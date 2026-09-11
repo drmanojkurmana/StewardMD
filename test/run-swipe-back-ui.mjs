@@ -110,6 +110,47 @@ try {
   await swipe();
   ok(await ev(DRAWER_OPEN) === true, "back at HOME: the menu opens again");
 
+  /* ── ANDROID GESTURE NAVIGATION: the same swipe, arriving as backButton ──
+   * On a gesture-nav phone (navigation_mode=2, the Pixel default) the left-to-right edge drag IS the
+   * system back gesture: the framework claims the touch stream, so the listeners above never fire and
+   * the app sees ONLY Capacitor's backButton event. hardwareBack() is that path, and it has to make
+   * the same decision as edgeSwipeAction() or the home gesture is dead on most phones - which is
+   * exactly what was reported (the swipe did nothing at home; the app exited).
+   * It runs last because the exit escape-hatch is time-based and would leak into other assertions. */
+  // Unwind to a GENUINE root first. The MaiK section above can leave a residual overlay, and then the
+  // first hardwareBack() below spends itself dismissing that instead of opening the menu - every
+  // assertion after it shifts by one and reads like a product failure. canGoBack()===false is the
+  // app's own definition of "nothing above home".
+  await ev(`SMD_showHome(); return 1;`); await sleep(900);
+  for (let i = 0; i < 6 && await ev(`return SMD_SWIPE_BACK.canGoBack();`) === true; i++) {
+    await ev(`SMD_SWIPE_BACK.goBack(); return 1;`); await sleep(500);
+  }
+  await ev(RESET_DRAWER); await sleep(200);
+  ok(await ev(`return SMD_SWIPE_BACK.canGoBack();`) === false, "unwound to home before the gesture-nav checks");
+  ok(await ev(`return SMD_SWIPE_BACK.hardwareBack();`) === true && await ev(DRAWER_OPEN) === true,
+    "GESTURE-NAV HOME: the system back gesture opens the menu (it used to exit the app)");
+
+  await sleep(450);
+  const closed = await ev(`return SMD_SWIPE_BACK.hardwareBack();`); await sleep(500);
+  ok(closed === true && await ev(DRAWER_OPEN) === false, "menu open: back closes it");
+
+  // The escape hatch: without this, back toggles the menu forever and can never dismiss the app.
+  ok(await ev(`return SMD_SWIPE_BACK.hardwareBack();`) === false,
+    "back again right after closing the menu returns false, so the caller exits the app");
+
+  await sleep(2100);                                   // EXIT_MS elapsed - back is a menu toggle again
+  ok(await ev(`return SMD_SWIPE_BACK.hardwareBack();`) === true && await ev(DRAWER_OPEN) === true,
+    "after EXIT_MS the gesture opens the menu again rather than exiting");
+  await ev(RESET_DRAWER);
+
+  // and on a real screen the same event must step back, never open the menu
+  await ev(`SMD_showHome(); KARDIOX.open(); return 1;`); await sleep(1000);
+  if (await ev(shown("#kardioxRoot")) === true) {
+    await ev(`return SMD_SWIPE_BACK.hardwareBack();`); await sleep(500);
+    ok(await ev(DRAWER_OPEN) === false, "GESTURE-NAV MODULE: the system back gesture never opens the menu");
+  } else { ok(true, "KardiQ not reachable for the gesture-nav check (skipped)"); }
+  await ev(`try{KARDIOX.close();}catch(e){} return 1;`);
+
   console.log(fails === 0 ? "\nALL GREEN — menu at home only; back everywhere else" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

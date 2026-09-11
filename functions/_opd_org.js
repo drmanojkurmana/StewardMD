@@ -28,12 +28,59 @@ export function roomStatus(waiting, inConsult, t) {
 // ---- entities ----------------------------------------------------------------------------------
 export function org(o = {}) {
   requireId(o);
-  /* kind is NOT mode. mode is the EMR coupling (native/connect); kind is what the organisation is.
-   * Without it an OPD clinic and a medical college are indistinguishable, so the eLOGBook offered a
-   * clinic as "your institution" and adopted it. Default "clinic" - only the PG path sets
-   * "institution" - so no existing document changes meaning. */
+  /* kind is NOT mode. mode is the EMR coupling; kind is what the organisation is. Without it an OPD
+   * clinic and a medical college are indistinguishable, so the eLOGBook offered a clinic as "your
+   * institution" and adopted it. Default "clinic" - only the PG path sets "institution" - so no
+   * existing document changes meaning.
+   *
+   * mode is THREE-WAY, each value semantically separate - never inferred, never collapsed into
+   * another: "native" (personal/shared clinic, on-device storage, no EMR), "connect" (hospital on an
+   * external FHIR EMR), "wardsynq" (hospital where WardSynQ itself is the EMR/HIS - server-side
+   * clinical record, no GHIS, no _localStore). Anything else defaults to "native" - the ORIGINAL two-
+   * way behaviour for every org that predates "wardsynq" is unchanged; only a document explicitly
+   * stamped mode:"wardsynq" gets it, so no existing org silently changes meaning. */
+  const MODE = o.mode === "connect" ? "connect" : o.mode === "wardsynq" ? "wardsynq" : "native";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic",
-           mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
+           mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
+           wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
+}
+
+/**
+ * The hospital's own WardSynQ configuration, carried through this projection.
+ *
+ * WHY IT IS ONE NAMED OBJECT rather than a handful of loose fields: this projection is a WHITELIST,
+ * and everything not listed is silently dropped. The inpatient work added six pieces of per-hospital
+ * clinical configuration - critical-value limits, the ward's drug-round times, its bed list, its
+ * escalation policy, its high-alert drugs, its order sets - and every one of them was being read as
+ * `org.someField` and arriving undefined, because none was listed here. Nothing broke, which is
+ * exactly the problem: each read fell back to a sensible default, so a hospital that carefully
+ * configured its own potassium limits would have been silently running on WardSynQ's.
+ *
+ * A nested object means the next piece of WardSynQ configuration cannot repeat that failure by
+ * being forgotten here.
+ *
+ * Values are passed through as stored, NOT validated: each consumer already validates its own -
+ * limitsFor() falls back per analyte, timesFor() falls back per frequency, resolveSet() reports an
+ * unusable set. Validating here as well would be a second opinion that could disagree with theirs.
+ */
+function wardsynqConfig(w) {
+  if (!w || typeof w !== "object" || Array.isArray(w)) return null;
+  const pick = {};
+  /* ai joined 2026-09-09 (TASK 8): whether this hospital has AI on at all, and - the part that
+   * matters - which model providers it has a data agreement with (phiApproved). That is a legal fact
+   * about this hospital, not something a source file can know, so it lives here with the rest of the
+   * hospital-owned clinical content and defaults to NONE approved. */
+  // dicom joined 2026-09-09 (TASK 7.7): the hospital's own order-code to DICOM modality map. It is
+  // hospital-owned clinical content for the same reason the rest of this list is - only this
+  // hospital knows that its order code "CT-ABDO" means a CT scanner - and functions/_wardsynq/dicom.js
+  // refuses to guess a modality from an order's words, so an unlisted key here means the worklist
+  // goes out without a modality rather than with an invented one.
+  // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
+  // counts as an implausible change in an analyte, and which analytes may be released unread.
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik"]) {
+    if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
+  }
+  return Object.keys(pick).length ? pick : null;
 }
 // Human StewardMD IDs: short, unambiguous (no 0/O/1/I). Clinics "SMD-XXXXXX", users "SMD-U-XXXXX".
 const SMD_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
@@ -44,8 +91,13 @@ export function genSmdCode(prefix, n) {   // uses CSPRNG; prefix e.g. "SMD-" or 
   let out = ""; for (let i = 0; i < bytes.length; i++) out += SMD_ALPHABET[bytes[i] % SMD_ALPHABET.length];
   return (prefix || "SMD-") + out;
 }
-export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code) }; }
-export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name) }; }
+// TASK 4.1: `type` and `active` joined 2026-09-09 - both were already required by every unit this
+// hierarchy needs to hold (a "Laboratory" department is not the same TYPE of thing as "Billing"),
+// and a department once opened had no way to be retired without deleting its history. Additive:
+// omitted on every call this file already had, so no existing document changes meaning - type
+// falls back to the free-text "general" it always effectively was, and active defaults true.
+export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false }; }
+export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), active: o.active !== false }; }
 
 export const ROOM_ASSIGN_MODES = ["primary", "multiple", "rotating", "unassigned"];
 export function room(o = {}) {
@@ -54,8 +106,36 @@ export function room(o = {}) {
   const mode = ROOM_ASSIGN_MODES.indexOf(a.mode) > -1 ? a.mode : "unassigned";
   return {
     id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), opdId: orNull(o.opdId),
-    name: s(o.name), number: s(o.number),
+    name: s(o.name), number: s(o.number), active: o.active !== false,
     assignment: { mode, doctors: arr(a.doctors), primary: orNull(a.primary) }
+  };
+}
+
+// ---- ward / bed (TASK 4.1: Enterprise -> Hospital -> Campus -> Building -> Floor -> Ward -> Room ->
+// Bed). Only Ward and Bed are new entities here - nothing in this task family (4.1-4.18) references
+// Campus/Building/Floor, so they are not built speculatively; `parentId`/`parentType` are generic
+// enough that inserting them later is a data change, not a schema migration. A ward is a distinct
+// unit from a `department` (department is a SERVICE - "Laboratory"; ward is a PLACE - "Medical A") so
+// this does not fold into department, matching the plan's own Enterprise->...->Ward->Bed distinction. */
+// "reserved" joined 2026-09-09 (TASK 4.3) - holding a bed for an incoming admission is a real,
+// named requirement distinct from "assignment" (occupied happens once the patient is actually
+// there). A reserved bed is not available (admission's own bed_not_available refusal already
+// applies to it, unchanged) and is never inferred - only a human reserving it sets this state.
+export const BED_STATES = Object.freeze(["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"]);
+export function ward(o = {}) {
+  requireId(o);
+  return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false };
+}
+export function bed(o = {}) {
+  requireId(o);
+  return {
+    id: s(o.id), orgId: s(o.orgId), wardId: s(o.wardId), name: s(o.name),
+    state: BED_STATES.includes(o.state) ? o.state : "available",
+    // What this bed may hold - never a clinical rule engine, only a stated restriction a human
+    // configured (a bay's own gender policy, an isolation-only room), read verbatim, never inferred.
+    genderRestriction: o.genderRestriction === "male" || o.genderRestriction === "female" ? o.genderRestriction : null,
+    isolation: !!o.isolation,
+    active: o.active !== false,
   };
 }
 // The doctor "on" a room right now (pure). Rooms are never permanently one doctor's.
@@ -93,6 +173,19 @@ export function membership(o = {}) {
   return {
     id: s(o.id), orgId: s(o.orgId), identity: s(o.identity), role,
     scope: { departments: arr(o.scope && o.scope.departments), opds: arr(o.scope && o.scope.opds), rooms: arr(o.scope && o.scope.rooms) },
+    /* THE HOSPITAL'S OWN ASSERTION that this member is a registered practitioner. Until this
+     * existed, a signing credential could come from ONE place: a verified Firebase custom claim. A
+     * doctor who signed in the way hospital staff actually sign in - email and password, or clinic
+     * code and PIN - carried no claims, so they could write the chart and could not SIGN anything:
+     * every prescription, every templated note, every discharge summary refused with NO_CREDENTIAL.
+     * That made the whole prescribing surface unreachable for any hospital not using StewardMD
+     * accounts.
+     *
+     * A hospital knows who its consultants are, and it is accountable for saying so - only an
+     * admin can set this. It is a WEAKER assertion than the platform's own verification, which is
+     * why the actor records WHICH of the two vouched (wardsynq-actors.js credentialSource) and
+     * every signed record carries that word. Empty means this member cannot sign, as before. */
+    regNo: s(o.regNo),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }
@@ -123,5 +216,8 @@ export function authorizeOrgAccess(orgDoc, membershipDoc, actorId, orgId, cap, t
   if (!canAccessOrg(m, orgId)) return { ok: false, reason: "not_a_member" };
   if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role };
   if (target && !withinScope(m, target)) return { ok: false, reason: "out_of_scope", role: m.role };
-  return { ok: true, role: m.role };
+  // regNo travels with the authorisation so resolveClinicalActor can build a signing credential
+  // from the hospital's own staff registry without a second read. Empty for an owner, who is
+  // authorised by ownership rather than by a membership row and therefore asserts no registration.
+  return { ok: true, role: m.role, regNo: m.regNo || "" };
 }

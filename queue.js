@@ -504,6 +504,7 @@
     if (cmd === "rolestaff") { root().innerHTML = _staffGate(); prefillStaff(); return; }   // front-desk staff -> sign in HERE
     if (cmd === "pickghis") { _setWp("ghis"); _enterGhis(); return; }  // GITAM / GHIS: reuse a live token if present (no needless re-login), else the prefilled gate
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
+    if (cmd === "pickwsq") { _setWp("wardsynq:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "wardsynq" }; loadSession(); return; }   // WardSynQ-native hospital: no external EMR at all, no GHIS token, no auto-import.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
@@ -530,7 +531,16 @@
       else { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); else { try { G.toast && G.toast("My Clinic loading…"); } catch (e) {} } }
       return;
     }
-    var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
+    /* This used to `return` SILENTLY when there was no session, which is how Add patient became a
+     * dead button: no sheet, no toast, no reason given. A blocked command must never fail mute.
+     * "add" is now exempt from the session requirement outright - registering a patient is exactly
+     * what you do before the queue has anyone in it - and openAdd()/onAdded handle a missing session
+     * themselves, so the check-in sheet always opens. */
+    var sid = st.session && st.session.id;
+    if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg" && cmd !== "add") {
+      try { G.toast && G.toast("Your queue session has not started yet. Reopen OPD Queue to begin."); } catch (e) {}
+      return;
+    }
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode - sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
@@ -598,11 +608,15 @@
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
     var o = { name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id };
     if (tab) o.tab = tab;
-    // Hospital workplace (GHIS / Connect) with a real hospital id -> the hospital record.
+    // Hospital workplace (GHIS / Connect / WardSynQ) with a real hospital id -> the hospital record.
     if (t.ghisPatientId && !inClinicWorkplace()) {
       o.patientId = t.ghisPatientId || t.mrn || "";
       o.episodeId = t.ghisEpisodeId || t.visitId || "";
       o.visitId = t.visitId || t.ghisEpisodeId || "";
+      // WardSynQ-native hospital: the ONLY case where opd-emr.js must not default to "ghis". Every
+      // other hospital workplace (GHIS, Connect) is unaffected - o.source stays unset for them, exactly
+      // as before.
+      if (st.openOpts && st.openOpts.source === "wardsynq") o.source = "wardsynq";
       G.OPDEMR.openProfile(o);
       return;
     }
@@ -644,7 +658,7 @@
     // never drift apart again. It replaced four sequential prompt() boxes. The SERVER validates and
     // issues the MR number - this only carries the answers and renders the field errors it returns.
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
-    var mode = inClinicWorkplace() ? "native" : (st.ghisToken ? "ghis" : ((st.openOpts && st.openOpts.source === "connect") ? "connect" : "native"));
+    var mode = inClinicWorkplace() ? "native" : (st.ghisToken ? "ghis" : ((st.openOpts && st.openOpts.source === "connect") ? "connect" : ((st.openOpts && st.openOpts.source === "wardsynq") ? "wardsynq" : "native")));
     G.SMD_PATIENTREG.open({
       mode: mode,
       clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
@@ -655,7 +669,15 @@
       },
       onAdded: function (r) {
         // Registered -> put them in THIS doctor's queue with the identity we just created.
-        act(st.session.id, "/ticket", {
+        // The session is re-read HERE, not captured above: the sheet can be open for a while, and
+        // reaching straight into st.session.id threw when there was no session, losing a patient who
+        // had just been registered on the server with no word to the doctor either way.
+        var sid2 = st.session && st.session.id;
+        if (!sid2) {
+          try { G.toast && G.toast("Patient registered. Reopen OPD Queue to add them to today's list."); } catch (e) {}
+          return;
+        }
+        act(sid2, "/ticket", {
           name: r.patient && r.patient.name, mrn: r.mrn, mobile: r.patient && r.patient.mobile,
           visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0
         });
@@ -687,15 +709,22 @@
       ((r && r.orgs) || []).filter(function (o) { return o.mode === "connect" && o.connectorId; }).forEach(function (o) {   // only real EMR-connected hospitals (a connect org with no connector is malformed, never shown)
         rows += '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickhosp:' + esc(o.id) + '">' + ms("local_hospital") + " " + esc(o.name || "Hospital") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + " · EMR-connected</small></button>";
       });
+      // WardSynQ-native hospitals: WardSynQ itself is the EMR/HIS - no external EMR, no GHIS. Its own
+      // action (pickwsq) so the workplace routes into the WardSynQ record, never the on-device store.
+      ((r && r.orgs) || []).filter(function (o) { return o.mode === "wardsynq"; }).forEach(function (o) {
+        rows += '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickwsq:' + esc(o.id) + '">' + ms("local_hospital") + " " + esc(o.name || "Hospital") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + " · WardSynQ EMR</small></button>";
+      });
       rows += '<button class="q-gate-btn" style="margin-top:12px;background:#f1f5f9;color:#0f172a" data-q-act="addhosp">' + ms("add_business") + " Add hospital (Connect EMR)</button>";
       el.innerHTML = _wrap('<p class="q-gate-sub">Choose your hospital.</p>' + rows + '<button class="q-gate-close" data-q-act="chooser">Back</button>');
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
   }
   // The doctor's personal (native, no-EMR) clinics. Here the WhatsApp visit link is the record.
+  // Excludes "connect" (Connect EMR hospital) AND "wardsynq" (WardSynQ-EMR hospital, listed in
+  // _listHospitals instead) - only a genuine on-device personal/shared clinic belongs here.
   function _listClinics() {
     var el = root(); el.innerHTML = _wrap('<div class="q-empty" style="padding:40px 8px">Loading your clinics…</div>');
     apiGet("/orgs").then(function (r) {
-      var mine = ((r && r.orgs) || []).filter(function (o) { return o.mode !== "connect"; });
+      var mine = ((r && r.orgs) || []).filter(function (o) { return o.mode !== "connect" && o.mode !== "wardsynq"; });
       var rows = mine.length ? mine.map(function (o) {
         return '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickclinic:' + esc(o.id) + '">' + ms("home_health") + " " + esc(o.name || "Clinic") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + "</small></button>";
       }).join("") : '<p class="q-gate-sub">No personal clinic yet - set one up in the console.</p>';
@@ -984,7 +1013,7 @@
     }).catch(function () {});
   }
   // Which workplace the doctor last chose, remembered on-device so a personal-clinic doctor is not forced
-  // onto GHIS just because a stale Ward Sync token is cached. Values: "ghis" | "clinic:<orgId>" | "connect:<orgId>" | "".
+  // onto GHIS just because a stale Ward Sync token is cached. Values: "ghis" | "clinic:<orgId>" | "connect:<orgId>" | "wardsynq:<orgId>" | "".
   function _wp() { try { return localStorage.getItem("smd_opd_workplace") || ""; } catch (e) { return ""; } }
   function _setWp(v) { try { if (v) localStorage.setItem("smd_opd_workplace", v); else localStorage.removeItem("smd_opd_workplace"); } catch (e) {} }
   function _wpRouterOn() { try { return localStorage.getItem("smd_opd_wp") !== "0"; } catch (e) { return true; } }   // reversible: set "0" to restore the old token-first routing
@@ -1030,6 +1059,7 @@
     // stray "Sign out of GHIS". Ward Sync's own token (window.GHIS) is untouched; _enterGhis re-pulls it later.
     if (wp.indexOf("clinic:") === 0) { st.ghisToken = null; startClinic(wp.slice(7)); return; }
     if (wp.indexOf("connect:") === 0) { st.ghisToken = null; st.openOpts = { hospitalId: wp.slice(8), source: "connect" }; loadSession(); return; }
+    if (wp.indexOf("wardsynq:") === 0) { st.ghisToken = null; st.openOpts = { hospitalId: wp.slice(9), source: "wardsynq" }; loadSession(); return; }
     el.innerHTML = _chooseType();   // no remembered workplace -> Hospital vs Personal clinic
   }
   function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; }

@@ -19,10 +19,14 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ICU]] — the ICU flagship workstation
 - [[FollowCare]] — post-discharge recovery intelligence
 - [[KardiQ X]] — ECG interpretation + Learn atlas
+- [[RadioAnatome]] — cross-sectional CT/MRI atlas · [[RadioAnatome 3D]] — BodyParts3D 3D layer on the same ontology
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
 - [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)
 - [[SURGX]] — SURGˣ Surgical Intelligence: notes, protocols, procedures, evidence, cases (flag ON for testers, content pending R1)
+- [[WardSynQ]] — the Clinical OS built inside this repo: canonical clinical model, event bus, safety
+  engine, and 16 hazards under an executable safety case. All three flags default OFF. **Nothing in
+  it is clinically approved** — read the module note's status taxonomy before quoting any of it.
 
 ### Medical education
 - [[NMC Logbook]] — the PG digital logbook required by PGMER-2023 5.2(v)-(vi): weekly e-logbook,

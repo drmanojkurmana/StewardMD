@@ -352,3 +352,15 @@ body.ot-open { overflow: hidden; }
 
 /* prevent horizontal overflow anywhere */
 .ot-overlay * { max-width: 100%; box-sizing: border-box; }
+
+/* ── Pathway summary sheet: one scroller, not two ─────────────────────────────
+   Reported from internal testing as "improper fit hiding button": the sheet was
+   max-height 70% with its own overflow, and the <pre> inside it had ANOTHER
+   max-height (46vh) and its own scrollbar. On a phone the nested pair clipped the
+   text mid-line and pushed the Copy button below the fold with no way to reach it.
+   The sheet is now a flex column: header and actions are pinned, the <pre> is the
+   only thing that scrolls, so Copy is always on screen and nothing is cut off. */
+.ot-sum-sheet { max-width: 620px; max-height: 82%; display: flex; flex-direction: column; overflow: hidden; }
+.ot-sum-sheet .ot-fn-hd { flex: 0 0 auto; }
+.ot-sum-sheet .ot-sum-pre { flex: 1 1 auto; min-height: 0; max-height: none; }
+.ot-sum-sheet .ot-detail-actions { flex: 0 0 auto; padding-top: 10px; }

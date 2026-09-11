@@ -13,10 +13,10 @@
 /* Both sides bumped this: main carries the FollowCare UX pass (fcux1), this branch the Pro-gate and
  * eLOGBook work (proevt1-b12). The key is a single opaque string, so keeping ONE would leave the
  * other deploy's clients on a stale cache. Carry both markers. */
-/* Both sides bumped this. main carries the eLOGBook b25 work, this branch the two-phase boot splash
- * (splashv2h). The key is one opaque string, so keeping either alone leaves the other deploy's
- * clients on a stale cache. Carry both markers. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2h";
+/* Both sides bumped this. main is the base; this branch's App Lock / splash marker is appended. The key
+ * is one opaque string, so keeping either alone leaves the other deploy's clients on a stale
+ * cache. Carry every marker. */
+var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b25-splashv2k-ecgatlas1-otaleak-rxfocus1-optsub1-gcs1-insask1-oncqis-sync1-ux9-icons1-gestnav1-scorefill1-iob1-lytes1-rxscan1-applock11-afoptin1-watchref1-demohosp3-micuvit1-proto3-exp1-vresync1-sknx18calm1-dxfit8-klall9-graphite2-fcquiet2-appfull2-universaldrugs1-emrux1-black1-admin1-rxc1";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
@@ -95,6 +95,11 @@ self.addEventListener("fetch", function (e) {
   // NEVER cache API responses (e.g. /api/ghis/* carries live PHI — labs, radiology,
   // patient lists). Let them go straight to the network so nothing is persisted.
   if (url.pathname.indexOf("/api/") === 0) return;
+
+  // RadioAnatome 3D geometry (/atlas/3d/*.bin.gz, ~31 MB in total) is fetched on demand by
+  // atlas3d.js. Keep it out of the versioned SW cache: every CACHE bump would otherwise
+  // re-download it, and the HTTP cache already serves repeat opens.
+  if (url.pathname.indexOf("/atlas/3d/") === 0 && /\.bin\.gz$/.test(url.pathname)) return;
 
   var isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").indexOf("text/html") !== -1;
 

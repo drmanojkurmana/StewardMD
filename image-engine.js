@@ -41,9 +41,13 @@
 
   var SCREEN_KINDS = { monitor: 1, ventilator: 1 };                 // layout-dependent → AI especially important
   // AI Vision is the recommended engine for best accuracy on ANY clinical image whenever it can
-  // run (enabled + online). On-device OCR is the private fallback but can be less accurate — so it
-  // is only recommended when AI Vision isn't available (offline / disabled).
-  function recommendFor(kind) { return (aiAvailable() && online()) ? "ai" : "device"; }
+  // run (enabled + online). When it cannot (offline / disabled), the downloaded on-device model is
+  // the offline alternative to AI Vision (owner, 2026-09-04) if its projector is installed; plain
+  // on-device OCR is the last resort, private but it only extracts text.
+  function recommendFor(kind) {
+    if (aiAvailable() && online()) return "ai";
+    return localVisionReady() ? "local" : "device";
+  }
   function online() { return typeof navigator === "undefined" || navigator.onLine !== false; }
   function log() { if (!DEV) return; try { console.log.apply(console, ["[ImageEngine]"].concat([].slice.call(arguments))); } catch (e) {} }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -136,7 +140,7 @@
     var desc = isAi
       ? "Secure cloud AI — the most accurate reading of any clinical image (labs, ABG, medication lists, monitor & ventilator screens). The image is sent for processing."
       : isLocal
-      ? "The downloaded model reads the image on this phone. Nothing is sent anywhere and no AI tokens are used. It understands what it is looking at rather than only extracting text, but it is a small model and can be wrong, so check it against the original."
+      ? "Your offline alternative to AI Vision. The downloaded model reads the image on this phone. Nothing is sent anywhere and no AI tokens are used. It understands what it is looking at rather than only extracting text, but it is a small model, slower than the cloud, and can be wrong, so check it against the original."
       : "Runs privately on this device (Apple Vision / ML Kit) — the image never leaves it, but it can be less accurate, especially for screens, handwriting or complex layouts.";
     return '<button type="button" class="ie-lrow' + (selected ? " sel" : "") + '" data-engine="' + engine + '" role="radio" aria-checked="' + selected + '">' +
       '<span class="ie-lmain"><span class="ie-lt">' + esc(title) + " " + pill + recPill + "</span>" +
@@ -155,6 +159,8 @@
         var rec = recommendFor(kind);
         var helper = rec === "ai"
           ? "AI Vision is recommended for the most accurate reading. Your image is sent securely for processing; on-device OCR stays private but can be less accurate."
+          : rec === "local"
+          ? "AI Vision is unavailable right now (offline or turned off). On-device AI is your offline alternative: the downloaded model reads the image on this phone. Slower than the cloud and it can be wrong, so check it against the original."
           : "Image stays on this device. (AI Vision is unavailable right now.)";
         var warn = (rec === "ai" && sel === "device")
           ? '<div class="ie-warn">⚠️ On-device OCR can be less accurate. AI Vision is recommended for the best accuracy.</div>' : "";
@@ -221,16 +227,18 @@
   }
 
   /* ---------------- F: fallback dialog ---------------- */
-  // opts { ai, device, retryLabel }  → resolves "ai" | "device" | "manual" | null
+  // opts { ai, local, device, retryLabel }  → resolves "ai" | "local" | "device" | "manual" | null
   function fallbackDialog(msg, opts) {
     opts = opts || {};
     return new Promise(function (resolve) {
       var btns = "";
       if (opts.ai) btns += '<button class="ie-btn" id="ieRetry">' + esc(opts.retryLabel || "Try AI Vision again") + "</button>";
+      if (opts.local) btns += '<button class="ie-btn' + (opts.ai ? " sec" : "") + '" id="ieUseLocal">Use On-device AI (offline)</button>';
       if (opts.device) btns += '<button class="ie-btn sec" id="ieUseDev">Use Private Device OCR</button>';
       btns += '<button class="ie-btn sec" id="ieManual">Fill manually</button>';
       var o = overlay('<div class="ie-h">Couldn’t read the image</div><div class="ie-sub">' + esc(msg) + '</div><div class="ie-row" style="flex-direction:column">' + btns + "</div>");
       var r = o.sheet.querySelector("#ieRetry"); if (r) r.addEventListener("click", function () { o.close(); resolve("ai"); });
+      var l = o.sheet.querySelector("#ieUseLocal"); if (l) l.addEventListener("click", function () { o.close(); resolve("local"); });
       var d = o.sheet.querySelector("#ieUseDev"); if (d) d.addEventListener("click", function () { o.close(); resolve("device"); });
       o.sheet.querySelector("#ieManual").addEventListener("click", function () { o.close(); resolve("manual"); });
     });
@@ -271,7 +279,8 @@
     ventilator: '{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}',
     abg: '{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num}',
     labs: '{"na":num,"k":num,"cl":num,"hco3":num,"ca":num,"mg":num,"glu":num,"creat":num,"urea":num,"wbc":num,"hb":num,"plt":num,"inr":num,"crp":num,"bili":num,"ast":num,"alt":num,"lactate":num}',
-    all: '{"labs":{...},"abg":{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num},"vitals":{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num},"ventilator":{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}}'
+    all: '{"labs":{...},"abg":{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num},"vitals":{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num},"ventilator":{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}}',
+    patient: '{"name":str,"age":num,"sex":str,"weightKg":num,"heightCm":num,"mrn":str,"hospital":str,"bed":str,"doctor":str,"dept":str,"allergies":str,"complaints":str,"pastHistory":str,"diagnosis":str,"codeStatus":str}'
   };
 
   /* On-device reading. Two shapes, because the callers want different things.
@@ -344,8 +353,9 @@
   function routeDevice(image, kind) {
     log("kind:", kind, "engine: device", "shape: none (on-device, no upload)");
     if (!deviceOcrAvailable()) {
-      return fallbackDialog("Private Device OCR is unavailable on this device.", { ai: aiAvailable(), device: false }).then(function (f) {
+      return fallbackDialog("Private Device OCR is unavailable on this device.", { ai: aiAvailable(), local: localVisionReady(), device: false }).then(function (f) {
         if (f === "ai") return routeAI(image, kind);
+        if (f === "local") return routeLocalOrFallback(image, kind);
         if (f === "manual") return { mode: "lines", lines: [], engine: "manual" };
         return { cancelled: true };
       });
@@ -366,7 +376,25 @@
     });
   }
 
+  /* The on-device model as a target of the fallback dialogs: try it, and if IT fails too, drop to the
+   * plain OCR/manual dialog rather than looping back to a cloud that is not there. */
+  function routeLocalOrFallback(image, kind) {
+    return routeLocal(image, kind).catch(function (e) {
+      log("local fail:", e && e.message);
+      return fallbackDialog("On-device AI could not read this image.", { ai: aiAvailable() && online(), device: deviceOcrAvailable() }).then(function (f) {
+        if (f === "ai") return routeAI(image, kind);
+        if (f === "device") return routeDevice(image, kind);
+        if (f === "manual") return { mode: "lines", lines: [], engine: "manual" };
+        return { cancelled: true };
+      });
+    });
+  }
+
   function routeAI(image, kind) {
+    // OFFLINE ALTERNATIVE (owner, 2026-09-04): with no connection, AI Vision cannot run at all, so a
+    // doctor who asked for it gets the downloaded on-device model instead of a failure dialog, when
+    // that model can see. The preference is untouched; the next scan with a connection is cloud again.
+    if (!online() && localVisionReady()) { log("kind:", kind, "engine: ai requested, offline -> local"); return routeLocalOrFallback(image, kind); }
     if (!aiAvailable()) return aiFallback("ai-off", image, kind);
     var consentP = getConsent() ? Promise.resolve({ engine: "ai", remember: true }) : phiConsent();
     return consentP.then(function (c) {
@@ -399,13 +427,14 @@
   function aiFallback(reason, image, kind) {
     var msg = reason === "quota" ? "AI Vision is temporarily over its usage limit. Please try again shortly."
       : reason === "entitlement" ? "AI Vision requires StewardMD Pro."
-      : reason === "ai-off" ? "AI Vision is turned off. You can use Private Device OCR instead."
-      : !online() ? "You appear to be offline — AI Vision needs a connection. Private Device OCR works offline."
+      : reason === "ai-off" ? (localVisionReady() ? "AI Vision is turned off. On-device AI or Private Device OCR can read the image instead." : "AI Vision is turned off. You can use Private Device OCR instead.")
+      : !online() ? (localVisionReady() ? "You appear to be offline. AI Vision needs a connection; On-device AI is your offline alternative." : "You appear to be offline. AI Vision needs a connection. Private Device OCR works offline.")
       : "AI Vision couldn’t process this image right now.";
     var canRetry = reason !== "entitlement" && reason !== "ai-off" && online();
-    return fallbackDialog(msg, { ai: canRetry, device: deviceOcrAvailable(), retryLabel: "Try AI Vision again" }).then(function (f) {
+    return fallbackDialog(msg, { ai: canRetry, local: localVisionReady(), device: deviceOcrAvailable(), retryLabel: "Try AI Vision again" }).then(function (f) {
       log("fallback selected:", f || "cancel");
       if (f === "ai") return routeAI(image, kind);
+      if (f === "local") return routeLocalOrFallback(image, kind);
       if (f === "device") return routeDevice(image, kind);
       if (f === "manual") return { mode: "lines", lines: [], engine: "manual" };
       return { cancelled: true };
@@ -427,6 +456,9 @@
       '<div role="radiogroup" aria-label="Image engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
       opt("device", "Private Device OCR", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>', "Uses Apple Vision on iPhone/iPad and ML Kit on Android. Image stays on this device.", true) +
       opt("ai", "AI Vision", '<span style="font:700 9px/1 var(--sans,system-ui);background:#fef3c7;color:#92400e;border-radius:5px;padding:2px 5px;vertical-align:middle">Pro</span>', "Uses secure cloud AI for better monitor and ventilator screen interpretation.", false) +
+      (localVisionReady()
+        ? opt("local", "On-device AI", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>', "Your offline alternative to AI Vision. The downloaded model reads the image on this phone. Slower, and it can be wrong.", false)
+        : "") +
       '</div>' +
       '<button class="smd-nav-btn" data-ie-privacy="1" style="text-align:left">🔒 Privacy &amp; processing</button>' +
       '</div>';

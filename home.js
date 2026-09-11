@@ -52,6 +52,24 @@
     } catch (e) {}
   })();
 
+  // MaiK CHAT skin (owner, 2026-09-04: "not getting a feel of using an AI assistant like ChatGPT or
+  // Claude"). Presentation-only CSS on body.mkchat: assistant prose unboxed on the page, ONE
+  // disclaimer (the banner, not a line inside every answer), reading-size type, quiet chips, a pulse
+  // instead of skeleton bars. DEFAULT ON. ?mkchat=0 turns it off (persists), ?mkchat=1 turns it back
+  // on. No DOM or logic change: flag-off is byte-for-byte the previous MaiK.
+  (function () {
+    try {
+      var k = "smd_mkchat", q = location.search || "";
+      if (/[?&]mkchat=0\b/.test(q)) { try { localStorage.setItem(k, "0"); } catch (e) {} }
+      else if (/[?&]mkchat=1\b/.test(q)) { try { localStorage.removeItem(k); } catch (e) {} }
+      var off = false; try { off = localStorage.getItem(k) === "0"; } catch (e) {}
+      if (off) return;
+      var applyChat = function () { if (document.body) document.body.classList.add("mkchat"); };
+      if (document.body) applyChat();
+      else document.addEventListener("DOMContentLoaded", applyChat);
+    } catch (e) {}
+  })();
+
   // MaiK Scribe inline-mic kill-switch: default ON; ?scribeinline=0 restores the
   // old modal voice dialog (persists), ?scribeinline=1 re-enables inline.
   function scribeInlineOn() {
@@ -89,6 +107,39 @@
   }
 
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
+
+  /* WARD SYNC OPENS WARDSYNQ. One decision, for all three places the app offers it: the top
+   * quick-link, the Settings button and the menu tile.
+   *
+   * "Ward Sync and WardSynQ are ONE system" is the owner's decision of 2026-09-04
+   * (vault/modules/WardSynQ.md): the GHIS integration is not a parallel product, it is the first
+   * hospital-data ADAPTER under WardSynQ. Until now the app contradicted that - Ward Sync opened the
+   * GHIS import screen, and WardSynQ sat behind a separate, default-off tile - so a hospital running
+   * WardSynQ still met somebody else's EMR when it tapped the button named after its own ward.
+   *
+   * WHAT DECIDES: the workplace this device is signed in to. queue.js and ward.js already record it
+   * as "wardsynq:<orgId>" in smd_opd_workplace, and that prefix is written ONLY for a hospital whose
+   * record is WardSynQ's - so it is a fact about the hospital, not a guess about the user.
+   *
+   * GITAM KEEPS WORKING. A device with no WardSynQ workplace gets the GHIS screen exactly as before.
+   * Nothing is removed: this changes which door the button opens, and only when there is a better
+   * one to open. */
+  function wardsynqWorkplace() {
+    try { return (localStorage.getItem("smd_opd_workplace") || "").indexOf("wardsynq:") === 0; } catch (e) { return false; }
+  }
+  function openWardSync() {
+    /* Every reference goes through `window.`, and the call uses the SAME reference the guard
+     * tested. Checking window.WARD and then calling a bare WARD leans on it also being a global:
+     * where it is not, the bare name throws, the catch below swallows it, and the button does
+     * nothing at all - which is the one outcome a clinician must never get from tapping the ward. */
+    try {
+      if (wardsynqWorkplace() && window.WARD && window.WARD.open) { window.WARD.open(); return; }
+      if (window.openGHIS) { window.openGHIS(); return; }
+      if (window.GHIS && window.GHIS.open) { window.GHIS.open(); return; }
+    } catch (e) { /* fall through to the message: a thrown door is still a door that did not open */ }
+    // Nothing opened. Say which one is coming rather than a bare "loading", and never stay silent.
+    try { toast(wardsynqWorkplace() ? "The ward is still loading…" : "Ward Sync loading…"); } catch (e) {}
+  }
   var IS_V2 = flagged();
 
   // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
@@ -164,7 +215,7 @@
       if (drugLink) drugLink.remove();
       var topFrag = document.createDocumentFragment();
       topFrag.appendChild(topBtn(svg("brain", "smd-ico"), "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
-      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { openWardSync(); }));
       topFrag.appendChild(topBtn(svg("pulse", "smd-ico"), "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
       menu.insertBefore(topFrag, menu.firstChild);
 
@@ -198,8 +249,9 @@
             : "") +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
-          (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", true)) : "") +
-          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>';
+          (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", false)) : "") +
+          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>' +
+          '<div class="smd-nav-note">Opens the WardSynQ ward when this workplace keeps a WardSynQ record; otherwise the GHIS inpatient list above.</div>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
             ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
@@ -275,7 +327,7 @@
           b.addEventListener("click", function () { try { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); } catch (e) {} try { if (window.SB && SB.close) SB.close(); } catch (e) {} });
         });
         var og = setBody.querySelector("[data-open-ghis]");
-        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
+        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(openWardSync, 60); });
         setBody.querySelectorAll("[data-xa-open]").forEach(function (xb) {
           xb.addEventListener("click", function () {
             var feat = xb.getAttribute("data-xa-open");
@@ -313,19 +365,36 @@
           if (otaCheck) otaCheck.addEventListener("click", function () {
             if (!window.SMD_OTA) return;
             otaCheck.disabled = true; if (otaStatus) otaStatus.textContent = "Checking…";
+            // (otaSay is defined below, hoisted - see the note there.)
             SMD_OTA.check().then(function (r) {
               otaCheck.disabled = false; r = r || {};
               if (r.status === "available") { pending = r; if (otaStatus) otaStatus.textContent = "Update available: v" + r.version; if (otaInstall) otaInstall.style.display = ""; }
               else if (r.status === "uptodate") { pending = null; if (otaStatus) otaStatus.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (otaInstall) otaInstall.style.display = "none"; }
-              else { if (otaStatus) otaStatus.textContent = "Couldn't check — " + (r.error || "try again"); }
+              else { if (otaStatus) otaStatus.textContent = otaSay(r.error, "Couldn't check for updates"); }
             });
           });
+          /* Phrase the failure from a CODE. This used to interpolate the error straight from
+           * native-ota.js, which passed through @capgo/capacitor-updater's own message - and that
+           * plugin is handed the bundle's zipUrl, so its failures quote our OTA endpoint back. The
+           * settings screen was printing our infrastructure to anyone who tapped Update. Each line
+           * below also tells the reader what to DO, which a URL never did. */
+          function otaSay(code, fallback) {
+            switch (String(code || "")) {
+              case "network":      return "Couldn't reach the update server. Check your connection and try again.";
+              case "checksum":     return "That update didn't verify, so it was not installed. Try again later.";
+              case "storage":      return "Not enough space on this device to download the update.";
+              case "unauthorized": return "This device isn't allowed to fetch that update.";
+              case "missing":      return "That update is no longer available.";
+              case "unavailable":  return "Updates aren't available on this build.";
+              default:             return fallback + ". Try again later.";
+            }
+          }
           if (otaInstall) otaInstall.addEventListener("click", function () {
             if (!window.SMD_OTA || !pending) return;
             otaInstall.disabled = true;
             SMD_OTA.install(pending, function (pct) { if (otaStatus) otaStatus.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
               if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready — reopening…"; }
-              else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+              else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = otaSay(res && res.error, "Update failed"); }
             });
           });
         })();
@@ -463,9 +532,12 @@
     stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
     hourglass: '<path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 4 5.5 5 9-1 3.5-5 4.5-5 9M17 3c0 4.5-4 5.5-5 9 1 3.5 5 4.5 5 9"/>',
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
-    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>'
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+    // App Lock — PIN keypad + biometric fingerprint (no emoji in security UI).
+    keypad: '<circle cx="7" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="18" r="1.3" fill="currentColor" stroke="none"/>',
+    fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>'
   };
-  function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
+  function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
   // Callers should guard (window.ICONS && ICONS.get(...)) with a text fallback for load-order safety.
   try {
@@ -500,7 +572,7 @@
     try { if (window.closeDrawer) window.closeDrawer(); } catch (e) {}
     // 2) Backstop — force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
-    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
+    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "dxOverlay", "dbOverlay",
       "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "ghisPanel", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
       "abgOverlay", "hvSheet", "hvScrim", "swShell", "swSheet", "swScrim"].forEach(function (id) {
       var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
@@ -704,6 +776,8 @@
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
+    govschemes: function () { if (window.SMD_GOVSCHEMES) SMD_GOVSCHEMES.open(); },
+    icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
@@ -735,12 +809,15 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
-    ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    ward: function () { openWardSync(); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
+    // The WardSynQ inpatient ward (window.WARD, ward.js). Distinct from `ward` above, which is the
+    // older Ward Sync / GHIS import screen - this is the native admission-to-discharge record.
+    wardsynq: function () { if (window.WARD && WARD.open) WARD.open(); else toast("Inpatient ward loading…"); },
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
-    oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCqis loading…"); },
+    oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
@@ -750,6 +827,18 @@
       function tile(icon, title, cap, act, pri) {
         return '<button class="hv-tile' + (pri ? ' pri' : '') + '" data-mi="' + act + '">' + svg(icon) +
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
+      }
+      /* A tile with TWO actions. Prescription needs it: writing an Rx and checking someone else's are
+       * different jobs done by different people, and burying "verify" inside the pad would hide it
+       * from the pharmacist it exists for. A <button> cannot nest buttons, so this is a plain div
+       * carrying its own two controls; .hv-tile styling is shared, the click handler keys off the
+       * same data-mi attribute, and each control keeps a real tap target. */
+      function tile2(icon, title, cap, actions) {
+        return '<div class="hv-tile hv-tile2" role="group" aria-label="' + title + '">' + svg(icon) +
+          '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div>' +
+          '<div class="hv-t2">' + actions.map(function (a) {
+            return '<button class="hv-t2b' + (a.pri ? " pri" : "") + '" data-mi="' + a.act + '">' + a.label + "</button>";
+          }).join("") + "</div></div>";
       }
       var oncoOn = true; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") !== "0"); } catch (e) {}
       // OPD Queue is PUBLIC-RELEASE-GATE def:false; gate the hub tile too (fail-closed) so it is not a dead tile for reviewers.
@@ -763,8 +852,14 @@
         // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
         // prescription for the patient in front of you meant going through something else first.
         // It belongs under the same roof as the other patient-facing tools.
-        tile("note", "Prescription", "Write and sign an Rx", "rx") +
+        tile2("note", "Prescription", "Write an Rx, or check one", [
+          { label: "Create", act: "rx", pri: true },
+          { label: "Verify", act: "rxverify" }
+        ]) +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device) - flag off = no tile.
+        (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
+        tile("search", "Search ICD", "ICD-10 / ICD-11 diagnosis codes", "icdsearch") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
@@ -772,6 +867,9 @@
           var a = b.getAttribute("data-mi"); closeSheet();
           setTimeout(function () {
             if (a === "rx") { ACT.prescription(); return; }
+            if (a === "rxverify") { ACT.prescriptionVerify(); return; }
+            if (a === "govschemes") { ACT.govschemes(); return; }
+            if (a === "icdsearch") { ACT.icdsearch(); return; }
             ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
           }, 70);
         });
@@ -782,6 +880,13 @@
     // to duplicate here.
     prescription: function () {
       if (window.SMD_RX && SMD_RX.open) { try { SMD_RX.open({}); } catch (e) { toast("Prescription pad unavailable"); } }
+      else toast("Prescription pad loading…");
+    },
+    // Check a prescription someone else wrote: type the code, or scan its QR with the phone camera
+    // (which opens stewardmd.in/verify directly). NOT gated on being a verified prescriber - the
+    // person checking is often a pharmacist, and verification is public by design.
+    prescriptionVerify: function () {
+      if (window.SMD_RX && SMD_RX.openVerify) { try { SMD_RX.openVerify(); } catch (e) { toast("Verification unavailable"); } }
       else toast("Prescription pad loading…");
     },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
@@ -854,18 +959,24 @@
       // Open to ANY signed-in user (P1 self-service): the console handles sign-in + create-your-hospital, and
       // the server enforces membership/RBAC on every call. Not owner-gated anymore.
       try {
-        var ex = document.getElementById("smdConnectOverlay"); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+        var ex = document.getElementById("smdConnectOverlay"); if (ex) return;
+        var previousFocus=document.activeElement, previousOverflow=document.body.style.overflow;
         var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
+        ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true"); ov.setAttribute("aria-label","EMR Connect");
         ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column";
         var bar = document.createElement("div");
         bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
-        var x = document.createElement("button"); x.textContent = "Close"; x.style.cssText = "background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:8px 14px;font:700 13px var(--hfont,sans-serif)";
-        x.onclick = function () { if (ov.parentNode) ov.parentNode.removeChild(ov); };
-        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn2";
-        fr.style.cssText = "flex:1;width:100%;border:0;background:#fff";
+        var x = document.createElement("button"); x.textContent = "Done"; x.type="button"; x.style.cssText = "background:var(--panel,#fff);color:var(--ink,#17252b);border:1px solid var(--line,#dfe6e4);border-radius:12px;min-height:44px;padding:8px 18px;font:600 15px -apple-system,system-ui";
+        function closeConnect(){if(ov.parentNode)ov.parentNode.removeChild(ov);document.body.style.overflow=previousOverflow;if(previousFocus&&previousFocus.isConnected)previousFocus.focus();}
+        x.onclick=closeConnect;
+        ov.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"&&e.shiftKey&&e.target===x){e.preventDefault();fr.focus();}});
+        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn3-calm"; fr.title="EMR connection settings";
+        fr.style.cssText = "flex:1;min-height:0;width:100%;border:0;background:var(--panel,#fff)";
+        fr.onload=function(){try{fr.contentDocument.addEventListener("keydown",function(e){if(e.key==="Escape"){e.preventDefault();closeConnect();}else if(e.key==="Tab"){var controls=[].slice.call(fr.contentDocument.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')).filter(function(n){return n.getClientRects().length;});if((e.shiftKey&&e.target===controls[0])||(!e.shiftKey&&e.target===controls[controls.length-1])){e.preventDefault();x.focus();}}});}catch(e){}};
         bar.appendChild(t); bar.appendChild(x); ov.appendChild(bar); ov.appendChild(fr);
         document.body.appendChild(ov);
+        document.body.style.overflow="hidden"; x.focus();
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
@@ -903,7 +1014,6 @@
     { sel: "#icuRoot.on", act: "icu" },
     { sel: "#ghisPanel.open", act: "ward" },
     { sel: "#mcOverlay.on", act: "calculators" },
-    { sel: "#mdOverlay.on", act: "drugs" },
     { sel: "#miOverlay.on", act: "interactions" },
     { sel: "#abgOverlay.on", act: "antibiogram" },
     { sel: "#eceOverlay.on", act: "electrolytes" }
@@ -1031,12 +1141,21 @@
       ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
       ".hv-mi+.hv-mi{border-top:1px solid var(--hbd)}",
       // Hospital hub — 2x2 tile grid (signature tile = teal). svg fill-fix so stroke icons don't render solid black.
-      ".hv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:2px 0 6px}",
-      ".hv-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:var(--hbg);border:1.5px solid var(--hbd);border-radius:16px;padding:15px 14px;min-height:114px;cursor:pointer;color:var(--hink);transition:transform .12s,border-color .12s,box-shadow .12s}",
+      ".hv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:2px 0 6px}",
+      ".hv-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:var(--hbg);border:1.5px solid var(--hbd);border-radius:16px;padding:13px 13px;min-height:98px;cursor:pointer;color:var(--hink);transition:transform .12s,border-color .12s,box-shadow .12s}",
       ".hv-tile:hover{border-color:var(--hp)}.hv-tile:active{transform:scale(.975)}",
       ".hv-tile svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--hp)}",
-      ".hv-tile .tl{font:800 15px var(--hfont);margin-top:11px}.hv-tile .tc{font:500 12px var(--hfont);color:var(--hmut);margin-top:3px;line-height:1.35}",
+      ".hv-tile .tl{font:800 15px var(--hfont);margin-top:9px}.hv-tile .tc{font:500 12px var(--hfont);color:var(--hmut);margin-top:3px;line-height:1.3}",
       ".hv-tile.pri{background:var(--hp);border-color:var(--hp);color:#fff;box-shadow:0 6px 18px -8px var(--hp)}.hv-tile.pri svg{color:#fff}.hv-tile.pri .tc{color:rgba(255,255,255,.85)}",
+      // A two-action tile (Prescription: Create / Verify). The tile itself is no longer the tap
+      // target - its buttons are - so it drops the whole-tile press affordance and gives each
+      // control a full-height 40px target instead. The row is auto-pushed to the bottom so a
+      // two-action tile still lines up with its single-action neighbours in the grid.
+      ".hv-tile2{cursor:default}.hv-tile2:hover{border-color:var(--hbd)}.hv-tile2:active{transform:none}",
+      ".hv-t2{display:flex;gap:7px;width:100%;margin-top:auto;padding-top:8px}",
+      ".hv-t2b{flex:1;min-width:0;min-height:40px;padding:9px 6px;border-radius:11px;border:1.5px solid var(--hbd);background:var(--hpanel);color:var(--hink);font:800 12.5px var(--hfont);cursor:pointer;transition:transform .12s,border-color .12s}",
+      ".hv-t2b:active{transform:scale(.96)}.hv-t2b:hover{border-color:var(--hp)}.hv-t2b:focus-visible{outline:2px solid var(--hp);outline-offset:2px}",
+      ".hv-t2b.pri{background:var(--hp);border-color:var(--hp);color:#fff}",
       "@media (prefers-reduced-motion:no-preference){.hv-tile{animation:hvTileIn .3s cubic-bezier(.2,.7,.2,1) both}.hv-tile:nth-child(2){animation-delay:.05s}.hv-tile:nth-child(3){animation-delay:.1s}.hv-tile:nth-child(4){animation-delay:.15s}}",
       "@keyframes hvTileIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}",
       // Customize-tools sheet (Add Tool): row toggles.
@@ -1322,6 +1441,13 @@
       "body.ui-v2 .smd-caseshare{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}",
       "body.ui-v2 .smd-caseshare button{flex:1;min-width:130px;border:1px solid var(--line)!important;background:var(--panel);color:var(--teal);font:700 13px var(--sans);padding:11px 14px;border-radius:12px;cursor:pointer}",
       "body.ui-v2 .smd-caseshare button:active{transform:scale(.99)}",
+      ".hv-drag{flex:0 0 auto;color:var(--hmut);padding:6px;margin-left:2px;touch-action:none;cursor:grab}",
+      ".hv-tool-tog.dragging{opacity:.55;background:var(--hbg)}",
+      ".rnav-grid.reordering .rnav-tile{touch-action:none}",
+      ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
+      ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
+      ".rnav-tile.dragging{opacity:.6;transform:scale(1.05);z-index:5}",
+      "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -1389,6 +1515,15 @@
               else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) qon = SMD_QUEUE_FLAGS.on();
               else qon = (localStorage.getItem("smd_opd_queue") === "1");
               return qon ? tileV4("queue", "ward", "OPD Queue", "Smart patient queue") : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // WardSynQ inpatient ward tile (flag smd_wardsynq, DEFAULT OFF). Same fallback
+            try {          // shape as the OPD tile above: query param, then the flag registry, then localStorage.
+              var won, w = (location.search.match(/[?&]wardsynq=([^&]+)/) || [])[1];
+              if (w != null) won = (w === "1" || w === "on" || w === "true");
+              else if (window.SMD_WARDSYNQ_FLAGS && SMD_WARDSYNQ_FLAGS.get) won = SMD_WARDSYNQ_FLAGS.get("smd_wardsynq");
+              else won = (localStorage.getItem("smd_wardsynq") === "1");
+              return won ? tileV4("wardsynq", "ward", "Inpatient Ward", "Admission to discharge") : "";
             } catch (e) { return ""; }
           })() +
         '</div>' +
@@ -1507,7 +1642,7 @@
       eligible: function () { try { if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
-    { act: "oncohome", ic: "oncology", tt: "ONCqis", sub: "The Cancer Library",
+    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "The Cancer Library",
       eligible: function () { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } } },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
       eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
@@ -1519,6 +1654,9 @@
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
+    { act: "govschemes", ic: "local_hospital", tt: "Scheme Search", sub: "Package codes and rates", defOn: true,
+      eligible: function () { return govschemesOn(); } },
+    { act: "icdsearch", ic: "search", tt: "Search ICD", sub: "ICD-10 / ICD-11 diagnosis codes", defOn: true },
     { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
     { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
     { act: "connect", ic: "hub", tt: "Connect EMR", sub: "Link your hospital", defOn: false },
@@ -1533,6 +1671,83 @@
     { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Local resistance", defOn: false },
   ];
   function homeToolByAct(a) { for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i]; return null; }
+  var _reorderMode = false, _pressT = null;
+  var DRAG_DOTS = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg>';
+  function toolOrderKey() { return "smd_home_tools_order"; }
+  function getToolOrder() { try { var o = JSON.parse(localStorage.getItem(toolOrderKey()) || "[]"); return Array.isArray(o) ? o : []; } catch (e) { return []; } }
+  function setToolOrder(order) { try { localStorage.setItem(toolOrderKey(), JSON.stringify(order)); } catch (e) {} }
+  // HOME_TOOLS in the user's saved drag order. A tool with no saved position (new install, or
+  // a tool added to the app after the user last reordered) falls back to its default place at
+  // the end - no migration needed when HOME_TOOLS itself changes.
+  function orderedHomeTools() {
+    var order = getToolOrder();
+    if (!order.length) return HOME_TOOLS.slice();
+    var byAct = {}; HOME_TOOLS.forEach(function (t) { byAct[t.act] = t; });
+    var out = [], seen = {};
+    order.forEach(function (act) { var t = byAct[act]; if (t && !seen[act]) { out.push(t); seen[act] = true; } });
+    HOME_TOOLS.forEach(function (t) { if (!seen[t.act]) out.push(t); });
+    return out;
+  }
+  // Drops `dragEl` into `container` (list or 2D grid) at whichever slot the pointer is over, on
+  // every move, and persists the resulting order on release. Shared by the Customize-tools sheet
+  // (vertical list) and the home tool grid (2D) - one implementation, no per-surface duplicate.
+  function beginDrag(dragEl, container, itemSelector, dataAttr) {
+    dragEl.classList.add("dragging");
+    var isGrid = container.id === "rnavToolsGrid";
+    function onMove(ev) {
+      var items = [].slice.call(container.querySelectorAll(itemSelector)).filter(function (n) { return n !== dragEl; });
+      if (isGrid) {
+        var best = null, bestD = Infinity;
+        items.forEach(function (n) {
+          var r = n.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          var d = Math.hypot(ev.clientX - cx, ev.clientY - cy);
+          if (d < bestD) { bestD = d; best = n; }
+        });
+        if (best) {
+          var br = best.getBoundingClientRect();
+          container.insertBefore(dragEl, (ev.clientY < br.top + br.height / 2) ? best : best.nextSibling);
+        }
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var r = items[i].getBoundingClientRect();
+          if (ev.clientY < r.top + r.height / 2) { container.insertBefore(dragEl, items[i]); return; }
+        }
+        container.appendChild(dragEl);
+      }
+    }
+    function onUp() {
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerup", onUp);
+      dragEl.classList.remove("dragging");
+      var order = [].slice.call(container.querySelectorAll(itemSelector)).map(function (n) { return n.getAttribute(dataAttr); });
+      setToolOrder(order);
+    }
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup", onUp);
+  }
+  // Drag-to-reorder entry point: the Customize-tools sheet list is armed immediately (its handle
+  // signals intent); the home tool grid needs a 500ms long-press first, matching iOS's
+  // press-and-hold icon rearrange so a normal tap still opens the tool. Delegated on `root` so
+  // it keeps working across every re-render of either surface without re-wiring.
+  function wireHomeDragReorder(root) {
+    root.addEventListener("pointerdown", function (e) {
+      var handle = e.target.closest(".hv-drag");
+      if (handle) {
+        var row = handle.closest(".hv-tool-tog"); if (!row) return;
+        e.preventDefault();
+        return beginDrag(row, row.parentElement, ".hv-tool-tog", "data-tool");
+      }
+      var tile = e.target.closest(".rnav-tile:not(.addtool)");
+      var grid = tile && document.getElementById("rnavToolsGrid");
+      if (!grid) return;
+      clearTimeout(_pressT);
+      _pressT = setTimeout(function () {
+        _reorderMode = true; grid.classList.add("reordering");
+        beginDrag(tile, grid, ".rnav-tile:not(.addtool)", "data-act");
+      }, 500);
+      document.addEventListener("pointerup", function cancel() { clearTimeout(_pressT); document.removeEventListener("pointerup", cancel); }, { once: true });
+    });
+  }
   function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
   function homeToolVisible(t) { var p = homeToolPrefs(); return Object.prototype.hasOwnProperty.call(p, t.act) ? !!p[t.act] : (t.defOn !== false); }
   function homeToolEligible(t) { if (!t.eligible) return true; try { return !!t.eligible(); } catch (e) { return false; } }
@@ -1541,7 +1756,7 @@
   var ANIM_ICON = {
     eye: '<svg class="ai-anim ai-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle class="pupil" cx="12" cy="12" r="3.1"/></svg>',
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
-    derm: '<svg class="ai-anim ai-derm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle class="p" cx="10" cy="10" r="1.7"/><circle class="p p2" cx="15" cy="14" r="1.7"/><circle class="p p3" cx="9.5" cy="15" r="1.3"/></svg>',
+    derm: '<img src="/sknx-mark.svg?v=sx16-ux" alt="" width="38" height="38">',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     // Brand marks share .ai-brandmark: ONE optical box in CSS, rather than the 48/38/34px inline
@@ -1565,26 +1780,28 @@
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
-    var html = "";
-    for (var i = 0; i < HOME_TOOLS.length; i++) { var t = HOME_TOOLS[i]; if (homeToolEligible(t) && homeToolVisible(t)) html += homeToolTile(t); }
+    var html = "", TOOLS = orderedHomeTools();
+    for (var i = 0; i < TOOLS.length; i++) { var t = TOOLS[i]; if (homeToolEligible(t) && homeToolVisible(t)) html += homeToolTile(t); }
     html += '<button class="rnav-tile addtool" data-act="customizetools" aria-label="Add or customise tools">' +
       '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
     return html;
   }
   function openToolsCustomize() {
-    var rows = "";
-    for (var i = 0; i < HOME_TOOLS.length; i++) {
-      var t = HOME_TOOLS[i]; if (!homeToolEligible(t)) continue;
+    var rows = "", TOOLS = orderedHomeTools();
+    for (var i = 0; i < TOOLS.length; i++) {
+      var t = TOOLS[i]; if (!homeToolEligible(t)) continue;
       rows += '<button class="hv-mi hv-tool-tog" data-tool="' + t.act + '">' + ric(t.ic) +
         '<div class="ml">' + t.tt + '<div class="mc">' + t.sub + '</div></div>' +
-        '<span class="hv-tog' + (homeToolVisible(t) ? ' on' : '') + '"></span></button>';
+        '<span class="hv-tog' + (homeToolVisible(t) ? ' on' : '') + '"></span>' +
+        '<span class="hv-drag" aria-label="Drag to reorder">' + DRAG_DOTS + '</span></button>';
     }
-    openSheet('<div class="hv-sh-t">Customize tools</div><div class="hv-sub2">Show or hide the tools on your home screen. Saved on this device.</div>' + rows);
+    openSheet('<div class="hv-sh-t">Customize tools</div><div class="hv-sub2">Show or hide the tools on your home screen. Drag ' + DRAG_DOTS + ' to reorder. Saved on this device.</div>' + rows);
     sheetEl().querySelectorAll(".hv-tool-tog").forEach(function (b) {
-      b.addEventListener("click", function () {
+      b.addEventListener("click", function (e) {
+        if (e.target.closest(".hv-drag")) return;   // reorder handle, not the visibility toggle
         var t = homeToolByAct(b.getAttribute("data-tool")); if (!t) return;
         var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
-        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e) {}
+        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e2) {}
         var tg = b.querySelector(".hv-tog"); if (tg) tg.classList.toggle("on", now);
         var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
       });
@@ -1850,9 +2067,16 @@
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
 
+    // Delegated on `document`, not `root`: the Customize-tools sheet (sheetEl()) is appended
+    // straight to document.body as a SIBLING of root, not a descendant, so a listener scoped to
+    // root alone never sees drags starting on its .hv-drag handles.
+    wireHomeDragReorder(document);
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
+      // Long-press grid reorder mode: any tap while active exits it instead of navigating -
+      // tap-anywhere-to-exit, matching iOS's "tap away to stop jiggling" without extra chrome.
+      if (_reorderMode) { _reorderMode = false; var g0 = document.getElementById("rnavToolsGrid"); if (g0) g0.classList.remove("reordering"); return; }
       if (a === "about") e.stopPropagation();   // hero banner → About & Acknowledgements; keep the StewardMD logo tap from also firing goHome
       if (a === "notifications") return openNotifications();
       if (a === "ku") return openKuPanel();
@@ -1965,6 +2189,8 @@
       return localStorage.getItem("smd_pglog") !== "0";
     } catch (e) { return true; }
   }
+  // One flag check for every Govt Schemes entry point (HOME_TOOLS tile, Hospital hub, More sheet).
+  function govschemesOn() { return !!(window.SMD_GOVSCHEMES_FLAGS && SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes")); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   function openMore() {
     openSheet(
@@ -1977,6 +2203,9 @@
       mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
+      // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device). Flag off = no row.
+      // data-mi="govschemes" falls through to the generic ACT[a] dispatch below (ACT.govschemes).
+      (govschemesOn() ? mi("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
       // NMC eLOGBook. Flag-gated the same way the home tile is, and read from localStorage DIRECTLY
       // rather than through SMD_PGLOG_FLAGS: home.js loads BEFORE the pglog block in index.html, so
       // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
@@ -2652,6 +2881,18 @@
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
 
+      // App Lock (flag smd_applock, off by default) — shown to the owner regardless, so the
+      // feature is reachable for testing even while the flag stays off for everyone else, the
+      // same pattern the "AI Control Center (owner)" More-menu row already uses.
+      (window.SMD_APPLOCK ?
+        '<div class="hv-pf-sec">Security</div>' +
+        '<div class="hv-pf-card">' +
+          row("App Lock", "applock", {
+            value: { pin: "PIN set", biometric: "Face ID / Touch ID" }[window.SMD_APPLOCK.method()] || "Not set",
+            editLabel: "Manage"
+          }) +
+        '</div>' : "") +
+
       '<div class="hv-pf-sec">Account</div>' +
       '<div class="hv-pf-card">' +
         row("Name", "name", { value: nm, edit: false }) +
@@ -2673,6 +2914,18 @@
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
     var del = s.querySelector('[data-acct="delete"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
+    // Bind immediately, not inside acctFillProfessional's async Firestore fetch below — a tap
+    // before that resolves (slow network, or just a fast tap) found nothing wired and did
+    // nothing at all. Read whatever hospital value is on screen at CLICK time instead: by then
+    // it is almost always the real one, and worst case (mid-"Loading…") is a harmless fallback
+    // to the personal-account gate rather than a dead button.
+    var alBtn = s.querySelector('[data-edit="applock"]');
+    if (alBtn) alBtn.addEventListener("click", function () {
+      var hosp = "";
+      try { var hv = s.querySelector('[data-row="hospital"] [data-val]'); hosp = (hv && hv.textContent) || ""; } catch (e) {}
+      if (hosp === "Loading…" || hosp === "Not set") hosp = "";
+      if (window.SMD_APPLOCK) window.SMD_APPLOCK.manage(hosp);
+    });
     acctWatchAuth();
     acctFillId(s);
     acctFillVerified(s);
@@ -2761,7 +3014,7 @@
       }
       btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
     }
-    function offline(msg) {
+    function offline(msg, why) {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
       // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
       // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
@@ -2771,7 +3024,9 @@
       note = document.createElement("div");
       note.className = "hv-pf-row";
       note.setAttribute("data-offnote", "1");
-      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
+      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">' +
+        smdEsc(why || "Couldn't load your details.") +
+        ' <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
       if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootTried = false; openAccount(); });
@@ -2812,7 +3067,24 @@
      * no way out. Bound the wait, then read the on-device cache before declaring it unreadable. */
     var settled = false;
     function once(fn) { return function (v) { if (settled) return; settled = true; try { fn(v); } catch (e) {} }; }
-    var onFail = function () { try { if (document.body.contains(card)) offline("Offline"); } catch (e) {} };
+    /* Why the read failed used to be THROWN AWAY - onFail ignored its argument - so a denied read and
+     * a genuinely offline device both rendered the same "Offline", and a screenshot could not tell
+     * them apart. That is why this bug kept coming back. Keep the code for the console (never on
+     * screen: an internal error string on a clinical display is the lesson from the OTA endpoint
+     * leak) and say the one thing the doctor can act on. */
+    var onFail = function (err) {
+      var code = String((err && (err.code || err.message)) || "");
+      try { console.warn("[profile] details read failed:", code || err); } catch (e) {}
+      // permission-denied / unauthenticated here means the request reached Google and was REFUSED -
+      // an auth or App Check problem, not a network one. Calling that "Offline" sends the user to
+      // check their wifi for a problem that has nothing to do with it.
+      var denied = /permission[-_ ]?denied|unauthenticated|app-?check/i.test(code);
+      try {
+        if (!document.body.contains(card)) return;
+        if (denied) offline("Unverified", "Signed in, but this device could not be verified. Sign out and back in, then retry.");
+        else offline("Offline", "Couldn't load your details.");
+      } catch (e) {}
+    };
     pref.get().then(once(onData), once(onFail));
     setTimeout(function () {
       if (settled || !document.body.contains(card)) return;
@@ -3014,28 +3286,30 @@
       }
       return hits.map(opt).join("");
     }
-    openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
-      '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
-      '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
-    var sh = sheetEl();
-    var inp = sh.querySelector("#hospSearch"), lst = sh.querySelector("#hospList");
-    if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
-    if (lst) lst.addEventListener("click", function (e) {
-      // Request to add a hospital to the directory → submit for admin review (does NOT set the field).
-      var rq = e.target.closest && e.target.closest("[data-h-request]");
-      if (rq) {
-        var name = (inp ? inp.value.trim() : ""); if (!name) return;
-        rq.disabled = true; rq.textContent = "Sending…";
-        submitHospitalRequest(name).then(function (ok) {
-          rq.textContent = ok ? "✓ Requested — we'll review it" : "Couldn't send — try again";
-          if (ok) { try { if (window.toast) toast("Hospital requested — you can use it now; we'll verify and add it."); } catch (e) {} setTimeout(function () { closeSheet(); try { onPick(name); } catch (e) {} }, 900); }
-          else rq.disabled = false;
-        });
-        return;
-      }
-      var b = e.target.closest && e.target.closest(".hosp-opt, [data-h-custom]"); if (!b) return;
-      var val = b.getAttribute("data-h-custom") ? (inp ? inp.value.trim() : "") : b.getAttribute("data-h");
-      if (!val) return; closeSheet(); setTimeout(function () { try { onPick(val); } catch (e) {} }, 60);
+    smdLazy('/hospitals-in.js?v=1').then(function() {
+      openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
+        '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
+        '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
+      var sh = sheetEl();
+      var inp = sh.querySelector("#hospSearch"), lst = sh.querySelector("#hospList");
+      if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
+      if (lst) lst.addEventListener("click", function (e) {
+        // Request to add a hospital to the directory → submit for admin review (does NOT set the field).
+        var rq = e.target.closest && e.target.closest("[data-h-request]");
+        if (rq) {
+          var name = (inp ? inp.value.trim() : ""); if (!name) return;
+          rq.disabled = true; rq.textContent = "Sending…";
+          submitHospitalRequest(name).then(function (ok) {
+            rq.textContent = ok ? "✓ Requested — we'll review it" : "Couldn't send — try again";
+            if (ok) { try { if (window.toast) toast("Hospital requested — you can use it now; we'll verify and add it."); } catch (e) {} setTimeout(function () { closeSheet(); try { onPick(name); } catch (e) {} }, 900); }
+            else rq.disabled = false;
+          });
+          return;
+        }
+        var b = e.target.closest && e.target.closest(".hosp-opt, [data-h-custom]"); if (!b) return;
+        var val = b.getAttribute("data-h-custom") ? (inp ? inp.value.trim() : "") : b.getAttribute("data-h");
+        if (!val) return; closeSheet(); setTimeout(function () { try { onPick(val); } catch (e) {} }, 60);
+      });
     });
   }
   // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----
@@ -3188,6 +3462,11 @@
         '<li><b>v9.7</b> · Apple Watch app: patient watchlist, tasks and criticals on the wrist, plus a Code Blue CPR assistant with an iPhone Command Center.</li>' +
         '<li><b>v9.8</b> · FundX AI: guided retinal image capture and analysis (experimental).</li>' +
         '<li><b>v10.0</b> · Reliability and polish: faster, flicker-free assessment; an editable profile with a searchable hospital directory; and a broad bug-fix sweep across the app and watch.</li>' +
+        // Only SHIPPED, flag-ON work belongs here. Anything still behind a default-OFF flag is not
+        // released and must not be announced as though it were.
+        '<li><b>v10.1</b> · NMC eLOGBook: the residency logbook and portfolio — postings, signed assessments, monthly authentication, configured targets, role-based access for faculty and residents, and an offline mirror so a ward with no signal still records the work.</li>' +
+        '<li><b>v10.2</b> · Insulin dosing support: basal initiation, correction, meal and combined boluses with the working shown step by step, an insulin library and guided conversion, active-insulin (IOB) accounting, and safety interrupts that stop an unsafe dose rather than footnoting it.</li>' +
+        '<li><b>v10.3</b> · Field-report sweep: buttons that used to fail silently now say what is wrong; long AI steps show what they are working on instead of a frozen line; the notification and update prompts wait until you are signed in and on the home screen; and the surgical evidence review reads as prose rather than raw markup.</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD, built and refined case by case at the bedside.</p>';
@@ -3208,6 +3487,13 @@
       '<li><span class="fn">2</span> imaging AIs at the point of care — KardioX 12-lead ECG interpretation and FundX retinal analysis (clinical preview).</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic, with no frameworks and no build step.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
+      // Every figure below is COUNTED from the repository, not estimated. If one stops being true,
+      // change the code or change the number - a fact panel that drifts is worse than none.
+      '<li><span class="fn">124</span> cancer treatment protocols in the oncology library, each carrying its own lifecycle state instead of being presented as settled fact.</li>' +
+      '<li><span class="fn">15</span> insulins across <span class="fn">7</span> classes, with guided conversion, active-insulin accounting and the arithmetic shown line by line.</li>' +
+      '<li><span class="fn">4,804</span> conditions and <span class="fn">405</span> calculators, and not one of them answers without showing where the answer came from.</li>' +
+      '<li><span class="fn">3,884</span> automated checks run against every change — including <span class="fn">163</span> that drive a real browser, because a clinical tool that only passes in theory has not been tested.</li>' +
+      '<li><span class="fn">0</span> doses, stages or scores invented by AI. Every number is computed by validated code a clinician can read, or it is not shown at all — the AI fills the form, the engine does the maths.</li>' +
       '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
@@ -3492,6 +3778,7 @@
    */
   var _maikStop = null;
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
+  var _maikRegen = false;         // set by the Regenerate action for exactly the next send (asks the local engine for sampling jitter)
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
@@ -3601,12 +3888,14 @@
     "...d.....d...",
     "..d.......d.."]];
   // rows -> <g> of 1x1 rects. Pure string building so it drops into innerHTML anywhere.
-  function maikPixG(rows, cls) {
+  // pal is optional: the Live Doctor brings his own colours, everyone else uses MAIK_PIX.
+  function maikPixG(rows, cls, pal) {
+    var P = pal || MAIK_PIX;
     var out = '<g class="' + cls + '">', y, x, c;
     for (y = 0; y < rows.length; y++) for (x = 0; x < rows[y].length; x++) {
       c = rows[y].charAt(x);
-      if (!MAIK_PIX[c]) continue;
-      out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + MAIK_PIX[c] + '"/>';
+      if (!P[c]) continue;
+      out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + P[c] + '"/>';
     }
     return out + "</g>";
   }
@@ -3690,6 +3979,361 @@
         '</g>' +
       '</g></svg>';
   }
+  /* ── The Live Doctor (2026-08-29) ──────────────────────────────────────────
+   * A pixel physician who LIVES on the composer's top edge while MaiK is open:
+   * walks his ward round right to left, freelances stunts (hop, backflip,
+   * sprint, auscultating the screen with a bpm report), and reacts when tapped
+   * (startle, wave, hearts). Sub-pixel travel + real jump arcs over hand-placed
+   * 12x16 frames; one rAF loop that tears itself down when his node is gone.
+   * Flag smd_maik_live_doc, "0" restores the stationary Stetho Buddy resident.
+   * Under prefers-reduced-motion the resident is used instead (he stands still).
+   * Taps on the thread/composer are NEVER intercepted: only the doctor himself
+   * (a ~44px hit inset around him) is tappable. */
+  function maikLiveDocOn() { try { return localStorage.getItem("smd_maik_live_doc") !== "0"; } catch (e) { return true; } }
+  var MAIK_DOC_PAL = {
+    h: "#25333B", s: "#E9B48C", k: "#0A1519", w: "#F2F6F7", c: "#C9D6DA",
+    g: "#2DD4BF", d: "#0E6E63", r: "#E05252", p: "#22333C"
+  };
+  var MAIK_DOC_F = [
+    [ // 0 idle
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 1 blink
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...ssssss...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 2 walk A, legs apart
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "..pp....pp..", "..pp....pp..", "..kk....kk.."],
+    [ // 3 walk B, passing + bob
+    "............", "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...",
+    "....ssss....", "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..",
+    "..wwwwwwww..", "..cwwwwwwc..", "...pp.pp....", "...kk.kk...."],
+    [ // 4 walk C, offset stride
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "..pp....pp..", "..kk....kk.."],
+    [ // 5 wave A
+    "............", "....hhhh..s.", "...hhhhhh.s.", "...hssssh.w.", "...skssks.w.", "....ssss.ww.",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 6 wave B
+    "............", "....hhhh.s..", "...hhhhhh.s.", "...hssssh.w.", "...skssks.w.", "....ssss.ww.",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 7 listen A, chest piece out
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", ".ggwgggwww..", "g.wwwgwwww..", "d.wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 8 listen B, bell pulses, eyes closed
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...ssssss...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", ".ggwgggwww..", "g.wwwgwwww..", "dd.wrwdwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 9 startle, arms up
+    "............", ".s..hhhh..s.", ".s.hhhhhh.s.", ".w.hssssh.w.", "...skssks...", "....ssks....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "..pp....pp..", "..pp....pp..", "..kk....kk.."],
+    [ // 10 write A: clipboard up, pen out, eyes on the pad
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "ccwwgggwww..", "cckwwgwwww..", "ccwrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 11 write B: pen moves, a glance down
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...ssssss...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "ccwwgggwww..", "ckcwwgwwww..", "ccwrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."]
+  ];
+  var MAIK_DOC_HEART = [".r.r.", "rrrrr", "rrrrr", ".rrr.", "..r.."];
+  var MAIK_DOC_ANIM = {
+    walk:    { f: [2, 3, 4, 3], fps: 7 },
+    run:     { f: [2, 3, 4, 3], fps: 13 },
+    idle:    { f: [0, 0, 0, 1], fps: 3 },
+    wave:    { f: [5, 6], fps: 5 },
+    listen:  { f: [7, 8], fps: 3 },
+    startle: { f: [9], fps: 1 },
+    jump:    { f: [2], fps: 1 },
+    flip:    { f: [3], fps: 1 },
+    skid:    { f: [2], fps: 1 },
+    write:   { f: [10, 11], fps: 2.6 },
+    sleep:   { f: [1], fps: 1 }
+  };
+  var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
+  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null;
+  function maikDocStop() {
+    if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
+    if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
+    if (_mkdOnTap) { try { _mkdOnTap.el.removeEventListener("pointerdown", _mkdOnTap.fn); } catch (e) {} _mkdOnTap = null; }
+    _mkdState = null; _mkdCueFn = null;
+  }
+  /* He listens to the QUESTION. A sent question is classified and he acts it out:
+   * an emergency startles him into a sprint, a cardiac question gets the stethoscope,
+   * a drug question gets a hop and an Rx note, anything else gets a thinking pause.
+   * When the answer lands he waves it in. Pure keyword routing, decorative only -
+   * it never touches what MaiK actually does with the question. */
+  function maikDocClassify(q) {
+    var s = String(q || "").toLowerCase();
+    if (/\b(arrest|code blue|anaphyla|shock|seizur|stroke|stemi|unrespons|apnoea|apnea|collaps|emergen|resus)/.test(s)) return "urgent";
+    if (/\b(heart|cardiac|chest pain|palpitat|ecg|ekg|murmur|arrhythm|atrial|tachycard|bradycard|angina)/.test(s)) return "cardiac";
+    if (/\b(dose|dosing|dosage|mg\b|drug|tablet|antibiotic|infusion|prescri)/.test(s)) return "rx";
+    return "think";
+  }
+  function maikDocCue(kind) { try { if (_mkdCueFn) _mkdCueFn(kind); } catch (e) {} }
+  /* What he says when the sheet opens: an introduction the very first time,
+   * then one random rounds-thought per open. Playful, never clinical advice. */
+  var MAIK_DOC_SAY = [
+    "Rounding here all night. Ask me anything.",
+    "Thought for today: the best test is the one that changes management.",
+    "Coffee is not a fluid bolus, doctor.",
+    "I read the guidelines twice so you can read the patient.",
+    "Auscultate twice, order once.",
+    "Stay hydrated. You, not just the patient.",
+    "A good history beats a hundred tests.",
+    "Night shift? I will keep the references warm.",
+    "Treat the patient, not the number.",
+    "If in doubt, examine again."
+  ];
+  function maikDocFx(box, html, dx, dy, life) {
+    try {
+      var el = document.createElement("div");
+      el.className = "mkdoc-fx"; el.innerHTML = html;
+      el.style.left = (_mkdState.x + dx) + "px";
+      el.style.top = (36 - MAIK_DOC_H + dy) + "px";
+      box.appendChild(el);
+      setTimeout(function () { try { el.remove(); } catch (e) {} }, life);
+    } catch (e) {}
+  }
+  function maikDocMount(cmp) {
+    maikDocStop();
+    var old = cmp.querySelector(".mkdoc"); if (old) old.remove();
+    var box = document.createElement("div"); box.className = "mkdoc";
+    var svg = '<svg class="mkdoc-svg" width="' + MAIK_DOC_W + '" height="' + MAIK_DOC_H +
+      '" viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true">';
+    for (var i = 0; i < MAIK_DOC_F.length; i++) svg += maikPixG(MAIK_DOC_F[i], "mkdoc-f" + i, MAIK_DOC_PAL);
+    svg += "</svg>";
+    // Purely decorative: hidden from VoiceOver entirely so he never lands between real controls (R5 #2).
+    box.setAttribute("aria-hidden", "true");
+    box.innerHTML = '<div class="mkdoc-sh"></div><div class="mkdoc-a">' + svg + "</div>";
+    cmp.appendChild(box);
+    var actor = box.querySelector(".mkdoc-a"), sh = box.querySelector(".mkdoc-sh");
+    var groups = box.querySelectorAll(".mkdoc-svg > g");
+    var WALK_V = 38, RUN_V = 120, JUMP_H = 20, JUMP_MS = 620, FLIP_MS = 760;
+    // Untouched and off-duty for this long, he lies down and sleeps until woken.
+    var SLEEP_MS = 45000;
+    try { var _sms = +localStorage.getItem("smd_maik_doc_sleepms"); if (_sms > 0) SLEEP_MS = _sms; } catch (e) {}
+    var lastAct = performance.now();
+    function wake() {
+      lastAct = performance.now();
+      if (D.state === "sleep") { setSt("startle", 420); return true; }
+      return false;
+    }
+    // Layout read cached: clientWidth only changes on rotation/keyboard, not per frame (R6 #2).
+    var W = cmp.clientWidth;
+    _mkdOnRz = function () { try { if (cmp.isConnected) W = cmp.clientWidth; } catch (e) {} };
+    window.addEventListener("resize", _mkdOnRz);
+    var D = _mkdState = { x: W + MAIK_DOC_W, dir: -1, state: "walk", t0: 0, until: 0, gone: 0, next: 0, target: null };
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function setSt(s, dur) {
+      D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0;
+      if (s === "listen") {
+        var pts = '<svg width="58" height="20" viewBox="0 0 60 20"><polyline points="0,10 14,10 18,10 21,2 24,17 27,10 40,10 60,10" fill="none" stroke="#2DD4BF" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:90;stroke-dashoffset:90;animation:mkdocEcg 1.2s linear forwards"/></svg>';
+        maikDocFx(box, pts, D.dir === -1 ? -62 : MAIK_DOC_W + 4, 4, 1700);
+        setTimeout(function () {
+          if (!_mkdState || D.state !== "listen") return;
+          maikDocFx(box, '<span class="mkdoc-bub">' + Math.round(rnd(64, 96)) + " bpm</span>", D.dir === -1 ? -46 : MAIK_DOC_W + 4, -12, 1500);
+        }, 850);
+      }
+    }
+    function sched() { D.next = performance.now() + (box.classList.contains("busy") ? rnd(1500, 3000) : rnd(2600, 5200)); }
+    function stunt() {
+      // While an answer generates he WORKS: clipboard out, pen scribbling, with the
+      // occasional pace across the strip. The stunts are for off-duty time.
+      if (box.classList.contains("busy")) {
+        if (D.state !== "write") {
+          setSt("write", rnd(2200, 3600));
+          if (Math.random() < 0.6) maikDocFx(box, '<span class="mkdoc-bub">...</span>', D.dir === -1 ? -26 : MAIK_DOC_W + 4, -16, 1400);
+        } else {
+          setSt("run", rnd(500, 900));   // stretch his legs, then back to the pad
+        }
+        sched(); return;
+      }
+      var r = Math.random();
+      if (r < 0.30) setSt("jump", JUMP_MS);
+      else if (r < 0.52) setSt("flip", FLIP_MS);
+      else if (r < 0.68) setSt("run", rnd(700, 1200));
+      else if (r < 0.84) setSt("listen", 1800);
+      else setSt("idle", rnd(900, 1500));
+      sched();
+    }
+    function react() {
+      var r = Math.random();
+      if (r < 0.4) { setSt("startle", 700); maikDocFx(box, '<span class="mkdoc-bub">!</span>', MAIK_DOC_W * 0.5 - 6, -20, 800); }
+      else if (r < 0.7) setSt("wave", 1100);
+      else {
+        setSt("wave", 1100);
+        for (var i = 0; i < 4; i++) (function (i) {
+          setTimeout(function () {
+            if (!_mkdState) return;
+            maikDocFx(box, '<span class="mkdoc-heart">' +
+              '<svg width="10" height="10" viewBox="0 0 5 5" shape-rendering="crispEdges">' + maikPixG(MAIK_DOC_HEART, "h", MAIK_DOC_PAL) + "</svg></span>",
+              rnd(-4, MAIK_DOC_W - 6), rnd(-12, -2), 1500);
+          }, i * 110);
+        })(i);
+      }
+      sched();
+    }
+    actor.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); if (wake()) return; react(); });
+    /* Tap ANYWHERE on the sheet and he sprints to that x and skids in. The listener
+     * is purely an observer: no preventDefault, no stopPropagation - every button,
+     * bubble and the composer behave exactly as before, he just also comes running.
+     * (Taps on the doctor himself stop propagation above, so they never reach this.) */
+    var sheetEl = cmp.closest ? cmp.closest("#maikSheet") : null;
+    if (sheetEl) {
+      _mkdOnTap = { el: sheetEl, fn: function (e) {
+        try {
+          if (!_mkdState || _mkdState !== D) return;
+          if (wake()) return;   // a tap first just wakes him
+          if (D.state === "startle" || D.state === "listen") return;   // let a scene finish
+          var px = e.clientX - cmp.getBoundingClientRect().left - MAIK_DOC_W / 2;
+          D.target = Math.max(4, Math.min(W - MAIK_DOC_W - 4, px));
+          D.dir = D.target > D.x ? 1 : -1;
+          setSt("run", 0);
+        } catch (err) {}
+      } };
+      sheetEl.addEventListener("pointerdown", _mkdOnTap.fn);
+    }
+    /* Question-aware acting. Each cue is a short scene built from the states he already has. */
+    _mkdCueFn = function (kind) {
+      wake();   // a question always wakes him, straight into the scene
+      if (kind === "urgent") {          // emergency wording: startled, then sprints to help
+        setSt("startle", 450);
+        maikDocFx(box, '<span class="mkdoc-bub">!</span>', MAIK_DOC_W * 0.5 - 6, -20, 700);
+        setTimeout(function () { if (_mkdState === D) setSt("run", 1500); }, 470);
+      } else if (kind === "cardiac") {  // cardiac wording: out comes the stethoscope
+        setSt("listen", 2200);
+      } else if (kind === "rx") {       // drug or dose: a hop and a prescription note
+        setSt("jump", JUMP_MS);
+        maikDocFx(box, '<span class="mkdoc-bub">Rx</span>', D.dir === -1 ? -30 : MAIK_DOC_W + 4, -14, 1300);
+      } else if (kind === "done") {     // the answer landed: confetti and a wave
+        setSt("wave", 1300);
+        var confCols = ["#2DD4BF", "#E05252", "#F5C84C", "#F2F6F7", "#0E6E63"], ch = "", ci;
+        for (ci = 0; ci < 14; ci++) {
+          ch += '<span class="mkdoc-conf" style="left:' + rnd(-4, MAIK_DOC_W + 4).toFixed(0) +
+            'px;background:' + confCols[ci % confCols.length] +
+            ';width:' + (Math.random() < 0.5 ? 4 : 5) + 'px;height:' + (Math.random() < 0.5 ? 4 : 6) +
+            'px;--cx:' + rnd(-30, 30).toFixed(0) + 'px;--cy:' + (-rnd(16, 34)).toFixed(0) +
+            'px;animation-duration:' + rnd(750, 1150).toFixed(0) + 'ms;animation-delay:' + rnd(0, 140).toFixed(0) + 'ms"></span>';
+        }
+        maikDocFx(box, ch, 0, -8, 1500);
+      } else {                          // anything else: a beat of thought
+        setSt("idle", 1200);
+        maikDocFx(box, '<span class="mkdoc-bub">?</span>', MAIK_DOC_W * 0.5 - 6, -20, 1100);
+      }
+      sched();
+    };
+    var shown = -1;
+    function show(fi) { if (fi === shown) return; if (shown >= 0) groups[shown].style.display = "none"; groups[fi].style.display = "block"; shown = fi; }
+    var last = performance.now();
+    sched();
+    /* The greeting: he pauses on his way in, waves, and speaks. The bubble is a
+     * FOLLOWER: tick() re-anchors it centred above his head every frame (clamped to
+     * the stage, riding his jumps), so it stays visually attached while he moves. */
+    var sayBub = null;
+    setTimeout(function () {
+      if (_mkdState !== D) return;
+      var first = false;
+      try { first = !localStorage.getItem("smd_maik_doc_hi"); if (first) localStorage.setItem("smd_maik_doc_hi", "1"); } catch (e) {}
+      var msg = first ? "Hi, I am MaiK, your medical AI assistant. Tap me any time."
+                      : MAIK_DOC_SAY[Math.floor(Math.random() * MAIK_DOC_SAY.length)];
+      // He must be ON stage before he speaks: half a doctor at the screen edge with a
+      // bubble pointing at nothing was the owner's screen recording. Snap him inside.
+      if (D.x > W - MAIK_DOC_W - 8) D.x = W - MAIK_DOC_W - 8;
+      if (D.x < 8) D.x = 8;
+      setSt("wave", 1600);
+      var d2 = document.createElement("div");
+      d2.className = "mkdoc-fx";
+      d2.innerHTML = '<span class="mkdoc-say">' + msg + "</span>";
+      box.appendChild(d2);
+      sayBub = d2;
+      setTimeout(function () { try { d2.remove(); } catch (e) {} if (sayBub === d2) sayBub = null; }, 4200);
+      sched();
+    }, 1400);
+    function tick(now) {
+      if (!box.isConnected) { maikDocStop(); return; }
+      // Screen locked / app occluded: let WebKit's hidden-document throttle idle us (R6 #1).
+      if (document.hidden) { last = now; _mkdRaf = requestAnimationFrame(tick); return; }
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      var y = 0, rot = 0, sq = 1, W = cmp.clientWidth;
+      var busy = box.classList.contains("busy");
+      var wv = busy ? WALK_V * 1.5 : WALK_V;
+      switch (D.state) {
+        case "walk":
+          D.x += wv * D.dir * dt;
+          if (!busy && now - lastAct > SLEEP_MS) { setSt("sleep", 0); break; }
+          if (now > D.next) stunt();
+          break;
+        case "sleep":
+          rot = -90;   // lying down; the blink frame keeps his eyes shut
+          if (busy) { wake(); break; }
+          if (now - (D.zz || 0) > 2600) {
+            D.zz = now;
+            maikDocFx(box, '<span class="mkdoc-heart"><span class="mkdoc-bub">Z z</span></span>', MAIK_DOC_W + 2, -4, 1700);
+          }
+          break;
+        case "run":
+          D.x += RUN_V * D.dir * dt; rot = D.dir * 6;
+          if (D.target !== null && D.target !== undefined) {
+            if ((D.dir === -1 && D.x <= D.target) || (D.dir === 1 && D.x >= D.target)) {
+              D.x = D.target; D.target = null;
+              setSt("skid", 340);        // arrives with a lean-back skid
+            }
+          } else if (D.until && now > D.until) setSt("walk", 0);
+          break;
+        case "skid": {
+          var sp = Math.min(1, (now - D.t0) / 340);
+          D.x += RUN_V * (1 - sp) * D.dir * dt;   // bleeding off speed
+          rot = -D.dir * 14 * (1 - sp * 0.4);     // leaned back against the slide
+          if (sp >= 1) { sq = 0.86; if (Math.random() < 0.35) setSt("flip", FLIP_MS); else setSt("walk", 0); }
+          break;
+        }
+        case "jump": case "flip":
+          var dur = D.state === "flip" ? FLIP_MS : JUMP_MS;
+          var pr = Math.min(1, (now - D.t0) / dur);
+          D.x += wv * 1.25 * D.dir * dt;
+          y = -JUMP_H * 4 * pr * (1 - pr);
+          if (D.state === "flip") rot = -D.dir * 360 * pr;
+          if (pr >= 1) { sq = 0.82; setSt("walk", 0); }
+          break;
+        default: // idle / wave / listen / startle
+          if (now > D.until) { if (D.dir === 1 && Math.random() < 0.6) D.dir = -1; setSt("walk", 0); }
+      }
+      if (D.x < -MAIK_DOC_W - 20 && D.dir === -1) {
+        if (!D.gone) D.gone = now + rnd(700, 1600);
+        if (now > D.gone) { D.gone = 0; D.x = W + MAIK_DOC_W + 10; setSt("walk", 0); sched(); }
+      } else if (D.x > W + MAIK_DOC_W + 30 && D.dir === 1) {
+        D.dir = -1;
+      } else D.gone = 0;
+      // Keep the speech bubble glued above his head while he moves (size cached once).
+      if (sayBub && sayBub.isConnected) {
+        if (!sayBub._w) { sayBub._w = sayBub.offsetWidth || 130; sayBub._h = sayBub.offsetHeight || 34; }
+        var sbl = Math.max(4, Math.min(W - sayBub._w - 4, D.x + MAIK_DOC_W / 2 - sayBub._w / 2));
+        sayBub.style.left = sbl.toFixed(0) + "px";
+        sayBub.style.top = (36 - MAIK_DOC_H - sayBub._h - 5 + y).toFixed(0) + "px";
+        // The tail keeps pointing at HIM even when the bubble is clamped at an edge.
+        var tail = Math.max(10, Math.min(sayBub._w - 10, D.x + MAIK_DOC_W / 2 - sbl));
+        try { sayBub.firstChild.style.setProperty("--mkTail", tail.toFixed(0) + "px"); } catch (e) {}
+      }
+      var a = MAIK_DOC_ANIM[D.state];
+      show(a.f[Math.floor(now / 1000 * a.fps) % a.f.length]);
+      var flip = D.dir === 1 ? -1 : 1;
+      actor.style.transform = "translate(" + D.x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + flip + "," + sq + ") rotate(" + rot.toFixed(1) + "deg)";
+      var air = Math.min(1, -y / JUMP_H);
+      sh.style.transform = "translateX(" + (D.x + MAIK_DOC_W / 2 - 16.5).toFixed(1) + "px) scaleX(" + (1 - air * 0.45).toFixed(2) + ")";
+      sh.style.opacity = (0.8 - air * 0.5).toFixed(2);
+      _mkdRaf = requestAnimationFrame(tick);
+    }
+    _mkdRaf = requestAnimationFrame(tick);
+  }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
@@ -3751,7 +4395,7 @@
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
           '<div class="maik-side-lbl">Your conversations</div>' +
           '<div class="maik-side-list" id="maikSideList"></div>' +
-          '<div class="maik-side-priv">' + MK.lock + '<span>Saved only on this device — your history never leaves your phone.</span></div>' +
+          '<div class="maik-side-priv">' + MK.lock + '<span>Saved only on this device. Your history never leaves your phone.</span></div>' +
           '<div class="maik-side-acct" id="maikSideAcct"></div>' +
         '</aside>' +
       '</div>' +
@@ -3855,14 +4499,23 @@ body.dark #maikSheet{
 .maik-hd-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--mk-bd);background:var(--mk-soft);color:var(--mk-ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
 .maik-hd-btn:hover{border-color:var(--mk-teal);color:var(--mk-teal)}
 .maik-hd-btn:active{transform:scale(.94)}
+/* Invisible hit-slop lifts every icon control to ~44pt for one-handed night use
+   without changing the visual size (R5 #3). */
+.maik-hd-btn,.maik-mic,.maik-img,.maik-research,.maik-send{position:relative}
+.maik-hd-btn::after,.maik-mic::after,.maik-img::after,.maik-research::after,.maik-send::after{content:"";position:absolute;inset:-5px;border-radius:50%}
 
 /* disclaimer (shared, wraps — never clips) */
 .maik-disc{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--mk-soft);border-top:1px solid var(--mk-bd);border-bottom:1px solid var(--mk-bd);flex:0 0 auto}
 .maik-disc svg{flex:0 0 auto}
-.maik-disc span{font:600 11px/1.3 'Inter';color:var(--mk-mut)}
+/* The one sentence telling the clinician to verify independently must clear WCAG AA:
+   #64748b on --mk-soft was 4.43:1, so light theme gets its own darker ink (R5 #4). */
+.maik-disc span{font:600 11px/1.3 'Inter';color:#5a6b80}
+body.dark #maikSheet .maik-disc span,body.v3-dark #maikSheet .maik-disc span{color:var(--mk-mut)}
 
-/* body (shared scroll area) */
-.maik-body{position:relative;flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px}
+/* body (shared scroll area) — 56px bottom padding keeps the last bubble's chips and citations
+   clear of the Live Doctor's strip above the composer (sprite is 44px tall + 9px hit inset),
+   so he can never cover or out-tap them (R5 #1). */
+.maik-body{position:relative;flex:1;overflow-y:auto;padding:14px 14px 56px;display:flex;flex-direction:column;gap:10px}
 .maik-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;opacity:.05;pointer-events:none}
 body.dark .maik-wm{opacity:.06}
 
@@ -3961,10 +4614,12 @@ body.dark .maik-fu{background:var(--mk-field)}
 body.dark .maik-conf-high{color:#4dd68c;background:rgba(77,214,140,.12)}
 body.dark .maik-conf-moderate{color:#f0c060;background:rgba(240,192,96,.12)}
 body.dark .maik-conf-lower{color:#f4bcbc;background:rgba(232,90,90,.14)}
-.maik-fb{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--mk-bd)}
+.maik-fb{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--mk-bd)}
 .maik-fb-q{font:600 12px/1.3 'Inter';color:var(--mk-mut,#5a7184)}
 .maik-fb-b{font:700 12px/1 'Inter';color:var(--mk-teal,#0e6e63);background:none;border:1px solid var(--mk-bd);border-radius:999px;padding:6px 14px;cursor:pointer}
 .maik-fb-b:hover{background:var(--mk-teal,#0e6e63);color:#fff;border-color:var(--mk-teal,#0e6e63)}
+.maik-fb-reason{flex-basis:100%;width:100%;font:500 13px/1.4 'Inter';color:var(--mk-ink,#14202b);background:var(--mk-card,#fff);border:1px solid var(--mk-bd);border-radius:10px;padding:8px 10px;resize:vertical;box-sizing:border-box}
+.maik-fb-reasonrow{flex-basis:100%;display:flex;gap:8px}
 .maik-verify{margin-top:10px;font:600 11.5px/1.45 'Inter';color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:9px;padding:8px 11px}
 body.dark .maik-verify{color:#fcd34d;background:rgba(146,64,14,.18);border-color:rgba(252,211,77,.25)}
 
@@ -4078,8 +4733,28 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .mkw-svg{display:block}
 .mkw-svg > g{display:none}
 .mkw-svg > g:first-child{display:block}
+/* The Live Doctor: the strip he lives on spans the composer width but takes no taps -
+   only the doctor himself (.mkdoc-a, hit inset widened to ~44px) is interactive. */
+.mkdoc{position:absolute;left:0;right:0;top:-36px;height:36px;pointer-events:none;z-index:1;overflow:visible}
+.mkdoc-a{position:absolute;left:0;bottom:1px;pointer-events:auto;cursor:pointer;will-change:transform;transform-origin:50% 100%;filter:drop-shadow(0 1px 2px rgba(8,19,26,.35))}
+.mkdoc-a::after{content:"";position:absolute;inset:-9px}
+.mkdoc.busy .mkdoc-a{filter:drop-shadow(0 1px 2px rgba(8,19,26,.35)) drop-shadow(0 0 6px rgba(45,212,191,.5))}
+.mkdoc-svg{display:block}
+.mkdoc-svg > g{display:none}
+.mkdoc-sh{position:absolute;left:0;bottom:0;width:33px;height:6px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(8,19,26,.4),transparent 70%);will-change:transform,opacity;pointer-events:none}
+.mkdoc-fx{position:absolute;pointer-events:none}
+.mkdoc-bub{font:700 9px/1 'Inter';color:var(--mk-teal,#0f766e);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:6px;padding:4px 6px;white-space:nowrap;animation:mkdocPop .24s ease-out forwards;display:inline-block}
+.mkdoc-heart{display:inline-block;animation:mkdocFloat 1.1s ease-out forwards}
+@keyframes mkdocPop{0%{transform:translateY(5px) scale(.6);opacity:0}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+.mkdoc-conf{position:absolute;top:0;opacity:0;animation:mkdocConf 900ms cubic-bezier(.2,.6,.4,1) forwards}
+.mkdoc-say{position:relative;display:inline-block;font:600 10px/1.35 'Inter';color:var(--mk-ink,#0f172a);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:10px;padding:7px 9px;max-width:170px;width:max-content;white-space:normal;box-shadow:0 4px 14px rgba(15,23,42,.14);animation:mkdocPop .24s ease-out forwards}
+.mkdoc-say::after{content:"";position:absolute;left:var(--mkTail,50%);bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top:5px solid var(--mk-bg,#fff);filter:drop-shadow(0 1px 0 var(--mk-bd,#d5dde6))}
+@keyframes mkdocConf{0%{transform:translate(0,0) rotate(0deg);opacity:1}35%{transform:translate(calc(var(--cx)*.55),var(--cy)) rotate(140deg);opacity:1}100%{transform:translate(var(--cx),48px) rotate(320deg);opacity:0}}
+@keyframes mkdocFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-42px) scale(1.15);opacity:0}}
+@keyframes mkdocEcg{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){
   .mkb-bob,.mkb-blink,.mkb-pulse,.mkb-ping,.mkb-tick,.mkw-a{animation:none}
+  .mkdoc-fx{animation:none}
 }
 .maik-buffer-txt{color:var(--mk-mut);font-weight:600}
 .maik-sk{display:flex;flex-direction:column;gap:8px}
@@ -4096,7 +4771,10 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-tbl{border-collapse:collapse;width:100%;font:400 12px 'Inter'}
 .maik-tbl th,.maik-tbl td{border:1px solid var(--mk-bd);padding:6px 9px;text-align:left;vertical-align:top;color:var(--mk-ink)}
 .maik-tbl th{background:var(--mk-soft);font-weight:700}
-.maik-cite{cursor:pointer;padding:0 1px;line-height:0}
+/* A ~9px superscript is the primary "verify" affordance; give it an invisible
+   ~25px hit area so it is actually tappable one-handed (R5 #5). */
+.maik-cite{cursor:pointer;padding:0 1px;line-height:0;position:relative}
+.maik-cite::after{content:"";position:absolute;inset:-8px}
 /* expandable <details> sources — the app uses <details class="maik-src">, so make it a
    disclosure block (overrides the spec's flat flex row while keeping its border/spacing/teal) */
 .maik-src{display:block}
@@ -4125,6 +4803,57 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-body>*:not(.maik-wm){position:relative;z-index:1}
 /* keep launch FABs (they sit at a high z-index) from floating over the sheet */
 body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab,body.maik-open .hv-fab{display:none!important}
+
+/* ══ MaiK CHAT skin (flag: body.mkchat, default ON, ?mkchat=0 disables) ═══════════
+   Owner, 2026-09-04: "not getting a feel of using an AI assistant like ChatGPT or Claude".
+   Audit found five differences from those apps and this block addresses each, presentation only:
+     1. assistant answers were bordered, shaded, shadowed cards with an uppercase MAIK label
+        -> unboxed prose on the page; only the user's message stays a bubble
+     2. a disclaimer line INSIDE every answer, duplicating the sheet's permanent banner -> banner only
+     3. 13px widget-sized text -> 15px reading-size text
+     4. up to 17 loud bordered chips under one answer -> quiet outline chips, muted labels
+     5. mascot + three shimmering skeleton bars while thinking -> just the stage line
+   Tokens untouched, so dark mode follows. No DOM/logic change. */
+body.mkchat #maikSheet .maik-b{max-width:100%}
+body.mkchat #maikSheet .maik-b.ai{background:transparent;border:none;border-radius:0;box-shadow:none;padding:6px 2px 4px;margin-top:2px}
+body.mkchat #maikSheet .maik-b.you{max-width:84%;font:500 14.5px/1.5 'Inter';padding:10px 14px;border-radius:18px 18px 6px 18px}
+body.mkchat #maikSheet .maik-attr{display:none!important}
+body.mkchat #maikSheet .maik-edu{display:none}
+body.mkchat #maikSheet .maik-conf{display:none}
+body.mkchat #maikSheet .maik-conf-lower{display:inline-flex}
+body.mkchat #maikSheet .maik-p,body.mkchat #maikSheet .maik-li,body.mkchat #maikSheet .maik-streaming{font-size:15px;line-height:1.65}
+/* the on-device path renders BARE p / ul / li (no .maik-p class, measured live at 12.5px), so the
+   reading size has to reach those too, plus real emphasis so bold and italic actually read as such */
+body.mkchat #maikSheet .maik-b.ai p,body.mkchat #maikSheet .maik-b.ai li,body.mkchat #maikSheet .maik-streaming p,body.mkchat #maikSheet .maik-streaming li{font-size:15px;line-height:1.65;color:var(--mk-ink)}
+body.mkchat #maikSheet .maik-b.ai p{margin:0 0 10px}
+body.mkchat #maikSheet .maik-b.ai ul,body.mkchat #maikSheet .maik-b.ai ol{margin:4px 0 10px;padding-left:20px}
+body.mkchat #maikSheet .maik-b.ai li{margin:3px 0}
+body.mkchat #maikSheet .maik-b.ai strong,body.mkchat #maikSheet .maik-b.ai b{font-weight:700;color:var(--mk-ink)}
+body.mkchat #maikSheet .maik-b.ai em,body.mkchat #maikSheet .maik-b.ai i{font-style:italic;color:var(--mk-mut)}
+body.mkchat #maikSheet .maik-b.ai h1,body.mkchat #maikSheet .maik-b.ai h2,body.mkchat #maikSheet .maik-b.ai h3,body.mkchat #maikSheet .maik-b.ai h4{font:700 15.5px/1.35 'Inter';color:var(--mk-ink);margin:14px 0 6px}
+body.mkchat #maikSheet .maik-h{font-size:15.5px;margin:14px 0 6px}
+/* the prescription chip is inline-styled as a filled teal button on EVERY answer; one filled accent per
+   screen is the send button, so this becomes a quiet outline like every other chip (inline needs !important) */
+body.mkchat #maikSheet .maik-chip.maik-rx{background:transparent!important;color:var(--mk-mut)!important;border-color:var(--mk-bd)!important;font-weight:500!important}
+body.mkchat #maikSheet .maik-chip.maik-rx:hover{color:var(--mk-teal)!important;border-color:var(--mk-teal)!important}
+body.mkchat #maikSheet .maik-note{font-size:12.5px}
+body.mkchat #maikSheet .maik-fu,body.mkchat #maikSheet .maik-chip{background:transparent;border:1px solid var(--mk-bd);color:var(--mk-mut);font:500 12.5px/1 'Inter';padding:7px 11px;border-radius:999px;box-shadow:none}
+body.mkchat #maikSheet .maik-fu:hover,body.mkchat #maikSheet .maik-chip:hover{color:var(--mk-teal);border-color:var(--mk-teal);background:transparent;box-shadow:none;transform:none}
+body.mkchat #maikSheet .maik-refine .maik-fu{background:transparent;border-color:var(--mk-bd);color:var(--mk-mut)}
+body.mkchat #maikSheet .maik-refine .maik-fu::before{display:none}
+body.mkchat #maikSheet .maik-refine{border-top:none;padding-top:4px;margin-top:8px}
+body.mkchat #maikSheet .maik-refine-lbl,body.mkchat #maikSheet .maik-tools-lbl{text-transform:none;letter-spacing:0;font:600 12px/1.3 'Inter';color:var(--mk-faint);margin-bottom:6px}
+body.mkchat #maikSheet .maik-know{background:transparent;border:none;padding:6px 0;margin:8px 0 0;color:var(--mk-teal);font-weight:600}
+body.mkchat #maikSheet .maik-src{border-top:none;padding-top:4px;font-size:12px;font-weight:500}
+body.mkchat #maikSheet .maik-fb{border-top:none;padding-top:2px;margin-top:8px;gap:6px}
+body.mkchat #maikSheet .maik-fb-q{font-size:12px;font-weight:500;color:var(--mk-faint)}
+body.mkchat #maikSheet .maik-fb-b{font:600 12px/1 'Inter';padding:5px 11px;color:var(--mk-mut)}
+body.mkchat #maikSheet .maik-sk{display:none}
+/* answer actions (Copy / Regenerate / Edit): text-only, sit before the rating on the same quiet row */
+.maik-acts{display:inline-flex;gap:2px;margin-right:6px}
+.maik-fb-b.maik-act{border-color:transparent;padding:5px 8px}
+body.mkchat #maikSheet .maik-fb-b.maik-act{color:var(--mk-faint)}
+body.mkchat #maikSheet .maik-fb-b.maik-act:hover{color:var(--mk-teal);background:transparent;border-color:transparent}
 
 /* ══ MaiK UI 2 · instrument-grade skin (flag: body.mk2 · ?mkui=1) ══════════════
    Presentation-only. Re-points the --mk-* tokens to one restrained clinical
@@ -4217,6 +4946,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
+    // On-device model lifecycle: cancel any pending unload and warm the chosen local pack NOW, at the
+    // moment a question is likely, instead of at app start (owner, 2026-09-04: no resident model when
+    // MaiK is not in use). close() below schedules the matching release.
+    try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetOpened) SMD_MAIK_LOCAL.sheetOpened(); } catch (e) {}
+    try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.warmIfLocal) SMD_MAIK_ENGINE.warmIfLocal(); } catch (e) {}
     maikBuddyMount();          // the resident: present from the moment MaiK opens
     requestAnimationFrame(function () {
       scrim.classList.add("on"); sheet.classList.add("on");
@@ -4284,6 +5018,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try {
         var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
         var old = cmp.querySelector(".mkw"); if (old) old.remove();
+        // The Live Doctor replaces the stationary resident unless the flag is off or the
+        // clinician asked for reduced motion (he only travels; standing still is Buddy's job).
+        var reduce = false;
+        try { reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        if (maikLiveDocOn() && !reduce) { maikDocMount(cmp); return; }
         var box = document.createElement("div"); box.className = "mkw";
         // +15% over the original 2x: vector rects, so a fractional scale stays sharp.
         box.innerHTML = '<span class="mkw-a">' + maikPixSVG([MAIK_BUDDY[0], MAIK_BUDDY[1], maikBlinkFrame(MAIK_BUDDY[0])], 2.3) + "</span>";
@@ -4293,16 +5032,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     function maikBuddyUnmount() {
       try { var old = sheet && sheet.querySelector(".mkw"); if (old) old.remove(); } catch (e) {}
-      maikBuddyStop();
+      try { var od = sheet && sheet.querySelector(".mkdoc"); if (od) od.remove(); } catch (e) {}
+      maikBuddyStop(); maikDocStop();
     }
     // Sending a question does not summon him — he is already there. It just perks him up, while
     // Medibot appears in the pending bubble (maikBufferHTML).
     function maikBuddyBusy(on) {
-      try { var b = sheet && sheet.querySelector(".mkw"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
+      try { var b = sheet && sheet.querySelector(".mkw, .mkdoc"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
     }
     function maikSetSendMode(busy) {
+      var was = _maikBusy;
       _maikBusy = busy;
       maikBuddyBusy(!!busy);
+      if (was && !busy) { try { maikDocCue("done"); } catch (e) {} }   // wave the answer in
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -4342,6 +5084,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
       // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
       _maikBusy = false;
+      // Release the on-device model shortly after close (after any in-flight answer finishes; the
+      // release never cuts a running generation), so it stops holding memory and heating the phone.
+      try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
@@ -4508,7 +5253,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics)\b/gi, " ").replace(/\s+/g, " ").trim();
         _drug = _drug || t.lastDrug;
         if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: "dose of " + _drug, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
-        return { clarify: "Which drug’s dose would you like — e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
+        // No drug named and none remembered: "and the dose?" right after a treatment answer means the
+        // first-line drug for the topic we are on. Asking "which drug?" back was the single most
+        // assistant-unlike thing in the owner's live battery (2026-09-04); ChatGPT resolves it in one hop.
+        return { question: _pop + " first-line drug and dose for " + t.topic + ": drug, dose, route, frequency and duration. Verify locally.", depth: "concise", topic: t.topic, retrieval: t.topic + " first line drug dose duration" };
       }
       if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
         return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };
@@ -4579,7 +5327,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { scroll(); } catch (e) {}
       // Staged progress + the live green dot so a ~15s web round-trip (search + synthesis) is clearly
       // WORKING, never a frozen "Researching…" line. Cleared the instant the answer/timeout lands.
-      var _wt = [[5000, "Searching medical sources"], [12000, "Synthesizing the evidence"], [30000, "Almost there — finalizing"]].map(function (s) {
+      var _wt = [[5000, "Searching medical sources"], [12000, "Synthesizing the evidence"], [30000, "Almost there, finalizing"]].map(function (s) {
         return setTimeout(function () { try { busy.innerHTML = maikBufferHTML(s[1], "maik-webbusy"); } catch (e) {} }, s[0]);
       });
       function _clr() { _wt.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); }
@@ -4688,10 +5436,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var askedRf = /\b(red ?flag|danger|warning|escalate|admit|worry|miss)\b/.test(qn);
         var askedIx = /\b(investigat|work ?up|test|tests|labs?|imaging|bloods?)\b/.test(qn);
         var askedDx = /\b(differential|ddx|mimic|versus|\bvs\b|distinguish)\b/.test(qn);
-        if (/redflag/i.test(secs) && !askedRf) out.push({ label: "🚩 Red flags not to miss", q: name + " red flags" });
-        if ((/management|treatment/i.test(secs) || (pkg.treatment && pkg.treatment.default)) && !askedTx) out.push({ label: "💊 First-line treatment", q: "treatment of " + name });
-        if (/investigation/i.test(secs) && !askedIx) out.push({ label: "🔬 What to investigate", q: "investigations for " + name });
-        if (/differential|mimic/i.test(secs) && !askedDx) out.push({ label: "🔀 Differentials & mimics", q: name + " differential diagnosis" });
+        if (/redflag/i.test(secs) && !askedRf) out.push({ label: "Red flags not to miss", q: name + " red flags" });
+        if ((/management|treatment/i.test(secs) || (pkg.treatment && pkg.treatment.default)) && !askedTx) out.push({ label: "First-line treatment", q: "treatment of " + name });
+        if (/investigation/i.test(secs) && !askedIx) out.push({ label: "What to investigate", q: "investigations for " + name });
+        if (/differential|mimic/i.test(secs) && !askedDx) out.push({ label: "Differentials and mimics", q: name + " differential diagnosis" });
         return out.slice(0, 3);
       } catch (e) { return []; }
     }
@@ -4700,7 +5448,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikFollowupsHTML(pkg, question, assume) {
       var chips = maikFollowupChips(pkg, question), html = "";
       chips.forEach(function (c) { html += '<button class="maik-fu" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
-      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic — search the web</button>';
+      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic: search the web</button>';
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     // UpToDate-style refinement chips: the LLM ends a clinical answer with a machine-readable
@@ -4794,7 +5542,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
              "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";
     }
     if (/cancel/i.test(e)) return "That answer was cancelled.";
-    return "MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available." +
+    return "MaiK is unavailable right now.the deterministic StewardMD engine, calculators and reference tools remain available." +
            (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
   }
 
@@ -4896,7 +5644,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           SMD_AI.verifyGrounding(md, pkg).then(function (v) {
             if (!v || !v.checked || !v.flagged || !v.flagged.length || !think || !think.isConnected) return;
             var w = document.createElement("div"); w.className = "maik-verify";
-            w.textContent = "⚠ " + v.flagged.length + " statement" + (v.flagged.length > 1 ? "s" : "") + " not directly supported by the cited sources — verify before acting.";
+            w.textContent = "⚠ " + v.flagged.length + " statement" + (v.flagged.length > 1 ? "s" : "") + " not directly supported by the cited sources. Verify before acting.";
             think.appendChild(w); scroll();
           }).catch(function () {});
         }
@@ -5025,7 +5773,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (_maikDone) return; _maikDone = true; _clearStages(); _fsResume();
         try {
           var _tw = _live();
-          _tw.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
+          _tw.innerHTML = '<div class="maik-welcome">MaiK took too long to respond. The knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
           try { _tw.removeAttribute("data-mg"); } catch (e) {}
           _persist();
           var _rl = _tw.querySelector(".maik-retry");
@@ -5038,7 +5786,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       function _armTO() { clearTimeout(_maikTO); _maikTO = setTimeout(_maikTimedOut, MAIK_TO_MS); }
       // Reassurance while a (native) answer generates — otherwise the bubble sits on one "Searching…" line
       // for the whole wait and reads as frozen/broken. Neutered the instant tokens/answer land.
-      [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there — finalizing"]].forEach(function (s) {
+      [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there, finalizing"]].forEach(function (s) {
         _stageT.push(setTimeout(function () {
           if (_maikDone || _streamStarted) return;
           try { think.innerHTML = maikBufferHTML(s[1], "maik-thinking"); scroll(); } catch (e) {}
@@ -5136,7 +5884,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               }
             } catch (e) {}
             try { _brainAugment(_h, pkgForKb); } catch (e) {}
-            try { _answerFeedback(_h); } catch (e) {}
+            try { _answerFeedback(_h, { engine: "kb" }); } catch (e) {}
             if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; _h.appendChild(_pe); } catch (e) {} }
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
             try { scroll(); } catch (e) {}
@@ -5175,12 +5923,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               // proactive safety
               (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
               // evidence contradiction (from the enriched package)
-              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ — " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
+              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ: " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
               // clinical workflow (ordered next steps)
               var wf = MaiKCopilot.workflow(res);
               if (wf && wf.steps.length) {
                 var box = document.createElement("div"); box.className = "maik-refine";
-                var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow — next steps"; box.appendChild(lbl);
+                var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow: next steps"; box.appendChild(lbl);
                 var row = document.createElement("div"); row.className = "maik-followups";
                 var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : "";
                 wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.addEventListener("click", function () { try { qEl.value = base + s; } catch (e) {} send(); }); row.appendChild(b); });
@@ -5210,9 +5958,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             } catch (e) {}
           }
           // Answer feedback (👍/👎 without emoji per the icon convention) — one tap sends an anonymous
-          // allow-listed analytics event (maik_feedback_up/down); a "No" also files a gap signal so the
-          // owner sees which questions MaiK answers poorly. No PHI, no answer text leaves the device.
-          function _answerFeedback(host) {
+          // allow-listed analytics event (maik_feedback_up/down) and files it in the admin console's
+          // "MaiK feedback" pane (owner, 2026-09-04: the old up/down counter had nowhere to review WHY
+          // an answer failed). A "No" also files the local gap signal (unchanged) and asks the doctor
+          // why, so the owner can actually read it. No PHI, no answer text leaves the device — only the
+          // question the doctor typed and whatever they choose to type in the reason box.
+          // Records the rating immediately (so the admin aggregate reflects every tap, not just the
+          // ones a doctor stays to explain) and resolves the new entry's id, so a reason typed a
+          // moment later can amend THIS SAME row instead of creating a second one.
+          function _postFeedback(kind, meta) {
+            try {
+              return fetch("/api/maik-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+                body: JSON.stringify({ helpful: kind, question: question, engine: (meta && meta.engine) || "", pack: (meta && meta.pack) || "" }) })
+                .then(function (r) { return r.json(); }).then(function (j) { return j && j.id; }).catch(function () { return null; });
+            } catch (e) { return Promise.resolve(null); }
+          }
+          function _amendFeedbackReason(id, reason) {
+            if (!id) return;
+            try { fetch("/api/maik-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true, body: JSON.stringify({ id: id, reason: reason }) }).catch(function () {}); } catch (e) {}
+          }
+          function _answerFeedback(host, meta) {
             try {
               if (!host || host.querySelector(".maik-fb")) return;
               var w = document.createElement("div"); w.className = "maik-fb";
@@ -5221,13 +5986,58 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; b.textContent = label; b.setAttribute("aria-label", label + " — was this answer helpful?");
                 b.addEventListener("click", function () {
                   try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
-                  if (kind === "down") { try { if (window.MaiKCopilot && MaiKCopilot.gapLog) MaiKCopilot.gapLog("thumbsdown", question); } catch (e) {} }
-                  q.textContent = "Thanks — noted.";
                   try { if (up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
                   try { if (dn.parentNode) dn.parentNode.removeChild(dn); } catch (e) {}
+                  if (kind === "up") { _postFeedback("up", meta); q.textContent = "Thanks, noted."; return; }
+                  try { if (window.MaiKCopilot && MaiKCopilot.gapLog) MaiKCopilot.gapLog("thumbsdown", question); } catch (e) {}
+                  // The down-vote is recorded NOW (so the admin aggregate matches every "No" tap, not
+                  // only the ones a doctor stays to explain); its id lets a reason typed a moment later
+                  // amend this same row instead of a second, separate entry.
+                  var fbIdP = _postFeedback("down", meta);
+                  // "No": ask why and help us improve, per the owner's request — one tap must not be a
+                  // dead end for a clinician who just found a real problem with the answer.
+                  q.textContent = "Sorry it missed. Please tell us why, so we can improve.";
+                  var ta = document.createElement("textarea"); ta.className = "maik-fb-reason"; ta.rows = 2; ta.maxLength = 500;
+                  ta.placeholder = "What was wrong or missing? (optional — no patient details, please)";
+                  var row = document.createElement("div"); row.className = "maik-fb-reasonrow";
+                  var sendBtn = document.createElement("button"); sendBtn.type = "button"; sendBtn.className = "maik-fb-b"; sendBtn.textContent = "Send";
+                  var skipBtn = document.createElement("button"); skipBtn.type = "button"; skipBtn.className = "maik-fb-b"; skipBtn.textContent = "Skip";
+                  function done(msg) {
+                    q.textContent = msg;
+                    try { if (ta.parentNode) ta.parentNode.removeChild(ta); } catch (e) {}
+                    try { if (row.parentNode) row.parentNode.removeChild(row); } catch (e) {}
+                  }
+                  sendBtn.addEventListener("click", function () {
+                    var reason = ta.value.trim();
+                    if (reason) { fbIdP.then(function (id) { _amendFeedbackReason(id, reason); }); }
+                    done(reason ? "Thanks for telling us. This helps." : "Thanks, noted.");
+                  });
+                  skipBtn.addEventListener("click", function () { done("Thanks, noted."); });
+                  row.appendChild(sendBtn); row.appendChild(skipBtn);
+                  w.appendChild(ta); w.appendChild(row);
+                  try { ta.focus(); } catch (e) {}
                 });
                 return b;
               }
+              // Assistant table stakes (owner battery, 2026-09-04): copy the answer, regenerate it, or
+              // edit the question and resend. Quiet text actions on the same row as the rating.
+              function act(label, fn) { var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b maik-act"; b.textContent = label; b.addEventListener("click", fn); return b; }
+              var acts = document.createElement("span"); acts.className = "maik-acts";
+              acts.appendChild(act("Copy", function () {
+                var txt = "";
+                try { var cl = host.cloneNode(true); Array.prototype.forEach.call(cl.querySelectorAll(".maik-fb,.maik-followups,.maik-tools,.maik-refine,.maik-chip,.maik-src,.maik-attr,.maik-edu,.maik-know,.maik-perf,.maik-webbusy"), function (x) { x.remove(); }); txt = cl.innerText.trim(); } catch (e) { try { txt = host.innerText; } catch (e2) {} }
+                var okMsg = function () { try { toast("Copied"); } catch (e) {} };
+                try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(okMsg, okMsg); else okMsg(); } catch (e) { okMsg(); }
+              }));
+              acts.appendChild(act("Regenerate", function () {
+                // Drop the cached render for this question, ask for sampling jitter, and resend.
+                try { delete _maikCache[maikNorm(question) + (maikActiveCase() ? "|case" : "")]; } catch (e) {}
+                _maikRegen = true;
+                try { qEl.value = question; } catch (e) {}
+                send();
+              }));
+              acts.appendChild(act("Edit", function () { try { qEl.value = question; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
+              w.appendChild(acts);
               var up = mk("Yes", "up"), dn = mk("No", "down");
               w.appendChild(up); w.appendChild(dn); host.appendChild(w);
             } catch (e) {}
@@ -5235,14 +6045,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
             var _tier = maikLazyOn() ? 1 : undefined;   // lazy: first call fetches ONLY the bottom line
+            var _regen = _maikRegen; _maikRegen = false;
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
-              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier }, onDelta)
-              : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier });
+              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier, regen: _regen }, onDelta)
+              : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen });
             return call.then(function (r) {
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
               try { _brainAugment(_h, pkg); } catch (e) {}
-              try { _answerFeedback(_h); } catch (e) {}
+              try { _answerFeedback(_h, { engine: (r && r.engine) || "cloud", pack: (r && r.model) || "" }); } catch (e) {}
               try {
                 if (maikPerfOn()) {
                   var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
@@ -5361,7 +6172,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             return _gemini();
           });
         })
-        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now. Clinical reasoning, calculators, and reference tools remain available.</div>'; } })
         .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
     // The two doors, as one card in the thread. Both are data-attribute buttons so they survive a
@@ -5395,6 +6206,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _sentThumb = "";
       try { if (window.__MAIK_IMAGES && window.__MAIK_IMAGES.attached().length) _sentThumb = window.__MAIK_IMAGES.thumb() || ""; } catch (e) {}
       _maikHist.push({ q: q });
+      try { maikDocCue(maikDocClassify(q)); } catch (e) {}   // the doctor acts out the question
       bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
@@ -5424,7 +6236,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
@@ -5727,7 +6539,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           SMD_AI.explainGrounded(_ctx.pkg, { tier: 2, depth: "detailed", priorLead: _ctx.lead }).then(function (r) {
             var _dt = (r && r.text) ? maikStripRefine(String(r.text)).replace(/@@\s*MORE\s*@@/gi, "").trim() : "";
             if (kdet && _dt) { kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_dt) : maikEscH(_dt); }
-            else if (kdet) { kdet.textContent = "Couldn't load the detail — re-ask for the full answer."; }
+            else if (kdet) { kdet.textContent = "Couldn't load the detail. Ask again for the full answer."; }
             if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
             try { delete _maikLazyCtx[_lgid]; } catch (e) {}
             know.remove();
@@ -5747,7 +6559,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         setTimeout(function () {
           try {
             if (window.MEDDB && MEDDB.openComposition && dn) MEDDB.openComposition(dn);
-            else if (window.MEDDRUGS && MEDDRUGS.openList) MEDDRUGS.openList();
             else if (window.MEDDB && MEDDB.openList) MEDDB.openList();
             else if (window.toast) toast("Drug Index loading…");
           } catch (e) {}
@@ -5767,7 +6578,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (rx) { ev.preventDefault(); var rrow = rx.closest("[data-maik-inline]"); if (rrow) maikRefineUnstage(rrow); return; }
       var askAll = ev.target && ev.target.closest ? ev.target.closest("[data-maik-askall]") : null;
       if (askAll) { ev.preventDefault(); maikRefineAsk(askAll.closest(".maik-refine")); return; }
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
+      // [data-maik-tool] MUST be in this selector: the "Open Drug Index" chip carries only that
+      // attribute, so without it the tool branch below was unreachable and the chip did nothing
+      // (found live on the owner's phone, 2026-09-03).
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine]") : null;
       if (!el) return;
       ev.preventDefault();
       // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.
@@ -7056,8 +7870,34 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   // On native app open: if notifications aren't decided yet, offer a one-tap enable popup.
   // Already-granted → silently re-register; denied → respect it (no popup).
+  /* A prompt must never land on the splash, the intro poster or the sign-in gate. Reported from
+   * internal testing with a screenshot of the notification ask AND the OTA update banner stacked on
+   * the pre-login screen, clipping each other. Two conditions, both required: the doctor is SIGNED
+   * IN, and the home screen is what they are actually looking at. refreshFab() already computed the
+   * second half for the Home FAB - the id list is named ONCE here so the two cannot drift.
+   * Exposed as window.SMD_PROMPT_OK so native-ota.js gates its banner on the same rule. */
+  var SMD_GATE_IDS = ["introPoster", "splash", "accountGate", "disclaimerModal", "introOverlay", "smdBootSplash"];
+  function smdGateUp() {
+    return SMD_GATE_IDS.some(function (id) {
+      var el = document.getElementById(id); if (!el) return false;
+      // These gates fade out via opacity/visibility but stay display:flex, so offsetWidth alone
+      // would read them as "up" forever after dismissal.
+      var cs = window.getComputedStyle(el);
+      return cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.01;
+    });
+  }
+  function smdSignedIn() {
+    try { return !!(window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid); } catch (e) { return false; }
+  }
+  function smdPromptOK() { return smdSignedIn() && !smdGateUp(); }
+  try { window.SMD_PROMPT_OK = smdPromptOK; } catch (e) {}
+
   function maybeOfferPushOnOpen() {
-    var P = nativePush(); if (!P || window.__smdPushOffered) return; window.__smdPushOffered = true;
+    var P = nativePush(); if (!P || window.__smdPushOffered) return;
+    // Not yet: still on the splash / intro / sign-in gate, or not signed in. Asking here is exactly
+    // what put this popup on the pre-login screen. The caller retries, so this is a "later", not a no.
+    if (!smdPromptOK()) return;
+    window.__smdPushOffered = true;
     initNativePushListeners();
     P.checkPermissions().then(function (res) {
       var st = res && res.receive;
@@ -7069,21 +7909,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function showPushPopup() {
     if (document.getElementById("smdPushPop")) return;
     var d = document.createElement("div"); d.id = "smdPushPop";
-    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center";
-    d.innerHTML = '<div style="background:var(--panel,#fff);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:18px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 40px rgba(0,0,0,.3)">' +
-      '<div style="font:800 17px var(--sans,system-ui);margin-bottom:6px">🔔 Turn on notifications?</div>' +
-      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates — drug approvals, safety alerts and recalls — plus notices from StewardMD.</div>' +
-      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:transparent;color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
-      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:12px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Turn on</button></div></div>';
+    // Liquid glass, matching the interstitial surfaces: a translucent, blurred card over a dimmed
+    // scrim, with a hairline top highlight. The 🔔 emoji is gone - real Material Symbol, like the
+    // rest of the app. -webkit-backdrop-filter is required for WKWebView.
+    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center";
+    d.innerHTML = '<div style="position:relative;overflow:hidden;background:color-mix(in srgb, var(--panel,#fff) 74%, transparent);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border:1px solid color-mix(in srgb, var(--line,#d7dee3) 70%, transparent);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:22px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -10px 44px rgba(0,0,0,.32)">' +
+      '<span aria-hidden="true" style="position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent)"></span>' +
+      '<div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span class="material-symbols-rounded" aria-hidden="true" style="font-size:22px;color:var(--teal,#0e6e63)">notifications_active</span>' +
+      '<span style="font:800 17px var(--sans,system-ui)">Turn on notifications?</span></div>' +
+      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates - drug approvals, safety alerts and recalls - plus notices from StewardMD.</div>' +
+      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid color-mix(in srgb, var(--line,#d7dee3) 80%, transparent);border-radius:14px;background:color-mix(in srgb, var(--panel,#fff) 45%, transparent);color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
+      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:14px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer;box-shadow:0 4px 14px -4px rgba(14,110,99,.65)">Turn on</button></div></div>';
     document.body.appendChild(d);
     function close() { if (d.parentNode) d.parentNode.removeChild(d); }
     d.querySelector("#smdPushLater").addEventListener("click", close);
     d.addEventListener("click", function (e) { if (e.target === d) close(); });
     d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
   }
-  // Offer the notification popup shortly after the app is up (native only).
+  // Offer the notification popup once the doctor is signed in AND on home (native only).
+  // POLL, don't fire once: sign-in and the splash dismissal both finish asynchronously, so the old
+  // single 1800ms shot landed on whatever happened to be on screen - which is how this ended up over
+  // the pre-login splash. Bounded (~2 min) so it can never spin; if home is never reached, the offer
+  // simply waits for the next launch.
   if (window.SMD_IS_NATIVE) {
-    try { window.addEventListener("load", function () { setTimeout(function () { try { maybeOfferPushOnOpen(); } catch (e) {} }, 1800); }); } catch (e) {}
+    try {
+      window.addEventListener("load", function () {
+        var tries = 0;
+        var iv = setInterval(function () {
+          try { maybeOfferPushOnOpen(); } catch (e) {}
+          if (window.__smdPushOffered || ++tries > 80) { try { clearInterval(iv); } catch (e2) {} }
+        }, 1500);
+      });
+    } catch (e) {}
   }
   function injectNotifCSS() {
     if (document.getElementById("ntf-css")) return;

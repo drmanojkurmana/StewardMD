@@ -41,6 +41,38 @@ Turning these on does not enable a feature; it breaks one.
 
 Both open **per device** today via the sidebar Experimental access code, so testers already reach them. Flipping the default makes them live for every user of the build.
 
+## WardSynQ — three flags, all OFF, added 2026-09-05
+
+Registry: `wardsynq-flags.js` (repo root), read as query param → localStorage → default. Not in the
+2026-08-26 generated count above, which predates them.
+
+| Flag | State | What turning it on does |
+|---|---|---|
+| `smd_wardsynq` | OFF | The WardSynQ surfaces. Nothing in WardSynQ is clinically approved. |
+| `smd_wardsynq_shadow` | OFF | Observation only. A GHIS bundle already ingested by the legacy path is additionally mapped through the WardSynQ adapter and the result COUNTED AND DISCARDED — no store, no event bus, no chart, no safety state. Not loading the file removes the change entirely. |
+| `smd_wardsynq_cutover` | OFF | **The one to be careful with.** Routes the live mobile path onto the adapter. Do not enable on a real clinical device: no clinical content in WardSynQ is approved, and the adapter has never seen a real GHIS bundle in anger. |
+
+**Added 2026-09-06, the Clinical Record Service.** Not in the registry above; three separate switches,
+each OFF/absent by default:
+
+| Switch | Where | What it does |
+|---|---|---|
+| `WARDSYNQ_RECORD=1` | Pages env var (server) | Serves `/api/wardsynq/*`. Unset, every route is 404. The schema must be applied first (see [[Infra]]). |
+| `?record=<tenantId>` (`&patient=<id>` on the bedside page) | `wardsynq.html`, `opd.html` | The surface charts into the hospital's shared record instead of this browser's memory. Without it the pages behave exactly as before, demo cohort and all. |
+| `?wardsynq_record=<tenantId>` / `localStorage smd_wardsynq_record_tenant` | StewardMD Mobile (`wardsynq-record-boot.js`) | The phone opens the same record and exposes it as `window.SMD_WARDSYNQ_RECORD`. Nothing in the shipped app reads it yet. `?wardsynq_record=off` forgets it. |
+| `settings.wardsynq.migrations.vitals` = `off` / `shadow` / `authoritative` | `connect_tenant` row, per hospital | The nurse-vitals dual-write (`functions/_wardsynq/migrate-vitals.js`). Default `off`. Needs `WARDSYNQ_RECORD=1` AND `q_orgs.connectTenantId` on the OPD org besides. `shadow` cannot fail a save; `authoritative` can. |
+
+On the NATIVE app there is no address bar, so the query param is unreachable — set the flag with
+`SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the WebView console, then reload. A
+reinstall clears `localStorage`, so a flag does NOT survive one.
+
+**Two things are deliberately NOT behind a flag**, and the reasoning is the same in both cases —
+gating them off produces a worse failure than leaving them present:
+- `wardsynq-alert-ui.js`, the forced acknowledgement screen. Inert until a `wardsynq-alert` push
+  arrives. Gated off, an escalation would reach a handset with no way to answer it.
+- `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
+  a patient record" surface rather than a plausible-looking drug round.
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>
@@ -104,6 +136,12 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_fundx_sensors` | OFF | **INCOMPLETE.** IMU sensor fusion. |
 | `smd_fundx_spatial_ar` | OFF | **INCOMPLETE.** True 3D AR corridor, iOS + ARKit only. |
 | `smd_fundx_telemetry` | OFF | **PRIVACY DEFAULT.** Acquisition telemetry. No PHI, but off unless wanted. |
+
+### Government Health Schemes  <sub>0 ON · 1 OFF</sub>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_govt_schemes` | OFF | **OWNER DECISION.** Government Health Schemes module master flag. DEFAULT OFF on purpose: scheme rates/codes are unverified government reference data until an admin review pass exists (vault/decisions 2026-09-02). Turn on per device with `?gs=1`. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 
@@ -215,6 +253,7 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 | Flag | Def | Why |
 |---|---|---|
 | `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
+| `VERIFY_NAME_ONLY_MATCH` | **OFF** | Auto-verify a certificate whose registration NUMBER could not be read but whose NAME could, when the register returns exactly ONE agreeing row (council-narrowed). A loosening of the rule, so the owner turns it on; `_verify_match.js` `uniqueNameMatch`, added 2026-09-02. Everything else in that change (core-first queries, D1 on empty, initials, 0.5 confidence floor) is unconditional. |
 | `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
 | `UNVERIFIED_PURGE_ON` | **ON** | **DESTRUCTIVE, ARMED 2026-08-27 (owner).** The 7-day unverified-account sweep acts. Set `0` for report-only. Warning emails send either way. |
 | `UNVERIFIED_PURGE_HARD_DELETE` | **ON** | **IRREVERSIBLE, ARMED 2026-08-27 (owner).** Deletes the Firebase user, after `purgeUserData()` removes their cases, verification record, budget cache and Firestore profile/directory entry. Set `0` to *disable* the account instead (reversible). |

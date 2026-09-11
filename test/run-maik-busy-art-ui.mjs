@@ -32,6 +32,9 @@ try {
   await call("Page.navigate", { url: BASE });
   for (let i = 0; i < 75; i++) { await sleep(400); if (await ev(`return !!window.SMD_askMaik`) === true) break; }
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); document.body.classList.add("dark"); return 1;`);
+  // This suite pins the LEGACY resident; the Live Doctor path has its own suite
+  // (run-maik-live-doc-ui.mjs). Flag off BEFORE the sheet mounts.
+  await ev(`localStorage.setItem("smd_maik_live_doc","0"); return 1;`);
   await ev(`SMD_askMaik(""); return 1;`); await sleep(1400);
 
   // ── the resident: there from the moment MaiK opens, before anything is asked ──

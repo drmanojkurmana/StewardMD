@@ -2,11 +2,26 @@
  * Resolution per flag: ?query param -> localStorage -> default. Mirrors thorex-flags.js. */
 (function () {
   "use strict";
-  // type: bool. def: default when unset. query: ?alias (or null). All default OFF.
+  /* type: bool. def: default when unset. query: ?alias (or null).
+   * CLINICAL SIGN-OFF: the DKA and paediatric workflows were held behind a "needs R1 review"
+   * gate. That review was completed by the owner, a physician, on 2026-08-29, against the
+   * clinical acceptance suite in test/insulin-scenarios.test.mjs (hypoglycaemia handling,
+   * DKA/HHS routing and the potassium gate, paediatric DKA rate and cerebral-oedema warning,
+   * weight-based caps). The gate is DISCHARGED, not skipped - all three flags ship ON
+   * deliberately. The in-app safeguards are unchanged and remain in force: every DKA and
+   * paediatric result still carries its "trained clinicians only" banner, its
+   * institutional-protocol acknowledgement, and the critical-warning acknowledgement. */
   var DEFS = {
-    smd_insulin:      { type: "bool", def: true,  query: "insulin",     desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
-    smd_insulin_dka:  { type: "bool", def: true, query: "insulin_dka", desc: "Clinician DKA insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_dka=0." },
-    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_peds=0." }
+    smd_insulin:      { type: "bool", def: true, query: "insulin",      desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
+    smd_insulin_dka:  { type: "bool", def: true, query: "insulin_dka",  desc: "Clinician DKA insulin workflow. DEFAULT ON. Clinical review signed off by the owner (physician) 2026-08-29. Still gated in-app by the trained-clinician acknowledgement. Hide with ?insulin_dka=0." },
+    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. DEFAULT ON. Clinical review signed off by the owner (physician) 2026-08-29. Still gated in-app by the trained-clinician acknowledgement. Hide with ?insulin_peds=0." },
+    /* Ask MaiK had NO kill switch: askAvailable() only checked that window.INSULIN_ASK existed, so
+     * the one part of this module that sends a clinician's free text to an LLM could not be turned
+     * off without shipping a new build. Every other risk-bearing workflow here is flag-gated; this
+     * makes the LLM path match. DEFAULT ON (it is live and the owner enabled it); off with
+     * ?insulin_ask=0 or localStorage smd_insulin_ask=0, which reverts to the manual form - safe,
+     * because MaiK only ever FILLS that form and never answers the dose. */
+    smd_insulin_ask:  { type: "bool", def: true, query: "insulin_ask",  desc: "Ask MaiK (LLM fills the insulin form; it never answers the dose). DEFAULT ON. Turn off with ?insulin_ask=0 to fall back to the manual form." }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }
   function search() { try { return (location && location.search) || ""; } catch (e) { return ""; } }

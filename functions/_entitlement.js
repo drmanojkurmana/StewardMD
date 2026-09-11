@@ -11,6 +11,7 @@
 import { mergeUserClaims, getUserClaims } from "./_fbadmin.js";
 import { verifyFirebaseToken } from "./_fbauth.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
+import { ownerEmails } from "./_adminauth.js";
 
 const PROMO_UNTIL_DEFAULT = Date.parse("2026-09-15T23:59:59+05:30");   // 15 Sep 2026, 23:59 IST
 
@@ -63,16 +64,35 @@ export function verifiedProDays(env) {
  *                              while pending, so the owner's review latency is never a user-facing
  *                              outage for an intern or student who did everything right.
  * Reads CLAIMS ONLY - no KV or Firestore lookup - because this runs on every gated request. */
+/* A platform owner (functions/_adminauth.js OWNER_EMAILS) holds Pro as a team entitlement. The
+ * email is read from the SIGNED token, so a client cannot claim it. Deliberately NOT the same as
+ * `verified`: verification also unlocks the prescription pad, which stamps a real registration
+ * number, and an owner who is not a registered doctor must still not have that. So an owner is
+ * `allowed` (Pro) but only `verified` if they actually verified.
+ *
+ * Reported 2026-09-02: the owner's own account showed the Pro badge (a `pro` claim) while the
+ * Subscription row said "needs a verified registration" - accessState() had no notion of an owner,
+ * so /billing/status answered `unverified` and the paywall bounced to the verify explainer. */
+export function isOwnerClaims(env, claims) {
+  const e = claims && typeof claims.email === "string" ? claims.email.trim().toLowerCase() : "";
+  return !!e && ownerEmails(env).indexOf(e) > -1;
+}
+
 export function accessState(env, claims, now) {
   now = now || Date.now();
   const prov = claims && claims.provUntil ? +claims.provUntil : 0;
+  const owner = isOwnerClaims(env, claims);
   if (claims && claims.verified === true) {
     const at = claims.verifiedAt ? +claims.verifiedAt : 0;
     // No verifiedAt = verified before this feature existed. entitlementFor() backfills it rather
     // than reading 0 here, so a doctor already verified never blinks out of Pro on deploy day.
     const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
-    return { allowed: true, verified: true, pending: false, verifiedAt: at || null,
-             freeProEndsAt: endsAt || null, freeProActive: !!(endsAt && now < endsAt) };
+    return { allowed: true, verified: true, pending: false, verifiedAt: at || null, owner,
+             freeProEndsAt: endsAt || null, freeProActive: owner || !!(endsAt && now < endsAt) };
+  }
+  if (owner) {
+    return { allowed: true, verified: false, pending: !!(prov && now < prov), provUntil: prov || null, owner: true,
+             freeProEndsAt: null, freeProActive: true };
   }
   if (prov && now < prov) {
     return { allowed: true, verified: false, pending: true, provUntil: prov,
@@ -113,6 +133,7 @@ export function entitlementState(env, claims, now) {
     // is sent to the certificate upload, not to a payment sheet that cannot help them.
     if (!a.allowed) return { ...base, pro: false, source: "none", until: null, reason: "unverified" };
     if (paid) return { ...base, pro: true, source: (claims.source || "subscription"), until: (claims.proExp || null) };
+    if (a.owner) return { ...base, pro: true, source: "owner", until: null, owner: true };
     if (a.freeProActive) {
       return { ...base, pro: true, until: a.freeProEndsAt,
                source: a.pending ? "pending-review" : "verified-free-week", trial: true,

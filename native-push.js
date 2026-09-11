@@ -20,13 +20,54 @@
   var C = window.Capacitor;
   var native = !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web")));
 
-  // Route a notification's url. A background lab-watch alert deep-links to /?ghisPatient=<id>;
+  // Route a notification's url. A background lab-watch alert deep-links to /?ghisRef=<ref>;
   // when Ward Sync is loaded, open that patient in-place (no reload). Otherwise navigate — the
   // ghis-ward deep-link handler opens it on load (covers cold-start taps).
+  // `ref` is opaque (see functions/api/watch/[[path]].js), never the real patientId, so it must be
+  // resolved through SMD_WATCH.resolveRef() (the doctor's own authenticated session) first.
+  /* ── WardSynQ escalation receipts (HAZ-DET-01) ─────────────────────────────
+   * The one thing a push gateway cannot tell you is whether the handset got it. This posts that
+   * fact back from the handset itself, which is what lets a WardSynQ notice move to DELIVERED
+   * honestly instead of on the strength of APNs returning 200.
+   *
+   * Three receipts, three different facts, never collapsed:
+   *   delivered     the alert arrived on this device
+   *   viewed        the clinician opened it. NOT an answer.
+   *   acknowledged  the clinician took it. This is the only one that closes the loop, and the
+   *                 server stamps it with the verified uid so a device cannot answer for somebody.
+   *
+   * Best-effort and silent on failure by design: a receipt that does not post leaves the alert
+   * OUTSTANDING and the escalation timer running, which is the safe direction to fail in. */
+  function wardsynqReceipt(kind, data, extra) {
+    try {
+      if (!data || !data.noticeId) return Promise.resolve(false);
+      return idToken().then(function (jwt) {
+        var headers = { "Content-Type": "application/json" };
+        if (jwt) headers["Authorization"] = "Bearer " + jwt;
+        return fetch(api("/api/push/wardsynq-receipt"), {
+          method: "POST", headers: headers,
+          body: JSON.stringify({
+            noticeId: data.noticeId, kind: kind,
+            patientId: data.patientId || null, alertId: data.alertId || null,
+            device: (window.SMD_DEVICE_ID || platform() || "device"),
+            action: (extra && extra.action) || null
+          })
+        });
+      }).then(function () { return true; }).catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
+  }
+  // Exposed so the alert UI can report the two states only a human can produce.
+  window.SMD_wardsynqViewed = function (data) { return wardsynqReceipt("viewed", data); };
+  window.SMD_wardsynqAcknowledge = function (data, action) { return wardsynqReceipt("acknowledged", data, { action: action }); };
+
   function routeUrl(url) {
     try {
-      var m = url && String(url).match(/[?&]ghisPatient=([^&]+)/);
-      if (m && m[1] && window.GHIS && window.GHIS.openPatientById) { window.GHIS.openPatientById(decodeURIComponent(m[1])); return; }
+      var m = url && String(url).match(/[?&]ghisRef=([^&]+)/);
+      if (m && m[1] && window.GHIS && window.GHIS.openPatientById && window.SMD_WATCH && window.SMD_WATCH.resolveRef) {
+        var ref = decodeURIComponent(m[1]);
+        window.SMD_WATCH.resolveRef(ref).then(function (pid) { if (pid) window.GHIS.openPatientById(pid); });
+        return;
+      }
     } catch (e) {}
     // Medical Update deep link (/?u=<id>): open that guideline's card IN-APP (warm tap);
     // if the app isn't ready yet, fall through to navigate — the on-load handler opens it.
@@ -89,6 +130,52 @@
   // forced ON for JR/interns when saved. Missing = default all-on.
   function categories() { try { var a = JSON.parse(localStorage.getItem("smd_notif_prefs") || "null"); if (a && a.categories && typeof a.categories === "object") return a.categories; } catch (e) {} return { tasks: true, critical: true, labs: true, guidelines: true, general: true }; }
 
+  /* Device identity, sent at registration for IDENTIFICATION ONLY.
+   *
+   * It changes nothing about who receives a push: an account-scoped alert still goes to every
+   * active token. It exists because the token store had no way to tell one handset from another -
+   * six iOS registrations on one account looked identical to six different iPhones, so none could
+   * be safely pruned and none could be named in a UI.
+   *
+   * installId is generated once and kept in localStorage, so it survives app updates and does NOT
+   * survive a reinstall. That is the correct granularity: a reinstall mints a new APNs token, so a
+   * new identity for it is honest rather than lossy.
+   *
+   * No plugin is added for this. iOS does not expose the device name or the real model to a
+   * WebView, so `model` is a best-effort read of the user agent and is labelled as such rather than
+   * being presented as authoritative. */
+  function installId() {
+    try {
+      var v = localStorage.getItem("smd_install_id");
+      if (!v) {
+        v = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+          : String(Date.now()) + "-" + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem("smd_install_id", v);
+      }
+      return v;
+    } catch (e) { return null; }
+  }
+  function deviceIdentity() {
+    var ua = "";
+    try { ua = navigator.userAgent || ""; } catch (e) {}
+    var os = null;
+    try {
+      var m = ua.match(/OS (\d+[_.]\d+(?:[_.]\d+)?) like Mac OS X/) || ua.match(/Android (\d+(?:\.\d+)*)/);
+      if (m) os = m[1].replace(/_/g, ".");
+    } catch (e) {}
+    var model = /iPad/.test(ua) ? "iPad" : /iPhone/.test(ua) ? "iPhone" : /Android/.test(ua) ? "Android" : null;
+    var app = null;
+    try { app = (window.SMD_BUILD || (document.querySelector('script[src*="app.js"]') || {}).getAttribute
+      && (document.querySelector('script[src*="app.js"]').getAttribute("src") || "").split("?v=")[1]) || null; } catch (e) {}
+    var label = null;
+    try { label = localStorage.getItem("smd_device_label") || null; } catch (e) {}
+    return { installId: installId(), label: label, model: model, osVersion: os, appVersion: app };
+  }
+  // So the owner can name a handset ("ward round phone") and have it show in the device list.
+  window.SMD_setDeviceLabel = function (name) {
+    try { localStorage.setItem("smd_device_label", String(name || "").slice(0, 80)); return true; } catch (e) { return false; }
+  };
+
   var _token = null, _wired = false;
 
   function wireListeners() {
@@ -103,7 +190,7 @@
         if (jwt) headers["Authorization"] = "Bearer " + jwt;   // server derives the owning account from this
         return fetch(api("/api/push/register-native"), {
           method: "POST", headers: headers,
-          body: JSON.stringify({ token: _token, platform: platform(), workspaces: workspaces(), categories: categories() })
+          body: JSON.stringify({ token: _token, platform: platform(), workspaces: workspaces(), categories: categories(), device: deviceIdentity() })
         });
       }).then(function () { flag("1"); }).catch(function () {});
     });
@@ -118,9 +205,18 @@
         // this handler ONLY fires in the foreground. So re-raise it as a LOCAL notification, which
         // manages its own channel — the doctor gets a real banner on Android even with the app open.
         var d = (n && n.data) || {};
+        // The handset has it. Receipt it BEFORE anything that could throw (rendering, routing),
+        // because the delivery fact is what an escalation timer depends on.
+        if (d.type === "wardsynq-alert") wardsynqReceipt("delivered", d);
         var title = (n && n.title) || d.title || "StewardMD";
         var body = (n && n.body) || d.body || "New update";
         var url = d.url || d.URL || "/";
+        // A deterioration escalation arriving while the app is OPEN goes straight to the
+        // acknowledgement screen rather than becoming a banner behind whatever is on screen. An
+        // escalation that waits politely for a tap is an escalation nobody has answered.
+        if (d.type === "wardsynq-alert" && window.SMD_showWardSynQAlert) {
+          if (window.SMD_showWardSynQAlert(d, title, body)) return;
+        }
         if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
         else if (window.SMD_toast) window.SMD_toast(title + " — " + body);
         if (window.SMD_refreshNotifBadge) window.SMD_refreshNotifBadge();
@@ -131,6 +227,17 @@
       try {
         var data = a && a.notification && a.notification.data;
         var url = (data && (data.url || data.URL)) || "/";
+        // A tap is evidence the alert reached this handset AND that a person opened it. Both are
+        // recorded; neither is an acknowledgement, which stays an explicit act in the alert UI.
+        if (data && data.type === "wardsynq-alert") {
+          wardsynqReceipt("delivered", data);
+          // The acknowledgement screen posts `viewed` itself when it opens, so this path does not
+          // duplicate it. Opening the screen is the whole purpose of the tap: routing to "/" left a
+          // clinician with a banner and nowhere to answer it.
+          var n = (a && a.notification) || {};
+          if (window.SMD_showWardSynQAlert && window.SMD_showWardSynQAlert(data, n.title, n.body)) return;
+          wardsynqReceipt("viewed", data);   // the screen is unavailable; the view still happened
+        }
         // FollowCare push → deep-link straight to that patient's recovery detail in-app (covers cold-launch).
         if (data && data.type === "followcare" && data.episodeId && window.FollowCare && window.FollowCare.openDetail) {
           try { window.FollowCare.openDetail(data.episodeId); return; } catch (e) {}

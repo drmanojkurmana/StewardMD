@@ -65,7 +65,7 @@ try {
   const cardHasIcon = await ev(`return !!document.querySelector(".oh-card .oh-card-ic .material-symbols-rounded");`);
   ok(cardHasIcon === true, "tool cards use the icon+body structure (oh-card-ic + Material Symbol)");
   const heroPresent = await ev(`return !!document.querySelector(".oh-hero .oh-hero-title");`);
-  ok(heroPresent === true, "the ONCqis landing hero renders (module identity)");
+  ok(heroPresent === true, "the ONCQIS landing hero renders (module identity)");
 
   // ---- typing a query shows categorized results ----
   await ev(`var i=document.getElementById("ohSearch"); i.value="khorana"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);

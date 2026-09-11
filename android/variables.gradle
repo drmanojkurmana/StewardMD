@@ -1,5 +1,11 @@
 ext {
-    minSdkVersion = 24
+    // Android 8.0. Raised from 24 (the Capacitor scaffold default, never a deliberate choice) for
+    // @capacitor/barcode-scanner, whose Android library (ionbarcode-android) requires 26 — the
+    // native scanner behind the prescription QR check. The alternative,
+    // @capacitor-mlkit/barcode-scanning, builds at 24 but ships a podspec only and so cannot be
+    // added to this SPM iOS project at all.
+    // Cost, accepted by the owner: Android 7.0/7.1 (API 24-25) can no longer install or update.
+    minSdkVersion = 26
     compileSdkVersion = 36
     targetSdkVersion = 36
     androidxActivityVersion = '1.11.0'

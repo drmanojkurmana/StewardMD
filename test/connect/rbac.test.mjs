@@ -85,7 +85,12 @@ test("the four existing tenant roles' matrices are unchanged", () => {
   assert.equal(can("auditor", "tenant:write"), false);
   assert.deepEqual(ROLE_MATRIX.owner, ["tenant:read", "tenant:write", "member:read", "member:invite", "member:role", "member:remove", "connector:read", "connector:write", "connector:validate", "ratelimit:write", "audit:read", "observability:read", "egress:baa"]);
   assert.deepEqual(ROLE_MATRIX.admin, ["tenant:read", "tenant:write", "member:read", "member:invite", "member:role", "member:remove", "connector:read", "connector:write", "connector:validate", "ratelimit:write", "audit:read", "observability:read"]);
-  assert.deepEqual(ROLE_MATRIX.clinician, ["tenant:read", "connector:read", "context:load", "maik:attach"]);
+  // 2026-09-06: clinician gained record:read / record:write for the WardSynQ Clinical Record Service
+  // (functions/api/wardsynq). Same PHI posture as context:load: clinician-only, never owner/admin/auditor.
+  assert.deepEqual(ROLE_MATRIX.clinician, ["tenant:read", "connector:read", "context:load", "maik:attach", "record:read", "record:write"]);
+  assert.equal(can("admin", "record:read"), false);
+  assert.equal(can("auditor", "record:read"), false);
+  assert.equal(can("owner", "record:write"), false);
   assert.deepEqual(ROLE_MATRIX.auditor, ["tenant:read", "member:read", "connector:read", "audit:read", "observability:read"]);
 });
 

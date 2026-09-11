@@ -91,18 +91,46 @@
         p.addListener("download", function (ev) { try { onProgress(Math.round((ev && ev.percent) || 0)); } catch (e) {} }).then(function (h) { offDl = h; });
       }
     } catch (e) {}
-    return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
+    // One automatic retry on a transport-class download failure. The plugin verifies the
+    // sha256 NATIVELY after fetching, so a connection that drops mid-file surfaces as
+    // "Checksum failed", not as a network error — retrying network-only would miss the most
+    // common ward-connection failure. The GET is idempotent with the checksum verified on
+    // every attempt, so one retry is safe; storage and auth failures still fail fast.
+    function tryDownload(retriesLeft) {
+      return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
+        .then(null, function (e) {
+          var code = otaCode(e, "download-failed");
+          if (retriesLeft > 0 && (code === "network" || code === "checksum")) return tryDownload(retriesLeft - 1);
+          throw e;
+        });
+    }
+    return tryDownload(1)
       .then(function (bundle) {
         cleanup();
         var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
         return applied.then(function () {
           setMyVersion(pending.version);
           return { ok: true, immediate: immediate !== false };
-        }, function (e) { return { ok: false, error: (e && e.message) || "apply-failed" }; });
+        }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
       }, function (e) {
         cleanup();
-        return { ok: false, error: (e && e.message) || "download-failed" };
+        return { ok: false, error: otaCode(e, "download-failed") };
       });
+  }
+
+  /* NEVER hand a native error message to the UI. @capgo/capacitor-updater is given the bundle's
+   * zipUrl, and its failures routinely quote that URL back - so "Install failed - <message>" printed
+   * our OTA endpoint on a screen any user, or anyone over their shoulder, can read. Map to a short
+   * stable CODE the UI phrases itself, and keep the detail in the console for debugging. */
+  function otaCode(e, fallback) {
+    var raw = String((e && (e.message || e.code)) || "");
+    try { if (raw) console.warn("[ota] " + fallback + ":", raw); } catch (x) {}
+    if (/checksum|hash|integrity/i.test(raw)) return "checksum";
+    if (/network|timeout|offline|connection|unreachable|dns/i.test(raw)) return "network";
+    if (/space|storage|disk|quota/i.test(raw)) return "storage";
+    if (/403|401|unauthor|forbidden/i.test(raw)) return "unauthorized";
+    if (/404|not ?found/i.test(raw)) return "missing";
+    return fallback;
   }
 
   window.SMD_OTA = {
@@ -115,7 +143,7 @@
   // ---- The banner (the part home.js's dormant Settings row never had) -----------------------
   // A single persistent, dismissible bar — not a toast (which auto-hides). Shown only when an
   // update is genuinely ready to apply; never for "checking" or "up to date" states.
-  var _bannerPending = null, _bannerEl = null;
+  var _bannerPending = null, _bannerEl = null, _bannerWait = null;   // _bannerWait: retry timer while home is not up yet
   function injectCSS() {
     if (document.getElementById("smdOtaCss")) return;
     var s = document.createElement("style"); s.id = "smdOtaCss";
@@ -137,6 +165,24 @@
   }
   function showBanner(pending) {
     _bannerPending = pending;
+    /* Not over the splash, the intro or the sign-in gate. Reported from internal testing with this
+     * banner and the notification ask stacked on the PRE-LOGIN screen, clipping each other's text.
+     * window.SMD_PROMPT_OK (home.js) is the single definition of "signed in and actually on home".
+     * If it is not available, fall through and behave exactly as before rather than suppressing an
+     * update notice forever. Re-checked on a timer, so the banner appears as soon as home is up. */
+    try {
+      if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) {
+        if (!_bannerWait) {
+          _bannerWait = setInterval(function () {
+            if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) return;
+            try { clearInterval(_bannerWait); } catch (e2) {}
+            _bannerWait = null;
+            showBanner(_bannerPending);
+          }, 1500);
+        }
+        return;
+      }
+    } catch (e) {}
     injectCSS();
     if (!_bannerEl) {
       _bannerEl = document.createElement("div"); _bannerEl.id = "smdOtaBanner";
@@ -147,8 +193,18 @@
       _bannerEl.querySelector(".go").addEventListener("click", function () {
         var btn = _bannerEl.querySelector(".go"); btn.textContent = "Updating…"; btn.disabled = true;
         // set() itself reloads the WebView on success — nothing left to do here but handle failure.
+        // Phrase it from the failure CODE (same vocabulary as the Settings screen): a connection
+        // drop and a full disk need different actions, and a bare "try again" never says which.
         install(_bannerPending, null, true).then(function (res) {
-          if (!res.ok) { btn.textContent = "Update now"; btn.disabled = false; toast("Couldn't apply the update — try again later"); }
+          if (!res.ok) {
+            btn.textContent = "Update now"; btn.disabled = false;
+            var code = res && res.error;
+            toast(code === "network" ? "Download failed — check connection and try again" :
+              code === "storage" ? "Not enough space to download the update" :
+              code === "checksum" ? "Update didn't verify — try again later" :
+              code === "missing" ? "That update is no longer available" :
+              "Couldn't apply the update — try again later");
+          }
         });
       });
     }

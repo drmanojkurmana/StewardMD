@@ -1,5 +1,5 @@
 /* ============================================================================
-   StewardMD — Non-antibiotic Drug Doses (ward formulary)
+   StewardMD — Shared ward formulary and Drug Interactions
    A standalone, searchable reference of commonly used non-antimicrobial drugs
    (PPIs, analgesics, anticoagulants, cardiac, respiratory, endocrine, sedation,
    electrolytes). Integrates with the global search (brand & class aware) and
@@ -173,72 +173,17 @@
       '<div style="font:500 11px var(--sans);color:var(--slate-soft);margin-top:12px;line-height:1.5">Adult dosing only — verify against the individual patient, renal/hepatic function and local protocol.</div>';
   }
 
-  /* ---- browse overlay (reuses .mc-* styles injected by calculators.js) ---- */
-  var CATS=["Gastrointestinal","Analgesia","Anticoagulation","Cardiac","Respiratory","Endocrine","Neuro/Sedation","Electrolytes","Other"];
-  var CAT_ICON={"Gastrointestinal":"stomach","Analgesia":"syringe","Anticoagulation":"droplet","Cardiac":"heart","Respiratory":"lungs","Endocrine":"endocrine","Neuro/Sedation":"brain","Electrolytes":"flask","Other":"pills"};
+  /* The Drugs Database is the single browse/dosing surface. Keep the old API
+     as a redirect for callers such as Oncology; shared formulary data stays local. */
   function dIco(n,c){ return (window.ICONS&&ICONS.get)?ICONS.get(n,c||"mc-ico"):""; }
-  function dCatIco(cat,c){ return dIco(CAT_ICON[cat]||"pills",c); }
-  var root=null, q="", activeCat="", openName=null;
-
-  function ensureRoot(){
-    if(root) return root;
-    if(!document.getElementById("mc-styles") && window.MEDCALC){ try{ window.MEDCALC.openList(); window.MEDCALC.close(); }catch(e){} }
-    injectFallbackCSS();
-    root=document.createElement("div");
-    root.id="mdOverlay"; root.className="mc-overlay";
-    root.innerHTML=
-      '<div class="mc-top"><button class="mc-back" id="mdClose">‹ Close</button><div class="mc-title">Drug Doses <span class="mc-count">'+DRUGS.length+'</span></div><span style="width:64px"></span></div>'+
-      '<div class="mc-body">'+
-        '<input id="mdSearch" class="mc-search" type="text" placeholder="Search drug or brand (e.g. pantop, lasix, statin, ppi)…" autocomplete="off">'+
-        '<div id="mdCats" class="mc-cats"></div>'+
-        '<div id="mdList" class="mc-list"></div>'+
-        '<button id="mdInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+dIco("interact")+' Check Drug Interactions</button>'+
-        '<div class="mc-disc">'+dIco("warn")+' Adult dosing only — verify against the patient, renal/hepatic function and local protocol. Antibiotics are in the syndrome pages / global search.</div>'+
-      '</div>';
-    document.body.appendChild(root);
-    root.querySelector("#mdClose").addEventListener("click", close);
-    root.querySelector("#mdInteractionsBtn").addEventListener("click", openInteractions);
-    var si=root.querySelector("#mdSearch");
-    si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); render(); });
-    si.addEventListener("keydown", function(e){ e.stopPropagation(); });
-    return root;
+  function openList(){
+    if(window.MEDDB && window.MEDDB.openList) return window.MEDDB.openList();
+    if(window.toast) window.toast("Drugs Database loading…");
   }
-  function renderCats(){
-    var el=root.querySelector("#mdCats");
-    var chips=['<button class="mc-cat'+(activeCat===""?" on":"")+'" data-c="">All</button>'];
-    CATS.forEach(function(c){ var n=DRUGS.filter(function(d){return d.cat===c;}).length; chips.push('<button class="mc-cat'+(activeCat===c?" on":"")+'" data-c="'+esc(c)+'">'+dCatIco(c)+" "+esc(c)+' <span>'+n+'</span></button>'); });
-    el.innerHTML=chips.join("");
-    el.querySelectorAll(".mc-cat").forEach(function(b){ b.addEventListener("click", function(){ activeCat=b.getAttribute("data-c"); openName=null; renderCats(); render(); }); });
-  }
-  function visible(d){ if(activeCat&&d.cat!==activeCat) return false; if(!q) return true; return (d.generic+" "+d.cls+" "+d.brands.join(" ")).toLowerCase().indexOf(q)>=0 || match(q).some(function(m){return m.drug===d.generic;}); }
-  function render(){
-    var el=root.querySelector("#mdList"); var list=DRUGS.filter(visible);
-    if(!list.length){ el.innerHTML='<div class="mc-empty">No drugs match “'+esc(q)+'”.</div>'; return; }
-    var html="";
-    CATS.forEach(function(cat){
-      var inc=list.filter(function(d){return d.cat===cat;}); if(!inc.length) return;
-      html+='<div class="mc-grp-h">'+dCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">';
-      inc.forEach(function(d){
-        var op=openName===d.generic;
-        html+='<div class="mc-card'+(op?" open":"")+'"><button class="mc-card-head" data-n="'+esc(d.generic)+'"><span class="mc-ic">'+dCatIco(d.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(d.generic)+'</span><span class="mc-card-d">'+esc(d.cls)+'</span></span><span class="mc-chev">'+(op?"▾":"▸")+'</span></button>'+(op?'<div class="mc-panel">'+detailHTML(d)+'</div>':"")+'</div>';
-      });
-      html+='</div>';
-    });
-    el.innerHTML=html;
-    el.querySelectorAll("[data-n]").forEach(function(b){ b.addEventListener("click", function(){ var n=b.getAttribute("data-n"); openName=(openName===n?null:n); render(); }); });
-  }
-  function openList(cat){
-    ensureRoot(); activeCat=(cat&&CATS.indexOf(cat)>=0)?cat:""; q=""; openName=null;
-    var si=root.querySelector("#mdSearch"); if(si) si.value="";
-    renderCats(); render();
-    root.classList.add("on"); document.body.classList.add("mc-lock");
-    setTimeout(function(){ try{ root.querySelector("#mdSearch").focus(); }catch(e){} }, 60);
-  }
-  function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
-  document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&root&&root.classList.contains("on")) close(); });
+  function close(){ if(window.MEDDB && window.MEDDB.close) window.MEDDB.close(); }
 
   /* ---- Drug Interactions entry point (mounts window.MEDLIST's med-list builder) ----
-     Reuses the same mc-overlay chrome as the browse overlay above; the body is fully
+     Uses the shared mc-overlay chrome; the body is fully
      owned/rendered by MEDLIST.mount (medlist.js), not by this file. */
   var interactionsRoot = null;
   function ensureInteractionsRoot(){
@@ -282,7 +227,6 @@
   function closeInteractions(){ if(interactionsRoot){ interactionsRoot.classList.remove("on"); document.body.classList.remove("mc-lock","smd-ddi-open"); } }
   document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&interactionsRoot&&interactionsRoot.classList.contains("on")) closeInteractions(); });
 
-  // minimal fallback styles in case calculators.js (mc-*) didn't load
   function injectFallbackCSS(){
     if(document.getElementById("mc-styles")||document.getElementById("md-fallback-styles")) return;
     var css=".mc-overlay{position:fixed;inset:0;z-index:872;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}.mc-overlay.on{display:flex}.mc-top{display:flex;align-items:center;gap:10px;padding:14px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0)}.mc-back{background:transparent;border:1px solid var(--teal,#0a9396);color:var(--teal,#0a9396);border-radius:9px;height:34px;padding:0 12px;font:600 13px system-ui;cursor:pointer}.mc-title{flex:1;text-align:center;font:800 16px system-ui}.mc-count{font-size:11px;background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:8px;padding:1px 7px}.mc-body{flex:1;overflow-y:auto;padding:14px;max-width:1100px;margin:0 auto;width:100%;box-sizing:border-box}.mc-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 14px;font:500 14px system-ui;margin-bottom:11px}.mc-cats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}.mc-cat{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:16px;padding:6px 12px;font:600 12px system-ui;cursor:pointer}.mc-cat.on{background:var(--teal,#0a9396);color:#fff}.mc-grp-h{font:800 12px system-ui;text-transform:uppercase;color:var(--slate-soft,#888);margin:14px 0 8px}.mc-grid{display:grid;grid-template-columns:1fr;gap:9px}@media(min-width:720px){.mc-grid{grid-template-columns:1fr 1fr}}.mc-card{border:1px solid var(--line,#e5e5e0);border-radius:12px;background:var(--panel,#fff)}.mc-card.open{grid-column:1/-1}.mc-card-head{display:flex;align-items:center;gap:11px;padding:12px 13px;cursor:pointer;width:100%;background:transparent;border:none;text-align:left}.mc-ic{font-size:20px}.mc-card-main{flex:1}.mc-card-t{display:block;font:700 13.5px system-ui}.mc-card-d{display:block;font:500 11.5px system-ui;color:var(--slate-soft,#888)}.mc-chev{color:#888}.mc-panel{padding:4px 13px 14px;border-top:1px solid var(--line,#e5e5e0)}.mc-empty{padding:30px;text-align:center;color:#888}.mc-disc{font:500 11px system-ui;color:#888;border:1px dashed var(--line,#e5e5e0);border-radius:10px;padding:10px 12px;margin-top:18px}.mc-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.mc-ic svg{width:20px;height:20px;color:var(--teal,#0a9396)}.mc-cat svg,.mc-grp-h svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px}.mc-grp-h svg{color:var(--teal,#0a9396)}.mc-disc svg,#mdInteractionsBtn svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px}body.mc-lock{overflow:hidden}";

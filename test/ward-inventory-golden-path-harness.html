@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 3.4: inventory golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the pharmacy-inventory golden path (Inventory button -> stock
+ * levels/near-expiry -> receipt -> adjustment/wastage -> reconciliation) against an in-memory stub
+ * server whose response shapes are confirmed against functions/_wardsynq/stock.js and the
+ * route-level tests in test/wardsynq-inpatient-emar.test.mjs, which prove these same contracts
+ * persist for real. This proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var LEVELS = [{ code: "Metformin 500mg", display: "Metformin 500mg", location: "Main", unit: "tablet", level: 70, belowReorder: false, impossible: false }];
+var EXPIRING = [{ code: "Insulin Glargine", display: "Insulin Glargine", location: "Fridge", batch: "INS-77", expired: false, daysRemaining: 12 }];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [] });
+
+  if (u.indexOf("/ward/stock-reconcile") >= 0 && (opts && opts.method) === "POST") {
+    return reply({ ok: true, written: 1, expected: 70, counted: body.counted, variance: body.counted - 70, reason: "Count reconciliation. Expected 70 tablet, counted " + body.counted + " tablet, variance " + (body.counted - 70) + " tablet." });
+  }
+  if (u.indexOf("/ward/stock-move") >= 0 && (opts && opts.method) === "POST") {
+    if ((body.kind === "adjustment" || body.kind === "wastage") && !body.reason) return reply({ ok: false, status: 422, error: "reason_required" });
+    return reply({ ok: true, written: 1, movementId: "wsq-stock-1", kind: body.kind });
+  }
+  if (u.indexOf("/ward/stock") >= 0) {
+    return reply({ ok: true, levels: LEVELS, expiring: EXPIRING, negative: [], problems: [] });
+  }
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

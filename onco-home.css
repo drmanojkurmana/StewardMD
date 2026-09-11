@@ -1,4 +1,4 @@
-/* onco-home.css — ONCqis "The Cancer Library" + the shared chrome for every onco reference tool
+/* onco-home.css — ONCQIS "The Cancer Library" + the shared chrome for every onco reference tool
    (staging / CTCAE / irAE / RECIST) and the doctor plan-flow. REBUILT (2026-08) onto the app's
    canonical design system (redesign-system.css --rds-* / --teal #0e6e63 + the clinical severity ramp
    --sev-*), so oncology reads as ONE premium surface instead of a flat greyscale sub-app. All original
@@ -6,7 +6,7 @@
 
 /* ===== Overlay shell ===================================================================== */
 .oh-overlay { position: fixed; inset: 0; z-index: 875; background: var(--rds-bg, var(--paper, #f5f8f9)); display: none; flex-direction: column; overflow: hidden; font-family: var(--rds-font, var(--sans, system-ui)); }
-/* Backgrounded: ONCqis stays mounted BELOW a sub-view overlay (calc 870 / drugs 872 / staging etc.)
+/* Backgrounded: ONCQIS stays mounted BELOW a sub-view overlay (calc 870 / drugs 872 / staging etc.)
    instead of closing, so dismissing the sub-view returns here rather than to the app home. */
 .oh-overlay.oh-bg { z-index: 865; }
 .oh-overlay.on { display: flex; animation: ohIn .28s cubic-bezier(.2,.7,.2,1); }
@@ -22,7 +22,7 @@ body.oh-lock { overflow: hidden; }
 
 .oh-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px; max-width: 920px; margin: 0 auto; width: 100%; box-sizing: border-box; padding-bottom: calc(52px + env(safe-area-inset-bottom)); }
 
-/* ===== Hero (ONCqis landing) — teal gradient card, masked logo, one strong search ========= */
+/* ===== Hero (ONCQIS landing) — teal gradient card, masked logo, one strong search ========= */
 .oh-hero { position: relative; overflow: hidden; border-radius: 20px; padding: 22px 20px; margin-bottom: 18px; color: #fff; background: linear-gradient(135deg, var(--teal, #0e6e63), #0b574e); box-shadow: var(--rds-el-cta, 0 6px 18px rgba(15,118,110,.22)); }
 .oh-hero-eyebrow { font: 800 11px var(--rds-font, var(--sans)); letter-spacing: .14em; text-transform: uppercase; opacity: .82; }
 .oh-hero-title { font: 800 26px/1.12 var(--rds-font, var(--sans)); letter-spacing: -.02em; margin: 6px 0 4px; }

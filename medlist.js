@@ -27,18 +27,28 @@
   var UNIT_RE = /(\d+(?:\.\d+)?)\s*(mg|mcg|g|ml|iu|units?|%)(?![a-z])/i;
   var BARE_NUM_RE = /\b(\d+(?:\.\d+)?)\b/;
 
-  // High-confidence deterministic brand->generic seeds (extend as needed).
-  var BRAND_SEED = {
-    ecosprin: "aspirin", pan: "pantoprazole", augmentin: "amoxicillin + clavulanate",
-    clopilet: "clopidogrel", lasix: "furosemide", piptaz: "piperacillin + tazobactam",
-    "pan-d": "pantoprazole + domperidone", monocef: "ceftriaxone"
-  };
+  /* The brand->generic map lives in brand-generics.js now, and these eight seeds were merged into
+   * it. There used to be two maps - these, and a 199-entry one inlined in app.js search - which is
+   * how "Amoxiclav" stayed unknown to the classifier while the other map knew its siblings. Two
+   * copies drift, and the copy that drifts is the one that misclassifies a drug.
+   *
+   * Same lookup shape as before, returning the "a + b" string this file has always used, so
+   * brandCandidates() below is unchanged. */
+  function brandSeed(n) {
+    try {
+      var B = (typeof window !== "undefined" && window.SMD_BRANDS) ||
+              (typeof require === "function" ? require("./brand-generics.js") : null);
+      var g = (B && B.generics) ? B.generics(n) : [];
+      return g.length ? g.join(" + ") : "";
+    } catch (e) { return ""; }
+  }
   function brandCandidates(name) {
     if (!name) return [];
     var n = name.toLowerCase().trim(), out = [];
     // BRAND_SEED is checked/listed before formulary hits intentionally — seed precedence
     // is deliberate (fast, hand-curated matches take priority), not a bug.
-    if (BRAND_SEED[n]) out.push({ brand: name, generic: BRAND_SEED[n] });
+    var seeded = brandSeed(n);
+    if (seeded) out.push({ brand: name, generic: seeded });
     // formulary aliases (window.MEDDRUGS: {generic, brands:[...]})
     try {
       // MEDDRUGS is a facade object ({match, findByName, ..., _list}), not an array —
@@ -1406,7 +1416,9 @@
   function runCheck() {
     if (!window.INTERACTIONS || typeof window.INTERACTIONS.checkInteractions !== "function") return;
     // Resolve any locally-unmapped brand via the catalogue API, THEN screen.
-    resolveUnresolvedViaApi().then(function () {
+    smdLazy('/interaction-rules.js?v=gold363').then(function() {
+      return resolveUnresolvedViaApi();
+    }).then(function () {
       _results = window.INTERACTIONS.checkInteractions(getList());
       _view = "results";
       _hideMinor = true;
@@ -1419,8 +1431,10 @@
   function recheckAfterEdit() {
     var resolved = getList().filter(function (m) { return m.generic && String(m.generic).trim(); });
     if (resolved.length >= 2 && window.INTERACTIONS && window.INTERACTIONS.checkInteractions) {
-      _results = window.INTERACTIONS.checkInteractions(getList());
-      _view = "results"; render();
+      smdLazy('/interaction-rules.js?v=gold363').then(function() {
+        _results = window.INTERACTIONS.checkInteractions(getList());
+        _view = "results"; render();
+      });
     } else {
       _view = "list"; render();
       toast("Fewer than 2 medicines left — add more to re-check.");

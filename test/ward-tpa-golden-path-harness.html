@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.17: TPA golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the TPA golden path (open a chart -> TPA button -> code a claim
+ * from a real diagnosis on the chart -> submit it -> deny it -> resubmit it -> record a
+ * pre-authorisation) against an in-memory stub server whose response shapes are confirmed against
+ * functions/_wardsynq/billing.js and wardsynq/wardsynq-billing.js's own tests. This proves the
+ * CLIENT half; it is not a live server. */
+window.__calls = [];
+window.prompt = function (msg) {
+  window.__calls.push({ prompt: msg });
+  if (/amount submitted/i.test(msg)) return "5000";
+  if (/reason for denying/i.test(msg)) return "Documentation insufficient for the severity claimed.";
+  if (/amount denied/i.test(msg)) return "";
+  if (/reason for resubmitting/i.test(msg)) return "Added the missing clinical documentation.";
+  return window.__promptValue || "";
+};
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-tpa01", ENC_ID = "wsq-enc-smd-h1-tpa01";
+var CLAIM = null;
+var PREAUTHS = [];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [{ encounterId: ENC_ID, patientId: PATIENT_ID, class: "IPD", ward: "Medical A", bed: "1", admittedAt: "2026-09-09T06:00:00.000Z" }] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Medical A", bedsKnown: true, occupied: [], free: ["1"], unplaced: [] }] });
+
+  if (u.indexOf("/ward/claim") >= 0 && u.indexOf("claim-state") < 0 && (opts && opts.method) === "POST") {
+    CLAIM = { id: "claim-" + ENC_ID + "-1", encounterId: ENC_ID, patientId: PATIENT_ID, state: "coded",
+      codes: body.codes.map(function (c) { return { code: c, support: "documented", evidence: ["Condition on chart"] }; }),
+      inferredCodes: [], queries: [], history: [{ event: "coded" }] };
+    return reply({ ok: true, written: 1, claim: CLAIM });
+  }
+  if (u.indexOf("/ward/claim-state") >= 0 && (opts && opts.method) === "POST") {
+    if (body.action === "submit") { CLAIM.state = "submitted"; CLAIM.submittedAmount = body.submittedAmount; CLAIM.adapter = { state: "not_configured", note: "No live payer connector is configured for this hospital." }; }
+    else if (body.action === "deny") { CLAIM.state = "denied"; CLAIM.denialReason = body.reason; }
+    else if (body.action === "resubmit") { CLAIM.state = "submitted"; CLAIM.submittedAmount = body.submittedAmount; CLAIM.history.push({ event: "resubmitted", detail: body.reason }); }
+    else if (body.action === "adjudicate") { if (body.approvedAmount != null) CLAIM.approvedAmount = body.approvedAmount; if (body.deniedAmount != null) CLAIM.deniedAmount = body.deniedAmount; }
+    return reply({ ok: true, written: 1, claim: CLAIM });
+  }
+  if (u.indexOf("/ward/preauth") >= 0 && (opts && opts.method) === "POST") {
+    var auth = { patientId: PATIENT_ID, treatment: body.treatment, scheme: body.scheme || null, state: body.state, reason: body.reason || null,
+      authorizedAmount: body.authorizedAmount != null ? body.authorizedAmount : null,
+      note: body.state === "refused" ? "The payer will not fund this. That is a funding decision and NOT a clinical one." : "A funding decision." };
+    PREAUTHS.push(auth);
+    return reply({ ok: true, written: 1, preAuth: auth });
+  }
+  if (u.indexOf("/ward/claims") >= 0) return reply({ ok: true, patientId: PATIENT_ID, claims: CLAIM ? [CLAIM] : [], preAuthorisations: PREAUTHS });
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough vitals recorded to score." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: 0 });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: [], prn: [], unscheduled: [] });
+  if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", type: "searchset", entry: [] });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

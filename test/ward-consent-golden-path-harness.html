@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ TASK 4.10: consent golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the consent golden path (open a chart -> Consent button ->
+ * record a granted consent -> record a refused consent needing a detail -> a missing detail is
+ * refused CLIENT-SIDE -> withdraw a consent -> the history shows both, sorted refused-first) against
+ * an in-memory stub server whose response shapes are confirmed against
+ * functions/_wardsynq/consent.js, which is unmodified by this task - only the client is new. This
+ * proves the CLIENT half; it is not a live server. */
+window.__calls = [];
+window.prompt = function (msg) { window.__calls.push({ prompt: msg }); return window.__promptValue || "Testing withdrawal"; };
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-consent01", ENC_ID = "wsq-enc-smd-h1-consent01";
+var CONSENTS = [];
+var RANK = { refused: 0, withdrawn: 1, expired: 2, "not-yet-valid": 3, granted: 4 };
+// Mirrors consent.js's own SCOPES labels, so the stub's scopeLabel matches what the real server sends.
+var SCOPE_LABELS = { "treatment": "General treatment", "share-external": "Sharing the record outside this hospital",
+  "share-registry": "Sharing with a registry or exchange", "research": "Use of the record for research",
+  "photography": "Clinical photography", "blood-products": "Transfusion of blood products",
+  "procedure": "A specific procedure", "other": "Other" };
+
+function listReply() {
+  var rows = CONSENTS.slice().sort(function (a, b) { return (RANK[a.status] - RANK[b.status]) || String(a.scope).localeCompare(String(b.scope)); });
+  return { ok: true, patientId: PATIENT_ID, consents: rows, refused: rows.filter(function (c) { return c.status === "refused"; }).length, withdrawn: rows.filter(function (c) { return c.status === "withdrawn"; }).length };
+}
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+  var refuse = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(Object.assign({ ok: false }, obj)); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [{ encounterId: ENC_ID, patientId: PATIENT_ID, class: "IPD", ward: "Medical A", bed: "1", admittedAt: "2026-09-09T06:00:00.000Z" }] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Medical A", bedsKnown: true, occupied: [], free: ["1"], unplaced: [] }] });
+
+  if (u.indexOf("/ward/consent") >= 0 && (opts && opts.method) === "POST") {
+    if ((body.scope === "other" || body.scope === "procedure") && !body.detail) return refuse({ status: 422, error: "detail_required", detail: 'scope "' + body.scope + '" needs to say what it is about' });
+    var idx = CONSENTS.map(function (c) { return c.scope + "|" + (c.detail || ""); }).indexOf(body.scope + "|" + (body.detail || ""));
+    var row = { consentId: "wsq-consent-" + body.scope, scope: body.scope, scopeLabel: SCOPE_LABELS[body.scope] || body.scope, decision: body.decision, status: body.decision,
+      detail: body.detail || null, givenBy: body.givenBy, giverName: body.giverName || null, capacity: body.capacity,
+      recordedBy: "cfa:doctor", recordedAt: "2026-09-09T09:00:00.000Z", validUntil: body.validUntil || null, withdrawnAt: null, version: 1 };
+    if (idx >= 0) CONSENTS[idx] = row; else CONSENTS.push(row);
+    return reply({ ok: true, written: 1, consentId: row.consentId, decision: row.decision });
+  }
+  if (u.indexOf("/ward/withdraw-consent") >= 0 && (opts && opts.method) === "POST") {
+    if (!body.reason) return refuse({ status: 422, error: "reason_required" });
+    var w = CONSENTS.filter(function (c) { return c.scope === body.scope && (c.detail || "") === (body.detail || ""); })[0];
+    if (!w) return refuse({ status: 404, error: "no_consent_recorded" });
+    w.status = "withdrawn"; w.withdrawnAt = "2026-09-09T09:30:00.000Z";
+    return reply({ ok: true, written: 1, status: "withdrawn" });
+  }
+  if (u.indexOf("/ward/consents") >= 0) return reply(listReply());
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough vitals recorded to score." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: 0 });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: [], prn: [], unscheduled: [] });
+  if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", type: "searchset", entry: [] });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

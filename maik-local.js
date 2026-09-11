@@ -40,7 +40,7 @@
    * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
    * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
    */
-  var DEFAULT_PACK = "maik-mxcore";
+  var DEFAULT_PACK = "maik-lite";   // our own model: flagship, and the safest default (smallest, fastest)
   var HISTORY_TURNS = 2;
   var HISTORY_CLIP = 180;
 
@@ -118,9 +118,20 @@
   var GEMMA_CTRL = /<\s*(start_of_turn|end_of_turn|unused\d+|eos|bos|pad)\s*>/gi;
   var LEAD_THOUGHT = /^\s*(thought|thinking|reasoning|analysis|plan)\b\s*[:\-]?\s*/i;
 
+  // Bracket citation markers like [1] or [2,3]. MaiK Lite was trained to cite numbered evidence
+  // passages; on-device there is no evidence list for the numbers to point at, and the owner's rule
+  // is that answers never show per-source references - so the markers are stripped, not rendered.
+  var CITE_MARK = /\s*\[\d+(?:\s*,\s*\d+)*\]/g;
+  // Shown when the model spent its whole token budget inside a reasoning block and produced no
+  // answer (measured on MaiK Lite v2: rare but real). An explicit message beats an empty bubble.
+  var EMPTY_ANSWER = "The on-device model did not produce an answer this time. Ask again, or switch to MaiK Cloud.";
+  // The model reporting that the retrieved passages do not cover the question. That is a retrieval
+  // verdict, not an answer; see the no-coverage fallback in answer().
+  var NO_COVERAGE = /\b(not|isn't|is not|aren't|are not|no)\b[^.]{0,60}\b(addressed|covered|found|included|mentioned|discussed|available|present|information|evidence|guidelines?)\b[^.]{0,50}\b(reference|retrieved|provided|source|sources|material|evidence|knowledge base)\b|\b(reference|retrieved) (material|passages?|sources?) (does not|do not|doesn't|don't|did not)\b/i;
+
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
-    out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "");
+    out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "").replace(CITE_MARK, "");
     // An unterminated <think> means the budget ran out mid-reasoning: there is no answer after it,
     // so keep whatever came BEFORE rather than shipping raw reasoning.
     out = out.replace(THINK_OPEN, "");
@@ -304,29 +315,23 @@
      * A Qwen3-family pack emits <think> blocks by default. At nPredict 768 a long reasoning trace can
      * consume the entire budget, so the doctor gets a truncated thought and NO answer - and
      * stripReasoning() then correctly returns "", which reads as the app failing. "/no_think" is the
-     * family's own switch and costs three tokens, which is far cheaper than the reasoning it prevents.
+     * family's own switch, read by the CHAT TEMPLATE if one applies - cheap, so kept as a hint even
+     * though it is not what actually fixes this (see below).
+     *
+     * WRONG FIX, KEPT AS A RECORD: this used to also push "<think>\n\n</think>" into the QUESTION
+     * text here, on the theory that the engine sends a raw completion prompt with no chat template.
+     * It does not - LlamaEngine.swift/.java DOES apply the model's own chat template, which wraps
+     * this whole string (empty-think tag included) inside the USER turn. The "closed" block landed
+     * as noise inside the doctor's question while the real assistant turn still opened blank, fixing
+     * nothing - and arguably making the noise-in-the-question worse than sending nothing at all.
+     * That misdiagnosis is why MaiK Lite kept blanking/looping on freshly re-verified v4 weights
+     * after every other cause had been ruled out (2026-09-03).
+     *
+     * REAL FIX: prefillEmptyThink, passed to L.generate() in answer() below. Only the NATIVE side
+     * can close the think block from the ASSISTANT's turn, because only it knows where
+     * "<|im_start|>assistant\n" actually is after applying the template.
      */
-    if (packId && noThinkPack(packId)) {
-      /* TWO switches, because from here we cannot tell which one the runtime will honour.
-       *
-       * "/no_think" is Qwen3's own switch, but it is read by the CHAT TEMPLATE - and this engine
-       * sends a RAW completion prompt (generate({ prompt, system, ... }) below, no template). In a
-       * raw prompt those three tokens can be treated as ordinary text and ignored, which produces
-       * exactly the failure the switch exists to prevent: the model reasons anyway, stripReasoning()
-       * bins every one of those tokens, and the doctor waits through generation they never see.
-       * A 1.7B burning 400 tokens on reasoning loses to a 4B that answers in 120 - which is what
-       * "Lite is SLOWER than the 4B" turned out to look like on a real phone.
-       *
-       * So we also CLOSE AN EMPTY THINKING BLOCK. The model resumes from a point where its reasoning
-       * has already happened and yielded nothing, so it goes straight to the answer. That needs no
-       * template support at all, which is the whole point.
-       *
-       * Both are kept: /no_think costs three tokens and still helps if a template IS applied, and
-       * stripReasoning() removes a closed empty block either way, so neither can leak to the doctor.
-       */
-      L.push("/no_think");
-      L.push("<think>\n\n</think>");
-    }
+    if (packId && noThinkPack(packId)) L.push("/no_think");
     return L.join("\n");
   }
 
@@ -435,6 +440,116 @@
     return DEFAULT_PACK;
   }
 
+  /* On-device RAG for MaiK Lite: grounds the answer in the actual book text instead of the
+   * model's own recollection, and a post-hoc gate catches any dose/drug it still invents.
+   *
+   * WHY THIS EXISTS: on-device probes (2026-09-03) showed MaiK Lite confidently stating a WRONG
+   * penicillin-allergy alternative (amoxicillin-clavulanate - itself a penicillin) for
+   * "Treatment of Pneumonia?". The blank-answer/thinking-loop bug was real and is fixed
+   * (prefillEmptyThink), but that does nothing for CONTENT accuracy - an ungrounded 1.7B states a
+   * wrong regimen with total confidence. Doctors expect textbook/guideline-accurate specifics,
+   * which only comes from retrieval + a check against it, same architecture as the server.
+   *
+   * Scoped to maik-lite only tonight, not every noThink pack - that is what was asked for
+   * ("the model we trained"), and widening it needs its own verification pass.
+   */
+  // Owner decision 2026-09-03: MaiK Lite ONLY. The Bonsai packs answer from their own weights.
+  function ragEligible(packId) { return packId === "maik-lite"; }
+
+  /** Resolves {evidenceText, passages, RAG} from the on-device book index, or null if ungrounded
+   * (no KB yet, no hit, or anything failed) - grounding is a strict improvement when available,
+   * never a hard requirement that can break an answer that would otherwise have worked. */
+  /* RETRIEVAL DRIFT GUARD (owner battery, 2026-09-04). Two live failures with the same root cause:
+   * "first-line treatment of uncomplicated UTI" retrieved a DEFINITIONS chapter, and the follow-up
+   * "what if she is pregnant" retrieved a hepatitis-in-pregnancy passage, so the model answered
+   * lamivudine for a UTI and the gate PASSED it (lamivudine was in the evidence). BM25 ranks by term
+   * overlap; a modifier like "pregnancy" or a generic like "management" can out-vote the actual topic.
+   * So a passage must now contain one of the question's ANCHORS - its rarest words that are neither
+   * generic clinical filler nor a population modifier - or it is not evidence for this question.
+   * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
+   * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
+   * third passage dropped), which is where on-device latency actually goes. */
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
+  var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
+  var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
+  var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  function cleanPassage(s) { return String(s || "").replace(/[■□▪▫●○◆◇◼◻•·]+/g, " ").replace(/\s+/g, " ").trim(); }
+  function anchorsFor(bk, RAG, question) {
+    // No tokenizer available (an older RAG build or a test stub) means no anchoring, never a
+    // thrown error that would silently turn every answer ungrounded.
+    if (!RAG || typeof RAG.toks !== "function") return [];
+    // Asked form AND expanded form: "UTI" expands to "urinary tract infection", but the book's own
+    // chapters say "UTI" (IDF 5.0) more than the long form (3.8); losing the abbreviation lost the
+    // strongest anchor. Three kinds come back: TOPIC words (the disease), DRUG names, and population
+    // MODIFIER stems. The disease is what a passage must be about; a drug name alone is not (the
+    // live CAP comparison pulled typhoid-resistance passages that merely named both drugs).
+    var q = question;
+    try { var ex = RAG.expand(question); q = question + " " + ex[0] + " " + ex[1]; } catch (e) {}
+    var seen = {}, topic = [], drugs = [], mods = [], tokens = [], drugSet = null;
+    try { tokens = RAG.toks(q) || []; } catch (e) { tokens = []; }
+    try { drugSet = RAG.drugsOf ? RAG.drugsOf(q) : null; } catch (e) { drugSet = null; }
+    var prev = "";
+    tokens.forEach(function (w) {
+      var before = prev; prev = w;
+      try { if (bk.us) w = bk.us(w); } catch (e) {}
+      if (seen[w] || w.length < 3) return;
+      seen[w] = 1;
+      // "non-pregnant" is not a request for pregnancy material.
+      if (MODIFIER_Q.test(w)) { if (before !== "non" && before !== "not") mods.push(w.slice(0, 5)); return; }
+      if (GENERIC_Q.test(w)) return;
+      var idf = bk.idfOf ? bk.idfOf(w) : 1;
+      if (idf === undefined) return;   // unknown to the book: cannot anchor on it
+      if (drugSet && drugSet.has(w)) drugs.push(w); else topic.push([idf, w]);
+    });
+    topic.sort(function (a, b) { return b[0] - a[0]; });
+    // Rarest topic words only, relative to the rarest one, so "infection" (IDF 2.0) does not let a
+    // urethritis passage stand in for a UTI one.
+    var floor = topic.length ? 0.6 * topic[0][0] : 0;
+    return { topic: topic.filter(function (e) { return e[0] >= floor; }).slice(0, 3).map(function (e) { return e[1]; }), drugs: drugs, mods: mods };
+  }
+  function retrieveGrounding(packId, question) {
+    if (!ragEligible(packId) || !question) return Promise.resolve(null);
+    var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+    var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
+    if (!RAG || !KB) return Promise.resolve(null);
+    return KB.loadBook(RAG).then(function (bk) {
+      // Search wider than we keep: the anchored passages are often ranks 2-6 behind a glossary
+      // chapter that matches every word. Same BM25 pass, only the sort tail is longer.
+      var hits = bk.search(question, RAG.TOPK * 3);
+      if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
+      var A = anchorsFor(bk, RAG, question);
+      if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
+      var need = A.topic.length ? A.topic : A.drugs;
+      var anchors = A.topic.concat(A.drugs);
+      var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
+      // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
+      // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
+      // nothing matches two, one is enough.
+      cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
+      var kept = need.length ? cited.filter(function (c) { return c.n > 0; }) : cited;
+      if (!kept.length) return null;
+      if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
+      // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
+      // do; when none do, the topic passages stay and the model says so, instead of a passage about
+      // a different disease in pregnancy.
+      if (A.mods.length) {
+        var wm = kept.filter(function (c) { return A.mods.some(function (m) { return c.hay.indexOf(m) !== -1; }); });
+        if (wm.length) kept = wm;
+      }
+      // A definitions / introduction chapter is not the answer to a treatment question when anything
+      // else survived (the live "■■ DEFINITIONS" fallback for a UTI treatment ask).
+      if (TREAT_Q.test(question) && kept.length > 1) {
+        var nd = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); });
+        if (nd.length) kept = nd;
+      }
+      kept = kept.filter(function (c) { return c.score >= 0.4 * kept[0].score; }).slice(0, RAG.TOPK);
+      if (kept.length > 2 && kept[2].score < 0.6 * kept[0].score) kept = kept.slice(0, 2);
+      var passages = kept.map(function (c) { c.p.text = cleanPassage(c.p.text); return c.p; });
+      var evidenceText = passages.map(function (p, n) { return "[" + (n + 1) + "] " + p.text.slice(0, 700); }).join("\n\n");
+      return { evidenceText: evidenceText, passages: passages, RAG: RAG, anchors: anchors };
+    }).catch(function () { return null; });
+  }
+
   function answer(pkg, opts, onDelta) {
     var L = llama();
     if (!L) return Promise.resolve({ error: "on-device inference needs the native app" });
@@ -448,9 +563,21 @@
     var acc = "";
     var sub = null;
 
+    // A greeting is not a question: no retrieval, so no "Source:" line on a hello (owner
+    // screenshot, 2026-09-04).
+    var groundingP = (images.length || (opts && (opts._retried || opts._ungrounded)) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
+      : retrieveGrounding(packId, pkg && pkg.question);
+
+    return groundingP.then(function (grounding) {
     return ensureLoaded(packId).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
+      if (grounding) {
+        prompt = "Reference material from the StewardMD Knowledge Base:\n" + grounding.evidenceText +
+          "\n\nUsing the reference material above where it applies, answer:\n" + prompt;
+      }
+      // Retry-after-blank: nudge the model out of the deliberation attractor it fell into.
+      if (opts && opts.nudge) prompt += "\nGive the final answer directly, no deliberation.";
 
       // Stream tokens into the caller's typewriter. Accumulate: onDelta wants the full text so far.
       var attach = (typeof onDelta === "function" && L.addListener)
@@ -494,12 +621,21 @@
           system: (opts && opts.systemOverride) ? opts.systemOverride
                 // A greeting with no image: answer it as a greeting, not as a clinical question.
                 : (!images.length && isGreeting(pkg && pkg.question)) ? SYSTEM_GREET
-                : !images.length ? SYSTEM
+                // A pack can carry its own system prompt (registry-driven, like noThink).
+                // MaiK Lite was TRAINED with its prompt, so the shared one would be a
+                // distribution shift - and its dose example was parroted as a real dose.
+                : !images.length ? (pk.system || SYSTEM)
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
-          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0,
-          stream: typeof onDelta === "function"
+          // Regenerate (owner, 2026-09-04): a second attempt at temperature 0 is the same answer
+          // byte for byte, so a regenerate request gets a little sampling jitter.
+          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : ((opts && opts.regen) ? 0.4 : 0),
+          stream: typeof onDelta === "function",
+          // The actual think-suppression fix (see buildPrompt's comment for why the old
+          // in-question-text approach never worked). Vision packs are never noThink today, so this
+          // only needs wiring on the text path.
+          prefillEmptyThink: !images.length && noThinkPack(packId)
         };
         if (!images.length) return L.generate(common);
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
@@ -515,12 +651,61 @@
       }).then(function (r) {
         if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
+        // Everything the model produced was reasoning (unterminated think block ate the
+        // budget). Measured on-device 2026-08-31: a second pass with sampling jitter and a
+        // directness nudge recovers most of these, so retry ONCE before surfacing an error.
+        // Text path only: an image answer costs a full vision prefill and is not think-prone.
+        if (!text && !images.length && !(opts && opts._retried)) {
+          var ro = { _retried: true, temperature: 0.35, nudge: true, pack: packId };
+          if (opts) { for (var k in opts) { if (!(k in ro)) ro[k] = opts[k]; } }
+          return answer(pkg, ro, onDelta);
+        }
+        if (!text) return { error: EMPTY_ANSWER };
+        // NO-COVERAGE FALLBACK (owner, 2026-09-04, from a live screenshot). Retrieval can miss: a
+        // misspelt "Spleenomegaly with fever DD and Rx" pulled diverticulitis and dd-cfDNA passages
+        // that still cleared the score floor, and the model obediently reported "not addressed in
+        // the provided reference material". The doctor got nothing. That reply is a verdict on the
+        // retrieval, not an answer, so re-ask ONCE with no reference material: the model answers
+        // from its own weights, marked ungrounded, no gate, no source line (the banner already says
+        // "AI-generated, no sources").
+        if (grounding && !images.length && !(opts && opts._ungrounded) && NO_COVERAGE.test(text)) {
+          var uo = { _ungrounded: true, pack: packId };
+          if (opts) { for (var k2 in opts) { if (!(k2 in uo)) uo[k2] = opts[k2]; } }
+          return answer(pkg, uo, onDelta);
+        }
+        // RAG safety net: every number/drug the answer states must be backed by the retrieved
+        // book text or the question itself. A doctor-supplied figure ("glucose 32 mg/dL") is not
+        // a hallucination; anything else the model adds without support is exactly the failure
+        // this was built to catch (the live penicillin-allergy contradiction). A gate failure does
+        // NOT surface as an error - it shows the real book passages instead of a wrong paraphrase,
+        // which is strictly more useful to a doctor than either a blank screen or a wrong answer.
+        var quotedPassage = false;   // a verbatim book passage is shown as written, never re-emphasized
+        if (grounding) {
+          var gate = grounding.RAG.evidenceGate(text, grounding.evidenceText, pkg && pkg.question);
+          if (!gate.ok) {
+            // Diagnostics only (never shown): what the gate rejected, for the live battery and the
+            // feedback triage. Passage text is not stored.
+            try { window.__smdLastGate = { q: pkg && pkg.question, nums: gate.nums, drugs: gate.drugs, anchors: grounding.anchors, heads: grounding.passages.map(function (p) { return String(p.heading || "").slice(0, 60); }) }; } catch (e) {}
+            var pass = grounding.passages[0]; quotedPassage = true;
+            var shown = cleanPassage(pass.text);
+            if (shown.length > 700) shown = shown.slice(0, 700).replace(/\s+\S*$/, "") + "…";
+            text = "The on-device model's answer could not be verified against the StewardMD Knowledge Base " +
+              "(it stated a figure or drug not found there). Here is the reference passage on this topic instead:\n\n" + shown;
+          } else {
+            // NEVER a page number, on owner order - matches the standing attribution used
+            // everywhere else in the app (maik-models.js GUIDE_INTRO / guide.why).
+            text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
+          }
+        }
+        if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
-          // ALWAYS empty: this answer used no StewardMD material, so attaching the package's
-          // citations would credit sources the model never saw. That is a lie in a clinical UI.
+          // sources stays [] regardless: the citation UI's own contract (SMD_MaiK.sourceList)
+          // recomputes from pkg.grounding/retrieved/treatment, which this engine does not
+          // populate. A plain "Source: ..." line is appended to the text itself above instead,
+          // which needs no UI change and cannot be silently dropped by a different code path.
           sources: [],
-          grounded: false,
+          grounded: !!grounding,
           engine: "local",
           images: images.length,
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
@@ -541,6 +726,7 @@
     }).then(function (out) {
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
       return out;
+    });
     });
   }
 
@@ -624,13 +810,281 @@
     if (L && L.release) { try { return L.release(); } catch (e) {} }
   }
 
+  /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and
+   * starving every other module, once its work is done. Rules:
+   *   - every tracked call (answer, warm) cancels any pending release and counts itself in flight;
+   *   - when the last in-flight call settles, a release is scheduled: IDLE_MS while the MaiK sheet is
+   *     open (a doctor reading the answer before the follow-up), CLOSE_GRACE_MS once it is closed;
+   *   - sheetClosed() never cuts a running generation: home.js close() deliberately lets an in-flight
+   *     answer finish and persist, so the release waits for it and then applies the close grace;
+   *   - sheetOpened() cancels a pending release, and home.js re-warms there instead of at app start.
+   * The next question after a release simply reloads (ensureLoaded), a few seconds on the 1.1 GB
+   * MaiK Lite, longer on the Bonsai packs; that cost is the price of not holding the memory. */
+  var IDLE_MS = 3 * 60 * 1000, CLOSE_GRACE_MS = 20 * 1000;
+  var _idleT = null, _inflight = 0, _sheetOpen = null, _idleMs = IDLE_MS, _closeMs = CLOSE_GRACE_MS;
+  function clearIdle() { if (_idleT) { clearTimeout(_idleT); _idleT = null; } }
+  function scheduleRelease(ms) {
+    clearIdle();
+    _idleT = setTimeout(function () { _idleT = null; if (_inflight === 0) release(); }, ms);
+    // unref() only exists on Node's Timeout (this file also runs, unit-tested, under plain node); in
+    // the WebView setTimeout returns a number and this is a no-op. Without it, any Node script that
+    // calls answer()/vivaJudge()/opdSuggest()/webAnswer() - test files included - hangs for up to
+    // IDLE_MS after its last assertion, because a real pending timer keeps the process alive even
+    // though nothing is left to do (found live in CI: the unit-tests job stalled ~3 minutes on
+    // maik-local.test.mjs alone, 2026-09-04). A timer this file starts must never block a caller's exit.
+    try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
+  }
+  function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
+  function tracked(fn) {
+    return function () {
+      clearIdle(); _inflight++;
+      var p;
+      try { p = Promise.resolve(fn.apply(null, arguments)); } catch (e) { p = Promise.reject(e); }
+      return p.then(function (r) { _inflight--; settle(); return r; }, function (e) { _inflight--; settle(); throw e; });
+    };
+  }
+  function sheetOpened() { _sheetOpen = true; clearIdle(); }
+  function sheetClosed() { _sheetOpen = false; settle(); }
+  /** Test hook: shorten the timers. */
+  function setIdleMs(idle, close) { _idleMs = idle; _closeMs = (close == null) ? idle : close; }
+
+  /* STRUCTURED on-device calls (owner, 2026-09-04): the CliniX viva judge and the OPD "Ask MaiK Pro"
+   * differential were cloud-only because nobody had written a local version, not because they need
+   * the cloud. Prompts and output whitelisting are copied from the server (functions/api/ai/[[path]].js
+   * "viva-judge" and _opd-suggest.js) so the callers see the same shapes. Run with `system` set to
+   * the task prompt so the interpretive MaiK prompt cannot turn the JSON into prose. */
+  function parseJsonLoose(t) {
+    if (!t) return null;
+    var m = String(t).match(/\{[\s\S]*\}/);
+    if (!m) return null;
+    try { return JSON.parse(m[0]); } catch (e) { return null; }
+  }
+  var VIVA_SYS =
+    "You are a strict but fair clinical viva examiner. You are given the QUESTION, the KEY POINTS a " +
+    "complete answer should cover, and the STUDENT'S ANSWER. Judge the answer ONLY - do not ask a new " +
+    "question, do not have a conversation, do not repeat the question back.\n" +
+    "Output ONLY this JSON, nothing else: " +
+    '{"verdict":"correct|partial|incorrect","feedback":"<one sentence, at most 25 words, examiner tone>"}\n' +
+    "correct = covers the key points accurately, in the student's own words is fine. partial = the right " +
+    "idea but incomplete, imprecise, or missing a key point. incorrect = wrong, or does not answer the " +
+    "question. Be direct in feedback, the way a real examiner would be, but never unkind.\n" +
+    "NEVER state a drug dose, route, or frequency in your feedback, even if the student's answer contains " +
+    "one - that is out of scope for this judgement.";
+  var OPD_SYS =
+    "You are a senior physician giving OPD decision support. From the clinical assessment below " +
+    "(what the doctor has already entered), produce a focused, safe differential.\n" +
+    "Return ONLY JSON: {\"provisionalDx\":\"\",\"ddx\":[{\"dx\":\"\",\"why\":\"\"}],\"investigations\":[\"\"],\"treatment\":[\"\"],\"redFlags\":[\"\"]}.\n" +
+    "RULES:\n" +
+    "- Base EVERYTHING only on the findings stated; NEVER invent a symptom, finding, or history.\n" +
+    "- provisionalDx = the single most likely working diagnosis for this picture.\n" +
+    "- ddx = the differential, MOST LIKELY FIRST (max 6), each with a one-line 'why' tied to the findings. " +
+    "Include must-not-miss diagnoses even if less likely.\n" +
+    "- investigations = the workup you would order for this picture (max 10).\n" +
+    "- treatment = first-line management, with drug/dose/route/frequency where standard (max 10). This is a " +
+    "SUGGESTION for the doctor to verify, never an order; note where dosing depends on weight/renal function.\n" +
+    "- redFlags = must-not-miss features to watch for (max 6).\n" +
+    "- Write everything in clear clinical ENGLISH. Keep drug names, doses, units and standard abbreviations exact.\n" +
+    "- Output ONLY the JSON. No prose, no markdown, no code fences.";
+  // Port of sanitizeOpdSuggest: bounded plain text only, nothing the app trusts blindly.
+  function sanitizeOpd(parsed) {
+    var out = { provisionalDx: "", ddx: [], investigations: [], treatment: [], redFlags: [] };
+    if (!parsed || typeof parsed !== "object") return out;
+    var str = function (x, n) { return String(x == null ? "" : x).replace(/\s+/g, " ").trim().slice(0, n || 200); };
+    var list = function (a, n, map) { return (Array.isArray(a) ? a : []).map(map).filter(Boolean).slice(0, n); };
+    if (typeof parsed.provisionalDx === "string") out.provisionalDx = str(parsed.provisionalDx, 300);
+    out.ddx = list(parsed.ddx, 6, function (x) {
+      if (!x) return null;
+      if (typeof x === "string") { var d0 = str(x, 160); return d0 ? { dx: d0, why: "" } : null; }
+      var d = str(x.dx || x.name, 160); return d ? { dx: d, why: str(x.why || x.reason, 300) } : null;
+    });
+    out.investigations = list(parsed.investigations, 10, function (x) { return str(x, 160); });
+    out.treatment = list(parsed.treatment, 10, function (x) { return str(x, 240); });
+    out.redFlags = list(parsed.redFlags, 6, function (x) { return str(x, 220); });
+    return out;
+  }
+  /* WEB RESEARCH (owner, 2026-09-04): "Research on the web" pays Gemini to turn TinyFish's search
+   * snippets into prose only when MaiK Cloud is the selected engine - "we can't charge them for
+   * snippet conversion into clean language" for the local/offline engine. The search itself
+   * (TinyFish, see functions/_search.js) already costs nothing; maik-engine.js's routing fetches the
+   * raw snippets via SMD_AI.researchSnippets and hands them here, so the on-device model does the
+   * writing for free. Prompt ported verbatim from RESEARCH_SYS_SNIPPETS / MEDICAL_ONLY in
+   * functions/api/ai/[[path]].js so a web-research answer reads the same regardless of which engine
+   * wrote it. */
+  var MEDICAL_ONLY_LOCAL =
+    "\nSCOPE - NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only. That includes everything a " +
+    "doctor legitimately asks: diseases, drugs and drug classes, doses, mechanisms of action, " +
+    "investigations, procedures, guidelines, physiology, pathology, public health and medical education. " +
+    "If the question is NOT medical, do not answer it. Reply with exactly this line and nothing else: " +
+    "\"I can only help with medical and clinical questions.\"";
+  var WEB_SYS =
+    "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally - the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
+    "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources - use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
+    "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+    "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer." + MEDICAL_ONLY_LOCAL;
+  var WEB_MAX = 900;
+  function generateText(prompt, system, nPredict, opts) {
+    var L = llama();
+    if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
+    var packId = (opts && opts.pack) || currentPack();
+    return ensureLoaded(packId).then(function () {
+      return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+                          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
+                          stream: false, prefillEmptyThink: noThinkPack(packId) });
+    }).then(function (r) {
+      if (r && r.error) throw new Error(String(r.error));
+      return stripReasoning((r && r.text) || "");
+    });
+  }
+  /** Turn TinyFish's raw sources into a web-research answer on device. sources:
+   * [{title,url,site,snippet}] (the exact shape SMD_AI.researchSnippets resolves). No sources -> the
+   * honest "no-results" the caller already renders as a retry, never a hallucinated web answer. */
+  function webAnswer(question, sources, opts) {
+    var q = String(question || "").slice(0, 500).trim();
+    if (!q) return Promise.resolve({ error: "no-question" });
+    var list = (Array.isArray(sources) ? sources : []).slice(0, 8).filter(function (s) { return s && (s.title || s.snippet); });
+    if (!list.length) return Promise.resolve({ error: "no-results" });
+    var ctx = list.map(function (s, i) {
+      return "[" + (i + 1) + "] " + String(s.title || "").slice(0, 200) + (s.site ? " (" + s.site + ")" : "") +
+        "\n" + String(s.snippet || "").slice(0, 400) + "\n" + String(s.url || "");
+    }).join("\n\n");
+    var evidenceText = list.map(function (s, i) { return "[" + (i + 1) + "] " + String(s.title || "") + ". " + String(s.snippet || ""); }).join("\n");
+    var prompt = "Question: " + q + "\n\nWeb results:\n" + ctx;
+    return generateText(prompt, WEB_SYS, WEB_MAX, opts).then(function (text) {
+      if (!text) return { error: "no-answer" };
+      var srcOut = list.map(function (s) { return { title: s.title, url: s.url, site: s.site }; });
+      try {
+        var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+        if (RAG && RAG.evidenceGate) {
+          var gate = RAG.evidenceGate(text, evidenceText, q);
+          if (!gate.ok) {
+            var top = list[0];
+            var shown = String(top.title || "") + (top.snippet ? "\n" + top.snippet : "") + (top.url ? "\n" + top.url : "");
+            return {
+              text: "The on-device model's answer could not be verified against the web results it found " +
+                "(it stated a figure or drug not in them). Showing the top result instead:\n\n" + shown,
+              sources: srcOut, engine: "local", mode: "web-local"
+            };
+          }
+        }
+      } catch (e) {}
+      return { text: emphasize(text), sources: srcOut, engine: "local", mode: "web-local" };
+    });
+  }
+  function generateJSON(prompt, system, nPredict, opts) {
+    var L = llama();
+    if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
+    var packId = (opts && opts.pack) || currentPack();
+    // Small packs (MaiK Lite was fine-tuned for prose) drift into sections before the JSON; the
+    // closing nudge in the user turn is what keeps a 1.7B on the object. Harmless for the larger ones.
+    prompt += "\n\nReply with the JSON object only. Start your reply with {";
+    function once(p, temp) {
+      return L.generate({ prompt: p, system: system, nPredict: nPredict, temperature: temp, stream: false,
+                          prefillEmptyThink: noThinkPack(packId) }).then(function (r) {
+        if (r && r.error) throw new Error(String(r.error));
+        var text = stripReasoning((r && r.text) || "");
+        return { parsed: parseJsonLoose(text), text: text };
+      });
+    }
+    return ensureLoaded(packId).then(function () { return once(prompt, 0); }).then(function (a) {
+      if (a.parsed) return a.parsed;
+      // A 1.7B answers the same prompt as JSON one minute and as prose the next (seen live on MaiK
+      // Lite). One retry with a blunter instruction and a little sampling jitter recovers most of
+      // those; a second miss is reported honestly, never turned into an invented verdict.
+      return once(prompt + "\n\nYour previous reply was prose. Output ONLY the JSON object now, nothing before it and nothing after it.", 0.3).then(function (b) {
+        if (b.parsed) return b.parsed;
+        // Carry a short sample of what the model said so a device probe can see WHY (callers only
+        // look at .error). Model output, never book text.
+        var e = new Error("parse"); e.sample = b.text.slice(0, 240); throw e;
+      });
+    });
+  }
+  function parseFailure(err) {
+    if (err && err.message === "parse") return { error: "parse", sample: err.sample || "" };
+    throw err;
+  }
+  /** CliniX viva examiner, same contract as /viva-judge: {verdict, feedback} or {error}. */
+  function vivaJudge(question, keyPoints, given, opts) {
+    var q = String(question || "").slice(0, 400).trim(), key = String(keyPoints || "").slice(0, 600).trim(), g = String(given || "").slice(0, 800).trim();
+    if (!q || !g) return Promise.resolve({ error: "no-input" });
+    var prompt = "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + g;
+    return generateJSON(prompt, VIVA_SYS, 160, opts).then(function (p) {
+      var v = (p && ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0) ? p.verdict : null;
+      if (!v) return { error: "parse", sample: JSON.stringify(p).slice(0, 240) };
+      return { verdict: v, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge", engine: "local" };
+    }, function (err) {
+      // MaiK Lite (prose fine-tune) judges in a sentence about half the time even after the retry:
+      // "The student's answer is incorrect because it omits adrenaline." That IS a verdict, stated by
+      // the model in its own words, so accept it - but only when the opening sentence names exactly
+      // one verdict. Anything vaguer stays an honest parse error; nothing is inferred.
+      var pf = parseFailure(err), v = verdictFromProse(pf.sample);
+      if (!v) return pf;
+      return { verdict: v.verdict, feedback: v.feedback, mode: "viva-judge", engine: "local" };
+    });
+  }
+  function verdictFromProse(text) {
+    var first = (String(text || "").trim().match(/^[^.!?]*[.!?]?/) || [""])[0];
+    if (first.length > 300) return null;
+    var found = {}, m, re = /\b(correct|partially correct|partial|incomplete|incorrect|wrong)\b/gi;
+    while ((m = re.exec(first)) !== null) {
+      var w = m[1].toLowerCase();
+      found[w === "wrong" ? "incorrect" : (w === "partially correct" || w === "incomplete") ? "partial" : w] = 1;
+    }
+    var keys = Object.keys(found);
+    if (keys.length !== 1) return null;
+    if (keys[0] === "correct" && /\b(not|n't)\s+(entirely\s+|fully\s+|completely\s+)?correct\b/i.test(first)) return null;
+    return { verdict: keys[0], feedback: first.slice(0, 300) };
+  }
+  /** OPD "Ask MaiK Pro" differential, same contract as /extract kind "opd-suggest". */
+  function opdSuggest(assessment, opts) {
+    var a = String(assessment == null ? "" : assessment).slice(0, 8000).trim();
+    if (!a) return Promise.resolve({ error: "no-text" });
+    return generateJSON("=== ASSESSMENT ===\n" + a, OPD_SYS, 900, opts).then(function (p) {
+      var out = sanitizeOpd(p);
+      out.kind = "opd-suggest"; out.mode = "opd-suggest"; out.engine = "local";
+      return out;
+    }, parseFailure);
+  }
+
+  /* READABLE EMPHASIS for on-device answers (owner, 2026-09-04: "Answer can show Bold Italic etc
+   * formats to make it more appealing and reading"). The renderer (reasoning.js maikMarkdown) already
+   * turns **x** into <b> and *x* into <i>; the gap is that MaiK Lite, a prose fine-tune, emits plain
+   * text. Its system prompt is the exact one it was trained with and is deliberately not touched, so
+   * the emphasis is added deterministically here instead: drug names (the same suffix regex the
+   * evidence gate uses, via SMD_MAIK_RAG.drugsOf when loaded), doses and durations are bolded, the
+   * way a doctor's eye scans an answer. Applied ONLY when the model produced no ** of its own (the
+   * larger packs follow "Answer in markdown" already), AFTER the evidence gate (it changes no figure),
+   * and never to the Source line. Pure, exported for tests. */
+  var DOSE_RE = /\b(\d+(?:\.\d+)?(?:\s*(?:-|to)\s*\d+(?:\.\d+)?)?\s*(?:mg|g|mcg|µg|ml|mL|IU|units?|mmol|mEq)(?:\/(?:kg|day|d|dose|h|hr|m2))?)(?![\w*])/gi;
+  var DURATION_RE = /\b(\d+(?:\s*(?:-|to)\s*\d+)?\s*(?:days?|weeks?|months?|hours?|hrs?))\b(?!\*)/gi;
+  var DRUG_FALLBACK_RE = /\b[a-z]{4,}(?:cillin|mycin|micin|cycline|azole|oxacin|floxacin|pril|sartan|statin|olol|dipine|parin|prazole|triptan|mab|nib|tinib|ciclovir|vir|navir|cept|gliptin|glitazone|barbital|azepam|zolam|caine|tidine|semide|thiazide)\b/gi;
+  function emphasize(text) {
+    var t = String(text == null ? "" : text);
+    if (!t || t.indexOf("**") !== -1) return t;
+    var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
+    var drugs = [];
+    try { if (RAG && RAG.drugsOf) drugs = Array.from(RAG.drugsOf(t)); } catch (e) { drugs = []; }
+    if (!drugs.length) { var seen = {}, m; DRUG_FALLBACK_RE.lastIndex = 0; while ((m = DRUG_FALLBACK_RE.exec(t)) !== null) { var w = m[0].toLowerCase(); if (!seen[w]) { seen[w] = 1; drugs.push(w); } } }
+    return t.split("\n").map(function (line) {
+      if (/^\s*Source:/i.test(line) || /^\s*Verify against/i.test(line)) return line;
+      var out = line.replace(DOSE_RE, "**$1**").replace(DURATION_RE, "**$1**");
+      drugs.forEach(function (d) {
+        var re = new RegExp("(^|[^\\w*])(" + d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![\\w*])", "gi");
+        out = out.replace(re, "$1**$2**");
+      });
+      return out;
+    }).join("\n");
+  }
+
   var API = {
-    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
-    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
+    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK, emphasize: emphasize,
+    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: tracked(answer), available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
-    warm: warm, isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release
+    warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
+    sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
+    vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

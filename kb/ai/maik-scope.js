@@ -53,6 +53,9 @@
     "pnea\\b", "pnoea\\b", "ptysis\\b", "phagia\\b", "rrh?ea\\b", "rrh?oea\\b", "sclerosis\\b",
     "stenosis\\b", "thrombo", "embol", "isch[ae]mi", "infarct", "necros", "sepsis", "septic",
     "edema\\b", "oedema\\b", "trophy\\b", "genic\\b", "cidal\\b", "static\\b", "lytic\\b",
+    // congenital anomaly morphology (owner report, 2026-09-05: "Portal agenesis?" fell through
+    // to "clarify" for having no matched signal - a 2-word query gets no second chance).
+    "agenesis\\b", "aplasia\\b", "hypoplasia\\b", "dysplasia\\b", "atresia\\b", "malformation",
     // drug stems
     "cillin", "mycin", "cycline", "oxacin", "penem", "cef[a-z]*", "ceph[a-z]*", "conazole",
     "[a-z]azole\\b", "pril\\b", "prils\\b", "sartan", "[a-z]olol\\b", "dipine", "statin",

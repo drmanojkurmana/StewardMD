@@ -190,6 +190,25 @@ export async function requestHealthInformation(env, deps, req) {
   const gate = revalidateForRequest(consent, req, now);
   if (!gate.ok) throw new PermissionError("consent revalidation failed: " + gate.reason);   // fail-closed: no gateway, no txn
 
+  /* TASK 7 (HIU start routes). THE REQUESTED WINDOW IS CLAMPED TO THE CONSENTED ONE.
+   *
+   * revalidateForRequest checks that NOW falls inside the granted permission.dateRange - it does not
+   * check the window the request ASKS FOR, and buildHiRequestBody sends that window to the HIP
+   * verbatim. So a caller could ask for two years of records under a consent granted for six weeks
+   * and rely on the HIP to notice. A well-behaved HIP would; the point of least privilege is not to
+   * need one. The window actually sent is the INTERSECTION of what was asked for and what was
+   * granted, and a request whose window lies entirely outside the grant is refused here rather than
+   * sent as an empty ask. An absent request window means "everything consented", which is the
+   * granted window itself - never an unbounded one. */
+  const granted = (consent.permission && consent.permission.dateRange) || {};
+  const gFrom = Date.parse(granted.from), gTo = Date.parse(granted.to);
+  const asked = (req.dateRange && typeof req.dateRange === "object") ? req.dateRange : {};
+  const aFrom = Date.parse(asked.from), aTo = Date.parse(asked.to);
+  const fromMs = Math.max(gFrom, Number.isNaN(aFrom) ? gFrom : aFrom);
+  const toMs = Math.min(gTo, Number.isNaN(aTo) ? gTo : aTo);
+  if (!(fromMs <= toMs)) throw new PermissionError("consent revalidation failed: requested-range-outside-consent");
+  const dateRange = { from: new Date(fromMs).toISOString(), to: new Date(toMs).toISOString() };
+
   // Our own correlation id for THIS data request; the txn row is keyed by it (R17).
   const requestId = globalThis.crypto.randomUUID();
 
@@ -202,7 +221,7 @@ export async function requestHealthInformation(env, deps, req) {
 
   // (3) Build + submit the hiRequest. keyMaterial carries only the PUBLIC half. Fail-closed: only a 202 persists.
   const body = buildHiRequestBody(HIREQUEST_FIELDS, {
-    requestId, now, consentId: consent.id, dateRange: req.dateRange,
+    requestId, now, consentId: consent.id, dateRange,
     dataPushUrl: env && env.CONNECT_ABDM_DATA_PUSH_URL,   // VERIFY: our on-push callback URL
     dhPublicKey: b64(publicKeyRaw), nonce: b64(ourNonce),
   });

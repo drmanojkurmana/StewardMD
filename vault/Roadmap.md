@@ -24,6 +24,22 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
 ## Modules
+- [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
+      load time over cellular for the LOD default (~12 MB of the 19.6 MB LOD set for the default systems, from R2),
+      frame rate with muscles ON, pinch/pan feel, the living-CT cut plane + slice slider.
+- [ ] **[[RadioAnatome]] living-torso images are NOT in radiological orientation** — the three
+      `ct-live-torso-*` modules display the patient's right on the image's right (liver at column 205/277
+      of the displayed coronal slab; `orient.to_display` keeps X unflipped for this RAS volume). Pins are
+      unaffected and no side is asserted, but a radiologist expects the liver on the image LEFT. Decide with
+      the owner: mirror the images + pins (re-run the pipeline) or label the convention. Found 2026-09-06
+      while registering the 3D cut planes; the Visible Human modules should be checked the same way.
+- [ ] **[[RadioAnatome 3D]] R2 upload in CI** — chunks are pushed to `stewardmd-models/atlas3d/` by hand
+      (`wrangler r2 object put`) after each pipeline run; a Pages/Actions step should diff `manifest.json` sha256s.
+- [ ] **[[RadioAnatome 3D]] sheet drag** — reuse/extract atlas.js `bindSheetDrag` so the 3D sheet resizes by swipe (today: tap the handle).
+- [ ] **[[RadioAnatome 3D]] coverage** — 7 canonical structures have no BodyParts3D counterpart
+      (cerebellar cortex/WM, corona radiata, nucleus accumbens, paranasal sinus, subarachnoid space,
+      vertebral canal). LIVER/LUNG/lobes/HEART are now real surfaces on the living-CT body (torso only);
+      the brain/head structures would need a second living subject (e.g. the OpenNeuro MRI + SynthSeg masks).
 - [ ] **[[SURGX]] clinical sign-off** — 8 authored protocols, 13 engine overlays, 5 procedures,
       3 cases and 15 evidence records are all `ai_drafted`. Flip `review.status` per item after
       review, then set `smd_surgx_draft` to 0. This is the ONLY thing between the module and use.
@@ -54,6 +70,27 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       selection (`smd_rxchoice_patient_selection`), refill savings. Also: per-brand strength is only
       recoverable from the brand NAME for most combination rows, so a `strength_mg` column on `drugs`
       would let RxChoice match combinations on the composition instead of on naming convention.
+
+## [[WardSynQ]] — blocked on people, not on code
+
+Recorded 2026-09-05 after the notification chain was completed and demonstrated on a device. These
+are NOT engineering tasks and should not be picked up as if they were.
+
+- [ ] **Resuscitation committee: approve the escalation policy** — response windows and responder
+      tiers. This is the sole remaining blocker on HAZ-DET-01. The chain is built and demonstrated on
+      hardware; the policy it carries is unapproved seed content.
+- [ ] **Clinical sign-off on every threshold pack** — MEOWS cut-offs (obstetric lead), PEWS bands
+      (paediatric lead), critical-result limits including paediatric ranges, interaction/allergy/dose
+      packs (pharmacy). ZERO of 16 hazards have sign-off today.
+- [ ] Carry a REAL patient's escalation end to end. The 2026-09-05 demonstration used `DEMO-PAT-1`.
+- [ ] A pager/SMS/phone vendor, if the ward wants a channel that reaches somebody not already at a
+      screen. Mobile push is shipped and proven; the ladder below it is not.
+
+Engineering that is deliberately NOT started:
+- [ ] **CTG / fetal monitoring** — a large separate hazard under HAZ-MAT-01. Needs clinical scoping
+      before a line is written; an unapproved implementation here would be worse than none.
+- [ ] Service worker for the WardSynQ surfaces; barcode hardware; replace the secops content digest
+      with real asymmetric signing.
 
 ## Security / ops
 - [ ] Rotate: Mac pw, admin token (done?), 2Factor, Green-API, GHIS, Resend, keystore; move+rotate the Firebase-admin JSON out of ~/Downloads

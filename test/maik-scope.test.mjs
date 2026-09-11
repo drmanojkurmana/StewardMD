@@ -134,3 +134,16 @@ test("Intent Firewall: question wrappers do not defeat the runtime lexicon", () 
   assert.equal(MaiKScope.core("side effects of linagliptin"), "linagliptin");
   assert.equal(MaiKScope.core("dengue"), "dengue");
 });
+
+test("Intent Firewall: congenital-anomaly morphology (owner report, 2026-09-05)", () => {
+  // "Portal agenesis?" on MaiK Cloud got the "Could you tell me the condition..." clarifier instead
+  // of an answer: a 2-word query only gets one chance (kb/ai/maik-scope.js core signal), and
+  // "agenesis" had no matching morphology rule. Same class as -itis/-osis, just for congenital
+  // absence/malformation instead of inflammation/disease.
+  for (const q of ["Portal agenesis?", "portal agenesis", "renal agenesis", "biliary atresia",
+                   "hip dysplasia", "thymic aplasia", "pulmonary hypoplasia", "congenital malformation"]) {
+    const c = MaiKScope.classify(q);
+    assert.equal(c.medical, true, "should be medical: " + q);
+    assert.equal(c.certain, true, "should be certain: " + q);
+  }
+});

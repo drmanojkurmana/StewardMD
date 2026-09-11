@@ -1,0 +1,39 @@
+{
+  "version": "seed-0.1.0",
+  "approvalStatus": "UNAPPROVED SEED. Not clinically validated. Requires sign-off by the Head of Laboratory Medicine and the relevant clinical directorates before it may classify a real result.",
+  "reviewBy": "2027-09-04",
+  "rationale": "The critical-result control cannot classify anything without thresholds, and thresholds are site-owned: they vary with assay, analyser, population and local policy. This file exists so the mechanism is testable and so a laboratory has something concrete to correct. Values below are widely cited adult critical-action limits, deliberately conservative, and every one needs local verification against the site's own assay and reference ranges.",
+  "notes": [
+    "Adult values only. Neonatal and paediatric critical limits differ substantially and are NOT modelled here; a paediatric result classified against these thresholds would be wrong.",
+    "Thresholds are absolute action limits, not reference ranges. A result inside the reference range is normal; a result beyond a critical limit demands action within minutes.",
+    "Delta checks, trend-based criticality and specimen-quality rejection are not modelled.",
+    "Units are stated per analyte and MUST match the incoming result; the classifier refuses to compare across units rather than converting."
+  ],
+
+  "thresholds": {
+    "2823-3": { "analyte": "Potassium", "unit": "mmol/L", "criticalLow": 2.8, "criticalHigh": 6.2 },
+    "2951-2": { "analyte": "Sodium", "unit": "mmol/L", "criticalLow": 120, "criticalHigh": 160 },
+    "2345-7": { "analyte": "Glucose", "unit": "mg/dL", "criticalLow": 45, "criticalHigh": 450 },
+    "718-7": { "analyte": "Haemoglobin", "unit": "g/dL", "criticalLow": 7.0, "criticalHigh": 20.0 },
+    "777-3": { "analyte": "Platelets", "unit": "10*9/L", "criticalLow": 20, "criticalHigh": 1000 },
+    "6301-6": { "analyte": "INR", "unit": "", "criticalLow": null, "criticalHigh": 5.0 },
+    "1975-2": { "analyte": "Bilirubin total", "unit": "mg/dL", "criticalLow": null, "criticalHigh": 15.0 },
+    "2160-0": { "analyte": "Creatinine", "unit": "mg/dL", "criticalLow": null, "criticalHigh": 6.0 },
+    "17861-6": { "analyte": "Calcium", "unit": "mg/dL", "criticalLow": 6.0, "criticalHigh": 13.0 },
+    "2524-7": { "analyte": "Lactate", "unit": "mmol/L", "criticalLow": null, "criticalHigh": 4.0 }
+  },
+
+  "qualitativeCritical": [
+    { "code": "600-7", "analyte": "Blood culture", "values": ["positive", "growth"], "note": "A positive blood culture is a critical result regardless of organism." },
+    { "code": "5821-4", "analyte": "CSF findings", "values": ["organisms seen", "positive gram stain"], "note": "Organisms in CSF demand immediate action." }
+  ],
+
+  "escalation": {
+    "note": "Tiers are elapsed minutes from the moment the loop opened, not from dispatch, because a dispatch that never happened must still escalate.",
+    "tiers": [
+      { "afterMinutes": 5, "to": "responsible-clinician", "channel": "sms", "reason": "not acknowledged within 5 minutes" },
+      { "afterMinutes": 15, "to": "covering-senior", "channel": "phone", "reason": "not acknowledged within 15 minutes" },
+      { "afterMinutes": 30, "to": "duty-consultant", "channel": "phone", "reason": "not acknowledged within 30 minutes" }
+    ]
+  }
+}

@@ -2,7 +2,11 @@
 
 *Prepared for hospital information-security teams, clinical partners, and investors evaluating StewardMD's handling of patient health data.*
 
-**Last updated:** 16 August 2026 · **Classification:** Shareable (contains no secrets, credentials, or patient data)
+**Last updated:** 31 August 2026 · **Classification:** Shareable (contains no secrets, credentials, or patient data)
+
+> **Reviewing a hospital EMR integration?** This document covers the platform as a whole. For how
+> StewardMD connects to a hospital's own system, whose credentials it uses, what it reads, and what
+> stops it writing, see **[Annex A — GHIS / GITAM EMR Integration](./GHIS-INTEGRATION-ANNEX.md)**.
 
 ---
 
@@ -136,13 +140,32 @@ Security is enforced by process, not goodwill:
 | "Can the AI make a treatment change on its own?" | No. AI output is advisory, human-confirmed, and the patient-facing follow-up engine is deterministic and can never change therapy. |
 | "Is data handled per Indian law?" | Consent, purpose limitation, right-to-erasure, minor protection, residency, and audit are built in per DPDP. |
 | "How do you know it's actually secure?" | We run continuous adversarial security reviews across all surfaces and remediate findings; security logic is test-covered and change-controlled. |
-| "What if a device is lost?" | Credentials live in the OS secure enclave, the session token is memory-only, and device backup of app data is disabled. |
+| "What if a device is lost?" | Credentials live in the OS secure enclave, the session token is memory-only, device backup of app data is disabled, and an optional App Lock (PIN, Face ID, or Touch ID) gates the app itself. |
+| "What does it do with *our* EMR?" | Each doctor authenticates with their own hospital credentials, so your audit trail stays correct; reads are scoped to what your system already shows that doctor; every write is separately gated and prescribing is hard-blocked. Full detail in [Annex A](./GHIS-INTEGRATION-ANNEX.md). |
 
 ---
 
 ## 10. Ongoing hardening
 
-Security is a program, not a milestone. Current defense-in-depth work in progress includes additional client-attestation enforcement, expanded per-request rate governance, and further tightening of the beta-feature access controls ahead of general availability. We welcome coordinated, responsible disclosure of any security concern.
+Security is a program, not a milestone. Controls added since the previous revision of this document:
+
+- **Complete session termination.** Signing out now clears all locally held state across every
+  module, not only the authentication token. This was found by our own review process and remediated
+  at the shared seam every module routes through, rather than module by module.
+- **Registration-gated clinical access.** Access to paid clinical features now requires a
+  practitioner registration that has been verified against the national medical register, and every
+  gated feature states the reason it is locked rather than failing silently.
+- **App Lock.** An optional device-level lock (PIN, Face ID, or Touch ID) in front of the application
+  itself, for shared or ward-based devices.
+- **Verifiable prescriptions.** Prescriptions carry a signed QR code that a pharmacist or patient can
+  verify independently; the public verification page discloses the minimum necessary and masks
+  patient identity to initials.
+- **Two further independent security reviews** were completed and their findings incorporated.
+
+Work continuing includes additional client-attestation enforcement, expanded per-request rate
+governance, and further tightening of beta-feature access controls ahead of general availability.
+
+We welcome coordinated, responsible disclosure of any security concern.
 
 ---
 

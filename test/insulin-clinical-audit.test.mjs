@@ -95,15 +95,37 @@ test("DKA FRIII = wt * rate/kg, capped, with potassium safety note", () => {
   assert.ok(r.clinicalNotes.join(" ").toLowerCase().includes("potassium"), "DKA must carry the K+ safety note");
 });
 
-// ---------- Context factor (bolus): lowers dose for renal/hepatic/exercise; NEVER auto-raises ----------
-test("bolus context factor: renal/hepatic/exercise reduce; pregnancy/steroids never auto-increase", () => {
+/* ---------- Context factor (bolus) ----------
+ * CHANGED 2026-08-29, documented rationale (golden-value change):
+ * This test previously asserted 0.75^3 = 0.42 for renal+hepatic+exercise, codifying a
+ * clinical error as expected behaviour. No guideline supports MULTIPLYING context
+ * reductions, and CKD + cirrhosis + ambulation is an ordinary ward combination: 0.42
+ * is a 58% dose cut nobody prescribed. The engine now takes the most restrictive SINGLE
+ * factor. Hepatic left the applied set entirely because no validated multiplier exists
+ * (the engine's own docs said so while applying 0.75 anyway) - it is advisory via
+ * contextAdjust / bolusContextAdvice instead. */
+test("bolus context factor: most restrictive single factor, NEVER the product", () => {
   assert.equal(E.bolusContextFactor({ renal: true, egfr: 30 }).factor, 0.75);
   assert.equal(E.bolusContextFactor({ renal: true, egfr: 8 }).factor, 0.5);
-  assert.equal(E.bolusContextFactor({ hepatic: true }).factor, 0.75);
   assert.equal(E.bolusContextFactor({ exercise: true }).factor, 0.75);
-  assert.equal(E.bolusContextFactor({ renal: true, egfr: 30, hepatic: true, exercise: true }).factor, 0.42); // 0.75^3
+  // hepatic is advisory only - it must not silently scale a dose
+  assert.equal(E.bolusContextFactor({ hepatic: true }).factor, 1);
+  // the regression this test exists to prevent: no compounding
+  assert.equal(E.bolusContextFactor({ renal: true, egfr: 30, hepatic: true, exercise: true }).factor, 0.75);
+  assert.equal(E.bolusContextFactor({ renal: true, dialysis: true, exercise: true }).factor, 0.5);
+  // the losing factor is still reported, so nothing is silently discarded
+  assert.equal(E.bolusContextFactor({ renal: true, dialysis: true, exercise: true }).considered.length, 1);
   assert.equal(E.bolusContextFactor({ pregnancy: true }).factor, 1);   // safety: no silent increase
   assert.equal(E.bolusContextFactor({ steroids: true }).factor, 1);    // safety: no silent increase
+});
+
+test("exercise advice explains the applied reduction, never restates it", () => {
+  const d = E.mealBolus({ carbs: 90, icr: 10, increment: 1, ctx: { exercise: true } });
+  const adv = E.bolusContextAdvice(d.rounded, { exercise: true }).find(a => a.id === "exercise");
+  // The dose is already reduced; advice must not suggest reducing the reduced number again.
+  assert.equal(d.rounded, 7);                          // 9 u -> x0.75 = 6.75 -> 7
+  assert.ok(/already applied/i.test(adv.label), "advice must say the reduction is already applied");
+  assert.ok(/do not reduce again/i.test(adv.detail), "advice must forbid a second reduction");
 });
 
 // ---------- Safety layer ----------

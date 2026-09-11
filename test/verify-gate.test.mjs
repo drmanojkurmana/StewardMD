@@ -166,3 +166,44 @@ test("a granted gate carries no reason to leak into a message", () => {
   const b = needsProBody({ ok: true, pro: true, reason: null });
   assert.equal(b.reason, "none");
 });
+
+// ── platform owners hold Pro as a team entitlement, without being "verified" ───────────────────
+// Reported 2026-09-02: the owner's account wore the Pro badge (a `pro` claim) while the Subscription
+// row said "needs a verified registration". accessState() had no notion of an owner, so
+// /billing/status answered `unverified` for the person who runs the platform.
+const TEAM = { OWNER_EMAILS: "team@example.test" };
+const ownerClaims = (extra) => ({ email: "team@example.test", ...(extra || {}) });
+
+test("an owner is Pro even with no verified claim and no paid claim", () => {
+  assert.equal(isPro(TEAM, ownerClaims(), now), true);
+  const s = entitlementState(TEAM, ownerClaims(), now);
+  assert.equal(s.pro, true);
+  assert.equal(s.source, "owner");
+  assert.equal(s.reason, undefined, "no reason to bounce on, so no verify explainer");
+});
+
+test("an owner is NOT thereby verified: the prescription pad still needs a real registration", () => {
+  const a = accessState(TEAM, ownerClaims(), now);
+  assert.equal(a.allowed, true);
+  assert.equal(a.verified, false);
+  assert.equal(entitlementState(TEAM, ownerClaims(), now).verified, false);
+});
+
+test("an owner whose free verified week has EXPIRED stays Pro", () => {
+  const c = ownerClaims(verified(30));
+  assert.equal(isPro(TEAM, c, now), true);
+  assert.equal(entitlementState(TEAM, c, now).source, "owner");
+  assert.equal(entitlementState(TEAM, c, now).verified, true, "a verified owner is still verified");
+});
+
+test("a paid owner reports the subscription, not the team entitlement", () => {
+  const c = ownerClaims({ pro: true, proExp: now + 10 * DAY, source: "subscription" });
+  assert.equal(entitlementState(TEAM, c, now).source, "subscription");
+});
+
+test("the email must come from the token and match exactly; anyone else is unchanged", () => {
+  assert.equal(isPro(TEAM, { email: "TEAM@example.test" }, now), true, "case-insensitive");
+  assert.equal(isPro(TEAM, { email: "someone@example.test" }, now), false);
+  assert.equal(isPro(TEAM, {}, now), false, "no email, no entitlement");
+  assert.equal(entitlementState(TEAM, { email: "someone@example.test" }, now).reason, "unverified");
+});

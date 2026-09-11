@@ -25,6 +25,9 @@ import { emailVerified } from "../_email.js";
 import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
 import { clearBudgetCache } from "../_aibudget.js";
 import { reconcileVerifiedClaim } from "../_verify_claim.js";
+import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName } from "../_verify_match.js";
+// Re-exported: test/verify-cert-recognition.test.mjs imports these from here.
+export { regCandidates, nmcNameOf };
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -142,21 +145,11 @@ async function geminiExtract(env, imageB64, mime, mode) {
 }
 
 // ── Live NMC cross-check ──────────────────────────────────────────────────────
-function normName(s) {
-  return String(s || "").toUpperCase()
-    .replace(/\bDR\.?\b/g, " ")
-    .replace(/\b(MR|MRS|MS|MISS|SHRI|SMT|PROF)\.?\b/g, " ")
-    .replace(/[^A-Z\s]/g, " ").replace(/\s+/g, " ").trim();
-}
-function regCore(s) { const m = String(s || "").match(/\d{2,}/g); return m ? m[m.length - 1] : ""; }
-function nameAgrees(extracted, nmcName) {
-  const a = new Set(normName(extracted).split(" ").filter(Boolean));
-  const b = new Set(normName(nmcName).split(" ").filter(Boolean));
-  if (!a.size || !b.size) return false;
-  let inter = 0; for (const t of a) if (b.has(t)) inter++;
-  return inter >= Math.max(1, Math.ceil(Math.min(a.size, b.size) * 0.6));
-}
-async function nmcLookup(regNo) {
+// The matching rules (which numbers to ask for, whether a row is this doctor) are pure and live in
+// ../_verify_match.js, where they are unit-tested. This file only does the I/O around them.
+// `body` is the searchDoctor payload: { registrationNo } or { name }. Throws when the service is
+// down (non-2xx / timeout) so the caller can tell "down" from "answered empty".
+async function nmcLookup(body) {
   // Timeout so a hung NMC doesn't stall verification — fall back to the offline DB instead.
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), 8000);
@@ -164,7 +157,7 @@ async function nmcLookup(regNo) {
     const res = await fetch(NMC_SEARCH, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
-      body: JSON.stringify({ registrationNo: regNo }),
+      body: JSON.stringify(body),
       signal: ctrl.signal,
     });
     if (!res.ok) throw new Error("nmc_http_" + res.status);
@@ -184,6 +177,58 @@ async function d1Lookup(env, core) {
     const rows = (rs && rs.results) || [];
     return rows.map((r) => ({ registrationNo: r.reg_no, firstName: r.name, smcName: r.council }));
   } catch (e) { console.warn("[verify] d1 error:", String((e && e.message) || e)); return null; }
+}
+async function d1LookupByName(env, word) {
+  const db = env.stewardmd_nmc;
+  if (!db || !word) return null;
+  try {
+    const rs = await db.prepare("SELECT reg_no, name, council FROM doctors WHERE name LIKE ? LIMIT 50").bind("%" + word + "%").all();
+    return ((rs && rs.results) || []).map((r) => ({ registrationNo: r.reg_no, firstName: r.name, smcName: r.council }));
+  } catch (e) { console.warn("[verify] d1 name error:", String((e && e.message) || e)); return null; }
+}
+
+/* Ask the register for the doctor by number. THE FIX for "1 in 10 auto-verify":
+ *  - the live register is asked for the digit CORE first ("112487"), the printed form last
+ *    ("APMC/FMR/112487/2015") - it was only ever asked the printed form, and answered empty;
+ *  - an EMPTY answer is no longer final: the offline D1 mirror is consulted whenever the live
+ *    register did not recognise the number, not only when it was down.
+ * Returns { records, source, queries, nmcDown, unavailable }. `unavailable` is true only when
+ * NOTHING could be asked (live register down AND no offline mirror bound). */
+async function registerLookup(env, effReg) {
+  const queries = nmcQueriesFor(effReg);
+  const out = { records: [], source: "nmc", queries, nmcDown: false, unavailable: false };
+  for (const q of queries) {
+    try {
+      const rows = await nmcLookup({ registrationNo: q });
+      if (rows.length) { out.records = rows; return out; }
+    } catch (e) {
+      out.nmcDown = true;
+      console.warn("[verify] NMC unreachable on", q, "→ offline D1 fallback:", String((e && e.message) || e));
+      break;
+    }
+  }
+  let d1Bound = true;
+  for (const c of regCandidates(effReg)) {
+    if (c.length < 3) continue;
+    const rows = await d1Lookup(env, c);
+    if (rows === null) { d1Bound = false; break; }
+    if (rows.length) { out.records = rows; out.source = "offline"; return out; }
+  }
+  if (out.nmcDown) { out.source = "offline"; out.unavailable = !d1Bound; }
+  return out;
+}
+/* Name-only fallback (VERIFY_NAME_ONLY_MATCH=1): the number could not be read, the name could. The
+ * decision of whether ONE row is enough lives in uniqueNameMatch(); this only fetches candidates. */
+function nameOnlyEnabled(env) { return String((env && env.VERIFY_NAME_ONLY_MATCH) || "") === "1"; }
+async function registerLookupByName(env, name) {
+  const out = { records: [], source: "nmc", queries: ["name:" + name], nmcDown: false, unavailable: false };
+  try { out.records = await nmcLookup({ name }); return out; }
+  catch (e) { out.nmcDown = true; console.warn("[verify] NMC unreachable on name → offline D1:", String((e && e.message) || e)); }
+  const word = normName(name).split(" ").filter((t) => t.length >= 3).sort((a, b) => b.length - a.length)[0] || "";
+  const rows = await d1LookupByName(env, word);
+  if (rows === null) { out.unavailable = true; out.source = "offline"; return out; }
+  out.records = rows; out.source = "offline";
+  return out;
 }
 
 // ── Resend — manual-review email ──────────────────────────────────────────────
@@ -328,6 +373,9 @@ export async function onRequest(context) {
   // Provisional access: on manual review the doctor still gets in for 7 days, but the
   // prescription generator stays locked (no verified claim) until approved.
   const PROVISIONAL_DAYS = 7;
+  // What the register was asked and what it said, kept on the record so the owner's review queue
+  // (and the next person debugging "why was this one manual?") can see it without re-running it.
+  let lookupDiag = null;
   const toManual = async (reason) => {
     console.log("[verify] uid", uid, "→ MANUAL:", reason);
     const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
@@ -350,7 +398,7 @@ export async function onRequest(context) {
       uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",
       confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
-      via: idMode ? "id" : "cert", photoKey, photoMime: mime,
+      via: idMode ? "id" : "cert", photoKey, photoMime: mime, lookup: lookupDiag,
       provisionalUntil, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
     try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
@@ -366,31 +414,34 @@ export async function onRequest(context) {
   // name read off the ID against NMC's registered name for the reg number the doctor typed.
   if (ex.looksValid === false) return toManual(idMode ? "not_an_id" : "not_a_certificate");
   if (!ex.name)  return toManual("no_name_read");
-  if (!effReg)   return toManual("no_reg_number");
 
-  const core = regCore(effReg);
-  // Live NMC is primary. If it's unreachable/slow, fall back to the offline D1 mirror so
-  // verification still works fast when NMC is down.
-  let records, source = "nmc";
-  try {
-    records = await nmcLookup(effReg);
-  } catch (e) {
-    console.warn("[verify] NMC unreachable → offline D1 fallback:", String((e && e.message) || e));
-    records = await d1Lookup(env, core);
-    source = "offline";
-    if (records === null) return toManual("nmc_unreachable");  // NMC down AND no offline DB
+  let match = null, source = "nmc";
+  if (effReg) {
+    const lk = await registerLookup(env, effReg);
+    source = lk.source;
+    lookupDiag = { queries: lk.queries, source: lk.source, records: lk.records.length, nmcDown: lk.nmcDown };
+    if (lk.unavailable) return toManual("nmc_unreachable");   // NMC down AND no offline DB
+    match = pickMatch(lk.records, effReg, ex.name, ex.council);
+    console.log("[verify] uid", uid, "source:", source, "queries:", JSON.stringify(lk.queries), "records:", lk.records.length, "match:", match ? "yes" : "NONE");
+    if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
+  } else if (!idMode && nameOnlyEnabled(env)) {
+    // No number could be read. Off by default: it is a loosening of the rule, and the owner turns
+    // it on (env VERIFY_NAME_ONLY_MATCH=1). Even then, only a register that returns exactly one
+    // agreeing row counts - see uniqueNameMatch().
+    const lk = await registerLookupByName(env, ex.name);
+    source = lk.source;
+    lookupDiag = { queries: lk.queries, source: lk.source, records: lk.records.length, nmcDown: lk.nmcDown };
+    if (!lk.unavailable) match = uniqueNameMatch(lk.records, ex.name, ex.council);
+    console.log("[verify] uid", uid, "name-only source:", source, "records:", lk.records.length, "unique match:", match ? "yes" : "NONE");
+    if (!match) return toManual("no_reg_number");
+  } else {
+    return toManual("no_reg_number");
   }
-  const match = records.find(r =>
-    (regCore(r.registrationNo) === core || String(r.registrationNo).includes(effReg)) &&
-    nameAgrees(ex.name, r.firstName)
-  );
-  console.log("[verify] uid", uid, "source:", source, "records:", records.length, "match:", match ? "yes" : "NONE");
-  if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
 
-  // AI confidence gate: auto-verify ONLY when the register matched AND Gemini read the document with
-  // ≥85% confidence. A low-confidence read (even on a register match) goes to the owner's dashboard
-  // for personal review, so a blurry/ambiguous scan is never rubber-stamped.
-  if (typeof ex.confidence === "number" && ex.confidence < 0.85) return toManual("low_confidence_review");
+  // Confidence is a sanity floor once the register has agreed on number AND name, not a second
+  // verdict. The old 0.85 gate sent ordinary phone photos (0.6-0.8) to a human who could only
+  // confirm what the register had already said. AUTO_VERIFY_MIN_CONFIDENCE in _verify_match.js.
+  if (!autoVerifyOk(ex.confidence)) return toManual("low_confidence_review");
 
   // 4. one reg no = one account (KV read-then-write; verification is rare)
   if (store) {
@@ -410,7 +461,9 @@ export async function onRequest(context) {
       uid, email, status: "verified", verified: true,
       regNo: match.registrationNo, name: match.firstName, council: match.smcName,
       dob: match.birthDateStr || "", university: match.university || "",
-      source, via: idMode ? "id" : "cert", verifiedAt: new Date().toISOString(),
+      source, via: idMode ? "id" : "cert", matchedBy: effReg ? "reg" : "name", lookup: lookupDiag,
+      confidence: (typeof ex.confidence === "number") ? ex.confidence : null,
+      verifiedAt: new Date().toISOString(),
     })); } catch (e) {}
   }
   console.log("[verify] uid", uid, "→ VERIFIED (" + source + "/" + (idMode ? "id" : "cert") + ")");

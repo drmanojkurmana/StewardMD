@@ -496,6 +496,10 @@
             (err === "model-corrupted" || err === "model-missing") ? "Voice model not on device — download it in Settings ▸ Voice models, then try again." :
             (err === "insufficient-storage" || err === "low-memory") ? "Not enough space/memory for the voice model. Free space, or use Fast mode." :
             err === "no-voice-engine" ? "No speech engine available on this device." :
+            // stt-unavailable is emitted by listen() but had no sentence of its own, so it landed on
+            // the generic fallback. Every code this file can emit now names itself: the Rx pad used
+            // to keep a SECOND copy of this mapping, and two copies drift.
+            err === "stt-unavailable" ? "Dictation isn't available on this build of the app." :
             "Couldn't capture audio — tap to try again.");
         },
         onState: onEngineState

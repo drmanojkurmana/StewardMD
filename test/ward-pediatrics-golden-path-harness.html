@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ Pediatrics/NICU: golden path harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js driven through the pediatrics/NICU golden path (bed board -> admission-type
+ * select "NICU" -> age/weight band check -> weight-based rate calculator -> respiratory-support
+ * charting -> a line placed and removed) against an in-memory stub server whose response shapes are
+ * confirmed against functions/_wardsynq/migrate-pediatrics.js and the route-level tests in
+ * test/wardsynq-pediatrics.test.mjs, which prove these same contracts persist for real. This proves
+ * the CLIENT half; it is not a live server. */
+window.__calls = [];
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-nicu01", ENC_ID = "wsq-enc-smd-h1-nicu01", MRN = "SMD-H1-NICU01", ADMIT_CLASS = null;
+var LINES = [];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null;
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: (opts && opts.method) || "GET", body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { mrn: MRN, name: "NICU Harness Patient", ageYears: 0, gender: "male" } });
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: ADMIT_CLASS ? [{ encounterId: ENC_ID, patientId: PATIENT_ID, class: ADMIT_CLASS, ward: "NICU", bed: "Cot 3", admittedAt: "2026-09-09T06:00:00.000Z" }] : [] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "NICU", bedsKnown: true, occupied: [], free: ["Cot 3", "Cot 4"], unplaced: [] }] });
+  if (u.indexOf("/ward/admit") >= 0 && (opts && opts.method) === "POST") { ADMIT_CLASS = body.class || "IPD"; return reply({ ok: true, written: 1, encounterId: ENC_ID, patientId: PATIENT_ID, version: 1 }); }
+
+  if (u.indexOf("/ward/age-band") >= 0 && (opts && opts.method) === "POST") {
+    var weightKg = body.patient && body.patient.weightKg;
+    var warn = typeof weightKg === "number" && weightKg > 6 ? { code: "WEIGHT_TOO_HIGH", message: weightKg + " kg is above the plausible range for a neonate (0.4 to 6 kg); check whether pounds were entered as kilograms" } : null;
+    return reply({ ok: true, banding: { band: "neonate", precise: true, weightWarning: warn, neonatal: { ready: false, reason: "a neonatal result needs gestational age; a 26 week preterm and a term baby share almost no reference range" } } });
+  }
+  if (u.indexOf("/ward/weight-rate") >= 0 && (opts && opts.method) === "POST") {
+    return reply({ ok: true, result: { ratePerHour: 0.24, workings: "5 mcg/kg/min x 3.2 kg x 60 = 960 mcg/h = 0.96 mg/h / 4 mg/mL", weightWarning: null } });
+  }
+  if (u.indexOf("/ward/neonatal") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, observationId: "wsq-neonatal-1" });
+
+  if (u.indexOf("/ward/line-list") >= 0) return reply({ ok: true, lines: LINES });
+  if (u.indexOf("/ward/line-remove") >= 0 && (opts && opts.method) === "POST") {
+    LINES = LINES.map(function (l) { return l.id === body.lineId ? Object.assign({}, l, { removedAt: "2026-09-09T09:00:00.000Z" }) : l; });
+    return reply({ ok: true, written: 1, lineId: body.lineId });
+  }
+  if (u.indexOf("/ward/line") >= 0 && (opts && opts.method) === "POST") {
+    var line = { id: "wsq-line-1", type: body.line.type, site: body.line.site || null, insertedAt: "2026-09-09T06:10:00.000Z", removedAt: null };
+    LINES = [line];
+    return reply({ ok: true, written: 1, lineId: line.id });
+  }
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "PEWS", score: { scorable: false, reason: "PEWS does not cover neonates." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: Object.keys((body && body.vitals) || {}).length });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: [], prn: [], unscheduled: [] });
+  if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", type: "searchset", entry: [] });
+
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

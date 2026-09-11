@@ -530,7 +530,8 @@
     }, true);
   })();
 
-  // Splash: launchAutoHide is false (see capacitor.config.json). The 35 app scripts
+  // Splash: launchAutoHide is false (see capacitor.config.json). The native launch layer is an
+  // unbranded white bridge; the animated web splash is the first visible StewardMD logo. App scripts
   // are `defer`, so the WebView does not paint the app's own boot splash until they
   // all execute — hiding the native splash before that shows a BLACK unpainted WebView.
   // The KB (~4.8MB) is now lazy-loaded AFTER first paint (see index.html), so the app's
@@ -544,6 +545,9 @@
   function hideNativeSplash() {
     if (_splashHidden) return;
     _splashHidden = true;
+    // The animated web splash becomes visible NOW: its motion and three-second total start here.
+    try { window.__smdSplashShownAt = Date.now(); } catch (e) { /* no-op */ }
+    try { var S = document.getElementById("smdBootSplash"); if (S) S.classList.add("sbs-visible"); } catch (e) { /* no-op */ }
     try {
       var P = window.Capacitor && window.Capacitor.Plugins;
       if (P && P.SplashScreen) P.SplashScreen.hide();
@@ -552,12 +556,11 @@
   // Hide the native splash on window 'load' — the only reliable signal that the WebView's
   // content is actually COMPOSITED to screen. (rAF/DOMContentLoaded fire while the WebView
   // still paints behind the native splash, so hiding then reveals an un-composited black
-  // frame.) The native splash is now a WHITE branded splash (white bg + StewardMD logo — see
-  // Splash.imageset + LaunchScreen.storyboard), so the user sees white-branded → the white
-  // #smdBootSplash (logo + progress + MaiK) → home, with no black/navy flash. The KB is
+  // frame.) The native surface is now plain white, so the only visible logo is the animated
+  // #smdBootSplash (logo + progress + MaiK), followed by home with no duplicate mark. The KB is
   // lazy-loaded after first paint, so 'load' now fires quickly. Timeout is a hard backstop.
   window.addEventListener("load", hideNativeSplash);
-  setTimeout(hideNativeSplash, 8000);
+  setTimeout(hideNativeSplash, 4000);
 
   function absolutize(u) {
     // Only rewrite root-relative API paths; leave everything else (assets, absolute URLs) as-is.

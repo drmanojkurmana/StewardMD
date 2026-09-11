@@ -21,8 +21,25 @@ jobs:
       # --experimental-test-module-mocks matches `npm test`: several suites use mock.module(), which
       # without the flag throws "mock.module is not a function" and fails the file rather than the
       # assertion. CI must run the suite the same way the repo's own script does.
+      #
+      # --experimental-sqlite is passed to match `npm test`, and A CORRECTION IS RECORDED HERE. An
+      # earlier version of this comment claimed the flag's absence had silently disarmed the
+      # disaster-recovery suites on every CI run. That was wrong: node:sqlite is unflagged on Node
+      # 22.13+ (the 23.4 change was backported), this runner resolves `node-version: '22'` to 22.23.2,
+      # and the pre-flag CI log for f49ece3e (run 34401383280) shows the restore rehearsal, the
+      # version-gap refusal, tenancy-in-SQL and the on-premise round trip all executing as `ok`. The
+      # claim was inferred from the flag being absent and the skip guard existing; the outcome was
+      # never checked. On this runner the flag is a no-op that makes the intent explicit and protects
+      # against a future pin below 22.13. It fixed nothing that was broken.
       - name: Run unit tests
-        run: node --test --experimental-test-module-mocks test/*.test.mjs
+        run: node --test --experimental-test-module-mocks --experimental-sqlite test/*.test.mjs
+
+      # A SKIPPED DR SUITE MUST NOT READ AS A PASSING ONE. wardsynq-restore / wardsynq-onprem /
+      # wardsynq-d1-sql deliberately SKIP rather than fail when node:sqlite is unavailable, so a
+      # future Node pin or flag change could stop them running with no red build to say so. This
+      # step is that forward guard - it is NOT a fix for a present failure, and it has not found one.
+      - name: Prove the DR suites actually executed
+        run: node --experimental-test-module-mocks --experimental-sqlite test/check-dr-suites-ran.mjs
 
   atlas-checks:
     runs-on: ubuntu-latest

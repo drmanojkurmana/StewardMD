@@ -40,6 +40,12 @@
   window.SMD_DEVICEID = function () { return _dev; };
   // Prime on sign-in changes + once at boot; refresh the token before it expires.
   try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { idle(refreshToken); }); } catch (e) {}
+  try {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") { idle(refreshToken); }
+    });
+  } catch (e) {}
   idle(function () { refreshToken(); refreshDevice(); });
   setInterval(function () { idle(refreshToken); }, 25 * 60 * 1000);   // < token life, so a near-expiry token is caught + refreshed before the cache goes stale
 })();
+

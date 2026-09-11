@@ -76,6 +76,27 @@ export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
   return r.filter((x) => !(x.fields && x.fields.deleted)).map((x) => M.org(withId(x.id, x.fields)));
 }
+// Orgs where `identities` (uid and/or email) hold an ACTIVE q_members row, for a doctor invited to
+// a hospital they don't own. Multiple identities can name the same org (uid AND email both enrolled,
+// or the same org via two identities) so dedupe by org id; the FIRST identity's membership wins, and
+// the caller (GET /api/queue/orgs) passes [uid, email] in that priority order.
+export async function listOrgsForMember(env, identities) {
+  const ids = Array.from(new Set((identities || []).map((x) => String(x || "").trim()).filter(Boolean)));
+  const seen = new Set(); const out = [];
+  for (const id of ids) {
+    const rows = await fsQuery(env, "q_members", { where: { field: "identity", value: id }, limit: 100 });
+    for (const row of rows) {
+      const f = row.fields || {};
+      if (f.active === false) continue;
+      const orgId = f.orgId; if (!orgId || seen.has(orgId)) continue;
+      seen.add(orgId);
+      const d = await fsGet(env, "q_orgs/" + sanitize(orgId));
+      if (!d || (d.fields && d.fields.deleted)) continue;   // dropped/missing org: no dangling membership shown
+      out.push(Object.assign({}, M.org(withId(sanitize(orgId), d.fields)), { memberRole: f.role || "viewer" }));
+    }
+  }
+  return out;
+}
 export async function deleteOrg(env, orgId, actorId) {
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
   await audit(env, orgId, actorId, "org:delete", "");
@@ -91,7 +112,8 @@ export async function updateOrg(env, orgId, patch, actorId) {
 
 // ---- departments / OPDs (optional layers) ------------------------------------------------------
 export async function createDepartment(env, orgId, body, actorId) {
-  const id = newId(); const f = M.department({ id, orgId, name: (body || {}).name, code: (body || {}).code });
+  const b = body || {};
+  const id = newId(); const f = M.department({ id, orgId, name: b.name, code: b.code, type: b.type, active: b.active });
   await fsCommit(env, [wCreate(env, "q_departments/" + id, f)]);
   await audit(env, orgId, actorId, "dept:create", f.name); return f;
 }
@@ -100,15 +122,17 @@ export async function listDepartments(env, orgId) {
   return r.map((x) => M.department(withId(x.id, x.fields)));
 }
 export async function createOpd(env, orgId, body, actorId) {
-  const id = newId(); const f = M.opd({ id, orgId, departmentId: (body || {}).departmentId, name: (body || {}).name });
+  const b = body || {};
+  const id = newId(); const f = M.opd({ id, orgId, departmentId: b.departmentId, name: b.name, active: b.active });
   await fsCommit(env, [wCreate(env, "q_opds/" + id, f)]);
   await audit(env, orgId, actorId, "opd:create", f.name); return f;
 }
 
 // ---- rooms (room != doctor: configurable assignment) -------------------------------------------
 export async function createRoom(env, orgId, body, actorId) {
+  const b = body || {};
   const id = newId();
-  const f = M.room({ id, orgId, departmentId: (body || {}).departmentId, opdId: (body || {}).opdId, name: (body || {}).name, number: (body || {}).number, assignment: (body || {}).assignment });
+  const f = M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active });
   await fsCommit(env, [wCreate(env, "q_rooms/" + id, f)]);
   await audit(env, orgId, actorId, "room:create", f.name); return f;
 }
@@ -124,6 +148,71 @@ export async function updateRoom(env, roomId, patch, actorId) {
   await audit(env, cur.orgId, actorId, "room:update", (patch && patch.assignment) ? "assignment" : ""); return f;
 }
 
+// ---- wards / beds (TASK 4.1: Enterprise -> ... -> Ward -> Bed) ----------------------------------
+export async function createWard(env, orgId, body, actorId) {
+  const b = body || {};
+  const id = newId(); const f = M.ward({ id, orgId, departmentId: b.departmentId, name: b.name, code: b.code, type: b.type, active: b.active });
+  await fsCommit(env, [wCreate(env, "q_wards/" + id, f)]);
+  await audit(env, orgId, actorId, "ward:create", f.name); return f;
+}
+export async function getWard(env, wardId) { const d = await fsGet(env, "q_wards/" + sanitize(wardId)); return d ? M.ward(withId(sanitize(wardId), d.fields)) : null; }
+export async function listWards(env, orgId) {
+  const r = await fsQuery(env, "q_wards", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
+  return r.map((x) => M.ward(withId(x.id, x.fields)));
+}
+export async function updateWard(env, wardId, patch, actorId) {
+  const cur = await getWard(env, wardId); if (!cur) return null;
+  const f = M.ward(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId }));   // orgId immutable
+  await fsCommit(env, [wUpdate(env, "q_wards/" + sanitize(wardId), f)]);
+  await audit(env, cur.orgId, actorId, "ward:update", patch && patch.active === false ? "deactivated" : ""); return f;
+}
+export async function createBed(env, orgId, body, actorId) {
+  const b = body || {};
+  const id = newId(); const f = M.bed({ id, orgId, wardId: b.wardId, name: b.name, state: b.state, genderRestriction: b.genderRestriction, isolation: b.isolation, active: b.active });
+  await fsCommit(env, [wCreate(env, "q_beds/" + id, f)]);
+  await audit(env, orgId, actorId, "bed:create", f.name); return f;
+}
+export async function getBed(env, bedId) { const d = await fsGet(env, "q_beds/" + sanitize(bedId)); return d ? M.bed(withId(sanitize(bedId), d.fields)) : null; }
+export async function listBeds(env, orgId, wardId) {
+  const r = await fsQuery(env, "q_beds", { where: { field: "orgId", value: sanitize(orgId) }, limit: 500 });
+  const beds = r.map((x) => M.bed(withId(x.id, x.fields)));
+  return wardId ? beds.filter((b) => b.wardId === sanitize(wardId)) : beds;
+}
+// Name-based lookups: ADT (migrate-inpatient.js) works with the free-text ward/bed NAMES a caller
+// types, never with a master record's own id - the same reason getOrgByCode() exists alongside
+// getOrg(). Case-insensitive, matching sameBed()'s own comparator in migrate-inpatient.js.
+export async function getWardByName(env, orgId, name) {
+  const want = String(name || "").trim().toLowerCase(); if (!want) return null;
+  const wards = await listWards(env, orgId);
+  return wards.find((w) => w.name.trim().toLowerCase() === want) || null;
+}
+export async function getBedByName(env, orgId, wardId, name) {
+  const want = String(name || "").trim().toLowerCase(); if (!want) return null;
+  const beds = await listBeds(env, orgId, wardId);
+  return beds.find((b) => b.name.trim().toLowerCase() === want) || null;
+}
+// TASK 4.3: SERVER-SIDE CONCURRENCY, NOT TRUST IN THE CLIENT. Two staff assigning/releasing/
+// blocking the same bed at once is exactly the race a read-modify-write with no version check
+// allows - the second write wins silently and the first caller's premise (the state they read) is
+// now false with nobody told. Guarded here with the SAME optimistic-concurrency primitive
+// (wUpdate's opts.updateTime, _fbfirestore.js) every single-use activation record in this codebase
+// already relies on - not a new locking system. A genuine conflict throws `bed_changed` instead of
+// silently overwriting; the caller (functions/api/queue/[[path]].js's bed/update route) turns that
+// into a 409 for the client to refetch and retry.
+export async function updateBed(env, bedId, patch, actorId) {
+  const id = sanitize(bedId);
+  const raw = await fsGet(env, "q_beds/" + id); if (!raw) return null;
+  const cur = M.bed(withId(id, raw.fields));
+  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  try {
+    await fsCommit(env, [wUpdate(env, "q_beds/" + id, f, { updateTime: raw.updateTime })]);
+  } catch (e) {
+    if (e && e.code === "precondition") throw Object.assign(new Error("bed_changed"), { code: "bed_changed" });
+    throw e;
+  }
+  await audit(env, cur.orgId, actorId, "bed:update", patch && patch.state ? "state:" + patch.state : ""); return f;
+}
+
 // ---- membership (org-based access: role + scope) -----------------------------------------------
 function memberId(orgId, identity) { return sanitize(orgId) + "__" + sanitize(identity); }
 export async function setMembership(env, orgId, identity, body, actorId) {
@@ -135,10 +224,29 @@ export async function setMembership(env, orgId, identity, body, actorId) {
    * `active` back to true. Re-enrolling someone to fix a typo must not widen what they can see. */
   const prev = (await getMembership(env, orgId, identity)) || null;
   const b = body || {};
+
+  /* ROLE FALLS BACK TO THE EXISTING ROLE, exactly as scope and active do below.
+   *
+   * It did not, and M.membership defaults a missing role to "viewer" - which holds queue.view and
+   * nothing else. So re-saving a member to change their scope, or to flip them active again, wiped
+   * a nurse to read-only. The only symptom is that check-in starts answering 403 forbidden, with
+   * nothing on screen connecting that to an edit nobody thought was about roles.
+   *
+   * A member created with no role at all cannot do the one job the staff console exists for, so
+   * that is refused rather than quietly written as a viewer. Never defaulted UPWARDS - guessing
+   * "nurse" would hand out queue control nobody granted. */
+  const role = String(b.role || (prev && prev.role) || "").trim();
+  if (!role) return { ok: false, error: "role_required", message: "Choose a role for this person - a member with no role can only watch the queue." };
+
   const f = M.membership({
     id, orgId, identity,
-    role: b.role,
+    role: role,
     scope: b.scope !== undefined ? b.scope : (prev && prev.scope),
+    /* Falls back to the stored value for the same reason role and scope do: an edit that was about
+     * something else must never silently strip a doctor's registration and leave them unable to
+     * sign. Sending an explicit empty string DOES clear it, which is how a hospital withdraws the
+     * assertion. */
+    regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
@@ -152,7 +260,7 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
 export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });

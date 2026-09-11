@@ -104,9 +104,21 @@
   // Effective engine — never route to a local engine that cannot answer. A stale "local" pref
   // (model deleted, code expired, web build with no plugin) silently behaves as KB-only rather
   // than dead-ending, because KB-only is the honest subset of what the user asked for.
+  // Offline stand-in (owner decision, 2026-09-03): a clinician on MaiK Cloud with no network gets
+  // the installed on-device model instead of a failed cloud call. The cloud PREFERENCE is untouched,
+  // so the next question with the network back goes to the cloud again. Flag smd_maik_offline_local:
+  // "0" turns it off. Only fires when the local engine can actually answer (gate, runtime, pack).
+  function offlineStandIn() {
+    if (lget("smd_maik_offline_local") === "0") return false;
+    try {
+      var nav = (typeof window !== "undefined" && window.navigator) || (typeof navigator !== "undefined" ? navigator : null);
+      return !!nav && nav.onLine === false;
+    } catch (e) { return false; }
+  }
   function effective() {
     var p = getPref();
     if (p === "local" && !localReady()) return "rag";
+    if (p === "cloud" && offlineStandIn() && localReady()) return "local";
     return p;
   }
 
@@ -158,6 +170,34 @@
   // typewriter exactly as the cloud path does.
   function route(kind, orig, self, args) {
     var e = effective();
+    // Structured calls with an on-device version (owner, 2026-09-04): the CliniX viva judge and the
+    // OPD "Ask MaiK Pro" differential (extract kind "opd-suggest"). They go local ONLY when the
+    // effective engine is local; every other extract kind (voice, translate, MaiK Ask) has no local
+    // implementation and keeps today's cloud behaviour regardless of engine. KB-only mode has no
+    // model to judge or suggest with, so it also stays on the cloud path here rather than dead-ending.
+    // Web research (owner, 2026-09-04): "we can't charge them for snippet conversion into clean
+    // language" for anything but MaiK Cloud. The search itself (TinyFish) is free either way; on the
+    // local engine, fetch the raw sources via SMD_AI.researchSnippets (no Gemini call, no quota) and
+    // have the ON-DEVICE model write the answer instead. Evidence Review (mode "evidence-review") is
+    // a distinct paid PubMed-synthesis feature, untouched, always cloud.
+    if (kind === "research") {
+      var mode = args[1];
+      var Lw = window.SMD_MAIK_LOCAL, Aw = window.SMD_AI;
+      var wantLocalWeb = e === "local" && mode !== "evidence-review" && !!Lw && !!Lw.webAnswer &&
+        !!Aw && typeof Aw.researchSnippets === "function";
+      if (!wantLocalWeb) return orig.apply(self, args);
+      return Aw.researchSnippets(args[0], args[2]).then(function (snip) {
+        if (!snip || snip.error) return { error: (snip && snip.error) || "no-results" };
+        return Lw.webAnswer(args[0], snip.sources || []);
+      }).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
+    if (kind === "vivaJudge" || kind === "extract") {
+      var Lc = window.SMD_MAIK_LOCAL;
+      var wantLocal = e === "local" && !!Lc && (kind === "vivaJudge" ? !!Lc.vivaJudge : (args[1] === "opd-suggest" && !!Lc.opdSuggest));
+      if (!wantLocal) return orig.apply(self, args);
+      var pl = kind === "vivaJudge" ? Lc.vivaJudge(args[0], args[1], args[2]) : Lc.opdSuggest(args[0]);
+      return Promise.resolve(pl).catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
+    }
     if (e === "cloud") return orig.apply(self, args);
     if (e === "rag") {
       // refine() is a paid Gemini round-trip whose callers all treat null as "no refinement".
@@ -205,7 +245,7 @@
     if (_installed) return false;
     var A = window.SMD_AI;
     if (!A || typeof A.explainGrounded !== "function") return false;
-    ["explain", "explainGrounded", "explainGroundedStream", "refine"].forEach(function (name) {
+    ["explain", "explainGrounded", "explainGroundedStream", "refine", "vivaJudge", "extract", "research"].forEach(function (name) {
       var orig = A[name];
       if (typeof orig !== "function") return;
       A[name] = function () { return route(name, orig, A, arguments); };
@@ -213,8 +253,9 @@
     // route() is an alias for refine() in reasoning.js; re-point it at the wrapped refine.
     if (typeof A.route === "function") A.route = function (q) { return A.refine(q); };
     _installed = true;
-    // Deferred so it never competes with first paint.
-    try { if (typeof setTimeout === "function") setTimeout(warmIfLocal, 2500); } catch (e) {}
+    // No warm-up at app start any more (owner, 2026-09-04): a resident 1 to 4 GB model the doctor may
+    // never use this session heats the phone and starves other modules. home.js openAskAi() warms
+    // when the MaiK sheet opens, and maik-local.js releases it after idle/close.
     return true;
   }
 
@@ -474,9 +515,9 @@
       '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these options with each other, nothing else.</div>' +
       rows +
       '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);border-top:1px solid var(--line,#e2e8f0);padding-top:10px;margin-top:2px">' +
-        "Start with MAiK MxCore: fastest, lightest, and enough for most questions. Neural for stronger " +
-        "medical detail, Horizon for broader general knowledge, Apex on a flagship phone when you want " +
-        "the best answer and can wait a little longer." +
+        "Start with MAiK Lite: StewardMD's own model, the smallest download and the fastest answers. " +
+        "MxCore and Neural for deeper medical detail, Horizon for broader general knowledge, Apex on a " +
+        "flagship phone when you want the best answer and can wait a little longer." +
       "</div>" +
     "</div>";
   }
@@ -636,9 +677,9 @@
              : have ? "On this device, works offline"
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
-          // FLAGSHIP badge instead of OFFLINE for the heaviest tier, so the hardware requirement is
-          // visible in the picker row itself and not only in the guide.
-          badge: M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
+          // STEWARDMD badge for our own model, FLAGSHIP instead of OFFLINE for the heaviest tier
+          // (so the hardware requirement is visible in the picker row itself, not only in the guide).
+          badge: M.PACKS[pid].own ? "STEWARDMD" : M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
           flagship: !!M.PACKS[pid].flagship,
           warn: M.DEVICE_WARNING || "",
           pack: pid, needsDownload: !have && !st.downloading,

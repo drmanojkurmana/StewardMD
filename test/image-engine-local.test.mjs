@@ -14,9 +14,10 @@ const SRC = readFileSync(new URL("../image-engine.js", import.meta.url), "utf8")
 const SERVER = readFileSync(new URL("../functions/api/ai/[[path]].js", import.meta.url), "utf8");
 
 /** Load image-engine.js with a stubbed on-device model that returns `reply`. */
-function load(reply, { visionReady = true } = {}) {
+function load(reply, { visionReady = true, onLine = true } = {}) {
   const calls = [];
   const win = {
+    navigator: { onLine },
     SMD_MAIK_LOCAL: {
       answer: async (pkg, opts) => { calls.push({ pkg, opts }); return typeof reply === "function" ? reply(pkg, opts) : reply; },
       visionReady: () => visionReady,
@@ -34,9 +35,28 @@ function load(reply, { visionReady = true } = {}) {
     addEventListener() {}, Capacitor: { isNativePlatform: () => true, Plugins: {} }
   };
   win.window = win;
-  new Function("window", "document", "localStorage", SRC)(win, win.document, win.localStorage);
+  new Function("window", "document", "localStorage", "navigator", SRC)(win, win.document, win.localStorage, win.navigator);
   return { E: win.SMD_IMAGE_ENGINE, calls };
 }
+
+// ── the on-device model as the OFFLINE ALTERNATIVE to AI Vision (owner, 2026-09-04) ──
+test("offline with a projector installed, the on-device model is the recommended engine", () => {
+  const { E } = load({ text: "{}" }, { onLine: false });
+  assert.equal(E.recommendFor("monitor"), "local");
+});
+
+test("offline without a projector, plain OCR stays the recommendation", () => {
+  const { E } = load({ text: "{}" }, { onLine: false, visionReady: false });
+  assert.equal(E.recommendFor("monitor"), "device");
+});
+
+test("a scan that asked for AI Vision while offline is read by the on-device model instead of failing", async () => {
+  const { E, calls } = load({ text: '{"hr":88,"spo2":95}' }, { onLine: false });
+  const r = await E.process({ image: "/tmp/m.jpg", kind: "monitor", engineOverride: "ai" });
+  assert.equal(r.engine, "local");
+  assert.equal(r.fields.hr, 88);
+  assert.equal(calls.length, 1, "the on-device model was asked exactly once");
+});
 
 test("ICU kinds get PARSED FIELDS, so autofill works", async () => {
   const { E, calls } = load({ text: '```json\n{"vitals":{"hr":96,"spo2":91},"abg":{"ph":7.28,"paco2":52}}\n```' });

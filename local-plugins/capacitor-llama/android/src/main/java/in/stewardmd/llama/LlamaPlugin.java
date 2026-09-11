@@ -292,6 +292,7 @@ public class LlamaPlugin extends Plugin {
         final float temp = call.getFloat("temperature", 0.0f);   // greedy by default: reproducible answers
         final int seed = call.getInt("seed", 0);
         final boolean stream = call.getBoolean("stream", true);
+        final boolean prefillEmptyThink = call.getBoolean("prefillEmptyThink", false);
 
         worker.execute(() -> {
             long t0 = System.currentTimeMillis();
@@ -300,7 +301,7 @@ public class LlamaPlugin extends Plugin {
                 LlamaNative.TokenSink sink = stream
                     ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
                     : null;
-                String text = engine.generate(system, user, nPredict, temp, seed, sink);
+                String text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink);
                 long ms = System.currentTimeMillis() - t0;
                 call.resolve(new JSObject().put("text", text).put("ms", ms)
                     .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens()));

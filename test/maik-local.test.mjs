@@ -6,7 +6,9 @@
  *      "aababcabcd..." on screen. reasoning.js replay() calls onDelta(full.slice(0, i)).
  */
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 
+const require = createRequire(import.meta.url);
 let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) pass++; else { fail++; console.log("  ✗ FAIL:", n); } };
 const src = (f) => readFileSync(new URL("../" + f, import.meta.url), "utf8");
@@ -168,7 +170,7 @@ const { L } = load();
   ok("package retrieved cleared", pkg2.retrieved.length === 0);
   ok("package sources cleared", pkg2.sources.length === 0);
   ok("package treatment removed", pkg2.treatment === undefined);
-  ok("result names the MAiK tier, not the upstream model", r.model === "MAiK MxCore");
+  ok("result names the MAiK tier, not the upstream model", r.model === "MAiK Lite");
 }
 
 // ── streaming contract: onDelta gets ACCUMULATED text ──
@@ -178,7 +180,7 @@ const { L } = load();
   const r = await L2.answer({ question: "hi" }, null, (t) => seen.push(t));
   ok("answer resolves with the full text", r.text === "Hello world");
   ok("answer is tagged engine=local", r.engine === "local");
-  ok("answer reports the MAiK tier label", r.model === "MAiK MxCore");
+  ok("answer reports the MAiK tier label", r.model === "MAiK Lite");
   ok("answer reports timing", r.ms === 1234);
   ok("onDelta called once per token", seen.length === 3);
   // Right-trimmed, because every delta goes through stripReasoning() on the way to the typewriter -
@@ -244,26 +246,28 @@ const { L } = load();
 /* ── Thinking-mode suppression (MAiK Apex / Qwen3 base) ─────────────────────────────────────────
  * A reasoning-capable base emits <think> blocks by default. At nPredict 768 a long trace can consume
  * the whole budget, leaving a truncated thought and NO answer - and stripReasoning() then correctly
- * returns "", which on screen reads as the app being broken. "/no_think" is the family's own switch.
- * Driven off the pack registry, never hardcoded to a model name.
+ * returns "", which on screen reads as the app being broken. Driven off the pack registry, never
+ * hardcoded to a model name.
+ *
+ * REGRESSION (2026-09-03, found live): buildPrompt() used to ALSO push "<think>\n\n</think>" into
+ * the QUESTION text, on the theory that the engine sends a raw completion with no chat template. It
+ * does not - LlamaEngine.swift/.java apply the model's own template, which wraps this whole string
+ * inside the USER turn. The "closed" block landed as noise inside the doctor's question while the
+ * real assistant turn still opened blank, fixing nothing. buildPrompt now ONLY sends the cheap
+ * "/no_think" hint; the actual fix is prefillEmptyThink on the options object passed to
+ * L.generate(), which only the native side can apply at the true assistant-turn boundary.
  */
 {
   const { L } = load();
   const q = { question: "empiric antibiotic for pyogenic liver abscess" };
 
-  /* Both switches, because only one of them can work and buildPrompt cannot know which: /no_think is
-     read by the Qwen3 CHAT TEMPLATE, but this engine sends a RAW prompt, so it can be ignored as
-     plain text. The closed empty <think></think> needs no template and makes the model resume as if
-     reasoning already happened. Registry-driven, so it covers Apex AND Lite. */
   {
     const p = L.buildPrompt(q, "maik-apex");
-    ok("a pack with noThink still gets Qwen3's own switch", /\/no_think/.test(p));
-    ok("...and an empty thinking block, which works without a chat template", /<think>\s*<\/think>\s*$/.test(p));
-    ok("the block is CLOSED - an unterminated one would make stripReasoning() bin the answer",
-       (p.match(/<think>/g) || []).length === (p.match(/<\/think>/g) || []).length);
-    ok("the question still precedes both switches", p.indexOf("liver abscess") < p.indexOf("/no_think"));
+    ok("a pack with noThink gets Qwen3's own switch", /\/no_think/.test(p));
+    ok("buildPrompt does NOT inject a think tag into the question text", !/<think>/.test(p));
+    ok("the question still precedes the switch", p.indexOf("liver abscess") < p.indexOf("/no_think"));
     // Same treatment for the 1.7B entry tier - this is the pack the slowdown was reported on.
-    ok("MAiK Lite gets it too", /<think>\s*<\/think>\s*$/.test(L.buildPrompt(q, "maik-lite")));
+    ok("MAiK Lite gets the switch too", /\/no_think/.test(L.buildPrompt(q, "maik-lite")));
   }
   ok("a pack without noThink does NOT", !/no_think/.test(L.buildPrompt(q, "maik-mxcore")));
   ok("no pack id given behaves as before", !/no_think/.test(L.buildPrompt(q)));
@@ -281,6 +285,19 @@ const { L } = load();
   // stripReasoning is the backstop if the switch is ignored.
   ok("a leaked qwen-style think block is still stripped",
      L.stripReasoning("<think>weighing options</think>Pip-tazo 3.375 g IV q8h") === "Pip-tazo 3.375 g IV q8h");
+}
+
+// ── prefillEmptyThink: the ACTUAL fix reaches the native call, buildPrompt's tag injection does not ──
+{
+  const { L: L2, calls } = load();
+  await L2.answer({ question: "Treatment of Pneumonia" }, { pack: "maik-lite" }, null);
+  ok("noThink pack sets prefillEmptyThink on the native call", calls.generate[0].prefillEmptyThink === true);
+  ok("the prompt sent to native carries no think tag (that landed in the user turn, uselessly)",
+     !/<think>/.test(calls.generate[0].prompt));
+
+  calls.generate.length = 0;
+  await L2.answer({ question: "Treatment of Pneumonia" }, { pack: "maik-mxcore" }, null);
+  ok("a pack without noThink does not set prefillEmptyThink", !calls.generate[0].prefillEmptyThink);
 }
 
 
@@ -406,7 +423,7 @@ if (fail) process.exit(1);
   ok("prompt asks for the final answer only", /never your reasoning/.test(L.SYSTEM));
   ok("prompt enforces medical-only scope", /Answer medical questions only/.test(L.SYSTEM));
   ok("no section labels are requested", /Bottom Line/.test(L.SYSTEM) && /no section labels/.test(L.SYSTEM));
-  ok("default pack matches the real registry after the MAiK rebrand", L.DEFAULT_PACK === "maik-mxcore");
+  ok("default pack matches the real registry after the MAiK rebrand", L.DEFAULT_PACK === "maik-lite");
 
   /* 4. MEMORY PRE-FLIGHT. A 2.5 GB model on a phone with nothing free does not fail cleanly: it
    *    load/evict cycles (Android) or gets jetsam-killed (iOS), both of which present to the
@@ -450,5 +467,330 @@ if (fail) process.exit(1);
                   !r.error && /Hello world/.test(r.text)));
 }
 
+
+// ── on-device RAG wiring: retrieval -> prompt -> evidence gate -> fallback or citation ──
+// The Book/BM25/evidenceGate LOGIC is verified against the real book in test/maik-lite-rag.test.mjs;
+// this tests only the WIRING in answer() - that a gate failure replaces the text with the real
+// passage rather than surfacing the model's unsupported claim, and a gate pass appends a source line.
+function loadWithRag({ tokens, kbLoadFails = false } = {}) {
+  const calls = { generate: [], searched: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }),
+    load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }),
+    addListener: () => ({ remove: () => {} })
+  };
+  const passage = { heading: "Pneumonia > Treatment", page: "p.1769", text: "For penicillin allergy, use doxycycline monotherapy or a respiratory fluoroquinolone.", chunk: 17689 };
+  const fakeBook = {
+    search: (q) => { calls.searched.push(q); return [[12.5, 0]]; },
+    cite: () => passage
+  };
+  const RAG = {
+    TOPK: 3, MIN_SCORE: 6.0,
+    evidenceGate: (answer, evidence) => {
+      const bad = /amoxicillin/i.test(answer) && !/amoxicillin/i.test(evidence);
+      return { ok: !bad, nums: [], drugs: bad ? ["amoxicillin"] : [] };
+    }
+  };
+  const KB = { loadBook: () => kbLoadFails ? Promise.reject(new Error("no kb")) : Promise.resolve(fakeBook) };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: KB,
+    SMD_MAIK_MODELS: { PACKS: {
+      "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true },
+      "maik-mxcore": { label: "MAiK MxCore", nCtx: 4096, nPredict: 512 }
+    }, pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+
+{
+  const { L, calls } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline monotherapy."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("retrieval ran for maik-lite", calls.searched.length === 1);
+  ok("evidence was prepended to the prompt sent to the model", /Reference material/.test(calls.generate[0].prompt));
+  ok("gate-passing answer is marked grounded", r.grounded === true);
+  ok("gate-passing answer gets a plain source line", /Source: StewardMD Knowledge Base - based on standard medical resources/.test(r.text));
+  ok("the source line NEVER carries a page number, on owner order", !/p\.\d/.test(r.text));
+}
+
+// ── REGRESSION (owner screenshot, 2026-09-04): a greeting must never carry a KB source line ──
+// The fake book always returns a hit for any query, reproducing the live bug exactly: "Hi" scored
+// above MIN_SCORE, so grounding ran, the gate passed (nothing to contradict), and the greeting's
+// answer was stamped "Source: StewardMD Knowledge Base..." - a citation for a hello.
+{
+  const { L, calls } = loadWithRag({ tokens: ["Hi, I'm MaiK. How can I help with a clinical question today?"] });
+  const r = await L.answer({ question: "Hi" }, { pack: "maik-lite" }, null);
+  ok("a greeting never triggers retrieval", calls.searched.length === 0);
+  ok("a greeting is never marked grounded", r.grounded === false);
+  ok("a greeting NEVER carries the Knowledge Base source line", !/Source: StewardMD Knowledge Base/.test(r.text));
+  ok("a greeting still gets the greeting system prompt", /nothing clinical/i.test(calls.generate[0].system));
+}
+
+{
+  const { L } = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline plus amoxicillin-clavulanate."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a gate FAILURE does not surface the model's unsupported claim",
+     !/amoxicillin/i.test(r.text));
+  ok("a gate failure shows the real retrieved passage instead",
+     /doxycycline monotherapy or a respiratory fluoroquinolone/.test(r.text));
+}
+
+{
+  const { L, calls } = loadWithRag({ tokens: ["General reasoning answer."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-mxcore" }, null);
+  ok("a non-maik-lite pack never triggers retrieval", calls.searched.length === 0);
+  ok("its answer passes through unchanged", r.text === "General reasoning answer.");
+}
+
+{
+  // KB unavailable/failing must degrade to today's ungrounded behaviour, never break the answer.
+  const { L } = loadWithRag({ tokens: ["Answer without grounding."], kbLoadFails: true });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a KB load failure degrades gracefully rather than erroring the answer", !r.error && r.text === "Answer without grounding.");
+  ok("and is correctly marked ungrounded", r.grounded === false);
+}
+
+// ── no-coverage fallback (owner, 2026-09-04, from a live screenshot): "not addressed in the
+// provided reference material" is a retrieval verdict, not an answer. Re-ask once ungrounded. ──
+{
+  const { L, calls } = loadWithRag({ tokens: ["Splenomegaly with fever is not addressed in the provided reference material. The evidence covers diverticular disease."] });
+  const r = await L.answer({ question: "Spleenomegaly with Fever DD and RX" }, { pack: "maik-lite" }, null);
+  ok("the model was asked twice", calls.generate.length === 2);
+  ok("the first pass carried the reference material", /Reference material/.test(calls.generate[0].prompt));
+  ok("the second pass carried NO reference material (own weights)", !/Reference material/.test(calls.generate[1].prompt));
+  ok("the result is marked ungrounded and carries no source line", r.grounded === false && !/Source: StewardMD/.test(r.text));
+  const ok1 = loadWithRag({ tokens: ["For penicillin allergy, use doxycycline monotherapy."] });
+  await ok1.L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
+  ok("a covered answer is not re-asked", ok1.calls.generate.length === 1);
+}
+
+// ── idle unload (owner, 2026-09-04): the model must not stay resident once its work is done ──
+{
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const { L, calls } = load();
+  L.setIdleMs(40, 40);
+  await L.answer({ question: "q1" }, { pack: "maik-apex" }, null);
+  const n1 = calls.load.length;
+  await sleep(120);
+  await L.answer({ question: "q2" }, { pack: "maik-apex" }, null);
+  ok("after the idle window the model was released, so the next question reloads it", calls.load.length === n1 + 1);
+  L.sheetOpened();
+  await L.answer({ question: "q3" }, { pack: "maik-apex" }, null);
+  L.sheetOpened();
+  await sleep(120);
+  await L.answer({ question: "q4" }, { pack: "maik-apex" }, null);
+  ok("an open sheet cancels the pending release: no reload", calls.load.length === n1 + 1);
+  L.sheetClosed();
+  await sleep(120);
+  await L.answer({ question: "q5" }, { pack: "maik-apex" }, null);
+  ok("closing the sheet releases after the grace, so the next question reloads", calls.load.length === n1 + 2);
+}
+
+// ── structured on-device calls (owner, 2026-09-04): viva judge and OPD differential ───────────────
+{
+  const j = load({ tokens: ['Sure! ```json\n{"verdict":"partial","feedback":"Right idea, but you missed the key point."}\n```'] });
+  const v = await j.L.vivaJudge("What is the first step?", "airway, breathing", "check breathing", { pack: "maik-apex" });
+  ok("viva judge parses JSON out of fences and prose", v.verdict === "partial" && /missed/.test(v.feedback) && v.engine === "local");
+  ok("viva judge ran with the examiner prompt as the system prompt, not the MaiK one", /viva examiner/.test(j.calls.generate[0].system));
+  ok("viva judge sends the question, key points and answer", /QUESTION: What is the first step\?[\s\S]*KEY POINTS: airway[\s\S]*STUDENT'S ANSWER: check breathing/.test(j.calls.generate[0].prompt));
+  const bad = load({ tokens: ["I think the student did well overall."] });
+  const vb = await bad.L.vivaJudge("Q", "", "A", { pack: "maik-apex" });
+  ok("an unparseable judgement is an honest parse error, never an invented verdict", vb.error === "parse");
+  ok("...after exactly one blunter retry", bad.calls.generate.length === 2 && /ONLY the JSON object now/.test(bad.calls.generate[1].prompt) && bad.calls.generate[1].temperature === 0.3);
+  ok("a parseable first reply is not retried", j.calls.generate.length === 1);
+  const prose = load({ tokens: ["The student's answer is incorrect because it omits intramuscular adrenaline. The correct approach is IM adrenaline first."] });
+  const vp = await prose.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" });
+  ok("a verdict the model states plainly in prose is accepted, with that sentence as feedback", vp.verdict === "incorrect" && /omits intramuscular adrenaline/.test(vp.feedback) && !/The correct approach/.test(vp.feedback));
+  const two = load({ tokens: ["The answer is partially correct but the dose is incorrect."] });
+  ok("two different verdict words in one sentence is ambiguous: parse error, nothing inferred", (await two.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" })).error === "parse");
+  const neg = load({ tokens: ["This is not entirely correct, adrenaline is missing."] });
+  ok("a negated 'correct' is never read as correct", (await neg.L.vivaJudge("Q", "K", "A", { pack: "maik-apex" })).error === "parse");
+  ok("empty input is refused before any generation", (await bad.L.vivaJudge("", "", "A")).error === "no-input");
+
+  const opdJson = JSON.stringify({ provisionalDx: "Acute  pyelonephritis", ddx: [{ dx: "Pyelonephritis", why: "fever, flank pain" }, "Renal colic", { name: "PID", reason: "lower abdominal pain" }, {}, { dx: "x1" }, { dx: "x2" }, { dx: "x3" }, { dx: "x4" }],
+    investigations: ["Urine R/M", "Urine culture", 42], treatment: ["Ceftriaxone 1 g IV once daily"], redFlags: ["Sepsis"], evil: { nested: true } });
+  const o = load({ tokens: [opdJson] });
+  const r = await o.L.opdSuggest("Fever 3 days, flank pain, dysuria", { pack: "maik-apex" });
+  ok("OPD differential keeps the server's shape", r.kind === "opd-suggest" && r.engine === "local" && r.provisionalDx === "Acute pyelonephritis");
+  ok("ddx is whitelisted: strings and name/reason accepted, empties dropped, capped at 6", r.ddx.length === 6 && r.ddx[1].dx === "Renal colic" && r.ddx[2].dx === "PID" && r.ddx[2].why === "lower abdominal pain");
+  ok("lists are plain bounded strings and unknown fields never pass through", r.investigations.length === 3 && typeof r.investigations[2] === "string" && !("evil" in r));
+  ok("the OPD prompt is the system prompt and the assessment is the user turn", /OPD decision support/.test(o.calls.generate[0].system) && /=== ASSESSMENT ===\nFever 3 days/.test(o.calls.generate[0].prompt));
+  ok("empty assessment is refused", (await o.L.opdSuggest("   ")).error === "no-text");
+}
+
+// ── web research on device (owner, 2026-09-04): "we can't charge them for snippet conversion into
+// clean language" for the local/offline engine, so the on-device model writes the answer from
+// TinyFish's raw sources instead of Gemini. Uses the REAL kb/ai/maik-lite-rag.js evidenceGate (not
+// loadWithRag's book-specific "amoxicillin only" stub), because a web answer's evidence is arbitrary
+// search-snippet text, not the book, and the gate must genuinely catch an unsupported drug in it. ──
+function loadForWeb({ tokens }) {
+  const calls = { generate: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }),
+    load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }),
+    addListener: () => ({ remove: () => {} })
+  };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: require("../kb/ai/maik-lite-rag.js"),
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
+      pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+{
+  const sources = [
+    { title: "CDC pneumonia treatment guidance", url: "https://cdc.gov/pna", site: "CDC", snippet: "Amoxicillin 500 mg three times daily for outpatient CAP." },
+    { title: "Up-to-date pneumonia review", url: "https://example.org/pna", site: "Example", snippet: "Doxycycline is an alternative for penicillin-allergic patients." }
+  ];
+  const w = loadForWeb({ tokens: ["For outpatient CAP, amoxicillin 500 mg three times daily is first-line [1]; doxycycline is the alternative for penicillin allergy [2]."] });
+  const r = await w.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("web research ran with the web-research prompt as the system prompt", /knowledgeable clinical AI/.test(w.calls.generate[0].system));
+  ok("the prompt carries the numbered web results, not the book-RAG wrapper", /\[1\] CDC pneumonia treatment guidance/.test(w.calls.generate[0].prompt) && !/Reference material from the StewardMD Knowledge Base/.test(w.calls.generate[0].prompt));
+  ok("a gate-passing answer is returned as-is, engine local, with the source list", r.engine === "local" && r.mode === "web-local" && r.sources.length === 2 && r.sources[0].url === sources[0].url);
+  ok("no book source line is ever appended to a web answer", !/Source: StewardMD Knowledge Base/.test(r.text));
+
+  const bad = loadForWeb({ tokens: ["Use azithromycin 250 mg once daily instead."] });
+  const rb = await bad.L.webAnswer("Treatment of community acquired pneumonia", sources, { pack: "maik-lite" });
+  ok("a drug not in the web results is caught by the SAME evidence gate the book RAG uses", /could not be verified against the web results/.test(rb.text) && /CDC pneumonia treatment guidance/.test(rb.text));
+
+  ok("no question is refused before any generation", (await w.L.webAnswer("", sources)).error === "no-question");
+  ok("no sources is an honest no-results, never a hallucinated web answer", (await w.L.webAnswer("Treatment of CAP", [])).error === "no-results");
+}
+
+// ── readable emphasis (owner, 2026-09-04): bold drug names, doses and durations when the model
+// emitted plain text; leave the model's own markdown, and the Source line, alone ──
+{
+  const { L: LE } = load();
+  const e1 = LE.emphasize("Give amoxicillin 500 mg three times daily for 7 days. Alternative: doxycycline 100 mg once daily for 7 to 14 days.\nSource: StewardMD Knowledge Base - based on standard medical resources.");
+  ok("drug names are bolded (drug-suffix regex)", /\*\*amoxicillin\*\*/.test(e1) && /\*\*doxycycline\*\*/.test(e1));
+  ok("doses are bolded", /\*\*500 mg\*\*/.test(e1) && /\*\*100 mg\*\*/.test(e1));
+  ok("durations and ranges are bolded", /\*\*7 days\*\*/.test(e1) && /\*\*7 to 14 days\*\*/.test(e1));
+  ok("the Source line is never touched", /\nSource: StewardMD Knowledge Base - based on standard medical resources\.$/.test(e1) && !/\*\*Source/.test(e1));
+  ok("nothing is double-wrapped", !/\*\*\*\*/.test(e1) && !/\*\*\*\*/.test(e1));
+  const already = "Use **amoxicillin 500 mg** for 7 days.";
+  ok("a model that already formatted is left exactly as it wrote", LE.emphasize(already) === already);
+  ok("empty and null are safe", LE.emphasize("") === "" && LE.emphasize(null) === "");
+  const gr = "Hi, I'm MaiK. How can I help with a clinical question today?";
+  ok("a greeting with no drug/dose/duration is unchanged", LE.emphasize(gr) === gr);
+  ok("the renderer contract holds: ** pairs are balanced", ((e1.match(/\*\*/g) || []).length % 2) === 0);
+  // Through answer(): a plain-text model reply comes back with emphasis markers the renderer turns into <b>.
+  const w = load({ tokens: ["For otitis media give amoxicillin 90 mg/kg per day for 10 days."] });
+  const r = await w.L.answer({ question: "Treatment of otitis media?" }, { pack: "maik-apex" }, null);
+  ok("answer() emphasizes an unformatted on-device reply", /\*\*amoxicillin\*\*/.test(r.text) && /\*\*90 mg\/kg\*\*/.test(r.text) && /\*\*10 days\*\*/.test(r.text));
+}
+
+// ── retrieval drift guard (owner battery, 2026-09-04) ──
+// Real BM25 (kb/ai/maik-lite-rag.js) over three synthetic chunks that reproduce the two live
+// failures: a DEFINITIONS chapter out-ranking treatment for a UTI ask, and a hepatitis-in-pregnancy
+// passage answering a UTI pregnancy follow-up (lamivudine). Anchors must exclude both.
+function loadRealRag({ tokens, rows }) {
+  const calls = { generate: [] };
+  const Llama = {
+    available: async () => ({ available: true, loaded: true }), load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: tokens.join(""), ms: 500 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }), addListener: () => ({ remove: () => {} })
+  };
+  const RAGm = require("../kb/ai/maik-lite-rag.js");
+  // A three-chunk corpus cannot clear the production score floor (tuned for 42,176 chunks); the
+  // floor is not what these tests are about, so lower it and keep everything else real.
+  const RAG = Object.assign({}, RAGm, { MIN_SCORE: 0.5 });
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
+    SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(new RAGm.Book(rows)) },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
+      pathFor: async () => "/var/mobile/Data/maik-models/maik-lite.gguf", totalBytes: () => 1.1e9 }
+  };
+  new Function("window", SRC)(win);
+  return { L: win.SMD_MAIK_LOCAL, calls };
+}
+{
+  const UTI_TX = "Uncomplicated cystitis in women: nitrofurantoin 100 mg twice daily for 5 days or trimethoprim-sulfamethoxazole for 3 days is first-line treatment of uncomplicated urinary tract infection. ".repeat(3);
+  const UTI_DEF = "■■ DEFINITIONS In this chapter, the term uncomplicated urinary tract infection refers to cystitis in a non-pregnant woman without structural abnormality; complicated infection is defined otherwise. ".repeat(3);
+  const HEP_PREG = "Hepatitis B in pregnancy: lamivudine or tenofovir may be used in the third trimester to reduce transmission; interferons are avoided in pregnancy because of antiproliferative effects. Management in pregnancy is specialist-led. ".repeat(3);
+  const rows = [
+    { i: 0, text: UTI_TX, headings: ["Urinary tract infection", "Treatment"], pages: [10] },
+    { i: 1, text: UTI_DEF, headings: ["Urinary tract infection", "Definitions"], pages: [9] },
+    { i: 2, text: HEP_PREG, headings: ["Hepatitis B", "Pregnancy"], pages: [300] }
+  ];
+  const a = loadRealRag({ tokens: ["Nitrofurantoin 100 mg twice daily for 5 days."], rows });
+  const r1 = await a.L.answer({ question: "First-line treatment of uncomplicated UTI in a non-pregnant woman" }, { pack: "maik-lite" }, null);
+  const p1 = a.calls.generate[0].prompt;
+  ok("treatment ask: the treatment chunk is in the evidence", /nitrofurantoin 100 mg twice daily/i.test(p1));
+  ok("treatment ask: the DEFINITIONS chapter is dropped when a real answer chunk exists", !/DEFINITIONS/.test(p1));
+  ok("glyph noise (■■) never reaches the prompt", !/■/.test(p1));
+  ok("grounded, gate passed (nitrofurantoin and 100 mg are in the evidence)", r1.grounded === true && /Source: StewardMD Knowledge Base/.test(r1.text));
+
+  const b = loadRealRag({ tokens: ["In pregnancy, lamivudine is widely used."], rows });
+  await b.L.answer({ question: "uncomplicated uti non pregnant woman: management considerations in pregnancy" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("pregnancy follow-up: the hepatitis passage is NOT evidence for a UTI question (no UTI anchor in it)", !/lamivudine/i.test(p2));
+  ok("pregnancy follow-up: still grounded in the UTI chunks (anchors: urinary / uncomplicated / cystitis)", /urinary tract infection/i.test(p2));
+
+  const c = loadRealRag({ tokens: ["x"], rows });
+  const r3 = await c.L.answer({ question: "management of hepatitis B in pregnancy" }, { pack: "maik-lite" }, null);
+  ok("a genuine hepatitis question still retrieves the hepatitis passage", /lamivudine/i.test(c.calls.generate[0].prompt) && r3.grounded === true);
+}
+{
+  // Second live battery (2026-09-04, after the first guard): the CAP comparison retrieved passages
+  // that named both drugs but not pneumonia (typhoid resistance), and "UTI in pregnancy" lost the
+  // abbreviation as an anchor because expand() rewrote it. A drug name is not the topic; the
+  // disease is. Among on-topic passages, the one that mentions the asked modifier wins.
+  const rows = [
+    { i: 0, text: "Community acquired pneumonia treatment: ceftriaxone 1 g IV daily plus azithromycin 500 mg daily is the usual inpatient regimen for pneumonia. ".repeat(3), headings: ["Pneumonia", "Treatment"], pages: [1] },
+    { i: 1, text: "Typhoid fever epidemiology: ceftriaxone and azithromycin resistance is rising in South Asia; some strains combine ceftriaxone and azithromycin resistance. ".repeat(3), headings: ["Typhoid", "Epidemiology"], pages: [2] },
+    { i: 2, text: "Acute cystitis (UTI) treatment: fosfomycin 3 g single dose or nitrofurantoin for five days. ".repeat(3), headings: ["Cystitis", "Treatment"], pages: [3] },
+    { i: 3, text: "UTI in pregnancy: cephalexin 500 mg four times daily for 7 days; treat asymptomatic bacteriuria in pregnancy. ".repeat(3), headings: ["Cystitis", "Pregnancy"], pages: [4] },
+    { i: 4, text: "Hepatitis B in pregnancy: lamivudine or tenofovir in the third trimester. ".repeat(3), headings: ["Hepatitis B", "Pregnancy"], pages: [5] }
+  ];
+  const a = loadRealRag({ tokens: ["x"], rows });
+  await a.L.answer({ question: "compare ceftriaxone and azithromycin for community acquired pneumonia" }, { pack: "maik-lite" }, null);
+  const p1 = a.calls.generate[0].prompt;
+  ok("drug comparison: the pneumonia passage is the evidence", /inpatient regimen for pneumonia/i.test(p1));
+  ok("drug comparison: a passage that only names both drugs (typhoid resistance) is not evidence", !/typhoid/i.test(p1));
+  const b = loadRealRag({ tokens: ["x"], rows });
+  await b.L.answer({ question: "UTI management in pregnancy" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("UTI in pregnancy: the in-pregnancy UTI passage is chosen (abbreviation anchors; modifier preferred)", /cephalexin/i.test(p2));
+  ok("UTI in pregnancy: the general cystitis passage yields to the pregnancy one", !/fosfomycin/i.test(p2));
+  ok("UTI in pregnancy: hepatitis-in-pregnancy is never evidence for it", !/lamivudine/i.test(p2));
+}
+{
+  // Evidence size: 700-char passages and a weak third passage dropped (prefill is the latency).
+  const RAG = require("../kb/ai/maik-lite-rag.js");
+  const long = "Amoxicillin 500 mg three times daily for community acquired pneumonia. ".repeat(20);   // ~1400 chars
+  const passages = [
+    { heading: "Pneumonia > Treatment", text: long, chunk: 1 },
+    { heading: "Pneumonia > Treatment", text: "Doxycycline 100 mg twice daily is the alternative for pneumonia.", chunk: 2 },
+    { heading: "Pneumonia > Epidemiology", text: "Pneumonia is common in winter.", chunk: 3 }
+  ];
+  const fakeBook = { search: () => [[12, 0], [10, 1], [3, 2]], cite: (i) => Object.assign({}, passages[i]), idfOf: () => 5, us: (w) => w };
+  const calls = { generate: [] };
+  const Llama = { available: async () => ({ available: true, loaded: true }), load: async () => ({ loaded: true }),
+    generate: async (o) => { calls.generate.push(o); return { text: "Amoxicillin 500 mg three times daily.", ms: 1 }; },
+    cancel: async () => ({}), release: async () => ({ released: true }), addListener: () => ({ remove: () => {} }) };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama } }, SMD_MAIK_RAG: RAG,
+    SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(fakeBook) },
+    SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } }, pathFor: async () => "/x.gguf", totalBytes: () => 1.1e9 } };
+  new Function("window", SRC)(win);
+  await win.SMD_MAIK_LOCAL.answer({ question: "Treatment of pneumonia" }, { pack: "maik-lite" }, null);
+  const p = calls.generate[0].prompt;
+  ok("each passage is capped at 700 chars in the prompt", !/\[1\] [\s\S]{705,}?\n\n\[2\]/.test(p) && /\[1\] /.test(p));
+  ok("a third passage scoring under 60% of the top is dropped", /\[2\] /.test(p) && !/\[3\] /.test(p));
+}
+{
+  // Regenerate asks the local engine for sampling jitter; an ordinary answer stays deterministic.
+  const d = load({ tokens: ["A."] });
+  await d.L.answer({ question: "q" }, { pack: "maik-apex" }, null);
+  await d.L.answer({ question: "q" }, { pack: "maik-apex", regen: true }, null);
+  ok("ordinary answer: temperature 0", d.calls.generate[0].temperature === 0);
+  ok("regenerate: temperature 0.4", d.calls.generate[1].temperature === 0.4);
+}
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

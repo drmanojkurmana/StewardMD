@@ -1,0 +1,789 @@
+/* test/ward-ui.test.mjs — the WardSynQ inpatient ward screen (ward.js). Pure _render, no DOM/network.
+ *
+ * The tests that matter here are the three rules the screen must not bend: it never decides a dose
+ * is safe, it renders a refusal verbatim, and it never invents a due time.
+ *
+ * node --test test/ward-ui.test.mjs
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+
+const SRC = readFileSync(new URL("../ward.js", import.meta.url), "utf8");
+function load() {
+  const win = {};
+  const doc = { getElementById: () => null, createElement: () => ({ classList: { add() {}, remove() {} } }), body: { appendChild() {} } };
+  new Function("window", "document", "location", "localStorage", SRC)(win, doc, { search: "" }, { getItem: () => null, setItem: () => {} });
+  return win.WARD;
+}
+const base = {
+  orgId: "org-wsq", ward: "", patients: [], view: "list", sel: null,
+  problems: [], due: [], dueAt: "", busy: false, err: "", note: "", refusal: null, loaded: true,
+};
+const chart = Object.assign({}, base, {
+  view: "chart",
+  sel: { encounterId: "wsq-adm-x", patientId: "opd-pat-x", ward: "Ward A", bed: "12", admittedAt: "2026-09-07T04:00:00.000Z" },
+});
+
+test("the ward list shows a bed per admitted patient and says so plainly when empty", () => {
+  const W = load();
+  const empty = W._render(base);
+  assert.match(empty, /No patients are currently admitted/);
+  assert.ok(!empty.includes("data-w-act=\"open:"), "nothing to open");
+
+  const full = W._render(Object.assign({}, base, {
+    patients: [{ encounterId: "wsq-adm-1", patientId: "opd-pat-1", ward: "Ward A", bed: "07", admittedAt: "2026-09-07T04:00:00.000Z" }],
+  }));
+  assert.match(full, /data-w-act="open:wsq-adm-1"/);
+  assert.match(full, />07</);
+  assert.match(full, /Ward A/);
+});
+
+test("A REFUSAL IS RENDERED VERBATIM: every reason code reaches the nurse, none are collapsed", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    refusal: { action: "administer", reasons: ["ALLERGY_CONTRAINDICATION", "DOSE_CEILING_EXCEEDED"], detail: "The order exceeds the daily ceiling." },
+  }));
+  assert.match(html, /ALLERGY_CONTRAINDICATION/);
+  assert.match(html, /DOSE_CEILING_EXCEEDED/);
+  assert.match(html, /The order exceeds the daily ceiling\./);
+  assert.match(html, /Refused on administer/);
+  assert.ok(!/\bfailed\b/i.test(html), "a refusal is never flattened into a generic failure");
+});
+
+test("a governance refusal keeps its reason codes too, and an ordinary error does not masquerade as one", () => {
+  const W = load();
+  assert.deepEqual(W._problem({ ok: false, error: "governance", reasons: ["WRITE_NOT_PERMITTED"] }).refusal.reasons, ["WRITE_NOT_PERMITTED"]);
+  // The server's own message is shown, because "only available for a WardSynQ-native hospital" is
+  // actionable and "something went wrong" is not.
+  assert.equal(W._problem({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }).err,
+    "The inpatient ward is only available for a WardSynQ-native hospital.");
+  assert.equal(W._problem({ ok: true }), null);
+  assert.match(W._problem(null).err, /No response/);
+});
+
+test("the due time is the server's, computed from the frequency - the screen never derives one", () => {
+  // This replaces the old rule 3. The nurse used to have to pick a round time and the screen had to
+  // say the system was asserting nothing, because nothing computed a schedule. Now mar-schedule.js
+  // does, and the two datetime fields are a VIEW WINDOW, not a claim about when a dose is due.
+  const html = load()._render(Object.assign({}, chart, {
+    from: "2026-09-09T00:00", to: "2026-09-10T00:00",
+    due: [{ orderId: "rx-1", drug: "Paracetamol", dose: { value: 500, unit: "mg" }, frequency: "TDS", dueAt: "2026-09-09T02:30:00.000Z", status: null }],
+  }));
+  assert.match(html, /id="wFrom"/);
+  assert.match(html, /id="wTo"/);
+  assert.ok(!/wDueAt/.test(html), "the per-dose time picker is gone");
+  assert.ok(!/round time is the one you chose/.test(html), "and so is the disclaimer it needed");
+
+  // The dose carries its own computed time, and the action addresses it BY INDEX so a click acts on
+  // the row the nurse is looking at rather than a time recomputed in the browser.
+  assert.match(html, /data-w-act="mar:verify\|0"/);
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  assert.match(code, /dueAt: d\.dueAt/, "the server's own dueAt is sent back verbatim");
+  assert.ok(!/new Date\(st\.dueAt\)/.test(code), "the browser never derives a dose time");
+});
+
+test("an overdue dose is marked, and one that was dealt with is not chased", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    from: "2026-09-09T00:00", to: "2026-09-10T00:00",
+    due: [
+      { orderId: "rx-1", drug: "Paracetamol", dueAt: "2026-09-09T02:30:00.000Z", status: null, overdue: true },
+      { orderId: "rx-2", drug: "Amoxicillin", dueAt: "2026-09-09T08:30:00.000Z", status: "administered", administeredAt: "2026-09-09T08:35:00.000Z", overdue: false },
+    ],
+  }));
+  assert.match(html, /<li class="overdue">/);
+  assert.match(html, /<span class="w-st overdue">overdue<\/span>/);
+  assert.equal((html.match(/>overdue</g) || []).length, 1, "only the one that is actually overdue");
+});
+
+test("PRN is shown APART from the round, and an unreadable frequency is surfaced loudly", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    from: "2026-09-09T00:00", to: "2026-09-10T00:00", due: [],
+    prn: [{ orderId: "rx-3", drug: "Morphine", dose: { value: 5, unit: "mg" }, route: "iv" }],
+    unscheduled: [{ orderId: "rx-4", drug: "Enoxaparin", frequency: "alternate days after dialysis", reason: "frequency_not_understood" }],
+  }));
+  // As-needed is visible to the ward but never among the doses that are due.
+  assert.match(html, /As needed \(PRN\)/);
+  assert.match(html, /Morphine/);
+  assert.ok(!/data-w-act="mar:[a-z]+\|/.test(html), "a PRN drug gets no round action");
+  assert.match(html, /Given on the patient/);
+  // An order the ward cannot see on the round is a dose nobody knows is missing.
+  assert.match(html, /Not on the round/);
+  assert.match(html, /Enoxaparin/);
+  assert.match(html, /alternate days after dialysis/);
+  assert.match(html, /w-sub warn/);
+});
+
+test("a truncated round says so rather than looking complete", () => {
+  const html = load()._render(Object.assign({}, chart, { truncated: true, due: [] }));
+  assert.match(html, /More doses fall in this window than can be listed/);
+});
+
+test("the MAR offers only the transitions the state machine accepts, and nothing after a dose is given", () => {
+  const W = load();
+  // The eMAR's states are LOWER CASE (wardsynq-meds.js STATES). This map was written in capitals
+  // first, so every lookup missed and the round rendered no buttons at all once a dose had a status.
+  assert.deepEqual(W._nextFor(null), ["verify"], "an unstarted dose can only be verified");
+  assert.deepEqual(W._nextFor("administered"), [], "a given dose has nowhere left to go");
+  assert.deepEqual(W._nextFor("refused"), []);
+  assert.ok(W._nextFor("dispensed").includes("scan"));
+  assert.ok(!W._nextFor("dispensed").includes("administer"), "administering skips the scan; the five rights are checked on a scan");
+  assert.deepEqual(W._nextFor("DISPENSED"), W._nextFor("dispensed"), "case never empties the round");
+
+  const html = W._render(Object.assign({}, chart, {
+    dueAt: "2026-09-07T09:00",
+    due: [
+      { orderId: "rx-1", drug: "Paracetamol", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TDS", status: "dispensed", administrationId: "mar-1" },
+      { orderId: "rx-2", drug: "Amoxicillin", dose: { value: 250, unit: "mg" }, status: "administered", administeredAt: "2026-09-07T09:05:00.000Z" },
+    ],
+  }));
+  // Doses are addressed by their index in the loaded round: rx-1 is 0, rx-2 is 1.
+  assert.match(html, /data-w-act="mar:scan\|0"/);
+  assert.ok(!html.includes('data-w-act="mar:administer|0"'), "no administer button before the scan");
+  assert.ok(!html.includes('|1"'), "a given dose offers no action at all");
+  assert.match(html, /No further action\./);
+  assert.match(html, /500 mg/);
+});
+
+test("THE SECOND NURSE CAN BE NAMED, and the screen never decides when one is needed", () => {
+  const W = load();
+  const html = W._render(chart);
+  /* Before this field existed the server's refusal was correct and unanswerable: a nurse at the
+   * bedside had no way to name the witness, so a high-alert dose could not be given from this screen
+   * at all. */
+  assert.match(html, /id="wWitness"/);
+  assert.match(html, /Second nurse/);
+
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  // The field is always rendered, never shown only for drugs the browser thinks are high-alert:
+  // that would be a second copy of the hospital's formulary living in the UI.
+  assert.ok(!/highAlert|HIGH_ALERT|insulin|heparin|opioid/i.test(code), "no formulary in the UI");
+  // And it never compares the witness to the nurse: WITNESS_NOT_INDEPENDENT is the server's refusal.
+  assert.ok(!/witness\w*\s*(?:={2,3}|!={1,2})(?!=)\s*(?!null\b|undefined\b)\S/i.test(code), "the UI never judges the witness");
+  assert.match(code, /body\.witnessId = w/, "it is forwarded, and only forwarded");
+});
+
+test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywhere in the file", () => {
+  // A second copy of the rules is how the screen and the server start disagreeing about whether a
+  // drug is contraindicated. This asserts the absence, because the absence IS the safety property.
+  // Comments are stripped first: the file explains at length why it has no safety logic, and
+  // scanning the prose would fail on the very sentences that promise the code is not there.
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  /* `interaction` was on this list as a proxy for drug-drug interaction logic, and it stopped being a
+   * usable one when TASK 8.5 put MaiK on the chart: a MaiKInteraction is a RECORD OF ASKING A MODEL
+   * something, and the screen reads `r.interaction` off that response. The narrowing is the same move
+   * this test already made for the word "allergy" a few lines below, and for the same reason - the
+   * property being defended is that the screen never RUNS a clinical rule, not that it never contains
+   * a clinical word. Drug-interaction logic remains forbidden by name. */
+  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  /* The word "allergy" used to be on that list as a proxy, and it stopped being a usable one when the
+   * downtime pack began DISPLAYING an allergy list the server assembled. Displaying is not deciding,
+   * and the property this test defends is that the screen never decides. So the check now tests the
+   * actual property: the file may name an allergy or a drug, and must never compare, search or match
+   * one - which is what a second copy of the rules would have to do. */
+  assert.ok(
+    // Comparing against null or undefined is ALLOWED and is itself a safety rule: "could not be read"
+    // and "none recorded" must never render the same, so the screen has to be able to tell them apart.
+    // `(?!=)` matters: without it the `==` branch matches the first two characters of `===` and the
+    // operand check then reads the third `=` instead of the value, so every comparison "passes".
+    !/(allerg|substance|drug)\w*\s*(?:={2,3}|!={1,2})(?!=)\s*(?!null\b|undefined\b)\S/i.test(code),
+    "the UI never compares an allergy or a drug VALUE, it only renders one",
+  );
+  assert.ok(
+    !/(allerg|substance|drug)\w*\s*\.\s*(includes|indexOf|match|search|test)\s*\(/i.test(code),
+    "and never searches one",
+  );
+  // The distinction it IS allowed to make, because printing them the same way is the hazard.
+  assert.match(code, /p\.allergies === null/, "a failed read and an empty list stay distinguishable");
+  /* `rulePack` was an unanchored substring, and TASK 8.9 made it stop being a usable proxy: the
+   * verdict card now PRINTS `rulePackVersion` - the version string the server reported, so a
+   * clinician can see which content produced the findings in front of them. Displaying which pack
+   * ran is not reaching for the engine, and it is the same narrowing this test already made for
+   * "allergy" and "interaction" above. `\brulePack\b` still forbids touching a pack itself, and
+   * getRulePack/compileRulePack remain forbidden by name. */
+  assert.ok(!/wardsynq-safety|SafetyEngine|resolveGeneric|\brulePack\b|getRulePack|compileRulePack/i.test(code),
+    "the UI does not reach for the safety engine");
+  // It must not decide the five rights itself either: the scans go to the server untouched, and the
+  // server compares them against the order. The UI only collects and forwards.
+  assert.ok(!/scan\.patient\s*[=!]==|scan\.drug\s*[=!]==/.test(code), "the UI never compares a scan itself");
+  assert.match(code, /body\.scan = \{ patient: val\("wScanP"\), drug: val\("wScanD"\) \}/, "scans are forwarded verbatim");
+});
+
+test("critical results sit ABOVE everything else on the chart, and say whose call each one was", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    criticals: [
+      { loopId: "l1", code: "2823-3", display: "Potassium", value: 7.4, unit: "mmol/L", basis: "limit", state: "open", escalation: { level: "escalate", minutesOpen: 95 } },
+      { loopId: "l2", code: "Blood culture", display: "Blood culture", value: null, basis: "lab", state: "acknowledged", acknowledgedBy: "cfa:doc", escalation: { level: "none", minutesOpen: 0 } },
+    ],
+    problems: [{ problemId: "p1", display: "Pneumonia", codeSystem: "text", verificationStatus: "confirmed" }],
+  }));
+  assert.match(html, /Critical results &middot; 2/);
+  assert.ok(html.indexOf("Critical results") < html.indexOf("Problem list"), "first on the chart");
+  assert.match(html, /7\.4 mmol\/L/);
+  // A laboratory's own flag and a configured threshold are never presented as the same thing.
+  assert.match(html, /outside critical limit/);
+  assert.match(html, /flagged by the lab/);
+  assert.match(html, /95 min since reported/);
+  assert.match(html, /ESCALATE/);
+  // An open loop can be acknowledged; one already acknowledged names who saw it and offers nothing.
+  assert.match(html, /data-w-act="ack:l1"/);
+  assert.ok(!html.includes('data-w-act="ack:l2"'));
+  assert.match(html, /acknowledged by cfa:doc/);
+  assert.match(html, /It is not a way to clear the list\./);
+});
+
+test("a transfer is reachable from the chart, and a busy bed is explained rather than just refused", () => {
+  const W = load();
+  assert.match(W._render(chart), /data-w-act="move"/);
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  // "bed 12 already has someone in it" is what a ward acts on; "could not transfer" is not.
+  assert.match(code, /bed_occupied/);
+  assert.match(code, /Choose another bed/);
+  assert.match(code, /occupiedBy/);
+  // The UI never decides a bed is free: it asks, and reports what the server says. Occupancy is
+  // checked against every open admission, which the screen does not have and must not guess at.
+  assert.ok(!/\.bed\s*===|occupied\s*=|isFree|bedFree/.test(code), "no client-side occupancy logic");
+  assert.match(code, /apiPost\("\/ward\/transfer"/, "it asks the server");
+});
+
+test("fluid balance shows in and out beside the net, never the net alone", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, chart, {
+    balance: { intake: 3000, output: 2600, balance: 400, entries: 8, unit: "mL", complete: true, gaps: [], hours: [{}], byKind: {} },
+  }));
+  // "+400" alone hides whether this patient drank 400 and passed nothing, or took three litres and
+  // passed 2.6. Those are different patients and one of them is in trouble.
+  assert.match(html, /3000 mL/);
+  assert.match(html, /2600 mL/);
+  assert.match(html, /\+400 mL/);
+  assert.match(html, /Every hour of this period has an entry\./);
+
+  // An incomplete chart says so, in the caution tier, right beside the number.
+  const thin = W._render(Object.assign({}, chart, {
+    balance: { intake: 200, output: 0, balance: 200, entries: 1, unit: "mL", complete: false, gaps: new Array(11).fill("h"), hours: [{}], byKind: {} },
+  }));
+  assert.match(thin, /11 of the last 12 hours have nothing charted/);
+  assert.match(thin, /Read this balance as incomplete\./);
+  assert.match(thin, /w-hint warn/);
+  // No balance at all is stated, not rendered as zero.
+  assert.match(W._render(chart), /No fluid charted for this period\./);
+  assert.ok(!/0 mL/.test(W._render(chart)), "an absent balance is never drawn as zeroes");
+});
+
+test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {
+  const W = load();
+  // No card at all when nothing is open, so it cannot become wallpaper a ward stops seeing.
+  assert.ok(!/Critical results/.test(W._render(chart)));
+  // But an unreachable list is not an empty one, and the difference is calm versus dangerous.
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  assert.match(code, /Do not read this chart as clear/);
+  // Acknowledging requires a sentence: an acknowledgement with no action recorded is a tick-box.
+  assert.match(code, /An acknowledgement records what was done/);
+});
+
+test("A DIAGNOSIS IS ENTERED HERE, AND THE SCREEN NEVER DECIDES WHO MAY ENTER ONE", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, chart, {
+    problems: [{ problemId: "p1", display: "Pneumonia", code: "J18.9", codeSystem: "ICD-10", verificationStatus: "confirmed", clinicalStatus: "active" }],
+  }));
+  assert.match(html, /Pneumonia/);
+  assert.match(html, /J18\.9/);
+  assert.match(html, /confirmed/);
+
+  /* The form is rendered unconditionally. This file holds no notion of the caller's role - by design,
+   * every authority question in it is the server's - so gating the form would mean adding
+   * client-side authorisation, which is the pattern this screen exists without. `emr.treat` is
+   * enforced on /ward/problem and a nurse gets a 403 that says so; that refusal is asserted three
+   * times in wardsynq-inpatient-emar.test.mjs, and it, not a hidden button, is the control. */
+  assert.match(html, /data-w-act="problem"/);
+  assert.ok(!/\brole\b/.test(W._render(chart)), "the screen has no idea who is looking at it");
+
+  // Every value the server's own vocabulary accepts, so nobody is forced to overstate their
+  // confidence. A list offering only "confirmed" turns every working idea into a diagnosis.
+  for (const v of ["provisional", "differential", "confirmed", "refuted"]) {
+    assert.match(html, new RegExp(`value="${v}"`), `${v} must be offerable`);
+  }
+  assert.match(html, /working diagnosis/, "and it says what provisional means");
+
+  /* THE CODE IS NEVER DERIVED FROM THE WORDS. An uncoded diagnosis is recorded as text and says so;
+   * emitting a guessed code is a lie that survives every export afterwards. */
+  assert.match(html, /the code is not guessed at/);
+  const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  /* THE PROPERTY IS "NEVER DERIVED", NOT "NEVER LOOKED UP". This assertion originally forbade any
+   * terminology call at all, which was a proxy: it stopped the screen mapping words to a code by
+   * itself, and it also stopped a clinician being OFFERED the real ICD titles to choose from - which
+   * is how a coded problem list gets coded at all. Searching is allowed; SELECTING is not. */
+  assert.ok(!/code\s*:\s*["'][A-Z]\d/.test(code), "the UI carries no code values of its own");
+  // No scoring, ranking or best-match anywhere: those are how a search quietly becomes a derivation.
+  assert.ok(!/bestMatch|score\s*\(|confidence|autoSelect|\.sort\s*\([^)]*match/i.test(code), "nothing ranks or auto-selects a code");
+  // The only thing that sets a code is a human pressing one of the results.
+  assert.match(code, /st\.probCode = c\.code/);
+  assert.match(code, /data-w-act="icdpick:/);
+
+  /* THE SEARCH OFFERS, IT DOES NOT CHOOSE. Not even a single result is preselected: one result is
+   * not the same as the right one, and a list that filled the box in would be a derivation with an
+   * extra step. */
+  const offered = W._render(Object.assign({}, chart, {
+    icd: [{ code: "J18.9", title: "Pneumonia, unspecified organism", system: "icd10" }],
+  }));
+  assert.match(offered, /data-w-act="icdpick:0"/);
+  assert.match(offered, /J18\.9/);
+  assert.match(offered, /Pneumonia, unspecified organism/);
+  assert.ok(!/id="wProbCode"[^>]*value="J18\.9"/.test(offered), "and the code box is still empty until somebody presses it");
+
+  // Three states, because "searching" and "no matches" must never look the same.
+  assert.match(W._render(Object.assign({}, chart, { icd: null })), /Searching/);
+  assert.match(W._render(Object.assign({}, chart, { icd: [] })), /an uncoded diagnosis is honest, a guessed code is not/);
+  assert.ok(!W._render(chart).includes("Searching"), "and nothing is shown before anybody asks");
+
+  // Resolving is offered on an active problem and is a new version, never a deletion.
+  assert.match(html, /data-w-act="resolve:p1"/);
+  const done = W._render(Object.assign({}, chart, {
+    problems: [{ problemId: "p1", display: "Pneumonia", verificationStatus: "confirmed", clinicalStatus: "resolved" }],
+  }));
+  assert.ok(!done.includes('data-w-act="resolve:p1"'));
+  assert.match(done, /resolved/);
+});
+
+test("vitals: every field the record path accepts is on the form, and blanks are not defaulted", () => {
+  const html = load()._render(chart);
+  for (const k of ["sbp", "dbp", "pulse", "rr", "temp", "spo2", "weight"]) {
+    assert.match(html, new RegExp(`id="wv_${k}"`), `${k} is missing from the ward vitals form`);
+  }
+  assert.match(html, /Blank fields are not recorded/);
+  assert.match(html, /never guessed at/);
+
+  /* The two an early warning score cannot do without, and which this form could not record until
+   * 2026-09-08. Without them NEWS2 can never complete, however many numbers a ward charts. */
+  assert.match(html, /id="wv_o2"/);
+  assert.match(html, /id="wv_acvpu"/);
+  // NOT RECORDED and "no" are different, and the form offers both.
+  assert.match(html, /<option value="">Not recorded<\/option>/);
+  assert.match(html, /<option value="0">Breathing air<\/option>/);
+  assert.match(html, /Consciousness: not assessed/);
+  for (const l of ["A", "C", "V", "P", "U"]) {
+    assert.match(html, new RegExp(`<option value="${l}">`), `${l} must be offerable`);
+  }
+  // The letters are spelled out: "C" on its own is not a thing a nurse should have to remember.
+  assert.match(html, /new confusion/);
+  assert.match(html, /unresponsive/);
+});
+
+test("HTML is escaped: a hostile ward or drug name cannot inject markup", () => {
+  const html = load()._render(Object.assign({}, base, {
+    patients: [{ encounterId: "<img src=x onerror=alert(1)>", patientId: "p&p", ward: '"><script>bad()</script>', bed: "1" }],
+  }));
+  assert.ok(!html.includes("<script>bad()"), "script tag escaped");
+  // The payload's TEXT survives - that is correct, it is being displayed. What must not survive is
+  // any character that could end an attribute or open a tag, so it can never stop being text.
+  assert.ok(!html.includes("<img"), "tag never opens");
+  assert.match(html, /&lt;img src=x onerror=alert\(1\)&gt;/, "rendered as inert text");
+  assert.ok(!/value="[^"]*"[^>]*<script/.test(html), "the quoted attribute is never broken out of");
+  assert.match(html, /p&amp;p/);
+});
+
+test("THE NOTE COMPOSER SUPPLIES HEADINGS AND NEVER CONTENT", () => {
+  const W = load();
+  const TPL = {
+    id: "ward-round", name: "Ward round note", noteType: "progress",
+    sections: [{ key: "impression", title: "Impression", required: true, prompt: "How is the patient today?" }, { key: "plan", title: "Plan" }],
+  };
+  // No templates configured, no card: this screen ships no headings of its own.
+  assert.ok(!W._render(chart).includes("Ward round note"));
+
+  const open = W._render(Object.assign({}, chart, { templates: [TPL], noteTemplateId: "ward-round" }));
+  assert.match(open, /id="wNote_impression"/);
+  assert.match(open, /id="wNote_plan"/);
+  assert.match(open, /How is the patient today\?/, "the hospital's own prompt, verbatim");
+  assert.match(open, /required/);
+  /* The screen writes nothing. No default text, no "normal examination", no expansion - a composer
+   * that pre-filled a finding would document an examination that never happened. */
+  assert.ok(!/<textarea[^>]*>[^<]/.test(open), "every field opens empty");
+  assert.match(open, /Nothing here writes text for you/);
+
+  /* A REQUIRED SECTION LEFT BLANK DOES NOT BLOCK THE SAVE, and the result says what is missing. A
+   * screen that refused would be one people stop using for the notes that matter most. */
+  const partial = W._render(Object.assign({}, chart, {
+    templates: [TPL], noteTemplateId: "ward-round",
+    noteResult: { ok: true, incomplete: true, missing: [{ key: "impression", title: "Impression" }] },
+  }));
+  assert.match(partial, /Saved with Impression still blank/);
+  assert.match(partial, /on the record as incomplete/);
+
+  /* IT NEVER SIGNS. Signing is its own act with its own authority, and it lives on the co-sign
+   * worklist - which is why "note-sign" DOES appear elsewhere in this file. What matters is that the
+   * composer's own save posts to /ward/note and carries no signature: one that signed on the way
+   * past would put a name against a note nobody re-read. */
+  assert.match(partial, /Unsigned/);
+  const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  const saveNote = src.slice(src.indexOf("function saveNote"), src.indexOf("function findCode"));
+  assert.ok(saveNote.length > 100, "found the composer's save");
+  assert.match(saveNote, /apiPost\("\/ward\/note",/);
+  assert.ok(!/note-sign|signedBy|sign\(/.test(saveNote), "and it carries no signature");
+});
+
+test("THE OVERRIDE REPORT IS ABOUT RULES, AND THE WORST ONE IS FIRST", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, base, {
+    overrides: {
+      totalOverrides: 45, distinctRules: 3,
+      note: "Override counts are evidence about RULES, not about clinicians.",
+      rules: [
+        { key: "dose", code: "dose", targetId: null, overridden: 5, fired: 40, overrideRate: 0.125, topReason: "clinical-judgement" },
+        { key: "interaction:ddi-a", code: "interaction", targetId: "ddi-a", overridden: 39, fired: 40, overrideRate: 0.975, topReason: "benefit-outweighs-risk" },
+        { key: "allergy:alg-1", code: "allergy", targetId: "alg-1", overridden: 1, fired: null, overrideRate: null },
+      ],
+    },
+  }));
+
+  /* WORST FIRST. A rule overridden on 39 of 40 firings is not protecting anyone - it is training
+   * every clinician in the hospital to click through warnings, including the one that mattered. */
+  assert.ok(html.indexOf("ddi-a") < html.indexOf(">dose<"), "the 97% rule is above the 12% one");
+  assert.match(html, /98%/, "0.975 rounds up");
+  assert.match(html, /39 of 40 firings/, "the denominator is always beside the rate");
+  assert.match(html, /trains people to click through warnings/);
+  assert.match(html, /class="hot"/);
+
+  // A rate with no denominator is not drawn as a measurement.
+  assert.match(html, /no firing count, so no rate/);
+  assert.ok(!/>0%</.test(html));
+  // And a rule that CAN be judged sorts above one that cannot: no rate is not the same as fine.
+  assert.ok(html.indexOf("ddi-a") < html.indexOf("alg-1"));
+
+  /* IT NAMES NO CLINICIAN. A screen that ranked people by override rate would stop them writing
+   * honest rationales, and the rationale is the only thing that makes a bad rule fixable. */
+  assert.match(html, /evidence about RULES, not about clinicians/);
+  const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+  const card = src.slice(src.indexOf("function overrideCard"), src.indexOf("function qualityCard"));
+  assert.ok(!/actorId|clinician|prescriber|byActor/i.test(card), "the card cannot even reach for an actor");
+
+  assert.ok(!W._render(base).includes("Safety rules being overridden"), "no data, no card");
+});
+
+test("A MEASURE SHOWS ITS DENOMINATOR, AND ONE THAT CANNOT BE COMPUTED SHOWS ITS REASON", () => {
+  const W = load();
+  const html = W._render(Object.assign({}, base, {
+    quality: {
+      period: { days: 30 }, notComputable: 1,
+      measures: [
+        { id: "a", title: "Critical results acknowledged in time", computable: true, rate: 0.75, numerator: 30, denominator: 40, neverAcknowledged: 2 },
+        { id: "b", title: "Doses on time", computable: true, rate: 1, numerator: 2, denominator: 2, underpowered: true, note: "2 cases in this period. Too few to read as a rate." },
+        { id: "c", title: "Discharges with a signed summary", computable: true, rate: null, numerator: 0, denominator: 0 },
+        { id: "d", title: "Allergy status documented", computable: false, reason: "WardSynQ cannot record \"asked, and there are none\"." },
+      ],
+    },
+  }));
+  /* A rate whose denominator is not shown is a rate nobody can argue with, and these exist to be
+   * argued with. */
+  assert.match(html, /75%/);
+  assert.match(html, /30 of 40/);
+  assert.match(html, /were never acknowledged at all/, "late and never-at-all are different failures");
+
+  // 100% over two cases is the commonest way a quality dashboard lies.
+  assert.match(html, /Too few to read as a rate/);
+
+  // No cases is neither 0% nor 100%.
+  assert.match(html, /No cases in this period/);
+  assert.ok(!/>0%</.test(html));
+
+  // The unavailable measure is SHOWN, with its reason. Omitting it would read as "nothing to report".
+  assert.match(html, /asked, and there are none/);
+  assert.match(html, /class="unavailable"/);
+  assert.match(html, /cannot be computed from the record/);
+
+  // And the card says out loud what it is not measuring.
+  assert.match(html, /measure the system, not any clinician/);
+  assert.ok(!W._render(base).includes("Measures"), "no data, no card");
+});
+
+test("THE DOWNTIME PACK NEVER PRINTS A REASSURING BLANK", () => {
+  const W = load();
+  const pack = (patients, over) => W._render(Object.assign({}, base, {
+    view: "downtime",
+    downtime: Object.assign({
+      ward: "Medical A", count: patients.length, generatedAt: "2026-09-07T09:00:00.000Z",
+      coversUntil: "2026-09-08T09:00:00.000Z", incomplete: 0,
+      warning: "This is a point-in-time COPY, not the record.",
+      patients,
+    }, over || {}),
+  }));
+
+  const ok = pack([{
+    patientId: "p", bed: "12", name: "Asha Rao", mrn: "SMD-1", admittedAt: "2026-09-07T04:00:00.000Z",
+    allergies: [{ substance: "Penicillin", reaction: "anaphylaxis" }],
+    orders: [{ drug: "Amoxicillin", dose: { value: 500, unit: "mg" }, route: "oral", scheduleKnown: true, due: ["2026-09-07T12:00:00.000Z"] }],
+    criticals: [], problems: [],
+  }]);
+  assert.match(ok, /point-in-time COPY/, "it says what it is, on the sheet");
+  assert.match(ok, /Penicillin/);
+  assert.match(ok, /Given during downtime/, "and leaves space to record what was given");
+
+  /* THE ONE THAT MATTERS. An empty allergy line on paper reads as "no known allergies" to every
+   * clinician alive, so a read that FAILED must never render as one. */
+  const blind = pack([{ patientId: "p", bed: "12", allergies: null, orders: null, criticals: null, problems: ["allergies could not be read"] }], { incomplete: 1 });
+  assert.match(blind, /ALLERGIES COULD NOT BE READ/);
+  assert.match(blind, /MEDICINES COULD NOT BE READ/);
+  assert.match(blind, /OPEN CRITICAL RESULTS COULD NOT BE READ/);
+  assert.match(blind, /could not be fully read/, "and the cover page counts the pages with holes in them");
+
+  // A patient genuinely without allergies says so in words rather than showing nothing.
+  assert.match(pack([{ patientId: "p", bed: "1", allergies: [], orders: [], criticals: [], problems: [] }]), /No allergies recorded/);
+
+  /* An order whose frequency nobody could parse gets no times and SAYS so. A blank time column reads
+   * as "nothing due today", which is how a dose gets missed for a whole outage. */
+  const vague = pack([{ patientId: "p", bed: "1", allergies: [], criticals: [], problems: [],
+    orders: [{ drug: "Warfarin", frequency: "as directed", scheduleKnown: false, due: [] }] }]);
+  assert.match(vague, /no dose times could be worked out/);
+  assert.match(vague, /as directed/);
+
+  // The controls do not reach the paper, and the print action is offered.
+  assert.match(ok, /w-noprint/);
+  assert.match(ok, /data-w-act="printpack"/);
+});
+
+test("THE CO-SIGN WORKLIST SAYS WHO WROTE IT, HOW LONG IT HAS WAITED, AND WHAT IS STILL BLANK", () => {
+  const W = load();
+  const q = {
+    canSign: true,
+    notes: [{ noteId: "n1", noteType: "progress", authorId: "cfa:locum", waitingMinutes: 195, incompleteSections: ["plan"] }],
+    mine: [],
+  };
+  const html = W._render(Object.assign({}, base, { cosign: q }));
+  assert.match(html, /written by cfa:locum/, "the author is named, not replaced by the signer");
+  assert.match(html, /waiting 3 h 15 min/);
+  /* The gap travels WITH the note to the person being asked to put their name to it: a signature
+   * does not fill in a missing plan, and the signer should know before they sign, not after. */
+  assert.match(html, /plan not filled in/);
+  assert.match(html, /data-w-act="cosign:n1"/);
+
+  // A reader who cannot sign is TOLD SO, rather than shown a button that will be refused - or a
+  // silently empty list, which is how a queue grows while everybody assumes it is handled.
+  const cannot = W._render(Object.assign({}, base, { cosign: Object.assign({}, q, { canSign: false }) }));
+  assert.ok(!cannot.includes('data-w-act="cosign:n1"'));
+  assert.match(cannot, /no verified registration/);
+
+  // The author's own unfinished note offers the other half of the loop, and says plainly that
+  // submitting is not signing.
+  const mine = W._render(Object.assign({}, base, { cosign: { canSign: false, notes: [], mine: [{ noteId: "n2", noteType: "progress", incompleteSections: [] }] } }));
+  assert.match(mine, /data-w-act="submitnote:n2"/);
+  assert.match(mine, /It is not a signature/);
+  assert.match(mine, /No notes are waiting on a signature/);
+
+  // Nothing waiting and nothing of mine: the card stays off the screen entirely.
+  assert.ok(!W._render(base).includes("Notes awaiting signature"));
+});
+
+test("THE OUTBOX NEVER READS 'SENT' AS 'ARRIVED', and an unsent prescription is named", () => {
+  const W = load();
+  const withTx = Object.assign({}, chart, {
+    due: [{ orderId: "wsq-rx-1", drug: "Amoxicillin", dose: { value: 500, unit: "mg" }, route: "oral", dueAt: "2026-09-07T09:00:00.000Z", status: null }],
+    prn: [{ orderId: "wsq-rx-2", drug: "Paracetamol", dose: { value: 1, unit: "g" }, route: "oral" }],
+    outbox: [
+      { transmissionId: "wsq-tx-1", orderId: "wsq-rx-1", orderVersion: 2, channel: "pharmacy", destination: "City Pharmacy", state: "sent", outstanding: true, queuedAt: "2026-09-07T08:00:00.000Z" },
+    ],
+  });
+  const html = W._render(withTx);
+  /* The whole point of the card: "sent" is the transport saying it left, not the pharmacy saying it
+   * has it. A screen that showed those as the same thing would tell a nurse a prescription is at the
+   * counter when it is sitting in an outbox. */
+  assert.match(html, /sent, not confirmed/);
+  assert.ok(!/confirmed received/.test(html), "nothing has been confirmed here");
+  assert.match(html, /order v2/, "and the version that left is on the row");
+  assert.match(html, /data-w-act="txr:wsq-tx-1"/, "an outstanding one can be dealt with");
+
+  // The medicine with nothing in the outbox is NAMED. An order nobody sent looks exactly like one
+  // that arrived, unless the screen says otherwise.
+  assert.match(html, /Not sent anywhere/);
+  assert.match(html, /data-w-act="tx:wsq-rx-2"/);
+  assert.ok(!html.includes('data-w-act="tx:wsq-rx-1"'), "the one already in the outbox is not offered again");
+
+  // A failure carries its reason, and resolving it never restyles it as delivered.
+  const failed = W._render(Object.assign({}, withTx, {
+    outbox: [{ transmissionId: "wsq-tx-1", orderId: "wsq-rx-1", channel: "pharmacy", state: "failed", outstanding: false, failureReason: "Pharmacy endpoint refused the message.", resolvedAt: "2026-09-07T10:00:00.000Z", resolution: "Printed and handed over." }],
+  }));
+  assert.match(failed, /Pharmacy endpoint refused the message\./);
+  assert.match(failed, /not delivered/);
+  assert.match(failed, /Dealt with: Printed and handed over\./);
+  assert.ok(!/confirmed received/.test(failed), "a resolved failure is not a delivery");
+
+  // Nothing prescribed and nothing sent: the card stays off the chart rather than showing an empty box.
+  assert.ok(!W._render(chart).includes("Prescriptions sent"));
+});
+
+const copy = Object.assign({}, base, {
+  view: "pcopy",
+  sel: { encounterId: "wsq-adm-x", patientId: "opd-pat-x", ward: "Ward A", bed: "12", admittedAt: "2026-09-07T04:00:00.000Z" },
+  pcopy: {
+    ok: true, patientId: "opd-pat-x",
+    statements: ["1 result is not included here. Your care team will discuss it with you.",
+      "This is a summary your care team has given you. It is not your complete medical record - you can ask the hospital for that separately."],
+    clinicianWarnings: ["This hospital has not configured wardsynq.neverRelease, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."],
+    document: {
+      patient: { id: "opd-pat-x", name: "Test Patient", mrn: "MRN-1", dob: "1970-01-01" },
+      diagnoses: [{ display: "Type 2 diabetes" }, { display: "COPD", note: "This is a working diagnosis. Your team is still confirming it." }],
+      excludedDiagnoses: 1,
+      allergies: [{ substance: "Penicillin", reaction: "rash" }],
+      medicines: [{ drug: "Metformin", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD" }],
+      results: [{ id: "rep-2", name: "Renal profile", reportedAt: "2026-09-08T09:00:00.000Z", status: "final", conclusion: null }],
+      withheldResults: [{ reason: "critical_unacknowledged", say: "Your care team is reviewing this result and will discuss it with you.", reportedAt: "2026-09-08T10:00:00.000Z" }],
+      appointments: [],
+    },
+  },
+});
+
+test("THE CLINICIAN'S WARNING NEVER PRINTS ON THE PATIENT'S OWN COPY", () => {
+  const html = load()._render(copy);
+  /* Two audiences on one page. The patient's sentences print; the line telling the clinician to
+   * check the page before handing it over carries w-noprint, because a document reading "not for
+   * the patient" handed to the patient is the most careless thing this screen could do. */
+  assert.ok(/<p class="w-dt-gap w-noprint">[^<]*neverRelease/.test(html), "the warning is on screen and marked not to print");
+  assert.match(html, /w-dt-warn">1 result is not included here/, "and the patient's own sentences are not w-noprint");
+  assert.ok(!/w-dt-warn">[^<]*neverRelease/.test(html), "the two are never mixed into one block");
+});
+
+test("a withheld result is ON the page, in the patient's words and never its reason code", () => {
+  const html = load()._render(copy);
+  assert.match(html, /Not included here/);
+  assert.match(html, /Your care team is reviewing this result/);
+  /* The reason code is for the clinician and the audit trail. Printing "critical_unacknowledged" on
+   * a page a patient reads tells them something alarming and nothing useful. */
+  assert.ok(!html.includes("critical_unacknowledged"));
+  // A result that IS releasable appears under its own heading, so the two are never confused.
+  assert.match(html, /Renal profile/);
+});
+
+test("the patient copy never renders a stale patient, and the handover is its own act", () => {
+  const W = load();
+  // Nothing loaded yet renders a placeholder, never the previous patient's page.
+  assert.match(W._render(Object.assign({}, copy, { pcopy: null })), /Preparing the copy/);
+
+  const html = W._render(copy);
+  assert.match(html, /Test Patient/);
+  assert.match(html, /Penicillin/);
+  // The working diagnosis is labelled rather than printed as settled.
+  assert.match(html, /working diagnosis/);
+  // Recording the handover is a separate, deliberate act with its own button.
+  assert.match(html, /data-w-act="pcopyGive"/);
+});
+
+/* ---- Held from other systems (2026-09-08): the exchange exception queue ------------------------ */
+
+const held = (over = {}) => ({
+  id: "wsq-xchg-1", source: "fhir-partner-his", reason: "identity-probable-duplicate", detail: "no identifier matched, but a local patient resembles this one closely enough that a person must decide",
+  patientId: null, raisedAt: "2026-09-08T10:00:00.000Z", entityRefs: ["Patient/HIS-PAT-77", "Observation/HIS-OBS-1"],
+  candidates: [{ id: "wsq-pat-1", mrn: "SMD-WARD01-00001", score: 0.91, band: "probable" }, { id: "wsq-pat-2", mrn: "SMD-WARD01-00002", score: 0.62, band: "possible" }],
+  conflict: null, ...over,
+});
+
+test("HELD FROM OTHER SYSTEMS: every held message is listed with its reason verbatim, in plain words, and only the decisions that fit it", () => {
+  const html = load()._render(Object.assign({}, base, { xchg: { ok: true, open: [held(), held({ id: "wsq-xchg-2", reason: "conflict-local-authoritative", candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-9", version: 3, source: "wardsynq-native" } }), held({ id: "wsq-xchg-3", reason: "conflict-patient-mismatch", candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-8", version: 1, source: "fhir-partner-his" } })] } }));
+  assert.match(html, /Held from other systems &middot; 3/);
+  assert.match(html, /identity-probable-duplicate/, "the reason code, verbatim");
+  assert.match(html, /a patient here looks like this person/, "and in plain words");
+  assert.match(html, /2 records held/);
+  // Candidates are offered as the choice for a link, with the MRN and the band the matcher gave -
+  // but NONE is preselected: an identity decision this clinician never touched is not one they made.
+  assert.match(html, /name="wxP-wsq-xchg-1" value="wsq-pat-1"[^>]*>/);
+  assert.doesNotMatch(html, /name="wxP-wsq-xchg-1"[^>]*checked/, "no candidate is checked by default");
+  assert.match(html, /SMD-WARD01-00002/);
+  assert.match(html, /probable 0\.91/);
+  // Only the decisions that fit, and the decision dropdown itself starts on an unchosen placeholder:
+  // identity gets link/create/reject; an ownership conflict gets accept-feed/keep-local; a
+  // patient-mismatch conflict gets REJECT ONLY, because it can never be accepted or kept as ours.
+  const sel = (id) => (new RegExp(`<select id="wxR-${id}">([\\s\\S]*?)</select>`).exec(html) || [])[1] || "";
+  assert.deepEqual([...sel("wsq-xchg-1").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "link", "create", "reject"]);
+  assert.deepEqual([...sel("wsq-xchg-2").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "accept-feed", "keep-local"]);
+  assert.deepEqual([...sel("wsq-xchg-3").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "reject"]);
+  assert.match(html, /ours: Observation\/wsq-obs-9 v3 \(wardsynq-native\)/, "the conflicting record of ours is named");
+  assert.match(html, /Why \(required\)/);
+  assert.match(html, /data-w-act="xchg:wsq-xchg-1"/);
+  assert.match(html, /Nothing here is on a chart yet/);
+  assert.ok(!/—/.test(html), "no em-dash");
+});
+
+test("an empty exchange queue says so; an UNREADABLE one never looks empty", () => {
+  const W = load();
+  assert.match(W._render(Object.assign({}, base, { xchg: { ok: true, open: [] } })), /Nothing is held from another system\./);
+  assert.match(W._render(Object.assign({}, base, { xchg: null })), /Loading the exchange queue/);
+  const err = W._render(Object.assign({}, base, { xchg: null, xchgErr: "Could not load the exchange queue: permission" }));
+  assert.match(err, /Could not load the exchange queue: permission/);
+  assert.ok(!/Nothing is held/.test(err), "an error is not an empty list");
+});
+
+test("a held message whose reason has no candidates still lets a person name the patient for a link, and text is escaped", () => {
+  const html = load()._render(Object.assign({}, base, { xchg: { ok: true, open: [held({ candidates: [], detail: "<b>x</b>", source: "his<script>" })] } }));
+  assert.match(html, /id="wxPid-wsq-xchg-1"/, "a free-text local patient id for the link");
+  assert.match(html, /&lt;b&gt;x&lt;\/b&gt;/);
+  assert.match(html, /his&lt;script&gt;/);
+  assert.ok(!/<script/.test(html));
+});
+
+/* ---- the golden path additions: bed board + admission, medication ordering, investigation
+ * ordering + results, and the flowsheet. Pure-render assertions; the interactive behaviour (a
+ * click, a request body, the eMAR state machine, cross-viewport layout) is proven for real in
+ * test/run-ward-golden-path.mjs against a real headless browser. */
+
+test("BED BOARD: occupied and free beds are both shown, no bed is preselected, and picking one opens the admit panel for exactly that bed", () => {
+  const W = load();
+  const board = Object.assign({}, base, { view: "board", board: { ok: true, bedsConfigured: true, wards: [
+    { ward: "Medical A", bedsKnown: true, occupied: [{ encounterId: "e1", patientId: "opd-pat-1", bed: "07" }], free: ["08", "09"], unplaced: [] },
+  ] } });
+  const html = W._render(board);
+  assert.match(html, /Medical A/);
+  assert.match(html, /opd-pat-1/, "the occupant is shown");
+  assert.match(html, /data-w-act="pickbed:Medical A\|08"/);
+  assert.match(html, /data-w-act="pickbed:Medical A\|09"/);
+  assert.ok(!html.includes("picked"), "nothing is preselected until a person clicks a bed");
+  assert.ok(!html.includes('data-w-act="admitnew"'), "no admit panel until a bed is picked");
+
+  const picked = W._render(Object.assign({}, board, { admitTarget: { ward: "Medical A", bed: "08" } }));
+  assert.match(picked, /Admit to Medical A, bed 08/);
+  assert.match(picked, /data-w-act="admitnew"/);
+  assert.match(picked, /data-w-act="mrnlookup"/);
+  assert.ok(!picked.includes('data-w-act="admitconfirm"'), "no confirm button until an MRN lookup actually found somebody");
+
+  const found = W._render(Object.assign({}, board, { admitTarget: { ward: "Medical A", bed: "08" }, mrnLookup: { mrn: "SMD-1", name: "Real Patient" } }));
+  assert.match(found, /Real Patient/);
+  assert.match(found, /data-w-act="admitconfirm"/);
+});
+
+test("a bed board with no configured bed list says so, rather than reporting zero free beds", () => {
+  const html = load()._render(Object.assign({}, base, { view: "board", board: { ok: true, bedsConfigured: false, wards: [
+    { ward: "Medical A", bedsKnown: false, occupied: [], free: [], unplaced: [] },
+  ] } }));
+  assert.match(html, /Bed list not configured/);
+  assert.ok(!/0 free/.test(html));
+});
+
+test("MEDICATION ORDER: the form asks for drug, dose and unit; nothing is preselected or computed", () => {
+  const html = load()._render(chart);
+  assert.match(html, /id="wMoDrug"/);
+  assert.match(html, /id="wMoValue"/);
+  assert.match(html, /id="wMoUnit"/);
+  assert.match(html, /data-w-act="medorder"/);
+  assert.match(html, /Every safety and formulary check happens on the server/);
+});
+
+test("INVESTIGATIONS: an order in flight is shown apart from a resulted one, and a result's conclusion is never invented", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    investigations: { requests: [{ serviceRequestId: "sr1", display: "Chest X-ray", category: "imaging", priority: "urgent", collection: { state: "ordered" } }] },
+    results: [{ display: "Chest X-ray", status: "final", conclusion: "Clear.", reportedAt: "2026-09-08T10:00:00.000Z" }],
+  }));
+  assert.match(html, /Chest X-ray/);
+  assert.match(html, /URGENT/);
+  assert.match(html, /Clear\./);
+  assert.match(html, /On order/);
+  assert.match(html, /Results/);
+});
+
+test("FLOWSHEET: an empty hour is a plain dash, never a value that looks recorded, and NEWS2 states plainly when it could not be scored", () => {
+  const html = load()._render(Object.assign({}, chart, {
+    flowsheet: { hours: ["2026-09-08T08:00:00Z", "2026-09-08T09:00:00Z"], rows: [
+      { code: "8480-6", label: "Systolic BP", cells: [{ hour: "2026-09-08T08:00:00Z", empty: true }, { hour: "2026-09-08T09:00:00Z", empty: false, value: 118, unit: "mmHg" }] },
+    ] },
+    news2: { ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough recorded to score." } },
+  }));
+  assert.match(html, /Systolic BP/);
+  assert.match(html, /118 mmHg/);
+  assert.match(html, /Not enough recorded to score\./);
+  assert.match(html, /This is a score, not an escalation/);
+});

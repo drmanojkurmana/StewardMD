@@ -22,7 +22,7 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCqis", "vaccines"]];
+    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["note", "Note", "edit_note"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -355,9 +355,27 @@
     var on = st.fieldMic === name;
     return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
   }
+  // "Search ICD" button, shown only on the provisional diagnosis field - picking a code appends
+  // "CODE - Title" as a new line rather than replacing whatever the doctor already typed, same
+  // additive behaviour as the per-field mic. window.SMD_ICD comes from icd.js (loaded default-on,
+  // no flag - see vault/modules/ICD Search.md).
+  function icdBtn(name) {
+    if (!G.SMD_ICD) return "";
+    return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsearch:' + esc(name) + '" aria-label="Search ICD" title="Search ICD-10 / ICD-11 code">' + ms("search") + "</button>";
+  }
+  // MaiK-assisted suggestion, same button-pair idea as icu.js: manual search stays a plain magnifier
+  // icon, MaiK suggestion gets its own icon so the two are never confused for the same action.
+  function icdSuggestBtn(name) {
+    if (!G.SMD_AI || !G.SMD_AI.extract) return "";
+    return '<button type="button" class="oe-fmic oe-icdbtn" data-oe-act="icdsuggest:' + esc(name) + '" aria-label="Suggest ICD code (MaiK)" title="Suggest ICD code (MaiK)">' + ms("auto_awesome") + "</button>";
+  }
   function assessField(f, vals) {
     var val = assessGet(vals, f), id = "assess:" + f.n, re = f.r && !val;
-    if (f.k === "textarea") return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + "</span>", f.r, re);
+    if (f.k === "textarea") {
+      var extra = f.n === "provisional_diagnosis" ? (icdBtn(f.n) + icdSuggestBtn(f.n)) : "";
+      var panel = f.n === "provisional_diagnosis" ? '<div class="oe-icdsug" id="oeIcdSug"></div>' : "";
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
+    }
     if (f.k === "yesno") return ynRow(f, val);
     var type = f.k === "number" ? "number" : "text";
     return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
@@ -760,9 +778,9 @@
   // Delegates markup to onco-protocols.js / onco-nurse.js so opd-emr.js stays the shell; inert (not
   // enabled / no plan) never crashes.
   function oncoTab(st) {
-    if (!oncoFlagOn()) return section("vaccines", "ONCqis", "", "", "Oncology protocols are not enabled for this account.");
+    if (!oncoFlagOn()) return section("vaccines", "ONCQIS", "", "", "Oncology protocols are not enabled for this account.");
     var plan = st.oncoPlan;
-    if (!plan) return section("vaccines", "ONCqis", "", "", "No active treatment plan for this patient yet.");
+    if (!plan) return section("vaccines", "ONCQIS", "", "", "No active treatment plan for this patient yet.");
     var toggle = oncoViewToggle(st);
     var body;
     if (st.oncoView === "nurse") {
@@ -776,7 +794,7 @@
       body += oncoPrintButtonHtml();    // Phase 6: 2-page Protocol PDF, built from this same plan/cycle
       body += oncoEmrButtonHtml(st);    // Phase G: [Add to EMR], only after CONFIRM & ACTIVATE
     }
-    return section("vaccines", "ONCqis", (plan.protocolId || "").toUpperCase(), toggle + body, "");
+    return section("vaccines", "ONCQIS", (plan.protocolId || "").toUpperCase(), toggle + body, "");
   }
   // Doctor-only per-cycle control panel (create/clearance/confirm), gated the same way the rest of
   // the write UI is gated (flag + smd_opd_emr_write) - a read-only doctor session sees only the
@@ -808,7 +826,7 @@
   // ---- Protocol tab: search the reference protocol library + Assign to this patient --------------
   // Search is a LOCAL filter over st.oncoProtocols (the 124 /kb/protocols/*.json already loaded);
   // Assign creates a DRAFT plan (server accepts the client template) + a timeline entry, then returns
-  // to the OPD profile. No auto-activation — the ONCqis tab still owns dose-lock + administration.
+  // to the OPD profile. No auto-activation — the ONCQIS tab still owns dose-lock + administration.
   function protocolTab(st) {
     if (!oncoFlagOn()) return section("account_tree", "Protocol", "", "", "Oncology protocols are not enabled for this account.");
     if (!st.oncoProtocolsLoaded) { try { maybeLoadOncoProtocols(); } catch (e) {} return section("account_tree", "Protocol", "Loading the protocol library…", "", "Loading…"); }
@@ -863,6 +881,7 @@
       if (active === "inv") body = head + invTab(st);
       else if (active === "meds") body = head + medsTab(st);
       else if (active === "assess") body = head + assessTab(st);
+      else if (active === "note") body = head + noteTab(st);
       else if (active === "protocol") body = head + protocolTab(st);
       else if (active === "onco") body = head + oncoTab(st);
       else body = head + profileTab(st);
@@ -886,7 +905,22 @@
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
   function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
-  function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
+  /* Keep the scroll position across a repaint.
+   *
+   * Every action in a consultation repaints the whole overlay with one innerHTML swap, and the new
+   * .oe-canvas starts at scrollTop 0 - so each tap threw the doctor back to the top of the note and
+   * they scrolled down again, mid-consultation, every time. queue.js paint() already does exactly
+   * this for .q-canvas; this is the same fix for the EMR's own scroller.
+   *
+   * Restored synchronously, before the browser paints, so there is no visible jump. Guarded on a
+   * non-zero top so genuinely re-opening a note still starts at the beginning. */
+  function paint() {
+    var r = root();
+    var prev = r.querySelector(".oe-canvas"), top = prev ? prev.scrollTop : 0;
+    r.innerHTML = _render(st);
+    if (top) { var next = r.querySelector(".oe-canvas"); if (next) next.scrollTop = top; }
+    try { initCloseSwipe(); } catch (e) {}
+  }
   function paintKeepFocus(kind) {
     paint();
     try { var el = document.querySelector('#smdOpdEmr [data-oe-inp="' + kind + '-q"]'); if (el) { el.focus(); var v = el.value; el.value = ""; el.value = v; } } catch (e) {}
@@ -913,12 +947,33 @@
   // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
   function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
   function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
-  function addToTimeline(kind, text) {
+  function addToTimeline(kind, text, vals, signOff, order, rx) {
     if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
     fbTok().then(function (t) {
       if (!t) return;
-      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
-        body: JSON.stringify({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) }) }).catch(function () {});
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) };
+      // The doctor's Authorise, only after GHIS confirmed it. Distinct from a content save on purpose:
+      // it carries no fields, and it must never be mistaken for one.
+      if (signOff) body.signOff = true;
+      // The structured fields travel WITH the summary text. The timeline keeps its text line; where
+      // a tenant has opted a clinical write into the WardSynQ record (currently: vitals, kind
+      // "assessment", an investigation order on a kind "note", and a prescription on a kind
+      // "medication"), the server maps the structured payload into the canonical record and the
+      // text line is untouched either way.
+      if (vals) body.vals = vals;
+      // What distinguishes an investigation order from every other kind:"note" line. Without it the
+      // server treats this as a plain note and files nothing, which is exactly the old behaviour.
+      if (order) body.order = order;
+      // Likewise for a prescription against every other kind:"medication" line.
+      if (rx) body.rx = rx;
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) {
+          // Off/shadow (every tenant today): the response is {ok:true, ...} and nothing changes here.
+          // A tenant running the clinical record as authoritative can refuse this write; that must
+          // not vanish silently, or "authoritative" would mean nothing a doctor could act on.
+          if (d && d.ok === false && d.error === "record_refused") toast("Saved to " + emrLabel() + ". Could not also save to the clinical record - " + ((d.wardsynq && d.wardsynq.error) || "try again") + ".");
+        }).catch(function () {});
     }).catch(function () {});
   }
   function assessSummary(v) {
@@ -1090,9 +1145,29 @@
     ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
     inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
   function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
+  // WardSynQ-native hospital: the org's own billing-tariff catalog (kind:"investigation" or
+  // "medication" rows), Firebase-authed, via GET /api/queue/inv-catalog?kind=. Same catalog
+  // mechanism for both - investigation ordering and prescribing both need SOMETHING to search that
+  // isn't GHIS's, which is meaningless for a hospital with no GHIS.
+  function runWardsynqCatalogSearch(kind, q) {
+    var key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg", tariffKind = kind === "inv" ? "investigation" : "medication";
+    st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
+    fbTok().then(function (t) {
+      if (!t) { st[key] = []; st[mkey] = "login"; renderSearchOut(kind); return; }
+      fetch(qBase() + "/api/queue/inv-catalog?kind=" + tariffKind + "&sessionId=" + encodeURIComponent(st.sessionId || "") + "&q=" + encodeURIComponent(q), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
+        .then(function (res) {
+          if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
+          else { st[key] = (res.d && res.d.rows) || []; st[mkey] = st[key].length ? "" : "none"; }
+          renderSearchOut(kind);
+        })
+        .catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+    }).catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
+  }
   function runSearch(kind) {
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
     if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
+    if (st.source === "wardsynq") { runWardsynqCatalogSearch(kind, q); return; }
     // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
     if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
     st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
@@ -1165,6 +1240,9 @@
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
+    if (cmd === "icdsearch") return openIcdSearchForField(arg);
+    if (cmd === "icdsuggest") return openIcdSuggestForField(arg);
+    if (cmd === "icdaccept") return acceptIcdSuggestion(+arg);
     if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
     if (cmd === "rx-rxchoice") return openRxChoice(st);
@@ -1190,6 +1268,12 @@
     if (cmd === "onco-print") return oncoPrintProtocol();
     if (cmd === "ivx") { var xi = +arg, xn = (st.dictatedInv || [])[xi]; if (xn != null) { st.dictatedInv.splice(xi, 1); stripPlanLine(xn); paint(); } return; }
     if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
+    /* Picking a template re-renders the headings and nothing else. Any text already typed under the
+     * previous template's headings is NOT carried across: the sections mean different things, and
+     * silently moving a paragraph from "Examination" to "Plan" would put words in a clinician's note
+     * that they did not write there. */
+    if (cmd === "ntpick") { st.noteTplId = (document.getElementById("oe-nt-pick") || {}).value || ""; st.noteMsg = ""; paint(); return; }
+    if (cmd === "ntsave") { saveNote(); return; }
     if (cmd === "notes-copy") return copyNotes();
     if (cmd === "notes-save") return saveNotesToHistory();
     if (cmd === "notes-clear") return clearNotes();
@@ -1258,7 +1342,7 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
+  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "note") loadNoteTemplates(); }
 
   // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
   // write. drugId may itself contain ":" so re-join everything after the cycle number.
@@ -1369,6 +1453,102 @@
   }
   // Firebase-authed GET to the onco routes (mirrors oncoPost's auth, no body). Read-side counterpart
   // that lets a NURSE session (no EMR_TREAT) actually fetch a cycle - the gap this phase closes.
+  /* The OPD note composer, 2026-09-08. The server half has existed since #906/#932 - org templates
+   * that supply HEADINGS and never content, a composer that writes no text of its own, and a note
+   * that is never auto-signed - and it was reachable from the ward chart and from nowhere in OPD.
+   * This is the OPD screen for it, and it computes nothing: every rule belongs to note-templates.js.
+   *
+   * THE TEMPLATE SUPPLIES HEADINGS, NOT WORDS. Nothing here prefills a section, offers a default
+   * phrase or suggests text. A note whose sentences a system wrote is a note nobody actually
+   * examined the patient to produce, and the clinician's name goes on it regardless.
+   *
+   * A SECTION LEFT EMPTY IS RECORDED AS NOT RECORDED, by the server, in its own words - never as an
+   * empty string, which reads as "examined and normal" to the next person to open the chart. */
+  function wardGet(path) {
+    return fbTok().then(function (t) {
+      var h = {}; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/ward/" + path, { headers: h, credentials: "include" });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+  function wardPost(path, body) {
+    return fbTok().then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/ward/" + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body) });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+
+  function loadNoteTemplates() {
+    if (st.tplLoaded || st.tplLoading) return;
+    st.tplLoading = true;
+    wardGet("templates?orgId=" + encodeURIComponent(st.hospitalId || "")).then(function (d) {
+      st.tplLoading = false; st.tplLoaded = true;
+      st.templates = (d && d.ok && d.templates) || [];
+      /* An empty list is STATED rather than shown as an empty dropdown: "this hospital has not
+       * configured any" and "they failed to load" look identical otherwise, and only one of them is
+       * something a clinician should wait for. */
+      st.tplErr = (d && d.ok) ? "" : ((d && d.detail) || "Templates could not be loaded.");
+      if (st.tab === "note") paint();
+    }).catch(function () {
+      st.tplLoading = false; st.tplLoaded = true; st.templates = [];
+      st.tplErr = "Templates could not be loaded.";
+      if (st.tab === "note") paint();
+    });
+  }
+
+  function saveNote() {
+    var tplId = st.noteTplId || "";
+    if (!tplId) { st.noteMsg = "Choose a template first."; paint(); return; }
+    /* A note belongs to a VISIT. Opened from a search rather than from the queue there is no ticket,
+     * so there is no encounter to file it against - and the server derives the encounter from the
+     * ticket precisely so this client never computes one. Refused with the reason rather than posted
+     * against a guessed id, which would file the note under an encounter that does not exist. */
+    if (!st.ticketId) { st.noteMsg = "This patient was not opened from today's queue, so there is no visit to file a note against. Open them from the queue."; paint(); return; }
+    var tpl = (st.templates || []).filter(function (t) { return t.id === tplId; })[0];
+    var sections = {};
+    ((tpl && tpl.sections) || []).forEach(function (s) {
+      var el = document.getElementById("oe-nt-" + s.key);
+      if (el && el.value.trim()) sections[s.key] = el.value.trim();
+    });
+    st.noteSaving = true; st.noteMsg = ""; paint();
+    wardPost("note", { orgId: st.hospitalId || "", templateId: tplId, ticketId: st.ticketId || "", sections: sections })
+      .then(function (d) {
+        st.noteSaving = false;
+        /* Never "signed". writeTemplatedNote does not sign, and a screen that said so would be
+         * claiming an authorisation the record does not carry. */
+        st.noteMsg = (d && d.ok) ? "Note saved to the record. It is not signed." : ((d && d.detail) || "The note was not saved.");
+        if (d && d.ok) st.noteSavedId = d.noteId || null;
+        paint();
+      })
+      .catch(function () { st.noteSaving = false; st.noteMsg = "The note was not saved."; paint(); });
+  }
+
+  function noteTab(st) {
+    if (st.tplLoading) return loadingBox("Loading templates…");
+    var tpl = (st.templates || []).filter(function (t) { return t.id === st.noteTplId; })[0];
+    var opts = '<option value="">Choose a template…</option>' +
+      (st.templates || []).map(function (t) {
+        return '<option value="' + esc(t.id) + '"' + (t.id === st.noteTplId ? " selected" : "") + ">" + esc(t.title || t.id) + "</option>";
+      }).join("");
+
+    var body = !st.templates || !st.templates.length
+      ? '<p class="oe-empty">' + esc(st.tplErr || "This hospital has not configured any note templates. Nothing here writes headings of its own.") + "</p>"
+      : '<label class="oe-field">Template<select id="oe-nt-pick" class="oe-inp" data-e-act="ntpick">' + opts + "</select></label>" +
+        (tpl
+          ? ((tpl.sections || []).map(function (s) {
+              return '<label class="oe-field">' + esc(s.title || s.key) + (s.required ? " *" : "") +
+                '<textarea id="oe-nt-' + esc(s.key) + '" class="oe-inp" rows="3"></textarea></label>';
+            }).join("") +
+            '<div class="oe-actions"><button class="oe-btn primary" data-e-act="ntsave"' + (st.noteSaving ? " disabled" : "") + ">" +
+            (st.noteSaving ? "Saving…" : "Save note") + "</button></div>" +
+            /* Said on the screen, every time, because it is the difference between a note and a
+             * signed note and nothing else on this page says which this is. */
+            '<p class="oe-note">' + ms("info") + "The headings come from your hospital. Nothing is written for you, a section you leave empty is recorded as not recorded, and saving does not sign the note.</p>")
+          : '<p class="oe-empty">Choose a template to see its headings.</p>') +
+        (st.noteMsg ? '<p class="oe-note">' + ms("info") + esc(st.noteMsg) + "</p>" : "");
+
+    return '<section class="oe-sec"><h3>Consultation note</h3>' + body + "</section>";
+  }
+
   function oncoGet(path) {
     return fbTok().then(function (t) {
       var h = {}; if (t) h.Authorization = "Bearer " + t;
@@ -1780,14 +1960,36 @@
     var a = ghisAuth(), url = kind === "lab"
       ? "/lab-detail?renderId=" + encodeURIComponent(parts[0] || "") + "&episodeId=" + encodeURIComponent(parts[1] || "")
       : "/radiology-report?resultid=" + encodeURIComponent(parts[0] || "") + "&type=" + encodeURIComponent(parts[1] || "manual");
+    // The order row this tap came from, so the mirror below (if this fetch succeeds) can send the
+    // SAME metadata the console already scraped, rather than re-deriving it from the URL parts.
+    var orderRow = kind === "lab"
+      ? (st.labs || []).filter(function (l) { return String(l.renderId || "") === parts[0] && String(l.episodeId || "") === parts[1]; })[0]
+      : (st.radiology || []).filter(function (o) { return String(o.resultid || "") === parts[0]; })[0];
     fetch(a.base + url, { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
       .then(function (res) {
         if (!st.report) return;
         if (!res.ok || res.d.error) { st.report.loading = false; st.report.err = res.d.error === "login_required" ? "Connect Ward Sync (GHIS) first." : "Could not load this report."; paint(); return; }
         st.report.loading = false; st.report.data = res.d; paint();
+        // Mirror what GHIS just answered into the clinical record, best-effort, after the fact.
+        // GHIS's read already happened and is unaffected by anything that follows; see
+        // functions/_wardsynq/migrate-results.js for why this is a READ mirror, not a write.
+        mirrorResult(kind === "lab" ? "lab" : "radiology", orderRow, res.d);
       })
       .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
+  }
+  // Fire-and-forget: post what GHIS just returned to the queue-session-authenticated mirror, so a
+  // tenant with the "results" migration on can file it as a WardSynQ DiagnosticReport. Off (every
+  // tenant today), the server does nothing with this and nothing here is visible to the doctor
+  // either way — no toast, no error surfaced, because a missed mirror changes no clinical behaviour:
+  // GHIS remains the source the doctor just read from.
+  function mirrorResult(source, orderRow, detail) {
+    if (!st.ticketId || !st.sessionId || !orderRow || !detail) return;
+    fbTok().then(function (t) {
+      if (!t) return;
+      var body = { sessionId: st.sessionId, ticketId: st.ticketId, source: source, order: orderRow, detail: detail };
+      fetch(qBase() + "/api/queue/result", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) }).catch(function () {});
+    }).catch(function () {});
   }
   // #156 — fetch every lab report for a repeated test name so labTrendPanel can trend its numeric analytes.
   // Reuses the /lab-detail endpoint per order. Patient-switch guarded. Flag-gated OFF (validate on device).
@@ -1861,7 +2063,10 @@
   // behind saveConsult in the injected store, so the EMR overlay stays storage-agnostic.
   function usesLocal(s) { return s === "local" || s === "shared"; }
   function loadProfile(opts) {
-    if (usesLocal(st.source)) { st.loading = false; paint(); return; }   // personal/shared clinic: no hospital profile/labs to fetch
+    // Personal/shared clinic: no hospital profile/labs to fetch. WardSynQ-native hospital: same - labs/
+    // radiology/medications are not migrated in this task, and there is no GHIS to fetch them from; the
+    // Profile tab must not show "Connect Ward Sync (GHIS) first" for a hospital that has no GHIS.
+    if (usesLocal(st.source) || st.source === "wardsynq") { st.loading = false; paint(); return; }
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
     var forPatient = st;   // guard: if the doctor opens another patient before this resolves, don't write A's labs onto B's chart
@@ -1877,7 +2082,10 @@
       .catch(function () { if (st !== forPatient) return; st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
-    if (usesLocal(st.source)) {   // personal/shared clinic: prefill from the on-device store (no GHIS fetch)
+    // Personal/shared clinic: prefill from the on-device store (no GHIS fetch). WardSynQ-native
+    // hospital: no on-device store either, and no GHIS draft to prefill from - a blank form for this
+    // encounter (the doctor's saved note is still readable afterward, via the visit timeline below).
+    if (usesLocal(st.source) || st.source === "wardsynq") {
       st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
       st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
       paint(); return;
@@ -1944,25 +2152,131 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
-        if (tl && tl.text) { addToTimeline(tl.kind, tl.text); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text, tl.vals, tl.signOff, tl.order, tl.rx); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
       })
       .catch(function () { toast("Could not complete the request. Please try again."); });
   }
+  // WardSynQ-native hospital (source "wardsynq"): the assessment write goes DIRECTLY to the WardSynQ
+  // record over the SAME /api/queue/timeline endpoint addToTimeline() already posts to for the GHIS
+  // shadow mirror - but here it IS the save, not a best-effort mirror: a refusal is reported to the
+  // doctor, never swallowed, and success means the WardSynQ record accepted it - no GHIS involved at
+  // all. Firebase-authed (qBase/fbTok, same as addToTimeline), never _localStore.
+  function wardsynqSay(d) {
+    var err = d && d.error;
+    if (err === "wardsynq_tenant_not_configured") return "WardSynQ is not fully set up for this hospital yet. Contact support.";
+    if (err === "record_refused") return "Could not save to the clinical record - " + ((d.wardsynq && d.wardsynq.error) || "try again") + ".";
+    if (err === "not_found") return "This visit could not be found. Reopen the patient from the queue and try again.";
+    return "Could not complete the request. Please try again.";
+  }
+  // General native-WardSynQ write: posts straight to the SAME /api/queue/timeline endpoint
+  // addToTimeline() uses for the GHIS shadow mirror, Firebase-authed - but here it IS the save, not a
+  // best-effort mirror. `extra` carries whatever structured payload this kind needs (vals/order/rx/
+  // signOff); success/failure is the WardSynQ record's own, never a GHIS response.
+  function postWardsynqTimeline(kind, text, extra, okMsg, onOk) {
+    if (!st.ticketId || !st.sessionId) { toast("Open this patient from the queue to save."); return; }
+    fbTok().then(function (t) {
+      if (!t) { toast("Sign in to WardSynQ first."); return; }
+      var body = Object.assign({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: text }, extra || {});
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
+        .then(function (res) {
+          var d = res.d;
+          if (!res.ok || d.ok === false) { toast(wardsynqSay(d)); return; }
+          toast(okMsg);
+          setTimeout(loadTimeline, 600);
+          if (onOk) try { onOk(); } catch (e) {}
+        })
+        .catch(function () { toast("Could not complete the request. Please try again."); });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  function postWardsynqAssessment(vals, okMsg, signOff, onOk) {
+    var extra = {}; if (vals) extra.vals = vals; if (signOff) extra.signOff = true;
+    postWardsynqTimeline("assessment", assessSummary(st.assessVals), extra, okMsg, onOk);
+  }
+  // Advisory-only CDSS pre-check (functions/_wardsynq/rx-safety.js) - shown to the doctor BEFORE
+  // they confirm a native prescription. NEVER blocks: the promise always resolves to a safety
+  // object (possibly with findings, possibly degraded), never rejects, so a check that fails never
+  // stops the doctor from prescribing - it only stops them from prescribing UNINFORMED.
+  function checkWardsynqRxSafety(drug, generic) {
+    if (!st.ticketId || !st.sessionId) return Promise.resolve({ unapproved: true, findings: [], degraded: true });
+    return fbTok().then(function (t) {
+      if (!t) return { unapproved: true, findings: [], degraded: true };
+      var q = "sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId) + "&drug=" + encodeURIComponent(drug || "") + "&generic=" + encodeURIComponent(generic || "");
+      return fetch(qBase() + "/api/queue/rx-safety?" + q, { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) { return (d && d.ok && d.safety) || { unapproved: true, findings: [], degraded: true }; })
+        .catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+    }).catch(function () { return { unapproved: true, findings: [], degraded: true }; });
+  }
+  // Plain-text summary appended to the prescribe confirm() dialog. Labeled UNAPPROVED per this
+  // content's own governance status (vault/modules/WardSynQ.md) - never phrased as a cleared check.
+  function wardsynqSafetyNote(safety) {
+    if (!safety) return "";
+    if (safety.degraded) return "\n\n(Decision support unavailable right now - proceeding without it.)";
+    // A drug the rule pack could not resolve was never checked against ANYTHING. Reporting "no
+    // interaction found" for it would be a clean bill of health for a check that never ran, which is
+    // exactly the distinction rx-safety.js reports `unresolvedDrug` for and which this function used
+    // to discard. Brand names are the common case ("Augmentin 625" does not resolve), and the
+    // patient may well be allergic to what is inside them - a penicillin, here.
+    if (safety.unresolvedDrug) return "\n\nNOT CHECKED: this drug was not recognised by the decision-support content, so NO interaction or allergy check ran for it. Check allergies and interactions yourself before prescribing.";
+    // Some of the patient's CURRENT medicines could not be resolved, so this order was never
+    // compared against them. Saying only "no interaction found" would overstate what ran.
+    var un = (safety.unresolvedActiveMeds || []);
+    var gap = un.length ? "\n\nNOT compared against: " + un.slice(0, 5).join(", ") + " (not recognised by the decision-support content). Check those yourself." : "";
+    if (!safety.findings || !safety.findings.length) return "\n\n(No interaction or allergy match found against this patient's record. Unapproved content, not a substitute for clinical judgment.)" + gap;
+    var lines = safety.findings.slice(0, 5).map(function (f) { return "- " + f.message; });
+    return "\n\nUNAPPROVED decision support flags:\n" + lines.join("\n") + gap + "\n\nUse clinical judgment. This does not block the prescription.";
+  }
   function confirmed(msg) { try { return !!(G.confirm && G.confirm(msg)); } catch (e) { return false; } }
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
+    var order = { serviceId: d.service.id, name: d.service.name || "", diagnosis: d.diagnosis || "", emergency: !!d.emergency };
+    var text = "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, no GHIS. Investigation orders carry
+    // no drug-dosing risk (unlike prescriptions), so unlike submitPrescribe this is safe to enable now.
+    if (st.source === "wardsynq") {
+      if (!confirmed('Order "' + d.service.name + '" for this patient?')) return;
+      postWardsynqTimeline("note", text, { order: order }, "Investigation ordered.", function () { st.invDraft = {}; paint(); });
+      return;
+    }
     if (!confirmed('Order "' + d.service.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `order` rides beside it so the server can file the SAME
+    // order structurally in the clinical record (functions/_wardsynq/migrate-inv-order.js) instead of
+    // re-parsing this sentence. Ignored entirely by clinics with the migration off, which is all of
+    // them today. Note `emergency` and `diagnosis` are carried here even though GHIS itself drops
+    // them - that is what makes the record keep what the doctor actually entered.
     postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.",
-      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "") });
+      { kind: "note", text: text, order: order });
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;
+    var rxText = [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "");
+    // WardSynQ-native hospital: straight to the WardSynQ record, with an advisory-only CDSS
+    // pre-check (functions/_wardsynq/rx-safety.js) shown BEFORE the doctor confirms. That check
+    // never blocks - see its header (unapproved clinical content) - it only informs.
+    if (st.source === "wardsynq") {
+      checkWardsynqRxSafety(d.drug.name, d.drug.name).then(function (safety) {
+        if (!confirmed('Prescribe "' + d.drug.name + '" for this patient?' + wardsynqSafetyNote(safety))) return;
+        postWardsynqTimeline("medication", rxText,
+          { rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.name || "", drugCodeSystem: "wardsynq-tariff", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } },
+          "Prescribed.", function () { st.medDraft = {}; paint(); });
+      });
+      return;
+    }
     if (!confirmed('Prescribe "' + d.drug.name + '" for this patient in GHIS?')) return;
+    // The timeline sentence is unchanged. `rx` rides beside it so the server can file the SAME
+    // prescription structurally in the clinical record (functions/_wardsynq/migrate-prescription.js)
+    // instead of re-parsing this sentence. `generic` is the composition GHIS's own drug search
+    // returned; the safety engine indexes allergy classes and dose limits by generic, so it is
+    // carried rather than dropped. NOTE this whole call is inert today: /prescribe answers 501
+    // until QUEUE_EMR_PRESCRIBE_OK=1, and postWrite returns above without mirroring anything - so a
+    // prescription GHIS refused never reaches the record. That is deliberate, not a gap.
     postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.",
-      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
+      { kind: "medication", text: rxText,
+        rx: { drugId: d.drug.id, name: d.drug.name || "", generic: d.drug.sub || "", route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" } });
   }
   function submitAssessment() {
     // An authorised record is locked in GHIS — a write would be rejected. Say so instead of failing.
@@ -1973,8 +2287,14 @@
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
+    // WardSynQ-native hospital: straight to the WardSynQ record. No GHIS call - a WardSynQ write is
+    // the whole save, not a mirror of one, so its own success/failure is what the doctor sees.
+    if (st.source === "wardsynq") {
+      postWardsynqAssessment(buildAssessPayload(st.assessVals || {}), "Saved to " + emrLabel() + ".", false, function () { st.savedConsult = true; paint(); });
+      return;
+    }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
-      { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
+      { kind: "assessment", text: assessSummary(st.assessVals), vals: buildAssessPayload(st.assessVals || {}) }, function () { st.savedConsult = true; paint(); });
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
   function clearAssessment() {
@@ -1987,8 +2307,9 @@
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
     paint();
+    if (st.source === "wardsynq") { postWardsynqAssessment(buildAssessPayload({}), "Assessment cleared in " + emrLabel() + ".", false); return; }
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
-      { kind: "assessment", text: "Assessment cleared" });
+      { kind: "assessment", text: "Assessment cleared", vals: buildAssessPayload({}) });
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
@@ -2008,6 +2329,63 @@
   // Which on-device model is transcribing right now (updates live as Auto mode adapts per chunk).
   function setModelChip(code) { st.voiceModel = code || ""; try { var e = document.getElementById("oeVcModel"); if (e && code) e.textContent = code; } catch (x) {} }
   function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
+  // Opens the ICD Search overlay in picker mode; the chosen code+title is appended as a new line
+  // to the named field (same DOM-patch path as voice dictation - putVoiceDom - so it doesn't lose
+  // scroll position or trigger a full repaint()).
+  function openIcdSearchForField(name) {
+    if (!G.SMD_ICD || !G.SMD_ICD.pick) { toast("ICD search not available on this build."); return; }
+    G.SMD_ICD.pick(function (row) {
+      st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      var cur = st.assessVals[name] || "";
+      var line = esc2Line(row.code) + " - " + esc2Line(row.title);
+      st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+      st.assessTouched[name] = true;
+      putVoiceDom(name);
+    });
+  }
+  function esc2Line(s) { return String(s == null ? "" : s).replace(/[\r\n]+/g, " "); }
+  // MaiK-assisted ICD suggestion: sends chief complaint + present history + whatever's already
+  // typed in provisional diagnosis (no name/MR number - explicit consent tap first, same posture
+  // as askMaikPro above) to /api/ai/extract kind:"icd-suggest". The server grounds the model
+  // against real icd_codes rows and re-validates every id before it comes back - this client
+  // never trusts a code string directly from the model. Advisory only: each row needs its own
+  // Accept tap; nothing is written to the field until then.
+  var _oeIcdSug = [], _oeIcdSeq = 0, _oeIcdField = "provisional_diagnosis";
+  function openIcdSuggestForField(name) {
+    if (!(G.SMD_AI && G.SMD_AI.extract)) { toast("MaiK is not available on this build."); return; }
+    _oeIcdField = name || "provisional_diagnosis";
+    var v = st.assessVals || {};
+    var text = [v.provisional_diagnosis, v.Chief_complaints_duration, v.History_present_illness].filter(Boolean).join(". ").trim();
+    if (!text) { toast("Type the complaint, history or diagnosis first."); return; }
+    if (!confirmed("Send this text (no name or MR number) to MaiK for ICD-10/11 code suggestions?")) return;
+    var panel = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!panel) return;
+    panel.innerHTML = '<div class="oe-icdsug-hint">Asking MaiK…</div>';
+    var mySeq = ++_oeIcdSeq;
+    G.SMD_AI.extract(text, "icd-suggest").then(function (r) {
+      if (mySeq !== _oeIcdSeq) return;
+      var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (!p) return;
+      if (!r || r.error) { p.innerHTML = '<div class="oe-icdsug-hint">' + esc(r && r.error === "quota" ? (r.message || "MaiK is a StewardMD Pro feature.") : "Could not reach MaiK. Try again.") + '</div>'; return; }
+      _oeIcdSug = r.suggestions || [];
+      if (!_oeIcdSug.length) { p.innerHTML = '<div class="oe-icdsug-hint">No confident ICD match found - try the search icon instead.</div>'; return; }
+      p.innerHTML = _oeIcdSug.map(function (s, i) {
+        return '<div class="oe-icdsug-row"><span class="oe-icdsug-code">' + esc(s.code) + '</span><span class="oe-icdsug-sys">' + esc(s.system) + '</span>' +
+          '<span class="oe-icdsug-title">' + esc(s.title) + '</span>' +
+          '<button type="button" class="oe-icdsug-accept" data-oe-act="icdaccept:' + i + '">Accept</button></div>';
+      }).join("");
+    });
+  }
+  function acceptIcdSuggestion(i) {
+    var s = _oeIcdSug[i]; if (!s) return;
+    var name = _oeIcdField;
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    var cur = st.assessVals[name] || "";
+    var line = esc2Line(s.code) + " - " + esc2Line(s.title);
+    st.assessVals[name] = cur ? (cur + (/\n$/.test(cur) ? "" : "\n") + line) : line;
+    st.assessTouched[name] = true;
+    putVoiceDom(name);
+    var p = document.querySelector("#smdOpdEmr #oeIcdSug"); if (p) p.innerHTML = "";
+    toast("ICD code added: " + s.code);
+  }
   function putVoiceDom(name) {
     try {
       var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;
@@ -2661,13 +3039,16 @@
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
-    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
+    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device | "wardsynq" (WardSynQ-native hospital)
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
-    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;
+    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;   // "wardsynq" never gets a localStore - it writes to the WardSynQ record, not this device
     st.author = opts.author || "";                                          // who is documenting this consult (for the timeline footprint)
     if (_localStore && _localStore.startConsult) { try { _localStore.startConsult(st.patient.mrn); } catch (e) {} }   // each open = a new dated entry
-    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS")));
-    st.writeOn = (usesLocal(st.source) || st.noStore) ? true : writeFlagOn();   // local/shared save is always allowed (on-device, no server gate)
+    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (st.source === "wardsynq" ? "WardSynQ" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"))));
+    // local/shared save is always allowed (on-device, no server gate); "wardsynq" likewise - its Save
+    // button must not depend on smd_opd_emr_write/QUEUE_EMR_WRITE, which gate GHIS write-back only and
+    // are meaningless for a hospital with no GHIS relationship at all.
+    st.writeOn = (usesLocal(st.source) || st.source === "wardsynq" || st.noStore) ? true : writeFlagOn();
     st.hospitalId = opts.hospitalId || opts.orgId || "";
     if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
     if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
@@ -2806,6 +3187,17 @@
    * this button can call it too. */
   function authoriseConsult() {
     if (st.assessAuthorized) { toast("This assessment is already authorised."); return; }
+    // WardSynQ-native hospital: there is no GHIS doc id (oeDocId()) to gate on - the WardSynQ save
+    // itself (st.savedConsult) is what "there is something to sign" means here.
+    if (st.source === "wardsynq") {
+      if (!st.savedConsult) { toast("Save the assessment first, then authorise it."); return; }
+      if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + ". The record is then LOCKED - you cannot edit or save it again.")) return;
+      postWardsynqAssessment(null, "Authorised in " + emrLabel() + ".", true, function () {
+        st.assessAuthorized = { by: st.author || "", on: "" };
+        endConsult();
+      });
+      return;
+    }
     if (!oeDocId()) { toast("Save the assessment first, then authorise it."); return; }
     // Spelled out because it is irreversible: GHIS locks the record on sign-off.
     if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + " and moves into Clinical notes. The record is then LOCKED - you cannot edit or save it again.")) return;
@@ -2814,10 +3206,12 @@
     postWrite("/assessment-authorize",
       { patientId: (st.patient && st.patient.mrn) || "", episodeId: st.episodeId || "", docId: oeDocId() },
       "Authorised in " + emrLabel() + ". It is now in Clinical notes.",
-      { kind: "assessment", text: "Authorised (signed off)" },
+      { kind: "assessment", text: "Authorised (signed off)", signOff: true },
       function () {
         // Reflect the lock immediately: GHIS will no longer accept a write for this record.
         st.assessAuthorized = { by: st.author || "", on: "" };
+        // The "Authorised by" line is a second timeline entry for the reader; it is NOT a second
+        // sign-off, so it carries neither fields nor the signOff flag and the record ignores it.
         try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
         endConsult();
       });
@@ -2832,7 +3226,7 @@
     st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
     var cur = st.assessVals.refered_management_plan || "";
     if (!/emergency/i.test(cur)) { st.assessVals.refered_management_plan = (cur ? cur + " " : "") + "Refer to Emergency (ER)."; st.assessTouched.refered_management_plan = true; }
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)", vals: buildAssessPayload(st.assessVals || {}) });
     // 2) escalate in the queue + end the consult (works even when the GHIS write is off)
     try { document.dispatchEvent(new CustomEvent("smd:consult-emergency", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
     close();
@@ -2862,6 +3256,6 @@
   // preview for the open patient. Registered once; guarded (no-op unless a patient profile is open).
   try { if (typeof document !== "undefined") document.addEventListener("smd-oncotree-select", function (e) { try { receiveOncoTreeProtocol(e && e.detail); } catch (err) {} }); } catch (e) {}
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote };
 })();

@@ -17,7 +17,9 @@ android {
         applicationId "in.stewardmd.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 13
+        // Play rejects a duplicate or lower code, so every upload needs this raised. 13 -> 14 for the
+        // build carrying the prescription QR verifier + native scanner (and the minSdk 24 -> 26 move).
+        versionCode 14
         versionName "7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -41,7 +43,8 @@ android {
             if (hasReleaseKeystore) {
                 signingConfig signingConfigs.release
             }
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             ndk {
                 debugSymbolLevel 'FULL'   // ship native debug symbols in every AAB

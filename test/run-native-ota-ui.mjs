@@ -161,13 +161,26 @@ try {
   // real multi-subscriber Capacitor App plugin) — several OTHER modules (autofetch.js, streak.js,
   // theme-sync.js) ALSO register their own listener for this event, so calling only "the" callback
   // would just hit whichever one happened to register last.
-  const banner = await J(`
+  /* The banner must NOT appear over the splash / intro / sign-in gate (reported from internal
+   * testing with it stacked on the pre-login screen, clipping the notification ask). native-ota.js
+   * asks window.SMD_PROMPT_OK - home.js's single definition of "signed in and actually on home" -
+   * and defers on a timer until it passes. Prove the deferral first, then let it through. */
+  await ev(`window.SMD_PROMPT_OK = function(){ return false; }; return 1;`);
+  await J(`
     window.__otaResponses = [{ ota:true, version:7, zipUrl:"https://stewardmd.in/api/ota/file/ghi", zipHash:"ghi" }];
     try { localStorage.removeItem("smd_ota_lastcheck"); } catch(e){}
     try { localStorage.setItem("smd_ota_auto", "0"); } catch(e){}   // manual mode -> banner, not silent apply
     window.__fireAppState({ isActive: true });
-    return JSON.stringify({ nListeners: window.__appStateCbs.length });
+    return JSON.stringify({ ok: 1 });
   `);
+  await sleep(500);
+  ok(await ev(`var b=document.getElementById("smdOtaBanner"); return !b || b.className.indexOf("on") < 0;`) === true,
+    "the banner does NOT appear while the sign-in gate is still up");
+
+  // Now the doctor is signed in and on home: the deferred banner should arrive on the next tick.
+  await ev(`window.SMD_PROMPT_OK = function(){ return true; }; return 1;`);
+  await sleep(1900);
+  const banner = await J(`return JSON.stringify({ nListeners: window.__appStateCbs.length });`);
   ok(banner.nListeners >= 1, `native-ota.js registered an app-foreground listener (alongside ${banner.nListeners - 1} others)`);
   await sleep(500);
   const bannerShown = await ev(`var b=document.getElementById("smdOtaBanner"); return b ? b.className : "absent";`);
@@ -200,6 +213,26 @@ try {
   const autoResult = await J(`return JSON.stringify({ calls: window.__calls, bannerPresent: !!document.getElementById("smdOtaBanner") || (document.getElementById("smdOtaBanner")&&document.getElementById("smdOtaBanner").classList.contains("on")) });`);
   ok(autoResult.calls.some(c => c[0] === "next"), `with automatic updates on, the background check applies silently via next() (${JSON.stringify(autoResult.calls)})`);
   ok(!autoResult.calls.some(c => c[0] === "set"), `...never via the disruptive set()`);
+
+  /* ── an update failure must never carry our infrastructure back to the screen ──
+   * Reported from the field, 2026-08-28: a failed update printed the OTA endpoint. install() was
+   * returning @capgo/capacitor-updater's own message, and that plugin is handed the bundle's
+   * zipUrl - so its failures quote the URL back, and the settings screen interpolated it straight
+   * into the status line. Fail download() exactly the way the plugin does. */
+  await J(`window.__calls = [];
+    window.__downloadResult = Promise.reject(new Error(
+      "Failed to download https://stewardmd.in/api/ota/file/abc: HTTP 403 from r2.stewardmd.internal"));
+    return 1;`);
+  const leak = await J(`return window.SMD_OTA.install(
+      { version: "9.9.9", zipUrl: "https://stewardmd.in/api/ota/file/abc", zipHash: "h" }, null, true)
+    .then(function (r) { return JSON.stringify(r); });`);
+  const leakStr = typeof leak === "string" ? leak : JSON.stringify(leak);
+  ok(!/stewardmd\.in|r2\.stewardmd|https?:\/\//.test(leakStr),
+     `install() returns no URL or hostname on failure (got: ${leakStr})`);
+  ok(/"error":"(network|checksum|storage|unauthorized|missing|download-failed|apply-failed)"/.test(leakStr),
+     `...only a fixed code (got: ${leakStr})`);
+  ok(/unauthorized/.test(leakStr),
+     `...and a 403 is classified rather than passed through (got: ${leakStr})`);
 
   console.log(fails === 0 ? "\nALL GREEN — the OTA client honours its contract, and never applies anything the user or their own auto-update choice didn't ask for" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

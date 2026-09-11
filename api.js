@@ -23,7 +23,9 @@
 
   /* ---------------- fetch client ---------------- */
   function api(path) {
-    return fetch(API_BASE + path).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 20000);
+    return fetch(API_BASE + path, { signal: controller.signal }).then(function (r) { clearTimeout(timeoutId); return r.ok ? r.json() : null; }).catch(function () { clearTimeout(timeoutId); return null; });
   }
   var MEDAPI = {
     base: API_BASE,
@@ -119,9 +121,10 @@
     if (root) return root;
     injectCSS();
     root = document.createElement("div");
-    root.id = "dbOverlay"; root.className = "db-overlay";
+    root.id = "dbOverlay"; root.className = "db-overlay db-sheet";
     root.innerHTML =
       '<div class="db-top">' +
+        '<div class="db-grab" id="dbGrab" aria-hidden="true"><i></i></div>' +
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
@@ -145,11 +148,12 @@
     root.querySelector("#dbBack").addEventListener("click", function () {
       closeDrawer(); if (st.name) { st.name = null; renderList(); } else close();
     });
+    attachSheetGestures();
     return root;
   }
   function setTitle(t, showBack) {
     root.querySelector("#dbTitle").textContent = t;
-    root.querySelector("#dbBack").style.visibility = showBack ? "visible" : "hidden";
+    root.querySelector("#dbBack").style.visibility = "visible";
   }
 
   /* ---- dynamic drug-count label (never goes stale) ---- */
@@ -356,12 +360,47 @@
     else azLoad(az.letter, fresh !== false);
   }
 
-  /* ---- list/search view ---- */
-  function renderList() {
-    st.name = null; setTitle("Drugs Database", false);
-    var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
+  /* ---- adaptive layout: split view (option C) on wide screens, single pane (option A) otherwise ----
+   * Wide = min-width 820px: iPads (either orientation), landscape phones, large foldables.
+   * Only one of #dbBody / (#dbSide + #dbMain) exists at a time, so the shared IDs
+   * (#dbSearch, #dbResults, #dbCount) keep resolving without duplication. */
+  function isWide() { try { return !!(window.matchMedia && matchMedia("(min-width: 820px)").matches); } catch (e) { return false; } }
+  function ensureSplit() {
     var b = root.querySelector("#dbBody");
+    if (!b.querySelector("#dbSplit")) b.innerHTML = '<div class="db-split" id="dbSplit"><aside id="dbSide" aria-label="Browse molecules"></aside><main id="dbMain"></main></div>';
+    b.classList.add("db-widebody");
+  }
+  function clearSplit() {
+    var b = root.querySelector("#dbBody");
+    if (b.querySelector("#dbSplit")) b.innerHTML = "";
+    b.classList.remove("db-widebody");
+  }
+  function listHost() { if (isWide()) { ensureSplit(); return root.querySelector("#dbSide"); } clearSplit(); return root.querySelector("#dbBody"); }
+  function detailHost() { if (isWide()) { ensureSplit(); return root.querySelector("#dbMain"); } clearSplit(); return root.querySelector("#dbBody"); }
+  function renderMainPlaceholder() {
+    var m = root.querySelector("#dbMain"); if (!m) return;
+    m.innerHTML = '<div class="db-pick">' + dbIco("flask") + '<div><b>Select a molecule</b><div class="db-pick-s">Search or browse the list — details open here.</div></div></div>';
+  }
+  // Re-render the current view when crossing the breakpoint (rotation, fold, resize).
+  function trackWide() {
+    try {
+      if (!window.matchMedia) return;
+      var mq = matchMedia("(min-width: 820px)");
+      var onChange = function () {
+        if (!root || !root.classList.contains("on")) return;
+        if (st.name) openComposition(st.name, st.sort, st.tier);
+        else { st.name = null; renderList(); }
+      };
+      if (mq.addEventListener) mq.addEventListener("change", onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    } catch (e) {}
+  }
+
+  /* ---- list/search view ---- */
+  function renderSideList() {
+    var b = listHost();
     b.innerHTML =
+      (isWide() ? '' : '<h1 class="db-bigt">Drugs</h1>') +
       '<div class="db-searchbar">' + dbIco("search", "db-search-ic") + '<input id="dbSearch" class="db-search" type="text" placeholder="Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '"></div>' +
       '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, or browse the molecules A-Z below.</div>' +
       '<div id="dbResults" class="db-results"></div>';
@@ -369,9 +408,15 @@
     var si = b.querySelector("#dbSearch");
     si.addEventListener("input", function () { onListInput(si.value); });
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
-    setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
+    if (!isWide()) setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
     if (q2.length >= MINLEN) runList(q2);
     else renderBrowse(true);                 // no query → the browser (A-Z or by class), never an empty screen
+  }
+  function renderList() {
+    st.name = null; setTitle("Drugs Database", false);
+    var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
+    renderSideList();
+    if (isWide()) renderMainPlaceholder();
   }
   function onListInput(v) {
     q2 = (v || "").trim();
@@ -400,7 +445,7 @@
     // brand-name hits + molecule/composition hits in parallel; brands shown first
     // so doctors who type a brand (e.g. "pantocid") see the brand itself on top.
     Promise.all([MEDAPI.searchBrands(q, 12), MEDAPI.searchCompositions(q, 30)]).then(function (arr) {
-      if (q !== q2 || st.name) return;
+      if (q !== q2 || (st.name && !isWide())) return;
       var r = root.querySelector("#dbResults"); if (!r) return;
       var brands = (arr[0] && arr[0].results) || [], comps = (arr[1] && arr[1].results) || [];
       if (!brands.length && !comps.length) { r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return; }
@@ -419,16 +464,28 @@
     if (st.name !== name) st.bq = "";   // fresh molecule → clear the brand filter; sort/tier changes keep it
     st.name = name; st.sort = sort || "relevance"; st.tier = tier || "all"; st.info = null; st.brands = []; st.total = 0; st.offset = 0;
     setTitle(name, true);
-    root.querySelector("#dbBody").innerHTML = '<div class="db-empty">Loading ' + esc(name) + '…</div>';
+    detailHost().innerHTML = '<div class="db-empty">Loading ' + esc(name) + '…</div>';
+    if (isWide() && !root.querySelector("#dbSide #dbSearch")) renderSideList();
     loadComposition(true);
   }
   function loadComposition(first) {
     if (st.loading) return; st.loading = true;
     MEDAPI.composition(st.name, st.sort, st.tier, PAGE, st.offset, st.bq).then(function (d) {
       st.loading = false;
-      if (!d || st.name !== d.composition) { if (first) root.querySelector("#dbBody").innerHTML = '<div class="db-empty">Could not load this drug.</div>'; return; }
+      if (!d || st.name !== d.composition) {
+        if (first) {
+          openList(st.name);
+          return;
+        }
+        return;
+      }
       if (first) { st.info = d; st.total = d.total || 0; st.brands = d.brands || []; renderDetail(); }
       else { st.brands = st.brands.concat(d.brands || []); appendBrands(d.brands || []); }
+    }).catch(function () {
+      st.loading = false;
+      if (first) {
+        openList(st.name);
+      }
     });
   }
   function sortBtn(key, label) {
@@ -447,7 +504,7 @@
       '</div>';
   }
   function renderDetail() {
-    var d = st.info, b = root.querySelector("#dbBody");
+    var d = st.info, b = detailHost();
     var chips = [d["class"], d.action_class].filter(Boolean).map(function (c) { return '<span class="db-chip">' + esc(c) + '</span>'; }).join("");
     var brandsBody = st.brands.length ? st.brands.map(brandHTML).join("")
       : '<div class="db-empty">No ' + (TIER_LABEL[st.tier] ? TIER_LABEL[st.tier] + " " : "") + 'brands listed for this generic.</div>';
@@ -506,7 +563,7 @@
     var html = '<div class="db-msrc">℞ <b>' + esc(mono.source || "openFDA") + '</b><span>Verify against local guidance. Decision support only.</span></div>';
     MONO_SECS.forEach(function (s) {
       var v = mono[s[1]]; if (!v) return; var op = openKeys[s[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button>' +
+      html += '<div class="db-msec db-msec-' + s[1] + '"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button>' +
         '<div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
@@ -565,13 +622,28 @@
     });
   }
 
-  function openList() {
+  function openList(q) {
     ensureRoot();
     if (st.name) st.name = null;
+    if (typeof q === "string" && q.trim()) {
+      q2 = q.trim();
+    }
+    root.style.transform = "";
     root.classList.add("on"); document.body.classList.add("db-lock");
     renderList();
   }
-  function close() { if (root) { closeDrawer(); var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; root.classList.remove("on"); document.body.classList.remove("db-lock"); } }
+  function close() { if (root) { closeDrawer(); var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; root.classList.remove("on"); document.body.classList.remove("db-lock"); root.style.transform = ""; } }
+  // Demo-A sheet gesture: 1:1 drag on the grab handle dismisses, with rubber-band resistance.
+  function attachSheetGestures() {
+    if (!root) return;
+    var grab = root.querySelector("#dbGrab");
+    if (!grab || grab._dbBound) return; grab._dbBound = true;
+    var y0 = 0, dy = 0, drag = false;
+    grab.addEventListener("pointerdown", function (e) { drag = true; y0 = e.clientY; dy = 0; try { grab.setPointerCapture(e.pointerId); } catch (x) {} });
+    grab.addEventListener("pointermove", function (e) { if (!drag) return; dy = Math.max(0, e.clientY - y0); root.style.transform = dy ? ("translateY(" + (dy * 0.7) + "px)") : ""; });
+    grab.addEventListener("pointerup", function () { drag = false; if (dy > 90) { close(); } else { root.style.transform = ""; } dy = 0; });
+    grab.addEventListener("pointercancel", function () { drag = false; root.style.transform = ""; dy = 0; });
+  }
   var dwOpen = false;
   function openDrawer() { dwOpen = true; if (!root) return; var s = root.querySelector("#dbScrim"), d = root.querySelector("#dbDrawer"); if (s) s.classList.add("on"); if (d) d.classList.add("on"); }
   function closeDrawer() { dwOpen = false; if (!root) return; var s = root.querySelector("#dbScrim"), d = root.querySelector("#dbDrawer"); if (s) s.classList.remove("on"); if (d) d.classList.remove("on"); }
@@ -595,7 +667,7 @@
     var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary — pending clinician review; US labelling, verify against local guidance.</span></div>';
     ST_SECS.forEach(function (sec) {
       var v = s[sec[1]]; if (!v) return; var op = openKeys[sec[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
+      html += '<div class="db-msec db-msec-' + sec[1] + '"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
   }
@@ -690,12 +762,12 @@
   /* ---- GOLD-STANDARD template renderer (from curated gold JSON) ---- */
   function goldHTML(g) {
     function bl(a) { return '<ul class="gd-b">' + (a || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
-    function S(ic, t, q, body) { return '<div class="gd-sec"><div class="gd-h">' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
+    function S(ic, t, q, body, cls) { return '<div class="gd-sec' + (cls ? ' ' + cls : '') + '"><div class="gd-h">' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
     var H = "";
     if (g.quick) H += S('⚡', 'Quick Facts', '10 seconds', '<div class="gd-qf">' + g.quick.map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>');
     if (g.summary) H += S('📋', 'Summary', 'What is it?', '<div>' + esc(g.summary) + '</div>');
     if (g.indications) H += S('🎯', 'Indications', 'When?', bl(g.indications));
-    if (g.dosage) H += S('💊', 'Dosage', 'How much?', '<div class="gd-tw"><table class="gd-t"><tr><th>Condition</th><th>Route</th><th>Dose</th><th>Duration</th><th>Notes</th></tr>' + g.dosage.map(function (r) { return '<tr><td><b>' + esc(r.c) + '</b></td><td>' + esc(r.r) + '</td><td><b>' + esc(r.d) + '</b></td><td>' + esc(r.t) + '</td><td>' + esc(r.n) + '</td></tr>'; }).join("") + '</table></div>');
+    if (g.dosage) H += S('💊', 'Dosage', 'How much?', '<div class="gd-tw"><table class="gd-t"><tr><th>Condition</th><th>Route</th><th>Dose</th><th>Duration</th><th>Notes</th></tr>' + g.dosage.map(function (r) { return '<tr><td><b>' + esc(r.c) + '</b></td><td>' + esc(r.r) + '</td><td><b>' + esc(r.d) + '</b></td><td>' + esc(r.t) + '</td><td>' + esc(r.n) + '</td></tr>'; }).join("") + '</table></div>', 'gd-sec-dosage');
     if (g.admin) H += S('✓', 'Administration', 'How to give?', '<ul class="gd-chk">' + g.admin.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
     if (g.moa) H += S('🧭', 'Mechanism', 'How it works', '<div>' + esc(g.moa) + '</div>');
     if (g.contra) H += S('⛔', 'Contraindications & Cautions', 'Avoid when?', '<div class="gd-sev red"><h4>Absolute</h4>' + bl(g.contra.absolute) + '</div><div class="gd-sev amber"><h4>Relative / precautions</h4>' + bl(g.contra.relative) + '</div><div class="gd-sev blue"><h4>Monitor</h4>' + bl(g.contra.monitor) + '</div>');
@@ -715,10 +787,19 @@
     if (el("smd-db-styles")) return;
     var css = [
       "#smdBrandResults:not(:empty){margin-top:6px}",
-      ".db-overlay{position:fixed;inset:0;z-index:880;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
+      ".db-overlay{position:fixed;inset:0;z-index:1000;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
       ".db-overlay.on{display:flex;animation:dbIn .22s ease}@keyframes dbIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
       "body.db-lock{overflow:hidden}",
       ".db-top{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0);z-index:3}",
+      ".db-top{background:var(--panel,#fff);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}",
+      ".db-top{background:color-mix(in srgb,var(--panel,#fff) 72%,transparent)}",
+      ".db-title{letter-spacing:-.01em}",
+      ".db-comp{transition:transform 120ms ease-out,background 120ms ease-out,border-color 160ms}",
+      ".db-comp:active{transform:scale(.99)}",
+      ".db-brand,.db-azb,.db-btab{transition:transform 120ms ease-out}",
+      ".db-brand:active,.db-azb:active,.db-btab:active{transform:scale(.97)}",
+      "@media(prefers-reduced-motion:reduce){.db-overlay.on{animation:none}.db-comp,.db-brand,.db-azb,.db-btab{transition:none}}",
+      "@media(prefers-reduced-transparency:reduce){.db-top{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}}",
       ".db-back,.db-close{background:transparent;border:1px solid var(--line,#e5e5e0);border-radius:9px;height:34px;padding:0 12px;font:600 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
       ".db-back{color:var(--teal,#0a9396);border-color:var(--teal,#0a9396)}",
       ".db-title{flex:1;text-align:center;font:800 16px var(--sans,system-ui);color:var(--ink,#1a1a1a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
@@ -850,7 +931,46 @@
       ".db-brand-meta{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:2px}",
       ".db-brand-price{font:800 15px var(--sans,system-ui);color:var(--teal,#0a9396);white-space:nowrap;flex:0 0 auto}",
       ".db-na{color:var(--slate-soft,#888);font-weight:600}",
-      ".db-more{width:100%;border:1px dashed var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:10px;padding:11px;font:700 12.5px var(--sans,system-ui);cursor:pointer;margin-top:10px}"
+      ".db-more{width:100%;border:1px dashed var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:10px;padding:11px;font:700 12.5px var(--sans,system-ui);cursor:pointer;margin-top:10px}",
+      // Visible Demo-A pass: segmented browse tabs, refined rows, tighter type.
+      // Pure CSS, later rules win on equal specificity; no markup or logic touched.
+      ".db-btabs{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:3px;gap:3px}",
+      ".db-btab{border:none;background:transparent;border-radius:10px;margin:0}",
+      ".db-search{border-radius:14px;padding:12px 14px}",
+      ".db-search:focus{box-shadow:0 0 0 3px rgba(10,147,150,.18)}",
+      ".db-searchbar .db-search{padding-left:44px}",
+      ".db-az{gap:6px}",
+      ".db-azb{border-radius:10px;min-width:32px;height:32px}",
+      ".db-sec-l{letter-spacing:.06em}",
+      ".db-comp{border-radius:14px;padding:13px 14px;margin-bottom:9px;box-shadow:0 1px 2px rgba(15,23,42,.04)}",
+      ".db-comp-name{letter-spacing:-.01em;font-size:14px}",
+      ".db-gen{letter-spacing:-.015em;font-size:22px}",
+      ".db-chip{border-radius:999px}",
+      // Dose-first detail: the Dosage section reads as the hero card, price as a pill.
+      ".db-msec-dosage{border:1.5px solid var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1)}",
+      ".db-msec-adult_dose{border:1.5px solid var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1)}",
+      ".gd-sec-dosage{border:1.5px solid var(--teal,#0a9396)}",
+      // Demo-A sheet: rounded top, grab handle, drag transform lane.
+      ".db-overlay.db-sheet{border-radius:20px 20px 0 0}",
+      ".db-overlay.db-sheet .db-top{flex-wrap:wrap}",
+      ".db-grab{flex:1 1 100%;display:grid;place-items:center;padding:2px 0 6px;cursor:grab;touch-action:none}",
+      ".db-grab i{width:40px;height:5px;border-radius:3px;background:#c7c7cc;display:block}",
+      ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
+      "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
+      ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
+      ".db-bh-comp{font-weight:700}",
+      ".db-brandhit{border-left-width:4px}",
+      // adaptive split view (option C): persistent browse sidebar + detail pane on wide screens
+      ".db-body.db-widebody{max-width:1180px}",
+      ".db-split{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}",
+      "#dbSide{position:sticky;top:0;max-height:calc(100dvh - 130px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:14px;padding:12px;box-sizing:border-box}",
+      "#dbMain{min-width:0}",
+      ".db-pick{display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--line,#e5e5e0);border-radius:14px;background:var(--panel,#fff);padding:22px;color:var(--slate,#555);font:500 13.5px var(--sans,system-ui);margin-top:2px}",
+      ".db-pick .db-ico{width:22px;height:22px;color:var(--teal,#0a9396)}",
+      ".db-pick-s{color:var(--slate-soft,#888);font-size:12.5px;margin-top:3px}",
+      // Option A on narrow screens: large title + iOS-style search field
+      ".db-bigt{font:800 30px var(--sans,system-ui);letter-spacing:-.025em;color:var(--ink,#1a1a1a);margin:6px 2px 10px}",
+      "@media(max-width:819px){.db-search{background:rgba(120,120,128,.14);border-color:transparent;border-radius:13px;padding:12px 14px}.db-searchbar .db-search{padding-left:42px}}"
     ].join("");
     var s = document.createElement("style"); s.id = "smd-db-styles"; s.textContent = css; document.head.appendChild(s);
   }
@@ -858,6 +978,7 @@
   /* ---- init ---- */
   function init() {
     injectCSS();
+    trackWide();
     var inp = el("smdSearchInput");
     if (inp) {
       ensureBox();

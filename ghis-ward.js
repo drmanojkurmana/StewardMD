@@ -51,6 +51,8 @@
             '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
             '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
             '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
+            '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
+            '<div class="ghis-setup-sub" style="margin:10px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
             '<div id="ghisConnectHosp"></div>' +
             '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
           '</div>' +
@@ -104,6 +106,54 @@
       var _connectCtx = null;   // {tid,cid,name} when the roster is from a Connect (FHIR) hospital; null for GHIS
       var _addedPids = {};   // ward patientIds ticked "add to dashboard" this session (checkbox state)
       var _connected = false;
+      // Set by GHIS.loadDemoHospital() (demo-hospital.js) to { patients:[raw shape], labsByPatientId }.
+      // authFetch() short-circuits to demoFetch() while this is non-null — no network call, no
+      // credential, entirely local. Cleared on sign-out (ghisDisconnect).
+      var DEMO = null;
+      function demoFetch(path) {
+        var pm = path.match(/patientId=([^&]+)/);
+        var pid = pm ? decodeURIComponent(pm[1]) : null;
+        if (/^\/patients/.test(path)) return Promise.resolve(DEMO.patients);
+        var CBC = { "Haemoglobin": 1, "Total WBC Count": 1, "Platelet Count": 1 };
+        if (/^\/lab\?/.test(path)) {
+          // ONE order per day, correctly dated — NOT one giant order per category spanning
+          // every day. Rows sharing a date came from the same draw (mkTrend stamps a whole
+          // day's panel with one date string), so grouping by that date is exactly right.
+          var labs = (pid && DEMO.labsByPatientId[pid]) || [];
+          var byDate = {}, dateOrder = [];
+          labs.forEach(function (t) { if (!byDate[t.date]) { byDate[t.date] = []; dateOrder.push(t.date); } byDate[t.date].push(t); });
+          var orders = [];
+          dateOrder.forEach(function (dt) {
+            var rows = byDate[dt];
+            if (rows.some(function (t) { return CBC[t.test]; })) orders.push({ renderId: "demo-cbc|" + pid + "|" + dt, episodeId: "DEMOEP" + pid, orderDate: dt });
+            if (rows.some(function (t) { return !CBC[t.test]; })) orders.push({ renderId: "demo-chem|" + pid + "|" + dt, episodeId: "DEMOEP" + pid, orderDate: dt });
+          });
+          return Promise.resolve({ orders: orders });
+        }
+        if (/^\/lab-detail\?/.test(path)) {
+          var rm = path.match(/renderId=([^&]+)/);
+          var rid = rm ? decodeURIComponent(rm[1]) : "";
+          var ridParts = rid.split("|");   // ["demo-cbc"|"demo-chem", pid, date]
+          var wantCbc = ridParts[0] === "demo-cbc";
+          var wantDate = ridParts[2];
+          var all = (pid && DEMO.labsByPatientId[pid]) || [];
+          return Promise.resolve({ tests: all.filter(function (t) {
+            var inCbc = !!CBC[t.test];
+            return (wantCbc ? inCbc : !inCbc) && t.date === wantDate;
+          }) });
+        }
+        if (/^\/radiology\?/.test(path)) {
+          var img = (pid && DEMO.imagingByPatientId[pid]) || [];
+          return Promise.resolve({ orders: img.map(function (im) { return { resultid: im.resultid, description: im.studyName, date: im.date, printType: "manual" }; }) });
+        }
+        if (/^\/radiology-report\?/.test(path)) {
+          var rrm = path.match(/resultid=([^&]+)/);
+          var rrid = rrm ? decodeURIComponent(rrm[1]) : "";
+          var found = DEMO.imagingByResultId[rrid];
+          return Promise.resolve(found ? { report: found.report, testName: found.studyName, doctor: found.doctor, reported: true } : { error: "not_found" });
+        }
+        return Promise.resolve({});
+      }
     
       // ── auth token (per-doctor GHIS login), persisted so they stay logged in ──
       // Scoped PER signed-in Google account (Firebase uid) so a GHIS login never
@@ -182,6 +232,7 @@
       // fetch wrapper that attaches the bearer token; on 401 it tries a SILENT refresh ONCE and
       // retries, only falling back to the login screen if that fails.
       function authFetch(path, opts, _retried) {
+        if (DEMO) return demoFetch(path);
         opts = opts || {};
         opts.headers = opts.headers || {};
         var t = getToken();
@@ -213,8 +264,17 @@
         if (name === 'hospital') { try { ghisRenderConnectHospitals(); } catch (e) {} }
       }
       window.showGhisScreen = showScreen;
+      // Setup-screen "Load Demo: Test Hospital" button (demo-hospital.js). No GHIS login,
+      // no network call — 25 fictional patients across 5 branches, real-shaped labs.
+      window.ghisLoadDemoHospital = function () {
+        if (window.SMD_TEST_HOSPITAL && window.GHIS && window.GHIS.loadDemoHospital) GHIS.loadDemoHospital(window.SMD_TEST_HOSPITAL);
+        else alert('Demo dataset not loaded yet — try again in a moment.');
+      };
       // Hospital picker actions.
-      window.ghisSelectHospital = function (id) { if (id === 'gimsr') showScreen('setup'); };
+      window.ghisSelectHospital = function (id) {
+        if (id === 'gimsr') showScreen('setup');
+        else if (id === 'stewardmd') window.ghisLoadDemoHospital();
+      };
       // Connect platform: open the self-service EMR console (falls back to the request form if not loaded).
       window.ghisOpenConnectConsole = function () { try { if (window.SMD_openConnectEmr) window.SMD_openConnectEmr(); else showScreen('addhospital'); } catch (e) {} };
       // List the doctor's CONNECTED hospitals (Connect platform) in the picker, next to GIMSR. Tapping one
@@ -436,6 +496,50 @@
         getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name, episodeId: GHIS._selectedPatient.episodeId || '' } : null; },
         // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
         getToken: function() { return getToken(); },
+        // Offline demo dataset (demo-hospital.js), for a live meeting with no GHIS login
+        // needed. Flattens branches -> _patients (same raw shape ghisLoadPatients expects)
+        // and reuses it unmodified: authFetch()'s demoFetch() branch answers every /patients,
+        // /lab, /lab-detail call from this data, so ICU bridging, filters, search, and
+        // calculator auto-fill all run through the exact real-GHIS code path. ghisDisconnect
+        // clears DEMO, so signing out cleanly returns to the real GHIS sign-in screen.
+        loadDemoHospital: function (dataset) {
+          _connectCtx = null;
+          var flat = [], labsById = {}, imgById = {}, imgByResult = {}, vitalsById = {};
+          (dataset && dataset.branches || []).forEach(function (b) {
+            (b.patients || []).forEach(function (p) {
+              flat.push({ patientId: p.patientId, episodeId: p.episodeId, patientFirstName: p.name,
+                gender: p.gender, bedName: p.bed, employeeFirstName: p.doctor, deptDescription: b.dept,
+                dob: String(p.age) });
+              labsById[p.patientId] = p.labs || [];
+              imgById[p.patientId] = p.imaging || [];
+              (p.imaging || []).forEach(function (im) { imgByResult[im.resultid] = im; });
+              if (p.vitals) vitalsById[p.patientId] = p.vitals;
+            });
+          });
+          DEMO = { patients: flat, labsByPatientId: labsById, imagingByPatientId: imgById,
+            imagingByResultId: imgByResult, vitalsByPatientId: vitalsById };
+          _connected = true; try { dot(true); } catch (e) {}
+          showScreen('ward');
+          ghisLoadPatients();
+
+          // Pre-populate a real, named ICU unit board with its 5 patients, fully filled (labs
+          // trends + vitals baked into each saved snapshot) — so opening ICU shows an active,
+          // populated unit immediately, not one-at-a-time bridging from Ward Sync.
+          try {
+            if (window.ICU && ICU.selectUnitByKey && ICU.addWardPatientToRoster) {
+              var micuPatients = flat.filter(function (p) { return p.deptDescription === 'StewardMD MICU'; });
+              if (micuPatients.length) {
+                ICU.selectUnitByKey('s:icu:' + encodeURIComponent('StewardMD MICU'));
+                micuPatients.forEach(function (p) {
+                  ICU.addWardPatientToRoster({
+                    patient: demoFromPatient(p), patientId: p.patientId, episodeId: p.episodeId, source: 'Ward Sync',
+                    labs: labsById[p.patientId] || [], vitals: vitalsById[p.patientId] || []
+                  });
+                });
+              }
+            }
+          } catch (e) {}
+        },
         // Persist a token another module obtained via the SAME /login proxy (e.g. the OPD
         // queue's sign-in) so the whole app shares ONE GHIS session — sign in once, everywhere.
         // Empty string signs out everywhere. Scoped per Firebase uid like every GHIS token here.
@@ -470,9 +574,10 @@
           GHIS._selectedPatient = null; GHIS._patientId = null;
           try { if (window.GHISMEDS && window.GHISMEDS.clearDraft) window.GHISMEDS.clearDraft(); } catch (e) {}
         },
-        // Deep-link target from a background lab-watch push (/?ghisPatient=<id>): open Ward Sync,
-        // wait for the ward list to load, then open that patient's lab drawer. If the patient
-        // isn't in the current ward list (e.g. discharged), prefill the search with the id.
+        // Deep-link target from a background lab-watch push (/?ghisRef=<ref>, resolved to a real
+        // patientId first — see SMD_WATCH.resolveRef): open Ward Sync, wait for the ward list to
+        // load, then open that patient's lab drawer. If the patient isn't in the current ward list
+        // (e.g. discharged), prefill the search with the id.
         openPatientById: function(patientId) {
           if (!patientId) return;
           var pid = String(patientId);
@@ -579,6 +684,13 @@
             var res = (ICU.ingestWardHistory
               ? ICU.ingestWardHistory({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
+            // Demo Test Hospital only: real GHIS never supplies a vitals monitor feed (there is no
+            // such source), so this never fires for a real patient. Replays a multi-day vitals
+            // timeline (HR/BP/RR/temp/GCS/SpO2/urine/lactate) through the SAME ingestMonitor() a
+            // clinician's manual entry uses, one ICU.ingestMonitor() call per recorded reading.
+            if (DEMO && DEMO.vitalsByPatientId && DEMO.vitalsByPatientId[patientId] && ICU.ingestMonitor) {
+              DEMO.vitalsByPatientId[patientId].forEach(function (v) { ICU.ingestMonitor(v); });
+            }
             // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
             // AUTO-SYNC (opts.silent): ingest in the BACKGROUND only — never close the Ward Sync panel,
             // navigate to the dashboard, or toast. This is what stops auto-sync from yanking the user into
@@ -1012,6 +1124,7 @@
       };
     
       window.ghisDisconnect = function() {
+        DEMO = null;
         var t = getToken();
         if (t) { fetch(PROXY + '/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + t } }).catch(function(){}); }
         setToken('');
@@ -1220,11 +1333,24 @@
         var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
       })();
 
-      // Background lab-watch notification deep link: /?ghisPatient=<id> → open that patient.
+      // Background lab-watch notification deep link: /?ghisRef=<ref> → open that patient.
+      // `ref` is opaque (see functions/api/watch/[[path]].js) — never the real patientId — so it
+      // must be resolved through SMD_WATCH.resolveRef() (the doctor's own authenticated session)
+      // before GHIS.openPatientById can be called with a real id.
       (function () {
         try {
-          var m = (location.search || "").match(/[?&]ghisPatient=([^&]+)/);
-          if (m && m[1]) { var pid = decodeURIComponent(m[1]); setTimeout(function () { try { window.GHIS && GHIS.openPatientById(pid); } catch (e) {} }, 500); }
+          var m = (location.search || "").match(/[?&]ghisRef=([^&]+)/);
+          if (!m || !m[1]) return;
+          var ref = decodeURIComponent(m[1]);
+          (function waitForWatch(tries) {
+            if (window.SMD_WATCH && window.SMD_WATCH.resolveRef) {
+              window.SMD_WATCH.resolveRef(ref).then(function (pid) {
+                if (pid) { try { window.GHIS && GHIS.openPatientById(pid); } catch (e) {} }
+              });
+            } else if (tries < 40) {
+              setTimeout(function () { waitForWatch(tries + 1); }, 250);   // watch-lab.js not loaded yet
+            }
+          })(0);
         } catch (e) {}
       })();
 

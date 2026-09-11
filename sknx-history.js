@@ -65,7 +65,7 @@
     ABCDE.forEach(function (a) { h += '<label class="sknx-hx-toggle"><input type="checkbox" data-field="abcde-' + esc(a.k) + '"><span>' + esc(a.label) + "</span></label>"; });
     h += "</div></details>";
     h += '<div class="sknx-hx-row"><div class="sknx-hx-label">Other</div>' +
-      '<textarea class="sknx-hx-note" data-field="note" rows="2" placeholder="Brief history - no names or IDs"></textarea></div>';
+      '<textarea class="sknx-hx-note" data-field="note" aria-label="Additional clinical history" rows="2" placeholder="Brief history - no names or IDs"></textarea></div>';
     h += "</div>";
     return h;
   }
@@ -119,7 +119,17 @@
     return parseState(records);
   }
 
-  var API = { historyToFeatures: historyToFeatures, formHtml: formHtml, bindForm: bindForm, readForm: readForm, parseState: parseState, EMPTY: {} };
+  function fillForm(root, history) {
+    if (!root) return;
+    var h = history || {};
+    Array.prototype.forEach.call(root.querySelectorAll("[data-field]"), function (el) {
+      var f = el.getAttribute("data-field"), v = el.getAttribute("data-value");
+      if (f === "note") el.value = h.note || "";
+      else if (el.type === "checkbox") el.checked = f.indexOf("abcde-") === 0 ? !!(h.abcde && h.abcde[f.slice(6)]) : !!h[f];
+      else el.setAttribute("aria-pressed", String(f === "site" ? (h.site || []).indexOf(v) !== -1 : h[f] === v));
+    });
+  }
+  var API = { historyToFeatures: historyToFeatures, formHtml: formHtml, bindForm: bindForm, readForm: readForm, fillForm: fillForm, parseState: parseState, EMPTY: {} };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_SKNX_HISTORY = API;
 })();

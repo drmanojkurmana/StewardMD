@@ -1,0 +1,417 @@
+/* ward.css — WardSynQ inpatient ward (#smdWard), in WardSynQ's own visual language.
+ *
+ * ONE PRODUCT, ONE PALETTE. This file used to carry the "Clinical Precision" palette it shared with
+ * queue.css: a teal primary, pill buttons, Material-Design container colours. The WardSynQ
+ * workstation (wardsynq/ui/wardsynq.css) is drawn in a different language entirely - an instrument
+ * ground, near-ink actions, and colour spent ONLY where something is clinically significant - so a
+ * clinician moving between the ward and the order screen met two products. Every token below now
+ * resolves to the workstation's, and because the whole file already funnels through these variables,
+ * the ward inherits that language without a single rule below this block changing.
+ *
+ * WHY var(--token, <literal>) AND NOT A BARE var(). On wardsynq.com the site loads wardsynq.css
+ * first, so these inherit the real tokens - including its dark palette, which is driven by
+ * prefers-color-scheme, so the ward follows the system there for free. Inside the StewardMD app
+ * wardsynq.css is NOT loaded and dark mode is the app's own body.dark class, so the literals are the
+ * same values written out, and the body.dark block below carries the workstation's dark palette. One
+ * design, two hosts, no third copy of the colours to drift.
+ *
+ * The ward keeps its own layout, its Material Symbols icons and its 44px touch targets: it is a
+ * bedside screen used on a phone, and that is a different job from a seated workstation. What is
+ * shared is the palette, the type and what colour is allowed to MEAN. */
+/* The product's face, self-hosted. Declared here as well as in wardsynq/ui/wardsynq.css because the
+ * StewardMD app loads THIS file and not that one; identical family and src, so a host loading both
+ * fetches once. */
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/assets/fonts/source-sans-3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/assets/fonts/source-sans-3-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+#smdWard {
+  /* The primary action is near-ink, not a brand colour. wardsynq.css's own reason: an interface
+   * where the primary action is a bright colour teaches the eye that colour means "clickable",
+   * which is exactly the association that must stay free for "clinically abnormal". */
+  --primary: var(--ink, #0f1613); --on-primary: var(--surface, #f8faf9);
+  --primary-container: var(--recess, #e4e8e7); --on-primary-container: var(--ink, #0f1613);
+  --error: var(--sig-stop, #8c2f22); --on-error: #fff;
+  --error-container: var(--sig-stop-wash, #f7e9e6); --on-error-container: var(--sig-stop, #8c2f22);
+  --warn-container: var(--sig-major-wash, #f8f0df); --on-warn-container: var(--sig-major, #85570c);
+  /* wardsynq.css defines no "clear" wash - nothing in the workstation fills a block to say a thing
+   * is normal. The ward does (a settled dose, a signed step), so the wash is defined HERE, in the
+   * same desaturated key as the other two, and carries the workstation's own clear signal as ink. */
+  --ok-container: var(--sig-clear-wash, #e6f0ea); --on-ok-container: var(--sig-clear, #2c6146);
+  --bg: var(--ground, #eef1f0); --on-surface: var(--ink, #0f1613); --on-surface-variant: var(--ink-2, #4a5551);
+  --sc-lowest: var(--raised, #ffffff); --sc-low: var(--surface, #f8faf9); --sc: var(--recess, #e4e8e7); --sc-high: var(--recess, #e4e8e7);
+  --outline: var(--ink-3, #5f6965); --outline-variant: var(--hair, #dbe0de);
+  /* The workstation's stack. Source Sans 3 is self-hosted next to the app's other faces, so a ward
+   * that has lost its network still renders in the product's own type rather than in whatever the
+   * device happens to have. */
+  --w-sans: var(--sans, "Source Sans 3", 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  position: fixed; inset: 0; z-index: 12000; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--w-sans);
+}
+#smdWard.on { display: block; }
+/* The app's own dark switch. On wardsynq.com the block above already followed the system, because
+ * wardsynq.css redefines its tokens under prefers-color-scheme; this is for the app, which has no
+ * wardsynq.css and decides dark itself. Values are the workstation's dark palette. */
+body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant: #a3aeaa;
+  --sc-lowest: #1a211f; --sc-low: #131917; --sc: #0a0e0d; --sc-high: #0a0e0d; --outline: #828d89; --outline-variant: #252d2b;
+  --primary: #e8edeb; --on-primary: #0d1211; --primary-container: #0a0e0d; --on-primary-container: #e8edeb;
+  --error: #e08277; --on-error: #14100a;
+  --error-container: #2b1512; --on-error-container: #e08277;
+  --warn-container: #2a2110; --on-warn-container: #dcb45a;
+  --ok-container: #10251c; --on-ok-container: #6fbb94; }
+#smdWard .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
+
+#smdWard .w-shell { display: flex; flex-direction: column; height: 100%; }
+#smdWard .w-top { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top)) 12px 10px; background: var(--sc-lowest); border-bottom: 1px solid var(--outline-variant); }
+#smdWard .w-title { font-weight: 700; font-size: 15px; letter-spacing: .2px; }
+#smdWard .w-busy { color: var(--primary); animation: w-spin 1s linear infinite; display: inline-flex; }
+@keyframes w-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { #smdWard .w-busy { animation: none; } }
+#smdWard .w-canvas { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 12px 12px calc(24px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; }
+
+#smdWard .w-ic { background: none; border: 0; color: var(--on-surface-variant); padding: 8px; border-radius: 999px; cursor: pointer; display: inline-flex; }
+#smdWard .w-ic:active { background: var(--sc); }
+#smdWard .w-x { background: none; border: 0; color: inherit; opacity: .7; padding: 4px; cursor: pointer; margin-left: auto; align-self: flex-start; display: inline-flex; }
+
+#smdWard .w-btn { appearance: none; border: 0; border-radius: 999px; background: var(--primary); color: var(--on-primary);
+  font: 600 14px var(--w-sans); padding: 11px 18px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+#smdWard .w-btn:active { filter: brightness(.92); }
+#smdWard .w-btn.ghost { background: var(--sc); color: var(--on-surface); }
+#smdWard .w-btn.tiny { font-size: 13px; padding: 8px 14px; min-height: 40px; background: var(--sc-high); color: var(--on-surface); text-transform: capitalize; }
+#smdWard .w-btn.tiny.go { background: var(--primary); color: var(--on-primary); }
+#smdWard .w-btn.tiny.warn { background: var(--error-container); color: var(--on-error-container); }
+
+/* cards */
+#smdWard .w-card { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; }
+#smdWard .w-card-h { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--primary); }
+#smdWard .w-card-h h3 { margin: 0; font-size: 15px; font-weight: 700; color: var(--on-surface); flex: 1; }
+#smdWard .w-empty { margin: 0; color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-hint { margin: 10px 0; color: var(--on-surface-variant); font-size: 12px; line-height: 1.5; display: flex; gap: 6px; align-items: flex-start; }
+#smdWard .w-hint .material-symbols-outlined { font-size: 16px; flex: 0 0 auto; margin-top: 1px; }
+
+/* banners: a refusal is the loudest thing on the screen, by design */
+#smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: flex; gap: 10px; align-items: flex-start; border-radius: 14px; padding: 12px 14px; font-size: 13px; line-height: 1.5; }
+#smdWard .w-refusal { background: var(--warn-container); color: var(--on-warn-container); border: 1px solid currentColor; }
+#smdWard .w-refusal h4 { margin: 0 0 6px; font-size: 14px; text-transform: capitalize; }
+#smdWard .w-refusal ul { margin: 0; padding-left: 18px; font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 12px; }
+#smdWard .w-refusal p { margin: 6px 0 0; }
+#smdWard .w-err { background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-ok { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-err p, #smdWard .w-ok p { margin: 0; }
+
+/* ward list */
+#smdWard .w-filter { display: flex; gap: 8px; margin-bottom: 12px; }
+#smdWard .w-filter input { flex: 1; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-bed { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--outline-variant); padding: 12px 2px; cursor: pointer; color: inherit; font: inherit; }
+#smdWard .w-bed:first-of-type { border-top: 0; }
+#smdWard .w-bed:active { background: var(--sc-low); }
+#smdWard .w-bed-no { flex: 0 0 46px; height: 46px; border-radius: 12px; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+#smdWard .w-bed-b { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#smdWard .w-bed-b b { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#smdWard .w-bed-b small { color: var(--on-surface-variant); font-size: 12px; }
+
+/* chart header */
+#smdWard .w-chart-h { display: flex; align-items: center; gap: 10px; }
+#smdWard .w-chart-h b { display: block; font-size: 15px; }
+#smdWard .w-chart-h small { color: var(--on-surface-variant); font-size: 12px; }
+
+/* problem list */
+#smdWard .w-problems { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+#smdWard .w-problems li { font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#smdWard .w-code { font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; color: var(--on-surface-variant); }
+#smdWard .w-vs { font-size: 11px; text-transform: uppercase; letter-spacing: .4px; padding: 2px 8px; border-radius: 999px; background: var(--sc); color: var(--on-surface-variant); }
+#smdWard .w-vs.confirmed { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-vs.refuted { background: var(--error-container); color: var(--on-error-container); }
+
+/* vitals */
+#smdWard .w-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+#smdWard .w-f { display: flex; flex-direction: column; gap: 4px; }
+#smdWard .w-f span { font-size: 12px; color: var(--on-surface-variant); font-weight: 600; }
+#smdWard .w-f span i { font-style: normal; font-weight: 400; opacity: .8; }
+#smdWard .w-f input { border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface); font: 400 15px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-f input:focus { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+/* MAR */
+#smdWard .w-scan { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+#smdWard .w-doses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+#smdWard .w-doses li { border: 1px solid var(--outline-variant); border-radius: 14px; padding: 12px; background: var(--sc-low); }
+#smdWard .w-dose-h b { font-size: 15px; }
+#smdWard .w-dose-h span { color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-dose-s { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+#smdWard .w-dose-s small { color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-st { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 3px 9px; border-radius: 999px; background: var(--sc-high); color: var(--on-surface-variant); }
+#smdWard .w-st.administered { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-st.held, #smdWard .w-st.refused, #smdWard .w-st.cancelled { background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-dose-a { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-doses li.overdue { border-color: var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-due { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; }
+#smdWard .w-due .material-symbols-outlined { font-size: 16px; }
+#smdWard .w-st.overdue { background: var(--error-container); color: var(--on-error-container); }
+
+/* Critical results. The loudest card on the chart, and it sits first — the only thing on this
+   screen allowed to outrank the medication round. Restrained even so: a border, a tint and text,
+   because a wall of red on a ward screen stops being read within a shift. */
+#smdWard .w-card.crit { border-color: var(--on-error-container); border-left-width: 3px; }
+#smdWard .w-card.crit .w-card-h { color: var(--on-error-container); }
+#smdWard .w-crits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-crits li { border: 1px solid var(--outline-variant); border-left-width: 3px; border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
+#smdWard .w-crits li.lvl-escalate { border-left-color: var(--on-error-container); background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-crits li.lvl-overdue { border-left-color: var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-crits li.lvl-due { border-left-color: var(--outline); }
+#smdWard .w-crit-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; }
+#smdWard .w-crit-h b { font: 700 15px var(--w-sans); }
+#smdWard .w-crit-v { font: 700 15px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-crit-b { font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; opacity: .85; }
+#smdWard .w-crit-m { display: flex; align-items: center; gap: 5px; margin: 6px 0 8px; font: 500 12px var(--w-sans); opacity: .9; }
+#smdWard .w-crit-m .material-symbols-outlined { font-size: 15px; }
+
+/* Fluid balance. In and out are always both shown, at the same weight: the net alone hides whether
+   "+400" is a patient who drank 400 and passed nothing or one who took three litres and passed 2.6. */
+#smdWard .w-bal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+#smdWard .w-bal-c { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 12px; background: var(--sc-low); }
+#smdWard .w-bal-c span { display: block; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
+#smdWard .w-bal-c b { display: block; margin-top: 3px; font: 700 18px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-bal-c.net { border-color: var(--primary); }
+#smdWard .w-hint.warn { color: var(--on-warn-container); background: var(--warn-container); border-radius: 10px; padding: 8px 10px; }
+#smdWard .w-fluid { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-fluid select, #smdWard .w-fluid input { flex: 1 1 110px; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+
+/* PRN and unreadable-frequency orders: visible, and visibly NOT part of the round */
+#smdWard .w-sub { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--outline-variant); }
+#smdWard .w-sub h4 { margin: 0; font-size: 13px; display: flex; align-items: center; gap: 6px; color: var(--on-surface-variant); }
+#smdWard .w-sub h4 .material-symbols-outlined { font-size: 18px; }
+#smdWard .w-sub.warn h4 { color: var(--on-warn-container); }
+#smdWard .w-sub.warn { background: var(--warn-container); color: var(--on-warn-container); margin: 14px -14px -14px; padding: 12px 14px; border-radius: 0 0 15px 15px; border-top: 0; }
+#smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+#smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }
+
+/* Prescription outbox. Only "confirmed received" is styled as finished; queued, sent and failed all
+   read as unfinished work, because they are. Restrained on purpose: this is a worklist, not an
+   alarm, and the one that failed is distinguished by a left edge and a reason, not by a red card. */
+#smdWard .w-tx li { border-left-width: 3px; border-left-color: var(--outline-variant); }
+#smdWard .w-tx li.open { border-left-color: var(--outline); }
+#smdWard .w-tx li.tx-failed { border-left-color: var(--on-warn-container); }
+#smdWard .w-st.acknowledged { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-st.failed { background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-tx .w-dose-h span { text-transform: capitalize; }
+#smdWard .w-unsent li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+#smdWard .w-unsent li b { flex: 0 0 auto; }
+#smdWard .w-unsent li .w-btn { margin-left: auto; }
+
+/* Problem entry. The code box sits beside the words and is never filled in from them. */
+#smdWard .w-prob { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+#smdWard .w-prob input, #smdWard .w-prob select { flex: 1 1 140px; min-width: 0; border: 1px solid var(--outline-variant); border-radius: 12px;
+  background: var(--sc-low); color: var(--on-surface); font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; }
+#smdWard .w-prob input#wProbText { flex: 2 1 200px; }
+#smdWard .w-problems li .w-btn.tiny { margin-left: auto; }
+
+/* The note composer. Wide fields, because a ward round note written into a one-line box is a ward
+   round note nobody writes. */
+#smdWard .w-note { display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-note textarea { border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low);
+  color: var(--on-surface); font: 400 15px var(--w-sans); padding: 10px 12px; resize: vertical; min-height: 76px; }
+#smdWard .w-note textarea:focus { outline: 2px solid var(--primary); outline-offset: -2px; }
+#smdWard .w-note .w-f span i { color: var(--on-warn-container); font-style: normal; font-weight: 600; }
+
+/* Terminology results. Each one is a BUTTON somebody has to press: nothing is preselected, so the
+   list can never be mistaken for a choice already made. */
+#smdWard .w-icd { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#smdWard .w-icd-p { display: flex; align-items: baseline; gap: 10px; width: 100%; text-align: left; cursor: pointer;
+  border: 1px solid var(--outline-variant); border-radius: 10px; background: var(--sc-low); color: inherit;
+  font: 400 14px var(--w-sans); padding: 9px 11px; min-height: 44px; }
+#smdWard .w-icd-p:active { background: var(--sc); }
+#smdWard .w-icd-p b { font: 700 13px var(--mono, ui-monospace, Menlo, monospace); flex: 0 0 auto; }
+#smdWard .w-icd-p span { flex: 1; min-width: 0; }
+#smdWard .w-icd-p small { color: var(--on-surface-variant); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+
+/* Measures. A big number and, always beside it, the two numbers it came from: a rate whose
+   denominator is not shown is a rate nobody can argue with, and these exist to be argued with. */
+#smdWard .w-q { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#smdWard .w-q li { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
+#smdWard .w-q li.unavailable { background: none; border-style: dashed; }
+#smdWard .w-q h4 { margin: 0 0 6px; font-size: 13.5px; font-weight: 600; }
+#smdWard .w-q-n { display: flex; align-items: baseline; gap: 10px; }
+#smdWard .w-q-n b { font: 700 26px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-q-n span { font-size: 12.5px; color: var(--on-surface-variant); }
+#smdWard .w-q .w-hint { margin: 6px 0 0; }
+
+/* A rule overridden almost every time it fires. Marked with an edge and a tint, not a red card: the
+   finding is about a RULE, and a wall of red on a report people read once a month is a report they
+   stop reading. */
+#smdWard .w-q li.hot { border-left: 3px solid var(--on-warn-container); }
+
+/* The downtime pack. On screen it is a preview; on paper it is the thing. Everything about the
+   styling serves one property: it must be obvious that this is a COPY, and obvious where it does not
+   know something. A gap is set in the error colour and in words, never left as a reassuring blank. */
+#smdWard .w-dt { display: flex; flex-direction: column; gap: 12px; }
+#smdWard .w-dt-bar { display: flex; align-items: center; gap: 10px; }
+#smdWard .w-dt-bar .w-btn { margin-left: 0; }
+#smdWard .w-dt-h { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; }
+#smdWard .w-dt-h h2 { margin: 0 0 4px; font-size: 17px; }
+#smdWard .w-dt-h p { margin: 4px 0 0; font-size: 13px; color: var(--on-surface-variant); }
+#smdWard .w-dt-warn { border-left: 3px solid var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container) !important;
+  padding: 9px 11px; border-radius: 0 10px 10px 0; line-height: 1.5; }
+#smdWard .w-dt-gap { color: var(--on-error-container); background: var(--error-container); padding: 2px 7px; border-radius: 6px; font-weight: 700; display: inline-block; }
+#smdWard .w-dt-p { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; break-inside: avoid; }
+#smdWard .w-dt-p header { display: flex; align-items: center; gap: 12px; }
+#smdWard .w-dt-bed { flex: 0 0 46px; height: 46px; border-radius: 12px; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; font-weight: 700; }
+#smdWard .w-dt-p header b { display: block; font-size: 15px; }
+#smdWard .w-dt-p header small { color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-dt-alg { margin: 10px 0 0; font-size: 14px; }
+#smdWard .w-dt-crit { margin: 8px 0 0; font-size: 13px; display: flex; align-items: center; gap: 5px; color: var(--on-error-container); }
+#smdWard .w-dt-crit .material-symbols-outlined { font-size: 17px; }
+#smdWard .w-dt-meds { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+#smdWard .w-dt-meds li { border-top: 1px solid var(--outline-variant); padding-top: 8px; }
+#smdWard .w-dt-times { font: 500 12.5px var(--mono, ui-monospace, Menlo, monospace); color: var(--on-surface-variant); margin-top: 3px; }
+/* Space to write in. A downtime pack with nowhere to record what was given is half a plan. */
+#smdWard .w-dt-blank { margin-top: 12px; border: 1px dashed var(--outline-variant); border-radius: 10px; height: 84px; position: relative; }
+#smdWard .w-dt-blank span { position: absolute; top: 6px; left: 10px; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
+
+/* The patient's own copy reuses the pack's styling: both are documents that leave the building and
+   both must be legible in black and white. Only the section headings are new. */
+#smdWard .w-dt-p h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: .01em; }
+#smdWard .w-dt-p h3 + .w-dt-alg { margin-top: 0; }
+
+@media print {
+  /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
+     undone so more than the first screenful reaches the paper. */
+  #smdWard { position: static; background: #fff; color: #000; }
+  #smdWard .w-shell, #smdWard .w-canvas { display: block; height: auto; overflow: visible; padding: 0; }
+  #smdWard .w-top, #smdWard .w-noprint, #smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: none !important; }
+  #smdWard .w-dt-p { page-break-inside: avoid; break-inside: avoid; border: 0; border-bottom: 1.5pt solid #000; border-radius: 0; padding: 0 0 10pt; margin-bottom: 12pt; }
+  #smdWard .w-dt-h { border: 0; border-bottom: 2pt solid #000; border-radius: 0; padding: 0 0 8pt; }
+  #smdWard .w-dt-bed { background: #000; color: #fff; border-radius: 0; }
+  /* The warning and the gaps must survive a black-and-white printer, so they carry a border and
+     weight rather than relying on a tint that prints as pale grey. */
+  #smdWard .w-dt-warn { background: none; color: #000 !important; border: 1.5pt solid #000; border-radius: 0; font-weight: 600; }
+  #smdWard .w-dt-gap { background: none; color: #000; border: 1.5pt solid #000; border-radius: 0; }
+  @page { size: A4; margin: 12mm; }
+}
+
+/* Held from other systems. A worklist of decisions, not an alarm: each row is one held message with
+   the decisions that fit it and a required reason. Nothing on it is on a chart. */
+#smdWard .w-xchg li h4 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font: 600 13.5px var(--mono, ui-monospace, Menlo, monospace); }
+#smdWard .w-xchg .w-xw { margin: 0 0 6px; font-size: 13.5px; line-height: 1.45; }
+#smdWard .w-xchg small { display: block; color: var(--on-surface-variant); font-size: 12px; margin-bottom: 8px; }
+#smdWard .w-xchg .w-xl { display: block; margin: 8px 0 0; font-size: 12px; color: var(--on-surface-variant); }
+#smdWard .w-xchg .w-xl select, #smdWard .w-xchg .w-xl textarea, #smdWard .w-xchg .w-xl input[type="text"] { display: block; width: 100%; margin-top: 4px; font-size: 14px; padding: 8px; border: 1px solid var(--outline-variant); border-radius: 8px; background: var(--surface); color: var(--on-surface); box-sizing: border-box; }
+#smdWard .w-xchg .w-xcs { margin-top: 6px; }
+#smdWard .w-xchg .w-xc { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 13.5px; }
+#smdWard .w-xchg .w-xc b { font: 600 13px var(--mono, ui-monospace, Menlo, monospace); }
+#smdWard .w-xchg .w-xc small { display: inline; margin: 0; }
+
+/* Bed board + admission. A grid of beds, not a list of patients: an occupied bed and a free one
+   read as different things at a glance, which a filtered flat list never gave the ward. */
+#smdWard .w-wardrow { margin-bottom: 16px; }
+#smdWard .w-wardrow:last-child { margin-bottom: 0; }
+#smdWard .w-wardrow h4 { display: flex; align-items: baseline; gap: 8px; margin: 0 0 8px; font-size: 13.5px; font-weight: 700; }
+#smdWard .w-wardrow h4 small { font-weight: 400; color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-bedgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+#smdWard .w-bedcell { border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 2px; min-height: 56px; font: inherit; text-align: left; }
+#smdWard .w-bedcell b { font-size: 13px; font-weight: 700; }
+#smdWard .w-bedcell span { font-size: 11px; color: var(--on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#smdWard .w-bedcell.occ { background: var(--sc-high); border: 1px solid var(--outline-variant); }
+#smdWard .w-bedcell.unknown { background: none; border: 1px dashed var(--outline-variant); justify-content: center; align-items: center; grid-column: 1 / -1; }
+#smdWard .w-bedcell.free { appearance: none; border: 1px solid var(--primary); background: var(--primary-container); color: var(--on-primary-container); cursor: pointer; }
+#smdWard .w-bedcell.free span { color: inherit; opacity: .8; }
+#smdWard .w-bedcell.free:active { filter: brightness(.94); }
+#smdWard .w-bedcell.free.picked { outline: 2px solid var(--primary); outline-offset: 1px; }
+#smdWard .w-card.admit { margin-top: 12px; border-color: var(--primary); }
+#smdWard .w-mrn-found { margin-top: 8px; padding: 10px; border-radius: 10px; background: var(--sc-high); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+#smdWard .w-mrn-found b { font-size: 14px; }
+#smdWard .w-mrn-found span { color: var(--on-surface-variant); font-size: 12.5px; flex: 1; }
+
+/* Flowsheet. Hours across, rows down; an empty cell is a plain dash so a gap in the chart never
+   looks like a normal reading. */
+#smdWard .w-flowgrid { overflow-x: auto; margin-top: 8px; }
+#smdWard .w-flowgrid table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+#smdWard .w-flowgrid th, #smdWard .w-flowgrid td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--outline-variant); white-space: nowrap; }
+#smdWard .w-flowgrid thead th { text-align: right; color: var(--on-surface-variant); font-weight: 600; font-size: 11px; }
+#smdWard .w-flowgrid tbody th { text-align: left; font-weight: 600; position: sticky; left: 0; background: var(--sc-lowest); }
+#smdWard .w-flowgrid td.empty { color: var(--on-surface-variant); opacity: .5; }
+#smdWard .w-flowgrid td.late { color: var(--on-warn-container); }
+#smdWard .w-news2 { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 12px; border-radius: 12px; background: var(--sc-high); margin-bottom: 10px; }
+#smdWard .w-news2 b { font-size: 20px; font-weight: 800; }
+#smdWard .w-news2 span { font-size: 12px; color: var(--on-surface-variant); text-transform: capitalize; }
+#smdWard .w-news2.risk-medium, #smdWard .w-news2.risk-high { background: var(--warn-container); }
+#smdWard .w-news2.risk-medium b, #smdWard .w-news2.risk-high b { color: var(--on-warn-container); }
+#smdWard .w-news2.na { background: none; border: 1px dashed var(--outline-variant); }
+
+/* Investigations: results carry their own conclusion text and a timestamp, same rhythm as the MAR's
+   own mini-lists. */
+#smdWard .w-results li { display: flex; flex-direction: column; gap: 2px; }
+#smdWard .w-results li div { font-size: 13px; }
+
+/* Emergency department. The bed-number badge is repurposed as an acuity badge: colour is urgency,
+   never a computed clinical severity - the level is a human's own choice (triageCard, ward.js). */
+#smdWard .w-bed-no.untriaged { background: var(--sc-high); color: var(--on-surface-variant); }
+#smdWard .w-bed-no.acuity-1, #smdWard .w-bed-no.acuity-2 { background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-bed-no.acuity-3 { background: var(--warn-container); color: var(--on-warn-container); }
+#smdWard .w-bed-no.acuity-4, #smdWard .w-bed-no.acuity-5 { background: var(--ok-container); color: var(--on-ok-container); }
+#smdWard .w-ed-board { list-style: none; margin: 0; padding: 0; }
+#smdWard .w-ed-board li { border-top: 1px solid var(--outline-variant); }
+#smdWard .w-ed-board li:first-child { border-top: 0; }
+
+/* ICU: the admit-panel's own class toggle, and the device-association card's short device list. */
+#smdWard .w-chk { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 13px; }
+#smdWard .w-devices { list-style: none; margin: 0 0 8px; padding: 0; }
+#smdWard .w-devices li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-top: 1px solid var(--outline-variant); gap: 8px; }
+#smdWard .w-devices li:first-child { border-top: 0; }
+
+/* TASK 7.10, the integration console. The counters are deliberately plain and the only colour on
+   the screen belongs to a number somebody has to act on: a wall of red on an operations board stops
+   being read within a shift, the same reasoning the critical-results card above is built on. A
+   count that could NOT be read renders as "?" rather than 0 - the two answers must never look
+   alike, because one of them means something is sitting undelivered and nobody knows. */
+#smdWard .w-int-stats { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 10px; }
+#smdWard .w-int-stat { border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 12px; background: var(--sc-low); }
+#smdWard .w-int-stat b { display: block; font: 700 22px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#smdWard .w-int-stat span { display: block; margin-top: 2px; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--on-surface-variant); }
+#smdWard .w-int-stat small { display: block; margin-top: 3px; font: 500 11px var(--w-sans); opacity: .85; }
+#smdWard .w-int-stat small.warn { color: var(--on-warn-container); opacity: 1; }
+#smdWard .w-int-stat.on { border-color: var(--outline); border-left-width: 3px; }
+#smdWard .w-int-list { list-style: none; margin: 0; padding: 0; }
+#smdWard .w-int-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid var(--outline-variant); }
+#smdWard .w-int-list li:first-child { border-top: 0; }
+#smdWard .w-int-list li > div { min-width: 0; }
+#smdWard .w-int-list b { display: block; font: 700 13.5px var(--w-sans); overflow-wrap: anywhere; }
+#smdWard .w-int-list small { display: block; font: 500 11.5px var(--w-sans); color: var(--on-surface-variant); overflow-wrap: anywhere; }
+#smdWard .w-int-list small.warn { color: var(--on-warn-container); }
+#smdWard .w-int-tag { flex: none; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; padding: 3px 7px; border-radius: 999px; border: 1px solid var(--outline-variant); }
+#smdWard .w-int-list li.st-expired .w-int-tag, #smdWard .w-int-list li.st-failed .w-int-tag { background: var(--warn-container); color: var(--on-warn-container); border-color: transparent; }
+#smdWard .w-int-list li.st-revoked .w-int-tag, #smdWard .w-int-list li.st-dead-letter .w-int-tag { background: var(--error-container); color: var(--on-error-container); border-color: transparent; }
+#smdWard .w-int-list li.st-revoked b, #smdWard .w-int-list li.st-revoked small { opacity: .7; }
+
+/* TASK 8.5, MaiK on the chart. Deliberately the quietest card on the screen: it sits beside the
+   problems and the note, in the same type and the same rhythm, because an assistant that announces
+   itself with gradients and glow is one a clinician learns to skim past. The only colour belongs to
+   the two things that change what a reader should believe - text from another hospital, and a
+   document that contained something shaped like an instruction. */
+#smdWard .w-maik-out { border-left: 3px solid var(--outline); padding: 2px 0 2px 12px; margin: 2px 0 12px; font: 400 14px/1.55 var(--w-sans); }
+#smdWard .w-maik-prov { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#smdWard .w-maik-prov li { display: flex; align-items: flex-start; gap: 7px; font: 500 12px/1.45 var(--w-sans); color: var(--on-surface-variant); }
+#smdWard .w-maik-prov li.warn { color: var(--on-warn-container); }
+#smdWard .w-maik-prov .material-symbols-outlined { font-size: 16px; flex: none; }
+#smdWard .w-maik-prev { border: 1px dashed var(--outline-variant); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; background: var(--sc-low); }
+#smdWard .w-maik-prev b { display: flex; align-items: center; gap: 6px; font: 700 12px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; }
+#smdWard .w-maik-prev span { display: block; margin-top: 4px; font: 500 12.5px/1.5 var(--w-sans); color: var(--on-surface-variant); }
+#smdWard .w-maik-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-maik-acts .w-btn[disabled] { opacity: .55; pointer-events: none; }
+
+#smdWard .w-demo { font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 1px 7px; border-radius: 3px; margin-left: 8px;
+  background: var(--warn-container); color: var(--on-warn-container); }

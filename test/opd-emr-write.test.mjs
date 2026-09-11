@@ -45,6 +45,51 @@ const NO_EMOJI = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}
 const base = { patient: { name: "Asha", mrn: "MR1" }, labs: [], radiology: [], medications: [] };
 const withTab = (o) => Object.assign({}, base, o);
 
+/* ---- the prescribing safety note: "not checked" must never read as "nothing found" -------------
+ *
+ * functions/_wardsynq/rx-safety.js reports `unresolvedDrug` precisely so a caller can tell a clean
+ * check from one that never ran, and its own tests say so ("the caller must be able to tell 'no
+ * findings' from 'not checked'"). The server honoured that contract; this note - the only place a
+ * human ever reads the result - discarded the flag and fell through to the empty-findings branch.
+ *
+ * So prescribing "Augmentin 625" (a brand name the pack does not resolve) to a patient documented
+ * allergic to penicillins printed "No interaction found against this patient's current medications"
+ * in the confirm dialog. Nothing had been checked at all, and Augmentin is a penicillin.
+ */
+test("wardsynqSafetyNote: an unresolved drug is reported as NOT CHECKED, never as a clean result", () => {
+  const OE = load();
+  const unresolved = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: true, findings: [] });
+  assert.match(unresolved, /NOT CHECKED/, "an unresolved drug must say so plainly");
+  assert.ok(!/match found/i.test(unresolved), "it must NOT read as a clean result (the 'nothing found' phrasing)");
+  assert.match(unresolved, /allergy/i, "and must say the allergy check did not run either");
+
+  // A genuinely clean check still reads clean, and no longer claims allergies are uncaptured
+  // (allergy capture shipped; a captured allergy does drive a contraindicated finding).
+  const clean = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: false, findings: [] });
+  assert.match(clean, /No interaction or allergy match found/);
+  assert.ok(!/not yet captured/i.test(clean), "the 'allergies are not captured' caveat is stale");
+
+  // Findings are still listed, and still never presented as a block.
+  const flagged = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: false,
+    findings: [{ code: "ALLERGY_CLASS", severity: "contraindicated", message: "Amoxicillin belongs to penicillins" }] });
+  assert.match(flagged, /UNAPPROVED decision support flags/);
+  assert.match(flagged, /does not block the prescription/);
+
+  // A verdict that could not cover some of the patient's CURRENT medicines says which.
+  const gapped = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: false, findings: [], unresolvedActiveMeds: ["Warfarin 5mg"] });
+  assert.match(gapped, /NOT compared against: Warfarin 5mg/, "the prescriber is told which medicine was never compared");
+  const gappedWithFindings = OE._wardsynqSafetyNote({ unapproved: true, unresolvedDrug: false, unresolvedActiveMeds: ["Warfarin 5mg"],
+    findings: [{ code: "DOSE_UNPARSEABLE", severity: "major", message: "no numeric dose" }] });
+  assert.match(gappedWithFindings, /NOT compared against: Warfarin 5mg/, "and told even when there ARE other findings");
+
+  // Unavailable decision support stays distinct from both.
+  assert.match(OE._wardsynqSafetyNote({ degraded: true }), /unavailable/i);
+  assert.equal(OE._wardsynqSafetyNote(null), "");
+  for (const s of [{ unresolvedDrug: true, findings: [] }, { findings: [] }, { degraded: true }]) {
+    assert.ok(!NO_EMOJI.test(OE._wardsynqSafetyNote(s)), "no emoji in clinician-facing text");
+  }
+});
+
 test("write buttons ABSENT when smd_opd_emr_write is off (note shown instead)", () => {
   const OE = load();
   const inv = OE._render(withTab({ tab: "inv", writeOn: false, invDraft: { service: { id: "LAB1", name: "CBC" } } }));
