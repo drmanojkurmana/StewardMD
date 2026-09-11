@@ -15,6 +15,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 
 ### Clinical modules
 - [[Scan-Meds and Drug Index]] — prescription/med scan, drug DB, interactions
+- [[RxChoice]] — same prescribed therapy, four price choices over the same drug DB
 - [[ICU]] — the ICU flagship workstation
 - [[FollowCare]] — post-discharge recovery intelligence
 - [[KardiQ X]] — ECG interpretation + Learn atlas

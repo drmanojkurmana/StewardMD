@@ -55,6 +55,16 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_clinix_uncleared_media` | OFF | **NEVER, LEGAL.** The repo's own text: 'Authoring escape hatch: render media whose licence is not cleared. NEVER ship on.' |
 | `smd_clinix_viva_tier` | `"mbbs"` | Viva difficulty tier (mbbs | pg). |
 
+### RxChoice  <sub>3 ON · 2 OFF</sub>  <small>(added 2026-09-11; counts above predate it)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_rxchoice` | **ON** | Master flag for the opt-in "Same Prescription. Smarter Price." panel. OFF restores the pre-RxChoice prescription pad exactly (no button, no PDF section). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing. |
+| `smd_rxchoice_price` | **ON** | Show course-level cost on the cards. OFF = products only, no rupee figures. MRP is the Drug Database list price, never a live pharmacy quote. |
+| `smd_rxchoice_pdf` | **ON** | Append the RxChoice section (four options + final selected product) under the unchanged conventional prescription. |
+| `smd_rxchoice_ai_normalization` | OFF | **Keep OFF unless there is a reason.** Even on, AI may only normalize free text BEFORE the deterministic lookup - eligibility, matching, pricing and ranking stay deterministic regardless. The deterministic composition/brand index already resolves every line the pad can produce. |
+| `smd_rxchoice_patient_selection` | OFF | Phase 2. A patient must never introduce a product the doctor did not approve; MVP is doctor approval only. |
+
 ### FollowCare  <sub>6 ON · 2 OFF</sub>
 
 | Flag | Def | Why |

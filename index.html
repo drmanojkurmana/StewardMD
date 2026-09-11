@@ -2079,7 +2079,14 @@ window.openExternal = function (u) {
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
 <script src="/rx-brand-match.js?v=rxb1" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch" defer></script>
+<!-- RxChoice™ — cost-optimization layer over a FINISHED prescription. Load order matters: the flags
+     registry and the deterministic core must exist before prescription.js renders its button, and
+     rxchoice-ui.js needs MEDAPI (api.js, loaded earlier) for the Drug Database. Defer keeps them in
+     document order. With smd_rxchoice off all three are inert and the pad renders no button. -->
+<script src="/rxchoice-flags.js?v=rxc1" defer></script>
+<script src="/rxchoice-core.js?v=rxc1" defer></script>
+<script src="/rxchoice-ui.js?v=rxc1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-rxc1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
