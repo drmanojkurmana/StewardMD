@@ -30,7 +30,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { vitalsToObservations } from "./migrate-vitals.js";
+import { vitalsToObservations, VITAL_CODES } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
@@ -763,9 +763,31 @@ async function bedBoard(request, env, ctx) {
   // that does not exist, and a night manager looking for a bed would skip it.
   if (cfg) for (const name of Object.keys(cfg)) { const w = wardOf(name); w.configured = Array.isArray(cfg[name]); }
 
+  /* THE BED BOARD NAMES ITS PATIENTS, for the same reason the ward list does.
+   *
+   * This projected the encounter and nothing else, so every occupied bed on the board read
+   * "opd-pat-smd-demo-00020" where a name belongs. The bed board is the screen used to find who is
+   * in which bed, and a record id is the one thing on that tile nobody can check against a
+   * wristband. Found 2026-09-12 clicking through the deployed board; identical in kind to the ward
+   * list defect fixed on 2026-09-11, same file, the function directly above.
+   *
+   * ONE extra read, not one per bed, and a name that cannot be read stays null so the caller falls
+   * back exactly as before - a missing name must never turn a readable board into an error. */
+  let nameById = new Map();
+  try {
+    const roster = await svc.list("Patient", 400);
+    nameById = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
+  } catch (e) { /* the beds are still worth showing; the tiles simply carry no name */ }
+
   for (const e of open) {
     const w = wardOf(e.location && e.location.ward);
-    const row = { encounterId: e.id, patientId: e.patientId, bed: (e.location && e.location.bed) || null, admittedAt: e.periodStart || null, attendingId: e.attendingId || null };
+    const p = nameById.get(e.patientId) || null;
+    const row = {
+      encounterId: e.id, patientId: e.patientId,
+      name: (p && (p.name || p.display)) || null,
+      mrn: (p && p.mrn) || null,
+      bed: (e.location && e.location.bed) || null, admittedAt: e.periodStart || null, attendingId: e.attendingId || null,
+    };
     if (row.bed) w.occupied.push(row); else w.unplaced.push(row);   // admitted to the ward, no bed yet
   }
   for (const w of byWard.values()) {
@@ -808,10 +830,19 @@ async function bedBoard(request, env, ctx) {
  * reading between two real ones, and a resource with no timestamp is counted and named, never
  * silently dropped - a timeline that quietly loses events is worse than a shorter one that says so.
  */
+/* LOINC -> the words a clinician reads, inverted from the table migrate-vitals.js already owns so
+ * there is exactly ONE place a code is named. The timeline printed "vital-signs: 8480-6 = 148
+ * mm[Hg]" until 2026-09-12: the readable story of a stay should not require knowing LOINC, and the
+ * flowsheet two cards below was already rendering "SYSTOLIC BLOOD PRESSURE" from this same source.
+ * A code that is not in the table keeps its code - never a name this file invented for it. */
+const OBSERVATION_NAME = Object.freeze(Object.fromEntries(
+  Object.values(VITAL_CODES).filter((v) => v && v.code).map((v) => [v.code, v.display]),
+));
+
 const TIMELINE_LABEL = {
   Encounter: (r) => `${r.class || "Encounter"} ${r.status || ""}${r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : ""}`.trim(),
   Condition: (r) => `Problem: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
-  Observation: (r) => `${r.category || "Observation"}: ${r.code}${r.value != null ? ` = ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
+  Observation: (r) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
   MedicationOrder: (r) => `Prescribed ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
   MedicationAdministration: (r) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}`,
   ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,

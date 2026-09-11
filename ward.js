@@ -242,7 +242,9 @@
     var t = state.admitTarget;
     var wardsHtml = wards.map(function (w) {
       var occ = (w.occupied || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.patientId) + "</span></div>";
+        // The server now sends name/mrn on every occupied bed (migrate-inpatient.js bedBoard).
+        // The id is the LAST resort, never the first thing a nurse reads off a bed.
+        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span></div>";
       }).join("");
       // Which free cell is highlighted as "picked" - a UI selection compare against what the board
       // itself already reported as free, never a computation of whether a bed IS free.
@@ -251,7 +253,7 @@
         return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>Free</span></button>";
       }).join("") : '<div class="w-bedcell unknown"><span>Bed list not configured</span></div>';
       var unplaced = (w.unplaced || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.patientId) + " (no bed assigned)</span></div>";
+        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
       }).join("");
       return '<div class="w-wardrow"><h4>' + esc(w.ward) + "<small>" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
@@ -752,7 +754,7 @@
         (m.dose && m.dose.value != null ? " <span>" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
         (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
         (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
-        (m.since ? "<small>since " + when(m.since) + "</small>" : "") +
+        (m.since ? " <small>since " + when(m.since) + "</small>" : "") +
         "</li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Active medications</h3></div>" +
@@ -940,7 +942,7 @@
       // nothing left to do here.
       var canCollect = st_ === "none" || st_ === "failed";
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
-        '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
+        " " + '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + "Collect</button>" : "") +
       "</li>";
     }).join("");
@@ -2934,6 +2936,9 @@
        * comes from GET /ward/list; without it a US hospital admitting from the bed board would be
        * handed an Indian mobile field and could not complete the registration. */
       region: st.region,
+      // This sheet is shared with the OPD front desk, whose verb is "Add to queue". Opened from the
+      // bed board the act is an admission, and the button now says which bed it is admitting to.
+      submitLabel: st.admitTarget && st.admitTarget.bed ? "Register & admit to " + st.admitTarget.bed : "Register & admit",
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
@@ -4717,6 +4722,16 @@
           else {
             VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
             ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+            /* THE SCORE PANEL HAS TO RE-READ, OR IT REPORTS THE OBSERVATIONS AS MISSING.
+             *
+             * Recording vitals repainted from existing client state, so the Flowsheet sitting
+             * directly below still said "NEWS2 Incomplete: RespiratoryRate, OxygenSaturation ...
+             * were not recorded ... partial total of 0" and "No vitals charted in this window yet"
+             * for a set that had just been accepted by the server. Charting RR 24, SpO2 91, pulse
+             * 112, temp 38.4 - a NEWS2 of 8 - and being shown a 0 is the deterioration path
+             * reporting the opposite of what was charted. Found 2026-09-12 on the live ward.
+             * The timeline is re-read too: the dose and the observation belong on it immediately. */
+            loadFlowsheet(); loadNews2(); loadChart();
           }
         }
         paint();
@@ -5059,6 +5074,21 @@
   }
   var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
   function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
+
+  /* THE OVERLAY LET GO OF THE SCREEN WHEN THE SHELL NAVIGATED AWAY.
+   *
+   * This is a fixed, full-viewport layer at z-index 12000. It closed only through its own X, so
+   * using the left-hand navigation while the ward was open left it covering an app that had already
+   * routed somewhere else: the map, the admin centre or the discharge summary rendered underneath,
+   * unreachable, and the ward looked stuck. Found 2026-09-12 clicking the shell's own nav on the
+   * live site. The shell owns the route; the overlay follows it. Only when it is actually open, so
+   * this can never interfere with a page the ward is not on top of. */
+  try {
+    G.addEventListener("hashchange", function () {
+      var el = document.getElementById("smdWard");
+      if (el && el.classList.contains("on")) close();
+    });
+  } catch (e) {}
 
   G.WARD = { open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
 })();

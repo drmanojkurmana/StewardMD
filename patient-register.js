@@ -119,7 +119,7 @@
           '<div class="pr-ferr" id="prFerr" role="alert"></div>' +
           '<div class="pr-actions">' +
             '<button type="button" class="pr-btn ghost" data-a="cancel">Cancel</button>' +
-            '<button type="button" class="pr-btn primary" data-a="save" id="prSave">Add to queue</button>' +
+            '<button type="button" class="pr-btn primary" data-a="save" id="prSave">' + esc(SUBMIT_LABEL) + "</button>" +
           "</div>" +
         "</footer>" +
       "</div></div>";
@@ -145,7 +145,12 @@
 
   // ---- controller -----------------------------------------------------------------------------
   // opts: { mode:"native"|"ghis"|"connect", clinicName, submit(payload)->Promise, onAdded(res) }
+  /* What the submit button says. The OPD front desk queues a patient; a ward admits one to a bed.
+   * Same sheet, same fields, two different acts - and until 2026-09-12 both read "Add to queue",
+   * which told a doctor admitting to bed CAR-08 that they were queueing an outpatient. */
+  var SUBMIT_LABEL = "Add to queue";
   function open(opts) {
+    SUBMIT_LABEL = (opts && opts.submitLabel) || "Add to queue";
     opts = opts || {};
     var host = el(), state = { gender: "", visitType: "new", confirmDuplicate: false };
     host.className = "on";
@@ -212,7 +217,7 @@
       if (!localCheck()) return;
       var btn = host.querySelector("#prSave");
       btn.disabled = true; btn.textContent = "Adding…";
-      var reset = function () { btn.disabled = false; btn.textContent = "Add to queue"; };
+      var reset = function () { btn.disabled = false; btn.textContent = SUBMIT_LABEL; };
       Promise.resolve(opts.submit(payload())).then(function (r) {
         if (r && r.ok) {
           host.innerHTML = doneHtml({ mrn: r.mrn, pending: r.pending, name: val("name") });
