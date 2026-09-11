@@ -154,3 +154,91 @@ test("overdue means the time passed and nobody resolved it", () => {
   assert.equal(isOverdue(due, "ADMINISTERED", late), true, "and no second spelling is silently accepted");
   assert.equal(isOverdue(due, null, due + 5 * 60000, 0), true, "a ward with no grace flags it at once");
 });
+
+/* ---- The hospital whose clock MOVES -------------------------------------------------------
+ * US DST 2026: forward Sun 8 Mar (02:00 EST -> 03:00 EDT), back Sun 1 Nov (02:00 EDT -> 01:00 EST).
+ * A fixed offset cannot describe such a ward: -300 runs every named dose an hour late for eight
+ * months of the year, -240 an hour early for the other four. These are the cases that fail on one.
+ */
+const NY = "America/New_York";
+/** Effective well before every window below, so nothing here is filtered out by the order's start. */
+const EARLY = "2025-01-01T00:00:00.000Z";
+/** A dose time as the New York ward reads it, "DD HH:MM". */
+function nyLocal(due) {
+  const f = new Intl.DateTimeFormat("en-US", { timeZone: NY, hourCycle: "h23", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+  return due.map((t) => {
+    const p = {}; for (const x of f.formatToParts(t)) p[x.type] = x.value;
+    return p.day + " " + p.hour + ":" + p.minute;
+  });
+}
+
+test("a DST ward's named round is the same wall clock in summer and in winter", () => {
+  // 08:00/20:00 on the ward's own clock, both sides of the year. On a fixed offset one of these is
+  // an hour wrong, whichever number is configured.
+  const jul = scheduleSlots(order("BD", EARLY), { from: "2026-07-01T04:00:00.000Z", to: "2026-07-02T04:00:00.000Z", timeZone: NY });
+  assert.deepEqual(jul.due.map(iso), ["2026-07-01T12:00:00.000Z", "2026-07-02T00:00:00.000Z"], "08:00 EDT is 12:00Z");
+  const jan = scheduleSlots(order("BD", EARLY), { from: "2026-01-01T05:00:00.000Z", to: "2026-01-02T05:00:00.000Z", timeZone: NY });
+  assert.deepEqual(jan.due.map(iso), ["2026-01-01T13:00:00.000Z", "2026-01-02T01:00:00.000Z"], "08:00 EST is 13:00Z");
+  assert.deepEqual(nyLocal(jul.due), ["01 08:00", "01 20:00"], "and both read as the ward's own round times");
+});
+
+test("SPRING FORWARD: the dose is shifted past the gap, and the slot SAYS it was", () => {
+  // 02:30 does not exist on 8 March in New York. A schedule that emitted it would put a time on the
+  // chart no clock will ever show; one that dropped it would lose a dose without saying so.
+  const day = { from: "2026-03-08T05:00:00.000Z", to: "2026-03-09T04:00:00.000Z" };   // 8 Mar, local midnight to midnight
+  const s = scheduleSlots(order("OD", EARLY), { ...day, timeZone: NY, times: { OD: ["02:30"] } });
+  assert.deepEqual(nyLocal(s.due), ["08 03:30"], "moved forward by the size of the gap, not dropped");
+  assert.deepEqual(s.due.map(iso), ["2026-03-08T07:30:00.000Z"]);
+  assert.deepEqual(s.adjusted, [{ at: Date.parse("2026-03-08T07:30:00.000Z"), from: "02:30", to: "03:30", reason: "clock_skipped_forward" }]);
+  // A dose on the same day that is NOT in the gap is untouched, and says nothing.
+  const normal = scheduleSlots(order("OD", EARLY), { ...day, timeZone: NY, times: { OD: ["08:00"] } });
+  assert.deepEqual(nyLocal(normal.due), ["08 08:00"]);
+  assert.equal(normal.adjusted, undefined, "nothing was adjusted, so nothing claims to have been");
+});
+
+test("FALL BACK: the repeated hour is ONE dose, not two and not zero", () => {
+  // 01:30 happens twice on 1 November in New York - once EDT, once EST an hour later. Two rows would
+  // be a double dose waiting to be given; none would be a missed one.
+  const day = { from: "2026-11-01T04:00:00.000Z", to: "2026-11-02T05:00:00.000Z" };   // 1 Nov, local midnight to midnight (25h)
+  const s = scheduleSlots(order("OD", START), { ...day, timeZone: NY, times: { OD: ["01:30"] } });
+  assert.equal(s.due.length, 1, "exactly one dose for a wall clock that happens twice");
+  assert.deepEqual(s.due.map(iso), ["2026-11-01T05:30:00.000Z"], "the FIRST occurrence (01:30 EDT) wins");
+  assert.equal(s.adjusted, undefined, "the time a nurse reads is the time the policy names");
+  // The rest of the 25-hour day still gets its usual doses, each exactly once.
+  const qid = scheduleSlots(order("QID", START), { ...day, timeZone: NY });
+  assert.deepEqual(nyLocal(qid.due), ["01 06:00", "01 12:00", "01 18:00", "01 22:00"]);
+});
+
+test("REGRESSION: a hospital with only an offset behaves exactly as it did before zones existed", () => {
+  // The case that must not move: every hospital in the product today has an offset and no zone.
+  const withKey = scheduleSlots(order("TDS", START), { ...DAY, offsetMinutes: IST, timeZone: undefined });
+  const without = scheduleSlots(order("TDS", START), { ...DAY, offsetMinutes: IST });
+  assert.deepEqual(withKey, without);
+  assert.deepEqual(withKey, { due: [Date.parse("2026-09-09T02:30:00.000Z"), Date.parse("2026-09-09T08:30:00.000Z"), Date.parse("2026-09-09T16:30:00.000Z")], truncated: false });
+  assert.equal("adjusted" in withKey, false, "no new key on the object a caller already reads");
+  // And with no options at all, the default is still the home ward's +05:30.
+  assert.deepEqual(local(scheduleSlots(order("BD", START), DAY).due), ["09 08:00", "09 20:00"]);
+});
+
+test("a zone WINS over an offset, because a moving clock has no correct offset to be given", () => {
+  // Both configured, and they disagree: +05:30 would put this dose at 02:30Z. The zone is the only
+  // one of the two that can be right on both sides of a transition, so it is the one that decides.
+  const s = scheduleSlots(order("OD", EARLY), { from: "2026-07-01T04:00:00.000Z", to: "2026-07-02T04:00:00.000Z", offsetMinutes: IST, timeZone: NY });
+  assert.deepEqual(s.due.map(iso), ["2026-07-01T12:00:00.000Z"], "08:00 New York, not 08:00 India");
+});
+
+test("a zone the runtime cannot read falls back to the offset and never throws", () => {
+  // A typo in one hospital's configuration must not take the medication round down.
+  for (const bad of ["Mars/Olympus", "Asia/Kolkatta", "", "   ", null, 42, {}]) {
+    const s = scheduleSlots(order("BD", START), { ...DAY, offsetMinutes: IST, timeZone: bad });
+    assert.deepEqual(local(s.due), ["09 08:00", "09 20:00"], "falls back to the configured offset: " + String(bad));
+  }
+});
+
+test("interval frequencies are immune to the clock, by definition", () => {
+  // Q8H is measured from the order, not from the ward round, so a transition cannot move it. Stated
+  // as a test because it is the reason only named and pattern frequencies needed any of this.
+  const at = "2026-03-07T20:00:00.000Z";
+  const s = scheduleSlots(order("Q8H", at), { from: "2026-03-08T05:00:00.000Z", to: "2026-03-09T04:00:00.000Z", timeZone: NY });
+  assert.deepEqual(s.due.map(iso), ["2026-03-08T12:00:00.000Z", "2026-03-08T20:00:00.000Z"], "strict 8-hour spacing across the gap");
+});

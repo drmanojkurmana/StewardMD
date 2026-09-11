@@ -47,7 +47,7 @@
       if (!(window.SMD_PATIENTREG && SMD_PATIENTREG.open)) { c.toast("The registration sheet is still loading."); return; }
       var mode = st.org.mode === "wardsynq" ? "native" : (st.org.mode || "native");
       SMD_PATIENTREG.open({
-        mode: mode, clinicName: st.org.code || st.org.name || "Check-in",
+        mode: mode, clinicName: st.org.code || st.org.name || "Check-in", region: st.org.region,
         submit: function (b) { b.orgId = st.orgId; b.workplaceMode = mode; return c.api("/patient/register", b); },
         onAdded: function (r) {
           var mrn = r && (r.mrn || (r.patient && r.patient.mrn));

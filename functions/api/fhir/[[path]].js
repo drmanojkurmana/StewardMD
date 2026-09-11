@@ -54,7 +54,7 @@ export async function onRequest(context) {
   const base = `${url.origin}/api/fhir/${orgId}`;
   const smart = smartEnabled(cfg) ? { authorize: `${base}/smart/authorize`, token: `${base}/smart/token`, revoke: `${base}/smart/revoke` } : null;
   const key = signingKey(env);
-  const ctx = { migration, config: cfg, base, hospitalName: str(org.name), actorDeps: actorDeps(env), recordDeps: recordDeps(env, migration.tenantId), smart, terminology: (org.wardsynq && org.wardsynq.terminology) || null, profiles: (cfg && cfg.profiles) || null };
+  const ctx = { migration, config: cfg, base, hospitalName: str(org.name), actorDeps: actorDeps(env), recordDeps: recordDeps(env, migration.tenantId), smart, terminology: (org.wardsynq && org.wardsynq.terminology) || null, profiles: (cfg && cfg.profiles) || null, region: str(org.region) };
 
   const sub = parts[1] || "", sub2 = parts[2] || "";
 
@@ -115,7 +115,7 @@ export async function onRequest(context) {
    * The ownership check is unchanged - asking for anybody else is still a 404. */
   if (sub === "Practitioner") {
     if (!sub2 || decodeURIComponent(sub2) !== bearer.actor.id || bearer.actor.kind !== "human") return fhirResponse(operationOutcome("error", "not-found", "no such resource"), 404, null, cors(request));
-    const r = await practitionerRead(request, env, { id: bearer.actor.id, accountName: str(bearer.actor.display).replace(/ \(SMART\)$/, "") || bearer.actor.id });
+    const r = await practitionerRead(request, env, { id: bearer.actor.id, accountName: str(bearer.actor.display).replace(/ \(SMART\)$/, "") || bearer.actor.id, region: str(org.region) });
     return fhirResponse(r.ok ? r.resource : r.outcome, r.status, null, cors(request));
   }
 

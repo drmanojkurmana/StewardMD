@@ -206,3 +206,22 @@ test("an unknown incident id is refused, not silently reported as empty", async 
   assert.equal(r.__status, 404, JSON.stringify(r));
   assert.equal(r.error, "incident_not_found");
 });
+
+test("triagedBy/conductedBy are the session's own actor, not whatever name the body supplies", async () => {
+  seedHospital();
+  const filed = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Wrong dose almost given, caught by the second nurse", severity: "no-harm" });
+  assert.equal(filed.__status, 200, JSON.stringify(filed));
+  const id = filed.incident.id;
+
+  // Body names somebody else entirely. If the router ever forwards this, the investigation's
+  // conclusion is filed under a name the safety officer typed, not the account that authenticated.
+  const triaged = await as(SAFETY_OFFICER, "/ward/incident-triage", "POST", { orgId: ORG, incidentId: id, likelihood: "possible", triagedBy: "Dr Somebody Else" });
+  assert.equal(triaged.__status, 200, JSON.stringify(triaged));
+  assert.equal(triaged.incident.triagedBy, idFor(SAFETY_OFFICER), "triagedBy must be the authenticated session's actor, never the body");
+  assert.notEqual(triaged.incident.triagedBy, "Dr Somebody Else");
+
+  const rca = await as(SAFETY_OFFICER, "/ward/incident-rca", "POST", { orgId: ORG, incidentId: id, rootCause: "The infusion pump's rate-entry screen defaults to mL/hr with no unit label visible at the bedside", conductedBy: "Dr Somebody Else" });
+  assert.equal(rca.__status, 200, JSON.stringify(rca));
+  assert.equal(rca.incident.rca.conductedBy, idFor(SAFETY_OFFICER), "conductedBy must be the authenticated session's actor, never the body");
+  assert.notEqual(rca.incident.rca.conductedBy, "Dr Somebody Else");
+});

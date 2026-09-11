@@ -80,6 +80,19 @@ export function phoneLabel(region) {
   return regionOf({ region }) === "US" ? "Mobile number (10 digits)" : "Mobile number (10-digit Indian)";
 }
 
+/* ---------------------------------------------------------------- postcode
+ *
+ * India: 6 digits, always. US: a ZIP is 5 digits, or 9 with the +4 extension - a real shape a US
+ * hospital's own address book already uses ("90210-1234"), not an edge case. This was hardcoded to
+ * exactly 6 digits everywhere (the server AND the input's maxlength), so a US ZIP+4 could not even
+ * be typed, let alone saved.
+ */
+export function isValidPostcode(raw, region) {
+  const d = digits(raw);
+  return regionOf({ region }) === "US" ? (d.length === 5 || d.length === 9) : d.length === 6;
+}
+export function postcodeLabel(region) { return regionOf({ region }) === "US" ? "ZIP code" : "PIN code"; }
+
 /* ---------------------------------------------------------------- clinical units
  *
  * THIS IS THE DANGEROUS ONE. A temperature recorded in the wrong unit is not a cosmetic problem: 37.1

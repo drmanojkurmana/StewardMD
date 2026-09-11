@@ -81,9 +81,24 @@ function wardsynqConfig(w) {
   // hospital knows that its order code "CT-ABDO" means a CT scanner - and functions/_wardsynq/dicom.js
   // refuses to guess a modality from an order's words, so an unlisted key here means the worklist
   // goes out without a modality rather than with an invented one.
+  /* timeZone joined 2026-09-11: an IANA name ("America/New_York") beside utcOffsetMinutes, for a
+   * hospital whose clock MOVES. One offset cannot describe such a site - it is an hour wrong for
+   * eight months of the year whichever value is chosen - so the medication round resolves the offset
+   * per dose instant from it. Purely additive: a hospital without one keeps running on its offset. */
   // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
   // counts as an implausible change in an analyte, and which analytes may be released unread.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik"]) {
+  // readLogRetentionDays joined 2026-09-11 (clinical read-log audit trail, HAZ-FLUID-01's
+  // notification list): how many days wardsynq-readlog.js keeps a decisive read before it drops
+  // out of "who to tell". Defaults to 90 in wardsynq-readlog.js itself when unset here - HIPAA
+  // requires 6 years, but 90 is what every hospital already runs on, and changing that default
+  // silently would shorten or lengthen retention nobody asked to change. A US hospital must set
+  // this explicitly.
+  // externalMrn joined 2026-09-11: opt-in for a hospital with its own MR numbering (every US
+  // hospital, plenty of Indian ones too) so resolveMrn() (functions/_opd_patient.js) accepts a
+  // supplied MRN AS the MRN instead of demoting it to hospitalRef and minting an SMD-... over it.
+  // Absent/false is the existing minting behaviour, unchanged - opt-in because minting is the right
+  // default for a clinic with no numbering of its own.
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;

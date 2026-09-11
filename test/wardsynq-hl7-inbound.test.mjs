@@ -64,6 +64,7 @@ test("ADT A01 -> SCCM 1.1: identifiers with their authorities, the visit number,
   assert.deepEqual(e.identifiers, [{ system: "GENHOSP", type: "VN", value: "V-2026-001" }]);
   assert.equal(sccm.conditions[0].code.coding[0].system, CODING_SYSTEMS.I10);
   assert.equal(sccm.conditions[0].code.coding[0].code, "E11.9");
+  assert.equal(CODING_SYSTEMS.I10, "http://hl7.org/fhir/sid/icd-10");
   assert.equal(sccm.allergies[0].criticality, "high");
   assert.equal(sccm.allergies[0].reactions[0].text, "Anaphylaxis");
   assert.deepEqual(zSegments, [{ id: "ZPI", raw: "ZPI|1|custom-value|do-not-interpret" }]);
@@ -155,4 +156,25 @@ test("identifiersFrom carries every repetition with authority and type; a repeti
   const msg = parseHl7("MSH|^~\\&|A|B|C|D|20260101||ADT^A01|1|P|2.5\rPID|1||X1^^^AUTH&1.2&ISO^MR~^^^NDHM^NI~Y2^^^^PI");
   const pid = msg.segments[1];
   assert.deepEqual(identifiersFrom(pid, msg.encoding), [{ system: "AUTH", type: "MR", value: "X1" }, { system: null, type: "PI", value: "Y2" }]);
+});
+
+test("HL7 table 0396 I10P is ICD-10-PCS, not ICD-10-CM, and is never mapped to a system it is not", () => {
+  // I10P is procedure coding (ICD-10-PCS); ICD-10-CM is I10/I10C. Mapping I10P into the CM URI
+  // would tell a receiver a procedure code is a diagnosis code from a different vocabulary.
+  const msg = [
+    "MSH|^~\\&|HIS|GENHOSP|WARDSYNQ|WSQ|20260808101500+0530||ADT^A01^ADT_A01|MSG0009|P|2.5.1",
+    "EVN|A01|20260808101500",
+    "PID|1||H-88^^^GENHOSP^MR||Testcase^Solo||19800101|M",
+    PV1(),
+    "DG1|1||0DTJ4ZZ^Excision of Stomach^I10P|||A",
+  ].join(CR);
+  const { sccm } = hl7ToSccm(parseHl7(msg), {});
+  const c = sccm.conditions[0].code.coding[0];
+  assert.notEqual(c.system, "http://hl7.org/fhir/sid/icd-10-cm", "I10P must not be mapped to ICD-10-CM");
+  assert.notEqual(c.system, CODING_SYSTEMS.I10, "nor conflated with ICD-10");
+  assert.ok(!CODING_SYSTEMS.I10P, "ICD-10-PCS has no registered URI in this codebase; I10P stays UNMAPPED");
+  // UNMAPPED means kept verbatim under the sender's own table name, never dropped or guessed.
+  assert.equal(c.system, "I10P");
+  assert.equal(c.code, "0DTJ4ZZ");
+  assert.equal(c.kind, "local", "an unrecognised table is a local coding, never presented as a standard one");
 });

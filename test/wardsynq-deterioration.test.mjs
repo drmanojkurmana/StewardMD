@@ -503,3 +503,38 @@ test("the unit travels from the observation, so a real F-charted patient is caug
   });
   assert.ok(r.missing.includes(PARAM.TEMPERATURE), "gathered from a real observation, the unit still refuses it");
 });
+
+/* REGRESSION, 2026-09-11: A POUNDS WEIGHT WAS READ AS KILOGRAMS.
+ *
+ * migrate-vitals.js hard-coded body weight's unit to "kg", so a US ward charting 154 lb stored 154
+ * KILOGRAMS. Nothing caught it: the adult plausibility band in wardsynq-paediatrics.js is 25 to 300
+ * kg, which 154 passes cleanly, and every weight-based infusion rate computed from it would be 2.2
+ * times the intended dose.
+ *
+ * weightInKg is the ONE place that converts, and the comment on it says why body mass is converted
+ * where a lab value or a temperature is refused: pounds to kilograms is a single exact constant that
+ * depends on nothing about the patient, and refusing would mean weight-based dosing never worked in
+ * a US hospital at all.
+ */
+import { weightInKg, LB_TO_KG } from "../wardsynq/wardsynq-vitals.js";
+
+test("a weight is read in the unit it was recorded in, exactly, or not at all", () => {
+  assert.equal(weightInKg(70, "kg"), 70);
+  // No unit recorded is kilograms: every weight written before units travelled has none, and they
+  // were all kilograms because that is the only unit the recorder could produce.
+  assert.equal(weightInKg(70, null), 70);
+  assert.equal(weightInKg(70, ""), 70);
+
+  // The case that was silently wrong. 154 lb is about 70 kg, not 154 kg.
+  assert.equal(weightInKg(154, "[lb_av]"), 154 * LB_TO_KG);
+  assert.ok(Math.abs(weightInKg(154, "[lb_av]") - 69.85) < 0.01);
+  assert.equal(weightInKg(154, "lb"), weightInKg(154, "[lb_av]"), "the plain spelling reads the same");
+
+  // Anything unrecognised is refused rather than guessed at, so a caller gets "no weight" instead
+  // of a wrong one. LB_TO_KG is exact by definition of the international avoirdupois pound.
+  assert.equal(weightInKg(70, "st"), null, "stones are not silently treated as kilograms");
+  assert.equal(weightInKg(70, "g"), null);
+  assert.equal(weightInKg("70", "kg"), null, "a string is not a weight");
+  assert.equal(weightInKg(NaN, "kg"), null);
+  assert.equal(LB_TO_KG, 0.45359237);
+});
