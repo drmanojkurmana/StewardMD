@@ -5172,3 +5172,49 @@ a missing identity rather than return early.
 **Also fixed, root cause not symptom:** `render()` in shell.js emitted the two-column `.wrap` grid
 even with an empty rail, so every page shown before a hospital is chosen (the hospital list included)
 was squeezed into the 178px rail column. `.wrap.norail` now collapses to one column.
+
+## 2026-09-11 — "Local AI" becomes a hard policy: no silent cloud inference, capability-matched packs, no unsuitable downloads
+
+**The problem the owner named.** A clinician who chose the on-device engine still spent Gemini on
+every Scribe refine, ICD suggestion, note structuring, MaiK Ask turn, timeline summary and ICU
+correlation, because the router only had local implementations for four tasks and fell through to
+`orig.apply()` for the rest. Five calls never went through the router at all (`SMD_AI.maik`, a raw
+`/summary` fetch, `voice.js` tier-3 transcribe, the ICU imaging/correlate calls, `readImage`'s cloud
+stage). KB-only mode sent the viva judge and the OPD differential to the cloud too.
+
+**Decision.** One policy decision in `maik-engine.js route()`: cloud -> untouched; rag -> no model,
+no spend; local -> the on-device engine or a structured `LOCAL_CAPABILITY_REQUIRED` refusal. Never
+the cloud. `SMD_MAIK_ENGINE.cloudAllowed()` is the single signal for the on-device-first paths
+(image engine, voice, readImage). Evidence Review is Cloud-only by product decision and is REFUSED in
+Local mode with cloud offered, rather than run silently. Speech-to-text is Whisper's job, not a
+MaiK model's. `smd_maik_hard_local="0"` is a one-release recovery switch, not a mode.
+
+**Capability matching lives in the registry, not a second one.** `maik-models.js` gains `CAPS`
+(medical, KB-grounded, JSON reliability, reasoning tier, RAM floor, KV at 4K, verified languages)
+and `suitability()` / `recommend()`. The matcher respects the pinned pack when it qualifies, then a
+feature's preferred tier if installed, then the SMALLEST qualifying pack. Bonsai Swift (`json: 1`)
+is never used for structured output.
+
+**Never recommend a download that will not run well.** Verdicts are ok / warn / no. Unknown RAM
+never upgrades a verdict; a 12 GB-floor pack on a phone whose total cannot be confirmed is "no"; an
+iOS jetsam budget below the need is "no"; short storage is "no"; free-memory-now and battery are
+warnings with the limitation named. "No" packs get no download button and MaiK Cloud is named as the
+alternative. Nothing downloads without a tap; a warn-level pack asks once more.
+
+**Languages are verified, not assumed.** `CAPS.lang` is empty everywhere. A language is added only
+from a passing `test/run-local-translate-eval.mjs` run (numbers, drugs, doses, units must survive;
+no native script may). Until then Indic input in Local mode is refused with the reason.
+
+**The 4K context is the runtime's, not the model's.** Every pack loads at `nCtx 4096`. Long inputs
+are windowed and reduced (`summarize`, `assess`, `noteStructure`, `reasoningExtract`, rolling
+`scribeFill` with running state); nothing is silently truncated. The local sanitizers are the
+server's, ported: the model orders ICD candidates the database supplied and can never emit a code
+the database did not; a figure the source never stated is dropped, never corrected.
+
+**Evidence.** `test/maik-policy.test.mjs`: Local + network ON, every decorated method, zero cloud AI
+calls. 653 test files, 0 failures. Recovery tag `pre-hard-local`. Handoff:
+[[2026-09-11-hard-local-policy]].
+
+**NOT claimed:** any on-device run of the new task functions on a phone (tests use a fake plugin),
+Indic offline translation, a client screen for Senior Surgeon Mode, or clinical validation of
+anything here.

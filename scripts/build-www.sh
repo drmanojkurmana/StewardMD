@@ -136,6 +136,13 @@ fi
 # natively, so the native bundle never carries them.
 [ -d clinix ] && mkdir -p "$WWW/clinix" && cp -R clinix/. "$WWW/clinix/"
 
+# Offline ICD-10 index (icd/icd10.min.json, built by scripts/icd/build-offline-index.mjs) - the
+# on-device fallback icd.js's window.SMD_ICD.localSearch() serves when maik-engine.js
+# icdCandidates() can't reach /api/icd/search. Same rule and failure mode as clinix above: the
+# root *.js glob copies icd.js, DATA DIRECTORIES ARE NOT COPIED - without this line the offline
+# ICD lookup silently returns nothing on-device.
+[ -d icd ] && mkdir -p "$WWW/icd" && cp -R icd/. "$WWW/icd/"
+
 # SURGX content (protocols / procedures / steps / cases / evidence / media manifest). Same rule and
 # the same failure mode as clinix above: root *.js and *.css are globbed, DATA DIRECTORIES ARE NOT.
 # Without this line the module loads, the tile appears, and every section renders empty on the device.
