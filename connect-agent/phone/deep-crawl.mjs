@@ -78,6 +78,11 @@ function CRAWL_RAW_TABLE() {
   var DAY = /^(su|mo|tu|we|th|fr|sa|sun|mon|tue|wed|thu|fri|sat)$/i;
   for (var i = 0; i < tables.length; i++) {
     var t = tables[i];
+    // Prefer a VISIBLE table (a sub-view that loaded into the active panel), but do not hard-exclude
+    // laid-out-but-zero-rect tables: some legacy EMRs render a real data table with no client rects.
+    // Visibility is a strong score bonus, not a filter, so the current view's table wins over a stale one
+    // without dropping a table the layout reports oddly.
+    var visible = t.getClientRects && t.getClientRects().length ? 1 : 0;
     var cls = (t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || '');
     // Skip a jQuery UI date-picker / calendar widget: it has <th> and rows but is chrome, not data.
     if (/datepicker|calendar/i.test(cls)) continue;
@@ -89,8 +94,8 @@ function CRAWL_RAW_TABLE() {
     var dataRows = 0;
     var scan = bodyRows.length ? bodyRows : t.querySelectorAll('tr');
     for (var b = 0; b < scan.length; b++) { if (scan[b].querySelectorAll('td').length >= 1) dataRows++; }
-    // Prefer a table with header labels AND real data rows; break ties by number of data rows.
-    var score = (thEls0.length ? 1000 : 0) + Math.min(dataRows, 999);
+    // Prefer a visible table with header labels AND real data rows; break ties by number of data rows.
+    var score = (visible ? 100000 : 0) + (thEls0.length ? 1000 : 0) + Math.min(dataRows, 999);
     if (score > bestScore) { bestScore = score; best = t; }
   }
   if (!best) return JSON.stringify(null);
