@@ -40,7 +40,13 @@ export function org(o = {}) {
    * way behaviour for every org that predates "wardsynq" is unchanged; only a document explicitly
    * stamped mode:"wardsynq" gets it, so no existing org silently changes meaning. */
   const MODE = o.mode === "connect" ? "connect" : o.mode === "wardsynq" ? "wardsynq" : "native";
-  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic",
+  /* WHICH COUNTRY THIS HOSPITAL IS IN. Top-level beside kind and mode, NOT inside the wardsynq
+   * config, because it governs the OPD registration desk (what a valid phone number is) just as much
+   * as it governs the ward. Unrecognised or absent means India - every hospital that exists today
+   * was created without this field and is an Indian one, so not a single record changes meaning.
+   * What it actually implies lives in functions/_region.js and nowhere else. */
+  const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
+  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
            wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
 }

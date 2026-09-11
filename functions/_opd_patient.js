@@ -20,6 +20,8 @@
  */
 
 // ---- small helpers ---------------------------------------------------------------------------
+import { normalizePhone, regionOf } from "./_region.js";
+
 const s = (x) => String(x == null ? "" : x).trim();
 const digits = (x) => s(x).replace(/\D/g, "");
 export const GENDERS = ["male", "female", "other"];
@@ -29,6 +31,10 @@ export const MR_SOURCES = ["stewardmd", "ghis", "connect", "provisional"];
 // ---- mobile (E.164, India-first) -------------------------------------------------------------
 // The queue already sends WhatsApp/SMS from this number, so it is stored in ONE canonical shape.
 // Accepts 9876543210, 09876543210, +91 98765 43210, 91-9876543210.
+/* KEPT as the India-only normaliser its existing callers already use (the queue, the slip, the SMS
+ * path - all serving hospitals that are, today, Indian). New code should call
+ * normalizePhone(raw, region) from functions/_region.js, of which this is now the IN branch by
+ * another name. */
 export function normalizeMobile(raw) {
   let d = digits(raw);
   if (!d) return "";
@@ -160,16 +166,22 @@ export function resolveMrn(workplaceMode, suppliedMrn) {
 // Required at the desk: name, mobile, gender, age (or DOB). Everything else optional. Errors are keyed
 // by field so a form can render them inline instead of one modal alert.
 export const REQUIRED_FIELDS = ["name", "mobile", "gender", "age"];
-export function validateRegistration(input, nowMs) {
+/* region joined 2026-09-11. The phone rule below was India-only, so a US hospital could not register
+ * a single patient: every +1 number was refused as "not a valid 10-digit Indian mobile". The rule
+ * now comes from functions/_region.js, the one place that says what a country implies. An omitted
+ * region means India, so every existing caller behaves exactly as before. */
+export function validateRegistration(input, nowMs, region) {
   const o = input || {};
   const errors = {};
   const name = s(o.name).replace(/\s+/g, " ");
   if (name.length < 2) errors.name = "Enter the patient's full name.";
   else if (name.length > 80) errors.name = "Name is too long.";
 
-  const mobile = normalizeMobile(o.mobile);
+  const mobile = normalizePhone(o.mobile, region);
   if (!s(o.mobile)) errors.mobile = "Mobile number is required - the queue sends updates to it.";
-  else if (!mobile) errors.mobile = "Enter a valid 10-digit Indian mobile number.";
+  else if (!mobile) errors.mobile = regionOf({ region }) === "US"
+    ? "Enter a valid 10-digit US phone number."
+    : "Enter a valid 10-digit Indian mobile number.";
 
   const gender = s(o.gender).toLowerCase();
   if (!gender) errors.gender = "Select the patient's gender.";

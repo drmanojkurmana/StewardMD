@@ -137,12 +137,12 @@ const NOTE_TEMPLATES = [{
   ],
 }];
 
-function seedHospital(mode = "wardsynq") {
+function seedHospital(mode = "wardsynq", region) {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
-  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
+  docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, ...(region ? { region } : {}), connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
   for (const [email, role] of [[DOCTOR, "doctor"], [NURSE, "nurse"], [PHARM, "pharmacy"], [LABTECH, "lab"], [LOCUM, "doctor"]]) {
     docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(email))}`, { fields: { orgId: ORG, identity: idFor(email), role, active: true }, updateTime: "t1" });
   }
@@ -244,6 +244,15 @@ test("the whole inpatient vertical: admit, ward vitals, order, and a governed ad
   const obs = await RECORD.byPatient(TENANT_ROW.id, "Observation", adm.patientId);
   assert.equal(obs.find((o) => o.code === "8480-6").value, 126, "systolic recorded as reported");
   assert.ok(obs.every((o) => o.encounterId === adm.encounterId), "every ward reading is anchored to the admission");
+
+  /* REGRESSION, 2026-09-11: A TEMPERATURE IS STORED IN THE UNIT IT WAS TAKEN IN.
+   *
+   * migrate-vitals.js defaulted tempUnit to "F" and ward.js never sent one, so a nurse in an Indian
+   * hospital charting 37.1 stored "37.1 [degF]" - profound hypothermia - to be read later by
+   * somebody who was not in the room. The unit now comes from the hospital's own country
+   * (functions/_region.js) whenever the caller does not state one. */
+  const tempObs = obs.find((o) => o.code === "8310-5");
+  assert.equal(tempObs.unit, "[degF]", "this hospital sent F explicitly, so F is what is stored");
 
   // 4. THE ORDER, by the doctor, carrying a real dose the bedside can check against.
   assert.equal(ord.__status, 200, JSON.stringify(ord));
@@ -1145,6 +1154,48 @@ test("reading the round is a view, and it grants nothing: it cannot move a dose"
   const s = await as(NURSE, "/ward/schedule" + q);
   const bad = await as(PHARM, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: s.due[0].orderId, dueAt: s.due[0].dueAt, patient: { id: adm.patientId } });
   assert.equal(bad.__status, 403);
+});
+
+/* THE UNIT A TEMPERATURE IS STORED IN, WHEN NOBODY SAID.
+ *
+ * This is the case that was actually wrong in production shape: ward.js sends no tempUnit at all, so
+ * every ward temperature fell to the hard-coded Fahrenheit default. In an Indian hospital - which is
+ * every hospital using this product today - a nurse charting 37.1 stored "37.1 [degF]". That is not
+ * a display preference; it is a wrong number in a clinical record, and 37.1 degF reads as profound
+ * hypothermia to whoever opens the chart next. */
+test("an unstated temperature is stored in the unit this hospital's country actually writes", async () => {
+  // India: no region set, which is every hospital that predates the field.
+  seedHospital();
+  const a = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: a.adm.encounterId, patientId: a.adm.patientId,
+    vitals: { temp: "37.1" },   // exactly what ward.js sends: a number, no unit
+  });
+  const inObs = await RECORD.byPatient(TENANT_ROW.id, "Observation", a.adm.patientId);
+  const inTemp = inObs.find((o) => o.code === "8310-5");
+  assert.equal(inTemp.value, 37.1);
+  assert.equal(inTemp.unit, "Cel", "37.1 in an Indian hospital is Celsius, not profound hypothermia");
+
+  // The United States, where 99.4 with no unit is Fahrenheit and Celsius would be absurd.
+  seedHospital("wardsynq", "US");
+  const b = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: b.adm.encounterId, patientId: b.adm.patientId,
+    vitals: { temp: "99.4" },
+  });
+  const usObs = await RECORD.byPatient(TENANT_ROW.id, "Observation", b.adm.patientId);
+  assert.equal(usObs.find((o) => o.code === "8310-5").unit, "[degF]");
+
+  // And an explicit unit always wins over the hospital's default: a thermometer that reads in one
+  // unit is a fact about the reading, not about the country.
+  seedHospital();
+  const c = await admittedPatientOnDrug();
+  await as(NURSE, "/ward/vitals", "POST", {
+    orgId: ORG, encounterId: c.adm.encounterId, patientId: c.adm.patientId,
+    vitals: { temp: "99.4", tempUnit: "F" },
+  });
+  const cObs = await RECORD.byPatient(TENANT_ROW.id, "Observation", c.adm.patientId);
+  assert.equal(cObs.find((o) => o.code === "8310-5").unit, "[degF]", "what the caller said wins");
 });
 
 /* ---- the discharge screen, end to end -----------------------------------------------------------
@@ -3360,7 +3411,14 @@ test("AN INCOMPLETE NEWS2 IS NEVER REASSURING, however low the partial total", a
     orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
     // All six numeric parameters PLUS the two NEWS2 could never record before: supplemental oxygen
     // and level of consciousness. Without them no early warning score can ever complete.
-    vitals: { rr: "18", spo2: "97", sbp: "126", pulse: "78", temp: "98.6", tempUnit: "F", o2: false, acvpu: "A" },
+    /* CHARTED IN CELSIUS, because this hospital is an Indian one and NEWS2's bands are Celsius.
+     * This fixture used to send 98.6 F and still assert a COMPLETE score - which passed only
+     * because the unit was discarded before scoring and 98.6 was read against the Celsius bands as
+     * "above 39", contributing 2 points to a patient with a normal temperature. The assertion
+     * below is unchanged: a full set of observations scores. What changed is that the set is now
+     * clinically coherent. A Fahrenheit temperature is refused outright, which
+     * test/wardsynq-deterioration.test.mjs pins directly. */
+    vitals: { rr: "18", spo2: "97", sbp: "126", pulse: "78", temp: "37.0", tempUnit: "C", o2: false, acvpu: "A" },
   });
   const scored = await as(NURSE, `/ward/news2?orgId=${ORG}&patientId=${adm.patientId}`);
   assert.equal(scored.score.scorable, true, JSON.stringify(scored.score));

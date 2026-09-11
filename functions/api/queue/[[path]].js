@@ -28,6 +28,7 @@ import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { selfCreateTenant } from "../../_connect/enterprise/org.js";
+import { unitsFor } from "../../_region.js";
 import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
@@ -985,7 +986,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
-        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
+        const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-arrival" && method === "POST") {
@@ -1309,7 +1310,9 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "vitals" && method === "POST") {
-        const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordWardVitals(request, env, { ...deps, encounterId: body.encounterId, patientId: body.patientId, vitals: body.vitals, recordedAt: body.recordedAt,
+          // What a clinician HERE writes a temperature in, when the caller did not say. See _region.js.
+          tempUnit: unitsFor(wOrg && wOrg.region).temp, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "medication-order" && method === "POST") {
@@ -1867,7 +1870,13 @@ export async function onRequest(context) {
       if (sub === "downtime" && method === "GET") {
         const r = await downtimePack(request, env, {
           ...deps, ward: url.searchParams.get("ward") || "", hours: url.searchParams.get("hours") || "",
-          marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: (wsqCfg && wsqCfg.utcOffsetMinutes) || 0,
+          marTimes: (wsqCfg && wsqCfg.marTimes) || null,
+          /* THE SAME CLOCK THE LIVE ROUND USES. This read `|| 0`, so a hospital that had not
+           * configured an offset got UTC here and mar-schedule.js's own default (330) everywhere
+           * else - the downtime pack printed every dose time 5h30m from the screen it replaces.
+           * The downtime pack is the PAPER SHEET a ward uses when the system is down, which makes
+           * it the single worst place in the product for a wrong dose clock. */
+          offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -2738,7 +2747,8 @@ export async function onRequest(context) {
         if (!env.CONNECT_DB) return json({ ok: false, error: "record_store_unavailable" }, 503, request);
         const t = await selfCreateTenant({ db: env.CONNECT_DB, identifyFn: identify }, request, env, { name: body.name });
         try {
-          let o = await ORG.createOrg(env, { name: body.name, mode: "wardsynq" }, actor.id);
+          // The hospital's country, chosen at creation. Absent means India, as everywhere else.
+          let o = await ORG.createOrg(env, { name: body.name, mode: "wardsynq", region: body.region }, actor.id);
           o = await ORG.updateOrg(env, o.id, { connectTenantId: t.id }, actor.id);
           await wsqLinkTenantOrg(env, o);
           return json({ ok: true, org: o, tenantId: t.id }, 200, request);

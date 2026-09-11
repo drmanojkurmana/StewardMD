@@ -27,7 +27,9 @@ export async function createOrg(env, body, ownerUid) {
   body = body || {};
   const id = body.id ? sanitize(body.id) : newId();
   const code = await uniqueOrgCode(env);
-  const f = M.org({ id, code, name: body.name, kind: body.kind, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
+  // region: which country this hospital is in. Absent means India (M.org decides), so every existing
+  // caller is unchanged; a US hospital has to be created as one, which was impossible before.
+  const f = M.org({ id, code, name: body.name, kind: body.kind, mode: body.mode, region: body.region, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
   await fsCommit(env, [wCreate(env, "q_orgs/" + id, f)]);
   await audit(env, id, ownerUid, "org:create", f.mode + " " + code);
   return f;

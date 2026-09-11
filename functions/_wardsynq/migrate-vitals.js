@@ -92,7 +92,18 @@ function vitalsToObservations(input) {
   const at = input.recordedAt || new Date().toISOString();
   const stamp = Date.parse(at) || Date.now();
   const out = [];
-  const tempUnit = String(v.tempUnit || "F").toUpperCase() === "C" ? "Cel" : "[degF]";
+  /* THE UNIT IS THE HOSPITAL'S, NOT A GUESS.
+   *
+   * This defaulted to Fahrenheit, and ward.js never sent a unit at all - so a nurse in an Indian
+   * hospital charting 37.1 stored "37.1 [degF]", which is profound hypothermia, and it would be read
+   * later by somebody who was not in the room. Found 2026-09-11 on a 100-bed demo hospital.
+   *
+   * Order of authority: what the caller explicitly said, else what this hospital's country writes
+   * without thinking (functions/_region.js), else Fahrenheit as the historical default so no
+   * existing US-shaped caller changes meaning. */
+  const said = String(v.tempUnit || "").toUpperCase();
+  const hospital = String((input && input.defaultTempUnit) || "").toUpperCase();
+  const tempUnit = (said || hospital || "F") === "C" ? "Cel" : "[degF]";
 
   /* The two NEWS2 parameters that are not plain numbers, normalised before the numeric loop.
    *
@@ -175,6 +186,8 @@ async function recordVitals(request, env, ctx) {
     vitals: ctx.vitals, patientId, ticketId: ctx.ticket.id,
     encounterId: encounterIdForTicket(ctx.ticket),
     recordedAt: ctx.recordedAt, note: ctx.note,
+    // What a clinician in THIS hospital's country writes a temperature in. See functions/_region.js.
+    defaultTempUnit: ctx.tempUnit || null,
   });
   if (!observations.length) return { ...base, ok: false, status: 422, error: "no_structured_vitals", written: 0, patientId };
 

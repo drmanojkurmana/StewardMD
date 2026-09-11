@@ -464,3 +464,42 @@ test("an observation timestamped exactly now is current, not future", () => {
   const r = news2({ observations: list, patient: ADULT, now: NOW });
   assert.equal(r.scorable, true, "the boundary is inclusive: now is not the future");
 });
+
+/* REGRESSION, 2026-09-11: NEWS2 SCORED FAHRENHEIT AGAINST CELSIUS BANDS.
+ *
+ * gatherVitals discarded the unit, so a temperature charted in Fahrenheit reached these Celsius
+ * bands as a bare number. 98.6 - a normal temperature - scored 2 for "above 39". So did a genuinely
+ * febrile 102, and so did a hypothermic 94. The temperature subscore was noise on every F-charted
+ * patient, and noise that reads as a real number on a chart that drives escalation.
+ *
+ * The scorer now REFUSES a unit it does not use, rather than converting: this module's own rule is
+ * that a missing parameter is never zero, so the score comes back incomplete and names what is
+ * missing, which the escalation path already handles honestly.
+ */
+test("a Fahrenheit temperature is refused, not scored against Celsius bands", () => {
+  // 98.6 degF is normal. Scored as Celsius it would land in the top band and contribute 2 points.
+  const f = news2({ values: { ...WELL, [PARAM.TEMPERATURE]: 98.6 }, units: { [PARAM.TEMPERATURE]: "[degF]" }, patient: ADULT, now: NOW });
+  assert.ok(f.missing.includes(PARAM.TEMPERATURE), "the parameter is missing, not silently wrong");
+  assert.equal(f.parameters[PARAM.TEMPERATURE], undefined, "and contributes no points at all");
+
+  // The same number in Celsius IS a real high temperature and must still score.
+  const c = news2({ values: { ...WELL, [PARAM.TEMPERATURE]: 39.5 }, units: { [PARAM.TEMPERATURE]: "Cel" }, patient: ADULT, now: NOW });
+  assert.equal(c.parameters[PARAM.TEMPERATURE].points, 2);
+
+  // No unit recorded stays Celsius: every value written before units travelled has none, and
+  // blanking them retroactively would remove a subscore that was correct all along.
+  const bare = news2({ values: { ...WELL, [PARAM.TEMPERATURE]: 39.5 }, patient: ADULT, now: NOW });
+  assert.equal(bare.parameters[PARAM.TEMPERATURE].points, 2);
+});
+
+test("the unit travels from the observation, so a real F-charted patient is caught end to end", () => {
+  const obs = (code, value, unit) => ({ id: `o-${code}`, code, value, unit, effectiveAt: NOW });
+  const r = news2({
+    observations: [
+      obs("9279-1", 16), obs("59408-5", 97), obs("8480-6", 120), obs("8867-4", 70),
+      obs("8310-5", 98.6, "[degF]"),
+    ],
+    patient: ADULT, now: NOW,
+  });
+  assert.ok(r.missing.includes(PARAM.TEMPERATURE), "gathered from a real observation, the unit still refuses it");
+});

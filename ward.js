@@ -58,6 +58,10 @@
     ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
     resusBundles: null, resusStarting: false,
     demo: false,             // a demonstration hospital, marked on the chart; set by the caller
+    /* Which country this hospital is in, from /ward/list. It decides the unit a temperature box is
+     * LABELLED with, and the unit that box then SENDS - so the screen and the record can never
+     * disagree about whether 98.6 is Fahrenheit. "IN" until the server answers. */
+    region: "IN",
     busy: false, err: "", note: "", refusal: null, loaded: false
   };
 
@@ -738,16 +742,25 @@
   var VITALS = [
     { k: "sbp", l: "Systolic", u: "mmHg" }, { k: "dbp", l: "Diastolic", u: "mmHg" },
     { k: "pulse", l: "Pulse", u: "/min" }, { k: "rr", l: "Resp rate", u: "/min" },
-    { k: "temp", l: "Temp", u: "°F" }, { k: "spo2", l: "SpO₂", u: "%" },
+    /* Temperature's unit is resolved when the card is DRAWN (tempUnitLabel), never here: it depends
+     * on which hospital is open, and this array is built once when the file loads. A box labelled
+     * one unit whose value is stored as the other is a false number in a clinical record - 98.6
+     * recorded as Celsius, or 37.1 as Fahrenheit - and it is invisible to whoever reads the chart
+     * next. The value is sent WITH its unit, so the two cannot drift again. */
+    { k: "temp", l: "Temp", u: null }, { k: "spo2", l: "SpO₂", u: "%" },
     { k: "weight", l: "Weight", u: "kg" }
   ];
   /* The two an early warning score cannot do without. They are not numbers, so they sit beside the
    * numeric grid rather than in it - and leaving them blank leaves the score INCOMPLETE, which is
    * the honest outcome rather than a reassuring total about a patient nobody finished examining. */
   var ACVPU = [["", "Consciousness: not assessed"], ["A", "A - alert"], ["C", "C - new confusion"], ["V", "V - responds to voice"], ["P", "P - responds to pain"], ["U", "U - unresponsive"]];
+  /* The unit this hospital's country writes a temperature in, and therefore the unit the server
+   * will store it in. st.region comes from GET /ward/list. */
+  function tempUnitLabel() { return st.region === "US" ? "°F" : "°C"; }
   function vitalsCard() {
     var f = VITALS.map(function (v) {
-      return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(v.u) + "</i></span>" +
+      var unit = v.u === null ? tempUnitLabel() : v.u;
+      return '<label class="w-f"><span>' + esc(v.l) + ' <i>' + esc(unit) + "</i></span>" +
         '<input id="wv_' + v.k + '" type="text" inputmode="decimal" autocomplete="off"></label>';
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Vitals</h3></div>" +
@@ -2763,7 +2776,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) st.patients = r.patients || []; st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -3929,7 +3942,10 @@
     var picked = st.transfusion && st.transfusion.pickedEpisodeId; if (!picked) return;
     var pulse = val("wTxPulse"), temp = val("wTxTemp"), sbp = val("wTxSbp");
     var vitals = {};
-    if (pulse) vitals.pulse = Number(pulse); if (temp) vitals.temp = Number(temp); if (sbp) vitals.sbp = Number(sbp);
+    if (pulse) vitals.pulse = Number(pulse);
+    // Always stated, never inferred: the unit the box was labelled with is the unit that is stored.
+    if (temp) { vitals.temp = Number(temp); vitals.tempUnit = st.region === "US" ? "F" : "C"; }
+    if (sbp) vitals.sbp = Number(sbp);
     st.busy = true; paint();
     apiPost("/ward/transfusion-observe", { orgId: st.orgId, episodeId: picked, vitals: vitals })
       .then(function (r) { if (settle(r, "Recorded.")) loadTransfusion(); else paint(); })
