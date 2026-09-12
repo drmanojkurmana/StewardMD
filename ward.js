@@ -3103,8 +3103,38 @@
       '<label class="w-f"><span>Amount</span><input id="wCashAmount" type="text" inputmode="decimal" autocomplete="off"></label>' +
       '<label class="w-f"><span>Reason (where required)</span><input id="wCashReason" type="text" autocomplete="off"></label>' +
       '<label class="w-f"><span>Reference (optional)</span><input id="wCashReference" type="text" autocomplete="off"></label>' +
-      "</div></div>";
+      "</div>" +
+      /* HOW THE MONEY WAS TAKEN, for a payment or a deposit. Only the fields that method actually
+       * needs are asked for, so a cashier taking cash is not faced with a UTR box. The server is the
+       * one that refuses an incomplete collection; this just asks for the right things first.
+       *
+       * There is deliberately no "confirmed by the card machine" tick. A payment recorded here is
+       * recorded as typed in, and only a card terminal's own reply can ever mark it confirmed - a
+       * screen that let a cashier claim that would make the day's takings unreconcilable. */
+      '<div class="w-sub"><h4>How was it paid</h4>' +
+      '<select id="wCashMethod">' + CASH_METHODS.map(function (m) {
+        return '<option value="' + esc(m[0]) + '"' + (state.cashMethod === m[0] ? " selected" : "") + ">" + esc(m[1]) + "</option>";
+      }).join("") + "</select>" +
+      '<button class="w-btn ghost sm" data-w-act="cashmethod">Use this method</button>' +
+      '<div class="w-grid">' + (CASH_METHOD_NEEDS[state.cashMethod || "cash"] || []).map(function (f) {
+        return '<label class="w-f"><span>' + esc(CASH_FIELD_WORDS[f] || f) + '</span><input id="wPay_' + esc(f) + '" type="text" autocomplete="off"></label>';
+      }).join("") + "</div>" +
+      '<p class="w-hint">' + ms("info") + "This records what the slip, screen or drawer says. It is never marked as confirmed by a card machine from here." + "</p></div>" +
+      "</div>";
   }
+  var CASH_METHODS = [["cash", "Cash"], ["upi", "UPI"], ["card", "Card"], ["neft", "NEFT"], ["rtgs", "RTGS"],
+    ["imps", "IMPS"], ["bank-transfer", "Bank transfer"], ["cheque", "Cheque"], ["online", "Online"], ["other", "Other"]];
+  /* Mirrors what wardsynq-payment-methods.js requires, so the right boxes appear. The server's copy
+   * is the authority; if the two ever disagree, the server refuses and says what is missing. */
+  var CASH_METHOD_NEEDS = {
+    cash: ["counter", "cashier"], upi: ["reference"], card: ["terminal", "reference"],
+    neft: ["utr", "bank", "payer"], rtgs: ["utr", "bank", "payer"], imps: ["utr", "bank", "payer"],
+    "bank-transfer": ["utr", "bank", "payer"], cheque: ["reference", "bank"], online: ["reference"], other: ["reference"],
+  };
+  var CASH_FIELD_WORDS = {
+    counter: "Counter", cashier: "Cashier", reference: "Reference", terminal: "Card machine",
+    utr: "UTR number", bank: "Bank", payer: "Paid by",
+  };
 
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
@@ -5241,7 +5271,17 @@
     if (!amount || Number(amount) <= 0) { st.cashier.err = "Enter a positive amount."; paint(); return; }
     var route = CASH_ACTION_ROUTE[kind];
     st.cashier.err = ""; st.busy = true; paint();
-    apiPost("/ward/" + route, { orgId: st.orgId, invoiceId: invoiceId, amount: Number(amount), reason: reason || undefined, reference: reference || undefined })
+    /* A payment or deposit carries HOW it was taken. The other actions (discount, refund,
+     * adjustment, write-off) are not collections and carry nothing. */
+    var body = { orgId: st.orgId, invoiceId: invoiceId, amount: Number(amount), reason: reason || undefined, reference: reference || undefined };
+    if (kind === "pay" || kind === "deposit") {
+      var method = st.cashMethod || "cash";
+      var details = {};
+      (CASH_METHOD_NEEDS[method] || []).forEach(function (f) { var v = val("wPay_" + f); if (v) details[f] = v; });
+      body.method = method;
+      body.paymentDetails = details;
+    }
+    apiPost("/ward/" + route, body)
       .then(function (r) {
         st.busy = false;
         if (r && r.ok) { loadCashier(); return; }
@@ -7160,6 +7200,7 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
     if (cmd === "wounds") { woundOpen(); return; }
     if (cmd === "woundchart") { woundChart(); return; }
     if (cmd === "risks") { riskOpenView(); return; }
