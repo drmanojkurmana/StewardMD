@@ -3077,6 +3077,99 @@
       "</div>";
   }
 
+  /* Incident reporting: file -> triage -> RCA -> CAPA -> close (functions/_wardsynq/incidents.js,
+   * wardsynq/wardsynq-incidents.js). The engine side of this has held a careful lifecycle since it
+   * was written - near-miss as a first-class report, an RCA that refuses "human error" as a root
+   * cause, a CAPA that refuses education-only actions - and NOTHING ON SCREEN EVER CALLED IT. Every
+   * one of the 159 demonstration staff, including safety_officer whose entire job this is, had no
+   * way to file or investigate an incident anywhere in the product. This is the front door.
+   *
+   * FILING IS BROAD; INVESTIGATING IS NOT (same split the route table already enforces). The filing
+   * form below is shown to anyone who reaches this screen at all (incident.report is the tile's own
+   * gate); the ledger under it only ever populates for incident.investigate - loadIncidents() reads
+   * it silently, like the co-sign worklist, because a reporter lacking that cap is not a reporter
+   * doing anything wrong and must never see their own filing refused for a screen they didn't ask
+   * to open. */
+  var INCIDENT_SEVERITY = [
+    ["near-miss", "Near miss - caught before it reached the patient"], ["no-harm", "Reached the patient, no harm"],
+    ["minor", "Minor harm"], ["moderate", "Moderate harm"], ["major", "Major harm"],
+    ["catastrophic", "Catastrophic - death or permanent severe harm"],
+  ];
+  var INCIDENT_LIKELIHOOD = [["rare", "Rare"], ["unlikely", "Unlikely"], ["possible", "Possible"], ["likely", "Likely"], ["frequent", "Frequent"]];
+  var INCIDENT_STRENGTH = [
+    ["", "Let the record infer it"], ["FORCING_FUNCTION", "Forcing function or constraint: the error becomes impossible"],
+    ["AUTOMATION", "Automation or computerisation"], ["SIMPLIFICATION", "Simplification or standardisation"],
+    ["CHECKLIST", "Checklist or independent verification"], ["EDUCATION", "Education, training or reminder"],
+  ];
+  function incidentRow(inc) {
+    var capaRows = (inc.capas || []).map(function (c) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state === "complete" ? "" : "due") + '">' + esc(c.state) + "</span> " +
+        esc(c.action) + " &middot; " + esc(c.owner) + " &middot; due " + esc(c.dueBy) +
+        (c.strengthLabel ? '<div class="w-dt-times">' + esc(c.strengthLabel) + (c.weak ? " - weak on its own" : "") + "</div>" : "") +
+        (c.state === "complete" ? '<div class="w-dt-times">completed by ' + esc(c.completedBy) + ": " + esc(c.evidence) + "</div>" : "") + "</div>" +
+        (c.state !== "complete"
+          ? '<div class="w-mini-row-act"><input id="wIncCapaBy_' + esc(c.id) + '" placeholder="Your name" style="width:110px">' +
+            '<input id="wIncCapaEvidence_' + esc(c.id) + '" placeholder="What shows it is done">' +
+            '<button class="w-btn ghost sm" data-w-act="incidentcapacomplete:' + esc(inc.id) + "~" + esc(c.id) + '">' + ms("task_alt") + "Complete</button></div>"
+          : "") + "</li>";
+    }).join("");
+    var next = inc.state === "reported"
+      ? '<div class="w-sub"><h4>Triage</h4><select id="wIncLk_' + esc(inc.id) + '"><option value="">Likelihood of recurrence…</option>' +
+        INCIDENT_LIKELIHOOD.map(function (l) { return '<option value="' + esc(l[0]) + '">' + esc(l[1]) + "</option>"; }).join("") + "</select>" +
+        '<button class="w-btn ghost" data-w-act="incidenttriage:' + esc(inc.id) + '">' + ms("fact_check") + "Triage</button></div>"
+      : inc.state === "triaged"
+      ? '<div class="w-sub"><h4>Root cause analysis</h4>' +
+        '<textarea id="wIncRoot_' + esc(inc.id) + '" rows="2" placeholder="What about the system made this error easy, likely or invisible - not who made it"></textarea>' +
+        '<input id="wIncMethod_' + esc(inc.id) + '" placeholder="Method (optional, e.g. 5 whys, fishbone)">' +
+        '<input id="wIncFactors_' + esc(inc.id) + '" placeholder="Contributing factors, comma-separated (optional)">' +
+        '<button class="w-btn ghost" data-w-act="incidentrca:' + esc(inc.id) + '">' + ms("fact_check") + "Record RCA</button></div>"
+      : "";
+    var capaAdd = (inc.state === "investigating" || inc.state === "actions-open")
+      ? '<div class="w-sub"><h4>Add a corrective or preventive action</h4>' +
+        '<input id="wIncCapaAction_' + esc(inc.id) + '" placeholder="What will change">' +
+        '<input id="wIncCapaOwner_' + esc(inc.id) + '" placeholder="Owner">' +
+        '<input id="wIncCapaDue_' + esc(inc.id) + '" type="date">' +
+        '<select id="wIncCapaStrength_' + esc(inc.id) + '">' + INCIDENT_STRENGTH.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
+        '<button class="w-btn ghost" data-w-act="incidentcapaadd:' + esc(inc.id) + '">' + ms("add") + "Add action</button></div>"
+      : "";
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(inc.state === "closed" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(inc.state) + "</span> " +
+      "<b>" + esc(inc.severity) + "</b>" + (inc.sac ? " &middot; SAC " + esc(inc.sac.sac) + " - " + esc(inc.sac.response) : "") +
+      (inc.anonymous ? " &middot; anonymous" : "") +
+      '<div class="w-dt-times">' + esc(inc.what) + "</div>" +
+      '<div class="w-dt-times">reported ' + when(inc.reportedAt) + (inc.patientId ? " &middot; patient " + esc(inc.patientId) : "") + "</div>" +
+      (inc.rca ? '<div class="w-dt-times">root cause: ' + esc(inc.rca.rootCause) + "</div>" : "") +
+      (capaRows ? "<ul class=\"w-mini\">" + capaRows + "</ul>" : "") + next + capaAdd +
+      '</div><div class="w-mini-row-act">' +
+      '<button class="w-btn ghost sm" data-w-act="incidentclose:' + esc(inc.id) + '">' + ms("done_all") + "Attempt close</button>" +
+      "</div></li>";
+  }
+  function incidentsView(state) {
+    var h = state.incidentHealth;
+    var healthBlock = h
+      ? '<div class="w-sub"><h4>Reporting health</h4><p>' + esc(h.reading) + "</p>" +
+        "<p>" + esc(h.total) + " total &middot; " + esc(h.openCapas) + " open actions" +
+        (h.overdueCapas && h.overdueCapas.length ? " &middot; " + esc(h.overdueCapas.length) + " overdue" : "") +
+        (h.actionReading ? " &middot; " + esc(h.actionReading) : "") + "</p></div>"
+      : "";
+    var log = (state.incidentLog || []).map(incidentRow).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("report") + "<h3>Safety and incidents</h3>" +
+      '<button class="w-ic" data-w-act="incidents" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Report an incident</h4>' +
+      '<textarea id="wIncWhat" rows="2" placeholder="What happened, in your own words"></textarea>' +
+      '<select id="wIncSeverity"><option value="">What actually reached the patient…</option>' +
+      INCIDENT_SEVERITY.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wIncWhen" type="datetime-local" placeholder="When (optional, default now)">' +
+      '<input id="wIncPatient" placeholder="Patient MRN (optional)">' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wIncAnon" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>File anonymously</span></label>' +
+      '<p class="w-hint">' + ms("info") + "A named report defaults to you; anonymous means exactly that - nobody, including the record, is told who filed it." +
+      "</p><button class=\"w-btn\" data-w-act=\"incidentreport\">" + ms("outbox") + "Report</button></div>" +
+      (state.incidentLog !== null
+        ? (healthBlock + (log ? "<ul class=\"w-mini\">" + log + "</ul>" : '<p class="w-empty">No incidents on the ledger.</p>'))
+        : "") +
+      "</div>";
+  }
+
   var EMERGENCY_KINDS = [["mass-casualty", "Mass casualty"], ["disaster", "Disaster"], ["downtime", "Major downtime"], ["evacuation", "Evacuation"], ["surge", "Surge"], ["network-outage", "Network outage"], ["other", "Other"]];
   function emergencyAdminView(state) {
     var e = state.emergencyAdmin || {};
@@ -3224,6 +3317,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "incidents" ? incidentsView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
@@ -4794,6 +4888,82 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
   }
+  function incidentsOpen() {
+    st.view = "incidents"; st.incidentLog = null; st.incidentHealth = null; paint(); loadIncidents();
+  }
+  function loadIncidents() {
+    st.busy = true; paint();
+    return apiGet("/ward/incident-log?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        // The ledger is incident.investigate only; filing is incident.report and nearly every
+        // clinical role holds it. A reporter without the ledger cap did nothing wrong by opening
+        // this screen to file - so a refused ledger read stays silent, same reasoning as the
+        // co-sign worklist elsewhere in this file, and st.incidentLog simply stays null (the
+        // view's own signal to show the filing form alone, not a ledger that never loaded).
+        if (r && r.ok) { st.incidentLog = r.incidents || []; st.incidentHealth = r.health || null; }
+        paint();
+      })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function reportIncidentAction() {
+    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient");
+    var anonEl = document.getElementById("wIncAnon");
+    var anon = !!(anonEl && anonEl.checked);
+    if (!what || what.length < 3) { st.err = "Describe what happened, in a sentence or two."; paint(); return; }
+    if (!severity) { st.err = "Pick what actually reached the patient."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Reported." : null)) {
+          ["wIncWhat", "wIncWhen", "wIncPatient"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          if (anonEl) anonEl.checked = false;
+          loadIncidents();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not file the report."; paint(); });
+  }
+  function incidentTriage(id) {
+    var likelihood = val("wIncLk_" + id);
+    if (!likelihood) { st.err = "Pick a likelihood before triaging."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-triage", { orgId: st.orgId, incidentId: id, likelihood: likelihood })
+      .then(function (r) { if (settle(r, "Triaged.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not triage."; paint(); });
+  }
+  function incidentRca(id) {
+    var rootCause = val("wIncRoot_" + id), method = val("wIncMethod_" + id);
+    var factors = val("wIncFactors_" + id).split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s; });
+    if (!rootCause) { st.err = "An RCA needs a root cause."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-rca", { orgId: st.orgId, incidentId: id, rootCause: rootCause, method: method || undefined, contributingFactors: factors })
+      .then(function (r) { if (settle(r, "Root cause recorded.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the root cause."; paint(); });
+  }
+  function incidentCapaAdd(id) {
+    var action = val("wIncCapaAction_" + id), owner = val("wIncCapaOwner_" + id), dueBy = val("wIncCapaDue_" + id), strength = val("wIncCapaStrength_" + id);
+    if (!action || !owner || !dueBy) { st.err = "A corrective action needs the action, an owner and a due date."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-capa", { orgId: st.orgId, incidentId: id, action: action, owner: owner, dueBy: dueBy, strength: strength || undefined })
+      .then(function (r) { if (settle(r, "Action added.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not add the action."; paint(); });
+  }
+  function incidentCapaComplete(id, capaId) {
+    var by = val("wIncCapaBy_" + capaId), evidence = val("wIncCapaEvidence_" + capaId);
+    if (!by || !evidence) { st.err = "Completing an action needs who did it and what shows it was done."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-capa-complete", { orgId: st.orgId, incidentId: id, capaId: capaId, by: by, evidence: evidence })
+      .then(function (r) { if (settle(r, "Action completed.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not complete the action."; paint(); });
+  }
+  function incidentClose(id) {
+    var by = window.prompt("Your name, to close this incident:");
+    if (!by) return;
+    st.busy = true; paint();
+    apiPost("/ward/incident-close", { orgId: st.orgId, incidentId: id, by: by })
+      .then(function (r) { if (settle(r, "Closed.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not close the incident."; paint(); });
+  }
   function emergencyAdminOpen() {
     st.view = "emergencyadmin"; st.emergencyAdmin = null; st.emergencyReconcile = null; paint(); loadEmergencyLog();
   }
@@ -5237,6 +5407,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -5463,6 +5634,13 @@
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
+    if (cmd === "incidents") { incidentsOpen(); return; }
+    if (cmd === "incidentreport") { reportIncidentAction(); return; }
+    if (cmd === "incidenttriage") { incidentTriage(arg); return; }
+    if (cmd === "incidentrca") { incidentRca(arg); return; }
+    if (cmd === "incidentcapaadd") { incidentCapaAdd(arg); return; }
+    if (cmd === "incidentcapacomplete") { var incp = arg.split("~"); incidentCapaComplete(incp[0], incp[1]); return; }
+    if (cmd === "incidentclose") { incidentClose(arg); return; }
     if (cmd === "emergencyadmin") { emergencyAdminOpen(); return; }
     if (cmd === "emergencydeclare") { emergencyDeclareAction(); return; }
     if (cmd === "emergencydeactivate") { emergencyDeactivateAction(arg); return; }
@@ -5537,7 +5715,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -5554,6 +5732,7 @@
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
+    st.incidentLog = null; st.incidentHealth = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

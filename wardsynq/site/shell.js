@@ -454,6 +454,12 @@
       tile({ go: "ward:cashier", icon: "payments", title: "Billing and cashier", sub: "Invoices, collections, claims and TPA pre-authorisation", need: "billing.view" }),
       tile({ go: "ward:integration", icon: "sync_alt", title: "Integration console", sub: "FHIR, HL7, SCCM: exceptions, outbound, replay", need: "emr.view" }),
       tile({ go: "ward:emergencyadmin", icon: "gpp_maybe", title: "Emergency access", sub: "Declarations, break-glass log, reconciliation", need: "emr.view" }),
+      /* incident.report OR incident.investigate: filing is broad (nearly every clinical role),
+       * investigating is not (safety_officer/admin). The engine (wardsynq-incidents.js) has held a
+       * full report -> triage -> RCA -> CAPA -> close lifecycle since it was written, gated at the
+       * route (functions/_wardsynq/incidents.js) - and had NO tile anywhere, so nobody, including
+       * safety_officer whose whole job this is, could reach it. */
+      tile({ go: "ward:incidents", icon: "report", title: "Safety and incidents", sub: "File a report; triage, RCA and CAPA for safety officers", need: ["incident.report", "incident.investigate"] }),
       tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "emr.view" }),
     ] : [];
     var peopleTiles = [
