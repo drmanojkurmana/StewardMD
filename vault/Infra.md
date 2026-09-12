@@ -200,3 +200,10 @@ silently drops every domain omitted from it.
 
 A NEW HOST NEEDS THIS TOO. Anything served on a fresh domain that offers Google sign-in must be
 added here, or its Google button is dead while every other sign-in method looks fine.
+
+## Pages production builds after secrets (2026-09-12)
+Three of five `main` builds on 2026-09-12 showed Failure in `wrangler pages deployment list` while
+`wrangler pages functions build` compiled the same tree cleanly: rapid pushes from parallel sessions.
+The wrangler OAuth token is NOT accepted by the Pages `deployments/:id/retry` API (10000 auth error);
+the cheap retry is any commit merged to main. Confirm the agent flags with
+`GET /api/connect/agent/connections` (401 = bound, 404 = not).
