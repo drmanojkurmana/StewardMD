@@ -671,8 +671,12 @@
       if (S.runner === "phone") payload.runner = "phone";
       api("/sessions", { method: "POST", body: JSON.stringify(payload) }).then(function (r) {
         if (!overlay() || !S) return;
-        if (r.s === 200 && r.d && r.d.ok !== false && r.d.session) {
-          S.session = r.d.session;
+        // The server answers sessionView(): a FLAT { ok, sessionId, state, ... }, never a nested
+        // `session` object. Requiring r.d.session meant every successful start was read as a failure
+        // and the doctor saw "Could not start the session" on a 200 with a real session id.
+        var sid = r.d && (r.d.sessionId || (r.d.session && r.d.session.id));
+        if (r.s === 200 && r.d && r.d.ok !== false && sid) {
+          S.session = { id: sid, state: r.d.state || null };
           S.deployment = r.d.deployment || null;
           S.reuse = !!r.d.reuse;
           S.visitedOrigins = [];
