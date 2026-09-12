@@ -58,16 +58,21 @@
   }
 
   /* Transport seam. fn(path, opts) must return a Promise of {s, d}. */
+  /* The caller's Firebase id token, exactly as connect-source.js sends it; the SERVER derives identity.
+   * Without it every call was a 401 and the sheet only ever said "Could not load your connections". */
+  function idToken() {
+    try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); }
+    catch (e) { return Promise.resolve(null); }
+  }
   var apiImpl = function (path, opts) {
     var method = (opts && opts.method) || "GET";
     var body = (opts && opts.body) ? opts.body : null;
     // The chosen hospital rides on every call as ?tenant= (the server reads it for GET and POST alike).
     var q = (S && S.tenant) ? (path.indexOf("?") >= 0 ? "&" : "?") + "tenant=" + encodeURIComponent(S.tenant) : "";
-    return fetch(AGENT_BASE + path + q, {
-      method: method,
-      headers: { "content-type": "application/json" },
-      body: body,
-      cache: "no-store"
+    return idToken().then(function (t) {
+      var h = { "content-type": "application/json" };
+      if (t) h.Authorization = "Bearer " + t;
+      return fetch(AGENT_BASE + path + q, { method: method, headers: h, body: body, cache: "no-store" });
     }).then(function (r) {
       return r.text().then(function (t) {
         var d = null;
