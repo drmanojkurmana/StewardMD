@@ -1348,6 +1348,7 @@
          * any of the others: everything that changes what they may safely do, in one place. */
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
+        '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
@@ -4111,6 +4112,69 @@
       "</div></div>";
   }
 
+  /* ORDER SETS. A hospital-approved bundle - "community-acquired pneumonia, admission" - so the
+   * admitting doctor at three in the morning does not forget the second blood culture. Also one of
+   * the easiest ways to hurt somebody, because a set applies many decisions very fast.
+   *
+   * THE RULE THIS SCREEN EXISTS TO KEEP: A SET WRITES NO ORDERS. Applying it sends EACH chosen item
+   * through the same door a hand-written order goes through, one at a time, so every item gets the
+   * allergy check, the interaction check, the dose ceiling and the formulary. A set that ordered in
+   * bulk would be a hole through every one of those, and invisible, because the orders would look
+   * ordinary.
+   *
+   * NOTHING IS ORDERED THAT THE DOCTOR DID NOT SEE. Every item is listed with its default choice
+   * shown, and only ticked items are sent. When some items are refused - an allergy, a restricted
+   * drug - the others are NOT rolled back and the refused ones are NOT retried: the screen says
+   * exactly which landed and which did not, and records that, because a doctor who believes a set
+   * went through whole is a doctor who does not go back for the antibiotic that was blocked. */
+  function orderSetsView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.orderSets;
+    var pick = state.orderSetPick;
+    var sets = d && d.sets ? d.sets : [];
+    var res = state.orderSetResult;
+    var chooser = sets.length
+      ? '<select id="wOsSet">' + sets.map(function (x) {
+          return '<option value="' + esc(x.id) + '"' + (pick && pick.id === x.id ? " selected" : "") + ">" + esc(x.name) + " (v" + esc(x.version) + ")</option>";
+        }).join("") + '</select><button class="w-btn ghost sm" data-w-act="ordersetpick">' + ms("fact_check") + "Show what is in it</button>"
+      : "";
+    var items = pick ? (pick.items || []).map(function (it, i) {
+      var on = it.defaultSelected !== false;
+      var what = it.kind === "medication"
+        ? esc(it.drug) + (it.dose ? " " + esc(it.dose.value) + esc(it.dose.unit || "") : "") + (it.route ? " " + esc(it.route) : "") + (it.frequency ? " " + esc(it.frequency) : "")
+        : esc(it.display || it.code);
+      return '<label class="w-f" style="flex-direction:row;align-items:center">' +
+        '<input id="wOsItem_' + esc(it.key) + '" type="checkbox" style="width:auto;margin:0 8px 0 0"' + (on ? " checked" : "") + ">" +
+        "<span>" + (it.kind === "medication" ? "Medicine: " : "Test: ") + what + "</span></label>";
+    }).join("") : "";
+    var result = "";
+    if (res) {
+      result = '<div class="w-sub' + (res.failed && res.failed.length ? " w-dead" : "") + '"><h4>' +
+        (res.failed && res.failed.length ? "Part of this set was NOT ordered" : "Every chosen item was ordered") + "</h4>" +
+        (res.applied && res.applied.length ? "<p><b>Ordered:</b> " + esc(res.applied.join(", ")) + "</p>" : "") +
+        (res.failed && res.failed.length
+          ? '<ul class="w-mini">' + res.failed.map(function (f) { return "<li><b>" + esc(f.key) + "</b> - " + esc(f.detail || f.error) + "</li>"; }).join("") + "</ul>" +
+            '<p class="w-hint warn">' + ms("warning") + "These were refused by the ordinary safety checks and have not been ordered. Nothing was retried.</p>"
+          : "") +
+        (res.deselected && res.deselected.length ? '<p class="w-dt-times">Left out by you: ' + esc(res.deselected.join(", ")) + "</p>" : "") +
+        "</div>";
+    }
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Order sets</h3></div>" +
+      (d && !sets.length ? '<p class="w-hint">' + ms("info") + "This hospital has not set up any order sets.</p>" : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>' : chooser) +
+      (pick
+        ? '<div class="w-sub"><h4>' + esc(pick.name) + "</h4>" +
+          (pick.description ? "<p>" + esc(pick.description) + "</p>" : "") +
+          '<p class="w-hint">' + ms("info") + "Untick anything this patient should not have. Each ticked item is then ordered on its own, with the same checks as any order you write by hand." + "</p>" +
+          items +
+          '<button class="w-btn" data-w-act="ordersetapply">' + ms("send") + "Order the ticked items</button></div>"
+        : "") +
+      result + "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4383,6 +4447,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "ordersets" ? orderSetsView(state)
         : state.view === "breakglass" ? breakGlassView(state)
         : state.view === "wounds" ? woundView(state)
         : state.view === "risks" ? riskView(state)
@@ -5947,6 +6012,71 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function orderSetsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "ordersets"; st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; paint();
+    apiGet("/ward/order-sets?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        if (r && r.ok) st.orderSets = r;
+        else { st.orderSets = null; st.err = "Could not load order sets."; }
+        paint();
+      })
+      .catch(function () { st.err = "Could not load order sets."; paint(); });
+  }
+  function orderSetPick() {
+    var id = val("wOsSet");
+    var found = null;
+    ((st.orderSets && st.orderSets.sets) || []).forEach(function (x) { if (x.id === id) found = x; });
+    st.orderSetPick = found; st.orderSetResult = null; paint();
+  }
+  /* Resolve the ticked items on the server, then send each through the ORDINARY ordering route in
+   * turn. Sequential on purpose: parallel orders against one patient race each other for the record
+   * version, and the interaction check on order three has to see orders one and two. */
+  function orderSetApply() {
+    var s = st.sel, pick = st.orderSetPick;
+    if (!s || !pick) return;
+    var select = [];
+    (pick.items || []).forEach(function (it) {
+      var el = document.getElementById("wOsItem_" + it.key);
+      if (el && el.checked) select.push(it.key);
+    });
+    if (!select.length) { st.err = "Nothing is ticked."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/prepare-set", { orgId: st.orgId, setId: pick.id, patientId: s.patientId, encounterId: s.encounterId, select: select })
+      .then(function (prep) {
+        if (!prep || !prep.ok) { st.busy = false; settle(prep, null); paint(); return null; }
+        var applied = [], failed = [];
+        var chain = Promise.resolve();
+        (prep.requests || []).forEach(function (req) {
+          chain = chain.then(function () {
+            var call = req.kind === "medication"
+              ? apiPost("/ward/medication-order", { orgId: st.orgId, order: req.order })
+              : apiPost("/ward/investigation", { orgId: st.orgId, encounterId: req.order.encounterId, code: req.order.code, display: req.order.display });
+            return call.then(function (r) {
+              if (r && r.ok) applied.push(req.key);
+              else failed.push({ key: req.key, error: (r && r.error) || "refused", detail: r && (r.detail || (r.reasons && r.reasons.join(", "))) });
+            }).catch(function () { failed.push({ key: req.key, error: "unreachable", detail: "Could not reach the server for this item." }); });
+          });
+        });
+        return chain.then(function () {
+          var result = { applied: applied, failed: failed, deselected: prep.deselected || [] };
+          /* Recorded whatever happened, including a set that landed in part - that is the case a
+           * later reader most needs to find. */
+          return apiPost("/ward/applied-set", {
+            orgId: st.orgId, setId: prep.setId, setName: prep.setName, setVersion: prep.setVersion,
+            patientId: s.patientId, encounterId: s.encounterId,
+            applied: applied, failed: failed, deselected: prep.deselected || [],
+          }).then(function () { return result; }, function () { return result; });
+        });
+      })
+      .then(function (result) {
+        st.busy = false;
+        if (result) { st.orderSetResult = result; st.orderSetPick = null; loadChart(); }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not apply that order set."; paint(); });
+  }
+
   function breakGlassOpen() {
     st.view = "breakglass"; st.breakGlass = null; paint(); loadBreakGlass();
   }
@@ -7034,6 +7164,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
       if (st.view === "risks") { st.risks = null; st.riskForm = null; st.view = "chart"; paint(); return; }
@@ -7285,6 +7416,9 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "ordersets") { orderSetsOpen(); return; }
+    if (cmd === "ordersetpick") { orderSetPick(); return; }
+    if (cmd === "ordersetapply") { orderSetApply(); return; }
     if (cmd === "breakglass") { breakGlassOpen(); return; }
     if (cmd === "breakglassdeclare") { breakGlassDeclare(); return; }
     if (cmd === "wounds") { woundOpen(); return; }
@@ -7433,6 +7567,7 @@
     st.medRec = null;
     st.wounds = null; st.risks = null; st.riskForm = null; st.riskTools = null;
     st.breakGlass = null;
+    st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
