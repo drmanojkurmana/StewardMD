@@ -308,9 +308,21 @@
     if (ai) ai.addEventListener("input", function () {
       var v = ai.value.trim(); if (v.length < 3) { sg.classList.remove("on"); return; }
       var r = suggestWorkspace(v);
-      var txt = r.shared ? 'Suggested: <b>' + r.shared.label + '</b>' : 'Suggested workspace: <b>' + meta(r.id).name + '</b>';
-      if (!r.score && !r.shared) txt = 'No clear specialty match — defaulting to <b>Internal Medicine</b>';
-      sg.innerHTML = txt + ' — tap it above to use. <span style="color:var(--slate-soft)">(you can override)</span>';
+
+      sg.innerHTML = "";
+      var textNode1 = document.createTextNode(r.shared ? "Suggested: " : (!r.score && !r.shared ? "No clear specialty match — defaulting to " : "Suggested workspace: "));
+      var bNode = document.createElement("b");
+      bNode.textContent = r.shared ? r.shared.label : (!r.score && !r.shared ? "Internal Medicine" : meta(r.id).name);
+      var textNode2 = document.createTextNode(" — tap it above to use. ");
+      var spanNode = document.createElement("span");
+      spanNode.style.color = "var(--slate-soft)";
+      spanNode.textContent = "(you can override)";
+
+      sg.appendChild(textNode1);
+      sg.appendChild(bNode);
+      sg.appendChild(textNode2);
+      sg.appendChild(spanNode);
+
       sg.classList.add("on");
     });
     requestAnimationFrame(function () { _scrim.classList.add("on"); _sheet.classList.add("on"); });
@@ -506,7 +518,10 @@
     for (var i = 0; i < btns.length; i++) { if (/clinical reasoning/i.test(btns[i].textContent || "")) { target = btns[i]; break; } }
     var lab = document.createElement("div"); lab.className = "sw-sblab"; lab.textContent = "Clinical workspace";
     var sw = document.createElement("button"); sw.className = "sw-sbsw";
-    sw.innerHTML = '<span class="ic">' + ic(ICONS[activeWorkspace()]) + '</span><span class="nm">' + meta(activeWorkspace()).name + '</span><span class="chev">▾</span>';
+    var spanIc = document.createElement("span"); spanIc.className = "ic"; spanIc.innerHTML = ic(ICONS[activeWorkspace()]);
+    var spanNm = document.createElement("span"); spanNm.className = "nm"; spanNm.textContent = meta(activeWorkspace()).name;
+    var spanChev = document.createElement("span"); spanChev.className = "chev"; spanChev.textContent = "▾";
+    sw.appendChild(spanIc); sw.appendChild(spanNm); sw.appendChild(spanChev);
     sw.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openSheet({ inCase: false }); });
     if (target && target.parentNode) { target.parentNode.insertBefore(sw, target); target.parentNode.insertBefore(lab, sw); }
     else { menu.insertBefore(sw, menu.firstChild); menu.insertBefore(lab, sw); }
