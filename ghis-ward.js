@@ -288,7 +288,8 @@
         if (!window.SMD_CONNECT || !SMD_CONNECT.tenants) return;
         SMD_CONNECT.tenants().then(function (ts) {
           box = document.getElementById('ghisConnectHosp');
-          if (!box || !ts || !ts.length) return;
+          ts = (ts || []).filter(function (t) { return !(window.__smdAdapterTenants || {})[t.tenantId]; });
+          if (!box || !ts.length) { if (box) box.innerHTML = ''; return; }
           var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
           box.innerHTML = '<div class="ghis-setup-sub" style="margin:12px 0 4px">Your connected hospitals · tap to load today\'s ward list</div>' +
             ts.map(function (t) { return '<button class="ghis-connect-btn" style="margin-top:6px" data-conn-tid="' + esc(t.tenantId) + '" data-conn-name="' + esc(t.name || t.tenantId) + '">' + wIco('hospital') + ' ' + esc(t.name || t.tenantId) + '</button>'; }).join('');
@@ -355,6 +356,12 @@
         }).then(function (items) {
           box = document.getElementById('ghisAdapterHosp'); if (!box) return;
           _adapterConns = {};
+          /* A tenant with an approved adapter is served by it. The older "Your connected hospitals"
+           * list (FHIR feeds) offered the SAME hospital a second time under a near-identical name, and
+           * the owner tapped that one and read "No FHIR connection on this hospital yet" as the adapter
+           * failing (2026-09-12). One hospital, one button. */
+          window.__smdAdapterTenants = {};
+          items.forEach(function (it) { window.__smdAdapterTenants[it.tid] = true; });
           box.innerHTML = items.map(function (it) {
             _adapterConns[it.conn.deploymentId] = it;
             return '<button class="ghis-connect-btn" data-adapter-dep="' + esc(it.conn.deploymentId) + '">' + wIco('hospital') + ' ' + esc(it.name) + '</button>' +
@@ -363,6 +370,7 @@
           [].slice.call(box.querySelectorAll('[data-adapter-dep]')).forEach(function (b) {
             b.onclick = function () { window.ghisOpenAdapterHospital(b.getAttribute('data-adapter-dep')); };
           });
+          ghisRenderConnectHospitals();   // redraw the older list without the hospitals now served by an adapter
         }).catch(function () {});
       }
       function adapterFail(msg) {
