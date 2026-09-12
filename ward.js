@@ -2167,7 +2167,14 @@
     var dispenseRows = dispenses.map(function (d) {
       return "<li><b>" + esc(d.drug) + "</b><span>" + esc(d.quantity && (d.quantity.value + " " + d.quantity.unit)) +
         (d.batch ? " &middot; batch " + esc(d.batch) : "") + (d.expiry ? " &middot; exp " + esc(d.expiry) : "") +
-        " &middot; " + when(d.dispensedAt) + "</span></li>";
+        " &middot; " + when(d.dispensedAt) + "</span>" +
+        /* A medicine handed back - the patient was discharged, the order stopped, the wrong strength
+         * went up - has to come back onto the record, or the stock count believes it is still out on
+         * the ward. Returned ones say so and are never returned twice. */
+        (d.returnedAt
+          ? ' <span class="w-st">returned ' + when(d.returnedAt) + (d.returnReason ? ": " + esc(d.returnReason) : "") + "</span>"
+          : ' <button class="w-btn ghost tiny" data-w-act="dispensereturn:' + esc(d.dispenseId) + '">' + ms("undo") + "Returned</button>") +
+        "</li>";
     }).join("");
 
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
@@ -3200,6 +3207,25 @@
    * and never lets the bedside-check button submit without both scans and both names present -
    * NO ONE-CLICK TRANSFUSE, enforced here as well as on the server. */
   var TXN_PHASE_WORDS = { requested: "Requested", crossmatched: "Crossmatched", issued: "Issued", checked: "Bedside check passed", transfusing: "Transfusing", completed: "Completed", stopped: "STOPPED" };
+  /* TRACING A BLOOD UNIT. Every movement of one bag - issued, checked, transfused, returned - from the
+   * record, in order. Asked when a reaction is reported or a donor is recalled, and the answer has to
+   * be complete: a trace that silently skipped a step is a trace that hides the step that mattered. */
+  function bloodTraceBlock(state) {
+    var t = state.bloodTrace;
+    return '<div class="w-card"><div class="w-card-h">' + ms("search") + "<h3>Trace a blood unit</h3></div>" +
+      '<input id="wTxTraceUnit" placeholder="Unit number on the bag">' +
+      '<button class="w-btn ghost" data-w-act="bloodtrace">' + ms("search") + "Trace</button>" +
+      (t == null ? ""
+        : !t.ok ? '<p class="w-hint warn">' + ms("warning") + "The trace could not be read. Do not treat this unit as untraced.</p>"
+        : (t.trace && t.trace.length)
+          ? '<ul class="w-mini">' + t.trace.map(function (x) {
+              return "<li>" + when(x.at) + " &middot; <b>" + esc(x.event || x.phase || "") + "</b>" +
+                (x.patientId ? " &middot; patient " + esc(x.patientId) : "") + (x.by || x.actorId ? " &middot; " + esc(x.by || x.actorId) : "") +
+                (x.detail ? " &middot; " + esc(typeof x.detail === "string" ? x.detail : JSON.stringify(x.detail)) : "") + "</li>";
+            }).join("") + "</ul>"
+          : '<p class="w-empty">No record of unit ' + esc(t.unitId) + ".</p>") +
+      "</div>";
+  }
   function transfusionView(state) {
     var tx = state.transfusion || {};
     var episodes = (tx.queue && tx.queue.episodes) || [];
@@ -3275,7 +3301,8 @@
 
       (ep && ep.phase === "stopped" && ep.reaction ? '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>STOPPED - reaction</h3></div><p>" + esc(ep.reaction.detail || "") + "</p><p><small>" + when(ep.reaction.at) + " &middot; " + esc(ep.reaction.by) + "</small></p></div>" : "") +
 
-      (ep ? ('<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Ledger</h3></div>" + (ledgerRows ? '<ul class="w-mini">' + ledgerRows + "</ul>" : "") + "</div>") : "");
+      (ep ? ('<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Ledger</h3></div>" + (ledgerRows ? '<ul class="w-mini">' + ledgerRows + "</ul>" : "") + "</div>") : "") +
+      bloodTraceBlock(state);
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -6342,6 +6369,25 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  function dispenseReturn(dispenseId) {
+    if (!dispenseId) return;
+    var reason = "";
+    try { reason = G.prompt("Why was it returned?") || ""; } catch (e) {}
+    if (!reason) { st.err = "A return needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/dispense-return", { orgId: st.orgId, dispenseId: dispenseId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded as returned." : null)) loadPharmacy(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that return."; paint(); });
+  }
+  function bloodTrace() {
+    var unit = val("wTxTraceUnit");
+    if (!unit) { st.err = "Enter the unit number from the bag."; paint(); return; }
+    st.bloodTrace = null; st.busy = true; paint();
+    apiGet("/ward/transfusion-trace?orgId=" + encodeURIComponent(st.orgId) + "&unitId=" + encodeURIComponent(unit))
+      .then(function (r) { st.busy = false; st.bloodTrace = r && r.ok ? r : { ok: false }; paint(); })
+      .catch(function () { st.busy = false; st.bloodTrace = { ok: false }; paint(); });
+  }
+
   function specimenOutcomeAct(specimenId, state) {
     if (!specimenId) return;
     var reason = "";
@@ -8001,6 +8047,8 @@
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
     if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
+    if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
+    if (cmd === "bloodtrace") { bloodTrace(); return; }
     if (cmd === "specreceived") { specimenOutcomeAct(arg, "received"); return; }
     if (cmd === "specfailed") { specimenOutcomeAct(arg, "failed"); return; }
     if (cmd === "labresultopen") { labResultOpen(arg); return; }
