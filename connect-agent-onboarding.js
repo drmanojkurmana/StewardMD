@@ -1016,6 +1016,12 @@
       });
     }).then(function (result) {
       if (!overlay() || !S) return;
+      /* THE CRAWL IS OVER: GIVE THE DOCTOR THEIR PHONE BACK.
+       * The hospital browser used to stay open on top of the approval screen, still wearing the
+       * orange "StewardMD is reading" banner, so a run that had FINISHED and built an adapter looked
+       * exactly like one still crawling: the doctor watched the EMR, never saw Approve, and read the
+       * whole thing as hung (2026-09-12). Closing it first puts the review in front of them. */
+      stopDiscoveryPlugin();
       S.result = result || {};
       S.versionId = (result && result.candidateVersionId) || null;
       loadVersionAndShowResult();
@@ -1029,6 +1035,9 @@
         setStatus("warn", "The hospital session expired. Sign in again to continue. The existing connection is kept.");
         return;
       }
+      // A failure ends the crawl too: leaving the hospital browser open hides the very message that
+      // says what went wrong, and the agent is no longer reading anything.
+      stopDiscoveryPlugin();
       S.progressFailed = true;
       /* NAME THE FAILURE. This swallowed e.message and said only "could not complete", so a crawl
        * that had walked 21 pages and posted its findings left the doctor, and whoever they call,

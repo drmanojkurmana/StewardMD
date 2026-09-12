@@ -424,6 +424,10 @@ try {
   ok(await waitFor(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Worklist")>=0 && t.indexOf("Medications")>=0;`, 4000), "proven capabilities are listed");
   ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Allergies")>=0 && t.indexOf("not found at this hospital")>=0;`) === true, "unproven capabilities are shown greyed with a not-found note");
   ok(await ev(`return document.getElementById("smd-connect-ov").innerText.indexOf("Awaiting approval")>=0;`) === true, "result names the awaiting-approval state");
+  // The crawl is over, so the hospital browser must be gone: left open it covers this very screen,
+  // still wearing the "StewardMD is reading" banner, and a finished run reads as a hung one.
+  ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="close";});`) === true,
+    "the hospital browser is closed when discovery finishes, so the approval screen is what the doctor sees");
   ok(await ev(noDash) === true, "result copy has no em-dash");
 
   // 7. Approve button appears for an admin fake and activating reaches Connected.

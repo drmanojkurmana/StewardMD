@@ -33,7 +33,7 @@
     if (window.SMD_CONNECT_AGENT) return Promise.resolve(window.SMD_CONNECT_AGENT);
     return new Promise(function (resolve, reject) {
       var s = document.createElement("script");
-      s.src = "/connect-agent-onboarding.js?v=caonb11";
+      s.src = "/connect-agent-onboarding.js?v=caonb12";
       s.async = true;
       s.onload = function () {
         if (window.SMD_CONNECT_AGENT) resolve(window.SMD_CONNECT_AGENT);
