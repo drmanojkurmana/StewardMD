@@ -207,3 +207,5 @@ Three of five `main` builds on 2026-09-12 showed Failure in `wrangler pages depl
 The wrangler OAuth token is NOT accepted by the Pages `deployments/:id/retry` API (10000 auth error);
 the cheap retry is any commit merged to main. Confirm the agent flags with
 `GET /api/connect/agent/connections` (401 = bound, 404 = not).
+
+Re-uploaded CONNECT_AGENT_FLAG and CONNECT_BROWSER_SESSION_FLAG with value `1` via stdin on 2026-09-12; a value typed interactively had not gated the route open.
