@@ -252,6 +252,16 @@ function cleanObservedViews(raw) {
       }
       clean.fieldHints = fh;
     }
+    // What the agent proved before asking for approval: counts and kinds only, never a value.
+    if (v.verified !== undefined) {
+      const w = v.verified;
+      if (!w || typeof w !== "object" || Array.isArray(w) || typeof w.ok !== "boolean") throw new OnboardError("invalid", "observedViews: verified invalid");
+      const ver = { ok: w.ok, via: ["endpoint", "page", "none"].indexOf(w.via) >= 0 ? w.via : "none", rows: Number.isInteger(w.rows) && w.rows >= 0 ? Math.min(w.rows, 100000) : 0 };
+      if (typeof w.kind === "string" && w.kind.length <= 16) ver.kind = w.kind;
+      if (typeof w.reason === "string") { if (/\d{3,}/.test(w.reason) || w.reason.indexOf("@") >= 0) throw new OnboardError("invalid", "observedViews: verified reason invalid"); ver.reason = w.reason.slice(0, 200); }
+      if (typeof w.resourceSeen === "string" && w.resourceSeen.length <= 32) ver.resourceSeen = w.resourceSeen;
+      clean.verified = ver;
+    }
     if (v.guidedPath !== undefined) {
       if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {
         throw new OnboardError("invalid", "observedViews: guidedPath invalid");
@@ -1065,6 +1075,8 @@ export async function onRequest(context) {
         path: v.pathTemplate ? redactPathValues(v.pathTemplate) : null,
         columns: Array.isArray(v.headers) ? v.headers.slice(0, 12) : [],
         guided: !!v.guided,
+        verified: v.verified || null,
+        endpoints: Array.isArray(v.endpoints) ? v.endpoints.length : 0,
       }));
       return jsonResponse({
         ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,

@@ -239,7 +239,7 @@ async function replayFirst({ plugin, origin, view, patient, onRead }) {
 }
 
 // The ward list. Throws with a reason the UI can show verbatim.
-export async function readWorklist({ plugin, origin, replay, settleMs, onRead }) {
+export async function readWorklist({ plugin, origin, replay, settleMs, onRead, maxWaitMs }) {
   const views = viewsByResource(replay);
   const view = views.worklist || views.patient;
   if (!view) throw new Error('the approved adapter has no worklist view');
@@ -247,7 +247,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead })
   let rows = null;
   try { rows = await replayFirst({ plugin, origin, view, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; rows = null; }
   if (!rows) {
-    rows = await readView({ plugin, origin, view, settleMs, toggleAll: true });
+    rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
     if (onRead) onRead({ resource: 'worklist', via: 'page', url: view.pathTemplate || view.path });
   }
   const patients = mapRows(rows);

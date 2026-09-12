@@ -3,6 +3,7 @@
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
+import { verifyViews } from './verify.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -184,11 +185,30 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     } catch { /* html discovery is best-effort; the JSON path still stands */ }
   }
 
-  // Ask the doctor: in manual mode for every resource, in auto mode for what the crawl could not find.
-  // The screen is handed back (guide mode: banner with the question, Done and Not in my EMR, NO touch
-  // overlay); where they tap is recorded and the resulting view captured.
+  /* PROVE THE MAP BEFORE ASKING FOR HELP OR APPROVAL. Every view with a discovered call is replayed
+   * for real patients from the ward list, inside this session, and the brain judges what came back.
+   * A view that fails joins the guided asks below, so the doctor is asked only for what the agent
+   * could not prove on its own. */
+  let verification = { patients: [], checks: [], failed: [] };
+  const runVerification = async () => {
+    if (!observedViews.length || crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') return;
+    notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
+    try {
+      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
+    } catch (e) {
+      if (e && e.name === 'NotSignedIn') { crawlStop = 'login-required'; warnings.push(e.message); return; }
+      warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
+    }
+  };
+  if (!manual) await runVerification();
+
+  // Ask the doctor: in manual mode for every resource, in auto mode for what the crawl could not find
+  // or could not prove. The screen is handed back (guide mode: banner with the question, Done and Not
+  // in my EMR, NO touch overlay); where they tap is recorded and the resulting view captured.
   if (typeof askDoctor === 'function' && crawlStop !== 'login-required' && crawlStop !== 'session-expired-or-shell') {
-    const gaps = manual ? ASK_ORDER.slice() : looking().slice(0, MAX_ASKS);
+    const unproven = verification.failed.filter((r) => r !== 'worklist' || !verification.patients.length);
+    // What the agent found but could not prove comes first: the doctor's tap there is worth most.
+    const gaps = manual ? ASK_ORDER.slice() : [...new Set([...unproven, ...looking()])].slice(0, MAX_ASKS + unproven.length);
     const prompts = manual ? ASK_PROMPTS : GAP_PROMPTS;
     for (let i = 0; i < gaps.length; i += 1) {
       if (stopped()) break;
@@ -196,6 +216,8 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     }
     await setMode('agent');
   }
+  // What the doctor showed (or manual mode captured) is proven the same way, once.
+  if (manual || asked.length) await runVerification();
 
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
@@ -213,6 +235,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     spec, steps: explored.steps, stopReason: explored.stopReason, visitedUrls: explored.visitedUrls,
     candidateVersionId: discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
     observedViews, found, asked, missing, warnings, crawlStop, mode,
+    verification: { patients: verification.patients.length, checks: verification.checks, failed: verification.failed },
     probes: probed.probes, capabilities: evidenceResult?.capabilities, evidenceHash: evidenceResult?.evidenceHash,
     state: evidenceResult?.state,
   });

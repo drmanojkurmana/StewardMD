@@ -63,7 +63,7 @@ test('manual mode asks for every resource in order, never clicks on its own, rec
   const progress = [];
   const result = await runPhoneDiscovery({
     plugin, api: fakeApi(calls), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
-    startUrl: 'https://emr.example/login', mode: 'manual', brain,
+    startUrl: 'https://emr.example/login', mode: 'manual', brain, caps: { verifyWaitMs: 5 },
     onProgress: (p) => progress.push(p),
     askDoctor: async ({ gap, text, step, total }) => {
       asks.push(gap);
