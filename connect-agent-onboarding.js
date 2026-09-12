@@ -1019,7 +1019,12 @@
         return;
       }
       S.progressFailed = true;
-      setStatus("bad", "Discovery could not complete. You can try again.");
+      /* NAME THE FAILURE. This swallowed e.message and said only "could not complete", so a crawl
+       * that had walked 21 pages and posted its findings left the doctor, and whoever they call,
+       * with nothing to act on. The engine's errors are codes (request-failed, engine-unavailable,
+       * the server's own error string), not stack traces, so they are safe to show. */
+      var why = e && e.message ? String(e.message).slice(0, 120) : "";
+      setStatus("bad", why ? "Discovery could not complete: " + why + ". You can try again." : "Discovery could not complete. You can try again.");
       paintProgress();
     });
   }

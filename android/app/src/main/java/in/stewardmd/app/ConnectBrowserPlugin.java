@@ -69,6 +69,7 @@ public class ConnectBrowserPlugin extends Plugin {
     private Dialog dialog;
     private WebView webView;
     private TextView subtitleLabel;
+    private Button backButton;
     private TextView bannerLabel;
     private Button doneButton;
     private View bannerView;
@@ -490,7 +491,21 @@ public class ConnectBrowserPlugin extends Plugin {
             }
         });
 
+        /* NO WAY BACK. The doctor is asked to show the agent a view ("open the discharge summary,
+         * then tap Done"), but reaching it usually means leaving the screen the agent left them on,
+         * and this header had only Cancel and Done: a popup or a sub-page was a dead end, and the
+         * ask could not be answered at all. Found on GHIS 2026-09-12. Back walks the EMR's own
+         * history; it is hidden in agent mode, where the agent drives. */
+        backButton = new Button(activity);
+        backButton.setText("Back");
+        flattenButton(backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { goBackIfPossible(); }
+        });
+
         header.addView(cancelButton);
+        header.addView(backButton);
         header.addView(titleBox, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         header.addView(doneButton);
 
@@ -548,6 +563,19 @@ public class ConnectBrowserPlugin extends Plugin {
         if (dialog.getWindow() != null) {
             dialog.getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
+        /* The phone's own back gesture walks the EMR's history, like every other browser. Without
+         * this it fell through to the dialog and ended the whole connection, which is the opposite
+         * of what a doctor backing out of a popup means. With nothing to go back to it is ignored;
+         * Cancel is the only way out, and in agent mode the doctor is not driving at all. */
+        dialog.setOnKeyListener(new android.content.DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(android.content.DialogInterface d, int keyCode, android.view.KeyEvent event) {
+                if (keyCode != android.view.KeyEvent.KEYCODE_BACK || event.getAction() != android.view.KeyEvent.ACTION_UP) return false;
+                if ("agent".equals(mode)) return true;
+                goBackIfPossible();
+                return true;
+            }
+        });
         dialog.setOnCancelListener(new android.content.DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(android.content.DialogInterface d) {
@@ -571,6 +599,8 @@ public class ConnectBrowserPlugin extends Plugin {
             doneButton.setVisibility(agent ? View.GONE : View.VISIBLE);
             doneButton.setText(guide ? "Done" : "Done, I'm signed in");
         }
+        // The doctor navigates in login and guide mode; in agent mode the agent drives.
+        if (backButton != null) backButton.setVisibility(agent ? View.GONE : View.VISIBLE);
         if (bannerView != null) bannerView.setVisibility(agent || guide ? View.VISIBLE : View.GONE);
         if (bannerLabel != null) {
             bannerLabel.setText(bannerText != null
@@ -578,6 +608,13 @@ public class ConnectBrowserPlugin extends Plugin {
                 : "StewardMD is reading " + hostTitle + " on your behalf. Tap Stop to end.");
         }
         if (touchBlockerView != null) touchBlockerView.setVisibility(agent ? View.VISIBLE : View.GONE);
+    }
+
+    /** One step back in the EMR's own history. Never closes the browser: Cancel does that. */
+    private void goBackIfPossible() {
+        try {
+            if (webView != null && webView.canGoBack()) webView.goBack();
+        } catch (Exception ignored) {}
     }
 
     private static void flattenButton(Button b) {
