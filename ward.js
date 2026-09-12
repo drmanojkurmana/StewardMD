@@ -246,6 +246,9 @@
       // patient (criticalsCard), read here with no patientId so anyone covering the ward or the lab
       // can see every open critical loop at once, not just the one chart they happen to have open.
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
+      // Hospital-wide, like Critical results beside it: imaging had a backend and nowhere to
+      // land before this - the missing screen for a radiographer or radiologist who signs in.
+      '<button class="w-btn ghost" data-w-act="radboard" title="Imaging worklist, reporting and open critical findings, hospital-wide">' + ms("medical_information") + "Radiology board</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
       // TASK 10: the Hospital Digital Twin - a fused view over patient flow, ward metrics, criticals,
@@ -2180,6 +2183,197 @@
       "</div>";
   }
 
+  /* THE RADIOLOGY BOARD. Every other department (ED, theatre, pharmacy stock, critical results) has
+   * a hospital-wide board; imaging had a backend (dicom.js, radiology-report.js) and nowhere for a
+   * radiographer or radiologist to land. This is that screen, built from exactly three routes:
+   * GET imaging-worklist, POST report-imaging, GET criticals.
+   *
+   * imaging-worklist IS A DICOM MODALITY WORKLIST: every item on it is, by definition, still to be
+   * performed - that is what a worklist is. This hospital touches no field when a study is actually
+   * acquired (landing an ImagingStudy from a PACS never writes back to the ServiceRequest, see
+   * dicom.js/wardsynq-sccm-adapter.js) and reportImaging() never flips the order's status either, so
+   * there is no signal anywhere this screen is allowed to read that would split "not yet scanned"
+   * from "scanned, not yet reported" - both are simply "on the worklist, not yet reported here". This
+   * board says exactly that, in one honest section, rather than inventing a split the data does not
+   * support. "Reported this session" is genuinely this board's own session - there is no hospital-
+   * wide reported-studies list among these three routes, so that is stated rather than dressed up as
+   * more history than it is. Priority is read defensively from a DICOM tag this worklist does not
+   * currently emit: absent means "not recorded", never "routine" - a priority this screen never saw
+   * is not one it may guess at.
+   *
+   * NO SPECIMEN, NO COLLECT ACTION. A plain radiograph has nothing to collect; an imaging order is
+   * acquired, not collected. This board never reads /ward/collections (the generic specimen/
+   * collection tracker every ServiceRequest carries, imaging included, and the one place a "Collect"
+   * button could wrongly appear for a chest X-ray), so that mistake cannot happen here. */
+  function radWorklistTagStr(tag) { return (tag && tag.Value && tag.Value.length) ? String(tag.Value[0]) : ""; }
+  function radPatientDisplayName(tag) {
+    var s = radWorklistTagStr(tag); if (!s) return "";
+    var parts = s.split("^");
+    return parts.length > 1 ? (parts[1] + " " + parts[0]).replace(/\s+/g, " ").trim() : s;
+  }
+  function radDicomDateTime(date, time) {
+    if (!date || date.length < 8) return "";
+    var iso = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
+    if (time && time.length >= 6) iso += "T" + time.slice(0, 2) + ":" + time.slice(2, 4) + ":" + time.slice(4, 6);
+    return iso;
+  }
+  function radWaitLabel(iso) {
+    if (!iso) return "";
+    var ms_ = Date.now() - new Date(iso).getTime();
+    if (!(ms_ >= 0)) return "";
+    var mins = Math.floor(ms_ / 60000);
+    if (mins < 60) return mins + " min";
+    return Math.floor(mins / 60) + "h " + (mins % 60) + "m";
+  }
+  /** PURE. One DICOM-JSON worklist item into the fields this board renders. */
+  function radWorklistRow(item) {
+    item = item || {};
+    var step = item["00400100"] && item["00400100"].Value && item["00400100"].Value[0];
+    var date = step && radWorklistTagStr(step["00400002"]);
+    var time = step && radWorklistTagStr(step["00400003"]);
+    return {
+      orderId: radWorklistTagStr(item["00080050"]),
+      name: radPatientDisplayName(item["00100010"]),
+      mrn: radWorklistTagStr(item["00100020"]),
+      procedure: radWorklistTagStr(item["00321060"]),
+      modality: (step && radWorklistTagStr(step["00080060"])) || "",
+      priority: radWorklistTagStr(item["00401003"]).toLowerCase(),
+      orderedAt: radDicomDateTime(date, time),
+    };
+  }
+  /** A critical loop opened against a radiology report. Report ids are "wsq-rad-<slug>"
+   *  (radiology-report.js's reportIdFor) versus a lab result's "wsq-dr-<slug>" - the only field
+   *  the criticals list carries that says which department a loop belongs to. */
+  function radCriticalOf(loop) { return !!(loop && typeof loop.reportId === "string" && loop.reportId.indexOf("wsq-rad-") === 0); }
+  var RAD_PRIORITY_WORDS = { stat: "STAT", urgent: "Urgent", routine: "Routine" };
+  var RAD_PRIORITY_CLASS = { stat: "overdue", urgent: "failed" };
+  function radBoardOpen() {
+    st.view = "radboard"; st.radBoard = { requested: [], reported: [], criticals: [], errors: [], picked: null }; paint(); loadRadBoard();
+  }
+  function loadRadBoard() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var prev = st.radBoard || {};
+    var out = { requested: [], reported: prev.reported || [], criticals: [], errors: [], picked: prev.picked || null };
+    var reportedIds = {}; out.reported.forEach(function (x) { reportedIds[x.orderId] = 1; });
+    return Promise.all([
+      apiGet("/ward/imaging-worklist?" + q)
+        .then(function (r) {
+          if (r && r.ok) out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
+          else out.errors.push("imaging worklist");
+        })
+        .catch(function () { out.errors.push("imaging worklist"); }),
+      apiGet("/ward/criticals?" + q)
+        .then(function (r) { if (r && r.ok) out.criticals = (r.loops || []).filter(radCriticalOf); else out.errors.push("critical findings"); })
+        .catch(function () { out.errors.push("critical findings"); }),
+    ]).then(function () { st.busy = false; st.radBoard = out; paint(); });
+  }
+  function radBoardPick(orderId) {
+    if (!st.radBoard) st.radBoard = {};
+    st.radBoard.picked = orderId || null; paint();
+  }
+  function radBoardReportSave() {
+    var b = st.radBoard, picked = b && b.picked; if (!picked) return;
+    var modality = val("wRadBModality"), status = val("wRadBStatus"), findings = val("wRadBFindings"), impression = val("wRadBImpression");
+    var critical = !!(document.getElementById("wRadBCritical") || {}).checked;
+    if (!findings) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
+    var row = null;
+    for (var i = 0; i < (b.requested || []).length; i++) { if (b.requested[i].orderId === picked) { row = b.requested[i]; break; } }
+    st.busy = true; paint();
+    apiPost("/ward/report-imaging", { orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings, impression: impression || undefined, critical: critical })
+      .then(function (r) {
+        if (r && r.error === "impression_required") { st.busy = false; st.err = "A final report needs an impression; release it as preliminary if it is not ready."; paint(); return; }
+        var msg = r && r.discrepancy
+          ? "Released. The impression changed from a reading that may already have been acted on - flagged as a discrepancy on the record."
+          : (r && r.critical ? "Released. Critical finding - a closed loop was opened." : "Released.");
+        if (!settle(r, msg)) { paint(); return; }
+        b.reported.unshift({ orderId: picked, name: row && row.name, mrn: row && row.mrn, modality: modality || (row && row.modality) || "", status: status || "preliminary", discrepancy: !!(r && r.discrepancy), reportedAt: new Date().toISOString() });
+        b.picked = null;
+        loadRadBoard();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not release the report."; paint(); });
+  }
+  function radBoardFormHtml(row) {
+    return '<div class="w-sub"><h4>' + ms("edit_note") + "File report &middot; " + esc((row && row.name) || "Unknown patient") + (row && row.mrn ? " (" + esc(row.mrn) + ")" : "") + "</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Modality</span><input id="wRadBModality" type="text" autocomplete="off" placeholder="e.g. CT, XR, US, MR" value="' + esc((row && row.modality) || "") + '"></label>' +
+      '<label class="w-f"><span>Status</span><select id="wRadBStatus"><option value="preliminary">Preliminary</option><option value="final">Final</option><option value="corrected">Corrected</option></select></label>' +
+      "</div>" +
+      '<label class="w-f"><span>Findings</span><textarea id="wRadBFindings" rows="3"></textarea></label>' +
+      '<label class="w-f"><span>Impression</span><textarea id="wRadBImpression" rows="2"></textarea></label>' +
+      '<label class="w-chk"><input type="checkbox" id="wRadBCritical"> Critical finding - opens the same closed-loop notification a critical lab value does</label>' +
+      '<div class="w-maik-acts"><button class="w-btn go" data-w-act="radboardreportsave">' + ms("send") + "Release report</button>" +
+      '<button class="w-btn ghost" data-w-act="radboardpick:">' + ms("close") + "Cancel</button></div>" +
+      '<p class="w-hint">' + ms("info") + "A final report needs an impression. A changed impression from a preliminary reading is flagged as a discrepancy, never silently overwritten." + "</p></div>";
+  }
+  function radBoardView(state) {
+    var b = state.radBoard || {};
+    var errs = b.errors || [];
+    var requested = b.requested || [];
+    var reported = b.reported || [];
+    var criticals = b.criticals || [];
+    var picked = b.picked;
+    var unreachable = function (what) { return errs.indexOf(what) >= 0; };
+    var pickedRow = null;
+    for (var i = 0; i < requested.length; i++) { if (requested[i].orderId === picked) { pickedRow = requested[i]; break; } }
+
+    var reqRows = requested.map(function (s) {
+      var pr = s.priority, prCls = RAD_PRIORITY_CLASS[pr] || "";
+      return '<li' + (s.orderId === picked ? ' class="picked"' : '') + '>' +
+        '<div class="w-crit-h"><b>' + esc(s.name || "Unknown patient") + "</b>" +
+        '<span class="w-crit-v">' + esc(s.mrn || "no MRN on record") + "</span>" +
+        (pr ? '<span class="w-st ' + prCls + '">' + esc(RAD_PRIORITY_WORDS[pr] || pr) + "</span>" : "") +
+        "</div>" +
+        '<div class="w-crit-m">' + esc(s.procedure || "Imaging study") +
+        (s.modality ? " &middot; " + esc(s.modality) : " &middot; modality not mapped") +
+        (s.orderedAt ? " &middot; waiting " + radWaitLabel(s.orderedAt) : "") + "</div>" +
+        '<button class="w-btn tiny go" data-w-act="radboardpick:' + esc(s.orderId) + '">' + ms("edit_note") + "File report</button>" +
+      "</li>";
+    }).join("");
+
+    var repRows = reported.map(function (r) {
+      return "<li><b>" + esc(r.name || "Unknown patient") + "</b> <span>" + esc(r.mrn || "") + "</span>" +
+        '<div class="w-crit-m">' + esc(r.modality || "modality not recorded") + " &middot; " + esc(r.status || "preliminary") +
+        (r.discrepancy ? " &middot; discrepancy flagged" : "") + " &middot; " + when(r.reportedAt) + "</div></li>";
+    }).join("");
+
+    var critRows = criticals.map(function (c) {
+      var esc_ = c.escalation || {}, mins = esc_.minutesOpen;
+      return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
+        '<div class="w-crit-h"><b>' + esc(c.display || c.code || "Critical finding") + "</b></div>" +
+        '<div class="w-crit-m">' + ms("person") + esc(c.patientId || "") +
+        (mins == null ? "" : " &middot; " + mins + " min since reported") +
+        (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") + "</div>" +
+      "</li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Radiology</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="radboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      (errs.length ? '<p class="w-hint warn">' + ms("warning") + "Some of this could not be read (" + esc(errs.join(", ")) +
+        "). What is shown below is incomplete: do not read an empty section here as nothing outstanding.</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("list") + "<h3>Requested &middot; " + requested.length + "</h3></div>" +
+      '<p class="w-hint">This hospital does not record a separate acquisition step for imaging: a study stays on this list from the order until it is reported here, whether or not it has been scanned yet.</p>' +
+      (unreachable("imaging worklist") ? '<p class="w-empty warn">The imaging worklist could not be read.</p>'
+        : reqRows ? '<ul class="w-crits">' + reqRows + "</ul>"
+        : '<p class="w-empty">No studies awaiting acquisition or a report.</p>') +
+      (pickedRow ? radBoardFormHtml(pickedRow) : "") +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Reported this session &middot; " + reported.length + "</h3></div>" +
+      '<p class="w-hint">Reports filed from this board since it was opened, most recent first. There is no hospital-wide reported-studies list to read back here.</p>' +
+      (repRows ? '<ul class="w-mini">' + repRows + "</ul>" : '<p class="w-empty">No studies reported yet this session.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Critical findings &middot; " + criticals.length + "</h3></div>" +
+      (unreachable("critical findings") ? '<p class="w-empty warn">Critical findings could not be read.</p>'
+        : critRows ? '<ul class="w-crits">' + critRows + "</ul>"
+        : '<p class="w-empty">No open critical findings for radiology right now.</p>') +
+      "</div>";
+  }
+
   /* TASK 4.3: the bed-management workstation. Bed STATE lives in the real master record TASK 4.1
    * built (_opd_org.js's bed()), never inferred from an Encounter - occupied happens automatically
    * on admit/transfer/discharge (TASK 4.2); this screen is for the OTHER transitions a ward
@@ -2864,6 +3058,7 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
@@ -4846,6 +5041,7 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "radboard") { st.radBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
@@ -4928,6 +5124,10 @@
     if (cmd === "srcrevoke") { revokeSource(arg); return; }
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
+    if (cmd === "radboard") { radBoardOpen(); return; }
+    if (cmd === "radboardload") { loadRadBoard(); return; }
+    if (cmd === "radboardpick") { radBoardPick(arg); return; }
+    if (cmd === "radboardreportsave") { radBoardReportSave(); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
@@ -5131,7 +5331,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
   function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
 
   /* THE OVERLAY LET GO OF THE SCREEN WHEN THE SHELL NAVIGATED AWAY.
