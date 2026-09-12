@@ -5504,7 +5504,25 @@
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
   var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
+  /* CLOSING THE WARD FORGETS THE PATIENTS.
+   *
+   * close() used to empty the markup and leave every patient in memory - the roster, the open
+   * chart, its timeline, its medications. signOut() calls this, so on a shared ward computer the
+   * next person to sign in opened the ward and saw the PREVIOUS user's patient list: 81 names, bed
+   * numbers and hospital numbers belonging to someone else's session. It was replaced a second
+   * later by their own fetch, which hid how wrong it was - and if that fetch was REFUSED, as it is
+   * for a pharmacist who may not read the ward, the old list simply stayed on screen.
+   *
+   * Found 2026-09-12 signing out of a nurse's session and in as the pharmacist. Everything clinical
+   * is cleared here; nothing is kept that names a patient. */
+  function close() {
+    var el = root(); el.classList.remove("on"); el.innerHTML = "";
+    st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
+    st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+    st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
+    st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
+    if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
+  }
 
   /* THE OVERLAY LET GO OF THE SCREEN WHEN THE SHELL NAVIGATED AWAY.
    *

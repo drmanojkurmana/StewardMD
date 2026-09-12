@@ -383,7 +383,15 @@
       tile({ go: "ward:labboard", icon: "science", title: "Laboratory", sub: "Specimens, bench worklist, results and release", need: "emr.view", liveId: "lvLab" }),
       tile({ go: "ward:radboard", icon: "radiology", title: "Radiology", sub: "Imaging worklist, acquisition, reporting", need: "emr.view", liveId: "lvRad" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: "Theatre", sub: "Cases, WHO checklist, anaesthesia, implants", need: "emr.view" }),
-      tile({ go: "ward:inventoryboard", icon: "inventory_2", title: "Pharmacy stock", sub: "Receive, move, waste, reconcile", need: "emr.view" }),
+      /* order.dispense, NOT emr.view, and this one locked the pharmacist out of pharmacy.
+       * The stock reads and writes behind this tile are gated ORDER_DISPENSE server-side
+       * (functions/api/queue/[[path]].js: "stock-move", "stock", "stock-reconcile"), which is
+       * exactly what the pharmacy role holds. The tile asked for emr.view instead - a capability
+       * the pharmacy role deliberately does NOT have, because dispensing needs the order and not
+       * the consultation notes - so a pharmacist signing in found the one screen her job runs on
+       * greyed out, with a tooltip explaining she lacked a capability the screen never needed.
+       * Found 2026-09-12 by signing in as the pharmacist. */
+      tile({ go: "ward:inventoryboard", icon: "inventory_2", title: "Pharmacy stock", sub: "Receive, move, waste, reconcile", need: "order.dispense" }),
       tile({ go: "ward:scheduling", icon: "event", title: "Scheduling", sub: "Appointments, resources, blackout periods", need: "queue.view" }),
       tile({ go: "opd", icon: "medical_services", title: "OPD desk", sub: "Queue, check-in, consult, prescriptions, results", need: "queue.view" }),
       tile({ go: "workstation", icon: "verified", title: "Order safety workstation", sub: "Medication order with allergy and interaction checks", need: "emr.treat" }),
@@ -410,7 +418,29 @@
     if (!native) return;
     // Live counts, each from the same route its tile opens. A count that cannot be read says so.
     var q = "?orgId=" + encodeURIComponent(st.orgId);
-    var live = function (id, p, f) { var s = $(id); if (!s) return; s.innerHTML = '<span class="spin"></span>'; api(p).then(function (r) { var v = f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : ""); }); };
+    /* A COUNT YOU ARE NOT ENTITLED TO IS NOT "UNAVAILABLE" - IT IS SIMPLY NOT YOURS.
+     *
+     * These badges are gated on queue.view, but the reads behind them need more than that, so a
+     * pharmacist (queue.view, no emr.view) opened her home screen to find the first three tiles -
+     * ward, bed board, emergency - all reporting "unavailable". Three words that say the system is
+     * broken, on the screen somebody sees first, about counts she was never meant to see. The
+     * pharmacy work she actually came for was further down and perfectly fine.
+     *
+     * A refusal now renders as nothing at all: the tile is still there, still openable if her role
+     * allows, just without a number beside it. A REAL failure still says so, because "the ward list
+     * is down" is worth knowing and must not be hidden by this. */
+    var refused = function (r) {
+      var e = r && r.error;
+      return e === "forbidden" || e === "permission" || e === "out_of_scope" || e === "not_a_member" || e === "unauthorized";
+    };
+    var live = function (id, p, f) {
+      var s = $(id); if (!s) return;
+      s.innerHTML = '<span class="spin"></span>';
+      api(p).then(function (r) {
+        if (refused(r)) { s.textContent = ""; s.className = "live"; return; }
+        var v = f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : "");
+      });
+    };
     if (can("queue.view")) live("lvWard", "/ward/list" + q, function (r) { return r && r.ok ? { text: (r.patients || []).length + " admitted" } : { text: "unavailable", stop: true }; });
     if (can("queue.view")) live("lvBeds", "/ward/beds" + q, function (r) { if (!r || !r.ok) return { text: "unavailable", stop: true }; var free = 0, known = false; (r.wards || []).forEach(function (w) { if (w.bedsKnown !== false && w.free) { known = true; free += w.free.length; } }); return { text: known ? free + " free beds" : (r.wards || []).length + " wards, beds not configured" }; });
     if (can("queue.view")) live("lvEd", "/ward/ed-list" + q, function (r) { return r && r.ok ? { text: (r.patients || []).length + " in ED" } : { text: "unavailable", stop: true }; });
