@@ -4277,6 +4277,60 @@
       "</div>";
   }
 
+  /* DUPLICATE RECORDS. mpi-view.js and identity-merge.js were complete and unreachable, so a records
+   * officer who suspected one patient had two records had no way to find the other, and no way to
+   * join them. Two records for one person is a real hazard: the allergy is on one and the
+   * prescription goes to the other.
+   *
+   * A MATCH IS A SUGGESTION, NEVER A DECISION. Every candidate shows WHICH fields agreed and which
+   * disagreed, in the module's own words - a score with no reasons is a number nobody can argue
+   * with. Merging is a person's act, with a reason, confirmed, and reversible: the module stores a
+   * merge as a claim that moves no clinical data, which is what makes "undo" honest.
+   *
+   * AN EMPTY RESULT FROM A PARTIAL SEARCH IS NOT "NO DUPLICATE". When the search hit its cap the
+   * module says so, and that sentence sits above the results, because the failure it prevents is
+   * registering a patient a second time on the strength of a search that never looked. */
+  function mpiCandidateRow(c, subjectId) {
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + (c.band === "probable" || c.band === "certain" ? "escalate" : "due") + '">' + esc(c.band || "possible") + "</span> " +
+      "<b>" + esc(c.name || c.patientId) + "</b>" + (c.mrn ? " &middot; " + esc(c.mrn) : "") +
+      (c.dob ? " &middot; born " + esc(c.dob) : "") + (c.sex ? " &middot; " + esc(c.sex) : "") +
+      '<div class="w-dt-times">score ' + esc(c.score) +
+      (c.agreed && c.agreed.length ? " &middot; agreed: " + esc(c.agreed.join(", ")) : "") +
+      (c.disagreed && c.disagreed.length ? " &middot; disagreed: " + esc(c.disagreed.join(", ")) : "") + "</div>" +
+      "</div><div class=\"w-mini-row-act\">" +
+      (subjectId && subjectId !== c.patientId
+        ? '<button class="w-btn ghost sm" data-w-act="mpimerge:' + esc(subjectId) + "~" + esc(c.patientId) + '">' + ms("fact_check") + "Same person - merge</button>" +
+          '<button class="w-btn ghost sm" data-w-act="mpiunmerge:' + esc(subjectId) + "~" + esc(c.patientId) + '">' + ms("undo") + "Undo a merge</button>"
+        : "") +
+      "</div></li>";
+  }
+  function mpiView(state) {
+    var d = state.mpi;
+    var s = state.sel;
+    var subjectId = s ? s.patientId : "";
+    var rows = d && d.candidates ? d.candidates.map(function (c) { return mpiCandidateRow(c, subjectId); }).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Duplicate records</h3></div>" +
+      '<div class="w-sub"><h4>' + (s ? "Look for other records of " + esc(s.name || s.patientId) : "Find a patient who may already have a record") + "</h4>" +
+      (s ? "" :
+        '<input id="wMpiName" placeholder="Name">' +
+        '<div class="w-grid"><label class="w-f"><span>Date of birth</span><input id="wMpiDob" type="date"></label>' +
+        '<label class="w-f"><span>Sex</span><select id="wMpiSex"><option value="">Not known</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></label>' +
+        '<label class="w-f"><span>MRN (optional)</span><input id="wMpiMrn"></label></div>') +
+      '<button class="w-btn" data-w-act="mpisearch">' + ms("search") + "Search</button>" +
+      '<p class="w-hint">' + ms("info") + "A match is a suggestion. Nothing is joined until a person decides, gives a reason, and confirms." + "</p></div>" +
+      /* Above the results, not below them. */
+      (d && d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+      (d == null ? ""
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : d.partial
+          ? '<p class="w-hint warn">' + ms("warning") + "Nothing found in what was searched - but the search was partial, so this is not proof of a new patient.</p>"
+          : '<p class="w-empty">No other record looks like this one. Checked ' + esc(d.comparedAgainst || 0) + " records.</p>") +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4549,6 +4603,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "mpi" ? mpiView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
@@ -6116,6 +6171,44 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function mpiOpen() {
+    st.view = "mpi"; st.mpi = null; paint();
+  }
+  function mpiSearch() {
+    var s = st.sel;
+    var body = { orgId: st.orgId };
+    if (s) body.patientId = s.patientId;
+    else {
+      body.name = val("wMpiName"); body.dob = val("wMpiDob") || undefined;
+      body.sex = val("wMpiSex") || undefined; body.mrn = val("wMpiMrn") || undefined;
+      if (!body.name && !body.mrn) { st.err = "Give at least a name or an MRN to search on."; paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/id-match", body)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.mpi = r;
+        else { st.mpi = null; settle(r, null); }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not search for duplicates."; paint(); });
+  }
+  function mpiMerge(arg, undo) {
+    var parts = String(arg || "").split("~");
+    var survivorId = parts[0], mergedId = parts[1];
+    if (!survivorId || !mergedId) return;
+    var reason = "";
+    try { reason = G.prompt(undo ? "Why is this merge being undone?" : "Why are these the same person? What did you check?") || ""; } catch (e) {}
+    if (!reason) { st.err = (undo ? "Undoing" : "Merging") + " records needs a reason."; paint(); return; }
+    if (!confirm(undo
+      ? "Undo the merge of these two records?"
+      : "Join these two records as one person?\n\nNo clinical data is moved or deleted, and this can be undone.")) return;
+    st.busy = true; paint();
+    apiPost(undo ? "/ward/unmerge" : "/ward/merge", { orgId: st.orgId, survivorId: survivorId, mergedId: mergedId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? (undo ? "Merge undone." : "Records joined.") : null)) mpiSearch(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not do that."; paint(); });
+  }
+
   function infusionOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "infusions"; st.infusions = null; paint(); loadInfusions();
@@ -7375,6 +7468,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
@@ -7629,6 +7723,10 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "mpi") { mpiOpen(); return; }
+    if (cmd === "mpisearch") { mpiSearch(); return; }
+    if (cmd === "mpimerge") { mpiMerge(arg, false); return; }
+    if (cmd === "mpiunmerge") { mpiMerge(arg, true); return; }
     if (cmd === "infusions") { infusionOpen(); return; }
     if (cmd === "infusionchart") { infusionChart(arg); return; }
     if (cmd === "careplansave") { carePlanSave(); return; }
@@ -7755,7 +7853,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -7789,6 +7887,7 @@
     st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null;
     st.admReqs = null;
     st.infusions = null;
+    st.mpi = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

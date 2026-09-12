@@ -480,6 +480,9 @@
       /* The bed waiting list sits at the capability that registers a patient - asking for a bed and
        * closing a request are front-desk and bed-management acts, and the module gates them itself. */
       tile({ go: "ward:admreqs", icon: "bed", title: "Waiting for a bed", sub: "Ask for a bed, see who is waiting and for how long", need: "queue.add" }),
+      /* Finding and joining duplicate records is the front desk's and medical records' work, on the
+       * capability that registers a patient; identity-merge.js gates the merge itself. */
+      tile({ go: "ward:mpi", icon: "search", title: "Duplicate records", sub: "Find a patient who may have two records, and join them with a reason", need: "queue.add" }),
       tile({ go: "ward:approvals", icon: "verified", title: "Approvals", sub: "Ask for an approval for a restricted medicine, and grant the ones waiting", need: ["emr.vitals", "emr.treat"] }),
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */
