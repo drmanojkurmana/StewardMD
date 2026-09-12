@@ -11,7 +11,7 @@ supplied raster originals at native resolution, pure white ground, no gradients.
 | `artboards/` | The two card faces as design-canvas artboards (96 px/in, 336 x 192) plus `canvas.json`. |
 | `img/` | Logos as placed: MaiK mark and infinity crop (from `maik-wordmark-color.png`), WardSynQ and StewardMD (supplied files, backdrop knocked out by `prepare-logos.py`), the supplied QR. `*-white.png` / `*-dark.png` are the same shapes with the fill changed to white (and mint for "MD") for the dark back; `qr-icon.png` adds a small centre infinity. |
 | `src/` | The supplied WardSynQ, StewardMD and QR files as received. |
-| `fonts/` | Inter 400/500/600 and Dancing Script 600 (Google Fonts, OFL), embedded into the PDF. |
+| `fonts/` | Inter 400/500/600 and Dancing Script 400/600 (Google Fonts, OFL), embedded into the PDF. The card uses Dancing Script 400. |
 | `build-print.mjs` | Rebuilds the PDF and proofs from `artboards/` with Playwright Chromium: `node build-print.mjs`. |
 
 Colours: primary `#0B5B4A`, black `#111111`, cursive blue `#1D5FB4`; back ground `#0A2F26` with
