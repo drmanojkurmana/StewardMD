@@ -269,18 +269,26 @@ async function pendingRequests(request, env, ctx) {
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", pending: [] };
 
+  /* `scope=hospital` is the bench's own view: every test this laboratory still owes a result for.
+   * Per-patient was the only mode until 2026-09-12, which is why there was no laboratory board to
+   * open at all. Opt-in by an explicit word, never by a missing patientId - on a read that returns
+   * every patient in the building, "the client forgot to send one" must not be the thing that
+   * unlocks it. The capability gate is unchanged and still does the real work. */
   const patientId = str(ctx.patientId);
-  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", pending: [] };
+  const hospitalWide = str(ctx.scope) === "hospital";
+  if (!patientId && !hospitalWide) return { ...base, ok: false, status: 422, error: "patient_required", pending: [] };
 
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, pending: [] };
 
   let requests, reports;
   try {
-    [requests, reports] = await Promise.all([
-      svc.byPatient("ServiceRequest", patientId),
-      svc.byPatient("DiagnosticReport", patientId).catch(() => []),
-    ]);
+    [requests, reports] = hospitalWide
+      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list("DiagnosticReport", 300).catch(() => [])])
+      : await Promise.all([
+        svc.byPatient("ServiceRequest", patientId),
+        svc.byPatient("DiagnosticReport", patientId).catch(() => []),
+      ]);
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), pending: [] }; }
 
   const resulted = new Set((reports || []).filter((r) => r && r.serviceRequestId).map((r) => r.serviceRequestId));
@@ -288,8 +296,9 @@ async function pendingRequests(request, env, ctx) {
     // Another hospital's order is not one this laboratory owes a result for.
     .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled" && !isExternalRecord(s))
     .filter((s) => !resulted.has(s.id))
-    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
-  return { ...base, ok: true, patientId, pending };
+    // patientId travels so a hospital-wide caller can say whose test this is.
+    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
+  return { ...base, ok: true, patientId: patientId || null, scope: hospitalWide ? "hospital" : "patient", pending };
 }
 
 export {

@@ -290,18 +290,34 @@ async function collectionList(request, env, ctx) {
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", requests: [] };
 
+  /* HOSPITAL-WIDE IS OPT-IN, BY AN EXPLICIT WORD, not by the absence of one.
+   *
+   * This was per-patient only, which is why the laboratory had no department board: a bench
+   * worklist is by definition every outstanding specimen in the building, and the only way to
+   * assemble one was to fan this read out across the whole admitted census - eighty patients, one
+   * request each, every refresh. digital-twin.js says as much in its own comment, and settles for a
+   * bare count because of it.
+   *
+   * The opt-in is `scope=hospital` rather than "patientId was missing" - deliberately unlike
+   * listCriticalLoops, which treats absence as hospital-wide. On THIS read the difference matters:
+   * a client bug that drops patientId would silently turn one patient's specimens into every
+   * patient's, and that is a PHI disclosure arriving through a typo. An explicit word cannot be
+   * reached by accident. The capability gate is unchanged and still does the real work. */
   const patientId = str(ctx.patientId);
-  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", requests: [] };
+  const hospitalWide = str(ctx.scope) === "hospital";
+  if (!patientId && !hospitalWide) return { ...base, ok: false, status: 422, error: "patient_required", requests: [] };
 
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, requests: [] };
 
   let orders, specimens;
   try {
-    [orders, specimens] = await Promise.all([
-      svc.byPatient("ServiceRequest", patientId),
-      svc.byPatient(TYPE, patientId).catch(() => []),
-    ]);
+    [orders, specimens] = hospitalWide
+      ? await Promise.all([svc.list("ServiceRequest", 300), svc.list(TYPE, 300).catch(() => [])])
+      : await Promise.all([
+        svc.byPatient("ServiceRequest", patientId),
+        svc.byPatient(TYPE, patientId).catch(() => []),
+      ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), requests: [] };
@@ -319,6 +335,9 @@ async function collectionList(request, env, ctx) {
     .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
     .map((o) => ({
       serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: o.category || null,
+      // Carried so a hospital-wide caller can say WHOSE specimen this is. Harmless per-patient
+      // (the caller already knows), and the one thing a department board cannot work without.
+      patientId: o.patientId || null,
       priority: o.priority || "routine",
       requestedAt: (o.meta && o.meta.recordedAt) || null,
       collection: collectionState(byRequest.get(str(o.id))),

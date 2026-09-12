@@ -160,7 +160,7 @@
     var native = isWardsynq();
     var item = function (go, label) { return '<a href="#/' + go.replace(/^ward:/, "ward/") + '"' + (page === go ? ' aria-current="page"' : "") + ">" + esc(label) + "</a>"; };
     var h = '<div class="rail"><div class="heading">WardSynQ</div>' + item("home", "Map");
-    if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results");
+    if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
     h += item("opd", "OPD desk") + item("patients", "Patients");
     if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
     h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + "</div>";
@@ -350,6 +350,25 @@
       tile({ go: "ward:board", icon: "hotel", title: "Admission and bed board", sub: "Admit by MRN, place in a bed, transfer", need: "queue.view", liveId: "lvBeds" }),
       tile({ go: "ward:edboard", icon: "emergency", title: "Emergency department", sub: "Arrivals, triage, resuscitation, disposition", need: "queue.view", liveId: "lvEd" }),
       tile({ go: "ward:critsboard", icon: "priority_high", title: "Critical results", sub: "Every open critical result, hospital-wide", need: "emr.view", liveId: "lvCrit" }),
+      /* THE LABORATORY AND RADIOLOGY HAD NO FRONT DOOR. Every other department on this map has one:
+       * theatre, pharmacy stock, the ED, critical results. Labs and imaging existed only as buttons
+       * buried inside a single patient's chart, so a lab technician or a radiographer signing in
+       * landed on a map with nothing on it they could do, and no way to see their own department's
+       * workload. The backends were already there (collections, pending-tests, release-result,
+       * imaging-worklist, report-imaging); only the way in was missing.
+       * BOTH are emr.view, and the laboratory one is emr.view for the SAME reason the imaging
+       * worklist already is (see the cap table in functions/api/queue/[[path]].js): a board is
+       * patient demographics beside a requested procedure, and emr.view is the capability that reads
+       * those. lab.result would have looked stricter and been broken - the laboratory grant
+       * deliberately cannot read Patient at all, and a worklist with no identity on it is worse than
+       * no worklist. Widening lab.result to make this tile work would overturn a considered boundary
+       * for the convenience of one screen, so it is not done here either.
+       * CONSEQUENCE, and it needs an owner's decision rather than a guess: the `lab` role holds only
+       * [queue.view, lab.result], so a lab technician still does not see this tile. Staffing the
+       * bench properly needs either emr.view on that role or a role designed for it. Flagged, not
+       * invented. */
+      tile({ go: "ward:labboard", icon: "science", title: "Laboratory", sub: "Specimens, bench worklist, results and release", need: "emr.view", liveId: "lvLab" }),
+      tile({ go: "ward:radboard", icon: "radiology", title: "Radiology", sub: "Imaging worklist, acquisition, reporting", need: "emr.view", liveId: "lvRad" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: "Theatre", sub: "Cases, WHO checklist, anaesthesia, implants", need: "emr.view" }),
       tile({ go: "ward:inventoryboard", icon: "inventory_2", title: "Pharmacy stock", sub: "Receive, move, waste, reconcile", need: "emr.view" }),
       tile({ go: "ward:scheduling", icon: "event", title: "Scheduling", sub: "Appointments, resources, blackout periods", need: "queue.view" }),

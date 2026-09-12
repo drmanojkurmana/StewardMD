@@ -1855,7 +1855,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collections" && method === "GET") {
-        const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        // scope=hospital is the laboratory's own board: every outstanding specimen, not one chart's.
+        const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", scope: url.searchParams.get("scope") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "registries" && method === "GET") {
@@ -1999,7 +2000,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "pending-tests" && method === "GET") {
-        const r = await pendingRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        const r = await pendingRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", scope: url.searchParams.get("scope") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "metrics" && method === "GET") {

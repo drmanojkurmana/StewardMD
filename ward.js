@@ -248,6 +248,7 @@
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
       // Hospital-wide, like Critical results beside it: imaging had a backend and nowhere to
       // land before this - the missing screen for a radiographer or radiologist who signs in.
+      '<button class="w-btn ghost" data-w-act="labboard" title="Specimens, tests awaiting a result and open critical results, hospital-wide">' + ms("science") + "Laboratory board</button>" +
       '<button class="w-btn ghost" data-w-act="radboard" title="Imaging worklist, reporting and open critical findings, hospital-wide">' + ms("medical_information") + "Radiology board</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
@@ -2159,6 +2160,51 @@
     return head + body + prov + preview + acts + "</div>";
   }
 
+  /* The bench, in the order work actually moves: to be collected, in transit, awaiting a result,
+   * and whatever has gone critical. Counts sit in every heading because "12 specimens uncollected"
+   * is the number a shift decides on, and an empty section names WHAT is empty rather than saying
+   * "None", which reads as a rendering failure. */
+  function labBoardView(state) {
+    var b = state.labBoard || { specimens: [], pending: [], criticals: [], errors: [] };
+    var none = function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
+    var stateOf = function (s) { return (s && s.collection && s.collection.state) || "none"; };
+    var spec = b.specimens || [];
+    var uncollected = spec.filter(function (s) { return stateOf(s) === "none" || stateOf(s) === "failed"; });
+    var inTransit = spec.filter(function (s) { return stateOf(s) === "collected"; });
+    var pri = function (s) { return s.priority === "stat" ? "overdue" : s.priority === "urgent" ? "failed" : ""; };
+    var specRow = function (s) {
+      return '<li class="' + pri(s) + '"><div class="w-crit-h"><b>' + esc(s.display || s.code) + "</b>" +
+        (s.priority && s.priority !== "routine" ? '<span class="w-st ' + esc(s.priority) + '">' + esc(String(s.priority).toUpperCase()) + "</span>" : "") +
+        "</div><div class=\"w-crit-m\">" + ms("person") + labWho(s.patientId) +
+        (s.category ? " &middot; " + esc(s.category) : "") + "</div></li>";
+    };
+    var pendRow = function (p) {
+      return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
+        '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div></li>";
+    };
+    var critRow = function (c) {
+      var e = c.escalation || {};
+      return '<li class="lvl-' + esc(e.level || "due") + '"><div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
+        '</div><div class="w-crit-m">' + ms("person") + labWho(c.patientId) +
+        (e.minutesOpen == null ? "" : " &middot; " + e.minutesOpen + " min open") + "</div></li>";
+    };
+    var card = function (icon, title, n, rows, emptyWords) {
+      return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + " &middot; " + n + "</h3></div>" +
+        (n ? '<ul class="w-crits">' + rows + "</ul>" : none(emptyWords)) + "</div>";
+    };
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Laboratory</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="labboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (b.errors && b.errors.length
+        ? '<div class="w-card warn"><div class="w-card-h">' + ms("error") + "<h3>Could not be read</h3></div>" +
+          "<p>" + esc(b.errors.join(", ")) + ". What is shown below is incomplete.</p></div>"
+        : "") +
+      card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.") +
+      card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(specRow).join(""), "Nothing in transit.") +
+      card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
+      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
+  }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
     var rows = loops.map(function (c) {
@@ -2247,6 +2293,53 @@
   function radCriticalOf(loop) { return !!(loop && typeof loop.reportId === "string" && loop.reportId.indexOf("wsq-rad-") === 0); }
   var RAD_PRIORITY_WORDS = { stat: "STAT", urgent: "Urgent", routine: "Routine" };
   var RAD_PRIORITY_CLASS = { stat: "overdue", urgent: "failed" };
+  /* THE LABORATORY BOARD. The bench had no screen of its own: specimens and pending tests could only
+   * ever be read one chart at a time (collectionList and pendingRequests were per-patient and
+   * answered 422 without a patientId), so the only way to see the department's work was to open
+   * eighty charts. Both reads now take scope=hospital - see the comments on those two functions for
+   * why the opt-in is an explicit word and not a missing parameter.
+   *
+   * NAMES, NOT RECORD IDS. Every row is joined against the ward roster, which already carries name
+   * and MRN, because a specimen tube identified only by "opd-pat-smd-demo-00020" cannot be checked
+   * against a wristband. Where the join misses (an outpatient, a discharged stay) the row says so
+   * rather than printing the id and calling it a name. */
+  function labPatientName(pid) {
+    var list = st.list || [];
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].patientId === pid) return list[i];
+    return null;
+  }
+  function labWho(pid) {
+    var p = labPatientName(pid);
+    if (p) return esc(p.name || p.patientId) + (p.mrn ? " &middot; " + esc(p.mrn) : "");
+    return '<i>not on the ward list</i>';
+  }
+  function labBoardOpen() {
+    st.view = "labboard"; st.labBoard = { specimens: [], pending: [], criticals: [], errors: [] }; paint(); loadLabBoard();
+  }
+  /* Four reads, and a failure in ANY of them is recorded BY NAME rather than left as an empty list.
+   * On this screen "nothing outstanding" and "could not tell" must never look the same: one of them
+   * means a specimen is sitting somewhere and nobody knows it. Same discipline as loadIntegration. */
+  function loadLabBoard() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var out = { specimens: [], pending: [], criticals: [], errors: [] };
+    var read = function (name, path, fn) {
+      return apiGet(path).then(function (r) {
+        if (r && r.ok) fn(r); else out.errors.push(name);
+      }).catch(function () { out.errors.push(name); });
+    };
+    return Promise.all([
+      read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
+      read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
+      read("critical results", "/ward/criticals?" + q, function (r) {
+        // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
+        out.criticals = (r.loops || []).filter(function (l) { return !radCriticalOf(l); });
+      }),
+      // The roster is what turns a patientId into a name. Its failure is not fatal to the board:
+      // the rows still render, they just cannot be named, and labWho says so per row.
+      read("ward roster", "/ward/list?" + q, function (r) { st.list = r.patients || st.list || []; }),
+    ]).then(function () { st.busy = false; st.labBoard = out; paint(); });
+  }
   function radBoardOpen() {
     st.view = "radboard"; st.radBoard = { requested: [], reported: [], criticals: [], errors: [], picked: null }; paint(); loadRadBoard();
   }
@@ -3058,6 +3151,7 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "labboard" ? labBoardView(state)
         : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
@@ -5041,6 +5135,7 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "labboard") { st.labBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "radboard") { st.radBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
@@ -5124,6 +5219,8 @@
     if (cmd === "srcrevoke") { revokeSource(arg); return; }
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
+    if (cmd === "labboard") { labBoardOpen(); return; }
+    if (cmd === "labboardload") { loadLabBoard(); return; }
     if (cmd === "radboard") { radBoardOpen(); return; }
     if (cmd === "radboardload") { loadRadBoard(); return; }
     if (cmd === "radboardpick") { radBoardPick(arg); return; }
@@ -5331,7 +5428,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
   function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
 
   /* THE OVERLAY LET GO OF THE SCREEN WHEN THE SHELL NAVIGATED AWAY.
