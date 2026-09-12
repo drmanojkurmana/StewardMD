@@ -95,6 +95,13 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
 
   const collector = createCollector({ client: plugin, tabId: 'phone', userId: session?.id || 'phone-user', phase: PHASE_AGENT_READ, ownsTab: false, ownsSession: false });
   await collector.start();
+  /* THE FIELD NAMES BEHIND EACH CLICK. The collector drains the page observer (method, path, query
+   * keys, request field names, response type; never values). captureView asks for what arrived since
+   * the last capture so a view's endpoints carry the names the runtime needs to replay a POST. */
+  let observerMark = 0;
+  if (typeof plugin.drainObserverEvents !== 'function') {
+    plugin.drainObserverEvents = async () => { const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
+  }
   notify('DISCOVERING', { steps: 0, events: 0 });
   if (typeof api.progress === 'function') await api.progress({ stage: 'DISCOVERING' }).catch(() => {});
 

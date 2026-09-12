@@ -211,7 +211,30 @@ function cleanObservedViews(raw) {
         if (!e || typeof e !== "object" || (e.method !== "GET" && e.method !== "POST") || typeof e.path !== "string" || e.path.length > 512 || /\d{3,}/.test(e.path)) {
           throw new OnboardError("invalid", "observedViews: endpoint invalid");
         }
-        return { method: e.method, path: e.path };
+        const cleanEndpoint = { method: e.method, path: e.path };
+        // Request FIELD NAMES only (never values), for the phone runtime to replay a POST inside the
+        // doctor's authenticated session (e.g. GHIS's __RequestVerificationToken + recordNo).
+        if (e.bodyKeys !== undefined) {
+          if (!Array.isArray(e.bodyKeys) || e.bodyKeys.length > 40 || e.bodyKeys.some((k) => typeof k !== "string" || k.length > 60 || /\d{3,}/.test(k) || k.indexOf("@") >= 0)) {
+            throw new OnboardError("invalid", "observedViews: endpoint bodyKeys invalid");
+          }
+          cleanEndpoint.bodyKeys = e.bodyKeys.slice();
+        }
+        if (e.requestKind !== undefined) {
+          if (e.requestKind !== "form" && e.requestKind !== "json" && e.requestKind !== "multipart" && e.requestKind !== "other") {
+            throw new OnboardError("invalid", "observedViews: endpoint requestKind invalid");
+          }
+          cleanEndpoint.requestKind = e.requestKind;
+        }
+        if (e.xhr !== undefined) {
+          if (typeof e.xhr !== "boolean") throw new OnboardError("invalid", "observedViews: endpoint xhr invalid");
+          cleanEndpoint.xhr = e.xhr;
+        }
+        if (e.contentType !== undefined) {
+          if (typeof e.contentType !== "string" || e.contentType.length > 60) throw new OnboardError("invalid", "observedViews: endpoint contentType invalid");
+          cleanEndpoint.contentType = e.contentType;
+        }
+        return cleanEndpoint;
       });
     }
     // Guided step: the doctor showed the agent where this lives; the tap path is the replay pattern.

@@ -222,7 +222,8 @@ export function rowsFromHtml(text, view, parse) {
   const tryView = (v) => { try { return JSON.parse(READ_ROWS(doc, v) || '[]'); } catch { return []; } };
   let rows = view && view.rowsSelector ? tryView(view) : [];
   if (!rows.length && view && view.block && view.rowsSelector) rows = tryView(Object.assign({}, view, { rowsSelector: view.rowsSelector.replace(/^#[\w-]+\s+/, '') }));
-  if (!rows.length && !(view && view.block)) rows = tryView({ rowsSelector: 'table tbody tr, table tr', headers: [] });
+  // A bare fragment has no header row: the view's own column labels name the cells by position.
+  if (!rows.length && !(view && view.block)) rows = tryView({ rowsSelector: 'table tbody tr, table tr', headers: (view && Array.isArray(view.headers)) ? view.headers : [] });
   return Array.isArray(rows) ? rows : [];
 }
 

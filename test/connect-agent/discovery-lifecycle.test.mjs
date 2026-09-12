@@ -38,7 +38,16 @@ function runObserver(config, { body = { items: [] }, contentType = 'application/
   const document = { addEventListener: (type, fn) => listeners.push([type, fn]) };
   function XMLHttpRequest() {}
   XMLHttpRequest.prototype.open = function (method, url) { this.opened = [method, url]; };
-  XMLHttpRequest.prototype.send = function () { this.sent = true; };
+  XMLHttpRequest.prototype.setRequestHeader = function (name, value) {
+    this.requestHeaders = this.requestHeaders || {};
+    this.requestHeaders[name] = value;
+  };
+  XMLHttpRequest.prototype.send = function (data) {
+    this.sent = true; this.sentBody = data;
+    if (this.__loadListener) this.__loadListener();
+  };
+  XMLHttpRequest.prototype.addEventListener = function (type, fn) { if (type === 'load') this.__loadListener = fn; };
+  XMLHttpRequest.prototype.getResponseHeader = function () { return null; };
   function HTMLFormElement() {}
   HTMLFormElement.prototype.submit = function () { this.submitted = true; };
   const location = { href: `${APP}/worklist` };
@@ -110,6 +119,35 @@ test('guard never blocks during clinician login (the doctor keeps driving)', asy
   env.HTMLFormElement.prototype.submit.call(form);
   assert.equal(form.submitted, true);
   assert.equal(env.state.events.filter(e => e.blocked).length, 0);
+});
+
+test('a form-encoded XHR POST records bodyKeys, requestKind "form" and xhr true (never the values)', async () => {
+  const env = runObserver(agentGuard({ enforce: false }));
+  const xhr = new env.XMLHttpRequest();
+  xhr.open('POST', `${API}/Doctor/Home/Searchnew`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  xhr.send('__RequestVerificationToken=super-secret-token&recordNo=MR900001');
+  assert.equal(xhr.sent, true);
+  const [event] = env.state.events;
+  assert.equal(event.method, 'POST');
+  assert.equal(event.path, '/Doctor/Home/Searchnew');
+  assert.deepEqual(event.bodyKeys, ['__RequestVerificationToken', 'recordNo']);
+  assert.equal(event.requestKind, 'form');
+  assert.equal(event.xhr, true);
+  const serialized = JSON.stringify(event);
+  assert.ok(!/super-secret-token|MR900001/.test(serialized), serialized);
+});
+
+test('a JSON fetch POST records bodyKeys and requestKind "json"; no X-Requested-With -> xhr false', async () => {
+  const env = runObserver(agentGuard({ enforce: false }));
+  await env.window.fetch(`${API}/api/v2/labs`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ patientId: 'pt-1', note: 'x' }),
+  });
+  const [event] = env.state.events;
+  assert.deepEqual(event.bodyKeys, ['patientId', 'note']);
+  assert.equal(event.requestKind, 'json');
+  assert.equal(event.xhr, false);
 });
 
 test('shape() drops hostile keys and sensitive keys and does not pollute Object.prototype', async () => {

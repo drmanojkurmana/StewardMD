@@ -8,7 +8,7 @@ import { existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, hintFromHeaders } from '../../connect-agent/phone/deep-crawl.mjs';
+import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders } from '../../connect-agent/phone/deep-crawl.mjs';
 import { inferHtmlOperations } from '../../connect-agent/manifest/infer-html.mjs';
 import { extractRecords, isValidSelector } from '../../connect-agent/manifest/html.mjs';
 
@@ -563,6 +563,48 @@ test('redactEndpoints: same-origin non-asset requests only, query values dropped
   assert.ok(!JSON.stringify(out).includes('MR900001'));
   const many = Array.from({ length: 20 }, (_, i) => ({ method: 'GET', url: `https://emr.example/p${i}` }));
   assert.equal(redactEndpoints(many, 'https://emr.example/').length, 8);
+});
+
+test('redactEndpoints: passes bodyKeys/requestKind/xhr/contentType through and strips a hostile body key', () => {
+  const reqs = [
+    {
+      method: 'POST', url: 'https://emr.example/Doctor/Home/Searchnew',
+      bodyKeys: ['__RequestVerificationToken', 'recordNo', 'mrn2012130687', 'user@example.com'],
+      requestKind: 'form', xhr: true, contentType: 'text/html; charset=utf-8',
+    },
+  ];
+  const out = redactEndpoints(reqs, 'https://emr.example/Doctor/Home');
+  assert.deepEqual(out, [{
+    method: 'POST', path: '/Doctor/Home/Searchnew',
+    bodyKeys: ['__RequestVerificationToken', 'recordNo'], // mrn2012130687 (digits) and the @ address dropped
+    requestKind: 'form', xhr: true, contentType: 'text/html; charset=utf-8',
+  }]);
+
+  // observer-style entry: path + origin instead of url, and no extra fields at all
+  const plain = redactEndpoints([{ method: 'GET', path: '/Doctor/Home', origin: 'https://emr.example' }], 'https://emr.example/Doctor/Home');
+  assert.deepEqual(plain, [{ method: 'GET', path: '/Doctor/Home' }]);
+});
+
+test('mergeEndpointDetails: attaches observer details to the matching endpoint by method + redacted path', () => {
+  const endpoints = [
+    { method: 'POST', path: '/Doctor/Home/Searchnew' },
+    { method: 'GET', path: '/Doctor/GetLabs?patientId' },
+  ];
+  const observerEvents = [
+    {
+      method: 'POST', path: '/Doctor/Home/Searchnew', origin: 'https://emr.example', queryKeys: [],
+      bodyKeys: ['__RequestVerificationToken', 'recordNo'], requestKind: 'form', xhr: true, contentType: 'text/html',
+    },
+    { method: 'GET', path: '/Doctor/Other', origin: 'https://emr.example', queryKeys: [] }, // no match: ignored
+  ];
+  const merged = mergeEndpointDetails(endpoints, observerEvents);
+  assert.deepEqual(merged[0], {
+    method: 'POST', path: '/Doctor/Home/Searchnew',
+    bodyKeys: ['__RequestVerificationToken', 'recordNo'], requestKind: 'form', xhr: true, contentType: 'text/html',
+  });
+  assert.deepEqual(merged[1], { method: 'GET', path: '/Doctor/GetLabs?patientId' }); // untouched, no match
+  assert.deepEqual(mergeEndpointDetails([], observerEvents), []);
+  assert.deepEqual(mergeEndpointDetails(endpoints, []), endpoints);
 });
 
 test('hintFromHeaders: a container label ("Patient profile") is re-hinted from what the block actually holds', () => {
