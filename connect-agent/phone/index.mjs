@@ -3,6 +3,12 @@
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
+/* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
+ * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
+ * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
+ * handed to runPhoneDiscovery, and discovery sat at zero pages forever after a successful sign-in:
+ * the raw plugin has no evaluate/snapshot/click. Found on the device 2026-09-12. */
+export { createPluginClient } from './plugin-client.mjs';
 // NB: HTML operation inference (infer-html.mjs) runs SERVER-SIDE in the broker's discovery route, not
 // on the phone. The phone only crawls and sends the observed view STRUCTURE; the server infers the
 // adapter from it (same split as compile/validate). Keeping the manifest modules off the phone bundle.
@@ -44,7 +50,20 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   }
   const origins = deployment?.origins;
   if (!Array.isArray(origins) || origins.length === 0) throw new Error('runPhoneDiscovery requires deployment.origins');
-  const url = startUrl || origins[0];
+  /* START WHERE THE DOCTOR ALREADY IS, NOT AT THE ADDRESS THEY TYPED.
+   *
+   * `startUrl` is the hospital address entered on the first screen, which for a real EMR is the
+   * LOGIN page (GHIS: gimsrlogin.gitam.edu). Navigating back to it after sign-in returns the doctor
+   * to the login form - on GHIS it ends the session outright - so the crawl explored a logged-out
+   * page, found nothing, and the doctor watched "Pages visited 0" while being signed out. Found on
+   * the device 2026-09-12. The post-login landing page is where the worklist lives, so the browser's
+   * own current URL wins whenever it is inside an allowed origin. */
+  let url = startUrl || origins[0];
+  try {
+    const cur = typeof plugin.currentUrl === 'function' ? await plugin.currentUrl() : null;
+    const curUrl = typeof cur === 'string' ? cur : cur?.url;
+    if (curUrl && origins.some((o) => typeof curUrl === 'string' && curUrl.indexOf(o) === 0)) url = curUrl;
+  } catch { /* no current URL: fall back to the typed address */ }
 
   const notify = (phase, extra = {}) => { try { onProgress?.({ phase, ...extra }); } catch { /* never let UI feedback break discovery */ } };
   const stopped = () => typeof stopSignal === 'function' && !!stopSignal();

@@ -726,7 +726,9 @@ export async function onRequest(context) {
         });
         manifest = compiled.manifest;
       } catch (e) {
-        throw new OnboardError("invalid", "spec could not be compiled");
+        // Keep the compiler's own reason: without it a failed compile is indistinguishable from a
+        // network error, and the crawl that produced the spec is thrown away with nothing to fix.
+        throw new OnboardError("invalid", "spec could not be compiled: " + String((e && e.message) || e).slice(0, 200));
       }
 
       // HTML-operation inference: merge crawler-observed views into the compiled manifest so a phone that
@@ -1082,6 +1084,12 @@ export async function onRequest(context) {
 
     return jsonResponse({ error: "not_found" }, { status: 404 });
   } catch (e) {
-    return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });
+    /* The CODE alone is not enough to act on: a doctor whose crawl walked 21 pages was told
+     * {"error":"invalid"} and nothing else. An OnboardError's message is authored here, is a
+     * sentence rather than a stack, and carries no PHI, so it travels as `detail`. Any OTHER
+     * exception keeps the bare code, since its message is not ours to promise. */
+    const body = { error: CODE(e) };
+    if (e instanceof OnboardError && e.message) body.detail = String(e.message).slice(0, 300);
+    return jsonResponse(body, { status: STATUS(e) });
   }
 }
