@@ -78,6 +78,10 @@ export function READ_ROWS(doc, view) {
     } else {
       var cells = row.querySelectorAll('td');
       if (!cells.length) continue;
+      /* A DataTables placeholder ("No data available in table", one cell spanning the row) is not a
+       * patient. Counting it as one stopped the wait loop on an empty table and rendered a patient
+       * called "(no name)" on the live hospital (2026-09-12). */
+      if (cells.length < 2 || /no (data|records|matching records)/i.test(txt(row))) continue;
       for (var c = 0; c < cells.length; c++) {
         var t = txt(cells[c]);
         if (t) { rec[headers[c] || ('col' + c)] = t; filled++; }
@@ -129,13 +133,42 @@ function pathToUrl(origin, path) {
 
 async function settle(ms) { await new Promise((r) => setTimeout(r, ms)); }
 
-async function readView({ plugin, origin, view, settleMs = 1500 }) {
+/* A DataTables page length control: pick its largest option (or "All", value -1) so ONE read sees the
+ * whole list rather than the first ten rows. Silent when the page has no such control. */
+export const EXPAND_PAGE_LENGTH = "(function(){try{var s=document.querySelector('select[name$=\"_length\"]');if(!s)return '0';var best=null;[].forEach.call(s.options,function(o){var n=parseInt(o.value,10);if(isNaN(n))return;if(n===-1){best=-1;return;}if(best!==-1&&(best===null||n>best))best=n;});if(best===null)return '0';s.value=String(best);s.dispatchEvent(new Event('change',{bubbles:true}));return '1'}catch(e){return 'e'}})()";
+
+/* WAIT FOR THE ROWS, DO NOT ASSUME THEM.
+ *
+ * GHIS draws its worklist with an AJAX DataTable: the page is "loaded" long before the tbody has a
+ * single patient in it. A fixed 1.5 s settle read an empty table on the live hospital and reported
+ * zero patients where the same screen showed three (owner, 2026-09-12). The reader now polls the
+ * recorded selector until rows appear or maxWaitMs passes, and first widens the page length so a
+ * ward of thirty is not truncated to ten. */
+function hostOf(u) { try { return new URL(u).host; } catch { return String(u || ''); } }
+
+export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000 }) {
   await plugin.navigate({ url: pathToUrl(origin, view.pathTemplate || view.path) });
   await settle(settleMs);
-  const res = await plugin.evaluate({ expression: readRowsExpression(view) });
+  /* NOT SIGNED IN IS A NAMED FAILURE, NOT AN EMPTY WARD. If the hospital answered this path with
+   * its login form, reading on would report "no patients" for a session that never existed. Seen
+   * on GHIS when the read began before the sign-in redirect had landed (2026-09-12). */
+  try {
+    const gate = await plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':'ok'})()" });
+    if (gate && String(gate.result).indexOf('login') >= 0) {
+      throw new Error('not signed in: ' + hostOf(origin) + ' returned its login page at ' + (view.pathTemplate || view.path) + '. Sign in and try again');
+    }
+  } catch (e) { if (/not signed in/.test(String(e && e.message))) throw e; }
+  try { await plugin.evaluate({ expression: EXPAND_PAGE_LENGTH }); } catch { /* not a DataTable: read as is */ }
+  const started = Date.now();
   let rows = [];
-  try { rows = JSON.parse((res && res.result) || '[]'); } catch { throw new Error('the page returned no readable rows (bad JSON from the reader)'); }
-  return Array.isArray(rows) ? rows : [];
+  for (;;) {
+    const res = await plugin.evaluate({ expression: readRowsExpression(view) });
+    try { rows = JSON.parse((res && res.result) || '[]'); } catch { throw new Error('the page returned no readable rows (bad JSON from the reader)'); }
+    rows = Array.isArray(rows) ? rows : [];
+    if (rows.length || Date.now() - started >= maxWaitMs) break;
+    await settle(pollMs);
+  }
+  return rows;
 }
 
 // The ward list. Throws with a reason the UI can show verbatim.
