@@ -941,7 +941,8 @@
           var e = new Error("reauth"); e.reauth = true; throw e;
         }
         if (r.s < 200 || r.s >= 300 || !r.d || r.d.ok === false) {
-          throw new Error((r.d && r.d.error) || "request-failed");
+          // The server names the reason in `detail` (router catch); carry it so the sheet can say it.
+          throw new Error((r.d && (r.d.detail || r.d.error)) || "request-failed");
         }
         return r.d;
       });
