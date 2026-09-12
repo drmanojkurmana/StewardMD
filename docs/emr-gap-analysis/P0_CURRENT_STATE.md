@@ -25,8 +25,8 @@ P0 actually costs.
 | # | Feature | Existing implementation | Reachable? | Secure? | Tested? | Gap | Action |
 |---|---|---|---|---|---|---|---|
 | P0.1 | Reachability gate | `scripts/wardsynq-reachability.mjs` — four checks: orphaned handlers, fail-closed capability guard, screens, tests | yes | n/a | yes | **DONE.** Orphan handlers locked at 0; capability-guard check verified by breaking it | Work the 65-route backlog |
-| P0.2 | Patient timeline | `timelineFromChart()` + history page. Note text, author, category, colour, type+date filters, expand/collapse, report button all shipped | yes | yes (governed `chart()`) | yes, 23 tests | No search; no unread/unacknowledged state; no drill-down to source record; voided/corrected versions not surfaced; referrals and documents absent because neither exists | **Add search, drill-down, voided handling, acknowledgement state** |
-| P0.3 | Doctor workspace | **None.** No `workspace` surface anywhere | no | n/a | no | The chart exists and is rich, but there is no single "everything for this patient" landing screen | **Build**, composing existing cards — no new data layer |
+| P0.2 | Patient timeline | Full story + author + note text + type/date filters + expand/collapse + **search** + **drill-down to the record with every version** (`record-detail.js`) | yes | yes (governed read scope applies) | yes, 38 tests | Remaining: unread/unacknowledged state; referrals and documents cannot appear until they exist | **Mostly done.** Acknowledgement state lands with the safety inbox |
+| P0.3 | Doctor workspace | `workspaceView` — allergies, outstanding criticals, current medicines, problems, score, results, pending tests, notes, contacts, deceased banner | yes | yes (pure projection, no new route) | yes, 10 tests | **DONE.** Adds no endpoint and no second source of truth | — |
 | P0.4 | Clinical safety centre | Partial: `critical-results.js` + `critsboard`, `labboard`, `radboard`, `rx-safety.js` | boards yes | yes | yes | No single cross-cutting, role-tailored inbox; no unified acknowledge/resolve state across alert kinds | **Build an inbox that projects existing alert sources** |
 | P0.5 | Medication safety | Strong: `rx-safety.js`, `maik-cds.js`, `formulary.js`, advisories, dose ceiling, interaction rules, override capture (`SafetyOverride`, `SafetyFiring`) | yes | yes, server-side | yes | Renal/hepatic/weight-based checks not confirmed present; overrides captured but not surfaced as a review queue | **Verify each check individually, then close only real gaps** |
 | P0.6 | Terminology | `terminology.js` with `$validate-code`, `askServer`, `txCache`, wired into FHIR inbound + `$validate-code` route | yes (machine) | yes | yes | No `$expand`; no autocomplete for clinicians beyond the ICD search; **no licensed content** | **Content is a licensing task, not code.** Add `$expand` + a clean interface |
@@ -93,3 +93,29 @@ history, and screens for merge/MPI.
 
 **Numbers:** 5846 tests passing, 0 failing. 303 routes — 218 reachable, 20 machine-only, 65 waiting
 for a screen, 36 waiting for a test.
+
+
+## 2026-09-13 (later) — P0.2 and P0.3
+
+**P0.2 (timeline): search and drill-down shipped.** Search covers the line, who did it and the words
+behind it. `functions/_wardsynq/record-detail.js` opens the record behind any line with every
+version, who wrote each, what changed between them, and — from `wardsynq-temporal.js` — whether a
+version was ever the live belief or was overtaken before it took effect. It adds no authority: the
+same governed read scope applies, so a reader outside a type's scope is refused there too.
+Two bugs caught by its own first tests: `historyOf` returns versions spread flat rather than
+wrapped (reading it as a wrapper yielded the version number where the record should be), and
+`isCurrentBelief` answers a narrower question than its name suggests and was marking every version
+current. Still open: unread/unacknowledged state.
+
+**P0.3 (doctor workspace): DONE.** A pure projection over state the chart already loads — no new
+endpoint, no new record type, and the reachability count is unchanged by it. The rule it is built
+around: **a block that did not load must never look like an empty one**, because an empty allergy
+box reads as "no known allergies". An unloaded block says "Do not read this as empty"; a genuinely
+empty one says "None recorded"; a test asserts the unloaded case does not contain the reassuring
+words.
+
+**Numbers:** 5871 tests passing, 0 failing. 304 routes — 219 reachable, 20 machine-only, 65 waiting
+for a screen, 36 waiting for a test.
+
+**Next:** the unified safety inbox (P0.4), which also supplies the acknowledgement state P0.2 still
+needs; then the 65-route backlog; then the payment framework.
