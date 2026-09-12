@@ -942,6 +942,11 @@ export async function onRequest(context) {
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       let wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
+      // Set true only when the noteWriterRoles alternative authority below actually fires. Carried
+      // to writeTemplatedNote's ctx so the record engine's own grant can be told the same thing the
+      // route just decided - see that check's own comment for why the route's say-so alone is not
+      // enough for the write to actually succeed.
+      let noteWriterOverride = false;
       /* The open critical results are readable by a VERIFIER as well as by the ward. A pharmacist
        * checking a dose against the patient's potassium needs to see that potassium, and gating this
        * list on emr.view alone was the reason they could not - the gap this build closes. It is an
@@ -967,7 +972,16 @@ export async function onRequest(context) {
         const allowed = (noteCfg && Array.isArray(noteCfg.noteWriterRoles) ? noteCfg.noteWriterRoles : []).map((r) => String(r || "").trim()).filter(Boolean);
         if (allowed.length) {
           const seeChart = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_VIEW);
-          if (seeChart.ok && allowed.indexOf(String(seeChart.role || "")) >= 0) wAz = seeChart;
+          /* Passing THIS gate is not enough to actually write the note. authorizeOrg only opens
+           * the route; the record engine (wardsynq-actors.js's GovernedStore) independently checks
+           * the writer's own grant before it will commit anything, and a role admitted here purely
+           * by noteWriterRoles (a nurse, say) has a grant built from emr.vitals alone, which has
+           * never included ClinicalNote - so the write below was refused anyway (SCOPE_DENIED),
+           * silently making this whole setting a no-op. noteWriterOverride carries the fact that
+           * THIS route already verified the config exception down to writeTemplatedNote, which is
+           * the only place allowed to act on it - see the comment on its own use in
+           * note-templates.js's open(). */
+          if (seeChart.ok && allowed.indexOf(String(seeChart.role || "")) >= 0) { wAz = seeChart; noteWriterOverride = true; }
         }
       }
       /* THE BENCH MAY SEE ITS OWN WORK. collections and pending-tests are gated emr.view, which is
@@ -1582,7 +1596,7 @@ export async function onRequest(context) {
           const t = await Q.getTicket(env, String(body.ticketId));
           noteEncounterId = t ? encounterIdForTicket(t) : null;
         }
-        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: noteEncounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: noteEncounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null, noteWriterOverride });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "note-submit" && method === "POST") {
