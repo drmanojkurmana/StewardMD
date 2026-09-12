@@ -1349,6 +1349,7 @@
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
         '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
+        '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
@@ -4224,6 +4225,58 @@
       "</div>";
   }
 
+  /* INFUSIONS AND THE CARE PLAN. Both modules were complete and unreachable.
+   *
+   * THE VOLUME IS AN ESTIMATE AND THE SCREEN SAYS SO. infusion.js integrates the charted rates, which
+   * assumes the pump ran at the last charted rate for every minute since. If it occluded at 02:00 and
+   * nobody noticed until 06:00, the total is four hours too high - and the fluid balance, and then a
+   * resuscitation decision, is built on it. So the module's own caveat is shown beside every total,
+   * and a drip nobody has charted for hours is marked at the top and on its row.
+   *
+   * AN UNCHARTED INFUSION IS NOT A STOPPED ONE. A pump nobody charted is still shown as running, with
+   * the stale warning, rather than quietly reading as finished. */
+  var INFUSION_EVENTS = [["started", "Started"], ["rate-changed", "Rate changed"], ["paused", "Paused"], ["resumed", "Resumed"], ["stopped", "Stopped"]];
+  function infusionRow(i) {
+    var v = i.volume || {};
+    return '<li class="w-mini-row' + (v.stale ? " w-ib-escalate" : i.running ? " w-ib-overdue" : "") + '"><div>' +
+      '<span class="w-st ' + (i.running ? "due" : "") + '">' + (i.running ? "running" : "not running") + "</span> " +
+      "<b>" + esc(i.drug || i.orderId) + "</b>" +
+      (v.lastRatePerHour != null ? " &middot; " + esc(v.lastRatePerHour) + " mL/h" : "") +
+      (v.ml != null ? " &middot; about " + esc(v.ml) + " mL so far" : "") +
+      (v.stale ? '<div class="w-hint warn">' + ms("warning") + esc(v.staleDetail) + "</div>" : "") +
+      (v.assumption ? '<div class="w-dt-times">' + esc(v.assumption) + "</div>" : "") +
+      '<div class="w-dt-times">started ' + when(i.startedAt) + " &middot; last charted " + when(i.lastChartedAt) + "</div>" +
+      "</div><div class=\"w-mini-row-act\">" +
+      '<button class="w-btn ghost sm" data-w-act="infusionchart:' + esc(i.orderId) + '">' + ms("edit_note") + "Chart</button>" +
+      "</div></li>";
+  }
+  function infusionView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.infusions;
+    var rows = d && d.infusions ? d.infusions.map(infusionRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Drips and care plan</h3>" +
+      '<button class="w-ic" data-w-act="infusions" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (d && d.stale ? '<p class="w-hint warn">' + ms("warning") + esc(d.stale) + " running infusion" + (d.stale === 1 ? " has" : "s have") + " not been charted for hours. Check the pumps.</p>" : "") +
+      (d && d.note ? '<p class="w-hint">' + ms("info") + esc(d.note) + "</p>" : "") +
+      '<div class="w-sub"><h4>Infusions</h4>' +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No infusions charted.</p>') +
+      "</div>" +
+      /* The care plan: what the team is trying to achieve and when it will be looked at again. A goal
+       * with no review date is a goal nobody comes back to, so the date is asked for with it. */
+      '<div class="w-sub"><h4>Care plan</h4>' +
+      '<input id="wCpTitle" placeholder="What this plan is for">' +
+      '<textarea id="wCpGoals" rows="3" placeholder="One goal a line - what the team is trying to achieve"></textarea>' +
+      '<label class="w-f"><span>Review by</span><input id="wCpReview" type="date"></label>' +
+      '<p class="w-hint">' + ms("info") + "A goal with no review date is a goal nobody comes back to." +
+      "</p><button class=\"w-btn\" data-w-act=\"careplansave\">" + ms("save") + "Save the care plan</button></div>" +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4496,6 +4549,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
         : state.view === "breakglass" ? breakGlassView(state)
@@ -6062,6 +6116,66 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function infusionOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "infusions"; st.infusions = null; paint(); loadInfusions();
+  }
+  function loadInfusions() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/infusions?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.infusions = r;
+        else { st.infusions = null; st.err = "Could not load infusions. Do not read this as none running."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.infusions = null; st.err = "Could not load infusions. Do not read this as none running."; paint(); });
+  }
+  function infusionChart(orderId) {
+    if (!orderId) return;
+    var event = "", rate = "", reason = "";
+    try {
+      event = G.prompt("What happened? started, rate-changed, paused, resumed, or stopped") || "";
+      event = String(event).trim().toLowerCase();
+    } catch (e) {}
+    var known = INFUSION_EVENTS.some(function (x) { return x[0] === event; });
+    if (!known) { st.err = "Say started, rate-changed, paused, resumed or stopped."; paint(); return; }
+    if (event === "started" || event === "rate-changed" || event === "resumed") {
+      try { rate = G.prompt("Rate now, in mL per hour") || ""; } catch (e) {}
+      /* A rate that is not plainly a number is refused here too, not coerced: a pump rate read wrong
+       * by a factor of ten is a real dose error. The server refuses it independently. */
+      if (!/^\d+(\.\d+)?$/.test(String(rate).trim())) { st.err = "The rate has to be a plain number of mL per hour."; paint(); return; }
+    }
+    if (event === "paused" || event === "stopped") {
+      try { reason = G.prompt("Why?") || ""; } catch (e) {}
+    }
+    st.busy = true; paint();
+    apiPost("/ward/infusion", {
+      orgId: st.orgId, orderId: orderId, event: event,
+      ratePerHour: rate ? Number(rate) : undefined, reason: reason || undefined,
+    })
+      .then(function (r) { if (settle(r, r && r.ok ? "Charted." : null)) loadInfusions(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not chart that."; paint(); });
+  }
+  function carePlanSave() {
+    var s = st.sel; if (!s) return;
+    var title = val("wCpTitle"), goalsText = val("wCpGoals"), reviewBy = val("wCpReview");
+    if (!title) { st.err = "Say what this plan is for."; paint(); return; }
+    var goals = goalsText.split("\n").map(function (g) { return g.trim(); }).filter(Boolean);
+    if (!goals.length) { st.err = "A care plan needs at least one goal."; paint(); return; }
+    if (!reviewBy) { st.err = "Say when this plan will be reviewed."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/care-plan", { orgId: st.orgId, encounterId: s.encounterId, title: title, goals: goals, reviewBy: reviewBy })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Care plan saved." : null)) {
+          ["wCpTitle", "wCpGoals", "wCpReview"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not save the care plan."; paint(); });
+  }
+
   function admReqOpen() {
     st.view = "admreqs"; st.admReqs = null; paint(); loadAdmReqs();
   }
@@ -7261,6 +7375,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
@@ -7514,6 +7629,9 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "infusions") { infusionOpen(); return; }
+    if (cmd === "infusionchart") { infusionChart(arg); return; }
+    if (cmd === "careplansave") { carePlanSave(); return; }
     if (cmd === "admreqs") { admReqOpen(); return; }
     if (cmd === "admreqask") { admReqAsk(); return; }
     if (cmd === "admreqclose") { admReqClose(arg); return; }
@@ -7670,6 +7788,7 @@
     st.breakGlass = null;
     st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null;
     st.admReqs = null;
+    st.infusions = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
