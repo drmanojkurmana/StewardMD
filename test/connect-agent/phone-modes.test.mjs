@@ -63,7 +63,7 @@ test('manual mode asks for every resource in order, never clicks on its own, rec
   const progress = [];
   const result = await runPhoneDiscovery({
     plugin, api: fakeApi(calls), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
-    startUrl: 'https://emr.example/login', mode: 'manual', brain,
+    startUrl: 'https://emr.example/login', mode: 'manual', brain, caps: { verifyWaitMs: 5 },
     onProgress: (p) => progress.push(p),
     askDoctor: async ({ gap, text, step, total }) => {
       asks.push(gap);
@@ -146,4 +146,23 @@ test('auto crawl lets the brain pick the next control from the candidate list an
   const plugin2 = fakePlugin(state2);
   await deepCrawlClinical({ client: plugin2, caps: { maxMs: 30000, waitMs: 1, maxClicks: 3 }, brain: { next: async () => ({ index: 42 }) } });
   assert.deepEqual(plugin2.clicks, [7], 'an out-of-range answer falls back to the clinical keyword rule');
+});
+
+test('auto crawl opens the first row of a captured list once and keeps what it shows as a detail view with its call', async () => {
+  const state = { table: WORKLIST_RAW, controls: [{ index: 7, label: 'Lab reports', clinical: true }], afterClick: LABS_RAW };
+  const plugin = fakePlugin(state);
+  let rowClicks = 0;
+  const base = plugin.evaluate.bind(plugin);
+  plugin.evaluate = async ({ expression }) => {
+    if (expression.includes('function CRAWL_CLICK_FIRST_ROW')) { rowClicks++; state.table = { id: 'labdetail', class: '', headers: ['Test', 'Result', 'Units'], rows: [{ isHeader: false, onclick: null }] }; return { result: 'link' }; }
+    return base({ expression });
+  };
+  const out = await deepCrawlClinical({ client: plugin, caps: { maxMs: 30000, waitMs: 1, maxClicks: 4, exploreDetails: true } });
+  assert.equal(rowClicks, 1, 'one row opened for the labs list');
+  const detail = out.observedViews.find((v) => v.resourceHint === 'labs-detail');
+  assert.ok(detail, JSON.stringify(out.observedViews.map((v) => v.resourceHint)));
+  assert.equal(detail.detailOf, 'labs');
+  assert.deepEqual(detail.headers, ['Test', 'Result', 'Units']);
+  const off = await deepCrawlClinical({ client: fakePlugin({ table: WORKLIST_RAW, controls: [{ index: 7, label: 'Lab reports', clinical: true }], afterClick: LABS_RAW }), caps: { maxMs: 30000, waitMs: 1, maxClicks: 4 } });
+  assert.ok(!off.observedViews.some((v) => v.resourceHint === 'labs-detail'), 'off unless asked for');
 });

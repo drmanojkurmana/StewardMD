@@ -2,28 +2,35 @@ import Foundation
 import UIKit
 import WebKit
 
-/// Delegate callbacks for the chrome the doctor taps (Cancel / Done / Stop). Dismissal and event
-/// emission stay owned by the plugin so `close()` and Cancel go through one code path.
+/// Delegate callbacks for the chrome the doctor taps (Cancel / Done / Stop / Not in my EMR).
+/// Dismissal and event emission stay owned by the plugin so `close()` and Cancel go through one
+/// code path. Back is handled locally (it just walks WKWebView history) — no delegate needed.
 protocol ConnectBrowserViewControllerDelegate: AnyObject {
     func connectBrowserDidRequestClose(_ vc: ConnectBrowserViewController)
     func connectBrowserDidTapDone(_ vc: ConnectBrowserViewController)
     func connectBrowserDidTapStop(_ vc: ConnectBrowserViewController)
+    func connectBrowserDidTapSkip(_ vc: ConnectBrowserViewController)
 }
 
-/// Full-screen modal chrome around the shared WKWebView: a safe-area aware header (title/subtitle,
-/// Cancel, and a Done button in login mode), an agent-mode banner with a Stop button, and a clear
-/// overlay that swallows the doctor's touches while the agent is driving.
+/// Chrome around the shared WKWebView: a safe-area aware header (title/subtitle, Cancel, Back,
+/// "Not in my EMR" in guide mode, and Done), an agent/guide-mode banner with a Stop button, and a
+/// clear overlay that swallows the doctor's touches while the agent is driving (agent mode only).
+/// The plugin controls presentation (full screen vs. the top 52% in compact agent mode) by sizing
+/// `view` directly — this controller only lays out its own content within whatever frame it is given.
 final class ConnectBrowserViewController: UIViewController {
     weak var delegate: ConnectBrowserViewControllerDelegate?
 
     let webView: WKWebView
     private(set) var mode: String = "login"
+    private(set) var compact: Bool = false
     private(set) var allowedOrigins: Set<String>
 
     private let hostTitle: String
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     private let cancelButton = UIButton(type: .system)
+    private let backButton = UIButton(type: .system)
+    private let skipButton = UIButton(type: .system)
     private let doneButton = UIButton(type: .system)
     private let bannerView = UIView()
     private let bannerLabel = UILabel()
@@ -36,7 +43,6 @@ final class ConnectBrowserViewController: UIViewController {
         self.allowedOrigins = Set(origins)
         self.hostTitle = title
         super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .fullScreen
     }
 
     required init?(coder: NSCoder) {
@@ -44,7 +50,7 @@ final class ConnectBrowserViewController: UIViewController {
     }
 
     // A locked or dimmed phone stops the web view laying out and can drop the hospital session: keep
-    // the screen awake for as long as the browser is presented.
+    // the screen awake for as long as the browser is on screen.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = true
@@ -61,7 +67,7 @@ final class ConnectBrowserViewController: UIViewController {
         buildHeader()
         buildBanner()
         buildContent()
-        applyMode(mode, banner: nil, origins: nil)
+        applyMode(mode, banner: nil, origins: nil, compact: false)
     }
 
     // MARK: - Layout
@@ -78,13 +84,21 @@ final class ConnectBrowserViewController: UIViewController {
 
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+
+        backButton.setTitle("Back", for: .normal)
+        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+
+        // guide-only escape hatch: the agent's expected screen isn't there, let the doctor say so
+        // instead of hunting for it. Visible only in guide mode (see applyMode).
+        skipButton.setTitle("Not in my EMR", for: .normal)
+        skipButton.titleLabel?.numberOfLines = 1
+        skipButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        skipButton.addTarget(self, action: #selector(skipTapped), for: .touchUpInside)
 
         doneButton.setTitle("Done, I'm signed in", for: .normal)
         doneButton.titleLabel?.numberOfLines = 1
         doneButton.titleLabel?.adjustsFontSizeToFitWidth = true
         doneButton.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
 
         titleLabel.text = hostTitle
         titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -102,20 +116,33 @@ final class ConnectBrowserViewController: UIViewController {
         titleStack.spacing = 2
         titleStack.translatesAutoresizingMaskIntoConstraints = false
 
-        header.addSubview(cancelButton)
-        header.addSubview(doneButton)
+        // Arranged in stacks so a hidden button (Back in agent mode, "Not in my EMR" outside guide
+        // mode) collapses its spacing instead of leaving a gap — mirrors the Android header's
+        // View.GONE behaviour in its LinearLayout.
+        let leadingStack = UIStackView(arrangedSubviews: [cancelButton, backButton])
+        leadingStack.axis = .horizontal
+        leadingStack.spacing = 8
+        leadingStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let trailingStack = UIStackView(arrangedSubviews: [skipButton, doneButton])
+        trailingStack.axis = .horizontal
+        trailingStack.spacing = 8
+        trailingStack.translatesAutoresizingMaskIntoConstraints = false
+
+        header.addSubview(leadingStack)
+        header.addSubview(trailingStack)
         header.addSubview(titleStack)
 
         NSLayoutConstraint.activate([
             header.heightAnchor.constraint(equalToConstant: 48),
-            cancelButton.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 12),
-            cancelButton.centerYAnchor.constraint(equalTo: header.centerYAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -12),
-            doneButton.centerYAnchor.constraint(equalTo: header.centerYAnchor),
-            doneButton.leadingAnchor.constraint(greaterThanOrEqualTo: titleStack.trailingAnchor, constant: 8),
+            leadingStack.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 12),
+            leadingStack.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+            trailingStack.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -12),
+            trailingStack.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+            trailingStack.leadingAnchor.constraint(greaterThanOrEqualTo: titleStack.trailingAnchor, constant: 8),
             titleStack.centerXAnchor.constraint(equalTo: header.centerXAnchor),
             titleStack.centerYAnchor.constraint(equalTo: header.centerYAnchor),
-            titleStack.leadingAnchor.constraint(greaterThanOrEqualTo: cancelButton.trailingAnchor, constant: 8)
+            titleStack.leadingAnchor.constraint(greaterThanOrEqualTo: leadingStack.trailingAnchor, constant: 8)
         ])
 
         self.headerRef = header
@@ -188,21 +215,24 @@ final class ConnectBrowserViewController: UIViewController {
     // MARK: - Mode
 
     /// `login`: interactive web view, header shows the sign-in subtitle + Done button.
-    /// `agent`: banner + Stop button, touches swallowed, native origin allowlist enforced elsewhere.
-    func applyMode(_ newMode: String, banner: String?, origins: [String]?) {
+    /// `agent`: banner + Stop button, touches swallowed, Back hidden, native origin allowlist
+    /// enforced elsewhere; `compact` (plugin-applied) shrinks the presented frame to the top 52%.
+    /// `guide`: banner with the question, Done + "Not in my EMR", no touch overlay (the doctor must
+    /// be able to tap), origins enforced.
+    func applyMode(_ newMode: String, banner: String?, origins: [String]?, compact: Bool) {
         mode = newMode
+        self.compact = compact
         if let origins = origins {
             allowedOrigins = Set(origins)
         }
 
-        // login: doctor drives, Done button, no banner. agent: banner + Stop, touch overlay ON, origins
-        // enforced. guide: the agent asks the doctor to show it something: banner with the question, Done
-        // button, NO touch overlay (the doctor must be able to tap), origins enforced.
         let isAgent = mode == "agent"
         let isGuide = mode == "guide"
         subtitleLabel.text = (isAgent || isGuide) ? "" : "Sign in yourself. StewardMD never sees your password."
         doneButton.isHidden = isAgent
         doneButton.setTitle(isGuide ? "Done" : "Done, I'm signed in", for: .normal)
+        backButton.isHidden = isAgent
+        skipButton.isHidden = !isGuide
         bannerLabel.text = banner ?? "StewardMD is reading \(hostTitle) on your behalf. Tap Stop to end."
         bannerHeightConstraint.constant = (isAgent || isGuide) ? 44 : 0
         bannerView.isHidden = !(isAgent || isGuide)
@@ -214,6 +244,16 @@ final class ConnectBrowserViewController: UIViewController {
 
     @objc private func cancelTapped() {
         delegate?.connectBrowserDidRequestClose(self)
+    }
+
+    @objc private func backTapped() {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+    }
+
+    @objc private func skipTapped() {
+        delegate?.connectBrowserDidTapSkip(self)
     }
 
     @objc private func doneTapped() {

@@ -5,8 +5,12 @@ import {
 
 const SENSITIVE = /password|passwd|token|secret|cookie|authorization|session|csrf|jwt|mrn|patient.?name|phone|email|dob|address|ssn|national.?id/i;
 const HOSTILE_KEY = /^(?:__proto__|constructor|prototype)$/;
+// A request-body FIELD NAME (never its value) carrying an identifier-shaped digit run or an email
+// sign is dropped, same PHI posture as redactPath/queryKeys below.
+const BODY_KEY_HOSTILE = /\d{3,}|@/;
+const REQUEST_KINDS = new Set(['form', 'json', 'multipart', 'other']);
 
-const LIMITS = { maxEvents: 200, maxDepth: 3, maxKeys: 40, maxNodes: 400, maxStringLen: 100 };
+const LIMITS = { maxEvents: 200, maxDepth: 3, maxKeys: 40, maxNodes: 400, maxStringLen: 100, maxBodyKeyLen: 60 };
 
 /**
  * The main-world observer + policy guard. Written as a real function so it is parsed (and therefore
@@ -75,7 +79,7 @@ function SMD_CONNECT_OBSERVER(config) {
     if (state.events.length > L.maxEvents) state.events.splice(0, state.events.length - L.maxEvents);
   };
 
-  var record = function (method, url, status, contentType, responseShape) {
+  var record = function (method, url, status, contentType, responseShape, bodyKeys, requestKind, xhr) {
     if (!url) return;
     // forEach, NOT [...searchParams.keys()]: inside Camofox/Firefox's evaluate() realm the iterator
     // keys() returns is dead - spreading it throws "is not iterable" and Array.from() yields []
@@ -87,7 +91,118 @@ function SMD_CONNECT_OBSERVER(config) {
       queryKeys: queryKeys.slice(0, 50), status: Number(status || 0),
       contentType: String(contentType || '').slice(0, L.maxStringLen),
       responseShape: responseShape || null, blocked: false,
+      bodyKeys: Array.isArray(bodyKeys) ? bodyKeys.slice(0, L.maxKeys) : [],
+      requestKind: (requestKind === 'form' || requestKind === 'json' || requestKind === 'multipart' || requestKind === 'other') ? requestKind : null,
+      xhr: !!xhr,
     });
+  };
+
+  // Request-body/header introspection: KEY NAMES ONLY, values never read. Used by both the fetch and
+  // XHR wrappers below so a phone-side runtime can later replay a POST (e.g. GHIS's
+  // POST /Doctor/Home/Searchnew with fields __RequestVerificationToken + recordNo) without this
+  // observer ever having seen what those fields held.
+  var ALLOWED_REQ_HEADERS = { 'x-requested-with': 1, 'content-type': 1, accept: 1 };
+  var BODY_KEY_MAXLEN = L.maxBodyKeyLen || 60;
+
+  var readAllowedHeaders = function (h) {
+    var out = {};
+    if (!h) return out;
+    try {
+      if (typeof h.forEach === 'function') {
+        h.forEach(function (v, k) { var lk = String(k).toLowerCase(); if (ALLOWED_REQ_HEADERS[lk]) out[lk] = v; });
+        return out;
+      }
+      if (typeof h.length === 'number') { // array of [name, value] pairs
+        for (var i = 0; i < h.length; i++) {
+          var lk2 = String(h[i][0]).toLowerCase();
+          if (ALLOWED_REQ_HEADERS[lk2]) out[lk2] = h[i][1];
+        }
+        return out;
+      }
+      var keys = Object.keys(h);
+      for (var j = 0; j < keys.length; j++) {
+        var lk3 = String(keys[j]).toLowerCase();
+        if (ALLOWED_REQ_HEADERS[lk3]) out[lk3] = h[keys[j]];
+      }
+    } catch (e) { /* best effort only */ }
+    return out;
+  };
+
+  var kindFromContentType = function (ct) {
+    var c = String(ct || '').toLowerCase();
+    if (!c) return null;
+    if (c.indexOf('json') >= 0) return 'json';
+    if (c.indexOf('multipart') >= 0) return 'multipart';
+    if (c.indexOf('form') >= 0) return 'form'; // application/x-www-form-urlencoded
+    return 'other';
+  };
+
+  var formKeysFromString = function (s) {
+    var keys = [];
+    var parts = String(s).split('&');
+    for (var i = 0; i < parts.length && keys.length < L.maxKeys; i++) {
+      if (!parts[i]) continue;
+      var eq = parts[i].indexOf('=');
+      var k = eq >= 0 ? parts[i].slice(0, eq) : parts[i];
+      try { k = decodeURIComponent(k.replace(/\+/g, ' ')); } catch (e) { /* keep raw */ }
+      if (k) keys.push(String(k).slice(0, BODY_KEY_MAXLEN));
+    }
+    return keys;
+  };
+
+  var jsonKeysFromValue = function (obj) {
+    var keys = [];
+    if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return keys;
+    var ks = Object.keys(obj);
+    for (var i = 0; i < ks.length && keys.length < L.maxKeys; i++) keys.push(String(ks[i]).slice(0, BODY_KEY_MAXLEN));
+    return keys;
+  };
+
+  /** bodyInfo(body, contentType) -> { bodyKeys, requestKind } - top-level KEY NAMES only. */
+  var bodyInfo = function (body, contentTypeHeader) {
+    var result = { bodyKeys: [], requestKind: null };
+    if (body === null || body === undefined) return result;
+    try {
+      if (typeof URLSearchParams !== 'undefined' && body instanceof URLSearchParams) {
+        var keys = [];
+        body.forEach(function (v, k) { if (keys.length < L.maxKeys) keys.push(String(k).slice(0, BODY_KEY_MAXLEN)); });
+        result.bodyKeys = keys; result.requestKind = 'form';
+        return result;
+      }
+      if (typeof FormData !== 'undefined' && body instanceof FormData) {
+        var fkeys = [];
+        if (typeof body.keys === 'function') {
+          var it = body.keys(); var cur = it.next();
+          while (!cur.done && fkeys.length < L.maxKeys) { fkeys.push(String(cur.value).slice(0, BODY_KEY_MAXLEN)); cur = it.next(); }
+        }
+        result.bodyKeys = fkeys; result.requestKind = 'multipart';
+        return result;
+      }
+      if (typeof body === 'string') {
+        var trimmed = body.replace(/^\s+/, '');
+        if (trimmed.charAt(0) === '{') {
+          try {
+            var parsed = JSON.parse(body);
+            result.bodyKeys = jsonKeysFromValue(parsed);
+            result.requestKind = 'json';
+            return result;
+          } catch (e) { /* not JSON after all: fall through to form parsing */ }
+        }
+        if (trimmed.indexOf('=') >= 0) {
+          result.bodyKeys = formKeysFromString(body);
+          result.requestKind = 'form';
+          return result;
+        }
+        result.requestKind = 'other';
+        return result;
+      }
+      if (typeof body === 'object') {
+        result.bodyKeys = jsonKeysFromValue(body);
+        result.requestKind = 'json';
+        return result;
+      }
+    } catch (e) { return { bodyKeys: [], requestKind: null }; }
+    return result;
   };
 
   var recordBlock = function (method, url, reason, rawTarget) {
@@ -127,6 +242,11 @@ function SMD_CONNECT_OBSERVER(config) {
     var isRequest = input && typeof input === 'object' && typeof input.url === 'string';
     var method = (init && init.method) || (isRequest ? input.method : null) || 'GET';
     var url = safeUrl(isRequest ? input.url : input);
+    var reqHeaders = readAllowedHeaders((init && init.headers) || (isRequest ? input.headers : null));
+    var reqBody = init && ('body' in init) ? init.body : undefined;
+    var bi = bodyInfo(reqBody, reqHeaders['content-type']);
+    var reqKind = kindFromContentType(reqHeaders['content-type']) || bi.requestKind;
+    var isXhrLike = !!reqHeaders['x-requested-with'];
     if (!permitted(method, url)) {
       recordBlock(method, url, 'policy-block', 'fetch');
       return Promise.reject(new TypeError('StewardMD Connect policy blocked this request'));
@@ -137,35 +257,47 @@ function SMD_CONNECT_OBSERVER(config) {
       var ct = '';
       try { ct = response.headers.get('content-type') || ''; } catch (e) { ct = ''; }
       if (/json/i.test(ct)) {
-        return response.clone().json().then(function (body) {
-          record(method, url, response.status, ct, safeShape(body));
+        return response.clone().json().then(function (respBody) {
+          record(method, url, response.status, ct, safeShape(respBody), bi.bodyKeys, reqKind, isXhrLike);
           return response;
-        }, function () { record(method, url, response.status, ct, null); return response; });
+        }, function () { record(method, url, response.status, ct, null, bi.bodyKeys, reqKind, isXhrLike); return response; });
       }
-      record(method, url, response.status, ct, responseShape);
+      record(method, url, response.status, ct, responseShape, bi.bodyKeys, reqKind, isXhrLike);
       return response;
     });
   };
 
   var nativeOpen = XMLHttpRequest.prototype.open;
   var nativeSend = XMLHttpRequest.prototype.send;
+  var nativeSetHeader = XMLHttpRequest.prototype.setRequestHeader;
   XMLHttpRequest.prototype.open = function (method, url) {
     this.__smdMethod = method; this.__smdUrl = safeUrl(url);
     this.__smdBlocked = !permitted(method, this.__smdUrl);
+    this.__smdHeaders = {};
     return nativeOpen.apply(this, arguments);
   };
-  XMLHttpRequest.prototype.send = function () {
+  XMLHttpRequest.prototype.setRequestHeader = function (name, value) {
+    if (!this.__smdHeaders) this.__smdHeaders = {};
+    var lk = String(name).toLowerCase();
+    if (ALLOWED_REQ_HEADERS[lk]) this.__smdHeaders[lk] = value;
+    if (nativeSetHeader) return nativeSetHeader.apply(this, arguments);
+  };
+  XMLHttpRequest.prototype.send = function (data) {
     if (this.__smdBlocked) {
       recordBlock(this.__smdMethod, this.__smdUrl, 'policy-block', 'xhr');
       throw new Error('StewardMD Connect policy blocked this request');
     }
+    var headers = this.__smdHeaders || {};
+    var bi = bodyInfo(data, headers['content-type']);
+    var reqKind = kindFromContentType(headers['content-type']) || bi.requestKind;
+    var isXhrLike = !!headers['x-requested-with'];
     var self = this;
     this.addEventListener('load', function () {
       var ct = '';
       try { ct = self.getResponseHeader('content-type') || ''; } catch (e) { ct = ''; }
       var responseShape = null;
       if (/json/i.test(ct)) { try { responseShape = safeShape(JSON.parse(self.responseText)); } catch (e) { responseShape = null; } }
-      record(self.__smdMethod, self.__smdUrl, self.status, ct, responseShape);
+      record(self.__smdMethod, self.__smdUrl, self.status, ct, responseShape, bi.bodyKeys, reqKind, isXhrLike);
     }, { once: true });
     return nativeSend.apply(this, arguments);
   };
@@ -247,6 +379,19 @@ function sanitizeShape(value, depth = 0, budget = { n: 0 }) {
   return { type: 'object', keys };
 }
 
+/** Sanitize request-body FIELD NAMES from a wire event: strings only, capped count/length, hostile
+ *  (identifier-shaped or email-shaped) keys dropped. Values are never read - the observer never sent any. */
+function sanitizeBodyKeys(raw) {
+  if (!Array.isArray(raw)) return [];
+  const out = [];
+  for (const k of raw) {
+    if (typeof k !== 'string' || !k || k.length > LIMITS.maxBodyKeyLen || BODY_KEY_HOSTILE.test(k)) continue;
+    out.push(k);
+    if (out.length >= LIMITS.maxKeys) break;
+  }
+  return out;
+}
+
 function baseEvent(e) {
   if (!e || typeof e !== 'object' || Array.isArray(e)) return null;
   const method = String(e.method || 'GET').toUpperCase();
@@ -258,6 +403,9 @@ function baseEvent(e) {
     queryKeys: Array.isArray(e.queryKeys) ? e.queryKeys.filter(k => typeof k === 'string' && !SENSITIVE.test(k) && !/key|id/i.test(k)).slice(0, 50) : [],
     status: Number(e.status || 0),
     contentType: String(e.contentType || '').slice(0, LIMITS.maxStringLen),
+    bodyKeys: sanitizeBodyKeys(e.bodyKeys),
+    requestKind: REQUEST_KINDS.has(e.requestKind) ? e.requestKind : null,
+    xhr: !!e.xhr,
   };
 }
 

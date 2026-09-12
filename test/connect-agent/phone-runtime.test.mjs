@@ -114,5 +114,5 @@ test('readPatientDetails reads each detail view for the patient and keeps per-vi
   assert.deepEqual(bad, [{ resource: 'labs', error: 'page gone' }]);
   const good = fakePlugin({ 'https://h/meds/K1': [{ Drug: 'Amox' }] });
   const secs = await readPatientDetails({ plugin: good, origin: 'https://h', replay: [{ resourceHint: 'medications', pathTemplate: '/meds/{id}', rowsSelector: 'tr', headers: ['Drug'] }], patient: { patientId: 'K1' }, settleMs: 0 });
-  assert.deepEqual(secs, [{ resource: 'medications', rows: [{ Drug: 'Amox' }] }]);
+  assert.deepEqual(secs, [{ resource: 'medications', rows: [{ Drug: 'Amox' }], via: 'page' }]);
 });

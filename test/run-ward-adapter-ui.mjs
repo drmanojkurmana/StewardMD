@@ -55,6 +55,14 @@ window.Capacitor.Plugins.ConnectBrowser = {
   evaluate: function (a) {
     var e = String(a && a.expression || "");
     window.__pluginCalls.push({ m: "evaluate", url: window.__url });
+    if (e.indexOf("var req={") === 0 || e.indexOf("(function(){var req={") === 0) {
+      var m = /var req=(\\{[\\s\\S]*?\\});var init=/.exec(e); var req = m ? JSON.parse(m[1]) : null;
+      if (!req) return Promise.resolve({ result: "" });
+      window.__fetches.push({ method: req.method, url: req.url, body: req.body });
+      var r = window.__routes[req.method + " " + req.url] || { status: 404, contentType: "text/plain", text: "" };
+      return Promise.resolve({ result: JSON.stringify({ status: r.status || 200, contentType: r.contentType || "application/json", url: req.url, text: typeof r.text === "string" ? r.text : JSON.stringify(r.text) }) });
+    }
+    if (e.indexOf("input[type=\\"hidden\\"]") >= 0) return Promise.resolve({ result: JSON.stringify({ __RequestVerificationToken: "tok-1" }) });
     if (e.indexOf("CRAWL_RAW_TABLE") >= 0) return Promise.resolve({ result: JSON.stringify(window.__rawTables[window.__url] || null) });
     if (e.indexOf("CRAWL_RAW_BLOCK") >= 0) return Promise.resolve({ result: "null" });
     if (e.indexOf('password') >= 0) return Promise.resolve({ result: "ok" });
@@ -74,11 +82,19 @@ window.__calls = [];
 window.GHIS.__setAgentApi(function (path, tid, opts) {
   var body = {}; try { body = opts && opts.body ? JSON.parse(opts.body) : {}; } catch (x) {}
   window.__calls.push({ path: path, tid: tid, method: (opts && opts.method) || "GET", body: body });
-  if (path === "/tenants") return Promise.resolve({ s: 200, d: { ok: true, tenants: [{ tenantId: "t-kims", name: "KIMS Hospital", role: "owner" }, { tenantId: "t-gimsr", name: "GIMSR", role: "owner" }] } });
+  if (path === "/tenants") return Promise.resolve({ s: 200, d: { ok: true, tenants: [{ tenantId: "t-kims", name: "KIMS Hospital", role: "owner" }, { tenantId: "t-gimsr", name: "GIMSR", role: "owner" }, { tenantId: "t-apollo", name: "Apollo Hospitals", role: "clinician" }] } });
+  if (path === "/connections" && tid === "t-apollo") return Promise.resolve({ s: 200, d: { ok: true, connections: [ { deploymentId: "dep-r", origins: ["https://his.apollo.example"], activeVersionId: "ver-r", pendingVersionId: null } ] } });
   if (path === "/connections" && tid === "t-kims") return Promise.resolve({ s: 200, d: { ok: true, connections: [
     { deploymentId: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-1", pendingVersionId: null },
     { deploymentId: "dep-draft", origins: ["https://draft.example"], activeVersionId: null, pendingVersionId: "ver-9" } ] } });
   if (path === "/connections" && tid === "t-gimsr") return Promise.resolve({ s: 200, d: { ok: true, connections: [ { deploymentId: "dep-g", origins: ["https://gimsrlogin.gitam.edu"], activeVersionId: "ver-g" } ] } });
+  if (path === "/sessions/sess-1/handoff" && window.__replayHospital) return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://his.apollo.example"], pendingOrigins: [] } });
+  if (path === "/versions/ver-r") return Promise.resolve({ s: 200, d: { ok: true, id: "ver-r", state: "ACTIVE", replay: [
+    { resourceHint: "worklist", pathTemplate: "https://his.apollo.example/ward/list", method: "GET", rowsSelector: "#wl tbody tr", headers: ["MRN", "Patient Name", "Age/Sex", "Ward"], singleRecord: false,
+      endpoints: [ { method: "GET", path: "/ward/list" }, { method: "GET", path: "/api/ward/patients?unit&start&length" } ] },
+    { resourceHint: "medications", pathTemplate: "https://his.apollo.example/ward/list", method: "GET", rowsSelector: "#rx tbody tr", headers: ["Drug", "Dose", "Route"], singleRecord: false,
+      endpoints: [ { method: "POST", path: "/api/visit/activate", bodyKeys: ["__RequestVerificationToken", "recordNo"], requestKind: "form" }, { method: "GET", path: "/api/ward/medications?mrn" } ] } ] } });
+  if (path === "/sessions" && opts.method === "POST" && window.__replayHospital) return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-r", state: "CREATED", reuse: true, deployment: { id: "dep-r", origins: ["https://his.apollo.example"], activeVersionId: "ver-r" } } });
   if (path === "/sessions" && opts.method === "POST") return Promise.resolve(window.__sessionResp || { s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-kims", state: "CREATED", reuse: true, deployment: { id: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-1" } } });
   if (path === "/sessions/sess-1/handoff") return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://hims.kims.example"], pendingOrigins: [] } });
   if (path === "/versions/ver-1/repair" && opts.method === "POST") return Promise.resolve({ s: 200, d: { ok: true, candidateVersionId: "ver-2", state: "AWAITING_APPROVAL", parentVersionId: "ver-1" } });
@@ -92,6 +108,7 @@ window.__pages["https://hims.kims.example/ip/worklist"] = [
   { "S.No": "2", "UHID": "K002", "Patient Name": "Sita Devi", "Age/Sex": "30 / F", "Bed No": "3", "Ward": "General", "Consultant": "Rao" } ];
 window.__pages["https://hims.kims.example/ip/meds/K001"] = [ { "Drug": "Amoxicillin", "Dose": "500 mg TDS" } ];
 window.__rawTables = window.__rawTables || {};
+window.__fetches = []; window.__routes = window.__routes || {};
 return 1;`;
 
 try {
@@ -122,7 +139,7 @@ try {
   await ev(`window.openGHIS(); return 1;`);
   ok(await waitFor(`return !!document.querySelector('#ghisAdapterHosp [data-adapter-dep="dep-kims"]');`, 8000), "the approved KIMS adapter appears as a hospital button in the picker");
   const picker = await ev(`var b=[].slice.call(document.querySelectorAll('#ghisHospital .ghis-setup-card .ghis-connect-btn')).map(function(x){return x.textContent.trim();}); return JSON.stringify(b);`);
-  ok(/^\["GIMSR","KIMS","GIMSR \(adapter\)","StewardMD Hospital"/.test(picker), "order is GIMSR, KIMS, GIMSR (adapter), StewardMD Hospital -> " + picker);
+  ok(/^\["GIMSR","KIMS","GIMSR \(adapter\)","Apollo","StewardMD Hospital"/.test(picker), "order is GIMSR, KIMS, GIMSR (adapter), Apollo, StewardMD Hospital -> " + picker);
   ok((await ev(`return document.getElementById("ghisAdapterHosp").innerText;`)).indexOf("KIMS Hospital · sign in with hims.kims.example") >= 0, "subtitle names the tenant and the host");
   ok(await ev(`return !document.querySelector('[data-adapter-dep="dep-draft"]');`) === true, "a draft (no active version) is not listed");
   // GIMSR has a built-in button; its approved adapter is still offered, labelled so the two never read as one.
@@ -161,6 +178,24 @@ try {
 
   await ev(`window.closeLabDrawer(); window.ghisDisconnect(); return 1;`);
   ok(await ev(`return document.getElementById("ghisHospital").style.display!=="none";`) === true, "sign out returns to the hospital picker");
+
+  // ENDPOINT REPLAY IS THE PRIMARY PATH. A hospital whose adapter recorded its data calls is read by
+  // replaying them inside the doctor's browser session (activation POST with the page token, then the
+  // keyed GET), never by scraping the page; the fake page answers the calls and records them.
+  await ev(`window.ghisDisconnect(); window.__replayHospital = true; window.__fetches = []; window.__pluginCalls = [];
+    window.__routes["GET https://his.apollo.example/api/ward/patients?unit=&start=0&length=1000"] = { text: { data: [ { MRN: "A100", "Patient Name": "Lakshmi N", "Age/Sex": "61 / F", Ward: "CCU" }, { MRN: "A101", "Patient Name": "Ramesh P", "Age/Sex": "48 / M", Ward: "CCU" } ] } };
+    window.__routes["POST https://his.apollo.example/api/visit/activate"] = { contentType: "text/plain", text: "ok" };
+    window.__routes["GET https://his.apollo.example/api/ward/medications?mrn=A100"] = { contentType: "text/html", text: "<table><tr><td>Metoprolol</td><td>25 mg</td><td>PO</td></tr></table>" };
+    return 1;`);
+  await ev(`document.querySelector('[data-adapter-dep="dep-r"]').click(); return 1;`);
+  await waitFor(`return (window.__pluginListeners.loggedIn||[]).length>0;`, 5000);
+  await ev(`window.__url = "https://his.apollo.example/home"; window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://his.apollo.example/home"}); return 1;`);
+  ok(await waitFor(`return document.querySelectorAll("#ghisPatientList .ghis-pt-card").length===2;`, 15000), "a second hospital's ward list renders from its replayed data call (JSON), two patients");
+  ok(await ev(`return window.__fetches.some(function(f){return f.method==="GET" && f.url==="https://his.apollo.example/api/ward/patients?unit=&start=0&length=1000";});`) === true, "the worklist came from the discovered endpoint with pagination widened, issued in the page");
+  ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://his.apollo.example/ward/list";});`) === true, "the rendered worklist page was never loaded: replay is primary, scraping is fallback");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A100").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===1 && j.rows[0].drugText==="Metoprolol" && j.rows[0].route==="PO"; });`) === true, "medications replay: activation POST then the keyed GET, HTML fragment parsed into the proxy row shape");
+  ok(await ev(`var f=window.__fetches; var i=f.findIndex(function(x){return x.method==="POST"&&x.url==="https://his.apollo.example/api/visit/activate";}); var j=f.findIndex(function(x){return x.url==="https://his.apollo.example/api/ward/medications?mrn=A100";}); return i>=0 && j>i && f[i].body==="__RequestVerificationToken=tok-1&recordNo=A100";`) === true, "the activation POST carried the page token and the record number, before the data call");
+  await ev(`window.ghisDisconnect(); window.__replayHospital = false; return 1;`);
 
   // Read-time self-repair: the approved adapter's worklist path reads nothing, so the browser asks the
   // doctor for the list once, reads the screen they show, and posts the correction as a new candidate.
