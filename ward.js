@@ -2489,6 +2489,33 @@
    * and whatever has gone critical. Counts sit in every heading because "12 specimens uncollected"
    * is the number a shift decides on, and an empty section names WHAT is empty rather than saying
    * "None", which reads as a rendering failure. */
+  /* RESULT ENTRY. Values are recorded exactly as typed - a number where it is a number, text where it
+   * is not, never coerced either way (lab-result.js's own rule). Rows the server rejects are shown by
+   * name with the reason, rather than the save being reported as a success for the rows that landed:
+   * a potassium that silently failed to save is a potassium nobody acts on. */
+  function labResultForm(state) {
+    var f = state.labResultFor;
+    if (!f) return "";
+    var r = state.labResultOutcome;
+    var rows = "";
+    for (var i = 0; i < 6; i++) {
+      rows += '<div class="w-grid">' +
+        '<label class="w-f"><span>Test</span><input id="wLrTest' + i + '"' + (i === 0 ? ' value="' + esc(f.display || f.code || "") + '"' : "") + "></label>" +
+        '<label class="w-f"><span>Result</span><input id="wLrVal' + i + '"></label>' +
+        '<label class="w-f"><span>Unit</span><input id="wLrUnit' + i + '"></label></div>';
+    }
+    return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Result for " + esc(f.display || f.code) + "</h3>" +
+      '<button class="w-ic" data-w-act="labresultclose" title="Close">' + ms("close") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Type each value as the analyser reported it. Nothing is converted or rounded. Leave unused rows empty." + "</p>" +
+      rows +
+      '<select id="wLrStatus"><option value="final">Final</option><option value="preliminary">Preliminary</option></select>' +
+      '<textarea id="wLrConc" rows="2" placeholder="Comment or conclusion (optional)"></textarea>' +
+      '<button class="w-btn" data-w-act="labresultsave">' + ms("send") + "Release result</button>" +
+      (r && r.rejected && r.rejected.length
+        ? '<p class="w-hint warn">' + ms("warning") + "Not saved: " + esc(r.rejected.map(function (x) { return (x.test || "row " + (x.index + 1)) + " (" + x.reason + ")"; }).join(", ")) + "</p>"
+        : "") +
+      "</div>";
+  }
   function labBoardView(state) {
     var b = state.labBoard || { specimens: [], pending: [], criticals: [], errors: [] };
     var none = function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
@@ -2503,9 +2530,13 @@
         "</div><div class=\"w-crit-m\">" + ms("person") + labWho(s.patientId) +
         (s.category ? " &middot; " + esc(s.category) : "") + "</div></li>";
     };
+    /* A test awaiting a result used to be a line with nothing to do: the laboratory board listed what
+     * was waiting and gave the laboratory no way to report it. The button opens the entry form for
+     * that one request, so a result is always reported AGAINST the order that asked for it. */
     var pendRow = function (p) {
       return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
-        '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div></li>";
+        '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div>" +
+        '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + "Enter result</button></li>";
     };
     var critRow = function (c) {
       var e = c.escalation || {};
@@ -2527,6 +2558,7 @@
         : "") +
       card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.") +
       card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(specRow).join(""), "Nothing in transit.") +
+      labResultForm(state) +
       card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
       card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
   }
@@ -6299,6 +6331,42 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  function labResultOpen(srId) {
+    var b = st.labBoard || {};
+    var found = null;
+    (b.pending || []).forEach(function (p) { if (p.serviceRequestId === srId) found = p; });
+    if (!found) { st.err = "That test is no longer waiting for a result. Refresh the board."; paint(); return; }
+    st.labResultFor = found; st.labResultOutcome = null; paint();
+  }
+  function labResultSave() {
+    var f = st.labResultFor; if (!f) return;
+    var tests = [];
+    for (var i = 0; i < 6; i++) {
+      var t = val("wLrTest" + i), v = val("wLrVal" + i), u = val("wLrUnit" + i);
+      if (!t && !v) continue;
+      tests.push({ test: t, value: v, unit: u || undefined });
+    }
+    if (!tests.length) { st.err = "Enter at least one result."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/release-result", {
+      orgId: st.orgId, serviceRequestId: f.serviceRequestId, patientId: f.patientId, encounterId: f.encounterId,
+      tests: tests, status: val("wLrStatus") || "final", conclusion: val("wLrConc") || undefined,
+    })
+      .then(function (r) {
+        st.busy = false;
+        st.labResultOutcome = r || null;
+        if (r && r.ok && !(r.rejected && r.rejected.length)) {
+          st.labResultFor = null; st.note = "Result released.";
+          loadLabBoard();
+        } else if (r && r.ok) {
+          st.err = "Some rows were not saved. They are listed below the form.";
+          loadLabBoard();
+        } else settle(r, null);
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not release that result."; paint(); });
+  }
+
   function tagsOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "tags"; st.tags = null; st.tagVerify = null; paint(); loadTags();
@@ -7909,6 +7977,9 @@
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
     if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
+    if (cmd === "labresultopen") { labResultOpen(arg); return; }
+    if (cmd === "labresultsave") { labResultSave(); return; }
+    if (cmd === "labresultclose") { st.labResultFor = null; st.labResultOutcome = null; paint(); return; }
     if (cmd === "tags") { tagsOpen(); return; }
     if (cmd === "tagverify") { tagVerify(); return; }
     if (cmd === "tagassign") { tagAssign(); return; }
@@ -8082,6 +8153,7 @@
     st.mpi = null;
     st.tags = null; st.tagVerify = null;
     st.patientCases = null;
+    st.labResultFor = null; st.labResultOutcome = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
