@@ -3039,6 +3039,23 @@
    * into a single number this screen invented. What each report's own body contains varies (a claim
    * count is not a stock level), so the body is listed generically as key: value rather than a
    * bespoke layout per report, which would be six more places to keep in sync with reports.js. */
+  /* reportsView() deliberately renders every report's own body generically (see the comment above
+   * REPORT_LABELS) - key: value, no bespoke layout per report. But some reports (patient flow, whose
+   * "flow" field is one big nested computation) put a structured object or array under that key, and
+   * JSON.stringify-ing it produced one unbroken line of raw JSON stretching the width of the page -
+   * unreadable, and looking like the screen was broken rather than just generic. This nests instead
+   * of flattening: an object becomes its own bulleted key: value list, an array becomes a bulleted
+   * list of its items, recursively - still nothing bespoke to any one report, just readable at any
+   * depth. */
+  function reportValue(v) {
+    if (v === null || v === undefined || v === "") return "-";
+    if (typeof v !== "object") return esc(v);
+    if (Array.isArray(v)) {
+      return v.length ? "<ul class=\"w-mini-flat\">" + v.map(function (item) { return "<li>" + reportValue(item) + "</li>"; }).join("") + "</ul>" : "none";
+    }
+    var keys = Object.keys(v);
+    return keys.length ? "<ul class=\"w-mini-flat\">" + keys.map(function (k) { return "<li><b>" + esc(k) + ":</b> " + reportValue(v[k]) + "</li>"; }).join("") + "</ul>" : "none";
+  }
   function reportsView(state) {
     var r = state.reports || {};
     var sections = Object.keys(REPORT_LABELS).map(function (key) {
@@ -3046,7 +3063,7 @@
       if (!rep) return "";
       if (!rep.ok) return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4><p class=\"w-empty\">Could not load: " + esc(rep.detail || rep.error || "unknown error") + "</p></div>";
       var body = Object.keys(rep).filter(function (k) { return ["ok", "mode", "tenantId", "dataSource", "period", "filters", "generatedAt", "scope"].indexOf(k) < 0; })
-        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + esc(typeof v === "object" ? JSON.stringify(v) : v) + "</li>"; }).join("");
+        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + reportValue(v) + "</li>"; }).join("");
       return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4>" +
         '<p class="w-dt-times">source: ' + esc((rep.dataSource || []).join(", ")) +
         (rep.period && (rep.period.from || rep.period.to) ? " &middot; " + esc(rep.period.from || "") + " to " + esc(rep.period.to || "") : "") +
