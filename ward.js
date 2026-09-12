@@ -1348,6 +1348,8 @@
          * any of the others: everything that changes what they may safely do, in one place. */
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
+        '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
+        '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
@@ -3903,6 +3905,131 @@
       "</div>";
   }
 
+  /* WOUND CARE. Another finished module nothing called. Pressure ulcers acquired in hospital are a
+   * reportable harm and a legal exposure, and a ward with no way to chart one has no way to show
+   * that it did not cause it either.
+   *
+   * TWO PROPERTIES THE MODULE GUARANTEES AND THIS SCREEN MUST NOT UNDO:
+   *   - a wound's WORST stage is carried forward and never lowered by a later, better reading
+   *   - where it came from is fixed at the first assessment and cannot be edited afterwards
+   * Both are shown, because a screen that displayed only the latest stage would let a wound that
+   * reached stage 4 read as stage 2 today, which is exactly the number a hospital is accountable
+   * for getting right. */
+  var WOUND_KINDS = [["pressure", "Pressure"], ["surgical", "Surgical"], ["traumatic", "Traumatic"],
+    ["diabetic-foot", "Diabetic foot"], ["venous", "Venous"], ["other", "Other"]];
+  var WOUND_STAGES = [["", "Not staged"], ["1", "Stage 1"], ["2", "Stage 2"], ["3", "Stage 3"],
+    ["4", "Stage 4"], ["unstageable", "Unstageable"], ["deep-tissue", "Deep tissue injury"]];
+  var WOUND_ORIGINS = [["present-on-admission", "Already there when they arrived"],
+    ["acquired-here", "Developed here"], ["unknown", "Not known"]];
+  function woundRow(w) {
+    var c = w.comparison || {};
+    return '<li class="w-mini-row' + (w.origin === "acquired-here" ? " w-ib-overdue" : "") + '"><div>' +
+      "<b>" + esc(w.site) + "</b> &middot; " + esc(w.kind) +
+      ' <span class="w-st">' + esc(w.stage ? "stage " + w.stage : "not staged") + "</span>" +
+      /* Never hidden behind the current reading. */
+      (w.worstStage && w.worstStage !== w.stage
+        ? ' <span class="w-st escalate">worst it has been: stage ' + esc(w.worstStage) + "</span>"
+        : "") +
+      (w.origin === "acquired-here" ? ' <span class="w-st escalate">developed here</span>' : "") +
+      '<div class="w-dt-times">' + esc(w.assessments) + " assessment" + (w.assessments === 1 ? "" : "s") +
+      " &middot; first " + when(w.firstAssessedAt) + " &middot; last " + when(w.lastAssessedAt) + "</div>" +
+      (c.verdict ? "<div>" + esc(c.verdict) + "</div>" : "") +
+      "</div></li>";
+  }
+  function woundView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.wounds;
+    var rows = d && d.wounds ? d.wounds.map(woundRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Wounds</h3><button class=\"w-ic\" data-w-act=\"wounds\" title=\"Refresh\">" + ms("refresh") + "</button></div>" +
+      (d && d.acquiredHere
+        ? '<p class="w-hint warn">' + ms("warning") + esc(d.acquiredHere) + " wound" + (d.acquiredHere === 1 ? "" : "s") + " developed here.</p>"
+        : "") +
+      '<div class="w-sub"><h4>Chart a wound</h4>' +
+      '<input id="wWdSite" placeholder="Where on the body">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Kind</span><select id="wWdKind">' + WOUND_KINDS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Stage</span><select id="wWdStage">' + WOUND_STAGES.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Where it came from</span><select id="wWdOrigin">' + WOUND_ORIGINS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      "</div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Length cm</span><input id="wWdL" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Width cm</span><input id="wWdW" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Depth cm</span><input id="wWdD" inputmode="decimal"></label>' +
+      "</div>" +
+      '<input id="wWdDressing" placeholder="Dressing used (optional)">' +
+      '<textarea id="wWdNote" rows="2" placeholder="Anything else worth recording"></textarea>' +
+      '<p class="w-hint">' + ms("info") + "Where a wound came from is set the first time it is charted and cannot be changed afterwards. A worse stage is never lowered by a later reading." +
+      "</p><button class=\"w-btn\" data-w-act=\"woundchart\">" + ms("save") + "Record</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No wounds charted.</p>') +
+      "</div>";
+  }
+
+  /* RISK ASSESSMENT. The tools are the HOSPITAL's - falls, pressure, VTE, whatever it configured -
+   * and this screen renders whatever it was given rather than knowing any of them. A hospital that
+   * has configured none gets told that, instead of an empty page that reads as "no risks". */
+  function riskRow(a) {
+    var due = a.reassessment && a.reassessment.due;
+    var actions = (a.actions || []).filter(function (x) { return !x.completedAt; });
+    return '<li class="w-mini-row' + (due ? " w-ib-overdue" : "") + '"><div>' +
+      "<b>" + esc(a.toolName || a.toolId) + "</b>" +
+      (a.score != null ? " &middot; score " + esc(a.score) : "") +
+      (a.band ? ' <span class="w-st ' + (a.band === "high" ? "escalate" : "due") + '">' + esc(a.band) + "</span>" : "") +
+      (due ? ' <span class="w-st escalate">reassessment overdue</span>' : "") +
+      '<div class="w-dt-times">assessed ' + when(a.assessedAt) + (a.assessedBy ? " by " + esc(a.assessedBy) : "") + "</div>" +
+      (actions.length
+        ? '<ul class="w-mini">' + actions.map(function (x) {
+            return "<li>" + esc(x.action || x.key) +
+              ' <button class="w-btn ghost sm" data-w-act="riskdone:' + esc(a.assessmentId) + "~" + esc(x.action || x.key) + '">' + ms("check") + "Done</button></li>";
+          }).join("") + "</ul>"
+        : "") +
+      "</div></li>";
+  }
+  function riskView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.risks, tools = state.riskTools;
+    var rows = d && d.assessments ? d.assessments.map(riskRow).join("") : "";
+    var toolList = tools && tools.tools ? tools.tools : [];
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Risk assessments</h3><button class=\"w-ic\" data-w-act=\"risks\" title=\"Refresh\">" + ms("refresh") + "</button></div>" +
+      (tools && !toolList.length
+        ? '<p class="w-hint">' + ms("info") + "This hospital has configured no risk tools, so none can be carried out here."
+          + " That is a setting, not an assessment that everything is fine.</p>"
+        : "") +
+      (toolList.length
+        ? '<div class="w-sub"><h4>Carry one out</h4>' +
+          '<select id="wRkTool">' + toolList.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(t.name || t.id) + "</option>"; }).join("") + "</select>" +
+          '<p class="w-hint">' + ms("info") + "The questions belong to the tool the hospital configured. Nothing here scores anything itself." +
+          "</p><button class=\"w-btn\" data-w-act=\"riskopen\">" + ms("fact_check") + "Open the tool</button></div>"
+        : "") +
+      (state.riskForm ? riskFormBlock(state) : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No assessments recorded.</p>') +
+      "</div>";
+  }
+  function riskFormBlock(state) {
+    var f = state.riskForm;
+    var qs = (f.questions || []).map(function (q) {
+      var opts = (q.options || []).map(function (o) {
+        return '<option value="' + esc(o.value != null ? o.value : o.key) + '">' + esc(o.label || o.key) + "</option>";
+      }).join("");
+      return '<label class="w-f"><span>' + esc(q.text || q.key) + "</span>" +
+        (opts ? '<select id="wRq_' + esc(q.key) + '"><option value="">Not answered</option>' + opts + "</select>"
+              : '<input id="wRq_' + esc(q.key) + '" inputmode="decimal">') + "</label>";
+    }).join("");
+    return '<div class="w-sub"><h4>' + esc(f.name || f.id) + "</h4>" + qs +
+      '<p class="w-hint">' + ms("info") + "A question left unanswered is recorded as unanswered. The score the server returns says whether it is complete." +
+      "</p><button class=\"w-btn\" data-w-act=\"risksave\">" + ms("save") + "Record the assessment</button>" +
+      '<button class="w-btn ghost" data-w-act="riskcancel">Cancel</button></div>';
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4175,6 +4302,8 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "wounds" ? woundView(state)
+        : state.view === "risks" ? riskView(state)
         : state.view === "medrec" ? medRecView(state)
         : state.view === "handover" ? handoverView(state)
         : state.view === "safetyinbox" ? safetyInboxView(state)
@@ -5726,6 +5855,98 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function woundOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "wounds"; st.wounds = null; paint(); loadWounds();
+  }
+  function loadWounds() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/wounds?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.wounds = r;
+        else { st.wounds = null; st.err = "Could not load wounds. Do not read this as none charted."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.wounds = null; st.err = "Could not load wounds. Do not read this as none charted."; paint(); });
+  }
+  function woundChart() {
+    var s = st.sel; if (!s) return;
+    var site = val("wWdSite");
+    if (!site) { st.err = "Say where on the body."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/wound", {
+      orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId,
+      site: site, kind: val("wWdKind"), stage: val("wWdStage") || undefined, origin: val("wWdOrigin"),
+      lengthCm: val("wWdL") || undefined, widthCm: val("wWdW") || undefined, depthCm: val("wWdD") || undefined,
+      dressing: val("wWdDressing") || undefined, note: val("wWdNote") || undefined,
+    })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Charted." : null)) {
+          ["wWdSite", "wWdL", "wWdW", "wWdD", "wWdDressing", "wWdNote"].forEach(function (id) {
+            var el = document.getElementById(id); if (el) el.value = "";
+          });
+          loadWounds();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not chart that wound."; paint(); });
+  }
+
+  function riskOpenView() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "risks"; st.risks = null; st.riskForm = null; paint(); loadRisks();
+  }
+  function loadRisks() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return Promise.all([
+      apiGet("/ward/risks?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)),
+      apiGet("/ward/risk-tools?orgId=" + encodeURIComponent(st.orgId)),
+    ]).then(function (rs) {
+      st.busy = false;
+      if (rs[0] && rs[0].ok) st.risks = rs[0];
+      else { st.risks = null; st.err = "Could not load risk assessments. Do not read this as none recorded."; }
+      st.riskTools = (rs[1] && rs[1].ok) ? rs[1] : { tools: [] };
+      paint();
+    }).catch(function () { st.busy = false; st.risks = null; st.err = "Could not load risk assessments."; paint(); });
+  }
+  function riskOpenTool() {
+    var id = val("wRkTool");
+    var tools = (st.riskTools && st.riskTools.tools) || [];
+    var found = null;
+    tools.forEach(function (t) { if (t.id === id) found = t; });
+    if (!found) { st.err = "That tool is not configured."; paint(); return; }
+    st.riskForm = found; paint();
+  }
+  function riskSave() {
+    var s = st.sel; if (!s || !st.riskForm) return;
+    var answers = {};
+    (st.riskForm.questions || []).forEach(function (q) {
+      var v = val("wRq_" + q.key);
+      if (v !== "") answers[q.key] = v;
+    });
+    st.busy = true; paint();
+    apiPost("/ward/assess", { orgId: st.orgId, toolId: st.riskForm.id, encounterId: s.encounterId, answers: answers })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? (r.incomplete ? "Recorded, with unanswered questions." : "Recorded.") : null)) {
+          st.riskForm = null; loadRisks();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that assessment."; paint(); });
+  }
+  function riskActionDone(arg) {
+    var parts = String(arg || "").split("~");
+    var assessmentId = parts[0], action = parts.slice(1).join("~");
+    if (!assessmentId || !action) return;
+    var note = "";
+    try { note = G.prompt("Anything to record about doing this? (optional)") || ""; } catch (e) {}
+    st.busy = true; paint();
+    apiPost("/ward/risk-action", { orgId: st.orgId, assessmentId: assessmentId, action: action, note: note || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded." : null)) loadRisks(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
   function medRecOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "medrec"; st.medRec = null; paint(); loadMedRec();
@@ -6690,6 +6911,8 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
+      if (st.view === "risks") { st.risks = null; st.riskForm = null; st.view = "chart"; paint(); return; }
       if (st.view === "medrec") { st.medRec = null; st.view = "chart"; paint(); return; }
       if (st.view === "handover") { st.handovers = null; st.view = "list"; paint(); return; }
       if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
@@ -6937,6 +7160,13 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "wounds") { woundOpen(); return; }
+    if (cmd === "woundchart") { woundChart(); return; }
+    if (cmd === "risks") { riskOpenView(); return; }
+    if (cmd === "riskopen") { riskOpenTool(); return; }
+    if (cmd === "risksave") { riskSave(); return; }
+    if (cmd === "riskcancel") { st.riskForm = null; paint(); return; }
+    if (cmd === "riskdone") { riskActionDone(arg); return; }
     if (cmd === "medrec") { medRecOpen(); return; }
     if (cmd === "medrecstart") { medRecStart(); return; }
     if (cmd === "medrecdecide") { medRecDecide(arg); return; }
@@ -7074,6 +7304,7 @@
     st.inbox = null; st.inboxRole = "";
     st.handovers = null; st.handoverState = "";
     st.medRec = null;
+    st.wounds = null; st.risks = null; st.riskForm = null; st.riskTools = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
