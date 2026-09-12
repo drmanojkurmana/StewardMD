@@ -127,3 +127,41 @@ test('runPhoneDiscovery: no askDoctor -> never leaves agent mode; stopSignal end
   });
   assert.deepEqual(asks, ['patient']); // Stop pressed during the first ask: no further asks
 });
+
+// A real EMR's entered address is its LOGIN page: navigating back to it after sign-in returns the
+// doctor to the login form (on GHIS it ends the session), so the crawl must begin at the page the
+// browser is already showing. Regression for the on-device failure of 2026-09-12.
+test('the crawl starts at the browser current URL, not the typed login address', async () => {
+  const state = { page: 'worklist', requests: [] };
+  const plugin = fakePlugin(state);
+  const navigated = [];
+  plugin.navigate = async ({ url }) => { navigated.push(url); return { ok: true }; };
+  plugin.currentUrl = async () => ({ url: 'https://emr.example/doctor/home' });
+  await runPhoneDiscovery({
+    plugin,
+    api: fakeApi({}),
+    session: { id: 'ses-1' },
+    deployment: { id: 'dep-1', origins: ['https://emr.example'] },
+    startUrl: 'https://emr.example/login',           // what the doctor typed
+  });
+  assert.ok(navigated.length > 0, 'the crawl navigated somewhere');
+  assert.equal(navigated[0], 'https://emr.example/doctor/home', 'first navigation is where the doctor already is');
+  assert.ok(!navigated.includes('https://emr.example/login'), 'never navigates back to the login page');
+});
+
+// No current URL (or one outside the allowed origins): the typed address is still the fallback.
+test('falls back to the typed address when the browser has no usable current URL', async () => {
+  const state = { page: 'worklist', requests: [] };
+  const plugin = fakePlugin(state);
+  const navigated = [];
+  plugin.navigate = async ({ url }) => { navigated.push(url); return { ok: true }; };
+  plugin.currentUrl = async () => { throw new Error('no tab'); };
+  await runPhoneDiscovery({
+    plugin,
+    api: fakeApi({}),
+    session: { id: 'ses-1' },
+    deployment: { id: 'dep-1', origins: ['https://emr.example'] },
+    startUrl: 'https://emr.example/login',
+  });
+  assert.equal(navigated[0], 'https://emr.example/login');
+});
