@@ -178,6 +178,9 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
   var body = {};
   try { body = opts && opts.body ? JSON.parse(opts.body) : {}; } catch (x) {}
   window.__calls.push({ path: path, method: (opts && opts.method) || "GET", body: body });
+  if (path.indexOf("/connections/dep-") === 0 && opts && opts.method === "DELETE") {
+    window.__removed = path; return Promise.resolve({ s: 200, d: { ok: true, deploymentId: path.slice(13), removedVersionId: "ver-old", discarded: 0 } });
+  }
   if (path === "/connections" && (!opts || !opts.method || opts.method === "GET")) {
     return Promise.resolve({ s: 200, d: window.__connections || [] });
   }
@@ -297,6 +300,29 @@ try {
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="connections";`, 8000), "sheet opens on the connections list");
   ok(await waitFor(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("have not connected a hospital yet")>=0;`, 8000), "first-time doctor sees empty-state copy");
   ok(await ev(noDash) === true, "connections copy has no em-dash");
+
+  // 1b. A connected hospital carries a Remove button; confirming it DELETEs the connection and reloads.
+  await ev(`window.__connections = [{ deploymentId: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-old", pendingVersionId: null }, { deploymentId: "dep-new", origins: ["https://new.example"], activeVersionId: null, pendingVersionId: null }]; window.__removed = null; window.confirm = function () { return true; }; return 1;`);
+  await ev(`if(window.SMD_CONNECT_AGENT) window.SMD_CONNECT_AGENT.close(); return 1;`);
+  await sleep(800);
+  await ev(MOCK);
+  await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
+  ok(await waitFor(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`, 8000), "sheet reopens for the connected-hospital scenario");
+  await ev(MOCK);
+  await ev(`window.SMD_CONNECT_AGENT.__reloadConnections(); return 1;`);
+  ok(await waitFor(`var r=document.querySelectorAll(".smd-connect-remove"); return r.length===1 && r[0].getAttribute("data-dep")==="dep-kims";`, 8000), "only the connected hospital offers Remove, a not-connected one does not");
+  await ev(`document.querySelector(".smd-connect-remove").click(); return 1;`);
+  ok(await waitFor(`return window.__removed==="/connections/dep-kims";`, 4000), "confirming Remove sends DELETE /connections/:deploymentId");
+  ok(await waitFor(`return window.__calls.filter(function(c){return c.path==="/connections" && c.method==="GET";}).length>=2;`, 4000), "the list reloads after the removal");
+  ok(await ev(noDash) === true, "remove copy has no em-dash");
+  await ev(`window.__connections = []; if(window.SMD_CONNECT_AGENT) window.SMD_CONNECT_AGENT.close(); return 1;`);
+  await sleep(800);
+  await ev(MOCK);
+  await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
+  ok(await waitFor(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`, 8000), "sheet reopens for the main flow");
+  await ev(MOCK);
+  await ev(`window.SMD_CONNECT_AGENT.__reloadConnections(); return 1;`);
+  ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="connections";`, 8000), "back on the connections list");
 
   // transform-origin anchors to the launcher, and the sheet fits the viewport.
   ok(await ev(`

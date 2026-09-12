@@ -2180,7 +2180,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab17" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab18" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2598,7 +2598,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter5"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter6"; document.body.appendChild(s); }
     // Offline "Test Hospital" demo dataset — 25 fictional patients, real-shaped labs, no GHIS
     // login needed. Loaded alongside ghis-ward.js so the setup screen's demo button works the
     // moment Ward Sync opens.

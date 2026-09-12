@@ -92,7 +92,7 @@ usage cut-off at any point leaves a resumable branch. Update this file's status 
 5. Snake game on the progress sheet, with the banner and Done always above it.  STATUS: done 2026-09-12 (connect-agent-snake.js, lazy-loaded; auto mode sets `compact: true` so the native browser keeps the top half and the sheet with the bar and the game shows beneath; guided asks are always full size)
 6. Read-time self-repair in `runtime.mjs` and `ghis-ward.js`, saved as a new candidate.  STATUS: done 2026-09-12 (zero rows through an approved adapter -> guide mode with REPAIR_ASK -> `captureWorklist` + `readView({navigate:false})` shows the patients now -> `POST /versions/:id/repair` files a child candidate, parent untouched, three-draft rule; test/connect/agent/repair.test.mjs, test/run-ward-adapter-ui.mjs)
 7. Live acceptance on GHIS from the Pixel: Manual mode end to end, Auto mode end to end, patients
-   visible in Ward Sync, medications and labs on tap. Record results here.  STATUS: not started
+   visible in Ward Sync, medications and labs on tap. Record results here.  STATUS: blocked on the phone 2026-09-12 (PR #1091 merged to main; APK with caonb15/cab17/adapter5/modes1 built at android/app/build/outputs/apk/debug/app-debug.apk; the Pixel was off adb, a watcher installs it on reconnect; then run Manual and Auto once each on GHIS and record here)
 
 ## Acceptance
 

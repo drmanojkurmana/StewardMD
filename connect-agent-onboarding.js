@@ -162,6 +162,7 @@
       // like it is moving. prefers-reduced-motion drops the animation, never the bar.
       ".smd-connect-snake{display:flex;justify-content:center;margin:0.375rem 0}",
       ".smd-connect-modes{margin-top:0.75rem}.smd-connect-modes .smd-connect-checkrow{margin-top:0.5rem}.smd-connect-modes strong{color:var(--ink,#14202b)}",
+      ".smd-connect-remove{min-height:2rem;padding:0.25rem 0.625rem;margin-left:0.5rem;font-size:0.75rem}",
       ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",
       ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:#0E7C66;width:2%;transition:width .5s ease}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-prog>i{transition:none}}",
@@ -544,8 +545,27 @@
 
   function connectionRow(c) {
     var pill = pillFor(c);
+    var removable = !!(c && (c.activeVersionId || c.pendingVersionId));
     return '<div class="smd-connect-hosp"><span style="flex:1"><span>' + esc(connectionHost(c)) + '</span></span>' +
-      '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span></div>';
+      '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span>' +
+      (removable ? '<button class="smd-connect-btn smd-connect-remove" type="button" data-dep="' + esc(c.deploymentId) + '" aria-label="Remove the adapter for ' + esc(connectionHost(c)) + '">Remove</button>' : "") + '</div>';
+  }
+  /* REMOVE AN ADAPTER. Owner or admin only (the server says 403 otherwise): the approved version is
+   * revoked, waiting drafts discarded, and the hospital leaves the Ward Sync list. The hospital row
+   * stays as "Not connected" so it can be connected again. */
+  function removeAdapter(depId, btn) {
+    var c = null;
+    for (var i = 0; i < S.connections.length; i++) if (S.connections[i].deploymentId === depId) c = S.connections[i];
+    var host = c ? connectionHost(c) : "this hospital";
+    if (!window.confirm("Remove the adapter for " + host + "? Doctors will no longer see it in Ward Sync until a new one is approved.")) return;
+    if (btn) btn.disabled = true;
+    api("/connections/" + enc(depId), { method: "DELETE", body: "{}" }).then(function (r) {
+      if (!overlay() || !S) return;
+      if (r.s === 200 && r.d && r.d.ok !== false) { toast("Adapter removed for " + host + "."); loadConnections(); return; }
+      if (btn) btn.disabled = false;
+      if (r.s === 403) { toast("Only an owner or admin can remove an adapter."); return; }
+      setStatus("bad", "Could not remove the adapter" + (r.d && (r.d.detail || r.d.error) ? ": " + (r.d.detail || r.d.error) : "") + ".");
+    });
   }
 
   var TENANT_KEY = "smd_connect_agent_tenant";
@@ -621,6 +641,8 @@
     setStatus(S.connError ? "bad" : "", S.connError ? "Could not load your connections. Check your connection and try again." : "");
     var sw = b.querySelector("#smd-connect-switch");
     if (sw) sw.onclick = function () { S.tenant = ""; storeTenant(""); renderConnections(); };
+    var rms = b.querySelectorAll(".smd-connect-remove");
+    for (var k = 0; k < rms.length; k++) rms[k].onclick = function () { removeAdapter(this.getAttribute("data-dep"), this); };
     b.querySelector("#smd-connect-add").onclick = function () {
       S.selected = null; S.emrUrl = "";
       show("url");
@@ -1622,6 +1644,7 @@
     __setApi: function (fn) { apiImpl = fn; },
     /* Test-only: drive the progress screen without a live crawl, so the bar, the wording and the
      * estimate are provable in a browser the way a doctor sees them. */
+    __reloadConnections: function () { if (S) loadConnections(); },
     __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
     __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
     __publishBanner: function () { publishBannerProgress(); },

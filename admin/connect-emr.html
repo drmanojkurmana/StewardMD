@@ -1156,9 +1156,14 @@
       if(x.s===404){ host.innerHTML='<div class="hint">Phone onboarding is not enabled for this deployment.</div>'; return; }
       if(x.s!==200||!x.d||x.d.ok===false){ host.innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; return; }
       var pending=(x.d.connections||[]).filter(function(c){ return c.pendingVersionId; });
-      if(!pending.length){ host.innerHTML='<div class="hint">Nothing is waiting for approval. Connections a doctor makes from their phone appear here.</div>'; return; }
+      var active=(x.d.connections||[]).filter(function(c){ return c.activeVersionId; });
       host.innerHTML="";
+      if(!pending.length){ host.innerHTML='<div class="hint">Nothing is waiting for approval. Connections a doctor makes from their phone appear here.</div>'; }
       pending.forEach(function(c){ renderPendingRow(host, c); });
+      if(active.length){
+        var h=mkEl("div","hint","Approved adapters (live in Ward Sync)"); h.style.cssText="margin-top:14px;font-weight:700"; host.appendChild(h);
+        active.forEach(function(c){ renderActiveRow(host, c); });
+      }
     }).catch(function(){ if(tenant()===forTenant) host.innerHTML='<div class="hint">Could not load. Try Refresh.</div>'; });
   }
   function renderPendingRow(host, conn){
@@ -1206,6 +1211,23 @@
       row.appendChild(ok); row.appendChild(no);
       box.appendChild(row); box.appendChild(msg);
     });
+  }
+  function renderActiveRow(host, conn){
+    var box=mkEl("div","", null);
+    box.style.cssText="border:1px solid var(--line,#dde3ea);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap";
+    box.innerHTML='<b style="flex:1;min-width:160px">'+esc((conn.origins||[])[0]||"This hospital")+'</b>'+
+      '<span class="st verified">Approved'+(conn.activeSince? ' '+esc(new Date(conn.activeSince).toLocaleDateString()) : '')+'</span>';
+    var rm=mkEl("button","ghost","Remove adapter"); rm.style.cssText="padding:7px 12px";
+    var msg=mkEl("div","msg"); msg.style.cssText="flex-basis:100%";
+    rm.onclick=function(){
+      if(!confirm("Remove the adapter for "+((conn.origins||[])[0]||"this hospital")+"? It leaves the Ward Sync hospital list until a new one is approved.")) return;
+      rm.disabled=true; msg.textContent="Removing...";
+      agentApi("/connections/"+encodeURIComponent(conn.deploymentId), { method:"DELETE", headers:{"Content-Type":"application/json"}, body:"{}" }).then(function(x){
+        if(x.s!==200||!x.d||x.d.ok===false){ msg.textContent=(x.d&&(x.d.detail||x.d.error))||httpErr(x); rm.disabled=false; return; }
+        msg.textContent="Removed. The hospital is no longer in Ward Sync."; setTimeout(loadAgentPending, 1200);
+      });
+    };
+    box.appendChild(rm); box.appendChild(msg); host.appendChild(box);
   }
   function decide(versionId, what, ok, no, msg){
     ok.disabled=true; no.disabled=true;
