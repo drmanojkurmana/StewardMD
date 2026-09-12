@@ -289,8 +289,21 @@
       var staff = function () {
         var id = ($("sid").value || "").trim().toLowerCase(), pw = $("spw").value, code = ($("sorg").value || "").trim().toUpperCase();
         if (!id || !pw) { msg("Enter your staff ID (or email) and PIN (or password)."); return; }
-        var isEmail = id.indexOf("@") > 0;
-        if (!isEmail && !code) { msg("Enter the hospital code, or sign in with your email."); return; }
+        /* THE HOSPITAL CODE DECIDES, NOT THE SHAPE OF THE ID.
+         *
+         * This read `id.indexOf("@") > 0` and sent anything containing an "@" down the
+         * email + password door, silently ignoring the hospital code the person had just typed and
+         * offering their PIN as a password. A staff ID IS an email address at every hospital seeded
+         * so far - all 159 here - so the staff door rejected every one of them with "Wrong email or
+         * password" while the very same code, ID and PIN worked perfectly against the server. The
+         * form's own caption promises both routes: "Hospital code + staff ID + PIN, or just your
+         * email + password". Filling in all three has to mean the first one.
+         *
+         * So: a hospital code present means the PIN route, whatever the ID looks like. No code means
+         * the email route, which still needs an "@" to be a sensible attempt. */
+        var hasAt = id.indexOf("@") > 0;
+        var isEmail = !code && hasAt;
+        if (!hasAt && !code) { msg("Enter the hospital code, or sign in with your email."); return; }
         st._lastCode = code; msg("Checking.", "note");
         fetch(API + (isEmail ? "/auth/email" : "/auth/pin"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(isEmail ? { email: id, password: pw } : { clinicCode: code, identity: id, pin: pw }) })
           .then(function (r) { return r.json(); }).then(function (r) {
