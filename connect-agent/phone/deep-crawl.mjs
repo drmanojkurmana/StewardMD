@@ -733,8 +733,26 @@ async function evalJson(client, expression, fallback) {
  * Attaches the same-origin endpoints the click triggered (Android drainRequests; redacted). Null when the
  * click revealed nothing. Also used for the guided step (index.mjs) after the doctor taps Done.
  */
+/* A PAGE URL IS STRUCTURE ONLY ONCE ITS VALUES ARE GONE. GHIS opens a patient's labs at
+ * /LabResults/Home?recordNo=<MRN>; stored as is, the adapter would carry a hospital number (seen in a
+ * live adapter, 2026-09-13). Every query value that looks like an identifier becomes the {id}
+ * placeholder the runtime fills with the patient it is reading. */
+export function redactPageUrl(u) {
+  if (!u) return u;
+  try {
+    const x = new URL(u);
+    const keys = [...x.searchParams.keys()];
+    for (const k of keys) {
+      const v = x.searchParams.get(k) || '';
+      if (/\d{3,}/.test(v) || /^[A-Za-z]{1,6}\d{2,}[A-Za-z0-9-]*$/.test(v)) x.searchParams.set(k, '{id}');
+    }
+    x.hash = '';
+    return x.toString().replace(/%7Bid%7D/g, '{id}');
+  } catch { return String(u).replace(/=([A-Za-z]{0,6}\d{3,}[A-Za-z0-9-]*)/g, '={id}'); }
+}
+
 export async function captureView({ client, resourceHint, blockOnly = false }) {
-  const url = (await client.currentUrl().catch(() => ({})))?.url || null;
+  const url = redactPageUrl((await client.currentUrl().catch(() => ({})))?.url || null);
   const raw = blockOnly ? null : await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
   let view = raw ? buildTableView(raw, resourceHint, url) : null;
   const block = await evalJson(client, `(${RAW_BLOCK_SRC})()`, null);
@@ -844,7 +862,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // 1. worklist (the client is already attached to it). No observer armed: global best table.
   progress('worklist', 0);
   const worklistRaw = await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
-  record(buildTableView(worklistRaw, 'worklist', await currentUrl()));
+  record(buildTableView(worklistRaw, 'worklist', redactPageUrl(await currentUrl())));
   await evalJson(client, `(${RAW_BLOCK_SRC})()`, null); // clears any stale observer state
 
   // Open the first patient row. Legacy worklists (e.g. GHIS DataTables) populate their rows by an AJAX

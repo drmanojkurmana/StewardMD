@@ -228,20 +228,70 @@ export async function readWorklist({ plugin, origin, replay, settleMs }) {
 // of [{header: text}] rows. Path placeholders ({id}, {mrn}, :id, #) are filled with the patient id.
 export const DETAIL_RESOURCES = Object.freeze(['medications', 'labs', 'radiology', 'history', 'discharge', 'patient']);
 
-export function fillPath(path, patient) {
-  const id = encodeURIComponent(patient.patientId || '');
-  return String(path || '').replace(/\{[^}]*\}|:[a-z_]+id\b|#+/gi, id);
+export function fillPath(path, patient, which = 'patientId') {
+  const id = encodeURIComponent((which === 'episodeId' ? patient.episodeId : patient.patientId) || patient.patientId || '');
+  return String(path || '')
+    .replace(/\{[^}]*\}|%7B[^%]*%7D|:[a-z_]+id\b|#+/gi, id)
+    // an identifier value an older capture left in a query (recordNo=MR25168764) is the patient's slot
+    .replace(/=([A-Za-z]{0,6}\d{3,}[A-Za-z0-9-]*)(?=&|$)/g, '=' + id);
 }
 
-export async function readPatientDetails({ plugin, origin, replay, patient, settleMs }) {
+/* THE SAME CALLS THE HOSPITAL'S OWN PAGES MAKE, replayed inside the doctor's browser session (same
+ * cookies, nothing leaves the phone). Discovery recorded each view's same-origin requests with their
+ * query keys and no values: "/Doctor/Home/GetMedicines/?id". A key with no value is the patient's
+ * slot. Only GET, only keyed, only paths that look like data (not the page shell or a session ping). */
+const NOISE_ENDPOINT = /checksession|payment|login|logout|keepalive|heartbeat|\/home\/?$/i;
+export function endpointCandidates(view, patient) {
+  const out = [];
+  for (const e of Array.isArray(view && view.endpoints) ? view.endpoints : []) {
+    if (!e || e.method !== 'GET' || typeof e.path !== 'string') continue;
+    const m = /^([^?]*)\?([A-Za-z_][\w-]*)(=[^&]*)?$/.exec(e.path);
+    if (!m || NOISE_ENDPOINT.test(m[1])) continue;
+    const key = m[2];
+    const ids = /visit|episode|encounter|admission/i.test(key) ? ['episodeId', 'patientId'] : ['patientId', 'episodeId'];
+    for (const which of ids) {
+      const val = (patient && patient[which]) || '';
+      if (!val) continue;
+      const url = m[1] + '?' + key + '=' + encodeURIComponent(val);
+      if (!out.includes(url)) out.push(url);
+    }
+  }
+  return out;
+}
+
+/* A recorded selector names a panel inside the full page ("#accordionEx table ... tr"); the data call
+ * answers with the fragment alone, where that container is missing. Fall back to any table's rows,
+ * or the block's own root, before concluding there is nothing. */
+function fallbackView(view) {
+  if (view.block) return Object.assign({}, view, { rowsSelector: view.rowsSelector.replace(/^#[\w-]+\s+/, '') });
+  return Object.assign({}, view, { rowsSelector: 'table tbody tr', headers: [] });
+}
+
+export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000 }) {
   const views = viewsByResource(replay);
   const sections = [];
   for (const r of DETAIL_RESOURCES) {
     const v = views[r];
     if (!v) continue;
-    const view = Object.assign({}, v, { pathTemplate: fillPath(v.pathTemplate || v.path, patient) });
+    /* Where to look, in order: the view's own page with the patient filled in (a labs page by
+     * recordNo), then the data calls that page made (the medicines fragment by id). A page shared with
+     * the worklist (the single-page Doctor Home) is skipped: it never shows this patient's panel on
+     * its own. Each place is read with the recorded selector, then with the fallback. */
+    const own = fillPath(v.pathTemplate || v.path, patient);
+    const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
+    const places = [];
+    if (!shared) places.push(own);
+    for (const c of endpointCandidates(v, patient)) places.push(c);
     let rows = [];
-    try { rows = await readView({ plugin, origin, view, settleMs }); } catch (e) { sections.push({ resource: r, error: e.message }); continue; }
+    let lastErr = null;
+    for (const place of places) {
+      for (const candidate of [Object.assign({}, v, { pathTemplate: place }), Object.assign(fallbackView(v), { pathTemplate: place })]) {
+        try { rows = await readView({ plugin, origin, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
+        if (rows.length) break;
+      }
+      if (rows.length) break;
+    }
+    if (!rows.length && lastErr) { sections.push({ resource: r, error: lastErr.message }); continue; }
     sections.push({ resource: r, rows });
   }
   return sections;
