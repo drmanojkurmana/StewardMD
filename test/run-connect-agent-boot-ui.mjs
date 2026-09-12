@@ -160,6 +160,16 @@ try {
   }
   ok(bootReady, "with the flag unset (default ON) the boot module publishes its opener");
 
+  // The two places a doctor actually looks: the home tile grid and the lean sidebar menu.
+  let tileShown = false;
+  for (let i = 0; i < 20; i++) { await sleep(250); if (await ev(`return !!document.querySelector('.rnav-tile[data-act="agentconnect"]');`) === true) { tileShown = true; break; } }
+  ok(tileShown, "the home tile grid shows a Connect Hospital tile by default");
+  await ev(`try { if (window.SB && SB.open) SB.open(); } catch (e) {} return 1;`);
+  let sbRow = false; // the lean sidebar rebuilds #sbMenu 60ms after SB.open
+  for (let i = 0; i < 20; i++) { await sleep(150); if (await ev(`return !!document.querySelector('[data-sbr-act="agentconnect"]');`) === true) { sbRow = true; break; } }
+  ok(sbRow, "the lean sidebar menu offers a Connect Hospital row");
+  await ev(`try { if (window.SB && SB.close) SB.close(); } catch (e) {} return 1;`);
+
   // Open the More sheet ONCE - clicking it again toggles it shut, so polling must not re-click.
   await ev(`
     var more = [].slice.call(document.querySelectorAll("button,a,[role=button]")).filter(function (b) {
