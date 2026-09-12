@@ -27,7 +27,7 @@ P0 actually costs.
 | P0.1 | Reachability gate | `scripts/wardsynq-reachability.mjs` — four checks: orphaned handlers, fail-closed capability guard, screens, tests | yes | n/a | yes | **DONE.** Orphan handlers locked at 0; capability-guard check verified by breaking it | Work the 65-route backlog |
 | P0.2 | Patient timeline | Full story + author + note text + type/date filters + expand/collapse + **search** + **drill-down to the record with every version** (`record-detail.js`) | yes | yes (governed read scope applies) | yes, 38 tests | Remaining: unread/unacknowledged state; referrals and documents cannot appear until they exist | **Mostly done.** Acknowledgement state lands with the safety inbox |
 | P0.3 | Doctor workspace | `workspaceView` — allergies, outstanding criticals, current medicines, problems, score, results, pending tests, notes, contacts, deceased banner | yes | yes (pure projection, no new route) | yes, 10 tests | **DONE.** Adds no endpoint and no second source of truth | — |
-| P0.4 | Clinical safety centre | Partial: `critical-results.js` + `critsboard`, `labboard`, `radboard`, `rx-safety.js` | boards yes | yes | yes | No single cross-cutting, role-tailored inbox; no unified acknowledge/resolve state across alert kinds | **Build an inbox that projects existing alert sources** |
+| P0.4 | Clinical safety centre | `safety-inbox.js` — ward-wide, role-tailored, reusing `chart-completion.js`'s detectors and critical-results; acknowledge from the row | yes | yes (grant applies; role filter only narrows) | yes, 25 tests | **DONE.** Incompleteness is loud: named failures, scan cap, never reads as all-clear | — |
 | P0.5 | Medication safety | Strong: `rx-safety.js`, `maik-cds.js`, `formulary.js`, advisories, dose ceiling, interaction rules, override capture (`SafetyOverride`, `SafetyFiring`) | yes | yes, server-side | yes | Renal/hepatic/weight-based checks not confirmed present; overrides captured but not surfaced as a review queue | **Verify each check individually, then close only real gaps** |
 | P0.6 | Terminology | `terminology.js` with `$validate-code`, `askServer`, `txCache`, wired into FHIR inbound + `$validate-code` route | yes (machine) | yes | yes | No `$expand`; no autocomplete for clinicians beyond the ICD search; **no licensed content** | **Content is a licensing task, not code.** Add `$expand` + a clean interface |
 | P0.7 | Identity / master data | `patient-identity.js` (deceased + RelatedPerson) + Contacts screen; `identity-merge.js`, `PatientLink`, `mpi-view.js` | contacts/deceased **yes**; merge/MPI still unreachable | yes, incl. negative-auth route tests | yes, 36 tests | **Partly done.** Still missing: fuzzy/phonetic search, duplicate detection, identifier history; merge/MPI need a screen | Fuzzy search next; then wire merge |
@@ -119,3 +119,35 @@ for a screen, 36 waiting for a test.
 
 **Next:** the unified safety inbox (P0.4), which also supplies the acknowledgement state P0.2 still
 needs; then the 65-route backlog; then the payment framework.
+
+
+## 2026-09-13 (later still) — P0.4, backlog started, and a checker correction
+
+**P0.4 (safety inbox): DONE.** Ward-wide and role-tailored, reusing `chart-completion.js`'s
+detectors rather than reimplementing them. Its most important behaviour is about incompleteness: a
+patient whose chart could not be read is NAMED, a ward past the scan cap says so, the warning
+renders above the list, and an empty-but-incomplete list is forbidden by test from saying "nothing
+outstanding". Role filtering is an ordering, never a permission.
+
+**Backlog started.** Two complete-but-unreachable modules now have real workflows:
+- **Shift handover** (3 routes) — the incoming shift's list, SBAR handover, and taking one.
+- **Medicines reconciliation** (3 routes) — history as the patient says it, decision per medicine,
+  completeness computed and never a tick.
+
+**A CORRECTION THAT MADE THE NUMBER WORSE.** Wiring medicines reconciliation dropped four routes off
+the backlog when only three had been wired. The fourth, `/ward/discharge`, came off because the
+checker accepted any quoted word anywhere in a screen file as proof a route was called — and the new
+screen contains `"discharge"` as a stage value. That is a false green, the one failure a checker
+must not have.
+
+Fixed two ways: bare strings now count only within sight of an actual API call, and route lookup
+tables (`{ pay: "invoice-payment", … }` used as a path tail) are followed properly, because dropping
+bare strings entirely would have produced false reds instead. **Thirteen routes were falsely green**
+— assess, clinic, delete, disable, hl7, hospital, order, orders, pay, reset, restore and two others
+— each checked by hand for a caller; none has one.
+
+**Honest numbers now:** 5911 tests passing, 0 failing. 305 routes — 213 reachable, 20 machine-only,
+**72 waiting for a screen** (not the 62 previously reported), 36 waiting for a test.
+
+**Next:** more of the backlog (wound care, risk assessment, order sets, break-glass, patient
+identity/MPI), then the provider-agnostic payment framework.
