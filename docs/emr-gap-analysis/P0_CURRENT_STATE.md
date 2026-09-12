@@ -242,3 +242,13 @@ typed; rejected rows named with the reason.
 
 **Numbers:** 5992 passing, 0 failing. 40 routes waiting for a screen.
 **Next:** billing extras (charges, invoice-void, upcoding, tariff), maternity-status, follow-up, discharge, oncology/cardiology links.
+
+
+## 2026-09-14 (cont.) — billing (backlog 40 -> 37)
+
+**Bug:** a failed bill load read as "No invoices for this patient yet" - a cashier could send a patient
+home believing nothing was owed. Fixed and tested. Added: unbilled charges (unpriced shown as a gap),
+cancel a bill, claims whose coding changed after a payer refusal.
+
+**Numbers:** 5997 passing, 0 failing. 37 routes waiting for a screen.
+**Next:** tariff (price list, admin), maternity-status, follow-up, discharge, oncology/cardiology links.
