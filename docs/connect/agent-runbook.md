@@ -60,7 +60,8 @@ All new flags default to OFF (fail closed).
 - `smd_connect_agent`: Client-side UI launcher gate in `connect-agent-boot.js` (default: OFF). Set via `localStorage.setItem("smd_connect_agent", "1")` or URL parameter `?connect_agent=1`.
 
 ### Cryptographic Keys
-- `CONNECT_CONSENT_SIGNING_KEY`: Mandatory environment variable for `connect-agent/consent.mjs`.
+- `CONNECT_AGENT_TOKEN_KEY`: Mandatory. Signs viewer tokens (`functions/_connect/agent/viewer-token.js`); missing = POST /sessions answers 400 not-configured. Set 2026-09-12.
+- `CONNECT_CONSENT_SIGNING_KEY`: Mandatory environment variable for `connect-agent/consent.mjs`. Set in production 2026-09-12.
   - Used to generate and verify HMAC-SHA256 signatures on consent receipts.
   - Fails closed: If the key is missing or signature verification fails, `assertConsent()` throws an error and discovery aborts. There is no unkeyed fallback.
 
