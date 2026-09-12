@@ -288,7 +288,8 @@
         if (!window.SMD_CONNECT || !SMD_CONNECT.tenants) return;
         SMD_CONNECT.tenants().then(function (ts) {
           box = document.getElementById('ghisConnectHosp');
-          if (!box || !ts || !ts.length) return;
+          ts = (ts || []).filter(function (t) { return !(window.__smdAdapterTenants || {})[t.tenantId]; });
+          if (!box || !ts.length) { if (box) box.innerHTML = ''; return; }
           var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
           box.innerHTML = '<div class="ghis-setup-sub" style="margin:12px 0 4px">Your connected hospitals · tap to load today\'s ward list</div>' +
             ts.map(function (t) { return '<button class="ghis-connect-btn" style="margin-top:6px" data-conn-tid="' + esc(t.tenantId) + '" data-conn-name="' + esc(t.name || t.tenantId) + '">' + wIco('hospital') + ' ' + esc(t.name || t.tenantId) + '</button>'; }).join('');
@@ -355,6 +356,12 @@
         }).then(function (items) {
           box = document.getElementById('ghisAdapterHosp'); if (!box) return;
           _adapterConns = {};
+          /* A tenant with an approved adapter is served by it. The older "Your connected hospitals"
+           * list (FHIR feeds) offered the SAME hospital a second time under a near-identical name, and
+           * the owner tapped that one and read "No FHIR connection on this hospital yet" as the adapter
+           * failing (2026-09-12). One hospital, one button. */
+          window.__smdAdapterTenants = {};
+          items.forEach(function (it) { window.__smdAdapterTenants[it.tid] = true; });
           box.innerHTML = items.map(function (it) {
             _adapterConns[it.conn.deploymentId] = it;
             return '<button class="ghis-connect-btn" data-adapter-dep="' + esc(it.conn.deploymentId) + '">' + wIco('hospital') + ' ' + esc(it.name) + '</button>' +
@@ -363,6 +370,7 @@
           [].slice.call(box.querySelectorAll('[data-adapter-dep]')).forEach(function (b) {
             b.onclick = function () { window.ghisOpenAdapterHospital(b.getAttribute('data-adapter-dep')); };
           });
+          ghisRenderConnectHospitals();   // redraw the older list without the hospitals now served by an adapter
         }).catch(function () {});
       }
       function adapterFail(msg) {
@@ -400,6 +408,25 @@
             plugin.open({ url: origin, origins: ctx.origins, storeId: conn.deploymentId, title: host, initScript: '' })
               .catch(function (e) { off(); reject(new Error('Could not open ' + host + ' in the in-app browser: ' + (e && e.message || e))); });
           });
+        }).then(function () {
+          /* LET THE SIGN-IN LAND BEFORE READING. The plugin reports loggedIn the moment the password
+           * field disappears, which on GHIS is mid-redirect: the login host has accepted the password
+           * but the EMR host has not yet been handed the session. Reading then gets an empty, signed-out
+           * worklist that looks like a hospital with no patients (owner, 2026-09-12). Wait until the
+           * browser sits on a page without a password field, for up to fifteen seconds. */
+          var until = Date.now() + 15000;
+          function settled() {
+            return plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':'ok'})()" })
+              .then(function (r) { return !(r && String(r.result).indexOf('login') >= 0); }, function () { return false; });
+          }
+          function waitSignedIn() {
+            return settled().then(function (ok) {
+              if (ok) return new Promise(function (res) { setTimeout(res, 1500); });   // one more beat for the landing page
+              if (Date.now() > until) return;
+              return new Promise(function (res) { setTimeout(res, 800); }).then(waitSignedIn);
+            });
+          }
+          return waitSignedIn();
         }).then(function () {
           if (el) el.innerHTML = '<div class="ghis-loading">Reading ' + esc(host) + ' for your ward list...</div>';
           try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins }); } catch (e) {}
