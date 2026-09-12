@@ -1110,6 +1110,11 @@
         // The summary is reachable from the patient, not from a menu somewhere else. A planned
         // discharge is prepared while the patient is still on the ward, so this is not gated on the
         // stay being closed - the summary screen states plainly when a stay is still open.
+        /* The whole visit in one screen and one save. It sits first because it is the commonest
+         * thing a doctor at the bedside is actually here to do, and because doing it here is safer
+         * than doing the same five things through five separate buttons: one save means one honest
+         * answer about what reached the chart. The individual buttons all still work. */
+        '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
         // patient does before anything else, and it is where the note box now lives.
@@ -3047,6 +3052,91 @@
    * of flattening: an object becomes its own bulleted key: value list, an array becomes a bulleted
    * list of its items, recursively - still nothing bespoke to any one report, just readable at any
    * depth. */
+  /* THE CONSULTATION: ONE SCREEN, ONE SAVE.
+   *
+   * Everything below can already be written one piece at a time from the chart, and those buttons
+   * are staying - a nurse recording a set of observations should not have to open a consultation.
+   * What this screen adds is the act as the clinician actually performs it: examine, diagnose,
+   * prescribe, order, write it up, once, and press save once.
+   *
+   * The reason it is worth a screen of its own is what the old way did on failure. Five buttons
+   * meant five separate saves, each reporting into the same single error line, and whichever reply
+   * landed last won - so a refused prescription could be painted over by a successful note and the
+   * doctor would walk away believing the drug was ordered. Here the server takes all five together,
+   * checks the whole lot against what this person may write BEFORE it writes any of it, and if it
+   * cannot finish it says exactly which pieces reached the chart and which were never attempted.
+   * This screen shows that answer literally rather than reducing it to "saved" or "failed". */
+  function consultationResultView(r) {
+    if (!r) return "";
+    if (r.ok) return '<div class="w-sub"><h4>Saved</h4><p>' + esc(r.written) + " item" + (r.written === 1 ? "" : "s") + " written to the chart.</p></div>";
+    if (r.refused && r.refused.length) {
+      return '<div class="w-sub"><h4>Not saved - and nothing was written</h4>' +
+        "<p>This role may not write every part of this consultation, so none of it was saved. The chart is unchanged.</p><ul class=\"w-mini\">" +
+        r.refused.map(function (x) { return "<li>" + esc(x.detail) + "</li>"; }).join("") +
+        "</ul>" + (r.allowed && r.allowed.length ? "<p>You could save just: " + esc(r.allowed.join(", ")) + ".</p>" : "") + "</div>";
+    }
+    if (r.partial) {
+      return '<div class="w-sub"><h4>Saved in part - read this before trying again</h4>' +
+        "<p>" + esc(r.detail) + "</p>" +
+        "<p><b>On the chart now:</b> " + esc((r.savedPieces || []).join(", ") || "nothing") + "</p>" +
+        "<p><b>Stopped at:</b> " + esc(r.failedAt) + "</p>" +
+        "<p><b>Never attempted:</b> " + esc((r.notAttempted || []).join(", ") || "nothing") + "</p>" +
+        "<ul class=\"w-mini\">" + (r.results || []).filter(function (x) { return !x.ok; })
+          .map(function (x) { return "<li>" + esc(x.piece) + ": " + esc(x.detail || x.error) + "</li>"; }).join("") + "</ul></div>";
+    }
+    return "";
+  }
+
+  function consultationView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var vf = VITALS.map(function (v) {
+      var unit = v.u !== null ? v.u : v.k === "weight" ? weightUnitLabel() : tempUnitLabel();
+      return '<label class="w-f"><span>' + esc(v.l) + " <i>" + esc(unit) + "</i></span>" +
+        '<input id="wc_' + v.k + '" type="text" inputmode="decimal" autocomplete="off"></label>';
+    }).join("");
+    var tpls = (state.templates || []).map(function (t) {
+      return '<option value="' + esc(t.id) + '">' + esc(t.name || t.id) + "</option>";
+    }).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Consultation</h3></div>" +
+      '<p class="w-hint">' + ms("info") + "Fill in only what you did. Empty sections are not saved. Everything here is saved together, in one go." + "</p>" +
+
+      '<div class="w-sub"><h4>Observations</h4><div class="w-grid">' + vf + "</div>" +
+      '<div class="w-fluid"><label class="w-f"><span>Supplemental oxygen</span>' +
+      '<select id="wc_o2"><option value="">Not recorded</option><option value="0">Breathing air</option><option value="1">On oxygen</option></select></label>' +
+      '<label class="w-f"><span>Consciousness <i>ACVPU</i></span><select id="wc_acvpu">' +
+      ACVPU.map(function (a) { return '<option value="' + esc(a[0]) + '">' + esc(a[1]) + "</option>"; }).join("") + "</select></label></div></div>" +
+
+      '<div class="w-sub"><h4>Diagnosis</h4>' +
+      '<input id="wcProbText" placeholder="The problem, in words">' +
+      '<input id="wcProbCode" placeholder="Code (optional)">' +
+      '<select id="wcProbVs"><option value="">How sure are you?</option><option value="provisional">Provisional</option><option value="differential">Differential</option><option value="confirmed">Confirmed</option></select></div>' +
+
+      '<div class="w-sub"><h4>Prescription</h4>' +
+      '<input id="wcMoDrug" placeholder="Drug">' +
+      '<div class="w-grid"><label class="w-f"><span>Dose</span><input id="wcMoValue" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wcMoUnit"></label></div>' +
+      '<input id="wcMoRoute" placeholder="Route (optional)">' +
+      '<input id="wcMoFreq" placeholder="How often (optional)">' +
+      '<p class="w-hint">Drug, dose and unit go together. Any one of them on its own is not enough to prescribe.</p></div>' +
+
+      '<div class="w-sub"><h4>Test to order</h4>' +
+      '<input id="wcInvCode" placeholder="Name of the test">' +
+      '<input id="wcInvReason" placeholder="Why (optional)">' +
+      '<select id="wcInvPri"><option value="">Routine</option><option value="urgent">Urgent</option><option value="stat">Immediately</option></select></div>' +
+
+      '<div class="w-sub"><h4>Note</h4>' +
+      '<select id="wcNoteTpl"><option value="">Choose a template…</option>' + tpls + "</select>" +
+      '<textarea id="wcNoteText" rows="4" placeholder="What you found and what you decided"></textarea>' +
+      '<p class="w-hint">A note needs a template chosen before it can be written.</p></div>' +
+
+      consultationResultView(state.consultationResult) +
+      '<button class="w-btn" data-w-act="consultationsave">' + ms("save") + "Save the whole consultation</button>" +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -3317,6 +3407,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
@@ -4764,6 +4855,93 @@
   /* Searching the terminology. The words the clinician typed are the query and nothing else - no
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
+  function consultationOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.consultationResult = null;
+    st.view = "consultation";
+    paint();
+    // The note section cannot offer a template it has not been told about.
+    if (!st.templates) loadTemplates();
+  }
+
+  /* Collects whatever the clinician actually filled in and sends it as ONE consultation. Sections
+   * left blank are not sent at all, so an empty box never becomes an empty record. Nothing here is
+   * validated beyond "is this section filled in enough to mean anything" - every real rule, from
+   * the formulary to the dose ceiling to who may prescribe at all, is the server's, and its refusal
+   * is shown as it came back. */
+  function saveWholeConsultation() {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId };
+
+    var v = {}, anyVital = false;
+    VITALS.forEach(function (f) { var x = val("wc_" + f.k); if (x) { v[f.k] = x; anyVital = true; } });
+    // The units the boxes were LABELLED with travel with the values, exactly as the vitals card does.
+    if (v.temp) v.tempUnit = st.region === "US" ? "F" : "C";
+    if (v.weight) v.weightUnit = st.region === "US" ? "lb" : "kg";
+    var o2 = val("wc_o2"); if (o2 !== "") { v.o2 = o2; anyVital = true; }
+    var ac = val("wc_acvpu"); if (ac) { v.acvpu = ac; anyVital = true; }
+    if (anyVital) body.vitals = [v];
+
+    var probText = val("wcProbText"), probCode = val("wcProbCode");
+    if (probText || probCode) {
+      body.problems = [{ patientId: s.patientId, encounterId: s.encounterId, display: probText, code: probCode,
+        verificationStatus: val("wcProbVs") || undefined }];
+    }
+
+    var drug = val("wcMoDrug"), dv = val("wcMoValue"), du = val("wcMoUnit");
+    if (drug || dv || du) {
+      /* Refused HERE rather than sent, because a half-written prescription is the one section where
+       * sending what was typed and letting the server sort it out is the wrong answer: the whole
+       * consultation would be refused for a typo, after the doctor had filled in everything else. */
+      if (!drug || !dv || !du) { st.err = "A prescription needs the drug, the dose and the unit. Fill all three, or clear them."; paint(); return; }
+      body.medications = [{ patientId: s.patientId, encounterId: s.encounterId, drug: drug,
+        dose: { value: dv, unit: du }, route: val("wcMoRoute") || undefined, frequency: val("wcMoFreq") || undefined }];
+    }
+
+    var inv = val("wcInvCode");
+    if (inv) body.investigations = [{ display: inv, code: inv, priority: val("wcInvPri") || undefined, reason: val("wcInvReason") || undefined }];
+
+    var tpl = val("wcNoteTpl"), noteText = val("wcNoteText");
+    if (tpl || noteText) {
+      if (!tpl) { st.err = "Choose a template for the note, or clear the note."; paint(); return; }
+      body.note = { templateId: tpl, sections: { narrative: noteText } };
+    }
+
+    if (!body.vitals && !body.problems && !body.medications && !body.investigations && !body.note) {
+      st.err = "Nothing was filled in."; paint(); return;
+    }
+
+    st.busy = true; st.consultationResult = null; paint();
+    apiPost("/ward/consultation", body)
+      .then(function (r) {
+        st.busy = false;
+        /* The server's own per-piece answer is kept and rendered in full. This deliberately does NOT
+         * go through settle(): settle reduces a reply to one success line or one error line, which
+         * is precisely the flattening that let a refused prescription hide behind a saved note. */
+        st.consultationResult = r || null;
+        if (r && r.ok) {
+          st.err = "";
+          clearConsultationFields();
+          // What was just written has to be re-read, or the chart under this screen still shows the
+          // ward as it was before the consultation happened.
+          loadChart(); loadFlowsheet(); loadNews2(); loadRound();
+        } else if (!r) {
+          st.err = "Could not save the consultation.";
+        } else {
+          st.err = "";
+        }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not save the consultation."; paint(); });
+  }
+
+  function clearConsultationFields() {
+    VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) el.value = ""; });
+    ["wc_o2", "wc_acvpu", "wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
+      "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText"]
+      .forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+  }
+
   function loadTemplates() {
     return apiGet("/ward/templates?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.templates = r.templates || []; paint(); })
@@ -5407,6 +5585,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "consultation") { st.consultationResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
@@ -5635,6 +5814,8 @@
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
     if (cmd === "incidents") { incidentsOpen(); return; }
+    if (cmd === "consultation") { consultationOpen(); return; }
+    if (cmd === "consultationsave") { saveWholeConsultation(); return; }
     if (cmd === "incidentreport") { reportIncidentAction(); return; }
     if (cmd === "incidenttriage") { incidentTriage(arg); return; }
     if (cmd === "incidentrca") { incidentRca(arg); return; }
@@ -5733,6 +5914,7 @@
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
     st.incidentLog = null; st.incidentHealth = null;
+    st.consultationResult = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

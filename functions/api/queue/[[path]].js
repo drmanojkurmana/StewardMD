@@ -140,6 +140,17 @@ import { bookResource, setBookingState, resourceSchedule } from "../../_wardsynq
 import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blackout.js";
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
+import { saveConsultation } from "../../_wardsynq/consultation.js";
+
+/* One consultation arrives with ONE idempotency key from the screen, but fans out into several
+ * writes. Handing the same key to each would make the second piece look like a repeat of the first
+ * and be silently dropped, which is how a resend quietly loses a prescription. Each piece gets its
+ * own derived key instead, stable across retries of the same consultation. No key in, no key out:
+ * a caller who sent none is not given replay protection it never asked for. */
+function idemFor(key, piece, index) {
+  const k = typeof key === "string" ? key.trim() : "";
+  return k ? k + ":" + piece + ":" + index : null;
+}
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
@@ -582,6 +593,15 @@ export async function onRequest(context) {
 
       const capFor = {
         admit: CAPS.QUEUE_ADD, list: CAPS.QUEUE_VIEW, vitals: CAPS.EMR_VITALS,
+        /* The whole-consultation save. The route bar is deliberately the LOWEST capability that
+         * means "this person has clinical business writing to a chart", the same reading break-glass
+         * uses, because the composite endpoint carries whatever mix of pieces the caller is entitled
+         * to - a nurse sending vitals alone must not be turned away at the door by a bar set for the
+         * prescription she was never going to send. The real authority is per piece and lives in
+         * _wardsynq/consultation.js, which resolves the actor once and refuses the entire save if
+         * any single piece is outside their grant. A tighter bar here would be a false comfort: it
+         * would narrow who may call, and change nothing about what anyone may write. */
+        consultation: CAPS.EMR_VITALS,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
@@ -1055,6 +1075,36 @@ export async function onRequest(context) {
 
       if (sub === "admit" && method === "POST") {
         const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ONE CONSULTATION, ONE CALL. The writers are handed in rather than imported by
+       * consultation.js, so every piece goes through the exact function its own route has always
+       * called - same validation, same governance, same audit, same org config (the formulary and
+       * the advisories below are ORG content and must not become caller-supplied just because the
+       * call arrived bundled). consultation.js decides order, does the up-front permission check
+       * across all pieces, and reports honestly when a save lands in part. */
+      if (sub === "consultation" && method === "POST") {
+        const cWriters = {
+          vitals: (rq, ev, c) => recordWardVitals(rq, ev, { ...c, encounterId: c.encounterId, patientId: body.patientId, vitals: c.item,
+            recordedAt: (c.item && c.item.recordedAt) || body.recordedAt,
+            tempUnit: unitsFor(wOrg && wOrg.region).temp, weightUnit: unitsFor(wOrg && wOrg.region).weight,
+            idempotencyKey: idemFor(body.idempotencyKey, "vitals", c.index) }),
+          problems: (rq, ev, c) => recordProblem(rq, ev, { ...c, problem: c.item, idempotencyKey: idemFor(body.idempotencyKey, "problem", c.index) }),
+          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, safety: (c.item && c.item.safety) || null,
+            formulary: (wsqCfg && wsqCfg.formulary) || null,
+            advisories: (wsqCfg && wsqCfg.advisories) || null,
+            ageYears: body.ageYears,
+            requireReasonOffFormulary: !!(wsqCfg && wsqCfg.requireReasonOffFormulary),
+            idempotencyKey: idemFor(body.idempotencyKey, "med", c.index) }),
+          investigations: (rq, ev, c) => orderInvestigation(rq, ev, { ...c,
+            code: c.item && c.item.code, display: c.item && c.item.display, codeSystem: c.item && c.item.codeSystem,
+            category: c.item && c.item.category, priority: c.item && c.item.priority, reason: c.item && c.item.reason,
+            idempotencyKey: idemFor(body.idempotencyKey, "inv", c.index) }),
+          note: (rq, ev, c) => writeTemplatedNote(rq, ev, { ...c, templates: (wsqCfg && wsqCfg.noteTemplates) || [],
+            templateId: c.item && c.item.templateId, sections: c.item && c.item.sections, at: c.item && c.item.at,
+            idempotencyKey: idemFor(body.idempotencyKey, "note", c.index), noteWriterOverride }),
+        };
+        const r = await saveConsultation(request, env, { ...deps, body, encounterId: body.encounterId, writers: cWriters });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "list" && method === "GET") {
