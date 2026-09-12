@@ -1,44 +1,87 @@
 # OpenMRS + Bahmni architecture audit
 
-A deep source-level verification pass (cloning openmrs-core, the REST/FHIR2 modules, bahmnicore,
-bahmni-config-example, and the IPD/lab/pharmacy modules) was launched as two parallel research agents
-alongside this document. **The Bahmni section below is now fully corrected against verified source**
-(87 tool calls, 160 repos enumerated via the GitHub API, 14 repos cloned and read) — every claim
-carries a file path. The OpenMRS section still reflects architecture-level knowledge pending that
-agent's own completion; it will be corrected the same way when it lands.
+Both halves of this audit are now fully verified against actual cloned source — OpenMRS: 69 tool
+calls across `openmrs-core`, the REST module, FHIR2, emrapi, reporting, appointment scheduling,
+dispensing, stock management, bed management, and billing modules; Bahmni: 87 tool calls, 160 repos
+enumerated via the GitHub API, 14 cloned and read. Every claim below carries a file path, table
+name, or class name from that reading, not a general reputation.
 
-## OpenMRS
+## OpenMRS — verified against source
 
-**What it is.** A 20+ year old, still-maintained (Java/Spring/Hibernate) open-source **electronic
-medical record platform**, not a full HMS. Its core strength and reason it still exists in 2025 is
-the **Concept Dictionary**: a genuinely rich, hierarchical, multi-vocabulary terminology model where
-every observation, diagnosis, and order references a `Concept`, and a Concept can carry mappings to
-LOINC, SNOMED CT, ICD-10, RxNorm, and others simultaneously. This is the single thing WardSynQ's own
-`terminology.js` explicitly admits it does not have ("this build carries no LOINC release and
-cannot validate a code").
+**What it is.** A live, actively-released (Java/Spring/Hibernate) open-source **electronic medical
+record platform**, not a full HMS — confirmed by its own schema: **117 core tables**, and not one of
+them is a bill, a bed, a stock item, an appointment, a radiology study, or a lab specimen. Three
+release lines are maintained in parallel (2.6/2.7/2.8, most recent tag 2.8.9) plus an active 3.0
+development line on `master` already targeting Java 21 / Jakarta EE / Spring 7 / Hibernate 7 — a
+real, in-progress framework migration worth timing your dependency around, not something already
+finished.
 
-**Domain model** (Patient/Person, Encounter/Obs, Visit, Order incl. DrugOrder/TestOrder, Provider,
-Location, User/Role/Privilege, PatientIdentifier, PersonAttribute, Relationship) is mature, has been
-battle-tested across thousands of low-resource-setting deployments, and is genuinely more complete
-on the "master data" side than WardSynQ (Relationship, deceased-patient handling, and fuzzy patient
-search are all real gaps WardSynQ has today — see the gap matrix).
+**The terminology dictionary — real machinery, confirmed EMPTY of actual content.** `Concept`,
+`ConceptMap`→`ConceptReferenceTerm`→`ConceptSource`, and `ConceptMapType` (SAME-AS/NARROWER-THAN/
+BROADER-THAN) are a genuinely well-designed, locale-aware, multi-vocabulary mapping *mechanism* —
+`ConceptSource.java`'s own doc-comment names ICD9, ICD10, SNOMED explicitly as the intended targets.
+**But the core seed data contains zero `concept_reference_source` rows and only 2 concept inserts.**
+OpenMRS core ships the shelving, not the books — a real ICD-10/SNOMED/LOINC dictionary is sourced
+separately (CIEL or OCL, via `openmrs-module-openconceptlab`), and populating and licensing it
+(SNOMED CT specifically requires a national member licence) is its own real workstream, not a
+config step. **This changes the reuse recommendation below**: the specific asset worth taking isn't
+"OpenMRS's terminology," it's "a terminology *service* populated with real vocabulary content" —
+OpenMRS's own machinery is one way to build that, not automatically the fastest one.
 
-**What OpenMRS core does NOT do**, by design: no billing, no bed/ward management, no nursing
-workflow, no radiology/RIS, no pharmacy dispensing or inventory. It is a records-and-terminology
-platform that other systems (Bahmni chief among them) build a hospital on top of.
+**Domain model, concretely.** Patient IS-A Person by inheritance (shared id, but two separate
+audit/void blocks — a known source of confusion). `PersonAttribute.value` is a raw, untyped
+`String` (an EAV escape hatch Person never got migrated off, unlike newer entities' typed
+`*Attribute`/`*AttributeType` + `CustomDatatype` pattern). `Encounter` **has no status field at
+all** — no draft/signed/amended lifecycle, no co-signature model anywhere in core; a hospital
+needing attested notes builds that layer itself (WardSynQ's own `note-cosign.js` already exists —
+a real point in WardSynQ's favor here). `Visit` is a bare time-boxed container with **no status, no
+disposition, no bed** — admission/discharge logic lives in the separate `emrapi` module
+(`AdtService`, `InpatientAdmission`), beds in a further separate `bedmanagement` module. `Order` is
+genuinely excellent: immutable and append-only (never edited, only revised via
+`action=REVISE`/`previousOrder` or discontinued via a new DISCONTINUE order), state derived on read
+(`Order.isActive(date)`), with real order-set/order-group nesting already in core.
 
-**API surface**: a mature REST module and a FHIR2 module (FHIR R4). The REST API is resource-based
-and reasonably complete for CRUD on the core domain, but was designed API-first for a UI that reads
-concepts and encounters, not as a headless backend for an arbitrary modern frontend — expect real
-integration friction (XML-heavy legacy config in places, a module system that assumes you're running
-inside the same JVM, not calling in over HTTP from a serverless edge function).
+**Pharmacy — your instinct partly refuted.** `MedicationDispense` **is now in core** (table
+`medication_dispense`, writable over REST and FHIR R4) — the dispense *record* is a real, modern,
+core-level resource. But **stock/batch/expiry/procurement is still not in core** — that's the
+separate `openmrs-module-stockmanagement` (21 tables), and it has **no foreign key at the database
+level** back to `medication_dispense`. So: prescribing→dispensing-the-fact is core-solved;
+inventory is still exactly the separate, bolt-on problem this audit already found in both Bahmni
+and WardSynQ.
 
-**Licensing**: MPL 2.0 / Apache-2.0 depending on module — generally commercial-friendly, unlike
-Bahmni's core pieces (see below).
+**API surface — one finding that matters a lot for a CPOE product.** Neither REST nor FHIR is in
+core (both are separately-versioned modules; core's own webapp has zero JSPs and one controller —
+it is genuinely headless by design, the same way you'd want to consume it). The REST module exposes
+~113 resources at `/ws/rest/v1/`, versioned by *source directory per platform release* rather than
+by URL — the path never changes, but the shape of what it returns can, silently, across an upgrade.
+Auth is HTTP Basic + session cookie only; no OAuth2/OIDC/JWT in a maintained state (the OAuth2
+module is stale since 2022). **FHIR R4 cannot write orders**: `MedicationRequestFhirResourceProvider`
+and `ServiceRequestFhirResourceProvider` both implement read/search only, no `@Create`/`@Update`/
+`@Delete` — a CPOE integration would have to go through the legacy REST module for its single most
+important write path, not FHIR. This is the sharpest, most concrete reason a "just call OpenMRS's
+FHIR API" integration plan needs a second look before committing to it.
 
-**Maintenance**: still actively released, with a real community (OpenMRS is used in dozens of
-countries' national health systems), but the stack itself (Java 8/11-era Spring, Hibernate, Maven
-multi-module) is dated relative to a 2025 serverless/edge architecture like WardSynQ's.
+**Permission model — verb-on-type only, confirmed at scale.** 186 named privilege constants, 213
+seeded privilege rows, enforced by Spring AOP (`AuthorizationAdvice`) across 704 `@Authorized`
+annotations on 20 service interfaces — real, broad coverage. But confirmed **no row-level, ward-
+level, or consent-scoped access control anywhere in core** — a doctor privileged to edit orders can
+edit any patient's orders in the whole hospital. WardSynQ's own two-layer capability+grant model,
+which scopes exactly this kind of thing down to a ward/department/patient level and was verified
+working correctly multiple times this session, is a genuine, confirmed advantage over OpenMRS here,
+not a gap to close by adopting OpenMRS's model.
+
+**Licensing**: core is **MPL-2.0**, confirmed from the license header on every source file — file-
+level copyleft, commercially comfortable, but with one important practical corollary the header
+itself pushes toward: don't patch core files directly (each one you modify must be published and
+maintained against upstream) — extend via modules and AOP advice instead, which is also just how
+the platform is designed to be used.
+
+**The realistic build/buy question, stated by the person who read the code**: "*can your team absorb
+the integration surface of eight-plus independently-versioned modules, an empty concept dictionary,
+and a REST contract that shifts under you on upgrade?*" If not, the honest alternative — and the one
+this audit already recommends — is to take the *shape* of OpenMRS's model (immutable order
+revisions, void-not-delete, concept-to-external-vocabulary mapping) as a design reference, and keep
+building WardSynQ's own tighter, fully-owned schema rather than adopting the federation.
 
 ## Bahmni — verified against source (full report: 87 tool calls, 14 repos cloned)
 
@@ -156,9 +199,12 @@ means for each architecture option.
 
 ## Bottom line going into the reuse decision
 
-- The thing OpenMRS has that is genuinely hard to rebuild well and genuinely missing from WardSynQ is
-  the **Concept Dictionary / terminology service**. That is the strongest, most specific candidate for
-  "reuse their juice" — and it's MPL-licensed, so it's safe to call as an external service.
+- What OpenMRS has that's genuinely hard to build well is the terminology-mapping *machinery*
+  (Concept ↔ external vocabulary, locale-aware, MPL-licensed, safe to call externally) — but it
+  ships with **zero actual ICD/SNOMED/LOINC content**. The real asset to acquire is a *populated*
+  terminology service; OpenMRS's own machinery is one legitimate way to build one (adopt it and feed
+  it CIEL/OCL content), not a shortcut that arrives pre-loaded. Weigh it against a dedicated,
+  purpose-built FHIR terminology server, which may be a lighter integration for the same end result.
 - Bahmni's genuinely valuable, safely-reusable asset is not code at all: it's the
   **`BahmniEncounterTransaction` composite-write pattern**, the **config-as-JSON idea** (MIT-licensed,
   free to copy outright), and the **appointment state machine**. All three are worth adopting as
