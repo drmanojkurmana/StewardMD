@@ -4175,6 +4175,55 @@
       result + "</div>";
   }
 
+  /* THE BED WAITING LIST. admission-request.js was complete and unreachable, so a doctor who decided
+   * a patient needed a bed had nowhere to say so except out loud - and a request made out loud is
+   * the one that is forgotten when the shift changes.
+   *
+   * THE LIST IS RANKED BY THE MODULE, NOT HERE: urgency first, then how long they have waited. How
+   * long is shown in hours on every row, because "waiting" says nothing about whether it has been
+   * twenty minutes or two days.
+   *
+   * A REQUEST IS CLOSED DELIBERATELY, NEVER AGED OUT. Admitted or cancelled, with a reason for a
+   * cancellation, because a patient who quietly drops off a bed list is a patient nobody admitted. */
+  var ADM_URGENCY = [["emergency", "Emergency"], ["urgent", "Urgent"], ["soon", "Soon"], ["elective", "Elective"]];
+  function admReqRow(r) {
+    var hot = r.urgency === "emergency" || r.urgency === "urgent";
+    return '<li class="w-mini-row' + (r.state === "waiting" && hot ? " w-ib-escalate" : r.state === "waiting" ? " w-ib-overdue" : "") + '"><div>' +
+      '<span class="w-st ' + (hot ? "escalate" : "due") + '">' + esc(r.urgency) + "</span> " +
+      "<b>" + esc(r.mrn || r.patientId) + "</b>" + (r.specialty ? " &middot; " + esc(r.specialty) : "") + (r.ward ? " &middot; for " + esc(r.ward) : "") +
+      "<div>" + esc(r.reason || "") + "</div>" +
+      '<div class="w-dt-times">asked by ' + esc(r.requestedBy) + " &middot; " + when(r.requestedAt) +
+      (r.state === "waiting" ? " &middot; waiting " + esc(r.waitingHours) + "h" : " &middot; " + esc(r.state) + (r.closeReason ? ": " + esc(r.closeReason) : "")) +
+      "</div></div>" +
+      '<div class="w-mini-row-act">' +
+      (r.state === "waiting"
+        ? '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~admitted">' + ms("bed") + "Admitted</button>" +
+          '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~cancelled">' + ms("close") + "Cancel</button>"
+        : "") +
+      "</div></li>";
+  }
+  function admReqView(state) {
+    var d = state.admReqs;
+    var rows = d && d.requests ? d.requests.map(admReqRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Waiting for a bed</h3>" +
+      '<button class="w-ic" data-w-act="admreqs" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Ask for a bed</h4>' +
+      '<input id="wArMrn" placeholder="Patient MRN">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>How soon</span><select id="wArUrg">' + ADM_URGENCY.map(function (u) { return '<option value="' + esc(u[0]) + '">' + esc(u[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Specialty</span><input id="wArSpec"></label>' +
+      '<label class="w-f"><span>Ward (optional)</span><input id="wArWard"></label>' +
+      "</div>" +
+      '<textarea id="wArReason" rows="2" placeholder="Why this patient needs to come in"></textarea>' +
+      '<button class="w-btn" data-w-act="admreqask">' + ms("send") + "Ask for a bed</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">Nobody is waiting for a bed.</p>') +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4447,6 +4496,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
         : state.view === "breakglass" ? breakGlassView(state)
         : state.view === "wounds" ? woundView(state)
@@ -6012,6 +6062,53 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function admReqOpen() {
+    st.view = "admreqs"; st.admReqs = null; paint(); loadAdmReqs();
+  }
+  function loadAdmReqs() {
+    st.busy = true; paint();
+    return apiGet("/ward/waiting-list?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.admReqs = r;
+        else { st.admReqs = null; st.err = "Could not load the bed waiting list. Do not read this as nobody waiting."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.admReqs = null; st.err = "Could not load the bed waiting list. Do not read this as nobody waiting."; paint(); });
+  }
+  function admReqAsk() {
+    var mrn = val("wArMrn"), reason = val("wArReason");
+    if (!mrn) { st.err = "Say which patient, by MRN."; paint(); return; }
+    if (!reason) { st.err = "Say why this patient needs to come in."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/request-admission", {
+      orgId: st.orgId, mrn: mrn, urgency: val("wArUrg"), specialty: val("wArSpec") || undefined,
+      ward: val("wArWard") || undefined, reason: reason,
+    })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "On the waiting list." : null)) {
+          ["wArMrn", "wArSpec", "wArWard", "wArReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadAdmReqs();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not ask for that bed."; paint(); });
+  }
+  function admReqClose(arg) {
+    var parts = String(arg || "").split("~");
+    var id = parts[0], state = parts[1];
+    if (!id || !state) return;
+    var reason = "";
+    if (state === "cancelled") {
+      try { reason = G.prompt("Why is this request being cancelled?") || ""; } catch (e) {}
+      /* A patient who drops off a bed list with no reason is a patient nobody admitted. */
+      if (!reason) { st.err = "A cancellation needs a reason."; paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/close-admission-request", { orgId: st.orgId, requestId: id, state: state, reason: reason || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Closed." : null)) loadAdmReqs(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not close that request."; paint(); });
+  }
+
   function orderSetsOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "ordersets"; st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; paint();
@@ -7164,6 +7261,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
@@ -7416,6 +7514,9 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "admreqs") { admReqOpen(); return; }
+    if (cmd === "admreqask") { admReqAsk(); return; }
+    if (cmd === "admreqclose") { admReqClose(arg); return; }
     if (cmd === "ordersets") { orderSetsOpen(); return; }
     if (cmd === "ordersetpick") { orderSetPick(); return; }
     if (cmd === "ordersetapply") { orderSetApply(); return; }
@@ -7536,7 +7637,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -7568,6 +7669,7 @@
     st.wounds = null; st.risks = null; st.riskForm = null; st.riskTools = null;
     st.breakGlass = null;
     st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null;
+    st.admReqs = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

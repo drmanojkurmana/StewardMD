@@ -477,6 +477,9 @@
        * which is exactly why actor.js grants ShiftHandover under emr.vitals and not under the
        * authority that writes a discharge summary. */
       tile({ go: "ward:handovers", icon: "swap_horiz", title: "Shift handover", sub: "Hand a patient to the next shift, and take the ones waiting for you", need: "emr.vitals" }),
+      /* The bed waiting list sits at the capability that registers a patient - asking for a bed and
+       * closing a request are front-desk and bed-management acts, and the module gates them itself. */
+      tile({ go: "ward:admreqs", icon: "bed", title: "Waiting for a bed", sub: "Ask for a bed, see who is waiting and for how long", need: "queue.add" }),
       tile({ go: "ward:approvals", icon: "verified", title: "Approvals", sub: "Ask for an approval for a restricted medicine, and grant the ones waiting", need: ["emr.vitals", "emr.treat"] }),
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */
