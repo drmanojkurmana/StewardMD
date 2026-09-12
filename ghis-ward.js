@@ -342,8 +342,14 @@
             return agentApi('/connections', t.tenantId).then(function (c) {
               return ((c.s === 200 && c.d && c.d.connections) || []).filter(function (cn) {
                 var o = (cn.origins || [])[0];
-                return cn.activeVersionId && o && !rt.isGimsrOrigin(o);
-              }).map(function (cn) { var lb = rt.hospitalLabel(t.name, cn.origins[0]); return { tid: t.tenantId, tenantName: t.name || '', conn: cn, name: lb.name, subtitle: lb.subtitle }; });
+                return cn.activeVersionId && o;
+              }).map(function (cn) {
+                var lb = rt.hospitalLabel(t.name, cn.origins[0]);
+                /* GIMSR has its own built-in button above. Its approved adapter is still listed, labelled
+                 * so the two never read as one: the doctor can see which path they are taking. */
+                var gim = rt.isGimsrOrigin(cn.origins[0]);
+                return { tid: t.tenantId, tenantName: t.name || '', conn: cn, name: gim ? lb.name + ' (adapter)' : lb.name, subtitle: gim ? lb.subtitle + ' · read through the approved adapter' : lb.subtitle };
+              });
             });
           })).then(function (lists) { return [].concat.apply([], lists); });
         }).then(function (items) {

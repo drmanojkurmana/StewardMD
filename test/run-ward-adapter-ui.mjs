@@ -112,9 +112,11 @@ try {
   await ev(`window.openGHIS(); return 1;`);
   ok(await waitFor(`return !!document.querySelector('#ghisAdapterHosp [data-adapter-dep="dep-kims"]');`, 8000), "the approved KIMS adapter appears as a hospital button in the picker");
   const picker = await ev(`var b=[].slice.call(document.querySelectorAll('#ghisHospital .ghis-setup-card .ghis-connect-btn')).map(function(x){return x.textContent.trim();}); return JSON.stringify(b);`);
-  ok(/^\["GIMSR","KIMS","StewardMD Hospital"/.test(picker), "order is GIMSR, KIMS, StewardMD Hospital -> " + picker);
+  ok(/^\["GIMSR","KIMS","GIMSR \(adapter\)","StewardMD Hospital"/.test(picker), "order is GIMSR, KIMS, GIMSR (adapter), StewardMD Hospital -> " + picker);
   ok((await ev(`return document.getElementById("ghisAdapterHosp").innerText;`)).indexOf("KIMS Hospital · sign in with hims.kims.example") >= 0, "subtitle names the tenant and the host");
-  ok(await ev(`return !document.querySelector('[data-adapter-dep="dep-draft"]') && !document.querySelector('[data-adapter-dep="dep-g"]');`) === true, "a draft (no active version) and the GIMSR origin are not listed");
+  ok(await ev(`return !document.querySelector('[data-adapter-dep="dep-draft"]');`) === true, "a draft (no active version) is not listed");
+  // GIMSR has a built-in button; its approved adapter is still offered, labelled so the two never read as one.
+  ok(await ev(`var b=document.querySelector('[data-adapter-dep="dep-g"]'); return !!b && b.textContent.indexOf('(adapter)')>=0 && document.getElementById('ghisAdapterHosp').innerText.indexOf('read through the approved adapter')>=0;`) === true, "the GIMSR-origin adapter is listed and labelled as the adapter path");
   ok(await ev(`return document.getElementById("ghisAdapterHosp").innerText.indexOf("\\u2014")<0;`) === true, "no em-dash in the adapter entries (pre-existing GIMSR/demo copy is out of scope)");
 
   await ev(`document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
