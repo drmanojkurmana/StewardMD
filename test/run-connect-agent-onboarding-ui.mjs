@@ -192,8 +192,14 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
       deployment: { id: "dep-1", origins: ["https://emr.newcity.example"], activeVersionId: null }, reuse: false } });
   }
   if (path === "/sessions/sess-1/handoff") {
+    // A job that already produced a candidate is finished; the sheet must review, not re-crawl.
     return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://emr.newcity.example"],
-      pendingOrigins: window.__pendingOrigins || [] } });
+      pendingOrigins: window.__pendingOrigins || [],
+      job: window.__finishedJob ? { jobId: "job-1", state: "AWAITING_APPROVAL", candidateVersionId: "ver-1" } : null } });
+  }
+  if (path === "/sessions/sess-1" && (!opts || !opts.method || opts.method === "GET")) {
+    return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", state: "AUTHENTICATED",
+      job: window.__finishedJob ? { jobId: "job-1", state: "AWAITING_APPROVAL", candidateVersionId: "ver-1" } : { jobId: "job-1", state: "DISCOVERING", candidateVersionId: null } } });
   }
   if (path === "/sessions/sess-1/origins") {
     return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://emr.newcity.example", "https://sso.newcity.example"] } });
@@ -573,6 +579,30 @@ try {
   ok(/^\d+%/.test(banner), "the banner leads with a percentage: " + banner);
   ok(/medication/i.test(banner), "the banner names what the agent is hunting for");
   ok(banner.indexOf("\u2014") < 0, "banner copy has no em-dash");
+
+  // Reopening a connection whose crawl ALREADY finished must review it, never crawl it again:
+  // the server refuses a second discovery ("job is not in discovery") and the doctor sat watching
+  // a 21-page re-crawl end in "you can try again" while their adapter waited for approval.
+  await ev(`
+    window.__finishedJob = true;
+    window.__reuse = false;          // an earlier scenario left the reuse shortcut on
+    var A = window.SMD_CONNECT_AGENT;
+    A.close(); A.open();
+    return 1;
+  `);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="connections";`, 6000);
+  await ev(`document.getElementById("smd-connect-add").click(); return 1;`);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="url";`, 4000);
+  await ev(`document.getElementById("smd-connect-url").value="https://emr.newcity.example"; document.getElementById("smd-connect-urlgo").click(); return 1;`);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="consent";`, 4000);
+  await ev(`var b=document.getElementById("smd-connect-agree"); b.checked=true; b.onchange(); document.getElementById("smd-connect-consentgo").click(); return 1;`);
+  await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login";`, 6000);
+  await ev(`window.__pendingOrigins = []; window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"}); return 1;`);
+  ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="result";`, 8000),
+    "a connection whose crawl already finished goes straight to the review, not back through discovery");
+  ok(await ev(`return document.getElementById("smd-connect-ov").innerText.indexOf("Awaiting approval")>=0;`) === true,
+    "and it shows the approval the doctor owes a decision on");
+  await ev(`window.__finishedJob = false; return 1;`);
 
   ok(consoleErrors.length === 0, "zero console errors and zero uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 5)) : ""));
 
