@@ -50,6 +50,10 @@ The browser runner executes outside Cloudflare Pages to keep headless browser pr
 All new flags default to OFF (fail closed).
 
 ### Feature Flags (Provisional Names Pending Broker Track)
+- Prerequisites the agent gate ALSO requires (found 2026-09-12: all agent routes 404 without them):
+  `CONNECT_FLAG=1` and `CONNECT_ONBOARD_FLAG=1` (`agentFlagOn = onboardFlagOn && CONNECT_AGENT_FLAG`).
+- Pages binds secrets at BUILD time: after uploading a flag, push a commit to main or retry the latest
+  production deployment, then confirm with `GET /api/connect/agent/connections` (401 = on, 404 = off).
 - `CONNECT_AGENT_FLAG`: Master switch for the Connect Agent discovery pipeline (default: OFF).
 - `CONNECT_BROWSER_SESSION_FLAG`: Enables remote browser session broker allocation (default: OFF).
 - `CONNECT_AGENT_AUTO_ACTIVATE_FLAG`: Allows automated activation of previously approved adapter templates (default: OFF).
