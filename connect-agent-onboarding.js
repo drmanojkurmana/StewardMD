@@ -684,7 +684,10 @@
           setStatus("bad", "Connections are not enabled yet. Try again later.");
           go.disabled = false;
         } else {
-          setStatus("bad", "Could not start the session. Check your connection and try again.");
+          // Say WHY when the server said why: a code like not-configured or forbidden is actionable,
+          // "check your connection" is not.
+          var why = r.d && (r.d.message || r.d.code || r.d.error);
+          setStatus("bad", why ? "Could not start the session: " + why + "." : "Could not start the session. Check your connection and try again.");
           go.disabled = false;
         }
       });
