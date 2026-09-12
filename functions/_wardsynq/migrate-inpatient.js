@@ -839,6 +839,26 @@ const OBSERVATION_NAME = Object.freeze(Object.fromEntries(
   Object.values(VITAL_CODES).filter((v) => v && v.code).map((v) => [v.code, v.display]),
 ));
 
+/* A PERSON'S NAME, NOT THE ID THE SYSTEM FILES THEM UNDER.
+ *
+ * An actor id is whatever the door minted: a staff sign-in is an email address, an account sign-in
+ * is "fb:" and a long opaque string. Printed raw on a timeline, the second one says "ordered by
+ * fb:DcGIzIXwxURU0G9L4J5jehluENl1", which answers the question "who ordered this?" with something
+ * no human can read - and the whole point of carrying the requester is that a person can be asked.
+ *
+ * This is a rendering, not a resolution: the underlying id is unchanged on the record and remains
+ * the thing an audit follows. An account id that cannot be turned into words is NOT dressed up as a
+ * name - it renders as "a clinician account", because inventing a person here would be worse than
+ * admitting the display cannot say which one. */
+function personName(actorId) {
+  const id = str(actorId);
+  if (!id) return "";
+  const at = id.indexOf("@");
+  if (at > 0) return id.slice(0, at);          // a staff sign-in: "dr.01@hospital" -> "dr.01"
+  if (id.indexOf("fb:") === 0) return "a clinician account";
+  return id;
+}
+
 const TIMELINE_LABEL = {
   Encounter: (r) => `${r.class || "Encounter"} ${r.status || ""}${r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : ""}`.trim(),
   Condition: (r) => `Problem: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
@@ -850,7 +870,7 @@ const TIMELINE_LABEL = {
    * investigation nobody can account for. requesterId is the AUTHENTICATED ordering clinician
    * (migrate-inv-order.js: "never a name typed anywhere"), so this is the session's own record and
    * not a free-text claim. An order carrying no requester says nothing rather than guessing. */
-  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}${r.requesterId ? ` · ordered by ${r.requesterId}` : ""}`,
+  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}${personName(r.requesterId) ? ` · ordered by ${personName(r.requesterId)}` : ""}`,
   DiagnosticReport: (r) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}`,
   CarePlan: (r) => `Care plan — ${r.status || "draft"}`,
   ClinicalNote: (r) => `${r.noteType || "progress"} note${r.signedBy ? " signed" : r.aiDrafted ? " (AI-drafted, unsigned)" : " drafted"}`,
