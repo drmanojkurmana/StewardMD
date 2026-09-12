@@ -204,3 +204,20 @@ abandon (2), billing extras (charges, invoice-void, upcoding, tariff), results r
 outcome, dispense returns, transfusion trace, maternity status, follow-up, discharge, digital-twin
 and MaiK routes, metrics/operational health. Then P0.7 phonetic search, P0.9 MFA, P0.8 documents,
 P0.10 invariant tests, cash-drawer shift closing.
+
+
+## 2026-09-13 (late night) — backlog 52 → 44
+
+- **Wristbands** (6 routes): issue, check, replace, lost, end. A mismatched band is a loud STOP; a
+  failed check is never shown as a verdict; ended bands stay in the history.
+- **A patient's operations + ending a case not going ahead** (2 routes). Caught a dead Open button
+  (wrong action name) and a blank abandon reason (it lives in the case ledger, not a field).
+
+**Numbers:** 5984 passing, 0 failing. 305 routes — 241 reachable, **44 waiting for a screen**.
+
+**Remaining backlog:** release-result, specimen-outcome, oncology/cardiology links (6), billing extras
+(charges, invoice-void, upcoding, tariff), dispense-return, transfusion-trace, maternity-status,
+follow-up, discharge, twin/MaiK routes, metrics/operational-health, readers, link-mrn, identity,
+advisory-check, dose-ceiling, emergency-chart, extend, flag-critical, backfill, resus-waive, and the
+13 found by the checker correction (assess is done; clinic, delete, disable, hl7, hospital, order,
+orders, pay, reset, restore still open).
