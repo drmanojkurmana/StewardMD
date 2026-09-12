@@ -3774,6 +3774,73 @@
       "</div>";
   }
 
+  /* SHIFT HANDOVER. The module behind this has existed, complete and tested, with nothing calling
+   * it - which meant a ward running WardSynQ had signed notes and no way for one nurse to hand a
+   * patient to another. Handover failure is one of the best-documented causes of harm in hospitals:
+   * the information existed, somebody knew it, and it did not survive the change of shift.
+   *
+   * THE SCREEN IS THE INCOMING SHIFT'S LIST. What is WAITING is the default and the point; received
+   * handovers are available but are not what somebody opens this for. Oldest first, because the one
+   * that has been waiting longest is the one most likely to be lost.
+   *
+   * NOTHING HERE CLOSES A LOOP BY ITSELF. The server refuses a handover received by the person who
+   * gave it, and this screen does not pretend otherwise - it shows the refusal as it comes back. */
+  var SBAR_FIELDS = [
+    ["situation", "Situation", "What is happening with this patient right now"],
+    ["background", "Background", "What brought them here and what matters from before"],
+    ["assessment", "Assessment", "What you think is going on"],
+    ["recommendation", "Recommendation", "What the next shift should do"],
+  ];
+  function handoverRow(h, state) {
+    var waiting = h.state === "waiting";
+    var name = "";
+    (state.list || []).forEach(function (p) { if (p.patientId === h.patientId) name = p.name || ""; });
+    var sec = SBAR_FIELDS.map(function (f) {
+      var text = (h.sections || {})[f[0]];
+      return text ? '<div class="w-tl-b"><b>' + esc(f[1]) + "</b> " + esc(text) + "</div>" : "";
+    }).join("");
+    return '<li class="w-mini-row' + (waiting ? " w-ib-overdue" : "") + '"><div>' +
+      '<span class="w-st ' + (waiting ? "due" : "") + '">' + (waiting ? "waiting to be taken" : "taken") + "</span> " +
+      "<b>" + esc(name || h.patientId) + "</b>" +
+      '<div class="w-dt-times">given by ' + esc(h.givenBy || "") + " &middot; " + when(h.givenAt) +
+      (h.receivedBy ? " &middot; taken by " + esc(h.receivedBy) + " " + when(h.receivedAt) : "") + "</div>" +
+      sec +
+      /* Said plainly rather than left as a blank section: a handover that silently assembled its
+       * own background from the chart would be a handover nobody actually gave. */
+      (h.sbarStated != null && h.sbarStated < 4 ? '<div class="w-dt-times">' + esc(4 - h.sbarStated) + " of the four parts were left blank.</div>" : "") +
+      "</div><div class=\"w-mini-row-act\">" +
+      (waiting ? '<button class="w-btn ghost sm" data-w-act="handovertake:' + esc(h.handoverId) + '">' + ms("check") + "Take this patient</button>" : "") +
+      "</div></li>";
+  }
+  function handoverView(state) {
+    var d = state.handovers;
+    var showing = state.handoverState || "waiting";
+    var rows = d && d.handovers ? d.handovers.map(function (h) { return handoverRow(h, state); }).join("") : "";
+    var s = state.sel;
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Shift handover</h3>" +
+      '<button class="w-ic" data-w-act="handovers" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-tl-filters">' +
+      '<button class="w-tl-f' + (showing === "waiting" ? " on" : "") + '" data-w-act="handovershow:waiting">Waiting to be taken' +
+        (d && d.waiting ? " <i>" + esc(d.waiting) + "</i>" : "") + "</button>" +
+      '<button class="w-tl-f' + (showing === "all" ? " on" : "") + '" data-w-act="handovershow:all">All</button>' +
+      "</div>" +
+      (s
+        ? '<div class="w-sub"><h4>Hand over ' + esc(s.name || s.patientId) + "</h4>" +
+          SBAR_FIELDS.map(function (f) {
+            return '<label class="w-f"><span>' + esc(f[1]) + "</span>" +
+              '<textarea id="wHo_' + esc(f[0]) + '" rows="2" placeholder="' + esc(f[2]) + '"></textarea></label>';
+          }).join("") +
+          '<p class="w-hint">' + ms("info") + "A part you leave blank is recorded as not stated. Nothing is filled in from the chart on your behalf." +
+          "</p><button class=\"w-btn\" data-w-act=\"handovergive\">" + ms("send") + "Hand over</button></div>"
+        : '<p class="w-hint">' + ms("info") + "Open a patient from the ward list to hand them over.</p>") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">' + (showing === "waiting" ? "Nothing waiting to be taken." : "No handovers recorded.") + "</p>") +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4046,6 +4113,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "handover" ? handoverView(state)
         : state.view === "safetyinbox" ? safetyInboxView(state)
         : state.view === "workspace" ? workspaceView(state)
         : state.view === "people" ? peopleView(state)
@@ -5595,6 +5663,46 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function handoverOpen() {
+    st.view = "handover"; st.handovers = null; paint(); loadHandovers();
+  }
+  function loadHandovers() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId) + "&state=" + encodeURIComponent(st.handoverState || "waiting");
+    return apiGet("/ward/handovers?" + q)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.handovers = r;
+        // An unreachable list is not an empty shift. Same reasoning as the safety inbox.
+        else { st.handovers = null; st.err = "Could not load handovers. Do not read this as nothing waiting."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.handovers = null; st.err = "Could not load handovers. Do not read this as nothing waiting."; paint(); });
+  }
+  function handoverGive() {
+    var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
+    var sbar = {}, any = false;
+    SBAR_FIELDS.forEach(function (f) { var v = val("wHo_" + f[0]); if (v) { sbar[f[0]] = v; any = true; } });
+    if (!any) { st.err = "A handover with nothing in it is not a handover."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/handover", { orgId: st.orgId, encounterId: s.encounterId, sbar: sbar })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Handed over. It stays waiting until somebody else takes it." : null)) {
+          SBAR_FIELDS.forEach(function (f) { var el = document.getElementById("wHo_" + f[0]); if (el) el.value = ""; });
+          loadHandovers();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that handover."; paint(); });
+  }
+  function handoverTake(id) {
+    var note = "";
+    try { note = G.prompt("Anything to add as you take this patient? (optional)") || ""; } catch (e) {}
+    st.busy = true; paint();
+    apiPost("/ward/receive-handover", { orgId: st.orgId, handoverId: id, note: note || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Taken." : null)) loadHandovers(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not take that handover."; paint(); });
+  }
+
   function safetyInboxOpen() {
     st.view = "safetyinbox"; st.inbox = null; paint(); loadSafetyInbox();
   }
@@ -6462,6 +6570,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "handover") { st.handovers = null; st.view = "list"; paint(); return; }
       if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
@@ -6707,6 +6816,10 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "handovers") { handoverOpen(); return; }
+    if (cmd === "handovershow") { st.handoverState = arg; loadHandovers(); return; }
+    if (cmd === "handovergive") { handoverGive(); return; }
+    if (cmd === "handovertake") { handoverTake(arg); return; }
     if (cmd === "safetyinbox") { safetyInboxOpen(); return; }
     if (cmd === "inboxrole") { st.inboxRole = arg === "all" ? "" : arg; loadSafetyInbox(); return; }
     if (cmd === "inboxopen") { inboxOpenPatient(arg); return; }
@@ -6808,7 +6921,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -6835,6 +6948,7 @@
     st.cDraft = null; st.cIcd = undefined;
     st.people = null;
     st.inbox = null; st.inboxRole = "";
+    st.handovers = null; st.handoverState = "";
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

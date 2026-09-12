@@ -468,6 +468,11 @@
        * clinical-view bar: anyone who may read a chart may read what on it needs a person. Which
        * items are THEIRS is decided inside, and is an ordering, never a permission. */
       tile({ go: "ward:safetyinbox", icon: "priority_high", title: "Safety inbox", sub: "Everything on the ward that needs a person, most urgent first", need: "emr.view" }),
+      /* Handover is nursing work and sits on the capability a nurse already holds for recording
+       * what she observes. A handover is her own account of a shift, not a clinical document -
+       * which is exactly why actor.js grants ShiftHandover under emr.vitals and not under the
+       * authority that writes a discharge summary. */
+      tile({ go: "ward:handovers", icon: "swap_horiz", title: "Shift handover", sub: "Hand a patient to the next shift, and take the ones waiting for you", need: "emr.vitals" }),
       tile({ go: "ward:approvals", icon: "verified", title: "Approvals", sub: "Ask for an approval for a restricted medicine, and grant the ones waiting", need: ["emr.vitals", "emr.treat"] }),
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */
