@@ -824,16 +824,140 @@
    * happened. A resource with no timestamp is counted, never silently dropped - see w-hint below. */
   /* One row of the stay. Shared by the card on the chart and the full-page Timeline, so the two can
    * never drift into telling the story differently. */
-  function timelineRow(e) {
-    return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
+  /* THE FILTERS. A stay of any length is unreadable as one undifferentiated list, and the question a
+   * reader actually arrives with is narrow: "just the notes", "just the tests". The counts are shown
+   * on each filter so an empty one is visibly empty rather than looking like a broken screen.
+   *
+   * "everything" is first and is the default, because a filter that silently hides half a chart is
+   * far more dangerous than a long list - a doctor who does not realise a filter is on is a doctor
+   * reading an incomplete history and not knowing it. The active filter is also restated above the
+   * list for the same reason. */
+  var TIMELINE_FILTERS = [
+    ["", "Everything"],
+    ["note", "Notes"],
+    ["investigation", "Tests ordered"],
+    ["result", "Results"],
+    ["medication", "Medicines"],
+    ["observation", "Vitals"],
+    ["problem", "Diagnoses"],
+    ["procedure", "Procedures"],
+    ["critical", "Critical events"],
+    ["allergy", "Allergies"],
+    ["visit", "Admission and discharge"],
+    ["billing", "Billing"],
+    ["registration", "Registration"],
+  ];
+  /* DATE. "What happened today" and "what happened on the day they deteriorated" are the two
+   * questions a long stay actually gets asked, and neither is answerable by scrolling. The ranges
+   * are relative rather than a date picker because that is how the question is asked out loud;
+   * a specific day is reachable by narrowing and reading. */
+  var TIMELINE_WHEN = [
+    ["", "Any time"],
+    ["24h", "Last 24 hours"],
+    ["72h", "Last 3 days"],
+    ["7d", "Last week"],
+  ];
+  function timelineSince(range) {
+    var hours = range === "24h" ? 24 : range === "72h" ? 72 : range === "7d" ? 168 : 0;
+    if (!hours) return null;
+    return new Date(Date.now() - hours * 3600 * 1000).toISOString();
+  }
+  function timelineFilterBar(state) {
+    var all = state.timeline || [];
+    var cur = state.timelineFilter || "";
+    var curWhen = state.timelineWhen || "";
+    var since = timelineSince(curWhen);
+    // The counts are counted AFTER the date range, so a kind that has nothing in the chosen window
+    // reads as empty rather than promising rows the list will not show.
+    var inRange = since ? all.filter(function (e) { return e.at >= since; }) : all;
+    // A kind with nothing in it at all is not offered: thirteen buttons of which nine are empty is
+    // a worse screen than four that mean something. "Everything" always stays.
+    var offered = TIMELINE_FILTERS.filter(function (f) {
+      if (!f[0]) return true;
+      if (f[0] === cur) return true;   // never yank the active filter out from under the reader
+      return inRange.some(function (e) { return e.category === f[0]; });
+    });
+    return '<div class="w-tl-filters">' + offered.map(function (f) {
+      var n = f[0] ? inRange.filter(function (e) { return e.category === f[0]; }).length : inRange.length;
+      return '<button class="w-tl-f' + (cur === f[0] ? " on" : "") + '" data-w-act="timelinefilter:' + esc(f[0] || "all") + '">' +
+        esc(f[1]) + " <i>" + esc(n) + "</i></button>";
+    }).join("") + "</div>" +
+    '<div class="w-tl-filters w-tl-when">' + TIMELINE_WHEN.map(function (w) {
+      return '<button class="w-tl-f' + (curWhen === w[0] ? " on" : "") + '" data-w-act="timelinewhen:' + esc(w[0] || "any") + '">' +
+        esc(w[1]) + "</button>";
+    }).join("") + "</div>";
+  }
+  function timelineFiltered(state) {
+    var all = state.timeline || [];
+    var f = state.timelineFilter || "";
+    var since = timelineSince(state.timelineWhen || "");
+    return all.filter(function (e) {
+      if (f && e.category !== f) return false;
+      if (since && e.at < since) return false;
+      return true;
+    });
+  }
+
+  /* One row of the stay. Shared by the card on the chart and the full-page Timeline, so the two can
+   * never drift into telling the story differently.
+   *
+   * The colour is the CATEGORY the server assigned, never anything decided here - a screen that
+   * works out for itself what kind of event something is will eventually disagree with the record. */
+  /* EXPAND AND COLLAPSE. A note's full text is exactly what a reader wants when they are reading
+   * that note and exactly what drowns the list when they are scanning for something else. So a row
+   * with words behind it shows the first line and opens on a click.
+   *
+   * Collapsed is the default, and the preview is the real first line rather than an ellipsis, so a
+   * reader can skim the assessments of a whole stay without opening one. */
+  function timelineRow(e, open) {
+    var parts = e.body || [];
+    var body = "";
+    if (parts.length) {
+      if (open) {
+        body = parts.map(function (b) {
+          return '<div class="w-tl-b"><b>' + esc(b.heading) + "</b> " + esc(b.text) + "</div>";
+        }).join("");
+      } else {
+        var first = String(parts[0].text || "");
+        var preview = first.length > 140 ? first.slice(0, 140) + "…" : first;
+        body = '<div class="w-tl-b w-tl-peek">' + esc(preview) + "</div>";
+      }
+    }
+    /* THE REPORT BUTTON, BESIDE THE ORDER THAT ASKED FOR IT. An order whose report is back is one
+     * click from being read; one still waiting says so in those words, rather than looking exactly
+     * like the finished one and leaving the reader to guess. */
+    var station = "";
+    if (e.resourceType === "ServiceRequest") {
+      station = e.reportReady
+        ? '<button class="w-btn ghost sm" data-w-act="timelinereport:' + esc(e.reportId || "") + '">' +
+          ms(e.reportIsImaging ? "labs" : "description") + "Open the report</button>"
+        : '<span class="w-st due">waiting for the report</span>';
+    }
+    return '<li class="w-tl-' + esc(e.category || "other") + (e.critical ? " w-tl-crit" : "") + '">' +
+      '<span class="w-tl-t">' + when(e.at) + "</span>" +
+      '<span class="w-tl-k">' + esc(e.category || e.resourceType) + "</span>" +
+      "<span>" + esc(e.label) +
+      (e.critical ? ' <span class="w-st escalate">critical</span>' : "") +
+      body +
+      (parts.length
+        ? '<button class="w-tl-x" data-w-act="timelineopen:' + esc(e.id || "") + '">' +
+          ms(open ? "expand_less" : "expand_more") + (open ? "Show less" : "Read it all") + "</button>"
+        : "") +
+      "</span>" +
+      (station ? '<span class="w-tl-a">' + station + "</span>" : "") +
+      "</li>";
   }
   function timelineGapHint(state) {
     return state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "";
   }
+  /* The card on the chart is a GLANCE and is deliberately never filtered: the filters belong to the
+   * full history, where somebody is reading rather than scanning, and a filtered glance would be a
+   * chart quietly showing less than it appears to. */
   function timelineCard(state) {
     var t = state.timeline;
     if (t == null) return "";
-    var rows = t.map(timelineRow).join("");
+    var openIds = state.timelineOpen || {};
+    var rows = t.map(function (e) { return timelineRow(e, !!openIds[e.id]); }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Timeline</h3>" +
       '<button class="w-btn tiny" data-w-act="timeline" title="The whole clinical history on one page">' + ms("open_in_full") + "Open full history</button>" +
       '<button class="w-ic" data-w-act="open:' + esc((state.sel || {}).encounterId || "") + '" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -855,6 +979,19 @@
     var s = st.sel; if (!s) return;
     st.view = "timeline"; st.noteErr = ""; paint();
     if (st.timeline == null) loadChart();
+  }
+  /* Opening the report an order produced. The investigations screen is where results are read, and
+   * this takes the reader there with the report already picked out, rather than building a second
+   * place to read a result that could drift from the first. */
+  function timelineOpenReport(reportId) {
+    if (!reportId) return;
+    /* Results are read in the Investigations card on the chart - there is no separate results
+     * screen, and adding one would be a second place to read a result that could drift from the
+     * first. So this goes to the chart and marks the report the reader asked for. */
+    st.highlightReportId = reportId;
+    st.view = "chart";
+    paint();
+    loadInvestigations();
   }
   function timelineNoteSave() {
     var s = st.sel; if (!s) return;
@@ -878,10 +1015,16 @@
       })
       .catch(function () { st.busy = false; st.noteErr = "Could not save that note."; paint(); });
   }
+  function filterLabel(v) {
+    for (var i = 0; i < TIMELINE_FILTERS.length; i++) if (TIMELINE_FILTERS[i][0] === v) return TIMELINE_FILTERS[i][1];
+    return v;
+  }
   function timelineView(state) {
     var s = state.sel || {};
     var t = state.timeline;
-    var rows = (t || []).map(timelineRow).join("");
+    var shown = timelineFiltered(state);
+    var openIds = state.timelineOpen || {};
+    var rows = shown.map(function (e) { return timelineRow(e, !!openIds[e.id]); }).join("");
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
         (s.mrn ? esc(s.mrn) + " &middot; " : "") + "clinical history</small></div>" +
@@ -896,8 +1039,18 @@
       (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + "</p>" : "") +
       '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + "Add note</button></div>" +
       '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>History &middot; " + (t ? t.length : 0) + "</h3></div>" +
+      (t == null ? "" : timelineFilterBar(state)) +
+      /* The active filter is restated in words above the list. A reader who does not notice a
+       * filter is on is reading an incomplete history and does not know it, which is worse than a
+       * long list. */
+      (t != null && state.timelineFilter
+        ? '<p class="w-hint">' + ms("info") + "Showing only " + esc(filterLabel(state.timelineFilter)).toLowerCase() +
+          " &mdash; " + esc(shown.length) + " of " + esc(t.length) + ". " +
+          '<button class="w-btn ghost sm" data-w-act="timelinefilter:all">Show everything</button></p>'
+        : "") +
       (t == null ? '<p class="w-empty">Loading the history.</p>'
         : rows ? '<ul class="w-timeline">' + rows + "</ul>"
+        : state.timelineFilter ? '<p class="w-empty">Nothing of that kind on this stay.</p>'
         : '<p class="w-empty">Nothing recorded on this stay yet.</p>') +
       timelineGapHint(state) + "</div>";
   }
@@ -1070,9 +1223,14 @@
     }).join("");
 
     var results = (state.results || []).map(function (r) {
-      return "<li><b>" + esc(r.display) + "</b> <span>" + esc(r.status || "") + "</span>" +
+      /* Arriving from the timeline's "Open the report" button, the report asked for is marked -
+       * a card that scrolls to a list of eight results and highlights none of them has not really
+       * opened anything. */
+      var picked = state.highlightReportId && r.id === state.highlightReportId;
+      return '<li' + (picked ? ' class="w-res-on"' : "") + "><b>" + esc(r.display) + "</b> <span>" + esc(r.status || "") + "</span>" +
+        (picked ? ' <span class="w-st due">the one you opened</span>' : "") +
         (r.conclusion ? "<div>" + esc(r.conclusion) + "</div>" : "") +
-        '<small>' + when(r.reportedAt) + "</small></li>";
+        "<small>" + when(r.reportedAt) + "</small></li>";
     }).join("");
 
     return '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Investigations</h3>" +
@@ -4957,7 +5115,7 @@
       var bundle = rs[2];
       st.results = (bundle && bundle.entry ? bundle.entry.map(function (e) { return e.resource; }).filter(Boolean) : [])
         .map(function (d) {
-          return { display: (d.code && (d.code.text || (d.code.coding && d.code.coding[0] && d.code.coding[0].display))) || "Result",
+          return { id: d.id, display: (d.code && (d.code.text || (d.code.coding && d.code.coding[0] && d.code.coding[0].display))) || "Result",
             status: d.status, conclusion: d.conclusion, reportedAt: d.effectiveDateTime };
         });
       paint();
@@ -5905,6 +6063,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
+      st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
@@ -6100,6 +6259,14 @@
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
     if (cmd === "incidents") { incidentsOpen(); return; }
+    if (cmd === "timelinefilter") { st.timelineFilter = arg === "all" ? "" : arg; paint(); return; }
+    if (cmd === "timelinewhen") { st.timelineWhen = arg === "any" ? "" : arg; paint(); return; }
+    if (cmd === "timelineopen") {
+      if (!st.timelineOpen) st.timelineOpen = {};
+      if (st.timelineOpen[arg]) delete st.timelineOpen[arg]; else st.timelineOpen[arg] = 1;
+      paint(); return;
+    }
+    if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "consultation") { consultationOpen(); return; }
     if (cmd === "approvals") { approvalsOpen(); return; }
     if (cmd === "purchasing") { purchasingOpen(); return; }
@@ -6207,6 +6374,7 @@
   function close() {
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
+    st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
     st.incidentLog = null; st.incidentHealth = null;

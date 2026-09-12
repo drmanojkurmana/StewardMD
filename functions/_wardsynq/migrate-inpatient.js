@@ -918,23 +918,139 @@ function personName(actorId) {
   return id;
 }
 
+/* WHO DID IT. Every record carries `writtenBy`, stamped by the store rather than supplied by the
+ * caller (wardsynq-actors.js), so this is the session that actually wrote it and not a claim. The
+ * role-specific fields are preferred where they exist because they are more precise about the
+ * clinical act: a prescription's prescriber and an order's requester are the person answerable for
+ * it, which is not always the session that saved the row. */
+function whoOf(r) {
+  return personName(
+    (r && (r.authorId || r.prescriberId || r.requesterId || r.performerId))
+    || (r && r.writtenBy && r.writtenBy.id)
+    || "",
+  );
+}
+
+/* What KIND of thing happened, for colour coding and for the filters a reader uses to pull one
+ * thread out of a long stay. Deliberately coarse: a doctor scanning a history wants "just the
+ * notes" or "just the tests", not fourteen categories they have to learn. */
+const TIMELINE_CATEGORY = {
+  Patient: "registration",
+  Encounter: "visit",
+  Condition: "problem",
+  AllergyIntolerance: "allergy",
+  Observation: "observation",
+  MedicationOrder: "medication",
+  MedicationAdministration: "medication",
+  ServiceRequest: "investigation",
+  DiagnosticReport: "result",
+  ImagingStudy: "result",
+  ClinicalNote: "note",
+  CarePlan: "careplan",
+  /* The rest of the clinical story. A history that stops at notes and vitals is not a history: a
+   * reader asking "what happened to this patient" needs the operation, the critical potassium
+   * nobody has acknowledged yet, the transfer to intensive care and the discharge, in the same
+   * list and on the same clock as everything else. */
+  SurgicalCase: "procedure",
+  AnesthesiaRecord: "procedure",
+  ImplantRecord: "procedure",
+  DeliveryRecord: "procedure",
+  MedicationDispense: "medication",
+  MedicationReconciliation: "medication",
+  SpecimenCollection: "investigation",
+  ImagingProtocol: "investigation",
+  AdmissionRequest: "visit",
+  /* Critical events get their own category rather than being filed under results, because the
+   * question "has anything dangerous happened to this patient" is asked on its own and must be
+   * answerable in one click. */
+  CriticalResultLoop: "critical",
+  ResusBundle: "critical",
+  EmergencyActivation: "critical",
+  BreakGlassGrant: "critical",
+  /* Money, where it belongs on a clinical history: that a bill was raised or paid is part of the
+   * story of a stay, and a patient asking about their bill is asking about this list. Nothing
+   * about what anything COST is put here - the amounts live on the billing screen, which has its
+   * own permission. */
+  Invoice: "billing",
+  Claim: "billing",
+};
+
+/* WHAT THE CLINICIAN ACTUALLY WROTE, not merely that they wrote something.
+ *
+ * The timeline said "progress note drafted" and stopped there, so the one thing a doctor picking up
+ * an unfamiliar patient most needs to read - what the last doctor thought - was the one thing the
+ * history would not show them. They had to open every note one at a time to find out. The sections
+ * are rendered in the order the template laid them out, headings included, because a heading is how
+ * a reader tells an examination finding from a plan.
+ *
+ * Nothing is summarised, shortened or rephrased. This is the clinician's own words or it is
+ * nothing. */
+function noteBody(r) {
+  const sections = (r && r.sections) || {};
+  const parts = [];
+  for (const key of Object.keys(sections)) {
+    const text = str(sections[key]);
+    if (!text) continue;
+    parts.push({ heading: key, text });
+  }
+  return parts;
+}
+
+/* A label is a sentence a person can read, with the actor in it where one is known. "Ordered CBC"
+ * answers what; "Dr Mehta ordered CBC" answers what a ward round actually asks. Where no actor can
+ * be resolved the sentence is written without one rather than being given a fabricated subject. */
 const TIMELINE_LABEL = {
-  Encounter: (r) => `${r.class || "Encounter"} ${r.status || ""}${r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : ""}`.trim(),
-  Condition: (r) => `Problem: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
-  Observation: (r) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
-  MedicationOrder: (r) => `Prescribed ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
-  MedicationAdministration: (r) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}`,
-  /* WHO ASKED FOR IT travels with the order. The timeline said what was ordered and when but never
-   * by whom, and "who ordered this chest film, and when" is the first question asked about an
-   * investigation nobody can account for. requesterId is the AUTHENTICATED ordering clinician
-   * (migrate-inv-order.js: "never a name typed anywhere"), so this is the session's own record and
-   * not a free-text claim. An order carrying no requester says nothing rather than guessing. */
-  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}${personName(r.requesterId) ? ` · ordered by ${personName(r.requesterId)}` : ""}`,
-  DiagnosticReport: (r) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}`,
-  CarePlan: (r) => `Care plan — ${r.status || "draft"}`,
-  ClinicalNote: (r) => `${r.noteType || "progress"} note${r.signedBy ? " signed" : r.aiDrafted ? " (AI-drafted, unsigned)" : " drafted"}`,
-  ImagingStudy: (r) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}`,
-  AllergyIntolerance: (r) => `Allergy recorded: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+  Patient: (r, who) => `${r.name || "Patient"} registered${r.mrn ? ` — ${r.mrn}` : ""}${r.provisional ? " (details still to be confirmed)" : ""}${who ? ` · by ${who}` : ""}`,
+  Encounter: (r, who) => {
+    const where = r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : "";
+    /* Admitted, moved and discharged read as three different things to somebody reconstructing a
+     * stay, so they are said as three different things rather than as one status word.
+     *
+     * And a ward stay is not an outpatient visit: somebody is ADMITTED to a ward and CHECKS IN at
+     * a clinic, and using one word for both makes the history read wrong in whichever half it does
+     * not belong to. ADMISSION_CLASSES is the list this file already keeps of what counts as a
+     * stay, so the two can never drift apart. */
+    const isStay = ADMISSION_CLASSES.indexOf(str(r.class)) >= 0;
+    const what = r.status === "finished" ? (isStay ? "discharged" : "left")
+      : r.status === "in-progress" ? (r.transferredAt ? "moved" : isStay ? "admitted" : "checked in")
+      : r.status === "planned" ? "expected"
+      : r.status === "cancelled" ? "cancelled"
+      : (r.status || "visit");
+    return `${r.class || "Visit"}: ${what}${where}${who ? ` · by ${who}` : ""}`;
+  },
+  Condition: (r, who) => `${who ? `${who} recorded` : "Recorded"} a diagnosis: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
+  Observation: (r, who) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}${who ? ` · by ${who}` : ""}`,
+  MedicationOrder: (r, who) => `${who ? `${who} prescribed` : "Prescribed"} ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
+  MedicationAdministration: (r, who) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}${who ? ` · by ${who}` : ""}`,
+  /* WHO ASKED FOR IT travels with the order. "Who ordered this chest film, and when" is the first
+   * question asked about an investigation nobody can account for. requesterId is the AUTHENTICATED
+   * ordering clinician (migrate-inv-order.js: "never a name typed anywhere"), so this is the
+   * session's own record and not a free-text claim. */
+  ServiceRequest: (r, who) => `${who ? `${who} ordered` : "Ordered"} ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,
+  DiagnosticReport: (r, who) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}${who ? ` · reported by ${who}` : ""}`,
+  CarePlan: (r, who) => `Care plan — ${r.status || "draft"}${who ? ` · by ${who}` : ""}`,
+  ClinicalNote: (r, who) => `${who ? `${who} wrote` : "Somebody wrote"} a ${r.noteType || "progress"} note${r.signedBy ? ", signed" : r.aiDrafted ? " (drafted by the assistant, unsigned)" : ", unsigned"}`,
+  ImagingStudy: (r, who) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}${who ? ` · by ${who}` : ""}`,
+  AllergyIntolerance: (r, who) => `${who ? `${who} recorded` : "Recorded"} an allergy: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+  SurgicalCase: (r, who) => `Operation: ${r.procedure || "procedure"}${r.site ? ` — ${r.site}` : ""}${r.laterality && r.laterality !== "not-applicable" ? ` ${r.laterality}` : ""}${r.status ? ` — ${r.status}` : ""}${who ? ` · by ${who}` : ""}`,
+  AnesthesiaRecord: (r, who) => `Anaesthetic${r.technique ? `: ${r.technique}` : ""}${who ? ` · by ${who}` : ""}`,
+  ImplantRecord: (r, who) => `Implant: ${r.device || r.display || "device"}${r.serialNumber ? ` (${r.serialNumber})` : ""}${who ? ` · by ${who}` : ""}`,
+  DeliveryRecord: (r, who) => `Delivery${r.mode ? `: ${r.mode}` : ""}${r.outcome ? ` — ${r.outcome}` : ""}${who ? ` · by ${who}` : ""}`,
+  MedicationDispense: (r, who) => `${who ? `${who} issued` : "Issued"} ${r.drug || "a medicine"}${r.quantity != null ? ` ${r.quantity}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
+  MedicationReconciliation: (r, who) => `${who ? `${who} took` : "Took"} a medicines history${r.decisions && r.decisions.length ? ` — ${r.decisions.length} medicine${r.decisions.length === 1 ? "" : "s"} decided` : ""}`,
+  SpecimenCollection: (r, who) => `Sample taken${r.specimenType ? `: ${r.specimenType}` : ""}${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
+  ImagingProtocol: (r, who) => `Imaging protocolled${r.contrast ? " (with contrast)" : ""}${who ? ` · by ${who}` : ""}`,
+  AdmissionRequest: (r, who) => `${who ? `${who} requested` : "Requested"} admission${r.ward ? ` to ${r.ward}` : ""}${r.state ? ` — ${r.state}` : ""}`,
+  /* A critical result names the number and whether anybody has picked it up yet, because an open
+   * loop is the single most actionable thing that can appear on a chart. */
+  CriticalResultLoop: (r) => `CRITICAL: ${r.display || r.code}${r.value != null ? ` ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""} — ${r.state === "open" ? "nobody has acknowledged this yet" : r.state || "open"}`,
+  ResusBundle: (r, who) => `Resuscitation${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
+  EmergencyActivation: (r, who) => `Hospital emergency declared: ${r.kind || "emergency"}${r.reason ? ` — ${r.reason}` : ""}${who ? ` · by ${who}` : ""}`,
+  BreakGlassGrant: (r, who) => `Emergency access to this chart was taken${r.reason ? `: ${r.reason}` : ""}${who ? ` · by ${who}` : ""}`,
+  /* WHAT was billed, never how much. The amounts are the billing screen's, which has its own
+   * permission; putting them here would put a patient's money on every clinical reader's screen. */
+  Invoice: (r, who) => `Bill ${r.void ? "cancelled" : "raised"}${r.lines && r.lines.length ? ` — ${r.lines.length} item${r.lines.length === 1 ? "" : "s"}` : ""}${who ? ` · by ${who}` : ""}`,
+  Claim: (r, who) => `Insurance claim${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
 };
 
 /**
@@ -945,13 +1061,68 @@ const TIMELINE_LABEL = {
 function timelineFromChart(chart) {
   const events = [];
   let withoutTimestamp = 0;
+
+  /* AN ORDER AND ITS RESULT, JOINED. DiagnosticReport carries the ServiceRequest it answers, so an
+   * investigation on the timeline can say whether the report is back and point at it - which is the
+   * difference between a history that lists what was asked for and one that can be acted on. An
+   * order with no report yet says so; it is not left looking identical to one that is done. */
+  const reportByRequest = new Map();
+  for (const rep of (chart && chart.DiagnosticReport) || []) {
+    const srId = str(rep && rep.serviceRequestId);
+    if (!srId) continue;
+    const prev = reportByRequest.get(srId);
+    // The most recent wins: a corrected report supersedes the preliminary one it corrects.
+    const at = (rep.meta && (rep.meta.effectiveAt || rep.meta.recordedAt)) || "";
+    if (!prev || at > prev.at) reportByRequest.set(srId, { id: rep.id, status: rep.status, critical: !!rep.critical, at });
+  }
+  // Imaging answers an order the same way a lab report does, and a reader wants the same button.
+  for (const study of (chart && chart.ImagingStudy) || []) {
+    const srId = str(study && study.serviceRequestId);
+    if (!srId || reportByRequest.has(srId)) continue;
+    const at = (study.meta && (study.meta.effectiveAt || study.meta.recordedAt)) || "";
+    reportByRequest.set(srId, { id: study.id, status: study.status, critical: false, at, imaging: true });
+  }
+
   for (const resourceType of Object.keys(chart || {})) {
     const rows = chart[resourceType] || [];
     const label = TIMELINE_LABEL[resourceType] || ((r) => `${resourceType} recorded`);
     for (const r of rows) {
       const at = (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
       if (!at) { withoutTimestamp++; continue; }
-      events.push({ at, resourceType, id: r.id, label: label(r) });
+      const who = whoOf(r);
+      const event = {
+        at, resourceType, id: r.id, label: label(r, who),
+        category: TIMELINE_CATEGORY[resourceType] || "other",
+        ...(who ? { who } : {}),
+      };
+      // The note's own words, so the history can be read without opening every note in turn.
+      if (resourceType === "ClinicalNote") {
+        const body = noteBody(r);
+        if (body.length) event.body = body;
+        if (r.signedBy) event.signedBy = personName(r.signedBy);
+      }
+      // A result's conclusion is the sentence the reader is actually after.
+      if (resourceType === "DiagnosticReport" && str(r.conclusion)) event.body = [{ heading: "conclusion", text: str(r.conclusion) }];
+      if (resourceType === "DiagnosticReport" && r.critical) event.critical = true;
+      /* An unacknowledged critical result is the loudest thing a chart can say. Flagged here so the
+       * screen can colour it without having to know what a CriticalResultLoop is. */
+      if (resourceType === "CriticalResultLoop") event.critical = true;
+      // A discharge summary's text is worth reading on the history as much as a progress note's.
+      if (resourceType === "Invoice" && Array.isArray(r.lines) && r.lines.length) {
+        event.body = [{ heading: "items", text: r.lines.map((l) => str(l && (l.display || l.code))).filter(Boolean).join(", ") }];
+      }
+      // An investigation says whether its report is back, and names it so it can be opened.
+      if (resourceType === "ServiceRequest") {
+        const rep = reportByRequest.get(str(r.id));
+        event.reportReady = !!rep;
+        if (rep) {
+          event.reportId = rep.id;
+          event.reportStatus = rep.status || null;
+          if (rep.critical) event.critical = true;
+          if (rep.imaging) event.reportIsImaging = true;
+        }
+      }
+      events.push(event);
     }
   }
   events.sort((a, b) => (a.at < b.at ? 1 : a.at > b.at ? -1 : 0)); // most recent first
