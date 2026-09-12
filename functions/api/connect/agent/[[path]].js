@@ -1005,6 +1005,9 @@ export async function onRequest(context) {
         requestedAt: (phoneState && phoneState.requestedAt) || null,
         pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
         views,
+        // The phone runtime replays these (selectors, labels, paths: PHI-free by construction, see
+        // connect-agent/phone/CONTRACT.md "observedViews") to read a ward list in the doctor's own session.
+        replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews : [],
         validation: validation ? { ok: validation.ok !== false, issues: (validation.issues || []).slice(0, 10) } : null,
       });
     }
