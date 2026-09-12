@@ -970,6 +970,15 @@ export async function onRequest(context) {
           if (seeChart.ok && allowed.indexOf(String(seeChart.role || "")) >= 0) wAz = seeChart;
         }
       }
+      /* THE BENCH MAY SEE ITS OWN WORK. collections and pending-tests are gated emr.view, which is
+       * right for a ward asking "where is my patient's sample?" - and wrong as the ONLY authority,
+       * because the other caller is the laboratory itself, asking "what is on my bench?". The lab
+       * role deliberately has no emr.view (dispensing and resulting need the order, not the
+       * consultation notes), so the department's own worklist was the one thing it could not open.
+       * lab.result is the alternative authority, exactly as order.verify is for criticals and
+       * lab.result already is for specimen-outcome directly below. It grants the narrow record
+       * scope in actor.js and nothing more, so this opens no other route. */
+      if (!wAz.ok && (sub === "collections" || sub === "pending-tests")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       if (!wAz.ok && sub === "criticals") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_VERIFY);
       /* A specimen's outcome is recorded by whichever side of the journey it happened on: the ward
        * says the attempt failed, the LABORATORY says it arrived. Same alternative-authority shape,

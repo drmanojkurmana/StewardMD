@@ -360,9 +360,15 @@
   } };
 
   // ---- home: the role-aware map -----------------------------------------------------------------------
+  /* `need` may be a LIST, because some screens have more than one honest way in. The laboratory
+   * board is the case that forced it: a ward opens it with emr.view, and the bench itself opens it
+   * with lab.result, which is the same pair of authorities the server accepts for those reads. A
+   * single capability would have had to pick one of the two departments to lock out. */
   function tile(opts) {
-    var dis = opts.need && !can(opts.need);
-    return '<button type="button" class="tile" data-go="' + esc(opts.go) + '"' + (dis ? ' disabled title="Your role (' + esc(st.who && st.who.role || "") + ') does not include ' + esc(opts.need) + '"' : "") + ">" +
+    var needs = opts.need ? (Object.prototype.toString.call(opts.need) === "[object Array]" ? opts.need : [opts.need]) : [];
+    var ok = !needs.length || needs.some(function (n) { return can(n); });
+    var dis = !ok;
+    return '<button type="button" class="tile" data-go="' + esc(opts.go) + '"' + (dis ? ' disabled title="Your role (' + esc(st.who && st.who.role || "") + ') does not include ' + esc(needs.join(" or ")) + '"' : "") + ">" +
       "<div><b>" + esc(opts.title) + "</b><span>" + esc(opts.sub) + "</span>" + (opts.liveId ? '<span class="live" id="' + opts.liveId + '"></span>' : "") + "</div></button>";
   }
   PAGES.home = { render: function (c) {
@@ -392,8 +398,8 @@
        * [queue.view, lab.result], so a lab technician still does not see this tile. Staffing the
        * bench properly needs either emr.view on that role or a role designed for it. Flagged, not
        * invented. */
-      tile({ go: "ward:labboard", icon: "science", title: "Laboratory", sub: "Specimens, bench worklist, results and release", need: "emr.view", liveId: "lvLab" }),
-      tile({ go: "ward:radboard", icon: "radiology", title: "Radiology", sub: "Imaging worklist, acquisition, reporting", need: "emr.view", liveId: "lvRad" }),
+      tile({ go: "ward:labboard", icon: "science", title: "Laboratory", sub: "Specimens, bench worklist, results and release", need: ["emr.view", "lab.result"], liveId: "lvLab" }),
+      tile({ go: "ward:radboard", icon: "radiology", title: "Radiology", sub: "Imaging worklist, acquisition, reporting", need: ["emr.view", "lab.result"], liveId: "lvRad" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: "Theatre", sub: "Cases, WHO checklist, anaesthesia, implants", need: "emr.view" }),
       /* order.dispense, NOT emr.view, and this one locked the pharmacist out of pharmacy.
        * The stock reads and writes behind this tile are gated ORDER_DISPENSE server-side
