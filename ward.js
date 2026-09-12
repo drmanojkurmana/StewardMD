@@ -1350,6 +1350,7 @@
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
         '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
         '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
+        '<button class="w-btn ghost" data-w-act="tags" title="Issue a wristband and check the band on the patient">' + ms("how_to_reg") + "Wristband</button>" +
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
@@ -4331,6 +4332,65 @@
       "</div>";
   }
 
+  /* WRISTBANDS. identity-tag.js was complete and unreachable, so there was no way to issue a band, and
+   * no way to check that the patient in the bed is the patient on the chart - which is the check that
+   * stops a drug, a transfusion or an operation going to the wrong person.
+   *
+   * A MISMATCH IS THE LOUDEST THING ON THIS SCREEN. "Scanned band does not match" is shown as a stop,
+   * in red, in words, and it does not fade: somebody who scanned the wrong band and missed a quiet
+   * notice is exactly the failure this exists to catch.
+   *
+   * A BAND IS NEVER DELETED. Replaced, lost or ended, the old one stays in the history with who ended it
+   * and why, because "which band was this patient wearing on Tuesday" is a question that gets asked. */
+  var TAG_TYPE_WORDS = [["wristband", "Wristband"], ["qr", "QR code"], ["nfc", "NFC tag"]];
+  function tagRow(t) {
+    var active = t.status === "active";
+    return '<li class="w-mini-row' + (active ? "" : " w-gone") + '"><div>' +
+      '<span class="w-st ' + (active ? "" : "due") + '">' + esc(t.status) + "</span> " +
+      "<b>" + esc(t.tagType) + "</b> &middot; " + esc(t.code) +
+      '<div class="w-dt-times">issued ' + when(t.assignedAt) + (t.assignedBy ? " by " + esc(t.assignedBy) : "") +
+      (t.endedAt ? " &middot; ended " + when(t.endedAt) + (t.endedBy ? " by " + esc(t.endedBy) : "") + (t.endedReason ? ": " + esc(t.endedReason) : "") : "") +
+      "</div></div><div class=\"w-mini-row-act\">" +
+      (active
+        ? '<button class="w-btn ghost sm" data-w-act="tagreplace:' + esc(t.id) + '">Replace</button>' +
+          '<button class="w-btn ghost sm" data-w-act="taglost:' + esc(t.id) + '">Lost</button>' +
+          '<button class="w-btn ghost sm" data-w-act="tagend:' + esc(t.id) + '">End</button>'
+        : "") +
+      "</div></li>";
+  }
+  function tagsView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.tags, v = state.tagVerify;
+    var rows = d && d.tags ? d.tags.slice().reverse().map(tagRow).join("") : "";
+    var verdict = "";
+    if (v) {
+      verdict = v.matches
+        ? '<div class="w-sub"><h4>' + ms("check") + "This band belongs to " + esc(s.name || s.patientId) + "</h4></div>"
+        : '<div class="w-sub w-dead"><h4>' + ms("warning") + "STOP - this band does not match " + esc(s.name || s.patientId) + "</h4>" +
+          "<p>" + esc(v.reason || "The scanned code is not this patient's active band.") + "</p>" +
+          "<p>Do not give anything to this patient until the mismatch is resolved.</p></div>";
+    }
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Wristband</h3>" +
+      '<button class="w-ic" data-w-act="tags" title="Refresh">' + ms("refresh") + "</button></div>" +
+      verdict +
+      '<div class="w-sub"><h4>Check the band on the patient</h4>' +
+      '<input id="wTgScan" placeholder="Scan or type the code on the band">' +
+      '<button class="w-btn" data-w-act="tagverify">' + ms("fact_check") + "Check</button></div>" +
+      (d && d.active && !d.active.length ? '<p class="w-hint warn">' + ms("warning") + "This patient has no active band.</p>" : "") +
+      '<div class="w-sub"><h4>Issue a band</h4>' +
+      '<div class="w-grid"><label class="w-f"><span>Kind</span><select id="wTgType">' +
+      TAG_TYPE_WORDS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Code on the band</span><input id="wTgCode"></label></div>' +
+      '<button class="w-btn ghost" data-w-act="tagassign">' + ms("save") + "Issue</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<div class="w-sub"><h4>Bands, newest first</h4><ul class="w-mini">' + rows + "</ul></div>"
+        : '<p class="w-empty">No band has ever been issued.</p>') +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4603,6 +4663,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "tags" ? tagsView(state)
         : state.view === "mpi" ? mpiView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
@@ -6171,6 +6232,60 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function tagsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "tags"; st.tags = null; st.tagVerify = null; paint(); loadTags();
+  }
+  function loadTags() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/tag-log?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        if (r && r.ok) st.tags = r;
+        else { st.tags = null; st.err = "Could not load wristbands. Do not read this as no band issued."; }
+        paint();
+      })
+      .catch(function () { st.tags = null; st.err = "Could not load wristbands."; paint(); });
+  }
+  function tagVerify() {
+    var s = st.sel; if (!s) return;
+    var code = val("wTgScan");
+    if (!code) { st.err = "Scan or type the code on the band."; paint(); return; }
+    st.tagVerify = null; st.busy = true; paint();
+    apiPost("/ward/tag-verify", { orgId: st.orgId, patientId: s.patientId, tagType: "wristband", scannedCode: code })
+      .then(function (r) {
+        st.busy = false;
+        /* Only a definite server answer is shown as a verdict. A failed CHECK is not a match and is not
+         * shown as one: it is an error, and the band has not been checked. */
+        if (r && r.ok) st.tagVerify = { matches: !!r.matches, reason: r.reason || null };
+        else { st.tagVerify = null; st.err = "The band could not be checked. Treat it as unchecked."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.tagVerify = null; st.err = "The band could not be checked. Treat it as unchecked."; paint(); });
+  }
+  function tagAssign() {
+    var s = st.sel; if (!s) return;
+    var code = val("wTgCode");
+    if (!code) { st.err = "Type the code printed on the band."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/tag-assign", { orgId: st.orgId, patientId: s.patientId, tagType: val("wTgType"), code: code })
+      .then(function (r) { if (settle(r, r && r.ok ? "Band issued." : null)) loadTags(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not issue that band."; paint(); });
+  }
+  function tagEnd(kind, tagId) {
+    if (!tagId) return;
+    var reason = "", newCode = "";
+    if (kind === "replace") { try { newCode = G.prompt("Code on the new band") || ""; } catch (e) {} if (!newCode) return; }
+    try { reason = G.prompt("Why?") || ""; } catch (e) {}
+    if (!reason) { st.err = "Ending or replacing a band needs a reason."; paint(); return; }
+    var route = kind === "replace" ? "/ward/tag-replace" : kind === "lost" ? "/ward/tag-lost" : "/ward/tag-deactivate";
+    var body = { orgId: st.orgId, tagId: tagId, reason: reason };
+    if (kind === "replace") body.newCode = newCode;
+    st.busy = true; paint();
+    apiPost(route, body)
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded." : null)) { st.tagVerify = null; loadTags(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
   function mpiOpen() {
     st.view = "mpi"; st.mpi = null; paint();
   }
@@ -7468,6 +7583,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
@@ -7723,6 +7839,12 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "tags") { tagsOpen(); return; }
+    if (cmd === "tagverify") { tagVerify(); return; }
+    if (cmd === "tagassign") { tagAssign(); return; }
+    if (cmd === "tagreplace") { tagEnd("replace", arg); return; }
+    if (cmd === "taglost") { tagEnd("lost", arg); return; }
+    if (cmd === "tagend") { tagEnd("end", arg); return; }
     if (cmd === "mpi") { mpiOpen(); return; }
     if (cmd === "mpisearch") { mpiSearch(); return; }
     if (cmd === "mpimerge") { mpiMerge(arg, false); return; }
@@ -7888,6 +8010,7 @@
     st.admReqs = null;
     st.infusions = null;
     st.mpi = null;
+    st.tags = null; st.tagVerify = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
