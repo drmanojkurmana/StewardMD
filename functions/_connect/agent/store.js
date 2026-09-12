@@ -116,6 +116,20 @@ export async function insertVersion(db, { tenantId, deploymentId, manifestRef, s
 // as casUpdate above, for the same reason (D1 meta.changes is not available through every driver shim).
 // The newest version of a deployment currently in a given lifecycle -- used by GET /connections
 // (pendingVersionId = the AWAITING_APPROVAL candidate, if any).
+/* Every candidate a deployment is holding, newest first.
+ *
+ * A doctor who re-runs discovery produces another candidate, and only one of them can ever be the
+ * connection. Without a list, the older ones were invisible: findVersionByLifecycle() returns the
+ * newest and the rest sat AWAITING_APPROVAL forever, each one a decision nobody would ever be asked
+ * to make. Callers use this to keep the newest few and discard the rest (see CANDIDATE_LIMIT). */
+export async function listVersionsByLifecycle(db, tenantId, deploymentId, lifecycle) {
+  const r = await need(db).prepare("SELECT * FROM connect_adapter_version WHERE tenant_id=? AND deployment_id=? AND lifecycle=?")
+    .bind(tenantId, deploymentId, lifecycle).all();
+  const rows = (r.results || []).slice();
+  rows.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  return rows;
+}
+
 export async function findVersionByLifecycle(db, tenantId, deploymentId, lifecycle) {
   const r = await need(db).prepare("SELECT * FROM connect_adapter_version WHERE tenant_id=? AND deployment_id=? AND lifecycle=?")
     .bind(tenantId, deploymentId, lifecycle).all();

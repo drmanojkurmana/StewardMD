@@ -382,12 +382,28 @@ test("full phone onboarding flow: session -> handoff -> origins -> plan -> progr
   const approveDenied = await onRequest(post(`/api/connect/agent/versions/${versionId}/approve`, { tenantId: "t1" }, env, doc1.headers));
   assert.equal(approveDenied.status, 403);
 
+  /* Two OLDER drafts of this same connection, as a doctor who re-ran discovery would leave behind.
+   * Approving one must discard them: they are drafts of the connection being approved, and left
+   * alone each is a decision the owner would be asked to make and could never sensibly make. */
+  const staleIds = ["ver-stale-a", "ver-stale-b"];
+  for (const id of staleIds) {
+    env.CONNECT_DB._tables.connect_adapter_version.push({
+      id, tenant_id: "t1", deployment_id: "dep-1", lifecycle: "AWAITING_APPROVAL",
+      evidence_hash: "sha256:old", created_at: "2020-01-01T00:00:00.000Z", updated_at: "2020-01-01T00:00:00.000Z",
+    });
+  }
+
   // owner approves
   const approveOk = await onRequest(post(`/api/connect/agent/versions/${versionId}/approve`, { tenantId: "t1" }, env, owner1.headers));
   assert.equal(approveOk.status, 200);
   const approveBody = await approveOk.json();
   assert.equal(approveBody.state, "ACTIVE");
   assert.ok(approveBody.activationId);
+  assert.equal(approveBody.discarded, staleIds.length, "the other drafts are discarded by the approval");
+  for (const id of staleIds) {
+    const stale = await onRequest(get(`/api/connect/agent/versions/${id}?tenant=t1`, env, doc1.headers));
+    assert.equal((await stale.json()).state, "REVOKED", `${id} must be revoked, not left waiting`);
+  }
 
   // GET /versions/:id shows the activated candidate with its operations
   const verGet = await onRequest(get(`/api/connect/agent/versions/${versionId}?tenant=t1`, env, doc1.headers));

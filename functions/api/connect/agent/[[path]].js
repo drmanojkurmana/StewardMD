@@ -42,6 +42,7 @@ import {
   getVersion,
   insertVersion,
   casVersionLifecycle,
+  listVersionsByLifecycle,
   findVersionByLifecycle,
   insertSession,
   getSessionRow,
@@ -77,6 +78,34 @@ export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags
  * most (MANIFEST_ID_RE, connect-agent/manifest/schema.mjs). The ids here are `dep_<uuid>` and
  * `job_<uuid>`, so prefixes and dashes are dropped and the first 12 hex characters of each are kept:
  * 34 characters, unique per deployment and job, and both are still readable to a reviewer. */
+/* HOW MANY CANDIDATES ONE HOSPITAL MAY HOLD AT ONCE.
+ *
+ * Re-running discovery is normal: a doctor signs in again, shows the agent a view it missed, and a
+ * fresh candidate appears. Only one of them can ever become the connection, so the rest are noise -
+ * and left alone they accumulate as decisions nobody will be asked to make. Owner rule (2026-09-12):
+ * keep the three newest, discard the rest, and when one is approved discard every other candidate
+ * for that deployment. Three is enough to compare a retry against what came before; more is a
+ * queue of stale drafts. Discarded means REVOKED: nothing is deleted and the audit trail stands. */
+export const CANDIDATE_LIMIT = 3;
+
+/** Revoke every AWAITING_APPROVAL candidate of a deployment except the ones named in `keepIds`. */
+async function discardOtherCandidates(db, tenantId, deploymentId, keepIds, reason) {
+  const keep = new Set((keepIds || []).filter(Boolean));
+  const all = await listVersionsByLifecycle(db, tenantId, deploymentId, "AWAITING_APPROVAL");
+  const discarded = [];
+  for (const v of all) {
+    if (keep.has(v.id)) continue;
+    try {
+      await casVersionLifecycle(db, tenantId, v.id, "AWAITING_APPROVAL", {
+        lifecycle: "REVOKED",
+        policy_version: "discarded:" + String(reason || "superseded").slice(0, 100),
+      });
+      discarded.push(v.id);
+    } catch { /* a candidate someone else just decided on: leave it as they left it */ }
+  }
+  return discarded;
+}
+
 export function manifestIdFor(deploymentId, jobId) {
   const short = (id) => String(id || "").toLowerCase().replace(/^(dep|job)_/, "").replace(/[^a-z0-9]/g, "").slice(0, 12) || "unknown";
   return `manifest-${short(deploymentId)}-${short(jobId)}`;
@@ -901,6 +930,15 @@ export async function onRequest(context) {
         version = await casVersionLifecycle(deps.db, tid, version.id, "CREATED", { lifecycle: "VALIDATING" });
         assertTransition("adapter", "VALIDATING", "AWAITING_APPROVAL");
         version = await casVersionLifecycle(deps.db, tid, version.id, "VALIDATING", { lifecycle: "AWAITING_APPROVAL" });
+        /* A retry ADDS a candidate rather than replacing one, so hold the newest CANDIDATE_LIMIT and
+         * discard anything older: an owner should never face a queue of stale drafts of the same
+         * connection. The candidate just built is always among those kept. */
+        const holding = await listVersionsByLifecycle(deps.db, tid, version.deployment_id, "AWAITING_APPROVAL");
+        if (holding.length > CANDIDATE_LIMIT) {
+          const keep = holding.slice(0, CANDIDATE_LIMIT).map((v) => v.id);
+          if (keep.indexOf(version.id) < 0) { keep.pop(); keep.push(version.id); }
+          await discardOtherCandidates(deps.db, tid, version.deployment_id, keep, "older than the newest " + CANDIDATE_LIMIT);
+        }
         versionState = version.lifecycle;
       } else {
         const version = await getVersion(deps.db, tid, candidateVersionId);
@@ -957,7 +995,10 @@ export async function onRequest(context) {
         assertTransition("job", job.state, "ACTIVE");
         await casJob(deps.db, tid, job.id, job.revision, { state: "ACTIVE", completed_at: nowIso() });
       }
-      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id });
+      // One candidate wins; the others are drafts of the same connection and must not stay in the
+      // owner's queue pretending to be decisions (CANDIDATE_LIMIT).
+      const discarded = await discardOtherCandidates(deps.db, tid, version.deployment_id, [versionId], "approved:" + versionId);
+      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id, discarded: discarded.length });
     }
 
     // POST /versions/:id/reject -- owner/admin only; revokes the candidate
