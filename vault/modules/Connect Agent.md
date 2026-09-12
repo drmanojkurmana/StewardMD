@@ -82,6 +82,13 @@ version with a fresh session - no rediscovery.
   Ward Sync (`ghis-ward.js` `ghisOpenAdapterHospital`). Zero rows -> guide mode with `REPAIR_ASK` ->
   `captureWorklist` + `readView({ navigate: false })` -> `POST /versions/:id/repair` files a child
   candidate (parent untouched, three-draft rule).
+- **The adapter answers the GHIS proxy** (`connect-agent/phone/ghis-shim.mjs`, wired in ghis-ward.js
+  `installAdapterProxy`): while an adapter session is fresh (30 min after a ward read), fetches to
+  `GHIS.getProxyBase()` are served on the phone in the hand-built proxy JSON shapes (patients, profile,
+  lab, lab-detail, radiology, radiology-report, medications, history, status; writes 501), one browser
+  read per patient cached per session. Assess, the drawers and medication review work on any hospital.
+- **Remove an adapter**: `DELETE /api/connect/agent/connections/:deploymentId` (owner/admin), buttons on
+  the sheet list and the admin Governance card.
 
 **Runner and connector**
 - `connect-agent/runner.mjs`: the actual long-lived process - leases a job, drives discovery through
