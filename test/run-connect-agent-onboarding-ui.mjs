@@ -209,6 +209,9 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
   if (path === "/versions/ver-1/reject") {
     return Promise.resolve({ s: 200, d: { ok: true, state: "REVOKED" } });
   }
+  if (path === "/tenants") {
+    return Promise.resolve(window.__tenants ? { s: 200, d: { ok: true, tenants: window.__tenants } } : { s: 404, d: { ok: false, error: "not_found" } });
+  }
   return Promise.resolve({ s: 404, d: { ok: false, error: "not_found" } });
 });
 return 1;
@@ -510,6 +513,14 @@ try {
   await call("Emulation.setEmulatedMedia", {});
   await ev(`if(window.SMD_CONNECT_AGENT) window.SMD_CONNECT_AGENT.close(); localStorage.removeItem("smd_connect_agent"); return 1;`);
   await sleep(800);
+
+  // A doctor whose account spans several hospitals is asked which one, and the choice sticks.
+  await ev(`window.__tenants = [{ tenantId: "t-a", name: "Alpha Hospital", role: "owner" }, { tenantId: "t-b", name: "Beta Hospital", role: "owner" }]; localStorage.removeItem("smd_connect_agent_tenant"); window.__calls = []; window.SMD_CONNECT_AGENT.open(); return 1;`);
+  ok(await waitFor(`return document.getElementById("smd-connect-ov").innerText.indexOf("Which hospital?")>=0;`, 6000), "an account with several hospitals is asked which one before anything loads");
+  await ev(`document.querySelector('[data-tenant="t-b"]').click(); return 1;`);
+  ok(await waitFor(`return localStorage.getItem("smd_connect_agent_tenant")==="t-b" && window.__calls.some(function(c){return c.path==="/connections";});`, 6000), "picking a hospital stores the choice and loads its connections");
+  ok(await waitFor(`return document.getElementById("smd-connect-ov").innerText.indexOf("Switch hospital")>=0;`, 4000), "the list offers Switch hospital");
+  await ev(`window.__tenants = null; localStorage.removeItem("smd_connect_agent_tenant"); return 1;`);
 
   ok(consoleErrors.length === 0, "zero console errors and zero uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 5)) : ""));
 

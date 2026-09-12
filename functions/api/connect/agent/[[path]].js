@@ -313,7 +313,14 @@ export async function onRequest(context) {
   };
 
   try {
-    if (!tid && seg !== "hospitals/resolve") await resolveTid();
+    if (!tid && seg !== "hospitals/resolve" && seg !== "tenants") await resolveTid();
+    // GET /tenants -- the hospitals this account may onboard for. The client asks the doctor to pick
+    // one when there are several (an owner or super-admin belongs to many), instead of the 400
+    // "tenantId required" that resolveTid() answers for every other route.
+    if (method === "GET" && seg === "tenants") {
+      const mine = (await listMyTenants(deps, request, env)).filter((t) => canAgent(t.role, "read"));
+      return jsonResponse({ ok: true, tenants: mine.map((t) => ({ tenantId: t.tenantId, name: t.name || null, role: t.role })) });
+    }
     // POST /sessions -- validate actor/tenant via identify()+RBAC, consent, create job/session
     if (method === "POST" && seg === "sessions") {
       if (!browserSessionFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });

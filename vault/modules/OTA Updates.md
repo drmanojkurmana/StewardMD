@@ -131,3 +131,5 @@ never by calling an internal function name directly — there isn't one to call.
   slider yet — every publish defaults to 100%.
 
 Deps: [[Native app delivery]]. See [[Decisions]] for the full incident history and reasoning.
+
+- **2026-09-12 gotcha:** an `adb install` can look like it did nothing: the phone keeps running the downloaded OTA bundle (`CapacitorUpdater.current()` over CDP shows it), not `assets/public`. `CapacitorUpdater.reset({toLastSuccessful:false})` puts the APK bundle back. After a client merge, press Push to devices or the next OTA pull restores the old UI.
