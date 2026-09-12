@@ -822,17 +822,78 @@
    * reconstruct by reading nine separate cards. Nothing here is a second copy of the record: the
    * events are labels over the SAME rows the cards above render, ordered by when each actually
    * happened. A resource with no timestamp is counted, never silently dropped - see w-hint below. */
+  /* One row of the stay. Shared by the card on the chart and the full-page Timeline, so the two can
+   * never drift into telling the story differently. */
+  function timelineRow(e) {
+    return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
+  }
+  function timelineGapHint(state) {
+    return state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "";
+  }
   function timelineCard(state) {
     var t = state.timeline;
     if (t == null) return "";
-    var rows = t.map(function (e) {
-      return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
-    }).join("");
+    var rows = t.map(timelineRow).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Timeline</h3>" +
+      '<button class="w-btn tiny" data-w-act="timeline" title="The whole clinical history on one page">' + ms("open_in_full") + "Open full history</button>" +
       '<button class="w-ic" data-w-act="open:' + esc((state.sel || {}).encounterId || "") + '" title="Refresh">' + ms("refresh") + "</button></div>" +
       (rows ? "<ul class=\"w-timeline\">" + rows + "</ul>" : '<p class="w-empty">Nothing recorded yet.</p>') +
-      (state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "") +
+      timelineGapHint(state) +
       "</div>";
+  }
+
+  /* THE WHOLE CLINICAL HISTORY, ON ONE PAGE, WITH SOMEWHERE TO WRITE.
+   *
+   * The timeline was a card among a dozen other cards, which is the wrong shape for the one thing a
+   * doctor picking up an unfamiliar patient actually does first: read the stay from the beginning.
+   * It is now a page of its own, and the note box sits at the top of it, because the note a ward
+   * round produces is written WHILE reading the history that prompted it, not on a different screen.
+   *
+   * Notes are append-only here as everywhere else: there is no edit and no delete. A correction is a
+   * new note, exactly as a corrected discharge summary is a new signed version. */
+  function timelineOpen() {
+    var s = st.sel; if (!s) return;
+    st.view = "timeline"; st.noteErr = ""; paint();
+    if (st.timeline == null) loadChart();
+  }
+  function timelineNoteSave() {
+    var s = st.sel; if (!s) return;
+    var text = val("wTlNote");
+    if (!text) { st.noteErr = "A note needs words."; paint(); return; }
+    st.busy = true; st.noteErr = ""; paint();
+    /* "progress" is the built-in free-text template every hospital has without configuring one
+     * (functions/_wardsynq/note-templates.js). A hospital that defines its own `progress` template
+     * replaces it, and this keeps working. */
+    apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: text } })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Note added." : null)) {
+          var el = document.getElementById("wTlNote"); if (el) el.value = "";
+          // Re-read rather than repaint from what the browser believes. A successful write that
+          // leaves the page showing the old story is the bug this codebase has already been bitten
+          // by on the flowsheet and the problem list.
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.noteErr = "Could not save that note."; paint(); });
+  }
+  function timelineView(state) {
+    var s = state.sel || {};
+    var t = state.timeline;
+    var rows = (t || []).map(timelineRow).join("");
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
+        (s.mrn ? esc(s.mrn) + " &middot; " : "") + "clinical history</small></div>" +
+      '<button class="w-ic" data-w-act="timelineload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Add a clinical note</h3></div>" +
+      '<p class="w-hint">What has happened, what was found, what was done, and what happens next. It is added to this history and cannot be edited afterwards; a correction is a new note.</p>' +
+      '<textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen."></textarea>' +
+      (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + "</p>" : "") +
+      '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + "Add note</button></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>History &middot; " + (t ? t.length : 0) + "</h3></div>" +
+      (t == null ? '<p class="w-empty">Loading the history.</p>'
+        : rows ? '<ul class="w-timeline">' + rows + "</ul>"
+        : '<p class="w-empty">Nothing recorded on this stay yet.</p>') +
+      timelineGapHint(state) + "</div>";
   }
 
   var VITALS = [
@@ -1044,6 +1105,9 @@
         // discharge is prepared while the patient is still on the ward, so this is not gated on the
         // stay being closed - the summary screen states plainly when a stay is still open.
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
+        // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
+        // patient does before anything else, and it is where the note box now lives.
+        '<button class="w-btn ghost" data-w-act="timeline" title="The whole clinical history on one page, and where you add a clinical note">' + ms("history") + "Timeline</button>" +
         '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
         // ONCqis is a separate product; this is only the LINK into it. Reachable from any patient
         // because oncology is a workflow layered on the ordinary chart, not a ward of its own.
@@ -3151,6 +3215,7 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "timeline" ? timelineView(state)
         : state.view === "labboard" ? labBoardView(state)
         : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
@@ -5135,6 +5200,7 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "timeline") { st.view = "chart"; paint(); return; }
       if (st.view === "labboard") { st.labBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "radboard") { st.radBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
@@ -5219,6 +5285,9 @@
     if (cmd === "srcrevoke") { revokeSource(arg); return; }
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
+    if (cmd === "timeline") { timelineOpen(); return; }
+    if (cmd === "timelineload") { loadChart(); return; }
+    if (cmd === "timelinenote") { timelineNoteSave(); return; }
     if (cmd === "labboard") { labBoardOpen(); return; }
     if (cmd === "labboardload") { loadLabBoard(); return; }
     if (cmd === "radboard") { radBoardOpen(); return; }

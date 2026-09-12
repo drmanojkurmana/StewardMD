@@ -845,7 +845,12 @@ const TIMELINE_LABEL = {
   Observation: (r) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
   MedicationOrder: (r) => `Prescribed ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
   MedicationAdministration: (r) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}`,
-  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,
+  /* WHO ASKED FOR IT travels with the order. The timeline said what was ordered and when but never
+   * by whom, and "who ordered this chest film, and when" is the first question asked about an
+   * investigation nobody can account for. requesterId is the AUTHENTICATED ordering clinician
+   * (migrate-inv-order.js: "never a name typed anywhere"), so this is the session's own record and
+   * not a free-text claim. An order carrying no requester says nothing rather than guessing. */
+  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}${r.requesterId ? ` · ordered by ${r.requesterId}` : ""}`,
   DiagnosticReport: (r) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}`,
   CarePlan: (r) => `Care plan — ${r.status || "draft"}`,
   ClinicalNote: (r) => `${r.noteType || "progress"} note${r.signedBy ? " signed" : r.aiDrafted ? " (AI-drafted, unsigned)" : " drafted"}`,
