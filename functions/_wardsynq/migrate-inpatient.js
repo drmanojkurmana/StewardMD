@@ -25,7 +25,7 @@
  */
 
 import { Encounter, MedicationOrder } from "../../wardsynq/wardsynq-model.js";
-import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
+import { GovernanceError, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
@@ -306,9 +306,17 @@ async function claimBed(svc, candidate) {
   const claimId = bedClaimIdFor(ward, bed);
   const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
   const version = latest ? latest.version + 1 : 1;
+  const at = new Date().toISOString();
   await svc.repository.append(svc.tenantId, [{
     resourceType: BED_CLAIM_TYPE, id: claimId, version,
-    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: new Date().toISOString(),
+    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: at,
+    /* This write goes straight to the repository, bypassing the governed store's put()/putMany()
+     * (which stamps writtenBy itself - see wardsynq-actors.js) because a bed claim isn't a clinical
+     * entity subject to authoriseWrite; it's this reconciler's own bookkeeping. Skipping that layer
+     * meant skipping its stamp too, so every bed-claim row in Audit and security showed a blank
+     * WHEN forever - not a missing fact, a fact this file never wrote down. KIND.SERVICE ("internal
+     * machinery such as the escalation monitor") is exactly what this is. */
+    writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
   }], {});
 }
 
