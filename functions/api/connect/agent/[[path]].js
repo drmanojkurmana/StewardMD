@@ -71,6 +71,7 @@ import {
   templatePlaceholders,
 } from "../../../../connect-agent/manifest/schema.mjs";
 import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
+import { askBrain, ROLES as BRAIN_ROLES } from "../../../_connect/agent/brain.js";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
@@ -206,6 +207,16 @@ function cleanObservedViews(raw) {
     if (v.guided !== undefined) {
       if (typeof v.guided !== "boolean") throw new OnboardError("invalid", "observedViews: guided invalid");
       clean.guided = v.guided;
+    }
+    // The brain's column roles (advisory; infer-html uses one only where its own rules found nothing).
+    if (v.fieldHints !== undefined) {
+      if (!v.fieldHints || typeof v.fieldHints !== "object" || Array.isArray(v.fieldHints)) throw new OnboardError("invalid", "observedViews: fieldHints invalid");
+      const fh = {};
+      for (const k of Object.keys(v.fieldHints)) {
+        if (typeof k !== "string" || k.length > 120 || BRAIN_ROLES.indexOf(v.fieldHints[k]) < 0) throw new OnboardError("invalid", "observedViews: fieldHints invalid");
+        if (clean.headers.indexOf(k) >= 0) fh[k] = v.fieldHints[k];
+      }
+      clean.fieldHints = fh;
     }
     if (v.guidedPath !== undefined) {
       if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {
@@ -358,6 +369,23 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "tenants") {
       const mine = (await listMyTenants(deps, request, env)).filter((t) => canAgent(t.role, "read"));
       return jsonResponse({ ok: true, tenants: mine.map((t) => ({ tenantId: t.tenantId, name: t.name || null, role: t.role })) });
+    }
+    // POST /brain/classify | /brain/map-columns | /brain/next -- the model that reads screen STRUCTURE.
+    // PHI gate first (400 with the reason, nothing sent), then a per-origin cache, then the model.
+    // A model failure is 503 brain_unavailable: the phone falls back to its deterministic rules.
+    if (method === "POST" && parts.length === 2 && parts[0] === "brain") {
+      await requireAgent(deps, request, env, tid, "session");
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      const { tenantId: _t, ...payload } = body;
+      payload.op = parts[1];
+      let out;
+      try {
+        out = await askBrain({ env, kv: deps.kv, fetchImpl: deps.fetch, generateImpl: env.brainGenerate, payload });
+      } catch (e) {
+        return jsonResponse({ ok: false, error: "brain_unavailable", detail: String((e && e.message) || e).slice(0, 300) }, { status: 503 });
+      }
+      if (!out.ok) throw new OnboardError("invalid", "refused by the PHI gate: " + out.refused);
+      return jsonResponse(Object.assign({ ok: true, cached: out.cached, model: out.model }, out.answer));
     }
     // POST /sessions -- validate actor/tenant via identify()+RBAC, consent, create job/session
     if (method === "POST" && seg === "sessions") {

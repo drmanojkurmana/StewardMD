@@ -83,7 +83,7 @@ Commit and push at the end of every numbered step, message `connect-agent modes:
 usage cut-off at any point leaves a resumable branch. Update this file's status list as you go.
 
 1. Model gateway route: `POST /api/connect/agent/brain/classify` and `/brain/map-columns`, PHI gate,
-   per-origin cache, env model id. Unit tests with a fake model.  STATUS: not started
+   per-origin cache, env model id. Unit tests with a fake model.  STATUS: done 2026-09-12 (functions/_connect/agent/brain.js, routes POST /api/connect/agent/brain/{classify,map-columns,next}, env CONNECT_AGENT_MODEL + CONNECT_AGENT_MODEL_PROVIDER, observedViews.fieldHints honored by infer-html; test/connect/agent/brain.test.mjs)
 2. Manual mode UI: mode picker on the consent screen, the ordered ask list with "My EMR does not
    have this", Done captures structure, progress bar by asks. Harness test.  STATUS: not started
 3. Wire the brain into Manual: classify on Done, map headers; deterministic fallback.  STATUS: not started
