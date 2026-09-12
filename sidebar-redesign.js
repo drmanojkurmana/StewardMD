@@ -550,7 +550,7 @@
         xaRowHTML("fundx", "🔬", "FundX AI", "AI-guided retinal screening &amp; fundus imaging") +
         xaRowHTML("kardiox", "🫀", "KardiQ X AI", "On-device 12-lead ECG rhythm &amp; ischemia interpretation") +
         xaRowHTML("thorex", "🫁", "ThoreX AI", "On-device chest radiograph interpretation") +
-        xaRowHTML("sknx", "🧴", "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
+        xaRowHTML("sknx", '<img src="/sknx-mark.png?v=sx2" alt="" width="20" height="20" style="object-fit:contain;vertical-align:middle;display:inline-block;">', "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
       '</div>' +
 
       '<div class="sbr-sec">AI Diagnostic Modules</div>' +
