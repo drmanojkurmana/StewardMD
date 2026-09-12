@@ -252,3 +252,13 @@ cancel a bill, claims whose coding changed after a payer refusal.
 
 **Numbers:** 5997 passing, 0 failing. 37 routes waiting for a screen.
 **Next:** tariff (price list, admin), maternity-status, follow-up, discharge, oncology/cardiology links.
+
+
+## 2026-09-14 (cont.) — price list (backlog 37 -> 36)
+
+**Bug:** changing a price left no audit trail (every other billing action did). Now audited with the
+old and new price; 4 tests. **Bug:** a failed department load read as "No departments yet". Fixed.
+Added the price list tab to the admin centre (paise stored, rupees shown, unparseable price refused).
+
+**Numbers:** 6001 passing, 0 failing. 36 routes waiting for a screen.
+**Next:** maternity-status, follow-up, discharge, oncology/cardiology links, then P0.7 fuzzy search.
