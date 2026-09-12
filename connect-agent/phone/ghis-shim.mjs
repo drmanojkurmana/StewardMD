@@ -30,12 +30,13 @@ const RX = {
 
 function col(row, re, not) {
   for (const k of Object.keys(row || {})) {
+    if (k === '_href' || k === '_args') continue;
     if (re.test(k) && !(not && not.test(k))) { const v = String(row[k] == null ? '' : row[k]).trim(); if (v) return v; }
   }
   return '';
 }
 function firstText(row) {
-  for (const k of Object.keys(row || {})) { const v = String(row[k] == null ? '' : row[k]).trim(); if (v && !/^\d+$/.test(v)) return v; }
+  for (const k of Object.keys(row || {})) { if (k === '_href' || k === '_args') continue; const v = String(row[k] == null ? '' : row[k]).trim(); if (v && !/^\d+$/.test(v)) return v; }
   return '';
 }
 function rowsOf(sections, resource) {
@@ -97,7 +98,7 @@ export function radiologyOrders(sections, patient) {
     reportOf: (resultid) => {
       const r = rows[Number(String(resultid).slice(1))];
       if (!r) return { error: 'parse' };
-      return { testName: col(r, RX.name) || firstText(r), report: col(r, RX.text, RX.name) || Object.keys(r).map((k) => k + ': ' + r[k]).join('\n'), orderDate: col(r, RX.date), reported: col(r, RX.date), doctor: col(r, RX.by), enteredBy: '' };
+      return { testName: col(r, RX.name) || firstText(r), report: col(r, RX.text, RX.name) || Object.keys(r).filter((k) => k !== '_href' && k !== '_args').map((k) => k + ': ' + r[k]).join('\n'), orderDate: col(r, RX.date), reported: col(r, RX.date), doctor: col(r, RX.by), enteredBy: '' };
     },
   };
 }
@@ -115,7 +116,7 @@ export function historyEntries(sections, patient) {
   const entries = [];
   for (const res of ['notes', 'history', 'discharge']) {
     for (const r of rowsOf(sections, res)) {
-      const text = col(r, RX.text) || Object.keys(r).map((k) => k + ': ' + r[k]).join('. ');
+      const text = col(r, RX.text) || Object.keys(r).filter((k) => k !== '_href' && k !== '_args').map((k) => k + ': ' + r[k]).join('. ');
       if (!text) continue;
       const date = col(r, RX.date);
       entries.push({ visitId: col(r, RX.visit) || ((patient && patient.episodeId) || ''), by: col(r, RX.by), text: ((date ? date + ' ' : '') + (res === 'discharge' ? 'Discharge summary: ' : '') + text).slice(0, 6000) });

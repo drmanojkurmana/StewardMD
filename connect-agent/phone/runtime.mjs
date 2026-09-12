@@ -49,10 +49,13 @@ export function fieldForHeader(label) {
 
 // One extracted row ({header: text}) -> the shape renderPatients() reads. "Age / Sex" style columns
 // split into both. Rows with neither a name nor an id are dropped by the caller.
+function isMeta(k) { return k === '_href' || k === '_args'; }
+
 export function mapRow(row) {
   const out = { patientId: '', episodeId: '', patientFirstName: '', dob: '', gender: '', bedName: '', deptDescription: '', employeeFirstName: '', queueStatus: '' };
   const dest = { mrn: 'patientId', episode: 'episodeId', name: 'patientFirstName', age: 'dob', gender: 'gender', bed: 'bedName', dept: 'deptDescription', doctor: 'employeeFirstName', status: 'queueStatus' };
   for (const key of Object.keys(row || {})) {
+    if (isMeta(key)) continue;
     const f = fieldForHeader(key);
     const v = String(row[key] == null ? '' : row[key]).replace(/\s+/g, ' ').trim();
     if (!f || !v) continue;
@@ -105,6 +108,19 @@ export function READ_ROWS(doc, view) {
         var t = txt(cells[c]);
         if (t) { rec[headers[c] || ('col' + c)] = t; filled++; }
       }
+    }
+    /* ROW-LEVEL IDENTIFIERS stay with the row (on the phone only): the first link's href and the
+     * arguments of the row's onclick, so a detail call (a lab render, a radiology report) can be
+     * keyed from the list the way the hospital's own page keys it. */
+    if (filled) {
+      try {
+        var a = row.querySelector ? row.querySelector('a[href]') : null;
+        if (a && a.getAttribute) { var href = a.getAttribute('href') || ''; if (href && href.charAt(0) !== '#' && !/^javascript:/i.test(href)) rec._href = href; }
+        var oc = (row.getAttribute && row.getAttribute('onclick')) || '';
+        if (!oc && row.querySelector) { var el = row.querySelector('[onclick]'); oc = (el && el.getAttribute('onclick')) || ''; }
+        var m = /\(([^)]*)\)/.exec(oc);
+        if (m && m[1].trim()) rec._args = m[1].split(',').map(function (x) { return x.trim().replace(/^['"]|['"]$/g, ''); });
+      } catch (e) {}
     }
     if (filled) out.push(rec);
   }
@@ -212,13 +228,28 @@ export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitM
   return rows;
 }
 
+/* ENDPOINT REPLAY FIRST. Once discovery recorded the data call a view makes, that call is the primary
+ * path (issued inside the doctor's browser session by adapter-runtime.mjs); the rendered page is the
+ * fallback for views whose call was never seen. `onRead` reports which path served each view. */
+async function replayFirst({ plugin, origin, view, patient, onRead }) {
+  const ar = await import('./adapter-runtime.mjs');
+  const out = await ar.executeView({ plugin, origin, view, patient });
+  if (out && out.rows.length) { if (onRead) onRead({ resource: view.resourceHint, via: 'endpoint', url: out.url, kind: out.kind }); return out.rows; }
+  return null;
+}
+
 // The ward list. Throws with a reason the UI can show verbatim.
-export async function readWorklist({ plugin, origin, replay, settleMs }) {
+export async function readWorklist({ plugin, origin, replay, settleMs, onRead }) {
   const views = viewsByResource(replay);
   const view = views.worklist || views.patient;
   if (!view) throw new Error('the approved adapter has no worklist view');
   if (view.block) throw new Error('the worklist view is a report block, not a table');
-  const rows = await readView({ plugin, origin, view, settleMs, toggleAll: true });
+  let rows = null;
+  try { rows = await replayFirst({ plugin, origin, view, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; rows = null; }
+  if (!rows) {
+    rows = await readView({ plugin, origin, view, settleMs, toggleAll: true });
+    if (onRead) onRead({ resource: 'worklist', via: 'page', url: view.pathTemplate || view.path });
+  }
   const patients = mapRows(rows);
   if (!patients.length) throw new Error('no patient rows found at ' + (view.pathTemplate || view.path || origin) + ' (' + rows.length + ' rows read, none with a name or id)');
   return patients;
@@ -267,7 +298,7 @@ function fallbackView(view) {
   return Object.assign({}, view, { rowsSelector: 'table tbody tr', headers: [] });
 }
 
-export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000 }) {
+export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
   const views = viewsByResource(replay);
   const sections = [];
   for (const r of DETAIL_RESOURCES) {
@@ -277,6 +308,9 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
      * recordNo), then the data calls that page made (the medicines fragment by id). A page shared with
      * the worklist (the single-page Doctor Home) is skipped: it never shows this patient's panel on
      * its own. Each place is read with the recorded selector, then with the fallback. */
+    let replayed = null;
+    try { replayed = await replayFirst({ plugin, origin, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
+    if (replayed) { sections.push({ resource: r, rows: replayed, via: 'endpoint' }); continue; }
     const own = fillPath(v.pathTemplate || v.path, patient);
     const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
     const places = [];
@@ -292,7 +326,8 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
       if (rows.length) break;
     }
     if (!rows.length && lastErr) { sections.push({ resource: r, error: lastErr.message }); continue; }
-    sections.push({ resource: r, rows });
+    if (rows.length && onRead) onRead({ resource: r, via: 'page' });
+    sections.push({ resource: r, rows, via: 'page' });
   }
   return sections;
 }
