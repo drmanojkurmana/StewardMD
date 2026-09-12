@@ -97,7 +97,15 @@ table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
 th, td { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
 th { font-size: var(--t-micro); color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 td.num { font-variant-numeric: tabular-nums lining-nums; text-align: right; }
+/* .tbl exists to let a wide table scroll sideways instead of squeezing its columns - but `table`
+ * is `width: 100%` and browsers auto-size columns to fit that 100%, so a table never actually
+ * overflows its scroll box; it just gets squeezed. Then .mono's word-break:break-word, with nothing
+ * left to break AT, wraps a long unbroken id (e.g. "wsq-bed-claim-general-medicine-a-gma-01") one
+ * character per line - the audit log's own id column turned a one-line row into a 40-line one.
+ * `width: max-content` lets the table size to its natural content width instead, so a table wider
+ * than its box now genuinely overflows and .tbl's scrollbar is what handles it, as intended. */
 .tbl { overflow-x: auto; }
+.tbl table { width: max-content; min-width: 100%; }
 .pill { display: inline-block; font-size: var(--t-micro); padding: 0 7px; border-radius: var(--r); border: 1px solid var(--hair); color: var(--ink-2); white-space: nowrap; }
 .pill.ok { border-color: var(--sig-clear); color: var(--sig-clear); }
 .pill.warn { border-color: var(--sig-major); color: var(--sig-major); }
