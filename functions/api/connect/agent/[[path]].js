@@ -487,7 +487,14 @@ export async function onRequest(context) {
       const sessionResp = Object.assign({ ok: true }, sessionView(session, job));
       if (runnerPhone) {
         sessionResp.deployment = { id: deployment.id, origins: deploymentOrigins(deployment), activeVersionId: deployment.active_version_id || null };
-        sessionResp.reuse = !job && !!deployment.active_version_id;
+        /* REUSE IS ABOUT THE ADAPTER, NOT ABOUT A LEFTOVER JOB. A doctor who ran Connect Hospital and
+         * then opened Ward Sync within the hour still holds the live session of that run, complete
+         * with its onboarding job; "no job" made reuse false and Ward Sync refused the APPROVED
+         * adapter with reuse=false (owner, 2026-09-13). A caller reading through the adapter says
+         * purpose:"read"; otherwise only a job still onboarding keeps reuse off, so the sheet can
+         * resume that run. */
+        const jobBusy = !!job && ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"].includes(job.state);
+        sessionResp.reuse = !!deployment.active_version_id && (body.purpose === "read" || !jobBusy);
       }
       return jsonResponse(sessionResp);
     }

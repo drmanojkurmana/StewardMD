@@ -504,7 +504,7 @@
         function selfRepair(err) { return ghisSelfRepair(ctx, plugin, rt, err); }
         loadWardRuntime().then(function (m) {
           rt = m;
-          return agentApi('/sessions', it.tid, { method: 'POST', body: JSON.stringify({ emrUrl: origin, consent: { agreed: true }, runner: 'phone' }) });
+          return agentApi('/sessions', it.tid, { method: 'POST', body: JSON.stringify({ emrUrl: origin, consent: { agreed: true }, runner: 'phone', purpose: 'read' }) });
         }).then(function (r) {
           if (r.s !== 200 || !r.d || r.d.ok === false) throw new Error(agentReason(r, 'start a session with ' + host));
           if (!r.d.reuse || !r.d.deployment || !r.d.deployment.activeVersionId) throw new Error('The server did not reuse the approved adapter for ' + host + ' (reuse=' + String(!!r.d.reuse) + ', activeVersionId=' + String(r.d.deployment && r.d.deployment.activeVersionId) + ').');
