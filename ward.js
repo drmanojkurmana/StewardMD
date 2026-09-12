@@ -2845,7 +2845,11 @@
       '<label class="w-f"><span>MRN</span><input id="wCashMrn" type="text" autocomplete="off" value="' + esc(c.mrn || "") + '"></label>' +
       "</div>" +
       '<button class="w-btn go" data-w-act="cashlookup">' + ms("search") + "Look up</button>" +
-      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.patientId) + "</small></p>" : "") + "</div>" +
+      /* THE SECOND LINE IS THE MRN, NOT THE RECORD ID. A cashier checks a patient against the number
+       * on their bill or their card, and "opd-pat-smd-6teqzm-00025" is neither: it is this system's
+       * own internal key, meaningless to hold up against anything a patient is carrying. c.mrn is
+       * exactly what she just typed to find this person, so it costs nothing extra to show back. */
+      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.mrn || c.patientId) + "</small></p>" : "") + "</div>" +
 
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>Outstanding balance</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
@@ -5498,7 +5502,20 @@
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
-    paint(); loadWard();
+    paint();
+    /* A HOSPITAL ACT LOADS ITS OWN SCREEN, NOT THE WARD ROSTER TOO.
+     *
+     * open() used to call loadWard() unconditionally, even when the shell asked for a specific
+     * hospital-wide board (opts.act). The roster read needs the same record scope as the ward list
+     * and plenty of roles - cashier, pharmacy, the front desk - do not hold it. So a cashier opening
+     * Billing and cashier watched the ward roster fail first ("cash.01@demo.wardsynq.test may not
+     * read Encounter"), which set the ONE shared error banner, and then landed on her own working
+     * cashier screen with somebody else's refusal still printed across the top of it. Her screen was
+     * fine; the request she never made was not.
+     *
+     * Every hospital act already loads itself (loadBoard, loadEd, cashierOpen, loadReports, ...), so
+     * the roster read is only needed when no act is given - opening the plain ward list. */
+    if (!(opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0)) loadWard();
     // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
