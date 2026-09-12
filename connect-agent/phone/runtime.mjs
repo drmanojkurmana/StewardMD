@@ -164,11 +164,24 @@ export const EXPAND_PAGE_LENGTH = "(function(){try{var s=document.querySelector(
  * recorded selector until rows appear or maxWaitMs passes, and first widens the page length so a
  * ward of thirty is not truncated to ten. */
 function hostOf(u) { try { return new URL(u).host; } catch { return String(u || ''); } }
+function samePage(a, b) { try { const x = new URL(a), y = new URL(b); return x.host === y.host && x.pathname.replace(/\/$/, '') === y.pathname.replace(/\/$/, ''); } catch { return false; } }
 
-export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000, navigate = true }) {
+/* AN EMPTY WORKLIST MAY BE A FILTER, NOT AN EMPTY WARD. GHIS lists only the signed-in doctor's own
+ * patients until "All patients" is ticked (owner's screen, 2026-09-13, 0 of 0 entries). When a list
+ * reads empty, tick a toggle labelled like that once and read again. */
+export const TOGGLE_ALL = "(function(){try{var els=[].slice.call(document.querySelectorAll('label,input[type=\"checkbox\"],a,button,span,div'));for(var i=0;i<els.length;i++){var el=els[i];var t=(el.textContent||el.getAttribute('aria-label')||'').replace(/\\s+/g,' ').trim();if(!/^(all patients|show all( patients)?|all)$/i.test(t))continue;var box=el.tagName==='INPUT'?el:(el.querySelector&&el.querySelector('input[type=\"checkbox\"]'))||(el.htmlFor&&document.getElementById(el.htmlFor))||null;if(!box&&el.previousElementSibling&&el.previousElementSibling.tagName==='INPUT')box=el.previousElementSibling;if(!box&&el.parentElement)box=el.parentElement.querySelector('input[type=\"checkbox\"]');if(box){if(box.checked)return 'already';box.click();return 'ticked'}el.click();return 'clicked'}return 'none'}catch(e){return 'e'}})()";
+
+export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000, navigate = true, toggleAll = false }) {
   if (navigate) {
-    await plugin.navigate({ url: pathToUrl(origin, view.pathTemplate || view.path) });
-    await settle(settleMs);
+    /* Already on the page (the doctor signed in and landed on it): reading it as it stands keeps the
+     * context the EMR set for them; a reload from the address bar can lose it. */
+    let here = null;
+    try { const cur = await plugin.currentUrl(); here = typeof cur === 'string' ? cur : cur && cur.url; } catch { here = null; }
+    const target = pathToUrl(origin, view.pathTemplate || view.path);
+    if (!here || !samePage(here, target)) {
+      await plugin.navigate({ url: target });
+      await settle(settleMs);
+    }
   }
   /* NOT SIGNED IN IS A NAMED FAILURE, NOT AN EMPTY WARD. If the hospital answered this path with
    * its login form, reading on would report "no patients" for a session that never existed. Seen
@@ -182,11 +195,18 @@ export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitM
   try { await plugin.evaluate({ expression: EXPAND_PAGE_LENGTH }); } catch { /* not a DataTable: read as is */ }
   const started = Date.now();
   let rows = [];
+  let toggled = !toggleAll;
   for (;;) {
     const res = await plugin.evaluate({ expression: readRowsExpression(view) });
     try { rows = JSON.parse((res && res.result) || '[]'); } catch { throw new Error('the page returned no readable rows (bad JSON from the reader)'); }
     rows = Array.isArray(rows) ? rows : [];
     if (rows.length || Date.now() - started >= maxWaitMs) break;
+    if (!toggled && Date.now() - started >= Math.min(4000, maxWaitMs / 3)) {
+      toggled = true;
+      let t = 'none';
+      try { t = String((await plugin.evaluate({ expression: TOGGLE_ALL }))?.result || 'none'); } catch { t = 'none'; }
+      if (t === 'ticked' || t === 'clicked') { await settle(settleMs); continue; }
+    }
     await settle(pollMs);
   }
   return rows;
@@ -198,7 +218,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs }) {
   const view = views.worklist || views.patient;
   if (!view) throw new Error('the approved adapter has no worklist view');
   if (view.block) throw new Error('the worklist view is a report block, not a table');
-  const rows = await readView({ plugin, origin, view, settleMs });
+  const rows = await readView({ plugin, origin, view, settleMs, toggleAll: true });
   const patients = mapRows(rows);
   if (!patients.length) throw new Error('no patient rows found at ' + (view.pathTemplate || view.path || origin) + ' (' + rows.length + ' rows read, none with a name or id)');
   return patients;

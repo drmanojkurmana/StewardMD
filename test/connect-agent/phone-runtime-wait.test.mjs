@@ -34,6 +34,35 @@ test('readView stops after maxWaitMs with an empty list rather than hanging', as
   assert.deepEqual(rows, []);
 });
 
+test('readWorklist ticks an "All patients" toggle when the list reads empty, then reads again', async () => {
+  const { readWorklist, TOGGLE_ALL } = await import('../../connect-agent/phone/runtime.mjs');
+  let ticked = false;
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://ghis.example/Login' }; },
+    async evaluate({ expression }) {
+      if (expression === TOGGLE_ALL) { ticked = true; return { result: 'ticked' }; }
+      if (expression === EXPAND_PAGE_LENGTH) return { result: '1' };
+      if (expression.indexOf('password') >= 0 && expression.indexOf('READ_ROWS') < 0) return { result: 'ok' };
+      return { result: ticked ? JSON.stringify([{ 'Patient ID': 'MR1', 'Patient name': 'A' }]) : '[]' };
+    },
+  };
+  const pts = await readWorklist({ plugin, origin: 'https://ghis.example', replay: [VIEW], settleMs: 0 });
+  assert.equal(ticked, true);
+  assert.equal(pts.length, 1);
+});
+
+test('readView does not reload a page the doctor is already on', async () => {
+  const calls = [];
+  const plugin = {
+    async navigate({ url }) { calls.push(url); },
+    async currentUrl() { return { url: 'https://ghis.example/Doctor/Home?x=1' }; },
+    async evaluate() { return { result: JSON.stringify([{ 'Patient ID': 'MR1' }]) }; },
+  };
+  await readView({ plugin, origin: 'https://ghis.example', view: VIEW, settleMs: 0, pollMs: 0, maxWaitMs: 10 });
+  assert.deepEqual(calls, []);
+});
+
 test('the page-length expander prefers "All" and otherwise the largest option', () => {
   // Pure script text: it must name the DataTables length select and treat -1 as All.
   assert.ok(EXPAND_PAGE_LENGTH.indexOf('_length') >= 0);
