@@ -3,6 +3,12 @@
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
+/* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
+ * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
+ * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
+ * handed to runPhoneDiscovery, and discovery sat at zero pages forever after a successful sign-in:
+ * the raw plugin has no evaluate/snapshot/click. Found on the device 2026-09-12. */
+export { createPluginClient } from './plugin-client.mjs';
 // NB: HTML operation inference (infer-html.mjs) runs SERVER-SIDE in the broker's discovery route, not
 // on the phone. The phone only crawls and sends the observed view STRUCTURE; the server infers the
 // adapter from it (same split as compile/validate). Keeping the manifest modules off the phone bundle.
