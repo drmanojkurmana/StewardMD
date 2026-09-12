@@ -43,7 +43,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -64,7 +64,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff };
     return renderers[tab](c, body);
   } });
 
@@ -145,11 +145,74 @@
     wireNoteWriters(c);
   }
 
+  // ---- Price list -------------------------------------------------------------------------------
+  /* WHAT THE HOSPITAL CHARGES. Prices are stored in paise, whole numbers, and shown in rupees - the
+   * conversion happens only here, on the way in and out, so no amount is ever held as a fraction that
+   * rounds differently in two places. Every change is audited on the server with the old price and the
+   * new one. Withdrawing an item hides it from new bills but keeps it, because old bills still name it. */
+  function rupees(paise) { var n = Number(paise); return isFinite(n) ? (n / 100).toFixed(2) : ""; }
+  function renderTariff(c, body) {
+    body.innerHTML = '<span class="spin"></span>';
+    return c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">The price list could not be loaded. Do not read this as an empty price list.</div>'; return; }
+      var items = r.items || [];
+      body.innerHTML = '<div class="card"><h2>Price list</h2>' +
+        (items.length ? '<div class="tbl"><table><thead><tr><th>Item</th><th>Code</th><th>Kind</th><th>Price (Rs)</th><th></th></tr></thead><tbody>' +
+          items.map(function (t) {
+            return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(t.kind) + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
+              '<td><button type="button" class="btn ghost" data-trf-edit="' + c.esc(t.id) + '">Change price</button> ' +
+              '<button type="button" class="btn ghost" data-trf-off="' + c.esc(t.id) + '">Withdraw</button></td></tr>';
+          }).join("") + "</tbody></table></div>" : '<p class="quiet">No prices set yet.</p>') +
+        '<h3>Add an item</h3><div class="row">' +
+        '<label class="f"><span>Name</span><input id="admTrfName"></label>' +
+        '<label class="f"><span>Code</span><input id="admTrfCode"></label>' +
+        '<label class="f"><span>Kind</span><select id="admTrfKind"><option value="investigation">Test</option><option value="medication">Medicine</option><option value="service">Service</option></select></label>' +
+        '<label class="f"><span>Price (Rs)</span><input id="admTrfPrice" inputmode="decimal"></label>' +
+        '</div><button type="button" class="btn" id="admTrfAdd">Add</button><div id="admTrfMsg"></div>' +
+        '<p class="quiet">Every change is recorded with the old and new price.</p></div>';
+
+      function save(item) {
+        return c.api("/bill/tariff", Object.assign({ orgId: c.state.orgId }, item)).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast("Saved."); renderTariff(c, body);
+        });
+      }
+      /* Rupees in, paise out. A price that is not plainly a number is refused here, never guessed at. */
+      function toPaise(v) { var t = String(v || "").trim(); return /^\d+(\.\d{1,2})?$/.test(t) ? Math.round(Number(t) * 100) : null; }
+
+      document.getElementById("admTrfAdd").onclick = function () {
+        var name = document.getElementById("admTrfName").value.trim();
+        var price = toPaise(document.getElementById("admTrfPrice").value);
+        if (!name) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">Give the item a name.</div>'; return; }
+        if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">The price has to be a plain amount in rupees, like 450 or 450.50.</div>'; return; }
+        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, price: price });
+      };
+      body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-edit"); })[0]; if (!t) return;
+          var v = prompt("New price for " + t.name + " in rupees (now " + rupees(t.price) + ")"); if (v == null) return;
+          var price = toPaise(v);
+          if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">The price has to be a plain amount in rupees.</div>'; return; }
+          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, price: price });
+        };
+      });
+      body.querySelectorAll("[data-trf-off]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-off"); })[0]; if (!t) return;
+          if (!confirm("Withdraw " + t.name + " from the price list? Old bills keep it.")) return;
+          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, price: t.price, active: false });
+        };
+      });
+    });
+  }
+
   // ---- Departments ------------------------------------------------------------------------------
   function renderDepts(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var depts = (r && r.ok && r.departments) || [];
+      /* A failed load is not "no departments" - said plainly, and the list is not drawn. */
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">The departments could not be loaded. Do not read this as none set up.</div>'; return; }
+      var depts = r.departments || [];
       if (c.state.org) c.state.org._departments = depts;
       body.innerHTML = '<div class="card"><h2>Departments</h2>' +
         (depts.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Code</th><th>Type</th><th>Active</th></tr></thead><tbody>' +
