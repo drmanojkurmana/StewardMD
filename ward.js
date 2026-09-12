@@ -3087,17 +3087,48 @@
     return "";
   }
 
+  /* THE HALF-FILLED CONSULTATION HAS TO SURVIVE A REPAINT.
+   *
+   * This screen is one long form, and every repaint rebuilds it from scratch - so without this, a
+   * doctor who typed the vitals, the drug and half the note and then pressed "Find the code" would
+   * watch the whole lot vanish. Any repaint at all did it: the busy spinner, a background refresh,
+   * anything. The values are snapshotted off the DOM before a repaint and rendered back in.
+   *
+   * Deliberately NOT kept once the consultation is saved or the screen is left: a draft that
+   * outlives its patient is how one patient's findings end up typed into another's chart. close()
+   * clears it with everything else. */
+  var C_FIELDS = ["wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
+    "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText",
+    "wc_o2", "wc_acvpu"];
+  function cDraft(d, id) { return (d && d[id]) || ""; }
+  /* Options for one of the consultation's dropdowns, with whatever was already chosen marked
+   * selected - a select rebuilt without this silently snaps back to its first option, which on the
+   * oxygen box means a repaint turns "on oxygen" into "not recorded". */
+  function cOpts(d, id, pairs) {
+    var cur = cDraft(d, id);
+    return pairs.map(function (o) {
+      return '<option value="' + esc(o[0]) + '"' + (String(o[0]) === String(cur) ? " selected" : "") + ">" + esc(o[1]) + "</option>";
+    }).join("");
+  }
+  function cSnapshot() {
+    var d = st.cDraft || {};
+    VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) d["wc_" + f.k] = el.value; });
+    C_FIELDS.forEach(function (id) { var el = document.getElementById(id); if (el) d[id] = el.value; });
+    st.cDraft = d;
+  }
+
   function consultationView(state) {
+    var d = state.cDraft || {};
     var s = state.sel;
     if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
     var vf = VITALS.map(function (v) {
       var unit = v.u !== null ? v.u : v.k === "weight" ? weightUnitLabel() : tempUnitLabel();
       return '<label class="w-f"><span>' + esc(v.l) + " <i>" + esc(unit) + "</i></span>" +
-        '<input id="wc_' + v.k + '" type="text" inputmode="decimal" autocomplete="off"></label>';
+        '<input id="wc_' + v.k + '" type="text" inputmode="decimal" autocomplete="off" value="' + esc(cDraft(d, "wc_" + v.k)) + '"></label>';
     }).join("");
-    var tpls = (state.templates || []).map(function (t) {
-      return '<option value="' + esc(t.id) + '">' + esc(t.name || t.id) + "</option>";
-    }).join("");
+    var tpls = cOpts(d, "wcNoteTpl", [["", "Choose a template…"]].concat((state.templates || []).map(function (t) {
+      return [t.id, t.name || t.id];
+    })));
     return '<div class="w-card">' +
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<h3>Consultation</h3></div>" +
@@ -3105,31 +3136,44 @@
 
       '<div class="w-sub"><h4>Observations</h4><div class="w-grid">' + vf + "</div>" +
       '<div class="w-fluid"><label class="w-f"><span>Supplemental oxygen</span>' +
-      '<select id="wc_o2"><option value="">Not recorded</option><option value="0">Breathing air</option><option value="1">On oxygen</option></select></label>' +
+      '<select id="wc_o2">' + cOpts(d, "wc_o2", [["", "Not recorded"], ["0", "Breathing air"], ["1", "On oxygen"]]) + "</select></label>" +
       '<label class="w-f"><span>Consciousness <i>ACVPU</i></span><select id="wc_acvpu">' +
-      ACVPU.map(function (a) { return '<option value="' + esc(a[0]) + '">' + esc(a[1]) + "</option>"; }).join("") + "</select></label></div></div>" +
+      cOpts(d, "wc_acvpu", ACVPU) + "</select></label></div></div>" +
 
+      /* The code search is the SAME one the chart's own diagnosis box uses. It is offered here and
+       * never required: a coded diagnosis is better, an uncoded one is honest, and a guessed code is
+       * neither. Nothing auto-selects, not even on a single result - a person picks, exactly as on
+       * the chart, because one result is not the same as the right one. */
       '<div class="w-sub"><h4>Diagnosis</h4>' +
-      '<input id="wcProbText" placeholder="The problem, in words">' +
-      '<input id="wcProbCode" placeholder="Code (optional)">' +
-      '<select id="wcProbVs"><option value="">How sure are you?</option><option value="provisional">Provisional</option><option value="differential">Differential</option><option value="confirmed">Confirmed</option></select></div>' +
+      '<input id="wcProbText" placeholder="The problem, in words" value="' + esc(cDraft(d, "wcProbText")) + '">' +
+      '<input id="wcProbCode" placeholder="Code (optional)" value="' + esc(cDraft(d, "wcProbCode")) + '">' +
+      '<button class="w-btn ghost sm" data-w-act="cfindcode">' + ms("search") + "Find the code</button>" +
+      (state.cIcd === null ? '<p class="w-hint">' + ms("info") + "Searching…</p>" : "") +
+      (Array.isArray(state.cIcd)
+        ? (state.cIcd.length
+          ? '<ul class="w-icd">' + state.cIcd.map(function (c, i) {
+              return '<li><button class="w-icd-p" data-w-act="cicdpick:' + i + '"><b>' + esc(c.code) + "</b><span>" + esc(c.title) + "</span><small>" + esc(c.system || "") + "</small></button></li>";
+            }).join("") + "</ul>"
+          : '<p class="w-hint">' + ms("info") + "No matching code. Record it in words: an uncoded diagnosis is honest, a guessed code is not.</p>")
+        : "") +
+      '<select id="wcProbVs">' + cOpts(d, "wcProbVs", [["", "How sure are you?"], ["provisional", "Provisional"], ["differential", "Differential"], ["confirmed", "Confirmed"]]) + "</select></div>" +
 
       '<div class="w-sub"><h4>Prescription</h4>' +
-      '<input id="wcMoDrug" placeholder="Drug">' +
-      '<div class="w-grid"><label class="w-f"><span>Dose</span><input id="wcMoValue" inputmode="decimal"></label>' +
-      '<label class="w-f"><span>Unit</span><input id="wcMoUnit"></label></div>' +
-      '<input id="wcMoRoute" placeholder="Route (optional)">' +
-      '<input id="wcMoFreq" placeholder="How often (optional)">' +
+      '<input id="wcMoDrug" placeholder="Drug" value="' + esc(cDraft(d, "wcMoDrug")) + '">' +
+      '<div class="w-grid"><label class="w-f"><span>Dose</span><input id="wcMoValue" inputmode="decimal" value="' + esc(cDraft(d, "wcMoValue")) + '"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wcMoUnit" value="' + esc(cDraft(d, "wcMoUnit")) + '"></label></div>' +
+      '<input id="wcMoRoute" placeholder="Route (optional)" value="' + esc(cDraft(d, "wcMoRoute")) + '">' +
+      '<input id="wcMoFreq" placeholder="How often (optional)" value="' + esc(cDraft(d, "wcMoFreq")) + '">' +
       '<p class="w-hint">Drug, dose and unit go together. Any one of them on its own is not enough to prescribe.</p></div>' +
 
       '<div class="w-sub"><h4>Test to order</h4>' +
-      '<input id="wcInvCode" placeholder="Name of the test">' +
-      '<input id="wcInvReason" placeholder="Why (optional)">' +
-      '<select id="wcInvPri"><option value="">Routine</option><option value="urgent">Urgent</option><option value="stat">Immediately</option></select></div>' +
+      '<input id="wcInvCode" placeholder="Name of the test" value="' + esc(cDraft(d, "wcInvCode")) + '">' +
+      '<input id="wcInvReason" placeholder="Why (optional)" value="' + esc(cDraft(d, "wcInvReason")) + '">' +
+      '<select id="wcInvPri">' + cOpts(d, "wcInvPri", [["", "Routine"], ["urgent", "Urgent"], ["stat", "Immediately"]]) + "</select></div>" +
 
       '<div class="w-sub"><h4>Note</h4>' +
-      '<select id="wcNoteTpl"><option value="">Choose a template…</option>' + tpls + "</select>" +
-      '<textarea id="wcNoteText" rows="4" placeholder="What you found and what you decided"></textarea>' +
+      '<select id="wcNoteTpl">' + tpls + "</select>" +
+      '<textarea id="wcNoteText" rows="4" placeholder="What you found and what you decided">' + esc(cDraft(d, "wcNoteText")) + "</textarea>" +
       '<p class="w-hint">A note needs a template chosen before it can be written.</p></div>' +
 
       consultationResultView(state.consultationResult) +
@@ -5068,7 +5112,7 @@
 
   function consultationOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
-    st.consultationResult = null;
+    st.consultationResult = null; st.cDraft = null; st.cIcd = undefined;
     st.view = "consultation";
     paint();
     // The note section cannot offer a template it has not been told about.
@@ -5082,6 +5126,10 @@
    * is shown as it came back. */
   function saveWholeConsultation() {
     var s = st.sel; if (!s) return;
+    /* Snapshot BEFORE any of the checks below, because every one of them ends in paint() - so
+     * without this, telling a doctor "a prescription needs the drug, the dose and the unit" would
+     * also wipe the vitals and the note they had already typed. */
+    cSnapshot();
     var body = { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId };
 
     var v = {}, anyVital = false;
@@ -5146,7 +5194,32 @@
       .catch(function () { st.busy = false; st.err = "Could not save the consultation."; paint(); });
   }
 
+  function consultationFindCode() {
+    cSnapshot();
+    var q = cDraft(st.cDraft, "wcProbText");
+    if (!q) { st.err = "Type the diagnosis first, then search for its code."; paint(); return; }
+    st.cIcd = null; paint();
+    icdSearch(q)
+      .then(function (rows) { st.cIcd = rows; paint(); })
+      // A code service that is down must never stop a diagnosis being recorded. The words still
+      // work, and the screen says so rather than leaving a spinner up.
+      .catch(function () { st.cIcd = []; st.err = "The code search is unavailable. Record the diagnosis in words."; paint(); });
+  }
+  function consultationPickCode(i) {
+    var c = (st.cIcd || [])[i];
+    if (!c) return;
+    cSnapshot();
+    st.cDraft.wcProbCode = c.code;
+    // The official title becomes the words, so the record says what the code actually means rather
+    // than what somebody typed on the way to finding it.
+    st.cDraft.wcProbText = c.title;
+    st.cIcd = undefined;
+    paint();
+  }
+
   function clearConsultationFields() {
+    // The draft goes with them, or the next repaint puts the saved consultation straight back.
+    st.cDraft = null; st.cIcd = undefined;
     VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) el.value = ""; });
     ["wc_o2", "wc_acvpu", "wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
       "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText"]
@@ -5798,7 +5871,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
-      if (st.view === "consultation") { st.consultationResult = null; st.view = "chart"; paint(); return; }
+      if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
@@ -6037,6 +6110,8 @@
     if (cmd === "approvalyes") { approvalDecide(arg, "approved"); return; }
     if (cmd === "approvalno") { approvalDecide(arg, "rejected"); return; }
     if (cmd === "consultationsave") { saveWholeConsultation(); return; }
+    if (cmd === "cfindcode") { consultationFindCode(); return; }
+    if (cmd === "cicdpick") { consultationPickCode(Number(arg)); return; }
     if (cmd === "incidentreport") { reportIncidentAction(); return; }
     if (cmd === "incidenttriage") { incidentTriage(arg); return; }
     if (cmd === "incidentrca") { incidentRca(arg); return; }
@@ -6138,6 +6213,9 @@
     st.consultationResult = null;
     st.approvals = null;
     st.purchaseOrders = null;
+    /* The half-typed consultation is cleared with everything else: a draft that outlives its
+     * patient is how one patient's findings end up in another's chart. */
+    st.cDraft = null; st.cIcd = undefined;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
