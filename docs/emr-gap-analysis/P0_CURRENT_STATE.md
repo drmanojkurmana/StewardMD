@@ -34,7 +34,7 @@ P0 actually costs.
 | P0.8 | Secure documents | **None.** No object storage, no document module | no | n/a | no | Blocked on infrastructure: needs an R2/S3 bucket decision first | **Infrastructure decision, then build** |
 | P0.9 | Auth / security | Two-layer capability + record grant, rate limiting, break-glass, audit — all real and enforced | yes | yes | yes, 45 test files carry negative-auth assertions | **No MFA/2FA.** Session timeout, password policy, device/session visibility unverified | **Add MFA; verify the rest before assuming it missing** |
 | P0.10 | Composite clinical transaction | `consultation.js` + Consultation screen | yes | yes | yes, 10 tests | **NOT COMPLETE, and not claimed to be.** No cross-record atomicity is available from an append-only store. Authorisation and validation happen before any write, and partial failure is detectable and reported | **Stays open**: identify which workflows genuinely require atomicity, add invariant tests. Do not redesign storage without a proven clinical-safety need |
-| P0.11 | **Payment framework** (replaces "live payments") | Seam only: `NullPaymentAdapter` | seam yes | yes | yes | Needs a provider-agnostic domain: method ≠ provider, cash as first-class, bank/UTR, POS with manual recording, reconciliation | **Build the framework + manual/cash/bank adapters now.** Provider integrations come later and must not be needed to finish P0 |
+| P0.11 | **Payment framework** (replaces "live payments") | `wardsynq-payment-methods.js` (pure, method ≠ provider) enforced on the cashier routes; method picker on the cashier screen | yes | yes, incl. nurse refused | yes, 28 tests | **Core done.** Still to build: cash-drawer shift closing + reconciliation screen, bank-statement reconciliation, provider adapters (need credentials) | Drawer closing next |
 | P0.12 | P0 testing standard | 5810 passing; negative-auth in 45 files; 8 screens rendered in tests | — | — | — | No end-to-end signed-in workflow test; no migration/rollback test | **Add an E2E harness** |
 
 ## What this changes about P0's cost
@@ -151,3 +151,30 @@ bare strings entirely would have produced false reds instead. **Thirteen routes 
 
 **Next:** more of the backlog (wound care, risk assessment, order sets, break-glass, patient
 identity/MPI), then the provider-agnostic payment framework.
+
+
+## 2026-09-13 (evening) — backlog, payments, and two config bugs
+
+**Backlog: 72 → 66.** Wound care (worst stage never lowered, where-it-came-from fixed) and risk
+assessment (hospital's own tools; "no tools configured" stated as a setting, not an all-clear).
+Six routes verified off by name — no false greens.
+
+**P0.11 payment framework: core done.** `wardsynq/wardsynq-payment-methods.js` is pure and
+provider-agnostic: each hospital configures the methods it takes and the provider for each; an
+unconfigured hospital takes cash only. Each method must carry what reconciliation needs (cash →
+counter; bank transfer → UTR + bank; card → terminal + slip reference). **Typed money is never
+recorded as machine-confirmed**: everything is `manual` until a provider actually answers, and a
+test sends `capture: "integrated"` in the body and asserts it is ignored. Refunds cannot exceed what
+was taken; a failed payment cannot be refunded. The cashier screen has a method picker with no
+"confirmed" control.
+
+**Two config bugs, one from earlier this session.** The hospital-config projection in
+`_opd_org.js` is a whitelist. `payment` was missing, so payment settings would never have reached
+the server — and so was `approvalLevels`, which `verification.js` and `purchasing.js` have read
+since I wrote them. A hospital asking for two approvers was silently getting one. Both fixed.
+
+**Numbers:** 5948 tests passing, 0 failing. 305 routes — 219 reachable, 66 waiting for a screen,
+35 waiting for a test.
+
+**Next:** cash-drawer shift closing; more backlog (order sets, break-glass, identity/MPI, infusions,
+admission requests); P0.7 fuzzy search; P0.9 MFA; P0.8 documents; P0.10 invariant tests.
