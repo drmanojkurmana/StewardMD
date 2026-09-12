@@ -158,6 +158,13 @@
       ".smd-connect-stages li.ok .smd-connect-dot{background:var(--green,#1c7a4a)}",
       ".smd-connect-note{font-size:0.6875rem;line-height:1.5;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.625rem}",
       ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
+      // The progress bar: a filled track that animates its width, so a run that is moving looks
+      // like it is moving. prefers-reduced-motion drops the animation, never the bar.
+      ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",
+      ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:#0E7C66;width:2%;transition:width .5s ease}",
+      "@media (prefers-reduced-motion: reduce){.smd-connect-prog>i{transition:none}}",
+      "#smd-connect-activity{flex:1;min-width:0}",
+      "#smd-connect-eta{white-space:nowrap;margin-left:10px;font-weight:600}",
       ".smd-connect-ov[data-motion=\"fade\"] .smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}.smd-connect-btn:active,.smd-connect-hosp:active,.smd-connect-x:active{transform:none}}",
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
@@ -437,6 +444,7 @@
 
   function finishClose() {
     stopPoll();
+    stopProgressTicker();
     removePluginListeners();
     var plugin = getPlugin();
     if (S && (S.screen === "login" || S.screen === "progress" || S.screen === "origins") && plugin && plugin.close) {
@@ -873,6 +881,7 @@
 
   function resetToConnections(msg) {
     stopPoll();
+    stopProgressTicker();
     removePluginListeners();
     S.session = null;
     S.deployment = null;
@@ -956,6 +965,7 @@
   }
 
   function startPhoneDiscovery() {
+    S.progressStartedAt = Date.now();      // the clock the time estimate divides by
     S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
     S.stopRequested = false;
@@ -1002,10 +1012,17 @@
             looking: (p && p.looking) || c.looking || []
           };
           paintProgress();
+          publishBannerProgress();
         }
       });
     }).then(function (result) {
       if (!overlay() || !S) return;
+      /* THE CRAWL IS OVER: GIVE THE DOCTOR THEIR PHONE BACK.
+       * The hospital browser used to stay open on top of the approval screen, still wearing the
+       * orange "StewardMD is reading" banner, so a run that had FINISHED and built an adapter looked
+       * exactly like one still crawling: the doctor watched the EMR, never saw Approve, and read the
+       * whole thing as hung (2026-09-12). Closing it first puts the review in front of them. */
+      stopDiscoveryPlugin();
       S.result = result || {};
       S.versionId = (result && result.candidateVersionId) || null;
       loadVersionAndShowResult();
@@ -1019,6 +1036,9 @@
         setStatus("warn", "The hospital session expired. Sign in again to continue. The existing connection is kept.");
         return;
       }
+      // A failure ends the crawl too: leaving the hospital browser open hides the very message that
+      // says what went wrong, and the agent is no longer reading anything.
+      stopDiscoveryPlugin();
       S.progressFailed = true;
       /* NAME THE FAILURE. This swallowed e.message and said only "could not complete", so a crawl
        * that had walked 21 pages and posted its findings left the doctor, and whoever they call,
@@ -1060,6 +1080,83 @@
     for (var i = 0; i < (list || []).length; i++) out.push(esc(VIEW_NAMES[list[i]] || list[i]));
     return out.length ? out.join(", ") : "none yet";
   }
+  /* WHAT THE AGENT IS DOING, IN WORDS A DOCTOR READS.
+   *
+   * The screen used to show a phase sentence and four counters, so a run that was working looked
+   * identical to one that had died: no sense of how far along it was or how long was left. These
+   * three functions turn the SAME state the engine already reports into a fraction, a sentence and
+   * a time. Nothing new is measured and nothing is invented: the fraction comes from views actually
+   * captured, the sentence from the view being opened, the time from this run's own elapsed clock. */
+  var TARGET_VIEWS = 7;                     // worklist, patient, medications, labs, radiology, discharge, history
+  function progressFraction() {
+    var c = S.progressCounts || {};
+    var found = (c.found || []).length;
+    var phase = c.phase || "DISCOVERING";
+    if (phase === "COMPILING") return 0.9;
+    if (phase === "VALIDATING") return 0.96;
+    // Exploring earns the first tenth; each captured view earns an equal share of the rest.
+    var explored = Math.min(1, (c.pages || 0) / 6) * 0.1;
+    return Math.max(0.02, Math.min(0.88, explored + (found / TARGET_VIEWS) * 0.78));
+  }
+  /* One sentence naming the thing being done, in the doctor's vocabulary. */
+  function activityLine() {
+    var c = S.progressCounts || {};
+    var phase = c.phase || "DISCOVERING";
+    if (S.guide) return "Waiting for you to show me one screen.";
+    if (phase === "COMPILING") return "Writing the connection for your hospital.";
+    if (phase === "VALIDATING") return "Checking it is safe and read-only.";
+    if (c.opening) return "Opening " + esc(c.opening) + ".";
+    var looking = (c.looking || []).filter(function (k) { return VIEW_NAMES[k]; });
+    if (phase === "CRAWLING" && looking.length) return "Looking for where your " + esc(String(VIEW_NAMES[looking[0]]).toLowerCase()) + " sit.";
+    if (phase === "CRAWLING") return "Walking through one patient record, read-only.";
+    return "Going through the tabs of your EMR to see what it offers.";
+  }
+  /* A coarse estimate from THIS run's own pace. Silent until there is enough of a run to divide by,
+   * and never a false precision: a doctor needs "about two minutes", not a countdown. */
+  function etaLine() {
+    if (S.guide) return "";
+    var started = S.progressStartedAt || 0;
+    var f = progressFraction();
+    if (!started || f < 0.08) return "";
+    var elapsed = Date.now() - started;
+    if (elapsed < 15000) return "";
+    var remain = Math.round((elapsed * (1 - f) / f) / 1000);
+    if (remain < 20) return "Almost done.";
+    if (remain < 90) return "About a minute left.";
+    var mins = Math.round(remain / 60);
+    return "About " + (mins > 9 ? "10+" : mins) + " minutes left.";
+  }
+  /* THE ONLY SURFACE THE DOCTOR CAN SEE WHILE THE AGENT WORKS.
+   *
+   * During the crawl the hospital browser is full-screen, so the sheet behind it - progress bar,
+   * activity line, estimate and all - is invisible. The doctor watched a static orange banner for
+   * minutes and concluded the app had hung (2026-09-12). The banner is native and this is the one
+   * thing that can write to it, so the same three facts go there: how far along, what it is doing,
+   * how long is left. Rewritten only when the sentence actually changes, since each write crosses
+   * the bridge and repaints native views. */
+  function bannerProgressLine() {
+    var pct = Math.round(progressFraction() * 100);
+    var eta = etaLine();
+    return pct + "% " + activityLine().replace(/<[^>]*>/g, "") + (eta ? " " + eta : "");
+  }
+  function publishBannerProgress() {
+    if (!S || S.guide || S.stopRequested) return;
+    var plugin = getPlugin();
+    if (!plugin || !plugin.setMode) return;
+    var line = bannerProgressLine();
+    if (line === S.bannerLine) return;
+    S.bannerLine = line;
+    try { plugin.setMode({ mode: "agent", banner: line, origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+  }
+
+  function progressBar() {
+    var pct = Math.round(progressFraction() * 100);
+    return '<div class="smd-connect-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
+      '<i style="width:' + pct + '%"></i></div>' +
+      '<div class="smd-connect-row smd-connect-counts"><span id="smd-connect-activity">' + activityLine() + '</span>' +
+      '<strong id="smd-connect-eta">' + etaLine() + '</strong></div>';
+  }
+
   function progressDetail() {
     var c = S.progressCounts || {};
     if (S.guide) {
@@ -1068,7 +1165,7 @@
         '<div class="smd-connect-row"><button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip</button></div></div>';
     }
     return '<div class="smd-connect-card">' +
-      (c.opening ? '<div class="smd-connect-row smd-connect-counts"><span>Opening</span><strong>' + esc(c.opening) + '</strong></div>' : "") +
+      progressBar() +
       '<div class="smd-connect-row smd-connect-counts"><span>Found</span><strong>' + viewNames(c.found) + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Still looking for</span><strong>' + viewNames(c.looking) + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
@@ -1092,6 +1189,7 @@
     b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
     wireGuideSkip(b);
+    startProgressTicker();
   }
 
   function wireGuideSkip(b) {
@@ -1111,6 +1209,25 @@
     var lead = b.querySelector("#smd-connect-phase"); if (lead) lead.textContent = phaseLabel(S.guide ? "ASKING" : c.phase);
     var detail = b.querySelector("#smd-connect-detail"); if (detail) { detail.innerHTML = progressDetail(); wireGuideSkip(b); }
     var retry = b.querySelector("#smd-connect-progretry"); if (retry) retry.style.display = S.progressFailed ? "" : "none";
+  }
+
+  /* A step of the crawl can take half a minute, and a screen that only repaints when the engine
+   * reports reads as frozen. This ticks the estimate (and only the estimate) once a second. */
+  function startProgressTicker() {
+    stopProgressTicker();
+    S.progressTicker = setInterval(function () {
+      if (!S || S.screen !== "progress" || S.progressFailed) return;
+      var eta = document.getElementById("smd-connect-eta");
+      if (eta) eta.textContent = etaLine();
+      var act = document.getElementById("smd-connect-activity");
+      if (act) act.textContent = activityLine();
+      // One crawl step can take half a minute; the banner is all the doctor can see, so the time
+      // left has to keep moving there too, not only on the hidden sheet.
+      publishBannerProgress();
+    }, 1000);
+  }
+  function stopProgressTicker() {
+    if (S && S.progressTicker) { clearInterval(S.progressTicker); S.progressTicker = null; }
   }
 
   /* ---- Fallback (no plugin): server-driven job-state polling, unchanged. ---- */
@@ -1385,6 +1502,11 @@
     close: function () { close(); },
     refresh: refresh,
     __setApi: function (fn) { apiImpl = fn; },
+    /* Test-only: drive the progress screen without a live crawl, so the bar, the wording and the
+     * estimate are provable in a browser the way a doctor sees them. */
+    __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
+    __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
+    __publishBanner: function () { publishBannerProgress(); },
     __debug: function () {
       if (!S) return { open: !!overlay() };
       return {
