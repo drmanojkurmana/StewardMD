@@ -524,11 +524,15 @@
                  * page has had time to load, count as signed in; the doctor never taps Done again
                  * inside the thirty-minute window. */
                 var quiet = 0, polls = 0;
+                /* On a hospital whose login host differs from the EMR host (GHIS: gimsrlogin -> ghis) a
+                 * quiet page on the LOGIN host is the app chooser, not the EMR: the doctor has not yet
+                 * entered the Doctor module and a read from there lists nobody (owner, 2026-09-13).
+                 * A quiet poll on another host counts double; a single-host EMR needs a few more. */
                 function look() {
                   if (!ctx.listeners.length) return;   // already resolved or rejected
-                  plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank')})()" })
-                    .then(function (r) { var v = r && String(r.result); if (v === 'ok') quiet++; else quiet = 0; }, function () { quiet = 0; })
-                    .then(function () { polls++; if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 8 && ctx.listeners.length) setTimeout(look, 900); });
+                  plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank'))+' '+location.host})()" })
+                    .then(function (r) { var v = String((r && r.result) || '').split(' '); if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { quiet = 0; })
+                    .then(function () { polls++; if (quiet >= 4 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 10 && ctx.listeners.length) setTimeout(look, 900); });
                 }
                 setTimeout(look, 2200);
               })
