@@ -132,3 +132,72 @@ each new module built in Phase 1-2 risks becoming the ninth instance of "finishe
 code. Phase 1's four items are independent of each other and of Phase 2, so they can run in
 parallel rather than sequentially. Phase 3 last because it needs Phase 0-2's surface area to exist
 before it can meaningfully re-test it.
+
+---
+
+# What actually got built (2026-09-12)
+
+Phase 0 and all four adaptations are implemented, tested and live. What follows is what was
+built, and — more usefully — where the plan above turned out to be wrong.
+
+## Phase 0 — the reachability checker: DONE
+`scripts/wardsynq-reachability.mjs`, running as part of the test suite. Screens are discovered
+rather than listed, so a new screen file is covered automatically.
+
+**The first run was worse than the plan assumed.** The plan named 7-8 unreachable modules found
+by hand. The checker found **65 routes with no screen at all**, out of 291 (206 reachable, 20
+machine-to-machine by design). Care plans, handover, wound care, medication reconciliation,
+order sets, patient record merge, break-glass, infusions and more are finished backend work
+nobody can reach.
+
+Those 65 are a recorded baseline worklist, not an ignore-list: the build fails on any NEW
+unreachable route, and also fails if a listed gap gets wired up without being removed from the
+list. The number can only go down. It caught its own author's new route within a second of it
+being written.
+
+## The four adaptations — DONE
+
+1. **Composite consultation write** (Bahmni's `BahmniEncounterTransaction`) —
+   `functions/_wardsynq/consultation.js` plus a new Consultation screen. One save for vitals,
+   diagnosis, prescription, test and note. The actor is resolved once and every piece checked
+   against their grant *before* anything is written, so "half a consultation" cannot happen from
+   a permission failure. A genuine mid-way failure reports what reached the chart, where it
+   stopped, and what was never attempted.
+
+2. **Append-only approval chain** (Danphe) — `functions/_wardsynq/verification.js` plus an
+   Approvals screen. This closed a **real security hole**, not a hypothetical one: `formulary.js`
+   accepted *any non-empty string* as the approval reference that clears a restricted drug, so a
+   prescriber blocked by antimicrobial stewardship at 2am could type one character and be
+   through. Two existing tests asserted that behaviour, which is how it survived. A reference now
+   has to name a real, standing, this-drug approval granted by somebody other than whoever asked.
+
+3. **Purchase order / goods receipt** (Danphe) — `functions/_wardsynq/purchasing.js` plus a
+   Purchasing screen. How much has arrived is summed from receipts, never stored. A goods receipt
+   is the stock movement `stock.js` already has, not a second ledger. Over-delivery and
+   wrong-unit delivery are recorded and named, never silently dropped or refused.
+
+4. **Terminology — DELIBERATELY NOT BUILT AS PLANNED.** The plan called for a concept-mapping
+   layer. On reading the code, the external terminology-server validation path *already exists*
+   in `terminology.js` and is already wired into the FHIR inbound and `$validate-code` routes.
+   What is actually missing is populated ICD/SNOMED/LOINC content, which is a licensing and data
+   problem, not a code one — and the audit's own finding was that OpenMRS ships this machinery
+   with zero content. Building an empty copy would have been another finished module nobody can
+   reach, which is the exact thing Phase 0 exists to prevent. What was built instead is the thing
+   that was genuinely missing: diagnosis code lookup on the new consultation screen.
+
+## Bugs found and fixed while building
+
+- A restricted drug could be unlocked with any made-up approval reference (above).
+- The consultation form was wiped by its own repaints, including by its own validation messages.
+- Its dropdowns snapped back to their first option on repaint — turning "on oxygen" into "not
+  recorded", and a NEWS2 score computed from it wrong in the reassuring direction.
+- A goods receipt naming line 0 double-counted against every other line holding the same item.
+- The purchase-order approval lookup had a ternary whose branches were identical, so an approval
+  for a different subject would have read as that order's.
+- Render helpers read module state rather than the state passed in, so the screen and the state
+  it claimed to show could disagree.
+
+## Still open
+
+The 65 unreachable routes are the real remaining work, and they are now a tracked list rather
+than a discovery problem. Phase 2 and Phase 3 above are unchanged.
