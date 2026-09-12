@@ -90,7 +90,7 @@ usage cut-off at any point leaves a resumable branch. Update this file's status 
 4. Auto mode: planner loop in `connect-agent/phone/index.mjs` calls the brain for the next control;
    falls back to Manual asks for missing resources.  STATUS: done 2026-09-12 (`deepCrawlClinical({ brain })` asks `brain.next` for the control to tap, index into the same candidate list only; unknown views classified; gaps still go to the guided asks)
 5. Snake game on the progress sheet, with the banner and Done always above it.  STATUS: done 2026-09-12 (connect-agent-snake.js, lazy-loaded; auto mode sets `compact: true` so the native browser keeps the top half and the sheet with the bar and the game shows beneath; guided asks are always full size)
-6. Read-time self-repair in `runtime.mjs` and `ghis-ward.js`, saved as a new candidate.  STATUS: not started
+6. Read-time self-repair in `runtime.mjs` and `ghis-ward.js`, saved as a new candidate.  STATUS: done 2026-09-12 (zero rows through an approved adapter -> guide mode with REPAIR_ASK -> `captureWorklist` + `readView({navigate:false})` shows the patients now -> `POST /versions/:id/repair` files a child candidate, parent untouched, three-draft rule; test/connect/agent/repair.test.mjs, test/run-ward-adapter-ui.mjs)
 7. Live acceptance on GHIS from the Pixel: Manual mode end to end, Auto mode end to end, patients
    visible in Ward Sync, medications and labs on tap. Record results here.  STATUS: not started
 

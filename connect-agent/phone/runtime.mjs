@@ -6,7 +6,26 @@
 // the row shape ghis-ward.js renderPatients() already draws. Cell TEXT exists only here, on the phone.
 // Reads are navigation + evaluate only; anything on the crawler's read-only SKIP list is never clicked.
 
+import { captureView } from './deep-crawl.mjs';
+
 const GIMSR_HOSTS = ['gimsrlogin.gitam.edu', 'ghis.gitam.edu'];
+
+/* READ-TIME SELF-REPAIR. When an approved adapter reads zero rows, the doctor is asked this once, in
+ * the browser header; the screen they land on is captured (structure only) and read right away, and
+ * the same structure is posted as a corrected candidate so the next doctor is never asked. */
+export const REPAIR_ASK = 'Show me the list of all your patients, then tap Done.';
+
+export async function captureWorklist({ plugin }) {
+  const client = {
+    currentUrl: () => plugin.currentUrl(),
+    evaluate: (a) => plugin.evaluate(a),
+  };
+  if (typeof plugin.drainRequests === 'function') client.drainRequests = () => plugin.drainRequests();
+  const view = await captureView({ client, resourceHint: 'worklist' });
+  if (!view || !view.rowsSelector || view.block) throw new Error('no patient table on the screen you showed me');
+  view.guided = true;
+  return view;
+}
 
 const HEADER_MAP = [
   ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b/i],
@@ -146,9 +165,11 @@ export const EXPAND_PAGE_LENGTH = "(function(){try{var s=document.querySelector(
  * ward of thirty is not truncated to ten. */
 function hostOf(u) { try { return new URL(u).host; } catch { return String(u || ''); } }
 
-export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000 }) {
-  await plugin.navigate({ url: pathToUrl(origin, view.pathTemplate || view.path) });
-  await settle(settleMs);
+export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000, navigate = true }) {
+  if (navigate) {
+    await plugin.navigate({ url: pathToUrl(origin, view.pathTemplate || view.path) });
+    await settle(settleMs);
+  }
   /* NOT SIGNED IN IS A NAMED FAILURE, NOT AN EMPTY WARD. If the hospital answered this path with
    * its login form, reading on would report "no patients" for a session that never existed. Seen
    * on GHIS when the read began before the sign-in redirect had landed (2026-09-12). */

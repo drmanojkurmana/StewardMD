@@ -52,7 +52,15 @@ window.Capacitor.Plugins = window.Capacitor.Plugins || {};
 window.Capacitor.Plugins.ConnectBrowser = {
   open: function (a) { window.__pluginCalls.push({ m: "open", a: a }); window.__url = a.url; window.__open = true; return Promise.resolve({ ok: true }); },
   navigate: function (a) { window.__pluginCalls.push({ m: "navigate", a: a }); window.__url = a.url; return Promise.resolve({ ok: true }); },
-  evaluate: function (a) { window.__pluginCalls.push({ m: "evaluate", url: window.__url }); return Promise.resolve({ result: JSON.stringify(window.__pages[window.__url] || []) }); },
+  evaluate: function (a) {
+    var e = String(a && a.expression || "");
+    window.__pluginCalls.push({ m: "evaluate", url: window.__url });
+    if (e.indexOf("CRAWL_RAW_TABLE") >= 0) return Promise.resolve({ result: JSON.stringify(window.__rawTables[window.__url] || null) });
+    if (e.indexOf("CRAWL_RAW_BLOCK") >= 0) return Promise.resolve({ result: "null" });
+    if (e.indexOf('password') >= 0) return Promise.resolve({ result: "ok" });
+    if (e.indexOf("_length") >= 0) return Promise.resolve({ result: "0" });
+    return Promise.resolve({ result: JSON.stringify(window.__pages[window.__url] || []) });
+  },
   currentUrl: function () { return Promise.resolve({ url: window.__url, title: "" }); },
   setMode: function (a) { window.__pluginCalls.push({ m: "setMode", a: a }); return Promise.resolve({ ok: true }); },
   close: function () { window.__pluginCalls.push({ m: "close" }); window.__open = false; return Promise.resolve({ ok: true }); },
@@ -73,6 +81,7 @@ window.GHIS.__setAgentApi(function (path, tid, opts) {
   if (path === "/connections" && tid === "t-gimsr") return Promise.resolve({ s: 200, d: { ok: true, connections: [ { deploymentId: "dep-g", origins: ["https://gimsrlogin.gitam.edu"], activeVersionId: "ver-g" } ] } });
   if (path === "/sessions" && opts.method === "POST") return Promise.resolve(window.__sessionResp || { s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-kims", state: "CREATED", reuse: true, deployment: { id: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-1" } } });
   if (path === "/sessions/sess-1/handoff") return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://hims.kims.example"], pendingOrigins: [] } });
+  if (path === "/versions/ver-1/repair" && opts.method === "POST") return Promise.resolve({ s: 200, d: { ok: true, candidateVersionId: "ver-2", state: "AWAITING_APPROVAL", parentVersionId: "ver-1" } });
   if (path === "/versions/ver-1") return Promise.resolve({ s: 200, d: { ok: true, id: "ver-1", state: "ACTIVE", replay: [
     { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false },
     { resourceHint: "medications", pathTemplate: "/ip/meds/{id}", method: "GET", rowsSelector: "#rx tr", headers: ["Drug", "Dose"], singleRecord: false } ] } });
@@ -82,6 +91,7 @@ window.__pages["https://hims.kims.example/ip/worklist"] = [
   { "S.No": "1", "UHID": "K001", "Patient Name": "Ravi Kumar", "Age/Sex": "45 / M", "Bed No": "12A", "Ward": "MICU", "Consultant": "Rao" },
   { "S.No": "2", "UHID": "K002", "Patient Name": "Sita Devi", "Age/Sex": "30 / F", "Bed No": "3", "Ward": "General", "Consultant": "Rao" } ];
 window.__pages["https://hims.kims.example/ip/meds/K001"] = [ { "Drug": "Amoxicillin", "Dose": "500 mg TDS" } ];
+window.__rawTables = window.__rawTables || {};
 return 1;`;
 
 try {
@@ -142,6 +152,30 @@ try {
 
   await ev(`window.closeLabDrawer(); window.ghisDisconnect(); return 1;`);
   ok(await ev(`return document.getElementById("ghisHospital").style.display!=="none";`) === true, "sign out returns to the hospital picker");
+
+  // Read-time self-repair: the approved adapter's worklist path reads nothing, so the browser asks the
+  // doctor for the list once, reads the screen they show, and posts the correction as a new candidate.
+  await ev(`window.__pages["https://hims.kims.example/ip/worklist"] = []; window.__pluginCalls = []; window.__calls = []; return 1;`);
+  await ev(`document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
+  await waitFor(`return (window.__pluginListeners.loggedIn||[]).length>0;`, 5000);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/home"}); return 1;`);
+  ok(await waitFor(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="guide"&&c.a.banner==="Show me the list of all your patients, then tap Done.";});`, 30000), "an empty read hands the browser back to the doctor with the one repair ask in its header");
+  ok(await ev(`return document.getElementById("ghisPatientList").innerText.indexOf("show me the list of all your patients")>=0;`) === true, "the ward list explains what is being asked");
+  ok(await ev(`return window.__open===true;`) === true, "the browser stays open for the doctor during the ask");
+  await ev(`
+    window.__url = "https://hims.kims.example/ip/all";
+    window.__rawTables["https://hims.kims.example/ip/all"] = { id: "allpts", class: "", headers: ["UHID", "Patient Name", "Age/Sex", "Ward"], rows: [{ isHeader: false, onclick: null }, { isHeader: false, onclick: null }, { isHeader: false, onclick: null }] };
+    window.__pages["https://hims.kims.example/ip/all"] = [
+      { "UHID": "K001", "Patient Name": "Ravi Kumar", "Age/Sex": "45 / M", "Ward": "MICU" },
+      { "UHID": "K002", "Patient Name": "Sita Devi", "Age/Sex": "30 / F", "Ward": "General" },
+      { "UHID": "K003", "Patient Name": "Arun Rao", "Age/Sex": "62 / M", "Ward": "MICU" } ];
+    window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/ip/all"});
+    return 1;`);
+  ok(await waitFor(`return document.querySelectorAll("#ghisPatientList .ghis-pt-card").length===3;`, 15000), "the screen the doctor showed is read at once and its three patients render");
+  ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && c[0].body.sessionId==="sess-1" && c[0].body.view.rowsSelector==="#allpts tbody tr" && c[0].body.view.resourceHint==="worklist" && c[0].body.view.guided===true;`, 8000), "the corrected view (selector and headers only) is posted as a repair candidate for approval");
+  ok(await ev(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair";})[0]; return JSON.stringify(c.body).indexOf("Ravi")<0 && JSON.stringify(c.body).indexOf("K001")<0;`) === true, "no patient cell text leaves the phone in the repair");
+  ok(await ev(`return window.__open===false;`) === true, "the browser is closed after the repaired read");
+  await ev(`window.ghisDisconnect(); return 1;`);
 
   await ev(`window.__sessionResp = { s: 403, d: { ok: false, error: "forbidden", detail: "not a member of this tenant" } }; document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
   ok(await waitFor(`return document.getElementById("ghisPatientList").innerText.indexOf("not a member of this tenant")>=0;`, 8000), "a server failure names its reason");
