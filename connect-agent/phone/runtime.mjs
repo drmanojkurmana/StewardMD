@@ -144,9 +144,20 @@ export const EXPAND_PAGE_LENGTH = "(function(){try{var s=document.querySelector(
  * zero patients where the same screen showed three (owner, 2026-09-12). The reader now polls the
  * recorded selector until rows appear or maxWaitMs passes, and first widens the page length so a
  * ward of thirty is not truncated to ten. */
+function hostOf(u) { try { return new URL(u).host; } catch { return String(u || ''); } }
+
 export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000 }) {
   await plugin.navigate({ url: pathToUrl(origin, view.pathTemplate || view.path) });
   await settle(settleMs);
+  /* NOT SIGNED IN IS A NAMED FAILURE, NOT AN EMPTY WARD. If the hospital answered this path with
+   * its login form, reading on would report "no patients" for a session that never existed. Seen
+   * on GHIS when the read began before the sign-in redirect had landed (2026-09-12). */
+  try {
+    const gate = await plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':'ok'})()" });
+    if (gate && String(gate.result).indexOf('login') >= 0) {
+      throw new Error('not signed in: ' + hostOf(origin) + ' returned its login page at ' + (view.pathTemplate || view.path) + '. Sign in and try again');
+    }
+  } catch (e) { if (/not signed in/.test(String(e && e.message))) throw e; }
   try { await plugin.evaluate({ expression: EXPAND_PAGE_LENGTH }); } catch { /* not a DataTable: read as is */ }
   const started = Date.now();
   let rows = [];

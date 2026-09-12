@@ -409,6 +409,25 @@
               .catch(function (e) { off(); reject(new Error('Could not open ' + host + ' in the in-app browser: ' + (e && e.message || e))); });
           });
         }).then(function () {
+          /* LET THE SIGN-IN LAND BEFORE READING. The plugin reports loggedIn the moment the password
+           * field disappears, which on GHIS is mid-redirect: the login host has accepted the password
+           * but the EMR host has not yet been handed the session. Reading then gets an empty, signed-out
+           * worklist that looks like a hospital with no patients (owner, 2026-09-12). Wait until the
+           * browser sits on a page without a password field, for up to fifteen seconds. */
+          var until = Date.now() + 15000;
+          function settled() {
+            return plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':'ok'})()" })
+              .then(function (r) { return !(r && String(r.result).indexOf('login') >= 0); }, function () { return false; });
+          }
+          function waitSignedIn() {
+            return settled().then(function (ok) {
+              if (ok) return new Promise(function (res) { setTimeout(res, 1500); });   // one more beat for the landing page
+              if (Date.now() > until) return;
+              return new Promise(function (res) { setTimeout(res, 800); }).then(waitSignedIn);
+            });
+          }
+          return waitSignedIn();
+        }).then(function () {
           if (el) el.innerHTML = '<div class="ghis-loading">Reading ' + esc(host) + ' for your ward list...</div>';
           try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins }); } catch (e) {}
           return agentApi('/sessions/' + encodeURIComponent(ctx.sessionId) + '/handoff', it.tid, { method: 'POST', body: JSON.stringify({ visitedOrigins: [origin] }) });
