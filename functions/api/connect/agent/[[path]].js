@@ -73,6 +73,15 @@ import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-ht
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
+/* A manifest id the manifest schema will actually accept: lower-case [a-z0-9._-], 64 characters at
+ * most (MANIFEST_ID_RE, connect-agent/manifest/schema.mjs). The ids here are `dep_<uuid>` and
+ * `job_<uuid>`, so prefixes and dashes are dropped and the first 12 hex characters of each are kept:
+ * 34 characters, unique per deployment and job, and both are still readable to a reviewer. */
+export function manifestIdFor(deploymentId, jobId) {
+  const short = (id) => String(id || "").toLowerCase().replace(/^(dep|job)_/, "").replace(/[^a-z0-9]/g, "").slice(0, 12) || "unknown";
+  return `manifest-${short(deploymentId)}-${short(jobId)}`;
+}
+
 const STATUS = (e) =>
   e instanceof OnboardError
     ? e.klass === "not-found"
@@ -721,7 +730,13 @@ export async function onRequest(context) {
       let manifest;
       try {
         const compiled = await compileManifest(spec, {
-          manifestId: `manifest-${deployment.id}-${job.id}`,
+          /* THE ID THAT FAILED EVERY REAL HOSPITAL. `manifest-<deployment>-<job>` with two prefixed
+           * UUIDs is 90 characters; MANIFEST_ID_RE caps a manifestId at 64, so validateManifest
+           * rejected it and compileManifest threw for EVERY discovery that ever reached this line.
+           * The fixtures passed because their ids are short ("dep-1", "job-1"). A doctor's crawl of
+           * 21 pages died here with "spec could not be compiled" (device, 2026-09-12). Twelve hex
+           * characters of each id keep it unique and readable inside the cap. */
+          manifestId: manifestIdFor(deployment.id, job.id),
           timezone: (env && env.CONNECT_AGENT_MANIFEST_TIMEZONE) || "Asia/Kolkata",
         });
         manifest = compiled.manifest;
