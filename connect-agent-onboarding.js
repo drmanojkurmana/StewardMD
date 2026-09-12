@@ -1012,6 +1012,7 @@
             looking: (p && p.looking) || c.looking || []
           };
           paintProgress();
+          publishBannerProgress();
         }
       });
     }).then(function (result) {
@@ -1125,6 +1126,29 @@
     var mins = Math.round(remain / 60);
     return "About " + (mins > 9 ? "10+" : mins) + " minutes left.";
   }
+  /* THE ONLY SURFACE THE DOCTOR CAN SEE WHILE THE AGENT WORKS.
+   *
+   * During the crawl the hospital browser is full-screen, so the sheet behind it - progress bar,
+   * activity line, estimate and all - is invisible. The doctor watched a static orange banner for
+   * minutes and concluded the app had hung (2026-09-12). The banner is native and this is the one
+   * thing that can write to it, so the same three facts go there: how far along, what it is doing,
+   * how long is left. Rewritten only when the sentence actually changes, since each write crosses
+   * the bridge and repaints native views. */
+  function bannerProgressLine() {
+    var pct = Math.round(progressFraction() * 100);
+    var eta = etaLine();
+    return pct + "% " + activityLine().replace(/<[^>]*>/g, "") + (eta ? " " + eta : "");
+  }
+  function publishBannerProgress() {
+    if (!S || S.guide || S.stopRequested) return;
+    var plugin = getPlugin();
+    if (!plugin || !plugin.setMode) return;
+    var line = bannerProgressLine();
+    if (line === S.bannerLine) return;
+    S.bannerLine = line;
+    try { plugin.setMode({ mode: "agent", banner: line, origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+  }
+
   function progressBar() {
     var pct = Math.round(progressFraction() * 100);
     return '<div class="smd-connect-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
@@ -1197,6 +1221,9 @@
       if (eta) eta.textContent = etaLine();
       var act = document.getElementById("smd-connect-activity");
       if (act) act.textContent = activityLine();
+      // One crawl step can take half a minute; the banner is all the doctor can see, so the time
+      // left has to keep moving there too, not only on the hidden sheet.
+      publishBannerProgress();
     }, 1000);
   }
   function stopProgressTicker() {
@@ -1479,6 +1506,7 @@
      * estimate are provable in a browser the way a doctor sees them. */
     __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
     __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
+    __publishBanner: function () { publishBannerProgress(); },
     __debug: function () {
       if (!S) return { open: !!overlay() };
       return {

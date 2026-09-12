@@ -559,6 +559,21 @@ try {
     "the compile step says it is writing the connection, not a phase code");
   ok(await ev(noDash) === true, "the progress copy has no em-dash");
 
+  // The sheet is BEHIND the full-screen hospital browser during a crawl, so the same three facts
+  // have to reach the one surface the doctor can see: the native banner.
+  await ev(`
+    var A = window.SMD_CONNECT_AGENT;
+    A.__setState({ bannerLine: "", deployment: { id: "dep-1", origins: ["https://emr.newcity.example"] },
+      progressCounts: { pages: 9, requests: 20, phase: "CRAWLING", opening: "", found: ["worklist","patient","labs"], looking: ["medications"] } });
+    window.__pluginCalls = [];
+    A.__publishBanner();
+    return 1;
+  `);
+  const banner = await ev(`var c = window.__pluginCalls.filter(function(x){return x.m==="setMode";}).pop(); return c && c.a ? String(c.a.banner) : "";`);
+  ok(/^\d+%/.test(banner), "the banner leads with a percentage: " + banner);
+  ok(/medication/i.test(banner), "the banner names what the agent is hunting for");
+  ok(banner.indexOf("\u2014") < 0, "banner copy has no em-dash");
+
   ok(consoleErrors.length === 0, "zero console errors and zero uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 5)) : ""));
 
   console.log(fails === 0 ? "\nALL GREEN - connect-agent-onboarding UI test passed" : `\n${fails} FAILED`);
