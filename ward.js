@@ -483,7 +483,17 @@
 
     var header = '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(STAGE_WORDS[c.stage] || c.stage) + "</small></div>" +
-      '<button class="w-ic" data-w-act="surgeryload" title="Refresh">' + ms("refresh") + "</button></div>";
+      '<button class="w-ic" data-w-act="surgeryload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      /* ABANDONING A CASE. A case that is not going ahead - the patient deteriorated, the list overran,
+       * the consent was withdrawn - has to be ended on the record, with a reason, or it sits on the
+       * theatre board as a case somebody is still expecting. Offered only while the case is live; a
+       * signed-out or already-abandoned case has nothing to abandon. */
+      (c.stage !== "signed-out" && c.stage !== "abandoned"
+        ? '<div class="w-noprint" style="margin:6px 0"><button class="w-btn ghost sm" data-w-act="surgeryabandon:' + esc(c.id) + '">' + ms("close") + "This case is not going ahead</button></div>"
+        : "") +
+      (c.stage === "abandoned" && abandonReasonOf(c)
+        ? '<p class="w-hint warn">' + ms("warning") + "Abandoned: " + esc(abandonReasonOf(c)) + "</p>"
+        : "");
 
     var consentCard = '<div class="w-card"><div class="w-card-h">' + ms("assignment_turned_in") + "<h3>Consent</h3></div>" +
       (c.consent
@@ -1351,6 +1361,7 @@
         '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
         '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
         '<button class="w-btn ghost" data-w-act="tags" title="Issue a wristband and check the band on the patient">' + ms("how_to_reg") + "Wristband</button>" +
+        '<button class="w-btn ghost" data-w-act="patientsurgery" title="Operations for this patient and where each one stands">' + ms("fact_check") + "Operations</button>" +
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
@@ -4391,6 +4402,38 @@
       "</div>";
   }
 
+  /* A PATIENT'S OPERATIONS. Every surgical case for this patient, newest first, with its stage - so a
+   * ward doctor can see that the patient is booked for theatre, or was abandoned yesterday, without
+   * going to the theatre board and hunting for them. */
+  /* Why a case was abandoned is not a field on the case - wardsynq-surgical.js records it as the
+   * detail of the ledger entry that ended it, so it is read from there. */
+  function abandonReasonOf(c) {
+    var l = (c && c.ledger) || [];
+    for (var i = l.length - 1; i >= 0; i--) if (l[i] && l[i].event === "abandoned") return l[i].detail || "";
+    return "";
+  }
+  function patientSurgeryView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.patientCases;
+    var rows = d && d.cases ? d.cases.map(function (c) {
+      return '<li class="w-mini-row"><div>' +
+        '<span class="w-st ' + (c.stage === "abandoned" ? "escalate" : "due") + '">' + esc(STAGE_WORDS[c.stage] || c.stage) + "</span> " +
+        "<b>" + esc(c.procedure) + "</b>" + (c.site ? " &middot; " + esc(c.site) : "") + (c.laterality ? " " + esc(c.laterality) : "") +
+        (abandonReasonOf(c) ? '<div class="w-dt-times">' + esc(abandonReasonOf(c)) + "</div>" : "") +
+        "</div><div class=\"w-mini-row-act\">" +
+        '<button class="w-btn ghost sm" data-w-act="opensurgery:' + esc(c.id) + '">Open</button>' +
+        "</div></li>";
+    }).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Operations</h3></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No operations recorded for this patient.</p>') +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4663,6 +4706,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "patientsurgery" ? patientSurgeryView(state)
         : state.view === "tags" ? tagsView(state)
         : state.view === "mpi" ? mpiView(state)
         : state.view === "infusions" ? infusionView(state)
@@ -6232,6 +6276,29 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function patientSurgeryOpen() {
+    var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "patientsurgery"; st.patientCases = null; paint();
+    apiGet("/ward/surgery-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        if (r && r.ok) st.patientCases = r;
+        else { st.patientCases = null; st.err = "Could not load operations. Do not read this as none recorded."; }
+        paint();
+      })
+      .catch(function () { st.err = "Could not load operations."; paint(); });
+  }
+  function surgeryAbandon(caseId) {
+    if (!caseId) return;
+    var reason = "";
+    try { reason = G.prompt("Why is this case not going ahead?") || ""; } catch (e) {}
+    if (!reason) { st.err = "Abandoning a case needs a reason."; paint(); return; }
+    if (!confirm("End this case on the record as not going ahead?")) return;
+    st.busy = true; paint();
+    apiPost("/ward/surgery-abandon", { orgId: st.orgId, caseId: caseId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded as not going ahead." : null)) loadSurgeryCase(caseId); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
   function tagsOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "tags"; st.tags = null; st.tagVerify = null; paint(); loadTags();
@@ -7583,6 +7650,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "patientsurgery") { st.patientCases = null; st.view = "chart"; paint(); return; }
       if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
@@ -7839,6 +7907,8 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
+    if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
     if (cmd === "tags") { tagsOpen(); return; }
     if (cmd === "tagverify") { tagVerify(); return; }
     if (cmd === "tagassign") { tagAssign(); return; }
@@ -8011,6 +8081,7 @@
     st.infusions = null;
     st.mpi = null;
     st.tags = null; st.tagVerify = null;
+    st.patientCases = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
