@@ -221,3 +221,14 @@ follow-up, discharge, twin/MaiK routes, metrics/operational-health, readers, lin
 advisory-check, dose-ceiling, emergency-chart, extend, flag-critical, backfill, resus-waive, and the
 13 found by the checker correction (assess is done; clinic, delete, disable, hl7, hospital, order,
 orders, pay, reset, restore still open).
+
+
+## 2026-09-14 — lab result entry (backlog 44 → 43)
+
+**Bug, not just a gap:** the laboratory board listed tests awaiting a result and offered no way to
+report any of them - `release-result` had no screen, so a lab on WardSynQ could not report results at
+all. Each pending test now has "Enter result", reported against its own order; values sent exactly as
+typed; rejected rows named with the reason.
+
+**Numbers:** 5988 passing, 0 failing. 43 routes waiting for a screen.
+**Next:** specimen-outcome (failed/received sample), dispense-return, transfusion-trace, billing extras.
