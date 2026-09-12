@@ -54,6 +54,7 @@ import {
   findJobForSession,
   findJobByCandidateVersion,
   casJob,
+  casDeploymentActiveVersion,
   getActiveActivation,
   revokeSessionViewerTokens,
   newId,
@@ -1160,6 +1161,25 @@ export async function onRequest(context) {
         await casJob(deps.db, tid, job.id, job.revision, { state: "FAILED", stage_code: "E_REJECTED", completed_at: nowIso() });
       }
       return jsonResponse({ ok: true, state: updated.lifecycle });
+    }
+
+    // DELETE /connections/:deploymentId -- owner/admin removes a hospital's adapter: the approved version
+    // is revoked, the hospital's active pointer cleared, every waiting draft discarded. The deployment
+    // row stays (history, consent), so the hospital shows as "Not connected" and can be connected again.
+    if (method === "DELETE" && parts.length === 2 && parts[0] === "connections") {
+      const deploymentId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "approve");
+      const deployment = await getDeployment(deps.db, tid, deploymentId);
+      const activeId = deployment.active_version_id || null;
+      if (activeId) {
+        const active = await getVersion(deps.db, tid, activeId);
+        await casDeploymentActiveVersion(deps.db, tid, deploymentId, activeId, null);
+        if (active && canTransition("adapter", active.lifecycle, "REVOKED")) {
+          await casVersionLifecycle(deps.db, tid, activeId, active.lifecycle, { lifecycle: "REVOKED", policy_version: "removed:" + String(actor.id).slice(0, 60) });
+        }
+      }
+      const discarded = await discardOtherCandidates(deps.db, tid, deploymentId, [], "removed by " + String(body.reason || "the owner").slice(0, 60));
+      return jsonResponse({ ok: true, deploymentId, removedVersionId: activeId, discarded: discarded.length });
     }
 
     // GET /connections -- this tenant's deployments, one row each
