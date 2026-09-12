@@ -149,10 +149,22 @@
       '<button class="btn" type="button" data-go="logout">Sign out</button></div>' : "";
     var h = '<div class="brandbar"><img class="brand-mark" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="" aria-hidden="true" width="261" height="61" decoding="async"><span class="spring"></span>' + tools + "</div>";
     if (org) h += '<div class="hospbar"><span class="name">' + esc(org.name || org.id) + '</span><span class="facts">' + esc(org.code || org.id) +
-      '<span class="sep">/</span>' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
+      ' <span class="sep">/</span> ' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
       (isDemo(org) ? '<span class="demo-tag" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
-      (who ? '<span class="who">' + esc(who.name || who.smdId || "") + (who.role ? ", " + esc(who.role) : "") + "</span>" : "") + "</div>";
+      (who ? '<span class="who">' + esc(personName(who)) + (who.role ? ", " + esc(String(who.role).replace(/_/g, " ")) : "") + "</span>" : "") + "</div>";
     return h;
+  }
+  /* THE PERSON, NOT THEIR LOGIN. The header greeted a staff member with the whole of
+   * "nurse.01@demo.wardsynq.test, nurse" - a login, printed at them, on every screen. A staff sign-in
+   * has no display name yet, so the local part is the closest thing the session honestly holds; a
+   * real name wins whenever one exists, and nothing is invented when neither does. Role underscores
+   * become spaces here too, so "blood_bank" reads as "blood bank". */
+  function personName(who) {
+    var n = (who && (who.name || who.displayName)) || "";
+    if (n && n.indexOf("@") < 0) return n;
+    var id = String(n || (who && who.smdId) || "");
+    var at = id.indexOf("@");
+    return at > 0 ? id.slice(0, at) : id;
   }
   /* The rail: the map of surfaces, the same list the home page states in full. */
   function rail(page) {
@@ -160,7 +172,7 @@
     var native = isWardsynq();
     var item = function (go, label) { return '<a href="#/' + go.replace(/^ward:/, "ward/") + '"' + (page === go ? ' aria-current="page"' : "") + ">" + esc(label) + "</a>"; };
     var h = '<div class="rail"><div class="heading">WardSynQ</div>' + item("home", "Map");
-    if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results");
+    if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
     h += item("opd", "OPD desk") + item("patients", "Patients");
     if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
     h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + "</div>";
@@ -289,8 +301,21 @@
       var staff = function () {
         var id = ($("sid").value || "").trim().toLowerCase(), pw = $("spw").value, code = ($("sorg").value || "").trim().toUpperCase();
         if (!id || !pw) { msg("Enter your staff ID (or email) and PIN (or password)."); return; }
-        var isEmail = id.indexOf("@") > 0;
-        if (!isEmail && !code) { msg("Enter the hospital code, or sign in with your email."); return; }
+        /* THE HOSPITAL CODE DECIDES, NOT THE SHAPE OF THE ID.
+         *
+         * This read `id.indexOf("@") > 0` and sent anything containing an "@" down the
+         * email + password door, silently ignoring the hospital code the person had just typed and
+         * offering their PIN as a password. A staff ID IS an email address at every hospital seeded
+         * so far - all 159 here - so the staff door rejected every one of them with "Wrong email or
+         * password" while the very same code, ID and PIN worked perfectly against the server. The
+         * form's own caption promises both routes: "Hospital code + staff ID + PIN, or just your
+         * email + password". Filling in all three has to mean the first one.
+         *
+         * So: a hospital code present means the PIN route, whatever the ID looks like. No code means
+         * the email route, which still needs an "@" to be a sensible attempt. */
+        var hasAt = id.indexOf("@") > 0;
+        var isEmail = !code && hasAt;
+        if (!hasAt && !code) { msg("Enter the hospital code, or sign in with your email."); return; }
         st._lastCode = code; msg("Checking.", "note");
         fetch(API + (isEmail ? "/auth/email" : "/auth/pin"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(isEmail ? { email: id, password: pw } : { clinicCode: code, identity: id, pin: pw }) })
           .then(function (r) { return r.json(); }).then(function (r) {
@@ -335,35 +360,107 @@
   } };
 
   // ---- home: the role-aware map -----------------------------------------------------------------------
+  /* `need` may be a LIST, because some screens have more than one honest way in. The laboratory
+   * board is the case that forced it: a ward opens it with emr.view, and the bench itself opens it
+   * with lab.result, which is the same pair of authorities the server accepts for those reads. A
+   * single capability would have had to pick one of the two departments to lock out. */
+  /* READING THE WARD NEEDS THE RECORD, NOT JUST THE QUEUE. These three tiles asked for queue.view,
+   * which almost every role holds - so a billing clerk, a pharmacist and a lab technician all saw
+   * Inpatient ward, Admission and bed board and Emergency department offered to them as their FIRST
+   * three tiles, and every one of those screens then refused them. The reads behind them need a
+   * record scope on Encounter, which is granted by emr.view, and separately by transfusion.issue so
+   * the blood bank can identify whose episode it is holding (actor.js). Naming both is what keeps
+   * this honest in either direction: nothing is offered that the server will refuse, and nothing is
+   * hidden from a role that genuinely gets in. */
+  var WARD_NEED = ["emr.view", "transfusion.issue"];
   function tile(opts) {
-    var dis = opts.need && !can(opts.need);
-    return '<button type="button" class="tile" data-go="' + esc(opts.go) + '"' + (dis ? ' disabled title="Your role (' + esc(st.who && st.who.role || "") + ') does not include ' + esc(opts.need) + '"' : "") + ">" +
+    var needs = opts.need ? (Object.prototype.toString.call(opts.need) === "[object Array]" ? opts.need : [opts.need]) : [];
+    var ok = !needs.length || needs.some(function (n) { return can(n); });
+    var dis = !ok;
+    return '<button type="button" class="tile" data-go="' + esc(opts.go) + '"' + (dis ? ' disabled title="Your role (' + esc(st.who && st.who.role || "") + ') does not include ' + esc(needs.join(" or ")) + '"' : "") + ">" +
       "<div><b>" + esc(opts.title) + "</b><span>" + esc(opts.sub) + "</span>" + (opts.liveId ? '<span class="live" id="' + opts.liveId + '"></span>' : "") + "</div></button>";
   }
   PAGES.home = { render: function (c) {
     var el = c.el, o = st.org, w = st.who, native = isWardsynq();
-    var head = '<div class="title"><h1>' + esc(o.name || o.id) + '</h1><span class="sub">' + esc(w.name || "") + (w.role ? " · " + esc(w.role) : "") + " · " + esc(o.code || o.id) + "</span></div>";
+    var head = '<div class="title"><h1>' + esc(o.name || o.id) + '</h1><span class="sub">' + esc(personName(w)) + (w.role ? " · " + esc(String(w.role).replace(/_/g, " ")) : "") + " · " + esc(o.code || o.id) + "</span></div>";
     if (!native) head += '<div class="msg note">This hospital runs in ' + esc(o.mode || "native") + " mode: the OPD desk and its EMR are available, the inpatient ward, command center and Digital Twin need a WardSynQ record. An owner can create a WardSynQ hospital from the hospital list.</div>";
-    var sec = function (t, tiles, note) { return '<div class="sec"><div class="signal"></div><div class="said"><h2>' + t + (note ? '<span class="n">' + note + "</span>" : "") + '</h2><div class="grid">' + tiles.join("") + "</div></div></div>"; };
+    /* WHAT YOU CAN ACTUALLY DO COMES FIRST.
+     *
+     * Every role opened the identical map in the identical order, which is the doctor's order. A
+     * billing clerk's first screen was eleven clinical tiles she cannot use - ward, emergency,
+     * critical results, laboratory, radiology, theatre, pharmacy - with Billing below the fold. The
+     * pharmacist's was the same, and the lab technician's. The product knew perfectly well which
+     * tiles it had just greyed out and still led with them.
+     *
+     * Within a section the tiles a person can open now sort above the ones they cannot. Nothing is
+     * hidden: a locked tile still appears, still says which role would open it, so the map stays a
+     * complete map of the hospital rather than quietly shrinking to fit whoever is signed in. The
+     * order inside each group is untouched, so a doctor - who can open everything - sees exactly
+     * what they saw before. */
+    var sec = function (t, tiles, note) {
+      var open = [], shut = [];
+      for (var i = 0; i < tiles.length; i++) (tiles[i].indexOf(" disabled") >= 0 ? shut : open).push(tiles[i]);
+      return '<div class="sec"><div class="signal"></div><div class="said"><h2>' + t + (note ? '<span class="n">' + note + "</span>" : "") + '</h2><div class="grid">' + open.concat(shut).join("") + "</div></div></div>";
+    };
     var wardTiles = native ? [
-      tile({ go: "ward:", icon: "bed", title: "Inpatient ward", sub: "Ward list, charts, vitals, eMAR round, notes, discharge", need: "queue.view", liveId: "lvWard" }),
-      tile({ go: "ward:board", icon: "hotel", title: "Admission and bed board", sub: "Admit by MRN, place in a bed, transfer", need: "queue.view", liveId: "lvBeds" }),
-      tile({ go: "ward:edboard", icon: "emergency", title: "Emergency department", sub: "Arrivals, triage, resuscitation, disposition", need: "queue.view", liveId: "lvEd" }),
+      tile({ go: "ward:", icon: "bed", title: "Inpatient ward", sub: "Ward list, charts, vitals, eMAR round, notes, discharge", need: WARD_NEED, liveId: "lvWard" }),
+      tile({ go: "ward:board", icon: "hotel", title: "Admission and bed board", sub: "Admit by MRN, place in a bed, transfer", need: WARD_NEED, liveId: "lvBeds" }),
+      tile({ go: "ward:edboard", icon: "emergency", title: "Emergency department", sub: "Arrivals, triage, resuscitation, disposition", need: WARD_NEED, liveId: "lvEd" }),
       tile({ go: "ward:critsboard", icon: "priority_high", title: "Critical results", sub: "Every open critical result, hospital-wide", need: "emr.view", liveId: "lvCrit" }),
+      /* THE LABORATORY AND RADIOLOGY HAD NO FRONT DOOR. Every other department on this map has one:
+       * theatre, pharmacy stock, the ED, critical results. Labs and imaging existed only as buttons
+       * buried inside a single patient's chart, so a lab technician or a radiographer signing in
+       * landed on a map with nothing on it they could do, and no way to see their own department's
+       * workload. The backends were already there (collections, pending-tests, release-result,
+       * imaging-worklist, report-imaging); only the way in was missing.
+       * BOTH are emr.view, and the laboratory one is emr.view for the SAME reason the imaging
+       * worklist already is (see the cap table in functions/api/queue/[[path]].js): a board is
+       * patient demographics beside a requested procedure, and emr.view is the capability that reads
+       * those. lab.result would have looked stricter and been broken - the laboratory grant
+       * deliberately cannot read Patient at all, and a worklist with no identity on it is worse than
+       * no worklist. Widening lab.result to make this tile work would overturn a considered boundary
+       * for the convenience of one screen, so it is not done here either.
+       * CONSEQUENCE, and it needs an owner's decision rather than a guess: the `lab` role holds only
+       * [queue.view, lab.result], so a lab technician still does not see this tile. Staffing the
+       * bench properly needs either emr.view on that role or a role designed for it. Flagged, not
+       * invented. */
+      tile({ go: "ward:labboard", icon: "science", title: "Laboratory", sub: "Specimens, bench worklist, results and release", need: ["emr.view", "lab.result"], liveId: "lvLab" }),
+      tile({ go: "ward:radboard", icon: "radiology", title: "Radiology", sub: "Imaging worklist, acquisition, reporting", need: ["emr.view", "lab.result"], liveId: "lvRad" }),
       tile({ go: "ward:surgeryboard", icon: "surgical", title: "Theatre", sub: "Cases, WHO checklist, anaesthesia, implants", need: "emr.view" }),
-      tile({ go: "ward:inventoryboard", icon: "inventory_2", title: "Pharmacy stock", sub: "Receive, move, waste, reconcile", need: "emr.view" }),
+      /* order.dispense, NOT emr.view, and this one locked the pharmacist out of pharmacy.
+       * The stock reads and writes behind this tile are gated ORDER_DISPENSE server-side
+       * (functions/api/queue/[[path]].js: "stock-move", "stock", "stock-reconcile"), which is
+       * exactly what the pharmacy role holds. The tile asked for emr.view instead - a capability
+       * the pharmacy role deliberately does NOT have, because dispensing needs the order and not
+       * the consultation notes - so a pharmacist signing in found the one screen her job runs on
+       * greyed out, with a tooltip explaining she lacked a capability the screen never needed.
+       * Found 2026-09-12 by signing in as the pharmacist. */
+      tile({ go: "ward:inventoryboard", icon: "inventory_2", title: "Pharmacy stock", sub: "Receive, move, waste, reconcile", need: "order.dispense" }),
       tile({ go: "ward:scheduling", icon: "event", title: "Scheduling", sub: "Appointments, resources, blackout periods", need: "queue.view" }),
       tile({ go: "opd", icon: "medical_services", title: "OPD desk", sub: "Queue, check-in, consult, prescriptions, results", need: "queue.view" }),
       tile({ go: "workstation", icon: "verified", title: "Order safety workstation", sub: "Medication order with allergy and interaction checks", need: "emr.treat" }),
     ] : [tile({ go: "opd", icon: "medical_services", title: "OPD desk", sub: "Queue, check-in, consult, prescriptions, results", need: "queue.view" })];
+    /* Every one of these six opens a route the server gates at emr.view (patient-flow, twin,
+     * report-patient-flow, fhir-exceptions, emergency-log, downtime - see the capability table in
+     * functions/api/queue/[[path]].js), not queue.view. queue.view is held by nearly every role,
+     * including four with no clinical read at all - pharmacy, billing, cashier, blood_bank, viewer -
+     * so each of them was offered all six of these as their first live tiles and refused by every
+     * one the moment they opened it. The exact bug WARD_NEED already exists to fix for the three
+     * Clinical-section tiles above; it was simply never applied down here too. */
     var cmdTiles = native ? [
-      tile({ go: "ward:flowcommand", icon: "monitoring", title: "Hospital command center", sub: "Patient flow, bottlenecks, emergency status", need: "queue.view", liveId: "lvEmerg" }),
-      tile({ go: "ward:twin", icon: "hub", title: "Digital Twin", sub: "Fused hospital state, freshness, predictions, simulation", need: "queue.view" }),
-      tile({ go: "ward:reports", icon: "summarize", title: "Reports", sub: "Patient flow, clinical operations, pharmacy, imaging, billing, claims", need: "queue.view" }),
+      tile({ go: "ward:flowcommand", icon: "monitoring", title: "Hospital command center", sub: "Patient flow, bottlenecks, emergency status", need: "emr.view", liveId: "lvEmerg" }),
+      tile({ go: "ward:twin", icon: "hub", title: "Digital Twin", sub: "Fused hospital state, freshness, predictions, simulation", need: "emr.view" }),
+      tile({ go: "ward:reports", icon: "summarize", title: "Reports", sub: "Patient flow, clinical operations, pharmacy, imaging, billing, claims", need: "emr.view" }),
       tile({ go: "ward:cashier", icon: "payments", title: "Billing and cashier", sub: "Invoices, collections, claims and TPA pre-authorisation", need: "billing.view" }),
-      tile({ go: "ward:integration", icon: "sync_alt", title: "Integration console", sub: "FHIR, HL7, SCCM: exceptions, outbound, replay", need: "queue.view" }),
-      tile({ go: "ward:emergencyadmin", icon: "gpp_maybe", title: "Emergency access", sub: "Declarations, break-glass log, reconciliation", need: "queue.view" }),
-      tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "queue.view" }),
+      tile({ go: "ward:integration", icon: "sync_alt", title: "Integration console", sub: "FHIR, HL7, SCCM: exceptions, outbound, replay", need: "emr.view" }),
+      tile({ go: "ward:emergencyadmin", icon: "gpp_maybe", title: "Emergency access", sub: "Declarations, break-glass log, reconciliation", need: "emr.view" }),
+      /* incident.report OR incident.investigate: filing is broad (nearly every clinical role),
+       * investigating is not (safety_officer/admin). The engine (wardsynq-incidents.js) has held a
+       * full report -> triage -> RCA -> CAPA -> close lifecycle since it was written, gated at the
+       * route (functions/_wardsynq/incidents.js) - and had NO tile anywhere, so nobody, including
+       * safety_officer whose whole job this is, could reach it. */
+      tile({ go: "ward:incidents", icon: "report", title: "Safety and incidents", sub: "File a report; triage, RCA and CAPA for safety officers", need: ["incident.report", "incident.investigate"] }),
+      tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "emr.view" }),
     ] : [];
     var peopleTiles = [
       tile({ go: "patients", icon: "person_search", title: "Patients", sub: "Find by MRN, register a new patient, open the chart", need: "queue.view" }),
@@ -378,7 +475,29 @@
     if (!native) return;
     // Live counts, each from the same route its tile opens. A count that cannot be read says so.
     var q = "?orgId=" + encodeURIComponent(st.orgId);
-    var live = function (id, p, f) { var s = $(id); if (!s) return; s.innerHTML = '<span class="spin"></span>'; api(p).then(function (r) { var v = f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : ""); }); };
+    /* A COUNT YOU ARE NOT ENTITLED TO IS NOT "UNAVAILABLE" - IT IS SIMPLY NOT YOURS.
+     *
+     * These badges are gated on queue.view, but the reads behind them need more than that, so a
+     * pharmacist (queue.view, no emr.view) opened her home screen to find the first three tiles -
+     * ward, bed board, emergency - all reporting "unavailable". Three words that say the system is
+     * broken, on the screen somebody sees first, about counts she was never meant to see. The
+     * pharmacy work she actually came for was further down and perfectly fine.
+     *
+     * A refusal now renders as nothing at all: the tile is still there, still openable if her role
+     * allows, just without a number beside it. A REAL failure still says so, because "the ward list
+     * is down" is worth knowing and must not be hidden by this. */
+    var refused = function (r) {
+      var e = r && r.error;
+      return e === "forbidden" || e === "permission" || e === "out_of_scope" || e === "not_a_member" || e === "unauthorized";
+    };
+    var live = function (id, p, f) {
+      var s = $(id); if (!s) return;
+      s.innerHTML = '<span class="spin"></span>';
+      api(p).then(function (r) {
+        if (refused(r)) { s.textContent = ""; s.className = "live"; return; }
+        var v = f(r); s.textContent = v.text; s.className = "live" + (v.stop ? " stop" : "");
+      });
+    };
     if (can("queue.view")) live("lvWard", "/ward/list" + q, function (r) { return r && r.ok ? { text: (r.patients || []).length + " admitted" } : { text: "unavailable", stop: true }; });
     if (can("queue.view")) live("lvBeds", "/ward/beds" + q, function (r) { if (!r || !r.ok) return { text: "unavailable", stop: true }; var free = 0, known = false; (r.wards || []).forEach(function (w) { if (w.bedsKnown !== false && w.free) { known = true; free += w.free.length; } }); return { text: known ? free + " free beds" : (r.wards || []).length + " wards, beds not configured" }; });
     if (can("queue.view")) live("lvEd", "/ward/ed-list" + q, function (r) { return r && r.ok ? { text: (r.patients || []).length + " in ED" } : { text: "unavailable", stop: true }; });

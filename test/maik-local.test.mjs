@@ -484,10 +484,17 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
   const passage = { heading: "Pneumonia > Treatment", page: "p.1769", text: "For penicillin allergy, use doxycycline monotherapy or a respiratory fluoroquinolone.", chunk: 17689 };
   const fakeBook = {
     search: (q) => { calls.searched.push(q); return [[12.5, 0]]; },
-    cite: () => passage
+    cite: () => passage,
+    // Real values, not the fake-tokenizer-free stub: the "zero real anchors -> no grounding" guard
+    // (owner report, 2026-09-11) needs a real anchor to be findable, or every test here would refuse
+    // to ground at all. idfOf() is a flat constant - these tests are about the gate/wiring, not BM25
+    // scoring (that is what test/maik-local's "retrieval drift guard" block covers with a real index).
+    idfOf: () => 5, us: (w) => w
   };
   const RAG = {
     TOPK: 3, MIN_SCORE: 6.0,
+    toks: (s) => String(s || "").toLowerCase().match(/[a-z]+/g) || [],
+    expand: (q) => [q, ""],
     evidenceGate: (answer, evidence) => {
       const bad = /amoxicillin/i.test(answer) && !/amoxicillin/i.test(evidence);
       return { ok: !bad, nums: [], drugs: bad ? ["amoxicillin"] : [] };
@@ -556,8 +563,11 @@ function loadWithRag({ tokens, kbLoadFails = false } = {}) {
 // ── no-coverage fallback (owner, 2026-09-04, from a live screenshot): "not addressed in the
 // provided reference material" is a retrieval verdict, not an answer. Re-ask once ungrounded. ──
 {
-  const { L, calls } = loadWithRag({ tokens: ["Splenomegaly with fever is not addressed in the provided reference material. The evidence covers diverticular disease."] });
-  const r = await L.answer({ question: "Spleenomegaly with Fever DD and RX" }, { pack: "maik-lite" }, null);
+  // Question kept anchored to the fixture passage's own vocabulary (pneumonia/penicillin/doxycycline)
+  // like every sibling test in this file - the point here is the re-ask-on-no-coverage behaviour, not
+  // anchor matching, and the fake book only ever returns the one canned "Pneumonia > Treatment" passage.
+  const { L, calls } = loadWithRag({ tokens: ["Pneumonia treatment is not addressed in the provided reference material. The evidence covers diverticular disease."] });
+  const r = await L.answer({ question: "Treatment of Pneumonia?" }, { pack: "maik-lite" }, null);
   ok("the model was asked twice", calls.generate.length === 2);
   ok("the first pass carried the reference material", /Reference material/.test(calls.generate[0].prompt));
   ok("the second pass carried NO reference material (own weights)", !/Reference material/.test(calls.generate[1].prompt));
@@ -791,6 +801,49 @@ function loadRealRag({ tokens, rows }) {
   await d.L.answer({ question: "q" }, { pack: "maik-apex", regen: true }, null);
   ok("ordinary answer: temperature 0", d.calls.generate[0].temperature === 0);
   ok("regenerate: temperature 0.4", d.calls.generate[1].temperature === 0.4);
+}
+
+{
+  // Owner report (2026-09-11): "Teach me Pneumonia atoz" and "Can I learn a new medical topic today"
+  // both grounded on an unrelated chapter because every content word in the question was either
+  // generic filler or simply absent from the book, so there was no real anchor to filter passages
+  // by - the code fell through to "whatever scored highest on raw BM25" instead of refusing.
+  const rows = [
+    { i: 0, text: "Uncomplicated cystitis in women: nitrofurantoin 100 mg twice daily for 5 days is first-line treatment. ".repeat(3), headings: ["Urinary tract infection", "Treatment"], pages: [1] },
+    { i: 1, text: "Modern medical machine learning uses semi-supervised methods combining labeled and unlabeled data for gene expression clustering. ".repeat(3), headings: ["Modern Medical Machine Learning"], pages: [2] }
+  ];
+  const a = loadRealRag({ tokens: ["Yes, semi-supervised learning combines labeled and unlabeled data."], rows });
+  const r1 = await a.L.answer({ question: "Can I learn a new medical topic today. Teach me one" }, { pack: "maik-lite" }, null);
+  ok("a topic-less question never grounds on whatever scored highest (no ML chapter leak)", r1.grounded === false);
+  ok("...and its answer carries no fabricated Knowledge Base citation", !/Source: StewardMD Knowledge Base/.test(r1.text));
+
+  const b = loadRealRag({ tokens: ["x"], rows });
+  await b.L.answer({ question: "Treatment of uncomplicated UTI" }, { pack: "maik-lite" }, null);
+  const p2 = b.calls.generate[0].prompt;
+  ok("a real topic still grounds normally (the guard is not over-broad)", /nitrofurantoin/i.test(p2));
+}
+{
+  // Owner report (2026-09-11): a bare "H" answered with MaiK's own SYSTEM prompt pasted back verbatim
+  // ("Give the final answer only, never your reasoning...") before an unrelated drug monograph. That
+  // sentence never occurs in a genuine clinical answer, so its presence voids the whole output rather
+  // than trying to guess where the real answer would have started.
+  const { L } = load();
+  const leak = "MaiK, clinical decision support for doctors. Answer in markdown.\nGive the final answer only, never your reasoning.\nHMechanism of Action: Inhibits dihydrofolate reductase.";
+  ok("a verbatim system-prompt echo is treated as no answer", L.stripReasoning(leak) === "");
+
+  // Owner report: "Plan: ... Possible responses: ... Let's go with X" - a brainstorm-then-pick leak
+  // with no blank line before the real answer, so the old strip-the-label fallback left it all visible.
+  const plan = "Plan:\nStart with a friendly greeting back.\nAsk an open-ended question.\nPossible responses:\n\"Hello there! What can I help you with today?\"\nLet's go with \"Hello there! What can I help you with today?\" It fits the brief.";
+  ok("a no-blank-line brainstorm leak recovers the picked line, not the whole plan",
+     L.stripReasoning(plan) === "Hello there! What can I help you with today?");
+
+  // A genuine answer that happens to start with one of the trigger words is not eaten.
+  ok("a real answer starting with 'plan' text is untouched when it is not a reasoning leak",
+     L.stripReasoning("Plan the airway first: this is a real clinical answer with no picks or brainstorming.").length > 20);
+
+  // Owner report: the heart-failure dosing answer repeated itself verbatim, back to back.
+  const para = "Initiate ACE inhibitor/ARB with a target dose of 10 to 25 mg per day, titrate to the maximum tolerated dose, then reassess symptoms weekly.";
+  ok("a small model repeating its whole answer verbatim is de-duplicated", L.stripReasoning(para + " " + para) === para);
 }
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

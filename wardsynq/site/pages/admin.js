@@ -10,11 +10,16 @@
   // Bed states, verbatim from functions/_opd_org.js BED_STATES - never invented here.
   var BED_STATES = ["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"];
 
-  // Every role functions/_queue_roles.js ROLE_CAPS knows about (ROLES = Object.keys(ROLE_CAPS)).
+  /* Every role functions/_queue_roles.js ROLE_CAPS knows about (ROLES = Object.keys(ROLE_CAPS)).
+   * This list is hand-kept, not generated - it went stale for radiographer/radiologist the day
+   * those two roles were added to ROLE_CAPS: they existed on the server, had a home-screen tile
+   * and a chart, and could not be GIVEN to anybody, because this dropdown - the only door into
+   * assigning a role to a staff member - never learned they existed. Keep this in sync by hand;
+   * there is no test that catches a role missing here, only a role an admin cannot find. */
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
-    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "oncqis_protocol_author",
-    "oncqis_clinical_reviewer", "oncqis_institutional_approver", "pg_resident", "pg_faculty", "pg_hod",
-    "academic_cell", "safety_officer", "viewer"];
+    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
+    "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   var ROLE_NOTES = [
@@ -27,6 +32,8 @@
     ["billing", "Reads charges, invoices and claims. Cannot take payment (see Cashier for that)."],
     ["him", "Reads the chart to decide and record release-of-information requests."],
     ["blood_bank", "Crossmatches, issues and administers transfusions only."],
+    ["radiographer", "Acquires the imaging study. Reads the chart, cannot file a report or protocol a study."],
+    ["radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write."],
   ];
 
   function refusal(r) {
@@ -62,6 +69,48 @@
   } });
 
   // ---- Hospital -------------------------------------------------------------------------------
+  /* WHO MAY WRITE A CLINICAL NOTE. Writing a note needs emr.treat, the prescribing capability, so
+   * out of the box only prescribers document. On plenty of real wards the nursing note is a core
+   * part of the record - and the alternative, handing nurses emr.treat, would hand them prescribing
+   * too. So the hospital names the roles it trusts to document, here, and those roles may write a
+   * note and nothing else.
+   *
+   * Only roles that can already open a chart are offered: a role that cannot read the record has no
+   * business writing into it, and listing it here would promise something the server would refuse.
+   * Prescribers are shown as always-on and cannot be unticked, because emr.treat carries this
+   * anyway and a tickbox that does not change anything is a lie about what it controls. */
+  var NOTE_ROLE_CHOICES = ["nurse", "supervisor", "resident", "intern", "reception", "him", "radiographer", "radiologist"];
+  var ALWAYS_WRITE = ["admin", "doctor", "pg_faculty", "pg_hod", "pg_resident"];
+  function noteWritersCard(c, o) {
+    var cfg = (o && o.wardsynq) || {};
+    var on = Array.isArray(cfg.noteWriterRoles) ? cfg.noteWriterRoles : [];
+    var row = function (r) {
+      return '<label class="f" style="flex:0 1 190px"><span>' +
+        '<input type="checkbox" class="admNoteRole" value="' + c.esc(r) + '"' + (on.indexOf(r) >= 0 ? " checked" : "") + "> " +
+        c.esc(r.replace(/_/g, " ")) + "</span></label>";
+    };
+    return '<div class="card"><h2>' + c.ms("edit_note") + " Who may write a clinical note</h2>" +
+      '<p class="quiet">Doctors and admins can always write a note. Tick any other role your hospital trusts to document on the patient timeline. This lets them write a note and nothing else: it does not let them prescribe, order or change anything.</p>' +
+      '<div class="row">' + NOTE_ROLE_CHOICES.map(row).join("") + "</div>" +
+      '<p class="quiet">Always allowed: ' + ALWAYS_WRITE.join(", ").replace(/_/g, " ") + ".</p>" +
+      '<button class="btn" id="admNoteSave" type="button">Save</button><div id="admNoteMsg"></div></div>';
+  }
+  function wireNoteWriters(c) {
+    var btn = document.getElementById("admNoteSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var picked = [];
+      document.querySelectorAll(".admNoteRole").forEach(function (b) { if (b.checked) picked.push(b.value); });
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { noteWriterRoles: picked } }).then(function (r) {
+        btn.disabled = false;
+        var m = document.getElementById("admNoteMsg");
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org;
+        c.toast(picked.length ? "Saved. " + picked.length + " extra role" + (picked.length === 1 ? "" : "s") + " may write a note." : "Saved. Only prescribers may write a note.");
+      });
+    };
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -80,7 +129,8 @@
        * say: nothing is converted, and nothing already recorded is rewritten. */
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
-      "</div>";
+      "</div>" +
+      (c.isWardsynq() ? noteWritersCard(c, o) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -92,6 +142,7 @@
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");
       });
     };
+    wireNoteWriters(c);
   }
 
   // ---- Departments ------------------------------------------------------------------------------

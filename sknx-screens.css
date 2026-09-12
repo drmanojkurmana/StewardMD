@@ -413,9 +413,18 @@ html.sknx-lock .ghis-ward-fab { display: none !important; }
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
 }
-#sknxRoot .sknx-cap-title { font-size: 20px; font-weight: 650; letter-spacing: -.035em; }
-#sknxRoot .sknx-brand-sub { display: block; font-size: 11px; font-weight: 500; letter-spacing: .02em; color: var(--sknx-text-2); margin-top: 2px; }
-#sknxRoot .sknx-mark { display: block; width: 38px; height: 38px; flex: 0 0 38px; border-radius: 11px; }
+#sknxRoot .sknx-cap-brand { display: flex; align-items: center; gap: 11px; min-width: 0; flex: 1; }
+#sknxRoot .sknx-cap-brand-txt { display: flex; flex-direction: column; min-width: 0; }
+#sknxRoot .sknx-cap-title { font-size: 19px; font-weight: 700; letter-spacing: -.035em; margin: 0; line-height: 1.15; }
+#sknxRoot .sknx-ai-tag { color: #14B8A6; font-weight: 800; font-size: .88em; letter-spacing: .02em; margin-left: 1px; }
+#sknxRoot .sknx-brand-sub { display: block; font-size: 11px; font-weight: 500; letter-spacing: .02em; color: var(--sknx-text-2); margin-top: 2px; line-height: 1.2; }
+#sknxRoot .sknx-mark { display: block; width: 34px; height: 34px; flex: 0 0 34px; object-fit: contain; }
+#sknxRoot .sknx-hero-lockup { margin: 0 0 16px; }
+#sknxRoot .sknx-hero-logo { height: 42px; width: auto; max-width: 240px; display: block; object-fit: contain; }
+#sknxRoot .sknx-hero-dark { display: none; }
+#sknxRoot .sknx-hero-light { display: block; }
+body.dark #sknxRoot .sknx-hero-light, body.v3-dark #sknxRoot .sknx-hero-light { display: none; }
+body.dark #sknxRoot .sknx-hero-dark, body.v3-dark #sknxRoot .sknx-hero-dark { display: block; }
 #sknxRoot:focus, #sknxRoot h2[tabindex="-1"]:focus, #sknxRoot .sknx-result-title:focus { outline: none; }
 #sknxRoot .sknx-cap-close, #sknxRoot .sknx-result-back, #sknxRoot .sknx-result-close { width: 44px; height: 44px; background: transparent; }
 #sknxRoot .sknx-cap-close:active, #sknxRoot .sknx-result-back:active, #sknxRoot .sknx-result-close:active { background: var(--sknx-surf-2); }

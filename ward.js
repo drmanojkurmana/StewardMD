@@ -246,6 +246,10 @@
       // patient (criticalsCard), read here with no patientId so anyone covering the ward or the lab
       // can see every open critical loop at once, not just the one chart they happen to have open.
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
+      // Hospital-wide, like Critical results beside it: imaging had a backend and nowhere to
+      // land before this - the missing screen for a radiographer or radiologist who signs in.
+      '<button class="w-btn ghost" data-w-act="labboard" title="Specimens, tests awaiting a result and open critical results, hospital-wide">' + ms("science") + "Laboratory board</button>" +
+      '<button class="w-btn ghost" data-w-act="radboard" title="Imaging worklist, reporting and open critical findings, hospital-wide">' + ms("medical_information") + "Radiology board</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
       // TASK 10: the Hospital Digital Twin - a fused view over patient flow, ward metrics, criticals,
@@ -293,7 +297,9 @@
     var t = state.admitTarget;
     var wardsHtml = wards.map(function (w) {
       var occ = (w.occupied || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.patientId) + "</span></div>";
+        // The server now sends name/mrn on every occupied bed (migrate-inpatient.js bedBoard).
+        // The id is the LAST resort, never the first thing a nurse reads off a bed.
+        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span></div>";
       }).join("");
       // Which free cell is highlighted as "picked" - a UI selection compare against what the board
       // itself already reported as free, never a computation of whether a bed IS free.
@@ -302,7 +308,7 @@
         return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>Free</span></button>";
       }).join("") : '<div class="w-bedcell unknown"><span>Bed list not configured</span></div>';
       var unplaced = (w.unplaced || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.patientId) + " (no bed assigned)</span></div>";
+        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
       }).join("");
       return '<div class="w-wardrow"><h4>' + esc(w.ward) + "<small>" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
@@ -803,7 +809,7 @@
         (m.dose && m.dose.value != null ? " <span>" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
         (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
         (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
-        (m.since ? "<small>since " + when(m.since) + "</small>" : "") +
+        (m.since ? " <small>since " + when(m.since) + "</small>" : "") +
         "</li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Active medications</h3></div>" +
@@ -816,17 +822,84 @@
    * reconstruct by reading nine separate cards. Nothing here is a second copy of the record: the
    * events are labels over the SAME rows the cards above render, ordered by when each actually
    * happened. A resource with no timestamp is counted, never silently dropped - see w-hint below. */
+  /* One row of the stay. Shared by the card on the chart and the full-page Timeline, so the two can
+   * never drift into telling the story differently. */
+  function timelineRow(e) {
+    return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
+  }
+  function timelineGapHint(state) {
+    return state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "";
+  }
   function timelineCard(state) {
     var t = state.timeline;
     if (t == null) return "";
-    var rows = t.map(function (e) {
-      return '<li><span class="w-tl-t">' + when(e.at) + '</span><span class="w-tl-k">' + esc(e.resourceType) + "</span><span>" + esc(e.label) + "</span></li>";
-    }).join("");
+    var rows = t.map(timelineRow).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Timeline</h3>" +
+      '<button class="w-btn tiny" data-w-act="timeline" title="The whole clinical history on one page">' + ms("open_in_full") + "Open full history</button>" +
       '<button class="w-ic" data-w-act="open:' + esc((state.sel || {}).encounterId || "") + '" title="Refresh">' + ms("refresh") + "</button></div>" +
       (rows ? "<ul class=\"w-timeline\">" + rows + "</ul>" : '<p class="w-empty">Nothing recorded yet.</p>') +
-      (state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "") +
+      timelineGapHint(state) +
       "</div>";
+  }
+
+  /* THE WHOLE CLINICAL HISTORY, ON ONE PAGE, WITH SOMEWHERE TO WRITE.
+   *
+   * The timeline was a card among a dozen other cards, which is the wrong shape for the one thing a
+   * doctor picking up an unfamiliar patient actually does first: read the stay from the beginning.
+   * It is now a page of its own, and the note box sits at the top of it, because the note a ward
+   * round produces is written WHILE reading the history that prompted it, not on a different screen.
+   *
+   * Notes are append-only here as everywhere else: there is no edit and no delete. A correction is a
+   * new note, exactly as a corrected discharge summary is a new signed version. */
+  function timelineOpen() {
+    var s = st.sel; if (!s) return;
+    st.view = "timeline"; st.noteErr = ""; paint();
+    if (st.timeline == null) loadChart();
+  }
+  function timelineNoteSave() {
+    var s = st.sel; if (!s) return;
+    var text = val("wTlNote");
+    if (!text) { st.noteErr = "A note needs words."; paint(); return; }
+    st.noteDraft = text;               // survives the repaint, and every refusal below
+    st.busy = true; st.noteErr = ""; paint();
+    /* "progress" is the built-in free-text template every hospital has without configuring one
+     * (functions/_wardsynq/note-templates.js). A hospital that defines its own `progress` template
+     * replaces it, and this keeps working. */
+    apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: text } })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Note added." : null)) {
+          st.noteDraft = "";           // on the record now, so the draft has done its job
+          var el = document.getElementById("wTlNote"); if (el) el.value = "";
+          // Re-read rather than repaint from what the browser believes. A successful write that
+          // leaves the page showing the old story is the bug this codebase has already been bitten
+          // by on the flowsheet and the problem list.
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.noteErr = "Could not save that note."; paint(); });
+  }
+  function timelineView(state) {
+    var s = state.sel || {};
+    var t = state.timeline;
+    var rows = (t || []).map(timelineRow).join("");
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
+        (s.mrn ? esc(s.mrn) + " &middot; " : "") + "clinical history</small></div>" +
+      '<button class="w-ic" data-w-act="timelineload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Add a clinical note</h3></div>" +
+      '<p class="w-hint">What has happened, what was found, what was done, and what happens next. It is added to this history and cannot be edited afterwards; a correction is a new note.</p>' +
+      /* The words survive a repaint. A refused save used to clear the box, so a clinician who was
+       * told "your role cannot do that" also lost the note they had just written - the one moment
+       * the text is most worth keeping, because the fix is to fetch someone who CAN sign it, not to
+       * type it again. st.noteDraft is held across paints and only cleared on a successful save. */
+      '<textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + "</textarea>" +
+      (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + "</p>" : "") +
+      '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + "Add note</button></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>History &middot; " + (t ? t.length : 0) + "</h3></div>" +
+      (t == null ? '<p class="w-empty">Loading the history.</p>'
+        : rows ? '<ul class="w-timeline">' + rows + "</ul>"
+        : '<p class="w-empty">Nothing recorded on this stay yet.</p>') +
+      timelineGapHint(state) + "</div>";
   }
 
   var VITALS = [
@@ -991,7 +1064,7 @@
       // nothing left to do here.
       var canCollect = st_ === "none" || st_ === "failed";
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
-        '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
+        " " + '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + "Collect</button>" : "") +
       "</li>";
     }).join("");
@@ -1038,6 +1111,9 @@
         // discharge is prepared while the patient is still on the ward, so this is not gated on the
         // stay being closed - the summary screen states plainly when a stay is still open.
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
+        // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
+        // patient does before anything else, and it is where the note box now lives.
+        '<button class="w-btn ghost" data-w-act="timeline" title="The whole clinical history on one page, and where you add a clinical note">' + ms("history") + "Timeline</button>" +
         '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
         // ONCqis is a separate product; this is only the LINK into it. Reachable from any patient
         // because oncology is a workflow layered on the ordinary chart, not a ward of its own.
@@ -2154,6 +2230,51 @@
     return head + body + prov + preview + acts + "</div>";
   }
 
+  /* The bench, in the order work actually moves: to be collected, in transit, awaiting a result,
+   * and whatever has gone critical. Counts sit in every heading because "12 specimens uncollected"
+   * is the number a shift decides on, and an empty section names WHAT is empty rather than saying
+   * "None", which reads as a rendering failure. */
+  function labBoardView(state) {
+    var b = state.labBoard || { specimens: [], pending: [], criticals: [], errors: [] };
+    var none = function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
+    var stateOf = function (s) { return (s && s.collection && s.collection.state) || "none"; };
+    var spec = b.specimens || [];
+    var uncollected = spec.filter(function (s) { return stateOf(s) === "none" || stateOf(s) === "failed"; });
+    var inTransit = spec.filter(function (s) { return stateOf(s) === "collected"; });
+    var pri = function (s) { return s.priority === "stat" ? "overdue" : s.priority === "urgent" ? "failed" : ""; };
+    var specRow = function (s) {
+      return '<li class="' + pri(s) + '"><div class="w-crit-h"><b>' + esc(s.display || s.code) + "</b>" +
+        (s.priority && s.priority !== "routine" ? '<span class="w-st ' + esc(s.priority) + '">' + esc(String(s.priority).toUpperCase()) + "</span>" : "") +
+        "</div><div class=\"w-crit-m\">" + ms("person") + labWho(s.patientId) +
+        (s.category ? " &middot; " + esc(s.category) : "") + "</div></li>";
+    };
+    var pendRow = function (p) {
+      return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
+        '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div></li>";
+    };
+    var critRow = function (c) {
+      var e = c.escalation || {};
+      return '<li class="lvl-' + esc(e.level || "due") + '"><div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
+        '</div><div class="w-crit-m">' + ms("person") + labWho(c.patientId) +
+        (e.minutesOpen == null ? "" : " &middot; " + e.minutesOpen + " min open") + "</div></li>";
+    };
+    var card = function (icon, title, n, rows, emptyWords) {
+      return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + " &middot; " + n + "</h3></div>" +
+        (n ? '<ul class="w-crits">' + rows + "</ul>" : none(emptyWords)) + "</div>";
+    };
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Laboratory</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="labboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (b.errors && b.errors.length
+        ? '<div class="w-card warn"><div class="w-card-h">' + ms("error") + "<h3>Could not be read</h3></div>" +
+          "<p>" + esc(b.errors.join(", ")) + ". What is shown below is incomplete.</p></div>"
+        : "") +
+      card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.") +
+      card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(specRow).join(""), "Nothing in transit.") +
+      card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
+      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
+  }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
     var rows = loops.map(function (c) {
@@ -2175,6 +2296,244 @@
       '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops &middot; " + loops.length + "</h3></div>" +
       '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
       (rows ? '<ul class="w-crits">' + rows + "</ul>" : '<p class="w-empty">No open critical results anywhere right now.</p>') +
+      "</div>";
+  }
+
+  /* THE RADIOLOGY BOARD. Every other department (ED, theatre, pharmacy stock, critical results) has
+   * a hospital-wide board; imaging had a backend (dicom.js, radiology-report.js) and nowhere for a
+   * radiographer or radiologist to land. This is that screen, built from exactly three routes:
+   * GET imaging-worklist, POST report-imaging, GET criticals.
+   *
+   * imaging-worklist IS A DICOM MODALITY WORKLIST: every item on it is, by definition, still to be
+   * performed - that is what a worklist is. This hospital touches no field when a study is actually
+   * acquired (landing an ImagingStudy from a PACS never writes back to the ServiceRequest, see
+   * dicom.js/wardsynq-sccm-adapter.js) and reportImaging() never flips the order's status either, so
+   * there is no signal anywhere this screen is allowed to read that would split "not yet scanned"
+   * from "scanned, not yet reported" - both are simply "on the worklist, not yet reported here". This
+   * board says exactly that, in one honest section, rather than inventing a split the data does not
+   * support. "Reported this session" is genuinely this board's own session - there is no hospital-
+   * wide reported-studies list among these three routes, so that is stated rather than dressed up as
+   * more history than it is. Priority is read defensively from a DICOM tag this worklist does not
+   * currently emit: absent means "not recorded", never "routine" - a priority this screen never saw
+   * is not one it may guess at.
+   *
+   * NO SPECIMEN, NO COLLECT ACTION. A plain radiograph has nothing to collect; an imaging order is
+   * acquired, not collected. This board never reads /ward/collections (the generic specimen/
+   * collection tracker every ServiceRequest carries, imaging included, and the one place a "Collect"
+   * button could wrongly appear for a chest X-ray), so that mistake cannot happen here. */
+  function radWorklistTagStr(tag) { return (tag && tag.Value && tag.Value.length) ? String(tag.Value[0]) : ""; }
+  function radPatientDisplayName(tag) {
+    var s = radWorklistTagStr(tag); if (!s) return "";
+    var parts = s.split("^");
+    return parts.length > 1 ? (parts[1] + " " + parts[0]).replace(/\s+/g, " ").trim() : s;
+  }
+  function radDicomDateTime(date, time) {
+    if (!date || date.length < 8) return "";
+    var iso = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
+    if (time && time.length >= 6) iso += "T" + time.slice(0, 2) + ":" + time.slice(2, 4) + ":" + time.slice(4, 6);
+    return iso;
+  }
+  function radWaitLabel(iso) {
+    if (!iso) return "";
+    var ms_ = Date.now() - new Date(iso).getTime();
+    if (!(ms_ >= 0)) return "";
+    var mins = Math.floor(ms_ / 60000);
+    if (mins < 60) return mins + " min";
+    return Math.floor(mins / 60) + "h " + (mins % 60) + "m";
+  }
+  /** PURE. One DICOM-JSON worklist item into the fields this board renders. */
+  function radWorklistRow(item) {
+    item = item || {};
+    var step = item["00400100"] && item["00400100"].Value && item["00400100"].Value[0];
+    var date = step && radWorklistTagStr(step["00400002"]);
+    var time = step && radWorklistTagStr(step["00400003"]);
+    return {
+      orderId: radWorklistTagStr(item["00080050"]),
+      name: radPatientDisplayName(item["00100010"]),
+      mrn: radWorklistTagStr(item["00100020"]),
+      procedure: radWorklistTagStr(item["00321060"]),
+      modality: (step && radWorklistTagStr(step["00080060"])) || "",
+      priority: radWorklistTagStr(item["00401003"]).toLowerCase(),
+      orderedAt: radDicomDateTime(date, time),
+    };
+  }
+  /** A critical loop opened against a radiology report. Report ids are "wsq-rad-<slug>"
+   *  (radiology-report.js's reportIdFor) versus a lab result's "wsq-dr-<slug>" - the only field
+   *  the criticals list carries that says which department a loop belongs to. */
+  function radCriticalOf(loop) { return !!(loop && typeof loop.reportId === "string" && loop.reportId.indexOf("wsq-rad-") === 0); }
+  var RAD_PRIORITY_WORDS = { stat: "STAT", urgent: "Urgent", routine: "Routine" };
+  var RAD_PRIORITY_CLASS = { stat: "overdue", urgent: "failed" };
+  /* THE LABORATORY BOARD. The bench had no screen of its own: specimens and pending tests could only
+   * ever be read one chart at a time (collectionList and pendingRequests were per-patient and
+   * answered 422 without a patientId), so the only way to see the department's work was to open
+   * eighty charts. Both reads now take scope=hospital - see the comments on those two functions for
+   * why the opt-in is an explicit word and not a missing parameter.
+   *
+   * NAMES, NOT RECORD IDS. Every row is joined against the ward roster, which already carries name
+   * and MRN, because a specimen tube identified only by "opd-pat-smd-demo-00020" cannot be checked
+   * against a wristband. Where the join misses (an outpatient, a discharged stay) the row says so
+   * rather than printing the id and calling it a name. */
+  function labPatientName(pid) {
+    var list = st.list || [];
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].patientId === pid) return list[i];
+    return null;
+  }
+  function labWho(pid) {
+    var p = labPatientName(pid);
+    if (p) return esc(p.name || p.patientId) + (p.mrn ? " &middot; " + esc(p.mrn) : "");
+    return '<i>not on the ward list</i>';
+  }
+  function labBoardOpen() {
+    st.view = "labboard"; st.labBoard = { specimens: [], pending: [], criticals: [], errors: [] }; paint(); loadLabBoard();
+  }
+  /* Four reads, and a failure in ANY of them is recorded BY NAME rather than left as an empty list.
+   * On this screen "nothing outstanding" and "could not tell" must never look the same: one of them
+   * means a specimen is sitting somewhere and nobody knows it. Same discipline as loadIntegration. */
+  function loadLabBoard() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var out = { specimens: [], pending: [], criticals: [], errors: [] };
+    var read = function (name, path, fn) {
+      return apiGet(path).then(function (r) {
+        if (r && r.ok) fn(r); else out.errors.push(name);
+      }).catch(function () { out.errors.push(name); });
+    };
+    return Promise.all([
+      read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
+      read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
+      read("critical results", "/ward/criticals?" + q, function (r) {
+        // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
+        out.criticals = (r.loops || []).filter(function (l) { return !radCriticalOf(l); });
+      }),
+      // The roster is what turns a patientId into a name. Its failure is not fatal to the board:
+      // the rows still render, they just cannot be named, and labWho says so per row.
+      read("ward roster", "/ward/list?" + q, function (r) { st.list = r.patients || st.list || []; }),
+    ]).then(function () { st.busy = false; st.labBoard = out; paint(); });
+  }
+  function radBoardOpen() {
+    st.view = "radboard"; st.radBoard = { requested: [], reported: [], criticals: [], errors: [], picked: null }; paint(); loadRadBoard();
+  }
+  function loadRadBoard() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var prev = st.radBoard || {};
+    var out = { requested: [], reported: prev.reported || [], criticals: [], errors: [], picked: prev.picked || null };
+    var reportedIds = {}; out.reported.forEach(function (x) { reportedIds[x.orderId] = 1; });
+    return Promise.all([
+      apiGet("/ward/imaging-worklist?" + q)
+        .then(function (r) {
+          if (r && r.ok) out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
+          else out.errors.push("imaging worklist");
+        })
+        .catch(function () { out.errors.push("imaging worklist"); }),
+      apiGet("/ward/criticals?" + q)
+        .then(function (r) { if (r && r.ok) out.criticals = (r.loops || []).filter(radCriticalOf); else out.errors.push("critical findings"); })
+        .catch(function () { out.errors.push("critical findings"); }),
+    ]).then(function () { st.busy = false; st.radBoard = out; paint(); });
+  }
+  function radBoardPick(orderId) {
+    if (!st.radBoard) st.radBoard = {};
+    st.radBoard.picked = orderId || null; paint();
+  }
+  function radBoardReportSave() {
+    var b = st.radBoard, picked = b && b.picked; if (!picked) return;
+    var modality = val("wRadBModality"), status = val("wRadBStatus"), findings = val("wRadBFindings"), impression = val("wRadBImpression");
+    var critical = !!(document.getElementById("wRadBCritical") || {}).checked;
+    if (!findings) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
+    var row = null;
+    for (var i = 0; i < (b.requested || []).length; i++) { if (b.requested[i].orderId === picked) { row = b.requested[i]; break; } }
+    st.busy = true; paint();
+    apiPost("/ward/report-imaging", { orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings, impression: impression || undefined, critical: critical })
+      .then(function (r) {
+        if (r && r.error === "impression_required") { st.busy = false; st.err = "A final report needs an impression; release it as preliminary if it is not ready."; paint(); return; }
+        var msg = r && r.discrepancy
+          ? "Released. The impression changed from a reading that may already have been acted on - flagged as a discrepancy on the record."
+          : (r && r.critical ? "Released. Critical finding - a closed loop was opened." : "Released.");
+        if (!settle(r, msg)) { paint(); return; }
+        b.reported.unshift({ orderId: picked, name: row && row.name, mrn: row && row.mrn, modality: modality || (row && row.modality) || "", status: status || "preliminary", discrepancy: !!(r && r.discrepancy), reportedAt: new Date().toISOString() });
+        b.picked = null;
+        loadRadBoard();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not release the report."; paint(); });
+  }
+  function radBoardFormHtml(row) {
+    return '<div class="w-sub"><h4>' + ms("edit_note") + "File report &middot; " + esc((row && row.name) || "Unknown patient") + (row && row.mrn ? " (" + esc(row.mrn) + ")" : "") + "</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Modality</span><input id="wRadBModality" type="text" autocomplete="off" placeholder="e.g. CT, XR, US, MR" value="' + esc((row && row.modality) || "") + '"></label>' +
+      '<label class="w-f"><span>Status</span><select id="wRadBStatus"><option value="preliminary">Preliminary</option><option value="final">Final</option><option value="corrected">Corrected</option></select></label>' +
+      "</div>" +
+      '<label class="w-f"><span>Findings</span><textarea id="wRadBFindings" rows="3"></textarea></label>' +
+      '<label class="w-f"><span>Impression</span><textarea id="wRadBImpression" rows="2"></textarea></label>' +
+      '<label class="w-chk"><input type="checkbox" id="wRadBCritical"> Critical finding - opens the same closed-loop notification a critical lab value does</label>' +
+      '<div class="w-maik-acts"><button class="w-btn go" data-w-act="radboardreportsave">' + ms("send") + "Release report</button>" +
+      '<button class="w-btn ghost" data-w-act="radboardpick:">' + ms("close") + "Cancel</button></div>" +
+      '<p class="w-hint">' + ms("info") + "A final report needs an impression. A changed impression from a preliminary reading is flagged as a discrepancy, never silently overwritten." + "</p></div>";
+  }
+  function radBoardView(state) {
+    var b = state.radBoard || {};
+    var errs = b.errors || [];
+    var requested = b.requested || [];
+    var reported = b.reported || [];
+    var criticals = b.criticals || [];
+    var picked = b.picked;
+    var unreachable = function (what) { return errs.indexOf(what) >= 0; };
+    var pickedRow = null;
+    for (var i = 0; i < requested.length; i++) { if (requested[i].orderId === picked) { pickedRow = requested[i]; break; } }
+
+    var reqRows = requested.map(function (s) {
+      var pr = s.priority, prCls = RAD_PRIORITY_CLASS[pr] || "";
+      return '<li' + (s.orderId === picked ? ' class="picked"' : '') + '>' +
+        '<div class="w-crit-h"><b>' + esc(s.name || "Unknown patient") + "</b>" +
+        '<span class="w-crit-v">' + esc(s.mrn || "no MRN on record") + "</span>" +
+        (pr ? '<span class="w-st ' + prCls + '">' + esc(RAD_PRIORITY_WORDS[pr] || pr) + "</span>" : "") +
+        "</div>" +
+        '<div class="w-crit-m">' + esc(s.procedure || "Imaging study") +
+        (s.modality ? " &middot; " + esc(s.modality) : " &middot; modality not mapped") +
+        (s.orderedAt ? " &middot; waiting " + radWaitLabel(s.orderedAt) : "") + "</div>" +
+        '<button class="w-btn tiny go" data-w-act="radboardpick:' + esc(s.orderId) + '">' + ms("edit_note") + "File report</button>" +
+      "</li>";
+    }).join("");
+
+    var repRows = reported.map(function (r) {
+      return "<li><b>" + esc(r.name || "Unknown patient") + "</b> <span>" + esc(r.mrn || "") + "</span>" +
+        '<div class="w-crit-m">' + esc(r.modality || "modality not recorded") + " &middot; " + esc(r.status || "preliminary") +
+        (r.discrepancy ? " &middot; discrepancy flagged" : "") + " &middot; " + when(r.reportedAt) + "</div></li>";
+    }).join("");
+
+    var critRows = criticals.map(function (c) {
+      var esc_ = c.escalation || {}, mins = esc_.minutesOpen;
+      return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
+        '<div class="w-crit-h"><b>' + esc(c.display || c.code || "Critical finding") + "</b></div>" +
+        '<div class="w-crit-m">' + ms("person") + esc(c.patientId || "") +
+        (mins == null ? "" : " &middot; " + mins + " min since reported") +
+        (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") + "</div>" +
+      "</li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Radiology</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="radboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      (errs.length ? '<p class="w-hint warn">' + ms("warning") + "Some of this could not be read (" + esc(errs.join(", ")) +
+        "). What is shown below is incomplete: do not read an empty section here as nothing outstanding.</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("list") + "<h3>Requested &middot; " + requested.length + "</h3></div>" +
+      '<p class="w-hint">This hospital does not record a separate acquisition step for imaging: a study stays on this list from the order until it is reported here, whether or not it has been scanned yet.</p>' +
+      (unreachable("imaging worklist") ? '<p class="w-empty warn">The imaging worklist could not be read.</p>'
+        : reqRows ? '<ul class="w-crits">' + reqRows + "</ul>"
+        : '<p class="w-empty">No studies awaiting acquisition or a report.</p>') +
+      (pickedRow ? radBoardFormHtml(pickedRow) : "") +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Reported this session &middot; " + reported.length + "</h3></div>" +
+      '<p class="w-hint">Reports filed from this board since it was opened, most recent first. There is no hospital-wide reported-studies list to read back here.</p>' +
+      (repRows ? '<ul class="w-mini">' + repRows + "</ul>" : '<p class="w-empty">No studies reported yet this session.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Critical findings &middot; " + criticals.length + "</h3></div>" +
+      (unreachable("critical findings") ? '<p class="w-empty warn">Critical findings could not be read.</p>'
+        : critRows ? '<ul class="w-crits">' + critRows + "</ul>"
+        : '<p class="w-empty">No open critical findings for radiology right now.</p>') +
       "</div>";
   }
 
@@ -2486,7 +2845,11 @@
       '<label class="w-f"><span>MRN</span><input id="wCashMrn" type="text" autocomplete="off" value="' + esc(c.mrn || "") + '"></label>' +
       "</div>" +
       '<button class="w-btn go" data-w-act="cashlookup">' + ms("search") + "Look up</button>" +
-      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.patientId) + "</small></p>" : "") + "</div>" +
+      /* THE SECOND LINE IS THE MRN, NOT THE RECORD ID. A cashier checks a patient against the number
+       * on their bill or their card, and "opd-pat-smd-6teqzm-00025" is neither: it is this system's
+       * own internal key, meaningless to hold up against anything a patient is carrying. c.mrn is
+       * exactly what she just typed to find this person, so it costs nothing extra to show back. */
+      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.mrn || c.patientId) + "</small></p>" : "") + "</div>" +
 
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>Outstanding balance</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
@@ -2676,6 +3039,23 @@
    * into a single number this screen invented. What each report's own body contains varies (a claim
    * count is not a stock level), so the body is listed generically as key: value rather than a
    * bespoke layout per report, which would be six more places to keep in sync with reports.js. */
+  /* reportsView() deliberately renders every report's own body generically (see the comment above
+   * REPORT_LABELS) - key: value, no bespoke layout per report. But some reports (patient flow, whose
+   * "flow" field is one big nested computation) put a structured object or array under that key, and
+   * JSON.stringify-ing it produced one unbroken line of raw JSON stretching the width of the page -
+   * unreadable, and looking like the screen was broken rather than just generic. This nests instead
+   * of flattening: an object becomes its own bulleted key: value list, an array becomes a bulleted
+   * list of its items, recursively - still nothing bespoke to any one report, just readable at any
+   * depth. */
+  function reportValue(v) {
+    if (v === null || v === undefined || v === "") return "-";
+    if (typeof v !== "object") return esc(v);
+    if (Array.isArray(v)) {
+      return v.length ? "<ul class=\"w-mini-flat\">" + v.map(function (item) { return "<li>" + reportValue(item) + "</li>"; }).join("") + "</ul>" : "none";
+    }
+    var keys = Object.keys(v);
+    return keys.length ? "<ul class=\"w-mini-flat\">" + keys.map(function (k) { return "<li><b>" + esc(k) + ":</b> " + reportValue(v[k]) + "</li>"; }).join("") + "</ul>" : "none";
+  }
   function reportsView(state) {
     var r = state.reports || {};
     var sections = Object.keys(REPORT_LABELS).map(function (key) {
@@ -2683,7 +3063,7 @@
       if (!rep) return "";
       if (!rep.ok) return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4><p class=\"w-empty\">Could not load: " + esc(rep.detail || rep.error || "unknown error") + "</p></div>";
       var body = Object.keys(rep).filter(function (k) { return ["ok", "mode", "tenantId", "dataSource", "period", "filters", "generatedAt", "scope"].indexOf(k) < 0; })
-        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + esc(typeof v === "object" ? JSON.stringify(v) : v) + "</li>"; }).join("");
+        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + reportValue(v) + "</li>"; }).join("");
       return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4>" +
         '<p class="w-dt-times">source: ' + esc((rep.dataSource || []).join(", ")) +
         (rep.period && (rep.period.from || rep.period.to) ? " &middot; " + esc(rep.period.from || "") + " to " + esc(rep.period.to || "") : "") +
@@ -2694,6 +3074,99 @@
       '<div class="w-card-h">' + ms("summarize") + "<h3>Reports</h3>" +
       '<button class="w-ic" data-w-act="reports" title="Refresh">' + ms("refresh") + "</button></div>" +
       (sections || '<p class="w-empty">Loading…</p>') +
+      "</div>";
+  }
+
+  /* Incident reporting: file -> triage -> RCA -> CAPA -> close (functions/_wardsynq/incidents.js,
+   * wardsynq/wardsynq-incidents.js). The engine side of this has held a careful lifecycle since it
+   * was written - near-miss as a first-class report, an RCA that refuses "human error" as a root
+   * cause, a CAPA that refuses education-only actions - and NOTHING ON SCREEN EVER CALLED IT. Every
+   * one of the 159 demonstration staff, including safety_officer whose entire job this is, had no
+   * way to file or investigate an incident anywhere in the product. This is the front door.
+   *
+   * FILING IS BROAD; INVESTIGATING IS NOT (same split the route table already enforces). The filing
+   * form below is shown to anyone who reaches this screen at all (incident.report is the tile's own
+   * gate); the ledger under it only ever populates for incident.investigate - loadIncidents() reads
+   * it silently, like the co-sign worklist, because a reporter lacking that cap is not a reporter
+   * doing anything wrong and must never see their own filing refused for a screen they didn't ask
+   * to open. */
+  var INCIDENT_SEVERITY = [
+    ["near-miss", "Near miss - caught before it reached the patient"], ["no-harm", "Reached the patient, no harm"],
+    ["minor", "Minor harm"], ["moderate", "Moderate harm"], ["major", "Major harm"],
+    ["catastrophic", "Catastrophic - death or permanent severe harm"],
+  ];
+  var INCIDENT_LIKELIHOOD = [["rare", "Rare"], ["unlikely", "Unlikely"], ["possible", "Possible"], ["likely", "Likely"], ["frequent", "Frequent"]];
+  var INCIDENT_STRENGTH = [
+    ["", "Let the record infer it"], ["FORCING_FUNCTION", "Forcing function or constraint: the error becomes impossible"],
+    ["AUTOMATION", "Automation or computerisation"], ["SIMPLIFICATION", "Simplification or standardisation"],
+    ["CHECKLIST", "Checklist or independent verification"], ["EDUCATION", "Education, training or reminder"],
+  ];
+  function incidentRow(inc) {
+    var capaRows = (inc.capas || []).map(function (c) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state === "complete" ? "" : "due") + '">' + esc(c.state) + "</span> " +
+        esc(c.action) + " &middot; " + esc(c.owner) + " &middot; due " + esc(c.dueBy) +
+        (c.strengthLabel ? '<div class="w-dt-times">' + esc(c.strengthLabel) + (c.weak ? " - weak on its own" : "") + "</div>" : "") +
+        (c.state === "complete" ? '<div class="w-dt-times">completed by ' + esc(c.completedBy) + ": " + esc(c.evidence) + "</div>" : "") + "</div>" +
+        (c.state !== "complete"
+          ? '<div class="w-mini-row-act"><input id="wIncCapaBy_' + esc(c.id) + '" placeholder="Your name" style="width:110px">' +
+            '<input id="wIncCapaEvidence_' + esc(c.id) + '" placeholder="What shows it is done">' +
+            '<button class="w-btn ghost sm" data-w-act="incidentcapacomplete:' + esc(inc.id) + "~" + esc(c.id) + '">' + ms("task_alt") + "Complete</button></div>"
+          : "") + "</li>";
+    }).join("");
+    var next = inc.state === "reported"
+      ? '<div class="w-sub"><h4>Triage</h4><select id="wIncLk_' + esc(inc.id) + '"><option value="">Likelihood of recurrence…</option>' +
+        INCIDENT_LIKELIHOOD.map(function (l) { return '<option value="' + esc(l[0]) + '">' + esc(l[1]) + "</option>"; }).join("") + "</select>" +
+        '<button class="w-btn ghost" data-w-act="incidenttriage:' + esc(inc.id) + '">' + ms("fact_check") + "Triage</button></div>"
+      : inc.state === "triaged"
+      ? '<div class="w-sub"><h4>Root cause analysis</h4>' +
+        '<textarea id="wIncRoot_' + esc(inc.id) + '" rows="2" placeholder="What about the system made this error easy, likely or invisible - not who made it"></textarea>' +
+        '<input id="wIncMethod_' + esc(inc.id) + '" placeholder="Method (optional, e.g. 5 whys, fishbone)">' +
+        '<input id="wIncFactors_' + esc(inc.id) + '" placeholder="Contributing factors, comma-separated (optional)">' +
+        '<button class="w-btn ghost" data-w-act="incidentrca:' + esc(inc.id) + '">' + ms("fact_check") + "Record RCA</button></div>"
+      : "";
+    var capaAdd = (inc.state === "investigating" || inc.state === "actions-open")
+      ? '<div class="w-sub"><h4>Add a corrective or preventive action</h4>' +
+        '<input id="wIncCapaAction_' + esc(inc.id) + '" placeholder="What will change">' +
+        '<input id="wIncCapaOwner_' + esc(inc.id) + '" placeholder="Owner">' +
+        '<input id="wIncCapaDue_' + esc(inc.id) + '" type="date">' +
+        '<select id="wIncCapaStrength_' + esc(inc.id) + '">' + INCIDENT_STRENGTH.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
+        '<button class="w-btn ghost" data-w-act="incidentcapaadd:' + esc(inc.id) + '">' + ms("add") + "Add action</button></div>"
+      : "";
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(inc.state === "closed" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(inc.state) + "</span> " +
+      "<b>" + esc(inc.severity) + "</b>" + (inc.sac ? " &middot; SAC " + esc(inc.sac.sac) + " - " + esc(inc.sac.response) : "") +
+      (inc.anonymous ? " &middot; anonymous" : "") +
+      '<div class="w-dt-times">' + esc(inc.what) + "</div>" +
+      '<div class="w-dt-times">reported ' + when(inc.reportedAt) + (inc.patientId ? " &middot; patient " + esc(inc.patientId) : "") + "</div>" +
+      (inc.rca ? '<div class="w-dt-times">root cause: ' + esc(inc.rca.rootCause) + "</div>" : "") +
+      (capaRows ? "<ul class=\"w-mini\">" + capaRows + "</ul>" : "") + next + capaAdd +
+      '</div><div class="w-mini-row-act">' +
+      '<button class="w-btn ghost sm" data-w-act="incidentclose:' + esc(inc.id) + '">' + ms("done_all") + "Attempt close</button>" +
+      "</div></li>";
+  }
+  function incidentsView(state) {
+    var h = state.incidentHealth;
+    var healthBlock = h
+      ? '<div class="w-sub"><h4>Reporting health</h4><p>' + esc(h.reading) + "</p>" +
+        "<p>" + esc(h.total) + " total &middot; " + esc(h.openCapas) + " open actions" +
+        (h.overdueCapas && h.overdueCapas.length ? " &middot; " + esc(h.overdueCapas.length) + " overdue" : "") +
+        (h.actionReading ? " &middot; " + esc(h.actionReading) : "") + "</p></div>"
+      : "";
+    var log = (state.incidentLog || []).map(incidentRow).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("report") + "<h3>Safety and incidents</h3>" +
+      '<button class="w-ic" data-w-act="incidents" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Report an incident</h4>' +
+      '<textarea id="wIncWhat" rows="2" placeholder="What happened, in your own words"></textarea>' +
+      '<select id="wIncSeverity"><option value="">What actually reached the patient…</option>' +
+      INCIDENT_SEVERITY.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wIncWhen" type="datetime-local" placeholder="When (optional, default now)">' +
+      '<input id="wIncPatient" placeholder="Patient MRN (optional)">' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wIncAnon" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>File anonymously</span></label>' +
+      '<p class="w-hint">' + ms("info") + "A named report defaults to you; anonymous means exactly that - nobody, including the record, is told who filed it." +
+      "</p><button class=\"w-btn\" data-w-act=\"incidentreport\">" + ms("outbox") + "Report</button></div>" +
+      (state.incidentLog !== null
+        ? (healthBlock + (log ? "<ul class=\"w-mini\">" + log + "</ul>" : '<p class="w-empty">No incidents on the ledger.</p>'))
+        : "") +
       "</div>";
   }
 
@@ -2844,6 +3317,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "incidents" ? incidentsView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
@@ -2862,6 +3336,9 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "timeline" ? timelineView(state)
+        : state.view === "labboard" ? labBoardView(state)
+        : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
@@ -2985,6 +3462,9 @@
        * comes from GET /ward/list; without it a US hospital admitting from the bed board would be
        * handed an Indian mobile field and could not complete the registration. */
       region: st.region,
+      // This sheet is shared with the OPD front desk, whose verb is "Add to queue". Opened from the
+      // bed board the act is an admission, and the button now says which bed it is admitting to.
+      submitLabel: st.admitTarget && st.admitTarget.bed ? "Register & admit to " + st.admitTarget.bed : "Register & admit",
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
@@ -4408,6 +4888,82 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
   }
+  function incidentsOpen() {
+    st.view = "incidents"; st.incidentLog = null; st.incidentHealth = null; paint(); loadIncidents();
+  }
+  function loadIncidents() {
+    st.busy = true; paint();
+    return apiGet("/ward/incident-log?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        // The ledger is incident.investigate only; filing is incident.report and nearly every
+        // clinical role holds it. A reporter without the ledger cap did nothing wrong by opening
+        // this screen to file - so a refused ledger read stays silent, same reasoning as the
+        // co-sign worklist elsewhere in this file, and st.incidentLog simply stays null (the
+        // view's own signal to show the filing form alone, not a ledger that never loaded).
+        if (r && r.ok) { st.incidentLog = r.incidents || []; st.incidentHealth = r.health || null; }
+        paint();
+      })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function reportIncidentAction() {
+    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient");
+    var anonEl = document.getElementById("wIncAnon");
+    var anon = !!(anonEl && anonEl.checked);
+    if (!what || what.length < 3) { st.err = "Describe what happened, in a sentence or two."; paint(); return; }
+    if (!severity) { st.err = "Pick what actually reached the patient."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Reported." : null)) {
+          ["wIncWhat", "wIncWhen", "wIncPatient"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          if (anonEl) anonEl.checked = false;
+          loadIncidents();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not file the report."; paint(); });
+  }
+  function incidentTriage(id) {
+    var likelihood = val("wIncLk_" + id);
+    if (!likelihood) { st.err = "Pick a likelihood before triaging."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-triage", { orgId: st.orgId, incidentId: id, likelihood: likelihood })
+      .then(function (r) { if (settle(r, "Triaged.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not triage."; paint(); });
+  }
+  function incidentRca(id) {
+    var rootCause = val("wIncRoot_" + id), method = val("wIncMethod_" + id);
+    var factors = val("wIncFactors_" + id).split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s; });
+    if (!rootCause) { st.err = "An RCA needs a root cause."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-rca", { orgId: st.orgId, incidentId: id, rootCause: rootCause, method: method || undefined, contributingFactors: factors })
+      .then(function (r) { if (settle(r, "Root cause recorded.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the root cause."; paint(); });
+  }
+  function incidentCapaAdd(id) {
+    var action = val("wIncCapaAction_" + id), owner = val("wIncCapaOwner_" + id), dueBy = val("wIncCapaDue_" + id), strength = val("wIncCapaStrength_" + id);
+    if (!action || !owner || !dueBy) { st.err = "A corrective action needs the action, an owner and a due date."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-capa", { orgId: st.orgId, incidentId: id, action: action, owner: owner, dueBy: dueBy, strength: strength || undefined })
+      .then(function (r) { if (settle(r, "Action added.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not add the action."; paint(); });
+  }
+  function incidentCapaComplete(id, capaId) {
+    var by = val("wIncCapaBy_" + capaId), evidence = val("wIncCapaEvidence_" + capaId);
+    if (!by || !evidence) { st.err = "Completing an action needs who did it and what shows it was done."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-capa-complete", { orgId: st.orgId, incidentId: id, capaId: capaId, by: by, evidence: evidence })
+      .then(function (r) { if (settle(r, "Action completed.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not complete the action."; paint(); });
+  }
+  function incidentClose(id) {
+    var by = window.prompt("Your name, to close this incident:");
+    if (!by) return;
+    st.busy = true; paint();
+    apiPost("/ward/incident-close", { orgId: st.orgId, incidentId: id, by: by })
+      .then(function (r) { if (settle(r, "Closed.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not close the incident."; paint(); });
+  }
   function emergencyAdminOpen() {
     st.view = "emergencyadmin"; st.emergencyAdmin = null; st.emergencyReconcile = null; paint(); loadEmergencyLog();
   }
@@ -4768,6 +5324,16 @@
           else {
             VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
             ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+            /* THE SCORE PANEL HAS TO RE-READ, OR IT REPORTS THE OBSERVATIONS AS MISSING.
+             *
+             * Recording vitals repainted from existing client state, so the Flowsheet sitting
+             * directly below still said "NEWS2 Incomplete: RespiratoryRate, OxygenSaturation ...
+             * were not recorded ... partial total of 0" and "No vitals charted in this window yet"
+             * for a set that had just been accepted by the server. Charting RR 24, SpO2 91, pulse
+             * 112, temp 38.4 - a NEWS2 of 8 - and being shown a 0 is the deterioration path
+             * reporting the opposite of what was charted. Found 2026-09-12 on the live ward.
+             * The timeline is re-read too: the dose and the observation belong on it immediately. */
+            loadFlowsheet(); loadNews2(); loadChart();
           }
         }
         paint();
@@ -4831,6 +5397,9 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "timeline") { st.view = "chart"; paint(); return; }
+      if (st.view === "labboard") { st.labBoard = null; st.view = "list"; paint(); return; }
+      if (st.view === "radboard") { st.radBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
@@ -4838,6 +5407,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -4913,6 +5483,15 @@
     if (cmd === "srcrevoke") { revokeSource(arg); return; }
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
+    if (cmd === "timeline") { timelineOpen(); return; }
+    if (cmd === "timelineload") { loadChart(); return; }
+    if (cmd === "timelinenote") { timelineNoteSave(); return; }
+    if (cmd === "labboard") { labBoardOpen(); return; }
+    if (cmd === "labboardload") { loadLabBoard(); return; }
+    if (cmd === "radboard") { radBoardOpen(); return; }
+    if (cmd === "radboardload") { loadRadBoard(); return; }
+    if (cmd === "radboardpick") { radBoardPick(arg); return; }
+    if (cmd === "radboardreportsave") { radBoardReportSave(); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
@@ -5055,6 +5634,13 @@
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
+    if (cmd === "incidents") { incidentsOpen(); return; }
+    if (cmd === "incidentreport") { reportIncidentAction(); return; }
+    if (cmd === "incidenttriage") { incidentTriage(arg); return; }
+    if (cmd === "incidentrca") { incidentRca(arg); return; }
+    if (cmd === "incidentcapaadd") { incidentCapaAdd(arg); return; }
+    if (cmd === "incidentcapacomplete") { var incp = arg.split("~"); incidentCapaComplete(incp[0], incp[1]); return; }
+    if (cmd === "incidentclose") { incidentClose(arg); return; }
     if (cmd === "emergencyadmin") { emergencyAdminOpen(); return; }
     if (cmd === "emergencydeclare") { emergencyDeclareAction(); return; }
     if (cmd === "emergencydeactivate") { emergencyDeactivateAction(arg); return; }
@@ -5111,13 +5697,60 @@
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
-    paint(); loadWard();
+    paint();
+    /* A HOSPITAL ACT LOADS ITS OWN SCREEN, NOT THE WARD ROSTER TOO.
+     *
+     * open() used to call loadWard() unconditionally, even when the shell asked for a specific
+     * hospital-wide board (opts.act). The roster read needs the same record scope as the ward list
+     * and plenty of roles - cashier, pharmacy, the front desk - do not hold it. So a cashier opening
+     * Billing and cashier watched the ward roster fail first ("cash.01@demo.wardsynq.test may not
+     * read Encounter"), which set the ONE shared error banner, and then landed on her own working
+     * cashier screen with somebody else's refusal still printed across the top of it. Her screen was
+     * fine; the request she never made was not.
+     *
+     * Every hospital act already loads itself (loadBoard, loadEd, cashierOpen, loadReports, ...), so
+     * the roster read is only needed when no act is given - opening the plain ward list. */
+    if (!(opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0)) loadWard();
     // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents"];
+  /* CLOSING THE WARD FORGETS THE PATIENTS.
+   *
+   * close() used to empty the markup and leave every patient in memory - the roster, the open
+   * chart, its timeline, its medications. signOut() calls this, so on a shared ward computer the
+   * next person to sign in opened the ward and saw the PREVIOUS user's patient list: 81 names, bed
+   * numbers and hospital numbers belonging to someone else's session. It was replaced a second
+   * later by their own fetch, which hid how wrong it was - and if that fetch was REFUSED, as it is
+   * for a pharmacist who may not read the ward, the old list simply stayed on screen.
+   *
+   * Found 2026-09-12 signing out of a nurse's session and in as the pharmacist. Everything clinical
+   * is cleared here; nothing is kept that names a patient. */
+  function close() {
+    var el = root(); el.classList.remove("on"); el.innerHTML = "";
+    st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
+    st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+    st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
+    st.incidentLog = null; st.incidentHealth = null;
+    st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
+    if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
+  }
+
+  /* THE OVERLAY LET GO OF THE SCREEN WHEN THE SHELL NAVIGATED AWAY.
+   *
+   * This is a fixed, full-viewport layer at z-index 12000. It closed only through its own X, so
+   * using the left-hand navigation while the ward was open left it covering an app that had already
+   * routed somewhere else: the map, the admin centre or the discharge summary rendered underneath,
+   * unreachable, and the ward looked stuck. Found 2026-09-12 clicking the shell's own nav on the
+   * live site. The shell owns the route; the overlay follows it. Only when it is actually open, so
+   * this can never interfere with a page the ward is not on top of. */
+  try {
+    G.addEventListener("hashchange", function () {
+      var el = document.getElementById("smdWard");
+      if (el && el.classList.contains("on")) close();
+    });
+  } catch (e) {}
 
   G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
 })();
