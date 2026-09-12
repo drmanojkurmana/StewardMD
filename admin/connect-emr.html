@@ -1166,6 +1166,7 @@
     box.style.cssText="border:1px solid var(--line,#dde3ea);border-radius:12px;padding:12px;margin-bottom:10px";
     box.innerHTML='<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
       '<b style="flex:1;min-width:160px">'+esc((conn.origins||[])[0]||"This hospital")+'</b>'+
+      ' '+
       '<span class="st pending">Waiting for you</span></div>'+
       '<div class="hint" style="margin-top:6px">Loading what it can read...</div>';
     host.appendChild(box);
@@ -1174,8 +1175,28 @@
       var ops=(x.d.operations||[]).map(function(o){ return opName(o.type); });
       var seen={}, names=[];
       ops.forEach(function(n){ if(!seen[n]){ seen[n]=1; names.push(n); } });
-      box.querySelector(".hint").innerHTML='<b>Can read:</b> '+esc(names.join(", ")||"nothing yet")+
-        '<div style="margin-top:4px">Read-only. The agent cannot order, prescribe or change any record.</div>';
+      /* Enough to judge the request, not just accept it: who asked, when, what the agent saw and
+       * whether the connection validated. Paths and column headers only, never patient data. */
+      var who = x.d.requestedBy ? esc(x.d.requestedBy) : "a doctor at this hospital";
+      var when = x.d.requestedAt ? new Date(x.d.requestedAt).toLocaleString() : "";
+      var val = x.d.validation;
+      var verdict = !val ? '<span class="st unverified">Not checked</span>'
+        : val.ok ? '<span class="st verified">Checks passed</span>'
+        : '<span class="st pending">'+esc((val.issues||[]).length)+' issue(s) to read below</span>';
+      var viewRows=(x.d.views||[]).map(function(v){
+        return '<li>'+esc(opName("list_"+v.resource))+
+          (v.path? ' <code>'+esc(v.path)+'</code>' : '')+
+          (v.columns && v.columns.length ? ' <span class="hint">columns: '+esc(v.columns.join(", "))+'</span>' : '')+
+          (v.guided ? ' <span class="hint">(shown by the doctor)</span>' : '')+'</li>';
+      }).join("");
+      box.querySelector(".hint").innerHTML=
+        '<div><b>Requested by:</b> '+who+(when? ' on '+esc(when) : '')+'</div>'+
+        '<div style="margin-top:4px"><b>Can read:</b> '+esc(names.join(", ")||"nothing yet")+'</div>'+
+        '<div style="margin-top:4px"><b>Safety checks:</b> '+verdict+'</div>'+
+        ((val && !val.ok && (val.issues||[]).length) ? '<ul style="margin:4px 0 0 18px">'+(val.issues||[]).map(function(i){return '<li>'+esc(typeof i==="string"?i:(i.message||i.code||JSON.stringify(i)))+'</li>';}).join("")+'</ul>' : '')+
+        '<div style="margin-top:4px"><b>Pages the agent read:</b> '+esc(x.d.pagesObserved||0)+'</div>'+
+        (viewRows? '<details style="margin-top:6px"><summary>What it found, screen by screen</summary><ul style="margin:6px 0 0 18px">'+viewRows+'</ul></details>' : '')+
+        '<div style="margin-top:6px">Read-only. The agent cannot order, prescribe or change any record.</div>';
       var row=mkEl("div","row"); row.style.cssText="margin-top:10px;gap:8px";
       var ok=mkEl("button",null,"Approve"); ok.style.cssText="background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 15px;font-weight:700;cursor:pointer";
       var no=mkEl("button","ghost","Reject"); no.style.cssText="padding:9px 15px";
