@@ -5,7 +5,7 @@ import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 const here = path.dirname(new URL(import.meta.url).pathname);
 const inner = (f) => { const s = fs.readFileSync(path.join(here, 'artboards', f), 'utf8'); const m = s.match(/<\/helmet>\s*([\s\S]*?)<\/x-dc>/); return m[1]; };
 const b64 = (n) => 'data:image/png;base64,' + fs.readFileSync(path.join(here, 'img', n)).toString('base64');
-const swap = (html) => html.replace(/src="([a-z]+)\.png"/g, (_, n) => `src="${b64(n + '.png')}"`);
+const swap = (html) => html.replace(/src="([a-z-]+)\.png"/g, (_, n) => `src="${b64(n + '.png')}"`);
 const page = `<!doctype html><html><head><meta charset="utf-8">
 <style>
 @font-face { font-family: "Inter"; font-weight: 400; src: url("fonts/inter-400.woff") format("woff"); }

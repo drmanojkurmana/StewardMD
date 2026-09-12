@@ -17,3 +17,17 @@ m = Image.open('../../../maik-wordmark-color.png').convert('RGBA'); m = m.crop(m
 cols = (np.array(m)[..., 3] > 20).sum(axis=0); gaps = [x for x in range(500, 760) if cols[x] == 0]
 inf = m.crop((0, 0, gaps[0] + (gaps[-1] - gaps[0]) // 2, m.height)); inf.crop(inf.getbbox()).save('img/infinity.png')
 Image.open('src/qr.png').convert('RGBA').save('img/qr.png')
+# Dark-ground variants for the back face: alpha (shape) unchanged, fill colour only.
+w = np.array(Image.open('img/wardsynq.png').convert('RGBA')); w[..., :3] = 255; Image.fromarray(w, 'RGBA').save('img/wardsynq-white.png')
+s = np.array(Image.open('img/stewardmd.png').convert('RGBA')).astype(int)
+green = (s[..., 1] - s[..., 0] > 25) & (s[..., 3] > 0)
+mint = green & (np.arange(s.shape[1])[None, :] > s.shape[1] * 0.3)   # the "MD" letters, not the mark
+o = s.copy(); o[..., :3] = 255; o[mint, 0], o[mint, 1], o[mint, 2] = 95, 211, 179
+Image.fromarray(o.astype(np.uint8), 'RGBA').save('img/stewardmd-dark.png')
+# QR with a small centre infinity on a white tile; modules outside the tile untouched. Decodes at 150 dpi.
+from PIL import ImageDraw
+q = Image.open('img/qr.png').convert('RGBA'); W = q.width; inf = Image.open('img/infinity.png').convert('RGBA')
+tile = int(W * 0.19); iw = int(W * 0.14); inf2 = inf.resize((iw, int(inf.height * iw / inf.width)), Image.LANCZOS)
+c = q.copy(); x0 = (W - tile) // 2
+ImageDraw.Draw(c).rounded_rectangle((x0, x0, x0 + tile, x0 + tile), radius=tile // 6, fill=(255, 255, 255, 255))
+c.paste(inf2, ((W - inf2.width) // 2, (W - inf2.height) // 2), inf2); c.save('img/qr-icon.png')
