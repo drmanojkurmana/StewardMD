@@ -49,7 +49,12 @@ const SKIP_SRC =
   '\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
 
 const HINT_RULES = [
-  [/medic|drug/i, 'medications'],
+  /* Indian hospital EMRs rarely say "medications": GHIS and its peers label the same chart
+   * "Treatment chart", "Rx", "Prescription", "Pharmacy" or "MAR". Matching only medic|drug is why a
+   * crawl that had already opened the chart still stopped to ask the doctor where medicines live
+   * (seen on GHIS 2026-09-12). Order matters: this rule sits above labs so "drug sensitivity" does
+   * not win the labs rule. */
+  [/medic|drug|prescri|\brx\b|treatment.?(chart|sheet)|pharmac|\bmar\b|dosage|indent/i, 'medications'],
   [/\blabs?\b|laborator|investigat|result/i, 'labs'],
   [/radiolog|imaging|x.?ray|scan/i, 'radiology'],
   [/history/i, 'history'],
