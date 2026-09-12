@@ -167,6 +167,14 @@ session does not have.
   once); the guided ask uses `guide` mode, which has no overlay.
 - **Inline report lines extract whole.** `<p><b>Study:</b> CT BRAIN</p>` yields "Study: CT BRAIN" (the
   closed transforms cannot strip the label); acceptable for documents, note it when mapping.
+- **Verification before approval** (2026-09-13): `connect-agent/phone/verify.mjs` runs after the crawl
+  (and after manual asks): ward list through the adapter, real patients, every view with a call
+  replayed and judged by brain op `verify` (columns, row count, kind only). Failed views are asked
+  first. `view.verified` is stored and shown on the result screen and the admin card.
+- **Discovery records request field names** (`bodyKeys`, `requestKind`, `xhr`, `contentType` on view
+  endpoints; observer in discovery.mjs, merged in deep-crawl `mergeEndpointDetails`); credential
+  requests are never endpoints; the worklist keeps its page-load call; first rows of lab, radiology,
+  history, discharge and notes lists are opened once for `<kind>-detail` views (`detailOf`).
 - **Endpoint replay** (2026-09-13): `runtime.readPatientDetails` reads a patient view from its own page with
   the patient filled in, then from the keyed GET data calls discovery recorded on that view
   (`endpoints`, e.g. `/Doctor/Home/GetMedicines/?id`), inside the doctor browser session; a view sharing

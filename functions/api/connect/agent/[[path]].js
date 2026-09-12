@@ -252,6 +252,10 @@ function cleanObservedViews(raw) {
       }
       clean.fieldHints = fh;
     }
+    if (v.detailOf !== undefined) {
+      if (typeof v.detailOf !== "string" || v.detailOf.length > 32) throw new OnboardError("invalid", "observedViews: detailOf invalid");
+      clean.detailOf = v.detailOf;
+    }
     // What the agent proved before asking for approval: counts and kinds only, never a value.
     if (v.verified !== undefined) {
       const w = v.verified;

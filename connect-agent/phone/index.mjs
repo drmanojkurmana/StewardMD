@@ -175,7 +175,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps, stopSignal, brain,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];

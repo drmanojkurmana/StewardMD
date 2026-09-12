@@ -792,6 +792,27 @@ const RAW_BLOCK_SRC = String(CRAWL_RAW_BLOCK);
 const PAGE_STATE_SRC = String(CRAWL_PAGE_STATE);
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
+
+/* Click the first data row of a captured list (its first link when it has one, else the row itself)
+ * so the call that opens a single report or result is observed. Page realm; returns what it did. */
+function CRAWL_CLICK_FIRST_ROW(selector) {
+  try {
+    var rows = document.querySelectorAll(selector);
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var tds = row.querySelectorAll ? row.querySelectorAll('td') : [];
+      if (tds.length < 2) continue;
+      var a = row.querySelector('a[href]:not([href^="#"]), a[onclick], button, [onclick]');
+      if (a) { a.click(); return 'link'; }
+      row.click();
+      return 'row';
+    }
+    return 'none';
+  } catch (e) { return 'e'; }
+}
+const CLICK_FIRST_ROW_SRC = String(CRAWL_CLICK_FIRST_ROW);
+/** Lists whose single record is worth a look: the call behind one lab result or one radiology report. */
+export const DETAIL_PARENTS = Object.freeze(['labs', 'radiology', 'history', 'discharge', 'notes']);
 const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
@@ -990,6 +1011,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block
   // to the panel the click populated. A click that navigates to another page is undone with history.back().
   const visited = new Set();
+  const detailSeen = new Set();
   let stopReason = 'no-candidate';
   let clicks = 0;
   const homePath = pathOf(await currentUrl());
@@ -1028,6 +1050,30 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     }
     if (view) await enrichView(view, brain, { label: next.label });
     record(view);
+
+    /* ONE LEVEL DEEPER. A list of lab orders or radiology studies is not the result: the hospital
+     * opens one on tap and that tap is the call the runtime needs (GHIS: a render id, a result id).
+     * Open the first row once per list kind, capture what it shows as "<kind>-detail" with the
+     * call it made, and come back. */
+    if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks) {
+      detailSeen.add(view.resourceHint);
+      const beforePath = pathOf(await currentUrl());
+      await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
+      const how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }).catch(() => ({ result: 'e' }));
+      if (how && (how.result === 'link' || how.result === 'row')) {
+        clicks += 1;
+        await client.wait({ ms: waitMs });
+        trail.push(view.resourceHint + ' row');
+        let detail = null;
+        try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
+        if (detail && detail.rowsSelector) { detail.detailOf = view.resourceHint; observedViews.push(detail); }
+        if (pathOf(await currentUrl()) !== beforePath) {
+          await client.evaluate({ expression: 'history.back()' }).catch(() => {});
+          await client.wait({ ms: waitMs });
+          trail.push('back');
+        }
+      }
+    }
 
     // Drifted to another page (a link with a handler that navigated): come back to the record.
     if (pathOf(await currentUrl()) !== homePath) {
