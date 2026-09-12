@@ -11,6 +11,7 @@ same as every other file in `vault/` — see `vault/Home.md`). Not referenced by
 | `signature-manoj-kurmana.png` | Dr. Kurmana Manoj Kumar's signature, transparent-ish crop, 309×159 | Extracted from the signed Vi/DLT "Declaration of the Authorized Person" letter, dated 20 Aug 2026 |
 | `llp-seal-maiknowledge.png` | MAIKNOWLEDGE LLP round seal ("MAIKNOWLEDGE LLP · LLPIN: ADA-6560 · VISAKHAPATNAM"), 229×225 | Same source document |
 | `MaiKnowledge-LLP-Letterhead.docx` | **Official company letterhead.** Blank body; logo + entity block in a real Word page Header (repeats on every page), footer with LLPIN/PAN/address + page numbers. Open it, type the letter, save as a new file — never edit this file directly. | Built 28 Aug 2026 |
+| `business-card/` | **Founder business card**, 3.5 x 2 in front and back, print-ready PDF plus rebuildable sources. See its README. | Built 12 Sep 2026 |
 | `build-letterhead.js` | The docx-js script that generates the letterhead above. Re-run with `node build-letterhead.js` after editing to regenerate it — e.g. if the registered office PIN gets confirmed, or the entity block changes. | — |
 
 ## Entity facts (safe to reuse in filings)
