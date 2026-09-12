@@ -358,22 +358,30 @@ function check() {
     return;
   }
   const p = S.current;
-  smdLazy('/interaction-rules.js?v=gold363').then(function() {
-    const v = S.engine.evaluate({
-      order: o, patient: p, weightKg: p.weightKg, egfr: p.egfr,
-      allergies: p.allergies || [], activeMeds: p.activeMeds || [], overrides: S.overrides,
-    });
-    S.verdict = v;
-    S.orderSubject = o.drug;
-
-    const allergyLive = v.findings.some((f) => String(f.code || "").startsWith("ALLERGY"));
-    renderIdentity(allergyLive);
-    renderMeds(v.findings.flatMap((f) => f.drugs || []));
-    renderFindings(v, o);
-
-    $("sign").disabled = !v.allowed;
-    $("signWhy").textContent = v.allowed ? "" : v.blocks.length ? "A hard stop is standing." : "An override is required first.";
+  /* smdLazy() is StewardMD native app's own lazy-loader for its interaction-rules bundle - this
+   * file is not that app, never loads that script, and never defines smdLazy at all. Calling it
+   * here threw "smdLazy is not defined" the instant a drug was typed, on every single check(),
+   * which is every keystroke in the order form. That is a synchronous throw inside boot()'s own
+   * call chain (boot -> select -> check on the first patient), so it aborted boot() itself: the
+   * roster never rendered ("Unavailable."), and the drug field was left permanently disabled.
+   * The rule pack this call was pretending to defer-load is already loaded, synchronously, at the
+   * top of boot() (S.pack = buildRulePack(...); S.engine = new SafetyEngine(...)) before check()
+   * can ever run - so there was nothing left to lazy-load here. Evaluating directly is not a
+   * shortcut around that step; that step was already done. */
+  const v = S.engine.evaluate({
+    order: o, patient: p, weightKg: p.weightKg, egfr: p.egfr,
+    allergies: p.allergies || [], activeMeds: p.activeMeds || [], overrides: S.overrides,
   });
+  S.verdict = v;
+  S.orderSubject = o.drug;
+
+  const allergyLive = v.findings.some((f) => String(f.code || "").startsWith("ALLERGY"));
+  renderIdentity(allergyLive);
+  renderMeds(v.findings.flatMap((f) => f.drugs || []));
+  renderFindings(v, o);
+
+  $("sign").disabled = !v.allowed;
+  $("signWhy").textContent = v.allowed ? "" : v.blocks.length ? "A hard stop is standing." : "An override is required first.";
 }
 
 /** Engine disposition and severity, expressed as clinical significance. */
