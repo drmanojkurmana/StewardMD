@@ -1,0 +1,50 @@
+fix(P0.1): the reachability checker was reporting false greens; feat: medicines reconciliation
+
+THE CHECKER BUG MATTERS MORE THAN THE FEATURE.
+
+Wiring the medicines-reconciliation screen dropped FOUR routes off the backlog, but I had
+only wired three. The fourth was /ward/discharge, which nothing calls and which I had not
+touched. It came off because the checker accepted any quoted word anywhere in a screen
+file as evidence that a route was called - and the new screen contains the string
+"discharge" as a STAGE VALUE, in `stage === "discharge"`.
+
+That is the one failure mode a checker must not have. A checker that reports work as done
+when it is not is worse than no checker, because the backlog silently shrinks on its own
+and nobody goes looking. The earlier honest-looking number of 62 was wrong.
+
+Two fixes, and the count gets WORSE, which is the point:
+
+  - Bare strings now only count within sight of an actual API call (a 400-character
+    window). A word used as a domain value elsewhere in the file no longer marks a route
+    reachable.
+  - Route LOOKUP TABLES are followed properly, because dropping bare strings entirely
+    would have created the opposite error: `var CASH_ACTION_ROUTE = { pay:
+    "invoice-payment", ... }` used later as a path tail is a genuine caller, declared far
+    from the call, and flagging those six invoice routes as unreachable would have been a
+    false RED - safe, but noise, and noise is how a checker gets switched off.
+
+Honest count after both: 305 routes, 213 reachable, **72 waiting for a screen** - not the
+62 previously reported. Thirteen routes were falsely green: assess, clinic, delete,
+disable, hl7, hospital, order, orders, pay, reset, restore and two more. Each was checked
+by hand for a caller; none has one.
+
+THE FEATURE. med-reconciliation.js was another complete, tested module with nothing calling
+it, which meant a ward had no way to record what a patient was already taking on arrival,
+or to decide what happens to each of those medicines - one of the commonest sources of
+avoidable harm on admission and discharge.
+
+Medicines are recorded one to a line, exactly as the patient says them. Nothing parses a
+dose out of the words: a parser that read "500mg" out of a line and got it wrong would put
+a made-up dose on a clinical record. Completeness is the module's own computation - every
+medicine has a decision - and never a tick somebody pressed, so the screen reports the
+count of undecided medicines. An empty stage says it is empty rather than reading as
+reconciled.
+
+Taking the history and deciding each medicine's fate stay separately gated on the server -
+a nurse or pharmacist can take a history; deciding is prescribing-adjacent and needs
+emr.treat. The screen shows the refusal rather than hiding the button.
+
+Tests: 8 rendering the screen. Suite 5911 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

@@ -1347,6 +1347,7 @@
         /* First, because it is the screen a doctor picking up an unfamiliar patient wants before
          * any of the others: everything that changes what they may safely do, in one place. */
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
+        '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
@@ -3841,6 +3842,67 @@
       "</div>";
   }
 
+  /* MEDICINES RECONCILIATION. Another complete module with nothing calling it - which meant a ward
+   * had no way to record what a patient was already taking when they arrived, or to decide what
+   * happens to each of those medicines. That gap is one of the commonest sources of avoidable harm
+   * on admission and discharge.
+   *
+   * TAKING the history and DECIDING what happens to each medicine are separate acts on purpose, and
+   * the server gates them separately: a nurse or pharmacist sits with the patient and writes down
+   * what they take; deciding the fate of each medicine is prescribing-adjacent and needs emr.treat.
+   * This screen shows both and lets the server refuse what it refuses.
+   *
+   * COMPLETE MEANS EVERY MEDICINE HAS A DECISION, computed by the module, never a button somebody
+   * presses. So the screen reports the count of undecided medicines rather than a tick. */
+  var MEDREC_DECISIONS = [
+    ["continued", "Continue"], ["stopped", "Stop"], ["changed", "Changed"], ["held", "Hold"],
+  ];
+  var MEDREC_STAGES = [["admission", "On admission"], ["discharge", "At discharge"]];
+  function medRecRow(m, stage) {
+    var decided = m.decision && m.decision !== "undecided";
+    return '<li class="w-mini-row' + (decided ? "" : " w-ib-overdue") + '"><div>' +
+      "<b>" + esc(m.drug || m.key) + "</b>" +
+      (m.dose ? " &middot; " + esc(m.dose) : "") +
+      ' <span class="w-st ' + (decided ? "" : "due") + '">' + esc(decided ? m.decision : "not decided") + "</span>" +
+      (m.reason ? '<div class="w-dt-times">' + esc(m.reason) + "</div>" : "") +
+      "</div><div class=\"w-mini-row-act\">" +
+      (decided ? "" : MEDREC_DECISIONS.map(function (d) {
+        return '<button class="w-btn ghost sm" data-w-act="medrecdecide:' + esc(stage) + "~" + esc(m.key) + "~" + esc(d[0]) + '">' + esc(d[1]) + "</button>";
+      }).join("")) +
+      "</div></li>";
+  }
+  function medRecView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.medRec;
+    var blocks = d && d.reconciliations ? d.reconciliations.map(function (r) {
+      var rows = (r.medicines || []).map(function (m) { return medRecRow(m, r.stage); }).join("");
+      return '<div class="w-sub"><h4>' + esc(r.stage === "discharge" ? "At discharge" : "On admission") +
+        (r.source ? " &middot; from " + esc(r.source) : "") + "</h4>" +
+        /* Never a tick: the module computes completeness from the medicines themselves. */
+        (r.empty ? '<p class="w-empty">No medicines recorded.</p>'
+          : r.undecided
+            ? '<p class="w-hint warn">' + ms("warning") + esc(r.undecided) + " medicine" + (r.undecided === 1 ? "" : "s") + " still undecided.</p>"
+            : '<p class="w-hint">' + ms("check") + "Every medicine has a decision.</p>") +
+        (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") + "</div>";
+    }).join("") : "";
+
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Medicines on arrival</h3>" +
+      '<button class="w-ic" data-w-act="medrec" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Record what this patient was taking</h4>' +
+      '<select id="wMrStage">' + MEDREC_STAGES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wMrSource" placeholder="Who told you - the patient, a carer, their own list, the pharmacy">' +
+      '<textarea id="wMrMeds" rows="4" placeholder="One medicine a line, as they said it. For example:&#10;Metformin 500mg twice a day&#10;Amlodipine 5mg in the morning"></textarea>' +
+      '<p class="w-hint">' + ms("info") + "Write them down as the patient says them. Nothing here corrects a name or a dose, and nothing is filled in from the chart." +
+      "</p><button class=\"w-btn\" data-w-act=\"medrecstart\">" + ms("save") + "Record the history</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : blocks ? blocks
+        : '<p class="w-empty">No medicines history recorded for this stay.</p>') +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4113,6 +4175,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "medrec" ? medRecView(state)
         : state.view === "handover" ? handoverView(state)
         : state.view === "safetyinbox" ? safetyInboxView(state)
         : state.view === "workspace" ? workspaceView(state)
@@ -5663,6 +5726,63 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function medRecOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "medrec"; st.medRec = null; paint(); loadMedRec();
+  }
+  function loadMedRec() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/med-reconciliation?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.medRec = r;
+        else { st.medRec = null; st.err = "Could not load the medicines history. Do not read this as none recorded."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.medRec = null; st.err = "Could not load the medicines history. Do not read this as none recorded."; paint(); });
+  }
+  function medRecStart() {
+    var s = st.sel; if (!s) return;
+    var text = val("wMrMeds");
+    if (!text) { st.err = "Write down what the patient is taking."; paint(); return; }
+    /* One medicine a line, exactly as typed. Nothing here parses a dose out of the words: a parser
+     * that guessed "500mg" from a line and got it wrong would put a made-up dose on the record. */
+    var medicines = text.split("\n").map(function (l) { return l.trim(); }).filter(Boolean)
+      .map(function (l) { return { drug: l }; });
+    if (!medicines.length) { st.err = "Write down what the patient is taking."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/med-history", {
+      orgId: st.orgId, encounterId: s.encounterId, stage: val("wMrStage") || "admission",
+      source: val("wMrSource") || undefined, medicines: medicines,
+    })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Recorded. Each medicine still needs a decision." : null)) {
+          var el = document.getElementById("wMrMeds"); if (el) el.value = "";
+          loadMedRec();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+  function medRecDecide(arg) {
+    var s = st.sel; if (!s) return;
+    var parts = String(arg || "").split("~");
+    var stage = parts[0], key = parts[1], decision = parts[2];
+    if (!stage || !key || !decision) return;
+    var reason = "";
+    /* The module requires a reason for the decisions that change what the patient takes; asking for
+     * one on every decision is simpler than encoding that rule twice, and the server is still the
+     * one that enforces it. */
+    try { reason = G.prompt("Why? (required for stopping or changing a medicine)") || ""; } catch (e) {}
+    st.busy = true; paint();
+    apiPost("/ward/med-decide", {
+      orgId: st.orgId, encounterId: s.encounterId, stage: stage, key: key,
+      decision: decision, reason: reason || undefined,
+    })
+      .then(function (r) { if (settle(r, r && r.ok ? "Decided." : null)) loadMedRec(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that decision."; paint(); });
+  }
+
   function handoverOpen() {
     st.view = "handover"; st.handovers = null; paint(); loadHandovers();
   }
@@ -6570,6 +6690,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "medrec") { st.medRec = null; st.view = "chart"; paint(); return; }
       if (st.view === "handover") { st.handovers = null; st.view = "list"; paint(); return; }
       if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
@@ -6816,6 +6937,9 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "medrec") { medRecOpen(); return; }
+    if (cmd === "medrecstart") { medRecStart(); return; }
+    if (cmd === "medrecdecide") { medRecDecide(arg); return; }
     if (cmd === "handovers") { handoverOpen(); return; }
     if (cmd === "handovershow") { st.handoverState = arg; loadHandovers(); return; }
     if (cmd === "handovergive") { handoverGive(); return; }
@@ -6949,6 +7073,7 @@
     st.people = null;
     st.inbox = null; st.inboxRole = "";
     st.handovers = null; st.handoverState = "";
+    st.medRec = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

@@ -125,7 +125,34 @@ for (const m of blob.matchAll(/["'`]\/(?:api\/queue\/)?([a-z0-9-]+)(?:\/([a-z0-9
   called.add(m[1]);
   if (m[2]) called.add(m[2]);
 }
-for (const m of blob.matchAll(/["'`]([a-z0-9][a-z0-9-]{2,})["'`]/g)) called.add(m[1]);
+/* Paths built by concatenation - `apiPost("/ward/" + kind)` - cannot be read off a literal, so bare
+ * strings count too. But ONLY within sight of an actual API call.
+ *
+ * This used to accept any quoted word anywhere in any screen file, and that produced FALSE GREENS:
+ * the word "discharge" appearing inside the sentence "At discharge" on an unrelated form marked the
+ * /ward/discharge route reachable, so a route nobody could reach dropped off the backlog on its
+ * own. A checker that reports work as done when it is not is worse than no checker, so the window
+ * is the fix: a string has to sit beside the call that might use it. */
+const API_WINDOW = 400;
+for (const call of blob.matchAll(/api(?:Get|Post)\s*\(|api\/queue/g)) {
+  const window = blob.slice(call.index, call.index + API_WINDOW);
+  for (const m of window.matchAll(/["'`]([a-z0-9][a-z0-9-]{2,})["'`]/g)) called.add(m[1]);
+}
+/* ROUTE LOOKUP TABLES. A screen that routes through a map - `var CASH_ACTION_ROUTE = { pay:
+ * "invoice-payment", ... }` used later as `apiPost("/ward/" + route)` - declares its route names
+ * far from the call, so the window above cannot see them. The table is followed instead of widening
+ * the window, because widening it brings back the bare-word false greens this replaced: the word
+ * "discharge" used as a STAGE VALUE is not a call to /ward/discharge, and treating it as one is how
+ * a route nobody can reach quietly drops off the backlog. */
+for (const decl of blob.matchAll(/(?:var|const|let)\s+([A-Za-z_$][\w$]*)\s*=\s*\{([^}]*)\}/g)) {
+  const ident = decl[1];
+  const usedAsPath = new RegExp(
+    "[\"'`]/[a-z0-9-]+/?[\"'`]\\s*\\+\\s*" + ident.replace(/\$/g, "\\$") + "\\b"
+    + "|\\b" + ident.replace(/\$/g, "\\$") + "\\s*\\[[^\\]]+\\]",
+  ).test(blob);
+  if (!usedAsPath) continue;
+  for (const m of decl[2].matchAll(/["'`]([a-z0-9][a-z0-9-]{2,})["'`]/g)) called.add(m[1]);
+}
 const orphans = [...routes].filter((r) => !called.has(r) && !byDesign.has(r)).sort();
 
 /* ---- TESTS ---------------------------------------------------------------------------------- */
