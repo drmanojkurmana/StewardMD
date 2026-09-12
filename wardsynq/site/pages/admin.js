@@ -10,11 +10,16 @@
   // Bed states, verbatim from functions/_opd_org.js BED_STATES - never invented here.
   var BED_STATES = ["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"];
 
-  // Every role functions/_queue_roles.js ROLE_CAPS knows about (ROLES = Object.keys(ROLE_CAPS)).
+  /* Every role functions/_queue_roles.js ROLE_CAPS knows about (ROLES = Object.keys(ROLE_CAPS)).
+   * This list is hand-kept, not generated - it went stale for radiographer/radiologist the day
+   * those two roles were added to ROLE_CAPS: they existed on the server, had a home-screen tile
+   * and a chart, and could not be GIVEN to anybody, because this dropdown - the only door into
+   * assigning a role to a staff member - never learned they existed. Keep this in sync by hand;
+   * there is no test that catches a role missing here, only a role an admin cannot find. */
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
-    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "oncqis_protocol_author",
-    "oncqis_clinical_reviewer", "oncqis_institutional_approver", "pg_resident", "pg_faculty", "pg_hod",
-    "academic_cell", "safety_officer", "viewer"];
+    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
+    "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   var ROLE_NOTES = [
@@ -27,6 +32,8 @@
     ["billing", "Reads charges, invoices and claims. Cannot take payment (see Cashier for that)."],
     ["him", "Reads the chart to decide and record release-of-information requests."],
     ["blood_bank", "Crossmatches, issues and administers transfusions only."],
+    ["radiographer", "Acquires the imaging study. Reads the chart, cannot file a report or protocol a study."],
+    ["radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write."],
   ];
 
   function refusal(r) {
