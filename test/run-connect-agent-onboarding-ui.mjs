@@ -182,11 +182,13 @@ window.SMD_CONNECT_AGENT.__setApi(function (path, opts) {
     return Promise.resolve({ s: 200, d: window.__connections || [] });
   }
   if (path === "/sessions" && opts && opts.method === "POST") {
+    // The REAL server shape (store.js sessionView): flat sessionId, never a nested session object.
+    // Stubbing the nested shape is how a 200 that the client read as a failure passed this test.
     if (window.__reuse) {
-      return Promise.resolve({ s: 200, d: { ok: true, session: { id: "sess-1" }, job: null,
+      return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-1", state: "CREATED", controlOwner: "clinician", revision: 1, job: null,
         deployment: { id: "dep-1", origins: ["https://emr.newcity.example"], activeVersionId: "v-old" }, reuse: true } });
     }
-    return Promise.resolve({ s: 200, d: { ok: true, session: { id: "sess-1" }, job: { id: "job-1" },
+    return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-1", state: "CREATED", controlOwner: "clinician", revision: 1, job: { jobId: "job-1", state: "PENDING" },
       deployment: { id: "dep-1", origins: ["https://emr.newcity.example"], activeVersionId: null }, reuse: false } });
   }
   if (path === "/sessions/sess-1/handoff") {
