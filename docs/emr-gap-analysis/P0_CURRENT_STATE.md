@@ -232,3 +232,13 @@ typed; rejected rows named with the reason.
 
 **Numbers:** 5988 passing, 0 failing. 43 routes waiting for a screen.
 **Next:** specimen-outcome (failed/received sample), dispense-return, transfusion-trace, billing extras.
+
+
+## 2026-09-14 (cont.) — backlog 43 -> 40
+
+- **Sample received / failed** on the lab board (a failure needs a reason).
+- **Medicine returns** in pharmacy dispense history (never returned twice).
+- **Blood-unit trace** on the transfusion screen (an unreadable trace never reads as "no record").
+
+**Numbers:** 5992 passing, 0 failing. 40 routes waiting for a screen.
+**Next:** billing extras (charges, invoice-void, upcoding, tariff), maternity-status, follow-up, discharge, oncology/cardiology links.
