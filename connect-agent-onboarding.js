@@ -58,14 +58,21 @@
   }
 
   /* Transport seam. fn(path, opts) must return a Promise of {s, d}. */
+  /* The caller's Firebase id token, exactly as connect-source.js sends it; the SERVER derives identity.
+   * Without it every call was a 401 and the sheet only ever said "Could not load your connections". */
+  function idToken() {
+    try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); }
+    catch (e) { return Promise.resolve(null); }
+  }
   var apiImpl = function (path, opts) {
     var method = (opts && opts.method) || "GET";
     var body = (opts && opts.body) ? opts.body : null;
-    return fetch(AGENT_BASE + path, {
-      method: method,
-      headers: { "content-type": "application/json" },
-      body: body,
-      cache: "no-store"
+    // The chosen hospital rides on every call as ?tenant= (the server reads it for GET and POST alike).
+    var q = (S && S.tenant) ? (path.indexOf("?") >= 0 ? "&" : "?") + "tenant=" + encodeURIComponent(S.tenant) : "";
+    return idToken().then(function (t) {
+      var h = { "content-type": "application/json" };
+      if (t) h.Authorization = "Bearer " + t;
+      return fetch(AGENT_BASE + path + q, { method: method, headers: h, body: body, cache: "no-store" });
     }).then(function (r) {
       return r.text().then(function (t) {
         var d = null;
@@ -526,6 +533,40 @@
       '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span></div>';
   }
 
+  var TENANT_KEY = "smd_connect_agent_tenant";
+  function storedTenant() { try { return localStorage.getItem(TENANT_KEY) || ""; } catch (e) { return ""; } }
+  function storeTenant(id) { try { if (id) localStorage.setItem(TENANT_KEY, id); else localStorage.removeItem(TENANT_KEY); } catch (e) {} }
+  /* Which hospital? An account that belongs to several tenants (an owner, a super-admin) must say
+   * which one it is connecting; the server refuses to guess. One tenant: nothing to ask. */
+  function pickTenantThenLoad() {
+    api("/tenants", {}).then(function (r) {
+      if (!overlay() || !S) return;
+      var list = (r.s === 200 && r.d && r.d.tenants) || [];
+      if (list.length > 1) {
+        S.tenants = list;
+        var known = list.some(function (t) { return t.tenantId === S.tenant; });
+        if (!known) { S.tenant = ""; storeTenant(""); if (S.screen === "connections") renderConnections(); return; }
+      } else if (list.length === 1 && S.tenant && S.tenant !== list[0].tenantId) { S.tenant = ""; storeTenant(""); }
+      loadConnections();
+    });
+  }
+  function renderTenantPicker(b) {
+    var rows = "";
+    for (var i = 0; i < S.tenants.length; i++) {
+      var t = S.tenants[i];
+      rows += '<div class="smd-connect-row"><button class="smd-connect-btn" type="button" data-tenant="' + esc(t.tenantId) + '">' + esc(t.name || t.tenantId) + "</button></div>";
+    }
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Which hospital?</h2>' +
+      '<p class="smd-connect-lead">Your account belongs to more than one. Pick the hospital you are connecting.</p>' +
+      '<div id="smd-connect-tenants">' + rows + "</div>";
+    setStatus("", "");
+    var btns = b.querySelectorAll("[data-tenant]");
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].onclick = function () { S.tenant = this.getAttribute("data-tenant"); storeTenant(S.tenant); loadConnections(); };
+    }
+    if (btns[0]) btns[0].focus();
+  }
   function loadConnections() {
     S.connLoading = true;
     S.connError = false;
@@ -547,6 +588,7 @@
   function renderConnections() {
     var b = body();
     if (!b) return;
+    if (S.tenants && !S.tenant) return renderTenantPicker(b);
     var rows = "";
     for (var i = 0; i < S.connections.length; i++) rows += connectionRow(S.connections[i]);
     b.innerHTML =
@@ -556,8 +598,11 @@
         : (S.connections.length
             ? '<div id="smd-connect-connlist">' + rows + '</div>'
             : '<p class="smd-connect-lead">You have not connected a hospital yet. Connect your hospital so StewardMD can read your worklist safely, once a reviewer approves it.</p>')) +
-      '<div class="smd-connect-row"><button id="smd-connect-add" class="smd-connect-btn primary" type="button">Connect a hospital</button></div>';
+      '<div class="smd-connect-row"><button id="smd-connect-add" class="smd-connect-btn primary" type="button">Connect a hospital</button>' +
+      (S.tenants ? '<button id="smd-connect-switch" class="smd-connect-btn" type="button">Switch hospital</button>' : "") + "</div>";
     setStatus(S.connError ? "bad" : "", S.connError ? "Could not load your connections. Check your connection and try again." : "");
+    var sw = b.querySelector("#smd-connect-switch");
+    if (sw) sw.onclick = function () { S.tenant = ""; storeTenant(""); renderConnections(); };
     b.querySelector("#smd-connect-add").onclick = function () {
       S.selected = null; S.emrUrl = "";
       show("url");
@@ -639,7 +684,10 @@
           setStatus("bad", "Connections are not enabled yet. Try again later.");
           go.disabled = false;
         } else {
-          setStatus("bad", "Could not start the session. Check your connection and try again.");
+          // Say WHY when the server said why: a code like not-configured or forbidden is actionable,
+          // "check your connection" is not.
+          var why = r.d && (r.d.message || r.d.code || r.d.error);
+          setStatus("bad", why ? "Could not start the session: " + why + "." : "Could not start the session. Check your connection and try again.");
           go.disabled = false;
         }
       });
@@ -1266,6 +1314,7 @@
     injectCSS();
     if (overlay()) close(true);
     S = {
+      tenant: storedTenant(), tenants: null,
       screen: "connections",
       connections: [],
       connLoading: true,
@@ -1318,7 +1367,7 @@
     show("connections");
     anchorToLauncher();
     animateOpen();
-    loadConnections();
+    pickTenantThenLoad();
   }
 
   window.SMD_CONNECT_AGENT = {

@@ -769,3 +769,16 @@ test("native identify() without env override works with Cf-Access header", async
   assert.deepEqual(await res.json(), { error: "not-found" });
 });
 
+
+// --- Tenant listing for the picker ---
+
+test("GET /tenants lists the caller's tenants without a tenant chosen; unauthenticated is 401", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const res = await onRequest(get("/api/connect/agent/tenants", env, doc1.headers));
+  assert.equal(res.status, 200);
+  const d = await res.json();
+  assert.equal(d.ok, true);
+  assert.ok(d.tenants.some((t) => t.tenantId === "t1"), "doc1's own tenant is listed");
+  const r2 = await onRequest(get("/api/connect/agent/tenants", env));
+  assert.equal(r2.status, 401);
+});
