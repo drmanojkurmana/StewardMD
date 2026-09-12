@@ -85,11 +85,11 @@ usage cut-off at any point leaves a resumable branch. Update this file's status 
 1. Model gateway route: `POST /api/connect/agent/brain/classify` and `/brain/map-columns`, PHI gate,
    per-origin cache, env model id. Unit tests with a fake model.  STATUS: done 2026-09-12 (functions/_connect/agent/brain.js, routes POST /api/connect/agent/brain/{classify,map-columns,next}, env CONNECT_AGENT_MODEL + CONNECT_AGENT_MODEL_PROVIDER, observedViews.fieldHints honored by infer-html; test/connect/agent/brain.test.mjs)
 2. Manual mode UI: mode picker on the consent screen, the ordered ask list with "My EMR does not
-   have this", Done captures structure, progress bar by asks. Harness test.  STATUS: not started
-3. Wire the brain into Manual: classify on Done, map headers; deterministic fallback.  STATUS: not started
+   have this", Done captures structure, progress bar by asks. Harness test.  STATUS: done 2026-09-12 (mode picker on consent, `mode: 'manual'` in `runPhoneDiscovery` with ASK_ORDER/ASK_PROMPTS, native "Not in my EMR" button -> `guideSkip` event, sheet buttons, step-counted progress; test/connect-agent/phone-modes.test.mjs, test/run-connect-agent-onboarding-ui.mjs)
+3. Wire the brain into Manual: classify on Done, map headers; deterministic fallback.  STATUS: done 2026-09-12 (`enrichView` in deep-crawl.mjs: classify against the ask, `fieldHints` from map-columns, `scrubForBrain` before anything leaves the phone; a strong disagreement is a warning, the doctor's word stands)
 4. Auto mode: planner loop in `connect-agent/phone/index.mjs` calls the brain for the next control;
-   falls back to Manual asks for missing resources.  STATUS: not started
-5. Snake game on the progress sheet, with the banner and Done always above it.  STATUS: not started
+   falls back to Manual asks for missing resources.  STATUS: done 2026-09-12 (`deepCrawlClinical({ brain })` asks `brain.next` for the control to tap, index into the same candidate list only; unknown views classified; gaps still go to the guided asks)
+5. Snake game on the progress sheet, with the banner and Done always above it.  STATUS: done 2026-09-12 (connect-agent-snake.js, lazy-loaded; auto mode sets `compact: true` so the native browser keeps the top half and the sheet with the bar and the game shows beneath; guided asks are always full size)
 6. Read-time self-repair in `runtime.mjs` and `ghis-ward.js`, saved as a new candidate.  STATUS: not started
 7. Live acceptance on GHIS from the Pixel: Manual mode end to end, Auto mode end to end, patients
    visible in Ward Sync, medications and labs on tap. Record results here.  STATUS: not started

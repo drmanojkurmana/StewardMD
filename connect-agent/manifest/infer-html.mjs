@@ -115,7 +115,7 @@ function planFor(hint) {
     case 'patient': return { type: 'get_patient_summary', resource: 'patient' };
     case 'medications': return { type: 'list_medications', resource: 'medications' };
     case 'labs': return { type: 'list_results', resource: 'observations' };
-    case 'history': case 'discharge': return { type: 'list_notes', resource: 'documents' };
+    case 'history': case 'discharge': case 'notes': return { type: 'list_notes', resource: 'documents' };
     case 'encounters': return { type: 'list_encounters', resource: 'encounters' };
     default: return null;
   }
