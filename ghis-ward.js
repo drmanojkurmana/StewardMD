@@ -221,7 +221,15 @@
       }
       // NON-UI: resolve true if a live session is ready (silently refreshed, or re-logged-in from a
       // remembered device credential), false otherwise. Opens no panel — the caller owns the UI.
+      /* AN ADAPTER SESSION COUNTS AS A SESSION. The patient workspace (Assess) asks ensureSession
+       * before it opens; with an agent-built adapter there is no proxy token, so it reopened Ward
+       * Sync and Assess looked dead (owner, 2026-09-12). A ward read through an approved adapter
+       * keeps the doctor signed in for thirty minutes: the hospital cookies live in the native
+       * browser, and every read reopens it without a second login. */
+      var ADAPTER_SESSION_MS = 30 * 60 * 1000;
+      function adapterSessionFresh() { return !!(_adapterCtx && _adapterCtx.at && (Date.now() - _adapterCtx.at) < ADAPTER_SESSION_MS); }
       function checkSession() {
+        if (adapterSessionFresh()) return Promise.resolve(true);
         if (!getToken()) return storedCredLogin();
         return fetch(PROXY + '/status', { headers: { 'Authorization': 'Bearer ' + getToken() } })
           .then(function (r) { return r.json(); })
@@ -437,6 +445,21 @@
             } catch (e) {}
             ctx.browserOpen = true;
             plugin.open({ url: origin, origins: ctx.origins, storeId: conn.deploymentId, title: host, initScript: '' })
+              .then(function () {
+                /* STILL SIGNED IN FROM LAST TIME: the hospital skips its login form (cookies live in
+                 * the native browser), so no password field ever appears and the auto sign-in
+                 * detection has nothing to see. Two quiet polls without a password field, after the
+                 * page has had time to load, count as signed in; the doctor never taps Done again
+                 * inside the thirty-minute window. */
+                var quiet = 0, polls = 0;
+                function look() {
+                  if (!ctx.listeners.length) return;   // already resolved or rejected
+                  plugin.evaluate({ expression: "(function(){return document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank')})()" })
+                    .then(function (r) { var v = r && String(r.result); if (v === 'ok') quiet++; else quiet = 0; }, function () { quiet = 0; })
+                    .then(function () { polls++; if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 8 && ctx.listeners.length) setTimeout(look, 900); });
+                }
+                setTimeout(look, 2200);
+              })
               .catch(function (e) { off(); reject(new Error('Could not open ' + host + ' in the in-app browser: ' + (e && e.message || e))); });
           });
         }).then(function () {
@@ -477,6 +500,8 @@
           ctx.browserOpen = false;
           try { plugin.close(); } catch (e) {}
           if (_adapterCtx !== ctx) return;
+          ctx.at = Date.now();
+          _connected = true; try { dot(true); } catch (e) {}
           _patients = patients;
           populateFilterOptions();
           ghisApplyFilters();
