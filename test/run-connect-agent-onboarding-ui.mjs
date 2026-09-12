@@ -524,6 +524,37 @@ try {
   ok(await waitFor(`return document.getElementById("smd-connect-ov").innerText.indexOf("Switch hospital")>=0;`, 4000), "the list offers Switch hospital");
   await ev(`window.__tenants = null; localStorage.removeItem("smd_connect_agent_tenant"); return 1;`);
 
+  // What the doctor watches while the agent works: a bar that moves, a sentence in their own
+  // vocabulary, and a time. A screen that only counted pages read as frozen.
+  await ev(`
+    var A = window.SMD_CONNECT_AGENT;
+    A.__setState({ screen: "progress", runner: "phone",
+      selected: { emrUrl: "https://emr.newcity.example" },
+      progressStartedAt: Date.now() - 60000,
+      progressCounts: { pages: 6, requests: 12, phase: "CRAWLING", opening: "", found: ["worklist", "patient"], looking: ["labs", "medications"] } });
+    A.__paintProgress();
+    return 1;
+  `);
+  ok(await waitFor(`return !!document.querySelector('.smd-connect-prog > i');`, 4000), "the progress screen shows a progress bar");
+  const pct = Number(await ev(`var b=document.querySelector('.smd-connect-prog'); return b ? b.getAttribute('aria-valuenow') : '';`));
+  ok(pct > 10 && pct < 90, "the bar reports a real percentage, not 0 or 100: " + pct);
+  ok(await ev(`return document.getElementById('smd-connect-activity').textContent.indexOf('Looking for where your lab results sit') >= 0;`) === true,
+    "it says what it is doing in the doctor's words, naming the view it is hunting for");
+  ok(await ev(`return /minute/.test(document.getElementById('smd-connect-eta').textContent);`) === true, "it estimates the time left");
+
+  // Further along, the bar must be further along, and the wording follows the phase.
+  await ev(`
+    var A = window.SMD_CONNECT_AGENT;
+    A.__setState({ progressCounts: { pages: 20, requests: 48, phase: "COMPILING", opening: "", found: ["worklist","patient","labs","medications","radiology"], looking: [] } });
+    A.__paintProgress();
+    return 1;
+  `);
+  const pct2 = Number(await ev(`var b=document.querySelector('.smd-connect-prog'); return b ? b.getAttribute('aria-valuenow') : '';`));
+  ok(pct2 > pct, "the bar advances as views are captured: " + pct + " -> " + pct2);
+  ok(await ev(`return document.getElementById('smd-connect-activity').textContent.indexOf('Writing the connection') >= 0;`) === true,
+    "the compile step says it is writing the connection, not a phase code");
+  ok(await ev(noDash) === true, "the progress copy has no em-dash");
+
   ok(consoleErrors.length === 0, "zero console errors and zero uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 5)) : ""));
 
   console.log(fails === 0 ? "\nALL GREEN - connect-agent-onboarding UI test passed" : `\n${fails} FAILED`);
