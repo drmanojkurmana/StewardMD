@@ -1344,6 +1344,9 @@
          * than doing the same five things through five separate buttons: one save means one honest
          * answer about what reached the chart. The individual buttons all still work. */
         '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
+        /* First, because it is the screen a doctor picking up an unfamiliar patient wants before
+         * any of the others: everything that changes what they may safely do, in one place. */
+        '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
@@ -2842,7 +2845,7 @@
       "<p class=\"w-hint\">Available " + esc(f.beds.states.available) + " &middot; Reserved " + esc(f.beds.states.reserved) +
       " &middot; Blocked " + esc(f.beds.states.blocked) + " &middot; Cleaning " + esc(f.beds.states.cleaning) + " &middot; Maintenance " + esc(f.beds.states.maintenance) + "</p></div>" +
 
-      '<div class="w-card"><div class="w-card-h">' + ms("hourglass_top") + "<h3>Admissions pending</h3></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>Admissions pending</h3></div>" +
       "<p>" + esc(f.admissionsPending.waiting) + " waiting &middot; longest wait " + esc(f.admissionsPending.longestWaitHours) + " h</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>Discharge</h3></div>" +
@@ -3604,6 +3607,107 @@
       "</div>";
   }
 
+  /* THE WORKSPACE — everything about this patient a doctor needs before they decide anything, on
+   * one screen, composed from what the chart already loaded.
+   *
+   * IT IS A PROJECTION AND OWNS NOTHING. Every block below reads state the chart already fetched
+   * through the governed routes; there is no new endpoint, no second copy and no separate idea of
+   * what is true. Delete this screen and nothing becomes impossible - the doctor just goes back to
+   * reading nine cards to answer one question.
+   *
+   * THE RULE THAT MATTERS MOST: AN EMPTY BLOCK AND AN UNLOADED BLOCK MUST NEVER LOOK ALIKE.
+   * An empty allergy box reads as "no known allergies" to every clinician alive. So a block whose
+   * data did not load says so, in those words, and never renders as blank calm. This is the same
+   * reasoning the chart already applies to critical results ("do not read this chart as clear").
+   */
+  function wsBlock(title, icon, body, notLoaded, act) {
+    return '<div class="w-ws-b"><h4>' + ms(icon) + esc(title) +
+      (act ? '<button class="w-btn ghost sm" data-w-act="' + esc(act) + '">Open</button>' : "") + "</h4>" +
+      (notLoaded
+        ? '<p class="w-hint warn">' + ms("warning") + "Not loaded. Do not read this as empty.</p>"
+        : body) +
+      "</div>";
+  }
+  function wsList(rows, emptyWords) {
+    return rows && rows.length ? '<ul class="w-mini">' + rows.join("") + "</ul>"
+      : '<p class="w-empty">' + esc(emptyWords) + "</p>";
+  }
+  function workspaceView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var tl = state.timeline;
+    var ev = function (cat) { return (tl || []).filter(function (e) { return e.category === cat; }); };
+
+    /* Allergies come off the timeline, which is the governed chart read - there is no separate
+     * allergy endpoint, and inventing one would be a second source of truth for the single fact a
+     * prescriber most needs to be right about. */
+    var allergies = ev("allergy").map(function (e) {
+      return '<li class="w-ws-alert">' + esc(e.label) + "</li>";
+    });
+    var openCriticals = (state.criticals || []).filter(function (c) { return c.state === "open"; });
+    var criticalRows = openCriticals.map(function (c) {
+      return '<li class="w-ws-alert"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value != null ? " " + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") : "") +
+        " &middot; nobody has acknowledged this yet</li>";
+    });
+    var problemRows = (state.problems || []).filter(function (p) { return p.clinicalStatus !== "resolved"; })
+      .map(function (p) { return "<li>" + esc(p.display || p.code) + (p.verificationStatus ? ' <span class="w-st">' + esc(p.verificationStatus) + "</span>" : "") + "</li>"; });
+    var medRows = (state.activeMeds || []).map(function (m) {
+      return "<li><b>" + esc(m.drug) + "</b>" +
+        (m.dose && m.dose.value != null ? " " + esc(m.dose.value) + esc(m.dose.unit || "") : "") +
+        (m.route ? " " + esc(m.route) : "") + (m.frequency ? " " + esc(m.frequency) : "") + "</li>";
+    });
+    var resultRows = ev("result").slice(0, 5).map(function (e) {
+      return "<li" + (e.critical ? ' class="w-ws-alert"' : "") + ">" + esc(e.label) + "</li>";
+    });
+    var pendingRows = ev("investigation").filter(function (e) { return e.reportReady === false; })
+      .map(function (e) { return "<li>" + esc(e.label) + ' <span class="w-st due">waiting</span></li>'; });
+    var noteRows = ev("note").slice(0, 3).map(function (e) {
+      var first = e.body && e.body[0] ? String(e.body[0].text || "") : "";
+      return "<li>" + esc(e.label) + (first ? '<div class="w-dt-times">' + esc(first.length > 120 ? first.slice(0, 120) + "…" : first) + "</div>" : "") + "</li>";
+    });
+
+    var n = state.news2;
+    var vitals = n && n.total != null
+      ? "<p><b>Early warning score " + esc(n.total) + "</b>" + (n.incomplete ? ' <span class="w-st escalate">incomplete - some observations were never recorded</span>' : "") + "</p>"
+      : '<p class="w-empty">No score yet.</p>';
+
+    var people = state.people;
+    var deceased = people && people.deceased
+      ? '<div class="w-card w-dead"><h4>' + ms("warning") + "This patient is recorded as deceased</h4><p>Died " + when(people.deceased.at) + "</p></div>"
+      : "";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
+        (s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") +
+        " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+      '<button class="w-ic" data-w-act="workspace" title="Refresh">' + ms("refresh") + "</button></div>" +
+      deceased +
+      '<div class="w-card">' +
+      /* The three that change what a prescriber may safely do come first and are never collapsed. */
+      '<div class="w-ws-top">' +
+      wsBlock("Allergies", "warning", wsList(allergies, "None recorded."), tl == null, "") +
+      wsBlock("Critical results", "priority_high", wsList(criticalRows, "None outstanding."), state.criticals == null, "critsboard") +
+      wsBlock("Current medicines", "medication", wsList(medRows, "None active."), state.activeMeds == null, "round") +
+      "</div>" +
+      '<div class="w-ws-grid">' +
+      wsBlock("Active problems", "fact_check", wsList(problemRows, "None recorded."), state.problems == null, "") +
+      wsBlock("Latest observations", "monitor_heart", vitals, state.news2 === undefined, "flowsheet") +
+      wsBlock("Recent results", "science", wsList(resultRows, "None yet."), tl == null, "investigations") +
+      wsBlock("Waiting for a result", "hourglass_top", wsList(pendingRows, "Nothing outstanding."), tl == null, "") +
+      wsBlock("Recent notes", "edit_note", wsList(noteRows, "None yet."), tl == null, "timeline") +
+      wsBlock("Contacts", "person", people
+        ? (people.hasEmergencyContact ? "<p>" + esc((people.people || []).filter(function (x) { return x.active; }).length) + " recorded.</p>"
+          : '<p class="w-hint warn">' + ms("warning") + "Nobody can be telephoned about this patient.</p>")
+        : "", !people, "people") +
+      "</div>" +
+      '<div class="w-ws-do">' +
+      '<button class="w-btn" data-w-act="consultation">' + ms("edit_note") + "Start a consultation</button>" +
+      '<button class="w-btn ghost" data-w-act="timeline">' + ms("history") + "Full history</button>" +
+      '<button class="w-btn ghost" data-w-act="open:' + esc(s.encounterId || "") + '">' + ms("fact_check") + "Full chart</button>" +
+      "</div></div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -3876,6 +3980,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "workspace" ? workspaceView(state)
         : state.view === "people" ? peopleView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
@@ -5417,6 +5522,15 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  /* Opening the workspace loads everything it shows, in parallel, through the routes that already
+   * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
+   * make the screen look tidy. */
+  function workspaceOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "workspace"; paint();
+    loadChart(); loadNews2(); loadPeople();
+  }
+
   function peopleOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "people"; st.people = null; paint(); loadPeople();
@@ -6249,6 +6363,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
@@ -6492,6 +6607,7 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "workspace") { workspaceOpen(); return; }
     if (cmd === "people") { peopleOpen(); return; }
     if (cmd === "personadd") { personAdd(); return; }
     if (cmd === "personremove") { personRemove(arg); return; }

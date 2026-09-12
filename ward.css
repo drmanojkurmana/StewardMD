@@ -269,6 +269,31 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* FILTERS. Chips, wrapping, with the count on each so an empty one is visibly empty rather than
    looking like a screen that failed to load. The active one is FILLED, not merely outlined: a
    filter a reader cannot see is on is a filter hiding half a chart without saying so. */
+/* THE WORKSPACE. Dense on purpose: the point of the screen is that a doctor does not have to
+   navigate to answer "what am I dealing with", so everything that changes what they may safely do
+   has to be visible without scrolling on a tablet.
+
+   The top row is allergies, outstanding criticals and current medicines. Those three are what a
+   prescribing decision rests on, they never collapse, and they get the full width on a phone. */
+#smdWard .w-ws-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-bottom: 10px; }
+#smdWard .w-ws-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+#smdWard .w-ws-b { border: 1px solid var(--outline-variant); border-radius: 10px; padding: 8px 10px; background: var(--sc-lowest); min-width: 0; }
+#smdWard .w-ws-b h4 { margin: 0 0 6px; font-size: 13px; display: flex; align-items: center; gap: 6px; color: var(--on-surface-variant); }
+#smdWard .w-ws-b h4 .material-symbols-outlined { font-size: 17px; }
+#smdWard .w-ws-b h4 button { margin-left: auto; }
+#smdWard .w-ws-b ul { margin: 0; }
+#smdWard .w-ws-b p { margin: 0; }
+
+/* The three blocks in the top row carry the rows that stop a prescription. Real colour, for the
+   same reason a critical result gets it: these are clinically abnormal, not decorative. */
+#smdWard .w-ws-top .w-ws-b { border-left: 3px solid var(--outline); }
+#smdWard .w-ws-alert { color: var(--on-error-container); font-weight: 600; }
+#smdWard .w-ws-b li.w-ws-alert { list-style: none; padding-left: 0; }
+
+/* Where the screen leads. A workspace that shows everything and offers nothing to do with it is a
+   dashboard, which is the thing this deliberately is not. */
+#smdWard .w-ws-do { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--outline-variant); }
+
 /* SEARCH. Above the filters, because "when did we start the co-amoxiclav" is asked far more often
    than any filter answers it, and on a three-week stay it is unanswerable by scrolling. */
 #smdWard .w-tl-search { display: flex; gap: 6px; align-items: center; margin: 8px 0 4px; flex-wrap: wrap; }
