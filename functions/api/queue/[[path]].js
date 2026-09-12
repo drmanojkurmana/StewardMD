@@ -145,6 +145,7 @@ import { requestVerification, recordVerification, listVerifications } from "../.
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
 import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
 import { recordDetail } from "../../_wardsynq/record-detail.js";
+import { safetyInbox } from "../../_wardsynq/safety-inbox.js";
 
 /* One consultation arrives with ONE idempotency key from the screen, but fans out into several
  * writes. Handing the same key to each would make the second piece look like a repeat of the first
@@ -624,6 +625,12 @@ export async function onRequest(context) {
          * gated exactly as reading the chart is. The record service applies the actor's own read
          * scope on top, so a role that may not read a type is refused there too - this route adds
          * no authority of its own and is not a side door around the governed store. */
+        /* The safety inbox is READING the ward's charts, merged. Gated at emr.view, the same bar
+         * every other chart read sits at - and the record service applies each reader's own grant
+         * on top, so a patient a reader may not read never enters the list. The role filter inside
+         * is an ORDERING convenience and never a permission: it can only narrow what the reader was
+         * already entitled to see. */
+        "safety-inbox": CAPS.EMR_VIEW,
         "record-detail": CAPS.EMR_VIEW,
         deceased: CAPS.EMR_TREAT, "deceased-correct": CAPS.EMR_TREAT,
         /* Contacts are the front desk's work, on the capability that registers a patient. Reading
@@ -1115,6 +1122,21 @@ export async function onRequest(context) {
        * the advisories below are ORG content and must not become caller-supplied just because the
        * call arrived bundled). consultation.js decides order, does the up-front permission check
        * across all pieces, and reports honestly when a save lands in part. */
+      if (sub === "safety-inbox" && method === "GET") {
+        /* The roster comes from the ward list this router already serves - the inbox does not get a
+         * second idea of who is on the ward, and a patient who is not on it is not scanned. */
+        const roster = await listWard(request, env, { ...deps });
+        if (!roster || !roster.ok) return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request);
+        const r = await safetyInbox(request, env, {
+          ...deps,
+          patients: (roster.patients || roster.list || []).map((p) => ({ patientId: p.patientId, name: p.name, mrn: p.mrn, ward: p.ward, bed: p.bed })),
+          rules: (wsqCfg && wsqCfg.chartCompletion) || null,
+          criticalPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          riskTools: (wsqCfg && wsqCfg.riskTools) || [],
+          role: url.searchParams.get("role") || "",
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "record-detail" && method === "GET") {
         const r = await recordDetail(request, env, { ...deps, resourceType: url.searchParams.get("type") || "", recordId: url.searchParams.get("id") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);

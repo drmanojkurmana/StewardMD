@@ -3708,6 +3708,72 @@
       "</div></div>";
   }
 
+  /* THE SAFETY INBOX — what needs a person, across the ward, ordered by urgency.
+   *
+   * An action queue, not a dashboard. Every row names the patient, says what is wrong and how long
+   * it has been wrong, and goes straight to where it is dealt with. A screen that displays safety
+   * items without offering the action is a screen people learn to scroll past.
+   *
+   * THE LOUDEST THING HERE IS A LIST THAT MIGHT BE INCOMPLETE. A safety inbox that quietly dropped
+   * the patients it could not read, or stopped at a cap, would be worse than not having one: it
+   * reads as a quiet ward. So the warning sits ABOVE the list, in those words, and the patients
+   * that could not be checked are named. */
+  var INBOX_ROLES = [
+    ["", "Everything"], ["doctor", "Doctors"], ["nurse", "Nursing"],
+    ["pharmacy", "Pharmacy"], ["lab", "Laboratory"],
+  ];
+  var INBOX_LEVEL = { escalate: "needs somebody now", overdue: "overdue", due: "due" };
+  function inboxRow(it) {
+    var lvl = (it.escalation && it.escalation.level) || "due";
+    var p = it.patient || {};
+    var act = it.type === "critical-result" && it.sourceRef && it.sourceRef.loopId
+      ? '<button class="w-btn ghost sm" data-w-act="ackboard:' + esc(it.sourceRef.loopId) + '">' + ms("check") + "Acknowledge</button>"
+      : "";
+    return '<li class="w-mini-row w-ib-' + esc(lvl) + '"><div>' +
+      '<span class="w-st ' + (lvl === "escalate" ? "escalate" : "due") + '">' + esc(INBOX_LEVEL[lvl] || lvl) + "</span> " +
+      "<b>" + esc(p.name || p.patientId || "Patient") + "</b>" +
+      (p.bed ? " &middot; bed " + esc(p.bed) : "") + (p.ward ? " &middot; " + esc(p.ward) : "") +
+      "<div>" + esc(it.detail || it.type) + "</div>" +
+      '<div class="w-dt-times">' + esc(it.type) +
+      (it.since ? " &middot; since " + when(it.since) : "") +
+      (it.escalation && it.escalation.hoursOpen != null ? " &middot; " + esc(it.escalation.hoursOpen) + "h" : "") +
+      "</div></div>" +
+      '<div class="w-mini-row-act">' + act +
+      '<button class="w-btn ghost sm" data-w-act="inboxopen:' + esc(p.patientId || "") + '">' + ms("fact_check") + "Open patient</button>" +
+      "</div></li>";
+  }
+  function safetyInboxView(state) {
+    var d = state.inbox;
+    var rows = d && d.items ? d.items.map(inboxRow).join("") : "";
+    var cur = state.inboxRole || "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Safety inbox</h3>" +
+      '<button class="w-ic" data-w-act="safetyinbox" title="Refresh">' + ms("refresh") + "</button></div>" +
+      /* The incompleteness warning comes FIRST and is not a footnote. */
+      (d && d.warning ? '<p class="w-hint warn">' + ms("warning") + esc(d.warning) + "</p>" : "") +
+      (d && d.failed && d.failed.length
+        ? '<p class="w-hint warn">' + ms("warning") + "Could not check: " +
+          esc(d.failed.map(function (f) { return (f.name || f.patientId) + " (" + f.what + ")"; }).join(", ")) + "</p>"
+        : "") +
+      (d && d.note ? '<p class="w-hint">' + ms("info") + esc(d.note) + "</p>" : "") +
+      '<div class="w-tl-filters">' + INBOX_ROLES.map(function (r) {
+        return '<button class="w-tl-f' + (cur === r[0] ? " on" : "") + '" data-w-act="inboxrole:' + esc(r[0] || "all") + '">' + esc(r[1]) + "</button>";
+      }).join("") + "</div>" +
+      (d
+        ? '<p class="w-hint">' + ms("info") +
+          esc(d.items.length) + " for this role &middot; " + esc(d.escalated) + " need somebody now &middot; " +
+          esc(d.totalOnWard) + " outstanding on the ward &middot; " + esc(d.scanned) + " patients checked</p>"
+        : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        /* "Nothing outstanding" is only ever said when the list is actually complete. */
+        : (d.warning || (d.failed && d.failed.length))
+          ? '<p class="w-hint warn">' + ms("warning") + "Nothing found in what could be checked - but the check was incomplete.</p>"
+          : '<p class="w-empty">Nothing outstanding for this role.</p>') +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -3980,6 +4046,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "safetyinbox" ? safetyInboxView(state)
         : state.view === "workspace" ? workspaceView(state)
         : state.view === "people" ? peopleView(state)
         : state.view === "consultation" ? consultationView(state)
@@ -4861,7 +4928,10 @@
     if (!why.trim()) { st.err = "An acknowledgement records what was done. It needs a sentence."; paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
-      .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
+      /* Acknowledging reloads whichever list the person is actually looking at. The same action is
+       * reachable from the criticals board and from the safety inbox, and reloading the board from
+       * the inbox would leave the row the person just acted on still sitting there. */
+      .then(function (r) { if (settle(r, "Acknowledged.")) { if (st.view === "safetyinbox") loadSafetyInbox(); else loadCritsBoard(); } else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
   }
   function cashierOpen() {
@@ -5525,6 +5595,35 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function safetyInboxOpen() {
+    st.view = "safetyinbox"; st.inbox = null; paint(); loadSafetyInbox();
+  }
+  function loadSafetyInbox() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    if (st.inboxRole) q += "&role=" + encodeURIComponent(st.inboxRole);
+    return apiGet("/ward/safety-inbox?" + q)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.inbox = r;
+        /* A failed LOAD is not an empty inbox. Said in the same words the list itself uses, because
+         * the reader has to end up with the same belief either way: this is not a quiet ward. */
+        else { st.inbox = null; st.err = "Could not load the safety inbox. Do not read this as a quiet ward."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.inbox = null; st.err = "Could not load the safety inbox. Do not read this as a quiet ward."; paint(); });
+  }
+  /* Opening the patient an item belongs to. It goes to the workspace rather than the raw chart,
+   * because somebody acting on a safety item needs the context around it before they act. */
+  function inboxOpenPatient(patientId) {
+    if (!patientId) return;
+    var found = null;
+    (st.list || []).forEach(function (p) { if (p.patientId === patientId) found = p; });
+    if (!found) { st.err = "That patient is not on the current ward list. Refresh the ward."; paint(); return; }
+    st.sel = found;
+    workspaceOpen();
+  }
+
   function workspaceOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "workspace"; paint();
@@ -6363,6 +6462,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
@@ -6607,6 +6707,9 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "safetyinbox") { safetyInboxOpen(); return; }
+    if (cmd === "inboxrole") { st.inboxRole = arg === "all" ? "" : arg; loadSafetyInbox(); return; }
+    if (cmd === "inboxopen") { inboxOpenPatient(arg); return; }
     if (cmd === "workspace") { workspaceOpen(); return; }
     if (cmd === "people") { peopleOpen(); return; }
     if (cmd === "personadd") { personAdd(); return; }
@@ -6705,7 +6808,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -6731,6 +6834,7 @@
      * patient is how one patient's findings end up in another's chart. */
     st.cDraft = null; st.cIcd = undefined;
     st.people = null;
+    st.inbox = null; st.inboxRole = "";
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

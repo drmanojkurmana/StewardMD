@@ -464,6 +464,10 @@
        * blocked by stewardship is the person who needs to ask, and the consultant who grants it
        * needs the same door. Who may actually grant is decided on the route, and who may not grant
        * their OWN request is decided beneath that, in verification.js. */
+      /* The safety inbox is the first thing somebody coming on shift should open, so it sits at the
+       * clinical-view bar: anyone who may read a chart may read what on it needs a person. Which
+       * items are THEIRS is decided inside, and is an ordering, never a permission. */
+      tile({ go: "ward:safetyinbox", icon: "priority_high", title: "Safety inbox", sub: "Everything on the ward that needs a person, most urgent first", need: "emr.view" }),
       tile({ go: "ward:approvals", icon: "verified", title: "Approvals", sub: "Ask for an approval for a restricted medicine, and grant the ones waiting", need: ["emr.vitals", "emr.treat"] }),
       /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
        * the storekeeper's job and has never been the ward's. */

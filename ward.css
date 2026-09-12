@@ -269,6 +269,13 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* FILTERS. Chips, wrapping, with the count on each so an empty one is visibly empty rather than
    looking like a screen that failed to load. The active one is FILLED, not merely outlined: a
    filter a reader cannot see is on is a filter hiding half a chart without saying so. */
+/* THE SAFETY INBOX. A worklist, so the urgency reads as a left edge and a word rather than as a
+   coloured card - the same restraint the timeline keeps, and for the same reason: a wall of red
+   teaches people to scroll past red. Only the top level gets the error colour. */
+#smdWard .w-ib-escalate { border-left: 4px solid var(--error); background: var(--error-container); padding-left: 10px; }
+#smdWard .w-ib-overdue { border-left: 3px solid var(--on-warn-container); padding-left: 10px; }
+#smdWard .w-ib-due { border-left: 3px solid var(--outline-variant); padding-left: 10px; }
+
 /* THE WORKSPACE. Dense on purpose: the point of the screen is that a doctor does not have to
    navigate to answer "what am I dealing with", so everything that changes what they may safely do
    has to be visible without scrolling on a tablet.
