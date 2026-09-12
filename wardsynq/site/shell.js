@@ -468,6 +468,10 @@
        * clinical-view bar: anyone who may read a chart may read what on it needs a person. Which
        * items are THEIRS is decided inside, and is an ordering, never a permission. */
       tile({ go: "ward:safetyinbox", icon: "priority_high", title: "Safety inbox", sub: "Everything on the ward that needs a person, most urgent first", need: "emr.view" }),
+      /* Emergency access sits at emr.vitals - the lowest capability meaning "clinical business with
+       * patients", the same bar actor.js uses for BreakGlassGrant. A cashier or HR cannot reach it,
+       * and the module refuses them independently of this tile. */
+      tile({ go: "ward:breakglass", icon: "warning", title: "Emergency access", sub: "Break glass for a patient in an emergency, and review every time it was used", need: "emr.vitals" }),
       /* Handover is nursing work and sits on the capability a nurse already holds for recording
        * what she observes. A handover is her own account of a shift, not a clinical document -
        * which is exactly why actor.js grants ShiftHandover under emr.vitals and not under the

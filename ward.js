@@ -4060,6 +4060,57 @@
       '<button class="w-btn ghost" data-w-act="riskcancel">Cancel</button></div>';
   }
 
+  /* BREAK-GLASS. Emergency access to one patient's chart, on the record. The module behind this
+   * was complete and unreachable, which meant the only emergency route into a chart a clinician did
+   * not hold access to was a borrowed login - the one outcome break-glass exists to prevent, because
+   * a borrowed login leaves no name.
+   *
+   * THIS SCREEN DOES NOT SOFTEN IT. The declaration asks for a reason in the clinician's own words
+   * (not a menu - a menu becomes "other" within a month), states that access is read-only, for this
+   * patient only, and expires on its own, and says plainly that it is reviewed. The review log shows
+   * every declaration, who made it, why, how many times the chart was read under it, and whether
+   * anybody was told. */
+  function breakGlassRow(g) {
+    return '<li class="w-mini-row' + (g.active ? " w-ib-escalate" : "") + '"><div>' +
+      '<span class="w-st ' + (g.active ? "escalate" : "") + '">' + (g.active ? "active" : g.revokedAt ? "withdrawn" : "expired") + "</span> " +
+      "<b>" + esc(g.actorId) + "</b>" + (g.role ? " &middot; " + esc(g.role) : "") +
+      "<div>" + esc(g.reason) + "</div>" +
+      '<div class="w-dt-times">patient ' + esc(g.patientId) + " &middot; declared " + when(g.grantedAt) +
+      " &middot; " + (g.active ? "expires " : "ended ") + when(g.revokedAt || g.expiresAt) +
+      " &middot; chart read " + esc(g.reads || 0) + " time" + (g.reads === 1 ? "" : "s") + "</div>" +
+      /* Whether anybody was told, on the review surface itself - "declared and paged" and "declared
+       * and told nobody" must be distinguishable without cross-referencing anything. */
+      '<div class="w-dt-times">' + (g.notification && g.notification.sent
+        ? "notified: " + esc(g.notification.to || "yes")
+        : "nobody was notified automatically") + "</div>" +
+      "</div></li>";
+  }
+  function breakGlassView(state) {
+    var d = state.breakGlass;
+    var s = state.sel;
+    var rows = d && d.grants ? d.grants.map(breakGlassRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Emergency access</h3>" +
+      '<button class="w-ic" data-w-act="breakglass" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (s
+        ? '<div class="w-sub w-dead"><h4>' + ms("warning") + "Break glass for " + esc(s.name || s.patientId) + "</h4>" +
+          "<p>Use this only when a patient needs care now and you do not hold access to their chart.</p>" +
+          '<ul class="w-mini"><li>Read only. It gives you no ability to write anything.</li>' +
+          "<li>This patient only.</li>" +
+          "<li>It ends on its own and cannot be extended - a second emergency is a second declaration.</li>" +
+          "<li>Your name, your reason and every time you open the chart are recorded and reviewed.</li></ul>" +
+          '<textarea id="wBgReason" rows="3" placeholder="In your own words: what is the emergency, and why you need this chart now"></textarea>' +
+          '<button class="w-btn" data-w-act="breakglassdeclare">' + ms("warning") + "Break glass</button></div>"
+        : '<p class="w-hint">' + ms("info") + "Open a patient from the ward list to request emergency access to their chart.</p>") +
+      '<div class="w-sub"><h4>Review log</h4>' +
+      (d && d.active ? '<p class="w-hint warn">' + ms("warning") + esc(d.active) + " emergency access grant" + (d.active === 1 ? " is" : "s are") + " active now.</p>" : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No emergency access has been declared.</p>') +
+      "</div></div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -4332,6 +4383,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "breakglass" ? breakGlassView(state)
         : state.view === "wounds" ? woundView(state)
         : state.view === "risks" ? riskView(state)
         : state.view === "medrec" ? medRecView(state)
@@ -5895,6 +5947,37 @@
   /* Opening the workspace loads everything it shows, in parallel, through the routes that already
    * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
    * make the screen look tidy. */
+  function breakGlassOpen() {
+    st.view = "breakglass"; st.breakGlass = null; paint(); loadBreakGlass();
+  }
+  function loadBreakGlass() {
+    st.busy = true; paint();
+    return apiGet("/ward/break-glass-log?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.breakGlass = r;
+        else { st.breakGlass = null; st.err = "Could not load the emergency access log. Do not read this as none declared."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.breakGlass = null; st.err = "Could not load the emergency access log."; paint(); });
+  }
+  function breakGlassDeclare() {
+    var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
+    var reason = val("wBgReason");
+    if (!reason) { st.err = "Break-glass needs a reason in your own words."; paint(); return; }
+    /* Asked twice, because this is recorded against the clinician's name and reviewed. */
+    if (!confirm("Break glass for " + (s.name || s.patientId) + "?\n\nYour name and reason will be recorded and reviewed.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/break-glass", { orgId: st.orgId, patientId: s.patientId, reason: reason })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Emergency access granted. It is read-only and ends on its own." : null)) {
+          var el = document.getElementById("wBgReason"); if (el) el.value = "";
+          loadBreakGlass();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not declare emergency access."; paint(); });
+  }
+
   function woundOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "wounds"; st.wounds = null; paint(); loadWounds();
@@ -6951,6 +7034,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
       if (st.view === "risks") { st.risks = null; st.riskForm = null; st.view = "chart"; paint(); return; }
       if (st.view === "medrec") { st.medRec = null; st.view = "chart"; paint(); return; }
@@ -7201,6 +7285,8 @@
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "breakglass") { breakGlassOpen(); return; }
+    if (cmd === "breakglassdeclare") { breakGlassDeclare(); return; }
     if (cmd === "wounds") { woundOpen(); return; }
     if (cmd === "woundchart") { woundChart(); return; }
     if (cmd === "risks") { riskOpenView(); return; }
@@ -7316,7 +7402,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -7346,6 +7432,7 @@
     st.handovers = null; st.handoverState = "";
     st.medRec = null;
     st.wounds = null; st.risks = null; st.riskForm = null; st.riskTools = null;
+    st.breakGlass = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }
