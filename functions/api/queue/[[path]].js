@@ -143,6 +143,7 @@ import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
+import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
 
 /* One consultation arrives with ONE idempotency key from the screen, but fans out into several
  * writes. Handing the same key to each would make the second piece look like a repeat of the first
@@ -614,6 +615,15 @@ export async function onRequest(context) {
          * a doctor has no business raising a purchase order, and a storekeeper has none prescribing.
          * WHO APPROVES the order is a separate question answered by the approval chain, which will
          * not let whoever raised it also grant it. */
+        /* Recording a death is a doctor's act - it is the clinical statement a certificate rests on,
+         * and emr.treat is the capability that already means "may make clinical decisions about this
+         * patient". Withdrawing one sits at the same bar deliberately: an error serious enough to
+         * need a doctor to make is serious enough to need a doctor to take back. */
+        deceased: CAPS.EMR_TREAT, "deceased-correct": CAPS.EMR_TREAT,
+        /* Contacts are the front desk's work, on the capability that registers a patient. Reading
+         * them is emr.view: a nurse looking for somebody to ring must not need prescribing rights. */
+        "related-person": CAPS.QUEUE_ADD, "related-person-remove": CAPS.QUEUE_ADD,
+        "related-people": CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
@@ -1099,6 +1109,26 @@ export async function onRequest(context) {
        * the advisories below are ORG content and must not become caller-supplied just because the
        * call arrived bundled). consultation.js decides order, does the up-front permission check
        * across all pieces, and reports honestly when a save lands in part. */
+      if (sub === "deceased" && method === "POST") {
+        const r = await recordDeath(request, env, { ...deps, patientId: body.patientId, deceased: body.deceased || body, confirm: body.confirm === true, correct: body.correct === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "deceased-correct" && method === "POST") {
+        const r = await correctDeath(request, env, { ...deps, patientId: body.patientId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "related-person" && method === "POST") {
+        const r = await addRelatedPerson(request, env, { ...deps, patientId: body.patientId, person: body.person || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "related-person-remove" && method === "POST") {
+        const r = await removeRelatedPerson(request, env, { ...deps, relatedPersonId: body.relatedPersonId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "related-people" && method === "GET") {
+        const r = await listRelatedPeople(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "purchase-order" && method === "POST") {
         const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);

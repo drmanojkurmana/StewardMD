@@ -68,6 +68,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function val(id) { var el = document.getElementById(id); return el ? String(el.value || "").trim() : ""; }
+  function checked(id) { var el = document.getElementById(id); return !!(el && el.checked); }
 
   // ---- transport (identical to queue.js; a staff token wins when present) -------------------
   function staffTok() { try { return localStorage.getItem(LS_STAFF) || ""; } catch (e) { return ""; } }
@@ -1273,6 +1274,7 @@
          * than doing the same five things through five separate buttons: one save means one honest
          * answer about what reached the chart. The individual buttons all still work. */
         '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
+        '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
         // patient does before anything else, and it is where the note box now lives.
@@ -3456,6 +3458,82 @@
       "</div>";
   }
 
+  /* WHO TO RING, AND WHETHER THIS PATIENT HAS DIED.
+   *
+   * Both are facts about a person rather than findings about a body, so they share a screen. The
+   * contact list is the one a ward reaches for at the worst moment of a stay, which is why a
+   * patient with nobody recorded is told about loudly here and not left as an empty list.
+   *
+   * Removed contacts stay on the screen, struck through. A number that was quietly deleted last
+   * month is indistinguishable from one that was never there, and the difference matters when
+   * somebody is trying to work out who was told what. */
+  var RELATIONSHIPS = ["spouse", "parent", "child", "sibling", "grandparent", "grandchild",
+    "guardian", "friend", "neighbour", "carer", "employer", "other"];
+  function personRow(p) {
+    var roles = [p.nextOfKin ? "next of kin" : "", p.guardian ? "guardian" : "", p.emergencyContact ? "emergency contact" : ""]
+      .filter(Boolean).join(", ");
+    return '<li class="w-mini-row' + (p.active ? "" : " w-gone") + '"><div>' +
+      "<b>" + esc(p.name) + "</b> &middot; " + esc(p.relationship) +
+      (p.phone ? ' &middot; <a href="tel:' + esc(p.phone) + '">' + esc(p.phone) + "</a>" : "") +
+      (roles ? ' <span class="w-st due">' + esc(roles) + "</span>" : "") +
+      (p.active ? "" : ' <span class="w-st">removed</span>') +
+      '<div class="w-dt-times">recorded by ' + esc(p.recordedBy) + " &middot; " + when(p.recordedAt) +
+      (p.active ? "" : " &middot; removed by " + esc(p.removedBy || "") + " " + when(p.removedAt) +
+        (p.removedReason ? " &middot; " + esc(p.removedReason) : "")) + "</div>" +
+      (p.note ? "<div>" + esc(p.note) + "</div>" : "") +
+      "</div><div class=\"w-mini-row-act\">" +
+      (p.active ? '<button class="w-btn ghost sm" data-w-act="personremove:' + esc(p.relatedPersonId) + '">' + ms("close") + "Remove</button>" : "") +
+      "</div></li>";
+  }
+  function peopleView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.people;
+    var rows = d && d.people ? d.people.map(personRow).join("") : "";
+    /* The deceased block sits at the TOP, because it changes how everything below it should be
+     * read - and because somebody about to telephone a family needs to know before they dial. */
+    var deceased = "";
+    if (d && d.deceased) {
+      deceased = '<div class="w-sub w-dead"><h4>' + ms("warning") + "This patient is recorded as deceased</h4>" +
+        "<p>Died " + when(d.deceased.at) +
+        (d.deceased.cause ? " &middot; " + esc(d.deceased.cause) : "") +
+        (d.deceased.certifiedBy ? " &middot; certified by " + esc(d.deceased.certifiedBy) : "") + "</p>" +
+        '<div class="w-dt-times">recorded by ' + esc(d.deceased.recordedBy) + " &middot; " + when(d.deceased.recordedAt) + "</div>" +
+        '<p class="w-hint">' + ms("info") + "The chart stays open and readable. Recording what happened after a death is normal work." +
+        "</p><button class=\"w-btn ghost\" data-w-act=\"deathwithdraw\">" + ms("undo") + "This is the wrong patient</button></div>";
+    } else if (d && d.deceasedCorrected) {
+      deceased = '<div class="w-sub"><h4>A death recorded against this patient was withdrawn</h4>' +
+        "<p>" + esc(d.deceasedCorrected.reason) + "</p>" +
+        '<div class="w-dt-times">by ' + esc(d.deceasedCorrected.by) + " &middot; " + when(d.deceasedCorrected.at) + "</div></div>";
+    }
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Contacts and status</h3>" +
+      '<button class="w-ic" data-w-act="people" title="Refresh">' + ms("refresh") + "</button></div>" +
+      deceased +
+      (d && d.warning ? '<p class="w-hint warn">' + ms("warning") + esc(d.warning) + " Nobody can be telephoned about this patient.</p>" : "") +
+      '<div class="w-sub"><h4>Add somebody to contact</h4>' +
+      '<input id="wPerName" placeholder="Their name">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>How they are related</span><select id="wPerRel">' +
+      RELATIONSHIPS.map(function (r) { return '<option value="' + esc(r) + '">' + esc(r) + "</option>"; }).join("") +
+      "</select></label>" +
+      '<label class="w-f"><span>Telephone</span><input id="wPerPhone" inputmode="tel"></label>' +
+      "</div>" +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wPerKin" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Next of kin</span></label>' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wPerGuard" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Guardian</span></label>' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wPerEmg" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Emergency contact</span></label>' +
+      '<p class="w-hint">' + ms("info") + "A next of kin or emergency contact needs a number - this is the name somebody rings." +
+      "</p><button class=\"w-btn\" data-w-act=\"personadd\">" + ms("save") + "Add</button></div>" +
+      (d ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">Nobody recorded yet.</p>') : "") +
+      (d && !d.deceased
+        ? '<div class="w-sub"><h4>Record a death</h4>' +
+          '<p class="w-hint">' + ms("warning") + "This is a clinical statement and it is recorded permanently against this patient. Check you have the right person." +
+          "</p><button class=\"w-btn ghost\" data-w-act=\"deathrecord\">" + ms("report") + "Record that this patient has died</button></div>"
+        : "") +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -3728,6 +3806,7 @@
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
+        : state.view === "people" ? peopleView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
@@ -5268,6 +5347,77 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  function peopleOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "people"; st.people = null; paint(); loadPeople();
+  }
+  function loadPeople() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/related-people?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.people = r; paint(); })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function personAdd() {
+    var s = st.sel; if (!s) return;
+    var name = val("wPerName");
+    if (!name) { st.err = "A contact needs a name."; paint(); return; }
+    var person = {
+      name: name, relationship: val("wPerRel"), phone: val("wPerPhone"),
+      nextOfKin: checked("wPerKin"), guardian: checked("wPerGuard"), emergencyContact: checked("wPerEmg"),
+    };
+    st.busy = true; paint();
+    apiPost("/ward/related-person", { orgId: st.orgId, patientId: s.patientId, person: person })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Recorded." : null)) {
+          ["wPerName", "wPerPhone"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wPerKin", "wPerGuard", "wPerEmg"].forEach(function (id) { var el = document.getElementById(id); if (el) el.checked = false; });
+          loadPeople();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that contact."; paint(); });
+  }
+  function personRemove(id) {
+    var reason = prompt("Why is this contact being removed? (optional)") || "";
+    st.busy = true; paint();
+    apiPost("/ward/related-person-remove", { orgId: st.orgId, relatedPersonId: id, reason: reason || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Removed. It stays on the record." : null)) loadPeople(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not remove that."; paint(); });
+  }
+  /* Recording a death asks twice, on purpose, and the second ask names the patient. A mis-click on
+   * a ward list is exactly how the wrong person gets recorded dead, and the server refuses anything
+   * that does not carry an explicit confirmation - this is the screen half of that. */
+  function deathRecord() {
+    var s = st.sel; if (!s) return;
+    var who = s.name || s.patientId;
+    if (!confirm("Record that " + who + " has died?\n\nThis is recorded permanently against this patient.")) return;
+    var at = prompt("When did they die? Leave blank for now.\n(YYYY-MM-DD HH:MM)") || "";
+    var cause = prompt("Cause, if known (optional)") || "";
+    var certifiedBy = prompt("Certified by (optional)") || "";
+    var iso = "";
+    if (at) {
+      var parsed = new Date(at.replace(" ", "T"));
+      if (isNaN(parsed.getTime())) { st.err = "That date could not be read. Nothing was recorded."; paint(); return; }
+      iso = parsed.toISOString();
+    }
+    st.busy = true; paint();
+    apiPost("/ward/deceased", {
+      orgId: st.orgId, patientId: s.patientId, confirm: true,
+      deceased: { at: iso || undefined, cause: cause || undefined, certifiedBy: certifiedBy || undefined },
+    })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded." : null)) loadPeople(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+  function deathWithdraw() {
+    var s = st.sel; if (!s) return;
+    var reason = prompt("Why is this being withdrawn?") || "";
+    if (!reason) { st.err = "A withdrawal needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/deceased-correct", { orgId: st.orgId, patientId: s.patientId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? r.detail : null)) loadPeople(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw that."; paint(); });
+  }
+
   function consultationOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.consultationResult = null; st.cDraft = null; st.cIcd = undefined;
@@ -6029,6 +6179,7 @@
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
       if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
@@ -6267,6 +6418,11 @@
       paint(); return;
     }
     if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "people") { peopleOpen(); return; }
+    if (cmd === "personadd") { personAdd(); return; }
+    if (cmd === "personremove") { personRemove(arg); return; }
+    if (cmd === "deathrecord") { deathRecord(); return; }
+    if (cmd === "deathwithdraw") { deathWithdraw(); return; }
     if (cmd === "consultation") { consultationOpen(); return; }
     if (cmd === "approvals") { approvalsOpen(); return; }
     if (cmd === "purchasing") { purchasingOpen(); return; }
@@ -6384,6 +6540,7 @@
     /* The half-typed consultation is cleared with everything else: a draft that outlives its
      * patient is how one patient's findings end up in another's chart. */
     st.cDraft = null; st.cIcd = undefined;
+    st.people = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

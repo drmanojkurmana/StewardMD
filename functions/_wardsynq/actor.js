@@ -155,7 +155,11 @@ function grantForCaps(caps) {
      * EMR_TREAT, which carries unrestricted write. */
     // Blackout joined 2026-09-09 (TASK 4.5): blocking a clinician's diary or a resource for a period
     // is the SAME administrative scheduling act as booking or cancelling one, not a clinical decision.
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"];
+    /* RelatedPerson joined 2026-09-13. Recording who to ring is the front desk's work and the same
+     * administrative act as registering the patient - it is not a clinical decision and asking a
+     * doctor to enter a telephone number is how the field stays empty. It grants nothing clinical:
+     * a receptionist still cannot write an observation or a note. */
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,

@@ -276,6 +276,18 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-tl-f.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
 #smdWard .w-tl-f i { font-style: normal; font-size: 11px; opacity: .75; }
 
+/* A contact that was removed. Kept on screen and struck through rather than deleted: a number
+   quietly removed last month is indistinguishable from one that was never there, and the
+   difference matters when somebody is working out who was told what. */
+#smdWard .w-gone { opacity: .55; }
+#smdWard .w-gone b { text-decoration: line-through; }
+
+/* A patient recorded as deceased. One of the few places this app spends real colour, for the same
+   reason a critical result does: it changes how everything below it should be read, and somebody
+   about to telephone a family needs to know before they dial. */
+#smdWard .w-dead { border-left: 4px solid var(--error); background: var(--error-container); padding-left: 10px; }
+#smdWard .w-dead h4 { color: var(--on-error-container); }
+
 /* The result a reader arrived at from the timeline's own button. */
 #smdWard .w-res-on { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 8px; }
 

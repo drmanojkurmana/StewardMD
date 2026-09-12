@@ -72,6 +72,11 @@ const RESOURCE_TYPES = Object.freeze([
    * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
    * for a stock level, so there is no counter to drift away from the events beneath it. */
   "PurchaseOrder", "Vendor",
+  /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
+   * list changes on its own clock and an emergency contact quietly overwritten last month leaves
+   * nobody to call at the moment somebody has to be called. Append-only like everything else:
+   * removing a contact marks it inactive and keeps it. */
+  "RelatedPerson",
   /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */
