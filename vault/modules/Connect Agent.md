@@ -167,3 +167,8 @@ session does not have.
   once); the guided ask uses `guide` mode, which has no overlay.
 - **Inline report lines extract whole.** `<p><b>Study:</b> CT BRAIN</p>` yields "Study: CT BRAIN" (the
   closed transforms cannot strip the label); acceptable for documents, note it when mapping.
+- **Endpoint replay** (2026-09-13): `runtime.readPatientDetails` reads a patient view from its own page with
+  the patient filled in, then from the keyed GET data calls discovery recorded on that view
+  (`endpoints`, e.g. `/Doctor/Home/GetMedicines/?id`), inside the doctor browser session; a view sharing
+  the worklist page is not re-read there. Captured page URLs carry `{id}` (deep-crawl `redactPageUrl`);
+  the server redacts stored/returned paths too (`redactPathValues`).
