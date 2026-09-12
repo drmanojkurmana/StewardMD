@@ -98,7 +98,13 @@ function wardsynqConfig(w) {
   // supplied MRN AS the MRN instead of demoting it to hospitalRef and minting an SMD-... over it.
   // Absent/false is the existing minting behaviour, unchanged - opt-in because minting is the right
   // default for a clinic with no numbering of its own.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn"]) {
+  /* noteWriterRoles joined 2026-09-12: WHICH ROLES MAY WRITE A CLINICAL NOTE, decided by the
+   * hospital rather than by this file. Writing a note needs emr.treat, which is the prescribing
+   * capability, so out of the box only prescribers document - and that is wrong for a great many
+   * real wards, where the nursing note is a core part of the record. Rather than widen emr.treat
+   * (which would also hand out prescribing) the hospital names the roles it trusts to document, in
+   * the Admin Center. Absent means the existing behaviour, unchanged: emr.treat alone. */
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;

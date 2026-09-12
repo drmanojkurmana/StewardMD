@@ -947,6 +947,29 @@ export async function onRequest(context) {
        * list on emr.view alone was the reason they could not - the gap this build closes. It is an
        * alternative authority, never a widening: order.verify grants the narrow record scope in
        * actor.js and nothing more, so this cannot open any other route. */
+      /* WHO MAY DOCUMENT IS THE HOSPITAL'S DECISION, within a boundary it cannot move.
+       *
+       * Writing a note needs emr.treat, which is the PRESCRIBING capability, so out of the box only
+       * prescribers document. On a great many real wards the nursing note is a core part of the
+       * record, and the alternative - handing nurses emr.treat - would hand them prescribing too.
+       * So the hospital names the roles it trusts to document (Admin Center -> noteWriterRoles) and
+       * those roles may write a note and nothing else. The role still has to be a real member of
+       * this hospital with emr.view; this is an alternative authority for ONE act, not a way to
+       * grant a capability, and it cannot reach any other route.
+       *
+       * A hospital that sets nothing keeps today's behaviour exactly. */
+      if (!wAz.ok && sub === "note" && method === "POST") {
+        // The hospital's own config, read HERE rather than reusing wsqCfg: that is built further
+        // down, after authorization, so reading it at this point would silently be undefined and
+        // the setting would appear to do nothing.
+        const noteOrg = await ORG.getOrg(env, wOrgId);
+        const noteCfg = (noteOrg && noteOrg.wardsynq) || null;
+        const allowed = (noteCfg && Array.isArray(noteCfg.noteWriterRoles) ? noteCfg.noteWriterRoles : []).map((r) => String(r || "").trim()).filter(Boolean);
+        if (allowed.length) {
+          const seeChart = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_VIEW);
+          if (seeChart.ok && allowed.indexOf(String(seeChart.role || "")) >= 0) wAz = seeChart;
+        }
+      }
       if (!wAz.ok && sub === "criticals") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_VERIFY);
       /* A specimen's outcome is recorded by whichever side of the journey it happened on: the ward
        * says the attempt failed, the LABORATORY says it arrived. Same alternative-authority shape,
