@@ -66,6 +66,12 @@ const RESOURCE_TYPES = Object.freeze([
    * stays readable forever. Nothing here confers any capability by existing; it is evidence that a
    * decision was made, which formulary.js then reads before it lets a restricted drug through. */
   "Verification",
+  /* A purchase order and the suppliers it is raised against. Commercial records, kept here for the
+   * same reason everything else is: append-only and versioned, so what was ordered, by whom, and
+   * what was approved cannot be edited after the fact. How much has ARRIVED is never stored on the
+   * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
+   * for a stock level, so there is no counter to drift away from the events beneath it. */
+  "PurchaseOrder", "Vendor",
   /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */

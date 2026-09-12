@@ -465,6 +465,9 @@
        * needs the same door. Who may actually grant is decided on the route, and who may not grant
        * their OWN request is decided beneath that, in verification.js. */
       tile({ go: "ward:approvals", icon: "verified", title: "Approvals", sub: "Ask for an approval for a restricted medicine, and grant the ones waiting", need: ["emr.vitals", "emr.treat"] }),
+      /* Purchasing sits behind the pharmacy's own capability, not a clinical one: ordering stock is
+       * the storekeeper's job and has never been the ward's. */
+      tile({ go: "ward:purchasing", icon: "inventory", title: "Purchasing", sub: "Raise a supplier order, get it approved, and book the stock in when it arrives", need: "order.dispense" }),
       tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "emr.view" }),
     ] : [];
     var peopleTiles = [

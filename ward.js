@@ -3196,6 +3196,64 @@
       "</div>";
   }
 
+  /* PURCHASING. The pharmacy's own screen: raise an order, get it approved, book the stock in.
+   *
+   * How much of an order has arrived is never shown from a stored field - the server adds up the
+   * deliveries booked against it every time it is asked, the same way a stock level is a sum of
+   * movements rather than a counter. So a part-delivered order is not a state somebody forgot to
+   * update; it is what the arithmetic says.
+   *
+   * Over-delivery and a delivery in the wrong unit are SHOWN, not hidden: in both cases the boxes
+   * are physically on the shelf, and a screen that quietly dropped them would be a screen whose
+   * numbers nobody could trust. */
+  function poLineRow(l) {
+    return "<li>" + esc(l.item) + " &middot; " +
+      (l.ordered === null ? "quantity unusable" : esc(l.received) + " of " + esc(l.ordered) + " " + esc(l.unit)) +
+      (l.over ? ' <span class="w-st escalate">' + esc(l.over) + " more than ordered</span>" : "") +
+      (l.unusable ? ' <span class="w-st escalate">' + esc(l.unusable) + "</span>" : "") +
+      (l.receivedInOtherUnits ? ' <span class="w-st due">also ' + l.receivedInOtherUnits.map(function (o) { return esc(o.quantity) + " " + esc(o.unit); }).join(", ") + ", not counted here</span>" : "") +
+      "</li>";
+  }
+  function poRow(o) {
+    var label = { "awaiting-approval": "waiting for approval", rejected: "turned down", open: "ordered, nothing in yet",
+      "part-received": "part delivered", received: "all in", cancelled: "cancelled" }[o.state] || o.state;
+    var cls = o.state === "received" ? "" : o.state === "rejected" || o.state === "cancelled" ? "escalate" : "due";
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(cls) + '">' + esc(label) + "</span> " +
+      "<b>" + esc(o.vendor) + "</b>" +
+      '<div class="w-dt-times">raised by ' + esc(o.raisedBy) + " &middot; " + when(o.raisedAt) +
+      " &middot; approvals " + esc(o.approval && o.approval.approvals || 0) + " of " + esc(o.approval && o.approval.required || 1) + "</div>" +
+      '<ul class="w-mini">' + (o.lines || []).map(poLineRow).join("") + "</ul>" +
+      '<div class="w-dt-times">Reference: ' + esc(o.purchaseOrderId) + "</div></div>" +
+      '<div class="w-mini-row-act">' +
+      (o.state === "awaiting-approval"
+        ? '<button class="w-btn ghost sm" data-w-act="poask:' + esc(o.purchaseOrderId) + '">' + ms("send") + "Ask for approval</button>"
+        : "") +
+      (o.state === "open" || o.state === "part-received"
+        ? '<button class="w-btn ghost sm" data-w-act="poreceive:' + esc(o.purchaseOrderId) + '">' + ms("add") + "Book stock in</button>"
+        : "") +
+      "</div></li>";
+  }
+  function purchasingView(state) {
+    var rows = (state.purchaseOrders || []).map(poRow).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Purchasing</h3><button class=\"w-btn ghost\" data-w-act=\"purchasing\">" + ms("refresh") + "Refresh</button></div>" +
+      '<div class="w-sub"><h4>Raise an order</h4>' +
+      '<input id="wPoVendor" placeholder="Supplier">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Item</span><input id="wPoItem"></label>' +
+      '<label class="w-f"><span>How many</span><input id="wPoQty" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Counted in</span><input id="wPoUnit" placeholder="box, strip, vial"></label>' +
+      "</div>" +
+      '<p class="w-hint">' + ms("info") + "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line." +
+      "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + "Raise</button></div>" +
+      (state.purchaseOrders !== null
+        ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No purchase orders.</p>')
+        : "") +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -3466,6 +3524,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "purchasing" ? purchasingView(state)
         : state.view === "approvals" ? approvalsView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
@@ -4915,6 +4974,58 @@
   /* Searching the terminology. The words the clinician typed are the query and nothing else - no
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
+  function purchasingOpen() {
+    st.view = "purchasing"; st.purchaseOrders = null; paint(); loadPurchaseOrders();
+  }
+  function loadPurchaseOrders() {
+    st.busy = true; paint();
+    return apiGet("/ward/purchase-orders?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.purchaseOrders = r.orders || []; paint(); })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function poRaise() {
+    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit");
+    if (!vendor) { st.err = "Say who this is being ordered from."; paint(); return; }
+    if (!item || !qty || !unit) { st.err = "An order line needs the item, how many, and what they are counted in."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [{ item: item, quantity: qty, unit: unit }] })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? r.detail : null)) {
+          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadPurchaseOrders();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not raise that order."; paint(); });
+  }
+  /* Asking for the order's approval uses the SAME chain a restricted medicine uses - there is one
+   * approval mechanism in WardSynQ, not one per feature, which is the entire point of building it
+   * generically rather than bolting a second `approved` flag onto purchase orders. */
+  function poAskApproval(id) {
+    var reason = prompt("Why is this order needed?") || "";
+    if (!reason) { st.err = "Say why it is needed."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/approval-request", { orgId: st.orgId, subjectType: "PurchaseOrder", subjectId: id, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Asked. Somebody else has to approve it." : null)) loadPurchaseOrders(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not ask for approval."; paint(); });
+  }
+  function poReceive(id) {
+    var item = prompt("Which item arrived?") || "";
+    if (!item) return;
+    var qty = prompt("How many?") || "";
+    if (!qty) return;
+    var unit = prompt("Counted in what? (box, strip, vial)") || "";
+    if (!unit) return;
+    st.busy = true; paint();
+    apiPost("/ward/goods-receive", { orgId: st.orgId, purchaseOrderId: id, item: item, quantity: qty, unit: unit })
+      .then(function (r) {
+        // r.detail carries the over-delivery / wrong-unit warning when there is one; it is shown
+        // rather than swallowed, because both mean real stock the record has to account for.
+        if (settle(r, r && r.ok ? (r.detail || "Booked in.") : null)) loadPurchaseOrders();
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not book that in."; paint(); });
+  }
+
   function approvalsOpen() {
     st.view = "approvals"; st.approvals = null; paint(); loadApprovals();
   }
@@ -5685,6 +5796,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
       if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
@@ -5917,6 +6029,10 @@
     if (cmd === "incidents") { incidentsOpen(); return; }
     if (cmd === "consultation") { consultationOpen(); return; }
     if (cmd === "approvals") { approvalsOpen(); return; }
+    if (cmd === "purchasing") { purchasingOpen(); return; }
+    if (cmd === "poraise") { poRaise(); return; }
+    if (cmd === "poask") { poAskApproval(arg); return; }
+    if (cmd === "poreceive") { poReceive(arg); return; }
     if (cmd === "approvalask") { approvalAsk(); return; }
     if (cmd === "approvalyes") { approvalDecide(arg, "approved"); return; }
     if (cmd === "approvalno") { approvalDecide(arg, "rejected"); return; }
@@ -6001,7 +6117,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -6021,6 +6137,7 @@
     st.incidentLog = null; st.incidentHealth = null;
     st.consultationResult = null;
     st.approvals = null;
+    st.purchaseOrders = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

@@ -142,6 +142,7 @@ import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
+import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
 
 /* One consultation arrives with ONE idempotency key from the screen, but fans out into several
  * writes. Handing the same key to each would make the second piece look like a repeat of the first
@@ -608,6 +609,13 @@ export async function onRequest(context) {
          * prescribing decision and the hospital named a consultant as the grantor. The rule that
          * actually protects this is neither of those: verification.js refuses to let the person who
          * asked be the person who grants, whatever capability they hold. */
+        /* Purchasing. Ordering stock and booking it in is the pharmacy's own work, so it sits on
+         * the capability the pharmacy already holds for dispensing rather than on any clinical one -
+         * a doctor has no business raising a purchase order, and a storekeeper has none prescribing.
+         * WHO APPROVES the order is a separate question answered by the approval chain, which will
+         * not let whoever raised it also grant it. */
+        "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
+        "goods-receive": CAPS.ORDER_DISPENSE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
@@ -1091,6 +1099,18 @@ export async function onRequest(context) {
        * the advisories below are ORG content and must not become caller-supplied just because the
        * call arrived bundled). consultation.js decides order, does the up-front permission check
        * across all pieces, and reports honestly when a save lands in part. */
+      if (sub === "purchase-order" && method === "POST") {
+        const r = await raisePurchaseOrder(request, env, { ...deps, vendor: body.vendor, lines: body.lines, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "goods-receive" && method === "POST") {
+        const r = await receiveGoods(request, env, { ...deps, purchaseOrderId: body.purchaseOrderId, item: body.item, quantity: body.quantity, unit: body.unit, line: body.line, batch: body.batch, expiry: body.expiry, location: body.location, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "purchase-orders" && method === "GET") {
+        const r = await listPurchaseOrders(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "approval-request" && method === "POST") {
         const r = await requestVerification(request, env, { ...deps, subjectType: body.subjectType, subjectId: body.subjectId, reason: body.reason, context: body.context, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
