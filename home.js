@@ -4465,7 +4465,7 @@
           // Cloud/KB answers have no image path, so showing it there would be a dead button.
           '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
-          '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
+          '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask a clinical question…"></textarea>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
       '</div>';
@@ -4999,6 +4999,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
+    sheet.classList.add("maik-polished");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
@@ -5173,8 +5174,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).join("");
       body.innerHTML = '<div class="maik-empty">' +
         '<div class="maik-hero"><div class="maik-hero-logo"><div class="maik-hero-glow"></div><img src="' + MK_LOGO() + '" alt="MaiK"></div><div class="maik-kicker">Medical AI Knowledge</div></div>' +
-        '<div class="maik-h1">Ask Maik anything clinical.</div>' +
-        '<div class="maik-sub">Grounded answers from StewardMD&rsquo;s knowledge base &mdash; with sources you can verify.</div>' +
+        '<div class="maik-h1">A little clarity. Ask MaiK.</div>' +
+        '<div class="maik-sub">Explore a clinical question, review a case, or find the right reference.</div>' +
         '<div class="maik-cards">' + cardHTML + '</div></div>';
       var cardEls = body.querySelectorAll(".maik-card");
       if (active) {
@@ -5185,7 +5186,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (cardEls[1]) cardEls[1].addEventListener("click", function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} });
         if (cardEls[2]) cardEls[2].addEventListener("click", function () { close(); setTimeout(function () { try { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else if (typeof toast === "function") toast("Loading…"); } catch (e) {} }, 60); });
       }
-      scroll();
+      body.scrollTop = 0;
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
     function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q) || /\b(mrn|uhid)\b/i.test(q) || /\bpatient\s+[a-z]+\s+(has|with|is|presenting|aged)/i.test(q) || /\bgive (him|her|them|the patient)\b/i.test(q) || /\b\d{1,3}\s*(yo|y\/o|year[- ]?old|yrs?)\b.*\b(patient|give|start|prescribe|dose)\b/i.test(q); }
@@ -7005,7 +7006,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     if (prefill && typeof prefill === "string") { try { qEl.value = prefill; qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; } catch (e) {} }
-    setTimeout(function () { try { qEl.focus(); } catch (e) {} }, 300);
+    setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);
   }
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty
   // Workspaces' point-of-care "Ask MaiK" hand-off). The clinician reviews and sends.
