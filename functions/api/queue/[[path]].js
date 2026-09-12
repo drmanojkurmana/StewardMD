@@ -1907,11 +1907,23 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-deposit" && method === "POST") {
-        const r = await postDeposit(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reference: body.reference, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await postDeposit(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reference: body.reference, at: body.at,
+          /* HOW the money was taken, and what this hospital is set up to take. The methods are ORG
+           * content like the formulary: a caller who could supply them could accept a method the
+           * hospital never configured, against a bank nobody can reconcile. */
+          method: body.method, paymentDetails: body.paymentDetails || body.details || null,
+          paymentMethods: (wsqCfg && wsqCfg.payment) || null,
+          idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-payment" && method === "POST") {
-        const r = await postPayment(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reference: body.reference, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await postPayment(request, env, { ...deps, invoiceId: body.invoiceId, amount: body.amount, reference: body.reference, at: body.at,
+          /* HOW the money was taken, and what this hospital is set up to take. The methods are ORG
+           * content like the formulary: a caller who could supply them could accept a method the
+           * hospital never configured, against a bank nobody can reconcile. */
+          method: body.method, paymentDetails: body.paymentDetails || body.details || null,
+          paymentMethods: (wsqCfg && wsqCfg.payment) || null,
+          idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-refund" && method === "POST") {

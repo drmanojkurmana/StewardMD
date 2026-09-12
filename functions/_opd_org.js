@@ -93,6 +93,14 @@ function wardsynqConfig(w) {
   // requires 6 years, but 90 is what every hospital already runs on, and changing that default
   // silently would shorten or lengthen retention nobody asked to change. A US hospital must set
   // this explicitly.
+  /* payment and approvalLevels joined 2026-09-13, and the second is a FIX, not an addition.
+   * approvalLevels was read by _wardsynq/verification.js and _wardsynq/purchasing.js from the day they
+   * were written - how many distinct people must approve a restricted drug or a purchase order - and
+   * this whitelist silently dropped it, so a hospital that asked for two approvers got one. Found by
+   * a route test for the payment framework, which failed for the same reason: `payment` (which
+   * methods this hospital takes, and which provider processes each) never reached the server either.
+   * Both are hospital-owned for the reason everything else in this list is - only the hospital knows
+   * how it takes money and how many people it wants on an approval. */
   // externalMrn joined 2026-09-11: opt-in for a hospital with its own MR numbering (every US
   // hospital, plenty of Indian ones too) so resolveMrn() (functions/_opd_patient.js) accepts a
   // supplied MRN AS the MRN instead of demoting it to hospitalRef and minting an SMD-... over it.
@@ -104,7 +112,7 @@ function wardsynqConfig(w) {
    * real wards, where the nursing note is a core part of the record. Rather than widen emr.treat
    * (which would also hand out prescribing) the hospital names the roles it trusts to document, in
    * the Admin Center. Absent means the existing behaviour, unchanged: emr.treat alone. */
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn"]) {
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
