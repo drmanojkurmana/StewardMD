@@ -29,6 +29,13 @@ const REJECT_BTN = `document.evaluate("//button[text()='Reject']", document, nul
 
 const VERSION = {
   ok: true, id: "ver-1", state: "AWAITING_APPROVAL", deploymentId: "dep-1",
+  requestedBy: "dr.rao@hospital.example", requestedAt: "2026-09-12T11:30:00.000Z",
+  pagesObserved: 49,
+  validation: { ok: true, issues: [] },
+  views: [
+    { resource: "worklist", path: "/Doctor/Home", columns: ["Patient ID", "Patient name", "Age"], guided: false },
+    { resource: "medications", path: "/Doctor/Treatment", columns: ["Drug", "Dose", "Route"], guided: true },
+  ],
   operations: [
     { opId: "list_worklist", type: "list_worklist", resource: "worklist", method: "GET", pathTemplate: "/Doctor/Home" },
     { opId: "list_medications", type: "list_medications", resource: "medications", method: "GET", pathTemplate: "/Doctor/Home" },
@@ -74,6 +81,20 @@ try {
     "it says what the connection would be able to read, in clinical words");
   ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("cannot order, prescribe or change") >= 0;`) === true,
     "it states the connection is read-only");
+  // An owner cannot judge a request they know nothing about: who asked, what was checked, how much
+  // was read, and what it found have to be on the card next to the two buttons.
+  ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("dr.rao@hospital.example") >= 0;`) === true,
+    "it names the doctor who requested the connection");
+  ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("Checks passed") >= 0;`) === true,
+    "it reports the safety checks");
+  ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("49") >= 0;`) === true,
+    "it says how many pages the agent read");
+  ok(await ev(`return !!document.querySelector("#agentPending details");`) === true,
+    "what it found is available screen by screen");
+  ok(await ev(`var d=document.querySelector("#agentPending details"); d.open=true; return d.innerText.indexOf("Drug")>=0 && d.innerText.indexOf("/Doctor/Treatment")>=0;`) === true,
+    "each screen shows its path and the columns the agent saw, never patient data");
+  ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("shown by the doctor") >= 0;`) === true,
+    "a screen the doctor had to point out is marked as such");
   ok(await waitFor(`return !!(${APPROVE_BTN});`, 4000), "an Approve button is offered");
   ok(await ev(`return !!(${REJECT_BTN});`) === true, "a Reject button is offered");
 

@@ -843,9 +843,25 @@ export async function onRequest(context) {
 
       // observedViews are kept on the job (PHI-free structure: selectors, labels, redacted endpoints and
       // the doctor's guided tap paths) as the replay pattern for the phone-side runtime.
+      /* WHO ASKED FOR THIS CONNECTION, kept with the candidate it produced.
+       *
+       * The approval screen named the hospital and nothing else, which is the one fact the owner
+       * already knows: they are looking at their own hospital's queue. What they cannot see is WHICH
+       * doctor signed in and ran the agent, and that is the whole basis for trusting the request
+       * (owner, 2026-09-12). The email is the VERIFIED one from identify(), never a body value, and
+       * it names a colleague rather than a patient: no PHI. Session rows keep only a pseudonymous
+       * actor id, so this is where the human-readable fact can live without a schema change. */
+      let requestedBy = null;
+      try {
+        const who = await deps.identifyFn(request, env);
+        requestedBy = who && who.email ? String(who.email).toLowerCase() : null;
+      } catch { /* identity is already proven by requireAgent above; this is only the label */ }
+
       const phoneState = {
         manifest, probes,
         offlineValidation,
+        requestedBy,
+        requestedAt: nowIso(),
         observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
         observedViews,
       };
@@ -968,10 +984,28 @@ export async function onRequest(context) {
           method: op.method, pathTemplate: op.pathTemplate,
         }));
       }
+      /* WHAT THE OWNER NEEDS TO JUDGE THIS, not just accept or reject it blind.
+       *
+       * The detail carried the operations and a hash. An owner asked, reasonably, how they were
+       * meant to decide: who requested it, what the agent actually saw, and whether it will work
+       * (2026-09-12). All of it already exists on the job; none of it is PHI - view labels, column
+       * headers, paths and probe outcomes, never a patient's data. */
+      const validation = phoneState && phoneState.offlineValidation ? phoneState.offlineValidation : null;
+      const views = (phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews : []).map((v) => ({
+        resource: v.resourceHint || "unknown",
+        path: v.pathTemplate || null,
+        columns: Array.isArray(v.headers) ? v.headers.slice(0, 12) : [],
+        guided: !!v.guided,
+      }));
       return jsonResponse({
         ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,
         operations, capabilities: safeJsonParse(version.capabilities) || [],
         evidenceHash: version.evidence_hash || null, createdAt: version.created_at,
+        requestedBy: (phoneState && phoneState.requestedBy) || null,
+        requestedAt: (phoneState && phoneState.requestedAt) || null,
+        pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
+        views,
+        validation: validation ? { ok: validation.ok !== false, issues: (validation.issues || []).slice(0, 10) } : null,
       });
     }
 
