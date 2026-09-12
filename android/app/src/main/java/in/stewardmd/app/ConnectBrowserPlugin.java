@@ -75,6 +75,9 @@ public class ConnectBrowserPlugin extends Plugin {
     private View touchBlockerView;
 
     private String mode = "login";
+    // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
+    private boolean sawPasswordField = false;
+    private boolean autoLoginNotified = false;
     private Set<String> allowedOrigins = Collections.emptySet();
     private String hostTitle = "";
     private String pendingLateInitScript; // non-null only when DOCUMENT_START_SCRIPT is unsupported
@@ -137,6 +140,8 @@ public class ConnectBrowserPlugin extends Plugin {
                 teardown(false);
                 allowedOrigins = new HashSet<>(origins);
                 mode = "login";
+                sawPasswordField = false;
+                autoLoginNotified = false;
                 hostTitle = title != null ? title : hostOf(urlStr);
                 synchronized (requestLog) {
                     requestLog.clear();
@@ -468,7 +473,14 @@ public class ConnectBrowserPlugin extends Plugin {
 
         doneButton = new Button(activity);
         doneButton.setText("Done, I'm signed in");
-        flattenButton(doneButton);
+        /* THIS BUTTON WAS INVISIBLE. The dialog uses Theme_Black, whose default button text is WHITE,
+         * and the header is white: Cancel and Done were white-on-white. A doctor who signed in saw a
+         * blank strip, tapped nothing, and the agent looked dead. Both buttons now state their own
+         * colours; Done is filled so it reads as the action. Sign-in is also detected automatically
+         * (see maybeAutoLoggedIn) so the tap is a fallback, not the only way forward. */
+        doneButton.setAllCaps(false);
+        doneButton.setTextColor(Color.WHITE);
+        doneButton.setBackgroundColor(Color.parseColor("#0E7C66"));
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -571,6 +583,8 @@ public class ConnectBrowserPlugin extends Plugin {
     private static void flattenButton(Button b) {
         b.setBackgroundColor(Color.TRANSPARENT);
         b.setAllCaps(false);
+        // Theme_Black's default text is white and this header is white: state the colour explicitly.
+        b.setTextColor(Color.parseColor("#14202B"));
     }
 
     private static int dp(Context c, int v) {
@@ -613,7 +627,47 @@ public class ConnectBrowserPlugin extends Plugin {
                 data.put("mainFrame", true);
                 notifyListeners("navigated", data);
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                maybeAutoLoggedIn(view, url);
+            }
         };
+    }
+
+    /* SIGN-IN DETECTED WITHOUT A TAP.
+     *
+     * The flow used to wait for the doctor to press "Done, I'm signed in". That button was invisible
+     * (white on white), so a doctor who had signed in watched an agent that appeared to do nothing.
+     * Even with the colours fixed, asking a human to announce something the page already shows is a
+     * step worth removing.
+     *
+     * The signal is the password field itself: a login page has one, the screen after sign-in does
+     * not. Once this browser has seen a password field and a later page has none, sign-in happened.
+     * Fires at most once per session, only in login mode, and the Done button still works for the
+     * EMR that keeps a password field on every page. No credential is read - only whether such a
+     * field EXISTS. */
+    private void maybeAutoLoggedIn(final WebView view, final String url) {
+        if (autoLoginNotified || !"login".equals(mode) || view == null) return;
+        try {
+            view.evaluateJavascript(
+                "(function(){try{return document.querySelector('input[type=\"password\"]')?'1':'0'}catch(e){return 'e'}})()",
+                new android.webkit.ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        boolean hasPassword = value != null && value.contains("1");
+                        if (hasPassword) { sawPasswordField = true; return; }
+                        if (value == null || value.contains("e")) return;   // could not tell: say nothing
+                        if (!sawPasswordField || autoLoginNotified) return;
+                        autoLoginNotified = true;
+                        JSObject data = new JSObject();
+                        data.put("url", url == null ? "" : url);
+                        data.put("auto", true);
+                        notifyListeners("loggedIn", data);
+                    }
+                });
+        } catch (Exception ignored) {}
     }
 
     // Returns true to BLOCK the navigation (shouldOverrideUrlLoading semantics: true = we handled it, don't load).
