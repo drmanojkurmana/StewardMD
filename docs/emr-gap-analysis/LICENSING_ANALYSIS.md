@@ -15,11 +15,33 @@ source stays available. Verify per-module before committing — OpenMRS is umbre
 few modules may carry different terms.
 
 ## Bahmni
-This is the one to be careful with. Historically, core Bahmni repositories (including pieces of
-`bahmnicore` and the clinical frontend) have shipped under **AGPL v3**. AGPL's defining, unusual term
-is **network-use copyleft**: unlike GPL, merely running a modified AGPL program as a network service
-(SaaS) — without ever "distributing" it in the traditional sense — still triggers the obligation to
-offer your modified source to every user who interacts with it over the network.
+
+**Verified directly against the LICENSE file in each cloned repo** (not GitHub's license-detection
+API, which reports some of these repos incorrectly as unlicensed):
+
+| Repo | Confirmed license |
+|---|---|
+| `bahmni-core` (the backend module, formerly bahmnicore) | **AGPL-3.0** |
+| `openmrs-module-bedmanagement` | **AGPL-3.0** |
+| `bahmnicommons` | **AGPL-3.0** |
+| `openmrs-module-bahmni.ie.apps` (forms 2.0 backend) | **AGPL-3.0** |
+| `openmrs-module-bahmnievents`, `insurance-integration`, `bahmni-reports`, `openmrs-distro-bahmni`, `form-controls`, `appointments-frontend`, `bahmni-carbon-ui`, `crater`, `bahmni-infra` | **AGPL-3.0** |
+| `bahmniapps` (classic AngularJS frontend) | MPL-2.0 |
+| `bahmni-apps-frontend` (new React 19 rewrite) | MPL-2.0 |
+| `openmrs-module-ipd`, `medicationadministration`, `appointments`, `pacs-integration` | MPL-2.0 |
+| `bahmni-odoo-modules` | MPL-2.0 at root, but individual addons declare LGPL-3 in their own manifest — mixed, check per addon |
+| `default-config` (the clinical config/pattern layer) | **MIT** — freely reusable |
+
+**The finding that matters: this inverts the technical instinct exactly backwards.** The Bahmni code
+most worth reusing headlessly — `bahmni-core` and `bedmanagement`, the actual backend domain logic —
+is AGPL. The mostly-frontend pieces are the more permissive MPL. And the one piece that's completely
+free to use (MIT) is `default-config` — not code at all, but the pattern/idea layer, which is exactly
+what `REUSE_VS_REBUILD.md` already recommends taking.
+
+AGPL's defining, unusual term is **network-use copyleft**: unlike GPL, merely running a modified AGPL
+program as a network service (SaaS) — without ever "distributing" it in the traditional sense — still
+triggers the obligation to offer your modified source to every user who interacts with it over the
+network.
 
 Practical consequence for each architecture option:
 - **Option B (fork Bahmni, replace the frontend)**: if any AGPL-licensed Bahmni backend code ships
@@ -40,13 +62,15 @@ Practical consequence for each architecture option:
   event at all. This is exactly the "reuse the idea, not the code" recommendation made throughout
   `REUSE_VS_REBUILD.md`.
 
-**Action item before any final architecture decision**: have this confirmed by counsel against the
-CURRENT, exact license file in whichever specific Bahmni repos would be touched — license terms can
-vary by repo and have changed over Bahmni's history, and this analysis should be treated as a strong
-default assumption (AGPL is well-documented as Bahmni's historical primary license) rather than a
-verified-today legal fact for every single repository. The pending research-agent pass (see
-`OPENMRS_BAHMNI_AUDIT.md`) is checking each cloned repo's actual `LICENSE` file, not just OpenMRS's
-general reputation for the platform license.
+**Confirmed** (not assumed) by directly reading the LICENSE file in each cloned repo — see the table
+above and `OPENMRS_BAHMNI_AUDIT.md`. One genuine open question the source audit correctly flagged
+rather than guessing at: whether AGPL's copyleft reaches a REST/HTTP client calling `bahmni-core`
+as an external service, versus an `.omod` running inside the same JVM and calling its Java services
+directly — the latter is a far stronger "derivative work" argument than the former. **This is a
+lawyer question, to be answered before design, not after** — the practical recommendation in this
+document (call nothing AGPL-licensed as a live network service; treat bahmnicore/bedmanagement as
+read-only engineering reference only) is the conservative default that avoids needing the answer at
+all, not a claim that the answer is definitely "yes, a REST client is safe."
 
 ## Bottom line
 - Option A (build everything native) and Option D (extract ideas/specs, reimplement natively): no

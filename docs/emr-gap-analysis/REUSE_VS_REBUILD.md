@@ -76,6 +76,24 @@ Format: Feature → OpenMRS → Bahmni → WardSynQ status → recommendation �
   `NullAdapter` default) as the actual remaining gap — that's an integration task (Razorpay/PayU/UPI),
   not a reuse-from-OpenMRS-or-Bahmni task, since neither has one either.
 
+## The composite clinical write (verified: `BahmniEncounterTransaction`)
+- OpenMRS: no equivalent — a plain Encounter/Obs CRUD API.
+- Bahmni: `bahmni-emr-api/…/encountertransaction/contract/BahmniEncounterTransaction.java` — every
+  clinical write in a consultation (obs, diagnoses, drug orders, disposition) is ONE composite POST,
+  fanned out through pluggable command handlers. Confirmed via source read, MPL-licensed
+  (`bahmni-emr-api` ships under `bahmni-core`'s MPL/AGPL split — verify the specific file, but the
+  PATTERN itself is what's being recommended, not the code).
+- WardSynQ: ward.js's chart currently issues several independent API calls per screen action
+  (problems, criticals, timeline load separately; medication order, investigation order, vitals each
+  their own POST) — this session found and partially fixed the resulting "shared error slot" race
+  this pattern produces (see BUGS.md's cashier/blood-bank findings).
+- **Recommendation: REBUILD NATIVE, copying the PATTERN.** A single composite "save this
+  consultation" endpoint, still built from WardSynQ's own FHIR-shaped resources and going through
+  the same two-layer permission grant, would remove an entire class of bug this session kept finding
+  by hand. This is the single most concrete, actionable idea worth taking from Bahmni.
+- Complexity: medium (a real API/UI change, not additive). Risk: medium — touches a lot of existing
+  call sites in ward.js.
+
 ## Clinical form building
 - OpenMRS: form module (older, XML-based).
 - Bahmni: config-driven JSON forms — a genuinely good pattern, actively used across many real
