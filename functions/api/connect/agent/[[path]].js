@@ -42,6 +42,7 @@ import {
   getVersion,
   insertVersion,
   casVersionLifecycle,
+  listVersionsByLifecycle,
   findVersionByLifecycle,
   insertSession,
   getSessionRow,
@@ -72,6 +73,43 @@ import {
 import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
+
+/* A manifest id the manifest schema will actually accept: lower-case [a-z0-9._-], 64 characters at
+ * most (MANIFEST_ID_RE, connect-agent/manifest/schema.mjs). The ids here are `dep_<uuid>` and
+ * `job_<uuid>`, so prefixes and dashes are dropped and the first 12 hex characters of each are kept:
+ * 34 characters, unique per deployment and job, and both are still readable to a reviewer. */
+/* HOW MANY CANDIDATES ONE HOSPITAL MAY HOLD AT ONCE.
+ *
+ * Re-running discovery is normal: a doctor signs in again, shows the agent a view it missed, and a
+ * fresh candidate appears. Only one of them can ever become the connection, so the rest are noise -
+ * and left alone they accumulate as decisions nobody will be asked to make. Owner rule (2026-09-12):
+ * keep the three newest, discard the rest, and when one is approved discard every other candidate
+ * for that deployment. Three is enough to compare a retry against what came before; more is a
+ * queue of stale drafts. Discarded means REVOKED: nothing is deleted and the audit trail stands. */
+export const CANDIDATE_LIMIT = 3;
+
+/** Revoke every AWAITING_APPROVAL candidate of a deployment except the ones named in `keepIds`. */
+async function discardOtherCandidates(db, tenantId, deploymentId, keepIds, reason) {
+  const keep = new Set((keepIds || []).filter(Boolean));
+  const all = await listVersionsByLifecycle(db, tenantId, deploymentId, "AWAITING_APPROVAL");
+  const discarded = [];
+  for (const v of all) {
+    if (keep.has(v.id)) continue;
+    try {
+      await casVersionLifecycle(db, tenantId, v.id, "AWAITING_APPROVAL", {
+        lifecycle: "REVOKED",
+        policy_version: "discarded:" + String(reason || "superseded").slice(0, 100),
+      });
+      discarded.push(v.id);
+    } catch { /* a candidate someone else just decided on: leave it as they left it */ }
+  }
+  return discarded;
+}
+
+export function manifestIdFor(deploymentId, jobId) {
+  const short = (id) => String(id || "").toLowerCase().replace(/^(dep|job)_/, "").replace(/[^a-z0-9]/g, "").slice(0, 12) || "unknown";
+  return `manifest-${short(deploymentId)}-${short(jobId)}`;
+}
 
 const STATUS = (e) =>
   e instanceof OnboardError
@@ -313,7 +351,14 @@ export async function onRequest(context) {
   };
 
   try {
-    if (!tid && seg !== "hospitals/resolve") await resolveTid();
+    if (!tid && seg !== "hospitals/resolve" && seg !== "tenants") await resolveTid();
+    // GET /tenants -- the hospitals this account may onboard for. The client asks the doctor to pick
+    // one when there are several (an owner or super-admin belongs to many), instead of the 400
+    // "tenantId required" that resolveTid() answers for every other route.
+    if (method === "GET" && seg === "tenants") {
+      const mine = (await listMyTenants(deps, request, env)).filter((t) => canAgent(t.role, "read"));
+      return jsonResponse({ ok: true, tenants: mine.map((t) => ({ tenantId: t.tenantId, name: t.name || null, role: t.role })) });
+    }
     // POST /sessions -- validate actor/tenant via identify()+RBAC, consent, create job/session
     if (method === "POST" && seg === "sessions") {
       if (!browserSessionFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
@@ -714,12 +759,20 @@ export async function onRequest(context) {
       let manifest;
       try {
         const compiled = await compileManifest(spec, {
-          manifestId: `manifest-${deployment.id}-${job.id}`,
+          /* THE ID THAT FAILED EVERY REAL HOSPITAL. `manifest-<deployment>-<job>` with two prefixed
+           * UUIDs is 90 characters; MANIFEST_ID_RE caps a manifestId at 64, so validateManifest
+           * rejected it and compileManifest threw for EVERY discovery that ever reached this line.
+           * The fixtures passed because their ids are short ("dep-1", "job-1"). A doctor's crawl of
+           * 21 pages died here with "spec could not be compiled" (device, 2026-09-12). Twelve hex
+           * characters of each id keep it unique and readable inside the cap. */
+          manifestId: manifestIdFor(deployment.id, job.id),
           timezone: (env && env.CONNECT_AGENT_MANIFEST_TIMEZONE) || "Asia/Kolkata",
         });
         manifest = compiled.manifest;
       } catch (e) {
-        throw new OnboardError("invalid", "spec could not be compiled");
+        // Keep the compiler's own reason: without it a failed compile is indistinguishable from a
+        // network error, and the crawl that produced the spec is thrown away with nothing to fix.
+        throw new OnboardError("invalid", "spec could not be compiled: " + String((e && e.message) || e).slice(0, 200));
       }
 
       // HTML-operation inference: merge crawler-observed views into the compiled manifest so a phone that
@@ -790,9 +843,25 @@ export async function onRequest(context) {
 
       // observedViews are kept on the job (PHI-free structure: selectors, labels, redacted endpoints and
       // the doctor's guided tap paths) as the replay pattern for the phone-side runtime.
+      /* WHO ASKED FOR THIS CONNECTION, kept with the candidate it produced.
+       *
+       * The approval screen named the hospital and nothing else, which is the one fact the owner
+       * already knows: they are looking at their own hospital's queue. What they cannot see is WHICH
+       * doctor signed in and ran the agent, and that is the whole basis for trusting the request
+       * (owner, 2026-09-12). The email is the VERIFIED one from identify(), never a body value, and
+       * it names a colleague rather than a patient: no PHI. Session rows keep only a pseudonymous
+       * actor id, so this is where the human-readable fact can live without a schema change. */
+      let requestedBy = null;
+      try {
+        const who = await deps.identifyFn(request, env);
+        requestedBy = who && who.email ? String(who.email).toLowerCase() : null;
+      } catch { /* identity is already proven by requireAgent above; this is only the label */ }
+
       const phoneState = {
         manifest, probes,
         offlineValidation,
+        requestedBy,
+        requestedAt: nowIso(),
         observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
         observedViews,
       };
@@ -877,6 +946,15 @@ export async function onRequest(context) {
         version = await casVersionLifecycle(deps.db, tid, version.id, "CREATED", { lifecycle: "VALIDATING" });
         assertTransition("adapter", "VALIDATING", "AWAITING_APPROVAL");
         version = await casVersionLifecycle(deps.db, tid, version.id, "VALIDATING", { lifecycle: "AWAITING_APPROVAL" });
+        /* A retry ADDS a candidate rather than replacing one, so hold the newest CANDIDATE_LIMIT and
+         * discard anything older: an owner should never face a queue of stale drafts of the same
+         * connection. The candidate just built is always among those kept. */
+        const holding = await listVersionsByLifecycle(deps.db, tid, version.deployment_id, "AWAITING_APPROVAL");
+        if (holding.length > CANDIDATE_LIMIT) {
+          const keep = holding.slice(0, CANDIDATE_LIMIT).map((v) => v.id);
+          if (keep.indexOf(version.id) < 0) { keep.pop(); keep.push(version.id); }
+          await discardOtherCandidates(deps.db, tid, version.deployment_id, keep, "older than the newest " + CANDIDATE_LIMIT);
+        }
         versionState = version.lifecycle;
       } else {
         const version = await getVersion(deps.db, tid, candidateVersionId);
@@ -906,10 +984,28 @@ export async function onRequest(context) {
           method: op.method, pathTemplate: op.pathTemplate,
         }));
       }
+      /* WHAT THE OWNER NEEDS TO JUDGE THIS, not just accept or reject it blind.
+       *
+       * The detail carried the operations and a hash. An owner asked, reasonably, how they were
+       * meant to decide: who requested it, what the agent actually saw, and whether it will work
+       * (2026-09-12). All of it already exists on the job; none of it is PHI - view labels, column
+       * headers, paths and probe outcomes, never a patient's data. */
+      const validation = phoneState && phoneState.offlineValidation ? phoneState.offlineValidation : null;
+      const views = (phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews : []).map((v) => ({
+        resource: v.resourceHint || "unknown",
+        path: v.pathTemplate || null,
+        columns: Array.isArray(v.headers) ? v.headers.slice(0, 12) : [],
+        guided: !!v.guided,
+      }));
       return jsonResponse({
         ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,
         operations, capabilities: safeJsonParse(version.capabilities) || [],
         evidenceHash: version.evidence_hash || null, createdAt: version.created_at,
+        requestedBy: (phoneState && phoneState.requestedBy) || null,
+        requestedAt: (phoneState && phoneState.requestedAt) || null,
+        pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
+        views,
+        validation: validation ? { ok: validation.ok !== false, issues: (validation.issues || []).slice(0, 10) } : null,
       });
     }
 
@@ -933,7 +1029,10 @@ export async function onRequest(context) {
         assertTransition("job", job.state, "ACTIVE");
         await casJob(deps.db, tid, job.id, job.revision, { state: "ACTIVE", completed_at: nowIso() });
       }
-      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id });
+      // One candidate wins; the others are drafts of the same connection and must not stay in the
+      // owner's queue pretending to be decisions (CANDIDATE_LIMIT).
+      const discarded = await discardOtherCandidates(deps.db, tid, version.deployment_id, [versionId], "approved:" + versionId);
+      return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id, discarded: discarded.length });
     }
 
     // POST /versions/:id/reject -- owner/admin only; revokes the candidate
@@ -1075,6 +1174,12 @@ export async function onRequest(context) {
 
     return jsonResponse({ error: "not_found" }, { status: 404 });
   } catch (e) {
-    return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });
+    /* The CODE alone is not enough to act on: a doctor whose crawl walked 21 pages was told
+     * {"error":"invalid"} and nothing else. An OnboardError's message is authored here, is a
+     * sentence rather than a stack, and carries no PHI, so it travels as `detail`. Any OTHER
+     * exception keeps the bare code, since its message is not ours to promise. */
+    const body = { error: CODE(e) };
+    if (e instanceof OnboardError && e.message) body.detail = String(e.message).slice(0, 300);
+    return jsonResponse(body, { status: STATUS(e) });
   }
 }

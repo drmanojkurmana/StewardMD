@@ -25,7 +25,7 @@
  */
 
 import { Encounter, MedicationOrder } from "../../wardsynq/wardsynq-model.js";
-import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
+import { GovernanceError, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
@@ -306,9 +306,17 @@ async function claimBed(svc, candidate) {
   const claimId = bedClaimIdFor(ward, bed);
   const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
   const version = latest ? latest.version + 1 : 1;
+  const at = new Date().toISOString();
   await svc.repository.append(svc.tenantId, [{
     resourceType: BED_CLAIM_TYPE, id: claimId, version,
-    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: new Date().toISOString(),
+    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: at,
+    /* This write goes straight to the repository, bypassing the governed store's put()/putMany()
+     * (which stamps writtenBy itself - see wardsynq-actors.js) because a bed claim isn't a clinical
+     * entity subject to authoriseWrite; it's this reconciler's own bookkeeping. Skipping that layer
+     * meant skipping its stamp too, so every bed-claim row in Audit and security showed a blank
+     * WHEN forever - not a missing fact, a fact this file never wrote down. KIND.SERVICE ("internal
+     * machinery such as the escalation monitor") is exactly what this is. */
+    writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
   }], {});
 }
 
@@ -727,7 +735,22 @@ async function bedBoard(request, env, ctx) {
 
   let encounters;
   try { encounters = await svc.list("Encounter", 200); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] }; }
+  catch (e) {
+    /* A REFUSAL IS NOT A SERVER FAULT, and calling it one made this screen unreadable.
+     *
+     * Every exception here became a 502 "record_read_failed". When the exception is the record
+     * refusing the read - a pharmacist, whose grant deliberately excludes Encounter - the caller
+     * got a 502, and Cloudflare replaces a 5xx from a Function with its own HTML error page. So the
+     * browser received a page of HTML where it expected JSON, could not parse it, and the bed board
+     * reported "unavailable": the product telling a pharmacist it was broken when it was working
+     * exactly as designed. specimen.js already separates these two; this did not.
+     *
+     * A genuine read failure is still a 502 and still says so. */
+    if (e instanceof GovernanceError) {
+      return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), wards: [] };
+    }
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] };
+  }
 
   const want = str(ctx.ward).toLowerCase();
   const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
@@ -839,13 +862,38 @@ const OBSERVATION_NAME = Object.freeze(Object.fromEntries(
   Object.values(VITAL_CODES).filter((v) => v && v.code).map((v) => [v.code, v.display]),
 ));
 
+/* A PERSON'S NAME, NOT THE ID THE SYSTEM FILES THEM UNDER.
+ *
+ * An actor id is whatever the door minted: a staff sign-in is an email address, an account sign-in
+ * is "fb:" and a long opaque string. Printed raw on a timeline, the second one says "ordered by
+ * fb:DcGIzIXwxURU0G9L4J5jehluENl1", which answers the question "who ordered this?" with something
+ * no human can read - and the whole point of carrying the requester is that a person can be asked.
+ *
+ * This is a rendering, not a resolution: the underlying id is unchanged on the record and remains
+ * the thing an audit follows. An account id that cannot be turned into words is NOT dressed up as a
+ * name - it renders as "a clinician account", because inventing a person here would be worse than
+ * admitting the display cannot say which one. */
+function personName(actorId) {
+  const id = str(actorId);
+  if (!id) return "";
+  const at = id.indexOf("@");
+  if (at > 0) return id.slice(0, at);          // a staff sign-in: "dr.01@hospital" -> "dr.01"
+  if (id.indexOf("fb:") === 0) return "a clinician account";
+  return id;
+}
+
 const TIMELINE_LABEL = {
   Encounter: (r) => `${r.class || "Encounter"} ${r.status || ""}${r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : ""}`.trim(),
   Condition: (r) => `Problem: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
   Observation: (r) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
   MedicationOrder: (r) => `Prescribed ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
   MedicationAdministration: (r) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}`,
-  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,
+  /* WHO ASKED FOR IT travels with the order. The timeline said what was ordered and when but never
+   * by whom, and "who ordered this chest film, and when" is the first question asked about an
+   * investigation nobody can account for. requesterId is the AUTHENTICATED ordering clinician
+   * (migrate-inv-order.js: "never a name typed anywhere"), so this is the session's own record and
+   * not a free-text claim. An order carrying no requester says nothing rather than guessing. */
+  ServiceRequest: (r) => `Ordered ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}${personName(r.requesterId) ? ` · ordered by ${personName(r.requesterId)}` : ""}`,
   DiagnosticReport: (r) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}`,
   CarePlan: (r) => `Care plan — ${r.status || "draft"}`,
   ClinicalNote: (r) => `${r.noteType || "progress"} note${r.signedBy ? " signed" : r.aiDrafted ? " (AI-drafted, unsigned)" : " drafted"}`,

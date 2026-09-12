@@ -58,14 +58,21 @@
   }
 
   /* Transport seam. fn(path, opts) must return a Promise of {s, d}. */
+  /* The caller's Firebase id token, exactly as connect-source.js sends it; the SERVER derives identity.
+   * Without it every call was a 401 and the sheet only ever said "Could not load your connections". */
+  function idToken() {
+    try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); }
+    catch (e) { return Promise.resolve(null); }
+  }
   var apiImpl = function (path, opts) {
     var method = (opts && opts.method) || "GET";
     var body = (opts && opts.body) ? opts.body : null;
-    return fetch(AGENT_BASE + path, {
-      method: method,
-      headers: { "content-type": "application/json" },
-      body: body,
-      cache: "no-store"
+    // The chosen hospital rides on every call as ?tenant= (the server reads it for GET and POST alike).
+    var q = (S && S.tenant) ? (path.indexOf("?") >= 0 ? "&" : "?") + "tenant=" + encodeURIComponent(S.tenant) : "";
+    return idToken().then(function (t) {
+      var h = { "content-type": "application/json" };
+      if (t) h.Authorization = "Bearer " + t;
+      return fetch(AGENT_BASE + path + q, { method: method, headers: h, body: body, cache: "no-store" });
     }).then(function (r) {
       return r.text().then(function (t) {
         var d = null;
@@ -151,6 +158,13 @@
       ".smd-connect-stages li.ok .smd-connect-dot{background:var(--green,#1c7a4a)}",
       ".smd-connect-note{font-size:0.6875rem;line-height:1.5;letter-spacing:0;color:var(--slate-soft,#5a7184);margin-top:0.625rem}",
       ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
+      // The progress bar: a filled track that animates its width, so a run that is moving looks
+      // like it is moving. prefers-reduced-motion drops the animation, never the bar.
+      ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",
+      ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:#0E7C66;width:2%;transition:width .5s ease}",
+      "@media (prefers-reduced-motion: reduce){.smd-connect-prog>i{transition:none}}",
+      "#smd-connect-activity{flex:1;min-width:0}",
+      "#smd-connect-eta{white-space:nowrap;margin-left:10px;font-weight:600}",
       ".smd-connect-ov[data-motion=\"fade\"] .smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-sheet{transition:opacity 160ms ease;transform:none!important}.smd-connect-btn:active,.smd-connect-hosp:active,.smd-connect-x:active{transform:none}}",
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
@@ -430,6 +444,7 @@
 
   function finishClose() {
     stopPoll();
+    stopProgressTicker();
     removePluginListeners();
     var plugin = getPlugin();
     if (S && (S.screen === "login" || S.screen === "progress" || S.screen === "origins") && plugin && plugin.close) {
@@ -526,6 +541,40 @@
       '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span></div>';
   }
 
+  var TENANT_KEY = "smd_connect_agent_tenant";
+  function storedTenant() { try { return localStorage.getItem(TENANT_KEY) || ""; } catch (e) { return ""; } }
+  function storeTenant(id) { try { if (id) localStorage.setItem(TENANT_KEY, id); else localStorage.removeItem(TENANT_KEY); } catch (e) {} }
+  /* Which hospital? An account that belongs to several tenants (an owner, a super-admin) must say
+   * which one it is connecting; the server refuses to guess. One tenant: nothing to ask. */
+  function pickTenantThenLoad() {
+    api("/tenants", {}).then(function (r) {
+      if (!overlay() || !S) return;
+      var list = (r.s === 200 && r.d && r.d.tenants) || [];
+      if (list.length > 1) {
+        S.tenants = list;
+        var known = list.some(function (t) { return t.tenantId === S.tenant; });
+        if (!known) { S.tenant = ""; storeTenant(""); if (S.screen === "connections") renderConnections(); return; }
+      } else if (list.length === 1 && S.tenant && S.tenant !== list[0].tenantId) { S.tenant = ""; storeTenant(""); }
+      loadConnections();
+    });
+  }
+  function renderTenantPicker(b) {
+    var rows = "";
+    for (var i = 0; i < S.tenants.length; i++) {
+      var t = S.tenants[i];
+      rows += '<div class="smd-connect-row"><button class="smd-connect-btn" type="button" data-tenant="' + esc(t.tenantId) + '">' + esc(t.name || t.tenantId) + "</button></div>";
+    }
+    b.innerHTML =
+      '<h2 class="smd-connect-display">Which hospital?</h2>' +
+      '<p class="smd-connect-lead">Your account belongs to more than one. Pick the hospital you are connecting.</p>' +
+      '<div id="smd-connect-tenants">' + rows + "</div>";
+    setStatus("", "");
+    var btns = b.querySelectorAll("[data-tenant]");
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].onclick = function () { S.tenant = this.getAttribute("data-tenant"); storeTenant(S.tenant); loadConnections(); };
+    }
+    if (btns[0]) btns[0].focus();
+  }
   function loadConnections() {
     S.connLoading = true;
     S.connError = false;
@@ -547,6 +596,7 @@
   function renderConnections() {
     var b = body();
     if (!b) return;
+    if (S.tenants && !S.tenant) return renderTenantPicker(b);
     var rows = "";
     for (var i = 0; i < S.connections.length; i++) rows += connectionRow(S.connections[i]);
     b.innerHTML =
@@ -556,8 +606,11 @@
         : (S.connections.length
             ? '<div id="smd-connect-connlist">' + rows + '</div>'
             : '<p class="smd-connect-lead">You have not connected a hospital yet. Connect your hospital so StewardMD can read your worklist safely, once a reviewer approves it.</p>')) +
-      '<div class="smd-connect-row"><button id="smd-connect-add" class="smd-connect-btn primary" type="button">Connect a hospital</button></div>';
+      '<div class="smd-connect-row"><button id="smd-connect-add" class="smd-connect-btn primary" type="button">Connect a hospital</button>' +
+      (S.tenants ? '<button id="smd-connect-switch" class="smd-connect-btn" type="button">Switch hospital</button>' : "") + "</div>";
     setStatus(S.connError ? "bad" : "", S.connError ? "Could not load your connections. Check your connection and try again." : "");
+    var sw = b.querySelector("#smd-connect-switch");
+    if (sw) sw.onclick = function () { S.tenant = ""; storeTenant(""); renderConnections(); };
     b.querySelector("#smd-connect-add").onclick = function () {
       S.selected = null; S.emrUrl = "";
       show("url");
@@ -626,8 +679,12 @@
       if (S.runner === "phone") payload.runner = "phone";
       api("/sessions", { method: "POST", body: JSON.stringify(payload) }).then(function (r) {
         if (!overlay() || !S) return;
-        if (r.s === 200 && r.d && r.d.ok !== false && r.d.session) {
-          S.session = r.d.session;
+        // The server answers sessionView(): a FLAT { ok, sessionId, state, ... }, never a nested
+        // `session` object. Requiring r.d.session meant every successful start was read as a failure
+        // and the doctor saw "Could not start the session" on a 200 with a real session id.
+        var sid = r.d && (r.d.sessionId || (r.d.session && r.d.session.id));
+        if (r.s === 200 && r.d && r.d.ok !== false && sid) {
+          S.session = { id: sid, state: r.d.state || null };
           S.deployment = r.d.deployment || null;
           S.reuse = !!r.d.reuse;
           S.visitedOrigins = [];
@@ -639,7 +696,10 @@
           setStatus("bad", "Connections are not enabled yet. Try again later.");
           go.disabled = false;
         } else {
-          setStatus("bad", "Could not start the session. Check your connection and try again.");
+          // Say WHY when the server said why: a code like not-configured or forbidden is actionable,
+          // "check your connection" is not.
+          var why = r.d && (r.d.message || r.d.code || r.d.error);
+          setStatus("bad", why ? "Could not start the session: " + why + "." : "Could not start the session. Check your connection and try again.");
           go.disabled = false;
         }
       });
@@ -793,6 +853,10 @@
         S.deployment.origins = r.d.origins || S.deployment.origins;
         S.pendingOrigins = r.d.pendingOrigins || [];
         if (S.reuse) { finishReuse(); return; }
+        /* A job that already produced a candidate is DONE: crawling it again only burns the
+         * doctor's time and then fails. Go straight to the review it is waiting for. */
+        var done = r.d.job && r.d.job.candidateVersionId;
+        if (done) { S.versionId = r.d.job.candidateVersionId; S.result = S.result || {}; loadVersionAndShowResult(); return; }
         if (S.pendingOrigins.length) { show("origins"); return; }
         if (S.runner === "phone") { beginAgentMode(); return; }
         show("progress");
@@ -821,6 +885,7 @@
 
   function resetToConnections(msg) {
     stopPoll();
+    stopProgressTicker();
     removePluginListeners();
     S.session = null;
     S.deployment = null;
@@ -889,7 +954,8 @@
           var e = new Error("reauth"); e.reauth = true; throw e;
         }
         if (r.s < 200 || r.s >= 300 || !r.d || r.d.ok === false) {
-          throw new Error((r.d && r.d.error) || "request-failed");
+          // The server names the reason in `detail` (router catch); carry it so the sheet can say it.
+          throw new Error((r.d && (r.d.detail || r.d.error)) || "request-failed");
         }
         return r.d;
       });
@@ -903,6 +969,7 @@
   }
 
   function startPhoneDiscovery() {
+    S.progressStartedAt = Date.now();      // the clock the time estimate divides by
     S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
     S.stopRequested = false;
@@ -949,10 +1016,17 @@
             looking: (p && p.looking) || c.looking || []
           };
           paintProgress();
+          publishBannerProgress();
         }
       });
     }).then(function (result) {
       if (!overlay() || !S) return;
+      /* THE CRAWL IS OVER: GIVE THE DOCTOR THEIR PHONE BACK.
+       * The hospital browser used to stay open on top of the approval screen, still wearing the
+       * orange "StewardMD is reading" banner, so a run that had FINISHED and built an adapter looked
+       * exactly like one still crawling: the doctor watched the EMR, never saw Approve, and read the
+       * whole thing as hung (2026-09-12). Closing it first puts the review in front of them. */
+      stopDiscoveryPlugin();
       S.result = result || {};
       S.versionId = (result && result.candidateVersionId) || null;
       loadVersionAndShowResult();
@@ -966,8 +1040,33 @@
         setStatus("warn", "The hospital session expired. Sign in again to continue. The existing connection is kept.");
         return;
       }
+      /* THE CRAWL ALREADY SUCCEEDED, AND THIS IS THE SECOND ATTEMPT AT IT.
+       *
+       * A session whose job has reached AWAITING_APPROVAL is finished: the server answers any
+       * further discovery with "job is not in discovery". Reopening the sheet on such a session
+       * started the whole crawl again, walked 21 pages a second time and then reported a failure,
+       * while the adapter it had already built sat waiting for the doctor's approval. They saw a
+       * run that said "almost done" and then "you can try again" forever (2026-09-12). Ask the
+       * server what the job actually is, and if it has a candidate, show the approval screen. */
+      stopDiscoveryPlugin();
+      if (S.session && e && /not in discovery/i.test(String(e.message || ""))) {
+        api("/sessions/" + enc(S.session.id), {}).then(function (r) {
+          if (!overlay() || !S) return;
+          var vid = r.s === 200 && r.d && (r.d.candidateVersionId || (r.d.job && r.d.job.candidateVersionId));
+          if (vid) { S.versionId = vid; S.result = S.result || {}; loadVersionAndShowResult(); return; }
+          S.progressFailed = true;
+          setStatus("bad", "This connection was already finished. Close and reopen Connect Hospital to review it.");
+          paintProgress();
+        });
+        return;
+      }
       S.progressFailed = true;
-      setStatus("bad", "Discovery could not complete. You can try again.");
+      /* NAME THE FAILURE. This swallowed e.message and said only "could not complete", so a crawl
+       * that had walked 21 pages and posted its findings left the doctor, and whoever they call,
+       * with nothing to act on. The engine's errors are codes (request-failed, engine-unavailable,
+       * the server's own error string), not stack traces, so they are safe to show. */
+      var why = e && e.message ? String(e.message).slice(0, 120) : "";
+      setStatus("bad", why ? "Discovery could not complete: " + why + ". You can try again." : "Discovery could not complete. You can try again.");
       paintProgress();
     });
   }
@@ -1002,6 +1101,83 @@
     for (var i = 0; i < (list || []).length; i++) out.push(esc(VIEW_NAMES[list[i]] || list[i]));
     return out.length ? out.join(", ") : "none yet";
   }
+  /* WHAT THE AGENT IS DOING, IN WORDS A DOCTOR READS.
+   *
+   * The screen used to show a phase sentence and four counters, so a run that was working looked
+   * identical to one that had died: no sense of how far along it was or how long was left. These
+   * three functions turn the SAME state the engine already reports into a fraction, a sentence and
+   * a time. Nothing new is measured and nothing is invented: the fraction comes from views actually
+   * captured, the sentence from the view being opened, the time from this run's own elapsed clock. */
+  var TARGET_VIEWS = 7;                     // worklist, patient, medications, labs, radiology, discharge, history
+  function progressFraction() {
+    var c = S.progressCounts || {};
+    var found = (c.found || []).length;
+    var phase = c.phase || "DISCOVERING";
+    if (phase === "COMPILING") return 0.9;
+    if (phase === "VALIDATING") return 0.96;
+    // Exploring earns the first tenth; each captured view earns an equal share of the rest.
+    var explored = Math.min(1, (c.pages || 0) / 6) * 0.1;
+    return Math.max(0.02, Math.min(0.88, explored + (found / TARGET_VIEWS) * 0.78));
+  }
+  /* One sentence naming the thing being done, in the doctor's vocabulary. */
+  function activityLine() {
+    var c = S.progressCounts || {};
+    var phase = c.phase || "DISCOVERING";
+    if (S.guide) return "Waiting for you to show me one screen.";
+    if (phase === "COMPILING") return "Writing the connection for your hospital.";
+    if (phase === "VALIDATING") return "Checking it is safe and read-only.";
+    if (c.opening) return "Opening " + esc(c.opening) + ".";
+    var looking = (c.looking || []).filter(function (k) { return VIEW_NAMES[k]; });
+    if (phase === "CRAWLING" && looking.length) return "Looking for where your " + esc(String(VIEW_NAMES[looking[0]]).toLowerCase()) + " sit.";
+    if (phase === "CRAWLING") return "Walking through one patient record, read-only.";
+    return "Going through the tabs of your EMR to see what it offers.";
+  }
+  /* A coarse estimate from THIS run's own pace. Silent until there is enough of a run to divide by,
+   * and never a false precision: a doctor needs "about two minutes", not a countdown. */
+  function etaLine() {
+    if (S.guide) return "";
+    var started = S.progressStartedAt || 0;
+    var f = progressFraction();
+    if (!started || f < 0.08) return "";
+    var elapsed = Date.now() - started;
+    if (elapsed < 15000) return "";
+    var remain = Math.round((elapsed * (1 - f) / f) / 1000);
+    if (remain < 20) return "Almost done.";
+    if (remain < 90) return "About a minute left.";
+    var mins = Math.round(remain / 60);
+    return "About " + (mins > 9 ? "10+" : mins) + " minutes left.";
+  }
+  /* THE ONLY SURFACE THE DOCTOR CAN SEE WHILE THE AGENT WORKS.
+   *
+   * During the crawl the hospital browser is full-screen, so the sheet behind it - progress bar,
+   * activity line, estimate and all - is invisible. The doctor watched a static orange banner for
+   * minutes and concluded the app had hung (2026-09-12). The banner is native and this is the one
+   * thing that can write to it, so the same three facts go there: how far along, what it is doing,
+   * how long is left. Rewritten only when the sentence actually changes, since each write crosses
+   * the bridge and repaints native views. */
+  function bannerProgressLine() {
+    var pct = Math.round(progressFraction() * 100);
+    var eta = etaLine();
+    return pct + "% " + activityLine().replace(/<[^>]*>/g, "") + (eta ? " " + eta : "");
+  }
+  function publishBannerProgress() {
+    if (!S || S.guide || S.stopRequested) return;
+    var plugin = getPlugin();
+    if (!plugin || !plugin.setMode) return;
+    var line = bannerProgressLine();
+    if (line === S.bannerLine) return;
+    S.bannerLine = line;
+    try { plugin.setMode({ mode: "agent", banner: line, origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+  }
+
+  function progressBar() {
+    var pct = Math.round(progressFraction() * 100);
+    return '<div class="smd-connect-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
+      '<i style="width:' + pct + '%"></i></div>' +
+      '<div class="smd-connect-row smd-connect-counts"><span id="smd-connect-activity">' + activityLine() + '</span>' +
+      '<strong id="smd-connect-eta">' + etaLine() + '</strong></div>';
+  }
+
   function progressDetail() {
     var c = S.progressCounts || {};
     if (S.guide) {
@@ -1010,7 +1186,7 @@
         '<div class="smd-connect-row"><button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip</button></div></div>';
     }
     return '<div class="smd-connect-card">' +
-      (c.opening ? '<div class="smd-connect-row smd-connect-counts"><span>Opening</span><strong>' + esc(c.opening) + '</strong></div>' : "") +
+      progressBar() +
       '<div class="smd-connect-row smd-connect-counts"><span>Found</span><strong>' + viewNames(c.found) + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Still looking for</span><strong>' + viewNames(c.looking) + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
@@ -1034,6 +1210,7 @@
     b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
     wireGuideSkip(b);
+    startProgressTicker();
   }
 
   function wireGuideSkip(b) {
@@ -1053,6 +1230,25 @@
     var lead = b.querySelector("#smd-connect-phase"); if (lead) lead.textContent = phaseLabel(S.guide ? "ASKING" : c.phase);
     var detail = b.querySelector("#smd-connect-detail"); if (detail) { detail.innerHTML = progressDetail(); wireGuideSkip(b); }
     var retry = b.querySelector("#smd-connect-progretry"); if (retry) retry.style.display = S.progressFailed ? "" : "none";
+  }
+
+  /* A step of the crawl can take half a minute, and a screen that only repaints when the engine
+   * reports reads as frozen. This ticks the estimate (and only the estimate) once a second. */
+  function startProgressTicker() {
+    stopProgressTicker();
+    S.progressTicker = setInterval(function () {
+      if (!S || S.screen !== "progress" || S.progressFailed) return;
+      var eta = document.getElementById("smd-connect-eta");
+      if (eta) eta.textContent = etaLine();
+      var act = document.getElementById("smd-connect-activity");
+      if (act) act.textContent = activityLine();
+      // One crawl step can take half a minute; the banner is all the doctor can see, so the time
+      // left has to keep moving there too, not only on the hidden sheet.
+      publishBannerProgress();
+    }, 1000);
+  }
+  function stopProgressTicker() {
+    if (S && S.progressTicker) { clearInterval(S.progressTicker); S.progressTicker = null; }
   }
 
   /* ---- Fallback (no plugin): server-driven job-state polling, unchanged. ---- */
@@ -1266,6 +1462,7 @@
     injectCSS();
     if (overlay()) close(true);
     S = {
+      tenant: storedTenant(), tenants: null,
       screen: "connections",
       connections: [],
       connLoading: true,
@@ -1318,7 +1515,7 @@
     show("connections");
     anchorToLauncher();
     animateOpen();
-    loadConnections();
+    pickTenantThenLoad();
   }
 
   window.SMD_CONNECT_AGENT = {
@@ -1326,6 +1523,11 @@
     close: function () { close(); },
     refresh: refresh,
     __setApi: function (fn) { apiImpl = fn; },
+    /* Test-only: drive the progress screen without a live crawl, so the bar, the wording and the
+     * estimate are provable in a browser the way a doctor sees them. */
+    __setState: function (patch) { if (!S) return; for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) S[k] = patch[k]; },
+    __paintProgress: function () { if (S && S.screen === "progress") { renderProgress(); } },
+    __publishBanner: function () { publishBannerProgress(); },
     __debug: function () {
       if (!S) return { open: !!overlay() };
       return {

@@ -19,7 +19,7 @@
 (function () {
   "use strict";
   function ic(name) { return '<span class="material-symbols-rounded" aria-hidden="true">' + name + '</span>'; }
-  function mark() { return '<img class="sknx-brand-logo" src="/sknx-logo-full.png?v=sx1" alt="SknX AI Dermatology Intelligence" style="height:34px;width:auto;max-width:240px;object-fit:contain;display:block;">'; }
+  function mark() { return '<img class="sknx-mark" src="/sknx-mark.png?v=sx2" alt="SknX" width="36" height="36">'; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function haptic(k) { try { if (window.SMD_SKNX_FLAGS && window.SMD_SKNX_FLAGS.bool("smd_sknx_haptics") && window.SMD_HAPTICS && window.SMD_HAPTICS[k]) window.SMD_HAPTICS[k](); } catch (e) {} }
   function toast(m) { try { if (window.toast) window.toast(m); else if (window.SMD_toast) window.SMD_toast(m); } catch (e) {} }
@@ -62,10 +62,23 @@
       '<section class="sknx-capture" aria-labelledby="sknxCapTitle">' +
         '<header class="sknx-cap-head">' +
           '<button type="button" class="sknx-cap-close" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
-          '<div style="flex:1;display:flex;align-items:center;min-width:0;">' + mark() + '<h2 class="sr-only" id="sknxCapTitle">SknX AI Dermatology Intelligence</h2></div>' +
+          '<div class="sknx-cap-brand">' +
+            mark() +
+            '<div class="sknx-cap-brand-txt">' +
+              '<h2 class="sknx-cap-title" id="sknxCapTitle">SknX <span class="sknx-ai-tag">AI</span></h2>' +
+              '<span class="sknx-brand-sub">Dermatology Intelligence</span>' +
+            '</div>' +
+          '</div>' +
         "</header>" +
         '<div class="sknx-cap-body">' +
-          '<div class="sknx-intro"><span class="sknx-eyebrow">DERMATOLOGY</span><h3>A clearer view<br>of skin.</h3><p>Bring the photo and clinical story together for a more informed review.</p></div>' +
+          '<div class="sknx-intro">' +
+            '<div class="sknx-hero-lockup">' +
+              '<img class="sknx-hero-logo sknx-hero-light" src="/sknx-logo.png?v=sx2" alt="SknX AI · Dermatology Intelligence">' +
+              '<img class="sknx-hero-logo sknx-hero-dark" src="/sknx-logo-dark.png?v=sx2" alt="SknX AI · Dermatology Intelligence">' +
+            '</div>' +
+            '<h3>A clearer view<br>of skin.</h3>' +
+            '<p>Bring the photo and clinical story together for a more informed review.</p>' +
+          '</div>' +
           '<ol class="sknx-journey" aria-label="Analysis steps"><li aria-current="step"><b>1</b> Add photo</li><li><b>2</b> Review</li><li><b>3</b> Explore findings</li></ol>' +
           '<div class="sknx-section-heading"><h3>Start a skin review</h3><span>Photo · Context · Findings</span></div>' +
           '<div class="sknx-src-grid">' +

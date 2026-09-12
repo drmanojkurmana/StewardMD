@@ -266,12 +266,19 @@
   function doStaffLogin(){
     var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value;
     if(!id||!pw){err("Enter your staff ID (or email) and PIN (or password).");return;}
-    var isEmail=id.indexOf("@")>-1;
+    /* THE CLINIC CODE DECIDES, NOT THE SHAPE OF THE ID. This read only for an "@" and sent anything
+     * containing one down the email+password door, ignoring the clinic code just typed and offering
+     * the PIN as a password. Every staff ID seeded so far IS an email address, so the staff door
+     * answered "Wrong email or password" to people whose code, ID and PIN were all correct. Same
+     * bug, same fix as wardsynq/site/shell.js. */
+    var hasAt=id.indexOf("@")>-1;
+    var codeTyped=(document.getElementById("sorg")&&document.getElementById("sorg").value.trim())||"";
+    var isEmail=!codeTyped&&hasAt;
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
-    if(!isEmail && !document.getElementById("sorg").value.trim()){err("Enter your clinic code (or sign in with your email).");return;}
+    if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
     var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
-    var body=isEmail?{email:id,password:pw}:{clinicCode:document.getElementById("sorg").value.trim(),identity:id,pin:pw};
+    var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
       if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
       onLogin("staff",r.token,r.orgId);
@@ -336,7 +343,11 @@
     Array.prototype.forEach.call(app.querySelectorAll("[data-open]"),function(b){b.onclick=function(){ openClinic({id:b.getAttribute("data-open"),code:b.getAttribute("data-code")}); };});
     Array.prototype.forEach.call(app.querySelectorAll("[data-del]"),function(b){b.onclick=function(){ delClinic(b.getAttribute("data-del"),b.getAttribute("data-name")); };});
     document.getElementById("newc").onclick=openWizard;
-    document.getElementById("lo2").onclick=logout;
+    /* WRAPPED, because logout(msg) takes a MESSAGE. Wired straight to onclick the browser hands it
+     * the click event instead, which flows to renderLogin(msg) and renders as the error line
+     * "[object PointerEvent]" - so every ordinary sign-out finished on a red error nobody could
+     * read or explain. Found 2026-09-12 signing out of the OPD console. */
+    document.getElementById("lo2").onclick=function(){logout();};
   }
   function delClinic(id,name){
     if(!confirm('Delete "'+name+'"? Its queue and rooms will be removed. This cannot be undone.')) return;
@@ -381,7 +392,7 @@
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
-    document.getElementById("lo").onclick=logout;
+    document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;

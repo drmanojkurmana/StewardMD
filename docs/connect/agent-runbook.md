@@ -50,13 +50,18 @@ The browser runner executes outside Cloudflare Pages to keep headless browser pr
 All new flags default to OFF (fail closed).
 
 ### Feature Flags (Provisional Names Pending Broker Track)
+- Prerequisites the agent gate ALSO requires (found 2026-09-12: all agent routes 404 without them):
+  `CONNECT_FLAG=1` and `CONNECT_ONBOARD_FLAG=1` (`agentFlagOn = onboardFlagOn && CONNECT_AGENT_FLAG`).
+- Pages binds secrets at BUILD time: after uploading a flag, push a commit to main or retry the latest
+  production deployment, then confirm with `GET /api/connect/agent/connections` (401 = on, 404 = off).
 - `CONNECT_AGENT_FLAG`: Master switch for the Connect Agent discovery pipeline (default: OFF).
 - `CONNECT_BROWSER_SESSION_FLAG`: Enables remote browser session broker allocation (default: OFF).
 - `CONNECT_AGENT_AUTO_ACTIVATE_FLAG`: Allows automated activation of previously approved adapter templates (default: OFF).
 - `smd_connect_agent`: Client-side UI launcher gate in `connect-agent-boot.js` (default: OFF). Set via `localStorage.setItem("smd_connect_agent", "1")` or URL parameter `?connect_agent=1`.
 
 ### Cryptographic Keys
-- `CONNECT_CONSENT_SIGNING_KEY`: Mandatory environment variable for `connect-agent/consent.mjs`.
+- `CONNECT_AGENT_TOKEN_KEY`: Mandatory. Signs viewer tokens (`functions/_connect/agent/viewer-token.js`); missing = POST /sessions answers 400 not-configured. Set 2026-09-12.
+- `CONNECT_CONSENT_SIGNING_KEY`: Mandatory environment variable for `connect-agent/consent.mjs`. Set in production 2026-09-12.
   - Used to generate and verify HMAC-SHA256 signatures on consent receipts.
   - Fails closed: If the key is missing or signature verification fails, `assertConsent()` throws an error and discovery aborts. There is no unkeyed fallback.
 

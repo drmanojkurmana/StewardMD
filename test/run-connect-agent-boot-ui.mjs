@@ -2,9 +2,9 @@
  *
  * Verifies:
  * 1. Page loads with zero console errors and zero uncaught exceptions.
- * 2. With the flag OFF, the boot module publishes no entry point, the More sheet has no Connect Hospital
+ * 2. With the flag explicitly OFF ("0"), the boot module publishes no entry point, the More sheet has no Connect Hospital
  *    row, and the onboarding UI is not loaded.
- * 3. With the flag ON (set via localStorage), the boot module publishes its opener, the More sheet
+ * 3. With the flag unset (default ON since 2026-09-12), the boot module publishes its opener, the More sheet
  *    offers a "Connect Hospital" row, and clicking it lazily loads the onboarding UI and opens it.
  * 4. Error reporting from client-errors.js still functions (trigger a caught test error
  *    and assert its existing handler ran).
@@ -117,13 +117,14 @@ try {
     }
   };
 
-  // 1. Load page with flag OFF (clean state)
+  // 1. Load page with the flag explicitly OFF
   const loaded = await attach(BASE + "index.html");
   ok(loaded, "index.html loaded successfully");
 
-  // Ensure clean slate (no flag set)
-  await ev(`localStorage.removeItem("smd_connect_agent"); localStorage.removeItem("CONNECT_AGENT_FLAG"); return 1;`);
-  await sleep(1500); // let any delayed timer (1200ms) fire
+  // Explicit off: the default is ON, so only "0" hides the entry point.
+  await ev(`localStorage.setItem("smd_connect_agent", "0"); localStorage.removeItem("CONNECT_AGENT_FLAG"); return 1;`);
+  await call("Page.navigate", { url: BASE + "index.html" }); // the boot module reads the flag at load
+  await sleep(2500); // let the page load and any delayed timer (1200ms) fire
 
   // Check 1: zero console errors and zero uncaught exceptions
   ok(consoleErrors.length === 0, "page loads with zero console errors and zero uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors) : ""));
@@ -148,8 +149,8 @@ try {
   `);
   ok(rowAbsentOff === true, "with the flag OFF the More sheet has no Connect Hospital row");
 
-  // Check 3: with the flag ON, the boot module publishes its opener and the More sheet offers the row
-  await ev(`localStorage.setItem("smd_connect_agent", "1"); return 1;`);
+  // Check 3: with the flag UNSET (default ON), the boot module publishes its opener and the More sheet offers the row
+  await ev(`localStorage.removeItem("smd_connect_agent"); return 1;`);
   await call("Page.navigate", { url: BASE + "index.html" });
 
   let bootReady = false;
@@ -157,7 +158,17 @@ try {
     await sleep(300);
     if (await ev(`return !!(window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled);`) === true) { bootReady = true; break; }
   }
-  ok(bootReady, "with the flag ON (localStorage smd_connect_agent=1) the boot module publishes its opener");
+  ok(bootReady, "with the flag unset (default ON) the boot module publishes its opener");
+
+  // The two places a doctor actually looks: the home tile grid and the lean sidebar menu.
+  let tileShown = false;
+  for (let i = 0; i < 20; i++) { await sleep(250); if (await ev(`return !!document.querySelector('.rnav-tile[data-act="agentconnect"]');`) === true) { tileShown = true; break; } }
+  ok(tileShown, "the home tile grid shows a Connect Hospital tile by default");
+  await ev(`try { if (window.SB && SB.open) SB.open(); } catch (e) {} return 1;`);
+  let sbRow = false; // the lean sidebar rebuilds #sbMenu 60ms after SB.open
+  for (let i = 0; i < 20; i++) { await sleep(150); if (await ev(`return !!document.querySelector('[data-sbr-act="agentconnect"]');`) === true) { sbRow = true; break; } }
+  ok(sbRow, "the lean sidebar menu offers a Connect Hospital row");
+  await ev(`try { if (window.SB && SB.close) SB.close(); } catch (e) {} return 1;`);
 
   // Open the More sheet ONCE - clicking it again toggles it shut, so polling must not re-click.
   await ev(`

@@ -57,6 +57,12 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
+    // Connect Hospital: the doctor onboards their own hospital by signing in to its EMR themselves.
+    agentconnect: function () {
+      var b = window.SMD_CONNECT_AGENT_BOOT;
+      if (b && b.open) b.open().catch(function (e) { toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed")); });
+      else toast("Connect Hospital is not enabled");
+    },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
     feedback: function () {
@@ -424,6 +430,7 @@
       row("drugs", "pills", "Drugs Database") +
       row("interactions", "interact", "Interaction Checker") +
       row("calculators", "calc", "Calculators") +
+      row("agentconnect", "steth", "Connect Hospital") +
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
@@ -543,7 +550,7 @@
         xaRowHTML("fundx", "🔬", "FundX AI", "AI-guided retinal screening &amp; fundus imaging") +
         xaRowHTML("kardiox", "🫀", "KardiQ X AI", "On-device 12-lead ECG rhythm &amp; ischemia interpretation") +
         xaRowHTML("thorex", "🫁", "ThoreX AI", "On-device chest radiograph interpretation") +
-        xaRowHTML("sknx", "🧴", "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
+        xaRowHTML("sknx", '<img src="/sknx-mark.png?v=sx2" alt="" width="20" height="20" style="object-fit:contain;vertical-align:middle;display:inline-block;">', "SknX AI", "Skin lesion, rash &amp; dermatoscope analysis") +
       '</div>' +
 
       '<div class="sbr-sec">AI Diagnostic Modules</div>' +

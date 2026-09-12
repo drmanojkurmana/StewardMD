@@ -303,7 +303,28 @@ const AZ_SAY = {
   not_a_member: "You are not on this clinic's staff list. Ask the owner to add you.",
   org_mismatch: "You are signed in to a different clinic. Sign out and sign in to this one.",
   out_of_scope: "Your access is limited to certain departments or rooms, and this patient is outside it.",
-  forbidden: "Your role cannot check patients in. Ask the owner to grant a role that can.",
+  forbidden: "Your role does not allow that. Ask the owner to grant a role that does.",
+};
+/* WHAT THE PERSON WAS ACTUALLY REFUSED, in words they use for the job.
+ *
+ * This is the shared refusal for EVERY permission failure in the product, and its wording was
+ * hardcoded to "cannot check patients in" - a phrase from the outpatient check-in desk. So a nurse
+ * refused a clinical note was told she could not check patients in, a pharmacist refused a chart
+ * was told the same, and so was everyone else. The message named an action nobody had attempted,
+ * which is worse than saying nothing: it sends the owner to change the wrong thing.
+ *
+ * The capability now travels on the refusal (_opd_org.js), and these are the plain-English words
+ * for each. A capability with no entry falls back to the generic sentence rather than inventing a
+ * description of itself. */
+const CAP_SAY = {
+  "queue.view": "see the patient list", "queue.add": "register or add a patient",
+  "queue.status": "move a patient through the queue", "queue.assign": "assign a patient to a clinician",
+  "emr.view": "open a patient's chart", "emr.vitals": "record observations",
+  "emr.treat": "prescribe or write in a chart", "order.read": "see a patient's orders",
+  "order.verify": "verify an order", "order.dispense": "dispense medicines",
+  "lab.result": "release a result", "billing.view": "see billing", "billing.charge": "take payment",
+  "staff.admin": "manage staff and roles", "analytics.view": "see reports",
+  "him.roi": "release records to a third party", "incident.report": "file an incident report",
 };
 function azRefusal(az) {
   const reason = (az && az.reason) || "forbidden";
@@ -311,7 +332,8 @@ function azRefusal(az) {
   if (az && az.role) {
     out.role = az.role;
     if (reason === "forbidden") {
-      out.message = 'Your role here is "' + az.role + '", which cannot check patients in' +
+      const doing = CAP_SAY[az.cap] ? " " + CAP_SAY[az.cap] : "";
+      out.message = 'Your role here is "' + az.role + '", which cannot' + (doing || " do that") +
         (az.role === "viewer" ? " - a member with no role granted is read-only." : ".") +
         " Ask the owner to change it.";
     }
@@ -920,11 +942,57 @@ export async function onRequest(context) {
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       let wAz = await ORG.authorizeOrg(env, actor, wOrgId, need);
+      // Set true only when the noteWriterRoles alternative authority below actually fires. Carried
+      // to writeTemplatedNote's ctx so the record engine's own grant can be told the same thing the
+      // route just decided - see that check's own comment for why the route's say-so alone is not
+      // enough for the write to actually succeed.
+      let noteWriterOverride = false;
       /* The open critical results are readable by a VERIFIER as well as by the ward. A pharmacist
        * checking a dose against the patient's potassium needs to see that potassium, and gating this
        * list on emr.view alone was the reason they could not - the gap this build closes. It is an
        * alternative authority, never a widening: order.verify grants the narrow record scope in
        * actor.js and nothing more, so this cannot open any other route. */
+      /* WHO MAY DOCUMENT IS THE HOSPITAL'S DECISION, within a boundary it cannot move.
+       *
+       * Writing a note needs emr.treat, which is the PRESCRIBING capability, so out of the box only
+       * prescribers document. On a great many real wards the nursing note is a core part of the
+       * record, and the alternative - handing nurses emr.treat - would hand them prescribing too.
+       * So the hospital names the roles it trusts to document (Admin Center -> noteWriterRoles) and
+       * those roles may write a note and nothing else. The role still has to be a real member of
+       * this hospital with emr.view; this is an alternative authority for ONE act, not a way to
+       * grant a capability, and it cannot reach any other route.
+       *
+       * A hospital that sets nothing keeps today's behaviour exactly. */
+      if (!wAz.ok && sub === "note" && method === "POST") {
+        // The hospital's own config, read HERE rather than reusing wsqCfg: that is built further
+        // down, after authorization, so reading it at this point would silently be undefined and
+        // the setting would appear to do nothing.
+        const noteOrg = await ORG.getOrg(env, wOrgId);
+        const noteCfg = (noteOrg && noteOrg.wardsynq) || null;
+        const allowed = (noteCfg && Array.isArray(noteCfg.noteWriterRoles) ? noteCfg.noteWriterRoles : []).map((r) => String(r || "").trim()).filter(Boolean);
+        if (allowed.length) {
+          const seeChart = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_VIEW);
+          /* Passing THIS gate is not enough to actually write the note. authorizeOrg only opens
+           * the route; the record engine (wardsynq-actors.js's GovernedStore) independently checks
+           * the writer's own grant before it will commit anything, and a role admitted here purely
+           * by noteWriterRoles (a nurse, say) has a grant built from emr.vitals alone, which has
+           * never included ClinicalNote - so the write below was refused anyway (SCOPE_DENIED),
+           * silently making this whole setting a no-op. noteWriterOverride carries the fact that
+           * THIS route already verified the config exception down to writeTemplatedNote, which is
+           * the only place allowed to act on it - see the comment on its own use in
+           * note-templates.js's open(). */
+          if (seeChart.ok && allowed.indexOf(String(seeChart.role || "")) >= 0) { wAz = seeChart; noteWriterOverride = true; }
+        }
+      }
+      /* THE BENCH MAY SEE ITS OWN WORK. collections and pending-tests are gated emr.view, which is
+       * right for a ward asking "where is my patient's sample?" - and wrong as the ONLY authority,
+       * because the other caller is the laboratory itself, asking "what is on my bench?". The lab
+       * role deliberately has no emr.view (dispensing and resulting need the order, not the
+       * consultation notes), so the department's own worklist was the one thing it could not open.
+       * lab.result is the alternative authority, exactly as order.verify is for criticals and
+       * lab.result already is for specimen-outcome directly below. It grants the narrow record
+       * scope in actor.js and nothing more, so this opens no other route. */
+      if (!wAz.ok && (sub === "collections" || sub === "pending-tests")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       if (!wAz.ok && sub === "criticals") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_VERIFY);
       /* A specimen's outcome is recorded by whichever side of the journey it happened on: the ward
        * says the attempt failed, the LABORATORY says it arrived. Same alternative-authority shape,
@@ -1528,7 +1596,7 @@ export async function onRequest(context) {
           const t = await Q.getTicket(env, String(body.ticketId));
           noteEncounterId = t ? encounterIdForTicket(t) : null;
         }
-        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: noteEncounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await writeTemplatedNote(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [], templateId: body.templateId, encounterId: noteEncounterId, sections: body.sections, at: body.at, idempotencyKey: body.idempotencyKey || null, noteWriterOverride });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "note-submit" && method === "POST") {
@@ -1855,7 +1923,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collections" && method === "GET") {
-        const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        // scope=hospital is the laboratory's own board: every outstanding specimen, not one chart's.
+        const r = await collectionList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", scope: url.searchParams.get("scope") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "registries" && method === "GET") {
@@ -1999,7 +2068,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "pending-tests" && method === "GET") {
-        const r = await pendingRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        const r = await pendingRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", scope: url.searchParams.get("scope") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "metrics" && method === "GET") {

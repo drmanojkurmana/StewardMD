@@ -186,7 +186,21 @@ function grantForCaps(caps) {
      * the read is required for the check to be honest rather than decorative. The write is the
      * protocol itself and nothing else: this grant still reaches no prescription, no administration
      * and no diagnosis. */
-    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"];
+    /* Patient joined 2026-09-12, for the bench worklist and for nothing else.
+     *
+     * The laboratory could read the REQUEST but never who it belonged to, so every row of its own
+     * worklist read "opd-pat-smd-demo-00020" - an identifier that cannot be checked against a tube,
+     * a form or a wristband, which is the one check the whole specimen subsystem exists to make.
+     * The imaging worklist settled this exact question already and is gated emr.view for exactly
+     * this reason: "a worklist with no identity on it is worse than no worklist".
+     *
+     * This is READ on Patient, which is name, identifiers, date of birth and sex. It is emphatically
+     * NOT emr.view: that was tried on the lab role first and reverted the same day, because it also
+     * opens the discharge summary and the ward's critical-results list, and
+     * wardsynq-inpatient-emar.test.mjs rightly asserts 403 on both. The grant below still reaches no
+     * Encounter, no Condition, no MedicationOrder, no note and no diagnosis. A laboratory still
+     * cannot read the chart; it can now name the sample in front of it. */
+    const canRead = ["Patient", "ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"];
     const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"];
     const cats = { Observation: ["laboratory"] };
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };

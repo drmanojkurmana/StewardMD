@@ -123,6 +123,17 @@
            supports (metadata only -- no tenant/PHI data), so an admin can see what they can connect and whether
            each type is enabled before adding a connection below. Read on demand via Refresh, same pattern as
            Connection health / Activity log (GET /connectors, connector:read RBAC). -->
+      <!-- Connect Agent approvals. A doctor onboards their own hospital from the phone; the adapter the
+           agent writes is INERT until a human approves it. That approval existed only inside the phone
+           sheet, so an owner who did the crawl on one device, or who wants to review it on a laptop,
+           had nowhere to go: the version sat AWAITING_APPROVAL with no door to it (2026-09-12). Same
+           endpoints the phone uses, same server-side role check. -->
+      <div class="card" data-section="governance">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Hospital connections awaiting approval</b><button class="ghost" id="agentReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" style="margin-top:4px">A doctor connected this hospital from their phone. The agent read the EMR and wrote a connection; nothing is live until you approve it here. Reject if anything looks wrong.</div>
+        <div id="agentPending" style="margin-top:12px"><div class="hint">Select your organization above to see connections waiting for you.</div></div>
+      </div>
+
       <div class="card" data-section="governance">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connector catalog</b><button class="ghost" id="catalogReload" style="padding:7px 11px">Refresh</button></div>
         <div class="hint" style="margin-top:4px">Every connector type below is available in principle. Enabling a type for your organization is a flag flip made by the StewardMD team; ask us to enable a type marked Disabled.</div>
@@ -1119,7 +1130,95 @@
     }).join("");
     s.innerHTML=html;
   }
-  function onTenantChange(){ say("tenantMsg","",""); loadDashboard(); }
+  function onTenantChange(){ say("tenantMsg","",""); loadDashboard(); loadAgentPending(); }
+
+  /* ---- Connect Agent approvals -------------------------------------------------------------
+   * The phone builds the adapter; a human decides whether it may ever run. These three functions
+   * are the owner's door to that decision on a laptop: the same GET /connections, GET /versions/:id
+   * and POST /versions/:id/approve|reject the phone sheet uses, with the server enforcing the role.
+   * PHI never appears here: an adapter is paths and field names, never a patient's data. */
+  var AGENT = "/api/connect/agent";
+  function agentApi(path, opts){ return api(AGENT + path + (path.indexOf("?")>=0?"&":"?") + "tenant=" + encodeURIComponent(tenant()), opts); }
+  function opName(t){
+    var N = { list_worklist:"Worklist", list_medications:"Medications", list_labs:"Lab results",
+      list_radiology:"Radiology reports", get_patient:"Patient details", list_notes:"Notes",
+      list_discharge:"Discharge summary", list_history:"Visit history", list_allergies:"Allergies",
+      list_problems:"Problems", list_vitals:"Vitals", list_encounters:"Visits" };
+    return N[t] || String(t||"").replace(/^(list|get)_/, "").replace(/_/g, " ");
+  }
+  function loadAgentPending(){
+    var host=$("agentPending"); if(!host) return;
+    if(!tenant()){ host.innerHTML='<div class="hint">Select your organization above to see connections waiting for you.</div>'; return; }
+    host.innerHTML='<div class="hint">Loading...</div>';
+    var forTenant=tenant();
+    agentApi("/connections").then(function(x){
+      if(tenant()!==forTenant) return;
+      if(x.s===404){ host.innerHTML='<div class="hint">Phone onboarding is not enabled for this deployment.</div>'; return; }
+      if(x.s!==200||!x.d||x.d.ok===false){ host.innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; return; }
+      var pending=(x.d.connections||[]).filter(function(c){ return c.pendingVersionId; });
+      if(!pending.length){ host.innerHTML='<div class="hint">Nothing is waiting for approval. Connections a doctor makes from their phone appear here.</div>'; return; }
+      host.innerHTML="";
+      pending.forEach(function(c){ renderPendingRow(host, c); });
+    }).catch(function(){ if(tenant()===forTenant) host.innerHTML='<div class="hint">Could not load. Try Refresh.</div>'; });
+  }
+  function renderPendingRow(host, conn){
+    var box=mkEl("div","", null);
+    box.style.cssText="border:1px solid var(--line,#dde3ea);border-radius:12px;padding:12px;margin-bottom:10px";
+    box.innerHTML='<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
+      '<b style="flex:1;min-width:160px">'+esc((conn.origins||[])[0]||"This hospital")+'</b>'+
+      ' '+
+      '<span class="st pending">Waiting for you</span></div>'+
+      '<div class="hint" style="margin-top:6px">Loading what it can read...</div>';
+    host.appendChild(box);
+    agentApi("/versions/"+encodeURIComponent(conn.pendingVersionId)).then(function(x){
+      if(x.s!==200||!x.d||x.d.ok===false){ box.querySelector(".hint").textContent=httpErr(x); return; }
+      var ops=(x.d.operations||[]).map(function(o){ return opName(o.type); });
+      var seen={}, names=[];
+      ops.forEach(function(n){ if(!seen[n]){ seen[n]=1; names.push(n); } });
+      /* Enough to judge the request, not just accept it: who asked, when, what the agent saw and
+       * whether the connection validated. Paths and column headers only, never patient data. */
+      var who = x.d.requestedBy ? esc(x.d.requestedBy) : "a doctor at this hospital";
+      var when = x.d.requestedAt ? new Date(x.d.requestedAt).toLocaleString() : "";
+      var val = x.d.validation;
+      var verdict = !val ? '<span class="st unverified">Not checked</span>'
+        : val.ok ? '<span class="st verified">Checks passed</span>'
+        : '<span class="st pending">'+esc((val.issues||[]).length)+' issue(s) to read below</span>';
+      var viewRows=(x.d.views||[]).map(function(v){
+        return '<li>'+esc(opName("list_"+v.resource))+
+          (v.path? ' <code>'+esc(v.path)+'</code>' : '')+
+          (v.columns && v.columns.length ? ' <span class="hint">columns: '+esc(v.columns.join(", "))+'</span>' : '')+
+          (v.guided ? ' <span class="hint">(shown by the doctor)</span>' : '')+'</li>';
+      }).join("");
+      box.querySelector(".hint").innerHTML=
+        '<div><b>Requested by:</b> '+who+(when? ' on '+esc(when) : '')+'</div>'+
+        '<div style="margin-top:4px"><b>Can read:</b> '+esc(names.join(", ")||"nothing yet")+'</div>'+
+        '<div style="margin-top:4px"><b>Safety checks:</b> '+verdict+'</div>'+
+        ((val && !val.ok && (val.issues||[]).length) ? '<ul style="margin:4px 0 0 18px">'+(val.issues||[]).map(function(i){return '<li>'+esc(typeof i==="string"?i:(i.message||i.code||JSON.stringify(i)))+'</li>';}).join("")+'</ul>' : '')+
+        '<div style="margin-top:4px"><b>Pages the agent read:</b> '+esc(x.d.pagesObserved||0)+'</div>'+
+        (viewRows? '<details style="margin-top:6px"><summary>What it found, screen by screen</summary><ul style="margin:6px 0 0 18px">'+viewRows+'</ul></details>' : '')+
+        '<div style="margin-top:6px">Read-only. The agent cannot order, prescribe or change any record.</div>';
+      var row=mkEl("div","row"); row.style.cssText="margin-top:10px;gap:8px";
+      var ok=mkEl("button",null,"Approve"); ok.style.cssText="background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 15px;font-weight:700;cursor:pointer";
+      var no=mkEl("button","ghost","Reject"); no.style.cssText="padding:9px 15px";
+      var msg=mkEl("div","msg"); msg.style.marginTop="8px";
+      ok.onclick=function(){ decide(conn.pendingVersionId,"approve",ok,no,msg); };
+      no.onclick=function(){ decide(conn.pendingVersionId,"reject",ok,no,msg); };
+      row.appendChild(ok); row.appendChild(no);
+      box.appendChild(row); box.appendChild(msg);
+    });
+  }
+  function decide(versionId, what, ok, no, msg){
+    ok.disabled=true; no.disabled=true;
+    msg.textContent = what==="approve" ? "Approving..." : "Rejecting...";
+    agentApi("/versions/"+encodeURIComponent(versionId)+"/"+what, { method:"POST", headers:{"Content-Type":"application/json"}, body:"{}" }).then(function(x){
+      if(x.s!==200||!x.d||x.d.ok===false){
+        msg.textContent = (x.d && (x.d.detail || x.d.error)) || httpErr(x);
+        ok.disabled=false; no.disabled=false; return;
+      }
+      msg.textContent = what==="approve" ? "Approved. This hospital is connected." : "Rejected. Nothing was activated.";
+      setTimeout(loadAgentPending, 1200);
+    });
+  }
   function loadTenants(){
     api(API+"/tenants").then(function(x){
       if(x.s===404){ showFlagOff(); return; }
@@ -1578,6 +1677,7 @@
     }).catch(function(){ $("catalog").innerHTML='<div class="hint">Sign in first.</div>'; });
   }
   $("catalogReload").onclick=loadCatalog;
+  if($("agentReload")) $("agentReload").onclick=loadAgentPending;
 
   // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
   function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
@@ -1716,7 +1816,7 @@
   else { signedInUI(null); say("authMsg","err","Sign-in could not load. Check your internet connection and reload this screen."); }
 
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
-  window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
+  window.ConnectEMR={ loadAgentPending:loadAgentPending, loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
     loadSyncPanel:loadSyncPanel, renderSyncPanel:renderSyncPanel, computeNextDue:computeNextDue,
     saveInterval:doSaveInterval, syncNow:doSyncNow,

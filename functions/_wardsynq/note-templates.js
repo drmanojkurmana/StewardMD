@@ -23,6 +23,17 @@
  * NOTHING IS COPIED FORWARD. Not the previous note, not yesterday's examination, not the last set of
  * observations. Copy-forward is the most documented way to propagate a stale finding through a whole
  * admission, and a template is exactly where it would be introduced.
+ *
+ * ONE BUILT-IN, ADDED 2026-09-12, AND WHY IT DOES NOT BREAK THE RULE ABOVE. This file used to ship
+ * no template at all, on the stated grounds that the headings a hospital wants are a clinical
+ * decision and inventing them would be making it. That reasoning still holds and is untouched for
+ * every structured template. What it did NOT account for is that a hospital with no templates
+ * configured could not write a clinical note of any kind: /ward/note answered template_not_found
+ * for whatever it was given, and the demonstration hospital had exactly that problem. BUILT_IN_
+ * TEMPLATES is therefore a single free-text progress note with one section, "Clinical course". It
+ * invents no clinical structure, asserts nothing about what an examination should contain, and
+ * carries no default text; it is the blank sheet a ward round already writes on. An org template of
+ * the same id replaces it outright, so this is a floor and never a ceiling.
  */
 
 import { ClinicalNote } from "../../wardsynq/wardsynq-model.js";
@@ -101,6 +112,39 @@ function composeNote(template, written) {
   };
 }
 
+/* THE BUILT-IN PROGRESS NOTE. Every note had to come from a template in org config, and a hospital
+ * that had configured none - which is every hospital on the day it opens, including the
+ * demonstration one - could not write a clinical note at all: /ward/note answered
+ * template_not_found for whatever it was given, and the chart's own compose box had nothing to
+ * offer. A ward round produces a narrative note; needing a configuration step before a doctor can
+ * write "admitted with community-acquired pneumonia, started on co-amoxiclav, improving" is the
+ * wrong default.
+ *
+ * One free-text section, because that is what a progress note IS. A hospital that wants structure
+ * still defines its own templates and they appear alongside this one; defining one with this id
+ * overrides it entirely, so this is a floor and never a ceiling.
+ *
+ * It carries no default text, which resolveTemplate refuses outright and is right to: pre-filled
+ * clinical prose is text nobody wrote being attributed to whoever signs it. */
+const BUILT_IN_TEMPLATES = Object.freeze([Object.freeze({
+  id: "progress",
+  name: "Progress note",
+  sections: Object.freeze([Object.freeze({
+    key: "narrative",
+    title: "Clinical course",
+    // `prompt`, not `hint` - resolveTemplate reads prompt and would drop anything else in silence.
+    // A question, never an answer, which is the rule the rest of this file is built on.
+    prompt: "What has happened, what was found, what was done, and what happens next?",
+  })]),
+})]);
+
+/** Org templates plus the built-ins, with an org definition of the same id winning outright. */
+function withBuiltIns(templates) {
+  const org = Array.isArray(templates) ? templates.filter(Boolean) : [];
+  const taken = new Set(org.map((d) => str(d && d.id)));
+  return org.concat(BUILT_IN_TEMPLATES.filter((d) => !taken.has(d.id)));
+}
+
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 /** PURE. One note per (encounter, template, moment). Two ward rounds a day are two notes. */
 function noteIdFor(encounterId, templateId, at) {
@@ -111,11 +155,32 @@ function noteIdFor(encounterId, templateId, at) {
 async function open(request, env, ctx, need) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, need, ctx.actorDeps);
+    /* THE HOSPITAL'S NOTE-WRITER EXCEPTION, APPLIED HERE AND ONLY HERE.
+     *
+     * The router (functions/api/queue/[[path]].js) already checked, before this function was ever
+     * called, that this role is a real member holding emr.view AND is named in the hospital's own
+     * noteWriterRoles config - ctx.noteWriterOverride carries that decision, this function does not
+     * remake it. What the router's check cannot reach is the record engine's own authority: every
+     * write, including this one, is independently checked against the ACTOR'S grant
+     * (wardsynq-actors.js's GovernedStore), and a role admitted here purely by noteWriterRoles (a
+     * nurse, most often) has a grant built solely from its own capability - emr.vitals for a nurse -
+     * which has never included ClinicalNote. Passing the route and then being refused by the engine
+     * (SCOPE_DENIED) made the whole admin setting a silent no-op: ticking the box changed nothing a
+     * nurse could actually do.
+     *
+     * Widened to ClinicalNote and NOTHING else, and only when the existing scope is a restricted
+     * array (never when it is already unrestricted, i.e. already emr.treat) - so this can only ever
+     * add the one type the config exists to authorise, never anything wider, and never for a role
+     * this exception was not built for. */
+    let actor = resolved.actor;
+    if (ctx.noteWriterOverride && Array.isArray(actor.scope.write) && actor.scope.write.indexOf("ClinicalNote") < 0) {
+      actor = { ...actor, scope: { ...actor.scope, write: [...actor.scope.write, "ClinicalNote"] } };
+    }
     const svc = new RecordService({
       repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
-      tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source,
+      tenant: resolved.tenant, actor, role: resolved.role, roleSource: resolved.source,
     });
-    return { svc, resolved };
+    return { svc, resolved: { ...resolved, actor } };
   } catch (e) {
     const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
     return { error: { ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: str(e && e.message) } };
@@ -133,7 +198,7 @@ async function listTemplates(request, env, ctx) {
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", templates: [] };
 
-  const defs = Array.isArray(ctx.templates) ? ctx.templates : [];
+  const defs = withBuiltIns(ctx.templates);
   const all = defs.map(resolveTemplate);
   return {
     ...base, ok: true,
@@ -156,7 +221,7 @@ async function writeTemplatedNote(request, env, ctx) {
   const templateId = str(ctx.templateId), encounterId = str(ctx.encounterId);
   if (!templateId || !encounterId) return { ...base, ok: false, status: 422, error: "template_and_encounter_required", written: 0 };
 
-  const def = (Array.isArray(ctx.templates) ? ctx.templates : []).find((d) => d && str(d.id) === templateId);
+  const def = withBuiltIns(ctx.templates).find((d) => d && str(d.id) === templateId);
   if (!def) return { ...base, ok: false, status: 404, error: "template_not_found", templateId, written: 0 };
   const tpl = resolveTemplate(def);
   if (!tpl.ok) return { ...base, ok: false, status: 422, error: tpl.error, detail: tpl.detail, problems: tpl.problems, written: 0 };
@@ -212,4 +277,4 @@ async function writeTemplatedNote(request, env, ctx) {
   }
 }
 
-export { NOT_RECORDED, resolveTemplate, composeNote, noteIdFor, listTemplates, writeTemplatedNote };
+export { NOT_RECORDED, BUILT_IN_TEMPLATES, withBuiltIns, resolveTemplate, composeNote, noteIdFor, listTemplates, writeTemplatedNote };

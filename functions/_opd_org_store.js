@@ -106,7 +106,23 @@ export async function deleteOrg(env, orgId, actorId) {
 }
 export async function updateOrg(env, orgId, patch, actorId) {
   const cur = await getOrg(env, orgId); if (!cur) return null;
-  const f = M.org(Object.assign({}, cur, patch || {}, { id: cur.id, ownerUid: cur.ownerUid, createdAt: cur.createdAt })); // ownerUid immutable
+  /* THE WARDSYNQ CONFIG MERGES; IT DOES NOT GET REPLACED.
+   *
+   * Object.assign is a SHALLOW merge, so a caller sending `{wardsynq: {noteWriterRoles: [...]}}` -
+   * the obvious thing for any screen that edits one setting - replaced the whole object and silently
+   * deleted every other setting the hospital had: its critical limits, its drug round times, its bed
+   * layout, its formulary, its escalation policy. Nothing would have complained; the ward would just
+   * have quietly reverted to defaults, which on critical limits means a potassium a hospital had
+   * carefully configured going back to WardSynQ's own numbers.
+   *
+   * Merging one level into `wardsynq` means a screen can save the field it owns without having to
+   * resend, and risk mangling, the entire configuration of the hospital. */
+  const p = patch || {};
+  const merged = Object.assign({}, cur, p, { id: cur.id, ownerUid: cur.ownerUid, createdAt: cur.createdAt }); // ownerUid immutable
+  if (p.wardsynq && typeof p.wardsynq === "object" && !Array.isArray(p.wardsynq)) {
+    merged.wardsynq = Object.assign({}, (cur && cur.wardsynq) || {}, p.wardsynq);
+  }
+  const f = M.org(merged);
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
   await audit(env, orgId, actorId, "org:update", "");
   return f;
