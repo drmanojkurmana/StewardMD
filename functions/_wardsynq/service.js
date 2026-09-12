@@ -59,6 +59,13 @@ const RESOURCE_TYPES = Object.freeze([
    * pharmacy write on that would let the role post a fabricated "administered" row through the raw
    * record API without going near a bedside. Its own type, granted only by ORDER_VERIFY. */
   "MedicationVerification",
+  /* An approval, and every decision on it. Its own type for the same reason BreakGlassGrant is: the
+   * only thing an approval is worth is being legible afterwards, and one that could be edited or
+   * deleted would be worth nothing. Append-only is the whole feature - a withdrawal is a new row
+   * after the approval it withdraws, never an edit of it, so "it was approved and then taken back"
+   * stays readable forever. Nothing here confers any capability by existing; it is evidence that a
+   * decision was made, which formulary.js then reads before it lets a restricted drug through. */
+  "Verification",
   /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */

@@ -1,0 +1,25 @@
+docs: complete the OpenMRS half of the gap audit against actual cloned source (69 tool calls)
+
+Both halves of OPENMRS_BAHMNI_AUDIT.md are now fully source-verified. The OpenMRS pass cloned
+openmrs-core, the REST module, FHIR2, emrapi, reporting, appointment scheduling, dispensing, stock
+management, bed management and billing modules.
+
+The one finding that changes a recommendation: OpenMRS's concept dictionary is real, well-designed
+mapping machinery (Concept to external vocabulary, locale-aware) but ships with literally zero
+ICD/SNOMED/LOINC content in its own seed data - two concept inserts, zero concept_reference_source
+rows. "Reuse OpenMRS for terminology" was too optimistic as stated; the real asset to acquire is a
+populated terminology service, and OpenMRS's machinery is one legitimate way to build one, not a
+shortcut that arrives pre-loaded. Softened the recommendation in the bottom-line section
+accordingly.
+
+Also confirmed: FHIR R4 cannot write orders in OpenMRS (MedicationRequest/ServiceRequest are
+read-only providers) - a real integration-planning fact for anyone building CPOE against it.
+MedicationDispense is now a real core-level resource (partially refuting the assumption that
+dispensing sits entirely outside OpenMRS core), while stock/batch/procurement remains a separate
+module with no database-level link back to it - consistent with every other pharmacy-inventory
+finding in this audit. And OpenMRS's own permission model is confirmed verb-on-type only, with no
+row/ward/consent-level scoping anywhere in core - a genuine, confirmed point in WardSynQ's own
+two-layer RBAC's favor, not a gap to close by adopting OpenMRS's.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

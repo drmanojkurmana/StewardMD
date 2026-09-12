@@ -1,0 +1,24 @@
+The Reports screen printed a wall of raw JSON at the supervisor
+
+Signed in as supervisor and opened Reports. Every report except patient flow
+showed sensibly (a handful of scalar counts, one bullet each). Patient flow's
+own body is one field, "flow", holding the same nested computation the
+Hospital command center screen already renders as cards - beds, admissions
+pending, discharge readiness, every ward's open items. reportsView() doesn't
+give each report its own layout by design (one shared key: value renderer,
+so six report types don't mean six screens to keep in sync), but that
+renderer just JSON.stringify'd anything that wasn't a plain value, so this
+one report printed its entire object as a single unbroken line of raw JSON
+running the width of the page and off the bottom of it. It read like the
+screen was broken, not merely generic.
+
+Kept the generic design. reportValue() now nests instead of flattening: an
+object becomes its own bulleted key: value list, an array becomes a bulleted
+list of its items, at any depth - so a future report with structured data
+gets a readable list for free, and nothing about any one report had to be
+hard-coded to fix it.
+
+Found by opening Reports as supervisor.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

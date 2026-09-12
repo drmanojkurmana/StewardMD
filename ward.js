@@ -3137,6 +3137,65 @@
       "</div>";
   }
 
+  /* APPROVALS. The door that has to exist because the formulary's lock is now real.
+   *
+   * A restricted drug needs an approval reference, and until now the prescriber invented one, which
+   * meant the lock was decoration. Now the reference has to name an approval that actually exists,
+   * so there has to be somewhere to ask for one and somewhere for the person who grants it to say
+   * yes. This is that place.
+   *
+   * The chain is shown in full, oldest first, including approvals that were later withdrawn -
+   * nothing here ever edits or hides what already happened, because "it was approved and then taken
+   * back" is exactly the thing somebody reviewing a case later needs to be able to see. */
+  var APPROVAL_SUBJECTS = [
+    ["RestrictedMedication", "A restricted medicine"],
+    ["PurchaseOrder", "A purchase order"],
+    ["StockRequisition", "A stock request"],
+    ["Discharge", "A discharge"],
+    ["Invoice", "A bill"],
+    ["Incident", "An incident"],
+  ];
+  function approvalRow(v) {
+    var stateLabel = v.state === "approved" ? "approved" : v.state === "rejected" ? "turned down" : "waiting";
+    var stateClass = v.state === "approved" ? "" : v.state === "rejected" ? "escalate" : "due";
+    var hist = (v.history || []).map(function (h) {
+      var what = h.kind === "request" ? "asked" : (h.decision === "approved" ? "approved" : h.decision === "rejected" ? "turned down" : "took back");
+      return "<li>" + esc(what) + " by " + esc(h.by) + " &middot; " + when(h.at) + (h.reason ? " &middot; " + esc(h.reason) : "") + "</li>";
+    }).join("");
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(stateClass) + '">' + esc(stateLabel) + "</span> " +
+      "<b>" + esc(v.subjectId) + "</b> &middot; " + esc(v.subjectType) +
+      " &middot; " + esc(v.approvals) + " of " + esc(v.required) + " approved" +
+      (v.withdrawn ? " &middot; something was taken back" : "") +
+      '<div class="w-dt-times">' + esc(v.reason || "") + "</div>" +
+      (hist ? '<ul class="w-mini">' + hist + "</ul>" : "") +
+      '<div class="w-dt-times">Reference: ' + esc(v.verificationId) + "</div>" +
+      "</div><div class=\"w-mini-row-act\">" +
+      (v.state === "pending"
+        ? '<button class="w-btn ghost sm" data-w-act="approvalyes:' + esc(v.verificationId) + '">' + ms("check") + "Approve</button>" +
+          '<button class="w-btn ghost sm" data-w-act="approvalno:' + esc(v.verificationId) + '">' + ms("block") + "Turn down</button>"
+        : "") +
+      "</div></li>";
+  }
+  function approvalsView(state) {
+    var rows = (state.approvals || []).map(approvalRow).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Approvals</h3><button class=\"w-btn ghost\" data-w-act=\"approvals\">" + ms("refresh") + "Refresh</button></div>" +
+      '<div class="w-sub"><h4>Ask for an approval</h4>' +
+      '<select id="wApSubjType">' +
+      APPROVAL_SUBJECTS.map(function (a) { return '<option value="' + esc(a[0]) + '">' + esc(a[1]) + "</option>"; }).join("") +
+      "</select>" +
+      '<input id="wApSubjId" placeholder="Which one - for a medicine, the drug name exactly as prescribed">' +
+      '<textarea id="wApReason" rows="2" placeholder="Why it is needed"></textarea>' +
+      '<p class="w-hint">' + ms("info") + "The name has to match the drug exactly, or the approval will not cover the prescription. Whoever asks cannot also be the one who approves." +
+      "</p><button class=\"w-btn\" data-w-act=\"approvalask\">" + ms("send") + "Ask</button></div>" +
+      (state.approvals !== null
+        ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No approvals on the ledger.</p>')
+        : "") +
+      "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -3407,6 +3466,7 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "approvals" ? approvalsView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
@@ -4855,6 +4915,46 @@
   /* Searching the terminology. The words the clinician typed are the query and nothing else - no
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
+  function approvalsOpen() {
+    st.view = "approvals"; st.approvals = null; paint(); loadApprovals();
+  }
+  function loadApprovals() {
+    st.busy = true; paint();
+    return apiGet("/ward/approvals?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.approvals = r.verifications || [];
+        paint();
+      })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function approvalAsk() {
+    var subjectType = val("wApSubjType"), subjectId = val("wApSubjId"), reason = val("wApReason");
+    if (!subjectId) { st.err = "Say which one this is about."; paint(); return; }
+    if (!reason) { st.err = "Say why it is needed."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/approval-request", { orgId: st.orgId, subjectType: subjectType, subjectId: subjectId, reason: reason })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Asked. It needs " + r.required + " approval" + (r.required === 1 ? "" : "s") + " from somebody else." : null)) {
+          ["wApSubjId", "wApReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadApprovals();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not ask for that."; paint(); });
+  }
+  function approvalDecide(id, decision) {
+    var reason = decision === "rejected" ? (prompt("Why are you turning this down?") || "") : "";
+    // A turn-down with no reason is one nobody can act on, so it is not sent.
+    if (decision === "rejected" && !reason) { st.err = "A turn-down needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/approval-decide", { orgId: st.orgId, verificationId: id, decision: decision, reason: reason || undefined })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? (r.state === "approved" ? "Approved." : r.state === "rejected" ? "Turned down." : "Recorded - it still needs " + (r.required - r.approvals) + " more.") : null)) loadApprovals();
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
   function consultationOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.consultationResult = null;
@@ -5585,6 +5685,7 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
@@ -5815,6 +5916,10 @@
     if (cmd === "reports") { loadReports(); return; }
     if (cmd === "incidents") { incidentsOpen(); return; }
     if (cmd === "consultation") { consultationOpen(); return; }
+    if (cmd === "approvals") { approvalsOpen(); return; }
+    if (cmd === "approvalask") { approvalAsk(); return; }
+    if (cmd === "approvalyes") { approvalDecide(arg, "approved"); return; }
+    if (cmd === "approvalno") { approvalDecide(arg, "rejected"); return; }
     if (cmd === "consultationsave") { saveWholeConsultation(); return; }
     if (cmd === "incidentreport") { reportIncidentAction(); return; }
     if (cmd === "incidenttriage") { incidentTriage(arg); return; }
@@ -5896,7 +6001,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -5915,6 +6020,7 @@
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
     st.incidentLog = null; st.incidentHealth = null;
     st.consultationResult = null;
+    st.approvals = null;
     st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
     if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
   }

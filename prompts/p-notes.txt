@@ -1,0 +1,60 @@
+TASK: Let a doctor write a note onto a patient's Timeline in WardSynQ.
+
+REPO: /Users/diwakarkumar/Developer/StewardMD/.claude/worktrees/wt-notes (branch synergy/notes)
+Work ONLY in that directory.
+
+WHY: The patient chart has a Timeline that assembles the whole stay in order (admission,
+observations, diagnoses, medication orders, investigation requests). It is read-only. A doctor
+cannot add a clinical note to it, so the one thing a ward round actually produces has nowhere to
+go. Epic and Oracle both treat the progress note as a first-class timeline entry; ours has none.
+
+FIRST, READ BEFORE YOU WRITE:
+  functions/_wardsynq/migrate-inpatient.js  - the timeline projection lives here. Find the
+    timeline handler and TIMELINE_LABEL / OBSERVATION_NAME. See exactly how an event is shaped
+    ({ resourceType, at, label, id, ... }) and how the projection sorts.
+  functions/api/queue/[[path]].js           - the /ward/* route table and its capability gates.
+  ward.js                                   - the chart UI. Find the timeline card renderer and
+    the `problem` / `addProblem` pair, which is the closest existing example of a chart write.
+  wardsynq/wardsynq-model.js                - the canonical resource factories.
+
+WHAT TO BUILD:
+1. SERVER: a note write and its projection into the timeline.
+   - Prefer the canonical model. If a clinical-note resource factory already exists in
+     wardsynq-model.js, USE IT; only add a new resource shape if there genuinely is not one.
+   - A note carries: patientId, encounterId, author (from the resolved actor, NEVER from the
+     request body), a note type (progress / admission / procedure / discharge as a small fixed
+     set), free text, and the time it was written.
+   - Expose it as POST /api/queue/ward/note, gated on the capability that ALREADY governs
+     clinical writes in that route's cap table (read the table; do not invent a capability).
+   - The author must be the server-resolved actor. A client-supplied author on a signed clinical
+     note is a forgery vector.
+   - Make it appear in the timeline projection alongside the other resource types, with a label
+     that reads as a clinician would say it.
+2. CLIENT (ward.js, ES5 ONLY - var + function, no arrow functions, no let/const, no template
+   literals, no optional chaining; this bundle is never transpiled):
+   - a compose control on the chart: note type selector + textarea + a save action
+   - on success, re-read the timeline so the note appears immediately. Follow the existing
+     addProblem() pattern, which calls loadChart() after a successful write. Repainting from
+     stale client state after a successful write is a bug this codebase has already been bitten
+     by twice.
+   - empty text must be refused client-side with a plain message, not silently dropped
+   - escape all server data through the existing esc() helper
+
+HARD RULES:
+  - Notes are APPEND-ONLY. Never add an edit or delete path. A clinical note that can be silently
+    rewritten is not a record. If a correction is needed that is a new note, exactly as the
+    discharge summary already treats a signed correction as a new signed version.
+  - No em-dashes in user-facing strings.
+  - No PHI in logs or URLs.
+  - Add unit tests under test/ for the server side: the note is stored, the author comes from the
+    actor and not the body, an empty note is refused, and the note appears in the timeline
+    projection in the right time order.
+
+VERIFY BEFORE YOU FINISH:
+  1. node --check ward.js
+  2. node --test --experimental-test-module-mocks --test-concurrency=4 test/*.test.mjs
+     Report the exact tests/pass/fail counts. The suite is at 5732 pass / 0 fail before your
+     change; it must still be 0 fail.
+COMMIT on branch synergy/notes. Do not push. Do not merge.
+
+REPORT BACK: the endpoint, the capability it is gated on, the files touched, and the test counts.

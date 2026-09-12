@@ -141,6 +141,7 @@ import { blockPeriod, cancelBlackout, listBlackouts } from "../../_wardsynq/blac
 import { flowsheet } from "../../_wardsynq/flowsheet-view.js";
 import { orderInvestigation } from "../../_wardsynq/ward-order.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
+import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 
 /* One consultation arrives with ONE idempotency key from the screen, but fans out into several
  * writes. Handing the same key to each would make the second piece look like a repeat of the first
@@ -602,6 +603,13 @@ export async function onRequest(context) {
          * any single piece is outside their grant. A tighter bar here would be a false comfort: it
          * would narrow who may call, and change nothing about what anyone may write. */
         consultation: CAPS.EMR_VITALS,
+        /* Approvals. ASKING for one is the lowest clinical bar - the prescriber who was just blocked
+         * is the person who asks. GRANTING one is emr.treat, because the thing being approved is a
+         * prescribing decision and the hospital named a consultant as the grantor. The rule that
+         * actually protects this is neither of those: verification.js refuses to let the person who
+         * asked be the person who grants, whatever capability they hold. */
+        "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
+        "approval-decide": CAPS.EMR_TREAT,
         "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
@@ -1083,6 +1091,18 @@ export async function onRequest(context) {
        * the advisories below are ORG content and must not become caller-supplied just because the
        * call arrived bundled). consultation.js decides order, does the up-front permission check
        * across all pieces, and reports honestly when a save lands in part. */
+      if (sub === "approval-request" && method === "POST") {
+        const r = await requestVerification(request, env, { ...deps, subjectType: body.subjectType, subjectId: body.subjectId, reason: body.reason, context: body.context, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "approval-decide" && method === "POST") {
+        const r = await recordVerification(request, env, { ...deps, verificationId: body.verificationId, decision: body.decision, reason: body.reason, withdraws: body.withdraws, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "approvals" && method === "GET") {
+        const r = await listVerifications(request, env, { ...deps, subjectId: url.searchParams.get("subjectId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "consultation" && method === "POST") {
         const cWriters = {
           vitals: (rq, ev, c) => recordWardVitals(rq, ev, { ...c, encounterId: c.encounterId, patientId: body.patientId, vitals: c.item,

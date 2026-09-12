@@ -4236,9 +4236,29 @@ test("OFF-FORMULARY NEVER BLOCKS, and a RESTRICTED drug does - because the hospi
   assert.match(mero.basis, /not a clinical safety finding/);
   assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "wsq-rx-" + adm.encounterId.toLowerCase() + "-meropenem"), null, "and nothing was written");
 
-  const approved = await order("Meropenem", { approvalRef: "MICRO-2291" });
+  /* A MADE-UP REFERENCE IS NOT AN APPROVAL - it used to be: this call read
+   * `order("Meropenem", { approvalRef: "MICRO-2291" })` and expected 200, so any non-empty string
+   * cleared stewardship and a prescriber blocked at 2am could type one character and be through.
+   * That refusal is asserted in test/wardsynq-formulary.test.mjs instead of with another order
+   * here, because this file shares one rate-limit budget and an extra write costs an unrelated
+   * test two thousand lines below. What is proved HERE is the half a unit test cannot reach: that
+   * a real chain, read out of the record store, actually clears the block end to end. */
+  RECORD.append(TENANT_ROW.id, [
+    { resourceType: "Verification", id: "wsq-verif-mero-1", version: 1, kind: "request",
+      subjectType: "RestrictedMedication", subjectId: "Meropenem", by: idFor(DOCTOR),
+      reason: "resistant organism", at: "2026-09-12T10:00:00.000Z" },
+    { resourceType: "Verification", id: "wsq-verif-mero-1-d1", version: 1, kind: "decision",
+      parentVerificationId: "wsq-verif-mero-1", subjectType: "RestrictedMedication",
+      subjectId: "Meropenem", by: "micro.consultant", decision: "approved", at: "2026-09-12T10:05:00.000Z" },
+  ]);
+  const approved = await order("Meropenem", { approvalRef: "wsq-verif-mero-1" });
   assert.equal(approved.__status, 200, JSON.stringify(approved));
-  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", approved.orderId)).restrictionApprovalRef, "MICRO-2291");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", approved.orderId)).restrictionApprovalRef, "wsq-verif-mero-1");
+
+  /* That an approval covers ONLY the drug it was granted for is proved in
+   * test/wardsynq-verification.test.mjs rather than with another order here: this test shares a
+   * rate-limit budget with the rest of the file, and spending it on a case a unit test already
+   * pins down is how an unrelated test two thousand lines below starts failing. */
 
   // A specialty restriction is satisfied by the specialty, not by an approval number.
   assert.equal((await order("Vancomycin", { approvalRef: "X" })).__status, 409);

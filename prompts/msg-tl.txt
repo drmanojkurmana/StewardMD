@@ -1,0 +1,50 @@
+Timeline becomes a page, a doctor can write on it, and radiology gets staff
+
+THE HISTORY WAS A CARD AMONG A DOZEN CARDS, which is the wrong shape for the one
+thing a doctor picking up an unfamiliar patient does first: read the stay from
+the beginning. It is now a page of its own, reached from the chart header and
+from the card it replaces, and the note box sits at the TOP of it, because the
+note a ward round produces is written while reading the history that prompted
+it, not on a different screen.
+
+NO HOSPITAL COULD WRITE A CLINICAL NOTE UNTIL IT CONFIGURED A TEMPLATE.
+writeTemplatedNote refused anything not defined in org config, and a hospital
+that had defined none - which is every hospital on the day it opens, including
+the demonstration one - got template_not_found for whatever it sent. So
+/ward/note existed, the chart had a compose box, and neither could produce a
+note. BUILT_IN_TEMPLATES is one free-text progress note with a single "Clinical
+course" section. It invents no clinical structure, asserts nothing about what an
+examination should contain and carries no default text, which resolveTemplate
+refuses outright and is right to. An org template of the same id replaces it, so
+it is a floor and never a ceiling. The file header said it shipped no template of
+its own; that paragraph now records why this one exists and what it deliberately
+is not.
+
+WHO ORDERED IT travels on the timeline. The entry said what was ordered and when
+but never by whom, and "who ordered this chest film, and when" is the first
+question asked about an investigation nobody can account for. requesterId is the
+authenticated ordering clinician (migrate-inv-order.js: "never a name typed
+anywhere"), so this is the session's own record rather than a free-text claim. An
+order carrying no requester says nothing rather than guessing.
+
+RADIOGRAPHER AND RADIOLOGIST NOW EXIST. Imaging had a worklist, a reporting
+endpoint and a board, and nobody who could be given the job. They are separate
+roles because the acts are separate: a radiographer acquires the study and needs
+the worklist (emr.view, identity beside a requested procedure); reporting is a
+different act with different accountability, which the cap table already states,
+so only the radiologist holds lab.result and can file a report or protocol a
+study. Neither orders, prescribes, dispenses or bills.
+
+EMR_VIEW WAS TRIED ON THE LAB ROLE AND REVERTED, recorded in the file so nobody
+spends an afternoon rediscovering it. The bench board needs patient identity and
+emr.view is how the imaging worklist solved that, but emr.view is not an identity
+grant: it also opens the discharge summary and the ward critical list, and
+wardsynq-inpatient-emar.test.mjs asserts 403 on both. The test is right and the
+grant was too wide. Naming a specimen needs name, MRN and date of birth, not a
+discharge summary, so the answer is a narrow identity capability and that is not
+this commit.
+
+5732 tests pass, 0 fail.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

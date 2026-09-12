@@ -460,6 +460,11 @@
        * route (functions/_wardsynq/incidents.js) - and had NO tile anywhere, so nobody, including
        * safety_officer whose whole job this is, could reach it. */
       tile({ go: "ward:incidents", icon: "report", title: "Safety and incidents", sub: "File a report; triage, RCA and CAPA for safety officers", need: ["incident.report", "incident.investigate"] }),
+      /* Approvals. Reachable by anyone with clinical business, because the prescriber who was just
+       * blocked by stewardship is the person who needs to ask, and the consultant who grants it
+       * needs the same door. Who may actually grant is decided on the route, and who may not grant
+       * their OWN request is decided beneath that, in verification.js. */
+      tile({ go: "ward:approvals", icon: "verified", title: "Approvals", sub: "Ask for an approval for a restricted medicine, and grant the ones waiting", need: ["emr.vitals", "emr.treat"] }),
       tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "emr.view" }),
     ] : [];
     var peopleTiles = [

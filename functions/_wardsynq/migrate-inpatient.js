@@ -34,6 +34,35 @@ import { vitalsToObservations, VITAL_CODES } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
+import { chainState, approvalCovers } from "./verification.js";
+
+/**
+ * Does this approval reference actually approve this drug, right now?
+ *
+ * Reads the whole chain for the reference and asks verification.js what it means. Returns a plain
+ * true/false because that is all the formulary needs to know; the reason it is false is already on
+ * the refusal the formulary builds.
+ *
+ * FAILS CLOSED, deliberately and in every direction: no reference, no chain, a chain about a
+ * different drug, a chain still short of the approvals this hospital asked for, a withdrawn
+ * approval, or a store that would not answer - all of them are "not approved". The alternative is a
+ * restricted antibiotic going through because a read timed out.
+ */
+async function verifyApprovalRef(svc, ref, drug, ctx) {
+  if (!ref || !drug) return false;
+  let rows;
+  try {
+    // Every record in the chain carries the request's id, so the chain is the request plus every
+    // decision pointing back at it.
+    const all = await svc.list("Verification", 500);
+    rows = (all || []).filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
+  } catch { return false; }
+  if (!rows.length) return false;
+  // How many people this hospital wants on a restricted-drug approval. One unless it says otherwise.
+  const levels = ctx && ctx.approvalLevels;
+  const state = chainState(rows, Number.isFinite(levels) ? levels : 1);
+  return approvalCovers(state, "RestrictedMedication", drug);
+}
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
@@ -515,9 +544,16 @@ async function createWardMedicationOrder(request, env, ctx) {
    * without one is the system that produces the resistance. The refusal names what is missing and
    * who grants it, since one a prescriber cannot act on is one they will work around. */
   const formulary = resolveFormulary(ctx.formulary);
+  /* RESOLVE THE APPROVAL REFERENCE BEFORE ASKING THE FORMULARY ABOUT IT. Until now the reference
+   * was any string the caller sent and nothing ever looked it up, so stewardship could be cleared
+   * by typing a character. Reading the chain can fail (the record store is a network call); a
+   * failure resolves to NOT verified, which blocks the restricted drug. Failing closed is the only
+   * safe direction here - an approval that cannot be read is not an approval. */
+  const approvalVerified = await verifyApprovalRef(svc, str(ctx.approvalRef), candidate.drug || candidate.drugCode, ctx);
   const fStatus = formularyStatus({
     formulary, drug: candidate.drug, code: candidate.drugCode,
     specialty: str(ctx.specialty), approvalRef: str(ctx.approvalRef), reason: str(ctx.formularyReason),
+    approvalVerified,
     requireReasonOffFormulary: ctx.requireReasonOffFormulary === true,
   });
   if (fStatus.blocked) {

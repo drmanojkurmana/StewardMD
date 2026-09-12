@@ -47,8 +47,16 @@ test("RESTRICTED DOES BLOCK, and the refusal is actionable at 2am", () => {
   assert.match(s.detail, /needs an approval reference from Microbiology/);
   assert.equal(s.note, "Carbapenem stewardship.");
 
-  assert.equal(status({ drug: "Meropenem", approvalRef: "MICRO-2291" }).blocked, false);
-  assert.equal(status({ drug: "Meropenem", approvalRef: "MICRO-2291" }).satisfiedBy, "approval");
+  /* A REFERENCE ON ITS OWN IS NOT AN APPROVAL. These two assertions used to expect the opposite,
+   * which is exactly how the hole survived: any non-empty string cleared stewardship. Whether the
+   * reference names a real, standing, this-drug approval is resolved against the approval chain
+   * before this function is called, and arrives as `approvalVerified`. */
+  assert.equal(status({ drug: "Meropenem", approvalRef: "MICRO-2291" }).blocked, true);
+  assert.match(status({ drug: "Meropenem", approvalRef: "MICRO-2291" }).detail, /does not cover Meropenem/);
+  assert.equal(status({ drug: "Meropenem", approvalRef: "MICRO-2291", approvalVerified: true }).blocked, false);
+  assert.equal(status({ drug: "Meropenem", approvalRef: "MICRO-2291", approvalVerified: true }).satisfiedBy, "approval");
+  // A verified flag with no reference is not an approval either; both halves have to be there.
+  assert.equal(status({ drug: "Meropenem", approvalVerified: true }).blocked, true);
 
   // A specialty restriction is satisfied by being in that specialty, not by an approval number.
   const vanc = status({ drug: "Vancomycin" });

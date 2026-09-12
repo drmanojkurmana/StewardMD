@@ -1,0 +1,30 @@
+Incident reporting had a full engine and no front door at all
+
+Signed in as safety_officer to look for the incident-reporting screen and there wasn't one -
+anywhere. wardsynq-incidents.js has held a careful report -> triage -> RCA -> CAPA -> close
+lifecycle since it was written: a near-miss counted as a first-class report, an RCA that refuses
+"human error" as a root cause and asks what about the system made the error easy instead, a CAPA
+that refuses to close on education and reminders alone. functions/_wardsynq/incidents.js wires all
+of it to real routes, gated exactly like everything else in this build (incident.report to file -
+nearly every clinical role holds it - incident.investigate to triage, RCA, add or complete a CAPA,
+or close - safety_officer and admin only). None of it had a tile, a screen, or a single button
+anywhere in the product. Every one of the 159 demonstration staff, including safety_officer whose
+entire job this is, had no way to file or investigate an incident at all.
+
+Added the front door: a "Safety and incidents" tile (Command and operations, gated on either
+capability so filing and investigating both reach it), and a screen in ward.js with a filing form
+always shown to whoever gets here, and a ledger with the safety-committee health summary (near-miss
+ratio, open and overdue actions, how much of the response is only education) that only ever
+populates for incident.investigate. Each incident's own next step - triage, RCA, add a CAPA,
+complete one, attempt close - is offered inline, changing with the incident's actual state, and the
+server's own refusals (a person named as root cause, a CAPA with no owner, closing with actions
+still open) show exactly as written, the same "server is the sole authority, shown in full" pattern
+as prescribing and every other write in this file.
+
+A reporter without incident.investigate never sees the ledger read refused - loadIncidents() stays
+silent on that failure by design, the same reasoning already used for the co-sign worklist:
+somebody who came here to file a report did nothing wrong, and a screen that told them so anyway
+would look like their report had failed too.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

@@ -1,0 +1,28 @@
+Every bed-claim row in the audit log had a blank WHEN, forever
+
+Following the table-wrapping fix, the audit log's Record changes list was
+readable enough to notice a pattern: every _wardsynq_bed_claim row showed no
+WHEN at all, while every Encounter row next to it did. Not one blank cell -
+every single one, on every bed claim ever written.
+
+The store stamps writtenBy (id, kind, tier, at) on every record it writes,
+but only for writes that go through its own put()/putMany() - the governed
+path that also runs authoriseWrite. claimBed() (the self-healing reconciler
+that keeps a bed's claim in sync with whichever Encounter currently sits in
+it) calls svc.repository.append() directly instead, correctly skipping
+authoriseWrite - a bed claim isn't a clinical entity a human or AI is
+writing, it's this file's own bookkeeping - but that also skipped the stamp
+that comes with it. The audit trail was accurately reporting a fact this
+file had genuinely never recorded, not misreading one that existed.
+
+claimBed() now stamps its own writtenBy, using the same shape every other
+record carries: kind: KIND.SERVICE ("internal machinery such as the
+escalation monitor" - wardsynq-actors.js's own words for exactly this kind
+of writer), so the audit log can finally tell a bed claim apart from a
+person's edit instead of showing neither a time nor an author for either.
+
+Found by reading the audit log as supervisor, right after fixing how it
+rendered.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX
