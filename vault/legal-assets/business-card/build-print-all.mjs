@@ -17,6 +17,7 @@ const page = `<!doctype html><html><head><meta charset="utf-8">
 @font-face { font-family: "Inter"; font-weight: 400; src: url("fonts/inter-400.woff") format("woff"); }
 @font-face { font-family: "Inter"; font-weight: 500; src: url("fonts/inter-500.woff") format("woff"); }
 @font-face { font-family: "Inter"; font-weight: 600; src: url("fonts/inter-600.woff") format("woff"); }
+@font-face { font-family: "Outfit"; font-weight: 600; src: url("fonts/outfit-600.woff") format("woff"); }
 @font-face { font-family: "Dancing Script"; font-weight: 400; src: url("fonts/dancing-400.woff") format("woff"); }
 @font-face { font-family: "Dancing Script"; font-weight: 600; src: url("fonts/dancing-600.woff") format("woff"); }
 @page { size: 3.5in 2in; margin: 0; }

@@ -15,7 +15,7 @@ supplied raster originals at native resolution, pure white ground, no gradients.
 | `artboards/` | All six card faces as design-canvas artboards (96 px/in, 336 x 192) plus `canvas.json`: `Main.dc.html`/`Back.dc.html` (Manoj), `MainDiwakar.dc.html`/`BackDiwakar.dc.html`, `MainCompany.dc.html`/`BackCompany.dc.html`. |
 | `img/` | Logos as placed: MaiK mark and infinity crop (from `maik-wordmark-color.png`), WardSynQ and StewardMD (supplied files, backdrop knocked out by `prepare-logos.py`), the supplied QR. `*-white.png` / `*-dark.png` are the same shapes with the fill changed to white (and mint for "MD") for the dark back; `qr-icon.png` adds a small centre infinity. |
 | `src/` | The supplied WardSynQ, StewardMD and QR files as received. |
-| `fonts/` | Inter 400/500/600 and Dancing Script 400/600 (Google Fonts, OFL), embedded into the PDF. The card uses Dancing Script 400. |
+| `fonts/` | Inter 400/500/600, Outfit 600 and Dancing Script 400/600 (Google Fonts, OFL), embedded into the PDF. The wordmark uses Outfit 600 for "aiK" and Dancing Script 400 for "nowledge". |
 | `build-print.mjs` | Rebuilds Manoj's PDF and proofs from `artboards/` with Playwright Chromium: `node build-print.mjs`. |
 | `build-print-all.mjs` | Rebuilds the combined 6-page PDF and all proofs: `node build-print-all.mjs`. |
 
@@ -24,9 +24,13 @@ white and mint `#5FD3B3` type, flat fills only. The QR (with its centre infinity
 `https://maiknowledge.com/` from 300, 200 and 150 DPI rasters of the PDF (OpenCV check in the
 build session).
 
-**Open item:** the original blue handwritten "nowledge" artwork was not available (only the MaiK
-mark exists in the repo). It is set in Dancing Script as a stand-in. Replace the `<span>` in
-`artboards/Main.dc.html` with the original file once supplied, then re-run `build-print.mjs`.
+**Wordmark construction (owner's call, 12 Sep 2026):** the infinity mark (cropped from
+`maik-wordmark-color.png`) is the "M"; "aiK" is typeset in Outfit 600 (single-storey a, geometric,
+echoing the original); "nowledge" is Dancing Script 400 in blue. All three sit on one measured
+baseline: the mark's ink bottom is 3.3% of its height below it (as in the original), the K cap
+height is the mark height / 1.144 (the original ratio), and the script ascenders meet the K cap.
+The original blue cursive "nowledge" artwork was never supplied; if it turns up, swap the span in
+the three `Main*.dc.html` files and rebuild.
 
 No bleed is included (the brief asked for exact 3.5 x 2 in). Ask the printer whether they want
 0.125 in bleed added; the white ground makes that a trivial page-size change in `build-print.mjs`.
