@@ -152,6 +152,12 @@ function hasCredentials(body) {
 // repaired view can be matched to the operation it produced.
 function toRepairPath(p) { try { return new URL(String(p)).pathname || "/"; } catch { return String(p || "/").split("?")[0]; } }
 
+/* An identifier inside a captured page path is not structure. Older phones stored a labs page as
+ * /LabResults/Home?recordNo=<MRN>; the value becomes {id} on the way in and on the way out. */
+export function redactPathValues(p) {
+  return String(p || "").replace(/=([A-Za-z]{0,6}\d{3,}[A-Za-z0-9-]*)(?=&|$)/g, "={id}");
+}
+
 function safeJsonParse(text) {
   try { return JSON.parse(text); } catch { return null; }
 }
@@ -170,7 +176,7 @@ function cleanObservedViews(raw) {
     if (!Array.isArray(v.headers) || v.headers.length > 24 || v.headers.some((h) => typeof h !== "string" || h.length > 120)) {
       throw new OnboardError("invalid", "observedViews: headers invalid");
     }
-    const clean = { resourceHint: v.resourceHint, pathTemplate: v.pathTemplate, headers: v.headers.slice() };
+    const clean = { resourceHint: v.resourceHint, pathTemplate: redactPathValues(v.pathTemplate), headers: v.headers.slice() };
     if (v.rowsSelector !== undefined) {
       if (typeof v.rowsSelector !== "string" || v.rowsSelector.length > 200) throw new OnboardError("invalid", "observedViews: rowsSelector invalid");
       clean.rowsSelector = v.rowsSelector;
@@ -1033,7 +1039,7 @@ export async function onRequest(context) {
       const validation = phoneState && phoneState.offlineValidation ? phoneState.offlineValidation : null;
       const views = (phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews : []).map((v) => ({
         resource: v.resourceHint || "unknown",
-        path: v.pathTemplate || null,
+        path: v.pathTemplate ? redactPathValues(v.pathTemplate) : null,
         columns: Array.isArray(v.headers) ? v.headers.slice(0, 12) : [],
         guided: !!v.guided,
       }));
@@ -1047,7 +1053,7 @@ export async function onRequest(context) {
         views,
         // The phone runtime replays these (selectors, labels, paths: PHI-free by construction, see
         // connect-agent/phone/CONTRACT.md "observedViews") to read a ward list in the doctor's own session.
-        replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews : [],
+        replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews.map((v) => Object.assign({}, v, { pathTemplate: redactPathValues(v.pathTemplate) })) : [],
         validation: validation ? { ok: validation.ok !== false, issues: (validation.issues || []).slice(0, 10) } : null,
       });
     }
