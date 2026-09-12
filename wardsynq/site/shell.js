@@ -440,14 +440,21 @@
       tile({ go: "opd", icon: "medical_services", title: "OPD desk", sub: "Queue, check-in, consult, prescriptions, results", need: "queue.view" }),
       tile({ go: "workstation", icon: "verified", title: "Order safety workstation", sub: "Medication order with allergy and interaction checks", need: "emr.treat" }),
     ] : [tile({ go: "opd", icon: "medical_services", title: "OPD desk", sub: "Queue, check-in, consult, prescriptions, results", need: "queue.view" })];
+    /* Every one of these six opens a route the server gates at emr.view (patient-flow, twin,
+     * report-patient-flow, fhir-exceptions, emergency-log, downtime - see the capability table in
+     * functions/api/queue/[[path]].js), not queue.view. queue.view is held by nearly every role,
+     * including four with no clinical read at all - pharmacy, billing, cashier, blood_bank, viewer -
+     * so each of them was offered all six of these as their first live tiles and refused by every
+     * one the moment they opened it. The exact bug WARD_NEED already exists to fix for the three
+     * Clinical-section tiles above; it was simply never applied down here too. */
     var cmdTiles = native ? [
-      tile({ go: "ward:flowcommand", icon: "monitoring", title: "Hospital command center", sub: "Patient flow, bottlenecks, emergency status", need: "queue.view", liveId: "lvEmerg" }),
-      tile({ go: "ward:twin", icon: "hub", title: "Digital Twin", sub: "Fused hospital state, freshness, predictions, simulation", need: "queue.view" }),
-      tile({ go: "ward:reports", icon: "summarize", title: "Reports", sub: "Patient flow, clinical operations, pharmacy, imaging, billing, claims", need: "queue.view" }),
+      tile({ go: "ward:flowcommand", icon: "monitoring", title: "Hospital command center", sub: "Patient flow, bottlenecks, emergency status", need: "emr.view", liveId: "lvEmerg" }),
+      tile({ go: "ward:twin", icon: "hub", title: "Digital Twin", sub: "Fused hospital state, freshness, predictions, simulation", need: "emr.view" }),
+      tile({ go: "ward:reports", icon: "summarize", title: "Reports", sub: "Patient flow, clinical operations, pharmacy, imaging, billing, claims", need: "emr.view" }),
       tile({ go: "ward:cashier", icon: "payments", title: "Billing and cashier", sub: "Invoices, collections, claims and TPA pre-authorisation", need: "billing.view" }),
-      tile({ go: "ward:integration", icon: "sync_alt", title: "Integration console", sub: "FHIR, HL7, SCCM: exceptions, outbound, replay", need: "queue.view" }),
-      tile({ go: "ward:emergencyadmin", icon: "gpp_maybe", title: "Emergency access", sub: "Declarations, break-glass log, reconciliation", need: "queue.view" }),
-      tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "queue.view" }),
+      tile({ go: "ward:integration", icon: "sync_alt", title: "Integration console", sub: "FHIR, HL7, SCCM: exceptions, outbound, replay", need: "emr.view" }),
+      tile({ go: "ward:emergencyadmin", icon: "gpp_maybe", title: "Emergency access", sub: "Declarations, break-glass log, reconciliation", need: "emr.view" }),
+      tile({ go: "ward:downtime", icon: "cloud_off", title: "Downtime pack", sub: "Printable ward state for a network outage", need: "emr.view" }),
     ] : [];
     var peopleTiles = [
       tile({ go: "patients", icon: "person_search", title: "Patients", sub: "Find by MRN, register a new patient, open the chart", need: "queue.view" }),
