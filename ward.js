@@ -2557,7 +2557,18 @@
           "<p>" + esc(b.errors.join(", ")) + ". What is shown below is incomplete.</p></div>"
         : "") +
       card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.") +
-      card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(specRow).join(""), "Nothing in transit.") +
+      /* A sample in transit is either received or failed, and the laboratory is who says which. Both
+       * used to be impossible from here - the list showed what was on its way and offered nothing.
+       * A failure needs a reason, because "take it again" is the action and the ward needs to know
+       * whether it was clotted or haemolysed or never arrived. */
+      card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(function (sp) {
+        var id = sp.collection && sp.collection.specimenId;
+        return specRow(sp).replace(/<\/li>$/, "") +
+          (id
+            ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + "Received</button>" +
+              '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + "Failed</button>"
+            : "") + "</li>";
+      }).join(""), "Nothing in transit.") +
       labResultForm(state) +
       card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
       card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
@@ -6331,6 +6342,19 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  function specimenOutcomeAct(specimenId, state) {
+    if (!specimenId) return;
+    var reason = "";
+    if (state === "failed") {
+      try { reason = G.prompt("Why did it fail? Clotted, haemolysed, insufficient, never arrived...") || ""; } catch (e) {}
+      if (!reason) { st.err = "A failed sample needs a reason, so the ward knows what to do differently."; paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? (state === "failed" ? "Recorded as failed. The order needs a new sample." : "Received.") : null)) loadLabBoard(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
   function labResultOpen(srId) {
     var b = st.labBoard || {};
     var found = null;
@@ -7977,6 +8001,8 @@
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
     if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
+    if (cmd === "specreceived") { specimenOutcomeAct(arg, "received"); return; }
+    if (cmd === "specfailed") { specimenOutcomeAct(arg, "failed"); return; }
     if (cmd === "labresultopen") { labResultOpen(arg); return; }
     if (cmd === "labresultsave") { labResultSave(); return; }
     if (cmd === "labresultclose") { st.labResultFor = null; st.labResultOutcome = null; paint(); return; }

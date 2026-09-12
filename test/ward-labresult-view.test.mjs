@@ -53,3 +53,11 @@ test("with no test picked, no entry form is shown", () => {
   const html = view(W, { labResultFor: null });
   assert.ok(!html.includes('id="wLrVal0"'));
 });
+
+test("a sample in transit can be marked received or failed by the laboratory", () => {
+  const W = loadWard();
+  const spec = { serviceRequestId: "sr2", code: "FBC", display: "Full blood count", patientId: "p1", collection: { state: "collected", specimenId: "spc1" } };
+  const html = W._render({ ...W._st, view: "labboard", labBoard: { specimens: [spec], pending: [], criticals: [], errors: [] } });
+  assert.ok(html.includes('data-w-act="specreceived:spc1"'));
+  assert.ok(html.includes('data-w-act="specfailed:spc1"'));
+});
