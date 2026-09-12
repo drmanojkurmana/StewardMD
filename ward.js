@@ -3110,6 +3110,27 @@
    * a later, explicitly-scoped task, not assumed here. */
   var INVOICE_STATUS_WORDS = { open: "Open", paid: "Paid", void: "Void" };
   var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided" };
+  /* WHAT HAS NOT BEEN BILLED YET, AND CLAIMS WORTH A SECOND LOOK.
+   * Unbilled charges are the priced items no invoice has picked up; unpriced ones are shown too, because
+   * an item with no price is not free, it is a gap in the price list. The coding watchlist lists claims
+   * whose clinical coding changed after a payer refused them - each may be a legitimate correction, and
+   * each is shown so a person decides. Both say when they could not be loaded. */
+  function cashExtras(c) {
+    var ch = c.charges, w = c.watch;
+    var chBody = !ch ? '<p class="w-empty">Loading.</p>'
+      : ch.failed ? '<p class="w-hint warn">' + ms("warning") + "Unbilled charges could not be loaded. Do not read this as nothing to bill.</p>"
+      : '<ul class="w-mini">' +
+          (ch.priced || []).map(function (i) { return "<li>" + esc(i.display || i.code) + " &middot; " + esc(i.amount) + "</li>"; }).join("") +
+          (ch.unpriced || []).map(function (i) { return '<li><span class="w-st due">no price set</span> ' + esc(i.display || i.code) + "</li>"; }).join("") +
+        "</ul>" +
+        (ch.tariffWarning ? '<p class="w-hint warn">' + ms("warning") + esc(ch.tariffWarning) + "</p>" : "") +
+        (!(ch.priced || []).length && !(ch.unpriced || []).length ? '<p class="w-empty">Nothing waiting to be billed.</p>' : "");
+    var wBody = !w ? '<p class="w-empty">Loading.</p>'
+      : w.failed ? '<p class="w-hint warn">' + ms("warning") + "The coding watchlist could not be loaded.</p>"
+      : (w.count ? '<p class="w-hint warn">' + ms("warning") + esc(w.reading) + "</p>" : '<p class="w-empty">No claims need a second look.</p>');
+    return '<div class="w-card"><div class="w-card-h">' + ms("receipt_long") + "<h3>Not billed yet</h3></div>" + chBody + "</div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Claims worth a second look</h3></div>" + wBody + "</div>";
+  }
   function cashierView(state) {
     var c = state.cashier || {};
     var invoices = c.invoices || [];
@@ -3137,6 +3158,7 @@
           '<button class="w-btn tiny ghost" data-w-act="invrefund:' + esc(inv.invoiceId) + '">' + ms("undo") + "Refund</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invadjust:' + esc(inv.invoiceId) + '">' + ms("tune") + "Adjustment</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invwriteoff:' + esc(inv.invoiceId) + '">' + ms("remove_circle") + "Write off</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invvoid:' + esc(inv.invoiceId) + '">' + ms("block") + "Cancel this bill</button>" +
           "</div>" : "") + "</div>";
     }).join("");
 
@@ -3159,7 +3181,10 @@
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>Outstanding balance</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
         '<button class="w-btn" data-w-act="cashraise">' + ms("receipt_long") + "Raise invoice from today's charges</button>" +
-        (invRows || '<p class="w-empty">No invoices for this patient yet.</p>') + "</div>" : "") +
+        (c.invoicesFailed
+          ? '<p class="w-hint warn">' + ms("warning") + "The bills could not be loaded. Do not read this as nothing owed.</p>"
+          : (invRows || '<p class="w-empty">No invoices for this patient yet.</p>')) + "</div>" : "") +
+      (c.patientId ? cashExtras(c) : "") +
 
       '<div class="w-card"><div class="w-card-h">' + ms("payments") + "<h3>Post an amount</h3></div>" +
       '<p class="w-hint">Applies to whichever invoice button above you use. A discount, an adjustment and a write-off all require a reason; a plain payment or deposit does not.</p>' +
@@ -5696,13 +5721,24 @@
   }
   function loadCashier() {
     if (!st.cashier || !st.cashier.patientId) return;
-    return apiGet("/ward/invoices?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.cashier.patientId))
+    /* A FAILED LOAD IS NOT "NO INVOICES". This used to set the list to empty on any failure, so a
+     * cashier facing a network error was told the patient owed nothing - and may have let them leave.
+     * The list is now null when it could not be read, and the screen says so. The unbilled charges and
+     * the coding watchlist load alongside, each with the same rule. */
+    var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.cashier.patientId);
+    apiGet("/ward/charges?" + q)
+      .then(function (r) { st.cashier.charges = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.cashier.charges = { failed: true }; paint(); });
+    apiGet("/ward/upcoding?" + q)
+      .then(function (r) { st.cashier.watch = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.cashier.watch = { failed: true }; paint(); });
+    return apiGet("/ward/invoices?" + q)
       .then(function (r) {
-        st.cashier.invoices = (r && r.ok && r.invoices) || [];
-        st.cashier.outstandingBalance = r && r.ok ? r.outstandingBalance : null;
+        if (r && r.ok) { st.cashier.invoices = r.invoices || []; st.cashier.outstandingBalance = r.outstandingBalance; st.cashier.invoicesFailed = false; }
+        else { st.cashier.invoices = []; st.cashier.outstandingBalance = null; st.cashier.invoicesFailed = true; }
         paint();
       })
-      .catch(function () { paint(); });
+      .catch(function () { st.cashier.invoices = []; st.cashier.outstandingBalance = null; st.cashier.invoicesFailed = true; paint(); });
   }
   function cashRaise() {
     if (!st.cashier || !st.cashier.patientId) return;
@@ -6367,6 +6403,18 @@
     apiPost("/ward/surgery-abandon", { orgId: st.orgId, caseId: caseId, reason: reason })
       .then(function (r) { if (settle(r, r && r.ok ? "Recorded as not going ahead." : null)) loadSurgeryCase(caseId); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
+  function invoiceVoid(invoiceId) {
+    if (!invoiceId) return;
+    var reason = "";
+    try { reason = G.prompt("Why is this bill being cancelled?") || ""; } catch (e) {}
+    if (!reason) { st.err = "Cancelling a bill needs a reason."; paint(); return; }
+    if (!confirm("Cancel this bill? It stays on the record as cancelled.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/invoice-void", { orgId: st.orgId, invoiceId: invoiceId, reason: reason })
+      .then(function (r) { st.busy = false; if (r && r.ok) loadCashier(); else { st.cashier.err = (r && (r.detail || r.error)) || "Could not cancel that bill."; paint(); } })
+      .catch(function () { st.busy = false; st.cashier.err = "Could not reach the server."; paint(); });
   }
 
   function dispenseReturn(dispenseId) {
@@ -8047,6 +8095,7 @@
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
     if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
+    if (cmd === "invvoid") { invoiceVoid(arg); return; }
     if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
     if (cmd === "bloodtrace") { bloodTrace(); return; }
     if (cmd === "specreceived") { specimenOutcomeAct(arg, "received"); return; }
