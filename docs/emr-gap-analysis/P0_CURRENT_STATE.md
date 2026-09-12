@@ -178,3 +178,29 @@ since I wrote them. A hospital asking for two approvers was silently getting one
 
 **Next:** cash-drawer shift closing; more backlog (order sets, break-glass, identity/MPI, infusions,
 admission requests); P0.7 fuzzy search; P0.9 MFA; P0.8 documents; P0.10 invariant tests.
+
+
+## 2026-09-13 (night) — backlog 66 → 52
+
+Six more complete-but-unreachable modules now have real workflows, each verified off the backlog by
+route name, no false greens:
+- **Payment method picker** on the cashier screen (no "confirmed by card machine" control exists).
+- **Emergency access (break-glass)** — limits stated before declaring; review log shows whether
+  anybody was notified, including "nobody was notified automatically".
+- **Order sets** — a set writes no orders; each item goes through the ordinary ordering route with its
+  own safety checks, sequentially; a part-applied set says exactly what was refused and nothing is
+  retried.
+- **Bed waiting list** — hours waited on every row; closed deliberately, never aged out.
+- **Infusions + care plan** — the volume caveat shown beside every total; an uncharted drip still
+  reads as running, with a stale warning.
+- **Duplicate records (MPI + merge/unmerge)** — agreed/disagreed fields per candidate; a partial
+  search can never read as "no duplicate". Closes the P0.7 merge screen.
+
+**Numbers:** 5974 tests passing, 0 failing. 305 routes — 233 reachable, **52 waiting for a screen**,
+35 waiting for a test.
+
+**Remaining backlog groups:** wristband tags (6), oncology/cardiology links (6), surgery list and
+abandon (2), billing extras (charges, invoice-void, upcoding, tariff), results release and specimen
+outcome, dispense returns, transfusion trace, maternity status, follow-up, discharge, digital-twin
+and MaiK routes, metrics/operational health. Then P0.7 phonetic search, P0.9 MFA, P0.8 documents,
+P0.10 invariant tests, cash-drawer shift closing.
