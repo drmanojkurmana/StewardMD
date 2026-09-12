@@ -853,6 +853,10 @@
         S.deployment.origins = r.d.origins || S.deployment.origins;
         S.pendingOrigins = r.d.pendingOrigins || [];
         if (S.reuse) { finishReuse(); return; }
+        /* A job that already produced a candidate is DONE: crawling it again only burns the
+         * doctor's time and then fails. Go straight to the review it is waiting for. */
+        var done = r.d.job && r.d.job.candidateVersionId;
+        if (done) { S.versionId = r.d.job.candidateVersionId; S.result = S.result || {}; loadVersionAndShowResult(); return; }
         if (S.pendingOrigins.length) { show("origins"); return; }
         if (S.runner === "phone") { beginAgentMode(); return; }
         show("progress");
@@ -1036,9 +1040,26 @@
         setStatus("warn", "The hospital session expired. Sign in again to continue. The existing connection is kept.");
         return;
       }
-      // A failure ends the crawl too: leaving the hospital browser open hides the very message that
-      // says what went wrong, and the agent is no longer reading anything.
+      /* THE CRAWL ALREADY SUCCEEDED, AND THIS IS THE SECOND ATTEMPT AT IT.
+       *
+       * A session whose job has reached AWAITING_APPROVAL is finished: the server answers any
+       * further discovery with "job is not in discovery". Reopening the sheet on such a session
+       * started the whole crawl again, walked 21 pages a second time and then reported a failure,
+       * while the adapter it had already built sat waiting for the doctor's approval. They saw a
+       * run that said "almost done" and then "you can try again" forever (2026-09-12). Ask the
+       * server what the job actually is, and if it has a candidate, show the approval screen. */
       stopDiscoveryPlugin();
+      if (S.session && e && /not in discovery/i.test(String(e.message || ""))) {
+        api("/sessions/" + enc(S.session.id), {}).then(function (r) {
+          if (!overlay() || !S) return;
+          var vid = r.s === 200 && r.d && (r.d.candidateVersionId || (r.d.job && r.d.job.candidateVersionId));
+          if (vid) { S.versionId = vid; S.result = S.result || {}; loadVersionAndShowResult(); return; }
+          S.progressFailed = true;
+          setStatus("bad", "This connection was already finished. Close and reopen Connect Hospital to review it.");
+          paintProgress();
+        });
+        return;
+      }
       S.progressFailed = true;
       /* NAME THE FAILURE. This swallowed e.message and said only "could not complete", so a crawl
        * that had walked 21 pages and posted its findings left the doctor, and whoever they call,
