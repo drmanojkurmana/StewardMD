@@ -727,7 +727,22 @@ async function bedBoard(request, env, ctx) {
 
   let encounters;
   try { encounters = await svc.list("Encounter", 200); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] }; }
+  catch (e) {
+    /* A REFUSAL IS NOT A SERVER FAULT, and calling it one made this screen unreadable.
+     *
+     * Every exception here became a 502 "record_read_failed". When the exception is the record
+     * refusing the read - a pharmacist, whose grant deliberately excludes Encounter - the caller
+     * got a 502, and Cloudflare replaces a 5xx from a Function with its own HTML error page. So the
+     * browser received a page of HTML where it expected JSON, could not parse it, and the bed board
+     * reported "unavailable": the product telling a pharmacist it was broken when it was working
+     * exactly as designed. specimen.js already separates these two; this did not.
+     *
+     * A genuine read failure is still a 502 and still says so. */
+    if (e instanceof GovernanceError) {
+      return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), wards: [] };
+    }
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] };
+  }
 
   const want = str(ctx.ward).toLowerCase();
   const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)

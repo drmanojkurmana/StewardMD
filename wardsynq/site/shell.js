@@ -149,10 +149,22 @@
       '<button class="btn" type="button" data-go="logout">Sign out</button></div>' : "";
     var h = '<div class="brandbar"><img class="brand-mark" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="" aria-hidden="true" width="261" height="61" decoding="async"><span class="spring"></span>' + tools + "</div>";
     if (org) h += '<div class="hospbar"><span class="name">' + esc(org.name || org.id) + '</span><span class="facts">' + esc(org.code || org.id) +
-      '<span class="sep">/</span>' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
+      ' <span class="sep">/</span> ' + (org.mode === "wardsynq" ? "WardSynQ record" : esc(org.mode || "native") + " mode") + "</span><span class=\"spring\"></span>" +
       (isDemo(org) ? '<span class="demo-tag" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
-      (who ? '<span class="who">' + esc(who.name || who.smdId || "") + (who.role ? ", " + esc(who.role) : "") + "</span>" : "") + "</div>";
+      (who ? '<span class="who">' + esc(personName(who)) + (who.role ? ", " + esc(String(who.role).replace(/_/g, " ")) : "") + "</span>" : "") + "</div>";
     return h;
+  }
+  /* THE PERSON, NOT THEIR LOGIN. The header greeted a staff member with the whole of
+   * "nurse.01@demo.wardsynq.test, nurse" - a login, printed at them, on every screen. A staff sign-in
+   * has no display name yet, so the local part is the closest thing the session honestly holds; a
+   * real name wins whenever one exists, and nothing is invented when neither does. Role underscores
+   * become spaces here too, so "blood_bank" reads as "blood bank". */
+  function personName(who) {
+    var n = (who && (who.name || who.displayName)) || "";
+    if (n && n.indexOf("@") < 0) return n;
+    var id = String(n || (who && who.smdId) || "");
+    var at = id.indexOf("@");
+    return at > 0 ? id.slice(0, at) : id;
   }
   /* The rail: the map of surfaces, the same list the home page states in full. */
   function rail(page) {
@@ -355,7 +367,7 @@
   }
   PAGES.home = { render: function (c) {
     var el = c.el, o = st.org, w = st.who, native = isWardsynq();
-    var head = '<div class="title"><h1>' + esc(o.name || o.id) + '</h1><span class="sub">' + esc(w.name || "") + (w.role ? " · " + esc(w.role) : "") + " · " + esc(o.code || o.id) + "</span></div>";
+    var head = '<div class="title"><h1>' + esc(o.name || o.id) + '</h1><span class="sub">' + esc(personName(w)) + (w.role ? " · " + esc(String(w.role).replace(/_/g, " ")) : "") + " · " + esc(o.code || o.id) + "</span></div>";
     if (!native) head += '<div class="msg note">This hospital runs in ' + esc(o.mode || "native") + " mode: the OPD desk and its EMR are available, the inpatient ward, command center and Digital Twin need a WardSynQ record. An owner can create a WardSynQ hospital from the hospital list.</div>";
     var sec = function (t, tiles, note) { return '<div class="sec"><div class="signal"></div><div class="said"><h2>' + t + (note ? '<span class="n">' + note + "</span>" : "") + '</h2><div class="grid">' + tiles.join("") + "</div></div></div>"; };
     var wardTiles = native ? [
