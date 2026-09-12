@@ -364,6 +364,15 @@
    * board is the case that forced it: a ward opens it with emr.view, and the bench itself opens it
    * with lab.result, which is the same pair of authorities the server accepts for those reads. A
    * single capability would have had to pick one of the two departments to lock out. */
+  /* READING THE WARD NEEDS THE RECORD, NOT JUST THE QUEUE. These three tiles asked for queue.view,
+   * which almost every role holds - so a billing clerk, a pharmacist and a lab technician all saw
+   * Inpatient ward, Admission and bed board and Emergency department offered to them as their FIRST
+   * three tiles, and every one of those screens then refused them. The reads behind them need a
+   * record scope on Encounter, which is granted by emr.view, and separately by transfusion.issue so
+   * the blood bank can identify whose episode it is holding (actor.js). Naming both is what keeps
+   * this honest in either direction: nothing is offered that the server will refuse, and nothing is
+   * hidden from a role that genuinely gets in. */
+  var WARD_NEED = ["emr.view", "transfusion.issue"];
   function tile(opts) {
     var needs = opts.need ? (Object.prototype.toString.call(opts.need) === "[object Array]" ? opts.need : [opts.need]) : [];
     var ok = !needs.length || needs.some(function (n) { return can(n); });
@@ -375,11 +384,28 @@
     var el = c.el, o = st.org, w = st.who, native = isWardsynq();
     var head = '<div class="title"><h1>' + esc(o.name || o.id) + '</h1><span class="sub">' + esc(personName(w)) + (w.role ? " · " + esc(String(w.role).replace(/_/g, " ")) : "") + " · " + esc(o.code || o.id) + "</span></div>";
     if (!native) head += '<div class="msg note">This hospital runs in ' + esc(o.mode || "native") + " mode: the OPD desk and its EMR are available, the inpatient ward, command center and Digital Twin need a WardSynQ record. An owner can create a WardSynQ hospital from the hospital list.</div>";
-    var sec = function (t, tiles, note) { return '<div class="sec"><div class="signal"></div><div class="said"><h2>' + t + (note ? '<span class="n">' + note + "</span>" : "") + '</h2><div class="grid">' + tiles.join("") + "</div></div></div>"; };
+    /* WHAT YOU CAN ACTUALLY DO COMES FIRST.
+     *
+     * Every role opened the identical map in the identical order, which is the doctor's order. A
+     * billing clerk's first screen was eleven clinical tiles she cannot use - ward, emergency,
+     * critical results, laboratory, radiology, theatre, pharmacy - with Billing below the fold. The
+     * pharmacist's was the same, and the lab technician's. The product knew perfectly well which
+     * tiles it had just greyed out and still led with them.
+     *
+     * Within a section the tiles a person can open now sort above the ones they cannot. Nothing is
+     * hidden: a locked tile still appears, still says which role would open it, so the map stays a
+     * complete map of the hospital rather than quietly shrinking to fit whoever is signed in. The
+     * order inside each group is untouched, so a doctor - who can open everything - sees exactly
+     * what they saw before. */
+    var sec = function (t, tiles, note) {
+      var open = [], shut = [];
+      for (var i = 0; i < tiles.length; i++) (tiles[i].indexOf(" disabled") >= 0 ? shut : open).push(tiles[i]);
+      return '<div class="sec"><div class="signal"></div><div class="said"><h2>' + t + (note ? '<span class="n">' + note + "</span>" : "") + '</h2><div class="grid">' + open.concat(shut).join("") + "</div></div></div>";
+    };
     var wardTiles = native ? [
-      tile({ go: "ward:", icon: "bed", title: "Inpatient ward", sub: "Ward list, charts, vitals, eMAR round, notes, discharge", need: "queue.view", liveId: "lvWard" }),
-      tile({ go: "ward:board", icon: "hotel", title: "Admission and bed board", sub: "Admit by MRN, place in a bed, transfer", need: "queue.view", liveId: "lvBeds" }),
-      tile({ go: "ward:edboard", icon: "emergency", title: "Emergency department", sub: "Arrivals, triage, resuscitation, disposition", need: "queue.view", liveId: "lvEd" }),
+      tile({ go: "ward:", icon: "bed", title: "Inpatient ward", sub: "Ward list, charts, vitals, eMAR round, notes, discharge", need: WARD_NEED, liveId: "lvWard" }),
+      tile({ go: "ward:board", icon: "hotel", title: "Admission and bed board", sub: "Admit by MRN, place in a bed, transfer", need: WARD_NEED, liveId: "lvBeds" }),
+      tile({ go: "ward:edboard", icon: "emergency", title: "Emergency department", sub: "Arrivals, triage, resuscitation, disposition", need: WARD_NEED, liveId: "lvEd" }),
       tile({ go: "ward:critsboard", icon: "priority_high", title: "Critical results", sub: "Every open critical result, hospital-wide", need: "emr.view", liveId: "lvCrit" }),
       /* THE LABORATORY AND RADIOLOGY HAD NO FRONT DOOR. Every other department on this map has one:
        * theatre, pharmacy stock, the ED, critical results. Labs and imaging existed only as buttons
