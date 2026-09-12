@@ -269,6 +269,11 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* FILTERS. Chips, wrapping, with the count on each so an empty one is visibly empty rather than
    looking like a screen that failed to load. The active one is FILLED, not merely outlined: a
    filter a reader cannot see is on is a filter hiding half a chart without saying so. */
+/* SEARCH. Above the filters, because "when did we start the co-amoxiclav" is asked far more often
+   than any filter answers it, and on a three-week stay it is unanswerable by scrolling. */
+#smdWard .w-tl-search { display: flex; gap: 6px; align-items: center; margin: 8px 0 4px; flex-wrap: wrap; }
+#smdWard .w-tl-search input { flex: 1 1 220px; min-width: 0; }
+
 #smdWard .w-tl-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
 #smdWard .w-tl-when { margin-top: 0; }
 #smdWard .w-tl-f { font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--outline-variant); background: transparent; color: var(--on-surface-variant); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }

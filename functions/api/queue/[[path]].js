@@ -144,6 +144,7 @@ import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
 import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
+import { recordDetail } from "../../_wardsynq/record-detail.js";
 
 /* One consultation arrives with ONE idempotency key from the screen, but fans out into several
  * writes. Handing the same key to each would make the second piece look like a repeat of the first
@@ -619,6 +620,11 @@ export async function onRequest(context) {
          * and emr.treat is the capability that already means "may make clinical decisions about this
          * patient". Withdrawing one sits at the same bar deliberately: an error serious enough to
          * need a doctor to make is serious enough to need a doctor to take back. */
+        /* Looking at the record behind a line on the timeline is READING THE CHART, and it is
+         * gated exactly as reading the chart is. The record service applies the actor's own read
+         * scope on top, so a role that may not read a type is refused there too - this route adds
+         * no authority of its own and is not a side door around the governed store. */
+        "record-detail": CAPS.EMR_VIEW,
         deceased: CAPS.EMR_TREAT, "deceased-correct": CAPS.EMR_TREAT,
         /* Contacts are the front desk's work, on the capability that registers a patient. Reading
          * them is emr.view: a nurse looking for somebody to ring must not need prescribing rights. */
@@ -1109,6 +1115,10 @@ export async function onRequest(context) {
        * the advisories below are ORG content and must not become caller-supplied just because the
        * call arrived bundled). consultation.js decides order, does the up-front permission check
        * across all pieces, and reports honestly when a save lands in part. */
+      if (sub === "record-detail" && method === "GET") {
+        const r = await recordDetail(request, env, { ...deps, resourceType: url.searchParams.get("type") || "", recordId: url.searchParams.get("id") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "deceased" && method === "POST") {
         const r = await recordDeath(request, env, { ...deps, patientId: body.patientId, deceased: body.deceased || body, confirm: body.confirm === true, correct: body.correct === true, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);

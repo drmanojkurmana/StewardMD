@@ -878,7 +878,11 @@
       if (f[0] === cur) return true;   // never yank the active filter out from under the reader
       return inRange.some(function (e) { return e.category === f[0]; });
     });
-    return '<div class="w-tl-filters">' + offered.map(function (f) {
+    return '<div class="w-tl-search"><input id="wTlQ" type="search" placeholder="Search this history - a drug, a word from a note, a person" value="' + esc(state.timelineQuery || "") + '">' +
+      '<button class="w-btn ghost sm" data-w-act="timelinesearch">' + ms("search") + "Search</button>" +
+      (state.timelineQuery ? '<button class="w-btn ghost sm" data-w-act="timelinesearchclear">' + ms("close") + "Clear</button>" : "") +
+      "</div>" +
+      '<div class="w-tl-filters">' + offered.map(function (f) {
       var n = f[0] ? inRange.filter(function (e) { return e.category === f[0]; }).length : inRange.length;
       return '<button class="w-tl-f' + (cur === f[0] ? " on" : "") + '" data-w-act="timelinefilter:' + esc(f[0] || "all") + '">' +
         esc(f[1]) + " <i>" + esc(n) + "</i></button>";
@@ -888,13 +892,27 @@
         esc(w[1]) + "</button>";
     }).join("") + "</div>";
   }
+  /* SEARCH. "When did we start the co-amoxiclav" is asked far more often than any filter answers,
+   * and on a three-week stay it is unanswerable by scrolling. It searches what the reader can
+   * actually see - the line itself and the words behind it - rather than the raw record, because a
+   * search that matched hidden fields would return rows whose match nobody can find. */
+  function timelineMatches(e, q) {
+    if (!q) return true;
+    var hay = String(e.label || "");
+    if (e.who) hay += " " + e.who;
+    if (e.category) hay += " " + e.category;
+    (e.body || []).forEach(function (b) { hay += " " + (b.heading || "") + " " + (b.text || ""); });
+    return hay.toLowerCase().indexOf(q) >= 0;
+  }
   function timelineFiltered(state) {
     var all = state.timeline || [];
     var f = state.timelineFilter || "";
     var since = timelineSince(state.timelineWhen || "");
+    var q = String(state.timelineQuery || "").trim().toLowerCase();
     return all.filter(function (e) {
       if (f && e.category !== f) return false;
       if (since && e.at < since) return false;
+      if (q && !timelineMatches(e, q)) return false;
       return true;
     });
   }
@@ -946,8 +964,45 @@
         : "") +
       "</span>" +
       (station ? '<span class="w-tl-a">' + station + "</span>" : "") +
+      '<button class="w-tl-x" data-w-act="timelinedetail:' + esc(e.resourceType || "") + "~" + esc(e.id || "") + '">' +
+        ms("fact_check") + "Show the record</button>" +
       "</li>";
   }
+  /* THE RECORD BEHIND A LINE, AND EVERY VERSION OF IT.
+   *
+   * A version that was overtaken before it ever took effect is marked as such rather than listed as
+   * though it had stood: "this was prescribed and corrected an hour later" and "this stood all week"
+   * are different facts, and showing only the latest version makes them look identical. */
+  function detailPanel(state) {
+    var d = state.recordDetail;
+    if (!d) return "";
+    if (d.loading) return '<div class="w-card"><p class="w-hint">' + ms("info") + "Opening the record…</p></div>";
+    if (!d.ok) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("error") + "<h3>The record could not be opened</h3>" +
+        '<button class="w-ic" data-w-act="timelinedetailclose">' + ms("close") + "</button></div>" +
+        '<p class="w-hint warn">' + esc(d.detail || d.error || "Not available.") + "</p></div>";
+    }
+    var versions = (d.versions || []).slice().reverse().map(function (v) {
+      return "<li>" +
+        '<span class="w-st ' + (v.current ? "" : v.stood ? "" : "escalate") + '">v' + esc(v.version) + (v.current ? " · current" : "") + "</span> " +
+        (v.byName ? esc(v.byName) : "somebody") +
+        (v.onBehalfOf ? " on behalf of " + esc(v.onBehalfOf) : "") +
+        " &middot; " + when(v.recordedAt) +
+        (v.effectiveAt && v.effectiveAt !== v.recordedAt ? " &middot; took effect " + when(v.effectiveAt) : "") +
+        (v.source && v.source !== "wardsynq-native" ? " &middot; from " + esc(v.source) : "") +
+        (v.supersededBeforeEffective ? ' <span class="w-st escalate">overtaken before it took effect - this was never what the record said</span>' : "") +
+        (v.amendedAt ? ' <span class="w-st due">corrected</span>' : "") +
+        (v.changed ? '<div class="w-dt-times">changed: ' + esc(v.changed.join(", ")) + "</div>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + esc(d.resourceType) + "</h3>" +
+      '<button class="w-ic" data-w-act="timelinedetailclose" title="Close">' + ms("close") + "</button></div>" +
+      '<div class="w-dt-times">' + esc(d.recordId) + " &middot; " + esc(d.versionCount) + " version" + (d.versionCount === 1 ? "" : "s") + "</div>" +
+      (versions ? '<div class="w-sub"><h4>Versions, newest first</h4><ul class="w-mini">' + versions + "</ul></div>" : "") +
+      '<div class="w-sub"><h4>What the record says now</h4>' + reportValue(d.record) + "</div>" +
+      "</div>";
+  }
+
   function timelineGapHint(state) {
     return state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "";
   }
@@ -984,6 +1039,20 @@
   /* Opening the report an order produced. The investigations screen is where results are read, and
    * this takes the reader there with the report already picked out, rather than building a second
    * place to read a result that could drift from the first. */
+  /* Opens the record behind a timeline line. The argument carries the type and the id together
+   * because a record id alone does not say what it is, and the record service refuses a type it
+   * was not given. */
+  function timelineDetail(arg) {
+    var parts = String(arg || "").split("~");
+    var type = parts[0], id = parts.slice(1).join("~");
+    if (!type || !id) return;
+    st.recordDetail = { loading: true };
+    paint();
+    apiGet("/ward/record-detail?orgId=" + encodeURIComponent(st.orgId) +
+      "&type=" + encodeURIComponent(type) + "&id=" + encodeURIComponent(id))
+      .then(function (r) { st.recordDetail = r || { ok: false, error: "no_response" }; paint(); })
+      .catch(function () { st.recordDetail = { ok: false, detail: "Could not open that record." }; paint(); });
+  }
   function timelineOpenReport(reportId) {
     if (!reportId) return;
     /* Results are read in the Investigations card on the chart - there is no separate results
@@ -1039,6 +1108,7 @@
       '<textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + "</textarea>" +
       (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + "</p>" : "") +
       '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + "Add note</button></div>" +
+      detailPanel(state) +
       '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>History &middot; " + (t ? t.length : 0) + "</h3></div>" +
       (t == null ? "" : timelineFilterBar(state)) +
       /* The active filter is restated in words above the list. A reader who does not notice a
@@ -6214,7 +6284,7 @@
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
-      st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null;
+      st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
@@ -6412,6 +6482,10 @@
     if (cmd === "incidents") { incidentsOpen(); return; }
     if (cmd === "timelinefilter") { st.timelineFilter = arg === "all" ? "" : arg; paint(); return; }
     if (cmd === "timelinewhen") { st.timelineWhen = arg === "any" ? "" : arg; paint(); return; }
+    if (cmd === "timelinesearch") { st.timelineQuery = val("wTlQ"); paint(); return; }
+    if (cmd === "timelinesearchclear") { st.timelineQuery = ""; paint(); return; }
+    if (cmd === "timelinedetail") { timelineDetail(arg); return; }
+    if (cmd === "timelinedetailclose") { st.recordDetail = null; paint(); return; }
     if (cmd === "timelineopen") {
       if (!st.timelineOpen) st.timelineOpen = {};
       if (st.timelineOpen[arg]) delete st.timelineOpen[arg]; else st.timelineOpen[arg] = 1;
@@ -6530,7 +6604,7 @@
   function close() {
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
-    st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null;
+    st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
     st.incidentLog = null; st.incidentHealth = null;

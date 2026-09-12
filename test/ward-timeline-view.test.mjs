@@ -129,3 +129,66 @@ test("the glance card on the chart is never filtered", () => {
   const html = W._render({ ...W._st, view: "chart", sel: SEL, timeline: EVENTS, timelineFilter: "note" });
   assert.ok(html.includes("ordered CBC"), "the chart glance must not inherit the history's filter");
 });
+
+test("search narrows the history to lines that mention the words", () => {
+  const W = loadWard();
+  const html = W._render(base(W, { timelineQuery: "co-amoxiclav" }));
+  // The note's BODY mentions it, so the note survives the search.
+  assert.ok(html.includes("wrote a progress note"), "a match inside the note body should count");
+  assert.ok(!html.includes("ordered CBC"), "an unrelated line should be filtered out");
+});
+
+test("search matches who did it, not only what was done", () => {
+  const W = loadWard();
+  const html = W._render(base(W, { timelineQuery: "dr.mehta" }));
+  assert.ok(html.includes("wrote a progress note"));
+  assert.ok(html.includes("ordered CBC"));
+  assert.ok(!html.includes("CRITICAL: Potassium"), "a line by nobody should not match a person search");
+});
+
+test("a search matching nothing says so rather than looking broken", () => {
+  const W = loadWard();
+  const html = W._render(base(W, { timelineQuery: "zzzznothing" }));
+  assert.match(html, /Nothing of that kind on this stay|Nothing recorded/);
+});
+
+test("every line offers a way into the record behind it", () => {
+  const W = loadWard();
+  const html = W._render(base(W));
+  assert.ok(html.includes('data-w-act="timelinedetail:ClinicalNote~n1"'));
+  assert.ok(html.includes("Show the record"));
+});
+
+test("the record panel shows every version, who wrote it, and what moved", () => {
+  const W = loadWard();
+  const html = W._render(base(W, { recordDetail: {
+    ok: true, resourceType: "MedicationOrder", recordId: "mo1", versionCount: 2,
+    record: { drug: "Co-amoxiclav", route: "iv" },
+    versions: [
+      { version: 1, recordedAt: "2026-09-10T09:00:00.000Z", byName: "dr.a", stood: true },
+      { version: 2, recordedAt: "2026-09-10T11:00:00.000Z", byName: "dr.b", stood: true, changed: ["route"], current: true },
+    ],
+  } }));
+  assert.ok(html.includes("MedicationOrder"));
+  assert.ok(html.includes("dr.a"));
+  assert.ok(html.includes("dr.b"));
+  assert.ok(html.includes("current"));
+  assert.ok(html.includes("changed: route"));
+});
+
+test("a version that was overtaken before it took effect says so plainly", () => {
+  const W = loadWard();
+  const html = W._render(base(W, { recordDetail: {
+    ok: true, resourceType: "Observation", recordId: "o1", versionCount: 1,
+    record: {},
+    versions: [{ version: 1, recordedAt: "2026-09-10T09:00:00.000Z", byName: "dr.a", stood: false, supersededBeforeEffective: true }],
+  } }));
+  assert.match(html, /never what the record said/);
+});
+
+test("a record that cannot be opened says why instead of showing an empty panel", () => {
+  const W = loadWard();
+  const html = W._render(base(W, { recordDetail: { ok: false, detail: "You may not read this type." } }));
+  assert.ok(html.includes("could not be opened"));
+  assert.ok(html.includes("You may not read this type."));
+});
