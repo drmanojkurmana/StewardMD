@@ -860,6 +860,7 @@
     var s = st.sel; if (!s) return;
     var text = val("wTlNote");
     if (!text) { st.noteErr = "A note needs words."; paint(); return; }
+    st.noteDraft = text;               // survives the repaint, and every refusal below
     st.busy = true; st.noteErr = ""; paint();
     /* "progress" is the built-in free-text template every hospital has without configuring one
      * (functions/_wardsynq/note-templates.js). A hospital that defines its own `progress` template
@@ -867,6 +868,7 @@
     apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: text } })
       .then(function (r) {
         if (settle(r, r && r.written ? "Note added." : null)) {
+          st.noteDraft = "";           // on the record now, so the draft has done its job
           var el = document.getElementById("wTlNote"); if (el) el.value = "";
           // Re-read rather than repaint from what the browser believes. A successful write that
           // leaves the page showing the old story is the bug this codebase has already been bitten
@@ -886,7 +888,11 @@
       '<button class="w-ic" data-w-act="timelineload" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Add a clinical note</h3></div>" +
       '<p class="w-hint">What has happened, what was found, what was done, and what happens next. It is added to this history and cannot be edited afterwards; a correction is a new note.</p>' +
-      '<textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen."></textarea>' +
+      /* The words survive a repaint. A refused save used to clear the box, so a clinician who was
+       * told "your role cannot do that" also lost the note they had just written - the one moment
+       * the text is most worth keeping, because the fix is to fetch someone who CAN sign it, not to
+       * type it again. st.noteDraft is held across paints and only cleared on a successful save. */
+      '<textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + "</textarea>" +
       (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + "</p>" : "") +
       '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + "Add note</button></div>" +
       '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>History &middot; " + (t ? t.length : 0) + "</h3></div>" +

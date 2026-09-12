@@ -303,7 +303,28 @@ const AZ_SAY = {
   not_a_member: "You are not on this clinic's staff list. Ask the owner to add you.",
   org_mismatch: "You are signed in to a different clinic. Sign out and sign in to this one.",
   out_of_scope: "Your access is limited to certain departments or rooms, and this patient is outside it.",
-  forbidden: "Your role cannot check patients in. Ask the owner to grant a role that can.",
+  forbidden: "Your role does not allow that. Ask the owner to grant a role that does.",
+};
+/* WHAT THE PERSON WAS ACTUALLY REFUSED, in words they use for the job.
+ *
+ * This is the shared refusal for EVERY permission failure in the product, and its wording was
+ * hardcoded to "cannot check patients in" - a phrase from the outpatient check-in desk. So a nurse
+ * refused a clinical note was told she could not check patients in, a pharmacist refused a chart
+ * was told the same, and so was everyone else. The message named an action nobody had attempted,
+ * which is worse than saying nothing: it sends the owner to change the wrong thing.
+ *
+ * The capability now travels on the refusal (_opd_org.js), and these are the plain-English words
+ * for each. A capability with no entry falls back to the generic sentence rather than inventing a
+ * description of itself. */
+const CAP_SAY = {
+  "queue.view": "see the patient list", "queue.add": "register or add a patient",
+  "queue.status": "move a patient through the queue", "queue.assign": "assign a patient to a clinician",
+  "emr.view": "open a patient's chart", "emr.vitals": "record observations",
+  "emr.treat": "prescribe or write in a chart", "order.read": "see a patient's orders",
+  "order.verify": "verify an order", "order.dispense": "dispense medicines",
+  "lab.result": "release a result", "billing.view": "see billing", "billing.charge": "take payment",
+  "staff.admin": "manage staff and roles", "analytics.view": "see reports",
+  "him.roi": "release records to a third party", "incident.report": "file an incident report",
 };
 function azRefusal(az) {
   const reason = (az && az.reason) || "forbidden";
@@ -311,7 +332,8 @@ function azRefusal(az) {
   if (az && az.role) {
     out.role = az.role;
     if (reason === "forbidden") {
-      out.message = 'Your role here is "' + az.role + '", which cannot check patients in' +
+      const doing = CAP_SAY[az.cap] ? " " + CAP_SAY[az.cap] : "";
+      out.message = 'Your role here is "' + az.role + '", which cannot' + (doing || " do that") +
         (az.role === "viewer" ? " - a member with no role granted is read-only." : ".") +
         " Ask the owner to change it.";
     }

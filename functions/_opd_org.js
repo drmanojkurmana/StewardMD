@@ -235,7 +235,9 @@ export function authorizeOrgAccess(orgDoc, membershipDoc, actorId, orgId, cap, t
   if (isOwnerOfOrg(orgDoc, actorId)) return { ok: true, role: "admin", owner: true };
   const m = membershipDoc;
   if (!canAccessOrg(m, orgId)) return { ok: false, reason: "not_a_member" };
-  if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role };
+  // The capability travels with the refusal so the message can say what was actually refused.
+  // Without it every refusal in the product had to guess, and the one hardcoded guess was wrong.
+  if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role, cap };
   if (target && !withinScope(m, target)) return { ok: false, reason: "out_of_scope", role: m.role };
   // regNo travels with the authorisation so resolveClinicalActor can build a signing credential
   // from the hospital's own staff registry without a second read. Empty for an owner, who is
