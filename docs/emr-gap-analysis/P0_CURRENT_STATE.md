@@ -24,17 +24,17 @@ P0 actually costs.
 
 | # | Feature | Existing implementation | Reachable? | Secure? | Tested? | Gap | Action |
 |---|---|---|---|---|---|---|---|
-| P0.1 | Reachability gate | `scripts/wardsynq-reachability.mjs`, runs in the suite | yes | n/a | yes | Only checks route↔screen. Does NOT check: capability present, audit present, UI→nonexistent route, orphaned exports | **Extend the checker**, then work the 65-route backlog |
+| P0.1 | Reachability gate | `scripts/wardsynq-reachability.mjs` — four checks: orphaned handlers, fail-closed capability guard, screens, tests | yes | n/a | yes | **DONE.** Orphan handlers locked at 0; capability-guard check verified by breaking it | Work the 65-route backlog |
 | P0.2 | Patient timeline | `timelineFromChart()` + history page. Note text, author, category, colour, type+date filters, expand/collapse, report button all shipped | yes | yes (governed `chart()`) | yes, 23 tests | No search; no unread/unacknowledged state; no drill-down to source record; voided/corrected versions not surfaced; referrals and documents absent because neither exists | **Add search, drill-down, voided handling, acknowledgement state** |
 | P0.3 | Doctor workspace | **None.** No `workspace` surface anywhere | no | n/a | no | The chart exists and is rich, but there is no single "everything for this patient" landing screen | **Build**, composing existing cards — no new data layer |
 | P0.4 | Clinical safety centre | Partial: `critical-results.js` + `critsboard`, `labboard`, `radboard`, `rx-safety.js` | boards yes | yes | yes | No single cross-cutting, role-tailored inbox; no unified acknowledge/resolve state across alert kinds | **Build an inbox that projects existing alert sources** |
 | P0.5 | Medication safety | Strong: `rx-safety.js`, `maik-cds.js`, `formulary.js`, advisories, dose ceiling, interaction rules, override capture (`SafetyOverride`, `SafetyFiring`) | yes | yes, server-side | yes | Renal/hepatic/weight-based checks not confirmed present; overrides captured but not surfaced as a review queue | **Verify each check individually, then close only real gaps** |
 | P0.6 | Terminology | `terminology.js` with `$validate-code`, `askServer`, `txCache`, wired into FHIR inbound + `$validate-code` route | yes (machine) | yes | yes | No `$expand`; no autocomplete for clinicians beyond the ICD search; **no licensed content** | **Content is a licensing task, not code.** Add `$expand` + a clean interface |
-| P0.7 | Identity / master data | `identity-merge.js`, `PatientLink`, `mpi-view.js`, `identity-key.js` | merge/MPI **unreachable** (on the 65 list) | yes | yes | Patient model has **no** deceased, relationships, next-of-kin, guardian, emergency contact. No fuzzy/phonetic search | **Add the fields + search; wire merge/MPI to a screen** |
+| P0.7 | Identity / master data | `patient-identity.js` (deceased + RelatedPerson) + Contacts screen; `identity-merge.js`, `PatientLink`, `mpi-view.js` | contacts/deceased **yes**; merge/MPI still unreachable | yes, incl. negative-auth route tests | yes, 36 tests | **Partly done.** Still missing: fuzzy/phonetic search, duplicate detection, identifier history; merge/MPI need a screen | Fuzzy search next; then wire merge |
 | P0.8 | Secure documents | **None.** No object storage, no document module | no | n/a | no | Blocked on infrastructure: needs an R2/S3 bucket decision first | **Infrastructure decision, then build** |
 | P0.9 | Auth / security | Two-layer capability + record grant, rate limiting, break-glass, audit — all real and enforced | yes | yes | yes, 45 test files carry negative-auth assertions | **No MFA/2FA.** Session timeout, password policy, device/session visibility unverified | **Add MFA; verify the rest before assuming it missing** |
-| P0.10 | Composite clinical transaction | `consultation.js` + Consultation screen; one actor resolution, all-or-nothing permission pre-flight, honest partial reporting | yes | yes | yes, 10 tests | **Not atomic.** The plan demands "no partial clinical state"; the store is append-only per record with no cross-record transaction | **Close the gap honestly** — either a compensating void, or state the limit in the plan |
-| P0.11 | Live payments | Seam only: `wardsynq-payment-adapter.js` exports `NullPaymentAdapter` and nothing else | seam yes | yes | yes | No real provider. No webhook verification, refunds, or reconciliation | **Integrate one Indian provider behind the existing seam** |
+| P0.10 | Composite clinical transaction | `consultation.js` + Consultation screen | yes | yes | yes, 10 tests | **NOT COMPLETE, and not claimed to be.** No cross-record atomicity is available from an append-only store. Authorisation and validation happen before any write, and partial failure is detectable and reported | **Stays open**: identify which workflows genuinely require atomicity, add invariant tests. Do not redesign storage without a proven clinical-safety need |
+| P0.11 | **Payment framework** (replaces "live payments") | Seam only: `NullPaymentAdapter` | seam yes | yes | yes | Needs a provider-agnostic domain: method ≠ provider, cash as first-class, bank/UTR, POS with manual recording, reconciliation | **Build the framework + manual/cash/bank adapters now.** Provider integrations come later and must not be needed to finish P0 |
 | P0.12 | P0 testing standard | 5810 passing; negative-auth in 45 files; 8 screens rendered in tests | — | — | — | No end-to-end signed-in workflow test; no migration/rollback test | **Add an E2E harness** |
 
 ## What this changes about P0's cost
@@ -58,3 +58,38 @@ original audit correctly identified as WardSynQ's defining weakness.
    screens that make the 65-route backlog start shrinking.
 4. **P0.9 MFA**, **P0.11 payments**, **P0.8 documents** — each needs an external decision
    (authenticator, provider, bucket) and is sequenced after the internal work.
+
+
+---
+
+# Progress log
+
+## 2026-09-13 — P0.1 closed, P0.7 substantially closed
+
+**P0.1 (reachability gate): DONE.** The checker now proves four links instead of one:
+orphaned domain handlers (locked at **zero** — every capability is wired to a route, so the whole
+backlog is route-to-screen, not domain-to-route), the fail-closed capability guard, screens, and
+tests. The capability-guard check was verified by deleting the guard and watching the build fail,
+then restoring it byte-identically. Two new baselines that may shrink and never grow.
+
+**P0.7 (identity): contacts and deceased status shipped.** `functions/_wardsynq/patient-identity.js`,
+five routes, a Contacts screen on the chart, 36 tests including eleven through the real routes with
+negative authorisation (a nurse cannot record or withdraw a death), audit-row assertions, and
+cross-hospital isolation. Still open in P0.7: fuzzy/phonetic search, duplicate detection, identifier
+history, and screens for merge/MPI.
+
+**Architecture decisions recorded this session:**
+- **Payments are provider-agnostic.** Payment *method* is separate from payment *provider*; cash is
+  a first-class collection method and not a fake gateway. The framework, the adapter interface and
+  the manual/cash/bank adapters are built without any provider credentials, and no P0 work blocks
+  on a provider.
+- **No Cloudflare coupling in the domain layer.** New code targets an S3-compatible object-storage
+  interface so documents can run on R2 now and S3 in production, and infrastructure boundaries
+  (database, storage, queues, auth, payments, notifications, jobs) stay clean. No migration starts
+  now; the point is to avoid creating migration debt.
+- **P0.10 stays open.** Cross-record atomicity is not available from an append-only store and is not
+  claimed. What is guaranteed: authorisation and validation before any write, and partial failure
+  that is detectable and reported rather than silent.
+
+**Numbers:** 5846 tests passing, 0 failing. 303 routes — 218 reachable, 20 machine-only, 65 waiting
+for a screen, 36 waiting for a test.
