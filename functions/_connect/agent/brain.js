@@ -29,7 +29,8 @@ export const ROLES = Object.freeze([
   "result", "unit", "reference", "patientId", "visitId", "name", "department", "age", "sex", "bed",
   "visitType", "date", "title", "report",
 ]);
-export const OPS = Object.freeze(["classify", "map-columns", "next"]);
+export const OPS = Object.freeze(["classify", "map-columns", "next", "verify"]);
+export const SUGGESTIONS = Object.freeze(["ok", "other-endpoint", "ask-doctor"]);
 
 const LIMITS = Object.freeze({ str: 120, list: 60, snapshot: 8000, path: 300 });
 const DIGITS = /\d{3,}/;
@@ -38,6 +39,7 @@ const ALLOWED_KEYS = Object.freeze({
   "classify": ["op", "origin", "path", "headers", "labels", "snapshot", "ask"],
   "map-columns": ["op", "origin", "resource", "headers"],
   "next": ["op", "origin", "controls", "looking", "path"],
+  "verify": ["op", "origin", "resource", "headers", "rowCount", "kind", "path"],
 });
 
 function str(v) { return typeof v === "string" ? v : ""; }
@@ -108,6 +110,15 @@ export function phiGate(payload) {
     if (RESOURCES.indexOf(payload[k]) < 0) return { ok: false, reason: k + " names an unknown resource" };
     clean[k] = payload[k];
   }
+  if (payload.rowCount !== undefined) {
+    const n = Number(payload.rowCount);
+    if (!Number.isInteger(n) || n < 0 || n > 100000) return { ok: false, reason: "rowCount must be a whole number" };
+    clean.rowCount = n;
+  }
+  if (payload.kind !== undefined) {
+    if (["json", "html", "page", "endpoint", "empty", "none"].indexOf(payload.kind) < 0) return { ok: false, reason: "kind must name a response kind" };
+    clean.kind = payload.kind;
+  }
   if (payload.snapshot !== undefined) {
     const why = badString(payload.snapshot, LIMITS.snapshot);
     if (why) return { ok: false, reason: "snapshot " + why };
@@ -116,6 +127,7 @@ export function phiGate(payload) {
   if (op === "classify" && !(clean.headers || []).length && !(clean.labels || []).length && !clean.snapshot) return { ok: false, reason: "classify needs headers, labels or a snapshot" };
   if (op === "map-columns" && (!clean.resource || !(clean.headers || []).length)) return { ok: false, reason: "map-columns needs resource and headers" };
   if (op === "next" && (!(clean.controls || []).length || !(clean.looking || []).length)) return { ok: false, reason: "next needs controls and looking" };
+  if (op === "verify" && (!clean.resource || clean.rowCount === undefined)) return { ok: false, reason: "verify needs resource and rowCount" };
   return { ok: true, clean };
 }
 
@@ -153,6 +165,12 @@ function promptFor(clean) {
       + "Map each header to the ONE role it plays, or leave it out if none fits. patientId = MRN/UHID/hospital number, visitId = visit/episode/admission number, name = the patient's name (never the doctor's), sex = gender, age = age or DOB, bed = bed/room, department = ward/dept/unit, drugName = medicine, prodCode = drug code, testName = investigation name, result = the result value, reference = normal range, date = any date column, title = report/study title, report = report body or summary.\n"
       + "Answer: {\"fields\": {<header>: <role>, ...}}";
   }
+  if (clean.op === "verify") {
+    return "A read-only agent replayed the call it discovered for the resource \"" + clean.resource + "\"" + (clean.path ? " (" + clean.path + ")" : "") + " for one real patient and got "
+      + clean.rowCount + " rows of kind " + (clean.kind || "unknown") + " with these columns:\n" + JSON.stringify(clean.headers || [])
+      + "\n\nJudge the STRUCTURE only. Is this really the patient's " + clean.resource + " (worklist = many patients of a ward, not a list of doctors, departments or menu items; labs = investigations with results, not just an order list; medications = drugs with dose or frequency; radiology = studies with reports; notes/history/discharge = clinical text or visit rows)? "
+      + "Answer: {\"ok\": <true|false>, \"resource\": <what these columns most likely are, one of " + RESOURCES.join(", ") + " or \"none\">, \"confidence\": <0 to 1>, \"reason\": <short>, \"suggestion\": <\"ok\" if it is right, \"other-endpoint\" if another call is likely to hold the real data, \"ask-doctor\" if only the doctor can show where it lives>}";
+  }
   return "A read-only agent is on an EMR screen" + (clean.path ? " at path " + clean.path : "") + " and can tap ONE of these controls (labels, in order, zero-based):\n"
     + JSON.stringify(clean.controls) + "\n\nIt is still looking for: " + clean.looking.join(", ") + ".\n"
     + "Which control most likely opens one of those resources? Never choose anything that could write, order, print, send, sign out, delete or change data.\n"
@@ -184,6 +202,10 @@ export function shapeAnswer(clean, raw) {
       if (ROLES.indexOf(role) >= 0 && !Object.values(fields).includes(role)) fields[h] = role;
     }
     return { fields };
+  }
+  if (clean.op === "verify") {
+    const c = Number(a.confidence);
+    return { ok: a.ok === true, resource: RESOURCES.indexOf(a.resource) >= 0 ? a.resource : "none", confidence: Number.isFinite(c) ? Math.max(0, Math.min(1, c)) : 0, reason, suggestion: SUGGESTIONS.indexOf(a.suggestion) >= 0 ? a.suggestion : (a.ok === true ? "ok" : "ask-doctor") };
   }
   const idx = Number.isInteger(a.index) && a.index >= 0 && a.index < clean.controls.length ? a.index : -1;
   const resource = RESOURCES.indexOf(a.resource) >= 0 ? a.resource : "none";

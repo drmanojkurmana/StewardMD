@@ -98,6 +98,21 @@ const UNSTABLE = /\d{3,}/;
 const stableIdent = (s) => !!s && SAFE_IDENT.test(s) && !UNSTABLE.test(s);
 const MAX_SELECTOR = 200;
 const STATIC_ASSET = /\.(js|css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|eot|map|json)(\?|$)/i;
+// Request-body FIELD NAMES (never values) carried alongside an endpoint, same PHI posture as the
+// query-key/path redaction above: an identifier-shaped or email-shaped key never leaves the phone.
+const BODY_KEY_HOSTILE = /\d{3,}|@/;
+const REQUEST_KINDS = new Set(['form', 'json', 'multipart', 'other']);
+export const CREDENTIAL_KEY = /passw|pwd|otp|\bpin\b|secret|captcha/i;
+function sanitizeEndpointBodyKeys(raw) {
+  if (!Array.isArray(raw)) return [];
+  const out = [];
+  for (const k of raw) {
+    if (typeof k !== 'string' || !k || k.length > 60 || BODY_KEY_HOSTILE.test(k)) continue;
+    out.push(k);
+    if (out.length >= 40) break;
+  }
+  return out;
+}
 
 function distinctClasses(cls) {
   return String(cls || '').split(/\s+/).filter((c) => c && stableIdent(c) && !GENERIC_CLASS.test(c));
@@ -172,10 +187,27 @@ export function buildBlockView(raw, resourceHint, pathTemplate) {
   return { resourceHint, pathTemplate, method: 'GET', rowsSelector: raw.rootSelector, headers, cellSelectors, singleRecord: !raw.repeated, block: true };
 }
 
+// Build a URL for a request-log entry: the native log (Android drainRequests) carries `.url`; an
+// in-page observer event carries `.path` + `.origin` only (no query string - queryKeys is separate).
+function requestUrlOf(r) {
+  if (typeof r.url === 'string') return r.url;
+  if (typeof r.path === 'string' && typeof r.origin === 'string') {
+    try {
+      const u = new URL(r.path, r.origin);
+      if (Array.isArray(r.queryKeys)) for (const k of r.queryKeys) { if (typeof k === 'string') u.searchParams.set(k, ''); }
+      return u.toString();
+    } catch { return null; }
+  }
+  return null;
+}
+
 /**
- * redactEndpoints(requests, pageUrl) -> [{ method, path }] : same-origin, non-asset requests the last
- * click triggered, with query VALUES dropped (keys kept) and digit runs of 3+ replaced by `#` so no
- * patient/visit identifier leaves the phone. Capped at 8.
+ * redactEndpoints(requests, pageUrl) -> [{ method, path, bodyKeys?, requestKind?, xhr?, contentType? }]
+ * : same-origin, non-asset requests the last click triggered, with query VALUES dropped (keys kept) and
+ * digit runs of 3+ replaced by `#` so no patient/visit identifier leaves the phone. Capped at 8.
+ * `requests` entries may be either the native request log's `{ method, url }` shape, or an in-page
+ * observer event's `{ method, path, origin, bodyKeys, requestKind, xhr, contentType }` shape - the
+ * latter's extra fields are sanitized and passed through onto the output entry when present.
  */
 export function redactEndpoints(requests, pageUrl) {
   let origin = null;
@@ -183,9 +215,11 @@ export function redactEndpoints(requests, pageUrl) {
   const out = [];
   const seen = new Set();
   for (const r of Array.isArray(requests) ? requests : []) {
-    if (!r || typeof r.url !== 'string') continue;
+    if (!r || typeof r !== 'object') continue;
+    const rawUrl = requestUrlOf(r);
+    if (typeof rawUrl !== 'string') continue;
     let u;
-    try { u = new URL(r.url); } catch { continue; }
+    try { u = new URL(rawUrl); } catch { continue; }
     if (!origin || u.origin !== origin || STATIC_ASSET.test(u.pathname)) continue;
     const keys = [...u.searchParams.keys()].filter((k) => SAFE_IDENT.test(k)).slice(0, 12);
     const path = u.pathname.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.join('&') : '');
@@ -193,10 +227,51 @@ export function redactEndpoints(requests, pageUrl) {
     const key = method + ' ' + path;
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({ method, path: path.slice(0, 512) });
+    const entry = { method, path: path.slice(0, 512) };
+    const bodyKeys = sanitizeEndpointBodyKeys(r.bodyKeys);
+    // A request that carried a credential is a sign-in, never data: it is not an endpoint at all.
+    if (bodyKeys.some((k) => CREDENTIAL_KEY.test(k))) continue;
+    if (bodyKeys.length) entry.bodyKeys = bodyKeys;
+    if (REQUEST_KINDS.has(r.requestKind)) entry.requestKind = r.requestKind;
+    if (r.xhr) entry.xhr = true;
+    if (typeof r.contentType === 'string' && r.contentType) entry.contentType = r.contentType.slice(0, 60);
+    out.push(entry);
     if (out.length >= 8) break;
   }
   return out;
+}
+
+/**
+ * mergeEndpointDetails(endpoints, observerEvents) -> endpoints, each augmented with
+ * bodyKeys/requestKind/xhr/contentType from the matching in-page observer event (same method and the
+ * same redacted path, computed the same way redactEndpoints computes it), when one drained during the
+ * same click. Endpoints with no match are returned unchanged.
+ */
+export function mergeEndpointDetails(endpoints, observerEvents) {
+  if (!Array.isArray(endpoints) || !endpoints.length || !Array.isArray(observerEvents) || !observerEvents.length) {
+    return Array.isArray(endpoints) ? endpoints : [];
+  }
+  const byKey = new Map();
+  for (const e of observerEvents) {
+    if (!e || typeof e.method !== 'string' || typeof e.path !== 'string') continue;
+    const method = e.method.toUpperCase() === 'POST' ? 'POST' : 'GET';
+    const keys = Array.isArray(e.queryKeys) ? e.queryKeys.filter((k) => SAFE_IDENT.test(k)).slice(0, 12) : [];
+    const path = (e.path.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.join('&') : '')).slice(0, 512);
+    const key = `${method} ${path}`;
+    if (!byKey.has(key)) byKey.set(key, e);
+  }
+  return endpoints.map((ep) => {
+    if (!ep || typeof ep !== 'object') return ep;
+    const match = byKey.get(`${ep.method} ${ep.path}`);
+    if (!match) return ep;
+    const out = { ...ep };
+    const bodyKeys = sanitizeEndpointBodyKeys(match.bodyKeys);
+    if (bodyKeys.length) out.bodyKeys = bodyKeys;
+    if (REQUEST_KINDS.has(match.requestKind)) out.requestKind = match.requestKind;
+    if (match.xhr) out.xhr = true;
+    if (typeof match.contentType === 'string' && match.contentType) out.contentType = match.contentType.slice(0, 60);
+    return out;
+  });
 }
 
 // --- browser-realm functions (String()'d below; must not close over anything from this module) -----
@@ -717,6 +792,27 @@ const RAW_BLOCK_SRC = String(CRAWL_RAW_BLOCK);
 const PAGE_STATE_SRC = String(CRAWL_PAGE_STATE);
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
+
+/* Click the first data row of a captured list (its first link when it has one, else the row itself)
+ * so the call that opens a single report or result is observed. Page realm; returns what it did. */
+function CRAWL_CLICK_FIRST_ROW(selector) {
+  try {
+    var rows = document.querySelectorAll(selector);
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var tds = row.querySelectorAll ? row.querySelectorAll('td') : [];
+      if (tds.length < 2) continue;
+      var a = row.querySelector('a[href]:not([href^="#"]), a[onclick], button, [onclick]');
+      if (a) { a.click(); return 'link'; }
+      row.click();
+      return 'row';
+    }
+    return 'none';
+  } catch (e) { return 'e'; }
+}
+const CLICK_FIRST_ROW_SRC = String(CRAWL_CLICK_FIRST_ROW);
+/** Lists whose single record is worth a look: the call behind one lab result or one radiology report. */
+export const DETAIL_PARENTS = Object.freeze(['labs', 'radiology', 'history', 'discharge', 'notes']);
 const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
@@ -760,7 +856,15 @@ export async function captureView({ client, resourceHint, blockOnly = false }) {
   if (!view) return null;
   if (typeof client.drainRequests === 'function') {
     const drained = await client.drainRequests().catch(() => null);
-    const endpoints = redactEndpoints(drained?.requests, url);
+    let endpoints = redactEndpoints(drained?.requests, url);
+    // Optional: the in-page observer (connect-agent/discovery.mjs) drained separately from the native
+    // log, so a phone plugin client without this method just gets the plain {method,path} endpoints.
+    if (endpoints.length && typeof client.drainObserverEvents === 'function') {
+      const observed = await client.drainObserverEvents().catch(() => null);
+      if (observed && Array.isArray(observed.events) && observed.events.length) {
+        endpoints = mergeEndpointDetails(endpoints, observed.events);
+      }
+    }
     if (endpoints.length) view.endpoints = endpoints;
   }
   return view;
@@ -862,7 +966,26 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // 1. worklist (the client is already attached to it). No observer armed: global best table.
   progress('worklist', 0);
   const worklistRaw = await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
-  record(buildTableView(worklistRaw, 'worklist', redactPageUrl(await currentUrl())));
+  {
+    /* THE WORKLIST'S OWN DATA CALL. A DataTables ward list fills itself on page load (GHIS: GetIPWL),
+     * before the crawl clicks anything, so the native log since open and the observer's events so
+     * far are the worklist's endpoints. Login-host requests are other-origin and drop out here. */
+    const wlView = buildTableView(worklistRaw, 'worklist', redactPageUrl(await currentUrl()));
+    if (wlView) {
+      const pageUrl = await currentUrl();
+      const drained = typeof client.drainRequests === 'function' ? await client.drainRequests().catch(() => null) : null;
+      let endpoints = redactEndpoints(drained?.requests, pageUrl);
+      if (typeof client.drainObserverEvents === 'function') {
+        const observed = await client.drainObserverEvents().catch(() => null);
+        if (observed && Array.isArray(observed.events) && observed.events.length) {
+          if (!endpoints.length) endpoints = redactEndpoints(observed.events, pageUrl);
+          else endpoints = mergeEndpointDetails(endpoints, observed.events);
+        }
+      }
+      if (endpoints.length) wlView.endpoints = endpoints;
+    }
+    record(wlView);
+  }
   await evalJson(client, `(${RAW_BLOCK_SRC})()`, null); // clears any stale observer state
 
   // Open the first patient row. Legacy worklists (e.g. GHIS DataTables) populate their rows by an AJAX
@@ -888,6 +1011,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block
   // to the panel the click populated. A click that navigates to another page is undone with history.back().
   const visited = new Set();
+  const detailSeen = new Set();
   let stopReason = 'no-candidate';
   let clicks = 0;
   const homePath = pathOf(await currentUrl());
@@ -926,6 +1050,30 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     }
     if (view) await enrichView(view, brain, { label: next.label });
     record(view);
+
+    /* ONE LEVEL DEEPER. A list of lab orders or radiology studies is not the result: the hospital
+     * opens one on tap and that tap is the call the runtime needs (GHIS: a render id, a result id).
+     * Open the first row once per list kind, capture what it shows as "<kind>-detail" with the
+     * call it made, and come back. */
+    if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks) {
+      detailSeen.add(view.resourceHint);
+      const beforePath = pathOf(await currentUrl());
+      await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
+      const how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }).catch(() => ({ result: 'e' }));
+      if (how && (how.result === 'link' || how.result === 'row')) {
+        clicks += 1;
+        await client.wait({ ms: waitMs });
+        trail.push(view.resourceHint + ' row');
+        let detail = null;
+        try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
+        if (detail && detail.rowsSelector) { detail.detailOf = view.resourceHint; observedViews.push(detail); }
+        if (pathOf(await currentUrl()) !== beforePath) {
+          await client.evaluate({ expression: 'history.back()' }).catch(() => {});
+          await client.wait({ ms: waitMs });
+          trail.push('back');
+        }
+      }
+    }
 
     // Drifted to another page (a link with a handler that navigated): come back to the record.
     if (pathOf(await currentUrl()) !== homePath) {

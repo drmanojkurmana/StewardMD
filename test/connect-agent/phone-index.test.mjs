@@ -66,7 +66,7 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   const result = await runPhoneDiscovery({
     plugin, api: fakeApi(calls), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
     startUrl: 'https://emr.example/doctor/home',
-    caps: { maxMs: 30000, waitMs: 1 },
+    caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5 },
     onProgress: (p) => phases.push(p.phase),
     askDoctor: async ({ gap, text }) => {
       asks.push(gap);
@@ -82,13 +82,14 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   });
 
   // Crawl found worklist + labs; the engine asked for the rest in canonical order, capped at 4.
-  assert.deepEqual(asks, ['patient', 'notes', 'radiology', 'medications']);
+  // The worklist was found but its read proved nothing against this fake page, so it is asked FIRST.
+  assert.deepEqual(asks, ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
   assert.ok(phases.includes('CRAWLING') && phases.includes('ASKING') && phases.includes('DONE'), phases.join(','));
 
   // Mode sequence: agent (start) -> guide x4 -> agent (before probes).
   assert.equal(plugin.modes[0].mode, 'agent');
   assert.equal(plugin.modes[plugin.modes.length - 1].mode, 'agent');
-  assert.equal(plugin.modes.filter((m) => m.mode === 'guide').length, 4);
+  assert.equal(plugin.modes.filter((m) => m.mode === 'guide').length, 6);
 
   const views = calls.discovery.observedViews;
   const rad = views.find((v) => v.resourceHint === 'radiology');
@@ -106,14 +107,15 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   assert.ok(!JSON.stringify(views).includes('SECRET'));
 
   assert.deepEqual(result.found.sort(), ['labs', 'radiology', 'worklist']);
-  assert.deepEqual(result.asked, ['patient', 'notes', 'radiology', 'medications']);
+  assert.deepEqual(result.asked, ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  assert.ok(result.verification && Array.isArray(result.verification.checks));
 });
 
 test('runPhoneDiscovery: no askDoctor -> never leaves agent mode; stopSignal ends the ask loop', async () => {
   const state = { page: 'worklist', requests: [], guided: false, guideTaps: [] };
   const plugin = fakePlugin(state);
   const calls = {};
-  await runPhoneDiscovery({ plugin, api: fakeApi(calls), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] }, caps: { maxMs: 30000, waitMs: 1 } });
+  await runPhoneDiscovery({ plugin, api: fakeApi(calls), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] }, caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5 } });
   assert.ok(plugin.modes.every((m) => m.mode === 'agent'));
 
   const state2 = { page: 'worklist', requests: [], guided: false, guideTaps: [] };
@@ -121,11 +123,11 @@ test('runPhoneDiscovery: no askDoctor -> never leaves agent mode; stopSignal end
   let stop = false;
   const asks = [];
   await runPhoneDiscovery({
-    plugin: plugin2, api: fakeApi({}), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] }, caps: { maxMs: 30000, waitMs: 1 },
+    plugin: plugin2, api: fakeApi({}), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] }, caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5 },
     stopSignal: () => stop,
     askDoctor: async ({ gap }) => { asks.push(gap); stop = true; return { done: false }; },
   });
-  assert.deepEqual(asks, ['patient']); // Stop pressed during the first ask: no further asks
+  assert.deepEqual(asks, ['worklist']); // Stop pressed during the first ask (the unproven worklist comes first): no further asks
 });
 
 // A real EMR's entered address is its LOGIN page: navigating back to it after sign-in returns the

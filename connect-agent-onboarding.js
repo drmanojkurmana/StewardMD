@@ -1023,7 +1023,8 @@
     return {
       classify: function (p) { return ask("classify", p); },
       mapColumns: function (p) { return ask("map-columns", p); },
-      next: function (p) { return ask("next", p); }
+      next: function (p) { return ask("next", p); },
+      verify: function (p) { return ask("verify", p); }
     };
   }
   /* Auto mode keeps the hospital browser to the top half while the agent drives, so the doctor sees
@@ -1081,6 +1082,7 @@
             opening: (p && p.phase === "CRAWLING") ? (p.opening || "") : "",
             found: (p && p.found) || c.found || [],
             looking: (p && p.looking) || c.looking || [],
+            checking: (p && p.phase === "VERIFYING") ? (p.checking || "") : "",
             step: (p && p.step != null) ? p.step : c.step || 0,
             total: (p && p.total != null) ? p.total : c.total || 0
           };
@@ -1157,6 +1159,7 @@
   }
 
   function phaseLabel(p) {
+    if (p === "VERIFYING") return "Checking each discovered endpoint against real patients before anything is sent for approval.";
     if (p === "COMPILING") return "Building the connection draft.";
     if (p === "VALIDATING") return "Checking the draft for safety and completeness.";
     if (p === "CRAWLING") return "Opening every view of one patient record, read-only.";
@@ -1184,6 +1187,7 @@
     var c = S.progressCounts || {};
     var found = (c.found || []).length;
     var phase = c.phase || "DISCOVERING";
+    if (phase === "VERIFYING") return 0.86;
     if (phase === "COMPILING") return 0.9;
     if (phase === "VALIDATING") return 0.96;
     // Manual mode: one ask is one share; the ask on screen does not count until it is answered.
@@ -1202,6 +1206,7 @@
     var phase = c.phase || "DISCOVERING";
     if (S.guide && S.guide.total) return "Step " + S.guide.step + " of " + S.guide.total + ". " + esc(S.guide.text);
     if (S.guide) return "Waiting for you to show me one screen.";
+    if (phase === "VERIFYING") return "Reading " + esc(String(VIEW_NAMES[c.checking] || c.checking || "the ward list")).toLowerCase() + " for a real patient to prove the endpoint works.";
     if (phase === "COMPILING") return "Writing the connection for your hospital.";
     if (phase === "VALIDATING") return "Checking it is safe and read-only.";
     if (c.opening) return "Opening " + esc(c.opening) + ".";
@@ -1497,6 +1502,7 @@
       '<h2 class="smd-connect-display">Your adapter is created</h2>' +
       '<p class="smd-connect-lead">' + esc(hostOf((S.selected && S.selected.emrUrl) || "")) + ' is connected and awaiting approval.</p>' +
       '<ul id="smd-connect-caps" class="smd-connect-caps"></ul>' +
+      verifiedLines() +
       missingLine() +
       '<div class="smd-connect-note">A StewardMD reviewer approves it, usually within about 4 hours. Once approved, your hospital appears in the Ward Sync hospital list on its own: tap it, sign in, and your patients load.</div>' +
       '<div id="smd-connect-approverow" class="smd-connect-row" style="display:none">' +
@@ -1535,6 +1541,19 @@
       });
     };
     paintResult();
+  }
+
+  /* WHAT WAS PROVEN, per view: rows read through the discovered endpoint for a real patient, or why not. */
+  function verifiedLines() {
+    var v = S.result && S.result.verification;
+    var checks = (v && v.checks) || [];
+    if (!checks.length) return "";
+    var items = checks.map(function (c) {
+      var name = esc(VIEW_NAMES[c.resource] || c.resource);
+      if (c.ok) return '<li>' + name + ': ' + esc(c.rows) + ' rows read through the ' + (c.via === 'endpoint' ? 'discovered endpoint' : 'page') + '.</li>';
+      return '<li class="smd-connect-note">' + name + ': not proven (' + esc(c.reason || 'no rows') + ').</li>';
+    });
+    return '<div class="smd-connect-note">Checked against ' + esc(v.patients) + ' real patient' + (v.patients === 1 ? '' : 's') + ' before sending for approval:</div><ul class="smd-connect-caps">' + items.join('') + '</ul>';
   }
 
   function missingLine() {

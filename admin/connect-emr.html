@@ -1192,7 +1192,8 @@
         return '<li>'+esc(opName("list_"+v.resource))+
           (v.path? ' <code>'+esc(v.path)+'</code>' : '')+
           (v.columns && v.columns.length ? ' <span class="hint">columns: '+esc(v.columns.join(", "))+'</span>' : '')+
-          (v.guided ? ' <span class="hint">(shown by the doctor)</span>' : '')+'</li>';
+          (v.guided ? ' <span class="hint">(shown by the doctor)</span>' : '')+
+          (v.verified ? (v.verified.ok ? ' <span class="st verified">'+esc(v.verified.rows)+' rows read via '+esc(v.verified.via)+'</span>' : ' <span class="st pending">not proven'+(v.verified.reason? ': '+esc(v.verified.reason) : '')+'</span>') : ' <span class="hint">not checked</span>')+'</li>';
       }).join("");
       box.querySelector(".hint").innerHTML=
         '<div><b>Requested by:</b> '+who+(when? ' on '+esc(when) : '')+'</div>'+

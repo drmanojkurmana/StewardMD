@@ -94,6 +94,33 @@ usage cut-off at any point leaves a resumable branch. Update this file's status 
 7. Live acceptance on GHIS from the Pixel: Manual mode end to end, Auto mode end to end, patients
    visible in Ward Sync, medications and labs on tap. Record results here.  STATUS: blocked on the phone 2026-09-12 (PR #1091 merged to main; APK with caonb15/cab17/adapter5/modes1 built at android/app/build/outputs/apk/debug/app-debug.apk; the Pixel was off adb, a watcher installs it on reconnect; then run Manual and Auto once each on GHIS and record here)
 
+## Endpoint replay and verification (2026-09-13, owner decision: scraping is fallback only)
+
+- **Discovery records the calls, not just the pages.** The in-page observer keeps method, path, query
+  keys, request FIELD NAMES (form, JSON, multipart; never values), request kind, X-Requested-With and
+  the response type. Each view carries the calls it made (`endpoints`), including the worklist's own
+  page-load call; a request that carried a credential is never an endpoint. A list view's first row is
+  opened once so the single-record call (lab render, radiology report) is seen as `<kind>-detail`.
+- **The adapter runs on the phone, declaratively.** `connect-agent/phone/adapter-runtime.mjs` issues
+  the discovered calls from inside the doctor's own hospital page (fetch with credentials): POST
+  prerequisites first with anti-forgery tokens read from the page and fields filled from the
+  discovered names (record and visit ids tried best first, including the joined record-visit form),
+  then the keyed GET with pagination widened; JSON and HTML fragments parsed by the same row reader;
+  401, 403 or a login page is NotSignedIn and Ward Sync re-opens the login gate. No generated code.
+- **Order of preference**: endpoint replay, then the rendered page (`runtime.mjs readView`), never the
+  other way round once a call is known.
+- **Verification before approval** (`connect-agent/phone/verify.mjs`, brain op `verify`): the ward
+  list is read through the adapter, real patients are picked, every view with a call is replayed for
+  them, and the brain judges the STRUCTURE (a patient list and not a doctor list; results and not a
+  menu). Failures become guided asks, asked first. The outcome travels with each view (`verified`)
+  to the phone result screen and the admin Governance card.
+- **iOS**: the WKWebView plugin now matches Android (compact layout, Not in my EMR, auto sign-in
+  detection, request log). Not yet run on a device.
+
+STATUS 2026-09-13: built and green in node suites and both headless harnesses (second-hospital replay
+proven in test/run-ward-adapter-ui.mjs). Live GHIS run of discovery with verification: pending the
+owner's next test.
+
 ## Acceptance
 
 - GIMSR: Auto mode alone produces an adapter with worklist, demographics, medications, labs,

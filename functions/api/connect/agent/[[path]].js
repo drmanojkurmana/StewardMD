@@ -211,7 +211,30 @@ function cleanObservedViews(raw) {
         if (!e || typeof e !== "object" || (e.method !== "GET" && e.method !== "POST") || typeof e.path !== "string" || e.path.length > 512 || /\d{3,}/.test(e.path)) {
           throw new OnboardError("invalid", "observedViews: endpoint invalid");
         }
-        return { method: e.method, path: e.path };
+        const cleanEndpoint = { method: e.method, path: e.path };
+        // Request FIELD NAMES only (never values), for the phone runtime to replay a POST inside the
+        // doctor's authenticated session (e.g. GHIS's __RequestVerificationToken + recordNo).
+        if (e.bodyKeys !== undefined) {
+          if (!Array.isArray(e.bodyKeys) || e.bodyKeys.length > 40 || e.bodyKeys.some((k) => typeof k !== "string" || k.length > 60 || /\d{3,}/.test(k) || k.indexOf("@") >= 0)) {
+            throw new OnboardError("invalid", "observedViews: endpoint bodyKeys invalid");
+          }
+          cleanEndpoint.bodyKeys = e.bodyKeys.slice();
+        }
+        if (e.requestKind !== undefined) {
+          if (e.requestKind !== "form" && e.requestKind !== "json" && e.requestKind !== "multipart" && e.requestKind !== "other") {
+            throw new OnboardError("invalid", "observedViews: endpoint requestKind invalid");
+          }
+          cleanEndpoint.requestKind = e.requestKind;
+        }
+        if (e.xhr !== undefined) {
+          if (typeof e.xhr !== "boolean") throw new OnboardError("invalid", "observedViews: endpoint xhr invalid");
+          cleanEndpoint.xhr = e.xhr;
+        }
+        if (e.contentType !== undefined) {
+          if (typeof e.contentType !== "string" || e.contentType.length > 60) throw new OnboardError("invalid", "observedViews: endpoint contentType invalid");
+          cleanEndpoint.contentType = e.contentType;
+        }
+        return cleanEndpoint;
       });
     }
     // Guided step: the doctor showed the agent where this lives; the tap path is the replay pattern.
@@ -228,6 +251,20 @@ function cleanObservedViews(raw) {
         if (clean.headers.indexOf(k) >= 0) fh[k] = v.fieldHints[k];
       }
       clean.fieldHints = fh;
+    }
+    if (v.detailOf !== undefined) {
+      if (typeof v.detailOf !== "string" || v.detailOf.length > 32) throw new OnboardError("invalid", "observedViews: detailOf invalid");
+      clean.detailOf = v.detailOf;
+    }
+    // What the agent proved before asking for approval: counts and kinds only, never a value.
+    if (v.verified !== undefined) {
+      const w = v.verified;
+      if (!w || typeof w !== "object" || Array.isArray(w) || typeof w.ok !== "boolean") throw new OnboardError("invalid", "observedViews: verified invalid");
+      const ver = { ok: w.ok, via: ["endpoint", "page", "none"].indexOf(w.via) >= 0 ? w.via : "none", rows: Number.isInteger(w.rows) && w.rows >= 0 ? Math.min(w.rows, 100000) : 0 };
+      if (typeof w.kind === "string" && w.kind.length <= 16) ver.kind = w.kind;
+      if (typeof w.reason === "string") { if (/\d{3,}/.test(w.reason) || w.reason.indexOf("@") >= 0) throw new OnboardError("invalid", "observedViews: verified reason invalid"); ver.reason = w.reason.slice(0, 200); }
+      if (typeof w.resourceSeen === "string" && w.resourceSeen.length <= 32) ver.resourceSeen = w.resourceSeen;
+      clean.verified = ver;
     }
     if (v.guidedPath !== undefined) {
       if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {
@@ -1042,6 +1079,8 @@ export async function onRequest(context) {
         path: v.pathTemplate ? redactPathValues(v.pathTemplate) : null,
         columns: Array.isArray(v.headers) ? v.headers.slice(0, 12) : [],
         guided: !!v.guided,
+        verified: v.verified || null,
+        endpoints: Array.isArray(v.endpoints) ? v.endpoints.length : 0,
       }));
       return jsonResponse({
         ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,
