@@ -289,7 +289,7 @@ try {
   `);
 
   // 1. Open the sheet: empty-state connections list for a first-time doctor.
-  await ev(`window.__connections = []; return 1;`);
+  await ev(`window.__connections = []; try { localStorage.removeItem("smd_connect_agent_mode"); } catch (e) {} return 1;`);
   await ev(`document.getElementById("smd-connect-agent-launch").click(); return 1;`);
   ok(await waitFor(`return !!(window.SMD_CONNECT_AGENT && document.getElementById("smd-connect-ov"));`, 8000), "clicking the launcher opens the sheet");
   ok(await ev(`var s=document.querySelector("#smd-connect-ov .smd-connect-sheet"); return !!(s && s.getAttribute("role")==="dialog" && s.getAttribute("aria-modal")==="true");`) === true, "sheet has dialog role with aria-modal");
@@ -329,6 +329,8 @@ try {
   // 3. Consent: no pre-checked box; Agree posts /sessions with runner:"phone".
   ok(await ev(`var b=document.getElementById("smd-connect-consentgo"); var c=document.getElementById("smd-connect-agree"); return !!b && b.disabled===true && !!c && c.checked===false;`) === true, "consent checkbox starts unchecked and Agree stays disabled (no pre-checked boxes)");
   ok(await ev(noDash) === true, "consent copy has no em-dash");
+  ok(await ev(`var r=document.querySelectorAll('input[name="smd-connect-mode"]'); return r.length===2 && r[0].value==="auto" && r[0].checked===true && r[1].value==="manual" && r[1].checked===false;`) === true, "consent offers Automatic (default) and Manual modes");
+  ok(await ev(`var t=document.getElementById("smd-connect-body").textContent; return t.indexOf("never sees patient data")>=0;`) === true, "consent declares the model reads screen structure only, never patient data");
   await ev(`document.getElementById("smd-connect-agree").click(); return 1;`);
   ok(await waitFor(`return document.getElementById("smd-connect-consentgo").disabled===false;`, 4000), "checking the box enables Agree and continue");
   await ev(`window.__reuse = false; document.getElementById("smd-connect-consentgo").click(); return 1;`);
@@ -355,6 +357,11 @@ try {
   await ev(`window.__engineOutcome = function () { return new Promise(function () {}); }; document.getElementById("smd-connect-originsyes").click(); return 1;`);
   ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/sessions/sess-1/origins";}); return c.length===1 && c[0].body.approve.indexOf("https://sso.newcity.example")>=0;`, 8000), "Allow posts POST origins approve with the pending origin");
   ok(await waitFor(`return window.__pluginCalls.filter(function(c){return c.m==="setMode" && c.a.mode==="agent";}).length>=1;`, 8000), "agent mode is set on the plugin once origins are settled");
+  ok(await ev(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.mode==="auto" && c.compact===true && c.brain && typeof c.brain.classify==="function" && typeof c.brain.mapColumns==="function" && typeof c.brain.next==="function";`) === true, "the engine runs in auto mode with the compact browser and the three brain advisors");
+  ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="setMode" && c.a.mode==="agent" && c.a.compact===true;});`) === true, "auto mode asks the browser for its top-half layout so the sheet stays visible");
+  ok(await ev(`return !!document.getElementById("smd-connect-snake");`) === true, "auto mode shows the game container under the progress");
+  await ev(`window.__brainCalls = []; var c=window.__engineCalls[window.__engineCalls.length-1]; c.brain.classify({path:"/Doctor/Home", headers:["Patient ID"], labels:["Home"]}); return 1;`);
+  ok(await waitFor(`var b=window.__calls.filter(function(x){return x.path==="/brain/classify";}); return b.length===1 && b[0].body.origin==="https://emr.newcity.example" && b[0].body.headers[0]==="Patient ID";`, 3000), "a brain question goes to POST /brain/classify with the hospital origin and structure only");
 
   // 6. Progress: runPhoneDiscovery invoked with plugin/api/session/deployment; onProgress updates counters.
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="progress";`, 8000), "discovery starts and shows the progress screen");
@@ -396,6 +403,23 @@ try {
   ok(await waitFor(`return window.__ask2 && window.__ask2.done === true;`, 3000), "the plugin's Done (loggedIn) during a guided step resolves the ask with done:true, not a second handoff");
   ok(await ev(`return window.__calls.filter(function(x){return x.path==="/sessions/sess-1/handoff";}).length === 1;`) === true, "no extra handoff was posted by the guided Done");
   ok(await ev(noDash) === true, "guided-step copy has no em-dash");
+  await ev(`
+    var call = window.__engineCalls[window.__engineCalls.length - 1];
+    window.__ask3 = null; window.__ask4 = null;
+    call.askDoctor({gap:"radiology", text:"Show me the radiology reports for that patient, then tap Done.", step:5, total:8}).then(function (r) { window.__ask3 = r; });
+    return 1;
+  `);
+  ok(await waitFor(`var t=document.getElementById("smd-connect-detail").textContent; return !!document.getElementById("smd-connect-guidemissing") && t.indexOf("Step 5 of 8")>=0;`, 3000), "a numbered ask shows its step and a Not in my EMR button");
+  await ev(`document.getElementById("smd-connect-guidemissing").click(); return 1;`);
+  ok(await waitFor(`return window.__ask3 && window.__ask3.done === false && window.__ask3.missing === true;`, 3000), "Not in my EMR on the sheet resolves the ask as missing");
+  await ev(`
+    var call = window.__engineCalls[window.__engineCalls.length - 1];
+    call.askDoctor({gap:"discharge", text:"Show me the discharge summary for that patient, then tap Done.", step:7, total:8}).then(function (r) { window.__ask4 = r; });
+    return 1;
+  `);
+  ok(await waitFor(`return !!document.getElementById("smd-connect-guidemissing");`, 3000), "fourth ask renders");
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("guideSkip", {url:"https://emr.newcity.example/home"}); return 1;`);
+  ok(await waitFor(`return window.__ask4 && window.__ask4.done === false && window.__ask4.missing === true;`, 3000), "the browser header's Not in my EMR (native guideSkip) resolves the ask as missing");
 
   // Resolve discovery: result screen with proven/unproven capabilities. The first run above left
   // runPhoneDiscovery's promise deliberately unresolved (__engineOutcome's default), so this next
@@ -416,11 +440,12 @@ try {
   await ev(`document.getElementById("smd-connect-add").click(); return 1;`);
   await ev(`document.getElementById("smd-connect-url").value="https://emr.newcity.example"; document.getElementById("smd-connect-urlgo").click(); return 1;`);
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="consent";`, 6000), "second run reaches consent");
-  await ev(`document.getElementById("smd-connect-agree").click(); window.__reuse=false; document.getElementById("smd-connect-consentgo").click(); return 1;`);
+  await ev(`document.querySelector('input[name="smd-connect-mode"][value="manual"]').click(); document.getElementById("smd-connect-agree").click(); window.__reuse=false; document.getElementById("smd-connect-consentgo").click(); return 1;`);
   ok(await waitFor(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login";`, 8000), "second run reaches login");
+  ok(await ev(`try { return localStorage.getItem("smd_connect_agent_mode")==="manual"; } catch (e) { return false; }`) === true, "the chosen mode is remembered for next time");
   await ev(`
     window.__engineOutcome = function () {
-      return Promise.resolve({candidateVersionId:"ver-1", capabilities: window.__capabilities, evidenceHash:"h1", state:"AWAITING_APPROVAL"});
+      return Promise.resolve({candidateVersionId:"ver-1", capabilities: window.__capabilities, evidenceHash:"h1", state:"AWAITING_APPROVAL", missing:["radiology","discharge"], mode:"manual"});
     };
     window.__pendingOrigins = [];
     window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"});
@@ -430,6 +455,11 @@ try {
   ok(await waitFor(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Worklist")>=0 && t.indexOf("Medications")>=0;`, 4000), "proven capabilities are listed");
   ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Allergies")>=0 && t.indexOf("not found at this hospital")>=0;`) === true, "unproven capabilities are shown greyed with a not-found note");
   ok(await ev(`return document.getElementById("smd-connect-ov").innerText.indexOf("Awaiting approval")>=0;`) === true, "result names the awaiting-approval state");
+  ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Your adapter is created")>=0 && t.indexOf("awaiting approval")>=0 && t.indexOf("4 hours")>=0 && t.indexOf("Ward Sync")>=0;`) === true, "result says the adapter is created, awaiting approval, and where it will appear in about 4 hours");
+  ok(await ev(`var t=document.getElementById("smd-connect-ov").innerText; return t.indexOf("Not in your EMR")>=0 && t.indexOf("Radiology reports")>=0 && t.indexOf("Discharge summary")>=0;`) === true, "result lists what the doctor said the EMR does not have");
+  ok(await ev(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.mode==="manual" && c.compact===false;`) === true, "manual mode runs the engine without the compact browser");
+  ok(await ev(`var calls=window.__pluginCalls; var last=-1; for (var i=0;i<calls.length;i++) if (calls[i].m==="open") last=i; var after=calls.slice(last); window.__dbgCalls=JSON.stringify(after.map(function(c){return [c.m, c.a&&c.a.mode, c.a&&c.a.compact];})); return !after.some(function(c){return c.m==="setMode" && c.a.compact===true;});`) === true, "manual mode never asks for the top-half browser");
+  if (!(await ev(`return !window.__pluginCalls.slice(window.__pluginCalls.map(function(c){return c.m;}).lastIndexOf("open")).some(function(c){return c.m==="setMode" && c.a.compact===true;});`))) console.log("  calls after open:", await ev(`return window.__dbgCalls;`));
   // The crawl is over, so the hospital browser must be gone: left open it covers this very screen,
   // still wearing the "StewardMD is reading" banner, and a finished run reads as a hung one.
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="close";});`) === true,

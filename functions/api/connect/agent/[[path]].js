@@ -71,6 +71,7 @@ import {
   templatePlaceholders,
 } from "../../../../connect-agent/manifest/schema.mjs";
 import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
+import { askBrain, ROLES as BRAIN_ROLES } from "../../../_connect/agent/brain.js";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
@@ -146,6 +147,10 @@ function hasCredentials(body) {
   return false;
 }
 
+// A crawler view's pathTemplate is a full URL; infer-html reduces it to a path. Same reduction here so a
+// repaired view can be matched to the operation it produced.
+function toRepairPath(p) { try { return new URL(String(p)).pathname || "/"; } catch { return String(p || "/").split("?")[0]; } }
+
 function safeJsonParse(text) {
   try { return JSON.parse(text); } catch { return null; }
 }
@@ -206,6 +211,16 @@ function cleanObservedViews(raw) {
     if (v.guided !== undefined) {
       if (typeof v.guided !== "boolean") throw new OnboardError("invalid", "observedViews: guided invalid");
       clean.guided = v.guided;
+    }
+    // The brain's column roles (advisory; infer-html uses one only where its own rules found nothing).
+    if (v.fieldHints !== undefined) {
+      if (!v.fieldHints || typeof v.fieldHints !== "object" || Array.isArray(v.fieldHints)) throw new OnboardError("invalid", "observedViews: fieldHints invalid");
+      const fh = {};
+      for (const k of Object.keys(v.fieldHints)) {
+        if (typeof k !== "string" || k.length > 120 || BRAIN_ROLES.indexOf(v.fieldHints[k]) < 0) throw new OnboardError("invalid", "observedViews: fieldHints invalid");
+        if (clean.headers.indexOf(k) >= 0) fh[k] = v.fieldHints[k];
+      }
+      clean.fieldHints = fh;
     }
     if (v.guidedPath !== undefined) {
       if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {
@@ -358,6 +373,23 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "tenants") {
       const mine = (await listMyTenants(deps, request, env)).filter((t) => canAgent(t.role, "read"));
       return jsonResponse({ ok: true, tenants: mine.map((t) => ({ tenantId: t.tenantId, name: t.name || null, role: t.role })) });
+    }
+    // POST /brain/classify | /brain/map-columns | /brain/next -- the model that reads screen STRUCTURE.
+    // PHI gate first (400 with the reason, nothing sent), then a per-origin cache, then the model.
+    // A model failure is 503 brain_unavailable: the phone falls back to its deterministic rules.
+    if (method === "POST" && parts.length === 2 && parts[0] === "brain") {
+      await requireAgent(deps, request, env, tid, "session");
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      const { tenantId: _t, ...payload } = body;
+      payload.op = parts[1];
+      let out;
+      try {
+        out = await askBrain({ env, kv: deps.kv, fetchImpl: deps.fetch, generateImpl: env.brainGenerate, payload });
+      } catch (e) {
+        return jsonResponse({ ok: false, error: "brain_unavailable", detail: String((e && e.message) || e).slice(0, 300) }, { status: 503 });
+      }
+      if (!out.ok) throw new OnboardError("invalid", "refused by the PHI gate: " + out.refused);
+      return jsonResponse(Object.assign({ ok: true, cached: out.cached, model: out.model }, out.answer));
     }
     // POST /sessions -- validate actor/tenant via identify()+RBAC, consent, create job/session
     if (method === "POST" && seg === "sessions") {
@@ -1036,6 +1068,79 @@ export async function onRequest(context) {
       // owner's queue pretending to be decisions (CANDIDATE_LIMIT).
       const discarded = await discardOtherCandidates(deps.db, tid, version.deployment_id, [versionId], "approved:" + versionId);
       return jsonResponse({ ok: true, state: activated.lifecycle, activationId: activation.id, discarded: discarded.length });
+    }
+
+    // POST /versions/:id/repair -- read-time self-repair. The phone read zero rows through an APPROVED
+    // adapter, the doctor was asked to show the right screen, and this is that screen's PHI-free
+    // structure. It becomes a NEW candidate (parent = the approved version) for the owner to approve;
+    // the approved adapter is never edited in place, and the three-draft rule applies.
+    if (method === "POST" && parts.length === 3 && parts[0] === "versions" && parts[2] === "repair") {
+      const versionId = parts[1];
+      const { actor } = await requireAgent(deps, request, env, tid, "session");
+      if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");
+      const session = await getSessionRow(deps.db, tid, String(body.sessionId || ""));
+      assertOwnership(session, tid, actor.id);
+      const version = await getVersion(deps.db, tid, versionId);
+      if (!version) throw new OnboardError("not-found", "adapter version not found");
+      if (version.lifecycle !== "ACTIVE") throw new OnboardError("conflict", "only an approved adapter can be repaired");
+      if (!body.view || typeof body.view !== "object") throw new OnboardError("invalid", "view required");
+      const view = cleanObservedViews([body.view])[0];
+      if (!view.rowsSelector) throw new OnboardError("invalid", "the repaired view has no row selector");
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      const phoneState = job ? safeJsonParse(job.phone_state) : null;
+      if (!phoneState || !phoneState.manifest || !Array.isArray(phoneState.manifest.origins) || !phoneState.manifest.origins.length) {
+        throw new OnboardError("conflict", "no candidate manifest on this adapter");
+      }
+      view.guided = true;
+      const observedViews = (Array.isArray(phoneState.observedViews) ? phoneState.observedViews : [])
+        .filter((v) => v && v.resourceHint !== view.resourceHint).concat([view]);
+      const base = phoneState.manifest;
+      const inferred = inferHtmlOperations(observedViews, { originId: base.origins[0].id });
+      const jsonOps = (base.operations || []).filter((op) => op.responseFormat !== "html");
+      const jsonTypes = new Set(jsonOps.map((op) => op.type));
+      const htmlOps = inferred.operations.filter((op) => !jsonTypes.has(op.type));
+      const manifest = Object.assign({}, base, {
+        operations: jsonOps.concat(htmlOps),
+        unsupported: inferred.unsupported,
+        capabilityProbes: (Array.isArray(base.capabilityProbes) ? base.capabilityProbes.filter((p) => p && jsonTypes.has(p.operationType)) : [])
+          .concat(htmlOps.map((op) => ({ operationType: op.type, expect: { minItems: 0 } }))),
+      });
+      manifest.contentHash = manifestContentHash(manifest);
+      const errors = validateManifest(manifest);
+      if (errors.length) throw new OnboardError("invalid", "repaired adapter failed validation: " + String((errors[0] && (errors[0].message || errors[0].path)) || errors[0]).slice(0, 160));
+      const offlineValidation = await validateCandidate({ manifest, fixture: { routes: {} } });
+      const evidenceHash = sha256(canonicalJson({ offlineValidation, repairedFrom: versionId }));
+      const capabilities = manifest.operations.map((op) => ({ operation: op.type, resource: capabilityResource(op.type), proven: op.type === (inferred.operations.find((o) => o.pathTemplate === toRepairPath(view.pathTemplate)) || {}).type, how: "repair" }));
+      let candidate = await insertVersion(deps.db, {
+        tenantId: tid, deploymentId: version.deployment_id, manifestRef: "manifest:" + manifest.contentHash,
+        schemaVersion: manifest.schemaVersion, contentHash: manifest.contentHash, capabilities,
+        parentVersionId: versionId, evidenceHash,
+      });
+      assertTransition("adapter", "CREATED", "VALIDATING");
+      candidate = await casVersionLifecycle(deps.db, tid, candidate.id, "CREATED", { lifecycle: "VALIDATING" });
+      assertTransition("adapter", "VALIDATING", "AWAITING_APPROVAL");
+      candidate = await casVersionLifecycle(deps.db, tid, candidate.id, "VALIDATING", { lifecycle: "AWAITING_APPROVAL" });
+      const holding = await listVersionsByLifecycle(deps.db, tid, version.deployment_id, "AWAITING_APPROVAL");
+      if (holding.length > CANDIDATE_LIMIT) {
+        const keep = holding.slice(0, CANDIDATE_LIMIT).map((v) => v.id);
+        if (keep.indexOf(candidate.id) < 0) { keep.pop(); keep.push(candidate.id); }
+        await discardOtherCandidates(deps.db, tid, version.deployment_id, keep, "older than the newest " + CANDIDATE_LIMIT);
+      }
+      let requestedBy = null;
+      try { const who = await deps.identifyFn(request, env); requestedBy = who && who.email ? String(who.email).toLowerCase() : null; } catch { /* label only */ }
+      // The candidate's own job row carries the replay views the phone runtime reads once approved.
+      const repairJob = await insertJob(deps.db, {
+        id: newId("job_"), tenant_id: tid, session_id: session.id, deployment_id: version.deployment_id, actor_id: actor.id,
+        state: "AWAITING_APPROVAL", idempotency_key: null, deadline_at: session.expires_at, max_attempts: 1,
+      });
+      await casJob(deps.db, tid, repairJob.id, repairJob.revision, {
+        candidate_version_id: candidate.id,
+        phone_state: JSON.stringify({
+          manifest, probes: [], offlineValidation, requestedBy, requestedAt: nowIso(), repairedFrom: versionId,
+          observedEvents: Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents : [], observedViews,
+        }),
+      });
+      return jsonResponse({ ok: true, candidateVersionId: candidate.id, state: candidate.lifecycle, parentVersionId: versionId, replay: observedViews });
     }
 
     // POST /versions/:id/reject -- owner/admin only; revokes the candidate

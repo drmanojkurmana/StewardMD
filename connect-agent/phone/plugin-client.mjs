@@ -74,8 +74,8 @@ export function createPluginClient({ plugin, storeId, origins, userAgent, title 
       return plugin.close();
     },
 
-    async setMode({ mode, banner, origins: newOrigins } = {}) {
-      return plugin.setMode({ mode, banner, origins: newOrigins });
+    async setMode({ mode, banner, origins: newOrigins, compact } = {}) {
+      return plugin.setMode({ mode, banner, origins: newOrigins, compact: !!compact });
     },
 
     async currentUrl() {

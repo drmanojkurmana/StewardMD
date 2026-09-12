@@ -72,14 +72,26 @@ function classify(label) {
 
 // headers[] -> { role: firstColumnIndex }. First column to claim a role wins (matches the fieldFor row
 // builder), so a later "Doctor name" cannot overwrite an earlier patient name.
-function roleIndex(headers) {
+function roleIndex(headers, hints) {
   const map = Object.create(null);
   headers.forEach((label, i) => {
     const role = classify(label);
     if (role && !(role in map)) map[role] = i;
   });
+  // The brain's advisory column roles fill only what the rules above left unclaimed: a header the
+  // rules already read keeps its rule, and a role already taken is never reassigned.
+  const h = hints && typeof hints === 'object' && !Array.isArray(hints) ? hints : null;
+  if (h) {
+    headers.forEach((label, i) => {
+      const role = h[label];
+      if (typeof role !== 'string' || FORBIDDEN_KEYS.has(role) || !ROLE_VOCAB.has(role)) return;
+      if (classify(label)) return;
+      if (!(role in map)) map[role] = i;
+    });
+  }
   return map;
 }
+const ROLE_VOCAB = new Set(HEADER_RULES.map(([, role]) => role));
 
 function sexMap() {
   const table = Object.create(null);
@@ -103,7 +115,7 @@ function planFor(hint) {
     case 'patient': return { type: 'get_patient_summary', resource: 'patient' };
     case 'medications': return { type: 'list_medications', resource: 'medications' };
     case 'labs': return { type: 'list_results', resource: 'observations' };
-    case 'history': case 'discharge': return { type: 'list_notes', resource: 'documents' };
+    case 'history': case 'discharge': case 'notes': return { type: 'list_notes', resource: 'documents' };
     case 'encounters': return { type: 'list_encounters', resource: 'encounters' };
     default: return null;
   }
@@ -191,7 +203,7 @@ function buildForView(view, ctx) {
   if (!view || typeof view !== 'object') return { unsupported: uns('unknown', 'view is not an object', observedPath) };
 
   const headers = Array.isArray(view.headers) ? view.headers : [];
-  const roles = roleIndex(headers);
+  const roles = roleIndex(headers, view.fieldHints);
 
   let plan = planFor(view.resourceHint);
   if (view.resourceHint === 'radiology') {
