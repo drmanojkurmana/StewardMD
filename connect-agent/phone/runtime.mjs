@@ -78,6 +78,10 @@ export function READ_ROWS(doc, view) {
     } else {
       var cells = row.querySelectorAll('td');
       if (!cells.length) continue;
+      /* A DataTables placeholder ("No data available in table", one cell spanning the row) is not a
+       * patient. Counting it as one stopped the wait loop on an empty table and rendered a patient
+       * called "(no name)" on the live hospital (2026-09-12). */
+      if (cells.length < 2 || /no (data|records|matching records)/i.test(txt(row))) continue;
       for (var c = 0; c < cells.length; c++) {
         var t = txt(cells[c]);
         if (t) { rec[headers[c] || ('col' + c)] = t; filled++; }
