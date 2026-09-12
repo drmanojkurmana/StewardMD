@@ -140,6 +140,15 @@ try {
   ok(await ev(`return window.__calls.some(function(c){return c.path==="/sessions/sess-1/handoff"&&c.method==="POST";}) && window.__calls.some(function(c){return c.path==="/versions/ver-1";});`) === true, "handoff was posted and the active version detail fetched");
   const card = await ev(`return document.querySelector("#ghisPatientList .ghis-pt-card").innerText;`);
   ok(card.indexOf("Ravi Kumar") >= 0 && card.indexOf("K001") >= 0 && card.indexOf("45") >= 0 && card.indexOf("Bed 12A") >= 0 && card.indexOf("MICU") >= 0, "first card shows name, UHID, age, bed, ward -> " + card.replace(/\s+/g, " "));
+  // The adapter answers the GHIS proxy: the same fetches the patient workspace, the drawers and
+  // medication review make are served on the phone from the adapter's views.
+  ok(await ev(`return window.GHIS.ensureSession().then(function(ok){ return ok; });`) === true, "ensureSession is true through an adapter session (Assess can open)");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/status").then(function(r){return r.json();}).then(function(j){ return j.connected===true && j.userId==="adapter"; });`) === true, "GET /status through the adapter says connected");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/patients").then(function(r){return r.json();}).then(function(j){ return Array.isArray(j) && j.length===2 && j[0].patientId==="K001"; });`) === true, "GET /patients is the adapter's roster in the proxy's array shape");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===1 && j.rows[0].drugText==="Amoxicillin" && j.rows[0].dosage==="500 mg TDS"; });`) === true, "GET /medications reads the adapter's medications view into the proxy row shape");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/profile?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.medications.length===1 && Array.isArray(j.labs) && Array.isArray(j.radiology); });`) === true, "GET /profile merges the cached patient views without a second browser read");
+  ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===2;`) === true, "one browser read per patient, then the cache serves every endpoint");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/prescribe",{method:"POST",body:"{}"}).then(function(r){return r.status;});`) === 501, "writes through an adapter answer 501 emr_write_disabled");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="agent"&&c.a.banner==="Reading hims.kims.example for your ward list";});`) === true, "browser was switched to agent mode with the reading banner");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://hims.kims.example/ip/worklist";});`) === true, "runtime navigated to the worklist path");
   ok(await ev(`return window.__open===false && window.__pluginCalls[window.__pluginCalls.length-1].m==="close";`) === true, "browser closed after the read");

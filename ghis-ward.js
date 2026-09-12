@@ -339,6 +339,78 @@
         try { return (new Function('p', 'return import(p)'))('/connect-agent/phone/runtime.mjs'); } catch (e) { return Promise.reject(e); }
       }
       function connectPlugin() { try { return window.Capacitor.Plugins.ConnectBrowser || null; } catch (e) { return null; } }
+      /* THE ADAPTER ANSWERS THE GHIS PROXY. Every screen that reads a hospital (the lab and radiology
+       * drawers here, the patient workspace and its Assess tab, medication review) fetches
+       * PROXY + '/<endpoint>'. While an adapter session is fresh, those fetches are answered on the
+       * phone from the adapter's own views in the proxy's exact JSON shapes
+       * (connect-agent/phone/ghis-shim.mjs), so an agent-built adapter drives the same UI the
+       * hand-built GHIS integration does. Patient views are read once per patient through the
+       * native browser and cached for the session; nothing about a patient leaves the phone. */
+      function loadWardShim() {
+        if (window.__SMD_WARD_SHIM_TEST__) return Promise.resolve(window.__SMD_WARD_SHIM_TEST__);
+        try { return (new Function('p', 'return import(p)'))('/connect-agent/phone/ghis-shim.mjs'); } catch (e) { return Promise.reject(e); }
+      }
+      function adapterSections(patientId) {
+        var ctx = _adapterCtx, plugin = connectPlugin();
+        if (!ctx || !plugin) return Promise.reject(new Error('no adapter session'));
+        ctx.sections = ctx.sections || {};
+        if (ctx.sections[patientId]) return ctx.sections[patientId];
+        var p = null;
+        for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
+        ctx.sections[patientId] = loadWardRuntime().then(function (rt) {
+          ctx.browserOpen = true;
+          return plugin.open({ url: ctx.origin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '' }).then(function () {
+            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins }); } catch (e) {}
+            return rt.readPatientDetails({ plugin: plugin, origin: ctx.origin, replay: ctx.replay, patient: p || { patientId: patientId } });
+          });
+        }).then(function (sections) {
+          ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
+          ctx.at = Date.now();
+          return sections;
+        }, function (e) {
+          ctx.browserOpen = false; try { plugin.close(); } catch (x) {}
+          delete ctx.sections[patientId];
+          throw e;
+        });
+        return ctx.sections[patientId];
+      }
+      function adapterServe(path, init) {
+        var method = (init && init.method) || 'GET';
+        return loadWardShim().then(function (shim) {
+          var pid = shim.patientIdOf(path) || (_adapterCtx && _adapterCtx.lastPatientId) || (GHIS._selectedPatient && GHIS._selectedPatient.patientId) || '';
+          if (!shim.needsPatientSections(path)) return shim.serveGhisProxy({ method: method, path: path, patients: _patients });
+          if (!pid) return { status: 400, body: { error: 'no_patient' } };
+          if (_adapterCtx) _adapterCtx.lastPatientId = pid;
+          var patient = null;
+          for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(pid)) patient = _patients[i];
+          return adapterSections(pid).then(function (sections) {
+            return shim.serveGhisProxy({ method: method, path: path, patients: _patients, sections: sections, patient: patient || { patientId: pid, episodeId: pid } });
+          }, function (e) { return { status: 502, body: { error: 'adapter_read_failed', detail: String(e && e.message || e) } }; });
+        }).then(function (r) {
+          if (!r) return null;
+          return new Response(JSON.stringify(r.body), { status: r.status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+        });
+      }
+      (function installAdapterProxy() {
+        if (window.__smdAdapterProxyInstalled) return;
+        window.__smdAdapterProxyInstalled = true;
+        var real = window.fetch;
+        if (typeof real !== 'function') return;
+        var abs = null; try { abs = new URL(PROXY, location.href).href; } catch (e) {}
+        window.fetch = function (input, init) {
+          try {
+            var u = typeof input === 'string' ? input : (input && input.url) || '';
+            var rel = null;
+            if (u.indexOf(PROXY + '/') === 0) rel = u.slice(PROXY.length);
+            else if (abs && u.indexOf(abs + '/') === 0) rel = u.slice(abs.length);
+            if (rel && adapterSessionFresh()) {
+              var args = arguments;
+              return adapterServe(rel, init).then(function (res) { return res || real.apply(window, args); });
+            }
+          } catch (e) { /* fall through to the network */ }
+          return real.apply(window, arguments);
+        };
+      })();
       var _adapterConns = {};
       // The registry feed: every deployment with an active version across the doctor's tenants.
       function ghisRenderAdapterHospitals() {
