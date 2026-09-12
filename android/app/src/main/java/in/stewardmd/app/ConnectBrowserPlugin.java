@@ -72,10 +72,12 @@ public class ConnectBrowserPlugin extends Plugin {
     private Button backButton;
     private TextView bannerLabel;
     private Button doneButton;
+    private Button skipButton;
     private View bannerView;
     private View touchBlockerView;
 
     private String mode = "login";
+    private boolean compact = false;
     // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
     private boolean sawPasswordField = false;
     private boolean autoLoginNotified = false;
@@ -141,6 +143,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 teardown(false);
                 allowedOrigins = new HashSet<>(origins);
                 mode = "login";
+                compact = false;
                 sawPasswordField = false;
                 autoLoginNotified = false;
                 hostTitle = title != null ? title : hostOf(urlStr);
@@ -363,6 +366,7 @@ public class ConnectBrowserPlugin extends Plugin {
         }
         final String banner = call.getString("banner");
         final JSArray originsArr = call.getArray("origins");
+        final boolean newCompact = call.getBoolean("compact", false);
         final Activity activity = getActivity();
         if (activity == null) {
             call.reject("no activity");
@@ -372,6 +376,7 @@ public class ConnectBrowserPlugin extends Plugin {
             @Override
             public void run() {
                 mode = newMode;
+                compact = newCompact;
                 if (originsArr != null) {
                     try {
                         Set<String> next = new HashSet<>();
@@ -504,9 +509,24 @@ public class ConnectBrowserPlugin extends Plugin {
             public void onClick(View v) { goBackIfPossible(); }
         });
 
+        // guide-only escape hatch: the agent's expected screen isn't there, let the doctor say so
+        // instead of hunting for it. Visible only in guide mode (see applyModeUi).
+        skipButton = new Button(activity);
+        skipButton.setText("Not in my EMR");
+        flattenButton(skipButton);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSObject data = new JSObject();
+                data.put("url", webView != null && webView.getUrl() != null ? webView.getUrl() : "");
+                notifyListeners("guideSkip", data);
+            }
+        });
+
         header.addView(cancelButton);
         header.addView(backButton);
         header.addView(titleBox, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        header.addView(skipButton);
         header.addView(doneButton);
 
         LinearLayout banner = new LinearLayout(activity);
@@ -599,6 +619,7 @@ public class ConnectBrowserPlugin extends Plugin {
             doneButton.setVisibility(agent ? View.GONE : View.VISIBLE);
             doneButton.setText(guide ? "Done" : "Done, I'm signed in");
         }
+        if (skipButton != null) skipButton.setVisibility(guide ? View.VISIBLE : View.GONE);
         // The doctor navigates in login and guide mode; in agent mode the agent drives.
         if (backButton != null) backButton.setVisibility(agent ? View.GONE : View.VISIBLE);
         if (bannerView != null) bannerView.setVisibility(agent || guide ? View.VISIBLE : View.GONE);
@@ -608,6 +629,30 @@ public class ConnectBrowserPlugin extends Plugin {
                 : "StewardMD is reading " + hostTitle + " on your behalf. Tap Stop to end.");
         }
         if (touchBlockerView != null) touchBlockerView.setVisibility(agent ? View.VISIBLE : View.GONE);
+        applyWindowLayout();
+    }
+
+    /* Compact agent mode: shrink the dialog window to the top 52% of the screen so the doctor can
+     * see (and touch) their own Activity underneath while the agent drives in the strip above.
+     * FLAG_NOT_TOUCH_MODAL lets touches outside the window fall through; idempotent, since setMode
+     * is called repeatedly (banner text refreshes) with the same mode/compact pair. */
+    private void applyWindowLayout() {
+        if (dialog == null) return;
+        Window window = dialog.getWindow();
+        if (window == null) return;
+        Activity activity = getActivity();
+        boolean useCompact = compact && "agent".equals(mode);
+        if (useCompact && activity != null) {
+            int heightPx = activity.getResources().getDisplayMetrics().heightPixels;
+            window.setGravity(Gravity.TOP);
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, Math.round(heightPx * 0.52f));
+            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        } else {
+            window.setGravity(Gravity.NO_GRAVITY);
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+        }
     }
 
     /** One step back in the EMR's own history. Never closes the browser: Cancel does that. */

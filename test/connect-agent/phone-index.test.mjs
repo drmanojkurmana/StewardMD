@@ -82,7 +82,7 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   });
 
   // Crawl found worklist + labs; the engine asked for the rest in canonical order, capped at 4.
-  assert.deepEqual(asks, ['patient', 'medications', 'radiology', 'discharge']);
+  assert.deepEqual(asks, ['patient', 'notes', 'radiology', 'medications']);
   assert.ok(phases.includes('CRAWLING') && phases.includes('ASKING') && phases.includes('DONE'), phases.join(','));
 
   // Mode sequence: agent (start) -> guide x4 -> agent (before probes).
@@ -106,7 +106,7 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   assert.ok(!JSON.stringify(views).includes('SECRET'));
 
   assert.deepEqual(result.found.sort(), ['labs', 'radiology', 'worklist']);
-  assert.deepEqual(result.asked, ['patient', 'medications', 'radiology', 'discharge']);
+  assert.deepEqual(result.asked, ['patient', 'notes', 'radiology', 'medications']);
 });
 
 test('runPhoneDiscovery: no askDoctor -> never leaves agent mode; stopSignal ends the ask loop', async () => {

@@ -160,6 +160,8 @@
       ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
       // The progress bar: a filled track that animates its width, so a run that is moving looks
       // like it is moving. prefers-reduced-motion drops the animation, never the bar.
+      ".smd-connect-snake{display:flex;justify-content:center;margin:0.375rem 0}",
+      ".smd-connect-modes{margin-top:0.75rem}.smd-connect-modes .smd-connect-checkrow{margin-top:0.5rem}.smd-connect-modes strong{color:var(--ink,#14202b)}",
       ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",
       ".smd-connect-prog>i{display:block;height:100%;border-radius:999px;background:#0E7C66;width:2%;transition:width .5s ease}",
       "@media (prefers-reduced-motion: reduce){.smd-connect-prog>i{transition:none}}",
@@ -467,6 +469,7 @@
   }
 
   function show(screen) {
+    if (S && S.snake && screen !== "progress") stopSnake();
     if (S) S.screen = screen;
     var render = {
       connections: renderConnections,
@@ -506,6 +509,10 @@
       S.loginHandled = true;
       doHandoff();
     });
+    on("guideSkip", function () {
+      /* "Not in my EMR" in the browser header: the ask is answered, the resource is recorded missing. */
+      if (S && S.guideResolve) { var r3 = S.guideResolve; S.guideResolve = null; S.guide = null; r3({ done: false, missing: true }); paintProgress(); }
+    });
     on("stopped", function () {
       if (S) S.stopRequested = true;
       if (S && S.guideResolve) { var r2 = S.guideResolve; S.guideResolve = null; S.guide = null; r2({ done: false }); }
@@ -542,6 +549,9 @@
   }
 
   var TENANT_KEY = "smd_connect_agent_tenant";
+  var MODE_KEY = "smd_connect_agent_mode";
+  function storedMode() { try { return localStorage.getItem(MODE_KEY) === "manual" ? "manual" : "auto"; } catch (e) { return "auto"; } }
+  function storeMode(m) { try { localStorage.setItem(MODE_KEY, m === "manual" ? "manual" : "auto"); } catch (e) {} }
   function storedTenant() { try { return localStorage.getItem(TENANT_KEY) || ""; } catch (e) { return ""; } }
   function storeTenant(id) { try { if (id) localStorage.setItem(TENANT_KEY, id); else localStorage.removeItem(TENANT_KEY); } catch (e) {} }
   /* Which hospital? An account that belongs to several tenants (an owner, a super-admin) must say
@@ -661,6 +671,12 @@
       '<li>You can stop the agent at any time.</li>' +
       '<li>A human reviewer approves the connection before another doctor can use it.</li>' +
       '</ul>' +
+      '<div class="smd-connect-modes" role="radiogroup" aria-label="How the agent works">' +
+      '<label class="smd-connect-checkrow"><input class="smd-connect-check" type="radio" name="smd-connect-mode" value="auto"' + (storedMode() === "manual" ? "" : " checked") + '/>' +
+      '<span><strong>Automatic</strong> (recommended). After you sign in the agent explores on its own. You can play a small game while it works.</span></label>' +
+      '<label class="smd-connect-checkrow"><input class="smd-connect-check" type="radio" name="smd-connect-mode" value="manual"' + (storedMode() === "manual" ? " checked" : "") + '/>' +
+      '<span><strong>Manual</strong>. The agent asks you to show it each screen, one at a time. Tap Not in my EMR for anything your hospital does not have.</span></label></div>' +
+      '<div class="smd-connect-note">An AI model helps read the hospital screens (labels and headers only). It never sees patient data.</div>' +
       '<label class="smd-connect-checkrow"><input id="smd-connect-agree" class="smd-connect-check" type="checkbox"/>' +
       '<span>I agree to continue.</span></label>' +
       '<div class="smd-connect-row"><button id="smd-connect-consentgo" class="smd-connect-btn primary" type="button" disabled>I agree, continue</button>' +
@@ -673,6 +689,9 @@
     go.onclick = function () {
       if (!box.checked) return;
       go.disabled = true;
+      var picked = b.querySelector('input[name="smd-connect-mode"]:checked');
+      S.mode = picked && picked.value === "manual" ? "manual" : "auto";
+      storeMode(S.mode);
       setStatus("", "Starting your session.");
       S.runner = hasPlugin() ? "phone" : null;
       var payload = { emrUrl: S.selected.emrUrl, consent: { agreed: true } };
@@ -941,7 +960,7 @@
   function beginAgentMode() {
     var plugin = getPlugin();
     if (plugin && plugin.setMode) {
-      try { plugin.setMode({ mode: "agent", origins: S.deployment.origins }); } catch (e) {}
+      try { plugin.setMode({ mode: "agent", origins: S.deployment.origins, compact: wantsCompact() }); } catch (e) {}
     }
     startPhoneDiscovery();
   }
@@ -968,7 +987,29 @@
     };
   }
 
+  /* The brain: three advisors the engine may consult about screen STRUCTURE (labels, headers, paths;
+   * digit runs already replaced on the phone). A null answer means "no advice", never a failure. */
+  function brainApi() {
+    var origin = (S.deployment && S.deployment.origins && S.deployment.origins[0]) || originOf(S.selected.emrUrl);
+    function ask(op, payload) {
+      var body = payload || {};
+      body.origin = origin;
+      return api("/brain/" + op, { method: "POST", body: JSON.stringify(body) }).then(function (r) {
+        return r.s === 200 && r.d && r.d.ok !== false ? r.d : null;
+      }).catch(function () { return null; });
+    }
+    return {
+      classify: function (p) { return ask("classify", p); },
+      mapColumns: function (p) { return ask("map-columns", p); },
+      next: function (p) { return ask("next", p); }
+    };
+  }
+  /* Auto mode keeps the hospital browser to the top half while the agent drives, so the doctor sees
+   * the progress bar and the game underneath. Manual mode needs the whole screen for the doctor. */
+  function wantsCompact() { return !!(S && S.mode !== "manual" && hasPlugin()); }
+
   function startPhoneDiscovery() {
+    S.mode = S.mode || storedMode();
     S.progressStartedAt = Date.now();      // the clock the time estimate divides by
     S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
@@ -990,14 +1031,18 @@
         session: S.session,
         deployment: S.deployment,
         startUrl: S.selected.emrUrl,
+        mode: S.mode,
+        brain: brainApi(),
+        compact: wantsCompact(),
         stopSignal: function () { return !!(S && S.stopRequested); },
         /* The agent could not find something: hand the screen to the doctor (plugin guide mode) and
          * resolve when they tap Done in the browser header, or Skip here. */
         askDoctor: function (q) {
           return new Promise(function (resolve) {
             if (!S || S.screen !== "progress" || S.stopRequested) { resolve({ done: false }); return; }
-            S.guide = { gap: q.gap, text: q.text };
+            S.guide = { gap: q.gap, text: q.text, step: q.step || 0, total: q.total || 0 };
             S.guideResolve = resolve;
+            S.bannerLine = null;
             paintProgress();
           });
         },
@@ -1013,7 +1058,9 @@
             phase: (p && p.phase) || c.phase,
             opening: (p && p.phase === "CRAWLING") ? (p.opening || "") : "",
             found: (p && p.found) || c.found || [],
-            looking: (p && p.looking) || c.looking || []
+            looking: (p && p.looking) || c.looking || [],
+            step: (p && p.step != null) ? p.step : c.step || 0,
+            total: (p && p.total != null) ? p.total : c.total || 0
           };
           paintProgress();
           publishBannerProgress();
@@ -1091,11 +1138,12 @@
     if (p === "COMPILING") return "Building the connection draft.";
     if (p === "VALIDATING") return "Checking the draft for safety and completeness.";
     if (p === "CRAWLING") return "Opening every view of one patient record, read-only.";
+    if (p === "ASKING" && isManual()) return "Show the agent one screen at a time. In the hospital screen, tap Done when it is showing, or Not in my EMR.";
     if (p === "ASKING") return "The agent needs your help to find a view.";
     return "Discovering read-only workflows. The agent makes no changes to the EMR.";
   }
 
-  var VIEW_NAMES = { worklist: "Worklist", patient: "Patient details", medications: "Medications", labs: "Lab results", radiology: "Radiology reports", discharge: "Discharge summary", history: "Visit history" };
+  var VIEW_NAMES = { worklist: "Worklist", patient: "Patient details", notes: "Clinical notes", medications: "Medications", labs: "Lab results", radiology: "Radiology reports", discharge: "Discharge summary", history: "Visit history" };
   function viewNames(list) {
     var out = [];
     for (var i = 0; i < (list || []).length; i++) out.push(esc(VIEW_NAMES[list[i]] || list[i]));
@@ -1108,13 +1156,20 @@
    * three functions turn the SAME state the engine already reports into a fraction, a sentence and
    * a time. Nothing new is measured and nothing is invented: the fraction comes from views actually
    * captured, the sentence from the view being opened, the time from this run's own elapsed clock. */
-  var TARGET_VIEWS = 7;                     // worklist, patient, medications, labs, radiology, discharge, history
+  var TARGET_VIEWS = 8;                     // worklist, patient, notes, labs, radiology, medications, discharge, history
+  function isManual() { return !!(S && S.mode === "manual"); }
   function progressFraction() {
     var c = S.progressCounts || {};
     var found = (c.found || []).length;
     var phase = c.phase || "DISCOVERING";
     if (phase === "COMPILING") return 0.9;
     if (phase === "VALIDATING") return 0.96;
+    // Manual mode: one ask is one share; the ask on screen does not count until it is answered.
+    if (isManual()) {
+      var tot = c.total || TARGET_VIEWS;
+      var done = Math.max(0, (c.step || 0) - (S.guide ? 1 : 0));
+      return Math.max(0.02, Math.min(0.88, (done / tot) * 0.88));
+    }
     // Exploring earns the first tenth; each captured view earns an equal share of the rest.
     var explored = Math.min(1, (c.pages || 0) / 6) * 0.1;
     return Math.max(0.02, Math.min(0.88, explored + (found / TARGET_VIEWS) * 0.78));
@@ -1123,6 +1178,7 @@
   function activityLine() {
     var c = S.progressCounts || {};
     var phase = c.phase || "DISCOVERING";
+    if (S.guide && S.guide.total) return "Step " + S.guide.step + " of " + S.guide.total + ". " + esc(S.guide.text);
     if (S.guide) return "Waiting for you to show me one screen.";
     if (phase === "COMPILING") return "Writing the connection for your hospital.";
     if (phase === "VALIDATING") return "Checking it is safe and read-only.";
@@ -1135,7 +1191,7 @@
   /* A coarse estimate from THIS run's own pace. Silent until there is enough of a run to divide by,
    * and never a false precision: a doctor needs "about two minutes", not a countdown. */
   function etaLine() {
-    if (S.guide) return "";
+    if (S.guide || (isManual() && progressFraction() < 0.9)) return "";
     var started = S.progressStartedAt || 0;
     var f = progressFraction();
     if (!started || f < 0.08) return "";
@@ -1167,7 +1223,7 @@
     var line = bannerProgressLine();
     if (line === S.bannerLine) return;
     S.bannerLine = line;
-    try { plugin.setMode({ mode: "agent", banner: line, origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+    try { plugin.setMode({ mode: "agent", banner: line, origins: (S.deployment && S.deployment.origins) || [], compact: wantsCompact() }); } catch (e) {}
   }
 
   function progressBar() {
@@ -1181,9 +1237,10 @@
   function progressDetail() {
     var c = S.progressCounts || {};
     if (S.guide) {
-      return '<div class="smd-connect-card"><p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
-        '<div class="smd-connect-note">Tap inside the hospital website, then tap Done at the top. Skip if your hospital has no such view.</div>' +
-        '<div class="smd-connect-row"><button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip</button></div></div>';
+      return '<div class="smd-connect-card">' + (S.guide.total ? progressBar() : "") + '<p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
+        '<div class="smd-connect-note">Find it in the hospital screen, then tap Done at the top. If your hospital has no such screen, tap Not in my EMR.</div>' +
+        '<div class="smd-connect-row"><button id="smd-connect-guidemissing" class="smd-connect-btn" type="button">Not in my EMR</button>' +
+        '<button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip for now</button></div></div>';
     }
     return '<div class="smd-connect-card">' +
       progressBar() +
@@ -1203,7 +1260,8 @@
       '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
       '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
-      '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open. Do not switch apps or lock the screen: a locked phone stops the agent and can sign you out of the hospital. This takes a few minutes.</div>' +
+      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
+      '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
       '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
       '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
@@ -1211,16 +1269,48 @@
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
     wireGuideSkip(b);
     startProgressTicker();
+    if (!isManual()) mountSnake(b.querySelector("#smd-connect-snake"));
+  }
+
+  /* THE GAME IS A COMPANION, NEVER A BLOCKER. It lives outside #smd-connect-detail so progress repaints
+   * do not restart it, and it is stopped whenever the sheet leaves the progress screen. */
+  function loadSnake() {
+    if (window.SMD_SNAKE) return Promise.resolve(window.SMD_SNAKE);
+    if (S && S.snakeLoading) return S.snakeLoading;
+    var p = new Promise(function (resolve) {
+      var sc = document.createElement("script");
+      sc.src = "/connect-agent-snake.js?v=snk1";
+      sc.onload = function () { resolve(window.SMD_SNAKE || null); };
+      sc.onerror = function () { resolve(null); };
+      document.head.appendChild(sc);
+    });
+    if (S) S.snakeLoading = p;
+    return p;
+  }
+  function mountSnake(el) {
+    if (!el) return;
+    stopSnake();
+    loadSnake().then(function (game) {
+      if (!game || !S || S.screen !== "progress" || !el.isConnected) return;
+      try { S.snake = game.mount(el, {}); } catch (e) { S.snake = null; }
+    });
+  }
+  function stopSnake() {
+    if (S && S.snake) { try { S.snake.stop(); } catch (e) {} S.snake = null; }
   }
 
   function wireGuideSkip(b) {
-    var skip = b.querySelector("#smd-connect-guideskip");
-    if (skip) skip.onclick = function () {
-      if (!S || !S.guideResolve) return;
-      var r = S.guideResolve; S.guideResolve = null; S.guide = null;
-      r({ done: false });
-      paintProgress();
-    };
+    function answer(id, value) {
+      var el = b.querySelector(id);
+      if (el) el.onclick = function () {
+        if (!S || !S.guideResolve) return;
+        var r = S.guideResolve; S.guideResolve = null; S.guide = null;
+        r(value);
+        paintProgress();
+      };
+    }
+    answer("#smd-connect-guideskip", { done: false });
+    answer("#smd-connect-guidemissing", { done: false, missing: true });
   }
 
   function paintProgress() {
@@ -1382,15 +1472,16 @@
     var b = body();
     if (!b) return;
     b.innerHTML =
-      '<h2 class="smd-connect-display">What the agent can read</h2>' +
-      '<p class="smd-connect-lead">Proven at ' + esc(hostOf((S.selected && S.selected.emrUrl) || "")) + '.</p>' +
+      '<h2 class="smd-connect-display">Your adapter is created</h2>' +
+      '<p class="smd-connect-lead">' + esc(hostOf((S.selected && S.selected.emrUrl) || "")) + ' is connected and awaiting approval.</p>' +
       '<ul id="smd-connect-caps" class="smd-connect-caps"></ul>' +
-      '<div class="smd-connect-note">Awaiting approval. A StewardMD reviewer approves before other doctors can use this.</div>' +
+      missingLine() +
+      '<div class="smd-connect-note">A StewardMD reviewer approves it, usually within about 4 hours. Once approved, your hospital appears in the Ward Sync hospital list on its own: tap it, sign in, and your patients load.</div>' +
       '<div id="smd-connect-approverow" class="smd-connect-row" style="display:none">' +
       '<button id="smd-connect-approve" class="smd-connect-btn primary" type="button">Approve</button>' +
       '<button id="smd-connect-reject" class="smd-connect-btn danger" type="button">Reject</button></div>' +
       '<div class="smd-connect-row"><button id="smd-connect-resultdone" class="smd-connect-btn" type="button">Done</button></div>';
-    setStatus("warn", "Awaiting approval.");
+    setStatus("warn", "Adapter created. Awaiting approval.");
     b.querySelector("#smd-connect-resultdone").onclick = function () { resetToConnections(""); };
     b.querySelector("#smd-connect-approve").onclick = function () {
       api("/versions/" + enc(S.versionId) + "/approve", { method: "POST", body: "{}" }).then(function (r) {
@@ -1422,6 +1513,12 @@
       });
     };
     paintResult();
+  }
+
+  function missingLine() {
+    var m = (S.result && S.result.missing) || [];
+    if (!m.length) return "";
+    return '<div class="smd-connect-note">Not in your EMR, as you told the agent: ' + viewNames(m) + '.</div>';
   }
 
   function paintResult() {

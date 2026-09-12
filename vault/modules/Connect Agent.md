@@ -66,6 +66,22 @@ version with a fresh session - no rediscovery.
   of one patient record capturing table + report-block STRUCTURE only. Contract: `connect-agent/phone/CONTRACT.md`.
 - Broker route `POST /sessions/:id/discovery` runs `manifest/infer-html.mjs` server-side over the observed
   views and keeps them on the job's `phone_state` (replay pattern for the runtime).
+- **Two modes** (2026-09-12, `docs/connect/agent-modes-plan.md`): `runPhoneDiscovery({ mode })`. `auto`
+  explores and crawls, then asks the doctor only for gaps; `manual` asks for every resource in
+  `ASK_ORDER` (worklist, patient, notes, labs, radiology, medications, discharge, history) and never taps.
+  Every ask has "Not in my EMR" (sheet button and the native header button, event `guideSkip`).
+- **The brain**: `functions/_connect/agent/brain.js` + routes `POST /brain/{classify,map-columns,next}`.
+  Screen STRUCTURE only through a refusing PHI gate, cached per origin + structure hash in `MAIK_KV`,
+  model from `CONNECT_AGENT_MODEL` via the MaiK gateway Google adapter. Phone side: `enrichView` /
+  `scrubForBrain` in deep-crawl.mjs; the answer is advisory (`fieldHints` on the view, honored by
+  infer-html only where its own rules found nothing; `brain.next` picks a control from the crawler's
+  own candidate list).
+- **Auto mode UI**: `setMode({ compact: true })` keeps the native browser to the top 52% while the agent
+  drives so the sheet's progress bar and `connect-agent-snake.js` stay visible; guided asks are full size.
+- **Runtime + self-repair**: `connect-agent/phone/runtime.mjs` replays an approved version's views for
+  Ward Sync (`ghis-ward.js` `ghisOpenAdapterHospital`). Zero rows -> guide mode with `REPAIR_ASK` ->
+  `captureWorklist` + `readView({ navigate: false })` -> `POST /versions/:id/repair` files a child
+  candidate (parent untouched, three-draft rule).
 
 **Runner and connector**
 - `connect-agent/runner.mjs`: the actual long-lived process - leases a job, drives discovery through

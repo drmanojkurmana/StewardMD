@@ -378,6 +378,36 @@
         if (el) el.innerHTML = '<div class="ghis-empty">' + esc(msg) + '</div>';
         try { var p = connectPlugin(); if (p && _adapterCtx && _adapterCtx.browserOpen) { _adapterCtx.browserOpen = false; p.close(); } } catch (e) {}
       }
+      /* READ-TIME SELF-REPAIR. An approved adapter that reads zero rows is not the end: the browser
+       * goes back to the doctor with one ask in its header, the screen they show is captured (labels
+       * and selectors, never cells), read at once so THEY see their patients now, and posted as a
+       * corrected candidate for the owner to approve so the next doctor is never asked. */
+      function ghisSelfRepair(ctx, plugin, rt, err) {
+        var el = document.getElementById('ghisPatientList');
+        if (el) el.innerHTML = '<div class="ghis-loading">The adapter could not find your patients on ' + esc(ctx.host) + '. In the hospital screen, show me the list of all your patients, then tap Done.</div>';
+        return new Promise(function (resolve, reject) {
+          function off() { ctx.listeners.forEach(function (l) { try { l.remove(); } catch (e) {} }); ctx.listeners = []; }
+          try {
+            ctx.listeners.push(plugin.addListener('loggedIn', function () { off(); resolve(); }));
+            ctx.listeners.push(plugin.addListener('guideSkip', function () { off(); reject(new Error('You said ' + ctx.host + ' has no patient list screen. ' + err.message)); }));
+            ctx.listeners.push(plugin.addListener('stopped', function () { off(); reject(err); }));
+          } catch (e) {}
+          try { plugin.setMode({ mode: 'guide', banner: rt.REPAIR_ASK, origins: ctx.origins }); } catch (e) { reject(err); }
+        }).then(function () {
+          if (el) el.innerHTML = '<div class="ghis-loading">Reading the screen you showed me...</div>';
+          try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins }); } catch (e) {}
+          return rt.captureWorklist({ plugin: plugin });
+        }).then(function (view) {
+          return rt.readView({ plugin: plugin, origin: ctx.origin, view: view, navigate: false }).then(function (rows) {
+            var patients = rt.mapRows(rows);
+            if (!patients.length) throw new Error('Still no patient rows on the screen you showed me (' + rows.length + ' rows read, none with a name or id). ' + err.message);
+            agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: view }) }).then(function (r) {
+              if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+            });
+            return patients;
+          });
+        });
+      }
       // Login gate + reuse + read. Each failure names its reason.
       window.ghisOpenAdapterHospital = function (depId) {
         var it = _adapterConns[depId]; if (!it) return;
@@ -391,6 +421,7 @@
         var ctx = { tid: it.tid, conn: conn, label: it.name, origin: origin, host: host, listeners: [], browserOpen: false };
         _adapterCtx = ctx;
         var rt;
+        function selfRepair(err) { return ghisSelfRepair(ctx, plugin, rt, err); }
         loadWardRuntime().then(function (m) {
           rt = m;
           return agentApi('/sessions', it.tid, { method: 'POST', body: JSON.stringify({ emrUrl: origin, consent: { agreed: true }, runner: 'phone' }) });
@@ -438,7 +469,10 @@
           if (r.s !== 200 || !r.d) throw new Error(agentReason(r, 'load the approved adapter'));
           ctx.replay = r.d.replay || [];
           if (!ctx.replay.length) throw new Error('The approved adapter for ' + host + ' has no replay views (version ' + ctx.versionId + ').');
-          return rt.readWorklist({ plugin: plugin, origin: origin, replay: ctx.replay });
+          return rt.readWorklist({ plugin: plugin, origin: origin, replay: ctx.replay }).catch(function (e) {
+            if (!/no patient rows found/.test(String(e && e.message))) throw e;
+            return selfRepair(e);
+          });
         }).then(function (patients) {
           ctx.browserOpen = false;
           try { plugin.close(); } catch (e) {}

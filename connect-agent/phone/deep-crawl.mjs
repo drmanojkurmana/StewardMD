@@ -55,6 +55,7 @@ const HINT_RULES = [
    * (seen on GHIS 2026-09-12). Order matters: this rule sits above labs so "drug sensitivity" does
    * not win the labs rule. */
   [/medic|drug|prescri|\brx\b|treatment.?(chart|sheet)|pharmac|\bmar\b|dosage|indent/i, 'medications'],
+  [/\bnotes?\b|assessment|case.?sheet|progress|clinical/i, 'notes'],
   [/\blabs?\b|laborator|investigat|result/i, 'labs'],
   [/radiolog|imaging|x.?ray|scan/i, 'radiology'],
   [/history/i, 'history'],
@@ -67,6 +68,7 @@ const HINT_RULES = [
 const HEADER_HINT_RULES = [
   [/impression|finding|study|modality|radiolog|imaging/i, 'radiology'],
   [/discharge|summary/i, 'discharge'],
+  [/\bnotes?\b|assessment|complaint|diagnos/i, 'notes'],
   [/drug|medic|dosage|frequency|route/i, 'medications'],
   [/test|result|unit|range/i, 'labs'],
   [/uhid|mrn|gender|sex|\bage\b|patient.?name/i, 'patient'],
@@ -80,7 +82,7 @@ export function hintFromHeaders(headers) {
 }
 
 /** The canonical set the crawl tries to cover; index.mjs asks the doctor for whatever is missing. */
-export const TARGET_HINTS = Object.freeze(['worklist', 'patient', 'medications', 'labs', 'radiology', 'discharge', 'history']);
+export const TARGET_HINTS = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
 
 export function resourceHintFor(label) {
   for (const [re, hint] of HINT_RULES) if (re.test(label)) return hint;
@@ -746,6 +748,49 @@ export async function captureView({ client, resourceHint, blockOnly = false }) {
   return view;
 }
 
+/* WHAT MAY LEAVE THE PHONE FOR THE BRAIN: structure with every digit run of 3+ replaced and any
+ * string carrying an @ dropped. The server refuses anything else (functions/_connect/agent/brain.js);
+ * this keeps an honest phone from ever tripping that refusal. */
+export function scrubForBrain(value) {
+  if (typeof value === 'string') return value.indexOf('@') >= 0 ? '' : value.replace(/\d{3,}/g, '#').slice(0, 120);
+  if (Array.isArray(value)) return value.map(scrubForBrain).filter((v) => v !== '').slice(0, 60);
+  if (value && typeof value === 'object') { const o = {}; for (const k of Object.keys(value)) o[k] = scrubForBrain(value[k]); return o; }
+  return value;
+}
+
+function pathOnly(u) { try { return new URL(u).pathname; } catch { return String(u || '').split('?')[0]; } }
+
+/**
+ * enrichView(view, brain, { label, ask, keepHint }) -> the brain's classify answer or null.
+ * Classifies an 'unknown' view (or checks it against `ask`), and maps its column headers to canonical
+ * roles as `view.fieldHints`. Advisory: the deterministic rules already ran; a brain that is absent,
+ * slow or wrong changes nothing but the hint. Never throws.
+ */
+export async function enrichView(view, brain, ctx = {}) {
+  if (!view || !brain) return null;
+  let verdict = null;
+  const labels = ctx.label ? [ctx.label] : [];
+  if (typeof brain.classify === 'function' && (ctx.ask || view.resourceHint === 'unknown' || !view.resourceHint)) {
+    const payload = scrubForBrain({ path: pathOnly(view.pathTemplate), headers: view.headers || [], labels });
+    if (ctx.ask) payload.ask = ctx.ask;
+    try { verdict = await brain.classify(payload); } catch { verdict = null; }
+    if (verdict && !ctx.keepHint && verdict.resource && verdict.resource !== 'none' && Number(verdict.confidence) >= 0.6 && TARGET_HINTS.includes(verdict.resource)) {
+      view.resourceHint = verdict.resource;
+    }
+  }
+  if (typeof brain.mapColumns === 'function' && Array.isArray(view.headers) && view.headers.length && TARGET_HINTS.includes(view.resourceHint)) {
+    let m = null;
+    try { m = await brain.mapColumns(scrubForBrain({ resource: view.resourceHint, headers: view.headers })); } catch { m = null; }
+    const fields = m && m.fields && typeof m.fields === 'object' ? m.fields : null;
+    if (fields) {
+      const fh = {};
+      for (const k of Object.keys(fields)) if (view.headers.includes(k) && typeof fields[k] === 'string') fh[k] = fields[k];
+      if (Object.keys(fh).length) view.fieldHints = fh;
+    }
+  }
+  return verdict;
+}
+
 export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, armGuide: `(${ARM_GUIDE_SRC})()`, guidePath: `(${GUIDE_PATH_SRC})()` });
 
 /**
@@ -755,7 +800,7 @@ export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, arm
  * again (index.mjs / UI surface it). onProgress({ opening, found, looking, clicks }) fires before each
  * click; stopSignal() true ends the walk (wired to the plugin's native Stop).
  */
-export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal } = {}) {
+export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null } = {}) {
   if (!client) throw new Error('deepCrawlClinical requires a client');
 
   const maxViews = Math.min(Math.max(caps.maxViews ?? CAPS_DEFAULT.maxViews, 1), CAPS_DEFAULT.maxViews);
@@ -835,7 +880,17 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
 
     const candidates = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
     const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label)) : [];
-    const next = fresh.find((c) => c.clinical) || fresh[0];
+    /* THE BRAIN PICKS THE NEXT TAP when there is one to consult: given the control labels and what is
+     * still missing, it names the control most likely to open it. The keyword rule is the fallback
+     * and the answer is only ever an index into the SAME candidate list (never a free target). */
+    let next = null;
+    if (brain && typeof brain.next === 'function' && fresh.length > 1 && looking().length) {
+      const pool = fresh.slice(0, 60);
+      let a = null;
+      try { a = await brain.next(scrubForBrain({ controls: pool.map((c) => c.label), looking: looking(), path: pathOf(await currentUrl()) })); } catch { a = null; }
+      if (a && Number.isInteger(a.index) && a.index >= 0 && a.index < pool.length) next = pool[a.index];
+    }
+    if (!next) next = fresh.find((c) => c.clinical) || fresh[0];
     if (!next) { stopReason = 'no-candidate'; break; }
 
     visited.add(next.label);
@@ -851,6 +906,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       const byHeaders = hintFromHeaders(view.headers);
       if (byHeaders !== 'unknown') view.resourceHint = byHeaders;
     }
+    if (view) await enrichView(view, brain, { label: next.label });
     record(view);
 
     // Drifted to another page (a link with a handler that navigated): come back to the record.
