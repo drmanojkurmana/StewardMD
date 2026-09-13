@@ -214,14 +214,19 @@ export function shapeAnswer(clean, raw) {
 
 /* ---- the call ------------------------------------------------------------------------------------ */
 
-const DEFAULT_MODEL = (MODELS.find((m) => m.id === "vertex-pro") || MODELS.find((m) => m.id === "gemini-pro") || { model: "gemini-3.1-pro-preview" }).model;
 const CACHE_TTL_S = 30 * 24 * 3600;
 const CACHE_PREFIX = "connect-agent:brain:";
 
+/* THE MODEL IS CONFIGURED, NEVER DEFAULTED. The owner provisioned a specific Gemini for the Connect
+ * Agent; running on whatever the registry happens to list was a silent substitution (every brain call
+ * until 2026-09-13 went to the registry default because CONNECT_AGENT_MODEL was unset). No model id,
+ * no brain: the call fails with that reason and the phone falls back to its deterministic rules. */
 export function brainModel(env) {
   const provider = str(env && env.CONNECT_AGENT_MODEL_PROVIDER) || "vertex";
-  const model = str(env && env.CONNECT_AGENT_MODEL) || DEFAULT_MODEL;
-  return { provider: PROVIDERS[provider] && provider !== "wardsynq" && provider !== "local-openai" ? provider : "vertex", model };
+  const model = str(env && env.CONNECT_AGENT_MODEL);
+  if (!model) throw new Error("CONNECT_AGENT_MODEL is not set: the Connect Agent brain has no configured model");
+  if (!PROVIDERS[provider] || provider === "wardsynq" || provider === "local-openai") throw new Error("CONNECT_AGENT_MODEL_PROVIDER must be vertex or gemini");
+  return { provider, model };
 }
 
 async function generate({ env, fetchImpl, generateImpl, system, prompt }) {
@@ -233,7 +238,6 @@ async function generate({ env, fetchImpl, generateImpl, system, prompt }) {
   } catch (e) {
     /* The same key serves both Google surfaces; when nobody pinned one, a Vertex refusal (project
      * not enabled, region) still gets an answer from AI Studio. Pinned providers fail as pinned. */
-    if (provider === "vertex" && !str(env && env.CONNECT_AGENT_MODEL_PROVIDER)) return PROVIDERS.gemini.generate(req);
     throw e;
   }
 }
