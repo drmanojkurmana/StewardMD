@@ -2231,7 +2231,7 @@
       '<div class="rx-head">' +
         '<div class="rx-handle-bar"></div>' +
         '<div class="rx-head-inner">' +
-          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
           '<div class="rx-head-title">' +
             '<span class="rx-title-main">Prescription <span class="rx-saved-indicator"><span class="rx-saved-dot"></span> Draft saved</span></span>' +
             '<span class="rx-title-sub">Dr. ' + esc(docName() || "—") + '</span>' +
@@ -2386,7 +2386,7 @@
       '<div class="rx-head">' +
         '<div class="rx-handle-bar"></div>' +
         '<div class="rx-head-inner">' +
-          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
           '<div class="rx-head-title"><span class="rx-title-main">Prescriber Details</span></div>' +
           '<div style="width:32px"></div>' +
         '</div>' +
@@ -2413,7 +2413,7 @@
       '<div class="rx-head">' +
         '<div class="rx-handle-bar"></div>' +
         '<div class="rx-head-inner">' +
-          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
           '<div class="rx-head-title"><span class="rx-title-main">Doctor Verification</span></div>' +
           '<div style="width:32px"></div>' +
         '</div>' +

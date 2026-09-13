@@ -137,3 +137,7 @@ not approve), refill savings, prescription economics and analytics.
 ## Prescription mobile presentation (2026-09-14)
 
 `prescription-mobile.css` adds a screen-only layer scoped to `#rxSheet`. Mobile uses a safe-area-aware sheet, a separate scrolling form, grouped fields, and a two-row dock: Add Drug / Dictate / RxChoice, then full-width export. Patient fields have persistent labels. Frequency shortcuts wrap with 44px targets. Dark appearance uses a black background. The existing drug, brand, price, template, verification, signing, and export handlers remain attached to their original IDs; print styling is outside this layer.
+
+### Full-screen follow-up (2026-09-14)
+
+Prescription now fills all viewport edges instead of retaining bottom-sheet centering and corner rules. Safe-area padding belongs to the header and dock, with the form as the sole scrolling region. The existing close handler is presented as a labelled Back button (including the existing discard confirmation). Header and quick actions use stable grid columns; template controls stack. Browser inspection confirmed exact 390x844 and 320x740 shell bounds and Back closing the screen. Physical iPhone keyboard verification is still required.
