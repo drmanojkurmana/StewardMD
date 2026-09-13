@@ -190,7 +190,8 @@ test("RxChoice Sprint 2: renderInlineTray produces 4 cards matching Reference Im
 
   assert.ok(container.innerHTML.indexOf("rxc-inline-tray") >= 0, "Tray container must be rendered");
   assert.ok(container.innerHTML.indexOf("Economy (Lowest Cost)") >= 0, "Generic pill must be present");
-  assert.ok(container.innerHTML.indexOf("Best Value ⭐") >= 0, "Balanced ⭐ pill must be present");
+  assert.ok(container.innerHTML.indexOf("Best Value") >= 0, "Balanced pill must be present");
+  assert.ok(container.innerHTML.indexOf("⭐") === -1, "No star emoji in inline tray");
   assert.ok(container.innerHTML.indexOf("Top Branded") >= 0, "Premium pill must be present");
   assert.ok(container.innerHTML.indexOf("Doctor Prescribed") >= 0, "Prescribed pill must be present");
   assert.ok(container.innerHTML.indexOf("Moxclav 625 Tablet") >= 0, "Generic brand name rendered");

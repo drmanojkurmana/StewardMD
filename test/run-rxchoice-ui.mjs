@@ -129,7 +129,8 @@ try {
   const cats = await ev(CARDS);
   ok(/GENERIC/.test(cats) && /BALANCED/.test(cats) && /PREMIUM/.test(cats) && /PRESCRIBED/.test(cats),
     "all four categories render (" + cats + ")");
-  ok(cats.indexOf("BALANCED ⭐") >= 0, "Balanced carries the star");
+  ok(cats.indexOf("BALANCED") >= 0, "Balanced category is present");
+  ok(cats.indexOf("⭐") === -1, "No star emoji in categories");
   const labs = (await ev(`return [].slice.call(document.querySelectorAll(".rxc-card .rxc-lab")).map(function(e){return e.textContent.trim();}).join("|");`) || "").toUpperCase();
   ok(labs.indexOf("RECOMMENDED VALUE") >= 0, "Balanced is labelled Recommended Value, not 'best medicine' (" + labs + ")");
   // Here the best-value product IS the cheapest one. The card says so rather than pretending the two

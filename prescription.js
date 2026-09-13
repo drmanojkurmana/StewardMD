@@ -86,42 +86,46 @@
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
       ".rx-doc{font-family:Georgia,'Times New Roman',serif;color:#111;background:#fff}.rxdoc-in{padding:40px 44px;word-spacing:1px}.rxdoc-hd{display:flex;align-items:center;gap:16px}.rxdoc-logo{width:64px;height:64px;object-fit:contain}.rxdoc-nm{font:800 22px Georgia,serif;color:#0e6e63}.rxdoc-ad{font:400 12.5px Georgia,serif;color:#444;margin-top:2px}.rxdoc-rule{height:3px;background:#0e6e63;margin-top:12px}.rxdoc-pt{display:flex;justify-content:space-between;align-items:baseline;font:400 14px Georgia,serif;color:#222;margin:12px 0 2px;border-bottom:1px solid #ddd;padding-bottom:6px}.rxdoc-dt{color:#555;font-size:12.5px}.rxdoc-topic{font:italic 400 12.5px Georgia,serif;color:#555;margin-top:4px}.rxdoc-rx{font:800 30px Georgia,serif;color:#0e6e63;margin:10px 0 2px}" +
       ".rxdoc-tbl{width:100%;border-collapse:collapse}.rxdoc-tbl td{padding:7px 4px;border-bottom:1px solid #eee;vertical-align:top;font:400 14px Georgia,serif}.rxdoc-tbl .sn{width:24px;color:#888}.rxdoc-tbl .br{color:#0e6e63;font-weight:600}.rxdoc-tbl .dz{color:#444;font-size:12.5px;white-space:nowrap}.rxdoc-tbl .advr td{color:#555;font-style:italic;border-bottom:0}.rxdoc-ft{margin-top:40px;display:flex;justify-content:flex-end}.rxdoc-sg{text-align:center;min-width:210px}.rxdoc-sgimg{height:54px;object-fit:contain;display:block;margin:0 auto 2px}.rxdoc-drn{font-weight:700;border-top:1px solid #333;padding-top:4px;font-size:14px}.rxdoc-reg{font-size:11.5px;color:#555}.rxdoc-dis{margin-top:26px;border-top:1px solid #ddd;padding-top:10px;font:400 10px Georgia,serif;color:#777;line-height:1.5}.rxdoc-foot{margin-top:22px;border-top:1px solid #ddd;padding-top:10px}.rxdoc-brand{font:400 12px Georgia,serif;color:#0e6e63}.rxdoc-smdlogo{width:20px;height:20px;object-fit:contain;vertical-align:-5px;margin-right:6px;display:inline-block}.rxdoc-smdwm{font:800 13px Georgia,serif;color:#0e6e63}.rxdoc-smdwm b{color:#111}.rxdoc-resp{margin-top:8px;font:400 11px Georgia,serif;color:#555;line-height:1.6}.rxdoc-line{font:400 12.5px Georgia,serif;color:#333;margin:3px 0}.rxdoc-line b{color:#111}.rx-ac-x{color:#ef4444;font-size:10px;font-weight:600}" +
-      ".rxcsec{margin-top:22px;padding-top:14px;border-top:2px solid #0e6e63;page-break-inside:avoid;break-inside:avoid}" +
-      ".rxcsec h3{font:800 13px system-ui,Georgia,serif;letter-spacing:.08em;text-transform:uppercase;color:#0e6e63;margin:0 0 3px}" +
-      ".rxcttl{font:700 15px Georgia,serif;color:#0f172a;margin-bottom:2px}.rxcsub{font:500 11px system-ui,sans-serif;color:#64748b;margin-bottom:10px}" +
-      ".rxc-tbl{width:100%;border-collapse:collapse;margin-top:10px;font-family:system-ui,-apple-system,sans-serif;page-break-inside:avoid;break-inside:avoid}" +
-      ".rxc-tbl th{background:#f8fafc;padding:7px 8px;font:700 11px system-ui;text-transform:uppercase;letter-spacing:.05em;border:1px solid #cbd5e1;text-align:left;vertical-align:bottom}" +
-      ".rxc-th-gen{border-top:3px solid #16a34a!important}.rxc-th-bal{border-top:3px solid #0052cc!important;background:#f0f7ff!important}.rxc-th-prem{border-top:3px solid #7e22ce!important}.rxc-th-orig{border-top:3px solid #475569!important}" +
-      ".rxc-tbl td{padding:8px;border:1px solid #e2e8f0;vertical-align:top;font-size:12px;background:#fff}.rxc-td-bal{background:#fbfdff!important}" +
-      ".rxc-chosen{box-shadow:inset 0 0 0 1.5px #16a34a;background:#f0fdf4!important}.rxc-badge-chosen{display:inline-block;padding:1px 5px;border-radius:4px;font:800 9px system-ui;background:#16a34a;color:#fff;margin-bottom:3px;letter-spacing:.04em}" +
-      ".rxc-tbl-cost{font:800 13px system-ui;color:#0e6e63;margin-top:4px}.rxc-tbl-mfg{color:#64748b;font-size:10.5px}.rxc-tbl-rx{color:#64748b;font-size:11px;margin-top:2px}" +
-      ".rxc-tot-val{font:800 13px system-ui;color:#0f172a}.rxc-banner-save{margin-top:8px;padding:8px 12px;border-radius:6px;background:rgba(22,163,74,.1);border-left:3px solid #16a34a;font:700 12px system-ui;color:#15803d}" +
-      ".rxcnote{margin-top:10px;font:500 10.5px/1.45 system-ui,Georgia,serif;color:#64748b}" +
+      ".rxcsec{margin-top:20px;padding-top:14px;border-top:1px solid #e5e5ea;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxcsec h3{font:600 12px -apple-system,BlinkMacSystemFont,system-ui;letter-spacing:.06em;text-transform:uppercase;color:#1d1d1f;margin:0 0 3px}" +
+      ".rxcttl{font:600 15px -apple-system,BlinkMacSystemFont,'SF Pro Display',system-ui;letter-spacing:-.01em;color:#1d1d1f;margin-bottom:2px}.rxcsub{font:400 11px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-bottom:10px}" +
+      ".rxc-tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;page-break-inside:avoid;break-inside:avoid;border:1px solid #e5e5ea;border-radius:10px;overflow:hidden}" +
+      ".rxc-tbl th{background:#f5f5f7;padding:7px 9px;font:600 10px -apple-system,BlinkMacSystemFont,system-ui;text-transform:uppercase;letter-spacing:.04em;color:#1d1d1f;border-bottom:1px solid #e5e5ea;border-right:1px solid #e5e5ea;text-align:left;vertical-align:bottom}" +
+      ".rxc-tbl th:last-child{border-right:0}" +
+      ".rxc-th-gen{border-top:2.5px solid #34c759!important}.rxc-th-bal{border-top:2.5px solid #0071e3!important;background:#fafcff!important}.rxc-th-prem{border-top:2.5px solid #af52de!important}.rxc-th-orig{border-top:2.5px solid #8e8e93!important}" +
+      ".rxc-tbl td{padding:8px 9px;border-bottom:1px solid #f2f2f7;border-right:1px solid #f2f2f7;vertical-align:top;font-size:11.5px;background:#fff;color:#1d1d1f}" +
+      ".rxc-tbl tr:last-child td{border-bottom:0}.rxc-tbl td:last-child{border-right:0}" +
+      ".rxc-td-bal{background:#fafcff!important}" +
+      ".rxc-chosen{box-shadow:inset 0 0 0 1px #34c759;background:#f6fbf7!important}.rxc-badge-chosen{display:inline-block;padding:1.5px 7px;border-radius:999px;font:600 8.5px -apple-system,BlinkMacSystemFont,system-ui;background:#34c759;color:#fff;margin-bottom:3px;letter-spacing:.03em}" +
+      ".rxc-tbl-cost{font:600 12.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f;margin-top:4px}.rxc-tbl-mfg{color:#86868b;font-size:10px}.rxc-tbl-rx{color:#86868b;font-size:10.5px;margin-top:2px}" +
+      ".rxc-tot-val{font:600 12.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f}.rxc-banner-save{margin-top:8px;padding:7px 12px;border-radius:8px;background:#f2fbf5;border:1px solid rgba(52,199,89,.3);font:600 11.5px -apple-system,BlinkMacSystemFont,system-ui;color:#248a3d}" +
+      ".rxcnote{margin-top:10px;font:400 10px/1.45 -apple-system,BlinkMacSystemFont,system-ui;color:#86868b}" +
       ".rxc-inline-box{width:100%;order:99}" +
-      ".rxc-inline-tray{margin-top:8px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:8px;width:100%;font-family:var(--hfont,system-ui)}" +
-      ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}" +
-      ".rxc-itray-pill{font:800 10.5px var(--hfont);color:var(--teal,#0e6e63);background:rgba(14,110,99,.09);padding:2px 8px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}" +
-      ".rxc-itray-sub{font:500 11px var(--hfont);color:var(--hmut,#64748b)}" +
-      ".rxc-icards{display:grid;gap:6px;grid-template-columns:repeat(4,1fr)}" +
-      "@media(max-width:640px){.rxc-icards{grid-template-columns:1fr 1fr}}" +
-      ".rxc-icard{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:8px;background:var(--hpanel,#fff);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all .15s ease}" +
-      ".rxc-icard:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 8px rgba(14,110,99,.08)}" +
-      ".rxc-icard.rec{border:1.5px solid #0052cc;background:rgba(0,82,204,.03)}" +
-      ".rxc-icard.sel{border-color:var(--teal,#0e6e63);box-shadow:0 0 0 2px rgba(14,110,99,.25);background:rgba(14,110,99,.04)}" +
-      ".rxc-icard.orig{border-style:dashed}" +
-      ".rxc-icat-pill{display:flex;align-items:center;gap:4px;font:800 9.5px var(--hfont);text-transform:uppercase;letter-spacing:.04em;color:#334155}" +
-      ".rxc-idot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}" +
-      ".dot-generic{background:#16a34a}.dot-balanced{background:#0052cc}.dot-premium{background:#7e22ce}.dot-prescribed{background:#475569}" +
-      ".rxc-icomp{font:500 10px var(--hfont);color:var(--hmut,#64748b);margin-top:3px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
-      ".rxc-ibrand{font:700 12px var(--hfont);margin-top:2px;line-height:1.25}" +
-      ".rxc-icard.generic .rxc-ibrand{color:#16a34a}.rxc-icard.balanced .rxc-ibrand{color:#0052cc}.rxc-icard.premium .rxc-ibrand{color:#7e22ce}.rxc-icard.prescribed .rxc-ibrand{color:var(--hink,#0f172a)}" +
-      ".rxc-imfg{font:500 10px var(--hfont);color:var(--hmut,#64748b);margin-top:1px;min-height:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
-      ".rxc-iprice{font:800 12.5px var(--hfont);color:var(--teal,#0e6e63);margin-top:4px}" +
-      ".rxc-iprice small{font:500 9.5px var(--hfont);color:var(--hmut,#64748b);margin-left:2px;font-weight:normal}" +
-      ".rxc-ibtn{margin-top:6px;border:0;border-radius:6px;padding:4px 6px;font:700 10.5px var(--hfont);cursor:pointer;text-align:center;background:rgba(100,116,139,.12);color:var(--hink,#0f172a);transition:background .15s}" +
-      ".rxc-icard.sel .rxc-ibtn{background:var(--teal,#0e6e63);color:#fff}" +
-      ".rxc-icard.rec:not(.sel) .rxc-ibtn{background:rgba(0,82,204,.1);color:#0052cc}" +
-      ".rxc-inote{font:500 11px/1.4 var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);padding:6px 8px;border-radius:8px;margin-top:4px}" +
+      ".rxc-inline-tray{margin-top:10px;border-top:1px solid rgba(0,0,0,.06);padding-top:10px;width:100%;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display',system-ui,sans-serif}" +
+      ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}" +
+      ".rxc-itray-pill{font:600 10px -apple-system,BlinkMacSystemFont,system-ui;color:#0071e3;background:rgba(0,113,227,.08);padding:2px 8px;border-radius:999px;letter-spacing:.03em;text-transform:uppercase}" +
+      ".rxc-itray-sub{font:400 11px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b}" +
+      ".rxc-icards{display:grid;gap:8px;grid-template-columns:repeat(4,1fr)}" +
+      "@media(max-width:640px){.rxc-icards{grid-template-columns:1fr 1fr;gap:6px}}" +
+      ".rxc-icard{border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:10px;background:#fff;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all .18s cubic-bezier(0.16,1,0.3,1);box-shadow:0 1px 2px rgba(0,0,0,.02)}" +
+      ".rxc-icard:hover{border-color:rgba(0,113,227,.3);box-shadow:0 3px 10px rgba(0,0,0,.05);transform:translateY(-1px)}" +
+      ".rxc-icard.rec{border:1px solid rgba(0,113,227,.28);background:#fafcff}" +
+      ".rxc-icard.sel{border-color:#0071e3!important;box-shadow:0 0 0 1.5px #0071e3,0 3px 12px rgba(0,113,227,.12);background:#fbfdff}" +
+      ".rxc-icard.orig{border-style:dashed;border-color:#d1d1d6}" +
+      ".rxc-icat-pill{display:flex;align-items:center;gap:5px;font:600 9.5px -apple-system,BlinkMacSystemFont,system-ui;text-transform:uppercase;letter-spacing:.04em;color:#636366}" +
+      ".rxc-idot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}" +
+      ".dot-generic{background:#34c759}.dot-balanced{background:#0071e3}.dot-premium{background:#af52de}.dot-prescribed{background:#8e8e93}" +
+      ".rxc-icomp{font:400 10px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-top:3px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rxc-ibrand{font:600 12.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f;margin-top:2px;line-height:1.3}" +
+      ".rxc-icard.generic .rxc-ibrand{color:#1d1d1f}.rxc-icard.balanced .rxc-ibrand{color:#0071e3}.rxc-icard.premium .rxc-ibrand{color:#1d1d1f}.rxc-icard.prescribed .rxc-ibrand{color:#1d1d1f}" +
+      ".rxc-imfg{font:400 10px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-top:1px;min-height:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rxc-iprice{font:600 12.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f;margin-top:5px}" +
+      ".rxc-iprice small{font:400 9.5px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-left:3px}" +
+      ".rxc-ibtn{margin-top:6px;border:1px solid rgba(0,0,0,.04);border-radius:999px;padding:3.5px 8px;font:500 10.5px -apple-system,BlinkMacSystemFont,system-ui;cursor:pointer;text-align:center;background:#f2f2f7;color:#1d1d1f;transition:all .15s ease}" +
+      ".rxc-ibtn:hover{background:#e5e5ea}" +
+      ".rxc-icard.sel .rxc-ibtn{background:#0071e3;color:#fff;font-weight:600;border-color:transparent;box-shadow:0 1px 3px rgba(0,113,227,.25)}" +
+      ".rxc-icard.rec:not(.sel) .rxc-ibtn{background:rgba(0,113,227,.08);color:#0071e3;border-color:transparent}" +
+      ".rxc-inote{font:400 11px/1.4 -apple-system,BlinkMacSystemFont,system-ui;color:#636366;background:#f2f2f7;padding:6px 9px;border-radius:8px;margin-top:4px}" +
       "@media print{body>*{display:none!important}body>.rx-scrim,body>.rx-sheet{display:block!important;position:static!important;transform:none!important;box-shadow:none!important;opacity:1!important;max-height:none!important;width:auto!important}.rx-scrim{background:none!important}.rx-x,.rx-del,.rx-add,.rx-print,.rx-row{display:none!important}.rx-in{border:none!important;padding:0!important;background:none!important}.rx-line{border:1px solid #ccc!important;background:none!important}}";
     document.head.appendChild(s);
   }
@@ -216,12 +220,12 @@
           var isChosen = (currentSelKey === catKey) || (sel[line.drug] && sel[line.drug].brand === opt.brand);
           var cls = "rxc-td" + (isChosen ? " rxc-chosen" : "");
           var tag = isChosen ? ('<div class="rxc-tag">' + (catKey === "prescribed" ? "KEPT" : "SELECTED") + '</div>') : "";
-          var brandNm = '<b>' + esc(opt.brand || "—") + '</b>';
+          var brandNm = '<b>' + esc(opt.brand || "-") + '</b>';
           var mfrNm = opt.manufacturer ? ('<div class="rxc-mfr">' + esc(opt.manufacturer) + '</div>') : '';
           var packInfo = (opt.packsRequired != null && opt.requiredUnits != null)
             ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + ' needed (' + (opt.packsRequired > 1 ? (opt.packsRequired + ' packs') : '1 pack') + ')</div>')
             : '';
-          var priceVal = opt.courseCost != null ? ('<div class="rxc-cost">' + costStr(opt.courseCost) + '<small>/course</small></div>') : '<div class="rxc-cost">—</div>';
+          var priceVal = opt.courseCost != null ? ('<div class="rxc-cost">' + costStr(opt.courseCost) + '<small>/course</small></div>') : '<div class="rxc-cost">-</div>';
           return '<td class="' + cls + '">' + tag + brandNm + mfrNm + packInfo + priceVal + '</td>';
         };
 
@@ -265,7 +269,7 @@
 
       return '<section class="rxcsec">' +
         '<div class="rxchd">' +
-        '<div class="rxcttl">RxChoice™ — 4-Way Cost Choice</div>' +
+        '<div class="rxcttl">RxChoice™ · 4-Way Cost Choice</div>' +
         '<div class="rxcsub">Validated alternatives from the StewardMD Drug Database &middot; Same active ingredient &amp; strength</div>' +
         '</div>' +
         '<table class="rxctbl">' +
@@ -626,29 +630,31 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
-      '.rxcsec{margin-top:22px;padding-top:14px;border-top:2px solid #0e6e63;page-break-inside:avoid;break-inside:avoid}' +
-      '.rxchd{margin-bottom:8px}.rxcttl{font:800 14px Manrope,Inter,system-ui;color:#0e6e63;letter-spacing:.02em;text-transform:uppercase}.rxcsub{font:500 10.5px system-ui;color:#64748b;margin-top:2px}' +
-      '.rxctbl{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px}' +
-      '.rxctbl th{padding:6px 7px;font:700 10px Inter,system-ui;text-transform:uppercase;letter-spacing:.04em;border:1px solid #e2e8f0;background:#f8fafc;vertical-align:top;text-align:left}' +
-      '.rxctbl th small{font-weight:500;text-transform:none;opacity:.8;display:block}' +
-      '.rxctbl th.col-rx{width:26%;border-top:3px solid #0f172a}' +
-      '.rxctbl th.col-gen{width:18.5%;color:#16a34a;border-top:3px solid #16a34a;background:#f0fdf4}' +
-      '.rxctbl th.col-bal{width:18.5%;color:#0052cc;border-top:3px solid #0052cc;background:#f0f7ff}' +
-      '.rxctbl th.col-prem{width:18.5%;color:#7e22ce;border-top:3px solid #7e22ce;background:#faf5ff}' +
-      '.rxctbl th.col-orig{width:18.5%;color:#475569;border-top:3px solid #475569;background:#f8fafc}' +
-      '.rxctbl td{padding:5px 7px;border:1px solid #e2e8f0;vertical-align:top;font-size:10.5px;line-height:1.35}' +
-      '.rxctbl td.rxc-rxcol{background:#fafaf9}.rxctbl .rxc-num{font-weight:700;color:#0f172a}.rxctbl .rxc-comp{color:#64748b;font-size:9.5px;margin-top:1px}.rxctbl .rxc-dose{color:#0e6e63;font-size:9.5px;font-weight:600;margin-top:2px}' +
-      '.rxctbl .rxc-mfr{color:#64748b;font-size:9.5px;margin-top:1px}' +
-      '.rxctbl .rxc-pack{color:#475569;font-size:9px;margin-top:2px}' +
-      '.rxctbl .rxc-cost{font:800 11.5px Inter,system-ui;color:#0e6e63;margin-top:3px}.rxctbl .rxc-cost small{font-size:9px;font-weight:600;color:#64748b}' +
-      '.rxctbl td.rxc-chosen{background:#ecfdf5;box-shadow:inset 0 0 0 1.5px #10b981}' +
-      '.rxctbl .rxc-tag{display:inline-block;padding:1px 4px;border-radius:3px;font:800 8px Inter,system-ui;background:#10b981;color:#fff;margin-bottom:3px;letter-spacing:.02em}' +
-      '.rxctbl td.rxc-empty{color:#94a3b8;font-style:italic;font-size:9.5px}' +
-      '.rxctbl .rxc-totrow td{background:#f8fafc;border-top:2px solid #cbd5e1;font-weight:700;padding:6px 7px}' +
-      '.rxctbl .rxc-totlab{font:800 10.5px Inter,system-ui;text-transform:uppercase;color:#0f172a}' +
-      '.rxctbl .rxc-saverow td{background:#f0fdf4;color:#16a34a;font:800 11px Inter,system-ui;text-align:right;padding:6px 8px;border-top:1px solid #bbf7d0}' +
-      '.rxcline{font-size:12.5px;color:#334155;padding:5px 0;border-bottom:1px solid #f1f5f4}.rxccat{font-size:10.5px;font-weight:700;color:#0e6e63;text-transform:uppercase}' +
-      '.rxcnote{margin-top:7px;font-size:10px;color:#64748b;line-height:1.4}' +
+      '.rxcsec{margin-top:20px;padding-top:14px;border-top:1px solid #e5e5ea;page-break-inside:avoid;break-inside:avoid}' +
+      '.rxchd{margin-bottom:8px}.rxcttl{font:600 13px -apple-system,BlinkMacSystemFont,\'SF Pro Display\',system-ui;color:#1d1d1f;letter-spacing:.02em;text-transform:uppercase}.rxcsub{font:400 10.5px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-top:2px}' +
+      '.rxctbl{width:100%;border-collapse:separate;border-spacing:0;margin:8px 0;font-size:11px;border:1px solid #e5e5ea;border-radius:8px;overflow:hidden}' +
+      '.rxctbl th{padding:6px 8px;font:600 9.5px -apple-system,BlinkMacSystemFont,system-ui;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e5e5ea;border-right:1px solid #e5e5ea;background:#f5f5f7;vertical-align:top;text-align:left;color:#1d1d1f}' +
+      '.rxctbl th:last-child{border-right:0}' +
+      '.rxctbl th small{font-weight:400;text-transform:none;color:#86868b;display:block;margin-top:1px}' +
+      '.rxctbl th.col-rx{width:26%;border-top:2.5px solid #1d1d1f}' +
+      '.rxctbl th.col-gen{width:18.5%;border-top:2.5px solid #34c759;background:#fbfdfb}' +
+      '.rxctbl th.col-bal{width:18.5%;border-top:2.5px solid #0071e3;background:#fafcff}' +
+      '.rxctbl th.col-prem{width:18.5%;border-top:2.5px solid #af52de;background:#fdfbfe}' +
+      '.rxctbl th.col-orig{width:18.5%;border-top:2.5px solid #8e8e93;background:#f5f5f7}' +
+      '.rxctbl td{padding:6px 8px;border-bottom:1px solid #f2f2f7;border-right:1px solid #f2f2f7;vertical-align:top;font-size:10.5px;line-height:1.35;color:#1d1d1f;background:#fff}' +
+      '.rxctbl tr:last-child td{border-bottom:0}.rxctbl td:last-child{border-right:0}' +
+      '.rxctbl td.rxc-rxcol{background:#fafafa}.rxctbl .rxc-num{font-weight:600;color:#1d1d1f}.rxctbl .rxc-comp{color:#86868b;font-size:9.5px;margin-top:1px}.rxctbl .rxc-dose{color:#0071e3;font-size:9.5px;font-weight:500;margin-top:2px}' +
+      '.rxctbl .rxc-mfr{color:#86868b;font-size:9.5px;margin-top:1px}' +
+      '.rxctbl .rxc-pack{color:#86868b;font-size:9px;margin-top:2px}' +
+      '.rxctbl .rxc-cost{font:600 11.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f;margin-top:3px}.rxctbl .rxc-cost small{font-size:9px;font-weight:400;color:#86868b}' +
+      '.rxctbl td.rxc-chosen{background:#f6fbf7!important;box-shadow:inset 0 0 0 1px #34c759}' +
+      '.rxctbl .rxc-tag{display:inline-block;padding:1px 6px;border-radius:999px;font:600 8px -apple-system,BlinkMacSystemFont,system-ui;background:#34c759;color:#fff;margin-bottom:3px;letter-spacing:.03em}' +
+      '.rxctbl td.rxc-empty{color:#8e8e93;font-style:italic;font-size:9.5px}' +
+      '.rxctbl .rxc-totrow td{background:#f5f5f7;border-top:1px solid #e5e5ea;font-weight:600;padding:6px 8px;color:#1d1d1f}' +
+      '.rxctbl .rxc-totlab{font:600 10px -apple-system,BlinkMacSystemFont,system-ui;text-transform:uppercase;color:#1d1d1f}' +
+      '.rxctbl .rxc-saverow td{background:#f2fbf5;color:#248a3d;font:600 11px -apple-system,BlinkMacSystemFont,system-ui;text-align:right;padding:6px 8px;border-top:1px solid rgba(52,199,89,.25)}' +
+      '.rxcline{font-size:12.5px;color:#1d1d1f;padding:5px 0;border-bottom:1px solid #f2f2f7}.rxccat{font-size:10px;font-weight:600;color:#0071e3;text-transform:uppercase}' +
+      '.rxcnote{margin-top:7px;font-size:9.5px;color:#86868b;line-height:1.4}' +
       // The verification block sits with the signature: a reader checking authenticity is already
       // looking at who signed it. Kept off the page break so the QR is never split in half.
       '.rxv{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;break-inside:avoid;page-break-inside:avoid}' +
