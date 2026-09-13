@@ -272,3 +272,13 @@ on the Contacts screen) and Follow-up (requires a real date).
 
 **Numbers:** 6004 passing, 0 failing. 34 routes waiting for a screen.
 **Next:** maternity-status, oncology/cardiology links, then P0.7 fuzzy search, P0.9 MFA, P0.8 documents.
+
+
+## 2026-09-14 (cont.) — maternity (backlog 34 -> 33)
+
+**Bug:** a failed pregnancy load read as "No pregnancy episode recorded". Fixed and tested. The
+pregnancy card now shows obstetric status in the engine's words (e.g. day 2 postpartum, haemorrhage
+risk highest now).
+
+**Numbers:** 6007 passing, 0 failing. 33 routes waiting for a screen.
+**Next:** oncology/cardiology links, then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
