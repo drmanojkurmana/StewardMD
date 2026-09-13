@@ -180,6 +180,8 @@
       return apiPost("/member/pin", { orgId: st.orgId, identity: identity, pin: pin });
     }).then(function (r) {
       if (r && r.ok) { try { G.toast && G.toast("Staff added: " + identity); } catch (e) {} if (nameEl) nameEl.value = ""; if (pinEl) pinEl.value = ""; loadClinicAdmin(); }
+      // The member exists but has no PIN yet: say why, rather than doing nothing at all.
+      else if (r) { try { G.toast && G.toast("Staff added, but the PIN was not set: " + (r.message || r.error || "refused")); } catch (e) {} loadClinicAdmin(); }
     }).catch(function () { try { G.toast && G.toast("Could not add staff"); } catch (e) {} });
   }
   function clinicAdminHtml(state) {

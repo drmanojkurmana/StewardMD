@@ -952,10 +952,14 @@
       if(pin && !/^\d{4,6}$/.test(pin)){toast("PIN must be 4 to 6 digits");return;}
       api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
+        // Each step's refusal stops the chain and is shown. This said "Saved" even when the PIN or
+        // password had been refused, so staff were handed a sign-in that did not exist.
+        var step=function(what,path,body){return function(){return api(path,{method:"POST",body:body}).then(function(x){ if(!x||!x.ok) throw new Error(what+" not set: "+((x&&(x.message||friendly(x.error)))||"no response")); });};};
         var chain=Promise.resolve();
-        if(pin) chain=chain.then(function(){return api("member/pin",{method:"POST",body:{orgId:st.orgId,identity:id,pin:pin}});});
-        if(em&&pw) chain=chain.then(function(){return api("member/password",{method:"POST",body:{orgId:st.orgId,identity:id,email:em,password:pw}});});
-        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); });
+        if(pin) chain=chain.then(step("PIN","member/pin",{orgId:st.orgId,identity:id,pin:pin}));
+        if(em&&pw) chain=chain.then(step("Password","member/password",{orgId:st.orgId,identity:id,email:em,password:pw}));
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
+          .catch(function(e){ loadStaffList(); toast(e.message); });
       });
     };
     loadStaffList();
@@ -1187,9 +1191,15 @@
     sheet.querySelector("#ok").onclick=function(){
       var id=sheet.querySelector("#wri").value.trim(), pin=sheet.querySelector("#wrp").value.trim();
       if(!id){close();loadDash();return;}
-      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(){
+      // A refused member or PIN keeps the sheet open with the reason, instead of "Clinic ready".
+      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(r){
+        if(!r||!r.ok){toast((r&&(r.message||friendly(r.error)))||"Could not add the receptionist");return;}
         var done=function(){close();toast("Clinic ready");loadDash();};
-        pin?api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(done):done();
+        if(!pin) return done();
+        api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(function(p){
+          if(!p||!p.ok){toast("PIN not set: "+((p&&(p.message||friendly(p.error)))||"no response"));return;}
+          done();
+        });
       });
     };
   }

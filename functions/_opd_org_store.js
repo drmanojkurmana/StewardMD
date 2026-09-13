@@ -10,7 +10,7 @@
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
 import * as M from "./_opd_org.js";
-import { genSalt, hashSecret } from "./_opd_auth.js";
+import { genSalt, hashSecret, passwordProblem, pinProblem } from "./_opd_auth.js";
 
 const now = () => Date.now();
 function newId() { return crypto.randomUUID().replace(/-/g, ""); }
@@ -300,20 +300,24 @@ export async function removeMembership(env, orgId, identity, actorId) { return s
 
 // ---- staff credentials (email + PIN) — hashed at rest, owner-managed ----------------------------
 export async function setMemberPin(env, orgId, identity, pin, actorId) {
+  const weakPin = pinProblem(pin);
+  if (weakPin) return { ok: false, error: "weak_pin", message: weakPin };
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const pinHash = await hashSecret(String(pin), salt);
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_pin", identity); return { ok: true };
 }
 export async function setMemberPassword(env, orgId, identity, email, password, actorId) {
+  const weakPass = passwordProblem(password, email);
+  if (weakPass) return { ok: false, error: "weak_password", message: weakPass };
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const passHash = await hashSecret(String(password), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, passAttempts: 0, passLockedUntil: 0, updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_password", identity); return { ok: true };
 }
 export async function resetMemberAccess(env, orgId, identity, actorId) {
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, passAttempts: 0, passLockedUntil: 0, updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:reset_access", identity); return { ok: true };
 }
 // Raw auth record for the login path (NEVER returned to a client).
@@ -331,7 +335,14 @@ export async function findMemberByEmail(env, email) {
   const row = r.find((x) => x.fields && x.fields.active !== false) || r[0];
   if (!row) return null;
   const f = row.fields || {};
-  return { orgId: f.orgId || "", identity: f.identity || "", active: f.active !== false, email: f.email || "", passSalt: f.passSalt || "", passHash: f.passHash || "" };
+  return { orgId: f.orgId || "", identity: f.identity || "", active: f.active !== false, email: f.email || "", passSalt: f.passSalt || "", passHash: f.passHash || "", passAttempts: f.passAttempts || 0, passLockedUntil: f.passLockedUntil || 0 };
+}
+export async function recordMemberPassAttempt(env, orgId, identity, patch) {
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { passAttempts: patch.passAttempts, passLockedUntil: patch.passLockedUntil, updatedAt: now() })]);
+}
+// Sign-in outcomes, audited under the hospital. Never the secret; the identity is a staff ID, not PHI.
+export async function auditLogin(env, orgId, identity, action, meta) {
+  await audit(env, orgId, String(identity || ""), action, meta || "");
 }
 
 // ---- THE isolation gate (I/O wrapper over the pure authorizeOrgAccess) --------------------------

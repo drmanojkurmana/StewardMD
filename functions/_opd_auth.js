@@ -44,6 +44,34 @@ export function nextPinState(member, now, success) {
   return attempts >= PIN_MAX_ATTEMPTS ? { pinAttempts: attempts, pinLockedUntil: now + PIN_LOCK_MS } : { pinAttempts: attempts, pinLockedUntil: 0 };
 }
 
+// The same machine for email + password sign-in, stored in its own fields so a PIN lockout and a
+// password lockout never reset each other. Email sign-in had no attempt limit at all.
+export function passLocked(member, now) { return pinLocked({ pinLockedUntil: member && member.passLockedUntil }, now); }
+export function nextPassState(member, now, success) {
+  const s = nextPinState({ pinAttempts: member && member.passAttempts }, now, success);
+  return { passAttempts: s.pinAttempts, passLockedUntil: s.pinLockedUntil };
+}
+
+// ---- credential policy (PURE). Returns a plain sentence for the admin, or null when acceptable. ---
+// ponytail: a short blocklist, not a breach corpus; add a k-anonymity breach check when there is a budget for the call.
+const COMMON_PASSWORDS = new Set(["password", "password1", "password123", "1234567890", "qwertyuiop", "welcome123", "admin12345", "hospital123", "abcdefghij", "iloveyou12"]);
+export function passwordProblem(password, email) {
+  const p = String(password || "");
+  if (p.length < 10) return "Use at least 10 characters.";
+  if (/^(.)\1+$/.test(p)) return "A password cannot be one character repeated.";
+  if (COMMON_PASSWORDS.has(p.toLowerCase())) return "That password is too common. Choose another.";
+  const local = String(email || "").toLowerCase().split("@")[0];
+  if (local.length >= 3 && p.toLowerCase().includes(local)) return "A password cannot contain the email name.";
+  return null;
+}
+export function pinProblem(pin) {
+  const p = String(pin || "");
+  if (!/^\d{4,8}$/.test(p)) return "A PIN is 4 to 8 digits.";
+  if (/^(\d)\1+$/.test(p)) return "A PIN cannot be one digit repeated.";
+  if ("01234567890".includes(p) || "09876543210".includes(p)) return "A PIN cannot be a run of consecutive digits.";
+  return null;
+}
+
 // ---- staff session token (identity only — authority comes from q_members) -----------------------
 const STAFF_TTL_MS = 12 * 3600 * 1000;
 export async function mintStaffSession(env, orgId, identity, nowMs) {
