@@ -374,3 +374,10 @@ P0.7 identifier history: the duplicate-records screen shows what the open record
 
 **Numbers:** 6029 passing, 0 failing. 15 routes waiting for a screen.
 **Next:** P0.7 fuzzy/phonetic search check; remaining 15 (backfill clinic hl7 hospital link-mrn maik-interactions metrics operational-health order readers recommend roi round twin-predict twin-reconstruct).
+
+### 2026-09-13 - phonetic name matching
+
+P0.7 phonetic search: Soundex was written and never used, so transliterated names (Mohammed/Muhammad, Lakshmi/Laxmi, Sita/Seetha) scored as different people and duplicates went unsuggested. Name now also agrees when every word sounds alike and spelling similarity >= 0.75 (floor stops Ravi/Rupa). Cannot auto-link alone. Deployed.
+
+**Numbers:** 6030 passing, 0 failing. 15 routes waiting for a screen.
+**Next:** P0.7 relationships / next of kin / guardian / emergency contacts / deceased status - check what exists.
