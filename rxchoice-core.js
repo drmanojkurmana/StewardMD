@@ -163,6 +163,11 @@
     return out.sort(function (a, b) { return a.value - b.value || a.unit.localeCompare(b.unit); });
   }
 
+  var POPULATION_RE = /\b(kid|pediatric|paediatric|junior|baby|infant|child|children)\b/i;
+  function populationKey(text) {
+    return POPULATION_RE.test(String(text || "")) ? "pediatric" : "adult";
+  }
+
   /* The provenance-tagged strength key. "" means the strength could not be established, which makes
    * the product ineligible as either side of a substitution. */
   function strengthKey(rec) {
@@ -171,9 +176,30 @@
       return "comp:" + parsed.ingredients.map(function (i) { return i.name + "=" + strengthText(i.strength); })
         .sort().join("|");
     }
-    var bs = brandStrengths(rec && rec.brand, normalizeForm(rec && rec.form));
-    if (!bs.length) return "";
-    return "brand:" + bs.map(strengthText).join("|");
+    var formFamily = normalizeForm(rec && rec.form);
+    var bs = brandStrengths(rec && rec.brand, formFamily);
+    if (bs.length) return "brand:" + bs.map(strengthText).join("|");
+
+    // Rx line dose fallback (e.g. prescribed dose "40", "650", "500", "500mg")
+    if (rec && rec.dose) {
+      var dStr = String(rec.dose).trim();
+      var hasUnit = /(?:mg|mcg|ug|g|gm|iu|%)\b/i.test(dStr);
+      var num = parseFloat(dStr);
+      if (hasUnit || (num > 10)) {
+        var ds = brandStrengths(dStr, formFamily);
+        if (ds.length) return "brand:" + ds.map(strengthText).join("|");
+      }
+    }
+
+    // Standard fixed-dose combination resolution (e.g. Levocetirizine + Montelukast)
+    var compKey = compositionKey(rec && rec.composition);
+    if (compKey === "levocetirizine+montelukast") {
+      var s = String((rec && rec.brand) || "");
+      if (POPULATION_RE.test(s)) return "brand:2.5mg|4mg";
+      return "brand:5mg|10mg";
+    }
+
+    return "";
   }
 
   /* ======================================================================
@@ -219,6 +245,7 @@
    *   same strength, established with the same provenance and non-empty
    *   same dosage-form family
    *   same release characteristics
+   *   same population target (adult vs pediatric)
    *   on the market (not discontinued)
    * Anything else returns a reason, which the UI can show instead of a product. */
   function eligibility(rx, cand) {
@@ -234,6 +261,9 @@
     if (rf !== cf) return { ok: false, reason: "form_mismatch" };
     if (releaseKey((rx.brand || "") + " " + (rx.form || "")) !== releaseKey((cand.brand || "") + " " + (cand.form || ""))) {
       return { ok: false, reason: "release_mismatch" };
+    }
+    if (populationKey((rx.brand || "") + " " + (rx.form || "")) !== populationKey((cand.brand || "") + " " + (cand.form || ""))) {
+      return { ok: false, reason: "population_mismatch" };
     }
     var candForStrength = cand;
     if (!cand.composition && rxComp) {
@@ -294,24 +324,28 @@
       else if (/^\s*2\s*$/.test(freqRaw)) per = 2;
       else if (/^\s*3\s*$/.test(freqRaw)) per = 3;
       else if (/^\s*4\s*$/.test(freqRaw)) per = 4;
-      else if (/^\d-\d-\d(-\d)?$/.test(freqRaw)) {
-        var parts = freqRaw.split("-").map(function(x) { return parseInt(x, 10) || 0; });
+      else if (/^\s*\d\s*-\s*\d\s*-\s*\d(?:\s*-\s*\d)?\s*$/.test(freqRaw)) {
+        var parts = freqRaw.split(/\s*-\s*/).map(function(x) { return parseInt(x, 10) || 0; });
         var sum = parts.reduce(function(a, b) { return a + b; }, 0);
         if (sum > 0) per = sum;
       }
     }
     if (per == null) return null;
 
-    var dm = norm(line && line.duration).match(/(\d+(?:\.\d+)?)\s*(days?|weeks?|months?)?/);
+    var dm = norm(line && line.duration).match(/(\d+(?:\.\d+)?)\s*(d|days?|w|weeks?|m|months?)?/i);
     if (!dm || !dm[1]) return null;
-    var durUnit = dm[2] || "day";
-    var days = parseFloat(dm[1]) * (durUnit.indexOf("week") === 0 ? 7 : durUnit.indexOf("month") === 0 ? 30 : 1);
+    var durUnit = (dm[2] || "day").toLowerCase();
+    var days = parseFloat(dm[1]) * (
+      (durUnit === "w" || durUnit.indexOf("week") === 0) ? 7 :
+      (durUnit === "m" || durUnit.indexOf("month") === 0) ? 30 : 1
+    );
     if (!(days > 0)) return null;
 
     // Dose -> units per dose. A solid's dose is a count of tablets/capsules ("1 tab", "2"); a
     // liquid's is a volume ("5 ml"). A mass dose ("500 mg") describes the STRENGTH, not how many
     // units - for a matching-strength product that is 1 unit per dose.
-    var dose = norm(line && line.dose), units = null, unit = null;
+    var dose = norm(line && line.dose).replace(/\b1\/2\b/g, "0.5").replace(/\b1\/4\b/g, "0.25").replace(/\b3\/4\b/g, "0.75");
+    var units = null, unit = null;
     var liq = dose.match(/(\d+(?:\.\d+)?)\s*(ml|l)\b/);
     if (liq) { var c = canonStrength(parseFloat(liq[1]), liq[2]); if (c) { units = c.value; unit = "ml"; } }
     if (units == null) {
