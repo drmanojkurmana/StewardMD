@@ -744,7 +744,7 @@ export async function onRequest(context) {
         "goods-receive": CAPS.ORDER_DISPENSE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
-        "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, mar: CAPS.MED_ADMINISTER,
+        "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
         schedule: CAPS.QUEUE_VIEW,
@@ -2683,6 +2683,37 @@ export async function onRequest(context) {
           idempotencyKey: body.idempotencyKey || null,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* P1.6 THE NURSE'S WORKLIST: every patient on the ward with overdue and soon-due doses (from the MAR
+       * schedule) and the early-warning score (NEWS2/PEWS), sickest and most overdue first. Composed from the
+       * same functions the chart uses, so it can never disagree with the chart. A patient whose schedule or
+       * score could not be read is listed with that failure, never shown as "nothing due". */
+      if (sub === "nurse-worklist" && method === "GET") {
+        const roster = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
+        if (!roster || !roster.ok) return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request);
+        const nowMs = Date.now(), CAP = 60;
+        const patients = (roster.patients || []).slice(0, CAP);
+        const sched = { marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined, graceMinutes: Number.isFinite(wsqCfg && wsqCfg.marGraceMinutes) ? wsqCfg.marGraceMinutes : undefined };
+        const rows = await Promise.all(patients.map(async (p) => {
+          const row = { patientId: p.patientId, patient: p, overdue: null, dueSoon: null, news2: null, problems: [] };
+          try {
+            const s = await marSchedule(request, env, { ...deps, ...sched, patientId: p.patientId, from: new Date(nowMs - 12 * 3600e3).toISOString(), to: new Date(nowMs + 4 * 3600e3).toISOString() });
+            if (s && s.ok) { row.overdue = s.due.filter((d) => d.overdue).length; row.dueSoon = s.due.filter((d) => !d.status && Date.parse(d.dueAt) >= nowMs).length; }
+            else row.problems.push("medication schedule could not be read");
+          } catch { row.problems.push("medication schedule could not be read"); }
+          try {
+            const n = await news2ForPatient(request, env, { ...deps, patientId: p.patientId, scale: "" });
+            // An unscorable result carries no number: 0 would read as "well" for a patient simply not observed.
+            if (n && n.ok && n.score) row.news2 = n.score.scorable === false ? { total: null, risk: null, scorable: false } : { total: n.score.total != null ? n.score.total : null, risk: n.score.risk || null, scorable: true };
+            else row.problems.push("early-warning score could not be worked out");
+          } catch { row.problems.push("early-warning score could not be worked out"); }
+          return row;
+        }));
+        const RISK = { high: 0, medium: 1, "low-medium": 2, low: 3 };
+        rows.sort((a, b) => (b.problems.length > 0) - (a.problems.length > 0)
+          || ((RISK[a.news2 && a.news2.risk] ?? 9) - (RISK[b.news2 && b.news2.risk] ?? 9))
+          || ((b.overdue || 0) - (a.overdue || 0)));
+        return json({ ok: true, rows, partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}) }, 200, request);
       }
       if (sub === "schedule" && method === "GET") {
         const r = await marSchedule(request, env, {

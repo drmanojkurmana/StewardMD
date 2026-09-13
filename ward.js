@@ -4608,6 +4608,25 @@
   /* HOSPITAL FORMS (wardsynq-forms.js). The screen draws the published form and hides fields whose condition
    * is not met, as a courtesy; the server re-checks everything, computes calculated fields itself and refuses
    * an invalid response with every field error. Not loaded, failed and none are different sentences. */
+  /* P1.6 NURSE WORKLIST. Sickest and most overdue first (the server sorts). A patient whose schedule or score
+   * could not be read says so on the row; a score that could not be worked out has no number. */
+  function nurseWorklistView(state) {
+    var d = state.nurseWorklist;
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Nurse worklist</h3>" +
+      '<button class="w-btn ghost sm" data-w-act="nurseworklist">' + ms("refresh") + "Refresh</button></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading the ward...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load the worklist. Do not read this as nothing due.</p></div>";
+    var rows = d.rows.map(function (r) {
+      var p = r.patient || {}, n = r.news2;
+      var score = !n ? "" : !n.scorable ? '<span class="w-st due">Score: not enough observations</span>' : '<span class="w-st ' + (n.risk === "high" ? "escalate" : n.risk === "medium" ? "due" : "done") + '">NEWS ' + esc(n.total) + (n.risk ? " " + esc(n.risk) : "") + "</span>";
+      return '<li class="w-mini-row"><div><b>' + esc(p.name || r.patientId) + "</b>" + (p.bed ? " &middot; bed " + esc(p.bed) : "") + " " + score +
+        '<div class="w-dt-times">' + (r.overdue == null ? "" : (r.overdue ? '<span class="w-st escalate">' + esc(r.overdue) + " dose" + (r.overdue === 1 ? "" : "s") + " overdue</span> " : "No doses overdue &middot; ") + esc(r.dueSoon) + " due in the next 4 hours") + "</div>" +
+        (r.problems.length ? '<div class="w-hint warn">' + ms("error") + esc(r.problems.join("; ")) + "</div>" : "") +
+        "</div>" + (p.encounterId ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="open:' + esc(p.encounterId) + '">Open chart</button></div>' : "") + "</li>";
+    }).join("");
+    return '<div class="w-card">' + head + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No patients on this ward.</p>') + "</div>";
+  }
   function formVisible(cond, a) {
     if (!cond) return true;
     if (cond.all) return cond.all.every(function (c) { return formVisible(c, a); });
@@ -5041,6 +5060,7 @@
         : state.view === "mpi" ? mpiView(state)
         : state.view === "documents" ? documentsView(state)
         : state.view === "forms" ? formsView(state)
+        : state.view === "nurseworklist" ? nurseWorklistView(state)
         : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
@@ -8305,6 +8325,7 @@
       if (st.view === "patientsurgery") { st.patientCases = null; st.view = "chart"; paint(); return; }
       if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "nurseworklist") { st.nurseWorklist = null; st.view = "list"; paint(); return; }
       if (st.view === "forms") { st.formDefs = null; st.formSel = null; st.formAnswers = null; st.formResult = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referrals") { st.referrals = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
@@ -8584,6 +8605,13 @@
     if (cmd === "taglost") { tagEnd("lost", arg); return; }
     if (cmd === "tagend") { tagEnd("end", arg); return; }
     if (cmd === "mpi") { mpiOpen(); return; }
+    if (cmd === "nurseworklist") {
+      st.view = "nurseworklist"; st.nurseWorklist = null; paint();
+      apiGet("/ward/nurse-worklist?orgId=" + encodeURIComponent(st.orgId))
+        .then(function (r) { st.nurseWorklist = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+        .catch(function () { st.nurseWorklist = { failed: true }; paint(); });
+      return;
+    }
     if (cmd === "forms") {
       if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
       st.view = "forms"; st.formDefs = null; st.formResponses = null; st.formSel = null; st.formAnswers = {}; st.formResult = null; paint();
@@ -8746,7 +8774,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox", "nurseworklist"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open

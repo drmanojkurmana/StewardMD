@@ -6791,3 +6791,18 @@ test("FORMS: the admin drafts and publishes; a nurse completes a published form,
   assert.deepEqual(list.responses.map((x) => x.answers), [{ fell_before: true, falls_count: 2 }]);
   assert.equal((await as(NURSE, "/ward/form-submit", "POST", { ...body, formVersion: 9, answers: { fell_before: false } })).error, "form_not_found", "an unpublished version cannot be answered");
 });
+
+test("NURSE WORKLIST: every patient on the ward with overdue doses and early-warning score; a read failure is shown, not hidden; pharmacy cannot see it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const w = await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`);
+  assert.equal(w.__status, 200, JSON.stringify(w).slice(0, 300));
+  const row = w.rows.find((r) => r.patientId === adm.patientId);
+  assert.ok(row, "the admitted patient is on the worklist");
+  assert.deepEqual(row.problems, []);
+  assert.equal(typeof row.overdue, "number");
+  assert.equal(row.news2.scorable, false);
+  assert.equal(row.news2.total, null, "a score that could not be worked out is never shown as 0");
+  assert.equal(w.partial, false);
+  assert.equal((await as(PHARM, `/ward/nurse-worklist?orgId=${ORG}`)).__status, 403);
+});
