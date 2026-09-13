@@ -488,3 +488,9 @@ wardsynq/wardsynq-forms.js engine + _forms_store.js (drafts, create-only publish
 
 Conditional form fields now appear on change (onFormChange redraw), ward.js site53, live. 6122 passing.
 **Next:** P1.6 nursing command center.
+
+### 2026-09-13 - P1.6 nurse worklist live
+
+GET /ward/nurse-worklist (MAR schedule overdue/due-next + NEWS2/PEWS per ward patient, sickest first, per-row read failures) + Nurse worklist screen and map tile. Bug fixed: unscorable early-warning score was total 0; now no number. Live (ward.js site54, shell.js v32), production deploy succeeded. 6127 passing.
+**P1 done:** 1.1 forms, 1.4 accounting, 1.6 nurse worklist (first cut: no nurse-patient assignment or task list yet), 1.7 rostering, 1.8 referrals, 1.15 outbox.
+**Next:** P1.3 approvals gaps, P1.2 supply chain gaps, P1.9-1.14 top-ups, P1.5 TPA; then P2.
