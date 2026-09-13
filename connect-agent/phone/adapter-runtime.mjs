@@ -327,7 +327,9 @@ export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 
 export async function executeView({ plugin, origin, view, patient, tokens = null, parseHtml = null, onCall = null }) {
   let plan = replayPlan(view, patient);
   if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
-  const base = String(origin || '').replace(/\/$/, '');
+  let viewHost = origin;
+  try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  const base = String(viewHost || '').replace(/\/$/, '');
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));
   const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
   if (wantsToken) plan = replayPlan(view, patient, toks);
