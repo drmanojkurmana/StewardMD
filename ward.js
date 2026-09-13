@@ -7354,6 +7354,13 @@
 
   /* Reads what is typed into the drawn form back into st.formAnswers, typed by field: numbers as numbers,
    * yes/no as booleans. Values of fields that are no longer shown are left out. */
+  /* A form answer changed: re-read the answers and redraw, so a follow-up question appears the moment the
+   * answer it depends on is given. "change" (not "input") so typing in a text box never loses focus. */
+  function onFormChange(ev) {
+    var t = ev && ev.target;
+    if (st.view !== "forms" || !st.formSel || !t || !(t.hasAttribute("data-w-formfield") || t.hasAttribute("data-w-formmulti"))) return;
+    readFormAnswers(); paint();
+  }
   function readFormAnswers() {
     var f = st.formSel; if (!f) return;
     var a = {};
@@ -8718,6 +8725,7 @@
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    el.removeEventListener("change", onFormChange); el.addEventListener("change", onFormChange);
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     paint();
