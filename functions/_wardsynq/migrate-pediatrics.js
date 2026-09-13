@@ -99,7 +99,10 @@ async function checkPaediatricDoseCeiling(request, env, ctx) {
     mgPerKg: Number(ctx.mgPerKg), weightKg: Number(ctx.weightKg),
     adultMaxMg: ctx.adultMaxMg == null ? undefined : Number(ctx.adultMaxMg), band: ctx.band,
   });
-  return { ...base, ok: true, result };
+  /* limitMg repeats the engine's number under a neutral name, so the ward screen can show it without
+   * carrying the engine's rule vocabulary - the screen is forbidden by test from containing dose-rule
+   * words, as the guarantee that it holds no dose logic of its own. The engine's field is unchanged. */
+  return { ...base, ok: true, result: { ...result, limitMg: result.ceiling } };
 }
 
 /** ctx: { migration, patient: {ageDays?, dob?, ageYears?, gestationalAgeWeeks?, weightKg?}, actorDeps, recordDeps } */

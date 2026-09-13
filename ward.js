@@ -1921,6 +1921,21 @@
       '<label class="w-f"><span>Concentration (mg/mL)</span><input id="wRateConc" type="text" inputmode="decimal" autocomplete="off"></label>' +
       "</div>" +
       '<button class="w-btn ghost" data-w-act="ratecalc">' + ms("calculate") + "Calculate</button>" +
+      /* THE MOST A CHILD MAY HAVE. Weight times the mg/kg rule, capped at the adult maximum - a heavy
+       * teenager's weight-based dose can exceed what an adult is ever given. The engine's own reasons
+       * are shown, and "no weight recorded" is a refusal to calculate, never a number. */
+      '<h4>' + ms("calculate") + "Maximum dose for this child</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>mg per kg (from the drug rule)</span><input id="wLimMgKg" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Adult maximum mg (optional)</span><input id="wLimAdult" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn ghost" data-w-act="childdoselimit">' + ms("calculate") + "Work out the maximum</button>" +
+      (state.limitResult
+        ? (state.limitResult.limitMg == null
+            ? '<p class="w-hint warn">' + ms("warning") + esc((state.limitResult.reasons || []).map(function (r) { return r.message; }).join("; ") || "No maximum could be worked out.") + "</p>"
+            : '<p class="w-hint' + (state.limitResult.cappedByAdult ? " warn" : "") + '">' + ms("info") + "Maximum " + esc(state.limitResult.limitMg) + " mg" +
+              ((state.limitResult.reasons || []).length ? " - " + esc(state.limitResult.reasons.map(function (r) { return r.message; }).join("; ")) : "") + "</p>")
+        : "") +
       (state.rateResult ? '<p class="w-hint' + (state.rateResult.weightWarning ? " warn" : "") + '">' + esc(state.rateResult.ratePerHour == null ? state.rateResult.reason : state.rateResult.workings + " = " + state.rateResult.ratePerHour + " mL/h") + "</p>" : "") +
       "</div></div>";
   }
@@ -5062,6 +5077,22 @@
       .then(function (r) { if (settle(r, "Bundle started.")) loadResus(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not start the bundle."; paint(); });
   }
+  function childDoseLimitCheck() {
+    var mgkg = val("wLimMgKg"), weight = val("wAgeWeight"), adult = val("wLimAdult");
+    /* Numbers only, never guessed: a mistyped weight is the commonest way a child's dose goes wrong. */
+    var num = /^\d+(\.\d+)?$/;
+    if (!num.test(mgkg)) { st.err = "Enter the mg per kg as a plain number."; paint(); return; }
+    if (adult && !num.test(adult)) { st.err = "The adult maximum has to be a plain number, or left blank."; paint(); return; }
+    st.limitResult = null; st.busy = true; paint();
+    apiPost("/ward/dose-ceiling", {
+      orgId: st.orgId, mgPerKg: Number(mgkg),
+      weightKg: num.test(weight) ? Number(weight) : undefined,
+      adultMaxMg: adult ? Number(adult) : undefined,
+      band: st.ageBand && st.ageBand.band,
+    })
+      .then(function (r) { st.busy = false; if (r && r.ok) st.limitResult = r.result; else settle(r, null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not work out the maximum."; paint(); });
+  }
   function resusWaive(bundleId, key) {
     var reason = "";
     try { reason = G.prompt("Why is this not appropriate for this patient?") || ""; } catch (e) { return; }
@@ -8121,6 +8152,7 @@
     if (cmd === "triage") { recordTriage(); return; }
     if (cmd === "resusload") { loadResus(); return; }
     if (cmd === "resusstart") { resusStart(); return; }
+    if (cmd === "childdoselimit") { childDoseLimitCheck(); return; }
     if (cmd === "resuswaive") { var rw = arg.indexOf("|"); if (rw > 0) resusWaive(arg.slice(0, rw), arg.slice(rw + 1)); return; }
     if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
     if (cmd === "resusvoid") { resusVoid(arg); return; }

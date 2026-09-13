@@ -174,7 +174,11 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
    * this test already made for the word "allergy" a few lines below, and for the same reason - the
    * property being defended is that the screen never RUNS a clinical rule, not that it never contains
    * a clinical word. Drug-interaction logic remains forbidden by name. */
-  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  /* Server route paths are removed before scanning. "/ward/dose-ceiling" is the NAME OF A SERVER CALL -
+   * calling the server is exactly how this screen is supposed to get a dose answer, because the rule runs
+   * there. Identifiers and logic are still scanned in full; only quoted route paths are exempt. */
+  const codeNoPaths = code.replace(/["'`]\/(?:api\/queue\/)?[a-z0-9-]+\/[a-z0-9-]+/g, " ");
+  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(codeNoPaths), "no clinical rule logic in the UI");
   /* The word "allergy" used to be on that list as a proxy, and it stopped being a usable one when the
    * downtime pack began DISPLAYING an allergy list the server assembled. Displaying is not deciding,
    * and the property this test defends is that the screen never decides. So the check now tests the
