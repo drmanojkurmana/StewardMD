@@ -503,3 +503,7 @@ approvalPolicy[subjectType] = { approverRoles, expiresHours } (whitelisted): app
 ### 2026-09-13 - P1.2 supply chain audit
 
 Already present: PO lines, approvals, partial and over-receipt detection (reported, never silently accepted), batch/expiry on receipt, near-expiry list, wastage, transfers (out+in), reorder list, count reconciliation, append-only ledger. GAP found, not built: FEFO needs per-batch on-hand, but dispensing does not record the batch, so any "take this batch" suggestion would be a guess. Next step for P1.2: record batch on dispense/return, then per-batch balances, then FEFO; PO line unit cost (enables server-held amount thresholds for approvals). Returns to supplier and pack/unit conversion also still to verify.
+
+### 2026-09-13 - P1.2 FEFO rules
+
+Correction to the audit above: dispenses DO record batch/expiry. Added pure batchBalances/fefoSuggestion in stock.js (earliest usable expiry first, expired/undated excluded with reason, shortfall reported, refuses when unbatched issues exist). 4 tests. Next: route + pharmacy screen for it; PO line unit cost.
