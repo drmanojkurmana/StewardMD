@@ -507,3 +507,14 @@ Already present: PO lines, approvals, partial and over-receipt detection (report
 ### 2026-09-13 - P1.2 FEFO rules
 
 Correction to the audit above: dispenses DO record batch/expiry. Added pure batchBalances/fefoSuggestion in stock.js (earliest usable expiry first, expired/undated excluded with reason, shortfall reported, refuses when unbatched issues exist). 4 tests. Next: route + pharmacy screen for it; PO line unit cost.
+
+### 2026-09-13 - P1.2 FEFO on the pharmacy screen; stock fixes
+
+GET /ward/stock-fefo (ORDER_DISPENSE) + Inventory "Which batch to use" card. Fixed: stock levels and reconciliation swallowed a failed dispense read as [] (levels too high; reconciliation would post a wrong adjustment); a failed stock load read as "No stock movements"; two receipts of one drug in the same millisecond shared a movement id and the second overwrote the first (random tail added). Deployed.
+
+### 2026-09-13 - every route has a screen or a stated reason (owner: "every backend has frontend")
+
+Reachability 14 -> 0 without a screen. Wired: link-mrn (Patients page), maik-interactions (chart MaiK card history), metrics (Ward status card), readers + read (record detail: opening logs a decisive read; superseded versions show who saw them), twin-predict + twin-reconstruct (Digital twin forecast and look-back), order (clinic billing add-from-price-list). Recorded with reasons: hl7 (machine), backfill (operator only), clinic/hospital (opd.html computed path), recommend (runs on device), roi (superseded by roi-requests), round (superseded by schedule).
+Bugs fixed on the way: SAFETY medication round showed an unreadable dose record as not started (both routes; now "unknown" + warning; nurse worklist carries it). SECURITY clinic billing orders took price from the request (now tariff). SECURITY any account could create a hospital under a chosen id / run backfill (now platform operator only). link-mrn onto an in-use MR overwrote that patient. Ward metrics counted unreadable types as 0. Twin look-back dropped unreadable histories silently. ROI consent failure showed "not recorded". Clinic billing queues read failures as empty; billing ID counter had no compare-and-set. 6149 passing, 0 failing.
+Noted, not yet fixed: other time-derived record ids (fluid balance entry, handover, preauth) may share the same-millisecond collision class as stock movements; audit next. Patient-app routes (patient-enrol/messages/reply/revoke) are marked "patient's own app": P2.9 must build that app.
+**Next:** P1.2 PO line unit cost -> P1.3 amount thresholds; P1.6 nurse assignment + tasks; P1.9-1.14; P1.5; P2.
