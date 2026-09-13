@@ -304,7 +304,7 @@ function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(func
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in", "https://wardsynq.com", "https://www.wardsynq.com"];
 function corsHeaders(request) {
   const o = request.headers.get("Origin") || ""; const h = { "Vary": "Origin" };
-  if (CORS_ORIGINS.indexOf(o) >= 0) { h["Access-Control-Allow-Origin"] = o; h["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"; h["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-App-Token, X-Admin-Token, X-Staff-Token"; h["Access-Control-Max-Age"] = "86400"; }
+  if (CORS_ORIGINS.indexOf(o) >= 0) { h["Access-Control-Allow-Origin"] = o; h["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"; h["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-App-Token, X-Admin-Token, X-Staff-Token, X-Offline-Created-At, X-Offline-Conflict-Reason"; h["Access-Control-Max-Age"] = "86400"; }
   return h;
 }
 /* `extra` is optional response headers. Added for TASK 9.15's 429s: a rate-limit refusal without a
@@ -1388,6 +1388,8 @@ export async function onRequest(context) {
       }
       if (sub === "list" && method === "GET") {
         const r = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "", region: (wOrg && wOrg.region) || "IN" });
+        // P2.4: how long a device may show an offline copy of a chart. Hospital config, 1-72 hours, default 12.
+        if (r.ok) { const h = Number(wsqCfg && wsqCfg.offlineCacheHours); r.offlineCacheHours = Number.isFinite(h) && h >= 1 && h <= 72 ? h : 12; }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-arrival" && method === "POST") {

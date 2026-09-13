@@ -479,6 +479,9 @@ class IdempotencyConflictError extends VersionConflictError {
   }
 }
 
+/** Who a record is about. A Patient's own subject is its id. */
+const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
+
 /**
  * The ClinicalStore backend over the persistence port, fixed to one tenant. This is the whole
  * bridge: four methods the store already expects, each forwarding with the tenant prepended. The
@@ -595,11 +598,21 @@ class RecordService {
     // key rather than a new column (see actor.js's requestContextOf() for why), so every audit
     // event this file already writes carries them with no change to any of this file's callers.
     const rc = this.actor && this.actor.requestContext;
-    const scope = (fields && fields.scope) || null;
+    let scope = (fields && fields.scope) || null;
+    /* P2.4: A WRITE A DEVICE HELD WHILE OFFLINE SAYS SO. Two times, and only one of them is trusted:
+     * `createdAt` is the device's clock, kept for display ("charted at the bedside at 10:02"), and
+     * `syncedAt` is this server's. The event's own `ts` stays the server's time, so nothing orders
+     * clinical truth by a clock the client controls. Writes only: a read is never "offline". */
+    const offline = rc && rc.offline;
+    if (offline && action !== "record.read" && action !== "record.list" && action !== "record.changes" && action !== "record.identity-lookup") {
+      scope = { ...(scope || {}), offline: { createdAt: offline.createdAt, syncedAt: this.now(), clientClock: true, ...(offline.conflictReason ? { conflictReason: offline.conflictReason } : {}) } };
+    }
+    let request = rc;
+    if (rc && rc.offline) { request = { ...rc }; delete request.offline; }
     const event = {
       ts: this.now(), actor: this.actor.id, connectorId: "wardsynq", action,
       resourceCounts: (fields && fields.resourceCounts) || null,
-      scope: rc ? { ...(scope || {}), request: rc } : scope,
+      scope: rc ? { ...(scope || {}), request } : scope,
       patientRefHash: patientId ? await this.pseudonym(patientId) : null,
       outcome: (fields && fields.outcome) || "ok",
     };
@@ -713,6 +726,34 @@ class RecordService {
   }
 
   /**
+   * The outcome a committed idempotency key already produced, or null when the key is new. Bound to
+   * the type and subject it first committed for (see the note in put()).
+   *
+   * Exposed so a route that checks state BEFORE it writes (the eMAR state machine, a nursing task's
+   * expectedVersion) can answer a retried request with its original outcome. Without this a retry of
+   * an "administer" whose response was lost - exactly what an offline device replaying its queue
+   * sends - was refused as an illegal transition, and the nurse was told a recorded dose was not.
+   */
+  async replayFor(idempotencyKey, resourceType, subjectId, attemptedId) {
+    const key = idempotencyKey ? String(idempotencyKey) : null;
+    if (!key) return null;
+    const prior = await this.repository.recall(this.tenantId, key);
+    if (!prior) return null;
+    const versions = await this.repository.history(this.tenantId, prior.resourceType, prior.id);
+    const rec = versions.find((v) => v.version === prior.version) || null;
+    if (prior.resourceType !== resourceType || subjectOf(rec) !== (subjectId || null)) {
+      throw new IdempotencyConflictError({
+        idempotencyKey: key,
+        committed: { resourceType: prior.resourceType, id: prior.id },
+        attempted: { resourceType, id: attemptedId || null },
+      });
+    }
+    // Same key, same outcome. The record returned is the version that write produced, so a client
+    // that lost the first response sees exactly what it would have seen.
+    return { record: rec, replayed: true };
+  }
+
+  /**
    * The native write door.
    *
    * @param {object} entity  a canonical entity (resourceType + id required)
@@ -732,11 +773,7 @@ class RecordService {
 
     const key = opts.idempotencyKey ? String(opts.idempotencyKey) : null;
     if (key) {
-      const prior = await this.repository.recall(this.tenantId, key);
-      if (prior) {
-        const versions = await this.repository.history(this.tenantId, prior.resourceType, prior.id);
-        const rec = versions.find((v) => v.version === prior.version) || null;
-
+      {
         /* A KEY IS BOUND TO THE TYPE AND THE PATIENT IT FIRST COMMITTED FOR.
          *
          * Without this the recall matched on the key ALONE, and a client that reused one key across
@@ -756,17 +793,8 @@ class RecordService {
          * retry alone.
          *
          * A Patient's own subject is its id: for that one type the record IS the person. */
-        const subjectOf = (r) => (r && (r.patientId || (r.resourceType === "Patient" ? r.id : null))) || null;
-        if (prior.resourceType !== entity.resourceType || subjectOf(rec) !== subjectOf(entity)) {
-          throw new IdempotencyConflictError({
-            idempotencyKey: key,
-            committed: { resourceType: prior.resourceType, id: prior.id },
-            attempted: { resourceType: entity.resourceType, id: entity.id },
-          });
-        }
-        // Same key, same outcome. The record returned is the version that write produced, so a
-        // client that lost the first response sees exactly what it would have seen.
-        return { record: rec, replayed: true };
+        const replay = await this.replayFor(key, entity.resourceType, subjectOf(entity), entity.id);
+        if (replay) return replay;
       }
     }
 
