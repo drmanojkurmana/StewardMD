@@ -258,6 +258,88 @@ function recordAdjudication(claim, { approvedAmount, deniedAmount, by, now, reas
 }
 
 /**
+ * P1.5: the payer said it has the claim. A fact arriving, like adjudication: never moves claim.state.
+ */
+function recordAcknowledgement(claim, { payerReference, by, now, note } = {}) {
+  if (!by) throw new BillingError("an acknowledgement names who recorded it", "NO_ACTOR");
+  if (!payerReference) throw new BillingError("an acknowledgement carries the payer's own reference", "NO_REFERENCE");
+  const at = now || new Date().toISOString();
+  claim.payerReference = String(payerReference);
+  claim.acknowledgedAt = at;
+  claim.history.push({ at, event: "acknowledged", by, detail: [String(payerReference), note || null].filter(Boolean).join(", ") });
+  return claim;
+}
+
+/**
+ * P1.5: settlement reconciliation. The payer's paid amount against what was approved and what was
+ * submitted. Short payment and disallowance are RECORDED with the payer's reasons; any balance stays
+ * on the claim as outstanding. Nothing here moves money to the patient - that is moveBalanceToPatient,
+ * a separate, explicit human act.
+ */
+function settle(claim, { paidAmount, disallowances, shortPaymentReason, by, now, payerReference } = {}) {
+  if (!by) throw new BillingError("a settlement names who recorded it", "NO_ACTOR");
+  const paid = Number(paidAmount);
+  if (paidAmount == null || paidAmount === "" || !Number.isFinite(paid) || paid < 0) throw new BillingError("a settlement needs the amount the payer actually paid", "NO_AMOUNT");
+  if (claim.state !== CLAIM_STATE.SUBMITTED && claim.state !== CLAIM_STATE.QUERIED) throw new BillingError("only a submitted claim is settled", "NOT_SUBMITTED");
+  const list = (Array.isArray(disallowances) ? disallowances : []).map((d) => ({ reason: String((d && d.reason) || "").trim(), amount: Number.isFinite(Number(d && d.amount)) ? Number(d.amount) : null })).filter((d) => d.reason);
+  const submitted = Number.isFinite(Number(claim.submittedAmount)) ? Number(claim.submittedAmount) : null;
+  const approved = Number.isFinite(Number(claim.approvedAmount)) ? Number(claim.approvedAmount) : null;
+  const disallowed = submitted != null && approved != null ? Math.max(0, submitted - approved) : null;
+  const short = approved != null ? Math.max(0, approved - paid) : null;
+  if (short > 0 && !shortPaymentReason) throw new BillingError(`the payer paid ${paid} against ${approved} approved; record the payer's reason for the short payment`, "NO_SHORT_REASON");
+  if (disallowed > 0 && !list.length) throw new BillingError(`${disallowed} of the submitted amount was not approved; record the disallowance reason(s)`, "NO_DISALLOWANCE_REASON");
+  const at = now || new Date().toISOString();
+  const outstanding = submitted != null ? Math.max(0, submitted - paid) : null;
+  claim.state = CLAIM_STATE.PAID;
+  claim.settlement = {
+    at, by, paidAmount: paid, submittedAmount: submitted, approvedAmount: approved,
+    disallowedAmount: disallowed, shortPaidAmount: short, shortPaymentReason: shortPaymentReason || null,
+    disallowances: list, outstandingAmount: outstanding, payerReference: payerReference || claim.payerReference || null,
+    // Where the balance sits: on the claim, unassigned, until a person decides.
+    balanceWith: "unassigned",
+    ...(submitted == null ? { unknown: "No submitted amount is on this claim, so the outstanding balance cannot be worked out." } : {}),
+    ...(approved == null ? { unknownApproved: "No approved amount was recorded, so short payment against approval cannot be worked out." } : {}),
+  };
+  claim.history.push({ at, event: "settled", by, detail: `paid ${paid}${short ? `, short ${short}: ${shortPaymentReason}` : ""}${list.length ? `, disallowed: ${list.map((d) => d.reason).join("; ")}` : ""}` });
+  return claim;
+}
+
+/** P1.5: the ONLY path that assigns a settled claim's balance to the patient. Explicit, reasoned, once. */
+function moveBalanceToPatient(claim, { amount, reason, by, now } = {}) {
+  if (!by || !reason) throw new BillingError("moving a balance to the patient names who decided and why", "NO_REASON");
+  if (!claim.settlement) throw new BillingError("only a settled claim has a balance to move", "NOT_SETTLED");
+  if (claim.settlement.balanceWith === "patient") throw new BillingError("this balance has already been moved to the patient", "ALREADY_MOVED");
+  const amt = Number(amount);
+  const max = claim.settlement.outstandingAmount;
+  if (!Number.isFinite(amt) || amt <= 0) throw new BillingError("name the amount being moved to the patient", "NO_AMOUNT");
+  if (max != null && amt > max) throw new BillingError(`${amt} is more than the ${max} outstanding on this claim`, "OVER_BALANCE");
+  const at = now || new Date().toISOString();
+  claim.settlement.balanceWith = "patient";
+  claim.settlement.patientBalance = { amount: amt, reason, by, at };
+  claim.history.push({ at, event: "balance-moved-to-patient", by, detail: `${amt}: ${reason}` });
+  return claim;
+}
+
+/**
+ * P1.5: a pre-admission ESTIMATE from tariff lines. `priced` comes from the caller's tariff pricing; this
+ * only shapes the record and says, on the record, that it is an estimate and not a bill.
+ */
+function costEstimate({ patientId, payerId, lines, priced, by, now } = {}) {
+  if (!patientId) throw new BillingError("an estimate names the patient", "NO_PATIENT");
+  if (!by) throw new BillingError("an estimate names who prepared it", "NO_ACTOR");
+  if (!Array.isArray(lines) || !lines.length) throw new BillingError("an estimate needs at least one tariff line", "NO_LINES");
+  const at = now || new Date().toISOString();
+  return {
+    patientId, payerId: payerId || null, preparedBy: by, at,
+    lines: priced.priced.map((l) => ({ code: l.code, display: l.description || l.display || null, quantity: Number(l.quantity) || 1, unitPrice: l.amount, amount: l.line, currency: l.currency || null })),
+    unpriced: priced.unpriced.map((l) => ({ code: l.code, quantity: Number(l.quantity) || 1, reason: l.reason })),
+    estimatedAmount: priced.total, currency: priced.currency || null,
+    isEstimate: true,
+    note: "An ESTIMATE from the hospital tariff, prepared before admission. It is not a bill and not a payer approval; the final charge follows what is actually done." + (priced.unpriced.length ? " Some lines have no tariff price and are NOT in the total." : ""),
+  };
+}
+
+/**
  * Resubmits a denied claim.
  *
  * The check that matters: if the clinical content changed between the denial and the resubmission,
@@ -347,4 +429,5 @@ export {
   CLAIM_STATE, PREAUTH_STATE, SUPPORT, BillingError,
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
   submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
+  recordAcknowledgement, settle, moveBalanceToPatient, costEstimate,
 };

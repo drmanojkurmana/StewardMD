@@ -46,18 +46,109 @@ function NullAdapter() {
  * `adapter` defaults to NullAdapter(); a real one is `{id, name, submit: async (claim) => {state,
  * payerReference?, note?}}`.
  */
-async function submitViaAdapter(claim, adapter) {
+async function submitViaAdapter(claim, adapter, opts) {
   const a = adapter || NullAdapter();
   let result;
-  try { result = await a.submit(claim); }
+  try { result = await a.submit(claim, opts || {}); }
   catch (e) { result = { state: "failed", note: `Adapter threw: ${e && e.message}` }; }
   const state = ADAPTER_STATES.includes(result && result.state) ? result.state : "failed";
   return {
     adapterId: a.id || "unknown", adapterName: a.name || "Unnamed adapter", state,
     payerReference: (result && result.payerReference) || null,
     note: (result && result.note) || null,
+    ...(result && result.outcome ? { outcome: result.outcome } : {}),
+    // The payer's own figures, carried only when the payer actually acknowledged.
+    ...(state === "acknowledged" && result.adjudication ? { adjudication: result.adjudication } : {}),
+    ...(state === "acknowledged" && Array.isArray(result.disallowances) && result.disallowances.length ? { disallowances: result.disallowances } : {}),
+    ...(opts && opts.payerId ? { payerId: opts.payerId } : {}),
     attemptedAt: new Date().toISOString(),
   };
 }
 
-export { ADAPTER_STATES, NullAdapter, submitViaAdapter };
+/* ---- P1.5: THE PAYER REGISTRY ------------------------------------------------------------------
+ * wardsynq.payers is the hospital's list: [{ id, name, adapter: "fhir-claim" | "manual", endpoint,
+ * currency, auth: "none" | { type: "bearer" | "header", headerName, credentialRef }, rules }].
+ * The claim record carries only a payerId. Everything payer-specific is resolved here, at the edge. */
+
+const str = (v) => (v == null ? "" : String(v).trim());
+
+/** The hospital's own process for a payer it deals with by portal, email or paper. Queued, never sent. */
+function ManualAdapter(payer) {
+  return {
+    id: `manual:${str(payer && payer.id)}`,
+    name: `Manual process for ${str(payer && payer.name) || str(payer && payer.id)}`,
+    async submit() {
+      return { state: "queued", payerReference: null, note: "This payer is handled by the hospital's own manual process (portal, email or paper). Queued for that process; nothing was sent electronically." };
+    },
+  };
+}
+
+/** PURE. Find a configured payer. */
+function payerById(payers, payerId) {
+  const id = str(payerId);
+  return id ? (Array.isArray(payers) ? payers : []).find((p) => p && str(p.id) === id) || null : null;
+}
+
+/** An unconfigured payer is the NullAdapter, with a note that says which payer and why. */
+function unconfigured(payerId, why) {
+  const base = NullAdapter();
+  return { ...base, id: "null", async submit() { const r = await base.submit(); return { ...r, note: `${why} ${r.note}` }; } };
+}
+
+/**
+ * Resolve a payer id to an adapter. kinds: { "fhir-claim": (payer, deps) => adapter } injected, so this
+ * file carries no transport. Unknown id, unknown kind, or no id at all: NullAdapter, recorded honestly.
+ */
+function adapterForPayer(payers, payerId, kinds, deps) {
+  if (!str(payerId)) return { payer: null, adapter: unconfigured(null, "No payer is recorded on this claim.") };
+  const payer = payerById(payers, payerId);
+  if (!payer) return { payer: null, adapter: unconfigured(payerId, `Payer "${str(payerId)}" is not configured for this hospital.`) };
+  const kind = str(payer.adapter) || "manual";
+  if (kind === "manual") return { payer, adapter: ManualAdapter(payer) };
+  const make = kinds && kinds[kind];
+  if (typeof make !== "function") return { payer, adapter: unconfigured(payerId, `Payer "${str(payerId)}" names adapter kind "${kind}", which this build does not have.`) };
+  return { payer, adapter: make(payer, deps || {}) };
+}
+
+/** PURE. The payer list as a screen may see it: no endpoint, no credential reference. */
+function publicPayers(payers) {
+  return (Array.isArray(payers) ? payers : []).filter((p) => p && str(p.id)).map((p) => ({
+    id: str(p.id), name: str(p.name) || str(p.id), adapter: str(p.adapter) || "manual",
+    endpointConfigured: /^https:\/\//i.test(str(p.endpoint)),
+    credentialConfigured: !!(p.auth && typeof p.auth === "object" && str(p.auth.credentialRef)),
+  }));
+}
+
+/**
+ * PURE. Payer rules as WARNINGS on the claim screen. They never block and never change state.
+ * rules: { preauthRequiredAbove: number, timelyFilingDays: number }
+ */
+function payerRuleWarnings(claim, payer, { preAuths = [], now } = {}) {
+  const warnings = [];
+  if (!claim) return warnings;
+  if (!payer) {
+    warnings.push(str(claim.payerId) ? `Payer "${str(claim.payerId)}" is not configured; its rules cannot be checked.` : "No payer is recorded on this claim; payer rules cannot be checked.");
+    return warnings;
+  }
+  const rules = (payer.rules && typeof payer.rules === "object") ? payer.rules : {};
+  const threshold = Number(rules.preauthRequiredAbove);
+  const amount = Number(claim.submittedAmount != null ? claim.submittedAmount : claim.estimatedAmount);
+  if (Number.isFinite(threshold) && Number.isFinite(amount) && amount > threshold) {
+    const approved = (preAuths || []).some((a) => a && a.state === "approved" && (!a.payerId || str(a.payerId) === str(payer.id)));
+    if (!approved) warnings.push(`${str(payer.name) || str(payer.id)} requires pre-authorisation above ${threshold}; this claim is ${amount} and no approved pre-authorisation is recorded.`);
+  }
+  const days = Number(rules.timelyFilingDays);
+  if (Number.isFinite(days) && days > 0 && !claim.submittedAt) {
+    const from = Date.parse(str(claim.dischargedAt) || str(claim.at));
+    const at = Date.parse(str(now) || new Date().toISOString());
+    if (Number.isFinite(from) && Number.isFinite(at)) {
+      const left = days - Math.floor((at - from) / 86400000);
+      const basis = str(claim.dischargedAt) ? "discharge" : "the date the claim was coded (no discharge date is on the claim)";
+      if (left < 0) warnings.push(`Timely filing: ${days} days from ${basis} has passed by ${-left} day(s).`);
+      else if (left <= Math.min(7, days)) warnings.push(`Timely filing: ${left} day(s) left of ${days}, counted from ${basis}.`);
+    }
+  }
+  return warnings;
+}
+
+export { ADAPTER_STATES, NullAdapter, ManualAdapter, submitViaAdapter, payerById, adapterForPayer, publicPayers, payerRuleWarnings };

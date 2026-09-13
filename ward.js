@@ -1821,15 +1821,41 @@
   }
 
   var PREAUTH_STATES = [["requested", "Requested"], ["approved", "Approved"], ["refused", "Refused"], ["expired", "Expired"]];
+  var TPA_CHANNEL_WORDS = { not_configured: "not configured, nothing sent", queued: "queued for the manual process", sent: "sent, not yet acknowledged", acknowledged: "acknowledged by the payer", failed: "failed" };
+  function tpaPayerName(payers, id) {
+    for (var i = 0; i < (payers || []).length; i++) if (payers[i].id === id) return payers[i].name;
+    return id ? id + " (not configured)" : "no payer recorded";
+  }
+  function tpaPayerSelect(id, payers) {
+    return '<select id="' + id + '"><option value="">No payer</option>' + (payers || []).map(function (p) {
+      return '<option value="' + esc(p.id) + '">' + esc(p.name) + " &middot; " + esc(p.adapter) +
+        (p.adapter === "fhir-claim" && !p.endpointConfigured ? " (no endpoint)" : "") + "</option>";
+    }).join("") + "</select>";
+  }
   function tpaView(state) {
-    var t = state.tpa || {};
+    if (!state.tpa) return '<div class="w-card"><h3>TPA / Claims</h3><p class="w-empty">Loading claims&hellip;</p></div>';
+    var t = state.tpa;
+    if (t.failed) {
+      return '<div class="w-card"><div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+        "<h3>TPA / Claims</h3><button class=\"w-btn ghost\" data-w-act=\"tpaopen\">" + ms("refresh") + "Retry</button></div>" +
+        '<p class="w-hint warn">' + ms("warning") + "Claims could not be read. This is not the same as this patient having none.</p></div>";
+    }
+    var warnMap = t.payerWarnings || {};
     var claimRows = (t.claims || []).map(function (c) {
       var actions = "";
+      var stl = c.settlement;
       if (c.state === "coded") actions = '<button class="w-btn ghost sm" data-w-act="claimsubmit:' + esc(c.id) + '">' + ms("send") + "Submit</button>";
       else if (c.state === "submitted" || c.state === "queried") {
         actions = '<button class="w-btn ghost sm" data-w-act="claimadjudicate:' + esc(c.id) + '">' + ms("gavel") + "Adjudicate</button>" +
+          '<button class="w-btn ghost sm" data-w-act="claimack:' + esc(c.id) + '">' + ms("mark_email_read") + "Acknowledged</button>" +
+          '<button class="w-btn ghost sm" data-w-act="claimsettle:' + esc(c.id) + '">' + ms("payments") + "Settle</button>" +
           '<button class="w-btn ghost sm" data-w-act="claimdeny:' + esc(c.id) + '">' + ms("cancel") + "Deny</button>";
       } else if (c.state === "denied") actions = '<button class="w-btn ghost sm" data-w-act="claimresubmit:' + esc(c.id) + '">' + ms("refresh") + "Resubmit</button>";
+      else if (c.state === "paid" && stl && stl.balanceWith !== "patient" && stl.outstandingAmount > 0) {
+        actions = '<button class="w-btn ghost sm" data-w-act="claimbalance:' + esc(c.id) + '">' + ms("person") + "Move balance to patient</button>";
+      }
+      var resubs = (c.submissions || []).filter(function (x) { return x.resubmission; });
+      var warns = warnMap[c.id] || [];
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state) + '">' + esc(c.state) + "</span> " +
         "<b>" + esc((c.codes || []).map(function (x) { return x.code; }).join(", ")) + "</b>" +
         (c.submittedAmount != null ? " &middot; submitted " + esc(c.submittedAmount) : "") +
@@ -1840,7 +1866,16 @@
         ((c.queries || []).length ? '<div class="w-dt-times">' + c.queries.map(function (q) { return esc(q.question); }).join(" ") + "</div>" : "") +
         // The adapter boundary, stated honestly: no live payer connector exists in this build, so a
         // submission is queued for the hospital's own process, never shown as sent to anyone.
-        (c.adapter ? '<div class="w-dt-times">payer channel: ' + esc(c.adapter.state) + (c.adapter.note ? " - " + esc(c.adapter.note) : "") + "</div>" : "") +
+        '<div class="w-dt-times">payer: ' + esc(tpaPayerName(t.payers, c.payerId)) + (c.payerReference ? " &middot; payer ref " + esc(c.payerReference) : "") + "</div>" +
+        (c.adapter ? '<div class="w-dt-times">payer channel: ' + esc(TPA_CHANNEL_WORDS[c.adapter.state] || c.adapter.state) + (c.adapter.note ? " - " + esc(c.adapter.note) : "") + "</div>" : "") +
+        (resubs.length ? '<div class="w-dt-times">resubmitted ' + resubs.length + " time" + (resubs.length > 1 ? "s" : "") + ": " + resubs.map(function (x) { return esc(x.reason || "no reason recorded"); }).join("; ") + "</div>" : "") +
+        (stl ? '<div class="w-dt-times">settled: paid ' + esc(stl.paidAmount) +
+          (stl.approvedAmount != null ? " of " + esc(stl.approvedAmount) + " approved" : " (approved amount not recorded)") +
+          (stl.shortPaidAmount ? " &middot; short " + esc(stl.shortPaidAmount) + ": " + esc(stl.shortPaymentReason) : "") +
+          (stl.disallowances && stl.disallowances.length ? " &middot; disallowed: " + stl.disallowances.map(function (d) { return esc(d.reason) + (d.amount != null ? " (" + esc(d.amount) + ")" : ""); }).join("; ") : "") +
+          (stl.outstandingAmount != null ? " &middot; outstanding " + esc(stl.outstandingAmount) : " &middot; outstanding unknown") +
+          " &middot; balance with " + esc(stl.balanceWith) + (stl.patientBalance ? " (" + esc(stl.patientBalance.amount) + ": " + esc(stl.patientBalance.reason) + ")" : "") + "</div>" : "") +
+        (warns.length ? warns.map(function (w) { return '<div class="w-warn">' + esc(w) + "</div>"; }).join("") : "") +
         "</div>" + (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") + "</li>";
     }).join("");
     var authRows = (t.preAuthorisations || []).map(function (a) {
@@ -1848,7 +1883,15 @@
         "<b>" + esc(a.treatment) + "</b>" + (a.scheme ? " &middot; " + esc(a.scheme) : "") +
         (a.authorizedAmount != null ? " &middot; " + esc(a.authorizedAmount) : "") +
         (a.reason ? " &middot; " + esc(a.reason) : "") +
+        (a.payerId ? '<div class="w-dt-times">payer: ' + esc(tpaPayerName(t.payers, a.payerId)) + (a.adapter ? " &middot; " + esc(TPA_CHANNEL_WORDS[a.adapter.state] || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") : "") + "</div>" : "") +
         '<div class="w-dt-times">' + esc(a.note || "") + "</div></div></li>";
+    }).join("");
+    var estRows = (t.estimates || []).map(function (e) {
+      return '<li class="w-mini-row"><div><span class="w-st">estimate</span> <b>' + esc(e.estimatedAmount) + " " + esc(e.currency || "") + "</b>" +
+        " &middot; " + esc(tpaPayerName(t.payers, e.payerId)) + " &middot; " + when(e.at) +
+        '<div class="w-dt-times">' + (e.lines || []).map(function (l) { return esc(l.code) + " x" + esc(l.quantity) + " = " + esc(l.amount); }).join(", ") + "</div>" +
+        ((e.unpriced || []).length ? '<div class="w-warn">Not priced, not in the total: ' + e.unpriced.map(function (l) { return esc(l.code); }).join(", ") + "</div>" : "") +
+        '<div class="w-dt-times">' + esc(e.note || "") + "</div></div></li>";
     }).join("");
     return '<div class="w-card">' +
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
@@ -1856,6 +1899,8 @@
       '<div class="w-sub"><h4>Claims</h4>' +
       (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : '<p class="w-empty">No claim has been coded for this patient.</p>') +
       '<input id="wTpaCodes" placeholder="Codes to claim, comma-separated">' +
+      tpaPayerSelect("wTpaPayer", t.payers) +
+      '<input id="wTpaPolicy" placeholder="Policy number (optional)">' +
       '<button class="w-btn" data-w-act="claimcode">' + ms("receipt_long") + "Code claim</button></div>" +
       '<div class="w-sub"><h4>Pre-authorisations</h4>' +
       (authRows ? "<ul class=\"w-mini\">" + authRows + "</ul>" : '<p class="w-empty">No pre-authorisation has been recorded for this patient.</p>') +
@@ -1864,7 +1909,16 @@
       '<select id="wTpaAuthState">' + PREAUTH_STATES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
       '<input id="wTpaAuthReason" placeholder="Reason (required if refused)">' +
       '<input id="wTpaAuthAmount" placeholder="Authorized amount (if approved)">' +
+      tpaPayerSelect("wTpaAuthPayer", t.payers) +
+      '<input id="wTpaAuthRequested" placeholder="Requested amount (sent with a requested pre-auth)">' +
       '<button class="w-btn" data-w-act="preauth">' + ms("fact_check") + "Record</button></div>" +
+      '<div class="w-sub"><h4>Estimates</h4>' +
+      (t.estimatesUnreadable ? '<p class="w-hint warn">' + ms("warning") + "Estimates could not be read.</p>"
+        : estRows ? "<ul class=\"w-mini\">" + estRows + "</ul>" : '<p class="w-empty">No estimate has been prepared for this patient.</p>') +
+      '<input id="wTpaEstLines" placeholder="Tariff lines, e.g. BED x3, CONSULT">' +
+      tpaPayerSelect("wTpaEstPayer", t.payers) +
+      '<button class="w-btn" data-w-act="estimate">' + ms("calculate") + "Prepare estimate</button>" +
+      '<p class="w-hint">' + ms("info") + "An estimate is priced from the hospital tariff. It is not a bill and not a payer approval.</p></div>" +
       "</div>";
   }
 
@@ -2402,6 +2456,50 @@
    * through the SAME state machine (radiology-report.js) that already keeps a preliminary reading on
    * the record and flags a changed impression as a discrepancy. NO IMAGE VIEWER: DICOM/PACS does not
    * exist in this build, and a screen that pretended otherwise would be worse than one that says so. */
+  /* P1.10. The launch link into the hospital's own viewer, and the structured template form. Both
+   * come from GET imaging-studies. Loading, failed and "no link, because X" are three different
+   * sentences: an absent button must never read as "there are no images". */
+  function radViewerHtml(entry, loading, failed) {
+    if (loading) return '<p class="w-empty">Checking for images&hellip;</p>';
+    if (failed) return '<p class="w-hint warn">' + ms("warning") + "Could not check for images. That is not the same as there being none.</p>";
+    if (!entry) return '<p class="w-hint warn">' + ms("visibility_off") + "IMAGE SOURCE UNAVAILABLE. This order is not visible to the image lookup.</p>";
+    var sd = entry.study, v = entry.viewer || {};
+    var studyLine = sd
+      ? "<p><b>Study on record</b>: " + esc(sd.modality || "modality not recorded") + (sd.started ? " &middot; " + esc(sd.started) : "") +
+        (sd.accessionNumber ? " &middot; accession " + esc(sd.accessionNumber) : "") + (sd.instanceCount != null ? " &middot; " + esc(sd.instanceCount) + " images" : "") + "</p>"
+      : '<p class="w-empty">No study from the PACS has been matched to this order yet.</p>';
+    var link = v.available
+      ? '<a class="w-btn go" href="' + esc(v.url) + '" target="_blank" rel="noopener noreferrer">' + ms("open_in_new") + "Open images</a>"
+      : '<p class="w-hint warn">' + ms("visibility_off") + "No image link. " + esc(v.detail || "The viewer is not available.") + "</p>";
+    return studyLine + link;
+  }
+  function radTemplateFor(templates, id) {
+    for (var i = 0; i < (templates || []).length; i++) if (templates[i].id === id) return templates[i];
+    return null;
+  }
+  function radTemplateHtml(templates, chosenId, prefix) {
+    if (!templates || !templates.length) return '<p class="w-hint">' + ms("info") + "No structured report templates are configured for this hospital; free text only.</p>";
+    var t = radTemplateFor(templates, chosenId);
+    var pick = '<label class="w-f"><span>Template</span><select id="' + prefix + 'Tpl">' +
+      '<option value="">Free text</option>' + templates.map(function (x) {
+        return '<option value="' + esc(x.id) + '"' + (t && t.id === x.id ? " selected" : "") + ">" + esc(x.name) + " (v" + esc(x.version) + ")</option>";
+      }).join("") + "</select></label>" +
+      '<button class="w-btn ghost tiny" data-w-act="radtemplate:' + prefix + '">' + ms("check") + "Use template</button>";
+    if (!t) return pick;
+    return pick + t.sections.map(function (sec) {
+      var id = prefix + "Sec_" + esc(sec.key);
+      var input = sec.options
+        ? '<select id="' + id + '"><option value="">-</option>' + sec.options.map(function (o) { return '<option value="' + esc(o) + '">' + esc(o) + "</option>"; }).join("") + "</select>"
+        : '<textarea id="' + id + '" rows="2"></textarea>';
+      return '<label class="w-f"><span>' + esc(sec.label) + (sec.required ? " *" : "") + "</span>" + input + "</label>";
+    }).join("") + '<p class="w-hint">' + ms("info") + "Findings may be left blank: your section entries become the findings as written. The impression is yours to write.</p>";
+  }
+  function radTemplatePayload(templates, chosenId, prefix) {
+    var t = radTemplateFor(templates, chosenId); if (!t) return {};
+    var sections = {};
+    t.sections.forEach(function (sec) { var v = val(prefix + "Sec_" + sec.key); if (v) sections[sec.key] = v; });
+    return { templateId: t.id, templateVersion: t.version, sections: sections };
+  }
   function radiologyView(state) {
     var rad = state.radiology || {};
     var studies = ((state.investigations && state.investigations.requests) || []).filter(function (r) { return r.category === "imaging"; });
@@ -2443,8 +2541,9 @@
         ) : '<p class="w-empty">Loading&hellip;</p>') +
         "</div>" +
 
-        '<div class="w-card"><div class="w-card-h">' + ms("image_not_supported") + "<h3>Study images</h3></div>" +
-        '<p class="w-hint warn">' + ms("visibility_off") + "IMAGE SOURCE UNAVAILABLE. No PACS/DICOM viewer is connected in this build; the report below is the record, not the pixels.</p>" +
+        '<div class="w-card"><div class="w-card-h">' + ms("image") + "<h3>Study images</h3></div>" +
+        radViewerHtml(radStudyEntry(rad.studies, picked), rad.studies === undefined, !!rad.studiesFailed) +
+        '<p class="w-hint">' + ms("info") + "Images open in the hospital's own viewer. WardSynQ holds the report, never the pixels.</p>" +
         "</div>" +
 
         '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Report</h3></div>" +
@@ -2452,6 +2551,7 @@
         '<label class="w-f"><span>Modality</span><input id="wRadModality" type="text" autocomplete="off" placeholder="e.g. CT, XR, US, MR"></label>' +
         '<label class="w-f"><span>Status</span><select id="wRadStatus"><option value="preliminary">Preliminary</option><option value="final">Final</option><option value="corrected">Corrected</option></select></label>' +
         "</div>" +
+        radTemplateHtml(rad.templates, rad.templateId, "wRad") +
         '<label class="w-f"><span>Findings</span><textarea id="wRadFindings" rows="3"></textarea></label>' +
         '<label class="w-f"><span>Impression</span><textarea id="wRadImpression" rows="2"></textarea></label>' +
         '<label class="w-chk"><input type="checkbox" id="wRadCritical"> Critical finding - opens the SAME closed-loop notification a critical lab value does</label>' +
@@ -3324,7 +3424,8 @@
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId);
     var prev = st.radBoard || {};
-    var out = { requested: [], reported: prev.reported || [], criticals: [], errors: [], picked: prev.picked || null };
+    var out = { requested: [], reported: prev.reported || [], criticals: [], errors: [], picked: prev.picked || null,
+      studies: prev.studies, studiesFailed: prev.studiesFailed, templates: prev.templates, templateId: prev.templateId };
     var reportedIds = {}; out.reported.forEach(function (x) { reportedIds[x.orderId] = 1; });
     return Promise.all([
       apiGet("/ward/imaging-worklist?" + q)
@@ -3340,17 +3441,21 @@
   }
   function radBoardPick(orderId) {
     if (!st.radBoard) st.radBoard = {};
-    st.radBoard.picked = orderId || null; paint();
+    st.radBoard.picked = orderId || null;
+    st.radBoard.studies = undefined; st.radBoard.studiesFailed = false;
+    paint();
+    if (orderId) loadRadiologyStudies(st.radBoard, "serviceRequestId=" + encodeURIComponent(orderId));
   }
   function radBoardReportSave() {
     var b = st.radBoard, picked = b && b.picked; if (!picked) return;
     var modality = val("wRadBModality"), status = val("wRadBStatus"), findings = val("wRadBFindings"), impression = val("wRadBImpression");
     var critical = !!(document.getElementById("wRadBCritical") || {}).checked;
-    if (!findings) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
+    var tplPayload = radTemplatePayload(b.templates, b.templateId, "wRadB");
+    if (!findings && !tplPayload.templateId) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
     var row = null;
     for (var i = 0; i < (b.requested || []).length; i++) { if (b.requested[i].orderId === picked) { row = b.requested[i]; break; } }
     st.busy = true; paint();
-    apiPost("/ward/report-imaging", { orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings, impression: impression || undefined, critical: critical })
+    apiPost("/ward/report-imaging", Object.assign({ orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings || undefined, impression: impression || undefined, critical: critical }, tplPayload))
       .then(function (r) {
         if (r && r.error === "impression_required") { st.busy = false; st.err = "A final report needs an impression; release it as preliminary if it is not ready."; paint(); return; }
         var msg = r && r.discrepancy
@@ -3363,8 +3468,11 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not release the report."; paint(); });
   }
-  function radBoardFormHtml(row) {
+  function radBoardFormHtml(row, b) {
+    b = b || {};
     return '<div class="w-sub"><h4>' + ms("edit_note") + "File report &middot; " + esc((row && row.name) || "Unknown patient") + (row && row.mrn ? " (" + esc(row.mrn) + ")" : "") + "</h4>" +
+      radViewerHtml(radStudyEntry(b.studies, row && row.orderId), b.studies === undefined, !!b.studiesFailed) +
+      radTemplateHtml(b.templates, b.templateId, "wRadB") +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Modality</span><input id="wRadBModality" type="text" autocomplete="off" placeholder="e.g. CT, XR, US, MR" value="' + esc((row && row.modality) || "") + '"></label>' +
       '<label class="w-f"><span>Status</span><select id="wRadBStatus"><option value="preliminary">Preliminary</option><option value="final">Final</option><option value="corrected">Corrected</option></select></label>' +
@@ -3429,7 +3537,7 @@
       (unreachable("imaging worklist") ? '<p class="w-empty warn">The imaging worklist could not be read.</p>'
         : reqRows ? '<ul class="w-crits">' + reqRows + "</ul>"
         : '<p class="w-empty">No studies awaiting acquisition or a report.</p>') +
-      (pickedRow ? radBoardFormHtml(pickedRow) : "") +
+      (pickedRow ? radBoardFormHtml(pickedRow, b) : "") +
       "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Reported this session &middot; " + reported.length + "</h3></div>" +
@@ -6712,9 +6820,29 @@
   function radiologyOpen() {
     st.view = "radiology"; st.radiology = null; paint(); loadInvestigations().then(loadRadiology);
   }
+  function radStudyEntry(list, serviceRequestId) {
+    for (var i = 0; i < (list || []).length; i++) if (list[i].serviceRequestId === serviceRequestId) return list[i];
+    return null;
+  }
+  function loadRadiologyStudies(target, query) {
+    return apiGet("/ward/imaging-studies?orgId=" + encodeURIComponent(st.orgId) + "&" + query)
+      .then(function (r) {
+        if (r && r.ok) { target.studies = r.orders || []; target.templates = r.templates || []; target.studiesFailed = false; }
+        else { target.studies = null; target.studiesFailed = true; }
+        paint();
+      })
+      .catch(function () { target.studies = null; target.studiesFailed = true; paint(); });
+  }
+  function radTemplatePick(prefix) {
+    var chosen = val(prefix + "Tpl");
+    if (prefix === "wRadB") { if (st.radBoard) st.radBoard.templateId = chosen; }
+    else { if (!st.radiology) st.radiology = {}; st.radiology.templateId = chosen; }
+    paint();
+  }
   function loadRadiology() {
     if (!st.radiology) st.radiology = {};
     paint();
+    if (st.sel && st.sel.patientId) loadRadiologyStudies(st.radiology, "patientId=" + encodeURIComponent(st.sel.patientId));
     var picked = st.radiology.pickedRequestId;
     if (!picked) return Promise.resolve();
     return apiGet("/ward/protocol-context?orgId=" + encodeURIComponent(st.orgId) + "&serviceRequestId=" + encodeURIComponent(picked))
@@ -6740,9 +6868,10 @@
     var s = st.sel, picked = st.radiology && st.radiology.pickedRequestId; if (!s || !picked) return;
     var modality = val("wRadModality"), status = val("wRadStatus"), findings = val("wRadFindings"), impression = val("wRadImpression");
     var critical = !!(document.getElementById("wRadCritical") || {}).checked;
-    if (!findings) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
+    var tplPayload = radTemplatePayload(st.radiology.templates, st.radiology.templateId, "wRad");
+    if (!findings && !tplPayload.templateId) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/report-imaging", { orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings, impression: impression || undefined, critical: critical })
+    apiPost("/ward/report-imaging", Object.assign({ orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings || undefined, impression: impression || undefined, critical: critical }, tplPayload))
       .then(function (r) {
         if (r && r.error === "impression_required") { st.busy = false; st.err = "A final report needs an impression; release it as preliminary if it is not ready."; paint(); return; }
         if (r && r.discrepancy) { st.busy = false; st.note = "Released. The impression changed from a reading that may already have been acted on - flagged as a discrepancy on the record."; loadInvestigations().then(loadRadiology); return; }
@@ -9279,15 +9408,15 @@
     if (!st.sel || !st.sel.patientId) return;
     st.busy = true; paint();
     return apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
-      .then(function (r) { st.busy = false; if (r && r.ok) st.tpa = r; else { st.tpa = { claims: [], preAuthorisations: [] }; st.err = "Could not load claims."; } paint(); })
-      .catch(function () { st.busy = false; st.tpa = { claims: [], preAuthorisations: [] }; st.err = "Could not load claims."; paint(); });
+      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); })
+      .catch(function () { st.busy = false; st.tpa = { failed: true }; paint(); });
   }
   function claimCodeAction() {
     if (!st.sel || !st.sel.patientId || !st.sel.encounterId) return;
     var codes = val("wTpaCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     if (!codes.length) { st.err = "Enter at least one code to claim."; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/claim", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, codes: codes })
+    apiPost("/ward/claim", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, codes: codes, payerId: val("wTpaPayer") || undefined, policyNumber: val("wTpaPolicy") || undefined })
       .then(function (r) { if (settle(r, "Coded.")) loadTpa(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not code that claim."; paint(); });
   }
@@ -9320,6 +9449,43 @@
     var amount = window.prompt("Amount submitted to the payer:");
     claimActionCall(claimId, "resubmit", { reason: reason, submittedAmount: amount ? Number(amount) : undefined });
   }
+  function claimAckAction(claimId) {
+    var ref = window.prompt("The payer's acknowledgement reference:");
+    if (!ref) return;
+    claimActionCall(claimId, "acknowledge", { payerReference: ref });
+  }
+  /* Settlement records what the payer paid and why any of it was short. The balance stays on the
+   * claim; moving it to the patient is the separate button below, never a side effect of this. */
+  function claimSettleAction(claimId) {
+    var paid = window.prompt("Amount the payer actually paid:");
+    if (paid == null || paid === "") return;
+    var shortReason = window.prompt("Payer's reason for any short payment (blank if paid in full):");
+    var dis = window.prompt("Disallowances, as reason:amount; reason:amount (blank if none):");
+    var disallowances = (dis || "").split(";").map(function (x) {
+      var i = x.lastIndexOf(":"); var reason = (i > 0 ? x.slice(0, i) : x).trim(); var amt = i > 0 ? Number(x.slice(i + 1)) : null;
+      return { reason: reason, amount: amt };
+    }).filter(function (d) { return d.reason; });
+    claimActionCall(claimId, "settle", { paidAmount: Number(paid), shortPaymentReason: shortReason || undefined, disallowances: disallowances });
+  }
+  function claimBalanceAction(claimId) {
+    var amount = window.prompt("Amount to move to the patient's account:");
+    if (!amount) return;
+    var reason = window.prompt("Why this balance is the patient's to pay:");
+    if (!reason) { st.err = "Moving a balance to the patient needs a reason."; paint(); return; }
+    claimActionCall(claimId, "balance-to-patient", { amount: Number(amount), reason: reason });
+  }
+  function estimateAction() {
+    if (!st.sel || !st.sel.patientId) return;
+    var lines = val("wTpaEstLines").split(",").map(function (x) {
+      var m = x.trim().split(/\s+x\s*/i);
+      return { code: (m[0] || "").trim(), quantity: m[1] ? Number(m[1]) : 1 };
+    }).filter(function (l) { return l.code; });
+    if (!lines.length) { st.err = "Enter at least one tariff line."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/claim-estimate", { orgId: st.orgId, patientId: st.sel.patientId, lines: lines, payerId: val("wTpaEstPayer") || undefined })
+      .then(function (r) { if (settle(r, "Estimate prepared.")) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not prepare that estimate."; paint(); });
+  }
   function preAuthAction() {
     if (!st.sel || !st.sel.patientId) return;
     var treatment = val("wTpaTreatment"), state = val("wTpaAuthState"), reason = val("wTpaAuthReason");
@@ -9331,6 +9497,8 @@
       orgId: st.orgId, patientId: st.sel.patientId, treatment: treatment, state: state,
       scheme: scheme || undefined, reason: reason || undefined,
       authorizedAmount: amountStr ? Number(amountStr) : undefined,
+      payerId: val("wTpaAuthPayer") || undefined,
+      requestedAmount: val("wTpaAuthRequested") ? Number(val("wTpaAuthRequested")) : undefined,
     })
       .then(function (r) { if (settle(r, "Recorded.")) loadTpa(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record that pre-authorisation."; paint(); });
@@ -9649,6 +9817,7 @@
     if (cmd === "radboardload") { loadRadBoard(); return; }
     if (cmd === "radboardpick") { radBoardPick(arg); return; }
     if (cmd === "radboardreportsave") { radBoardReportSave(); return; }
+    if (cmd === "radtemplate") { radTemplatePick(arg); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
@@ -10005,6 +10174,10 @@
     if (cmd === "claimdeny") { claimDenyAction(arg); return; }
     if (cmd === "claimadjudicate") { claimAdjudicateAction(arg); return; }
     if (cmd === "claimresubmit") { claimResubmitAction(arg); return; }
+    if (cmd === "claimack") { claimAckAction(arg); return; }
+    if (cmd === "claimsettle") { claimSettleAction(arg); return; }
+    if (cmd === "claimbalance") { claimBalanceAction(arg); return; }
+    if (cmd === "estimate") { estimateAction(); return; }
     if (cmd === "preauth") { preAuthAction(); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }

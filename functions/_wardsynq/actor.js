@@ -349,9 +349,9 @@ function grantForCaps(caps) {
     // invoice and posting a payment against it is the SAME financial-record authority as coding a
     // claim, not a clinical one.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", ...CAPTURE_TYPES]
-      : ["Claim", "PreAuthorisation", "Invoice"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES]
+      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds

@@ -168,6 +168,7 @@ function idemFor(key, piece, index) {
 }
 import { chartInfusion, listInfusions } from "../../_wardsynq/infusion.js";
 import { reportImaging } from "../../_wardsynq/radiology-report.js";
+import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
@@ -182,7 +183,7 @@ import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
 import { cdaForEncounter } from "../../_wardsynq/cda.js";
 import { news2ForPatient } from "../../_wardsynq/news2-view.js";
 import { recordRead, readersToNotify } from "../../_wardsynq/read-log.js";
-import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList } from "../../_wardsynq/billing.js";
+import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, watchlist as upcodingList, raiseEstimate } from "../../_wardsynq/billing.js";
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
@@ -1008,6 +1009,9 @@ export async function onRequest(context) {
          * than no worklist. Widening the lab grant to make this work would have overturned a
          * considered boundary for the convenience of one feature, so it was not done. */
         "imaging-worklist": CAPS.EMR_VIEW,
+        /* P1.10: which study answers each imaging order, and a launch link into the hospital's own
+         * viewer. Reading an order and its study is reading the chart: emr.view, the worklist's bar. */
+        "imaging-studies": CAPS.EMR_VIEW,
         /* TASK 8. ASKING reads the chart and writes no clinical content, so it is emr.view - the same
          * capability that reads the record it summarises, and no wider. REVIEWING is emr.treat:
          * accepting a drafted note puts an unsigned note on the chart, which is a clinical act, and
@@ -1052,6 +1056,8 @@ export async function onRequest(context) {
          * collections" - and billing.view is precisely the person who is. */
         claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
+        // P1.5: a pre-admission estimate is a financial record written by the same authority that codes a claim.
+        "claim-estimate": CAPS.BILLING_CHARGE,
         // TASK 4.9: a third-party record request is a records-custody function, not clinical or
         // billing work - staff.admin, the same authority every other org-administration action in
         // this file already uses, pending a real site adding a dedicated HIM role.
@@ -2052,19 +2058,26 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim" && method === "POST") {
-        const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, invoiceId: body.invoiceId, idempotencyKey: body.idempotencyKey || null });
+        const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, invoiceId: body.invoiceId, payerId: body.payerId, policyNumber: body.policyNumber, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim-state" && method === "POST") {
-        const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount });
+        const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
+          payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
+          payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {
-        const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null,
+          payerId: body.payerId, requestedAmount: body.requestedAmount, payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "claim-estimate" && method === "POST") {
+        const r = await raiseEstimate(request, env, { ...deps, patientId: body.patientId, lines: body.lines, payerId: body.payerId, tariff: (wsqCfg && wsqCfg.tariff) || null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claims" && method === "GET") {
-        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers: (wsqCfg && wsqCfg.payers) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "upcoding" && method === "GET") {
@@ -2311,8 +2324,14 @@ export async function onRequest(context) {
         const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "imaging-studies" && method === "GET") {
+        const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
+          viewerConfig: (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "report-imaging" && method === "POST") {
-        const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null });
+        const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null,
+          templateId: body.templateId, templateVersion: body.templateVersion, sections: body.sections, templates: (wsqCfg && wsqCfg.radiologyTemplates) || null });
         /* A CRITICAL IMAGING FINDING OPENS ITS LOOP ON RELEASE - the same fix as release-result, and the
          * same bug: a report marked critical set report.critical, which openCriticalLoops reads, but nothing
          * called openCriticalLoops, so a reported pneumothorax alerted nobody. Only opened when the report is

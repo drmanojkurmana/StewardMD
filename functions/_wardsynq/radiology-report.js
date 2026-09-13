@@ -31,6 +31,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { templatesOf, applyTemplate } from "./imaging-viewer.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const STATUSES = Object.freeze(["preliminary", "final", "corrected"]);
@@ -85,7 +86,15 @@ async function reportImaging(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
 
   const serviceRequestId = str(ctx.serviceRequestId);
-  const findings = str(ctx.findings);
+  /* P1.10 STRUCTURED TEMPLATES. A report written against a hospital template stores the sections and
+   * the template id/version. Findings may be left blank then: they become the radiologist's own section
+   * entries, joined, never reworded. The impression is still never composed. Free text stays. */
+  let templated = null;
+  if (str(ctx.templateId)) {
+    templated = applyTemplate(templatesOf(ctx.templates).templates, ctx.templateId, ctx.templateVersion, ctx.sections);
+    if (!templated.ok) return { ...base, ok: false, status: 422, error: templated.error, detail: templated.detail, written: 0 };
+  }
+  const findings = str(ctx.findings) || (templated ? templated.sections.map((x) => `${x.label}: ${x.value}`).join("\n") : "");
   const impression = str(ctx.impression);
   const status = str(ctx.status) || "preliminary";
   if (!serviceRequestId) return { ...base, ok: false, status: 422, error: "request_required", detail: "an imaging report answers a request", written: 0 };
@@ -135,6 +144,7 @@ async function reportImaging(request, env, ctx) {
   report.category = "imaging";
   report.modality = str(ctx.modality) || null;
   report.findings = findings;
+  if (templated) { report.template = templated.template; report.sections = templated.sections; }
   report.impression = impression || null;
   report.reportedBy = resolved.actor.id;
   report.reportedAt = str(ctx.reportedAt) || new Date().toISOString();
@@ -155,6 +165,7 @@ async function reportImaging(request, env, ctx) {
       ...base, ok: true, written: 1, reportId: id, patientId: report.patientId,
       serviceRequestId, status, modality: report.modality,
       findings, impression: report.impression, version: out.record.version,
+      ...(templated ? { template: templated.template, sections: templated.sections } : {}),
       critical: !!report.critical,
       supersedes: current ? { status: current.status, version: current.version } : null,
       ...(changed ? {
