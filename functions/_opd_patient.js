@@ -221,6 +221,12 @@ export function validateRegistration(input, nowMs, region) {
     abhaAddress = normalizeAbhaAddress(o.abhaAddress);
     if (!abhaAddress) errors.abhaAddress = "An ABHA address looks like name@abdm.";
   }
+  /* ABHA is India's national health id (P2.6). A hospital outside India cannot hold one: storing it
+   * would imply an ABDM link that does not exist. The India checks above are unchanged. */
+  if ((s(o.abhaNumber) || s(o.abhaAddress)) && regionOf({ region }) !== "IN") {
+    delete errors.abhaAddress;
+    errors.abhaNumber = "ABHA applies only to a hospital in India.";
+  }
   /* pincode was 6-digits-or-refuse everywhere, which made a US ZIP (5) or ZIP+4 (9, "90210-1234")
    * unregisterable. The length now comes from the region, same as the phone rule above. */
   const pincode = digits(o.pincode);

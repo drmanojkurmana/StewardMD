@@ -34,6 +34,7 @@ import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
+import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
@@ -2166,7 +2167,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "POST") {
-        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: (wsqCfg && wsqCfg.tariff) || null, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: (wsqCfg && wsqCfg.tariff) || null, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "GET") {
@@ -3581,6 +3582,13 @@ export async function onRequest(context) {
       }
       if (seg === "org" && sub === "update") {
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        // P2.6: country identifiers are validated by the region adapter AFTER authorization, so an
+        // unauthorised caller learns nothing from this route.
+        if (body.regionProfile !== undefined) {
+          const cur = await ORG.getOrg(env, body.orgId);
+          const errors = validateOrgProfile(body.regionProfile, body.region !== undefined ? body.region : (cur && cur.region));
+          if (Object.keys(errors).length) return json({ ok: false, error: "invalid_region_profile", errors }, 422, request);
+        }
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
@@ -3633,6 +3641,11 @@ export async function onRequest(context) {
         if (sub === "restore") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id));
         if (sub === "reset") return lifecycle(ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id));
         if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id));
+        if (body.regionProfile !== undefined) {
+          const mOrg = await ORG.getOrg(env, body.orgId);
+          const errors = validateMemberProfile(body.regionProfile, mOrg && mOrg.region);
+          if (Object.keys(errors).length) return json({ ok: false, error: "invalid_region_profile", errors }, 422, request);
+        }
         // setMembership refuses a create with no role rather than writing a silent read-only viewer.
         const saved = await ORG.setMembership(env, body.orgId, body.identity, body, actor.id);
         if (saved && saved.ok === false) return json(saved, 400, request);

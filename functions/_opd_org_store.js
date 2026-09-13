@@ -124,6 +124,10 @@ export async function updateOrg(env, orgId, patch, actorId) {
   if (p.wardsynq && typeof p.wardsynq === "object" && !Array.isArray(p.wardsynq)) {
     merged.wardsynq = Object.assign({}, (cur && cur.wardsynq) || {}, p.wardsynq);
   }
+  // Same one-level merge for the region profile: saving a GSTIN must not erase the HFR id.
+  if (p.regionProfile && typeof p.regionProfile === "object" && !Array.isArray(p.regionProfile)) {
+    merged.regionProfile = Object.assign({}, (cur && cur.regionProfile) || {}, p.regionProfile);
+  }
   const f = M.org(merged);
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
   await audit(env, orgId, actorId, "org:update", "");
@@ -267,6 +271,7 @@ export async function setMembership(env, orgId, identity, body, actorId) {
      * sign. Sending an explicit empty string DOES clear it, which is how a hospital withdraws the
      * assertion. */
     regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
+    regionProfile: b.regionProfile !== undefined ? b.regionProfile : (prev && prev.regionProfile),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
