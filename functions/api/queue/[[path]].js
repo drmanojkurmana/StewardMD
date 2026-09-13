@@ -96,6 +96,7 @@ import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js"
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
+import { recordIcu, icuChart } from "../../_wardsynq/icu-care.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
 import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.js";
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
@@ -1019,6 +1020,11 @@ export async function onRequest(context) {
         /* An early warning score is a reading of the chart's own vitals. It writes nothing and
          * escalates nobody, so it needs the authority to read a chart and no more. */
         news2: CAPS.EMR_VIEW,
+        /* The ICU bedside record (icu-care.js). Charting a gas, a ventilator setting, a RASS or a round
+         * checklist is the nurse's charting act, emr.vitals, the capability IcuRecord is granted
+         * through in actor.js. Reading the ICU cards, with the SOFA and the advisory sepsis screen
+         * worked out from them, is reading the chart. */
+        "icu-record": CAPS.EMR_VITALS, icu: CAPS.EMR_VIEW,
         /* Recording that a value was decisive is part of reading a chart, so it needs the authority
          * to read one - emr.vitals, the same bar as charting an observation about the patient.
          * Asking WHO to tell about a correction is emr.view: it is the safety question, and the
@@ -2226,6 +2232,14 @@ export async function onRequest(context) {
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "icu-record" && method === "POST") {
+        const r = await recordIcu(request, env, { ...deps, kind: body.kind, patientId: body.patientId, encounterId: body.encounterId, at: body.at, values: body.values, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "icu" && method === "GET") {
+        const r = await icuChart(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "flowsheet" && method === "GET") {
         const r = await flowsheet(request, env, {
           ...deps, patientId: url.searchParams.get("patientId") || "",
@@ -2300,7 +2314,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "infusion" && method === "POST") {
-        const r = await chartInfusion(request, env, { ...deps, orderId: body.orderId, event: body.event, ratePerHour: body.ratePerHour, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await chartInfusion(request, env, { ...deps, orderId: body.orderId, event: body.event, ratePerHour: body.ratePerHour, reason: body.reason, concentration: body.concentration, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "infusions" && method === "GET") {

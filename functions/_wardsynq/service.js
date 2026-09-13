@@ -136,6 +136,10 @@ const RESOURCE_TYPES = Object.freeze([
    * stored total stops being true the moment the pump changes - and an infusion that stops being
    * charted is uncharted, not stopped. */
   "InfusionRate",
+  /* The ICU bedside record (icu-care.js): a blood gas, a ventilator setting, a RASS, a round
+   * checklist. One type with a `kind`, append-only like every other chart entry, so a corrected gas
+   * is a new entry beside the wrong one rather than an edit of it. */
+  "IcuRecord",
   /* That a value was DECISIVE for a named person at a time. Not a view log: a page rendering a
    * hundred numbers has not shown a clinician a hundred numbers. It exists so that when a figure is
    * later found to be wrong there is a list of people to tell - HAZ-FLUID-01's missing half. */

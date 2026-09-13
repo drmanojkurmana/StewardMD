@@ -1265,7 +1265,8 @@
    * pages nobody, and the card says so in the server's own words. */
   function flowsheetCard(state) {
     var g = state.flowsheet, n = state.news2;
-    var grid = !g ? '<p class="w-empty">Loading the flowsheet…</p>'
+    var grid = !g && state.flowsheetFailed ? '<p class="w-hint warn">' + ms("error") + "The flowsheet could not be loaded. Do not read this as nothing charted.</p>"
+      : !g ? '<p class="w-empty">Loading the flowsheet…</p>'
       : !(g.rows || []).length ? '<p class="w-empty">No vitals charted in this window yet.</p>'
       : '<div class="w-flowgrid"><table><thead><tr><th>' + (g.hours || []).map(function (h) { return "<th>" + when(h).replace(/^.* /, "") + "</th>"; }).join("").replace(/^<th>/, "") +
         '</tr></thead><tbody>' + g.rows.map(function (r) {
@@ -1503,10 +1504,12 @@
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) +
+      (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
+      fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
       (isNicu ? neonatalCard() + linesCard(state) : "") +
-      ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
+      ((isEd || isMaternity || isIcu) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
       (isMaternity ? deliveryCard(state) : "") +
       (isEd ? edProceduresCard(state) + dispositionCard(state) : "");
@@ -1940,6 +1943,179 @@
       '<input id="wDevWrist" type="text" placeholder="Scan wristband" autocomplete="off">' +
       '<button class="w-btn" data-w-act="deviceassociate">' + ms("sensors") + "Associate</button></div>" +
       '<p class="w-hint">' + ms("info") + "Both codes must be scanned and must match this patient - a device found in the room is not the same as a device confirmed on the patient." + "</p></div>";
+  }
+
+
+  /* ---- ICU (P1.12). Everything below renders what functions/_wardsynq/icu-care.js returned from
+   * /ward/icu and computes nothing clinical of its own: the SOFA, the dose and the sepsis screen are
+   * the server's, with the server's reasons. Loading, failed and empty are three different sentences
+   * on every card, because on an ICU chart "no gas on record" and "the gases did not load" lead to
+   * opposite decisions. */
+  function icuState(state, what) {
+    if (state.icu === false) return '<p class="w-hint warn">' + ms("error") + "The ICU record could not be loaded. Do not read this as no " + what + " on record.</p>";
+    if (state.icu == null) return '<p class="w-empty">Loading the ICU record...</p>';
+    return "";
+  }
+  function icuHead(icon, title) {
+    return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + title + "</h3>" +
+      '<button class="w-ic" data-w-act="icuload" title="Refresh">' + ms("refresh") + "</button></div>";
+  }
+  function icuWhen() {
+    return '<label class="w-f"><span>Time (blank is now)</span><input id="wIcuAt" type="datetime-local" autocomplete="off"></label>';
+  }
+  function icuNum(id, label) {
+    return '<label class="w-f"><span>' + label + '</span><input id="' + id + '" type="text" inputmode="decimal" autocomplete="off"></label>';
+  }
+
+  /* SPARKLINES. One small inline SVG per vital from the flowsheet grid already on this chart (no
+   * library, no second read). An hour nobody charted is a BREAK in the line: points are joined only
+   * between neighbouring charted hours, so a gap is never drawn as a straight line that implies
+   * somebody measured something in between. */
+  var ICU_TRENDS = [["8867-4", "Heart rate"], ["BP", "Blood pressure"], ["59408-5", "SpO2"], ["8310-5", "Temperature"], ["9279-1", "Respiratory rate"]];
+  function sparkline(series) {
+    var W = 160, H = 32, all = [];
+    series.forEach(function (cells) { cells.forEach(function (c) { if (!c.empty && typeof c.value === "number") all.push(c.value); }); });
+    if (!all.length) return "";
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), span = hi - lo || 1;
+    var out = "";
+    series.forEach(function (cells) {
+      var n = cells.length, seg = [], segs = [];
+      cells.forEach(function (c, i) {
+        if (c.empty || typeof c.value !== "number") { if (seg.length) segs.push(seg); seg = []; return; }
+        var x = n > 1 ? (i / (n - 1)) * (W - 4) + 2 : W / 2, y = H - 2 - ((c.value - lo) / span) * (H - 4);
+        seg.push(x.toFixed(1) + "," + y.toFixed(1));
+      });
+      if (seg.length) segs.push(seg);
+      segs.forEach(function (s) {
+        out += s.length > 1 ? '<polyline fill="none" stroke="currentColor" stroke-width="1.5" points="' + s.join(" ") + '"/>'
+          : '<circle r="1.8" fill="currentColor" cx="' + s[0].split(",")[0] + '" cy="' + s[0].split(",")[1] + '"/>';
+      });
+    });
+    return '<svg class="w-spark" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="trend">' + out + "</svg>";
+  }
+  function icuTrendsCard(state) {
+    var g = state.flowsheet;
+    var body;
+    if (state.flowsheetFailed) body = '<p class="w-hint warn">' + ms("error") + "The flowsheet could not be loaded, so no trends can be drawn. Do not read this as stable.</p>";
+    else if (!g) body = '<p class="w-empty">Loading trends...</p>';
+    else {
+      var byCode = {};
+      (g.rows || []).forEach(function (r) { byCode[r.code] = r; });
+      var rows = ICU_TRENDS.map(function (t) {
+        var series = t[0] === "BP" ? [byCode["8480-6"], byCode["8462-4"]].filter(Boolean) : [byCode[t[0]]].filter(Boolean);
+        var cells = series.length ? series.map(function (r) { return r.cells || []; }) : [];
+        var svg = cells.length ? sparkline(cells) : "";
+        var last = null;
+        series.forEach(function (r, k) { var cs = (r.cells || []).filter(function (c) { return !c.empty; }); if (cs.length) last = (last ? last + "/" : "") + cs[cs.length - 1].value; });
+        return "<li><b>" + esc(t[1]) + "</b>" + (svg ? svg + "<span>" + esc(last) + "</span>" : "<span>Nothing charted in this window.</span>") + "</li>";
+      }).join("");
+      body = '<ul class="w-mini">' + rows + "</ul>" +
+        '<p class="w-hint">' + ms("info") + "Last 24 hours. A break in a line is an hour nobody charted; it is not filled in.</p>";
+    }
+    return '<div class="w-card"><div class="w-card-h">' + ms("show_chart") + "<h3>Trends</h3>" +
+      '<button class="w-ic" data-w-act="flowsheet" title="Refresh">' + ms("refresh") + "</button></div>" + body + "</div>";
+  }
+
+  function icuScoresCard(state) {
+    var head = icuHead("monitor_heart", "Sepsis screen and SOFA");
+    var wait = icuState(state, "score"); if (wait) return head + wait + "</div>";
+    var sp = state.icu.sepsis || {}, so = state.icu.sofa || {};
+    var spCls = sp.result === "screen-positive" ? "risk-high" : sp.result === "cannot-screen" ? "na" : "risk-low";
+    var comps = (so.components || []).map(function (c) {
+      return "<li><b>" + esc(c.label) + "</b><span>" + (c.score == null ? "not scored: " + esc(c.reason) : esc(c.score) + (c.from ? " (" + esc(c.from) + ")" : "") + (c.caution ? " " + esc(c.caution) : "")) + "</span></li>";
+    }).join("");
+    return head +
+      '<div class="w-news2 ' + spCls + '"><b>Sepsis</b><span>' + esc(sp.say || "") + "</span></div>" +
+      (sp.result === "screen-positive" ? '<p class="w-hint warn">' + ms("emergency") + "If a clinician suspects sepsis, the Code Sepsis bundle can be started from the Resuscitation card. Nothing has been started.</p>" : "") +
+      '<div class="w-news2 ' + (so.total == null ? "na" : so.partial ? "risk-medium" : "risk-low") + '"><b>' + (so.total == null ? "SOFA" : esc(so.total)) + "</b><span>" + esc(so.say || "") + "</span></div>" +
+      (comps ? '<ul class="w-mini">' + comps + "</ul>" : "") +
+      '<p class="w-hint">' + ms("info") + esc(state.icu.advisory || "") + "</p></div>";
+  }
+
+  function icuAbgCard(state) {
+    var head = icuHead("bloodtype", "Blood gas");
+    var wait = icuState(state, "blood gas");
+    var cur = !wait && state.icu.abg && state.icu.abg.current;
+    var shown = wait || (!cur ? '<p class="w-empty">No blood gas on record.</p>' : (function () {
+      var i = cur.interpretation || {};
+      return '<p class="w-hint">' + esc(cur.sampleType || "") + " " + when(cur.at) + ": pH " + esc(cur.ph == null ? "-" : cur.ph) + ", pCO2 " + esc(cur.pco2 == null ? "-" : cur.pco2) +
+        ", pO2 " + esc(cur.po2 == null ? "-" : cur.po2) + ", HCO3 " + esc(cur.hco3 == null ? "-" : cur.hco3) + ", BE " + esc(cur.baseExcess == null ? "-" : cur.baseExcess) +
+        ", lactate " + esc(cur.lactate == null ? "-" : cur.lactate) + ", FiO2 " + esc(cur.fio2 == null ? "-" : Math.round(cur.fio2 * 100) + "%") + "</p>" +
+        (i.interpretable ? "<p><b>" + esc(i.primary) + "</b>" + (i.compensation ? ". " + esc(i.compensation) : "") + "</p>" : '<p class="w-hint warn">' + ms("warning") + esc(i.reason) + "</p>") +
+        (i.caution ? '<p class="w-hint warn">' + esc(i.caution) + "</p>" : "") +
+        "<p>" + (i.pf != null ? "P/F ratio " + esc(i.pf) + (i.pfBand ? " (" + esc(i.pfBand) + ")" : "") : esc(i.pfReason || "")) + "</p>";
+    })());
+    return head + shown +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Sample</span><select id="wAbgType"><option value="">Choose...</option><option value="arterial">Arterial</option><option value="venous">Venous</option></select></label>' +
+      icuNum("wAbgPh", "pH") + icuNum("wAbgPco2", "pCO2 (mmHg)") + icuNum("wAbgPo2", "pO2 (mmHg)") + icuNum("wAbgHco3", "HCO3 (mmol/L)") +
+      icuNum("wAbgBe", "Base excess") + icuNum("wAbgLac", "Lactate (mmol/L)") + icuNum("wAbgFio2", "FiO2 (%)") + icuWhen() +
+      "</div>" + '<button class="w-btn" data-w-act="icuabg">' + ms("save") + "Record gas</button></div>";
+  }
+
+  function icuVentCard(state) {
+    var head = icuHead("air", "Ventilator settings");
+    var wait = icuState(state, "ventilator setting");
+    var v = !wait && state.icu.ventilator;
+    var line = function (x) {
+      return esc(x.mode) + (x.tidalVolumeMl != null ? ", Vt " + esc(x.tidalVolumeMl) + " mL" : "") + (x.rate != null ? ", rate " + esc(x.rate) : "") +
+        (x.peep != null ? ", PEEP " + esc(x.peep) : "") + (x.fio2 != null ? ", FiO2 " + Math.round(x.fio2 * 100) + "%" : "") +
+        (x.peakPressure != null ? ", peak " + esc(x.peakPressure) : "") + (x.plateauPressure != null ? ", plateau " + esc(x.plateauPressure) : "");
+    };
+    var shown = wait || (!v.current ? '<p class="w-empty">No ventilator settings on record.</p>'
+      : "<p><b>Now:</b> " + line(v.current) + " <small>" + when(v.current.at) + "</small></p>" +
+        (v.history.length > 1 ? '<ul class="w-mini">' + v.history.slice(1).map(function (x) { return "<li>" + line(x) + "<span>" + when(x.at) + "</span></li>"; }).join("") + "</ul>" : ""));
+    var modes = ((state.icu && state.icu.ventModes) || ["VC-AC", "PC-AC", "SIMV", "PSV", "CPAP", "PRVC", "APRV", "NIV-BiPAP", "HFNC", "other"]).map(function (m) { return '<option value="' + esc(m) + '">' + esc(m) + "</option>"; }).join("");
+    return head + shown +
+      '<div class="w-grid"><label class="w-f"><span>Mode</span><select id="wVentMode"><option value="">Choose...</option>' + modes + "</select></label>" +
+      icuNum("wVentVt", "Tidal volume (mL)") + icuNum("wVentRate", "Rate") + icuNum("wVentPeep", "PEEP") + icuNum("wVentFio2", "FiO2 (%)") +
+      icuNum("wVentPeak", "Peak pressure") + icuNum("wVentPlat", "Plateau pressure") + icuWhen() + "</div>" +
+      '<button class="w-btn" data-w-act="icuvent">' + ms("save") + "Record settings</button></div>";
+  }
+
+  function icuSedationCard(state) {
+    var head = icuHead("bedtime", "Sedation");
+    var wait = icuState(state, "sedation score");
+    var sd = !wait && state.icu.sedation;
+    var shown = wait || (!sd.current ? '<p class="w-empty">No RASS on record.</p>'
+      : '<p class="w-hint' + (sd.status && sd.status.onTarget === false ? " warn" : "") + '">' + esc(sd.status.say) + " <small>" + when(sd.current.at) + "</small></p>" +
+        (sd.current.gcs != null ? "<p>GCS " + esc(sd.current.gcs) + "</p>" : ""));
+    var opts = ""; for (var r = 4; r >= -5; r--) opts += '<option value="' + r + '">' + (r > 0 ? "+" + r : r) + "</option>";
+    return head + shown +
+      '<div class="w-grid"><label class="w-f"><span>RASS</span><select id="wSedRass"><option value="">Choose...</option>' + opts + "</select></label>" +
+      '<label class="w-f"><span>Target from</span><select id="wSedLo"><option value="">None</option>' + opts + "</select></label>" +
+      '<label class="w-f"><span>Target to</span><select id="wSedHi"><option value="">None</option>' + opts + "</select></label>" +
+      icuNum("wSedGcs", "GCS (optional)") + icuWhen() + "</div>" +
+      '<button class="w-btn" data-w-act="icused">' + ms("save") + "Record sedation</button></div>";
+  }
+
+  function icuPressorCard(state) {
+    var head = icuHead("vaccines", "Vasopressors");
+    var wait = icuState(state, "vasopressor");
+    var list = !wait && state.icu.vasopressors;
+    var shown = wait || (!list.length ? '<p class="w-empty">No vasoactive infusion on record.</p>'
+      : '<ul class="w-mini">' + list.map(function (p) {
+        return "<li><b>" + esc(p.drug) + (p.running ? "" : " (stopped)") + "</b><span>" +
+          (p.dose && p.dose.value != null ? esc(p.dose.value) + " mcg/kg/min (" + esc(p.dose.workings) + ")" : "Dose not worked out: " + esc(p.dose && p.dose.reason)) +
+          "</span></li>";
+      }).join("") + "</ul>" +
+        '<p class="w-hint">' + ms("info") + "The concentration is what was recorded when the infusion was charted in Drips. It is never assumed.</p>");
+    return head + shown + "</div>";
+  }
+
+  function icuRoundCard(state) {
+    var head = icuHead("fact_check", "ICU round checklist");
+    var wait = icuState(state, "round");
+    var latest = !wait && state.icu.rounds && state.icu.rounds.latest;
+    var words = { yes: "Yes", no: "No", "not-applicable": "Not applicable", "not-assessed": "Not assessed" };
+    var shown = wait || (!latest ? '<p class="w-empty">No round checklist recorded.</p>'
+      : '<p class="w-hint">Last round ' + when(latest.at) + (latest.by ? " by " + esc(latest.by) : "") + ": " + esc(latest.assessed) + " of " + esc(latest.of) + " assessed.</p>" +
+        '<ul class="w-mini">' + latest.items.map(function (i) { return "<li><b>" + esc(i.label) + "</b><span>" + esc(words[i.answer] || i.answer) + (i.note ? ": " + esc(i.note) : "") + "</span></li>"; }).join("") + "</ul>");
+    var items = (state.icu && state.icu.roundItems) || [];
+    var form = items.length ? '<div class="w-grid">' + items.map(function (i) {
+      return '<label class="w-f"><span>' + esc(i.label) + '</span><select id="wRound_' + esc(i.key) + '"><option value="">Not assessed</option><option value="yes">Yes</option><option value="no">No</option><option value="not-applicable">Not applicable</option></select></label>';
+    }).join("") + icuWhen() + "</div>" + '<button class="w-btn" data-w-act="icuround">' + ms("save") + "Record round</button>" : "";
+    return head + shown + form + '<p class="w-hint">' + ms("info") + "An item left blank is recorded as not assessed, never as no.</p></div>";
   }
 
   /* PREGNANCY EPISODE. Gravida/para/gestation, recorded exactly as entered - para only ever changes
@@ -5776,6 +5952,50 @@
       .then(function (r) { if (settle(r, "Device removed.")) loadDevices(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not remove the device."; paint(); });
   }
+
+  // ---- ICU bedside record (P1.12) -----------------------------------------------------------
+  function loadIcu() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/icu?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { if (st.sel !== s) return; st.icu = (r && r.ok) ? r : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.icu = false; paint(); });
+  }
+  function icuAtValue() {
+    var raw = val("wIcuAt"); if (!raw) return undefined;
+    var d = new Date(raw); return isNaN(d.getTime()) ? "bad" : d.toISOString();
+  }
+  function icuRecord(kind, values, okMsg) {
+    var s = st.sel; if (!s) return;
+    var at = icuAtValue();
+    if (at === "bad") { st.err = "The time is not a date."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/icu-record", { orgId: st.orgId, kind: kind, patientId: s.patientId, encounterId: s.encounterId, at: at, values: values })
+      .then(function (r) {
+        if (r && !r.ok && r.error === "invalid_values") {
+          st.busy = false;
+          st.err = "Not recorded: " + (r.problems || []).map(function (p) { return p.field + " " + p.reason; }).join("; ") + ".";
+          paint(); return;
+        }
+        if (settle(r, okMsg)) loadIcu(); else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+  function icuAbg() {
+    icuRecord("abg", { sampleType: val("wAbgType"), ph: val("wAbgPh"), pco2: val("wAbgPco2"), po2: val("wAbgPo2"), hco3: val("wAbgHco3"),
+      baseExcess: val("wAbgBe"), lactate: val("wAbgLac"), fio2: val("wAbgFio2") }, "Blood gas recorded.");
+  }
+  function icuVent() {
+    icuRecord("ventilator", { mode: val("wVentMode"), tidalVolumeMl: val("wVentVt"), rate: val("wVentRate"), peep: val("wVentPeep"), fio2: val("wVentFio2"),
+      peakPressure: val("wVentPeak"), plateauPressure: val("wVentPlat") }, "Ventilator settings recorded.");
+  }
+  function icuSedation() {
+    icuRecord("sedation", { rass: val("wSedRass"), targetLow: val("wSedLo"), targetHigh: val("wSedHi"), gcs: val("wSedGcs") }, "Sedation recorded.");
+  }
+  function icuRound() {
+    var items = {};
+    ((st.icu && st.icu.roundItems) || []).forEach(function (i) { var a = val("wRound_" + i.key); if (a) items[i.key] = a; });
+    icuRecord("round", { items: items }, "Round recorded.");
+  }
   // ---- surgery / OT / PACU (Task 2.3) ------------------------------------------------------
   function loadSurgeryBoard() {
     st.busy = true; st.view = "surgery"; st.surgErr = ""; paint();
@@ -6983,8 +7203,8 @@
   function loadFlowsheet() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/flowsheet?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) + "&hours=24")
-      .then(function (r) { if (r && r.ok) st.flowsheet = r.grid; paint(); })
-      .catch(function () {});
+      .then(function (r) { if (st.sel !== s) return; if (r && r.ok) { st.flowsheet = r.grid; st.flowsheetFailed = false; } else st.flowsheetFailed = true; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.flowsheetFailed = true; paint(); });
   }
   function loadNews2() {
     var s = st.sel; if (!s) return Promise.resolve();
@@ -7399,15 +7619,29 @@
        * by a factor of ten is a real dose error. The server refuses it independently. */
       if (!/^\d+(\.\d+)?$/.test(String(rate).trim())) { st.err = "The rate has to be a plain number of mL per hour."; paint(); return; }
     }
+    /* THE BAG'S CONCENTRATION, as written on its label, so an ICU chart can work out a weight-based
+     * dose from the rate. Optional and never defaulted: left blank, no dose is worked out, and the
+     * ICU card says why. Anything that is not "amount unit in volume mL" is refused, not guessed. */
+    var concentration;
+    if (event === "started" || event === "rate-changed") {
+      var conc = "";
+      try { conc = G.prompt("Bag concentration, as on the label, e.g. 4 mg in 50 mL (leave blank if not needed)") || ""; } catch (e) {}
+      conc = String(conc).trim();
+      if (conc) {
+        var cm = /^(\d+(?:\.\d+)?)\s*([a-zA-Z\u00b5\u03bc]+)\s+in\s+(\d+(?:\.\d+)?)\s*ml$/i.exec(conc);
+        if (!cm) { st.err = "Write the concentration as amount, unit, in, volume in mL, for example 4 mg in 50 mL."; paint(); return; }
+        concentration = { amount: Number(cm[1]), unit: cm[2], volumeMl: Number(cm[3]) };
+      }
+    }
     if (event === "paused" || event === "stopped") {
       try { reason = G.prompt("Why?") || ""; } catch (e) {}
     }
     st.busy = true; paint();
     apiPost("/ward/infusion", {
       orgId: st.orgId, orderId: orderId, event: event,
-      ratePerHour: rate ? Number(rate) : undefined, reason: reason || undefined,
+      ratePerHour: rate ? Number(rate) : undefined, reason: reason || undefined, concentration: concentration,
     })
-      .then(function (r) { if (settle(r, r && r.ok ? "Charted." : null)) loadInfusions(); else paint(); })
+      .then(function (r) { if (settle(r, r && r.ok ? "Charted." : null)) { loadInfusions(); if (st.sel && st.sel.class === "ICU") loadIcu(); } else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not chart that."; paint(); });
   }
   function carePlanSave() {
@@ -8892,6 +9126,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
+      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
        * steps, and it is the one this panel could most easily cause. */
@@ -8899,7 +9134,7 @@
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
-      if (p.class === "ICU") loadDevices();
+      if (p.class === "ICU") { loadDevices(); loadIcu(); loadResus(); }
       if (p.class === "MATERNITY") loadMaternity();
       if (p.class === "PEDIATRICS" || p.class === "NICU") loadAgeBand();
       if (p.class === "NICU") loadLines();
@@ -9079,6 +9314,11 @@
     if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
     if (cmd === "resusvoid") { resusVoid(arg); return; }
     if (cmd === "deviceload") { loadDevices(); return; }
+    if (cmd === "icuload") { loadIcu(); return; }
+    if (cmd === "icuabg") { icuAbg(); return; }
+    if (cmd === "icuvent") { icuVent(); return; }
+    if (cmd === "icused") { icuSedation(); return; }
+    if (cmd === "icuround") { icuRound(); return; }
     if (cmd === "deviceassociate") { deviceAssociate(); return; }
     if (cmd === "devicedissociate") { deviceDissociate(arg); return; }
     if (cmd === "dispositionadmit") { edDispositionAdmit(); return; }
