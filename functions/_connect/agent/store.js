@@ -221,10 +221,15 @@ export async function getSessionRow(db, tenantId, id) {
 // Any still-usable session this actor already holds for this deployment. This is what makes app
 // backgrounding / reconnection RESUME instead of provisioning a second browser context.
 export async function findLiveSession(db, tenantId, actorId, deploymentId, liveStates, nowMs) {
+  return (await listLiveSessions(db, tenantId, actorId, deploymentId, liveStates, nowMs))[0] || null;
+}
+
+/** Every live session of this doctor on this hospital, newest first. */
+export async function listLiveSessions(db, tenantId, actorId, deploymentId, liveStates, nowMs) {
   const r = await need(db).prepare("SELECT * FROM connect_agent_session WHERE tenant_id=? AND actor_id=? AND deployment_id=?").bind(tenantId, actorId, deploymentId).all();
   const rows = (r.results || []).filter((s) => liveStates.indexOf(String(s.state)) !== -1 && Number(s.expires_at) > Number(nowMs));
   rows.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
-  return rows[0] || null;
+  return rows;
 }
 
 export async function casSession(db, tenantId, id, expectedRevision, set) {

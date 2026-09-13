@@ -47,6 +47,7 @@ import {
   insertSession,
   getSessionRow,
   findLiveSession,
+  listLiveSessions,
   findLatestSessionForDeployment,
   casSession,
   sessionView,
@@ -500,7 +501,15 @@ export async function onRequest(context) {
        * the approved adapter keeps serving Ward Sync until the new draft is approved over it. */
       const discover = body.purpose === "discover";
       const ONBOARDING = ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"];
-      if (session && discover && !(job && ONBOARDING.includes(job.state))) { session = null; job = null; }
+      if (discover) {
+        // Any live session of this doctor with a run still onboarding is the one to resume; the newest
+        // live session may be a Ward Sync read with no job at all.
+        session = null; job = null;
+        for (const s of await listLiveSessions(deps.db, tenantId, actor.id, deployment.id, SESSION_LIVE, nowMs)) {
+          const j = await findJobForSession(deps.db, tenantId, s.id);
+          if (j && ONBOARDING.includes(j.state)) { session = s; job = j; break; }
+        }
+      }
       if (!session) {
         const sessionId = newId("ses_");
         const sessionTtl = Number(body.ttlMs) > 0 ? Number(body.ttlMs) : 3600000;

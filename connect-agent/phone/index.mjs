@@ -22,14 +22,14 @@ function browserOf(plugin) {
 
 /** Doctor-facing wording for each gap the auto crawl could not fill. No em-dash (app-facing text). */
 export const GAP_PROMPTS = Object.freeze({
-  worklist: 'I could not find your patient worklist. Tap where it lives, then tap Done.',
-  patient: 'I could not find the patient details (name, age, sex). Tap where they live, then tap Done.',
-  notes: 'I could not find the clinical or assessment notes. Tap where they live, then tap Done.',
-  medications: 'I could not find the medication chart. Tap where it lives, then tap Done.',
-  labs: 'I could not find the lab results. Tap where they live, then tap Done.',
-  radiology: 'I could not find the radiology reports. Tap where they live, then tap Done.',
-  discharge: 'I could not find the discharge summary. Tap where it lives, then tap Done.',
-  history: 'I could not find the visit history. Tap where it lives, then tap Done.',
+  worklist: 'I could not find your patient worklist. Open it and tap inside it so it turns green, then tap Done.',
+  patient: 'I could not find the patient details (name, age, sex). Open them and tap inside so they turn green, then tap Done.',
+  notes: 'I could not find the clinical or assessment notes. Open them and tap inside so they turn green, then tap Done.',
+  medications: 'I could not find the medication chart. Open it and tap inside it so it turns green, then tap Done.',
+  labs: 'I could not find the lab results. Open them and tap inside so they turn green, then tap Done.',
+  radiology: 'I could not find the radiology reports. Open them and tap inside so they turn green, then tap Done.',
+  discharge: 'I could not find the discharge summary. Open it and tap inside it so it turns green, then tap Done.',
+  history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done.',
 });
 const MAX_ASKS = 4;
 const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[type=\"password\"]')?'1':'0'})()";
@@ -39,14 +39,14 @@ const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[typ
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
 export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
 export const ASK_PROMPTS = Object.freeze({
-  worklist: 'Show me the list of all your patients (the whole ward or your own list), then tap Done.',
-  patient: 'Open one patient and show me their details (name, age, sex, ward, bed), then tap Done.',
-  notes: 'Show me the assessment or clinical notes for that patient, then tap Done.',
-  labs: 'Show me the lab results for that patient, then tap Done.',
-  radiology: 'Show me the radiology reports for that patient, then tap Done.',
-  medications: 'Show me the medication chart or prescription for that patient, then tap Done.',
-  discharge: 'Show me the discharge summary for that patient, then tap Done.',
-  history: 'Show me the visit history for that patient, then tap Done.',
+  worklist: 'Show me the list of all your patients (the whole ward or your own list), tap inside it so it turns green, then tap Done.',
+  patient: 'Open one patient and show me their details (name, age, sex, ward, bed), tap inside it so it turns green, then tap Done.',
+  notes: 'Show me the assessment or clinical notes for that patient, tap inside it so it turns green, then tap Done.',
+  labs: 'Show me the lab results for that patient, tap inside it so it turns green, then tap Done.',
+  radiology: 'Show me the radiology reports for that patient, tap inside it so it turns green, then tap Done.',
+  medications: 'Show me the medication chart or prescription for that patient, tap inside it so it turns green, then tap Done.',
+  discharge: 'Show me the discharge summary for that patient, tap inside it so it turns green, then tap Done.',
+  history: 'Show me the visit history for that patient, tap inside it so it turns green, then tap Done.',
 });
 
 /**
@@ -151,6 +151,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     if (!view || !view.rowsSelector) {
       try { view = await captureView({ client: plugin, resourceHint: gap }); } catch { view = null; }
     }
+    await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
     if (!view || !view.rowsSelector) { warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
     view.guided = true;
     if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
