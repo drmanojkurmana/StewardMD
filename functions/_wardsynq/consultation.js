@@ -34,6 +34,7 @@
 
 import { resolveClinicalActor } from "./actor.js";
 import { StagedRepository } from "./staged.js";
+import { stageEvent } from "./outbox.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 /* Each piece of a consultation: what the caller sends, which writer does it, and what resource type
@@ -159,8 +160,13 @@ async function saveConsultation(request, env, ctx) {
     };
   }
 
-  let commit;
-  try { commit = await staged.commit(); }
+  /* The event downstream work listens for (billing, notifications, analytics) is staged in the SAME
+   * commit: it exists exactly when the consultation does. outbox.js drains it. */
+  let commit, eventId = null;
+  try {
+    if (staged.size > 0) eventId = await stageEvent(staged, mig.tenantId, "consultation.saved", { encounterId, patientId: body.patientId || null, pieces: pieces.map((p) => p.key), actor: resolved.actor.id });
+    commit = await staged.commit();
+  }
   catch (e) {
     staged.discard();
     const conflict = e && e.name === "VersionConflictError";
@@ -172,7 +178,8 @@ async function saveConsultation(request, env, ctx) {
       actor: resolved.actor.id,
     };
   }
-  return { ...base, ok: true, written: commit.committed, encounterId, results, actor: resolved.actor.id };
+  // `written` counts clinical records; the event row is bookkeeping, not part of the chart.
+  return { ...base, ok: true, written: commit.committed - (eventId ? 1 : 0), encounterId, results, eventId, actor: resolved.actor.id };
 }
 
 /* The identifiers a screen needs back to render what was just saved, without echoing whole records. */

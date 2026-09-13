@@ -37,7 +37,8 @@ function okWriter(piece) {
   fn.calls = calls;
   return fn;
 }
-const rows = () => repo._rows.length;
+const rows = () => repo._rows.filter((r) => r.resourceType !== "_wardsynq_outbox").length;
+const events = () => repo._rows.filter((r) => r.resourceType === "_wardsynq_outbox");
 
 test("writes every piece in chart order, all in ONE atomic append, with every key and audit row", async () => {
   grant(null);
