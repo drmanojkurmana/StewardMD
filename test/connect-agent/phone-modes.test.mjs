@@ -67,21 +67,24 @@ test('manual mode asks for every resource in order, never clicks on its own, rec
     onProgress: (p) => progress.push(p),
     askDoctor: async ({ gap, text, step, total }) => {
       asks.push(gap);
-      assert.equal(text, ASK_PROMPTS[gap]);
+      if (asks.filter((a) => a === gap).length === 1) assert.equal(text, ASK_PROMPTS[gap]);
+      else assert.match(text, /None of the requests from that screen returned|could not read a table/);
       assert.equal(total, ASK_ORDER.length);
-      assert.equal(step, asks.length);
+      assert.equal(step, [...new Set(asks)].length);
       const last = plugin.modes[plugin.modes.length - 1];
       assert.equal(last.mode, 'guide');
       assert.equal(last.banner, text);
-      if (gap === 'worklist') { state.table = WORKLIST_RAW; return { done: true }; }
-      if (gap === 'labs') { state.table = LABS_RAW; return { done: true }; }
+      if (asks.filter((a) => a === gap).length === 1) {
+        if (gap === 'worklist') { state.table = WORKLIST_RAW; return { done: true }; }
+        if (gap === 'labs') { state.table = LABS_RAW; return { done: true }; }
+      }
       if (gap === 'radiology' || gap === 'discharge') return { done: false, missing: true };
       state.table = null;
       return { done: false };
     },
   });
 
-  assert.deepEqual(asks, [...ASK_ORDER]);
+  assert.deepEqual([...new Set(asks)], [...ASK_ORDER]);
   assert.equal(plugin.clicks.length, 0, 'the agent never tapped anything');
   assert.equal(plugin.modes[0].mode, 'guide', 'manual mode never starts the agent-driven explore');
   assert.equal(plugin.modes[plugin.modes.length - 1].mode, 'agent', 'agent mode before the probes');
@@ -100,8 +103,8 @@ test('manual mode asks for every resource in order, never clicks on its own, rec
   assert.deepEqual(views[1].fieldHints, { 'Test name': 'testName' });
   assert.deepEqual(calls.discovery.steps, []);
   const asking = progress.filter((p) => p.phase === 'ASKING');
-  assert.equal(asking.length, ASK_ORDER.length);
-  assert.equal(asking[2].step, 3);
+  assert.equal(asking.length, asks.length);
+  assert.equal(asking.find((a) => a.gap === 'notes')?.step, 3);
   assert.ok(progress.some((p) => p.phase === 'CAPTURED' && p.gap === 'worklist'));
   for (const [, p] of brainCalls) assert.ok(!JSON.stringify(p).includes('SECRET'), 'no onclick argument reaches the brain');
 });
