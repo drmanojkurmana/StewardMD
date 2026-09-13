@@ -118,6 +118,7 @@ import { startReconciliation, decideMedicine, readReconciliation } from "../../_
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
+import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
@@ -933,6 +934,11 @@ export async function onRequest(context) {
         "report-pharmacy": CAPS.ORDER_DISPENSE, "report-him": CAPS.STAFF_ADMIN,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
         "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT, "verify-result": CAPS.LAB_RESULT, "results-to-verify": CAPS.LAB_RESULT,
+        /* Microbiology and histopathology (P1.9). Writing either, and the bench's in-progress list, is the
+         * laboratory's release authority. The chart reading them is reading the chart. */
+        "culture-report": CAPS.LAB_RESULT, "cultures-in-progress": CAPS.LAB_RESULT,
+        "histopathology-report": CAPS.LAB_RESULT, "histopathology-addendum": CAPS.LAB_RESULT,
+        "pathology-reports": CAPS.EMR_VIEW,
         /* Resolving identity is the registration authority, not a clinical one: it is the same act
          * as creating the record in the first place. Reading who a patient is needs only emr.view -
          * a clinician who followed a link to a merged record must be told where the chart went. */
@@ -2498,6 +2504,39 @@ export async function onRequest(context) {
             r.criticalCheck = { checked: false, error: "critical_check_failed" };
           }
         }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "culture-report" && method === "POST") {
+        const r = await recordCulture(request, env, { ...deps, serviceRequestId: body.serviceRequestId, stage: body.stage, specimen: body.specimen,
+          collectedAt: body.collectedAt, receivedAt: body.receivedAt, gramStain: body.gramStain, noGrowthHours: body.noGrowthHours,
+          organisms: body.organisms, comment: body.comment, correction: body.correction === true, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        /* A POSITIVE BLOOD CULTURE OPENS ITS LOOP, through the same openCriticalLoops every other critical
+         * result uses. The loop id is per (report, test), so growth detected opens it and identification
+         * later finds it instead of opening a second one. A failure to open it is reported, never swallowed. */
+        if (r && r.ok && r.positiveBloodCulture) {
+          try {
+            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, observations: [r.criticalRow], notifyDeps: {}, idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
+            r.criticalCheck = crit && crit.ok ? { checked: true, opened: crit.opened || 0, loops: crit.loops || [] } : { checked: false, error: (crit && crit.error) || "critical_check_failed" };
+          } catch (e) { r.criticalCheck = { checked: false, error: "critical_check_failed" }; }
+        }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "cultures-in-progress" && method === "GET") {
+        const r = await culturesInProgress(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "histopathology-report" && method === "POST") {
+        const r = await recordHistopathology(request, env, { ...deps, serviceRequestId: body.serviceRequestId, status: body.status, specimen: body.specimen,
+          clinicalDetails: body.clinicalDetails, macroscopic: body.macroscopic, microscopic: body.microscopic, diagnosis: body.diagnosis,
+          codedDiagnosis: body.codedDiagnosis, labVerification: (wsqCfg && wsqCfg.labVerification) || null, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "histopathology-addendum" && method === "POST") {
+        const r = await addHistopathologyAddendum(request, env, { ...deps, reportId: body.reportId, text: body.text, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pathology-reports" && method === "GET") {
+        const r = await pathologyForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-result" && method === "POST") {
