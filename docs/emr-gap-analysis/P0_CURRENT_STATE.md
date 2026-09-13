@@ -282,3 +282,16 @@ risk highest now).
 
 **Numbers:** 6007 passing, 0 failing. 33 routes waiting for a screen.
 **Next:** oncology/cardiology links, then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
+
+
+## 2026-09-14 (cont.) — oncology/cardiology (backlog 33 -> 28)
+
+**Bug (server):** both specialty timelines turned a failed read into an empty list, so a failed chemotherapy
+read showed "no chemotherapy given". Failed parts are now named and warned on screen; 3 tests.
+Five list routes verified as fully covered by the timelines the screens already call, recorded byDesign
+with that reason rather than given duplicate screens.
+
+**Numbers:** 6010 passing, 0 failing. 28 routes waiting for a screen.
+**Next:** remaining backlog (onco recommend, readers, link-mrn, identity, advisory-check, dose-ceiling,
+emergency-chart, extend, flag-critical, backfill, resus-waive, metrics, operational-health, twin, maik,
+and the older set), then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
