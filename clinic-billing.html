@@ -149,6 +149,20 @@
     inp.focus();
     go.onclick = function(){ var id = inp.value.trim(); if(!id){ document.getElementById("err").textContent = "Enter the patient's ID."; return; } loadPatient(id); };
     inp.addEventListener("keydown", function(e){ if(e.key==="Enter") go.click(); });
+    // Everyone with something waiting to be billed, so the cashier does not depend on being told an ID.
+    var q = document.createElement("section"); q.className = "card"; q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Loading…</div>';
+    app.appendChild(q);
+    if (MOCK) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Demo: the live list shows every patient with unbilled orders.</div>'; return; }
+    api("queue?orgId="+encodeURIComponent(orgId)).then(function(r){
+      if (!r || !r.ok) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">'+ms("error")+'The list could not be loaded. Do not read this as nothing waiting. Look a patient up by ID instead.</div>'; return; }
+      var by = {}; (r.orders||[]).forEach(function(o){ (by[o.patientId] = by[o.patientId] || []).push(o); });
+      var ids = Object.keys(by);
+      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2>' + (ids.length
+        ? ids.map(function(id){ var n = by[id].length, tot = by[id].reduce(function(s,o){ return s + (o.unitPrice||0)*(o.qty||1); }, 0);
+            return '<div class="line"><span class="nm">'+esc(id)+' <small>'+n+' item'+(n===1?'':'s')+'</small></span><span class="amt">'+rupees(tot)+'</span><button class="btn ghost" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-bill="'+esc(id)+'">Open</button></div>'; }).join("")
+        : '<div class="msg">Nothing is waiting to be billed.</div>');
+      Array.prototype.forEach.call(q.querySelectorAll("[data-bill]"), function(b){ b.onclick = function(){ loadPatient(b.getAttribute("data-bill")); }; });
+    });
   }
 
   function loadPatient(id){

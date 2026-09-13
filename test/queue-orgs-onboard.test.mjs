@@ -281,6 +281,20 @@ test("POST /ward/update: renames the ward", async () => {
   assert.equal(r.__status, 200, JSON.stringify(r));
   assert.equal(r.ok, true);
   assert.equal(r.ward.name, "North 2");
+  assert.equal(r.ward.code, "N", "fields not sent are kept, not blanked");
+});
+
+test("SECURITY: an admin of one hospital cannot edit another hospital's ward", async () => {
+  reset();
+  seedOrg("org-a", OWNER, "Hospital A");
+  const OTHER = "other-owner@example.test";
+  seedOrg("org-b", uidFor(OTHER), "Hospital B");
+  const wardA = await api("/ward", "POST", { orgId: "org-a", name: "North", code: "N" }, asFirebase(OWNER_EMAIL));
+  assert.equal(wardA.__status, 200, JSON.stringify(wardA));
+  const r = await api("/ward/update", "POST", { orgId: "org-b", wardId: wardA.ward.id, name: "Taken", active: false }, asFirebase(OTHER));
+  assert.equal(r.__status, 404, JSON.stringify(r));
+  const list = await api("/wards?orgId=org-a", "GET", null, asFirebase(OWNER_EMAIL));
+  assert.equal(list.wards.find((w) => w.id === wardA.ward.id).name, "North");
 });
 
 test("GET /ward/list: still owned by the clinical block, not the admin-route not_found", async () => {

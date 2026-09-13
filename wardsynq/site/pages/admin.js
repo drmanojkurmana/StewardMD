@@ -397,11 +397,14 @@
   function renderWards(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/wards?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var wards = (r && r.ok && r.wards) || [];
+      if (!r || !r.ok) { body.innerHTML = '<div class="card"><h2>Wards</h2><div class="msg err">Wards could not be loaded. Do not read this as no wards. ' + c.esc(refusal(r)) + "</div></div>"; return; }
+      var wards = r.wards || [];
       var wardOpts = wards.map(function (w) { return '<option value="' + c.esc(w.id) + '">' + c.esc(w.name) + "</option>"; }).join("");
       body.innerHTML = '<div class="card"><h2>Wards</h2>' +
-        (wards.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Code</th><th>Type</th><th>Active</th></tr></thead><tbody>' +
-          wards.map(function (w) { return '<tr data-ward-id="' + c.esc(w.id) + '"><td>' + c.esc(w.name) + "</td><td>" + c.esc(w.code) + "</td><td>" + c.esc(w.type) + "</td><td>" + (w.active ? "yes" : "no") + "</td></tr>"; }).join("") +
+        (wards.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Code</th><th>Type</th><th>Active</th><th></th></tr></thead><tbody>' +
+          wards.map(function (w) { return '<tr data-ward-id="' + c.esc(w.id) + '"><td>' + c.esc(w.name) + "</td><td>" + c.esc(w.code) + "</td><td>" + c.esc(w.type) + "</td><td>" + (w.active ? "yes" : "no") + "</td>" +
+            '<td><button class="btn ghost sm" type="button" data-ward-rename="' + c.esc(w.id) + '" data-ward-name="' + c.esc(w.name) + '">Rename</button> ' +
+            '<button class="btn ghost sm" type="button" data-ward-active="' + c.esc(w.id) + '" data-to="' + (w.active ? "0" : "1") + '">' + (w.active ? "Deactivate" : "Reactivate") + "</button></td></tr>"; }).join("") +
           "</tbody></table></div>" : '<p class="quiet">No wards yet.</p>') +
         '<h3>Add a ward</h3><div class="row"><label class="f"><span>Name</span><input id="admWardName"></label>' +
         '<label class="f"><span>Code</span><input id="admWardCode"></label>' +
@@ -413,6 +416,25 @@
           '<h3>Add a bed</h3><div class="row"><label class="f"><span>Name</span><input id="admBedLabel"></label>' +
           '<button class="btn" id="admBedAdd" type="button">' + c.ms("add") + "Add</button></div><div id=\"admBedMsg\"></div>"
           : '<p class="quiet">Add a ward, then its beds.</p>') + "</div>";
+      var wardUpdate = function (patch, done) {
+        c.api("/ward/update", Object.assign({ orgId: c.state.orgId }, patch)).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admWardMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast(done); WSQ.render("admin");
+        });
+      };
+      body.querySelectorAll("[data-ward-rename]").forEach(function (b) {
+        b.onclick = function () {
+          var name = (window.prompt("New name for this ward", b.getAttribute("data-ward-name")) || "").trim();
+          if (name) wardUpdate({ wardId: b.getAttribute("data-ward-rename"), name: name }, "Ward renamed.");
+        };
+      });
+      body.querySelectorAll("[data-ward-active]").forEach(function (b) {
+        b.onclick = function () {
+          var on = b.getAttribute("data-to") === "1";
+          if (!on && !window.confirm("Deactivate this ward? Nothing already recorded changes, and it can be reactivated.")) return;
+          wardUpdate({ wardId: b.getAttribute("data-ward-active"), active: on }, on ? "Ward reactivated." : "Ward deactivated.");
+        };
+      });
       document.getElementById("admWardAdd").onclick = function () {
         var name = (document.getElementById("admWardName").value || "").trim();
         if (!name) { document.getElementById("admWardMsg").innerHTML = '<div class="msg err">Give the ward a name.</div>'; return; }

@@ -3392,13 +3392,24 @@ export async function onRequest(context) {
       if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "room" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request); }
       if (seg === "ward" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.createWard(env, body.orgId, body, actor.id) }, 200, request); }
-      if (seg === "ward" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.updateWard(env, body.wardId, body, actor.id) }, 200, request); }
+      if (seg === "ward" && sub === "update") {
+        const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        /* The ward must belong to the hospital the caller administers. Without this an admin of one
+         * hospital could rename or deactivate another hospital's ward by naming its id. */
+        const w = await ORG.getWard(env, body.wardId || "");
+        if (!w || w.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        const wPatch = {}; for (const k of ["name", "code", "type", "active"]) if (body[k] !== undefined) wPatch[k] = body[k];
+        return json({ ok: true, ward: await ORG.updateWard(env, body.wardId, wPatch, actor.id) }, 200, request);
+      }
       if (seg === "bed" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, bed: await ORG.createBed(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "bed" && sub === "update") {
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
         // TASK 4.3: server-side concurrency, not trust in the client. Two staff racing to
         // assign/release/block the same bed get ONE winner; the loser is told to refetch and
         // retry, never handed a write that silently overwrote what they thought they saw.
+        // The bed must be this hospital's: an admin elsewhere could otherwise block or release it by id.
+        const bedNow = await ORG.getBed(env, body.bedId || "");
+        if (!bedNow || bedNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
         try { return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
         catch (e) { if (e && e.code === "bed_changed") return json({ ok: false, error: "bed_changed", message: "This bed changed under you - reload it and try again." }, 409, request); throw e; }
       }

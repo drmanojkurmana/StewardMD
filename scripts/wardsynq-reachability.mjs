@@ -81,7 +81,22 @@ const knownGaps = new Set(Object.keys(cfg.knownGaps || {}));
 const untestedBaseline = new Set(cfg.untestedRoutes || []);
 
 const router = readFileSync(ROUTER, "utf8");
-const routes = new Set([...router.matchAll(/\bsub\s*===\s*"([a-z0-9][a-z0-9-]*)"/g)].map((m) => m[1]));
+/* ROUTES ARE (segment, sub), NOT sub. Matching on the sub name alone let a same-named route in another
+ * segment hide a gap: onco's /plan made ward/plan look reachable, and the note template id "progress"
+ * made ward/progress look reachable, while neither ward route had a screen. A sub is attributed to the
+ * nearest segment check before it. A sub that exists in ONE segment keeps its bare name (so the allow
+ * file reads as it always has); a sub in several is labelled seg/sub. */
+const segMarks = [...router.matchAll(/\bseg\s*===\s*"([a-z0-9][a-z0-9-]*)"/g)].map((m) => ({ at: m.index, seg: m[1] }));
+const routePairs = [];
+for (const m of router.matchAll(/\bsub\s*===\s*"([a-z0-9][a-z0-9-]*)"/g)) {
+  let seg = null;
+  for (const mk of segMarks) { if (mk.at < m.index) seg = mk.seg; else break; }
+  routePairs.push({ seg, sub: m[1] });
+}
+const segsOf = new Map();
+for (const { seg, sub } of routePairs) { if (!segsOf.has(sub)) segsOf.set(sub, new Set()); segsOf.get(sub).add(seg); }
+const label = (seg, sub) => (segsOf.get(sub).size === 1 ? sub : seg + "/" + sub);
+const routes = new Set(routePairs.map((r) => label(r.seg, r.sub)));
 
 /* ---- CAPGUARD ------------------------------------------------------------------------------ */
 /* Every capability map must be followed, within the same block, by a refusal for a route the map
@@ -122,51 +137,69 @@ for (const f of readdirSync(DOMAIN)) {
 
 /* ---- SCREENS -------------------------------------------------------------------------------- */
 const screens = findScreens(ROOT, []);
-const blob = screens.map((s) => s[1]).join("\n");
 const called = new Set();
-for (const m of blob.matchAll(/["'`]\/(?:api\/queue\/)?([a-z0-9-]+)(?:\/([a-z0-9-]+))?/g)) {
-  called.add(m[1]);
-  if (m[2]) called.add(m[2]);
-}
-/* Paths built by concatenation - `apiPost("/ward/" + kind)` - cannot be read off a literal, so bare
- * strings count too. But ONLY within sight of an actual API call.
- *
- * This used to accept any quoted word anywhere in any screen file, and that produced FALSE GREENS:
- * the word "discharge" appearing inside the sentence "At discharge" on an unrelated form marked the
- * /ward/discharge route reachable, so a route nobody could reach dropped off the backlog on its
- * own. A checker that reports work as done when it is not is worse than no checker, so the window
- * is the fix: a string has to sit beside the call that might use it. */
-/* opd.html's helper takes the path WITHOUT a leading slash - `api("timeline/extend", ...)` - which the
- * literal pass above cannot see. Only the first argument counts, so nothing else on the line leaks in. */
-for (const m of blob.matchAll(/\bapi\(\s*["'`]([a-z0-9-]+)(?:\/([a-z0-9-]+))?/g)) {
-  called.add(m[1]);
-  if (m[2]) called.add(m[2]);
-}
-const API_WINDOW = 400;
-for (const call of blob.matchAll(/api(?:Get|Post)\s*\(|api\/queue/g)) {
-  const window = blob.slice(call.index, call.index + API_WINDOW);
-  for (const m of window.matchAll(/["'`]([a-z0-9][a-z0-9-]{2,})["'`]/g)) called.add(m[1]);
-}
-/* ROUTE LOOKUP TABLES. A screen that routes through a map - `var CASH_ACTION_ROUTE = { pay:
- * "invoice-payment", ... }` used later as `apiPost("/ward/" + route)` - declares its route names
- * far from the call, so the window above cannot see them. The table is followed instead of widening
- * the window, because widening it brings back the bare-word false greens this replaced: the word
- * "discharge" used as a STAGE VALUE is not a call to /ward/discharge, and treating it as one is how
- * a route nobody can reach quietly drops off the backlog. */
-for (const decl of blob.matchAll(/(?:var|const|let)\s+([A-Za-z_$][\w$]*)\s*=\s*\{([^}]*)\}/g)) {
-  const ident = decl[1];
-  const usedAsPath = new RegExp(
-    "[\"'`]/[a-z0-9-]+/?[\"'`]\\s*\\+\\s*" + ident.replace(/\$/g, "\\$") + "\\b"
-    + "|\\b" + ident.replace(/\$/g, "\\$") + "\\s*\\[[^\\]]+\\]",
-  ).test(blob);
-  if (!usedAsPath) continue;
-  for (const m of decl[2].matchAll(/["'`]([a-z0-9][a-z0-9-]{2,})["'`]/g)) called.add(m[1]);
+const markPair = (seg, sub) => { const segs = segsOf.get(sub); if (segs && segs.has(seg)) called.add(label(seg, sub)); };
+/* A bare word counts only when it names a sub that exists in exactly one segment, or when the
+ * segment is known from context. An ambiguous bare word counts for nothing. */
+const markBare = (word, ctxSeg) => {
+  const segs = segsOf.get(word);
+  if (!segs) return;
+  if (ctxSeg && segs.has(ctxSeg)) called.add(label(ctxSeg, word));
+  else if (segs.size === 1) called.add(word);
+};
+const SEG_LIT = /["'`]\/(?:api\/queue\/)?([a-z0-9-]+)\/["'`]/;
+for (const [, text] of screens) {
+  /* HELPERS THAT CARRY A SEGMENT: `function oncoPost(path) { fetch(base + "/api/queue/onco" + path) }`.
+   * A call `oncoPost("/plan")` is onco/plan, and nothing else. */
+  const helperSeg = new Map();
+  for (const h of text.matchAll(/function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{([\s\S]{0,600})/g)) {
+    const m = h[3].match(new RegExp("[\"'`]/api/queue/([a-z0-9-]+)/?[\"'`]\\s*\\+\\s*" + h[2] + "\\b"));
+    if (m) helperSeg.set(h[1], m[1]);
+  }
+  for (const [name, seg] of helperSeg) {
+    for (const c of text.matchAll(new RegExp("\\b" + name.replace(/\$/g, "\\$") + "\\(\\s*[\"'`]/?([a-z0-9-]+)", "g"))) markPair(seg, c[1]);
+  }
+  for (const m of text.matchAll(/["'`]\/(?:api\/queue\/)?([a-z0-9-]+)(?:\/([a-z0-9-]+))?/g)) {
+    if (m[2]) markPair(m[1], m[2]); else markBare(m[1], null);
+  }
+  /* opd.html's helper takes the path WITHOUT a leading slash - `api("timeline/extend", ...)` - unless
+   * the file's own `api` is a segment-bound helper (clinic-billing.html: `api("order")` is bill/order),
+   * which the helper pass above already handled. */
+  if (!helperSeg.has("api")) {
+    for (const m of text.matchAll(/\bapi\(\s*["'`]([a-z0-9-]+)(?:\/([a-z0-9-]+))?/g)) {
+      if (m[2]) markPair(m[1], m[2]); else markBare(m[1], null);
+    }
+  }
+  /* Paths built by concatenation - `apiPost("/ward/" + kind)` - within sight of the call, with the
+   * segment taken from the literal in the same window. The old pass accepted any quoted word near any
+   * call and marked ward/progress reachable off `templateId: "progress"`. */
+  const API_WINDOW = 400;
+  for (const call of text.matchAll(/api(?:Get|Post)\s*\(|api\/queue/g)) {
+    const win = text.slice(call.index, call.index + API_WINDOW);
+    const seg = (win.match(SEG_LIT) || [])[1];
+    if (!seg) continue;
+    for (const m of win.matchAll(/\+\s*["'`]([a-z0-9][a-z0-9-]{2,})["'`]|["'`]([a-z0-9][a-z0-9-]{2,})["'`]\s*:\s*["'`]?/g)) markBare(m[1] || m[2], seg);
+  }
+  /* ROUTE LOOKUP TABLES: `var CASH_ACTION_ROUTE = { pay: "invoice-payment" }` used as
+   * `apiPost("/ward/" + CASH_ACTION_ROUTE[kind])`. The segment comes from that usage. */
+  for (const decl of text.matchAll(/(?:var|const|let)\s+([A-Za-z_$][\w$]*)\s*=\s*\{([^}]*)\}/g)) {
+    const id = decl[1].replace(/\$/g, "\\$");
+    const use = text.match(new RegExp("[\"'`]/(?:api/queue/)?([a-z0-9-]+)/[\"'`]\\s*\\+\\s*" + id + "\\b"));
+    const indexed = new RegExp("\\b" + id + "\\s*\\[[^\\]]+\\]").test(text);
+    if (!use && !indexed) continue;
+    for (const m of decl[2].matchAll(/:\s*["'`]([a-z0-9][a-z0-9-]{2,})["'`]/g)) markBare(m[1], use ? use[1] : null);
+  }
 }
 const orphans = [...routes].filter((r) => !called.has(r) && !byDesign.has(r)).sort();
 
 /* ---- TESTS ---------------------------------------------------------------------------------- */
 const testBlob = readAll(join(ROOT, "test"), ".mjs");
-const untested = [...routes].filter((r) => !testBlob.includes('"' + r + '"') && !testBlob.includes("/" + r)).sort();
+/* A test names a route by its path. For a sub that exists in several segments only the full
+ * /seg/sub path counts; a unique sub may still be named bare. */
+const untested = [...new Set(routePairs.map((p) => label(p.seg, p.sub)))].filter((lbl) => {
+  const [seg, sub] = lbl.includes("/") ? lbl.split("/") : [null, lbl];
+  return seg ? !testBlob.includes("/" + seg + "/" + sub) : (!testBlob.includes('"' + sub + '"') && !testBlob.includes("/" + sub));
+}).sort();
 
 /* ---- baseline update ------------------------------------------------------------------------ */
 if (process.argv.includes("--update-baseline")) {
