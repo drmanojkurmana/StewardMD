@@ -421,3 +421,12 @@ Admin Center, Staff tab: tick roles that must use two-step sign-in (org.security
 **Numbers:** 6053 passing, 0 failing. 14 routes waiting for a screen.
 **P0.9 status:** complete for staff accounts (MFA + required-by-role, lockouts, credential policy, session revocation, sign-in audit with device, sign out everywhere, rate limiting, break-glass, headers). Doctor StewardMD accounts use their identity provider.
 **Next:** P0.8 documents behind an S3-compatible interface.
+
+### 2026-09-13 - P0.8 patient documents
+
+DocumentReference metadata in the append-only record (patient, visit, type, title, size, SHA-256, uploader, retention date, withdrawal, purge). Bytes AES-GCM encrypted before leaving the server, stored under unguessable keys via functions/_wardsynq/object-store.js: plain-fetch S3 SigV4 adapter (matches AWS published example), works with R2/S3/MinIO, no Cloudflare binding. Versions never overwrite; withdraw keeps file with reason; purge admin-only, refused before retention (hospital documentRetentionYears, default 3), record kept. Files open only via a 5-minute signed link bound to person/document/version, integrity-checked and audited per use (document-file byDesign). Ward chart Documents screen: loading/failed/storage-off/none distinct. Live (ward.js site49).
+
+**Blocked for production uploads (owner action):** no storage is configured, so the live screen says so and refuses uploads. To turn on: create a private bucket (R2 or S3) and set DOC_S3_ENDPOINT, DOC_S3_BUCKET, DOC_S3_ACCESS_KEY_ID, DOC_S3_SECRET_ACCESS_KEY (DOC_S3_REGION for AWS; optional dedicated DOC_ENC_KEY, 32 bytes base64url) as secrets on the stewardmd Pages project.
+
+**Numbers:** 6065 passing, 0 failing. 14 routes waiting for a screen.
+**Next:** P0.10 atomicity investigation and invariant tests.
