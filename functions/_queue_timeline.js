@@ -27,6 +27,9 @@ export const TL_KINDS = ["note", "assessment", "medication", "vitals", "status",
 export function tlKind(k) { k = String(k || "").toLowerCase(); return TL_KINDS.indexOf(k) > -1 ? k : "note"; }
 // A doctor may extend the link, clamped to [1, 30] days from now.
 export function clampExtendMs(nowMs, days) { const n = (days == null || isNaN(Number(days))) ? LINK_DAYS_DEFAULT : Number(days); const d = Math.max(1, Math.min(LINK_DAYS_MAX, Math.round(n))); return nowMs + d * DAY; }
+// The patient's token was minted at checkout to expire at closedAt + LINK_DAYS_MAX, so no extension can
+// outlive that. Promising a later date would show the doctor an expiry the link never reaches.
+export function extendLinkMs(nowMs, days, closedAt) { return Math.min(clampExtendMs(nowMs, days), (Number(closedAt) || nowMs) + LINK_DAYS_MAX * DAY); }
 // The patient link is live only after checkout and before linkExpiresAt.
 export function timelineLive(doc, nowMs) { return !!(doc && doc.linkExpiresAt && nowMs <= doc.linkExpiresAt); }
 
@@ -90,7 +93,9 @@ export async function finalizeCheckout(env, session, ticket, actor) {
 // ---- doctor extends the link (up to 30 days from now) -------------------------------------------
 export async function extendTimeline(env, ticketId, days) {
   const d = await fsGet(env, "q_timeline/" + ticketId); if (!d) return { error: "not_found" };
-  const linkExpiresAt = clampExtendMs(now(), days);
+  // Before checkout there is no link, and writing expiresAt would cut the open visit's clean-up window.
+  if (!d.fields.closed) return { error: "not_ready" };
+  const linkExpiresAt = extendLinkMs(now(), days, d.fields.closedAt);
   await fsCommit(env, [wUpdate(env, "q_timeline/" + ticketId, { linkExpiresAt: linkExpiresAt, expiresAt: linkExpiresAt, updatedAt: now() })]);
   return { ok: true, linkExpiresAt: linkExpiresAt };
 }

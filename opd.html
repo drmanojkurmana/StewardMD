@@ -561,8 +561,26 @@
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
       refresh();
-      if(r.timelineUrl){ open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary (valid 7 days):")+'</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'); sheet.querySelector("#cx").onclick=close; }
+      if(r.timelineUrl){
+        open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary:")+'</p><div class="link">'+esc(r.timelineUrl)+'</div>'+
+          '<p id="lx" style="color:var(--mut)">'+linkUntil(r.linkExpiresAt)+'</p>'+
+          '<div class="row2">'+(can("emr.treat")?'<button class="cancel" id="ext" style="margin:0">Keep open 30 days</button>':'')+'<button class="btn" id="cx" style="margin:0">Done</button></div>');
+        sheet.querySelector("#cx").onclick=close;
+        var ext=sheet.querySelector("#ext");
+        if(ext) ext.onclick=function(){ extendLink(sid,tid,ext); };
+      }
     });
+  }
+  function linkUntil(ms){ return ms?"The patient can open it until "+new Date(ms).toLocaleDateString([],{day:"numeric",month:"short",year:"numeric"})+".":"The link expiry date is not known."; }
+  // The date shown only changes when the server says the extension was saved.
+  function extendLink(sid,tid,btn){
+    btn.disabled=true; btn.textContent="Saving…";
+    api("timeline/extend",{method:"POST",body:{sessionId:sid,ticketId:tid,days:30}}).then(function(r){
+      var lx=sheet.querySelector("#lx");
+      if(!r||!r.ok){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast(r&&r.error==="not_ready"?"This visit is not closed yet.":r&&r.error?friendly(r.error):"Could not extend the link. The old date still applies."); return; }
+      if(lx) lx.textContent=linkUntil(r.linkExpiresAt);
+      btn.textContent="Extended";
+    }).catch(function(){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast("Could not extend the link. The old date still applies."); });
   }
   // ---- audit drawer ----
   function openAudit(sid){

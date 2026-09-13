@@ -3255,7 +3255,11 @@ export async function onRequest(context) {
         await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
-        return json(Object.assign({ ok: true }, await QT.extendTimeline(env, t.id, body.days)), 200, request);
+        const ext = await QT.extendTimeline(env, t.id, body.days);
+        // Was ok:true with an error inside it, so a missing timeline looked like a success.
+        if (ext.error) return json({ ok: false, error: ext.error }, ext.error === "not_found" ? 404 : 409, request);
+        await Q.qAudit(env, { hospitalId: s.hospitalId, ticketId: t.id, actor: actor.id, action: "link_extend", meta: new Date(ext.linkExpiresAt).toISOString() });
+        return json(ext, 200, request);
       }
       if (seg === "timeline") {
         const isVitals = QT.tlKind(body.kind) === "vitals";

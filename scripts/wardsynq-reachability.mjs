@@ -133,6 +133,12 @@ for (const m of blob.matchAll(/["'`]\/(?:api\/queue\/)?([a-z0-9-]+)(?:\/([a-z0-9
  * /ward/discharge route reachable, so a route nobody could reach dropped off the backlog on its
  * own. A checker that reports work as done when it is not is worse than no checker, so the window
  * is the fix: a string has to sit beside the call that might use it. */
+/* opd.html's helper takes the path WITHOUT a leading slash - `api("timeline/extend", ...)` - which the
+ * literal pass above cannot see. Only the first argument counts, so nothing else on the line leaks in. */
+for (const m of blob.matchAll(/\bapi\(\s*["'`]([a-z0-9-]+)(?:\/([a-z0-9-]+))?/g)) {
+  called.add(m[1]);
+  if (m[2]) called.add(m[2]);
+}
 const API_WINDOW = 400;
 for (const call of blob.matchAll(/api(?:Get|Post)\s*\(|api\/queue/g)) {
   const window = blob.slice(call.index, call.index + API_WINDOW);
