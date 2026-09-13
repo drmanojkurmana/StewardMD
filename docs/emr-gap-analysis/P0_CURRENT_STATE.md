@@ -396,3 +396,12 @@ Password sign-in now locks after 5 wrong tries (had no limit; PIN already did), 
 
 **Numbers:** 6038 passing, 0 failing. 15 routes waiting for a screen.
 **Next (P0.9):** two-step sign-in (authenticator code) for staff password sign-in; staff "sessions and devices" visibility; security headers check.
+
+### 2026-09-13 - P0.9 two-step sign-in for staff
+
+Staff switch on authenticator-app codes for their own account (new Sign-in security page on wardsynq.com). Correct PIN/password then returns a 5-minute challenge (signed ver 2, never usable as a session); code checked server-side (RFC 6238 vectors verified), secret encrypted at rest, used step refused, 8 hashed one-time backup codes spent under a precondition, 5 wrong codes lock 15 min, all outcomes audited. Turning on ends older sessions; turning off needs a code; admin Reset access clears it (lost phone). All three staff sign-in screens (wardsynq.com, opd, queue app) ask for the code. Doctor StewardMD accounts out of scope (their identity provider).
+
+**Deploy note:** Cloudflare accepted both publishes (build and deploy stages "success") but every deployment since ~08:25 UTC, on both projects, answers "Deployment Not Found"; live sites still serve the previous version. Not code-related (a static-only upload is affected too). Watching.
+
+**Numbers:** 6048 passing, 0 failing. 15 routes waiting for a screen.
+**Next (P0.9):** confirm live once Cloudflare serves new deploys; security headers; session/device visibility.
