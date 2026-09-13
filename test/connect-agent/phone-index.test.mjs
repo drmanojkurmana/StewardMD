@@ -101,9 +101,12 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   assert.equal(rad.rowsSelector, '#divPrint > div.rreport');
   // Skipped gaps produced no view.
   assert.ok(!views.some((v) => v.resourceHint === 'discharge' || v.resourceHint === 'medications'));
-  // The labs click's endpoint rides on the labs view, query VALUE dropped.
+  // The labs click fired a request, but this page keeps no replay buffer, so nothing could be re-issued
+  // and compared with the screen: an unproven endpoint is never saved (prove.mjs).
   const labs = views.find((v) => v.resourceHint === 'labs');
-  assert.deepEqual(labs.endpoints, [{ method: 'GET', path: '/Doctor/GetLabs?pid' }]);
+  assert.equal(labs.endpoints, undefined);
+  assert.equal(labs.proof.status, 'no-requests');
+  assert.ok(result.proofs.some((p) => p.resource === 'labs' && p.status === 'no-requests'));
   assert.ok(!JSON.stringify(views).includes('MR900001'));
   assert.ok(!JSON.stringify(views).includes('SECRET'));
 

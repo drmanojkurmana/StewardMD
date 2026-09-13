@@ -1044,7 +1044,8 @@
       classify: function (p) { return ask("classify", p); },
       mapColumns: function (p) { return ask("map-columns", p); },
       next: function (p) { return ask("next", p); },
-      verify: function (p) { return ask("verify", p); }
+      verify: function (p) { return ask("verify", p); },
+      pickEndpoint: function (p) { return ask("pick-endpoint", p); }
     };
   }
   /* Auto mode keeps the hospital browser to the top half while the agent drives, so the doctor sees

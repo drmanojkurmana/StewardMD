@@ -30,13 +30,13 @@ const RX = {
 
 function col(row, re, not) {
   for (const k of Object.keys(row || {})) {
-    if (k === '_href' || k === '_args') continue;
+    if (k.charAt(0) === '_') continue;
     if (re.test(k) && !(not && not.test(k))) { const v = String(row[k] == null ? '' : row[k]).trim(); if (v) return v; }
   }
   return '';
 }
 function firstText(row) {
-  for (const k of Object.keys(row || {})) { if (k === '_href' || k === '_args') continue; const v = String(row[k] == null ? '' : row[k]).trim(); if (v && !/^\d+$/.test(v)) return v; }
+  for (const k of Object.keys(row || {})) { if (k.charAt(0) === '_') continue; const v = String(row[k] == null ? '' : row[k]).trim(); if (v && !/^\d+$/.test(v)) return v; }
   return '';
 }
 function rowsOf(sections, resource) {
@@ -72,7 +72,17 @@ export function labOrders(sections, patient) {
     serviceName: col(r, RX.name) || firstText(r), orderDate: col(r, RX.date), department: col(r, RX.dept),
     status: col(r, RX.status), renderId: 'a' + i, episodeId, orderId: 'a' + i, valueType: '',
   }));
-  return { orders, detailOf: (renderId) => { const r = rows[Number(String(renderId).slice(1))]; return r ? detailFor({ dept: col(r, RX.dept), date: col(r, RX.date), rows: [r] }) : null; } };
+  /* The proven chain (runtime readPatientDetails): each order's own result rows, read through the
+   * detail call with that order's render id, tagged `_of` with the order's title. */
+  const detailRows = rowsOf(sections, 'labs-detail');
+  return { orders, detailOf: (renderId) => {
+    const i = Number(String(renderId).slice(1));
+    const r = rows[i];
+    if (!r) return null;
+    const title = firstText(r);
+    const own = detailRows.filter((d) => d._of === title);
+    return detailFor({ dept: col(r, RX.dept), date: col(r, RX.date), rows: own.length ? own : [r] });
+  } };
 }
 function detailFor(g) {
   if (!g) return null;
@@ -98,6 +108,8 @@ export function radiologyOrders(sections, patient) {
     reportOf: (resultid) => {
       const r = rows[Number(String(resultid).slice(1))];
       if (!r) return { error: 'parse' };
+      const own = rowsOf(sections, 'radiology-detail').filter((d) => d._of === firstText(r));
+      if (own.length) return { testName: col(r, RX.name) || firstText(r), report: own.map((d) => col(d, RX.text) || Object.keys(d).filter((k) => k.charAt(0) !== '_').map((k) => k + ': ' + d[k]).join('\n')).join('\n'), orderDate: col(r, RX.date), reported: col(own[0], RX.date) || col(r, RX.date), doctor: col(own[0], RX.by) || col(r, RX.by), enteredBy: '' };
       return { testName: col(r, RX.name) || firstText(r), report: col(r, RX.text, RX.name) || Object.keys(r).filter((k) => k !== '_href' && k !== '_args').map((k) => k + ': ' + r[k]).join('\n'), orderDate: col(r, RX.date), reported: col(r, RX.date), doctor: col(r, RX.by), enteredBy: '' };
     },
   };

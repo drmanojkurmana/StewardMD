@@ -145,3 +145,25 @@ test("the brain never runs on a default model: no CONNECT_AGENT_MODEL is a named
   assert.deepEqual(brainModel({ CONNECT_AGENT_MODEL: "gemini-3.8-pro", CONNECT_AGENT_MODEL_PROVIDER: "gemini" }), { provider: "gemini", model: "gemini-3.8-pro" });
   await assert.rejects(askBrain({ env: {}, payload: GHIS_WORKLIST, generateImpl: async () => ({ text: "{}" }) }), /CONNECT_AGENT_MODEL is not set/);
 });
+
+test("pick-endpoint: the gate takes request STRUCTURE only and the answer is clamped to real indexes and roles", async () => {
+  const payload = {
+    op: "pick-endpoint", origin: ORIGIN, resource: "medications", action: "tap Treatment chart", headers: ["Drug", "Route", "Frequency"],
+    candidates: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", queryKeys: [], bodyKeys: ["__RequestVerificationToken", "recordNo"], kind: "html", keys: ["Chief complaint"], rows: 2, page: false, xhr: true },
+      { method: "GET", path: "/Doctor/Home/GetMedicines/", queryKeys: ["id"], bodyKeys: [], kind: "html", keys: ["Drug", "Route", "Frequency"], rows: 3, page: false, xhr: true },
+    ],
+  };
+  const g = phiGate(payload);
+  assert.equal(g.ok, true, g.reason);
+  assert.equal(g.clean.candidates[1].path, "/Doctor/Home/GetMedicines/");
+  assert.equal(phiGate(Object.assign({}, payload, { candidates: [Object.assign({}, payload.candidates[1], { path: "/Doctor/Home/GetMedicines/?id=MR25168764" })] })).ok, false);
+  assert.equal(phiGate(Object.assign({}, payload, { candidates: [Object.assign({}, payload.candidates[1], { body: "recordNo=x" })] })).ok, false, "a request body never reaches the model");
+  const a = shapeAnswer(g.clean, { ranked: [{ index: 1, role: "data" }, { index: 1, role: "data" }, { index: 0, role: "prerequisite" }, { index: 7, role: "data" }, { index: 0, role: "write" }] });
+  assert.deepEqual(a.ranked.map((r) => [r.index, r.role]), [[1, "data"], [0, "prerequisite"]]);
+  let prompt = "";
+  const out = await askBrain({ env: { CONNECT_AGENT_MODEL: "gemini-3.8-flash", CONNECT_AGENT_MODEL_PROVIDER: "vertex" }, generateImpl: async (req) => { prompt = req.prompt; assert.equal(req.model.model, "gemini-3.8-flash"); return { text: '{"ranked":[{"index":1,"role":"data","reason":"columns match"}]}', model: "gemini-3.8-flash" }; }, payload });
+  assert.equal(out.model, "gemini-3.8-flash");
+  assert.deepEqual(out.answer.ranked[0], { index: 1, role: "data", reason: "columns match" });
+  assert.match(prompt, /compare each answer with the values on screen/);
+});

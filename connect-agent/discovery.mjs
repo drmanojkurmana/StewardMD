@@ -79,6 +79,63 @@ function SMD_CONNECT_OBSERVER(config) {
     if (state.events.length > L.maxEvents) state.events.splice(0, state.events.length - L.maxEvents);
   };
 
+  /* THE REQUEST ITSELF, FOR PROOF (connect-agent/phone/prove.mjs). The last requests' exact url and
+   * body, plus the STRUCTURE of what came back, held in the page realm only and never drained: the
+   * phone re-issues one from inside this page and compares its answer with the cells on screen. The
+   * page already held these values; nothing here leaves it. A body carrying a credential-shaped field
+   * (a sign-in) is never kept. */
+  var replay = W.__SMD_REPLAY__ = W.__SMD_REPLAY__ || { seq: 0, list: [] };
+  var CRED_RE = /passw|pwd|otp|\bpin\b|secret|captcha/i;
+  var bodyText = function (body) {
+    if (body === null || body === undefined) return null;
+    if (typeof body === 'string') return body;
+    try { if (typeof URLSearchParams !== 'undefined' && body instanceof URLSearchParams) return body.toString(); } catch (e) { /* not params */ }
+    return undefined; // FormData, Blob: not replayable
+  };
+  var stripTags = function (s) { return String(s).replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim(); };
+  var respStructure = function (ct, text) {
+    var s = { kind: 'empty', keys: [], rows: 0, bytes: text ? text.length : 0 };
+    var t = String(text || '').replace(/^\s+/, '');
+    if (!t) return s;
+    if (/json/i.test(ct) || t.charAt(0) === '{' || t.charAt(0) === '[') {
+      try {
+        var j = JSON.parse(t);
+        var list = Array.isArray(j) ? j : null;
+        if (!list && j && typeof j === 'object') {
+          for (var k in j) { if (Array.isArray(j[k])) { list = j[k]; break; } }
+          if (!list) for (var k2 in j) { var v2 = j[k2]; if (v2 && typeof v2 === 'object') for (var k3 in v2) { if (Array.isArray(v2[k3])) { list = v2[k3]; break; } } if (list) break; }
+        }
+        var obj = list ? list[0] : j;
+        s.kind = 'json'; s.rows = list ? list.length : 1;
+        if (obj && typeof obj === 'object' && !Array.isArray(obj)) s.keys = Object.keys(obj).slice(0, 40);
+        return s;
+      } catch (e) { /* not JSON after all */ }
+    }
+    if (/<[a-z][\s\S]*>/i.test(t)) {
+      s.kind = 'html';
+      var ths = t.match(/<th\b[^>]*>[\s\S]*?<\/th>/gi) || [];
+      for (var h = 0; h < ths.length && s.keys.length < 40; h++) { var l = stripTags(ths[h]); if (l && l.length <= 60) s.keys.push(l); }
+      s.rows = (t.match(/<tr\b/gi) || []).length;
+      s.tables = (t.match(/<table\b/gi) || []).length;
+      s.page = /<html\b|<body\b/i.test(t);
+      return s;
+    }
+    s.kind = 'text';
+    return s;
+  };
+  var keep = function (method, url, body, reqCt, xhr, status, respCt, text) {
+    try {
+      if (!url || !/^https?:$/.test(url.protocol)) return;
+      if (/checksession|keepalive|heartbeat|signalr|analytics|\.(js|css|png|jpe?g|gif|svg|woff2?|ico|map)$/i.test(url.pathname)) return;
+      var b = bodyText(body);
+      if (b === undefined) return;
+      if (b && CRED_RE.test(b.split('&').map(function (p) { return p.split('=')[0]; }).join(' ') + ' ' + (b.charAt(0) === '{' ? b.slice(0, 2000) : ''))) return;
+      replay.seq += 1;
+      replay.list.push({ seq: replay.seq, method: String(method || 'GET').toUpperCase(), url: url.href, body: b, reqCt: String(reqCt || ''), xhr: !!xhr, status: Number(status || 0), shape: respStructure(respCt, text) });
+      if (replay.list.length > 40) replay.list.splice(0, replay.list.length - 40);
+    } catch (e) { /* proof is best effort; the page must never notice */ }
+  };
+
   var record = function (method, url, status, contentType, responseShape, bodyKeys, requestKind, xhr) {
     if (!url) return;
     // forEach, NOT [...searchParams.keys()]: inside Camofox/Firefox's evaluate() realm the iterator
@@ -256,6 +313,7 @@ function SMD_CONNECT_OBSERVER(config) {
       var responseShape = null;
       var ct = '';
       try { ct = response.headers.get('content-type') || ''; } catch (e) { ct = ''; }
+      try { response.clone().text().then(function (t) { keep(method, url, reqBody, reqHeaders['content-type'], isXhrLike, response.status, ct, t); }, function () {}); } catch (e) { /* body already used */ }
       if (/json/i.test(ct)) {
         return response.clone().json().then(function (respBody) {
           record(method, url, response.status, ct, safeShape(respBody), bi.bodyKeys, reqKind, isXhrLike);
@@ -296,6 +354,9 @@ function SMD_CONNECT_OBSERVER(config) {
       var ct = '';
       try { ct = self.getResponseHeader('content-type') || ''; } catch (e) { ct = ''; }
       var responseShape = null;
+      var rt = null;
+      try { rt = (!self.responseType || self.responseType === 'text') ? self.responseText : null; } catch (e) { rt = null; }
+      keep(self.__smdMethod, self.__smdUrl, data, headers['content-type'], isXhrLike, self.status, ct, rt);
       if (/json/i.test(ct)) { try { responseShape = safeShape(JSON.parse(self.responseText)); } catch (e) { responseShape = null; } }
       record(self.__smdMethod, self.__smdUrl, self.status, ct, responseShape, bi.bodyKeys, reqKind, isXhrLike);
     }, { once: true });

@@ -180,3 +180,18 @@ session does not have.
   (`endpoints`, e.g. `/Doctor/Home/GetMedicines/?id`), inside the doctor browser session; a view sharing
   the worklist page is not re-read there. Captured page URLs carry `{id}` (deep-crawl `redactPageUrl`);
   the server redacts stored/returned paths too (`redactPathValues`).
+- **Proven endpoints only** (owner decision 2026-09-13; `connect-agent/phone/prove.mjs`): the page observer
+  keeps a page-realm, never-drained replay buffer (`window.__SMD_REPLAY__`: exact url, body, response
+  STRUCTURE; sign-in bodies skipped). Per captured screen: candidates = requests since the action's mark
+  (`__smdProveMark`, set by CRAWL_ARM_OBSERVER; a new document means all of it) -> brain op
+  `pick-endpoint` ranks them from structure (data | prerequisite | lookup | ping | shell) -> each is
+  re-issued from inside the page in that order -> the first whose answer carries >= 50% (and >= 3) of the
+  on-screen cell values is the data call. Patient-bound POSTs fired before it ride as `prerequisite`.
+  Every field gets a source (`params`: worklist column, `{from, fields, join}` joined id, parent list
+  column for `-detail` views, constant, token, page, today). Unproven views keep NO endpoints
+  (`view.proof.status`). Runtime `executeProven` sends exactly that; patients carry their list row as
+  non-enumerable `_row`; `readPatientDetails` follows `labs -> labs-detail` style chains (`_of` meta).
+- **Gold audit** (`connect-agent/phone/gold-audit.mjs`, verification only, never imported by discovery):
+  `GHIS.goldAudit()` in the app answers the same proxy paths from the hand-built `/api/ghis` and from the
+  adapter (via ghis-shim) for the same patients; report = counts per endpoint and field. Browser test:
+  `node test/run-connect-prove-browser.mjs`.
