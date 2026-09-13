@@ -1452,10 +1452,19 @@
     var running = bundles.filter(function (b) { return b.state === "running" || b.state === "breached"; });
     var rows = running.map(function (b) {
       var els = b.elements.map(function (e) {
-        return "<li" + (e.done ? "" : e.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(e.label) + "</b>" +
-          (e.done ? '<span class="w-st administered">done ' + when(e.doneAt) + "</span>" : e.overdue ? '<span class="w-st overdue">overdue</span>' : '<span class="w-st">' + esc(Math.round(e.minutesRemaining || 0)) + " min left</span>") +
+        /* A waived element is a DECISION, not an omission: it is never shown as overdue or counting down,
+         * which would make a deliberate "not appropriate" read as forgotten care. */
+        return "<li" + (e.done || e.notApplicable ? "" : e.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(e.label) + "</b>" +
+          (e.done ? '<span class="w-st administered">done ' + when(e.doneAt) + "</span>"
+            : e.notApplicable ? '<span class="w-st">not appropriate' + (e.notApplicableReason || e.reason ? ": " + esc(e.notApplicableReason || e.reason) : "") + "</span>"
+            : e.overdue ? '<span class="w-st overdue">overdue</span>' : '<span class="w-st">' + esc(Math.round(e.minutesRemaining || 0)) + " min left</span>") +
           "</div>" +
-          (!e.done && !e.notApplicable ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="resusmark:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("task_alt") + "Mark done</button></div>" : "") +
+          (!e.done && !e.notApplicable ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="resusmark:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("task_alt") + "Mark done</button>" +
+            /* NOT DONE, ON PURPOSE. A bundle element that is deliberately not given - fluids withheld in
+             * heart failure, antibiotics already running - used to have no way to say so, so it sat as
+             * undone for ever and the bundle read as a failure of care rather than a decision. A waiver
+             * needs a reason, and it is recorded as a waiver, never as done. */
+            '<button class="w-btn tiny ghost" data-w-act="resuswaive:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("block") + "Not appropriate</button></div>" : "") +
           "</li>";
       }).join("");
       return '<div class="w-sub"><h4>' + ms("emergency") + esc(b.label) + '<span class="w-st ' + (b.state === "breached" ? "overdue" : "") + '">' + esc(b.state) + "</span></h4>" +
@@ -5053,6 +5062,15 @@
       .then(function (r) { if (settle(r, "Bundle started.")) loadResus(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not start the bundle."; paint(); });
   }
+  function resusWaive(bundleId, key) {
+    var reason = "";
+    try { reason = G.prompt("Why is this not appropriate for this patient?") || ""; } catch (e) { return; }
+    if (!reason.trim()) { st.err = "A waiver needs a clinical reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resus-waive", { orgId: st.orgId, bundleId: bundleId, key: key, reason: reason.trim() })
+      .then(function (r) { if (settle(r, "Recorded as not appropriate.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
   function resusMark(bundleId, key) {
     var event = "";
     try { event = G.prompt("What actually happened (e.g. resulted, collected, administered)?") || ""; } catch (e) { return; }
@@ -8103,6 +8121,7 @@
     if (cmd === "triage") { recordTriage(); return; }
     if (cmd === "resusload") { loadResus(); return; }
     if (cmd === "resusstart") { resusStart(); return; }
+    if (cmd === "resuswaive") { var rw = arg.indexOf("|"); if (rw > 0) resusWaive(arg.slice(0, rw), arg.slice(rw + 1)); return; }
     if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
     if (cmd === "resusvoid") { resusVoid(arg); return; }
     if (cmd === "deviceload") { loadDevices(); return; }
