@@ -360,3 +360,10 @@ Outpatient checked-out box shows the real expiry and lets a doctor keep the pati
 
 **Numbers:** 6022 passing, 0 failing. 19 routes waiting for a screen.
 **Next:** re-check the 19 against other screens; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
+
+### 2026-09-13 - staff sign-in typo bug (backlog 19 -> 16)
+
+Security fix: set PIN / password / disable / restore / reset / remove all upserted, so a mistyped staff ID created a member row and a PIN on it was a working read-only login nobody chose. All now refuse an unknown member ("Add them first"), returned as a failure, nothing audited as if it happened. Admin staff table routes through an action table, so the checker sees its real Disable/Restore/Reset buttons. Live (admin.js v8).
+
+**Numbers:** 6025 passing, 0 failing. 16 routes waiting for a screen.
+**Next:** remaining 16 (backfill clinic hl7 hospital identity link-mrn maik-interactions metrics operational-health order readers recommend roi round twin-predict twin-reconstruct).
