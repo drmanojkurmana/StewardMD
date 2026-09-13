@@ -126,7 +126,8 @@ export async function getPatient(env, orgId, mrn) {
     ageYears: f.ageYears, ageMonths: f.ageMonths,
     abhaNumber: f.abhaNumber || "", abhaAddress: f.abhaAddress || "", abhaConsent: !!f.abhaConsent,
     district: f.district || "", state: f.state || "", pincode: f.pincode || "",
-    referredBy: f.referredBy || "", createdAt: f.createdAt
+    referredBy: f.referredBy || "", createdAt: f.createdAt,
+    supersededBy: f.supersededBy || "", previousMrn: f.previousMrn || ""
   };
 }
 
@@ -138,12 +139,21 @@ export async function linkHospitalMrn(env, orgId, provisionalMrn, hospitalMrn, m
   if (!String(hospitalMrn || "").trim()) return { ok: false, error: "mrn_required" };
   const oldId = sanitize(String(orgId) + "__" + String(provisionalMrn));
   const newId = sanitize(String(orgId) + "__" + String(hospitalMrn));
+  if (oldId === newId) return { ok: false, error: "same_mrn" };
   const d = await fsGet(env, "q_patients/" + oldId);
+  if (d.fields.supersededBy) return { ok: false, error: "already_linked", mrn: String(d.fields.supersededBy) };
   const fields = Object.assign({}, d.fields, {
     mrn: String(hospitalMrn), mrSource: mrSource === "connect" ? "connect" : "ghis",
     pending: false, previousMrn: String(provisionalMrn), updatedAt: now()
   });
-  await fsCommit(env, [wUpdate(env, "q_patients/" + newId, fields), wUpdate(env, "q_patients/" + oldId, { supersededBy: String(hospitalMrn), updatedAt: now() })]);
+  /* wCreate, not wUpdate: an upsert onto a hospital MR that already belongs to somebody overwrote that
+   * person's record with this one's name and mobile. The whole commit fails instead. */
+  try {
+    await fsCommit(env, [wCreate(env, "q_patients/" + newId, fields), wUpdate(env, "q_patients/" + oldId, { supersededBy: String(hospitalMrn), updatedAt: now() }, { exists: true })]);
+  } catch (e) {
+    if (await getPatient(env, orgId, hospitalMrn)) return { ok: false, error: "mrn_in_use" };
+    throw e;
+  }
   await qAudit(env, { hospitalId: orgId, ticketId: newId, actor: actorId || "", action: "patient:mrn_link", meta: provisionalMrn + "->" + hospitalMrn });
   return { ok: true, mrn: String(hospitalMrn) };
 }

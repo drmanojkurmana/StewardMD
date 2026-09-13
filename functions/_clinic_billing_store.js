@@ -28,10 +28,20 @@ function uid(p, n) { return p + crypto.randomUUID().replace(/-/g, "").slice(0, n
 // ---- patient registry (portable MRN across stations) ----
 async function nextSeq(env, orgId) {
   const path = "q_patient_seq/" + orgId;
-  const d = await fsGet(env, path).catch(() => null);
-  const n = (((d && d.fields && d.fields.n) || 0) | 0) + 1;
-  await fsCommit(env, [d ? wUpdate(env, path, { n }) : wCreate(env, path, { n })]);
-  return n;
+  /* Compare-and-set, as _opd_patient_store.js's counter: a plain update let two desks read the same n
+   * and hand out the same billing ID. A failed read throws rather than restarting the count at 1. */
+  for (let i = 0; i < 20; i++) {
+    const d = await fsGet(env, path);
+    const n = (((d && d.fields && d.fields.n) || 0) | 0) + 1;
+    try {
+      await fsCommit(env, [d ? wUpdate(env, path, { n }, { updateTime: d.updateTime }) : wCreate(env, path, { n })]);
+      return n;
+    } catch (e) {
+      if (e && e.code === "precondition") { await new Promise((r) => setTimeout(r, 3 + Math.floor(Math.random() * 10))); continue; }
+      throw e;
+    }
+  }
+  throw Object.assign(new Error("billing_id_contention"), { status: 503 });
 }
 export async function registerPatient(env, orgId, orgCode, p) {
   const seq = await nextSeq(env, orgId);
@@ -50,22 +60,29 @@ export async function getPatient(env, orgId, id) {
 
 // ---- orders (first-class; the station work item) ----
 export async function createOrder(env, orgId, o, actor) {
-  const v = validateOrder(o); if (!v.ok) return v;
+  /* The item and its price come from this clinic's own price list, never from the request: a price
+   * in the body let anyone who could raise an order bill anything at zero. */
+  const tariffId = String((o && o.tariffId) || "").trim();
+  if (!tariffId) return { ok: false, error: "tariff_item_required" };
+  const t = await fsGet(env, "q_tariff/" + tariffId);
+  if (!t || !t.fields || t.fields.orgId !== orgId || t.fields.active === false) return { ok: false, error: "tariff_item_not_found" };
+  const v = validateOrder({ patientId: o.patientId, qty: o.qty, name: t.fields.name, code: t.fields.code, kind: t.fields.kind, unitPrice: t.fields.price, ticketId: o.ticketId, sessionId: o.sessionId });
+  if (!v.ok) return v;
   const id = uid("ord_");
-  const fields = { orgId, patientId: v.order.patientId, encounterId: o.encounterId || "", kind: v.order.kind, code: v.order.code, name: v.order.name, qty: v.order.qty, unitPrice: v.order.unitPrice, status: "ordered", orderedBy: actor || "", orderedAt: Date.now(), invoiceId: "", updatedAt: Date.now() };
+  const fields = { orgId, patientId: v.order.patientId, encounterId: o.encounterId || "", kind: v.order.kind, code: v.order.code, name: v.order.name, qty: v.order.qty, unitPrice: v.order.unitPrice, tariffId, ticketId: v.order.ticketId, sessionId: v.order.sessionId, status: "ordered", orderedBy: actor || "", orderedAt: Date.now(), invoiceId: "", updatedAt: Date.now() };
   await fsCommit(env, [wCreate(env, "q_orders/" + id, fields)]);
   await qAudit(env, { hospitalId: orgId, ticketId: v.order.patientId, actor: actor || "doctor", action: "order_create", meta: v.order.kind });
   return { ok: true, id };
 }
 export async function ordersForPatient(env, orgId, patientId, status) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "patientId", value: patientId }, limit: 200 }).catch(() => []);
+  const rows = await fsQuery(env, "q_orders", { where: { field: "patientId", value: patientId }, limit: 200 });
   let list = (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.orgId === orgId);
   if (status) list = list.filter((o) => o.status === status);
   return list;
 }
 // billing station inbox: every 'ordered' order in the org (fsQuery is single-field, so filter status in JS).
 export async function billingQueue(env, orgId) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 }).catch(() => []);
+  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 });
   return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.status === "ordered");
 }
 
@@ -73,7 +90,7 @@ export async function billingQueue(env, orgId) {
 // What the pharmacy still owes patients: medication orders that are PAID but not yet handed over.
 // Investigations and services never appear here - they have no dispensing step.
 export async function pharmacyQueue(env, orgId) {
-  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 }).catch(() => []);
+  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 });
   return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter(isDispensable);
 }
 // Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
@@ -91,7 +108,7 @@ export async function dispenseOrder(env, orgId, orderId, actor) {
 
 // ---- tariff (price catalog, integer paise) ----
 export async function listTariff(env, orgId) {
-  const rows = await fsQuery(env, "q_tariff", { where: { field: "orgId", value: orgId }, limit: 500 }).catch(() => []);
+  const rows = await fsQuery(env, "q_tariff", { where: { field: "orgId", value: orgId }, limit: 500 });
   return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((t) => t.active !== false);
 }
 export async function upsertTariff(env, orgId, item, actor) {
@@ -164,7 +181,7 @@ export async function getInvoice(env, orgId, invoiceId) {
 // so status/date are filtered in JS. IST day boundary (UTC+5:30) matches the clinic's calendar day.
 export async function revenueToday(env, orgId) {
   if (!billingEnabled(env) || !orgId) return null;
-  const rows = await fsQuery(env, "q_invoices", { where: { field: "orgId", value: orgId }, limit: 1000 }).catch(() => []);
+  const rows = await fsQuery(env, "q_invoices", { where: { field: "orgId", value: orgId }, limit: 1000 });
   const now = Date.now(), dayStart = now - ((now + 19800000) % 86400000);
   let paise = 0, count = 0;
   (rows || []).forEach((r) => { const f = r.fields || {}; if (f.status === "paid" && (f.paidAt || 0) >= dayStart) { paise += (f.total || 0); count++; } });

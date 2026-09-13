@@ -125,7 +125,9 @@ async function readRoi(request, env, ctx) {
   if (error) return { ...base, ...error, roi: null };
   const roiId = str(ctx.roiId);
   if (!roiId) return { ...base, ok: false, status: 422, error: "roi_required", roi: null };
-  const req = await svc.get(TYPE, roiId).catch(() => null);
+  let req;
+  try { req = await svc.get(TYPE, roiId); }
+  catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", detail: str(e && e.message), roi: null }; }
   if (!req) return { ...base, ok: false, status: 404, error: "roi_not_found", roi: null };
   return { ...base, ok: true, roi: summary(req) };
 }
@@ -144,13 +146,14 @@ async function roiRequestsForPatient(request, env, ctx) {
 
   let rows, consents;
   try {
-    [rows, consents] = await Promise.all([svc.byPatient(TYPE, patientId), svc.byPatient("PatientConsent", patientId).catch(() => [])]);
+    /* A failed consent read is null, not []: [] reads as "not recorded", which is a different fact. */
+    [rows, consents] = await Promise.all([svc.byPatient(TYPE, patientId), svc.byPatient("PatientConsent", patientId).catch(() => null)]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), requests: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), requests: [] };
   }
   const requests = (rows || []).filter(Boolean).map(summary).sort((a, b) => String(b.requestedAt || "").localeCompare(String(a.requestedAt || "")));
-  return { ...base, ok: true, patientId, requests, shareExternalConsent: permits(consents || [], "share-external") };
+  return { ...base, ok: true, patientId, requests, shareExternalConsent: consents === null ? { status: "could not be read" } : permits(consents, "share-external") };
 }
 
 export { TYPE, requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient };

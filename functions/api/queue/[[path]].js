@@ -2702,7 +2702,7 @@ export async function onRequest(context) {
           const row = { patientId: p.patientId, patient: p, overdue: null, dueSoon: null, news2: null, problems: [] };
           try {
             const s = await marSchedule(request, env, { ...deps, ...sched, patientId: p.patientId, from: new Date(nowMs - 12 * 3600e3).toISOString(), to: new Date(nowMs + 4 * 3600e3).toISOString() });
-            if (s && s.ok) { row.overdue = s.due.filter((d) => d.overdue).length; row.dueSoon = s.due.filter((d) => !d.status && Date.parse(d.dueAt) >= nowMs).length; }
+            if (s && s.ok) { row.overdue = s.due.filter((d) => d.overdue).length; row.dueSoon = s.due.filter((d) => !d.status && Date.parse(d.dueAt) >= nowMs).length; if (s.unreadDoses) row.problems.push(s.warning); }
             else row.problems.push("medication schedule could not be read");
           } catch { row.problems.push("medication schedule could not be read"); }
           try {
@@ -3333,6 +3333,9 @@ export async function onRequest(context) {
       }
       if (seg === "onboard" && sub === "hospital") {  // EMR hospital: connect org (connector by config)
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        /* A chosen id is a platform operator's call: any signed-in account naming one could claim a real
+         * hospital's id before that hospital arrived, and own the org every connector points at. */
+        if (body.hospitalId && !actor.isOwner) return json({ ok: false, error: "forbidden", message: "Only StewardMD can create a hospital under a chosen ID." }, 403, request);
         const o = await ORG.createOrg(env, { id: body.hospitalId || undefined, name: body.name || "Hospital", mode: "connect", connectorId: body.connectorId || null }, actor.id);
         return json({ ok: true, org: o }, 200, request);
       }
@@ -3353,6 +3356,7 @@ export async function onRequest(context) {
       }
       if (seg === "migrate" && sub === "backfill") {  // idempotent legacy hospitalId -> org
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        if (!actor.isOwner) return json({ ok: false, error: "forbidden", message: "Legacy hospital migration is run by StewardMD." }, 403, request);
         return json({ ok: true, org: await ORG.backfillOrg(env, body.hospitalId, actor.id, body.mode, body.connectorId) }, 200, request);
       }
       // ---- nurse-station runtime: register into the pool + assign a patient to a room ----

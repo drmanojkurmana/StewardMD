@@ -229,6 +229,32 @@
       : !shown.length ? '<p class="w-empty">No patients match. Clear the search or the filter.</p>' : "";
     return '<p class="w-count">' + shown.length + " of " + all.length + (all.length === 1 ? " patient" : " patients") + (wards.length ? " · " + wards.length + (wards.length === 1 ? " ward" : " wards") : "") + "</p>" + chips + (groups || empty);
   }
+  /* Unfinished work on the ward, from /ward/metrics. A count the server could not read arrives as
+   * null and is shown as "not readable", never as 0. */
+  function wardStatusHtml(m) {
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>Ward status</h3></div>";
+    if (!m) return "";
+    if (m.busy) return head + '<p class="w-empty">Loading ward status...</p></div>';
+    if (!m.ok || !m.metrics) return head + '<p class="w-hint warn">' + ms("error") + "Ward status could not be loaded. Do not read this as nothing open.</p></div>";
+    var x = m.metrics, o = x.open || {};
+    var n = function (v) { return v == null ? '<span class="w-st overdue">not readable</span>' : esc(v); };
+    var row = function (label, v) { return "<li><b>" + label + "</b><span>" + n(v) + "</span></li>"; };
+    var oldest = x.oldestUnacknowledgedCritical;
+    return head +
+      (m.partial ? '<p class="w-hint warn">' + ms("warning") + "Some records could not be read with your role (" + esc((m.unreadable || []).join(", ")) + "). Those counts are left blank.</p>" : "") +
+      "<p><b>" + n(x.openItems) + "</b> open items &middot; " + n(x.patients) + " patients &middot; " + n(x.occupiedBeds) + " beds occupied &middot; " + n(x.unplaced) + " without a bed</p>" +
+      '<ul class="w-mini">' +
+      row("Critical results not acknowledged", o.criticalResults) +
+      row("of those, escalated", o.criticalResultsEscalated) +
+      row("Doses in progress", o.dosesInFlight) +
+      row("Handovers not received", o.handoversWaiting) +
+      row("Home medicines not decided", o.medicinesUndecided) +
+      row("Stays with no medication history", o.staysWithNoMedicationHistory) +
+      row("Orders not checked by pharmacy", o.ordersNotPharmacyVerified) +
+      "</ul>" +
+      (oldest ? '<p class="w-hint warn">' + ms("priority_high") + "Oldest unacknowledged critical result: " + esc(oldest.display || "") + ", reported " + esc(String(oldest.reportedAt || "").slice(0, 16).replace("T", " ")) + "</p>" : "") +
+      "</div>";
+  }
   function listView(state) {
     return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward round" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
       '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -236,6 +262,7 @@
       '<input id="wWard" type="text" placeholder="Ward (blank = all)" value="' + esc(state.ward) + '">' +
       '<button class="w-btn ghost" data-w-act="setward" type="button">Apply</button></div>' +
       '<div id="wRoster">' + rosterHtml(state) + "</div></div>" +
+      wardStatusHtml(state.wardMetrics) +
       '<div class="w-card"><div class="w-card-h">' + ms("hub") + '<h3>Boards and tools</h3></div><div class="w-tools">' +
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
       '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
@@ -1003,11 +1030,14 @@
         (v.supersededBeforeEffective ? ' <span class="w-st escalate">overtaken before it took effect - this was never what the record said</span>' : "") +
         (v.amendedAt ? ' <span class="w-st due">corrected</span>' : "") +
         (v.changed ? '<div class="w-dt-times">changed: ' + esc(v.changed.join(", ")) + "</div>" : "") +
+        (!v.current ? (d.readers && d.readers[v.version] ? readersHtml(d.readers[v.version])
+          : ' <button class="w-btn ghost sm" data-w-act="readers:' + esc(v.version) + '">' + ms("group") + "Who saw this version</button>") : "") +
         "</li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + esc(d.resourceType) + "</h3>" +
       '<button class="w-ic" data-w-act="timelinedetailclose" title="Close">' + ms("close") + "</button></div>" +
       '<div class="w-dt-times">' + esc(d.recordId) + " &middot; " + esc(d.versionCount) + " version" + (d.versionCount === 1 ? "" : "s") + "</div>" +
+      (d.readLogFailed ? '<p class="w-hint warn">' + ms("warning") + "Your opening of this record could not be logged, so you will not be told if it is later corrected.</p>" : "") +
       (versions ? '<div class="w-sub"><h4>Versions, newest first</h4><ul class="w-mini">' + versions + "</ul></div>" : "") +
       '<div class="w-sub"><h4>What the record says now</h4>' + reportValue(d.record) + "</div>" +
       "</div>";
@@ -1060,8 +1090,42 @@
     paint();
     apiGet("/ward/record-detail?orgId=" + encodeURIComponent(st.orgId) +
       "&type=" + encodeURIComponent(type) + "&id=" + encodeURIComponent(id))
-      .then(function (r) { st.recordDetail = r || { ok: false, error: "no_response" }; paint(); })
+      .then(function (r) { st.recordDetail = r || { ok: false, error: "no_response" }; paint(); if (r && r.ok) logDecisiveRead(r); })
       .catch(function () { st.recordDetail = { ok: false, detail: "Could not open that record." }; paint(); });
+  }
+  /* Opening a record's detail is a decisive read (read-log.js): logged so that if this version is
+   * later corrected, the person who opened it can be told. A failed log is said on the panel. */
+  function logDecisiveRead(d) {
+    var rec = d.record || {}, cur = (d.versions || []).filter(function (v) { return v.current; })[0];
+    var patientId = rec.patientId || (st.sel && st.sel.patientId);
+    if (!patientId || !cur) return;
+    var val = rec.value != null ? (typeof rec.value === "object" ? (rec.value.value != null ? rec.value.value + (rec.value.unit ? " " + rec.value.unit : "") : JSON.stringify(rec.value)) : rec.value) : (rec.status || "");
+    apiPost("/ward/read", { orgId: st.orgId, patientId: patientId, valueId: d.recordId, version: cur.version, value: String(val).slice(0, 200), kind: "opened", context: d.resourceType })
+      .then(function (r) { if (!(r && r.ok) && st.recordDetail === d) { d.readLogFailed = true; paint(); } })
+      .catch(function () { if (st.recordDetail === d) { d.readLogFailed = true; paint(); } });
+  }
+  function loadReaders(version) {
+    var d = st.recordDetail; if (!d || !d.ok) return;
+    var vs = d.versions || [], i = -1;
+    for (var k = 0; k < vs.length; k++) if (String(vs[k].version) === String(version)) i = k;
+    var next = vs[i + 1];
+    if (i < 0 || !next) return;
+    var patientId = (d.record && d.record.patientId) || (st.sel && st.sel.patientId);
+    d.readers = d.readers || {};
+    d.readers[version] = { busy: true }; paint();
+    apiGet("/ward/readers?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId) + "&valueId=" + encodeURIComponent(d.recordId) +
+      "&supersededVersion=" + encodeURIComponent(version) + "&correctedAt=" + encodeURIComponent(next.recordedAt || "") + "&label=" + encodeURIComponent(d.resourceType || ""))
+      .then(function (r) { d.readers[version] = r && r.ok ? r : { ok: false, detail: r && (r.detail || r.error) }; paint(); })
+      .catch(function () { d.readers[version] = { ok: false }; paint(); });
+  }
+  function readersHtml(x) {
+    if (!x) return "";
+    if (x.busy) return '<div class="w-dt-times">Looking up who saw this version...</div>';
+    if (!x.ok) return '<p class="w-hint warn">' + ms("error") + "Could not find out who saw this version" + (x.detail ? ": " + esc(x.detail) : "") + ". Do not read this as nobody.</p>";
+    var people = (x.people || []).map(function (p) {
+      return "<li><b>" + esc(p.person) + "</b><span>" + esc(p.kind) + " " + when(p.readAt) + (p.actedOn ? ' <span class="w-st overdue">acted on it</span>' : "") + "</span></li>";
+    }).join("");
+    return (people ? '<ul class="w-mini">' + people + "</ul>" : "") + '<p class="w-hint">' + ms("info") + esc(x.note || "") + "</p>";
   }
   function timelineOpenReport(reportId) {
     if (!reportId) return;
@@ -1222,7 +1286,8 @@
         (d.adjusted ? "<small>clock change: " + esc(d.adjusted.from) + " does not exist today, moved to " + esc(d.adjusted.to) + "</small>" : "") +
         '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status || "not started") + "</span>" +
         (d.administeredAt ? "<small>given " + when(d.administeredAt) + "</small>" : "") + "</div>" +
-        '<div class="w-dose-a">' + (acts || '<small class="w-empty">No further action.</small>') + "</div></li>";
+        '<div class="w-dose-a">' + (d.readFailed ? '<small class="w-st overdue">Could not read whether this dose was given. Reload before acting.</small>'
+          : acts || '<small class="w-empty">No further action.</small>') + "</div></li>";
     }).join("");
 
     // PRN is shown, and shown APART. An as-needed drug is given on the patient's need, not on the
@@ -1250,7 +1315,8 @@
        * shown only for drugs the browser thinks are high-alert: that would be a second copy of the
        * formulary living in the UI. */
       '<label class="w-f"><span>Second nurse <i>high-alert drugs only</i></span><input id="wWitness" type="text" autocomplete="off" placeholder="Witness ID"></label></div>' +
-      (rows ? '<ul class="w-doses">' + rows + "</ul>" : '<p class="w-empty">No doses fall in this window.</p>') +
+      (state.roundWarning ? '<p class="w-hint warn">' + ms("error") + esc(state.roundWarning) + "</p>" : "") +
+      (rows ? '<ul class="w-doses">' + rows + "</ul>" : state.roundWarning && !(state.due || []).length ? "" : '<p class="w-empty">No doses fall in this window.</p>') +
       (prn ? '<div class="w-sub"><h4>' + ms("touch_app") + 'As needed (PRN)</h4><p class="w-hint">Given on the patient’s need. These are never due at a time.</p><ul class="w-mini">' + prn + "</ul></div>" : "") +
       (unsched ? '<div class="w-sub warn"><h4>' + ms("help") + 'Not on the round</h4><p class="w-hint">The frequency on these orders could not be read, so no dose times were computed. They need a look.</p><ul class="w-mini">' + unsched + "</ul></div>" : "") +
       (state.truncated ? '<p class="w-hint">' + ms("warning") + "More doses fall in this window than can be listed. Narrow it.</p>" : "") +
@@ -2495,6 +2561,20 @@
    * ACCEPT / EDIT / REJECT ARE THE ONLY VERBS. There is no "apply", no "use this", no silent
    * insertion into a note the clinician is typing. Rejecting needs a reason because a model that is
    * regularly wrong about one thing is only visible if the reasons are kept. */
+  function maikHistoryHtml(h) {
+    if (!h) return '<button class="w-btn ghost sm" data-w-act="maikhistory">' + ms("history") + "Earlier MaiK answers for this patient</button>";
+    if (h.busy) return '<p class="w-empty">Loading earlier answers...</p>';
+    if (!h.ok) return '<p class="w-hint warn">' + ms("error") + "Earlier answers could not be loaded. Do not read this as none.</p>";
+    if (!(h.interactions || []).length) return '<p class="w-empty">MaiK has not been asked about this patient before.</p>';
+    var c = h.counts || {};
+    return "<p><b>Earlier answers</b> &middot; " + esc(c.pending || 0) + " waiting for review, " + esc((c.accepted || 0) + (c.edited || 0)) + " kept, " + esc(c.rejected || 0) + " rejected</p>" +
+      '<ul class="w-mini">' + h.interactions.map(function (x, n) {
+        var state = (x.review && x.review.state) || "pending";
+        return "<li><b>" + esc(x.task || "question") + "</b><span>" + esc(String(x.requestedAt || "").slice(0, 16).replace("T", " ")) + " &middot; " +
+          '<span class="w-st ' + (state === "pending" ? "due" : "") + '">' + esc(state === "pending" ? "waiting for review" : state) + "</span> " +
+          '<button class="w-btn ghost sm" data-w-act="maikopen:' + n + '">Open</button></span></li>';
+      }).join("") + "</ul>";
+  }
   function maikCard(state) {
     var m = state.maik || {};
     var s = state.sel;
@@ -2515,6 +2595,7 @@
         '<button class="w-btn ghost" data-w-act="maikask:draft-note"' + (busy ? " disabled" : "") + ">" + ms("edit_note") + "Draft a progress note</button>" +
         "</div>" +
         (busy ? '<p class="w-empty">Asking MaiK&hellip;</p>' : "") +
+        maikHistoryHtml(m.history) +
         "</div>";
     }
 
@@ -3092,7 +3173,45 @@
       "</div>" +
       (tw.sim ? (tw.sim.ok === false ? '<p class="w-hint warn">' + esc(tw.sim.detail || tw.sim.error) + "</p>" :
         '<p class="w-hint"><b>' + esc(tw.sim.label) + "</b><br>" + esc(JSON.stringify(tw.sim.projected)) + "</p>") : "") +
-      "</div>";
+      "</div>" +
+      twinForecastHtml(tw.forecast) +
+      twinAsOfHtml(tw.asOf);
+  }
+  var TWIN_METRICS = [["bed-demand", "Bed demand"], ["discharge-volume", "Discharges"], ["ed-load", "Emergency arrivals"], ["critical-backlog", "Critical results waiting"], ["diagnostic-workload", "Lab and imaging work"], ["pharmacy-workload", "Pharmacy dispensing"], ["blood-demand", "Blood demand"], ["ot-delays", "Theatre delays"]];
+  function twinForecastHtml(f) {
+    var body = "";
+    if (f && f.busy) body = '<p class="w-empty">Working out the forecast...</p>';
+    else if (f && f.error === "insufficient_data") body = '<p class="w-hint">' + ms("info") + "Not enough past days of data to forecast this yet. No number is shown rather than a guess.</p>";
+    else if (f && f.error === "not_built") body = '<p class="w-hint">' + ms("info") + "This forecast is not built: " + esc(f.detail || "") + "</p>";
+    else if (f && !f.ok) body = '<p class="w-hint warn">' + ms("error") + "The forecast could not be worked out" + (f.detail ? ": " + esc(f.detail) : "") + ".</p>";
+    else if (f && f.prediction) {
+      var p = f.prediction, u = p.uncertainty || {};
+      body = '<p class="w-hint warn"><b>' + esc(p.label) + "</b></p>" +
+        "<p><b>" + esc(p.pointEstimate) + "</b> per day expected over the next " + esc(p.horizonDays) + " day" + (p.horizonDays === 1 ? "" : "s") +
+        " (likely range " + esc(u.lowerBound) + " to " + esc(u.upperBound) + ")</p>" +
+        '<p class="w-dt-times">From ' + esc(p.inputWindow && p.inputWindow.sampleSize) + " days of records, " + esc(String(p.inputWindow && p.inputWindow.from || "").slice(0, 10)) + " to " + esc(String(p.inputWindow && p.inputWindow.to || "").slice(0, 10)) + ". A plain average, not a fitted model.</p>";
+    }
+    return '<div class="w-card"><div class="w-card-h">' + ms("trending_up") + "<h3>Forecast</h3></div>" +
+      '<div class="w-actions">' + TWIN_METRICS.map(function (m) { return '<button class="w-btn ghost tiny" data-w-act="twinpredict:' + m[0] + '">' + esc(m[1]) + "</button>"; }).join("") + "</div>" +
+      body + "</div>";
+  }
+  function twinAsOfHtml(a) {
+    var body = "";
+    if (a && a.busy) body = '<p class="w-empty">Rebuilding the past state...</p>';
+    else if (a && !a.ok) body = '<p class="w-hint warn">' + ms("error") + (a.error === "permission" || a.status === 403 || a.error === "forbidden" ? "Looking back in time needs hospital admin rights." : "Could not rebuild that moment" + (a.detail ? ": " + esc(a.detail) : "") + ".") + "</p>";
+    else if (a && a.reconstruction) {
+      var s = a.reconstruction.state || {};
+      var label = { EmergencyActivation: "Emergencies declared", Blackout: "Scheduling blocks", CriticalResultLoop: "Critical results" };
+      body = "<p>As it stood at <b>" + when(a.reconstruction.at) + "</b></p>" + '<ul class="w-mini">' + Object.keys(s).map(function (k) {
+        var x = s[k] || {};
+        return "<li><b>" + esc(label[k] || k) + "</b><span>" + (x.status === "unavailable" ? '<span class="w-st overdue">could not be read</span>'
+          : esc(x.count) + (x.status === "partial" ? ' <span class="w-st due">incomplete' + (x.unreadable ? ": " + esc(x.unreadable) + " unreadable" : "") + (x.capped ? ": only the latest 500 checked" : "") + "</span>" : "")) + "</span></li>";
+      }).join("") + "</ul>" +
+        '<p class="w-dt-times">Not rebuilt: ' + esc((a.reconstruction.notReconstructed || []).join(", ")) + "</p>";
+    }
+    return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Look back in time</h3></div>" +
+      '<div class="w-filter"><input id="wTwinAt" type="datetime-local"><button class="w-btn ghost" data-w-act="twinasof">Show</button></div>' +
+      body + "</div>";
   }
 
   /* TASK 4.5: scheduling. scheduling.js/resource-booking.js/blackout.js already enforce every hard
@@ -5142,7 +5261,7 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
   }
   function loadChart() {
@@ -5917,6 +6036,13 @@
       })
       .catch(function () { st.maik.busy = false; st.maik.err = "Could not reach MaiK."; paint(); });
   }
+  function maikHistory() {
+    var sel = st.sel; if (!sel) return;
+    st.maik = st.maik || {}; st.maik.history = { busy: true }; paint();
+    apiGet("/ward/maik-interactions?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(sel.patientId))
+      .then(function (r) { if (st.sel !== sel) return; st.maik.history = r && r.ok ? r : { ok: false }; paint(); })
+      .catch(function () { if (st.sel !== sel) return; st.maik.history = { ok: false }; paint(); });
+  }
   function maikReview(decision) {
     var m = st.maik || {}; if (!m.interaction) return;
     var body = { orgId: st.orgId, interactionId: m.interaction.id, decision: decision };
@@ -6515,10 +6641,11 @@
       "&from=" + encodeURIComponent(new Date(st.from).toISOString()) + "&to=" + encodeURIComponent(new Date(st.to).toISOString());
     return apiGet(q)
       .then(function (r) {
-        if (settle(r)) { st.due = r.due || []; st.prn = r.prn || []; st.unscheduled = r.unscheduled || []; st.truncated = !!r.truncated; }
+        if (settle(r)) { st.due = r.due || []; st.prn = r.prn || []; st.unscheduled = r.unscheduled || []; st.truncated = !!r.truncated; st.roundWarning = r.warning || ""; }
+        else { st.due = []; st.prn = []; st.unscheduled = []; st.roundWarning = "The round could not be loaded. Do not read this as no doses due."; }
         paint();
       })
-      .catch(function () { st.busy = false; st.err = "Could not load the round."; paint(); });
+      .catch(function () { st.busy = false; st.err = "Could not load the round."; st.due = []; st.roundWarning = "The round could not be loaded. Do not read this as no doses due."; paint(); });
   }
   /* Prescribing writes a MedicationOrder through the SAME door the round already reads from; the
    * refusal - formulary, restricted, incomplete - is the server's own and shown verbatim, exactly
@@ -7819,6 +7946,12 @@
       // still look after every patient on it.
       .catch(function () {});
   }
+  function loadWardMetrics() {
+    st.wardMetrics = { busy: true };
+    return apiGet("/ward/metrics?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { st.wardMetrics = r && r.ok ? r : { ok: false, error: r && r.error }; paint(); })
+      .catch(function () { st.wardMetrics = { ok: false }; paint(); });
+  }
   function loadQuality() {
     return apiGet("/ward/quality?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.quality = r; paint(); })
@@ -8413,7 +8546,7 @@
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
@@ -8434,7 +8567,7 @@
       var pe = null;
       for (var k2 = 0; k2 < ((st.ed && st.ed.patients) || []).length; k2++) { if (st.ed.patients[k2].encounterId === arg) { pe = st.ed.patients[k2]; break; } }
       if (!pe) return;
-      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
@@ -8451,6 +8584,12 @@
     if (cmd === "maikreview") { maikReview(arg); return; }
     if (cmd === "maikedit") { st.maik.editing = true; paint(); return; }
     if (cmd === "maikclear") { st.maik = null; paint(); return; }
+    if (cmd === "maikhistory") { maikHistory(); return; }
+    if (cmd === "maikopen") {
+      var hx = st.maik && st.maik.history, picked = hx && hx.interactions && hx.interactions[Number(arg)];
+      if (picked) { st.maik.interaction = picked; st.maik.err = ""; paint(); }
+      return;
+    }
     if (cmd === "integration") { integrationOpen(); return; }
     if (cmd === "intload") { loadIntegration(); return; }
     if (cmd === "outdispatch") { dispatchOutbound(); return; }
@@ -8477,6 +8616,22 @@
     if (cmd === "twinask") { twinAsk(); return; }
     if (cmd === "twincopilotreview") { twinCopilotReview(arg); return; }
     if (cmd === "twinsim") { twinSimulate(arg); return; }
+    if (cmd === "twinpredict") {
+      st.twin = st.twin || {}; st.twin.forecast = { busy: true }; paint();
+      apiGet("/ward/twin-predict?orgId=" + encodeURIComponent(st.orgId) + "&metric=" + encodeURIComponent(arg))
+        .then(function (r) { st.twin.forecast = r || { ok: false }; paint(); })
+        .catch(function () { st.twin.forecast = { ok: false }; paint(); });
+      return;
+    }
+    if (cmd === "twinasof") {
+      var atv = val("wTwinAt");
+      if (!atv) { st.err = "Pick a date and time to look back to."; paint(); return; }
+      st.twin = st.twin || {}; st.twin.asOf = { busy: true }; paint();
+      apiGet("/ward/twin-reconstruct?orgId=" + encodeURIComponent(st.orgId) + "&at=" + encodeURIComponent(new Date(atv).toISOString()))
+        .then(function (r) { st.twin.asOf = r || { ok: false }; paint(); })
+        .catch(function () { st.twin.asOf = { ok: false }; paint(); });
+      return;
+    }
     if (cmd === "scheduling") { schedulingOpen(); return; }
     if (cmd === "schedload") { loadScheduling(); return; }
     if (cmd === "schedload2") { st.scheduling.clinicianId = val("wSchedClinician"); loadScheduling(); return; }
@@ -8620,6 +8775,7 @@
     if (cmd === "timelinesearchclear") { st.timelineQuery = ""; paint(); return; }
     if (cmd === "timelinedetail") { timelineDetail(arg); return; }
     if (cmd === "timelinedetailclose") { st.recordDetail = null; paint(); return; }
+    if (cmd === "readers") { loadReaders(arg); return; }
     if (cmd === "timelineopen") {
       if (!st.timelineOpen) st.timelineOpen = {};
       if (st.timelineOpen[arg]) delete st.timelineOpen[arg]; else st.timelineOpen[arg] = 1;

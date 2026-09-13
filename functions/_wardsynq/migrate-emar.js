@@ -146,19 +146,23 @@ async function medicationRound(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), due: [] }; }
 
   const due = [];
+  let unread = 0;
   for (const o of (orders || []).filter((x) => x && x.status === "active")) {
     const marId = medicationAdministrationIdFor(o.id, dueAt);
-    let mar = null;
-    try { mar = marId ? await svc.get("MedicationAdministration", marId) : null; } catch { mar = null; }
+    let mar = null, readFailed = false;
+    /* A failed read is NOT "not started". Reporting it as null invited a second dose of something
+     * already given. */
+    try { mar = marId ? await svc.get("MedicationAdministration", marId) : null; } catch { readFailed = true; unread += 1; }
     due.push({
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       administrationId: marId,
-      status: mar ? mar.status : null,          // null = this dose has not been started
+      ...(readFailed ? { readFailed: true } : {}),
+      status: readFailed ? "unknown" : mar ? mar.status : null,          // null = this dose has not been started
       administeredAt: (mar && mar.administeredAt) || null,
       administeredBy: (mar && mar.administeredBy) || null,
     });
   }
-  return { ...base, ok: true, patientId, dueAt, due };
+  return { ...base, ok: true, patientId, dueAt, due, ...(unread ? { incomplete: true, warning: `${unread} dose record${unread === 1 ? "" : "s"} could not be read. Check the chart before giving ${unread === 1 ? "that dose" : "those doses"}.` } : {}) };
 }
 
 /**

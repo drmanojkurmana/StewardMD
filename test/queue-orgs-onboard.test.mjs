@@ -229,6 +229,22 @@ test("POST /onboard/wardsynq: requires a Firebase account (a staff session canno
   assert.equal(r.error, "account_required");
 });
 
+test("SECURITY: only a StewardMD platform operator may create a hospital under a chosen id or run the legacy migration", async () => {
+  reset();
+  const squat = await api("/onboard/hospital", "POST", { name: "Squat", hospitalId: "gh-real-hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(squat.__status, 403, JSON.stringify(squat));
+  assert.ok(!docs.has("q_orgs/gh-real-hospital"), "nothing was created under the chosen id");
+  const plain = await api("/onboard/hospital", "POST", { name: "My Hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(plain.__status, 200, "an ordinary sign-up with no chosen id still works: " + JSON.stringify(plain));
+  const bf = await api("/migrate/backfill", "POST", { hospitalId: "gh-real-hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(bf.__status, 403, JSON.stringify(bf));
+
+  ENV.OWNER_EMAILS = OWNER_EMAIL;
+  const op = await api("/migrate/backfill", "POST", { hospitalId: "gh-real-hospital" }, asFirebase(OWNER_EMAIL));
+  assert.equal(op.__status, 200, JSON.stringify(op));
+  assert.equal(op.org.id, "gh-real-hospital");
+});
+
 test("POST /onboard/wardsynq: 503s when the record store isn't configured", async () => {
   reset();
   delete ENV.CONNECT_DB;

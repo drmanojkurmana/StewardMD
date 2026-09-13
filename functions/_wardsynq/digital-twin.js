@@ -258,11 +258,13 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
     try { ids = (await svc.list(type, 500)) || []; }
     catch { asOf[type] = { status: "unavailable" }; continue; }
     const rows = [];
+    let unreadable = 0;
     for (const current of ids) {
       if (!current || !current.id) continue;
       let history;
+      /* Counted, not skipped silently: a dropped history made the as-of count too low with nothing saying so. */
       try { history = (await svc.history(type, current.id)) || []; }
-      catch { continue; }
+      catch { unreadable += 1; continue; }
       /* The latest version that itself already existed at or before the requested instant. A version
        * whose own timestamp is after T did not exist yet, whatever the current record now shows. */
       const asOfVersion = history
@@ -270,7 +272,9 @@ async function reconstructTwinAsOf(request, env, ctx, atIso) {
         .sort((a, b) => (b.version || 0) - (a.version || 0))[0];
       if (asOfVersion) rows.push(asOfVersion);
     }
-    asOf[type] = { status: "ok", count: rows.length, records: rows };
+    asOf[type] = unreadable
+      ? { status: "partial", count: rows.length, unreadable, records: rows }
+      : { status: "ok", count: rows.length, ...(ids.length >= 500 ? { status: "partial", capped: true } : {}), records: rows };
   }
 
   return {

@@ -366,7 +366,7 @@ async function marSchedule(request, env, ctx) {
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
   const opts = { from: new Date(fromMs).toISOString(), to: new Date(toMs).toISOString(), times: ctx.marTimes, offsetMinutes: ctx.offsetMinutes, timeZone: ctx.timeZone };
   const due = [], prn = [], unscheduled = [];
-  let truncated = false;
+  let truncated = false, unreadDoses = 0;
 
   for (const o of (orders || []).filter((x) => x && x.status === "active")) {
     const card = { orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
@@ -384,11 +384,14 @@ async function marSchedule(request, env, ctx) {
     for (const t of slots.due) {
       const dueAt = new Date(t).toISOString();
       const administrationId = medicationAdministrationIdFor(o.id, dueAt);
-      let mar = null;
-      try { mar = administrationId ? await svc.get("MedicationAdministration", administrationId) : null; } catch { mar = null; }
+      let mar = null, readFailed = false;
+      /* A failed read is NOT "not started": shown as null it offered Administer on a dose that may
+       * already have been given. */
+      try { mar = administrationId ? await svc.get("MedicationAdministration", administrationId) : null; } catch { readFailed = true; unreadDoses += 1; }
       due.push({
         ...card, dueAt, administrationId,
-        status: mar ? mar.status : null,             // null = this dose has not been started
+        ...(readFailed ? { readFailed: true } : {}),
+        status: readFailed ? "unknown" : mar ? mar.status : null,             // null = this dose has not been started
         administeredAt: (mar && mar.administeredAt) || null,
         administeredBy: (mar && mar.administeredBy) || null,
         overdue: isOverdue(t, mar && mar.status, nowMs, ctx.graceMinutes),
@@ -404,6 +407,7 @@ async function marSchedule(request, env, ctx) {
     due, prn, unscheduled,
     // Never a silent cap: a truncated round that looked complete would read as "nothing else is due".
     ...(truncated ? { truncated: true, detail: `more than ${MAX_SLOTS} doses fall in this window; narrow it` } : {}),
+    ...(unreadDoses ? { unreadDoses, warning: `${unreadDoses} dose record${unreadDoses === 1 ? "" : "s"} could not be read, so whether ${unreadDoses === 1 ? "it was" : "they were"} given is unknown. Reload before giving.` } : {}),
   };
 }
 

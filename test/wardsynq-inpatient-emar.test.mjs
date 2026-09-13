@@ -1108,6 +1108,28 @@ test("the round is computed from the frequency the doctor already wrote, and a g
   assert.equal(after.due[1].status, null);
 });
 
+test("SAFETY: a dose record that cannot be read is 'unknown', never 'not started', on both the round and the legacy round", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();   // TID
+  const real = RECORD.latest.bind(RECORD);
+  RECORD.latest = async (tenantId, resourceType, id) => {
+    if (resourceType === "MedicationAdministration") throw new Error("simulated read outage");
+    return real(tenantId, resourceType, id);
+  };
+  try {
+    const from = new Date().toISOString(), to = new Date(Date.now() + 86400000).toISOString();
+    const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
+    assert.equal(s.__status, 200, JSON.stringify(s));
+    assert.ok(s.due.length > 0);
+    assert.ok(s.due.every((d) => d.status === "unknown" && d.readFailed), JSON.stringify(s.due));
+    assert.equal(s.unreadDoses, s.due.length);
+    assert.match(s.warning, /Reload before giving/);
+    const legacy = await as(NURSE, `/ward/round?orgId=${ORG}&patientId=${adm.patientId}&dueAt=${encodeURIComponent(DUE)}`);
+    assert.ok(legacy.due.every((d) => d.status === "unknown"), JSON.stringify(legacy.due));
+    assert.equal(legacy.incomplete, true);
+  } finally { RECORD.latest = real; }
+});
+
 test("a PRN drug never appears on the round, and an unreadable frequency is reported rather than dropped", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
