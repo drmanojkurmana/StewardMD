@@ -84,22 +84,83 @@
       ".rx-bp-it{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:9px 4px;cursor:pointer}.rx-bp-nm{font:700 13.5px var(--hfont);color:var(--hink);flex:1 1 44%}.rx-bp-nm em{color:#ef4444;font-weight:600;font-style:normal;font-size:11px}.rx-bp-mf{font:500 11px var(--hfont);color:var(--hmut);flex:1 1 40%}.rx-bp-pr{font:800 13px var(--hfont);color:var(--teal,#0e6e63)}" +
       ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
-      ".rx-doc{font-family:Georgia,'Times New Roman',serif;color:#111;background:#fff}.rxdoc-in{padding:40px 44px;word-spacing:1px}.rxdoc-hd{display:flex;align-items:center;gap:16px}.rxdoc-logo{width:64px;height:64px;object-fit:contain}.rxdoc-nm{font:800 22px Georgia,serif;color:#0e6e63}.rxdoc-ad{font:400 12.5px Georgia,serif;color:#444;margin-top:2px}.rxdoc-rule{height:3px;background:#0e6e63;margin-top:12px}.rxdoc-pt{display:flex;justify-content:space-between;align-items:baseline;font:400 14px Georgia,serif;color:#222;margin:12px 0 2px;border-bottom:1px solid #ddd;padding-bottom:6px}.rxdoc-dt{color:#555;font-size:12.5px}.rxdoc-topic{font:italic 400 12.5px Georgia,serif;color:#555;margin-top:4px}.rxdoc-rx{font:800 30px Georgia,serif;color:#0e6e63;margin:10px 0 2px}" +
-      ".rxdoc-tbl{width:100%;border-collapse:collapse}.rxdoc-tbl td{padding:7px 4px;border-bottom:1px solid #eee;vertical-align:top;font:400 14px Georgia,serif}.rxdoc-tbl .sn{width:24px;color:#888}.rxdoc-tbl .br{color:#0e6e63;font-weight:600}.rxdoc-tbl .dz{color:#444;font-size:12.5px;white-space:nowrap}.rxdoc-tbl .advr td{color:#555;font-style:italic;border-bottom:0}.rxdoc-ft{margin-top:40px;display:flex;justify-content:flex-end}.rxdoc-sg{text-align:center;min-width:210px}.rxdoc-sgimg{height:54px;object-fit:contain;display:block;margin:0 auto 2px}.rxdoc-drn{font-weight:700;border-top:1px solid #333;padding-top:4px;font-size:14px}.rxdoc-reg{font-size:11.5px;color:#555}.rxdoc-dis{margin-top:26px;border-top:1px solid #ddd;padding-top:10px;font:400 10px Georgia,serif;color:#777;line-height:1.5}.rxdoc-foot{margin-top:22px;border-top:1px solid #ddd;padding-top:10px}.rxdoc-brand{font:400 12px Georgia,serif;color:#0e6e63}.rxdoc-smdlogo{width:20px;height:20px;object-fit:contain;vertical-align:-5px;margin-right:6px;display:inline-block}.rxdoc-smdwm{font:800 13px Georgia,serif;color:#0e6e63}.rxdoc-smdwm b{color:#111}.rxdoc-resp{margin-top:8px;font:400 11px Georgia,serif;color:#555;line-height:1.6}.rxdoc-line{font:400 12.5px Georgia,serif;color:#333;margin:3px 0}.rxdoc-line b{color:#111}.rx-ac-x{color:#ef4444;font-size:10px;font-weight:600}" +
-      ".rxcsec{margin-top:20px;padding-top:14px;border-top:1px solid #e5e5ea;page-break-inside:avoid;break-inside:avoid}" +
-      ".rxcsec h3{font:600 12px -apple-system,BlinkMacSystemFont,system-ui;letter-spacing:.06em;text-transform:uppercase;color:#1d1d1f;margin:0 0 3px}" +
-      ".rxcttl{font:600 15px -apple-system,BlinkMacSystemFont,'SF Pro Display',system-ui;letter-spacing:-.01em;color:#1d1d1f;margin-bottom:2px}.rxcsub{font:400 11px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-bottom:10px}" +
-      ".rxc-tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;page-break-inside:avoid;break-inside:avoid;border:1px solid #e5e5ea;border-radius:10px;overflow:hidden}" +
-      ".rxc-tbl th{background:#f5f5f7;padding:7px 9px;font:600 10px -apple-system,BlinkMacSystemFont,system-ui;text-transform:uppercase;letter-spacing:.04em;color:#1d1d1f;border-bottom:1px solid #e5e5ea;border-right:1px solid #e5e5ea;text-align:left;vertical-align:bottom}" +
-      ".rxc-tbl th:last-child{border-right:0}" +
-      ".rxc-th-gen{border-top:2.5px solid #34c759!important}.rxc-th-bal{border-top:2.5px solid #0071e3!important;background:#fafcff!important}.rxc-th-prem{border-top:2.5px solid #af52de!important}.rxc-th-orig{border-top:2.5px solid #8e8e93!important}" +
-      ".rxc-tbl td{padding:8px 9px;border-bottom:1px solid #f2f2f7;border-right:1px solid #f2f2f7;vertical-align:top;font-size:11.5px;background:#fff;color:#1d1d1f}" +
-      ".rxc-tbl tr:last-child td{border-bottom:0}.rxc-tbl td:last-child{border-right:0}" +
-      ".rxc-td-bal{background:#fafcff!important}" +
-      ".rxc-chosen{box-shadow:inset 0 0 0 1px #34c759;background:#f6fbf7!important}.rxc-badge-chosen{display:inline-block;padding:1.5px 7px;border-radius:999px;font:600 8.5px -apple-system,BlinkMacSystemFont,system-ui;background:#34c759;color:#fff;margin-bottom:3px;letter-spacing:.03em}" +
-      ".rxc-tbl-cost{font:600 12.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f;margin-top:4px}.rxc-tbl-mfg{color:#86868b;font-size:10px}.rxc-tbl-rx{color:#86868b;font-size:10.5px;margin-top:2px}" +
-      ".rxc-tot-val{font:600 12.5px -apple-system,BlinkMacSystemFont,system-ui;color:#1d1d1f}.rxc-banner-save{margin-top:8px;padding:7px 12px;border-radius:8px;background:#f2fbf5;border:1px solid rgba(52,199,89,.3);font:600 11.5px -apple-system,BlinkMacSystemFont,system-ui;color:#248a3d}" +
-      ".rxcnote{margin-top:10px;font:400 10px/1.45 -apple-system,BlinkMacSystemFont,system-ui;color:#86868b}" +
+      ".rx-doc{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a;background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}" +
+      ".rxdoc-in{padding:30px 42px;box-sizing:border-box}" +
+      ".rxdoc-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}" +
+      ".rxdoc-hd-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}" +
+      ".rxdoc-logo{width:52px;height:52px;object-fit:contain;border-radius:8px}" +
+      ".rxdoc-nm{font:700 17px/1.25 -apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;color:#0f172a;letter-spacing:-.015em}" +
+      ".rxdoc-ad{font:500 11.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#475569;margin-top:2px}" +
+      ".rxdoc-reg-top{font:600 10.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#0e6e63;margin-top:2px;letter-spacing:.02em}" +
+      ".rxdoc-hd-right{text-align:right;flex:none}" +
+      ".rxdoc-hd-badge{display:inline-block;font:700 8.5px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#0e6e63;background:#f0fdf4;border:1px solid #bbf7d0;padding:2px 7px;border-radius:999px}" +
+      ".rxdoc-hd-date{font:600 11px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;margin-top:4px}" +
+      ".rxdoc-rule{height:1px;background:#e2e8f0;margin:14px 0 16px}" +
+      ".rxdoc-meta-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;margin-bottom:16px}" +
+      ".rxdoc-meta-grid{display:grid;grid-template-columns:1.2fr .8fr 1fr;gap:8px 16px}" +
+      ".rxdoc-meta-cell{min-width:0}" +
+      ".rxdoc-meta-lbl{font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#64748b;margin-bottom:1.5px}" +
+      ".rxdoc-meta-val{font:600 12px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a}" +
+      ".rxdoc-meta-sub{font-weight:500;color:#475569;font-size:11px;margin-left:4px}" +
+      ".rxdoc-pill-dx{display:inline-block;background:#e0f2fe;border:1px solid #bae6fd;padding:1px 7px;border-radius:5px;font:700 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#0369a1}" +
+      ".rxdoc-meta-divider{height:1px;background:#e2e8f0;margin:8px 0}" +
+      ".rxdoc-rx-header{display:flex;align-items:baseline;gap:8px;margin:12px 0 6px}" +
+      ".rxdoc-rx-sym{font:800 22px -apple-system,BlinkMacSystemFont,'SF Pro Display',Georgia,serif;color:#0e6e63;line-height:1}" +
+      ".rxdoc-rx-title{font:700 10px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#64748b}" +
+      ".rxdoc-tbl{width:100%;border-collapse:separate;border-spacing:0;margin-bottom:14px}" +
+      ".rxdoc-tbl td{padding:7px 6px;border-bottom:1px solid #f1f5f9;vertical-align:top}" +
+      ".rxdoc-tbl tr:last-child td{border-bottom:0}" +
+      ".rxdoc-tbl .sn{width:28px;font:700 11.5px ui-monospace,SFMono-Regular,Menlo,monospace;color:#94a3b8;padding-top:1.5px}" +
+      ".rxdoc-tbl .dg{padding-left:4px}" +
+      ".rxdoc-drug-nm{font:700 13px/1.3 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;color:#0f172a}" +
+      ".rxdoc-tbl .br{color:#0e6e63;font-weight:600;font-size:12px}" +
+      ".rxdoc-tbl .dz{color:#475569;font:500 11.5px/1.35 -apple-system,BlinkMacSystemFont,sans-serif;margin-top:2px}" +
+      ".rxdoc-adv-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font:500 11.5px/1.35 -apple-system,BlinkMacSystemFont,sans-serif;color:#334155;display:flex;align-items:baseline;gap:8px}" +
+      ".rxdoc-adv-lbl{font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#0e6e63;background:#ecfdf5;border:1px solid #a7f3d0;padding:1px 5px;border-radius:4px;flex:none}" +
+      ".rx-ac-x{color:#ef4444;font-size:10px;font-weight:600}" +
+      ".rxcsec{margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxcsec h3{font:700 10.5px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#0f172a;margin:0 0 2px}" +
+      ".rxchd{margin-bottom:6px}" +
+      ".rxcttl{font:700 11px -apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;letter-spacing:.03em;color:#334155;text-transform:uppercase}" +
+      ".rxcsub{font:400 9.5px/1.35 -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;margin-top:1px}" +
+      ".rxctbl,.rxc-tbl{width:100%;border-collapse:separate;border-spacing:0;margin:6px 0;font-size:10px;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif}" +
+      ".rxctbl th,.rxc-tbl th{padding:6px 8px;font:700 8.5px -apple-system,BlinkMacSystemFont,sans-serif;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #e2e8f0;border-right:1px solid #e2e8f0;background:#f8fafc;vertical-align:top;text-align:left;color:#0f172a}" +
+      ".rxctbl th:last-child,.rxc-tbl th:last-child{border-right:0}" +
+      ".rxctbl th small,.rxc-tbl th small{font-weight:500;text-transform:none;color:#64748b;display:block;margin-top:1.5px;font-size:8px;letter-spacing:normal}" +
+      ".rxctbl th.col-rx,.rxc-tbl th.col-rx{width:25%;border-top:2.5px solid #0f172a}" +
+      ".rxctbl th.col-gen,.rxc-tbl th.col-gen{width:18.75%;border-top:2.5px solid #10b981}" +
+      ".rxctbl th.col-bal,.rxc-tbl th.col-bal{width:18.75%;border-top:2.5px solid #2563eb}" +
+      ".rxctbl th.col-prem,.rxc-tbl th.col-prem{width:18.75%;border-top:2.5px solid #8b5cf6}" +
+      ".rxctbl th.col-orig,.rxc-tbl th.col-orig{width:18.75%;border-top:2.5px solid #64748b}" +
+      ".rxctbl td,.rxc-tbl td{padding:6px 8px;border-bottom:1px solid #f1f5f9;border-right:1px solid #f1f5f9;vertical-align:top;font-size:10px;line-height:1.3;color:#0f172a;background:#fff}" +
+      ".rxctbl tr:last-child td,.rxc-tbl tr:last-child td{border-bottom:0}.rxctbl td:last-child,.rxc-tbl td:last-child{border-right:0}" +
+      ".rxctbl td.rxc-rxcol,.rxc-tbl td.rxc-rxcol{background:#fafafa}.rxctbl .rxc-num,.rxc-tbl .rxc-num{font-weight:700;color:#0f172a;font-size:10.5px}.rxctbl .rxc-comp,.rxc-tbl .rxc-comp{color:#64748b;font-size:8.5px;margin-top:1px}.rxctbl .rxc-dose,.rxc-tbl .rxc-dose{color:#64748b;font-size:9px;font-weight:500;margin-top:1px}" +
+      ".rxctbl .rxc-brand{font-weight:700;color:#0f172a;font-size:10px;line-height:1.25}" +
+      ".rxctbl .rxc-mfr,.rxc-tbl .rxc-mfr{color:#64748b;font-size:8.5px;margin-top:1px}" +
+      ".rxctbl .rxc-pack,.rxc-tbl .rxc-pack{color:#64748b;font-size:8px;margin-top:1px}" +
+      ".rxctbl .rxc-cost,.rxc-tbl .rxc-cost{font:700 11px -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a;margin-top:2px}.rxctbl .rxc-cost small,.rxc-tbl .rxc-cost small{font-size:8px;font-weight:400;color:#64748b}" +
+      ".rxctbl td.rxc-chosen,.rxc-tbl td.rxc-chosen{background:#fafcff!important;box-shadow:inset 0 0 0 1.5px #0284c7}" +
+      ".rxctbl .rxc-tag,.rxc-tbl .rxc-tag{display:inline-block;padding:1px 5px;border-radius:3px;font:700 7.5px -apple-system,BlinkMacSystemFont,sans-serif;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;margin-bottom:2px;letter-spacing:.05em;text-transform:uppercase}" +
+      ".rxctbl td.rxc-empty,.rxc-tbl td.rxc-empty{color:#94a3b8;font-style:italic;font-size:9px;vertical-align:middle}" +
+      ".rxctbl .rxc-totrow td,.rxc-tbl .rxc-totrow td{background:#f8fafc;border-top:1px solid #e2e8f0;font-weight:700;padding:6px 8px;color:#0f172a;font-size:10.5px}" +
+      ".rxctbl .rxc-totlab,.rxc-tbl .rxc-totlab{font:700 8.5px -apple-system,BlinkMacSystemFont,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#0f172a}" +
+      ".rxctbl .rxc-saverow td,.rxc-tbl .rxc-saverow td{background:#f0fdf4;color:#15803d;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;text-align:right;padding:6px 10px;border-top:1px solid #bbf7d0}" +
+      ".rxcline{font-size:11.5px;color:#0f172a;padding:4px 0;border-bottom:1px solid #f1f5f9}.rxccat{font-size:9px;font-weight:700;color:#0284c7;text-transform:uppercase;letter-spacing:.04em}" +
+      ".rxcnote{margin-top:6px;font:400 8.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b}" +
+      ".rxdoc-ft{margin-top:16px;border-top:1px solid #e2e8f0;padding-top:12px;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxdoc-ft-tbl{width:100%;border-collapse:collapse}" +
+      ".rxdoc-ft-auth{width:56%;vertical-align:middle;padding:0 14px 0 0}" +
+      ".rxdoc-ft-sg{width:44%;vertical-align:bottom;text-align:right;padding:0}" +
+      ".rxdoc-sg{display:inline-block;text-align:center;min-width:190px}" +
+      ".rxdoc-sgimg{max-height:42px;object-fit:contain;display:block;margin:0 auto 3px}" +
+      ".rxdoc-drn{font:700 12.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a;border-top:1px solid #94a3b8;padding-top:3px}" +
+      ".rxdoc-reg{font:500 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;margin-top:1.5px}" +
+      ".rxdoc-foot{margin-top:14px;border-top:1px solid #f1f5f9;padding-top:8px;display:flex;justify-content:space-between;align-items:center}" +
+      ".rxdoc-brand{display:flex;align-items:center;gap:6px;font:500 10px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b}" +
+      ".rxdoc-smdlogo{width:15px;height:15px;object-fit:contain}" +
+      ".rxdoc-smdwm{font:800 11px -apple-system,BlinkMacSystemFont,sans-serif;color:#0e6e63}" +
+      ".rxdoc-smdwm b{color:#0f172a}" +
+      ".rxdoc-resp{font:400 8.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#94a3b8;max-width:58%;text-align:right}" +
       ".rxc-inline-box{width:100%;order:99}" +
       ".rxc-inline-tray{margin-top:10px;border-top:1px solid rgba(0,0,0,.06);padding-top:10px;width:100%;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display',system-ui,sans-serif}" +
       ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}" +
@@ -195,6 +256,8 @@
    * the alternatives were. Empty (and absent from the page) when RxChoice was never opened or the
    * PDF flag is off. */
   function rxcPrintSection() {
+    var opts = arguments[0] || {};
+    if (opts && opts.includeRxChoice === false) return "";
     var sel = sheet && sheet._rxChoice;
     if (!sel) return "";
     try { if (!(window.SMD_RXCHOICE_FLAGS && window.SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
@@ -219,8 +282,8 @@
           }
           var isChosen = (currentSelKey === catKey) || (sel[line.drug] && sel[line.drug].brand === opt.brand);
           var cls = "rxc-td" + (isChosen ? " rxc-chosen" : "");
-          var tag = isChosen ? ('<div class="rxc-tag">' + (catKey === "prescribed" ? "KEPT" : "SELECTED") + '</div>') : "";
-          var brandNm = '<b>' + esc(opt.brand || "-") + '</b>';
+          var tag = isChosen ? ('<span class="rxc-tag">' + (catKey === "prescribed" ? "KEPT" : "SELECTED") + '</span><br>') : "";
+          var brandNm = '<div class="rxc-brand"><b>' + esc(opt.brand || "-") + '</b></div>';
           var mfrNm = opt.manufacturer ? ('<div class="rxc-mfr">' + esc(opt.manufacturer) + '</div>') : '';
           var packInfo = (opt.packsRequired != null && opt.requiredUnits != null)
             ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + ' needed (' + (opt.packsRequired > 1 ? (opt.packsRequired + ' packs') : '1 pack') + ')</div>')
@@ -270,7 +333,7 @@
       return '<section class="rxcsec">' +
         '<div class="rxchd">' +
         '<div class="rxcttl">RxChoice™ · 4-Way Cost Choice</div>' +
-        '<div class="rxcsub">Validated alternatives from the StewardMD Drug Database &middot; Same active ingredient &amp; strength</div>' +
+        '<div class="rxcsub">Equivalent options for the prescribed medicine &middot; Same active ingredient &amp; strength</div>' +
         '</div>' +
         '<table class="rxctbl">' +
         '<thead><tr>' +
@@ -420,14 +483,17 @@
   function rxDocQrBlock(rec, bare) {
     if (!rec || !rec.code) return "";
     var until = rxValidUntil(rec);
-    return '<table style="width:100%;border-collapse:collapse;margin-top:' + (bare ? "0" : "14px") +
-        ';padding-top:12px;border-top:' + (bare ? "0" : "1px solid #e2e8f0") + '"><tr>' +
-      '<td style="width:104px;padding:8px 12px 0 0;vertical-align:top">' + rxQrSvg(rec, 96) + '</td>' +
-      '<td style="padding:8px 0 0 0;vertical-align:top">' +
-        '<div style="font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a;word-break:break-all">' + esc(rec.code) + '</div>' +
-        '<div style="font-size:10.5px;color:#64748b;margin-top:3px">Scan to verify this prescription</div>' +
-        '<div style="font-size:10.5px;color:#0e6e63;font-weight:700;margin-top:2px">stewardmd.in/verify</div>' +
-        (until ? '<div style="font-size:10.5px;color:#64748b;margin-top:2px">Valid until ' + esc(until) + '</div>' : '') +
+    return '<table style="width:100%;border-collapse:collapse;margin-top:' + (bare ? "0" : "2px") +
+        ';padding:8px 10px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc"><tr>' +
+      '<td style="width:78px;padding:6px 10px 6px 6px;vertical-align:middle;text-align:center">' + rxQrSvg(rec, 72) + '</td>' +
+      '<td style="padding:6px 6px 6px 0;vertical-align:middle">' +
+        '<div style="display:inline-block;padding:2px 7px;border-radius:999px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font:700 9px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px">' +
+          '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;margin-right:3px"><polyline points="20 6 9 17 4 12"></polyline></svg>' +
+          'Digitally Verified' +
+        '</div>' +
+        '<div style="font:700 12.5px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a;word-break:break-all">' + esc(rec.code) + '</div>' +
+        '<div style="font:500 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;margin-top:2px">Scan to verify &middot; <span style="color:#0e6e63;font-weight:600">stewardmd.in/verify</span></div>' +
+        (until ? '<div style="font:500 10px -apple-system,BlinkMacSystemFont,sans-serif;color:#94a3b8;margin-top:2px">Valid until ' + esc(until) + '</div>' : '') +
       '</td></tr></table>';
   }
 
@@ -609,6 +675,7 @@
 
   function rxPrintHTML(topic, regNo, rxv) {
     var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
+    var dn = docName() || "—"; if (dn && !/^dr\.?\s+/i.test(dn) && dn !== "—") dn = "Dr. " + dn;
     var n = 0;
     var rows = d.lines.map(function (L) {
       if (L.advice) return '<div class="adv">&bull; ' + esc(L.text) + '</div>';
@@ -668,7 +735,7 @@
       ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
       '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
       rxcPrintSection() +
-      '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
+      '<div class="sign"><div class="nm">' + esc(dn) + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
       rxQrBlock(rxv) +
       '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
       '</body></html>';
@@ -1475,23 +1542,70 @@
   (function preloadSmdLogo(){ try{ var img=new Image(); img.onload=function(){ try{ var c=document.createElement("canvas"); c.width=img.naturalWidth||368; c.height=img.naturalHeight||368; c.getContext("2d").drawImage(img,0,0); _smdLogoData=c.toDataURL("image/png"); }catch(e){} }; img.src="/logo.png"; }catch(e){} })();
   // ---- Professional Rx document + PDF/JPEG export ----
   function rxDoc(topic, regNo, signImg, rxv){
+    var opts = arguments[4] || {};
     var d=collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
+    var dn = docName() || "—";
+    if (dn && !/^dr\.?\s+/i.test(dn) && dn !== "—") dn = "Dr. " + dn;
     var n=0;
-    var rows=d.lines.map(function(L){ if(L.advice) return '<tr class="advr"><td></td><td colspan="2">• '+esc(L.text)+'</td></tr>'; n++; var sub=[L.dose,L.freq,L.duration].filter(Boolean).join(" · "); return '<tr><td class="sn">'+n+'</td><td class="dg"><b>'+esc(L.drug)+'</b>'+(L.brand?' <span class="br">('+esc(L.brand)+')</span>':'')+'</td><td class="dz">'+esc(sub)+'</td></tr>'; }).join("");
+    var rows=d.lines.map(function(L){
+      if(L.advice) return '<tr class="advr"><td class="sn"></td><td colspan="2" class="dg"><div class="rxdoc-adv-box"><span class="rxdoc-adv-lbl">ADVICE</span> ' + esc(L.text) + '</div></td></tr>';
+      n++;
+      var sub=[L.dose,L.freq,L.duration].filter(Boolean).join(" · ");
+      var numStr = n < 10 ? '0' + n : String(n);
+      return '<tr class="rxdoc-row-med"><td class="sn">' + numStr + '</td><td class="dg"><div class="rxdoc-drug-nm"><b>' + esc(L.drug) + '</b>' + (L.brand ? ' <span class="br">(' + esc(L.brand) + ')</span>' : '') + '</div>' + (sub ? '<div class="dz">' + esc(sub) + '</div>' : '') + '</td></tr>';
+    }).join("");
     var node=document.createElement("div"); node.className="rx-doc";
-    node.innerHTML='<div class="rxdoc-in"><div class="rxdoc-hd">'+(c.logo?'<img class="rxdoc-logo" src="'+esc(c.logo)+'">':'')+
-      '<div class="rxdoc-cl"><div class="rxdoc-nm">'+esc(c.name||docName()||"Prescription")+'</div>'+(c.address?'<div class="rxdoc-ad">'+esc(c.address)+'</div>':'')+(c.phone?'<div class="rxdoc-ad">Ph: '+esc(c.phone)+'</div>':'')+'</div></div>'+
-      '<div class="rxdoc-rule"></div><div class="rxdoc-pt"><span>'+(d.name?'<b>'+esc(d.name)+'</b>':'')+(d.age?' &nbsp; '+esc(d.age):'')+'</span><span class="rxdoc-dt">'+esc(date)+'</span></div>'+
-      (d.complaints?'<div class="rxdoc-line"><b>Complaints:</b> '+esc(d.complaints)+'</div>':'')+
-      (d.vitals?'<div class="rxdoc-line"><b>Vitals:</b> '+esc(d.vitals)+'</div>':'')+
-      ((d.dx||topic)?'<div class="rxdoc-line"><b>Diagnosis:</b> '+esc(d.dx||topic)+'</div>':'')+
-      '<div class="rxdoc-rx">℞</div>'+
-      '<table class="rxdoc-tbl">'+(rows||'<tr><td colspan="3">No items.</td></tr>')+'</table>'+
-      '<div class="rxdoc-ft"><div class="rxdoc-sg">'+(signImg?'<img class="rxdoc-sgimg" src="'+esc(signImg)+'">':'')+'<div class="rxdoc-drn">Dr. '+esc(docName()||"—")+'</div><div class="rxdoc-reg">Reg. No: '+esc(regNo||"—")+'</div></div></div>'+
-      rxDocQrBlock(rxv) +
-      rxcPrintSection() +
-      '<div class="rxdoc-foot"><div class="rxdoc-brand">'+(_smdLogoData?'<img class="rxdoc-smdlogo" src="'+_smdLogoData+'">':'<span class="rxdoc-smdwm">Steward<b>MD</b></span>')+'<span>Prescription generated using <b>StewardMD</b></span></div>'+
-      '<div class="rxdoc-resp">Digitally <b>signed &amp; verified</b> by the prescriber named above, who takes <b>complete responsibility</b> for this prescription. Verify every drug, dose, route and interaction against the patient and local protocol before dispensing.</div></div></div>';
+    node.innerHTML='<div class="rxdoc-in">' +
+      '<div class="rxdoc-hd">' +
+        '<div class="rxdoc-hd-left">' +
+          (c.logo ? '<img class="rxdoc-logo" src="' + esc(c.logo) + '">' : '') +
+          '<div class="rxdoc-cl">' +
+            '<div class="rxdoc-nm">' + esc(c.name || dn || "Prescription") + '</div>' +
+            (c.address ? '<div class="rxdoc-ad">' + esc(c.address) + '</div>' : '') +
+            '<div class="rxdoc-reg-top">Reg. No: ' + esc(regNo || c.phone || "—") + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="rxdoc-hd-right">' +
+          '<div class="rxdoc-hd-badge">Clinical Prescription</div>' +
+          '<div class="rxdoc-hd-date">' + esc(date) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rxdoc-rule"></div>' +
+      '<div class="rxdoc-meta-card">' +
+        '<div class="rxdoc-meta-grid">' +
+          '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">PATIENT</div><div class="rxdoc-meta-val"><b>' + esc(d.name || "—") + '</b>' + (d.age ? '<span class="rxdoc-meta-sub">' + esc(d.age) + '</span>' : '') + '</div></div>' +
+          '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">DATE OF VISIT</div><div class="rxdoc-meta-val">' + esc(date) + '</div></div>' +
+          ((d.dx || topic) ? '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">DIAGNOSIS</div><div class="rxdoc-meta-val"><span class="rxdoc-pill-dx">' + esc(d.dx || topic) + '</span></div></div>' : '<div class="rxdoc-meta-cell"></div>') +
+        '</div>' +
+        ((d.complaints || d.vitals) ? (
+          '<div class="rxdoc-meta-divider"></div><div class="rxdoc-meta-grid">' +
+          (d.complaints ? '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">CHIEF COMPLAINTS</div><div class="rxdoc-meta-val">' + esc(d.complaints) + '</div></div>' : '<div class="rxdoc-meta-cell"></div>') +
+          (d.vitals ? '<div class="rxdoc-meta-cell" style="grid-column:span 2"><div class="rxdoc-meta-lbl">VITALS</div><div class="rxdoc-meta-val">' + esc(d.vitals) + '</div></div>' : '') +
+          '</div>'
+        ) : '') +
+      '</div>' +
+      '<div class="rxdoc-rx-header"><span class="rxdoc-rx-sym">℞</span><span class="rxdoc-rx-title">PRESCRIPTION</span></div>' +
+      '<table class="rxdoc-tbl">' + (rows || '<tr><td colspan="2" class="dz">No items prescribed.</td></tr>') + '</table>' +
+      rxcPrintSection(opts) +
+      '<div class="rxdoc-ft">' +
+        '<table class="rxdoc-ft-tbl"><tr>' +
+          '<td class="rxdoc-ft-auth">' + rxDocQrBlock(rxv) + '</td>' +
+          '<td class="rxdoc-ft-sg">' +
+            '<div class="rxdoc-sg">' +
+              (signImg ? '<img class="rxdoc-sgimg" src="' + esc(signImg) + '">' : '') +
+              '<div class="rxdoc-drn">' + esc(dn) + '</div>' +
+              '<div class="rxdoc-reg">Reg. No: ' + esc(regNo || "—") + '</div>' +
+            '</div>' +
+          '</td>' +
+        '</tr></table>' +
+      '</div>' +
+      '<div class="rxdoc-foot">' +
+        '<div class="rxdoc-brand">' +
+          (_smdLogoData ? '<img class="rxdoc-smdlogo" src="' + _smdLogoData + '">' : '<span class="rxdoc-smdwm">Steward<b>MD</b></span>') +
+          '<span>Prescription generated using <b>StewardMD</b></span>' +
+        '</div>' +
+        '<div class="rxdoc-resp">Digitally signed &amp; verified by the prescriber named above, who takes complete responsibility for this prescription. Verify every drug, dose, route and interaction against the patient and local protocol before dispensing.</div>' +
+      '</div></div>';
     return node;
   }
   function rxSaveOrShare(dataURL, filename){
@@ -1503,13 +1617,14 @@
    * should be. Same fail-open contract: rxIssueVerification never rejects, and an out-of-scope or
    * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
+    var opts = arguments[4] || {};
     var v1 = smdLazy('/vendor-html2canvas.js?v=1');
     var p = kind === "pdf" ? v1.then(function(){ return smdLazy('/vendor-jspdf.js?v=1'); }) : v1;
     p.then(function() {
       var d=collectRx()||{}, lines=d.lines;
       rxIssueVerification(lines, d.name).then(function(rxv){
         if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
-        exportRxNow(kind, topic, regNo, signImg, rxv);
+        exportRxNow(kind, topic, regNo, signImg, rxv, opts);
       });
     }).catch(function(){ rxToast("Export engine failed to load"); });
   }
@@ -1530,9 +1645,10 @@
   }
 
   function exportRxNow(kind, topic, regNo, signImg, rxv){
+    var opts = arguments[5] || {};
     // JPEG is a single image, so the block sits in the document. A PDF can run to several pages, so
     // it is left OUT of the document and stamped onto every page below.
-    var node=rxDoc(topic, regNo, signImg, kind==="pdf" ? null : rxv);
+    var node=rxDoc(topic, regNo, signImg, kind==="pdf" ? null : rxv, opts);
     node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
     window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
@@ -1561,7 +1677,23 @@
     }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); });
   }
   function signAndExport(topic, regNo){
-    function chooser(sig){ var ov=document.createElement("div"); ov.className="rx-bp-ov"; ov.innerHTML='<div class="rx-bp rx-exp"><div class="rx-bp-h"><b>Export prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div><div class="rx-row" style="justify-content:center;margin-top:6px"><button class="rx-btn rx-print" id="rxExpPdf">'+rxIco("print")+' Save as PDF</button><button class="rx-btn rx-add" id="rxExpJpg">Save as JPEG</button></div></div>'; sheet.appendChild(ov); ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); }); ov.querySelector("#rxExpPdf").addEventListener("click", function(){ ov.remove(); exportRx("pdf",topic,regNo,sig); }); ov.querySelector("#rxExpJpg").addEventListener("click", function(){ ov.remove(); exportRx("jpeg",topic,regNo,sig); }); }
+    function chooser(sig){
+      var hasRxChoice = !!(sheet && sheet._rxChoice && sheet._rxChoice._allResults && sheet._rxChoice._allResults.length);
+      var ov=document.createElement("div"); ov.className="rx-bp-ov";
+      ov.innerHTML='<div class="rx-bp rx-exp"><div class="rx-bp-h"><b>Export prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div>' +
+        '<div style="margin:12px 0 10px;text-align:center"><label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a)"><input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + '><span>Include RxChoice™ cost options</span></label></div>' +
+        '<div class="rx-row" style="justify-content:center;margin-top:6px"><button class="rx-btn rx-print" id="rxExpPdf">'+rxIco("print")+' Save as PDF</button><button class="rx-btn rx-add" id="rxExpJpg">Save as JPEG</button></div></div>';
+      sheet.appendChild(ov);
+      ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
+      ov.querySelector("#rxExpPdf").addEventListener("click", function(){
+        var inc = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
+        ov.remove(); exportRx("pdf",topic,regNo,sig,{includeRxChoice:inc});
+      });
+      ov.querySelector("#rxExpJpg").addEventListener("click", function(){
+        var inc = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
+        ov.remove(); exportRx("jpeg",topic,regNo,sig,{includeRxChoice:inc});
+      });
+    }
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
   }
 
