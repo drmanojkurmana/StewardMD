@@ -455,3 +455,11 @@ functions/_wardsynq/outbox.js: events staged through StagedRepository commit ato
 
 **Numbers:** 6097 passing, 0 failing. 14 routes waiting for a screen.
 **Next:** P1.1 dynamic forms; P1.4 accounting.
+
+### 2026-09-13 - P1.4 accounting core; suite fix
+
+wardsynq/wardsynq-accounting.js (pure, beside the billing ledger): starter chart of accounts, balanced integer-paise journal entries on open accounts, no posting into closed periods, correction only by single reversal, trial balance as at a date, period close refused on unbalanced books, billing event -> entry mapping. Storage/routes/screens next. Fixed a suite failure merged from main: RxChoice prescription table used a star/tick emoji (forbidden by no-ui-emoji test; its own test asserted it). Process note: one commit (6dde3ef) was pushed while that inherited test was red because the gate checked output, not the fail count; fixed immediately (e7f2a09).
+
+**Deploy blocker (owner):** stewardmd production deployments still "Failure"; preview of the same code succeeds. Needs the build log.
+
+**Numbers:** 6109 passing, 0 failing. 14 routes waiting for a screen.
