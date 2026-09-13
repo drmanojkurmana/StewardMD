@@ -215,4 +215,270 @@ async function qualityReport(request, env, ctx) {
   };
 }
 
-export { MIN_DENOMINATOR, measure, notComputable, computeMeasures, qualityReport };
+
+/* ================================================================== P1.14: quality and safety measures
+ *
+ * One report, each measure with its numerator, denominator, period and the CASE LIST behind it
+ * (record ids and patient ids, never a clinician). Definitions and their sources:
+ *
+ *   - Inpatient mortality, 30-day readmission, sepsis bundle compliance: the UNAPPROVED seed
+ *     definitions in wardsynq/wardsynq-quality.js (MEASURES), reused unchanged through computeMeasure,
+ *     so their exclusions are counted by reason and a denominator under 20 is not shown as a rate.
+ *   - Length of stay, bed-days, bed utilisation: Encounter periodStart/periodEnd
+ *     (wardsynq/wardsynq-model.js), inpatient classes as functions/_wardsynq/migrate-inpatient.js.
+ *   - Falls, pressure injuries, medication errors, HAI: CONFIRMED incidents only, by the category list
+ *     in wardsynq/wardsynq-incidents.js (CATEGORY). A signal nobody has confirmed is not counted.
+ *     Pressure injuries count confirmed incidents; hospital-acquired stage 2+ pressure wound records
+ *     (functions/_wardsynq/wound.js) are reported BESIDE the rate, not added to it, because a wound and
+ *     an incident about the same wound would otherwise be counted twice.
+ *   - Antibiotic days of therapy: one patient receiving one listed drug on one calendar day (UTC) is one
+ *     day of therapy, from administered MedicationAdministration records. The list is the hospital's
+ *     (wsqCfg.antibiotics); with none configured the measure is not computable, never 0.
+ *   - Lab and radiology turnaround: ServiceRequest time to DiagnosticReport reportedAt
+ *     (functions/_wardsynq/lab-result.js, radiology-report.js). Only items with BOTH timestamps are
+ *     measured; the rest are counted as exclusions.
+ */
+import { MEASURES as SEED, computeMeasure, withEvidence } from "../../wardsynq/wardsynq-quality.js";
+import { CATEGORY, stageOf } from "../../wardsynq/wardsynq-incidents.js";
+import { hydrateBundle } from "./migrate-resus.js";
+import { provenanceReport } from "../../wardsynq/wardsynq-bundle-binding.js";
+
+const DAY = 86400000;
+const INPATIENT = new Set(["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"]);
+const ms = (t) => { const v = Date.parse(str(t)); return Number.isFinite(v) ? v : null; };
+const round = (v, dp) => (v == null ? null : Math.round(v * 10 ** dp) / 10 ** dp);
+const median = (xs) => { if (!xs.length) return null; const s = xs.slice().sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+const DEATH = /\b(died|death|deceased|expired|dead)\b/i;
+
+/** Bed-days a stay contributed inside [fromMs, toMs]. An open stay runs to toMs. */
+function overlapDays(e, fromMs, toMs) {
+  const a = ms(e.periodStart); if (a == null) return 0;
+  const b = ms(e.periodEnd) == null ? toMs : ms(e.periodEnd);
+  return Math.max(0, Math.min(b, toMs) - Math.max(a, fromMs)) / DAY;
+}
+
+/** A per-1000-bed-days rate: null (with reason) when there are no bed-days to divide by. */
+function perThousand(id, title, cases, bedDays, extra) {
+  return {
+    id, title, computable: true, numerator: cases.length, denominator: round(bedDays, 1), unit: "per 1000 bed-days",
+    rate: bedDays > 0 ? round((cases.length / bedDays) * 1000, 2) : null,
+    ...(bedDays > 0 ? {} : { note: "No occupied bed-days in this period, so there is no rate." }),
+    cases, ...(extra || {}),
+  };
+}
+
+/** A seed-definition result, reshaped to this report's row. */
+function seedRow(result, cases, extra) {
+  return {
+    id: result.measureId, title: result.label, version: result.version, computable: true,
+    numerator: result.numerator, denominator: result.denominator, rate: result.rate,
+    underpowered: result.suppressed, note: result.suppressed ? result.suppressionReason : null,
+    excluded: result.excluded, exclusionsByReason: result.exclusionsByReason, reading: result.reading,
+    cases, ...(extra || {}), source: "wardsynq/wardsynq-quality.js",
+  };
+}
+
+/**
+ * PURE. input: { encounters, patients, bundles, incidents, wounds, administrations, requests, reports,
+ * beds, antibiotics, fromMs, toMs, unreadable: {Type: reason} }
+ */
+function computeQualitySafety(input) {
+  const i = input || {};
+  const fromMs = Number(i.fromMs), toMs = Number(i.toMs);
+  const bad = i.unreadable || {};
+  const blocked = (types) => types.find((t) => bad[t]);
+  const out = [];
+  const inP = (t) => { const v = ms(t); return v != null && v >= fromMs && v <= toMs; };
+
+  const stays = (i.encounters || []).filter((e) => e && INPATIENT.has(e.class) && e.status !== "cancelled");
+  const bedDays = stays.reduce((n, e) => n + overlapDays(e, fromMs, toMs), 0);
+  const closed = stays.filter((e) => e.status === "finished" && inP(e.periodEnd) && ms(e.periodStart) != null);
+  const encBlocked = blocked(["Encounter"]);
+
+  // LENGTH OF STAY, over stays that ENDED in the period.
+  if (encBlocked) out.push(notComputable("length-of-stay", "Length of stay", `Encounter records could not be read: ${bad.Encounter}`));
+  else {
+    const days = closed.map((e) => (ms(e.periodEnd) - ms(e.periodStart)) / DAY);
+    out.push({
+      id: "length-of-stay", title: "Length of stay (days, stays ended in the period)", computable: true,
+      numerator: round(days.reduce((a, b) => a + b, 0), 1), denominator: closed.length, unit: "days",
+      rate: null, mean: closed.length ? round(days.reduce((a, b) => a + b, 0) / closed.length, 1) : null,
+      median: round(median(days), 1),
+      cases: closed.map((e) => ({ id: e.id, patientId: e.patientId || null })),
+    });
+  }
+
+  // MORTALITY and READMISSION: the seed definitions, fed the facts the record has.
+  if (encBlocked || blocked(["Patient"])) {
+    const why = `Records could not be read: ${bad.Encounter || bad.Patient}`;
+    out.push(notComputable(SEED.INPATIENT_MORTALITY.id, SEED.INPATIENT_MORTALITY.label, why));
+    out.push(notComputable(SEED.READMISSION_30D.id, SEED.READMISSION_30D.label, why));
+  } else {
+    const deceasedAt = new Map((i.patients || []).filter((p) => p && p.deceased && p.deceased.at).map((p) => [str(p.id), ms(p.deceased.at)]));
+    const died = (e) => {
+      const d = deceasedAt.get(str(e.patientId));
+      if (d != null && d >= ms(e.periodStart) && d <= ms(e.periodEnd) + DAY) return true;
+      if (DEATH.test(str(e.disposition))) return true;
+      // No disposition and no death record: we cannot tell, which is counted as data missing.
+      return str(e.disposition) ? false : null;
+    };
+    const cases = closed.map((e) => {
+      const end = ms(e.periodEnd);
+      const back = stays.some((o) => o !== e && str(o.patientId) === str(e.patientId) && ms(o.periodStart) > end && ms(o.periodStart) <= end + 30 * DAY);
+      return {
+        id: e.id, patientId: e.patientId || null, encounterClass: "IPD", dischargedAt: e.periodEnd, died: died(e),
+        readmittedWithin30Days: back ? true : end + 30 * DAY > toMs ? undefined : false,
+      };
+    });
+    const ids = (pred) => cases.filter(pred).map((c) => ({ id: c.id, patientId: c.patientId }));
+    out.push(seedRow(computeMeasure(SEED.INPATIENT_MORTALITY, cases), ids((c) => c.died === true),
+      { note2: "Deaths are read from a recorded death (Patient.deceased) or a discharge disposition. A stay with neither is excluded as data missing, and counted." }));
+    out.push(seedRow(computeMeasure(SEED.READMISSION_30D, cases), ids((c) => c.readmittedWithin30Days === true),
+      { note2: "The record has no planned-readmission flag, so every readmission is counted as unplanned." }));
+  }
+
+  // SEPSIS BUNDLE COMPLIANCE: code-sepsis bundles started in the period. A running bundle is not yet
+  // compliant or breached, so it is held out of the seed measure and counted.
+  if (blocked(["ResusBundle"])) out.push(notComputable(SEED.SEPSIS_BUNDLE.id, SEED.SEPSIS_BUNDLE.label, `ResusBundle records could not be read: ${bad.ResusBundle}`));
+  else {
+    const now = new Date(toMs).toISOString();
+    const hyd = (i.bundles || []).filter((b) => b && b.code === "code-sepsis" && inP(b.timeZero || b.openedAt))
+      .map((b) => { try { return { rec: b, h: hydrateBundle(b) }; } catch (e) { return null; } }).filter(Boolean);
+    const withStatus = hyd.map((x) => ({ ...x, s: x.h.status(now) }));
+    const decided = withStatus.filter((x) => x.s.state !== "running");
+    const cases = decided.map((x) => ({ id: x.rec.id, patientId: x.rec.patientId || null, sepsisBundle: { state: x.s.state, compliant: x.s.compliant } }));
+    let row = computeMeasure(SEED.SEPSIS_BUNDLE, cases);
+    try { row = withEvidence(row, provenanceReport(decided.map((x) => x.h), now)); } catch (e) { row = { ...row, evidence: null }; }
+    out.push(seedRow(row, cases.filter((c) => c.sepsisBundle.compliant).map((c) => ({ id: c.id, patientId: c.patientId })), {
+      stillRunning: withStatus.length - decided.length, evidence: row.evidence || null,
+      allCases: cases.map((c) => ({ id: c.id, patientId: c.patientId, state: c.sepsisBundle.state })),
+    }));
+  }
+
+  // INCIDENT-BASED RATES: confirmed incidents by category, dated by when the event happened.
+  const confirmed = (i.incidents || []).filter((x) => x && x.confirmation && x.confirmation.outcome === "confirmed" && inP(x.when || x.reportedAt));
+  const byCat = (c) => confirmed.filter((x) => x.category === c).map((x) => ({ id: x.id, patientId: x.patientId || null, severity: x.severity }));
+  const incBlocked = blocked(["IncidentReport"]);
+  const rateRow = (id, title, cat, extra) => (incBlocked || encBlocked
+    ? notComputable(id, title, `Records could not be read: ${bad.IncidentReport || bad.Encounter}`)
+    : perThousand(id, title, byCat(cat), bedDays, { source: "confirmed incidents, category " + cat, ...(extra ? extra() : {}) }));
+  out.push(rateRow("falls", "Falls per 1000 bed-days", CATEGORY.FALL));
+  out.push(rateRow("pressure-injuries", "Pressure injuries per 1000 bed-days", CATEGORY.PRESSURE_INJURY, () => {
+    if (bad.WoundAssessment) return { woundRecords: null, woundRecordsReason: `Wound records could not be read: ${bad.WoundAssessment}` };
+    const seen = new Map();
+    for (const w of i.wounds || []) {
+      if (!w || w.kind !== "pressure" || w.origin !== "acquired-here" || !inP(w.assessedAt)) continue;
+      const st = str(w.worstStage || w.stage);
+      if (["2", "3", "4", "unstageable", "deep-tissue"].includes(st)) seen.set(str(w.woundId || w.id), { id: w.woundId || w.id, patientId: w.patientId || null, stage: st });
+    }
+    return { woundRecords: seen.size, woundCases: [...seen.values()], woundNote: "Hospital-acquired pressure wounds at stage 2 or worse recorded in the period, shown beside the rate and not added to it." };
+  }));
+  out.push(rateRow("medication-errors", "Medication error incidents per 1000 bed-days", CATEGORY.MEDICATION_ERROR));
+  out.push(rateRow("hai", "Healthcare-associated infections per 1000 bed-days", CATEGORY.HAI));
+
+  // ANTIBIOTIC DAYS OF THERAPY.
+  const abx = (Array.isArray(i.antibiotics) ? i.antibiotics : []).map((a) => str(a).toLowerCase()).filter(Boolean);
+  if (!abx.length) out.push(notComputable("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", "antibiotic list not configured. Set wardsynq.antibiotics on the organisation to the drug names or codes this hospital counts."));
+  else if (blocked(["MedicationAdministration", "Encounter"])) out.push(notComputable("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", "Administration or encounter records could not be read."));
+  else {
+    const days = new Map();
+    for (const a of i.administrations || []) {
+      if (!a || a.status !== "administered" || !inP(a.administeredAt)) continue;
+      const drug = str(a.drug).toLowerCase(), code = str(a.drugCode).toLowerCase();
+      if (!abx.some((x) => x === code || (drug && (drug === x || drug.startsWith(x + " "))))) continue;
+      const key = `${str(a.patientId)}|${drug || code}|${str(a.administeredAt).slice(0, 10)}`;
+      if (!days.has(key)) days.set(key, { id: a.id, patientId: a.patientId || null, drug: a.drug || a.drugCode, day: str(a.administeredAt).slice(0, 10) });
+    }
+    out.push(perThousand("antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", [...days.values()], bedDays, { antibioticList: abx }));
+  }
+
+  // TURNAROUND TIMES.
+  const reqAt = new Map((i.requests || []).filter(Boolean).map((r) => [str(r.id), r.authoredOn || r.requestedAt || r.orderedAt || (r.meta && r.meta.recordedAt) || null]));
+  const tat = (id, title, pick) => {
+    if (blocked(["DiagnosticReport", "ServiceRequest"])) return notComputable(id, title, "Report or request records could not be read.");
+    const items = (i.reports || []).filter((r) => r && pick(r) && inP(r.reportedAt));
+    const measured = [], excluded = [];
+    for (const r of items) {
+      const a = ms(reqAt.get(str(r.serviceRequestId))), b = ms(r.reportedAt);
+      if (a == null || b == null || b < a) excluded.push({ id: r.id, patientId: r.patientId || null });
+      else measured.push({ id: r.id, patientId: r.patientId || null, minutes: Math.round((b - a) / 60000) });
+    }
+    const mins = measured.map((m) => m.minutes);
+    return {
+      id, title, computable: true, unit: "minutes", numerator: null, denominator: measured.length, rate: null,
+      median: median(mins), mean: mins.length ? Math.round(mins.reduce((x, y) => x + y, 0) / mins.length) : null,
+      excludedMissingTimestamp: excluded.length, excludedCases: excluded, cases: measured,
+    };
+  };
+  out.push(tat("lab-tat", "Laboratory turnaround (request to result)", (r) => r.category !== "imaging"));
+  out.push(tat("radiology-tat", "Radiology turnaround (request to report)", (r) => r.category === "imaging"));
+
+  // BED UTILISATION from the configured beds.
+  const bedCount = i.beds && typeof i.beds === "object" ? Object.values(i.beds).reduce((n, v) => n + (Array.isArray(v) ? v.length : 0), 0) : 0;
+  if (!bedCount) out.push(notComputable("bed-utilisation", "Bed utilisation", "No beds are configured for this hospital (wardsynq.beds), so there is no available bed-days denominator."));
+  else if (encBlocked) out.push(notComputable("bed-utilisation", "Bed utilisation", `Encounter records could not be read: ${bad.Encounter}`));
+  else {
+    const available = bedCount * ((toMs - fromMs) / DAY);
+    out.push({
+      id: "bed-utilisation", title: "Bed utilisation (occupied / available bed-days)", computable: true,
+      numerator: round(bedDays, 1), denominator: round(available, 1), rate: available > 0 ? round(bedDays / available, 3) : null,
+      configuredBeds: bedCount, note: "Available beds are the configured bed list; blocked or closed beds are not subtracted.",
+      cases: stays.filter((e) => overlapDays(e, fromMs, toMs) > 0).map((e) => ({ id: e.id, patientId: e.patientId || null, bedDays: round(overlapDays(e, fromMs, toMs), 2) })),
+    });
+  }
+
+  return { measures: out, bedDays: encBlocked ? null : round(bedDays, 1) };
+}
+
+/** PURE. Safety pipeline counts from the incident ledger. */
+function safetyCounts(incidents) {
+  const all = (incidents || []).filter(Boolean);
+  const confirmed = all.filter((x) => x.confirmation && x.confirmation.outcome === "confirmed");
+  const capas = confirmed.flatMap((x) => x.capas || []);
+  return {
+    signals: all.filter((x) => stageOf(x) === "signal").length,
+    confirmed: confirmed.length,
+    rejected: all.filter((x) => stageOf(x) === "rejected").length,
+    withRootCause: confirmed.filter((x) => x.rca).length,
+    capasOpen: capas.filter((c) => c.state !== "complete").length,
+    capasCompleted: capas.filter((c) => c.state === "complete").length,
+  };
+}
+
+const QS_TYPES = ["Encounter", "Patient", "ResusBundle", "IncidentReport", "WoundAssessment", "MedicationAdministration", "ServiceRequest", "DiagnosticReport"];
+
+/** ctx: { migration, days?, now?, beds?, antibiotics?, actorDeps, recordDeps } */
+async function qualitySafetyReport(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", measures: [] };
+  const { svc, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, measures: [] };
+
+  const nowMs = Date.parse(str(ctx.now)) || Date.now();
+  const days = Math.min(365, Math.max(1, Number(ctx.days) || 30));
+  const fromMs = nowMs - days * DAY;
+  /* Read each type on its own: one type this actor cannot read makes the measures that need it
+   * null with the reason, not the whole report a failure and not a row of zeros. */
+  const unreadable = {}, rows = {};
+  await Promise.all(QS_TYPES.map(async (t) => {
+    try { rows[t] = await svc.list(t, 1000); }
+    catch (e) { unreadable[t] = e instanceof GovernanceError ? "not readable with this role" : str(e && e.message) || "read failed"; rows[t] = []; }
+  }));
+  const r = computeQualitySafety({
+    encounters: rows.Encounter, patients: rows.Patient, bundles: rows.ResusBundle, incidents: rows.IncidentReport,
+    wounds: rows.WoundAssessment, administrations: rows.MedicationAdministration, requests: rows.ServiceRequest,
+    reports: rows.DiagnosticReport, beds: ctx.beds, antibiotics: ctx.antibiotics, fromMs, toMs: nowMs, unreadable,
+  });
+  return {
+    ...base, ok: true,
+    period: { days, from: new Date(fromMs).toISOString(), to: new Date(nowMs).toISOString() },
+    bedDays: r.bedDays, measures: r.measures,
+    safety: unreadable.IncidentReport ? null : safetyCounts(rows.IncidentReport),
+    unreadable: Object.keys(unreadable),
+    notComputable: r.measures.filter((m) => !m.computable).length,
+    note: "Measures of the system over a period. Case lists name records and patients, never a clinician.",
+  };
+}
+
+export { MIN_DENOMINATOR, measure, notComputable, computeMeasures, qualityReport, computeQualitySafety, safetyCounts, qualitySafetyReport };
