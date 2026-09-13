@@ -24,6 +24,7 @@ import { ownerEmails, ownerOK } from "../../_adminauth.js";
 import { CAPS, can, requireCap, capsFor } from "../../_queue_roles.js";
 import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
+import * as ROSTER from "../../_roster_store.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
@@ -2889,6 +2890,40 @@ export async function onRequest(context) {
       for (const o of member) byId.set(o.id, o);
       for (const o of owned) byId.set(o.id, o);
       return json({ ok: true, orgs: Array.from(byId.values()) }, 200, request);
+    }
+    /* STAFF ROSTERING (_roster.js rules, _roster_store.js storage). Staff data, never the patient record.
+     * Everyone in the hospital may see the rota and act on their OWN leave and swaps (identity from the
+     * session, never the body); defining shifts, assigning, removing and approving are the admin's. */
+    if (seg === "roster") {
+      const rb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || rb.orgId || "";
+      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending"]);
+      const az = await ORG.authorizeOrg(env, actor, orgId, ADMIN_SUBS.has(sub) ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const me = actor.id;
+      const out = (r) => json(r, r.ok ? 200 : r.error === "not_found" ? 404 : 422, request);
+      if (method === "GET" && sub === "shifts") return out(await ROSTER.listShifts(env, orgId));
+      if (method === "GET" && sub === "mine") return out(await ROSTER.mine(env, orgId, me));
+      if (method === "GET" && sub === "coverage") {
+        const members = await ORG.listMembers(env, orgId);
+        const roleOf = (id) => ((members.find((m) => m.identity === id) || {}).role || "");
+        return out(await ROSTER.coverageFor(env, orgId, url.searchParams.get("from") || "", url.searchParams.get("to") || "", roleOf));
+      }
+      if (method === "GET" && sub === "on-duty") {
+        const o = await ORG.getOrg(env, orgId);
+        return out(await ROSTER.onDuty(env, orgId, url.searchParams.get("unit") || "", o && o.wardsynq && o.wardsynq.utcOffsetMinutes != null ? o.wardsynq.utcOffsetMinutes : 330));
+      }
+      if (method === "GET" && sub === "leave-pending") return out(await ROSTER.pendingLeave(env, orgId));
+      if (method === "GET" && sub === "swap-pending") return out(await ROSTER.pendingSwaps(env, orgId));
+      if (method === "POST" && sub === "shift") return out(await ROSTER.saveShift(env, orgId, rb, me));
+      if (method === "POST" && sub === "assign") return out(await ROSTER.assign(env, orgId, rb, me));
+      if (method === "POST" && sub === "unassign") return out(await ROSTER.unassign(env, orgId, rb.assignmentId, rb.reason, me));
+      if (method === "POST" && sub === "leave-request") return out(await ROSTER.requestLeave(env, orgId, me, rb));
+      if (method === "POST" && sub === "leave-decide") return out(await ROSTER.decideLeave(env, orgId, rb.leaveId, rb.approve === true, me));
+      if (method === "POST" && sub === "swap-propose") return out(await ROSTER.proposeSwap(env, orgId, me, rb.assignmentId, rb.to));
+      if (method === "POST" && sub === "swap-respond") return out(await ROSTER.respondSwap(env, orgId, me, rb.swapId, rb.accept === true));
+      if (method === "POST" && sub === "swap-approve") return out(await ROSTER.approveSwap(env, orgId, rb.swapId, rb.approve === true, me));
+      return json({ ok: false, error: "not_found" }, 404, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
