@@ -1082,6 +1082,11 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null) || row;
     }
   }
+  /* THE RECORD'S OWN CONTROLS. The list page's menu (hospital-wide Lab reports, Final discharge, Diet)
+   * stays in the DOM after a patient opens; walking it reads everyone's reports, not this patient's.
+   * GHIS adds Medications, Investigations and Patient profile only once a patient is open (Pixel,
+   * 2026-09-13), so the controls present before the row tap are skipped when opening added new ones. */
+  const landingLabels = new Set(((await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, [])) || []).map((c) => c && c.label).filter(Boolean));
   if (typeof client.drainRequests === 'function') await client.drainRequests().catch(() => null); // fresh per-click log
   await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
   await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
@@ -1097,6 +1102,11 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block
   // to the panel the click populated. A click that navigates to another page is undone with history.back().
   const visited = new Set();
+  {
+    const afterOpen = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const added = (Array.isArray(afterOpen) ? afterOpen : []).filter((c) => c && c.label && !landingLabels.has(c.label));
+    if (added.length) for (const l of landingLabels) visited.add(l);
+  }
   const detailSeen = new Set();
   let stopReason = 'no-candidate';
   let clicks = 0;
