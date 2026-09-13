@@ -330,6 +330,19 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
   let viewHost = origin;
   try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
   const base = String(viewHost || '').replace(/\/$/, '');
+  /* SAME SITE OR NO COOKIES. The page issues the call, so it must BE on the data host: a browser left
+   * on the sign-in host (gimsrlogin) calling ghis.gitam.edu sends no session and gets the login form
+   * (Pixel, 2026-09-13). Move onto the view's own page first when the hosts differ. */
+  try {
+    const cur = typeof plugin.currentUrl === 'function' ? await plugin.currentUrl() : null;
+    const curUrl = typeof cur === 'string' ? cur : cur && cur.url;
+    const here = curUrl ? new URL(curUrl).origin : '';
+    if (base && here !== base && typeof plugin.navigate === 'function') {
+      const page = /^https?:/i.test(String(view.pathTemplate || '')) ? String(view.pathTemplate).replace(/\{[^}]*\}/g, encodeURIComponent((patient && patient.patientId) || '')) : base + '/';
+      await plugin.navigate({ url: page });
+      await new Promise((r) => setTimeout(r, 2500));
+    }
+  } catch { /* stay where we are */ }
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));
   const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
   if (wantsToken) plan = replayPlan(view, patient, toks);
