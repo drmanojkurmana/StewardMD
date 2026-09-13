@@ -82,5 +82,12 @@ export async function verifyStaffSession(env, token, nowMs) {
   if (!v || !v.ok) return null;
   const raw = idFromToken(token); const i = String(raw).indexOf("~");
   if (i < 0) return null;
-  return { orgId: raw.slice(0, i), identity: raw.slice(i + 1) };
+  // issuedAt is derived from the signed expiry, so it cannot be forged without the secret.
+  return { orgId: raw.slice(0, i), identity: raw.slice(i + 1), issuedAt: v.exp - STAFF_TTL_MS };
+}
+// PURE. A session issued before the member's sessions were revoked (reset, disable, new PIN or
+// password) is dead, even though its signature and expiry are still good.
+export function sessionRevoked(session, member) {
+  const at = Number(member && member.sessionsRevokedAt) || 0;
+  return at > 0 && Number(session && session.issuedAt) < at;
 }

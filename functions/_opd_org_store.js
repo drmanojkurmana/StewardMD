@@ -293,7 +293,7 @@ async function memberMissing(env, orgId, identity) { return !(await fsGet(env, "
 // Lifecycle. disable/remove -> active:false blocks OPD access IMMEDIATELY (authorizeOrg checks active).
 export async function setMemberActive(env, orgId, identity, active, actorId) {
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, ...(active ? {} : { sessionsRevokedAt: now() }), updatedAt: now() })]);
   await audit(env, orgId, actorId, active ? "member:restore" : "member:disable", identity); return { ok: true };
 }
 export async function removeMembership(env, orgId, identity, actorId) { return setMemberActive(env, orgId, identity, false, actorId); }
@@ -304,7 +304,7 @@ export async function setMemberPin(env, orgId, identity, pin, actorId) {
   if (weakPin) return { ok: false, error: "weak_pin", message: weakPin };
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const pinHash = await hashSecret(String(pin), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_pin", identity); return { ok: true };
 }
 export async function setMemberPassword(env, orgId, identity, email, password, actorId) {
@@ -312,12 +312,12 @@ export async function setMemberPassword(env, orgId, identity, email, password, a
   if (weakPass) return { ok: false, error: "weak_password", message: weakPass };
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const passHash = await hashSecret(String(password), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, passAttempts: 0, passLockedUntil: 0, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, passAttempts: 0, passLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_password", identity); return { ok: true };
 }
 export async function resetMemberAccess(env, orgId, identity, actorId) {
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, passAttempts: 0, passLockedUntil: 0, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, passAttempts: 0, passLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:reset_access", identity); return { ok: true };
 }
 // Raw auth record for the login path (NEVER returned to a client).
@@ -325,7 +325,7 @@ export async function getMemberAuth(env, orgId, identity) {
   const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
   if (!d) return null;
   const f = d.fields || {};
-  return { orgId: sanitize(orgId), identity: String(identity), active: f.active !== false, role: f.role || "viewer", email: f.email || "", pinSalt: f.pinSalt || "", pinHash: f.pinHash || "", passSalt: f.passSalt || "", passHash: f.passHash || "", pinAttempts: f.pinAttempts || 0, pinLockedUntil: f.pinLockedUntil || 0 };
+  return { orgId: sanitize(orgId), identity: String(identity), active: f.active !== false, role: f.role || "viewer", email: f.email || "", pinSalt: f.pinSalt || "", pinHash: f.pinHash || "", passSalt: f.passSalt || "", passHash: f.passHash || "", pinAttempts: f.pinAttempts || 0, pinLockedUntil: f.pinLockedUntil || 0, sessionsRevokedAt: f.sessionsRevokedAt || 0 };
 }
 export async function recordMemberPinAttempt(env, orgId, identity, patch) {
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinAttempts: patch.pinAttempts, pinLockedUntil: patch.pinLockedUntil, updatedAt: now() })]);

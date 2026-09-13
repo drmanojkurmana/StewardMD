@@ -35,7 +35,7 @@ import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket 
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
-import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession } from "../../_opd_auth.js";
+import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
@@ -385,6 +385,10 @@ async function resolveActor(request, env) {
     if (tok) {
       // 1. StewardMD-native staff session (email/PIN login) — signed HMAC, org-bound. Authority via q_members.
       const ss = await verifyStaffSession(env, tok, Date.now());
+      /* A reset, a disable, or a new PIN/password ends every session issued before it. Without this a
+       * leaked PIN, once reset, still opened the ward for the rest of a 12-hour session. A member row
+       * that cannot be read leaves the session to authorizeOrg, which refuses it anyway. */
+      if (ss && sessionRevoked(ss, await ORG.getMemberAuth(env, ss.orgId, ss.identity))) return null;
       if (ss) return { kind: "staff", id: ss.identity, orgId: ss.orgId, role: "viewer", name: ss.identity, ghisToken: "" };
       // 2. GHIS session — an identity provider only; it maps into org membership, never a global elevation.
       const eid = await ghisUserId(env, tok);

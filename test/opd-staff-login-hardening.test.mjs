@@ -101,6 +101,36 @@ test("an admin cannot set a weak PIN or password; the route reports it as a fail
   assert.equal((await post("auth/pin", { orgId: "org1", identity: "nurse1", pin: "4826" })).status, 200);
 });
 
+const whoami = async (token) => (await onRequest({ request: new Request("https://x.test/api/queue/whoami?orgId=org1", { headers: { "X-Staff-Token": token } }), env: ENV })).status;
+
+test("a reset, a disable or a new PIN ends sessions issued before it; restore does not revive them", async () => {
+  ENV.FOLLOWCARE_PHI_KEY = Buffer.alloc(32, 7).toString("base64url");
+  for (const [label, revoke] of [
+    ["reset", () => ORG.resetMemberAccess(undefined, "org1", "nurse1", "owner")],
+    ["new PIN", () => ORG.setMemberPin(undefined, "org1", "nurse1", "5937", "owner")],
+    ["new password", () => ORG.setMemberPassword(undefined, "org1", "nurse1", "nurse1@clinic.in", "Another-long-one9", "owner")],
+    ["disable", () => ORG.setMemberActive(undefined, "org1", "nurse1", false, "owner")],
+  ]) {
+    await seed();
+    const { token } = await post("auth/pin", { orgId: "org1", identity: "nurse1", pin: "4826" });
+    assert.ok(token);
+    assert.equal(await whoami(token), 200, "the session works before " + label);
+    await new Promise((r) => setTimeout(r, 2));
+    assert.equal((await revoke()).ok, true);
+    assert.equal(await whoami(token), 401, "the old session is dead after " + label);
+    if (label === "disable") {
+      await ORG.setMemberActive(undefined, "org1", "nurse1", true, "owner");
+      assert.equal(await whoami(token), 401, "restoring the member does not bring the old session back");
+    }
+  }
+  // A session signed in AFTER the change works.
+  await seed();
+  await ORG.setMemberPin(undefined, "org1", "nurse1", "5937", "owner");
+  await new Promise((r) => setTimeout(r, 2));
+  const fresh = await post("auth/pin", { orgId: "org1", identity: "nurse1", pin: "5937" });
+  assert.equal(await whoami(fresh.token), 200);
+});
+
 test("pure: the password lockout machine mirrors the PIN one on its own fields", () => {
   const now = 1_000_000;
   let m = {};
