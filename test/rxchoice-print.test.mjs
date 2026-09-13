@@ -61,7 +61,7 @@ test("RxChoice Print Table: renders complete 4-way comparison table and totals",
   const html = fnScope(mockSheet, mockEsc, global.window);
   assert.ok(html.includes("rxctbl"), "Contains 4-way comparison table class");
   assert.ok(html.includes("GENERIC"), "Contains GENERIC column header");
-  assert.ok(html.includes("BALANCED ⭐"), "Contains BALANCED ⭐ column header");
+  assert.ok(html.includes("BALANCED<br>"), "Contains BALANCED column header (no emoji: test/no-ui-emoji.test.mjs)");
   assert.ok(html.includes("PREMIUM"), "Contains PREMIUM column header");
   assert.ok(html.includes("DOCTOR PRESCRIBED"), "Contains DOCTOR PRESCRIBED column header");
   assert.ok(html.includes("Moxikind-CV 625"), "Contains Generic candidate brand");

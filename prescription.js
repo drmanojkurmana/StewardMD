@@ -215,7 +215,7 @@
           }
           var isChosen = (currentSelKey === catKey) || (sel[line.drug] && sel[line.drug].brand === opt.brand);
           var cls = "rxc-td" + (isChosen ? " rxc-chosen" : "");
-          var tag = isChosen ? ('<div class="rxc-tag">' + (catKey === "prescribed" ? "✓ KEPT" : "✓ SELECTED") + '</div>') : "";
+          var tag = isChosen ? ('<div class="rxc-tag">' + (catKey === "prescribed" ? "KEPT" : "SELECTED") + '</div>') : "";
           var brandNm = '<b>' + esc(opt.brand || "—") + '</b>';
           var mfrNm = opt.manufacturer ? ('<div class="rxc-mfr">' + esc(opt.manufacturer) + '</div>') : '';
           var packInfo = (opt.packsRequired != null && opt.requiredUnits != null)
@@ -272,7 +272,7 @@
         '<thead><tr>' +
         '<th class="col-rx">Prescribed Medicine</th>' +
         '<th class="col-gen">GENERIC<br><small>Lowest Cost</small></th>' +
-        '<th class="col-bal">BALANCED ⭐<br><small>Recommended Value</small></th>' +
+        '<th class="col-bal">BALANCED<br><small>Recommended Value</small></th>' +
         '<th class="col-prem">PREMIUM<br><small>Top Branded</small></th>' +
         '<th class="col-orig">DOCTOR PRESCRIBED<br><small>Original Choice</small></th>' +
         '</tr></thead>' +
