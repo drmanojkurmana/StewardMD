@@ -45,7 +45,7 @@
      progressive enhancement (degrades to ligature text offline/native). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0">
 <!-- Sacramento (the "MaiKnowledge" credit wordmark, .v4-maik-name .mk-s) is now SELF-HOSTED via
      @font-face in redesign-system.css (assets/fonts/sacramento.woff2). The old Google-CDN <link>
      used a media="print" trick that never loaded in the WKWebView, so the app fell back to a
@@ -70,7 +70,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward22-round">
+<link rel="stylesheet" href="/ward.css?v=ward23-round">
 <link rel="stylesheet" href="/discharge.css?v=dis1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
@@ -2485,7 +2485,7 @@ window.openExternal = function (u) {
      Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
-<script src="/ward.js?v=ward22-round" defer></script>
+<script src="/ward.js?v=ward23-round" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->

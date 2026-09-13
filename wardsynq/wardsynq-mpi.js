@@ -582,7 +582,8 @@ function makeProvisionalIdentity(input) {
   const day = compactDate(spec.arrivedAt);
   // Padded to two digits for readability; a day past 99 unidentified arrivals keeps counting rather
   // than wrapping, because a colliding mrn is a wrong-patient hazard and an ugly one is not.
-  const mrn = `TRAUMA-UNKNOWN-${token}-${day}-${String(sequence).padStart(2, "0")}`;
+  const prefix = spec.isTrauma === false ? "EMERG-UNKNOWN" : (spec.prefix || "TRAUMA-UNKNOWN");
+  const mrn = `${prefix}-${token}-${day}-${String(sequence).padStart(2, "0")}`;
 
   return Patient({
     mrn,
