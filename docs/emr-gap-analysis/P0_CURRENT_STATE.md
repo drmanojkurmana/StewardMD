@@ -405,3 +405,11 @@ Staff switch on authenticator-app codes for their own account (new Sign-in secur
 
 **Numbers:** 6048 passing, 0 failing. 15 routes waiting for a screen.
 **Next (P0.9):** confirm live once Cloudflare serves new deploys; security headers; session/device visibility.
+
+### 2026-09-13 - P0.9 sign-in history + sign out everywhere
+
+Cloudflare hold-up cleared 08:44 UTC; two-step sign-in confirmed live. Each staff sign-in audit now names the device ("Chrome on Android", never raw user-agent). Sign-in security page lists the account's own recent sign-ins/failures/lockouts/two-step events with device, failed and partial loads stated, and Sign out everywhere (ends every session). Checker now scans wardsynq.com pages that call via c.api (8 files were invisible; mfa routes had passed only by word coincidence); operational-health confirmed on the audit page. Security headers already set (_headers; no strict CSP by documented decision). Live.
+
+**Numbers:** 6051 passing, 0 failing. 14 routes waiting for a screen.
+**P0.9 status:** MFA, lockout, password/PIN policy, session revocation, login audit, device visibility, rate limiting, break-glass, headers all in place. Not done: org policy to REQUIRE two-step for roles.
+**Next:** org policy "require two-step sign-in" for chosen roles; then P0.8 documents.
