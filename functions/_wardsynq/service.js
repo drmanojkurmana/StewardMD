@@ -201,6 +201,10 @@ const RESOURCE_TYPES = Object.freeze([
    * short, and only the caller knows whether it actually stored the last page. Kept in the record
    * itself so the recovery point is answerable from the same store a restore would rebuild. */
   "BackupRun",
+  /* P2.17: a reviewer's recorded decision on a break-glass grant or privileged admin act, and a
+   * restore test somebody actually ran. Append-only receipts; neither changes anyone's access. */
+  "SecurityReview",
+  "RestoreTest",
   /* A pharmacy stock movement. The LEVEL is summed from these and never stored as a counter, because
    * a counter loses one of two concurrent updates and the direction it loses in is the one that says
    * there is more stock than there is. Issues are deliberately NOT movements: the quantity that left

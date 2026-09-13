@@ -186,6 +186,7 @@ import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, wa
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
+import { securityReport, recordSecurityReview, recordRestoreTest } from "../../_wardsynq/security-review.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
@@ -696,7 +697,7 @@ export async function onRequest(context) {
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -1101,6 +1102,10 @@ export async function onRequest(context) {
          * restores into a chart with holes in it. So no clinical capability reaches it at any dose:
          * it is STAFF_ADMIN, the person who owns the deployment, and every page is audited. */
         backup: CAPS.STAFF_ADMIN, "backup-status": CAPS.STAFF_ADMIN,
+        /* P2.17. Reading everyone's access pattern, and recording a review or a restore test, is the
+         * deployment owner's act. No clinical capability reaches it: a doctor or nurse gets 403.
+         * safety_officer is NOT added - it is clinical-incident safety, not account security. */
+        "security-report": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
@@ -2195,6 +2200,22 @@ export async function onRequest(context) {
         const r = await backupStatus(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "security-report" && method === "GET") {
+        const orgEvents = await ORG.orgAuditEvents(env, wOrgId).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) }));
+        const r = await securityReport(request, env, { ...deps, orgEvents, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "security-review" && method === "POST") {
+        const orgEvents = body.subjectKind === "privileged-action"
+          ? await ORG.orgAuditEvents(env, wOrgId).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) }))
+          : null;
+        const r = await recordSecurityReview(request, env, { ...deps, orgEvents, viewerId: actor.id, subjectKind: body.subjectKind, subjectId: body.subjectId, decision: body.decision, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "restore-test" && method === "POST") {
+        const r = await recordRestoreTest(request, env, { ...deps, restoredWhat: body.restoredWhat, outcome: body.outcome, at: body.at, performedBy: body.performedBy, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "advisory-check" && method === "POST") {
         const r = await checkAdvisories(request, env, { ...deps, advisories: body.advisories, now: body.now });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -2610,7 +2631,7 @@ export async function onRequest(context) {
        * records this tenant already writes - see digital-twin.js's own header for what this is
        * and, just as deliberately, is NOT. */
       if (sub === "operational-health" && method === "GET") {
-        const r = await operationalHealthReport(request, env, { ...deps, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, resources: (wsqCfg && wsqCfg.resources) || null });
+        const r = await operationalHealthReport(request, env, { ...deps, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null, ward: url.searchParams.get("ward") || "", escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, resources: (wsqCfg && wsqCfg.resources) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* TASK 10.12: governed operational predictions. Never merged into the twin's own sections -

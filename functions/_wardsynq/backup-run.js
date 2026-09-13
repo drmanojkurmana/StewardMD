@@ -149,7 +149,11 @@ async function exportPage(request, env, ctx) {
     await repository.auditOnly(tenantId, {
       action: "record.export",
       tenantId,
+      /* `actor` is the column the audit table stores; `actorId` alone landed as NULL, so nobody
+       * could tell afterwards WHO took the hospital out. resourceCounts feeds the export review. */
+      actor: resolved.actor.id,
       actorId: resolved.actor.id,
+      resourceCounts: { records: rows.length },
       detail: `backup export page: ${rows.length} rows, seq ${since + 1}..${(page && page.cursor) || since}`,
     });
   } catch (e) {

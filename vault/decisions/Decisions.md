@@ -5339,3 +5339,22 @@ their own leak-resistant system prompt or verify on-device whether `stripReasoni
 in practice. `LlamaEngine.swift`'s chat-template application (`llama_chat_apply_template`) looks
 correct on inspection, so this reads as an instruction-following limit at 4B scale, not a template
 bug - not re-verified live on device this session.
+
+
+## 2026-09-13 WardSynQ security review (P2.17) is advisory, evidence-backed, and never green by default
+
+`functions/_wardsynq/security-review.js`, routes `GET /ward/security-report`, `POST /ward/security-review`,
+`POST /ward/restore-test` (all STAFF_ADMIN; doctor/nurse 403), Admin Center tab "Security review".
+- Findings are deterministic counts over the audit trail and the org event log, each with its rows.
+  Nothing auto-locks. Thresholds live in `RULES` and are returned on the report.
+- Audit read-back is an OPTIONAL repository method `auditTrail()` (Memory + D1), not in PORT_METHODS;
+  a port without it reports the section unavailable, never clean.
+- Reviews and restore tests are append-only `SecurityReview` / `RestoreTest` records. The self-review
+  check uses the server's own record of who acted. No new record grant: hr holds STAFF_ADMIN but has no
+  clinical actor (pinned by wardsynq-rbac-4-13), so hr gets a clean 403 from the store; admin works.
+  safety_officer was not given access: it is clinical-incident safety, not account security.
+- Data protection is green only with a backup inside a configured RPO AND a successful restore test.
+  The same verdict now appears in operational-health.
+- Not built: ward/assignment reads (no assignment data), staff-as-patient (would need new PHI
+  linkage), VIP flag (does not exist), denied READS (the service only audits denied writes).
+- Backup export audit rows now carry `actor` (they landed as NULL before) and a row count.

@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"]);
     var tab = st._adminTab || "hospital";
-    if (tab === "maik" && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms };
     return renderers[tab](c, body);
   } });
 
@@ -672,6 +672,119 @@
             if (or2 && or2.ok) c.state.org = or2.org;
             c.toast("MaiK settings saved."); WSQ.render("admin");
           });
+        });
+      };
+    });
+  }
+  // ---- Security review (P2.17) ----------------------------------------------------------------
+  /* Advisory findings over the audit trail, a review queue for break-glass and admin acts, and data
+   * protection. Loading, failed, unavailable and empty are four different sentences: a section that
+   * could not be checked must never read as "nothing found", and nothing here is green without a
+   * recorded backup AND a recorded restore test. */
+  var SEC_TYPE_LABEL = {
+    "chart-access-volume": "Unusually many patients read", "chart-access-off-hours": "Reads outside usual hours",
+    "repeated-denied": "Repeated denied actions", "unusual-export": "Unusual export volume",
+    "failed-sign-ins": "Many failed sign-ins", "new-device": "Sign-in from a new device", "many-devices": "Many devices in a short time"
+  };
+  var SEC_STATUS_LABEL = { green: "Protected: recent backup and a successful restore test on record", amber: "Needs attention", red: "Not protected", unavailable: "Unknown: could not be checked" };
+
+  function secSection(c, title, s, days) {
+    var esc = c.esc;
+    var h = "<h3>" + esc(title) + "</h3>";
+    if (!s || s.status !== "ok") return h + '<div class="msg err">Could not be checked' + (s && s.detail ? ": " + esc(s.detail) : "") + ". This is not the same as nothing being found.</div>";
+    if (s.truncated || s.partial) h += '<div class="msg note">Only part of the log could be read, so some activity may not have been checked.</div>';
+    if (!s.findings.length) return h + '<p class="quiet">No findings in the last ' + esc(days) + " days.</p>";
+    return h + s.findings.map(function (f) {
+      return "<details><summary><b>" + esc(SEC_TYPE_LABEL[f.type] || f.type) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
+        '<p class="quiet">' + esc(f.method) + "</p>" +
+        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th></tr></thead><tbody>' +
+        f.evidence.map(function (e) {
+          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + "</td></tr>";
+        }).join("") + "</tbody></table></div>" +
+        (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + "</details>";
+    }).join("");
+  }
+
+  function securityReviewHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<div class="card"><span class="spin"></span> Loading the security review...</div>';
+    if (r.failed) return '<div class="card"><div class="msg err">The security review could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being nothing to review.</div></div>";
+    var h = '<div class="card"><h2>Security review, last ' + esc(r.days) + " days</h2>" +
+      '<div class="msg note">' + esc(r.note) + "</div>";
+    var types = Object.keys(r.counts || {});
+    h += types.length ? '<div class="tbl"><table><thead><tr><th>Finding</th><th>Count</th></tr></thead><tbody>' +
+      types.map(function (t) { return "<tr><td>" + esc(SEC_TYPE_LABEL[t] || t) + "</td><td>" + esc(r.counts[t]) + "</td></tr>"; }).join("") + "</tbody></table></div>"
+      : '<p class="quiet">No findings in the sections that could be checked. Check each section below for any that could not.</p>';
+    h += secSection(c, "Chart access", r.chartAccess, r.days) + secSection(c, "Exports", r.exports, r.days) + secSection(c, "Sign-ins", r.logins, r.days);
+    h += "<h3>Not checked, and why</h3><ul>" + (r.notDetected || []).map(function (n) { return "<li>" + esc(n.rule) + ": " + esc(n.reason) + "</li>"; }).join("") + "</ul></div>";
+
+    var q = r.reviewQueue || {};
+    h += '<div class="card"><h2>Review queue</h2>';
+    if (q.status === "ok" || q.status === "partial") {
+      if (q.missing && q.missing.length) h += '<div class="msg note">Incomplete: ' + esc(q.missing.join("; ")) + ".</div>";
+      h += q.items.length ? '<p class="quiet">' + esc(q.awaiting) + " awaiting review.</p>" +
+        '<div class="tbl"><table><thead><tr><th>What</th><th>By</th><th>When</th><th>Detail</th><th>Status</th><th></th></tr></thead><tbody>' +
+        q.items.map(function (i) {
+          var key = esc(i.kind + "|" + i.subjectId);
+          var hist = i.reviews.map(function (v) { return esc(v.decision) + " by " + esc(v.reviewedBy) + " (" + esc(v.at) + ")" + (v.note ? ": " + esc(v.note) : ""); }).join("<br>");
+          return "<tr><td>" + esc(i.kind === "break-glass" ? "Break-glass" : i.action) + "</td><td>" + esc(i.actor) + "</td><td>" + esc(i.at || "") + "</td><td>" + esc(i.detail) + "</td><td>" +
+            esc(i.status === "awaiting" ? "Awaiting review" : i.status === "appropriate" ? "Reviewed, appropriate" : "Needs follow-up") + (hist ? '<br><span class="quiet">' + hist + "</span>" : "") + "</td><td>" +
+            (i.ownAction ? '<span class="quiet">Your own action: another administrator must review it.</span>'
+              : '<button type="button" class="btn ghost" data-sec-review="' + key + '|appropriate">Reviewed, appropriate</button> ' +
+                '<button type="button" class="btn ghost" data-sec-review="' + key + '|follow-up">Needs follow-up</button>') + "</td></tr>";
+        }).join("") + "</tbody></table></div>" : '<p class="quiet">No break-glass grants or admin actions to review.</p>';
+    } else h += '<div class="msg err">The review queue could not be loaded' + (q.detail ? ": " + esc(q.detail) : "") + ". This is not the same as nothing awaiting review.</div>";
+    h += '<div id="secRevMsg"></div></div>';
+
+    var d = r.dataProtection || {};
+    h += '<div class="card"><h2>Data protection</h2><p><b>' + esc(SEC_STATUS_LABEL[d.status] || "Unknown") + "</b></p>" +
+      ((d.reasons || []).length ? "<ul>" + d.reasons.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "");
+    if (d.status !== "unavailable") {
+      h += "<p>Last backup: " + (d.lastBackup ? esc(d.lastBackup.at) + ", " + esc(d.lastBackup.rows) + " rows, stored at " + esc(d.lastBackup.location) : "never recorded") + "</p>" +
+        "<p>Last restore test: " + (d.lastRestoreTest ? esc(d.lastRestoreTest.at) + ", " + esc(d.lastRestoreTest.outcome) + ", restored " + esc(d.lastRestoreTest.restoredWhat) + ", by " + esc(d.lastRestoreTest.performedBy) : "never recorded") + "</p>";
+    }
+    h += "<h3>Record a restore test</h3><div class=\"row\">" +
+      '<label class="f"><span>What was restored</span><input id="secRtWhat" placeholder="Backup of 12 Sep into a test database"></label>' +
+      '<label class="f"><span>Outcome</span><select id="secRtOutcome"><option value="">Choose</option><option value="success">Success</option><option value="partial">Partial</option><option value="failed">Failed</option></select></label>' +
+      '<label class="f"><span>Done by</span><input id="secRtBy"></label>' +
+      '<label class="f"><span>Note</span><input id="secRtNote"></label>' +
+      '</div><button type="button" class="btn" id="secRtSave">Record restore test</button><div id="secRtMsg"></div></div>';
+
+    var a = r.auditRetention || {};
+    h += '<div class="card"><h2>Audit retention</h2>';
+    h += a.status === "ok"
+      ? "<p>" + esc(a.configuredNote) + "</p><p>Oldest audit row: " + esc(a.oldestAuditAt || "none found") + "</p><p>Oldest record: " + esc(a.oldestRecordAt || "none") + "</p>" +
+        (a.gap ? '<div class="msg err">' + esc(a.gap) + "</div>" : "")
+      : '<div class="msg err">Audit retention could not be checked.</div>';
+    return h + "</div>";
+  }
+  WSQ._securityReviewHtml = securityReviewHtml;
+
+  function renderSecurity(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = securityReviewHtml(c, null);
+    return c.api("/ward/security-report" + q + "&days=7").then(function (r) {
+      body.innerHTML = securityReviewHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      if (!r || !r.ok) return;
+      body.querySelectorAll("[data-sec-review]").forEach(function (b) {
+        b.onclick = function () {
+          var parts = b.getAttribute("data-sec-review").split("|");
+          var note = "";
+          if (parts[2] === "follow-up") { note = window.prompt("What needs following up?") || ""; if (!note) return; }
+          b.disabled = true;
+          c.api("/ward/security-review", { orgId: c.state.orgId, subjectKind: parts[0], subjectId: parts.slice(1, -1).join("|"), decision: parts[parts.length - 1], note: note }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; document.getElementById("secRevMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+            c.toast("Review recorded."); WSQ.render("admin");
+          });
+        };
+      });
+      var save = document.getElementById("secRtSave");
+      if (save) save.onclick = function () {
+        var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+        save.disabled = true;
+        c.api("/ward/restore-test", { orgId: c.state.orgId, restoredWhat: val("secRtWhat"), outcome: val("secRtOutcome"), performedBy: val("secRtBy"), note: val("secRtNote") }).then(function (x) {
+          if (!x || !x.ok) { save.disabled = false; document.getElementById("secRtMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast("Restore test recorded."); WSQ.render("admin");
         });
       };
     });

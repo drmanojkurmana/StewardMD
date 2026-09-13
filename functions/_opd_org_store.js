@@ -425,6 +425,14 @@ export async function recentSignIns(env, orgId, identity) {
     .map((e) => ({ ts: e.ts, action: e.action, detail: e.meta || "" }));
   return { ok: true, events: mine, partial: rows.length >= SIGNIN_SCAN };
 }
+/* The hospital's event log (sign-ins, admin acts) for the security review. Unordered and capped,
+ * so a full page is reported as partial. ponytail: one capped query; page by ts if a hospital
+ * routinely exceeds it. */
+const ORG_EVENT_SCAN = 2000;
+export async function orgAuditEvents(env, orgId) {
+  const rows = await fsQuery(env, "q_events", { where: { field: "hospitalId", value: String(orgId) }, limit: ORG_EVENT_SCAN });
+  return { events: rows.map((r) => withId(r.id, r.fields)), partial: rows.length >= ORG_EVENT_SCAN };
+}
 export async function signOutEverywhere(env, orgId, identity) {
   if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { sessionsRevokedAt: now(), updatedAt: now() })]);
