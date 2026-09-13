@@ -66,6 +66,22 @@ test("a read session reuses the approved adapter even while the doctor's own onb
   assert.equal(ward.deployment.activeVersionId, "ver-live");
 });
 
+test("Discover again on an approved hospital starts a new session and job while the adapter stays active", async () => {
+  const { db, env, docEmail } = await setup();
+  const post = (body) => onRequest({ request: new Request("https://x/api/connect/agent/sessions?tenant=t1", { method: "POST", body: JSON.stringify(body), headers: { "content-type": "application/json", "Cf-Access-Authenticated-User-Email": docEmail } }), env, params: {} });
+  const reuse = await (await post({ emrUrl: "https://hims.kims.example", consent: { agreed: true }, runner: "phone" })).json();
+  assert.equal(reuse.reuse, true);
+  const fresh = await (await post({ emrUrl: "https://hims.kims.example", consent: { agreed: true }, runner: "phone", purpose: "discover" })).json();
+  assert.equal(fresh.reuse, false, "discover never reuses");
+  assert.notEqual(fresh.sessionId, reuse.sessionId, "a new session, not the reuse one");
+  assert.ok(fresh.jobId || (fresh.job && fresh.job.jobId) || fresh.state, JSON.stringify(fresh));
+  const again = await (await post({ emrUrl: "https://hims.kims.example", consent: { agreed: true }, runner: "phone", purpose: "discover" })).json();
+  assert.equal(again.sessionId, fresh.sessionId, "an onboarding run in flight is resumed, not duplicated");
+  assert.equal((await getDeployment(db, "t1", "dep-1")).active_version_id, "ver-live", "the approved adapter keeps serving");
+  const ward = await (await post({ emrUrl: "https://hims.kims.example", consent: { agreed: true }, runner: "phone", purpose: "read" })).json();
+  assert.equal(ward.reuse, true, "Ward Sync still reads through the approved adapter meanwhile");
+});
+
 test("a clinician cannot remove an adapter and an unknown hospital is 404", async () => {
   const { db, call, docEmail, ownerEmail } = await setup();
   assert.equal((await call("DELETE", "/api/connect/agent/connections/dep-1?tenant=t1", docEmail)).status, 403);

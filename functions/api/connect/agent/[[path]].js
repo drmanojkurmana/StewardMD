@@ -494,6 +494,13 @@ export async function onRequest(context) {
       // Reconnect/backgrounding resumption
       let session = await findLiveSession(deps.db, tenantId, actor.id, deployment.id, SESSION_LIVE, nowMs);
       let job = session ? await findJobForSession(deps.db, tenantId, session.id) : null;
+      /* DISCOVER AGAIN. A hospital that already has an approved adapter can be discovered afresh (a
+       * better adapter, an EMR that changed): the doctor asks with purpose:"discover". An onboarding
+       * run already in flight on this session is resumed; otherwise a new session and job start, and
+       * the approved adapter keeps serving Ward Sync until the new draft is approved over it. */
+      const discover = body.purpose === "discover";
+      const ONBOARDING = ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"];
+      if (session && discover && !(job && ONBOARDING.includes(job.state))) { session = null; job = null; }
       if (!session) {
         const sessionId = newId("ses_");
         const sessionTtl = Number(body.ttlMs) > 0 ? Number(body.ttlMs) : 3600000;
@@ -512,7 +519,7 @@ export async function onRequest(context) {
         // Phone runner reuse: the deployment already has a live, approved adapter -- this session is for
         // reauth/use of that adapter, not for onboarding a new one, so no job is created at all. The
         // existing Camofox path (runner absent) is unchanged: it always onboards, active version or not.
-        if (!(runnerPhone && deployment.active_version_id)) {
+        if (!(runnerPhone && deployment.active_version_id) || discover) {
           const jobId = newId("job_");
           job = await insertJob(deps.db, {
             id: jobId,
@@ -536,8 +543,8 @@ export async function onRequest(context) {
          * adapter with reuse=false (owner, 2026-09-13). A caller reading through the adapter says
          * purpose:"read"; otherwise only a job still onboarding keeps reuse off, so the sheet can
          * resume that run. */
-        const jobBusy = !!job && ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"].includes(job.state);
-        sessionResp.reuse = !!deployment.active_version_id && (body.purpose === "read" || !jobBusy);
+        const jobBusy = !!job && ONBOARDING.includes(job.state);
+        sessionResp.reuse = !!deployment.active_version_id && !discover && (body.purpose === "read" || !jobBusy);
       }
       return jsonResponse(sessionResp);
     }
