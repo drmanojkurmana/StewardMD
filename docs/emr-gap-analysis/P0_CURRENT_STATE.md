@@ -494,3 +494,8 @@ Conditional form fields now appear on change (onFormChange redraw), ward.js site
 GET /ward/nurse-worklist (MAR schedule overdue/due-next + NEWS2/PEWS per ward patient, sickest first, per-row read failures) + Nurse worklist screen and map tile. Bug fixed: unscorable early-warning score was total 0; now no number. Live (ward.js site54, shell.js v32), production deploy succeeded. 6127 passing.
 **P1 done:** 1.1 forms, 1.4 accounting, 1.6 nurse worklist (first cut: no nurse-patient assignment or task list yet), 1.7 rostering, 1.8 referrals, 1.15 outbox.
 **Next:** P1.3 approvals gaps, P1.2 supply chain gaps, P1.9-1.14 top-ups, P1.5 TPA; then P2.
+
+### 2026-09-13 - P1.3 approvals: roles and expiry
+
+approvalPolicy[subjectType] = { approverRoles, expiresHours } (whitelisted): approver role enforced, pending requests expire and must be resubmitted; no policy = unchanged. Amount thresholds NOT added (requester-supplied amount is dodgeable; needs server-held subject values such as a PO total, which purchasing does not store yet). Server-only change, deployed via main. 6128 passing.
+**Next:** P1.2 supply chain gaps (PO totals, partial/over receipt, FEFO, transfers), then amount thresholds on server-held values; P1.9-1.14; P1.5; then P2.
