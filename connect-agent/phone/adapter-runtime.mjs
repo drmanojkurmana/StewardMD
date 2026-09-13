@@ -255,6 +255,12 @@ export function rowsFromHtml(text, view, parse) {
   return Array.isArray(rows) ? rows : [];
 }
 
+/** Rows worth calling data: at least two real columns (one column per row is a heading list, not results). */
+export function usableRows(rows) {
+  const r = Array.isArray(rows) ? rows[0] : null;
+  return !!r && Object.keys(r).filter((k) => k.charAt(0) !== '_').length >= 2;
+}
+
 export function normLabel(s) { return String(s || '').toLowerCase().replace(/[^a-z]/g, ''); }
 
 /** One table's data rows keyed by its own header labels (row-level link and onclick kept, as READ_ROWS does). */
@@ -320,7 +326,7 @@ export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 
  */
 export async function executeView({ plugin, origin, view, patient, tokens = null, parseHtml = null, onCall = null }) {
   let plan = replayPlan(view, patient);
-  if (!plan.calls.length) return null;
+  if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
   const base = String(origin || '').replace(/\/$/, '');
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));
   const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
@@ -350,6 +356,15 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
       const headers = pre.requestKind === 'json' ? { 'Content-Type': 'application/json' } : {};
       const r = await run({ method: 'POST', url: base + pre.path, body, headers });
       if (r.kind === 'login') throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page to ' + pre.path);
+      /* A POST CAN BE THE DATA. Many EMRs search by form post (GHIS labs: a patient-id search that
+       * answers JSON). When the answer fits the view by name or columns, it is the view's data. */
+      if (r.rows.length && usableRows(r.rows)) {
+        const pFits = !!(RESOURCE_WORDS[view.resourceHint] && RESOURCE_WORDS[view.resourceHint].test(pre.path));
+        const pWant = Array.isArray(view.headers) ? view.headers.filter(Boolean) : [];
+        if (r.kind === 'json' ? (pFits || headerFit(r.rows, pWant) >= 1) : (pWant.length >= 2 ? headerFit(r.rows, pWant) >= 2 : pFits)) {
+          return { rows: r.rows, via: 'endpoint', url: pre.path, kind: r.kind, method: 'POST' };
+        }
+      }
     }
     if (attempt > 0 && !any) break;
     const want = Array.isArray(view.headers) ? view.headers.filter(Boolean) : [];
@@ -376,7 +391,7 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
     if (!plan.prerequisites.length) break;
   }
   if (loginSeen) throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page');
-  return { rows: [], via: 'endpoint', url: plan.calls[0].url, kind: 'empty' };
+  return { rows: [], via: 'endpoint', url: plan.calls.length ? plan.calls[0].url : plan.prerequisites[0].path, kind: 'empty' };
 }
 
 function hostOf(u) { try { return new URL(u).host; } catch { return String(u || ''); } }
