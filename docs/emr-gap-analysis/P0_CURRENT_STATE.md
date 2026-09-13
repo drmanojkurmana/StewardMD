@@ -413,3 +413,11 @@ Cloudflare hold-up cleared 08:44 UTC; two-step sign-in confirmed live. Each staf
 **Numbers:** 6051 passing, 0 failing. 14 routes waiting for a screen.
 **P0.9 status:** MFA, lockout, password/PIN policy, session revocation, login audit, device visibility, rate limiting, break-glass, headers all in place. Not done: org policy to REQUIRE two-step for roles.
 **Next:** org policy "require two-step sign-in" for chosen roles; then P0.8 documents.
+
+### 2026-09-13 - P0.9 require two-step sign-in per role
+
+Admin Center, Staff tab: tick roles that must use two-step sign-in (org.security.requireTwoStepRoles, only real role names kept). A member of such a role without it can sign in but the server refuses every route except mfa/* and whoami (two_step_required); wardsynq.com routes them to Sign-in security, OPD page and queue app say where to set it up. Live (admin.js v9, shell.js v28, security.js v3).
+
+**Numbers:** 6053 passing, 0 failing. 14 routes waiting for a screen.
+**P0.9 status:** complete for staff accounts (MFA + required-by-role, lockouts, credential policy, session revocation, sign-in audit with device, sign out everywhere, rate limiting, break-glass, headers). Doctor StewardMD accounts use their identity provider.
+**Next:** P0.8 documents behind an S3-compatible interface.
