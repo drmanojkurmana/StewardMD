@@ -28,15 +28,15 @@ export async function captureWorklist({ plugin }) {
 }
 
 const HEADER_MAP = [
-  ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b/i],
-  ['episode', /\b(visit|episode|admission|encounter|ip\s*number)\b/i],
-  ['name', /\b(patient\s*)?name\b/i],
-  ['age', /\b(age|dob|date\s*of\s*birth|age\s*\/\s*sex)\b/i],
-  ['gender', /\b(sex|gender)\b/i],
-  ['bed', /\b(bed|room|cot)\b/i],
-  ['dept', /\b(ward|dept|department|unit|speciality|specialty|branch)\b/i],
-  ['doctor', /\b(doctor|consultant|physician|treating|dr\.?)\b/i],
-  ['status', /\b(status|state)\b/i],
+  ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b|^patient_?id$/i],
+  ['episode', /\b(visit|episode|admission|encounter|ip\s*number)\b|^episode_?id$/i],
+  ['name', /\b(patient\s*)?name\b|^patient_?first_?name$/i],
+  ['age', /\b(age|dob|date\s*of\s*birth|age\s*\/\s*sex)\b|^dob$/i],
+  ['gender', /\b(sex|gender)\b|^gender$/i],
+  ['bed', /\b(bed|room|cot)\b|^bed_?name$/i],
+  ['dept', /\b(ward|dept|department|unit|speciality|specialty|branch)\b|^dept_?description$/i],
+  ['doctor', /\b(doctor|consultant|physician|treating|dr\.?)\b|^employee_?first_?name$/i],
+  ['status', /\b(status|state)\b|^queue_?status$/i],
 ];
 
 // Which patient field a column label feeds, or null. Exported for the unit test.
@@ -67,6 +67,12 @@ export function mapRow(row) {
     }
     if (f === 'gender' && out.gender) continue;
     if (!out[dest[f]]) out[dest[f]] = v;
+  }
+  const DIRECT = ['patientId', 'episodeId', 'patientFirstName', 'dob', 'gender', 'bedName', 'deptDescription', 'employeeFirstName', 'queueStatus'];
+  for (const k of DIRECT) {
+    if (!out[k] && row[k] != null && String(row[k]).trim()) {
+      out[k] = String(row[k]).trim();
+    }
   }
   if (!out.episodeId) out.episodeId = out.patientId;
   return out;
@@ -174,7 +180,7 @@ async function settle(ms) { await new Promise((r) => setTimeout(r, ms)); }
 
 /* A DataTables page length control: pick its largest option (or "All", value -1) so ONE read sees the
  * whole list rather than the first ten rows. Silent when the page has no such control. */
-export const EXPAND_PAGE_LENGTH = "(function(){try{var s=document.querySelector('select[name$=\"_length\"]');if(!s)return '0';var best=null;[].forEach.call(s.options,function(o){var n=parseInt(o.value,10);if(isNaN(n))return;if(n===-1){best=-1;return;}if(best!==-1&&(best===null||n>best))best=n;});if(best===null)return '0';s.value=String(best);s.dispatchEvent(new Event('change',{bubbles:true}));return '1'}catch(e){return 'e'}})()";
+export const EXPAND_PAGE_LENGTH = "(function(){try{var dt=window.jQuery&&window.jQuery('table.dataTable, #data_tables1').DataTable?window.jQuery('table.dataTable, #data_tables1').DataTable():null;if(dt){try{dt.page.len(-1).draw();return 'dt-all';}catch(e){}}var s=document.querySelector('select[name$=\"_length\"]');if(!s)return '0';var best=null;[].forEach.call(s.options,function(o){var n=parseInt(o.value,10);if(isNaN(n))return;if(n===-1){best=-1;return;}if(best!==-1&&(best===null||n>best))best=n;});if(best===null)return '0';s.value=String(best);s.dispatchEvent(new Event('change',{bubbles:true}));return '1'}catch(e){return 'e'}})()";
 
 /* WAIT FOR THE ROWS, DO NOT ASSUME THEM.
  *
@@ -234,7 +240,12 @@ export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitM
       toggled = true;
       let t = 'none';
       try { t = String((await plugin.evaluate({ expression: TOGGLE_ALL }))?.result || 'none'); } catch { t = 'none'; }
-      if (t === 'ticked' || t === 'clicked') { await settle(settleMs); continue; }
+      if (t === 'ticked' || t === 'clicked') {
+        await settle(settleMs);
+        try { await plugin.evaluate({ expression: EXPAND_PAGE_LENGTH }); } catch {}
+        await settle(settleMs);
+        continue;
+      }
     }
     await settle(pollMs);
   }
@@ -263,6 +274,23 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
     .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
+  if (isGimsrOrigin(origin) && !candidates.some((c) => (c.endpoints || []).some((e) => /GetIPWL/i.test(e.path)))) {
+    candidates.unshift({
+      resourceHint: 'worklist',
+      pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
+      proof: { status: 'proven', kind: 'json' },
+      endpoints: [{
+        method: 'GET',
+        path: '/Doctor/Home/GetIPWL?NursingStationId&PatientId&FloorId&Emp_ID&Dept_ID&Type=IPWorkList&__RequestVerificationToken',
+        role: 'data',
+        params: {
+          Type: { constant: 'IPWorkList' },
+          __RequestVerificationToken: { token: true }
+        },
+        proof: { status: 'proven', kind: 'json' }
+      }]
+    });
+  }
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }

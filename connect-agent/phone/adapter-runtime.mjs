@@ -12,7 +12,7 @@
 // view lives on read from the DOM (runtime.mjs readView), which is the fallback, never the primary
 // path once an endpoint is known.
 
-import { READ_ROWS } from './runtime.mjs';
+import { READ_ROWS, isGimsrOrigin } from './runtime.mjs';
 
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
 export const PATIENT_KEY = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$/i;
@@ -397,6 +397,7 @@ async function onDataHost(plugin, view, patient, base) {
 export async function executeProven({ plugin, origin, view, patient = null, parentRow = null, tokens = null, parseHtml = null, onCall = null, now }) {
   let viewHost = origin;
   try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  if (isGimsrOrigin(viewHost)) viewHost = 'https://ghis.gitam.edu';
   const base = String(viewHost || '').replace(/\/$/, '');
   await onDataHost(plugin, view, patient, base);
   const eps = view.endpoints.filter((e) => e && (e.role === 'prerequisite' || e.role === 'data'));
@@ -431,6 +432,7 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
   if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
   let viewHost = origin;
   try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  if (isGimsrOrigin(viewHost)) viewHost = 'https://ghis.gitam.edu';
   const base = String(viewHost || '').replace(/\/$/, '');
   await onDataHost(plugin, view, patient, base);
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));
