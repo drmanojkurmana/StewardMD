@@ -59,20 +59,22 @@
     var s = document.createElement("style"); s.id = "rxCss";
     s.textContent =
       ".rx-scrim{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:16000;opacity:0;transition:opacity .25s ease;pointer-events:none}.rx-scrim.on{opacity:1;pointer-events:auto}" +
-      "html.rx-locked,body.rx-locked{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important}" +
-      ".rx-sheet{position:fixed;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);transition:transform .28s cubic-bezier(0.16,1,0.3,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;box-sizing:border-box}" +
+      "html.rx-locked,body.rx-locked{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important;position:relative!important;width:100%!important;height:100%!important}" +
+      ".rx-sheet{position:fixed;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);transition:transform .28s cubic-bezier(0.16,1,0.3,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;box-sizing:border-box;max-width:100vw!important}" +
       "@media(max-width:640px){.rx-sheet{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100vw!important;max-width:100vw!important;height:94vh!important;max-height:94vh!important;border-radius:20px 20px 0 0!important;transform:translateY(100%);opacity:0;pointer-events:none;margin:0!important}.rx-sheet.on{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}}" +
       "@media(min-width:641px){.rx-sheet{left:50%!important;top:50%!important;transform:translate(-50%,-46%)!important;width:min(700px,94vw)!important;height:88vh!important;max-height:88vh!important;border-radius:18px!important;opacity:0;pointer-events:none}.rx-sheet.on{transform:translate(-50%,-50%)!important;opacity:1!important;pointer-events:auto!important}}" +
       ".rx-wrap{display:flex;flex-direction:column;height:100%;width:100%;min-height:0;overflow:hidden;box-sizing:border-box}" +
       ".rx-head{flex:none;background:var(--hpanel,#fff);border-bottom:1px solid var(--hbd,#e2e8f0);padding:6px 12px 8px;display:flex;flex-direction:column;gap:4px;position:relative;z-index:2}" +
       ".rx-handle-bar{width:36px;height:4px;background:#cbd5e1;border-radius:999px;margin:2px auto 6px}@media(min-width:641px){.rx-handle-bar{display:none}}" +
       ".rx-head-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}" +
-      ".rx-head-title{flex:1;min-width:0;text-align:center}.rx-title-main{font-size:14.5px;font-weight:700;color:var(--hink,#0f172a);display:block;line-height:1.2}.rx-title-sub{font-size:11px;font-weight:500;color:var(--hmut,#64748b);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rx-head-title{flex:1;min-width:0;text-align:center}.rx-title-main{font-size:14.5px;font-weight:700;color:var(--hink,#0f172a);display:flex;align-items:center;justify-content:center;gap:6px;line-height:1.2}.rx-title-sub{font-size:11px;font-weight:500;color:var(--hmut,#64748b);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rx-saved-indicator{display:inline-flex;align-items:center;gap:3.5px;font-size:10px;font-weight:600;color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;padding:1px 6px;border-radius:999px}" +
+      ".rx-saved-dot{width:5px;height:5px;border-radius:50%;background:#10b981;display:inline-block}" +
       ".rx-x{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:var(--hmut,#475569);flex:none;transition:all .15s ease}.rx-x:hover{background:#e2e8f0;color:#0f172a}" +
       ".rx-top-export{border:0;background:#0e6e63;color:#fff;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;flex:none;transition:all .15s ease}.rx-top-export:hover{background:#0b584f}" +
-      ".rx-scroll-body{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden!important;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding:12px 14px 24px;box-sizing:border-box}" +
+      ".rx-scroll-body{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden!important;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding:12px 14px 24px;box-sizing:border-box;width:100%!important}" +
       ".rx-disc{font:500 11px/1.4 var(--hfont,system-ui);color:#92400e;background:#fffbeb;border:1px solid #fef3c7;border-radius:10px;padding:8px 12px;margin-bottom:12px;box-sizing:border-box}" +
-      ".rx-pt-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:12px;box-sizing:border-box}" +
+      ".rx-pt-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:12px;box-sizing:border-box;width:100%}" +
       ".rx-pt-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:8px}" +
       ".rx-pt-row{margin-bottom:7px;width:100%;box-sizing:border-box}.rx-pt-row:last-child{margin-bottom:0}" +
       ".rx-pt-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:6px;width:100%;box-sizing:border-box}.rx-pt-grid input{min-width:0;width:100%;box-sizing:border-box}" +
@@ -80,11 +82,25 @@
       ".rx-in::placeholder{color:var(--hmut,#94a3b8)}" +
       ".rx-in:focus{outline:none;border-color:var(--teal,#0e6e63);box-shadow:0 0 0 3px color-mix(in srgb, var(--teal,#0e6e63) 18%, transparent)}" +
       ".rx-sec-head{display:flex;align-items:center;gap:8px;margin:14px 0 8px}.rx-symbol{font:800 22px var(--hfont,system-ui);color:#0e6e63;line-height:1}.rx-sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b}" +
-      ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px 11px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%}" +
+      ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px 11px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%!important;overflow:hidden}" +
       ".rx-line:focus-within{border-color:#cbd5e1;box-shadow:0 3px 10px rgba(0,0,0,.05)}.rx-line.unv{border-color:#f59e0b;background:#fffdfa}.rx-line.adv{background:#f8fafc}" +
       ".rx-line .r1{display:flex;gap:6px;align-items:center;width:100%;box-sizing:border-box}.rx-line .r1 .rx-drug{flex:1.6 1 140px;min-width:0;font-weight:600}.rx-line .r1 .rx-brand{flex:1.4 1 120px;min-width:0}" +
       ".rx-line .r2{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;margin-top:8px;width:100%;box-sizing:border-box}.rx-line .r2 input{min-width:0;width:100%;box-sizing:border-box}" +
       "@media(max-width:500px){.rx-line .r1{display:grid;grid-template-columns:1fr auto;gap:6px}.rx-line .r1 .rx-drug{grid-column:1}.rx-line .r1 .rx-del{grid-column:2;grid-row:1}.rx-line .r1 .rx-brand{grid-column:1/span 2;grid-row:2}}" +
+      ".rx-timing-tag{margin-top:6px;display:flex;align-items:center;gap:4px}" +
+      ".rx-timing-chip{display:inline-flex;align-items:center;gap:3px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;padding:2px 7px;border-radius:5px;letter-spacing:.01em}" +
+      ".rx-freq-pills{display:flex;align-items:center;gap:4px;margin-top:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rx-freq-pills::-webkit-scrollbar{display:none}" +
+      ".rx-freq-pill{border:1px solid #e2e8f0;background:#f8fafc;color:#475569;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;padding:3px 8px;border-radius:6px;cursor:pointer;flex:none;transition:all .15s ease}" +
+      ".rx-freq-pill:hover{background:#e2e8f0;color:#0f172a}" +
+      ".rx-freq-pill.active{background:#0e6e63;border-color:#0e6e63;color:#fff}" +
+      ".rx-switch-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0;cursor:pointer;width:100%}" +
+      ".rx-toggle{position:relative;display:inline-block;width:38px;height:22px;flex:none}" +
+      ".rx-toggle input{opacity:0;width:0;height:0}" +
+      ".rx-slider{position:absolute;cursor:pointer;inset:0;background-color:#cbd5e1;transition:.2s;border-radius:24px}" +
+      ".rx-slider:before{position:absolute;content:'';height:16px;width:16px;left:3px;bottom:3px;background-color:#fff;transition:.2s;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.2)}" +
+      ".rx-toggle input:checked + .rx-slider{background-color:#0e6e63}" +
+      ".rx-toggle input:checked + .rx-slider:before{transform:translateX(16px)}" +
+      ".rx-toggle input:disabled + .rx-slider{opacity:0.4;cursor:not-allowed}" +
       ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:6px}.rx-del{border:0;background:#fee2e2;color:#ef4444;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;transition:all .15s ease}.rx-del:hover{background:#fecaca;color:#dc2626}" +
       ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
       ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
@@ -106,12 +122,19 @@
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
       ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
       ".rx-clinic-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}.rx-clinic-form .rx-in{width:100%}.rx-logo-row{display:flex;align-items:center;gap:8px}.rx-logo-prev{width:54px;height:54px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 10px var(--hfont);color:var(--hmut);overflow:hidden;flex:none}.rx-logo-prev img{width:100%;height:100%;object-fit:contain}" +
-      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.48);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;z-index:10;border-radius:16px;box-sizing:border-box}@media(max-width:640px){.rx-bp-ov{border-radius:20px 20px 0 0}}" +
-      ".rx-bp{background:var(--hpanel,#fff);width:100%;max-height:85%;overflow-y:auto;overflow-x:hidden;border-radius:18px 18px 0 0;padding:16px 18px 24px;box-sizing:border-box;box-shadow:0 -8px 30px rgba(0,0,0,.16)}" +
-      ".rx-exp,.rx-sign-sheet{border-radius:18px 18px 0 0}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:#f1f5f9;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
+      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;z-index:100;border-radius:16px;box-sizing:border-box;animation:rxFadeIn .18s ease-out}@media(max-width:640px){.rx-bp-ov{border-radius:20px 20px 0 0}}" +
+      "@keyframes rxFadeIn{from{opacity:0}to{opacity:1}}" +
+      ".rx-bp{background:var(--hpanel,#fff);width:100%;max-height:88%;overflow-y:auto;overflow-x:hidden;border-radius:20px 20px 0 0;padding:18px 20px 26px;box-sizing:border-box;box-shadow:0 -12px 36px rgba(0,0,0,.2)}" +
+      ".rx-exp,.rx-sign-sheet{border-radius:20px 20px 0 0}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:#f1f5f9;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
+      ".rx-exp-primary-btn{width:100%;padding:13px 18px!important;font-size:14px!important;justify-content:center!important;gap:10px!important;border-radius:12px!important;box-shadow:0 4px 14px rgba(14,110,99,.32)!important}" +
+      ".rx-exp-sec-btn{width:100%;padding:11px 16px!important;font-size:13px!important;justify-content:center!important;gap:8px!important;border-radius:12px!important;background:#f8fafc!important;border:1px solid #cbd5e1!important;color:#334155!important}" +
+      ".rx-exp-sec-btn:hover{background:#f1f5f9!important;color:#0f172a!important}" +
+      ".rx-mono-btn{background:#f0fdf4;border:1px solid #bbf7d0;color:#0e6e63;font:600 9.5px -apple-system,sans-serif;padding:2px 7px;border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:all .15s ease}" +
+      ".rx-mono-btn:hover{background:#dcfce7;border-color:#86efac;color:#065f46}" +
       ".rx-bp-it{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:9px 4px;cursor:pointer}.rx-bp-nm{font:700 13.5px var(--hfont);color:var(--hink);flex:1 1 44%}.rx-bp-nm em{color:#ef4444;font-weight:600;font-style:normal;font-size:11px}.rx-bp-mf{font:500 11px var(--hfont);color:var(--hmut);flex:1 1 40%}.rx-bp-pr{font:800 13px var(--hfont);color:var(--teal,#0e6e63)}" +
       ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0;box-sizing:border-box}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
+      ".rxdoc-timing-chip{display:inline-block;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font:600 9.5px -apple-system,BlinkMacSystemFont,sans-serif;padding:1px 6px;border-radius:4px;margin-left:6px;letter-spacing:.02em;vertical-align:middle}" +
       ".rx-doc{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a;background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}" +
       ".rxdoc-in{padding:30px 42px;box-sizing:border-box}" +
       ".rxdoc-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}" +
@@ -305,6 +328,7 @@
   function rxNative() { try { var C = window.Capacitor; return !!(C && (C.isNativePlatform ? C.isNativePlatform() : C.isNative)); } catch (e) { return false; } }
   function rxPlugins() { try { return (window.Capacitor && window.Capacitor.Plugins) || {}; } catch (e) { return {}; } }
   function collectRx() {
+    if (!sheet) return { name: "", age: "", dx: "", complaints: "", vitals: "", lines: [] };
     var name = (sheet.querySelector("#rxPtName") || {}).value || "";
     var age = (sheet.querySelector("#rxPtAge") || {}).value || "";
     var dx = ((sheet.querySelector("#rxDx") || {}).value || "").trim();
@@ -932,14 +956,43 @@
     if (l.isAdvice) {
       return '<div class="' + cls + '" data-i="' + i + '"><div class="r1"><input class="rx-in rx-drug" data-f="drug" value="' + esc(l.drug) + '" style="flex:1" placeholder="Advice / non-drug measure"><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div></div>';
     }
+    var timing = getDrugTimingBadge(l.drug, l.freq);
+    var timingHtml = timing ? '<div class="rx-timing-tag"><span class="rx-timing-chip">' + esc(timing) + '</span></div>' : '';
+    var curFreq = (l.freq || "").toUpperCase().trim();
+    var pills = ["OD", "BD", "TDS", "QID", "HS", "SOS", "STAT"].map(function (p) {
+      var act = curFreq === p ? " active" : "";
+      return '<button type="button" class="rx-freq-pill' + act + '" data-freq="' + p + '">' + p + '</button>';
+    }).join("");
     return '<div class="' + cls + '" data-i="' + i + '">' +
       '<div class="r1"><input class="rx-in rx-drug" data-f="drug" value="' + esc(l.drug) + '" placeholder="Drug (generic)">' +
       '<input class="rx-in rx-brand" data-f="brand" value="' + esc(l.brand || "") + '" placeholder="Brand — tap for brands + prices"><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div>' +
       '<div class="r2"><input class="rx-in rx-dose" data-f="dose" value="' + esc(l.dose || "") + '" placeholder="Dose">' +
       '<input class="rx-in rx-freq" data-f="freq" value="' + esc(l.freq || "") + '" placeholder="Freq">' +
       '<input class="rx-in rx-dur" data-f="duration" value="' + esc(l.duration || "") + '" placeholder="Duration"></div>' +
+      '<div class="rx-freq-pills">' + pills + '</div>' +
+      timingHtml +
       (l.unverified ? '<div class="rx-flag">'+rxIco("warn")+' Not from the Drug Index — confirm this dose before signing</div>' : "") +
       '</div>';
+  }
+
+  function updateLineTiming(line) {
+    if (!line || line.classList.contains("adv")) return;
+    var d = ((line.querySelector('[data-f="drug"]') || {}).value || "").trim();
+    var f = ((line.querySelector('[data-f="freq"]') || {}).value || "").trim();
+    var badge = getDrugTimingBadge(d, f);
+    var existing = line.querySelector(".rx-timing-tag");
+    if (badge) {
+      if (existing) {
+        existing.innerHTML = '<span class="rx-timing-chip">' + esc(badge) + '</span>';
+      } else {
+        var anchor = line.querySelector(".rx-freq-pills") || line.querySelector(".r2");
+        if (anchor) {
+          anchor.insertAdjacentHTML("afterend", '<div class="rx-timing-tag"><span class="rx-timing-chip">' + esc(badge) + '</span></div>');
+        }
+      }
+    } else if (existing) {
+      existing.remove();
+    }
   }
 
   // Live brand/composition search on a drug line, powered by the Drug Index (MEDDRUGS).
@@ -964,6 +1017,7 @@
       var doseIn = line.querySelector(".rx-dose"); if (doseIn && r.dose) doseIn.value = r.dose;
       line.classList.remove("unv"); var fl = line.querySelector(".rx-flag"); if (fl) fl.remove();  // now DB-sourced
       closeAc();
+      try { updateLineTiming(line); } catch (e) {}
       try { refreshSafety(); } catch (e) {}   // re-run allergy + interaction checks with the newly picked drug
       try { showPriceHint(line, r.generic); } catch (e) {}   // lowest-cost brand awareness
     }
@@ -1138,6 +1192,7 @@
       sideEffects: ["Nausea, abdominal cramps, loose stools", "Headache or mild dizziness"],
       redFlags: ["Palpitations or irregular heart rhythm", "Severe allergic rash or facial swelling", "Persistent watery diarrhea"],
       counseling: "Take 1 hour before or 2 hours after meals (or with light food if stomach upset occurs). Complete the full 3–5 day course.",
+      timingBadge: "1h Before / 2h After Food",
       interactions: [
         { withTags: ["qt_prolonging", "ondansetron", "ciprofloxacin", "amiodarone"], sev: "major", text: "Additive QT prolongation risk — monitor cardiac rhythm and electrolytes." },
         { withTags: ["antacids"], sev: "moderate", text: "Aluminum/magnesium antacids reduce peak absorption — separate doses by 2 hours." },
@@ -1151,6 +1206,7 @@
       sideEffects: ["Diarrhea or frequent loose stools, nausea, mild abdominal cramps", "Oral or vaginal candidiasis"],
       redFlags: ["Anaphylaxis (wheezing, hives, lip swelling)", "Cholestatic jaundice / dark urine (rare)", "Severe watery diarrhea (C. diff)"],
       counseling: "Take at the start of a meal to optimize clavulanate absorption and minimize stomach upset. Complete full course.",
+      timingBadge: "Start of Meals / With Food",
       interactions: [
         { withTags: ["allopurinol"], sev: "moderate", text: "Increased risk of drug-induced skin rash." },
         { withTags: ["methotrexate"], sev: "major", text: "Reduces renal methotrexate clearance — risk of methotrexate toxicity." },
@@ -1164,6 +1220,7 @@
       sideEffects: ["Loose stools, diarrhea, mild nausea", "Mild non-allergic skin rash"],
       redFlags: ["Severe allergic urticaria, facial swelling or wheezing (penicillin allergy)", "Severe watery diarrhea"],
       counseling: "Take at evenly spaced intervals. Finish entire course even if symptoms resolve.",
+      timingBadge: "With or Without Food",
       interactions: [
         { withTags: ["allopurinol"], sev: "moderate", text: "Higher incidence of skin rash." },
         { withTags: ["methotrexate"], sev: "major", text: "Decreases renal tubular methotrexate clearance." }
@@ -1176,6 +1233,7 @@
       sideEffects: ["Well tolerated at standard therapeutic doses"],
       redFlags: ["Severe nausea, right upper quadrant abdominal pain, jaundice / yellowing of eyes (hepatotoxicity)"],
       counseling: "Do not exceed 4,000 mg in 24 hours (max 3,000 mg/day in elderly/hepatic risk). Check all OTC cough/cold formulations to avoid duplicate paracetamol.",
+      timingBadge: "As Needed (Max 4g/day)",
       interactions: [
         { withTags: ["warfarin"], sev: "moderate", text: "Regular daily high doses (>2g/day) may enhance anticoagulant effect." },
         { withTags: ["alcohol"], sev: "major", text: "Chronic alcohol misuse increases risk of hepatotoxicity." }
@@ -1188,6 +1246,7 @@
       sideEffects: ["Mild headache, loose stools or constipation, flatulence"],
       redFlags: ["Severe persistent watery diarrhea", "Severe abdominal cramping"],
       counseling: "Take once daily in the morning, 30 to 60 minutes before breakfast or first meal.",
+      timingBadge: "30m Before Breakfast",
       interactions: [
         { withTags: ["iron"], sev: "moderate", text: "Decreased gastric acidity reduces oral iron absorption." },
         { withTags: ["ketoconazole", "itraconazole"], sev: "major", text: "Markedly reduces antifungal absorption." }
@@ -1200,6 +1259,7 @@
       sideEffects: ["Headache, mild diarrhea, abdominal discomfort"],
       redFlags: ["Severe watery diarrhea", "Bone pain or muscle spasms with long-term use"],
       counseling: "Take 30–60 minutes before morning meal. Swallow whole, do not crush or chew capsules.",
+      timingBadge: "30m Before Breakfast",
       interactions: [
         { withTags: ["clopidogrel"], sev: "major", text: "CYP2C19 inhibition reduces clopidogrel activation and antiplatelet efficacy." },
         { withTags: ["iron"], sev: "moderate", text: "Reduces oral iron absorption." }
@@ -1212,6 +1272,7 @@
       sideEffects: ["Constipation, mild headache, warm flushing sensation"],
       redFlags: ["Palpitations, dizziness or syncope (QT interval prolongation)"],
       counseling: "Take 30 minutes before meals or as directed for nausea. Drink adequate fluids to prevent constipation.",
+      timingBadge: "30m Before Meals",
       interactions: [
         { withTags: ["qt_prolonging", "azithromycin", "ciprofloxacin", "amiodarone"], sev: "major", text: "Additive risk of QT prolongation and cardiac dysrhythmias." },
         { withTags: ["apomorphine"], sev: "critical", text: "Contraindicated: severe profound hypotension and loss of consciousness." }
@@ -1224,6 +1285,7 @@
       sideEffects: ["Nausea, mild diarrhea, insomnia, lightheadedness"],
       redFlags: ["Tendon pain, swelling or tenderness (especially Achilles tendon) — stop and rest immediately", "Palpitations / irregular heart rhythm", "Burning or tingling nerve pain"],
       counseling: "Drink plenty of water. Do NOT take with milk, dairy, antacids, or iron within 2 hours. Protect skin from direct sunlight.",
+      timingBadge: "With Water · Avoid Dairy",
       interactions: [
         { withTags: ["qt_prolonging", "ondansetron", "azithromycin"], sev: "major", text: "Cumulative QT prolongation risk." },
         { withTags: ["theophylline", "tizanidine"], sev: "critical", text: "Severe CYP1A2 inhibition elevates plasma levels to toxic range." },
@@ -1237,6 +1299,7 @@
       sideEffects: ["Indigestion, heartburn, epigastric discomfort, nausea"],
       redFlags: ["Black or tarry stools, vomiting blood (GI bleed)", "Swelling of feet/ankles, shortness of breath", "Decreased urine output"],
       counseling: "Take strictly with or after meals. Use for the shortest required duration at the lowest effective dose.",
+      timingBadge: "Strictly After Food",
       interactions: [
         { withTags: ["anticoagulant", "antiplatelet", "aspirin", "clopidogrel", "warfarin"], sev: "major", text: "Significant increase in gastrointestinal ulceration and hemorrhage risk." },
         { withTags: ["acei", "arb", "diuretic", "telmisartan"], sev: "major", text: "Triple whammy: risk of acute renal failure and blunted antihypertensive effect." }
@@ -1249,9 +1312,75 @@
       sideEffects: ["Dyspepsia, heartburn, mild nausea"],
       redFlags: ["Black stools, vomiting blood", "Swelling, sudden elevation of blood pressure"],
       counseling: "Take with food or milk to protect stomach lining. Avoid alcohol while taking NSAIDs.",
+      timingBadge: "With or After Food",
       interactions: [
         { withTags: ["anticoagulant", "aspirin", "warfarin"], sev: "major", text: "Additive gastrointestinal mucosal ulceration and bleeding." },
         { withTags: ["acei", "arb", "diuretic"], sev: "major", text: "Risk of decreased renal blood flow and increased BP." }
+      ]
+    },
+    "doxycycline": {
+      generic: "Doxycycline",
+      cls: "Tetracycline Antibiotic",
+      tags: ["tetracycline", "antibiotic"],
+      sideEffects: ["Nausea, esophageal irritation, photosensitivity / sun sensitivity"],
+      redFlags: ["Severe swallowing pain, severe headache with visual changes (intracranial hypertension)"],
+      counseling: "Take with a full glass of water and stay upright for at least 30 minutes. Space 2 hours from antacids, calcium, or iron supplements.",
+      timingBadge: "With Water · Stay Upright 30m",
+      interactions: [
+        { withTags: ["antacids", "iron", "calcium"], sev: "moderate", text: "Divalent cations chelate doxycycline and severely impair absorption." },
+        { withTags: ["warfarin"], sev: "moderate", text: "May enhance anticoagulant effect — monitor INR." }
+      ]
+    },
+    "aspirin": {
+      generic: "Aspirin",
+      cls: "Salicylate Antiplatelet & Analgesic",
+      tags: ["nsaid", "salicylate", "antiplatelet", "analgesic"],
+      sideEffects: ["Gastric irritation, heartburn, easy bruising"],
+      redFlags: ["Black or tarry stools, vomiting coffee-ground material (GI bleed), ringing in ears (tinnitus / toxicity)"],
+      counseling: "Take with or immediately after meals. Avoid in children/teens with fever/flu due to Reye’s syndrome risk.",
+      timingBadge: "With or After Food",
+      interactions: [
+        { withTags: ["anticoagulant", "warfarin", "clopidogrel"], sev: "major", text: "Substantial bleeding risk — co-prescribe gastroprotection if indicated." },
+        { withTags: ["nsaid", "ibuprofen"], sev: "major", text: "Ibuprofen interferes with irreversible aspirin antiplatelet effect." }
+      ]
+    },
+    "furosemide": {
+      generic: "Furosemide",
+      cls: "Loop Diuretic",
+      tags: ["diuretic", "loop_diuretic", "antihypertensive"],
+      sideEffects: ["Increased urination, mild lightheadedness, dry mouth"],
+      redFlags: ["Muscle cramps or profound weakness (hypokalemia), severe dehydration, dizziness upon standing"],
+      counseling: "Take in the morning to prevent nighttime urination sleep disruption. Maintain adequate hydration.",
+      timingBadge: "Morning (Avoid Evening)",
+      interactions: [
+        { withTags: ["nsaid", "diclofenac", "ibuprofen"], sev: "major", text: "NSAIDs inhibit renal prostaglandins, attenuating diuretic effect and precipitating AKI." },
+        { withTags: ["digoxin"], sev: "major", text: "Hypokalemia dramatically potentiates digitalis toxicity." }
+      ]
+    },
+    "hydrochlorothiazide": {
+      generic: "Hydrochlorothiazide",
+      cls: "Thiazide Diuretic",
+      tags: ["diuretic", "thiazide_diuretic", "antihypertensive"],
+      sideEffects: ["Frequent urination, mild electrolyte imbalance, increased uric acid"],
+      redFlags: ["Severe muscle weakness, confusion, syncope"],
+      counseling: "Take once daily in the morning with or without food. Protect skin from prolonged sunlight.",
+      timingBadge: "Morning",
+      interactions: [
+        { withTags: ["nsaid"], sev: "major", text: "Decreased diuretic and antihypertensive efficacy." },
+        { withTags: ["lithium"], sev: "major", text: "Reduces renal clearance of lithium, elevating risk of lithium toxicity." }
+      ]
+    },
+    "ramipril": {
+      generic: "Ramipril",
+      cls: "ACE Inhibitor",
+      tags: ["acei", "antihypertensive"],
+      sideEffects: ["Persistent dry cough, mild dizziness upon standing"],
+      redFlags: ["Facial, lip, or tongue swelling (angioedema) — seek emergency care", "Severe lightheadedness, decreased urination"],
+      counseling: "Take once daily at the same time every day. Avoid potassium supplements unless advised by physician.",
+      timingBadge: "Morning · Same Time Daily",
+      interactions: [
+        { withTags: ["nsaid", "diclofenac", "ibuprofen"], sev: "major", text: "May impair renal function and blunt antihypertensive response." },
+        { withTags: ["potassium", "spironolactone"], sev: "major", text: "High risk of life-threatening hyperkalemia." }
       ]
     },
     "ambroxol + levosalbutamol": {
@@ -1261,6 +1390,7 @@
       sideEffects: ["Fine tremors of hands, rapid heartbeat (palpitations), headache", "Mild nausea or dry mouth"],
       redFlags: ["Severe chest tightness, extreme racing pulse (>120 bpm), paradoxical wheezing"],
       counseling: "Take after food. Tremors usually subside as your body adjusts. If breathing worsens, seek immediate medical care.",
+      timingBadge: "After Food with Water",
       interactions: [
         { withTags: ["beta_blocker", "propranolol", "metoprolol", "carvedilol"], sev: "major", text: "Beta-blockers can block bronchodilation and precipitate severe bronchospasm." }
       ]
@@ -1272,6 +1402,7 @@
       sideEffects: ["Mild drowsiness or fatigue, dry mouth, headache"],
       redFlags: ["Unusual mood or behavioral changes, agitation, sleep disturbances", "Severe allergic skin rash"],
       counseling: "Take once daily in the evening. Avoid driving or alcohol if drowsiness occurs.",
+      timingBadge: "At Bedtime (Evening)",
       interactions: [
         { withTags: ["sedative", "alcohol", "benzodiazepine"], sev: "moderate", text: "Additive central nervous system sedation." }
       ]
@@ -1283,6 +1414,7 @@
       sideEffects: ["Mild drowsiness, dry mouth, fatigue"],
       redFlags: ["Severe allergic reaction", "Urinary retention"],
       counseling: "Best taken at bedtime. Avoid alcohol during treatment.",
+      timingBadge: "At Bedtime (Evening)",
       interactions: [
         { withTags: ["sedative", "alcohol"], sev: "moderate", text: "Enhanced CNS depression." }
       ]
@@ -1294,6 +1426,7 @@
       sideEffects: ["Loose stools, diarrhea, nausea, dyspepsia"],
       redFlags: ["Severe allergic rash / hives / wheezing", "Severe watery diarrhea (C. diff colitis)"],
       counseling: "May be taken with or without food. Complete the full course as prescribed.",
+      timingBadge: "With or Without Food",
       interactions: [
         { withTags: ["warfarin"], sev: "moderate", text: "May enhance anticoagulant effect — monitor INR." }
       ]
@@ -1305,6 +1438,7 @@
       sideEffects: ["Metallic taste in mouth, mild nausea, dark urine (benign)"],
       redFlags: ["Severe numbness, tingling, peripheral neuropathy", "Seizures or ataxia (rare)"],
       counseling: "STRICTLY avoid alcohol during treatment and for at least 48 hours after finishing (disulfiram-like reaction). Take with food.",
+      timingBadge: "With Food · Avoid Alcohol",
       interactions: [
         { withTags: ["alcohol"], sev: "critical", text: "Disulfiram-like reaction with severe vomiting, tachycardia and flushing." },
         { withTags: ["warfarin"], sev: "major", text: "Potentiates warfarin effect via CYP2C9 inhibition — monitor INR." }
@@ -1317,6 +1451,7 @@
       sideEffects: ["GI upset: diarrhea, nausea, abdominal fullness, metallic taste"],
       redFlags: ["Lactic acidosis: malaise, severe muscle aches, respiratory distress, hypothermia"],
       counseling: "Take with or immediately after meals to minimize stomach upset. Swallow whole with water.",
+      timingBadge: "With Meals",
       interactions: [
         { withTags: ["contrast"], sev: "major", text: "Withhold prior to iodinated contrast procedures to prevent lactic acidosis." },
         { withTags: ["alcohol"], sev: "major", text: "Excessive alcohol potentiates risk of lactic acidosis." }
@@ -1329,6 +1464,7 @@
       sideEffects: ["Peripheral edema (ankle swelling), headache, flushing, dizziness"],
       redFlags: ["Severe lightheadedness, syncope upon standing, worsening chest pain on initiation"],
       counseling: "Take once daily at the same time each day. Elevate feet if mild ankle swelling occurs.",
+      timingBadge: "Once Daily (Morning)",
       interactions: [
         { withTags: ["simvastatin"], sev: "moderate", text: "Increases simvastatin levels — do not exceed simvastatin 20mg daily." }
       ]
@@ -1340,6 +1476,7 @@
       sideEffects: ["Dizziness, mild fatigue, back or leg pain"],
       redFlags: ["Facial/lip swelling (angioedema), lightheadedness, sudden reduction in urination"],
       counseling: "Take with or without food at the same time daily. Avoid potassium supplements without medical advice.",
+      timingBadge: "Morning · Same Time Daily",
       interactions: [
         { withTags: ["nsaid", "diclofenac", "ibuprofen"], sev: "major", text: "May reduce antihypertensive efficacy and increase risk of acute renal impairment." },
         { withTags: ["potassium", "spironolactone"], sev: "major", text: "Risk of hyperkalemia." }
@@ -1352,6 +1489,7 @@
       sideEffects: ["Mild muscle aches, headache, digestive discomfort"],
       redFlags: ["Unexplained severe muscle pain, tenderness, weakness, dark/tea-colored urine (rhabdomyolysis)"],
       counseling: "Take once daily in the evening or at bedtime. Avoid excessive grapefruit juice.",
+      timingBadge: "At Bedtime",
       interactions: [
         { withTags: ["macrolide", "clarithromycin"], sev: "major", text: "CYP3A4 inhibition increases statin concentration and myopathy risk." },
         { withTags: ["gemfibrozil"], sev: "major", text: "Substantially elevates rhabdomyolysis risk." }
@@ -1379,7 +1517,11 @@
     "glycomet": "metformin", "glyciphage": "metformin",
     "stamlo": "amlodipine", "amlopres": "amlodipine", "norvasc": "amlodipine",
     "telma": "telmisartan", "telmikind": "telmisartan", "micardis": "telmisartan",
-    "atorva": "atorvastatin", "lipitor": "atorvastatin", "atorlip": "atorvastatin"
+    "atorva": "atorvastatin", "lipitor": "atorvastatin", "atorlip": "atorvastatin",
+    "doxy": "doxycycline", "doxy-1": "doxycycline", "doxycycline": "doxycycline",
+    "aspirin": "aspirin", "ecosprin": "aspirin", "disprin": "aspirin", "asa": "aspirin",
+    "lasix": "furosemide", "furosemide": "furosemide",
+    "cardace": "ramipril", "ramipril": "ramipril"
   };
 
   function normalizeDrugName(raw) {
@@ -1399,7 +1541,27 @@
     return s;
   }
 
-  function analyzeRegimenSafety(lines, allergiesStr) {
+  function getDrugTimingBadge(drugName, freq) {
+    var norm = normalizeDrugName(drugName);
+    var kb = RX_CLINICAL_KB[norm];
+    var badge = (kb && kb.timingBadge) || "";
+    if (badge) return badge;
+
+    var f = String(freq || "").trim();
+    if (!f) return "";
+    if (/\b(?:a\.?c\.?|before\s*(?:meals?|food)|empty\s*stomach)\b/i.test(f)) return "Before Food";
+    if (/\b(?:p\.?c\.?|after\s*(?:meals?|food)|with\s*food)\b/i.test(f)) return "After Food";
+    if (/\b(?:h\.?s\.?|bedtime|night|evening|at\s*night)\b/i.test(f)) return "At Bedtime";
+    if (/\b(?:s\.?o\.?s\.?|prn|as\s*needed)\b/i.test(f)) return "As Needed";
+    if (/\b(?:stat|immediate(?:ly)?)\b/i.test(f)) return "STAT";
+    if (/\b(?:od|once\s*daily)\b/i.test(f)) return "Once Daily";
+    if (/\b(?:bd|bid|twice\s*daily)\b/i.test(f)) return "Twice Daily";
+    if (/\b(?:tds|tid|thrice\s*daily|three\s*times)\b/i.test(f)) return "Thrice Daily";
+    if (/\b(?:qid|four\s*times)\b/i.test(f)) return "4 Times Daily";
+    return "";
+  }
+
+  function analyzeRegimenSafety(lines, allergiesStr, patientAge) {
     var outFindings = [];
     var meds = (lines || []).filter(function (L) { return !L.advice && (L.drug || L.brand); });
 
@@ -1421,6 +1583,113 @@
       });
     }
 
+    // Pediatric & Age-Specific Safety Precautions
+    var ageNum = null;
+    if (patientAge != null && patientAge !== "") {
+      var mAge = String(patientAge).match(/(\d+(?:\.\d+)?)\s*(y|yr|yrs|year|years|m|mo|month|months|d|day|days)?/i);
+      if (mAge) {
+        var val = parseFloat(mAge[1]);
+        var unit = (mAge[2] || "y").toLowerCase();
+        if (unit.indexOf("m") === 0) ageNum = val / 12;
+        else if (unit.indexOf("d") === 0) ageNum = val / 365;
+        else ageNum = val;
+      }
+    }
+
+    if (ageNum !== null) {
+      meds.forEach(function (m) {
+        var raw = m.drug || m.brand || "";
+        var norm = normalizeDrugName(raw);
+        var info = RX_CLINICAL_KB[norm] || {};
+        var tags = info.tags || [];
+        var gen = (info.generic || raw);
+
+        if (ageNum < 18 && (tags.indexOf("fluoroquinolone") > -1 || /cipro|levoflox|oflox|moxiflox|norflox/i.test(norm))) {
+          outFindings.push({
+            sev: "major",
+            type: "pediatric",
+            txt: "Pediatric Precaution: " + gen + " (fluoroquinolone) is generally contraindicated in patients < 18y due to risk of cartilage and tendon toxicity."
+          });
+        }
+        if (ageNum < 8 && (tags.indexOf("tetracycline") > -1 || /doxycycl|tetracycl|minocycl/i.test(norm))) {
+          outFindings.push({
+            sev: "major",
+            type: "pediatric",
+            txt: "Pediatric Alert: " + gen + " (tetracycline) is contraindicated in children < 8y due to permanent tooth discoloration and enamel hypoplasia."
+          });
+        }
+        if (ageNum < 16 && (tags.indexOf("salicylate") > -1 || /aspirin|acetylsalicylic/i.test(norm))) {
+          outFindings.push({
+            sev: "critical",
+            type: "pediatric",
+            txt: "Pediatric Warning: Aspirin / Salicylate in children/teens < 16y with viral illnesses carries severe risk of fatal Reye’s syndrome."
+          });
+        }
+        if (ageNum < 12 && /codeine|tramadol/i.test(norm)) {
+          outFindings.push({
+            sev: "critical",
+            type: "pediatric",
+            txt: "Pediatric Contraindication: Codeine/Tramadol contraindicated in children < 12y due to unpredictable metabolism and respiratory depression risk."
+          });
+        }
+      });
+    }
+
+    // High-Risk Multi-Drug Combinations:
+    // 1. Triple Whammy (NSAID + Diuretic + ACEi/ARB) -> Acute Kidney Injury (AKI)
+    var hasNsaid = false, hasDiuretic = false, hasAceiArb = false;
+    var nsaidNames = [], diureticNames = [], aceiArbNames = [], ppiNames = [];
+
+    meds.forEach(function (m) {
+      var raw = m.drug || m.brand || "";
+      var norm = normalizeDrugName(raw);
+      var info = RX_CLINICAL_KB[norm] || {};
+      var tags = info.tags || [];
+      var gen = (info.generic || raw);
+
+      if (tags.indexOf("nsaid") > -1 || /diclofenac|ibuprofen|naproxen|aceclofenac|indomethacin|ketorolac|piroxicam|mefenamic/i.test(norm)) {
+        hasNsaid = true;
+        if (nsaidNames.indexOf(gen) === -1) nsaidNames.push(gen);
+      }
+      if (tags.indexOf("diuretic") > -1 || /furosemide|torsemide|hydrochlorothiazide|chlorthalidone|spironolactone|indapamide/i.test(norm)) {
+        hasDiuretic = true;
+        if (diureticNames.indexOf(gen) === -1) diureticNames.push(gen);
+      }
+      if (tags.indexOf("acei") > -1 || tags.indexOf("arb") > -1 || /ramipril|enalapril|lisinopril|perindopril|telmisartan|losartan|olmesartan|valsartan|candesartan/i.test(norm)) {
+        hasAceiArb = true;
+        if (aceiArbNames.indexOf(gen) === -1) aceiArbNames.push(gen);
+      }
+      if (tags.indexOf("ppi") > -1 || /pantoprazole|omeprazole|rabeprazole|esomeprazole|lansoprazole/i.test(norm)) {
+        if (ppiNames.indexOf(gen) === -1) ppiNames.push(gen);
+      }
+    });
+
+    if (hasNsaid && hasDiuretic && hasAceiArb) {
+      outFindings.push({
+        sev: "critical",
+        type: "high_risk",
+        txt: "CRITICAL: High-Risk 'Triple Whammy' — Concurrent NSAID (" + nsaidNames.join("/") + ") + Diuretic (" + diureticNames.join("/") + ") + ACEi/ARB (" + aceiArbNames.join("/") + ") severely impairs renal hemodynamics, precipitating Acute Kidney Injury (AKI)."
+      });
+    }
+
+    // 2. Duplicate NSAID therapy
+    if (nsaidNames.length >= 2) {
+      outFindings.push({
+        sev: "major",
+        type: "duplicate",
+        txt: "Duplicate NSAID therapy: " + nsaidNames.join(" + ") + " — concurrent NSAIDs increase gastrointestinal ulceration and hemorrhage risk without added analgesia."
+      });
+    }
+
+    // 3. Duplicate PPI therapy
+    if (ppiNames.length >= 2) {
+      outFindings.push({
+        sev: "moderate",
+        type: "duplicate",
+        txt: "Duplicate PPI therapy: " + ppiNames.join(" + ") + " — redundant acid suppression."
+      });
+    }
+
     try {
       if (window.INTERACTIONS && window.INTERACTIONS.checkInteractions && meds.length >= 2) {
         var r = window.INTERACTIONS.checkInteractions(meds.map(function (m) { return { generic: m.drug || m.brand }; })) || {};
@@ -1434,11 +1703,14 @@
           });
         });
         (r.duplicates || []).forEach(function (f) {
-          outFindings.push({
-            sev: "moderate",
-            type: "duplicate",
-            txt: "Duplicate therapy: " + (f.drugs || []).join(" + ")
-          });
+          var dupTxt = "Duplicate therapy: " + (f.drugs || []).join(" + ");
+          if (!outFindings.some(function (x) { return x.type === "duplicate" && x.txt.indexOf(f.drugs[0]) > -1; })) {
+            outFindings.push({
+              sev: "moderate",
+              type: "duplicate",
+              txt: dupTxt
+            });
+          }
         });
       }
     } catch (e) {}
@@ -1463,6 +1735,7 @@
             sideEffects: [],
             redFlags: drugMatch.notes ? [drugMatch.notes] : [],
             counseling: drugMatch.dose ? ("Dosing guide: " + drugMatch.dose) : "",
+            timingBadge: "",
             interactions: []
           };
         }
@@ -1521,14 +1794,16 @@
   function rxSafetyFindings() {
     var d = collectRx();
     var alg = (((sheet && sheet.querySelector && sheet.querySelector("#rxAllergies")) || {}).value || "");
-    var res = analyzeRegimenSafety(d.lines, alg);
+    var age = (((sheet && sheet.querySelector && sheet.querySelector("#rxPtAge")) || {}).value || "");
+    var res = analyzeRegimenSafety(d.lines, alg, age);
     return res.findings;
   }
 
   function rxSafetyHTML() {
     var d = collectRx();
     var alg = (((sheet && sheet.querySelector && sheet.querySelector("#rxAllergies")) || {}).value || "");
-    var safety = analyzeRegimenSafety(d.lines, alg);
+    var age = (((sheet && sheet.querySelector && sheet.querySelector("#rxPtAge")) || {}).value || "");
+    var safety = analyzeRegimenSafety(d.lines, alg, age);
     if (!safety.findings.length && !safety.medications.length) return "";
 
     var col = {
@@ -1556,9 +1831,12 @@
           var se = (m.info.sideEffects || []).join(", ");
           var rf = (m.info.redFlags || []).join("; ");
           return '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#334155;line-height:1.4">' +
-            '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px">' +
               '<span style="font-weight:700;color:#0f172a;font-size:12px">' + esc(m.info.generic) + '</span>' +
-              '<span style="font:600 9px -apple-system,sans-serif;background:#f1f5f9;color:#475569;padding:1px 5px;border-radius:4px">' + esc(m.info.cls) + '</span>' +
+              '<div style="display:flex;align-items:center;gap:5px;flex:none">' +
+                '<span style="font:600 9px -apple-system,sans-serif;background:#f1f5f9;color:#475569;padding:1px 5px;border-radius:4px">' + esc(m.info.cls) + '</span>' +
+                '<button type="button" class="rx-mono-btn" data-gen="' + esc(m.info.generic) + '" title="View prescribing monograph">Monograph ↗</button>' +
+              '</div>' +
             '</div>' +
             (se ? '<div style="margin-bottom:3px"><b>Side effects:</b> ' + esc(se) + '</div>' : '') +
             (rf ? '<div style="color:#b91c1c;margin-bottom:3px"><b>Red flags:</b> ' + esc(rf) + '</div>' : '') +
@@ -1598,12 +1876,27 @@
     var s = sheet && sheet.querySelector("#rxSafety");
     if (!s) return;
     s.innerHTML = rxSafetyHTML();
+    s.querySelectorAll(".rx-mono-btn").forEach(function (b) {
+      b.onclick = function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var g = b.getAttribute("data-gen");
+        if (!g) return;
+        if (window.MEDDB && typeof window.MEDDB.openComposition === "function") {
+          window.MEDDB.openComposition(g);
+        } else if (window.MEDAPI && typeof window.MEDAPI.monograph === "function") {
+          window.MEDAPI.monograph(g);
+        } else {
+          try { rxToast("Monograph: " + g); } catch (err) {}
+        }
+      };
+    });
     var addBtn = s.querySelector("#rxAddSafetyToAdvice");
     if (addBtn) {
       addBtn.addEventListener("click", function () {
         var d = collectRx();
         var alg = (((sheet && sheet.querySelector("#rxAllergies")) || {}).value || "");
-        var safety = analyzeRegimenSafety(d.lines, alg);
+        var age = (((sheet && sheet.querySelector("#rxPtAge")) || {}).value || "");
+        var safety = analyzeRegimenSafety(d.lines, alg, age);
         if (!safety.counselingBullets.length) return;
         var advText = safety.counselingBullets.join(" | ");
         var advLine = null;
@@ -1638,7 +1931,7 @@
     if (opts && opts.includeSafety === false) return "";
     var d = collectRx();
     var alg = ((sheet && sheet.querySelector && sheet.querySelector("#rxAllergies")) || {}).value || "";
-    var safety = analyzeRegimenSafety(d.lines, alg);
+    var safety = analyzeRegimenSafety(d.lines, alg, d.age);
     if (!safety.medications.length && !safety.findings.length) return "";
 
     var cells = safety.medications.map(function (m) {
@@ -1940,10 +2233,10 @@
         '<div class="rx-head-inner">' +
           '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
           '<div class="rx-head-title">' +
-            '<span class="rx-title-main">Prescription</span>' +
+            '<span class="rx-title-main">Prescription <span class="rx-saved-indicator"><span class="rx-saved-dot"></span> Draft saved</span></span>' +
             '<span class="rx-title-sub">Dr. ' + esc(docName() || "—") + '</span>' +
           '</div>' +
-          '<button class="rx-top-export rx-print" id="rxTopExport" title="Export prescription">' + rxIco("print") + ' Export</button>' +
+          '<button class="rx-top-export rx-print" id="rxTopExport" title="Export prescription">' + rxIco("print") + ' Save PDF</button>' +
         '</div>' +
       '</div>' +
       '<div class="rx-scroll-body" id="rxScrollBody">' +
@@ -1975,7 +2268,7 @@
         '<div class="rx-tpl-card">' +
           '<div class="rx-tpl-row">' +
             '<select id="rxTpl" class="rx-tpl-sel">' + tplOptions() + '</select>' +
-            '<button class="rx-btn rx-tpl-btn" id="rxTplSave">+ Save as template</button>' +
+            '<button class="rx-btn rx-tpl-btn" id="rxTplSave">+ Save Template Set</button>' +
           '</div>' +
         '</div>' +
         '<div class="rx-sign-bar">' +
@@ -1989,7 +2282,7 @@
           '<button class="rx-btn rx-mic" id="rxMic" title="Dictate a drug">' + rxIco("mic") + ' Dictate</button>' +
           (rxcOn() ? '<button class="rx-btn rx-rxc" id="rxcOpen" title="Same prescription, smarter price">RxChoice™</button>' : "") +
         '</div>' +
-        '<button class="rx-btn rx-print rx-hero-export" id="rxExport">' + rxIco("print") + ' Save &amp; Export</button>' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxExport" title="Save and export verified prescription">' + rxIco("print") + ' Save &amp; Export PDF</button>' +
       '</div>';
     show(body);
     sheet.querySelector("#rxX").addEventListener("click", function () {
@@ -2019,8 +2312,46 @@
     sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) { acAttach(ln); rxBrandAC(ln); rxChoiceInline(ln); });
     // live safety panel: recheck allergies + interactions as drug names / allergies change
     refreshSafety();
-    var _sl = sheet.querySelector("#rxLines"); if (_sl) _sl.addEventListener("input", function (e) { if (e.target && e.target.getAttribute && e.target.getAttribute("data-f") === "drug") refreshSafety(); });
+    var _sl = sheet.querySelector("#rxLines");
+    if (_sl) {
+      _sl.addEventListener("click", function (e) {
+        var btn = e.target && e.target.closest && e.target.closest(".rx-freq-pill");
+        if (!btn) return;
+        e.preventDefault();
+        var p = btn.getAttribute("data-freq");
+        var ln = btn.closest(".rx-line");
+        if (ln && p) {
+          var freqInp = ln.querySelector('[data-f="freq"]');
+          if (freqInp) {
+            freqInp.value = p;
+            ln.querySelectorAll(".rx-freq-pill").forEach(function (b) {
+              b.classList.toggle("active", b.getAttribute("data-freq") === p);
+            });
+            updateLineTiming(ln);
+            refreshSafety();
+          }
+        }
+      });
+      _sl.addEventListener("input", function (e) {
+        if (!e.target || !e.target.getAttribute) return;
+        var f = e.target.getAttribute("data-f");
+        if (f === "drug" || f === "freq") {
+          var ln = e.target.closest(".rx-line");
+          if (ln) {
+            if (f === "freq") {
+              var val = (e.target.value || "").toUpperCase().trim();
+              ln.querySelectorAll(".rx-freq-pill").forEach(function (b) {
+                b.classList.toggle("active", b.getAttribute("data-freq") === val);
+              });
+            }
+            updateLineTiming(ln);
+          }
+          if (f === "drug") refreshSafety();
+        }
+      });
+    }
     var _al = sheet.querySelector("#rxAllergies"); if (_al) _al.addEventListener("input", refreshSafety);
+    var _ag = sheet.querySelector("#rxPtAge"); if (_ag) _ag.addEventListener("input", refreshSafety);
     // Templates: apply a saved set, or save the current drugs as a named set.
     var _tpl = sheet.querySelector("#rxTpl"); if (_tpl) _tpl.onchange = function () { var i = +this.value; if (i >= 0) { var t = rxTemplates()[i]; if (t) applyTemplate(t.lines); this.value = "-1"; } };
     var _tplS = sheet.querySelector("#rxTplSave"); if (_tplS) _tplS.onclick = function () {
@@ -2217,7 +2548,7 @@
   // ---- Professional Rx document + PDF/JPEG export ----
   function rxDoc(topic, regNo, signImg, rxv){
     var opts = arguments[4] || {};
-    var d=collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
+    var d=(opts && opts.rxData) || collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
     var dn = docName() || "—";
     if (dn && !/^dr\.?\s+/i.test(dn) && dn !== "—") dn = "Dr. " + dn;
     var n=0;
@@ -2226,7 +2557,9 @@
       n++;
       var sub=[L.dose,L.freq,L.duration].filter(Boolean).join(" · ");
       var numStr = n < 10 ? '0' + n : String(n);
-      return '<tr class="rxdoc-row-med"><td class="sn">' + numStr + '</td><td class="dg"><div class="rxdoc-drug-nm"><b>' + esc(L.drug) + '</b>' + (L.brand ? ' <span class="br">(' + esc(L.brand) + ')</span>' : '') + '</div>' + (sub ? '<div class="dz">' + esc(sub) + '</div>' : '') + '</td></tr>';
+      var timing = getDrugTimingBadge(L.drug, L.freq);
+      var timingHtml = timing ? ' <span class="rxdoc-timing-chip">' + esc(timing) + '</span>' : '';
+      return '<tr class="rxdoc-row-med"><td class="sn">' + numStr + '</td><td class="dg"><div class="rxdoc-drug-nm"><b>' + esc(L.drug) + '</b>' + (L.brand ? ' <span class="br">(' + esc(L.brand) + ')</span>' : '') + '</div>' + (sub ? '<div class="dz">' + esc(sub) + timingHtml + '</div>' : (timingHtml ? '<div class="dz">' + timingHtml + '</div>' : '')) + '</td></tr>';
     }).join("");
     var node=document.createElement("div"); node.className="rx-doc";
     node.innerHTML='<div class="rxdoc-in">' +
@@ -2356,22 +2689,23 @@
       var hasRxChoice = !!(sheet && sheet._rxChoice && sheet._rxChoice._allResults && sheet._rxChoice._allResults.length);
       var ov=document.createElement("div"); ov.className="rx-bp-ov";
       ov.innerHTML='<div class="rx-bp rx-exp">' +
-        '<div class="rx-bp-h"><div><b>Export Prescription</b><div style="font-size:11px;color:#64748b;font-weight:normal;margin-top:2px">Digitally signed &amp; verified document</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
-        '<div style="margin:12px 0 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">' +
-          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
-            '<input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + ' style="width:16px;height:16px;accent-color:#0e6e63">' +
-            '<span>Include RxChoice™ 4-way cost options</span>' +
+        '<div class="rx-handle-bar" style="margin:0 auto 10px"></div>' +
+        '<div class="rx-bp-h"><div><b style="font-size:16px">Export &amp; Issue Prescription</b><div style="font-size:11px;color:#047857;font-weight:600;margin-top:2px;display:flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Digitally signed &amp; verified document</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
+        '<div style="margin:14px 0 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:12px">' +
+          '<label class="rx-switch-row">' +
+            '<div><span style="display:block;font-size:13px;font-weight:600;color:#0f172a">Include RxChoice™ 4-way cost options</span><span style="font-size:11px;color:#64748b;font-weight:normal">Displays generic &amp; alternative pricing table</span></div>' +
+            '<span class="rx-toggle"><input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + '><span class="rx-slider"></span></span>' +
           '</label>' +
-          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
-            '<input type="checkbox" id="rxExpSafety" checked style="width:16px;height:16px;accent-color:#0e6e63">' +
-            '<span>Include Patient Safety &amp; Instructions Notes</span>' +
+          '<label class="rx-switch-row">' +
+            '<div><span style="display:block;font-size:13px;font-weight:600;color:#0f172a">Include Patient Safety &amp; Instructions Notes</span><span style="font-size:11px;color:#64748b;font-weight:normal">Adds common side effects, red flags &amp; meal timing</span></div>' +
+            '<span class="rx-toggle"><input type="checkbox" id="rxExpSafety" checked><span class="rx-slider"></span></span>' +
           '</label>' +
         '</div>' +
-        '<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">' +
-          '<button class="rx-btn rx-print rx-hero-export" id="rxExpPdf" style="width:100%;padding:12px 16px;font-size:14px;justify-content:center;gap:8px">' +
+        '<div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">' +
+          '<button class="rx-btn rx-print rx-hero-export rx-exp-primary-btn" id="rxExpPdf">' +
             rxIco("print") + '<span>Save as PDF (Recommended)</span>' +
           '</button>' +
-          '<button class="rx-btn rx-add" id="rxExpJpg" style="width:100%;padding:10px 16px;font-size:13px;justify-content:center;gap:8px">' +
+          '<button class="rx-btn rx-add rx-exp-sec-btn" id="rxExpJpg">' +
             '<span>Save as JPEG image</span>' +
           '</button>' +
         '</div>' +
@@ -2405,7 +2739,7 @@
 
   // openVerify is deliberately NOT gated on canPrescribe(): checking someone else's prescription is
   // not prescribing, and the pharmacist doing it may not be a prescriber at all.
-  window.SMD_RX = { open: open, openVerify: openVerify, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
+  window.SMD_RX = { open: open, openVerify: openVerify, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx, _analyzeRegimenSafety: analyzeRegimenSafety, _getDrugTimingBadge: getDrugTimingBadge, _rxDoc: rxDoc };
 
   /* Prime the verification cache at boot.
    * canPrescribe() is a SYNCHRONOUS read of _vcache, but ONLY verifiedInfo() fills it — and that
