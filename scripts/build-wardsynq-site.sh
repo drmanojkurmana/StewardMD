@@ -30,7 +30,7 @@ cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
 # opened), every Material Symbols ligature printed as its own name — "medicationMedications",
 # "fact_checkProvenance" — and the print stylesheet was absent, which is why the printed PDF came out
 # as unstyled running text. One file, four symptoms.
-for f in ward.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
+for f in ward.js ward-offline.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
   cp "$ROOT/$f" "$OUT/$f"
 done
 # The order-safety workstation and the WardSynQ client libraries it imports.
