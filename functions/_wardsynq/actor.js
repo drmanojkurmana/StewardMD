@@ -271,7 +271,11 @@ function grantForCaps(caps) {
      * is granted by ORDER_VERIFY above and is a supply fact against an ORDER, which is a different
      * thing that a different check governs. Reading MedicationDispense is how the level subtracts
      * what was issued, and pharmacy already holds that read. */
-    const added = ["StockMovement"];
+    /* PurchaseOrder, Vendor and Verification joined 2026-09-13. Purchasing sits on this capability at
+     * the router, but the record grant never followed, so a pharmacist's "Raise" and "Ask for approval"
+     * were refused (SCOPE_DENIED) and only an admin could ever order stock. Verification is written
+     * only through the approval routes (the raw door refuses it), and deciding one still needs emr.treat. */
+    const added = ["StockMovement", "PurchaseOrder", "Vendor", "Verification"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.ORDER_DISPENSE };
     else grant = {
       tier: TIER.EXECUTE,

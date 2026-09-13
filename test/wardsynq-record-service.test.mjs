@@ -282,6 +282,22 @@ test("roles: admin gets no chart (PHI is clinician-only); superadmin can read an
   assert.equal(await h.repository.latest("gimsr", "Patient", "pat-7"), null);
 });
 
+test("SECURITY: the raw record door refuses records other code trusts as authority, even from a prescriber who may write every type", async () => {
+  const h = hospital();
+  const f = h.fetchAs("fb:dr-menon");
+  const forge = (entity) => f("https://x/api/wardsynq/gimsr/record", { method: "POST", body: JSON.stringify({ entity }) });
+  const approval = { resourceType: "Verification", id: "wsq-verif-forged-d1", kind: "decision", parentVerificationId: "wsq-verif-forged", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: "micro.consultant", decision: "approved", at: "2026-09-13T00:00:00.000Z" };
+  for (const entity of [approval,
+    { resourceType: "MedicationVerification", id: "mv-forged", patientId: "pat-8", orderId: "rx-9", outcome: "verified" },
+    { resourceType: "PatientConsent", id: "pc-forged", patientId: "pat-8", scope: "share-external", status: "active" },
+    { resourceType: "EmergencyActivation", id: "em-forged", kind: "mass-casualty", relaxations: ["bed-capacity"] }]) {
+    const r = await forge(entity);
+    assert.equal(r.status, 403, entity.resourceType);
+    assert.equal((await r.json()).error, "route_governed");
+    assert.equal(await h.repository.latest("gimsr", entity.resourceType, entity.id), null, entity.resourceType + " was not written");
+  }
+});
+
 test("governance runs on the SERVER: a forged signature and a wrong-chart write are refused whatever the client claimed", async () => {
   const h = hospital();
   const f = h.fetchAs("fb:dr-rao");     // no registration number -> cannot sign
@@ -689,8 +705,9 @@ test("role mapping: every operational role resolves to exactly the grant its cap
   /* Two writes since 2026-09-07: its own verification, and its own supply record. Issuing stock is
    * the pharmacy's act and gets its own resource; recording that a patient was GIVEN a dose is the
    * nurse's, at a bedside, and is still not on this list. */
-  assert.deepEqual(write("pharmacy"), ["MedicationVerification", "MedicationDispense", "StockMovement"]);
-  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense", "StockMovement"]);
+  /* Purchasing joined 2026-09-13: raising an order and asking for its approval are pharmacy acts. */
+  assert.deepEqual(write("pharmacy"), ["MedicationVerification", "MedicationDispense", "StockMovement", "PurchaseOrder", "Vendor", "Verification"]);
+  assert.deepEqual(read("pharmacy"), ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense", "StockMovement", "PurchaseOrder", "Vendor", "Verification"]);
   assert.ok(!write("pharmacy").includes("MedicationAdministration"), "a pharmacist can never claim a dose was given");
   assert.ok(!write("pharmacy").includes("MedicationOrder"), "nor change the order they are checking");
   assert.ok(!read("pharmacy").includes("ClinicalNote"), "and not the notes or the discharge summary");
@@ -790,7 +807,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
    * stops well short of the chart: no Patient, no notes, no discharge summary. */
   const pharm = await client(h, "fb:pharm-1");
   assert.deepEqual(pharm.descriptor.actor.readable,
-    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense", "StockMovement"]);
+    ["MedicationOrder", "ServiceRequest", "AllergyIntolerance", "Observation", "Condition", "MedicationAdministration", "CriticalResultLoop", "MedicationVerification", "MedicationDispense", "StockMovement", "PurchaseOrder", "Vendor", "Verification"]);
   const chart = await pharm.backend.chart("pat-20");
   assert.ok(Object.keys(chart).includes("MedicationOrder"));
   assert.equal(chart.MedicationOrder.length, 1);

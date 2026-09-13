@@ -36,7 +36,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { chainState, approvalCovers } from "./verification.js";
+import { chainState, approvalCovers, levelsFor, amountOf } from "./verification.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const key = (v) => str(v).toUpperCase();
@@ -51,6 +51,25 @@ function qtyOf(v) {
   if (!s || !/^-?\d+(\.\d+)?$/.test(s)) return null;
   const n = Number(s);
   return Number.isFinite(n) ? n : null;
+}
+
+/* A receipt carries its quantity either as a { value, unit } (what stock.js counts, written since
+ * 2026-09-13) or as a bare number beside `unit` (older receipts). Both are read. */
+const amountIn = (r) => (r && r.quantity && typeof r.quantity === "object" ? qtyOf(r.quantity.value) : qtyOf(r && r.quantity));
+const unitOf = (r) => str(r && (r.unit || (r.quantity && r.quantity.unit)));
+
+/** PURE. An order's total in paise from its own lines; null when any line has no price, so nothing is
+ *  ever approved against a total that silently left something out. */
+function poTotalPaise(po) {
+  const lines = Array.isArray(po && po.lines) ? po.lines : [];
+  if (!lines.length) return null;
+  let total = 0;
+  for (const l of lines) {
+    const q = qtyOf(l && l.quantity), p = qtyOf(l && l.unitPricePaise);
+    if (q === null || p === null || p < 0) return null;
+    total += Math.round(q * p);
+  }
+  return total;
 }
 
 function poIdFor(orgId, at, salt) {
@@ -80,16 +99,16 @@ function orderState(po, receipts, approval) {
     /* Only receipts in the SAME unit count towards the line being fulfilled. One in a different
      * unit is real stock and is recorded, but adding it here would be the unit guess this file
      * refuses to make. */
-    const same = mine.filter((r) => key(r.unit) === unit);
-    const otherUnits = mine.filter((r) => key(r.unit) !== unit);
-    const received = same.reduce((a, r) => a + (qtyOf(r.quantity) || 0), 0);
+    const same = mine.filter((r) => key(unitOf(r)) === unit);
+    const otherUnits = mine.filter((r) => key(unitOf(r)) !== unit);
+    const received = same.reduce((a, r) => a + (amountIn(r) || 0), 0);
     return {
       index: i, item: str(l && l.item), unit: str(l && l.unit),
       ordered, received,
       outstanding: ordered === null ? null : Math.max(0, ordered - received),
       ...(ordered !== null && received > ordered ? { over: received - ordered } : {}),
       ...(ordered === null ? { unusable: "The quantity on this line is not a plain number, so nothing can be said about what is outstanding." } : {}),
-      ...(otherUnits.length ? { receivedInOtherUnits: otherUnits.map((r) => ({ quantity: qtyOf(r.quantity), unit: str(r.unit) })) } : {}),
+      ...(otherUnits.length ? { receivedInOtherUnits: otherUnits.map((r) => ({ quantity: amountIn(r), unit: str(unitOf(r)) })) } : {}),
     };
   });
 
@@ -147,18 +166,26 @@ async function raisePurchaseOrder(request, env, ctx) {
   const lines = rawLines.map((l) => ({
     item: str(l && l.item), quantity: qtyOf(l && l.quantity), unit: str(l && l.unit),
     ...(qtyOf(l && l.unitPrice) !== null ? { unitPrice: qtyOf(l.unitPrice) } : {}),
+    ...(str(l && l.unitPricePaise) !== "" ? { unitPricePaise: qtyOf(l.unitPricePaise) } : {}),
   }));
   const bad = lines.findIndex((l) => !l.item || !l.unit || l.quantity === null || l.quantity <= 0);
   if (bad >= 0) {
     return { ...base, ok: false, status: 422, error: "bad_line", line: bad, written: 0,
       detail: "Line " + (bad + 1) + " needs an item, a plain quantity above zero, and the unit it is counted in. The unit is not guessed at." };
   }
+  const badPrice = lines.findIndex((l) => "unitPricePaise" in l && (l.unitPricePaise === null || l.unitPricePaise < 0 || !Number.isInteger(l.unitPricePaise)));
+  if (badPrice >= 0) {
+    return { ...base, ok: false, status: 422, error: "bad_price", line: badPrice, written: 0,
+      detail: "Line " + (badPrice + 1) + " has a price that is not a whole number of paise at or above zero." };
+  }
 
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
   const at = str(ctx.at) || new Date().toISOString();
-  const id = poIdFor(ctx.orgId, at, vendor);
+  /* Random tail: two orders to one supplier in the same millisecond shared an id, and the second
+   * silently became a new version of the first. A retry is caught by idempotencyKey. */
+  const id = poIdFor(ctx.orgId, at, vendor + "-" + crypto.randomUUID().slice(0, 8));
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
   try {
@@ -167,7 +194,7 @@ async function raisePurchaseOrder(request, env, ctx) {
       ...(str(ctx.note) ? { note: str(ctx.note) } : {}),
     };
     const out = await svc.put(po, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines,
+    return { ...base, ok: true, written: 1, purchaseOrderId: id, vendor, lines, totalPaise: poTotalPaise(po),
       /* Said on the way out, because an order that looks placed and is only raised is how a ward
        * ends up waiting for stock nobody ever bought. */
       state: "awaiting-approval",
@@ -214,9 +241,12 @@ async function receiveGoods(request, env, ctx) {
   const at = str(ctx.at) || new Date().toISOString();
   const id = `wsq-grn-${poId}-${str(at).replace(/[^0-9a-zA-Z]+/g, "")}`;
   try {
+    /* The shape stock.js counts: a code and a { value, unit } quantity. This used to write a bare
+     * number and no code, so levelsFrom() reported every booked-in delivery as "no_quantity" and an
+     * approved, received order never reached the stock level. item/unit stay for orderState(). */
     const movement = {
       resourceType: MOVE_TYPE, id, kind: "receipt",
-      item, quantity, unit,
+      code: item, display: item, item, quantity: { value: quantity, unit }, unit,
       purchaseOrderId: poId,
       ...(str(ctx.line) !== "" ? { purchaseOrderLine: str(ctx.line) } : {}),
       ...(str(ctx.batch) ? { batch: str(ctx.batch) } : {}),
@@ -248,8 +278,7 @@ async function approvalFor(svc, poId, ctx) {
   if (!rows.length) return null;
   const requestId = str((rows.find((r) => str(r.kind) === "request") || {}).id);
   const chain = rows.filter((r) => str(r.id) === requestId || str(r.parentVerificationId) === requestId);
-  const levels = ctx && ctx.wsqCfg && ctx.wsqCfg.approvalLevels && ctx.wsqCfg.approvalLevels[PO_TYPE];
-  const state = chainState(chain, Number.isFinite(levels) ? levels : 1);
+  const state = chainState(chain, levelsFor(ctx, PO_TYPE, amountOf(chain.find((r) => str(r.kind) === "request"))));
   /* The rows were already narrowed to this order's subject, but the covers check is what actually
    * ties an approval to the thing it approves, so it is asked rather than assumed - an approved
    * chain that turns out to be about something else must not read as this order's approval. */
@@ -290,24 +319,23 @@ async function listPurchaseOrders(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orders: [] };
   }
 
-  const levels = ctx && ctx.wsqCfg && ctx.wsqCfg.approvalLevels && ctx.wsqCfg.approvalLevels[PO_TYPE];
-  const want = Number.isFinite(levels) ? levels : 1;
-
   const orders = pos.map((po) => {
     const id = str(po.id);
     const mine = moves.filter((m) => str(m.purchaseOrderId) === id);
     const rows = verifs.filter((r) => str(r.subjectType) === PO_TYPE && str(r.subjectId) === id);
-    const requestId = str((rows.find((r) => str(r.kind) === "request") || {}).id);
+    const reqRow = rows.find((r) => str(r.kind) === "request");
+    const requestId = str((reqRow || {}).id);
     const chain = rows.filter((r) => str(r.id) === requestId || str(r.parentVerificationId) === requestId);
+    const want = levelsFor(ctx, PO_TYPE, reqRow ? amountOf(reqRow) : poTotalPaise(po) === null ? undefined : poTotalPaise(po));
     const approval = chain.length ? chainState(chain, want) : { state: "none", approvals: 0, required: want, approvers: [] };
     return { purchaseOrderId: id, vendor: str(po.vendor), raisedBy: str(po.raisedBy), raisedAt: str(po.raisedAt),
-      ...orderState(po, mine, approval), approval };
+      totalPaise: poTotalPaise(po), ...orderState(po, mine, approval), approval };
   }).sort((a, b) => str(b.raisedAt).localeCompare(str(a.raisedAt)));
 
   return { ...base, ok: true, orders };
 }
 
 export {
-  PO_TYPE, VENDOR_TYPE, qtyOf, poIdFor, orderState,
+  PO_TYPE, VENDOR_TYPE, qtyOf, poIdFor, orderState, poTotalPaise,
   raisePurchaseOrder, receiveGoods, listPurchaseOrders,
 };

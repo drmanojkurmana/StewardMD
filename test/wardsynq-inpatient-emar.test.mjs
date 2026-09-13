@@ -6871,3 +6871,74 @@ test("APPROVALS: the hospital can name which roles approve, and a request past i
   const req3 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "pip-p1", reason: "Neutropenic sepsis" });
   assert.equal((await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req3.verificationId, decision: "approved" })).__status, 200, "no policy: behaves as before");
 });
+
+test("APPROVALS BY AMOUNT: a purchase order's own priced total sets how many approvers it needs; a missing price or a typed amount never lowers it; booked-in stock reaches the stock level", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  docs.set(`q_orgs/${ORG}`, { ...org, fields: { ...org.fields, wardsynq: { ...org.fields.wardsynq, approvalPolicy: { PurchaseOrder: { amountThresholds: [{ abovePaise: 1000000, levels: 2 }] } } } } });
+
+  const raise = (lines) => as(PHARM, "/ward/purchase-order", "POST", { orgId: ORG, vendor: "MedSupply", lines });
+  const small = await raise([{ item: "Ceftriaxone 1g", quantity: 10, unit: "vial", unitPricePaise: 5000 }]);        // Rs 500
+  const big = await raise([{ item: "Albumin 20%", quantity: 50, unit: "vial", unitPricePaise: 450000 }]);          // Rs 2,25,000
+  const unpriced = await raise([{ item: "Gauze", quantity: 100, unit: "pack" }]);
+  assert.equal(small.__status, 200, JSON.stringify(small));
+  assert.equal(big.totalPaise, 22500000);
+  assert.equal(unpriced.totalPaise, null);
+  assert.equal((await raise([{ item: "X", quantity: 1, unit: "vial", unitPricePaise: -1 }])).error, "bad_price");
+
+  const ask = (id, extra) => as(PHARM, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "PurchaseOrder", subjectId: id, reason: "Stock low", ...(extra || {}) });
+  const rs = await ask(small.purchaseOrderId, { context: { amountPaise: 99999999 } });
+  assert.equal(rs.__status, 200, JSON.stringify(rs));
+  assert.equal(rs.required, 1, "the requester's typed amount is ignored; the order's own total is under the threshold");
+  const rb = await ask(big.purchaseOrderId, { context: { amountPaise: 1 } });
+  assert.equal(rb.required, 2, "typing a small amount does not dodge the second approver");
+  assert.equal((await ask(unpriced.purchaseOrderId)).required, 2, "no price means the strictest level, never the lightest");
+  assert.equal((await ask("wsq-po-does-not-exist")).__status, 404);
+  const pharmRestricted = await as(PHARM, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "Meropenem", reason: "x" });
+  assert.equal(pharmRestricted.__status, 403, "the pharmacy's approval-request authority covers supply subjects only");
+  assert.equal((await as(PHARM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: rs.verificationId, decision: "approved" })).__status, 403, "and pharmacy never decides one");
+
+  // One approval on the big order is not enough, so nothing can be booked in against it yet.
+  await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: rb.verificationId, decision: "approved" });
+  const early = await as(PHARM, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: big.purchaseOrderId, item: "Albumin 20%", quantity: 50, unit: "vial", line: 0, batch: "ALB1", expiry: "2099-01-01", location: "Main" });
+  assert.equal(early.__status, 409, JSON.stringify(early));
+  assert.equal(early.error, "order_not_approved");
+
+  const ADMIN_APPROVER = "consultant2@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN_APPROVER))}`, { fields: { orgId: ORG, identity: idFor(ADMIN_APPROVER), role: "doctor", active: true }, updateTime: "t1" });
+  await as(ADMIN_APPROVER, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: rb.verificationId, decision: "approved" });
+  const booked = await as(PHARM, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: big.purchaseOrderId, item: "Albumin 20%", quantity: 50, unit: "vial", line: 0, batch: "ALB1", expiry: "2099-01-01", location: "Main" });
+  assert.equal(booked.__status, 200, JSON.stringify(booked));
+  assert.equal(booked.state, "received");
+
+  const stock = await as(PHARM, `/ward/stock?orgId=${ORG}`);
+  const row = stock.levels.find((r) => r.code === "Albumin 20%");
+  assert.ok(row, "stock booked in against an order is counted: " + JSON.stringify(stock.problems));
+  assert.equal(row.level, 50);
+  const list = await as(PHARM, `/ward/purchase-orders?orgId=${ORG}`);
+  assert.equal(list.orders.find((o) => o.purchaseOrderId === big.purchaseOrderId).approval.required, 2);
+});
+
+test("RESTRICTED MEDICINES honour the hospital's approver count at prescribing, not only on the approvals screen", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, approvalLevels: { RestrictedMedication: 2 },
+    formulary: [{ drug: "Meropenem", restricted: true, requiresApproval: true, approvedBy: "Microbiology" }] };
+  const { adm } = await admittedPatientOnDrug();
+  RECORD.append(TENANT_ROW.id, [
+    { resourceType: "Verification", id: "wsq-verif-mero-2", version: 1, kind: "request", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: idFor(DOCTOR), reason: "ESBL", at: "2026-09-12T10:00:00.000Z" },
+    { resourceType: "Verification", id: "wsq-verif-mero-2-d1", version: 1, kind: "decision", parentVerificationId: "wsq-verif-mero-2", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: "micro.one", decision: "approved", at: "2026-09-12T10:05:00.000Z" },
+  ]);
+  const order = () => as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, approvalRef: "wsq-verif-mero-2",
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Meropenem", dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" } });
+  const one = await order();
+  assert.equal(one.__status, 409, "one approver of the two this hospital asked for does not clear the block: " + JSON.stringify(one));
+  RECORD.append(TENANT_ROW.id, [{ resourceType: "Verification", id: "wsq-verif-mero-2-d2", version: 1, kind: "decision", parentVerificationId: "wsq-verif-mero-2", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: "micro.two", decision: "approved", at: "2026-09-12T10:07:00.000Z" }]);
+  assert.equal((await order()).__status, 200);
+});
+
+test("APPROVALS: no policy keeps the old behaviour", async () => {
+  seedHospital();
+  const req3 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "pip-p1", reason: "Neutropenic sepsis" });
+  assert.equal((await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req3.verificationId, decision: "approved" })).__status, 200, "no policy: behaves as before");
+});

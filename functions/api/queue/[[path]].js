@@ -1177,6 +1177,10 @@ export async function onRequest(context) {
        * routes - the `blood_bank` role holds TRANSFUSION_ISSUE and none of the EMR capabilities, and
        * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
       if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
+      /* Asking for a purchase order's approval is the pharmacy's own next step after raising it. The
+       * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
+       * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
+      if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       /* TASK 9.15/9.1: A THROTTLE ON THE CLINICAL DOOR, which had none.

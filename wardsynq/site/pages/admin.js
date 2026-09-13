@@ -114,6 +114,69 @@
       });
     };
   }
+  /* APPROVAL RULES (P1.3). How many people must approve each kind of request, which roles may, how
+   * long a request stays open, and extra approvers above an amount. The amount is always the one the
+   * server works out from the thing itself (a purchase order's priced lines); a request with no known
+   * amount gets the strictest level. Deciding an approval needs emr.treat, so only roles holding it
+   * are offered. ponytail: one amount step per kind on screen; the server accepts a list. */
+  var APPROVAL_KINDS = [["PurchaseOrder", "Purchase orders"], ["StockRequisition", "Stock requests"], ["RestrictedMedication", "Restricted medicines"], ["Invoice", "Invoices"], ["Discharge", "Discharges"], ["Incident", "Incident reports"]];
+  var APPROVER_ROLES = ["admin", "doctor", "pg_faculty", "pg_hod"];
+  function approvalRulesHtml(esc, cfg) {
+    cfg = cfg || {};
+    var levels = cfg.approvalLevels || {}, policy = cfg.approvalPolicy || {};
+    var rows = APPROVAL_KINDS.map(function (k) {
+      var p = policy[k[0]] || {}, t = (p.amountThresholds || [])[0] || {};
+      var roles = Array.isArray(p.approverRoles) ? p.approverRoles : [];
+      return "<tr data-kind=\"" + esc(k[0]) + "\"><td>" + esc(k[1]) + "</td>" +
+        '<td><input class="apLevels" type="number" min="1" max="5" value="' + esc(levels[k[0]] || 1) + '" style="width:4em"></td>' +
+        "<td>" + APPROVER_ROLES.map(function (r) { return '<label style="white-space:nowrap"><input type="checkbox" class="apRole" value="' + r + '"' + (roles.indexOf(r) >= 0 ? " checked" : "") + "> " + esc(r.replace(/_/g, " ")) + "</label> "; }).join("") + "</td>" +
+        '<td><input class="apExpires" type="number" min="1" placeholder="never" value="' + esc(p.expiresHours || "") + '" style="width:5em"></td>' +
+        '<td>above Rs <input class="apAbove" inputmode="decimal" placeholder="none" value="' + esc(t.abovePaise != null ? t.abovePaise / 100 : "") + '" style="width:7em"> needs <input class="apAboveLevels" type="number" min="1" max="5" value="' + esc(t.levels || "") + '" style="width:4em"></td></tr>';
+    }).join("");
+    return '<div class="card"><h2>Approval rules</h2>' +
+      '<p class="quiet">Nobody can approve their own request. No roles ticked means any role that may approve can. Amounts are taken from the request itself on the server; a request whose amount is not known needs the highest number you set.</p>' +
+      '<div class="tbl"><table><thead><tr><th>Kind</th><th>Approvals</th><th>Only these roles</th><th>Expires after (hours)</th><th>Extra approvers by amount</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
+      '<button class="btn" id="apSave" type="button">Save approval rules</button><div id="apMsg"></div></div>';
+  }
+  /* Reads the table back. Returns { approvalLevels, approvalPolicy } or { error }. */
+  function readApprovalRules(rowEls) {
+    var levels = {}, policy = {};
+    for (var i = 0; i < rowEls.length; i++) {
+      var tr = rowEls[i], kind = tr.getAttribute("data-kind");
+      var q = function (sel) { return tr.querySelector(sel); };
+      var n = parseInt(q(".apLevels").value, 10);
+      if (!(n >= 1 && n <= 5)) return { error: "Approvals must be between 1 and 5." };
+      levels[kind] = n;
+      var p = {};
+      var roles = []; tr.querySelectorAll(".apRole").forEach(function (b) { if (b.checked) roles.push(b.value); });
+      if (roles.length) p.approverRoles = roles;
+      var exp = String(q(".apExpires").value || "").trim();
+      if (exp) { var h = Number(exp); if (!(h > 0)) return { error: "Expiry must be a number of hours above zero." }; p.expiresHours = h; }
+      var above = String(q(".apAbove").value || "").trim(), aboveN = String(q(".apAboveLevels").value || "").trim();
+      if (above || aboveN) {
+        if (!/^\d+(\.\d{1,2})?$/.test(above) || !(parseInt(aboveN, 10) >= 1)) return { error: "An amount step needs both a rupee amount and a number of approvals." };
+        p.amountThresholds = [{ abovePaise: Math.round(Number(above) * 100), levels: parseInt(aboveN, 10) }];
+      }
+      policy[kind] = p;
+    }
+    return { approvalLevels: levels, approvalPolicy: policy };
+  }
+  WSQ._approvalRules = { html: approvalRulesHtml, read: readApprovalRules };
+  function wireApprovalRules(c) {
+    var btn = document.getElementById("apSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var m = document.getElementById("apMsg");
+      var out = readApprovalRules(document.querySelectorAll("tr[data-kind]"));
+      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: out }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org; c.toast("Approval rules saved.");
+      });
+    };
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -133,7 +196,7 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       "</div>" +
-      (c.isWardsynq() ? noteWritersCard(c, o) : "");
+      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -146,6 +209,7 @@
       });
     };
     wireNoteWriters(c);
+    wireApprovalRules(c);
   }
 
   // ---- Safety reminders (dry run) ----------------------------------------------------------------

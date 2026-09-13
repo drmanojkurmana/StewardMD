@@ -34,7 +34,7 @@ import { vitalsToObservations, VITAL_CODES } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
-import { chainState, approvalCovers } from "./verification.js";
+import { chainState, approvalCovers, levelsFor } from "./verification.js";
 
 /**
  * Does this approval reference actually approve this drug, right now?
@@ -58,9 +58,10 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
     rows = (all || []).filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
   } catch { return false; }
   if (!rows.length) return false;
-  // How many people this hospital wants on a restricted-drug approval. One unless it says otherwise.
-  const levels = ctx && ctx.approvalLevels;
-  const state = chainState(rows, Number.isFinite(levels) ? levels : 1);
+  /* How many people this hospital wants on a restricted-drug approval, read the same way the approval
+   * screen reads it. This used to read ctx.approvalLevels, which the router never passes, so a hospital
+   * that asked for two approvers had prescribing accept one. */
+  const state = chainState(rows, levelsFor(ctx, "RestrictedMedication"));
   return approvalCovers(state, "RestrictedMedication", drug);
 }
 import { isActive as emergencyIsActive } from "./emergency-mode.js";

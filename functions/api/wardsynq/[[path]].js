@@ -40,6 +40,8 @@ import { IntegrationHub } from "../../../wardsynq/wardsynq-interop.js";
 import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { reconcileIdentity, identityCandidates, rebind, authorizedSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 
+const ROUTE_GOVERNED = new Set(["Verification", "MedicationVerification", "MedicationDispense", "MedicationAdministration", "EmergencyActivation", "BreakGlassGrant", "SourceSystemGrant", "PatientConsent", "CriticalResultLoop", "SafetyOverride"]);
+
 export function recordFlagOn(env) { return String(env && env.WARDSYNQ_RECORD) === "1"; }
 
 function status(e) {
@@ -159,6 +161,15 @@ export async function handle(request, env, deps) {
       const svc = await openService(request, env, tenantId, "record:write", deps);
 
       if (rest[0] === "record" && rest.length === 1) {
+        /* RECORDS OTHER CODE TRUSTS AS AUTHORITY are written only through the route that enforces their
+         * rules. Through this door a prescriber (who may write every type) could post a Verification
+         * "approved" under a microbiologist's name and clear a restricted drug, a MedicationVerification
+         * to skip the pharmacist, a PatientConsent to release a record, or an EmergencyActivation to
+         * relax bed safety - none of the checks those routes make ever ran. */
+        const kind = body && body.entity && body.entity.resourceType;
+        if (ROUTE_GOVERNED.has(kind)) {
+          return jsonResponse({ error: "route_governed", resourceType: kind, detail: `${kind} records are written only through their own workflow, which checks who may make them. This door cannot write them.` }, { status: 403 });
+        }
         const idempotencyKey = request.headers.get("Idempotency-Key") || body.idempotencyKey || null;
         const out = await svc.put(body.entity, { expectedVersion: body.expectedVersion, idempotencyKey, activePatientId: body.activePatientId || null, origin: body.origin || null });
         return jsonResponse({ ok: true, replayed: out.replayed, record: out.record, actor: out.actor || null }, { status: out.replayed ? 200 : 201 });

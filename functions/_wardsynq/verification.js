@@ -31,6 +31,7 @@ import { RecordService } from "./service.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { poTotalPaise } from "./purchasing.js";
 
 const str = (v) => (typeof v === "string" ? v.trim() : "");
 const lower = (v) => str(v).toLowerCase();
@@ -180,14 +181,22 @@ async function chainRows(svc, requestId) {
   return (all || []).filter((r) => r && (str(r.id) === requestId || str(r.parentVerificationId) === requestId));
 }
 
-/** How many distinct approvers this hospital wants. Org config, the same way note writers are. */
+/** How many distinct approvers this hospital wants. Org config, the same way note writers are.
+ *
+ * AMOUNT THRESHOLDS (P1.3): approvalPolicy[subjectType].amountThresholds = [{ abovePaise, levels }].
+ * The amount is only ever the one the SERVER worked out from the subject when the request was made
+ * (a purchase order's own priced lines), never one the requester typed. When thresholds are set and
+ * no server amount exists - an unpriced line, a subject type with no amount - the strictest level
+ * applies, so leaving a price out can never mean fewer approvers. */
 function levelsFor(ctx, subjectType, amountPaise) {
   const cfg = ctx && ctx.wsqCfg && ctx.wsqCfg.approvalLevels;
   const n = cfg && typeof cfg === "object" ? cfg[str(subjectType)] : null;
-  /* ponytail: no amount thresholds yet. The only amount available here would be the one the requester
-   * typed, which they could leave out to need fewer approvers; thresholds wait for server-held values
-   * (a purchase order total, an invoice balance) on the subject itself. */
-  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+  const base = Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+  const t = policyFor(ctx, subjectType).amountThresholds;
+  const valid = (Array.isArray(t) ? t : []).filter((x) => x && Number.isFinite(Number(x.abovePaise)) && Number(x.levels) >= 1);
+  if (!valid.length) return base;
+  const hit = Number.isFinite(amountPaise) ? valid.filter((x) => amountPaise > Number(x.abovePaise)) : valid;
+  return Math.max(base, ...hit.map((x) => Math.floor(Number(x.levels))));
 }
 /** The hospital's approval policy for a subject type: { approverRoles?, expiresHours? }. */
 function policyFor(ctx, subjectType) {
@@ -195,7 +204,8 @@ function policyFor(ctx, subjectType) {
   const p = all && typeof all === "object" ? all[str(subjectType)] : null;
   return p && typeof p === "object" ? p : {};
 }
-const amountOf = (row) => { const a = row && row.context && Number(row.context.amountPaise); return Number.isFinite(a) ? a : undefined; };
+/* Only the server-set amount counts. context.amountPaise is the requester's own words and is ignored. */
+const amountOf = (row) => { const a = row && row.serverAmountPaise != null ? Number(row.serverAmountPaise) : NaN; return Number.isFinite(a) ? a : undefined; };
 
 /** Asks for an approval. Creates the chain; approves nothing. */
 async function requestVerification(request, env, ctx) {
@@ -220,11 +230,22 @@ async function requestVerification(request, env, ctx) {
   const id = verificationIdFor(subjectType, subjectId, at);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* The amount an approval is judged on, read from the subject itself. A purchase order that does not
+   * exist cannot be approved into existence. */
+  let serverAmountPaise = null;
+  if (subjectType === "PurchaseOrder") {
+    let po;
+    try { po = await svc.get("PurchaseOrder", subjectId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    if (!po) return { ...base, ok: false, status: 404, error: "subject_not_found", detail: "There is no purchase order with that reference.", written: 0 };
+    serverAmountPaise = poTotalPaise(po);
+  }
+
   try {
-    const rec = requestRecord({ id, subjectType, subjectId, by: resolved.actor.id, reason, at, context: ctx.context });
+    const rec = { ...requestRecord({ id, subjectType, subjectId, by: resolved.actor.id, reason, at, context: ctx.context }), ...(serverAmountPaise !== null ? { serverAmountPaise } : {}) };
     const out = await svc.put(rec, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, verificationId: id, subjectType, subjectId,
-      state: "pending", required: levelsFor(ctx, subjectType, amountOf({ context: ctx.context })), version: out.record.version, actor: resolved.actor.id };
+      state: "pending", required: levelsFor(ctx, subjectType, amountOf(rec)), amountPaise: serverAmountPaise, version: out.record.version, actor: resolved.actor.id };
   } catch (e) {
     return { ...base, ...writeFailure(e), written: 0 };
   }
@@ -340,6 +361,6 @@ function writeFailure(e) {
 
 export {
   DECISIONS, SUBJECT_TYPES, verificationIdFor, chainState, mayDecide,
-  requestRecord, decisionRecord, approvalCovers,
+  requestRecord, decisionRecord, approvalCovers, levelsFor, amountOf,
   requestVerification, recordVerification, listVerifications,
 };

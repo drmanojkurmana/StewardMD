@@ -3828,6 +3828,7 @@
       (l.receivedInOtherUnits ? ' <span class="w-st due">also ' + l.receivedInOtherUnits.map(function (o) { return esc(o.quantity) + " " + esc(o.unit); }).join(", ") + ", not counted here</span>" : "") +
       "</li>";
   }
+  function rupeesOf(paise) { return "Rs " + (Math.round(Number(paise) || 0) / 100).toFixed(2); }
   function poRow(o) {
     var label = { "awaiting-approval": "waiting for approval", rejected: "turned down", open: "ordered, nothing in yet",
       "part-received": "part delivered", received: "all in", cancelled: "cancelled" }[o.state] || o.state;
@@ -3836,7 +3837,8 @@
       '<span class="w-st ' + esc(cls) + '">' + esc(label) + "</span> " +
       "<b>" + esc(o.vendor) + "</b>" +
       '<div class="w-dt-times">raised by ' + esc(o.raisedBy) + " &middot; " + when(o.raisedAt) +
-      " &middot; approvals " + esc(o.approval && o.approval.approvals || 0) + " of " + esc(o.approval && o.approval.required || 1) + "</div>" +
+      " &middot; approvals " + esc(o.approval && o.approval.approvals || 0) + " of " + esc(o.approval && o.approval.required || 1) +
+      " &middot; " + (o.totalPaise == null ? "total not known (a line has no price)" : "total " + rupeesOf(o.totalPaise)) + "</div>" +
       '<ul class="w-mini">' + (o.lines || []).map(poLineRow).join("") + "</ul>" +
       '<div class="w-dt-times">Reference: ' + esc(o.purchaseOrderId) + "</div></div>" +
       '<div class="w-mini-row-act">' +
@@ -3859,12 +3861,14 @@
       '<label class="w-f"><span>Item</span><input id="wPoItem"></label>' +
       '<label class="w-f"><span>How many</span><input id="wPoQty" inputmode="decimal"></label>' +
       '<label class="w-f"><span>Counted in</span><input id="wPoUnit" placeholder="box, strip, vial"></label>' +
+      '<label class="w-f"><span>Price per unit (Rs)</span><input id="wPoPrice" inputmode="decimal" placeholder="optional"></label>' +
       "</div>" +
-      '<p class="w-hint">' + ms("info") + "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line." +
+      '<p class="w-hint">' + ms("info") + "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line. " +
+      "Without a price the order total is unknown, and the hospital's strictest approval level applies." +
       "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + "Raise</button></div>" +
-      (state.purchaseOrders !== null
-        ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No purchase orders.</p>')
-        : "") +
+      (state.purchaseOrdersFailed ? '<p class="w-hint warn">' + ms("error") + "Purchase orders could not be loaded. Do not read this as none." + (state.purchaseOrders ? " The list below may be out of date." : "") + "</p>" : "") +
+      (state.purchaseOrders == null ? (state.purchaseOrdersFailed ? "" : '<p class="w-empty">Loading purchase orders...</p>')
+        : rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No purchase orders.</p>') +
       "</div>";
   }
 
@@ -6746,18 +6750,21 @@
   function loadPurchaseOrders() {
     st.busy = true; paint();
     return apiGet("/ward/purchase-orders?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.busy = false; if (r && r.ok) st.purchaseOrders = r.orders || []; paint(); })
-      .catch(function () { st.busy = false; paint(); });
+      .then(function (r) { st.busy = false; st.purchaseOrdersFailed = !(r && r.ok); if (r && r.ok) st.purchaseOrders = r.orders || []; paint(); })
+      .catch(function () { st.busy = false; st.purchaseOrdersFailed = true; paint(); });
   }
   function poRaise() {
-    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit");
+    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit"), price = val("wPoPrice");
     if (!vendor) { st.err = "Say who this is being ordered from."; paint(); return; }
     if (!item || !qty || !unit) { st.err = "An order line needs the item, how many, and what they are counted in."; paint(); return; }
+    if (price && !/^\d+(\.\d{1,2})?$/.test(price)) { st.err = "Write the price in rupees, for example 125.50."; paint(); return; }
+    var line = { item: item, quantity: qty, unit: unit };
+    if (price) line.unitPricePaise = Math.round(Number(price) * 100);
     st.busy = true; paint();
-    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [{ item: item, quantity: qty, unit: unit }] })
+    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [line] })
       .then(function (r) {
         if (settle(r, r && r.ok ? r.detail : null)) {
-          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit", "wPoPrice"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadPurchaseOrders();
         } else paint();
       })
