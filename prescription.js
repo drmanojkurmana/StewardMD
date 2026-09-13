@@ -2236,7 +2236,7 @@
             '<span class="rx-title-main">Prescription <span class="rx-saved-indicator"><span class="rx-saved-dot"></span> Draft saved</span></span>' +
             '<span class="rx-title-sub">Dr. ' + esc(docName() || "—") + '</span>' +
           '</div>' +
-          '<button class="rx-top-export rx-print" id="rxTopExport" title="Export prescription">' + rxIco("print") + ' Save PDF</button>' +
+          '<button class="rx-top-export rx-print" id="rxTopExport" title="Export prescription">' + rxIco("print") + ' PDF</button>' +
         '</div>' +
       '</div>' +
       '<div class="rx-scroll-body" id="rxScrollBody">' +
@@ -2245,18 +2245,18 @@
         '<div class="rx-pt-card">' +
           '<div class="rx-pt-card-title">Patient &amp; Clinical Summary</div>' +
           '<div class="rx-pt-row rx-pt-grid">' +
-            '<input class="rx-in" id="rxPtName" placeholder="Patient name" aria-label="Patient name">' +
-            '<input class="rx-in" id="rxPtAge" placeholder="Age / Sex" aria-label="Age or Sex">' +
+            '<label class="rx-field">Patient name<input class="rx-in" id="rxPtName" placeholder="Patient name" aria-label="Patient name"></label>' +
+            '<label class="rx-field">Age / sex<input class="rx-in" id="rxPtAge" placeholder="Age / Sex" aria-label="Age or Sex"></label>' +
           '</div>' +
           '<div class="rx-pt-row">' +
-            '<input class="rx-in" id="rxDx" placeholder="Diagnosis (e.g. CAP, HTN)" value="' + esc(topic || "") + '" aria-label="Diagnosis">' +
+            '<label class="rx-field">Diagnosis<input class="rx-in" id="rxDx" placeholder="Diagnosis (e.g. CAP, HTN)" value="' + esc(topic || "") + '" aria-label="Diagnosis"></label>' +
           '</div>' +
           '<div class="rx-pt-row rx-pt-grid">' +
-            '<input class="rx-in" id="rxCc" placeholder="Chief complaints" aria-label="Complaints">' +
-            '<input class="rx-in" id="rxVitals" placeholder="Vitals (BP, HR, SpO₂)" aria-label="Vitals">' +
+            '<label class="rx-field">Chief complaints<input class="rx-in" id="rxCc" placeholder="Chief complaints" aria-label="Complaints"></label>' +
+            '<label class="rx-field">Vitals<input class="rx-in" id="rxVitals" placeholder="Vitals (BP, HR, SpO₂)" aria-label="Vitals"></label>' +
           '</div>' +
           '<div class="rx-pt-row">' +
-            '<input class="rx-in" id="rxAllergies" placeholder="Known drug allergies (optional)" aria-label="Known allergies">' +
+            '<label class="rx-field">Drug allergies<input class="rx-in" id="rxAllergies" placeholder="Known drug allergies (optional)" aria-label="Known allergies"></label>' +
           '</div>' +
         '</div>' +
         '<div class="rx-sec-head">' +
