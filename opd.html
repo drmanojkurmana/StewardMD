@@ -314,6 +314,8 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout("Your session ended. Please sign in again.");return;} renderLogin("Session expired. Sign in again."); return; }
+      // The hospital requires two-step sign-in for this role and it is not set up: every other request would be refused.
+      if(r.twoStepRequired){ app.innerHTML='<div class="login"><h3>Two-step sign-in required</h3><p>Your hospital requires two-step sign-in for your role. Set it up at <a href="https://wardsynq.com/#/security">wardsynq.com, Sign-in security</a>, then sign in here again.</p><button class="btn" id="tsOut">Sign out</button></div>'; document.getElementById("tsOut").onclick=function(){logout("");}; return; }
       st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.

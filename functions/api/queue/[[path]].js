@@ -388,8 +388,20 @@ async function resolveActor(request, env) {
       /* A reset, a disable, or a new PIN/password ends every session issued before it. Without this a
        * leaked PIN, once reset, still opened the ward for the rest of a 12-hour session. A member row
        * that cannot be read leaves the session to authorizeOrg, which refuses it anyway. */
-      if (ss && sessionRevoked(ss, await ORG.getMemberAuth(env, ss.orgId, ss.identity))) return null;
-      if (ss) return { kind: "staff", id: ss.identity, orgId: ss.orgId, role: "viewer", name: ss.identity, ghisToken: "" };
+      const ssMember = ss ? await ORG.getMemberAuth(env, ss.orgId, ss.identity) : null;
+      if (ss && sessionRevoked(ss, ssMember)) return null;
+      if (ss) {
+        /* The hospital may require two-step sign-in for some roles. A member of such a role who has not
+         * set it up gets a session that can do exactly one thing: set it up (see the gate after
+         * resolveActor). Refusing the sign-in outright would leave them no way to comply.
+         * ponytail: one org read per staff request; cache per isolate if request volume makes it matter. */
+        let mfaSetupOnly = false;
+        if (ssMember && !ssMember.mfaEnabled) {
+          const ssOrg = await ORG.getOrg(env, ss.orgId);
+          mfaSetupOnly = !!(ssOrg && ssOrg.security && ssOrg.security.requireTwoStepRoles.indexOf(ssMember.role) >= 0);
+        }
+        return { kind: "staff", id: ss.identity, orgId: ss.orgId, role: "viewer", name: ss.identity, ghisToken: "", mfaSetupOnly };
+      }
       // 2. GHIS session — an identity provider only; it maps into org membership, never a global elevation.
       const eid = await ghisUserId(env, tok);
       if (eid) return { kind: "ghis", id: "ghis:" + eid, employeeId: eid, role: "viewer", name: eid, hospitalId: "", ghisToken: tok };
@@ -573,6 +585,11 @@ export async function onRequest(context) {
     if (!actor) return json({ ok: false, error: "unauthorized" }, 401, request);
     if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
     const who = actor;   // compat alias: a plain doctor's actor.id === their Firebase uid
+    /* THE HOSPITAL REQUIRES TWO-STEP SIGN-IN FOR THIS ROLE and it is not set up: set-up and "who am I"
+     * only. Enforced here, server-side, for every route - a screen that forgot to check changes nothing. */
+    if (actor.mfaSetupOnly && seg !== "mfa" && seg !== "whoami") {
+      return json({ ok: false, error: "two_step_required", message: "Your hospital requires two-step sign-in for your role. Set it up under Sign-in security on wardsynq.com before continuing." }, 403, request);
+    }
 
     // Upload/replace a Pro clinic's white-label logo (owner/admin of the org, and must be Pro).
     // Body = raw image bytes; query ?orgId=&name=. Stored in R2, recorded in q_org_branding.
@@ -2761,7 +2778,7 @@ export async function onRequest(context) {
       if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
       let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env) }, 200, request);
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----

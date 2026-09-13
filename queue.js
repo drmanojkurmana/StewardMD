@@ -800,6 +800,7 @@
     el.innerHTML = '<div class="q-empty" style="padding:80px">Loading the front desk…</div>';
     apiGet("/whoami").then(function (w) {
       if (!w || !w.ok) { setStaffTok(""); root().innerHTML = _staffGate("Your session ended. Sign in again."); prefillStaff(); return; }
+      if (w.twoStepRequired) { el.innerHTML = _wrap('<p class="q-gate-sub">Your clinic requires two-step sign-in for your role. Set it up at wardsynq.com under Sign-in security, then sign in here again.</p><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }
       st.staffWho = w; st.orgId = w.orgId || st.orgId || "";
       if (!st.orgId) { el.innerHTML = _wrap('<p class="q-gate-sub">You are not assigned to a clinic yet. Ask the clinic owner to add you.</p><button class="q-gate-close" data-q-act="staffout">Back</button>'); return; }
       return apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (b) {

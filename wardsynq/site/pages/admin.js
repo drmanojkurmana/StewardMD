@@ -354,6 +354,33 @@
   }
 
   // ---- Staff and roles ----------------------------------------------------------------------------
+  /* REQUIRE TWO-STEP SIGN-IN, per role. The server enforces it on every request; this card only sets it.
+   * Staff of a ticked role who have not set it up can still sign in, but can do nothing except set it up. */
+  function twoStepPolicyCard(c) {
+    var on = ((c.state.org && c.state.org.security && c.state.org.security.requireTwoStepRoles) || []);
+    return '<div class="card"><h2>Require two-step sign-in</h2>' +
+      '<p class="quiet">Staff in a ticked role must use a code from an authenticator app when they sign in. Anyone in that role who has not set it up yet can sign in, but can only reach the set-up page until they do. A lost phone is fixed with Reset access.</p>' +
+      '<div class="row">' + ROLES.map(function (r) {
+        return '<label class="f" style="flex:0 1 170px"><span><input type="checkbox" class="admTwoStepRole" value="' + c.esc(r) + '"' + (on.indexOf(r) >= 0 ? " checked" : "") + "> " + c.esc(r.replace(/_/g, " ")) + "</span></label>";
+      }).join("") + "</div>" +
+      '<button class="btn" id="admTwoStepSave" type="button">Save</button><div id="admTwoStepMsg"></div></div>';
+  }
+  function wireTwoStepPolicy(c) {
+    var btn = document.getElementById("admTwoStepSave"); if (!btn) return;
+    btn.onclick = function () {
+      var picked = [];
+      document.querySelectorAll(".admTwoStepRole").forEach(function (b) { if (b.checked) picked.push(b.value); });
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, security: { requireTwoStepRoles: picked } }).then(function (r) {
+        btn.disabled = false;
+        var m = document.getElementById("admTwoStepMsg");
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org;
+        var saved = (r.org && r.org.security && r.org.security.requireTwoStepRoles) || [];
+        m.innerHTML = '<div class="msg ok">' + (saved.length ? "Saved. Required for: " + c.esc(saved.join(", ")) + "." : "Saved. Two-step sign-in is optional for everyone.") + "</div>";
+      });
+    };
+  }
   function renderStaff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/members?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
@@ -362,6 +389,7 @@
       body.innerHTML =
         '<div class="card"><h2>What each credential lets a person do</h2>' +
         ROLE_NOTES.map(function (l) { return '<p class="quiet"><b>' + c.esc(l[0]) + ":</b> " + c.esc(l[1]) + "</p>"; }).join("") + "</div>" +
+        twoStepPolicyCard(c) +
         '<div class="card"><h2>Staff</h2>' +
         (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th></th></tr></thead><tbody>' +
           members.map(function (m) {
@@ -389,6 +417,7 @@
         '<label class="f"><span>Password</span><input id="admPwVal" type="password"></label>' +
         '<button class="btn quiet" id="admPwSave" type="button">Set password</button></div><div id="admPwMsg"></div>' +
         "</div>";
+      wireTwoStepPolicy(c);
       body.querySelectorAll("[data-mact]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-mact"), id = b.getAttribute("data-id");

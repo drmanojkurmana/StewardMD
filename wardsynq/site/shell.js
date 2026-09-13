@@ -107,6 +107,10 @@
     if (r.page === "login") return render("login");
     if (r.page === "logout") return signOut();
     if (!st.who) return whoami().then(route);
+    /* The hospital requires two-step sign-in for this role and it is not set up. The server refuses
+     * everything else anyway; this just takes the person to the one page that will work, before any
+     * hospital data is asked for (which would only be refused). */
+    if (st.who.twoStepRequired) return r.page === "security" ? render("security") : go("security");
     if (r.page === "hospitals") return render("hospitals");
     /* The demonstration-hospital builder runs BEFORE a hospital is chosen, because its whole job is
      * to create one. Every other page below needs st.org loaded; this one would be bounced straight

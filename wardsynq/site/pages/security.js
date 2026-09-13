@@ -65,7 +65,9 @@
 
   WSQ.page("security", { render: function (c) {
     var el = c.el, s = null;
-    el.innerHTML = '<div class="title"><h1>Sign-in security</h1><span class="sub">Your own account</span></div><div class="card" id="secCard"></div>';
+    el.innerHTML = '<div class="title"><h1>Sign-in security</h1><span class="sub">Your own account</span></div>' +
+      (c.state.who && c.state.who.twoStepRequired ? '<div class="msg warn">Your hospital requires two-step sign-in for your role. Set it up below; the rest of WardSynQ opens once it is on.</div>' : "") +
+      '<div class="card" id="secCard"></div>';
     if (c.state.tokType !== "staff") {
       document.getElementById("secCard").innerHTML = '<div class="msg note">This page is for hospital staff sign-ins (hospital code, staff ID and PIN, or staff email). A StewardMD account sets up two-step sign-in with its own account provider.</div>';
       return;

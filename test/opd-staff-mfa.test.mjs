@@ -7,6 +7,7 @@ registerHooks({ resolve(spec, ctx, next) { const r = next(spec, ctx); if (r.url.
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 import { webcrypto } from "node:crypto";
+import { readFileSync } from "node:fs";
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 
 const docs = new Map();
@@ -178,6 +179,51 @@ test("pure: device labels are recognisable and never the raw user-agent", () => 
   assert.equal(A.deviceLabel("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1"), "Safari on iPhone or iPad");
   assert.equal(A.deviceLabel("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36 Edg/126.0"), "Edge on Windows");
   assert.equal(A.deviceLabel(""), "unknown device");
+});
+
+test("a hospital that requires two-step sign-in for a role: set-up only until it is on, then everything", async () => {
+  await seed();
+  await ORG.setMembership(undefined, "org1", "recep1", { role: "reception" }, "owner");
+  await ORG.setMemberPin(undefined, "org1", "recep1", "3517", "owner");
+  const orgDoc = docs.get("q_orgs/org1");
+  docs.set("q_orgs/org1", { ...orgDoc, fields: { ...orgDoc.fields, security: { requireTwoStepRoles: ["nurse", "not-a-role"] } } });
+  const { securityConfig } = await import("../functions/_opd_org.js");
+  assert.deepEqual(securityConfig({ requireTwoStepRoles: ["nurse", "not-a-role", "nurse"] }), { requireTwoStepRoles: ["nurse"] });
+  assert.deepEqual(securityConfig(undefined), { requireTwoStepRoles: [] }, "absent means nobody is required");
+
+  const t = (await pinLogin()).token;
+  assert.ok(t, "they can still sign in, or they could never comply");
+  const me = await call("GET", "whoami?orgId=org1", null, t);
+  assert.equal(me.status, 200);
+  assert.equal(me.twoStepRequired, true);
+  for (const path of ["members?orgId=org1", "opd-board?orgId=org1", "orgs"]) {
+    const r = await call("GET", path, null, t);
+    assert.equal(r.status, 403, path + " must be refused until two-step is on");
+    assert.equal(r.error, "two_step_required");
+  }
+  assert.equal((await call("GET", "mfa/status", null, t)).status, 200, "the set-up page still works");
+
+  const recep = (await pinLogin("recep1", "3517")).token;
+  const rw = await call("GET", "whoami?orgId=org1", null, recep);
+  assert.equal(rw.twoStepRequired, undefined, "a role that is not required is unaffected");
+  assert.notEqual((await call("GET", "orgs", null, recep)).error, "two_step_required");
+
+  const { secret } = await enrol(t);
+  const ch = await pinLogin();
+  const after = await call("POST", "auth/mfa", { challenge: ch.challenge, code: await A.totpAt(secret, step() + 1) });
+  assert.equal(after.status, 200);
+  assert.equal((await call("GET", "whoami?orgId=org1", null, after.token)).twoStepRequired, undefined);
+  assert.notEqual((await call("GET", "orgs", null, after.token)).error, "two_step_required", "once it is on, the gate is gone");
+});
+
+test("the screens send a required-but-not-set-up person to set-up, and the admin can set the policy", () => {
+  const shell = readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8");
+  assert.match(shell, /if \(st\.who\.twoStepRequired\) return r\.page === "security" \? render\("security"\) : go\("security"\);/);
+  const admin = readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8");
+  assert.match(admin, /security: \{ requireTwoStepRoles: picked \}/);
+  assert.match(admin, /twoStepPolicyCard\(c\) \+/);
+  assert.match(readFileSync(new URL("../opd.html", import.meta.url), "utf8"), /if\(r\.twoStepRequired\)/);
+  assert.match(readFileSync(new URL("../queue.js", import.meta.url), "utf8"), /if \(w\.twoStepRequired\)/);
 });
 
 test("doctor accounts are told this is for staff accounts, not silently accepted", async () => {

@@ -48,7 +48,15 @@ export function org(o = {}) {
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
-           wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
+           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security), createdAt: Number(o.createdAt) || 0 };
+}
+
+/* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs
+ * every staff sign-in (OPD desk included). Only real role names survive; absent means nobody is
+ * required to use two-step sign-in, which is how every existing hospital stays unchanged. */
+export function securityConfig(sec) {
+  const roles = sec && Array.isArray(sec.requireTwoStepRoles) ? sec.requireTwoStepRoles : [];
+  return { requireTwoStepRoles: Array.from(new Set(roles.map(String).filter(isRole))) };
 }
 
 /**
