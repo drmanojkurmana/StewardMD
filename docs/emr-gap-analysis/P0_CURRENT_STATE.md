@@ -543,3 +543,11 @@ Parked for owner (end): an external scheduler token for ops tick (optional), not
 
 Reachability now keys routes by segment+sub (onco/plan no longer hides ward/plan; bare words need context). Found and built: Admin ward rename/deactivate, clinic billing "Waiting to be billed". SECURITY: ward/update and bed/update did not check the ward/bed belongs to the caller's hospital (now 404, test). Live verified: wardsynq.com serves ward.js site63/admin.js 13; /ward/results-to-verify answers 401 (deployed). 6199 passing.
 In flight (builders): microbiology + histopathology; command center drill-down; quality measures + incident signal/confirm; radiology viewer + TPA adapters.
+
+### 2026-09-13 - P1.9 microbiology/histopathology, P1.13 command center, P1.14 quality merged
+
+Builders reviewed and merged; live (ward.js site64).
+- Cultures (stages, organisms, S/I/R, positive blood culture opens one critical loop, "not tested" never S) and histopathology (addenda only after signing, second-person verification) as DiagnosticReport extensions; resistant-antibiotic advisory.
+- Command center: every count drills to patients/boards; ICU, OPD queue, staffing, lab TAT, radiology backlog, OT, pharmacy items, finance. SECURITY: twin ?finance=1 leaked billing/claims to any EMR_VIEW role; now BILLING_VIEW server-side.
+- Quality: incident categories (WHO ICPS), signal stage linked to source records, confirm/reject/duplicate (RCA/CAPA only after confirm), mortality/readmission/sepsis wired, LOS, falls/pressure injury rates, antibiotic DOT (needs antibiotics list), TAT, bed utilisation, case lists. 6231 passing.
+Waiting: radiology viewer + TPA builder. Then P2.
