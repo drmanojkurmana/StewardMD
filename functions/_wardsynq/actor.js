@@ -92,7 +92,10 @@ const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassG
   "PatientTag",
   // FormResponse: a completed hospital form (triage, nursing assessment, checklist) - documentation the
   // nurse records at the bedside, answered against a form the hospital published for their role.
-  "FormResponse"]);
+  "FormResponse",
+  // The nursing command center (nursing.js), 2026-09-13: assigning a nurse to a patient, the shift's tasks and the
+  // observation frequency are the ward's own nursing workflow, the same authority as charting the vitals they schedule.
+  "NurseAssignment", "NursingTask", "ObservationFrequency"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers

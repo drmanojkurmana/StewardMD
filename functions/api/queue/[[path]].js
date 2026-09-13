@@ -105,6 +105,7 @@ import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, com
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
 import { createReferral, actOnReferral, patientReferrals, referralInbox } from "../../_wardsynq/referral.js";
+import { assignNurse, setObservationFrequency, createNursingTask, actOnNursingTask, nursingPatient, nursingWard } from "../../_wardsynq/nursing.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
@@ -784,6 +785,12 @@ export async function onRequest(context) {
         documents: CAPS.EMR_VIEW, "document-versions": CAPS.EMR_VIEW, "document-link": CAPS.EMR_VIEW,
         // Referrals (referral.js): making and answering one is a prescriber's act; reading them is chart access.
         referrals: CAPS.EMR_VIEW, "referral-inbox": CAPS.EMR_VIEW, "referral-create": CAPS.EMR_TREAT, "referral-act": CAPS.EMR_TREAT,
+        /* Nursing command center (nursing.js). Deciding who looks after a patient is queue.assign, the capability
+         * that already means "may decide who takes a patient"; interns and residents do not hold it. The store still
+         * checks the write (NurseAssignment is EMR_VITALS scope). Tasks and the obs frequency are the nurse's own
+         * charting authority, emr.vitals; reading the panel is chart access. */
+        "nurse-assign": CAPS.QUEUE_ASSIGN, "nursing-patient": CAPS.EMR_VIEW, "nursing-task": CAPS.EMR_VITALS,
+        "nursing-task-act": CAPS.EMR_VITALS, "obs-frequency": CAPS.EMR_VITALS,
         // Completed hospital forms: nurses document them too (FormResponse is in the nurse write scope).
         "form-responses": CAPS.EMR_VIEW, "form-submit": CAPS.EMR_VITALS,
         "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
@@ -1421,6 +1428,27 @@ export async function onRequest(context) {
       }
       if (sub === "referral-act" && method === "POST") {
         const r = await actOnReferral(request, env, { ...deps, referralId: body.referralId, expectedVersion: body.expectedVersion, input: body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "nurse-assign" && method === "POST") {
+        const members = await ORG.listMembers(env, wOrgId);
+        const r = await assignNurse(request, env, { ...deps, input: body, idempotencyKey: body.idempotencyKey || null, staffMember: async (id) => members.find((m) => m.identity === id) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "nursing-patient" && method === "GET") {
+        const r = await nursingPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", encounterId: url.searchParams.get("encounterId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "nursing-task" && method === "POST") {
+        const r = await createNursingTask(request, env, { ...deps, input: body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "nursing-task-act" && method === "POST") {
+        const r = await actOnNursingTask(request, env, { ...deps, input: body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "obs-frequency" && method === "POST") {
+        const r = await setObservationFrequency(request, env, { ...deps, input: body, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "documents" && method === "GET") {
@@ -2739,11 +2767,24 @@ export async function onRequest(context) {
           } catch { row.problems.push("early-warning score could not be worked out"); }
           return row;
         }));
+        /* Nursing columns (nursing.js): assigned nurse, open/overdue tasks, obs due. A piece that could not be read
+         * is null with a problem on the row, never 0 or "not due". */
+        const nursing = await nursingWard(request, env, { ...deps, patients: patients.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId })) }).catch(() => new Map());
+        for (const row of rows) {
+          const n = nursing.get(row.patientId);
+          // The NEWS2 module's own "high" band. Shown, never paged: escalation is the nurse's call.
+          row.escalation = row.news2 && row.news2.scorable && row.news2.risk === "high" ? { score: row.news2.total, risk: "high", text: "NEWS2 " + row.news2.total + " (high). Escalation is your call; nothing has been paged." } : null;
+          if (!n) { row.assignment = null; row.tasksOpen = null; row.tasksOverdue = null; row.vitals = null; row.problems.push("nursing assignment, tasks and observation schedule could not be read"); continue; }
+          row.assignment = n.assignment; row.tasksOpen = n.tasksOpen; row.tasksOverdue = n.tasksOverdue; row.vitals = n.vitals;
+          row.problems.push(...n.problems);
+        }
+        /* Who can be assigned: active staff who can record observations. Labels only, for the assign picker. */
+        const staff = await ORG.listMembers(env, wOrgId).catch(() => null);
         const RISK = { high: 0, medium: 1, "low-medium": 2, low: 3 };
         rows.sort((a, b) => (b.problems.length > 0) - (a.problems.length > 0)
           || ((RISK[a.news2 && a.news2.risk] ?? 9) - (RISK[b.news2 && b.news2.risk] ?? 9))
           || ((b.overdue || 0) - (a.overdue || 0)));
-        return json({ ok: true, rows, partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}) }, 200, request);
+        return json({ ok: true, rows, me: actor.id, staff: staff ? staff.filter((m) => m.active !== false && can(m.role, CAPS.EMR_VITALS)).map((m) => ({ identity: m.identity, label: m.email || m.identity, role: m.role })) : null, partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}) }, 200, request);
       }
       if (sub === "schedule" && method === "GET") {
         const r = await marSchedule(request, env, {

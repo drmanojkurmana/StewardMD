@@ -4814,16 +4814,65 @@
       '<button class="w-btn ghost sm" data-w-act="nurseworklist">' + ms("refresh") + "Refresh</button></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading the ward...</p></div>";
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load the worklist. Do not read this as nothing due.</p></div>";
-    var rows = d.rows.map(function (r) {
+    var mine = state.nwScope === "mine";
+    var toggle = '<div class="w-sub w-noprint"><button class="w-btn ' + (mine ? "" : "ghost ") + 'sm" data-w-act="nwscope:mine">Mine</button> <button class="w-btn ' + (mine ? "ghost " : "") + 'sm" data-w-act="nwscope:ward">Whole ward</button></div>';
+    var shown = mine ? d.rows.filter(function (r) { return r.assignment && r.assignment.nurseId && r.assignment.nurseId === d.me; }) : d.rows;
+    var rows = shown.map(function (r) {
       var p = r.patient || {}, n = r.news2;
       var score = !n ? "" : !n.scorable ? '<span class="w-st due">Score: not enough observations</span>' : '<span class="w-st ' + (n.risk === "high" ? "escalate" : n.risk === "medium" ? "due" : "done") + '">NEWS ' + esc(n.total) + (n.risk ? " " + esc(n.risk) : "") + "</span>";
       return '<li class="w-mini-row"><div><b>' + esc(p.name || r.patientId) + "</b>" + (p.bed ? " &middot; bed " + esc(p.bed) : "") + " " + score +
         '<div class="w-dt-times">' + (r.overdue == null ? "" : (r.overdue ? '<span class="w-st escalate">' + esc(r.overdue) + " dose" + (r.overdue === 1 ? "" : "s") + " overdue</span> " : "No doses overdue &middot; ") + esc(r.dueSoon) + " due in the next 4 hours") + "</div>" +
+        nursingRowLine(r) +
+        (r.escalation ? '<div class="w-hint warn">' + ms("notifications_active") + esc(r.escalation.text) + "</div>" : "") +
         (r.problems.length ? '<div class="w-hint warn">' + ms("error") + esc(r.problems.join("; ")) + "</div>" : "") +
-        "</div>" + (p.encounterId ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="open:' + esc(p.encounterId) + '">Open chart</button></div>' : "") + "</li>";
+        "</div>" + (p.encounterId ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="nursingpatient:' + esc(r.patientId) + "~" + esc(p.encounterId) + '">Nursing</button> <button class="w-btn ghost sm" data-w-act="open:' + esc(p.encounterId) + '">Open chart</button></div>' : "") + "</li>";
     }).join("");
-    return '<div class="w-card">' + head + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
-      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No patients on this ward.</p>') + "</div>";
+    return '<div class="w-card">' + head + toggle + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + (mine && d.rows.length ? "No patients on this ward are assigned to you." : "No patients on this ward.") + "</p>") + "</div>";
+  }
+  /* The nursing columns of a worklist row. A piece the server could not read is null and is never shown as
+   * zero or "not due": the row's problem line already says what failed. */
+  function nursingRowLine(r) {
+    var a = r.assignment, v = r.vitals, bits = [];
+    if (a) bits.push(a.nurseId ? "Nurse: " + esc(a.nurseLabel || a.nurseId) + (a.shift ? " (" + esc(a.shift) + ")" : "") : "No nurse assigned");
+    if (r.tasksOverdue != null) bits.push(r.tasksOverdue ? '<span class="w-st escalate">' + esc(r.tasksOverdue) + " task" + (r.tasksOverdue === 1 ? "" : "s") + " overdue</span>" : esc(r.tasksOpen) + " open task" + (r.tasksOpen === 1 ? "" : "s"));
+    if (v) bits.push(v.state === "overdue" ? '<span class="w-st escalate">' + esc(v.text) + "</span>" : esc(v.text) + (v.dueAt ? " " + when(v.dueAt) : ""));
+    return bits.length ? '<div class="w-dt-times">' + bits.join(" &middot; ") + "</div>" : "";
+  }
+  /* P1.6 NURSING PANEL for one patient: assigned nurse, observation frequency, and the shift's tasks. Loading,
+   * failed and empty are different sentences. */
+  function nursingPatientView(state) {
+    var np = state.nursingPanel || {}, d = np.data, wl = state.nurseWorklist || {};
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Nursing: " + esc(np.name || np.patientId || "") + "</h3></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading tasks and observations...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load this patient's nursing tasks. Do not read this as nothing due.</p></div>";
+    var problems = (d.problems || []).length ? '<p class="w-hint warn">' + ms("error") + esc(d.problems.join("; ")) + "</p>" : "";
+    var a = d.assignment, staff = wl.staff;
+    var who = function (id) { var m = (staff || []).filter(function (x) { return x.identity === id; })[0]; return m ? m.label : id; };
+    var assign = '<div class="w-sub"><h4>Assigned nurse</h4>' +
+      (a == null ? '<p class="w-hint warn">Assignment not known.</p>' : "<p>" + (a.nurseId ? esc(a.nurseLabel || a.nurseId) + (a.shift ? " (" + esc(a.shift) + ")" : "") + " since " + when(a.assignedAt) : "No nurse assigned.") + "</p>") +
+      (staff == null ? '<p class="w-hint warn">The staff list could not be loaded, so nobody can be picked.</p>'
+        : '<label class="w-f"><span>Nurse</span><select id="wNaNurse"><option value="">-</option>' + staff.map(function (m) { return '<option value="' + esc(m.identity) + '">' + esc(m.label) + " (" + esc(m.role) + ")</option>"; }).join("") + "</select></label>" +
+          '<label class="w-f"><span>Shift</span><input id="wNaShift" placeholder="Day, Night"></label>' +
+          '<button class="w-btn sm" data-w-act="nurseassign:assign">Assign</button>') +
+      (a && a.nurseId ? ' <button class="w-btn ghost sm" data-w-act="nurseassign:unassign">Unassign</button>' : "") + "</div>";
+    var v = d.vitals, opts = ["", "1", "2", "4", "6", "12"];
+    var obs = '<div class="w-sub"><h4>Observations</h4>' +
+      (v == null ? '<p class="w-hint warn">Observation schedule not known.</p>' : "<p>" + (v.state === "overdue" ? '<span class="w-st escalate">' + esc(v.text) + "</span>" : esc(v.text)) + (v.dueAt ? " " + when(v.dueAt) : "") + (v.lastAt ? " &middot; last recorded " + when(v.lastAt) : "") + "</p>") +
+      '<label class="w-f"><span>Every</span><select id="wObsEvery">' + opts.map(function (h) { return '<option value="' + h + '"' + (v && String(v.everyHours || "") === h ? " selected" : "") + ">" + (h ? h + " hours" : "No frequency") + "</option>"; }).join("") + "</select></label>" +
+      '<button class="w-btn sm" data-w-act="obsfreqsave">Save frequency</button></div>';
+    var tasks = d.tasks == null ? '<p class="w-hint warn">Tasks not known.</p>'
+      : d.tasks.length ? '<ul class="w-mini">' + d.tasks.map(function (t) {
+          var st2 = t.status === "open" ? (t.overdue ? '<span class="w-st escalate">Overdue</span>' : '<span class="w-st due">Open</span>')
+            : t.status === "done" ? '<span class="w-st done">Done by ' + esc(who(t.doneBy)) + " " + when(t.doneAt) + "</span>"
+            : '<span class="w-st">Cancelled: ' + esc(t.cancelReason) + "</span>";
+          return '<li class="w-mini-row"><div><b>' + esc(t.title) + "</b> " + st2 + '<div class="w-dt-times">Due ' + when(t.dueAt) + " &middot; added by " + esc(who(t.createdBy)) + "</div></div>" +
+            (t.status === "open" ? '<div class="w-mini-row-act"><button class="w-btn sm" data-w-act="ntaskact:' + esc(t.id) + "~done~" + esc(t.version) + '">Done</button> <button class="w-btn ghost sm" data-w-act="ntaskact:' + esc(t.id) + "~cancel~" + esc(t.version) + '">Cancel</button></div>' : "") + "</li>";
+        }).join("") + "</ul>"
+      : '<p class="w-empty">No tasks for this patient.</p>';
+    var add = '<div class="w-sub"><label class="w-f"><span>New task</span><input id="wNtTitle" placeholder="What needs doing"></label>' +
+      '<label class="w-f"><span>Due</span><input id="wNtDue" type="datetime-local"></label><button class="w-btn sm" data-w-act="ntaskadd">Add task</button></div>';
+    return '<div class="w-card">' + head + problems + assign + obs + '<div class="w-sub"><h4>Tasks</h4>' + tasks + add + "</div></div>";
   }
   function formVisible(cond, a) {
     if (!cond) return true;
@@ -5259,6 +5308,7 @@
         : state.view === "documents" ? documentsView(state)
         : state.view === "forms" ? formsView(state)
         : state.view === "nurseworklist" ? nurseWorklistView(state)
+        : state.view === "nursingpatient" ? nursingPatientView(state)
         : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
@@ -7634,6 +7684,32 @@
       .then(function (r) { if (settle(r, r && r.ok ? "Referral sent." : null)) loadReferrals(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not send the referral."; paint(); });
   }
+  function loadNurseWorklist() {
+    st.view = "nurseworklist"; st.nurseWorklist = null; paint();
+    apiGet("/ward/nurse-worklist?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.nurseWorklist = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+      .catch(function () { st.nurseWorklist = { failed: true }; paint(); });
+  }
+  function nursingPanelOpen(arg) {
+    var p = String(arg || "").split("~"), row = ((st.nurseWorklist && st.nurseWorklist.rows) || []).filter(function (r) { return r.patientId === p[0]; })[0];
+    st.view = "nursingpatient"; st.nursingPanel = { patientId: p[0], encounterId: p[1], name: row && row.patient ? row.patient.name : "", data: null }; paint();
+    loadNursingPanel();
+  }
+  function loadNursingPanel() {
+    var np = st.nursingPanel; if (!np) return;
+    apiGet("/ward/nursing-patient?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(np.patientId) + "&encounterId=" + encodeURIComponent(np.encounterId))
+      .then(function (r) { if (st.nursingPanel !== np) return; np.data = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+      .catch(function () { np.data = { failed: true }; paint(); });
+  }
+  function nursingVersion(k) { var d = st.nursingPanel && st.nursingPanel.data; return d && d[k] && d[k].version != null ? d[k].version : 0; }
+  function nursingPost(path, body, okMsg) {
+    var np = st.nursingPanel; if (!np) return;
+    body.orgId = st.orgId; body.encounterId = np.encounterId;
+    st.busy = true; paint();
+    apiPost(path, body)
+      .then(function (r) { if (settle(r, r && r.ok ? okMsg : null)) { np.data = null; paint(); loadNursingPanel(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not save. Nothing was changed."; paint(); });
+  }
   function referralAct(arg) {
     var p = String(arg || "").split("~"), id = p[0], action = p[1], version = Number(p[2]);
     var body = { orgId: st.orgId, referralId: id, action: action, expectedVersion: version };
@@ -8553,6 +8629,7 @@
       if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "nurseworklist") { st.nurseWorklist = null; st.view = "list"; paint(); return; }
+      if (st.view === "nursingpatient") { st.nursingPanel = null; loadNurseWorklist(); return; }
       if (st.view === "forms") { st.formDefs = null; st.formSel = null; st.formAnswers = null; st.formResult = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referrals") { st.referrals = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
@@ -8865,11 +8942,16 @@
     if (cmd === "taglost") { tagEnd("lost", arg); return; }
     if (cmd === "tagend") { tagEnd("end", arg); return; }
     if (cmd === "mpi") { mpiOpen(); return; }
-    if (cmd === "nurseworklist") {
-      st.view = "nurseworklist"; st.nurseWorklist = null; paint();
-      apiGet("/ward/nurse-worklist?orgId=" + encodeURIComponent(st.orgId))
-        .then(function (r) { st.nurseWorklist = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
-        .catch(function () { st.nurseWorklist = { failed: true }; paint(); });
+    if (cmd === "nurseworklist") { loadNurseWorklist(); return; }
+    if (cmd === "nwscope") { st.nwScope = arg === "mine" ? "mine" : "ward"; paint(); return; }
+    if (cmd === "nursingpatient") { nursingPanelOpen(arg); return; }
+    if (cmd === "nurseassign") { nursingPost("/ward/nurse-assign", arg === "unassign" ? { action: "unassign", expectedVersion: nursingVersion("assignment") } : { action: "assign", nurseId: val("wNaNurse"), shift: val("wNaShift"), expectedVersion: nursingVersion("assignment") }, arg === "unassign" ? "Nurse unassigned." : "Nurse assigned."); return; }
+    if (cmd === "obsfreqsave") { nursingPost("/ward/obs-frequency", { everyHours: val("wObsEvery"), expectedVersion: nursingVersion("vitals") }, "Observation frequency saved."); return; }
+    if (cmd === "ntaskadd") { nursingPost("/ward/nursing-task", { patientId: (st.nursingPanel || {}).patientId, title: val("wNtTitle"), dueAt: val("wNtDue") ? new Date(val("wNtDue")).toISOString() : "" }, "Task added."); return; }
+    if (cmd === "ntaskact") {
+      var ta = String(arg || "").split("~"), tb = { taskId: ta[0], action: ta[1], expectedVersion: Number(ta[2]) };
+      if (ta[1] === "cancel") { try { tb.reason = G.prompt("Why is this task cancelled?") || ""; } catch (e) { tb.reason = ""; } if (!tb.reason.trim()) return; }
+      nursingPost("/ward/nursing-task-act", tb, ta[1] === "done" ? "Task done." : "Task cancelled.");
       return;
     }
     if (cmd === "forms") {
