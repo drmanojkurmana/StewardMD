@@ -1063,14 +1063,25 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       progress(label, 0);
       await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
       await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${ctl.index},${JSON.stringify(CONTROL_QUERY)})` });
-      await client.wait({ ms: Math.max(waitMs * 5, 6000) });
+      /* Wait for the list itself, not a fixed time: GHIS's IP worklist fetches its dropdowns first and
+       * fills the table about 9 s after the tap (Pixel, 2026-09-13). Up to 15 s for a data table. */
+      // The old list still shows rows for a moment: wait until the visible tables CHANGE and carry rows.
+      const TABLES_SIG = "(function(){var s=[],n=0,ts=document.querySelectorAll('table');for(var i=0;i<ts.length;i++){if(!ts[i].getClientRects().length)continue;var r=0,trs=ts[i].querySelectorAll('tbody tr');for(var j=0;j<trs.length;j++){if(trs[j].querySelectorAll('td').length>=2)r++}n+=r;s.push((ts[i].id||ts[i].className)+':'+r)}return JSON.stringify({sig:s.join('|'),rows:n})})()";
+      const before = await evalJson(client, TABLES_SIG, { sig: '' });
+      for (let t = 0; t < 15; t += 1) {
+        await client.wait({ ms: 1000 });
+        const now = await evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
+        if (now && now.rows > 0 && now.sig !== (before && before.sig)) { await client.wait({ ms: 1500 }); break; }
+      }
       trail.push(label);
       const v = await captureView({ client, resourceHint: 'worklist' });
       if (v && v.rowsSelector && !v.block) {
         await book.prove({ client, view: v, label: 'tap ' + label });
         if (v.proof && v.proof.status === 'proven') listViews.push(v);
       }
-      if (landing && (await currentUrl()) !== landing) { await client.navigate({ url: landing }).catch(() => {}); await client.wait({ ms: waitMs * 3 }); }
+      /* Always reload the landing page: a single-page EMR swaps the list in place with the same URL
+       * (GHIS loadView), and a row tapped in the swapped list opens no record (Pixel, 2026-09-13). */
+      if (landing) { await client.navigate({ url: landing }).catch(() => {}); await client.wait({ ms: Math.max(waitMs * 3, 4000) }); }
     }
     if (listViews.length) {
       const rowsOf = (v) => ((v.endpoints || []).find((e) => e.role === 'data') || { proof: {} }).proof.rows || 0;
@@ -1078,8 +1089,15 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       const at = observedViews.indexOf(wl);
       observedViews.splice(at >= 0 ? at : 0, at >= 0 ? 1 : 0, ...listViews, ...(wl && wl.proof && wl.proof.status === 'proven' ? [wl] : []));
       found.add('worklist');
-      // The landing list may have been redrawn: find the patient row again.
-      row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null) || row;
+    }
+    // The landing page was reloaded: find the patient row again (rows may arrive after the page).
+    if (tabs.length) {
+      for (let attempt = 0; attempt < 8; attempt += 1) {
+        const again = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null);
+        if (again) { row = again; break; }
+        if (stopped()) break;
+        await client.wait({ ms: waitMs });
+      }
     }
   }
   /* THE RECORD'S OWN CONTROLS. The list page's menu (hospital-wide Lab reports, Final discharge, Diet)
@@ -1111,18 +1129,41 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   let stopReason = 'no-candidate';
   let clicks = 0;
   const homePath = pathOf(await currentUrl());
+
+  /* READ EVERY BUTTON ONCE, LET GEMINI ASSIGN THEM (owner, 2026-09-13). Instead of clicking blindly
+   * and guessing after, hand Gemini the whole control inventory of the open record (collapsed menus
+   * included) and ask which control opens each missing resource, and which controls could write. The
+   * plan orders the walk (assigned controls first, in resource order) and the avoid set is never
+   * clicked. Only labels leave the phone; every pick is still proven against the screen below. */
+  const planned = [];              // control labels to open first, best resource match first
+  const avoidLabels = new Set();
+  if (brain && typeof brain.planControls === 'function') {
+    const all = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const pool = (Array.isArray(all) ? all : []).filter((c) => c && c.label && !visited.has(c.label)).slice(0, 200);
+    if (pool.length) {
+      let a = null;
+      try { a = await brain.planControls(scrubForBrain({ controls: pool.map((c) => c.label), looking: looking(), path: pathOf(await currentUrl()) })); } catch { a = null; }
+      if (a && a.assign) {
+        for (const r of TARGET_HINTS) {
+          const i = a.assign[r];
+          if (Number.isInteger(i) && i >= 0 && i < pool.length && pool[i].label && !planned.includes(pool[i].label)) planned.push(pool[i].label);
+        }
+        for (const i of Array.isArray(a.avoid) ? a.avoid : []) if (Number.isInteger(i) && i >= 0 && i < pool.length && pool[i].label) avoidLabels.add(pool[i].label);
+        trail.push('gemini planned ' + planned.length + ' of ' + Object.keys(a.assign).length + ', avoid ' + avoidLabels.size);
+      }
+    }
+  }
   while (observedViews.length < maxViews) {
     if (Date.now() >= deadline) { stopReason = 'time-cap'; break; }
     if (stopped()) { stopReason = 'stop-signal'; break; }
     if (clicks >= maxClicks) { stopReason = 'max-clicks'; break; }
 
     const candidates = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
-    const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label)) : [];
-    /* THE BRAIN PICKS THE NEXT TAP when there is one to consult: given the control labels and what is
-     * still missing, it names the control most likely to open it. The keyword rule is the fallback
-     * and the answer is only ever an index into the SAME candidate list (never a free target). */
-    let next = null;
-    if (brain && typeof brain.next === 'function' && fresh.length > 1 && looking().length) {
+    const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label) && !avoidLabels.has(c.label)) : [];
+    /* Gemini's plan first: the controls it assigned to a missing resource, in resource order. Then the
+     * keyword rule, then the first fresh control. Every choice is proven against the screen below. */
+    let next = planned.map((lbl) => fresh.find((c) => c.label === lbl)).find(Boolean);
+    if (!next && brain && typeof brain.next === 'function' && fresh.length > 1 && looking().length) {
       const pool = fresh.slice(0, 60);
       let a = null;
       try { a = await brain.next(scrubForBrain({ controls: pool.map((c) => c.label), looking: looking(), path: pathOf(await currentUrl()) })); } catch { a = null; }

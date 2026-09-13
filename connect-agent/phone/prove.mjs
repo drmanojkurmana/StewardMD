@@ -339,7 +339,23 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: r.role, kind, hits: o.hits, ratio: o.ratio });
     if (kind === 'login') return done('signed-out');
     // A whole page that happens to carry the table is where the view lives, not a data call.
-    if (accepted(o) && !(r.role === 'shell' && (e.shape || {}).page && !e.xhr)) { hit = { e, resp, kind, o, role: r.role === 'shell' ? 'data' : r.role }; break; }
+    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr)) continue;
+    /* GEMINI JUDGES THE REPLY. Carrying the screen's values is necessary, not sufficient: the reply's
+     * own columns must be the resource asked for (labs = tests with results, not an order list). Only
+     * column names and a row count go to the model. A confident "no" rejects it: next candidate. */
+    const resource = String(view.resourceHint || '').replace(/-detail$/, '');
+    if (brain && typeof brain.verify === 'function' && BRAIN_RESOURCES.includes(resource) && resource !== 'worklist') {
+      const rows = rowsForChain(resp.text, resp.contentType);
+      const cols = [];
+      for (const row of rows.slice(0, 5)) for (const k of Object.keys(row)) if (k.charAt(0) !== '_' && !cols.includes(k)) cols.push(k);
+      let v = null;
+      try { v = await brain.verify(scrubForBrain({ resource, headers: cols.slice(0, 24), rowCount: rows.length, kind: kind === 'json' ? 'json' : 'html', path: candidateStructure(e).path })); } catch { v = null; }
+      const last = trace.tried[trace.tried.length - 1];
+      if (v && typeof v.ok === 'boolean') { trace.brain = true; trace.model = trace.model || v.model || null; last.gemini = v.ok ? 'ok' : 'rejected'; }
+      if (v && v.ok === false && Number(v.confidence) >= 0.7) continue;
+    }
+    hit = { e, resp, kind, o, role: r.role === 'shell' ? 'data' : r.role };
+    break;
   }
   if (!hit) return done('unproven');
 

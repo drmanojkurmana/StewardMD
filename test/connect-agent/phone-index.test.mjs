@@ -75,7 +75,9 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
       const last = plugin.modes[plugin.modes.length - 1];
       assert.equal(last.mode, 'guide');
       assert.equal(last.banner, text);
-      assert.equal(text, GAP_PROMPTS[gap]);
+      // The first ask uses the gap prompt; a re-ask says why (nothing proven from that screen).
+      if (asks.filter((a) => a === gap).length === 1) assert.equal(text, GAP_PROMPTS[gap]);
+      else assert.match(text, /None of the requests from that screen returned|could not read a table/);
       if (gap === 'radiology') { state.guided = true; return { done: true }; }
       state.guided = false;
       return { done: false }; // doctor skipped
@@ -84,13 +86,15 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
 
   // Crawl found worklist + labs; the engine asked for the rest in canonical order, capped at 4.
   // The worklist was found but its read proved nothing against this fake page, so it is asked FIRST.
-  assert.deepEqual(asks, ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  // Radiology was shown but nothing on this fake page could be proven, so the doctor was asked again.
+  assert.deepEqual([...new Set(asks)], ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  assert.ok(asks.filter((a) => a === 'radiology').length >= 2, asks.join(','));
   assert.ok(phases.includes('CRAWLING') && phases.includes('ASKING') && phases.includes('DONE'), phases.join(','));
 
-  // Mode sequence: agent (start) -> guide x4 -> agent (before probes).
+  // Mode sequence: agent (start) -> guide once per ask -> agent (before probes).
   assert.equal(plugin.modes[0].mode, 'agent');
   assert.equal(plugin.modes[plugin.modes.length - 1].mode, 'agent');
-  assert.equal(plugin.modes.filter((m) => m.mode === 'guide').length, 6);
+  assert.equal(plugin.modes.filter((m) => m.mode === 'guide').length, asks.length);
 
   const views = calls.discovery.observedViews;
   const rad = views.find((v) => v.resourceHint === 'radiology');
