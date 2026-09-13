@@ -306,6 +306,8 @@
        * role without the capability is told so by the server's own 403 rather than by this screen
        * guessing who holds it. */
       '<button class="w-btn ghost" data-w-act="integration" title="Feeds in and out: what is held, what is stuck, who may push, where this hospital sends">' + ms("hub") + "Integration</button>" +
+      // P1.14: quality and safety measures with the case list behind each number (analytics.view, server-checked).
+      '<button class="w-btn ghost" data-w-act="qualityview" title="Quality and safety measures, each with its case list">' + ms("query_stats") + "Quality and safety</button>" +
       '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div></div>" +
       xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
   }
@@ -1279,7 +1281,10 @@
 
     var score = !n ? "" : !n.score || n.score.scorable === false
       ? '<div class="w-news2 na"><b>' + esc(n.tool || "NEWS2") + "</b><span>" + esc((n.score && n.score.reason) || n.note || "Not enough recorded to score.") + "</span></div>"
-      : '<div class="w-news2 risk-' + esc(n.score.risk || "low") + '"><b>' + esc(n.score.total) + "</b><span>" + esc(n.tool) + " &middot; " + esc(n.score.risk || "") + " risk</span></div>";
+      : '<div class="w-news2 risk-' + esc(n.score.risk || "low") + '"><b>' + esc(n.score.total) + "</b><span>" + esc(n.tool) + " &middot; " + esc(n.score.risk || "") + " risk</span>" +
+        // A NEWS2 score is computed, never stored (news2-view.js), so there is no escalation record to link:
+        // the signal names the patient and the deterioration category instead.
+        (n.patientId && n.score.risk && n.score.risk !== "low" ? '<button class="w-btn tiny ghost" data-w-act="incidentsignalnews2:' + esc(n.patientId) + '">' + ms("report") + "Raise safety signal</button>" : "") + "</div>";
 
     return '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>Flowsheet</h3>" +
       '<button class="w-ic" data-w-act="flowsheet" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -3046,6 +3051,7 @@
         (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
         critEscalationsHtml(c.escalations) +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
+        '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
     }).join("");
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
@@ -3841,6 +3847,7 @@
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") +
         (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ack:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
+        '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
     }).join("");
     if (!rows) return "";
@@ -5383,7 +5390,20 @@
     ["AUTOMATION", "Automation or computerisation"], ["SIMPLIFICATION", "Simplification or standardisation"],
     ["CHECKLIST", "Checklist or independent verification"], ["EDUCATION", "Education, training or reminder"],
   ];
+  var INCIDENT_CATEGORY = [
+    ["fall", "Fall"], ["medication-error", "Medication error"], ["pressure-injury", "Pressure injury"],
+    ["healthcare-associated-infection", "Healthcare-associated infection"], ["patient-identification", "Patient identification"],
+    ["blood-transfusion", "Blood or transfusion"], ["clinical-procedure", "Clinical procedure"], ["diagnosis-or-result", "Diagnosis or result"],
+    ["deterioration-not-recognised", "Deterioration not recognised"], ["medical-device", "Medical device"], ["documentation", "Documentation"],
+    ["behaviour-or-violence", "Behaviour or violence"], ["other", "Other"],
+  ];
+  var INCIDENT_STAGE = { signal: "signal", confirmed: "confirmed", rejected: "rejected", "under-investigation": "under investigation", closed: "closed" };
+  function categoryOptions(first) {
+    return '<option value="">' + esc(first) + "</option>" + INCIDENT_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '">' + esc(c[1]) + "</option>"; }).join("");
+  }
+  function categoryLabel(v) { for (var i = 0; i < INCIDENT_CATEGORY.length; i++) if (INCIDENT_CATEGORY[i][0] === v) return INCIDENT_CATEGORY[i][1]; return v ? v : "no category"; }
   function incidentRow(inc) {
+    var stage = inc.stage || "signal";
     var capaRows = (inc.capas || []).map(function (c) {
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state === "complete" ? "" : "due") + '">' + esc(c.state) + "</span> " +
         esc(c.action) + " &middot; " + esc(c.owner) + " &middot; due " + esc(c.dueBy) +
@@ -5395,11 +5415,22 @@
             '<button class="w-btn ghost sm" data-w-act="incidentcapacomplete:' + esc(inc.id) + "~" + esc(c.id) + '">' + ms("task_alt") + "Complete</button></div>"
           : "") + "</li>";
     }).join("");
-    var next = inc.state === "reported"
+    /* CONFIRM: only a signal is decided, and only an investigator's decision is accepted by the server.
+     * RCA and actions appear once it is confirmed; a rejected signal offers nothing further. */
+    var confirmForm = stage === "signal"
+      ? '<div class="w-sub"><h4>Confirm or reject this signal</h4>' +
+        '<select id="wIncOutcome_' + esc(inc.id) + '"><option value="">Decision…</option><option value="confirmed">Confirmed incident</option><option value="not-an-incident">Not an incident</option><option value="duplicate">Duplicate of another report</option></select>' +
+        '<select id="wIncConfCat_' + esc(inc.id) + '">' + categoryOptions(inc.category ? "Keep: " + categoryLabel(inc.category) : "Category (needed to confirm)…") + "</select>" +
+        '<input id="wIncDupOf_' + esc(inc.id) + '" placeholder="Duplicate of incident id (for a duplicate)">' +
+        '<input id="wIncConfReason_' + esc(inc.id) + '" placeholder="Reason for the decision">' +
+        '<button class="w-btn ghost" data-w-act="incidentconfirm:' + esc(inc.id) + '">' + ms("fact_check") + "Record decision</button></div>"
+      : "";
+    var next = inc.state === "reported" && stage !== "rejected"
       ? '<div class="w-sub"><h4>Triage</h4><select id="wIncLk_' + esc(inc.id) + '"><option value="">Likelihood of recurrence…</option>' +
         INCIDENT_LIKELIHOOD.map(function (l) { return '<option value="' + esc(l[0]) + '">' + esc(l[1]) + "</option>"; }).join("") + "</select>" +
         '<button class="w-btn ghost" data-w-act="incidenttriage:' + esc(inc.id) + '">' + ms("fact_check") + "Triage</button></div>"
-      : inc.state === "triaged"
+      : "";
+    var rcaForm = stage === "confirmed"
       ? '<div class="w-sub"><h4>Root cause analysis</h4>' +
         '<textarea id="wIncRoot_' + esc(inc.id) + '" rows="2" placeholder="What about the system made this error easy, likely or invisible - not who made it"></textarea>' +
         '<input id="wIncMethod_' + esc(inc.id) + '" placeholder="Method (optional, e.g. 5 whys, fishbone)">' +
@@ -5415,21 +5446,25 @@
         '<button class="w-btn ghost" data-w-act="incidentcapaadd:' + esc(inc.id) + '">' + ms("add") + "Add action</button></div>"
       : "";
     return '<li class="w-mini-row"><div>' +
-      '<span class="w-st ' + esc(inc.state === "closed" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(inc.state) + "</span> " +
-      "<b>" + esc(inc.severity) + "</b>" + (inc.sac ? " &middot; SAC " + esc(inc.sac.sac) + " - " + esc(inc.sac.response) : "") +
+      '<span class="w-st ' + esc(stage === "closed" || stage === "rejected" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(INCIDENT_STAGE[stage] || stage) + "</span> " +
+      "<b>" + esc(inc.severity) + "</b> &middot; " + esc(categoryLabel(inc.category)) + (inc.sac ? " &middot; SAC " + esc(inc.sac.sac) + " - " + esc(inc.sac.response) : "") +
       (inc.anonymous ? " &middot; anonymous" : "") +
       '<div class="w-dt-times">' + esc(inc.what) + "</div>" +
       '<div class="w-dt-times">reported ' + when(inc.reportedAt) + (inc.patientId ? " &middot; patient " + esc(inc.patientId) : "") + "</div>" +
+      (inc.source ? '<div class="w-dt-times">raised from ' + esc(inc.source.resourceType) + " " + esc(inc.source.id) + "</div>" : "") +
+      (inc.confirmation ? '<div class="w-dt-times">decision: ' + esc(inc.confirmation.outcome) + (inc.confirmation.duplicateOf ? " of " + esc(inc.confirmation.duplicateOf) : "") + " - " + esc(inc.confirmation.reason) + "</div>" : "") +
       (inc.rca ? '<div class="w-dt-times">root cause: ' + esc(inc.rca.rootCause) + "</div>" : "") +
-      (capaRows ? "<ul class=\"w-mini\">" + capaRows + "</ul>" : "") + next + capaAdd +
+      (capaRows ? "<ul class=\"w-mini\">" + capaRows + "</ul>" : "") + confirmForm + next + rcaForm + capaAdd +
       '</div><div class="w-mini-row-act">' +
-      '<button class="w-btn ghost sm" data-w-act="incidentclose:' + esc(inc.id) + '">' + ms("done_all") + "Attempt close</button>" +
+      (stage === "confirmed" || stage === "under-investigation" ? '<button class="w-btn ghost sm" data-w-act="incidentclose:' + esc(inc.id) + '">' + ms("done_all") + "Attempt close</button>" : "") +
       "</div></li>";
   }
   function incidentsView(state) {
     var h = state.incidentHealth;
     var healthBlock = h
       ? '<div class="w-sub"><h4>Reporting health</h4><p>' + esc(h.reading) + "</p>" +
+        "<p>" + esc(h.signals) + " signals &middot; " + esc(h.confirmed) + " confirmed &middot; " + esc(h.rejected) + " rejected &middot; " +
+        esc(h.withRootCause) + " with a root cause &middot; " + esc(h.completedCapas) + " actions completed</p>" +
         "<p>" + esc(h.total) + " total &middot; " + esc(h.openCapas) + " open actions" +
         (h.overdueCapas && h.overdueCapas.length ? " &middot; " + esc(h.overdueCapas.length) + " overdue" : "") +
         (h.actionReading ? " &middot; " + esc(h.actionReading) : "") + "</p></div>"
@@ -5443,6 +5478,7 @@
       INCIDENT_SEVERITY.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
       '<input id="wIncWhen" type="datetime-local" placeholder="When (optional, default now)">' +
       '<input id="wIncPatient" placeholder="Patient MRN (optional)">' +
+      '<select id="wIncCategory">' + categoryOptions("What kind of event (optional)…") + "</select>" +
       '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wIncAnon" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>File anonymously</span></label>' +
       '<p class="w-hint">' + ms("info") + "A named report defaults to you; anonymous means exactly that - nobody, including the record, is told who filed it." +
       "</p><button class=\"w-btn\" data-w-act=\"incidentreport\">" + ms("outbox") + "Report</button></div>" +
@@ -5450,6 +5486,72 @@
         ? (healthBlock + (log ? "<ul class=\"w-mini\">" + log + "</ul>" : '<p class="w-empty">No incidents on the ledger.</p>'))
         : "") +
       "</div>";
+  }
+
+  /* P1.14 QUALITY AND SAFETY (functions/_wardsynq/quality.js qualitySafetyReport). Every measure shows its
+   * numerator, denominator and period, and opens the case list behind it. Loading, failed and not
+   * computable are three different screens: none of them is a zero. */
+  var QS_PERIODS = [7, 30, 90, 365];
+  function qsValue(m) {
+    if (!m.computable) return '<p class="w-hint warn">' + ms("help") + "Not computable: " + esc(m.reason) + "</p>";
+    var parts = [];
+    if (m.unit === "days" || m.unit === "minutes") {
+      if (!m.denominator) return '<p class="w-hint">' + ms("info") + "No cases in this period.</p>";
+      parts.push("median " + esc(m.median) + " " + esc(m.unit) + ", mean " + esc(m.mean) + " over " + esc(m.denominator));
+      if (m.excludedMissingTimestamp) parts.push(esc(m.excludedMissingTimestamp) + " excluded: missing a timestamp");
+    } else if (m.rate === null) {
+      parts.push(esc(m.numerator) + " of " + esc(m.denominator) + " - no rate: " + esc(m.note || "no cases in this period"));
+    } else if (m.unit === "per 1000 bed-days") {
+      parts.push("<b>" + esc(m.rate) + "</b> per 1000 bed-days (" + esc(m.numerator) + " over " + esc(m.denominator) + " bed-days)");
+    } else {
+      parts.push("<b>" + esc(Math.round(m.rate * 1000) / 10) + "%</b> (" + esc(m.numerator) + " of " + esc(m.denominator) + ")");
+    }
+    if (m.excluded) parts.push(esc(m.excluded) + " excluded");
+    if (m.stillRunning) parts.push(esc(m.stillRunning) + " bundle(s) still running, not counted");
+    if (m.woundRecords != null) parts.push(esc(m.woundRecords) + " hospital-acquired stage 2+ pressure wound record(s), shown beside the rate");
+    return "<p>" + parts.join(" &middot; ") + "</p>" + (m.note2 ? '<p class="w-hint">' + ms("info") + esc(m.note2) + "</p>" : "");
+  }
+  function qsCases(m) {
+    var list = (m.cases || []).concat(m.woundCases || []);
+    if (!list.length) return '<p class="w-empty">No cases behind this measure in the period.</p>';
+    return '<ul class="w-mini">' + list.map(function (c) {
+      return '<li class="w-mini-row"><div>' + esc(c.id) + (c.patientId ? " &middot; patient " + esc(c.patientId) : "") +
+        (c.minutes != null ? " &middot; " + esc(c.minutes) + " min" : "") + (c.bedDays != null ? " &middot; " + esc(c.bedDays) + " bed-days" : "") +
+        (c.day ? " &middot; " + esc(c.day) : "") + (c.stage ? " &middot; stage " + esc(c.stage) : "") + "</div></li>";
+    }).join("") + "</ul>";
+  }
+  function qualitySafetyView(state) {
+    var q = state.qs, days = state.qsDays || 30;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("query_stats") + "<h3>Quality and safety</h3>" +
+      '<button class="w-ic" data-w-act="qsdays:' + esc(days) + '" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-tools">' + QS_PERIODS.map(function (d) {
+        return '<button class="w-btn ' + (d === days ? "" : "ghost ") + 'sm" data-w-act="qsdays:' + d + '">Last ' + d + " days</button>";
+      }).join("") + "</div>";
+    if (!q || q.busy) return head + '<p class="w-empty">Loading measures...</p></div>';
+    if (!q.ok) {
+      return head + '<p class="w-hint warn">' + ms("error") + (q.status === 403
+        ? "Your role cannot read quality measures (analytics rights needed)."
+        : "The measures could not be loaded. Do not read this as nothing to report.") + "</p></div>";
+    }
+    if (q.skipped) return head + '<p class="w-hint">' + ms("info") + "The WardSynQ record is not switched on for this hospital, so there is nothing to measure.</p></div>";
+    var s = q.safety;
+    var safety = s
+      ? '<div class="w-sub"><h4>Safety pipeline</h4><ul class="w-mini">' +
+        "<li><b>Signals awaiting a decision</b><span>" + esc(s.signals) + "</span></li>" +
+        "<li><b>Confirmed incidents</b><span>" + esc(s.confirmed) + "</span></li>" +
+        "<li><b>Rejected or duplicate</b><span>" + esc(s.rejected) + "</span></li>" +
+        "<li><b>Confirmed, with a root cause recorded</b><span>" + esc(s.withRootCause) + "</span></li>" +
+        "<li><b>Corrective actions open</b><span>" + esc(s.capasOpen) + "</span></li>" +
+        "<li><b>Corrective actions completed</b><span>" + esc(s.capasCompleted) + "</span></li></ul></div>"
+      : '<p class="w-hint warn">' + ms("error") + "Incident records could not be read with your role, so the safety pipeline is not shown.</p>";
+    var rows = (q.measures || []).map(function (m) {
+      var open = state.qsOpen === m.id;
+      return '<li class="w-mini-row"><div><h4>' + esc(m.title) + "</h4>" + qsValue(m) + (open ? qsCases(m) : "") + "</div>" +
+        (m.computable ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="qscases:' + esc(m.id) + '">' + ms("list") + (open ? "Hide cases" : "Cases") + "</button></div>" : "") + "</li>";
+    }).join("");
+    return head + '<p class="w-hint">' + ms("info") + esc(String(q.period && q.period.from || "").slice(0, 10)) + " to " + esc(String(q.period && q.period.to || "").slice(0, 10)) +
+      ". Measures of the system; case lists name records and patients, never a clinician. Definitions: functions/_wardsynq/quality.js.</p>" +
+      safety + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No measures returned.</p>') + "</div>";
   }
 
   var EMERGENCY_KINDS = [["mass-casualty", "Mass casualty"], ["disaster", "Disaster"], ["downtime", "Major downtime"], ["evacuation", "Evacuation"], ["surge", "Surge"], ["network-outage", "Network outage"], ["other", "Other"]];
@@ -5623,6 +5725,7 @@
         : state.view === "people" ? peopleView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
+        : state.view === "qualitysafety" ? qualitySafetyView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
@@ -8548,6 +8651,46 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
   }
+  function loadQualitySafety(days) {
+    st.view = "qualitysafety"; st.qsDays = days || st.qsDays || 30; st.qs = { busy: true }; paint();
+    return apiGet("/ward/quality-safety?orgId=" + encodeURIComponent(st.orgId) + "&days=" + st.qsDays)
+      .then(function (r) { st.qs = r && r.ok ? r : { ok: false, status: r && r.__status, error: r && r.error }; if (r && (r.error === "permission" || r.error === "forbidden")) st.qs.status = 403; paint(); })
+      .catch(function () { st.qs = { ok: false }; paint(); });
+  }
+  function incidentConfirm(id) {
+    var outcome = val("wIncOutcome_" + id), reason = val("wIncConfReason_" + id), category = val("wIncConfCat_" + id), dup = val("wIncDupOf_" + id);
+    if (!outcome) { st.err = "Pick a decision."; paint(); return; }
+    if (!reason) { st.err = "A decision needs a reason."; paint(); return; }
+    if (outcome === "duplicate" && !dup) { st.err = "Name the incident this duplicates."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-confirm", { orgId: st.orgId, incidentId: id, outcome: outcome, reason: reason, category: category || undefined, duplicateOf: dup || undefined })
+      .then(function (r) { if (settle(r, "Decision recorded.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the decision."; paint(); });
+  }
+  /* Raising a signal from where it was noticed. The severity question is the same one the report form asks. */
+  function askSignal() {
+    var what = window.prompt("What happened? A sentence is enough.");
+    if (!what || what.length < 3) return null;
+    var severity = window.prompt("What reached the patient? near-miss, no-harm, minor, moderate, major or catastrophic", "near-miss");
+    if (!severity) return null;
+    severity = String(severity).trim().toLowerCase();
+    if (!INCIDENT_SEVERITY.some(function (x) { return x[0] === severity; })) { st.err = "Severity must be one of near-miss, no-harm, minor, moderate, major, catastrophic."; paint(); return null; }
+    return { what: what, severity: severity };
+  }
+  function incidentSignal(resourceType, id) {
+    var a = askSignal(); if (!a) return;
+    st.busy = true; paint();
+    apiPost("/ward/incident-signal", { orgId: st.orgId, what: a.what, severity: a.severity, source: { resourceType: resourceType, id: id } })
+      .then(function (r) { settle(r, r && r.written ? "Safety signal raised. An investigator will confirm or reject it." : null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not raise the signal."; paint(); });
+  }
+  function incidentSignalNews2(patientId) {
+    var a = askSignal(); if (!a) return;
+    st.busy = true; paint();
+    apiPost("/ward/incident-report", { orgId: st.orgId, what: a.what, severity: a.severity, patientId: patientId, category: "deterioration-not-recognised" })
+      .then(function (r) { settle(r, r && r.written ? "Safety signal raised. An investigator will confirm or reject it." : null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not raise the signal."; paint(); });
+  }
   function incidentsOpen() {
     st.view = "incidents"; st.incidentLog = null; st.incidentHealth = null; paint(); loadIncidents();
   }
@@ -8567,13 +8710,13 @@
       .catch(function () { st.busy = false; paint(); });
   }
   function reportIncidentAction() {
-    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient");
+    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient"), category = val("wIncCategory");
     var anonEl = document.getElementById("wIncAnon");
     var anon = !!(anonEl && anonEl.checked);
     if (!what || what.length < 3) { st.err = "Describe what happened, in a sentence or two."; paint(); return; }
     if (!severity) { st.err = "Pick what actually reached the patient."; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined })
+    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined, category: category || undefined })
       .then(function (r) {
         if (settle(r, r && r.written ? "Reported." : null)) {
           ["wIncWhat", "wIncWhen", "wIncPatient"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
@@ -9092,6 +9235,7 @@
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
+      if (st.view === "qualitysafety") { st.qs = null; st.qsOpen = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -9352,6 +9496,9 @@
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
     if (cmd === "incidents") { incidentsOpen(); return; }
+    if (cmd === "qualityview") { st.qsOpen = null; loadQualitySafety(); return; }
+    if (cmd === "qsdays") { loadQualitySafety(Number(arg) || 30); return; }
+    if (cmd === "qscases") { st.qsOpen = st.qsOpen === arg ? null : arg; paint(); return; }
     if (cmd === "timelinefilter") { st.timelineFilter = arg === "all" ? "" : arg; paint(); return; }
     if (cmd === "timelinewhen") { st.timelineWhen = arg === "any" ? "" : arg; paint(); return; }
     if (cmd === "timelinesearch") { st.timelineQuery = val("wTlQ"); paint(); return; }
@@ -9498,6 +9645,9 @@
     if (cmd === "incidentcapaadd") { incidentCapaAdd(arg); return; }
     if (cmd === "incidentcapacomplete") { var incp = arg.split("~"); incidentCapaComplete(incp[0], incp[1]); return; }
     if (cmd === "incidentclose") { incidentClose(arg); return; }
+    if (cmd === "incidentconfirm") { incidentConfirm(arg); return; }
+    if (cmd === "incidentsignal") { var sigp = arg.split("~"); incidentSignal(sigp[0], sigp[1]); return; }
+    if (cmd === "incidentsignalnews2") { incidentSignalNews2(arg); return; }
     if (cmd === "emergencyadmin") { emergencyAdminOpen(); return; }
     if (cmd === "emergencydeclare") { emergencyDeclareAction(); return; }
     if (cmd === "emergencydeactivate") { emergencyDeactivateAction(arg); return; }
@@ -9573,7 +9723,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox", "nurseworklist"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox", "nurseworklist", "qualityview"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
@@ -9591,7 +9741,7 @@
     st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
-    st.incidentLog = null; st.incidentHealth = null;
+    st.incidentLog = null; st.incidentHealth = null; st.qs = null; st.qsOpen = null;
     st.consultationResult = null;
     st.approvals = null;
     st.purchaseOrders = null;

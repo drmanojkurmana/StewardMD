@@ -102,7 +102,7 @@ import { verifyOrder, verificationQueue } from "../../_wardsynq/pharmacy-verify.
 import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/pharmacy-dispense.js";
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
-import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
+import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
 import { createReferral, actOnReferral, patientReferrals, referralInbox } from "../../_wardsynq/referral.js";
@@ -139,7 +139,7 @@ import { predictMetric } from "../../_wardsynq/twin-predict.js";
 import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
 import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
 import { prepareOverdueWorkQueue } from "../../_wardsynq/twin-agent.js";
-import { qualityReport } from "../../_wardsynq/quality.js";
+import { qualityReport, qualitySafetyReport } from "../../_wardsynq/quality.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
@@ -874,7 +874,9 @@ export async function onRequest(context) {
         // TASK 5.14: filing an incident is broad (INCIDENT_REPORT); triage/RCA/CAPA/close and the
         // ledger itself are INCIDENT_INVESTIGATE (safety_officer/admin) - the same split
         // EMERGENCY_DECLARE's declare/deactivate hold over one shared resource scope.
-        "incident-report": CAPS.INCIDENT_REPORT,
+        "incident-report": CAPS.INCIDENT_REPORT, "incident-signal": CAPS.INCIDENT_REPORT,
+        // P1.14: deciding a signal is (or is not) an incident is the investigator's act.
+        "incident-confirm": CAPS.INCIDENT_INVESTIGATE,
         "incident-triage": CAPS.INCIDENT_INVESTIGATE, "incident-rca": CAPS.INCIDENT_INVESTIGATE,
         "incident-capa": CAPS.INCIDENT_INVESTIGATE, "incident-capa-complete": CAPS.INCIDENT_INVESTIGATE,
         "incident-close": CAPS.INCIDENT_INVESTIGATE, "incident-log": CAPS.INCIDENT_INVESTIGATE,
@@ -969,6 +971,10 @@ export async function onRequest(context) {
         // Measures about the system, naming no clinician. Readable by anyone who can read a chart,
         // for the same reason the override report is: the people the machinery acts on can see it.
         quality: CAPS.EMR_VIEW,
+        /* P1.14: the quality and safety measures WITH their case lists. analytics.view, not emr.view:
+         * a case list is a hospital-wide list of patients behind a rate, which is analytics, and the
+         * record read below still applies the actor's own read scope on top. */
+        "quality-safety": CAPS.ANALYTICS_VIEW,
         /* A registry NAMES PATIENTS beside their diagnoses - chart-level PHI, and exactly what a
          * browsing incident looks like. So it needs the authority to read a chart, not the lower bar
          * that opens a ward list. quality.js, which names nobody, sits at the same level because it
@@ -2356,6 +2362,13 @@ export async function onRequest(context) {
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "quality-safety" && method === "GET") {
+        const r = await qualitySafetyReport(request, env, {
+          ...deps, days: url.searchParams.get("days") || "",
+          beds: (wsqCfg && wsqCfg.beds) || null, antibiotics: (wsqCfg && wsqCfg.antibiotics) || null,
+        });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "downtime" && method === "GET") {
         const r = await downtimePack(request, env, {
           ...deps, ward: url.searchParams.get("ward") || "", hours: url.searchParams.get("hours") || "",
@@ -2651,8 +2664,14 @@ export async function onRequest(context) {
         const r = await emergencyReconciliation(request, env, { ...deps, activationId: url.searchParams.get("activationId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "incident-report" && method === "POST") {
-        const r = await reportIncident(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, idempotencyKey: body.idempotencyKey || null });
+      if ((sub === "incident-report" || sub === "incident-signal") && method === "POST") {
+        const fn = sub === "incident-signal" ? signalIncident : reportIncident;
+        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "incident-confirm" && method === "POST") {
+        // The decider is the authenticated actor, never the body: same reasoning as triagedBy below.
+        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, by: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-triage" && method === "POST") {
