@@ -20,7 +20,8 @@ import { rowsFromJson, TOKEN_KEY, PAGE_SIZE_KEY, PAGE_START_KEY, PAGE_NUMBER_KEY
 export const ROLES = Object.freeze(['data', 'prerequisite', 'lookup', 'ping', 'shell']);
 const WRITE_PATH = /save|update|insert|delete|remove|create|submit|approve|cancel|logout|logoff|signout/i;
 const MAX_EXEC = 6;
-const BRAIN_RESOURCES = ['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history'];
+export const CONSTANT_VALUE = /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/;
+const BRAIN_RESOURCES =['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history'];
 export const ACCEPT = Object.freeze({ ratio: 0.5, hits: 3 });
 
 /* ---- page realm ---------------------------------------------------------------------------------- */
@@ -232,7 +233,9 @@ export function paramsOf(request, parents = [], now = new Date()) {
       }
     }
     if (!src) { const f = todayFormat(v, now); if (f) src = { today: f }; }
-    if (!src && /^[A-Za-z_]{1,32}$/.test(v)) src = { constant: v };
+    // A mode value (Type=IPWorkList, type=Arrived and Occupied, checkbox=0): short, no identifier-shaped
+    // digit run, and not any row's field (checked above). Sent as recorded.
+    if (!src && CONSTANT_VALUE.test(v) && !/\d{3,}/.test(v)) src = { constant: v };
     out[k] = src || { unmapped: true };
   }
   return out;
@@ -385,7 +388,12 @@ export function createProofBook({ brain = null } = {}) {
       try { const cur = await client.currentUrl(); pageUrl = typeof cur === 'string' ? cur : cur && cur.url; } catch { pageUrl = null; }
       let out = { proven: null, trace: { tried: [] } };
       try { out = await proveView({ client, view, brain, since, label, parents, pageUrl }); } catch { view.proof = { status: 'error', tried: 0, brain: false }; delete view.endpoints; }
-      if (out.proven) rowsBy.set(view.resourceHint, out.proven);
+      // Several proven lists of one kind (the doctor's own list and the ward-wide list): a field is
+      // traced against all of their rows.
+      if (out.proven) {
+        const prev = rowsBy.get(view.resourceHint);
+        rowsBy.set(view.resourceHint, prev ? { label: prev.label, rows: prev.rows.concat(out.proven.rows).slice(0, 3000) } : out.proven);
+      }
       trace.push(Object.assign({ resource: view.resourceHint }, view.proof || {}, { attempts: out.trace.tried }));
       return view.proof || null;
     },
