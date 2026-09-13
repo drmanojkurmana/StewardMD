@@ -43,7 +43,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -64,7 +64,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff, advisories: renderAdvisories };
     return renderers[tab](c, body);
   } });
 
@@ -143,6 +143,28 @@
       });
     };
     wireNoteWriters(c);
+  }
+
+  // ---- Safety reminders (dry run) ----------------------------------------------------------------
+  /* A DRAFT IS TESTED BEFORE IT IS PUBLISHED. A hospital's own safety reminders fire on real patients, and
+   * a badly written one either never fires or fires on everybody - both are found out on a ward. This
+   * compiles the draft on the server and reports what it WOULD have done, and changes nothing: publishing
+   * is the separate, existing hospital-settings step. A draft that does not compile says why. */
+  function renderAdvisories(c, body) {
+    body.innerHTML = '<div class="card"><h2>Safety reminders - try a draft</h2>' +
+      '<p class="quiet">Paste the draft reminder set (JSON). Nothing is published or changed by trying it.</p>' +
+      '<textarea id="admAdvDraft" rows="10" style="width:100%"></textarea>' +
+      '<button type="button" class="btn" id="admAdvRun">Try it</button><div id="admAdvOut"></div></div>';
+    document.getElementById("admAdvRun").onclick = function () {
+      var out = document.getElementById("admAdvOut"), draft;
+      try { draft = JSON.parse(document.getElementById("admAdvDraft").value || "null"); }
+      catch (e) { out.innerHTML = '<div class="msg err">That is not valid JSON, so it was not tried.</div>'; return; }
+      out.innerHTML = '<span class="spin"></span>';
+      c.api("/ward/advisory-check", { orgId: c.state.orgId, advisories: draft }).then(function (r) {
+        if (!r || !r.ok) { out.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        out.innerHTML = '<div class="msg note">Tried, not published.</div><pre style="white-space:pre-wrap">' + c.esc(JSON.stringify(r, null, 2)) + "</pre>";
+      });
+    };
   }
 
   // ---- Price list -------------------------------------------------------------------------------
