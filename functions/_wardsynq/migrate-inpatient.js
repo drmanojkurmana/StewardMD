@@ -966,6 +966,7 @@ const TIMELINE_CATEGORY = {
    * answerable in one click. */
   CriticalResultLoop: "critical",
   ResusBundle: "critical",
+  ProcedureRecord: "visit",
   EmergencyActivation: "critical",
   BreakGlassGrant: "critical",
   /* Money, where it belongs on a clinical history: that a bill was raised or paid is part of the
@@ -1045,6 +1046,7 @@ const TIMELINE_LABEL = {
   /* A critical result names the number and whether anybody has picked it up yet, because an open
    * loop is the single most actionable thing that can appear on a chart. */
   CriticalResultLoop: (r) => `CRITICAL: ${r.display || r.code}${r.value != null ? ` ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""} — ${r.state === "open" ? "nobody has acknowledged this yet" : r.state || "open"}`,
+  ProcedureRecord: (r) => `Procedure: ${r.name || "procedure"}${r.site ? `, ${r.site}` : ""}${r.performedBy ? ` · by ${r.performedBy}` : ""}${r.complications ? ` · complications: ${r.complications}` : ""}`,
   ResusBundle: (r, who) => `Resuscitation${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
   EmergencyActivation: (r, who) => `Hospital emergency declared: ${r.kind || "emergency"}${r.reason ? ` — ${r.reason}` : ""}${who ? ` · by ${who}` : ""}`,
   BreakGlassGrant: (r, who) => `Emergency access to this chart was taken${r.reason ? `: ${r.reason}` : ""}${who ? ` · by ${who}` : ""}`,
@@ -1059,9 +1061,55 @@ const TIMELINE_LABEL = {
  * currently active. `chart` is `RecordService.chart()`'s own shape: `{ [resourceType]: resource[] }`,
  * already scoped to what this actor may read - nothing here widens or re-checks that.
  */
-function timelineFromChart(chart) {
+/* AN ED VISIT IS SEVERAL EVENTS, NOT ONE. chart() carries only the latest version of an Encounter, so
+ * an ED visit read as a single "checked in" or "left" and every triage in between was invisible.
+ * Given the visit's versions, each step becomes its own event at the clinical time it happened:
+ * arrival, every triage and re-triage (with the reason), and the disposition. PURE. */
+function edVisitEvents(versions) {
+  const vs = (versions || []).filter(Boolean).slice().sort((a, b) => (a.version || 0) - (b.version || 0));
+  const out = [];
+  const metaAt = (v) => (v.meta && (v.meta.effectiveAt || v.meta.recordedAt)) || null;
+  const writer = (v) => whoOf(v);
+  let prevTriage = null, prevAcuity = null, disposed = false;
+  vs.forEach((v, i) => {
+    if (i === 0) {
+      const at = str(v.periodStart) || metaAt(v);
+      const who = writer(v);
+      if (at) out.push({ at, resourceType: "Encounter", id: v.id, category: "visit", label: `ED: arrived${v.reason ? `, ${v.reason}` : ""}${who ? ` · by ${who}` : ""}`, ...(who ? { who } : {}) });
+    }
+    // triageSeq tells two triages apart even inside one millisecond (migrate-ed.js triageKey()).
+    const tKey = !v.triagedAt ? null : v.triageSeq != null ? `seq:${v.triageSeq}` : `at:${v.triagedAt}`;
+    if (tKey && tKey !== prevTriage) {
+      const who = personName(v.triagedBy);
+      const retriage = prevTriage != null;
+      const from = v.previousAcuity != null ? v.previousAcuity : prevAcuity;
+      out.push({
+        at: v.triagedAt, resourceType: "Encounter", id: v.id, category: "visit",
+        label: retriage ? `Re-triaged: acuity ${from != null ? `${from} to ` : ""}${v.acuity}${who ? ` · by ${who}` : ""}` : `Triaged: acuity ${v.acuity}${who ? ` · by ${who}` : ""}`,
+        ...(v.triageReason ? { body: [{ heading: "reason", text: str(v.triageReason) }] } : {}),
+        ...(who ? { who } : {}),
+      });
+      prevTriage = tKey; prevAcuity = v.acuity;
+    }
+    if (!disposed && v.status === "finished") {
+      disposed = true;
+      const at = str(v.periodEnd) || metaAt(v);
+      const who = writer(v);
+      if (at) out.push({
+        at, resourceType: "Encounter", id: v.id, category: "visit",
+        label: `ED disposition: ${v.disposition || "visit closed"}${who ? ` · by ${who}` : ""}`,
+        ...(v.dispositionReason ? { body: [{ heading: "reason", text: str(v.dispositionReason) }] } : {}),
+        ...(who ? { who } : {}),
+      });
+    }
+  });
+  return out;
+}
+
+function timelineFromChart(chart, extras) {
   const events = [];
   let withoutTimestamp = 0;
+  const edHistory = (extras && extras.edHistory) || {};
 
   /* AN ORDER AND ITS RESULT, JOINED. DiagnosticReport carries the ServiceRequest it answers, so an
    * investigation on the timeline can say whether the report is back and point at it - which is the
@@ -1088,7 +1136,12 @@ function timelineFromChart(chart) {
     const rows = chart[resourceType] || [];
     const label = TIMELINE_LABEL[resourceType] || ((r) => `${resourceType} recorded`);
     for (const r of rows) {
-      const at = (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
+      if (resourceType === "Encounter" && r && r.class === "ED" && Array.isArray(edHistory[r.id]) && edHistory[r.id].length) {
+        for (const ev of edVisitEvents(edHistory[r.id])) events.push(ev);
+        continue;
+      }
+      // A procedure sits at the time it was DONE, not the time somebody wrote it up.
+      const at = (resourceType === "ProcedureRecord" && str(r.performedAt)) || (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
       if (!at) { withoutTimestamp++; continue; }
       const who = whoOf(r);
       const event = {
@@ -1157,7 +1210,14 @@ async function patientTimeline(request, env, ctx) {
   try { chart = await svc.chart(patientId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), events: [], activeMedications: [] }; }
 
-  const { events, withoutTimestamp, activeMedications } = timelineFromChart(chart);
+  /* An ED visit's versions, so triage, re-triage and disposition are their own events. A failed
+   * history read degrades that one visit to its single latest-version event, never to nothing. */
+  const edHistory = {};
+  for (const enc of (chart && chart.Encounter) || []) {
+    if (!enc || enc.class !== "ED") continue;
+    try { edHistory[enc.id] = await svc.history("Encounter", enc.id); } catch { /* degrade, see above */ }
+  }
+  const { events, withoutTimestamp, activeMedications } = timelineFromChart(chart, { edHistory });
   return { ...base, ok: true, patientId, events, activeMedications, ...(withoutTimestamp ? { withoutTimestamp } : {}) };
 }
 

@@ -60,7 +60,7 @@ import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, tr
 // Emergency department (2026-09-09). Reuses everything above unchanged - vitals, orders, the eMAR,
 // notes, labs, NEWS2, critical results are all encounter-class-agnostic already. This adds only
 // arrival (known or unidentified), triage acuity, and a non-admitted disposition.
-import { edArrival, recordEdTriage, edDisposition, listEd } from "../../_wardsynq/migrate-ed.js";
+import { edArrival, recordEdTriage, edDisposition, listEd, recordEdProcedure, edRecord } from "../../_wardsynq/migrate-ed.js";
 import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle, listResusBundles } from "../../_wardsynq/migrate-resus.js";
 import { deviceAssociate, deviceDissociate, deviceIngest, deviceStatus, deviceList } from "../../_wardsynq/migrate-device.js";
 import {
@@ -768,6 +768,9 @@ export async function onRequest(context) {
          * a hand-off into admitPatient(), which itself needs only queue.add too. */
         "ed-arrival": CAPS.QUEUE_ADD, "ed-triage": CAPS.EMR_VITALS, "ed-disposition": CAPS.QUEUE_ADD,
         "ed-list": CAPS.QUEUE_VIEW,
+        // The triage history, reassessment clock and procedures of one ED visit are chart reads;
+        // recording a procedure done is a clinical act of the same standing as an order.
+        "ed-record": CAPS.EMR_VIEW, "ed-procedure": CAPS.EMR_TREAT,
         /* Resuscitation bundles. Starting one is "a clinical commitment" (wardsynq-emergency.js's own
          * words) - emr.treat. Reading a running bundle's status is emr.view, the same as the chart
          * it hangs off. */
@@ -1354,7 +1357,15 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-triage" && method === "POST") {
-        const r = await recordEdTriage(request, env, { ...deps, encounterId: body.encounterId, acuity: body.acuity, chiefComplaint: body.chiefComplaint, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordEdTriage(request, env, { ...deps, encounterId: body.encounterId, acuity: body.acuity, chiefComplaint: body.chiefComplaint, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-procedure" && method === "POST") {
+        const r = await recordEdProcedure(request, env, { ...deps, encounterId: body.encounterId, procedure: body.procedure || body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "ed-record" && method === "GET") {
+        const r = await edRecord(request, env, { ...deps, encounterId: url.searchParams.get("encounterId") || "", reassessMinutes: (wsqCfg && wsqCfg.edReassessMinutes) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-disposition" && method === "POST") {
@@ -1362,7 +1373,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "ed-list" && method === "GET") {
-        const r = await listEd(request, env, { ...deps });
+        const r = await listEd(request, env, { ...deps, reassessMinutes: (wsqCfg && wsqCfg.edReassessMinutes) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "resus-start" && method === "POST") {

@@ -393,7 +393,8 @@
     var rows = (state.ed && state.ed.patients || []).map(function (p) {
       return "<li>" + '<button class="w-bed" data-w-act="openEd:' + esc(p.encounterId) + '">' +
         '<span class="w-bed-no' + (p.acuity == null ? " untriaged" : " acuity-" + esc(p.acuity)) + '">' + (p.acuity == null ? ms("priority_high") : esc(p.acuity)) + "</span>" +
-        '<span class="w-bed-b"><b>' + esc(p.mrn || p.patientId) + "</b><small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small></span>" +
+        '<span class="w-bed-b"><b>' + esc(p.mrn || p.patientId) + "</b><small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small>" +
+        edReassessLine(p.reassessment) + "</span>" +
         ms("chevron_right") + "</button></li>";
     }).join("");
 
@@ -423,10 +424,26 @@
       '<button class="w-btn tiny go" data-w-act="edarrivalopen">' + ms("add_circle") + "Arrival</button>" +
       '<button class="w-ic" data-w-act="edboard" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-card">' +
-      (state.edErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edErr) + "</p>"
-        : rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
-        : '<p class="w-empty">No patients currently in the ED.</p>') +
+      (state.edErr ? '<p class="w-hint warn">' + ms("error") + esc(state.edErr) + " Do not read this as an empty department.</p>"
+        : state.ed == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading the ED board.</p>"
+        : (state.ed.overdueReassessments ? '<p class="w-hint warn">' + ms("alarm") + esc(state.ed.overdueReassessments) + " patient" + (state.ed.overdueReassessments === 1 ? " is" : "s are") + " overdue for reassessment.</p>" : "") +
+          (rows && state.ed.reassessIntervalsSet === false ? '<p class="w-hint">' + ms("info") + "This hospital has not set reassessment intervals, so no reassessment times are shown.</p>" : "") +
+          (rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
+            : '<p class="w-empty">No patients currently in the ED.</p>')) +
       "</div>" + arrivalPanel;
+  }
+
+  /* One line saying when this patient must be looked at again. Every state is its own sentence: an
+   * hour the server could not work out is "not known" with its reason, and a hospital with no interval
+   * gets "no reassessment interval set" - never "not due", which would promise a clock nobody set. */
+  function edReassessLine(r) {
+    if (!r) return "";
+    if (r.state === "overdue") return '<small class="w-st overdue">' + ms("alarm") + "Reassessment overdue by " + esc(r.minutesOverdue) + " min (was due " + when(r.dueAt) + ")</small>";
+    if (r.state === "due") return "<small>Reassessment due " + when(r.dueAt) + "</small>";
+    if (r.state === "no-interval") return "<small>No reassessment interval set</small>";
+    if (r.state === "not-known") return '<small class="w-st">' + esc(r.text) + "</small>";
+    if (r.state === "closed") return "<small>Visit closed, no reassessment due</small>";
+    return "";
   }
 
   /* THE THEATRE BOARD. Every open case hospital-wide (functions/_wardsynq/migrate-surgery.js's
@@ -1405,6 +1422,7 @@
       ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" +
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
+        '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this visit and whether each was met">' + ms("flag") + "Care plan</button>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
       : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         // A human on the ward reads a name and an MR number, not a record id: the ward list's own
@@ -1426,6 +1444,7 @@
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
         '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
         '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
+        '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this stay and whether each was met">' + ms("flag") + "Care plan</button>" +
         '<button class="w-btn ghost" data-w-act="tags" title="Issue a wristband and check the band on the patient">' + ms("how_to_reg") + "Wristband</button>" +
         '<button class="w-btn ghost" data-w-act="patientsurgery" title="Operations for this patient and where each one stands">' + ms("fact_check") + "Operations</button>" +
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
@@ -1490,7 +1509,7 @@
       ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
       medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
       (isMaternity ? deliveryCard(state) : "") +
-      (isEd ? dispositionCard(state) : "");
+      (isEd ? edProceduresCard(state) + dispositionCard(state) : "");
   }
 
   /* TRIAGE. The acuity is a human's choice, made once, shown plainly once made - and this card
@@ -1500,12 +1519,32 @@
    * own words the same way note-templates.js already lets it configure its own headings. */
   function triageCard(state) {
     var s = state.sel || {};
+    var opts = Object.keys(ACUITY_WORDS).map(function (k) { return '<option value="' + k + '">' + esc(ACUITY_WORDS[k]) + "</option>"; }).join("");
     if (s.acuity != null) {
+      /* TRIAGE IS A HISTORY. The current acuity is shown first; every earlier triage stays underneath
+       * with who, when and why it changed, and a re-triage (which is also how a reassessment is
+       * recorded) asks for its reason. */
+      var rec = state.edRecord;
+      var history = rec == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading the triage history.</p>"
+        : rec.failed ? '<p class="w-hint warn">' + ms("error") + "Could not load the triage history or reassessment time. Do not read this as no earlier triage.</p>"
+        : !(rec.triages || []).length ? '<p class="w-empty">No triage history recorded.</p>'
+        : '<ul class="w-mini">' + rec.triages.map(function (t) {
+          return '<li class="w-mini-row"><div><b>' + (t.retriage ? "Re-triaged" : "Triaged") + ": " + esc(ACUITY_WORDS[t.acuity] || t.acuity) + "</b>" +
+            (t.retriage && t.previousAcuity != null ? " (was " + esc(t.previousAcuity) + ")" : "") +
+            '<div class="w-dt-times">' + when(t.triagedAt) + (t.triagedBy ? " &middot; by " + esc(t.triagedBy) : "") +
+            (t.chiefComplaint ? " &middot; " + esc(t.chiefComplaint) : "") + "</div>" +
+            (t.reason ? '<div class="w-dt-times"><b>Reason:</b> ' + esc(t.reason) + "</div>" : "") + "</div></li>";
+        }).join("") + "</ul>";
+      var reassess = rec && !rec.failed && rec.reassessment ? '<p class="w-hint' + (rec.reassessment.state === "overdue" ? " warn" : "") + '">' + edReassessLine(rec.reassessment) + "</p>" : "";
       return '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Triage</h3></div>" +
         '<div class="w-news2 risk-' + (s.acuity <= 2 ? "high" : s.acuity === 3 ? "medium" : "low") + '"><b>' + esc(s.acuity) + "</b><span>" + esc(ACUITY_WORDS[s.acuity] || "") + "</span></div>" +
-        '<p class="w-hint">' + ms("info") + "Triaged " + when(s.triagedAt) + ". Not clinically validated content - this hospital's own scale." + "</p></div>";
+        '<p class="w-hint">' + ms("info") + "Triaged " + when(s.triagedAt) + ". Not clinically validated content - this hospital's own scale." + "</p>" +
+        reassess + history +
+        '<div class="w-sub"><h4>Re-triage or reassess</h4>' +
+        '<label class="w-f"><span>Acuity now</span><select id="wRetriageAcuity"><option value="">Choose&hellip;</option>' + opts + "</select></label>" +
+        '<label class="w-f"><span>Reason (required)</span><input id="wRetriageReason" placeholder="For example: reassessed, no change"></label>' +
+        '<button class="w-btn" data-w-act="retriage">' + ms("save") + "Record re-triage</button></div></div>";
     }
-    var opts = Object.keys(ACUITY_WORDS).map(function (k) { return '<option value="' + k + '">' + esc(ACUITY_WORDS[k]) + "</option>"; }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Triage</h3></div>" +
       '<p class="w-hint warn">' + ms("warning") + "Not yet triaged.</p>" +
       '<label class="w-f"><span>Acuity</span><select id="wTriageAcuity"><option value="">Choose&hellip;</option>' + opts + "</select></label>" +
@@ -1552,7 +1591,46 @@
   /* DISPOSITION: the ED visit ends. "Admitted" reuses the SAME bed board an inpatient admission
    * uses - reachable straight from here, not a second admission flow - because an ED patient being
    * admitted needs the SAME bed-occupancy guard any admission needs. */
+  /* ED PROCEDURES. What was done, where, by whom and when, and what went wrong. The time is asked for
+   * and never filled in with "now": a drain written up an hour later belongs at the hour it went in. */
+  function edProceduresCard(state) {
+    var rec = state.edRecord;
+    var list = rec == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading procedures.</p>"
+      : rec.failed ? '<p class="w-hint warn">' + ms("error") + "Could not load procedures. Do not read this as none done.</p>"
+      : !(rec.procedures || []).length ? '<p class="w-empty">No procedures recorded for this ED visit.</p>'
+      : '<ul class="w-mini">' + rec.procedures.map(function (p) {
+        return '<li class="w-mini-row"><div><b>' + esc(p.name) + "</b>" + (p.site ? " &middot; " + esc(p.site) : "") +
+          '<div class="w-dt-times">' + when(p.performedAt) + " &middot; by " + esc(p.performedBy) + "</div>" +
+          (p.notes ? '<div class="w-dt-times">' + esc(p.notes) + "</div>" : "") +
+          '<div class="w-dt-times"><b>Complications:</b> ' + (p.complications ? esc(p.complications) : "none recorded") + "</div></div></li>";
+      }).join("") + "</ul>";
+    return '<div class="w-card"><div class="w-card-h">' + ms("healing") + "<h3>Procedures</h3></div>" + list +
+      '<div class="w-sub"><h4>Record a procedure</h4><div class="w-grid">' +
+      '<label class="w-f"><span>Procedure</span><input id="wProcName" placeholder="For example: chest drain"></label>' +
+      '<label class="w-f"><span>Site</span><input id="wProcSite"></label>' +
+      '<label class="w-f"><span>Performed by</span><input id="wProcBy"></label>' +
+      '<label class="w-f"><span>When</span><input id="wProcAt" type="datetime-local"></label></div>' +
+      '<label class="w-f"><span>Notes</span><textarea id="wProcNotes" rows="2"></textarea></label>' +
+      '<label class="w-f"><span>Complications</span><input id="wProcComp" placeholder="Leave empty if none"></label>' +
+      '<button class="w-btn" data-w-act="edprocsave">' + ms("save") + "Record procedure</button></div></div>";
+  }
+
   function dispositionCard(state) {
+    /* REFERRAL from the ED goes through the SAME referral route and record the Referrals screen uses
+     * (referral.js); this is only a shorter way to reach it from where the decision is made. */
+    var d = state.referrals;
+    var refs = d == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading referrals.</p>"
+      : d.failed ? '<p class="w-hint warn">' + ms("error") + "Could not load referrals. Do not read this as none.</p>"
+      : (d.referrals || []).length ? '<ul class="w-mini">' + d.referrals.map(referralRow).join("") + "</ul>"
+      : '<p class="w-empty">No referrals for this patient.</p>';
+    var referral = '<div class="w-sub"><h4>' + ms("send") + "Refer</h4>" + refs +
+      '<div class="w-grid"><label class="w-f"><span>To (specialty)</span><input id="wRefSpecialty" placeholder="For example: Cardiology"></label>' +
+      '<label class="w-f"><span>How soon</span><select id="wRefUrgency"><option value="routine">Routine</option><option value="urgent">Urgent</option><option value="emergency">Emergency</option></select></label>' +
+      '<label class="w-f"><span>Where</span><select id="wRefKind"><option value="internal">This hospital</option><option value="external">Another facility</option></select></label>' +
+      '<label class="w-f"><span>Facility (if another)</span><input id="wRefFacility"></label></div>' +
+      '<label class="w-f"><span>Reason</span><input id="wRefReason"></label>' +
+      '<label class="w-f"><span>Clinical summary for the receiving team</span><textarea id="wRefSummary" rows="2"></textarea></label>' +
+      '<button class="w-btn ghost" data-w-act="refcreate">' + ms("send") + "Send referral</button></div>";
     return '<div class="w-card"><div class="w-card-h">' + ms("exit_to_app") + "<h3>Disposition</h3></div>" +
       '<p class="w-hint">' + ms("info") + "Ends this ED visit. The chart stays exactly as it is - nothing here is hidden or removed." + "</p>" +
       '<div class="w-dose-a">' +
@@ -1561,7 +1639,7 @@
       '<button class="w-btn ghost" data-w-act="disposition:transferred">' + ms("local_shipping") + "Transfer</button>" +
       '<button class="w-btn ghost" data-w-act="disposition:lwbs">' + ms("directions_walk") + "LWBS</button>" +
       '<button class="w-btn ghost" data-w-act="disposition:deceased">' + ms("healing") + "Deceased</button>" +
-      "</div></div>";
+      "</div>" + referral + "</div>";
   }
 
   /* The patient's own copy, on screen and on paper. It reuses the downtime pack's print styling
@@ -4628,13 +4706,58 @@
       "</div>" +
       /* The care plan: what the team is trying to achieve and when it will be looked at again. A goal
        * with no review date is a goal nobody comes back to, so the date is asked for with it. */
-      '<div class="w-sub"><h4>Care plan</h4>' +
-      '<input id="wCpTitle" placeholder="What this plan is for">' +
-      '<textarea id="wCpGoals" rows="3" placeholder="One goal a line - what the team is trying to achieve"></textarea>' +
-      '<label class="w-f"><span>Review by</span><input id="wCpReview" type="date"></label>' +
-      '<p class="w-hint">' + ms("info") + "A goal with no review date is a goal nobody comes back to." +
-      "</p><button class=\"w-btn\" data-w-act=\"careplansave\">" + ms("save") + "Save the care plan</button></div>" +
+      '<div class="w-sub"><h4>Care plan</h4>' + carePlanForm() +
+      '<button class="w-btn ghost" data-w-act="careplan">' + ms("flag") + "Open the care plan and its progress</button></div>" +
       "</div>";
+  }
+  function carePlanForm() {
+    return '<input id="wCpTitle" placeholder="What this plan is for">' +
+      '<textarea id="wCpGoals" rows="3" placeholder="One goal a line: the goal | how you will know it was met"></textarea>' +
+      '<label class="w-f"><span>Review by</span><input id="wCpReview" type="date"></label>' +
+      '<p class="w-hint">' + ms("info") + "A goal with no review date is a goal nobody comes back to. Goals already on the plan are kept." +
+      "</p><button class=\"w-btn\" data-w-act=\"careplansave\">" + ms("save") + "Save the care plan</button>";
+  }
+
+  /* THE CARE PLAN, READ BACK. A plan could be saved and never seen again, so nobody could tell whether
+   * a goal had been met. Loading, failed and "no plan written" are three different sentences: the last
+   * is the one a ward has to act on, and a failed read must never look like it. */
+  var GOAL_WORDS = { active: "In progress", met: "Met", "not-met": "Not met", cancelled: "Cancelled" };
+  function carePlanView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.carePlan;
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Care plan</h3>" +
+      '<button class="w-ic" data-w-act="careplan" title="Refresh">' + ms("refresh") + "</button></div>";
+    var body;
+    if (d == null) body = '<p class="w-hint">' + ms("hourglass_empty") + "Loading the care plan.</p>";
+    else if (d.failed) body = '<p class="w-hint warn">' + ms("error") + "Could not load the care plan. Do not read this as no plan.</p>";
+    else if (!d.plan) body = '<p class="w-empty">No care plan has been written for this stay yet.</p>';
+    else {
+      var p = d.plan, rv = p.review || {};
+      var review = rv.state === "stale" ? '<p class="w-hint warn">' + ms("alarm") + "Review overdue by " + esc(rv.overdueDays) + " day" + (rv.overdueDays === 1 ? "" : "s") + " (was due " + when(p.reviewBy) + ").</p>"
+        : rv.state === "current" ? '<p class="w-hint">' + ms("event") + "Next review by " + when(p.reviewBy) + ".</p>"
+        : rv.state === "no-review-date" ? '<p class="w-hint warn">' + ms("warning") + "No review date set, so nobody is due to look at this plan again.</p>"
+        : '<p class="w-hint">' + ms("info") + "This plan is closed.</p>";
+      var goals = (p.goals || []).length ? '<ul class="w-mini">' + p.goals.map(function (g) {
+        var acts = ["met", "not-met", "cancelled"].filter(function (x) { return x !== g.state; }).map(function (x) {
+          return '<button class="w-btn ghost sm" data-w-act="cpprog:' + esc(g.key) + "~" + x + '">' + GOAL_WORDS[x] + "</button>";
+        }).join("");
+        return '<li class="w-mini-row"><div><span class="w-st ' + (g.state === "met" ? "done" : g.state === "not-met" ? "overdue" : g.state === "active" ? "due" : "") + '">' + esc(GOAL_WORDS[g.state] || g.state) + "</span> <b>" + esc(g.title) + "</b>" +
+          '<div class="w-dt-times"><b>How we will know:</b> ' + esc(g.measure) + (g.targetDate ? " &middot; by " + when(g.targetDate) : "") + "</div>" +
+          (g.decidedAt ? '<div class="w-dt-times">' + esc(GOAL_WORDS[g.state] || g.state) + " " + when(g.decidedAt) + (g.decidedBy ? " &middot; by " + esc(g.decidedBy) : "") + "</div>" : "") +
+          (g.outcomeNote ? '<div class="w-dt-times"><b>Note:</b> ' + esc(g.outcomeNote) + "</div>" : "") +
+          '</div><div class="w-mini-row-act">' + acts + "</div></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">This plan has no goals.</p>';
+      var c = p.counts || {};
+      body = '<div class="w-sub"><h4>' + esc(p.title || "Care plan") + "</h4>" +
+        '<p class="w-dt-times">' + esc(c.active || 0) + " in progress &middot; " + esc(c.met || 0) + " met &middot; " + esc(c["not-met"] || 0) + " not met &middot; " + esc(c.cancelled || 0) + " cancelled" +
+        (p.lastReviewedAt ? " &middot; last reviewed " + when(p.lastReviewedAt) + (p.lastReviewedBy ? " by " + esc(p.lastReviewedBy) : "") : " &middot; never reviewed") + "</p>" +
+        review + goals +
+        '<div class="w-filter"><label class="w-f"><span>Next review by</span><input id="wCpNextReview" type="date"></label>' +
+        '<button class="w-btn ghost" data-w-act="cpreview">' + ms("task_alt") + "Record plan reviewed</button></div></div>";
+    }
+    return '<div class="w-card">' + head + body +
+      '<div class="w-sub"><h4>' + (d && d.plan ? "Add goals" : "Write the care plan") + "</h4>" + carePlanForm() + "</div></div>";
   }
 
   /* DUPLICATE RECORDS. mpi-view.js and identity-merge.js were complete and unreachable, so a records
@@ -5311,6 +5434,7 @@
         : state.view === "nursingpatient" ? nursingPatientView(state)
         : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
         : state.view === "infusions" ? infusionView(state)
+        : state.view === "careplan" ? carePlanView(state)
         : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
         : state.view === "breakglass" ? breakGlassView(state)
@@ -5521,10 +5645,45 @@
     st.busy = true; paint();
     apiPost("/ward/ed-triage", { orgId: st.orgId, encounterId: s.encounterId, acuity: Number(acuity) })
       .then(function (r) {
-        if (settle(r, "Triaged.")) { s.acuity = Number(acuity); s.triagedAt = new Date().toISOString(); paint(); }
+        if (settle(r, "Triaged.")) { s.acuity = Number(acuity); s.triagedAt = new Date().toISOString(); paint(); loadEdRecord(); }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not record triage."; paint(); });
+  }
+  function recordRetriage() {
+    var s = st.sel; if (!s) return;
+    var acuity = val("wRetriageAcuity"), reason = val("wRetriageReason");
+    if (!acuity) { st.err = "Choose the acuity now."; paint(); return; }
+    if (!reason) { st.err = "Say why this patient is being triaged again."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/ed-triage", { orgId: st.orgId, encounterId: s.encounterId, acuity: Number(acuity), reason: reason })
+      .then(function (r) {
+        if (settle(r, "Re-triage recorded.")) { s.acuity = Number(acuity); s.triagedAt = new Date().toISOString(); paint(); loadEdRecord(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record the re-triage."; paint(); });
+  }
+  /* The ED half of the chart: triage history, reassessment time, procedures. null while loading,
+   * {failed:true} when it could not be read, so the cards can tell those apart from "none". */
+  function loadEdRecord() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.edRecord = null;
+    return apiGet("/ward/ed-record?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId))
+      .then(function (r) { st.edRecord = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.edRecord = { failed: true }; paint(); });
+  }
+  function edProcedureSave() {
+    var s = st.sel; if (!s) return;
+    var name = val("wProcName"), by = val("wProcBy"), at = val("wProcAt");
+    if (!name) { st.err = "Say which procedure was done."; paint(); return; }
+    if (!by) { st.err = "Say who performed it."; paint(); return; }
+    var atMs = at ? new Date(at).getTime() : NaN;
+    if (isNaN(atMs)) { st.err = "Say when it was done."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/ed-procedure", { orgId: st.orgId, encounterId: s.encounterId, procedure: {
+      name: name, site: val("wProcSite"), performedBy: by, performedAt: new Date(atMs).toISOString(), notes: val("wProcNotes"), complications: val("wProcComp") } })
+      .then(function (r) { if (settle(r, r && r.ok ? "Procedure recorded." : null)) loadEdRecord(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the procedure."; paint(); });
   }
   function loadResus() {
     var s = st.sel; if (!s) return Promise.resolve();
@@ -7255,18 +7414,69 @@
     var s = st.sel; if (!s) return;
     var title = val("wCpTitle"), goalsText = val("wCpGoals"), reviewBy = val("wCpReview");
     if (!title) { st.err = "Say what this plan is for."; paint(); return; }
-    var goals = goalsText.split("\n").map(function (g) { return g.trim(); }).filter(Boolean);
-    if (!goals.length) { st.err = "A care plan needs at least one goal."; paint(); return; }
+    /* Each line is "goal | how you will know it was met". The server refuses a goal with no measure,
+     * and this form used to send bare lines, so every plan saved from it was refused. */
+    var lines = goalsText.split("\n").map(function (g) { return g.trim(); }).filter(Boolean);
+    if (!lines.length) { st.err = "A care plan needs at least one goal."; paint(); return; }
+    var typed = [], bad = "";
+    lines.forEach(function (l) {
+      var i = l.indexOf("|");
+      var t = i < 0 ? "" : l.slice(0, i).trim(), m = i < 0 ? "" : l.slice(i + 1).trim();
+      if (!t || !m) bad = bad || l; else typed.push({ title: t, measure: m });
+    });
+    if (bad) { st.err = "Each goal needs how you will know it was met. Write the goal, then |, then the measure: " + bad; paint(); return; }
     if (!reviewBy) { st.err = "Say when this plan will be reviewed."; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/care-plan", { orgId: st.orgId, encounterId: s.encounterId, title: title, goals: goals, reviewBy: reviewBy })
-      .then(function (r) {
-        if (settle(r, r && r.ok ? "Care plan saved." : null)) {
-          ["wCpTitle", "wCpGoals", "wCpReview"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
-          loadChart();
-        } else paint();
+    /* SAVING REPLACES THE GOAL LIST, so the current plan is read first and its goals are kept. A goal
+     * that is no longer wanted is marked cancelled on the care plan screen, where the reason shows. If
+     * the current plan cannot be read nothing is saved: saving blind could drop goals already on it. */
+    apiGet("/ward/plan?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId))
+      .then(function (cur) {
+        if (!(cur && cur.ok)) { st.busy = false; st.err = "Could not read the current care plan, so nothing was saved."; paint(); return; }
+        var goals = ((cur.plan && cur.plan.goals) || []).map(function (g) { return { title: g.title, measure: g.measure, targetDate: g.targetDate || undefined, note: g.note || undefined }; });
+        var have = {}; goals.forEach(function (g) { have[String(g.title).toLowerCase()] = true; });
+        typed.forEach(function (g) { if (!have[g.title.toLowerCase()]) goals.push(g); });
+        return apiPost("/ward/care-plan", { orgId: st.orgId, encounterId: s.encounterId, title: title, goals: goals, reviewBy: reviewBy })
+          .then(function (r) {
+            if (settle(r, r && r.ok ? "Care plan saved." : null)) {
+              ["wCpTitle", "wCpGoals", "wCpReview"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+              if (st.view === "careplan") loadCarePlan(); else loadChart();
+            } else paint();
+          });
       })
       .catch(function () { st.busy = false; st.err = "Could not save the care plan."; paint(); });
+  }
+  function carePlanOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "careplan"; st.carePlan = null; paint(); loadCarePlan();
+  }
+  function loadCarePlan() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.carePlan = null;
+    return apiGet("/ward/plan?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId))
+      .then(function (r) { st.carePlan = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.carePlan = { failed: true }; paint(); });
+  }
+  function carePlanProgress(arg) {
+    var s = st.sel; if (!s) return;
+    var p = String(arg || "").split("~"), key = p[0], state = p[1], note = "";
+    if (state === "not-met" || state === "cancelled") {
+      try { note = G.prompt(state === "not-met" ? "Why was this goal not met?" : "Why is this goal no longer wanted?") || ""; } catch (e) {}
+      if (state === "not-met" && !note.trim()) return;
+    }
+    st.busy = true; paint();
+    apiPost("/ward/progress", { orgId: st.orgId, encounterId: s.encounterId, key: key, state: state, note: note.trim() || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Progress recorded." : null)) loadCarePlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record progress."; paint(); });
+  }
+  function carePlanReview() {
+    var s = st.sel; if (!s) return;
+    var next = val("wCpNextReview");
+    if (!next) { st.err = "Say when the plan will be reviewed next."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/progress", { orgId: st.orgId, encounterId: s.encounterId, review: true, reviewBy: next })
+      .then(function (r) { if (settle(r, r && r.ok ? "Review recorded." : null)) loadCarePlan(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the review."; paint(); });
   }
 
   function admReqOpen() {
@@ -8635,6 +8845,7 @@
       if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
       if (st.view === "documents") { st.docs = null; st.docVersions = null; st.docNewVersion = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
+      if (st.view === "careplan") { st.carePlan = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
@@ -8700,13 +8911,14 @@
       if (!pe) return;
       st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
+      st.edRecord = null; st.referrals = null;
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
       /* MaiK's panel is cleared when the chart changes. An answer about the previous patient left on
        * screen beside a new patient's observations is the wrong-patient error with extra steps. */
       st.maik = null;
-      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); return;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); loadEdRecord(); loadReferrals(); return;
     }
     if (cmd === "edboard") { loadEd(); return; }
     if (cmd === "inventoryboard") { inventoryOpen(); return; }
@@ -8983,6 +9195,11 @@
     if (cmd === "infusions") { infusionOpen(); return; }
     if (cmd === "infusionchart") { infusionChart(arg); return; }
     if (cmd === "careplansave") { carePlanSave(); return; }
+    if (cmd === "careplan") { carePlanOpen(); return; }
+    if (cmd === "cpprog") { carePlanProgress(arg); return; }
+    if (cmd === "cpreview") { carePlanReview(); return; }
+    if (cmd === "retriage") { recordRetriage(); return; }
+    if (cmd === "edprocsave") { edProcedureSave(); return; }
     if (cmd === "admreqs") { admReqOpen(); return; }
     if (cmd === "admreqask") { admReqAsk(); return; }
     if (cmd === "admreqclose") { admReqClose(arg); return; }

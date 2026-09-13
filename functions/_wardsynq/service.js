@@ -77,6 +77,11 @@ const RESOURCE_TYPES = Object.freeze([
    * nobody to call at the moment somebody has to be called. Append-only like everything else:
    * removing a contact marks it inactive and keeps it. */
   "RelatedPerson",
+  /* A procedure done in the emergency department (migrate-ed.js): what, where on the body, who did
+   * it, when, and what went wrong. Its own type, not a SurgicalCase: that is a theatre booking with a
+   * checklist, and a chest drain in resus has neither. No grant change: EMR_TREAT's unrestricted
+   * write covers recording one and EMR_VIEW's unrestricted read covers seeing it. */
+  "ProcedureRecord",
   /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */
