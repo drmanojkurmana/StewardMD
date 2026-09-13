@@ -59,7 +59,8 @@ function fakeApi(calls) {
 
 test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures the guided view with its tap path, then returns to agent mode', async () => {
   const state = { page: 'worklist', requests: [], guided: false, guideTaps: ['a "Patient profile"', 'h5#sb7 "Radiology"'] };
-  const plugin = fakePlugin(state);
+  // Frozen, exactly like the real createPluginClient(): the engine must never write onto it.
+  const plugin = Object.freeze(fakePlugin(state));
   const calls = {};
   const asks = [];
   const phases = [];

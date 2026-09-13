@@ -245,7 +245,15 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
   if (!view) throw new Error('the approved adapter has no worklist view');
   if (view.block) throw new Error('the worklist view is a report block, not a table');
   let rows = null;
-  try { rows = await replayFirst({ plugin, origin, view, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; rows = null; }
+  /* Every worklist view with a data call is tried (a crawl can record the OPD list and the ward list
+   * both). Rows that are not patients (a doctor list, a dashboard count) are not a ward: next call,
+   * then the page. */
+  const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length);
+  for (const cand of candidates.length ? candidates : [view]) {
+    let got = null;
+    try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+    if (got && mapRows(got).length) { rows = got; break; }
+  }
   if (!rows) {
     rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
     if (onRead) onRead({ resource: 'worklist', via: 'page', url: view.pathTemplate || view.path });
