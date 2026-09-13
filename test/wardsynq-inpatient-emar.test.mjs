@@ -2269,12 +2269,12 @@ test("ORDER -> RESULT -> CRITICAL LOOP, natively, end to end", async () => {
   // It is now on the chart, and the critical loop opens off it - natively, with no GHIS anywhere.
   /* Releasing the result opens the loop itself now - it used to need a separate /ward/flag-critical call
    * that no screen ever made, so a critical potassium alerted nobody. */
-  assert.equal(rel.critical && rel.critical.checked, true, JSON.stringify(rel.critical));
-  assert.equal(rel.critical.opened, 1, "releasing a critical potassium opens exactly one loop");
+  assert.equal(rel.criticalCheck && rel.criticalCheck.checked, true, JSON.stringify(rel.criticalCheck));
+  assert.equal(rel.criticalCheck.opened, 1, "releasing a critical potassium opens exactly one loop");
   // Asking again opens no second loop for the same result.
   const again = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: rel.reportId });
   assert.equal(again.opened, 0, "a second flag must not duplicate the loop: " + JSON.stringify(again));
-  const opened = { loops: rel.critical.loops };
+  const opened = { loops: rel.criticalCheck.loops };
   assert.equal(opened.loops[0].display, "Potassium");
   assert.equal(opened.loops[0].basis, "limit", "flagged by the site's limits, not by the lab");
   assert.equal(opened.loops[0].value, 7.4);
@@ -3638,9 +3638,13 @@ test("TASK 3.2: a CRITICAL imaging finding (text, no number) opens the SAME clos
   assert.equal(stored.critical, true, "the flag is on the record, not just the response");
 
   // The SAME critical-loop mechanism opens for this text finding - no numeric value anywhere.
-  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: done.reportId });
-  assert.equal(opened.__status, 200, JSON.stringify(opened));
+  /* Releasing a critical imaging report opens the loop itself now; the separate flag-critical call is no
+   * longer needed and, made again, opens nothing new. */
+  assert.equal(done.criticalCheck && done.criticalCheck.checked, true, JSON.stringify(done.criticalCheck));
+  const opened = { __status: 200, opened: done.criticalCheck.opened, loops: done.criticalCheck.loops };
   assert.equal(opened.opened, 1, "one loop, for a report-level critical flag with no comparable value");
+  const reflag = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: done.reportId });
+  assert.equal(reflag.opened, 0, "flagging again never duplicates the loop");
   assert.equal(opened.loops[0].value, null);
   assert.equal(opened.loops[0].basis, "lab", "attributed to whoever flagged it, the same as a lab's own critical flag");
   // And the same honest notification discipline applies - no channel wired, no silent 'sent'.

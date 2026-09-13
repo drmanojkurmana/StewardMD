@@ -25,7 +25,8 @@
     "onco-chemo-list": "Superseded by onco-timeline, which the Oncology screen calls and which reads the same record types (link, adverse events, chemotherapy). Verified 2026-09-14; a separate screen would duplicate it.",
     "onco-link-get": "Superseded by onco-timeline, which the Oncology screen calls and which reads the same record types (link, adverse events, chemotherapy). Verified 2026-09-14; a separate screen would duplicate it.",
     "cardio-ecg-list": "Superseded by cardio-timeline, which the Cardiology screen calls and which reads the same record types (link, ECGs). Verified 2026-09-14; a separate screen would duplicate it.",
-    "cardio-link-get": "Superseded by cardio-timeline, which the Cardiology screen calls and which reads the same record types (link, ECGs). Verified 2026-09-14; a separate screen would duplicate it."
+    "cardio-link-get": "Superseded by cardio-timeline, which the Cardiology screen calls and which reads the same record types (link, ECGs). Verified 2026-09-14; a separate screen would duplicate it.",
+    "flag-critical": "Called by the server itself: release-result opens critical loops against the stored report on every release (2026-09-14). This route remains only as an idempotent re-check; a screen button for it would duplicate that automatic step."
   },
   "knownGaps": {
     "advisory-check": "No screen calls this yet.",
@@ -35,7 +36,6 @@
     "disable": "No screen calls this yet.",
     "emergency-chart": "No screen calls this yet.",
     "extend": "No screen calls this yet.",
-    "flag-critical": "No screen calls this yet.",
     "hl7": "No screen calls this yet.",
     "hospital": "No screen calls this yet.",
     "identity": "No screen calls this yet.",

@@ -2064,6 +2064,16 @@ export async function onRequest(context) {
       }
       if (sub === "report-imaging" && method === "POST") {
         const r = await reportImaging(request, env, { ...deps, serviceRequestId: body.serviceRequestId, findings: body.findings, impression: body.impression, status: body.status, modality: body.modality, critical: !!body.critical, reportedAt: body.reportedAt, idempotencyKey: body.idempotencyKey || null });
+        /* A CRITICAL IMAGING FINDING OPENS ITS LOOP ON RELEASE - the same fix as release-result, and the
+         * same bug: a report marked critical set report.critical, which openCriticalLoops reads, but nothing
+         * called openCriticalLoops, so a reported pneumothorax alerted nobody. Only opened when the report is
+         * critical; a check that fails is reported, never swallowed. */
+        if (r && r.ok && r.reportId && body.critical === true) {
+          try {
+            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, limits: (wsqCfg && wsqCfg.criticalLimits) || null, notifyDeps: {}, idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
+            r.criticalCheck = crit && crit.ok ? { checked: true, opened: crit.opened || 0, loops: crit.loops || [] } : { checked: false, error: (crit && crit.error) || "critical_check_failed" };
+          } catch (e) { r.criticalCheck = { checked: false, error: "critical_check_failed" }; }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "infusion" && method === "POST") {
@@ -2244,11 +2254,11 @@ export async function onRequest(context) {
               notifyDeps: {},
               idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null,
             });
-            r.critical = crit && crit.ok
+            r.criticalCheck = crit && crit.ok
               ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
               : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
           } catch (e) {
-            r.critical = { checked: false, error: "critical_check_failed" };
+            r.criticalCheck = { checked: false, error: "critical_check_failed" };
           }
         }
         return json(r, r.ok ? 200 : (r.status || 502), request);
