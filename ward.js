@@ -1785,10 +1785,17 @@
    * on its own when a real delivery is recorded (migrate-maternity.js), never edited here. */
   function pregnancyCard(state) {
     var p = state.maternity && state.maternity.pregnancy;
+    var ms_ = state.maternity && state.maternity.status;
+    /* A failed load is not "no pregnancy recorded". On a maternity ward that difference decides
+     * whether somebody asks about a pregnancy at all. */
+    var pregFailed = state.maternity && state.maternity.pregFailed;
     return '<div class="w-card"><div class="w-card-h">' + ms("pregnant_woman") + "<h3>Pregnancy</h3>" +
       '<button class="w-ic" data-w-act="maternityload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (ms_ && ms_.reason ? '<p class="w-hint' + (ms_.state === "postpartum" ? " warn" : "") + '">' + ms("info") + esc(ms_.reason) + "</p>" : "") +
+      (state.maternity && state.maternity.statusFailed ? '<p class="w-hint warn">' + ms("warning") + "Pregnancy status could not be read.</p>" : "") +
+      (pregFailed ? '<p class="w-hint warn">' + ms("warning") + "The pregnancy record could not be loaded. Do not read this as no pregnancy.</p>" : "") +
       (p ? '<p class="w-hint">' + ms("info") + "Gravida " + esc(p.gravida == null ? "?" : p.gravida) + ", para " + esc(p.para == null ? "?" : p.para) +
-        (p.gestationWeeks != null ? ", " + esc(p.gestationWeeks) + " weeks gestation" : "") + (p.edd ? ", EDD " + esc(p.edd) : "") + "</p>" : '<p class="w-empty">No pregnancy episode recorded.</p>') +
+        (p.gestationWeeks != null ? ", " + esc(p.gestationWeeks) + " weeks gestation" : "") + (p.edd ? ", EDD " + esc(p.edd) : "") + "</p>" : pregFailed ? "" : '<p class="w-empty">No pregnancy episode recorded.</p>') +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Gravida</span><input id="wPregGravida" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.gravida != null ? p.gravida : "") + '"></label>' +
       '<label class="w-f"><span>Para</span><input id="wPregPara" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.para != null ? p.para : "") + '"></label>' +
@@ -5251,7 +5258,10 @@
     var s = st.sel; if (!s) return Promise.resolve();
     st.maternity = st.maternity || {};
     return Promise.all([
-      apiGet("/ward/pregnancy-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.pregnancy = r.pregnancy; }),
+      /* Where the woman is in pregnancy or the puerperium - "day 2 postpartum, haemorrhage risk is
+       * highest now" - read from the obstetric engine rather than worked out on screen. */
+      apiGet("/ward/maternity-status?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.status = r && r.ok ? r.status : null; st.maternity.statusFailed = !(r && r.ok); }, function () { st.maternity.statusFailed = true; }),
+      apiGet("/ward/pregnancy-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.pregFailed = !(r && r.ok); if (r && r.ok) st.maternity.pregnancy = r.pregnancy; }),
       apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.meows = r.meows; }),
       apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.losses = r.losses; }),
       apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.delivery = r.delivery; }),
