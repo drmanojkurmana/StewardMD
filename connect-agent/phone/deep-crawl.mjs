@@ -329,7 +329,8 @@ function CRAWL_ARM_OBSERVER() {
 function CRAWL_RAW_TABLE() {
   var obs = window.__smdCrawlObs || null;
   if (obs && obs.mo) { obs.mo.disconnect(); obs.mo = null; }
-  var tables = document.querySelectorAll('table');
+  var pointed = window.__smdPointed; // the table the doctor tapped inside during an ask wins outright
+  var tables = (pointed && pointed.isConnected && pointed.tagName === 'TABLE') ? [pointed] : document.querySelectorAll('table');
   var DAY = /^(su|mo|tu|we|th|fr|sa|sun|mon|tue|wed|thu|fri|sat)$/i;
   var FORM_HINT = /\b(entry|requisition)\b/i;
   var LABEL_WORD = /name|date|code|route|dos|qty|quant|freq|dur|test|result|unit|type|status|remark|desc|no\b|s\.?no|sl\b|#|time|value|range|method|dept|ward|bed|age|sex|gender|doctor|drug|medic|diagnos|advice|report|title|subject|category|notes?\b|comment/i;
@@ -786,9 +787,26 @@ function CRAWL_ARM_GUIDE() {
     var label = (ctl.textContent || '').replace(/\s+/g, ' ').trim().replace(/\d{3,}/g, '#').slice(0, 60);
     var entry = ctl.tagName.toLowerCase() + id + (cls ? '.' + cls : '') + (label ? ' "' + label + '"' : '');
     if (window.__smdGuidePath.length < 20) window.__smdGuidePath.push(entry);
+    /* POINT AT IT. A tap inside a table marks THAT table as the one to read and outlines it green, so
+     * the doctor sees what the agent will take before tapping Done. A tap elsewhere (a tab, a menu)
+     * keeps the last mark. */
+    var tbl = el.closest ? el.closest('table') : null;
+    if (tbl) {
+      if (window.__smdPointed && window.__smdPointed !== tbl) { try { window.__smdPointed.style.outline = window.__smdPointedOutline || ''; } catch (e) { /* gone */ } }
+      if (window.__smdPointed !== tbl) { window.__smdPointedOutline = tbl.style.outline || ''; }
+      window.__smdPointed = tbl;
+      tbl.style.outline = '3px solid #0E7C66';
+      tbl.style.outlineOffset = '2px';
+    }
   };
   document.addEventListener('click', handler, true);
   window.__smdGuideOff = function () { document.removeEventListener('click', handler, true); };
+  return 'ok';
+}
+
+function CRAWL_CLEAR_POINT() {
+  if (window.__smdPointed) { try { window.__smdPointed.style.outline = window.__smdPointedOutline || ''; } catch (e) { /* gone */ } }
+  window.__smdPointed = null;
   return 'ok';
 }
 
@@ -831,6 +849,7 @@ const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
 const GUIDE_PATH_SRC = String(CRAWL_GUIDE_PATH);
+const CLEAR_POINT_SRC = String(CRAWL_CLEAR_POINT);
 
 async function evalJson(client, expression, fallback) {
   const res = await client.evaluate({ expression });
@@ -927,7 +946,7 @@ export async function enrichView(view, brain, ctx = {}) {
   return verdict;
 }
 
-export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, armGuide: `(${ARM_GUIDE_SRC})()`, guidePath: `(${GUIDE_PATH_SRC})()` });
+export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, armGuide: `(${ARM_GUIDE_SRC})()`, guidePath: `(${GUIDE_PATH_SRC})()`, clearPoint: `(${CLEAR_POINT_SRC})()` });
 
 /**
  * deepCrawlClinical({ client, caps, onProgress, stopSignal }) -> { observedViews, trail, stopReason, found }

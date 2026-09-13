@@ -229,11 +229,92 @@ export function rowsFromHtml(text, view, parse) {
   let doc;
   try { doc = parser(String(text || '')); } catch { return []; }
   const tryView = (v) => { try { return JSON.parse(READ_ROWS(doc, v) || '[]'); } catch { return []; } };
+  /* THE TABLE WITH THE VIEW'S OWN COLUMNS. A data call can answer a whole page of tables (GHIS: the
+   * assessment form has six); reading them all passed an assessment form off as a medication chart.
+   * When the view recorded its column labels, only the table whose header row shares them is read. */
+  const headers = view && Array.isArray(view.headers) ? view.headers : [];
+  if (headers.length >= 2 && doc && typeof doc.querySelectorAll === 'function') {
+    const want = headers.map(normLabel);
+    let best = null, bestScore = 0;
+    for (const t of Array.from(doc.querySelectorAll('table'))) {
+      const labels = Array.from(t.querySelectorAll ? t.querySelectorAll('th') : []).map((th) => normLabel(th.textContent));
+      const score = labels.filter((l) => l && want.includes(l)).length;
+      if (score > bestScore) { best = t; bestScore = score; }
+    }
+    if (best && bestScore >= Math.min(2, want.length)) {
+      const out = tableRows(best);
+      if (out.length) return out;
+    }
+  }
   let rows = view && view.rowsSelector ? tryView(view) : [];
   if (!rows.length && view && view.block && view.rowsSelector) rows = tryView(Object.assign({}, view, { rowsSelector: view.rowsSelector.replace(/^#[\w-]+\s+/, '') }));
   // A bare fragment has no header row: the view's own column labels name the cells by position.
-  if (!rows.length && !(view && view.block)) rows = tryView({ rowsSelector: 'table tbody tr, table tr', headers: (view && Array.isArray(view.headers)) ? view.headers : [] });
+  // Only for a single-table fragment: labelling cells by position across a page of several tables is
+  // how a six-table assessment form once passed for a medication chart.
+  if (!rows.length && !(view && view.block) && (String(text || '').match(/<table/gi) || []).length <= 1) rows = tryView({ rowsSelector: 'table tbody tr, table tr', headers: (view && Array.isArray(view.headers)) ? view.headers : [] });
   return Array.isArray(rows) ? rows : [];
+}
+
+/** Rows worth calling data: at least two real columns (one column per row is a heading list, not results). */
+export function usableRows(rows) {
+  const r = Array.isArray(rows) ? rows[0] : null;
+  return !!r && Object.keys(r).filter((k) => k.charAt(0) !== '_').length >= 2;
+}
+
+export function normLabel(s) { return String(s || '').toLowerCase().replace(/[^a-z]/g, ''); }
+
+/** One table's data rows keyed by its own header labels (row-level link and onclick kept, as READ_ROWS does). */
+function tableRows(table) {
+  const txt = (el) => String((el && el.textContent) || '').replace(/\s+/g, ' ').trim();
+  const labels = Array.from(table.querySelectorAll('th')).map(txt);
+  const out = [];
+  for (const tr of Array.from(table.querySelectorAll('tr'))) {
+    const cells = Array.from(tr.querySelectorAll('td'));
+    if (cells.length < 2 || /no (data|records|matching records)/i.test(txt(tr))) continue;
+    const rec = {};
+    let filled = 0;
+    cells.forEach((c, i) => { const t = txt(c); if (t) { rec[labels[i] || ('col' + i)] = t; filled += 1; } });
+    if (!filled) continue;
+    const a = tr.querySelector ? tr.querySelector('a[href]') : null;
+    const href = a && a.getAttribute ? a.getAttribute('href') || '' : '';
+    if (href && href.charAt(0) !== '#' && !/^javascript:/i.test(href)) rec._href = href;
+    const oc = (tr.getAttribute && tr.getAttribute('onclick')) || ((tr.querySelector && tr.querySelector('[onclick]')) || { getAttribute: () => '' }).getAttribute('onclick') || '';
+    const m = /\(([^)]*)\)/.exec(oc);
+    if (m && m[1].trim()) rec._args = m[1].split(',').map((x) => x.trim().replace(/^['"]|['"]$/g, ''));
+    out.push(rec);
+  }
+  return out;
+}
+
+/* WHICH CALL IS THIS VIEW'S DATA. A tap fires several calls (visit activation, the assessment form, a
+ * session ping, then the medicines list); the first that answers anything is often not the one wanted.
+ * Calls whose name fits the resource come first, then the later-recorded ones (the tap's own call is
+ * usually last); a call is only accepted when its rows carry the view's recorded columns. */
+const RESOURCE_WORDS = Object.freeze({
+  medications: /medic|drug|rx|prescri|pharm|indent|treatment/i,
+  labs: /lab|investig|result|patho|biochem|haemat|hemat/i,
+  radiology: /radio|imag|xray|x-ray|scan|pacs|rad\b/i,
+  notes: /note|assess|clinic|progress|casesheet/i,
+  patient: /demograph|patientdetail|profile|patientinfo/i,
+  history: /visit|history|opcard|encounter|episode/i,
+  discharge: /discharge|summary|\bds\b/i,
+  worklist: /ipwl|worklist|ward|patients|patlist|census/i,
+});
+export function rankCalls(calls, resource) {
+  const re = RESOURCE_WORDS[resource];
+  const paths = [];
+  for (const c of calls) if (!paths.includes(c.path)) paths.push(c.path);
+  // Later-recorded CALLS first, but a call's id variants keep their best-first order.
+  return calls.map((c, i) => ({ c, i, p: paths.indexOf(c.path), fit: re && re.test(c.path) ? 1 : 0 }))
+    .sort((a, b) => (b.fit - a.fit) || (b.p - a.p) || (a.i - b.i))
+    .map((x) => x.c);
+}
+export function headerFit(rows, headers) {
+  const want = (Array.isArray(headers) ? headers : []).map(normLabel).filter(Boolean);
+  if (!want.length || !rows.length) return 0;
+  const have = new Set();
+  for (const r of rows.slice(0, 5)) for (const k of Object.keys(r)) have.add(normLabel(k));
+  return want.filter((w) => have.has(w)).length;
 }
 
 export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 'NotSignedIn'; } }
@@ -245,7 +326,7 @@ export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 
  */
 export async function executeView({ plugin, origin, view, patient, tokens = null, parseHtml = null, onCall = null }) {
   let plan = replayPlan(view, patient);
-  if (!plan.calls.length) return null;
+  if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
   const base = String(origin || '').replace(/\/$/, '');
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));
   const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
@@ -275,17 +356,42 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
       const headers = pre.requestKind === 'json' ? { 'Content-Type': 'application/json' } : {};
       const r = await run({ method: 'POST', url: base + pre.path, body, headers });
       if (r.kind === 'login') throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page to ' + pre.path);
+      /* A POST CAN BE THE DATA. Many EMRs search by form post (GHIS labs: a patient-id search that
+       * answers JSON). When the answer fits the view by name or columns, it is the view's data. */
+      if (r.rows.length && usableRows(r.rows)) {
+        const pFits = !!(RESOURCE_WORDS[view.resourceHint] && RESOURCE_WORDS[view.resourceHint].test(pre.path));
+        const pWant = Array.isArray(view.headers) ? view.headers.filter(Boolean) : [];
+        if (r.kind === 'json' ? (pFits || headerFit(r.rows, pWant) >= 1) : (pWant.length >= 2 ? headerFit(r.rows, pWant) >= 2 : pFits)) {
+          return { rows: r.rows, via: 'endpoint', url: pre.path, kind: r.kind, method: 'POST' };
+        }
+      }
     }
     if (attempt > 0 && !any) break;
-    for (const call of plan.calls) {
+    const want = Array.isArray(view.headers) ? view.headers.filter(Boolean) : [];
+    const needFit = Math.min(2, want.length);
+    let fallback = null;
+    for (const call of rankCalls(plan.calls, view.resourceHint).slice(0, 6)) {
       const r = await run({ method: 'GET', url: base + call.url });
       if (r.kind === 'login') throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page to ' + call.path);
-      if (r.rows.length) return { rows: r.rows, via: 'endpoint', url: call.url, kind: r.kind };
+      if (!r.rows.length) continue;
+      const fits = !!(RESOURCE_WORDS[view.resourceHint] && RESOURCE_WORDS[view.resourceHint].test(call.path));
+      const got = { rows: r.rows, via: 'endpoint', url: call.url, kind: r.kind };
+      // JSON keys rarely equal the screen's column labels (patientFirstName vs "Patient name"): a name
+      // fit or any shared label will do, and a JSON answer can still be the fallback. An HTML answer
+      // must carry the view's own columns when it recorded them; a page of other tables never counts.
+      if (r.kind === 'json') {
+        if (fits || headerFit(r.rows, want) >= 1) return got;
+        if (!fallback) fallback = got;
+        continue;
+      }
+      if (needFit ? headerFit(r.rows, want) >= needFit : fits) return got;
+      if (!fallback && !needFit) fallback = got;
     }
+    if (fallback) return fallback;
     if (!plan.prerequisites.length) break;
   }
   if (loginSeen) throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page');
-  return { rows: [], via: 'endpoint', url: plan.calls[0].url, kind: 'empty' };
+  return { rows: [], via: 'endpoint', url: plan.calls.length ? plan.calls[0].url : plan.prerequisites[0].path, kind: 'empty' };
 }
 
 function hostOf(u) { try { return new URL(u).host; } catch { return String(u || ''); } }
