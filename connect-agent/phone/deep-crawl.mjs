@@ -296,6 +296,8 @@ function CRAWL_ARM_OBSERVER() {
   var prev = window.__smdCrawlObs;
   if (prev && prev.mo) prev.mo.disconnect();
   var state = { changed: [], tables: [], mo: null };
+  // The proof loop (prove.mjs) takes only the requests fired after this mark as the action's candidates.
+  window.__smdProveMark = window.__SMD_REPLAY__ ? window.__SMD_REPLAY__.seq : 0;
   var all = document.querySelectorAll('table');
   for (var i = 0; i < all.length; i++) {
     state.tables.push({ el: all[i], visible: all[i].getClientRects && all[i].getClientRects().length > 0 });
@@ -955,7 +957,7 @@ export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, arm
  * again (index.mjs / UI surface it). onProgress({ opening, found, looking, clicks }) fires before each
  * click; stopSignal() true ends the walk (wired to the plugin's native Stop).
  */
-export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null } = {}) {
+export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null, book = null } = {}) {
   if (!client) throw new Error('deepCrawlClinical requires a client');
 
   const maxViews = Math.min(Math.max(caps.maxViews ?? CAPS_DEFAULT.maxViews, 1), CAPS_DEFAULT.maxViews);
@@ -1031,6 +1033,10 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     await client.wait({ ms: waitMs });
   }
   if (!row) return { observedViews, trail, stopReason: stopped() ? 'stop-signal' : 'no-patient-row', found: [...found] };
+  /* PROVE THE WARD LIST while its rows are on screen: every request since the page loaded is a
+   * candidate (a DataTables list fills itself on load, before any click). */
+  const wl = observedViews.find((v) => v.resourceHint === 'worklist' && v.rowsSelector);
+  if (book && wl) await book.prove({ client, view: wl, label: 'open the patient list', since: 0 });
   if (typeof client.drainRequests === 'function') await client.drainRequests().catch(() => null); // fresh per-click log
   await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
   await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
@@ -1038,7 +1044,9 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   trail.push('patient-record');
   // The patient hub itself often shows demographics as a label/value block: capture it as 'patient'.
   // Block only: the worklist table just hidden by the click would otherwise pass for it.
-  record(await captureView({ client, resourceHint: 'patient', blockOnly: true }));
+  const hub = await captureView({ client, resourceHint: 'patient', blockOnly: true });
+  if (book && hub) await book.prove({ client, view: hub, label: 'open one patient from the list' });
+  record(hub);
 
   // 2/3. Walk EVERY control under the record, clinical keywords first, dedup by redacted label, until a
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block
@@ -1082,6 +1090,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       if (byHeaders !== 'unknown') view.resourceHint = byHeaders;
     }
     if (view) await enrichView(view, brain, { label: next.label });
+    if (book && view && view.rowsSelector) await book.prove({ client, view, label: 'tap ' + next.label });
     record(view);
 
     /* ONE LEVEL DEEPER. A list of lab orders or radiology studies is not the result: the hospital
@@ -1099,7 +1108,12 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
         trail.push(view.resourceHint + ' row');
         let detail = null;
         try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
-        if (detail && detail.rowsSelector) { detail.detailOf = view.resourceHint; observedViews.push(detail); }
+        if (detail && detail.rowsSelector) {
+          detail.detailOf = view.resourceHint;
+          // LEARN / CHAIN: the detail call's fields are traced to the list row it was opened from.
+          if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+          observedViews.push(detail);
+        }
         if (pathOf(await currentUrl()) !== beforePath) {
           await client.evaluate({ expression: 'history.back()' }).catch(() => {});
           await client.wait({ ms: waitMs });

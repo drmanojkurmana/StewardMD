@@ -37,7 +37,8 @@ export function localVerdict(resource, rows, kind) {
  * checks: [{ resource, ok, via, rows, kind, reason, url }] one per verifiable view; `failed` lists the
  * resources the doctor should be asked for. Each verified view gets `view.verified` (PHI-free).
  */
-export async function verifyViews({ plugin, origin, views, brain = null, notify = null, stopped = () => false, maxPatients = 2, waitMs = 6000, parseHtml = null }) {
+export async function verifyViews({ plugin, origin, views, brain = null, book = null, notify = null, stopped = () => false, maxPatients = 2, waitMs = 6000, parseHtml = null }) {
+  const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   const say = (extra) => { try { if (notify) notify('VERIFYING', extra); } catch { /* UI must never break the check */ } };
   const checks = [];
   const failed = [];
@@ -49,7 +50,7 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
   let wlVia = 'none';
   if (worklistView) {
     say({ checking: 'worklist' });
-    await learnPageLoadCalls({ plugin, origin, view: worklistView, waitMs: Math.max(waitMs, 20000), tapList: true });
+    if (!book || !proven(worklistView)) await learnPageLoadCalls({ plugin, origin, view: worklistView, waitMs: Math.max(waitMs, 20000), tapList: true, book });
     try {
       patients = await readWorklist({ plugin, origin, replay: list, settleMs: Math.min(1200, waitMs), maxWaitMs: waitMs, onRead: (r) => { wlVia = r.via; } });
     } catch (e) {
@@ -67,23 +68,35 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
 
   // 2. Every other view with a discovered call, for up to two real patients.
   const sample = patients.slice(0, maxPatients);
+  const listRows = {};
   for (const view of list) {
     if (stopped()) break;
     if (!view || view === worklistView || !VERIFY_RESOURCES.includes(view.resourceHint)) continue;
-    if (!Array.isArray(view.endpoints) || !view.endpoints.length) { view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no data call was discovered for this view; it will be read from its page' }; continue; }
     if (!sample.length) { view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no patient to check with' }; failed.push(view.resourceHint); continue; }
+    /* NOT PROVEN DURING THE CRAWL: open the view's own page for a real patient and run the proof there
+     * (the page's own load calls against the rows it shows). Still nothing: no endpoint is kept. */
+    if (book && !proven(view) && !view.detailOf) {
+      say({ checking: view.resourceHint, learning: true });
+      await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000), book });
+    }
+    if (book && !proven(view)) {
+      const status = (view.proof && view.proof.status) || 'none';
+      view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no endpoint was proven for this view (' + status + '); it will be read from its page' };
+      checks.push(Object.assign({ resource: view.resourceHint }, view.verified)); failed.push(view.resourceHint); continue;
+    }
+    if (!Array.isArray(view.endpoints) || !view.endpoints.length) { view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no data call was discovered for this view; it will be read from its page' }; continue; }
     say({ checking: view.resourceHint });
     let best = null;
     let lastError = '';
     for (const patient of sample) {
       let out = null;
       try { out = await executeView({ plugin, origin, view, patient, parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; out = null; lastError = String((e && e.message) || e).replace(/\d{3,}/g, '#').slice(0, 120); }
-      if (out && out.rows.length) { best = out; break; }
+      if (out && out.rows.length) { best = out; listRows[view.resourceHint] = { rows: out.rows, patient }; break; }
       if (out && !best) best = out;
     }
     /* Nothing usable (no rows, or one column per row): open the view's own page for this patient, keep
      * the calls it makes on load (a lab page's search post), and replay once more. */
-    if (!best || !usableRows(best.rows)) {
+    if (!book && (!best || !usableRows(best.rows))) {
       say({ checking: view.resourceHint, learning: true });
       await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000) });
       let again = null;
@@ -96,13 +109,28 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
     checks.push(c); view.verified = c;
     if (!verdict.ok) failed.push(view.resourceHint);
   }
+
+  // 3. The chains: a proven detail view (one lab result, one report) for a row of its proven list.
+  for (const view of list) {
+    if (stopped()) break;
+    if (!view || !view.detailOf || !proven(view)) continue;
+    const parent = listRows[view.detailOf];
+    if (!parent || !parent.rows.length) { view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'the ' + view.detailOf + ' list returned no row to open' }; checks.push(Object.assign({ resource: view.resourceHint }, view.verified)); continue; }
+    say({ checking: view.resourceHint });
+    let out = null;
+    let err = '';
+    try { out = await executeView({ plugin, origin, view, patient: parent.patient, parentRow: parent.rows[0], parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; err = String((e && e.message) || e).replace(/\d{3,}/g, '#').slice(0, 120); }
+    const rows = out ? out.rows : [];
+    const c = { resource: view.resourceHint, ok: rows.length > 0, via: out ? 'endpoint' : 'none', rows: rows.length, kind: out ? out.kind : 'none', reason: rows.length ? rows.length + ' rows for one ' + view.detailOf + ' row through the chained call' : (err ? 'replay failed: ' + err : 'the chained call answered no rows'), url: out ? out.url : null };
+    checks.push(c); view.verified = c;
+  }
   return { patients, checks, failed: [...new Set(failed)] };
 }
 
 /* THE CALL A LIST MAKES ON ITS OWN. A ward list fills itself by AJAX as the page loads (GHIS: GetIPWL),
  * before the crawl ever clicks, so it is easy to miss. Load the list page once, wait for its rows,
  * and keep every same-origin data call it made (field names and mode constants only) on the view. */
-export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000, patient = null, tapList = false }) {
+export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000, patient = null, tapList = false, book = null }) {
   if (!view || !view.pathTemplate) return;
   try {
     if (typeof plugin.drainRequests === 'function') await plugin.drainRequests().catch(() => null);
@@ -115,6 +143,8 @@ export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000,
     if (tapList) {
       try { await plugin.evaluate({ expression: TAP_LIST_TAB }); await new Promise((r) => setTimeout(r, Math.min(4000, waitMs))); } catch { /* no tab */ }
     }
+    // With proof, the page's calls are candidates only: one is kept when its answer matches the rows shown.
+    if (book) { await book.prove({ client: plugin, view, label: 'open the ' + view.resourceHint + ' page', since: 0 }); return; }
     const pageUrl = ((await plugin.currentUrl().catch(() => ({}))) || {}).url || view.pathTemplate;
     const drained = typeof plugin.drainRequests === 'function' ? await plugin.drainRequests().catch(() => null) : null;
     let eps = redactEndpoints(drained && drained.requests, pageUrl);

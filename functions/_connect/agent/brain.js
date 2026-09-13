@@ -1,9 +1,12 @@
 /* functions/_connect/agent/brain.js - the model that helps the Connect Agent read a hospital's SCREENS.
  *
- * Three questions, all about STRUCTURE and never about a patient:
+ * Five questions, all about STRUCTURE and never about a patient:
  *   classify     "which resource is this screen" (labels, headers, path, redacted snapshot)
  *   map-columns  "which canonical role does each column header play"
  *   next         "which of these controls leads to the resource still missing"
+ *   verify       "do these replayed columns look like the resource they claim to be"
+ *   pick-endpoint "which of the requests this action fired returns what the screen shows" (the phone then
+ *                proves the answer against the on-screen values before anything is saved)
  *
  * THE PHI GATE IS THE CONTRACT. Nothing reaches the model unless every string in the request passes
  * phiGate(): only whitelisted keys, capped lengths, no run of 3+ digits (an MRN, a phone, a date), no
@@ -15,7 +18,7 @@
  *
  * The model is reached through the MaiK gateway's Google adapter (functions/_wardsynq/maik-gateway.js)
  * so its key handling, timeouts and error scrubbing apply. The model id comes from CONNECT_AGENT_MODEL
- * (default: the registry's newest Gemini Pro), the surface from CONNECT_AGENT_MODEL_PROVIDER
+ * (required, no default), the surface from CONNECT_AGENT_MODEL_PROVIDER
  * ("vertex" default, "gemini" for AI Studio). A dated id is never hard-coded here.
  */
 import { PROVIDERS, MODELS } from "../../_wardsynq/maik-gateway.js";
@@ -29,7 +32,11 @@ export const ROLES = Object.freeze([
   "result", "unit", "reference", "patientId", "visitId", "name", "department", "age", "sex", "bed",
   "visitType", "date", "title", "report",
 ]);
-export const OPS = Object.freeze(["classify", "map-columns", "next", "verify"]);
+export const OPS = Object.freeze(["classify", "map-columns", "next", "verify", "pick-endpoint"]);
+/* What a request does for the screen it fired on (pick-endpoint). Only "data" can become a saved endpoint,
+ * and only after the phone has proven its answer carries what the screen shows. */
+export const ENDPOINT_ROLES = Object.freeze(["data", "prerequisite", "lookup", "ping", "shell"]);
+const RESPONSE_KINDS = Object.freeze(["json", "html", "text", "empty", "unknown"]);
 export const SUGGESTIONS = Object.freeze(["ok", "other-endpoint", "ask-doctor"]);
 
 const LIMITS = Object.freeze({ str: 120, list: 60, snapshot: 8000, path: 300 });
@@ -40,6 +47,7 @@ const ALLOWED_KEYS = Object.freeze({
   "map-columns": ["op", "origin", "resource", "headers"],
   "next": ["op", "origin", "controls", "looking", "path"],
   "verify": ["op", "origin", "resource", "headers", "rowCount", "kind", "path"],
+  "pick-endpoint": ["op", "origin", "resource", "action", "headers", "candidates"],
 });
 
 function str(v) { return typeof v === "string" ? v : ""; }
@@ -119,6 +127,30 @@ export function phiGate(payload) {
     if (["json", "html", "page", "endpoint", "empty", "none"].indexOf(payload.kind) < 0) return { ok: false, reason: "kind must name a response kind" };
     clean.kind = payload.kind;
   }
+  if (payload.action !== undefined) {
+    const why = badString(payload.action, LIMITS.str);
+    if (why) return { ok: false, reason: "action " + why };
+    clean.action = payload.action.replace(/\s+/g, " ").trim();
+  }
+  if (payload.candidates !== undefined) {
+    if (!Array.isArray(payload.candidates) || !payload.candidates.length || payload.candidates.length > 12) return { ok: false, reason: "candidates must be 1 to 12 requests" };
+    clean.candidates = [];
+    for (const c of payload.candidates) {
+      if (!c || typeof c !== "object" || Array.isArray(c)) return { ok: false, reason: "candidate must be an object" };
+      for (const k of Object.keys(c)) if (["method", "path", "queryKeys", "bodyKeys", "kind", "keys", "rows", "page", "xhr"].indexOf(k) < 0) return { ok: false, reason: "candidate key \"" + k + "\" is not accepted" };
+      if (c.method !== "GET" && c.method !== "POST") return { ok: false, reason: "candidate method must be GET or POST" };
+      const why = badString(c.path, LIMITS.path);
+      if (why) return { ok: false, reason: "candidate path " + why };
+      const out = { method: c.method, path: c.path, kind: RESPONSE_KINDS.indexOf(c.kind) >= 0 ? c.kind : "unknown", rows: Number.isInteger(c.rows) && c.rows >= 0 ? Math.min(c.rows, 100000) : 0, page: c.page === true, xhr: c.xhr === true };
+      for (const k of ["queryKeys", "bodyKeys", "keys"]) {
+        if (c[k] === undefined) { out[k] = []; continue; }
+        const r = cleanList(c[k], "candidate " + k, LIMITS.str);
+        if (r.error) return { ok: false, reason: r.error };
+        out[k] = r.list;
+      }
+      clean.candidates.push(out);
+    }
+  }
   if (payload.snapshot !== undefined) {
     const why = badString(payload.snapshot, LIMITS.snapshot);
     if (why) return { ok: false, reason: "snapshot " + why };
@@ -128,6 +160,7 @@ export function phiGate(payload) {
   if (op === "map-columns" && (!clean.resource || !(clean.headers || []).length)) return { ok: false, reason: "map-columns needs resource and headers" };
   if (op === "next" && (!(clean.controls || []).length || !(clean.looking || []).length)) return { ok: false, reason: "next needs controls and looking" };
   if (op === "verify" && (!clean.resource || clean.rowCount === undefined)) return { ok: false, reason: "verify needs resource and rowCount" };
+  if (op === "pick-endpoint" && !(clean.candidates || []).length) return { ok: false, reason: "pick-endpoint needs candidates" };
   return { ok: true, clean };
 }
 
@@ -164,6 +197,15 @@ function promptFor(clean) {
       + "\n\nRoles: " + ROLES.join(", ") + ".\n"
       + "Map each header to the ONE role it plays, or leave it out if none fits. patientId = MRN/UHID/hospital number, visitId = visit/episode/admission number, name = the patient's name (never the doctor's), sex = gender, age = age or DOB, bed = bed/room, department = ward/dept/unit, drugName = medicine, prodCode = drug code, testName = investigation name, result = the result value, reference = normal range, date = any date column, title = report/study title, report = report body or summary.\n"
       + "Answer: {\"fields\": {<header>: <role>, ...}}";
+  }
+  if (clean.op === "pick-endpoint") {
+    return "A read-only agent did this on a hospital EMR: " + JSON.stringify(clean.action || clean.resource || "opened a screen") + ". The screen now shows "
+      + (clean.resource ? "the patient's " + clean.resource : "a table or report") + " with these column or field labels:\n" + JSON.stringify(clean.headers || [])
+      + "\n\nRight after that action the page made these requests (index is the position in this list; keys = response JSON keys or HTML table columns; rows = rows in the response; page = the response is a whole HTML page):\n"
+      + JSON.stringify(clean.candidates.map((c, i) => Object.assign({ index: i }, c)))
+      + "\n\nReason about which request returns the data the screen shows. Roles: data = returns those rows or that report; prerequisite = selects the patient, visit or context the data call needs and returns no rows of its own; lookup = a reference list (departments, doctors, dropdown values, a menu); ping = session check, counter, audit or logging; shell = the whole page layout. "
+      + "Rank EVERY request, most likely data first. The agent will replay them in your order and compare each answer with the values on screen, so put a request whose keys or columns match the labels above ahead of one that merely has a matching name.\n"
+      + "Answer: {\"ranked\": [{\"index\": <n>, \"role\": <data|prerequisite|lookup|ping|shell>, \"reason\": <short>}, ...]}";
   }
   if (clean.op === "verify") {
     return "A read-only agent replayed the call it discovered for the resource \"" + clean.resource + "\"" + (clean.path ? " (" + clean.path + ")" : "") + " for one real patient and got "
@@ -202,6 +244,16 @@ export function shapeAnswer(clean, raw) {
       if (ROLES.indexOf(role) >= 0 && !Object.values(fields).includes(role)) fields[h] = role;
     }
     return { fields };
+  }
+  if (clean.op === "pick-endpoint") {
+    const seen = new Set();
+    const ranked = [];
+    for (const r of Array.isArray(a.ranked) ? a.ranked : []) {
+      if (!r || !Number.isInteger(r.index) || r.index < 0 || r.index >= clean.candidates.length || seen.has(r.index) || ENDPOINT_ROLES.indexOf(r.role) < 0) continue;
+      seen.add(r.index);
+      ranked.push({ index: r.index, role: r.role, reason: str(r.reason).slice(0, 120) });
+    }
+    return { ranked, reason };
   }
   if (clean.op === "verify") {
     const c = Number(a.confidence);

@@ -156,4 +156,4 @@ Build, per captured screen (crawl step or guided Done):
 6. GOLD AUDIT (verification only, phone): for the same patients, call the hand-built /api/ghis
    endpoints and the adapter, compare endpoint-by-endpoint and field-by-field; report per view.
 
-STATUS: not started (same-host replay fix committed 7b48611e).
+STATUS: built 2026-09-13 (prove.mjs, brain op pick-endpoint, executeProven, gold-audit.mjs); unit + headless-browser tests pass; live GHIS run on the Pixel pending.
