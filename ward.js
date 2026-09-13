@@ -1366,6 +1366,7 @@
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="documents" title="Consent forms, referral letters, outside reports">' + ms("description") + "Documents</button>" +
+        '<button class="w-btn ghost" data-w-act="forms" title="Triage, nursing assessments, checklists this hospital uses">' + ms("assignment") + "Forms</button>" +
         '<button class="w-btn ghost" data-w-act="referrals" title="Refer this patient to another specialty or facility, and follow the reply">' + ms("send") + "Referrals</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
@@ -4604,6 +4605,46 @@
           : '<p class="w-empty">' + (inbox ? "No open referrals here." : "No referrals for this patient.") + "</p>");
     return '<div class="w-card">' + head + filter + form + body + "</div>";
   }
+  /* HOSPITAL FORMS (wardsynq-forms.js). The screen draws the published form and hides fields whose condition
+   * is not met, as a courtesy; the server re-checks everything, computes calculated fields itself and refuses
+   * an invalid response with every field error. Not loaded, failed and none are different sentences. */
+  function formVisible(cond, a) {
+    if (!cond) return true;
+    if (cond.all) return cond.all.every(function (c) { return formVisible(c, a); });
+    if (cond.any) return cond.any.some(function (c) { return formVisible(c, a); });
+    var v = a[cond.field], filled = !(v == null || v === "" || (v && v.length === 0));
+    return cond.op === "filled" ? filled : cond.op === "empty" ? !filled : cond.op === "eq" ? v === cond.value : cond.op === "ne" ? v !== cond.value
+      : cond.op === "in" ? (cond.value || []).indexOf(v) >= 0 : cond.op === "gt" ? +v > +cond.value : cond.op === "gte" ? +v >= +cond.value : cond.op === "lt" ? +v < +cond.value : cond.op === "lte" ? +v <= +cond.value : false;
+  }
+  function formFieldHtml(f, a, err) {
+    var id = "wFf_" + f.key, v = a[f.key];
+    var input = f.type === "textarea" ? '<textarea id="' + id + '" data-w-formfield="' + esc(f.key) + '" rows="3">' + esc(v || "") + "</textarea>"
+      : f.type === "boolean" ? '<select id="' + id + '" data-w-formfield="' + esc(f.key) + '"><option value="">-</option><option value="true"' + (v === true ? " selected" : "") + '>Yes</option><option value="false"' + (v === false ? " selected" : "") + ">No</option></select>"
+      : f.type === "single_choice" ? '<select id="' + id + '" data-w-formfield="' + esc(f.key) + '"><option value="">-</option>' + f.options.map(function (o) { return '<option value="' + esc(o.value) + '"' + (v === o.value ? " selected" : "") + ">" + esc(o.label || o.value) + "</option>"; }).join("") + "</select>"
+      : f.type === "multi_choice" ? f.options.map(function (o) { return '<label><input type="checkbox" data-w-formmulti="' + esc(f.key) + '" value="' + esc(o.value) + '"' + ((v || []).indexOf(o.value) >= 0 ? " checked" : "") + "> " + esc(o.label || o.value) + "</label>"; }).join(" ")
+      : f.type === "calculated" ? "<i>Worked out when saved</i>"
+      : '<input id="' + id + '" data-w-formfield="' + esc(f.key) + '" type="' + (f.type === "number" || f.type === "integer" ? "number" : f.type === "date" ? "date" : f.type === "datetime" ? "datetime-local" : "text") + '" value="' + esc(v == null ? "" : v) + '">';
+    return '<label class="w-f"><span>' + esc(f.label) + (f.required ? " *" : "") + "</span>" + input + (err ? '<em class="w-hint warn">' + esc(err) + "</em>" : "") + "</label>";
+  }
+  function formsView(state) {
+    var d = state.formDefs, r = state.formResponses, sel = state.formSel, a = state.formAnswers || {}, errs = (state.formResult && state.formResult.errors) || {};
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Forms</h3></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading this hospital's forms...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load the hospital's forms.</p></div>";
+    var picker = d.published.length ? '<div class="w-sub"><h4>Fill in a form</h4>' + d.published.map(function (f) { return '<button class="w-btn ghost sm" data-w-act="formpick:' + esc(f.key) + '">' + esc(f.title) + " (v" + esc(f.version) + ")</button>"; }).join(" ") + "</div>"
+      : '<p class="w-empty">This hospital has not published any forms yet.</p>';
+    var form = "";
+    if (sel) {
+      form = '<div class="w-sub"><h4>' + esc(sel.title) + " (version " + esc(sel.version) + ")</h4>" + (sel.sections || []).map(function (s) {
+        return "<h5>" + esc(s.title) + "</h5>" + (s.fields || []).filter(function (f) { return formVisible(f.showWhen, a); }).map(function (f) { return formFieldHtml(f, a, errs[f.key]); }).join("");
+      }).join("") + '<button class="w-btn" data-w-act="formsubmit">' + ms("save") + "Save form</button></div>";
+    }
+    var past = r == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading completed forms...</p>"
+      : r.failed ? '<p class="w-hint warn">' + ms("error") + "Could not load completed forms. Do not read this as none.</p>"
+      : r.responses.length ? '<ul class="w-mini">' + r.responses.map(function (x) { return '<li class="w-mini-row"><div><b>' + esc(x.formTitle) + "</b> v" + esc(x.formVersion) + ' <span class="w-dt-times">' + esc(x.completedBy) + " &middot; " + when(x.completedAt) + "</span><div class=\"w-dt-times\">" + esc(Object.keys(x.answers).map(function (k) { return k + ": " + JSON.stringify(x.answers[k]); }).join("; ")) + "</div></div></li>"; }).join("") + "</ul>"
+      : '<p class="w-empty">No completed forms for this patient.</p>';
+    return '<div class="w-card">' + head + picker + form + "<h4>Completed</h4>" + past + "</div>";
+  }
   function mpiView(state) {
     var d = state.mpi;
     var s = state.sel;
@@ -4999,6 +5040,7 @@
         : state.view === "tags" ? tagsView(state)
         : state.view === "mpi" ? mpiView(state)
         : state.view === "documents" ? documentsView(state)
+        : state.view === "forms" ? formsView(state)
         : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
@@ -7310,6 +7352,23 @@
     loadChart(); loadNews2(); loadPeople();
   }
 
+  /* Reads what is typed into the drawn form back into st.formAnswers, typed by field: numbers as numbers,
+   * yes/no as booleans. Values of fields that are no longer shown are left out. */
+  function readFormAnswers() {
+    var f = st.formSel; if (!f) return;
+    var a = {};
+    (f.sections || []).forEach(function (s) { (s.fields || []).forEach(function (fd) {
+      if (fd.type === "calculated") return;
+      if (fd.type === "multi_choice") {
+        var boxes = document.querySelectorAll('[data-w-formmulti="' + fd.key + '"]'), picked = [];
+        for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) picked.push(boxes[i].value);
+        if (picked.length) a[fd.key] = picked; return;
+      }
+      var v = val("wFf_" + fd.key); if (v === "") return;
+      a[fd.key] = fd.type === "number" || fd.type === "integer" ? Number(v) : fd.type === "boolean" ? v === "true" : v;
+    }); });
+    st.formAnswers = a;
+  }
   function loadReferrals() {
     var path = st.view === "referralinbox"
       ? "/ward/referral-inbox?orgId=" + encodeURIComponent(st.orgId) + "&specialty=" + encodeURIComponent(st.refSpecialty || "") + "&view=" + encodeURIComponent(st.refView || "")
@@ -8239,6 +8298,7 @@
       if (st.view === "patientsurgery") { st.patientCases = null; st.view = "chart"; paint(); return; }
       if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "forms") { st.formDefs = null; st.formSel = null; st.formAnswers = null; st.formResult = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referrals") { st.referrals = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
       if (st.view === "documents") { st.docs = null; st.docVersions = null; st.docNewVersion = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
@@ -8517,6 +8577,22 @@
     if (cmd === "taglost") { tagEnd("lost", arg); return; }
     if (cmd === "tagend") { tagEnd("end", arg); return; }
     if (cmd === "mpi") { mpiOpen(); return; }
+    if (cmd === "forms") {
+      if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+      st.view = "forms"; st.formDefs = null; st.formResponses = null; st.formSel = null; st.formAnswers = {}; st.formResult = null; paint();
+      apiGet("/forms/definitions?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { st.formDefs = r && r.ok ? r : { failed: true }; paint(); }).catch(function () { st.formDefs = { failed: true }; paint(); });
+      apiGet("/ward/form-responses?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId)).then(function (r) { st.formResponses = r && r.ok ? r : { failed: true }; paint(); }).catch(function () { st.formResponses = { failed: true }; paint(); });
+      return;
+    }
+    if (cmd === "formpick") { st.formSel = ((st.formDefs && st.formDefs.published) || []).filter(function (f) { return f.key === arg; })[0] || null; st.formAnswers = {}; st.formResult = null; paint(); return; }
+    if (cmd === "formsubmit") {
+      readFormAnswers();
+      st.busy = true; paint();
+      apiPost("/ward/form-submit", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId || undefined, formKey: st.formSel.key, formVersion: st.formSel.version, answers: st.formAnswers })
+        .then(function (r) { st.formResult = r; if (settle(r, r && r.ok ? "Form saved." : null)) { st.formSel = null; st.formAnswers = {}; dispatch("forms"); } else paint(); })
+        .catch(function () { st.busy = false; st.err = "Could not save the form."; paint(); });
+      return;
+    }
     if (cmd === "referrals") { if (!st.sel) { st.err = "Open a patient first."; paint(); return; } st.view = "referrals"; st.referrals = null; paint(); loadReferrals(); return; }
     if (cmd === "referralinbox") { st.view = "referralinbox"; st.referrals = null; paint(); loadReferrals(); return; }
     if (cmd === "refinboxload") { st.refSpecialty = val("wRefSpec"); st.refView = val("wRefView"); st.referrals = null; paint(); loadReferrals(); return; }

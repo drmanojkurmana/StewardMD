@@ -26,6 +26,8 @@ import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
 import * as ROSTER from "../../_roster_store.js";
 import * as ACCOUNTS from "../../_accounts_store.js";
+import * as FORMS from "../../_forms_store.js";
+import { submitFormResponse, patientFormResponses } from "../../_wardsynq/form-response.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
@@ -781,6 +783,8 @@ export async function onRequest(context) {
         documents: CAPS.EMR_VIEW, "document-versions": CAPS.EMR_VIEW, "document-link": CAPS.EMR_VIEW,
         // Referrals (referral.js): making and answering one is a prescriber's act; reading them is chart access.
         referrals: CAPS.EMR_VIEW, "referral-inbox": CAPS.EMR_VIEW, "referral-create": CAPS.EMR_TREAT, "referral-act": CAPS.EMR_TREAT,
+        // Completed hospital forms: nurses document them too (FormResponse is in the nurse write scope).
+        "form-responses": CAPS.EMR_VIEW, "form-submit": CAPS.EMR_VITALS,
         "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
         "tag-assign": CAPS.EMR_VITALS, "tag-verify": CAPS.EMR_VITALS, "tag-replace": CAPS.EMR_VITALS,
         "tag-deactivate": CAPS.EMR_VITALS, "tag-lost": CAPS.EMR_VITALS, "tag-log": CAPS.EMR_VITALS,
@@ -1374,6 +1378,15 @@ export async function onRequest(context) {
       }
       if (sub === "device-list" && method === "GET") {
         const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "form-responses" && method === "GET") {
+        const r = await patientFormResponses(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "form-submit" && method === "POST") {
+        const definition = await FORMS.publishedVersion(env, wOrgId, body.formKey, body.formVersion);
+        const r = await submitFormResponse(request, env, { ...deps, definition, patientId: body.patientId, encounterId: body.encounterId, answers: body.answers, department: body.department, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "referrals" && method === "GET") {
@@ -2899,6 +2912,19 @@ export async function onRequest(context) {
      * session, never the body); defining shifts, assigning, removing and approving are the admin's. */
     /* THE HOSPITAL'S BOOKS (wardsynq-accounting.js rules, _accounts_store.js storage). Reading the books is
      * billing.view; posting, reversing, changing the chart and closing a period are the admin's. */
+    /* FORM DEFINITIONS (hospital configuration). Saving drafts and publishing are the admin's; anyone in the
+     * hospital may list them, because the ward screen needs the published forms to offer. */
+    if (seg === "forms") {
+      const fb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || fb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, method === "POST" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const out = (r) => json(r, r.ok ? 200 : 422, request);
+      if (method === "GET" && sub === "definitions") return out(await FORMS.listDefinitions(env, orgId));
+      if (method === "POST" && sub === "draft") return out(await FORMS.saveDraft(env, orgId, fb.definition, actor.id));
+      if (method === "POST" && sub === "publish") return out(await FORMS.publishForm(env, orgId, fb.key, actor.id));
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
     if (seg === "accounts") {
       const ab = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || ab.orgId || "";

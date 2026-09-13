@@ -46,7 +46,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff, advisories: renderAdvisories };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms };
     return renderers[tab](c, body);
   } });
 
@@ -153,6 +153,48 @@
    * a badly written one either never fires or fires on everybody - both are found out on a ward. This
    * compiles the draft on the server and reports what it WOULD have done, and changes nothing: publishing
    * is the separate, existing hospital-settings step. A draft that does not compile says why. */
+  /* FORMS: write a form as JSON, save it as a draft (kept even with problems, every problem listed), publish
+   * when it has none. A published version never changes; publishing again makes the next version. */
+  function renderForms(c, body) {
+    body.innerHTML = '<span class="spin"></span>';
+    return c.api("/forms/definitions?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">Could not load the forms. ' + c.esc(refusal(r)) + "</div>"; return; }
+      var list = function (title, rows, draft) {
+        return "<h3>" + title + "</h3>" + (rows.length ? "<ul>" + rows.map(function (x) {
+          var d = draft ? x.def : x;
+          return "<li><b>" + c.esc(d.title || d.key) + "</b> (" + c.esc(d.key) + (draft ? ", draft" : ", version " + c.esc(d.version)) + ")" +
+            (draft ? (x.problems.length ? '<div class="msg err">' + x.problems.map(c.esc).join("<br>") + "</div>" : ' <button class="btn" type="button" data-form-pub="' + c.esc(d.key) + '">Publish</button>') : "") +
+            ' <button class="btn quiet" type="button" data-form-edit="' + c.esc(d.key) + '" data-form-draft="' + (draft ? "1" : "") + '">Edit</button></li>';
+        }).join("") + "</ul>" : "<p>None.</p>");
+      };
+      body.innerHTML = '<div class="card"><h2>Forms</h2>' + list("Drafts", r.drafts, true) + list("Published", r.published, false) +
+        '<h3>Edit a form (JSON)</h3><textarea id="admFormJson" rows="14" style="width:100%;font-family:monospace" placeholder=\'{"key":"nursing_admission","title":"Nursing admission assessment","roles":["nurse"],"sections":[{"title":"Risks","fields":[{"key":"falls_risk","label":"Falls risk","type":"boolean","required":true}]}]}\'></textarea>' +
+        '<button class="btn" type="button" id="admFormSave">Save draft</button><div id="admFormMsg"></div></div>';
+      body.querySelectorAll("[data-form-edit]").forEach(function (b) {
+        b.onclick = function () {
+          var key = b.getAttribute("data-form-edit"), isDraft = b.getAttribute("data-form-draft") === "1";
+          var d = isDraft ? r.drafts.filter(function (x) { return x.key === key; })[0].def : r.published.filter(function (x) { return x.key === key; })[0];
+          document.getElementById("admFormJson").value = JSON.stringify(d, null, 2);
+        };
+      });
+      body.querySelectorAll("[data-form-pub]").forEach(function (b) {
+        b.onclick = function () {
+          c.api("/forms/publish", { orgId: c.state.orgId, key: b.getAttribute("data-form-pub") }).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Published as version " + x.version + "."); WSQ.render("admin");
+          });
+        };
+      });
+      document.getElementById("admFormSave").onclick = function () {
+        var def; try { def = JSON.parse(document.getElementById("admFormJson").value); } catch (e) { document.getElementById("admFormMsg").innerHTML = '<div class="msg err">That is not valid JSON: ' + c.esc(e.message) + "</div>"; return; }
+        delete def.status; delete def.version; delete def.publishedAt;
+        c.api("/forms/draft", { orgId: c.state.orgId, definition: def }).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admFormMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast(x.problems.length ? "Draft saved with " + x.problems.length + " problem(s) to fix before publishing." : "Draft saved. It can be published."); WSQ.render("admin");
+        });
+      };
+    });
+  }
   function renderAdvisories(c, body) {
     body.innerHTML = '<div class="card"><h2>Safety reminders - try a draft</h2>' +
       '<p class="quiet">Paste the draft reminder set (JSON). Nothing is published or changed by trying it.</p>' +

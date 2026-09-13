@@ -6755,3 +6755,39 @@ test("REFERRAL: a declined referral stays on the referrer's list until they clos
   const att = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, attachments: ["wsq-doc-someone-else"] });
   assert.equal(att.error, "attachment_not_this_patient");
 });
+
+/* ---- hospital forms (wardsynq-forms.js, _forms_store.js, form-response.js) ---------------------------- */
+test("FORMS: the admin drafts and publishes; a nurse completes a published form, checked on the server; pharmacy cannot", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  const def = { key: "falls", title: "Falls assessment", roles: ["nurse", "doctor"], sections: [{ title: "Risk", fields: [
+    { key: "fell_before", label: "Fallen in the last year", type: "boolean", required: true },
+    { key: "falls_count", label: "How many falls", type: "integer", min: 1, max: 50, required: true, showWhen: { field: "fell_before", op: "eq", value: true } },
+  ] }] };
+
+  assert.equal((await as(NURSE, "/forms/draft", "POST", { orgId: ORG, definition: def })).__status, 403, "a nurse cannot define forms");
+  const broken = await as(ADMIN, "/forms/draft", "POST", { orgId: ORG, definition: { ...def, sections: [{ title: "Risk", fields: [{ key: "x", label: "X", type: "slider" }] }] } });
+  assert.equal(broken.__status, 200);
+  assert.ok(broken.problems.length, "a broken draft is kept and its problems named");
+  assert.equal((await as(ADMIN, "/forms/publish", "POST", { orgId: ORG, key: "falls" })).__status, 422, "and cannot be published");
+  await as(ADMIN, "/forms/draft", "POST", { orgId: ORG, definition: def });
+  const pub = await as(ADMIN, "/forms/publish", "POST", { orgId: ORG, key: "falls" });
+  assert.equal(pub.__status, 200, JSON.stringify(pub));
+  assert.equal(pub.version, 1);
+  const defs = await as(NURSE, `/forms/definitions?orgId=${ORG}`);
+  assert.deepEqual(defs.published.map((d) => d.key + "@" + d.version), ["falls@1"]);
+
+  const body = { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, formKey: "falls", formVersion: 1 };
+  const invalid = await as(NURSE, "/ward/form-submit", "POST", { ...body, answers: { fell_before: true } });
+  assert.equal(invalid.__status, 422);
+  assert.match(invalid.errors.falls_count, /How many falls is required/);
+  assert.equal((await as(PHARM, "/ward/form-submit", "POST", { ...body, answers: { fell_before: false } })).__status, 403);
+  const ok = await as(NURSE, "/ward/form-submit", "POST", { ...body, answers: { fell_before: true, falls_count: 2 } });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.response.formVersion, 1);
+  const list = await as(DOCTOR, `/ward/form-responses?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(list.responses.map((x) => x.answers), [{ fell_before: true, falls_count: 2 }]);
+  assert.equal((await as(NURSE, "/ward/form-submit", "POST", { ...body, formVersion: 9, answers: { fell_before: false } })).error, "form_not_found", "an unpublished version cannot be answered");
+});

@@ -89,7 +89,10 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord",
   // TASK 6.14: PatientTag - assigning/replacing/ending a wristband is the same bedside act as
   // DeviceAssociation, above, and the same capability governs both.
-  "PatientTag"]);
+  "PatientTag",
+  // FormResponse: a completed hospital form (triage, nursing assessment, checklist) - documentation the
+  // nurse records at the bedside, answered against a form the hospital published for their role.
+  "FormResponse"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers

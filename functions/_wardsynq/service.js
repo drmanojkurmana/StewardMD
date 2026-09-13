@@ -366,6 +366,8 @@ const RESOURCE_TYPES = Object.freeze([
   "DocumentReference",
   // A referral and every step of it (referral.js). Written by prescribers (unrestricted EMR_TREAT), read by EMR_VIEW.
   "Referral",
+  // A completed hospital-defined form (wardsynq-forms.js), naming the exact published version it answers.
+  "FormResponse",
   /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
    * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
    * declare an X-Source-System header naming ANY registered partner and every downstream
