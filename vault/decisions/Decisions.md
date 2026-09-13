@@ -5339,3 +5339,16 @@ their own leak-resistant system prompt or verify on-device whether `stripReasoni
 in practice. `LlamaEngine.swift`'s chat-template application (`llama_chat_apply_template`) looks
 correct on inspection, so this reads as an instruction-following limit at 4B scale, not a template
 bug - not re-verified live on device this session.
+
+## 2026-09-13 WardSynQ P1.10 imaging viewer launch and P1.5 payer adapters (branch p1-rad-tpa)
+- Images open in the hospital's own viewer via `wardsynq.imagingViewer.urlTemplate` (https only; placeholders
+  {studyInstanceUid}, {accessionNumber}, {patientId}=MRN, URL-encoded, never a name). No pixels in WardSynQ, unchanged.
+- Study-to-order linkage is done at read time (`_wardsynq/imaging-viewer.js` studyForOrder): serviceRequestId, else
+  accession equal to the order id the worklist issued, else the order's external identifiers. Exact only.
+- Structured report templates are hospital content (`wardsynq.radiologyTemplates`); report stores template id/version
+  and sections. No clinical scoring in code.
+- Payers are org config (`wardsynq.payers`); the claim stores only `payerId`. Adapter kinds: `manual` (queued) and
+  `fhir-claim` (generic R4 Claim/ClaimResponse). Unknown payer or kind = NullAdapter. A fhir-claim payer requires auth
+  unless `auth: "none"`; credentials are `credentialRef: "sealed:<ciphertext>"` sealed with the existing Connect
+  envelope key, no new secret or binding. Missing credentials record `not_configured: credentials missing`.
+- Settlement never assigns a balance to the patient; `balance-to-patient` is a separate, reasoned human action.

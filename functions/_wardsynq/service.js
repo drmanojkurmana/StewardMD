@@ -179,6 +179,9 @@ const RESOURCE_TYPES = Object.freeze([
    * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
    * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
   "PreAuthorisation",
+  /* P1.5: a pre-admission cost estimate from the tariff. Financial, marked as an estimate on the record,
+   * and never read to decide anything clinical. Granted with Claim. */
+  "CostEstimate",
   /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
    * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
    * lines - "what was billed" and "what happened to the bill since" are different facts. A
