@@ -446,3 +446,12 @@ P1 started (user asked to move faster; P0 leftovers run alongside). Referrals en
 
 **Numbers:** 6092 passing, 0 failing. 14 routes waiting for a screen.
 **Next:** confirm storage round trip once live; P1.1 dynamic forms, P1.4 accounting, P1.15 outbox.
+
+### 2026-09-13 - P1.15 transactional outbox
+
+functions/_wardsynq/outbox.js: events staged through StagedRepository commit atomically with the business records; drainOutbox claims via next-version (no double claim), consumers recorded per event (retries skip succeeded ones), exponential backoff, dead after 6 with outboxHealth surfacing them, stale claims (>10 min) reclaimed. At-least-once, consumers must be idempotent (documented). Saved consultation carries one consultation.saved event. No production consumer registered yet; nothing to deploy visibly.
+
+**Deploy blocker (owner):** every stewardmd production deployment since ff5f14e is "Failure" (latest 3e2fdc9 from another session too); an identical preview deployment builds and serves. wrangler.toml unchanged since 2026-09-04; DOC_S3_* are valid encrypted secrets. Needs the failed deployment build log from the Cloudflare dashboard.
+
+**Numbers:** 6097 passing, 0 failing. 14 routes waiting for a screen.
+**Next:** P1.1 dynamic forms; P1.4 accounting.
