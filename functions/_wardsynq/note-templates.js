@@ -136,6 +136,19 @@ const BUILT_IN_TEMPLATES = Object.freeze([Object.freeze({
     // A question, never an answer, which is the rule the rest of this file is built on.
     prompt: "What has happened, what was found, what was done, and what happens next?",
   })]),
+}), Object.freeze({
+  /* THE BUILT-IN NURSING NOTE, 2026-09-13 (P1.6). Same reasoning and same shape as the progress note:
+   * one free-text section, a question and never an answer, no invented clinical structure. A ward
+   * whose nurses document (Admin Center -> noteWriterRoles) had only a doctor's "Clinical course"
+   * heading to write under. Who may WRITE it is unchanged: still emr.treat or noteWriterRoles. */
+  id: "nursing",
+  name: "Nursing note",
+  noteType: "nursing",
+  sections: Object.freeze([Object.freeze({
+    key: "narrative",
+    title: "Nursing care this shift",
+    prompt: "What did you observe, what care was given, how did the patient respond, and what does the next shift need to know?",
+  })]),
 })]);
 
 /** Org templates plus the built-ins, with an org definition of the same id winning outright. */

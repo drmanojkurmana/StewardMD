@@ -368,6 +368,10 @@ const RESOURCE_TYPES = Object.freeze([
   "Referral",
   // A completed hospital-defined form (wardsynq-forms.js), naming the exact published version it answers.
   "FormResponse",
+  /* The nursing command center (nursing.js): who is looking after a patient this shift, the shift's tasks,
+   * and how often observations are due. Workflow facts, append-only so a change of nurse or a cancelled
+   * task stays legible. Written through EMR_VITALS (VITALS_TYPES in actor.js). */
+  "NurseAssignment", "NursingTask", "ObservationFrequency",
   /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
    * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
    * declare an X-Source-System header naming ANY registered partner and every downstream

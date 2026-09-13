@@ -6942,3 +6942,78 @@ test("APPROVALS: no policy keeps the old behaviour", async () => {
   const req3 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "pip-p1", reason: "Neutropenic sepsis" });
   assert.equal((await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req3.verificationId, decision: "approved" })).__status, 200, "no policy: behaves as before");
 });
+
+test("NURSING ASSIGNMENT: a nurse is assigned to a patient with history kept; an inactive or non-nursing member is refused by name; pharmacy cannot assign", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const refused = await as(PHARM, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(NURSE) });
+  assert.equal(refused.__status, 403, "no queue.assign, no assigning");
+  const stranger = await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: "cfa:nobody-here" });
+  assert.equal(stranger.__status, 422); assert.equal(stranger.error, "not_an_active_member");
+  assert.match(stranger.detail, /not an active member of staff/);
+  const pharmacist = await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(PHARM) });
+  assert.equal(pharmacist.error, "cannot_record_observations");
+  const nurseKey = `q_members/${sanitize(ORG)}__${sanitize(idFor(NURSE))}`, nurseDoc = docs.get(nurseKey);
+  docs.set(nurseKey, { ...nurseDoc, fields: { ...nurseDoc.fields, active: false } });
+  assert.equal((await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(NURSE) })).error, "not_an_active_member");
+  docs.set(nurseKey, nurseDoc);
+
+  const ok = await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(NURSE), shift: "Night" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const w = await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`);
+  const row = w.rows.find((r) => r.patientId === adm.patientId);
+  assert.equal(row.assignment.nurseId, w.me, "the nurse's own id is what 'my patients' filters on");
+  assert.ok(w.staff.some((m) => m.identity === idFor(NURSE)) && !w.staff.some((m) => m.identity === idFor(PHARM)), "only staff who can record obs are offered");
+  const stale = await as(NURSE, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, action: "unassign", expectedVersion: 99 });
+  assert.equal(stale.__status, 409);
+  const off = await as(NURSE, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, action: "unassign", expectedVersion: ok.assignment.version, reason: "end of shift" });
+  assert.equal(off.__status, 200, JSON.stringify(off));
+  assert.equal(off.assignment.nurseId, null);
+  assert.deepEqual(off.assignment.history.map((h) => h.action), ["assign", "unassign"]);
+});
+
+test("NURSING TASKS: created, overdue when open past due, done or cancelled with a reason; counts reach the worklist; pharmacy cannot write or read them", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const past = new Date(Date.now() - 3600e3).toISOString(), later = new Date(Date.now() + 3600e3).toISOString();
+  assert.equal((await as(PHARM, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "Turn", dueAt: past })).__status, 403);
+  assert.equal((await as(PHARM, `/ward/nursing-patient?orgId=${ORG}&patientId=${adm.patientId}&encounterId=${adm.encounterId}`)).__status, 403);
+  assert.equal((await as(NURSE, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "", dueAt: past })).error, "title_required");
+  const t1 = await as(NURSE, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "Pressure area check", dueAt: past });
+  assert.equal(t1.__status, 200, JSON.stringify(t1));
+  const t2 = await as(NURSE, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "Catheter care", dueAt: later });
+  const row = (await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`)).rows.find((r) => r.patientId === adm.patientId);
+  assert.equal(row.tasksOpen, 2); assert.equal(row.tasksOverdue, 1);
+  assert.equal((await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t2.task.id, action: "cancel" })).error, "reason_required");
+  assert.equal((await as(PHARM, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t1.task.id, action: "done" })).__status, 403);
+  const done = await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t1.task.id, action: "done", expectedVersion: t1.task.version });
+  assert.equal(done.task.status, "done"); assert.equal(done.task.doneBy, idFor(NURSE));
+  assert.equal((await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t1.task.id, action: "done" })).error, "not_open");
+  await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t2.task.id, action: "cancel", reason: "patient discharged home" });
+  const panel = await as(NURSE, `/ward/nursing-patient?orgId=${ORG}&patientId=${adm.patientId}&encounterId=${adm.encounterId}`);
+  assert.equal(panel.__status, 200, JSON.stringify(panel));
+  assert.deepEqual(panel.tasks.map((t) => t.status).sort(), ["cancelled", "done"]);
+  assert.equal(panel.tasksOverdue, 0);
+});
+
+test("OBSERVATION FREQUENCY: none set says so (never 'not due'); a weight is not obs; set, overdue, then not due after vitals; a high NEWS2 is flagged, not paged", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const panel = () => as(NURSE, `/ward/nursing-patient?orgId=${ORG}&patientId=${adm.patientId}&encounterId=${adm.encounterId}`);
+  let p = await panel();
+  assert.equal(p.vitals.state, "no_frequency"); assert.equal(p.vitals.text, "No observation frequency set");
+  assert.equal((await as(NURSE, "/ward/obs-frequency", "POST", { orgId: ORG, encounterId: adm.encounterId, everyHours: 7 })).error, "bad_frequency");
+  assert.equal((await as(PHARM, "/ward/obs-frequency", "POST", { orgId: ORG, encounterId: adm.encounterId, everyHours: 4 })).__status, 403);
+  const set = await as(DOCTOR, "/ward/obs-frequency", "POST", { orgId: ORG, encounterId: adm.encounterId, everyHours: 4 });
+  assert.equal(set.__status, 200, JSON.stringify(set));
+  p = await panel();
+  assert.equal(p.vitals.state, "overdue", "only a weight on the chart: observations have never been done");
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    vitals: { rr: "30", spo2: "88", o2: true, sbp: "85", pulse: "140", temp: "38.5", tempUnit: "C", acvpu: "A" } });
+  p = await panel();
+  assert.equal(p.vitals.state, "not_due"); assert.equal(p.vitals.everyHours, 4); assert.ok(p.vitals.dueAt);
+  const row = (await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`)).rows.find((r) => r.patientId === adm.patientId);
+  assert.equal(row.news2.risk, "high", JSON.stringify(row.news2));
+  assert.match(row.escalation.text, /NEWS2 \d+ \(high\)\. Escalation is your call; nothing has been paged\./);
+  assert.equal(row.vitals.state, "not_due");
+});
