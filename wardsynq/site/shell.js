@@ -509,6 +509,7 @@
     var peopleTiles = [
       tile({ go: "patients", icon: "person_search", title: "Patients", sub: "Find by MRN, register a new patient, open the chart", need: "queue.view" }),
     ];
+    if (native) peopleTiles.push(tile({ go: "portal-access", icon: "forum", title: "Patient portal", sub: "Patient messages, and record access for patients and family", need: "emr.view" }));
     if (native) peopleTiles.push(tile({ go: "maik", icon: "psychology", title: "MaiK clinical AI", sub: "Governed summaries and draft notes, always reviewed by you", need: "emr.view" }));
     var adminTiles = [
       tile({ go: "admin", icon: "admin_panel_settings", title: "Admin Center", sub: "Wards, beds, departments, rooms, staff and roles", need: "staff.admin" }),

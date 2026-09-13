@@ -190,7 +190,7 @@ import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
-import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
+import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
 import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
@@ -1084,7 +1084,7 @@ export async function onRequest(context) {
          * is the same bar as deciding they are ready to be told what is in their record. The
          * patient's own two routes are NOT here - they live under /api/portal, outside the block
          * that assumes an employee. */
-        "patient-enrol": CAPS.EMR_TREAT, "patient-revoke": CAPS.EMR_TREAT,
+        "patient-enrol": CAPS.EMR_TREAT, "patient-revoke": CAPS.EMR_TREAT, "patient-grants": CAPS.EMR_TREAT,
         /* The patient message worklist is readable by any clinician - an unanswered message is a
          * ward-level safety fact, not one doctor's inbox. ANSWERING is EMR_TREAT: replying to a
          * patient's clinical question is a clinical act, and nothing non-human can reach it. */
@@ -2220,7 +2220,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-enrol" && method === "POST") {
-        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, config: (wsqCfg && wsqCfg.patientAccess) || null, idempotencyKey: body.idempotencyKey || null });
+        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, proxy: body.proxy || null, config: (wsqCfg && wsqCfg.patientAccess) || null, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "patient-grants" && method === "GET") {
+        const r = await listGrants(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", config: (wsqCfg && wsqCfg.patientAccess) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-revoke" && method === "POST") {

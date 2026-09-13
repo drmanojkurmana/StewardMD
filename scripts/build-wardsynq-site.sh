@@ -16,6 +16,8 @@ rm -rf "$OUT"
 mkdir -p "$OUT/wardsynq/site" "$OUT/wardsynq/ui" "$OUT/wardsynq/adapters" "$OUT/wardsynq/data" "$OUT/assets/fonts" "$OUT/data" "$OUT/kb/protocols"
 
 cp "$ROOT/wardsynq/site/index.html" "$OUT/index.html"
+# The patient and family portal (P2.9): its own page, no staff session. portal.js rides the *.js copy below.
+cp "$ROOT/wardsynq/site/portal.html" "$OUT/portal.html"
 cp "$ROOT/wardsynq/site/_worker.js" "$OUT/_worker.js"
 cp "$ROOT/wardsynq/site/"*.js "$ROOT/wardsynq/site/"*.css "$ROOT/wardsynq/site/"*.webmanifest "$OUT/wardsynq/site/"
 rm -f "$OUT/wardsynq/site/_worker.js"
