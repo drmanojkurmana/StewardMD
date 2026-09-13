@@ -3484,27 +3484,33 @@
       return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>Patient flow</b><small>hospital-wide</small></div>" +
         '<button class="w-ic" data-w-act="flowload" title="Refresh">' + ms("refresh") + "</button></div>" +
-        '<p class="w-empty">' + (state.flow && state.flow.loaded ? "Nothing to show yet." : "Loading&hellip;") + "</p>";
+        (state.flow && state.flow.err ? '<p class="w-hint warn">' + ms("error") + "Patient flow could not be loaded: " + esc(state.flow.err) + ". Do not read this as an empty hospital.</p>"
+          : '<p class="w-empty">' + (state.flow && state.flow.loaded ? "Nothing to show yet." : "Loading&hellip;") + "</p>");
     }
     var bottleneckWords = { unplaced_patients: "unplaced patients on", ed_untriaged: "ED patients not yet triaged", beds_blocked: "beds blocked", beds_in_cleaning_turnover: "beds in cleaning turnover", stays_with_open_items: "stays with open items" };
     var bottlenecks = (f.bottlenecks || []).map(function (b) {
       return "<li><b>" + esc(b.count) + "</b> " + esc(bottleneckWords[b.kind] || b.kind) + (b.ward ? " " + esc(b.ward) : "") + "</li>";
     }).join("");
+    var fd = f.drill || {};
+    var fc = function (key, n, label) { return drillCount(n, label, fd[key], "flowdrill:" + key); };
     var openRows = (f.staysWithOpenItems || []).map(function (s) {
-      return "<li><b>" + esc(s.openItems) + "</b> open item" + (s.openItems === 1 ? "" : "s") + '<span>' + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + (s.lengthOfStayDays != null ? " &middot; day " + esc(s.lengthOfStayDays) : "") + "</span></li>";
+      return "<li><b>" + esc(s.openItems) + "</b> open item" + (s.openItems === 1 ? "" : "s") + '<span>' + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + (s.lengthOfStayDays != null ? " &middot; day " + esc(s.lengthOfStayDays) : "") + "</span>" +
+        (s.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(s.encounterId) + '">Open chart</button>' : "") + "</li>";
     }).join("");
     var transferRows = (f.recentTransfers || []).map(function (t) {
-      return "<li>" + esc((t.movedFrom && t.movedFrom.ward) || "?") + " &rarr; " + esc(t.ward || "?") + '<span>' + when(t.movedAt) + (t.moveReason ? " &middot; " + esc(t.moveReason) : "") + "</span></li>";
+      return "<li>" + esc((t.movedFrom && t.movedFrom.ward) || "?") + " &rarr; " + esc(t.ward || "?") + '<span>' + when(t.movedAt) + (t.moveReason ? " &middot; " + esc(t.moveReason) : "") + "</span>" +
+        (t.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(t.encounterId) + '">Open chart</button>' : "") + "</li>";
     }).join("");
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Patient flow</b><small>hospital-wide &middot; " + when(f.computedAt) + "</small></div>" +
       '<button class="w-ic" data-w-act="flowload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (state.flow.drill ? drillListHtml("Behind the count: " + state.flow.drill, fd[state.flow.drill], /^ed/.test(state.flow.drill) ? "edboard" : "bedmgmt", "flowdrillclose") : "") +
 
       '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>ED</h3></div>" +
-      "<p>" + esc(f.ed.arrivals) + " in the department &middot; " + esc(f.ed.untriaged) + " not yet triaged</p></div>" +
+      '<div class="w-actions">' + fc("edArrivals", f.ed.arrivals, "in the department") + fc("edUntriaged", f.ed.untriaged, "not yet triaged") + "</div></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Beds</h3></div>" +
-      "<p>" + esc(f.beds.occupied) + " occupied &middot; " + esc(f.beds.unplacedPatients) + " admitted with no bed yet</p>" +
+      '<div class="w-actions">' + fc("occupied", f.beds.occupied, "occupied") + fc("unplaced", f.beds.unplacedPatients, "admitted with no bed yet") + "</div>" +
       "<p class=\"w-hint\">Available " + esc(f.beds.states.available) + " &middot; Reserved " + esc(f.beds.states.reserved) +
       " &middot; Blocked " + esc(f.beds.states.blocked) + " &middot; Cleaning " + esc(f.beds.states.cleaning) + " &middot; Maintenance " + esc(f.beds.states.maintenance) + "</p></div>" +
 
@@ -3512,7 +3518,7 @@
       "<p>" + esc(f.admissionsPending.waiting) + " waiting &middot; longest wait " + esc(f.admissionsPending.longestWaitHours) + " h</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>Discharge</h3></div>" +
-      "<p>" + esc(f.dischargeCandidates) + " stay" + (f.dischargeCandidates === 1 ? "" : "s") + " with nothing outstanding right now</p>" +
+      '<div class="w-actions">' + fc("dischargeCandidates", f.dischargeCandidates, f.dischargeCandidates === 1 ? "stay with nothing outstanding right now" : "stays with nothing outstanding right now") + "</div>" +
       '<p class="w-hint">This is a live fact, not a predicted discharge date - no expected-discharge field exists in this record.</p>' +
       (openRows ? '<ul class="w-mini">' + openRows + "</ul>" : "") + "</div>" +
 
@@ -3536,10 +3542,45 @@
       ? '<span class="w-st ' + (section.freshness === "live" ? "" : "due") + '">' + esc(TWIN_FRESHNESS_WORDS[section.freshness] || section.freshness) + "</span>"
       : '<span class="w-st overdue">' + ms("block") + "Unavailable</span>";
     return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + "</h3>" + badge + "</div>" +
-      (section.status === "ok" ? body(section.data)
+      (section.status === "ok" ? body(section.data) + '<p class="w-dt-times">Computed ' + when(section.generatedAt) + "</p>"
         : '<p class="w-hint warn">' + ms("warning") + esc(section.error || "unavailable") + (section.detail ? ": " + esc(section.detail) : "") + '<br><small>This section is UNAVAILABLE, not zero - the rest of this screen is unaffected.</small></p>') +
       "</div>";
   }
+  /* P1.13 DRILL-DOWN. A count with ids behind it is a button that lists them; a count with none
+   * says "detail not available" instead of linking to an empty list. */
+  var DRILL_BOARDS = { flow: "bedmgmt", criticals: "critsboard", lis: "labboard", labTat: "labboard", radiology: "radboard", icu: "bedmgmt", pharmacy: "inventoryboard", opdQueue: "", staffing: "" };
+  var BOARD_WORDS = { bedmgmt: "Bed management", critsboard: "Critical results board", labboard: "Lab board", radboard: "Radiology board", inventoryboard: "Inventory", edboard: "ED board" };
+  function drillCount(n, label, d, act) {
+    if (n == null) return '<span class="w-hint">' + esc(label) + ": not known</span>";
+    if (!d) return "<b>" + esc(n) + "</b> " + esc(label) + ' <small class="w-hint">(detail not available)</small>';
+    return '<button class="w-btn ghost tiny" data-w-act="' + esc(act) + '"><b>' + esc(n) + "</b> " + esc(label) + "</button>";
+  }
+  function twinCount(section, sKey, dKey, n, label) {
+    var d = section && section.data && section.data.drill && section.data.drill[dKey];
+    return drillCount(n, label, d, "twindrill:" + sKey + "." + dKey);
+  }
+  function drillListHtml(title, d, board, closeAct) {
+    var rows = ((d && d.items) || []).map(function (it) {
+      return "<li><b>" + esc(it.label || it.identity || it.patientId || "") + "</b><span>" +
+        esc([it.ward, it.bed ? "bed " + it.bed : "", it.minutes != null ? it.minutes + " min" : "", it.waitingHours != null ? it.waitingHours + " h waiting" : "", it.shift || "", it.unit || ""].filter(Boolean).join(" \u00b7 ")) + "</span>" +
+        (it.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(it.encounterId) + '">Open chart</button>' : "") + "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("list") + "<h3>" + esc(title) + "</h3>" +
+      '<button class="w-ic" data-w-act="' + esc(closeAct) + '" title="Close">' + ms("close") + "</button></div>" +
+      (!d ? '<p class="w-hint">Detail not available for this count.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">None.</p>') +
+      (d && d.truncated ? '<p class="w-hint warn">Showing ' + esc(d.items.length) + " of " + esc(d.total) + ". The list is cut short; open the board for all of them.</p>" : "") +
+      (board ? '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="' + esc(board) + '">' + esc(BOARD_WORDS[board] || board) + "</button></div>" : "") +
+      "</div>";
+  }
+  function twinDrillHtml(t, dr) {
+    if (!dr) return "";
+    var sec = t.sections[dr.section];
+    var d = sec && sec.data && sec.data.drill && sec.data.drill[dr.key];
+    var board = dr.section === "flow" && /^ed/.test(dr.key) ? "edboard" : DRILL_BOARDS[dr.section];
+    return drillListHtml("Behind the count: " + dr.section + " " + dr.key, d, board, "twindrillclose");
+  }
+  function pct(x) { return x == null ? "not known" : Math.round(x * 100) + "%"; }
   function twinView(state) {
     var tw = state.twin || {};
     var t = tw.snapshot;
@@ -3547,7 +3588,8 @@
       return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>Digital twin</b><small>hospital-wide</small></div>" +
         '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
-        '<p class="w-empty">' + (tw.loaded ? (tw.err ? esc(tw.err) : "Nothing to show yet.") : "Loading&hellip;") + "</p>";
+        (tw.loaded && tw.err ? '<p class="w-hint warn">' + ms("error") + "The hospital snapshot could not be loaded: " + esc(tw.err) + ". Do not read this as zero.</p>"
+          : '<p class="w-empty">' + (tw.loaded ? "Nothing to show yet." : "Loading&hellip;") + "</p>");
     }
     var s = t.sections;
     var notBuiltRows = Object.keys(t.notBuilt || {}).map(function (k) { return "<li><b>" + esc(k) + "</b><span>" + esc(t.notBuilt[k]) + "</span></li>"; }).join("");
@@ -3565,20 +3607,60 @@
           '<button class="w-btn ghost tiny" data-w-act="twincopilotreview:rejected">' + ms("close") + "Not helpful</button></div>" :
           copilot.interaction && copilot.interaction.review ? '<p class="w-hint">' + ms("task_alt") + esc(copilot.interaction.review.state) + "</p>" : "");
 
+    var flowDrill = function (key, n, label) {
+      var d = s.flow && s.flow.data && s.flow.data.flow && s.flow.data.flow.drill && s.flow.data.flow.drill[key];
+      return drillCount(n, label, d, "twindrill:flow." + key);
+    };
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Digital twin</b><small>" + esc(t.sectionsOk) + "/" + esc(t.sectionsTotal) + " sections &middot; " + when(t.generatedAt) + "</small></div>" +
       '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      twinDrillHtml(t, tw.drill) +
 
       twinSectionCard("hub", "Flow &amp; capacity", s.flow, function (d) {
         var f = d.flow;
-        return "<p>" + esc(f.beds.occupied) + " occupied &middot; " + esc(f.ed.arrivals) + " in ED &middot; " + esc(f.dischargeCandidates) + " ready to leave</p>";
+        return '<div class="w-actions">' + flowDrill("occupied", f.beds.occupied, "occupied") + flowDrill("edArrivals", f.ed.arrivals, "in ED") + flowDrill("dischargeCandidates", f.dischargeCandidates, "ready to leave") + "</div>";
       }) +
       twinSectionCard("monitor_heart", "Clinical operations", s.clinicalOps, function (d) {
         var m = d.metrics;
-        return "<p>" + esc(m.open.criticalResults) + " open critical result(s) &middot; " + esc(m.open.dosesInFlight) + " dose(s) in flight &middot; " + esc(m.openItems) + " open item(s)</p>";
+        return "<p>" + drillCount(m.open.criticalResults, "open critical result(s)") + " &middot; " + drillCount(m.open.dosesInFlight, "dose(s) in flight") + " &middot; " + drillCount(m.openItems, "open item(s)") + "</p>";
       }) +
       twinSectionCard("priority_high", "Critical results", s.criticals, function (d) {
-        return "<p>" + esc(d.open) + " open loop(s)</p>";
+        return '<div class="w-actions">' + twinCount(s.criticals, "criticals", "open", d.open, "open loop(s)") + "</div>";
+      }) +
+      twinSectionCard("bed", "ICU", s.icu, function (d) {
+        return '<div class="w-actions">' + twinCount(s.icu, "icu", "occupied", d.occupied, "in ICU") +
+          twinCount(s.icu, "icu", "ventilated", d.ventilatedRecorded, "ventilator charted in 12 h") +
+          twinCount(s.icu, "icu", "vasopressors", d.vasopressorsRecorded, "on a vasoactive order") + "</div>" +
+          '<p class="w-hint">Ventilation and vasopressors count what is charted. A patient with nothing charted is not known, not "off".</p>' +
+          (d.encounterReadCapped || d.recordsCapped ? '<p class="w-hint warn">Read limit reached: these counts may be low.</p>' : "");
+      }) +
+      twinSectionCard("groups", "OPD queue today", s.opdQueue, function (d) {
+        return "<p>" + drillCount(d.waiting, "waiting") + " &middot; " + drillCount(d.inConsultation, "in consultation") + " &middot; " + esc(d.sessions) + " session(s)</p>" +
+          '<p class="w-hint">' + esc(d.drillNotAvailable || "") + "</p>";
+      }) +
+      twinSectionCard("badge", "Staffing now", s.staffing, function (d) {
+        if (!d.rosterConfigured) return '<p class="w-hint">Not known: ' + esc(d.reason || "no roster") + ".</p>";
+        var gaps = (d.gaps || []).map(function (g) { return "<li><b>" + esc(g.role) + "</b><span>" + esc(g.shift) + (g.unit ? " &middot; " + esc(g.unit) : "") + " &middot; short " + esc(g.short) + " (have " + esc(g.have) + " of " + esc(g.need) + ")</span></li>"; }).join("");
+        return '<div class="w-actions">' + twinCount(s.staffing, "staffing", "onDuty", d.onDutyNow, "on duty now") + "</div>" +
+          "<p>" + (d.requiredNow == null ? "No shift is running right now." : esc(d.requiredNow) + " required by the running shift(s)") + "</p>" +
+          (gaps ? '<p class="w-hint warn">Gaps</p><ul class="w-mini">' + gaps + "</ul>" : '<p class="w-empty">No gaps against the roster minimum.</p>') +
+          (d.partial ? '<p class="w-hint warn">The roster read was cut short; gaps may be incomplete.</p>' : "");
+      }) +
+      twinSectionCard("science", "Lab turnaround (7 days)", s.labTat, function (d) {
+        return (d.sampleSize ? "<p>Median <b>" + esc(d.medianMinutes) + " min</b> &middot; 90th percentile <b>" + esc(d.p90Minutes) + " min</b></p>" : '<p class="w-empty">No reported requests with both times in the last 7 days. No figure is shown.</p>') +
+          '<div class="w-actions">' + twinCount(s.labTat, "labTat", "slowest", d.sampleSize, "in the sample") + "</div>" +
+          '<p class="w-hint">' + esc(d.excludedTotal) + " excluded for a missing or impossible time.</p>" +
+          (d.capped ? '<p class="w-hint warn">Read limit reached: older requests may be missing.</p>' : "");
+      }) +
+      twinSectionCard("radiology", "Radiology backlog", s.radiology, function (d) {
+        return '<div class="w-actions">' + twinCount(s.radiology, "radiology", "waiting", d.waiting, "not yet reported") + "</div>" +
+          "<p>" + (d.oldestWaitingSince ? "Oldest waiting since " + when(d.oldestWaitingSince) + " (" + esc(d.oldestWaitingHours) + " h)" : "Oldest wait not known") + "</p>" +
+          (d.orderTimeMissing ? '<p class="w-hint">' + esc(d.orderTimeMissing) + " order(s) have no recorded time.</p>" : "");
+      }) +
+      twinSectionCard("surgical", "Theatre utilisation (24 h)", s.otUtilisation, function (d) {
+        if (!d.theatresConfigured) return '<p class="w-hint">Not known: no theatres are set up for this hospital.</p>';
+        return "<p>Overall <b>" + pct(d.overallUtilisation) + "</b> of " + esc(d.theatresConfigured) + " theatre(s)</p>" +
+          '<ul class="w-mini">' + (d.perTheatre || []).map(function (x) { return "<li><b>" + esc(x.name) + "</b><span>" + pct(x.utilisation) + " &middot; " + esc(x.bookedMinutes) + " min booked</span></li>"; }).join("") + "</ul>";
       }) +
       twinSectionCard("emergency", "Emergency", s.emergency, function (d) {
         return d.any ? "<p>" + esc(d.active.length) + " active declaration(s): " + esc(d.active.map(function (a) { return a.kind; }).join(", ")) + "</p>" : '<p class="w-empty">None active.</p>';
@@ -3587,13 +3669,23 @@
         return d.blackouts.length ? "<p>" + esc(d.blackouts.length) + " active blackout(s)</p>" : '<p class="w-empty">None active.</p>';
       }) +
       twinSectionCard("medication", "Pharmacy", s.pharmacy, function (d) {
-        return "<p>" + esc(d.dispenseCount) + " dispensed &middot; " + esc(d.pendingVerification) + " pending verification &middot; " + esc((d.stock || []).filter(function (r) { return r.belowReorder; }).length) + " below reorder</p>";
+        var low = (d.stock || []).filter(function (r) { return r.belowReorder; });
+        return "<p>" + esc(d.dispenseCount) + " dispensed &middot; " + esc(d.pendingVerification) + " pending verification &middot; " + esc(low.length) + " below reorder</p>" +
+          (low.length ? '<ul class="w-mini">' + low.map(function (r) { return "<li><b>" + esc(r.display || r.code || "") + "</b><span>level " + esc(r.level) + " &middot; reorder at " + esc(r.reorderAt) + "</span></li>"; }).join("") + "</ul>" +
+            '<div class="w-actions"><button class="w-btn ghost tiny" data-w-act="inventoryboard">Inventory</button></div>' : "");
       }) +
       twinSectionCard("folder_shared", "HIM", s.him, function (d) {
-        return "<p>" + esc(d.incompleteCharts) + " incomplete chart(s) of " + esc(d.chartsChecked) + " checked</p>";
+        return "<p>" + drillCount(d.incompleteCharts, "incomplete chart(s)") + " of " + esc(d.chartsChecked) + " checked</p>";
       }) +
       twinSectionCard("science", "Diagnostics (LIS)", s.lis, function (d) {
-        return "<p>" + esc(d.outstanding) + " outstanding of " + esc(d.checked) + " checked</p>";
+        return '<div class="w-actions">' + twinCount(s.lis, "lis", "outstanding", d.outstanding, "outstanding specimens") + "</div><p>of " + esc(d.checked) + " checked</p>";
+      }) +
+      (t.financeWithheld ? '<div class="w-card"><div class="w-card-h">' + ms("lock") + "<h3>Finance</h3></div><p class=\"w-hint\">Billing and claims need billing rights, so they are not shown.</p></div>" : "") +
+      twinSectionCard("payments", "Billing", s.billing, function (d) {
+        return "<p>" + drillCount(d.invoiceCount, "invoice(s)") + " &middot; charged " + esc(d.charged) + " &middot; collected " + esc(d.collected) + " &middot; outstanding " + esc(d.outstanding) + "</p>";
+      }) +
+      twinSectionCard("request_quote", "Claims", s.claims, function (d) {
+        return "<p>" + drillCount(d.claimCount, "claim(s)") + " &middot; pending " + esc(d.pending) + " &middot; denied " + esc(d.denied) + " &middot; outstanding " + esc(d.outstandingAmount) + "</p>";
       }) +
 
       (notBuiltRows ? '<div class="w-card"><div class="w-card-h">' + ms("info") + "<h3>Not built</h3></div>" +
@@ -6923,8 +7015,8 @@
   }
   function loadTwin() {
     if (!st.twin) st.twin = {};
-    st.twin.copilot = null; st.twin.sim = null;
-    return apiGet("/ward/twin?orgId=" + encodeURIComponent(st.orgId))
+    st.twin.copilot = null; st.twin.sim = null; st.twin.drill = null;
+    return apiGet("/ward/twin?orgId=" + encodeURIComponent(st.orgId) + "&finance=1")
       .then(function (r) {
         st.twin.snapshot = (r && r.ok && r.twin) || null;
         st.twin.err = (r && !r.ok) ? (r.detail || r.error) : "";
@@ -6958,14 +7050,29 @@
       .then(function (r) { st.twin.sim = r; paint(); })
       .catch(function () { st.twin.sim = { ok: false, error: "Could not run the simulation." }; paint(); });
   }
+  /* A command-center row opens the chart through the SAME "open" path the ward list uses. A patient
+   * not on the loaded list (the list may be filtered to one ward) is looked for hospital-wide once;
+   * one who is on no inpatient list (an ED attendance, say) is told so, never opened half-filled. */
+  function commandOpenChart(encounterId) {
+    if (!encounterId) return;
+    var onList = function () { for (var i = 0; i < (st.patients || []).length; i++) { if (st.patients[i].encounterId === encounterId) return true; } return false; };
+    if (onList()) { dispatch("open:" + encounterId); return; }
+    apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        if (r && r.ok && r.patients) { st.ward = ""; st.patients = r.patients; }
+        if (onList()) { dispatch("open:" + encounterId); return; }
+        st.err = "That patient is not on an inpatient ward list. Open the board for them instead."; paint();
+      })
+      .catch(function () { st.err = "Could not reach the ward list to open that chart."; paint(); });
+  }
   function flowCommandOpen() {
     st.view = "flowcommand"; st.flow = {}; paint(); loadFlowCommand();
   }
   function loadFlowCommand() {
     if (!st.flow) st.flow = {};
     return apiGet("/ward/patient-flow?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.flow.flow = (r && r.ok && r.flow) || null; st.flow.loaded = true; paint(); })
-      .catch(function () { st.flow.loaded = true; paint(); });
+      .then(function (r) { st.flow.flow = (r && r.ok && r.flow) || null; st.flow.err = (r && !r.ok) ? (r.detail || r.error || "refused") : ""; st.flow.loaded = true; paint(); })
+      .catch(function () { st.flow.loaded = true; st.flow.err = "could not reach the server"; paint(); });
   }
   function bedMgmtOpen() {
     st.view = "bedmgmt"; st.bedMgmt = {}; paint(); loadBedMgmt();
@@ -9404,6 +9511,11 @@
     if (cmd === "flowload") { loadFlowCommand(); return; }
     if (cmd === "twin") { twinOpen(); return; }
     if (cmd === "twinload") { loadTwin(); return; }
+    if (cmd === "twindrill") { var dp = arg.split("."); st.twin = st.twin || {}; st.twin.drill = { section: dp[0], key: dp[1] || "" }; paint(); return; }
+    if (cmd === "twindrillclose") { if (st.twin) st.twin.drill = null; paint(); return; }
+    if (cmd === "flowdrill") { st.flow = st.flow || {}; st.flow.drill = arg; paint(); return; }
+    if (cmd === "flowdrillclose") { if (st.flow) st.flow.drill = null; paint(); return; }
+    if (cmd === "cmdopen") { commandOpenChart(arg); return; }
     if (cmd === "twinask") { twinAsk(); return; }
     if (cmd === "twincopilotreview") { twinCopilotReview(arg); return; }
     if (cmd === "twinsim") { twinSimulate(arg); return; }
