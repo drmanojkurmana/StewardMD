@@ -27,6 +27,7 @@ import * as QT from "../../_queue_timeline.js";
 import * as ROSTER from "../../_roster_store.js";
 import * as ACCOUNTS from "../../_accounts_store.js";
 import * as FORMS from "../../_forms_store.js";
+import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses } from "../../_wardsynq/form-response.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
@@ -176,6 +177,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
 import { askAboutPatient, reviewInteraction, listInteractions, COPILOT as MAIK_COPILOT } from "../../_wardsynq/maik-interaction.js";
 import { patientSurveillance, acknowledgeSignal, RULES as SURVEILLANCE_RULES, NOT_BUILT as SURVEILLANCE_NOT_BUILT } from "../../_wardsynq/surveillance.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
+import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty } from "../../_wardsynq/pathways.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
@@ -1046,6 +1048,11 @@ export async function onRequest(context) {
         /* P2.3 surveillance (surveillance.js). Reading signals is reading the chart. Acknowledging one with a
          * note is a bedside act by whoever looks after the patient: emr.vitals, like the obs it usually cites. */
         surveillance: CAPS.EMR_VIEW, "surveillance-ack": CAPS.EMR_VITALS,
+        /* P2.12 pathways (pathways.js). Reading the published pathways, a patient's progress and the specialty
+         * panel is reading the chart. Enrolling a patient and overriding a step are clinical decisions: emr.treat.
+         * Authoring and publishing are hospital configuration, under /pathways (staff.admin), not here. */
+        pathways: CAPS.EMR_VIEW, "pathway-progress": CAPS.EMR_VIEW, specialty: CAPS.EMR_VIEW,
+        "pathway-enrol": CAPS.EMR_TREAT, "pathway-override": CAPS.EMR_TREAT,
         /* The ICU bedside record (icu-care.js). Charting a gas, a ventilator setting, a RASS or a round
          * checklist is the nurse's charting act, emr.vitals, the capability IcuRecord is granted
          * through in actor.js. Reading the ICU cards, with the SOFA and the advisory sepsis screen
@@ -2336,6 +2343,43 @@ export async function onRequest(context) {
           partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}),
           monitoring: "Signals are computed from the record and shown. Nothing has been paged and no order has been changed." }, 200, request);
       }
+      if (sub === "pathways" && method === "GET") {
+        const all = await PATHWAYS.listAll(env, wOrgId);
+        return json({ ok: true, pathways: all.published }, 200, request);
+      }
+      if (sub === "pathway-progress" && method === "GET") {
+        const all = await PATHWAYS.listAll(env, wOrgId);
+        const r = await pathwayProgress(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", retiredKeys: all.retired });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pathway-enrol" && method === "POST") {
+        // The definition is read from the store by key and version, never taken from the request body.
+        const [pathway, all] = await Promise.all([PATHWAYS.publishedVersion(env, wOrgId, body.pathwayKey, body.pathwayVersion), PATHWAYS.listAll(env, wOrgId)]);
+        const r = await enrolOnPathway(request, env, { ...deps, pathway, retired: all.retired.has(`${body.pathwayKey}@${Number(body.pathwayVersion)}`), patientId: body.patientId, encounterId: body.encounterId, idempotencyKey: body.idempotencyKey || null });
+        if (r.ok && r.written) await Q.qAudit(env, { hospitalId: wOrgId, ticketId: "", actor: actor.id, action: "pathways:enrolled", meta: `${body.pathwayKey} v${Number(body.pathwayVersion)} ${r.enrolmentId}` });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "pathway-override" && method === "POST") {
+        const r = await overridePathwayStep(request, env, { ...deps, patientId: body.patientId, enrolmentId: body.enrolmentId, stepKey: body.stepKey, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        if (r.ok && r.written) await Q.qAudit(env, { hospitalId: wOrgId, ticketId: "", actor: actor.id, action: "pathways:step_overridden", meta: String(r.overrideId) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "specialty" && method === "GET") {
+        /* P2.11: the hospital's specialty registry resolved against what it actually has configured. */
+        const registry = (wsqCfg && wsqCfg.specialties) || [];
+        if (!Array.isArray(registry) || !registry.length) return json({ ok: true, configured: false, specialty: null }, 200, request);
+        const [sets, tpl, tools, all] = await Promise.all([
+          listOrderSets(request, env, { ...deps, sets: (wsqCfg && wsqCfg.orderSets) || [] }),
+          listTemplates(request, env, { ...deps, templates: (wsqCfg && wsqCfg.noteTemplates) || [] }),
+          listRiskTools(request, env, { ...deps, tools: (wsqCfg && wsqCfg.riskTools) || [] }),
+          PATHWAYS.listAll(env, wOrgId),
+        ]);
+        const latest = {};
+        for (const p of all.published) if (p.status !== "retired" && !latest[p.key]) latest[p.key] = p;
+        const specialty = resolveSpecialty(registry, { class: url.searchParams.get("class") || "", specialty: url.searchParams.get("specialty") || "" },
+          { orderSets: (sets && sets.sets) || [], templates: (tpl && tpl.templates) || [], calculators: (tools && tools.tools) || [], pathways: Object.values(latest) });
+        return json({ ok: true, configured: true, specialty }, 200, request);
+      }
       if (sub === "surveillance-ack" && method === "POST") {
         const r = await acknowledgeSignal(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, signalId: body.signalId, note: body.note, schedule: wsqSchedule(wsqCfg), idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -3202,6 +3246,20 @@ export async function onRequest(context) {
       if (method === "GET" && sub === "definitions") return out(await FORMS.listDefinitions(env, orgId));
       if (method === "POST" && sub === "draft") return out(await FORMS.saveDraft(env, orgId, fb.definition, actor.id));
       if (method === "POST" && sub === "publish") return out(await FORMS.publishForm(env, orgId, fb.key, actor.id));
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
+    /* CLINICAL PATHWAY DEFINITIONS (P2.12, _pathways_store.js). Hospital configuration: reading drafts, saving,
+     * publishing and retiring are all the admin's. Clinicians read published pathways through /ward/pathways. */
+    if (seg === "pathways") {
+      const pb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || pb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const out = (r) => json(r, r.ok ? 200 : r.error === "not_found" || r.error === "no_draft" ? 404 : 422, request);
+      if (method === "GET" && sub === "definitions") { const all = await PATHWAYS.listAll(env, orgId); return out({ ok: true, published: all.published, drafts: all.drafts }); }
+      if (method === "POST" && sub === "draft") return out(await PATHWAYS.saveDraft(env, orgId, pb.definition, actor.id));
+      if (method === "POST" && sub === "publish") return out(await PATHWAYS.publish(env, orgId, pb.key, actor.id));
+      if (method === "POST" && sub === "retire") return out(await PATHWAYS.retire(env, orgId, pb.key, pb.version, pb.reason, actor.id));
       return json({ ok: false, error: "not_found" }, 404, request);
     }
     if (seg === "accounts") {

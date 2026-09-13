@@ -1449,6 +1449,8 @@
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
         '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
+        '<button class="w-btn ghost" data-w-act="pathways" title="Clinical pathways, step progress and enrolments">' + ms("alt_route") + "Pathways</button>" +
+        '<button class="w-btn ghost" data-w-act="specialty" title="Specialty framework, templates and tools for this stay">' + ms("local_hospital") + "Specialty</button>" +
         '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
         '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this stay and whether each was met">' + ms("flag") + "Care plan</button>" +
         '<button class="w-btn ghost" data-w-act="tags" title="Issue a wristband and check the band on the patient">' + ms("how_to_reg") + "Wristband</button>" +
@@ -5157,6 +5159,81 @@
       result + "</div>";
   }
 
+  /* CLINICAL PATHWAYS (P2.12). Bedside pathway progress and enrolments.
+   * Progress is read directly from the clinical record: steps are evaluated against actual orders,
+   * observations, and forms. Overriding a step requires a mandatory clinical reason. */
+  var PW_STEP_STATUS = { met: "Met", missed: "Missed", "not-evaluated": "Not evaluated", pending: "Pending", overridden: "Overridden" };
+  function pathwaysView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.pathwaysData;
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Clinical pathways - " + esc(s.name || s.patientId) + "</h3>" +
+      '<button class="w-ic" data-w-act="pathways" title="Refresh">' + ms("refresh") + "</button></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading clinical pathways...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load clinical pathways. Do not read this as no pathways.</p></div>";
+
+    var enrolments = (d.progress && d.progress.enrolments) || [];
+    var available = (d.available && d.available.pathways) || [];
+    var enrolList = enrolments.length ? enrolments.map(function (en) {
+      var pw = en.pathway || {};
+      var steps = (en.steps || []).map(function (st) {
+        var isDone = st.status === "met" || st.status === "overridden";
+        var isAlert = st.status === "missed";
+        var badgeCls = isDone ? "done" : isAlert ? "overdue" : "due";
+        var ovr = st.override;
+        var act = (!isDone) ? '<button class="w-btn ghost sm" data-w-act="pwoverride:' + esc(en.id) + "~" + esc(st.key) + '">Override step</button>' : "";
+        return '<li class="w-mini-row"><div><span class="w-st ' + badgeCls + '">' + esc(PW_STEP_STATUS[st.status] || st.status) + "</span> " +
+          "<b>" + esc(st.title || st.key) + "</b> (" + esc(st.kind) + ")" +
+          (st.withinMinutes ? ' <span class="w-dt-times">&middot; target within ' + esc(st.withinMinutes) + "m</span>" : "") +
+          (ovr ? '<div class="w-dt-times"><b>Override reason:</b> ' + esc(ovr.reason) + (ovr.by ? " (by " + esc(ovr.by) + ")" : "") + "</div>" : "") +
+          '</div><div class="w-mini-row-act">' + act + "</div></li>";
+      }).join("");
+      return '<div class="w-sub"><h4>' + esc(pw.title || en.id) + " (v" + esc(pw.version || 1) + ")</h4>" +
+        '<p class="w-dt-times">Enrolled ' + when(en.enrolledAt) + (en.enrolledBy ? " by " + esc(en.enrolledBy) : "") + (pw.owner ? " &middot; Owner: " + esc(pw.owner) : "") + "</p>" +
+        '<ul class="w-mini">' + steps + "</ul></div>";
+    }).join("") : '<p class="w-empty">No active clinical pathways for this patient.</p>';
+
+    var availList = available.length ? '<div class="w-sub"><h4>Available pathways to enrol</h4><ul class="w-mini">' +
+      available.map(function (p) {
+        return '<li class="w-mini-row"><div><b>' + esc(p.title) + "</b> (v" + esc(p.version) + ")" +
+          (p.owner ? '<div class="w-dt-times">Owner: ' + esc(p.owner) + (p.reviewDate ? " &middot; Review: " + esc(p.reviewDate) : "") + "</div>" : "") +
+          '</div><div class="w-mini-row-act"><button class="w-btn sm" data-w-act="pwenrol:' + esc(p.key) + "~" + esc(p.version) + '">' + ms("add") + "Enrol</button></div></li>";
+      }).join("") + "</ul></div>" : '<p class="w-hint">No hospital pathways are currently published.</p>';
+
+    return '<div class="w-card">' + head +
+      '<div class="w-sub"><h4>Active pathway progress</h4>' + enrolList + "</div>" +
+      availList + "</div>";
+  }
+
+  /* SPECIALTY FRAMEWORK (P2.11). Hospital specialty profile for the admission class/specialty. */
+  function specialtyView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.specialtyData;
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Specialty framework - " + esc(s.name || s.patientId) + "</h3>" +
+      '<button class="w-ic" data-w-act="specialty" title="Refresh">' + ms("refresh") + "</button></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading specialty profile...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load specialty profile.</p></div>";
+    if (!d.configured || !d.specialty) return '<div class="w-card">' + head + '<p class="w-empty">No specialty profile configured for admission class "' + esc(s.class || "General") + '".</p></div>';
+
+    var sp = d.specialty;
+    var sets = (sp.orderSets || []).map(function (x) { return '<button class="w-btn ghost sm" data-w-act="ordersets">' + esc(x.name || x.id) + "</button>"; }).join(" ");
+    var tpls = (sp.templates || []).map(function (x) { return '<span class="w-chip">' + esc(x.title || x.id) + "</span>"; }).join(" ");
+    var calcs = (sp.calculators || []).map(function (x) { return '<button class="w-btn ghost sm" data-w-act="risks">' + esc(x.name || x.id) + "</button>"; }).join(" ");
+    var pws = (sp.pathways || []).map(function (x) { return '<button class="w-btn ghost sm" data-w-act="pathways">' + esc(x.title || x.key) + "</button>"; }).join(" ");
+
+    return '<div class="w-card">' + head +
+      '<div class="w-sub"><h4>' + esc(sp.name || sp.key) + "</h4>" +
+      (sp.description ? "<p>" + esc(sp.description) + "</p>" : "") +
+      '<div style="margin-top:12px"><b>Order sets:</b> ' + (sets || '<span class="w-dt-times">None</span>') + "</div>" +
+      '<div style="margin-top:8px"><b>Note templates:</b> ' + (tpls || '<span class="w-dt-times">None</span>') + "</div>" +
+      '<div style="margin-top:8px"><b>Calculators / risk tools:</b> ' + (calcs || '<span class="w-dt-times">None</span>') + "</div>" +
+      '<div style="margin-top:8px"><b>Pathways:</b> ' + (pws || '<span class="w-dt-times">None</span>') + "</div>" +
+      "</div></div>";
+  }
+
   /* THE BED WAITING LIST. admission-request.js was complete and unreachable, so a doctor who decided
    * a patient needed a bed had nowhere to say so except out loud - and a request made out loud is
    * the one that is forgotten when the shift changes.
@@ -6128,6 +6205,8 @@
         : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "careplan" ? carePlanView(state)
+        : state.view === "pathways" ? pathwaysView(state)
+        : state.view === "specialty" ? specialtyView(state)
         : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
         : state.view === "breakglass" ? breakGlassView(state)
@@ -8452,6 +8531,77 @@
       .catch(function () { st.busy = false; st.err = "Could not apply that order set."; paint(); });
   }
 
+  function loadPathways() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "pathways"; st.pathwaysData = null; paint();
+    Promise.all([
+      apiGet("/ward/pathways?orgId=" + encodeURIComponent(st.orgId)),
+      apiGet("/ward/pathway-progress?patientId=" + encodeURIComponent(st.sel.patientId))
+    ]).then(function (res) {
+      st.pathwaysData = { available: res[0] && res[0].ok ? res[0] : null, progress: res[1] && res[1].ok ? res[1] : null };
+      paint();
+    }).catch(function () {
+      st.pathwaysData = { failed: true };
+      paint();
+    });
+  }
+
+  function pathwayEnrol(arg) {
+    var s = st.sel;
+    if (!s) return;
+    var parts = String(arg || "").split("~");
+    apiPost("/ward/pathway-enrol", {
+      orgId: st.orgId,
+      patientId: s.patientId,
+      encounterId: s.encounterId || s.id || "",
+      pathwayKey: parts[0],
+      pathwayVersion: parts[1]
+    }).then(function (r) {
+      if (settle(r, "Patient enrolled on pathway.")) loadPathways();
+      else paint();
+    }).catch(function () {
+      st.err = "Could not enrol patient on pathway.";
+      paint();
+    });
+  }
+
+  function pathwayOverride(arg) {
+    var s = st.sel;
+    if (!s) return;
+    var parts = String(arg || "").split("~");
+    var reason = window.prompt("Clinical reason for overriding this pathway step (mandatory):");
+    if (!reason || reason.trim().length < 5) {
+      alert("A reason of at least 5 characters is required to override a pathway step.");
+      return;
+    }
+    apiPost("/ward/pathway-override", {
+      orgId: st.orgId,
+      patientId: s.patientId,
+      enrolmentId: parts[0],
+      stepKey: parts[1],
+      reason: reason.trim()
+    }).then(function (r) {
+      if (settle(r, "Step override recorded.")) loadPathways();
+      else paint();
+    }).catch(function () {
+      st.err = "Could not record step override.";
+      paint();
+    });
+  }
+
+  function loadSpecialty() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "specialty"; st.specialtyData = null; paint();
+    apiGet("/ward/specialty?class=" + encodeURIComponent(st.sel.class || "") + "&specialty=" + encodeURIComponent(st.sel.specialty || ""))
+      .then(function (r) {
+        st.specialtyData = r && r.ok ? r : { failed: true };
+        paint();
+      }).catch(function () {
+        st.specialtyData = { failed: true };
+        paint();
+      });
+  }
+
   function breakGlassOpen() {
     st.view = "breakglass"; st.breakGlass = null; paint(); loadBreakGlass();
   }
@@ -9803,6 +9953,8 @@
       if (st.view === "documents") { st.docs = null; st.docVersions = null; st.docNewVersion = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
       if (st.view === "careplan") { st.carePlan = null; st.view = "chart"; paint(); return; }
+      if (st.view === "pathways") { st.pathwaysData = null; st.view = "chart"; paint(); return; }
+      if (st.view === "specialty") { st.specialtyData = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
       if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
@@ -10181,6 +10333,10 @@
     if (cmd === "careplan") { carePlanOpen(); return; }
     if (cmd === "cpprog") { carePlanProgress(arg); return; }
     if (cmd === "cpreview") { carePlanReview(); return; }
+    if (cmd === "pathways") { loadPathways(); return; }
+    if (cmd === "pwenrol") { pathwayEnrol(arg); return; }
+    if (cmd === "pwoverride") { pathwayOverride(arg); return; }
+    if (cmd === "specialty") { loadSpecialty(); return; }
     if (cmd === "retriage") { recordRetriage(); return; }
     if (cmd === "edprocsave") { edProcedureSave(); return; }
     if (cmd === "admreqs") { admReqOpen(); return; }

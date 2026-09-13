@@ -426,6 +426,9 @@ const RESOURCE_TYPES = Object.freeze([
    * one record per acknowledgement, patient-compartmented. Signals themselves are computed, never stored.
    * Written through EMR_VITALS (VITALS_TYPES in actor.js), the same authority as charting the obs it cites. */
   "SurveillanceAcknowledgement",
+  /* P2.12 (pathways.js): a patient enrolled on one published pathway version, and each step override with its
+   * reason as its own record, never edited. Written through EMR_TREAT; no narrower grant writes either. */
+  "PathwayEnrolment", "PathwayStepOverride",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
