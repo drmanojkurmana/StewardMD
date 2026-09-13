@@ -1370,6 +1370,12 @@
         // patient does before anything else, and it is where the note box now lives.
         '<button class="w-btn ghost" data-w-act="timeline" title="The whole clinical history on one page, and where you add a clinical note">' + ms("history") + "Timeline</button>" +
         '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+        /* CLOSING THE STAY. A ward patient could have a discharge summary written and still never be
+         * discharged - the route that ends the stay had no button, so the bed board went on showing them
+         * in a bed they had left. Where they went is asked for, because "discharged" alone does not say
+         * home, another hospital, or died. */
+        '<button class="w-btn ghost" data-w-act="wardcloseopen" title="End this stay and record where the patient went">' + ms("home") + "Discharge</button>" +
+        '<button class="w-btn ghost" data-w-act="followup" title="Ask for this patient to be seen again">' + ms("schedule") + "Follow-up</button>" +
         // ONCqis is a separate product; this is only the LINK into it. Reachable from any patient
         // because oncology is a workflow layered on the ordinary chart, not a ward of its own.
         '<button class="w-btn ghost" data-w-act="oncologyopen" title="ONCqis link, diagnosis, adverse events, chemo administration">' + ms("labs") + "Oncology</button>" +
@@ -6405,6 +6411,43 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  var WARD_DISPOSITIONS = [["home", "home"], ["transferred", "to another hospital"], ["left-against-advice", "left against medical advice"], ["died", "died"]];
+  function wardDischarge() {
+    var s = st.sel; if (!s) return;
+    var pick = "";
+    try {
+      pick = G.prompt("Where did " + (s.name || "the patient") + " go? Type: " + WARD_DISPOSITIONS.map(function (d) { return d[0]; }).join(", ")) || "";
+      pick = String(pick).trim().toLowerCase();
+    } catch (e) {}
+    var known = WARD_DISPOSITIONS.filter(function (d) { return d[0] === pick; })[0];
+    if (!known) { st.err = "Say where the patient went: " + WARD_DISPOSITIONS.map(function (d) { return d[0]; }).join(", ") + "."; paint(); return; }
+    /* A death is not recorded from here: it is a clinical statement with its own confirmation and its
+     * own record, on the Contacts and status screen. Ending the stay as "died" without it would leave
+     * the patient alive on their own record. */
+    if (known[0] === "died") { st.err = "Record the death first on the Contacts screen, then close the stay."; paint(); return; }
+    if (!confirm("End this stay: " + (s.name || s.patientId) + " went " + known[1] + "?\n\nThe bed is released.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/discharge", { orgId: st.orgId, encounterId: s.encounterId, disposition: known[0] })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Stay ended. The bed is free." : null)) { st.sel = null; st.view = "list"; loadWard(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not end the stay."; paint(); });
+  }
+  function followUpRequest() {
+    var s = st.sel; if (!s) return;
+    var reason = "", dueBy = "";
+    try { reason = G.prompt("Why should this patient be seen again?") || ""; } catch (e) {}
+    if (!reason) { st.err = "A follow-up needs a reason."; paint(); return; }
+    try { dueBy = G.prompt("Seen by when? (YYYY-MM-DD)") || ""; } catch (e) {}
+    /* A follow-up with no date is one nobody books, so the date is required and must be a real date. */
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dueBy).trim())) { st.err = "Give a date like 2026-10-01."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/follow-up", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, reason: reason, dueBy: String(dueBy).trim() })
+      .then(function (r) { settle(r, r && r.ok ? "Follow-up requested." : null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not request that follow-up."; paint(); });
+  }
+
   function invoiceVoid(invoiceId) {
     if (!invoiceId) return;
     var reason = "";
@@ -8095,6 +8138,8 @@
     if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
     if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
+    if (cmd === "wardcloseopen") { wardDischarge(); return; }
+    if (cmd === "followup") { followUpRequest(); return; }
     if (cmd === "invvoid") { invoiceVoid(arg); return; }
     if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
     if (cmd === "bloodtrace") { bloodTrace(); return; }
