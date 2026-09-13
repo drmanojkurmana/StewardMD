@@ -74,9 +74,10 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
     if (!sample.length) { view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no patient to check with' }; failed.push(view.resourceHint); continue; }
     say({ checking: view.resourceHint });
     let best = null;
+    let lastError = '';
     for (const patient of sample) {
       let out = null;
-      try { out = await executeView({ plugin, origin, view, patient, parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; out = null; }
+      try { out = await executeView({ plugin, origin, view, patient, parseHtml }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; out = null; lastError = String((e && e.message) || e).replace(/\d{3,}/g, '#').slice(0, 120); }
       if (out && out.rows.length) { best = out; break; }
       if (out && !best) best = out;
     }
@@ -91,7 +92,7 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
     }
     const rows = best ? best.rows : [];
     const verdict = await judge({ brain, resource: view.resourceHint, rows, kind: best ? best.kind : 'none', path: best ? best.url : null });
-    const c = { resource: view.resourceHint, ok: verdict.ok, via: best ? 'endpoint' : 'none', rows: rows.length, kind: best ? best.kind : 'none', reason: verdict.reason, resourceSeen: verdict.resource, url: best ? best.url : null };
+    const c = { resource: view.resourceHint, ok: verdict.ok, via: best ? 'endpoint' : 'none', rows: rows.length, kind: best ? best.kind : 'none', reason: (!best && lastError) ? 'replay failed: ' + lastError : verdict.reason, resourceSeen: verdict.resource, url: best ? best.url : null };
     checks.push(c); view.verified = c;
     if (!verdict.ok) failed.push(view.resourceHint);
   }
