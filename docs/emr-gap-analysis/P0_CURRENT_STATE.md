@@ -295,3 +295,12 @@ with that reason rather than given duplicate screens.
 **Next:** remaining backlog (onco recommend, readers, link-mrn, identity, advisory-check, dose-ceiling,
 emergency-chart, extend, flag-critical, backfill, resus-waive, metrics, operational-health, twin, maik,
 and the older set), then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
+
+
+## 2026-09-14 (cont.) — resuscitation waiver (backlog 28 -> 27)
+
+Bundle elements can be recorded as "not appropriate" with a reason. **Bug caught:** a waived element
+would still have shown as overdue and counting down; it now reads as a decision. 2 tests.
+
+**Numbers:** 6012 passing, 0 failing. 27 routes waiting for a screen.
+**Next:** flag-critical, extend, emergency-chart, dose-ceiling, advisory-check; then P0.7, P0.9, P0.8, P0.10.
