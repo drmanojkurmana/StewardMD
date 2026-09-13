@@ -389,3 +389,10 @@ P0.7 governed merge: "Same person - merge" now asks the server for a dry run (ev
 **Numbers:** 6032 passing, 0 failing. 15 routes waiting for a screen.
 **P0.7 status:** duplicate detection, phonetic matching, preview/authorised/audited/reversible merge, identifier history all in place. Remaining P0.7: none known.
 **Next:** P0.9 MFA/session hardening.
+
+### 2026-09-13 - P0.9 sign-in hardening (part 1)
+
+Password sign-in now locks after 5 wrong tries (had no limit; PIN already did), own counters. Every sign-in outcome audited under the hospital, never the secret. Weak PINs (repeated/consecutive, not 4-8 digits) and passwords (<10, common, contains email name) refused when set. Resetting, disabling, or changing a PIN/password ends sessions issued before it (sessionsRevokedAt vs signed issue time); restore does not revive them. Fixed three screens that said Saved / Clinic ready / nothing when a PIN or password was refused. Live on both sites.
+
+**Numbers:** 6038 passing, 0 failing. 15 routes waiting for a screen.
+**Next (P0.9):** two-step sign-in (authenticator code) for staff password sign-in; staff "sessions and devices" visibility; security headers check.
