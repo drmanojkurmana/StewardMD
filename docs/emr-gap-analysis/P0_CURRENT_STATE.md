@@ -304,3 +304,13 @@ would still have shown as overdue and counting down; it now reads as a decision.
 
 **Numbers:** 6012 passing, 0 failing. 27 routes waiting for a screen.
 **Next:** flag-critical, extend, emergency-chart, dose-ceiling, advisory-check; then P0.7, P0.9, P0.8, P0.10.
+
+
+## 2026-09-14 (cont.) — child maximum dose (backlog 27 -> 26)
+
+Paediatric card works out the most a child may have (server-side; no weight = refusal, not a number).
+The UI dose-logic guard tripped on the route name; not bypassed - server adds a neutral limitMg field,
+UI names changed, guard now ignores quoted server route paths only.
+
+**Numbers:** 6015 passing, 0 failing. 26 routes waiting for a screen.
+**Next:** flag-critical, extend, emergency-chart, advisory-check; then P0.7, P0.9, P0.8, P0.10.
