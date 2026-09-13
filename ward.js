@@ -1510,7 +1510,7 @@
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
       (isNicu ? neonatalCard() + linesCard(state) : "") +
       ((isEd || isMaternity || isIcu) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
-      medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) +
+      medOrderCard(state) + marCard(state) + outboxCard(state) + investigationsCard(state) + pathologyCard(state) +
       (isMaternity ? deliveryCard(state) : "") +
       (isEd ? edProceduresCard(state) + dispositionCard(state) : "");
   }
@@ -2984,7 +2984,9 @@
     var pendRow = function (p) {
       return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
         '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div>" +
-        '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + "Enter result</button></li>";
+        '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + "Enter result</button>" +
+        '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(p.serviceRequestId) + '">' + ms("coronavirus") + "Culture</button>" +
+        '<button class="w-btn ghost sm" data-w-act="histoopen:' + esc(p.serviceRequestId) + '">' + ms("description") + "Histopathology</button></li>";
     };
     var critRow = function (c) {
       var e = c.escalation || {};
@@ -3020,7 +3022,144 @@
       labResultForm(state) +
       ((b.toVerify || []).length ? card("verified", "Awaiting verification", b.toVerify.length, b.toVerify.map(labVerifyRow).join(""), "") : "") +
       card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
-      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
+      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.") +
+      cultureForm(state) + histoForm(state) +
+      card("coronavirus", "Cultures in progress", (b.cultures || []).length, (b.cultures || []).map(function (c) {
+        return '<li><div class="w-crit-h"><b>' + esc(c.panel || "Culture") + "</b>" + '<span class="w-st due">' + esc(CULTURE_STAGE_WORDS[c.stage] || c.stage) + "</span>" +
+          (c.critical ? '<span class="w-st overdue">positive blood culture</span>' : "") + "</div>" +
+          '<div class="w-crit-m">' + ms("person") + labWho(c.patientId) + " &middot; " + esc((c.specimen && c.specimen.type) || "") + "</div>" +
+          '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(c.serviceRequestId) + '">' + ms("edit_note") + "Update stage</button></li>";
+      }).join(""), "No cultures in progress.") +
+      card("description", "Histopathology reports", (b.histopathology || []).length, (b.histopathology || []).map(function (h) {
+        var signed = h.status === "final" || h.status === "corrected";
+        return '<li><div class="w-crit-h"><b>' + esc(h.panel || "Histopathology") + "</b>" +
+          '<span class="w-st ' + (signed ? "" : "due") + '">' + (signed ? "signed" : h.awaitingVerification ? "awaiting verification" : "not signed") + "</span></div>" +
+          '<div class="w-crit-m">' + ms("person") + labWho(h.patientId) + (h.diagnosis ? " &middot; " + esc(h.diagnosis) : "") + "</div>" +
+          (signed ? '<button class="w-btn ghost sm" data-w-act="histoaddendum:' + esc(h.reportId) + '">' + ms("post_add") + "Add addendum</button>" : "") + "</li>";
+      }).join(""), "No histopathology reports.");
+  }
+
+  /* MICROBIOLOGY ENTRY (P1.9). One form per stage update; every save is a new version of the same
+   * report. A susceptibility left on "not tested" is not sent at all, so nothing becomes S by default. */
+  var CULTURE_STAGE_WORDS = { received: "Received", incubating: "Incubating", "growth-detected": "Growth detected", identification: "Identification",
+    "no-growth": "No growth so far", final: "Final" };
+  var CULTURE_ABX_ROWS = 8, CULTURE_ORG_SLOTS = 2;
+  function cultureForm(state) {
+    var f = state.cultureFor;
+    if (!f) return "";
+    var c = f.existing || {};
+    var orgs = c.organisms || [];
+    var sel = function (id, opts, cur) {
+      return '<select id="' + id + '">' + opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === cur ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select>";
+    };
+    var input = function (id, label, v, ph) {
+      return '<label class="w-f"><span>' + esc(label) + '</span><input id="' + id + '" value="' + esc(v == null ? "" : v) + '"' + (ph ? ' placeholder="' + esc(ph) + '"' : "") + "></label>";
+    };
+    var stages = [["received", "Received"], ["incubating", "Incubating"], ["growth-detected", "Growth detected (preliminary, Gram stain)"], ["identification", "Organism identified"], ["no-growth", "No growth at N hours"], ["final", "Final"]];
+    var orgHtml = "";
+    for (var k = 0; k < CULTURE_ORG_SLOTS; k++) {
+      var o = orgs[k] || {}, sus = o.susceptibilities || [];
+      var abx = "";
+      for (var r = 0; r < CULTURE_ABX_ROWS; r++) {
+        var s = sus[r] || {};
+        abx += '<div class="w-grid">' + input("wCuAbx" + k + "_" + r, "Antibiotic", s.antibiotic) +
+          '<label class="w-f"><span>Result</span>' + sel("wCuRes" + k + "_" + r, [["", "Not tested"], ["S", "S"], ["I", "I"], ["R", "R"], ["SDD", "SDD"]], s.result || "") + "</label>" +
+          input("wCuMic" + k + "_" + r, "MIC", s.mic) + input("wCuMicU" + k + "_" + r, "MIC unit", s.micUnit) + input("wCuMeth" + k + "_" + r, "Method", s.method) + "</div>";
+      }
+      orgHtml += '<div class="w-sub"><h4>' + ms("coronavirus") + "Organism " + (k + 1) + "</h4>" +
+        '<div class="w-grid">' + input("wCuOrg" + k, "Organism", o.name) + input("wCuQty" + k, "Quantity or colony count", o.quantity) +
+        input("wCuBp" + k, "Breakpoint standard", o.breakpointStandard, "as reported, e.g. CLSI M100 2025") + "</div>" + abx + "</div>";
+    }
+    var spec = c.specimen || {};
+    return '<div class="w-card"><div class="w-card-h">' + ms("coronavirus") + "<h3>Culture: " + esc(f.display || f.code || "") + "</h3>" +
+      '<button class="w-ic" data-w-act="cultureclose" title="Close">' + ms("close") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Each save is a new stage on the same report. Leave an antibiotic on Not tested unless it was tested. Leave the breakpoint standard empty if it was not reported.</p>" +
+      '<div class="w-grid">' + input("wCuSpec", "Specimen type", spec.type, "e.g. Blood, Urine, CSF") + input("wCuSite", "Site", spec.site) +
+      input("wCuColl", "Collected at", c.collectedAt, "YYYY-MM-DDTHH:MM") + input("wCuRecv", "Received at", c.receivedAt, "YYYY-MM-DDTHH:MM") + "</div>" +
+      '<div class="w-grid"><label class="w-f"><span>Stage</span>' + sel("wCuStage", stages, c.stage || "received") + "</label>" +
+      input("wCuGram", "Gram stain", c.gramStain) + input("wCuNoGrowth", "No growth at hours", c.noGrowthHours) + "</div>" +
+      orgHtml +
+      '<textarea id="wCuComment" rows="2" placeholder="Comment (optional)">' + esc(c.comment || "") + "</textarea>" +
+      '<label class="w-f"><span><input type="checkbox" id="wCuCorrect"> This corrects a final culture</span></label>' +
+      '<button class="w-btn" data-w-act="culturesave">' + ms("send") + "Save stage</button></div>";
+  }
+  function histoForm(state) {
+    var f = state.histoFor;
+    if (!f) return "";
+    var area = function (id, label, rows) { return '<label class="w-f"><span>' + esc(label) + '</span><textarea id="' + id + '" rows="' + rows + '"></textarea></label>'; };
+    return '<div class="w-card"><div class="w-card-h">' + ms("description") + "<h3>Histopathology: " + esc(f.display || f.code || "") + "</h3>" +
+      '<button class="w-ic" data-w-act="histoclose" title="Close">' + ms("close") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Once signed, the report is not edited. Anything added later is an addendum.</p>" +
+      '<label class="w-f"><span>Specimen</span><input id="wHpSpec"></label>' +
+      area("wHpClin", "Clinical details", 2) + area("wHpMacro", "Macroscopic", 3) + area("wHpMicro", "Microscopic", 4) +
+      area("wHpDx", "Diagnosis", 2) + '<label class="w-f"><span>Coded diagnosis (optional, as coded by the pathologist)</span><input id="wHpCode"></label>' +
+      '<select id="wHpStatus"><option value="preliminary">Save unsigned (preliminary)</option><option value="final">Sign (final)</option></select>' +
+      '<button class="w-btn" data-w-act="histosave">' + ms("send") + "Save report</button></div>";
+  }
+
+  /* THE CHART'S CULTURES AND HISTOPATHOLOGY. Loading, failed and empty are three different sentences.
+   * A susceptibility that was not reported is "not tested", never a blank that could be read as S.
+   * The antibiotic review is advisory: it lists, it flags, and it changes nothing. */
+  function pathologyCard(state) {
+    var p = state.pathology;
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("coronavirus") + "<h3>Cultures and histopathology</h3>" +
+      '<button class="w-ic" data-w-act="pathologyload" title="Refresh">' + ms("refresh") + "</button></div>";
+    if (p === false) return head + '<p class="w-hint warn">' + ms("error") + "Cultures and histopathology could not be loaded. Do not read this as none.</p></div>";
+    if (!p) return head + '<p class="w-empty">Loading cultures and histopathology...</p></div>';
+    var cultures = p.cultures || [], histo = p.histopathology || [];
+    if (!cultures.length && !histo.length) return head + '<p class="w-empty">No cultures or histopathology reports for this patient.</p></div>';
+
+    var cultureHtml = cultures.map(function (c) {
+      var orgs = c.organisms || [];
+      var names = [], seen = {};
+      orgs.forEach(function (o) { (o.susceptibilities || []).forEach(function (s) { var k = String(s.antibiotic).toLowerCase(); if (!seen[k]) { seen[k] = 1; names.push(s.antibiotic); } }); });
+      var cell = function (o, name) {
+        var hit = null;
+        (o.susceptibilities || []).forEach(function (s) { if (String(s.antibiotic).toLowerCase() === String(name).toLowerCase()) hit = s; });
+        if (!hit) return "<td><i>not tested</i></td>";
+        return "<td><b>" + esc(hit.result) + "</b>" + (hit.mic ? " (MIC " + esc(hit.mic) + (hit.micUnit ? " " + esc(hit.micUnit) : "") + ")" : "") + (hit.method ? " <small>" + esc(hit.method) + "</small>" : "") + "</td>";
+      };
+      var table = names.length
+        ? '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>Antibiotic</th>' + orgs.map(function (o) { return "<th>" + esc(o.name) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+          names.map(function (n) { return "<tr><td>" + esc(n) + "</td>" + orgs.map(function (o) { return cell(o, n); }).join("") + "</tr>"; }).join("") + "</tbody></table></div>"
+        : (orgs.length ? "<p class=\"w-hint\">No susceptibilities reported yet.</p>" : "");
+      return "<li><div class=\"w-crit-h\"><b>" + esc(c.panel || "Culture") + "</b>" +
+        (c.status === "preliminary" ? '<span class="w-st due">PRELIMINARY</span>' : c.status === "corrected" ? '<span class="w-st overdue">CORRECTED</span>' : '<span class="w-st">Final</span>') +
+        (c.critical ? '<span class="w-st overdue">positive blood culture</span>' : "") + "</div>" +
+        '<div class="w-crit-m">' + esc((c.specimen && c.specimen.type) || "") + (c.specimen && c.specimen.site ? ", " + esc(c.specimen.site) : "") +
+        " &middot; " + esc(CULTURE_STAGE_WORDS[c.stage] || c.stage || "") + (c.stage === "no-growth" || (c.stage === "final" && c.noGrowthHours) ? " at " + esc(c.noGrowthHours) + " hours" : "") +
+        " &middot; " + when(c.reportedAt) + "</div>" +
+        (c.gramStain ? "<div>Gram stain: " + esc(c.gramStain) + "</div>" : "") +
+        orgs.map(function (o) {
+          return "<div><b>" + esc(o.name) + "</b>" + (o.quantity ? " &middot; " + esc(o.quantity) : "") +
+            " &middot; " + (o.breakpointStandard ? "Breakpoints: " + esc(o.breakpointStandard) : "breakpoint standard not reported") + "</div>";
+        }).join("") + table + (c.comment ? "<div>" + esc(c.comment) + "</div>" : "") + "</li>";
+    }).join("");
+
+    var abx = p.antibioticOrders;
+    var review = !cultures.length ? ""
+      : abx == null ? '<p class="w-hint warn">' + ms("error") + "Active medication orders could not be read, so no antibiotic review was done.</p>"
+      : !abx.length ? '<p class="w-hint">No active orders for an antibiotic on these panels. Other active medicines are not screened here.</p>'
+      : '<ul class="w-mini">' + abx.map(function (a) {
+          return "<li><b>" + esc(a.drug) + "</b>" + (a.flag
+            ? ' <span class="w-st overdue">' + esc(a.flag) + "</span><div>" + a.resistant.map(function (x) { return esc(x.organism) + (x.preliminary ? " (preliminary)" : ""); }).join(", ") + " reported R to " + esc(a.antibiotic) + "</div>"
+            : " <span>no organism reported R to " + esc(a.antibiotic) + "</span>") + "</li>";
+        }).join("") + "</ul><p class=\"w-hint\">Advisory only. Other active medicines are not screened here.</p>";
+
+    var histoHtml = histo.map(function (h) {
+      var sec = function (label, v) { return v ? "<div><b>" + esc(label) + ":</b> " + esc(v) + "</div>" : ""; };
+      return "<li><div class=\"w-crit-h\"><b>" + esc(h.panel || "Histopathology") + "</b>" +
+        (h.status === "final" || h.status === "corrected" ? '<span class="w-st">Signed</span>' : '<span class="w-st due">PRELIMINARY' + (h.awaitingVerification ? ", awaiting verification" : "") + "</span>") + "</div>" +
+        '<div class="w-crit-m">Reported by ' + esc(h.reportedBy || "unknown") + (h.verifiedBy ? ", verified by " + esc(h.verifiedBy) : "") + " &middot; " + when(h.reportedAt) + "</div>" +
+        sec("Specimen", h.specimen) + sec("Clinical details", h.clinicalDetails) + sec("Macroscopic", h.macroscopic) + sec("Microscopic", h.microscopic) +
+        sec("Diagnosis", h.diagnosis) + sec("Coded diagnosis", h.codedDiagnosis) +
+        (h.addenda || []).map(function (a) { return '<div class="w-sub"><b>Addendum</b> ' + esc(a.by) + " &middot; " + when(a.at) + "<div>" + esc(a.text) + "</div></div>"; }).join("") + "</li>";
+    }).join("");
+
+    return head +
+      (cultures.length ? '<div class="w-sub"><h4>' + ms("coronavirus") + "Cultures</h4><ul class=\"w-crits\">" + cultureHtml + "</ul></div>" +
+        '<div class="w-sub"><h4>' + ms("medication") + "Active antibiotic orders</h4>" + review + "</div>" : "") +
+      (histo.length ? '<div class="w-sub"><h4>' + ms("description") + "Histopathology</h4><ul class=\"w-crits\">" + histoHtml + "</ul></div>" : "") + "</div>";
   }
   /* What the background escalation did for a loop nobody acknowledged. "Not delivered" is said as
    * plainly as "delivered": a hospital with no notification channel must see that nobody was paged. */
@@ -3152,7 +3291,7 @@
   function loadLabBoard() {
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId);
-    var out = { specimens: [], pending: [], criticals: [], toVerify: [], errors: [] };
+    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], errors: [] };
     var read = function (name, path, fn) {
       return apiGet(path).then(function (r) {
         if (r && r.ok) fn(r); else out.errors.push(name);
@@ -3162,6 +3301,7 @@
       read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
       read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
       read("results awaiting verification", "/ward/results-to-verify?" + q, function (r) { out.toVerify = r.results || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
+      read("cultures in progress", "/ward/cultures-in-progress?" + q, function (r) { out.cultures = r.cultures || []; out.histopathology = r.histopathology || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("critical results", "/ward/criticals?" + q, function (r) {
         // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
         out.criticals = (r.loops || []).filter(function (l) { return !radCriticalOf(l); });
@@ -7420,6 +7560,79 @@
       .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
 
+  /* Microbiology and histopathology entry (P1.9). A culture is opened from a pending request or from
+   * its in-progress row, where the form starts from the stage already on the record. */
+  function cultureOpen(srId) {
+    var b = st.labBoard || {}, found = null, existing = null;
+    (b.pending || []).forEach(function (p) { if (p.serviceRequestId === srId) found = p; });
+    (b.cultures || []).forEach(function (c) { if (c.serviceRequestId === srId) { existing = c; found = found || { serviceRequestId: srId, display: c.panel, patientId: c.patientId }; } });
+    if (!found) { st.err = "That request is no longer on the board. Refresh the board."; paint(); return; }
+    st.histoFor = null; st.labResultFor = null;
+    st.cultureFor = Object.assign({}, found, { existing: existing }); paint();
+  }
+  function cultureSave() {
+    var f = st.cultureFor; if (!f) return;
+    var organisms = [];
+    for (var k = 0; k < CULTURE_ORG_SLOTS; k++) {
+      var name = val("wCuOrg" + k);
+      var sus = [];
+      for (var r = 0; r < CULTURE_ABX_ROWS; r++) {
+        var a = val("wCuAbx" + k + "_" + r), res = val("wCuRes" + k + "_" + r);
+        if (!a || !res) continue; // not tested is not sent
+        sus.push({ antibiotic: a, result: res, mic: val("wCuMic" + k + "_" + r) || undefined, micUnit: val("wCuMicU" + k + "_" + r) || undefined, method: val("wCuMeth" + k + "_" + r) || undefined });
+      }
+      if (!name) { if (sus.length) { st.err = "Organism " + (k + 1) + " has susceptibilities but no name."; paint(); return; } continue; }
+      organisms.push({ name: name, quantity: val("wCuQty" + k) || undefined, breakpointStandard: val("wCuBp" + k) || undefined, susceptibilities: sus });
+    }
+    var box = document.getElementById("wCuCorrect");
+    st.busy = true; paint();
+    apiPost("/ward/culture-report", {
+      orgId: st.orgId, serviceRequestId: f.serviceRequestId, stage: val("wCuStage"),
+      specimen: { type: val("wCuSpec"), site: val("wCuSite") || undefined },
+      collectedAt: val("wCuColl") || undefined, receivedAt: val("wCuRecv") || undefined, gramStain: val("wCuGram") || undefined,
+      noGrowthHours: val("wCuNoGrowth") || undefined, organisms: organisms, comment: val("wCuComment") || undefined,
+      correction: !!(box && box.checked),
+    }).then(function (r) {
+      if (settle(r, "Culture stage saved.")) {
+        if (r.criticalCheck && !r.criticalCheck.checked) st.err = "Saved, but the critical-result alert for this positive blood culture could NOT be opened. Phone the ward now.";
+        else if (r.criticalCheck && r.criticalCheck.opened) st.note = "Positive blood culture. The critical-result alert has been opened.";
+        st.cultureFor = null; loadLabBoard();
+      } else paint();
+    }).catch(function () { st.busy = false; st.err = "Could not reach the server."; paint(); });
+  }
+  function histoOpen(srId) {
+    var b = st.labBoard || {}, found = null;
+    (b.pending || []).forEach(function (p) { if (p.serviceRequestId === srId) found = p; });
+    if (!found) { st.err = "That request is no longer on the board. Refresh the board."; paint(); return; }
+    st.cultureFor = null; st.labResultFor = null; st.histoFor = found; paint();
+  }
+  function histoSave() {
+    var f = st.histoFor; if (!f) return;
+    st.busy = true; paint();
+    apiPost("/ward/histopathology-report", {
+      orgId: st.orgId, serviceRequestId: f.serviceRequestId, status: val("wHpStatus") || "preliminary", specimen: val("wHpSpec"),
+      clinicalDetails: val("wHpClin") || undefined, macroscopic: val("wHpMacro") || undefined, microscopic: val("wHpMicro") || undefined,
+      diagnosis: val("wHpDx") || undefined, codedDiagnosis: val("wHpCode") || undefined,
+    }).then(function (r) {
+      if (settle(r, r && r.awaitingVerification ? "On the chart as preliminary. Another member of the laboratory must verify it." : "Histopathology report saved.")) { st.histoFor = null; loadLabBoard(); }
+      else paint();
+    }).catch(function () { st.busy = false; st.err = "Could not reach the server."; paint(); });
+  }
+  function histoAddendum(reportId) {
+    var text = window.prompt("Addendum. The signed report is not changed.") || "";
+    if (!text.trim()) { st.err = "An addendum needs words."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/histopathology-addendum", { orgId: st.orgId, reportId: reportId, text: text })
+      .then(function (r) { if (settle(r, "Addendum added.")) loadLabBoard(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not reach the server."; paint(); });
+  }
+  function loadPathology() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.pathology = null; paint();
+    return apiGet("/ward/pathology-reports?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.pathology = r && r.ok ? r : false; paint(); })
+      .catch(function () { st.pathology = false; paint(); });
+  }
   function labResultOpen(srId) {
     var b = st.labBoard || {};
     var found = null;
@@ -9102,7 +9315,7 @@
       if (st.view === "surgerycase") { st.surgCase = null; loadSurgeryBoard(); return; }
       st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
       st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false;
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
       st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
@@ -9123,7 +9336,7 @@
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
       st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       st.icu = null; st.flowsheetFailed = false; st.resusBundles = null;
@@ -9133,7 +9346,7 @@
       st.maik = null;
       defaultWindow();
       st.noteTemplateId = ""; st.noteResult = null;
-      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations();
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadPathology();
       if (p.class === "ICU") { loadDevices(); loadIcu(); loadResus(); }
       if (p.class === "MATERNITY") loadMaternity();
       if (p.class === "PEDIATRICS" || p.class === "NICU") loadAgeBand();
@@ -9145,7 +9358,7 @@
       for (var k2 = 0; k2 < ((st.ed && st.ed.patients) || []).length; k2++) { if (st.ed.patients[k2].encounterId === arg) { pe = st.ed.patients[k2]; break; } }
       if (!pe) return;
       st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.edRecord = null; st.referrals = null;
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
@@ -9153,7 +9366,7 @@
       /* MaiK's panel is cleared when the chart changes. An answer about the previous patient left on
        * screen beside a new patient's observations is the wrong-patient error with extra steps. */
       st.maik = null;
-      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadResus(); loadEdRecord(); loadReferrals(); return;
+      paint(); loadChart(); loadRound(); loadBalance(); loadOutbox(); loadTemplates(); loadFlowsheet(); loadNews2(); loadInvestigations(); loadPathology(); loadResus(); loadEdRecord(); loadReferrals(); return;
     }
     if (cmd === "edboard") { loadEd(); return; }
     if (cmd === "inventoryboard") { inventoryOpen(); return; }
@@ -9387,6 +9600,14 @@
       return;
     }
     if (cmd === "labresultclose") { st.labResultFor = null; st.labResultOutcome = null; paint(); return; }
+    if (cmd === "cultureopen") { cultureOpen(arg); return; }
+    if (cmd === "culturesave") { cultureSave(); return; }
+    if (cmd === "cultureclose") { st.cultureFor = null; paint(); return; }
+    if (cmd === "histoopen") { histoOpen(arg); return; }
+    if (cmd === "histosave") { histoSave(); return; }
+    if (cmd === "histoclose") { st.histoFor = null; paint(); return; }
+    if (cmd === "histoaddendum") { histoAddendum(arg); return; }
+    if (cmd === "pathologyload") { loadPathology(); return; }
     if (cmd === "tags") { tagsOpen(); return; }
     if (cmd === "tagverify") { tagVerify(); return; }
     if (cmd === "tagassign") { tagAssign(); return; }
@@ -9589,7 +9810,7 @@
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
     st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
-    st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+    st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
     st.incidentLog = null; st.incidentHealth = null;
     st.consultationResult = null;
@@ -9630,5 +9851,5 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard };
 })();
