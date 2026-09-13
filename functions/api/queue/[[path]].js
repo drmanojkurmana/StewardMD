@@ -172,6 +172,7 @@ import { imagingWorklist } from "../../_wardsynq/dicom.js";
 import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
+import { runTick } from "../../_wardsynq/ops-tick.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
@@ -1226,6 +1227,19 @@ export async function onRequest(context) {
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
       const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg };
+      /* BACKGROUND WORK ON ORDINARY TRAFFIC: escalate unacknowledged critical results and drain the
+       * outbox, at most once per two minutes per hospital, after the response is on its way. No
+       * scheduler is required for a hospital that is in use; ops-tick.js is callable by one as well. */
+      if (context.waitUntil && env.WSQ_TICK_OFF !== "1") {
+        context.waitUntil((async () => {
+          try {
+            const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
+            if (!gate.allowed) return;
+            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {} });
+            if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
+          } catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
+        })());
+      }
 
       if (sub === "admit" && method === "POST") {
         const r = await admitPatient(request, env, { ...deps, admission: body.admission || body, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });

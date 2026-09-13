@@ -2768,6 +2768,16 @@
       card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
       card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
   }
+  /* What the background escalation did for a loop nobody acknowledged. "Not delivered" is said as
+   * plainly as "delivered": a hospital with no notification channel must see that nobody was paged. */
+  function critEscalationsHtml(list) {
+    if (!list || !list.length) return "";
+    return '<div class="w-crit-m">' + list.map(function (x) {
+      var n = x.notification || {};
+      return ms("campaign") + (x.level === "escalate" ? "Escalated" : "Overdue") + " " + when(x.at) + " after " + esc(x.minutesOpen) + " min: " +
+        (n.delivered ? "notification delivered" : '<b>nobody was notified</b> (' + esc(n.reason === "NO_CHANNEL" ? "no notification channel is set up" : (n.reason || "delivery failed")) + ")");
+    }).join("<br>") + "</div>";
+  }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
     var rows = loops.map(function (c) {
@@ -2780,6 +2790,7 @@
         " &middot; " + ms("schedule") + (mins == null ? "" : mins + " min since reported") +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") +
         (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
+        critEscalationsHtml(c.escalations) +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
       "</li>";
     }).join("");

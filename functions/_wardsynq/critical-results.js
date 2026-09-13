@@ -205,6 +205,9 @@ function CriticalResultLoop(input) {
     // one rule: attempted is not delivered. { attempted, delivered, channels, reason?, at }. A site
     // that wires no channel gets NO_CHANNEL recorded here, never a silent "sent".
     notification: i.notification || null,
+    // Each time the unacknowledged loop crossed a level (overdue, escalate), what was attempted. ops-tick.js.
+    escalations: Array.isArray(i.escalations) ? i.escalations : [],
+    escalatedLevel: i.escalatedLevel || null,
     source: i.source || { system: "wardsynq-native", sourceId: `critical:${i.id}` },
   };
 }
@@ -336,6 +339,7 @@ function summary(l, nowMs, policy) {
     version: l.version,
     escalation: escalationOf(l, nowMs, policy),
     notification: l.notification || null,
+    escalations: l.escalations || [],
   };
 }
 
