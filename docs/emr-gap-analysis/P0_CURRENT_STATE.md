@@ -367,3 +367,10 @@ Security fix: set PIN / password / disable / restore / reset / remove all upsert
 
 **Numbers:** 6025 passing, 0 failing. 16 routes waiting for a screen.
 **Next:** remaining 16 (backfill clinic hl7 hospital identity link-mrn maik-interactions metrics operational-health order readers recommend roi round twin-predict twin-reconstruct).
+
+### 2026-09-13 - merge history on duplicate records (backlog 16 -> 15)
+
+P0.7 identifier history: the duplicate-records screen shows what the open record was joined into, what was joined into it, and every undo with who and why. Undo only on a live merge (was on every search match, where it could only fail). Loading/failed/never-merged are distinct; a capped link scan is flagged partial on the server. Live (ward.js site47).
+
+**Numbers:** 6029 passing, 0 failing. 15 routes waiting for a screen.
+**Next:** P0.7 fuzzy/phonetic search check; remaining 15 (backfill clinic hl7 hospital link-mrn maik-interactions metrics operational-health order readers recommend roi round twin-predict twin-reconstruct).
