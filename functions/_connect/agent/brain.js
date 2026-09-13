@@ -32,14 +32,14 @@ export const ROLES = Object.freeze([
   "result", "unit", "reference", "patientId", "visitId", "name", "department", "age", "sex", "bed",
   "visitType", "date", "title", "report",
 ]);
-export const OPS = Object.freeze(["classify", "map-columns", "next", "verify", "pick-endpoint"]);
+export const OPS = Object.freeze(["classify", "map-columns", "next", "verify", "pick-endpoint", "plan-controls"]);
 /* What a request does for the screen it fired on (pick-endpoint). Only "data" can become a saved endpoint,
  * and only after the phone has proven its answer carries what the screen shows. */
 export const ENDPOINT_ROLES = Object.freeze(["data", "prerequisite", "lookup", "ping", "shell"]);
 const RESPONSE_KINDS = Object.freeze(["json", "html", "text", "empty", "unknown"]);
 export const SUGGESTIONS = Object.freeze(["ok", "other-endpoint", "ask-doctor"]);
 
-const LIMITS = Object.freeze({ str: 120, list: 60, snapshot: 8000, path: 300 });
+const LIMITS = Object.freeze({ str: 120, list: 60, planList: 200, snapshot: 8000, path: 300 });
 const DIGITS = /\d{3,}/;
 const CONTROL = /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/; // newlines and tabs are fine: the snapshot is line-based
 const ALLOWED_KEYS = Object.freeze({
@@ -48,6 +48,7 @@ const ALLOWED_KEYS = Object.freeze({
   "next": ["op", "origin", "controls", "looking", "path"],
   "verify": ["op", "origin", "resource", "headers", "rowCount", "kind", "path"],
   "pick-endpoint": ["op", "origin", "resource", "action", "headers", "candidates"],
+  "plan-controls": ["op", "origin", "controls", "looking", "path"],
 });
 
 function str(v) { return typeof v === "string" ? v : ""; }
@@ -61,9 +62,9 @@ function badString(s, max) {
   return null;
 }
 
-function cleanList(list, name, max) {
+function cleanList(list, name, max, maxEntries = LIMITS.list) {
   if (!Array.isArray(list)) return { error: name + " must be an array" };
-  if (list.length > LIMITS.list) return { error: name + " has more than " + LIMITS.list + " entries" };
+  if (list.length > maxEntries) return { error: name + " has more than " + maxEntries + " entries" };
   const out = [];
   for (const s of list) {
     const why = badString(s, max);
@@ -103,7 +104,7 @@ export function phiGate(payload) {
   }
   for (const k of ["headers", "labels", "controls"]) {
     if (payload[k] === undefined) continue;
-    const r = cleanList(payload[k], k, LIMITS.str);
+    const r = cleanList(payload[k], k, LIMITS.str, op === "plan-controls" && k === "controls" ? LIMITS.planList : LIMITS.list);
     if (r.error) return { ok: false, reason: r.error };
     clean[k] = r.list;
   }
@@ -161,6 +162,7 @@ export function phiGate(payload) {
   if (op === "next" && (!(clean.controls || []).length || !(clean.looking || []).length)) return { ok: false, reason: "next needs controls and looking" };
   if (op === "verify" && (!clean.resource || clean.rowCount === undefined)) return { ok: false, reason: "verify needs resource and rowCount" };
   if (op === "pick-endpoint" && !(clean.candidates || []).length) return { ok: false, reason: "pick-endpoint needs candidates" };
+  if (op === "plan-controls" && (!(clean.controls || []).length || !(clean.looking || []).length)) return { ok: false, reason: "plan-controls needs controls and looking" };
   return { ok: true, clean };
 }
 
@@ -197,6 +199,13 @@ function promptFor(clean) {
       + "\n\nRoles: " + ROLES.join(", ") + ".\n"
       + "Map each header to the ONE role it plays, or leave it out if none fits. patientId = MRN/UHID/hospital number, visitId = visit/episode/admission number, name = the patient's name (never the doctor's), sex = gender, age = age or DOB, bed = bed/room, department = ward/dept/unit, drugName = medicine, prodCode = drug code, testName = investigation name, result = the result value, reference = normal range, date = any date column, title = report/study title, report = report body or summary.\n"
       + "Answer: {\"fields\": {<header>: <role>, ...}}";
+  }
+  if (clean.op === "plan-controls") {
+    return "These are ALL the controls (buttons, tabs, menu items, including collapsed menus) of a hospital EMR screen with one patient's record open" + (clean.path ? " at path " + clean.path : "") + ". Each is \"label [where it sits]\", index = position, zero-based:\n"
+      + JSON.stringify(clean.controls) + "\n\nFor each of these resources, pick the ONE control that opens it for THIS patient: " + clean.looking.join(", ") + ".\n"
+      + "labs = the patient's lab/investigation results; radiology = imaging reports (often inside a patient profile or reports view); medications = drug chart or medicines; notes = clinical or assessment notes; history = previous visits; discharge = discharge summary (DS); patient = demographics or profile. "
+      + "Prefer the patient's own record menu over hospital-wide lists. Use -1 when none fits. Also list every control that could write, order, prescribe, print, send, sign, submit, approve, delete or sign out.\n"
+      + "Answer: {\"assign\": {<resource>: <index or -1>, ...}, \"avoid\": [<index>, ...]}";
   }
   if (clean.op === "pick-endpoint") {
     return "A read-only agent did this on a hospital EMR: " + JSON.stringify(clean.action || clean.resource || "opened a screen") + ". The screen now shows "
@@ -244,6 +253,16 @@ export function shapeAnswer(clean, raw) {
       if (ROLES.indexOf(role) >= 0 && !Object.values(fields).includes(role)) fields[h] = role;
     }
     return { fields };
+  }
+  if (clean.op === "plan-controls") {
+    const assign = {};
+    const src = a.assign && typeof a.assign === "object" && !Array.isArray(a.assign) ? a.assign : {};
+    for (const r of clean.looking) {
+      const i = src[r];
+      assign[r] = Number.isInteger(i) && i >= 0 && i < clean.controls.length ? i : -1;
+    }
+    const avoid = (Array.isArray(a.avoid) ? a.avoid : []).filter((i) => Number.isInteger(i) && i >= 0 && i < clean.controls.length);
+    return { assign, avoid: [...new Set(avoid)] };
   }
   if (clean.op === "pick-endpoint") {
     const seen = new Set();
