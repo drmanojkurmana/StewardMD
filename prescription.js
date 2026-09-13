@@ -1449,6 +1449,24 @@
       var raw = line.drug || line.brand || "";
       var norm = normalizeDrugName(raw);
       var info = RX_CLINICAL_KB[norm];
+      if (!info && window.MEDDRUGS && window.MEDDRUGS.all) {
+        var drugMatch = window.MEDDRUGS.all.filter(function (d) {
+          if (!d.generic) return false;
+          var dg = d.generic.toLowerCase();
+          return dg === norm || norm.indexOf(dg) > -1 || dg.indexOf(norm) > -1;
+        })[0];
+        if (drugMatch) {
+          info = {
+            generic: drugMatch.generic,
+            cls: drugMatch.cls || drugMatch.cat || "Formulary Drug",
+            tags: [(drugMatch.cls || "").toLowerCase(), (drugMatch.cat || "").toLowerCase()],
+            sideEffects: [],
+            redFlags: drugMatch.notes ? [drugMatch.notes] : [],
+            counseling: drugMatch.dose ? ("Dosing guide: " + drugMatch.dose) : "",
+            interactions: []
+          };
+        }
+      }
       if (info && !seenKeys[norm]) {
         seenKeys[norm] = true;
         resolvedMeds.push({
@@ -2082,6 +2100,13 @@
 
   function open(ctx) {
     ensureEls();
+    try {
+      if (typeof smdLazy === "function") {
+        smdLazy('/interaction-rules.js?v=gold363').then(function () {
+          try { refreshSafety(); } catch (e) {}
+        });
+      }
+    } catch (e) {}
     var reg = (ctx && ctx.regimen) || regimenFromCtx(ctx);
     var drugList = (window.MEDDRUGS && window.MEDDRUGS._list) || [];
     function build(regNo) {
