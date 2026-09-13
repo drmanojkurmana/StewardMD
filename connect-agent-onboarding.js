@@ -1597,7 +1597,10 @@
         (proven ? "✓ " : "") + esc(CAP_LABELS[key]) + (proven ? "" : " (not found at this hospital)") + '</li>';
     }
     var list = b.querySelector("#smd-connect-caps");
-    if (list) list.innerHTML = html;
+    /* The probe list said "not found" for everything on a live run whose views were real: what the
+     * agent PROVED against patients (verifiedLines) is the truth, so it replaces the probe list. */
+    var proven = S.result && S.result.verification && (S.result.verification.checks || []).length;
+    if (list) { list.innerHTML = proven ? "" : html; list.style.display = proven ? "none" : ""; }
     var row = b.querySelector("#smd-connect-approverow");
     if (row) row.style.display = S.canApprove ? "" : "none";
   }

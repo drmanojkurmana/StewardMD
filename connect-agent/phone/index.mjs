@@ -32,6 +32,7 @@ export const GAP_PROMPTS = Object.freeze({
   history: 'I could not find the visit history. Tap where it lives, then tap Done.',
 });
 const MAX_ASKS = 4;
+const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[type=\"password\"]')?'1':'0'})()";
 
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
@@ -103,7 +104,9 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   /* The real client is frozen (plugin-client.mjs), so the drain is added on a wrapper, never on it. */
   if (typeof plugin.drainObserverEvents !== 'function') {
     const base = plugin;
-    const drainObserverEvents = async () => { const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
+    // Drain the page observer first: raw() alone is whatever the collector last pulled, which on the
+    // phone lost every POST field name (live GHIS run, 2026-09-13).
+    const drainObserverEvents = async () => { try { await collector.ensureInstalled(); } catch { /* keep what we have */ } const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
     plugin = Object.assign(Object.create(base), { drainObserverEvents });
   }
   notify('DISCOVERING', { steps: 0, events: 0 });
@@ -127,6 +130,17 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await plugin.evaluate({ expression: GUIDE_SOURCES.armGuide }).catch(() => {});
     let answer = null;
     try { answer = await askDoctor({ gap, text, step, total, mode }); } catch { answer = null; }
+    /* SIGNED OUT DURING THE ASK: the screen the doctor tapped Done on is the login page. Ask them to
+     * sign in again and show the same screen, up to twice, instead of capturing a login form. */
+    for (let tries = 0; tries < 2 && answer && answer.done; tries += 1) {
+      let onLogin = false;
+      try { onLogin = /1/.test(String((await plugin.evaluate({ expression: LOGIN_FORM_PRESENT }))?.result)); } catch { onLogin = false; }
+      if (!onLogin) break;
+      const again = 'You were signed out. Sign in again, then ' + text.charAt(0).toLowerCase() + text.slice(1);
+      notify('ASKING', { gap, text: again, step, total, found, looking: looking(), signedOut: true });
+      await setMode('guide', again);
+      try { answer = await askDoctor({ gap, text: again, step, total, mode }); } catch { answer = null; }
+    }
     asked.push(gap);
     if (answer && answer.missing) { missing.push(gap); return 'missing'; }
     if (!answer || !answer.done) return 'skipped';
@@ -236,7 +250,9 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
 
   return Object.freeze({
     spec, steps: explored.steps, stopReason: explored.stopReason, visitedUrls: explored.visitedUrls,
-    candidateVersionId: discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
+    // The version row is created by the evidence call, not discovery: without this the phone's Approve
+    // posted /versions/undefined/approve and said "Could not approve" (live GHIS run, 2026-09-13).
+    candidateVersionId: evidenceResult?.candidateVersionId || discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
     observedViews, found, asked, missing, warnings, crawlStop, mode,
     verification: { patients: verification.patients.length, checks: verification.checks, failed: verification.failed },
     probes: probed.probes, capabilities: evidenceResult?.capabilities, evidenceHash: evidenceResult?.evidenceHash,

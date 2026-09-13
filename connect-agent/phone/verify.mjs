@@ -10,9 +10,9 @@
 //
 // PHI never leaves the phone: the brain sees column names, row counts and the response kind only.
 
-import { readWorklist } from './runtime.mjs';
+import { readWorklist, readView } from './runtime.mjs';
 import { executeView } from './adapter-runtime.mjs';
-import { scrubForBrain } from './deep-crawl.mjs';
+import { scrubForBrain, redactEndpoints, mergeEndpointDetails } from './deep-crawl.mjs';
 
 export const VERIFY_RESOURCES = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
 
@@ -47,6 +47,7 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
   let wlVia = 'none';
   if (worklistView) {
     say({ checking: 'worklist' });
+    await learnPageLoadCalls({ plugin, origin, view: worklistView, waitMs: Math.max(waitMs, 20000) });
     try {
       patients = await readWorklist({ plugin, origin, replay: list, settleMs: Math.min(1200, waitMs), maxWaitMs: waitMs, onRead: (r) => { wlVia = r.via; } });
     } catch (e) {
@@ -84,6 +85,29 @@ export async function verifyViews({ plugin, origin, views, brain = null, notify 
     if (!verdict.ok) failed.push(view.resourceHint);
   }
   return { patients, checks, failed: [...new Set(failed)] };
+}
+
+/* THE CALL A LIST MAKES ON ITS OWN. A ward list fills itself by AJAX as the page loads (GHIS: GetIPWL),
+ * before the crawl ever clicks, so it is easy to miss. Load the list page once, wait for its rows,
+ * and keep every same-origin data call it made (field names and mode constants only) on the view. */
+export async function learnPageLoadCalls({ plugin, origin, view, waitMs = 20000 }) {
+  if (!view || !view.pathTemplate) return;
+  try {
+    if (typeof plugin.drainRequests === 'function') await plugin.drainRequests().catch(() => null);
+    if (typeof plugin.drainObserverEvents === 'function') await plugin.drainObserverEvents().catch(() => null);
+    await plugin.navigate({ url: view.pathTemplate.indexOf('http') === 0 ? view.pathTemplate : String(origin).replace(/\/$/, '') + view.pathTemplate });
+    try { await readView({ plugin, origin, view, settleMs: 1500, toggleAll: true, maxWaitMs: waitMs, navigate: false }); } catch { /* the rows are a bonus; the calls are the point */ }
+    const pageUrl = ((await plugin.currentUrl().catch(() => ({}))) || {}).url || view.pathTemplate;
+    const drained = typeof plugin.drainRequests === 'function' ? await plugin.drainRequests().catch(() => null) : null;
+    let eps = redactEndpoints(drained && drained.requests, pageUrl);
+    if (typeof plugin.drainObserverEvents === 'function') {
+      const obs = await plugin.drainObserverEvents().catch(() => null);
+      if (obs && Array.isArray(obs.events) && obs.events.length) eps = eps.length ? mergeEndpointDetails(eps, obs.events) : redactEndpoints(obs.events, pageUrl);
+    }
+    const have = new Set((view.endpoints || []).map((e) => e.method + ' ' + e.path));
+    const learned = eps.filter((e) => !have.has(e.method + ' ' + e.path));
+    if (learned.length) view.endpoints = learned.concat(view.endpoints || []).slice(0, 8);
+  } catch { /* learning never breaks verification */ }
 }
 
 /** The brain's verdict on a replayed view, or the local one when the brain is absent or silent. */
