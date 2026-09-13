@@ -567,3 +567,7 @@ Admin "Security review" tab (STAFF_ADMIN, doctor/nurse 403): chart-access anomal
 
 Surveillance board (ward): deterministic signals with evidence links (deterioration trend, sepsis screen, critical lab trend, overdue care, medication risk needs highAlertDrugs/orderVerifyWithinHours config - "not evaluated" otherwise), append-only acknowledgement, raise as incident signal. Copilot: 8 MaiK tasks with record facts shown apart from reasoning; outage = no answer. Portal: wardsynq.com/portal.html (live 200) - patient and proxy access with grants, audited proxy reads, released-only data, messages, consent withdraw (non-treatment); staff "Patient portal" tile; needs wardsynq.patientAccess.enabled per hospital. Not built: queue status, released documents, full discharge summary in portal. Live shell 34, ward.js site66. 6328 passing.
 **Next P2:** offline-first (P2.4), FHIR platform depth (P2.5), India profile (P2.6), multilingual (P2.7), voice notes (P2.8), hospital intelligence (P2.10), specialty framework + pathways (P2.11/2.12), developer platform (P2.13), multi-hospital (P2.14), UX bar (P2.16).
+
+### 2026-09-13 - P2 builders stopped (usage limit)
+
+Pathways (p2-pathways), offline-first (p2-offline) and multilingual/India (p2-india-lang) builders all failed on the weekly usage limit (resets Sep 17 12:30 IST) with no commits. Restart them from their briefs when quota returns. Continuing single-threaded: transliterated patient search first.
