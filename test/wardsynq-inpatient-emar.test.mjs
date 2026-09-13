@@ -6806,3 +6806,27 @@ test("NURSE WORKLIST: every patient on the ward with overdue doses and early-war
   assert.equal(w.partial, false);
   assert.equal((await as(PHARM, `/ward/nurse-worklist?orgId=${ORG}`)).__status, 403);
 });
+
+test("APPROVALS: the hospital can name which roles approve, and a request past its time limit must be asked again", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  const withPolicy = (policy) => docs.set(`q_orgs/${ORG}`, { ...org, fields: { ...org.fields, wardsynq: { ...org.fields.wardsynq, approvalPolicy: { RestrictedMedication: policy } } } });
+
+  withPolicy({ approverRoles: ["admin"] });
+  const req = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "meropenem-p1", reason: "Culture-proven ESBL" });
+  assert.equal(req.__status, 200, JSON.stringify(req));
+  const byDoctor = await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req.verificationId, decision: "approved" });
+  assert.equal(byDoctor.__status, 403);
+  assert.equal(byDoctor.error, "not_an_approver_role");
+
+  withPolicy({ expiresHours: 0.0000001 });
+  const req2 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "vanco-p1", reason: "MRSA" });
+  await new Promise((r) => setTimeout(r, 5));
+  const late = await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req2.verificationId, decision: "approved" });
+  assert.equal(late.__status, 409, JSON.stringify(late));
+  assert.equal(late.error, "request_expired");
+
+  withPolicy({});
+  const req3 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "pip-p1", reason: "Neutropenic sepsis" });
+  assert.equal((await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req3.verificationId, decision: "approved" })).__status, 200, "no policy: behaves as before");
+});
