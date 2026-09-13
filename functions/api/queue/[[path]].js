@@ -3032,12 +3032,14 @@ export async function onRequest(context) {
       }
       if (seg === "member") {   // staff lifecycle (owner/admin only): invite/role/scope + credentials + enable/disable
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
-        if (sub === "pin") { await ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id); return json({ ok: true }, 200, request); }
-        if (sub === "password") { await ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id); return json({ ok: true }, 200, request); }
-        if (sub === "disable") { await ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id); return json({ ok: true }, 200, request); }
-        if (sub === "restore") { await ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id); return json({ ok: true }, 200, request); }
-        if (sub === "reset") { await ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
-        if (body.remove) { await ORG.removeMembership(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
+        // Each refuses an identity with no member row instead of creating one (memberMissing in the store).
+        const lifecycle = async (p) => { const r = await p; return json(r, r && r.ok === false ? 404 : 200, request); };
+        if (sub === "pin") return lifecycle(ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id));
+        if (sub === "password") return lifecycle(ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id));
+        if (sub === "disable") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id));
+        if (sub === "restore") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id));
+        if (sub === "reset") return lifecycle(ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id));
+        if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id));
         // setMembership refuses a create with no role rather than writing a silent read-only viewer.
         const saved = await ORG.setMembership(env, body.orgId, body.identity, body, actor.id);
         if (saved && saved.ok === false) return json(saved, 400, request);

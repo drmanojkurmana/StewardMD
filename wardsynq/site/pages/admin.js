@@ -36,6 +36,9 @@
     ["radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write."],
   ];
 
+  // The only actions the staff table sends to /member/<action>; anything else sends nothing.
+  var MEMBER_ACTION_ROUTE = { disable: "disable", restore: "restore", reset: "reset" };
+
   function refusal(r) {
     if (!r) return "No response from the server.";
     if (r.message) return r.message;
@@ -389,7 +392,8 @@
       body.querySelectorAll("[data-mact]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-mact"), id = b.getAttribute("data-id");
-          c.api("/member/" + act, { orgId: c.state.orgId, identity: id }).then(function (r) {
+          if (!MEMBER_ACTION_ROUTE[act]) return;
+          c.api("/member/" + MEMBER_ACTION_ROUTE[act], { orgId: c.state.orgId, identity: id }).then(function (r) {
             if (!r || !r.ok) { c.toast(refusal(r)); return; }
             c.toast("Updated."); WSQ.render("admin");
           });

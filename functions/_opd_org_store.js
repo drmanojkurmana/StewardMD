@@ -284,8 +284,15 @@ export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });
   return r.map((x) => publicMember(x.id, x.fields));   // includes disabled so admin can restore; active flag shown
 }
+/* wUpdate UPSERTS. Without this check a mistyped identity on disable/restore/PIN/password/reset
+ * created a brand-new member row, and a PIN or password on it was a working sign-in (getMemberAuth
+ * defaults the missing role to "viewer") that nobody chose to create. Members are only ever
+ * deactivated, never deleted, so reading first leaves no window for one to vanish. */
+const NO_MEMBER = { ok: false, error: "member_not_found", message: "No staff member with that ID or email in this hospital. Add them first." };
+async function memberMissing(env, orgId, identity) { return !(await fsGet(env, "q_members/" + memberId(orgId, identity))); }
 // Lifecycle. disable/remove -> active:false blocks OPD access IMMEDIATELY (authorizeOrg checks active).
 export async function setMemberActive(env, orgId, identity, active, actorId) {
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, updatedAt: now() })]);
   await audit(env, orgId, actorId, active ? "member:restore" : "member:disable", identity); return { ok: true };
 }
@@ -293,16 +300,19 @@ export async function removeMembership(env, orgId, identity, actorId) { return s
 
 // ---- staff credentials (email + PIN) — hashed at rest, owner-managed ----------------------------
 export async function setMemberPin(env, orgId, identity, pin, actorId) {
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const pinHash = await hashSecret(String(pin), salt);
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_pin", identity); return { ok: true };
 }
 export async function setMemberPassword(env, orgId, identity, email, password, actorId) {
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const passHash = await hashSecret(String(password), salt);
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_password", identity); return { ok: true };
 }
 export async function resetMemberAccess(env, orgId, identity, actorId) {
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:reset_access", identity); return { ok: true };
 }
