@@ -552,17 +552,13 @@
                  * page has had time to load, count as signed in; the doctor never taps Done again
                  * inside the thirty-minute window. */
                 var quiet = 0, polls = 0;
-                /* On a hospital whose login host differs from the EMR host (GHIS: gimsrlogin -> ghis) a
-                 * quiet page on the LOGIN host is the app chooser, not the EMR: the doctor has not yet
-                 * entered the Doctor module and a read from there lists nobody (owner, 2026-09-13).
-                 * A quiet poll on another host counts double; a single-host EMR needs a few more. */
                 function look() {
                   if (!ctx.listeners.length) return;   // already resolved or rejected
                   plugin.evaluate({ expression: "(function(){return (document.querySelector('input[type=\"password\"]')?'login':(document.body&&document.body.innerText.length>200?'ok':'blank'))+' '+location.host})()" })
                     .then(function (r) { var v = String((r && r.result) || '').split(' '); if (v[0] === 'ok') quiet += (v[1] && v[1] !== host) ? 2 : 1; else quiet = 0; }, function () { quiet = 0; })
-                    .then(function () { polls++; if (quiet >= 4 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 10 && ctx.listeners.length) setTimeout(look, 900); });
+                    .then(function () { polls++; if (quiet >= 2 && ctx.listeners.length) { off(); resolve(); return; } if (polls < 12 && ctx.listeners.length) setTimeout(look, 700); });
                 }
-                setTimeout(look, 2200);
+                setTimeout(look, 1200);
               })
               .catch(function (e) { off(); reject(new Error('Could not open ' + host + ' in the in-app browser: ' + (e && e.message || e))); });
           });
@@ -579,9 +575,9 @@
           }
           function waitSignedIn() {
             return settled().then(function (ok) {
-              if (ok) return new Promise(function (res) { setTimeout(res, 1500); });   // one more beat for the landing page
+              if (ok) return new Promise(function (res) { setTimeout(res, 600); });   // quick beat for landing page
               if (Date.now() > until) return;
-              return new Promise(function (res) { setTimeout(res, 800); }).then(waitSignedIn);
+              return new Promise(function (res) { setTimeout(res, 600); }).then(waitSignedIn);
             });
           }
           return waitSignedIn();
@@ -1422,6 +1418,12 @@
     
       window.openGHIS = function() {
         document.getElementById('ghisPanel').classList.add('open');
+        // If an adapter session is fresh and patients are loaded, resume straight to the ward!
+        if (adapterSessionFresh() && _patients && _patients.length) {
+          _connected = true; try { dot(true); } catch (e) {}
+          showScreen('ward');
+          return;
+        }
         // No saved login? Ask which hospital first (GIMSR → GHIS login; others → request form).
         if (!getToken()) { showScreen('hospital'); return; }
         // Have a saved login? Verify the token and go straight to the ward.

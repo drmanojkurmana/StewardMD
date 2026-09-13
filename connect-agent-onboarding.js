@@ -546,8 +546,10 @@
   function connectionRow(c) {
     var pill = pillFor(c);
     var removable = !!(c && (c.activeVersionId || c.pendingVersionId));
+    var active = !!(c && c.activeVersionId);
     return '<div class="smd-connect-hosp"><span style="flex:1"><span>' + esc(connectionHost(c)) + '</span></span>' +
       '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span>' +
+      (active ? '<button class="smd-connect-btn primary smd-connect-openward" type="button" data-dep="' + esc(c.deploymentId) + '" style="margin-left:6px" aria-label="Open ' + esc(connectionHost(c)) + ' in Ward Sync">Open in Ward</button>' : "") +
       (removable ? '<button class="smd-connect-btn smd-connect-remove" type="button" data-dep="' + esc(c.deploymentId) + '" aria-label="Remove the adapter for ' + esc(connectionHost(c)) + '">Remove</button>' : "") + '</div>';
   }
   /* REMOVE AN ADAPTER. Owner or admin only (the server says 403 otherwise): the approved version is
@@ -643,6 +645,13 @@
     if (sw) sw.onclick = function () { S.tenant = ""; storeTenant(""); renderConnections(); };
     var rms = b.querySelectorAll(".smd-connect-remove");
     for (var k = 0; k < rms.length; k++) rms[k].onclick = function () { removeAdapter(this.getAttribute("data-dep"), this); };
+    var ows = b.querySelectorAll(".smd-connect-openward");
+    for (var m = 0; m < ows.length; m++) ows[m].onclick = function () {
+      var depId = this.getAttribute("data-dep");
+      close();
+      if (window.openGHIS) window.openGHIS();
+      if (window.ghisOpenAdapterHospital && depId) setTimeout(function () { window.ghisOpenAdapterHospital(depId); }, 150);
+    };
     b.querySelector("#smd-connect-add").onclick = function () {
       S.selected = null; S.emrUrl = "";
       show("url");
@@ -1621,11 +1630,22 @@
     if (!b) return;
     var name = hostOf((S.selected && S.selected.emrUrl) || "");
     var msg = S.reuse ? "Signed in. You can use this connection now." : "Approved. This connection is now active.";
+    var depId = (S.deployment && S.deployment.id) || S.deploymentId || (S.selected && S.selected.deploymentId);
     b.innerHTML =
       '<h2 class="smd-connect-display">Connected</h2>' +
       '<p class="smd-connect-lead">' + esc(name) + '. ' + msg + '</p>' +
-      '<div class="smd-connect-row"><button id="smd-connect-donebtn" class="smd-connect-btn primary" type="button">Done</button></div>';
+      '<div class="smd-connect-row">' +
+      (depId ? '<button id="smd-connect-wardgo" class="smd-connect-btn primary" type="button">Open in Ward Sync</button>' : "") +
+      '<button id="smd-connect-donebtn" class="smd-connect-btn' + (depId ? "" : " primary") + '" type="button">Done</button></div>';
     setStatus("done", "Connection active.");
+    var wbtn = b.querySelector("#smd-connect-wardgo");
+    if (wbtn) {
+      wbtn.onclick = function () {
+        close();
+        if (window.openGHIS) window.openGHIS();
+        if (window.ghisOpenAdapterHospital && depId) setTimeout(function () { window.ghisOpenAdapterHospital(depId); }, 150);
+      };
+    }
     b.querySelector("#smd-connect-donebtn").onclick = function () { close(); };
   }
 
