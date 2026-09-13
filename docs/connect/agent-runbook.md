@@ -61,7 +61,7 @@ All new flags default to OFF (fail closed).
 
 ### The brain (model that reads screen structure)
 - `CONNECT_AGENT_MODEL`: REQUIRED. The exact Google model id for the Connect Agent brain (owner: Gemini 3.8). No default and no fallback: unset means every brain call fails with brain_not_configured. `GET /api/connect/agent/brain/model` reports what is configured. Production (2026-09-13): `gemini-3.8-flash`.
-- `CONNECT_AGENT_MODEL_PROVIDER`: `vertex` (default) or `gemini` (AI Studio). No automatic switch between them. Production uses `gemini`: the project's Gemini API keys are bound to a service account, and org policy
+- `CONNECT_AGENT_MODEL_PROVIDER`: `vertex` (default), `vertex-adc` or `gemini` (AI Studio). With `CONNECT_AGENT_BRAIN_PROXY_URL` + `CONNECT_AGENT_BRAIN_PROXY_SECRET` set, `vertex` goes through the Cloud Run brain proxy (`connect-agent/brain-proxy`, service `connect-agent-brain` in asia-south1, service account `connect-agent-brain@stewardmd-498ec` with roles/aiplatform.user, Vertex `locations/global` via ADC). Production uses that. Direct express mode does not work: the project's Gemini API keys are bound to a service account, and org policy
   `iam.managed.disableServiceAccountApiKeyCreation` limits them to generativelanguage.googleapis.com, so Vertex express
   mode (aiplatform.googleapis.com) answers PERMISSION_DENIED for every call (found live, 2026-09-13). Secrets bind at
   build time: a changed provider needs a new deploy.

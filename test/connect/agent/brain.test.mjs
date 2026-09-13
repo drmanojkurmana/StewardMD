@@ -2,7 +2,7 @@
 //   node --test test/connect/agent/brain.test.mjs
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { phiGate, askBrain, shapeAnswer, structureHash, RESOURCES, ROLES } from "../../../functions/_connect/agent/brain.js";
+import { phiGate, askBrain, shapeAnswer, structureHash, RESOURCES, ROLES, brainModel } from "../../../functions/_connect/agent/brain.js";
 import { onRequest } from "../../../functions/api/connect/agent/[[path]].js";
 import { makeAgentDb } from "./agent-db.mjs";
 import { sha256hex } from "../../../functions/_connect/agent/hmac.js";
@@ -166,4 +166,19 @@ test("pick-endpoint: the gate takes request STRUCTURE only and the answer is cla
   assert.equal(out.model, "gemini-3.8-flash");
   assert.deepEqual(out.answer.ranked[0], { index: 1, role: "data", reason: "columns match" });
   assert.match(prompt, /compare each answer with the values on screen/);
+});
+
+test("vertex-adc: with the Cloud Run proxy configured, the brain calls it with the secret and reports the served model", async () => {
+  const env = { CONNECT_AGENT_MODEL: "gemini-3.8-flash", CONNECT_AGENT_MODEL_PROVIDER: "vertex", CONNECT_AGENT_BRAIN_PROXY_URL: "https://brain.example.run.app/", CONNECT_AGENT_BRAIN_PROXY_SECRET: "s".repeat(48) };
+  assert.deepEqual(brainModel(env), { provider: "vertex-adc", model: "gemini-3.8-flash" });
+  assert.throws(() => brainModel(Object.assign({}, env, { CONNECT_AGENT_BRAIN_PROXY_SECRET: "short" })), /needs CONNECT_AGENT_BRAIN_PROXY_URL and CONNECT_AGENT_BRAIN_PROXY_SECRET/);
+  const seen = [];
+  const fetchImpl = async (url, init) => { seen.push({ url, init }); return new Response(JSON.stringify({ text: '{"resource":"labs","confidence":0.9,"reason":"x"}', model: "gemini-3.8-flash" }), { status: 200 }); };
+  const out = await askBrain({ env, fetchImpl, payload: Object.assign({}, GHIS_WORKLIST) });
+  assert.equal(seen[0].url, "https://brain.example.run.app/generate");
+  assert.equal(seen[0].init.headers["x-brain-secret"], "s".repeat(48));
+  assert.equal(JSON.parse(seen[0].init.body).model, "gemini-3.8-flash");
+  assert.equal(out.model, "gemini-3.8-flash");
+  const refused = async () => new Response(JSON.stringify({ error: "vertex_403", detail: "denied" }), { status: 502 });
+  await assert.rejects(askBrain({ env, fetchImpl: refused, payload: Object.assign({}, GHIS_WORKLIST, { labels: ["other"] }) }), /ADC proxy\) refused the request \[502\]/);
 });
