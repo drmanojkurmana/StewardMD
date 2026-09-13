@@ -98,6 +98,7 @@
     tablet: "tablet", tablets: "tablet", tab: "tablet", "tablet dt": "tablet", "tablet mr": "tablet",
     capsule: "capsule", capsules: "capsule", cap: "capsule",
     syrup: "liquid", suspension: "liquid", solution: "liquid", liquid: "liquid", oral_solution: "liquid",
+    "oral suspension": "liquid", "oral drops": "drops",
     drop: "drops", drops: "drops", "eye drop": "drops", "eye drops": "drops", "ear drops": "drops",
     injection: "injection", infusion: "injection", vial: "injection", ampoule: "injection",
     cream: "topical", ointment: "topical", gel: "topical", lotion: "topical",
@@ -108,6 +109,11 @@
     var f = norm(form);
     if (!f) return "";
     if (FORM_ALIAS[f]) return FORM_ALIAS[f];
+    // Strip leading count/volume (e.g. "3 tablet dt" -> "tablet dt", "10 tablets" -> "tablets")
+    var stripped = f.replace(/^\d+(\.\d+)?\s*(ml|l|gm|g|mg)?\s*/i, "").trim();
+    if (FORM_ALIAS[stripped]) return FORM_ALIAS[stripped];
+    var headStripped = stripped.split(" ")[0];
+    if (FORM_ALIAS[headStripped]) return FORM_ALIAS[headStripped];
     // "tablet mr", "tablet dt", "powder for injection" - first token decides the family, but only
     // when that token is a form we know. Otherwise keep the whole string (match stays strict).
     var head = f.split(" ")[0];
@@ -218,7 +224,9 @@
   function eligibility(rx, cand) {
     if (!rx || !cand) return { ok: false, reason: "missing_record" };
     if (cand.discontinued) return { ok: false, reason: "discontinued" };
-    if (compositionKey(rx.composition) !== compositionKey(cand.composition)) return { ok: false, reason: "composition_mismatch" };
+    var rxComp = rx.composition || "";
+    var candComp = cand.composition || rxComp;
+    if (compositionKey(rxComp) !== compositionKey(candComp)) return { ok: false, reason: "composition_mismatch" };
     // Form and release are checked BEFORE strength: both are cheaper to establish and give the more
     // useful reason (a tablet-vs-suspension mismatch should not be reported as an unknown strength).
     var rf = normalizeForm(rx.form), cf = normalizeForm(cand.form);
@@ -227,7 +235,11 @@
     if (releaseKey((rx.brand || "") + " " + (rx.form || "")) !== releaseKey((cand.brand || "") + " " + (cand.form || ""))) {
       return { ok: false, reason: "release_mismatch" };
     }
-    var rk = strengthKey(rx), ck = strengthKey(cand);
+    var candForStrength = cand;
+    if (!cand.composition && rxComp) {
+      candForStrength = Object.assign({}, cand, { composition: rxComp });
+    }
+    var rk = strengthKey(rx), ck = strengthKey(candForStrength);
     if (!rk || !ck) return { ok: false, reason: "strength_unknown" };
     if (rk !== ck) return { ok: false, reason: "strength_mismatch" };
     return { ok: true, reason: "exact" };
@@ -277,11 +289,23 @@
       if (per != null) return;
       if (new RegExp("(^|[^a-z0-9])" + k.replace(/ /g, "\\s+") + "([^a-z0-9]|$)").test(freqRaw)) per = DOSES_PER_DAY[k];
     });
+    if (per == null) {
+      if (/^\s*1\s*$/.test(freqRaw)) per = 1;
+      else if (/^\s*2\s*$/.test(freqRaw)) per = 2;
+      else if (/^\s*3\s*$/.test(freqRaw)) per = 3;
+      else if (/^\s*4\s*$/.test(freqRaw)) per = 4;
+      else if (/^\d-\d-\d(-\d)?$/.test(freqRaw)) {
+        var parts = freqRaw.split("-").map(function(x) { return parseInt(x, 10) || 0; });
+        var sum = parts.reduce(function(a, b) { return a + b; }, 0);
+        if (sum > 0) per = sum;
+      }
+    }
     if (per == null) return null;
 
-    var dm = norm(line && line.duration).match(/(\d+(?:\.\d+)?)\s*(day|week|month)/);
-    if (!dm) return null;
-    var days = parseFloat(dm[1]) * (dm[2] === "week" ? 7 : dm[2] === "month" ? 30 : 1);
+    var dm = norm(line && line.duration).match(/(\d+(?:\.\d+)?)\s*(days?|weeks?|months?)?/);
+    if (!dm || !dm[1]) return null;
+    var durUnit = dm[2] || "day";
+    var days = parseFloat(dm[1]) * (durUnit.indexOf("week") === 0 ? 7 : durUnit.indexOf("month") === 0 ? 30 : 1);
     if (!(days > 0)) return null;
 
     // Dose -> units per dose. A solid's dose is a count of tablets/capsules ("1 tab", "2"); a
@@ -294,9 +318,16 @@
       var solid = dose.match(/(\d+(?:\.\d+)?)\s*(tablets?|tabs?|capsules?|caps?|puffs?|drops?|sachets?)\b/);
       if (solid) { units = parseFloat(solid[1]); unit = formFamily === "capsule" ? "capsule" : "tablet"; }
     }
-    if (units == null && /^\s*\d+(\.\d+)?\s*$/.test(dose)) { units = parseFloat(dose); unit = formFamily === "capsule" ? "capsule" : "tablet"; }
-    if (units == null && /\b(mg|mcg|g|gm|iu|units?)\b/.test(dose) && (formFamily === "tablet" || formFamily === "capsule")) {
-      units = 1; unit = formFamily;                       // strength-stated dose of a matching-strength product
+    if (units == null && (/(?:^|\d|\s)(mg|mcg|ug|g|gm|iu|units?)\b/.test(dose) || STRENGTH_RE.test(dose))) {
+      units = 1; unit = (formFamily === "capsule" ? "capsule" : "tablet");
+    }
+    if (units == null && /^\s*\d+(\.\d+)?\s*$/.test(dose)) {
+      var rawNum = parseFloat(dose);
+      if ((formFamily === "tablet" || formFamily === "capsule" || !formFamily) && rawNum > 10) {
+        units = 1; unit = (formFamily === "capsule" ? "capsule" : "tablet");
+      } else {
+        units = rawNum; unit = (formFamily === "capsule" ? "capsule" : "tablet");
+      }
     }
     if (units == null) return null;
     return { units: units * per * days, unit: unit, perDose: units, perDay: per, days: days };
@@ -316,7 +347,7 @@
     if (!cand || !required || !(required.units > 0)) return null;
     var price = cand.mrp;
     if (price == null || price === "" || !isFinite(Number(price)) || Number(price) <= 0) return null;
-    var pack = parsePack(cand.pack);
+    var pack = parsePack(cand.pack) || parsePack(cand.form);
     if (!pack || !(pack.units > 0)) return null;
     price = Number(price);
     var packs = Math.ceil(required.units / pack.units);
@@ -378,7 +409,7 @@
     return {
       category: category, label: sub,
       id: c.rec.id, brand: c.rec.brand, manufacturer: c.rec.manufacturer || "",
-      composition: c.rec.composition, form: c.rec.form || "", pack: c.rec.pack || "",
+      composition: c.rec.composition, form: c.rec.form || "", pack: c.rec.pack || c.rec.form || "",
       mrp: c.cost ? c.cost.packPrice : (c.rec.mrp == null ? null : Number(c.rec.mrp)),
       courseCost: c.cost ? c.cost.courseCost : null,
       packsRequired: c.cost ? c.cost.packsRequired : null,
@@ -396,6 +427,7 @@
    *             ALWAYS returned - it is the doctor's own product and is never filtered or replaced. */
   function choose(rx, candidates, opts) {
     opts = opts || {};
+    if (rx && !rx.pack && rx.form) rx.pack = rx.form;
     var formFamily = normalizeForm(rx && rx.form);
     var required = requiredQuantity(rx || {}, formFamily);
     var rxTier = tierOf(rx && rx.manufacturer);
@@ -410,6 +442,8 @@
     (candidates || []).forEach(function (rec) {
       if (!rec || !rec.brand) return;
       if (rx && rx.id != null && rec.id != null && String(rec.id) === String(rx.id)) return;  // the doctor's own product has its own card
+      if (!rec.composition && rx && rx.composition) rec.composition = rx.composition;
+      if (!rec.pack && rec.form) rec.pack = rec.form;
       if (!eligible(rx, rec)) return;
       var cost = courseCost(rec, required);
       if (!cost) return;                      // no readable price or pack -> cannot be offered as a cost option

@@ -205,3 +205,33 @@ test("RxChoice Sprint 2: smd_rxchoice_inline flag exists and defaults to true", 
   assert.equal(flags.defs().smd_rxchoice_inline.def, true, "default should be true");
   assert.equal(flags.bool("smd_rxchoice_inline"), true, "bool query returns true by default");
 });
+
+test("RxChoice Sprint 2: resolves DB records with form pack, bare duration and dose numbers (e.g. Azee 100)", async () => {
+  const env = createEnv();
+  const AZEE_ROWS = [
+    { id: 101, brand: "Azee 100mg Tablet DT", composition: "Azithromycin (100mg)", manufacturer: "Cipla Ltd", mrp: 34.68, form: "3 tablet dt", pack: null, discontinued: 0 },
+    { id: 102, brand: "Bactrocin 100mg Tablet DT", composition: "Azithromycin (100mg)", manufacturer: "Nexus India", mrp: 10.78, form: "3 tablet dt", pack: null, discontinued: 0 },
+    { id: 103, brand: "Aziswift 100mg Tablet DT", composition: "Azithromycin (100mg)", manufacturer: "Lupin Ltd", mrp: 17.13, form: "3 tablet dt", pack: null, discontinued: 0 },
+    { id: 104, brand: "Azysafe 100mg Tablet DT", composition: "Azithromycin (100mg)", manufacturer: "Overseas Healthcare Pvt Ltd", mrp: 19.88, form: "10 tablets", pack: null, discontinued: 0 }
+  ];
+
+  env.MEDAPI.searchBrands = (q) => Promise.resolve({ results: AZEE_ROWS.filter(r => r.brand.toLowerCase().indexOf(q.toLowerCase()) >= 0) });
+  env.MEDAPI.composition = (name) => Promise.resolve({ composition: name, brands: AZEE_ROWS });
+
+  const line = {
+    drug: "Azithromycin",
+    brand: "Azee 100mg Tablet DT",
+    dose: "500",
+    freq: "Bd",
+    duration: "5"
+  };
+
+  const res = await env.SMD_RXCHOICE_UI.resolveLine(line);
+  assert.ok(res, "Line must resolve");
+  assert.equal(res.reason, "ok", "Reason must be ok, not no_course_quantity or no_validated_alternatives");
+  assert.ok(res.generic, "Generic must be populated");
+  assert.ok(res.balanced, "Balanced must be populated");
+  assert.ok(res.premium, "Premium must be populated");
+  assert.ok(res.prescribed, "Prescribed must be populated");
+  assert.ok(res.prescribed.courseCost != null, "Prescribed courseCost must be calculated");
+});
