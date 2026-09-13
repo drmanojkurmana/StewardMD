@@ -422,6 +422,10 @@ const RESOURCE_TYPES = Object.freeze([
    * (EMR_VIEW grants read:null, every type), never patient-compartmented since it carries no patient.
    * See twin-copilot.js. */
   "TwinInteraction",
+  /* P2.3: a clinician's acknowledgement of a computed surveillance signal (surveillance.js). Append-only,
+   * one record per acknowledgement, patient-compartmented. Signals themselves are computed, never stored.
+   * Written through EMR_VITALS (VITALS_TYPES in actor.js), the same authority as charting the obs it cites. */
+  "SurveillanceAcknowledgement",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });

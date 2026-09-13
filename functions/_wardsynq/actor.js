@@ -98,7 +98,10 @@ const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassG
   "NurseAssignment", "NursingTask", "ObservationFrequency",
   // IcuRecord (icu-care.js): a blood gas, ventilator setting, RASS or round checklist charted at an
   // ICU bedside is the same act as charting a vital sign, by the same nurse.
-  "IcuRecord"]);
+  "IcuRecord",
+  // SurveillanceAcknowledgement (surveillance.js): acknowledging a computed signal with a note is a bedside
+  // act by whoever is looking after the patient, not a prescribing decision.
+  "SurveillanceAcknowledgement"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
