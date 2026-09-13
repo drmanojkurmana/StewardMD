@@ -735,7 +735,13 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
     var tag = el.tagName;
     if (/^(TR|TD|TH|TABLE|TBODY|THEAD|INPUT|SELECT|TEXTAREA|OPTION|FORM|BODY|HTML)$/.test(tag)) continue;
     if (tag === 'BUTTON' && (el.getAttribute('type') || '').toLowerCase() === 'submit') continue;
-    if (anyVisible && !(el.getClientRects && el.getClientRects().length)) continue;
+    /* A COLLAPSED MENU IS STILL THE MENU. On a phone the EMR's navbar folds away (GHIS: Medications,
+     * Investigations, Patient profile sit in a hidden .navbar-nav / .dropdown-menu), so a visible-only
+     * walk never reached labs or medications (Pixel, 2026-09-13). A hidden item with its own click
+     * handler inside a nav or dropdown menu is kept; el.click() runs its handler without opening it. */
+    if (anyVisible && !(el.getClientRects && el.getClientRects().length)) {
+      if (!el.hasAttribute('onclick') || !(el.closest && el.closest('nav,.navbar,.navbar-nav,.dropdown-menu,[class*=sidebar],[class*=side-menu],[class*=mega-me]'))) continue;
+    }
     var text = (el.textContent || '').replace(/\s+/g, ' ').trim();
     if (!text || text.length > 80) continue;
     if (SKIP.test(text)) continue;
