@@ -2276,6 +2276,21 @@
    * ward-wide boards already use. A level is DERIVED (stock.js's own rule) and shown exactly as
    * computed: negative levels are never clamped, mixed units are never summed, and a dispense
    * already reduces the level without a second movement being written for it. */
+  function fefoResultHtml(f) {
+    if (!f) return "";
+    if (f.busy) return '<p class="w-empty">Working out batches...</p>';
+    if (!f.ok) return '<p class="w-hint warn">' + ms("error") + esc(f.detail || f.message || "No advice could be given: " + (f.error || "the server could not be reached") + ".") + "</p>";
+    var picks = (f.picks || []).map(function (p) {
+      return "<li><b>Batch " + esc(p.batch) + "</b><span>take " + esc(p.take) + " " + esc(f.unit) + " &middot; expires " + esc(p.expiry) + "</span></li>";
+    }).join("");
+    var skipped = (f.excluded || []).map(function (x) {
+      return "<li><b>Batch " + esc(x.batch) + "</b><span>" + esc(x.onHand) + " " + esc(f.unit) + ' <span class="w-st overdue">' + esc(x.why) + "</span> &middot; do not issue</span></li>";
+    }).join("");
+    return (picks ? '<ul class="w-mini">' + picks + "</ul>" : '<p class="w-hint warn">' + ms("warning") + "No usable batch is in stock.</p>") +
+      (f.shortfall > 0 ? '<p class="w-hint warn">' + ms("warning") + "Short by " + esc(f.shortfall) + " " + esc(f.unit) + ".</p>" : "") +
+      (skipped ? "<p><b>Left out</b></p>" + '<ul class="w-mini">' + skipped + "</ul>" : "") +
+      '<p class="w-hint">' + ms("info") + esc(f.note || "") + "</p>";
+  }
   function inventoryView(state) {
     var inv = state.inventory || {};
     var s = inv.stock;
@@ -2301,13 +2316,28 @@
       (s && s.negative && s.negative.length ? '<p class="w-hint warn">' + ms("error") + esc(s.negativeWarning) + "</p>" : "") +
       (s && s.mixedUnitsWarning ? '<p class="w-hint warn">' + ms("warning") + esc(s.mixedUnitsWarning) + "</p>" : "") +
 
+      (s && s.truncatedWarning ? '<p class="w-hint warn">' + ms("warning") + esc(s.truncatedWarning) + "</p>" : "") +
+
       '<div class="w-card"><div class="w-card-h">' + ms("inventory_2") + "<h3>Stock levels</h3></div>" +
-      (levelRows ? '<ul class="w-mini">' + levelRows + "</ul>" : '<p class="w-empty">No stock movements recorded yet.</p>') +
+      (inv.failed ? '<p class="w-hint warn">' + ms("error") + "Stock could not be loaded. Do not read this as no stock.</p>"
+        : !s ? '<p class="w-empty">Loading stock...</p>'
+        : levelRows ? '<ul class="w-mini">' + levelRows + "</ul>" : '<p class="w-empty">No stock movements recorded yet.</p>') +
       "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("event_busy") + "<h3>Near expiry</h3></div>" +
-      (expiringRows ? '<ul class="w-mini">' + expiringRows + "</ul>" : '<p class="w-empty">Nothing expiring soon.</p>') +
+      (inv.failed ? '<p class="w-hint warn">' + ms("error") + "Not loaded.</p>"
+        : !s ? '<p class="w-empty">Loading...</p>'
+        : expiringRows ? '<ul class="w-mini">' + expiringRows + "</ul>" : '<p class="w-empty">Nothing expiring soon.</p>') +
       "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("low_priority") + "<h3>Which batch to use</h3></div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Drug</span><input id="wFefoCode" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Quantity</span><input id="wFefoQty" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wFefoUnit" type="text" autocomplete="off" placeholder="e.g. tablet"></label>' +
+      "</div>" +
+      '<button class="w-btn go" data-w-act="stockfefo">' + ms("search") + "Suggest batches</button>" +
+      fefoResultHtml(inv.fefo) + "</div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("call_received") + "<h3>Receipt</h3></div>" +
       '<div class="w-grid">' +
@@ -6229,9 +6259,19 @@
   }
   function loadInventory() {
     if (!st.inventory) st.inventory = {};
+    st.inventory.failed = false;
     return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.inventory.stock = (r && r.ok) ? r : null; paint(); })
-      .catch(function () { paint(); });
+      .then(function (r) { st.inventory.stock = (r && r.ok) ? r : null; st.inventory.failed = !(r && r.ok); paint(); })
+      .catch(function () { st.inventory.stock = null; st.inventory.failed = true; paint(); });
+  }
+  function stockFefo() {
+    var code = val("wFefoCode"), qty = val("wFefoQty"), unit = val("wFefoUnit");
+    if (!code || !qty || !unit) { st.err = "Enter the drug, the quantity and the unit."; paint(); return; }
+    if (!st.inventory) st.inventory = {};
+    st.inventory.fefo = { busy: true }; paint();
+    apiGet("/ward/stock-fefo?orgId=" + encodeURIComponent(st.orgId) + "&code=" + encodeURIComponent(code) + "&unit=" + encodeURIComponent(unit) + "&quantity=" + encodeURIComponent(qty))
+      .then(function (r) { st.inventory.fefo = r || { ok: false }; paint(); })
+      .catch(function () { st.inventory.fefo = { ok: false }; paint(); });
   }
   function stockReceive() {
     var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
@@ -8464,6 +8504,7 @@
     if (cmd === "stockadjust") { stockAdjustOrWaste("adjustment"); return; }
     if (cmd === "stockwaste") { stockAdjustOrWaste("wastage"); return; }
     if (cmd === "stockreconcile") { stockReconcile(); return; }
+    if (cmd === "stockfefo") { stockFefo(); return; }
     if (cmd === "txopen") { txOpen(); return; }
     if (cmd === "txload") { loadTransfusion(); return; }
     if (cmd === "txpick") { txPick(arg); return; }

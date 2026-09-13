@@ -184,7 +184,7 @@ import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
-import { recordMovement, stockLevels, reconcileCount } from "../../_wardsynq/stock.js";
+import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
@@ -1040,7 +1040,7 @@ export async function onRequest(context) {
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
-        "stock-move": CAPS.ORDER_DISPENSE, stock: CAPS.ORDER_DISPENSE, "stock-reconcile": CAPS.ORDER_DISPENSE,
+        "stock-move": CAPS.ORDER_DISPENSE, stock: CAPS.ORDER_DISPENSE, "stock-fefo": CAPS.ORDER_DISPENSE, "stock-reconcile": CAPS.ORDER_DISPENSE,
         /* Asking "is this person already here" is the front desk's work, and it is the same
          * authority that registers them - QUEUE_ADD. It proposes candidates and can link nothing:
          * a merge is a separate, human, retractable claim through its own route. */
@@ -2038,6 +2038,10 @@ export async function onRequest(context) {
       }
       if (sub === "stock" && method === "GET") {
         const r = await stockLevels(request, env, { ...deps, location: url.searchParams.get("location") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stock-fefo" && method === "GET") {
+        const r = await stockFefo(request, env, { ...deps, code: url.searchParams.get("code") || "", unit: url.searchParams.get("unit") || "", quantity: url.searchParams.get("quantity") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-reconcile" && method === "POST") {

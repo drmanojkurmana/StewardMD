@@ -2949,6 +2949,25 @@ test("TASK 3.4: NEAR-EXPIRY appears on the real stock read, and a nurse holds no
   assert.equal((await as(NURSE, `/ward/stock?orgId=${ORG}`)).__status, 403);
 });
 
+test("P1.2 FEFO route: earliest usable expiry first, expired batch left out, nurse refused, unbatched issue refuses advice", async () => {
+  seedHospital();
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ceftriaxone 1g", quantity: { value: 10, unit: "vial" }, location: "Main", batch: "LATE", expiry: "2099-01-01" });
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ceftriaxone 1g", quantity: { value: 4, unit: "vial" }, location: "Main", batch: "SOON", expiry: "2098-01-01" });
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ceftriaxone 1g", quantity: { value: 3, unit: "vial" }, location: "Main", batch: "OLD", expiry: "2001-01-01" });
+  const q = `/ward/stock-fefo?orgId=${ORG}&code=${encodeURIComponent("Ceftriaxone 1g")}&unit=vial&quantity=6`;
+  const r = await as(PHARM, q);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual(r.picks.map((p) => p.batch + ":" + p.take), ["SOON:4", "LATE:2"]);
+  assert.deepEqual(r.excluded.map((x) => x.batch), ["OLD"]);
+  assert.equal((await as(NURSE, q)).__status, 403);
+  assert.equal((await as(PHARM, `/ward/stock-fefo?orgId=${ORG}&code=x&unit=vial`)).__status, 400);
+
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "wastage", code: "Ceftriaxone 1g", quantity: { value: 1, unit: "vial" }, location: "Main", reason: "dropped" });
+  const refused = await as(PHARM, q);
+  assert.equal(refused.__status, 409);
+  assert.equal(refused.error, "unbatched_issues");
+});
+
 test("A VERIFICATION IS OF ONE VERSION: change the order and it is no longer verified", async () => {
   seedHospital();
   const { adm, ord } = await admittedPatientOnDrug();

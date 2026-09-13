@@ -261,10 +261,17 @@ async function reconcileCount(request, env, ctx) {
   let movements, dispenses;
   try {
     [movements, dispenses] = await Promise.all([
-      svc.list(MOVE_TYPE, 1000).catch(() => []),
-      svc.list("MedicationDispense", 1000).catch(() => []),
+      /* No catch: an empty read here would post a wrong adjustment into the permanent record. */
+      svc.list(MOVE_TYPE, READ_CAP),
+      svc.list("MedicationDispense", READ_CAP),
     ]);
-  } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+  if ((movements || []).length >= READ_CAP || (dispenses || []).length >= READ_CAP) {
+    return { ...base, ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so the expected level cannot be worked out safely. Nothing was posted.`, written: 0 };
+  }
 
   const computed = levelsFrom((movements || []).filter(Boolean), (dispenses || []).filter(Boolean));
   const k = `${key(code)}|${key(ctx.location)}|${key(unit)}`;
@@ -342,7 +349,10 @@ async function recordMovement(request, env, ctx) {
   if (error) return { ...base, ...error, written: 0 };
 
   const at = str(ctx.at) || new Date().toISOString();
-  const id = `wsq-stock-${key(code).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}-${kind}`;
+  /* The random tail matters: two receipts of one drug in the same millisecond used to share an id, and
+   * the second became a new version of the first, so the first delivery vanished from every level.
+   * A retried request is caught by idempotencyKey, not by the id. */
+  const id = `wsq-stock-${key(code).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}-${kind}-${crypto.randomUUID().slice(0, 8)}`;
   const record = {
     resourceType: MOVE_TYPE, id, kind, code, display: str(ctx.display) || code,
     quantity, location: str(ctx.location) || null,
@@ -361,6 +371,33 @@ async function recordMovement(request, env, ctx) {
   }
 }
 
+const READ_CAP = 1000;
+
+/** ctx: { migration, code, unit, quantity, now? } - which batches to take from, earliest expiry first. Advice only. */
+async function stockFefo(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", picks: [] };
+  const code = str(ctx.code), unit = str(ctx.unit), quantity = Number(ctx.quantity);
+  if (!code || !unit) return { ...base, ok: false, status: 400, error: "code_and_unit_required" };
+  if (!(quantity > 0)) return { ...base, ok: false, status: 400, error: "quantity_required" };
+  const { svc, error } = await open_(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  let movements, dispenses;
+  try {
+    [movements, dispenses] = await Promise.all([svc.list(MOVE_TYPE, READ_CAP), svc.list("MedicationDispense", READ_CAP)]);
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code) };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
+  }
+  if ((movements || []).length >= READ_CAP || (dispenses || []).length >= READ_CAP) {
+    return { ...base, ok: false, status: 409, error: "too_many_records", detail: `More than ${READ_CAP} stock records exist, so batch counts cannot be worked out safely here. Pick from the shelf by expiry date.` };
+  }
+  const sug = fefoSuggestion(batchBalances((movements || []).filter(Boolean), (dispenses || []).filter(Boolean), code, unit), quantity, ctx.now);
+  if (!sug.ok) return { ...base, ok: false, status: 409, error: sug.reason, detail: sug.detail };
+  return { ...base, ok: true, code, unit, quantity, picks: sug.picks, shortfall: sug.shortfall, excluded: sug.excluded, note: "Advice only. Check the expiry printed on the box before issuing." };
+}
+
 /** ctx: { migration, reorderLevels?, location? } - the levels, computed now. */
 async function stockLevels(request, env, ctx) {
   const mig = ctx.migration;
@@ -373,8 +410,9 @@ async function stockLevels(request, env, ctx) {
   let movements, dispenses;
   try {
     [movements, dispenses] = await Promise.all([
-      svc.list(MOVE_TYPE, 1000).catch(() => []),
-      svc.list("MedicationDispense", 1000).catch(() => []),
+      /* No catch: a dispense read that failed and came back as [] would make every level too high. */
+      svc.list(MOVE_TYPE, READ_CAP),
+      svc.list("MedicationDispense", READ_CAP),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), levels: [] };
@@ -389,8 +427,10 @@ async function stockLevels(request, env, ctx) {
   const expiring = nearExpiry((movements || []).filter(Boolean), ctx.nearExpiryDays, ctx.now)
     .filter((r) => !where || key(r.location) === key(where));
 
+  const truncated = (movements || []).length >= READ_CAP || (dispenses || []).length >= READ_CAP;
   return {
     ...base, ok: true,
+    ...(truncated ? { truncated: true, truncatedWarning: `More than ${READ_CAP} stock records exist and only the latest ${READ_CAP} of each kind were read, so these levels may be wrong.` } : {}),
     levels: levels.sort((a, b) => String(a.display).localeCompare(String(b.display))),
     belowReorder: flagged.belowReorder,
     negative: flagged.negative,
@@ -409,4 +449,4 @@ async function stockLevels(request, env, ctx) {
   };
 }
 
-export { batchBalances, fefoSuggestion, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
+export { batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
