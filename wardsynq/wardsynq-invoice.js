@@ -53,6 +53,10 @@ function invoiceLine(input) {
   return {
     code: str(i.code), display: str(i.display) || str(i.code), quantity: Number(i.quantity) || 1,
     amount: Number(i.amount), line: Number(i.line), sourceType: str(i.sourceType) || null, sourceId: str(i.sourceId) || null,
+    /* A tax on this line, when a REGION ADAPTER computed one from the hospital's own tariff (India:
+     * GST, functions/_region_in.js). This file names no tax, sets no rate and computes no tax; it only
+     * carries the adapter's figure and adds it to what is owed. A line with no taxKind has no tax. */
+    ...(str(i.taxKind) ? { taxKind: str(i.taxKind), taxRate: i.taxRate == null ? null : Number(i.taxRate), taxExempt: i.taxExempt === true, tax: round2(i.tax) } : {}),
   };
 }
 
@@ -70,9 +74,9 @@ function openInvoice({ id, patientId, encounterId, lines, currency, actorId, at 
   };
 }
 
-/** PURE. Sum of the invoice's own charge lines - the base amount, never re-priced afterward. */
+/** PURE. Sum of the invoice's own charge lines plus any tax carried on them - never re-priced afterward. */
 function chargeTotal(invoice) {
-  return round2((invoice.lines || []).reduce((n, l) => n + (Number(l.line) || 0), 0));
+  return round2((invoice.lines || []).reduce((n, l) => n + (Number(l.line) || 0) + (Number(l.tax) || 0), 0));
 }
 function eventSum(events, kinds) {
   return round2((events || []).filter((e) => e && kinds.includes(e.kind)).reduce((n, e) => n + (Number(e.amount) || 0), 0));

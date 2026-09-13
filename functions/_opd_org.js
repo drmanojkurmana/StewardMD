@@ -7,6 +7,7 @@
  * (never trust the frontend). No EMR/GHIS specifics — org.mode + connectorId is the only EMR coupling.
  */
 import { isRole, can } from "./_queue_roles.js";
+import { orgProfile, memberProfile } from "./_region_in.js";
 
 export const OPD_ORG_VERSION = "1.0";
 
@@ -48,7 +49,10 @@ export function org(o = {}) {
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
-           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security), createdAt: Number(o.createdAt) || 0 };
+           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security),
+           /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,
+            * which returns {} for any other region, so the core model never names a national field. */
+           regionProfile: orgProfile(o.regionProfile, REGION), createdAt: Number(o.createdAt) || 0 };
 }
 
 /* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs
@@ -237,6 +241,9 @@ export function membership(o = {}) {
      * why the actor records WHICH of the two vouched (wardsynq-actors.js credentialSource) and
      * every signed record carries that word. Empty means this member cannot sign, as before. */
     regNo: s(o.regNo),
+    /* Country-specific practitioner ids (India: HPR id). Shape only here; the member route refuses
+     * one for a hospital outside India (functions/_region_in.js validateMemberProfile). */
+    regionProfile: memberProfile(o.regionProfile, "IN"),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }
