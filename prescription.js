@@ -89,6 +89,18 @@
       "@media(max-width:500px){.rx-line .r1{display:grid;grid-template-columns:1fr auto;gap:6px}.rx-line .r1 .rx-drug{grid-column:1}.rx-line .r1 .rx-del{grid-column:2;grid-row:1}.rx-line .r1 .rx-brand{grid-column:1/span 2;grid-row:2}}" +
       ".rx-timing-tag{margin-top:6px;display:flex;align-items:center;gap:4px}" +
       ".rx-timing-chip{display:inline-flex;align-items:center;gap:3px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;padding:2px 7px;border-radius:5px;letter-spacing:.01em}" +
+      ".rx-freq-pills{display:flex;align-items:center;gap:4px;margin-top:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rx-freq-pills::-webkit-scrollbar{display:none}" +
+      ".rx-freq-pill{border:1px solid #e2e8f0;background:#f8fafc;color:#475569;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;padding:3px 8px;border-radius:6px;cursor:pointer;flex:none;transition:all .15s ease}" +
+      ".rx-freq-pill:hover{background:#e2e8f0;color:#0f172a}" +
+      ".rx-freq-pill.active{background:#0e6e63;border-color:#0e6e63;color:#fff}" +
+      ".rx-switch-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0;cursor:pointer;width:100%}" +
+      ".rx-toggle{position:relative;display:inline-block;width:38px;height:22px;flex:none}" +
+      ".rx-toggle input{opacity:0;width:0;height:0}" +
+      ".rx-slider{position:absolute;cursor:pointer;inset:0;background-color:#cbd5e1;transition:.2s;border-radius:24px}" +
+      ".rx-slider:before{position:absolute;content:'';height:16px;width:16px;left:3px;bottom:3px;background-color:#fff;transition:.2s;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.2)}" +
+      ".rx-toggle input:checked + .rx-slider{background-color:#0e6e63}" +
+      ".rx-toggle input:checked + .rx-slider:before{transform:translateX(16px)}" +
+      ".rx-toggle input:disabled + .rx-slider{opacity:0.4;cursor:not-allowed}" +
       ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:6px}.rx-del{border:0;background:#fee2e2;color:#ef4444;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;transition:all .15s ease}.rx-del:hover{background:#fecaca;color:#dc2626}" +
       ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
       ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
@@ -316,6 +328,7 @@
   function rxNative() { try { var C = window.Capacitor; return !!(C && (C.isNativePlatform ? C.isNativePlatform() : C.isNative)); } catch (e) { return false; } }
   function rxPlugins() { try { return (window.Capacitor && window.Capacitor.Plugins) || {}; } catch (e) { return {}; } }
   function collectRx() {
+    if (!sheet) return { name: "", age: "", dx: "", complaints: "", vitals: "", lines: [] };
     var name = (sheet.querySelector("#rxPtName") || {}).value || "";
     var age = (sheet.querySelector("#rxPtAge") || {}).value || "";
     var dx = ((sheet.querySelector("#rxDx") || {}).value || "").trim();
@@ -945,12 +958,18 @@
     }
     var timing = getDrugTimingBadge(l.drug, l.freq);
     var timingHtml = timing ? '<div class="rx-timing-tag"><span class="rx-timing-chip">' + esc(timing) + '</span></div>' : '';
+    var curFreq = (l.freq || "").toUpperCase().trim();
+    var pills = ["OD", "BD", "TDS", "QID", "HS", "SOS", "STAT"].map(function (p) {
+      var act = curFreq === p ? " active" : "";
+      return '<button type="button" class="rx-freq-pill' + act + '" data-freq="' + p + '">' + p + '</button>';
+    }).join("");
     return '<div class="' + cls + '" data-i="' + i + '">' +
       '<div class="r1"><input class="rx-in rx-drug" data-f="drug" value="' + esc(l.drug) + '" placeholder="Drug (generic)">' +
       '<input class="rx-in rx-brand" data-f="brand" value="' + esc(l.brand || "") + '" placeholder="Brand — tap for brands + prices"><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div>' +
       '<div class="r2"><input class="rx-in rx-dose" data-f="dose" value="' + esc(l.dose || "") + '" placeholder="Dose">' +
       '<input class="rx-in rx-freq" data-f="freq" value="' + esc(l.freq || "") + '" placeholder="Freq">' +
       '<input class="rx-in rx-dur" data-f="duration" value="' + esc(l.duration || "") + '" placeholder="Duration"></div>' +
+      '<div class="rx-freq-pills">' + pills + '</div>' +
       timingHtml +
       (l.unverified ? '<div class="rx-flag">'+rxIco("warn")+' Not from the Drug Index — confirm this dose before signing</div>' : "") +
       '</div>';
@@ -966,9 +985,9 @@
       if (existing) {
         existing.innerHTML = '<span class="rx-timing-chip">' + esc(badge) + '</span>';
       } else {
-        var r2 = line.querySelector(".r2");
-        if (r2) {
-          r2.insertAdjacentHTML("afterend", '<div class="rx-timing-tag"><span class="rx-timing-chip">' + esc(badge) + '</span></div>');
+        var anchor = line.querySelector(".rx-freq-pills") || line.querySelector(".r2");
+        if (anchor) {
+          anchor.insertAdjacentHTML("afterend", '<div class="rx-timing-tag"><span class="rx-timing-chip">' + esc(badge) + '</span></div>');
         }
       }
     } else if (existing) {
@@ -2295,12 +2314,38 @@
     refreshSafety();
     var _sl = sheet.querySelector("#rxLines");
     if (_sl) {
+      _sl.addEventListener("click", function (e) {
+        var btn = e.target && e.target.closest && e.target.closest(".rx-freq-pill");
+        if (!btn) return;
+        e.preventDefault();
+        var p = btn.getAttribute("data-freq");
+        var ln = btn.closest(".rx-line");
+        if (ln && p) {
+          var freqInp = ln.querySelector('[data-f="freq"]');
+          if (freqInp) {
+            freqInp.value = p;
+            ln.querySelectorAll(".rx-freq-pill").forEach(function (b) {
+              b.classList.toggle("active", b.getAttribute("data-freq") === p);
+            });
+            updateLineTiming(ln);
+            refreshSafety();
+          }
+        }
+      });
       _sl.addEventListener("input", function (e) {
         if (!e.target || !e.target.getAttribute) return;
         var f = e.target.getAttribute("data-f");
         if (f === "drug" || f === "freq") {
           var ln = e.target.closest(".rx-line");
-          if (ln) updateLineTiming(ln);
+          if (ln) {
+            if (f === "freq") {
+              var val = (e.target.value || "").toUpperCase().trim();
+              ln.querySelectorAll(".rx-freq-pill").forEach(function (b) {
+                b.classList.toggle("active", b.getAttribute("data-freq") === val);
+              });
+            }
+            updateLineTiming(ln);
+          }
           if (f === "drug") refreshSafety();
         }
       });
@@ -2503,7 +2548,7 @@
   // ---- Professional Rx document + PDF/JPEG export ----
   function rxDoc(topic, regNo, signImg, rxv){
     var opts = arguments[4] || {};
-    var d=collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
+    var d=(opts && opts.rxData) || collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
     var dn = docName() || "—";
     if (dn && !/^dr\.?\s+/i.test(dn) && dn !== "—") dn = "Dr. " + dn;
     var n=0;
@@ -2645,15 +2690,15 @@
       var ov=document.createElement("div"); ov.className="rx-bp-ov";
       ov.innerHTML='<div class="rx-bp rx-exp">' +
         '<div class="rx-handle-bar" style="margin:0 auto 10px"></div>' +
-        '<div class="rx-bp-h"><div><b>Export Prescription</b><div style="font-size:11px;color:#047857;font-weight:600;margin-top:2px;display:flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Digitally signed &amp; verified document</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
-        '<div style="margin:12px 0 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">' +
-          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
-            '<input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + ' style="width:16px;height:16px;accent-color:#0e6e63">' +
-            '<span>Include RxChoice™ 4-way cost options</span>' +
+        '<div class="rx-bp-h"><div><b style="font-size:16px">Export &amp; Issue Prescription</b><div style="font-size:11px;color:#047857;font-weight:600;margin-top:2px;display:flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Digitally signed &amp; verified document</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
+        '<div style="margin:14px 0 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:12px">' +
+          '<label class="rx-switch-row">' +
+            '<div><span style="display:block;font-size:13px;font-weight:600;color:#0f172a">Include RxChoice™ 4-way cost options</span><span style="font-size:11px;color:#64748b;font-weight:normal">Displays generic &amp; alternative pricing table</span></div>' +
+            '<span class="rx-toggle"><input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + '><span class="rx-slider"></span></span>' +
           '</label>' +
-          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
-            '<input type="checkbox" id="rxExpSafety" checked style="width:16px;height:16px;accent-color:#0e6e63">' +
-            '<span>Include Patient Safety &amp; Instructions Notes</span>' +
+          '<label class="rx-switch-row">' +
+            '<div><span style="display:block;font-size:13px;font-weight:600;color:#0f172a">Include Patient Safety &amp; Instructions Notes</span><span style="font-size:11px;color:#64748b;font-weight:normal">Adds common side effects, red flags &amp; meal timing</span></div>' +
+            '<span class="rx-toggle"><input type="checkbox" id="rxExpSafety" checked><span class="rx-slider"></span></span>' +
           '</label>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">' +
