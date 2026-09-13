@@ -326,3 +326,13 @@ no duplicates on re-flag.
 
 **Numbers:** 6015 passing, 0 failing. 26 routes waiting for a screen (flag-critical remains machine-callable).
 **Next:** extend, emergency-chart, advisory-check; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10.
+
+
+## 2026-09-14 (cont.) — SAFETY: critical imaging findings now alert
+
+**Bug:** a critical imaging report (e.g. tension pneumothorax) opened no alert, same cause as lab. Fixed on
+the imaging release route. My own previous change had overwritten the imaging reply's existing critical
+flag; caught by an existing test; both routes now use criticalCheck. flag-critical recorded byDesign.
+
+**Numbers:** 6015 passing, 0 failing. 25 routes waiting for a screen.
+**Next:** extend, emergency-chart, advisory-check; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10.
