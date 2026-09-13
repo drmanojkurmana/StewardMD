@@ -4458,11 +4458,39 @@
       (c.agreed && c.agreed.length ? " &middot; agreed: " + esc(c.agreed.join(", ")) : "") +
       (c.disagreed && c.disagreed.length ? " &middot; disagreed: " + esc(c.disagreed.join(", ")) : "") + "</div>" +
       "</div><div class=\"w-mini-row-act\">" +
+      /* No "Undo" here: a search match is not a merge, and undoing a merge that never happened only
+       * ever failed. Undo lives on the history below, against joins that actually exist. */
       (subjectId && subjectId !== c.patientId
-        ? '<button class="w-btn ghost sm" data-w-act="mpimerge:' + esc(subjectId) + "~" + esc(c.patientId) + '">' + ms("fact_check") + "Same person - merge</button>" +
-          '<button class="w-btn ghost sm" data-w-act="mpiunmerge:' + esc(subjectId) + "~" + esc(c.patientId) + '">' + ms("undo") + "Undo a merge</button>"
+        ? '<button class="w-btn ghost sm" data-w-act="mpimerge:' + esc(subjectId) + "~" + esc(c.patientId) + '">' + ms("fact_check") + "Same person - merge</button>"
         : "") +
       "</div></li>";
+  }
+  /* MERGE HISTORY of the open record: what it was joined into, what was joined into it, and every
+   * undo, with who and why. Not loaded, failed and empty are three different sentences. */
+  function mpiHistory(state, subjectId) {
+    var h = state.mpiIdentity;
+    if (h == null) return '<p class="w-hint">' + ms("hourglass_empty") + "Loading the merge history of this record...</p>";
+    if (h.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the merge history. Do not read this as never merged.</p>";
+    var idn = h.identity;
+    if (!idn) return '<p class="w-hint warn">' + ms("warning") + "The clinical record is not switched on for this hospital, so there is no merge history to show.</p>";
+    var links = idn.links || [];
+    var rows = links.map(function (l) {
+      var live = l.state === "merged";
+      var other = l.survivorId === subjectId ? l.mergedId : l.survivorId;
+      var what = l.survivorId === subjectId ? "Record " + esc(other) + " was joined into this one" : "This record was joined into " + esc(other);
+      return '<li class="w-mini-row"><div>' +
+        '<span class="w-st ' + (live ? "escalate" : "done") + '">' + (live ? "joined" : "undone") + "</span> " + what +
+        '<div class="w-dt-times">' + esc(l.mergedBy || "unknown") + " &middot; " + when(l.mergedAt) + (l.reason ? " &middot; " + esc(l.reason) : "") + "</div>" +
+        (live ? "" : '<div class="w-dt-times">Undone by ' + esc(l.unmergedBy || "unknown") + " &middot; " + when(l.unmergedAt) + (l.unmergeReason ? " &middot; " + esc(l.unmergeReason) : "") + "</div>") +
+        '</div><div class="w-mini-row-act">' +
+        (live ? '<button class="w-btn ghost sm" data-w-act="mpiunmerge:' + esc(l.survivorId) + "~" + esc(l.mergedId) + '">' + ms("undo") + "Undo this merge</button>" : "") +
+        "</div></li>";
+    }).join("");
+    return (h.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(h.partialWarning) + "</p>" : "") +
+      (idn.isMerged ? '<p class="w-hint warn">' + ms("warning") + "This record has been merged into " + esc(idn.mergedInto) + ". The complete chart is under that record.</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : h.partial ? '<p class="w-hint warn">' + ms("warning") + "No merges found in what was checked, but the check was partial.</p>"
+        : '<p class="w-empty">This record has never been merged with another.</p>');
   }
   function mpiView(state) {
     var d = state.mpi;
@@ -4480,6 +4508,7 @@
         '<label class="w-f"><span>MRN (optional)</span><input id="wMpiMrn"></label></div>') +
       '<button class="w-btn" data-w-act="mpisearch">' + ms("search") + "Search</button>" +
       '<p class="w-hint">' + ms("info") + "A match is a suggestion. Nothing is joined until a person decides, gives a reason, and confirms." + "</p></div>" +
+      (s ? '<div class="w-sub"><h4>Merge history</h4>' + mpiHistory(state, subjectId) + "</div>" : "") +
       /* Above the results, not below them. */
       (d && d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
       (d == null ? ""
@@ -6664,7 +6693,15 @@
   }
 
   function mpiOpen() {
-    st.view = "mpi"; st.mpi = null; paint();
+    st.view = "mpi"; st.mpi = null; st.mpiIdentity = null; paint();
+    loadMpiIdentity();
+  }
+  function loadMpiIdentity() {
+    var s = st.sel; if (!s) return;
+    st.mpiIdentity = null; paint();
+    apiGet("/ward/identity?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.mpiIdentity = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.mpiIdentity = { failed: true }; paint(); });
   }
   function mpiSearch() {
     var s = st.sel;
@@ -6697,7 +6734,7 @@
       : "Join these two records as one person?\n\nNo clinical data is moved or deleted, and this can be undone.")) return;
     st.busy = true; paint();
     apiPost(undo ? "/ward/unmerge" : "/ward/merge", { orgId: st.orgId, survivorId: survivorId, mergedId: mergedId, reason: reason })
-      .then(function (r) { if (settle(r, r && r.ok ? (undo ? "Merge undone." : "Records joined.") : null)) mpiSearch(); else paint(); })
+      .then(function (r) { if (settle(r, r && r.ok ? (undo ? "Merge undone." : "Records joined.") : null)) { loadMpiIdentity(); mpiSearch(); } else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not do that."; paint(); });
   }
 

@@ -34,7 +34,7 @@ test("a candidate shows which fields agreed and which disagreed, not just a scor
   assert.match(html, /agreed: dob, sex/);
   assert.match(html, /disagreed: name/);
   assert.ok(html.includes('data-w-act="mpimerge:p1~p2"'));
-  assert.ok(html.includes('data-w-act="mpiunmerge:p1~p2"'));
+  assert.ok(!html.includes('data-w-act="mpiunmerge:'), "a match is not a merge, so it offers no undo");
 });
 
 test("A PARTIAL SEARCH IS STATED ABOVE THE RESULTS, and an empty partial result is not 'no duplicate'", () => {
