@@ -2342,6 +2342,51 @@ test("ORDER -> RESULT -> CRITICAL LOOP, natively, end to end", async () => {
   assert.deepEqual((await as(LABTECH, `/ward/pending-tests?orgId=${ORG}&patientId=${adm.patientId}`)).pending, []);
 });
 
+test("LAB VERIFICATION (opt-in): a result autoverification did not pass is on the chart as preliminary, still opens its critical loop, and only a DIFFERENT person makes it final", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, labVerification: { mode: "second-person" } };
+  const LAB2 = "lab2@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(LAB2))}`, { fields: { orgId: ORG, identity: idFor(LAB2), role: "lab", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm);
+
+  const rel = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, status: "final", reportedAt: "2026-09-07T10:00:00.000Z",
+    tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L", range: "3.5-5.1" }] });
+  assert.equal(rel.__status, 200, JSON.stringify(rel));
+  assert.equal(rel.status, "preliminary");
+  assert.equal(rel.awaitingVerification, true);
+  assert.equal(rel.criticalCheck.opened, 1, "held for verification is NOT held back from the critical loop");
+
+  const queue = await as(LAB2, `/ward/results-to-verify?orgId=${ORG}`);
+  assert.equal(queue.__status, 200, JSON.stringify(queue));
+  const row = queue.results.find((x) => x.reportId === rel.reportId);
+  assert.ok(row, "waiting for verification");
+  assert.equal(row.observations[0].value, 7.4);
+
+  const own = await as(LABTECH, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" });
+  assert.equal(own.__status, 403);
+  assert.equal(own.error, "cannot_verify_own");
+  assert.equal((await as(NURSE, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" })).__status, 403, "a nurse cannot verify a lab result");
+  assert.equal((await as(LAB2, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "return" })).error, "reason_required");
+
+  const ok = await as(LAB2, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.status, "final");
+  const stored = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", rel.reportId);
+  assert.equal(stored.status, "final");
+  assert.equal(stored.verifiedBy, idFor(LAB2));
+  assert.equal((await as(LAB2, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" })).error, "not_awaiting_verification");
+  assert.ok(!(await as(LAB2, `/ward/results-to-verify?orgId=${ORG}`)).results.some((x) => x.reportId === rel.reportId));
+
+  // Without the setting nothing changes: final stays final.
+  org.fields.wardsynq = { ...org.fields.wardsynq, labVerification: null };
+  const sr2 = await orderTest(adm, "Sodium", "wsq-sr-2");
+  const plain = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr2, status: "final", tests: [{ test: "Sodium", value: 138, unit: "mmol/L" }] });
+  assert.equal(plain.status, "final");
+  assert.equal(plain.awaitingVerification, undefined);
+});
+
 test("A FINAL RESULT IS CORRECTED, NEVER OVERWRITTEN", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();

@@ -34,6 +34,12 @@ test("the screen shows the current rules and reads them back into the shape the 
   assert.equal(levelsFor(cfg, "PurchaseOrder", undefined), 2, "unknown amount: the strictest");
 });
 
+test("laboratory result checking shows the saved setting", () => {
+  const L = sb.window.WSQ._labCheck;
+  assert.match(L.html(esc, { labVerification: { mode: "second-person" } }), /id="labSecond" checked/);
+  assert.ok(!/id="labSecond" checked/.test(L.html(esc, {})));
+});
+
 test("half-filled or impossible rules are refused on screen, not saved", () => {
   assert.match(A.read([row("Invoice", { above: "100" })]).error, /both a rupee amount and a number/);
   assert.match(A.read([row("Invoice", { levels: "0" })]).error, /between 1 and 5/);

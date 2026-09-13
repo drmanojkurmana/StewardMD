@@ -115,7 +115,7 @@ import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
-import { releaseResult, pendingRequests } from "../../_wardsynq/lab-result.js";
+import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { mergePatients, unmergePatients, identityOf } from "../../_wardsynq/identity-merge.js";
 import { overrideReport } from "../../_wardsynq/override-analytics.js";
 import { listOrderSets, prepareOrderSet, recordApplication } from "../../_wardsynq/order-sets.js";
@@ -920,7 +920,7 @@ export async function onRequest(context) {
         "report-billing": CAPS.BILLING_VIEW, "report-claims": CAPS.BILLING_VIEW,
         "report-pharmacy": CAPS.ORDER_DISPENSE, "report-him": CAPS.STAFF_ADMIN,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
-        "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT,
+        "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT, "verify-result": CAPS.LAB_RESULT, "results-to-verify": CAPS.LAB_RESULT,
         /* Resolving identity is the registration authority, not a clinical one: it is the same act
          * as creating the record in the first place. Reading who a patient is needs only emr.view -
          * a clinician who followed a link to a merged record must be told where the chart went. */
@@ -2406,7 +2406,7 @@ export async function onRequest(context) {
           panel: body.panel, tests: body.tests, status: body.status, reportedAt: body.reportedAt, conclusion: body.conclusion,
           // What counts as an implausible change, and what may be released unread, are the HOSPITAL's
           // clinical content - the same shape as the critical limits this file already passes.
-          deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null,
+          deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null, labVerification: (wsqCfg && wsqCfg.labVerification) || null,
           idempotencyKey: body.idempotencyKey || null,
         });
         /* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
@@ -2431,6 +2431,14 @@ export async function onRequest(context) {
             r.criticalCheck = { checked: false, error: "critical_check_failed" };
           }
         }
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "verify-result" && method === "POST") {
+        const r = await verifyResult(request, env, { ...deps, reportId: body.reportId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "results-to-verify" && method === "GET") {
+        const r = await resultsToVerify(request, env, { ...deps });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "pending-tests" && method === "GET") {

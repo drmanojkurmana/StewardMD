@@ -2673,13 +2673,14 @@
       rows += '<div class="w-grid">' +
         '<label class="w-f"><span>Test</span><input id="wLrTest' + i + '"' + (i === 0 ? ' value="' + esc(f.display || f.code || "") + '"' : "") + "></label>" +
         '<label class="w-f"><span>Result</span><input id="wLrVal' + i + '"></label>' +
-        '<label class="w-f"><span>Unit</span><input id="wLrUnit' + i + '"></label></div>';
+        '<label class="w-f"><span>Unit</span><input id="wLrUnit' + i + '"></label>' +
+        '<label class="w-f"><span>Reference range</span><input id="wLrRange' + i + '" placeholder="as the analyser reports it"></label></div>';
     }
     return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Result for " + esc(f.display || f.code) + "</h3>" +
       '<button class="w-ic" data-w-act="labresultclose" title="Close">' + ms("close") + "</button></div>" +
       '<p class="w-hint">' + ms("info") + "Type each value as the analyser reported it. Nothing is converted or rounded. Leave unused rows empty." + "</p>" +
       rows +
-      '<select id="wLrStatus"><option value="final">Final</option><option value="preliminary">Preliminary</option></select>' +
+      '<select id="wLrStatus"><option value="final">Final</option><option value="preliminary">Preliminary</option><option value="corrected">Corrected (replaces a final result)</option></select>' +
       '<textarea id="wLrConc" rows="2" placeholder="Comment or conclusion (optional)"></textarea>' +
       '<button class="w-btn" data-w-act="labresultsave">' + ms("send") + "Release result</button>" +
       (r && r.rejected && r.rejected.length
@@ -2687,8 +2688,30 @@
         : "") +
       "</div>";
   }
+  function labVerifyRow(x) {
+    var obs = (x.observations || []).map(function (o) {
+      var why = [];
+      if (o.critical) why.push("flagged critical by the analyser");
+      if (o.deltaBreach) why.push("changed more than expected since the last result");
+      if (!o.autoVerified) why.push("did not pass autoverification");
+      return "<div>" + esc(o.display) + ": <b>" + esc(o.value) + (o.unit ? " " + esc(o.unit) : "") + "</b>" +
+        (o.referenceRange && (o.referenceRange.text || o.referenceRange.low != null) ? " (range " + esc(o.referenceRange.text || (o.referenceRange.low + "-" + o.referenceRange.high)) + ")" : " (no range reported)") +
+        (why.length ? ' <span class="w-st due">' + esc(why.join("; ")) + "</span>" : "") + "</div>";
+    }).join("");
+    return '<li><div class="w-crit-h"><b>' + esc(x.panel || "Result") + "</b></div>" +
+      '<div class="w-crit-m">' + ms("person") + labWho(x.patientId) + " &middot; entered by " + esc(x.releasedBy || "unknown") + (x.reportedAt ? " " + when(x.reportedAt) : "") + "</div>" + obs +
+      (x.unreadObservations ? '<p class="w-hint warn">' + ms("error") + esc(x.unreadObservations) + " value(s) could not be read. Do not verify until they load.</p>" : "") +
+      (x.mine ? '<p class="w-hint">' + ms("info") + "You entered this, so somebody else must verify it.</p>"
+        : (x.unreadObservations ? "" : '<button class="w-btn go sm" data-w-act="labverify:' + esc(x.reportId) + '">' + ms("verified") + "Verify</button>") +
+          '<button class="w-btn ghost sm" data-w-act="labreturn:' + esc(x.reportId) + '">' + ms("undo") + "Return for re-entry</button>") +
+      "</li>";
+  }
   function labBoardView(state) {
-    var b = state.labBoard || { specimens: [], pending: [], criticals: [], errors: [] };
+    if (!state.labBoard) {
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><div><b>Laboratory</b><small>hospital-wide</small></div></div>" +
+        '<p class="w-empty">Loading the laboratory board...</p>';
+    }
+    var b = state.labBoard;
     var none = function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
     var stateOf = function (s) { return (s && s.collection && s.collection.state) || "none"; };
     var spec = b.specimens || [];
@@ -2741,6 +2764,7 @@
             : "") + "</li>";
       }).join(""), "Nothing in transit.") +
       labResultForm(state) +
+      ((b.toVerify || []).length ? card("verified", "Awaiting verification", b.toVerify.length, b.toVerify.map(labVerifyRow).join(""), "") : "") +
       card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
       card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
   }
@@ -2855,7 +2879,7 @@
     return '<i>not on the ward list</i>';
   }
   function labBoardOpen() {
-    st.view = "labboard"; st.labBoard = { specimens: [], pending: [], criticals: [], errors: [] }; paint(); loadLabBoard();
+    st.view = "labboard"; st.labBoard = null; paint(); loadLabBoard();
   }
   /* Four reads, and a failure in ANY of them is recorded BY NAME rather than left as an empty list.
    * On this screen "nothing outstanding" and "could not tell" must never look the same: one of them
@@ -2863,7 +2887,7 @@
   function loadLabBoard() {
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId);
-    var out = { specimens: [], pending: [], criticals: [], errors: [] };
+    var out = { specimens: [], pending: [], criticals: [], toVerify: [], errors: [] };
     var read = function (name, path, fn) {
       return apiGet(path).then(function (r) {
         if (r && r.ok) fn(r); else out.errors.push(name);
@@ -2872,6 +2896,7 @@
     return Promise.all([
       read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
       read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
+      read("results awaiting verification", "/ward/results-to-verify?" + q, function (r) { out.toVerify = r.results || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("critical results", "/ward/criticals?" + q, function (r) {
         // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
         out.criticals = (r.loops || []).filter(function (l) { return !radCriticalOf(l); });
@@ -6966,9 +6991,9 @@
     var f = st.labResultFor; if (!f) return;
     var tests = [];
     for (var i = 0; i < 6; i++) {
-      var t = val("wLrTest" + i), v = val("wLrVal" + i), u = val("wLrUnit" + i);
+      var t = val("wLrTest" + i), v = val("wLrVal" + i), u = val("wLrUnit" + i), rg = val("wLrRange" + i);
       if (!t && !v) continue;
-      tests.push({ test: t, value: v, unit: u || undefined });
+      tests.push({ test: t, value: v, unit: u || undefined, range: rg || undefined });
     }
     if (!tests.length) { st.err = "Enter at least one result."; paint(); return; }
     st.busy = true; paint();
@@ -6987,7 +7012,9 @@
           st.err = r.criticalCheck.opened + " critical value" + (r.criticalCheck.opened === 1 ? "" : "s") + " in this result. The critical-result alert has been opened.";
         }
         if (r && r.ok && !(r.rejected && r.rejected.length)) {
-          st.labResultFor = null; st.note = "Result released.";
+          st.labResultFor = null;
+          st.note = r.awaitingVerification ? "On the chart as preliminary. Another member of the laboratory must verify it." : "Result released.";
+          if (r.deltaBreaches) st.note += " " + r.deltaBreaches + " value" + (r.deltaBreaches === 1 ? " changed" : "s changed") + " more than expected since the last result: check the sample identity.";
           loadLabBoard();
         } else if (r && r.ok) {
           st.err = "Some rows were not saved. They are listed below the form.";
@@ -8810,6 +8837,15 @@
     if (cmd === "specfailed") { specimenOutcomeAct(arg, "failed"); return; }
     if (cmd === "labresultopen") { labResultOpen(arg); return; }
     if (cmd === "labresultsave") { labResultSave(); return; }
+    if (cmd === "labverify" || cmd === "labreturn") {
+      var reason = cmd === "labreturn" ? (window.prompt("What needs checking or re-entering?") || "") : "";
+      if (cmd === "labreturn" && !reason.trim()) { st.err = "Say what needs checking."; paint(); return; }
+      st.busy = true; paint();
+      apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined })
+        .then(function (r) { if (settle(r, cmd === "labverify" ? "Verified. The result is final." : "Returned for re-entry.")) loadLabBoard(); else paint(); })
+        .catch(function () { st.busy = false; st.err = "Could not reach the server."; paint(); });
+      return;
+    }
     if (cmd === "labresultclose") { st.labResultFor = null; st.labResultOutcome = null; paint(); return; }
     if (cmd === "tags") { tagsOpen(); return; }
     if (cmd === "tagverify") { tagVerify(); return; }

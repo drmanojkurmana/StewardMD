@@ -162,6 +162,30 @@
     return { approvalLevels: levels, approvalPolicy: policy };
   }
   WSQ._approvalRules = { html: approvalRulesHtml, read: readApprovalRules };
+  /* LABORATORY RESULT CHECKING (P1.9). Off: a result is released as entered. On: a final result that did
+   * not pass the hospital's autoverification goes on the chart as preliminary until a different member
+   * of the laboratory verifies it. Critical values alert either way. */
+  function labCheckHtml(esc, cfg) {
+    var on = !!(cfg && cfg.labVerification && cfg.labVerification.mode === "second-person");
+    return '<div class="card"><h2>Laboratory result checking</h2>' +
+      '<label class="f"><span><input type="checkbox" id="labSecond"' + (on ? " checked" : "") + "> Require a second member of the laboratory to verify results that did not pass autoverification</span></label>" +
+      '<p class="quiet">While waiting, the result is on the chart marked preliminary. A critical value still raises its alert straight away.</p>' +
+      '<button class="btn" id="labSecondSave" type="button">Save</button></div>';
+  }
+  WSQ._labCheck = { html: labCheckHtml };
+  function wireLabCheck(c) {
+    var btn = document.getElementById("labSecondSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var on = document.getElementById("labSecond").checked;
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { labVerification: on ? { mode: "second-person" } : null } }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { c.toast(refusal(r)); return; }
+        c.state.org = r.org; c.toast(on ? "Saved. Unverified results now need a second person." : "Saved. Results are released as entered.");
+      });
+    };
+  }
   function wireApprovalRules(c) {
     var btn = document.getElementById("apSave");
     if (!btn) return;
@@ -196,7 +220,7 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       "</div>" +
-      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) : "");
+      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -210,6 +234,7 @@
     };
     wireNoteWriters(c);
     wireApprovalRules(c);
+    wireLabCheck(c);
   }
 
   // ---- Safety reminders (dry run) ----------------------------------------------------------------
