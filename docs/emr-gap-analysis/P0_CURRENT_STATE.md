@@ -471,3 +471,7 @@ Confirmed from the failed deployment log: "Failed to publish your Function. Got 
 ### 2026-09-13 - owner decision
 
 Owner: park open issues (document bucket name InvalidBucketName; 14 unscreened routes; payment provider credentials) and finish P1 then P2 first; issues are sorted at the end.
+
+### 2026-09-13 - production deploy failed again (130 bindings)
+
+Another session added secrets CONNECT_AGENT_MODEL and CONNECT_AGENT_MODEL_PROVIDER (130 > 128). No unused secrets remained, so removed three production vars whose values equal the code default (behaviour identical, verified): DEVICE_LOCK_ON="0" (cfgFlag: KV override first, absent = off), PGLOG_VERIFY_BASE (default https://stewardmd.in), MAIK_CACHE_VERSION (default "1"). Count 127, one slot spare. Also shipped P1.4 accounting storage/routes/Accounts page and clinic billing postings.
