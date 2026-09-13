@@ -3494,16 +3494,16 @@
         r.refused.map(function (x) { return "<li>" + esc(x.detail) + "</li>"; }).join("") +
         "</ul>" + (r.allowed && r.allowed.length ? "<p>You could save just: " + esc(r.allowed.join(", ")) + ".</p>" : "") + "</div>";
     }
-    if (r.partial) {
-      return '<div class="w-sub"><h4>Saved in part - read this before trying again</h4>' +
-        "<p>" + esc(r.detail) + "</p>" +
-        "<p><b>On the chart now:</b> " + esc((r.savedPieces || []).join(", ") || "nothing") + "</p>" +
-        "<p><b>Stopped at:</b> " + esc(r.failedAt) + "</p>" +
-        "<p><b>Never attempted:</b> " + esc((r.notAttempted || []).join(", ") || "nothing") + "</p>" +
-        "<ul class=\"w-mini\">" + (r.results || []).filter(function (x) { return !x.ok; })
-          .map(function (x) { return "<li>" + esc(x.piece) + ": " + esc(x.detail || x.error) + "</li>"; }).join("") + "</ul></div>";
-    }
-    return "";
+    /* EVERY OTHER FAILURE IS SAID, and it is all-or-nothing now: the server saves a consultation in one
+     * transaction, so a failure means none of it is on the chart and what was typed is still here to
+     * fix and save again. This used to return "" for anything but a refusal or a partial save, so a
+     * consultation that failed outright showed no sign at all that it had not been saved. */
+    return '<div class="w-sub"><h4>Not saved - nothing from this consultation is on the chart</h4>' +
+      "<p>" + esc(r.detail || r.message || r.error || "The consultation could not be saved.") + "</p>" +
+      (r.failedAt ? "<p><b>The part that failed:</b> " + esc(r.failedAt) + "</p>" : "") +
+      "<ul class=\"w-mini\">" + (r.results || []).filter(function (x) { return !x.ok; })
+        .map(function (x) { return "<li>" + esc(x.piece) + ": " + esc(x.detail || x.error) + "</li>"; }).join("") + "</ul>" +
+      "<p>What you typed is still here. Fix the part that failed and save again.</p></div>";
   }
 
   /* THE HALF-FILLED CONSULTATION HAS TO SURVIVE A REPAINT.

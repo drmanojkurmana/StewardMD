@@ -330,7 +330,14 @@ class D1Repository {
         .prepare("INSERT INTO wardsynq_idempotency (tenant_id,key,resource_type,id,version,created_at) VALUES (?,?,?,?,?,?)")
         .bind(tenantId, ctx.idempotencyKey, r.resourceType, r.id, r.version, new Date().toISOString()));
     }
+    // Several logical writes in one atomic batch (staged.js): every key and audit row they carry.
+    for (const k of Array.isArray(ctx.idempotency) ? ctx.idempotency : []) {
+      stmts.push(this.db
+        .prepare("INSERT INTO wardsynq_idempotency (tenant_id,key,resource_type,id,version,created_at) VALUES (?,?,?,?,?,?)")
+        .bind(tenantId, k.key, k.resourceType, k.id, k.version, new Date().toISOString()));
+    }
     if (ctx.audit) stmts.push(this._auditStatement(tenantId, ctx.audit));
+    for (const a of Array.isArray(ctx.audits) ? ctx.audits : []) stmts.push(this._auditStatement(tenantId, a));
 
     /* The published-id alias, for the ids FHIR cannot carry verbatim. OR IGNORE because the hash is
      * a function of the id: a second row for one hash would mean a SHA-256 collision, not a claim,

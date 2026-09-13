@@ -15,19 +15,16 @@
  * same safety engine. Delete this file and nothing becomes impossible; the screen just goes back to
  * making five calls and losing four error messages.
  *
- * HALF A CONSULTATION IS THE THING TO FEAR. There is no transaction across records here - the store
- * is append-only, each record is its own write, and Cloudflare gives us nothing to roll back with.
- * Pretending otherwise would be worse than not having it. So the failure that is actually common -
- * "this person is not allowed to write one of these five things" - is caught BEFORE anything is
- * written: the actor is resolved once up front and every requested piece is checked against their
- * write scope, and if any single piece is not allowed the whole consultation is refused and the
- * chart is untouched. A nurse who may record vitals but not prescribe gets told that before her
- * vitals are saved, not after.
+ * HALF A CONSULTATION IS THE THING TO FEAR, AND IT NO LONGER HAPPENS. This header used to say there
+ * was no transaction across records to be had. That was wrong: repository.append() is atomic across
+ * every record it is given (one D1 batch, one transaction). What was missing was a way to give it all
+ * five pieces at once, since each writer appended for itself. staged.js supplies it: the writers run
+ * against a StagedRepository that holds their records, keys and audit rows, and only when every piece
+ * has succeeded does ONE append commit the lot. A failure in any piece, or a conflict at commit, leaves
+ * the chart exactly as it was (test/wardsynq-consultation.test.mjs, the INVARIANT tests).
  *
- * What can still go wrong mid-way is a write that passes the permission check and then fails on its
- * own merits - a duplicate, a version conflict, the database. That case is REPORTED, never hidden:
- * the reply names every piece, says what happened to each, and says plainly that the consultation
- * was saved in part. A screen that shows that honestly is the point of the whole exercise.
+ * The permission pre-flight stays: "this person may not write one of these five things" is still
+ * refused before any writer runs, with every refused piece named.
  *
  * ORDER. Problems before orders before the note, because that is the order a chart reads in and the
  * order a later reader expects: a prescription written against a diagnosis that is not yet on the
@@ -36,6 +33,7 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
+import { StagedRepository } from "./staged.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 /* Each piece of a consultation: what the caller sends, which writer does it, and what resource type
@@ -118,6 +116,11 @@ async function saveConsultation(request, env, ctx) {
   const results = [];
   let written = 0;
   let stopped = null;
+  /* ONE UNIT OF WORK. Every writer below writes through a StagedRepository, which holds its records
+   * instead of storing them. Only when every piece has succeeded are they committed, in one atomic
+   * append; if any piece fails, or the commit itself is refused, nothing reaches the chart. */
+  const staged = new StagedRepository(ctx.recordDeps.repository);
+  const wctx = { ...ctx, recordDeps: { ...ctx.recordDeps, repository: staged } };
 
   for (const p of pieces) {
     const writer = ctx.writers && ctx.writers[p.key];
@@ -131,7 +134,7 @@ async function saveConsultation(request, env, ctx) {
     for (let i = 0; i < items.length; i++) {
       let r;
       try {
-        r = await writer(request, env, { ...ctx, encounterId, item: items[i], index: i });
+        r = await writer(request, env, { ...wctx, encounterId, item: items[i], index: i });
       } catch (e) {
         r = { ok: false, status: 502, error: "write_threw", detail: str(e && e.message) };
       }
@@ -144,25 +147,32 @@ async function saveConsultation(request, env, ctx) {
     if (failedHere) { stopped = p.key; break; }
   }
 
-  const allOk = !stopped;
-  return {
-    ...base,
-    ok: allOk,
-    ...(allOk ? {} : { status: 207, error: "saved_in_part" }),
-    written,
-    encounterId,
-    results,
-    /* The honest sentence the screen should show when it goes wrong. Everything before the failure
-     * IS on the chart and must not be retried blindly; everything after it was never attempted. */
-    ...(allOk ? {} : {
-      partial: true,
-      savedPieces: [...new Set(results.filter((r) => r.ok).map((r) => r.piece))],
-      failedAt: stopped,
+  if (stopped) {
+    staged.discard();
+    const failed = results.find((r) => !r.ok) || {};
+    return {
+      ...base, ok: false, status: failed.status && failed.status !== 207 ? failed.status : 422, error: "consultation_not_saved",
+      written: 0, encounterId, results, failedAt: stopped,
       notAttempted: pieces.slice(pieces.findIndex((p) => p.key === stopped) + 1).map((p) => p.key),
-      detail: "Part of this consultation was saved. Check what is on the chart before trying again.",
-    }),
-    actor: resolved.actor.id,
-  };
+      detail: "Nothing from this consultation was saved, because " + (PIECES.find((p) => p.key === stopped) || {}).label + " could not be. Fix that part and save again.",
+      actor: resolved.actor.id,
+    };
+  }
+
+  let commit;
+  try { commit = await staged.commit(); }
+  catch (e) {
+    staged.discard();
+    const conflict = e && e.name === "VersionConflictError";
+    return {
+      ...base, ok: false, status: conflict ? 409 : 502, error: conflict ? "consultation_conflict" : "consultation_commit_failed",
+      written: 0, encounterId,
+      detail: conflict ? "Someone else changed this chart while you were writing. Nothing from this consultation was saved; reload and save again."
+        : "The consultation could not be saved. Nothing from it is on the chart.",
+      actor: resolved.actor.id,
+    };
+  }
+  return { ...base, ok: true, written: commit.committed, encounterId, results, actor: resolved.actor.id };
 }
 
 /* The identifiers a screen needs back to render what was just saved, without echoing whole records. */
