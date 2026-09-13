@@ -2219,7 +2219,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "merge" && method === "POST") {
-        const r = await mergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        const r = await mergePatients(request, env, { ...deps, survivorId: body.survivorId, mergedId: body.mergedId, reason: body.reason, dryRun: body.dryRun === true, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "unmerge" && method === "POST") {

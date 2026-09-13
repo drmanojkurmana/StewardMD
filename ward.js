@@ -4492,6 +4492,22 @@
         : h.partial ? '<p class="w-hint warn">' + ms("warning") + "No merges found in what was checked, but the check was partial.</p>"
         : '<p class="w-empty">This record has never been merged with another.</p>');
   }
+  /* MERGE PREVIEW: both records side by side, every field that differs marked, before anything is
+   * written. The server ran every check to produce it, so this is what the join would really do. */
+  function mpiPreviewCard(p) {
+    var F = [["name", "Name"], ["mrn", "MRN"], ["dob", "Date of birth"], ["sex", "Sex"]];
+    var rows = F.map(function (f) {
+      var a = p.survivor[f[0]] || "", b = p.merged[f[0]] || "";
+      var differs = String(a).toLowerCase() !== String(b).toLowerCase();
+      return "<tr" + (differs ? ' class="w-diff"' : "") + "><th>" + f[1] + "</th><td>" + esc(a || "-") + "</td><td>" + esc(b || "-") + "</td><td>" + (differs ? ms("warning") + "differs" : "") + "</td></tr>";
+    }).join("");
+    return '<div class="w-sub"><h4>Check before joining these records</h4>' +
+      '<div style="overflow-x:auto"><table class="w-tbl"><tr><th></th><th>Keeps (' + esc(p.survivor.patientId) + ")</th><th>Joins it (" + esc(p.merged.patientId) + ")</th><th></th></tr>" + rows + "</table></div>" +
+      '<p class="w-hint">' + ms("info") + "No clinical data is moved or deleted. Both records stay as they are, and this can be undone.</p>" +
+      '<label class="w-f"><span>What establishes these are the same person?</span><textarea id="wMpiReason" rows="2" placeholder="For example: same Aadhaar, same mobile, confirmed with the patient"></textarea></label>' +
+      '<button class="w-btn" data-w-act="mpimergeconfirm">' + ms("fact_check") + "Join these records</button> " +
+      '<button class="w-btn ghost" data-w-act="mpimergecancel">Cancel</button></div>';
+  }
   function mpiView(state) {
     var d = state.mpi;
     var s = state.sel;
@@ -4508,6 +4524,7 @@
         '<label class="w-f"><span>MRN (optional)</span><input id="wMpiMrn"></label></div>') +
       '<button class="w-btn" data-w-act="mpisearch">' + ms("search") + "Search</button>" +
       '<p class="w-hint">' + ms("info") + "A match is a suggestion. Nothing is joined until a person decides, gives a reason, and confirms." + "</p></div>" +
+      (state.mpiPreview ? mpiPreviewCard(state.mpiPreview) : "") +
       (s ? '<div class="w-sub"><h4>Merge history</h4>' + mpiHistory(state, subjectId) + "</div>" : "") +
       /* Above the results, not below them. */
       (d && d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
@@ -6722,6 +6739,29 @@
       })
       .catch(function () { st.busy = false; st.err = "Could not search for duplicates."; paint(); });
   }
+  function mpiMergePreview(arg) {
+    var parts = String(arg || "").split("~");
+    if (!parts[0] || !parts[1]) return;
+    st.busy = true; st.mpiPreview = null; paint();
+    apiPost("/ward/merge", { orgId: st.orgId, survivorId: parts[0], mergedId: parts[1], dryRun: true })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok && r.dryRun && r.survivor && r.merged) st.mpiPreview = r;
+        else if (r && r.ok && r.skipped === "already_merged") st.note = "These two records are already joined.";
+        else settle(r, null);
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not prepare the merge preview. Nothing was joined."; paint(); });
+  }
+  function mpiMergeConfirm() {
+    var p = st.mpiPreview; if (!p) return;
+    var reason = val("wMpiReason");
+    if (reason.length < 10) { st.err = "Say what establishes these are the same person (at least a short sentence)."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/merge", { orgId: st.orgId, survivorId: p.survivor.patientId, mergedId: p.merged.patientId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Records joined." : null)) { st.mpiPreview = null; loadMpiIdentity(); mpiSearch(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not join the records. Nothing was changed."; paint(); });
+  }
   function mpiMerge(arg, undo) {
     var parts = String(arg || "").split("~");
     var survivorId = parts[0], mergedId = parts[1];
@@ -8283,7 +8323,9 @@
     if (cmd === "tagend") { tagEnd("end", arg); return; }
     if (cmd === "mpi") { mpiOpen(); return; }
     if (cmd === "mpisearch") { mpiSearch(); return; }
-    if (cmd === "mpimerge") { mpiMerge(arg, false); return; }
+    if (cmd === "mpimerge") { mpiMergePreview(arg); return; }
+    if (cmd === "mpimergeconfirm") { mpiMergeConfirm(); return; }
+    if (cmd === "mpimergecancel") { st.mpiPreview = null; paint(); return; }
     if (cmd === "mpiunmerge") { mpiMerge(arg, true); return; }
     if (cmd === "infusions") { infusionOpen(); return; }
     if (cmd === "infusionchart") { infusionChart(arg); return; }

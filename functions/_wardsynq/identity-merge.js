@@ -129,7 +129,8 @@ async function mergePatients(request, env, ctx) {
   const reason = str(ctx.reason);
   /* A REASON IS MANDATORY. A merge is a claim that two people are one, and the reason is what lets
    * somebody later tell a verified match from a guess. */
-  if (reason.length < 10) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say what establishes that these are the same person", written: 0 };
+  // The preview comes before the reason (the person has not decided yet); the write never does.
+  if (!ctx.dryRun && reason.length < 10) return { ...base, ok: false, status: 422, error: "reason_required", detail: "say what establishes that these are the same person", written: 0 };
 
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
@@ -159,8 +160,10 @@ async function mergePatients(request, env, ctx) {
    * merged INTO something has no link under its own id - byPatient(mergedId) returns nothing and
    * the chain would go through unnoticed. The same subtlety identityOf already documents. */
   let allLinks;
-  try { allLinks = await svc.list(TYPE, 500); }
-  catch { allLinks = []; }
+  /* A failed read is NOT "no chain". This used to swallow the error into an empty list, so the one
+   * check that stops a record being merged twice passed whenever it could not look. */
+  try { allLinks = await svc.list(TYPE, LINK_SCAN_CAP); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   const alreadyGone = (allLinks || []).find((l) => l && l.state === "merged" && l.mergedId === mergedId && l.survivorId !== survivorId);
   if (alreadyGone) {
     return { ...base, ok: false, status: 409, error: "already_merged", detail: "this record is already merged into another; unmerge that first", mergedId, into: alreadyGone.survivorId, written: 0 };
@@ -170,6 +173,13 @@ async function mergePatients(request, env, ctx) {
   const current = (existing || []).find((l) => l && l.id === id) || null;
   if (current && current.state === "merged") {
     return { ...base, ok: true, written: 0, skipped: "already_merged", ...summary(current) };
+  }
+
+  /* PREVIEW. Every check above has run - both records exist, the actor may write, neither is chained
+   * - so what a person confirms is exactly what would be written. Nothing is written here. */
+  if (ctx.dryRun) {
+    const who = (p) => ({ patientId: p.id, name: p.name || null, mrn: p.mrn || null, dob: p.dob || null, sex: p.sex || null });
+    return { ...base, ok: true, dryRun: true, written: 0, survivor: who(survivor), merged: who(merged), clinicalRecordsMoved: 0 };
   }
 
   const link = PatientLink({

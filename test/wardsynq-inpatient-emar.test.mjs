@@ -64,6 +64,7 @@ mock.module("../functions/_fbfirestore.js", {
 });
 
 const { MemoryRepository, VersionConflictError } = await import("../functions/_wardsynq/repository.js");
+const { resetMemory: resetRateLimits } = await import("../functions/_wardsynq/rate-limit.js");
 const { identify } = await import("../functions/_usage.js");
 const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
@@ -140,6 +141,10 @@ const NOTE_TEMPLATES = [{
 function seedHospital(mode = "wardsynq", region) {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
+  /* A new hospital starts with a fresh per-minute throttle. The limiter's memory store outlives each
+   * test, so DOCTOR's writes from every earlier test in this file counted against the later ones,
+   * and a test far down the file failed with "too many requests" whenever one above it grew. */
+  resetRateLimits();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
   docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, ...(region ? { region } : {}), connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
@@ -2139,8 +2144,22 @@ test("A MERGE MOVES NOTHING AND DESTROYS NOTHING, and it can be taken back", asy
   };
   assert.ok(before.survivor > 0 && before.dupe > 0);
 
+  /* THE PREVIEW RUNS EVERY CHECK AND WRITES NOTHING. It needs no reason (the person has not decided
+   * yet), shows both records, and a real merge afterwards still needs one. */
+  const linksBefore = (await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length;
+  const preview = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, dryRun: true });
+  assert.equal(preview.__status, 200, JSON.stringify(preview));
+  assert.equal(preview.dryRun, true);
+  assert.equal(preview.written, 0);
+  assert.equal(preview.survivor.patientId, adm.patientId);
+  assert.equal(preview.merged.patientId, dupe.patientId);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, linksBefore, "a preview must not write a link");
+  assert.equal((await as(DOCTOR, `/ward/identity?orgId=${ORG}&patientId=${dupe.patientId}`)).identity.isMerged, false);
+  // The same people who cannot merge cannot preview one either.
+  assert.equal((await as(LABTECH, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, dryRun: true })).__status, 403);
+
   // A merge is a claim, and it needs a reason that says what establishes it.
-  const bare = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
+  const bare =await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
   assert.equal(bare.__status, 422);
   assert.equal(bare.error, "reason_required");
   // And a record cannot absorb itself.
@@ -2206,6 +2225,24 @@ test("a merge is refused where it would create an identity by side effect or a c
   assert.equal(chained.into, adm.patientId, "and it names the link that is in the way");
   // Repeating the SAME merge is idempotent, not an error.
   assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason })).written, 0);
+});
+
+test("a merge whose chain check cannot read the existing links is refused, not waved through", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const b = await secondPatient("Medical A", "34");
+  const real = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+    if (resourceType === "PatientLink") throw new Error("store unavailable");
+    return real(tenantId, resourceType, limit);
+  };
+  try {
+    const r = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." });
+    assert.equal(r.__status, 502, JSON.stringify(r));
+    assert.equal(r.error, "record_read_failed");
+    assert.equal(r.written, 0);
+  } finally { RECORD.latestByType = real; }
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, 0, "nothing was joined");
 });
 
 test("resolving identity is the registration authority, and nothing automatic does it", async () => {

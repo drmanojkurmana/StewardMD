@@ -553,3 +553,8 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-chip.on b { color: inherit; }
 #smdWard .w-tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
 #smdWard .w-tools .w-btn { justify-content: flex-start; }
+
+/* Merge preview: the two records side by side; a row that differs is tinted so it cannot be skimmed past. */
+#smdWard .w-tbl { border-collapse: collapse; width: 100%; font-size: 13px; }
+#smdWard .w-tbl th, #smdWard .w-tbl td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--outline-variant); }
+#smdWard .w-tbl tr.w-diff td { background: var(--warn-container, #fff4e0); color: var(--on-warn-container); }
