@@ -602,11 +602,26 @@ async function resolveIdentity(request, env, deps) {
  * "smallest set of new code" instruction, when the existing scope blob already carries exactly this
  * kind of metadata for free. */
 function requestContextOf(request, identity) {
-  return {
+  const rc = {
     correlationId: request.headers.get("X-Correlation-Id") || (crypto.randomUUID ? crypto.randomUUID() : null),
     deviceId: request.headers.get("X-Device-Id") || null,
     sessionId: (identity && identity.sessionRef) || null,
   };
+  const offline = offlineContextOf(request);
+  if (offline) rc.offline = offline;
+  return rc;
+}
+
+/* P2.4: a write that a device queued while offline and is now sending (ward-offline.js). The device's
+ * created-at is DISPLAY ONLY and is accepted only as a plain ISO instant; anything else is recorded as
+ * unreadable rather than stored. The conflict reason is bounded; the audit writer value-scans it. */
+function offlineContextOf(request) {
+  const raw = String(request.headers.get("X-Offline-Created-At") || "").trim();
+  if (!raw) return null;
+  const ok = raw.length <= 40 && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,3})?)?Z$/.test(raw) && !isNaN(Date.parse(raw));
+  let reason = "";
+  try { reason = decodeURIComponent(String(request.headers.get("X-Offline-Conflict-Reason") || "")).trim().slice(0, 200); } catch { reason = ""; }
+  return { createdAt: ok ? new Date(raw).toISOString() : "unreadable", ...(reason ? { conflictReason: reason } : {}) };
 }
 
 /**

@@ -16,7 +16,7 @@
  * domain onto the stewardmd Pages project and serve this site from _middleware.js by host.
  */
 const UPSTREAM = "https://stewardmd.in";
-const FORWARD = ["authorization", "x-staff-token", "x-app-token", "x-admin-token", "content-type", "idempotency-key", "x-correlation-id", "x-device-id", "accept", "if-none-match", "range"];
+const FORWARD = ["authorization", "x-staff-token", "x-app-token", "x-admin-token", "content-type", "idempotency-key", "x-correlation-id", "x-device-id", "x-offline-created-at", "x-offline-conflict-reason", "accept", "if-none-match", "range"];
 
 export default {
   async fetch(request, env) {
