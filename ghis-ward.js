@@ -19,67 +19,68 @@
   var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS();try{window.SMD_showHome&&window.SMD_showHome()}catch(e){}\" aria-label=\"Back to home\">{{ic:back}}</button>\n    <div class=\"ghis-title\">{{ic:ward}} Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7, background lab alerts\" aria-label=\"Lab Watch\">{{ic:bell}}</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\" aria-label=\"Refresh\">{{ic:refresh}}</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div id=\"ghisAddTarget\" style=\"display:none;align-items:center;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6)\"></div>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Sign out\" aria-label=\"Sign out\">{{ic:logout}}</button>\n    </div>\n    <div class=\"ghis-filter-row2\">\n      <select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by branch/department\"><option value=\"\">All branches</option></select>\n      <select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by treating doctor\"><option value=\"\">All doctors</option></select>\n      <select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by gender\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select>\n      <select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Sort patients\"><option value=\"\">Default order</option><option value=\"name\">Name A–Z</option><option value=\"branch\">Branch</option><option value=\"doctor\">Doctor</option><option value=\"bed\">Bed</option></select>\n    </div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">{{ic:back}} Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
 
   function inject() {
-    if (document.getElementById('ghisPanel')) return;
-    var style = document.createElement('style');
-    style.setAttribute('data-ghis', '1');
-    style.textContent = CSS;
-    document.head.appendChild(style);
+    if (!document.getElementById('ghisPanel')) {
+      var style = document.createElement('style');
+      style.setAttribute('data-ghis', '1');
+      style.textContent = CSS;
+      document.head.appendChild(style);
 
-    var holder = document.createElement('div');
-    // Swap {{ic:name}} tokens for the app's shared SVG icon set (no emoji, per house style).
-    // "back" reuses the arrow icon flipped horizontally (no dedicated left-arrow in the set).
-    holder.innerHTML = PANEL_HTML.replace(/\{\{ic:([a-z]+)\}\}/g, function (_, n) {
-      if (n === 'back') return '<span class="ghis-flip">' + wIco('arrow') + '</span>';
-      return wIco(n);
-    });
-    while (holder.firstChild) document.body.appendChild(holder.firstChild);
+      var holder = document.createElement('div');
+      // Swap {{ic:name}} tokens for the app's shared SVG icon set (no emoji, per house style).
+      // "back" reuses the arrow icon flipped horizontally (no dedicated left-arrow in the set).
+      holder.innerHTML = PANEL_HTML.replace(/\{\{ic:([a-z]+)\}\}/g, function (_, n) {
+        if (n === 'back') return '<span class="ghis-flip">' + wIco('arrow') + '</span>';
+        return wIco(n);
+      });
+      while (holder.firstChild) document.body.appendChild(holder.firstChild);
 
-    // Hospital picker + "Add your hospital" request form, inserted BEFORE the GHIS login
-    // so Ward Sync first asks which hospital (GIMSR → GHIS login; others → request form).
-    (function () {
-      var setup = document.getElementById('ghisSetup');
-      if (!setup || document.getElementById('ghisHospital')) return;
-      var wrap = document.createElement('div');
-      wrap.innerHTML =
-        '<div id="ghisHospital" class="ghis-body">' +
-          '<div style="display:flex;background:var(--panel,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:4px;margin-bottom:16px;gap:4px">' +
-            '<div style="flex:1;text-align:center;padding:9px;border-radius:9px;background:var(--teal,#0e6e63);color:#fff;font-weight:700;font-size:13.5px">' + wIco("hospital") + ' Select hospital</div>' +
-            '<button onclick="ghisOpenMyWard()" style="flex:1;text-align:center;padding:9px;border-radius:9px;background:transparent;border:none;color:var(--slate,#64748b);font-weight:700;font-size:13.5px;font-family:inherit;cursor:pointer">' + wIco("pulse") + ' My Units</button>' +
+      // Hospital picker + "Add your hospital" request form, inserted BEFORE the GHIS login
+      // so Ward Sync first asks which hospital (GIMSR → GHIS login; others → request form).
+      (function () {
+        var setup = document.getElementById('ghisSetup');
+        if (!setup || document.getElementById('ghisHospital')) return;
+        var wrap = document.createElement('div');
+        wrap.innerHTML =
+          '<div id="ghisHospital" class="ghis-body">' +
+            '<div style="display:flex;background:var(--panel,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:4px;margin-bottom:16px;gap:4px">' +
+              '<div style="flex:1;text-align:center;padding:9px;border-radius:9px;background:var(--teal,#0e6e63);color:#fff;font-weight:700;font-size:13.5px">' + wIco("hospital") + ' Select hospital</div>' +
+              '<button onclick="ghisOpenMyWard()" style="flex:1;text-align:center;padding:9px;border-radius:9px;background:transparent;border:none;color:var(--slate,#64748b);font-weight:700;font-size:13.5px;font-family:inherit;cursor:pointer">' + wIco("pulse") + ' My Units</button>' +
+            '</div>' +
+            '<div class="ghis-setup-card">' +
+              '<div class="ghis-setup-title">Select your hospital</div>' +
+              '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
+              '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
+              '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
+              '<div id="ghisAdapterHosp"></div>' +
+              '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
+              '<div class="ghis-setup-sub" style="margin:10px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
+              '<div id="ghisConnectHosp"></div>' +
+              '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
+            '</div>' +
           '</div>' +
-          '<div class="ghis-setup-card">' +
-            '<div class="ghis-setup-title">Select your hospital</div>' +
-            '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
-            '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
-            '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
-            '<div id="ghisAdapterHosp"></div>' +
-            '<button class="ghis-connect-btn" style="background:var(--paper,#f6f8f6);color:var(--ink,#0f172a);border:1px solid var(--line,#e4eae8)" onclick="ghisSelectHospital(\'stewardmd\')">' + wIco("hospital") + ' StewardMD Hospital</button>' +
-            '<div class="ghis-setup-sub" style="margin:10px 0 4px">25 demo patients, 5 wards, no login needed — for live demos</div>' +
-            '<div id="ghisConnectHosp"></div>' +
-            '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
-          '</div>' +
-        '</div>' +
-        '<div id="ghisAddHospital" class="ghis-body" style="display:none;">' +
-          '<div class="ghis-setup-card">' +
-            '<button class="ghis-back-sm" onclick="showGhisScreen(\'hospital\')">← Back</button>' +
-            '<div class="ghis-setup-title" style="margin-top:8px">Add your hospital</div>' +
-            '<button class="ghis-connect-btn" onclick="ghisOpenConnectConsole()">' + wIco("hospital") + ' Connect an EMR now (self-service)</button>' +
-            '<div class="ghis-setup-sub">Tell us your hospital + EMR and we\'ll set up Ward Sync for you.</div>' +
-            '<input id="ghReqHosp" class="ghis-login-input" placeholder="Hospital name">' +
-            '<input id="ghReqEmr" class="ghis-login-input" placeholder="EMR / HIS system (if known)">' +
-            '<input id="ghReqName" class="ghis-login-input" placeholder="Your name">' +
-            '<input id="ghReqEmail" class="ghis-login-input" type="email" placeholder="Your email">' +
-            '<textarea id="ghReqMsg" class="ghis-login-input" rows="3" placeholder="Contact person, API docs link, anything else…"></textarea>' +
-            '<button class="ghis-connect-btn" onclick="ghisSubmitHospitalRequest()">Send request</button>' +
-            '<div id="ghReqStatus" class="ghis-setup-sub" style="margin-top:8px"></div>' +
-          '</div>' +
-        '</div>';
-      while (wrap.firstChild) setup.parentNode.insertBefore(wrap.firstChild, setup);
-    })();
+          '<div id="ghisAddHospital" class="ghis-body" style="display:none;">' +
+            '<div class="ghis-setup-card">' +
+              '<button class="ghis-back-sm" onclick="showGhisScreen(\'hospital\')">← Back</button>' +
+              '<div class="ghis-setup-title" style="margin-top:8px">Add your hospital</div>' +
+              '<button class="ghis-connect-btn" onclick="ghisOpenConnectConsole()">' + wIco("hospital") + ' Connect an EMR now (self-service)</button>' +
+              '<div class="ghis-setup-sub">Tell us your hospital + EMR and we\'ll set up Ward Sync for you.</div>' +
+              '<input id="ghReqHosp" class="ghis-login-input" placeholder="Hospital name">' +
+              '<input id="ghReqEmr" class="ghis-login-input" placeholder="EMR / HIS system (if known)">' +
+              '<input id="ghReqName" class="ghis-login-input" placeholder="Your name">' +
+              '<input id="ghReqEmail" class="ghis-login-input" type="email" placeholder="Your email">' +
+              '<textarea id="ghReqMsg" class="ghis-login-input" rows="3" placeholder="Contact person, API docs link, anything else…"></textarea>' +
+              '<button class="ghis-connect-btn" onclick="ghisSubmitHospitalRequest()">Send request</button>' +
+              '<div id="ghReqStatus" class="ghis-setup-sub" style="margin-top:8px"></div>' +
+            '</div>' +
+          '</div>';
+        while (wrap.firstChild) setup.parentNode.insertBefore(wrap.firstChild, setup);
+      })();
+    }
 
     // Ward Sync now lives inside the Home "Hospital" hub tile, so the floating Ward FAB is retired to avoid
     // a duplicate entry point. Only mounted if a host explicitly opts in via window.GHIS_BUTTON_SELECTOR.
     var sel = window.GHIS_BUTTON_SELECTOR, host = sel ? document.querySelector(sel) : null;
-    if (host) {
+    if (host && !document.getElementById('ghisBtn')) {
       var btn = document.createElement('button');
       btn.id = 'ghisBtn'; btn.className = 'ghis-ward-fab'; btn.title = 'GHIS Ward Sync';
       btn.innerHTML = wIco("hospital") + ' Ward';
@@ -91,6 +92,11 @@
   }
 
   function initGHIS() {
+    if (window.__ghisInitDone) return;
+    window.__ghisInitDone = true;
+    function wIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+    var GHIS = window.GHIS = window.GHIS || {};
+
     /* ===== GHIS module (verbatim from StewardMD v4) ===== */
     (function() {
       // Backend: local Node proxy during dev (localhost), same-origin Cloudflare
@@ -402,7 +408,13 @@
             var u = typeof input === 'string' ? input : (input && input.url) || '';
             var rel = null;
             if (u.indexOf(PROXY + '/') === 0) rel = u.slice(PROXY.length);
+            else if (u === PROXY) rel = '/';
             else if (abs && u.indexOf(abs + '/') === 0) rel = u.slice(abs.length);
+            else if (abs && u === abs) rel = '/';
+            else {
+              var m = u.match(/(?:\/api\/ghis|https?:\/\/[^\/]+\/api\/ghis)(?:(\/.*)|$)/);
+              if (m) rel = m[1] || '/';
+            }
             if (rel && adapterSessionFresh()) {
               var args = arguments;
               return adapterServe(rel, init).then(function (res) { return res || real.apply(window, args); });
@@ -825,7 +837,7 @@
         return html;
       }
     
-      window.GHIS = {
+      Object.assign(GHIS, {
         __setAgentApi: function (fn) { _agentApi = fn; },
         _patientId: null,
         // The patient currently opened in the ward drawer, used by the Drug-Interactions
@@ -961,7 +973,7 @@
           // lives in the dashboard (removed here).
           body.innerHTML =
             (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">' + wIco("bell") + ' Lab Watch — alerts on new labs</button>' : '') +
-            '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
+            '<div id="ghisMedSection"></div><div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           // Open at the TOP. The drawer is position:absolute; inset:0 inside #ghisWard, which is a
           // scrolled container (the patient list). If the list is scrolled down when a patient is
@@ -974,6 +986,7 @@
             if (ward) ward.scrollTop = 0;
             drawer.scrollTop = 0;
           } catch (e) {}
+          GHIS.loadMedications(patientId);
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
         },
@@ -1150,7 +1163,6 @@
         },
 
         onPatient: function(episodeId, patientId, name) {
-          if (_adapterCtx) { ghisOpenAdapterPatient(patientId, name); return; }
           if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
             try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
             if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid, name);
@@ -1223,6 +1235,30 @@
             DX.importPatient({ patientName: name || (pObj && pObj.patientFirstName) || '', age: (!isNaN(age) && age > 0 && age < 130) ? age : null, sex: pObj && pObj.gender, labs: labs, radiology: radiology, culture: culture, mrn: (pObj && pObj.patientId) || '' });
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
           });
+        },
+        loadMedications: function(patientId) {
+          var sec = document.getElementById('ghisMedSection');
+          if (!sec) return;
+          authFetch('/medications?patientId=' + encodeURIComponent(patientId))
+            .then(function(j) {
+              var rows = (j && j.rows) || [];
+              if (rows.length === 0) { sec.innerHTML = ''; return; }
+              var html = '<div class="ghis-lab-section-title">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + '</div>';
+              rows.forEach(function(m) {
+                var title = m.drugText || m.genericName || 'Medication';
+                var sub = [m.dosage, m.route, m.frequency, m.duration].filter(Boolean).join(' · ');
+                html += '<div class="ghis-lab-order">' +
+                  '<div class="ghis-lab-order-head">' +
+                    '<div class="ghis-lab-order-name">' + esc(title) + '</div>' +
+                    (m.dateTime ? '<div class="ghis-lab-order-dept">' + esc(m.dateTime) + '</div>' : '') +
+                  '</div>' +
+                  (sub ? '<div class="ghis-pt-meta" style="margin-top:4px">' + esc(sub) + '</div>' : '') +
+                '</div>';
+              });
+              html += '<div class="ghis-rad-divider"></div>';
+              sec.innerHTML = html;
+            })
+            .catch(function() { sec.innerHTML = ''; });
         },
         loadLabs: function(patientId) {
           var body = document.getElementById('ghisLabSection');
@@ -1382,7 +1418,7 @@
             })).then(function() { return rows; });
           });
         }
-      };
+      });
     
       window.openGHIS = function() {
         document.getElementById('ghisPanel').classList.add('open');
