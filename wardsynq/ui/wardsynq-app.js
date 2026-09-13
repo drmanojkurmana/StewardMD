@@ -227,7 +227,11 @@ async function boot() {
   } catch (e) {
     const pack = $("pack");
     pack.className = "pack bad";
-    pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+    if (String((e && e.message) || "").includes("401")) {
+      pack.innerHTML = `${esc(e.message)}. Please <a href="/#/login" style="color:inherit;text-decoration:underline;font-weight:600">sign in to WardSynQ</a> to access this record.`;
+    } else {
+      pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+    }
     $("drug").disabled = true;
     $("roster").innerHTML = '<p class="quiet">Unavailable.</p>';
   }

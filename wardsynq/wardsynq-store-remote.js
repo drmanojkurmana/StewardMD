@@ -101,7 +101,16 @@ class RemoteBackend {
   async open() {
     this._closed = false;
     if (this._opened) return this.descriptor;
-    const { status, data } = await this._request("GET", "");
+    let { status, data } = await this._request("GET", "");
+    // If auth is still resolving or refreshing on initial navigation, give it one retry opportunity
+    if (status === 401) {
+      await new Promise((r) => setTimeout(r, 600));
+      const retry = await this._request("GET", "");
+      if (retry.status === 200 && retry.data && retry.data.ok) {
+        status = retry.status;
+        data = retry.data;
+      }
+    }
     if (status !== 200 || !data || !data.ok) {
       throw new RemoteStoreError(`record service refused to open (${status})`, status === 401 ? "UNAUTHENTICATED" : status === 403 ? "FORBIDDEN" : status === 404 ? "NOT_AVAILABLE" : "OPEN_FAILED", status, data);
     }
