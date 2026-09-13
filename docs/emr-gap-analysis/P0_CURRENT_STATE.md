@@ -353,3 +353,10 @@ Admin centre Safety reminders tab: try a draft advisory set, see what it would d
 
 **Numbers:** 6017 passing, 0 failing. 23 routes waiting for a screen.
 **Next:** extend; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
+
+### 2026-09-13 - visit link extension (backlog 23 -> 19)
+
+Outpatient checked-out box shows the real expiry and lets a doctor keep the patient link open 30 days. Server fixes: refused before checkout, capped at the 30-day token life (was promising unreachable dates), failures no longer reported as success, each extension audited. Checker now reads the api("path") calls in opd.html and clinic-billing.html, which showed delete/orders/pay already had real screens (were false reds). Live on wardsynq.com/opd.
+
+**Numbers:** 6022 passing, 0 failing. 19 routes waiting for a screen.
+**Next:** re-check the 19 against other screens; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
