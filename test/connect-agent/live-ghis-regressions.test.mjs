@@ -60,6 +60,35 @@ test('verification learns the ward list call its page makes on load, then the wo
   assert.deepEqual(via, ['endpoint']);
 });
 
+test('the medications view reads GetMedicines, not the six-table assessment form fired by the same tap', async () => {
+  const { executeView, parseFetchExpression: pfe, PAGE_TOKENS: PT } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const seen = [];
+  const plugin = { async evaluate({ expression }) {
+    if (expression === PT) return { result: JSON.stringify({ __RequestVerificationToken: 'tok' }) };
+    const req = pfe(expression); if (!req) return { result: '[]' };
+    seen.push(req.method + ' ' + req.url.replace(O, ''));
+    const html = /GetInitialAssessmentnew/.test(req.url) ? '<table><tr><td>a</td><td>b</td></tr></table>'.repeat(6) : /GetMedicines/.test(req.url) ? '<table><tr><td>P1</td><td>Amox</td></tr></table>' : 'ok';
+    return { result: JSON.stringify({ status: 200, contentType: 'text/html', url: req.url, text: html }) };
+  } };
+  const view = { resourceHint: 'medications', rowsSelector: '#accordionEx table tbody tr', headers: ['Prod. Code', 'Drug Name'],
+    endpoints: [{ method: 'POST', path: '/Doctor/Home/Searchnew', bodyKeys: ['__RequestVerificationToken', 'recordNo'] }, { method: 'GET', path: '/Doctor/Home/GetInitialAssessmentnew/?id' }, { method: 'GET', path: '/Doctor/Home/GetMedicines/?id' }] };
+  const rowsDoc = (html) => {
+    const rows = (html.match(/<tr>[\s\S]*?<\/tr>/g) || []).map((tr) => {
+      const tds = (tr.match(/<td>([\s\S]*?)<\/td>/g) || []).map((td) => ({ textContent: td.replace(/<\/?td>/g, '') }));
+      return { querySelectorAll: (s) => (s === 'td' ? tds : []), querySelector: () => null, getAttribute: () => '', textContent: tds.map((t) => t.textContent).join(' ') };
+    });
+    // Like a real DOM: the view's #accordionEx selector matches nothing in a bare fragment.
+    return { querySelectorAll: (s) => (/^table tbody tr/.test(s) ? rows : []), querySelector: () => null };
+  };
+  const out = await executeView({ plugin, origin: O, view, patient: { patientId: 'MR1', episodeId: 'V1' }, parseHtml: rowsDoc });
+  assert.match(out.url, /GetMedicines/);
+  assert.deepEqual(out.rows, [{ 'Prod. Code': 'P1', 'Drug Name': 'Amox' }]);
+  assert.ok(!seen.some((k) => /GetInitialAssessmentnew/.test(k)), 'the name-fitting call was tried first and accepted');
+  const onlyForm = Object.assign({}, view, { endpoints: [view.endpoints[0], view.endpoints[1]] });
+  const junk = await executeView({ plugin, origin: O, view: onlyForm, patient: { patientId: 'MR1', episodeId: 'V1' }, parseHtml: rowsDoc });
+  assert.equal(junk.rows.length, 0, 'a six-table form never passes for the medication chart');
+});
+
 test('a call that answers doctors, not patients, is not taken as the ward list', async () => {
   const plugin = hospital({ onLoadCall: false });
   const view = { resourceHint: 'worklist', pathTemplate: O + '/Doctor/Home', rowsSelector: '#data_tables1 tbody tr', headers: ['Patient ID', 'Patient name'], endpoints: [{ method: 'GET', path: '/Doctor/Home/DashboardUnit?type&sdate&checkbox' }] };
