@@ -498,7 +498,9 @@ async function documentStorageProbe(env) {
     await store.delete(key);
     result = { state: "ok" };
   } catch (e) {
-    result = { state: "failed", step: (e && e.op) || "unknown", providerStatus: (e && e.status) || null };
+    // The provider's own error code (e.g. InvalidArgument, SignatureDoesNotMatch, NoSuchBucket): never a setting or a key.
+    const code = e && typeof e.detail === "string" && (e.detail.match(/<Code>([A-Za-z]{1,60})<\/Code>/) || [])[1];
+    result = { state: "failed", step: (e && e.op) || "unknown", providerStatus: (e && e.status) || null, providerCode: code || null };
   }
   docProbeCache = { at: Date.now(), result };
   return result;
