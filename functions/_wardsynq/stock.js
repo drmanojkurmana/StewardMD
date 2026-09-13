@@ -132,6 +132,46 @@ function levelsFrom(movements, dispenses) {
 }
 
 /** PURE. Which rows are at or below the hospital's reorder level, and which are impossible. */
+/**
+ * PURE. Per-batch balances for one item (code + unit), counting receipts, transfers, wastage and
+ * dispenses that name a batch. Anything that moved stock WITHOUT naming a batch is totalled in
+ * `unbatched`, because it came out of some batch nobody recorded.
+ */
+function batchBalances(movements, dispenses, code, unit) {
+  const k = key(code), u = key(unit);
+  const b = new Map();
+  let unbatched = 0;
+  const row = (batch, expiry) => { const r = b.get(batch) || { batch, expiry: expiry || null, onHand: 0 }; if (expiry && !r.expiry) r.expiry = expiry; b.set(batch, r); return r; };
+  for (const m of movements || []) {
+    const q = m && quantityOf(m.quantity); const sign = m && SIGN[str(m.kind)];
+    if (!q || sign === undefined || key(m.code) !== k || key(q.unit) !== u) continue;
+    if (!str(m.batch)) { if (sign < 0) unbatched += q.value; continue; }
+    row(str(m.batch), str(m.expiry)).onHand += q.value * sign;
+  }
+  for (const d of dispenses || []) {
+    const q = d && quantityOf(d.quantity);
+    if (!q || key(str(d.drugCode) || str(d.drug)) !== k || key(q.unit) !== u) continue;
+    if (!str(d.batch)) { unbatched += q.value; continue; }
+    row(str(d.batch), str(d.expiry)).onHand -= q.value;
+  }
+  return { batches: [...b.values()], unbatched };
+}
+
+/**
+ * PURE. First-expiry-first-out: which batches to take `quantity` from. REFUSES to advise when stock left
+ * without a named batch (the per-batch counts cannot be trusted), and never offers an expired batch or
+ * one with no expiry recorded. Reports any shortfall instead of pretending there is enough.
+ */
+function fefoSuggestion(balances, quantity, nowIso) {
+  if (balances.unbatched > 0) return { ok: false, reason: "unbatched_issues", detail: `${balances.unbatched} left stock without a batch recorded, so batch counts cannot be trusted. Record batches when dispensing.` };
+  const today = String(nowIso || new Date().toISOString()).slice(0, 10);
+  const usable = balances.batches.filter((x) => x.onHand > 0 && x.expiry && x.expiry >= today).sort((a, c) => a.expiry.localeCompare(c.expiry));
+  const picks = []; let need = Number(quantity);
+  for (const x of usable) { if (need <= 0) break; const take = Math.min(x.onHand, need); picks.push({ batch: x.batch, expiry: x.expiry, take }); need -= take; }
+  const excluded = balances.batches.filter((x) => x.onHand > 0 && !(x.expiry && x.expiry >= today)).map((x) => ({ batch: x.batch, expiry: x.expiry, onHand: x.onHand, why: x.expiry ? "expired" : "no expiry recorded" }));
+  return { ok: true, picks, shortfall: Math.max(0, need), excluded };
+}
+
 function flagLevels(levels, reorderLevels) {
   const table = {};
   for (const k of Object.keys(reorderLevels || {})) table[key(k)] = reorderLevels[k];
@@ -369,4 +409,4 @@ async function stockLevels(request, env, ctx) {
   };
 }
 
-export { MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
+export { batchBalances, fefoSuggestion, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount };
