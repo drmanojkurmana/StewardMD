@@ -538,3 +538,8 @@ Audit findings, with evidence, drove this batch. Built and live:
 Known checker weakness: reachability matches route names without their segment, so a same-named route in another segment hides a gap (found: ward/plan vs onco /plan; ward/progress via templateId "progress"). Make seg-aware.
 Parked for owner (end): an external scheduler token for ops tick (optional), notification channel credentials (escalation currently records "no channel"), plus earlier parked items.
 **Next batch:** microbiology/culture-sensitivity; command center drill-down + ICU/OPD/staffing/finance/OT sections; quality measures + incident signal/confirm/category; radiology viewer launch + structured templates; P1.5 TPA adapters; checker seg-aware; then P2.
+
+### 2026-09-13 - checker segment-aware; ward/bed cross-hospital edits closed
+
+Reachability now keys routes by segment+sub (onco/plan no longer hides ward/plan; bare words need context). Found and built: Admin ward rename/deactivate, clinic billing "Waiting to be billed". SECURITY: ward/update and bed/update did not check the ward/bed belongs to the caller's hospital (now 404, test). Live verified: wardsynq.com serves ward.js site63/admin.js 13; /ward/results-to-verify answers 401 (deployed). 6199 passing.
+In flight (builders): microbiology + histopathology; command center drill-down; quality measures + incident signal/confirm; radiology viewer + TPA adapters.
