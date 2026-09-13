@@ -280,7 +280,8 @@ export function brainModel(env) {
   /* VERTEX THROUGH ADC. The project's API keys may only call the Gemini API and service-account keys
    * cannot be created (org policy), so Vertex is reached through the Cloud Run brain proxy
    * (connect-agent/brain-proxy), whose service account holds the ADC. Configured by its URL. */
-  if ((provider === "vertex" || provider === "vertex-adc") && str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL)) provider = "vertex-adc";
+  // The owner's choice is Vertex via ADC: a configured proxy wins over any provider value.
+  if (str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL)) provider = "vertex-adc";
   if (provider === "vertex-adc") {
     if (!str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL) || str(env && env.CONNECT_AGENT_BRAIN_PROXY_SECRET).length < 32) throw new Error("vertex-adc needs CONNECT_AGENT_BRAIN_PROXY_URL and CONNECT_AGENT_BRAIN_PROXY_SECRET");
     return { provider, model };
