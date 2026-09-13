@@ -163,6 +163,42 @@ function safeJsonParse(text) {
   try { return JSON.parse(text); } catch { return null; }
 }
 
+const PARAM_NAME = /^[^@]{1,80}$/;
+const TODAY_FORMATS = ["DD-MM-YYYY", "DD/MM/YYYY", "YYYY-MM-DD", "MM/DD/YYYY", "DD-Mon-YYYY"];
+function fieldNameOk(s) { return typeof s === "string" && PARAM_NAME.test(s) && !/\d{3,}/.test(s); }
+// A proven endpoint's field sources (prove.mjs paramsOf): each names a source, never carries a value
+// beyond a short letters-only mode constant.
+function cleanProvenParams(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw) || Object.keys(raw).length > 40) throw new OnboardError("invalid", "observedViews: endpoint params invalid");
+  const out = {};
+  for (const k of Object.keys(raw)) {
+    const s = raw[k];
+    if (!fieldNameOk(k) || k.length > 60 || !s || typeof s !== "object" || Array.isArray(s)) throw new OnboardError("invalid", "observedViews: endpoint params invalid");
+    if (s.token === true) out[k] = { token: true };
+    else if (s.empty === true) out[k] = { empty: true };
+    else if (s.unmapped === true) out[k] = { unmapped: true };
+    else if (["size", "start", "number"].indexOf(s.page) >= 0) out[k] = { page: s.page };
+    else if (TODAY_FORMATS.indexOf(s.today) >= 0) out[k] = { today: s.today };
+    else if (typeof s.constant === "string" && /^[A-Za-z_]{1,32}$/.test(s.constant)) out[k] = { constant: s.constant };
+    else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && fieldNameOk(s.field)) out[k] = { from: s.from, field: s.field };
+    else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && Array.isArray(s.fields) && s.fields.length === 2 && s.fields.every(fieldNameOk) && /^[-_/|]$/.test(s.join)) out[k] = { from: s.from, fields: s.fields.slice(), join: s.join };
+    else throw new OnboardError("invalid", "observedViews: endpoint params invalid");
+  }
+  return out;
+}
+function cleanProofCounts(raw, kinds, name) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new OnboardError("invalid", "observedViews: " + name + " invalid");
+  const out = {};
+  if (raw.kind !== undefined) { if (kinds.indexOf(raw.kind) < 0) throw new OnboardError("invalid", "observedViews: " + name + " kind invalid"); out.kind = raw.kind; }
+  for (const k of ["hits", "cells", "rows"]) {
+    if (raw[k] === undefined) continue;
+    if (!Number.isInteger(raw[k]) || raw[k] < 0 || raw[k] > 100000) throw new OnboardError("invalid", "observedViews: " + name + " " + k + " invalid");
+    out[k] = raw[k];
+  }
+  if (raw.overlap !== undefined) { if (typeof raw.overlap !== "number" || !(raw.overlap >= 0 && raw.overlap <= 1)) throw new OnboardError("invalid", "observedViews: " + name + " overlap invalid"); out.overlap = raw.overlap; }
+  return out;
+}
+
 // Validates+strips body.observedViews (crawler-observed server-rendered views) for inferHtmlOperations.
 // Fail-closed: an out-of-shape entry throws "invalid" rather than silently dropping fields. Hostile keys
 // (__proto__/constructor/prototype) are already rejected on the whole body upstream of this call.
@@ -235,6 +271,14 @@ function cleanObservedViews(raw) {
           if (typeof e.contentType !== "string" || e.contentType.length > 60) throw new OnboardError("invalid", "observedViews: endpoint contentType invalid");
           cleanEndpoint.contentType = e.contentType;
         }
+        // Proven on the phone (connect-agent/phone/prove.mjs): its role, where each field's value comes
+        // from (names only) and the match counts. Never a value.
+        if (e.role !== undefined) {
+          if (e.role !== "data" && e.role !== "prerequisite") throw new OnboardError("invalid", "observedViews: endpoint role invalid");
+          cleanEndpoint.role = e.role;
+        }
+        if (e.params !== undefined) cleanEndpoint.params = cleanProvenParams(e.params);
+        if (e.proof !== undefined) cleanEndpoint.proof = cleanProofCounts(e.proof, ["json", "html", "fired-before"], "endpoint proof");
         return cleanEndpoint;
       });
     }
@@ -266,6 +310,15 @@ function cleanObservedViews(raw) {
       if (typeof w.reason === "string") { if (/\d{3,}/.test(w.reason) || w.reason.indexOf("@") >= 0) throw new OnboardError("invalid", "observedViews: verified reason invalid"); ver.reason = w.reason.slice(0, 200); }
       if (typeof w.resourceSeen === "string" && w.resourceSeen.length <= 32) ver.resourceSeen = w.resourceSeen;
       clean.verified = ver;
+    }
+    if (v.proof !== undefined) {
+      const p = cleanProofCounts(v.proof, ["json", "html"], "proof");
+      if (["proven", "unproven", "no-requests", "no-screen-values", "signed-out", "error"].indexOf(v.proof.status) < 0) throw new OnboardError("invalid", "observedViews: proof status invalid");
+      p.status = v.proof.status;
+      if (v.proof.tried !== undefined) { if (!Number.isInteger(v.proof.tried) || v.proof.tried < 0 || v.proof.tried > 50) throw new OnboardError("invalid", "observedViews: proof tried invalid"); p.tried = v.proof.tried; }
+      if (v.proof.brain !== undefined) { if (typeof v.proof.brain !== "boolean") throw new OnboardError("invalid", "observedViews: proof brain invalid"); p.brain = v.proof.brain; }
+      if (v.proof.model !== undefined && v.proof.model !== null) { if (typeof v.proof.model !== "string" || !/^[\w.:\/-]{1,80}$/.test(v.proof.model)) throw new OnboardError("invalid", "observedViews: proof model invalid"); p.model = v.proof.model; }
+      clean.proof = p;
     }
     if (v.guidedPath !== undefined) {
       if (!Array.isArray(v.guidedPath) || v.guidedPath.length > 20 || v.guidedPath.some((s) => typeof s !== "string" || s.length > 120 || /\d{3,}/.test(s))) {

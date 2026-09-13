@@ -4,6 +4,7 @@ import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
+import { createProofBook } from './prove.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -113,6 +114,9 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   if (typeof api.progress === 'function') await api.progress({ stage: 'DISCOVERING' }).catch(() => {});
 
   const planner = async (args) => api.plan(args);
+  /* EXPLORE -> OBSERVE -> GEMINI -> EXECUTE -> VERIFY -> LEARN: every captured screen's data call is
+   * proven against what the screen shows before it is kept (prove.mjs). */
+  const book = createProofBook({ brain });
 
   let observedViews = [];
   let found = [];
@@ -151,16 +155,17 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     if (!view || !view.rowsSelector) {
       try { view = await captureView({ client: plugin, resourceHint: gap }); } catch { view = null; }
     }
-    await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
-    if (!view || !view.rowsSelector) { warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
+    if (!view || !view.rowsSelector) { await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {}); warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
     view.guided = true;
     if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
     /* The brain checks the doctor's answer against the structure and maps the columns; the doctor's
      * word on WHAT the screen is stands, a strong disagreement is only reported. */
     const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
+    await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
     if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
       warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
     }
+    await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
     observedViews.push(view);
     found = [...found, gap];
     notify('CAPTURED', { gap, step, total, found, looking: looking() });
@@ -193,7 +198,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];
@@ -212,7 +217,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     if (!observedViews.length || crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') return;
     notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
     try {
-      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
+      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
     } catch (e) {
       if (e && e.name === 'NotSignedIn') { crawlStop = 'login-required'; warnings.push(e.message); return; }
       warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
@@ -232,7 +237,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = again.observedViews || [];
@@ -283,6 +288,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     candidateVersionId: evidenceResult?.candidateVersionId || discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
     observedViews, found, asked, missing, warnings, crawlStop, mode,
     verification: { patients: verification.patients.length, checks: verification.checks, failed: verification.failed },
+    proofs: book.trace,
     probes: probed.probes, capabilities: evidenceResult?.capabilities, evidenceHash: evidenceResult?.evidenceHash,
     state: evidenceResult?.state,
   });

@@ -319,20 +319,64 @@ export function headerFit(rows, headers) {
 
 export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 'NotSignedIn'; } }
 
+/* ---- proven endpoints (prove.mjs) ---------------------------------------------------------------- */
+
+/** A proven view: its endpoints carry the role and field sources discovery proved. */
+export function isProven(view) {
+  return !!(view && view.proof && view.proof.status === 'proven' && Array.isArray(view.endpoints) && view.endpoints.some((e) => e && e.role === 'data'));
+}
+
+/** A row's field as prove.mjs named it: a column, `_args.N` (onclick argument) or `_href.KEY` (link query). */
+export function fieldOf(row, field) {
+  if (!row || !field) return '';
+  const a = /^_args\.(\d+)$/.exec(field);
+  if (a) return Array.isArray(row._args) ? String(row._args[Number(a[1])] ?? '') : String(row[field] ?? '');
+  const h = /^_href\.(.+)$/.exec(field);
+  if (h && typeof row._href === 'string') { try { return new URL(row._href, 'https://x.invalid').searchParams.get(h[1]) || ''; } catch { return ''; } }
+  return row[field] == null ? '' : String(row[field]);
+}
+
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+export function formatToday(fmt, now = new Date()) {
+  const dd = String(now.getDate()).padStart(2, '0'), mm = String(now.getMonth() + 1).padStart(2, '0'), yyyy = String(now.getFullYear());
+  return ({ 'DD-MM-YYYY': `${dd}-${mm}-${yyyy}`, 'DD/MM/YYYY': `${dd}/${mm}/${yyyy}`, 'YYYY-MM-DD': `${yyyy}-${mm}-${dd}`, 'MM/DD/YYYY': `${mm}/${dd}/${yyyy}`, 'DD-Mon-YYYY': `${dd}-${MON[now.getMonth()]}-${yyyy}` })[fmt] || '';
+}
+
 /**
- * executeView({ plugin, origin, view, patient, tokens, parseHtml }) -> { rows, via, url } | null
- * null means the view has no replayable call (caller falls back to the page). Throws NotSignedIn when
- * the hospital answered with its login page or 401/403.
+ * provenValue(key, source, { patient, parentRow, tokens }) -> string
+ * The value a proven field sends. A field traced to the ward list reads the patient's own list row
+ * (patient._row); without that row it falls back to the id the patient carries for a key of that name.
  */
-export async function executeView({ plugin, origin, view, patient, tokens = null, parseHtml = null, onCall = null }) {
-  let plan = replayPlan(view, patient);
-  if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
-  let viewHost = origin;
-  try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
-  const base = String(viewHost || '').replace(/\/$/, '');
-  /* SAME SITE OR NO COOKIES. The page issues the call, so it must BE on the data host: a browser left
-   * on the sign-in host (gimsrlogin) calling ghis.gitam.edu sends no session and gets the login form
-   * (Pixel, 2026-09-13). Move onto the view's own page first when the hosts differ. */
+export function provenValue(key, src, { patient = null, parentRow = null, tokens = null, now } = {}) {
+  if (!src || src.empty || src.unmapped) return '';
+  if (src.token) return tokenFor(key, tokens);
+  if (src.constant != null) return String(src.constant);
+  if (src.page) return ({ size: '1000', start: '0', number: '1' })[src.page] || '';
+  if (src.today) return formatToday(src.today, now);
+  const row = src.from === 'worklist' ? (patient && patient._row) : parentRow;
+  if (!row) return src.from === 'worklist' ? (idCandidates(key, patient)[0] || '') : '';
+  if (Array.isArray(src.fields)) return src.fields.map((f) => fieldOf(row, f)).join(src.join || '');
+  return fieldOf(row, src.field);
+}
+
+/** provenRequest(endpoint, ctx) -> { method, path, url, body, headers }: one proven call, filled. */
+export function provenRequest(ep, ctx = {}) {
+  const { path, keys, constants } = splitPath(ep.path);
+  const params = ep.params || {};
+  const q = {};
+  for (const k of keys) q[k] = params[k] ? provenValue(k, params[k], ctx) : (constants[k] !== undefined ? constants[k] : '');
+  const url = path + (keys.length ? '?' + formEncode(q) : '');
+  if (ep.method !== 'POST') return { method: 'GET', path, url, body: null, headers: {} };
+  const fields = {};
+  for (const k of Array.isArray(ep.bodyKeys) ? ep.bodyKeys : []) fields[k] = params[k] ? provenValue(k, params[k], ctx) : (TOKEN_KEY.test(k) ? tokenFor(k, ctx.tokens) : '');
+  const json = ep.requestKind === 'json';
+  return { method: 'POST', path, url, body: json ? JSON.stringify(fields) : formEncode(fields), headers: json ? { 'Content-Type': 'application/json' } : {} };
+}
+
+/* SAME SITE OR NO COOKIES. The page issues the call, so it must BE on the data host: a browser left on
+ * the sign-in host (gimsrlogin) calling ghis.gitam.edu sends no session and gets the login form (Pixel,
+ * 2026-09-13). Move onto the view's own page first when the hosts differ. */
+async function onDataHost(plugin, view, patient, base) {
   try {
     const cur = typeof plugin.currentUrl === 'function' ? await plugin.currentUrl() : null;
     const curUrl = typeof cur === 'string' ? cur : cur && cur.url;
@@ -343,6 +387,52 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
       await new Promise((r) => setTimeout(r, 2500));
     }
   } catch { /* stay where we are */ }
+}
+
+/**
+ * executeProven({ plugin, origin, view, patient, parentRow }) -> { rows, via:'endpoint', url, kind, proven:true }
+ * Runs exactly what discovery proved, in the order the page ran it: the patient-bound prerequisites,
+ * then the data call, every field filled from its proven source. No guessing among calls.
+ */
+export async function executeProven({ plugin, origin, view, patient = null, parentRow = null, tokens = null, parseHtml = null, onCall = null, now }) {
+  let viewHost = origin;
+  try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  const base = String(viewHost || '').replace(/\/$/, '');
+  await onDataHost(plugin, view, patient, base);
+  const eps = view.endpoints.filter((e) => e && (e.role === 'prerequisite' || e.role === 'data'));
+  const wantsToken = eps.some((e) => Object.values(e.params || {}).some((s) => s && s.token) || (e.bodyKeys || []).some((k) => TOKEN_KEY.test(k)));
+  const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
+  let out = null;
+  for (const ep of eps) {
+    const req = provenRequest(ep, { patient, parentRow, tokens: toks, now });
+    const call = { method: req.method, url: base + req.url, body: req.body, headers: req.headers };
+    if (typeof onCall === 'function') onCall(call);
+    const resp = await fetchInPage(plugin, call);
+    const kind = classifyResponse(resp);
+    if (kind === 'login') throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page to ' + req.path);
+    if (ep.role !== 'data') continue;
+    let rows = [];
+    if (kind === 'json') { try { rows = rowsFromJson(JSON.parse(resp.text)); } catch { rows = []; } }
+    else if (kind === 'html') rows = rowsFromHtml(resp.text, view, parseHtml);
+    out = { rows, via: 'endpoint', url: req.path, kind, proven: true, method: req.method };
+  }
+  return out || { rows: [], via: 'endpoint', url: '', kind: 'empty', proven: true };
+}
+
+/**
+ * executeView({ plugin, origin, view, patient, tokens, parseHtml }) -> { rows, via, url } | null
+ * null means the view has no replayable call (caller falls back to the page). Throws NotSignedIn when
+ * the hospital answered with its login page or 401/403.
+ */
+export async function executeView({ plugin, origin, view, patient, tokens = null, parseHtml = null, onCall = null, parentRow = null }) {
+  if (isProven(view)) return executeProven({ plugin, origin, view, patient, parentRow, tokens, parseHtml, onCall });
+  // An adapter discovered before proof existed: the old ranked replay below.
+  let plan = replayPlan(view, patient);
+  if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
+  let viewHost = origin;
+  try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  const base = String(viewHost || '').replace(/\/$/, '');
+  await onDataHost(plugin, view, patient, base);
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));
   const toks = tokens || (wantsToken ? await pageTokens(plugin) : {});
   if (wantsToken) plan = replayPlan(view, patient, toks);

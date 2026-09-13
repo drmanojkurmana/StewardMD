@@ -227,6 +227,33 @@ test("discovery accepts a report-block view (cellSelectors) and keeps guided tap
   assert.equal(mmRes.status, 400);
 });
 
+test("discovery keeps a proven endpoint's role, field sources and match counts, and refuses a value smuggled in a source", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, env, doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, env, doc1.headers));
+  const view = {
+    resourceHint: "medications", pathTemplate: "/Doctor/Home", rowsSelector: "#meds tbody tr", headers: ["Drug", "Route", "Frequency"], singleRecord: false,
+    proof: { status: "proven", tried: 3, brain: true, model: "gemini-3.8-flash", overlap: 1, hits: 4, cells: 4, kind: "html" },
+    endpoints: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", bodyKeys: ["__RequestVerificationToken", "recordNo"], requestKind: "form", xhr: true, role: "prerequisite", params: { __RequestVerificationToken: { token: true }, recordNo: { from: "worklist", fields: ["MRNo", "VisitNo"], join: "-" } }, proof: { kind: "fired-before" } },
+      { method: "GET", path: "/Doctor/Home/GetMedicines/?id", xhr: true, role: "data", params: { id: { from: "worklist", field: "MRNo" } }, proof: { kind: "html", hits: 4, cells: 4, overlap: 1, rows: 3 } },
+    ],
+  };
+  const res = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: [view] }, env, doc1.headers));
+  assert.equal(res.status, 200, await res.clone().text());
+  const phoneState = JSON.parse((await findJobForSession(env.CONNECT_DB, "t1", sessionId)).phone_state);
+  assert.deepEqual(phoneState.observedViews[0].endpoints, view.endpoints);
+  assert.deepEqual(phoneState.observedViews[0].proof, { kind: "html", hits: 4, cells: 4, overlap: 1, status: "proven", tried: 3, brain: true, model: "gemini-3.8-flash" });
+  for (const bad of [{ id: { from: "worklist", field: "MR25168764" } }, { id: { constant: "MR25168764" } }, { id: { value: "x" } }]) {
+    const leak = JSON.parse(JSON.stringify(view));
+    leak.endpoints[1].params = bad;
+    const r = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), observedViews: [leak] }, env, doc1.headers));
+    assert.equal(r.status, 400, JSON.stringify(bad));
+  }
+});
+
 test("discovery observedViews validation: hostile key, oversize, and unmappable headers", async () => {
   const { env, doc1 } = await setupTestEnv();
   const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));

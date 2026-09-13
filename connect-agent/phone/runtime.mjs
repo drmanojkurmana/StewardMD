@@ -72,8 +72,10 @@ export function mapRow(row) {
   return out;
 }
 
+/* Each patient keeps the list row it came from (non-enumerable: never serialised) so a proven call can
+ * send the exact field discovery traced its value to (prove.mjs paramsOf). */
 export function mapRows(rows) {
-  return (Array.isArray(rows) ? rows : []).map(mapRow).filter((p) => p.patientFirstName || p.patientId);
+  return (Array.isArray(rows) ? rows : []).map((r) => { const p = mapRow(r); Object.defineProperty(p, '_row', { value: r, enumerable: false }); return p; }).filter((p) => p.patientFirstName || p.patientId);
 }
 
 // Page-side reader. Runs INSIDE the hospital page via plugin.evaluate and returns a JSON string of
@@ -151,11 +153,13 @@ export function isGimsrOrigin(origin) {
 }
 
 // Pick the replay views by resource. The worklist is the one the ward list is read from.
+// A view whose data call was proven wins over an unproven one for the same resource.
 export function viewsByResource(replay) {
   const by = {};
+  const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   for (const v of Array.isArray(replay) ? replay : []) {
     const r = String(v.resourceHint || v.resource || 'unknown');
-    if (!by[r]) by[r] = v;
+    if (!by[r] || (proven(v) && !proven(by[r]))) by[r] = v;
   }
   return by;
 }
@@ -257,7 +261,8 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
   /* Every worklist view with a data call is tried (a crawl can record the OPD list and the ward list
    * both). Rows that are not patients (a doctor list, a dashboard count) are not a ward: next call,
    * then the page. */
-  const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length);
+  const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
+    .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
@@ -275,6 +280,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
 // A patient's views (medications, labs, radiology, history, discharge): each becomes a titled section
 // of [{header: text}] rows. Path placeholders ({id}, {mrn}, :id, #) are filled with the patient id.
 export const DETAIL_RESOURCES = Object.freeze(['medications', 'labs', 'radiology', 'history', 'discharge', 'patient']);
+const MAX_DETAIL_ROWS = 15;
 
 export function fillPath(path, patient, which = 'patientId') {
   const id = encodeURIComponent((which === 'episodeId' ? patient.episodeId : patient.patientId) || patient.patientId || '');
@@ -328,7 +334,25 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     let replayed = null;
     const vo = viewOrigin(v, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
-    if (replayed) { sections.push({ resource: r, rows: replayed, via: 'endpoint' }); continue; }
+    if (replayed) {
+      sections.push({ resource: r, rows: replayed, via: 'endpoint' });
+      /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
+       * this list, its fields filled from that row (render id, result id). */
+      const d = views[r + '-detail'];
+      if (d && d.detailOf === r && d.proof && d.proof.status === 'proven') {
+        const ar = await import('./adapter-runtime.mjs');
+        const detailRows = [];
+        for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
+          let got = null;
+          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+          // The row's title as ghis-shim.mjs firstText() reads it: first non-meta cell that is not a bare number.
+          const title = Object.keys(row).filter((k) => k.charAt(0) !== '_').map((k) => String(row[k] == null ? '' : row[k]).trim()).find((v) => v && !/^\d+$/.test(v)) || '';
+          for (const dr of (got && got.rows) || []) detailRows.push(Object.assign({ _of: title }, dr));
+        }
+        if (detailRows.length) { sections.push({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
+      }
+      continue;
+    }
     const own = fillPath(v.pathTemplate || v.path, patient);
     const origin_ = vo;
     const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
