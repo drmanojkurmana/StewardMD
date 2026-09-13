@@ -46,7 +46,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
     return renderers[tab](c, body);
   } });
 
@@ -280,6 +280,61 @@
         c.api("/forms/draft", { orgId: c.state.orgId, definition: def }).then(function (x) {
           if (!x || !x.ok) { document.getElementById("admFormMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
           c.toast(x.problems.length ? "Draft saved with " + x.problems.length + " problem(s) to fix before publishing." : "Draft saved. It can be published."); WSQ.render("admin");
+        });
+      };
+    });
+  }
+
+  /* CLINICAL PATHWAYS (P2.12): hospital pathway definitions, draft saving, publishing immutable versions,
+   * and retiring outdated versions with a mandatory reason. */
+  function renderPathways(c, body) {
+    body.innerHTML = '<span class="spin"></span>';
+    return c.api("/pathways/definitions?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">Could not load the clinical pathways. ' + c.esc(refusal(r)) + "</div>"; return; }
+      var list = function (title, rows, draft) {
+        return "<h3>" + title + "</h3>" + (rows && rows.length ? "<ul>" + rows.map(function (x) {
+          var d = draft ? x.def : x;
+          var retired = d.status === "retired";
+          return "<li><b>" + c.esc(d.title || d.key) + "</b> (" + c.esc(d.key) + (draft ? ", draft" : ", version " + c.esc(d.version)) + (retired ? " - RETIRED" : "") + ")" +
+            (draft ? (x.problems && x.problems.length ? '<div class="msg err">' + x.problems.map(c.esc).join("<br>") + "</div>" : ' <button class="btn" type="button" data-pw-pub="' + c.esc(d.key) + '">Publish</button>') : "") +
+            (!draft && !retired ? ' <button class="btn ghost" type="button" data-pw-retire="' + c.esc(d.key) + '" data-pw-v="' + c.esc(d.version) + '">Retire</button>' : "") +
+            ' <button class="btn quiet" type="button" data-pw-edit="' + c.esc(d.key) + '" data-pw-draft="' + (draft ? "1" : "") + '">Edit</button></li>';
+        }).join("") + "</ul>" : "<p>None.</p>");
+      };
+      body.innerHTML = '<div class="card"><h2>Clinical pathways</h2>' + list("Drafts", r.drafts || [], true) + list("Published", r.published || [], false) +
+        '<h3>Edit a pathway (JSON)</h3><textarea id="admPwJson" rows="14" style="width:100%;font-family:monospace" placeholder=\'{"key":"sepsis_bundle","title":"Sepsis resuscitation bundle","owner":"Critical Care Committee","effectiveDate":"2026-01-01","reviewDate":"2027-01-01","evidence":[{"citation":"Surviving Sepsis Campaign 2021"}],"steps":[{"key":"blood_cultures","title":"Blood cultures before antibiotics","kind":"orders","orderSetId":"sepsis_labs"}]}\'></textarea>' +
+        '<button class="btn" type="button" id="admPwSave">Save draft</button><div id="admPwMsg"></div></div>';
+      body.querySelectorAll("[data-pw-edit]").forEach(function (b) {
+        b.onclick = function () {
+          var key = b.getAttribute("data-pw-edit"), isDraft = b.getAttribute("data-pw-draft") === "1";
+          var d = isDraft ? (r.drafts || []).filter(function (x) { return x.key === key; })[0].def : (r.published || []).filter(function (x) { return x.key === key; })[0];
+          document.getElementById("admPwJson").value = JSON.stringify(d, null, 2);
+        };
+      });
+      body.querySelectorAll("[data-pw-pub]").forEach(function (b) {
+        b.onclick = function () {
+          c.api("/pathways/publish", { orgId: c.state.orgId, key: b.getAttribute("data-pw-pub") }).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Published as version " + x.version + "."); WSQ.render("admin");
+          });
+        };
+      });
+      body.querySelectorAll("[data-pw-retire]").forEach(function (b) {
+        b.onclick = function () {
+          var reason = window.prompt("Reason for retiring this pathway version (mandatory):");
+          if (!reason || reason.trim().length < 5) { alert("A retirement reason of at least 5 characters is required."); return; }
+          c.api("/pathways/retire", { orgId: c.state.orgId, key: b.getAttribute("data-pw-retire"), version: b.getAttribute("data-pw-v"), reason: reason.trim() }).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Pathway version retired."); WSQ.render("admin");
+          });
+        };
+      });
+      document.getElementById("admPwSave").onclick = function () {
+        var def; try { def = JSON.parse(document.getElementById("admPwJson").value); } catch (e) { document.getElementById("admPwMsg").innerHTML = '<div class="msg err">That is not valid JSON: ' + c.esc(e.message) + "</div>"; return; }
+        delete def.status; delete def.version; delete def.publishedAt;
+        c.api("/pathways/draft", { orgId: c.state.orgId, definition: def }).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admPwMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast(x.problems && x.problems.length ? "Draft saved with " + x.problems.length + " problem(s) to fix before publishing." : "Draft saved. It can be published."); WSQ.render("admin");
         });
       };
     });
