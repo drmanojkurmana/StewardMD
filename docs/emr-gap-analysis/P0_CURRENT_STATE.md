@@ -437,3 +437,12 @@ The earlier claim that cross-record atomicity was unavailable was wrong: reposit
 
 **Numbers:** 6069 passing, 0 failing. 14 routes waiting for a screen.
 **P0 remaining:** 14 small screens, live payment providers (need credentials), document storage settings (owner). User asked to move faster; P1 starts next, leftovers in parallel.
+
+### 2026-09-13 - P1.8 referrals, P1.7 staff rostering, storage check
+
+P1 started (user asked to move faster; P0 leftovers run alongside). Referrals end to end (referral.js; patient Referrals screen + hospital Referral inbox). Staff rostering (_roster.js pure rules, _roster_store.js by-month storage, Staff rota page): overlap/leave/swap refusals, all-or-nothing weekly assignment, leave clash blocks approval, swap needs colleague + manager with re-check, coverage gaps, on duty now, removal with reason, all audited, negative-auth tested. GET /api/queue/ready now reports documentStorage via a real save/read/delete round trip.
+
+**Deploy note:** wardsynq.com is live (rota.js v2, shell.js v30, ward.js site51). stewardmd.in (server) has served no new deployment since ff5f14e (~50 min): Cloudflare lists them as deployed but answers "Deployment Not Found"; the previous one still serves. The same build runs correctly in local workerd (wrangler pages dev: /api/queue/ready 200 with documentStorage). Referral/rota/storage-check server routes go live when Cloudflare serves the new deployment.
+
+**Numbers:** 6092 passing, 0 failing. 14 routes waiting for a screen.
+**Next:** confirm storage round trip once live; P1.1 dynamic forms, P1.4 accounting, P1.15 outbox.
