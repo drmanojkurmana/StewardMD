@@ -6053,10 +6053,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                  * close() first, which is why those worked and these did not. Same trap as SURGX. */
                 tools.slice(0, 4).forEach(function (t) {
                   var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label;
-                  b.addEventListener("click", function () {
-                    try { close(); } catch (e) {}
-                    setTimeout(function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }, 180);
-                  });
+                  // Persist the route with the chip: per-node listeners disappear when saved
+                  // conversation HTML is restored. The body delegate also closes MaiK first.
+                  b.setAttribute("data-maik-copilot", t.kind);
+                  if (t.arg != null) b.setAttribute("data-maik-arg", String(t.arg));
                   tb.appendChild(b);
                 });
                 host.appendChild(tb);
@@ -6625,6 +6625,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
+      var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool])") : null;
+      if (launch) {
+        ev.preventDefault();
+        var kind = launch.getAttribute("data-maik-copilot"), arg = launch.getAttribute("data-maik-arg");
+        var registry = window.MaiKCopilot && window.MaiKCopilot.TOOLS;
+        // Older saved answers predate route attributes. Match only exact registered calculator
+        // titles (never evaluate saved markup or guess a clinical calculator from a partial label).
+        if (!kind && window.MEDCALC && MEDCALC.list) {
+          var label = launch.textContent.trim();
+          var matches = MEDCALC.list().filter(function (c) { return c.title === label; });
+          if (matches.length === 1) { kind = "calculator"; arg = matches[0].id; }
+        }
+        var target = registry && Object.prototype.hasOwnProperty.call(registry, kind) && registry[kind];
+        if (!target || !target.probe || !target.probe() || (kind === "calculator" && (!window.MEDCALC || !MEDCALC.get(arg)))) {
+          toast("This tool is unavailable. Try opening it from Clinical Tools."); return;
+        }
+        close();
+        setTimeout(function () { try { target.open(arg); } catch (e) { toast("Could not open this tool. Please try again."); } }, 180);
+        return;
+      }
       // Phase 2 — citation chip → reveal the numbered sources footer in the same answer bubble.
       var cite = ev.target && ev.target.closest ? ev.target.closest(".maik-cite") : null;
       if (cite) { var bub = cite.closest(".maik-b.ai") || cite.closest(".maik-b"); var det = bub && bub.querySelector(".maik-src"); if (det) { det.open = true; try { det.scrollIntoView({ block: "nearest" }); } catch (e) {} } return; }

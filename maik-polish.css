@@ -41,3 +41,14 @@ html body #maikSheet.maik-polished .maik-side-srch input{font-size:16px}
 html body #maikSheet.maik-polished .mkdoc{overflow-x:clip;overflow-y:visible}
 @media(min-width:700px){html body #maikSheet.maik-polished .maik-body{padding-left:32px;padding-right:32px}html body #maikSheet.maik-polished .maik-empty{max-width:560px;width:100%;margin:auto}html body #maikSheet.maik-polished .maik-h1{font-size:32px}}
 @media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{gap:2px}html body #maikSheet.maik-polished .maik-body{padding-left:16px;padding-right:16px}html body #maikSheet.maik-polished .maik-h1{font-size:25px}html body #maikSheet.maik-polished .maik-cmp-in{flex-wrap:wrap}html body #maikSheet.maik-polished .maik-ta{flex-basis:calc(100% - 56px);order:5}html body #maikSheet.maik-polished .maik-send{order:6}}
+
+/* Keep answer actions and ratings in stable rows, including restored conversations. */
+html body #maikSheet.maik-polished .maik-tools{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+html body #maikSheet.maik-polished .maik-tool{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 12px;text-align:left;white-space:normal;line-height:1.4;border-radius:14px;gap:10px}
+html body #maikSheet.maik-polished .maik-tool::after{flex-shrink:0}
+html body #maikSheet.maik-polished .maik-fb{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid var(--mk-bd)}
+html body #maikSheet.maik-polished .maik-fb-q{grid-column:1;line-height:1.4;color:var(--mk-mut)}
+html body #maikSheet.maik-polished .maik-fb-b{min-width:44px;min-height:44px;padding:10px 12px;line-height:1.3}
+html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
+html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut)}
+html body #maikSheet.maik-polished :is(.maik-fb-reason,.maik-fb-reasonrow){grid-column:1/-1;font-size:16px}
