@@ -1011,6 +1011,10 @@
   function showPriceHint(line, generic) {
     if (!line) return;
     var hint = line.querySelector(".rx-price-hint");
+    if (rxcOn()) {
+      if (hint) hint.textContent = "";
+      return;
+    }
     if (!hint) { hint = document.createElement("div"); hint.className = "rx-price-hint"; hint.style.cssText = "flex-basis:100%;width:100%;order:99;font-size:11.5px;color:#0e6e63;margin:3px 0 0"; line.appendChild(hint); }
     if (!generic || !window.MEDAPI || !MEDAPI.searchCompositions) { hint.textContent = ""; return; }
     hint.textContent = "checking brand prices…";

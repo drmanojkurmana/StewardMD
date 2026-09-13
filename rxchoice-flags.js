@@ -48,7 +48,7 @@
    * It waits for DOM + MEDAPI + the deterministic core before doing any work. */
   if (typeof window !== "undefined" && bool("smd_rxchoice")) {
     try {
-      var src = "/rxchoice-autopilot.js";
+      var src = "/rxchoice-autopilot.js?v=rxc2";
       if (!document.querySelector('script[data-smd-rxc-autopilot="1"]')) {
         var el = document.createElement("script"); el.src = src; el.async = true; el.dataset.smdRxcAutopilot = "1";
         (document.head || document.documentElement).appendChild(el);

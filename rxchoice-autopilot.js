@@ -71,8 +71,16 @@
     return rows.map(function (r) { return [r.drug,r.brand,r.dose,r.freq,r.duration].join("¦"); }).join("§");
   }
 
-  function resolveBrand(brand) {
-    if (!brand || !G.MEDAPI.searchBrands) return Promise.resolve(null);
+  function resolveBrand(row) {
+    var brand = typeof row === "string" ? row : (row && row.brand);
+    if (!brand) return Promise.resolve(null);
+    if (G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.resolvePrescribed) {
+      return G.SMD_RXCHOICE_UI.resolvePrescribed(typeof row === "string" ? { brand: brand } : row).then(function (rec) {
+        if (rec && !rec.pack && rec.form) rec.pack = rec.form;
+        return rec;
+      });
+    }
+    if (!G.MEDAPI.searchBrands) return Promise.resolve(null);
     return G.MEDAPI.searchBrands(brand, 24).then(function (d) {
       var rows = (d && d.results) || [];
       if (!rows.length) return null;
@@ -84,20 +92,38 @@
         return score(aa) - score(bb) || String(aa).length - String(bb).length;
       });
       var active = rows.filter(function (r) { return !r.discontinued; });
-      return active[0] || rows[0] || null;
+      var rec = active[0] || rows[0] || null;
+      if (rec && !rec.pack && rec.form) rec.pack = rec.form;
+      return rec;
     }).catch(function () { return null; });
   }
 
   function candidates(comp) {
     if (!comp || !G.MEDAPI.composition) return Promise.resolve([]);
     return G.MEDAPI.composition(comp, "price_asc", "all", 300, 0)
-      .then(function (d) { return (d && d.brands) || []; })
+      .then(function (d) {
+        var list = (d && d.brands) || [];
+        var compName = (d && d.composition) || comp;
+        return list.map(function (b) {
+          return {
+            id: b.id,
+            brand: b.brand,
+            manufacturer: b.manufacturer,
+            mrp: b.mrp,
+            form: b.form,
+            pack: b.pack || b.form,
+            composition: b.composition || compName,
+            discontinued: b.discontinued
+          };
+        });
+      })
       .catch(function () { return []; });
   }
 
   function choose(row, prescribed, cands) {
     var rx = {};
     Object.keys(prescribed || {}).forEach(function (k) { rx[k] = prescribed[k]; });
+    if (!rx.pack && rx.form) rx.pack = rx.form;
     rx.dose = row.dose; rx.freq = row.freq; rx.duration = row.duration;
     return core().choose(rx, cands);
   }
@@ -109,12 +135,14 @@
     return '<button type="button" class="rxc-auto-card' + (isRec ? " rec" : "") + '" data-rxc-auto="1" data-rxc-cat="' + esc(o.category || category.toLowerCase()) + '">' +
       '<div class="rxc-auto-cat">' + esc(label) + (isRec ? '<span class="rxc-auto-badge">RECOMMENDED VALUE</span>' : '') + '</div>' +
       '<div class="rxc-auto-brand">' + esc(o.brand || "—") + '</div>' +
-      '<div class="rxc-auto-cost">' + (o.courseCost != null ? money(o.courseCost) + " / course" : "Price unavailable") + '</div></button>';
+      '<div class="rxc-auto-cost">' + (o.courseCost != null ? money(o.courseCost) + " / course" : (o.mrp != null ? money(o.mrp) : "Price unavailable")) + '</div></button>';
   }
 
   function paint(row, result) {
     var old = row.line.querySelector(":scope > .rxc-auto");
     if (old) old.remove();
+    // If prescription.js inline container is active on this line, do not double-render
+    if (row.line.querySelector(".rxc-inline-box") || row.line.querySelector(".rxc-inline-container")) return;
     var wrap = document.createElement("div"); wrap.className = "rxc-auto";
     if (!result) {
       wrap.innerHTML = '<div class="rxc-auto-head"><span class="rxc-auto-title">RxChoice™</span><span class="rxc-auto-status">No database match</span></div>' +

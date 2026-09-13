@@ -178,7 +178,22 @@
   function candidatesFor(comp) {
     if (!comp) return Promise.resolve([]);
     return MEDAPI.composition(comp, "price_asc", "all", 300, 0)
-      .then(function (c) { return (c && c.brands) || []; })
+      .then(function (c) {
+        var list = (c && c.brands) || [];
+        var compName = (c && c.composition) || comp;
+        return list.map(function (b) {
+          return {
+            id: b.id,
+            brand: b.brand,
+            manufacturer: b.manufacturer,
+            mrp: b.mrp,
+            form: b.form,
+            pack: b.pack || b.form,
+            composition: b.composition || compName,
+            discontinued: b.discontinued
+          };
+        });
+      })
       .catch(function () { return []; });
   }
 
@@ -209,6 +224,7 @@
           generic: null, balanced: null, premium: null, blocked: false, reason: "not_in_database"
         };
       }
+      if (!rec.pack && rec.form) rec.pack = rec.form;
       return candidatesFor(rec.composition).then(function (cands) {
         var rx = {};
         for (var k in rec) if (Object.prototype.hasOwnProperty.call(rec, k)) rx[k] = rec[k];
@@ -446,6 +462,7 @@
           st.results[idx] = { prescribed: { category: "prescribed", label: "Original Choice", brand: line.brand, manufacturer: "", composition: line.drug || "", courseCost: null, mrp: null }, generic: null, balanced: null, premium: null, blocked: false, reason: "not_in_database" };
           render(st); return next();
         }
+        if (!rec.pack && rec.form) rec.pack = rec.form;
         return candidatesFor(rec.composition).then(function (cands) {
           var rx = {};
           for (var k in rec) if (Object.prototype.hasOwnProperty.call(rec, k)) rx[k] = rec[k];
@@ -460,7 +477,7 @@
     })();
   }
 
-  window.SMD_RXCHOICE_UI = {
+  var API = {
     open: open,
     available: available,
     close: close,
@@ -472,4 +489,6 @@
     normalizeBrand: normalizeBrand,
     _version: 2
   };
+  window.SMD_RXCHOICE_UI = API;
+  if (typeof module !== "undefined" && module.exports) module.exports = API;
 })();
