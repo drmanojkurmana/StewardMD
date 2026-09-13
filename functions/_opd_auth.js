@@ -91,3 +91,60 @@ export function sessionRevoked(session, member) {
   const at = Number(member && member.sessionsRevokedAt) || 0;
   return at > 0 && Number(session && session.issuedAt) < at;
 }
+
+// ---- two-step sign-in: authenticator codes (RFC 6238 TOTP: HMAC-SHA1, 30 s, 6 digits) ------------
+// Works with any standard authenticator app. The secret is 20 random bytes shown once as base32.
+const B32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+export function base32Encode(u8) {
+  let bits = 0, value = 0, out = "";
+  for (const b of u8) { value = ((value << 8) | b) & 0xffff; bits += 8; while (bits >= 5) { out += B32[(value >>> (bits - 5)) & 31]; bits -= 5; } }
+  if (bits > 0) out += B32[(value << (5 - bits)) & 31];
+  return out;
+}
+export function base32Decode(str) {
+  const s = String(str || "").toUpperCase().replace(/[\s=-]/g, "");
+  let bits = 0, value = 0; const out = [];
+  for (const ch of s) { const i = B32.indexOf(ch); if (i < 0) return null; value = ((value << 5) | i) & 0xffff; bits += 5; if (bits >= 8) { out.push((value >>> (bits - 8)) & 255); bits -= 8; } }
+  return new Uint8Array(out);
+}
+export function newTotpSecret() { return base32Encode(crypto.getRandomValues(new Uint8Array(20))); }
+export const TOTP_STEP_MS = 30000;
+export async function totpAt(secretB32, step) {
+  const key = await crypto.subtle.importKey("raw", base32Decode(secretB32), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
+  const msg = new Uint8Array(8); let n = step;
+  for (let i = 7; i >= 0; i--) { msg[i] = n & 255; n = Math.floor(n / 256); }
+  const h = new Uint8Array(await crypto.subtle.sign("HMAC", key, msg));
+  const o = h[19] & 15;
+  const bin = ((h[o] & 127) << 24) | (h[o + 1] << 16) | (h[o + 2] << 8) | h[o + 3];
+  return String(bin % 1000000).padStart(6, "0");
+}
+/* One step either side for phone clock drift. Returns the matched step, or 0. A step at or before
+  * lastStep is refused, so a code read over a shoulder cannot be used a second time. */
+export async function verifyTotp(secretB32, code, nowMs, lastStep) {
+  const c = String(code || "").replace(/\s/g, "");
+  if (!/^\d{6}$/.test(c) || !base32Decode(secretB32)) return 0;
+  const cur = Math.floor(nowMs / TOTP_STEP_MS);
+  for (const s of [cur - 1, cur, cur + 1]) { if (s > (Number(lastStep) || 0) && (await totpAt(secretB32, s)) === c) return s; }
+  return 0;
+}
+export function otpauthUri(secretB32, account, issuer) {
+  const iss = issuer || "WardSynQ";
+  return "otpauth://totp/" + encodeURIComponent(iss + ":" + account) + "?secret=" + secretB32 + "&issuer=" + encodeURIComponent(iss) + "&algorithm=SHA1&digits=6&period=30";
+}
+// Backup codes: 10 base32 characters (50 bits), shown once, stored only as SHA-256.
+export function newRecoveryCodes(n) { return Array.from({ length: n || 8 }, () => base32Encode(crypto.getRandomValues(new Uint8Array(7))).slice(0, 10)); }
+export async function hashRecoveryCode(code) {
+  const d = await crypto.subtle.digest("SHA-256", enc.encode(String(code || "").toUpperCase().replace(/[\s-]/g, "")));
+  return b64u(new Uint8Array(d));
+}
+// The second-step ticket: 5 minutes, signed with ver 2 so it can never pass as a staff session (ver 1).
+const MFA_CHALLENGE_MS = 5 * 60 * 1000;
+export async function mintMfaChallenge(env, orgId, identity, nowMs) {
+  return signToken({ id: String(orgId) + "~" + String(identity), exp: (nowMs || 0) + MFA_CHALLENGE_MS, ver: 2 }, queueSecret(env));
+}
+export async function verifyMfaChallenge(env, token, nowMs) {
+  const v = await verifyToken(token, queueSecret(env), 2, nowMs || 0);
+  if (!v || !v.ok) return null;
+  const raw = idFromToken(token); const i = String(raw).indexOf("~");
+  return i < 0 ? null : { orgId: raw.slice(0, i), identity: raw.slice(i + 1) };
+}

@@ -86,6 +86,15 @@
 
   // ---- router ---------------------------------------------------------------------------------
   function go(page, arg) { location.hash = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : ""); }
+  /* Two-step sign-in: the PIN or password was right, and the account wants a code from the phone. The
+   * server's answer is passed through untouched, so a wrong code reads as a wrong code, not a PIN. */
+  function secondStep(r) {
+    var code = "";
+    try { code = G.prompt((r.message || "Enter the 6-digit code from your authenticator app.") + "\n\nLost your phone? Enter a backup code instead.") || ""; } catch (e) {}
+    if (!code.trim()) return { cancelled: true };
+    return fetch(API + "/auth/mfa", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ challenge: r.challenge, code: code.trim() }) })
+      .then(function (x) { return x.json(); });
+  }
   function parseHash() {
     var h = (location.hash || "").replace(/^#\/?/, "").split("/");
     return { page: h[0] || "", arg: h.length > 1 ? decodeURIComponent(h.slice(1).join("/")) : "" };
@@ -175,7 +184,7 @@
     if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
     h += item("opd", "OPD desk") + item("patients", "Patients");
     if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
-    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + "</div>";
+    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + "</div>";
     return h;
   }
   function render(page, extra) {
@@ -318,7 +327,9 @@
         if (!hasAt && !code) { msg("Enter the hospital code, or sign in with your email."); return; }
         st._lastCode = code; msg("Checking.", "note");
         fetch(API + (isEmail ? "/auth/email" : "/auth/pin"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(isEmail ? { email: id, password: pw } : { clinicCode: code, identity: id, pin: pw }) })
-          .then(function (r) { return r.json(); }).then(function (r) {
+          .then(function (r) { return r.json(); }).then(function (r) { return r && r.error === "mfa_required" ? secondStep(r) : r; }).then(function (r) {
+            if (r && r.cancelled) { msg("Sign-in cancelled."); return; }
+            if (r && (r.error === "wrong_code" || r.error === "challenge_expired")) { msg(r.error === "wrong_code" ? "That code did not match. Sign in again and use the newest code." : "That took too long. Sign in again."); return; }
             if (!r || !r.ok || !r.token) { msg(r && r.error === "locked" ? "Too many attempts. Try again later." : r && r.error === "staff_disabled" ? "Staff access is not enabled on this server." : isEmail ? "Wrong email or password." : "Wrong hospital code, staff ID or PIN."); return; }
             setSession("staff", r.token, r.orgId || ""); st.who = null; go(r.orgId ? "landing" : "hospitals");
           }).catch(function () { msg("Could not reach the server."); });

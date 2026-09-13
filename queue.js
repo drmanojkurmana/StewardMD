@@ -767,8 +767,18 @@
     fetchRetry(API + "/auth/pin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clinicCode: org, identity: user, pin: pin }) })
       .then(function (r) { return r.json(); })
       .then(function (r) {
+        // Two-step sign-in: the PIN was right; ask for the phone's code and pass the server's answer through.
+        if (!r || r.error !== "mfa_required") return r;
+        var code = ""; try { code = window.prompt((r.message || "Enter the 6-digit code from your authenticator app.") + "\n\nLost your phone? Enter a backup code instead.") || ""; } catch (e) {}
+        if (!code.trim()) return { cancelled: true };
+        return fetchRetry(API + "/auth/mfa", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ challenge: r.challenge, code: code.trim() }) }).then(function (x) { return x.json(); });
+      })
+      .then(function (r) {
         if (!r || !r.ok || !r.token) {
-          var msg = (r && r.error === "locked") ? "Too many attempts. Try again shortly."
+          var msg = (r && r.cancelled) ? "Sign-in cancelled."
+            : (r && r.error === "wrong_code") ? "That code did not match. Sign in again and use the newest code."
+            : (r && r.error === "challenge_expired") ? "That took too long. Sign in again."
+            : (r && r.error === "locked") ? "Too many attempts. Try again shortly."
             : (r && r.error === "staff_disabled") ? "Staff sign-in is not enabled for this clinic."
             : "Wrong Clinic ID, login or PIN.";
           root().innerHTML = _staffGate(msg); prefillStaff(); return;

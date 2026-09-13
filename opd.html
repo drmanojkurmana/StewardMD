@@ -280,6 +280,14 @@
     var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
     var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
+      if(!r||r.error!=="mfa_required") return r;
+      var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
+      if(!code.trim()) return {cancelled:true};
+      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+    }).then(function(r){
+      if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
+      if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }
       if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
       onLogin("staff",r.token,r.orgId);
     }).catch(function(){err("Could not reach the server.");});

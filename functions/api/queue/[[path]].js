@@ -35,7 +35,7 @@ import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket 
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
-import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked } from "../../_opd_auth.js";
+import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
@@ -496,6 +496,7 @@ export async function onRequest(context) {
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
         await ORG.auditLogin(env, auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
         if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
+        if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
         return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, identity: auth.identity }, 200, request);
       }
       const m = await ORG.findMemberByEmail(env, b.email || "");
@@ -512,7 +513,22 @@ export async function onRequest(context) {
       await ORG.recordMemberPassAttempt(env, m.orgId, m.identity, pNx);
       await ORG.auditLogin(env, m.orgId, m.identity, pOk ? "login:password_ok" : pNx.passLockedUntil ? "login:password_lockout" : "login:password_failed", pOk ? "" : "attempt " + pNx.passAttempts);
       if (!pOk) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - pNx.passAttempts) }, 401, request);
+      if (m.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, m.orgId, m.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
       return json({ ok: true, token: await mintStaffSession(env, m.orgId, m.identity, Date.now()), orgId: m.orgId, identity: m.identity }, 200, request);
+    }
+    /* THE SECOND STEP. The challenge proves the PIN or password was right in the last five minutes; it
+     * is signed with a different version from a session, so it can never be used as one. The member is
+     * re-read: a person disabled between the two steps does not get in. */
+    if (method === "POST" && seg === "auth" && sub === "mfa") {
+      if (!staffEnabled(env)) return json({ ok: false, error: "staff_disabled" }, 404, request);
+      const b = await readBody(request);
+      const ch = await verifyMfaChallenge(env, b.challenge || "", Date.now());
+      if (!ch) return json({ ok: false, error: "challenge_expired", message: "That sign-in took too long. Start again." }, 401, request);
+      const member = await ORG.getMemberAuth(env, ch.orgId, ch.identity);
+      if (!member || !member.active) return json({ ok: false, error: "invalid_login" }, 401, request);
+      const r = await ORG.checkMfa(env, ch.orgId, ch.identity, b.code);
+      if (!r.ok) return json({ ok: false, error: r.error, attemptsLeft: r.attemptsLeft, retryInMs: r.retryInMs }, r.error === "locked" ? 429 : 401, request);
+      return json({ ok: true, token: await mintStaffSession(env, ch.orgId, ch.identity, Date.now()), orgId: ch.orgId, identity: ch.identity, via: r.via, recoveryLeft: r.recoveryLeft }, 200, request);
     }
 
     // ---- PATIENT: token only, no auth ----
@@ -2716,6 +2732,20 @@ export async function onRequest(context) {
     }
 
     // Role + capabilities, so the client can adapt its UI (server still re-checks every mutation).
+    /* TWO-STEP SIGN-IN, SELF-SERVICE. Always the caller's OWN account: the identity comes from the
+     * session, never the body, so nobody can switch it on or off for someone else. Hospital staff
+     * accounts only; a StewardMD account's sign-in is managed by its own identity provider. Losing the
+     * phone is handled by an admin's Reset access, which clears it. */
+    if (seg === "mfa") {
+      if (actor.kind !== "staff") return json({ ok: false, error: "staff_accounts_only", message: "Two-step sign-in here is for hospital staff accounts." }, 403, request);
+      const reply = (r) => json(r, r.ok ? 200 : r.error === "member_not_found" ? 404 : r.error === "locked" ? 429 : 422, request);
+      if (method === "GET" && sub === "status") return reply(await ORG.mfaStatus(env, actor.orgId, actor.id));
+      if (method === "POST" && sub === "enrol") return reply(await ORG.beginMfaEnrol(env, actor.orgId, actor.id, actor.id));
+      const mb = method === "POST" ? await readBody(request) : {};
+      if (method === "POST" && sub === "confirm") return reply(await ORG.confirmMfaEnrol(env, actor.orgId, actor.id, mb.code));
+      if (method === "POST" && sub === "disable") return reply(await ORG.disableMfa(env, actor.orgId, actor.id, mb.code));
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
     if (method === "GET" && seg === "whoami") {
       // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
       let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
