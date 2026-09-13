@@ -262,3 +262,13 @@ Added the price list tab to the admin centre (paise stored, rupees shown, unpars
 
 **Numbers:** 6001 passing, 0 failing. 36 routes waiting for a screen.
 **Next:** maternity-status, follow-up, discharge, oncology/cardiology links, then P0.7 fuzzy search.
+
+
+## 2026-09-14 (cont.) — ward discharge (backlog 36 -> 34)
+
+**Bug:** a ward patient had no discharge action - the stay could never be closed and the bed never
+freed from the chart. Added Discharge (asks where they went; refuses "died" until the death is recorded
+on the Contacts screen) and Follow-up (requires a real date).
+
+**Numbers:** 6004 passing, 0 failing. 34 routes waiting for a screen.
+**Next:** maternity-status, oncology/cardiology links, then P0.7 fuzzy search, P0.9 MFA, P0.8 documents.
