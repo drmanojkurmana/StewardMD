@@ -475,3 +475,11 @@ Owner: park open issues (document bucket name InvalidBucketName; 14 unscreened r
 ### 2026-09-13 - production deploy failed again (130 bindings)
 
 Another session added secrets CONNECT_AGENT_MODEL and CONNECT_AGENT_MODEL_PROVIDER (130 > 128). No unused secrets remained, so removed three production vars whose values equal the code default (behaviour identical, verified): DEVICE_LOCK_ON="0" (cfgFlag: KV override first, absent = off), PGLOG_VERIFY_BASE (default https://stewardmd.in), MAIK_CACHE_VERSION (default "1"). Count 127, one slot spare. Also shipped P1.4 accounting storage/routes/Accounts page and clinic billing postings.
+
+### 2026-09-13 - P1.1 hospital forms live
+
+wardsynq/wardsynq-forms.js engine + _forms_store.js (drafts, create-only published versions) + form-response.js (FormResponse checked server-side against the exact version). Admin Forms tab (JSON, problems listed, publish), ward chart Forms screen. FormResponse added to nurse write scope. Live: production deploy succeeded, ward.js site52, admin.js v10.
+
+**P1 done so far:** P1.1 forms, P1.4 accounting, P1.7 rostering, P1.8 referrals, P1.15 outbox.
+**Next:** P1.3 approval engine gaps, P1.2 supply chain gaps, P1.6 nursing command center, P1.9-14 top-ups, P1.5 TPA; then P2.
+**Numbers:** 6122 passing, 0 failing.
