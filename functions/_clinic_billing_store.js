@@ -5,6 +5,19 @@ import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { encPHI, decPHI } from "./_queue.js";
 import { qAudit, getSession, getTicket } from "./_queue_engine.js";
 import { appendTimeline } from "./_queue_timeline.js";
+import { postBillingEvent } from "./_accounts_store.js";
+
+/* Billing -> the hospital's books. The invoice or payment is already recorded when this runs; a posting
+ * that fails is audited as accounts:posting_failed so finance sees exactly which event is missing from the
+ * books, instead of the books quietly disagreeing with billing. Re-posting the same event is refused by the
+ * books themselves (write-once ids), so a retry can never double-count. */
+async function toBooks(env, orgId, ev, actor) {
+  let r;
+  try { r = await postBillingEvent(env, orgId, ev, actor); } catch (e) { r = { ok: false, error: "exception", message: String((e && e.message) || e) }; }
+  if (!r.ok) await qAudit(env, { hospitalId: orgId, ticketId: "", actor: actor || "system:billing", action: "accounts:posting_failed", meta: `${ev.kind} ${ev.id} ${r.error}` });
+  return r;
+}
+const today = () => new Date().toISOString().slice(0, 10);
 import { makeMrn, buildInvoice, canOrderTransition, validateOrder, validateTariff, isDispensable } from "./_clinic_billing.js";
 
 // Server enable gate (wrangler.toml var, like QUEUE_ENABLED). Billing is inert unless set.
@@ -110,6 +123,7 @@ export async function createInvoice(env, orgId, patientId, actor) {
   orders.forEach((o) => { if (canOrderTransition(o.status, "billed")) writes.push(wUpdate(env, "q_orders/" + o.id, { status: "billed", invoiceId: id, updatedAt: Date.now() })); });
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: orgId, ticketId: patientId, actor: actor || "cashier", action: "invoice_create", meta: String(inv.total) });
+  if (inv.total > 0) await toBooks(env, orgId, { kind: "invoice_posted", id, amountPaise: inv.total, date: today(), category: "consultation", payer: "patient" }, actor);
   return { ok: true, id, invoice: Object.assign({ id, status: "open" }, inv) };
 }
 export async function payInvoice(env, orgId, invoiceId, method, actor) {
@@ -121,6 +135,7 @@ export async function payInvoice(env, orgId, invoiceId, method, actor) {
   lines.forEach((l) => { if (l.orderId) writes.push(wUpdate(env, "q_orders/" + l.orderId, { status: "paid", updatedAt: Date.now() })); });
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: method || "cash" });
+  if (d.fields.total > 0) await toBooks(env, orgId, { kind: "payment", id: invoiceId, amountPaise: d.fields.total, date: today(), method: method || "cash", payer: "patient" }, actor);
   // Tell the VISIT the money is in. The cashier deliberately holds no queue capability - taking payment
   // is not queue authority - so this is emitted by the payment itself, not by a person clicking twice.
   // Only possible for orders the doctor raised from the EMR, which carry ticketId/sessionId; an order

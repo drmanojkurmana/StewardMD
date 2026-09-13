@@ -25,6 +25,7 @@ import { CAPS, can, requireCap, capsFor } from "../../_queue_roles.js";
 import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
 import * as ROSTER from "../../_roster_store.js";
+import * as ACCOUNTS from "../../_accounts_store.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
@@ -2896,6 +2897,25 @@ export async function onRequest(context) {
     /* STAFF ROSTERING (_roster.js rules, _roster_store.js storage). Staff data, never the patient record.
      * Everyone in the hospital may see the rota and act on their OWN leave and swaps (identity from the
      * session, never the body); defining shifts, assigning, removing and approving are the admin's. */
+    /* THE HOSPITAL'S BOOKS (wardsynq-accounting.js rules, _accounts_store.js storage). Reading the books is
+     * billing.view; posting, reversing, changing the chart and closing a period are the admin's. */
+    if (seg === "accounts") {
+      const ab = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || ab.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const out = (r) => json(r, r.ok ? 200 : r.error === "not_found" ? 404 : 422, request);
+      const q = (k) => url.searchParams.get(k) || "";
+      if (method === "GET" && sub === "chart") return out(await ACCOUNTS.getChart(env, orgId));
+      if (method === "GET" && sub === "trial-balance") return out(await ACCOUNTS.trialBalanceAt(env, orgId, q("to")));
+      if (method === "GET" && sub === "ledger") return out(await ACCOUNTS.ledger(env, orgId, q("account"), q("from"), q("to")));
+      if (method === "GET" && sub === "periods") return out(await ACCOUNTS.periods(env, orgId));
+      if (method === "POST" && sub === "account") return out(await ACCOUNTS.saveAccount(env, orgId, ab, actor.id));
+      if (method === "POST" && sub === "entry") return out(await ACCOUNTS.postEntry(env, orgId, ab, actor.id));
+      if (method === "POST" && sub === "reverse") return out(await ACCOUNTS.reverseEntry(env, orgId, ab.entryId, ab.date, ab.reason, actor.id));
+      if (method === "POST" && sub === "close-period") return out(await ACCOUNTS.closePeriodFor(env, orgId, ab.period, actor.id));
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
     if (seg === "roster") {
       const rb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || rb.orgId || "";

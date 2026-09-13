@@ -467,3 +467,7 @@ wardsynq/wardsynq-accounting.js (pure, beside the billing ledger): starter chart
 ### 2026-09-13 - production deploy fixed (text binding limit)
 
 Confirmed from the failed deployment log: "Failed to publish your Function. Got error: Too many text bindings, found a total of 129, they exceed the limit of 128." Started when the 4 DOC_S3_* secrets were added. Audited all 82 production secrets + 43 production vars against code: only GITHUB_OTA_TOKEN is referenced nowhere (OTA uses the OTA_R2 binding); the 6 AI_COST_CAP_<ROLE> vars looked unused but are read dynamically in functions/_credits.js and were kept. Deleted GITHUB_OTA_TOKEN only (129 -> 128). Storage secrets left as four separate provider-agnostic settings, per owner. Headroom is now zero: any new setting needs another verified removal first.
+
+### 2026-09-13 - owner decision
+
+Owner: park open issues (document bucket name InvalidBucketName; 14 unscreened routes; payment provider credentials) and finish P1 then P2 first; issues are sorted at the end.
