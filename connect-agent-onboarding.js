@@ -1285,7 +1285,7 @@
     var c = S.progressCounts || {};
     if (S.guide) {
       return '<div class="smd-connect-card">' + (S.guide.total ? progressBar() : "") + '<p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
-        '<div class="smd-connect-note">Find it in the hospital screen, then tap Done at the top. If your hospital has no such screen, tap Not in my EMR.</div>' +
+        '<div class="smd-connect-note">Find it in the hospital screen and tap inside it: it turns green so you can see what the agent will read. Then tap Done at the top. If your hospital has no such screen, tap Not in my EMR.</div>' +
         '<div class="smd-connect-row"><button id="smd-connect-guidemissing" class="smd-connect-btn" type="button">Not in my EMR</button>' +
         '<button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip for now</button></div></div>';
     }
@@ -1502,6 +1502,9 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
+     * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
+    try { stopDiscoveryPlugin(); } catch (e) {}
     show("result");
     S.canApprove = true; /* optimistic; server enforces on approve/reject, see below */
     if (!S.versionId) { paintResult(); return; }

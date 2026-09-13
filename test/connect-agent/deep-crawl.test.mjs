@@ -676,3 +676,22 @@ test('deepCrawlClinical: real DOM, login form -> login-required', { skip: !HAVE_
     assert.deepEqual(observedViews, []);
   }, LOGIN_HTML);
 });
+
+test('guided ask: the table the doctor taps inside turns green and is the one captured (real DOM)', async () => {
+  const html = '<html><body>'
+    + '<table id="big"><thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th><th>Ward</th></tr></thead><tbody>'
+    + '<tr><td>A1</td><td>X</td><td>30</td><td>W1</td></tr><tr><td>A2</td><td>Y</td><td>40</td><td>W2</td></tr><tr><td>A3</td><td>Z</td><td>50</td><td>W3</td></tr></tbody></table>'
+    + '<table id="meds"><thead><tr><th>Drug Name</th><th>Dose</th></tr></thead><tbody><tr><td id="cell">Amox</td><td>500 mg</td></tr></tbody></table>'
+    + '</body></html>';
+  const { GUIDE_SOURCES, captureView } = await import('../../connect-agent/phone/deep-crawl.mjs');
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, async currentUrl() { return { url: 'https://emr.example/rx' }; } };
+    await evaluate({ expression: GUIDE_SOURCES.armGuide });
+    await evaluate({ expression: "document.getElementById('cell').click(); 1" });
+    assert.match(String((await evaluate({ expression: "document.getElementById('meds').style.outline" })).result), /solid/);
+    const view = await captureView({ client, resourceHint: 'medications' });
+    assert.equal(view.rowsSelector, '#meds tbody tr', 'the pointed table, not the bigger one');
+    await evaluate({ expression: GUIDE_SOURCES.clearPoint });
+    assert.equal((await evaluate({ expression: "document.getElementById('meds').style.outline" })).result, '');
+  }, html);
+});
