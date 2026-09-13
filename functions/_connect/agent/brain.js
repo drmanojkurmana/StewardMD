@@ -274,24 +274,40 @@ const CACHE_PREFIX = "connect-agent:brain:";
  * until 2026-09-13 went to the registry default because CONNECT_AGENT_MODEL was unset). No model id,
  * no brain: the call fails with that reason and the phone falls back to its deterministic rules. */
 export function brainModel(env) {
-  const provider = str(env && env.CONNECT_AGENT_MODEL_PROVIDER) || "vertex";
+  let provider = str(env && env.CONNECT_AGENT_MODEL_PROVIDER) || "vertex";
   const model = str(env && env.CONNECT_AGENT_MODEL);
   if (!model) throw new Error("CONNECT_AGENT_MODEL is not set: the Connect Agent brain has no configured model");
-  if (!PROVIDERS[provider] || provider === "wardsynq" || provider === "local-openai") throw new Error("CONNECT_AGENT_MODEL_PROVIDER must be vertex or gemini");
+  /* VERTEX THROUGH ADC. The project's API keys may only call the Gemini API and service-account keys
+   * cannot be created (org policy), so Vertex is reached through the Cloud Run brain proxy
+   * (connect-agent/brain-proxy), whose service account holds the ADC. Configured by its URL. */
+  if ((provider === "vertex" || provider === "vertex-adc") && str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL)) provider = "vertex-adc";
+  if (provider === "vertex-adc") {
+    if (!str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL) || str(env && env.CONNECT_AGENT_BRAIN_PROXY_SECRET).length < 32) throw new Error("vertex-adc needs CONNECT_AGENT_BRAIN_PROXY_URL and CONNECT_AGENT_BRAIN_PROXY_SECRET");
+    return { provider, model };
+  }
+  if (!PROVIDERS[provider] || provider === "wardsynq" || provider === "local-openai") throw new Error("CONNECT_AGENT_MODEL_PROVIDER must be vertex, vertex-adc or gemini");
   return { provider, model };
+}
+
+async function viaAdcProxy(env, fetchImpl, { model, system, prompt }) {
+  const f = fetchImpl || fetch;
+  const r = await f(str(env.CONNECT_AGENT_BRAIN_PROXY_URL).replace(/\/$/, "") + "/generate", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-brain-secret": str(env.CONNECT_AGENT_BRAIN_PROXY_SECRET) },
+    body: JSON.stringify({ model, system, prompt }),
+    signal: AbortSignal.timeout(45000),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error("Vertex (ADC proxy) refused the request [" + r.status + "]: " + str(j.error) + " " + str(j.detail).slice(0, 200));
+  return { text: str(j.text), model: str(j.model) || model };
 }
 
 async function generate({ env, fetchImpl, generateImpl, system, prompt }) {
   const { provider, model } = brainModel(env);
   const req = { env, config: { timeoutMs: 45000 }, model: { model }, system, prompt, fetchImpl };
   if (typeof generateImpl === "function") return generateImpl(req, provider);
-  try {
-    return await PROVIDERS[provider].generate(req);
-  } catch (e) {
-    /* The same key serves both Google surfaces; when nobody pinned one, a Vertex refusal (project
-     * not enabled, region) still gets an answer from AI Studio. Pinned providers fail as pinned. */
-    throw e;
-  }
+  if (provider === "vertex-adc") return viaAdcProxy(env, fetchImpl, { model, system, prompt });
+  return PROVIDERS[provider].generate(req);
 }
 
 /**
