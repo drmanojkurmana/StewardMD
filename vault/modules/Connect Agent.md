@@ -191,6 +191,13 @@ session does not have.
   column for `-detail` views, constant, token, page, today). Unproven views keep NO endpoints
   (`view.proof.status`). Runtime `executeProven` sends exactly that; patients carry their list row as
   non-enumerable `_row`; `readPatientDetails` follows `labs -> labs-detail` style chains (`_of` meta).
+- **Brain reaches Vertex through ADC** (2026-09-13): org policy limits the project's API keys to the Gemini
+  API and forbids service-account keys, so Vertex express mode answered PERMISSION_DENIED to every brain
+  call and discovery ran without Gemini (`proof.brain:false`). Cloud Run service `connect-agent-brain`
+  (asia-south1, `connect-agent/brain-proxy`, SA `connect-agent-brain@` with roles/aiplatform.user) calls
+  gemini-3.8-flash on `locations/global` with its ADC token; Pages secrets
+  `CONNECT_AGENT_BRAIN_PROXY_URL/SECRET` route brain.js to it (`/brain/model` says `vertex-adc`). Gotcha:
+  a Pages secret change showed up only on the deploy AFTER the next one.
 - **Gold audit** (`connect-agent/phone/gold-audit.mjs`, verification only, never imported by discovery):
   `GHIS.goldAudit()` in the app answers the same proxy paths from the hand-built `/api/ghis` and from the
   adapter (via ghis-shim) for the same patients; report = counts per endpoint and field. Browser test:
