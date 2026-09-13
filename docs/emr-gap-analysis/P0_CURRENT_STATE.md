@@ -551,3 +551,10 @@ Builders reviewed and merged; live (ward.js site64).
 - Command center: every count drills to patients/boards; ICU, OPD queue, staffing, lab TAT, radiology backlog, OT, pharmacy items, finance. SECURITY: twin ?finance=1 leaked billing/claims to any EMR_VIEW role; now BILLING_VIEW server-side.
 - Quality: incident categories (WHO ICPS), signal stage linked to source records, confirm/reject/duplicate (RCA/CAPA only after confirm), mortality/readmission/sepsis wired, LOS, falls/pressure injury rates, antibiotic DOT (needs antibiotics list), TAT, bed utilisation, case lists. 6231 passing.
 Waiting: radiology viewer + TPA builder. Then P2.
+
+### 2026-09-13 - P1.10 radiology viewer/templates + P1.5 payer adapters merged; P2 started
+
+Radiology: imagingViewer urlTemplate (https only, no names in URL) with "Open images" when a study UID/accession is known; ImagingStudy matched to orders; structured report templates. TPA: per-payer registry (org config payers), generic FHIR R4 Claim adapter (mocked fetch only - not verified against any payer), credentials via sealed credentialRef (existing CONNECT_MASTER_KEY, no new binding), estimate, acknowledge, settle, balance-to-patient as explicit action, rule warnings. Live ward.js site65. 6278 passing.
+P1 status: all P1 items now have server + screen; remaining limits are listed per builder (no live payer/PACS verification, notification channels unconfigured).
+P2 builders running: patient/family portal (P2.9), surveillance + copilot tasks (P2.3/2.2), security monitoring + restore evidence (P2.17/2.15).
+Parked for owner: payer credentials + endpoint per payer, PACS viewer URL, notification channel, document bucket name, payment provider credentials.
