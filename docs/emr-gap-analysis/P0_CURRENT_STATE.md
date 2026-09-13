@@ -336,3 +336,12 @@ flag; caught by an existing test; both routes now use criticalCheck. flag-critic
 
 **Numbers:** 6015 passing, 0 failing. 25 routes waiting for a screen.
 **Next:** extend, emergency-chart, advisory-check; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10.
+
+
+## 2026-09-14 (cont.) — emergency access usable (backlog 25 -> 24)
+
+**Bug:** break-glass granted access but no screen opened the chart. Active grants now open it read-only;
+expired ones cannot. Live and verified (ward.js site46).
+
+**Numbers:** 6017 passing, 0 failing. 24 routes waiting for a screen.
+**Next:** extend, advisory-check; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10 invariants.
