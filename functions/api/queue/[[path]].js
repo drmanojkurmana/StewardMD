@@ -99,6 +99,8 @@ import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wa
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
 import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
+import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
+import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
@@ -545,6 +547,18 @@ export async function onRequest(context) {
       return json({ ok: true, token: await mintStaffSession(env, ch.orgId, ch.identity, Date.now()), orgId: ch.orgId, identity: ch.identity, via: r.via, recoveryLeft: r.recoveryLeft }, 200, request);
     }
 
+    /* A PATIENT DOCUMENT OPENED THROUGH ITS SIGNED LINK. Before authentication on purpose: a new tab or a
+     * print dialog carries no staff header. The five-minute token, minted for a named person who could
+     * read the document, is the authorisation, and serveDocumentLink audits every use under that person. */
+    if (method === "GET" && seg === "ward" && sub === "document-file") {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
+      const r = await serveDocumentLink(env, url.searchParams.get("t") || "", { store: documentStoreFromEnv(env), recordDepsFor: (tenantId) => wsqRecordDeps(env, tenantId) });
+      if (!r.ok) return json(r, r.status || 502, request);
+      return new Response(r.bytes, { status: 200, headers: Object.assign({
+        "Content-Type": r.contentType, "Content-Disposition": `inline; filename="${r.filename}"`,
+        "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff",
+      }, corsHeaders(request)) });
+    }
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
@@ -732,6 +746,10 @@ export async function onRequest(context) {
         "device-associate": CAPS.EMR_VITALS, "device-dissociate": CAPS.EMR_VITALS,
         // TASK 6.14: a wristband/QR/NFC tag is the same bedside act as a device association -
         // assign/verify/replace/deactivate/lost/log all EMR_VITALS, same as device-* above.
+        // Patient documents (documents.js). Reading and opening is chart access; uploading and withdrawing
+        // is the clinician's act; deleting stored bytes after retention is an administrator's.
+        documents: CAPS.EMR_VIEW, "document-versions": CAPS.EMR_VIEW, "document-link": CAPS.EMR_VIEW,
+        "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
         "tag-assign": CAPS.EMR_VITALS, "tag-verify": CAPS.EMR_VITALS, "tag-replace": CAPS.EMR_VITALS,
         "tag-deactivate": CAPS.EMR_VITALS, "tag-lost": CAPS.EMR_VITALS, "tag-log": CAPS.EMR_VITALS,
         "device-ingest": CAPS.EMR_VITALS, "device-status": CAPS.EMR_VIEW, "device-list": CAPS.EMR_VIEW,
@@ -1324,6 +1342,32 @@ export async function onRequest(context) {
       }
       if (sub === "device-list" && method === "GET") {
         const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "documents" && method === "GET") {
+        const r = await listDocuments(request, env, { ...deps, store: documentStoreFromEnv(env), patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "document-versions" && method === "GET") {
+        const r = await documentVersions(request, env, { ...deps, documentId: url.searchParams.get("documentId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "document-link" && method === "POST") {
+        const r = await documentLink(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId, version: body.version });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "document-upload" && method === "POST") {
+        const r = await uploadDocument(request, env, { ...deps, store: documentStoreFromEnv(env), patientId: body.patientId, encounterId: body.encounterId,
+          docType: body.docType, title: body.title, contentType: body.contentType, dataBase64: body.dataBase64,
+          documentId: body.documentId, expectedVersion: body.expectedVersion, retentionYears: wsqCfg && wsqCfg.documentRetentionYears, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "document-withdraw" && method === "POST") {
+        const r = await withdrawDocument(request, env, { ...deps, documentId: body.documentId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "document-purge" && method === "POST") {
+        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "tag-assign" && method === "POST") {

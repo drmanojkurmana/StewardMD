@@ -1365,6 +1365,7 @@
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
+        '<button class="w-btn ghost" data-w-act="documents" title="Consent forms, referral letters, outside reports">' + ms("description") + "Documents</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
         // patient does before anything else, and it is where the note box now lives.
@@ -4508,6 +4509,60 @@
       '<button class="w-btn" data-w-act="mpimergeconfirm">' + ms("fact_check") + "Join these records</button> " +
       '<button class="w-btn ghost" data-w-act="mpimergecancel">Cancel</button></div>';
   }
+  /* PATIENT DOCUMENTS (documents.js). A consent form, a referral letter, an outside report.
+   *
+   * NOT LOADED, FAILED, STORAGE OFF AND NONE are four different sentences: a consent that failed to load
+   * must never read as "no consent on file". A withdrawn document stays in the list, struck through, with
+   * the reason - that it was once filed against this patient is itself part of the record. Opening a file
+   * asks the server for a five-minute link for this person only; there is no public address to copy. */
+  var DOC_TYPE_LABEL = { "consent": "Consent", "referral-letter": "Referral letter", "outside-report": "Outside report", "outside-imaging": "Outside imaging", "id-proof": "ID proof", "insurance": "Insurance", "prescription-outside": "Outside prescription", "other": "Other" };
+  function documentsView(state) {
+    var d = state.docs;
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Documents</h3></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading this patient's documents...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load this patient's documents. Do not read this as none on file.</p></div>";
+    var rows = (d.documents || []).map(function (x) {
+      var withdrawn = x.status !== "current";
+      return '<li class="w-mini-row"><div>' +
+        '<span class="w-st ' + (withdrawn ? "missed" : "done") + '">' + esc(DOC_TYPE_LABEL[x.docType] || x.docType) + "</span> " +
+        (withdrawn ? "<s>" + esc(x.title) + "</s>" : "<b>" + esc(x.title) + "</b>") + " &middot; version " + esc(x.version) +
+        '<div class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + " &middot; " + esc(Math.max(1, Math.round((x.sizeBytes || 0) / 1024))) + " KB</div>" +
+        (x.status === "entered-in-error" ? '<div class="w-dt-times">Withdrawn: ' + esc(x.withdrawnReason || "") + " (" + esc(x.withdrawnBy || "") + ")</div>" : "") +
+        (x.status === "purged" ? '<div class="w-dt-times">File deleted after its retention period, ' + when(x.purgedAt) + "</div>" : "") +
+        '</div><div class="w-mini-row-act">' +
+        (x.status !== "purged" && d.storageConfigured ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") +
+        (x.version > 1 ? '<button class="w-btn ghost sm" data-w-act="docversions:' + esc(x.id) + '">' + ms("history") + "Versions</button>" : "") +
+        (!withdrawn ? '<button class="w-btn ghost sm" data-w-act="docnewversion:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("upload") + "New version</button>" +
+          '<button class="w-btn ghost sm" data-w-act="docwithdraw:' + esc(x.id) + '">' + ms("block") + "Withdraw</button>" : "") +
+        /* Offered only once the hospital's retention period is over; the server refuses it before then,
+         * and to anyone but an administrator, whatever this screen shows. */
+        (x.status !== "purged" && d.storageConfigured && x.retainUntil && new Date(x.retainUntil).getTime() <= Date.now()
+          ? '<button class="w-btn ghost sm" data-w-act="docpurge:' + esc(x.id) + '">' + ms("delete") + "Delete file (retention ended)</button>" : "") +
+        "</div>" +
+        (state.docVersions && state.docVersions.id === x.id ? docVersionsBlock(state.docVersions) : "") +
+        "</li>";
+    }).join("");
+    var target = state.docNewVersion;
+    var form = !d.storageConfigured
+      ? '<p class="w-hint warn">' + ms("warning") + "Document storage is not set up for this hospital yet, so documents cannot be uploaded or opened. Ask the hospital administrator.</p>"
+      : '<div class="w-sub"><h4>' + (target ? "Upload a new version" : "Add a document") + "</h4>" +
+        (target ? '<p class="w-hint">' + ms("info") + "The earlier version is kept and can still be opened.</p>" :
+          '<label class="w-f"><span>Type</span><select id="wDocType">' + Object.keys(DOC_TYPE_LABEL).map(function (k) { return '<option value="' + k + '">' + DOC_TYPE_LABEL[k] + "</option>"; }).join("") + "</select></label>") +
+        '<label class="w-f"><span>Title</span><input id="wDocTitle" maxlength="160" placeholder="For example: Consent for central line"></label>' +
+        '<label class="w-f"><span>File (PDF or photo, up to 10 MB)</span><input id="wDocFile" type="file" accept="application/pdf,image/jpeg,image/png,image/webp"></label>' +
+        '<button class="w-btn" data-w-act="docupload">' + ms("upload") + (target ? "Upload new version" : "Upload") + "</button>" +
+        (target ? ' <button class="w-btn ghost" data-w-act="docnewversioncancel">Cancel</button>' : "") + "</div>";
+    return '<div class="w-card">' + head + form +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No documents on file for this patient.</p>') + "</div>";
+  }
+  function docVersionsBlock(v) {
+    if (v.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the earlier versions.</p>";
+    if (!v.versions) return '<p class="w-hint">' + ms("hourglass_empty") + "Loading versions...</p>";
+    return '<ul class="w-mini">' + v.versions.map(function (x) {
+      return '<li class="w-mini-row"><div>Version ' + esc(x.version) + " &middot; " + esc(x.title) + ' <span class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + "</span></div>" +
+        '<div class="w-mini-row-act">' + (x.status !== "purged" ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") + "</div></li>";
+    }).reverse().join("") + "</ul>";
+  }
   function mpiView(state) {
     var d = state.mpi;
     var s = state.sel;
@@ -4902,6 +4957,7 @@
         : state.view === "patientsurgery" ? patientSurgeryView(state)
         : state.view === "tags" ? tagsView(state)
         : state.view === "mpi" ? mpiView(state)
+        : state.view === "documents" ? documentsView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
@@ -7212,6 +7268,71 @@
     loadChart(); loadNews2(); loadPeople();
   }
 
+  function documentsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "documents"; st.docs = null; st.docVersions = null; st.docNewVersion = null; paint(); loadDocuments();
+  }
+  function loadDocuments() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/documents?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.docs = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+      .catch(function () { st.docs = { failed: true }; paint(); });
+  }
+  function documentUpload() {
+    var s = st.sel, input = document.getElementById("wDocFile");
+    var file = input && input.files && input.files[0];
+    var title = val("wDocTitle"), target = st.docNewVersion;
+    if (!file) { st.err = "Choose a file first."; paint(); return; }
+    if (!title) { st.err = "Give the document a title."; paint(); return; }
+    if (file.size > 10 * 1024 * 1024) { st.err = "Files are limited to 10 MB."; paint(); return; }
+    var docType = target ? "" : val("wDocType");
+    var reader = new FileReader();
+    reader.onload = function () {
+      var body = { orgId: st.orgId, title: title, contentType: file.type, dataBase64: String(reader.result || "") };
+      if (target) { body.documentId = target.id; body.expectedVersion = target.version; body.docType = (st.docs.documents.filter(function (x) { return x.id === target.id; })[0] || {}).docType; }
+      else { body.patientId = s.patientId; body.encounterId = s.encounterId || undefined; body.docType = docType; }
+      st.busy = true; paint();
+      apiPost("/ward/document-upload", body)
+        .then(function (r) { if (settle(r, r && r.ok ? (target ? "New version uploaded." : "Document uploaded.") : null)) { st.docNewVersion = null; st.docVersions = null; loadDocuments(); } else paint(); })
+        .catch(function () { st.busy = false; st.err = "Could not upload. Nothing was saved."; paint(); });
+    };
+    reader.onerror = function () { st.err = "Could not read that file."; paint(); };
+    reader.readAsDataURL(file);
+  }
+  function documentOpen(arg) {
+    var p = String(arg || "").split("~");
+    // Opened now, filled in when the link arrives: a window opened after a network wait is blocked as a popup.
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    apiPost("/ward/document-link", { orgId: st.orgId, documentId: p[0], version: Number(p[1]) })
+      .then(function (r) {
+        if (r && r.ok && r.url) { if (win) win.location.href = API.replace(/\/api\/queue$/, "") + r.url; else G.location.href = r.url; return; }
+        if (win) try { win.close(); } catch (e) {}
+        settle(r, null); paint();
+      })
+      .catch(function () { if (win) try { win.close(); } catch (e) {} st.err = "Could not open the document."; paint(); });
+  }
+  function documentVersionsLoad(id) {
+    st.docVersions = { id: id }; paint();
+    apiGet("/ward/document-versions?orgId=" + encodeURIComponent(st.orgId) + "&documentId=" + encodeURIComponent(id))
+      .then(function (r) { st.docVersions = r && r.ok ? { id: id, versions: r.versions } : { id: id, failed: true }; paint(); })
+      .catch(function () { st.docVersions = { id: id, failed: true }; paint(); });
+  }
+  function documentPurge(id) {
+    if (!confirm("Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
+      .then(function (r) { if (settle(r, r && r.ok ? "File deleted. The record of the document is kept." : null)) loadDocuments(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not delete the file."; paint(); });
+  }
+  function documentWithdraw(id) {
+    var reason = "";
+    try { reason = G.prompt("Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.") || ""; } catch (e) {}
+    if (!reason.trim()) return;
+    st.busy = true; paint();
+    apiPost("/ward/document-withdraw", { orgId: st.orgId, documentId: id, reason: reason.trim() })
+      .then(function (r) { if (settle(r, r && r.ok ? "Document withdrawn. The file is kept." : null)) loadDocuments(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw the document."; paint(); });
+  }
   function peopleOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "people"; st.people = null; paint(); loadPeople();
@@ -8047,6 +8168,7 @@
       if (st.view === "patientsurgery") { st.patientCases = null; st.view = "chart"; paint(); return; }
       if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "documents") { st.docs = null; st.docVersions = null; st.docNewVersion = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
       if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
@@ -8358,6 +8480,14 @@
     if (cmd === "inboxopen") { inboxOpenPatient(arg); return; }
     if (cmd === "workspace") { workspaceOpen(); return; }
     if (cmd === "people") { peopleOpen(); return; }
+    if (cmd === "documents") { documentsOpen(); return; }
+    if (cmd === "docupload") { documentUpload(); return; }
+    if (cmd === "docopen") { documentOpen(arg); return; }
+    if (cmd === "docversions") { documentVersionsLoad(arg); return; }
+    if (cmd === "docnewversion") { var nv = String(arg || "").split("~"); st.docNewVersion = { id: nv[0], version: Number(nv[1]) }; paint(); return; }
+    if (cmd === "docnewversioncancel") { st.docNewVersion = null; paint(); return; }
+    if (cmd === "docwithdraw") { documentWithdraw(arg); return; }
+    if (cmd === "docpurge") { documentPurge(arg); return; }
     if (cmd === "personadd") { personAdd(); return; }
     if (cmd === "personremove") { personRemove(arg); return; }
     if (cmd === "deathrecord") { deathRecord(); return; }

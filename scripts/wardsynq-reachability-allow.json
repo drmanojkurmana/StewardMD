@@ -1,6 +1,7 @@
 {
   "_": "byDesign: machine-to-machine routes no screen should ever call. Permanent, each needs a reason. knownGaps: routes that need a screen and do not have one yet. A worklist - it may shrink, never grow.",
   "byDesign": {
+    "document-file": "Opened only through the five-minute signed link that document-link returns to the Documents screen; no screen may build this address itself (test/ward-documents-view.test.mjs checks that).",
     "adt": "HL7 patient admit/discharge/transfer messages arrive from another hospital system, not from a screen.",
     "oru": "HL7 result messages arrive from the lab analyser, not from a screen.",
     "cda": "Clinical document exchange with an outside system.",

@@ -360,6 +360,10 @@ const RESOURCE_TYPES = Object.freeze([
    * Granted by EMR_VITALS (VITALS_TYPES in actor.js), the same capability DeviceAssociation already
    * uses - scanning a wristband onto a patient is the same kind of bedside act. */
   "PatientTag",
+  /* A patient document's METADATA (documents.js). The bytes are never in the record: they are encrypted in
+   * an object store and this row points at them. Unrestricted EMR_TREAT write and EMR_VIEW read, like a
+   * ClinicalNote; a nurse's enumerated write scope does not include it. */
+  "DocumentReference",
   /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
    * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
    * declare an X-Source-System header naming ANY registered partner and every downstream

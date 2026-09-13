@@ -6539,3 +6539,139 @@ test("timeline: pharmacy cannot see it — the same emr.view gate the flowsheet 
   const r = await as(PHARM, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
   assert.equal(r.__status, 403);
 });
+
+/* ---- patient documents (documents.js + object-store.js) ------------------------------------------------
+ *
+ * The real S3 adapter runs against a stand-in S3 endpoint (a fetch stub keyed on its host), so the signed
+ * request path is exercised end to end, not a memory shortcut.
+ */
+const DOC_S3 = { DOC_S3_ENDPOINT: "https://s3.docs.test", DOC_S3_BUCKET: "wsq-docs", DOC_S3_ACCESS_KEY_ID: "AK", DOC_S3_SECRET_ACCESS_KEY: "SK" };
+async function withDocStore(fn) {
+  const objects = new Map(), calls = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, init) => {
+    const u = String(url);
+    if (!u.startsWith(DOC_S3.DOC_S3_ENDPOINT)) return realFetch(url, init);
+    const key = decodeURIComponent(new URL(u).pathname.replace(/^\/wsq-docs\//, ""));
+    calls.push({ method: init.method, key, signed: /^AWS4-HMAC-SHA256 /.test(init.headers.authorization || "") });
+    if (init.method === "PUT") { objects.set(key, new Uint8Array(init.body)); return new Response("", { status: 200 }); }
+    if (init.method === "GET") return objects.has(key) ? new Response(objects.get(key), { status: 200 }) : new Response("", { status: 404 });
+    if (init.method === "DELETE") { objects.delete(key); return new Response(null, { status: 204 }); }
+    return new Response("", { status: 405 });
+  };
+  Object.assign(ENV, DOC_S3);
+  try { return await fn({ objects, calls }); }
+  finally { globalThis.fetch = realFetch; for (const k of Object.keys(DOC_S3)) delete ENV[k]; }
+}
+const PDF = Buffer.from("%PDF-1.4\n% a consent form\n%%EOF\n");
+
+test("DOCUMENTS: upload encrypts before it leaves, versions never overwrite, and the signed link opens exactly what was uploaded", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects, calls }) => {
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, docType: "consent", title: "Consent for central line", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    assert.equal(up.document.version, 1);
+    assert.ok(!("objectKey" in up.document), "the storage key is never handed to a client");
+    assert.equal(objects.size, 1);
+    assert.ok(calls.length && calls.every((c) => c.signed), "every storage request is signed");
+    const stored = [...objects.values()][0];
+    assert.ok(!Buffer.from(stored).includes(Buffer.from("consent form")), "the store holds ciphertext, never the document");
+
+    const v2 = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, documentId: up.document.id, expectedVersion: 1, docType: "consent", title: "Consent for central line (signed copy)", contentType: "application/pdf", dataBase64: Buffer.from("%PDF-1.4\n% signed\n%%EOF\n").toString("base64") });
+    assert.equal(v2.__status, 200, JSON.stringify(v2));
+    assert.equal(v2.document.version, 2);
+    assert.equal(objects.size, 2, "version 1's file is kept");
+    const stale = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, documentId: up.document.id, expectedVersion: 1, docType: "consent", title: "late", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(stale.__status, 409, "a version built on an old copy is refused");
+
+    const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(list.__status, 200, JSON.stringify(list));
+    assert.equal(list.storageConfigured, true);
+    assert.equal(list.documents.length, 1);
+    assert.equal(list.documents[0].version, 2);
+    assert.equal((await as(NURSE, `/ward/document-versions?orgId=${ORG}&documentId=${up.document.id}`)).versions.length, 2);
+
+    const link = await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id, version: 1 });
+    assert.equal(link.__status, 200, JSON.stringify(link));
+    assert.match(link.url, /^\/api\/queue\/ward\/document-file\?t=/);
+    const file = await onRequest({ request: new Request("https://x" + link.url), env: ENV });
+    assert.equal(file.status, 200);
+    assert.equal(file.headers.get("content-type"), "application/pdf");
+    assert.equal(file.headers.get("cache-control"), "private, no-store");
+    assert.deepEqual(Buffer.from(await file.arrayBuffer()), PDF, "version 1 opens as version 1, byte for byte");
+
+    const tampered = await onRequest({ request: new Request("https://x" + link.url.slice(0, -4) + "AAAA"), env: ENV });
+    assert.equal(tampered.status, 401);
+  });
+});
+
+test("DOCUMENTS: who may do what - nurses read, only a doctor uploads or withdraws, pharmacy cannot list or link, purge is an admin act", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects }) => {
+    const body = { orgId: ORG, patientId: adm.patientId, docType: "outside-report", title: "Echo from City Hospital", contentType: "application/pdf", dataBase64: PDF.toString("base64") };
+    assert.equal((await as(NURSE, "/ward/document-upload", "POST", body)).__status, 403);
+    assert.equal((await as(PHARM, "/ward/document-upload", "POST", body)).__status, 403);
+    assert.equal(objects.size, 0, "a refused upload stores nothing");
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", body);
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    assert.equal((await as(PHARM, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 403);
+    assert.equal((await as(PHARM, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 403, "no link for someone who cannot read it");
+
+    assert.equal((await as(NURSE, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "Wrong patient" })).__status, 403);
+    assert.equal((await as(DOCTOR, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "no" })).__status, 422, "a withdrawal needs a reason");
+    const w = await as(DOCTOR, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "Scanned under the wrong patient" });
+    assert.equal(w.__status, 200);
+    assert.equal(w.document.status, "entered-in-error");
+    assert.equal(objects.size, 1, "withdrawing keeps the file");
+
+    assert.equal((await as(DOCTOR, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id })).__status, 403, "deleting stored bytes is an administrator's act");
+    const bad = await as(DOCTOR, "/ward/document-upload", "POST", { ...body, contentType: "text/html", dataBase64: Buffer.from("<script>").toString("base64") });
+    assert.equal(bad.__status, 422, "only PDF and images are accepted, so nothing served back can run script");
+  });
+});
+
+test("DOCUMENTS: an administrator deletes the stored files only after retention; the record of the document stays", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects }) => {
+    const body = { orgId: ORG, patientId: adm.patientId, docType: "id-proof", title: "Aadhaar copy", contentType: "image/png", dataBase64: Buffer.from([137, 80, 78, 71]).toString("base64") };
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", body);
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    await as(DOCTOR, "/ward/document-upload", "POST", { ...body, documentId: up.document.id, expectedVersion: 1, title: "Aadhaar copy, clearer" });
+    assert.equal(objects.size, 2);
+
+    const early = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    assert.equal(early.__status, 409, JSON.stringify(early));
+    assert.equal(early.error, "retention_not_expired");
+    assert.equal(objects.size, 2, "nothing is deleted before the retention date");
+
+    const realNow = Date.now;
+    Date.now = () => realNow() + 4 * 365 * 24 * 3600 * 1000;
+    let purged;
+    try { purged = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id }); }
+    finally { Date.now = realNow; }
+    assert.equal(purged.__status, 200, JSON.stringify(purged));
+    assert.equal(purged.objectsDeleted, 2, "every version's file goes");
+    assert.equal(objects.size, 0);
+    const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(list.documents.length, 1, "the record that a document existed stays");
+    assert.equal(list.documents[0].status, "purged");
+    assert.equal((await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 410);
+  });
+});
+
+test("DOCUMENTS: with no storage configured, an upload is refused and says so, and the list says storage is off rather than looking empty", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, docType: "consent", title: "x", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+  assert.equal(r.__status, 503);
+  assert.equal(r.error, "document_storage_not_configured");
+  assert.match(r.message, /Nothing was saved/);
+  const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.__status, 200);
+  assert.equal(list.storageConfigured, false);
+});
