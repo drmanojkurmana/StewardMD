@@ -50,6 +50,16 @@ async function openService(request, env, ctx, need) {
   }
 }
 
+const DRILL_CAP = 50;
+/** PURE. The ids behind a count: at most DRILL_CAP rows, with the true total and a stated `truncated`. */
+function drillList(rows) {
+  const all = (rows || []).filter(Boolean);
+  return {
+    total: all.length, truncated: all.length > DRILL_CAP,
+    items: all.slice(0, DRILL_CAP).map((r) => ({ patientId: r.patientId || null, encounterId: r.encounterId || null, ward: r.ward || null, bed: r.bed || null, at: r.arrivedAt || r.admittedAt || null })),
+  };
+}
+
 /** PURE. Bed states hospital-wide, from real master data - a plain histogram, nothing inferred. */
 function bedStateCounts(beds) {
   const counts = { available: 0, reserved: 0, occupied: 0, blocked: 0, cleaning: 0, maintenance: 0 };
@@ -140,8 +150,16 @@ async function patientFlow(request, env, ctx) {
     staysWithOpenItems: staysWithOpenItems.slice(0, 50),
     recentTransfers: recentTransfers.slice(0, 50),
     bottlenecks,
+    /* P1.13 drill-down: the patients BEHIND each headline count, capped and saying so. */
+    drill: {
+      edArrivals: drillList((ed && ed.patients) || []),
+      edUntriaged: drillList(((ed && ed.patients) || []).filter((p) => !p.triagedAt)),
+      occupied: drillList(wards.flatMap((w) => (w.occupied || []).map((o) => ({ ...o, ward: w.ward })))),
+      unplaced: drillList(wards.flatMap((w) => (w.unplaced || []).map((o) => ({ ...o, ward: w.ward })))),
+      dischargeCandidates: drillList(dischargeCandidates),
+    },
   };
   return { ...base, ok: true, flow, ...( (ed && !ed.ok) || (beds && !beds.ok) || (waiting && !waiting.ok) ? { partial: true } : {}) };
 }
 
-export { patientFlow, bedStateCounts };
+export { patientFlow, bedStateCounts, drillList, DRILL_CAP };

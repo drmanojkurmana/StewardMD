@@ -45,6 +45,13 @@ import { resourceSchedule } from "./resource-booking.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { drillList, DRILL_CAP } from "./patient-flow.js";
+import { OPEN } from "./migrate-inpatient.js";
+import { isVasoactive } from "./icu-care.js";
+import { isPendingImaging } from "./dicom.js";
+import { listSessions, listTickets } from "../_queue_engine.js";
+import * as ROSTER_STORE from "../_roster_store.js";
+import { span as shiftSpan, addDays } from "../_roster.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -73,13 +80,94 @@ function freshnessOf(ageMs, thresholds) {
  *
  *  otUtilisation MOVED OUT of this list on 2026-09-10: resource-booking.js's ResourceBooking rows
  *  carry a real `kind` ("theatre" among them) and a real committed duration, which is enough to
- *  compute utilisation honestly - see the otUtilisation section below. bloodBank and radiologyQueue
+ *  compute utilisation honestly - see the otUtilisation section below. radiologyQueue moved out on
+ *  2026-09-13 (P1.13): the backlog is imaging ServiceRequests with no DiagnosticReport. bloodBank
  *  remain here because no such data exists anywhere in this codebase to compute from; ResourceBooking
  *  covers rooms/theatres/equipment BOOKINGS, never a blood-product count or an imaging backlog. */
 const NOT_BUILT = Object.freeze({
   bloodBank: "no blood-product inventory module exists in this codebase - migrate-transfusion.js records transfusions given, not units held.",
-  radiologyQueue: "no hospital-wide radiology/PACS backlog aggregator exists - radiology-protocol.js works per-study, and building a second queue model here would duplicate whatever the real one turns out to need.",
 });
+
+/* ---- P1.13 command-center helpers. PURE, exported for tests. -------------------------------------- */
+
+const LIST_CAP = 1000;
+const HOUR = 3600000;
+
+/** PURE. Nearest-rank percentile of a numeric list; null for an empty list, never 0. */
+function percentile(values, p) {
+  const v = (values || []).filter((x) => Number.isFinite(x)).sort((a, b) => a - b);
+  if (!v.length) return null;
+  return v[Math.min(v.length - 1, Math.max(0, Math.ceil((p / 100) * v.length) - 1))];
+}
+
+/** PURE. Request-to-report turnaround over lab reports released in [fromMs, toMs]. Only real timestamps:
+ *  a request with no meta.recordedAt, or a report timed before its request, is EXCLUDED and counted by
+ *  reason, never guessed. */
+function labTurnaround(requests, reports, fromMs, toMs) {
+  const byId = new Map((requests || []).filter((r) => r && r.id).map((r) => [r.id, r]));
+  const excluded = { requestNotReadable: 0, requestTimeMissing: 0, reportTimeMissing: 0, negative: 0 };
+  const rows = [];
+  for (const d of reports || []) {
+    if (!d || !d.serviceRequestId) continue;
+    const sr = byId.get(d.serviceRequestId);
+    if (sr && sr.category === "imaging") continue;
+    const end = Date.parse(d.reportedAt || "");
+    if (!Number.isFinite(end)) { excluded.reportTimeMissing += 1; continue; }
+    if (end < fromMs || end > toMs) continue;
+    if (!sr) { excluded.requestNotReadable += 1; continue; }
+    const start = Date.parse((sr.meta && sr.meta.recordedAt) || "");
+    if (!Number.isFinite(start)) { excluded.requestTimeMissing += 1; continue; }
+    if (end < start) { excluded.negative += 1; continue; }
+    rows.push({ patientId: sr.patientId || null, encounterId: sr.encounterId || null, serviceRequestId: sr.id, label: sr.display || sr.code || null, minutes: Math.round((end - start) / 60000) });
+  }
+  const mins = rows.map((r) => r.minutes);
+  rows.sort((a, b) => b.minutes - a.minutes);
+  return {
+    sampleSize: rows.length, medianMinutes: percentile(mins, 50), p90Minutes: percentile(mins, 90),
+    excluded, excludedTotal: Object.values(excluded).reduce((a, b) => a + b, 0),
+    drill: { slowest: { total: rows.length, truncated: rows.length > DRILL_CAP, items: rows.slice(0, DRILL_CAP) } },
+  };
+}
+
+/** PURE. Imaging orders still on the worklist (dicom.js isPendingImaging) with no report against them;
+ *  the oldest is judged from real order times only, and orders with no time are counted. */
+function radiologyBacklog(requests, reports, nowMs) {
+  const reported = new Set((reports || []).filter((r) => r && r.serviceRequestId).map((r) => r.serviceRequestId));
+  const waiting = (requests || []).filter(isPendingImaging).filter((o) => !reported.has(o.id));
+  let timeMissing = 0;
+  const rows = waiting.map((o) => {
+    const t = Date.parse((o.meta && o.meta.recordedAt) || "");
+    if (!Number.isFinite(t)) timeMissing += 1;
+    return { patientId: o.patientId || null, encounterId: o.encounterId || null, serviceRequestId: o.id, label: o.display || o.code || null,
+      at: Number.isFinite(t) ? new Date(t).toISOString() : null, waitingHours: Number.isFinite(t) ? Math.round(((nowMs - t) / HOUR) * 10) / 10 : null };
+  }).sort((a, b) => ((a.at ? 0 : 1) - (b.at ? 0 : 1)) || String(a.at).localeCompare(String(b.at)));
+  const oldest = rows.find((r) => r.at) || null;
+  return {
+    waiting: rows.length, oldestWaitingSince: oldest ? oldest.at : null, oldestWaitingHours: oldest ? oldest.waitingHours : null,
+    orderTimeMissing: timeMissing,
+    drill: { waiting: { total: rows.length, truncated: rows.length > DRILL_CAP, items: rows.slice(0, DRILL_CAP) } },
+  };
+}
+
+/** PURE. Staffing NOW: who the roster has on duty, against the minimum of every shift running at this
+ *  instant. Yesterday's coverage rows are passed in so a night shift crossing midnight is not missed. */
+function staffingNow(nowMs, utcOffsetMinutes, shifts, coverageRows, onDuty) {
+  const local = Math.floor((nowMs + (Number(utcOffsetMinutes) || 0) * 60000) / 60000);
+  const running = (coverageRows || []).filter((row) => {
+    const def = shifts[row.shiftId];
+    if (!def) return false;
+    const [a, b] = shiftSpan(row.date, def);
+    return a <= local && local < b;
+  });
+  const required = running.reduce((n, r) => n + Object.values((shifts[r.shiftId] || {}).minimum || {}).reduce((x, y) => x + (Number(y) || 0), 0), 0);
+  const gaps = running.flatMap((r) => (r.gaps || []).map((g) => ({ shift: r.shift, unit: r.unit || null, role: g.role, need: g.need, have: g.have, short: g.short })));
+  const duty = onDuty || [];
+  return {
+    shiftsRunning: running.length, onDutyNow: duty.length, requiredNow: running.length ? required : null, gaps,
+    drill: { onDuty: { total: duty.length, truncated: duty.length > DRILL_CAP, items: duty.slice(0, DRILL_CAP).map((a) => ({ identity: a.identity, shift: a.shift, unit: a.unit || null })) } },
+  };
+}
+
 
 /**
  * Runs one existing aggregator and wraps its answer with freshness/provenance, catching failure
@@ -130,7 +218,14 @@ async function buildTwinSnapshot(request, env, ctx) {
   const [flow, clinicalOps, criticals, emergency, blackouts, pharmacy, him] = await Promise.all([
     section("flow", ["Encounter", "MedicationOrder", "MedicationAdministration", "ServiceRequest", "Condition"], patientFlowReport, request, env, ctx),
     section("clinicalOps", ["Encounter", "CriticalResultLoop", "MedicationAdministration", "ShiftHandover", "MedicationReconciliation", "MedicationOrder", "MedicationVerification"], clinicalOperationsReport, request, env, ctx),
-    section("criticals", ["CriticalResultLoop"], (rq, e, c) => listCriticalLoops(rq, e, { ...c, policy: c.escalationPolicy }), request, env, ctx),
+    section("criticals", ["CriticalResultLoop"], async (rq, e, c) => {
+      const r = await listCriticalLoops(rq, e, { ...c, policy: c.escalationPolicy });
+      if (!r || !r.ok) return r;
+      const open = (r.loops || []).filter((l) => l.state === "open");
+      const items = drillList(open);
+      items.items = items.items.map((it, i) => ({ ...it, loopId: open[i].loopId, label: open[i].display || open[i].code || null }));
+      return { ...r, drill: { open: items } };
+    }, request, env, ctx),
     section("emergency", ["EmergencyActivation"], emergencyStatus, request, env, ctx),
     section("blackouts", ["Blackout"], listBlackouts, request, env, ctx),
     section("pharmacy", ["Movement", "MedicationDispense", "MedicationOrder", "MedicationVerification"], pharmacyReport, request, env, ctx),
@@ -150,7 +245,8 @@ async function buildTwinSnapshot(request, env, ctx) {
     });
     const rows = await svc.list("SpecimenCollection", 1000);
     const outstanding = (rows || []).filter(Boolean).filter(isOutstanding);
-    return { ok: true, generatedAt: new Date().toISOString(), outstanding: outstanding.length, checked: (rows || []).length };
+    return { ok: true, generatedAt: new Date().toISOString(), outstanding: outstanding.length, checked: (rows || []).length,
+      drill: { outstanding: drillList(outstanding.map((x) => ({ patientId: x.patientId, encounterId: x.encounterId }))) } };
   }, request, env, ctx);
 
   /* OT UTILISATION, real, from resource-booking.js's own ResourceBooking rows - reused, never
@@ -182,7 +278,82 @@ async function buildTwinSnapshot(request, env, ctx) {
     };
   }, request, env, ctx);
 
-  const sections = { flow, clinicalOps, criticals, emergency, blackouts, pharmacy, him, lis, otUtilisation };
+  const openSvc = async (rq, e, c) => {
+    const resolved = await resolveClinicalActor(rq, e, c.migration.tenantId, "record:read", c.actorDeps);
+    return new RecordService({ repository: c.recordDeps.repository, pseudonym: c.recordDeps.pseudonym,
+      tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
+  };
+  const nowMs = Date.now();
+
+  /* ICU: occupancy from open ICU encounters. Ventilation = an IcuRecord ventilator entry in the last
+   * 12h; vasopressors = an active MedicationOrder whose drug icu-care.js calls vasoactive. Both are
+   * "recorded" counts: no record means not known, never "not on one". */
+  const icu = await section("icu", ["Encounter", "IcuRecord", "MedicationOrder"], async (rq, e, c) => {
+    const svc = await openSvc(rq, e, c);
+    const encounters = (await svc.list("Encounter", 500)) || [];
+    const open = encounters.filter((x) => x && x.class === "ICU" && x.status === OPEN);
+    const ids = new Set(open.map((x) => x.id));
+    const [icuRecords, orders] = await Promise.all([svc.list("IcuRecord", LIST_CAP), svc.list("MedicationOrder", LIST_CAP)]);
+    const ventIds = new Set((icuRecords || []).filter((r) => r && r.kind === "ventilator" && ids.has(r.encounterId) && nowMs - Date.parse(r.at || "") <= 12 * HOUR).map((r) => r.encounterId));
+    const pressorIds = new Set((orders || []).filter((o) => o && o.status === "active" && ids.has(o.encounterId) && isVasoactive(o.drug || o.display || o.code)).map((o) => o.encounterId));
+    const rowsOf = (set) => open.filter((x) => set.has(x.id)).map((x) => ({ patientId: x.patientId, encounterId: x.id, ward: x.location && x.location.ward, bed: x.location && x.location.bed }));
+    return {
+      ok: true, generatedAt: new Date().toISOString(),
+      occupied: open.length, encounterReadCapped: encounters.length >= 500,
+      ventilatedRecorded: ventIds.size, vasopressorsRecorded: pressorIds.size,
+      recordsCapped: (icuRecords || []).length >= LIST_CAP || (orders || []).length >= LIST_CAP,
+      drill: { occupied: drillList(rowsOf(ids)), ventilated: drillList(rowsOf(ventIds)), vasopressors: drillList(rowsOf(pressorIds)) },
+    };
+  }, request, env, ctx);
+
+  /* OPD queue: today's (UTC date, the same day the OPD board uses) waiting and in-consultation tickets
+   * across every session of this hospital. queue.view is checked by the router and passed in. */
+  const opdQueue = await section("opdQueue", ["q_sessions", "q_tickets"], async (rq, e, c) => {
+    if (!c.canViewQueue) return { ok: false, error: "not_permitted", detail: "reading the OPD queue needs queue.view" };
+    const date = new Date(nowMs).toISOString().slice(0, 10);
+    const sessions = await listSessions(e, c.orgId, date);
+    let waiting = 0, inConsultation = 0;
+    for (const sess of sessions) {
+      for (const t of await listTickets(e, sess.id)) {
+        if (t.status === "waiting" || t.status === "called") waiting += 1;
+        else if (t.status === "in_consultation") inConsultation += 1;
+      }
+    }
+    return { ok: true, generatedAt: new Date().toISOString(), date, sessions: sessions.length, sessionsCapped: sessions.length >= 200, waiting, inConsultation,
+      drillNotAvailable: "OPD tickets are not ward records; open the OPD board to see who is waiting." };
+  }, request, env, ctx);
+
+  const staffing = await section("staffing", ["q_roster_shifts", "q_roster_assign"], async (rq, e, c) => {
+    if (!c.canViewQueue) return { ok: false, error: "not_permitted", detail: "reading the roster needs queue.view" };
+    const offset = (c.wsqCfg && c.wsqCfg.utcOffsetMinutes != null) ? c.wsqCfg.utcOffsetMinutes : 330;
+    const today = new Date(nowMs + offset * 60000).toISOString().slice(0, 10);
+    const [shiftsR, members] = await Promise.all([ROSTER_STORE.listShifts(e, c.orgId), c.listMembers ? c.listMembers(e, c.orgId) : []]);
+    const shifts = {}; for (const sh of (shiftsR && shiftsR.shifts) || []) shifts[sh.id] = sh;
+    if (!Object.keys(shifts).length) return { ok: true, generatedAt: new Date().toISOString(), rosterConfigured: false, onDutyNow: null, requiredNow: null, gaps: [], reason: "no shifts are set up in the roster" };
+    const roleOf = (id) => (((members || []).find((m) => m.identity === id) || {}).role || "");
+    const [cov, duty] = await Promise.all([ROSTER_STORE.coverageFor(e, c.orgId, addDays(today, -1), today, roleOf), ROSTER_STORE.onDuty(e, c.orgId, "", offset)]);
+    if (!cov.ok) return cov;
+    return { ok: true, generatedAt: new Date().toISOString(), rosterConfigured: true, partial: !!(cov.partial || duty.partial), ...staffingNow(nowMs, offset, shifts, cov.coverage, duty.onDuty) };
+  }, request, env, ctx);
+
+  /* Lab TAT and the radiology backlog share one read of requests and reports. */
+  const diagRead = (async () => {
+    const svc = await openSvc(request, env, ctx);
+    const [requests, reports] = await Promise.all([svc.list("ServiceRequest", LIST_CAP), svc.list("DiagnosticReport", LIST_CAP)]);
+    return { requests: requests || [], reports: reports || [] };
+  })();
+  diagRead.catch(() => {});
+  const labTat = await section("labTat", ["ServiceRequest", "DiagnosticReport"], async () => {
+    const d = await diagRead;
+    return { ok: true, generatedAt: new Date().toISOString(), windowDays: 7, capped: d.requests.length >= LIST_CAP || d.reports.length >= LIST_CAP,
+      ...labTurnaround(d.requests, d.reports, nowMs - 7 * 24 * HOUR, nowMs) };
+  }, request, env, ctx);
+  const radiology = await section("radiology", ["ServiceRequest", "DiagnosticReport"], async () => {
+    const d = await diagRead;
+    return { ok: true, generatedAt: new Date().toISOString(), capped: d.requests.length >= LIST_CAP || d.reports.length >= LIST_CAP, ...radiologyBacklog(d.requests, d.reports, nowMs) };
+  }, request, env, ctx);
+
+  const sections = { flow, clinicalOps, criticals, emergency, blackouts, pharmacy, him, lis, otUtilisation, icu, opdQueue, staffing, labTat, radiology };
 
   if (ctx.includeFinance) {
     const [billing, claims] = await Promise.all([
@@ -210,6 +381,7 @@ async function buildTwinSnapshot(request, env, ctx) {
       /* A live count nobody should mistake for a subtler judgement: how many of the sections above
        * actually answered. A reader who sees 6/8 knows two things failed before reading a single
        * number - the same "counted, never judged" property the rest of this codebase holds. */
+      ...(ctx.financeWithheld ? { financeWithheld: ctx.financeWithheld } : {}),
       sectionsOk: Object.values(sections).filter((s) => s.status === "ok").length,
       sectionsTotal: Object.keys(sections).length,
     },
@@ -382,4 +554,4 @@ async function operationalHealthReport(request, env, ctx) {
   };
 }
 
-export { FRESHNESS, NOT_BUILT, freshnessOf, buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport };
+export { FRESHNESS, NOT_BUILT, freshnessOf, percentile, labTurnaround, radiologyBacklog, staffingNow, buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport };

@@ -2531,8 +2531,18 @@ export async function onRequest(context) {
       /* TASK 10.1-10.4: the Hospital Digital Twin. Every number is a call into a file that already
        * owns it - see digital-twin.js's own header for why this route is deliberately thin. */
       if (sub === "twin" && method === "GET") {
+        /* P1.13: finance is BILLING_VIEW, checked HERE on the server - the twin route itself is only
+         * EMR_VIEW, and asking with ?finance=1 must not be a way round the billing capability. The
+         * OPD queue and roster sections need QUEUE_VIEW, the same cap their own routes use. */
+        const wantFinance = url.searchParams.get("finance") === "1";
+        const [finAz, queueAz] = await Promise.all([
+          wantFinance ? ORG.authorizeOrg(env, actor, wOrgId, CAPS.BILLING_VIEW) : Promise.resolve({ ok: false }),
+          ORG.authorizeOrg(env, actor, wOrgId, CAPS.QUEUE_VIEW),
+        ]);
         const r = await buildTwinSnapshot(request, env, { ...deps, ward: url.searchParams.get("ward") || "",
-          escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null, includeFinance: url.searchParams.get("finance") === "1",
+          escalationPolicy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          includeFinance: wantFinance && finAz.ok, financeWithheld: wantFinance && !finAz.ok ? "billing_view_required" : null,
+          canViewQueue: !!queueAz.ok, listMembers: ORG.listMembers,
           resources: (wsqCfg && wsqCfg.resources) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
