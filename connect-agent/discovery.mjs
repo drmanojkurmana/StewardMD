@@ -126,13 +126,20 @@ function SMD_CONNECT_OBSERVER(config) {
   var keep = function (method, url, body, reqCt, xhr, status, respCt, text) {
     try {
       if (!url || !/^https?:$/.test(url.protocol)) return;
-      if (/checksession|keepalive|heartbeat|signalr|analytics|\.(js|css|png|jpe?g|gif|svg|woff2?|ico|map)$/i.test(url.pathname)) return;
+      /* The page's own origin only: live GHIS filled the buffer with Google Analytics beacons and pushed
+       * the ward list's page-load call out before the proof ran (Pixel, 2026-09-13). */
+      if (url.origin !== location.origin) return;
+      if (/checksession|keepalive|heartbeat|signalr|analytics|\/collect$|\.(js|css|png|jpe?g|gif|svg|woff2?|ico|map)$/i.test(url.pathname)) return;
       var b = bodyText(body);
       if (b === undefined) return;
       if (b && CRED_RE.test(b.split('&').map(function (p) { return p.split('=')[0]; }).join(' ') + ' ' + (b.charAt(0) === '{' ? b.slice(0, 2000) : ''))) return;
+      // A poll repeats the same request every few seconds: one entry, moved to the newest position.
+      var m = String(method || 'GET').toUpperCase();
+      var sig = m + ' ' + url.href + ' ' + (b || '');
+      for (var d = replay.list.length - 1; d >= 0; d--) { if (replay.list[d].sig === sig) { replay.list.splice(d, 1); break; } }
       replay.seq += 1;
-      replay.list.push({ seq: replay.seq, method: String(method || 'GET').toUpperCase(), url: url.href, body: b, reqCt: String(reqCt || ''), xhr: !!xhr, status: Number(status || 0), shape: respStructure(respCt, text) });
-      if (replay.list.length > 40) replay.list.splice(0, replay.list.length - 40);
+      replay.list.push({ seq: replay.seq, sig: sig, method: m, url: url.href, body: b, reqCt: String(reqCt || ''), xhr: !!xhr, status: Number(status || 0), shape: respStructure(respCt, text) });
+      if (replay.list.length > 60) replay.list.splice(0, replay.list.length - 60);
     } catch (e) { /* proof is best effort; the page must never notice */ }
   };
 

@@ -47,6 +47,7 @@ xhr('GET', '/Doctor/Home/GetIPWL?NursingStationId=&Type=IPWorkList&__RequestVeri
   rows.forEach(function (r) { var tr = document.createElement('tr'); tr.innerHTML = '<td>' + r.MRNo + '</td><td>' + r.VisitNo + '</td><td>' + r.PatientName + '</td><td>' + r.BedName + '</td>'; tr.onclick = function () { selected = r; }; tb.appendChild(tr); });
   document.title = 'ready';
 });
+setInterval(function () { xhr('GET', '/Doctor/Home/DashboardUnit?type=docopdlist', null, function () {}); }, 100);
 document.getElementById('tc').onclick = function (e) {
   e.preventDefault();
   var tok = document.querySelector('input[name=__RequestVerificationToken]').value;
@@ -80,6 +81,7 @@ function startEmr() {
         if (p.get("__RequestVerificationToken") === "tok-abc") active[sid[1]] = p.get("recordNo");
         res.writeHead(200, { "Content-Type": "text/html" }); return res.end("<html><body><table><tr><th>Chief complaint</th></tr><tr><td><textarea></textarea></td></tr></table></body></html>");
       }
+      if (u.pathname === "/Doctor/Home/DashboardUnit") { res.writeHead(200, { "Content-Type": "text/html" }); return res.end("<table><tr><td>5</td></tr></table>"); }
       if (u.pathname === "/Doctor/Home/GetSignatureBYid") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end('{"Signature":"sig"}'); }
       if (u.pathname === "/Doctor/Home/GetMedicines/") {
         const rec = active[sid[1]] || "";
@@ -153,10 +155,11 @@ async function main() {
     await client.createTab({ url: emr.origin + "/signin" });
     ok(await waitFor("document.title==='ready'"), "ward list filled itself by XHR after sign-in");
     await client.evaluate({ expression: "fetch('/Account/Login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'user=doc&pwd=hunter2'})" });
-    await sleep(300);
+    await sleep(2500); // the poll fires ~25 times meanwhile
     const buf = JSON.parse((await client.evaluate({ expression: "JSON.stringify(window.__SMD_REPLAY__.list)" })).result);
     ok(buf.some((e) => /GetIPWL/.test(e.url) && e.shape.kind === "json" && e.shape.keys.includes("MRNo")), "replay buffer kept the page-load ward list call with its response structure");
     ok(!buf.some((e) => /Login/.test(e.url) || /hunter2/.test(e.body || "")), "a sign-in body is never kept");
+    ok(buf.filter((e) => /DashboardUnit/.test(e.url)).length === 1, "a poll is one entry, not a flood that pushes the page-load call out");
 
     const asked = [];
     const brain = { async pickEndpoint(p) { asked.push(p); const i = p.candidates.length; return { ranked: p.candidates.map((c, k) => ({ index: i - 1 - k, role: "data" })).reverse(), model: "gemini-3.8-flash" }; } };

@@ -179,7 +179,7 @@ function cleanProvenParams(raw) {
     else if (s.unmapped === true) out[k] = { unmapped: true };
     else if (["size", "start", "number"].indexOf(s.page) >= 0) out[k] = { page: s.page };
     else if (TODAY_FORMATS.indexOf(s.today) >= 0) out[k] = { today: s.today };
-    else if (typeof s.constant === "string" && /^[A-Za-z_]{1,32}$/.test(s.constant)) out[k] = { constant: s.constant };
+    else if (typeof s.constant === "string" && /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/.test(s.constant) && !/\d{3,}/.test(s.constant)) out[k] = { constant: s.constant };
     else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && fieldNameOk(s.field)) out[k] = { from: s.from, field: s.field };
     else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && Array.isArray(s.fields) && s.fields.length === 2 && s.fields.every(fieldNameOk) && /^[-_/|]$/.test(s.join)) out[k] = { from: s.from, fields: s.fields.slice(), join: s.join };
     else throw new OnboardError("invalid", "observedViews: endpoint params invalid");
