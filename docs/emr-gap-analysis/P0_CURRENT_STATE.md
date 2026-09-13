@@ -499,3 +499,7 @@ GET /ward/nurse-worklist (MAR schedule overdue/due-next + NEWS2/PEWS per ward pa
 
 approvalPolicy[subjectType] = { approverRoles, expiresHours } (whitelisted): approver role enforced, pending requests expire and must be resubmitted; no policy = unchanged. Amount thresholds NOT added (requester-supplied amount is dodgeable; needs server-held subject values such as a PO total, which purchasing does not store yet). Server-only change, deployed via main. 6128 passing.
 **Next:** P1.2 supply chain gaps (PO totals, partial/over receipt, FEFO, transfers), then amount thresholds on server-held values; P1.9-1.14; P1.5; then P2.
+
+### 2026-09-13 - P1.2 supply chain audit
+
+Already present: PO lines, approvals, partial and over-receipt detection (reported, never silently accepted), batch/expiry on receipt, near-expiry list, wastage, transfers (out+in), reorder list, count reconciliation, append-only ledger. GAP found, not built: FEFO needs per-batch on-hand, but dispensing does not record the batch, so any "take this batch" suggestion would be a guess. Next step for P1.2: record batch on dispense/return, then per-batch balances, then FEFO; PO line unit cost (enables server-held amount thresholds for approvals). Returns to supplier and pack/unit conversion also still to verify.
