@@ -36,6 +36,33 @@
       '<button class="btn" type="button" id="secStart">Set up two-step sign-in</button><div id="secMsg"></div>';
   }
 
+  var SIGNIN_LABEL = {
+    "login:pin_ok": "Signed in with PIN", "login:password_ok": "Signed in with password",
+    "login:pin_failed": "Wrong PIN", "login:password_failed": "Wrong password",
+    "login:pin_lockout": "Locked after too many wrong PINs", "login:password_lockout": "Locked after too many wrong passwords",
+    "login:pin_locked": "Sign-in tried while locked", "login:password_locked": "Sign-in tried while locked",
+    "login:pin_refused": "Sign-in refused", "login:password_refused": "Sign-in refused",
+    "login:signed_out_everywhere": "Signed out everywhere",
+    "mfa:ok": "Phone code accepted", "mfa:failed": "Wrong phone code", "mfa:lockout": "Locked after too many wrong phone codes",
+    "mfa:backup_code_used": "Backup code used", "mfa:enabled": "Two-step sign-in turned on", "mfa:disabled": "Two-step sign-in turned off",
+    "mfa:enrol_started": "Two-step set-up started"
+  };
+  /* A failed or partial read never reads as "nobody has signed in as you". */
+  function signinsHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<span class="spin"></span> Loading recent sign-ins...';
+    if (r.failed) return '<div class="msg err">Could not load your recent sign-ins. This is not the same as there being none.</div>';
+    var rows = (r.events || []).map(function (e) {
+      var bad = /failed|lockout|locked|refused/.test(e.action);
+      return "<tr" + (bad ? ' class="warn"' : "") + "><td>" + esc(c.when ? c.when(e.ts) : new Date(e.ts).toLocaleString()) + "</td><td>" + esc(SIGNIN_LABEL[e.action] || e.action) + "</td><td>" + esc(e.detail) + "</td></tr>";
+    }).join("");
+    return (r.partial ? '<div class="msg note">Only the most recent part of the hospital audit was checked, so older sign-ins may be missing.</div>' : "") +
+      (rows ? '<div style="overflow-x:auto"><table><tr><th>When</th><th>What</th><th>Device</th></tr>' + rows + "</table></div>"
+        : r.partial ? '<div class="msg note">No sign-ins found in the part that was checked.</div>' : "<p>No sign-ins recorded for this account yet.</p>") +
+      "<p>Something here you do not recognise? Sign out everywhere, then ask your hospital admin to reset your PIN.</p>" +
+      '<button class="btn quiet" type="button" id="secSignOutAll">Sign out everywhere</button>';
+  }
+
   WSQ.page("security", { render: function (c) {
     var el = c.el, s = null;
     el.innerHTML = '<div class="title"><h1>Sign-in security</h1><span class="sub">Your own account</span></div><div class="card" id="secCard"></div>';
@@ -66,8 +93,27 @@
       s = null; paint();
       c.api("/mfa/status").then(function (r) { s = r && r.ok ? r : { failed: true }; paint(); });
     }
+    function loadSignins() {
+      var box = document.getElementById("secSignins"); if (!box) return;
+      box.innerHTML = signinsHtml(c, null);
+      c.api("/mfa/signins").then(function (r) {
+        var b = document.getElementById("secSignins"); if (!b) return;
+        b.innerHTML = signinsHtml(c, r && r.ok ? r : { failed: true });
+        var btn = document.getElementById("secSignOutAll");
+        if (btn) btn.onclick = function () {
+          if (!confirm("Sign out of this account on every device, including this one?")) return;
+          c.api("/mfa/signout-all", {}).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Signed out everywhere."); WSQ.go("logout");
+          });
+        };
+      });
+    }
+    el.insertAdjacentHTML("beforeend", '<div class="card"><h2>Recent sign-ins</h2><div id="secSignins"></div></div>');
     load();
+    loadSignins();
   } });
 
   WSQ._securityStatusHtml = statusHtml;
+  WSQ._securitySigninsHtml = signinsHtml;
 })();

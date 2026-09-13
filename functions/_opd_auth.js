@@ -148,3 +148,13 @@ export async function verifyMfaChallenge(env, token, nowMs) {
   const raw = idFromToken(token); const i = String(raw).indexOf("~");
   return i < 0 ? null : { orgId: raw.slice(0, i), identity: raw.slice(i + 1) };
 }
+
+// PURE. A short, human label for the device a sign-in came from ("Chrome on Android"). Never the raw
+// user-agent: the label is what a person can recognise, and all a security review needs.
+export function deviceLabel(ua) {
+  const u = String(ua || "");
+  if (!u) return "unknown device";
+  const browser = /Edg\//.test(u) ? "Edge" : /OPR\//.test(u) ? "Opera" : /Firefox\//.test(u) ? "Firefox" : /Chrome\//.test(u) ? "Chrome" : /Safari\//.test(u) ? "Safari" : /StewardMD|Capacitor/i.test(u) ? "StewardMD app" : "a browser";
+  const os = /Android/.test(u) ? "Android" : /iPhone|iPad|iOS/.test(u) ? "iPhone or iPad" : /Windows/.test(u) ? "Windows" : /Mac OS X|Macintosh/.test(u) ? "Mac" : /Linux/.test(u) ? "Linux" : "an unknown system";
+  return browser + " on " + os;
+}

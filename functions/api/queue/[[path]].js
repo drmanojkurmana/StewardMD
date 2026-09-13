@@ -35,7 +35,7 @@ import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket 
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
-import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge } from "../../_opd_auth.js";
+import { verifyStaffSession, verifySecret, pinLocked, nextPinState, passLocked, nextPassState, mintStaffSession, sessionRevoked, mintMfaChallenge, verifyMfaChallenge, deviceLabel } from "../../_opd_auth.js";
 // WardSynQ record: the nurse-vitals migration (functions/_wardsynq/migrate-vitals.js). Off unless
 // WARDSYNQ_RECORD=1 AND the org names a Connect tenant AND that tenant opts in; then the timeline
 // handler below dual-writes, timeline first in "shadow", record first in "authoritative".
@@ -478,6 +478,8 @@ export async function onRequest(context) {
   try {
     // ---- StewardMD-native staff login (email / PIN) — GHIS-INDEPENDENT (Phase 5), pre-auth ----
     if (method === "POST" && seg === "auth" && (sub === "pin" || sub === "email")) {
+      // Every sign-in record names the device it came from, so "Recent sign-ins" can show it.
+      const loginAudit = (orgId, identity, action, meta) => ORG.auditLogin(env, orgId, identity, action, [meta, deviceLabel(request.headers.get("user-agent"))].filter(Boolean).join(" · "));
       if (!staffEnabled(env)) return json({ ok: false, error: "staff_disabled" }, 404, request);
       const b = await readBody(request);
       if (sub === "pin") {
@@ -486,32 +488,32 @@ export async function onRequest(context) {
         /* EVERY OUTCOME IS AUDITED under the hospital, so "who tried to get in as this nurse at 3am"
          * has an answer. Unknown IDs are recorded too when the hospital resolved. Never the PIN. */
         if (!auth || !auth.active || !auth.pinHash) {
-          if (orgId) await ORG.auditLogin(env, orgId, b.identity, "login:pin_refused", !auth ? "unknown" : !auth.active ? "disabled" : "no_pin");
+          if (orgId) await loginAudit(orgId, b.identity, "login:pin_refused", !auth ? "unknown" : !auth.active ? "disabled" : "no_pin");
           return json({ ok: false, error: "invalid_login" }, 401, request);
         }
         const gate = pinLocked(auth, Date.now());
-        if (gate.locked) { await ORG.auditLogin(env, auth.orgId, auth.identity, "login:pin_locked", ""); return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request); }
+        if (gate.locked) { await loginAudit(auth.orgId, auth.identity, "login:pin_locked", ""); return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request); }
         const ok = await verifySecret(String(b.pin || ""), auth.pinSalt, auth.pinHash);
         const nx = nextPinState(auth, Date.now(), ok);
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
-        await ORG.auditLogin(env, auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
+        await loginAudit(auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
         if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
         if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
         return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, identity: auth.identity }, 200, request);
       }
       const m = await ORG.findMemberByEmail(env, b.email || "");
       if (!m || !m.active || !m.passHash) {
-        if (m && m.orgId) await ORG.auditLogin(env, m.orgId, m.identity, "login:password_refused", !m.active ? "disabled" : "no_password");
+        if (m && m.orgId) await loginAudit(m.orgId, m.identity, "login:password_refused", !m.active ? "disabled" : "no_password");
         return json({ ok: false, error: "invalid_login" }, 401, request);
       }
       /* Password sign-in had NO attempt limit, so a password could be guessed without end while the
        * PIN beside it locked after five. Same machine now, its own counters. */
       const pGate = passLocked(m, Date.now());
-      if (pGate.locked) { await ORG.auditLogin(env, m.orgId, m.identity, "login:password_locked", ""); return json({ ok: false, error: "locked", retryInMs: pGate.remainingMs }, 429, request); }
+      if (pGate.locked) { await loginAudit(m.orgId, m.identity, "login:password_locked", ""); return json({ ok: false, error: "locked", retryInMs: pGate.remainingMs }, 429, request); }
       const pOk = await verifySecret(String(b.password || ""), m.passSalt, m.passHash);
       const pNx = nextPassState(m, Date.now(), pOk);
       await ORG.recordMemberPassAttempt(env, m.orgId, m.identity, pNx);
-      await ORG.auditLogin(env, m.orgId, m.identity, pOk ? "login:password_ok" : pNx.passLockedUntil ? "login:password_lockout" : "login:password_failed", pOk ? "" : "attempt " + pNx.passAttempts);
+      await loginAudit(m.orgId, m.identity, pOk ? "login:password_ok" : pNx.passLockedUntil ? "login:password_lockout" : "login:password_failed", pOk ? "" : "attempt " + pNx.passAttempts);
       if (!pOk) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - pNx.passAttempts) }, 401, request);
       if (m.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, m.orgId, m.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
       return json({ ok: true, token: await mintStaffSession(env, m.orgId, m.identity, Date.now()), orgId: m.orgId, identity: m.identity }, 200, request);
@@ -2744,6 +2746,9 @@ export async function onRequest(context) {
       const mb = method === "POST" ? await readBody(request) : {};
       if (method === "POST" && sub === "confirm") return reply(await ORG.confirmMfaEnrol(env, actor.orgId, actor.id, mb.code));
       if (method === "POST" && sub === "disable") return reply(await ORG.disableMfa(env, actor.orgId, actor.id, mb.code));
+      if (method === "GET" && sub === "signins") return reply(await ORG.recentSignIns(env, actor.orgId, actor.id));
+      // Ends every session of this account, the one making the request included.
+      if (method === "POST" && sub === "signout-all") return reply(await ORG.signOutEverywhere(env, actor.orgId, actor.id));
       return json({ ok: false, error: "not_found" }, 404, request);
     }
     if (method === "GET" && seg === "whoami") {

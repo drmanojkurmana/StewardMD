@@ -54,7 +54,10 @@ function findScreens(dir, out) {
     if (!/\.(js|html)$/.test(name)) continue;
     if (s.size > 4 * 1024 * 1024) continue;
     const text = readFileSync(p, "utf8");
-    if (/api\/queue|apiGet\(|apiPost\(/.test(text)) out.push([relative(ROOT, p), text]);
+    /* The wardsynq.com pages call through the shell's context - `c.api("/mfa/status")` - and never name
+     * api/queue, so a page made only of those calls was invisible here, and its routes passed only when
+     * some other screen happened to use the same word. */
+    if (/api\/queue|apiGet\(|apiPost\(|\bc\.api\(\s*["'`]\//.test(text)) out.push([relative(ROOT, p), text]);
   }
   return out;
 }

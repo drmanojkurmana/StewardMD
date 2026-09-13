@@ -149,6 +149,37 @@ test("a lost phone: the admin's Reset access clears two-step sign-in along with 
   assert.ok(back.token);
 });
 
+test("recent sign-ins show only your own, with the device; sign out everywhere ends every session", async () => {
+  await seed();
+  const ua = "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36";
+  const raw = (identity, pin) => onRequest({ request: new Request("https://x.test/api/queue/auth/pin", { method: "POST", headers: { "Content-Type": "application/json", "user-agent": ua }, body: JSON.stringify({ orgId: "org1", identity, pin }) }), env: ENV }).then((r) => r.json());
+  await raw("nurse1", "0000");
+  const a = await raw("nurse1", "4826");
+  const b = await raw("nurse1", "4826");
+  await raw("nurse2", "7391");
+
+  const list = await call("GET", "mfa/signins", null, a.token);
+  assert.equal(list.status, 200, JSON.stringify(list));
+  assert.equal(list.partial, false);
+  const actions = list.events.map((e) => e.action);
+  assert.ok(actions.includes("login:pin_failed") && actions.includes("login:pin_ok"));
+  assert.equal(list.events.filter((e) => e.action === "login:pin_ok").length, 2, "nurse2's sign-in is not in nurse1's list");
+  assert.ok(list.events.every((e) => /Chrome on Android/.test(e.detail)), "each row names the device");
+  assert.ok(list.events[0].ts >= list.events[list.events.length - 1].ts, "newest first");
+
+  await new Promise((r) => setTimeout(r, 2));
+  assert.equal((await call("POST", "mfa/signout-all", {}, a.token)).status, 200);
+  assert.equal((await call("GET", "whoami?orgId=org1", null, a.token)).status, 401);
+  assert.equal((await call("GET", "whoami?orgId=org1", null, b.token)).status, 401, "the other device is signed out too");
+  assert.equal((await pinLogin()).status, 200, "and signing in again works");
+});
+
+test("pure: device labels are recognisable and never the raw user-agent", () => {
+  assert.equal(A.deviceLabel("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1"), "Safari on iPhone or iPad");
+  assert.equal(A.deviceLabel("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36 Edg/126.0"), "Edge on Windows");
+  assert.equal(A.deviceLabel(""), "unknown device");
+});
+
 test("doctor accounts are told this is for staff accounts, not silently accepted", async () => {
   const r = await call("GET", "mfa/status", null, null);
   assert.equal(r.status, 401);

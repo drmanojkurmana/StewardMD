@@ -412,6 +412,25 @@ export async function recordMemberPassAttempt(env, orgId, identity, patch) {
 export async function auditLogin(env, orgId, identity, action, meta) {
   await audit(env, orgId, String(identity || ""), action, meta || "");
 }
+/* The member's OWN sign-in history: successes, failures, lockouts and two-step events, newest first,
+ * with the device each came from. Read from the hospital's audit, which is capped, so a full page is
+ * reported as partial rather than as "that is everything". */
+const SIGNIN_SCAN = 500;
+export async function recentSignIns(env, orgId, identity) {
+  const rows = await fsQuery(env, "q_events", { where: { field: "hospitalId", value: String(orgId) }, limit: SIGNIN_SCAN });
+  const mine = rows.map((r) => r.fields || {})
+    .filter((e) => e.actor === String(identity) && /^(login|mfa):/.test(e.action || ""))
+    .sort((a, b) => (b.ts || 0) - (a.ts || 0))
+    .slice(0, 30)
+    .map((e) => ({ ts: e.ts, action: e.action, detail: e.meta || "" }));
+  return { ok: true, events: mine, partial: rows.length >= SIGNIN_SCAN };
+}
+export async function signOutEverywhere(env, orgId, identity) {
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { sessionsRevokedAt: now(), updatedAt: now() })]);
+  await audit(env, orgId, identity, "login:signed_out_everywhere", "");
+  return { ok: true };
+}
 
 // ---- THE isolation gate (I/O wrapper over the pure authorizeOrgAccess) --------------------------
 // Fetches the org + the actor's membership, then lets the pure layer decide. Returns { ok, role, ... }.

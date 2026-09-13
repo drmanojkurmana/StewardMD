@@ -39,6 +39,24 @@ test("setting up shows the key and the app link; backup codes are shown once wit
   assert.match(codes, /AAAA1BBBB2\nCCCC3DDDD4/);
 });
 
+test("recent sign-ins: loading, failed, partial and empty read differently; failures stand out", () => {
+  const sb = { window: {} };
+  sb.window.WSQ = { page() {} };
+  vm.createContext(sb); vm.runInContext(read("wardsynq/site/pages/security.js"), sb);
+  const h = (r) => sb.window.WSQ._securitySigninsHtml({ esc, when: (t) => "T" + t }, r);
+  assert.match(h(null), /Loading recent sign-ins/);
+  assert.match(h({ failed: true }), /not the same as there being none/);
+  assert.ok(!h({ failed: true }).includes("No sign-ins recorded"));
+  assert.match(h({ ok: true, events: [], partial: false }), /No sign-ins recorded for this account yet/);
+  const partial = h({ ok: true, events: [], partial: true });
+  assert.match(partial, /older sign-ins may be missing/);
+  assert.ok(!partial.includes("No sign-ins recorded"));
+  const rows = h({ ok: true, partial: false, events: [{ ts: 2, action: "login:pin_failed", detail: "attempt 1 · Chrome on Android" }, { ts: 1, action: "login:pin_ok", detail: "Chrome on Android" }] });
+  assert.match(rows, /<tr class="warn"><td>T2<\/td><td>Wrong PIN/);
+  assert.match(rows, /Signed in with PIN/);
+  assert.ok(rows.includes('id="secSignOutAll"'));
+});
+
 test("every staff sign-in screen asks for the code instead of reporting a wrong PIN", () => {
   for (const f of ["wardsynq/site/shell.js", "opd.html", "queue.js"]) {
     const src = read(f);
