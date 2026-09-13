@@ -755,8 +755,28 @@
       '<h2 class="smd-connect-display">Already connected</h2>' +
       '<p class="smd-connect-lead">This hospital is already connected (adapter active).</p>' +
       '<div class="smd-connect-row"><button id="smd-connect-reusego" class="smd-connect-btn primary" type="button">Sign in to use it</button>' +
-      '<button id="smd-connect-reuseback" class="smd-connect-btn" type="button">Back</button></div>';
+      '<button id="smd-connect-reuseback" class="smd-connect-btn" type="button">Back</button></div>' +
+      '<div class="smd-connect-note">Discover again builds a new adapter from scratch and checks it against real patients. The current adapter keeps working in Ward Sync until the new one is approved.</div>' +
+      '<div class="smd-connect-row"><button id="smd-connect-rediscover" class="smd-connect-btn" type="button">Discover again</button></div>';
     setStatus("", "");
+    b.querySelector("#smd-connect-rediscover").onclick = function () {
+      var btn = this; btn.disabled = true;
+      setStatus("", "Starting a new discovery.");
+      api("/sessions", { method: "POST", body: JSON.stringify({ emrUrl: S.selected.emrUrl, consent: { agreed: true }, runner: "phone", purpose: "discover" }) }).then(function (r) {
+        if (!overlay() || !S) return;
+        var sid = r.d && (r.d.sessionId || (r.d.session && r.d.session.id));
+        if (r.s === 200 && r.d && r.d.ok !== false && sid && !r.d.reuse) {
+          S.session = { id: sid, state: r.d.state || null };
+          S.deployment = r.d.deployment || S.deployment;
+          S.reuse = false; S.visitedOrigins = []; S.pendingOrigins = []; S.loginOpened = false; S.loginHandled = false;
+          show("login");
+        } else {
+          btn.disabled = false;
+          var why = r.d && (r.d.detail || r.d.message || r.d.error);
+          setStatus("bad", "Could not start a new discovery" + (why ? ": " + why : "") + ".");
+        }
+      });
+    };
     b.querySelector("#smd-connect-reuseback").onclick = function () { resetToConnections(""); };
     b.querySelector("#smd-connect-reusego").onclick = function () {
       S.loginOpened = false;
