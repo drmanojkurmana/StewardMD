@@ -86,6 +86,42 @@
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
       ".rx-doc{font-family:Georgia,'Times New Roman',serif;color:#111;background:#fff}.rxdoc-in{padding:40px 44px;word-spacing:1px}.rxdoc-hd{display:flex;align-items:center;gap:16px}.rxdoc-logo{width:64px;height:64px;object-fit:contain}.rxdoc-nm{font:800 22px Georgia,serif;color:#0e6e63}.rxdoc-ad{font:400 12.5px Georgia,serif;color:#444;margin-top:2px}.rxdoc-rule{height:3px;background:#0e6e63;margin-top:12px}.rxdoc-pt{display:flex;justify-content:space-between;align-items:baseline;font:400 14px Georgia,serif;color:#222;margin:12px 0 2px;border-bottom:1px solid #ddd;padding-bottom:6px}.rxdoc-dt{color:#555;font-size:12.5px}.rxdoc-topic{font:italic 400 12.5px Georgia,serif;color:#555;margin-top:4px}.rxdoc-rx{font:800 30px Georgia,serif;color:#0e6e63;margin:10px 0 2px}" +
       ".rxdoc-tbl{width:100%;border-collapse:collapse}.rxdoc-tbl td{padding:7px 4px;border-bottom:1px solid #eee;vertical-align:top;font:400 14px Georgia,serif}.rxdoc-tbl .sn{width:24px;color:#888}.rxdoc-tbl .br{color:#0e6e63;font-weight:600}.rxdoc-tbl .dz{color:#444;font-size:12.5px;white-space:nowrap}.rxdoc-tbl .advr td{color:#555;font-style:italic;border-bottom:0}.rxdoc-ft{margin-top:40px;display:flex;justify-content:flex-end}.rxdoc-sg{text-align:center;min-width:210px}.rxdoc-sgimg{height:54px;object-fit:contain;display:block;margin:0 auto 2px}.rxdoc-drn{font-weight:700;border-top:1px solid #333;padding-top:4px;font-size:14px}.rxdoc-reg{font-size:11.5px;color:#555}.rxdoc-dis{margin-top:26px;border-top:1px solid #ddd;padding-top:10px;font:400 10px Georgia,serif;color:#777;line-height:1.5}.rxdoc-foot{margin-top:22px;border-top:1px solid #ddd;padding-top:10px}.rxdoc-brand{font:400 12px Georgia,serif;color:#0e6e63}.rxdoc-smdlogo{width:20px;height:20px;object-fit:contain;vertical-align:-5px;margin-right:6px;display:inline-block}.rxdoc-smdwm{font:800 13px Georgia,serif;color:#0e6e63}.rxdoc-smdwm b{color:#111}.rxdoc-resp{margin-top:8px;font:400 11px Georgia,serif;color:#555;line-height:1.6}.rxdoc-line{font:400 12.5px Georgia,serif;color:#333;margin:3px 0}.rxdoc-line b{color:#111}.rx-ac-x{color:#ef4444;font-size:10px;font-weight:600}" +
+      ".rxcsec{margin-top:22px;padding-top:14px;border-top:2px solid #0e6e63;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxcsec h3{font:800 13px system-ui,Georgia,serif;letter-spacing:.08em;text-transform:uppercase;color:#0e6e63;margin:0 0 3px}" +
+      ".rxcttl{font:700 15px Georgia,serif;color:#0f172a;margin-bottom:2px}.rxcsub{font:500 11px system-ui,sans-serif;color:#64748b;margin-bottom:10px}" +
+      ".rxc-tbl{width:100%;border-collapse:collapse;margin-top:10px;font-family:system-ui,-apple-system,sans-serif;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxc-tbl th{background:#f8fafc;padding:7px 8px;font:700 11px system-ui;text-transform:uppercase;letter-spacing:.05em;border:1px solid #cbd5e1;text-align:left;vertical-align:bottom}" +
+      ".rxc-th-gen{border-top:3px solid #16a34a!important}.rxc-th-bal{border-top:3px solid #0052cc!important;background:#f0f7ff!important}.rxc-th-prem{border-top:3px solid #7e22ce!important}.rxc-th-orig{border-top:3px solid #475569!important}" +
+      ".rxc-tbl td{padding:8px;border:1px solid #e2e8f0;vertical-align:top;font-size:12px;background:#fff}.rxc-td-bal{background:#fbfdff!important}" +
+      ".rxc-chosen{box-shadow:inset 0 0 0 1.5px #16a34a;background:#f0fdf4!important}.rxc-badge-chosen{display:inline-block;padding:1px 5px;border-radius:4px;font:800 9px system-ui;background:#16a34a;color:#fff;margin-bottom:3px;letter-spacing:.04em}" +
+      ".rxc-tbl-cost{font:800 13px system-ui;color:#0e6e63;margin-top:4px}.rxc-tbl-mfg{color:#64748b;font-size:10.5px}.rxc-tbl-rx{color:#64748b;font-size:11px;margin-top:2px}" +
+      ".rxc-tot-val{font:800 13px system-ui;color:#0f172a}.rxc-banner-save{margin-top:8px;padding:8px 12px;border-radius:6px;background:rgba(22,163,74,.1);border-left:3px solid #16a34a;font:700 12px system-ui;color:#15803d}" +
+      ".rxcnote{margin-top:10px;font:500 10.5px/1.45 system-ui,Georgia,serif;color:#64748b}" +
+      ".rxc-inline-box{width:100%;order:99}" +
+      ".rxc-inline-tray{margin-top:8px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:8px;width:100%;font-family:var(--hfont,system-ui)}" +
+      ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}" +
+      ".rxc-itray-pill{font:800 10.5px var(--hfont);color:var(--teal,#0e6e63);background:rgba(14,110,99,.09);padding:2px 8px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}" +
+      ".rxc-itray-sub{font:500 11px var(--hfont);color:var(--hmut,#64748b)}" +
+      ".rxc-icards{display:grid;gap:6px;grid-template-columns:repeat(4,1fr)}" +
+      "@media(max-width:640px){.rxc-icards{grid-template-columns:1fr 1fr}}" +
+      ".rxc-icard{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:8px;background:var(--hpanel,#fff);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all .15s ease}" +
+      ".rxc-icard:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 8px rgba(14,110,99,.08)}" +
+      ".rxc-icard.rec{border:1.5px solid #0052cc;background:rgba(0,82,204,.03)}" +
+      ".rxc-icard.sel{border-color:var(--teal,#0e6e63);box-shadow:0 0 0 2px rgba(14,110,99,.25);background:rgba(14,110,99,.04)}" +
+      ".rxc-icard.orig{border-style:dashed}" +
+      ".rxc-icat-pill{display:flex;align-items:center;gap:4px;font:800 9.5px var(--hfont);text-transform:uppercase;letter-spacing:.04em;color:#334155}" +
+      ".rxc-idot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}" +
+      ".dot-generic{background:#16a34a}.dot-balanced{background:#0052cc}.dot-premium{background:#7e22ce}.dot-prescribed{background:#475569}" +
+      ".rxc-icomp{font:500 10px var(--hfont);color:var(--hmut,#64748b);margin-top:3px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rxc-ibrand{font:700 12px var(--hfont);margin-top:2px;line-height:1.25}" +
+      ".rxc-icard.generic .rxc-ibrand{color:#16a34a}.rxc-icard.balanced .rxc-ibrand{color:#0052cc}.rxc-icard.premium .rxc-ibrand{color:#7e22ce}.rxc-icard.prescribed .rxc-ibrand{color:var(--hink,#0f172a)}" +
+      ".rxc-imfg{font:500 10px var(--hfont);color:var(--hmut,#64748b);margin-top:1px;min-height:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rxc-iprice{font:800 12.5px var(--hfont);color:var(--teal,#0e6e63);margin-top:4px}" +
+      ".rxc-iprice small{font:500 9.5px var(--hfont);color:var(--hmut,#64748b);margin-left:2px;font-weight:normal}" +
+      ".rxc-ibtn{margin-top:6px;border:0;border-radius:6px;padding:4px 6px;font:700 10.5px var(--hfont);cursor:pointer;text-align:center;background:rgba(100,116,139,.12);color:var(--hink,#0f172a);transition:background .15s}" +
+      ".rxc-icard.sel .rxc-ibtn{background:var(--teal,#0e6e63);color:#fff}" +
+      ".rxc-icard.rec:not(.sel) .rxc-ibtn{background:rgba(0,82,204,.1);color:#0052cc}" +
+      ".rxc-inote{font:500 11px/1.4 var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);padding:6px 8px;border-radius:8px;margin-top:4px}" +
       "@media print{body>*{display:none!important}body>.rx-scrim,body>.rx-sheet{display:block!important;position:static!important;transform:none!important;box-shadow:none!important;opacity:1!important;max-height:none!important;width:auto!important}.rx-scrim{background:none!important}.rx-x,.rx-del,.rx-add,.rx-print,.rx-row{display:none!important}.rx-in{border:none!important;padding:0!important;background:none!important}.rx-line{border:1px solid #ccc!important;background:none!important}}";
     document.head.appendChild(s);
   }
@@ -157,8 +193,99 @@
   function rxcPrintSection() {
     var sel = sheet && sheet._rxChoice;
     if (!sel) return "";
-    try { if (!(window.SMD_RXCHOICE_FLAGS && SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
-    var keys = Object.keys(sel); if (!keys.length) return "";
+    try { if (!(window.SMD_RXCHOICE_FLAGS && window.SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
+    var costStr = function (c) { return (c != null && isFinite(c)) ? ("\u20b9" + (Math.round(c * 100) / 100).toLocaleString("en-IN")) : "—"; };
+
+    // 4-Way Comparison Table when full results are available (Reference Image 3 & Final Plan §3)
+    if (sel._allResults && sel._allResults.length) {
+      var results = sel._allResults, lines = sel._allLines || [], selectedKeys = sel._allSelected || [];
+      var tableRows = "";
+      for (var i = 0; i < results.length; i++) {
+        var r = results[i], line = lines[i] || {};
+        if (!r) continue;
+        var drugTitle = esc(line.drug || line.brand || ("Medicine " + (i + 1)));
+        var rxDetails = [line.dose, line.freq, line.duration].filter(Boolean).map(esc).join(" &middot; ");
+        var activeComp = (r.prescribed && r.prescribed.composition) ? esc(r.prescribed.composition) : "";
+        var currentSelKey = selectedKeys[i] || "prescribed";
+
+        var cell = function (opt, catKey) {
+          if (!opt) {
+            var msg = r.blocked ? ("Blocked: " + esc(r.reason || "NTI / device restriction")) : "No validated alternative";
+            return '<td class="rxc-td rxc-empty">' + msg + '</td>';
+          }
+          var isChosen = (currentSelKey === catKey) || (sel[line.drug] && sel[line.drug].brand === opt.brand);
+          var cls = "rxc-td" + (isChosen ? " rxc-chosen" : "");
+          var tag = isChosen ? ('<div class="rxc-tag">' + (catKey === "prescribed" ? "✓ KEPT" : "✓ SELECTED") + '</div>') : "";
+          var brandNm = '<b>' + esc(opt.brand || "—") + '</b>';
+          var mfrNm = opt.manufacturer ? ('<div class="rxc-mfr">' + esc(opt.manufacturer) + '</div>') : '';
+          var packInfo = (opt.packsRequired != null && opt.requiredUnits != null)
+            ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + ' needed (' + (opt.packsRequired > 1 ? (opt.packsRequired + ' packs') : '1 pack') + ')</div>')
+            : '';
+          var priceVal = opt.courseCost != null ? ('<div class="rxc-cost">' + costStr(opt.courseCost) + '<small>/course</small></div>') : '<div class="rxc-cost">—</div>';
+          return '<td class="' + cls + '">' + tag + brandNm + mfrNm + packInfo + priceVal + '</td>';
+        };
+
+        tableRows += '<tr class="rxc-tr">' +
+          '<td class="rxc-td rxc-rxcol"><div class="rxc-num">' + (i + 1) + '. ' + drugTitle + '</div>' +
+          (activeComp ? ('<div class="rxc-comp">' + activeComp + '</div>') : '') +
+          (rxDetails ? ('<div class="rxc-dose">' + rxDetails + '</div>') : '') + '</td>' +
+          cell(r.generic, "generic") +
+          cell(r.balanced, "balanced") +
+          cell(r.premium, "premium") +
+          cell(r.prescribed, "prescribed") +
+          '</tr>';
+      }
+
+      var totalsFoot = "";
+      if (window.SMD_RXCHOICE && SMD_RXCHOICE.totals) {
+        try {
+          var validResults = results.filter(Boolean);
+          var t = SMD_RXCHOICE.totals(validResults);
+          if (t && t.prescribed != null) {
+            totalsFoot = '<tr class="rxc-totrow">' +
+              '<td class="rxc-totlab"><b>Estimated Total</b></td>' +
+              '<td><b>' + costStr(t.generic) + '</b></td>' +
+              '<td><b>' + costStr(t.balanced) + '</b></td>' +
+              '<td><b>' + costStr(t.premium) + '</b></td>' +
+              '<td><b>' + costStr(t.prescribed) + '</b></td>' +
+              '</tr>';
+            if (t.savings) {
+              var sBal = t.savings.balanced, sGen = t.savings.generic;
+              if (sBal != null && sBal > 0) {
+                var pctB = Math.round((sBal / t.prescribed) * 100);
+                totalsFoot += '<tr class="rxc-saverow"><td colspan="5"><b>Potential saving on Balanced: ' + costStr(sBal) + ' (' + pctB + '% less than original)</b></td></tr>';
+              } else if (sGen != null && sGen > 0) {
+                var pctG = Math.round((sGen / t.prescribed) * 100);
+                totalsFoot += '<tr class="rxc-saverow"><td colspan="5"><b>Potential saving on Generic: ' + costStr(sGen) + ' (' + pctG + '% less than original)</b></td></tr>';
+              }
+            }
+          }
+        } catch (e) {}
+      }
+
+      return '<section class="rxcsec">' +
+        '<div class="rxchd">' +
+        '<div class="rxcttl">RxChoice™ — 4-Way Cost Choice</div>' +
+        '<div class="rxcsub">Validated alternatives from the StewardMD Drug Database &middot; Same active ingredient &amp; strength</div>' +
+        '</div>' +
+        '<table class="rxctbl">' +
+        '<thead><tr>' +
+        '<th class="col-rx">Prescribed Medicine</th>' +
+        '<th class="col-gen">GENERIC<br><small>Lowest Cost</small></th>' +
+        '<th class="col-bal">BALANCED ⭐<br><small>Recommended Value</small></th>' +
+        '<th class="col-prem">PREMIUM<br><small>Top Branded</small></th>' +
+        '<th class="col-orig">DOCTOR PRESCRIBED<br><small>Original Choice</small></th>' +
+        '</tr></thead>' +
+        '<tbody>' + tableRows + '</tbody>' +
+        (totalsFoot ? ('<tfoot>' + totalsFoot + '</tfoot>') : '') +
+        '</table>' +
+        '<div class="rxcnote">Costs are calculated from the Drug Database MRP and the pack size for the course you prescribed. MRP is a list price, not a pharmacy quote, and availability is not checked. A lower price is an economic choice, never a claim that one product is clinically better than another. Final product selection remains the prescriber\u2019s responsibility.</div>' +
+        '</section>';
+    }
+
+    // Fallback simple list (preserves backward-compatibility if only selected single products exist)
+    var keys = Object.keys(sel).filter(function (k) { return k && k.charAt(0) !== "_"; });
+    if (!keys.length) return "";
     var cost = function (o) { return (o && o.courseCost != null) ? (" &middot; \u20b9" + o.courseCost + " for this course") : ""; };
     var rows = keys.map(function (k) {
       var o = sel[k]; if (!o) return "";
@@ -499,9 +626,29 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
-      '.rxcsec{margin-top:20px;padding-top:10px;border-top:1px dashed #0e6e63}.rxcsec h3{margin:0 0 6px;font-size:13px;color:#0e6e63;text-transform:uppercase;letter-spacing:.05em}' +
+      '.rxcsec{margin-top:22px;padding-top:14px;border-top:2px solid #0e6e63;page-break-inside:avoid;break-inside:avoid}' +
+      '.rxchd{margin-bottom:8px}.rxcttl{font:800 14px Manrope,Inter,system-ui;color:#0e6e63;letter-spacing:.02em;text-transform:uppercase}.rxcsub{font:500 10.5px system-ui;color:#64748b;margin-top:2px}' +
+      '.rxctbl{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px}' +
+      '.rxctbl th{padding:6px 7px;font:700 10px Inter,system-ui;text-transform:uppercase;letter-spacing:.04em;border:1px solid #e2e8f0;background:#f8fafc;vertical-align:top;text-align:left}' +
+      '.rxctbl th small{font-weight:500;text-transform:none;opacity:.8;display:block}' +
+      '.rxctbl th.col-rx{width:26%;border-top:3px solid #0f172a}' +
+      '.rxctbl th.col-gen{width:18.5%;color:#16a34a;border-top:3px solid #16a34a;background:#f0fdf4}' +
+      '.rxctbl th.col-bal{width:18.5%;color:#0052cc;border-top:3px solid #0052cc;background:#f0f7ff}' +
+      '.rxctbl th.col-prem{width:18.5%;color:#7e22ce;border-top:3px solid #7e22ce;background:#faf5ff}' +
+      '.rxctbl th.col-orig{width:18.5%;color:#475569;border-top:3px solid #475569;background:#f8fafc}' +
+      '.rxctbl td{padding:5px 7px;border:1px solid #e2e8f0;vertical-align:top;font-size:10.5px;line-height:1.35}' +
+      '.rxctbl td.rxc-rxcol{background:#fafaf9}.rxctbl .rxc-num{font-weight:700;color:#0f172a}.rxctbl .rxc-comp{color:#64748b;font-size:9.5px;margin-top:1px}.rxctbl .rxc-dose{color:#0e6e63;font-size:9.5px;font-weight:600;margin-top:2px}' +
+      '.rxctbl .rxc-mfr{color:#64748b;font-size:9.5px;margin-top:1px}' +
+      '.rxctbl .rxc-pack{color:#475569;font-size:9px;margin-top:2px}' +
+      '.rxctbl .rxc-cost{font:800 11.5px Inter,system-ui;color:#0e6e63;margin-top:3px}.rxctbl .rxc-cost small{font-size:9px;font-weight:600;color:#64748b}' +
+      '.rxctbl td.rxc-chosen{background:#ecfdf5;box-shadow:inset 0 0 0 1.5px #10b981}' +
+      '.rxctbl .rxc-tag{display:inline-block;padding:1px 4px;border-radius:3px;font:800 8px Inter,system-ui;background:#10b981;color:#fff;margin-bottom:3px;letter-spacing:.02em}' +
+      '.rxctbl td.rxc-empty{color:#94a3b8;font-style:italic;font-size:9.5px}' +
+      '.rxctbl .rxc-totrow td{background:#f8fafc;border-top:2px solid #cbd5e1;font-weight:700;padding:6px 7px}' +
+      '.rxctbl .rxc-totlab{font:800 10.5px Inter,system-ui;text-transform:uppercase;color:#0f172a}' +
+      '.rxctbl .rxc-saverow td{background:#f0fdf4;color:#16a34a;font:800 11px Inter,system-ui;text-align:right;padding:6px 8px;border-top:1px solid #bbf7d0}' +
       '.rxcline{font-size:12.5px;color:#334155;padding:5px 0;border-bottom:1px solid #f1f5f4}.rxccat{font-size:10.5px;font-weight:700;color:#0e6e63;text-transform:uppercase}' +
-      '.rxcnote{margin-top:7px;font-size:10.5px;color:#64748b;line-height:1.5}' +
+      '.rxcnote{margin-top:7px;font-size:10px;color:#64748b;line-height:1.4}' +
       // The verification block sits with the signature: a reader checking authenticity is already
       // looking at who signed it. Kept off the page break so the QR is never split in half.
       '.rxv{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;break-inside:avoid;page-break-inside:avoid}' +
@@ -911,14 +1058,155 @@
       lines: rows,
       // The doctor tapped SELECT / KEEP. Write the brand field of THAT line, record the choice for
       // the printout, and leave everything else alone.
-      onSelect: function (i, opt) {
+      onSelect: function (i, opt, line, res, st) {
         var ln = map[i]; if (!ln) return;
         var bi = ln.querySelector('[data-f="brand"]');
         if (bi && opt && opt.brand) { bi.value = opt.brand; try { bi.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {} }
         if (!sheet._rxChoice) sheet._rxChoice = {};
         sheet._rxChoice[(rows[i] && rows[i].drug) || ("line" + i)] = opt;
+        if (st) {
+          sheet._rxChoice._allResults = st.results;
+          sheet._rxChoice._allLines = st.lines;
+          sheet._rxChoice._allSelected = st.selected;
+        }
       }
     });
+  }
+
+  function rxcInlineOn() {
+    try {
+      return rxcOn() && !!(window.SMD_RXCHOICE_FLAGS && SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_inline"));
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function syncRxChoiceState() {
+    if (!sheet) return;
+    var els = sheet.querySelectorAll("#rxLines .rx-line:not(.adv)");
+    var rows = [];
+    Array.prototype.forEach.call(els, function (ln) {
+      if (ln.style.display === "none") return;
+      var g = ((ln.querySelector('[data-f="drug"]') || {}).value || "").trim();
+      if (!g) return;
+      rows.push({
+        drug: g,
+        brand: ((ln.querySelector('[data-f="brand"]') || {}).value || "").trim(),
+        dose: ((ln.querySelector('[data-f="dose"]') || {}).value || "").trim(),
+        freq: ((ln.querySelector('[data-f="freq"]') || {}).value || "").trim(),
+        duration: ((ln.querySelector('[data-f="duration"]') || {}).value || "").trim()
+      });
+    });
+    if (!sheet._rxChoice) sheet._rxChoice = {};
+    sheet._rxChoice._allLines = rows;
+    if (!sheet._rxChoice._allResults) sheet._rxChoice._allResults = [];
+    if (!sheet._rxChoice._allSelected) sheet._rxChoice._allSelected = [];
+  }
+
+  function rxChoiceInline(line) {
+    if (!line || line.classList.contains("adv") || line._rxcInlineWired) return;
+    line._rxcInlineWired = true;
+    if (!rxcInlineOn()) return;
+
+    var debTimer = null;
+    var box = null;
+
+    function ensureBox() {
+      if (!box) {
+        box = line.querySelector(".rxc-inline-box");
+        if (!box) {
+          box = document.createElement("div");
+          box.className = "rxc-inline-box";
+          line.appendChild(box);
+        }
+      }
+      return box;
+    }
+
+    function refresh() {
+      if (!rxcInlineOn()) {
+        if (box) { box.innerHTML = ""; }
+        return;
+      }
+      var drugIn = line.querySelector('[data-f="drug"]'), brandIn = line.querySelector('[data-f="brand"]');
+      var doseIn = line.querySelector('[data-f="dose"]'), freqIn = line.querySelector('[data-f="freq"]'), durIn = line.querySelector('[data-f="duration"]');
+      var drug = String((drugIn && drugIn.value) || "").trim();
+      var brand = String((brandIn && brandIn.value) || "").trim();
+      var dose = String((doseIn && doseIn.value) || "").trim();
+      var freq = String((freqIn && freqIn.value) || "").trim();
+      var duration = String((durIn && durIn.value) || "").trim();
+
+      if (!drug && !brand) {
+        if (box) { box.innerHTML = ""; }
+        return;
+      }
+
+      var b = ensureBox();
+      var lineObj = { drug: drug, brand: brand, dose: dose, freq: freq, duration: duration };
+
+      SMD_RXCHOICE_UI.resolveLine(lineObj).then(function (res) {
+        if (!res) { if (b) b.innerHTML = ""; return; }
+        var curDrug = String((drugIn && drugIn.value) || "").trim();
+        var curBrand = String((brandIn && brandIn.value) || "").trim();
+        if (curDrug !== drug || curBrand !== brand) return;
+
+        function onPick(cat, opt, allRes) {
+          if (!opt || !brandIn) return;
+          brandIn.value = opt.brand;
+          try { brandIn.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {}
+
+          if (!sheet._rxChoice) sheet._rxChoice = {};
+          var lineKey = drug || ("line" + (line.getAttribute("data-i") || "0"));
+          sheet._rxChoice[lineKey] = opt;
+
+          SMD_RXCHOICE_UI.renderInlineTray(b, res, opt.brand, onPick);
+
+          syncRxChoiceState();
+          var lineIdx = 0;
+          var els = sheet.querySelectorAll("#rxLines .rx-line:not(.adv)");
+          for (var k = 0; k < els.length; k++) {
+            if (els[k] === line) { lineIdx = k; break; }
+          }
+          sheet._rxChoice._allResults[lineIdx] = allRes;
+          sheet._rxChoice._allSelected[lineIdx] = cat;
+
+          try {
+            if (window.toast) window.toast(cat === "prescribed" ? ("Kept " + opt.brand) : ("Brand set to " + opt.brand));
+          } catch (e) {}
+        }
+
+        SMD_RXCHOICE_UI.renderInlineTray(b, res, curBrand, onPick);
+
+        if (!sheet._rxChoice) sheet._rxChoice = {};
+        var lineKey = drug || ("line" + (line.getAttribute("data-i") || "0"));
+        if (!sheet._rxChoice[lineKey] && res.prescribed) {
+          sheet._rxChoice[lineKey] = res.prescribed;
+        }
+        syncRxChoiceState();
+        var lineIdx = 0;
+        var els = sheet.querySelectorAll("#rxLines .rx-line:not(.adv)");
+        for (var k = 0; k < els.length; k++) {
+          if (els[k] === line) { lineIdx = k; break; }
+        }
+        sheet._rxChoice._allResults[lineIdx] = res;
+        if (!sheet._rxChoice._allSelected[lineIdx]) {
+          sheet._rxChoice._allSelected[lineIdx] = "prescribed";
+        }
+      }).catch(function () {
+        if (b) b.innerHTML = "";
+      });
+    }
+
+    line.addEventListener("input", function () {
+      clearTimeout(debTimer);
+      debTimer = setTimeout(refresh, 350);
+    });
+
+    var d0 = String(((line.querySelector('[data-f="drug"]') || {}).value) || "").trim();
+    var b0 = String(((line.querySelector('[data-f="brand"]') || {}).value) || "").trim();
+    if (d0 || b0) {
+      setTimeout(refresh, 100);
+    }
   }
 
   // ---- Rx templates / favourites: save the current drug set under a name (e.g. "URI", "UTI") and re-apply
@@ -934,7 +1222,7 @@
       var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: l.drug || "", brand: l.brand || "", dose: l.dose || "", freq: l.freq || "", duration: l.duration || "", unverified: false, isAdvice: false }, i));
       rxLabelInputs();   // rows added after show() need labelling too
-      var ln = wrap.lastElementChild; acAttach(ln); rxBrandAC(ln);
+      var ln = wrap.lastElementChild; acAttach(ln); rxBrandAC(ln); rxChoiceInline(ln);
       var del = ln.querySelector(".rx-del"); if (del) del.onclick = function () { ln.remove(); refreshSafety(); };
     });
     refreshSafety();
@@ -1000,14 +1288,14 @@
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
       rxLabelInputs();   // rows added after show() need labelling too
       bindDel();
-      acAttach(wrap.lastElementChild); rxBrandAC(wrap.lastElementChild);   // drug AC + live brand picker
+      acAttach(wrap.lastElementChild); rxBrandAC(wrap.lastElementChild); rxChoiceInline(wrap.lastElementChild);   // drug AC + live brand picker + RxChoice inline
       refreshSafety();
     });
     sheet.querySelector("#rxExport").addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
     var _rxc = sheet.querySelector("#rxcOpen"); if (_rxc) _rxc.addEventListener("click", function () { try { openRxChoice(); } catch (e) {} });
     bindDel();
     // Drug autocomplete (generic + DB dose, local) AND the live brand picker (MEDAPI brands + prices).
-    sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) { acAttach(ln); rxBrandAC(ln); });
+    sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) { acAttach(ln); rxBrandAC(ln); rxChoiceInline(ln); });
     // live safety panel: recheck allergies + interactions as drug names / allergies change
     refreshSafety();
     var _sl = sheet.querySelector("#rxLines"); if (_sl) _sl.addEventListener("input", function (e) { if (e.target && e.target.getAttribute && e.target.getAttribute("data-f") === "drug") refreshSafety(); });
@@ -1191,6 +1479,7 @@
       '<table class="rxdoc-tbl">'+(rows||'<tr><td colspan="3">No items.</td></tr>')+'</table>'+
       '<div class="rxdoc-ft"><div class="rxdoc-sg">'+(signImg?'<img class="rxdoc-sgimg" src="'+esc(signImg)+'">':'')+'<div class="rxdoc-drn">Dr. '+esc(docName()||"—")+'</div><div class="rxdoc-reg">Reg. No: '+esc(regNo||"—")+'</div></div></div>'+
       rxDocQrBlock(rxv) +
+      rxcPrintSection() +
       '<div class="rxdoc-foot"><div class="rxdoc-brand">'+(_smdLogoData?'<img class="rxdoc-smdlogo" src="'+_smdLogoData+'">':'<span class="rxdoc-smdwm">Steward<b>MD</b></span>')+'<span>Prescription generated using <b>StewardMD</b></span></div>'+
       '<div class="rxdoc-resp">Digitally <b>signed &amp; verified</b> by the prescriber named above, who takes <b>complete responsibility</b> for this prescription. Verify every drug, dose, route and interaction against the patient and local protocol before dispensing.</div></div></div>';
     return node;

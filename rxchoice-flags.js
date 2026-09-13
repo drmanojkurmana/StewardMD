@@ -21,7 +21,8 @@
     smd_rxchoice_price: { type: "bool", def: true, query: "rxcprice", desc: "Show course-level cost (pack size x packs needed x MRP) on the four cards. OFF = products only, no rupee figures. MRP is the Drug Database's list price, never a live pharmacy quote." },
     smd_rxchoice_ai_normalization: { type: "bool", def: false, query: "rxcai", desc: "Let AI normalize a free-text drug line into a composition BEFORE the deterministic database lookup. OFF by default: the deterministic composition/brand index already resolves every line the pad can produce, and AI output must never reach eligibility, matching, pricing or ranking - those stay deterministic whatever this flag says." },
     smd_rxchoice_patient_selection: { type: "bool", def: false, query: "rxcpatient", desc: "Phase 2: let the PATIENT pick among the products the doctor approved. OFF for MVP - doctor approval first, and a patient can never introduce a product the doctor did not approve." },
-    smd_rxchoice_pdf: { type: "bool", def: true, query: "rxcpdf", desc: "Append the RxChoice section (four options + the final selected product) to the printed/PDF prescription. The conventional prescription above it is unchanged." }
+    smd_rxchoice_pdf: { type: "bool", def: true, query: "rxcpdf", desc: "Append the RxChoice section (four options + the final selected product) to the printed/PDF prescription. The conventional prescription above it is unchanged." },
+    smd_rxchoice_inline: { type: "bool", def: true, query: "rxcinline", desc: "Show 4-way cost choice tray automatically under each medication line on the prescription pad. Master smd_rxchoice must also be ON." }
   };
 
   function raw(key) {

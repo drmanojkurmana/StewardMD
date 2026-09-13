@@ -63,7 +63,31 @@
       ".rxc-tot{margin-top:16px;border-top:2px solid var(--hbd,#e2e8f0);padding-top:10px}.rxc-totrow{display:flex;justify-content:space-between;font:600 13px var(--hfont);padding:3px 0;color:var(--hink)}.rxc-totrow b{font-weight:800}.rxc-save{font:800 13px var(--hfont);color:var(--teal,#0e6e63);margin-top:4px}" +
       ".rxc-foot{margin-top:14px;font:500 10.5px/1.55 var(--hfont);color:var(--hmut)}" +
       ".rxc-ico{width:13px;height:13px;vertical-align:-2px;fill:none;stroke:currentColor;stroke-width:1.9}" +
-      ".rxc-load{font:600 13px var(--hfont);color:var(--hmut);padding:18px 2px}";
+      ".rxc-load{font:600 13px var(--hfont);color:var(--hmut);padding:18px 2px}" +
+      ".rxc-inline-tray{margin-top:8px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:8px;width:100%;order:100;font-family:var(--hfont,system-ui)}" +
+      ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}" +
+      ".rxc-itray-pill{font:800 10.5px var(--hfont);color:var(--teal,#0e6e63);background:rgba(14,110,99,.09);padding:2px 8px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}" +
+      ".rxc-itray-sub{font:500 11px var(--hfont);color:var(--hmut,#64748b)}" +
+      ".rxc-icards{display:grid;gap:6px;grid-template-columns:repeat(4,1fr)}" +
+      "@media(max-width:640px){.rxc-icards{grid-template-columns:1fr 1fr}}" +
+      ".rxc-icard{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:8px;background:var(--hpanel,#fff);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all .15s ease}" +
+      ".rxc-icard:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 8px rgba(14,110,99,.08)}" +
+      ".rxc-icard.rec{border:1.5px solid #0052cc;background:rgba(0,82,204,.03)}" +
+      ".rxc-icard.sel{border-color:var(--teal,#0e6e63);box-shadow:0 0 0 2px rgba(14,110,99,.25);background:rgba(14,110,99,.04)}" +
+      ".rxc-icard.orig{border-style:dashed}" +
+      ".rxc-icat-pill{display:flex;align-items:center;gap:4px;font:800 9.5px var(--hfont);text-transform:uppercase;letter-spacing:.04em;color:#334155}" +
+      ".rxc-idot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}" +
+      ".dot-generic{background:#16a34a}.dot-balanced{background:#0052cc}.dot-premium{background:#7e22ce}.dot-prescribed{background:#475569}" +
+      ".rxc-icomp{font:500 10px var(--hfont);color:var(--hmut,#64748b);margin-top:3px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rxc-ibrand{font:700 12px var(--hfont);margin-top:2px;line-height:1.25}" +
+      ".rxc-icard.generic .rxc-ibrand{color:#16a34a}.rxc-icard.balanced .rxc-ibrand{color:#0052cc}.rxc-icard.premium .rxc-ibrand{color:#7e22ce}.rxc-icard.prescribed .rxc-ibrand{color:var(--hink,#0f172a)}" +
+      ".rxc-imfg{font:500 10px var(--hfont);color:var(--hmut,#64748b);margin-top:1px;min-height:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rxc-iprice{font:800 12.5px var(--hfont);color:var(--teal,#0e6e63);margin-top:4px}" +
+      ".rxc-iprice small{font:500 9.5px var(--hfont);color:var(--hmut,#64748b);margin-left:2px;font-weight:normal}" +
+      ".rxc-ibtn{margin-top:6px;border:0;border-radius:6px;padding:4px 6px;font:700 10.5px var(--hfont);cursor:pointer;text-align:center;background:rgba(100,116,139,.12);color:var(--hink,#0f172a);transition:background .15s}" +
+      ".rxc-icard.sel .rxc-ibtn{background:var(--teal,#0e6e63);color:#fff}" +
+      ".rxc-icard.rec:not(.sel) .rxc-ibtn{background:rgba(0,82,204,.1);color:#0052cc}" +
+      ".rxc-inote{font:500 11px/1.4 var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);padding:6px 8px;border-radius:8px;margin-top:4px}";
     document.head.appendChild(s);
   }
 
@@ -78,25 +102,73 @@
 
   /* ---------------- database access: MEDAPI only, one product truth ---------------- */
 
+  /* Typo-tolerant brand/medicine resolver:
+   * Normalizes punctuation, dosage tokens, and form suffixes so queries like
+   * "Augmentin-625", "Augmentin 625 Duo", "Augmentin625" resolve seamlessly to the
+   * database record and its therapeutic equivalents. */
+  function normalizeBrand(s) {
+    return String(s || "")
+      .toLowerCase()
+      .replace(/[-_/,+]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
   /* Resolve the doctor's BRAND text to the database record they actually prescribed. The brand-name
    * endpoint is the same one the Drugs Database and the Rx brand picker use. An exact name match wins
    * over a prefix, which wins over a substring; the molecule must also match the typed drug when the
    * drug resolves to a composition, so "Augmentin" on a Paracetamol line never silently wins. */
   function resolvePrescribed(line) {
-    var brand = String(line.brand || "").trim();
+    var brand = String((line && line.brand) || "").trim();
     if (!brand) return Promise.resolve(null);
+    var cleanBrand = normalizeBrand(brand);
+    // 1. Direct search with raw brand text
     return MEDAPI.searchBrands(brand, 24).then(function (d) {
       var rows = (d && d.results) || [];
+      if (!rows.length && cleanBrand !== brand.toLowerCase()) {
+        // 2. Normalized search without punctuation/delimiters
+        return MEDAPI.searchBrands(cleanBrand, 24).then(function (d2) {
+          return (d2 && d2.results) || [];
+        });
+      }
+      return rows;
+    }).then(function (rows) {
+      if (!rows.length) {
+        // 3. Primary brand stem search (strip dosage & form tokens)
+        var stem = cleanBrand.replace(/\b(tablet|tab|cap|capsule|syrup|suspension|drops|\d+\s*(?:mg|ml|mcg|g)?)\b/gi, "").trim();
+        if (stem && stem.length >= 3 && stem !== cleanBrand) {
+          return MEDAPI.searchBrands(stem, 24).then(function (d3) {
+            return (d3 && d3.results) || [];
+          });
+        }
+      }
+      return rows;
+    }).then(function (rows) {
       if (!rows.length) return null;
-      var q = brand.toLowerCase();
-      rows = rows.filter(function (r) { return r && r.brand && !r.discontinued; }).concat(rows.filter(function (r) { return r && r.brand && r.discontinued; }));
+      var q = cleanBrand;
+      var lineDrug = normalizeBrand(line.drug || "");
+      rows = rows.filter(function (r) { return r && r.brand && !r.discontinued; })
+        .concat(rows.filter(function (r) { return r && r.brand && r.discontinued; }));
+
       var score = function (r) {
-        var b = String(r.brand).toLowerCase();
-        if (b === q) return 0;
-        if (b.indexOf(q + " ") === 0 || b.indexOf(q) === 0) return 1;
-        return 2;
+        var b = normalizeBrand(r.brand);
+        var s = 10;
+        if (b === q) s = 0;
+        else if (b.indexOf(q + " ") === 0 || b.indexOf(q) === 0) s = 1;
+        else if (b.indexOf(q) >= 0) s = 2;
+        else s = 3;
+
+        // Prioritize hits matching the prescribed generic/composition
+        if (lineDrug && r.composition) {
+          var c = normalizeBrand(r.composition);
+          if (c.indexOf(lineDrug) >= 0 || lineDrug.indexOf(c) >= 0) s -= 1;
+        }
+        return s;
       };
-      rows.sort(function (a, b) { return score(a) - score(b) || String(a.brand).length - String(b.brand).length; });
+
+      rows.sort(function (a, b) {
+        return score(a) - score(b) || String(a.brand).length - String(b.brand).length;
+      });
       return rows[0] || null;
     }).catch(function () { return null; });
   }
@@ -108,6 +180,130 @@
     return MEDAPI.composition(comp, "price_asc", "all", 300, 0)
       .then(function (c) { return (c && c.brands) || []; })
       .catch(function () { return []; });
+  }
+
+  /* Resolve a single prescription line (drug, brand, dose, freq, duration) into its 4-way choices. */
+  function resolveLine(line) {
+    if (!available()) return Promise.resolve(null);
+    var brand = String((line && line.brand) || "").trim();
+    var drug = String((line && line.drug) || "").trim();
+    if (!brand && !drug) return Promise.resolve(null);
+
+    var rxLine = {
+      dose: String((line && line.dose) || "").trim(),
+      freq: String((line && line.freq) || "").trim(),
+      duration: String((line && line.duration) || "").trim()
+    };
+
+    if (!brand) {
+      return Promise.resolve({
+        prescribed: { category: "prescribed", label: "Original Choice", brand: "", manufacturer: "", composition: drug || "", courseCost: null, mrp: null },
+        generic: null, balanced: null, premium: null, blocked: false, reason: "no_brand"
+      });
+    }
+
+    return resolvePrescribed(line).then(function (rec) {
+      if (!rec) {
+        return {
+          prescribed: { category: "prescribed", label: "Original Choice", brand: brand, manufacturer: "", composition: drug || "", courseCost: null, mrp: null },
+          generic: null, balanced: null, premium: null, blocked: false, reason: "not_in_database"
+        };
+      }
+      return candidatesFor(rec.composition).then(function (cands) {
+        var rx = {};
+        for (var k in rec) if (Object.prototype.hasOwnProperty.call(rec, k)) rx[k] = rec[k];
+        rx.dose = rxLine.dose; rx.freq = rxLine.freq; rx.duration = rxLine.duration;
+        return CORE().choose(rx, cands);
+      });
+    }).catch(function () {
+      return {
+        prescribed: { category: "prescribed", label: "Original Choice", brand: brand, manufacturer: "", composition: drug || "", courseCost: null, mrp: null },
+        generic: null, balanced: null, premium: null, blocked: false, reason: "not_in_database"
+      };
+    });
+  }
+
+  /* Render the compact 4-way choice tray directly under an .rx-line on the prescription pad. */
+  function renderInlineTray(container, result, currentBrand, onSelect) {
+    if (!container) return;
+    injectCSS();
+    if (!result) { container.innerHTML = ""; return; }
+    if (result.blocked) {
+      container.innerHTML = '<div class="rxc-inline-tray">' +
+        '<div class="rxc-itray-header"><span class="rxc-itray-pill">RxChoice™</span><span class="rxc-itray-sub">Same Prescription · Smarter Price</span></div>' +
+        '<div class="rxc-inote">Not offered as a price choice. ' + esc(result.reason) + '. Prescribed medicine preserved.</div></div>';
+      return;
+    }
+    if (!result.generic && result.reason === "no_course_quantity") {
+      container.innerHTML = '<div class="rxc-inline-tray">' +
+        '<div class="rxc-itray-header"><span class="rxc-itray-pill">RxChoice™</span><span class="rxc-itray-sub">Same Prescription · Smarter Price</span></div>' +
+        '<div class="rxc-inote">Enter dose, frequency and duration to calculate course costs and compare 4 alternatives.</div></div>';
+      return;
+    }
+    if (!result.generic) {
+      var why = REASON_TEXT[result.reason] || REASON_TEXT.no_validated_alternatives;
+      container.innerHTML = '<div class="rxc-inline-tray">' +
+        '<div class="rxc-itray-header"><span class="rxc-itray-pill">RxChoice™</span><span class="rxc-itray-sub">Same Prescription · Smarter Price</span></div>' +
+        '<div class="rxc-inote">' + esc(why) + '</div></div>';
+      return;
+    }
+
+    var normCur = normalizeBrand(currentBrand);
+    var isSel = function (opt) {
+      if (!opt) return false;
+      if (normCur && normalizeBrand(opt.brand) === normCur) return true;
+      return false;
+    };
+
+    function card(opt, cat, label, dotCls, extraCls) {
+      if (!opt) return "";
+      var sel = isSel(opt);
+      var isOrig = (cat === "prescribed");
+      var sub = opt.packsRequired != null
+        ? (opt.requiredUnits + " units · " + (opt.unitsPerPack != null ? ("pack of " + opt.unitsPerPack) : inr(opt.mrp)))
+        : "";
+      var costTxt = (F("smd_rxchoice_price") && opt.courseCost != null) ? inr(opt.courseCost) : inr(opt.mrp);
+      var act = sel ? (isOrig ? "KEPT" : "SELECTED") : (isOrig ? "Keep" : "Select");
+
+      return '<div class="rxc-icard ' + cat + (sel ? " sel" : "") + (extraCls ? " " + extraCls : "") + '" data-rxc-cat="' + cat + '">' +
+        '<div>' +
+          '<div class="rxc-icat-pill"><span class="rxc-idot ' + dotCls + '"></span>' + esc(label) + '</div>' +
+          '<div class="rxc-icomp" title="' + esc(opt.composition || "") + '">' + esc(opt.composition || "") + '</div>' +
+          '<div class="rxc-ibrand">' + esc(opt.brand || "—") + '</div>' +
+          '<div class="rxc-imfg">' + esc(opt.manufacturer || "") + '</div>' +
+        '</div>' +
+        '<div>' +
+          (costTxt ? ('<div class="rxc-iprice">' + costTxt + (sub ? '<small>(' + esc(sub) + ')</small>' : '') + '</div>') : '<div class="rxc-imfg">Price unavailable</div>') +
+          '<button type="button" class="rxc-ibtn">' + (sel ? "✓ " : "") + act + '</button>' +
+        '</div>' +
+      '</div>';
+    }
+
+    var html = '<div class="rxc-inline-tray">' +
+      '<div class="rxc-itray-header">' +
+        '<span class="rxc-itray-pill">RxChoice™</span>' +
+        '<span class="rxc-itray-sub">4 Ways to Fill This Medicine · Tap any card to set brand</span>' +
+      '</div>' +
+      '<div class="rxc-icards">' +
+        card(result.generic, "generic", "Economy (Lowest Cost)", "dot-generic", "") +
+        card(result.balanced, "balanced", "Best Value ⭐", "dot-balanced", "rec") +
+        card(result.premium, "premium", "Top Branded", "dot-premium", "") +
+        card(result.prescribed, "prescribed", "Doctor Prescribed", "dot-prescribed", "orig") +
+      '</div>' +
+    '</div>';
+
+    container.innerHTML = html;
+
+    Array.prototype.forEach.call(container.querySelectorAll(".rxc-icard"), function (el) {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        var cat = el.getAttribute("data-rxc-cat");
+        var opt = result[cat];
+        if (opt && typeof onSelect === "function") {
+          onSelect(cat, opt, result);
+        }
+      });
+    });
   }
 
   /* ---------------- render ---------------- */
@@ -206,7 +402,7 @@
     var o = r[key]; if (!o) return;
     st.selected[i] = key;
     try {
-      if (typeof st.onSelect === "function") st.onSelect(i, o, st.lines[i]);
+      if (typeof st.onSelect === "function") st.onSelect(i, o, st.lines[i], r, st);
     } catch (e) {}
     logAudit(CORE().auditEntry({
       prescriptionId: st.prescriptionId, original: r.prescribed, alternative: o, category: key,
@@ -264,5 +460,16 @@
     })();
   }
 
-  window.SMD_RXCHOICE_UI = { open: open, available: available, close: close, audit: audit, clearAudit: clearAudit, _version: 1 };
+  window.SMD_RXCHOICE_UI = {
+    open: open,
+    available: available,
+    close: close,
+    audit: audit,
+    clearAudit: clearAudit,
+    resolvePrescribed: resolvePrescribed,
+    resolveLine: resolveLine,
+    renderInlineTray: renderInlineTray,
+    normalizeBrand: normalizeBrand,
+    _version: 2
+  };
 })();
