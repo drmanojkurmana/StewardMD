@@ -2267,8 +2267,14 @@ test("ORDER -> RESULT -> CRITICAL LOOP, natively, end to end", async () => {
   assert.equal(rel.observations.find((o) => o.display === "Blood culture").codeSystem, "wardsynq-lab-local");
 
   // It is now on the chart, and the critical loop opens off it - natively, with no GHIS anywhere.
-  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: rel.reportId });
-  assert.equal(opened.opened, 1);
+  /* Releasing the result opens the loop itself now - it used to need a separate /ward/flag-critical call
+   * that no screen ever made, so a critical potassium alerted nobody. */
+  assert.equal(rel.critical && rel.critical.checked, true, JSON.stringify(rel.critical));
+  assert.equal(rel.critical.opened, 1, "releasing a critical potassium opens exactly one loop");
+  // Asking again opens no second loop for the same result.
+  const again = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: rel.reportId });
+  assert.equal(again.opened, 0, "a second flag must not duplicate the loop: " + JSON.stringify(again));
+  const opened = { loops: rel.critical.loops };
   assert.equal(opened.loops[0].display, "Potassium");
   assert.equal(opened.loops[0].basis, "limit", "flagged by the site's limits, not by the lab");
   assert.equal(opened.loops[0].value, 7.4);

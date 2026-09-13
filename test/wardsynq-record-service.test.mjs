@@ -703,7 +703,7 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * "laboratory" (pinned in the inpatient suite), and closing it properly needs a category-scoped
    * grant, which is a change to the store's authorisation model rather than to this table. */
   assert.equal(tier("lab"), TIER.EXECUTE);
-  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"]);
+  assert.deepEqual(write("lab"), ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol", "CriticalResultLoop"]);
   /* Patient joined the READ list on 2026-09-12, and the assertion below changed with it, so the
    * change is recorded rather than quietly absorbed.
    *
@@ -717,7 +717,7 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * MedicationOrder. A laboratory still cannot read the chart, and emr.view was tried on the role
    * first and reverted the same day precisely because it opened the discharge summary and the
    * ward's critical-results list, which the inpatient suite rightly refuses. */
-  assert.deepEqual(read("lab"), ["Patient", "ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"]);
+  assert.deepEqual(read("lab"), ["Patient", "ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol", "CriticalResultLoop"]);
   assert.ok(!write("lab").includes("MedicationOrder") && !write("lab").includes("Condition"), "a laboratory does not prescribe or diagnose");
   assert.ok(!write("lab").includes("Patient"), "and it never WRITES a patient's identity, only reads it to name a sample");
   assert.ok(!read("lab").includes("ClinicalNote") && !read("lab").includes("Encounter") && !read("lab").includes("Condition") && !read("lab").includes("MedicationOrder"),

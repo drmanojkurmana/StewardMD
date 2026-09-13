@@ -2229,6 +2229,28 @@ export async function onRequest(context) {
           deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null,
           idempotencyKey: body.idempotencyKey || null,
         });
+        /* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
+         * reachable through /ward/flag-critical, which nothing called - so a potassium of 7 released
+         * through the laboratory screen opened no critical-result loop and alerted nobody. The loops are
+         * now opened here, straight after the write, against the report ON THE RECORD (not the request
+         * body) and with the site's own limits, so no client can release a result without it being
+         * checked. A failure to open them is reported on the release, never swallowed: a result that
+         * could not be checked must not read as a result that was checked and found normal. */
+        if (r && r.ok && r.reportId) {
+          try {
+            const crit = await openCriticalLoops(request, env, {
+              ...deps, reportId: r.reportId,
+              limits: (wsqCfg && wsqCfg.criticalLimits) || null,
+              notifyDeps: {},
+              idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null,
+            });
+            r.critical = crit && crit.ok
+              ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
+              : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
+          } catch (e) {
+            r.critical = { checked: false, error: "critical_check_failed" };
+          }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "pending-tests" && method === "GET") {

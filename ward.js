@@ -6581,6 +6581,13 @@
       .then(function (r) {
         st.busy = false;
         st.labResultOutcome = r || null;
+        /* Whether the result was checked against the critical limits is said on every release. A check
+         * that failed is a warning, never silence. */
+        if (r && r.ok && r.critical && !r.critical.checked) {
+          st.err = "Result saved, but it could NOT be checked against the critical limits. Review it for critical values now.";
+        } else if (r && r.ok && r.critical && r.critical.opened) {
+          st.err = r.critical.opened + " critical value" + (r.critical.opened === 1 ? "" : "s") + " in this result. The critical-result alert has been opened.";
+        }
         if (r && r.ok && !(r.rejected && r.rejected.length)) {
           st.labResultFor = null; st.note = "Result released.";
           loadLabBoard();
