@@ -218,6 +218,28 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
       warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
     }
   };
+  /* NOT ON THE EMR YET. Sign-in is detected when the password box goes, which on a single-sign-on
+   * hospital is the app chooser, not the EMR: the crawl then read a login or shell page, found nothing,
+   * and an empty draft was filed (owner, Pixel, 2026-09-13). Ask the doctor to open their patient list
+   * and crawl again, up to twice. */
+  for (let tries = 0; !manual && tries < 2 && (crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') && typeof askDoctor === 'function' && !stopped(); tries += 1) {
+    const text = 'Open your patient list in the hospital (for example the Doctor module), then tap Done.';
+    notify('ASKING', { gap: 'worklist', text, found, looking: looking() });
+    await setMode('guide', text);
+    let a = null;
+    try { a = await askDoctor({ gap: 'worklist', text, mode }); } catch { a = null; }
+    if (!a || !a.done) break;
+    await setMode('agent');
+    try {
+      const again = await deepCrawlClinical({
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain,
+        onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
+      });
+      observedViews = again.observedViews || [];
+      found = again.found || [];
+      crawlStop = again.stopReason;
+    } catch { break; }
+  }
   if (!manual) await runVerification();
 
   // Ask the doctor: in manual mode for every resource, in auto mode for what the crawl could not find
@@ -237,6 +259,11 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   // What the doctor showed (or manual mode captured) is proven the same way, once.
   if (manual || asked.length) await runVerification();
 
+  // Nothing discovered is a failure with its reason, never an "adapter created".
+  if (!observedViews.length) {
+    await collector.detach().catch(() => {});
+    throw new Error('nothing was discovered (' + (crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell' ? 'the browser was not on the EMR after sign-in' : (crawlStop || 'no clinical screen found')) + ')');
+  }
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 

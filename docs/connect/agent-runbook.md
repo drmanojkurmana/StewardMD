@@ -60,8 +60,8 @@ All new flags default to OFF (fail closed).
 - `smd_connect_agent`: Client-side UI launcher gate in `connect-agent-boot.js` (default: OFF). Set via `localStorage.setItem("smd_connect_agent", "1")` or URL parameter `?connect_agent=1`.
 
 ### The brain (model that reads screen structure)
-- `CONNECT_AGENT_MODEL`: optional. Google model id for `POST /api/connect/agent/brain/{classify,map-columns,next}` (`functions/_connect/agent/brain.js`). Default: the MaiK registry's Vertex Pro entry. Never a dated id in code.
-- `CONNECT_AGENT_MODEL_PROVIDER`: optional, `vertex` (default) or `gemini` (AI Studio). Both use `GEMINI_API_KEY`. Unpinned, a Vertex refusal falls back to AI Studio once.
+- `CONNECT_AGENT_MODEL`: REQUIRED. The exact Google model id for the Connect Agent brain (owner: Gemini 3.8). No default and no fallback: unset means every brain call fails with brain_not_configured. `GET /api/connect/agent/brain/model` reports what is configured. Not set on production as of 2026-09-13.
+- `CONNECT_AGENT_MODEL_PROVIDER`: `vertex` (default) or `gemini` (AI Studio). No automatic switch between them.
 - Ops: `classify`, `map-columns`, `next`, `verify` (judges a replayed view from columns, row count and response kind).
 - Requests pass a refusing PHI gate (whitelisted keys, no 3+ digit runs, no `@`); answers are cached in `MAIK_KV` per origin and structure hash for 30 days. A model outage answers 503 `brain_unavailable` and the phone continues on its deterministic rules.
 

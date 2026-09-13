@@ -1570,7 +1570,12 @@
   function verifiedLines() {
     var v = S.result && S.result.verification;
     var checks = (v && v.checks) || [];
-    if (!checks.length) return "";
+    if (!checks.length) {
+      // No verification ran: say why, in plain words, instead of a silent probe list.
+      var why = S.result && (S.result.crawlStop || S.result.stopReason);
+      var warn = S.result && (S.result.warnings || [])[0];
+      return (why || warn) ? '<div class="smd-connect-note">Not checked against patients' + (why ? ' (the crawl stopped: ' + esc(why) + ')' : '') + (warn ? '. ' + esc(warn) : '') + '.</div>' : "";
+    }
     var items = checks.map(function (c) {
       var name = esc(VIEW_NAMES[c.resource] || c.resource);
       if (c.ok) return '<li>' + name + ': ' + esc(c.rows) + ' rows read through the ' + (c.via === 'endpoint' ? 'discovered endpoint' : 'page') + '.</li>';
@@ -1708,7 +1713,8 @@
         statusText: S.statusText,
         controlOwner: S.controlOwner,
         connectionCount: S.connections.length,
-        canApprove: S.canApprove
+        canApprove: S.canApprove,
+        run: S.result ? { crawlStop: S.result.crawlStop || null, stopReason: S.result.stopReason || null, views: (S.result.observedViews || []).length, found: S.result.found || [], asked: S.result.asked || [], missing: S.result.missing || [], warnings: S.result.warnings || [], checks: ((S.result.verification || {}).checks || []).length, patients: (S.result.verification || {}).patients || 0, candidate: S.result.candidateVersionId || null } : null
       };
     }
   };

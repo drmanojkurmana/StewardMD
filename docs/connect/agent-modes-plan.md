@@ -129,3 +129,31 @@ owner's next test.
   manual button; doctor taps, signs in, patients appear.
 - No PHI in any model request (test asserts the gate with real GHIS structure fixtures).
 - Every failure names its reason. No em-dash in app text.
+
+## Proven endpoints (owner decision 2026-09-13): EXPLORE -> OBSERVE -> GEMINI -> EXECUTE -> VERIFY -> LEARN
+
+"Do not save an endpoint as discovered until the system has proven what that endpoint does."
+Same-to-same reproduction of the hand-built GHIS proxy (functions/api/ghis/[[path]].js) wherever it
+supports a view; discovery never receives the GHIS endpoint list, only verification compares against it.
+
+Today (why endpoints are wrong): captureView stores every request fired around a tap as the view's
+endpoints (deep-crawl.mjs redactEndpoints/mergeEndpointDetails); the runtime later guesses with
+rankCalls/headerFit (adapter-runtime.mjs); Gemini only picks taps (brain.next), labels screens
+(classify/map-columns) and judges rows after the fact (verify.mjs judge, skipped when rows are empty).
+
+Build, per captured screen (crawl step or guided Done):
+1. OBSERVE (phone): visible table headers, a set of cell-value hashes for the on-screen rows (never
+   leaves the phone), the action label, and the requests fired since the action with method, path,
+   field names, response kind and response keys/columns (structure only).
+2. REASON (brain op `pick-endpoint`, PHI gate): screen headers + action + candidates -> ranked list
+   with role (data | lookup | ping | shell) and chain hints (which response key feeds which next call).
+3. EXECUTE: replay candidates in rank order inside the page on the data host (adapter-runtime).
+4. VERIFY (phone): overlap of response cell values with the on-screen value hashes; accept at a set
+   threshold, store `proof` {overlap, rows, kind} on the endpoint; else next candidate; none -> the
+   view is page-read or the doctor is asked. Unproven endpoints are never saved.
+5. LEARN / CHAIN: for a proven list, take a row id from the response (renderId, resultid, visit id),
+   open that row, and run the loop for the detail call with the parent key mapping stored.
+6. GOLD AUDIT (verification only, phone): for the same patients, call the hand-built /api/ghis
+   endpoints and the adapter, compare endpoint-by-endpoint and field-by-field; report per view.
+
+STATUS: not started (same-host replay fix committed 7b48611e).

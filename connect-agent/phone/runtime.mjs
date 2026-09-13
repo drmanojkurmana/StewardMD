@@ -187,7 +187,16 @@ function samePage(a, b) { try { const x = new URL(a), y = new URL(b); return x.h
  * reads empty, tick a toggle labelled like that once and read again. */
 export const TOGGLE_ALL = "(function(){try{var els=[].slice.call(document.querySelectorAll('label,input[type=\"checkbox\"],a,button,span,div'));for(var i=0;i<els.length;i++){var el=els[i];var t=(el.textContent||el.getAttribute('aria-label')||'').replace(/\\s+/g,' ').trim();if(!/^(all patients|show all( patients)?|all)$/i.test(t))continue;var box=el.tagName==='INPUT'?el:(el.querySelector&&el.querySelector('input[type=\"checkbox\"]'))||(el.htmlFor&&document.getElementById(el.htmlFor))||null;if(!box&&el.previousElementSibling&&el.previousElementSibling.tagName==='INPUT')box=el.previousElementSibling;if(!box&&el.parentElement)box=el.parentElement.querySelector('input[type=\"checkbox\"]');if(box){if(box.checked)return 'already';box.click();return 'ticked'}el.click();return 'clicked'}return 'none'}catch(e){return 'e'}})()";
 
+/* THE DATA HOST IS WHERE THE VIEW WAS SEEN, NOT WHERE THE DOCTOR SIGNED IN. GHIS signs in on
+ * gimsrlogin.gitam.edu and serves every screen from ghis.gitam.edu; joining the recorded calls to the
+ * login host failed every replay in Ward Sync and in verification (Pixel, 2026-09-13). */
+export function viewOrigin(view, fallback) {
+  try { const u = new URL(String(view && (view.pathTemplate || view.path) || '')); if (/^https:$/.test(u.protocol)) return u.origin; } catch { /* relative */ }
+  return fallback;
+}
+
 export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000, navigate = true, toggleAll = false }) {
+  origin = viewOrigin(view, origin);
   if (navigate) {
     /* Already on the page (the doctor signed in and landed on it): reading it as it stands keeps the
      * context the EMR set for them; a reload from the address bar can lose it. */
@@ -317,9 +326,11 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
      * the worklist (the single-page Doctor Home) is skipped: it never shows this patient's panel on
      * its own. Each place is read with the recorded selector, then with the fallback. */
     let replayed = null;
-    try { replayed = await replayFirst({ plugin, origin, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
+    const vo = viewOrigin(v, origin);
+    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
     if (replayed) { sections.push({ resource: r, rows: replayed, via: 'endpoint' }); continue; }
     const own = fillPath(v.pathTemplate || v.path, patient);
+    const origin_ = vo;
     const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
     const places = [];
     if (!shared) places.push(own);
@@ -328,7 +339,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     let lastErr = null;
     for (const place of places) {
       for (const candidate of [Object.assign({}, v, { pathTemplate: place }), Object.assign(fallbackView(v), { pathTemplate: place })]) {
-        try { rows = await readView({ plugin, origin, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
+        try { rows = await readView({ plugin, origin: vo, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
         if (rows.length) break;
       }
       if (rows.length) break;

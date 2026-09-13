@@ -73,7 +73,7 @@ import {
   templatePlaceholders,
 } from "../../../../connect-agent/manifest/schema.mjs";
 import { inferHtmlOperations } from "../../../../connect-agent/manifest/infer-html.mjs";
-import { askBrain, ROLES as BRAIN_ROLES } from "../../../_connect/agent/brain.js";
+import { askBrain, brainModel, ROLES as BRAIN_ROLES } from "../../../_connect/agent/brain.js";
 
 export { agentFlagOn, browserSessionFlagOn } from "../../../_connect/agent/flags.js";
 
@@ -422,6 +422,12 @@ export async function onRequest(context) {
     // POST /brain/classify | /brain/map-columns | /brain/next -- the model that reads screen STRUCTURE.
     // PHI gate first (400 with the reason, nothing sent), then a per-origin cache, then the model.
     // A model failure is 503 brain_unavailable: the phone falls back to its deterministic rules.
+    // GET /brain/model -- which model the Connect Agent brain is configured to use (no key, no fallback).
+    if (method === "GET" && seg === "brain/model") {
+      await requireAgent(deps, request, env, tid, "read");
+      try { const m = brainModel(env); return jsonResponse({ ok: true, provider: m.provider, model: m.model }); }
+      catch (e) { return jsonResponse({ ok: false, error: "brain_not_configured", detail: String(e.message || e) }, { status: 503 }); }
+    }
     if (method === "POST" && parts.length === 2 && parts[0] === "brain") {
       await requireAgent(deps, request, env, tid, "session");
       if (findHostileKeys(body).length) throw new OnboardError("invalid", "hostile key in request body");

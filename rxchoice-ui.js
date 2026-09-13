@@ -122,10 +122,27 @@
     var brand = String((line && line.brand) || "").trim();
     if (!brand) return Promise.resolve(null);
     var cleanBrand = normalizeBrand(brand);
-    // 1. Direct search with raw brand text
-    return MEDAPI.searchBrands(brand, 24).then(function (d) {
-      var rows = (d && d.results) || [];
-      if (!rows.length && cleanBrand !== brand.toLowerCase()) {
+    var hyphenated = cleanBrand.replace(/\s+/g, "-");
+
+    // 1. Direct search with raw brand text and hyphenated variant (e.g. "Montair LC" and "Montair-LC")
+    var searches = [MEDAPI.searchBrands(brand, 24)];
+    if (hyphenated !== cleanBrand && hyphenated !== brand.toLowerCase()) {
+      searches.push(MEDAPI.searchBrands(hyphenated, 24));
+    }
+
+    return Promise.all(searches).then(function (results) {
+      var rows = [];
+      var seenIds = {};
+      results.forEach(function (d) {
+        var list = (d && d.results) || [];
+        list.forEach(function (r) {
+          if (r && r.id != null && !seenIds[r.id]) {
+            seenIds[r.id] = true;
+            rows.push(r);
+          }
+        });
+      });
+      if (!rows.length && cleanBrand !== brand.toLowerCase() && cleanBrand !== hyphenated) {
         // 2. Normalized search without punctuation/delimiters
         return MEDAPI.searchBrands(cleanBrand, 24).then(function (d2) {
           return (d2 && d2.results) || [];
@@ -144,6 +161,27 @@
       }
       return rows;
     }).then(function (rows) {
+      if (!rows.length && line.drug) {
+        // 5. Search within molecule composition if brand-search did not hit
+        return MEDAPI.composition(line.drug, "price_desc", "all", 100, 0).then(function (c) {
+          var cb = (c && c.brands) || [];
+          var compName = (c && c.composition) || line.drug;
+          return cb.map(function (b) {
+            return {
+              id: b.id,
+              brand: b.brand,
+              manufacturer: b.manufacturer,
+              mrp: b.mrp,
+              form: b.form,
+              pack: b.pack || b.form,
+              composition: b.composition || compName,
+              discontinued: b.discontinued
+            };
+          });
+        });
+      }
+      return rows;
+    }).then(function (rows) {
       if (!rows.length) return null;
       var q = cleanBrand;
       var lineDrug = normalizeBrand(line.drug || "");
@@ -155,14 +193,36 @@
         var s = 10;
         if (b === q) s = 0;
         else if (b.indexOf(q + " ") === 0 || b.indexOf(q) === 0) s = 1;
-        else if (b.indexOf(q) >= 0) s = 2;
+        else if (b.indexOf(" " + q + " ") >= 0 || b.indexOf(q) >= 0) s = 2;
         else s = 3;
 
         // Prioritize hits matching the prescribed generic/composition
         if (lineDrug && r.composition) {
-          var c = normalizeBrand(r.composition);
-          if (c.indexOf(lineDrug) >= 0 || lineDrug.indexOf(c) >= 0) s -= 1;
+          var core = CORE();
+          if (core && core.compositionKey(r.composition) === core.compositionKey(lineDrug)) s -= 3;
+          else {
+            var c = normalizeBrand(r.composition);
+            if (c.indexOf(lineDrug) >= 0 || lineDrug.indexOf(c) >= 0) s -= 1;
+          }
         }
+
+        // Form prioritization: prefer oral solids (tablet/capsule) unless liquid/injection is explicit
+        var form = normalizeBrand(r.form || "");
+        var isLiquid = /syrup|suspension|liquid|solution|drops/.test(form);
+        var isInjection = /injection|infusion|vial|ampoule/.test(form);
+        var lineRequestsLiquid = /syrup|suspension|liquid|solution|drops|ml\b/i.test((line.drug || "") + " " + (line.dose || ""));
+        var lineRequestsInjection = /injection|infusion|iv\b|im\b/i.test((line.drug || "") + " " + (line.dose || ""));
+
+        if (!lineRequestsLiquid && isLiquid) s += 4;
+        if (!lineRequestsInjection && isInjection) s += 5;
+        if (!lineRequestsLiquid && !lineRequestsInjection && (form === "tablet" || form === "capsule")) s -= 1;
+
+        // Pediatric penalization if line does not mention pediatric
+        var isPediatric = /\b(kid|pediatric|paediatric|junior|baby|infant)\b/i.test(r.brand || "");
+        var lineIsPediatric = /\b(kid|pediatric|paediatric|junior|baby|infant)\b/i.test((line.brand || "") + " " + (line.drug || ""));
+        if (isPediatric && !lineIsPediatric) s += 4;
+        if (!isPediatric && lineIsPediatric) s += 4;
+
         return s;
       };
 
@@ -211,9 +271,29 @@
     };
 
     if (!brand) {
-      return Promise.resolve({
-        prescribed: { category: "prescribed", label: "Original Choice", brand: "", manufacturer: "", composition: drug || "", courseCost: null, mrp: null },
-        generic: null, balanced: null, premium: null, blocked: false, reason: "no_brand"
+      return candidatesFor(drug).then(function (cands) {
+        if (!cands || !cands.length) {
+          return {
+            prescribed: { category: "prescribed", label: "Original Choice", brand: drug, manufacturer: "Generic Prescribed", composition: drug, courseCost: null, mrp: null },
+            generic: null, balanced: null, premium: null, blocked: false, reason: "no_candidates_for_generic"
+          };
+        }
+        var rx = {
+          brand: drug + (rxLine.dose ? (" " + rxLine.dose) : ""),
+          composition: drug,
+          form: "tablet",
+          mrp: null,
+          manufacturer: "Generic Prescribed",
+          dose: rxLine.dose,
+          freq: rxLine.freq,
+          duration: rxLine.duration
+        };
+        return CORE().choose(rx, cands);
+      }).catch(function () {
+        return {
+          prescribed: { category: "prescribed", label: "Original Choice", brand: drug, manufacturer: "Generic Prescribed", composition: drug, courseCost: null, mrp: null },
+          generic: null, balanced: null, premium: null, blocked: false, reason: "no_brand"
+        };
       });
     }
 
@@ -285,7 +365,7 @@
         '<div>' +
           '<div class="rxc-icat-pill"><span class="rxc-idot ' + dotCls + '"></span>' + esc(label) + '</div>' +
           '<div class="rxc-icomp" title="' + esc(opt.composition || "") + '">' + esc(opt.composition || "") + '</div>' +
-          '<div class="rxc-ibrand">' + esc(opt.brand || "—") + '</div>' +
+          '<div class="rxc-ibrand">' + esc(opt.brand || "-") + '</div>' +
           '<div class="rxc-imfg">' + esc(opt.manufacturer || "") + '</div>' +
         '</div>' +
         '<div>' +
@@ -346,7 +426,7 @@
       '<div class="rxc-cat">' + esc(o.category === "balanced" ? "BALANCED ⭐" : o.category.toUpperCase()) + "</div>" +
       '<div class="rxc-lab">' + esc(o.label) +
         (o.sameAs === "generic" ? " · also the lowest cost" : o.sameAs === "premium" ? " · also the top branded option" : "") + "</div>" +
-      '<div class="rxc-br">' + esc(o.brand || "—") + "</div>" +
+      '<div class="rxc-br">' + esc(o.brand || "-") + "</div>" +
       '<div class="rxc-mf">' + esc(o.manufacturer || "") + "</div>" +
       costHTML(o) +
       '<button type="button" class="rxc-btn' + (selected ? " done" : "") + '" data-rxc-pick="' + idx + ":" + key + '">' +

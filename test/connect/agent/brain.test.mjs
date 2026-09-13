@@ -111,7 +111,7 @@ async function routeEnv(generateImpl) {
   const env = {
     CONNECT_FLAG: "1", CONNECT_ONBOARD_FLAG: "1", CONNECT_AGENT_FLAG: "1", CONNECT_BROWSER_SESSION_FLAG: "1",
     CONNECT_CONSENT_SIGNING_KEY: "secret-consent-signing-key-32bytes", CONNECT_AGENT_TOKEN_KEY: "secret-agent-token-key-32bytes",
-    CONNECT_DB: db, identifyFn, brainGenerate: generateImpl,
+    CONNECT_DB: db, identifyFn, brainGenerate: generateImpl, CONNECT_AGENT_MODEL: "gemini-3.8-test",
   };
   const post = (path, body, headers) => onRequest({ request: new Request("https://x" + path, { method: "POST", body: JSON.stringify(body), headers: Object.assign({ "content-type": "application/json" }, headers || {}) }), env, params: {} });
   return { post, doc: { "Cf-Access-Authenticated-User-Email": email } };
@@ -137,4 +137,11 @@ test("POST /brain/classify answers a member, refuses PHI with 400 and names a mo
   const d = await down.json();
   assert.equal(d.error, "brain_unavailable");
   assert.match(d.detail, /PERMISSION_DENIED/);
+});
+
+test("the brain never runs on a default model: no CONNECT_AGENT_MODEL is a named refusal", async () => {
+  const { brainModel } = await import("../../../functions/_connect/agent/brain.js");
+  assert.throws(() => brainModel({}), /CONNECT_AGENT_MODEL is not set/);
+  assert.deepEqual(brainModel({ CONNECT_AGENT_MODEL: "gemini-3.8-pro", CONNECT_AGENT_MODEL_PROVIDER: "gemini" }), { provider: "gemini", model: "gemini-3.8-pro" });
+  await assert.rejects(askBrain({ env: {}, payload: GHIS_WORKLIST, generateImpl: async () => ({ text: "{}" }) }), /CONNECT_AGENT_MODEL is not set/);
 });
