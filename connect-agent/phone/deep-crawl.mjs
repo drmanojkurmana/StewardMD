@@ -46,7 +46,10 @@ const SKIP_SRC =
   'log.?out|sign.?out|log.?off|delete|remove|\\bsave|submit|update|\\bedit|\\badd\\b|\\bnew\\b|create|' +
   'order|prescri|upload|attach|send|\\bsms|whatsapp|mail|print|export|download|cancel|\\bclose|\\bback\\b|' +
   '\\bhome\\b|refresh|reload|\\bapps?\\b|switch|password|settings|transfer|admit|approve|reject|confirm|' +
-  '\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
+  '×|✕|\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
+
+// Controls that switch which patient list is shown (tabs and menu items on a worklist page).
+const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted/i;
 
 const HINT_RULES = [
   /* Indian hospital EMRs rarely say "medications": GHIS and its peers label the same chart
@@ -1037,6 +1040,42 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
    * candidate (a DataTables list fills itself on load, before any click). */
   const wl = observedViews.find((v) => v.resourceHint === 'worklist' && v.rowsSelector);
   if (book && wl) await book.prove({ client, view: wl, label: 'open the patient list', since: 0 });
+  /* THE LIST'S OWN CALL OFTEN NEEDS A TAB. GHIS draws the landing list into the page HTML (nothing to
+   * prove) and fetches a list only when "In patients" or "IP worklist" is tapped (Pixel, 2026-09-13).
+   * Tap each list control once, prove what it shows, keep the proven list with the most rows first,
+   * and come back to the landing page to open a patient. */
+  if (book && typeof client.navigate === 'function') {
+    const landing = await currentUrl();
+    const listViews = [];
+    const tabs = (await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []) || [])
+      .filter((c) => c && LIST_CONTROL.test(c.label)).map((c) => c.label);
+    for (const label of [...new Set(tabs)].slice(0, 4)) {
+      if (stopped() || Date.now() >= deadline) break;
+      const now = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+      const ctl = (Array.isArray(now) ? now : []).find((c) => c.label === label);
+      if (!ctl) continue;
+      progress(label, 0);
+      await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
+      await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${ctl.index},${JSON.stringify(CONTROL_QUERY)})` });
+      await client.wait({ ms: Math.max(waitMs * 5, 6000) });
+      trail.push(label);
+      const v = await captureView({ client, resourceHint: 'worklist' });
+      if (v && v.rowsSelector && !v.block) {
+        await book.prove({ client, view: v, label: 'tap ' + label });
+        if (v.proof && v.proof.status === 'proven') listViews.push(v);
+      }
+      if (landing && (await currentUrl()) !== landing) { await client.navigate({ url: landing }).catch(() => {}); await client.wait({ ms: waitMs * 3 }); }
+    }
+    if (listViews.length) {
+      const rowsOf = (v) => ((v.endpoints || []).find((e) => e.role === 'data') || { proof: {} }).proof.rows || 0;
+      listViews.sort((a, b) => rowsOf(b) - rowsOf(a));
+      const at = observedViews.indexOf(wl);
+      observedViews.splice(at >= 0 ? at : 0, at >= 0 ? 1 : 0, ...listViews, ...(wl && wl.proof && wl.proof.status === 'proven' ? [wl] : []));
+      found.add('worklist');
+      // The landing list may have been redrawn: find the patient row again.
+      row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null) || row;
+    }
+  }
   if (typeof client.drainRequests === 'function') await client.drainRequests().catch(() => null); // fresh per-click log
   await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
   await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
