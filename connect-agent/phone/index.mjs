@@ -33,6 +33,7 @@ export const GAP_PROMPTS = Object.freeze({
   history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done.',
 });
 const MAX_ASKS = 4;
+const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history' });
 const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[type=\"password\"]')?'1':'0'})()";
 
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
@@ -128,45 +129,60 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   /* One guided ask: hand the screen to the doctor, wait for Done / Not in my EMR / Skip, capture what
    * they landed on. Shared by both modes. Returns 'captured' | 'missing' | 'skipped' | 'unreadable'. */
   const askOne = async (gap, text, step, total) => {
-    notify('ASKING', { gap, text, step, total, found, looking: looking() });
-    await setMode('guide', text);
-    await plugin.evaluate({ expression: GUIDE_SOURCES.arm }).catch(() => {});
-    await plugin.evaluate({ expression: GUIDE_SOURCES.armGuide }).catch(() => {});
-    let answer = null;
-    try { answer = await askDoctor({ gap, text, step, total, mode }); } catch { answer = null; }
-    /* SIGNED OUT DURING THE ASK: the screen the doctor tapped Done on is the login page. Ask them to
-     * sign in again and show the same screen, up to twice, instead of capturing a login form. */
-    for (let tries = 0; tries < 2 && answer && answer.done; tries += 1) {
-      let onLogin = false;
-      try { onLogin = /1/.test(String((await plugin.evaluate({ expression: LOGIN_FORM_PRESENT }))?.result)); } catch { onLogin = false; }
-      if (!onLogin) break;
-      const again = 'You were signed out. Sign in again, then ' + text.charAt(0).toLowerCase() + text.slice(1);
-      notify('ASKING', { gap, text: again, step, total, found, looking: looking(), signedOut: true });
-      await setMode('guide', again);
-      try { answer = await askDoctor({ gap, text: again, step, total, mode }); } catch { answer = null; }
+    /* ASK UNTIL IT IS PROVEN (owner, 2026-09-13). The doctor opens the screen and taps Done; every
+     * request fired between the ask and Done is replayed and must carry what the screen shows, and
+     * Gemini must agree the reply is that resource. When none does, the doctor is asked again (up to
+     * three times) instead of saving a guess. */
+    let prompt = text;
+    let last = null;
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      notify('ASKING', { gap, text: prompt, step, total, found, looking: looking(), attempt: attempt + 1 });
+      await setMode('guide', prompt);
+      await plugin.evaluate({ expression: GUIDE_SOURCES.arm }).catch(() => {});
+      await plugin.evaluate({ expression: GUIDE_SOURCES.armGuide }).catch(() => {});
+      let answer = null;
+      try { answer = await askDoctor({ gap, text: prompt, step, total, mode }); } catch { answer = null; }
+      /* SIGNED OUT DURING THE ASK: the screen the doctor tapped Done on is the login page. Ask them to
+       * sign in again and show the same screen, up to twice, instead of capturing a login form. */
+      for (let tries = 0; tries < 2 && answer && answer.done; tries += 1) {
+        let onLogin = false;
+        try { onLogin = /1/.test(String((await plugin.evaluate({ expression: LOGIN_FORM_PRESENT }))?.result)); } catch { onLogin = false; }
+        if (!onLogin) break;
+        const again = 'You were signed out. Sign in again, then ' + text.charAt(0).toLowerCase() + text.slice(1);
+        notify('ASKING', { gap, text: again, step, total, found, looking: looking(), signedOut: true });
+        await setMode('guide', again);
+        try { answer = await askDoctor({ gap, text: again, step, total, mode }); } catch { answer = null; }
+      }
+      if (attempt === 0) asked.push(gap);
+      if (answer && answer.missing) { missing.push(gap); return 'missing'; }
+      if (!answer || !answer.done) break;
+      let guidedPath = [];
+      try { guidedPath = JSON.parse((await plugin.evaluate({ expression: GUIDE_SOURCES.guidePath }))?.result || '[]'); } catch { guidedPath = []; }
+      let view = null;
+      try { view = await captureView({ client: plugin, resourceHint: gap, blockOnly: gap === 'patient' }); } catch { view = null; }
+      if (!view || !view.rowsSelector) {
+        try { view = await captureView({ client: plugin, resourceHint: gap }); } catch { view = null; }
+      }
+      if (!view || !view.rowsSelector) {
+        await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+        prompt = 'I could not read a table on that screen. Open the ' + GAP_NAMES[gap] + ' for a patient, tap inside the list so it turns green, then tap Done.';
+        continue;
+      }
+      view.guided = true;
+      if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
+      const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
+      await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
+      await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+      if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
+        warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
+      }
+      last = view;
+      if (view.proof && view.proof.status === 'proven') break;
+      prompt = 'None of the requests from that screen returned the ' + GAP_NAMES[gap] + '. Open the ' + GAP_NAMES[gap] + ' for a patient again (the list itself, not a menu), tap inside it so it turns green, then tap Done.';
     }
-    asked.push(gap);
-    if (answer && answer.missing) { missing.push(gap); return 'missing'; }
-    if (!answer || !answer.done) return 'skipped';
-    let guidedPath = [];
-    try { guidedPath = JSON.parse((await plugin.evaluate({ expression: GUIDE_SOURCES.guidePath }))?.result || '[]'); } catch { guidedPath = []; }
-    let view = null;
-    try { view = await captureView({ client: plugin, resourceHint: gap, blockOnly: gap === 'patient' }); } catch { view = null; }
-    if (!view || !view.rowsSelector) {
-      try { view = await captureView({ client: plugin, resourceHint: gap }); } catch { view = null; }
-    }
-    if (!view || !view.rowsSelector) { await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {}); warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
-    view.guided = true;
-    if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
-    /* The brain checks the doctor's answer against the structure and maps the columns; the doctor's
-     * word on WHAT the screen is stands, a strong disagreement is only reported. */
-    const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
-    await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
-    if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
-      warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
-    }
-    await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
-    observedViews.push(view);
+    if (!last) { warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
+    if (!(last.proof && last.proof.status === 'proven')) warnings.push('no request was proven for the ' + gap + ' screen; it will be read from its page');
+    observedViews.push(last);
     found = [...found, gap];
     notify('CAPTURED', { gap, step, total, found, looking: looking() });
     return 'captured';

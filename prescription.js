@@ -58,31 +58,59 @@
     if (document.getElementById("rxCss")) return;
     var s = document.createElement("style"); s.id = "rxCss";
     s.textContent =
-      ".rx-scrim{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:16000;opacity:0;transition:.2s;pointer-events:none}.rx-scrim.on{opacity:1;pointer-events:auto}" +
-      ".rx-sheet{position:fixed;left:50%;top:50%;transform:translate(-50%,-48%);width:min(680px,94vw);max-height:92vh;overflow:auto;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:16px;z-index:16001;opacity:0;transition:.2s;pointer-events:none;box-shadow:0 20px 60px rgba(0,0,0,.3)}.rx-sheet.on{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}" +
-      ".rx-wrap{padding:18px 18px 22px;font:400 14px var(--hfont,system-ui)}" +
-      ".rx-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}.rx-title{font:800 18px var(--hfont,system-ui)}.rx-x{border:0;background:transparent;font-size:20px;cursor:pointer;color:var(--hmut,#64748b)}" +
-      ".rx-clinic{font:700 15px var(--hfont);color:var(--hink)}.rx-disc{font:500 11px var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);border-radius:8px;padding:6px 9px;margin:8px 0}" +
-      ".rx-pt{display:flex;gap:8px;margin:8px 0}.rx-pt input{flex:1;min-width:0}" +
-      /* Fields were 7px-tall hairline boxes with no focus state - the sheet read as a grey stack and nothing told you where the caret was. Taller touch target, softer radius, and a real focus ring so the active field is unmistakable on a phone held one-handed at the bedside. */
-      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:10px 12px;font:400 13.5px var(--hfont);background:var(--hpanel,#fff);color:var(--hink);transition:border-color .15s,box-shadow .15s}" +
+      ".rx-scrim{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:16000;opacity:0;transition:opacity .25s ease;pointer-events:none}.rx-scrim.on{opacity:1;pointer-events:auto}" +
+      "html.rx-locked,body.rx-locked{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important}" +
+      ".rx-sheet{position:fixed;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);transition:transform .28s cubic-bezier(0.16,1,0.3,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;box-sizing:border-box}" +
+      "@media(max-width:640px){.rx-sheet{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100vw!important;max-width:100vw!important;height:94vh!important;max-height:94vh!important;border-radius:20px 20px 0 0!important;transform:translateY(100%);opacity:0;pointer-events:none;margin:0!important}.rx-sheet.on{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}}" +
+      "@media(min-width:641px){.rx-sheet{left:50%!important;top:50%!important;transform:translate(-50%,-46%)!important;width:min(700px,94vw)!important;height:88vh!important;max-height:88vh!important;border-radius:18px!important;opacity:0;pointer-events:none}.rx-sheet.on{transform:translate(-50%,-50%)!important;opacity:1!important;pointer-events:auto!important}}" +
+      ".rx-wrap{display:flex;flex-direction:column;height:100%;width:100%;min-height:0;overflow:hidden;box-sizing:border-box}" +
+      ".rx-head{flex:none;background:var(--hpanel,#fff);border-bottom:1px solid var(--hbd,#e2e8f0);padding:6px 12px 8px;display:flex;flex-direction:column;gap:4px;position:relative;z-index:2}" +
+      ".rx-handle-bar{width:36px;height:4px;background:#cbd5e1;border-radius:999px;margin:2px auto 6px}@media(min-width:641px){.rx-handle-bar{display:none}}" +
+      ".rx-head-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}" +
+      ".rx-head-title{flex:1;min-width:0;text-align:center}.rx-title-main{font-size:14.5px;font-weight:700;color:var(--hink,#0f172a);display:block;line-height:1.2}.rx-title-sub{font-size:11px;font-weight:500;color:var(--hmut,#64748b);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rx-x{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:var(--hmut,#475569);flex:none;transition:all .15s ease}.rx-x:hover{background:#e2e8f0;color:#0f172a}" +
+      ".rx-top-export{border:0;background:#0e6e63;color:#fff;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;flex:none;transition:all .15s ease}.rx-top-export:hover{background:#0b584f}" +
+      ".rx-scroll-body{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden!important;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding:12px 14px 24px;box-sizing:border-box}" +
+      ".rx-disc{font:500 11px/1.4 var(--hfont,system-ui);color:#92400e;background:#fffbeb;border:1px solid #fef3c7;border-radius:10px;padding:8px 12px;margin-bottom:12px;box-sizing:border-box}" +
+      ".rx-pt-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:12px;box-sizing:border-box}" +
+      ".rx-pt-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:8px}" +
+      ".rx-pt-row{margin-bottom:7px;width:100%;box-sizing:border-box}.rx-pt-row:last-child{margin-bottom:0}" +
+      ".rx-pt-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:6px;width:100%;box-sizing:border-box}.rx-pt-grid input{min-width:0;width:100%;box-sizing:border-box}" +
+      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:8.5px 11px;font:400 13px var(--hfont,system-ui);background:var(--hpanel,#fff);color:var(--hink,#0f172a);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%}" +
       ".rx-in::placeholder{color:var(--hmut,#94a3b8)}" +
       ".rx-in:focus{outline:none;border-color:var(--teal,#0e6e63);box-shadow:0 0 0 3px color-mix(in srgb, var(--teal,#0e6e63) 18%, transparent)}" +
-      ".rx-symbol{font:800 22px var(--hfont);margin:6px 0 2px}" +
-      ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:9px;margin:8px 0}.rx-line.unv{border-color:#f59e0b;background:rgba(245,158,11,.06)}.rx-line.adv{background:rgba(100,116,139,.06)}" +
-      ".rx-line .r1{display:flex;gap:6px;flex-wrap:wrap}.rx-line .r1 input{}.rx-drug{flex:2 1 160px}.rx-brand{flex:1 1 110px}.rx-line .r2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.rx-dose{flex:2 1 160px}.rx-freq{flex:1 1 90px}.rx-dur{flex:1 1 90px}" +
-      ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:5px}.rx-del{border:0;background:transparent;color:#ef4444;cursor:pointer;font-size:16px;align-self:center}" +
+      ".rx-sec-head{display:flex;align-items:center;gap:8px;margin:14px 0 8px}.rx-symbol{font:800 22px var(--hfont,system-ui);color:#0e6e63;line-height:1}.rx-sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b}" +
+      ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px 11px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%}" +
+      ".rx-line:focus-within{border-color:#cbd5e1;box-shadow:0 3px 10px rgba(0,0,0,.05)}.rx-line.unv{border-color:#f59e0b;background:#fffdfa}.rx-line.adv{background:#f8fafc}" +
+      ".rx-line .r1{display:flex;gap:6px;align-items:center;width:100%;box-sizing:border-box}.rx-line .r1 .rx-drug{flex:1.6 1 140px;min-width:0;font-weight:600}.rx-line .r1 .rx-brand{flex:1.4 1 120px;min-width:0}" +
+      ".rx-line .r2{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;margin-top:8px;width:100%;box-sizing:border-box}.rx-line .r2 input{min-width:0;width:100%;box-sizing:border-box}" +
+      "@media(max-width:500px){.rx-line .r1{display:grid;grid-template-columns:1fr auto;gap:6px}.rx-line .r1 .rx-drug{grid-column:1}.rx-line .r1 .rx-del{grid-column:2;grid-row:1}.rx-line .r1 .rx-brand{grid-column:1/span 2;grid-row:2}}" +
+      ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:6px}.rx-del{border:0;background:#fee2e2;color:#ef4444;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;transition:all .15s ease}.rx-del:hover{background:#fecaca;color:#dc2626}" +
       ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
       ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
       ".rx-ac-g{font-weight:800}.rx-ac-b{color:var(--teal,#0e6e63);font-weight:600}.rx-ac-d{display:block;color:var(--hmut,#64748b);font-size:11.5px;margin-top:2px}.rx-ac-empty{padding:8px 10px;color:var(--hmut,#64748b);font:500 12px var(--hfont)}" +
-      ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:var(--teal,#0e6e63);color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
+      ".rx-tpl-card{margin:12px 0 6px;padding:9px 11px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;box-sizing:border-box}" +
+      ".rx-tpl-row{display:flex;gap:8px;align-items:center;width:100%;box-sizing:border-box}" +
+      ".rx-tpl-sel{flex:1;min-width:0;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;background:#fff;color:#0f172a}" +
+      ".rx-tpl-btn{flex:none;white-space:nowrap;padding:7px 11px;font-size:11.5px;font-weight:600;border-radius:8px;background:#fff;border:1px solid #cbd5e1;color:#334155;cursor:pointer}.rx-tpl-btn:hover{background:#f1f5f9}" +
+      ".rx-sign-bar{margin-top:14px;border-top:1px dashed #e2e8f0;padding-top:10px;display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:#64748b}.rx-sign-dr{font-weight:600;color:#0f172a}.rx-sign-meta{font-size:11px}" +
+      ".rx-dock{flex:none;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 10px;padding-bottom:max(12px,env(safe-area-inset-bottom,12px));background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--hbd,#e2e8f0);box-sizing:border-box;width:100%;position:relative;z-index:2}" +
+      ".rx-dock-quick{display:flex;align-items:center;gap:4.5px;flex:1 1 auto;min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rx-dock-quick::-webkit-scrollbar{display:none}" +
+      ".rx-btn{border:0;border-radius:999px;padding:6px 9px;font:650 11.5px var(--hfont,system-ui);cursor:pointer;transition:all .15s ease;white-space:nowrap;display:inline-flex;align-items:center;gap:3.5px;flex:none}" +
+      ".rx-add{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}.rx-add:hover{background:#e2e8f0}" +
+      ".rx-mic{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}.rx-mic:hover{background:#e2e8f0}" +
+      ".rx-rxc{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}.rx-rxc:hover{background:#bae6fd}" +
+      ".rx-hero-export,.rx-print{background:var(--teal,#0e6e63)!important;color:#fff!important;font-size:11.5px!important;font-weight:700!important;padding:7px 11px!important;box-shadow:0 2px 8px rgba(14,110,99,.28)!important;flex:none;border-radius:999px}.rx-hero-export:hover{background:#0b584f!important}" +
+      ".rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:15px;height:15px}.rx-print .rx-ico{margin-right:4px}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
-      ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:6px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
+      ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
       ".rx-clinic-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}.rx-clinic-form .rx-in{width:100%}.rx-logo-row{display:flex;align-items:center;gap:8px}.rx-logo-prev{width:54px;height:54px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 10px var(--hfont);color:var(--hmut);overflow:hidden;flex:none}.rx-logo-prev img{width:100%;height:100%;object-fit:contain}" +
-      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.42);display:flex;align-items:flex-end;justify-content:center;z-index:6;border-radius:16px}.rx-bp{background:var(--hpanel,#fff);width:100%;max-height:82%;overflow:auto;border-radius:16px 16px 0 0;padding:14px}.rx-exp,.rx-sign-sheet{border-radius:16px}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:transparent;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
+      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.48);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;z-index:10;border-radius:16px;box-sizing:border-box}@media(max-width:640px){.rx-bp-ov{border-radius:20px 20px 0 0}}" +
+      ".rx-bp{background:var(--hpanel,#fff);width:100%;max-height:85%;overflow-y:auto;overflow-x:hidden;border-radius:18px 18px 0 0;padding:16px 18px 24px;box-sizing:border-box;box-shadow:0 -8px 30px rgba(0,0,0,.16)}" +
+      ".rx-exp,.rx-sign-sheet{border-radius:18px 18px 0 0}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:#f1f5f9;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
       ".rx-bp-it{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:9px 4px;cursor:pointer}.rx-bp-nm{font:700 13.5px var(--hfont);color:var(--hink);flex:1 1 44%}.rx-bp-nm em{color:#ef4444;font-weight:600;font-style:normal;font-size:11px}.rx-bp-mf{font:500 11px var(--hfont);color:var(--hmut);flex:1 1 40%}.rx-bp-pr{font:800 13px var(--hfont);color:var(--teal,#0e6e63)}" +
-      ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
+      ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0;box-sizing:border-box}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
       ".rx-doc{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a;background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}" +
       ".rxdoc-in{padding:30px 42px;box-sizing:border-box}" +
@@ -139,14 +167,45 @@
       ".rxctbl .rxc-mfr,.rxc-tbl .rxc-mfr{color:#64748b;font-size:8.5px;margin-top:1px}" +
       ".rxctbl .rxc-pack,.rxc-tbl .rxc-pack{color:#64748b;font-size:8px;margin-top:1px}" +
       ".rxctbl .rxc-cost,.rxc-tbl .rxc-cost{font:700 11px -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a;margin-top:2px}.rxctbl .rxc-cost small,.rxc-tbl .rxc-cost small{font-size:8px;font-weight:400;color:#64748b}" +
-      ".rxctbl td.rxc-chosen,.rxc-tbl td.rxc-chosen{background:#fafcff!important;box-shadow:inset 0 0 0 1.5px #0284c7}" +
-      ".rxctbl .rxc-tag,.rxc-tbl .rxc-tag{display:inline-block;padding:1px 5px;border-radius:3px;font:700 7.5px -apple-system,BlinkMacSystemFont,sans-serif;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;margin-bottom:2px;letter-spacing:.05em;text-transform:uppercase}" +
+      ".rxctbl td.rxc-chosen,.rxc-tbl td.rxc-chosen{background:#f0f9ff!important;border:1.5px solid #0284c7!important}" +
+      ".rxctbl td.rxc-chosen .rxc-brand,.rxc-tbl td.rxc-chosen .rxc-brand{color:#0f172a!important}" +
+      ".rxctbl td.rxc-chosen .rxc-mfr,.rxc-tbl td.rxc-chosen .rxc-mfr{color:#334155!important}" +
+      ".rxctbl td.rxc-chosen .rxc-pack,.rxc-tbl td.rxc-chosen .rxc-pack{color:#475569!important}" +
+      ".rxctbl td.rxc-chosen .rxc-cost,.rxc-tbl td.rxc-chosen .rxc-cost{color:#0f172a!important}" +
+      ".rxctbl td.rxc-chosen .rxc-cost small,.rxc-tbl td.rxc-chosen .rxc-cost small{color:#475569!important}" +
+      ".rxctbl .rxc-tag,.rxc-tbl .rxc-tag{display:inline-block;padding:2px 6px;border-radius:4px;font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;background:#0284c7;color:#fff;margin-bottom:3px;letter-spacing:.04em;text-transform:uppercase}" +
       ".rxctbl td.rxc-empty,.rxc-tbl td.rxc-empty{color:#94a3b8;font-style:italic;font-size:9px;vertical-align:middle}" +
       ".rxctbl .rxc-totrow td,.rxc-tbl .rxc-totrow td{background:#f8fafc;border-top:1px solid #e2e8f0;font-weight:700;padding:6px 8px;color:#0f172a;font-size:10.5px}" +
       ".rxctbl .rxc-totlab,.rxc-tbl .rxc-totlab{font:700 8.5px -apple-system,BlinkMacSystemFont,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#0f172a}" +
       ".rxctbl .rxc-saverow td,.rxc-tbl .rxc-saverow td{background:#f0fdf4;color:#15803d;font:600 10px -apple-system,BlinkMacSystemFont,sans-serif;text-align:right;padding:6px 10px;border-top:1px solid #bbf7d0}" +
       ".rxcline{font-size:11.5px;color:#0f172a;padding:4px 0;border-bottom:1px solid #f1f5f9}.rxccat{font-size:9px;font-weight:700;color:#0284c7;text-transform:uppercase;letter-spacing:.04em}" +
       ".rxcnote{margin-top:6px;font:400 8.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b}" +
+      ".rxdoc-safety-card{margin:12px 0 10px;border:1px solid #e2e8f0;border-radius:9px;background:#f8fafc;padding:10px 12px;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxdoc-safety-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}" +
+      ".rxdoc-safety-badge{display:inline-flex;align-items:center;gap:4px;font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#0e6e63;background:#ecfdf5;border:1px solid #a7f3d0;padding:2px 7px;border-radius:4px}" +
+      ".rxdoc-safety-sub{font:500 9px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b}" +
+      ".rxdoc-safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}" +
+      ".rxdoc-safety-cell{min-width:0;font-size:9.5px;line-height:1.35;color:#334155}" +
+      ".rxdoc-safety-drug{font-weight:700;color:#0f172a;margin-bottom:2px}" +
+      ".rxdoc-safety-warn{background:#fffbeb;border:1px solid #fef3c7;border-radius:6px;padding:6px 9px;margin-top:6px;font:500 9px/1.35 -apple-system,BlinkMacSystemFont,sans-serif;color:#92400e}" +
+      ".rx-safety{margin:10px 0 12px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);overflow:hidden}" +
+      ".rx-safety-head{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0}" +
+      ".rx-safety-title{display:flex;align-items:center;gap:6px;font:700 12px -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a}" +
+      ".rx-safety-badge{font:700 9.5px -apple-system,BlinkMacSystemFont,sans-serif;padding:2px 7px;border-radius:999px;letter-spacing:.02em}" +
+      ".rx-safety-badge.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}" +
+      ".rx-safety-badge.warn{background:#fffbeb;color:#92400e;border:1px solid #fef3c7}" +
+      ".rx-safety-badge.crit{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}" +
+      ".rx-safety-body{padding:10px 12px;display:flex;flex-direction:column;gap:8px}" +
+      ".rx-safety-row{display:flex;flex-direction:column;gap:3px;padding:7px 10px;border-radius:8px;font-size:12px;line-height:1.4}" +
+      ".rx-safety-row.crit{background:#fef2f2;border-left:3.5px solid #dc2626;color:#7f1d1d}" +
+      ".rx-safety-row.maj{background:#fffbeb;border-left:3.5px solid #f59e0b;color:#78350f}" +
+      ".rx-safety-row.mod{background:#f0f9ff;border-left:3.5px solid #0284c7;color:#0c4a6e}" +
+      ".rx-safety-counsel{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px}" +
+      ".rx-safety-counsel-title{font:700 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#334155;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}" +
+      ".rx-safety-counsel-list{font:400 11.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#475569;margin:0;padding-left:14px}" +
+      ".rx-safety-counsel-list li{margin-bottom:3px}" +
+      ".rx-safety-add-btn{border:1px solid #0e6e63;background:#ecfdf5;color:#065f46;font:700 11px -apple-system,BlinkMacSystemFont,sans-serif;padding:4px 11px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-top:6px;width:fit-content;transition:all .15s}" +
+      ".rx-safety-add-btn:hover{background:#0e6e63;color:#fff}" +
       ".rxdoc-ft{margin-top:16px;border-top:1px solid #e2e8f0;padding-top:12px;page-break-inside:avoid;break-inside:avoid}" +
       ".rxdoc-ft-tbl{width:100%;border-collapse:collapse}" +
       ".rxdoc-ft-auth{width:56%;vertical-align:middle;padding:0 14px 0 0}" +
@@ -155,12 +214,13 @@
       ".rxdoc-sgimg{max-height:42px;object-fit:contain;display:block;margin:0 auto 3px}" +
       ".rxdoc-drn{font:700 12.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a;border-top:1px solid #94a3b8;padding-top:3px}" +
       ".rxdoc-reg{font:500 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;margin-top:1.5px}" +
-      ".rxdoc-foot{margin-top:14px;border-top:1px solid #f1f5f9;padding-top:8px;display:flex;justify-content:space-between;align-items:center}" +
-      ".rxdoc-brand{display:flex;align-items:center;gap:6px;font:500 10px -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b}" +
-      ".rxdoc-smdlogo{width:15px;height:15px;object-fit:contain}" +
+      ".rxdoc-foot{margin-top:16px;border-top:1px solid #e2e8f0;padding-top:10px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;letter-spacing:normal!important;word-spacing:normal!important}" +
+      ".rxdoc-brand{display:flex;align-items:center;gap:7px;font:600 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#334155;flex-shrink:0}" +
+      ".rxdoc-smd-icon{width:16px;height:16px;flex:none;fill:none;stroke:#0e6e63;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}" +
+      ".rxdoc-smdlogo{width:16px;height:16px;object-fit:contain}" +
       ".rxdoc-smdwm{font:800 11px -apple-system,BlinkMacSystemFont,sans-serif;color:#0e6e63}" +
       ".rxdoc-smdwm b{color:#0f172a}" +
-      ".rxdoc-resp{font:400 8.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#94a3b8;max-width:58%;text-align:right}" +
+      ".rxdoc-resp{font:400 8.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#64748b;max-width:62%;text-align:right;letter-spacing:normal!important;word-spacing:normal!important}" +
       ".rxc-inline-box{width:100%;order:99}" +
       ".rxc-inline-tray{margin-top:10px;border-top:1px solid rgba(0,0,0,.06);padding-top:10px;width:100%;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display',system-ui,sans-serif}" +
       ".rxc-itray-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}" +
@@ -194,8 +254,19 @@
   var scrim, sheet;
   function ensureEls() {
     injectCSS();
-    if (!scrim) { scrim = document.createElement("div"); scrim.className = "rx-scrim"; scrim.id = "rxScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", close); }
-    if (!sheet) { sheet = document.createElement("div"); sheet.className = "rx-sheet"; sheet.id = "rxSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Prescription"); document.body.appendChild(sheet); }
+    if (!scrim) {
+      scrim = document.createElement("div"); scrim.className = "rx-scrim"; scrim.id = "rxScrim"; document.body.appendChild(scrim);
+      scrim.addEventListener("click", function() {
+        var d = collectRx();
+        if (d && (d.name || d.dx || (d.lines && d.lines.length > 1) || (d.lines && d.lines[0] && d.lines[0].drug))) {
+          if (!window.confirm("Discard draft prescription?")) return;
+        }
+        close();
+      });
+    }
+    if (!sheet) {
+      sheet = document.createElement("div"); sheet.className = "rx-sheet"; sheet.id = "rxSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Prescription"); document.body.appendChild(sheet);
+    }
   }
   /* Every field on this sheet is placeholder-only - no <label>, no aria-label. A placeholder
    * disappears the moment you type, so once the pad is half filled the doctor is looking at
@@ -219,8 +290,13 @@
     sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>';
     rxLabelInputs();
     scrim.classList.add("on"); sheet.classList.add("on");
+    try { document.documentElement.classList.add("rx-locked"); document.body.classList.add("rx-locked"); } catch (e) {}
   }
-  function close() { if (sheet) sheet.classList.remove("on"); if (scrim) scrim.classList.remove("on"); }
+  function close() {
+    if (sheet) sheet.classList.remove("on");
+    if (scrim) scrim.classList.remove("on");
+    try { document.documentElement.classList.remove("rx-locked"); document.body.classList.remove("rx-locked"); } catch (e) {}
+  }
 
   // ---- WebView-safe Print / PDF ----------------------------------------------------------------
   // window.print() is a no-op in the native WKWebView, so we build a self-contained branded Rx
@@ -286,9 +362,9 @@
           var brandNm = '<div class="rxc-brand"><b>' + esc(opt.brand || "-") + '</b></div>';
           var mfrNm = opt.manufacturer ? ('<div class="rxc-mfr">' + esc(opt.manufacturer) + '</div>') : '';
           var packInfo = (opt.packsRequired != null && opt.requiredUnits != null)
-            ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + ' needed (' + (opt.packsRequired > 1 ? (opt.packsRequired + ' packs') : '1 pack') + ')</div>')
+            ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + '&nbsp;needed&nbsp;(' + (opt.packsRequired > 1 ? (opt.packsRequired + '&nbsp;packs') : '1&nbsp;pack') + ')</div>')
             : '';
-          var priceVal = opt.courseCost != null ? ('<div class="rxc-cost">' + costStr(opt.courseCost) + '<small>/course</small></div>') : '<div class="rxc-cost">-</div>';
+          var priceVal = opt.courseCost != null ? ('<div class="rxc-cost">' + costStr(opt.courseCost) + '<small>&nbsp;/&nbsp;course</small></div>') : '<div class="rxc-cost">-</div>';
           return '<td class="' + cls + '">' + tag + brandNm + mfrNm + packInfo + priceVal + '</td>';
         };
 
@@ -1052,32 +1128,550 @@
     brandIn.addEventListener("blur", function () { setTimeout(closeB, 200); });
   }
 
-  // ---- Smart Rx pad safety: live allergy + drug-interaction checks under the drug list. Reuses the
-  // on-device INTERACTIONS engine; fails safe (absent engine / <2 drugs => no panel). Advisory, never blocks. ----
-  function rxSafetyFindings() {
-    var d = collectRx();
-    var meds = d.lines.filter(function (L) { return !L.advice && L.drug; }).map(function (L) { return { generic: L.drug }; });
-    var out = [];
-    var alg = (((sheet && sheet.querySelector("#rxAllergies")) || {}).value || "").toLowerCase().split(/[,;]+/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 2; });
-    if (alg.length) meds.forEach(function (m) { var g = String(m.generic).toLowerCase(); alg.forEach(function (a) { if (g.indexOf(a) > -1) out.push({ sev: "critical", txt: "Allergy — patient reacts to “" + a + "”; " + m.generic + " prescribed" }); }); });
+  // ---- Clinical Safety & Patient Counseling Intelligence Engine ----
+  // Analyzes regimen for molecule-specific side effects, red flags, counseling advice, allergies, and drug interactions.
+  var RX_CLINICAL_KB = {
+    "azithromycin": {
+      generic: "Azithromycin",
+      cls: "Macrolide Antibiotic",
+      tags: ["macrolide", "antibiotic", "qt_prolonging"],
+      sideEffects: ["Nausea, abdominal cramps, loose stools", "Headache or mild dizziness"],
+      redFlags: ["Palpitations or irregular heart rhythm", "Severe allergic rash or facial swelling", "Persistent watery diarrhea"],
+      counseling: "Take 1 hour before or 2 hours after meals (or with light food if stomach upset occurs). Complete the full 3–5 day course.",
+      interactions: [
+        { withTags: ["qt_prolonging", "ondansetron", "ciprofloxacin", "amiodarone"], sev: "major", text: "Additive QT prolongation risk — monitor cardiac rhythm and electrolytes." },
+        { withTags: ["antacids"], sev: "moderate", text: "Aluminum/magnesium antacids reduce peak absorption — separate doses by 2 hours." },
+        { withTags: ["warfarin"], sev: "moderate", text: "May enhance anticoagulant effect — monitor INR." }
+      ]
+    },
+    "amoxicillin + clavulanic acid": {
+      generic: "Amoxicillin + Clavulanic Acid",
+      cls: "Potentiated Penicillin Antibiotic",
+      tags: ["penicillin", "beta_lactam", "antibiotic"],
+      sideEffects: ["Diarrhea or frequent loose stools, nausea, mild abdominal cramps", "Oral or vaginal candidiasis"],
+      redFlags: ["Anaphylaxis (wheezing, hives, lip swelling)", "Cholestatic jaundice / dark urine (rare)", "Severe watery diarrhea (C. diff)"],
+      counseling: "Take at the start of a meal to optimize clavulanate absorption and minimize stomach upset. Complete full course.",
+      interactions: [
+        { withTags: ["allopurinol"], sev: "moderate", text: "Increased risk of drug-induced skin rash." },
+        { withTags: ["methotrexate"], sev: "major", text: "Reduces renal methotrexate clearance — risk of methotrexate toxicity." },
+        { withTags: ["warfarin"], sev: "moderate", text: "May prolong prothrombin time / INR." }
+      ]
+    },
+    "amoxicillin": {
+      generic: "Amoxicillin",
+      cls: "Aminopenicillin Antibiotic",
+      tags: ["penicillin", "beta_lactam", "antibiotic"],
+      sideEffects: ["Loose stools, diarrhea, mild nausea", "Mild non-allergic skin rash"],
+      redFlags: ["Severe allergic urticaria, facial swelling or wheezing (penicillin allergy)", "Severe watery diarrhea"],
+      counseling: "Take at evenly spaced intervals. Finish entire course even if symptoms resolve.",
+      interactions: [
+        { withTags: ["allopurinol"], sev: "moderate", text: "Higher incidence of skin rash." },
+        { withTags: ["methotrexate"], sev: "major", text: "Decreases renal tubular methotrexate clearance." }
+      ]
+    },
+    "paracetamol": {
+      generic: "Paracetamol",
+      cls: "Analgesic & Antipyretic",
+      tags: ["analgesic", "antipyretic", "acetaminophen"],
+      sideEffects: ["Well tolerated at standard therapeutic doses"],
+      redFlags: ["Severe nausea, right upper quadrant abdominal pain, jaundice / yellowing of eyes (hepatotoxicity)"],
+      counseling: "Do not exceed 4,000 mg in 24 hours (max 3,000 mg/day in elderly/hepatic risk). Check all OTC cough/cold formulations to avoid duplicate paracetamol.",
+      interactions: [
+        { withTags: ["warfarin"], sev: "moderate", text: "Regular daily high doses (>2g/day) may enhance anticoagulant effect." },
+        { withTags: ["alcohol"], sev: "major", text: "Chronic alcohol misuse increases risk of hepatotoxicity." }
+      ]
+    },
+    "pantoprazole": {
+      generic: "Pantoprazole",
+      cls: "Proton Pump Inhibitor (PPI)",
+      tags: ["ppi", "acid_reducer"],
+      sideEffects: ["Mild headache, loose stools or constipation, flatulence"],
+      redFlags: ["Severe persistent watery diarrhea", "Severe abdominal cramping"],
+      counseling: "Take once daily in the morning, 30 to 60 minutes before breakfast or first meal.",
+      interactions: [
+        { withTags: ["iron"], sev: "moderate", text: "Decreased gastric acidity reduces oral iron absorption." },
+        { withTags: ["ketoconazole", "itraconazole"], sev: "major", text: "Markedly reduces antifungal absorption." }
+      ]
+    },
+    "omeprazole": {
+      generic: "Omeprazole",
+      cls: "Proton Pump Inhibitor (PPI)",
+      tags: ["ppi", "acid_reducer"],
+      sideEffects: ["Headache, mild diarrhea, abdominal discomfort"],
+      redFlags: ["Severe watery diarrhea", "Bone pain or muscle spasms with long-term use"],
+      counseling: "Take 30–60 minutes before morning meal. Swallow whole, do not crush or chew capsules.",
+      interactions: [
+        { withTags: ["clopidogrel"], sev: "major", text: "CYP2C19 inhibition reduces clopidogrel activation and antiplatelet efficacy." },
+        { withTags: ["iron"], sev: "moderate", text: "Reduces oral iron absorption." }
+      ]
+    },
+    "ondansetron": {
+      generic: "Ondansetron",
+      cls: "5-HT3 Antiemetic",
+      tags: ["antiemetic", "qt_prolonging"],
+      sideEffects: ["Constipation, mild headache, warm flushing sensation"],
+      redFlags: ["Palpitations, dizziness or syncope (QT interval prolongation)"],
+      counseling: "Take 30 minutes before meals or as directed for nausea. Drink adequate fluids to prevent constipation.",
+      interactions: [
+        { withTags: ["qt_prolonging", "azithromycin", "ciprofloxacin", "amiodarone"], sev: "major", text: "Additive risk of QT prolongation and cardiac dysrhythmias." },
+        { withTags: ["apomorphine"], sev: "critical", text: "Contraindicated: severe profound hypotension and loss of consciousness." }
+      ]
+    },
+    "ciprofloxacin": {
+      generic: "Ciprofloxacin",
+      cls: "Fluoroquinolone Antibiotic",
+      tags: ["fluoroquinolone", "antibiotic", "qt_prolonging"],
+      sideEffects: ["Nausea, mild diarrhea, insomnia, lightheadedness"],
+      redFlags: ["Tendon pain, swelling or tenderness (especially Achilles tendon) — stop and rest immediately", "Palpitations / irregular heart rhythm", "Burning or tingling nerve pain"],
+      counseling: "Drink plenty of water. Do NOT take with milk, dairy, antacids, or iron within 2 hours. Protect skin from direct sunlight.",
+      interactions: [
+        { withTags: ["qt_prolonging", "ondansetron", "azithromycin"], sev: "major", text: "Cumulative QT prolongation risk." },
+        { withTags: ["theophylline", "tizanidine"], sev: "critical", text: "Severe CYP1A2 inhibition elevates plasma levels to toxic range." },
+        { withTags: ["nsaid", "diclofenac", "ibuprofen"], sev: "moderate", text: "Concurrent NSAID use may increase CNS stimulation and seizure risk." }
+      ]
+    },
+    "diclofenac": {
+      generic: "Diclofenac",
+      cls: "NSAID Analgesic",
+      tags: ["nsaid", "analgesic"],
+      sideEffects: ["Indigestion, heartburn, epigastric discomfort, nausea"],
+      redFlags: ["Black or tarry stools, vomiting blood (GI bleed)", "Swelling of feet/ankles, shortness of breath", "Decreased urine output"],
+      counseling: "Take strictly with or after meals. Use for the shortest required duration at the lowest effective dose.",
+      interactions: [
+        { withTags: ["anticoagulant", "antiplatelet", "aspirin", "clopidogrel", "warfarin"], sev: "major", text: "Significant increase in gastrointestinal ulceration and hemorrhage risk." },
+        { withTags: ["acei", "arb", "diuretic", "telmisartan"], sev: "major", text: "Triple whammy: risk of acute renal failure and blunted antihypertensive effect." }
+      ]
+    },
+    "ibuprofen": {
+      generic: "Ibuprofen",
+      cls: "NSAID Analgesic",
+      tags: ["nsaid", "analgesic"],
+      sideEffects: ["Dyspepsia, heartburn, mild nausea"],
+      redFlags: ["Black stools, vomiting blood", "Swelling, sudden elevation of blood pressure"],
+      counseling: "Take with food or milk to protect stomach lining. Avoid alcohol while taking NSAIDs.",
+      interactions: [
+        { withTags: ["anticoagulant", "aspirin", "warfarin"], sev: "major", text: "Additive gastrointestinal mucosal ulceration and bleeding." },
+        { withTags: ["acei", "arb", "diuretic"], sev: "major", text: "Risk of decreased renal blood flow and increased BP." }
+      ]
+    },
+    "ambroxol + levosalbutamol": {
+      generic: "Ambroxol + Levosalbutamol",
+      cls: "Mucolytic & Bronchodilator",
+      tags: ["mucolytic", "bronchodilator", "beta_agonist"],
+      sideEffects: ["Fine tremors of hands, rapid heartbeat (palpitations), headache", "Mild nausea or dry mouth"],
+      redFlags: ["Severe chest tightness, extreme racing pulse (>120 bpm), paradoxical wheezing"],
+      counseling: "Take after food. Tremors usually subside as your body adjusts. If breathing worsens, seek immediate medical care.",
+      interactions: [
+        { withTags: ["beta_blocker", "propranolol", "metoprolol", "carvedilol"], sev: "major", text: "Beta-blockers can block bronchodilation and precipitate severe bronchospasm." }
+      ]
+    },
+    "levocetirizine + montelukast": {
+      generic: "Levocetirizine + Montelukast",
+      cls: "Antihistamine + Leukotriene Antagonist",
+      tags: ["antihistamine", "leukotriene_antagonist", "allergy"],
+      sideEffects: ["Mild drowsiness or fatigue, dry mouth, headache"],
+      redFlags: ["Unusual mood or behavioral changes, agitation, sleep disturbances", "Severe allergic skin rash"],
+      counseling: "Take once daily in the evening. Avoid driving or alcohol if drowsiness occurs.",
+      interactions: [
+        { withTags: ["sedative", "alcohol", "benzodiazepine"], sev: "moderate", text: "Additive central nervous system sedation." }
+      ]
+    },
+    "cetirizine": {
+      generic: "Cetirizine",
+      cls: "Antihistamine",
+      tags: ["antihistamine", "allergy"],
+      sideEffects: ["Mild drowsiness, dry mouth, fatigue"],
+      redFlags: ["Severe allergic reaction", "Urinary retention"],
+      counseling: "Best taken at bedtime. Avoid alcohol during treatment.",
+      interactions: [
+        { withTags: ["sedative", "alcohol"], sev: "moderate", text: "Enhanced CNS depression." }
+      ]
+    },
+    "cefixime": {
+      generic: "Cefixime",
+      cls: "3rd Gen Cephalosporin Antibiotic",
+      tags: ["cephalosporin", "beta_lactam", "antibiotic"],
+      sideEffects: ["Loose stools, diarrhea, nausea, dyspepsia"],
+      redFlags: ["Severe allergic rash / hives / wheezing", "Severe watery diarrhea (C. diff colitis)"],
+      counseling: "May be taken with or without food. Complete the full course as prescribed.",
+      interactions: [
+        { withTags: ["warfarin"], sev: "moderate", text: "May enhance anticoagulant effect — monitor INR." }
+      ]
+    },
+    "metronidazole": {
+      generic: "Metronidazole",
+      cls: "Nitroimidazole Antimicrobial",
+      tags: ["antimicrobial", "antibiotic"],
+      sideEffects: ["Metallic taste in mouth, mild nausea, dark urine (benign)"],
+      redFlags: ["Severe numbness, tingling, peripheral neuropathy", "Seizures or ataxia (rare)"],
+      counseling: "STRICTLY avoid alcohol during treatment and for at least 48 hours after finishing (disulfiram-like reaction). Take with food.",
+      interactions: [
+        { withTags: ["alcohol"], sev: "critical", text: "Disulfiram-like reaction with severe vomiting, tachycardia and flushing." },
+        { withTags: ["warfarin"], sev: "major", text: "Potentiates warfarin effect via CYP2C9 inhibition — monitor INR." }
+      ]
+    },
+    "metformin": {
+      generic: "Metformin",
+      cls: "Biguanide Antihyperglycemic",
+      tags: ["antidiabetic", "biguanide"],
+      sideEffects: ["GI upset: diarrhea, nausea, abdominal fullness, metallic taste"],
+      redFlags: ["Lactic acidosis: malaise, severe muscle aches, respiratory distress, hypothermia"],
+      counseling: "Take with or immediately after meals to minimize stomach upset. Swallow whole with water.",
+      interactions: [
+        { withTags: ["contrast"], sev: "major", text: "Withhold prior to iodinated contrast procedures to prevent lactic acidosis." },
+        { withTags: ["alcohol"], sev: "major", text: "Excessive alcohol potentiates risk of lactic acidosis." }
+      ]
+    },
+    "amlodipine": {
+      generic: "Amlodipine",
+      cls: "Calcium Channel Blocker (CCB)",
+      tags: ["antihypertensive", "ccb"],
+      sideEffects: ["Peripheral edema (ankle swelling), headache, flushing, dizziness"],
+      redFlags: ["Severe lightheadedness, syncope upon standing, worsening chest pain on initiation"],
+      counseling: "Take once daily at the same time each day. Elevate feet if mild ankle swelling occurs.",
+      interactions: [
+        { withTags: ["simvastatin"], sev: "moderate", text: "Increases simvastatin levels — do not exceed simvastatin 20mg daily." }
+      ]
+    },
+    "telmisartan": {
+      generic: "Telmisartan",
+      cls: "Angiotensin II Receptor Blocker (ARB)",
+      tags: ["antihypertensive", "arb"],
+      sideEffects: ["Dizziness, mild fatigue, back or leg pain"],
+      redFlags: ["Facial/lip swelling (angioedema), lightheadedness, sudden reduction in urination"],
+      counseling: "Take with or without food at the same time daily. Avoid potassium supplements without medical advice.",
+      interactions: [
+        { withTags: ["nsaid", "diclofenac", "ibuprofen"], sev: "major", text: "May reduce antihypertensive efficacy and increase risk of acute renal impairment." },
+        { withTags: ["potassium", "spironolactone"], sev: "major", text: "Risk of hyperkalemia." }
+      ]
+    },
+    "atorvastatin": {
+      generic: "Atorvastatin",
+      cls: "Statin Lipid-Lowering",
+      tags: ["statin", "lipid_lowering"],
+      sideEffects: ["Mild muscle aches, headache, digestive discomfort"],
+      redFlags: ["Unexplained severe muscle pain, tenderness, weakness, dark/tea-colored urine (rhabdomyolysis)"],
+      counseling: "Take once daily in the evening or at bedtime. Avoid excessive grapefruit juice.",
+      interactions: [
+        { withTags: ["macrolide", "clarithromycin"], sev: "major", text: "CYP3A4 inhibition increases statin concentration and myopathy risk." },
+        { withTags: ["gemfibrozil"], sev: "major", text: "Substantially elevates rhabdomyolysis risk." }
+      ]
+    }
+  };
+
+  var BRAND_ALIASES = {
+    "azithro": "azithromycin", "azee": "azithromycin", "zithromax": "azithromycin", "zady": "azithromycin", "azithral": "azithromycin",
+    "crocin": "paracetamol", "dolo": "paracetamol", "calpol": "paracetamol", "pcm": "paracetamol", "pacimol": "paracetamol", "sumo": "paracetamol",
+    "pan": "pantoprazole", "pantop": "pantoprazole", "pantocid": "pantoprazole", "pantodac": "pantoprazole",
+    "omez": "omeprazole", "prilosec": "omeprazole",
+    "rablet": "rabeprazole", "happi": "rabeprazole",
+    "augmentin": "amoxicillin + clavulanic acid", "moxikind-cv": "amoxicillin + clavulanic acid", "clavam": "amoxicillin + clavulanic acid", "clavicid": "amoxicillin + clavulanic acid",
+    "amox": "amoxicillin", "mox": "amoxicillin", "novamox": "amoxicillin",
+    "ascoril": "ambroxol + levosalbutamol", "ascoril ls": "ambroxol + levosalbutamol", "bro-zedex": "ambroxol + levosalbutamol",
+    "emeset": "ondansetron", "ondem": "ondansetron", "vomikind": "ondansetron",
+    "voveran": "diclofenac", "voltaren": "diclofenac",
+    "brufen": "ibuprofen", "combiflam": "ibuprofen",
+    "cifran": "ciprofloxacin", "ciptab": "ciprofloxacin", "cipro": "ciprofloxacin",
+    "zifi": "cefixime", "mahacef": "cefixime", "taxim-o": "cefixime",
+    "montair-lc": "levocetirizine + montelukast", "telekast-l": "levocetirizine + montelukast", "montek-lc": "levocetirizine + montelukast",
+    "cetzine": "cetirizine", "alerid": "cetirizine", "zyrtec": "cetirizine",
+    "flagyl": "metronidazole", "metrogyl": "metronidazole",
+    "glycomet": "metformin", "glyciphage": "metformin",
+    "stamlo": "amlodipine", "amlopres": "amlodipine", "norvasc": "amlodipine",
+    "telma": "telmisartan", "telmikind": "telmisartan", "micardis": "telmisartan",
+    "atorva": "atorvastatin", "lipitor": "atorvastatin", "atorlip": "atorvastatin"
+  };
+
+  function normalizeDrugName(raw) {
+    if (!raw) return "";
+    var s = String(raw).toLowerCase().trim();
+    s = s.replace(/\([^)]*\)/g, " ").trim();
+    s = s.replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|ml|iu|%)\b/g, " ");
+    s = s.replace(/\b(?:tablet|tablets|tab|tabs|syrup|syp|capsule|caps|cap|injection|inj|drops|solution|suspension|oral|gel|cream)\b/g, " ");
+    s = s.replace(/[^a-z0-9\s\+\-\/]/g, " ").replace(/\s+/g, " ").trim();
+    if (BRAND_ALIASES[s]) return BRAND_ALIASES[s];
+    for (var b in BRAND_ALIASES) {
+      if (s === b || s.indexOf(b + " ") === 0 || s.indexOf(" " + b) > -1) return BRAND_ALIASES[b];
+    }
+    for (var k in RX_CLINICAL_KB) {
+      if (s === k || s.indexOf(k) > -1) return k;
+    }
+    return s;
+  }
+
+  function analyzeRegimenSafety(lines, allergiesStr) {
+    var outFindings = [];
+    var meds = (lines || []).filter(function (L) { return !L.advice && (L.drug || L.brand); });
+
+    var alg = String(allergiesStr || "").toLowerCase().split(/[,;]+/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 2; });
+    if (alg.length) {
+      meds.forEach(function (m) {
+        var names = [m.drug, m.brand].filter(Boolean).map(function (s) { return String(s).toLowerCase(); });
+        alg.forEach(function (a) {
+          names.forEach(function (n) {
+            if (n.indexOf(a) > -1) {
+              outFindings.push({
+                sev: "critical",
+                type: "allergy",
+                txt: "Documented Allergy — patient has reported reaction to “" + a + "”; " + (m.drug || m.brand) + " is prescribed"
+              });
+            }
+          });
+        });
+      });
+    }
+
     try {
       if (window.INTERACTIONS && window.INTERACTIONS.checkInteractions && meds.length >= 2) {
-        var r = window.INTERACTIONS.checkInteractions(meds) || {};
-        ["critical", "major", "moderate"].forEach(function (sev) { (r[sev] || []).forEach(function (f) { out.push({ sev: sev, txt: (f.drugs || []).join(" + ") + ": " + (f.effect || f.mechanism || "interaction") + (f.action ? " — " + f.action : "") }); }); });
-        (r.duplicates || []).forEach(function (f) { out.push({ sev: "moderate", txt: "Duplicate therapy: " + (f.drugs || []).join(" + ") }); });
+        var r = window.INTERACTIONS.checkInteractions(meds.map(function (m) { return { generic: m.drug || m.brand }; })) || {};
+        ["critical", "major", "moderate"].forEach(function (sev) {
+          (r[sev] || []).forEach(function (f) {
+            outFindings.push({
+              sev: sev,
+              type: "ddi",
+              txt: (f.drugs || []).join(" + ") + ": " + (f.effect || f.mechanism || "interaction") + (f.action ? " — " + f.action : "")
+            });
+          });
+        });
+        (r.duplicates || []).forEach(function (f) {
+          outFindings.push({
+            sev: "moderate",
+            type: "duplicate",
+            txt: "Duplicate therapy: " + (f.drugs || []).join(" + ")
+          });
+        });
       }
     } catch (e) {}
+
+    var resolvedMeds = [];
+    var seenKeys = {};
+    meds.forEach(function (line) {
+      var raw = line.drug || line.brand || "";
+      var norm = normalizeDrugName(raw);
+      var info = RX_CLINICAL_KB[norm];
+      if (!info && window.MEDDRUGS && window.MEDDRUGS.all) {
+        var drugMatch = window.MEDDRUGS.all.filter(function (d) {
+          if (!d.generic) return false;
+          var dg = d.generic.toLowerCase();
+          return dg === norm || norm.indexOf(dg) > -1 || dg.indexOf(norm) > -1;
+        })[0];
+        if (drugMatch) {
+          info = {
+            generic: drugMatch.generic,
+            cls: drugMatch.cls || drugMatch.cat || "Formulary Drug",
+            tags: [(drugMatch.cls || "").toLowerCase(), (drugMatch.cat || "").toLowerCase()],
+            sideEffects: [],
+            redFlags: drugMatch.notes ? [drugMatch.notes] : [],
+            counseling: drugMatch.dose ? ("Dosing guide: " + drugMatch.dose) : "",
+            interactions: []
+          };
+        }
+      }
+      if (info && !seenKeys[norm]) {
+        seenKeys[norm] = true;
+        resolvedMeds.push({
+          key: norm,
+          prescribed: raw,
+          brand: line.brand || "",
+          info: info
+        });
+      }
+    });
+
+    for (var i = 0; i < resolvedMeds.length; i++) {
+      for (var j = i + 1; j < resolvedMeds.length; j++) {
+        var a = resolvedMeds[i], b = resolvedMeds[j];
+        var aTags = a.info.tags || [], bTags = b.info.tags || [];
+        (a.info.interactions || []).forEach(function (rule) {
+          var hit = rule.withTags.some(function (t) {
+            return bTags.indexOf(t) > -1 || b.info.generic.toLowerCase().indexOf(t) > -1;
+          });
+          if (hit) {
+            var pairTxt = a.info.generic + " + " + b.info.generic + ": " + rule.text;
+            var already = outFindings.some(function (f) { return f.txt.indexOf(a.info.generic) > -1 && f.txt.indexOf(b.info.generic) > -1; });
+            if (!already) {
+              outFindings.push({
+                sev: rule.sev || "major",
+                type: "ddi",
+                txt: pairTxt
+              });
+            }
+          }
+        });
+      }
+    }
+
     var rank = { critical: 0, major: 1, moderate: 2 };
-    out.sort(function (a, b) { return (rank[a.sev] == null ? 3 : rank[a.sev]) - (rank[b.sev] == null ? 3 : rank[b.sev]); });
-    return out;
+    outFindings.sort(function (a, b) { return (rank[a.sev] == null ? 3 : rank[a.sev]) - (rank[b.sev] == null ? 3 : rank[b.sev]); });
+
+    var counselingBullets = [];
+    resolvedMeds.forEach(function (rm) {
+      if (rm.info.counseling) {
+        counselingBullets.push(rm.info.generic + ": " + rm.info.counseling);
+      }
+    });
+
+    return {
+      findings: outFindings,
+      medications: resolvedMeds,
+      counselingBullets: counselingBullets
+    };
   }
+
+  function rxSafetyFindings() {
+    var d = collectRx();
+    var alg = (((sheet && sheet.querySelector && sheet.querySelector("#rxAllergies")) || {}).value || "");
+    var res = analyzeRegimenSafety(d.lines, alg);
+    return res.findings;
+  }
+
   function rxSafetyHTML() {
-    var out = rxSafetyFindings(); if (!out.length) return "";
-    var col = { critical: ["#fdecea", "#8a1520", "#d3302f"], major: ["#fff4e5", "#8a4b00", "#f59e0b"], moderate: ["#fffbea", "#7a5b00", "#eab308"] };
-    return '<div style="font:700 12px/1.4 system-ui;color:#ab1c2c;margin:10px 0 6px;display:flex;align-items:center;gap:6px">' + rxIco("warning") + " Safety checks (" + out.length + ")</div>" +
-      out.map(function (w) { var c = col[w.sev] || col.moderate; return '<div style="font:500 12.5px/1.45 system-ui;padding:8px 10px;border-radius:8px;margin:4px 0;background:' + c[0] + ";color:" + c[1] + ";border-left:3px solid " + c[2] + '">' + esc(w.txt) + "</div>"; }).join("");
+    var d = collectRx();
+    var alg = (((sheet && sheet.querySelector && sheet.querySelector("#rxAllergies")) || {}).value || "");
+    var safety = analyzeRegimenSafety(d.lines, alg);
+    if (!safety.findings.length && !safety.medications.length) return "";
+
+    var col = {
+      critical: ["#fef2f2", "#991b1b", "#ef4444"],
+      major: ["#fffbeb", "#92400e", "#f59e0b"],
+      moderate: ["#f8fafc", "#475569", "#94a3b8"]
+    };
+
+    var alertsHtml = "";
+    if (safety.findings.length) {
+      alertsHtml = '<div style="margin-bottom:10px">' +
+        safety.findings.map(function (w) {
+          var c = col[w.sev] || col.moderate;
+          return '<div style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,sans-serif;padding:7px 10px;border-radius:8px;margin:4px 0;background:' + c[0] + ';color:' + c[1] + ';border-left:3px solid ' + c[2] + '">' +
+            '<b>' + (w.sev === "critical" ? "ALLERGY WARNING" : (w.sev === "major" ? "MAJOR INTERACTION" : "PRECAUTION")) + ':</b> ' + esc(w.txt) +
+          '</div>';
+        }).join("") +
+      '</div>';
+    }
+
+    var drugsHtml = "";
+    if (safety.medications.length) {
+      drugsHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin-bottom:8px">' +
+        safety.medications.map(function (m) {
+          var se = (m.info.sideEffects || []).join(", ");
+          var rf = (m.info.redFlags || []).join("; ");
+          return '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#334155;line-height:1.4">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">' +
+              '<span style="font-weight:700;color:#0f172a;font-size:12px">' + esc(m.info.generic) + '</span>' +
+              '<span style="font:600 9px -apple-system,sans-serif;background:#f1f5f9;color:#475569;padding:1px 5px;border-radius:4px">' + esc(m.info.cls) + '</span>' +
+            '</div>' +
+            (se ? '<div style="margin-bottom:3px"><b>Side effects:</b> ' + esc(se) + '</div>' : '') +
+            (rf ? '<div style="color:#b91c1c;margin-bottom:3px"><b>Red flags:</b> ' + esc(rf) + '</div>' : '') +
+            (m.info.counseling ? '<div style="color:#0e6e63"><b>Counseling:</b> ' + esc(m.info.counseling) + '</div>' : '') +
+          '</div>';
+        }).join("") +
+      '</div>';
+    }
+
+    var addBtnHtml = "";
+    if (safety.counselingBullets.length) {
+      addBtnHtml = '<div style="display:flex;justify-content:flex-end;margin-top:6px">' +
+        '<button type="button" class="rx-safety-add-btn" id="rxAddSafetyToAdvice" style="display:inline-flex;align-items:center;gap:5px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font:600 11px -apple-system,BlinkMacSystemFont,sans-serif;padding:4px 9px;border-radius:6px;cursor:pointer">' +
+          '+ Add Safety &amp; Instructions to Advice' +
+        '</button>' +
+      '</div>';
+    }
+
+    var badgeText = safety.findings.length ? (safety.findings.length + ' alert' + (safety.findings.length > 1 ? 's' : '')) : 'Regimen verified';
+    var badgeCol = safety.findings.length ? '#b45309' : '#047857';
+    var badgeBg = safety.findings.length ? '#fef3c7' : '#d1fae5';
+
+    return '<div style="margin:12px 0 8px;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+        '<div style="display:flex;align-items:center;gap:6px;font:700 12px -apple-system,BlinkMacSystemFont,sans-serif;color:#0f172a">' +
+          rxIco("warn") + ' <span>Clinical Safety &amp; Patient Counseling</span>' +
+        '</div>' +
+        '<span style="font:700 9.5px -apple-system,sans-serif;text-transform:uppercase;letter-spacing:.04em;background:' + badgeBg + ';color:' + badgeCol + ';padding:2px 7px;border-radius:4px">' + badgeText + '</span>' +
+      '</div>' +
+      alertsHtml +
+      drugsHtml +
+      addBtnHtml +
+    '</div>';
   }
-  function refreshSafety() { var s = sheet && sheet.querySelector("#rxSafety"); if (s) s.innerHTML = rxSafetyHTML(); }
+
+  function refreshSafety() {
+    var s = sheet && sheet.querySelector("#rxSafety");
+    if (!s) return;
+    s.innerHTML = rxSafetyHTML();
+    var addBtn = s.querySelector("#rxAddSafetyToAdvice");
+    if (addBtn) {
+      addBtn.addEventListener("click", function () {
+        var d = collectRx();
+        var alg = (((sheet && sheet.querySelector("#rxAllergies")) || {}).value || "");
+        var safety = analyzeRegimenSafety(d.lines, alg);
+        if (!safety.counselingBullets.length) return;
+        var advText = safety.counselingBullets.join(" | ");
+        var advLine = null;
+        sheet.querySelectorAll("#rxLines .rx-line.adv").forEach(function (ln) {
+          if (ln.style.display !== "none") advLine = ln;
+        });
+        if (advLine) {
+          var inp = advLine.querySelector('[data-f="drug"]');
+          if (inp) {
+            var cur = (inp.value || "").trim();
+            if (!cur) {
+              inp.value = advText;
+            } else if (cur.indexOf(safety.counselingBullets[0]) === -1) {
+              inp.value = cur + " | " + advText;
+            }
+          }
+        } else {
+          var wrap = sheet.querySelector("#rxLines");
+          if (wrap) {
+            var idx = wrap.children.length;
+            wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: advText, isAdvice: true }, idx));
+            rxLabelInputs();
+            bindDel();
+          }
+        }
+        rxToast("Safety instructions added to Advice");
+      });
+    }
+  }
+
+  function rxDocSafetySection(opts) {
+    if (opts && opts.includeSafety === false) return "";
+    var d = collectRx();
+    var alg = ((sheet && sheet.querySelector && sheet.querySelector("#rxAllergies")) || {}).value || "";
+    var safety = analyzeRegimenSafety(d.lines, alg);
+    if (!safety.medications.length && !safety.findings.length) return "";
+
+    var cells = safety.medications.map(function (m) {
+      var se = (m.info.sideEffects || []).join(", ");
+      var rf = (m.info.redFlags || []).join("; ");
+      return '<div class="rxdoc-safety-cell">' +
+        '<div class="rxdoc-safety-drug">' + esc(m.info.generic) + ' <span style="font-size:8.5px;font-weight:normal;color:#64748b">(' + esc(m.info.cls) + ')</span></div>' +
+        (se ? '<div style="margin-bottom:2px"><b>Common side effects:</b> ' + esc(se) + '</div>' : '') +
+        (rf ? '<div style="color:#991b1b;margin-bottom:2px"><b>Alert doctor if:</b> ' + esc(rf) + '</div>' : '') +
+        (m.info.counseling ? '<div style="color:#0e6e63"><b>Instructions:</b> ' + esc(m.info.counseling) + '</div>' : '') +
+      '</div>';
+    }).join("");
+
+    var warnBlock = "";
+    if (safety.findings.length) {
+      warnBlock = '<div class="rxdoc-safety-warn">' +
+        '<b>Clinical Interaction &amp; Allergy Precautions:</b><br>' +
+        safety.findings.map(function (f) { return '&bull; ' + esc(f.txt); }).join("<br>") +
+      '</div>';
+    }
+
+    return '<div class="rxdoc-safety-card">' +
+      '<div class="rxdoc-safety-hd">' +
+        '<span class="rxdoc-safety-badge">' +
+          '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#0e6e63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;margin-right:3px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
+          'Patient Instructions &amp; Safety Notes' +
+        '</span>' +
+        '<span class="rxdoc-safety-sub">Advisory guidance to support safe medicine use</span>' +
+      '</div>' +
+      '<div class="rxdoc-safety-grid">' + cells + '</div>' +
+      warnBlock +
+    '</div>';
+  }
 
   // Price + generic-substitute awareness: when a drug's generic is set, show the lowest-cost brand (and the
   // spread) inline, so the doctor can prescribe the affordable option. Async, fails silently (no API -> no hint).
@@ -1341,22 +1935,72 @@
     for (var _li = 0; _li < lines.length; _li++) if (lines[_li] && !lines[_li].isAdvice) { _hasDrugRow = true; break; }
     if (!_hasDrugRow) lines = lines.concat([{ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }]);
     var body =
-      '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
-      '<div class="rx-clinic-slot" id="rxClinicSlot">' + clinicSummaryHTML() + '</div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxPtName" placeholder="Patient name (optional, not saved)"><input class="rx-in" id="rxPtAge" placeholder="Age/Sex" style="flex:0 0 110px"></div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxDx" placeholder="Diagnosis" value="' + esc(topic || "") + '" style="flex:1"></div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxCc" placeholder="Complaints (optional)"><input class="rx-in" id="rxVitals" placeholder="Vitals — BP/HR/T/SpO₂ (optional)"></div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxAllergies" placeholder="Known allergies (optional) — checked against each drug" style="flex:1"></div>' +
-      '<div class="rx-symbol">℞</div>' +
-      '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
-      '<div class="rx-safety" id="rxSafety"></div>' +
-      '<div style="display:flex;gap:8px;margin:6px 0 2px"><select id="rxTpl" style="flex:1;padding:9px 10px;border:1px solid #d7dee3;border-radius:9px;font-size:13px;background:#fff;color:#14202b">' + tplOptions() + '</select><button class="rx-btn" id="rxTplSave" style="width:auto;margin:0;white-space:nowrap;padding:9px 12px;font-size:13px">Save set</button></div>' +
-      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn" id="rxMic" title="Dictate a drug, e.g. amox 500 TDS 5 days">'+rxIco("mic")+' Dictate</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button>' +
-      (rxcOn() ? '<button class="rx-btn" id="rxcOpen" style="background:rgba(14,110,99,.12);color:var(--teal,#0e6e63)" title="Same prescription, smarter price">RxChoice™</button>' : "") + '</div>' +
-      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<div class="rx-head-title">' +
+            '<span class="rx-title-main">Prescription</span>' +
+            '<span class="rx-title-sub">Dr. ' + esc(docName() || "—") + '</span>' +
+          '</div>' +
+          '<button class="rx-top-export rx-print" id="rxTopExport" title="Export prescription">' + rxIco("print") + ' Export</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body" id="rxScrollBody">' +
+        '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
+        '<div class="rx-clinic-slot" id="rxClinicSlot">' + clinicSummaryHTML() + '</div>' +
+        '<div class="rx-pt-card">' +
+          '<div class="rx-pt-card-title">Patient &amp; Clinical Summary</div>' +
+          '<div class="rx-pt-row rx-pt-grid">' +
+            '<input class="rx-in" id="rxPtName" placeholder="Patient name" aria-label="Patient name">' +
+            '<input class="rx-in" id="rxPtAge" placeholder="Age / Sex" aria-label="Age or Sex">' +
+          '</div>' +
+          '<div class="rx-pt-row">' +
+            '<input class="rx-in" id="rxDx" placeholder="Diagnosis (e.g. CAP, HTN)" value="' + esc(topic || "") + '" aria-label="Diagnosis">' +
+          '</div>' +
+          '<div class="rx-pt-row rx-pt-grid">' +
+            '<input class="rx-in" id="rxCc" placeholder="Chief complaints" aria-label="Complaints">' +
+            '<input class="rx-in" id="rxVitals" placeholder="Vitals (BP, HR, SpO₂)" aria-label="Vitals">' +
+          '</div>' +
+          '<div class="rx-pt-row">' +
+            '<input class="rx-in" id="rxAllergies" placeholder="Known drug allergies (optional)" aria-label="Known allergies">' +
+          '</div>' +
+        '</div>' +
+        '<div class="rx-sec-head">' +
+          '<span class="rx-symbol">℞</span>' +
+          '<span class="rx-sec-title">Prescribed Medications</span>' +
+        '</div>' +
+        '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
+        '<div class="rx-safety" id="rxSafety"></div>' +
+        '<div class="rx-tpl-card">' +
+          '<div class="rx-tpl-row">' +
+            '<select id="rxTpl" class="rx-tpl-sel">' + tplOptions() + '</select>' +
+            '<button class="rx-btn rx-tpl-btn" id="rxTplSave">+ Save as template</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="rx-sign-bar">' +
+          '<div class="rx-sign-dr">Dr. ' + esc(docName() || "—") + '</div>' +
+          '<div class="rx-sign-meta">Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-dock" id="rxDock">' +
+        '<div class="rx-dock-quick">' +
+          '<button class="rx-btn rx-add" id="rxAdd">+ Drug</button>' +
+          '<button class="rx-btn rx-mic" id="rxMic" title="Dictate a drug">' + rxIco("mic") + ' Dictate</button>' +
+          (rxcOn() ? '<button class="rx-btn rx-rxc" id="rxcOpen" title="Same prescription, smarter price">RxChoice™</button>' : "") +
+        '</div>' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxExport">' + rxIco("print") + ' Save &amp; Export</button>' +
+      '</div>';
     show(body);
-    sheet.querySelector("#rxX").addEventListener("click", close);
+    sheet.querySelector("#rxX").addEventListener("click", function () {
+      var d = collectRx();
+      if (d && (d.name || d.dx || (d.lines && d.lines.length > 1) || (d.lines && d.lines[0] && d.lines[0].drug))) {
+        if (!window.confirm("Discard draft prescription?")) return;
+      }
+      close();
+    });
+    var _topExp = sheet.querySelector("#rxTopExport");
+    if (_topExp) _topExp.addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
     function wireClinic() { var a = sheet.querySelector("#rxClinicAdd"); if (a) a.onclick = function () { openClinicEditor(refreshClinic); }; var e = sheet.querySelector("#rxClinicEdit"); if (e) e.onclick = function () { openClinicEditor(refreshClinic); }; }
     function refreshClinic() { var s = sheet.querySelector("#rxClinicSlot"); if (s) { s.innerHTML = clinicSummaryHTML(); wireClinic(); } }
     wireClinic();
@@ -1382,24 +2026,13 @@
     var _tplS = sheet.querySelector("#rxTplSave"); if (_tplS) _tplS.onclick = function () {
       var ls = (collectRx().lines || []).filter(function (l) { return !l.advice && l.drug; });
       if (!ls.length) { try { window.toast && window.toast("Add drugs first"); } catch (e) {} return; }
-      var nm = ""; try { nm = (window.prompt("Name this Rx set (e.g. URI, UTI, HTN):") || "").trim(); } catch (e) {}
+      var nm = ""; try { nm = (window.prompt("Name this Rx template set (e.g. URI, UTI, HTN):") || "").trim(); } catch (e) {}
       if (!nm) return;
       var a = rxTemplates(); a.push({ name: nm, lines: ls.map(function (l) { return { drug: l.drug, brand: l.brand, dose: l.dose, freq: l.freq, duration: l.duration }; }) }); saveRxTemplates(a);
-      try { window.toast && window.toast("Saved Rx set: " + nm); } catch (e) {}
+      try { window.toast && window.toast("Saved Rx template: " + nm); } catch (e) {}
       var s = sheet.querySelector("#rxTpl"); if (s) s.innerHTML = tplOptions();
     };
     // Voice-to-Rx: dictate a drug line ("amox 500 TDS 5 days"), parse it, add the row.
-    /* Dictate opens the SHARED dictation sheet (SMD_VOICE.openDialog) - the same one ICU, MaiK and
-     * ThoreX already use. The old path called SMD_VOICE.listen() directly and reported progress by
-     * writing to the button's `title`: a hover tooltip, invisible on a phone. `.rx-btn.on` had no CSS
-     * rule at all, so the "on" class did nothing either. A doctor tapping Dictate therefore saw
-     * NOTHING - no listening state, no transcript, no error. It could not have worked as written:
-     * on native the clinical Whisper engine never fires onPartial (WhisperEngine.swift declares the
-     * callback and never calls it), so the "live feedback" line was dead code.
-     *
-     * The shared sheet brings the recording animation, the elapsed timer and the model/permission
-     * error copy, and - the part that matters most for a PRESCRIPTION - it shows the transcript and
-     * lets the doctor CORRECT it before it is parsed into a drug row. */
     var _mic = sheet.querySelector("#rxMic");
     if (_mic) _mic.onclick = function () {
       var V = window.SMD_VOICE;
@@ -1409,7 +2042,6 @@
         onText: function (txt) {
           var p = parseVoiceRx(txt);
           if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
-          // Silence here was indistinguishable from a broken button. Say what was heard.
           var heard = String(txt || "").trim();
           rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
         }
@@ -1419,10 +2051,23 @@
   }
 
   function gate() {
-    show('<div class="rx-head"><div class="rx-title">Prescriber details</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-gate">Enter your <b>NMC registration number</b> to create prescriptions. It is stored on this device and printed on your prescriptions.' +
-      '<input class="rx-in" id="rxNmc" placeholder="NMC registration number" inputmode="numeric"></div>' +
-      '<div class="rx-row"><button class="rx-btn rx-print" id="rxSaveNmc">Save & continue</button></div>');
+    show(
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<div class="rx-head-title"><span class="rx-title-main">Prescriber Details</span></div>' +
+          '<div style="width:32px"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body">' +
+        '<div class="rx-gate">Enter your <b>NMC registration number</b> to create prescriptions. It is stored on this device and printed on your prescriptions.' +
+        '<input class="rx-in" id="rxNmc" placeholder="NMC registration number" inputmode="numeric" style="margin-top:12px"></div>' +
+      '</div>' +
+      '<div class="rx-dock">' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxSaveNmc" style="width:100%;justify-content:center">Save &amp; continue</button>' +
+      '</div>'
+    );
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxSaveNmc").addEventListener("click", function () {
       var v = (sheet.querySelector("#rxNmc").value || "").trim();
@@ -1433,15 +2078,35 @@
 
   // Verified-doctors-only prompt (shown when the gate is present but the user isn't verified).
   function verifyRequired() {
-    show('<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
-      '<div class="rx-row"><button class="rx-btn rx-print" id="rxVerify">Verify my registration</button></div>');
+    show(
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<div class="rx-head-title"><span class="rx-title-main">Doctor Verification</span></div>' +
+          '<div style="width:32px"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body">' +
+        '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
+      '</div>' +
+      '<div class="rx-dock">' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxVerify" style="width:100%;justify-content:center">Verify my registration</button>' +
+      '</div>'
+    );
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxVerify").addEventListener("click", function () { close(); try { window.SMD_VERIFY.openPanel(); } catch (e) {} });
   }
 
   function open(ctx) {
     ensureEls();
+    try {
+      if (typeof smdLazy === "function") {
+        smdLazy('/interaction-rules.js?v=gold363').then(function () {
+          try { refreshSafety(); } catch (e) {}
+        });
+      }
+    } catch (e) {}
     var reg = (ctx && ctx.regimen) || regimenFromCtx(ctx);
     var drugList = (window.MEDDRUGS && window.MEDDRUGS._list) || [];
     function build(regNo) {
@@ -1520,7 +2185,16 @@
   function openSignPad(onDone){
     var saved=getSign();
     var ov=document.createElement("div"); ov.className="rx-bp-ov";
-    ov.innerHTML='<div class="rx-bp rx-sign-sheet"><div class="rx-bp-h"><b>Sign the prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div><div class="rx-bp-sub">Sign with your finger, or upload your signature image.</div><canvas class="rx-sign-cv" width="600" height="200"></canvas><label class="rx-sign-reuse"><input type="checkbox" id="rxSignSave" '+(saved?'checked':'')+'> Save &amp; reuse on this device</label><div class="rx-row"><button class="rx-btn rx-add" id="rxSignClear">Clear</button><label class="rx-btn rx-add" style="cursor:pointer">Upload<input type="file" id="rxSignUp" accept="image/*" style="display:none"></label><button class="rx-btn rx-print" id="rxSignUse">Use signature →</button></div></div>';
+    ov.innerHTML='<div class="rx-bp rx-sign-sheet">' +
+      '<div class="rx-bp-h"><div><b>Doctor Signature</b><div style="font-size:11px;color:#64748b;font-weight:normal;margin-top:2px">Sign with your finger or upload an image</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
+      '<div style="font-size:12px;color:#475569;margin:8px 0 4px">Draw signature in the box below:</div>' +
+      '<canvas class="rx-sign-cv" width="600" height="200"></canvas>' +
+      '<label class="rx-sign-reuse" style="margin:8px 0 12px;cursor:pointer"><input type="checkbox" id="rxSignSave" '+(saved?'checked':'')+' style="width:16px;height:16px;accent-color:#0e6e63"><span>Save &amp; reuse signature on this device</span></label>' +
+      '<div style="display:flex;gap:8px;align-items:center">' +
+        '<button class="rx-btn rx-add" id="rxSignClear" style="flex:1;justify-content:center">Clear</button>' +
+        '<label class="rx-btn rx-add" style="flex:1;justify-content:center;cursor:pointer">Upload<input type="file" id="rxSignUp" accept="image/*" style="display:none"></label>' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxSignUse" style="flex:1.5;justify-content:center">Use signature →</button>' +
+      '</div></div>';
     sheet.appendChild(ov);
     var cv=ov.querySelector(".rx-sign-cv"), ctx=cv.getContext("2d"); ctx.lineWidth=2.4; ctx.lineCap="round"; ctx.strokeStyle="#0f172a";
     var upImg="", drew=false, drawing=false, px=0, py=0;
@@ -1587,6 +2261,7 @@
       '<div class="rxdoc-rx-header"><span class="rxdoc-rx-sym">℞</span><span class="rxdoc-rx-title">PRESCRIPTION</span></div>' +
       '<table class="rxdoc-tbl">' + (rows || '<tr><td colspan="2" class="dz">No items prescribed.</td></tr>') + '</table>' +
       rxcPrintSection(opts) +
+      rxDocSafetySection(opts) +
       '<div class="rxdoc-ft">' +
         '<table class="rxdoc-ft-tbl"><tr>' +
           '<td class="rxdoc-ft-auth">' + rxDocQrBlock(rxv) + '</td>' +
@@ -1601,8 +2276,8 @@
       '</div>' +
       '<div class="rxdoc-foot">' +
         '<div class="rxdoc-brand">' +
-          (_smdLogoData ? '<img class="rxdoc-smdlogo" src="' + _smdLogoData + '">' : '<span class="rxdoc-smdwm">Steward<b>MD</b></span>') +
-          '<span>Prescription generated using <b>StewardMD</b></span>' +
+          '<svg class="rxdoc-smd-icon" viewBox="0 0 24 24"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3M9 12.5v5a3.5 3.5 0 0 0 7 0v-2M16 15.5a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/></svg>' +
+          '<span>Prescription&nbsp;generated&nbsp;using&nbsp;<b style="color:#0e6e63">StewardMD</b></span>' +
         '</div>' +
         '<div class="rxdoc-resp">Digitally signed &amp; verified by the prescriber named above, who takes complete responsibility for this prescription. Verify every drug, dose, route and interaction against the patient and local protocol before dispensing.</div>' +
       '</div></div>';
@@ -1680,18 +2355,49 @@
     function chooser(sig){
       var hasRxChoice = !!(sheet && sheet._rxChoice && sheet._rxChoice._allResults && sheet._rxChoice._allResults.length);
       var ov=document.createElement("div"); ov.className="rx-bp-ov";
-      ov.innerHTML='<div class="rx-bp rx-exp"><div class="rx-bp-h"><b>Export prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div>' +
-        '<div style="margin:12px 0 10px;text-align:center"><label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a)"><input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + '><span>Include RxChoice™ cost options</span></label></div>' +
-        '<div class="rx-row" style="justify-content:center;margin-top:6px"><button class="rx-btn rx-print" id="rxExpPdf">'+rxIco("print")+' Save as PDF</button><button class="rx-btn rx-add" id="rxExpJpg">Save as JPEG</button></div></div>';
+      ov.innerHTML='<div class="rx-bp rx-exp">' +
+        '<div class="rx-bp-h"><div><b>Export Prescription</b><div style="font-size:11px;color:#64748b;font-weight:normal;margin-top:2px">Digitally signed &amp; verified document</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
+        '<div style="margin:12px 0 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">' +
+          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
+            '<input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + ' style="width:16px;height:16px;accent-color:#0e6e63">' +
+            '<span>Include RxChoice™ 4-way cost options</span>' +
+          '</label>' +
+          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
+            '<input type="checkbox" id="rxExpSafety" checked style="width:16px;height:16px;accent-color:#0e6e63">' +
+            '<span>Include Patient Safety &amp; Instructions Notes</span>' +
+          '</label>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">' +
+          '<button class="rx-btn rx-print rx-hero-export" id="rxExpPdf" style="width:100%;padding:12px 16px;font-size:14px;justify-content:center;gap:8px">' +
+            rxIco("print") + '<span>Save as PDF (Recommended)</span>' +
+          '</button>' +
+          '<button class="rx-btn rx-add" id="rxExpJpg" style="width:100%;padding:10px 16px;font-size:13px;justify-content:center;gap:8px">' +
+            '<span>Save as JPEG image</span>' +
+          '</button>' +
+        '</div>' +
+        '<div id="rxExpStatus" style="font-size:11.5px;color:#0e6e63;text-align:center;margin-top:10px;display:none;font-weight:600"></div>' +
+      '</div>';
       sheet.appendChild(ov);
       ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
       ov.querySelector("#rxExpPdf").addEventListener("click", function(){
-        var inc = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
-        ov.remove(); exportRx("pdf",topic,regNo,sig,{includeRxChoice:inc});
+        var incChoice = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
+        var incSafety = ov.querySelector("#rxExpSafety") ? ov.querySelector("#rxExpSafety").checked : true;
+        var btn = this; btn.disabled = true; btn.style.opacity = "0.7";
+        rxToast("Generating prescription PDF…");
+        setTimeout(function(){
+          ov.remove();
+          exportRx("pdf", topic, regNo, sig, { includeRxChoice: incChoice, includeSafety: incSafety });
+        }, 150);
       });
       ov.querySelector("#rxExpJpg").addEventListener("click", function(){
-        var inc = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
-        ov.remove(); exportRx("jpeg",topic,regNo,sig,{includeRxChoice:inc});
+        var incChoice = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
+        var incSafety = ov.querySelector("#rxExpSafety") ? ov.querySelector("#rxExpSafety").checked : true;
+        var btn = this; btn.disabled = true; btn.style.opacity = "0.7";
+        rxToast("Generating prescription JPEG…");
+        setTimeout(function(){
+          ov.remove();
+          exportRx("jpeg", topic, regNo, sig, { includeRxChoice: incChoice, includeSafety: incSafety });
+        }, 150);
       });
     }
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
