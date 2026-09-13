@@ -176,11 +176,14 @@ async function cardiologyTimeline(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, timeline: null };
 
+  /* Same rule as the oncology timeline: a part that failed is named, never returned as empty. */
+  const incomplete = [];
+  const read = (type, what) => svc.byPatient(type, patientId).catch(() => { incomplete.push(what); return null; });
   const [links, ecgs] = await Promise.all([
-    svc.byPatient(LINK_TYPE, patientId).catch(() => []),
-    svc.byPatient(ECG_TYPE, patientId).catch(() => []),
+    read(LINK_TYPE, "KardiQ X link"),
+    read(ECG_TYPE, "ECGs"),
   ]);
-  return { ...base, ok: true, timeline: { patientId, links: links || [], ecgs: ecgs || [] } };
+  return { ...base, ok: true, ...(incomplete.length ? { incomplete, warning: "Could not read: " + incomplete.join(", ") + ". Do not read those as empty." } : {}), timeline: { patientId, links: links || [], ecgs: ecgs || [] } };
 }
 
 export {

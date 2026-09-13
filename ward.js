@@ -1953,7 +1953,10 @@
         (a.extravasation && a.extravasation.occurred ? '<span class="w-st overdue">extravasation</span>' : "") + " &middot; " + when(a.startedAt) + "</span></li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    /* A part of this history that could not be read is said above everything, never shown as empty. */
+    var partialWarn = state.oncology && state.oncology.warning
+      ? '<p class="w-hint warn">' + ms("warning") + esc(state.oncology.warning) + "</p>" : "";
+    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Oncology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="oncologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -2009,7 +2012,10 @@
         '<span class="w-st overdue">unvalidated AI output</span> &middot; ' + when(e.capturedAt || e.recordedAt) + "</span></li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    /* A part of this history that could not be read is said above everything, never shown as empty. */
+    var partialWarn = state.cardiology && state.cardiology.warning
+      ? '<p class="w-hint warn">' + ms("warning") + esc(state.cardiology.warning) + "</p>" : "";
+    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Cardiology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="cardiologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -5396,7 +5402,7 @@
   function loadOncology() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/onco-timeline?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { st.oncology = { timeline: r && r.ok ? r.timeline : null }; paint(); })
+      .then(function (r) { st.oncology = { timeline: r && r.ok ? r.timeline : null, warning: r && r.ok ? (r.warning || null) : "This history could not be loaded. Do not read it as empty." }; paint(); })
       .catch(function () {});
   }
   function oncoLinkSave() {
@@ -5452,7 +5458,7 @@
   function loadCardiology() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/cardio-timeline?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { st.cardiology = { timeline: r && r.ok ? r.timeline : null }; paint(); })
+      .then(function (r) { st.cardiology = { timeline: r && r.ok ? r.timeline : null, warning: r && r.ok ? (r.warning || null) : "This history could not be loaded. Do not read it as empty." }; paint(); })
       .catch(function () {});
   }
   function cardioLinkSave() {
