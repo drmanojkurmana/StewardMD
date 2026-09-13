@@ -1502,6 +1502,9 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
+     * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
+    try { stopDiscoveryPlugin(); } catch (e) {}
     show("result");
     S.canApprove = true; /* optimistic; server enforces on approve/reject, see below */
     if (!S.versionId) { paintResult(); return; }

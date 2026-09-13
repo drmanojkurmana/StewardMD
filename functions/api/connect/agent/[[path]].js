@@ -501,6 +501,9 @@ export async function onRequest(context) {
        * the approved adapter keeps serving Ward Sync until the new draft is approved over it. */
       const discover = body.purpose === "discover";
       const ONBOARDING = ["CREATED", "AUTHENTICATED", "DISCOVERING", "COMPILING", "VALIDATING"];
+      // A phone session whose run already FINISHED is never resumed: a new connect attempt landed on the
+      // old draft's result behind the browser, with Done and sign-in detection dead (owner, 2026-09-13).
+      if (runnerPhone && session && job && !ONBOARDING.includes(job.state)) { session = null; job = null; }
       if (discover) {
         // Any live session of this doctor with a run still onboarding is the one to resume; the newest
         // live session may be a Ward Sync read with no job at all.
