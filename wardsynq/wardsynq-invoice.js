@@ -131,6 +131,11 @@ function postEvent(invoice, kind, opts) {
     // this event's money actually moved through - present only on payment/deposit events the caller
     // ran through wardsynq-payment-adapter.js, never invented here.
     ...(o.adapter ? { adapter: o.adapter } : {}),
+    /* HOW the money was taken - method, provider, the details reconciliation needs, and what may
+     * honestly be claimed about it - as wardsynq-payment-methods.js validated it. Carried verbatim,
+     * never built here: this engine owns the arithmetic, not the question of whether a card payment
+     * was confirmed by a machine or typed from a slip. Only deposits and payments carry one. */
+    ...(o.collection && (kind === "payment" || kind === "deposit") ? { collection: o.collection } : {}),
   });
   return invoice;
 }

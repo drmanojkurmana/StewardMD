@@ -1,0 +1,17 @@
+radiographer and radiologist could not be given to anybody
+
+Went to give a staff member the radiographer role to test it, and it was not an option. Every
+other role functions/_queue_roles.js knows about was in the Admin Center's role dropdown -
+including obscure ones like oncqis_protocol_author and academic_cell - except the two newest.
+admin.js keeps its own hand-written copy of the role list rather than reading ROLE_CAPS directly,
+and that copy went stale the day radiographer and radiologist were added: both roles had a real
+capability grant, a home-screen tile, and a chart to work from, and no admin could assign either
+one to a single member of staff. Built, tiled, and completely unreachable - the same shape of gap
+as the incident-reporting system found earlier in this walkthrough, just one door over.
+
+Added both to the dropdown and gave each the same one-line description style the rest of the list
+already uses, borrowed from ROLE_CAPS's own comment on why the two are separate (a radiographer
+acquires the study; reporting it is the radiologist's own act, granted by lab.result).
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

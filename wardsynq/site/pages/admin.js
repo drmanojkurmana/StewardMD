@@ -10,11 +10,16 @@
   // Bed states, verbatim from functions/_opd_org.js BED_STATES - never invented here.
   var BED_STATES = ["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"];
 
-  // Every role functions/_queue_roles.js ROLE_CAPS knows about (ROLES = Object.keys(ROLE_CAPS)).
+  /* Every role functions/_queue_roles.js ROLE_CAPS knows about (ROLES = Object.keys(ROLE_CAPS)).
+   * This list is hand-kept, not generated - it went stale for radiographer/radiologist the day
+   * those two roles were added to ROLE_CAPS: they existed on the server, had a home-screen tile
+   * and a chart, and could not be GIVEN to anybody, because this dropdown - the only door into
+   * assigning a role to a staff member - never learned they existed. Keep this in sync by hand;
+   * there is no test that catches a role missing here, only a role an admin cannot find. */
   var ROLES = ["admin", "doctor", "supervisor", "nurse", "intern", "resident", "reception", "cashier",
-    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "oncqis_protocol_author",
-    "oncqis_clinical_reviewer", "oncqis_institutional_approver", "pg_resident", "pg_faculty", "pg_hod",
-    "academic_cell", "safety_officer", "viewer"];
+    "pharmacy", "lab", "hr", "billing", "him", "blood_bank", "radiographer", "radiologist",
+    "oncqis_protocol_author", "oncqis_clinical_reviewer", "oncqis_institutional_approver",
+    "pg_resident", "pg_faculty", "pg_hod", "academic_cell", "safety_officer", "viewer"];
 
   // One line per common role, from the capability lists in functions/_queue_roles.js ROLE_CAPS.
   var ROLE_NOTES = [
@@ -27,7 +32,12 @@
     ["billing", "Reads charges, invoices and claims. Cannot take payment (see Cashier for that)."],
     ["him", "Reads the chart to decide and record release-of-information requests."],
     ["blood_bank", "Crossmatches, issues and administers transfusions only."],
+    ["radiographer", "Acquires the imaging study. Reads the chart, cannot file a report or protocol a study."],
+    ["radiologist", "Protocols and reports imaging studies (the same authority a lab result release uses). No other chart write."],
   ];
+
+  // The only actions the staff table sends to /member/<action>; anything else sends nothing.
+  var MEMBER_ACTION_ROUTE = { disable: "disable", restore: "restore", reset: "reset" };
 
   function refusal(r) {
     if (!r) return "No response from the server.";
@@ -36,7 +46,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -57,11 +67,53 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff, advisories: renderAdvisories };
     return renderers[tab](c, body);
   } });
 
   // ---- Hospital -------------------------------------------------------------------------------
+  /* WHO MAY WRITE A CLINICAL NOTE. Writing a note needs emr.treat, the prescribing capability, so
+   * out of the box only prescribers document. On plenty of real wards the nursing note is a core
+   * part of the record - and the alternative, handing nurses emr.treat, would hand them prescribing
+   * too. So the hospital names the roles it trusts to document, here, and those roles may write a
+   * note and nothing else.
+   *
+   * Only roles that can already open a chart are offered: a role that cannot read the record has no
+   * business writing into it, and listing it here would promise something the server would refuse.
+   * Prescribers are shown as always-on and cannot be unticked, because emr.treat carries this
+   * anyway and a tickbox that does not change anything is a lie about what it controls. */
+  var NOTE_ROLE_CHOICES = ["nurse", "supervisor", "resident", "intern", "reception", "him", "radiographer", "radiologist"];
+  var ALWAYS_WRITE = ["admin", "doctor", "pg_faculty", "pg_hod", "pg_resident"];
+  function noteWritersCard(c, o) {
+    var cfg = (o && o.wardsynq) || {};
+    var on = Array.isArray(cfg.noteWriterRoles) ? cfg.noteWriterRoles : [];
+    var row = function (r) {
+      return '<label class="f" style="flex:0 1 190px"><span>' +
+        '<input type="checkbox" class="admNoteRole" value="' + c.esc(r) + '"' + (on.indexOf(r) >= 0 ? " checked" : "") + "> " +
+        c.esc(r.replace(/_/g, " ")) + "</span></label>";
+    };
+    return '<div class="card"><h2>' + c.ms("edit_note") + " Who may write a clinical note</h2>" +
+      '<p class="quiet">Doctors and admins can always write a note. Tick any other role your hospital trusts to document on the patient timeline. This lets them write a note and nothing else: it does not let them prescribe, order or change anything.</p>' +
+      '<div class="row">' + NOTE_ROLE_CHOICES.map(row).join("") + "</div>" +
+      '<p class="quiet">Always allowed: ' + ALWAYS_WRITE.join(", ").replace(/_/g, " ") + ".</p>" +
+      '<button class="btn" id="admNoteSave" type="button">Save</button><div id="admNoteMsg"></div></div>';
+  }
+  function wireNoteWriters(c) {
+    var btn = document.getElementById("admNoteSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var picked = [];
+      document.querySelectorAll(".admNoteRole").forEach(function (b) { if (b.checked) picked.push(b.value); });
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { noteWriterRoles: picked } }).then(function (r) {
+        btn.disabled = false;
+        var m = document.getElementById("admNoteMsg");
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org;
+        c.toast(picked.length ? "Saved. " + picked.length + " extra role" + (picked.length === 1 ? "" : "s") + " may write a note." : "Saved. Only prescribers may write a note.");
+      });
+    };
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -80,7 +132,8 @@
        * say: nothing is converted, and nothing already recorded is rewritten. */
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
-      "</div>";
+      "</div>" +
+      (c.isWardsynq() ? noteWritersCard(c, o) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -92,13 +145,99 @@
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");
       });
     };
+    wireNoteWriters(c);
+  }
+
+  // ---- Safety reminders (dry run) ----------------------------------------------------------------
+  /* A DRAFT IS TESTED BEFORE IT IS PUBLISHED. A hospital's own safety reminders fire on real patients, and
+   * a badly written one either never fires or fires on everybody - both are found out on a ward. This
+   * compiles the draft on the server and reports what it WOULD have done, and changes nothing: publishing
+   * is the separate, existing hospital-settings step. A draft that does not compile says why. */
+  function renderAdvisories(c, body) {
+    body.innerHTML = '<div class="card"><h2>Safety reminders - try a draft</h2>' +
+      '<p class="quiet">Paste the draft reminder set (JSON). Nothing is published or changed by trying it.</p>' +
+      '<textarea id="admAdvDraft" rows="10" style="width:100%"></textarea>' +
+      '<button type="button" class="btn" id="admAdvRun">Try it</button><div id="admAdvOut"></div></div>';
+    document.getElementById("admAdvRun").onclick = function () {
+      var out = document.getElementById("admAdvOut"), draft;
+      try { draft = JSON.parse(document.getElementById("admAdvDraft").value || "null"); }
+      catch (e) { out.innerHTML = '<div class="msg err">That is not valid JSON, so it was not tried.</div>'; return; }
+      out.innerHTML = '<span class="spin"></span>';
+      c.api("/ward/advisory-check", { orgId: c.state.orgId, advisories: draft }).then(function (r) {
+        if (!r || !r.ok) { out.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        out.innerHTML = '<div class="msg note">Tried, not published.</div><pre style="white-space:pre-wrap">' + c.esc(JSON.stringify(r, null, 2)) + "</pre>";
+      });
+    };
+  }
+
+  // ---- Price list -------------------------------------------------------------------------------
+  /* WHAT THE HOSPITAL CHARGES. Prices are stored in paise, whole numbers, and shown in rupees - the
+   * conversion happens only here, on the way in and out, so no amount is ever held as a fraction that
+   * rounds differently in two places. Every change is audited on the server with the old price and the
+   * new one. Withdrawing an item hides it from new bills but keeps it, because old bills still name it. */
+  function rupees(paise) { var n = Number(paise); return isFinite(n) ? (n / 100).toFixed(2) : ""; }
+  function renderTariff(c, body) {
+    body.innerHTML = '<span class="spin"></span>';
+    return c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">The price list could not be loaded. Do not read this as an empty price list.</div>'; return; }
+      var items = r.items || [];
+      body.innerHTML = '<div class="card"><h2>Price list</h2>' +
+        (items.length ? '<div class="tbl"><table><thead><tr><th>Item</th><th>Code</th><th>Kind</th><th>Price (Rs)</th><th></th></tr></thead><tbody>' +
+          items.map(function (t) {
+            return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(t.kind) + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
+              '<td><button type="button" class="btn ghost" data-trf-edit="' + c.esc(t.id) + '">Change price</button> ' +
+              '<button type="button" class="btn ghost" data-trf-off="' + c.esc(t.id) + '">Withdraw</button></td></tr>';
+          }).join("") + "</tbody></table></div>" : '<p class="quiet">No prices set yet.</p>') +
+        '<h3>Add an item</h3><div class="row">' +
+        '<label class="f"><span>Name</span><input id="admTrfName"></label>' +
+        '<label class="f"><span>Code</span><input id="admTrfCode"></label>' +
+        '<label class="f"><span>Kind</span><select id="admTrfKind"><option value="investigation">Test</option><option value="medication">Medicine</option><option value="service">Service</option></select></label>' +
+        '<label class="f"><span>Price (Rs)</span><input id="admTrfPrice" inputmode="decimal"></label>' +
+        '</div><button type="button" class="btn" id="admTrfAdd">Add</button><div id="admTrfMsg"></div>' +
+        '<p class="quiet">Every change is recorded with the old and new price.</p></div>';
+
+      function save(item) {
+        return c.api("/bill/tariff", Object.assign({ orgId: c.state.orgId }, item)).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast("Saved."); renderTariff(c, body);
+        });
+      }
+      /* Rupees in, paise out. A price that is not plainly a number is refused here, never guessed at. */
+      function toPaise(v) { var t = String(v || "").trim(); return /^\d+(\.\d{1,2})?$/.test(t) ? Math.round(Number(t) * 100) : null; }
+
+      document.getElementById("admTrfAdd").onclick = function () {
+        var name = document.getElementById("admTrfName").value.trim();
+        var price = toPaise(document.getElementById("admTrfPrice").value);
+        if (!name) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">Give the item a name.</div>'; return; }
+        if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">The price has to be a plain amount in rupees, like 450 or 450.50.</div>'; return; }
+        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, price: price });
+      };
+      body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-edit"); })[0]; if (!t) return;
+          var v = prompt("New price for " + t.name + " in rupees (now " + rupees(t.price) + ")"); if (v == null) return;
+          var price = toPaise(v);
+          if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">The price has to be a plain amount in rupees.</div>'; return; }
+          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, price: price });
+        };
+      });
+      body.querySelectorAll("[data-trf-off]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-off"); })[0]; if (!t) return;
+          if (!confirm("Withdraw " + t.name + " from the price list? Old bills keep it.")) return;
+          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, price: t.price, active: false });
+        };
+      });
+    });
   }
 
   // ---- Departments ------------------------------------------------------------------------------
   function renderDepts(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var depts = (r && r.ok && r.departments) || [];
+      /* A failed load is not "no departments" - said plainly, and the list is not drawn. */
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">The departments could not be loaded. Do not read this as none set up.</div>'; return; }
+      var depts = r.departments || [];
       if (c.state.org) c.state.org._departments = depts;
       body.innerHTML = '<div class="card"><h2>Departments</h2>' +
         (depts.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Code</th><th>Type</th><th>Active</th></tr></thead><tbody>' +
@@ -215,6 +354,33 @@
   }
 
   // ---- Staff and roles ----------------------------------------------------------------------------
+  /* REQUIRE TWO-STEP SIGN-IN, per role. The server enforces it on every request; this card only sets it.
+   * Staff of a ticked role who have not set it up can still sign in, but can do nothing except set it up. */
+  function twoStepPolicyCard(c) {
+    var on = ((c.state.org && c.state.org.security && c.state.org.security.requireTwoStepRoles) || []);
+    return '<div class="card"><h2>Require two-step sign-in</h2>' +
+      '<p class="quiet">Staff in a ticked role must use a code from an authenticator app when they sign in. Anyone in that role who has not set it up yet can sign in, but can only reach the set-up page until they do. A lost phone is fixed with Reset access.</p>' +
+      '<div class="row">' + ROLES.map(function (r) {
+        return '<label class="f" style="flex:0 1 170px"><span><input type="checkbox" class="admTwoStepRole" value="' + c.esc(r) + '"' + (on.indexOf(r) >= 0 ? " checked" : "") + "> " + c.esc(r.replace(/_/g, " ")) + "</span></label>";
+      }).join("") + "</div>" +
+      '<button class="btn" id="admTwoStepSave" type="button">Save</button><div id="admTwoStepMsg"></div></div>';
+  }
+  function wireTwoStepPolicy(c) {
+    var btn = document.getElementById("admTwoStepSave"); if (!btn) return;
+    btn.onclick = function () {
+      var picked = [];
+      document.querySelectorAll(".admTwoStepRole").forEach(function (b) { if (b.checked) picked.push(b.value); });
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, security: { requireTwoStepRoles: picked } }).then(function (r) {
+        btn.disabled = false;
+        var m = document.getElementById("admTwoStepMsg");
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org;
+        var saved = (r.org && r.org.security && r.org.security.requireTwoStepRoles) || [];
+        m.innerHTML = '<div class="msg ok">' + (saved.length ? "Saved. Required for: " + c.esc(saved.join(", ")) + "." : "Saved. Two-step sign-in is optional for everyone.") + "</div>";
+      });
+    };
+  }
   function renderStaff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/members?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
@@ -223,6 +389,7 @@
       body.innerHTML =
         '<div class="card"><h2>What each credential lets a person do</h2>' +
         ROLE_NOTES.map(function (l) { return '<p class="quiet"><b>' + c.esc(l[0]) + ":</b> " + c.esc(l[1]) + "</p>"; }).join("") + "</div>" +
+        twoStepPolicyCard(c) +
         '<div class="card"><h2>Staff</h2>' +
         (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th></th></tr></thead><tbody>' +
           members.map(function (m) {
@@ -250,10 +417,12 @@
         '<label class="f"><span>Password</span><input id="admPwVal" type="password"></label>' +
         '<button class="btn quiet" id="admPwSave" type="button">Set password</button></div><div id="admPwMsg"></div>' +
         "</div>";
+      wireTwoStepPolicy(c);
       body.querySelectorAll("[data-mact]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-mact"), id = b.getAttribute("data-id");
-          c.api("/member/" + act, { orgId: c.state.orgId, identity: id }).then(function (r) {
+          if (!MEMBER_ACTION_ROUTE[act]) return;
+          c.api("/member/" + MEMBER_ACTION_ROUTE[act], { orgId: c.state.orgId, identity: id }).then(function (r) {
             if (!r || !r.ok) { c.toast(refusal(r)); return; }
             c.toast("Updated."); WSQ.render("admin");
           });

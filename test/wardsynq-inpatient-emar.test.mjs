@@ -64,6 +64,7 @@ mock.module("../functions/_fbfirestore.js", {
 });
 
 const { MemoryRepository, VersionConflictError } = await import("../functions/_wardsynq/repository.js");
+const { resetMemory: resetRateLimits } = await import("../functions/_wardsynq/rate-limit.js");
 const { identify } = await import("../functions/_usage.js");
 const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
@@ -140,6 +141,10 @@ const NOTE_TEMPLATES = [{
 function seedHospital(mode = "wardsynq", region) {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
+  /* A new hospital starts with a fresh per-minute throttle. The limiter's memory store outlives each
+   * test, so DOCTOR's writes from every earlier test in this file counted against the later ones,
+   * and a test far down the file failed with "too many requests" whenever one above it grew. */
+  resetRateLimits();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
   docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, ...(region ? { region } : {}), connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
@@ -2139,8 +2144,22 @@ test("A MERGE MOVES NOTHING AND DESTROYS NOTHING, and it can be taken back", asy
   };
   assert.ok(before.survivor > 0 && before.dupe > 0);
 
+  /* THE PREVIEW RUNS EVERY CHECK AND WRITES NOTHING. It needs no reason (the person has not decided
+   * yet), shows both records, and a real merge afterwards still needs one. */
+  const linksBefore = (await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length;
+  const preview = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, dryRun: true });
+  assert.equal(preview.__status, 200, JSON.stringify(preview));
+  assert.equal(preview.dryRun, true);
+  assert.equal(preview.written, 0);
+  assert.equal(preview.survivor.patientId, adm.patientId);
+  assert.equal(preview.merged.patientId, dupe.patientId);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, linksBefore, "a preview must not write a link");
+  assert.equal((await as(DOCTOR, `/ward/identity?orgId=${ORG}&patientId=${dupe.patientId}`)).identity.isMerged, false);
+  // The same people who cannot merge cannot preview one either.
+  assert.equal((await as(LABTECH, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, dryRun: true })).__status, 403);
+
   // A merge is a claim, and it needs a reason that says what establishes it.
-  const bare = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
+  const bare =await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
   assert.equal(bare.__status, 422);
   assert.equal(bare.error, "reason_required");
   // And a record cannot absorb itself.
@@ -2208,6 +2227,24 @@ test("a merge is refused where it would create an identity by side effect or a c
   assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason })).written, 0);
 });
 
+test("a merge whose chain check cannot read the existing links is refused, not waved through", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const b = await secondPatient("Medical A", "34");
+  const real = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+    if (resourceType === "PatientLink") throw new Error("store unavailable");
+    return real(tenantId, resourceType, limit);
+  };
+  try {
+    const r = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." });
+    assert.equal(r.__status, 502, JSON.stringify(r));
+    assert.equal(r.error, "record_read_failed");
+    assert.equal(r.written, 0);
+  } finally { RECORD.latestByType = real; }
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, 0, "nothing was joined");
+});
+
 test("resolving identity is the registration authority, and nothing automatic does it", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
@@ -2267,8 +2304,14 @@ test("ORDER -> RESULT -> CRITICAL LOOP, natively, end to end", async () => {
   assert.equal(rel.observations.find((o) => o.display === "Blood culture").codeSystem, "wardsynq-lab-local");
 
   // It is now on the chart, and the critical loop opens off it - natively, with no GHIS anywhere.
-  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: rel.reportId });
-  assert.equal(opened.opened, 1);
+  /* Releasing the result opens the loop itself now - it used to need a separate /ward/flag-critical call
+   * that no screen ever made, so a critical potassium alerted nobody. */
+  assert.equal(rel.criticalCheck && rel.criticalCheck.checked, true, JSON.stringify(rel.criticalCheck));
+  assert.equal(rel.criticalCheck.opened, 1, "releasing a critical potassium opens exactly one loop");
+  // Asking again opens no second loop for the same result.
+  const again = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: rel.reportId });
+  assert.equal(again.opened, 0, "a second flag must not duplicate the loop: " + JSON.stringify(again));
+  const opened = { loops: rel.criticalCheck.loops };
   assert.equal(opened.loops[0].display, "Potassium");
   assert.equal(opened.loops[0].basis, "limit", "flagged by the site's limits, not by the lab");
   assert.equal(opened.loops[0].value, 7.4);
@@ -3632,9 +3675,13 @@ test("TASK 3.2: a CRITICAL imaging finding (text, no number) opens the SAME clos
   assert.equal(stored.critical, true, "the flag is on the record, not just the response");
 
   // The SAME critical-loop mechanism opens for this text finding - no numeric value anywhere.
-  const opened = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: done.reportId });
-  assert.equal(opened.__status, 200, JSON.stringify(opened));
+  /* Releasing a critical imaging report opens the loop itself now; the separate flag-critical call is no
+   * longer needed and, made again, opens nothing new. */
+  assert.equal(done.criticalCheck && done.criticalCheck.checked, true, JSON.stringify(done.criticalCheck));
+  const opened = { __status: 200, opened: done.criticalCheck.opened, loops: done.criticalCheck.loops };
   assert.equal(opened.opened, 1, "one loop, for a report-level critical flag with no comparable value");
+  const reflag = await as(DOCTOR, "/ward/flag-critical", "POST", { orgId: ORG, reportId: done.reportId });
+  assert.equal(reflag.opened, 0, "flagging again never duplicates the loop");
   assert.equal(opened.loops[0].value, null);
   assert.equal(opened.loops[0].basis, "lab", "attributed to whoever flagged it, the same as a lab's own critical flag");
   // And the same honest notification discipline applies - no channel wired, no silent 'sent'.
@@ -4236,9 +4283,29 @@ test("OFF-FORMULARY NEVER BLOCKS, and a RESTRICTED drug does - because the hospi
   assert.match(mero.basis, /not a clinical safety finding/);
   assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", "wsq-rx-" + adm.encounterId.toLowerCase() + "-meropenem"), null, "and nothing was written");
 
-  const approved = await order("Meropenem", { approvalRef: "MICRO-2291" });
+  /* A MADE-UP REFERENCE IS NOT AN APPROVAL - it used to be: this call read
+   * `order("Meropenem", { approvalRef: "MICRO-2291" })` and expected 200, so any non-empty string
+   * cleared stewardship and a prescriber blocked at 2am could type one character and be through.
+   * That refusal is asserted in test/wardsynq-formulary.test.mjs instead of with another order
+   * here, because this file shares one rate-limit budget and an extra write costs an unrelated
+   * test two thousand lines below. What is proved HERE is the half a unit test cannot reach: that
+   * a real chain, read out of the record store, actually clears the block end to end. */
+  RECORD.append(TENANT_ROW.id, [
+    { resourceType: "Verification", id: "wsq-verif-mero-1", version: 1, kind: "request",
+      subjectType: "RestrictedMedication", subjectId: "Meropenem", by: idFor(DOCTOR),
+      reason: "resistant organism", at: "2026-09-12T10:00:00.000Z" },
+    { resourceType: "Verification", id: "wsq-verif-mero-1-d1", version: 1, kind: "decision",
+      parentVerificationId: "wsq-verif-mero-1", subjectType: "RestrictedMedication",
+      subjectId: "Meropenem", by: "micro.consultant", decision: "approved", at: "2026-09-12T10:05:00.000Z" },
+  ]);
+  const approved = await order("Meropenem", { approvalRef: "wsq-verif-mero-1" });
   assert.equal(approved.__status, 200, JSON.stringify(approved));
-  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", approved.orderId)).restrictionApprovalRef, "MICRO-2291");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "MedicationOrder", approved.orderId)).restrictionApprovalRef, "wsq-verif-mero-1");
+
+  /* That an approval covers ONLY the drug it was granted for is proved in
+   * test/wardsynq-verification.test.mjs rather than with another order here: this test shares a
+   * rate-limit budget with the rest of the file, and spending it on a case a unit test already
+   * pins down is how an unrelated test two thousand lines below starts failing. */
 
   // A specialty restriction is satisfied by the specialty, not by an approval number.
   assert.equal((await order("Vancomycin", { approvalRef: "X" })).__status, 409);
@@ -6444,4 +6511,247 @@ test("SMART: the token endpoint is rate limited per client, and says so with Ret
   assert.equal(last.status, 429);
   assert.ok(Number(last.headers.get("retry-after")) >= 1);
   assert.equal((await last.json()).error, "temporarily_unavailable");
+});
+
+/* ---- the chart's timeline: every readable resource, in one chronological order ------------------ */
+
+test("timeline: admission, the problem, the order and the given dose all appear, most recent first", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "Community-acquired pneumonia", verificationStatus: "provisional" } });
+
+  const tl = await as(DOCTOR, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(tl.__status, 200);
+  assert.ok(tl.events.length >= 3, "at least the admission, the problem and the order appear");
+  const types = tl.events.map((e) => e.resourceType);
+  assert.ok(types.includes("Encounter"));
+  assert.ok(types.includes("Condition"));
+  assert.ok(types.includes("MedicationOrder"));
+  // Descending: each event is no more recent than the one before it.
+  for (let i = 1; i < tl.events.length; i++) assert.ok(tl.events[i - 1].at >= tl.events[i].at, "sorted most-recent-first");
+  // The order IS the drug currently running, surfaced as its own board.
+  assert.ok(tl.activeMedications.some((m) => m.drug === "Paracetamol 500mg" && m.since));
+});
+
+test("timeline: pharmacy cannot see it — the same emr.view gate the flowsheet already enforces", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(PHARM, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(r.__status, 403);
+});
+
+/* ---- patient documents (documents.js + object-store.js) ------------------------------------------------
+ *
+ * The real S3 adapter runs against a stand-in S3 endpoint (a fetch stub keyed on its host), so the signed
+ * request path is exercised end to end, not a memory shortcut.
+ */
+const DOC_S3 = { DOC_S3_ENDPOINT: "https://s3.docs.test", DOC_S3_BUCKET: "wsq-docs", DOC_S3_ACCESS_KEY_ID: "AK", DOC_S3_SECRET_ACCESS_KEY: "SK" };
+async function withDocStore(fn) {
+  const objects = new Map(), calls = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, init) => {
+    const u = String(url);
+    if (!u.startsWith(DOC_S3.DOC_S3_ENDPOINT)) return realFetch(url, init);
+    const key = decodeURIComponent(new URL(u).pathname.replace(/^\/wsq-docs\//, ""));
+    calls.push({ method: init.method, key, signed: /^AWS4-HMAC-SHA256 /.test(init.headers.authorization || "") });
+    if (init.method === "PUT") { objects.set(key, new Uint8Array(init.body)); return new Response("", { status: 200 }); }
+    if (init.method === "GET") return objects.has(key) ? new Response(objects.get(key), { status: 200 }) : new Response("", { status: 404 });
+    if (init.method === "DELETE") { objects.delete(key); return new Response(null, { status: 204 }); }
+    return new Response("", { status: 405 });
+  };
+  Object.assign(ENV, DOC_S3);
+  try { return await fn({ objects, calls }); }
+  finally { globalThis.fetch = realFetch; for (const k of Object.keys(DOC_S3)) delete ENV[k]; }
+}
+const PDF = Buffer.from("%PDF-1.4\n% a consent form\n%%EOF\n");
+
+test("DOCUMENTS: upload encrypts before it leaves, versions never overwrite, and the signed link opens exactly what was uploaded", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects, calls }) => {
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, docType: "consent", title: "Consent for central line", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    assert.equal(up.document.version, 1);
+    assert.ok(!("objectKey" in up.document), "the storage key is never handed to a client");
+    assert.equal(objects.size, 1);
+    assert.ok(calls.length && calls.every((c) => c.signed), "every storage request is signed");
+    const stored = [...objects.values()][0];
+    assert.ok(!Buffer.from(stored).includes(Buffer.from("consent form")), "the store holds ciphertext, never the document");
+
+    const v2 = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, documentId: up.document.id, expectedVersion: 1, docType: "consent", title: "Consent for central line (signed copy)", contentType: "application/pdf", dataBase64: Buffer.from("%PDF-1.4\n% signed\n%%EOF\n").toString("base64") });
+    assert.equal(v2.__status, 200, JSON.stringify(v2));
+    assert.equal(v2.document.version, 2);
+    assert.equal(objects.size, 2, "version 1's file is kept");
+    const stale = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, documentId: up.document.id, expectedVersion: 1, docType: "consent", title: "late", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(stale.__status, 409, "a version built on an old copy is refused");
+
+    const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(list.__status, 200, JSON.stringify(list));
+    assert.equal(list.storageConfigured, true);
+    assert.equal(list.documents.length, 1);
+    assert.equal(list.documents[0].version, 2);
+    assert.equal((await as(NURSE, `/ward/document-versions?orgId=${ORG}&documentId=${up.document.id}`)).versions.length, 2);
+
+    const link = await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id, version: 1 });
+    assert.equal(link.__status, 200, JSON.stringify(link));
+    assert.match(link.url, /^\/api\/queue\/ward\/document-file\?t=/);
+    const file = await onRequest({ request: new Request("https://x" + link.url), env: ENV });
+    assert.equal(file.status, 200);
+    assert.equal(file.headers.get("content-type"), "application/pdf");
+    assert.equal(file.headers.get("cache-control"), "private, no-store");
+    assert.deepEqual(Buffer.from(await file.arrayBuffer()), PDF, "version 1 opens as version 1, byte for byte");
+
+    const tampered = await onRequest({ request: new Request("https://x" + link.url.slice(0, -4) + "AAAA"), env: ENV });
+    assert.equal(tampered.status, 401);
+  });
+});
+
+test("DOCUMENTS: who may do what - nurses read, only a doctor uploads or withdraws, pharmacy cannot list or link, purge is an admin act", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects }) => {
+    const body = { orgId: ORG, patientId: adm.patientId, docType: "outside-report", title: "Echo from City Hospital", contentType: "application/pdf", dataBase64: PDF.toString("base64") };
+    assert.equal((await as(NURSE, "/ward/document-upload", "POST", body)).__status, 403);
+    assert.equal((await as(PHARM, "/ward/document-upload", "POST", body)).__status, 403);
+    assert.equal(objects.size, 0, "a refused upload stores nothing");
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", body);
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    assert.equal((await as(PHARM, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 403);
+    assert.equal((await as(PHARM, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 403, "no link for someone who cannot read it");
+
+    assert.equal((await as(NURSE, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "Wrong patient" })).__status, 403);
+    assert.equal((await as(DOCTOR, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "no" })).__status, 422, "a withdrawal needs a reason");
+    const w = await as(DOCTOR, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "Scanned under the wrong patient" });
+    assert.equal(w.__status, 200);
+    assert.equal(w.document.status, "entered-in-error");
+    assert.equal(objects.size, 1, "withdrawing keeps the file");
+
+    assert.equal((await as(DOCTOR, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id })).__status, 403, "deleting stored bytes is an administrator's act");
+    const bad = await as(DOCTOR, "/ward/document-upload", "POST", { ...body, contentType: "text/html", dataBase64: Buffer.from("<script>").toString("base64") });
+    assert.equal(bad.__status, 422, "only PDF and images are accepted, so nothing served back can run script");
+  });
+});
+
+test("DOCUMENTS: an administrator deletes the stored files only after retention; the record of the document stays", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects }) => {
+    const body = { orgId: ORG, patientId: adm.patientId, docType: "id-proof", title: "Aadhaar copy", contentType: "image/png", dataBase64: Buffer.from([137, 80, 78, 71]).toString("base64") };
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", body);
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    await as(DOCTOR, "/ward/document-upload", "POST", { ...body, documentId: up.document.id, expectedVersion: 1, title: "Aadhaar copy, clearer" });
+    assert.equal(objects.size, 2);
+
+    const early = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    assert.equal(early.__status, 409, JSON.stringify(early));
+    assert.equal(early.error, "retention_not_expired");
+    assert.equal(objects.size, 2, "nothing is deleted before the retention date");
+
+    const realNow = Date.now;
+    Date.now = () => realNow() + 4 * 365 * 24 * 3600 * 1000;
+    let purged;
+    try { purged = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id }); }
+    finally { Date.now = realNow; }
+    assert.equal(purged.__status, 200, JSON.stringify(purged));
+    assert.equal(purged.objectsDeleted, 2, "every version's file goes");
+    assert.equal(objects.size, 0);
+    const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(list.documents.length, 1, "the record that a document existed stays");
+    assert.equal(list.documents[0].status, "purged");
+    assert.equal((await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 410);
+  });
+});
+
+test("DOCUMENTS: with no storage configured, an upload is refused and says so, and the list says storage is off rather than looking empty", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, docType: "consent", title: "x", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+  assert.equal(r.__status, 503);
+  assert.equal(r.error, "document_storage_not_configured");
+  assert.match(r.message, /Nothing was saved/);
+  const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.__status, 200);
+  assert.equal(list.storageConfigured, false);
+});
+
+test("DOCUMENTS: the public ready check says whether storage really works - a round trip, not just settings present", async () => {
+  const ready = async () => (await (await onRequest({ request: new Request("https://x/api/queue/ready"), env: ENV })).json()).documentStorage;
+  assert.deepEqual(await ready(), { state: "not_configured" });
+  await withDocStore(async ({ objects, calls }) => {
+    assert.deepEqual(await ready(), { state: "ok" });
+    assert.deepEqual(calls.map((c) => c.method), ["PUT", "GET", "DELETE"], "it saved, read back and deleted");
+    assert.equal(objects.size, 0, "and left nothing behind");
+    await ready();
+    assert.equal(calls.length, 3, "cached, so the public endpoint cannot run up storage calls");
+  });
+});
+
+/* ---- referrals (referral.js) ----------------------------------------------------------------------- */
+test("REFERRAL: request -> accept -> schedule -> seen -> respond -> close, each step by the right side, every step on the record", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const bare = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: adm.patientId, specialty: "Cardiology", reason: "New AF" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "summary_required", "a referral with no clinical summary is refused");
+
+  const made = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, specialty: "Cardiology", urgency: "urgent", reason: "New atrial fibrillation", clinicalSummary: "72M, palpitations 2 days, AF 130 on ECG, BP stable." });
+  assert.equal(made.__status, 200, JSON.stringify(made));
+  const id = made.referral.id;
+  assert.equal(made.referral.status, "requested");
+
+  const self = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" });
+  assert.equal(self.__status, 422);
+  assert.equal(self.error, "referrer_cannot_receive");
+  assert.equal((await as(NURSE, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" })).__status, 403, "a nurse cannot accept a referral");
+
+  const inbox = await as(LOCUM, `/ward/referral-inbox?orgId=${ORG}&specialty=cardiology`);
+  assert.equal(inbox.__status, 200);
+  assert.deepEqual(inbox.referrals.map((r) => r.id), [id]);
+  assert.equal(inbox.partial, false);
+
+  const steps = [
+    ["accept", {}], ["schedule", { appointmentAt: "2026-09-20T10:00:00.000Z" }], ["seen", {}],
+    ["respond", { response: "Rate control with metoprolol; anticoagulate, CHA2DS2-VASc 3. Echo booked." }],
+  ];
+  for (const [action, extra] of steps) {
+    const r = await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action, ...extra });
+    assert.equal(r.__status, 200, action + " " + JSON.stringify(r));
+  }
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "close" })).error, "only_referrer", "the referrer closes it, having read the reply");
+  const closed = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "close" });
+  assert.equal(closed.__status, 200);
+  assert.equal(closed.referral.status, "closed");
+  assert.deepEqual(closed.referral.history.map((h) => h.status), ["requested", "accepted", "scheduled", "seen", "responded", "closed"]);
+  assert.equal(closed.referral.receivingProvider, idFor(LOCUM));
+
+  const list = await as(NURSE, `/ward/referrals?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.referrals[0].status, "closed");
+  assert.equal((await as(PHARM, `/ward/referrals?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 403);
+  assert.equal((await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" })).error, "bad_transition", "a closed referral does not reopen");
+});
+
+test("REFERRAL: a declined referral stays on the referrer's list until they close it; cancel needs a reason; external needs a facility", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const base = { orgId: ORG, patientId: adm.patientId, specialty: "Neurology", reason: "Seizure", clinicalSummary: "First seizure, CT normal." };
+  const r1 = await as(DOCTOR, "/ward/referral-create", "POST", base);
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r1.referral.id, action: "decline" })).error, "reason_required");
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r1.referral.id, action: "decline", reason: "Epilepsy clinic takes first seizures" })).__status, 200);
+  const sent = await as(DOCTOR, `/ward/referral-inbox?orgId=${ORG}&view=sent`);
+  assert.deepEqual(sent.referrals.map((r) => r.status), ["declined"], "a declined referral is exactly the one most likely to be forgotten");
+
+  const r2 = await as(DOCTOR, "/ward/referral-create", "POST", base);
+  assert.equal((await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: r2.referral.id, action: "cancel" })).error, "reason_required");
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r2.referral.id, action: "cancel", reason: "x" })).error, "only_referrer");
+
+  assert.equal((await as(DOCTOR, "/ward/referral-create", "POST", { ...base, kind: "external" })).error, "facility_required");
+  const ext = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, kind: "external", destinationFacility: "NIMHANS" });
+  const acc = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: ext.referral.id, action: "accept" });
+  assert.equal(acc.__status, 200, "an external referral's acceptance is recorded by our staff on the facility's behalf");
+  assert.equal(acc.referral.history[1].onBehalfOf, "NIMHANS");
+
+  const att = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, attachments: ["wsq-doc-someone-else"] });
+  assert.equal(att.error, "attachment_not_this_patient");
 });

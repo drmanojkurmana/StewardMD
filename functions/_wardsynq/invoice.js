@@ -20,6 +20,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, receiptsFor, InvoiceRefusalError } from "../../wardsynq/wardsynq-invoice.js";
+import { validateCollection, applyAdapterResult } from "../../wardsynq/wardsynq-payment-methods.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
 
@@ -128,14 +129,44 @@ async function postDiscount(request, env, ctx) { return transition(request, env,
  * adapter call happens BEFORE transition() (its own `run` is synchronous, so the adapter's async
  * result must already be in hand) - never blocks the deposit itself, the same "never claim more
  * than the adapter reports" discipline wardsynq-payment-adapter.js's own header states. */
-async function postDeposit(request, env, ctx) {
-  const adapter = await submitPaymentViaAdapter({ kind: "deposit", amount: ctx.amount, reference: ctx.reference }, ctx.paymentAdapter || null);
-  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "deposit", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter }));
+/* HOW the money was taken, checked before anything is recorded.
+ *
+ * A collection that cannot be reconciled later is not a collection anybody can act on: cash with no
+ * counter cannot be matched against a drawer, and a bank transfer with no UTR cannot be matched
+ * against a statement. wardsynq-payment-methods.js decides what each method must carry, from the
+ * hospital's OWN configuration - a hospital that has configured nothing takes cash only.
+ *
+ * It also decides what may honestly be CLAIMED. Everything is recorded as manually captured until a
+ * provider actually answers; the reply is applied afterwards and is the only thing that can produce
+ * an integrated capture. A request body cannot ask for one.
+ *
+ * A hospital that has configured no payment methods at all keeps working exactly as before - the
+ * check is skipped rather than refusing every payment on a config nobody has filled in yet. */
+function collectionFor(ctx, kind) {
+  if (!ctx.paymentMethods && !str(ctx.method)) return { ok: true, collection: null };
+  if (!str(ctx.method)) {
+    return { ok: false, error: "method_required", detail: "Say how the money was taken." };
+  }
+  return validateCollection(
+    { method: ctx.method, amount: ctx.amount, details: ctx.paymentDetails || {} },
+    ctx.paymentMethods || null,
+  );
 }
-/** ctx: { migration, invoiceId, amount, reference?, paymentAdapter?, actorDeps, recordDeps } */
+
+async function postDeposit(request, env, ctx) {
+  const c = collectionFor(ctx, "deposit");
+  if (!c.ok) return { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null, ok: false, status: 422, error: c.error, detail: c.detail, ...(c.missing ? { missing: c.missing } : {}), written: 0 };
+  const adapter = await submitPaymentViaAdapter({ kind: "deposit", amount: ctx.amount, reference: ctx.reference, method: c.collection && c.collection.method }, ctx.paymentAdapter || null);
+  const collection = c.collection ? applyAdapterResult(c.collection, adapter) : null;
+  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "deposit", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter, ...(collection ? { collection } : {}) }));
+}
+/** ctx: { migration, invoiceId, amount, reference?, method?, paymentDetails?, paymentMethods?, paymentAdapter?, actorDeps, recordDeps } */
 async function postPayment(request, env, ctx) {
-  const adapter = await submitPaymentViaAdapter({ kind: "payment", amount: ctx.amount, reference: ctx.reference }, ctx.paymentAdapter || null);
-  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "payment", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter }));
+  const c = collectionFor(ctx, "payment");
+  if (!c.ok) return { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null, ok: false, status: 422, error: c.error, detail: c.detail, ...(c.missing ? { missing: c.missing } : {}), written: 0 };
+  const adapter = await submitPaymentViaAdapter({ kind: "payment", amount: ctx.amount, reference: ctx.reference, method: c.collection && c.collection.method }, ctx.paymentAdapter || null);
+  const collection = c.collection ? applyAdapterResult(c.collection, adapter) : null;
+  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "payment", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter, ...(collection ? { collection } : {}) }));
 }
 /** ctx: { migration, invoiceId, amount, reason, reference?, actorDeps, recordDeps } */
 async function postRefund(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "refund", { amount: ctx.amount, actorId, at: at_(ctx), reason: ctx.reason, reference: ctx.reference })); }

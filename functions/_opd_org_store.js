@@ -10,7 +10,9 @@
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
 import * as M from "./_opd_org.js";
-import { genSalt, hashSecret } from "./_opd_auth.js";
+import { genSalt, hashSecret, passwordProblem, pinProblem } from "./_opd_auth.js";
+import * as A from "./_opd_auth.js";
+import { encPHI, decPHI } from "./_queue.js";
 
 const now = () => Date.now();
 function newId() { return crypto.randomUUID().replace(/-/g, ""); }
@@ -106,7 +108,23 @@ export async function deleteOrg(env, orgId, actorId) {
 }
 export async function updateOrg(env, orgId, patch, actorId) {
   const cur = await getOrg(env, orgId); if (!cur) return null;
-  const f = M.org(Object.assign({}, cur, patch || {}, { id: cur.id, ownerUid: cur.ownerUid, createdAt: cur.createdAt })); // ownerUid immutable
+  /* THE WARDSYNQ CONFIG MERGES; IT DOES NOT GET REPLACED.
+   *
+   * Object.assign is a SHALLOW merge, so a caller sending `{wardsynq: {noteWriterRoles: [...]}}` -
+   * the obvious thing for any screen that edits one setting - replaced the whole object and silently
+   * deleted every other setting the hospital had: its critical limits, its drug round times, its bed
+   * layout, its formulary, its escalation policy. Nothing would have complained; the ward would just
+   * have quietly reverted to defaults, which on critical limits means a potassium a hospital had
+   * carefully configured going back to WardSynQ's own numbers.
+   *
+   * Merging one level into `wardsynq` means a screen can save the field it owns without having to
+   * resend, and risk mangling, the entire configuration of the hospital. */
+  const p = patch || {};
+  const merged = Object.assign({}, cur, p, { id: cur.id, ownerUid: cur.ownerUid, createdAt: cur.createdAt }); // ownerUid immutable
+  if (p.wardsynq && typeof p.wardsynq === "object" && !Array.isArray(p.wardsynq)) {
+    merged.wardsynq = Object.assign({}, (cur && cur.wardsynq) || {}, p.wardsynq);
+  }
+  const f = M.org(merged);
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
   await audit(env, orgId, actorId, "org:update", "");
   return f;
@@ -268,26 +286,40 @@ export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });
   return r.map((x) => publicMember(x.id, x.fields));   // includes disabled so admin can restore; active flag shown
 }
+/* wUpdate UPSERTS. Without this check a mistyped identity on disable/restore/PIN/password/reset
+ * created a brand-new member row, and a PIN or password on it was a working sign-in (getMemberAuth
+ * defaults the missing role to "viewer") that nobody chose to create. Members are only ever
+ * deactivated, never deleted, so reading first leaves no window for one to vanish. */
+const NO_MEMBER = { ok: false, error: "member_not_found", message: "No staff member with that ID or email in this hospital. Add them first." };
+async function memberMissing(env, orgId, identity) { return !(await fsGet(env, "q_members/" + memberId(orgId, identity))); }
 // Lifecycle. disable/remove -> active:false blocks OPD access IMMEDIATELY (authorizeOrg checks active).
 export async function setMemberActive(env, orgId, identity, active, actorId) {
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, updatedAt: now() })]);
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, ...(active ? {} : { sessionsRevokedAt: now() }), updatedAt: now() })]);
   await audit(env, orgId, actorId, active ? "member:restore" : "member:disable", identity); return { ok: true };
 }
 export async function removeMembership(env, orgId, identity, actorId) { return setMemberActive(env, orgId, identity, false, actorId); }
 
 // ---- staff credentials (email + PIN) — hashed at rest, owner-managed ----------------------------
 export async function setMemberPin(env, orgId, identity, pin, actorId) {
+  const weakPin = pinProblem(pin);
+  if (weakPin) return { ok: false, error: "weak_pin", message: weakPin };
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const pinHash = await hashSecret(String(pin), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_pin", identity); return { ok: true };
 }
 export async function setMemberPassword(env, orgId, identity, email, password, actorId) {
+  const weakPass = passwordProblem(password, email);
+  if (weakPass) return { ok: false, error: "weak_password", message: weakPass };
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
   const salt = genSalt(); const passHash = await hashSecret(String(password), salt);
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, updatedAt: now() })]);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, passAttempts: 0, passLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:set_password", identity); return { ok: true };
 }
 export async function resetMemberAccess(env, orgId, identity, actorId) {
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, passAttempts: 0, passLockedUntil: 0, ...MFA_OFF, sessionsRevokedAt: now(), updatedAt: now() })]);
   await audit(env, orgId, actorId, "member:reset_access", identity); return { ok: true };
 }
 // Raw auth record for the login path (NEVER returned to a client).
@@ -295,7 +327,73 @@ export async function getMemberAuth(env, orgId, identity) {
   const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
   if (!d) return null;
   const f = d.fields || {};
-  return { orgId: sanitize(orgId), identity: String(identity), active: f.active !== false, role: f.role || "viewer", email: f.email || "", pinSalt: f.pinSalt || "", pinHash: f.pinHash || "", passSalt: f.passSalt || "", passHash: f.passHash || "", pinAttempts: f.pinAttempts || 0, pinLockedUntil: f.pinLockedUntil || 0 };
+  return { orgId: sanitize(orgId), identity: String(identity), active: f.active !== false, role: f.role || "viewer", email: f.email || "", pinSalt: f.pinSalt || "", pinHash: f.pinHash || "", passSalt: f.passSalt || "", passHash: f.passHash || "", pinAttempts: f.pinAttempts || 0, pinLockedUntil: f.pinLockedUntil || 0, sessionsRevokedAt: f.sessionsRevokedAt || 0, mfaEnabled: !!f.mfaEnabled };
+}
+/* ---- two-step sign-in ----------------------------------------------------------------------------
+ * The authenticator secret is encrypted at rest with the same key as clinical text, and never leaves
+ * the server after enrolment. Codes are checked here, not in the route, so the secret is decrypted in
+ * exactly one place. Every spend of a code (the TOTP step, a backup code) is written with the read's
+ * updateTime as a precondition: two sign-ins racing on the same code cannot both win. */
+const MFA_OFF = { mfaEnabled: false, mfaSecretEnc: "", mfaPendingEnc: "", mfaLastStep: 0, mfaRecovery: [], mfaAttempts: 0, mfaLockedUntil: 0 };
+async function memberDoc(env, orgId, identity) {
+  const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
+  return d ? { path: "q_members/" + memberId(orgId, identity), f: d.fields || {}, updateTime: d.updateTime } : null;
+}
+export async function mfaStatus(env, orgId, identity) {
+  const m = await memberDoc(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  return { ok: true, enabled: !!m.f.mfaEnabled, pending: !!m.f.mfaPendingEnc, recoveryLeft: (m.f.mfaRecovery || []).length };
+}
+export async function beginMfaEnrol(env, orgId, identity, account) {
+  const m = await memberDoc(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  if (m.f.mfaEnabled) return { ok: false, error: "mfa_already_on", message: "Two-step sign-in is already on. Turn it off first to move it to a new phone." };
+  const secret = A.newTotpSecret();
+  await fsCommit(env, [wUpdate(env, m.path, { mfaPendingEnc: await encPHI(env, secret), updatedAt: now() })]);
+  await audit(env, orgId, identity, "mfa:enrol_started", "");
+  return { ok: true, secret, uri: A.otpauthUri(secret, account || identity) };
+}
+export async function confirmMfaEnrol(env, orgId, identity, code) {
+  const m = await memberDoc(env, orgId, identity);
+  if (!m) return NO_MEMBER;
+  if (!m.f.mfaPendingEnc) return { ok: false, error: "mfa_not_started", message: "Start setting up two-step sign-in first." };
+  const secret = await decPHI(env, m.f.mfaPendingEnc);
+  const step = await A.verifyTotp(secret, code, now(), 0);
+  if (!step) return { ok: false, error: "wrong_code", message: "That code did not match. Check the phone's clock and try the newest code." };
+  const recoveryCodes = A.newRecoveryCodes(8);
+  const mfaRecovery = await Promise.all(recoveryCodes.map(A.hashRecoveryCode));
+  await fsCommit(env, [wUpdate(env, m.path, { mfaEnabled: true, mfaSecretEnc: await encPHI(env, secret), mfaPendingEnc: "", mfaLastStep: step, mfaRecovery, mfaAttempts: 0, mfaLockedUntil: 0, sessionsRevokedAt: now(), updatedAt: now() })]);
+  await audit(env, orgId, identity, "mfa:enabled", "");
+  return { ok: true, enabled: true, recoveryCodes };
+}
+/** The second step. Returns { ok, via: "code"|"backup", recoveryLeft } or { ok:false, error }. */
+export async function checkMfa(env, orgId, identity, code) {
+  const m = await memberDoc(env, orgId, identity);
+  if (!m || !m.f.mfaEnabled) return { ok: false, error: "mfa_not_on" };
+  const gate = A.pinLocked({ pinLockedUntil: m.f.mfaLockedUntil }, now());
+  if (gate.locked) return { ok: false, error: "locked", retryInMs: gate.remainingMs };
+  const secret = await decPHI(env, m.f.mfaSecretEnc);
+  const step = await A.verifyTotp(secret, code, now(), m.f.mfaLastStep);
+  const hashes = m.f.mfaRecovery || [];
+  const hit = step ? -1 : hashes.indexOf(await A.hashRecoveryCode(code));
+  const good = !!step || hit >= 0;
+  const att = A.nextPinState({ pinAttempts: m.f.mfaAttempts }, now(), good);
+  const patch = { mfaAttempts: att.pinAttempts, mfaLockedUntil: att.pinLockedUntil, updatedAt: now() };
+  if (step) patch.mfaLastStep = step;
+  if (hit >= 0) patch.mfaRecovery = hashes.filter((_, i) => i !== hit);
+  try { await fsCommit(env, [wUpdate(env, m.path, patch, good ? { updateTime: m.updateTime } : undefined)]); }
+  catch (e) { return { ok: false, error: "wrong_code" }; }   // lost a race for the same code: it is spent
+  await audit(env, orgId, identity, good ? (step ? "mfa:ok" : "mfa:backup_code_used") : att.pinLockedUntil ? "mfa:lockout" : "mfa:failed", good ? "" : "attempt " + att.pinAttempts);
+  if (!good) return { ok: false, error: att.pinLockedUntil ? "locked" : "wrong_code", attemptsLeft: Math.max(0, A.PIN_MAX_ATTEMPTS - att.pinAttempts) };
+  return { ok: true, via: step ? "code" : "backup", recoveryLeft: hit >= 0 ? hashes.length - 1 : hashes.length };
+}
+export async function disableMfa(env, orgId, identity, code) {
+  const c = await checkMfa(env, orgId, identity, code);
+  if (!c.ok) return { ...c, message: c.error === "locked" ? "Too many wrong codes. Try again later." : "A current code (or a backup code) is needed to turn two-step sign-in off." };
+  const m = await memberDoc(env, orgId, identity);
+  await fsCommit(env, [wUpdate(env, m.path, { ...MFA_OFF, updatedAt: now() })]);
+  await audit(env, orgId, identity, "mfa:disabled", "");
+  return { ok: true, enabled: false };
 }
 export async function recordMemberPinAttempt(env, orgId, identity, patch) {
   await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinAttempts: patch.pinAttempts, pinLockedUntil: patch.pinLockedUntil, updatedAt: now() })]);
@@ -305,7 +403,33 @@ export async function findMemberByEmail(env, email) {
   const row = r.find((x) => x.fields && x.fields.active !== false) || r[0];
   if (!row) return null;
   const f = row.fields || {};
-  return { orgId: f.orgId || "", identity: f.identity || "", active: f.active !== false, email: f.email || "", passSalt: f.passSalt || "", passHash: f.passHash || "" };
+  return { orgId: f.orgId || "", identity: f.identity || "", active: f.active !== false, email: f.email || "", passSalt: f.passSalt || "", passHash: f.passHash || "", passAttempts: f.passAttempts || 0, passLockedUntil: f.passLockedUntil || 0, mfaEnabled: !!f.mfaEnabled };
+}
+export async function recordMemberPassAttempt(env, orgId, identity, patch) {
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { passAttempts: patch.passAttempts, passLockedUntil: patch.passLockedUntil, updatedAt: now() })]);
+}
+// Sign-in outcomes, audited under the hospital. Never the secret; the identity is a staff ID, not PHI.
+export async function auditLogin(env, orgId, identity, action, meta) {
+  await audit(env, orgId, String(identity || ""), action, meta || "");
+}
+/* The member's OWN sign-in history: successes, failures, lockouts and two-step events, newest first,
+ * with the device each came from. Read from the hospital's audit, which is capped, so a full page is
+ * reported as partial rather than as "that is everything". */
+const SIGNIN_SCAN = 500;
+export async function recentSignIns(env, orgId, identity) {
+  const rows = await fsQuery(env, "q_events", { where: { field: "hospitalId", value: String(orgId) }, limit: SIGNIN_SCAN });
+  const mine = rows.map((r) => r.fields || {})
+    .filter((e) => e.actor === String(identity) && /^(login|mfa):/.test(e.action || ""))
+    .sort((a, b) => (b.ts || 0) - (a.ts || 0))
+    .slice(0, 30)
+    .map((e) => ({ ts: e.ts, action: e.action, detail: e.meta || "" }));
+  return { ok: true, events: mine, partial: rows.length >= SIGNIN_SCAN };
+}
+export async function signOutEverywhere(env, orgId, identity) {
+  if (await memberMissing(env, orgId, identity)) return NO_MEMBER;
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { sessionsRevokedAt: now(), updatedAt: now() })]);
+  await audit(env, orgId, identity, "login:signed_out_everywhere", "");
+  return { ok: true };
 }
 
 // ---- THE isolation gate (I/O wrapper over the pure authorizeOrgAccess) --------------------------

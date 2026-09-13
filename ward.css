@@ -124,9 +124,16 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-bed-b b { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #smdWard .w-bed-b small { color: var(--on-surface-variant); font-size: 12px; }
 
-/* chart header */
-#smdWard .w-chart-h { display: flex; align-items: center; gap: 10px; }
-#smdWard .w-chart-h b { display: block; font-size: 15px; }
+/* chart header
+ *
+ * flex-wrap was missing, so the 13 action buttons never wrapped: they ran off the right edge of the
+ * viewport instead, and four of them (ROI, TPA, Billing, Patient copy) landed entirely off-screen
+ * with nothing telling a clinician they existed. The identity block had no minimum width either, so
+ * it shrank along with everything else and a long id with no spaces (opd-pat-smd-demo-00001) wrapped
+ * one syllable per line, six lines tall. Both found 2026-09-12 walking the deployed chart. */
+#smdWard .w-chart-h { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+#smdWard .w-chart-h > div { flex: 1 1 220px; min-width: 180px; }
+#smdWard .w-chart-h b { display: block; font-size: 15px; overflow-wrap: anywhere; }
 #smdWard .w-chart-h small { color: var(--on-surface-variant); font-size: 12px; }
 
 /* problem list */
@@ -199,6 +206,127 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 #smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
 #smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }
+
+/* Timeline. One row per event, oldest styling reused (w-mini's spacing/type scale) rather than a
+   third list style invented for one card - the kind label is the only new visual: a small pill so a
+   long scroll of mixed resource types stays scannable. */
+#smdWard .w-timeline { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; max-height: 420px; overflow-y: auto; }
+#smdWard .w-timeline li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; padding: 6px 0; border-top: 1px solid var(--outline-variant); }
+#smdWard .w-timeline li:first-child { border-top: 0; }
+#smdWard .w-tl-t { color: var(--on-surface-variant); font-size: 12px; flex: 0 0 auto; white-space: nowrap; }
+#smdWard .w-tl-k { font-size: 11px; text-transform: uppercase; letter-spacing: .4px; padding: 2px 8px; border-radius: 999px; background: var(--sc); color: var(--on-surface-variant); flex: 0 0 auto; }
+
+/* THE HISTORY, READ RATHER THAN SCANNED.
+ *
+ * The full history is a page somebody reads top to bottom, so it is not capped the way the glance
+ * card on the chart is - a scroll box inside a scrolling page is what makes a long stay unreadable.
+ * The card keeps its cap; only the page releases it. */
+#smdWard .w-chart-h ~ .w-card .w-timeline { max-height: none; }
+#smdWard .w-timeline li { position: relative; padding-left: 10px; border-left: 3px solid var(--outline-variant); }
+#smdWard .w-timeline li > span:nth-of-type(3) { flex: 1 1 220px; min-width: 0; }
+
+/* COLOUR CODING, UNDER THIS FILE'S OWN RULE ABOUT COLOUR.
+ *
+ * The token block above says why the primary action here is near-ink and not a brand colour: an
+ * interface where colour means "clickable" has spent the association that must stay free for
+ * "clinically abnormal". A thirteen-colour rainbow timeline would spend it far more thoroughly, and
+ * the cost is paid by the one genuinely red thing on the chart, which stops being seen.
+ *
+ * So the kinds are separated by WEIGHT, in the same ink as everything else - and real colour is
+ * spent only where the meaning is real: a critical result nobody has acknowledged, and an allergy.
+ * The category is also written on every row in words, which is what actually tells a reader what
+ * they are looking at; the edge is there to group, not to explain. */
+#smdWard .w-tl-note,
+#smdWard .w-tl-problem      { border-left-color: var(--primary); }
+#smdWard .w-tl-procedure    { border-left-color: var(--outline); border-left-width: 4px; }
+#smdWard .w-tl-investigation,
+#smdWard .w-tl-result       { border-left-color: var(--on-warn-container); }
+#smdWard .w-tl-medication   { border-left-color: var(--outline); }
+#smdWard .w-tl-observation  { border-left-color: var(--outline-variant); }
+#smdWard .w-tl-visit,
+#smdWard .w-tl-registration,
+#smdWard .w-tl-billing      { border-left-color: var(--outline-variant); }
+/* The two that get real colour, and the only two. */
+#smdWard .w-tl-allergy      { border-left-color: var(--error); }
+#smdWard .w-tl-critical,
+#smdWard .w-tl-crit         { border-left-color: var(--error); border-left-width: 4px; background: var(--error-container); }
+
+/* The note's own words. Indented under the line they belong to and set slightly quieter, because
+   the event is the anchor and the words are the detail. pre-wrap so a clinician's own line breaks
+   survive - a note reflowed into one paragraph is not what they wrote. */
+#smdWard .w-tl-b { flex-basis: 100%; margin: 4px 0 0; padding: 6px 10px; border-radius: 8px; background: var(--sc-low); color: var(--on-surface); white-space: pre-wrap; font-size: 13px; line-height: 1.45; }
+#smdWard .w-tl-b b { display: inline-block; margin-right: 6px; text-transform: capitalize; color: var(--on-surface-variant); font-weight: 600; }
+/* Collapsed: one clipped line, so a whole stay can be skimmed without opening anything. */
+#smdWard .w-tl-peek { color: var(--on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#smdWard .w-tl-x { flex-basis: 100%; margin-top: 4px; background: none; border: 0; padding: 2px 0; color: var(--primary); font: inherit; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+#smdWard .w-tl-x:hover { text-decoration: underline; }
+#smdWard .w-tl-x .material-symbols-outlined { font-size: 16px; }
+
+/* The action belonging to a row - today only "open the report". Pushed to its own end of the line
+   so a list of orders reads as a column of things to do. */
+#smdWard .w-tl-a { flex: 0 0 auto; margin-left: auto; }
+
+/* FILTERS. Chips, wrapping, with the count on each so an empty one is visibly empty rather than
+   looking like a screen that failed to load. The active one is FILLED, not merely outlined: a
+   filter a reader cannot see is on is a filter hiding half a chart without saying so. */
+/* THE SAFETY INBOX. A worklist, so the urgency reads as a left edge and a word rather than as a
+   coloured card - the same restraint the timeline keeps, and for the same reason: a wall of red
+   teaches people to scroll past red. Only the top level gets the error colour. */
+#smdWard .w-ib-escalate { border-left: 4px solid var(--error); background: var(--error-container); padding-left: 10px; }
+#smdWard .w-ib-overdue { border-left: 3px solid var(--on-warn-container); padding-left: 10px; }
+#smdWard .w-ib-due { border-left: 3px solid var(--outline-variant); padding-left: 10px; }
+
+/* THE WORKSPACE. Dense on purpose: the point of the screen is that a doctor does not have to
+   navigate to answer "what am I dealing with", so everything that changes what they may safely do
+   has to be visible without scrolling on a tablet.
+
+   The top row is allergies, outstanding criticals and current medicines. Those three are what a
+   prescribing decision rests on, they never collapse, and they get the full width on a phone. */
+#smdWard .w-ws-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-bottom: 10px; }
+#smdWard .w-ws-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+#smdWard .w-ws-b { border: 1px solid var(--outline-variant); border-radius: 10px; padding: 8px 10px; background: var(--sc-lowest); min-width: 0; }
+#smdWard .w-ws-b h4 { margin: 0 0 6px; font-size: 13px; display: flex; align-items: center; gap: 6px; color: var(--on-surface-variant); }
+#smdWard .w-ws-b h4 .material-symbols-outlined { font-size: 17px; }
+#smdWard .w-ws-b h4 button { margin-left: auto; }
+#smdWard .w-ws-b ul { margin: 0; }
+#smdWard .w-ws-b p { margin: 0; }
+
+/* The three blocks in the top row carry the rows that stop a prescription. Real colour, for the
+   same reason a critical result gets it: these are clinically abnormal, not decorative. */
+#smdWard .w-ws-top .w-ws-b { border-left: 3px solid var(--outline); }
+#smdWard .w-ws-alert { color: var(--on-error-container); font-weight: 600; }
+#smdWard .w-ws-b li.w-ws-alert { list-style: none; padding-left: 0; }
+
+/* Where the screen leads. A workspace that shows everything and offers nothing to do with it is a
+   dashboard, which is the thing this deliberately is not. */
+#smdWard .w-ws-do { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--outline-variant); }
+
+/* SEARCH. Above the filters, because "when did we start the co-amoxiclav" is asked far more often
+   than any filter answers it, and on a three-week stay it is unanswerable by scrolling. */
+#smdWard .w-tl-search { display: flex; gap: 6px; align-items: center; margin: 8px 0 4px; flex-wrap: wrap; }
+#smdWard .w-tl-search input { flex: 1 1 220px; min-width: 0; }
+
+#smdWard .w-tl-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+#smdWard .w-tl-when { margin-top: 0; }
+#smdWard .w-tl-f { font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--outline-variant); background: transparent; color: var(--on-surface-variant); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+#smdWard .w-tl-f:hover { border-color: var(--outline); color: var(--on-surface); }
+#smdWard .w-tl-f.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+#smdWard .w-tl-f i { font-style: normal; font-size: 11px; opacity: .75; }
+
+/* A contact that was removed. Kept on screen and struck through rather than deleted: a number
+   quietly removed last month is indistinguishable from one that was never there, and the
+   difference matters when somebody is working out who was told what. */
+#smdWard .w-gone { opacity: .55; }
+#smdWard .w-gone b { text-decoration: line-through; }
+
+/* A patient recorded as deceased. One of the few places this app spends real colour, for the same
+   reason a critical result does: it changes how everything below it should be read, and somebody
+   about to telephone a family needs to know before they dial. */
+#smdWard .w-dead { border-left: 4px solid var(--error); background: var(--error-container); padding-left: 10px; }
+#smdWard .w-dead h4 { color: var(--on-error-container); }
+
+/* The result a reader arrived at from the timeline's own button. */
+#smdWard .w-res-on { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 8px; }
 
 /* Prescription outbox. Only "confirmed received" is styled as finished; queued, sent and failed all
    read as unfinished work, because they are. Restrained on purpose: this is a worklist, not an
@@ -415,3 +543,18 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 
 #smdWard .w-demo { font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 1px 7px; border-radius: 3px; margin-left: 8px;
   background: var(--warn-container); color: var(--on-warn-container); }
+
+/* Ward round list: counts, class chips, and the hospital-wide boards moved out of the filter row. */
+#smdWard .w-count { margin: 0 0 8px; color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+#smdWard .w-chip { border: 1px solid var(--outline-variant); background: var(--sc-low); color: var(--on-surface); border-radius: 999px; padding: 6px 12px; font: 500 13px var(--w-sans); cursor: pointer; min-height: 36px; }
+#smdWard .w-chip b { font-weight: 700; margin-left: 4px; color: var(--on-surface-variant); }
+#smdWard .w-chip.on { background: var(--primary-container); color: var(--on-primary-container); border-color: transparent; }
+#smdWard .w-chip.on b { color: inherit; }
+#smdWard .w-tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+#smdWard .w-tools .w-btn { justify-content: flex-start; }
+
+/* Merge preview: the two records side by side; a row that differs is tinted so it cannot be skimmed past. */
+#smdWard .w-tbl { border-collapse: collapse; width: 100%; font-size: 13px; }
+#smdWard .w-tbl th, #smdWard .w-tbl td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--outline-variant); }
+#smdWard .w-tbl tr.w-diff td { background: var(--warn-container, #fff4e0); color: var(--on-warn-container); }

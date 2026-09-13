@@ -238,8 +238,15 @@
         '<button class="oe-toggle' + (d.emergency ? " on" : "") + '" data-oe-act="inv-emg">' + ms(d.emergency ? "check_box" : "check_box_outline_blank") + "Emergency</button>" +
         action + "</div>";
     }
+    var dictatedShelf = "";
+    if (st.dictatedInv && st.dictatedInv.length) {
+      dictatedShelf = '<div class="oe-vc-orders" style="margin:0 0 12px;background:#f8fafc;padding:9px 12px;border-radius:8px;border:1px solid #e2e8ec"><div class="oe-vc-orders-h" style="font-size:12px;font-weight:600;color:#475569;display:flex;gap:6px;align-items:center;margin-bottom:6px">' + ms("record_voice_over") + '<span>Dictated in consultation:</span></div><div class="oe-vc-chips" style="display:flex;flex-wrap:wrap;gap:6px">' +
+        st.dictatedInv.map(function (nm, i) {
+          return '<button class="oe-btn ghost" data-oe-act="ivorder:' + i + '" style="font-size:12px;padding:4px 9px;border-radius:6px;cursor:pointer" title="Search and order ' + esc(nm) + '">' + ms("add") + esc(nm) + '</button>';
+        }).join("") + '</div></div>';
+    }
     var existing = section("history", "Existing orders", "Investigations on record", (st.labs || []).map(labRow).join(""), "No investigations on record.");
-    return searchBox("inv", st.invQuery, "Search investigation services…") + '<div class="oe-searchout" id="oe-out-inv">' + resultList("inv", st.invResults) + searchStatus(st, "inv") + "</div>" + draft + existing;
+    return dictatedShelf + searchBox("inv", st.invQuery, "Search investigation services…") + '<div class="oe-searchout" id="oe-out-inv">' + resultList("inv", st.invResults) + searchStatus(st, "inv") + "</div>" + draft + existing;
   }
   function medsTab(st) {
     if (usesLocal(st.source)) return clinicMedsTab(st);
@@ -266,12 +273,14 @@
   // textarea|yesno(Y/N)|check(true/false)|select(rendered as a plain text input — no GHIS option values captured).
   // OMITTED radio groups (write field names NOT captured — do not guess): level of consciousness, neck stiffness,
   // dyspnoea, abdomen shape, pain scale, birth history, general condition, diet, menstrual status/cycles/flow.
-  function F(n, l, k, req, ph) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "" }; }
+  function F(n, l, k, req, ph, opts) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "", opts: opts || null }; }
   var ASSESS_SCHEMA = [
     { t: "History", i: "description", f: [
       F("Chief_complaints_duration", "Chief complaints", "textarea", true),
       F("History_present_illness", "Present history", "textarea", true),
-      F("History_past_illness", "Past history", "textarea", true) ] },
+      F("History_past_illness", "Past history", "textarea", true),
+      F("surgical_history", "Past surgical history / Operations", "textarea"),
+      F("home_medications", "Current / Home medications", "textarea") ] },
     { t: "Pre-admission investigation / treatment", i: "biotech", f: [
       F("val.investigation_desc", "Investigation"), F("val.investigation_diagnostic", "Diagnostics"), F("val.investigation_date", "Date"),
       F("val.treatment_received", "Treatment received"), F("val.treatment_received_date", "Date"), F("val.treatment_received_hospital", "Hospital") ] },
@@ -283,12 +292,23 @@
       F("Tuberculosis_yesNo", "Tuberculosis", "yesno"), F("Tuberculosis_details", "Tuberculosis details"),
       F("Thyroid_yesNo", "Thyroid disorder", "yesno"), F("Thyroid_details", "Thyroid details"),
       F("Epilepsy_yesNo", "Epilepsy", "yesno"), F("Epilepsy_details", "Epilepsy details"),
+      F("Renal_yesNo", "Kidney disease (CKD)", "yesno"), F("Renal_details", "Kidney details"),
+      F("Liver_yesNo", "Liver disease (CLD)", "yesno"), F("Liver_details", "Liver details"),
+      F("Cancer_yesNo", "Malignancy / Cancer", "yesno"), F("Cancer_details", "Cancer details"),
+      F("Cva_yesNo", "Stroke / CVA / TIA", "yesno"), F("Cva_details", "Stroke details"),
+      F("Dyslipidemia_yesNo", "Dyslipidemia", "yesno"), F("Dyslipidemia_details", "Lipid details"),
       F("Others_details", "Others") ] },
     { t: "Immunisation status", i: "vaccines", f: [
       F("immunization_status", "Immunisation status", "text", false, "IAP guidelines") ] },
     { t: "Personal history", i: "person", f: [
-      F("Single_married", "Marital status", "select"), F("No_of_children", "Children", "select"), F("Consanguinity", "Consanguinity", "select"),
-      F("Appetite", "Appetite", "select"), F("Bowels", "Bowels", "select"), F("Micturition", "Micturition", "select"),
+      F("Single_married", "Marital status", "select", false, "", ["", "Single", "Married", "Widowed", "Divorced"]),
+      F("No_of_children", "Children", "select", false, "", ["", "0", "1", "2", "3", "4+"]),
+      F("Consanguinity", "Consanguinity", "select", false, "", ["", "Non-consanguineous", "1st degree", "2nd degree"]),
+      F("Diet", "Diet", "select", false, "", ["", "Vegetarian", "Non-vegetarian", "Eggetarian"]),
+      F("Sleep", "Sleep", "select", false, "", ["", "Normal", "Disturbed", "Insomnia"]),
+      F("Appetite", "Appetite", "select", false, "", ["", "Normal", "Reduced", "Increased"]),
+      F("Bowels", "Bowels", "select", false, "", ["", "Regular", "Constipated", "Loose stools"]),
+      F("Micturition", "Micturition", "select", false, "", ["", "Normal", "Dysuria", "Frequency", "Hesitancy"]),
       F("Mic_abnorml_details", "Micturition details"), F("Known_allergies_details", "Known allergies"),
       F("Habitat_addiction_yesno", "Habits", "yesno"),
       F("Habitat_addiction_alcohol", "Alcohol", "check"), F("Habitat_addiction_smoking", "Smoking", "check"),
@@ -312,15 +332,25 @@
       F("breast_feeding", "Breast feeding"), F("feeding_duration", "Duration"), F("molar_pregnancy", "Molar pregnancy"),
       F("pregnancy_comlications", "Pregnancy complications"), F("contracception", "Contraception"), F("sterilization", "Sterilization") ] },
     { t: "Nutritional screening", i: "monitor_weight", f: [
-      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)") ] },
+      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)"),
+      F("waist_cm", "Waist circumference (cm)", "number"), F("muac_cm", "MUAC (cm)", "number") ] },
     { t: "Physical examination - vital parameters", i: "vital_signs", f: [
       F("Temp", "Temperature (F)", "number", true), F("BP_SYS", "BP systolic", "number", true), F("BP_dia", "BP diastolic", "number", true),
+      F("Pulse", "Pulse rate /min", "number", true), F("pulse_rhythm", "Pulse rhythm", "select", false, "", ["", "Regular", "Irregular"]),
+      F("respiratory", "Respiratory rate /min", "number", true),
+      F("spo2", "Oxygen saturation (%)", "number", false, "95-100%"),
+      F("grbs", "GRBS / Blood sugar (mg/dL)", "number", false, "mg/dL"),
+      F("pain_score", "Pain score (0-10)", "number", false, "0-10"),
+      F("general_condition", "General condition", "select", false, "", ["", "Good", "Fair", "Sick / Poor", "Moribund"]),
       F("Nutrtion", "Nutrition"), F("hydration", "Hydration"),
-      F("Pulse", "Pulse rate /min", "number", true), F("respiratory", "Respiratory rate /min", "number", true),
       F("pallor", "Pallor", "check"), F("icterus", "Icterus", "check"), F("cyanosis", "Cyanosis", "check"), F("clubbing", "Clubbing", "check"),
       F("Oedema", "Oedema", "check"), F("Lymphadenopathy", "Lymphadenopathy", "check"), F("Rash", "Rash", "check"), F("goitre", "Goitre", "check"),
       F("sys_examination", "Systemic examination", "textarea") ] },
     { t: "Examination", i: "stethoscope", f: [
+      F("respiratory_exam", "Respiratory system (air entry / sounds)", "textarea"),
+      F("cvs_exam", "Cardiovascular system (apex / sounds / murmurs)", "textarea"),
+      F("per_abdomen_exam", "Per abdomen (soft / distension / organomegaly)", "textarea"),
+      F("local_examination", "Local examination (site of lesion / wound)", "textarea"),
       F("cranial_nerves", "Cranial nerves"), F("sensory_sys", "Sensory system"), F("gait", "Gait"), F("motor_sys", "Motor system"),
       F("speech", "Speech"), F("reflexes", "Reflexes"), F("plantar", "Plantars"), F("glasgow_scale", "Glasgow scale"),
       F("cerebellar_sign", "Cerebellar signs"), F("cardiac_sound", "Cardiac sounds"), F("JVP", "JVP"),
@@ -332,8 +362,12 @@
       F("hernial_orifices", "Hernial orifices normal", "yesno"), F("hernial_orifices_details", "Hernial orifices details"),
       F("genital", "Genitalia"), F("external_genitilia_perineum", "External genital & perineum"), F("examination", "P/R examination") ] },
     { t: "Diagnosis & plan", i: "assignment_turned_in", f: [
-      F("provisional_diagnosis", "Provisional diagnosis", "textarea"), F("management_plan", "Management plan", "textarea"),
+      F("provisional_diagnosis", "Provisional diagnosis", "textarea"),
+      F("differential_diagnosis", "Differential diagnosis", "textarea"),
+      F("management_plan", "Management plan", "textarea"),
       F("refered_management_plan", "Referred to & management plan", "textarea"),
+      F("diet_lifestyle_advice", "Diet & lifestyle advice", "textarea"),
+      F("follow_up_advice", "Follow-up instructions", "textarea"),
       F("informany_attendant", "Informant name"), F("informant_relation", "Relation with attendant", "select") ] }
   ];
   function defVal(k) { return k === "yesno" ? "N" : (k === "check" ? "false" : ""); }
@@ -377,6 +411,12 @@
       return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
     }
     if (f.k === "yesno") return ynRow(f, val);
+    if (f.k === "select" && f.opts && f.opts.length) {
+      var optHtml = f.opts.map(function (o) {
+        return '<option value="' + esc(o) + '"' + (val === o ? ' selected' : '') + '>' + esc(o || '-- Select --') + '</option>';
+      }).join('');
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><select class="oe-inp oe-sel" data-oe-inp="' + esc(id) + '">' + optHtml + '</select>' + fmicBtn(f.n) + '</span>', f.r, re);
+    }
     var type = f.k === "number" ? "number" : "text";
     return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
   }
@@ -391,7 +431,8 @@
     sec.f.forEach(function (f) { var v = assessGet(vals, f); var has = v && v !== "" && v !== "N" && v !== "false"; if (has) filled++; if (f.r) { reqN++; if (v) reqDone++; } });
     var badge = reqN ? '<span class="oe-req-badge ' + (reqDone >= reqN ? "done" : "pending") + '">' + reqDone + "/" + reqN + " required</span>"
       : (filled ? '<span class="oe-cnt">' + filled + "</span>" : "");
-    return '<details class="oe-acc"' + (open ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms(sec.i) + '</span><span class="oe-acc-t">' + esc(sec.t) + "</span>" + badge + '<span class="oe-chev">' + ms("expand_more") + "</span></summary><div class=\"oe-acc-body\">" + html + "</div></details>";
+    var isOpen = open || filled > 0;
+    return '<details class="oe-acc"' + (isOpen ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms(sec.i) + '</span><span class="oe-acc-t">' + esc(sec.t) + "</span>" + badge + '<span class="oe-chev">' + ms("expand_more") + "</span></summary><div class=\"oe-acc-body\">" + html + "</div></details>";
   }
   // pure payload builder: EVERY schema field -> string value (yesno Y/N, check true/false, empties ""). Exposed for tests.
   function buildAssessPayload(vals) {
@@ -416,18 +457,64 @@
   function fieldLabel(n) { return OPD_LABEL[n] || n; }
   var VOICE_MAP = {
     cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
+    treatmentReceived: "val.treatment_received", homeMeds: "home_medications", surgicalHistory: "surgical_history",
     temp: "Temp", bpSys: "BP_SYS", bpDia: "BP_dia", pulse: "Pulse", rr: "respiratory",
+    spo2: "spo2", saturation: "spo2", grbs: "grbs", cbg: "grbs", rbs: "grbs",
+    pain: "pain_score", painScore: "pain_score",
+    pulseRhythm: "pulse_rhythm", genCondition: "general_condition",
     pallor: "pallor", icterus: "icterus", cyanosis: "cyanosis", clubbing: "clubbing",
     oedema: "Oedema", lymphadenopathy: "Lymphadenopathy", rash: "Rash", goitre: "goitre",
+    nutrition: "Nutrtion", hydration: "hydration",
     systemicExam: "sys_examination", gcs: "glasgow_scale", cardiacSounds: "cardiac_sound",
-    tenderness: "tenderness_yesNo", abdoMass: "palpable_mass_yesNo",
-    provisionalDx: "provisional_diagnosis", managementPlan: "management_plan",
-    heightCm: "Height", weightKg: "Weight",
-    dm: "Diabetes_yesNo", htn: "Hypertension_yesNo", cardiac: "Cardiac_yesNo",
-    asthma: "Bronchial_yesNo", tb: "Tuberculosis_yesNo", thyroid: "Thyroid_yesNo", epilepsy: "Epilepsy_yesNo",
-    habits: "Habitat_addiction_yesno", alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
+    respiratoryExam: "respiratory_exam", cvsExam: "cvs_exam", abdoExam: "per_abdomen_exam", localExam: "local_examination",
+    tenderness: "tenderness_yesNo", tendernessDetails: "tenderness_details",
+    abdoMass: "palpable_mass_yesNo", abdoMassDetails: "palpable_mass_details",
+    provisionalDx: "provisional_diagnosis", ddx: "differential_diagnosis", differentialDiagnosis: "differential_diagnosis",
+    managementPlan: "management_plan", advice: "follow_up_advice", lifestyleAdvice: "diet_lifestyle_advice",
+    heightCm: "Height", weightKg: "Weight", waistCm: "waist_cm", muacCm: "muac_cm",
+    dm: "Diabetes_yesNo", dmDetails: "Diabetes_details",
+    htn: "Hypertension_yesNo", htnDetails: "Hypertension_details",
+    cardiac: "Cardiac_yesNo", cardiacDetails: "Cardiac_details",
+    asthma: "Bronchial_yesNo", asthmaDetails: "Bronchial_details",
+    tb: "Tuberculosis_yesNo", tbDetails: "Tuberculosis_details",
+    thyroid: "Thyroid_yesNo", thyroidDetails: "Thyroid_details",
+    epilepsy: "Epilepsy_yesNo", epilepsyDetails: "Epilepsy_details",
+    ckd: "Renal_yesNo", ckdDetails: "Renal_details",
+    cld: "Liver_yesNo", cldDetails: "Liver_details",
+    cancer: "Cancer_yesNo", cancerDetails: "Cancer_details",
+    cva: "Cva_yesNo", cvaDetails: "Cva_details",
+    dyslipidemia: "Dyslipidemia_yesNo", dyslipidemiaDetails: "Dyslipidemia_details",
+    comorbidsNote: "Others_details",
+    familyHistory: "Family_history_yesno", familyDiabetes: "Family_history_diabetics",
+    familyHtn: "Family_history_hypertension", familyHeart: "Family_history_Heart",
+    familyCancer: "Family_history_cancer", familyTb: "Family_history_TB",
+    familyAsthma: "Family_history_asthma", familyDetails: "Family_history_othersdetails",
+    lmp: "LMP", immunization: "immunization_status",
+    diet: "Diet", sleep: "Sleep",
+    allergies: "Known_allergies_details",
+    habits: "Habitat_addiction_yesno", habitsDetails: "Habitat_addiction_others",
+    alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
     recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
   };
+  // Live BMI (kg/m^2) and Mosteller BSA (m^2):
+  // BMI = weight / (height/100)^2; BSA = sqrt((height * weight) / 3600). Returns null if either invalid.
+  function calcBmiBsa(heightCm, weightKg) {
+    var h = parseFloat(heightCm), w = parseFloat(weightKg);
+    if (!(h > 30 && h < 260 && w > 1 && w < 400)) return null;
+    var hm = h / 100;
+    var bmi = Math.round((w / (hm * hm)) * 10) / 10;
+    var bsa = Math.round(Math.sqrt((h * w) / 3600) * 100) / 100;
+    return { bmi: String(bmi), bsa: String(bsa) };
+  }
+  function autoComputeBmiBsa() {
+    if (!st || !st.assessVals) return;
+    var mBmi = calcBmiBsa(st.assessVals.Height, st.assessVals.Weight);
+    if (mBmi) {
+      st.assessTouched = st.assessTouched || {};
+      if (!st.assessTouched.BMI) { st.assessVals.BMI = mBmi.bmi; putVoiceDom("BMI"); }
+      if (!st.assessTouched.bsa) { st.assessVals.bsa = mBmi.bsa; putVoiceDom("bsa"); }
+    }
+  }
   // Alcohol quantification: "60 ml whisky" -> grams of ethanol + WHO standard drinks (10 g each).
   // grams = volume(ml) x ABV x 0.789 (ethanol density). Returns null if volume or drink-type is missing.
   var ALC_ABV = { whisky: .40, whiskey: .40, rum: .40, vodka: .40, brandy: .40, gin: .40, tequila: .40,
@@ -515,6 +602,13 @@
       if (wire == null) return;
       out[name] = wire; filled.push(name);
     });
+    if (out.Height && out.Weight) {
+      var b = calcBmiBsa(out.Height, out.Weight);
+      if (b) {
+        if (!touched.BMI && !out.BMI) { out.BMI = b.bmi; filled.push("BMI"); }
+        if (!touched.bsa && !out.bsa) { out.bsa = b.bsa; filled.push("bsa"); }
+      }
+    }
     return { vals: out, filled: filled, dropped: dropped, conflicts: conflicts };
   }
 
@@ -695,7 +789,37 @@
     var reqAll = 0, reqDone = 0;
     ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { if (f.r) { reqAll++; if (assessGet(vals, f)) reqDone++; } }); });
     var done = reqDone >= reqAll;
-    if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+
+    var redFlags = detectTriageRedFlags(vals);
+    var triageHtml = "";
+    if (redFlags.length) {
+      triageHtml = '<div class="oe-ai-redflags" style="border-left:4px solid #ef4444;background:#fef2f2;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+        '<div style="display:flex;gap:8px;align-items:flex-start">' +
+          '<span class="oe-ico" style="color:#dc2626;font-size:22px">' + ms("warning") + '</span>' +
+          '<div><b style="color:#991b1b;font-size:13px">Emergency / Critical Triage Alert</b>' +
+            '<ul style="margin:4px 0 0;padding-left:18px;font-size:12.5px;color:#7f1d1d">' +
+              redFlags.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+        '<button class="oe-btn" data-oe-act="consult-er" style="background:#dc2626;color:#fff;font-weight:600;padding:6px 12px;border-radius:6px;border:none;white-space:nowrap;cursor:pointer">' + ms("emergency") + 'Transfer to ER</button>' +
+      '</div>';
+    }
+
+    var conflicts = checkAllergyConflicts(vals.Known_allergies_details, vals.management_plan);
+    var allergyHtml = "";
+    if (conflicts.length) {
+      allergyHtml = '<div class="oe-ai-redflags" style="border-left:4px solid #f97316;background:#fff7ed;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;gap:8px;align-items:flex-start">' +
+        '<span class="oe-ico" style="color:#ea580c;font-size:22px">' + ms("medication") + '</span>' +
+        '<div><b style="color:#9a3412;font-size:13px">Drug-Allergy Conflict Warning</b>' +
+          '<div style="font-size:12.5px;color:#7c2d12;margin-top:2px">' +
+            conflicts.map(function (c) { return 'Patient has documented allergy to <b>' + esc(c.allergy) + '</b>, but <b>' + esc(c.drug) + '</b> was dictated in the management plan.'; }).join("<br>") +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    if (!st.writeOn) return triageHtml + allergyHtml + '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     // Ask MaiK: its own glowing AI banner (Option C), separate from the save actions.
     var maikCta = (maikOn() && G.DX) ?
       '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
@@ -725,9 +849,10 @@
         : "";
       bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
         '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
+        '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + triageHtml + allergyHtml + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -1115,7 +1240,21 @@
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"],
       "cinv-name": ["invDraft", "name"], "cinv-note": ["invDraft", "note"], "crx-drug": ["medDraft", "drug"], "crx-dose": ["medDraft", "dose"], "crx-freq": ["medDraft", "frequency"], "crx-dur": ["medDraft", "duration"], "crx-rem": ["medDraft", "remarks"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
-    if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; return; }
+    if (inp.indexOf("assess:") === 0) {
+      var an = inp.slice(7);
+      st.assessVals = st.assessVals || {};
+      st.assessVals[an] = val;
+      st.assessTouched = st.assessTouched || {};
+      st.assessTouched[an] = true;
+      if (an === "Height" || an === "Weight") {
+        var mBmi = calcBmiBsa(st.assessVals.Height, st.assessVals.Weight);
+        if (mBmi) {
+          if (!st.assessTouched.BMI) { st.assessVals.BMI = mBmi.bmi; putVoiceDom("BMI"); }
+          if (!st.assessTouched.bsa) { st.assessVals.bsa = mBmi.bsa; putVoiceDom("bsa"); }
+        }
+      }
+      return;
+    }
     // Oncology override staging (Phase 4): silent, no repaint (mirrors the assess: fields above) so
     // typing a dose/reason never loses focus. Nothing is recorded into st.oncoDraft.overrides until
     // the doctor taps "Save override" (oncoSaveOverride), which requires the reason to be non-empty.
@@ -1210,6 +1349,22 @@
     if (cmd === "inv-clear") { st.invDraft = {}; paint(); return; }
     if (cmd === "inv-emg") { st.invDraft = st.invDraft || {}; st.invDraft.emergency = !st.invDraft.emergency; paint(); return; }
     if (cmd === "inv-order") return submitInvOrder();
+    if (cmd === "ivorder") {
+      var nm = st.dictatedInv && st.dictatedInv[+arg];
+      if (nm) {
+        switchTab("inv");
+        st.invQuery = expandQuery("inv", nm);
+        scheduleSearch("inv");
+      }
+      return;
+    }
+    if (cmd === "ivx") {
+      if (st.dictatedInv) {
+        st.dictatedInv.splice(+arg, 1);
+        paint();
+      }
+      return;
+    }
     if (cmd === "med-pick") { var m = st.medResults[+arg]; if (m) { st.medDraft = { drug: m, route: "", form: "", qty: "", frequency: "", duration: "", remarks: "" }; st.medResults = []; st.medQuery = ""; paint(); } return; }
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
@@ -1905,6 +2060,19 @@
     var meds = parts.rx.length ? parts.rx : (st.medications || []).map(function (m) { return (m.drugText || m.drug || "") + [m.dosage, m.frequency, m.duration].filter(Boolean).map(function (x) { return " " + x; }).join(""); }).filter(Boolean);
     var row = function (t, val) { return val ? '<div class="vs-row"><span class="vs-k">' + t + "</span><div>" + e2(val).replace(/\n/g, "<br>") + "</div></div>" : ""; };
     var list = function (t, arr) { return arr && arr.length ? '<div class="vs-row"><span class="vs-k">' + t + '</span><ul style="margin:0;padding-left:18px">' + arr.map(function (x) { return "<li>" + e2(x) + "</li>"; }).join("") + "</ul></div>" : ""; };
+    var vit = [
+      v.Temp ? ("Temp: " + v.Temp + "°F") : "",
+      (v.BP_SYS && v.BP_dia) ? ("BP: " + v.BP_SYS + "/" + v.BP_dia + " mmHg") : "",
+      v.Pulse ? ("Pulse: " + v.Pulse + " /min") : "",
+      v.respiratory ? ("RR: " + v.respiratory + " /min") : "",
+      v.spo2 ? ("SpO2: " + v.spo2 + "%") : "",
+      v.grbs ? ("GRBS: " + v.grbs + " mg/dL") : "",
+      v.pain_score ? ("Pain: " + v.pain_score + "/10") : "",
+      v.Height ? ("Height: " + v.Height + " cm") : "",
+      v.Weight ? ("Weight: " + v.Weight + " kg") : "",
+      v.BMI ? ("BMI: " + v.BMI) : "",
+      v.bsa ? ("BSA: " + v.bsa + " m²") : ""
+    ].filter(Boolean).join(" · ");
     return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visit summary</title><style>' +
       'body{font:14px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#14202b;margin:0;padding:24px;max-width:760px}' +
       '.vs-hd{border-bottom:3px solid #0e6e63;padding-bottom:12px;margin-bottom:14px}.vs-hd h1{font-size:20px;margin:0;color:#0e6e63}' +
@@ -1916,11 +2084,21 @@
       row("Patient", (p.name || "Patient") + (p.displayId || p.mrn ? "  (ID: " + (p.displayId || p.mrn) + ")" : "")) +
       row("Chief complaints", v.Chief_complaints_duration) +
       row("History", v.History_present_illness) +
+      row("Surgical History", v.surgical_history) +
+      row("Vitals & Nutrition", vit) +
+      row("Known Allergies", v.Known_allergies_details) +
+      row("Ongoing Medications", v.home_medications || v["val.treatment_received"]) +
       row("Diagnosis", v.provisional_diagnosis) +
+      row("Differential Diagnosis", v.differential_diagnosis) +
       list("Investigations", parts.ix) +
-      list("Medications", meds) +
+      list("Medications Prescribed", meds) +
       list("Advice", parts.adv) +
       row("Referral", v.refered_management_plan) +
+      '<div style="margin:16px 0;padding:10px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;font-size:12px;color:#991b1b">' +
+        '<b>Emergency Warning Signs / అత్యవసర సంకేతాలు:</b><br>' +
+        'Return immediately if you develop high fever, severe breathlessness, chest pain, confusion, or persistent vomiting.<br>' +
+        'తీవ్రమైన జ్వరం, శ్వాస ఆడకపోవడం, ఛాతీ నొప్పి లేదా వాంతులు వస్తే వెంటనే ఆసుపత్రికి రండి.' +
+      '</div>' +
       '<div class="vs-sign"><div class="ln">' + (doctor ? e2(doctor) : "Treating doctor") + "</div></div>" +
       '<div class="vs-foot">Electronically generated' + (doctor ? " by " + e2(doctor) : "") + (when ? " on " + e2(when) : "") + " via StewardMD &middot; a record of this consultation</div></body></html>";
   }
@@ -2317,7 +2495,7 @@
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = false;
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "", _scribeCapToasted = "";
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
@@ -2477,12 +2655,103 @@
   function assessFindingsText(v) {
     v = v || {};
     var parts = [v.Chief_complaints_duration, v.History_present_illness, v.History_past_illness, v.sys_examination, v.provisional_diagnosis];
-    if (v.Diabetes_yesNo === "Y") parts.push("diabetes");
-    if (v.Hypertension_yesNo === "Y") parts.push("hypertension");
-    if (v.Cardiac_yesNo === "Y") parts.push("cardiac disease");
-    if (v.Bronchial_yesNo === "Y") parts.push("asthma");
-    if (v.Tuberculosis_yesNo === "Y") parts.push("tuberculosis");
+    if (v.surgical_history) parts.push("Surgical history: " + v.surgical_history);
+    if (v.home_medications) parts.push("Home medications: " + v.home_medications);
+    if (v["val.treatment_received"]) parts.push("Current medications: " + v["val.treatment_received"]);
+    if (v.Known_allergies_details) parts.push("Allergies: " + v.Known_allergies_details);
+    if (v.Diabetes_yesNo === "Y") parts.push(v.Diabetes_details ? ("diabetes: " + v.Diabetes_details) : "diabetes");
+    if (v.Hypertension_yesNo === "Y") parts.push(v.Hypertension_details ? ("hypertension: " + v.Hypertension_details) : "hypertension");
+    if (v.Cardiac_yesNo === "Y") parts.push(v.Cardiac_details ? ("cardiac disease: " + v.Cardiac_details) : "cardiac disease");
+    if (v.Bronchial_yesNo === "Y") parts.push(v.Bronchial_details ? ("asthma: " + v.Bronchial_details) : "asthma");
+    if (v.Tuberculosis_yesNo === "Y") parts.push(v.Tuberculosis_details ? ("tuberculosis: " + v.Tuberculosis_details) : "tuberculosis");
+    if (v.Thyroid_yesNo === "Y") parts.push(v.Thyroid_details ? ("thyroid disorder: " + v.Thyroid_details) : "thyroid disorder");
+    if (v.Epilepsy_yesNo === "Y") parts.push(v.Epilepsy_details ? ("epilepsy: " + v.Epilepsy_details) : "epilepsy");
+    if (v.Renal_yesNo === "Y") parts.push(v.Renal_details ? ("chronic kidney disease: " + v.Renal_details) : "chronic kidney disease");
+    if (v.Liver_yesNo === "Y") parts.push(v.Liver_details ? ("chronic liver disease: " + v.Liver_details) : "chronic liver disease");
+    if (v.Cancer_yesNo === "Y") parts.push(v.Cancer_details ? ("malignancy: " + v.Cancer_details) : "malignancy");
+    if (v.Cva_yesNo === "Y") parts.push(v.Cva_details ? ("stroke CVA: " + v.Cva_details) : "stroke CVA");
+    if (v.Dyslipidemia_yesNo === "Y") parts.push(v.Dyslipidemia_details ? ("dyslipidemia: " + v.Dyslipidemia_details) : "dyslipidemia");
+    if (v.Others_details) parts.push(v.Others_details);
+    if (v.Family_history_othersdetails) parts.push("Family history: " + v.Family_history_othersdetails);
+    if (v.respiratory_exam) parts.push("Respiratory: " + v.respiratory_exam);
+    if (v.cvs_exam) parts.push("CVS: " + v.cvs_exam);
+    if (v.per_abdomen_exam) parts.push("Abdomen: " + v.per_abdomen_exam);
+    if (v.local_examination) parts.push("Local exam: " + v.local_examination);
+    if (v.tenderness_yesNo === "Y") parts.push(v.tenderness_details ? ("abdominal tenderness: " + v.tenderness_details) : "abdominal tenderness");
+    if (v.palpable_mass_yesNo === "Y") parts.push(v.palpable_mass_details ? ("palpable mass: " + v.palpable_mass_details) : "palpable mass");
     return parts.filter(function (x) { return x && String(x).trim(); }).map(function (x) { return String(x).trim(); }).join(". ");
+  }
+
+  // Real-time Allergy Cross-Check: matches documented allergies against dictated management plans or rx lines.
+  var DRUG_ALLERGY_MAP = [
+    { key: "penicillin", names: ["penicillin", "amoxicillin", "ampicillin", "augmentin", "clavam", "mox", "amox", "piperacillin", "tazobactam"], label: "Penicillin class" },
+    { key: "cephalosporin", names: ["cephalosporin", "cefixime", "ceftriaxone", "cefotaxime", "cefuroxime", "cephalexin", "cefepime", "cefpodoxime"], label: "Cephalosporin class" },
+    { key: "sulfa", names: ["sulfa", "sulfonamide", "cotrimoxazole", "bactrim", "septra", "dapsone", "sulfamethoxazole"], label: "Sulfa drug class" },
+    { key: "nsaid", names: ["nsaid", "aspirin", "ibuprofen", "diclofenac", "aceclofenac", "naproxen", "piroxicam", "mefenamic", "ketorolac", "combiflam"], label: "NSAID class" },
+    { key: "fluoroquinolone", names: ["fluoroquinolone", "ciprofloxacin", "levofloxacin", "ofloxacin", "norfloxacin", "moxifloxacin"], label: "Fluoroquinolone class" },
+    { key: "macrolide", names: ["macrolide", "azithromycin", "clarithromycin", "erythromycin", "roxythromycin"], label: "Macrolide class" }
+  ];
+
+  function checkAllergyConflicts(allergiesText, planText) {
+    var aTxt = String(allergiesText || "").toLowerCase();
+    var pTxt = String(planText || "").toLowerCase();
+    if (!aTxt.trim() || !pTxt.trim()) return [];
+    var conflicts = [];
+    DRUG_ALLERGY_MAP.forEach(function (grp) {
+      var hitAllergy = false;
+      for (var i = 0; i < grp.names.length; i++) {
+        if (new RegExp("\\b" + grp.names[i] + "\\b").test(aTxt)) { hitAllergy = true; break; }
+      }
+      if (!hitAllergy) return;
+      for (var j = 0; j < grp.names.length; j++) {
+        var drg = grp.names[j];
+        if (new RegExp("\\b" + drg + "\\b").test(pTxt)) {
+          conflicts.push({ allergy: grp.label, drug: drg });
+          break;
+        }
+      }
+    });
+    return conflicts;
+  }
+
+  // Deterministic critical triage red-flag detection over vitals and provisional diagnosis.
+  function detectTriageRedFlags(vals) {
+    vals = vals || {};
+    var flags = [];
+    var sys = parseFloat(vals.BP_SYS), dia = parseFloat(vals.BP_dia);
+    if (sys > 0 && dia > 0) {
+      if (sys < 90 || dia < 50) flags.push("Hypotension / Shock: BP " + sys + "/" + dia + " mmHg");
+      else if (sys >= 200 || dia >= 120) flags.push("Hypertensive Crisis: BP " + sys + "/" + dia + " mmHg");
+    }
+    var pulse = parseFloat(vals.Pulse);
+    if (pulse > 0) {
+      if (pulse >= 140) flags.push("Severe Tachycardia: Pulse " + pulse + " /min");
+      else if (pulse <= 40) flags.push("Severe Bradycardia: Pulse " + pulse + " /min");
+    }
+    var rr = parseFloat(vals.respiratory);
+    if (rr > 0) {
+      if (rr >= 32) flags.push("Severe Tachypnoea: RR " + rr + " /min");
+      else if (rr <= 8) flags.push("Bradypnoea / Hypoventilation: RR " + rr + " /min");
+    }
+    var temp = parseFloat(vals.Temp);
+    if (temp >= 104) flags.push("Hyperpyrexia: Temp " + temp + "°F");
+    var spo2 = parseFloat(vals.spo2 || vals.Spo2 || vals.SPO2 || vals.saturation);
+    if (spo2 > 0 && spo2 < 90) flags.push("Critical Hypoxemia: SpO2 " + spo2 + "% (<90%)");
+    var grbs = parseFloat(vals.grbs || vals.blood_sugar || vals.rbs);
+    if (grbs > 0) {
+      if (grbs < 55) flags.push("Critical Hypoglycemia: GRBS " + grbs + " mg/dL (<55 mg/dL)");
+      else if (grbs >= 450) flags.push("Severe Hyperglycemia / DKA alert: GRBS " + grbs + " mg/dL (>=450 mg/dL)");
+    }
+
+    var dx = String(vals.provisional_diagnosis || "").toLowerCase();
+    var cc = String(vals.Chief_complaints_duration || "").toLowerCase();
+    var comb = dx + " " + cc;
+    if (/\b(?:stemi|acute mi|myocardial infarction|cardiogenic shock)\b/.test(comb)) flags.push("Acute Coronary Event / STEMI suspected");
+    if (/\banaphylax(?:is|tic)\b/.test(comb)) flags.push("Severe Anaphylaxis suspected");
+    if (/\b(?:status epilepticus|active seizure)\b/.test(comb)) flags.push("Status Epilepticus / Active Seizure");
+    if (/\b(?:acute stroke|ischemic stroke|hemorrhagic stroke)\b/.test(comb)) flags.push("Acute Stroke Protocol window");
+
+    return flags;
   }
 
   // Clear medical-term misspellings (NOT real words, so replacement is safe). Deliberately small and
@@ -2772,11 +3041,58 @@
   function assessProText(v) {
     v = v || {};
     function ln(lbl, val) { return (val && String(val).trim()) ? (lbl + ": " + String(val).trim()) : ""; }
-    var yn = function (k, lbl) { return v[k] === "Y" ? lbl : ""; };
-    var co = [yn("Diabetes_yesNo", "diabetes"), yn("Hypertension_yesNo", "hypertension"), yn("Cardiac_yesNo", "cardiac disease"), yn("Bronchial_yesNo", "asthma"), yn("Tuberculosis_yesNo", "TB"), yn("Thyroid_yesNo", "thyroid disorder"), yn("Epilepsy_yesNo", "epilepsy")].filter(Boolean).join(", ");
-    var vit = [v.Temp ? ("Temp " + v.Temp) : "", (v.BP_SYS && v.BP_dia) ? ("BP " + v.BP_SYS + "/" + v.BP_dia) : "", v.Pulse ? ("Pulse " + v.Pulse) : "", v.respiratory ? ("RR " + v.respiratory) : ""].filter(Boolean).join(", ");
-    return [ln("Chief complaint", v.Chief_complaints_duration), ln("History of present illness", v.History_present_illness), ln("Past history", v.History_past_illness),
-      co ? ("Comorbidities: " + co) : "", vit ? ("Vitals: " + vit) : "", ln("Systemic examination", v.sys_examination), ln("Provisional diagnosis (doctor)", v.provisional_diagnosis)].filter(Boolean).join("\n");
+    var yn = function (k, detKey, lbl) {
+      if (v[k] !== "Y") return "";
+      return (v[detKey] && String(v[detKey]).trim()) ? (lbl + " (" + String(v[detKey]).trim() + ")") : lbl;
+    };
+    var co = [
+      yn("Diabetes_yesNo", "Diabetes_details", "diabetes"),
+      yn("Hypertension_yesNo", "Hypertension_details", "hypertension"),
+      yn("Cardiac_yesNo", "Cardiac_details", "cardiac disease"),
+      yn("Bronchial_yesNo", "Bronchial_details", "asthma"),
+      yn("Tuberculosis_yesNo", "Tuberculosis_details", "TB"),
+      yn("Thyroid_yesNo", "Thyroid_details", "thyroid disorder"),
+      yn("Epilepsy_yesNo", "Epilepsy_details", "epilepsy"),
+      yn("Renal_yesNo", "Renal_details", "CKD"),
+      yn("Liver_yesNo", "Liver_details", "CLD/cirrhosis"),
+      yn("Cancer_yesNo", "Cancer_details", "cancer"),
+      yn("Cva_yesNo", "Cva_details", "stroke"),
+      yn("Dyslipidemia_yesNo", "Dyslipidemia_details", "dyslipidemia"),
+      (v.Others_details ? ("other: " + v.Others_details) : "")
+    ].filter(Boolean).join(", ");
+    var vit = [
+      v.Temp ? ("Temp " + v.Temp + "F") : "",
+      (v.BP_SYS && v.BP_dia) ? ("BP " + v.BP_SYS + "/" + v.BP_dia) : "",
+      v.Pulse ? ("Pulse " + v.Pulse) : "",
+      v.respiratory ? ("RR " + v.respiratory) : "",
+      v.spo2 ? ("SpO2 " + v.spo2 + "%") : "",
+      v.grbs ? ("GRBS " + v.grbs + " mg/dL") : "",
+      v.pain_score ? ("Pain " + v.pain_score + "/10") : "",
+      v.BMI ? ("BMI " + v.BMI) : ""
+    ].filter(Boolean).join(", ");
+    var exam = [
+      v.sys_examination || "",
+      v.respiratory_exam ? ("Chest: " + v.respiratory_exam) : "",
+      v.cvs_exam ? ("CVS: " + v.cvs_exam) : "",
+      v.per_abdomen_exam ? ("Abdomen: " + v.per_abdomen_exam) : "",
+      v.local_examination ? ("Local: " + v.local_examination) : "",
+      v.tenderness_yesNo === "Y" ? (v.tenderness_details ? ("Tenderness: " + v.tenderness_details) : "Tenderness: Yes") : "",
+      v.palpable_mass_yesNo === "Y" ? (v.palpable_mass_details ? ("Mass: " + v.palpable_mass_details) : "Mass: Yes") : ""
+    ].filter(Boolean).join("; ");
+    return [
+      ln("Chief complaint", v.Chief_complaints_duration),
+      ln("History of present illness", v.History_present_illness),
+      ln("Past history", v.History_past_illness),
+      ln("Surgical history", v.surgical_history),
+      ln("Ongoing medications", v.home_medications || v["val.treatment_received"]),
+      ln("Known allergies", v.Known_allergies_details),
+      co ? ("Comorbidities: " + co) : "",
+      vit ? ("Vitals: " + vit) : "",
+      exam ? ("Examination: " + exam) : "",
+      ln("Family history", v.Family_history_othersdetails),
+      ln("Provisional diagnosis (doctor)", v.provisional_diagnosis),
+      ln("Differential diagnosis", v.differential_diagnosis)
+    ].filter(Boolean).join("\n");
   }
 
   // Pro tier — send the (de-identified) assessment to Vertex for a deeper differential. Explicit action
@@ -2838,8 +3154,30 @@
       // The engine refused for a named reason (Local mode, model lacks the capability): say it ONCE
       // per session rather than on every refine tick, and keep dictating (the deterministic vitals
       // extractor and the transcript are unaffected).
-      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only") && !_scribeCapToasted) { _scribeCapToasted = true; try { toast(r.message || "On-device Scribe needs a different model."); } catch (e) {} return; }
-      if (!r || r.error) { if (_finishPending) { try { toast("Could not draft the note from this dictation - the transcript is kept, try Stop again."); } catch (e) {} } return; }
+      // A named refusal (Local mode, model lacks the capability): say it once per distinct reason.
+      // It used to be once per SESSION, so every later refine fell through to the generic message
+      // below and the actual reason was never seen again (owner report, 2026-09-11).
+      if (r && (r.error === "LOCAL_CAPABILITY_REQUIRED" || r.error === "kb-only")) {
+        var cm = r.message || "On-device Scribe needs a different model.";
+        if (_scribeCapToasted !== cm) { _scribeCapToasted = cm; try { toast(cm); } catch (e) {} }
+        return;
+      }
+      // Anything else: say WHY. The generic line hid a real, actionable engine error (the on-device
+      // engine runs one generation at a time, so a refine landing on a busy engine reported "busy"
+      // and the doctor was told only that drafting failed).
+      if (!r || r.error) {
+        if (_finishPending) {
+          var e0 = String((r && r.error) || "");
+          var why = (r && r.error === "draft-unparsed" && r.message) ? r.message
+            : /busy|already running/i.test(e0) ? "MaiK was still drafting the previous part. Tap Stop again in a moment."
+            : /timed out/i.test(e0) ? "On-device drafting took too long and was stopped. The transcript is kept - tap Stop again, or switch to MaiK Cloud."
+            : /not-enough-memory|low-memory/i.test(e0) ? "Not enough free memory to draft on this phone right now. Close other apps and tap Stop again."
+            : e0 ? "Could not draft the note: " + e0 + ". The transcript is kept."
+            : "Could not draft the note from this dictation - the transcript is kept, try Stop again.";
+          try { toast(why); } catch (e) {}
+        }
+        return;
+      }
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
@@ -2847,9 +3185,14 @@
       // Multilingual VITALS: the deterministic extractor (voice-vitals) is English-regex only, so a
       // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
       // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
-      if (r.en && G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) {
-        st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
-        try { applyVoice(G.SMD_AMBIENT.reduce(r.en, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
+      var enText = (r && r.en) || transcript;
+      if (enText) {
+        if (r && r.en) st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
+        var reducer = (G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) ? G.SMD_AMBIENT.reduce
+          : ((G.SMD_VVITALS && G.SMD_EMRMAP) ? function (t, o) { return G.SMD_EMRMAP.merge(G.SMD_VVITALS.extract(t), o); } : null);
+        if (reducer) {
+          try { applyVoice(reducer(enText, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
+        }
       }
       // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
       // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
@@ -3027,6 +3370,7 @@
     // auto-shown after a consult — the clinician taps "Ask MaiK" to pull them on demand.
     st.scribeStats = { filled: m.filled.length, suggestions: 0 };
     paint();
+    m.filled.forEach(putVoiceDom);
     return { filled: m.filled, dropped: m.dropped, conflicts: m.conflicts };
   }
 
@@ -3271,6 +3615,6 @@
   // preview for the open patient. Registered once; guarded (no-op unless a patient profile is open).
   try { if (typeof document !== "undefined") document.addEventListener("smd-oncotree-select", function (e) { try { receiveOncoTreeProtocol(e && e.detail); } catch (err) {} }); } catch (e) {}
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml };
 })();

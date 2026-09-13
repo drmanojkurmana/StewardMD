@@ -159,7 +159,26 @@ export const ROLE_CAPS = {
    * ServiceRequest, and a laboratory has no need to know what the patient is being prescribed.
    * LAB_RESULT already carries the investigation requests, which is the only order a lab works from.
    * Caught by the role-mapping test, which is what it is for. */
+  /* EMR_VIEW WAS TRIED HERE ON 2026-09-12 AND REVERTED, recorded so nobody spends the afternoon
+   * rediscovering it. The bench now has a board, a board needs patient identity, and EMR_VIEW is
+   * how the imaging worklist solved the same problem. But EMR_VIEW is not an identity grant: it
+   * also opens the discharge summary and the ward's critical-results list, and
+   * wardsynq-inpatient-emar.test.mjs ("THE LAB'S AUTHORITY IS ITS OWN") asserts 403 on both. The
+   * test is right and the grant was too wide. Naming a specimen needs name, MRN and date of birth,
+   * not a discharge summary, so the answer is a narrow identity capability rather than this one. */
   lab: [C.QUEUE_VIEW, C.LAB_RESULT],
+  /* Radiography and radiology, added 2026-09-12. Imaging had a worklist, a reporting endpoint and a
+   * board, and nobody who could be given the job: there was no role for the people who run the
+   * scanner or read the films, so a department the product already supported could not be staffed.
+   *
+   * The two are SEPARATE because the acts are separate. A radiographer acquires the study and needs
+   * the worklist (EMR_VIEW - identity beside a requested procedure, the same reasoning as the lab
+   * above). Reporting is a different act with different accountability, and the cap table already
+   * says so: "Reporting an imaging study is the radiologist's own act, granted by lab.result". So
+   * the radiographer does NOT hold LAB_RESULT and cannot file a report or protocol a study, and the
+   * radiologist does. Neither orders, prescribes, dispenses or bills. */
+  radiographer: [C.QUEUE_VIEW, C.EMR_VIEW],
+  radiologist: [C.QUEUE_VIEW, C.EMR_VIEW, C.LAB_RESULT],
   // HR / practice manager: runs the staff list and reads operational analytics. NO queue control, NO
   // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
   // admin (which carries every clinical and billing capability in the system).

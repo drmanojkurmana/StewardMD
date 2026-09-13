@@ -1,0 +1,43 @@
+/* Existing MaiK interface, original wordmark and live doctor preserved. */
+html body #maikSheet.maik-polished{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--mk-bg);color:var(--mk-ink)}
+html body #maikSheet.maik-polished :is(button,input,textarea,.maik-h1,.maik-sub,.maik-card-tt,.maik-card-sb,.maik-b,.maik-disc span){font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+html body #maikSheet.maik-polished .maik-hd{background:var(--mk-bg);padding:8px 16px 12px}
+html body #maikSheet.maik-polished .maik-hd-row{display:grid;grid-template-columns:44px minmax(0,1fr) repeat(3,44px);gap:6px;align-items:center}
+html body #maikSheet.maik-polished .maik-hd-row>span{display:none}
+html body #maikSheet.maik-polished .maik-logo-wrap{min-width:0;padding:0 4px}
+html body #maikSheet.maik-polished .maik-logo{height:auto;width:88px;max-width:100%;object-fit:contain}
+html body #maikSheet.maik-polished :is(.maik-logo-glow,.maik-hero-glow){display:none}
+html body #maikSheet.maik-polished .maik-hd-btn{width:44px;height:44px;border:0;border-radius:14px;background:transparent}
+html body #maikSheet.maik-polished .maik-hd-btn:hover{background:var(--mk-soft)}
+html body #maikSheet.maik-polished #maikModelChip{grid-column:1/-1;grid-row:2;justify-self:start;max-width:100%!important;min-height:44px;padding:8px 12px!important;font-size:12px!important;background:var(--mk-soft)!important;border-radius:12px!important}
+html body #maikSheet.maik-polished .maik-disc{padding:9px 20px;background:var(--mk-bg);border-top:0;border-bottom:1px solid var(--mk-bd)}
+html body #maikSheet.maik-polished .maik-disc span{font-size:11px;line-height:1.45;font-weight:400;color:var(--mk-mut)}
+html body #maikSheet.maik-polished .maik-body{padding:22px 20px 64px;gap:18px;overscroll-behavior:contain}
+html body #maikSheet.maik-polished .maik-empty{padding:12px 0;justify-content:center}
+html body #maikSheet.maik-polished .maik-hero{align-items:flex-start;margin-bottom:24px}
+html body #maikSheet.maik-polished .maik-hero-logo{padding:0}
+html body #maikSheet.maik-polished .maik-hero-logo img{width:142px;height:auto;max-width:100%}
+html body #maikSheet.maik-polished .maik-kicker{font-size:10px;letter-spacing:.12em;margin-top:10px;font-weight:600;color:var(--mk-mut)}
+html body #maikSheet.maik-polished .maik-h1{font-size:28px;line-height:1.18;letter-spacing:-.035em;font-weight:650}
+html body #maikSheet.maik-polished .maik-sub{font-size:14px;line-height:1.55;margin-top:10px;max-width:36em}
+html body #maikSheet.maik-polished .maik-cards{gap:0;margin-top:24px;border:1px solid var(--mk-bd);border-radius:20px;overflow:hidden;background:var(--mk-soft)}
+html body #maikSheet.maik-polished .maik-card{min-height:76px;padding:16px;border:0;border-bottom:1px solid var(--mk-bd);border-radius:0;background:transparent;box-shadow:none;animation:none;gap:14px}
+html body #maikSheet.maik-polished .maik-card:last-child{border-bottom:0}
+html body #maikSheet.maik-polished .maik-card:hover{background:var(--mk-tsoft);box-shadow:none}
+html body #maikSheet.maik-polished .maik-card-ic{width:36px;height:36px;flex:0 0 36px;border-radius:12px;background:var(--mk-tsoft)}
+html body #maikSheet.maik-polished .maik-card-tt{font-size:14px;line-height:1.35;font-weight:600}
+html body #maikSheet.maik-polished .maik-card-sb{font-size:12px;line-height:1.45;margin-top:3px;color:var(--mk-mut)}
+html body #maikSheet.maik-polished .maik-b{font-size:16px;line-height:1.65;overflow-wrap:anywhere;min-width:0}
+html body #maikSheet.maik-polished .maik-b.you{padding:12px 16px;border-radius:20px 20px 6px 20px;background:var(--mk-soft);color:var(--mk-ink);box-shadow:none}
+html body #maikSheet.maik-polished .maik-cmp{padding:10px 16px max(16px,env(safe-area-inset-bottom));background:var(--mk-bg)}
+html body #maikSheet.maik-polished .maik-cmp-in{border-radius:24px;background:var(--mk-soft);padding:6px;gap:4px;box-shadow:0 2px 10px #00000008}
+html body #maikSheet.maik-polished .maik-ta{font-size:16px;line-height:1.45;min-width:0;padding:9px 4px}
+html body #maikSheet.maik-polished :is(.maik-mic,.maik-img,.maik-research,.maik-send){width:44px;height:44px;flex:0 0 44px;border-radius:16px}
+html body #maikSheet.maik-polished :is(.maik-hd-btn,.maik-mic,.maik-img,.maik-research,.maik-send)::after{inset:0}
+html body #maikSheet.maik-polished :is(button,input,textarea):focus-visible{outline:2px solid var(--mk-teal);outline-offset:3px}
+html body #maikSheet.maik-polished .maik-side{background:var(--mk-bg)}
+html body #maikSheet.maik-polished .maik-side-row{min-height:48px;border-radius:14px}
+html body #maikSheet.maik-polished .maik-side-srch input{font-size:16px}
+html body #maikSheet.maik-polished .mkdoc{overflow-x:clip;overflow-y:visible}
+@media(min-width:700px){html body #maikSheet.maik-polished .maik-body{padding-left:32px;padding-right:32px}html body #maikSheet.maik-polished .maik-empty{max-width:560px;width:100%;margin:auto}html body #maikSheet.maik-polished .maik-h1{font-size:32px}}
+@media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{gap:2px}html body #maikSheet.maik-polished .maik-body{padding-left:16px;padding-right:16px}html body #maikSheet.maik-polished .maik-h1{font-size:25px}html body #maikSheet.maik-polished .maik-cmp-in{flex-wrap:wrap}html body #maikSheet.maik-polished .maik-ta{flex-basis:calc(100% - 56px);order:5}html body #maikSheet.maik-polished .maik-send{order:6}}

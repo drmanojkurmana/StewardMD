@@ -130,3 +130,9 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
   `test/device/maik-bench.html` in a throwaway build; its control arm proves the buffering.
 - Stream deadlines: connect 10s / idle 10s / total 25s. A deadline-closed stream sets
   `stalled:true` and the client MUST refuse it — otherwise a truncated clinical answer looks whole.
+
+## UI polish (2026-09-12)
+
+- `maik-polish.css` is an additive layer scoped to `#maikSheet.maik-polished`: system typography, grouped quick actions, larger controls, visible keyboard focus, and a wrapping composer on narrow screens.
+- Original color/white MaiK wordmarks remain in the header and welcome view. The live doctor and its existing animation/interaction engine are preserved; horizontal stage clipping prevents off-screen travel from widening the sheet.
+- Existing engine selection, clinical disclaimer, local/cloud routing and conversation actions are unchanged. Cache tokens in `index.html` and `sw.js` include `mkpolish1`.

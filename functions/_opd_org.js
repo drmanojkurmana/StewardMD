@@ -48,7 +48,15 @@ export function org(o = {}) {
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
-           wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
+           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security), createdAt: Number(o.createdAt) || 0 };
+}
+
+/* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs
+ * every staff sign-in (OPD desk included). Only real role names survive; absent means nobody is
+ * required to use two-step sign-in, which is how every existing hospital stays unchanged. */
+export function securityConfig(sec) {
+  const roles = sec && Array.isArray(sec.requireTwoStepRoles) ? sec.requireTwoStepRoles : [];
+  return { requireTwoStepRoles: Array.from(new Set(roles.map(String).filter(isRole))) };
 }
 
 /**
@@ -93,12 +101,26 @@ function wardsynqConfig(w) {
   // requires 6 years, but 90 is what every hospital already runs on, and changing that default
   // silently would shorten or lengthen retention nobody asked to change. A US hospital must set
   // this explicitly.
+  /* payment and approvalLevels joined 2026-09-13, and the second is a FIX, not an addition.
+   * approvalLevels was read by _wardsynq/verification.js and _wardsynq/purchasing.js from the day they
+   * were written - how many distinct people must approve a restricted drug or a purchase order - and
+   * this whitelist silently dropped it, so a hospital that asked for two approvers got one. Found by
+   * a route test for the payment framework, which failed for the same reason: `payment` (which
+   * methods this hospital takes, and which provider processes each) never reached the server either.
+   * Both are hospital-owned for the reason everything else in this list is - only the hospital knows
+   * how it takes money and how many people it wants on an approval. */
   // externalMrn joined 2026-09-11: opt-in for a hospital with its own MR numbering (every US
   // hospital, plenty of Indian ones too) so resolveMrn() (functions/_opd_patient.js) accepts a
   // supplied MRN AS the MRN instead of demoting it to hospitalRef and minting an SMD-... over it.
   // Absent/false is the existing minting behaviour, unchanged - opt-in because minting is the right
   // default for a clinic with no numbering of its own.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn"]) {
+  /* noteWriterRoles joined 2026-09-12: WHICH ROLES MAY WRITE A CLINICAL NOTE, decided by the
+   * hospital rather than by this file. Writing a note needs emr.treat, which is the prescribing
+   * capability, so out of the box only prescribers document - and that is wrong for a great many
+   * real wards, where the nursing note is a core part of the record. Rather than widen emr.treat
+   * (which would also hand out prescribing) the hospital names the roles it trusts to document, in
+   * the Admin Center. Absent means the existing behaviour, unchanged: emr.treat alone. */
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -235,7 +257,9 @@ export function authorizeOrgAccess(orgDoc, membershipDoc, actorId, orgId, cap, t
   if (isOwnerOfOrg(orgDoc, actorId)) return { ok: true, role: "admin", owner: true };
   const m = membershipDoc;
   if (!canAccessOrg(m, orgId)) return { ok: false, reason: "not_a_member" };
-  if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role };
+  // The capability travels with the refusal so the message can say what was actually refused.
+  // Without it every refusal in the product had to guess, and the one hardcoded guess was wrong.
+  if (cap && !can(m.role, cap)) return { ok: false, reason: "forbidden", role: m.role, cap };
   if (target && !withinScope(m, target)) return { ok: false, reason: "out_of_scope", role: m.role };
   // regNo travels with the authorisation so resolveClinicalActor can build a signing credential
   // from the hospital's own staff registry without a second read. Empty for an owner, who is

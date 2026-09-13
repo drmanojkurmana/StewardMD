@@ -143,7 +143,42 @@
 
 <footer class="foot">WardSynQ demonstration build. Real deterministic safety engine, unapproved clinical content. Not for clinical use.</footer>
 
-<script type="module" src="wardsynq-app.js?v=6"></script>
+<!-- THE WORKSTATION HAD NO IDENTITY AT ALL.
+     This page carried no Firebase and no SMD_AUTH, so every call it made to the record service went
+     out with no bearer and came back 401: it opened onto "record service refused to open (401).
+     Safety checking is unavailable, so ordering is disabled." with the drug field, Sign order,
+     Notes and Handover all disabled. It is one of the nine clinical tiles on the map, and it was
+     dead on arrival for an account sign-in. Found 2026-09-12 by clicking Ward on the live site.
+
+     Loaded exactly the way wardsynq/site/index.html loads it, and publishing the SAME
+     `SMD_AUTH.token()` shape that shell publishes, so the two halves of the product finally agree
+     (record-deployment.js's shellToken() now accepts both shapes). Best-effort: if the SDK fails to
+     load, the staff-session path (X-Staff-Token from localStorage) still works exactly as before. -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+  try {
+    firebase.initializeApp({ apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain: "stewardmd-498ec.firebaseapp.com", projectId: "stewardmd-498ec", appId: "1:911280405587:web:d09038e15e98d69dc79aa6" });
+    /* WAIT FOR THE SESSION TO RESTORE BEFORE ANSWERING. firebase.auth().currentUser is null for the
+     * first moments after load while the SDK rehydrates from IndexedDB, and this page opens the
+     * record service immediately - so answering "no token" straight away would reproduce the very
+     * 401 this is here to fix, just with a smaller window. Resolves once on the first auth state,
+     * and is capped so a page with no session (a hospital PC behind Cloudflare Access, which needs
+     * no bearer at all) opens promptly rather than hanging on a sign-in that is never coming. */
+    var ready = new Promise(function (resolve) {
+      var done = false;
+      var settle = function (u) { if (!done) { done = true; resolve(u || null); } };
+      try { firebase.auth().onAuthStateChanged(settle); } catch (e) { settle(null); }
+      setTimeout(function () { settle(null); }, 4000);
+    });
+    window.SMD_AUTH = window.SMD_AUTH || {
+      token: function () {
+        return ready.then(function (u) { return u && u.getIdToken ? u.getIdToken() : null; }).catch(function () { return null; });
+      },
+    };
+  } catch (e) {}
+</script>
+<script type="module" src="wardsynq-app.js?v=8"></script>
 <script type="module">
   // Offline shell. Registered separately from the app so a caching failure never stops the
   // workstation loading: an app that says it is offline is more use than one that will not open.

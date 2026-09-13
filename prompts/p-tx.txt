@@ -1,0 +1,59 @@
+TASK: Build a TREATMENT section on the WardSynQ patient chart: everything currently running on
+this patient, in one place.
+
+REPO: /Users/diwakarkumar/Developer/StewardMD/.claude/worktrees/wt-tx (branch synergy/treatment)
+Work ONLY in that directory.
+
+WHY: The chart has an "Active medications" card that lists drug orders, and nothing that answers
+the question a doctor actually asks at the bedside: what is running on this patient right now?
+Epic and Oracle both have a single treatment view. Ours scatters it: the antibiotic is in one
+card, the fluid is nowhere, the oxygen is a vital sign, and how many doses were actually given
+lives in the eMAR.
+
+FIRST, READ BEFORE YOU WRITE:
+  ward.js                                   - find the active-medications card and the eMAR round
+    ("due"/marAction) code. These already hold most of what you need.
+  functions/_wardsynq/migrate-inpatient.js  - the ward chart projection and the medication order
+    shape; also how administrations are recorded.
+  functions/api/queue/[[path]].js           - the /ward/* route table. Look for the existing chart
+    read and the medication/administration endpoints.
+
+WHAT TO BUILD - one "Treatment" card on the chart, assembled from what the record ALREADY holds.
+Do not invent a new store. Reuse the existing reads; add a server projection only if the data
+genuinely cannot be assembled from what the chart read already returns.
+
+Each running treatment shows:
+  - drug or therapy name, dose, route, frequency
+  - when it was started, and by whom if the record holds it
+  - doses given on this admission versus doses due (the eMAR already computes due doses - reuse
+    that logic, do not write a second one that can disagree with it)
+  - the next dose due, and whether a dose is overdue (overdue must be visually distinct)
+  - status: active, held, or stopped, with stopped/held items separated from running ones and not
+    silently dropped
+  - anything running that is NOT an oral/IV drug and is currently invisible on this chart:
+    supplemental oxygen (it is recorded as an observation, LOINC 80288-4 - see
+    functions/_wardsynq/migrate-vitals.js VITAL_CODES) and IV fluids if the record holds them.
+    If a category genuinely is not in the record, render nothing for it rather than a fake row.
+
+RULES THAT MATTER CLINICALLY:
+  - "Not recorded" and "none" are different answers and must never render the same. If a read
+    fails, say so by name; do not show an empty treatment list, which reads as "this patient is on
+    nothing" and is the most dangerous possible wrong answer on this screen.
+  - Never compute or suggest a dose. This card REPORTS what was ordered and what was given. It is
+    not a calculator and must not become one.
+  - Counts must come from the record, not from the client's idea of what should have happened.
+
+CLIENT RULES (ward.js): ES5 ONLY - var + function, no arrow functions, no let/const, no template
+literals, no optional chaining. This bundle is never transpiled. Escape all server data through
+the existing esc() helper. Reuse the existing w-card / w-btn / w-st CSS classes; add no new CSS
+file. No em-dashes in user-facing strings.
+
+VERIFY BEFORE YOU FINISH:
+  1. node --check ward.js
+  2. node --test --experimental-test-module-mocks --test-concurrency=4 test/*.test.mjs
+     Report exact tests/pass/fail. Baseline is 5732 pass / 0 fail; it must still be 0 fail.
+  3. Add tests for any server-side projection you add, including the "read failed" path.
+COMMIT on branch synergy/treatment. Do not push. Do not merge.
+
+REPORT BACK: what the card assembles, which existing reads you reused, anything you deliberately
+left out because the record does not hold it, and the test counts.

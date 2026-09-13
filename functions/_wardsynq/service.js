@@ -59,6 +59,24 @@ const RESOURCE_TYPES = Object.freeze([
    * pharmacy write on that would let the role post a fabricated "administered" row through the raw
    * record API without going near a bedside. Its own type, granted only by ORDER_VERIFY. */
   "MedicationVerification",
+  /* An approval, and every decision on it. Its own type for the same reason BreakGlassGrant is: the
+   * only thing an approval is worth is being legible afterwards, and one that could be edited or
+   * deleted would be worth nothing. Append-only is the whole feature - a withdrawal is a new row
+   * after the approval it withdraws, never an edit of it, so "it was approved and then taken back"
+   * stays readable forever. Nothing here confers any capability by existing; it is evidence that a
+   * decision was made, which formulary.js then reads before it lets a restricted drug through. */
+  "Verification",
+  /* A purchase order and the suppliers it is raised against. Commercial records, kept here for the
+   * same reason everything else is: append-only and versioned, so what was ordered, by whom, and
+   * what was approved cannot be edited after the fact. How much has ARRIVED is never stored on the
+   * order - it is summed from the receipts booked against it, the same discipline stock.js keeps
+   * for a stock level, so there is no counter to drift away from the events beneath it. */
+  "PurchaseOrder", "Vendor",
+  /* Who to ring about this patient. Its own record rather than fields on Patient, because a contact
+   * list changes on its own clock and an emergency contact quietly overwritten last month leaves
+   * nobody to call at the moment somebody has to be called. Append-only like everything else:
+   * removing a contact marks it inactive and keeps it. */
+  "RelatedPerson",
   /* A break-glass declaration. The record OF an emergency access, not a clinical fact - and it is
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */
@@ -342,6 +360,12 @@ const RESOURCE_TYPES = Object.freeze([
    * Granted by EMR_VITALS (VITALS_TYPES in actor.js), the same capability DeviceAssociation already
    * uses - scanning a wristband onto a patient is the same kind of bedside act. */
   "PatientTag",
+  /* A patient document's METADATA (documents.js). The bytes are never in the record: they are encrypted in
+   * an object store and this row points at them. Unrestricted EMR_TREAT write and EMR_VIEW read, like a
+   * ClinicalNote; a nurse's enumerated write scope does not include it. */
+  "DocumentReference",
+  // A referral and every step of it (referral.js). Written by prescribers (unrestricted EMR_TREAT), read by EMR_VIEW.
+  "Referral",
   /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
    * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
    * declare an X-Source-System header naming ANY registered partner and every downstream

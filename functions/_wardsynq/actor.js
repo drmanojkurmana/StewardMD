@@ -155,7 +155,11 @@ function grantForCaps(caps) {
      * EMR_TREAT, which carries unrestricted write. */
     // Blackout joined 2026-09-09 (TASK 4.5): blocking a clinician's diary or a resource for a period
     // is the SAME administrative scheduling act as booking or cancelling one, not a clinical decision.
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"];
+    /* RelatedPerson joined 2026-09-13. Recording who to ring is the front desk's work and the same
+     * administrative act as registering the patient - it is not a clinical decision and asking a
+     * doctor to enter a telephone number is how the field stays empty. It grants nothing clinical:
+     * a receptionist still cannot write an observation or a note. */
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "RelatedPerson"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
@@ -186,8 +190,28 @@ function grantForCaps(caps) {
      * the read is required for the check to be honest rather than decorative. The write is the
      * protocol itself and nothing else: this grant still reaches no prescription, no administration
      * and no diagnosis. */
-    const canRead = ["ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol"];
-    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol"];
+    /* Patient joined 2026-09-12, for the bench worklist and for nothing else.
+     *
+     * The laboratory could read the REQUEST but never who it belonged to, so every row of its own
+     * worklist read "opd-pat-smd-demo-00020" - an identifier that cannot be checked against a tube,
+     * a form or a wristband, which is the one check the whole specimen subsystem exists to make.
+     * The imaging worklist settled this exact question already and is gated emr.view for exactly
+     * this reason: "a worklist with no identity on it is worse than no worklist".
+     *
+     * This is READ on Patient, which is name, identifiers, date of birth and sex. It is emphatically
+     * NOT emr.view: that was tried on the lab role first and reverted the same day, because it also
+     * opens the discharge summary and the ward's critical-results list, and
+     * wardsynq-inpatient-emar.test.mjs rightly asserts 403 on both. The grant below still reaches no
+     * Encounter, no Condition, no MedicationOrder, no note and no diagnosis. A laboratory still
+     * cannot read the chart; it can now name the sample in front of it. */
+    /* CriticalResultLoop joined 2026-09-14, and it is a SAFETY FIX. Releasing a result now opens the
+     * critical-result loop straight away on the server, and the laboratory is who releases results - but
+     * this grant could not write a CriticalResultLoop, so a potassium of 7.2 released by the lab was saved,
+     * the loop was refused, and no critical alert opened. The lab may now write the loop its own result
+     * opens, and read it back to avoid opening it twice. This does NOT open the ward's critical-results
+     * LIST to the laboratory: that route is gated by capability at the door, which is unchanged. */
+    const canRead = ["Patient", "ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol", "CriticalResultLoop"];
+    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol", "CriticalResultLoop"];
     const cats = { Observation: ["laboratory"] };
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };
     else grant = {

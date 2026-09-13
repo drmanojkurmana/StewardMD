@@ -861,6 +861,12 @@
         (govschemesOn() ? tile("hospital", "Scheme Search", "Package codes and rates", "govschemes") : "") +
         tile("search", "Search ICD", "ICD-10 / ICD-11 diagnosis codes", "icdsearch") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
+        // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves.
+        // Same flag as the boot module (smd_connect_agent, default OFF) - the boot module owns that
+        // check and only publishes SMD_CONNECT_AGENT_BOOT when it passes, so the tile cannot appear
+        // without it and the flag logic is not duplicated here.
+        ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
+          ? tile("hospital", "Connect Hospital", "Onboard your hospital EMR", "agentconnect") : "") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
@@ -870,6 +876,7 @@
             if (a === "rxverify") { ACT.prescriptionVerify(); return; }
             if (a === "govschemes") { ACT.govschemes(); return; }
             if (a === "icdsearch") { ACT.icdsearch(); return; }
+            if (a === "agentconnect") { ACT.agentconnect(); return; }
             ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
           }, 70);
         });
@@ -980,6 +987,17 @@
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
+    // Agent Connect: doctor-driven hospital onboarding. The boot module (connect-agent-boot.js) owns
+    // the smd_connect_agent flag check and the lazy load of the onboarding UI; this only opens it.
+    agentconnect: function () {
+      try {
+        if (window.SMD_CONNECT_AGENT_BOOT && SMD_CONNECT_AGENT_BOOT.open) {
+          SMD_CONNECT_AGENT_BOOT.open().catch(function (e) {
+            if (window.toast) toast("Connect Hospital unavailable: " + (e && e.message ? e.message : "load failed"));
+          });
+        } else if (window.toast) { toast("Connect Hospital is not enabled"); }
+      } catch (e) { if (window.toast) toast("Connect Hospital unavailable"); }
+    },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
     maitri: function () { if (window.FollowCare && FollowCare.maitri) FollowCare.maitri(); else if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("MAiTRI loading…"); },
     customizetools: function () { openToolsCustomize(); }
@@ -1446,7 +1464,7 @@
       ".rnav-grid.reordering .rnav-tile{touch-action:none}",
       ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
-      "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderDone{margin-left:auto;min-height:44px;padding:8px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--teal);font:600 14px var(--sans,system-ui)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
+      "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
@@ -1660,6 +1678,7 @@
     { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
     { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
     { act: "connect", ic: "hub", tt: "Connect EMR", sub: "Link your hospital", defOn: false },
+    { act: "agentconnect", ic: "local_hospital", tt: "Connect Hospital", sub: "Onboard your EMR", defOn: true },
     { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assessment", defOn: false },
     { act: "reasoning", ic: "neurology", tt: "Dx Patient", sub: "Differential", defOn: false },
     { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
@@ -1694,10 +1713,8 @@
   var _dragCancel=null, _dragActive=false, _suppressToolClickUntil=0;
   function homeEditMode(on){
     _reorderMode=on;
-    var grid=document.getElementById("rnavToolsGrid"),done=document.getElementById("rnavReorderDone"),hint=document.getElementById("rnavReorderHint");
+    var grid=document.getElementById("rnavToolsGrid");
     if(grid)grid.classList.toggle("reordering",on);
-    if(done){done.textContent=on?"Done":"Edit";done.setAttribute("aria-pressed",String(on));}
-    if(hint)hint.textContent=on?"Drag tools to rearrange. Tap Done when finished.":"Touch and hold a tool to rearrange.";
   }
   function beginDrag(dragEl, container, itemSelector, dataAttr, initial) {
     if(_dragCancel)_dragCancel();
@@ -1746,6 +1763,10 @@
     frame=requestAnimationFrame(tick);
   }
   function wireHomeDragReorder(root) {
+    // Start the hint's ten seconds only once it enters the visible home viewport.
+    var hintObserver=window.IntersectionObserver?new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){hintObserver.unobserve(entry.target);var hint=entry.target;setTimeout(function(){hint.remove();},10000);}});}):null;
+    function watchHint(){var hint=document.getElementById("rnavReorderHint");if(!hint||hint.dataset.watched)return;hint.dataset.watched="1";if(hintObserver)hintObserver.observe(hint);else setTimeout(function(){hint.remove();},10000);}
+    var homeRoot=document.getElementById("homeV2");if(homeRoot)new MutationObserver(watchHint).observe(homeRoot,{childList:true,subtree:true});watchHint();
     var pending=null;
     function clearPress(){clearTimeout(_pressT);_pressT=null;pending=null;}
     root.addEventListener("contextmenu",function(e){if(e.target.closest("#rnavToolsGrid"))e.preventDefault();});
@@ -1763,15 +1784,17 @@
       pending={id:e.pointerId,x:e.clientX,y:e.clientY};_pressT=setTimeout(start,450);
     });
     root.addEventListener("click",function(e){
-      var done=e.target.closest("#rnavReorderDone");
-      if(done){e.preventDefault();e.stopPropagation();if(_dragCancel)_dragCancel();homeEditMode(!_reorderMode);return;}
+      if(!e.target||!e.target.closest)return; // a document-targeted synthetic event has no Element API
+      if(_reorderMode&&Date.now()>=_suppressToolClickUntil&&!e.target.closest("#rnavToolsGrid .rnav-tile")){if(_dragCancel)_dragCancel();homeEditMode(false);}
       if((Date.now()<_suppressToolClickUntil||_reorderMode)&&e.target.closest("#rnavToolsGrid,.hv-tool-tog")){
         e.preventDefault();e.stopImmediatePropagation();
       }
     },true);
     root.addEventListener("keydown",function(e){
       if(e.key==="Escape"&&_reorderMode){if(_dragCancel)_dragCancel();homeEditMode(false);return;}
+      if(!e.target||!e.target.closest)return;
       var tile=e.target.closest("#rnavToolsGrid .rnav-tile:not(.addtool)");
+      if(tile&&e.key===" "&&!_reorderMode){e.preventDefault();homeEditMode(true);return;}
       if(!_reorderMode||!tile||!/^Arrow/.test(e.key))return;
       e.preventDefault();var grid=tile.parentElement,list=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")),at=list.indexOf(tile),cols=getComputedStyle(grid).gridTemplateColumns.split(" ").length,delta=e.key==="ArrowLeft"?-1:e.key==="ArrowRight"?1:e.key==="ArrowUp"?-cols:cols,target=list[at+delta];
       if(target){grid.insertBefore(tile,delta>0?target.nextSibling:target);var next=list.map(function(n){return n.getAttribute("data-act");});next=[].slice.call(grid.querySelectorAll(".rnav-tile:not(.addtool)")).map(function(n){return n.getAttribute("data-act");});orderedHomeTools().forEach(function(t){if(next.indexOf(t.act)<0)next.push(t.act);});setToolOrder(next);tile.focus();}
@@ -1785,7 +1808,7 @@
   var ANIM_ICON = {
     eye: '<svg class="ai-anim ai-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle class="pupil" cx="12" cy="12" r="3.1"/></svg>',
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
-    derm: '<img src="/sknx-mark.svg?v=sx16-ux" alt="" width="38" height="38">',
+    derm: '<img class="ai-brandmark ai-sknx-img" src="/sknx-mark.png?v=sx2" alt="SknX AI" width="38" height="38">',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     // Brand marks share .ai-brandmark: ONE optical box in CSS, rather than the 48/38/34px inline
@@ -1864,7 +1887,7 @@
           '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
           '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
         '</div>' +
-        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span><button id="rnavReorderDone" aria-pressed="false">Edit</button></div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>' +
         '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>' +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
@@ -2245,6 +2268,11 @@
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
       mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
+      // Agent Connect: the doctor onboards their OWN hospital by signing in to its EMR themselves,
+      // rather than an admin wiring a connection up front. Flag-gated by the boot module
+      // (smd_connect_agent, default OFF), which only publishes SMD_CONNECT_AGENT_BOOT when it passes.
+      ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
+        ? mi("hospital", "Connect Hospital", "Onboard your hospital by signing in yourself", "agentconnect") : "") +
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
@@ -4438,7 +4466,7 @@
           // Cloud/KB answers have no image path, so showing it there would be a dead button.
           '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
-          '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
+          '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask a clinical question…"></textarea>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
       '</div>';
@@ -4972,6 +5000,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
+    sheet.classList.add("maik-polished");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
@@ -5146,8 +5175,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).join("");
       body.innerHTML = '<div class="maik-empty">' +
         '<div class="maik-hero"><div class="maik-hero-logo"><div class="maik-hero-glow"></div><img src="' + MK_LOGO() + '" alt="MaiK"></div><div class="maik-kicker">Medical AI Knowledge</div></div>' +
-        '<div class="maik-h1">Ask Maik anything clinical.</div>' +
-        '<div class="maik-sub">Grounded answers from StewardMD&rsquo;s knowledge base &mdash; with sources you can verify.</div>' +
+        '<div class="maik-h1">A little clarity. Ask MaiK.</div>' +
+        '<div class="maik-sub">Explore a clinical question, review a case, or find the right reference.</div>' +
         '<div class="maik-cards">' + cardHTML + '</div></div>';
       var cardEls = body.querySelectorAll(".maik-card");
       if (active) {
@@ -5158,7 +5187,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (cardEls[1]) cardEls[1].addEventListener("click", function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} });
         if (cardEls[2]) cardEls[2].addEventListener("click", function () { close(); setTimeout(function () { try { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else if (typeof toast === "function") toast("Loading…"); } catch (e) {} }, 60); });
       }
-      scroll();
+      body.scrollTop = 0;
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
     function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q) || /\b(mrn|uhid)\b/i.test(q) || /\bpatient\s+[a-z]+\s+(has|with|is|presenting|aged)/i.test(q) || /\bgive (him|her|them|the patient)\b/i.test(q) || /\b\d{1,3}\s*(yo|y\/o|year[- ]?old|yrs?)\b.*\b(patient|give|start|prescribe|dose)\b/i.test(q); }
@@ -5201,7 +5230,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // disease names, so "hi <anything clinical>" wrongly got the canned reply.)
       var afterGreet = n
         .replace(/^(hi+|hey+|hello|helo|yo|hiya|sup|namaste|hai|greetings|good (morning|afternoon|evening|night))\b/i, "")
-        .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam)\b/i, "")
+        .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam|dude|bro|man|buddy)\b/i, "")
         .replace(/[\s,!.?]+/g, " ").trim();
       var greetOnly = afterGreet.split(" ").filter(function (w) { return w.length >= 2 && MAIK_CASUAL.indexOf(w) < 0; }).length === 0;
       /* A GREETING IS ROUTED BY WHO PAYS FOR IT.
@@ -5224,6 +5253,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (_eng === "local") return { kind: "clinical" };          // free and offline: let it answer
         if (byeHit) return { kind: "casual", reply: "Goodbye." };
         return { kind: "casual", reply: "Hello. What would you like to look at?" };
+      }
+      // Complaint about MaiK's OWN last answer/behaviour, not a new clinical question. Owner report
+      // (2026-09-11): "What the fuck i asked how to diagnose pneumonia why are you missing continuity"
+      // and "When asked you to show answer with doses earlier why didn't you..." both contain real
+      // clinical words (pneumonia, doses), so the Intent Firewall correctly calls them medical - and
+      // both went straight to RAG, which answered an unrelated drug because there was no real question
+      // in them to retrieve. Caught here, before retrieval, so it costs nothing and never mismatches.
+      if (/\b(why (are|is|did|didn'?t|do|does|doesn'?t|would|wouldn'?t) you\b|you already know|missing continuity|you'?re wrong|you are wrong|that'?s wrong|that is wrong|not what i asked)\b/i.test(n)) {
+        return { kind: "casual", reply: "Sorry about that. Could you ask the question again, in one line? I'll stay on that topic this time." };
       }
       // Thanks and acknowledgements: same reasoning, same split.
       if (isShort && /^(thanks|thank you|thankyou|thx|ty|ok|okay|got it|cool|great)\b/.test(n)) {
@@ -5279,7 +5317,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 6)) {
         var _pop = /\b(paediatric|pediatric|child|neonat)/i.test(n) ? "Paediatric" : (/\b(renal|dialysis|ckd)\b/i.test(n) ? "Renal-adjusted" : (/\b(hepatic|liver)\b/i.test(n) ? "Hepatic-adjusted" : (/\bpregnan/i.test(n) ? "Pregnancy" : "Adult")));
-        var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics)\b/gi, " ").replace(/\s+/g, " ").trim();
+        // Owner report (2026-09-11): "Ok tell me dose of metoprolol" gate-failed while "Metoprolol
+        // dose" answered fine - this stopword list stripped "dose/of/me" but left "Ok tell" glued
+        // onto the drug name, so retrieval searched for "Ok tell metoprolol" instead of "metoprolol".
+        // Request-frame words added so any phrasing of the same question extracts the same drug.
+        var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|plz|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics|tell|ok|okay|so|can|could|you|show|us|kindly)\b/gi, " ").replace(/\s+/g, " ").trim();
         _drug = _drug || t.lastDrug;
         if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: "dose of " + _drug, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
         // No drug named and none remembered: "and the dose?" right after a treatment answer means the
@@ -5312,7 +5354,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // keyword-matched a random disease (a real case: "Ok First Line Treatment?" after
       // an ascites answer retrieved FIRST Bite Syndrome). Any non-generic token means
       // the clinician may be naming a NEW topic → fall through to normal routing.
-      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
+      // "it"/"them" (pronouns referring back to the topic) and "diagnose"/"diagnostic" (verb/adjective
+      // forms - only the noun "diagnosis" was covered) added after the owner report (2026-09-11):
+      // "How to diagnose it" failed every token here ("diagnose" and "it" both unmatched), so it was
+      // treated as a brand-new topic-less query and drifted onto an unrelated malnutrition chapter.
+      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|it|them|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|diagnose|diagnosed|diagnostic|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
       if (wc <= 7) {
         var toksF = n.replace(/\?/g, "").split(" ").filter(Boolean);   // maikNorm keeps '?' — drop it for token matching
         if (toksF.length && toksF.every(function (w) { return GENERIC_FU.test(w); })) {
@@ -5582,7 +5628,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
              "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";
     }
     if (/cancel/i.test(e)) return "That answer was cancelled.";
-    return "MaiK is unavailable right now.the deterministic StewardMD engine, calculators and reference tools remain available." +
+    // Owner report (2026-09-11): the FIRST message after opening MaiK ("Hi") hit this raw native code
+    // with no guidance, then every later message that turn worked fine - a transient race (the model
+    // was still being mapped into memory) read as a permanent failure. One retry costs nothing.
+    if (/model-missing/i.test(e)) {
+      return "The on-device model was still loading. Please ask again - it usually answers on the next try.";
+    }
+    return "MaiK is unavailable right now. The deterministic StewardMD engine, calculators and reference tools remain available." +
            (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
   }
 
@@ -6955,7 +7007,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     if (prefill && typeof prefill === "string") { try { qEl.value = prefill; qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; } catch (e) {} }
-    setTimeout(function () { try { qEl.focus(); } catch (e) {} }, 300);
+    setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);
   }
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty
   // Workspaces' point-of-care "Ask MaiK" hand-off). The clinician reviews and sends.
@@ -8262,15 +8314,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { initResume(); } catch (e) {}
     try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {
-      // show the new home as soon as the user is past splash/login, COVERING the app's own
-      // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
-      var tries = 0;
-      var iv = setInterval(function () {
-        tries++;
-        var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
-        var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
-        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); try { resumeRestore(); } catch (e) {} }
-      }, 120);
+      document.body.classList.add("ui-v2");
+      suppressModeSelect();
+      showV2();
+      try { resumeRestore(); } catch (e) {}
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();

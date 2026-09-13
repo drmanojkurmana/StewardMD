@@ -1,0 +1,28 @@
+Five roles with no clinical read at all got six "Command" tiles anyway
+
+Signed in as resident and the whole "Command and operations" section opened
+fine - correctly, a resident holds emr.view. But every one of those six
+tiles (Hospital command center, Digital Twin, Reports, Integration console,
+Emergency access, Downtime pack) was gated on queue.view, and queue.view is
+held by almost every role - including four who hold no clinical read at
+all: pharmacy, billing, cashier and viewer (blood_bank holds transfusion.
+issue instead, same gap). Each of them was being offered all six as live
+tiles, and every route behind them is actually gated at emr.view server-side
+(functions/api/queue/[[path]].js's own capability table: patient-flow, twin,
+report-patient-flow, fhir-exceptions, emergency-log, downtime all read
+CAPS.EMR_VIEW) - so a billing clerk who tapped Downtime pack, or a
+pharmacist who tapped Hospital command center, was refused the instant it
+loaded. Exactly the bug WARD_NEED already exists to fix for the three
+Clinical-section tiles above it (Inpatient ward, Admission and bed board,
+Emergency department) - it was simply never carried down into this section
+too, so five roles kept hitting it here.
+
+All six now need emr.view, matching what their own routes actually require.
+Billing and cashier already correctly needed billing.view and is untouched.
+
+Found by comparing resident's caps against the same tile set supervisor saw
+minutes earlier and checking each route's real capability requirement in
+the router.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

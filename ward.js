@@ -31,7 +31,7 @@
   var LS_STAFF = "smd_opd_staff_tok";
 
   var st = {
-    orgId: "", ward: "", patients: [], view: "list",
+    orgId: "", ward: "", q: "", cls: "", patients: [], view: "list",
     sel: null,                 // the selected {encounterId, patientId, ward, bed, admittedAt}
     problems: [], criticals: [], balance: null, outbox: [], cosign: null, downtime: null, quality: null, pcopy: null, consent: null, completion: null, emergency: null, roi: null, tpa: null, billing: null, reports: null, emergencyOverride: false, emergencyAdmin: null, emergencyReconcile: null,
     /* Held from other systems. null until asked, an object once answered, and a separate error
@@ -68,6 +68,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function val(id) { var el = document.getElementById(id); return el ? String(el.value || "").trim() : ""; }
+  function checked(id) { var el = document.getElementById(id); return !!(el && el.checked); }
 
   // ---- transport (identical to queue.js; a staff token wins when present) -------------------
   function staffTok() { try { return localStorage.getItem(LS_STAFF) || ""; } catch (e) { return ""; } }
@@ -170,20 +171,72 @@
     return emBanner;
   }
 
-  function listView(state) {
-    var rows = (state.patients || []).map(function (p) {
-      return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '">' +
-        '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
-        /* Name first, then the MRN a wristband can be checked against. The record id is the last
-         * resort, not the default: it is the one identifier on the row nobody can verify against
-         * the patient in front of them. */
-        '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" + esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(p.ward || "") + " &middot; admitted " + when(p.admittedAt) + "</small></span>" +
-        ms("chevron_right") + "</button>";
+  /* THE WARD ROUND LIST. Grouped by ward, ordered by bed, filtered by admission class and a live
+   * search over name / MRN / bed - the way a round is actually walked, not one flat list of every
+   * admission in the hospital. Every fact on a row comes from /ward/list as the server projected it
+   * (name, MRN, ward, bed, class, admission time); nothing is inferred here. The hospital-wide
+   * boards (bed board, ED, surgery, twin...) live in their own card below the round, not in the
+   * filter row. */
+  var CLASS_LABEL = { IPD: "General", ICU: "ICU", MATERNITY: "Maternity", PEDIATRICS: "Paediatrics", NICU: "NICU" };
+  var CLASS_ORDER = ["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"];
+  function bedKey(b) { var m = /^(\D*)(\d+)(.*)$/.exec(String(b || "")); return m ? [m[1], Number(m[2]), m[3]] : [String(b || "~"), 0, ""]; }
+  function bedCompare(a, b) {
+    var ka = bedKey(a.bed), kb = bedKey(b.bed);
+    return ka[0] < kb[0] ? -1 : ka[0] > kb[0] ? 1 : ka[1] - kb[1] || (ka[2] < kb[2] ? -1 : ka[2] > kb[2] ? 1 : 0);
+  }
+  function stayDay(iso) {
+    var t = Date.parse(iso || ""); if (!isFinite(t)) return "";
+    var d = Math.floor((Date.now() - t) / 86400000) + 1;
+    return d < 1 ? "" : "day " + d;
+  }
+  /* Pure: which rows survive the class chip and the search. Exposed as WARD.filterRoster for tests. */
+  function filterRoster(patients, cls, q) {
+    var needle = String(q || "").trim().toLowerCase();
+    return (patients || []).filter(function (p) {
+      if (cls && p.class !== cls) return false;
+      if (!needle) return true;
+      return [p.name, p.mrn, p.bed, p.ward, p.patientId].some(function (v) { return v != null && String(v).toLowerCase().indexOf(needle) >= 0; });
+    });
+  }
+  function rosterHtml(state) {
+    var all = state.patients || [];
+    var shown = filterRoster(all, state.cls, state.q);
+    var counts = {}; all.forEach(function (p) { counts[p.class] = (counts[p.class] || 0) + 1; });
+    var chips = '<div class="w-chips" role="tablist">' +
+      '<button class="w-chip' + (!state.cls ? " on" : "") + '" data-w-act="setcls:" type="button">All <b>' + all.length + "</b></button>" +
+      CLASS_ORDER.filter(function (c) { return counts[c]; }).map(function (c) {
+        return '<button class="w-chip' + (state.cls === c ? " on" : "") + '" data-w-act="setcls:' + c + '" type="button">' + esc(CLASS_LABEL[c] || c) + " <b>" + counts[c] + "</b></button>";
+      }).join("") + "</div>";
+    var byWard = {}; shown.forEach(function (p) { var w = p.ward || "No ward assigned"; (byWard[w] = byWard[w] || []).push(p); });
+    var wards = Object.keys(byWard).sort(function (a, b) { return a === "No ward assigned" ? 1 : b === "No ward assigned" ? -1 : a.localeCompare(b); });
+    var groups = wards.map(function (w) {
+      var rows = byWard[w].sort(bedCompare).map(function (p) {
+        var day = stayDay(p.admittedAt);
+        return '<button class="w-bed" data-w-act="open:' + esc(p.encounterId) + '" type="button">' +
+          '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
+          /* Name first, then the MRN a wristband can be checked against. The record id is the last
+           * resort, not the default: it is the one identifier on the row nobody can verify against
+           * the patient in front of them. */
+          '<span class="w-bed-b"><b>' + esc(p.name || p.mrn || p.patientId) + "</b><small>" +
+            esc(p.mrn && p.name ? p.mrn + " · " : "") + esc(CLASS_LABEL[p.class] || p.class || "") +
+            (day ? " · " + esc(day) : "") + " · admitted " + when(p.admittedAt) + "</small></span>" +
+          ms("chevron_right") + "</button>";
+      }).join("");
+      return '<div class="w-wardrow"><h4>' + esc(w) + "<small>" + byWard[w].length + (byWard[w].length === 1 ? " patient" : " patients") + "</small></h4>" + rows + "</div>";
     }).join("");
-    return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
+    var empty = !state.loaded ? '<p class="w-empty">Loading the ward…</p>'
+      : !all.length ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>"
+      : !shown.length ? '<p class="w-empty">No patients match. Clear the search or the filter.</p>' : "";
+    return '<p class="w-count">' + shown.length + " of " + all.length + (all.length === 1 ? " patient" : " patients") + (wards.length ? " · " + wards.length + (wards.length === 1 ? " ward" : " wards") : "") + "</p>" + chips + (groups || empty);
+  }
+  function listView(state) {
+    return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward round" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
       '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      '<div class="w-filter"><input id="wWard" type="text" placeholder="Filter by ward (blank = all)" value="' + esc(state.ward) + '">' +
-      '<button class="w-btn ghost" data-w-act="setward">Apply</button>' +
+      '<div class="w-filter"><input id="wQ" type="search" autocomplete="off" placeholder="Search name, MRN or bed" value="' + esc(state.q || "") + '">' +
+      '<input id="wWard" type="text" placeholder="Ward (blank = all)" value="' + esc(state.ward) + '">' +
+      '<button class="w-btn ghost" data-w-act="setward" type="button">Apply</button></div>' +
+      '<div id="wRoster">' + rosterHtml(state) + "</div></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("hub") + '<h3>Boards and tools</h3></div><div class="w-tools">' +
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
       '<button class="w-btn ghost" data-w-act="edboard" title="Emergency department">' + ms("emergency") + "ED</button>" +
       '<button class="w-btn ghost" data-w-act="surgeryboard" title="Surgery / OT / PACU">' + ms("medical_services") + "Surgery</button>" +
@@ -194,6 +247,10 @@
       // patient (criticalsCard), read here with no patientId so anyone covering the ward or the lab
       // can see every open critical loop at once, not just the one chart they happen to have open.
       '<button class="w-btn ghost" data-w-act="critsboard" title="Every open critical result, hospital-wide">' + ms("priority_high") + "Critical results</button>" +
+      // Hospital-wide, like Critical results beside it: imaging had a backend and nowhere to
+      // land before this - the missing screen for a radiographer or radiologist who signs in.
+      '<button class="w-btn ghost" data-w-act="labboard" title="Specimens, tests awaiting a result and open critical results, hospital-wide">' + ms("science") + "Laboratory board</button>" +
+      '<button class="w-btn ghost" data-w-act="radboard" title="Imaging worklist, reporting and open critical findings, hospital-wide">' + ms("medical_information") + "Radiology board</button>" +
       '<button class="w-btn ghost" data-w-act="bedmgmt" title="Reserve, block for maintenance, clean-before-reuse - real bed states, server-checked">' + ms("bed") + "Bed management</button>" +
       '<button class="w-btn ghost" data-w-act="flowcommand" title="ED, beds, admissions pending, discharge, transfers - hospital-wide, live">' + ms("hub") + "Patient flow</button>" +
       // TASK 10: the Hospital Digital Twin - a fused view over patient flow, ward metrics, criticals,
@@ -222,9 +279,8 @@
        * role without the capability is told so by the server's own 403 rather than by this screen
        * guessing who holds it. */
       '<button class="w-btn ghost" data-w-act="integration" title="Feeds in and out: what is held, what is stuck, who may push, where this hospital sends">' + ms("hub") + "Integration</button>" +
-      '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div>" +
-      (rows || (state.loaded ? '<p class="w-empty">No patients are currently admitted' + (state.ward ? " to " + esc(state.ward) : "") + ".</p>" : '<p class="w-empty">Loading the ward…</p>')) +
-      "</div>" + xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
+      '<button class="w-btn ghost" data-w-act="downtime" title="Printable sheet for when the system is unavailable">' + ms("print") + "Downtime pack</button></div></div>" +
+      xchgCard(state) + cosignCard(state) + qualityCard(state) + overrideCard(state);
   }
 
   /* THE BED BOARD. Every configured ward, every bed, occupied or free - from the record itself
@@ -242,7 +298,9 @@
     var t = state.admitTarget;
     var wardsHtml = wards.map(function (w) {
       var occ = (w.occupied || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.patientId) + "</span></div>";
+        // The server now sends name/mrn on every occupied bed (migrate-inpatient.js bedBoard).
+        // The id is the LAST resort, never the first thing a nurse reads off a bed.
+        return '<div class="w-bedcell occ"><b>' + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span></div>";
       }).join("");
       // Which free cell is highlighted as "picked" - a UI selection compare against what the board
       // itself already reported as free, never a computation of whether a bed IS free.
@@ -251,7 +309,7 @@
         return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>Free</span></button>";
       }).join("") : '<div class="w-bedcell unknown"><span>Bed list not configured</span></div>';
       var unplaced = (w.unplaced || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.patientId) + " (no bed assigned)</span></div>";
+        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
       }).join("");
       return '<div class="w-wardrow"><h4>' + esc(w.ward) + "<small>" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
@@ -425,7 +483,17 @@
 
     var header = '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(STAGE_WORDS[c.stage] || c.stage) + "</small></div>" +
-      '<button class="w-ic" data-w-act="surgeryload" title="Refresh">' + ms("refresh") + "</button></div>";
+      '<button class="w-ic" data-w-act="surgeryload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      /* ABANDONING A CASE. A case that is not going ahead - the patient deteriorated, the list overran,
+       * the consent was withdrawn - has to be ended on the record, with a reason, or it sits on the
+       * theatre board as a case somebody is still expecting. Offered only while the case is live; a
+       * signed-out or already-abandoned case has nothing to abandon. */
+      (c.stage !== "signed-out" && c.stage !== "abandoned"
+        ? '<div class="w-noprint" style="margin:6px 0"><button class="w-btn ghost sm" data-w-act="surgeryabandon:' + esc(c.id) + '">' + ms("close") + "This case is not going ahead</button></div>"
+        : "") +
+      (c.stage === "abandoned" && abandonReasonOf(c)
+        ? '<p class="w-hint warn">' + ms("warning") + "Abandoned: " + esc(abandonReasonOf(c)) + "</p>"
+        : "");
 
     var consentCard = '<div class="w-card"><div class="w-card-h">' + ms("assignment_turned_in") + "<h3>Consent</h3></div>" +
       (c.consent
@@ -739,6 +807,335 @@
       "</div></div>";
   }
 
+  /* ACTIVE MEDICATIONS. What is running right now, in one place - filtered server-side to
+   * status==="active" MedicationOrder (functions/_wardsynq/migrate-inpatient.js timelineFromChart),
+   * the same field "New medication order" writes and "Medication round" administers against. This
+   * card writes nothing; it is the missing answer to "what drugs is this patient currently on",
+   * which used to mean reading the round and the order form and holding the rest in your head. */
+  function activeMedsCard(state) {
+    var meds = state.activeMeds;
+    if (meds == null) return "";
+    var rows = meds.map(function (m) {
+      return "<li><b>" + esc(m.drug) + "</b>" +
+        (m.dose && m.dose.value != null ? " <span>" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
+        (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
+        (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
+        (m.since ? " <small>since " + when(m.since) + "</small>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Active medications</h3></div>" +
+      (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">Nothing currently active.</p>') + "</div>";
+  }
+
+  /* THE TIMELINE. Every readable resource on this chart, in one chronological list - the same
+   * governed read every section above already does, merged server-side
+   * (functions/_wardsynq/migrate-inpatient.js patientTimeline) rather than left for a clinician to
+   * reconstruct by reading nine separate cards. Nothing here is a second copy of the record: the
+   * events are labels over the SAME rows the cards above render, ordered by when each actually
+   * happened. A resource with no timestamp is counted, never silently dropped - see w-hint below. */
+  /* One row of the stay. Shared by the card on the chart and the full-page Timeline, so the two can
+   * never drift into telling the story differently. */
+  /* THE FILTERS. A stay of any length is unreadable as one undifferentiated list, and the question a
+   * reader actually arrives with is narrow: "just the notes", "just the tests". The counts are shown
+   * on each filter so an empty one is visibly empty rather than looking like a broken screen.
+   *
+   * "everything" is first and is the default, because a filter that silently hides half a chart is
+   * far more dangerous than a long list - a doctor who does not realise a filter is on is a doctor
+   * reading an incomplete history and not knowing it. The active filter is also restated above the
+   * list for the same reason. */
+  var TIMELINE_FILTERS = [
+    ["", "Everything"],
+    ["note", "Notes"],
+    ["investigation", "Tests ordered"],
+    ["result", "Results"],
+    ["medication", "Medicines"],
+    ["observation", "Vitals"],
+    ["problem", "Diagnoses"],
+    ["procedure", "Procedures"],
+    ["critical", "Critical events"],
+    ["allergy", "Allergies"],
+    ["visit", "Admission and discharge"],
+    ["billing", "Billing"],
+    ["registration", "Registration"],
+  ];
+  /* DATE. "What happened today" and "what happened on the day they deteriorated" are the two
+   * questions a long stay actually gets asked, and neither is answerable by scrolling. The ranges
+   * are relative rather than a date picker because that is how the question is asked out loud;
+   * a specific day is reachable by narrowing and reading. */
+  var TIMELINE_WHEN = [
+    ["", "Any time"],
+    ["24h", "Last 24 hours"],
+    ["72h", "Last 3 days"],
+    ["7d", "Last week"],
+  ];
+  function timelineSince(range) {
+    var hours = range === "24h" ? 24 : range === "72h" ? 72 : range === "7d" ? 168 : 0;
+    if (!hours) return null;
+    return new Date(Date.now() - hours * 3600 * 1000).toISOString();
+  }
+  function timelineFilterBar(state) {
+    var all = state.timeline || [];
+    var cur = state.timelineFilter || "";
+    var curWhen = state.timelineWhen || "";
+    var since = timelineSince(curWhen);
+    // The counts are counted AFTER the date range, so a kind that has nothing in the chosen window
+    // reads as empty rather than promising rows the list will not show.
+    var inRange = since ? all.filter(function (e) { return e.at >= since; }) : all;
+    // A kind with nothing in it at all is not offered: thirteen buttons of which nine are empty is
+    // a worse screen than four that mean something. "Everything" always stays.
+    var offered = TIMELINE_FILTERS.filter(function (f) {
+      if (!f[0]) return true;
+      if (f[0] === cur) return true;   // never yank the active filter out from under the reader
+      return inRange.some(function (e) { return e.category === f[0]; });
+    });
+    return '<div class="w-tl-search"><input id="wTlQ" type="search" placeholder="Search this history - a drug, a word from a note, a person" value="' + esc(state.timelineQuery || "") + '">' +
+      '<button class="w-btn ghost sm" data-w-act="timelinesearch">' + ms("search") + "Search</button>" +
+      (state.timelineQuery ? '<button class="w-btn ghost sm" data-w-act="timelinesearchclear">' + ms("close") + "Clear</button>" : "") +
+      "</div>" +
+      '<div class="w-tl-filters">' + offered.map(function (f) {
+      var n = f[0] ? inRange.filter(function (e) { return e.category === f[0]; }).length : inRange.length;
+      return '<button class="w-tl-f' + (cur === f[0] ? " on" : "") + '" data-w-act="timelinefilter:' + esc(f[0] || "all") + '">' +
+        esc(f[1]) + " <i>" + esc(n) + "</i></button>";
+    }).join("") + "</div>" +
+    '<div class="w-tl-filters w-tl-when">' + TIMELINE_WHEN.map(function (w) {
+      return '<button class="w-tl-f' + (curWhen === w[0] ? " on" : "") + '" data-w-act="timelinewhen:' + esc(w[0] || "any") + '">' +
+        esc(w[1]) + "</button>";
+    }).join("") + "</div>";
+  }
+  /* SEARCH. "When did we start the co-amoxiclav" is asked far more often than any filter answers,
+   * and on a three-week stay it is unanswerable by scrolling. It searches what the reader can
+   * actually see - the line itself and the words behind it - rather than the raw record, because a
+   * search that matched hidden fields would return rows whose match nobody can find. */
+  function timelineMatches(e, q) {
+    if (!q) return true;
+    var hay = String(e.label || "");
+    if (e.who) hay += " " + e.who;
+    if (e.category) hay += " " + e.category;
+    (e.body || []).forEach(function (b) { hay += " " + (b.heading || "") + " " + (b.text || ""); });
+    return hay.toLowerCase().indexOf(q) >= 0;
+  }
+  function timelineFiltered(state) {
+    var all = state.timeline || [];
+    var f = state.timelineFilter || "";
+    var since = timelineSince(state.timelineWhen || "");
+    var q = String(state.timelineQuery || "").trim().toLowerCase();
+    return all.filter(function (e) {
+      if (f && e.category !== f) return false;
+      if (since && e.at < since) return false;
+      if (q && !timelineMatches(e, q)) return false;
+      return true;
+    });
+  }
+
+  /* One row of the stay. Shared by the card on the chart and the full-page Timeline, so the two can
+   * never drift into telling the story differently.
+   *
+   * The colour is the CATEGORY the server assigned, never anything decided here - a screen that
+   * works out for itself what kind of event something is will eventually disagree with the record. */
+  /* EXPAND AND COLLAPSE. A note's full text is exactly what a reader wants when they are reading
+   * that note and exactly what drowns the list when they are scanning for something else. So a row
+   * with words behind it shows the first line and opens on a click.
+   *
+   * Collapsed is the default, and the preview is the real first line rather than an ellipsis, so a
+   * reader can skim the assessments of a whole stay without opening one. */
+  function timelineRow(e, open) {
+    var parts = e.body || [];
+    var body = "";
+    if (parts.length) {
+      if (open) {
+        body = parts.map(function (b) {
+          return '<div class="w-tl-b"><b>' + esc(b.heading) + "</b> " + esc(b.text) + "</div>";
+        }).join("");
+      } else {
+        var first = String(parts[0].text || "");
+        var preview = first.length > 140 ? first.slice(0, 140) + "…" : first;
+        body = '<div class="w-tl-b w-tl-peek">' + esc(preview) + "</div>";
+      }
+    }
+    /* THE REPORT BUTTON, BESIDE THE ORDER THAT ASKED FOR IT. An order whose report is back is one
+     * click from being read; one still waiting says so in those words, rather than looking exactly
+     * like the finished one and leaving the reader to guess. */
+    var station = "";
+    if (e.resourceType === "ServiceRequest") {
+      station = e.reportReady
+        ? '<button class="w-btn ghost sm" data-w-act="timelinereport:' + esc(e.reportId || "") + '">' +
+          ms(e.reportIsImaging ? "labs" : "description") + "Open the report</button>"
+        : '<span class="w-st due">waiting for the report</span>';
+    }
+    return '<li class="w-tl-' + esc(e.category || "other") + (e.critical ? " w-tl-crit" : "") + '">' +
+      '<span class="w-tl-t">' + when(e.at) + "</span>" +
+      '<span class="w-tl-k">' + esc(e.category || e.resourceType) + "</span>" +
+      "<span>" + esc(e.label) +
+      (e.critical ? ' <span class="w-st escalate">critical</span>' : "") +
+      body +
+      (parts.length
+        ? '<button class="w-tl-x" data-w-act="timelineopen:' + esc(e.id || "") + '">' +
+          ms(open ? "expand_less" : "expand_more") + (open ? "Show less" : "Read it all") + "</button>"
+        : "") +
+      "</span>" +
+      (station ? '<span class="w-tl-a">' + station + "</span>" : "") +
+      '<button class="w-tl-x" data-w-act="timelinedetail:' + esc(e.resourceType || "") + "~" + esc(e.id || "") + '">' +
+        ms("fact_check") + "Show the record</button>" +
+      "</li>";
+  }
+  /* THE RECORD BEHIND A LINE, AND EVERY VERSION OF IT.
+   *
+   * A version that was overtaken before it ever took effect is marked as such rather than listed as
+   * though it had stood: "this was prescribed and corrected an hour later" and "this stood all week"
+   * are different facts, and showing only the latest version makes them look identical. */
+  function detailPanel(state) {
+    var d = state.recordDetail;
+    if (!d) return "";
+    if (d.loading) return '<div class="w-card"><p class="w-hint">' + ms("info") + "Opening the record…</p></div>";
+    if (!d.ok) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("error") + "<h3>The record could not be opened</h3>" +
+        '<button class="w-ic" data-w-act="timelinedetailclose">' + ms("close") + "</button></div>" +
+        '<p class="w-hint warn">' + esc(d.detail || d.error || "Not available.") + "</p></div>";
+    }
+    var versions = (d.versions || []).slice().reverse().map(function (v) {
+      return "<li>" +
+        '<span class="w-st ' + (v.current ? "" : v.stood ? "" : "escalate") + '">v' + esc(v.version) + (v.current ? " · current" : "") + "</span> " +
+        (v.byName ? esc(v.byName) : "somebody") +
+        (v.onBehalfOf ? " on behalf of " + esc(v.onBehalfOf) : "") +
+        " &middot; " + when(v.recordedAt) +
+        (v.effectiveAt && v.effectiveAt !== v.recordedAt ? " &middot; took effect " + when(v.effectiveAt) : "") +
+        (v.source && v.source !== "wardsynq-native" ? " &middot; from " + esc(v.source) : "") +
+        (v.supersededBeforeEffective ? ' <span class="w-st escalate">overtaken before it took effect - this was never what the record said</span>' : "") +
+        (v.amendedAt ? ' <span class="w-st due">corrected</span>' : "") +
+        (v.changed ? '<div class="w-dt-times">changed: ' + esc(v.changed.join(", ")) + "</div>" : "") +
+        "</li>";
+    }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + esc(d.resourceType) + "</h3>" +
+      '<button class="w-ic" data-w-act="timelinedetailclose" title="Close">' + ms("close") + "</button></div>" +
+      '<div class="w-dt-times">' + esc(d.recordId) + " &middot; " + esc(d.versionCount) + " version" + (d.versionCount === 1 ? "" : "s") + "</div>" +
+      (versions ? '<div class="w-sub"><h4>Versions, newest first</h4><ul class="w-mini">' + versions + "</ul></div>" : "") +
+      '<div class="w-sub"><h4>What the record says now</h4>' + reportValue(d.record) + "</div>" +
+      "</div>";
+  }
+
+  function timelineGapHint(state) {
+    return state.timelineGap ? '<p class="w-hint warn">' + ms("warning") + esc(state.timelineGap) + " record" + (state.timelineGap === 1 ? "" : "s") + " on this chart carry no timestamp and are not shown here.</p>" : "";
+  }
+  /* The card on the chart is a GLANCE and is deliberately never filtered: the filters belong to the
+   * full history, where somebody is reading rather than scanning, and a filtered glance would be a
+   * chart quietly showing less than it appears to. */
+  function timelineCard(state) {
+    var t = state.timeline;
+    if (t == null) return "";
+    var openIds = state.timelineOpen || {};
+    var rows = t.map(function (e) { return timelineRow(e, !!openIds[e.id]); }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Timeline</h3>" +
+      '<button class="w-btn tiny" data-w-act="timeline" title="The whole clinical history on one page">' + ms("open_in_full") + "Open full history</button>" +
+      '<button class="w-ic" data-w-act="open:' + esc((state.sel || {}).encounterId || "") + '" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (rows ? "<ul class=\"w-timeline\">" + rows + "</ul>" : '<p class="w-empty">Nothing recorded yet.</p>') +
+      timelineGapHint(state) +
+      "</div>";
+  }
+
+  /* THE WHOLE CLINICAL HISTORY, ON ONE PAGE, WITH SOMEWHERE TO WRITE.
+   *
+   * The timeline was a card among a dozen other cards, which is the wrong shape for the one thing a
+   * doctor picking up an unfamiliar patient actually does first: read the stay from the beginning.
+   * It is now a page of its own, and the note box sits at the top of it, because the note a ward
+   * round produces is written WHILE reading the history that prompted it, not on a different screen.
+   *
+   * Notes are append-only here as everywhere else: there is no edit and no delete. A correction is a
+   * new note, exactly as a corrected discharge summary is a new signed version. */
+  function timelineOpen() {
+    var s = st.sel; if (!s) return;
+    st.view = "timeline"; st.noteErr = ""; paint();
+    if (st.timeline == null) loadChart();
+  }
+  /* Opening the report an order produced. The investigations screen is where results are read, and
+   * this takes the reader there with the report already picked out, rather than building a second
+   * place to read a result that could drift from the first. */
+  /* Opens the record behind a timeline line. The argument carries the type and the id together
+   * because a record id alone does not say what it is, and the record service refuses a type it
+   * was not given. */
+  function timelineDetail(arg) {
+    var parts = String(arg || "").split("~");
+    var type = parts[0], id = parts.slice(1).join("~");
+    if (!type || !id) return;
+    st.recordDetail = { loading: true };
+    paint();
+    apiGet("/ward/record-detail?orgId=" + encodeURIComponent(st.orgId) +
+      "&type=" + encodeURIComponent(type) + "&id=" + encodeURIComponent(id))
+      .then(function (r) { st.recordDetail = r || { ok: false, error: "no_response" }; paint(); })
+      .catch(function () { st.recordDetail = { ok: false, detail: "Could not open that record." }; paint(); });
+  }
+  function timelineOpenReport(reportId) {
+    if (!reportId) return;
+    /* Results are read in the Investigations card on the chart - there is no separate results
+     * screen, and adding one would be a second place to read a result that could drift from the
+     * first. So this goes to the chart and marks the report the reader asked for. */
+    st.highlightReportId = reportId;
+    st.view = "chart";
+    paint();
+    loadInvestigations();
+  }
+  function timelineNoteSave() {
+    var s = st.sel; if (!s) return;
+    var text = val("wTlNote");
+    if (!text) { st.noteErr = "A note needs words."; paint(); return; }
+    st.noteDraft = text;               // survives the repaint, and every refusal below
+    st.busy = true; st.noteErr = ""; paint();
+    /* "progress" is the built-in free-text template every hospital has without configuring one
+     * (functions/_wardsynq/note-templates.js). A hospital that defines its own `progress` template
+     * replaces it, and this keeps working. */
+    apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: text } })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Note added." : null)) {
+          st.noteDraft = "";           // on the record now, so the draft has done its job
+          var el = document.getElementById("wTlNote"); if (el) el.value = "";
+          // Re-read rather than repaint from what the browser believes. A successful write that
+          // leaves the page showing the old story is the bug this codebase has already been bitten
+          // by on the flowsheet and the problem list.
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.noteErr = "Could not save that note."; paint(); });
+  }
+  function filterLabel(v) {
+    for (var i = 0; i < TIMELINE_FILTERS.length; i++) if (TIMELINE_FILTERS[i][0] === v) return TIMELINE_FILTERS[i][1];
+    return v;
+  }
+  function timelineView(state) {
+    var s = state.sel || {};
+    var t = state.timeline;
+    var shown = timelineFiltered(state);
+    var openIds = state.timelineOpen || {};
+    var rows = shown.map(function (e) { return timelineRow(e, !!openIds[e.id]); }).join("");
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
+        (s.mrn ? esc(s.mrn) + " &middot; " : "") + "clinical history</small></div>" +
+      '<button class="w-ic" data-w-act="timelineload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Add a clinical note</h3></div>" +
+      '<p class="w-hint">What has happened, what was found, what was done, and what happens next. It is added to this history and cannot be edited afterwards; a correction is a new note.</p>' +
+      /* The words survive a repaint. A refused save used to clear the box, so a clinician who was
+       * told "your role cannot do that" also lost the note they had just written - the one moment
+       * the text is most worth keeping, because the fix is to fetch someone who CAN sign it, not to
+       * type it again. st.noteDraft is held across paints and only cleared on a successful save. */
+      '<textarea id="wTlNote" class="w-input" rows="5" placeholder="Admitted with community-acquired pneumonia. Started on co-amoxiclav 1.2 g IV TDS. Observations improving, remains on 2 L oxygen.">' + esc(state.noteDraft || "") + "</textarea>" +
+      (state.noteErr ? '<p class="w-hint warn">' + ms("warning") + esc(state.noteErr) + "</p>" : "") +
+      '<button class="w-btn" data-w-act="timelinenote">' + ms("save") + "Add note</button></div>" +
+      detailPanel(state) +
+      '<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>History &middot; " + (t ? t.length : 0) + "</h3></div>" +
+      (t == null ? "" : timelineFilterBar(state)) +
+      /* The active filter is restated in words above the list. A reader who does not notice a
+       * filter is on is reading an incomplete history and does not know it, which is worse than a
+       * long list. */
+      (t != null && state.timelineFilter
+        ? '<p class="w-hint">' + ms("info") + "Showing only " + esc(filterLabel(state.timelineFilter)).toLowerCase() +
+          " &mdash; " + esc(shown.length) + " of " + esc(t.length) + ". " +
+          '<button class="w-btn ghost sm" data-w-act="timelinefilter:all">Show everything</button></p>'
+        : "") +
+      (t == null ? '<p class="w-empty">Loading the history.</p>'
+        : rows ? '<ul class="w-timeline">' + rows + "</ul>"
+        : state.timelineFilter ? '<p class="w-empty">Nothing of that kind on this stay.</p>'
+        : '<p class="w-empty">Nothing recorded on this stay yet.</p>') +
+      timelineGapHint(state) + "</div>";
+  }
+
   var VITALS = [
     { k: "sbp", l: "Systolic", u: "mmHg" }, { k: "dbp", l: "Diastolic", u: "mmHg" },
     { k: "pulse", l: "Pulse", u: "/min" }, { k: "rr", l: "Resp rate", u: "/min" },
@@ -901,15 +1298,20 @@
       // nothing left to do here.
       var canCollect = st_ === "none" || st_ === "failed";
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
-        '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
+        " " + '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + "Collect</button>" : "") +
       "</li>";
     }).join("");
 
     var results = (state.results || []).map(function (r) {
-      return "<li><b>" + esc(r.display) + "</b> <span>" + esc(r.status || "") + "</span>" +
+      /* Arriving from the timeline's "Open the report" button, the report asked for is marked -
+       * a card that scrolls to a list of eight results and highlights none of them has not really
+       * opened anything. */
+      var picked = state.highlightReportId && r.id === state.highlightReportId;
+      return '<li' + (picked ? ' class="w-res-on"' : "") + "><b>" + esc(r.display) + "</b> <span>" + esc(r.status || "") + "</span>" +
+        (picked ? ' <span class="w-st due">the one you opened</span>' : "") +
         (r.conclusion ? "<div>" + esc(r.conclusion) + "</div>" : "") +
-        '<small>' + when(r.reportedAt) + "</small></li>";
+        "<small>" + when(r.reportedAt) + "</small></li>";
     }).join("");
 
     return '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Investigations</h3>" +
@@ -939,12 +1341,43 @@
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
       : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
-        "<div><b>" + esc(s.patientId || "") + "</b><small>" + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+        // A human on the ward reads a name and an MR number, not a record id: the ward list's own
+        // roster join (functions/_wardsynq/migrate-inpatient.js listWard) already carries both on
+        // this same object, and the header is now the second of two places that used to ignore them
+        // - found 2026-09-12, same defect, different screen.
+        "<div><b>" + esc(s.name || s.patientId || "") + "</b><small>" + (s.name && s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
         // The summary is reachable from the patient, not from a menu somewhere else. A planned
         // discharge is prepared while the patient is still on the ward, so this is not gated on the
         // stay being closed - the summary screen states plainly when a stay is still open.
+        /* The whole visit in one screen and one save. It sits first because it is the commonest
+         * thing a doctor at the bedside is actually here to do, and because doing it here is safer
+         * than doing the same five things through five separate buttons: one save means one honest
+         * answer about what reached the chart. The individual buttons all still work. */
+        '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
+        /* First, because it is the screen a doctor picking up an unfamiliar patient wants before
+         * any of the others: everything that changes what they may safely do, in one place. */
+        '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
+        '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
+        '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
+        '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
+        '<button class="w-btn ghost" data-w-act="tags" title="Issue a wristband and check the band on the patient">' + ms("how_to_reg") + "Wristband</button>" +
+        '<button class="w-btn ghost" data-w-act="patientsurgery" title="Operations for this patient and where each one stands">' + ms("fact_check") + "Operations</button>" +
+        '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
+        '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
+        '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
+        '<button class="w-btn ghost" data-w-act="documents" title="Consent forms, referral letters, outside reports">' + ms("description") + "Documents</button>" +
+        '<button class="w-btn ghost" data-w-act="referrals" title="Refer this patient to another specialty or facility, and follow the reply">' + ms("send") + "Referrals</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
+        // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
+        // patient does before anything else, and it is where the note box now lives.
+        '<button class="w-btn ghost" data-w-act="timeline" title="The whole clinical history on one page, and where you add a clinical note">' + ms("history") + "Timeline</button>" +
         '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
+        /* CLOSING THE STAY. A ward patient could have a discharge summary written and still never be
+         * discharged - the route that ends the stay had no button, so the bed board went on showing them
+         * in a bed they had left. Where they went is asked for, because "discharged" alone does not say
+         * home, another hospital, or died. */
+        '<button class="w-btn ghost" data-w-act="wardcloseopen" title="End this stay and record where the patient went">' + ms("home") + "Discharge</button>" +
+        '<button class="w-btn ghost" data-w-act="followup" title="Ask for this patient to be seen again">' + ms("schedule") + "Follow-up</button>" +
         // ONCqis is a separate product; this is only the LINK into it. Reachable from any patient
         // because oncology is a workflow layered on the ordinary chart, not a ward of its own.
         '<button class="w-btn ghost" data-w-act="oncologyopen" title="ONCqis link, diagnosis, adverse events, chemo administration">' + ms("labs") + "Oncology</button>" +
@@ -984,7 +1417,7 @@
     return header +
       criticalsCard(state) + (isEd ? triageCard(state) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
-      problemsCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
+      problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + noteCard(state) + vitalsCard() + flowsheetCard(state) + fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
       (isNicu ? neonatalCard() + linesCard(state) : "") +
       ((isEd || isMaternity) ? resusCard(state) : "") + (isIcu ? deviceCard(state) : "") +
@@ -1021,10 +1454,19 @@
     var running = bundles.filter(function (b) { return b.state === "running" || b.state === "breached"; });
     var rows = running.map(function (b) {
       var els = b.elements.map(function (e) {
-        return "<li" + (e.done ? "" : e.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(e.label) + "</b>" +
-          (e.done ? '<span class="w-st administered">done ' + when(e.doneAt) + "</span>" : e.overdue ? '<span class="w-st overdue">overdue</span>' : '<span class="w-st">' + esc(Math.round(e.minutesRemaining || 0)) + " min left</span>") +
+        /* A waived element is a DECISION, not an omission: it is never shown as overdue or counting down,
+         * which would make a deliberate "not appropriate" read as forgotten care. */
+        return "<li" + (e.done || e.notApplicable ? "" : e.overdue ? ' class="overdue"' : "") + '><div class="w-dose-h"><b>' + esc(e.label) + "</b>" +
+          (e.done ? '<span class="w-st administered">done ' + when(e.doneAt) + "</span>"
+            : e.notApplicable ? '<span class="w-st">not appropriate' + (e.notApplicableReason || e.reason ? ": " + esc(e.notApplicableReason || e.reason) : "") + "</span>"
+            : e.overdue ? '<span class="w-st overdue">overdue</span>' : '<span class="w-st">' + esc(Math.round(e.minutesRemaining || 0)) + " min left</span>") +
           "</div>" +
-          (!e.done && !e.notApplicable ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="resusmark:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("task_alt") + "Mark done</button></div>" : "") +
+          (!e.done && !e.notApplicable ? '<div class="w-dose-a"><button class="w-btn tiny go" data-w-act="resusmark:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("task_alt") + "Mark done</button>" +
+            /* NOT DONE, ON PURPOSE. A bundle element that is deliberately not given - fluids withheld in
+             * heart failure, antibiotics already running - used to have no way to say so, so it sat as
+             * undone for ever and the bundle read as a failure of care rather than a decision. A waiver
+             * needs a reason, and it is recorded as a waiver, never as done. */
+            '<button class="w-btn tiny ghost" data-w-act="resuswaive:' + esc(b.bundleId) + "|" + esc(e.key) + '">' + ms("block") + "Not appropriate</button></div>" : "") +
           "</li>";
       }).join("");
       return '<div class="w-sub"><h4>' + ms("emergency") + esc(b.label) + '<span class="w-st ' + (b.state === "breached" ? "overdue" : "") + '">' + esc(b.state) + "</span></h4>" +
@@ -1354,10 +1796,17 @@
    * on its own when a real delivery is recorded (migrate-maternity.js), never edited here. */
   function pregnancyCard(state) {
     var p = state.maternity && state.maternity.pregnancy;
+    var ms_ = state.maternity && state.maternity.status;
+    /* A failed load is not "no pregnancy recorded". On a maternity ward that difference decides
+     * whether somebody asks about a pregnancy at all. */
+    var pregFailed = state.maternity && state.maternity.pregFailed;
     return '<div class="w-card"><div class="w-card-h">' + ms("pregnant_woman") + "<h3>Pregnancy</h3>" +
       '<button class="w-ic" data-w-act="maternityload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (ms_ && ms_.reason ? '<p class="w-hint' + (ms_.state === "postpartum" ? " warn" : "") + '">' + ms("info") + esc(ms_.reason) + "</p>" : "") +
+      (state.maternity && state.maternity.statusFailed ? '<p class="w-hint warn">' + ms("warning") + "Pregnancy status could not be read.</p>" : "") +
+      (pregFailed ? '<p class="w-hint warn">' + ms("warning") + "The pregnancy record could not be loaded. Do not read this as no pregnancy.</p>" : "") +
       (p ? '<p class="w-hint">' + ms("info") + "Gravida " + esc(p.gravida == null ? "?" : p.gravida) + ", para " + esc(p.para == null ? "?" : p.para) +
-        (p.gestationWeeks != null ? ", " + esc(p.gestationWeeks) + " weeks gestation" : "") + (p.edd ? ", EDD " + esc(p.edd) : "") + "</p>" : '<p class="w-empty">No pregnancy episode recorded.</p>') +
+        (p.gestationWeeks != null ? ", " + esc(p.gestationWeeks) + " weeks gestation" : "") + (p.edd ? ", EDD " + esc(p.edd) : "") + "</p>" : pregFailed ? "" : '<p class="w-empty">No pregnancy episode recorded.</p>') +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Gravida</span><input id="wPregGravida" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.gravida != null ? p.gravida : "") + '"></label>' +
       '<label class="w-f"><span>Para</span><input id="wPregPara" type="text" inputmode="numeric" autocomplete="off" value="' + esc(p && p.para != null ? p.para : "") + '"></label>' +
@@ -1474,6 +1923,21 @@
       '<label class="w-f"><span>Concentration (mg/mL)</span><input id="wRateConc" type="text" inputmode="decimal" autocomplete="off"></label>' +
       "</div>" +
       '<button class="w-btn ghost" data-w-act="ratecalc">' + ms("calculate") + "Calculate</button>" +
+      /* THE MOST A CHILD MAY HAVE. Weight times the mg/kg rule, capped at the adult maximum - a heavy
+       * teenager's weight-based dose can exceed what an adult is ever given. The engine's own reasons
+       * are shown, and "no weight recorded" is a refusal to calculate, never a number. */
+      '<h4>' + ms("calculate") + "Maximum dose for this child</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>mg per kg (from the drug rule)</span><input id="wLimMgKg" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="w-f"><span>Adult maximum mg (optional)</span><input id="wLimAdult" type="text" inputmode="decimal" autocomplete="off"></label>' +
+      "</div>" +
+      '<button class="w-btn ghost" data-w-act="childdoselimit">' + ms("calculate") + "Work out the maximum</button>" +
+      (state.limitResult
+        ? (state.limitResult.limitMg == null
+            ? '<p class="w-hint warn">' + ms("warning") + esc((state.limitResult.reasons || []).map(function (r) { return r.message; }).join("; ") || "No maximum could be worked out.") + "</p>"
+            : '<p class="w-hint' + (state.limitResult.cappedByAdult ? " warn" : "") + '">' + ms("info") + "Maximum " + esc(state.limitResult.limitMg) + " mg" +
+              ((state.limitResult.reasons || []).length ? " - " + esc(state.limitResult.reasons.map(function (r) { return r.message; }).join("; ")) : "") + "</p>")
+        : "") +
       (state.rateResult ? '<p class="w-hint' + (state.rateResult.weightWarning ? " warn" : "") + '">' + esc(state.rateResult.ratePerHour == null ? state.rateResult.reason : state.rateResult.workings + " = " + state.rateResult.ratePerHour + " mL/h") + "</p>" : "") +
       "</div></div>";
   }
@@ -1515,7 +1979,10 @@
         (a.extravasation && a.extravasation.occurred ? '<span class="w-st overdue">extravasation</span>' : "") + " &middot; " + when(a.startedAt) + "</span></li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    /* A part of this history that could not be read is said above everything, never shown as empty. */
+    var partialWarn = state.oncology && state.oncology.warning
+      ? '<p class="w-hint warn">' + ms("warning") + esc(state.oncology.warning) + "</p>" : "";
+    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Oncology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="oncologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -1571,7 +2038,10 @@
         '<span class="w-st overdue">unvalidated AI output</span> &middot; ' + when(e.capturedAt || e.recordedAt) + "</span></li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    /* A part of this history that could not be read is said above everything, never shown as empty. */
+    var partialWarn = state.cardiology && state.cardiology.warning
+      ? '<p class="w-hint warn">' + ms("warning") + esc(state.cardiology.warning) + "</p>" : "";
+    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Cardiology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="cardiologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -1742,7 +2212,14 @@
     var dispenseRows = dispenses.map(function (d) {
       return "<li><b>" + esc(d.drug) + "</b><span>" + esc(d.quantity && (d.quantity.value + " " + d.quantity.unit)) +
         (d.batch ? " &middot; batch " + esc(d.batch) : "") + (d.expiry ? " &middot; exp " + esc(d.expiry) : "") +
-        " &middot; " + when(d.dispensedAt) + "</span></li>";
+        " &middot; " + when(d.dispensedAt) + "</span>" +
+        /* A medicine handed back - the patient was discharged, the order stopped, the wrong strength
+         * went up - has to come back onto the record, or the stock count believes it is still out on
+         * the ward. Returned ones say so and are never returned twice. */
+        (d.returnedAt
+          ? ' <span class="w-st">returned ' + when(d.returnedAt) + (d.returnReason ? ": " + esc(d.returnReason) : "") + "</span>"
+          : ' <button class="w-btn ghost tiny" data-w-act="dispensereturn:' + esc(d.dispenseId) + '">' + ms("undo") + "Returned</button>") +
+        "</li>";
     }).join("");
 
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
@@ -2060,6 +2537,94 @@
     return head + body + prov + preview + acts + "</div>";
   }
 
+  /* The bench, in the order work actually moves: to be collected, in transit, awaiting a result,
+   * and whatever has gone critical. Counts sit in every heading because "12 specimens uncollected"
+   * is the number a shift decides on, and an empty section names WHAT is empty rather than saying
+   * "None", which reads as a rendering failure. */
+  /* RESULT ENTRY. Values are recorded exactly as typed - a number where it is a number, text where it
+   * is not, never coerced either way (lab-result.js's own rule). Rows the server rejects are shown by
+   * name with the reason, rather than the save being reported as a success for the rows that landed:
+   * a potassium that silently failed to save is a potassium nobody acts on. */
+  function labResultForm(state) {
+    var f = state.labResultFor;
+    if (!f) return "";
+    var r = state.labResultOutcome;
+    var rows = "";
+    for (var i = 0; i < 6; i++) {
+      rows += '<div class="w-grid">' +
+        '<label class="w-f"><span>Test</span><input id="wLrTest' + i + '"' + (i === 0 ? ' value="' + esc(f.display || f.code || "") + '"' : "") + "></label>" +
+        '<label class="w-f"><span>Result</span><input id="wLrVal' + i + '"></label>' +
+        '<label class="w-f"><span>Unit</span><input id="wLrUnit' + i + '"></label></div>';
+    }
+    return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Result for " + esc(f.display || f.code) + "</h3>" +
+      '<button class="w-ic" data-w-act="labresultclose" title="Close">' + ms("close") + "</button></div>" +
+      '<p class="w-hint">' + ms("info") + "Type each value as the analyser reported it. Nothing is converted or rounded. Leave unused rows empty." + "</p>" +
+      rows +
+      '<select id="wLrStatus"><option value="final">Final</option><option value="preliminary">Preliminary</option></select>' +
+      '<textarea id="wLrConc" rows="2" placeholder="Comment or conclusion (optional)"></textarea>' +
+      '<button class="w-btn" data-w-act="labresultsave">' + ms("send") + "Release result</button>" +
+      (r && r.rejected && r.rejected.length
+        ? '<p class="w-hint warn">' + ms("warning") + "Not saved: " + esc(r.rejected.map(function (x) { return (x.test || "row " + (x.index + 1)) + " (" + x.reason + ")"; }).join(", ")) + "</p>"
+        : "") +
+      "</div>";
+  }
+  function labBoardView(state) {
+    var b = state.labBoard || { specimens: [], pending: [], criticals: [], errors: [] };
+    var none = function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
+    var stateOf = function (s) { return (s && s.collection && s.collection.state) || "none"; };
+    var spec = b.specimens || [];
+    var uncollected = spec.filter(function (s) { return stateOf(s) === "none" || stateOf(s) === "failed"; });
+    var inTransit = spec.filter(function (s) { return stateOf(s) === "collected"; });
+    var pri = function (s) { return s.priority === "stat" ? "overdue" : s.priority === "urgent" ? "failed" : ""; };
+    var specRow = function (s) {
+      return '<li class="' + pri(s) + '"><div class="w-crit-h"><b>' + esc(s.display || s.code) + "</b>" +
+        (s.priority && s.priority !== "routine" ? '<span class="w-st ' + esc(s.priority) + '">' + esc(String(s.priority).toUpperCase()) + "</span>" : "") +
+        "</div><div class=\"w-crit-m\">" + ms("person") + labWho(s.patientId) +
+        (s.category ? " &middot; " + esc(s.category) : "") + "</div></li>";
+    };
+    /* A test awaiting a result used to be a line with nothing to do: the laboratory board listed what
+     * was waiting and gave the laboratory no way to report it. The button opens the entry form for
+     * that one request, so a result is always reported AGAINST the order that asked for it. */
+    var pendRow = function (p) {
+      return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
+        '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div>" +
+        '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + "Enter result</button></li>";
+    };
+    var critRow = function (c) {
+      var e = c.escalation || {};
+      return '<li class="lvl-' + esc(e.level || "due") + '"><div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
+        '</div><div class="w-crit-m">' + ms("person") + labWho(c.patientId) +
+        (e.minutesOpen == null ? "" : " &middot; " + e.minutesOpen + " min open") + "</div></li>";
+    };
+    var card = function (icon, title, n, rows, emptyWords) {
+      return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + " &middot; " + n + "</h3></div>" +
+        (n ? '<ul class="w-crits">' + rows + "</ul>" : none(emptyWords)) + "</div>";
+    };
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Laboratory</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="labboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (b.errors && b.errors.length
+        ? '<div class="w-card warn"><div class="w-card-h">' + ms("error") + "<h3>Could not be read</h3></div>" +
+          "<p>" + esc(b.errors.join(", ")) + ". What is shown below is incomplete.</p></div>"
+        : "") +
+      card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.") +
+      /* A sample in transit is either received or failed, and the laboratory is who says which. Both
+       * used to be impossible from here - the list showed what was on its way and offered nothing.
+       * A failure needs a reason, because "take it again" is the action and the ward needs to know
+       * whether it was clotted or haemolysed or never arrived. */
+      card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(function (sp) {
+        var id = sp.collection && sp.collection.specimenId;
+        return specRow(sp).replace(/<\/li>$/, "") +
+          (id
+            ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + "Received</button>" +
+              '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + "Failed</button>"
+            : "") + "</li>";
+      }).join(""), "Nothing in transit.") +
+      labResultForm(state) +
+      card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") +
+      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.");
+  }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
     var rows = loops.map(function (c) {
@@ -2081,6 +2646,244 @@
       '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops &middot; " + loops.length + "</h3></div>" +
       '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
       (rows ? '<ul class="w-crits">' + rows + "</ul>" : '<p class="w-empty">No open critical results anywhere right now.</p>') +
+      "</div>";
+  }
+
+  /* THE RADIOLOGY BOARD. Every other department (ED, theatre, pharmacy stock, critical results) has
+   * a hospital-wide board; imaging had a backend (dicom.js, radiology-report.js) and nowhere for a
+   * radiographer or radiologist to land. This is that screen, built from exactly three routes:
+   * GET imaging-worklist, POST report-imaging, GET criticals.
+   *
+   * imaging-worklist IS A DICOM MODALITY WORKLIST: every item on it is, by definition, still to be
+   * performed - that is what a worklist is. This hospital touches no field when a study is actually
+   * acquired (landing an ImagingStudy from a PACS never writes back to the ServiceRequest, see
+   * dicom.js/wardsynq-sccm-adapter.js) and reportImaging() never flips the order's status either, so
+   * there is no signal anywhere this screen is allowed to read that would split "not yet scanned"
+   * from "scanned, not yet reported" - both are simply "on the worklist, not yet reported here". This
+   * board says exactly that, in one honest section, rather than inventing a split the data does not
+   * support. "Reported this session" is genuinely this board's own session - there is no hospital-
+   * wide reported-studies list among these three routes, so that is stated rather than dressed up as
+   * more history than it is. Priority is read defensively from a DICOM tag this worklist does not
+   * currently emit: absent means "not recorded", never "routine" - a priority this screen never saw
+   * is not one it may guess at.
+   *
+   * NO SPECIMEN, NO COLLECT ACTION. A plain radiograph has nothing to collect; an imaging order is
+   * acquired, not collected. This board never reads /ward/collections (the generic specimen/
+   * collection tracker every ServiceRequest carries, imaging included, and the one place a "Collect"
+   * button could wrongly appear for a chest X-ray), so that mistake cannot happen here. */
+  function radWorklistTagStr(tag) { return (tag && tag.Value && tag.Value.length) ? String(tag.Value[0]) : ""; }
+  function radPatientDisplayName(tag) {
+    var s = radWorklistTagStr(tag); if (!s) return "";
+    var parts = s.split("^");
+    return parts.length > 1 ? (parts[1] + " " + parts[0]).replace(/\s+/g, " ").trim() : s;
+  }
+  function radDicomDateTime(date, time) {
+    if (!date || date.length < 8) return "";
+    var iso = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
+    if (time && time.length >= 6) iso += "T" + time.slice(0, 2) + ":" + time.slice(2, 4) + ":" + time.slice(4, 6);
+    return iso;
+  }
+  function radWaitLabel(iso) {
+    if (!iso) return "";
+    var ms_ = Date.now() - new Date(iso).getTime();
+    if (!(ms_ >= 0)) return "";
+    var mins = Math.floor(ms_ / 60000);
+    if (mins < 60) return mins + " min";
+    return Math.floor(mins / 60) + "h " + (mins % 60) + "m";
+  }
+  /** PURE. One DICOM-JSON worklist item into the fields this board renders. */
+  function radWorklistRow(item) {
+    item = item || {};
+    var step = item["00400100"] && item["00400100"].Value && item["00400100"].Value[0];
+    var date = step && radWorklistTagStr(step["00400002"]);
+    var time = step && radWorklistTagStr(step["00400003"]);
+    return {
+      orderId: radWorklistTagStr(item["00080050"]),
+      name: radPatientDisplayName(item["00100010"]),
+      mrn: radWorklistTagStr(item["00100020"]),
+      procedure: radWorklistTagStr(item["00321060"]),
+      modality: (step && radWorklistTagStr(step["00080060"])) || "",
+      priority: radWorklistTagStr(item["00401003"]).toLowerCase(),
+      orderedAt: radDicomDateTime(date, time),
+    };
+  }
+  /** A critical loop opened against a radiology report. Report ids are "wsq-rad-<slug>"
+   *  (radiology-report.js's reportIdFor) versus a lab result's "wsq-dr-<slug>" - the only field
+   *  the criticals list carries that says which department a loop belongs to. */
+  function radCriticalOf(loop) { return !!(loop && typeof loop.reportId === "string" && loop.reportId.indexOf("wsq-rad-") === 0); }
+  var RAD_PRIORITY_WORDS = { stat: "STAT", urgent: "Urgent", routine: "Routine" };
+  var RAD_PRIORITY_CLASS = { stat: "overdue", urgent: "failed" };
+  /* THE LABORATORY BOARD. The bench had no screen of its own: specimens and pending tests could only
+   * ever be read one chart at a time (collectionList and pendingRequests were per-patient and
+   * answered 422 without a patientId), so the only way to see the department's work was to open
+   * eighty charts. Both reads now take scope=hospital - see the comments on those two functions for
+   * why the opt-in is an explicit word and not a missing parameter.
+   *
+   * NAMES, NOT RECORD IDS. Every row is joined against the ward roster, which already carries name
+   * and MRN, because a specimen tube identified only by "opd-pat-smd-demo-00020" cannot be checked
+   * against a wristband. Where the join misses (an outpatient, a discharged stay) the row says so
+   * rather than printing the id and calling it a name. */
+  function labPatientName(pid) {
+    var list = st.list || [];
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].patientId === pid) return list[i];
+    return null;
+  }
+  function labWho(pid) {
+    var p = labPatientName(pid);
+    if (p) return esc(p.name || p.patientId) + (p.mrn ? " &middot; " + esc(p.mrn) : "");
+    return '<i>not on the ward list</i>';
+  }
+  function labBoardOpen() {
+    st.view = "labboard"; st.labBoard = { specimens: [], pending: [], criticals: [], errors: [] }; paint(); loadLabBoard();
+  }
+  /* Four reads, and a failure in ANY of them is recorded BY NAME rather than left as an empty list.
+   * On this screen "nothing outstanding" and "could not tell" must never look the same: one of them
+   * means a specimen is sitting somewhere and nobody knows it. Same discipline as loadIntegration. */
+  function loadLabBoard() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var out = { specimens: [], pending: [], criticals: [], errors: [] };
+    var read = function (name, path, fn) {
+      return apiGet(path).then(function (r) {
+        if (r && r.ok) fn(r); else out.errors.push(name);
+      }).catch(function () { out.errors.push(name); });
+    };
+    return Promise.all([
+      read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
+      read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
+      read("critical results", "/ward/criticals?" + q, function (r) {
+        // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
+        out.criticals = (r.loops || []).filter(function (l) { return !radCriticalOf(l); });
+      }),
+      // The roster is what turns a patientId into a name. Its failure is not fatal to the board:
+      // the rows still render, they just cannot be named, and labWho says so per row.
+      read("ward roster", "/ward/list?" + q, function (r) { st.list = r.patients || st.list || []; }),
+    ]).then(function () { st.busy = false; st.labBoard = out; paint(); });
+  }
+  function radBoardOpen() {
+    st.view = "radboard"; st.radBoard = { requested: [], reported: [], criticals: [], errors: [], picked: null }; paint(); loadRadBoard();
+  }
+  function loadRadBoard() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    var prev = st.radBoard || {};
+    var out = { requested: [], reported: prev.reported || [], criticals: [], errors: [], picked: prev.picked || null };
+    var reportedIds = {}; out.reported.forEach(function (x) { reportedIds[x.orderId] = 1; });
+    return Promise.all([
+      apiGet("/ward/imaging-worklist?" + q)
+        .then(function (r) {
+          if (r && r.ok) out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
+          else out.errors.push("imaging worklist");
+        })
+        .catch(function () { out.errors.push("imaging worklist"); }),
+      apiGet("/ward/criticals?" + q)
+        .then(function (r) { if (r && r.ok) out.criticals = (r.loops || []).filter(radCriticalOf); else out.errors.push("critical findings"); })
+        .catch(function () { out.errors.push("critical findings"); }),
+    ]).then(function () { st.busy = false; st.radBoard = out; paint(); });
+  }
+  function radBoardPick(orderId) {
+    if (!st.radBoard) st.radBoard = {};
+    st.radBoard.picked = orderId || null; paint();
+  }
+  function radBoardReportSave() {
+    var b = st.radBoard, picked = b && b.picked; if (!picked) return;
+    var modality = val("wRadBModality"), status = val("wRadBStatus"), findings = val("wRadBFindings"), impression = val("wRadBImpression");
+    var critical = !!(document.getElementById("wRadBCritical") || {}).checked;
+    if (!findings) { st.err = "Say what was seen; the impression may follow."; paint(); return; }
+    var row = null;
+    for (var i = 0; i < (b.requested || []).length; i++) { if (b.requested[i].orderId === picked) { row = b.requested[i]; break; } }
+    st.busy = true; paint();
+    apiPost("/ward/report-imaging", { orgId: st.orgId, serviceRequestId: picked, modality: modality || undefined, status: status || "preliminary", findings: findings, impression: impression || undefined, critical: critical })
+      .then(function (r) {
+        if (r && r.error === "impression_required") { st.busy = false; st.err = "A final report needs an impression; release it as preliminary if it is not ready."; paint(); return; }
+        var msg = r && r.discrepancy
+          ? "Released. The impression changed from a reading that may already have been acted on - flagged as a discrepancy on the record."
+          : (r && r.critical ? "Released. Critical finding - a closed loop was opened." : "Released.");
+        if (!settle(r, msg)) { paint(); return; }
+        b.reported.unshift({ orderId: picked, name: row && row.name, mrn: row && row.mrn, modality: modality || (row && row.modality) || "", status: status || "preliminary", discrepancy: !!(r && r.discrepancy), reportedAt: new Date().toISOString() });
+        b.picked = null;
+        loadRadBoard();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not release the report."; paint(); });
+  }
+  function radBoardFormHtml(row) {
+    return '<div class="w-sub"><h4>' + ms("edit_note") + "File report &middot; " + esc((row && row.name) || "Unknown patient") + (row && row.mrn ? " (" + esc(row.mrn) + ")" : "") + "</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Modality</span><input id="wRadBModality" type="text" autocomplete="off" placeholder="e.g. CT, XR, US, MR" value="' + esc((row && row.modality) || "") + '"></label>' +
+      '<label class="w-f"><span>Status</span><select id="wRadBStatus"><option value="preliminary">Preliminary</option><option value="final">Final</option><option value="corrected">Corrected</option></select></label>' +
+      "</div>" +
+      '<label class="w-f"><span>Findings</span><textarea id="wRadBFindings" rows="3"></textarea></label>' +
+      '<label class="w-f"><span>Impression</span><textarea id="wRadBImpression" rows="2"></textarea></label>' +
+      '<label class="w-chk"><input type="checkbox" id="wRadBCritical"> Critical finding - opens the same closed-loop notification a critical lab value does</label>' +
+      '<div class="w-maik-acts"><button class="w-btn go" data-w-act="radboardreportsave">' + ms("send") + "Release report</button>" +
+      '<button class="w-btn ghost" data-w-act="radboardpick:">' + ms("close") + "Cancel</button></div>" +
+      '<p class="w-hint">' + ms("info") + "A final report needs an impression. A changed impression from a preliminary reading is flagged as a discrepancy, never silently overwritten." + "</p></div>";
+  }
+  function radBoardView(state) {
+    var b = state.radBoard || {};
+    var errs = b.errors || [];
+    var requested = b.requested || [];
+    var reported = b.reported || [];
+    var criticals = b.criticals || [];
+    var picked = b.picked;
+    var unreachable = function (what) { return errs.indexOf(what) >= 0; };
+    var pickedRow = null;
+    for (var i = 0; i < requested.length; i++) { if (requested[i].orderId === picked) { pickedRow = requested[i]; break; } }
+
+    var reqRows = requested.map(function (s) {
+      var pr = s.priority, prCls = RAD_PRIORITY_CLASS[pr] || "";
+      return '<li' + (s.orderId === picked ? ' class="picked"' : '') + '>' +
+        '<div class="w-crit-h"><b>' + esc(s.name || "Unknown patient") + "</b>" +
+        '<span class="w-crit-v">' + esc(s.mrn || "no MRN on record") + "</span>" +
+        (pr ? '<span class="w-st ' + prCls + '">' + esc(RAD_PRIORITY_WORDS[pr] || pr) + "</span>" : "") +
+        "</div>" +
+        '<div class="w-crit-m">' + esc(s.procedure || "Imaging study") +
+        (s.modality ? " &middot; " + esc(s.modality) : " &middot; modality not mapped") +
+        (s.orderedAt ? " &middot; waiting " + radWaitLabel(s.orderedAt) : "") + "</div>" +
+        '<button class="w-btn tiny go" data-w-act="radboardpick:' + esc(s.orderId) + '">' + ms("edit_note") + "File report</button>" +
+      "</li>";
+    }).join("");
+
+    var repRows = reported.map(function (r) {
+      return "<li><b>" + esc(r.name || "Unknown patient") + "</b> <span>" + esc(r.mrn || "") + "</span>" +
+        '<div class="w-crit-m">' + esc(r.modality || "modality not recorded") + " &middot; " + esc(r.status || "preliminary") +
+        (r.discrepancy ? " &middot; discrepancy flagged" : "") + " &middot; " + when(r.reportedAt) + "</div></li>";
+    }).join("");
+
+    var critRows = criticals.map(function (c) {
+      var esc_ = c.escalation || {}, mins = esc_.minutesOpen;
+      return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
+        '<div class="w-crit-h"><b>' + esc(c.display || c.code || "Critical finding") + "</b></div>" +
+        '<div class="w-crit-m">' + ms("person") + esc(c.patientId || "") +
+        (mins == null ? "" : " &middot; " + mins + " min since reported") +
+        (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") + "</div>" +
+      "</li>";
+    }).join("");
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Radiology</b><small>hospital-wide</small></div>" +
+      '<button class="w-ic" data-w-act="radboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
+
+      (errs.length ? '<p class="w-hint warn">' + ms("warning") + "Some of this could not be read (" + esc(errs.join(", ")) +
+        "). What is shown below is incomplete: do not read an empty section here as nothing outstanding.</p>" : "") +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("list") + "<h3>Requested &middot; " + requested.length + "</h3></div>" +
+      '<p class="w-hint">This hospital does not record a separate acquisition step for imaging: a study stays on this list from the order until it is reported here, whether or not it has been scanned yet.</p>' +
+      (unreachable("imaging worklist") ? '<p class="w-empty warn">The imaging worklist could not be read.</p>'
+        : reqRows ? '<ul class="w-crits">' + reqRows + "</ul>"
+        : '<p class="w-empty">No studies awaiting acquisition or a report.</p>') +
+      (pickedRow ? radBoardFormHtml(pickedRow) : "") +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Reported this session &middot; " + reported.length + "</h3></div>" +
+      '<p class="w-hint">Reports filed from this board since it was opened, most recent first. There is no hospital-wide reported-studies list to read back here.</p>' +
+      (repRows ? '<ul class="w-mini">' + repRows + "</ul>" : '<p class="w-empty">No studies reported yet this session.</p>') +
+      "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Critical findings &middot; " + criticals.length + "</h3></div>" +
+      (unreachable("critical findings") ? '<p class="w-empty warn">Critical findings could not be read.</p>'
+        : critRows ? '<ul class="w-crits">' + critRows + "</ul>"
+        : '<p class="w-empty">No open critical findings for radiology right now.</p>') +
       "</div>";
   }
 
@@ -2154,7 +2957,7 @@
       "<p class=\"w-hint\">Available " + esc(f.beds.states.available) + " &middot; Reserved " + esc(f.beds.states.reserved) +
       " &middot; Blocked " + esc(f.beds.states.blocked) + " &middot; Cleaning " + esc(f.beds.states.cleaning) + " &middot; Maintenance " + esc(f.beds.states.maintenance) + "</p></div>" +
 
-      '<div class="w-card"><div class="w-card-h">' + ms("hourglass_top") + "<h3>Admissions pending</h3></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("schedule") + "<h3>Admissions pending</h3></div>" +
       "<p>" + esc(f.admissionsPending.waiting) + " waiting &middot; longest wait " + esc(f.admissionsPending.longestWaitHours) + " h</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>Discharge</h3></div>" +
@@ -2352,6 +3155,27 @@
    * a later, explicitly-scoped task, not assumed here. */
   var INVOICE_STATUS_WORDS = { open: "Open", paid: "Paid", void: "Void" };
   var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided" };
+  /* WHAT HAS NOT BEEN BILLED YET, AND CLAIMS WORTH A SECOND LOOK.
+   * Unbilled charges are the priced items no invoice has picked up; unpriced ones are shown too, because
+   * an item with no price is not free, it is a gap in the price list. The coding watchlist lists claims
+   * whose clinical coding changed after a payer refused them - each may be a legitimate correction, and
+   * each is shown so a person decides. Both say when they could not be loaded. */
+  function cashExtras(c) {
+    var ch = c.charges, w = c.watch;
+    var chBody = !ch ? '<p class="w-empty">Loading.</p>'
+      : ch.failed ? '<p class="w-hint warn">' + ms("warning") + "Unbilled charges could not be loaded. Do not read this as nothing to bill.</p>"
+      : '<ul class="w-mini">' +
+          (ch.priced || []).map(function (i) { return "<li>" + esc(i.display || i.code) + " &middot; " + esc(i.amount) + "</li>"; }).join("") +
+          (ch.unpriced || []).map(function (i) { return '<li><span class="w-st due">no price set</span> ' + esc(i.display || i.code) + "</li>"; }).join("") +
+        "</ul>" +
+        (ch.tariffWarning ? '<p class="w-hint warn">' + ms("warning") + esc(ch.tariffWarning) + "</p>" : "") +
+        (!(ch.priced || []).length && !(ch.unpriced || []).length ? '<p class="w-empty">Nothing waiting to be billed.</p>' : "");
+    var wBody = !w ? '<p class="w-empty">Loading.</p>'
+      : w.failed ? '<p class="w-hint warn">' + ms("warning") + "The coding watchlist could not be loaded.</p>"
+      : (w.count ? '<p class="w-hint warn">' + ms("warning") + esc(w.reading) + "</p>" : '<p class="w-empty">No claims need a second look.</p>');
+    return '<div class="w-card"><div class="w-card-h">' + ms("receipt_long") + "<h3>Not billed yet</h3></div>" + chBody + "</div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Claims worth a second look</h3></div>" + wBody + "</div>";
+  }
   function cashierView(state) {
     var c = state.cashier || {};
     var invoices = c.invoices || [];
@@ -2379,6 +3203,7 @@
           '<button class="w-btn tiny ghost" data-w-act="invrefund:' + esc(inv.invoiceId) + '">' + ms("undo") + "Refund</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invadjust:' + esc(inv.invoiceId) + '">' + ms("tune") + "Adjustment</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invwriteoff:' + esc(inv.invoiceId) + '">' + ms("remove_circle") + "Write off</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invvoid:' + esc(inv.invoiceId) + '">' + ms("block") + "Cancel this bill</button>" +
           "</div>" : "") + "</div>";
     }).join("");
 
@@ -2392,12 +3217,19 @@
       '<label class="w-f"><span>MRN</span><input id="wCashMrn" type="text" autocomplete="off" value="' + esc(c.mrn || "") + '"></label>' +
       "</div>" +
       '<button class="w-btn go" data-w-act="cashlookup">' + ms("search") + "Look up</button>" +
-      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.patientId) + "</small></p>" : "") + "</div>" +
+      /* THE SECOND LINE IS THE MRN, NOT THE RECORD ID. A cashier checks a patient against the number
+       * on their bill or their card, and "opd-pat-smd-6teqzm-00025" is neither: it is this system's
+       * own internal key, meaningless to hold up against anything a patient is carrying. c.mrn is
+       * exactly what she just typed to find this person, so it costs nothing extra to show back. */
+      (c.patientId ? "<p><b>" + esc(c.patientName || c.patientId) + "</b><br><small>" + esc(c.mrn || c.patientId) + "</small></p>" : "") + "</div>" +
 
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>Outstanding balance</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
         '<button class="w-btn" data-w-act="cashraise">' + ms("receipt_long") + "Raise invoice from today's charges</button>" +
-        (invRows || '<p class="w-empty">No invoices for this patient yet.</p>') + "</div>" : "") +
+        (c.invoicesFailed
+          ? '<p class="w-hint warn">' + ms("warning") + "The bills could not be loaded. Do not read this as nothing owed.</p>"
+          : (invRows || '<p class="w-empty">No invoices for this patient yet.</p>')) + "</div>" : "") +
+      (c.patientId ? cashExtras(c) : "") +
 
       '<div class="w-card"><div class="w-card-h">' + ms("payments") + "<h3>Post an amount</h3></div>" +
       '<p class="w-hint">Applies to whichever invoice button above you use. A discount, an adjustment and a write-off all require a reason; a plain payment or deposit does not.</p>' +
@@ -2405,8 +3237,38 @@
       '<label class="w-f"><span>Amount</span><input id="wCashAmount" type="text" inputmode="decimal" autocomplete="off"></label>' +
       '<label class="w-f"><span>Reason (where required)</span><input id="wCashReason" type="text" autocomplete="off"></label>' +
       '<label class="w-f"><span>Reference (optional)</span><input id="wCashReference" type="text" autocomplete="off"></label>' +
-      "</div></div>";
+      "</div>" +
+      /* HOW THE MONEY WAS TAKEN, for a payment or a deposit. Only the fields that method actually
+       * needs are asked for, so a cashier taking cash is not faced with a UTR box. The server is the
+       * one that refuses an incomplete collection; this just asks for the right things first.
+       *
+       * There is deliberately no "confirmed by the card machine" tick. A payment recorded here is
+       * recorded as typed in, and only a card terminal's own reply can ever mark it confirmed - a
+       * screen that let a cashier claim that would make the day's takings unreconcilable. */
+      '<div class="w-sub"><h4>How was it paid</h4>' +
+      '<select id="wCashMethod">' + CASH_METHODS.map(function (m) {
+        return '<option value="' + esc(m[0]) + '"' + (state.cashMethod === m[0] ? " selected" : "") + ">" + esc(m[1]) + "</option>";
+      }).join("") + "</select>" +
+      '<button class="w-btn ghost sm" data-w-act="cashmethod">Use this method</button>' +
+      '<div class="w-grid">' + (CASH_METHOD_NEEDS[state.cashMethod || "cash"] || []).map(function (f) {
+        return '<label class="w-f"><span>' + esc(CASH_FIELD_WORDS[f] || f) + '</span><input id="wPay_' + esc(f) + '" type="text" autocomplete="off"></label>';
+      }).join("") + "</div>" +
+      '<p class="w-hint">' + ms("info") + "This records what the slip, screen or drawer says. It is never marked as confirmed by a card machine from here." + "</p></div>" +
+      "</div>";
   }
+  var CASH_METHODS = [["cash", "Cash"], ["upi", "UPI"], ["card", "Card"], ["neft", "NEFT"], ["rtgs", "RTGS"],
+    ["imps", "IMPS"], ["bank-transfer", "Bank transfer"], ["cheque", "Cheque"], ["online", "Online"], ["other", "Other"]];
+  /* Mirrors what wardsynq-payment-methods.js requires, so the right boxes appear. The server's copy
+   * is the authority; if the two ever disagree, the server refuses and says what is missing. */
+  var CASH_METHOD_NEEDS = {
+    cash: ["counter", "cashier"], upi: ["reference"], card: ["terminal", "reference"],
+    neft: ["utr", "bank", "payer"], rtgs: ["utr", "bank", "payer"], imps: ["utr", "bank", "payer"],
+    "bank-transfer": ["utr", "bank", "payer"], cheque: ["reference", "bank"], online: ["reference"], other: ["reference"],
+  };
+  var CASH_FIELD_WORDS = {
+    counter: "Counter", cashier: "Cashier", reference: "Reference", terminal: "Card machine",
+    utr: "UTR number", bank: "Bank", payer: "Paid by",
+  };
 
   /* TASK 3.5: the blood bank workstation. wardsynq-transfusion.js (HAZ-BLD-01) already enforces
    * everything hazardous here - ABO/RhD compatibility, a crossmatch bound to one patient, and a
@@ -2415,6 +3277,25 @@
    * and never lets the bedside-check button submit without both scans and both names present -
    * NO ONE-CLICK TRANSFUSE, enforced here as well as on the server. */
   var TXN_PHASE_WORDS = { requested: "Requested", crossmatched: "Crossmatched", issued: "Issued", checked: "Bedside check passed", transfusing: "Transfusing", completed: "Completed", stopped: "STOPPED" };
+  /* TRACING A BLOOD UNIT. Every movement of one bag - issued, checked, transfused, returned - from the
+   * record, in order. Asked when a reaction is reported or a donor is recalled, and the answer has to
+   * be complete: a trace that silently skipped a step is a trace that hides the step that mattered. */
+  function bloodTraceBlock(state) {
+    var t = state.bloodTrace;
+    return '<div class="w-card"><div class="w-card-h">' + ms("search") + "<h3>Trace a blood unit</h3></div>" +
+      '<input id="wTxTraceUnit" placeholder="Unit number on the bag">' +
+      '<button class="w-btn ghost" data-w-act="bloodtrace">' + ms("search") + "Trace</button>" +
+      (t == null ? ""
+        : !t.ok ? '<p class="w-hint warn">' + ms("warning") + "The trace could not be read. Do not treat this unit as untraced.</p>"
+        : (t.trace && t.trace.length)
+          ? '<ul class="w-mini">' + t.trace.map(function (x) {
+              return "<li>" + when(x.at) + " &middot; <b>" + esc(x.event || x.phase || "") + "</b>" +
+                (x.patientId ? " &middot; patient " + esc(x.patientId) : "") + (x.by || x.actorId ? " &middot; " + esc(x.by || x.actorId) : "") +
+                (x.detail ? " &middot; " + esc(typeof x.detail === "string" ? x.detail : JSON.stringify(x.detail)) : "") + "</li>";
+            }).join("") + "</ul>"
+          : '<p class="w-empty">No record of unit ' + esc(t.unitId) + ".</p>") +
+      "</div>";
+  }
   function transfusionView(state) {
     var tx = state.transfusion || {};
     var episodes = (tx.queue && tx.queue.episodes) || [];
@@ -2490,7 +3371,8 @@
 
       (ep && ep.phase === "stopped" && ep.reaction ? '<div class="w-card"><div class="w-card-h">' + ms("emergency") + "<h3>STOPPED - reaction</h3></div><p>" + esc(ep.reaction.detail || "") + "</p><p><small>" + when(ep.reaction.at) + " &middot; " + esc(ep.reaction.by) + "</small></p></div>" : "") +
 
-      (ep ? ('<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Ledger</h3></div>" + (ledgerRows ? '<ul class="w-mini">' + ledgerRows + "</ul>" : "") + "</div>") : "");
+      (ep ? ('<div class="w-card"><div class="w-card-h">' + ms("history") + "<h3>Ledger</h3></div>" + (ledgerRows ? '<ul class="w-mini">' + ledgerRows + "</ul>" : "") + "</div>") : "") +
+      bloodTraceBlock(state);
   }
 
   /* Open critical results, ABOVE everything else on the chart. A critical result that reaches a
@@ -2582,6 +3464,1274 @@
    * into a single number this screen invented. What each report's own body contains varies (a claim
    * count is not a stock level), so the body is listed generically as key: value rather than a
    * bespoke layout per report, which would be six more places to keep in sync with reports.js. */
+  /* reportsView() deliberately renders every report's own body generically (see the comment above
+   * REPORT_LABELS) - key: value, no bespoke layout per report. But some reports (patient flow, whose
+   * "flow" field is one big nested computation) put a structured object or array under that key, and
+   * JSON.stringify-ing it produced one unbroken line of raw JSON stretching the width of the page -
+   * unreadable, and looking like the screen was broken rather than just generic. This nests instead
+   * of flattening: an object becomes its own bulleted key: value list, an array becomes a bulleted
+   * list of its items, recursively - still nothing bespoke to any one report, just readable at any
+   * depth. */
+  /* THE CONSULTATION: ONE SCREEN, ONE SAVE.
+   *
+   * Everything below can already be written one piece at a time from the chart, and those buttons
+   * are staying - a nurse recording a set of observations should not have to open a consultation.
+   * What this screen adds is the act as the clinician actually performs it: examine, diagnose,
+   * prescribe, order, write it up, once, and press save once.
+   *
+   * The reason it is worth a screen of its own is what the old way did on failure. Five buttons
+   * meant five separate saves, each reporting into the same single error line, and whichever reply
+   * landed last won - so a refused prescription could be painted over by a successful note and the
+   * doctor would walk away believing the drug was ordered. Here the server takes all five together,
+   * checks the whole lot against what this person may write BEFORE it writes any of it, and if it
+   * cannot finish it says exactly which pieces reached the chart and which were never attempted.
+   * This screen shows that answer literally rather than reducing it to "saved" or "failed". */
+  function consultationResultView(r) {
+    if (!r) return "";
+    if (r.ok) return '<div class="w-sub"><h4>Saved</h4><p>' + esc(r.written) + " item" + (r.written === 1 ? "" : "s") + " written to the chart.</p></div>";
+    if (r.refused && r.refused.length) {
+      return '<div class="w-sub"><h4>Not saved - and nothing was written</h4>' +
+        "<p>This role may not write every part of this consultation, so none of it was saved. The chart is unchanged.</p><ul class=\"w-mini\">" +
+        r.refused.map(function (x) { return "<li>" + esc(x.detail) + "</li>"; }).join("") +
+        "</ul>" + (r.allowed && r.allowed.length ? "<p>You could save just: " + esc(r.allowed.join(", ")) + ".</p>" : "") + "</div>";
+    }
+    /* EVERY OTHER FAILURE IS SAID, and it is all-or-nothing now: the server saves a consultation in one
+     * transaction, so a failure means none of it is on the chart and what was typed is still here to
+     * fix and save again. This used to return "" for anything but a refusal or a partial save, so a
+     * consultation that failed outright showed no sign at all that it had not been saved. */
+    return '<div class="w-sub"><h4>Not saved - nothing from this consultation is on the chart</h4>' +
+      "<p>" + esc(r.detail || r.message || r.error || "The consultation could not be saved.") + "</p>" +
+      (r.failedAt ? "<p><b>The part that failed:</b> " + esc(r.failedAt) + "</p>" : "") +
+      "<ul class=\"w-mini\">" + (r.results || []).filter(function (x) { return !x.ok; })
+        .map(function (x) { return "<li>" + esc(x.piece) + ": " + esc(x.detail || x.error) + "</li>"; }).join("") + "</ul>" +
+      "<p>What you typed is still here. Fix the part that failed and save again.</p></div>";
+  }
+
+  /* THE HALF-FILLED CONSULTATION HAS TO SURVIVE A REPAINT.
+   *
+   * This screen is one long form, and every repaint rebuilds it from scratch - so without this, a
+   * doctor who typed the vitals, the drug and half the note and then pressed "Find the code" would
+   * watch the whole lot vanish. Any repaint at all did it: the busy spinner, a background refresh,
+   * anything. The values are snapshotted off the DOM before a repaint and rendered back in.
+   *
+   * Deliberately NOT kept once the consultation is saved or the screen is left: a draft that
+   * outlives its patient is how one patient's findings end up typed into another's chart. close()
+   * clears it with everything else. */
+  var C_FIELDS = ["wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
+    "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText",
+    "wc_o2", "wc_acvpu"];
+  function cDraft(d, id) { return (d && d[id]) || ""; }
+  /* Options for one of the consultation's dropdowns, with whatever was already chosen marked
+   * selected - a select rebuilt without this silently snaps back to its first option, which on the
+   * oxygen box means a repaint turns "on oxygen" into "not recorded". */
+  function cOpts(d, id, pairs) {
+    var cur = cDraft(d, id);
+    return pairs.map(function (o) {
+      return '<option value="' + esc(o[0]) + '"' + (String(o[0]) === String(cur) ? " selected" : "") + ">" + esc(o[1]) + "</option>";
+    }).join("");
+  }
+  function cSnapshot() {
+    var d = st.cDraft || {};
+    VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) d["wc_" + f.k] = el.value; });
+    C_FIELDS.forEach(function (id) { var el = document.getElementById(id); if (el) d[id] = el.value; });
+    st.cDraft = d;
+  }
+
+  function consultationView(state) {
+    var d = state.cDraft || {};
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var vf = VITALS.map(function (v) {
+      var unit = v.u !== null ? v.u : v.k === "weight" ? weightUnitLabel() : tempUnitLabel();
+      return '<label class="w-f"><span>' + esc(v.l) + " <i>" + esc(unit) + "</i></span>" +
+        '<input id="wc_' + v.k + '" type="text" inputmode="decimal" autocomplete="off" value="' + esc(cDraft(d, "wc_" + v.k)) + '"></label>';
+    }).join("");
+    var tpls = cOpts(d, "wcNoteTpl", [["", "Choose a template…"]].concat((state.templates || []).map(function (t) {
+      return [t.id, t.name || t.id];
+    })));
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Consultation</h3></div>" +
+      '<p class="w-hint">' + ms("info") + "Fill in only what you did. Empty sections are not saved. Everything here is saved together, in one go." + "</p>" +
+
+      '<div class="w-sub"><h4>Observations</h4><div class="w-grid">' + vf + "</div>" +
+      '<div class="w-fluid"><label class="w-f"><span>Supplemental oxygen</span>' +
+      '<select id="wc_o2">' + cOpts(d, "wc_o2", [["", "Not recorded"], ["0", "Breathing air"], ["1", "On oxygen"]]) + "</select></label>" +
+      '<label class="w-f"><span>Consciousness <i>ACVPU</i></span><select id="wc_acvpu">' +
+      cOpts(d, "wc_acvpu", ACVPU) + "</select></label></div></div>" +
+
+      /* The code search is the SAME one the chart's own diagnosis box uses. It is offered here and
+       * never required: a coded diagnosis is better, an uncoded one is honest, and a guessed code is
+       * neither. Nothing auto-selects, not even on a single result - a person picks, exactly as on
+       * the chart, because one result is not the same as the right one. */
+      '<div class="w-sub"><h4>Diagnosis</h4>' +
+      '<input id="wcProbText" placeholder="The problem, in words" value="' + esc(cDraft(d, "wcProbText")) + '">' +
+      '<input id="wcProbCode" placeholder="Code (optional)" value="' + esc(cDraft(d, "wcProbCode")) + '">' +
+      '<button class="w-btn ghost sm" data-w-act="cfindcode">' + ms("search") + "Find the code</button>" +
+      (state.cIcd === null ? '<p class="w-hint">' + ms("info") + "Searching…</p>" : "") +
+      (Array.isArray(state.cIcd)
+        ? (state.cIcd.length
+          ? '<ul class="w-icd">' + state.cIcd.map(function (c, i) {
+              return '<li><button class="w-icd-p" data-w-act="cicdpick:' + i + '"><b>' + esc(c.code) + "</b><span>" + esc(c.title) + "</span><small>" + esc(c.system || "") + "</small></button></li>";
+            }).join("") + "</ul>"
+          : '<p class="w-hint">' + ms("info") + "No matching code. Record it in words: an uncoded diagnosis is honest, a guessed code is not.</p>")
+        : "") +
+      '<select id="wcProbVs">' + cOpts(d, "wcProbVs", [["", "How sure are you?"], ["provisional", "Provisional"], ["differential", "Differential"], ["confirmed", "Confirmed"]]) + "</select></div>" +
+
+      '<div class="w-sub"><h4>Prescription</h4>' +
+      '<input id="wcMoDrug" placeholder="Drug" value="' + esc(cDraft(d, "wcMoDrug")) + '">' +
+      '<div class="w-grid"><label class="w-f"><span>Dose</span><input id="wcMoValue" inputmode="decimal" value="' + esc(cDraft(d, "wcMoValue")) + '"></label>' +
+      '<label class="w-f"><span>Unit</span><input id="wcMoUnit" value="' + esc(cDraft(d, "wcMoUnit")) + '"></label></div>' +
+      '<input id="wcMoRoute" placeholder="Route (optional)" value="' + esc(cDraft(d, "wcMoRoute")) + '">' +
+      '<input id="wcMoFreq" placeholder="How often (optional)" value="' + esc(cDraft(d, "wcMoFreq")) + '">' +
+      '<p class="w-hint">Drug, dose and unit go together. Any one of them on its own is not enough to prescribe.</p></div>' +
+
+      '<div class="w-sub"><h4>Test to order</h4>' +
+      '<input id="wcInvCode" placeholder="Name of the test" value="' + esc(cDraft(d, "wcInvCode")) + '">' +
+      '<input id="wcInvReason" placeholder="Why (optional)" value="' + esc(cDraft(d, "wcInvReason")) + '">' +
+      '<select id="wcInvPri">' + cOpts(d, "wcInvPri", [["", "Routine"], ["urgent", "Urgent"], ["stat", "Immediately"]]) + "</select></div>" +
+
+      '<div class="w-sub"><h4>Note</h4>' +
+      '<select id="wcNoteTpl">' + tpls + "</select>" +
+      '<textarea id="wcNoteText" rows="4" placeholder="What you found and what you decided">' + esc(cDraft(d, "wcNoteText")) + "</textarea>" +
+      '<p class="w-hint">A note needs a template chosen before it can be written.</p></div>' +
+
+      consultationResultView(state.consultationResult) +
+      '<button class="w-btn" data-w-act="consultationsave">' + ms("save") + "Save the whole consultation</button>" +
+      "</div>";
+  }
+
+  /* APPROVALS. The door that has to exist because the formulary's lock is now real.
+   *
+   * A restricted drug needs an approval reference, and until now the prescriber invented one, which
+   * meant the lock was decoration. Now the reference has to name an approval that actually exists,
+   * so there has to be somewhere to ask for one and somewhere for the person who grants it to say
+   * yes. This is that place.
+   *
+   * The chain is shown in full, oldest first, including approvals that were later withdrawn -
+   * nothing here ever edits or hides what already happened, because "it was approved and then taken
+   * back" is exactly the thing somebody reviewing a case later needs to be able to see. */
+  var APPROVAL_SUBJECTS = [
+    ["RestrictedMedication", "A restricted medicine"],
+    ["PurchaseOrder", "A purchase order"],
+    ["StockRequisition", "A stock request"],
+    ["Discharge", "A discharge"],
+    ["Invoice", "A bill"],
+    ["Incident", "An incident"],
+  ];
+  function approvalRow(v) {
+    var stateLabel = v.state === "approved" ? "approved" : v.state === "rejected" ? "turned down" : "waiting";
+    var stateClass = v.state === "approved" ? "" : v.state === "rejected" ? "escalate" : "due";
+    var hist = (v.history || []).map(function (h) {
+      var what = h.kind === "request" ? "asked" : (h.decision === "approved" ? "approved" : h.decision === "rejected" ? "turned down" : "took back");
+      return "<li>" + esc(what) + " by " + esc(h.by) + " &middot; " + when(h.at) + (h.reason ? " &middot; " + esc(h.reason) : "") + "</li>";
+    }).join("");
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(stateClass) + '">' + esc(stateLabel) + "</span> " +
+      "<b>" + esc(v.subjectId) + "</b> &middot; " + esc(v.subjectType) +
+      " &middot; " + esc(v.approvals) + " of " + esc(v.required) + " approved" +
+      (v.withdrawn ? " &middot; something was taken back" : "") +
+      '<div class="w-dt-times">' + esc(v.reason || "") + "</div>" +
+      (hist ? '<ul class="w-mini">' + hist + "</ul>" : "") +
+      '<div class="w-dt-times">Reference: ' + esc(v.verificationId) + "</div>" +
+      "</div><div class=\"w-mini-row-act\">" +
+      (v.state === "pending"
+        ? '<button class="w-btn ghost sm" data-w-act="approvalyes:' + esc(v.verificationId) + '">' + ms("check") + "Approve</button>" +
+          '<button class="w-btn ghost sm" data-w-act="approvalno:' + esc(v.verificationId) + '">' + ms("block") + "Turn down</button>"
+        : "") +
+      "</div></li>";
+  }
+  function approvalsView(state) {
+    var rows = (state.approvals || []).map(approvalRow).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Approvals</h3><button class=\"w-btn ghost\" data-w-act=\"approvals\">" + ms("refresh") + "Refresh</button></div>" +
+      '<div class="w-sub"><h4>Ask for an approval</h4>' +
+      '<select id="wApSubjType">' +
+      APPROVAL_SUBJECTS.map(function (a) { return '<option value="' + esc(a[0]) + '">' + esc(a[1]) + "</option>"; }).join("") +
+      "</select>" +
+      '<input id="wApSubjId" placeholder="Which one - for a medicine, the drug name exactly as prescribed">' +
+      '<textarea id="wApReason" rows="2" placeholder="Why it is needed"></textarea>' +
+      '<p class="w-hint">' + ms("info") + "The name has to match the drug exactly, or the approval will not cover the prescription. Whoever asks cannot also be the one who approves." +
+      "</p><button class=\"w-btn\" data-w-act=\"approvalask\">" + ms("send") + "Ask</button></div>" +
+      (state.approvals !== null
+        ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No approvals on the ledger.</p>')
+        : "") +
+      "</div>";
+  }
+
+  /* PURCHASING. The pharmacy's own screen: raise an order, get it approved, book the stock in.
+   *
+   * How much of an order has arrived is never shown from a stored field - the server adds up the
+   * deliveries booked against it every time it is asked, the same way a stock level is a sum of
+   * movements rather than a counter. So a part-delivered order is not a state somebody forgot to
+   * update; it is what the arithmetic says.
+   *
+   * Over-delivery and a delivery in the wrong unit are SHOWN, not hidden: in both cases the boxes
+   * are physically on the shelf, and a screen that quietly dropped them would be a screen whose
+   * numbers nobody could trust. */
+  function poLineRow(l) {
+    return "<li>" + esc(l.item) + " &middot; " +
+      (l.ordered === null ? "quantity unusable" : esc(l.received) + " of " + esc(l.ordered) + " " + esc(l.unit)) +
+      (l.over ? ' <span class="w-st escalate">' + esc(l.over) + " more than ordered</span>" : "") +
+      (l.unusable ? ' <span class="w-st escalate">' + esc(l.unusable) + "</span>" : "") +
+      (l.receivedInOtherUnits ? ' <span class="w-st due">also ' + l.receivedInOtherUnits.map(function (o) { return esc(o.quantity) + " " + esc(o.unit); }).join(", ") + ", not counted here</span>" : "") +
+      "</li>";
+  }
+  function poRow(o) {
+    var label = { "awaiting-approval": "waiting for approval", rejected: "turned down", open: "ordered, nothing in yet",
+      "part-received": "part delivered", received: "all in", cancelled: "cancelled" }[o.state] || o.state;
+    var cls = o.state === "received" ? "" : o.state === "rejected" || o.state === "cancelled" ? "escalate" : "due";
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(cls) + '">' + esc(label) + "</span> " +
+      "<b>" + esc(o.vendor) + "</b>" +
+      '<div class="w-dt-times">raised by ' + esc(o.raisedBy) + " &middot; " + when(o.raisedAt) +
+      " &middot; approvals " + esc(o.approval && o.approval.approvals || 0) + " of " + esc(o.approval && o.approval.required || 1) + "</div>" +
+      '<ul class="w-mini">' + (o.lines || []).map(poLineRow).join("") + "</ul>" +
+      '<div class="w-dt-times">Reference: ' + esc(o.purchaseOrderId) + "</div></div>" +
+      '<div class="w-mini-row-act">' +
+      (o.state === "awaiting-approval"
+        ? '<button class="w-btn ghost sm" data-w-act="poask:' + esc(o.purchaseOrderId) + '">' + ms("send") + "Ask for approval</button>"
+        : "") +
+      (o.state === "open" || o.state === "part-received"
+        ? '<button class="w-btn ghost sm" data-w-act="poreceive:' + esc(o.purchaseOrderId) + '">' + ms("add") + "Book stock in</button>"
+        : "") +
+      "</div></li>";
+  }
+  function purchasingView(state) {
+    var rows = (state.purchaseOrders || []).map(poRow).join("");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Purchasing</h3><button class=\"w-btn ghost\" data-w-act=\"purchasing\">" + ms("refresh") + "Refresh</button></div>" +
+      '<div class="w-sub"><h4>Raise an order</h4>' +
+      '<input id="wPoVendor" placeholder="Supplier">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Item</span><input id="wPoItem"></label>' +
+      '<label class="w-f"><span>How many</span><input id="wPoQty" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Counted in</span><input id="wPoUnit" placeholder="box, strip, vial"></label>' +
+      "</div>" +
+      '<p class="w-hint">' + ms("info") + "One item per order for now. The unit is recorded as you type it and is never converted, so a delivery in a different unit will not count against this line." +
+      "</p><button class=\"w-btn\" data-w-act=\"poraise\">" + ms("save") + "Raise</button></div>" +
+      (state.purchaseOrders !== null
+        ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No purchase orders.</p>')
+        : "") +
+      "</div>";
+  }
+
+  /* WHO TO RING, AND WHETHER THIS PATIENT HAS DIED.
+   *
+   * Both are facts about a person rather than findings about a body, so they share a screen. The
+   * contact list is the one a ward reaches for at the worst moment of a stay, which is why a
+   * patient with nobody recorded is told about loudly here and not left as an empty list.
+   *
+   * Removed contacts stay on the screen, struck through. A number that was quietly deleted last
+   * month is indistinguishable from one that was never there, and the difference matters when
+   * somebody is trying to work out who was told what. */
+  var RELATIONSHIPS = ["spouse", "parent", "child", "sibling", "grandparent", "grandchild",
+    "guardian", "friend", "neighbour", "carer", "employer", "other"];
+  function personRow(p) {
+    var roles = [p.nextOfKin ? "next of kin" : "", p.guardian ? "guardian" : "", p.emergencyContact ? "emergency contact" : ""]
+      .filter(Boolean).join(", ");
+    return '<li class="w-mini-row' + (p.active ? "" : " w-gone") + '"><div>' +
+      "<b>" + esc(p.name) + "</b> &middot; " + esc(p.relationship) +
+      (p.phone ? ' &middot; <a href="tel:' + esc(p.phone) + '">' + esc(p.phone) + "</a>" : "") +
+      (roles ? ' <span class="w-st due">' + esc(roles) + "</span>" : "") +
+      (p.active ? "" : ' <span class="w-st">removed</span>') +
+      '<div class="w-dt-times">recorded by ' + esc(p.recordedBy) + " &middot; " + when(p.recordedAt) +
+      (p.active ? "" : " &middot; removed by " + esc(p.removedBy || "") + " " + when(p.removedAt) +
+        (p.removedReason ? " &middot; " + esc(p.removedReason) : "")) + "</div>" +
+      (p.note ? "<div>" + esc(p.note) + "</div>" : "") +
+      "</div><div class=\"w-mini-row-act\">" +
+      (p.active ? '<button class="w-btn ghost sm" data-w-act="personremove:' + esc(p.relatedPersonId) + '">' + ms("close") + "Remove</button>" : "") +
+      "</div></li>";
+  }
+  function peopleView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.people;
+    var rows = d && d.people ? d.people.map(personRow).join("") : "";
+    /* The deceased block sits at the TOP, because it changes how everything below it should be
+     * read - and because somebody about to telephone a family needs to know before they dial. */
+    var deceased = "";
+    if (d && d.deceased) {
+      deceased = '<div class="w-sub w-dead"><h4>' + ms("warning") + "This patient is recorded as deceased</h4>" +
+        "<p>Died " + when(d.deceased.at) +
+        (d.deceased.cause ? " &middot; " + esc(d.deceased.cause) : "") +
+        (d.deceased.certifiedBy ? " &middot; certified by " + esc(d.deceased.certifiedBy) : "") + "</p>" +
+        '<div class="w-dt-times">recorded by ' + esc(d.deceased.recordedBy) + " &middot; " + when(d.deceased.recordedAt) + "</div>" +
+        '<p class="w-hint">' + ms("info") + "The chart stays open and readable. Recording what happened after a death is normal work." +
+        "</p><button class=\"w-btn ghost\" data-w-act=\"deathwithdraw\">" + ms("undo") + "This is the wrong patient</button></div>";
+    } else if (d && d.deceasedCorrected) {
+      deceased = '<div class="w-sub"><h4>A death recorded against this patient was withdrawn</h4>' +
+        "<p>" + esc(d.deceasedCorrected.reason) + "</p>" +
+        '<div class="w-dt-times">by ' + esc(d.deceasedCorrected.by) + " &middot; " + when(d.deceasedCorrected.at) + "</div></div>";
+    }
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Contacts and status</h3>" +
+      '<button class="w-ic" data-w-act="people" title="Refresh">' + ms("refresh") + "</button></div>" +
+      deceased +
+      (d && d.warning ? '<p class="w-hint warn">' + ms("warning") + esc(d.warning) + " Nobody can be telephoned about this patient.</p>" : "") +
+      '<div class="w-sub"><h4>Add somebody to contact</h4>' +
+      '<input id="wPerName" placeholder="Their name">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>How they are related</span><select id="wPerRel">' +
+      RELATIONSHIPS.map(function (r) { return '<option value="' + esc(r) + '">' + esc(r) + "</option>"; }).join("") +
+      "</select></label>" +
+      '<label class="w-f"><span>Telephone</span><input id="wPerPhone" inputmode="tel"></label>' +
+      "</div>" +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wPerKin" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Next of kin</span></label>' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wPerGuard" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Guardian</span></label>' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wPerEmg" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Emergency contact</span></label>' +
+      '<p class="w-hint">' + ms("info") + "A next of kin or emergency contact needs a number - this is the name somebody rings." +
+      "</p><button class=\"w-btn\" data-w-act=\"personadd\">" + ms("save") + "Add</button></div>" +
+      (d ? (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">Nobody recorded yet.</p>') : "") +
+      (d && !d.deceased
+        ? '<div class="w-sub"><h4>Record a death</h4>' +
+          '<p class="w-hint">' + ms("warning") + "This is a clinical statement and it is recorded permanently against this patient. Check you have the right person." +
+          "</p><button class=\"w-btn ghost\" data-w-act=\"deathrecord\">" + ms("report") + "Record that this patient has died</button></div>"
+        : "") +
+      "</div>";
+  }
+
+  /* THE WORKSPACE — everything about this patient a doctor needs before they decide anything, on
+   * one screen, composed from what the chart already loaded.
+   *
+   * IT IS A PROJECTION AND OWNS NOTHING. Every block below reads state the chart already fetched
+   * through the governed routes; there is no new endpoint, no second copy and no separate idea of
+   * what is true. Delete this screen and nothing becomes impossible - the doctor just goes back to
+   * reading nine cards to answer one question.
+   *
+   * THE RULE THAT MATTERS MOST: AN EMPTY BLOCK AND AN UNLOADED BLOCK MUST NEVER LOOK ALIKE.
+   * An empty allergy box reads as "no known allergies" to every clinician alive. So a block whose
+   * data did not load says so, in those words, and never renders as blank calm. This is the same
+   * reasoning the chart already applies to critical results ("do not read this chart as clear").
+   */
+  function wsBlock(title, icon, body, notLoaded, act) {
+    return '<div class="w-ws-b"><h4>' + ms(icon) + esc(title) +
+      (act ? '<button class="w-btn ghost sm" data-w-act="' + esc(act) + '">Open</button>' : "") + "</h4>" +
+      (notLoaded
+        ? '<p class="w-hint warn">' + ms("warning") + "Not loaded. Do not read this as empty.</p>"
+        : body) +
+      "</div>";
+  }
+  function wsList(rows, emptyWords) {
+    return rows && rows.length ? '<ul class="w-mini">' + rows.join("") + "</ul>"
+      : '<p class="w-empty">' + esc(emptyWords) + "</p>";
+  }
+  function workspaceView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var tl = state.timeline;
+    var ev = function (cat) { return (tl || []).filter(function (e) { return e.category === cat; }); };
+
+    /* Allergies come off the timeline, which is the governed chart read - there is no separate
+     * allergy endpoint, and inventing one would be a second source of truth for the single fact a
+     * prescriber most needs to be right about. */
+    var allergies = ev("allergy").map(function (e) {
+      return '<li class="w-ws-alert">' + esc(e.label) + "</li>";
+    });
+    var openCriticals = (state.criticals || []).filter(function (c) { return c.state === "open"; });
+    var criticalRows = openCriticals.map(function (c) {
+      return '<li class="w-ws-alert"><b>' + esc(c.display || c.code) + "</b>" +
+        (c.value != null ? " " + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") : "") +
+        " &middot; nobody has acknowledged this yet</li>";
+    });
+    var problemRows = (state.problems || []).filter(function (p) { return p.clinicalStatus !== "resolved"; })
+      .map(function (p) { return "<li>" + esc(p.display || p.code) + (p.verificationStatus ? ' <span class="w-st">' + esc(p.verificationStatus) + "</span>" : "") + "</li>"; });
+    var medRows = (state.activeMeds || []).map(function (m) {
+      return "<li><b>" + esc(m.drug) + "</b>" +
+        (m.dose && m.dose.value != null ? " " + esc(m.dose.value) + esc(m.dose.unit || "") : "") +
+        (m.route ? " " + esc(m.route) : "") + (m.frequency ? " " + esc(m.frequency) : "") + "</li>";
+    });
+    var resultRows = ev("result").slice(0, 5).map(function (e) {
+      return "<li" + (e.critical ? ' class="w-ws-alert"' : "") + ">" + esc(e.label) + "</li>";
+    });
+    var pendingRows = ev("investigation").filter(function (e) { return e.reportReady === false; })
+      .map(function (e) { return "<li>" + esc(e.label) + ' <span class="w-st due">waiting</span></li>'; });
+    var noteRows = ev("note").slice(0, 3).map(function (e) {
+      var first = e.body && e.body[0] ? String(e.body[0].text || "") : "";
+      return "<li>" + esc(e.label) + (first ? '<div class="w-dt-times">' + esc(first.length > 120 ? first.slice(0, 120) + "…" : first) + "</div>" : "") + "</li>";
+    });
+
+    var n = state.news2;
+    var vitals = n && n.total != null
+      ? "<p><b>Early warning score " + esc(n.total) + "</b>" + (n.incomplete ? ' <span class="w-st escalate">incomplete - some observations were never recorded</span>' : "") + "</p>"
+      : '<p class="w-empty">No score yet.</p>';
+
+    var people = state.people;
+    var deceased = people && people.deceased
+      ? '<div class="w-card w-dead"><h4>' + ms("warning") + "This patient is recorded as deceased</h4><p>Died " + when(people.deceased.at) + "</p></div>"
+      : "";
+
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
+        (s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") +
+        " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
+      '<button class="w-ic" data-w-act="workspace" title="Refresh">' + ms("refresh") + "</button></div>" +
+      deceased +
+      '<div class="w-card">' +
+      /* The three that change what a prescriber may safely do come first and are never collapsed. */
+      '<div class="w-ws-top">' +
+      wsBlock("Allergies", "warning", wsList(allergies, "None recorded."), tl == null, "") +
+      wsBlock("Critical results", "priority_high", wsList(criticalRows, "None outstanding."), state.criticals == null, "critsboard") +
+      wsBlock("Current medicines", "medication", wsList(medRows, "None active."), state.activeMeds == null, "round") +
+      "</div>" +
+      '<div class="w-ws-grid">' +
+      wsBlock("Active problems", "fact_check", wsList(problemRows, "None recorded."), state.problems == null, "") +
+      wsBlock("Latest observations", "monitor_heart", vitals, state.news2 === undefined, "flowsheet") +
+      wsBlock("Recent results", "science", wsList(resultRows, "None yet."), tl == null, "investigations") +
+      wsBlock("Waiting for a result", "hourglass_top", wsList(pendingRows, "Nothing outstanding."), tl == null, "") +
+      wsBlock("Recent notes", "edit_note", wsList(noteRows, "None yet."), tl == null, "timeline") +
+      wsBlock("Contacts", "person", people
+        ? (people.hasEmergencyContact ? "<p>" + esc((people.people || []).filter(function (x) { return x.active; }).length) + " recorded.</p>"
+          : '<p class="w-hint warn">' + ms("warning") + "Nobody can be telephoned about this patient.</p>")
+        : "", !people, "people") +
+      "</div>" +
+      '<div class="w-ws-do">' +
+      '<button class="w-btn" data-w-act="consultation">' + ms("edit_note") + "Start a consultation</button>" +
+      '<button class="w-btn ghost" data-w-act="timeline">' + ms("history") + "Full history</button>" +
+      '<button class="w-btn ghost" data-w-act="open:' + esc(s.encounterId || "") + '">' + ms("fact_check") + "Full chart</button>" +
+      "</div></div>";
+  }
+
+  /* THE SAFETY INBOX — what needs a person, across the ward, ordered by urgency.
+   *
+   * An action queue, not a dashboard. Every row names the patient, says what is wrong and how long
+   * it has been wrong, and goes straight to where it is dealt with. A screen that displays safety
+   * items without offering the action is a screen people learn to scroll past.
+   *
+   * THE LOUDEST THING HERE IS A LIST THAT MIGHT BE INCOMPLETE. A safety inbox that quietly dropped
+   * the patients it could not read, or stopped at a cap, would be worse than not having one: it
+   * reads as a quiet ward. So the warning sits ABOVE the list, in those words, and the patients
+   * that could not be checked are named. */
+  var INBOX_ROLES = [
+    ["", "Everything"], ["doctor", "Doctors"], ["nurse", "Nursing"],
+    ["pharmacy", "Pharmacy"], ["lab", "Laboratory"],
+  ];
+  var INBOX_LEVEL = { escalate: "needs somebody now", overdue: "overdue", due: "due" };
+  function inboxRow(it) {
+    var lvl = (it.escalation && it.escalation.level) || "due";
+    var p = it.patient || {};
+    var act = it.type === "critical-result" && it.sourceRef && it.sourceRef.loopId
+      ? '<button class="w-btn ghost sm" data-w-act="ackboard:' + esc(it.sourceRef.loopId) + '">' + ms("check") + "Acknowledge</button>"
+      : "";
+    return '<li class="w-mini-row w-ib-' + esc(lvl) + '"><div>' +
+      '<span class="w-st ' + (lvl === "escalate" ? "escalate" : "due") + '">' + esc(INBOX_LEVEL[lvl] || lvl) + "</span> " +
+      "<b>" + esc(p.name || p.patientId || "Patient") + "</b>" +
+      (p.bed ? " &middot; bed " + esc(p.bed) : "") + (p.ward ? " &middot; " + esc(p.ward) : "") +
+      "<div>" + esc(it.detail || it.type) + "</div>" +
+      '<div class="w-dt-times">' + esc(it.type) +
+      (it.since ? " &middot; since " + when(it.since) : "") +
+      (it.escalation && it.escalation.hoursOpen != null ? " &middot; " + esc(it.escalation.hoursOpen) + "h" : "") +
+      "</div></div>" +
+      '<div class="w-mini-row-act">' + act +
+      '<button class="w-btn ghost sm" data-w-act="inboxopen:' + esc(p.patientId || "") + '">' + ms("fact_check") + "Open patient</button>" +
+      "</div></li>";
+  }
+  function safetyInboxView(state) {
+    var d = state.inbox;
+    var rows = d && d.items ? d.items.map(inboxRow).join("") : "";
+    var cur = state.inboxRole || "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Safety inbox</h3>" +
+      '<button class="w-ic" data-w-act="safetyinbox" title="Refresh">' + ms("refresh") + "</button></div>" +
+      /* The incompleteness warning comes FIRST and is not a footnote. */
+      (d && d.warning ? '<p class="w-hint warn">' + ms("warning") + esc(d.warning) + "</p>" : "") +
+      (d && d.failed && d.failed.length
+        ? '<p class="w-hint warn">' + ms("warning") + "Could not check: " +
+          esc(d.failed.map(function (f) { return (f.name || f.patientId) + " (" + f.what + ")"; }).join(", ")) + "</p>"
+        : "") +
+      (d && d.note ? '<p class="w-hint">' + ms("info") + esc(d.note) + "</p>" : "") +
+      '<div class="w-tl-filters">' + INBOX_ROLES.map(function (r) {
+        return '<button class="w-tl-f' + (cur === r[0] ? " on" : "") + '" data-w-act="inboxrole:' + esc(r[0] || "all") + '">' + esc(r[1]) + "</button>";
+      }).join("") + "</div>" +
+      (d
+        ? '<p class="w-hint">' + ms("info") +
+          esc(d.items.length) + " for this role &middot; " + esc(d.escalated) + " need somebody now &middot; " +
+          esc(d.totalOnWard) + " outstanding on the ward &middot; " + esc(d.scanned) + " patients checked</p>"
+        : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        /* "Nothing outstanding" is only ever said when the list is actually complete. */
+        : (d.warning || (d.failed && d.failed.length))
+          ? '<p class="w-hint warn">' + ms("warning") + "Nothing found in what could be checked - but the check was incomplete.</p>"
+          : '<p class="w-empty">Nothing outstanding for this role.</p>') +
+      "</div>";
+  }
+
+  /* SHIFT HANDOVER. The module behind this has existed, complete and tested, with nothing calling
+   * it - which meant a ward running WardSynQ had signed notes and no way for one nurse to hand a
+   * patient to another. Handover failure is one of the best-documented causes of harm in hospitals:
+   * the information existed, somebody knew it, and it did not survive the change of shift.
+   *
+   * THE SCREEN IS THE INCOMING SHIFT'S LIST. What is WAITING is the default and the point; received
+   * handovers are available but are not what somebody opens this for. Oldest first, because the one
+   * that has been waiting longest is the one most likely to be lost.
+   *
+   * NOTHING HERE CLOSES A LOOP BY ITSELF. The server refuses a handover received by the person who
+   * gave it, and this screen does not pretend otherwise - it shows the refusal as it comes back. */
+  var SBAR_FIELDS = [
+    ["situation", "Situation", "What is happening with this patient right now"],
+    ["background", "Background", "What brought them here and what matters from before"],
+    ["assessment", "Assessment", "What you think is going on"],
+    ["recommendation", "Recommendation", "What the next shift should do"],
+  ];
+  function handoverRow(h, state) {
+    var waiting = h.state === "waiting";
+    var name = "";
+    (state.list || []).forEach(function (p) { if (p.patientId === h.patientId) name = p.name || ""; });
+    var sec = SBAR_FIELDS.map(function (f) {
+      var text = (h.sections || {})[f[0]];
+      return text ? '<div class="w-tl-b"><b>' + esc(f[1]) + "</b> " + esc(text) + "</div>" : "";
+    }).join("");
+    return '<li class="w-mini-row' + (waiting ? " w-ib-overdue" : "") + '"><div>' +
+      '<span class="w-st ' + (waiting ? "due" : "") + '">' + (waiting ? "waiting to be taken" : "taken") + "</span> " +
+      "<b>" + esc(name || h.patientId) + "</b>" +
+      '<div class="w-dt-times">given by ' + esc(h.givenBy || "") + " &middot; " + when(h.givenAt) +
+      (h.receivedBy ? " &middot; taken by " + esc(h.receivedBy) + " " + when(h.receivedAt) : "") + "</div>" +
+      sec +
+      /* Said plainly rather than left as a blank section: a handover that silently assembled its
+       * own background from the chart would be a handover nobody actually gave. */
+      (h.sbarStated != null && h.sbarStated < 4 ? '<div class="w-dt-times">' + esc(4 - h.sbarStated) + " of the four parts were left blank.</div>" : "") +
+      "</div><div class=\"w-mini-row-act\">" +
+      (waiting ? '<button class="w-btn ghost sm" data-w-act="handovertake:' + esc(h.handoverId) + '">' + ms("check") + "Take this patient</button>" : "") +
+      "</div></li>";
+  }
+  function handoverView(state) {
+    var d = state.handovers;
+    var showing = state.handoverState || "waiting";
+    var rows = d && d.handovers ? d.handovers.map(function (h) { return handoverRow(h, state); }).join("") : "";
+    var s = state.sel;
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Shift handover</h3>" +
+      '<button class="w-ic" data-w-act="handovers" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-tl-filters">' +
+      '<button class="w-tl-f' + (showing === "waiting" ? " on" : "") + '" data-w-act="handovershow:waiting">Waiting to be taken' +
+        (d && d.waiting ? " <i>" + esc(d.waiting) + "</i>" : "") + "</button>" +
+      '<button class="w-tl-f' + (showing === "all" ? " on" : "") + '" data-w-act="handovershow:all">All</button>' +
+      "</div>" +
+      (s
+        ? '<div class="w-sub"><h4>Hand over ' + esc(s.name || s.patientId) + "</h4>" +
+          SBAR_FIELDS.map(function (f) {
+            return '<label class="w-f"><span>' + esc(f[1]) + "</span>" +
+              '<textarea id="wHo_' + esc(f[0]) + '" rows="2" placeholder="' + esc(f[2]) + '"></textarea></label>';
+          }).join("") +
+          '<p class="w-hint">' + ms("info") + "A part you leave blank is recorded as not stated. Nothing is filled in from the chart on your behalf." +
+          "</p><button class=\"w-btn\" data-w-act=\"handovergive\">" + ms("send") + "Hand over</button></div>"
+        : '<p class="w-hint">' + ms("info") + "Open a patient from the ward list to hand them over.</p>") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">' + (showing === "waiting" ? "Nothing waiting to be taken." : "No handovers recorded.") + "</p>") +
+      "</div>";
+  }
+
+  /* MEDICINES RECONCILIATION. Another complete module with nothing calling it - which meant a ward
+   * had no way to record what a patient was already taking when they arrived, or to decide what
+   * happens to each of those medicines. That gap is one of the commonest sources of avoidable harm
+   * on admission and discharge.
+   *
+   * TAKING the history and DECIDING what happens to each medicine are separate acts on purpose, and
+   * the server gates them separately: a nurse or pharmacist sits with the patient and writes down
+   * what they take; deciding the fate of each medicine is prescribing-adjacent and needs emr.treat.
+   * This screen shows both and lets the server refuse what it refuses.
+   *
+   * COMPLETE MEANS EVERY MEDICINE HAS A DECISION, computed by the module, never a button somebody
+   * presses. So the screen reports the count of undecided medicines rather than a tick. */
+  var MEDREC_DECISIONS = [
+    ["continued", "Continue"], ["stopped", "Stop"], ["changed", "Changed"], ["held", "Hold"],
+  ];
+  var MEDREC_STAGES = [["admission", "On admission"], ["discharge", "At discharge"]];
+  function medRecRow(m, stage) {
+    var decided = m.decision && m.decision !== "undecided";
+    return '<li class="w-mini-row' + (decided ? "" : " w-ib-overdue") + '"><div>' +
+      "<b>" + esc(m.drug || m.key) + "</b>" +
+      (m.dose ? " &middot; " + esc(m.dose) : "") +
+      ' <span class="w-st ' + (decided ? "" : "due") + '">' + esc(decided ? m.decision : "not decided") + "</span>" +
+      (m.reason ? '<div class="w-dt-times">' + esc(m.reason) + "</div>" : "") +
+      "</div><div class=\"w-mini-row-act\">" +
+      (decided ? "" : MEDREC_DECISIONS.map(function (d) {
+        return '<button class="w-btn ghost sm" data-w-act="medrecdecide:' + esc(stage) + "~" + esc(m.key) + "~" + esc(d[0]) + '">' + esc(d[1]) + "</button>";
+      }).join("")) +
+      "</div></li>";
+  }
+  function medRecView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.medRec;
+    var blocks = d && d.reconciliations ? d.reconciliations.map(function (r) {
+      var rows = (r.medicines || []).map(function (m) { return medRecRow(m, r.stage); }).join("");
+      return '<div class="w-sub"><h4>' + esc(r.stage === "discharge" ? "At discharge" : "On admission") +
+        (r.source ? " &middot; from " + esc(r.source) : "") + "</h4>" +
+        /* Never a tick: the module computes completeness from the medicines themselves. */
+        (r.empty ? '<p class="w-empty">No medicines recorded.</p>'
+          : r.undecided
+            ? '<p class="w-hint warn">' + ms("warning") + esc(r.undecided) + " medicine" + (r.undecided === 1 ? "" : "s") + " still undecided.</p>"
+            : '<p class="w-hint">' + ms("check") + "Every medicine has a decision.</p>") +
+        (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") + "</div>";
+    }).join("") : "";
+
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Medicines on arrival</h3>" +
+      '<button class="w-ic" data-w-act="medrec" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Record what this patient was taking</h4>' +
+      '<select id="wMrStage">' + MEDREC_STAGES.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wMrSource" placeholder="Who told you - the patient, a carer, their own list, the pharmacy">' +
+      '<textarea id="wMrMeds" rows="4" placeholder="One medicine a line, as they said it. For example:&#10;Metformin 500mg twice a day&#10;Amlodipine 5mg in the morning"></textarea>' +
+      '<p class="w-hint">' + ms("info") + "Write them down as the patient says them. Nothing here corrects a name or a dose, and nothing is filled in from the chart." +
+      "</p><button class=\"w-btn\" data-w-act=\"medrecstart\">" + ms("save") + "Record the history</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : blocks ? blocks
+        : '<p class="w-empty">No medicines history recorded for this stay.</p>') +
+      "</div>";
+  }
+
+  /* WOUND CARE. Another finished module nothing called. Pressure ulcers acquired in hospital are a
+   * reportable harm and a legal exposure, and a ward with no way to chart one has no way to show
+   * that it did not cause it either.
+   *
+   * TWO PROPERTIES THE MODULE GUARANTEES AND THIS SCREEN MUST NOT UNDO:
+   *   - a wound's WORST stage is carried forward and never lowered by a later, better reading
+   *   - where it came from is fixed at the first assessment and cannot be edited afterwards
+   * Both are shown, because a screen that displayed only the latest stage would let a wound that
+   * reached stage 4 read as stage 2 today, which is exactly the number a hospital is accountable
+   * for getting right. */
+  var WOUND_KINDS = [["pressure", "Pressure"], ["surgical", "Surgical"], ["traumatic", "Traumatic"],
+    ["diabetic-foot", "Diabetic foot"], ["venous", "Venous"], ["other", "Other"]];
+  var WOUND_STAGES = [["", "Not staged"], ["1", "Stage 1"], ["2", "Stage 2"], ["3", "Stage 3"],
+    ["4", "Stage 4"], ["unstageable", "Unstageable"], ["deep-tissue", "Deep tissue injury"]];
+  var WOUND_ORIGINS = [["present-on-admission", "Already there when they arrived"],
+    ["acquired-here", "Developed here"], ["unknown", "Not known"]];
+  function woundRow(w) {
+    var c = w.comparison || {};
+    return '<li class="w-mini-row' + (w.origin === "acquired-here" ? " w-ib-overdue" : "") + '"><div>' +
+      "<b>" + esc(w.site) + "</b> &middot; " + esc(w.kind) +
+      ' <span class="w-st">' + esc(w.stage ? "stage " + w.stage : "not staged") + "</span>" +
+      /* Never hidden behind the current reading. */
+      (w.worstStage && w.worstStage !== w.stage
+        ? ' <span class="w-st escalate">worst it has been: stage ' + esc(w.worstStage) + "</span>"
+        : "") +
+      (w.origin === "acquired-here" ? ' <span class="w-st escalate">developed here</span>' : "") +
+      '<div class="w-dt-times">' + esc(w.assessments) + " assessment" + (w.assessments === 1 ? "" : "s") +
+      " &middot; first " + when(w.firstAssessedAt) + " &middot; last " + when(w.lastAssessedAt) + "</div>" +
+      (c.verdict ? "<div>" + esc(c.verdict) + "</div>" : "") +
+      "</div></li>";
+  }
+  function woundView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.wounds;
+    var rows = d && d.wounds ? d.wounds.map(woundRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Wounds</h3><button class=\"w-ic\" data-w-act=\"wounds\" title=\"Refresh\">" + ms("refresh") + "</button></div>" +
+      (d && d.acquiredHere
+        ? '<p class="w-hint warn">' + ms("warning") + esc(d.acquiredHere) + " wound" + (d.acquiredHere === 1 ? "" : "s") + " developed here.</p>"
+        : "") +
+      '<div class="w-sub"><h4>Chart a wound</h4>' +
+      '<input id="wWdSite" placeholder="Where on the body">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Kind</span><select id="wWdKind">' + WOUND_KINDS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Stage</span><select id="wWdStage">' + WOUND_STAGES.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Where it came from</span><select id="wWdOrigin">' + WOUND_ORIGINS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      "</div>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Length cm</span><input id="wWdL" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Width cm</span><input id="wWdW" inputmode="decimal"></label>' +
+      '<label class="w-f"><span>Depth cm</span><input id="wWdD" inputmode="decimal"></label>' +
+      "</div>" +
+      '<input id="wWdDressing" placeholder="Dressing used (optional)">' +
+      '<textarea id="wWdNote" rows="2" placeholder="Anything else worth recording"></textarea>' +
+      '<p class="w-hint">' + ms("info") + "Where a wound came from is set the first time it is charted and cannot be changed afterwards. A worse stage is never lowered by a later reading." +
+      "</p><button class=\"w-btn\" data-w-act=\"woundchart\">" + ms("save") + "Record</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No wounds charted.</p>') +
+      "</div>";
+  }
+
+  /* RISK ASSESSMENT. The tools are the HOSPITAL's - falls, pressure, VTE, whatever it configured -
+   * and this screen renders whatever it was given rather than knowing any of them. A hospital that
+   * has configured none gets told that, instead of an empty page that reads as "no risks". */
+  function riskRow(a) {
+    var due = a.reassessment && a.reassessment.due;
+    var actions = (a.actions || []).filter(function (x) { return !x.completedAt; });
+    return '<li class="w-mini-row' + (due ? " w-ib-overdue" : "") + '"><div>' +
+      "<b>" + esc(a.toolName || a.toolId) + "</b>" +
+      (a.score != null ? " &middot; score " + esc(a.score) : "") +
+      (a.band ? ' <span class="w-st ' + (a.band === "high" ? "escalate" : "due") + '">' + esc(a.band) + "</span>" : "") +
+      (due ? ' <span class="w-st escalate">reassessment overdue</span>' : "") +
+      '<div class="w-dt-times">assessed ' + when(a.assessedAt) + (a.assessedBy ? " by " + esc(a.assessedBy) : "") + "</div>" +
+      (actions.length
+        ? '<ul class="w-mini">' + actions.map(function (x) {
+            return "<li>" + esc(x.action || x.key) +
+              ' <button class="w-btn ghost sm" data-w-act="riskdone:' + esc(a.assessmentId) + "~" + esc(x.action || x.key) + '">' + ms("check") + "Done</button></li>";
+          }).join("") + "</ul>"
+        : "") +
+      "</div></li>";
+  }
+  function riskView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.risks, tools = state.riskTools;
+    var rows = d && d.assessments ? d.assessments.map(riskRow).join("") : "";
+    var toolList = tools && tools.tools ? tools.tools : [];
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Risk assessments</h3><button class=\"w-ic\" data-w-act=\"risks\" title=\"Refresh\">" + ms("refresh") + "</button></div>" +
+      (tools && !toolList.length
+        ? '<p class="w-hint">' + ms("info") + "This hospital has configured no risk tools, so none can be carried out here."
+          + " That is a setting, not an assessment that everything is fine.</p>"
+        : "") +
+      (toolList.length
+        ? '<div class="w-sub"><h4>Carry one out</h4>' +
+          '<select id="wRkTool">' + toolList.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(t.name || t.id) + "</option>"; }).join("") + "</select>" +
+          '<p class="w-hint">' + ms("info") + "The questions belong to the tool the hospital configured. Nothing here scores anything itself." +
+          "</p><button class=\"w-btn\" data-w-act=\"riskopen\">" + ms("fact_check") + "Open the tool</button></div>"
+        : "") +
+      (state.riskForm ? riskFormBlock(state) : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No assessments recorded.</p>') +
+      "</div>";
+  }
+  function riskFormBlock(state) {
+    var f = state.riskForm;
+    var qs = (f.questions || []).map(function (q) {
+      var opts = (q.options || []).map(function (o) {
+        return '<option value="' + esc(o.value != null ? o.value : o.key) + '">' + esc(o.label || o.key) + "</option>";
+      }).join("");
+      return '<label class="w-f"><span>' + esc(q.text || q.key) + "</span>" +
+        (opts ? '<select id="wRq_' + esc(q.key) + '"><option value="">Not answered</option>' + opts + "</select>"
+              : '<input id="wRq_' + esc(q.key) + '" inputmode="decimal">') + "</label>";
+    }).join("");
+    return '<div class="w-sub"><h4>' + esc(f.name || f.id) + "</h4>" + qs +
+      '<p class="w-hint">' + ms("info") + "A question left unanswered is recorded as unanswered. The score the server returns says whether it is complete." +
+      "</p><button class=\"w-btn\" data-w-act=\"risksave\">" + ms("save") + "Record the assessment</button>" +
+      '<button class="w-btn ghost" data-w-act="riskcancel">Cancel</button></div>';
+  }
+
+  /* BREAK-GLASS. Emergency access to one patient's chart, on the record. The module behind this
+   * was complete and unreachable, which meant the only emergency route into a chart a clinician did
+   * not hold access to was a borrowed login - the one outcome break-glass exists to prevent, because
+   * a borrowed login leaves no name.
+   *
+   * THIS SCREEN DOES NOT SOFTEN IT. The declaration asks for a reason in the clinician's own words
+   * (not a menu - a menu becomes "other" within a month), states that access is read-only, for this
+   * patient only, and expires on its own, and says plainly that it is reviewed. The review log shows
+   * every declaration, who made it, why, how many times the chart was read under it, and whether
+   * anybody was told. */
+  function breakGlassRow(g) {
+    return '<li class="w-mini-row' + (g.active ? " w-ib-escalate" : "") + '"><div>' +
+      '<span class="w-st ' + (g.active ? "escalate" : "") + '">' + (g.active ? "active" : g.revokedAt ? "withdrawn" : "expired") + "</span> " +
+      "<b>" + esc(g.actorId) + "</b>" + (g.role ? " &middot; " + esc(g.role) : "") +
+      "<div>" + esc(g.reason) + "</div>" +
+      '<div class="w-dt-times">patient ' + esc(g.patientId) + " &middot; declared " + when(g.grantedAt) +
+      " &middot; " + (g.active ? "expires " : "ended ") + when(g.revokedAt || g.expiresAt) +
+      " &middot; chart read " + esc(g.reads || 0) + " time" + (g.reads === 1 ? "" : "s") + "</div>" +
+      /* Whether anybody was told, on the review surface itself - "declared and paged" and "declared
+       * and told nobody" must be distinguishable without cross-referencing anything. */
+      /* Breaking glass granted access that could not be used: nothing opened the chart the grant was
+       * for. An active grant now opens it - read only, only what the emergency scope allows, and every
+       * read counted on the grant itself. */
+      (g.active ? '<button class="w-btn ghost sm" data-w-act="emergencychart:' + esc(g.patientId) + '">' + ms("fact_check") + "Open the chart (read only)</button>" : "") +
+      '<div class="w-dt-times">' + (g.notification && g.notification.sent
+        ? "notified: " + esc(g.notification.to || "yes")
+        : "nobody was notified automatically") + "</div>" +
+      "</div></li>";
+  }
+  function breakGlassView(state) {
+    var d = state.breakGlass;
+    var s = state.sel;
+    var rows = d && d.grants ? d.grants.map(breakGlassRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Emergency access</h3>" +
+      '<button class="w-ic" data-w-act="breakglass" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (s
+        ? '<div class="w-sub w-dead"><h4>' + ms("warning") + "Break glass for " + esc(s.name || s.patientId) + "</h4>" +
+          "<p>Use this only when a patient needs care now and you do not hold access to their chart.</p>" +
+          '<ul class="w-mini"><li>Read only. It gives you no ability to write anything.</li>' +
+          "<li>This patient only.</li>" +
+          "<li>It ends on its own and cannot be extended - a second emergency is a second declaration.</li>" +
+          "<li>Your name, your reason and every time you open the chart are recorded and reviewed.</li></ul>" +
+          '<textarea id="wBgReason" rows="3" placeholder="In your own words: what is the emergency, and why you need this chart now"></textarea>' +
+          '<button class="w-btn" data-w-act="breakglassdeclare">' + ms("warning") + "Break glass</button></div>"
+        : '<p class="w-hint">' + ms("info") + "Open a patient from the ward list to request emergency access to their chart.</p>") +
+      (state.emergencyChart
+        ? '<div class="w-sub w-dead"><h4>' + ms("warning") + "Emergency read-only chart</h4>" +
+          (state.emergencyChart.ok ? reportValue(state.emergencyChart.chart) : '<p class="w-hint warn">' + esc(state.emergencyChart.detail || state.emergencyChart.error || "Could not open the chart.") + "</p>") +
+          "</div>"
+        : "") +
+      '<div class="w-sub"><h4>Review log</h4>' +
+      (d && d.active ? '<p class="w-hint warn">' + ms("warning") + esc(d.active) + " emergency access grant" + (d.active === 1 ? " is" : "s are") + " active now.</p>" : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No emergency access has been declared.</p>') +
+      "</div></div>";
+  }
+
+  /* ORDER SETS. A hospital-approved bundle - "community-acquired pneumonia, admission" - so the
+   * admitting doctor at three in the morning does not forget the second blood culture. Also one of
+   * the easiest ways to hurt somebody, because a set applies many decisions very fast.
+   *
+   * THE RULE THIS SCREEN EXISTS TO KEEP: A SET WRITES NO ORDERS. Applying it sends EACH chosen item
+   * through the same door a hand-written order goes through, one at a time, so every item gets the
+   * allergy check, the interaction check, the dose ceiling and the formulary. A set that ordered in
+   * bulk would be a hole through every one of those, and invisible, because the orders would look
+   * ordinary.
+   *
+   * NOTHING IS ORDERED THAT THE DOCTOR DID NOT SEE. Every item is listed with its default choice
+   * shown, and only ticked items are sent. When some items are refused - an allergy, a restricted
+   * drug - the others are NOT rolled back and the refused ones are NOT retried: the screen says
+   * exactly which landed and which did not, and records that, because a doctor who believes a set
+   * went through whole is a doctor who does not go back for the antibiotic that was blocked. */
+  function orderSetsView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.orderSets;
+    var pick = state.orderSetPick;
+    var sets = d && d.sets ? d.sets : [];
+    var res = state.orderSetResult;
+    var chooser = sets.length
+      ? '<select id="wOsSet">' + sets.map(function (x) {
+          return '<option value="' + esc(x.id) + '"' + (pick && pick.id === x.id ? " selected" : "") + ">" + esc(x.name) + " (v" + esc(x.version) + ")</option>";
+        }).join("") + '</select><button class="w-btn ghost sm" data-w-act="ordersetpick">' + ms("fact_check") + "Show what is in it</button>"
+      : "";
+    var items = pick ? (pick.items || []).map(function (it, i) {
+      var on = it.defaultSelected !== false;
+      var what = it.kind === "medication"
+        ? esc(it.drug) + (it.dose ? " " + esc(it.dose.value) + esc(it.dose.unit || "") : "") + (it.route ? " " + esc(it.route) : "") + (it.frequency ? " " + esc(it.frequency) : "")
+        : esc(it.display || it.code);
+      return '<label class="w-f" style="flex-direction:row;align-items:center">' +
+        '<input id="wOsItem_' + esc(it.key) + '" type="checkbox" style="width:auto;margin:0 8px 0 0"' + (on ? " checked" : "") + ">" +
+        "<span>" + (it.kind === "medication" ? "Medicine: " : "Test: ") + what + "</span></label>";
+    }).join("") : "";
+    var result = "";
+    if (res) {
+      result = '<div class="w-sub' + (res.failed && res.failed.length ? " w-dead" : "") + '"><h4>' +
+        (res.failed && res.failed.length ? "Part of this set was NOT ordered" : "Every chosen item was ordered") + "</h4>" +
+        (res.applied && res.applied.length ? "<p><b>Ordered:</b> " + esc(res.applied.join(", ")) + "</p>" : "") +
+        (res.failed && res.failed.length
+          ? '<ul class="w-mini">' + res.failed.map(function (f) { return "<li><b>" + esc(f.key) + "</b> - " + esc(f.detail || f.error) + "</li>"; }).join("") + "</ul>" +
+            '<p class="w-hint warn">' + ms("warning") + "These were refused by the ordinary safety checks and have not been ordered. Nothing was retried.</p>"
+          : "") +
+        (res.deselected && res.deselected.length ? '<p class="w-dt-times">Left out by you: ' + esc(res.deselected.join(", ")) + "</p>" : "") +
+        "</div>";
+    }
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Order sets</h3></div>" +
+      (d && !sets.length ? '<p class="w-hint">' + ms("info") + "This hospital has not set up any order sets.</p>" : "") +
+      (d == null ? '<p class="w-empty">Loading.</p>' : chooser) +
+      (pick
+        ? '<div class="w-sub"><h4>' + esc(pick.name) + "</h4>" +
+          (pick.description ? "<p>" + esc(pick.description) + "</p>" : "") +
+          '<p class="w-hint">' + ms("info") + "Untick anything this patient should not have. Each ticked item is then ordered on its own, with the same checks as any order you write by hand." + "</p>" +
+          items +
+          '<button class="w-btn" data-w-act="ordersetapply">' + ms("send") + "Order the ticked items</button></div>"
+        : "") +
+      result + "</div>";
+  }
+
+  /* THE BED WAITING LIST. admission-request.js was complete and unreachable, so a doctor who decided
+   * a patient needed a bed had nowhere to say so except out loud - and a request made out loud is
+   * the one that is forgotten when the shift changes.
+   *
+   * THE LIST IS RANKED BY THE MODULE, NOT HERE: urgency first, then how long they have waited. How
+   * long is shown in hours on every row, because "waiting" says nothing about whether it has been
+   * twenty minutes or two days.
+   *
+   * A REQUEST IS CLOSED DELIBERATELY, NEVER AGED OUT. Admitted or cancelled, with a reason for a
+   * cancellation, because a patient who quietly drops off a bed list is a patient nobody admitted. */
+  var ADM_URGENCY = [["emergency", "Emergency"], ["urgent", "Urgent"], ["soon", "Soon"], ["elective", "Elective"]];
+  function admReqRow(r) {
+    var hot = r.urgency === "emergency" || r.urgency === "urgent";
+    return '<li class="w-mini-row' + (r.state === "waiting" && hot ? " w-ib-escalate" : r.state === "waiting" ? " w-ib-overdue" : "") + '"><div>' +
+      '<span class="w-st ' + (hot ? "escalate" : "due") + '">' + esc(r.urgency) + "</span> " +
+      "<b>" + esc(r.mrn || r.patientId) + "</b>" + (r.specialty ? " &middot; " + esc(r.specialty) : "") + (r.ward ? " &middot; for " + esc(r.ward) : "") +
+      "<div>" + esc(r.reason || "") + "</div>" +
+      '<div class="w-dt-times">asked by ' + esc(r.requestedBy) + " &middot; " + when(r.requestedAt) +
+      (r.state === "waiting" ? " &middot; waiting " + esc(r.waitingHours) + "h" : " &middot; " + esc(r.state) + (r.closeReason ? ": " + esc(r.closeReason) : "")) +
+      "</div></div>" +
+      '<div class="w-mini-row-act">' +
+      (r.state === "waiting"
+        ? '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~admitted">' + ms("bed") + "Admitted</button>" +
+          '<button class="w-btn ghost sm" data-w-act="admreqclose:' + esc(r.requestId) + '~cancelled">' + ms("close") + "Cancel</button>"
+        : "") +
+      "</div></li>";
+  }
+  function admReqView(state) {
+    var d = state.admReqs;
+    var rows = d && d.requests ? d.requests.map(admReqRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Waiting for a bed</h3>" +
+      '<button class="w-ic" data-w-act="admreqs" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Ask for a bed</h4>' +
+      '<input id="wArMrn" placeholder="Patient MRN">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>How soon</span><select id="wArUrg">' + ADM_URGENCY.map(function (u) { return '<option value="' + esc(u[0]) + '">' + esc(u[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Specialty</span><input id="wArSpec"></label>' +
+      '<label class="w-f"><span>Ward (optional)</span><input id="wArWard"></label>' +
+      "</div>" +
+      '<textarea id="wArReason" rows="2" placeholder="Why this patient needs to come in"></textarea>' +
+      '<button class="w-btn" data-w-act="admreqask">' + ms("send") + "Ask for a bed</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">Nobody is waiting for a bed.</p>') +
+      "</div>";
+  }
+
+  /* INFUSIONS AND THE CARE PLAN. Both modules were complete and unreachable.
+   *
+   * THE VOLUME IS AN ESTIMATE AND THE SCREEN SAYS SO. infusion.js integrates the charted rates, which
+   * assumes the pump ran at the last charted rate for every minute since. If it occluded at 02:00 and
+   * nobody noticed until 06:00, the total is four hours too high - and the fluid balance, and then a
+   * resuscitation decision, is built on it. So the module's own caveat is shown beside every total,
+   * and a drip nobody has charted for hours is marked at the top and on its row.
+   *
+   * AN UNCHARTED INFUSION IS NOT A STOPPED ONE. A pump nobody charted is still shown as running, with
+   * the stale warning, rather than quietly reading as finished. */
+  var INFUSION_EVENTS = [["started", "Started"], ["rate-changed", "Rate changed"], ["paused", "Paused"], ["resumed", "Resumed"], ["stopped", "Stopped"]];
+  function infusionRow(i) {
+    var v = i.volume || {};
+    return '<li class="w-mini-row' + (v.stale ? " w-ib-escalate" : i.running ? " w-ib-overdue" : "") + '"><div>' +
+      '<span class="w-st ' + (i.running ? "due" : "") + '">' + (i.running ? "running" : "not running") + "</span> " +
+      "<b>" + esc(i.drug || i.orderId) + "</b>" +
+      (v.lastRatePerHour != null ? " &middot; " + esc(v.lastRatePerHour) + " mL/h" : "") +
+      (v.ml != null ? " &middot; about " + esc(v.ml) + " mL so far" : "") +
+      (v.stale ? '<div class="w-hint warn">' + ms("warning") + esc(v.staleDetail) + "</div>" : "") +
+      (v.assumption ? '<div class="w-dt-times">' + esc(v.assumption) + "</div>" : "") +
+      '<div class="w-dt-times">started ' + when(i.startedAt) + " &middot; last charted " + when(i.lastChartedAt) + "</div>" +
+      "</div><div class=\"w-mini-row-act\">" +
+      '<button class="w-btn ghost sm" data-w-act="infusionchart:' + esc(i.orderId) + '">' + ms("edit_note") + "Chart</button>" +
+      "</div></li>";
+  }
+  function infusionView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.infusions;
+    var rows = d && d.infusions ? d.infusions.map(infusionRow).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Drips and care plan</h3>" +
+      '<button class="w-ic" data-w-act="infusions" title="Refresh">' + ms("refresh") + "</button></div>" +
+      (d && d.stale ? '<p class="w-hint warn">' + ms("warning") + esc(d.stale) + " running infusion" + (d.stale === 1 ? " has" : "s have") + " not been charted for hours. Check the pumps.</p>" : "") +
+      (d && d.note ? '<p class="w-hint">' + ms("info") + esc(d.note) + "</p>" : "") +
+      '<div class="w-sub"><h4>Infusions</h4>' +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No infusions charted.</p>') +
+      "</div>" +
+      /* The care plan: what the team is trying to achieve and when it will be looked at again. A goal
+       * with no review date is a goal nobody comes back to, so the date is asked for with it. */
+      '<div class="w-sub"><h4>Care plan</h4>' +
+      '<input id="wCpTitle" placeholder="What this plan is for">' +
+      '<textarea id="wCpGoals" rows="3" placeholder="One goal a line - what the team is trying to achieve"></textarea>' +
+      '<label class="w-f"><span>Review by</span><input id="wCpReview" type="date"></label>' +
+      '<p class="w-hint">' + ms("info") + "A goal with no review date is a goal nobody comes back to." +
+      "</p><button class=\"w-btn\" data-w-act=\"careplansave\">" + ms("save") + "Save the care plan</button></div>" +
+      "</div>";
+  }
+
+  /* DUPLICATE RECORDS. mpi-view.js and identity-merge.js were complete and unreachable, so a records
+   * officer who suspected one patient had two records had no way to find the other, and no way to
+   * join them. Two records for one person is a real hazard: the allergy is on one and the
+   * prescription goes to the other.
+   *
+   * A MATCH IS A SUGGESTION, NEVER A DECISION. Every candidate shows WHICH fields agreed and which
+   * disagreed, in the module's own words - a score with no reasons is a number nobody can argue
+   * with. Merging is a person's act, with a reason, confirmed, and reversible: the module stores a
+   * merge as a claim that moves no clinical data, which is what makes "undo" honest.
+   *
+   * AN EMPTY RESULT FROM A PARTIAL SEARCH IS NOT "NO DUPLICATE". When the search hit its cap the
+   * module says so, and that sentence sits above the results, because the failure it prevents is
+   * registering a patient a second time on the strength of a search that never looked. */
+  function mpiCandidateRow(c, subjectId) {
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + (c.band === "probable" || c.band === "certain" ? "escalate" : "due") + '">' + esc(c.band || "possible") + "</span> " +
+      "<b>" + esc(c.name || c.patientId) + "</b>" + (c.mrn ? " &middot; " + esc(c.mrn) : "") +
+      (c.dob ? " &middot; born " + esc(c.dob) : "") + (c.sex ? " &middot; " + esc(c.sex) : "") +
+      '<div class="w-dt-times">score ' + esc(c.score) +
+      (c.agreed && c.agreed.length ? " &middot; agreed: " + esc(c.agreed.join(", ")) : "") +
+      (c.disagreed && c.disagreed.length ? " &middot; disagreed: " + esc(c.disagreed.join(", ")) : "") + "</div>" +
+      "</div><div class=\"w-mini-row-act\">" +
+      /* No "Undo" here: a search match is not a merge, and undoing a merge that never happened only
+       * ever failed. Undo lives on the history below, against joins that actually exist. */
+      (subjectId && subjectId !== c.patientId
+        ? '<button class="w-btn ghost sm" data-w-act="mpimerge:' + esc(subjectId) + "~" + esc(c.patientId) + '">' + ms("fact_check") + "Same person - merge</button>"
+        : "") +
+      "</div></li>";
+  }
+  /* MERGE HISTORY of the open record: what it was joined into, what was joined into it, and every
+   * undo, with who and why. Not loaded, failed and empty are three different sentences. */
+  function mpiHistory(state, subjectId) {
+    var h = state.mpiIdentity;
+    if (h == null) return '<p class="w-hint">' + ms("hourglass_empty") + "Loading the merge history of this record...</p>";
+    if (h.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the merge history. Do not read this as never merged.</p>";
+    var idn = h.identity;
+    if (!idn) return '<p class="w-hint warn">' + ms("warning") + "The clinical record is not switched on for this hospital, so there is no merge history to show.</p>";
+    var links = idn.links || [];
+    var rows = links.map(function (l) {
+      var live = l.state === "merged";
+      var other = l.survivorId === subjectId ? l.mergedId : l.survivorId;
+      var what = l.survivorId === subjectId ? "Record " + esc(other) + " was joined into this one" : "This record was joined into " + esc(other);
+      return '<li class="w-mini-row"><div>' +
+        '<span class="w-st ' + (live ? "escalate" : "done") + '">' + (live ? "joined" : "undone") + "</span> " + what +
+        '<div class="w-dt-times">' + esc(l.mergedBy || "unknown") + " &middot; " + when(l.mergedAt) + (l.reason ? " &middot; " + esc(l.reason) : "") + "</div>" +
+        (live ? "" : '<div class="w-dt-times">Undone by ' + esc(l.unmergedBy || "unknown") + " &middot; " + when(l.unmergedAt) + (l.unmergeReason ? " &middot; " + esc(l.unmergeReason) : "") + "</div>") +
+        '</div><div class="w-mini-row-act">' +
+        (live ? '<button class="w-btn ghost sm" data-w-act="mpiunmerge:' + esc(l.survivorId) + "~" + esc(l.mergedId) + '">' + ms("undo") + "Undo this merge</button>" : "") +
+        "</div></li>";
+    }).join("");
+    return (h.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(h.partialWarning) + "</p>" : "") +
+      (idn.isMerged ? '<p class="w-hint warn">' + ms("warning") + "This record has been merged into " + esc(idn.mergedInto) + ". The complete chart is under that record.</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : h.partial ? '<p class="w-hint warn">' + ms("warning") + "No merges found in what was checked, but the check was partial.</p>"
+        : '<p class="w-empty">This record has never been merged with another.</p>');
+  }
+  /* MERGE PREVIEW: both records side by side, every field that differs marked, before anything is
+   * written. The server ran every check to produce it, so this is what the join would really do. */
+  function mpiPreviewCard(p) {
+    var F = [["name", "Name"], ["mrn", "MRN"], ["dob", "Date of birth"], ["sex", "Sex"]];
+    var rows = F.map(function (f) {
+      var a = p.survivor[f[0]] || "", b = p.merged[f[0]] || "";
+      var differs = String(a).toLowerCase() !== String(b).toLowerCase();
+      return "<tr" + (differs ? ' class="w-diff"' : "") + "><th>" + f[1] + "</th><td>" + esc(a || "-") + "</td><td>" + esc(b || "-") + "</td><td>" + (differs ? ms("warning") + "differs" : "") + "</td></tr>";
+    }).join("");
+    return '<div class="w-sub"><h4>Check before joining these records</h4>' +
+      '<div style="overflow-x:auto"><table class="w-tbl"><tr><th></th><th>Keeps (' + esc(p.survivor.patientId) + ")</th><th>Joins it (" + esc(p.merged.patientId) + ")</th><th></th></tr>" + rows + "</table></div>" +
+      '<p class="w-hint">' + ms("info") + "No clinical data is moved or deleted. Both records stay as they are, and this can be undone.</p>" +
+      '<label class="w-f"><span>What establishes these are the same person?</span><textarea id="wMpiReason" rows="2" placeholder="For example: same Aadhaar, same mobile, confirmed with the patient"></textarea></label>' +
+      '<button class="w-btn" data-w-act="mpimergeconfirm">' + ms("fact_check") + "Join these records</button> " +
+      '<button class="w-btn ghost" data-w-act="mpimergecancel">Cancel</button></div>';
+  }
+  /* PATIENT DOCUMENTS (documents.js). A consent form, a referral letter, an outside report.
+   *
+   * NOT LOADED, FAILED, STORAGE OFF AND NONE are four different sentences: a consent that failed to load
+   * must never read as "no consent on file". A withdrawn document stays in the list, struck through, with
+   * the reason - that it was once filed against this patient is itself part of the record. Opening a file
+   * asks the server for a five-minute link for this person only; there is no public address to copy. */
+  var DOC_TYPE_LABEL = { "consent": "Consent", "referral-letter": "Referral letter", "outside-report": "Outside report", "outside-imaging": "Outside imaging", "id-proof": "ID proof", "insurance": "Insurance", "prescription-outside": "Outside prescription", "other": "Other" };
+  function documentsView(state) {
+    var d = state.docs;
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Documents</h3></div>";
+    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading this patient's documents...</p></div>";
+    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load this patient's documents. Do not read this as none on file.</p></div>";
+    var rows = (d.documents || []).map(function (x) {
+      var withdrawn = x.status !== "current";
+      return '<li class="w-mini-row"><div>' +
+        '<span class="w-st ' + (withdrawn ? "missed" : "done") + '">' + esc(DOC_TYPE_LABEL[x.docType] || x.docType) + "</span> " +
+        (withdrawn ? "<s>" + esc(x.title) + "</s>" : "<b>" + esc(x.title) + "</b>") + " &middot; version " + esc(x.version) +
+        '<div class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + " &middot; " + esc(Math.max(1, Math.round((x.sizeBytes || 0) / 1024))) + " KB</div>" +
+        (x.status === "entered-in-error" ? '<div class="w-dt-times">Withdrawn: ' + esc(x.withdrawnReason || "") + " (" + esc(x.withdrawnBy || "") + ")</div>" : "") +
+        (x.status === "purged" ? '<div class="w-dt-times">File deleted after its retention period, ' + when(x.purgedAt) + "</div>" : "") +
+        '</div><div class="w-mini-row-act">' +
+        (x.status !== "purged" && d.storageConfigured ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") +
+        (x.version > 1 ? '<button class="w-btn ghost sm" data-w-act="docversions:' + esc(x.id) + '">' + ms("history") + "Versions</button>" : "") +
+        (!withdrawn ? '<button class="w-btn ghost sm" data-w-act="docnewversion:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("upload") + "New version</button>" +
+          '<button class="w-btn ghost sm" data-w-act="docwithdraw:' + esc(x.id) + '">' + ms("block") + "Withdraw</button>" : "") +
+        /* Offered only once the hospital's retention period is over; the server refuses it before then,
+         * and to anyone but an administrator, whatever this screen shows. */
+        (x.status !== "purged" && d.storageConfigured && x.retainUntil && new Date(x.retainUntil).getTime() <= Date.now()
+          ? '<button class="w-btn ghost sm" data-w-act="docpurge:' + esc(x.id) + '">' + ms("delete") + "Delete file (retention ended)</button>" : "") +
+        "</div>" +
+        (state.docVersions && state.docVersions.id === x.id ? docVersionsBlock(state.docVersions) : "") +
+        "</li>";
+    }).join("");
+    var target = state.docNewVersion;
+    var form = !d.storageConfigured
+      ? '<p class="w-hint warn">' + ms("warning") + "Document storage is not set up for this hospital yet, so documents cannot be uploaded or opened. Ask the hospital administrator.</p>"
+      : '<div class="w-sub"><h4>' + (target ? "Upload a new version" : "Add a document") + "</h4>" +
+        (target ? '<p class="w-hint">' + ms("info") + "The earlier version is kept and can still be opened.</p>" :
+          '<label class="w-f"><span>Type</span><select id="wDocType">' + Object.keys(DOC_TYPE_LABEL).map(function (k) { return '<option value="' + k + '">' + DOC_TYPE_LABEL[k] + "</option>"; }).join("") + "</select></label>") +
+        '<label class="w-f"><span>Title</span><input id="wDocTitle" maxlength="160" placeholder="For example: Consent for central line"></label>' +
+        '<label class="w-f"><span>File (PDF or photo, up to 10 MB)</span><input id="wDocFile" type="file" accept="application/pdf,image/jpeg,image/png,image/webp"></label>' +
+        '<button class="w-btn" data-w-act="docupload">' + ms("upload") + (target ? "Upload new version" : "Upload") + "</button>" +
+        (target ? ' <button class="w-btn ghost" data-w-act="docnewversioncancel">Cancel</button>' : "") + "</div>";
+    return '<div class="w-card">' + head + form +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No documents on file for this patient.</p>') + "</div>";
+  }
+  function docVersionsBlock(v) {
+    if (v.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the earlier versions.</p>";
+    if (!v.versions) return '<p class="w-hint">' + ms("hourglass_empty") + "Loading versions...</p>";
+    return '<ul class="w-mini">' + v.versions.map(function (x) {
+      return '<li class="w-mini-row"><div>Version ' + esc(x.version) + " &middot; " + esc(x.title) + ' <span class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + "</span></div>" +
+        '<div class="w-mini-row-act">' + (x.status !== "purged" ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") + "</div></li>";
+    }).reverse().join("") + "</ul>";
+  }
+  /* REFERRALS (referral.js). Each referral shows its one current state and the actions that state
+   * allows; the server decides who may take each (a referrer cannot accept their own), this screen only
+   * offers them. Not loaded, failed and none are three different sentences. */
+  var REF_LABEL = { requested: "Waiting to be accepted", accepted: "Accepted", scheduled: "Appointment booked", seen: "Seen", responded: "Reply received", closed: "Closed", declined: "Declined", cancelled: "Cancelled" };
+  var REF_ACTIONS = { requested: ["accept", "decline", "cancel"], accepted: ["schedule", "seen"], scheduled: ["schedule", "seen"], seen: ["respond"], responded: ["close"], declined: ["close"] };
+  var REF_ACT_LABEL = { accept: "Accept", decline: "Decline", cancel: "Cancel", schedule: "Book appointment", seen: "Mark seen", respond: "Send reply", close: "Close" };
+  function referralRow(x) {
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + (x.urgency === "emergency" ? "escalate" : x.urgency === "urgent" ? "due" : "done") + '">' + esc(x.urgency) + "</span> " +
+      "<b>" + esc(x.specialty) + "</b>" + (x.kind === "external" ? " at " + esc(x.destinationFacility) : "") + " &middot; " + esc(REF_LABEL[x.status] || x.status) +
+      '<div class="w-dt-times">' + esc(x.reason) + " &middot; from " + esc(x.referringProvider) + " &middot; " + when(x.requestedAt) +
+      (x.appointmentAt ? " &middot; appointment " + when(x.appointmentAt) : "") + "</div>" +
+      '<div class="w-dt-times">' + esc(x.clinicalSummary) + "</div>" +
+      (x.response ? '<div class="w-dt-times"><b>Reply:</b> ' + esc(x.response) + "</div>" : "") +
+      (x.declineReason ? '<div class="w-dt-times"><b>Declined:</b> ' + esc(x.declineReason) + "</div>" : "") +
+      '</div><div class="w-mini-row-act">' + (REF_ACTIONS[x.status] || []).map(function (a) {
+        return '<button class="w-btn ghost sm" data-w-act="refact:' + esc(x.id) + "~" + a + "~" + esc(x.version) + '">' + REF_ACT_LABEL[a] + "</button>";
+      }).join("") + "</div></li>";
+  }
+  function referralsView(state) {
+    var d = state.referrals, inbox = state.view === "referralinbox";
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>" + (inbox ? "Referral inbox" : "Referrals") + "</h3></div>";
+    var filter = inbox ? '<div class="w-sub"><div class="w-grid"><label class="w-f"><span>Specialty</span><input id="wRefSpec" value="' + esc(state.refSpecialty || "") + '" placeholder="All specialties"></label>' +
+      '<label class="w-f"><span>Show</span><select id="wRefView"><option value="">Referrals to a specialty</option><option value="sent"' + (state.refView === "sent" ? " selected" : "") + ">Referrals I sent</option></select></label></div>" +
+      '<button class="w-btn" data-w-act="refinboxload">' + ms("search") + "Show</button></div>" : "";
+    var form = inbox ? "" : '<div class="w-sub"><h4>Refer this patient</h4>' +
+      '<div class="w-grid"><label class="w-f"><span>To (specialty)</span><input id="wRefSpecialty" placeholder="For example: Cardiology"></label>' +
+      '<label class="w-f"><span>How soon</span><select id="wRefUrgency"><option value="routine">Routine</option><option value="urgent">Urgent</option><option value="emergency">Emergency</option></select></label>' +
+      '<label class="w-f"><span>Where</span><select id="wRefKind"><option value="internal">This hospital</option><option value="external">Another facility</option></select></label>' +
+      '<label class="w-f"><span>Facility (if another)</span><input id="wRefFacility"></label></div>' +
+      '<label class="w-f"><span>Reason</span><input id="wRefReason"></label>' +
+      '<label class="w-f"><span>Clinical summary for the receiving team</span><textarea id="wRefSummary" rows="3"></textarea></label>' +
+      '<button class="w-btn" data-w-act="refcreate">' + ms("send") + "Send referral</button></div>";
+    var body = d == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading referrals...</p>"
+      : d.failed ? '<p class="w-hint warn">' + ms("error") + "Could not load referrals. Do not read this as none.</p>"
+      : (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+        ((d.referrals || []).length ? '<ul class="w-mini">' + d.referrals.map(referralRow).join("") + "</ul>"
+          : '<p class="w-empty">' + (inbox ? "No open referrals here." : "No referrals for this patient.") + "</p>");
+    return '<div class="w-card">' + head + filter + form + body + "</div>";
+  }
+  function mpiView(state) {
+    var d = state.mpi;
+    var s = state.sel;
+    var subjectId = s ? s.patientId : "";
+    var rows = d && d.candidates ? d.candidates.map(function (c) { return mpiCandidateRow(c, subjectId); }).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Duplicate records</h3></div>" +
+      '<div class="w-sub"><h4>' + (s ? "Look for other records of " + esc(s.name || s.patientId) : "Find a patient who may already have a record") + "</h4>" +
+      (s ? "" :
+        '<input id="wMpiName" placeholder="Name">' +
+        '<div class="w-grid"><label class="w-f"><span>Date of birth</span><input id="wMpiDob" type="date"></label>' +
+        '<label class="w-f"><span>Sex</span><select id="wMpiSex"><option value="">Not known</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></label>' +
+        '<label class="w-f"><span>MRN (optional)</span><input id="wMpiMrn"></label></div>') +
+      '<button class="w-btn" data-w-act="mpisearch">' + ms("search") + "Search</button>" +
+      '<p class="w-hint">' + ms("info") + "A match is a suggestion. Nothing is joined until a person decides, gives a reason, and confirms." + "</p></div>" +
+      (state.mpiPreview ? mpiPreviewCard(state.mpiPreview) : "") +
+      (s ? '<div class="w-sub"><h4>Merge history</h4>' + mpiHistory(state, subjectId) + "</div>" : "") +
+      /* Above the results, not below them. */
+      (d && d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+      (d == null ? ""
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : d.partial
+          ? '<p class="w-hint warn">' + ms("warning") + "Nothing found in what was searched - but the search was partial, so this is not proof of a new patient.</p>"
+          : '<p class="w-empty">No other record looks like this one. Checked ' + esc(d.comparedAgainst || 0) + " records.</p>") +
+      "</div>";
+  }
+
+  /* WRISTBANDS. identity-tag.js was complete and unreachable, so there was no way to issue a band, and
+   * no way to check that the patient in the bed is the patient on the chart - which is the check that
+   * stops a drug, a transfusion or an operation going to the wrong person.
+   *
+   * A MISMATCH IS THE LOUDEST THING ON THIS SCREEN. "Scanned band does not match" is shown as a stop,
+   * in red, in words, and it does not fade: somebody who scanned the wrong band and missed a quiet
+   * notice is exactly the failure this exists to catch.
+   *
+   * A BAND IS NEVER DELETED. Replaced, lost or ended, the old one stays in the history with who ended it
+   * and why, because "which band was this patient wearing on Tuesday" is a question that gets asked. */
+  var TAG_TYPE_WORDS = [["wristband", "Wristband"], ["qr", "QR code"], ["nfc", "NFC tag"]];
+  function tagRow(t) {
+    var active = t.status === "active";
+    return '<li class="w-mini-row' + (active ? "" : " w-gone") + '"><div>' +
+      '<span class="w-st ' + (active ? "" : "due") + '">' + esc(t.status) + "</span> " +
+      "<b>" + esc(t.tagType) + "</b> &middot; " + esc(t.code) +
+      '<div class="w-dt-times">issued ' + when(t.assignedAt) + (t.assignedBy ? " by " + esc(t.assignedBy) : "") +
+      (t.endedAt ? " &middot; ended " + when(t.endedAt) + (t.endedBy ? " by " + esc(t.endedBy) : "") + (t.endedReason ? ": " + esc(t.endedReason) : "") : "") +
+      "</div></div><div class=\"w-mini-row-act\">" +
+      (active
+        ? '<button class="w-btn ghost sm" data-w-act="tagreplace:' + esc(t.id) + '">Replace</button>' +
+          '<button class="w-btn ghost sm" data-w-act="taglost:' + esc(t.id) + '">Lost</button>' +
+          '<button class="w-btn ghost sm" data-w-act="tagend:' + esc(t.id) + '">End</button>'
+        : "") +
+      "</div></li>";
+  }
+  function tagsView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.tags, v = state.tagVerify;
+    var rows = d && d.tags ? d.tags.slice().reverse().map(tagRow).join("") : "";
+    var verdict = "";
+    if (v) {
+      verdict = v.matches
+        ? '<div class="w-sub"><h4>' + ms("check") + "This band belongs to " + esc(s.name || s.patientId) + "</h4></div>"
+        : '<div class="w-sub w-dead"><h4>' + ms("warning") + "STOP - this band does not match " + esc(s.name || s.patientId) + "</h4>" +
+          "<p>" + esc(v.reason || "The scanned code is not this patient's active band.") + "</p>" +
+          "<p>Do not give anything to this patient until the mismatch is resolved.</p></div>";
+    }
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Wristband</h3>" +
+      '<button class="w-ic" data-w-act="tags" title="Refresh">' + ms("refresh") + "</button></div>" +
+      verdict +
+      '<div class="w-sub"><h4>Check the band on the patient</h4>' +
+      '<input id="wTgScan" placeholder="Scan or type the code on the band">' +
+      '<button class="w-btn" data-w-act="tagverify">' + ms("fact_check") + "Check</button></div>" +
+      (d && d.active && !d.active.length ? '<p class="w-hint warn">' + ms("warning") + "This patient has no active band.</p>" : "") +
+      '<div class="w-sub"><h4>Issue a band</h4>' +
+      '<div class="w-grid"><label class="w-f"><span>Kind</span><select id="wTgType">' +
+      TAG_TYPE_WORDS.map(function (k) { return '<option value="' + esc(k[0]) + '">' + esc(k[1]) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>Code on the band</span><input id="wTgCode"></label></div>' +
+      '<button class="w-btn ghost" data-w-act="tagassign">' + ms("save") + "Issue</button></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<div class="w-sub"><h4>Bands, newest first</h4><ul class="w-mini">' + rows + "</ul></div>"
+        : '<p class="w-empty">No band has ever been issued.</p>') +
+      "</div>";
+  }
+
+  /* A PATIENT'S OPERATIONS. Every surgical case for this patient, newest first, with its stage - so a
+   * ward doctor can see that the patient is booked for theatre, or was abandoned yesterday, without
+   * going to the theatre board and hunting for them. */
+  /* Why a case was abandoned is not a field on the case - wardsynq-surgical.js records it as the
+   * detail of the ledger entry that ended it, so it is read from there. */
+  function abandonReasonOf(c) {
+    var l = (c && c.ledger) || [];
+    for (var i = l.length - 1; i >= 0; i--) if (l[i] && l[i].event === "abandoned") return l[i].detail || "";
+    return "";
+  }
+  function patientSurgeryView(state) {
+    var s = state.sel;
+    if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.patientCases;
+    var rows = d && d.cases ? d.cases.map(function (c) {
+      return '<li class="w-mini-row"><div>' +
+        '<span class="w-st ' + (c.stage === "abandoned" ? "escalate" : "due") + '">' + esc(STAGE_WORDS[c.stage] || c.stage) + "</span> " +
+        "<b>" + esc(c.procedure) + "</b>" + (c.site ? " &middot; " + esc(c.site) : "") + (c.laterality ? " " + esc(c.laterality) : "") +
+        (abandonReasonOf(c) ? '<div class="w-dt-times">' + esc(abandonReasonOf(c)) + "</div>" : "") +
+        "</div><div class=\"w-mini-row-act\">" +
+        '<button class="w-btn ghost sm" data-w-act="opensurgery:' + esc(c.id) + '">Open</button>' +
+        "</div></li>";
+    }).join("") : "";
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Operations</h3></div>" +
+      (d == null ? '<p class="w-empty">Loading.</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>"
+        : '<p class="w-empty">No operations recorded for this patient.</p>') +
+      "</div>";
+  }
+
+  function reportValue(v) {
+    if (v === null || v === undefined || v === "") return "-";
+    if (typeof v !== "object") return esc(v);
+    if (Array.isArray(v)) {
+      return v.length ? "<ul class=\"w-mini-flat\">" + v.map(function (item) { return "<li>" + reportValue(item) + "</li>"; }).join("") + "</ul>" : "none";
+    }
+    var keys = Object.keys(v);
+    return keys.length ? "<ul class=\"w-mini-flat\">" + keys.map(function (k) { return "<li><b>" + esc(k) + ":</b> " + reportValue(v[k]) + "</li>"; }).join("") + "</ul>" : "none";
+  }
   function reportsView(state) {
     var r = state.reports || {};
     var sections = Object.keys(REPORT_LABELS).map(function (key) {
@@ -2589,7 +4739,7 @@
       if (!rep) return "";
       if (!rep.ok) return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4><p class=\"w-empty\">Could not load: " + esc(rep.detail || rep.error || "unknown error") + "</p></div>";
       var body = Object.keys(rep).filter(function (k) { return ["ok", "mode", "tenantId", "dataSource", "period", "filters", "generatedAt", "scope"].indexOf(k) < 0; })
-        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + esc(typeof v === "object" ? JSON.stringify(v) : v) + "</li>"; }).join("");
+        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + reportValue(v) + "</li>"; }).join("");
       return '<div class="w-sub"><h4>' + esc(REPORT_LABELS[key]) + "</h4>" +
         '<p class="w-dt-times">source: ' + esc((rep.dataSource || []).join(", ")) +
         (rep.period && (rep.period.from || rep.period.to) ? " &middot; " + esc(rep.period.from || "") + " to " + esc(rep.period.to || "") : "") +
@@ -2600,6 +4750,99 @@
       '<div class="w-card-h">' + ms("summarize") + "<h3>Reports</h3>" +
       '<button class="w-ic" data-w-act="reports" title="Refresh">' + ms("refresh") + "</button></div>" +
       (sections || '<p class="w-empty">Loading…</p>') +
+      "</div>";
+  }
+
+  /* Incident reporting: file -> triage -> RCA -> CAPA -> close (functions/_wardsynq/incidents.js,
+   * wardsynq/wardsynq-incidents.js). The engine side of this has held a careful lifecycle since it
+   * was written - near-miss as a first-class report, an RCA that refuses "human error" as a root
+   * cause, a CAPA that refuses education-only actions - and NOTHING ON SCREEN EVER CALLED IT. Every
+   * one of the 159 demonstration staff, including safety_officer whose entire job this is, had no
+   * way to file or investigate an incident anywhere in the product. This is the front door.
+   *
+   * FILING IS BROAD; INVESTIGATING IS NOT (same split the route table already enforces). The filing
+   * form below is shown to anyone who reaches this screen at all (incident.report is the tile's own
+   * gate); the ledger under it only ever populates for incident.investigate - loadIncidents() reads
+   * it silently, like the co-sign worklist, because a reporter lacking that cap is not a reporter
+   * doing anything wrong and must never see their own filing refused for a screen they didn't ask
+   * to open. */
+  var INCIDENT_SEVERITY = [
+    ["near-miss", "Near miss - caught before it reached the patient"], ["no-harm", "Reached the patient, no harm"],
+    ["minor", "Minor harm"], ["moderate", "Moderate harm"], ["major", "Major harm"],
+    ["catastrophic", "Catastrophic - death or permanent severe harm"],
+  ];
+  var INCIDENT_LIKELIHOOD = [["rare", "Rare"], ["unlikely", "Unlikely"], ["possible", "Possible"], ["likely", "Likely"], ["frequent", "Frequent"]];
+  var INCIDENT_STRENGTH = [
+    ["", "Let the record infer it"], ["FORCING_FUNCTION", "Forcing function or constraint: the error becomes impossible"],
+    ["AUTOMATION", "Automation or computerisation"], ["SIMPLIFICATION", "Simplification or standardisation"],
+    ["CHECKLIST", "Checklist or independent verification"], ["EDUCATION", "Education, training or reminder"],
+  ];
+  function incidentRow(inc) {
+    var capaRows = (inc.capas || []).map(function (c) {
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(c.state === "complete" ? "" : "due") + '">' + esc(c.state) + "</span> " +
+        esc(c.action) + " &middot; " + esc(c.owner) + " &middot; due " + esc(c.dueBy) +
+        (c.strengthLabel ? '<div class="w-dt-times">' + esc(c.strengthLabel) + (c.weak ? " - weak on its own" : "") + "</div>" : "") +
+        (c.state === "complete" ? '<div class="w-dt-times">completed by ' + esc(c.completedBy) + ": " + esc(c.evidence) + "</div>" : "") + "</div>" +
+        (c.state !== "complete"
+          ? '<div class="w-mini-row-act"><input id="wIncCapaBy_' + esc(c.id) + '" placeholder="Your name" style="width:110px">' +
+            '<input id="wIncCapaEvidence_' + esc(c.id) + '" placeholder="What shows it is done">' +
+            '<button class="w-btn ghost sm" data-w-act="incidentcapacomplete:' + esc(inc.id) + "~" + esc(c.id) + '">' + ms("task_alt") + "Complete</button></div>"
+          : "") + "</li>";
+    }).join("");
+    var next = inc.state === "reported"
+      ? '<div class="w-sub"><h4>Triage</h4><select id="wIncLk_' + esc(inc.id) + '"><option value="">Likelihood of recurrence…</option>' +
+        INCIDENT_LIKELIHOOD.map(function (l) { return '<option value="' + esc(l[0]) + '">' + esc(l[1]) + "</option>"; }).join("") + "</select>" +
+        '<button class="w-btn ghost" data-w-act="incidenttriage:' + esc(inc.id) + '">' + ms("fact_check") + "Triage</button></div>"
+      : inc.state === "triaged"
+      ? '<div class="w-sub"><h4>Root cause analysis</h4>' +
+        '<textarea id="wIncRoot_' + esc(inc.id) + '" rows="2" placeholder="What about the system made this error easy, likely or invisible - not who made it"></textarea>' +
+        '<input id="wIncMethod_' + esc(inc.id) + '" placeholder="Method (optional, e.g. 5 whys, fishbone)">' +
+        '<input id="wIncFactors_' + esc(inc.id) + '" placeholder="Contributing factors, comma-separated (optional)">' +
+        '<button class="w-btn ghost" data-w-act="incidentrca:' + esc(inc.id) + '">' + ms("fact_check") + "Record RCA</button></div>"
+      : "";
+    var capaAdd = (inc.state === "investigating" || inc.state === "actions-open")
+      ? '<div class="w-sub"><h4>Add a corrective or preventive action</h4>' +
+        '<input id="wIncCapaAction_' + esc(inc.id) + '" placeholder="What will change">' +
+        '<input id="wIncCapaOwner_' + esc(inc.id) + '" placeholder="Owner">' +
+        '<input id="wIncCapaDue_' + esc(inc.id) + '" type="date">' +
+        '<select id="wIncCapaStrength_' + esc(inc.id) + '">' + INCIDENT_STRENGTH.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
+        '<button class="w-btn ghost" data-w-act="incidentcapaadd:' + esc(inc.id) + '">' + ms("add") + "Add action</button></div>"
+      : "";
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + esc(inc.state === "closed" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(inc.state) + "</span> " +
+      "<b>" + esc(inc.severity) + "</b>" + (inc.sac ? " &middot; SAC " + esc(inc.sac.sac) + " - " + esc(inc.sac.response) : "") +
+      (inc.anonymous ? " &middot; anonymous" : "") +
+      '<div class="w-dt-times">' + esc(inc.what) + "</div>" +
+      '<div class="w-dt-times">reported ' + when(inc.reportedAt) + (inc.patientId ? " &middot; patient " + esc(inc.patientId) : "") + "</div>" +
+      (inc.rca ? '<div class="w-dt-times">root cause: ' + esc(inc.rca.rootCause) + "</div>" : "") +
+      (capaRows ? "<ul class=\"w-mini\">" + capaRows + "</ul>" : "") + next + capaAdd +
+      '</div><div class="w-mini-row-act">' +
+      '<button class="w-btn ghost sm" data-w-act="incidentclose:' + esc(inc.id) + '">' + ms("done_all") + "Attempt close</button>" +
+      "</div></li>";
+  }
+  function incidentsView(state) {
+    var h = state.incidentHealth;
+    var healthBlock = h
+      ? '<div class="w-sub"><h4>Reporting health</h4><p>' + esc(h.reading) + "</p>" +
+        "<p>" + esc(h.total) + " total &middot; " + esc(h.openCapas) + " open actions" +
+        (h.overdueCapas && h.overdueCapas.length ? " &middot; " + esc(h.overdueCapas.length) + " overdue" : "") +
+        (h.actionReading ? " &middot; " + esc(h.actionReading) : "") + "</p></div>"
+      : "";
+    var log = (state.incidentLog || []).map(incidentRow).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("report") + "<h3>Safety and incidents</h3>" +
+      '<button class="w-ic" data-w-act="incidents" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Report an incident</h4>' +
+      '<textarea id="wIncWhat" rows="2" placeholder="What happened, in your own words"></textarea>' +
+      '<select id="wIncSeverity"><option value="">What actually reached the patient…</option>' +
+      INCIDENT_SEVERITY.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + "</option>"; }).join("") + "</select>" +
+      '<input id="wIncWhen" type="datetime-local" placeholder="When (optional, default now)">' +
+      '<input id="wIncPatient" placeholder="Patient MRN (optional)">' +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wIncAnon" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>File anonymously</span></label>' +
+      '<p class="w-hint">' + ms("info") + "A named report defaults to you; anonymous means exactly that - nobody, including the record, is told who filed it." +
+      "</p><button class=\"w-btn\" data-w-act=\"incidentreport\">" + ms("outbox") + "Report</button></div>" +
+      (state.incidentLog !== null
+        ? (healthBlock + (log ? "<ul class=\"w-mini\">" + log + "</ul>" : '<p class="w-empty">No incidents on the ledger.</p>'))
+        : "") +
       "</div>";
   }
 
@@ -2750,6 +4993,26 @@
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
+        : state.view === "purchasing" ? purchasingView(state)
+        : state.view === "approvals" ? approvalsView(state)
+        : state.view === "patientsurgery" ? patientSurgeryView(state)
+        : state.view === "tags" ? tagsView(state)
+        : state.view === "mpi" ? mpiView(state)
+        : state.view === "documents" ? documentsView(state)
+        : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
+        : state.view === "infusions" ? infusionView(state)
+        : state.view === "admreqs" ? admReqView(state)
+        : state.view === "ordersets" ? orderSetsView(state)
+        : state.view === "breakglass" ? breakGlassView(state)
+        : state.view === "wounds" ? woundView(state)
+        : state.view === "risks" ? riskView(state)
+        : state.view === "medrec" ? medRecView(state)
+        : state.view === "handover" ? handoverView(state)
+        : state.view === "safetyinbox" ? safetyInboxView(state)
+        : state.view === "workspace" ? workspaceView(state)
+        : state.view === "people" ? peopleView(state)
+        : state.view === "consultation" ? consultationView(state)
+        : state.view === "incidents" ? incidentsView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
@@ -2768,6 +5031,9 @@
         : state.view === "pharmacy" ? pharmacyView(state)
         : state.view === "transfusion" ? transfusionView(state)
         : state.view === "critsboard" ? critsBoardView(state)
+        : state.view === "timeline" ? timelineView(state)
+        : state.view === "labboard" ? labBoardView(state)
+        : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
@@ -2791,13 +5057,18 @@
     var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
-    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q)])
+    return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q), apiGet("/ward/timeline?" + q)])
       .then(function (rs) {
         if (settle(rs[0])) st.problems = rs[0].problems || [];
         // A failure to READ the critical list must not be silent: an empty list and an unreachable
         // one look identical on screen, and that is the difference between calm and dangerous.
         if (rs[1] && rs[1].ok) st.criticals = rs[1].loops || [];
         else st.err = st.err || "Could not load critical results. Do not read this chart as clear.";
+        // The timeline is a READ of records already shown elsewhere on this chart, merged into one
+        // order - a failure here is never worse than not having merged them, so it degrades to
+        // "not shown" rather than joining the critical-results error above.
+        if (rs[2] && rs[2].ok) { st.timeline = rs[2].events || []; st.activeMeds = rs[2].activeMedications || []; st.timelineGap = rs[2].withoutTimestamp || 0; }
+        else { st.timeline = null; st.activeMeds = null; }
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the chart."; paint(); });
@@ -2882,6 +5153,13 @@
     if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { st.err = "Registration is unavailable on this build."; paint(); return; }
     G.SMD_PATIENTREG.open({
+      /* The hospital's country, so the sheet asks for the right phone and postcode shapes. st.region
+       * comes from GET /ward/list; without it a US hospital admitting from the bed board would be
+       * handed an Indian mobile field and could not complete the registration. */
+      region: st.region,
+      // This sheet is shared with the OPD front desk, whose verb is "Add to queue". Opened from the
+      // bed board the act is an admission, and the button now says which bed it is admitting to.
+      submitLabel: st.admitTarget && st.admitTarget.bed ? "Register & admit to " + st.admitTarget.bed : "Register & admit",
       submit: function (payload) { return apiPost("/patient/register", Object.assign({ orgId: st.orgId }, payload)); },
       onAdded: function (r) { if (r && r.mrn) doAdmit(r.mrn); },
     });
@@ -2951,6 +5229,31 @@
     apiPost("/ward/resus-start", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, code: code })
       .then(function (r) { if (settle(r, "Bundle started.")) loadResus(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not start the bundle."; paint(); });
+  }
+  function childDoseLimitCheck() {
+    var mgkg = val("wLimMgKg"), weight = val("wAgeWeight"), adult = val("wLimAdult");
+    /* Numbers only, never guessed: a mistyped weight is the commonest way a child's dose goes wrong. */
+    var num = /^\d+(\.\d+)?$/;
+    if (!num.test(mgkg)) { st.err = "Enter the mg per kg as a plain number."; paint(); return; }
+    if (adult && !num.test(adult)) { st.err = "The adult maximum has to be a plain number, or left blank."; paint(); return; }
+    st.limitResult = null; st.busy = true; paint();
+    apiPost("/ward/dose-ceiling", {
+      orgId: st.orgId, mgPerKg: Number(mgkg),
+      weightKg: num.test(weight) ? Number(weight) : undefined,
+      adultMaxMg: adult ? Number(adult) : undefined,
+      band: st.ageBand && st.ageBand.band,
+    })
+      .then(function (r) { st.busy = false; if (r && r.ok) st.limitResult = r.result; else settle(r, null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not work out the maximum."; paint(); });
+  }
+  function resusWaive(bundleId, key) {
+    var reason = "";
+    try { reason = G.prompt("Why is this not appropriate for this patient?") || ""; } catch (e) { return; }
+    if (!reason.trim()) { st.err = "A waiver needs a clinical reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/resus-waive", { orgId: st.orgId, bundleId: bundleId, key: key, reason: reason.trim() })
+      .then(function (r) { if (settle(r, "Recorded as not appropriate.")) loadResus(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
   }
   function resusMark(bundleId, key) {
     var event = "";
@@ -3163,7 +5466,10 @@
     var s = st.sel; if (!s) return Promise.resolve();
     st.maternity = st.maternity || {};
     return Promise.all([
-      apiGet("/ward/pregnancy-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.pregnancy = r.pregnancy; }),
+      /* Where the woman is in pregnancy or the puerperium - "day 2 postpartum, haemorrhage risk is
+       * highest now" - read from the obstetric engine rather than worked out on screen. */
+      apiGet("/ward/maternity-status?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.status = r && r.ok ? r.status : null; st.maternity.statusFailed = !(r && r.ok); }, function () { st.maternity.statusFailed = true; }),
+      apiGet("/ward/pregnancy-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.pregFailed = !(r && r.ok); if (r && r.ok) st.maternity.pregnancy = r.pregnancy; }),
       apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.meows = r.meows; }),
       apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.losses = r.losses; }),
       apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.delivery = r.delivery; }),
@@ -3298,7 +5604,7 @@
   function loadOncology() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/onco-timeline?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { st.oncology = { timeline: r && r.ok ? r.timeline : null }; paint(); })
+      .then(function (r) { st.oncology = { timeline: r && r.ok ? r.timeline : null, warning: r && r.ok ? (r.warning || null) : "This history could not be loaded. Do not read it as empty." }; paint(); })
       .catch(function () {});
   }
   function oncoLinkSave() {
@@ -3354,7 +5660,7 @@
   function loadCardiology() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/cardio-timeline?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { st.cardiology = { timeline: r && r.ok ? r.timeline : null }; paint(); })
+      .then(function (r) { st.cardiology = { timeline: r && r.ok ? r.timeline : null, warning: r && r.ok ? (r.warning || null) : "This history could not be loaded. Do not read it as empty." }; paint(); })
       .catch(function () {});
   }
   function cardioLinkSave() {
@@ -3612,7 +5918,10 @@
     if (!why.trim()) { st.err = "An acknowledgement records what was done. It needs a sentence."; paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/acknowledge", { orgId: st.orgId, loopId: loopId, action: why.trim() })
-      .then(function (r) { if (settle(r, "Acknowledged.")) loadCritsBoard(); else paint(); })
+      /* Acknowledging reloads whichever list the person is actually looking at. The same action is
+       * reachable from the criticals board and from the safety inbox, and reloading the board from
+       * the inbox would leave the row the person just acted on still sitting there. */
+      .then(function (r) { if (settle(r, "Acknowledged.")) { if (st.view === "safetyinbox") loadSafetyInbox(); else loadCritsBoard(); } else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the acknowledgement."; paint(); });
   }
   function cashierOpen() {
@@ -3636,13 +5945,24 @@
   }
   function loadCashier() {
     if (!st.cashier || !st.cashier.patientId) return;
-    return apiGet("/ward/invoices?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.cashier.patientId))
+    /* A FAILED LOAD IS NOT "NO INVOICES". This used to set the list to empty on any failure, so a
+     * cashier facing a network error was told the patient owed nothing - and may have let them leave.
+     * The list is now null when it could not be read, and the screen says so. The unbilled charges and
+     * the coding watchlist load alongside, each with the same rule. */
+    var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.cashier.patientId);
+    apiGet("/ward/charges?" + q)
+      .then(function (r) { st.cashier.charges = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.cashier.charges = { failed: true }; paint(); });
+    apiGet("/ward/upcoding?" + q)
+      .then(function (r) { st.cashier.watch = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.cashier.watch = { failed: true }; paint(); });
+    return apiGet("/ward/invoices?" + q)
       .then(function (r) {
-        st.cashier.invoices = (r && r.ok && r.invoices) || [];
-        st.cashier.outstandingBalance = r && r.ok ? r.outstandingBalance : null;
+        if (r && r.ok) { st.cashier.invoices = r.invoices || []; st.cashier.outstandingBalance = r.outstandingBalance; st.cashier.invoicesFailed = false; }
+        else { st.cashier.invoices = []; st.cashier.outstandingBalance = null; st.cashier.invoicesFailed = true; }
         paint();
       })
-      .catch(function () { paint(); });
+      .catch(function () { st.cashier.invoices = []; st.cashier.outstandingBalance = null; st.cashier.invoicesFailed = true; paint(); });
   }
   function cashRaise() {
     if (!st.cashier || !st.cashier.patientId) return;
@@ -3662,7 +5982,17 @@
     if (!amount || Number(amount) <= 0) { st.cashier.err = "Enter a positive amount."; paint(); return; }
     var route = CASH_ACTION_ROUTE[kind];
     st.cashier.err = ""; st.busy = true; paint();
-    apiPost("/ward/" + route, { orgId: st.orgId, invoiceId: invoiceId, amount: Number(amount), reason: reason || undefined, reference: reference || undefined })
+    /* A payment or deposit carries HOW it was taken. The other actions (discount, refund,
+     * adjustment, write-off) are not collections and carry nothing. */
+    var body = { orgId: st.orgId, invoiceId: invoiceId, amount: Number(amount), reason: reason || undefined, reference: reference || undefined };
+    if (kind === "pay" || kind === "deposit") {
+      var method = st.cashMethod || "cash";
+      var details = {};
+      (CASH_METHOD_NEEDS[method] || []).forEach(function (f) { var v = val("wPay_" + f); if (v) details[f] = v; });
+      body.method = method;
+      body.paymentDetails = details;
+    }
+    apiPost("/ward/" + route, body)
       .then(function (r) {
         st.busy = false;
         if (r && r.ok) { loadCashier(); return; }
@@ -4120,7 +6450,7 @@
       var bundle = rs[2];
       st.results = (bundle && bundle.entry ? bundle.entry.map(function (e) { return e.resource; }).filter(Boolean) : [])
         .map(function (d) {
-          return { display: (d.code && (d.code.text || (d.code.coding && d.code.coding[0] && d.code.coding[0].display))) || "Result",
+          return { id: d.id, display: (d.code && (d.code.text || (d.code.coding && d.code.coding[0] && d.code.coding[0].display))) || "Result",
             status: d.status, conclusion: d.conclusion, reportedAt: d.effectiveDateTime };
         });
       paint();
@@ -4181,6 +6511,1086 @@
   /* Searching the terminology. The words the clinician typed are the query and nothing else - no
    * patient identifier is sent, because a lookup that carried the patient it was for would leak a
    * diagnosis to a reference service that has no business knowing one. */
+  function purchasingOpen() {
+    st.view = "purchasing"; st.purchaseOrders = null; paint(); loadPurchaseOrders();
+  }
+  function loadPurchaseOrders() {
+    st.busy = true; paint();
+    return apiGet("/ward/purchase-orders?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.purchaseOrders = r.orders || []; paint(); })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function poRaise() {
+    var vendor = val("wPoVendor"), item = val("wPoItem"), qty = val("wPoQty"), unit = val("wPoUnit");
+    if (!vendor) { st.err = "Say who this is being ordered from."; paint(); return; }
+    if (!item || !qty || !unit) { st.err = "An order line needs the item, how many, and what they are counted in."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/purchase-order", { orgId: st.orgId, vendor: vendor, lines: [{ item: item, quantity: qty, unit: unit }] })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? r.detail : null)) {
+          ["wPoVendor", "wPoItem", "wPoQty", "wPoUnit"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadPurchaseOrders();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not raise that order."; paint(); });
+  }
+  /* Asking for the order's approval uses the SAME chain a restricted medicine uses - there is one
+   * approval mechanism in WardSynQ, not one per feature, which is the entire point of building it
+   * generically rather than bolting a second `approved` flag onto purchase orders. */
+  function poAskApproval(id) {
+    var reason = prompt("Why is this order needed?") || "";
+    if (!reason) { st.err = "Say why it is needed."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/approval-request", { orgId: st.orgId, subjectType: "PurchaseOrder", subjectId: id, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Asked. Somebody else has to approve it." : null)) loadPurchaseOrders(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not ask for approval."; paint(); });
+  }
+  function poReceive(id) {
+    var item = prompt("Which item arrived?") || "";
+    if (!item) return;
+    var qty = prompt("How many?") || "";
+    if (!qty) return;
+    var unit = prompt("Counted in what? (box, strip, vial)") || "";
+    if (!unit) return;
+    st.busy = true; paint();
+    apiPost("/ward/goods-receive", { orgId: st.orgId, purchaseOrderId: id, item: item, quantity: qty, unit: unit })
+      .then(function (r) {
+        // r.detail carries the over-delivery / wrong-unit warning when there is one; it is shown
+        // rather than swallowed, because both mean real stock the record has to account for.
+        if (settle(r, r && r.ok ? (r.detail || "Booked in.") : null)) loadPurchaseOrders();
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not book that in."; paint(); });
+  }
+
+  function approvalsOpen() {
+    st.view = "approvals"; st.approvals = null; paint(); loadApprovals();
+  }
+  function loadApprovals() {
+    st.busy = true; paint();
+    return apiGet("/ward/approvals?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.approvals = r.verifications || [];
+        paint();
+      })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function approvalAsk() {
+    var subjectType = val("wApSubjType"), subjectId = val("wApSubjId"), reason = val("wApReason");
+    if (!subjectId) { st.err = "Say which one this is about."; paint(); return; }
+    if (!reason) { st.err = "Say why it is needed."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/approval-request", { orgId: st.orgId, subjectType: subjectType, subjectId: subjectId, reason: reason })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Asked. It needs " + r.required + " approval" + (r.required === 1 ? "" : "s") + " from somebody else." : null)) {
+          ["wApSubjId", "wApReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadApprovals();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not ask for that."; paint(); });
+  }
+  function approvalDecide(id, decision) {
+    var reason = decision === "rejected" ? (prompt("Why are you turning this down?") || "") : "";
+    // A turn-down with no reason is one nobody can act on, so it is not sent.
+    if (decision === "rejected" && !reason) { st.err = "A turn-down needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/approval-decide", { orgId: st.orgId, verificationId: id, decision: decision, reason: reason || undefined })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? (r.state === "approved" ? "Approved." : r.state === "rejected" ? "Turned down." : "Recorded - it still needs " + (r.required - r.approvals) + " more.") : null)) loadApprovals();
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
+  /* Opening the workspace loads everything it shows, in parallel, through the routes that already
+   * exist. Each loader reports its own failure the way it always has; nothing here swallows one to
+   * make the screen look tidy. */
+  function patientSurgeryOpen() {
+    var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "patientsurgery"; st.patientCases = null; paint();
+    apiGet("/ward/surgery-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        if (r && r.ok) st.patientCases = r;
+        else { st.patientCases = null; st.err = "Could not load operations. Do not read this as none recorded."; }
+        paint();
+      })
+      .catch(function () { st.err = "Could not load operations."; paint(); });
+  }
+  function surgeryAbandon(caseId) {
+    if (!caseId) return;
+    var reason = "";
+    try { reason = G.prompt("Why is this case not going ahead?") || ""; } catch (e) {}
+    if (!reason) { st.err = "Abandoning a case needs a reason."; paint(); return; }
+    if (!confirm("End this case on the record as not going ahead?")) return;
+    st.busy = true; paint();
+    apiPost("/ward/surgery-abandon", { orgId: st.orgId, caseId: caseId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded as not going ahead." : null)) loadSurgeryCase(caseId); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
+  var WARD_DISPOSITIONS = [["home", "home"], ["transferred", "to another hospital"], ["left-against-advice", "left against medical advice"], ["died", "died"]];
+  function wardDischarge() {
+    var s = st.sel; if (!s) return;
+    var pick = "";
+    try {
+      pick = G.prompt("Where did " + (s.name || "the patient") + " go? Type: " + WARD_DISPOSITIONS.map(function (d) { return d[0]; }).join(", ")) || "";
+      pick = String(pick).trim().toLowerCase();
+    } catch (e) {}
+    var known = WARD_DISPOSITIONS.filter(function (d) { return d[0] === pick; })[0];
+    if (!known) { st.err = "Say where the patient went: " + WARD_DISPOSITIONS.map(function (d) { return d[0]; }).join(", ") + "."; paint(); return; }
+    /* A death is not recorded from here: it is a clinical statement with its own confirmation and its
+     * own record, on the Contacts and status screen. Ending the stay as "died" without it would leave
+     * the patient alive on their own record. */
+    if (known[0] === "died") { st.err = "Record the death first on the Contacts screen, then close the stay."; paint(); return; }
+    if (!confirm("End this stay: " + (s.name || s.patientId) + " went " + known[1] + "?\n\nThe bed is released.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/discharge", { orgId: st.orgId, encounterId: s.encounterId, disposition: known[0] })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Stay ended. The bed is free." : null)) { st.sel = null; st.view = "list"; loadWard(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not end the stay."; paint(); });
+  }
+  function followUpRequest() {
+    var s = st.sel; if (!s) return;
+    var reason = "", dueBy = "";
+    try { reason = G.prompt("Why should this patient be seen again?") || ""; } catch (e) {}
+    if (!reason) { st.err = "A follow-up needs a reason."; paint(); return; }
+    try { dueBy = G.prompt("Seen by when? (YYYY-MM-DD)") || ""; } catch (e) {}
+    /* A follow-up with no date is one nobody books, so the date is required and must be a real date. */
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dueBy).trim())) { st.err = "Give a date like 2026-10-01."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/follow-up", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, reason: reason, dueBy: String(dueBy).trim() })
+      .then(function (r) { settle(r, r && r.ok ? "Follow-up requested." : null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not request that follow-up."; paint(); });
+  }
+
+  function invoiceVoid(invoiceId) {
+    if (!invoiceId) return;
+    var reason = "";
+    try { reason = G.prompt("Why is this bill being cancelled?") || ""; } catch (e) {}
+    if (!reason) { st.err = "Cancelling a bill needs a reason."; paint(); return; }
+    if (!confirm("Cancel this bill? It stays on the record as cancelled.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/invoice-void", { orgId: st.orgId, invoiceId: invoiceId, reason: reason })
+      .then(function (r) { st.busy = false; if (r && r.ok) loadCashier(); else { st.cashier.err = (r && (r.detail || r.error)) || "Could not cancel that bill."; paint(); } })
+      .catch(function () { st.busy = false; st.cashier.err = "Could not reach the server."; paint(); });
+  }
+
+  function dispenseReturn(dispenseId) {
+    if (!dispenseId) return;
+    var reason = "";
+    try { reason = G.prompt("Why was it returned?") || ""; } catch (e) {}
+    if (!reason) { st.err = "A return needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/dispense-return", { orgId: st.orgId, dispenseId: dispenseId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded as returned." : null)) loadPharmacy(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that return."; paint(); });
+  }
+  function bloodTrace() {
+    var unit = val("wTxTraceUnit");
+    if (!unit) { st.err = "Enter the unit number from the bag."; paint(); return; }
+    st.bloodTrace = null; st.busy = true; paint();
+    apiGet("/ward/transfusion-trace?orgId=" + encodeURIComponent(st.orgId) + "&unitId=" + encodeURIComponent(unit))
+      .then(function (r) { st.busy = false; st.bloodTrace = r && r.ok ? r : { ok: false }; paint(); })
+      .catch(function () { st.busy = false; st.bloodTrace = { ok: false }; paint(); });
+  }
+
+  function specimenOutcomeAct(specimenId, state) {
+    if (!specimenId) return;
+    var reason = "";
+    if (state === "failed") {
+      try { reason = G.prompt("Why did it fail? Clotted, haemolysed, insufficient, never arrived...") || ""; } catch (e) {}
+      if (!reason) { st.err = "A failed sample needs a reason, so the ward knows what to do differently."; paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: state, failureReason: reason || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? (state === "failed" ? "Recorded as failed. The order needs a new sample." : "Received.") : null)) loadLabBoard(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
+  function labResultOpen(srId) {
+    var b = st.labBoard || {};
+    var found = null;
+    (b.pending || []).forEach(function (p) { if (p.serviceRequestId === srId) found = p; });
+    if (!found) { st.err = "That test is no longer waiting for a result. Refresh the board."; paint(); return; }
+    st.labResultFor = found; st.labResultOutcome = null; paint();
+  }
+  function labResultSave() {
+    var f = st.labResultFor; if (!f) return;
+    var tests = [];
+    for (var i = 0; i < 6; i++) {
+      var t = val("wLrTest" + i), v = val("wLrVal" + i), u = val("wLrUnit" + i);
+      if (!t && !v) continue;
+      tests.push({ test: t, value: v, unit: u || undefined });
+    }
+    if (!tests.length) { st.err = "Enter at least one result."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/release-result", {
+      orgId: st.orgId, serviceRequestId: f.serviceRequestId, patientId: f.patientId, encounterId: f.encounterId,
+      tests: tests, status: val("wLrStatus") || "final", conclusion: val("wLrConc") || undefined,
+    })
+      .then(function (r) {
+        st.busy = false;
+        st.labResultOutcome = r || null;
+        /* Whether the result was checked against the critical limits is said on every release. A check
+         * that failed is a warning, never silence. */
+        if (r && r.ok && r.criticalCheck && !r.criticalCheck.checked) {
+          st.err = "Result saved, but it could NOT be checked against the critical limits. Review it for critical values now.";
+        } else if (r && r.ok && r.criticalCheck && r.criticalCheck.opened) {
+          st.err = r.criticalCheck.opened + " critical value" + (r.criticalCheck.opened === 1 ? "" : "s") + " in this result. The critical-result alert has been opened.";
+        }
+        if (r && r.ok && !(r.rejected && r.rejected.length)) {
+          st.labResultFor = null; st.note = "Result released.";
+          loadLabBoard();
+        } else if (r && r.ok) {
+          st.err = "Some rows were not saved. They are listed below the form.";
+          loadLabBoard();
+        } else settle(r, null);
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not release that result."; paint(); });
+  }
+
+  function tagsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "tags"; st.tags = null; st.tagVerify = null; paint(); loadTags();
+  }
+  function loadTags() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/tag-log?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        if (r && r.ok) st.tags = r;
+        else { st.tags = null; st.err = "Could not load wristbands. Do not read this as no band issued."; }
+        paint();
+      })
+      .catch(function () { st.tags = null; st.err = "Could not load wristbands."; paint(); });
+  }
+  function tagVerify() {
+    var s = st.sel; if (!s) return;
+    var code = val("wTgScan");
+    if (!code) { st.err = "Scan or type the code on the band."; paint(); return; }
+    st.tagVerify = null; st.busy = true; paint();
+    apiPost("/ward/tag-verify", { orgId: st.orgId, patientId: s.patientId, tagType: "wristband", scannedCode: code })
+      .then(function (r) {
+        st.busy = false;
+        /* Only a definite server answer is shown as a verdict. A failed CHECK is not a match and is not
+         * shown as one: it is an error, and the band has not been checked. */
+        if (r && r.ok) st.tagVerify = { matches: !!r.matches, reason: r.reason || null };
+        else { st.tagVerify = null; st.err = "The band could not be checked. Treat it as unchecked."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.tagVerify = null; st.err = "The band could not be checked. Treat it as unchecked."; paint(); });
+  }
+  function tagAssign() {
+    var s = st.sel; if (!s) return;
+    var code = val("wTgCode");
+    if (!code) { st.err = "Type the code printed on the band."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/tag-assign", { orgId: st.orgId, patientId: s.patientId, tagType: val("wTgType"), code: code })
+      .then(function (r) { if (settle(r, r && r.ok ? "Band issued." : null)) loadTags(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not issue that band."; paint(); });
+  }
+  function tagEnd(kind, tagId) {
+    if (!tagId) return;
+    var reason = "", newCode = "";
+    if (kind === "replace") { try { newCode = G.prompt("Code on the new band") || ""; } catch (e) {} if (!newCode) return; }
+    try { reason = G.prompt("Why?") || ""; } catch (e) {}
+    if (!reason) { st.err = "Ending or replacing a band needs a reason."; paint(); return; }
+    var route = kind === "replace" ? "/ward/tag-replace" : kind === "lost" ? "/ward/tag-lost" : "/ward/tag-deactivate";
+    var body = { orgId: st.orgId, tagId: tagId, reason: reason };
+    if (kind === "replace") body.newCode = newCode;
+    st.busy = true; paint();
+    apiPost(route, body)
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded." : null)) { st.tagVerify = null; loadTags(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
+  function mpiOpen() {
+    st.view = "mpi"; st.mpi = null; st.mpiIdentity = null; paint();
+    loadMpiIdentity();
+  }
+  function loadMpiIdentity() {
+    var s = st.sel; if (!s) return;
+    st.mpiIdentity = null; paint();
+    apiGet("/ward/identity?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.mpiIdentity = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.mpiIdentity = { failed: true }; paint(); });
+  }
+  function mpiSearch() {
+    var s = st.sel;
+    var body = { orgId: st.orgId };
+    if (s) body.patientId = s.patientId;
+    else {
+      body.name = val("wMpiName"); body.dob = val("wMpiDob") || undefined;
+      body.sex = val("wMpiSex") || undefined; body.mrn = val("wMpiMrn") || undefined;
+      if (!body.name && !body.mrn) { st.err = "Give at least a name or an MRN to search on."; paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/id-match", body)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.mpi = r;
+        else { st.mpi = null; settle(r, null); }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not search for duplicates."; paint(); });
+  }
+  function mpiMergePreview(arg) {
+    var parts = String(arg || "").split("~");
+    if (!parts[0] || !parts[1]) return;
+    st.busy = true; st.mpiPreview = null; paint();
+    apiPost("/ward/merge", { orgId: st.orgId, survivorId: parts[0], mergedId: parts[1], dryRun: true })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok && r.dryRun && r.survivor && r.merged) st.mpiPreview = r;
+        else if (r && r.ok && r.skipped === "already_merged") st.note = "These two records are already joined.";
+        else settle(r, null);
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not prepare the merge preview. Nothing was joined."; paint(); });
+  }
+  function mpiMergeConfirm() {
+    var p = st.mpiPreview; if (!p) return;
+    var reason = val("wMpiReason");
+    if (reason.length < 10) { st.err = "Say what establishes these are the same person (at least a short sentence)."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/merge", { orgId: st.orgId, survivorId: p.survivor.patientId, mergedId: p.merged.patientId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Records joined." : null)) { st.mpiPreview = null; loadMpiIdentity(); mpiSearch(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not join the records. Nothing was changed."; paint(); });
+  }
+  function mpiMerge(arg, undo) {
+    var parts = String(arg || "").split("~");
+    var survivorId = parts[0], mergedId = parts[1];
+    if (!survivorId || !mergedId) return;
+    var reason = "";
+    try { reason = G.prompt(undo ? "Why is this merge being undone?" : "Why are these the same person? What did you check?") || ""; } catch (e) {}
+    if (!reason) { st.err = (undo ? "Undoing" : "Merging") + " records needs a reason."; paint(); return; }
+    if (!confirm(undo
+      ? "Undo the merge of these two records?"
+      : "Join these two records as one person?\n\nNo clinical data is moved or deleted, and this can be undone.")) return;
+    st.busy = true; paint();
+    apiPost(undo ? "/ward/unmerge" : "/ward/merge", { orgId: st.orgId, survivorId: survivorId, mergedId: mergedId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? (undo ? "Merge undone." : "Records joined.") : null)) { loadMpiIdentity(); mpiSearch(); } else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not do that."; paint(); });
+  }
+
+  function infusionOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "infusions"; st.infusions = null; paint(); loadInfusions();
+  }
+  function loadInfusions() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/infusions?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.infusions = r;
+        else { st.infusions = null; st.err = "Could not load infusions. Do not read this as none running."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.infusions = null; st.err = "Could not load infusions. Do not read this as none running."; paint(); });
+  }
+  function infusionChart(orderId) {
+    if (!orderId) return;
+    var event = "", rate = "", reason = "";
+    try {
+      event = G.prompt("What happened? started, rate-changed, paused, resumed, or stopped") || "";
+      event = String(event).trim().toLowerCase();
+    } catch (e) {}
+    var known = INFUSION_EVENTS.some(function (x) { return x[0] === event; });
+    if (!known) { st.err = "Say started, rate-changed, paused, resumed or stopped."; paint(); return; }
+    if (event === "started" || event === "rate-changed" || event === "resumed") {
+      try { rate = G.prompt("Rate now, in mL per hour") || ""; } catch (e) {}
+      /* A rate that is not plainly a number is refused here too, not coerced: a pump rate read wrong
+       * by a factor of ten is a real dose error. The server refuses it independently. */
+      if (!/^\d+(\.\d+)?$/.test(String(rate).trim())) { st.err = "The rate has to be a plain number of mL per hour."; paint(); return; }
+    }
+    if (event === "paused" || event === "stopped") {
+      try { reason = G.prompt("Why?") || ""; } catch (e) {}
+    }
+    st.busy = true; paint();
+    apiPost("/ward/infusion", {
+      orgId: st.orgId, orderId: orderId, event: event,
+      ratePerHour: rate ? Number(rate) : undefined, reason: reason || undefined,
+    })
+      .then(function (r) { if (settle(r, r && r.ok ? "Charted." : null)) loadInfusions(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not chart that."; paint(); });
+  }
+  function carePlanSave() {
+    var s = st.sel; if (!s) return;
+    var title = val("wCpTitle"), goalsText = val("wCpGoals"), reviewBy = val("wCpReview");
+    if (!title) { st.err = "Say what this plan is for."; paint(); return; }
+    var goals = goalsText.split("\n").map(function (g) { return g.trim(); }).filter(Boolean);
+    if (!goals.length) { st.err = "A care plan needs at least one goal."; paint(); return; }
+    if (!reviewBy) { st.err = "Say when this plan will be reviewed."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/care-plan", { orgId: st.orgId, encounterId: s.encounterId, title: title, goals: goals, reviewBy: reviewBy })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Care plan saved." : null)) {
+          ["wCpTitle", "wCpGoals", "wCpReview"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not save the care plan."; paint(); });
+  }
+
+  function admReqOpen() {
+    st.view = "admreqs"; st.admReqs = null; paint(); loadAdmReqs();
+  }
+  function loadAdmReqs() {
+    st.busy = true; paint();
+    return apiGet("/ward/waiting-list?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.admReqs = r;
+        else { st.admReqs = null; st.err = "Could not load the bed waiting list. Do not read this as nobody waiting."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.admReqs = null; st.err = "Could not load the bed waiting list. Do not read this as nobody waiting."; paint(); });
+  }
+  function admReqAsk() {
+    var mrn = val("wArMrn"), reason = val("wArReason");
+    if (!mrn) { st.err = "Say which patient, by MRN."; paint(); return; }
+    if (!reason) { st.err = "Say why this patient needs to come in."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/request-admission", {
+      orgId: st.orgId, mrn: mrn, urgency: val("wArUrg"), specialty: val("wArSpec") || undefined,
+      ward: val("wArWard") || undefined, reason: reason,
+    })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "On the waiting list." : null)) {
+          ["wArMrn", "wArSpec", "wArWard", "wArReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadAdmReqs();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not ask for that bed."; paint(); });
+  }
+  function admReqClose(arg) {
+    var parts = String(arg || "").split("~");
+    var id = parts[0], state = parts[1];
+    if (!id || !state) return;
+    var reason = "";
+    if (state === "cancelled") {
+      try { reason = G.prompt("Why is this request being cancelled?") || ""; } catch (e) {}
+      /* A patient who drops off a bed list with no reason is a patient nobody admitted. */
+      if (!reason) { st.err = "A cancellation needs a reason."; paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/close-admission-request", { orgId: st.orgId, requestId: id, state: state, reason: reason || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Closed." : null)) loadAdmReqs(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not close that request."; paint(); });
+  }
+
+  function orderSetsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "ordersets"; st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; paint();
+    apiGet("/ward/order-sets?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        if (r && r.ok) st.orderSets = r;
+        else { st.orderSets = null; st.err = "Could not load order sets."; }
+        paint();
+      })
+      .catch(function () { st.err = "Could not load order sets."; paint(); });
+  }
+  function orderSetPick() {
+    var id = val("wOsSet");
+    var found = null;
+    ((st.orderSets && st.orderSets.sets) || []).forEach(function (x) { if (x.id === id) found = x; });
+    st.orderSetPick = found; st.orderSetResult = null; paint();
+  }
+  /* Resolve the ticked items on the server, then send each through the ORDINARY ordering route in
+   * turn. Sequential on purpose: parallel orders against one patient race each other for the record
+   * version, and the interaction check on order three has to see orders one and two. */
+  function orderSetApply() {
+    var s = st.sel, pick = st.orderSetPick;
+    if (!s || !pick) return;
+    var select = [];
+    (pick.items || []).forEach(function (it) {
+      var el = document.getElementById("wOsItem_" + it.key);
+      if (el && el.checked) select.push(it.key);
+    });
+    if (!select.length) { st.err = "Nothing is ticked."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/prepare-set", { orgId: st.orgId, setId: pick.id, patientId: s.patientId, encounterId: s.encounterId, select: select })
+      .then(function (prep) {
+        if (!prep || !prep.ok) { st.busy = false; settle(prep, null); paint(); return null; }
+        var applied = [], failed = [];
+        var chain = Promise.resolve();
+        (prep.requests || []).forEach(function (req) {
+          chain = chain.then(function () {
+            var call = req.kind === "medication"
+              ? apiPost("/ward/medication-order", { orgId: st.orgId, order: req.order })
+              : apiPost("/ward/investigation", { orgId: st.orgId, encounterId: req.order.encounterId, code: req.order.code, display: req.order.display });
+            return call.then(function (r) {
+              if (r && r.ok) applied.push(req.key);
+              else failed.push({ key: req.key, error: (r && r.error) || "refused", detail: r && (r.detail || (r.reasons && r.reasons.join(", "))) });
+            }).catch(function () { failed.push({ key: req.key, error: "unreachable", detail: "Could not reach the server for this item." }); });
+          });
+        });
+        return chain.then(function () {
+          var result = { applied: applied, failed: failed, deselected: prep.deselected || [] };
+          /* Recorded whatever happened, including a set that landed in part - that is the case a
+           * later reader most needs to find. */
+          return apiPost("/ward/applied-set", {
+            orgId: st.orgId, setId: prep.setId, setName: prep.setName, setVersion: prep.setVersion,
+            patientId: s.patientId, encounterId: s.encounterId,
+            applied: applied, failed: failed, deselected: prep.deselected || [],
+          }).then(function () { return result; }, function () { return result; });
+        });
+      })
+      .then(function (result) {
+        st.busy = false;
+        if (result) { st.orderSetResult = result; st.orderSetPick = null; loadChart(); }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not apply that order set."; paint(); });
+  }
+
+  function breakGlassOpen() {
+    st.view = "breakglass"; st.breakGlass = null; paint(); loadBreakGlass();
+  }
+  function loadBreakGlass() {
+    st.busy = true; paint();
+    return apiGet("/ward/break-glass-log?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.breakGlass = r;
+        else { st.breakGlass = null; st.err = "Could not load the emergency access log. Do not read this as none declared."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.breakGlass = null; st.err = "Could not load the emergency access log."; paint(); });
+  }
+  function emergencyChartOpen(patientId) {
+    if (!patientId) return;
+    st.emergencyChart = null; st.busy = true; paint();
+    apiGet("/ward/emergency-chart?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId))
+      .then(function (r) { st.busy = false; st.emergencyChart = r || { ok: false, error: "no_response" }; paint(); })
+      .catch(function () { st.busy = false; st.emergencyChart = { ok: false, detail: "Could not open the chart." }; paint(); });
+  }
+  function breakGlassDeclare() {
+    var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
+    var reason = val("wBgReason");
+    if (!reason) { st.err = "Break-glass needs a reason in your own words."; paint(); return; }
+    /* Asked twice, because this is recorded against the clinician's name and reviewed. */
+    if (!confirm("Break glass for " + (s.name || s.patientId) + "?\n\nYour name and reason will be recorded and reviewed.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/break-glass", { orgId: st.orgId, patientId: s.patientId, reason: reason })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Emergency access granted. It is read-only and ends on its own." : null)) {
+          var el = document.getElementById("wBgReason"); if (el) el.value = "";
+          loadBreakGlass();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not declare emergency access."; paint(); });
+  }
+
+  function woundOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "wounds"; st.wounds = null; paint(); loadWounds();
+  }
+  function loadWounds() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/wounds?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.wounds = r;
+        else { st.wounds = null; st.err = "Could not load wounds. Do not read this as none charted."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.wounds = null; st.err = "Could not load wounds. Do not read this as none charted."; paint(); });
+  }
+  function woundChart() {
+    var s = st.sel; if (!s) return;
+    var site = val("wWdSite");
+    if (!site) { st.err = "Say where on the body."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/wound", {
+      orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId,
+      site: site, kind: val("wWdKind"), stage: val("wWdStage") || undefined, origin: val("wWdOrigin"),
+      lengthCm: val("wWdL") || undefined, widthCm: val("wWdW") || undefined, depthCm: val("wWdD") || undefined,
+      dressing: val("wWdDressing") || undefined, note: val("wWdNote") || undefined,
+    })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Charted." : null)) {
+          ["wWdSite", "wWdL", "wWdW", "wWdD", "wWdDressing", "wWdNote"].forEach(function (id) {
+            var el = document.getElementById(id); if (el) el.value = "";
+          });
+          loadWounds();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not chart that wound."; paint(); });
+  }
+
+  function riskOpenView() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "risks"; st.risks = null; st.riskForm = null; paint(); loadRisks();
+  }
+  function loadRisks() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return Promise.all([
+      apiGet("/ward/risks?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)),
+      apiGet("/ward/risk-tools?orgId=" + encodeURIComponent(st.orgId)),
+    ]).then(function (rs) {
+      st.busy = false;
+      if (rs[0] && rs[0].ok) st.risks = rs[0];
+      else { st.risks = null; st.err = "Could not load risk assessments. Do not read this as none recorded."; }
+      st.riskTools = (rs[1] && rs[1].ok) ? rs[1] : { tools: [] };
+      paint();
+    }).catch(function () { st.busy = false; st.risks = null; st.err = "Could not load risk assessments."; paint(); });
+  }
+  function riskOpenTool() {
+    var id = val("wRkTool");
+    var tools = (st.riskTools && st.riskTools.tools) || [];
+    var found = null;
+    tools.forEach(function (t) { if (t.id === id) found = t; });
+    if (!found) { st.err = "That tool is not configured."; paint(); return; }
+    st.riskForm = found; paint();
+  }
+  function riskSave() {
+    var s = st.sel; if (!s || !st.riskForm) return;
+    var answers = {};
+    (st.riskForm.questions || []).forEach(function (q) {
+      var v = val("wRq_" + q.key);
+      if (v !== "") answers[q.key] = v;
+    });
+    st.busy = true; paint();
+    apiPost("/ward/assess", { orgId: st.orgId, toolId: st.riskForm.id, encounterId: s.encounterId, answers: answers })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? (r.incomplete ? "Recorded, with unanswered questions." : "Recorded.") : null)) {
+          st.riskForm = null; loadRisks();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that assessment."; paint(); });
+  }
+  function riskActionDone(arg) {
+    var parts = String(arg || "").split("~");
+    var assessmentId = parts[0], action = parts.slice(1).join("~");
+    if (!assessmentId || !action) return;
+    var note = "";
+    try { note = G.prompt("Anything to record about doing this? (optional)") || ""; } catch (e) {}
+    st.busy = true; paint();
+    apiPost("/ward/risk-action", { orgId: st.orgId, assessmentId: assessmentId, action: action, note: note || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded." : null)) loadRisks(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+
+  function medRecOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "medrec"; st.medRec = null; paint(); loadMedRec();
+  }
+  function loadMedRec() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/med-reconciliation?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(s.encounterId))
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.medRec = r;
+        else { st.medRec = null; st.err = "Could not load the medicines history. Do not read this as none recorded."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.medRec = null; st.err = "Could not load the medicines history. Do not read this as none recorded."; paint(); });
+  }
+  function medRecStart() {
+    var s = st.sel; if (!s) return;
+    var text = val("wMrMeds");
+    if (!text) { st.err = "Write down what the patient is taking."; paint(); return; }
+    /* One medicine a line, exactly as typed. Nothing here parses a dose out of the words: a parser
+     * that guessed "500mg" from a line and got it wrong would put a made-up dose on the record. */
+    var medicines = text.split("\n").map(function (l) { return l.trim(); }).filter(Boolean)
+      .map(function (l) { return { drug: l }; });
+    if (!medicines.length) { st.err = "Write down what the patient is taking."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/med-history", {
+      orgId: st.orgId, encounterId: s.encounterId, stage: val("wMrStage") || "admission",
+      source: val("wMrSource") || undefined, medicines: medicines,
+    })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Recorded. Each medicine still needs a decision." : null)) {
+          var el = document.getElementById("wMrMeds"); if (el) el.value = "";
+          loadMedRec();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+  function medRecDecide(arg) {
+    var s = st.sel; if (!s) return;
+    var parts = String(arg || "").split("~");
+    var stage = parts[0], key = parts[1], decision = parts[2];
+    if (!stage || !key || !decision) return;
+    var reason = "";
+    /* The module requires a reason for the decisions that change what the patient takes; asking for
+     * one on every decision is simpler than encoding that rule twice, and the server is still the
+     * one that enforces it. */
+    try { reason = G.prompt("Why? (required for stopping or changing a medicine)") || ""; } catch (e) {}
+    st.busy = true; paint();
+    apiPost("/ward/med-decide", {
+      orgId: st.orgId, encounterId: s.encounterId, stage: stage, key: key,
+      decision: decision, reason: reason || undefined,
+    })
+      .then(function (r) { if (settle(r, r && r.ok ? "Decided." : null)) loadMedRec(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that decision."; paint(); });
+  }
+
+  function handoverOpen() {
+    st.view = "handover"; st.handovers = null; paint(); loadHandovers();
+  }
+  function loadHandovers() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId) + "&state=" + encodeURIComponent(st.handoverState || "waiting");
+    return apiGet("/ward/handovers?" + q)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.handovers = r;
+        // An unreachable list is not an empty shift. Same reasoning as the safety inbox.
+        else { st.handovers = null; st.err = "Could not load handovers. Do not read this as nothing waiting."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.handovers = null; st.err = "Could not load handovers. Do not read this as nothing waiting."; paint(); });
+  }
+  function handoverGive() {
+    var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
+    var sbar = {}, any = false;
+    SBAR_FIELDS.forEach(function (f) { var v = val("wHo_" + f[0]); if (v) { sbar[f[0]] = v; any = true; } });
+    if (!any) { st.err = "A handover with nothing in it is not a handover."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/handover", { orgId: st.orgId, encounterId: s.encounterId, sbar: sbar })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Handed over. It stays waiting until somebody else takes it." : null)) {
+          SBAR_FIELDS.forEach(function (f) { var el = document.getElementById("wHo_" + f[0]); if (el) el.value = ""; });
+          loadHandovers();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that handover."; paint(); });
+  }
+  function handoverTake(id) {
+    var note = "";
+    try { note = G.prompt("Anything to add as you take this patient? (optional)") || ""; } catch (e) {}
+    st.busy = true; paint();
+    apiPost("/ward/receive-handover", { orgId: st.orgId, handoverId: id, note: note || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Taken." : null)) loadHandovers(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not take that handover."; paint(); });
+  }
+
+  function safetyInboxOpen() {
+    st.view = "safetyinbox"; st.inbox = null; paint(); loadSafetyInbox();
+  }
+  function loadSafetyInbox() {
+    st.busy = true; paint();
+    var q = "orgId=" + encodeURIComponent(st.orgId);
+    if (st.inboxRole) q += "&role=" + encodeURIComponent(st.inboxRole);
+    return apiGet("/ward/safety-inbox?" + q)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) st.inbox = r;
+        /* A failed LOAD is not an empty inbox. Said in the same words the list itself uses, because
+         * the reader has to end up with the same belief either way: this is not a quiet ward. */
+        else { st.inbox = null; st.err = "Could not load the safety inbox. Do not read this as a quiet ward."; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.inbox = null; st.err = "Could not load the safety inbox. Do not read this as a quiet ward."; paint(); });
+  }
+  /* Opening the patient an item belongs to. It goes to the workspace rather than the raw chart,
+   * because somebody acting on a safety item needs the context around it before they act. */
+  function inboxOpenPatient(patientId) {
+    if (!patientId) return;
+    var found = null;
+    (st.list || []).forEach(function (p) { if (p.patientId === patientId) found = p; });
+    if (!found) { st.err = "That patient is not on the current ward list. Refresh the ward."; paint(); return; }
+    st.sel = found;
+    workspaceOpen();
+  }
+
+  function workspaceOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "workspace"; paint();
+    loadChart(); loadNews2(); loadPeople();
+  }
+
+  function loadReferrals() {
+    var path = st.view === "referralinbox"
+      ? "/ward/referral-inbox?orgId=" + encodeURIComponent(st.orgId) + "&specialty=" + encodeURIComponent(st.refSpecialty || "") + "&view=" + encodeURIComponent(st.refView || "")
+      : "/ward/referrals?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel ? st.sel.patientId : "");
+    return apiGet(path)
+      .then(function (r) { st.referrals = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+      .catch(function () { st.referrals = { failed: true }; paint(); });
+  }
+  function referralCreate() {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId || undefined, specialty: val("wRefSpecialty"), urgency: val("wRefUrgency"),
+      kind: val("wRefKind"), destinationFacility: val("wRefFacility"), reason: val("wRefReason"), clinicalSummary: val("wRefSummary") };
+    st.busy = true; paint();
+    apiPost("/ward/referral-create", body)
+      .then(function (r) { if (settle(r, r && r.ok ? "Referral sent." : null)) loadReferrals(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not send the referral."; paint(); });
+  }
+  function referralAct(arg) {
+    var p = String(arg || "").split("~"), id = p[0], action = p[1], version = Number(p[2]);
+    var body = { orgId: st.orgId, referralId: id, action: action, expectedVersion: version };
+    var ask = function (q) { try { return G.prompt(q) || ""; } catch (e) { return ""; } };
+    if (action === "decline" || action === "cancel") { body.reason = ask(action === "decline" ? "Why is this referral declined? The referring team will see this." : "Why is this referral cancelled?"); if (!body.reason.trim()) return; }
+    if (action === "respond") { body.response = ask("Your reply to the referring team:"); if (!body.response.trim()) return; }
+    if (action === "schedule") { body.appointmentAt = ask("Appointment date and time (for example 2026-09-20 10:30):"); if (!body.appointmentAt.trim()) return; body.appointmentAt = body.appointmentAt.trim().replace(" ", "T"); }
+    st.busy = true; paint();
+    apiPost("/ward/referral-act", body)
+      .then(function (r) { if (settle(r, r && r.ok ? "Referral updated." : null)) loadReferrals(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not update the referral."; paint(); });
+  }
+  function documentsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "documents"; st.docs = null; st.docVersions = null; st.docNewVersion = null; paint(); loadDocuments();
+  }
+  function loadDocuments() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    return apiGet("/ward/documents?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.docs = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+      .catch(function () { st.docs = { failed: true }; paint(); });
+  }
+  function documentUpload() {
+    var s = st.sel, input = document.getElementById("wDocFile");
+    var file = input && input.files && input.files[0];
+    var title = val("wDocTitle"), target = st.docNewVersion;
+    if (!file) { st.err = "Choose a file first."; paint(); return; }
+    if (!title) { st.err = "Give the document a title."; paint(); return; }
+    if (file.size > 10 * 1024 * 1024) { st.err = "Files are limited to 10 MB."; paint(); return; }
+    var docType = target ? "" : val("wDocType");
+    var reader = new FileReader();
+    reader.onload = function () {
+      var body = { orgId: st.orgId, title: title, contentType: file.type, dataBase64: String(reader.result || "") };
+      if (target) { body.documentId = target.id; body.expectedVersion = target.version; body.docType = (st.docs.documents.filter(function (x) { return x.id === target.id; })[0] || {}).docType; }
+      else { body.patientId = s.patientId; body.encounterId = s.encounterId || undefined; body.docType = docType; }
+      st.busy = true; paint();
+      apiPost("/ward/document-upload", body)
+        .then(function (r) { if (settle(r, r && r.ok ? (target ? "New version uploaded." : "Document uploaded.") : null)) { st.docNewVersion = null; st.docVersions = null; loadDocuments(); } else paint(); })
+        .catch(function () { st.busy = false; st.err = "Could not upload. Nothing was saved."; paint(); });
+    };
+    reader.onerror = function () { st.err = "Could not read that file."; paint(); };
+    reader.readAsDataURL(file);
+  }
+  function documentOpen(arg) {
+    var p = String(arg || "").split("~");
+    // Opened now, filled in when the link arrives: a window opened after a network wait is blocked as a popup.
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    apiPost("/ward/document-link", { orgId: st.orgId, documentId: p[0], version: Number(p[1]) })
+      .then(function (r) {
+        if (r && r.ok && r.url) { if (win) win.location.href = API.replace(/\/api\/queue$/, "") + r.url; else G.location.href = r.url; return; }
+        if (win) try { win.close(); } catch (e) {}
+        settle(r, null); paint();
+      })
+      .catch(function () { if (win) try { win.close(); } catch (e) {} st.err = "Could not open the document."; paint(); });
+  }
+  function documentVersionsLoad(id) {
+    st.docVersions = { id: id }; paint();
+    apiGet("/ward/document-versions?orgId=" + encodeURIComponent(st.orgId) + "&documentId=" + encodeURIComponent(id))
+      .then(function (r) { st.docVersions = r && r.ok ? { id: id, versions: r.versions } : { id: id, failed: true }; paint(); })
+      .catch(function () { st.docVersions = { id: id, failed: true }; paint(); });
+  }
+  function documentPurge(id) {
+    if (!confirm("Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.")) return;
+    st.busy = true; paint();
+    apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
+      .then(function (r) { if (settle(r, r && r.ok ? "File deleted. The record of the document is kept." : null)) loadDocuments(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not delete the file."; paint(); });
+  }
+  function documentWithdraw(id) {
+    var reason = "";
+    try { reason = G.prompt("Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.") || ""; } catch (e) {}
+    if (!reason.trim()) return;
+    st.busy = true; paint();
+    apiPost("/ward/document-withdraw", { orgId: st.orgId, documentId: id, reason: reason.trim() })
+      .then(function (r) { if (settle(r, r && r.ok ? "Document withdrawn. The file is kept." : null)) loadDocuments(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw the document."; paint(); });
+  }
+  function peopleOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "people"; st.people = null; paint(); loadPeople();
+  }
+  function loadPeople() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/related-people?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.busy = false; if (r && r.ok) st.people = r; paint(); })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function personAdd() {
+    var s = st.sel; if (!s) return;
+    var name = val("wPerName");
+    if (!name) { st.err = "A contact needs a name."; paint(); return; }
+    var person = {
+      name: name, relationship: val("wPerRel"), phone: val("wPerPhone"),
+      nextOfKin: checked("wPerKin"), guardian: checked("wPerGuard"), emergencyContact: checked("wPerEmg"),
+    };
+    st.busy = true; paint();
+    apiPost("/ward/related-person", { orgId: st.orgId, patientId: s.patientId, person: person })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Recorded." : null)) {
+          ["wPerName", "wPerPhone"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          ["wPerKin", "wPerGuard", "wPerEmg"].forEach(function (id) { var el = document.getElementById(id); if (el) el.checked = false; });
+          loadPeople();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that contact."; paint(); });
+  }
+  function personRemove(id) {
+    var reason = prompt("Why is this contact being removed? (optional)") || "";
+    st.busy = true; paint();
+    apiPost("/ward/related-person-remove", { orgId: st.orgId, relatedPersonId: id, reason: reason || undefined })
+      .then(function (r) { if (settle(r, r && r.ok ? "Removed. It stays on the record." : null)) loadPeople(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not remove that."; paint(); });
+  }
+  /* Recording a death asks twice, on purpose, and the second ask names the patient. A mis-click on
+   * a ward list is exactly how the wrong person gets recorded dead, and the server refuses anything
+   * that does not carry an explicit confirmation - this is the screen half of that. */
+  function deathRecord() {
+    var s = st.sel; if (!s) return;
+    var who = s.name || s.patientId;
+    if (!confirm("Record that " + who + " has died?\n\nThis is recorded permanently against this patient.")) return;
+    var at = prompt("When did they die? Leave blank for now.\n(YYYY-MM-DD HH:MM)") || "";
+    var cause = prompt("Cause, if known (optional)") || "";
+    var certifiedBy = prompt("Certified by (optional)") || "";
+    var iso = "";
+    if (at) {
+      var parsed = new Date(at.replace(" ", "T"));
+      if (isNaN(parsed.getTime())) { st.err = "That date could not be read. Nothing was recorded."; paint(); return; }
+      iso = parsed.toISOString();
+    }
+    st.busy = true; paint();
+    apiPost("/ward/deceased", {
+      orgId: st.orgId, patientId: s.patientId, confirm: true,
+      deceased: { at: iso || undefined, cause: cause || undefined, certifiedBy: certifiedBy || undefined },
+    })
+      .then(function (r) { if (settle(r, r && r.ok ? "Recorded." : null)) loadPeople(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+  }
+  function deathWithdraw() {
+    var s = st.sel; if (!s) return;
+    var reason = prompt("Why is this being withdrawn?") || "";
+    if (!reason) { st.err = "A withdrawal needs a reason."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/deceased-correct", { orgId: st.orgId, patientId: s.patientId, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? r.detail : null)) loadPeople(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw that."; paint(); });
+  }
+
+  function consultationOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.consultationResult = null; st.cDraft = null; st.cIcd = undefined;
+    st.view = "consultation";
+    paint();
+    // The note section cannot offer a template it has not been told about.
+    if (!st.templates) loadTemplates();
+  }
+
+  /* Collects whatever the clinician actually filled in and sends it as ONE consultation. Sections
+   * left blank are not sent at all, so an empty box never becomes an empty record. Nothing here is
+   * validated beyond "is this section filled in enough to mean anything" - every real rule, from
+   * the formulary to the dose ceiling to who may prescribe at all, is the server's, and its refusal
+   * is shown as it came back. */
+  function saveWholeConsultation() {
+    var s = st.sel; if (!s) return;
+    /* Snapshot BEFORE any of the checks below, because every one of them ends in paint() - so
+     * without this, telling a doctor "a prescription needs the drug, the dose and the unit" would
+     * also wipe the vitals and the note they had already typed. */
+    cSnapshot();
+    var body = { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId };
+
+    var v = {}, anyVital = false;
+    VITALS.forEach(function (f) { var x = val("wc_" + f.k); if (x) { v[f.k] = x; anyVital = true; } });
+    // The units the boxes were LABELLED with travel with the values, exactly as the vitals card does.
+    if (v.temp) v.tempUnit = st.region === "US" ? "F" : "C";
+    if (v.weight) v.weightUnit = st.region === "US" ? "lb" : "kg";
+    var o2 = val("wc_o2"); if (o2 !== "") { v.o2 = o2; anyVital = true; }
+    var ac = val("wc_acvpu"); if (ac) { v.acvpu = ac; anyVital = true; }
+    if (anyVital) body.vitals = [v];
+
+    var probText = val("wcProbText"), probCode = val("wcProbCode");
+    if (probText || probCode) {
+      body.problems = [{ patientId: s.patientId, encounterId: s.encounterId, display: probText, code: probCode,
+        verificationStatus: val("wcProbVs") || undefined }];
+    }
+
+    var drug = val("wcMoDrug"), dv = val("wcMoValue"), du = val("wcMoUnit");
+    if (drug || dv || du) {
+      /* Refused HERE rather than sent, because a half-written prescription is the one section where
+       * sending what was typed and letting the server sort it out is the wrong answer: the whole
+       * consultation would be refused for a typo, after the doctor had filled in everything else. */
+      if (!drug || !dv || !du) { st.err = "A prescription needs the drug, the dose and the unit. Fill all three, or clear them."; paint(); return; }
+      body.medications = [{ patientId: s.patientId, encounterId: s.encounterId, drug: drug,
+        dose: { value: dv, unit: du }, route: val("wcMoRoute") || undefined, frequency: val("wcMoFreq") || undefined }];
+    }
+
+    var inv = val("wcInvCode");
+    if (inv) body.investigations = [{ display: inv, code: inv, priority: val("wcInvPri") || undefined, reason: val("wcInvReason") || undefined }];
+
+    var tpl = val("wcNoteTpl"), noteText = val("wcNoteText");
+    if (tpl || noteText) {
+      if (!tpl) { st.err = "Choose a template for the note, or clear the note."; paint(); return; }
+      body.note = { templateId: tpl, sections: { narrative: noteText } };
+    }
+
+    if (!body.vitals && !body.problems && !body.medications && !body.investigations && !body.note) {
+      st.err = "Nothing was filled in."; paint(); return;
+    }
+
+    st.busy = true; st.consultationResult = null; paint();
+    apiPost("/ward/consultation", body)
+      .then(function (r) {
+        st.busy = false;
+        /* The server's own per-piece answer is kept and rendered in full. This deliberately does NOT
+         * go through settle(): settle reduces a reply to one success line or one error line, which
+         * is precisely the flattening that let a refused prescription hide behind a saved note. */
+        st.consultationResult = r || null;
+        if (r && r.ok) {
+          st.err = "";
+          clearConsultationFields();
+          // What was just written has to be re-read, or the chart under this screen still shows the
+          // ward as it was before the consultation happened.
+          loadChart(); loadFlowsheet(); loadNews2(); loadRound();
+        } else if (!r) {
+          st.err = "Could not save the consultation.";
+        } else {
+          st.err = "";
+        }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not save the consultation."; paint(); });
+  }
+
+  function consultationFindCode() {
+    cSnapshot();
+    var q = cDraft(st.cDraft, "wcProbText");
+    if (!q) { st.err = "Type the diagnosis first, then search for its code."; paint(); return; }
+    st.cIcd = null; paint();
+    icdSearch(q)
+      .then(function (rows) { st.cIcd = rows; paint(); })
+      // A code service that is down must never stop a diagnosis being recorded. The words still
+      // work, and the screen says so rather than leaving a spinner up.
+      .catch(function () { st.cIcd = []; st.err = "The code search is unavailable. Record the diagnosis in words."; paint(); });
+  }
+  function consultationPickCode(i) {
+    var c = (st.cIcd || [])[i];
+    if (!c) return;
+    cSnapshot();
+    st.cDraft.wcProbCode = c.code;
+    // The official title becomes the words, so the record says what the code actually means rather
+    // than what somebody typed on the way to finding it.
+    st.cDraft.wcProbText = c.title;
+    st.cIcd = undefined;
+    paint();
+  }
+
+  function clearConsultationFields() {
+    // The draft goes with them, or the next repaint puts the saved consultation straight back.
+    st.cDraft = null; st.cIcd = undefined;
+    VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) el.value = ""; });
+    ["wc_o2", "wc_acvpu", "wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
+      "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText"]
+      .forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+  }
+
   function loadTemplates() {
     return apiGet("/ward/templates?orgId=" + encodeURIComponent(st.orgId))
       .then(function (r) { if (r && r.ok) st.templates = r.templates || []; paint(); })
@@ -4304,6 +7714,82 @@
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not load the reports."; paint(); });
+  }
+  function incidentsOpen() {
+    st.view = "incidents"; st.incidentLog = null; st.incidentHealth = null; paint(); loadIncidents();
+  }
+  function loadIncidents() {
+    st.busy = true; paint();
+    return apiGet("/ward/incident-log?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        st.busy = false;
+        // The ledger is incident.investigate only; filing is incident.report and nearly every
+        // clinical role holds it. A reporter without the ledger cap did nothing wrong by opening
+        // this screen to file - so a refused ledger read stays silent, same reasoning as the
+        // co-sign worklist elsewhere in this file, and st.incidentLog simply stays null (the
+        // view's own signal to show the filing form alone, not a ledger that never loaded).
+        if (r && r.ok) { st.incidentLog = r.incidents || []; st.incidentHealth = r.health || null; }
+        paint();
+      })
+      .catch(function () { st.busy = false; paint(); });
+  }
+  function reportIncidentAction() {
+    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient");
+    var anonEl = document.getElementById("wIncAnon");
+    var anon = !!(anonEl && anonEl.checked);
+    if (!what || what.length < 3) { st.err = "Describe what happened, in a sentence or two."; paint(); return; }
+    if (!severity) { st.err = "Pick what actually reached the patient."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined })
+      .then(function (r) {
+        if (settle(r, r && r.written ? "Reported." : null)) {
+          ["wIncWhat", "wIncWhen", "wIncPatient"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          if (anonEl) anonEl.checked = false;
+          loadIncidents();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not file the report."; paint(); });
+  }
+  function incidentTriage(id) {
+    var likelihood = val("wIncLk_" + id);
+    if (!likelihood) { st.err = "Pick a likelihood before triaging."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-triage", { orgId: st.orgId, incidentId: id, likelihood: likelihood })
+      .then(function (r) { if (settle(r, "Triaged.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not triage."; paint(); });
+  }
+  function incidentRca(id) {
+    var rootCause = val("wIncRoot_" + id), method = val("wIncMethod_" + id);
+    var factors = val("wIncFactors_" + id).split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s; });
+    if (!rootCause) { st.err = "An RCA needs a root cause."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-rca", { orgId: st.orgId, incidentId: id, rootCause: rootCause, method: method || undefined, contributingFactors: factors })
+      .then(function (r) { if (settle(r, "Root cause recorded.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not record the root cause."; paint(); });
+  }
+  function incidentCapaAdd(id) {
+    var action = val("wIncCapaAction_" + id), owner = val("wIncCapaOwner_" + id), dueBy = val("wIncCapaDue_" + id), strength = val("wIncCapaStrength_" + id);
+    if (!action || !owner || !dueBy) { st.err = "A corrective action needs the action, an owner and a due date."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-capa", { orgId: st.orgId, incidentId: id, action: action, owner: owner, dueBy: dueBy, strength: strength || undefined })
+      .then(function (r) { if (settle(r, "Action added.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not add the action."; paint(); });
+  }
+  function incidentCapaComplete(id, capaId) {
+    var by = val("wIncCapaBy_" + capaId), evidence = val("wIncCapaEvidence_" + capaId);
+    if (!by || !evidence) { st.err = "Completing an action needs who did it and what shows it was done."; paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/incident-capa-complete", { orgId: st.orgId, incidentId: id, capaId: capaId, by: by, evidence: evidence })
+      .then(function (r) { if (settle(r, "Action completed.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not complete the action."; paint(); });
+  }
+  function incidentClose(id) {
+    var by = window.prompt("Your name, to close this incident:");
+    if (!by) return;
+    st.busy = true; paint();
+    apiPost("/ward/incident-close", { orgId: st.orgId, incidentId: id, by: by })
+      .then(function (r) { if (settle(r, "Closed.")) loadIncidents(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not close the incident."; paint(); });
   }
   function emergencyAdminOpen() {
     st.view = "emergencyadmin"; st.emergencyAdmin = null; st.emergencyReconcile = null; paint(); loadEmergencyLog();
@@ -4665,6 +8151,16 @@
           else {
             VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
             ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+            /* THE SCORE PANEL HAS TO RE-READ, OR IT REPORTS THE OBSERVATIONS AS MISSING.
+             *
+             * Recording vitals repainted from existing client state, so the Flowsheet sitting
+             * directly below still said "NEWS2 Incomplete: RespiratoryRate, OxygenSaturation ...
+             * were not recorded ... partial total of 0" and "No vitals charted in this window yet"
+             * for a set that had just been accepted by the server. Charting RR 24, SpO2 91, pulse
+             * 112, temp 38.4 - a NEWS2 of 8 - and being shown a 0 is the deterioration path
+             * reporting the opposite of what was charted. Found 2026-09-12 on the live ward.
+             * The timeline is re-read too: the dose and the observation belong on it immediately. */
+            loadFlowsheet(); loadNews2(); loadChart();
           }
         }
         paint();
@@ -4710,6 +8206,7 @@
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
+    if (cmd === "setcls") { st.cls = arg; var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st); else paint(); return; }
     if (cmd === "back") {
       /* The patient's copy is opened FROM a chart, so back returns to that chart rather than
        * throwing the selection away - and the copy itself is always dropped, because a page with
@@ -4727,6 +8224,9 @@
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
       if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
+      if (st.view === "timeline") { st.view = "chart"; paint(); return; }
+      if (st.view === "labboard") { st.labBoard = null; st.view = "list"; paint(); return; }
+      if (st.view === "radboard") { st.radBoard = null; st.view = "list"; paint(); return; }
       if (st.view === "integration") { st.integration = null; st.view = "list"; paint(); return; }
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
@@ -4734,6 +8234,27 @@
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
+      if (st.view === "purchasing") { st.purchaseOrders = null; st.view = "list"; paint(); return; }
+      if (st.view === "approvals") { st.approvals = null; st.view = "list"; paint(); return; }
+      if (st.view === "patientsurgery") { st.patientCases = null; st.view = "chart"; paint(); return; }
+      if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
+      if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "referrals") { st.referrals = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
+      if (st.view === "documents") { st.docs = null; st.docVersions = null; st.docNewVersion = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
+      if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
+      if (st.view === "ordersets") { st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null; st.view = "chart"; paint(); return; }
+      if (st.view === "breakglass") { st.breakGlass = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
+      if (st.view === "risks") { st.risks = null; st.riskForm = null; st.view = "chart"; paint(); return; }
+      if (st.view === "medrec") { st.medRec = null; st.view = "chart"; paint(); return; }
+      if (st.view === "handover") { st.handovers = null; st.view = "list"; paint(); return; }
+      if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
+      if (st.view === "workspace") { st.view = "chart"; paint(); return; }
+      if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
+      if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
+      if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "emergencyadmin") { st.emergencyAdmin = null; st.emergencyReconcile = null; st.view = "list"; paint(); return; }
       // Picking a bed to admit an ED patient opens the SAME bed board a fresh admission uses;
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
@@ -4765,7 +8286,8 @@
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
       st.sel = p; st.view = "chart"; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
-      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+      st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
+      st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
@@ -4809,6 +8331,15 @@
     if (cmd === "srcrevoke") { revokeSource(arg); return; }
     if (cmd === "critsboard") { critsBoardOpen(); return; }
     if (cmd === "critsboardload") { loadCritsBoard(); return; }
+    if (cmd === "timeline") { timelineOpen(); return; }
+    if (cmd === "timelineload") { loadChart(); return; }
+    if (cmd === "timelinenote") { timelineNoteSave(); return; }
+    if (cmd === "labboard") { labBoardOpen(); return; }
+    if (cmd === "labboardload") { loadLabBoard(); return; }
+    if (cmd === "radboard") { radBoardOpen(); return; }
+    if (cmd === "radboardload") { loadRadBoard(); return; }
+    if (cmd === "radboardpick") { radBoardPick(arg); return; }
+    if (cmd === "radboardreportsave") { radBoardReportSave(); return; }
     if (cmd === "ackboard") { acknowledgeBoard(arg); return; }
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
@@ -4916,6 +8447,8 @@
     if (cmd === "triage") { recordTriage(); return; }
     if (cmd === "resusload") { loadResus(); return; }
     if (cmd === "resusstart") { resusStart(); return; }
+    if (cmd === "childdoselimit") { childDoseLimitCheck(); return; }
+    if (cmd === "resuswaive") { var rw = arg.indexOf("|"); if (rw > 0) resusWaive(arg.slice(0, rw), arg.slice(rw + 1)); return; }
     if (cmd === "resusmark") { var rm = arg.indexOf("|"); if (rm > 0) resusMark(arg.slice(0, rm), arg.slice(rm + 1)); return; }
     if (cmd === "resusvoid") { resusVoid(arg); return; }
     if (cmd === "deviceload") { loadDevices(); return; }
@@ -4951,6 +8484,110 @@
     if (cmd === "resolve") { resolveProblem(arg); return; }
     if (cmd === "downtime") { loadDowntime(); return; }
     if (cmd === "reports") { loadReports(); return; }
+    if (cmd === "incidents") { incidentsOpen(); return; }
+    if (cmd === "timelinefilter") { st.timelineFilter = arg === "all" ? "" : arg; paint(); return; }
+    if (cmd === "timelinewhen") { st.timelineWhen = arg === "any" ? "" : arg; paint(); return; }
+    if (cmd === "timelinesearch") { st.timelineQuery = val("wTlQ"); paint(); return; }
+    if (cmd === "timelinesearchclear") { st.timelineQuery = ""; paint(); return; }
+    if (cmd === "timelinedetail") { timelineDetail(arg); return; }
+    if (cmd === "timelinedetailclose") { st.recordDetail = null; paint(); return; }
+    if (cmd === "timelineopen") {
+      if (!st.timelineOpen) st.timelineOpen = {};
+      if (st.timelineOpen[arg]) delete st.timelineOpen[arg]; else st.timelineOpen[arg] = 1;
+      paint(); return;
+    }
+    if (cmd === "timelinereport") { timelineOpenReport(arg); return; }
+    if (cmd === "cashmethod") { st.cashMethod = val("wCashMethod") || "cash"; paint(); return; }
+    if (cmd === "patientsurgery") { patientSurgeryOpen(); return; }
+    if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
+    if (cmd === "wardcloseopen") { wardDischarge(); return; }
+    if (cmd === "followup") { followUpRequest(); return; }
+    if (cmd === "invvoid") { invoiceVoid(arg); return; }
+    if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
+    if (cmd === "bloodtrace") { bloodTrace(); return; }
+    if (cmd === "specreceived") { specimenOutcomeAct(arg, "received"); return; }
+    if (cmd === "specfailed") { specimenOutcomeAct(arg, "failed"); return; }
+    if (cmd === "labresultopen") { labResultOpen(arg); return; }
+    if (cmd === "labresultsave") { labResultSave(); return; }
+    if (cmd === "labresultclose") { st.labResultFor = null; st.labResultOutcome = null; paint(); return; }
+    if (cmd === "tags") { tagsOpen(); return; }
+    if (cmd === "tagverify") { tagVerify(); return; }
+    if (cmd === "tagassign") { tagAssign(); return; }
+    if (cmd === "tagreplace") { tagEnd("replace", arg); return; }
+    if (cmd === "taglost") { tagEnd("lost", arg); return; }
+    if (cmd === "tagend") { tagEnd("end", arg); return; }
+    if (cmd === "mpi") { mpiOpen(); return; }
+    if (cmd === "referrals") { if (!st.sel) { st.err = "Open a patient first."; paint(); return; } st.view = "referrals"; st.referrals = null; paint(); loadReferrals(); return; }
+    if (cmd === "referralinbox") { st.view = "referralinbox"; st.referrals = null; paint(); loadReferrals(); return; }
+    if (cmd === "refinboxload") { st.refSpecialty = val("wRefSpec"); st.refView = val("wRefView"); st.referrals = null; paint(); loadReferrals(); return; }
+    if (cmd === "refcreate") { referralCreate(); return; }
+    if (cmd === "refact") { referralAct(arg); return; }
+    if (cmd === "mpisearch") { mpiSearch(); return; }
+    if (cmd === "mpimerge") { mpiMergePreview(arg); return; }
+    if (cmd === "mpimergeconfirm") { mpiMergeConfirm(); return; }
+    if (cmd === "mpimergecancel") { st.mpiPreview = null; paint(); return; }
+    if (cmd === "mpiunmerge") { mpiMerge(arg, true); return; }
+    if (cmd === "infusions") { infusionOpen(); return; }
+    if (cmd === "infusionchart") { infusionChart(arg); return; }
+    if (cmd === "careplansave") { carePlanSave(); return; }
+    if (cmd === "admreqs") { admReqOpen(); return; }
+    if (cmd === "admreqask") { admReqAsk(); return; }
+    if (cmd === "admreqclose") { admReqClose(arg); return; }
+    if (cmd === "ordersets") { orderSetsOpen(); return; }
+    if (cmd === "ordersetpick") { orderSetPick(); return; }
+    if (cmd === "ordersetapply") { orderSetApply(); return; }
+    if (cmd === "breakglass") { breakGlassOpen(); return; }
+    if (cmd === "breakglassdeclare") { breakGlassDeclare(); return; }
+    if (cmd === "emergencychart") { emergencyChartOpen(arg); return; }
+    if (cmd === "wounds") { woundOpen(); return; }
+    if (cmd === "woundchart") { woundChart(); return; }
+    if (cmd === "risks") { riskOpenView(); return; }
+    if (cmd === "riskopen") { riskOpenTool(); return; }
+    if (cmd === "risksave") { riskSave(); return; }
+    if (cmd === "riskcancel") { st.riskForm = null; paint(); return; }
+    if (cmd === "riskdone") { riskActionDone(arg); return; }
+    if (cmd === "medrec") { medRecOpen(); return; }
+    if (cmd === "medrecstart") { medRecStart(); return; }
+    if (cmd === "medrecdecide") { medRecDecide(arg); return; }
+    if (cmd === "handovers") { handoverOpen(); return; }
+    if (cmd === "handovershow") { st.handoverState = arg; loadHandovers(); return; }
+    if (cmd === "handovergive") { handoverGive(); return; }
+    if (cmd === "handovertake") { handoverTake(arg); return; }
+    if (cmd === "safetyinbox") { safetyInboxOpen(); return; }
+    if (cmd === "inboxrole") { st.inboxRole = arg === "all" ? "" : arg; loadSafetyInbox(); return; }
+    if (cmd === "inboxopen") { inboxOpenPatient(arg); return; }
+    if (cmd === "workspace") { workspaceOpen(); return; }
+    if (cmd === "people") { peopleOpen(); return; }
+    if (cmd === "documents") { documentsOpen(); return; }
+    if (cmd === "docupload") { documentUpload(); return; }
+    if (cmd === "docopen") { documentOpen(arg); return; }
+    if (cmd === "docversions") { documentVersionsLoad(arg); return; }
+    if (cmd === "docnewversion") { var nv = String(arg || "").split("~"); st.docNewVersion = { id: nv[0], version: Number(nv[1]) }; paint(); return; }
+    if (cmd === "docnewversioncancel") { st.docNewVersion = null; paint(); return; }
+    if (cmd === "docwithdraw") { documentWithdraw(arg); return; }
+    if (cmd === "docpurge") { documentPurge(arg); return; }
+    if (cmd === "personadd") { personAdd(); return; }
+    if (cmd === "personremove") { personRemove(arg); return; }
+    if (cmd === "deathrecord") { deathRecord(); return; }
+    if (cmd === "deathwithdraw") { deathWithdraw(); return; }
+    if (cmd === "consultation") { consultationOpen(); return; }
+    if (cmd === "approvals") { approvalsOpen(); return; }
+    if (cmd === "purchasing") { purchasingOpen(); return; }
+    if (cmd === "poraise") { poRaise(); return; }
+    if (cmd === "poask") { poAskApproval(arg); return; }
+    if (cmd === "poreceive") { poReceive(arg); return; }
+    if (cmd === "approvalask") { approvalAsk(); return; }
+    if (cmd === "approvalyes") { approvalDecide(arg, "approved"); return; }
+    if (cmd === "approvalno") { approvalDecide(arg, "rejected"); return; }
+    if (cmd === "consultationsave") { saveWholeConsultation(); return; }
+    if (cmd === "cfindcode") { consultationFindCode(); return; }
+    if (cmd === "cicdpick") { consultationPickCode(Number(arg)); return; }
+    if (cmd === "incidentreport") { reportIncidentAction(); return; }
+    if (cmd === "incidenttriage") { incidentTriage(arg); return; }
+    if (cmd === "incidentrca") { incidentRca(arg); return; }
+    if (cmd === "incidentcapaadd") { incidentCapaAdd(arg); return; }
+    if (cmd === "incidentcapacomplete") { var incp = arg.split("~"); incidentCapaComplete(incp[0], incp[1]); return; }
+    if (cmd === "incidentclose") { incidentClose(arg); return; }
     if (cmd === "emergencyadmin") { emergencyAdminOpen(); return; }
     if (cmd === "emergencydeclare") { emergencyDeclareAction(); return; }
     if (cmd === "emergencydeactivate") { emergencyDeactivateAction(arg); return; }
@@ -4992,6 +8629,11 @@
     } catch (e) {}
     return "";
   }
+  function onInput(e) {
+    if (!e.target || e.target.id !== "wQ") return;
+    st.q = String(e.target.value || "");
+    var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st);
+  }
   function open(opts) {
     opts = opts || {};
     st.orgId = opts.orgId || st.orgId || rememberedOrgId();
@@ -5000,13 +8642,82 @@
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
-    paint(); loadWard();
+    // Live search: re-render only the roster so the search box keeps focus and its caret.
+    el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
+    paint();
+    /* A HOSPITAL ACT LOADS ITS OWN SCREEN, NOT THE WARD ROSTER TOO.
+     *
+     * open() used to call loadWard() unconditionally, even when the shell asked for a specific
+     * hospital-wide board (opts.act). The roster read needs the same record scope as the ward list
+     * and plenty of roles - cashier, pharmacy, the front desk - do not hold it. So a cashier opening
+     * Billing and cashier watched the ward roster fail first ("cash.01@demo.wardsynq.test may not
+     * read Encounter"), which set the ONE shared error banner, and then landed on her own working
+     * cashier screen with somebody else's refusal still printed across the top of it. Her screen was
+     * fine; the request she never made was not.
+     *
+     * Every hospital act already loads itself (loadBoard, loadEd, cashierOpen, loadReports, ...), so
+     * the roster read is only needed when no act is given - opening the plain ward list. */
+    if (!(opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0)) loadWard();
     // A hospital-level view requested by the shell (bed board, ED, twin...). Only the verbs the ward
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime"];
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} } }
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox"];
+  /* CLOSING THE WARD FORGETS THE PATIENTS.
+   *
+   * close() used to empty the markup and leave every patient in memory - the roster, the open
+   * chart, its timeline, its medications. signOut() calls this, so on a shared ward computer the
+   * next person to sign in opened the ward and saw the PREVIOUS user's patient list: 81 names, bed
+   * numbers and hospital numbers belonging to someone else's session. It was replaced a second
+   * later by their own fetch, which hid how wrong it was - and if that fetch was REFUSED, as it is
+   * for a pharmacist who may not read the ward, the old list simply stayed on screen.
+   *
+   * Found 2026-09-12 signing out of a nurse's session and in as the pharmacist. Everything clinical
+   * is cleared here; nothing is kept that names a patient. */
+  function close() {
+    var el = root(); el.classList.remove("on"); el.innerHTML = "";
+    st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
+    st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
+    st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null;
+    st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
+    st.incidentLog = null; st.incidentHealth = null;
+    st.consultationResult = null;
+    st.approvals = null;
+    st.purchaseOrders = null;
+    /* The half-typed consultation is cleared with everything else: a draft that outlives its
+     * patient is how one patient's findings end up in another's chart. */
+    st.cDraft = null; st.cIcd = undefined;
+    st.people = null;
+    st.inbox = null; st.inboxRole = "";
+    st.handovers = null; st.handoverState = "";
+    st.medRec = null;
+    st.wounds = null; st.risks = null; st.riskForm = null; st.riskTools = null;
+    st.breakGlass = null; st.emergencyChart = null;
+    st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null;
+    st.admReqs = null;
+    st.infusions = null;
+    st.mpi = null;
+    st.tags = null; st.tagVerify = null;
+    st.patientCases = null;
+    st.labResultFor = null; st.labResultOutcome = null;
+    st.noteDraft = ""; st.noteErr = ""; st.err = ""; st.view = "list";
+    if (G.WARD && typeof G.WARD.onClose === "function") { try { G.WARD.onClose(); } catch (e) {} }
+  }
 
-  G.WARD = { open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
+  /* THE OVERLAY LET GO OF THE SCREEN WHEN THE SHELL NAVIGATED AWAY.
+   *
+   * This is a fixed, full-viewport layer at z-index 12000. It closed only through its own X, so
+   * using the left-hand navigation while the ward was open left it covering an app that had already
+   * routed somewhere else: the map, the admin centre or the discharge summary rendered underneath,
+   * unreachable, and the ward looked stuck. Found 2026-09-12 clicking the shell's own nav on the
+   * live site. The shell owns the route; the overlay follows it. Only when it is actually open, so
+   * this can never interfere with a page the ward is not on top of. */
+  try {
+    G.addEventListener("hashchange", function () {
+      var el = document.getElementById("smdWard");
+      if (el && el.classList.contains("on")) close();
+    });
+  } catch (e) {}
+
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem };
 })();

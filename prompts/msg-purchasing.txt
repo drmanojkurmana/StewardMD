@@ -1,0 +1,46 @@
+feat: the pharmacy can order stock and book it in
+
+stock.js has said "NOTHING HERE PURCHASES ANYTHING" since it was written, and was right
+to defer it. This is the missing half, and it was the one confirmed, explicit gap in
+WardSynQ's own pharmacy that the OpenMRS/Bahmni/Danphe audit found - neither OpenMRS nor
+Bahmni has a first-party answer to it at all, so the shape is taken from Danphe's
+purchase-order chain, which is the part of that codebase that is genuinely good.
+
+Three disciplines carried over from stock.js rather than reinvented:
+
+HOW MUCH HAS ARRIVED IS NEVER STORED. It is summed from the goods received against the
+order, exactly as a stock level is summed from movements. There is no receivedQty column
+to drift and no status field to disagree with the events beneath it. A part-delivered
+order is not a state somebody remembered to set - it is what the arithmetic says.
+
+A GOODS RECEIPT IS A STOCK MOVEMENT, NOT A SECOND LEDGER. Receiving against an order
+writes the receipt stock.js already understands, carrying the order it belongs to. Danphe
+keeps a separate inventory ledger beside its stock ledger and the two can disagree; when
+two records describe the same physical box, one is wrong and nobody knows which.
+
+UNITS ARE NOT CONVERTED. A line ordered in boxes and a delivery in tablets are not added
+together, and nothing here guesses the ratio - that is a product catalogue this build does
+not have, and guessing produces a confident number wrong by a factor of twenty-eight. A
+delivery in the wrong unit is recorded and flagged, and does not count towards its line.
+
+Over-delivery is recorded and named, never refused. If a hundred arrive against an order
+for ninety, a hundred arrived - the boxes are on the shelf either way, and a receipt
+turned away is stock no record knows about. Same reasoning as stock.js refusing to clamp a
+negative level to zero.
+
+Approval is the chain from the previous commit, not a new flag: one approval mechanism in
+WardSynQ rather than one per feature, so a purchase order cannot be approved by whoever
+raised it, for exactly the reason a restricted antibiotic cannot be. Stock is not booked
+in against an unapproved order - not because the stock is not real, but because doing so
+would make an order nobody approved look like one placed properly. It can always be
+recorded as an ordinary receipt.
+
+Two bugs caught while writing it: a receipt naming line 0 was double-counting against
+every other line holding the same item, and the approval lookup had a ternary whose
+branches were identical, so an approval for a different subject would have read as this
+order's. Both fixed, both covered.
+
+Tests: 13 new. Suite 5779 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

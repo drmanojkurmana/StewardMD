@@ -5,6 +5,55 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-12 · Connect Hospital: explore everything, then ask the doctor
+
+**Decision:** The phone crawl is exhaustive (every control under one patient record, read-only SKIP list, keywords only order the walk) and captures label/value report blocks as well as tables; whatever is still missing is asked of the doctor in a new plugin `guide` mode (question banner, Done, no touch overlay) and the tap path is saved as the replay pattern. Details in `connect-hospital-next-2026-09-12.md`.
+
+**Why:** On GHIS radiology, discharge and history sit inside "Patient profile" as report blocks a keyword-gated, table-only crawler never reached; a doctor can show the agent in seconds what heuristics miss.
+
+**Trade-off:** One `list_notes` per manifest (schema uniqueness), so radiology/discharge/history compete; ids with digit runs are refused as anchors even when stable. Inline report lines keep their label text.
+
+**Status:** Built and tested (unit, real-DOM Chrome, broker, UI harness); awaiting the on-phone autonomous run after PR #1038 merges.
+
+## 2026-09-10 · Browser provider for Connect Agent: jo-inc/camofox-browser over REST API
+
+**Decision:** Browser provider for Connect Agent = jo-inc/camofox-browser (Camoufox engine), driven over its REST API by connect-agent/camofox-client.mjs.
+
+**Why:** Bot-detection resistance on real hospital EMRs; endpoints verified against its openapi.json.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · Main-world evaluation prerequisite for Connect discovery
+
+**Decision:** Main-world evaluation is a hard prerequisite: discovery installs and reads its observer with the "mw:" prefix, enabled by the connect-agent/camofox-plugins/main-world plugin.
+
+**Why:** Camoufox isolates evaluate() by design, so a plain-realm observer is invisible to page scripts (verified live).
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · Disqualification of Camofox Playwright tracing for doctor sessions
+
+**Decision:** Camofox Playwright tracing is disqualified for doctor sessions.
+
+**Why:** It records the login POST body (credentials), cookies, bodies and screenshots, and can only be enabled at session creation.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · HMAC-SHA256 signature verification for consent receipts
+
+**Decision:** Consent receipts are HMAC-SHA256 signed with CONNECT_CONSENT_SIGNING_KEY and verified server-side; no unkeyed fallback.
+
+**Why:** The previous unkeyed digest was never verified and was forgeable.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
+
+## 2026-09-10 · Versioned adapter spec validation (schemaVersion 1 and 2)
+
+**Decision:** Adapter spec validation is versioned: schemaVersion 1 (legacy, default) keeps keyword blocking; schemaVersion 2 separates action verbs from clinical-domain nouns so read endpoints validate.
+
+**Why:** v1 rejected ordinary reads like GET /patients/{id}/medications.
+
+**Status:** Decided; verified against a running jo-inc/camofox-browser 1.14.0 server.
 ## 2026-09-10 · Skn X calm clarity UI selected
 
 Use the calm clarity direction for Skn X: native system typography, translucent navigation, grouped
@@ -5143,6 +5192,56 @@ answer length alone is wrong by that factor.
 **NOT claimed:** clinical validation, production readiness, or real-device verification. An automated
 rubric passing 8/8 is not a clinical study, and this note is not evidence that it is.
 
+
+## 2026-09-11: Connect Agent browser should run on the phone, not a remote server (proposed)
+
+Full ADR: `connect-agent-phone-browser-adr-2026-09-11.md`. Discovery is already a page-realm JS shim plus six
+transport primitives, all of which WKWebView and Android WebView provide natively, with an init-script the
+Camofox REST API lacks. Proposed: Option 4 phone-first (in-app WebView + Worker control plane), existing
+Camofox runner kept only as fallback. Not yet decided by the owner; no code written.
+
+## 2026-09-11: Connect Hospital phone-first implementation shipped (behind flags)
+
+Built the phone-first architecture from the ADR. Native ConnectBrowser plugin (WKWebView + Android WebView),
+phone discovery engine over the plugin, broker phone-runner routes (plan/progress/discovery/evidence/approve/
+reject/connections + adapter reuse), pure-JS SHA-256 so the compiler runs in Pages Functions, and the doctor
+UI. Commit c341a51f. Verified: 208 connect-agent tests pass; phone engine proven end to end vs a synthetic EMR
+over headless Chrome; acceptance report 17 PASS / 0 FAIL / 3 BLOCKED; Android full-app APK builds with the
+plugin in the dex; iOS ConnectBrowser package builds and links for the device SDK against real Capacitor.
+BLOCKED (environment, not code): iOS full-app link needs the llama.xcframework simulator slice (pre-existing,
+unrelated) or device signing; live-GHIS on-device run needs the broker deployed to stewardmd.in (feature
+branch, behind flag) plus a doctor's own authorised GHIS login. Feature stays behind CONNECT_AGENT_FLAG +
+client smd_connect_agent (default off).
+## 2026-09-11 - the demonstration hospital stays a script, and what seeding it exposed
+
+A one-click "Create a demonstration hospital" button was built on the wardsynq.com hospital list and
+then REMOVED the same day: it was never asked for, and it duplicated
+`scripts/wardsynq-demo-hospital.mjs` in a second language with a second set of guards to keep
+correct. The seeder remains the one way to build a demo hospital. Recorded here so the idea is not
+rebuilt by someone reading only the shape of the problem.
+
+Two real defects the seeding exposed, both of which outlive the button:
+
+**An allocated MR number is not always the one the caller asked for.** `patient/register` allocates
+it, so a later specimen collection that scans the REQUESTED number is refused as a
+`wrong_patient_scan` - the safety control working exactly as intended, against a caller that had
+assumed its own number was authoritative. Any client driving registration must carry the ALLOCATED
+MRN forward. The seeder does not yet, and reports the refusals as a finding.
+
+**The clinical record write re-finds the hospital it was already given.** Opening the record resolves
+the governed actor from scratch, and that resolution locates the organisation again by a Firestore
+field query - the slowest lookup in the chain, and one the calling route had already performed. The
+lookups stack until a single write runs past its request budget and Cloudflare answers 502 with the
+first half of the work already committed. On the demo hospital this left 83 encounters standing over
+zero patient identities: registration wrote the OPD register, died before writing the clinical
+identity, and could never repair itself because re-registering was refused as a duplicate. The fix
+hands the record write the org the route already holds, and makes a duplicate registration reconcile
+a missing identity rather than return early.
+
+**Also fixed, root cause not symptom:** `render()` in shell.js emitted the two-column `.wrap` grid
+even with an empty rail, so every page shown before a hospital is chosen (the hospital list included)
+was squeezed into the 178px rail column. `.wrap.norail` now collapses to one column.
+
 ## 2026-09-11 — "Local AI" becomes a hard policy: no silent cloud inference, capability-matched packs, no unsuitable downloads
 
 **The problem the owner named.** A clinician who chose the on-device engine still spent Gemini on
@@ -5188,3 +5287,55 @@ calls. 653 test files, 0 failures. Recovery tag `pre-hard-local`. Handoff:
 **NOT claimed:** any on-device run of the new task functions on a phone (tests use a fake plugin),
 Indic offline translation, a client screen for Senior Surgeon Mode, or clinical validation of
 anything here.
+
+## 2026-09-12 MaiK Lite: 12 gaps from two live owner transcripts (PR maik-lite-battery-0911)
+
+Owner ran MaiK Lite live and shared two full transcripts (2026-09-11 evening) plus screenshots of
+raw reasoning leaking into the chat. Asked to "find the gaps", then "fix all". Same model/quant/
+prompt throughout; every fix is in retrieval, the follow-up resolver, the router, or a
+post-generation safety net (`stripReasoning`).
+
+Root causes, grouped:
+1. **Router misses** (home.js `maikRoute`): "Hello dude" (address word not in the greeting strip
+   list), meta-complaints about MaiK's own last answer ("why are you missing continuity", "you are
+   wrong") being sent to retrieval as new clinical questions instead of short-circuited, "How to
+   diagnose it" (a follow-up) losing continuity because `GENERIC_FU` had the noun "diagnosis" but not
+   the verb "diagnose" or the pronoun "it"/"them", and "Ok tell me dose of metoprolol" gate-failing
+   while "Metoprolol dose" worked because the dose-follow-up drug extractor left "Ok tell" glued onto
+   the drug name (the stopword list had no request-frame words).
+2. **Zero-anchor grounding** (maik-local.js `retrieveGrounding`): "Teach me Pneumonia atoz" and "Can
+   I learn a new topic today" had no real topic/drug anchor at all (every content word was generic or
+   simply absent from the book), so the anchor filter's `need.length ? filter : cited` fallback used
+   the UNFILTERED top BM25 hits - grounding a fabricated disease and an unrelated ML chapter
+   respectively. Fixed: zero anchors now means "not covered", never "whatever scored highest".
+   "medical/topic/learn/teach/today" added to the generic-word list (near-universal in a medical KB,
+   so treating them as real anchors was nearly as bad as no anchor).
+3. **Reasoning/prompt leaks** (`stripReasoning`, new class): a bare "H" answered with MaiK's own
+   SYSTEM prompt pasted back verbatim ("Give the final answer only, never your reasoning...") before
+   an unrelated drug monograph - a 4B model occasionally fails to distinguish "these are your
+   instructions" from "please continue this text". Verbatim presence of that unique sentence is now
+   treated as no answer (there is no reliable place to cut the echo from, so it does not try).
+   Separately, "Hi" leaked a full "Plan: ... Possible responses: ... Let's go with X" brainstorm with
+   no blank line before the real line, defeating the existing `LEAD_THOUGHT` blank-line-cut guard
+   (added earlier for a tagged/paragraph-separated version of the same failure). Now recovers the
+   picked line via a `LEAD_PICK` marker when present, and only falls back to the old
+   strip-the-label behaviour otherwise - so a genuine answer starting with a trigger word ("Plan the
+   airway first: ...") is still untouched. Also added: de-duplication when a small model repeats its
+   whole answer verbatim (seen on the heart-failure dosing answer).
+4. **model-missing on the first message**: the native plugin's `model-missing` error code (a
+   transient load race, not a real failure - every later message that session worked) had no branch
+   in `maikErrorNotice`, so the clinician got a dead-end with no next step on their very first
+   message. Now told to simply ask again.
+
+Tests: `test/maik-router-gaps-0911.test.mjs` (new, source-level per home.js convention), 7 new cases
+in `test/maik-local.test.mjs`. The older `loadWithRag` test fixture needed a real tokenizer/idfOf on
+its fake RAG/book (it previously had none, same gap class as the drift-guard fix on 2026-09-04) so
+the new zero-anchor guard does not blind every pre-existing grounding test. Full suite green.
+
+Not fixed, flagged for later: the underlying cause of the reasoning/prompt leaks may go deeper than
+JS-side stripping - MaiK MxCore (MedGemma, no `noThink`) has no thinking-suppression prefill trick at
+all (only Lite/Apex/Bonsai have `noThink: true`), so a stronger fix would give MxCore/Neural/Horizon
+their own leak-resistant system prompt or verify on-device whether `stripReasoning` alone is enough
+in practice. `LlamaEngine.swift`'s chat-template application (`llama_chat_apply_template`) looks
+correct on inspection, so this reads as an instruction-following limit at 4B scale, not a template
+bug - not re-verified live on device this session.

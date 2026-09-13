@@ -124,7 +124,28 @@ function formularyStatus(input) {
   const specialty = norm(i.specialty);
   const allowedHere = entry.restrictedTo.length > 0 && entry.restrictedTo.some((s) => norm(s) === specialty);
   if (allowedHere) return { state: "restricted", blocked: false, entry, satisfiedBy: "specialty" };
-  if (entry.requiresApproval && approvalRef) return { state: "restricted", blocked: false, entry, satisfiedBy: "approval", approvalRef };
+  /* THE REFERENCE HAS TO NAME A REAL APPROVAL.
+   *
+   * This used to read `if (entry.requiresApproval && approvalRef)` - any non-empty string. A
+   * prescriber blocked by stewardship at 2am could type one character and be through, and the block
+   * that the hospital had configured to protect its last-line antibiotics was a formality that
+   * looked like a control. The reference is now resolved against the approval chain
+   * (_wardsynq/verification.js) BEFORE this function is called, and `approvalVerified` is that
+   * answer: the chain exists, it is for this very drug, it holds as many distinct approvers as the
+   * hospital asked for, none of them is the person who asked, and none has withdrawn. */
+  if (entry.requiresApproval && approvalRef && i.approvalVerified === true) {
+    return { state: "restricted", blocked: false, entry, satisfiedBy: "approval", approvalRef };
+  }
+  if (entry.requiresApproval && approvalRef) {
+    // Named separately from "no approval at all", because the two need different things done about
+    // them: one prescriber has to go and get an approval, the other is holding one that does not
+    // apply, and telling them both the same thing sends one of them looking in the wrong place.
+    return {
+      state: "restricted", blocked: true, entry, needs: "approval", approvalRef,
+      detail: `That approval reference does not cover ${entry.drug || entry.code}. An approval has to be granted for this drug, by someone other than the person asking, and still stand.`,
+      ...(entry.note ? { note: entry.note } : {}),
+    };
+  }
 
   const needs = [];
   if (entry.restrictedTo.length) needs.push(`a prescriber in ${entry.restrictedTo.join(" or ")}`);

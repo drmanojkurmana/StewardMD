@@ -134,6 +134,12 @@ const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase(
 const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test", LABTECH = "lab@example.test", PHARM = "pharmacy@example.test", ADMIN = "admin@example.test";
 const ENV = {
   QUEUE_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac",
+  /* Staff PIN sign-in, on. The demo seeder mints one session PER MEMBER OF STAFF and makes every
+   * clinical call through it, so that each action is performed by the role that would really
+   * perform it. With this off the whole path answers staff_disabled and cannot be exercised
+   * locally at all. The deployed service sets this by configuration, and production currently does
+   * NOT, which is why the seeder's per-role sessions are refused there. */
+  QUEUE_STAFF_ENABLED: "1",
   FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb,
 };
 

@@ -179,10 +179,37 @@ const WSQ_CONFIG = {
     ...LABS.map((l) => ({ [l.code]: { amount: 320, currency: "INR", description: l.test + " (DEMO price)" } })),
     { "CXR-PA": { amount: 550, currency: "INR", description: "Chest radiograph (DEMO price)" } },
   ),
-  // MaiK stays OFF: no model is configured for this demo tenant and a fabricated AI answer on a
-  // fabricated chart would be the one thing here that could mislead.
-  maik: { enabled: false },
+  /* MaiK is OFF unless WSQ_DEMO_MAIK=1.
+   *
+   * Off by default because a fabricated AI answer on a fabricated chart is the one artefact here
+   * that could mislead somebody reading over a shoulder, and because a local run has no model at all.
+   * On for a live demonstration, where a real model is configured and MaiK is one of the things
+   * worth demonstrating: it is gated by the same per-provider PHI approval a real hospital sets, and
+   * every answer it gives is marked an unsigned AI draft awaiting a clinician's review. */
+  maik: E.WSQ_DEMO_MAIK === "1"
+    ? { enabled: true, phiApproved: ["gemini", "vertex"] }
+    : { enabled: false },
 };
+
+/* THE LOGIN SHEET. One member of each role, with the three things a sign-in actually needs: the
+ * hospital code, the staff id and the PIN. Printed at the end because a seeded demonstration nobody
+ * can sign into is not a demonstration. These are DEMONSTRATION credentials into a hospital of
+ * fabricated patients; they are not secrets and they are not a real person's login. */
+function printLogins(orgCode) {
+  const staff = buildStaff();
+  const seen = new Set();
+  const rows = [];
+  for (const s of staff) {
+    if (seen.has(s.role)) continue;
+    seen.add(s.role);
+    rows.push(s);
+  }
+  console.log("\nSIGN IN AT " + BASE + "  ->  \"Hospital staff\"");
+  console.log("  Hospital code: " + orgCode);
+  console.log("  " + "ROLE".padEnd(16) + "STAFF ID".padEnd(34) + "PIN");
+  for (const r of rows) console.log("  " + String(r.role).padEnd(16) + String(r.identity).padEnd(34) + r.pin);
+  console.log("  Every role above is one of " + staff.length + " demonstration staff. Same code, same PIN pattern.");
+}
 
 // ---------------------------------------------------------------------------------------------
 // HTTP: one session helper, one call helper, all failures collected
@@ -192,6 +219,16 @@ const tokens = new Map();   // identity -> X-Staff-Token, PIN mode only
 
 /** The headers that make this request THIS member of staff. */
 function session(actor) {
+  /* WSQ_ALL_OWNER: every call goes as the signed-in owner instead of as each role.
+   *
+   * Needed where a deployment has staff PIN sessions turned OFF (QUEUE_STAFF_ENABLED unset):
+   * /auth/pin still issues a token and the API then refuses it, so no role can act as itself and
+   * the seeder cannot get past its first member. This gets a populated hospital onto such a site.
+   * WHAT IS LOST, and it matters: the record attributes every write to the owner account rather
+   * than to the nurse, pharmacist or lab technician who would really have made it, so this run
+   * proves the WORKFLOWS but NOT the permission model. Do not read a clean run here as evidence
+   * that RBAC works; the per-role run is what shows that. */
+  if (E.WSQ_ALL_OWNER === "1") return ownerHeaders();
   if (ACCESS_MODE) return { "Cf-Access-Authenticated-User-Email": actor.identity };
   const tok = tokens.get(actor.identity);
   if (!tok) throw new Error(`no staff session for ${actor.identity} - PIN login did not succeed`);
@@ -320,19 +357,22 @@ function planSummary(staff, patients) {
 // ---------------------------------------------------------------------------------------------
 async function resolveOrg(bootstrapActor) {
   if (ADOPT_ORG) {
-    const r = await as(bootstrapActor, "GET", `org?orgId=${encodeURIComponent(ADOPT_ORG)}`, null, { tolerate: true });
+    const r = await as(bootstrapActor, "GET", `org?orgId=${encodeURIComponent(ADOPT_ORG)}`, null, { tolerate: true, owner: !ACCESS_MODE });
     if (!r.ok || !r.body.org) throw new Error(`WSQ_ORG=${ADOPT_ORG} is not an organisation this account can read`);
     const org = r.body.org;
     if (org.mode !== "wardsynq") throw new Error(`${ADOPT_ORG} is mode "${org.mode}"; the inpatient record needs a WardSynQ-native hospital`);
     if (!/DEMO/.test(org.name)) {
-      const up = await as(bootstrapActor, "POST", "org/update", { orgId: org.id, name: DEMO_ORG_NAME });
+      const up = await as(bootstrapActor, "POST", "org/update", { orgId: org.id, name: DEMO_ORG_NAME }, { owner: !ACCESS_MODE });
       if (!up.ok) throw new Error(`refusing to seed: ${ADOPT_ORG} is named "${org.name}" (no DEMO) and renaming it was refused`);
       return up.body.org;
     }
     return org;
   }
   // A deployed site: find an existing DEMO hospital, else self-serve a new WardSynQ-native one.
-  const list = await as(bootstrapActor, "GET", "orgs", null, { tolerate: true });
+  /* OWNER, not a staff session. Every call in resolveOrg runs BEFORE any staff member exists, so
+   * there is no PIN to log in with - asking for one failed with "no staff session for
+   * admin@example.test", which names a mechanism that cannot possibly be ready yet. */
+  const list = await as(bootstrapActor, "GET", "orgs", null, { tolerate: true, owner: !ACCESS_MODE });
   const found = ((list.body && list.body.orgs) || []).find((o) => o.mode === "wardsynq" && /DEMO/.test(o.name || ""));
   if (found) return found;
   const made = await as(bootstrapActor, "POST", "onboard/wardsynq", { name: DEMO_ORG_NAME }, { owner: !ACCESS_MODE });
@@ -432,8 +472,13 @@ async function registerAndAdmit(orgId, p, who) {
   const reg = await as(recep, "POST", "patient/register", {
     orgId, mrn: p.mrn, name: p.name, mobile: p.mobile, gender: p.gender,
     ageYears: p.ageYears, ageMonths: p.ageMonths, confirmDuplicate: true,
-  }, { key: `demo-reg-${p.mrn}` });
-  if (!reg.ok) return null;
+  }, { key: `demo-reg-${p.mrn}`, tolerate: true });
+  /* ALREADY REGISTERED IS NOT A FAILURE. A seeder that stops here leaves a hospital with patients
+   * and no admissions, which is what a half-finished run actually produces: the registry write
+   * succeeded and everything after it did not. "duplicate" is the mobile-number guard and
+   * "mrn_taken" is the MR-number uniqueness guard; both mean this person already exists, so carry
+   * on and admit them. Anything else is a real failure and still stops this patient. */
+  if (!reg.ok && reg.body && reg.body.error !== "duplicate" && reg.body.error !== "mrn_taken") return null;
 
   const admittedBy = p.theme === "emergency" ? who.reception() : recep;
   const adm = await as(admittedBy, "POST", "ward/admit", {
@@ -805,10 +850,13 @@ async function main() {
   // The bootstrap account's ONE job: make the DEMO admins exist. Everything after is their own work.
   const admins = staff.filter((s) => s.role === "admin");
   for (const a of admins) {
-    await as(bootstrap, "POST", "member", { orgId, identity: a.identity, role: "admin" });
-    if (!ACCESS_MODE) await as(bootstrap, "POST", "member/pin", { orgId, identity: a.identity, pin: a.pin });
+    /* OWNER for both. This is the one step that cannot be done by a staff session, because it is
+     * the step that CREATES the first staff session. Asking for a PIN here failed with "no staff
+     * session for admin@example.test", which named a mechanism that does not exist yet. */
+    await as(bootstrap, "POST", "member", { orgId, identity: a.identity, role: "admin" }, { owner: !ACCESS_MODE });
+    if (!ACCESS_MODE) await as(bootstrap, "POST", "member/pin", { orgId, identity: a.identity, pin: a.pin }, { owner: true });
   }
-  if (!ACCESS_MODE) await openStaffSessions(org.code, admins);
+  if (!ACCESS_MODE && E.WSQ_ALL_OWNER !== "1") await openStaffSessions(org.code, admins);
   const admin = admins[0];
 
   // Second-run guard.
@@ -823,7 +871,7 @@ async function main() {
   console.log("\n[1/6] organisation, departments, wards, 100 beds, staff roster ...");
   await setupOrg(admin, orgId);
   await setupStaff(admin, orgId, staff);
-  if (!ACCESS_MODE) await openStaffSessions(org.code, staff);
+  if (!ACCESS_MODE && E.WSQ_ALL_OWNER !== "1") await openStaffSessions(org.code, staff);
 
   const who = {};
   for (const r of ROSTER) who[r.role] = picker(staff, r.role);
@@ -969,6 +1017,7 @@ async function main() {
   } else {
     console.log("\nNo failed calls.");
   }
+  printLogins(org.code || orgId);
   console.log(`\nBed board as the server reports it: ${JSON.stringify((board.body && board.body.wards || []).map((w) => ({ ward: w.ward, occupied: (w.occupied || []).length, free: (w.free || []).length })))}`);
   // A fresh seed that did not reach the shape it promised is a failed seed, and says so.
   if (problems.length && !FORCE) process.exitCode = 1;

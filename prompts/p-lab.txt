@@ -1,0 +1,63 @@
+TASK: Add a hospital-level LABORATORY board to WardSynQ.
+
+REPO: /Users/diwakarkumar/Developer/StewardMD/.claude/worktrees/wt-lab (branch synergy/labboard)
+Work ONLY in that directory. Do not touch any other worktree.
+
+WHY: WardSynQ has a full lab BACKEND but no hospital-level lab screen. A lab technician who
+signs in has nowhere to land. Every other department (ED, theatre, pharmacy stock, critical
+results) has a board; the laboratory does not. You are adding the missing screen, NOT new backend.
+
+THE BACKEND ALREADY EXISTS. Do not invent endpoints. Read
+functions/api/queue/[[path]].js and use exactly these (all under /api/queue/ward/, all take
+?orgId=<id>):
+  GET  collections           - specimens: ordered / collected / in-transit / received
+  POST collect               - record a specimen collection
+  POST specimen-outcome      - {specimenId, state, failureReason} mark received/rejected
+  GET  pending-tests         - tests ordered but not resulted
+  POST release-result        - release a finished result
+  GET  criticals             - critical results needing acknowledgement
+Read each handler before you call it and match its real parameter names and response shape.
+The client helpers are apiGet/apiPost in ward.js; they already add auth.
+
+WHERE THE CODE GOES: ward.js, following the EXISTING board pattern exactly. Study
+`critsBoardOpen` (~line 3654), `loadIntegration` (~line 3662) and the `critsboard` case in the
+dispatch block (~line 4929) first, then copy that shape:
+  1. `function labBoardOpen() { st.view = "labboard"; ...; paint(); loadLabBoard(); }`
+  2. `function loadLabBoard()` - parallel apiGet reads. Follow loadIntegration's error discipline:
+     record EACH failed read by name. "nothing held" and "could not tell" must never render the
+     same, because one of them means a specimen is lost and nobody knows.
+  3. a render function returning an HTML string, same helpers as the other views (esc(), ms(),
+     w-card / w-btn / w-st CSS classes that already exist in ward.css - add no new CSS file)
+  4. add `if (cmd === "labboard") { labBoardOpen(); return; }` to the dispatch block
+  5. add "labboard" to the HOSPITAL_ACTS array (~line 5134)
+  6. render the view where the other `st.view` branches are handled
+
+WHAT THE BOARD MUST SHOW (this is a working clinical screen, not a stub):
+  - specimens awaiting collection, with patient NAME and MRN (never a bare record id)
+  - specimens collected and awaiting receipt, with how long they have been in transit
+  - tests received and awaiting a result
+  - results finished and awaiting release, each with a release action
+  - open critical results, most urgent first, visually distinct
+  - counts per section in the section headers
+  - a refresh control
+Empty states must say which thing is empty ("No specimens awaiting collection"), never a bare
+"None". A failed read renders as a named error, not as an empty section.
+
+HARD RULES:
+  - ES5 only. `var`, `function`. No arrow functions, no let/const, no template literals, no
+    optional chaining. This is a buildless IIFE bundle; modern syntax breaks the older browsers
+    the wards run and is not transpiled.
+  - Escape every piece of server data through the existing esc() before putting it in HTML.
+  - No em-dashes in any user-facing string.
+  - Do not modify any file other than ward.js.
+  - Do not touch the existing chart, ward list, or any other view.
+  - `node --check ward.js` must pass.
+
+VERIFY BEFORE YOU FINISH:
+  1. node --check ward.js
+  2. node --test --experimental-test-module-mocks test/*.test.mjs  (must stay at 0 failures)
+  3. grep your new function names back out of ward.js to confirm they are present and wired
+COMMIT on branch synergy/labboard with a message explaining what was missing and why the screen
+is shaped the way it is. Do not push. Do not merge.
+
+REPORT BACK: the function names you added, the endpoints you wired, and the exact test counts.

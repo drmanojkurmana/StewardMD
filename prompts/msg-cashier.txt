@@ -1,0 +1,26 @@
+The cashier's own screen refused itself before she ever opened it
+
+open() called loadWard() unconditionally, even when the shell asked for one
+specific hospital-wide board. The ward roster read needs the same record scope
+as the ward list, and plenty of roles - cashier, pharmacy, the front desk - do
+not hold it. So a cashier opening "Billing and cashier" watched the ward roster
+fail first ("cash.01@demo.wardsynq.test may not read Encounter"), which set the
+one shared error banner every view reads from, and then landed on her own
+working cashier screen with somebody else's refusal still printed across the
+top of it. Her screen was fine; the request she never made was not.
+
+Every hospital act already loads itself (loadBoard, loadEd, cashierOpen,
+loadReports, and the rest), so the roster read is only needed when no act is
+given - opening the plain ward list. loadWard() now runs only in that case.
+
+Found by looking up a patient as the cashier and watching the refusal from a
+request she never made appear over her own working screen.
+
+ALSO: the cashier's patient card printed the raw record id
+("opd-pat-smd-6teqzm-00025") under the patient's name. A cashier checks a
+person against the number on their bill or their card, and that id is neither -
+it is the system's own internal key. It now shows the MRN she just typed to
+find them, which costs nothing extra since she already has it.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

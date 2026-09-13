@@ -1,0 +1,46 @@
+feat(P0.2): search the history, and open the record behind any line
+
+Two of the three gaps left on the timeline. "When did we start the co-amoxiclav" is asked
+far more often than any filter answers, and on a three-week stay it is unanswerable by
+scrolling. Search looks at what the reader can actually SEE - the line, who did it, and
+the words behind it - rather than the raw record, because a search that matched hidden
+fields would return rows whose match nobody can find.
+
+The drill-down is the bigger one. The timeline is a projection: it says "dr.mehta
+prescribed Co-amoxiclav 1.2g IV TDS", which is what a reader wants ninety-nine times in a
+hundred. The hundredth time somebody needs to know exactly what was written, by whom, when
+it was written as against when it took effect, and whether it was later corrected - and
+there was nowhere to go and look.
+
+_wardsynq/record-detail.js adds no authority and no second copy. It reads the same
+governed record through the same actor's own read scope and returns its versions; a reader
+outside a type's read scope is refused here exactly as anywhere else.
+
+WHAT WAS SUPERSEDED IS SHOWN, NOT HIDDEN. "This was prescribed and corrected an hour
+later" and "this stood all week" are different facts, and a chart showing only the latest
+version makes them look identical. wardsynq-temporal.js already works out which versions
+were ever the live belief and which were overtaken before taking effect; that verdict is
+now on screen, along with which fields moved between versions.
+
+Two bugs found while building:
+  - historyOf returns each version spread FLAT with its verdict flags alongside, not
+    wrapped. Reading it as a wrapper silently yielded the version NUMBER where the record
+    should be, so every field came back undefined. Caught by the first test written.
+  - `isCurrentBelief` answers a narrower question than its name suggests - "was this the
+    live belief at its OWN effective time" - and is true of several versions at once, so
+    it marked every version current. The version the store actually returns is the latest
+    recorded one; that is what is marked now, and it matches the record in the response.
+
+Also: `changed` skips meta, version and writtenBy, which differ on every version by
+construction, and historyOf's own three verdict flags. Listing them would drown the one
+field that actually moved.
+
+Tests: 15 new - 8 on the version logic, 7 rendering the search and the panel, including a
+version overtaken before it took effect and a record the reader may not open. Suite 5861
+passing, 0 failing.
+
+Still open on P0.2: unread/unacknowledged state, and referrals and documents, which cannot
+appear on a timeline until they exist.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

@@ -26,7 +26,9 @@
  *
  * append() is the only write and it is append-only: it inserts new versions and never updates or
  * deletes. It MUST be atomic across the records, the idempotency key and the audit event it is
- * given, and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
+ * given - and across the optional ctx.idempotency ([{key, resourceType, id, version}]) and
+ * ctx.audits ([event]) lists, which let one append carry several logical writes (see staged.js,
+ * the consultation's unit of work) with every key and every audit row they would have had alone - and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
  * for that tenant. That last rule is the concurrency control for the whole system: two clients
  * that both derive version N+1 from version N cannot both land, whatever the network did.
  *
@@ -290,6 +292,10 @@ class MemoryRepository {
     if (ctx.idempotencyKey && this._idem.has(`${tenantId}|${ctx.idempotencyKey}`)) {
       throw new VersionConflictError("idempotency key already used", { idempotencyKey: ctx.idempotencyKey });
     }
+    const extraKeys = Array.isArray(ctx.idempotency) ? ctx.idempotency : [];
+    for (const k of extraKeys) {
+      if (this._idem.has(`${tenantId}|${k.key}`)) throw new VersionConflictError("idempotency key already used", { idempotencyKey: k.key });
+    }
     /* THE IDENTITY CHECK, in the same all-or-nothing phase as the version check above and for the
      * same reason: an identifier that lands while a sibling row is refused would leave the index
      * claiming a patient the record does not have. Claiming an identifier that already belongs to a
@@ -347,7 +353,9 @@ class MemoryRepository {
       const r = records[records.length - 1];
       this._idem.set(`${tenantId}|${ctx.idempotencyKey}`, { resourceType: r.resourceType, id: r.id, version: r.version });
     }
+    for (const k of extraKeys) this._idem.set(`${tenantId}|${k.key}`, { resourceType: k.resourceType, id: k.id, version: k.version });
     if (ctx.audit) this.audit.push({ tenantId, ...clone(ctx.audit) });
+    for (const a of Array.isArray(ctx.audits) ? ctx.audits : []) this.audit.push({ tenantId, ...clone(a) });
     return { seq: last };
   }
 

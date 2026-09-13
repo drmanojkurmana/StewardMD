@@ -30,11 +30,22 @@ export function idFromToken(token) {
     const body = dec.decode(unb64u(String(token).split(".")[0]));
     const i = body.lastIndexOf(".");
     const id = i > 0 ? body.slice(0, i) : "";
-    // Guard the trust boundary: the id is later concatenated into a Firestore doc path on a
-    // service-account request (which bypasses security rules), so a crafted "../" id would be a
-    // path-traversal. Legit ids are UUIDs, "orgId~identity" staff ids, or usernames (may contain a
-    // single "."). Allow those chars, block the traversal primitives ("/", "\", "..").
-    return (/^[A-Za-z0-9_.~:-]{1,128}$/.test(id) && id.indexOf("..") === -1) ? id : "";
+    /* Guard the trust boundary: the id is later concatenated into a Firestore doc path on a
+     * service-account request (which bypasses security rules), so a crafted "../" id would be a
+     * path-traversal. Legit ids are UUIDs, "orgId~identity" staff ids, or usernames (may contain a
+     * single "."). Allow those chars, block the traversal primitives ("/", "\", "..").
+     *
+     * "@" JOINED THE SET 2026-09-12, AND WITHOUT IT NO MEMBER OF STAFF COULD USE THE PRODUCT.
+     * A staff id is `orgId~identity` and an identity is an EMAIL ADDRESS — the comment above always
+     * said staff ids were legal here, but the class it allowed had no "@" in it. So every staff
+     * token parsed to "", verifyStaffSession returned null, resolveActor fell through to null, and
+     * the door answered 401 to a session it had itself minted seconds earlier: all 159 demonstration
+     * staff, all fifteen roles, could sign in and then do nothing at all. Found by signing in as a
+     * nurse on the live site and landing with zero capabilities.
+     *
+     * "@" is not a traversal primitive. The three that are — "/", "\" and ".." — are still refused,
+     * and the length cap is unchanged. */
+    return (/^[A-Za-z0-9_.~:@-]{1,128}$/.test(id) && id.indexOf("..") === -1) ? id : "";
   } catch (e) { return ""; }
 }
 // Verify + parse against the CURRENT ver + expiry. Returns { ok, id, reason }. Never throws.
@@ -50,7 +61,7 @@ export async function verifyToken(token, secret, curVer, nowMs) {
     const ok = await crypto.subtle.verify("HMAC", k, unb64u(parts[1]), enc.encode(body + "." + curVer));
     if (!ok) return { ok: false, reason: "bad_signature" };          // wrong secret OR revoked (ver bumped)
     if (typeof nowMs === "number" && exp < nowMs) return { ok: false, reason: "expired", id };
-    return { ok: true, id };
+    return { ok: true, id, exp };
   } catch (e) { return { ok: false, reason: "malformed" }; }
 }
 

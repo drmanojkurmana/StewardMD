@@ -266,13 +266,28 @@
   function doStaffLogin(){
     var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value;
     if(!id||!pw){err("Enter your staff ID (or email) and PIN (or password).");return;}
-    var isEmail=id.indexOf("@")>-1;
+    /* THE CLINIC CODE DECIDES, NOT THE SHAPE OF THE ID. This read only for an "@" and sent anything
+     * containing one down the email+password door, ignoring the clinic code just typed and offering
+     * the PIN as a password. Every staff ID seeded so far IS an email address, so the staff door
+     * answered "Wrong email or password" to people whose code, ID and PIN were all correct. Same
+     * bug, same fix as wardsynq/site/shell.js. */
+    var hasAt=id.indexOf("@")>-1;
+    var codeTyped=(document.getElementById("sorg")&&document.getElementById("sorg").value.trim())||"";
+    var isEmail=!codeTyped&&hasAt;
     id=id.toLowerCase();   // staff IDs + emails are case-insensitive; the doctor app stores them lowercase, and mobile keyboards auto-capitalize - so normalize to match
-    if(!isEmail && !document.getElementById("sorg").value.trim()){err("Enter your clinic code (or sign in with your email).");return;}
+    if(!hasAt && !codeTyped){err("Enter your clinic code (or sign in with your email).");return;}
     err("Signing in…");
     var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
-    var body=isEmail?{email:id,password:pw}:{clinicCode:document.getElementById("sorg").value.trim(),identity:id,pin:pw};
+    var body=isEmail?{email:id,password:pw}:{clinicCode:codeTyped,identity:id,pin:pw};
     fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      // Two-step sign-in: the PIN/password was right; ask for the phone's code and pass the answer through.
+      if(!r||r.error!=="mfa_required") return r;
+      var code=""; try{ code=prompt((r.message||"Enter the 6-digit code from your authenticator app.")+"\n\nLost your phone? Enter a backup code instead.")||""; }catch(e){}
+      if(!code.trim()) return {cancelled:true};
+      return fetch("/api/queue/auth/mfa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({challenge:r.challenge,code:code.trim()})}).then(function(x){return x.json();});
+    }).then(function(r){
+      if(r&&r.cancelled){ err("Sign-in cancelled."); return; }
+      if(r&&(r.error==="wrong_code"||r.error==="challenge_expired")){ err(r.error==="wrong_code"?"That code did not match. Sign in again and use the newest code.":"That took too long. Sign in again."); return; }
       if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
       onLogin("staff",r.token,r.orgId);
     }).catch(function(){err("Could not reach the server.");});
@@ -299,6 +314,8 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout("Your session ended. Please sign in again.");return;} renderLogin("Session expired. Sign in again."); return; }
+      // The hospital requires two-step sign-in for this role and it is not set up: every other request would be refused.
+      if(r.twoStepRequired){ app.innerHTML='<div class="login"><h3>Two-step sign-in required</h3><p>Your hospital requires two-step sign-in for your role. Set it up at <a href="https://wardsynq.com/#/security">wardsynq.com, Sign-in security</a>, then sign in here again.</p><button class="btn" id="tsOut">Sign out</button></div>'; document.getElementById("tsOut").onclick=function(){logout("");}; return; }
       st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
@@ -336,7 +353,11 @@
     Array.prototype.forEach.call(app.querySelectorAll("[data-open]"),function(b){b.onclick=function(){ openClinic({id:b.getAttribute("data-open"),code:b.getAttribute("data-code")}); };});
     Array.prototype.forEach.call(app.querySelectorAll("[data-del]"),function(b){b.onclick=function(){ delClinic(b.getAttribute("data-del"),b.getAttribute("data-name")); };});
     document.getElementById("newc").onclick=openWizard;
-    document.getElementById("lo2").onclick=logout;
+    /* WRAPPED, because logout(msg) takes a MESSAGE. Wired straight to onclick the browser hands it
+     * the click event instead, which flows to renderLogin(msg) and renders as the error line
+     * "[object PointerEvent]" - so every ordinary sign-out finished on a red error nobody could
+     * read or explain. Found 2026-09-12 signing out of the OPD console. */
+    document.getElementById("lo2").onclick=function(){logout();};
   }
   function delClinic(id,name){
     if(!confirm('Delete "'+name+'"? Its queue and rooms will be removed. This cannot be undone.')) return;
@@ -381,7 +402,7 @@
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
-    document.getElementById("lo").onclick=logout;
+    document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
@@ -550,8 +571,26 @@
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
       refresh();
-      if(r.timelineUrl){ open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary (valid 7 days):")+'</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'); sheet.querySelector("#cx").onclick=close; }
+      if(r.timelineUrl){
+        open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary:")+'</p><div class="link">'+esc(r.timelineUrl)+'</div>'+
+          '<p id="lx" style="color:var(--mut)">'+linkUntil(r.linkExpiresAt)+'</p>'+
+          '<div class="row2">'+(can("emr.treat")?'<button class="cancel" id="ext" style="margin:0">Keep open 30 days</button>':'')+'<button class="btn" id="cx" style="margin:0">Done</button></div>');
+        sheet.querySelector("#cx").onclick=close;
+        var ext=sheet.querySelector("#ext");
+        if(ext) ext.onclick=function(){ extendLink(sid,tid,ext); };
+      }
     });
+  }
+  function linkUntil(ms){ return ms?"The patient can open it until "+new Date(ms).toLocaleDateString([],{day:"numeric",month:"short",year:"numeric"})+".":"The link expiry date is not known."; }
+  // The date shown only changes when the server says the extension was saved.
+  function extendLink(sid,tid,btn){
+    btn.disabled=true; btn.textContent="Saving…";
+    api("timeline/extend",{method:"POST",body:{sessionId:sid,ticketId:tid,days:30}}).then(function(r){
+      var lx=sheet.querySelector("#lx");
+      if(!r||!r.ok){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast(r&&r.error==="not_ready"?"This visit is not closed yet.":r&&r.error?friendly(r.error):"Could not extend the link. The old date still applies."); return; }
+      if(lx) lx.textContent=linkUntil(r.linkExpiresAt);
+      btn.textContent="Extended";
+    }).catch(function(){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast("Could not extend the link. The old date still applies."); });
   }
   // ---- audit drawer ----
   function openAudit(sid){
@@ -923,10 +962,14 @@
       if(pin && !/^\d{4,6}$/.test(pin)){toast("PIN must be 4 to 6 digits");return;}
       api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
+        // Each step's refusal stops the chain and is shown. This said "Saved" even when the PIN or
+        // password had been refused, so staff were handed a sign-in that did not exist.
+        var step=function(what,path,body){return function(){return api(path,{method:"POST",body:body}).then(function(x){ if(!x||!x.ok) throw new Error(what+" not set: "+((x&&(x.message||friendly(x.error)))||"no response")); });};};
         var chain=Promise.resolve();
-        if(pin) chain=chain.then(function(){return api("member/pin",{method:"POST",body:{orgId:st.orgId,identity:id,pin:pin}});});
-        if(em&&pw) chain=chain.then(function(){return api("member/password",{method:"POST",body:{orgId:st.orgId,identity:id,email:em,password:pw}});});
-        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); });
+        if(pin) chain=chain.then(step("PIN","member/pin",{orgId:st.orgId,identity:id,pin:pin}));
+        if(em&&pw) chain=chain.then(step("Password","member/password",{orgId:st.orgId,identity:id,email:em,password:pw}));
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); })
+          .catch(function(e){ loadStaffList(); toast(e.message); });
       });
     };
     loadStaffList();
@@ -1158,9 +1201,15 @@
     sheet.querySelector("#ok").onclick=function(){
       var id=sheet.querySelector("#wri").value.trim(), pin=sheet.querySelector("#wrp").value.trim();
       if(!id){close();loadDash();return;}
-      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(){
+      // A refused member or PIN keeps the sheet open with the reason, instead of "Clinic ready".
+      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(r){
+        if(!r||!r.ok){toast((r&&(r.message||friendly(r.error)))||"Could not add the receptionist");return;}
         var done=function(){close();toast("Clinic ready");loadDash();};
-        pin?api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(done):done();
+        if(!pin) return done();
+        api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(function(p){
+          if(!p||!p.ok){toast("PIN not set: "+((p&&(p.message||friendly(p.error)))||"no response"));return;}
+          done();
+        });
       });
     };
   }

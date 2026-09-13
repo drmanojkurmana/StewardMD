@@ -117,6 +117,15 @@
   var THINK_OPEN = /<\s*(think|thinking|thought|reason|reasoning|scratchpad)\s*>[\s\S]*$/i;   // unterminated
   var GEMMA_CTRL = /<\s*(start_of_turn|end_of_turn|unused\d+|eos|bos|pad)\s*>/gi;
   var LEAD_THOUGHT = /^\s*(thought|thinking|reasoning|analysis|plan)\b\s*[:\-]?\s*/i;
+  // A brainstorm-then-pick leak ("Plan: ... Possible responses: 'A' 'B' ... Let's go with 'C'") ends
+  // with this marker before the one line that was actually meant for the doctor.
+  var LEAD_PICK = /\b(?:let'?s go with|i'?ll (?:go with|answer|respond|say)|final answer(?: is)?|so my answer is|the answer is)\s*[:\-]?\s*"?([^"\n.]{3,200})"?/i;
+  // A verbatim echo of MaiK's OWN system prompt (owner report, 2026-09-11: "H" answered with the raw
+  // prompt text, "Give the final answer only, never your reasoning...", pasted back before an unrelated
+  // drug monograph). These two sentences are unique to that prompt and would never appear in a genuine
+  // clinical answer, so their presence means the whole output is compromised - there is no reliable
+  // point to cut from, so it is treated the same as no answer at all.
+  var SYSTEM_LEAK = /give the final answer only,?\s*never your reasoning|open with one plain sentence answering the question/i;
 
   // Bracket citation markers like [1] or [2,3]. MaiK Lite was trained to cite numbered evidence
   // passages; on-device there is no evidence list for the numbers to point at, and the owner's rule
@@ -131,6 +140,8 @@
 
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
+    // A verbatim echo of our own system prompt has no answer worth recovering from it - see SYSTEM_LEAK.
+    if (SYSTEM_LEAK.test(out)) return "";
     out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "").replace(CITE_MARK, "");
     // An unterminated <think> means the budget ran out mid-reasoning: there is no answer after it,
     // so keep whatever came BEFORE rather than shipping raw reasoning.
@@ -139,9 +150,29 @@
     // first paragraph break, so a genuine answer that merely starts with the word is not eaten.
     if (LEAD_THOUGHT.test(out)) {
       var brk = out.search(/\n\s*\n/);
-      out = brk > -1 ? out.slice(brk) : out.replace(LEAD_THOUGHT, "");
+      if (brk > -1) {
+        out = out.slice(brk);
+      } else {
+        // No blank line to cut at. If the model named what it settled on ("Let's go with ...") this is
+        // a brainstorm-then-pick leak (owner report, 2026-09-11: "Plan:" followed by single-newline
+        // bullets, no paragraph break before the real answer) - recover that one line, not the whole
+        // plan. Otherwise this may just be a genuine answer that happens to start with a trigger word
+        // ("Plan the airway first: ..."), so fall back to only stripping the label, as before.
+        var pick = out.match(LEAD_PICK);
+        out = pick ? pick[1].trim() : out.replace(LEAD_THOUGHT, "");
+      }
     }
-    return out.replace(/^\s+/, "").replace(/\s+$/, "");
+    out = out.replace(/^\s+/, "").replace(/\s+$/, "");
+    // A small model repeating its whole answer verbatim (owner report, 2026-09-11: the heart-failure
+    // dosing answer appeared twice back to back). If the second half re-opens with the first ~40 chars
+    // of the first half, it is a repeat - drop it rather than show the doctor the same paragraph twice.
+    var half = out.length >> 1;
+    if (half > 60) {
+      var head = out.slice(0, 40);
+      var repeatAt = out.indexOf(head, half - 40);
+      if (repeatAt > 0) out = out.slice(0, repeatAt).replace(/\s+$/, "");
+    }
+    return out;
   }
 
   /* IMAGE ANSWERS.
@@ -469,7 +500,7 @@
    * Zero anchored passages means "not grounded", never "grounded in the wrong chapter". Same model,
    * same speed: this is a filter after search, and it SHRINKS the prompt (700-char passages, a weak
    * third passage dropped), which is where on-device latency actually goes. */
-  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
+  var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|medical|topic|topics|learn|learning|teach|today|question|questions|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common)$/;
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
   var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
@@ -520,13 +551,21 @@
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
       var need = A.topic.length ? A.topic : A.drugs;
+      // Owner report (2026-09-11): "Teach me Pneumonia atoz" and "Can I learn a new medical topic
+      // today" both had NO real topic or drug anchor (every content word was generic filler, or "atoz"
+      // and "topic" simply are not in the book's vocabulary at all) - a topic-less question has no
+      // way to tell a relevant passage from an irrelevant one, so falling through to the raw top BM25
+      // hits grounded a fabricated "Pneumonia atoz" monograph on an unrelated chapter and "teach me a
+      // topic" on a machine-learning chapter. Zero anchors now means "not covered", never "grounded in
+      // whatever scored highest" - a passage's relevance can never be established without one.
+      if (!need.length) return null;
       var anchors = A.topic.concat(A.drugs);
       var cited = hits.map(function (h) { var p = bk.cite(h[1]); return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() }; });
       // Count anchors per passage. With two or more topic anchors, a passage matching two beats one
       // matching one ("community" alone let a typhoid epidemiology passage stand in for CAP); when
       // nothing matches two, one is enough.
       cited.forEach(function (c) { c.n = need.filter(function (a) { return c.hay.indexOf(a) !== -1; }).length; });
-      var kept = need.length ? cited.filter(function (c) { return c.n > 0; }) : cited;
+      var kept = cited.filter(function (c) { return c.n > 0; });
       if (!kept.length) return null;
       if (need.length > 1 && kept.some(function (c) { return c.n > 1; })) kept = kept.filter(function (c) { return c.n > 1; });
       // "…in pregnancy": among the on-topic passages, the ones that mention the modifier win when any
@@ -569,6 +608,9 @@
       : retrieveGrounding(packId, pkg && pkg.question);
 
     return groundingP.then(function (grounding) {
+    // Queued like every other local generation, and NOT background: the clinician is watching this
+    // one, so it goes ahead of any queued Scribe drafting (it cannot interrupt one already running).
+    return serial(function () {
     return ensureLoaded(packId).then(function () {
       var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
@@ -731,6 +773,7 @@
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }
       return out;
     });
+    }, { reentrant: !!(opts && (opts._retried || opts._ungrounded)) });
     });
   }
 
@@ -839,6 +882,75 @@
     try { if (_idleT && typeof _idleT.unref === "function") _idleT.unref(); } catch (e) {}
   }
   function settle() { if (_inflight === 0) scheduleRelease(_sheetOpen === false ? _closeMs : _idleMs); }
+  /* ── ONE GENERATION AT A TIME (owner bug report, 2026-09-11) ────────────────────────────────
+   * The native engine is single-threaded and says so: LlamaEngine.swift generateSync throws
+   * LlamaError(.busy, "a generation is already running"), and the Android JNI behaves the same.
+   * Until the hard Local policy, only the MaiK sheet ever called it, so nothing collided. Now
+   * Scribe, Ask MaiK Pro, ICD, assessment, the summary and the ICU advisories all share that one
+   * engine, and Scribe refines on a timer (every refineEveryChunks windows AND again on Stop)
+   * while the clinician taps other things. The second caller got `busy`, which surfaced as
+   * "Could not draft the note from this dictation" with no reason. Reported from a real consult.
+   *
+   * So every local generation now queues here. A generation cannot be interrupted once it has
+   * started (the native call owns the context), but a job the clinician is WATCHING goes ahead of
+   * background drafting in the queue, because a 4B model can take tens of seconds per pass.
+   *
+   * ponytail: a plain FIFO with one priority tier. A real scheduler would need the engine to
+   * support pre-emption, which it does not. */
+  var _running = false, _waiting = [];
+  var JOB_TIMEOUT_MS = 180000;   // a wedged native call must not stall every later one forever
+  function serial(fn, opts) {
+    opts = opts || {};
+    /* RE-ENTRANCY. answer() calls ITSELF for the blank-answer retry (_retried) and the no-coverage
+     * ungrounded retry (_ungrounded), from inside its own running job. Queueing that inner call
+     * would wait for a job that cannot finish until the inner call returns: a deadlock, and on a
+     * phone an answer that never arrives. The engine is already ours at that point, so run inline. */
+    if (opts.reentrant && _running) return Promise.resolve().then(fn);
+    var job = { fn: fn, bg: !!opts.background };
+    job.promise = new Promise(function (resolve, reject) {
+      job.resolve = resolve; job.reject = reject;
+      // Interactive work jumps ahead of queued background drafting, never ahead of a running job.
+      if (!job.bg) {
+        var i = 0;
+        while (i < _waiting.length && !_waiting[i].bg) i++;
+        _waiting.splice(i, 0, job);
+      } else _waiting.push(job);
+      pump();
+    });
+    return job.promise;
+  }
+  function pump() {
+    if (_running || !_waiting.length) return;
+    var job = _waiting.shift();
+    _running = true;
+    var done = false, timer = null;
+    function finish(ok, v) {
+      if (done) return; done = true;
+      if (timer) { clearTimeout(timer); timer = null; }
+      _running = false;
+      if (ok) job.resolve(v); else job.reject(v);
+      // Fire-and-forget callers (warm, a background refine whose screen has gone) attach no
+      // handler; a queue failure must not become an unhandled rejection that takes down the page.
+      try { job.promise.catch(function () {}); } catch (e) {}
+      pump();
+    }
+    try {
+      timer = setTimeout(function () {
+        // Free the engine so the rest of the queue can run, and say which call gave up.
+        try { var L = llama(); if (L && L.cancel) L.cancel(); } catch (e) {}
+        finish(false, new Error("on-device generation timed out"));
+      }, JOB_TIMEOUT_MS);
+      // A pending timeout must never be a reason for the host to stay alive (it kept `node --test`
+      // running for the full three minutes, then fired into a finished test). No-op in a WebView.
+      if (timer && typeof timer.unref === "function") timer.unref();
+    } catch (e) {}
+    Promise.resolve().then(job.fn).then(function (r) { finish(true, r); }, function (e) { finish(false, e); });
+  }
+  /** Queue depth, for tests and diagnostics. */
+  function queueState() { return { running: _running, waiting: _waiting.length }; }
+  /** Test hook: shorten the per-job timeout (the real one is three minutes). */
+  function setJobTimeoutMs(ms) { JOB_TIMEOUT_MS = Math.max(1, Number(ms) || 1); return JOB_TIMEOUT_MS; }
+
   function tracked(fn) {
     return function () {
       clearIdle(); _inflight++;
@@ -930,14 +1042,16 @@
     var L = llama();
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     var packId = (opts && opts.pack) || currentPack();
-    return ensureLoaded(packId).then(function () {
-      return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
-                          temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
-                          stream: false, prefillEmptyThink: noThinkPack(packId) });
-    }).then(function (r) {
-      if (r && r.error) throw new Error(String(r.error));
-      return stripReasoning((r && r.text) || "");
-    });
+    return serial(function () {
+      return ensureLoaded(packId).then(function () {
+        return L.generate({ prompt: prompt, system: system, nPredict: nPredict,
+                            temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2,
+                            stream: false, prefillEmptyThink: noThinkPack(packId) });
+      }).then(function (r) {
+        if (r && r.error) throw new Error(String(r.error));
+        return stripReasoning((r && r.text) || "");
+      });
+    }, { background: !!(opts && opts.background) });
   }
   /** Turn TinyFish's raw sources into a web-research answer on device. sources:
    * [{title,url,site,snippet}] (the exact shape SMD_AI.researchSnippets resolves). No sources -> the
@@ -989,6 +1103,7 @@
         return { parsed: parseJsonLoose(text), text: text };
       });
     }
+    return serial(function () {
     return ensureLoaded(packId).then(function () { return once(prompt, 0); }).then(function (a) {
       if (a.parsed) return a.parsed;
       // A 1.7B answers the same prompt as JSON one minute and as prose the next (seen live on MaiK
@@ -1001,6 +1116,7 @@
         var e = new Error("parse"); e.sample = b.text.slice(0, 240); throw e;
       });
     });
+    }, { background: !!(opts && opts.background) });
   }
   function parseFailure(err) {
     if (err && err.message === "parse") return { error: "parse", sample: err.sample || "" };
@@ -1291,8 +1407,11 @@
     if (!t) return Promise.resolve({ error: "no-text" });
     var packId = (opts && opts.pack) || currentPack();
     var wins = splitWindows(t, windowBudget(packId, ASSESS_SYS, 400));
+    // Ambient, like Scribe: queued behind anything the clinician is waiting on.
+    var bg = { background: true, pack: packId };
+    if (opts) { for (var ak in opts) if (Object.prototype.hasOwnProperty.call(opts, ak) && !(ak in bg)) bg[ak] = opts[ak]; }
     return eachWindow(wins, function (w) {
-      return generateJSON("=== TRANSCRIPT ===\n" + w, ASSESS_SYS, 400, opts).then(sanitizeAssessment, function (e) { if (e && e.message === "parse") return {}; throw e; });
+      return generateJSON("=== TRANSCRIPT ===\n" + w, ASSESS_SYS, 400, bg).then(sanitizeAssessment, function (e) { if (e && e.message === "parse") return {}; throw e; });
     }).then(function (parts) {
       var fields = {};
       // Narrative accumulates; the clinician's stated diagnosis and plan are single statements, so
@@ -1308,9 +1427,29 @@
    * The cloud re-reads the whole transcript on every refine. That cannot fit here after a few
    * minutes of dictation, so the engine keeps what it has already captured and asks the model
    * only about the text it has not seen (plus a short overlap), merging deterministically. */
-  var EMR_FIELD_KEYS = ["cc", "presentHx", "pastHx", "comorbidsNote", "dm", "htn", "cardiac", "asthma", "tb", "thyroid", "epilepsy",
-    "habits", "alcohol", "smoking", "recDrug", "tobacco"];
-  var YES_NO_KEYS = { dm: 1, htn: 1, cardiac: 1, asthma: 1, tb: 1, thyroid: 1, epilepsy: 1, habits: 1, alcohol: 1, smoking: 1, recDrug: 1, tobacco: 1 };
+  var EMR_FIELD_KEYS = [
+    "cc", "presentHx", "pastHx", "surgicalHistory", "homeMeds", "treatmentReceived", "comorbidsNote",
+    "dm", "dmDetails", "htn", "htnDetails", "cardiac", "cardiacDetails",
+    "asthma", "asthmaDetails", "tb", "tbDetails", "thyroid", "thyroidDetails",
+    "epilepsy", "epilepsyDetails",
+    "ckd", "ckdDetails", "cld", "cldDetails", "cancer", "cancerDetails", "cva", "cvaDetails",
+    "dyslipidemia", "dyslipidemiaDetails",
+    "habits", "alcohol", "smoking", "recDrug", "tobacco", "habitsDetails",
+    "familyHistory", "familyDiabetes", "familyHtn", "familyHeart",
+    "familyCancer", "familyTb", "familyAsthma", "familyDetails",
+    "allergies", "diet", "sleep", "lmp", "immunization", "nutrition", "hydration",
+    "systemicExam", "respiratoryExam", "cvsExam", "abdoExam", "localExam",
+    "tenderness", "tendernessDetails", "abdoMass", "abdoMassDetails",
+    "provisionalDx", "managementPlan", "advice"
+  ];
+  var YES_NO_KEYS = {
+    dm: 1, htn: 1, cardiac: 1, asthma: 1, tb: 1, thyroid: 1, epilepsy: 1,
+    ckd: 1, cld: 1, cancer: 1, cva: 1, dyslipidemia: 1,
+    habits: 1, alcohol: 1, smoking: 1, recDrug: 1, tobacco: 1,
+    familyHistory: 1, familyDiabetes: 1, familyHtn: 1, familyHeart: 1,
+    familyCancer: 1, familyTb: 1, familyAsthma: 1,
+    tenderness: 1, abdoMass: 1
+  };
   var SCRIBE_SYS =
     "You are an OPD scribe turning a doctor-patient consultation transcript into a structured note. " +
     "Return ONLY JSON: {\"en\":\"\", \"emrFields\":{...}, \"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
@@ -1319,8 +1458,9 @@
     "Keep drug names, doses, units, numbers and abbreviations (BP, IV, BD, OD) exactly as stated.\n" +
     "ASR NOISE: the transcript is on-device speech recognition of possibly code-switched speech. De-duplicate repeats, drop filler, " +
     "normalise ONLY an unambiguous mis-recognition. If a garbled word could be more than one drug or finding, keep it verbatim or omit it. NEVER guess a dose.\n" +
-    "emrFields keys allowed: cc, presentHx, pastHx, comorbidsNote (+ dm/htn/cardiac/asthma/tb/thyroid/epilepsy as 'Yes'/'No' only if clearly stated). " +
-    "Habits: alcohol, smoking, recDrug, tobacco as 'Yes' only when explicitly affirmed, and habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
+    "emrFields keys allowed: cc, presentHx, pastHx, surgicalHistory, homeMeds, treatmentReceived, comorbidsNote, dm, dmDetails, htn, htnDetails, cardiac, cardiacDetails, asthma, asthmaDetails, tb, tbDetails, thyroid, thyroidDetails, epilepsy, epilepsyDetails, ckd, ckdDetails, cld, cldDetails, cancer, cancerDetails, cva, cvaDetails, dyslipidemia, dyslipidemiaDetails, familyHistory, familyDiabetes, familyHtn, familyHeart, familyCancer, familyTb, familyAsthma, familyDetails, allergies, diet, sleep, lmp, immunization, nutrition, hydration, systemicExam, respiratoryExam, cvsExam, abdoExam, localExam, tenderness, tendernessDetails, abdoMass, abdoMassDetails, provisionalDx, managementPlan, advice. " +
+    "(dm/htn/cardiac/asthma/tb/thyroid/epilepsy/ckd/cld/cancer/cva/dyslipidemia/familyHistory/familyDiabetes/familyHtn/familyHeart/familyCancer/familyTb/familyAsthma/tenderness/abdoMass as 'Yes'/'No' if stated).\n" +
+    "Habits: alcohol, smoking, recDrug, tobacco as 'Yes'/'No', habitsDetails for details; set habits='Yes' if any is; add top-level \"alcoholDetail\" with the exact amount and type stated.\n" +
     "If ALREADY CAPTURED fields are given, output ONLY additions or corrections from the NEW text; do not repeat captured content.\n" +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. provisionalDx ONLY if the clinician stated it. " +
     "ddx = a short reasonable differential FOR THE DOCTOR TO CONSIDER. investigations = tests a clinician would reasonably consider. No prose outside JSON.";
@@ -1331,9 +1471,13 @@
     if (typeof parsed.alcoholDetail === "string" && parsed.alcoholDetail.trim()) out.alcoholDetail = tidy(parsed.alcoholDetail, 200);
     var ef = parsed.emrFields || {};
     EMR_FIELD_KEYS.forEach(function (k) {
-      var v = ef[k]; if (typeof v !== "string" && typeof v !== "number") return;
+      var v = ef[k]; if (typeof v !== "string" && typeof v !== "number" && typeof v !== "boolean") return;
       var s = stripIndic(tidy(v, 2000)); if (!s) return;
-      if (YES_NO_KEYS[k]) { if (/^yes$/i.test(s)) out.emrFields[k] = "Yes"; else if (/^no$/i.test(s)) out.emrFields[k] = "No"; return; }
+      if (YES_NO_KEYS[k]) {
+        if (/^(?:yes|y|true)$/i.test(s)) out.emrFields[k] = "Yes";
+        else if (/^(?:no|n|false)$/i.test(s)) out.emrFields[k] = "No";
+        return;
+      }
       out.emrFields[k] = s;
     });
     var sg = parsed.suggestions || {};
@@ -1344,7 +1488,11 @@
   }
   var SCRIBE_OVERLAP = 400;   // chars re-shown so a sentence split across two refines is not lost
   var _scribe = { prefix: "", covered: 0, acc: null };
-  function scribeReset() { _scribe = { prefix: "", covered: 0, acc: null }; }
+  // A refine that has been overtaken by a newer transcript must not spend a generation drafting
+  // from stale text: on a 4B model each pass costs tens of seconds, so a long consult would queue
+  // one refine per window and never catch up.
+  var _scribeSeq = 0;
+  function scribeReset() { _scribe = { prefix: "", covered: 0, acc: null }; _scribeSeq++; }
   function unionList(a, b) {
     var seen = {}, out = [];
     (a || []).concat(b || []).forEach(function (x) { var k = String(x).toLowerCase(); if (!seen[k]) { seen[k] = 1; out.push(x); } });
@@ -1383,17 +1531,47 @@
     var budget = windowBudget(packId, SCRIBE_SYS + captured, 600);
     var wins = splitWindows(fresh, budget);
     var acc = _scribe.acc;
+    var mySeq = ++_scribeSeq;
+    var bg = { background: true, pack: packId };
+    if (opts) { for (var k in opts) if (Object.prototype.hasOwnProperty.call(opts, k) && !(k in bg)) bg[k] = opts[k]; }
+    // A model that answered in prose is not a model that captured nothing: count the misses so a
+    // run that produced NO structure can say so instead of leaving the form silently empty (owner
+    // report, 2026-09-11: "no autopopulation of drafting", with no message either way).
+    var unparsed = 0, ran = 0;
     return eachWindow(wins, function (w) {
-      return generateJSON(captured + "=== NEW TRANSCRIPT ===\n" + w, SCRIBE_SYS, 600, opts)
-        .then(sanitizeScribe, function (e) { if (e && e.message === "parse") return sanitizeScribe(null); throw e; })
+      if (mySeq !== _scribeSeq) return null;   // a newer refine arrived while this one waited its turn
+      ran++;
+      return generateJSON(captured + "=== NEW TRANSCRIPT ===\n" + w, SCRIBE_SYS, 600, bg)
+        .then(sanitizeScribe, function (e) { if (e && e.message === "parse") { unparsed++; return sanitizeScribe(null); } throw e; })
         .then(function (nu) { acc = scribeMerge(acc, nu); });
     }).then(function () {
+      if (ran && unparsed === ran && !hasScribeContent(acc)) {
+        return { error: "draft-unparsed", unparsed: unparsed, engine: "local", mode: "opd-scribe",
+                 message: "The on-device model answered in prose instead of a structured note, so nothing could be filled in. The transcript is kept. A larger pack (MAiK MxCore or Neural) is better at this, or use MaiK Cloud." };
+      }
+      return null;
+    }).then(function (bail) {
+      if (bail) return bail;
+      return afterScribe();
+    });
+    function afterScribe() {
+      // Superseded: leave the rolling state to the newer refine and report what we already have,
+      // so the caller shows the fields captured so far rather than an error.
+      if (mySeq !== _scribeSeq) return finishScribe(_scribe.acc || acc || { en: "", emrFields: {}, suggestions: { ddx: [], investigations: [] } }, 0);
       _scribe = { prefix: t, covered: t.length, acc: acc };
       return finishScribe(acc, wins.length);
-    });
+    }
   }
   function finishScribe(acc, windows) {
     return { kind: "opd-scribe", en: acc.en, emrFields: acc.emrFields, suggestions: acc.suggestions, alcoholDetail: acc.alcoholDetail, mode: "opd-scribe", engine: "local", windows: windows };
+  }
+  /** Did this pass actually capture anything the form can use? */
+  function hasScribeContent(acc) {
+    if (!acc) return false;
+    if (acc.en) return true;
+    if (acc.emrFields && Object.keys(acc.emrFields).length) return true;
+    var s = acc.suggestions || {};
+    return !!(s.provisionalDx || (s.ddx && s.ddx.length) || (s.investigations && s.investigations.length));
   }
 
   /* ── SURGX note structuring (kind "surgx-note"): _surgx-note.js ── */
@@ -1727,6 +1905,7 @@
     // local task layer (2026-09-11)
     TUTOR_SYS: TUTOR_SYS, SURG_SYS: SURG_SYS, MODE_SYS: MODE_SYS,
     estTokens: estTokens, splitWindows: splitWindows, windowBudget: windowBudget, numbersIn: numbersIn, canonNum: canonNum, dropUnsupportedNumbers: dropUnsupportedNumbers, stripIndic: stripIndic, mergeText: mergeText,
+    queueState: queueState, setJobTimeoutMs: setJobTimeoutMs,
     summarize: tracked(summarize), assess: tracked(assess), scribeFill: tracked(scribeFill), scribeReset: scribeReset,
     noteStructure: tracked(noteStructure), icdRank: tracked(icdRank), reasoningExtract: tracked(reasoningExtract),
     maikNext: tracked(maikNext), maikExtract: tracked(maikExtract), imagingSummary: tracked(imagingSummary), correlate: tracked(correlate),

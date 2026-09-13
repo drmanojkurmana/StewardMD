@@ -1,0 +1,45 @@
+{
+  "_note": "GHIS zero-knowledge benchmark reference. NEVER imported by connect-agent/** or functions/**: the discovery agent must find these endpoints on its own from a live GHIS session, without ever having read this file or the hand-built integration it was derived from (functions/api/ghis/[[path]].js). Key NAMES only below, never values, never credentials. See test/connect-agent/benchmark/compare-ghis.mjs.",
+  "sourceFile": "functions/api/ghis/[[path]].js",
+  "generatedFrom": "manual read of functions/api/ghis/[[path]].js, 2026-09-11",
+  "entries": [
+    { "op": "login", "method": "GET", "origin": "https://gimsrlogin.gitam.edu", "path": "/", "queryKeys": [], "bodyKeys": [], "kind": "login" },
+    { "op": "login", "method": "POST", "origin": "https://gimsrlogin.gitam.edu", "path": "/Index", "queryKeys": [], "bodyKeys": ["USER_ID", "PASSWORD", "__RequestVerificationToken", "X-Requested-With"], "kind": "login" },
+    { "op": "login", "method": "GET", "origin": "https://gimsrlogin.gitam.edu", "path": "/apps", "queryKeys": [], "bodyKeys": [], "kind": "login" },
+    { "op": "login", "method": "GET", "origin": "https://gimsrlogin.gitam.edu", "path": "/route", "queryKeys": ["id"], "bodyKeys": [], "kind": "login" },
+    { "op": "login", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/Nurseipwlnew/", "queryKeys": ["id"], "bodyKeys": [], "kind": "login" },
+
+    { "op": "opd-patients", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home", "queryKeys": [], "bodyKeys": [], "kind": "other" },
+    { "op": "opd-patients", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/DashboardUnit", "queryKeys": ["type", "sdate", "checkbox"], "bodyKeys": [], "kind": "list_results" },
+
+    { "op": "patients", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/GetIPWL", "queryKeys": ["NursingStationId", "PatientId", "FloorId", "Emp_ID", "Dept_ID", "Type", "__RequestVerificationToken"], "bodyKeys": [], "kind": "list_results" },
+
+    { "op": "demographics", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/Searchnew", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken", "recordNo"], "kind": "patient_lookup" },
+
+    { "op": "lab", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Lab/Home/GetSearchPatientId", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken", "patient_id", "DeptID", "FDate", "EDate"], "kind": "results" },
+
+    { "op": "lab-detail", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Lab/Home/GetPrintLabResultDetailsAuth", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken", "Render_ID", "Episode_Id", "Result_Type"], "kind": "result_detail" },
+
+    { "op": "radiology", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Radio/Home", "queryKeys": ["recordNo"], "bodyKeys": [], "kind": "radiology" },
+
+    { "op": "radiology-report", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Radio/Home/GetRadiologyAutomatedResultPrint", "queryKeys": ["resultid"], "bodyKeys": [], "kind": "radiology_report" },
+    { "op": "radiology-report", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Radiology/Home/GetRadiologyResultPrint", "queryKeys": ["resultid"], "bodyKeys": [], "kind": "radiology_report" },
+
+    { "op": "medications", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/GetMedicines/", "queryKeys": ["id"], "bodyKeys": [], "kind": "medications" },
+
+    { "op": "inv-search", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/FilterServices", "queryKeys": ["searchText"], "bodyKeys": [], "kind": "other" },
+    { "op": "drug-search", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/FilterDrugs", "queryKeys": ["searchText", "chemoflag"], "bodyKeys": [], "kind": "other" },
+
+    { "op": "assessment", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/GetInitialAssessmentnew/", "queryKeys": ["id"], "bodyKeys": [], "kind": "assessment" },
+
+    { "op": "history", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/Getopcard", "queryKeys": ["id", "patid"], "bodyKeys": [], "kind": "history" },
+    { "op": "history", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/Getconsultant", "queryKeys": ["id", "patid"], "bodyKeys": [], "kind": "history" },
+
+    { "op": "service-detail", "method": "GET", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/addservices", "queryKeys": ["Id"], "bodyKeys": [], "kind": "other" },
+
+    { "op": "inv-order", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/CreateServices", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken", "mat_dept_id", "mat_grp_sp_id", "mat_serv_sp_id", "Service_id", "serv_pack_rate_id", "serv_alias", "serv_code", "Service_desc", "Remarks", "service_price", "Service_type", "antibiotics", "collection", "specimen"], "kind": "other", "write": true },
+    { "op": "prescribe", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/CreateDrugs", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken", "drugId", "route", "form", "qty", "frequency", "duration", "remarks"], "kind": "other", "write": true },
+    { "op": "assessment-save", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/CreateinitialAssessmentnew", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken"], "kind": "assessment", "write": true },
+    { "op": "assessment-authorize", "method": "POST", "origin": "https://ghis.gitam.edu", "path": "/Doctor/Home/signoffinitialAssessmentnew", "queryKeys": [], "bodyKeys": ["__RequestVerificationToken", "id"], "kind": "other", "write": true }
+  ]
+}

@@ -152,6 +152,31 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
     tests: [{ test: "Potassium", value: 4.2, unit: "mmol/L", range: "3.5-5.1" }],
   });
   assert.equal(labResult.__status, 200, JSON.stringify(labResult));
+  /* Every released result is checked against the critical limits on the server. A normal potassium is
+   * checked and opens nothing - "checked" is asserted, because an unchecked result must never look like a
+   * normal one. */
+  assert.equal(labResult.criticalCheck && labResult.criticalCheck.checked, true, "a released result must be checked against the critical limits: " + JSON.stringify(labResult.criticalCheck));
+  assert.equal(labResult.criticalCheck.opened, 0);
+
+  // A dangerous potassium, on a second order, opens a critical-result loop with no other call.
+  const labOrder2 = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId, code: "Potassium", category: "laboratory" });
+  const critResult = await as(LABTECH, "/ward/release-result", "POST", {
+    orgId: ORG, serviceRequestId: labOrder2.orderId, status: "final", reportedAt: "2026-09-09T09:05:00.000Z",
+    tests: [{ test: "Potassium", value: 7.2, unit: "mmol/L" }],
+  });
+  assert.equal(critResult.__status, 200, JSON.stringify(critResult));
+  assert.equal(critResult.criticalCheck.checked, true);
+  assert.ok(critResult.criticalCheck.opened >= 1, "a potassium of 7.2 must open a critical-result loop: " + JSON.stringify(critResult.criticalCheck));
+
+  // A critical IMAGING finding opens its loop on release too.
+  const critImgOrder = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId, code: "CT head", category: "imaging" });
+  const critImg = await as(LABTECH, "/ward/report-imaging", "POST", {
+    orgId: ORG, serviceRequestId: critImgOrder.orderId, modality: "CT", status: "final", critical: true,
+    findings: "Large acute subdural haematoma with midline shift.", impression: "Acute subdural haematoma.",
+  });
+  assert.equal(critImg.__status, 200, JSON.stringify(critImg));
+  assert.equal(critImg.criticalCheck && critImg.criticalCheck.checked, true, "a critical imaging report must be checked: " + JSON.stringify(critImg.criticalCheck));
+  assert.ok(critImg.criticalCheck.opened >= 1, "a critical imaging finding must open a loop: " + JSON.stringify(critImg.criticalCheck));
 
   // ---- Radiology: order -> report. --------------------------------------------------------------
   const imagingOrder = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId, code: "Chest X-ray", category: "imaging" });
@@ -203,11 +228,12 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
 
   assert.ok(types.has("ServiceRequest"), "the bundle carries BOTH the lab and the imaging order (same FHIR type, both mapped): " + JSON.stringify([...types]));
   const serviceRequests = entries.filter((e) => e.resource && e.resource.resourceType === "ServiceRequest");
-  assert.equal(serviceRequests.length, 2, "exactly the two orders this journey placed - lab and imaging: " + serviceRequests.length);
+  // Three: the lab order, the second (critical) potassium added to prove critical loops open on release, and imaging.
+  assert.equal(serviceRequests.length, 4, "exactly the four orders this journey placed - two lab and two imaging: " + serviceRequests.length);
 
   assert.ok(types.has("DiagnosticReport"), "the bundle carries BOTH the lab result and the imaging report: " + JSON.stringify([...types]));
   const diagnosticReports = entries.filter((e) => e.resource && e.resource.resourceType === "DiagnosticReport");
-  assert.equal(diagnosticReports.length, 2, "exactly the two reports this journey released - lab and imaging: " + diagnosticReports.length);
+  assert.equal(diagnosticReports.length, 4, "exactly the four reports this journey released - two lab and two imaging: " + diagnosticReports.length);
 
   assert.ok(types.has("Specimen"), "TASK 3.7 gap closed: the specimen collected for the lab order is now visible in $everything: " + JSON.stringify([...types]));
   const specimens = entries.filter((e) => e.resource && e.resource.resourceType === "Specimen");

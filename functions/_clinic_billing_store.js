@@ -87,6 +87,16 @@ export async function upsertTariff(env, orgId, item, actor) {
   const existing = item.id ? await fsGet(env, "q_tariff/" + id).catch(() => null) : null;
   const fields = Object.assign({ orgId, active: item.active !== false, updatedBy: actor || "", updatedAt: Date.now() }, v.item);
   await fsCommit(env, [existing ? wUpdate(env, "q_tariff/" + id, fields) : wCreate(env, "q_tariff/" + id, fields)]);
+  /* A PRICE CHANGE IS AUDITED. Every other money action in this file leaves an audit row - raising an
+   * invoice, taking a payment, dispensing - and changing what the hospital charges did not, so a price
+   * quietly altered and then altered back left no trace at all. The row names who changed it, and the
+   * price it had before, because "what did we charge for this last month" is the question it answers. */
+  const before = existing && existing.fields ? existing.fields.price : null;
+  await qAudit(env, {
+    hospitalId: orgId, ticketId: "", actor: actor || "admin",
+    action: existing ? "tariff_update" : "tariff_create",
+    meta: `${fields.name} ${before == null ? "" : before + " -> "}${fields.price}${fields.active === false ? " (withdrawn)" : ""}`,
+  });
   return { ok: true, id };
 }
 

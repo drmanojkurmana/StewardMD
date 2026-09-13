@@ -545,21 +545,36 @@
   function findOrgIdByName(name) {
     if (!name) return null;
     var n = String(name).toLowerCase().trim();
-    if (n.indexOf("a. baumannii") !== -1 || n.indexOf("acinetobacter") !== -1) return "acineto";
+    if (n.indexOf("a. baumannii") !== -1 || n.indexOf("acinetobacter") !== -1 || n.indexOf("crab") !== -1) return "acineto";
     if (n.indexOf("p. aeruginosa") !== -1 || n.indexOf("pseudomonas") !== -1) return "pseud";
     if (n.indexOf("e. coli") !== -1 || n.indexOf("escherichia") !== -1) return "ecoli";
-    if (n.indexOf("klebsiella") !== -1) return "kleb";
-    if (n.indexOf("s. aureus") !== -1 || n.indexOf("staph") !== -1) return "mrsa";
-    if (n.indexOf("streptococc") !== -1 || n.indexOf("pneumococc") !== -1) return "strep";
-    if (n.indexOf("enterococc") !== -1 || n.indexOf("faecium") !== -1 || n.indexOf("faecalis") !== -1) return "efaecium";
-    if (n.indexOf("proteus") !== -1) return "pmir";
-    if (n.indexOf("stenotrophomonas") !== -1) return "steno";
+    if (n.indexOf("klebsiella") !== -1 || n.indexOf("k. pneumoniae") !== -1 || n.indexOf("k. oxytoca") !== -1) return "kleb";
+    if (n.indexOf("mrsa") !== -1) return "mrsa";
+    if (n.indexOf("mssa") !== -1) return "mssa";
+    if (n.indexOf("s. aureus") !== -1 || n.indexOf("staphylococcus aureus") !== -1 || n.indexOf("staph aureus") !== -1) return "mrsa";
+    if (n.indexOf("pneumococc") !== -1 || n.indexOf("s. pneumoniae") !== -1 || n.indexOf("streptococc") !== -1 || n.indexOf("pyogenes") !== -1 || n.indexOf("agalactiae") !== -1) return "strep";
+    if (n.indexOf("faecium") !== -1 || n.indexOf("vre") !== -1) return "efaecium";
+    if (n.indexOf("faecalis") !== -1 || n.indexOf("enterococc") !== -1) return "efaecalis";
+    if (n.indexOf("proteus") !== -1 || n.indexOf("p. mirabilis") !== -1) return "pmir";
+    if (n.indexOf("stenotrophomonas") !== -1 || n.indexOf("s. maltophilia") !== -1) return "steno";
     if (n.indexOf("salmonella") !== -1 || n.indexOf("shigella") !== -1) return "ecoli";
+    if (n.indexOf("listeria") !== -1 || n.indexOf("l. monocytogenes") !== -1) return "listeria";
+    if (n.indexOf("haemophilus") !== -1 || n.indexOf("h. influenzae") !== -1) return "hflu";
+    if (n.indexOf("moraxella") !== -1 || n.indexOf("m. catarrhalis") !== -1) return "morax";
+    if (n.indexOf("gonorrh") !== -1 || n.indexOf("n. gonorrhoeae") !== -1) return "ngon";
+    if (n.indexOf("meningit") !== -1 || n.indexOf("n. meningitidis") !== -1) return "nmen";
+    if (n.indexOf("bacteroides") !== -1 || n.indexOf("b. fragilis") !== -1) return "bfrag";
+    if (n.indexOf("mycoplasma") !== -1 || n.indexOf("chlamydia") !== -1) return "atyp";
+    if (n.indexOf("legionella") !== -1 || n.indexOf("l. pneumophila") !== -1) return "legio";
+    if (n.indexOf("enterobacter") !== -1 || n.indexOf("serratia") !== -1 || n.indexOf("citrobacter") !== -1 || n.indexOf("ampc") !== -1) return "escappm";
+    if (n.indexOf("esbl") !== -1) return "esbl";
+    if (n.indexOf("cre") !== -1 || n.indexOf("carbapenem-resistant") !== -1) return "cre";
     return null;
   }
 
   /* ───────────────────────────  STATE / DOM  ─────────────────────────── */
   var root = null, tab = "coverage", covSel = null, covSelType = null, srcKey = "national", tEl, tTimer;
+  var filterQuery = "", filterBand = "all";
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -583,12 +598,12 @@
     if (!q) return;
     try {
       if (window.MEDDB) {
-        if (typeof window.MEDDB.openList === "function") {
-          window.MEDDB.openList(q);
-          return;
-        }
         if (typeof window.MEDDB.openComposition === "function") {
           window.MEDDB.openComposition(q);
+          return;
+        }
+        if (typeof window.MEDDB.openList === "function") {
+          window.MEDDB.openList(q);
           return;
         }
       }
@@ -600,17 +615,7 @@
 
   function openAntibiotic(agentStr) {
     if (!agentStr) return;
-    var raw = String(agentStr).trim();
-    // Check if it contains multiple molecules separated by slash "/"
-    if (raw.indexOf("/") !== -1) {
-      var parts = raw.split("/").map(function (p) { return p.trim(); }).filter(Boolean);
-      if (parts.length > 1) {
-        showDrugPicker(raw, parts);
-        return;
-      }
-    }
-    var clean = cleanSingleDrugName(raw);
-    redirectDrugDB(clean || raw);
+    showDrugModal(agentStr);
   }
 
   function showDrugPicker(title, drugs) {
@@ -618,6 +623,7 @@
     var el = root.querySelector("#abgDrugPicker");
     if (!el) return;
     var h = '<div class="abg-picker-card">' +
+      '<div class="abg-sheet-grabber"></div>' +
       '<div class="abg-picker-head">' +
         '<div class="abg-picker-title">Select Molecule</div>' +
         '<button class="abg-picker-close" data-act="dismiss-picker" aria-label="Close">' + abIco("close") + '</button>' +
@@ -646,13 +652,181 @@
     }
   }
 
+  /* ─────────────── ANTIBIOTIC COVERAGE & DRUG DB MODAL ─────────────── */
+  function showDrugModal(drugIndexOrName) {
+    if (!root) return;
+    var el = root.querySelector("#abgDrugModal");
+    if (!el) return;
+    var d = null, di = -1;
+    if (typeof drugIndexOrName === "number") {
+      di = drugIndexOrName;
+      d = COVERAGE[di];
+    } else {
+      var searchName = String(drugIndexOrName).toLowerCase().trim();
+      for (var i = 0; i < COVERAGE.length; i++) {
+        if (COVERAGE[i].agent.toLowerCase().indexOf(searchName) !== -1 ||
+            searchName.indexOf(COVERAGE[i].agent.toLowerCase()) !== -1) {
+          di = i;
+          d = COVERAGE[i];
+          break;
+        }
+      }
+    }
+    if (!d) return;
+
+    var clean = cleanSingleDrugName(d.agent) || d.agent;
+    var raw = String(d.agent).trim();
+    var multiParts = [];
+    if (raw.indexOf("/") !== -1) {
+      multiParts = raw.split("/").map(function (p) { return p.trim(); }).filter(Boolean);
+    }
+
+    var keys = Object.keys(d.cov || {});
+    var relOrgs = keys.filter(function (id) { return d.cov[id] === 2; });
+    var partOrgs = keys.filter(function (id) { return d.cov[id] === 1; });
+
+    var h = '<div class="abg-dossier-card">' +
+      '<div class="abg-sheet-grabber"></div>' +
+      '<div class="abg-dossier-head g-drug">' +
+        '<div class="abg-dossier-meta">' +
+          '<span class="abg-dossier-badge">' + esc(d.cls) + '</span>' +
+          '<span class="abg-dossier-gram">Antimicrobial Agent</span>' +
+        '</div>' +
+        '<div class="abg-dossier-title">' + esc(d.agent) + '</div>' +
+        '<button class="abg-dossier-close" data-act="dismiss-drug-modal" aria-label="Close">' + abIco("close") + '</button>' +
+      '</div>' +
+      '<div class="abg-dossier-body">';
+
+    // HERO CTA: Know More - Open in Drug Database
+    h += '<button class="abg-know-more-hero" data-act="open-abx-direct" data-agent="' + esc(clean) + '">' +
+      abIco("pills") + ' <span>Know More — Open ' + esc(clean) + ' in Drug Database</span> ↗' +
+    '</button>';
+
+    if (multiParts.length > 1) {
+      h += '<div class="abg-multi-molecules">' +
+        '<span class="abg-multi-lbl">Specific Molecules in Drug Database:</span>' +
+        '<div class="abg-multi-btns">' +
+        multiParts.map(function (p) {
+          var cp = cleanSingleDrugName(p);
+          return '<button class="abg-multi-btn" data-act="open-abx-direct" data-agent="' + esc(cp || p) + '">' +
+            abIco("pills") + ' ' + esc(p) + ' ↗</button>';
+        }).join("") +
+        '</div></div>';
+    }
+
+    if (d.note) {
+      h += '<div class="abg-dossier-section pearls">' +
+        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Spectrum Highlights &amp; Clinical Note</div>' +
+        '<div class="abg-dossier-sec-p">' + esc(d.note) + '</div>' +
+      '</div>';
+    }
+
+    // Organisms Covered Section
+    h += '<div class="abg-dossier-section">' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Organisms Covered by ' + esc(d.agent) + '</div>' +
+      '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any organism below to inspect complete microbiology, intrinsic resistance, and treatment regimens:</div>';
+
+    if (relOrgs.length) {
+      h += '<div class="abg-cov-group-lbl"><b>Reliably Active (First-line / High Susceptibility):</b></div>' +
+        '<div class="abg-tags" style="margin-bottom:10px">' +
+        relOrgs.map(function (id) {
+          return '<em class="abg-tag-org rel" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="View complete pathogen dossier">' +
+            '✓ ' + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
+        }).join("") + '</div>';
+    }
+
+    if (partOrgs.length) {
+      h += '<div class="abg-cov-group-lbl"><b>Variable / Inducible / Partial Activity:</b></div>' +
+        '<div class="abg-tags">' +
+        partOrgs.map(function (id) {
+          return '<em class="abg-tag-org part" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="View complete pathogen dossier">' +
+            '◐ ' + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
+        }).join("") + '</div>';
+    }
+
+    if (!relOrgs.length && !partOrgs.length) {
+      h += '<span class="abg-note-sm">No coverage defined in standard spectrum.</span>';
+    }
+    h += '</div>';
+
+    // Highlight on Spectrum Grid button + Done button
+    h += '<div class="abg-dossier-actions">' +
+      '<button class="abg-dossier-btn-isolate" data-act="isolate-drug-from-modal" data-drug-idx="' + di + '">Highlight on Spectrum Grid</button>' +
+      '<button class="abg-dossier-btn-done" data-act="dismiss-drug-modal">Done</button>' +
+    '</div>';
+
+    h += '</div></div>';
+    el.innerHTML = h;
+    el.classList.add("on");
+  }
+
+  function hideDrugModal() {
+    if (!root) return;
+    var el = root.querySelector("#abgDrugModal");
+    if (el) {
+      el.classList.remove("on");
+      setTimeout(function () { if (!el.classList.contains("on")) el.innerHTML = ""; }, 220);
+    }
+  }
+
+  /* ─────────────── CELL CLICK ACTION MODAL ─────────────── */
+  function showCellAction(di, orgId) {
+    if (!root) return;
+    var el = root.querySelector("#abgCellAction");
+    if (!el) return;
+    var d = COVERAGE[di];
+    if (!d) return;
+    var st = (d.cov && d.cov[orgId]) || 0; // 2 = reliable, 1 = variable, 0 = not active
+    var statusClass = st === 2 ? "on" : st === 1 ? "part" : "no";
+    var statusIcon = st === 2 ? abIco("check") : st === 1 ? "◐" : "✕";
+    var statusText = st === 2 ? "Reliably Active (First-line spectrum)" :
+                     st === 1 ? "Variable / Partial Activity (Verify against local susceptibility)" :
+                     "Not Active (No activity or inherent resistance)";
+
+    var h = '<div class="abg-cell-action-card">' +
+      '<div class="abg-sheet-grabber"></div>' +
+      '<div class="abg-cell-action-head">' +
+        '<div class="abg-cell-action-title">' + esc(d.agent) + ' × ' + esc(colLabel(orgId)) + '</div>' +
+        '<button class="abg-picker-close" data-act="dismiss-cell-action" aria-label="Close">' + abIco("close") + '</button>' +
+      '</div>' +
+      '<div class="abg-cell-banner ' + statusClass + '">' +
+        '<span style="display:inline-flex;align-items:center">' + statusIcon + '</span>' +
+        '<span>' + esc(statusText) + '</span>' +
+      '</div>' +
+      '<div class="abg-cell-actions">' +
+        '<button class="abg-cell-btn-dossier" data-act="cell-open-org" data-org-id="' + esc(orgId) + '">' +
+          abIco("microbe") + ' View ' + esc(colLabel(orgId)) + ' Pathogen &amp; AMR Dossier ↗' +
+        '</button>' +
+        '<button class="abg-cell-btn-drug" data-act="cell-open-drug" data-drug-idx="' + di + '">' +
+          abIco("pills") + ' View ' + esc(d.agent) + ' Spectrum &amp; Drug Database ↗' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+    el.innerHTML = h;
+    el.classList.add("on");
+  }
+
+  function hideCellAction() {
+    if (!root) return;
+    var el = root.querySelector("#abgCellAction");
+    if (el) {
+      el.classList.remove("on");
+      setTimeout(function () { if (!el.classList.contains("on")) el.innerHTML = ""; }, 220);
+    }
+  }
+
   /* ─────────────── ORGANISM MICROBIOLOGY DOSSIER MODAL ─────────────── */
   function showOrgDossier(orgId) {
     if (!root) return;
     var el = root.querySelector("#abgOrgDossier");
     if (!el) return;
     var d = getOrgDossierData(orgId);
+    var hits = COVERAGE.filter(function (x) { return x.cov && x.cov[orgId]; }).sort(function (a, b) { return (b.cov[orgId] || 0) - (a.cov[orgId] || 0); });
+    var relHits = hits.filter(function (x) { return x.cov[orgId] === 2; });
+    var partHits = hits.filter(function (x) { return x.cov[orgId] === 1; });
+
     var h = '<div class="abg-dossier-card">' +
+      '<div class="abg-sheet-grabber"></div>' +
       '<div class="abg-dossier-head g-' + esc(d.groupClass || "gpc") + '">' +
         '<div class="abg-dossier-meta">' +
           '<span class="abg-dossier-badge">' + esc(d.group) + '</span>' +
@@ -671,20 +845,20 @@
     }
 
     h += '<div class="abg-dossier-section">' +
-      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology, Morphology & Virulence</div>' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology, Morphology &amp; Virulence</div>' +
       '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
     '</div>';
 
     if (d.mechanism) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("flask") + ' AMR Mechanisms & Phenotypes</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("flask") + ' AMR Mechanisms &amp; Phenotypes</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.mechanism) + '</div>' +
       '</div>';
     }
 
     if (d.regimens && d.regimens.length) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Clinical Regimens & Targeted Therapy</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Clinical Regimens &amp; Targeted Therapy</div>' +
         '<div class="abg-dossier-regimens">';
       d.regimens.forEach(function (r) {
         h += '<div class="abg-dossier-reg-item">' +
@@ -698,23 +872,35 @@
 
     if (d.pearls) {
       h += '<div class="abg-dossier-section pearls">' +
-        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls for Clinicians & Microbiologists</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls for Clinicians &amp; Microbiologists</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.pearls) + '</div>' +
       '</div>';
     }
 
-    var hits = COVERAGE.filter(function (x) { return x.cov[orgId]; }).sort(function (a, b) { return (b.cov[orgId] || 0) - (a.cov[orgId] || 0); });
     if (hits.length) {
       h += '<div class="abg-dossier-section">' +
         '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Active Antibiotics from Spectrum Grid</div>' +
-        '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any antibiotic to open full dosing, monograph, and brands in the Drug Database:</div>' +
-        '<div class="abg-tags">' +
-        hits.map(function (x) {
-          var rel = x.cov[orgId] === 2;
-          return '<em class="abg-tag-drug ' + (rel ? "rel" : "part") + '" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Open in Drug Database">' +
-            (rel ? "✓ " : "◐ ") + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
-        }).join("") +
-        '</div></div>';
+        '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any antibiotic to inspect coverage details &amp; open in Drug Database:</div>';
+
+      if (relHits.length) {
+        h += '<div class="abg-cov-group-lbl"><b>Reliably Active (First-line):</b></div>' +
+          '<div class="abg-tags" style="margin-bottom:8px">' +
+          relHits.map(function (x) {
+            return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + ' &amp; open in Drug DB">' +
+              '✓ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+          }).join("") + '</div>';
+      }
+
+      if (partHits.length) {
+        h += '<div class="abg-cov-group-lbl"><b>Variable / Second-line:</b></div>' +
+          '<div class="abg-tags">' +
+          partHits.map(function (x) {
+            return '<em class="abg-tag-drug part" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + ' &amp; open in Drug DB">' +
+              '◐ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+          }).join("") + '</div>';
+      }
+
+      h += '</div>';
     }
 
     h += '<div class="abg-dossier-actions">' +
@@ -751,7 +937,13 @@
     if (!root) return;
     var el = root.querySelector("#abgOrgDossier");
     if (!el) return;
+    var hits = COVERAGE.filter(function (x) {
+      var oid = findOrgIdByName(d.name);
+      return oid && x.cov && x.cov[oid];
+    });
+
     var h = '<div class="abg-dossier-card">' +
+      '<div class="abg-sheet-grabber"></div>' +
       '<div class="abg-dossier-head g-' + esc(d.groupClass || "gpc") + '">' +
         '<div class="abg-dossier-meta">' +
           '<span class="abg-dossier-badge">' + esc(d.group) + '</span>' +
@@ -760,24 +952,48 @@
         '<div class="abg-dossier-title">' + esc(d.name) + '</div>' +
         '<button class="abg-dossier-close" data-act="dismiss-dossier" aria-label="Close">' + abIco("close") + '</button>' +
       '</div>' +
-      '<div class="abg-dossier-body">' +
-      '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology & Clinical Summary</div>' +
-        '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
-      '</div>' +
-      '<div class="abg-dossier-section pearls">' +
+      '<div class="abg-dossier-body">';
+
+    if (d.intrinsic) {
+      h += '<div class="abg-dossier-alert">' +
+        '<div class="abg-dossier-alert-title">' + abIco("warn") + ' Intrinsic / Inherent Resistance</div>' +
+        '<div class="abg-dossier-alert-text">' + esc(d.intrinsic) + '</div>' +
+      '</div>';
+    }
+
+    h += '<div class="abg-dossier-section">' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology &amp; Clinical Summary</div>' +
+      '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
+    '</div>';
+
+    if (d.pearls) {
+      h += '<div class="abg-dossier-section pearls">' +
         '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.pearls) + '</div>' +
-      '</div>' +
-      '<div class="abg-dossier-actions">' +
-        '<button class="abg-dossier-btn-done" data-act="dismiss-dossier">Done</button>' +
-      '</div>' +
-      '</div></div>';
+      '</div>';
+    }
+
+    if (hits.length) {
+      h += '<div class="abg-dossier-section">' +
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Active Antibiotics from Spectrum Grid</div>' +
+        '<div class="abg-tags">' +
+        hits.map(function (x) {
+          return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="View coverage &amp; Drug DB">' +
+            '✓ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+        }).join("") +
+        '</div></div>';
+    }
+
+    h += '<div class="abg-dossier-actions">' +
+      '<button class="abg-dossier-btn-done" data-act="dismiss-dossier">Done</button>' +
+    '</div>' +
+    '</div></div>';
     el.innerHTML = h;
     el.classList.add("on");
   }
 
   function open() {
+    _rotateDismissed = false;
     if (root) { root.classList.add("on"); document.body.style.overflow = "hidden"; enableRotate(); return; }
     injectCSS();
     root = document.createElement("div"); root.className = "abg"; root.id = "abgOverlay";
@@ -811,34 +1027,46 @@
     if (_isPortrait()) { if (root && root.classList.contains("on")) showRotateHint(); }
     else hideRotateHint();   // rotated to landscape — the hint has done its job
   }
+  var _rotateTimer = null;
+  var _rotateDismissed = false;  // once dismissed (auto or manual), never re-show until next open()
   function showRotateHint() {
-    if (!root || root.querySelector("#abgRotate")) return;
+    if (_rotateDismissed || !root || root.querySelector("#abgRotate")) return;
     var h = document.createElement("div");
     h.className = "abg-rotate"; h.id = "abgRotate";
-    h.innerHTML = '<span class="abg-rotate-ic">' + abIco("refresh") + '</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">' + abIco("close") + '</button>';
+    h.innerHTML = '<span class="abg-rotate-ic">' + abIco("refresh") + '</span><span class="abg-rotate-tx">Rotate for a wider view</span>';
     root.appendChild(h);
     requestAnimationFrame(function () { h.classList.add("on"); });
-    h.addEventListener("click", function (e) { if (e.target.closest("[data-act='rotate-dismiss']")) hideRotateHint(); });
+    h.addEventListener("click", function () { hideRotateHint(); });
+    if (_rotateTimer) clearTimeout(_rotateTimer);
+    _rotateTimer = setTimeout(function () { _rotateTimer = null; hideRotateHint(); }, 4000);
   }
   function hideRotateHint() {
+    _rotateDismissed = true;
+    if (_rotateTimer) { clearTimeout(_rotateTimer); _rotateTimer = null; }
     var h = root && root.querySelector("#abgRotate");
     if (!h) return;
     h.classList.remove("on");
-    setTimeout(function () { if (h && h.parentNode) h.parentNode.removeChild(h); }, 220);
+    setTimeout(function () { if (h && h.parentNode) h.parentNode.removeChild(h); }, 300);
   }
 
   function shell() {
     return '' +
       '<div class="abg-top">' +
         '<button class="abg-back" data-act="close" aria-label="Back">‹ Back</button>' +
-        '<div class="abg-ttl">Antibiogram</div>' +
+        '<div class="abg-ttl-wrap">' +
+          '<div class="abg-ttl">Antibiogram</div>' +
+          '<div class="abg-subttl">Spectrum &amp; Susceptibility Guide</div>' +
+        '</div>' +
+        '<button class="abg-reset-btn" data-act="reset-all" title="Reset selections and filters">Reset</button>' +
       '</div>' +
       '<div class="abg-tabs" role="tablist">' +
-        '<button class="abg-tab" data-tab="coverage" role="tab">Antibiotic coverage</button>' +
+        '<button class="abg-tab on" data-tab="coverage" role="tab">Antibiotic coverage</button>' +
         '<button class="abg-tab" data-tab="resistance" role="tab">Resistance rates</button>' +
       '</div>' +
       '<div class="abg-body" id="abgBody"></div>' +
       '<div class="abg-modal-sheet" id="abgDrugPicker"></div>' +
+      '<div class="abg-modal-sheet" id="abgCellAction"></div>' +
+      '<div class="abg-modal-sheet" id="abgDrugModal"></div>' +
       '<div class="abg-modal-sheet" id="abgOrgDossier"></div>';
   }
 
@@ -850,29 +1078,108 @@
     body.scrollTop = 0;
   }
 
-  /* Coverage grid + interactive summary */
+  /* Coverage grid + interactive summary + search & category filters */
   function coverageView() {
-    var h = '<div class="abg-note">Spectrum of activity — a teaching guide, <b>not</b> a substitute for susceptibility testing or your local antibiogram. Tap a drug or an organism to isolate it.</div>';
+    var h = '<div class="abg-filter-bar">' +
+      '<div class="abg-search-box">' +
+        '<span class="abg-search-icon">' + abIco("search") + '</span>' +
+        '<input type="search" class="abg-search-input" id="abgSearch" placeholder="Filter antibiotic (e.g. Meropenem) or organism..." value="' + esc(filterQuery) + '" autocomplete="off" autocorrect="off" spellcheck="false" />' +
+        (filterQuery ? '<button class="abg-search-clear" data-act="clear-search" aria-label="Clear">' + abIco("close") + '</button>' : '') +
+      '</div>' +
+      '<div class="abg-filter-pills">' +
+        '<button class="abg-filter-pill' + (filterBand === "all" ? " active" : "") + '" data-act="set-band" data-band="all">All Spectrum</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "gpc" ? " active" : "") + '" data-act="set-band" data-band="gpc"><span class="abg-dot gpc"></span>Gram (+)</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "gneg" ? " active" : "") + '" data-act="set-band" data-band="gneg"><span class="abg-dot entero"></span>Gram (-)</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "nonferm" ? " active" : "") + '" data-act="set-band" data-band="nonferm"><span class="abg-dot nonferm"></span>Non-ferm</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "ana" ? " active" : "") + '" data-act="set-band" data-band="ana"><span class="abg-dot ana"></span>Anaerobes</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "aty" ? " active" : "") + '" data-act="set-band" data-band="aty"><span class="abg-dot aty"></span>Atypicals</button>' +
+      '</div>' +
+    '</div>';
 
-    // interactive summary bar
+    h += '<div class="abg-note">Spectrum of activity — qualitative clinical teaching guide. Tap any drug, organism, or cell to inspect coverage &amp; details.</div>';
     h += '<div class="abg-sum" id="abgSum">' + coverageSummary() + '</div>';
+    h += '<div id="abgGridContainer">' + gridTableHtml() + '</div>';
+    return h;
+  }
 
-    // scrollable grid
-    h += '<div class="abg-scroll"><table class="abg-grid"><thead>';
-    // tier-1 Gram-stain band row (spells out that Enterobacterales etc. are Gram-negative)
-    var solo = {}; BANDS.forEach(function (b) { if (b.groups.length === 1) solo[b.groups[0]] = 1; });
-    var span = {}; GROUPS.forEach(function (g) { span[g.id] = g.cols.length; });
-    h += '<tr class="abg-band"><th class="abg-rowh abg-corner" rowspan="3">Antibiotic</th>';
-    BANDS.forEach(function (b) {
-      var cs = 0; b.groups.forEach(function (gid) { cs += span[gid] || 0; });
-      var rs = b.groups.length === 1 ? ' rowspan="2"' : '';
-      h += '<th class="abg-gh abg-band-h g-' + b.id + '"' + rs + ' colspan="' + cs + '">' + esc(b.name) + '</th>';
+  function updateGridOnly() {
+    if (!root) return;
+    var container = root.querySelector("#abgGridContainer");
+    if (container) container.innerHTML = gridTableHtml();
+    var sum = root.querySelector("#abgSum");
+    if (sum) sum.innerHTML = coverageSummary();
+    var searchBox = root.querySelector(".abg-search-box");
+    if (searchBox) {
+      var clearBtn = searchBox.querySelector(".abg-search-clear");
+      if (filterQuery && !clearBtn) {
+        var b = document.createElement("button");
+        b.className = "abg-search-clear";
+        b.setAttribute("data-act", "clear-search");
+        b.setAttribute("aria-label", "Clear");
+        b.innerHTML = abIco("close");
+        searchBox.appendChild(b);
+      } else if (!filterQuery && clearBtn) {
+        clearBtn.remove();
+      }
+    }
+  }
+
+  function gridTableHtml() {
+    var q = filterQuery.toLowerCase().trim();
+    // 1. Columns according to filterBand
+    var viewCols = COLS;
+    if (filterBand === "gpc") viewCols = COLS.filter(function (c) { return c.group === "gpc"; });
+    else if (filterBand === "gneg") viewCols = COLS.filter(function (c) { return c.group === "entero" || c.group === "fast"; });
+    else if (filterBand === "nonferm") viewCols = COLS.filter(function (c) { return c.group === "nonferm"; });
+    else if (filterBand === "ana") viewCols = COLS.filter(function (c) { return c.group === "ana"; });
+    else if (filterBand === "aty") viewCols = COLS.filter(function (c) { return c.group === "aty"; });
+
+    // 2. Filter drugs if filterQuery is set
+    var viewDrugs = [];
+    COVERAGE.forEach(function (d, i) {
+      if (!q) { viewDrugs.push({ d: d, i: i }); return; }
+      var matchDrug = d.agent.toLowerCase().indexOf(q) !== -1 || d.cls.toLowerCase().indexOf(q) !== -1 || (d.note && d.note.toLowerCase().indexOf(q) !== -1);
+      var matchOrg = Object.keys(d.cov || {}).some(function (oid) {
+        return colLabel(oid).toLowerCase().indexOf(q) !== -1;
+      });
+      if (matchDrug || matchOrg) viewDrugs.push({ d: d, i: i });
     });
-    // tier-2 group header row — only multi-family bands fan out into their families here
-    h += '</tr><tr class="abg-grp">';
-    GROUPS.forEach(function (g) { if (!solo[g.id]) h += '<th class="abg-gh g-' + g.id + '" colspan="' + g.cols.length + '">' + esc(g.name) + '</th>'; });
-    h += '</tr><tr class="abg-orgh">';
-    COLS.forEach(function (c) {
+
+    if (!viewDrugs.length) {
+      return '<div class="abg-empty-filter">' +
+        '<div class="abg-empty-ic">' + abIco("search") + '</div>' +
+        '<b>No matching antibiotics or organisms</b>' +
+        '<p>No results found for &ldquo;' + esc(filterQuery) + '&rdquo;.</p>' +
+        '<button class="abg-reset-filter-btn" data-act="clear-search">Clear Search Filter</button>' +
+      '</div>';
+    }
+
+    var h = '<div class="abg-scroll"><table class="abg-grid"><thead>';
+    if (filterBand === "all") {
+      var solo = {}; BANDS.forEach(function (b) { if (b.groups.length === 1) solo[b.groups[0]] = 1; });
+      var span = {}; GROUPS.forEach(function (g) { span[g.id] = g.cols.length; });
+      h += '<tr class="abg-band"><th class="abg-rowh abg-corner" rowspan="3">Antibiotic</th>';
+      BANDS.forEach(function (b) {
+        var cs = 0; b.groups.forEach(function (gid) { cs += span[gid] || 0; });
+        var rs = b.groups.length === 1 ? ' rowspan="2"' : '';
+        h += '<th class="abg-gh abg-band-h g-' + b.id + '"' + rs + ' colspan="' + cs + '">' + esc(b.name) + '</th>';
+      });
+      h += '</tr><tr class="abg-grp">';
+      GROUPS.forEach(function (g) { if (!solo[g.id]) h += '<th class="abg-gh g-' + g.id + '" colspan="' + g.cols.length + '">' + esc(g.name) + '</th>'; });
+      h += '</tr>';
+    } else {
+      h += '<tr class="abg-band"><th class="abg-rowh abg-corner" rowspan="2">Antibiotic</th>' +
+        '<th class="abg-gh abg-band-h g-' + filterBand + '" colspan="' + viewCols.length + '">' +
+          esc(filterBand === "gpc" ? "Gram-Positive Organisms" :
+              filterBand === "gneg" ? "Gram-Negative Organisms" :
+              filterBand === "nonferm" ? "Non-Fermenters" :
+              filterBand === "ana" ? "Anaerobic Organisms" :
+              filterBand === "aty" ? "Atypical Organisms" : "Selected Spectrum") +
+        '</th></tr>';
+    }
+
+    h += '<tr class="abg-orgh">';
+    viewCols.forEach(function (c) {
       var on = (covSelType === "org" && covSel === c.id) ? " sel" : "";
       h += '<th class="abg-ch g-' + c.group + on + '" data-org="' + c.id + '" title="Tap to isolate column or view pathogen details">' +
         '<button class="abg-ch-btn" data-act="show-org-dossier" data-org-id="' + esc(c.id) + '" title="View complete microbiology dossier">' +
@@ -881,8 +1188,10 @@
       '</th>';
     });
     h += '</tr></thead><tbody>';
+
     var lastCls = null;
-    COVERAGE.forEach(function (d, i) {
+    viewDrugs.forEach(function (item) {
+      var d = item.d, i = item.i;
       var rowOn = (covSelType === "drug" && covSel === i) ? " sel" : "";
       var dim = covSel !== null && !rowOn && covSelType === "drug" ? " dim" : "";
       var newCls = d.cls !== lastCls; lastCls = d.cls;
@@ -890,7 +1199,7 @@
       h += '<td class="abg-rowh">' +
         (newCls ? '<span class="abg-cls">' + esc(d.cls) + '</span>' : '') +
         '<div class="abg-agent-wrap">' +
-          '<button class="abg-agent-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Open ' + esc(d.agent) + ' in Drug Database">' +
+          '<button class="abg-agent-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Inspect coverage &amp; open in Drug Database">' +
             esc(d.agent) +
           '</button>' +
           '<button class="abg-drug-link-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Open in Drug Database" aria-label="Open in Drug Database">' +
@@ -898,19 +1207,20 @@
           '</button>' +
         '</div>' +
       '</td>';
-      COLS.forEach(function (c) {
-        var st = (d.cov && d.cov[c.id]) || 0;   // 2 = reliable · 1 = variable · 0 = not active
+      viewCols.forEach(function (c) {
+        var st = (d.cov && d.cov[c.id]) || 0;
         var hl = "";
         if (covSelType === "org" && covSel === c.id) hl = " col";
         if ((covSelType === "org" && covSel === c.id) || (covSelType === "drug" && covSel === i)) hl += " hit";
         var cls = st === 2 ? "on" : st === 1 ? "part" : "no";
-        var sym = st === 2 ? "✓" : st === 1 ? "◐" : "✕";   // ✓ active (green) · ◐ variable (amber hatch on light green) · ✕ not active (red)
-        h += '<td class="abg-cell ' + cls + hl + '"><i>' + sym + '</i></td>';
+        var sym = st === 2 ? abIco("check") : st === 1 ? "◐" : "✕";
+        h += '<td class="abg-cell ' + cls + hl + '" data-org-id="' + esc(c.id) + '"><i class="abg-cell-sym">' + sym + '</i></td>';
       });
       h += '</tr>';
     });
+
     h += '</tbody></table></div>';
-    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference — verify against your local antibiogram · Sanford / IDSA / CLSI M100 (2024)</span></div>';
+    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference — verify against local antibiogram · Sanford / IDSA / CLSI M100 (2024)</span></div>';
     return h;
   }
 
@@ -930,13 +1240,13 @@
         '<button class="abg-know-more-hero" data-act="open-abx" data-agent="' + esc(d.agent) + '">' +
           abIco("pills") + ' <span>Know More — Open ' + esc(clean) + ' in Drug Database</span> ↗' +
         '</button>' +
-        (d.note ? '<div class="abg-sum-note">💡 <b>Spectrum &amp; Clinical Note:</b> ' + esc(d.note) + '</div>' : '') +
+        (d.note ? '<div class="abg-sum-note"><span class="abg-sum-note-ic">' + abIco("info") + '</span> <div><b>Spectrum &amp; Clinical Note:</b> ' + esc(d.note) + '</div></div>' : '') +
         '<div class="abg-sum-body">' +
           '<div class="abg-sum-cov-label"><b>Organisms covered</b> (tap any for pathogen details):</div>' +
           (keys.length ? '<div class="abg-tags">' + keys.map(function (id) {
             var rel = d.cov[id] === 2;
             return '<em class="abg-tag-org ' + (rel ? "rel" : "part") + '" data-act="select-org-show" data-org-id="' + esc(id) + '" title="View pathogen details for ' + esc(colLabel(id)) + '">' +
-              (rel ? "✓ " : "◐ ") + esc(colLabel(id)) + ' <i class="abg-tag-info">🔬</i></em>';
+              (rel ? "✓ " : "◐ ") + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
           }).join("") + '</div>' : '<span class="abg-note-sm">No coverage defined in standard spectrum.</span>') +
         '</div>';
       return h;
@@ -957,7 +1267,7 @@
       '</button>' +
       '<div class="abg-sum-pathogen-card">' +
         '<div class="abg-sum-pathogen-sec"><b>Type &amp; Microbiology:</b> ' + esc(d.microbiology) + '</div>' +
-        (d.intrinsic ? '<div class="abg-sum-pathogen-intrinsic">⚠️ <b>Intrinsic Resistance:</b> ' + esc(d.intrinsic) + '</div>' : '') +
+        (d.intrinsic ? '<div class="abg-sum-pathogen-intrinsic"><span class="abg-sum-alert-ic">' + abIco("warn") + '</span> <div><b>Intrinsic Resistance:</b> ' + esc(d.intrinsic) + '</div></div>' : '') +
       '</div>' +
       '<div class="abg-sum-body">' +
         '<div class="abg-sum-cov-label"><b>Antibiotics with activity</b> (tap any to inspect &amp; open in Drug DB):</div>' +
@@ -1074,15 +1384,46 @@
   /* ───────────────────────────  EVENTS  ─────────────────────────── */
   function bind() {
     root.addEventListener("click", function (e) {
+      // 0. Backdrop click dismiss for all modal sheets
+      if (e.target && e.target.classList && e.target.classList.contains("abg-modal-sheet")) {
+        hideDrugModal();
+        hideOrgDossier();
+        hideCellAction();
+        hideDrugPicker();
+        return;
+      }
+
       // 1. Direct interactive action buttons
       var btn = e.target.closest("[data-act]");
       if (btn) {
         var act = btn.getAttribute("data-act");
         if (act === "close") return close();
         if (act === "clearcov") { covSel = null; covSelType = null; return render(); }
+        if (act === "set-band") {
+          filterBand = btn.getAttribute("data-band") || "all";
+          return render();
+        }
+        if (act === "clear-search") {
+          filterQuery = "";
+          var inp = root.querySelector("#abgSearch");
+          if (inp) inp.value = "";
+          return render();
+        }
+        if (act === "reset-all") {
+          filterQuery = "";
+          filterBand = "all";
+          covSel = null;
+          covSelType = null;
+          return render();
+        }
         if (act === "open-abx") {
           var ag = btn.getAttribute("data-agent");
-          if (ag) openAntibiotic(ag);
+          if (ag) showDrugModal(ag);
+          return;
+        }
+        if (act === "open-abx-direct") {
+          var agDirect = btn.getAttribute("data-agent");
+          if (agDirect) redirectDrugDB(agDirect);
           return;
         }
         if (act === "select-org-show") {
@@ -1103,19 +1444,24 @@
                 covSel = ki;
                 covSelType = "drug";
                 render();
-                var sumEl = root.querySelector("#abgSum");
-                if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                showDrugModal(ki);
                 return;
               }
             }
-            openAntibiotic(agName);
+            showDrugModal(agName);
           }
           return;
         }
         if (act === "dossier-open-abx") {
           var doAg = btn.getAttribute("data-agent");
           hideOrgDossier();
-          if (doAg) openAntibiotic(doAg);
+          if (doAg) showDrugModal(doAg);
+          return;
+        }
+        if (act === "dossier-open-org") {
+          var doOid = btn.getAttribute("data-org-id");
+          hideDrugModal();
+          if (doOid) showOrgDossier(doOid);
           return;
         }
         if (act === "show-org-dossier") {
@@ -1137,6 +1483,26 @@
           hideOrgDossier();
           return;
         }
+        if (act === "dismiss-drug-modal") {
+          hideDrugModal();
+          return;
+        }
+        if (act === "dismiss-cell-action") {
+          hideCellAction();
+          return;
+        }
+        if (act === "cell-open-org") {
+          var cellOid = btn.getAttribute("data-org-id");
+          hideCellAction();
+          if (cellOid) showOrgDossier(cellOid);
+          return;
+        }
+        if (act === "cell-open-drug") {
+          var cellDi = +btn.getAttribute("data-drug-idx");
+          hideCellAction();
+          showDrugModal(cellDi);
+          return;
+        }
         if (act === "dismiss-picker") {
           hideDrugPicker();
           return;
@@ -1147,6 +1513,17 @@
           if (targetAbx) redirectDrugDB(targetAbx);
           return;
         }
+        if (act === "isolate-drug-from-modal") {
+          var isDrugIdx = +btn.getAttribute("data-drug-idx");
+          hideDrugModal();
+          tab = "coverage";
+          covSel = isDrugIdx;
+          covSelType = "drug";
+          render();
+          var sumEl = root.querySelector("#abgSum");
+          if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          return;
+        }
         if (act === "isolate-from-dossier") {
           var isOrgId = btn.getAttribute("data-org-id");
           hideOrgDossier();
@@ -1154,6 +1531,8 @@
           covSel = isOrgId;
           covSelType = "org";
           render();
+          var sumEl = root.querySelector("#abgSum");
+          if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
           return;
         }
       }
@@ -1176,19 +1555,28 @@
           showOrgDossier(oid);
           return;
         }
+        var cell = e.target.closest(".abg-cell");
+        if (cell) {
+          var tr = cell.closest("tr[data-drug]");
+          if (tr) {
+            var di = +tr.getAttribute("data-drug");
+            var targetOid = cell.getAttribute("data-org-id");
+            if (targetOid) {
+              covSel = di;
+              covSelType = "drug";
+              render();
+              showCellAction(di, targetOid);
+              return;
+            }
+          }
+        }
         var dr = e.target.closest("[data-drug]");
         if (dr && dr.classList.contains("abg-drow")) {
-          if (e.target.closest(".abg-drug-link-btn")) {
-            var agBtn = dr.querySelector("[data-agent]");
-            var ag = agBtn ? agBtn.getAttribute("data-agent") : null;
-            if (ag) { openAntibiotic(ag); return; }
-          }
           var di = +dr.getAttribute("data-drug");
           covSel = di;
           covSelType = "drug";
           render();
-          var sumEl = root.querySelector("#abgSum");
-          if (sumEl) sumEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          showDrugModal(di);
           return;
         }
       }
@@ -1202,6 +1590,13 @@
           if (c && c.src) toast(drugLabel(pr.getAttribute("data-drug")) + " · " + pr.getAttribute("data-org") + " — source: " + srcLabel(c.src));
           return;
         }
+      }
+    });
+
+    root.addEventListener("input", function (e) {
+      if (e.target && e.target.id === "abgSearch") {
+        filterQuery = e.target.value;
+        updateGridOnly();
       }
     });
 
@@ -1224,161 +1619,154 @@
     if (document.getElementById("abg-css")) return;
     var s = document.createElement("style"); s.id = "abg-css";
     s.textContent = [
-      ".abg{--bg:#F4F6F9;--panel:#fff;--ink:#0F172A;--mut:#64748B;--line:#E2E8F0;--tl:var(--teal,#0F766E);--tls:var(--teal-soft,#CCFBF1);--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:950;background:var(--bg);color:var(--ink);font-family:var(--f);display:flex;flex-direction:column;opacity:0;transform:translateY(8px);transition:opacity .22s,transform .22s;pointer-events:none}",
+      ".abg{--bg:#F8FAFC;--panel:#FFFFFF;--ink:#0F172A;--mut:#64748B;--line:#E2E8F0;--tl:#0F766E;--tls:#CCFBF1;--f:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:950;background:var(--bg);color:var(--ink);font-family:var(--f);display:flex;flex-direction:column;opacity:0;transform:translateY(8px);transition:opacity .22s cubic-bezier(.2,.8,.2,1),transform .22s cubic-bezier(.2,.8,.2,1);pointer-events:none}",
       ".abg.on{opacity:1;transform:none;pointer-events:auto}",
-      "body.dark .abg{--bg:#0A0F1A;--panel:#101827;--ink:#E6EAF2;--mut:#8A94A6;--line:#1E2B43;--tls:#0d3b36}",
-      ".abg-top{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:2}",
-      ".abg-back{border:none;background:none;color:var(--tl);font:700 15px var(--f);cursor:pointer;padding:6px 6px;border-radius:8px}",
-      ".abg-ttl{font:800 18px var(--f);letter-spacing:-.01em}",
-      ".abg-tabs{display:flex;gap:4px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:53px;z-index:2}",
-      ".abg-tab{flex:1;border:1px solid var(--line);background:var(--bg);color:var(--mut);font:700 13px var(--f);padding:10px 8px;border-radius:11px;cursor:pointer;transition:.15s}",
-      ".abg-tab.on{background:var(--tl);color:#fff;border-color:var(--tl)}",
-      ".abg-body{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:14px 16px calc(28px + env(safe-area-inset-bottom))}",
-      ".abg-note{font:500 12.5px/1.5 var(--f);color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:12px}",
+      "body.dark .abg{--bg:#0B0F19;--panel:#111827;--ink:#F1F5F9;--mut:#94A3B8;--line:#1E293B;--tls:#0d3b36}",
+      ".abg-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);position:sticky;top:0;z-index:20}",
+      "body.dark .abg-top{background:rgba(17,24,39,.88)}",
+      ".abg-back{display:inline-flex;align-items:center;gap:4px;border:none;background:var(--tls);color:var(--tl);font:700 13px var(--f);cursor:pointer;padding:6px 12px;border-radius:20px;transition:transform .12s,background .12s}",
+      ".abg-back:active{transform:scale(.95);background:var(--tl);color:#fff}",
+      ".abg-ttl-wrap{display:flex;flex-direction:column;align-items:center;text-align:center}",
+      ".abg-ttl{font:800 17px/1.2 var(--f);letter-spacing:-.02em;color:var(--ink)}",
+      ".abg-subttl{font:600 10.5px var(--f);color:var(--mut);letter-spacing:.02em;text-transform:uppercase;margin-top:1px}",
+      ".abg-reset-btn{border:none;background:rgba(100,116,139,.1);color:var(--mut);font:700 12px var(--f);padding:6px 11px;border-radius:20px;cursor:pointer;transition:background .15s,color .15s}",
+      ".abg-reset-btn:active{background:var(--tls);color:var(--tl)}",
+      ".abg-tabs{display:flex;gap:4px;padding:5px;margin:8px 16px 6px;background:rgba(0,0,0,.05);border-radius:14px;position:relative;z-index:10}",
+      "body.dark .abg-tabs{background:rgba(255,255,255,.07)}",
+      ".abg-tab{flex:1;border:none;background:none;color:var(--mut);font:700 12.5px var(--f);padding:8px 10px;border-radius:10px;cursor:pointer;transition:all .18s cubic-bezier(.2,.8,.2,1);text-align:center}",
+      ".abg-tab.on{background:var(--panel);color:var(--tl);box-shadow:0 2px 8px rgba(0,0,0,.08)}",
+      "body.dark .abg-tab.on{background:#1E293B;color:#2DD4BF;box-shadow:0 2px 8px rgba(0,0,0,.4)}",
+      ".abg-body{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:8px 16px calc(28px + env(safe-area-inset-bottom))}",
+      /* Filter Bar & Search */
+      ".abg-filter-bar{margin-bottom:10px;display:flex;flex-direction:column;gap:8px}",
+      ".abg-search-box{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px;box-shadow:0 1px 3px rgba(0,0,0,.02);transition:border-color .15s,box-shadow .15s}",
+      ".abg-search-box:focus-within{border-color:var(--tl);box-shadow:0 0 0 3px rgba(15,118,110,.12)}",
+      ".abg-search-icon{color:var(--mut);display:flex;align-items:center;flex:none}",
+      ".abg-search-icon svg{width:15px;height:15px}",
+      ".abg-search-input{flex:1;border:none;background:none;font:600 13px var(--f);color:var(--ink);outline:none;padding:0}",
+      ".abg-search-input::placeholder{color:var(--mut);font-weight:400}",
+      ".abg-search-clear{border:none;background:rgba(0,0,0,.08);color:var(--mut);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}",
+      "body.dark .abg-search-clear{background:rgba(255,255,255,.14)}",
+      ".abg-search-clear svg{width:11px;height:11px}",
+      ".abg-filter-pills{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:3px}",
+      ".abg-filter-pills::-webkit-scrollbar{display:none}",
+      ".abg-filter-pill{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--mut);font:700 11px var(--f);padding:5px 11px;border-radius:20px;cursor:pointer;transition:all .14s;display:inline-flex;align-items:center;gap:5px;flex:none}",
+      ".abg-filter-pill:active{transform:scale(.95)}",
+      ".abg-filter-pill.active{background:var(--tl);color:#fff;border-color:var(--tl);box-shadow:0 2px 6px rgba(15,118,110,.25)}",
+      ".abg-dot{width:6px;height:6px;border-radius:50%;display:inline-block}",
+      ".abg-dot.gpc{background:#2563EB}.abg-dot.entero{background:#DC2626}.abg-dot.nonferm{background:#EA580C}.abg-dot.ana{background:#92702A}.abg-dot.aty{background:#475569}",
+      ".abg-note{font:500 12px/1.5 var(--f);color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}",
       ".abg-note b{color:var(--ink)}",
-      ".abg-sum{font:500 13px/1.6 var(--f);color:var(--ink);background:var(--tls);border:1px solid var(--tl);border-radius:12px;padding:10px 12px;margin-bottom:12px;min-height:20px;position:relative}",
+      /* Summary Box */
+      ".abg-sum{font:500 13px/1.6 var(--f);color:var(--ink);background:var(--tls);border:1px solid var(--tl);border-radius:14px;padding:12px 14px;margin-bottom:12px;min-height:20px;position:relative;box-shadow:0 2px 8px rgba(15,118,110,.08)}",
       ".abg-sum .abg-hint{color:var(--mut);font-weight:500}",
       ".abg-sum b{font-weight:800}",
-      ".abg-tags{display:inline-flex;flex-wrap:wrap;gap:5px;margin-left:2px;vertical-align:middle}",
-      ".abg-tags em{font-style:normal;font:700 11px var(--f);background:var(--panel);border:1px solid var(--tl);color:var(--tl);padding:2px 8px;border-radius:999px}",
-      ".abg-tags em.part{background:var(--warn-soft,#fbf0dd);border-color:#e0b978;color:var(--warn,#b5720a)}",
+      ".abg-clear{position:absolute;top:10px;right:10px;border:none;background:var(--tl);color:#fff;width:24px;height:24px;border-radius:50%;font:700 12px var(--f);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}",
+      ".abg-clear svg{width:13px;height:13px}",
+      ".abg-sum-header{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px;padding-right:26px}",
+      ".abg-sum-meta-row{display:flex;align-items:center;gap:6px;margin-bottom:2px}",
+      ".abg-cls-badge{font:800 10px var(--f);text-transform:uppercase;letter-spacing:.05em;background:rgba(15,118,110,.12);color:var(--tl);padding:2px 8px;border-radius:6px}",
+      "body.dark .abg-cls-badge{background:rgba(20,184,166,.2);color:#2dd4bf}",
+      ".abg-gram-badge{font:600 11px var(--f);color:var(--mut)}",
+      ".abg-sum-title-text{font:800 16px/1.25 var(--f);color:var(--ink);margin:3px 0 2px}",
+      ".abg-sum-title-text.org{font-style:italic}",
+      ".abg-sum-note{display:flex;align-items:flex-start;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:500 12px/1.45 var(--f);color:var(--ink);margin:8px 0}",
+      ".abg-sum-note-ic{color:var(--tl);display:flex;margin-top:1px}.abg-sum-note-ic svg{width:14px;height:14px}",
+      ".abg-sum-pathogen-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:8px 0 10px;font:500 12px/1.5 var(--f);color:var(--ink)}",
+      ".abg-sum-pathogen-intrinsic{display:flex;align-items:flex-start;gap:7px;margin-top:8px;padding:8px 10px;border-radius:8px;background:#FEF2F2;border:1px solid #F87171;color:#991B1B;font:600 11.5px/1.4 var(--f)}",
+      "body.dark .abg-sum-pathogen-intrinsic{background:#3B1212;border-color:#991B1B;color:#FCA5A5}",
+      ".abg-sum-alert-ic{color:#DC2626;display:flex;margin-top:1px}.abg-sum-alert-ic svg{width:14px;height:14px}",
+      ".abg-sum-cov-label{font:700 11.5px var(--f);color:var(--mut);margin:8px 0 4px}",
+      ".abg-tags{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:middle}",
+      ".abg-tags em{font-style:normal;font:700 11px var(--f);background:var(--panel);border:1px solid var(--tl);color:var(--tl);padding:3px 9px;border-radius:999px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;transition:transform .12s}",
+      ".abg-tags em:active{transform:scale(.95)}",
+      ".abg-tags em.rel{background:var(--panel);border-color:#059669;color:#047857}",
+      "body.dark .abg-tags em.rel{background:#0d281e;border-color:#059669;color:#34d399}",
+      ".abg-tags em.part{background:#FEF3C7;border-color:#F59E0B;color:#B45309}",
       "body.dark .abg-tags em.part{background:#3a2e0a;border-color:#8a6a1a;color:#fbbf24}",
-      ".abg-note-sm{display:block;margin-top:6px;font:500 11.5px/1.5 var(--f);color:var(--mut)}",
-      ".abg-clear{position:absolute;top:8px;right:8px;border:none;background:var(--tl);color:#fff;width:22px;height:22px;border-radius:999px;font:700 12px var(--f);cursor:pointer;line-height:1}",
-      ".abg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--panel)}",
+      ".abg-tag-info{display:inline-flex;align-items:center;opacity:.7}.abg-tag-info svg{width:10px;height:10px}",
+      ".abg-tag-arrow{font-style:normal;font-size:9px;font-weight:700;opacity:.8}",
+      /* Empty Filter State */
+      ".abg-empty-filter{text-align:center;padding:36px 20px;background:var(--panel);border:1px solid var(--line);border-radius:14px;color:var(--mut)}",
+      ".abg-empty-filter .abg-empty-ic{color:var(--mut);display:flex;justify-content:center;margin-bottom:8px}",
+      ".abg-empty-filter .abg-empty-ic svg{width:32px;height:32px}",
+      ".abg-empty-filter b{display:block;font:800 15px var(--f);color:var(--ink);margin-bottom:4px}",
+      ".abg-empty-filter p{font:500 12.5px var(--f);margin-bottom:12px}",
+      ".abg-reset-filter-btn{border:none;background:var(--tl);color:#fff;font:700 12px var(--f);padding:8px 16px;border-radius:20px;cursor:pointer}",
+      /* Grid Table */
+      ".abg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px;background:var(--panel);box-shadow:0 4px 16px rgba(0,0,0,.03)}",
       ".abg-grid{border-collapse:separate;border-spacing:0;font:600 11px var(--f);width:max-content;min-width:100%}",
       ".abg-grid th,.abg-grid td{border-bottom:1px solid var(--line);border-right:1px solid var(--line)}",
-      ".abg-rowh{position:sticky;left:0;z-index:1;background:var(--panel);text-align:left;padding:7px 9px;width:38vw;min-width:120px;max-width:150px;vertical-align:middle}",
-      ".abg-corner{z-index:3}",
-      ".abg-cls{display:block;font:800 9.5px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--tl);margin-bottom:1px}",
-      ".abg-agent{display:block;font:600 12px/1.25 var(--f);color:var(--ink)}",
-      ".abg-agent.org{font-weight:700;font-style:italic}",
-      ".abg-gh{padding:6px 8px;text-align:center;font:800 10px var(--f);text-transform:uppercase;letter-spacing:.04em;color:#fff}",
-      ".g-gpc{background:#2563EB}.g-entero{background:#B91C1C}.g-nonferm{background:#C2410C}.g-fast{background:#7E22CE}.g-ana{background:#92702a}.g-aty{background:#475569}.g-gneg{background:#7F1D1D}",
-      ".abg-band-h{font-size:10.5px;letter-spacing:.09em;border-bottom:2px solid var(--panel)}",
-      ".abg-orgh th{top:0}",
-      ".abg-ch{padding:6px 5px;min-width:56px;max-width:70px;vertical-align:bottom;text-align:center;background:var(--panel)}",
-      ".abg-ch span{display:block;font:700 9.5px/1.15 var(--f);color:var(--ink);word-break:break-word}",
-      ".abg-ch.g-gpc,.abg-ch.g-entero,.abg-ch.g-nonferm,.abg-ch.g-fast,.abg-ch.g-ana,.abg-ch.g-aty{background:var(--panel)}",
-      ".abg-ch.sel{outline:2px solid var(--tl);outline-offset:-2px}",
-      ".abg-ch[data-org]{cursor:pointer}",
-      ".abg-drow{cursor:pointer}",
-      ".abg-drow.sel .abg-rowh{background:var(--tls)}",
-      ".abg-drow.dim{opacity:.4}",
-      ".abg-cell{width:56px;min-width:56px;height:32px;text-align:center;background:var(--panel)}",
-      ".abg-cell i{font-style:normal;font:800 12px var(--f);color:#fff;opacity:.92}",
-      ".abg-cell.on{background:#059669}",
-      ".abg-cell.off{background:#E15B64}",
-      "body.dark .abg-cell.on{background:#0e7a5f}body.dark .abg-cell.off{background:#a83b43}",
-      ".abg-cell.hit{outline:2px solid var(--ink);outline-offset:-2px}",
-      ".abg-cell.hit i{opacity:1}",
-      ".abg-legend{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:10px;font:600 11px var(--f);color:var(--mut)}",
-      ".abg-legend .sw{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:5px;background:var(--panel)}",
-      ".abg-legend .sw.on{background:#059669;border-color:#059669}",
-      ".abg-legend .sw.off{background:#E15B64;border-color:#E15B64}",
-      // 3-tier cell: reliable (solid green ✓) · variable (amber hatch on LIGHT GREEN ◐) · not active (red ✕)
-      ".abg-cell.part{background-color:var(--green-bg,#e7f5ec);background-image:repeating-linear-gradient(45deg,rgba(181,114,10,.5),rgba(181,114,10,.5) 4px,transparent 4px,transparent 8px)}",
-      ".abg-cell.part i{color:#8a5a0a;opacity:1;font-size:13px}",
-      "body.dark .abg-cell.part{background-color:#0f3a2f;background-image:repeating-linear-gradient(45deg,rgba(240,192,96,.45),rgba(240,192,96,.45) 4px,transparent 4px,transparent 8px)}",
-      "body.dark .abg-cell.part i{color:#f0c060}",
-      ".abg-cell.no{background:#E15B64}",
-      "body.dark .abg-cell.no{background:#a83b43}",
-      ".abg-legend .sw.part{background-color:var(--green-bg,#e7f5ec);background-image:repeating-linear-gradient(45deg,rgba(181,114,10,.6),rgba(181,114,10,.6) 3px,transparent 3px,transparent 6px);border-color:#bcd7c8}",
-      "body.dark .abg-legend .sw.part{background-color:#0f3a2f;background-image:repeating-linear-gradient(45deg,rgba(240,192,96,.5),rgba(240,192,96,.5) 3px,transparent 3px,transparent 6px)}",
-      ".abg-legend .sw.no{background:#E15B64;border-color:#E15B64}",
-      ".abg-src{margin-left:auto;font-weight:500;font-size:10px}",
-      ".abg-srcbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}",
-      ".abg-srclab{font:800 11px var(--f);text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}",
-      ".abg-srcsel{flex:1;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:700 13px var(--f);padding:11px 12px;border-radius:11px;-webkit-appearance:none;appearance:none;cursor:pointer}",
-      ".abg-warn{font:500 12px/1.5 var(--f);color:var(--ink);background:#FEF3C7;border:1px solid #F59E0B;border-radius:12px;padding:10px 12px;margin-bottom:12px}",
-      "body.dark .abg-warn{background:#3a2e0a;border-color:#a3791d;color:#f5e6bd}",
-      ".abg-warn b{color:#B45309}body.dark .abg-warn b{color:#fbbf24}",
-      ".abg-oc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}",
-      ".abg-oc-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--line)}",
-      ".abg-oc-n{font:800 15px var(--f);font-style:italic;color:var(--ink)}",
-      ".abg-oc-m{font:600 10.5px var(--f);color:var(--mut);white-space:nowrap}",
-      ".abg-dr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0}",
-      ".abg-dr-n{font:600 13px var(--f);color:var(--ink)}",
-      ".abg-dr-v{display:inline-flex;align-items:center;gap:7px;flex-shrink:0}",
-      ".abg-dr-q{font:600 11.5px var(--f);color:var(--mut);text-align:right;max-width:58%}",
-      ".abg-pill{font:800 12px var(--f);color:#fff;padding:3px 9px;border-radius:999px;min-width:52px;text-align:center}",
-      ".su4{background:#047857}.su3{background:#65a30d}.su2{background:#D97706}.su1{background:#EA580C}.su0{background:#B91C1C}",
-      ".abg-trend{font:800 10px var(--f);padding:1px 4px;border-radius:5px}",
-      ".abg-trend.up{color:#047857;background:rgba(4,120,87,.12)}",
-      ".abg-trend.down{color:#B91C1C;background:rgba(185,28,28,.12)}",
-      ".abg-dr-note{font:500 11px/1.4 var(--f);color:var(--mut);padding:0 0 4px 2px}",
-      ".abg-prov{font-style:normal;color:var(--tl);font-size:11px;opacity:.65;margin-left:3px}",
-      ".abg-dr-prov{cursor:pointer}",
-      ".abg-legend.heat .hs{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px}",
-      ".abg-empty{text-align:center;padding:40px 20px;color:var(--mut)}",
-      ".abg-empty-ic{font-size:38px;margin-bottom:8px}",
-      ".abg-empty b{display:block;font:800 16px var(--f);color:var(--ink);margin-bottom:6px}",
-      ".abg-empty p{font:500 13px/1.6 var(--f);max-width:320px;margin:0 auto}",
-      ".abg-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(10px);background:#0F172A;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:12px;z-index:970;opacity:0;transition:.2s;pointer-events:none;max-width:88vw;text-align:center}",
-      ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
-      ".abg-rotate{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-8px);display:flex;align-items:center;gap:9px;background:var(--tl,#0f766e);color:#fff;font:600 13px/1.35 var(--f);padding:10px 10px 10px 14px;border-radius:12px;z-index:990;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 8px 26px rgba(8,15,26,.32);max-width:92vw}",
-      ".abg-rotate.on{opacity:1;transform:translateX(-50%)}",
-      ".abg-rotate-ic{display:flex;animation:abgrot 1.6s ease-in-out infinite}.abg-rotate-ic svg{width:16px;height:16px}",
-      "@keyframes abgrot{0%,60%,100%{transform:rotate(0)}75%{transform:rotate(-28deg)}88%{transform:rotate(8deg)}}",
-      ".abg-rotate-tx{flex:1}",
-      ".abg-rotate-x{border:none;background:rgba(255,255,255,.22);color:#fff;width:22px;height:22px;border-radius:999px;font:700 12px var(--f);cursor:pointer;line-height:1;flex:none}",
-      /* Interactive Antibiotic Badges, Links & Dossier Styling */
+      ".abg-rowh{position:sticky;left:0;z-index:2;background:var(--panel);text-align:left;padding:7px 10px;width:38vw;min-width:124px;max-width:154px;vertical-align:middle;box-shadow:2px 0 5px rgba(0,0,0,.02)}",
+      ".abg-corner{z-index:4;font:800 11px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}",
+      ".abg-cls{display:block;font:800 9px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--tl);margin-bottom:1px}",
       ".abg-agent-wrap{display:flex;align-items:center;justify-content:space-between;gap:4px}",
-      ".abg-agent-btn{border:none;background:none;padding:0;text-align:left;font:600 12px/1.25 var(--f);color:var(--ink);cursor:pointer;flex:1}",
+      ".abg-agent-btn{border:none;background:none;padding:0;text-align:left;font:700 12px/1.25 var(--f);color:var(--ink);cursor:pointer;flex:1}",
       ".abg-agent-btn:hover,.abg-agent-btn:active{color:var(--tl);text-decoration:underline}",
-      ".abg-ch-btn{border:none;background:none;padding:0;font:700 9.5px/1.15 var(--f);color:var(--ink);cursor:pointer;word-break:break-word;width:100%}",
-      ".abg-ch-btn:hover,.abg-ch-btn:active{color:#2563EB;text-decoration:underline}",
-      ".abg-drug-link-btn{border:none;background:rgba(15,118,110,.08);color:var(--tl);border-radius:6px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:background .15s,transform .15s}",
-      ".abg-drug-link-btn:active{transform:scale(.92);background:rgba(15,118,110,.2)}",
+      ".abg-drug-link-btn{border:none;background:rgba(15,118,110,.08);color:var(--tl);border-radius:6px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:all .14s}",
+      ".abg-drug-link-btn:active{transform:scale(.92);background:var(--tl);color:#fff}",
       ".abg-drug-link-btn svg{width:11px;height:11px}",
       ".abg-link-arrow{font-size:9px;margin-left:1px;font-weight:700}",
-      ".abg-sum-header{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:6px}",
-      ".abg-sum-lead{font-weight:700;color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}",
-      ".abg-sum-title-btn{display:inline-flex;align-items:center;gap:6px;border:none;background:none;padding:0;font:800 14px var(--f);color:var(--ink);cursor:pointer;text-align:left}",
-      ".abg-sum-title-btn.org{font-style:italic}",
-      ".abg-badge-link{font-style:normal;display:inline-flex;align-items:center;gap:3px;font:700 10.5px var(--f);background:var(--tl);color:#fff;padding:2px 8px;border-radius:999px;vertical-align:middle;text-transform:none}",
-      ".abg-badge-link svg{width:10px;height:10px}",
-      ".abg-badge-link.dossier{background:#2563EB}",
-      ".abg-sum-body{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px}",
-      ".abg-sum-label{font-weight:700;color:var(--mut);font-size:11.5px}",
-      ".abg-tag-org,.abg-tag-drug{display:inline-flex;align-items:center;gap:3px;cursor:pointer;transition:transform .12s}",
-      ".abg-tag-org:active,.abg-tag-drug:active{transform:scale(.95)}",
-      ".abg-tag-info{font-style:normal;font-size:9.5px;opacity:.7}",
-      ".abg-tag-arrow{font-style:normal;font-size:9px;font-weight:700;opacity:.8}",
-      ".abg-oc-n-btn{display:inline-flex;align-items:center;gap:8px;border:none;background:none;padding:0;cursor:pointer;text-align:left}",
-      ".abg-oc-badge{display:inline-flex;align-items:center;gap:3px;font:700 10px var(--f);background:rgba(37,99,235,.12);color:#2563EB;padding:2px 7px;border-radius:6px}",
-      ".abg-oc-badge svg{width:10px;height:10px}",
-      "body.dark .abg-oc-badge{background:rgba(59,130,246,.25);color:#93C5FD}",
-      ".abg-dr-n-btn{display:inline-flex;align-items:center;gap:4px;border:none;background:none;padding:0;cursor:pointer;text-align:left;font:600 13px var(--f);color:var(--ink)}",
-      ".abg-dr-n-btn:active{color:var(--tl)}",
-      ".abg-dr-link-arrow{font-size:10px;color:var(--tl);font-weight:700;opacity:.65}",
-      /* Bottom Sheet / Modal Dialogs for Dossier and Molecule Picker */
-      ".abg-modal-sheet{position:fixed;inset:0;z-index:960;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}",
+      ".abg-gh{padding:6px 8px;text-align:center;font:800 10px var(--f);text-transform:uppercase;letter-spacing:.04em;color:#fff}",
+      ".g-gpc{background:#2563EB}.g-entero{background:#B91C1C}.g-nonferm{background:#C2410C}.g-fast{background:#7E22CE}.g-ana{background:#92702A}.g-aty{background:#475569}.g-gneg{background:#991B1B}",
+      ".abg-band-h{font-size:10px;letter-spacing:.07em;border-bottom:1px solid rgba(255,255,255,.25)}",
+      ".abg-ch{padding:7px 5px;min-width:58px;max-width:74px;vertical-align:bottom;text-align:center;background:var(--panel)}",
+      ".abg-ch-btn{border:none;background:none;padding:0;font:700 9.5px/1.15 var(--f);color:var(--ink);cursor:pointer;word-break:break-word;width:100%}",
+      ".abg-ch-btn:hover,.abg-ch-btn:active{color:#2563EB;text-decoration:underline}",
+      ".abg-ch.sel{outline:2px solid var(--tl);outline-offset:-2px}",
+      ".abg-drow{cursor:pointer;transition:background .12s}",
+      ".abg-drow.sel .abg-rowh{background:var(--tls)}",
+      ".abg-drow.dim{opacity:.35}",
+      /* Grid Cells */
+      ".abg-cell{width:56px;min-width:56px;height:34px;text-align:center;background:var(--panel);cursor:pointer;user-select:none;transition:transform .12s,filter .12s}",
+      ".abg-cell:active{transform:scale(.88);opacity:.8}",
+      ".abg-cell-sym{display:inline-flex;align-items:center;justify-content:center;font-style:normal}",
+      ".abg-cell-sym svg{width:12px;height:12px;stroke-width:2.8}",
+      ".abg-cell.on{background:linear-gradient(135deg,#059669 0%,#047857 100%);color:#fff}",
+      "body.dark .abg-cell.on{background:linear-gradient(135deg,#0D9488 0%,#0F766E 100%)}",
+      ".abg-cell.part{background:#FEF3C7;color:#B45309}",
+      ".abg-cell.part .abg-cell-sym{font-size:13px;font-weight:800;color:#B45309}",
+      "body.dark .abg-cell.part{background:#382606;color:#FCD34D}",
+      "body.dark .abg-cell.part .abg-cell-sym{color:#FCD34D}",
+      ".abg-cell.no{background:var(--bg);color:var(--mut);opacity:.45}",
+      ".abg-cell.no .abg-cell-sym{font-size:11px;font-weight:600;color:var(--mut)}",
+      ".abg-cell.hit{box-shadow:inset 0 0 0 2px var(--ink)}",
+      /* Legend */
+      ".abg-legend{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:10px;font:600 11px var(--f);color:var(--mut)}",
+      ".abg-legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:5px;background:var(--panel)}",
+      ".abg-legend .sw.on{background:#059669;border-color:#059669}",
+      ".abg-legend .sw.part{background:#FEF3C7;border-color:#F59E0B}",
+      ".abg-legend .sw.no{background:var(--bg);border-color:var(--line)}",
+      ".abg-src{margin-left:auto;font-weight:500;font-size:10px}",
+      /* Bottom Sheet Common */
+      ".abg-sheet-grabber{width:36px;height:4px;border-radius:2px;background:rgba(0,0,0,.2);margin:0 auto 10px;flex:none}",
+      "body.dark .abg-sheet-grabber{background:rgba(255,255,255,.24)}",
+      ".abg-modal-sheet{position:fixed;inset:0;z-index:960;background:rgba(15,23,42,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .22s cubic-bezier(.2,.8,.2,1)}",
       ".abg-modal-sheet.on{opacity:1;pointer-events:auto}",
-      ".abg-picker-card{background:var(--panel);border-radius:20px 20px 0 0;padding:18px 20px calc(24px + env(safe-area-inset-bottom));max-height:80vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .24s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 30px rgba(0,0,0,.25)}",
+      /* Molecule Picker */
+      ".abg-picker-card{background:var(--panel);border-radius:22px 22px 0 0;padding:14px 20px calc(24px + env(safe-area-inset-bottom));max-height:80vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .24s cubic-bezier(.16,1,.3,1);box-shadow:0 -12px 36px rgba(0,0,0,.25)}",
       ".abg-modal-sheet.on .abg-picker-card{transform:translateY(0)}",
-      ".abg-picker-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}",
+      ".abg-picker-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}",
       ".abg-picker-title{font:800 17px var(--f);color:var(--ink)}",
       ".abg-picker-close{border:none;background:var(--bg);color:var(--ink);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}",
-      ".abg-picker-close svg{width:16px;height:16px}",
-      ".abg-picker-sub{font:500 12px/1.4 var(--f);color:var(--mut);margin-bottom:14px}",
+      ".abg-picker-close svg{width:15px;height:15px}",
+      ".abg-picker-sub{font:500 12px/1.4 var(--f);color:var(--mut);margin-bottom:12px}",
       ".abg-picker-list{display:flex;flex-direction:column;gap:8px;overflow-y:auto}",
-      ".abg-picker-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);cursor:pointer;text-align:left;font:700 14px var(--f);color:var(--ink);transition:background .15s}",
+      ".abg-picker-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);cursor:pointer;text-align:left;font:700 13.5px var(--f);color:var(--ink);transition:background .15s}",
       ".abg-picker-item:active{background:var(--tls)}",
-      ".abg-picker-icon{color:var(--tl);display:flex;align-items:center}",
-      ".abg-picker-icon svg{width:18px;height:18px}",
+      ".abg-picker-icon{color:var(--tl);display:flex;align-items:center}.abg-picker-icon svg{width:17px;height:17px}",
       ".abg-picker-name{flex:1}",
       ".abg-picker-arrow{font-size:12px;color:var(--mut);font-weight:700}",
       /* Dossier Card Sheet */
-      ".abg-dossier-card{background:var(--panel);border-radius:20px 20px 0 0;max-height:88vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .24s cubic-bezier(.2,.8,.2,1);box-shadow:0 -12px 36px rgba(0,0,0,.3);overflow:hidden}",
+      ".abg-dossier-card{background:var(--panel);border-radius:24px 24px 0 0;max-height:88vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .26s cubic-bezier(.16,1,.3,1);box-shadow:0 -12px 36px rgba(0,0,0,.32);overflow:hidden;padding-top:10px}",
       ".abg-modal-sheet.on .abg-dossier-card{transform:translateY(0)}",
-      ".abg-dossier-head{padding:16px 18px 14px;color:#fff;position:relative;flex:none}",
+      ".abg-dossier-head{padding:14px 18px 14px;color:#fff;position:relative;flex:none;margin-top:2px;border-radius:14px 14px 0 0}",
       ".abg-dossier-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px}",
       ".abg-dossier-badge{font:800 10px var(--f);text-transform:uppercase;letter-spacing:.05em;background:rgba(255,255,255,.24);padding:2px 7px;border-radius:5px}",
       ".abg-dossier-gram{font:600 11px var(--f);opacity:.9}",
       ".abg-dossier-title{font:800 17px/1.3 var(--f);font-style:italic;padding-right:32px}",
       ".abg-dossier-close{position:absolute;top:14px;right:14px;border:none;background:rgba(0,0,0,.2);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}",
-      ".abg-dossier-close svg{width:16px;height:16px}",
+      ".abg-dossier-close svg{width:15px;height:15px}",
       ".abg-dossier-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px calc(24px + env(safe-area-inset-bottom))}",
       ".abg-dossier-alert{background:#FEF2F2;border:1px solid #F87171;border-radius:12px;padding:10px 12px;margin-bottom:14px}",
       "body.dark .abg-dossier-alert{background:#3B1212;border-color:#991B1B}",
@@ -1404,27 +1792,84 @@
       ".abg-dossier-actions{display:flex;gap:10px;margin-top:16px}",
       ".abg-dossier-btn-isolate{flex:1;border:1px solid var(--tl);background:var(--tls);color:var(--tl);font:700 13px var(--f);padding:11px 12px;border-radius:11px;cursor:pointer}",
       ".abg-dossier-btn-done{flex:1;border:none;background:var(--tl);color:#fff;font:700 13px var(--f);padding:11px 12px;border-radius:11px;cursor:pointer}",
-      ".db-overlay{position:fixed;inset:0;z-index:1000!important;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
-      ".db-overlay.on{display:flex!important;z-index:1000!important}",
-      ".abg-know-more-hero{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:#0F766E;color:#fff;font:700 13px var(--f);padding:10px 14px;border:none;border-radius:10px;margin:8px 0;cursor:pointer;box-shadow:0 2px 8px rgba(15,118,110,.25);transition:background .15s,transform .15s}",
-      ".abg-know-more-hero:active{transform:scale(.98);background:#0d635c}",
+      ".abg-dossier-head.g-drug{background:linear-gradient(135deg,#0F766E 0%,#115E59 100%)}",
+      ".abg-multi-molecules{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0 12px}",
+      ".abg-multi-lbl{font:700 11px var(--f);color:var(--mut);display:block;margin-bottom:6px}",
+      ".abg-multi-btns{display:flex;flex-wrap:wrap;gap:6px}",
+      ".abg-multi-btn{display:inline-flex;align-items:center;gap:5px;background:var(--panel);border:1px solid var(--line);color:var(--tl);font:600 12px var(--f);padding:5px 9px;border-radius:7px;cursor:pointer}",
+      ".abg-multi-btn:active{background:var(--tls)}",
+      ".abg-multi-btn svg{width:12px;height:12px}",
+      ".abg-cov-group-lbl{font:700 11.5px var(--f);color:var(--mut);margin:8px 0 4px}",
+      /* Hero CTA Buttons */
+      ".abg-know-more-hero{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:linear-gradient(135deg,#0F766E 0%,#115E59 100%);color:#fff;font:700 13px var(--f);padding:11px 14px;border:none;border-radius:12px;margin:8px 0;cursor:pointer;box-shadow:0 3px 10px rgba(15,118,110,.25);transition:all .15s}",
+      ".abg-know-more-hero:active{transform:scale(.98);filter:brightness(.95)}",
       ".abg-know-more-hero svg{width:15px;height:15px}",
-      ".abg-dossier-hero-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:#2563EB;color:#fff;font:700 13px var(--f);padding:10px 14px;border:none;border-radius:10px;margin:8px 0;cursor:pointer;box-shadow:0 2px 8px rgba(37,99,235,.25);transition:background .15s,transform .15s}",
-      ".abg-dossier-hero-btn:active{transform:scale(.98);background:#1d4ed8}",
+      ".abg-dossier-hero-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:linear-gradient(135deg,#2563EB 0%,#1D4ED8 100%);color:#fff;font:700 13px var(--f);padding:11px 14px;border:none;border-radius:12px;margin:8px 0;cursor:pointer;box-shadow:0 3px 10px rgba(37,99,235,.25);transition:all .15s}",
+      ".abg-dossier-hero-btn:active{transform:scale(.98);filter:brightness(.95)}",
       ".abg-dossier-hero-btn svg{width:15px;height:15px}",
-      ".abg-sum-meta-row{display:flex;align-items:center;gap:6px;margin-bottom:2px}",
-      ".abg-cls-badge{font:800 10px var(--f);text-transform:uppercase;letter-spacing:.05em;background:rgba(15,118,110,.12);color:var(--tl);padding:2px 8px;border-radius:6px}",
-      "body.dark .abg-cls-badge{background:rgba(20,184,166,.2);color:#2dd4bf}",
-      ".abg-gram-badge{font:600 11px var(--f);color:var(--mut)}",
-      ".abg-sum-title-text{font:800 16px/1.25 var(--f);color:var(--ink);margin:3px 0 2px}",
-      ".abg-sum-title-text.org{font-style:italic}",
-      ".abg-sum-pathogen-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:6px 0 10px;font:500 12px/1.5 var(--f);color:var(--ink)}",
-      ".abg-sum-pathogen-intrinsic{margin-top:6px;padding:6px 9px;border-radius:6px;background:#FEF2F2;border:1px solid #F87171;color:#991B1B;font:600 11.5px/1.4 var(--f)}",
-      "body.dark .abg-sum-pathogen-intrinsic{background:#3B1212;border-color:#991B1B;color:#FCA5A5}",
-      ".abg-sum-cov-label{font:700 11.5px var(--f);color:var(--mut);margin-bottom:5px}",
-      ".abg-sum-note{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:500 12px/1.4 var(--f);color:var(--ink);margin-bottom:8px}",
-      ".abg-tags em.rel{background:var(--panel);border-color:#059669;color:#047857}",
-      "body.dark .abg-tags em.rel{background:#0d281e;border-color:#059669;color:#34d399}"
+      /* Cell Action Modal */
+      ".abg-cell-action-card{background:var(--panel);border-radius:24px 24px 0 0;padding:12px 20px calc(24px + env(safe-area-inset-bottom));max-height:80vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .24s cubic-bezier(.16,1,.3,1);box-shadow:0 -12px 36px rgba(0,0,0,.3)}",
+      ".abg-modal-sheet.on .abg-cell-action-card{transform:translateY(0)}",
+      ".abg-cell-action-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}",
+      ".abg-cell-action-title{font:800 16px var(--f);color:var(--ink)}",
+      ".abg-cell-banner{padding:10px 12px;border-radius:12px;font:700 12.5px/1.4 var(--f);margin-bottom:14px;display:flex;align-items:center;gap:8px}",
+      ".abg-cell-banner.on{background:#ECFDF5;border:1px solid #10B981;color:#047857}",
+      "body.dark .abg-cell-banner.on{background:#064E3B;border-color:#059669;color:#6EE7B7}",
+      ".abg-cell-banner.part{background:#FFFBEB;border:1px solid #F59E0B;color:#B45309}",
+      "body.dark .abg-cell-banner.part{background:#78350F;border-color:#D97706;color:#FDE68A}",
+      ".abg-cell-banner.no{background:#FEF2F2;border:1px solid #EF4444;color:#B91C1C}",
+      "body.dark .abg-cell-banner.no{background:#7F1D1D;border-color:#DC2626;color:#FCA5A5}",
+      ".abg-cell-banner svg{width:15px;height:15px;flex:none}",
+      ".abg-cell-actions{display:flex;flex-direction:column;gap:9px}",
+      ".abg-cell-btn-dossier{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(135deg,#2563EB 0%,#1D4ED8 100%);color:#fff;font:700 13px var(--f);padding:11px 14px;border:none;border-radius:11px;cursor:pointer;box-shadow:0 2px 8px rgba(37,99,235,.2)}",
+      ".abg-cell-btn-dossier:active{transform:scale(.98);filter:brightness(.95)}",
+      ".abg-cell-btn-dossier svg{width:15px;height:15px}",
+      ".abg-cell-btn-drug{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(135deg,#0F766E 0%,#115E59 100%);color:#fff;font:700 13px var(--f);padding:11px 14px;border:none;border-radius:11px;cursor:pointer;box-shadow:0 2px 8px rgba(15,118,110,.2)}",
+      ".abg-cell-btn-drug:active{transform:scale(.98);filter:brightness(.95)}",
+      ".abg-cell-btn-drug svg{width:15px;height:15px}",
+      /* Resistance View */
+      ".abg-srcbar{display:flex;align-items:center;gap:10px;margin-bottom:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px}",
+      ".abg-srclab{font:800 11px var(--f);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);display:flex;align-items:center;gap:5px}",
+      ".abg-srclab-ic svg{width:14px;height:14px;color:var(--tl)}",
+      ".abg-srcsel{flex:1;border:none;background:none;color:var(--ink);font:700 13px var(--f);padding:4px 0;outline:none;cursor:pointer}",
+      ".abg-warn{font:500 12px/1.5 var(--f);color:var(--ink);background:#FEF3C7;border:1px solid #F59E0B;border-radius:12px;padding:10px 12px;margin-bottom:12px}",
+      "body.dark .abg-warn{background:#3a2e0a;border-color:#a3791d;color:#f5e6bd}",
+      ".abg-warn b{color:#B45309}body.dark .abg-warn b{color:#fbbf24}",
+      ".abg-oc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.02)}",
+      ".abg-oc-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--line)}",
+      ".abg-oc-n{font:800 15px var(--f);font-style:italic;color:var(--ink)}",
+      ".abg-oc-m{font:600 10.5px var(--f);color:var(--mut);white-space:nowrap}",
+      ".abg-dr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0}",
+      ".abg-dr-n{font:600 13px var(--f);color:var(--ink)}",
+      ".abg-dr-v{display:inline-flex;align-items:center;gap:7px;flex-shrink:0}",
+      ".abg-dr-q{font:600 11.5px var(--f);color:var(--mut);text-align:right;max-width:58%}",
+      ".abg-pill{font:800 12px var(--f);color:#fff;padding:3px 9px;border-radius:999px;min-width:52px;text-align:center}",
+      ".su4{background:#047857}.su3{background:#65a30d}.su2{background:#D97706}.su1{background:#EA580C}.su0{background:#B91C1C}",
+      ".abg-trend{font:800 10px var(--f);padding:1px 4px;border-radius:5px}",
+      ".abg-trend.up{color:#047857;background:rgba(4,120,87,.12)}",
+      ".abg-trend.down{color:#B91C1C;background:rgba(185,28,28,.12)}",
+      ".abg-dr-note{font:500 11px/1.4 var(--f);color:var(--mut);padding:0 0 4px 2px}",
+      ".abg-prov{font-style:normal;color:var(--tl);font-size:11px;opacity:.65;margin-left:3px}",
+      ".abg-dr-prov{cursor:pointer}",
+      ".abg-legend.heat .hs{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}",
+      ".abg-oc-n-btn{display:inline-flex;align-items:center;gap:8px;border:none;background:none;padding:0;cursor:pointer;text-align:left}",
+      ".abg-oc-badge{display:inline-flex;align-items:center;gap:3px;font:700 10px var(--f);background:rgba(37,99,235,.12);color:#2563EB;padding:2px 7px;border-radius:6px}",
+      ".abg-oc-badge svg{width:10px;height:10px}",
+      "body.dark .abg-oc-badge{background:rgba(59,130,246,.25);color:#93C5FD}",
+      ".abg-dr-n-btn{display:inline-flex;align-items:center;gap:4px;border:none;background:none;padding:0;cursor:pointer;text-align:left;font:600 13px var(--f);color:var(--ink)}",
+      ".abg-dr-n-btn:active{color:var(--tl)}",
+      ".abg-dr-link-arrow{font-size:10px;color:var(--tl);font-weight:700;opacity:.65}",
+      /* System Toasts & Rotate Hint */
+      ".abg-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(10px);background:#0F172A;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:12px;z-index:970;opacity:0;transition:.2s;pointer-events:none;max-width:88vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}",
+      ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
+      /* Rotate Hint — iOS notification style */
+      ".abg-rotate{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-50px);display:flex;align-items:center;gap:8px;background:rgba(28,28,30,.88);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);color:rgba(255,255,255,.92);font:600 13px/1 -apple-system,BlinkMacSystemFont,var(--f);padding:10px 16px;border-radius:100px;z-index:990;opacity:0;transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.4,1);box-shadow:0 2px 12px rgba(0,0,0,.18);cursor:pointer;-webkit-tap-highlight-color:transparent}",
+      ".abg-rotate.on{opacity:1;transform:translateX(-50%) translateY(0)}",
+      ".abg-rotate-ic{display:flex;align-items:center}.abg-rotate-ic svg{width:15px;height:15px;opacity:.7}",
+      ".abg-rotate-tx{white-space:nowrap;letter-spacing:-.01em}",
+      /* Drug DB Overlay Integration */
+      ".db-overlay{position:fixed;inset:0;z-index:1000!important;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
+      ".db-overlay.on{display:flex!important;z-index:1000!important}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
   }

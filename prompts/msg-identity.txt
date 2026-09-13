@@ -1,0 +1,53 @@
+feat(P0.7): who to ring about a patient, and whether they have died
+
+Two of the gaps the audit confirmed were genuinely absent: the Patient model carried no
+deceased status and no relationships at all, so a ward had nowhere to record a next of
+kin and no way to state that a patient had died.
+
+_wardsynq/patient-identity.js holds both, because both are facts about a PERSON rather
+than findings about a body. A next of kin is not an observation and a death is not a
+diagnosis.
+
+A DEATH IS A NEW VERSION OF THE PATIENT, NEVER A DELETION AND NEVER A LOCK. The record
+moves to its next version and every clinical record underneath stays exactly as it was,
+because a death is the moment a chart becomes more important to read, not less. Nothing
+here closes an encounter, cancels an order or stops a write: post-mortem documentation is
+real work, and a system that seals the chart at the moment of death forces the people
+doing that work to record it somewhere the record cannot see.
+
+It also refuses to be casual about it:
+  - an explicit confirmation is required, and the server refuses without it, so a
+    mis-click on a ward list cannot record the wrong person dead
+  - a death dated in the future is refused rather than clamped to now, because clamping
+    hides the typo that produced it
+  - recording one twice is refused rather than overwriting the first
+  - withdrawing one is its own governed act needing a reason, and it keeps what was
+    withdrawn: somebody investigating how a living patient came to be recorded dead has
+    to be able to read it
+
+CONTACTS ARE APPEND-ONLY AND DEACTIVATED, NEVER DELETED. "Who do we call" is asked at the
+worst moments, and an emergency contact quietly overwritten last month leaves nobody to
+call. Next of kin, guardian and emergency contact are three things one person can be, not
+three lists that would disagree - in a real family they are usually the same person. A
+next of kin or emergency contact with no telephone number is refused, because that is the
+name somebody rings. And every read says plainly when there is nobody recorded at all,
+rather than returning an empty list nobody notices.
+
+Reception can record a contact - it is the same front-desk act as registering the patient,
+and asking a doctor to type a telephone number is how the field stays empty. Recording a
+death is emr.treat, because it is the clinical statement a certificate rests on.
+Withdrawing one sits at the same bar deliberately.
+
+Tests: 36 new. 18 on the module, 7 rendering the screen, 11 through the REAL routes -
+including that a nurse cannot record a death, cannot withdraw one, that the audit row
+names the actor, that the earlier version survives, and that another hospital's staff
+cannot read the contacts at all.
+
+Also updated: nine pinned grant lists in wardsynq-record-service.test.mjs. Reception's
+write scope genuinely widened by one type, by design, and those tests exist to make that
+visible rather than silent.
+
+Suite 5846 passing, 0 failing.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01DKrDwaxMXTx69zQNFMozxX

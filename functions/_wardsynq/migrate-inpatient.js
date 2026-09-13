@@ -25,15 +25,44 @@
  */
 
 import { Encounter, MedicationOrder } from "../../wardsynq/wardsynq-model.js";
-import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
+import { GovernanceError, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { vitalsToObservations } from "./migrate-vitals.js";
+import { vitalsToObservations, VITAL_CODES } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
+import { chainState, approvalCovers } from "./verification.js";
+
+/**
+ * Does this approval reference actually approve this drug, right now?
+ *
+ * Reads the whole chain for the reference and asks verification.js what it means. Returns a plain
+ * true/false because that is all the formulary needs to know; the reason it is false is already on
+ * the refusal the formulary builds.
+ *
+ * FAILS CLOSED, deliberately and in every direction: no reference, no chain, a chain about a
+ * different drug, a chain still short of the approvals this hospital asked for, a withdrawn
+ * approval, or a store that would not answer - all of them are "not approved". The alternative is a
+ * restricted antibiotic going through because a read timed out.
+ */
+async function verifyApprovalRef(svc, ref, drug, ctx) {
+  if (!ref || !drug) return false;
+  let rows;
+  try {
+    // Every record in the chain carries the request's id, so the chain is the request plus every
+    // decision pointing back at it.
+    const all = await svc.list("Verification", 500);
+    rows = (all || []).filter((r) => r && (str(r.id) === ref || str(r.parentVerificationId) === ref));
+  } catch { return false; }
+  if (!rows.length) return false;
+  // How many people this hospital wants on a restricted-drug approval. One unless it says otherwise.
+  const levels = ctx && ctx.approvalLevels;
+  const state = chainState(rows, Number.isFinite(levels) ? levels : 1);
+  return approvalCovers(state, "RestrictedMedication", drug);
+}
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
 import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
@@ -306,9 +335,17 @@ async function claimBed(svc, candidate) {
   const claimId = bedClaimIdFor(ward, bed);
   const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
   const version = latest ? latest.version + 1 : 1;
+  const at = new Date().toISOString();
   await svc.repository.append(svc.tenantId, [{
     resourceType: BED_CLAIM_TYPE, id: claimId, version,
-    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: new Date().toISOString(),
+    patientId: candidate.patientId, encounterId: candidate.id, ward, bed, claimedAt: at,
+    /* This write goes straight to the repository, bypassing the governed store's put()/putMany()
+     * (which stamps writtenBy itself - see wardsynq-actors.js) because a bed claim isn't a clinical
+     * entity subject to authoriseWrite; it's this reconciler's own bookkeeping. Skipping that layer
+     * meant skipping its stamp too, so every bed-claim row in Audit and security showed a blank
+     * WHEN forever - not a missing fact, a fact this file never wrote down. KIND.SERVICE ("internal
+     * machinery such as the escalation monitor") is exactly what this is. */
+    writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
   }], {});
 }
 
@@ -507,9 +544,16 @@ async function createWardMedicationOrder(request, env, ctx) {
    * without one is the system that produces the resistance. The refusal names what is missing and
    * who grants it, since one a prescriber cannot act on is one they will work around. */
   const formulary = resolveFormulary(ctx.formulary);
+  /* RESOLVE THE APPROVAL REFERENCE BEFORE ASKING THE FORMULARY ABOUT IT. Until now the reference
+   * was any string the caller sent and nothing ever looked it up, so stewardship could be cleared
+   * by typing a character. Reading the chain can fail (the record store is a network call); a
+   * failure resolves to NOT verified, which blocks the restricted drug. Failing closed is the only
+   * safe direction here - an approval that cannot be read is not an approval. */
+  const approvalVerified = await verifyApprovalRef(svc, str(ctx.approvalRef), candidate.drug || candidate.drugCode, ctx);
   const fStatus = formularyStatus({
     formulary, drug: candidate.drug, code: candidate.drugCode,
     specialty: str(ctx.specialty), approvalRef: str(ctx.approvalRef), reason: str(ctx.formularyReason),
+    approvalVerified,
     requireReasonOffFormulary: ctx.requireReasonOffFormulary === true,
   });
   if (fStatus.blocked) {
@@ -727,7 +771,22 @@ async function bedBoard(request, env, ctx) {
 
   let encounters;
   try { encounters = await svc.list("Encounter", 200); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] }; }
+  catch (e) {
+    /* A REFUSAL IS NOT A SERVER FAULT, and calling it one made this screen unreadable.
+     *
+     * Every exception here became a 502 "record_read_failed". When the exception is the record
+     * refusing the read - a pharmacist, whose grant deliberately excludes Encounter - the caller
+     * got a 502, and Cloudflare replaces a 5xx from a Function with its own HTML error page. So the
+     * browser received a page of HTML where it expected JSON, could not parse it, and the bed board
+     * reported "unavailable": the product telling a pharmacist it was broken when it was working
+     * exactly as designed. specimen.js already separates these two; this did not.
+     *
+     * A genuine read failure is still a 502 and still says so. */
+    if (e instanceof GovernanceError) {
+      return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), wards: [] };
+    }
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] };
+  }
 
   const want = str(ctx.ward).toLowerCase();
   const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
@@ -763,9 +822,31 @@ async function bedBoard(request, env, ctx) {
   // that does not exist, and a night manager looking for a bed would skip it.
   if (cfg) for (const name of Object.keys(cfg)) { const w = wardOf(name); w.configured = Array.isArray(cfg[name]); }
 
+  /* THE BED BOARD NAMES ITS PATIENTS, for the same reason the ward list does.
+   *
+   * This projected the encounter and nothing else, so every occupied bed on the board read
+   * "opd-pat-smd-demo-00020" where a name belongs. The bed board is the screen used to find who is
+   * in which bed, and a record id is the one thing on that tile nobody can check against a
+   * wristband. Found 2026-09-12 clicking through the deployed board; identical in kind to the ward
+   * list defect fixed on 2026-09-11, same file, the function directly above.
+   *
+   * ONE extra read, not one per bed, and a name that cannot be read stays null so the caller falls
+   * back exactly as before - a missing name must never turn a readable board into an error. */
+  let nameById = new Map();
+  try {
+    const roster = await svc.list("Patient", 400);
+    nameById = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
+  } catch (e) { /* the beds are still worth showing; the tiles simply carry no name */ }
+
   for (const e of open) {
     const w = wardOf(e.location && e.location.ward);
-    const row = { encounterId: e.id, patientId: e.patientId, bed: (e.location && e.location.bed) || null, admittedAt: e.periodStart || null, attendingId: e.attendingId || null };
+    const p = nameById.get(e.patientId) || null;
+    const row = {
+      encounterId: e.id, patientId: e.patientId,
+      name: (p && (p.name || p.display)) || null,
+      mrn: (p && p.mrn) || null,
+      bed: (e.location && e.location.bed) || null, admittedAt: e.periodStart || null, attendingId: e.attendingId || null,
+    };
     if (row.bed) w.occupied.push(row); else w.unplaced.push(row);   // admitted to the ward, no bed yet
   }
   for (const w of byWard.values()) {
@@ -794,6 +875,291 @@ async function bedBoard(request, env, ctx) {
   };
 }
 
+/* THE CHART HAD NINE SEPARATE BOXES AND NO SINGLE STORY OF THE STAY (2026-09-12).
+ *
+ * A clinician opening a patient found a problem list, an order form, a dose round and a results
+ * queue - four true things, in four places, in no shared order. Reconstructing "what happened to
+ * this patient" meant reading all four and doing the sequencing by hand. This is that sequencing,
+ * done once, from records that already exist: nothing here is a new store, a new write path, or a
+ * fact invented for the view. It is `RecordService.chart()` - the same governed, role-scoped read
+ * the FHIR $everything operation already uses - flattened into one list ordered by when each thing
+ * actually happened, with an "on now" board pulled from the same read.
+ *
+ * "Every minute detail" is only as fine as what was actually charted. This does not interpolate a
+ * reading between two real ones, and a resource with no timestamp is counted and named, never
+ * silently dropped - a timeline that quietly loses events is worse than a shorter one that says so.
+ */
+/* LOINC -> the words a clinician reads, inverted from the table migrate-vitals.js already owns so
+ * there is exactly ONE place a code is named. The timeline printed "vital-signs: 8480-6 = 148
+ * mm[Hg]" until 2026-09-12: the readable story of a stay should not require knowing LOINC, and the
+ * flowsheet two cards below was already rendering "SYSTOLIC BLOOD PRESSURE" from this same source.
+ * A code that is not in the table keeps its code - never a name this file invented for it. */
+const OBSERVATION_NAME = Object.freeze(Object.fromEntries(
+  Object.values(VITAL_CODES).filter((v) => v && v.code).map((v) => [v.code, v.display]),
+));
+
+/* A PERSON'S NAME, NOT THE ID THE SYSTEM FILES THEM UNDER.
+ *
+ * An actor id is whatever the door minted: a staff sign-in is an email address, an account sign-in
+ * is "fb:" and a long opaque string. Printed raw on a timeline, the second one says "ordered by
+ * fb:DcGIzIXwxURU0G9L4J5jehluENl1", which answers the question "who ordered this?" with something
+ * no human can read - and the whole point of carrying the requester is that a person can be asked.
+ *
+ * This is a rendering, not a resolution: the underlying id is unchanged on the record and remains
+ * the thing an audit follows. An account id that cannot be turned into words is NOT dressed up as a
+ * name - it renders as "a clinician account", because inventing a person here would be worse than
+ * admitting the display cannot say which one. */
+function personName(actorId) {
+  const id = str(actorId);
+  if (!id) return "";
+  const at = id.indexOf("@");
+  if (at > 0) return id.slice(0, at);          // a staff sign-in: "dr.01@hospital" -> "dr.01"
+  if (id.indexOf("fb:") === 0) return "a clinician account";
+  return id;
+}
+
+/* WHO DID IT. Every record carries `writtenBy`, stamped by the store rather than supplied by the
+ * caller (wardsynq-actors.js), so this is the session that actually wrote it and not a claim. The
+ * role-specific fields are preferred where they exist because they are more precise about the
+ * clinical act: a prescription's prescriber and an order's requester are the person answerable for
+ * it, which is not always the session that saved the row. */
+function whoOf(r) {
+  return personName(
+    (r && (r.authorId || r.prescriberId || r.requesterId || r.performerId))
+    || (r && r.writtenBy && r.writtenBy.id)
+    || "",
+  );
+}
+
+/* What KIND of thing happened, for colour coding and for the filters a reader uses to pull one
+ * thread out of a long stay. Deliberately coarse: a doctor scanning a history wants "just the
+ * notes" or "just the tests", not fourteen categories they have to learn. */
+const TIMELINE_CATEGORY = {
+  Patient: "registration",
+  Encounter: "visit",
+  Condition: "problem",
+  AllergyIntolerance: "allergy",
+  Observation: "observation",
+  MedicationOrder: "medication",
+  MedicationAdministration: "medication",
+  ServiceRequest: "investigation",
+  DiagnosticReport: "result",
+  ImagingStudy: "result",
+  ClinicalNote: "note",
+  CarePlan: "careplan",
+  /* The rest of the clinical story. A history that stops at notes and vitals is not a history: a
+   * reader asking "what happened to this patient" needs the operation, the critical potassium
+   * nobody has acknowledged yet, the transfer to intensive care and the discharge, in the same
+   * list and on the same clock as everything else. */
+  SurgicalCase: "procedure",
+  AnesthesiaRecord: "procedure",
+  ImplantRecord: "procedure",
+  DeliveryRecord: "procedure",
+  MedicationDispense: "medication",
+  MedicationReconciliation: "medication",
+  SpecimenCollection: "investigation",
+  ImagingProtocol: "investigation",
+  AdmissionRequest: "visit",
+  /* Critical events get their own category rather than being filed under results, because the
+   * question "has anything dangerous happened to this patient" is asked on its own and must be
+   * answerable in one click. */
+  CriticalResultLoop: "critical",
+  ResusBundle: "critical",
+  EmergencyActivation: "critical",
+  BreakGlassGrant: "critical",
+  /* Money, where it belongs on a clinical history: that a bill was raised or paid is part of the
+   * story of a stay, and a patient asking about their bill is asking about this list. Nothing
+   * about what anything COST is put here - the amounts live on the billing screen, which has its
+   * own permission. */
+  Invoice: "billing",
+  Claim: "billing",
+};
+
+/* WHAT THE CLINICIAN ACTUALLY WROTE, not merely that they wrote something.
+ *
+ * The timeline said "progress note drafted" and stopped there, so the one thing a doctor picking up
+ * an unfamiliar patient most needs to read - what the last doctor thought - was the one thing the
+ * history would not show them. They had to open every note one at a time to find out. The sections
+ * are rendered in the order the template laid them out, headings included, because a heading is how
+ * a reader tells an examination finding from a plan.
+ *
+ * Nothing is summarised, shortened or rephrased. This is the clinician's own words or it is
+ * nothing. */
+function noteBody(r) {
+  const sections = (r && r.sections) || {};
+  const parts = [];
+  for (const key of Object.keys(sections)) {
+    const text = str(sections[key]);
+    if (!text) continue;
+    parts.push({ heading: key, text });
+  }
+  return parts;
+}
+
+/* A label is a sentence a person can read, with the actor in it where one is known. "Ordered CBC"
+ * answers what; "Dr Mehta ordered CBC" answers what a ward round actually asks. Where no actor can
+ * be resolved the sentence is written without one rather than being given a fabricated subject. */
+const TIMELINE_LABEL = {
+  Patient: (r, who) => `${r.name || "Patient"} registered${r.mrn ? ` — ${r.mrn}` : ""}${r.provisional ? " (details still to be confirmed)" : ""}${who ? ` · by ${who}` : ""}`,
+  Encounter: (r, who) => {
+    const where = r.location && r.location.ward ? ` — ${r.location.ward}${r.location.bed ? ` bed ${r.location.bed}` : ""}` : "";
+    /* Admitted, moved and discharged read as three different things to somebody reconstructing a
+     * stay, so they are said as three different things rather than as one status word.
+     *
+     * And a ward stay is not an outpatient visit: somebody is ADMITTED to a ward and CHECKS IN at
+     * a clinic, and using one word for both makes the history read wrong in whichever half it does
+     * not belong to. ADMISSION_CLASSES is the list this file already keeps of what counts as a
+     * stay, so the two can never drift apart. */
+    const isStay = ADMISSION_CLASSES.indexOf(str(r.class)) >= 0;
+    const what = r.status === "finished" ? (isStay ? "discharged" : "left")
+      : r.status === "in-progress" ? (r.transferredAt ? "moved" : isStay ? "admitted" : "checked in")
+      : r.status === "planned" ? "expected"
+      : r.status === "cancelled" ? "cancelled"
+      : (r.status || "visit");
+    return `${r.class || "Visit"}: ${what}${where}${who ? ` · by ${who}` : ""}`;
+  },
+  Condition: (r, who) => `${who ? `${who} recorded` : "Recorded"} a diagnosis: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
+  Observation: (r, who) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}${who ? ` · by ${who}` : ""}`,
+  MedicationOrder: (r, who) => `${who ? `${who} prescribed` : "Prescribed"} ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
+  MedicationAdministration: (r, who) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}${who ? ` · by ${who}` : ""}`,
+  /* WHO ASKED FOR IT travels with the order. "Who ordered this chest film, and when" is the first
+   * question asked about an investigation nobody can account for. requesterId is the AUTHENTICATED
+   * ordering clinician (migrate-inv-order.js: "never a name typed anywhere"), so this is the
+   * session's own record and not a free-text claim. */
+  ServiceRequest: (r, who) => `${who ? `${who} ordered` : "Ordered"} ${r.code}${r.category ? ` (${r.category})` : ""} — ${r.status || "draft"}${r.priority === "stat" ? " STAT" : r.priority === "urgent" ? " urgent" : ""}`,
+  DiagnosticReport: (r, who) => `Result: ${r.code} — ${r.status || "preliminary"}${r.critical ? " CRITICAL" : ""}${who ? ` · reported by ${who}` : ""}`,
+  CarePlan: (r, who) => `Care plan — ${r.status || "draft"}${who ? ` · by ${who}` : ""}`,
+  ClinicalNote: (r, who) => `${who ? `${who} wrote` : "Somebody wrote"} a ${r.noteType || "progress"} note${r.signedBy ? ", signed" : r.aiDrafted ? " (drafted by the assistant, unsigned)" : ", unsigned"}`,
+  ImagingStudy: (r, who) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}${who ? ` · by ${who}` : ""}`,
+  AllergyIntolerance: (r, who) => `${who ? `${who} recorded` : "Recorded"} an allergy: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+  SurgicalCase: (r, who) => `Operation: ${r.procedure || "procedure"}${r.site ? ` — ${r.site}` : ""}${r.laterality && r.laterality !== "not-applicable" ? ` ${r.laterality}` : ""}${r.status ? ` — ${r.status}` : ""}${who ? ` · by ${who}` : ""}`,
+  AnesthesiaRecord: (r, who) => `Anaesthetic${r.technique ? `: ${r.technique}` : ""}${who ? ` · by ${who}` : ""}`,
+  ImplantRecord: (r, who) => `Implant: ${r.device || r.display || "device"}${r.serialNumber ? ` (${r.serialNumber})` : ""}${who ? ` · by ${who}` : ""}`,
+  DeliveryRecord: (r, who) => `Delivery${r.mode ? `: ${r.mode}` : ""}${r.outcome ? ` — ${r.outcome}` : ""}${who ? ` · by ${who}` : ""}`,
+  MedicationDispense: (r, who) => `${who ? `${who} issued` : "Issued"} ${r.drug || "a medicine"}${r.quantity != null ? ` ${r.quantity}${r.unit ? ` ${r.unit}` : ""}` : ""}`,
+  MedicationReconciliation: (r, who) => `${who ? `${who} took` : "Took"} a medicines history${r.decisions && r.decisions.length ? ` — ${r.decisions.length} medicine${r.decisions.length === 1 ? "" : "s"} decided` : ""}`,
+  SpecimenCollection: (r, who) => `Sample taken${r.specimenType ? `: ${r.specimenType}` : ""}${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
+  ImagingProtocol: (r, who) => `Imaging protocolled${r.contrast ? " (with contrast)" : ""}${who ? ` · by ${who}` : ""}`,
+  AdmissionRequest: (r, who) => `${who ? `${who} requested` : "Requested"} admission${r.ward ? ` to ${r.ward}` : ""}${r.state ? ` — ${r.state}` : ""}`,
+  /* A critical result names the number and whether anybody has picked it up yet, because an open
+   * loop is the single most actionable thing that can appear on a chart. */
+  CriticalResultLoop: (r) => `CRITICAL: ${r.display || r.code}${r.value != null ? ` ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""} — ${r.state === "open" ? "nobody has acknowledged this yet" : r.state || "open"}`,
+  ResusBundle: (r, who) => `Resuscitation${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
+  EmergencyActivation: (r, who) => `Hospital emergency declared: ${r.kind || "emergency"}${r.reason ? ` — ${r.reason}` : ""}${who ? ` · by ${who}` : ""}`,
+  BreakGlassGrant: (r, who) => `Emergency access to this chart was taken${r.reason ? `: ${r.reason}` : ""}${who ? ` · by ${who}` : ""}`,
+  /* WHAT was billed, never how much. The amounts are the billing screen's, which has its own
+   * permission; putting them here would put a patient's money on every clinical reader's screen. */
+  Invoice: (r, who) => `Bill ${r.void ? "cancelled" : "raised"}${r.lines && r.lines.length ? ` — ${r.lines.length} item${r.lines.length === 1 ? "" : "s"}` : ""}${who ? ` · by ${who}` : ""}`,
+  Claim: (r, who) => `Insurance claim${r.state ? ` — ${r.state}` : ""}${who ? ` · by ${who}` : ""}`,
+};
+
+/**
+ * PURE. Every resource in a chart(), as one chronologically ordered list, plus the medications
+ * currently active. `chart` is `RecordService.chart()`'s own shape: `{ [resourceType]: resource[] }`,
+ * already scoped to what this actor may read - nothing here widens or re-checks that.
+ */
+function timelineFromChart(chart) {
+  const events = [];
+  let withoutTimestamp = 0;
+
+  /* AN ORDER AND ITS RESULT, JOINED. DiagnosticReport carries the ServiceRequest it answers, so an
+   * investigation on the timeline can say whether the report is back and point at it - which is the
+   * difference between a history that lists what was asked for and one that can be acted on. An
+   * order with no report yet says so; it is not left looking identical to one that is done. */
+  const reportByRequest = new Map();
+  for (const rep of (chart && chart.DiagnosticReport) || []) {
+    const srId = str(rep && rep.serviceRequestId);
+    if (!srId) continue;
+    const prev = reportByRequest.get(srId);
+    // The most recent wins: a corrected report supersedes the preliminary one it corrects.
+    const at = (rep.meta && (rep.meta.effectiveAt || rep.meta.recordedAt)) || "";
+    if (!prev || at > prev.at) reportByRequest.set(srId, { id: rep.id, status: rep.status, critical: !!rep.critical, at });
+  }
+  // Imaging answers an order the same way a lab report does, and a reader wants the same button.
+  for (const study of (chart && chart.ImagingStudy) || []) {
+    const srId = str(study && study.serviceRequestId);
+    if (!srId || reportByRequest.has(srId)) continue;
+    const at = (study.meta && (study.meta.effectiveAt || study.meta.recordedAt)) || "";
+    reportByRequest.set(srId, { id: study.id, status: study.status, critical: false, at, imaging: true });
+  }
+
+  for (const resourceType of Object.keys(chart || {})) {
+    const rows = chart[resourceType] || [];
+    const label = TIMELINE_LABEL[resourceType] || ((r) => `${resourceType} recorded`);
+    for (const r of rows) {
+      const at = (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
+      if (!at) { withoutTimestamp++; continue; }
+      const who = whoOf(r);
+      const event = {
+        at, resourceType, id: r.id, label: label(r, who),
+        category: TIMELINE_CATEGORY[resourceType] || "other",
+        ...(who ? { who } : {}),
+      };
+      // The note's own words, so the history can be read without opening every note in turn.
+      if (resourceType === "ClinicalNote") {
+        const body = noteBody(r);
+        if (body.length) event.body = body;
+        if (r.signedBy) event.signedBy = personName(r.signedBy);
+      }
+      // A result's conclusion is the sentence the reader is actually after.
+      if (resourceType === "DiagnosticReport" && str(r.conclusion)) event.body = [{ heading: "conclusion", text: str(r.conclusion) }];
+      if (resourceType === "DiagnosticReport" && r.critical) event.critical = true;
+      /* An unacknowledged critical result is the loudest thing a chart can say. Flagged here so the
+       * screen can colour it without having to know what a CriticalResultLoop is. */
+      if (resourceType === "CriticalResultLoop") event.critical = true;
+      // A discharge summary's text is worth reading on the history as much as a progress note's.
+      if (resourceType === "Invoice" && Array.isArray(r.lines) && r.lines.length) {
+        event.body = [{ heading: "items", text: r.lines.map((l) => str(l && (l.display || l.code))).filter(Boolean).join(", ") }];
+      }
+      // An investigation says whether its report is back, and names it so it can be opened.
+      if (resourceType === "ServiceRequest") {
+        const rep = reportByRequest.get(str(r.id));
+        event.reportReady = !!rep;
+        if (rep) {
+          event.reportId = rep.id;
+          event.reportStatus = rep.status || null;
+          if (rep.critical) event.critical = true;
+          if (rep.imaging) event.reportIsImaging = true;
+        }
+      }
+      events.push(event);
+    }
+  }
+  events.sort((a, b) => (a.at < b.at ? 1 : a.at > b.at ? -1 : 0)); // most recent first
+  const activeMedications = (chart.MedicationOrder || [])
+    .filter((o) => o && o.status === "active")
+    .map((o) => ({
+      orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
+      prescriberId: o.prescriberId || null, since: (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || null,
+    }))
+    .sort((a, b) => (a.since || "") < (b.since || "") ? 1 : -1);
+  return { events, withoutTimestamp, activeMedications };
+}
+
+/**
+ * The route handler. ctx: { migration, patientId, actorDeps, recordDeps }. A role with no read grant
+ * on a resource type simply never sees it in `chart` — the same silent narrowing `chart()` already
+ * does for every other reader; this does not loosen or re-decide that.
+ */
+async function patientTimeline(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", events: [], activeMedications: [] };
+
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_id_required", events: [], activeMedications: [] };
+
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, events: [], activeMedications: [] };
+
+  let chart;
+  try { chart = await svc.chart(patientId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), events: [], activeMedications: [] }; }
+
+  const { events, withoutTimestamp, activeMedications } = timelineFromChart(chart);
+  return { ...base, ok: true, patientId, events, activeMedications, ...(withoutTimestamp ? { withoutTimestamp } : {}) };
+}
+
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
@@ -801,4 +1167,5 @@ export {
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
+  timelineFromChart, patientTimeline,
 };

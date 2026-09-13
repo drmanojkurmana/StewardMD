@@ -17,11 +17,11 @@
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
   var DEFS = {
-    smd_rxchoice: { type: "bool", def: true, query: "rxc", desc: "RxChoice master flag: the opt-in 'Same Prescription. Smarter Price.' panel on a finished prescription. OFF restores the pre-RxChoice pad exactly. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing." },
+    smd_rxchoice: { type: "bool", def: true, query: "rxc", desc: "RxChoice master flag: the automatic 'Same Prescription. Smarter Price.' choices on a finished prescription. OFF restores the pre-RxChoice pad exactly. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing." },
     smd_rxchoice_price: { type: "bool", def: true, query: "rxcprice", desc: "Show course-level cost (pack size x packs needed x MRP) on the four cards. OFF = products only, no rupee figures. MRP is the Drug Database's list price, never a live pharmacy quote." },
     smd_rxchoice_ai_normalization: { type: "bool", def: false, query: "rxcai", desc: "Let AI normalize a free-text drug line into a composition BEFORE the deterministic database lookup. OFF by default: the deterministic composition/brand index already resolves every line the pad can produce, and AI output must never reach eligibility, matching, pricing or ranking - those stay deterministic whatever this flag says." },
     smd_rxchoice_patient_selection: { type: "bool", def: false, query: "rxcpatient", desc: "Phase 2: let the PATIENT pick among the products the doctor approved. OFF for MVP - doctor approval first, and a patient can never introduce a product the doctor did not approve." },
-    smd_rxchoice_pdf: { type: "bool", def: true, query: "rxcpdf", desc: "Append the RxChoice section (four options + the final selected product) to the printed/PDF prescription. The conventional prescription above it is unchanged." },
+    smd_rxchoice_pdf: { type: "bool", def: true, query: "rxcpdf", desc: "Append the RxChoice section (four options + final selected product) to the printed/PDF prescription. The conventional prescription above it is unchanged." },
     smd_rxchoice_inline: { type: "bool", def: true, query: "rxcinline", desc: "Show 4-way cost choice tray automatically under each medication line on the prescription pad. Master smd_rxchoice must also be ON." }
   };
 
@@ -39,7 +39,20 @@
   function on() { return bool("smd_rxchoice"); }
   function defs() { return DEFS; }
 
-  var API = { bool: bool, set: set, on: on, defs: defs, _version: 1 };
+  var API = { bool: bool, set: set, on: on, defs: defs, _version: 2 };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_RXCHOICE_FLAGS = API;
+
+  /* Automatic prescription population is a separate additive adapter. Loading it here keeps the
+   * existing app entrypoints untouched and lets scripts/build-www.sh ship it with the other root JS.
+   * It waits for DOM + MEDAPI + the deterministic core before doing any work. */
+  if (typeof window !== "undefined" && bool("smd_rxchoice")) {
+    try {
+      var src = "/rxchoice-autopilot.js";
+      if (!document.querySelector('script[data-smd-rxc-autopilot="1"]')) {
+        var el = document.createElement("script"); el.src = src; el.async = true; el.dataset.smdRxcAutopilot = "1";
+        (document.head || document.documentElement).appendChild(el);
+      }
+    } catch (e) {}
+  }
 })();

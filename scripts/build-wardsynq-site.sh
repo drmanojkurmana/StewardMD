@@ -22,7 +22,13 @@ rm -f "$OUT/wardsynq/site/_worker.js"
 cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
 
 # The clinical surfaces, byte-identical to what the app runs.
-for f in ward.js ward.css discharge.js patient-register.js patient-register.css opd.html opd-display.html; do
+# discharge.css was missing from this list until 2026-09-12. discharge.js shipped without it, so the
+# discharge summary rendered on wardsynq.com with NO stylesheet at all: no card layout, no
+# positioning (it fell into normal page flow underneath the ward overlay and looked like it had not
+# opened), every Material Symbols ligature printed as its own name — "medicationMedications",
+# "fact_checkProvenance" — and the print stylesheet was absent, which is why the printed PDF came out
+# as unstyled running text. One file, four symptoms.
+for f in ward.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
   cp "$ROOT/$f" "$OUT/$f"
 done
 # The order-safety workstation and the WardSynQ client libraries it imports.

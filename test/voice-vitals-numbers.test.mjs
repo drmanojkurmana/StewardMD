@@ -41,6 +41,15 @@ test("SAFETY: number words with no vital cue never create a vital", () => {
   assert.deepEqual(fields, []);
 });
 
+test("extract: spoken spo2 and blood sugar populate structured fields", () => {
+  const f = {};
+  V.extract("pulse eighty eight, saturation ninety seven percent, random blood sugar one twenty")
+    .forEach((r) => (f[r.field] = r.value));
+  assert.equal(f.pulse, 88);
+  assert.equal(f.spo2, 97);
+  assert.equal(f.grbs, 120);
+});
+
 test("digit-form input is untouched", () => {
   assert.equal(V.wordsToNumbers("BP 120/80 pulse 88"), "BP 120/80 pulse 88");
 });
