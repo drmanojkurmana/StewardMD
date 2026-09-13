@@ -314,3 +314,15 @@ UI names changed, guard now ignores quoted server route paths only.
 
 **Numbers:** 6015 passing, 0 failing. 26 routes waiting for a screen.
 **Next:** flag-critical, extend, emergency-chart, advisory-check; then P0.7, P0.9, P0.8, P0.10.
+
+
+## 2026-09-14 (cont.) — SAFETY: critical lab results now alert
+
+**Bug (serious):** releasing a lab result never opened a critical-result loop - the only path was an
+uncalled route - and the lab grant could not write one anyway. A potassium of 7 alerted nobody. Fixed on
+the server (release opens loops against the stored report with site limits; a failed check is reported)
+and in the lab grant. Proved through real routes: normal = checked, nothing opened; 7.2 = one loop;
+no duplicates on re-flag.
+
+**Numbers:** 6015 passing, 0 failing. 26 routes waiting for a screen (flag-critical remains machine-callable).
+**Next:** extend, emergency-chart, advisory-check; then P0.7 fuzzy search, P0.9 MFA, P0.8 documents, P0.10.
