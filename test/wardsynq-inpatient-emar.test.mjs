@@ -6675,3 +6675,83 @@ test("DOCUMENTS: with no storage configured, an upload is refused and says so, a
   assert.equal(list.__status, 200);
   assert.equal(list.storageConfigured, false);
 });
+
+test("DOCUMENTS: the public ready check says whether storage really works - a round trip, not just settings present", async () => {
+  const ready = async () => (await (await onRequest({ request: new Request("https://x/api/queue/ready"), env: ENV })).json()).documentStorage;
+  assert.deepEqual(await ready(), { state: "not_configured" });
+  await withDocStore(async ({ objects, calls }) => {
+    assert.deepEqual(await ready(), { state: "ok" });
+    assert.deepEqual(calls.map((c) => c.method), ["PUT", "GET", "DELETE"], "it saved, read back and deleted");
+    assert.equal(objects.size, 0, "and left nothing behind");
+    await ready();
+    assert.equal(calls.length, 3, "cached, so the public endpoint cannot run up storage calls");
+  });
+});
+
+/* ---- referrals (referral.js) ----------------------------------------------------------------------- */
+test("REFERRAL: request -> accept -> schedule -> seen -> respond -> close, each step by the right side, every step on the record", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const bare = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: adm.patientId, specialty: "Cardiology", reason: "New AF" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "summary_required", "a referral with no clinical summary is refused");
+
+  const made = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, specialty: "Cardiology", urgency: "urgent", reason: "New atrial fibrillation", clinicalSummary: "72M, palpitations 2 days, AF 130 on ECG, BP stable." });
+  assert.equal(made.__status, 200, JSON.stringify(made));
+  const id = made.referral.id;
+  assert.equal(made.referral.status, "requested");
+
+  const self = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" });
+  assert.equal(self.__status, 422);
+  assert.equal(self.error, "referrer_cannot_receive");
+  assert.equal((await as(NURSE, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" })).__status, 403, "a nurse cannot accept a referral");
+
+  const inbox = await as(LOCUM, `/ward/referral-inbox?orgId=${ORG}&specialty=cardiology`);
+  assert.equal(inbox.__status, 200);
+  assert.deepEqual(inbox.referrals.map((r) => r.id), [id]);
+  assert.equal(inbox.partial, false);
+
+  const steps = [
+    ["accept", {}], ["schedule", { appointmentAt: "2026-09-20T10:00:00.000Z" }], ["seen", {}],
+    ["respond", { response: "Rate control with metoprolol; anticoagulate, CHA2DS2-VASc 3. Echo booked." }],
+  ];
+  for (const [action, extra] of steps) {
+    const r = await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action, ...extra });
+    assert.equal(r.__status, 200, action + " " + JSON.stringify(r));
+  }
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "close" })).error, "only_referrer", "the referrer closes it, having read the reply");
+  const closed = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "close" });
+  assert.equal(closed.__status, 200);
+  assert.equal(closed.referral.status, "closed");
+  assert.deepEqual(closed.referral.history.map((h) => h.status), ["requested", "accepted", "scheduled", "seen", "responded", "closed"]);
+  assert.equal(closed.referral.receivingProvider, idFor(LOCUM));
+
+  const list = await as(NURSE, `/ward/referrals?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.referrals[0].status, "closed");
+  assert.equal((await as(PHARM, `/ward/referrals?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 403);
+  assert.equal((await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" })).error, "bad_transition", "a closed referral does not reopen");
+});
+
+test("REFERRAL: a declined referral stays on the referrer's list until they close it; cancel needs a reason; external needs a facility", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const base = { orgId: ORG, patientId: adm.patientId, specialty: "Neurology", reason: "Seizure", clinicalSummary: "First seizure, CT normal." };
+  const r1 = await as(DOCTOR, "/ward/referral-create", "POST", base);
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r1.referral.id, action: "decline" })).error, "reason_required");
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r1.referral.id, action: "decline", reason: "Epilepsy clinic takes first seizures" })).__status, 200);
+  const sent = await as(DOCTOR, `/ward/referral-inbox?orgId=${ORG}&view=sent`);
+  assert.deepEqual(sent.referrals.map((r) => r.status), ["declined"], "a declined referral is exactly the one most likely to be forgotten");
+
+  const r2 = await as(DOCTOR, "/ward/referral-create", "POST", base);
+  assert.equal((await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: r2.referral.id, action: "cancel" })).error, "reason_required");
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r2.referral.id, action: "cancel", reason: "x" })).error, "only_referrer");
+
+  assert.equal((await as(DOCTOR, "/ward/referral-create", "POST", { ...base, kind: "external" })).error, "facility_required");
+  const ext = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, kind: "external", destinationFacility: "NIMHANS" });
+  const acc = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: ext.referral.id, action: "accept" });
+  assert.equal(acc.__status, 200, "an external referral's acceptance is recorded by our staff on the facility's behalf");
+  assert.equal(acc.referral.history[1].onBehalfOf, "NIMHANS");
+
+  const att = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, attachments: ["wsq-doc-someone-else"] });
+  assert.equal(att.error, "attachment_not_this_patient");
+});

@@ -495,6 +495,7 @@
       /* The bed waiting list sits at the capability that registers a patient - asking for a bed and
        * closing a request are front-desk and bed-management acts, and the module gates them itself. */
       tile({ go: "ward:admreqs", icon: "bed", title: "Waiting for a bed", sub: "Ask for a bed, see who is waiting and for how long", need: "queue.add" }),
+      tile({ go: "ward:referralinbox", icon: "send", title: "Referral inbox", sub: "Referrals waiting for your specialty, and the ones you sent", need: "emr.view" }),
       /* Finding and joining duplicate records is the front desk's and medical records' work, on the
        * capability that registers a patient; identity-merge.js gates the merge itself. */
       tile({ go: "ward:mpi", icon: "search", title: "Duplicate records", sub: "Find a patient who may have two records, and join them with a reason", need: "queue.add" }),

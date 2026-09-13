@@ -1366,6 +1366,7 @@
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="documents" title="Consent forms, referral letters, outside reports">' + ms("description") + "Documents</button>" +
+        '<button class="w-btn ghost" data-w-act="referrals" title="Refer this patient to another specialty or facility, and follow the reply">' + ms("send") + "Referrals</button>" +
         '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
         // First in the row on purpose: reading the stay is what a doctor picking up an unfamiliar
         // patient does before anything else, and it is where the note box now lives.
@@ -4563,6 +4564,46 @@
         '<div class="w-mini-row-act">' + (x.status !== "purged" ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") + "</div></li>";
     }).reverse().join("") + "</ul>";
   }
+  /* REFERRALS (referral.js). Each referral shows its one current state and the actions that state
+   * allows; the server decides who may take each (a referrer cannot accept their own), this screen only
+   * offers them. Not loaded, failed and none are three different sentences. */
+  var REF_LABEL = { requested: "Waiting to be accepted", accepted: "Accepted", scheduled: "Appointment booked", seen: "Seen", responded: "Reply received", closed: "Closed", declined: "Declined", cancelled: "Cancelled" };
+  var REF_ACTIONS = { requested: ["accept", "decline", "cancel"], accepted: ["schedule", "seen"], scheduled: ["schedule", "seen"], seen: ["respond"], responded: ["close"], declined: ["close"] };
+  var REF_ACT_LABEL = { accept: "Accept", decline: "Decline", cancel: "Cancel", schedule: "Book appointment", seen: "Mark seen", respond: "Send reply", close: "Close" };
+  function referralRow(x) {
+    return '<li class="w-mini-row"><div>' +
+      '<span class="w-st ' + (x.urgency === "emergency" ? "escalate" : x.urgency === "urgent" ? "due" : "done") + '">' + esc(x.urgency) + "</span> " +
+      "<b>" + esc(x.specialty) + "</b>" + (x.kind === "external" ? " at " + esc(x.destinationFacility) : "") + " &middot; " + esc(REF_LABEL[x.status] || x.status) +
+      '<div class="w-dt-times">' + esc(x.reason) + " &middot; from " + esc(x.referringProvider) + " &middot; " + when(x.requestedAt) +
+      (x.appointmentAt ? " &middot; appointment " + when(x.appointmentAt) : "") + "</div>" +
+      '<div class="w-dt-times">' + esc(x.clinicalSummary) + "</div>" +
+      (x.response ? '<div class="w-dt-times"><b>Reply:</b> ' + esc(x.response) + "</div>" : "") +
+      (x.declineReason ? '<div class="w-dt-times"><b>Declined:</b> ' + esc(x.declineReason) + "</div>" : "") +
+      '</div><div class="w-mini-row-act">' + (REF_ACTIONS[x.status] || []).map(function (a) {
+        return '<button class="w-btn ghost sm" data-w-act="refact:' + esc(x.id) + "~" + a + "~" + esc(x.version) + '">' + REF_ACT_LABEL[a] + "</button>";
+      }).join("") + "</div></li>";
+  }
+  function referralsView(state) {
+    var d = state.referrals, inbox = state.view === "referralinbox";
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>" + (inbox ? "Referral inbox" : "Referrals") + "</h3></div>";
+    var filter = inbox ? '<div class="w-sub"><div class="w-grid"><label class="w-f"><span>Specialty</span><input id="wRefSpec" value="' + esc(state.refSpecialty || "") + '" placeholder="All specialties"></label>' +
+      '<label class="w-f"><span>Show</span><select id="wRefView"><option value="">Referrals to a specialty</option><option value="sent"' + (state.refView === "sent" ? " selected" : "") + ">Referrals I sent</option></select></label></div>" +
+      '<button class="w-btn" data-w-act="refinboxload">' + ms("search") + "Show</button></div>" : "";
+    var form = inbox ? "" : '<div class="w-sub"><h4>Refer this patient</h4>' +
+      '<div class="w-grid"><label class="w-f"><span>To (specialty)</span><input id="wRefSpecialty" placeholder="For example: Cardiology"></label>' +
+      '<label class="w-f"><span>How soon</span><select id="wRefUrgency"><option value="routine">Routine</option><option value="urgent">Urgent</option><option value="emergency">Emergency</option></select></label>' +
+      '<label class="w-f"><span>Where</span><select id="wRefKind"><option value="internal">This hospital</option><option value="external">Another facility</option></select></label>' +
+      '<label class="w-f"><span>Facility (if another)</span><input id="wRefFacility"></label></div>' +
+      '<label class="w-f"><span>Reason</span><input id="wRefReason"></label>' +
+      '<label class="w-f"><span>Clinical summary for the receiving team</span><textarea id="wRefSummary" rows="3"></textarea></label>' +
+      '<button class="w-btn" data-w-act="refcreate">' + ms("send") + "Send referral</button></div>";
+    var body = d == null ? '<p class="w-hint">' + ms("hourglass_empty") + "Loading referrals...</p>"
+      : d.failed ? '<p class="w-hint warn">' + ms("error") + "Could not load referrals. Do not read this as none.</p>"
+      : (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+        ((d.referrals || []).length ? '<ul class="w-mini">' + d.referrals.map(referralRow).join("") + "</ul>"
+          : '<p class="w-empty">' + (inbox ? "No open referrals here." : "No referrals for this patient.") + "</p>");
+    return '<div class="w-card">' + head + filter + form + body + "</div>";
+  }
   function mpiView(state) {
     var d = state.mpi;
     var s = state.sel;
@@ -4958,6 +4999,7 @@
         : state.view === "tags" ? tagsView(state)
         : state.view === "mpi" ? mpiView(state)
         : state.view === "documents" ? documentsView(state)
+        : state.view === "referrals" || state.view === "referralinbox" ? referralsView(state)
         : state.view === "infusions" ? infusionView(state)
         : state.view === "admreqs" ? admReqView(state)
         : state.view === "ordersets" ? orderSetsView(state)
@@ -7268,6 +7310,35 @@
     loadChart(); loadNews2(); loadPeople();
   }
 
+  function loadReferrals() {
+    var path = st.view === "referralinbox"
+      ? "/ward/referral-inbox?orgId=" + encodeURIComponent(st.orgId) + "&specialty=" + encodeURIComponent(st.refSpecialty || "") + "&view=" + encodeURIComponent(st.refView || "")
+      : "/ward/referrals?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel ? st.sel.patientId : "");
+    return apiGet(path)
+      .then(function (r) { st.referrals = r && r.ok ? r : { failed: true }; if (!(r && r.ok)) settle(r, null); paint(); })
+      .catch(function () { st.referrals = { failed: true }; paint(); });
+  }
+  function referralCreate() {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId || undefined, specialty: val("wRefSpecialty"), urgency: val("wRefUrgency"),
+      kind: val("wRefKind"), destinationFacility: val("wRefFacility"), reason: val("wRefReason"), clinicalSummary: val("wRefSummary") };
+    st.busy = true; paint();
+    apiPost("/ward/referral-create", body)
+      .then(function (r) { if (settle(r, r && r.ok ? "Referral sent." : null)) loadReferrals(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not send the referral."; paint(); });
+  }
+  function referralAct(arg) {
+    var p = String(arg || "").split("~"), id = p[0], action = p[1], version = Number(p[2]);
+    var body = { orgId: st.orgId, referralId: id, action: action, expectedVersion: version };
+    var ask = function (q) { try { return G.prompt(q) || ""; } catch (e) { return ""; } };
+    if (action === "decline" || action === "cancel") { body.reason = ask(action === "decline" ? "Why is this referral declined? The referring team will see this." : "Why is this referral cancelled?"); if (!body.reason.trim()) return; }
+    if (action === "respond") { body.response = ask("Your reply to the referring team:"); if (!body.response.trim()) return; }
+    if (action === "schedule") { body.appointmentAt = ask("Appointment date and time (for example 2026-09-20 10:30):"); if (!body.appointmentAt.trim()) return; body.appointmentAt = body.appointmentAt.trim().replace(" ", "T"); }
+    st.busy = true; paint();
+    apiPost("/ward/referral-act", body)
+      .then(function (r) { if (settle(r, r && r.ok ? "Referral updated." : null)) loadReferrals(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not update the referral."; paint(); });
+  }
   function documentsOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "documents"; st.docs = null; st.docVersions = null; st.docNewVersion = null; paint(); loadDocuments();
@@ -8168,6 +8239,8 @@
       if (st.view === "patientsurgery") { st.patientCases = null; st.view = "chart"; paint(); return; }
       if (st.view === "tags") { st.tags = null; st.tagVerify = null; st.view = "chart"; paint(); return; }
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "referrals") { st.referrals = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
+      if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
       if (st.view === "documents") { st.docs = null; st.docVersions = null; st.docNewVersion = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "infusions") { st.infusions = null; st.view = "chart"; paint(); return; }
       if (st.view === "admreqs") { st.admReqs = null; st.view = "list"; paint(); return; }
@@ -8444,6 +8517,11 @@
     if (cmd === "taglost") { tagEnd("lost", arg); return; }
     if (cmd === "tagend") { tagEnd("end", arg); return; }
     if (cmd === "mpi") { mpiOpen(); return; }
+    if (cmd === "referrals") { if (!st.sel) { st.err = "Open a patient first."; paint(); return; } st.view = "referrals"; st.referrals = null; paint(); loadReferrals(); return; }
+    if (cmd === "referralinbox") { st.view = "referralinbox"; st.referrals = null; paint(); loadReferrals(); return; }
+    if (cmd === "refinboxload") { st.refSpecialty = val("wRefSpec"); st.refView = val("wRefView"); st.referrals = null; paint(); loadReferrals(); return; }
+    if (cmd === "refcreate") { referralCreate(); return; }
+    if (cmd === "refact") { referralAct(arg); return; }
     if (cmd === "mpisearch") { mpiSearch(); return; }
     if (cmd === "mpimerge") { mpiMergePreview(arg); return; }
     if (cmd === "mpimergeconfirm") { mpiMergeConfirm(); return; }
@@ -8584,7 +8662,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open

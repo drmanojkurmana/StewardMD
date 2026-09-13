@@ -100,6 +100,7 @@ import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, e
 import { reportIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
 import { assignPatientTag, verifyPatientTag, deactivatePatientTag, reportPatientTagLost, replacePatientTag, patientTagLog } from "../../_wardsynq/identity-tag.js";
 import { uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink } from "../../_wardsynq/documents.js";
+import { createReferral, actOnReferral, patientReferrals, referralInbox } from "../../_wardsynq/referral.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
@@ -477,6 +478,31 @@ function opdOrgFor(env, hospitalId) {
   return { id: hospitalId || "", mode: cid ? "connect" : "native", connectorId: cid };
 }
 
+/* Is patient-document storage actually reachable? Settings being present is not the question - wrong
+ * keys, a wrong bucket or a wrong endpoint all look "configured". So it saves, reads back and deletes
+ * one fixed 2-byte object (never patient data, never a growing key), and says only "ok", "not
+ * configured" or which step failed with the provider's status. Cached per isolate for ten minutes so
+ * a public endpoint cannot be used to run up storage calls. */
+let docProbeCache = null;
+async function documentStorageProbe(env) {
+  const store = documentStoreFromEnv(env);
+  if (!store) return { state: "not_configured" };
+  if (docProbeCache && Date.now() - docProbeCache.at < 10 * 60 * 1000) return docProbeCache.result;
+  let result;
+  try {
+    const key = "_health/probe";
+    await store.put(key, new Uint8Array([111, 107]), "application/octet-stream");
+    const got = await store.get(key);
+    if (!got || got.bytes.length !== 2) throw Object.assign(new Error("read back nothing"), { op: "get" });
+    await store.delete(key);
+    result = { state: "ok" };
+  } catch (e) {
+    result = { state: "failed", step: (e && e.op) || "unknown", providerStatus: (e && e.status) || null };
+  }
+  docProbeCache = { at: Date.now(), result };
+  return result;
+}
+
 export async function onRequest(context) {
   const __t0 = Date.now();
   const { request, env } = context;
@@ -486,7 +512,7 @@ export async function onRequest(context) {
   const parts = url.pathname.replace(/^\/api\/queue\/?/, "").replace(/\/+$/, "").split("/");
   const seg = parts[0] || "", sub = parts[1] || "";
 
-  if (method === "GET" && seg === "ready") return json({ ok: true, enabled: queueEnabled(env), configured: isQueueConfigured(env) }, 200, request);
+  if (method === "GET" && seg === "ready") return json({ ok: true, enabled: queueEnabled(env), configured: isQueueConfigured(env), documentStorage: await documentStorageProbe(env) }, 200, request);
   if (!queueEnabled(env)) return json({ ok: false, error: "disabled" }, 404, request);
 
   try {
@@ -749,6 +775,8 @@ export async function onRequest(context) {
         // Patient documents (documents.js). Reading and opening is chart access; uploading and withdrawing
         // is the clinician's act; deleting stored bytes after retention is an administrator's.
         documents: CAPS.EMR_VIEW, "document-versions": CAPS.EMR_VIEW, "document-link": CAPS.EMR_VIEW,
+        // Referrals (referral.js): making and answering one is a prescriber's act; reading them is chart access.
+        referrals: CAPS.EMR_VIEW, "referral-inbox": CAPS.EMR_VIEW, "referral-create": CAPS.EMR_TREAT, "referral-act": CAPS.EMR_TREAT,
         "document-upload": CAPS.EMR_TREAT, "document-withdraw": CAPS.EMR_TREAT, "document-purge": CAPS.STAFF_ADMIN,
         "tag-assign": CAPS.EMR_VITALS, "tag-verify": CAPS.EMR_VITALS, "tag-replace": CAPS.EMR_VITALS,
         "tag-deactivate": CAPS.EMR_VITALS, "tag-lost": CAPS.EMR_VITALS, "tag-log": CAPS.EMR_VITALS,
@@ -1342,6 +1370,22 @@ export async function onRequest(context) {
       }
       if (sub === "device-list" && method === "GET") {
         const r = await deviceList(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "referrals" && method === "GET") {
+        const r = await patientReferrals(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "referral-inbox" && method === "GET") {
+        const r = await referralInbox(request, env, { ...deps, specialty: url.searchParams.get("specialty") || "", view: url.searchParams.get("view") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "referral-create" && method === "POST") {
+        const r = await createReferral(request, env, { ...deps, input: body, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "referral-act" && method === "POST") {
+        const r = await actOnReferral(request, env, { ...deps, referralId: body.referralId, expectedVersion: body.expectedVersion, input: body, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "documents" && method === "GET") {
