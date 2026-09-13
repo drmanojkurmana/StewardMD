@@ -558,3 +558,7 @@ Radiology: imagingViewer urlTemplate (https only, no names in URL) with "Open im
 P1 status: all P1 items now have server + screen; remaining limits are listed per builder (no live payer/PACS verification, notification channels unconfigured).
 P2 builders running: patient/family portal (P2.9), surveillance + copilot tasks (P2.3/2.2), security monitoring + restore evidence (P2.17/2.15).
 Parked for owner: payer credentials + endpoint per payer, PACS viewer URL, notification channel, document bucket name, payment provider credentials.
+
+### 2026-09-13 - P2.17 security review + P2.15 restore evidence merged
+
+Admin "Security review" tab (STAFF_ADMIN, doctor/nurse 403): chart-access anomalies vs own baseline, unusual exports, suspicious sign-ins, break-glass and privileged-action review queue (append-only, no self-review), data-protection status green only with a backup inside RPO AND a recorded successful restore test; audit storage that cannot be read shows "unavailable". Fixed on the way: backup export audit rows recorded a NULL actor. Not built: out-of-assignment reads (no staff-ward data), VIP flag, configurable audit retention. Live admin.js 14. 6290 passing.
