@@ -430,3 +430,10 @@ DocumentReference metadata in the append-only record (patient, visit, type, titl
 
 **Numbers:** 6065 passing, 0 failing. 14 routes waiting for a screen.
 **Next:** P0.10 atomicity investigation and invariant tests.
+
+### 2026-09-13 - P0.10 consultation all-or-nothing
+
+The earlier claim that cross-record atomicity was unavailable was wrong: repository.append is atomic across its records (one D1 batch). New functions/_wardsynq/staged.js StagedRepository (unit of work over the port; reads overlay staged records; append holds; commit = one append). Port extended backward-compatibly: ctx.idempotency[] and ctx.audits[] (memory + D1). saveConsultation runs all writers against it and commits once; any failure or commit conflict = nothing written, no keys spent, no audit rows. Invariant tests added. Ward consultation screen now shows "not saved" for every failure (was blank for most). Live (ward.js site50).
+
+**Numbers:** 6069 passing, 0 failing. 14 routes waiting for a screen.
+**P0 remaining:** 14 small screens, live payment providers (need credentials), document storage settings (owner). User asked to move faster; P1 starts next, leftovers in parallel.
