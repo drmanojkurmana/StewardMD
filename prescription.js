@@ -58,31 +58,59 @@
     if (document.getElementById("rxCss")) return;
     var s = document.createElement("style"); s.id = "rxCss";
     s.textContent =
-      ".rx-scrim{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:16000;opacity:0;transition:.2s;pointer-events:none}.rx-scrim.on{opacity:1;pointer-events:auto}" +
-      ".rx-sheet{position:fixed;left:50%;top:50%;transform:translate(-50%,-48%);width:min(680px,94vw);max-height:92vh;overflow:auto;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:16px;z-index:16001;opacity:0;transition:.2s;pointer-events:none;box-shadow:0 20px 60px rgba(0,0,0,.3)}.rx-sheet.on{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}" +
-      ".rx-wrap{padding:18px 18px 22px;font:400 14px var(--hfont,system-ui)}" +
-      ".rx-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}.rx-title{font:800 18px var(--hfont,system-ui)}.rx-x{border:0;background:transparent;font-size:20px;cursor:pointer;color:var(--hmut,#64748b)}" +
-      ".rx-clinic{font:700 15px var(--hfont);color:var(--hink)}.rx-disc{font:500 11px var(--hfont);color:var(--hmut,#64748b);background:rgba(245,158,11,.1);border-radius:8px;padding:6px 9px;margin:8px 0}" +
-      ".rx-pt{display:flex;gap:8px;margin:8px 0}.rx-pt input{flex:1;min-width:0}" +
-      /* Fields were 7px-tall hairline boxes with no focus state - the sheet read as a grey stack and nothing told you where the caret was. Taller touch target, softer radius, and a real focus ring so the active field is unmistakable on a phone held one-handed at the bedside. */
-      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:10px 12px;font:400 13.5px var(--hfont);background:var(--hpanel,#fff);color:var(--hink);transition:border-color .15s,box-shadow .15s}" +
+      ".rx-scrim{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:16000;opacity:0;transition:opacity .25s ease;pointer-events:none}.rx-scrim.on{opacity:1;pointer-events:auto}" +
+      "html.rx-locked,body.rx-locked{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important}" +
+      ".rx-sheet{position:fixed;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);transition:transform .28s cubic-bezier(0.16,1,0.3,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;box-sizing:border-box}" +
+      "@media(max-width:640px){.rx-sheet{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100vw!important;max-width:100vw!important;height:94vh!important;max-height:94vh!important;border-radius:20px 20px 0 0!important;transform:translateY(100%);opacity:0;pointer-events:none;margin:0!important}.rx-sheet.on{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}}" +
+      "@media(min-width:641px){.rx-sheet{left:50%!important;top:50%!important;transform:translate(-50%,-46%)!important;width:min(700px,94vw)!important;height:88vh!important;max-height:88vh!important;border-radius:18px!important;opacity:0;pointer-events:none}.rx-sheet.on{transform:translate(-50%,-50%)!important;opacity:1!important;pointer-events:auto!important}}" +
+      ".rx-wrap{display:flex;flex-direction:column;height:100%;width:100%;min-height:0;overflow:hidden;box-sizing:border-box}" +
+      ".rx-head{flex:none;background:var(--hpanel,#fff);border-bottom:1px solid var(--hbd,#e2e8f0);padding:6px 12px 8px;display:flex;flex-direction:column;gap:4px;position:relative;z-index:2}" +
+      ".rx-handle-bar{width:36px;height:4px;background:#cbd5e1;border-radius:999px;margin:2px auto 6px}@media(min-width:641px){.rx-handle-bar{display:none}}" +
+      ".rx-head-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}" +
+      ".rx-head-title{flex:1;min-width:0;text-align:center}.rx-title-main{font-size:14.5px;font-weight:700;color:var(--hink,#0f172a);display:block;line-height:1.2}.rx-title-sub{font-size:11px;font-weight:500;color:var(--hmut,#64748b);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".rx-x{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:var(--hmut,#475569);flex:none;transition:all .15s ease}.rx-x:hover{background:#e2e8f0;color:#0f172a}" +
+      ".rx-top-export{border:0;background:#0e6e63;color:#fff;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;flex:none;transition:all .15s ease}.rx-top-export:hover{background:#0b584f}" +
+      ".rx-scroll-body{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden!important;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding:12px 14px 24px;box-sizing:border-box}" +
+      ".rx-disc{font:500 11px/1.4 var(--hfont,system-ui);color:#92400e;background:#fffbeb;border:1px solid #fef3c7;border-radius:10px;padding:8px 12px;margin-bottom:12px;box-sizing:border-box}" +
+      ".rx-pt-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:12px;box-sizing:border-box}" +
+      ".rx-pt-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:8px}" +
+      ".rx-pt-row{margin-bottom:7px;width:100%;box-sizing:border-box}.rx-pt-row:last-child{margin-bottom:0}" +
+      ".rx-pt-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:6px;width:100%;box-sizing:border-box}.rx-pt-grid input{min-width:0;width:100%;box-sizing:border-box}" +
+      ".rx-in{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:8.5px 11px;font:400 13px var(--hfont,system-ui);background:var(--hpanel,#fff);color:var(--hink,#0f172a);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%}" +
       ".rx-in::placeholder{color:var(--hmut,#94a3b8)}" +
       ".rx-in:focus{outline:none;border-color:var(--teal,#0e6e63);box-shadow:0 0 0 3px color-mix(in srgb, var(--teal,#0e6e63) 18%, transparent)}" +
-      ".rx-symbol{font:800 22px var(--hfont);margin:6px 0 2px}" +
-      ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:9px;margin:8px 0}.rx-line.unv{border-color:#f59e0b;background:rgba(245,158,11,.06)}.rx-line.adv{background:rgba(100,116,139,.06)}" +
-      ".rx-line .r1{display:flex;gap:6px;flex-wrap:wrap}.rx-line .r1 input{}.rx-drug{flex:2 1 160px}.rx-brand{flex:1 1 110px}.rx-line .r2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.rx-dose{flex:2 1 160px}.rx-freq{flex:1 1 90px}.rx-dur{flex:1 1 90px}" +
-      ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:5px}.rx-del{border:0;background:transparent;color:#ef4444;cursor:pointer;font-size:16px;align-self:center}" +
+      ".rx-sec-head{display:flex;align-items:center;gap:8px;margin:14px 0 8px}.rx-symbol{font:800 22px var(--hfont,system-ui);color:#0e6e63;line-height:1}.rx-sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b}" +
+      ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px 11px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:border-color .15s,box-shadow .15s;box-sizing:border-box;width:100%}" +
+      ".rx-line:focus-within{border-color:#cbd5e1;box-shadow:0 3px 10px rgba(0,0,0,.05)}.rx-line.unv{border-color:#f59e0b;background:#fffdfa}.rx-line.adv{background:#f8fafc}" +
+      ".rx-line .r1{display:flex;gap:6px;align-items:center;width:100%;box-sizing:border-box}.rx-line .r1 .rx-drug{flex:1.6 1 140px;min-width:0;font-weight:600}.rx-line .r1 .rx-brand{flex:1.4 1 120px;min-width:0}" +
+      ".rx-line .r2{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;margin-top:8px;width:100%;box-sizing:border-box}.rx-line .r2 input{min-width:0;width:100%;box-sizing:border-box}" +
+      "@media(max-width:500px){.rx-line .r1{display:grid;grid-template-columns:1fr auto;gap:6px}.rx-line .r1 .rx-drug{grid-column:1}.rx-line .r1 .rx-del{grid-column:2;grid-row:1}.rx-line .r1 .rx-brand{grid-column:1/span 2;grid-row:2}}" +
+      ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:6px}.rx-del{border:0;background:#fee2e2;color:#ef4444;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;transition:all .15s ease}.rx-del:hover{background:#fecaca;color:#dc2626}" +
       ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
       ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
       ".rx-ac-g{font-weight:800}.rx-ac-b{color:var(--teal,#0e6e63);font-weight:600}.rx-ac-d{display:block;color:var(--hmut,#64748b);font-size:11.5px;margin-top:2px}.rx-ac-empty{padding:8px 10px;color:var(--hmut,#64748b);font:500 12px var(--hfont)}" +
-      ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:var(--teal,#0e6e63);color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
+      ".rx-tpl-card{margin:12px 0 6px;padding:9px 11px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;box-sizing:border-box}" +
+      ".rx-tpl-row{display:flex;gap:8px;align-items:center;width:100%;box-sizing:border-box}" +
+      ".rx-tpl-sel{flex:1;min-width:0;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:12px;background:#fff;color:#0f172a}" +
+      ".rx-tpl-btn{flex:none;white-space:nowrap;padding:7px 11px;font-size:11.5px;font-weight:600;border-radius:8px;background:#fff;border:1px solid #cbd5e1;color:#334155;cursor:pointer}.rx-tpl-btn:hover{background:#f1f5f9}" +
+      ".rx-sign-bar{margin-top:14px;border-top:1px dashed #e2e8f0;padding-top:10px;display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:#64748b}.rx-sign-dr{font-weight:600;color:#0f172a}.rx-sign-meta{font-size:11px}" +
+      ".rx-dock{flex:none;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 10px;padding-bottom:max(12px,env(safe-area-inset-bottom,12px));background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--hbd,#e2e8f0);box-sizing:border-box;width:100%;position:relative;z-index:2}" +
+      ".rx-dock-quick{display:flex;align-items:center;gap:4.5px;flex:1 1 auto;min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rx-dock-quick::-webkit-scrollbar{display:none}" +
+      ".rx-btn{border:0;border-radius:999px;padding:6px 9px;font:650 11.5px var(--hfont,system-ui);cursor:pointer;transition:all .15s ease;white-space:nowrap;display:inline-flex;align-items:center;gap:3.5px;flex:none}" +
+      ".rx-add{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}.rx-add:hover{background:#e2e8f0}" +
+      ".rx-mic{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}.rx-mic:hover{background:#e2e8f0}" +
+      ".rx-rxc{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}.rx-rxc:hover{background:#bae6fd}" +
+      ".rx-hero-export,.rx-print{background:var(--teal,#0e6e63)!important;color:#fff!important;font-size:11.5px!important;font-weight:700!important;padding:7px 11px!important;box-shadow:0 2px 8px rgba(14,110,99,.28)!important;flex:none;border-radius:999px}.rx-hero-export:hover{background:#0b584f!important}" +
+      ".rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:15px;height:15px}.rx-print .rx-ico{margin-right:4px}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
-      ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:6px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
+      ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:8px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
       ".rx-clinic-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}.rx-clinic-form .rx-in{width:100%}.rx-logo-row{display:flex;align-items:center;gap:8px}.rx-logo-prev{width:54px;height:54px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 10px var(--hfont);color:var(--hmut);overflow:hidden;flex:none}.rx-logo-prev img{width:100%;height:100%;object-fit:contain}" +
-      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.42);display:flex;align-items:flex-end;justify-content:center;z-index:6;border-radius:16px}.rx-bp{background:var(--hpanel,#fff);width:100%;max-height:82%;overflow:auto;border-radius:16px 16px 0 0;padding:14px}.rx-exp,.rx-sign-sheet{border-radius:16px}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:transparent;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
+      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.48);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;z-index:10;border-radius:16px;box-sizing:border-box}@media(max-width:640px){.rx-bp-ov{border-radius:20px 20px 0 0}}" +
+      ".rx-bp{background:var(--hpanel,#fff);width:100%;max-height:85%;overflow-y:auto;overflow-x:hidden;border-radius:18px 18px 0 0;padding:16px 18px 24px;box-sizing:border-box;box-shadow:0 -8px 30px rgba(0,0,0,.16)}" +
+      ".rx-exp,.rx-sign-sheet{border-radius:18px 18px 0 0}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:#f1f5f9;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
       ".rx-bp-it{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:9px 4px;cursor:pointer}.rx-bp-nm{font:700 13.5px var(--hfont);color:var(--hink);flex:1 1 44%}.rx-bp-nm em{color:#ef4444;font-weight:600;font-style:normal;font-size:11px}.rx-bp-mf{font:500 11px var(--hfont);color:var(--hmut);flex:1 1 40%}.rx-bp-pr{font:800 13px var(--hfont);color:var(--teal,#0e6e63)}" +
-      ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
+      ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0;box-sizing:border-box}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
       ".rx-doc{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f172a;background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}" +
       ".rxdoc-in{padding:30px 42px;box-sizing:border-box}" +
@@ -194,8 +222,19 @@
   var scrim, sheet;
   function ensureEls() {
     injectCSS();
-    if (!scrim) { scrim = document.createElement("div"); scrim.className = "rx-scrim"; scrim.id = "rxScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", close); }
-    if (!sheet) { sheet = document.createElement("div"); sheet.className = "rx-sheet"; sheet.id = "rxSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Prescription"); document.body.appendChild(sheet); }
+    if (!scrim) {
+      scrim = document.createElement("div"); scrim.className = "rx-scrim"; scrim.id = "rxScrim"; document.body.appendChild(scrim);
+      scrim.addEventListener("click", function() {
+        var d = collectRx();
+        if (d && (d.name || d.dx || (d.lines && d.lines.length > 1) || (d.lines && d.lines[0] && d.lines[0].drug))) {
+          if (!window.confirm("Discard draft prescription?")) return;
+        }
+        close();
+      });
+    }
+    if (!sheet) {
+      sheet = document.createElement("div"); sheet.className = "rx-sheet"; sheet.id = "rxSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Prescription"); document.body.appendChild(sheet);
+    }
   }
   /* Every field on this sheet is placeholder-only - no <label>, no aria-label. A placeholder
    * disappears the moment you type, so once the pad is half filled the doctor is looking at
@@ -219,8 +258,13 @@
     sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>';
     rxLabelInputs();
     scrim.classList.add("on"); sheet.classList.add("on");
+    try { document.documentElement.classList.add("rx-locked"); document.body.classList.add("rx-locked"); } catch (e) {}
   }
-  function close() { if (sheet) sheet.classList.remove("on"); if (scrim) scrim.classList.remove("on"); }
+  function close() {
+    if (sheet) sheet.classList.remove("on");
+    if (scrim) scrim.classList.remove("on");
+    try { document.documentElement.classList.remove("rx-locked"); document.body.classList.remove("rx-locked"); } catch (e) {}
+  }
 
   // ---- WebView-safe Print / PDF ----------------------------------------------------------------
   // window.print() is a no-op in the native WKWebView, so we build a self-contained branded Rx
@@ -1341,22 +1385,72 @@
     for (var _li = 0; _li < lines.length; _li++) if (lines[_li] && !lines[_li].isAdvice) { _hasDrugRow = true; break; }
     if (!_hasDrugRow) lines = lines.concat([{ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }]);
     var body =
-      '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
-      '<div class="rx-clinic-slot" id="rxClinicSlot">' + clinicSummaryHTML() + '</div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxPtName" placeholder="Patient name (optional, not saved)"><input class="rx-in" id="rxPtAge" placeholder="Age/Sex" style="flex:0 0 110px"></div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxDx" placeholder="Diagnosis" value="' + esc(topic || "") + '" style="flex:1"></div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxCc" placeholder="Complaints (optional)"><input class="rx-in" id="rxVitals" placeholder="Vitals — BP/HR/T/SpO₂ (optional)"></div>' +
-      '<div class="rx-pt"><input class="rx-in" id="rxAllergies" placeholder="Known allergies (optional) — checked against each drug" style="flex:1"></div>' +
-      '<div class="rx-symbol">℞</div>' +
-      '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
-      '<div class="rx-safety" id="rxSafety"></div>' +
-      '<div style="display:flex;gap:8px;margin:6px 0 2px"><select id="rxTpl" style="flex:1;padding:9px 10px;border:1px solid #d7dee3;border-radius:9px;font-size:13px;background:#fff;color:#14202b">' + tplOptions() + '</select><button class="rx-btn" id="rxTplSave" style="width:auto;margin:0;white-space:nowrap;padding:9px 12px;font-size:13px">Save set</button></div>' +
-      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn" id="rxMic" title="Dictate a drug, e.g. amox 500 TDS 5 days">'+rxIco("mic")+' Dictate</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button>' +
-      (rxcOn() ? '<button class="rx-btn" id="rxcOpen" style="background:rgba(14,110,99,.12);color:var(--teal,#0e6e63)" title="Same prescription, smarter price">RxChoice™</button>' : "") + '</div>' +
-      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<div class="rx-head-title">' +
+            '<span class="rx-title-main">Prescription</span>' +
+            '<span class="rx-title-sub">Dr. ' + esc(docName() || "—") + '</span>' +
+          '</div>' +
+          '<button class="rx-top-export rx-print" id="rxTopExport" title="Export prescription">' + rxIco("print") + ' Export</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body" id="rxScrollBody">' +
+        '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
+        '<div class="rx-clinic-slot" id="rxClinicSlot">' + clinicSummaryHTML() + '</div>' +
+        '<div class="rx-pt-card">' +
+          '<div class="rx-pt-card-title">Patient &amp; Clinical Summary</div>' +
+          '<div class="rx-pt-row rx-pt-grid">' +
+            '<input class="rx-in" id="rxPtName" placeholder="Patient name" aria-label="Patient name">' +
+            '<input class="rx-in" id="rxPtAge" placeholder="Age / Sex" aria-label="Age or Sex">' +
+          '</div>' +
+          '<div class="rx-pt-row">' +
+            '<input class="rx-in" id="rxDx" placeholder="Diagnosis (e.g. CAP, HTN)" value="' + esc(topic || "") + '" aria-label="Diagnosis">' +
+          '</div>' +
+          '<div class="rx-pt-row rx-pt-grid">' +
+            '<input class="rx-in" id="rxCc" placeholder="Chief complaints" aria-label="Complaints">' +
+            '<input class="rx-in" id="rxVitals" placeholder="Vitals (BP, HR, SpO₂)" aria-label="Vitals">' +
+          '</div>' +
+          '<div class="rx-pt-row">' +
+            '<input class="rx-in" id="rxAllergies" placeholder="Known drug allergies (optional)" aria-label="Known allergies">' +
+          '</div>' +
+        '</div>' +
+        '<div class="rx-sec-head">' +
+          '<span class="rx-symbol">℞</span>' +
+          '<span class="rx-sec-title">Prescribed Medications</span>' +
+        '</div>' +
+        '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
+        '<div class="rx-safety" id="rxSafety"></div>' +
+        '<div class="rx-tpl-card">' +
+          '<div class="rx-tpl-row">' +
+            '<select id="rxTpl" class="rx-tpl-sel">' + tplOptions() + '</select>' +
+            '<button class="rx-btn rx-tpl-btn" id="rxTplSave">+ Save as template</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="rx-sign-bar">' +
+          '<div class="rx-sign-dr">Dr. ' + esc(docName() || "—") + '</div>' +
+          '<div class="rx-sign-meta">Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-dock" id="rxDock">' +
+        '<div class="rx-dock-quick">' +
+          '<button class="rx-btn rx-add" id="rxAdd">+ Drug</button>' +
+          '<button class="rx-btn rx-mic" id="rxMic" title="Dictate a drug">' + rxIco("mic") + ' Dictate</button>' +
+          (rxcOn() ? '<button class="rx-btn rx-rxc" id="rxcOpen" title="Same prescription, smarter price">RxChoice™</button>' : "") +
+        '</div>' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxExport">' + rxIco("print") + ' Save &amp; Export</button>' +
+      '</div>';
     show(body);
-    sheet.querySelector("#rxX").addEventListener("click", close);
+    sheet.querySelector("#rxX").addEventListener("click", function () {
+      var d = collectRx();
+      if (d && (d.name || d.dx || (d.lines && d.lines.length > 1) || (d.lines && d.lines[0] && d.lines[0].drug))) {
+        if (!window.confirm("Discard draft prescription?")) return;
+      }
+      close();
+    });
+    var _topExp = sheet.querySelector("#rxTopExport");
+    if (_topExp) _topExp.addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
     function wireClinic() { var a = sheet.querySelector("#rxClinicAdd"); if (a) a.onclick = function () { openClinicEditor(refreshClinic); }; var e = sheet.querySelector("#rxClinicEdit"); if (e) e.onclick = function () { openClinicEditor(refreshClinic); }; }
     function refreshClinic() { var s = sheet.querySelector("#rxClinicSlot"); if (s) { s.innerHTML = clinicSummaryHTML(); wireClinic(); } }
     wireClinic();
@@ -1382,24 +1476,13 @@
     var _tplS = sheet.querySelector("#rxTplSave"); if (_tplS) _tplS.onclick = function () {
       var ls = (collectRx().lines || []).filter(function (l) { return !l.advice && l.drug; });
       if (!ls.length) { try { window.toast && window.toast("Add drugs first"); } catch (e) {} return; }
-      var nm = ""; try { nm = (window.prompt("Name this Rx set (e.g. URI, UTI, HTN):") || "").trim(); } catch (e) {}
+      var nm = ""; try { nm = (window.prompt("Name this Rx template set (e.g. URI, UTI, HTN):") || "").trim(); } catch (e) {}
       if (!nm) return;
       var a = rxTemplates(); a.push({ name: nm, lines: ls.map(function (l) { return { drug: l.drug, brand: l.brand, dose: l.dose, freq: l.freq, duration: l.duration }; }) }); saveRxTemplates(a);
-      try { window.toast && window.toast("Saved Rx set: " + nm); } catch (e) {}
+      try { window.toast && window.toast("Saved Rx template: " + nm); } catch (e) {}
       var s = sheet.querySelector("#rxTpl"); if (s) s.innerHTML = tplOptions();
     };
     // Voice-to-Rx: dictate a drug line ("amox 500 TDS 5 days"), parse it, add the row.
-    /* Dictate opens the SHARED dictation sheet (SMD_VOICE.openDialog) - the same one ICU, MaiK and
-     * ThoreX already use. The old path called SMD_VOICE.listen() directly and reported progress by
-     * writing to the button's `title`: a hover tooltip, invisible on a phone. `.rx-btn.on` had no CSS
-     * rule at all, so the "on" class did nothing either. A doctor tapping Dictate therefore saw
-     * NOTHING - no listening state, no transcript, no error. It could not have worked as written:
-     * on native the clinical Whisper engine never fires onPartial (WhisperEngine.swift declares the
-     * callback and never calls it), so the "live feedback" line was dead code.
-     *
-     * The shared sheet brings the recording animation, the elapsed timer and the model/permission
-     * error copy, and - the part that matters most for a PRESCRIPTION - it shows the transcript and
-     * lets the doctor CORRECT it before it is parsed into a drug row. */
     var _mic = sheet.querySelector("#rxMic");
     if (_mic) _mic.onclick = function () {
       var V = window.SMD_VOICE;
@@ -1409,7 +1492,6 @@
         onText: function (txt) {
           var p = parseVoiceRx(txt);
           if (p && p.drug) { applyTemplate([p]); rxSay("Added: " + p.drug); return; }
-          // Silence here was indistinguishable from a broken button. Say what was heard.
           var heard = String(txt || "").trim();
           rxSay(heard ? ('Could not read a drug from "' + heard.slice(0, 40) + '"') : "Nothing was heard - try again.");
         }
@@ -1419,10 +1501,23 @@
   }
 
   function gate() {
-    show('<div class="rx-head"><div class="rx-title">Prescriber details</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-gate">Enter your <b>NMC registration number</b> to create prescriptions. It is stored on this device and printed on your prescriptions.' +
-      '<input class="rx-in" id="rxNmc" placeholder="NMC registration number" inputmode="numeric"></div>' +
-      '<div class="rx-row"><button class="rx-btn rx-print" id="rxSaveNmc">Save & continue</button></div>');
+    show(
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<div class="rx-head-title"><span class="rx-title-main">Prescriber Details</span></div>' +
+          '<div style="width:32px"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body">' +
+        '<div class="rx-gate">Enter your <b>NMC registration number</b> to create prescriptions. It is stored on this device and printed on your prescriptions.' +
+        '<input class="rx-in" id="rxNmc" placeholder="NMC registration number" inputmode="numeric" style="margin-top:12px"></div>' +
+      '</div>' +
+      '<div class="rx-dock">' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxSaveNmc" style="width:100%;justify-content:center">Save &amp; continue</button>' +
+      '</div>'
+    );
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxSaveNmc").addEventListener("click", function () {
       var v = (sheet.querySelector("#rxNmc").value || "").trim();
@@ -1433,9 +1528,22 @@
 
   // Verified-doctors-only prompt (shown when the gate is present but the user isn't verified).
   function verifyRequired() {
-    show('<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
-      '<div class="rx-row"><button class="rx-btn rx-print" id="rxVerify">Verify my registration</button></div>');
+    show(
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<div class="rx-head-title"><span class="rx-title-main">Doctor Verification</span></div>' +
+          '<div style="width:32px"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body">' +
+        '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
+      '</div>' +
+      '<div class="rx-dock">' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxVerify" style="width:100%;justify-content:center">Verify my registration</button>' +
+      '</div>'
+    );
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxVerify").addEventListener("click", function () { close(); try { window.SMD_VERIFY.openPanel(); } catch (e) {} });
   }
@@ -1520,7 +1628,16 @@
   function openSignPad(onDone){
     var saved=getSign();
     var ov=document.createElement("div"); ov.className="rx-bp-ov";
-    ov.innerHTML='<div class="rx-bp rx-sign-sheet"><div class="rx-bp-h"><b>Sign the prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div><div class="rx-bp-sub">Sign with your finger, or upload your signature image.</div><canvas class="rx-sign-cv" width="600" height="200"></canvas><label class="rx-sign-reuse"><input type="checkbox" id="rxSignSave" '+(saved?'checked':'')+'> Save &amp; reuse on this device</label><div class="rx-row"><button class="rx-btn rx-add" id="rxSignClear">Clear</button><label class="rx-btn rx-add" style="cursor:pointer">Upload<input type="file" id="rxSignUp" accept="image/*" style="display:none"></label><button class="rx-btn rx-print" id="rxSignUse">Use signature →</button></div></div>';
+    ov.innerHTML='<div class="rx-bp rx-sign-sheet">' +
+      '<div class="rx-bp-h"><div><b>Doctor Signature</b><div style="font-size:11px;color:#64748b;font-weight:normal;margin-top:2px">Sign with your finger or upload an image</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
+      '<div style="font-size:12px;color:#475569;margin:8px 0 4px">Draw signature in the box below:</div>' +
+      '<canvas class="rx-sign-cv" width="600" height="200"></canvas>' +
+      '<label class="rx-sign-reuse" style="margin:8px 0 12px;cursor:pointer"><input type="checkbox" id="rxSignSave" '+(saved?'checked':'')+' style="width:16px;height:16px;accent-color:#0e6e63"><span>Save &amp; reuse signature on this device</span></label>' +
+      '<div style="display:flex;gap:8px;align-items:center">' +
+        '<button class="rx-btn rx-add" id="rxSignClear" style="flex:1;justify-content:center">Clear</button>' +
+        '<label class="rx-btn rx-add" style="flex:1;justify-content:center;cursor:pointer">Upload<input type="file" id="rxSignUp" accept="image/*" style="display:none"></label>' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxSignUse" style="flex:1.5;justify-content:center">Use signature →</button>' +
+      '</div></div>';
     sheet.appendChild(ov);
     var cv=ov.querySelector(".rx-sign-cv"), ctx=cv.getContext("2d"); ctx.lineWidth=2.4; ctx.lineCap="round"; ctx.strokeStyle="#0f172a";
     var upImg="", drew=false, drawing=false, px=0, py=0;
@@ -1680,18 +1797,43 @@
     function chooser(sig){
       var hasRxChoice = !!(sheet && sheet._rxChoice && sheet._rxChoice._allResults && sheet._rxChoice._allResults.length);
       var ov=document.createElement("div"); ov.className="rx-bp-ov";
-      ov.innerHTML='<div class="rx-bp rx-exp"><div class="rx-bp-h"><b>Export prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div>' +
-        '<div style="margin:12px 0 10px;text-align:center"><label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a)"><input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + '><span>Include RxChoice™ cost options</span></label></div>' +
-        '<div class="rx-row" style="justify-content:center;margin-top:6px"><button class="rx-btn rx-print" id="rxExpPdf">'+rxIco("print")+' Save as PDF</button><button class="rx-btn rx-add" id="rxExpJpg">Save as JPEG</button></div></div>';
+      ov.innerHTML='<div class="rx-bp rx-exp">' +
+        '<div class="rx-bp-h"><div><b>Export Prescription</b><div style="font-size:11px;color:#64748b;font-weight:normal;margin-top:2px">Digitally signed &amp; verified document</div></div><button class="rx-bp-x" aria-label="Close">'+rxIco("close")+'</button></div>' +
+        '<div style="margin:14px 0 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px">' +
+          '<label class="rx-sign-reuse" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--hink,#0f172a);margin:0">' +
+            '<input type="checkbox" id="rxExpChoice"' + (hasRxChoice ? ' checked' : ' disabled') + ' style="width:16px;height:16px;accent-color:#0e6e63">' +
+            '<span>Include RxChoice™ 4-way cost options</span>' +
+          '</label>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">' +
+          '<button class="rx-btn rx-print rx-hero-export" id="rxExpPdf" style="width:100%;padding:12px 16px;font-size:14px;justify-content:center;gap:8px">' +
+            rxIco("print") + '<span>Save as PDF (Recommended)</span>' +
+          '</button>' +
+          '<button class="rx-btn rx-add" id="rxExpJpg" style="width:100%;padding:10px 16px;font-size:13px;justify-content:center;gap:8px">' +
+            '<span>Save as JPEG image</span>' +
+          '</button>' +
+        '</div>' +
+        '<div id="rxExpStatus" style="font-size:11.5px;color:#0e6e63;text-align:center;margin-top:10px;display:none;font-weight:600"></div>' +
+      '</div>';
       sheet.appendChild(ov);
       ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
       ov.querySelector("#rxExpPdf").addEventListener("click", function(){
         var inc = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
-        ov.remove(); exportRx("pdf",topic,regNo,sig,{includeRxChoice:inc});
+        var btn = this; btn.disabled = true; btn.style.opacity = "0.7";
+        rxToast("Generating prescription PDF…");
+        setTimeout(function(){
+          ov.remove();
+          exportRx("pdf", topic, regNo, sig, { includeRxChoice: inc });
+        }, 150);
       });
       ov.querySelector("#rxExpJpg").addEventListener("click", function(){
         var inc = ov.querySelector("#rxExpChoice") ? ov.querySelector("#rxExpChoice").checked : false;
-        ov.remove(); exportRx("jpeg",topic,regNo,sig,{includeRxChoice:inc});
+        var btn = this; btn.disabled = true; btn.style.opacity = "0.7";
+        rxToast("Generating prescription JPEG…");
+        setTimeout(function(){
+          ov.remove();
+          exportRx("jpeg", topic, regNo, sig, { includeRxChoice: inc });
+        }, 150);
       });
     }
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
