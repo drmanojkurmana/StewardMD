@@ -105,6 +105,25 @@ test("score: a name-only candidate can never reach the auto band", () => {
   );
 });
 
+test("score: a transliterated name that sounds the same agrees; a coarse sound-alike does not", () => {
+  const nameOf = (a, b) => scoreMatch({ name: a }, aPatient({ name: b })).breakdown.find((f) => f.field === "name");
+  for (const [a, b] of [["Mohammed Rafi", "Muhammad Rafi"], ["Lakshmi", "Laxmi"], ["Sita Devi", "Seetha Devi"]]) {
+    const f = nameOf(a, b);
+    assert.equal(f.agreed, true, a + " / " + b + " is one person written two ways");
+    assert.match(f.detail, /sounds alike/);
+  }
+  // Both R100 in Soundex, but nothing alike on the page: the spelling floor refuses it.
+  assert.equal(nameOf("Ravi", "Rupa").agreed, false);
+  // Close spelling, different sound: two different people.
+  assert.equal(nameOf("Ramesh Kumar", "Rakesh Kumar").agreed, false);
+  // A word missing is not "sounds alike".
+  assert.equal(nameOf("Sita", "Seetha Devi").agreed, false);
+  // Exact spelling agreement is unchanged and not labelled phonetic.
+  assert.doesNotMatch(nameOf("Anita Rao", "Anita Rao").detail, /sounds alike/);
+  // And a phonetic name still cannot auto-link on its own.
+  assert.notEqual(scoreMatch({ name: "Muhammad Rafi" }, aPatient({ name: "Mohammed Rafi" })).band, "auto");
+});
+
 test("score: a missing field is not a disagreement", () => {
   const existing = aPatient();
   const noDob = scoreMatch({ name: "Anita Rao", sex: "female" }, existing);

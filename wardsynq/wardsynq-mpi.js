@@ -280,7 +280,19 @@ const DEFAULT_THRESHOLDS = {
   review: 0.13,
   // Jaro-Winkler at or above this counts as name agreement rather than name disagreement.
   nameAgreement: 0.9,
+  // Below nameAgreement, a name still agrees when every word sounds alike (per-word Soundex) AND the
+  // spelling is at least this close. Transliteration is where Indian registries split one person
+  // in two: Mohammed/Muhammad (0.85), Lakshmi/Laxmi (0.83), Sita/Seetha (0.79). Soundex alone is too
+  // coarse to trust - Ravi and Rupa are both R100 - so the spelling floor keeps it from pairing them.
+  phoneticFloor: 0.75,
 };
+
+/** PURE. Same number of words, and each word codes to the same Soundex, in order. */
+function soundsAlike(aName, bName) {
+  const a = aName.split(" "), b = bName.split(" ");
+  if (a.length !== b.length) return false;
+  return a.every((t, i) => { const s = soundex(t); return s !== "" && s === soundex(b[i]); });
+}
 
 /** Denominator for the score: the total weight on offer if every field agreed. Identifiers count
  * once here even though several systems can each contribute, which is why the raw total is clamped
@@ -365,14 +377,17 @@ function scoreMatch(candidate, existing, config) {
   const bName = normalizeName(b.name);
   if (aName && bName) {
     const similarity = jaroWinkler(aName, bName);
-    const agreed = similarity >= thresholds.nameAgreement;
+    const spelled = similarity >= thresholds.nameAgreement;
+    const floor = thresholds.phoneticFloor ?? DEFAULT_THRESHOLDS.phoneticFloor;
+    const phonetic = !spelled && similarity >= floor && soundsAlike(aName, bName);
+    const agreed = spelled || phonetic;
     // Graded both ways: a near miss is worth almost the full weight, and a total mismatch costs the
     // full penalty, with everything in between scaled instead of falling off a cliff at the
     // threshold.
     const contribution = agreed
       ? weights.name.agree * similarity
       : -weights.name.disagree * (1 - similarity);
-    record("name", agreed, contribution, `name Jaro-Winkler ${similarity.toFixed(2)}`);
+    record("name", agreed, contribution, `name Jaro-Winkler ${similarity.toFixed(2)}${phonetic ? ", sounds alike" : ""}`);
   }
 
   const aDob = dobOf(a);
