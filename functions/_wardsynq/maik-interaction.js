@@ -97,12 +97,43 @@ const INSTRUCTIONS = Object.freeze({
   [TASK.EXTRACT]: "Extract the requested structured fields from the record below. Return only fields the record actually contains; omit anything absent rather than guessing.",
 });
 
+/* P2.2 COPILOT TASKS. Each is one of the gateway's own tasks (so routing and PHI approval are unchanged)
+ * with a fixed instruction. None writes anything on acceptance: only DRAFT_NOTE does, and these are not it.
+ * The deterministic findings (surveillance signals, abnormal labs) are computed by the server BEFORE the
+ * model is asked and handed in as facts; the model explains them and may not re-decide them. */
+const FACTS_RULE = "Below, before the record, are FINDINGS COMPUTED BY WARDSYNQ'S OWN DETERMINISTIC RULES, each naming its rule and the record ids it rests on. They are facts from the record, not yours to re-decide, soften or add to. Cite the record id when you rely on one. If they say a rule could not be evaluated, say that it was not evaluated; never treat it as normal.";
+const COPILOT = Object.freeze({
+  "admission-summary": { task: TASK.SUMMARISE, label: "Summarise this admission", instruction: "Summarise this admission for a clinician taking over: why the patient is here, what has been done, what is outstanding. Use ONLY the record and the computed findings." },
+  "explain-deterioration": { task: TASK.EXPLAIN, label: "Explain deterioration", instruction: "Explain, from the computed findings and the observations in the record, what has changed in this patient's condition and over what period. Do not diagnose the cause and do not recommend treatment." },
+  "unresolved-issues": { task: TASK.SUMMARISE, label: "Identify unresolved issues", instruction: "List what is unresolved on this record: active signals not acknowledged, results or loops not closed, doses not resolved, problems not confirmed. Only items the record or the computed findings show." },
+  "prepare-rounds": { task: TASK.SUMMARISE, label: "Prepare rounds", instruction: "Prepare a brief ward-round summary: problems, current medicines, latest observations and results, and the computed findings. No plan that is not already written down." },
+  "overnight-events": { task: TASK.SUMMARISE, label: "Summarise overnight events", instruction: "Summarise what the record shows happened in the last 12 hours: observations, results, doses, notes and the computed findings, in time order. Say plainly if the record shows nothing for that period." },
+  "explain-labs": { task: TASK.EXPLAIN, label: "Explain abnormal labs", instruction: "Explain in plain language which results are outside the reference range recorded on them and how they have moved, using the computed findings. Do not diagnose and do not recommend treatment." },
+  "medication-risks": { task: TASK.EXPLAIN, label: "Identify medication risks", instruction: "Set out the medication-related findings the system has computed (overdue high-alert doses, unverified orders) and what the record shows about the medicines involved. The safety engine and the prescriber decide safety; you do not." },
+  "referral-summary": { task: TASK.SUMMARISE, label: "Prepare referral summary", instruction: "Prepare a referral summary for a receiving team: clinical background, active problems, medicines, allergies, relevant results and the computed findings. Only what the record supports." },
+});
+
+/** PURE. The findings as the model sees them: rule, summary and record ids. */
+function factsText(facts) {
+  if (!facts) return "COMPUTED FINDINGS: none were supplied.";
+  if (facts.unavailable) return "COMPUTED FINDINGS COULD NOT BE PRODUCED (" + facts.unavailable + "). Say so; do not treat their absence as normal.";
+  const lines = (facts.signals || []).map((x) => "- [" + x.ruleId + "] " + x.summary + " (rule: " + x.source + "; records: " + ((x.evidence || []).filter((e) => e.id).map((e) => e.resourceType + "/" + e.id).join(", ") || "none") + ")");
+  const labs = (facts.abnormalLabs || []).map((l) => "- " + (l.display || l.code) + " " + l.value + (l.unit ? " " + l.unit : "") + " at " + l.at + ", " + l.direction + " the recorded range (Observation/" + l.id + ")");
+  const ne = (facts.notEvaluated || []).map((n) => "- " + n.ruleId + ": not evaluated, " + n.reason);
+  return ["COMPUTED FINDINGS (active signals):", ...(lines.length ? lines : ["- no rule is currently true"]),
+    "RESULTS OUTSIDE THEIR RECORDED RANGE (latest per analyte):", ...(labs.length ? labs : ["- none"]),
+    "RULES NOT EVALUATED:", ...(ne.length ? ne : ["- none"])].join("\n");
+}
+
 function MaiKInteraction(input) {
   const i = input || {};
   return {
     resourceType: TYPE, id: i.id,
     patientId: i.patientId, encounterId: i.encounterId || null,
     task: i.task,
+    /* P2.2: the deterministic findings handed to the model, with their record ids. Shown to the clinician
+     * apart from the model's words, so "what the record says" and "what MaiK made of it" never blur. */
+    facts: i.facts || null,
     /* Who asked, and which AI actor would write anything that comes of it. Two different identities
      * on purpose: the clinician is responsible for asking, the AI is the author of the answer. */
     requestedBy: i.requestedBy, requestedAt: i.requestedAt,
@@ -207,7 +238,8 @@ async function askAboutPatient(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off" };
 
   const task = str(ctx.task) || TASK.SUMMARISE;
-  if (!INSTRUCTIONS[task]) return { ...base, ok: false, status: 422, error: "unknown_task", detail: `"${task}" is not a MaiK task this ward performs` };
+  const copilot = COPILOT[task] || null;
+  if (!INSTRUCTIONS[task] && !copilot) return { ...base, ok: false, status: 422, error: "unknown_task", detail: `"${task}" is not a MaiK task this ward performs` };
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "a MaiK request is always about one identified patient" };
 
@@ -244,11 +276,13 @@ async function askAboutPatient(request, env, ctx) {
 
   /* The role boundary leads, because the instruction a model reads first is the one it is most likely
    * to still be holding when it reaches the clinician's question at the end. */
-  const instruction = `${ROLE_BOUNDARY}\n\n${INSTRUCTIONS[task]}`;
+  const instruction = copilot
+    ? `${ROLE_BOUNDARY}\n\n${copilot.instruction}\n\n${FACTS_RULE}\n\n${factsText(ctx.facts)}`
+    : `${ROLE_BOUNDARY}\n\n${INSTRUCTIONS[task]}`;
   const built = await promptFor(context, `${instruction}${str(ctx.question) ? `\n\nThe clinician asks: ${str(ctx.question)}` : ""}`, { signingKey });
 
   const answer = await invoke({
-    task, phi: true, context: { ...context, content: built.prompt },
+    task: copilot ? copilot.task : task, phi: true, context: { ...context, content: built.prompt },
     system: null, prompt: built.prompt,
     config: ctx.config, env, providers: ctx.providers, fetchImpl: ctx.fetchImpl,
   });
@@ -276,6 +310,7 @@ async function askAboutPatient(request, env, ctx) {
 
   const record = MaiKInteraction({
     id, patientId, encounterId: encounterId || null, task,
+    facts: copilot ? (ctx.facts || { unavailable: "no findings were supplied" }) : null,
     requestedBy: resolved.actor.id, requestedAt: at,
     sessionRef: (resolved.identity && resolved.identity.sessionRef) || null,
     correlationId: str(ctx.correlationId) || id,
@@ -410,4 +445,4 @@ async function listInteractions(request, env, ctx) {
   return { ...base, ok: true, interactions, counts };
 }
 
-export { TYPE, REVIEW, INSTRUCTIONS, ROLE_BOUNDARY, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };
+export { COPILOT, factsText, TYPE, REVIEW, INSTRUCTIONS, ROLE_BOUNDARY, MaiKInteraction, idFor, askAboutPatient, reviewInteraction, listInteractions };

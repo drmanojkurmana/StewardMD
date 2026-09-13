@@ -172,7 +172,8 @@ import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-proto
 import { imagingWorklist } from "../../_wardsynq/dicom.js";
 /* TASK 8: the governed AI layer over the clinical record. Distinct from the MaiK product routes
  * under /api/ai, which answer a clinician's own questions and touch no record. */
-import { askAboutPatient, reviewInteraction, listInteractions } from "../../_wardsynq/maik-interaction.js";
+import { askAboutPatient, reviewInteraction, listInteractions, COPILOT as MAIK_COPILOT } from "../../_wardsynq/maik-interaction.js";
+import { patientSurveillance, acknowledgeSignal, RULES as SURVEILLANCE_RULES, NOT_BUILT as SURVEILLANCE_NOT_BUILT } from "../../_wardsynq/surveillance.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
@@ -291,6 +292,11 @@ function clientProtocolTemplate(t) {
 // kb/schema/standard-protocol.schema.json objects; only status==="ACTIVE" are ever recommended, and
 // none are published ACTIVE yet, so activeStandardProtocols() is [] for now (honest, not fabricated).
 import ONCORECOMMEND from "../../../onco-recommend.js";
+/* The ward's MAR clock, from org config only: the same four values the schedule and nurse-worklist routes pass. */
+function wsqSchedule(c) {
+  return { marTimes: (c && c.marTimes) || null, offsetMinutes: Number.isFinite(c && c.utcOffsetMinutes) ? c.utcOffsetMinutes : undefined,
+    timeZone: (c && c.timeZone) || undefined, graceMinutes: Number.isFinite(c && c.marGraceMinutes) ? c.marGraceMinutes : undefined };
+}
 function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in", "https://wardsynq.com", "https://www.wardsynq.com"];
@@ -1032,6 +1038,9 @@ export async function onRequest(context) {
         /* An early warning score is a reading of the chart's own vitals. It writes nothing and
          * escalates nobody, so it needs the authority to read a chart and no more. */
         news2: CAPS.EMR_VIEW,
+        /* P2.3 surveillance (surveillance.js). Reading signals is reading the chart. Acknowledging one with a
+         * note is a bedside act by whoever looks after the patient: emr.vitals, like the obs it usually cites. */
+        surveillance: CAPS.EMR_VIEW, "surveillance-ack": CAPS.EMR_VITALS,
         /* The ICU bedside record (icu-care.js). Charting a gas, a ventilator setting, a RASS or a round
          * checklist is the nurse's charting act, emr.vitals, the capability IcuRecord is granted
          * through in actor.js. Reading the ICU cards, with the SOFA and the advisory sepsis screen
@@ -2272,14 +2281,45 @@ export async function onRequest(context) {
         const r = await listWounds(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* P2.3 SURVEILLANCE. Computed on read from the same modules the chart uses; writes nothing and pages
+       * nobody. A patient whose signals could not be computed is listed with that failure, never as "no signals". */
+      if (sub === "surveillance" && method === "GET") {
+        const roster = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
+        if (!roster || !roster.ok) return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request);
+        const CAP = 60, patients = (roster.patients || []).slice(0, CAP);
+        const rows = await Promise.all(patients.map(async (p) => {
+          const r = await patientSurveillance(request, env, { ...deps, patientId: p.patientId, encounterId: p.encounterId, schedule: wsqSchedule(wsqCfg) }).catch((e) => ({ ok: false, error: "failed", detail: String((e && e.message) || e).slice(0, 200) }));
+          return r && r.ok
+            ? { patientId: p.patientId, encounterId: p.encounterId, patient: p, signals: r.signals, notEvaluated: r.notEvaluated, ...(r.acknowledgementsUnread ? { acknowledgementsUnread: true } : {}) }
+            : { patientId: p.patientId, encounterId: p.encounterId, patient: p, signals: null, notEvaluated: [], failed: (r && (r.detail || r.error)) || "could not be computed" };
+        }));
+        rows.sort((a, b) => (b.failed ? 1 : 0) - (a.failed ? 1 : 0) || ((b.signals || []).length - (a.signals || []).length));
+        return json({ ok: true, rows, rules: SURVEILLANCE_RULES, notBuilt: SURVEILLANCE_NOT_BUILT, computedAt: new Date().toISOString(),
+          partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}),
+          monitoring: "Signals are computed from the record and shown. Nothing has been paged and no order has been changed." }, 200, request);
+      }
+      if (sub === "surveillance-ack" && method === "POST") {
+        const r = await acknowledgeSignal(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, signalId: body.signalId, note: body.note, schedule: wsqSchedule(wsqCfg), idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "maik-ask" && method === "POST") {
+        /* P2.2 copilot tasks carry the deterministic findings as structured facts, computed as THIS clinician
+         * before the model is asked. A failure to compute them is passed on as such, never as "no findings". */
+        let facts = null;
+        if (MAIK_COPILOT[String(body.task || "")]) {
+          const sv = await patientSurveillance(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, schedule: wsqSchedule(wsqCfg) }).catch(() => null);
+          facts = sv && sv.ok
+            ? { computedAt: sv.computedAt, signals: sv.signals.map((x) => ({ id: x.id, ruleId: x.ruleId, label: x.label, summary: x.summary, source: x.source, firstSeenAt: x.firstSeenAt, evidence: x.evidence.map((e) => ({ resourceType: e.resourceType, id: e.id, value: e.value, unit: e.unit, at: e.at })) })),
+                abnormalLabs: sv.abnormalLabs, notEvaluated: sv.notEvaluated }
+            : { unavailable: (sv && (sv.detail || sv.error)) || "surveillance could not be computed" };
+        }
         /* WSQ_MAIK_FETCH is a BINDING, not a parameter: it lets a deployment (and this repository's own
          * test suite) supply the transport the local-model adapter talks over, while leaving every
          * decision about WHICH model may answer - and whether it may see patient data at all - to the
          * gateway and the hospital's configuration. No caller can choose a provider. */
         const r = await askAboutPatient(request, env, { ...deps, config: (wsqCfg && wsqCfg.maik) || null,
           patientId: body.patientId, encounterId: body.encounterId, task: body.task, question: body.question,
-          sections: body.sections, idempotencyKey: body.idempotencyKey || null,
+          sections: body.sections, idempotencyKey: body.idempotencyKey || null, facts,
           fetchImpl: env && typeof env.WSQ_MAIK_FETCH === "function" ? env.WSQ_MAIK_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
