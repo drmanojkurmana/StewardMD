@@ -381,3 +381,11 @@ P0.7 phonetic search: Soundex was written and never used, so transliterated name
 
 **Numbers:** 6030 passing, 0 failing. 15 routes waiting for a screen.
 **Next:** P0.7 relationships / next of kin / guardian / emergency contacts / deceased status - check what exists.
+
+### 2026-09-13 - merge preview + fail-closed chain check
+
+P0.7 governed merge: "Same person - merge" now asks the server for a dry run (every check, nothing written) and shows both records side by side, differing fields marked, with a reason box before "Join these records". Safety fix: the check that stops a record being merged twice swallowed a read failure as "no links" and let the merge proceed; it now refuses. Harness fix: throttle reset per seeded hospital. P0.7 contacts/guardian/next of kin/deceased already had a screen. Live (ward.js site48, ward.css site12).
+
+**Numbers:** 6032 passing, 0 failing. 15 routes waiting for a screen.
+**P0.7 status:** duplicate detection, phonetic matching, preview/authorised/audited/reversible merge, identifier history all in place. Remaining P0.7: none known.
+**Next:** P0.9 MFA/session hardening.
