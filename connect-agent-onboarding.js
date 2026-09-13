@@ -160,7 +160,7 @@
       ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
       // The progress bar: a filled track that animates its width, so a run that is moving looks
       // like it is moving. prefers-reduced-motion drops the animation, never the bar.
-      ".smd-connect-snake{display:flex;justify-content:center;margin:0.375rem 0}",
+      ".smd-connect-snake{display:flex;flex-direction:column;align-items:center;max-width:320px;margin:0.375rem auto}.smd-connect-snake canvas{max-width:100%;height:auto}",
       ".smd-connect-modes{margin-top:0.75rem}.smd-connect-modes .smd-connect-checkrow{margin-top:0.5rem}.smd-connect-modes strong{color:var(--ink,#14202b)}",
       ".smd-connect-remove{min-height:2rem;padding:0.25rem 0.625rem;margin-left:0.5rem;font-size:0.75rem}",
       ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",

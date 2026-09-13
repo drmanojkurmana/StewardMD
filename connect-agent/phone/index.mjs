@@ -100,8 +100,11 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
    * keys, request field names, response type; never values). captureView asks for what arrived since
    * the last capture so a view's endpoints carry the names the runtime needs to replay a POST. */
   let observerMark = 0;
+  /* The real client is frozen (plugin-client.mjs), so the drain is added on a wrapper, never on it. */
   if (typeof plugin.drainObserverEvents !== 'function') {
-    plugin.drainObserverEvents = async () => { const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
+    const base = plugin;
+    const drainObserverEvents = async () => { const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
+    plugin = Object.assign(Object.create(base), { drainObserverEvents });
   }
   notify('DISCOVERING', { steps: 0, events: 0 });
   if (typeof api.progress === 'function') await api.progress({ stage: 'DISCOVERING' }).catch(() => {});
