@@ -124,8 +124,16 @@ export function formEncode(fields) {
 function splitPath(path) {
   const m = /^([^?]*)(?:\?(.*))?$/.exec(String(path || ''));
   const keys = [];
-  if (m && m[2]) for (const part of m[2].split('&')) { const k = part.split('=')[0]; if (k) keys.push(k); }
-  return { path: m ? m[1] : String(path || ''), keys };
+  const constants = {};
+  if (m && m[2]) for (const part of m[2].split('&')) {
+    const i = part.indexOf('=');
+    const k = i >= 0 ? part.slice(0, i) : part;
+    if (!k) continue;
+    keys.push(k);
+    // A value discovery kept is a mode constant (Type=IPWorkList), never an identifier: send it as recorded.
+    if (i >= 0 && /^[A-Za-z_]{1,32}$/.test(part.slice(i + 1))) constants[k] = part.slice(i + 1);
+  }
+  return { path: m ? m[1] : String(path || ''), keys, constants };
 }
 
 /**
@@ -141,7 +149,7 @@ export function replayPlan(view, patient, tokens = null) {
   const eps = Array.isArray(view && view.endpoints) ? view.endpoints : [];
   for (const e of eps) {
     if (!e || typeof e.path !== 'string') continue;
-    const { path, keys } = splitPath(e.path);
+    const { path, keys, constants } = splitPath(e.path);
     if (NOISE_PATH.test(path)) continue;
     if (e.method === 'POST') {
       if (Array.isArray(e.bodyKeys) && e.bodyKeys.length) prerequisites.push({ method: 'POST', path, bodyKeys: e.bodyKeys.slice(), requestKind: e.requestKind || 'form', queryKeys: keys });
@@ -151,6 +159,7 @@ export function replayPlan(view, patient, tokens = null) {
     // Expand id keys over their candidates (best first), cartesian only across distinct id keys.
     let variants = [{}];
     for (const k of keys) {
+      if (constants && constants[k] !== undefined) { variants = variants.map((v) => Object.assign({}, v, { [k]: constants[k] })); continue; }
       if (PAGE_SIZE_KEY.test(k)) { variants = variants.map((v) => Object.assign({}, v, { [k]: '1000' })); continue; }
       if (PAGE_START_KEY.test(k)) { variants = variants.map((v) => Object.assign({}, v, { [k]: '0' })); continue; }
       if (PAGE_NUMBER_KEY.test(k)) { variants = variants.map((v) => Object.assign({}, v, { [k]: '1' })); continue; }

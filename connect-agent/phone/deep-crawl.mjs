@@ -103,6 +103,20 @@ const STATIC_ASSET = /\.(js|css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|eot|map|js
 const BODY_KEY_HOSTILE = /\d{3,}|@/;
 const REQUEST_KINDS = new Set(['form', 'json', 'multipart', 'other']);
 export const CREDENTIAL_KEY = /passw|pwd|otp|\bpin\b|secret|captcha/i;
+/* A MODE SWITCH IS NOT PATIENT DATA. GHIS asks for its ward list with Type=IPWorkList; drop that value
+ * and the replayed call returns nothing. Only keys that name a mode (type, mode, view, tab, action,
+ * list, kind, category, status, flag) keep their value, and only a short run of letters with no digit,
+ * space or @: never an id, a date, a phone or a name typed into a search box. */
+// Query keys may start with an underscore (ASP.NET: __RequestVerificationToken); still no digits runs are checked by callers.
+const QUERY_KEY = /^[A-Za-z_][\w-]{0,59}$/;
+const CONSTANT_KEY = /^(type|mode|view|tab|action|list|listtype|kind|category|status|flag|module|screen|page_type)$/i;
+const CONSTANT_VALUE = /^[A-Za-z_]{1,32}$/;
+export function keyWithConstant(k, v) {
+  return CONSTANT_KEY.test(k) && CONSTANT_VALUE.test(String(v || '')) ? k + '=' + v : k;
+}
+export function stripConstants(path) {
+  return String(path || '').replace(/=[A-Za-z_]{1,32}(?=&|$)/g, '');
+}
 function sanitizeEndpointBodyKeys(raw) {
   if (!Array.isArray(raw)) return [];
   const out = [];
@@ -221,8 +235,8 @@ export function redactEndpoints(requests, pageUrl) {
     let u;
     try { u = new URL(rawUrl); } catch { continue; }
     if (!origin || u.origin !== origin || STATIC_ASSET.test(u.pathname)) continue;
-    const keys = [...u.searchParams.keys()].filter((k) => SAFE_IDENT.test(k)).slice(0, 12);
-    const path = u.pathname.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.join('&') : '');
+    const keys = [...u.searchParams.keys()].filter((k) => QUERY_KEY.test(k)).slice(0, 12);
+    const path = u.pathname.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.map((k) => keyWithConstant(k, u.searchParams.get(k))).join('&') : '');
     const method = String(r.method || 'GET').toUpperCase() === 'POST' ? 'POST' : 'GET';
     const key = method + ' ' + path;
     if (seen.has(key)) continue;
@@ -255,14 +269,14 @@ export function mergeEndpointDetails(endpoints, observerEvents) {
   for (const e of observerEvents) {
     if (!e || typeof e.method !== 'string' || typeof e.path !== 'string') continue;
     const method = e.method.toUpperCase() === 'POST' ? 'POST' : 'GET';
-    const keys = Array.isArray(e.queryKeys) ? e.queryKeys.filter((k) => SAFE_IDENT.test(k)).slice(0, 12) : [];
+    const keys = Array.isArray(e.queryKeys) ? e.queryKeys.filter((k) => QUERY_KEY.test(k)).slice(0, 12) : [];
     const path = (e.path.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.join('&') : '')).slice(0, 512);
     const key = `${method} ${path}`;
     if (!byKey.has(key)) byKey.set(key, e);
   }
   return endpoints.map((ep) => {
     if (!ep || typeof ep !== 'object') return ep;
-    const match = byKey.get(`${ep.method} ${ep.path}`);
+    const match = byKey.get(`${ep.method} ${stripConstants(ep.path)}`);
     if (!match) return ep;
     const out = { ...ep };
     const bodyKeys = sanitizeEndpointBodyKeys(match.bodyKeys);
