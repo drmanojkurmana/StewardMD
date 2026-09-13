@@ -5352,3 +5352,22 @@ bug - not re-verified live on device this session.
   unless `auth: "none"`; credentials are `credentialRef: "sealed:<ciphertext>"` sealed with the existing Connect
   envelope key, no new secret or binding. Missing credentials record `not_configured: credentials missing`.
 - Settlement never assigns a balance to the patient; `balance-to-patient` is a separate, reasoned human action.
+
+
+## 2026-09-13 WardSynQ security review (P2.17) is advisory, evidence-backed, and never green by default
+
+`functions/_wardsynq/security-review.js`, routes `GET /ward/security-report`, `POST /ward/security-review`,
+`POST /ward/restore-test` (all STAFF_ADMIN; doctor/nurse 403), Admin Center tab "Security review".
+- Findings are deterministic counts over the audit trail and the org event log, each with its rows.
+  Nothing auto-locks. Thresholds live in `RULES` and are returned on the report.
+- Audit read-back is an OPTIONAL repository method `auditTrail()` (Memory + D1), not in PORT_METHODS;
+  a port without it reports the section unavailable, never clean.
+- Reviews and restore tests are append-only `SecurityReview` / `RestoreTest` records. The self-review
+  check uses the server's own record of who acted. No new record grant: hr holds STAFF_ADMIN but has no
+  clinical actor (pinned by wardsynq-rbac-4-13), so hr gets a clean 403 from the store; admin works.
+  safety_officer was not given access: it is clinical-incident safety, not account security.
+- Data protection is green only with a backup inside a configured RPO AND a successful restore test.
+  The same verdict now appears in operational-health.
+- Not built: ward/assignment reads (no assignment data), staff-as-patient (would need new PHI
+  linkage), VIP flag (does not exist), denied READS (the service only audits denied writes).
+- Backup export audit rows now carry `actor` (they landed as NULL before) and a row count.

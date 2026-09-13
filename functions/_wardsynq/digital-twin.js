@@ -36,6 +36,8 @@
  * this file cannot see change after the response leaves it.
  */
 
+import { dataProtection, RESTORE_TYPE } from "./security-review.js";
+import { RUN_TYPE as BACKUP_RUN_TYPE } from "./backup-run.js";
 import { patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport } from "./reports.js";
 import { emergencyStatus, emergencyLog } from "./emergency-mode.js";
 import { listBlackouts } from "./blackout.js";
@@ -538,11 +540,19 @@ async function operationalHealthReport(request, env, ctx) {
       : { status: "unavailable", error: snap.error || "twin_unavailable" };
   } catch (e) { twin = { status: "unavailable", error: str(e && e.message) }; }
 
+  /* P2.15: DATA PROTECTION, from the same receipts the security review reads. Green only when a
+   * backup meets its objective AND a successful restore test is recorded; never inferred. */
+  let dataProtectionStatus = { status: "unavailable", error: null };
+  try {
+    const [runs, tests] = await Promise.all([svc.list(BACKUP_RUN_TYPE, 50), svc.list(RESTORE_TYPE, 200)]);
+    dataProtectionStatus = dataProtection(runs, tests, ctx.rpoMinutes, new Date().toISOString());
+  } catch (e) { dataProtectionStatus = { status: "unavailable", error: str(e && e.message) }; }
+
   return {
     ...base, ok: true,
     health: {
       generatedAt: new Date().toISOString(),
-      ai, notifications, twin,
+      ai, notifications, twin, dataProtection: dataProtectionStatus,
       /* WHAT THIS DOES NOT COVER, stated rather than left silent: request-level error rate and
        * latency across the whole router are emitted by observability.js as transient log lines
        * (Cloudflare's own capture, not a second store) and are NOT aggregated back into this report

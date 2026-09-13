@@ -13,7 +13,7 @@
  * file implementing the same eight methods against its own engine.
  */
 
-import { VersionConflictError, IdentityConflictError, RepositoryError, rowOf, rosterLimit } from "./repository.js";
+import { VersionConflictError, IdentityConflictError, RepositoryError, rowOf, rosterLimit, AUDIT_READ_MAX } from "./repository.js";
 import { patientIdentifierKeys } from "./identity-key.js";
 import { fhirId } from "./fhir-id.js";
 
@@ -438,6 +438,33 @@ class D1Repository {
 
   async auditOnly(tenantId, event) {
     await this._auditStatement(tenantId, event).run();
+  }
+
+  /**
+   * OPTIONAL, not in PORT_METHODS: the security review reads the audit trail back. A deployment
+   * without it reports the review as unavailable rather than clean. Newest rows win the limit, so a
+   * truncated read loses the oldest baseline, never the period under review.
+   * @returns {Promise<{events: object[], oldestAt: string|null, truncated: boolean}>}
+   */
+  async auditTrail(tenantId, opts) {
+    const since = String((opts && opts.since) || "");
+    const limit = Math.max(1, Math.min(AUDIT_READ_MAX, Number(opts && opts.limit) || AUDIT_READ_MAX));
+    const r = await this.db
+      .prepare("SELECT id, ts, actor, action, resource_counts, scope, patient_ref_hash, outcome FROM connect_audit_event WHERE tenant_id=? AND connector_id='wardsynq' AND ts>=? ORDER BY ts DESC LIMIT ?")
+      .bind(tenantId, since, limit + 1).all();
+    const rows = r.results || [];
+    const o = await this.db
+      .prepare("SELECT MIN(ts) AS oldest FROM connect_audit_event WHERE tenant_id=? AND connector_id='wardsynq'")
+      .bind(tenantId).first();
+    const json = (v) => { try { return v == null ? null : JSON.parse(v); } catch { return null; } };
+    return {
+      truncated: rows.length > limit,
+      oldestAt: (o && o.oldest) || null,
+      events: rows.slice(0, limit).reverse().map((row) => ({
+        id: row.id, ts: row.ts, actor: row.actor, action: row.action, resourceCounts: json(row.resource_counts),
+        scope: json(row.scope), patientRefHash: row.patient_ref_hash, outcome: row.outcome,
+      })),
+    };
   }
 }
 
