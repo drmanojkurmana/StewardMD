@@ -1804,8 +1804,10 @@
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<h3>Billing</h3><button class=\"w-btn ghost\" data-w-act=\"billingopen\">" + ms("refresh") + "Refresh</button></div>" +
       (b.outstandingBalance != null ? '<p class="w-dt-times">Outstanding: ' + esc(b.outstandingBalance) + "</p>" : "") +
-      '<div class="w-sub"><h4>Invoices</h4>' + (invRows ? "<ul class=\"w-mini\">" + invRows + "</ul>" : '<p class="w-empty">No invoice has been raised for this patient.</p>') + "</div>" +
-      '<div class="w-sub"><h4>Claims</h4>' + (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : '<p class="w-empty">No claim has been coded for this patient.</p>') + "</div>" +
+      '<div class="w-sub"><h4>Invoices</h4>' + (!state.billing ? '<p class="w-empty">Loading...</p>' : b.invoices === null ? '<p class="w-hint warn">' + ms("error") + "Invoices could not be loaded. Do not read this as none.</p>"
+        : invRows ? "<ul class=\"w-mini\">" + invRows + "</ul>" : '<p class="w-empty">No invoice has been raised for this patient.</p>') + "</div>" +
+      '<div class="w-sub"><h4>Claims</h4>' + (!state.billing ? '<p class="w-empty">Loading...</p>' : b.claims === null ? '<p class="w-hint warn">' + ms("error") + "Claims could not be loaded. Do not read this as none.</p>"
+        : claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : '<p class="w-empty">No claim has been coded for this patient.</p>') + "</div>" +
       "</div>";
   }
 
@@ -1820,7 +1822,8 @@
     var opts = function (list) {
       return list.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + "</option>"; }).join("");
     };
-    var totals = !b ? '<p class="w-empty">No fluid charted for this period.</p>'
+    var totals = state.balanceFailed ? '<p class="w-hint warn">' + ms("error") + "Fluid balance could not be loaded. Do not read this as nothing charted.</p>"
+      : !b ? '<p class="w-empty">No fluid charted for this period.</p>'
       : '<div class="w-bal">' +
           '<div class="w-bal-c"><span>In</span><b>' + esc(b.intake) + " mL</b></div>" +
           '<div class="w-bal-c"><span>Out</span><b>' + esc(b.output) + " mL</b></div>" +
@@ -1851,7 +1854,9 @@
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("sensors") + "<h3>Devices</h3>" +
       '<button class="w-ic" data-w-act="deviceload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      (rows ? '<ul class="w-devices">' + rows + "</ul>" : '<p class="w-empty">No monitor currently associated with this patient.</p>') +
+      (state.devices === false ? '<p class="w-hint warn">' + ms("error") + "Devices could not be loaded. Do not read this as no monitor attached.</p>"
+        : state.devices == null ? '<p class="w-empty">Loading devices...</p>'
+        : rows ? '<ul class="w-devices">' + rows + "</ul>" : '<p class="w-empty">No monitor currently associated with this patient.</p>') +
       '<div class="w-filter"><input id="wDevId" type="text" placeholder="Device ID" autocomplete="off">' +
       '<input id="wDevTag" type="text" placeholder="Scan asset tag" autocomplete="off">' +
       '<input id="wDevWrist" type="text" placeholder="Scan wristband" autocomplete="off">' +
@@ -2017,7 +2022,9 @@
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("device_hub") + "<h3>Lines</h3>" +
       '<button class="w-ic" data-w-act="linesload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No lines recorded.</p>') +
+      (state.lines === false ? '<p class="w-hint warn">' + ms("error") + "Lines could not be loaded. Do not read this as no lines in place.</p>"
+        : state.lines == null ? '<p class="w-empty">Loading lines...</p>'
+        : rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No lines recorded.</p>') +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Type</span><input id="wLineType" type="text" autocomplete="off" placeholder="e.g. UVC, PICC"></label>' +
       '<label class="w-f"><span>Site</span><input id="wLineSite" type="text" autocomplete="off"></label>' +
@@ -2755,9 +2762,11 @@
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Critical results</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="critsboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops &middot; " + loops.length + "</h3></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops" + (Array.isArray(state.critsBoard) ? " &middot; " + loops.length : "") + "</h3></div>" +
       '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
-      (rows ? '<ul class="w-crits">' + rows + "</ul>" : '<p class="w-empty">No open critical results anywhere right now.</p>') +
+      (state.critsBoard === false ? '<p class="w-hint warn">' + ms("error") + "Critical results could not be loaded. Do not read this as none open. Check the laboratory system directly.</p>"
+        : state.critsBoard == null ? '<p class="w-empty">Loading open critical results...</p>'
+        : rows ? '<ul class="w-crits">' + rows + "</ul>" : '<p class="w-empty">No open critical results anywhere right now.</p>') +
       "</div>";
   }
 
@@ -5491,8 +5500,8 @@
   function loadDevices() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/device-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { if (r && r.ok) st.devices = r.devices; paint(); })
-      .catch(function () {});
+      .then(function (r) { if (st.sel !== s) return; st.devices = (r && r.ok) ? (r.devices || []) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.devices = false; paint(); });
   }
   function deviceAssociate() {
     var s = st.sel; if (!s) return;
@@ -5794,8 +5803,8 @@
   function loadLines() {
     var s = st.sel; if (!s) return Promise.resolve();
     return apiGet("/ward/line-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
-      .then(function (r) { if (r && r.ok) st.lines = r.lines; paint(); })
-      .catch(function () {});
+      .then(function (r) { if (st.sel !== s) return; st.lines = (r && r.ok) ? (r.lines || []) : false; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.lines = false; paint(); });
   }
   function lineSave() {
     var s = st.sel; if (!s) return;
@@ -6072,7 +6081,7 @@
   }
 
   function critsBoardOpen() {
-    st.view = "critsboard"; st.critsBoard = []; paint(); loadCritsBoard();
+    st.view = "critsboard"; st.critsBoard = null; paint(); loadCritsBoard();
   }
   /* TASK 7.10, the integration console. Four independent reads, and a failure in ANY of them is
    * recorded by name rather than left as an empty list: on this screen "nothing held" and "could not
@@ -6132,8 +6141,8 @@
   }
   function loadCritsBoard() {
     return apiGet("/ward/criticals?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.critsBoard = (r && r.ok && r.loops) || []; paint(); })
-      .catch(function () { paint(); });
+      .then(function (r) { st.critsBoard = (r && r.ok) ? (r.loops || []) : false; paint(); })
+      .catch(function () { st.critsBoard = false; paint(); });
   }
   function acknowledgeBoard(loopId) {
     var why = ""; try { why = G.prompt("What did you do about this result?") || ""; } catch (e) {}
@@ -6596,8 +6605,8 @@
     var to = new Date(), from = new Date(to.getTime() - 12 * 3600000);
     return apiGet("/ward/balance?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId) +
       "&from=" + encodeURIComponent(from.toISOString()) + "&to=" + encodeURIComponent(to.toISOString()))
-      .then(function (r) { if (r && r.ok) st.balance = r.balance; paint(); })
-      .catch(function () { /* the card says "no fluid charted"; a failure is not a zero balance */ });
+      .then(function (r) { if (st.sel !== s) return; st.balanceFailed = !(r && r.ok); if (r && r.ok) st.balance = r.balance; paint(); })
+      .catch(function () { if (st.sel !== s) return; st.balanceFailed = true; paint(); });
   }
   function chartFluid() {
     var s = st.sel; if (!s) return;
@@ -8234,13 +8243,13 @@
         st.busy = false;
         var inv = rs[0], cl = rs[1];
         st.billing = {
-          invoices: (inv && inv.ok) ? inv.invoices : [], outstandingBalance: (inv && inv.ok) ? inv.outstandingBalance : null,
-          claims: (cl && cl.ok) ? cl.claims : [],
+          invoices: (inv && inv.ok) ? inv.invoices : null, outstandingBalance: (inv && inv.ok) ? inv.outstandingBalance : null,
+          claims: (cl && cl.ok) ? cl.claims : null,
         };
         if (!(inv && inv.ok) && !(cl && cl.ok)) st.err = "Could not load billing.";
         paint();
       })
-      .catch(function () { st.busy = false; st.billing = { invoices: [], claims: [] }; st.err = "Could not load billing."; paint(); });
+      .catch(function () { st.busy = false; st.billing = { invoices: null, claims: null }; st.err = "Could not load billing."; paint(); });
   }
   function tpaOpen() {
     st.view = "tpa"; st.tpa = null; paint(); loadTpa();
@@ -8553,7 +8562,7 @@
       var p = null;
       for (var j = 0; j < st.patients.length; j++) { if (st.patients[j].encounterId === arg) { p = st.patients[j]; break; } }
       if (!p) return;
-      st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.sel = p; st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
@@ -8574,7 +8583,7 @@
       var pe = null;
       for (var k2 = 0; k2 < ((st.ed && st.ed.patients) || []).length; k2++) { if (st.ed.patients[k2].encounterId === arg) { pe = st.ed.patients[k2]; break; } }
       if (!pe) return;
-      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.outbox = [];
+      st.sel = Object.assign({ class: "ED" }, pe); st.view = "chart"; st.roundWarning = ""; st.due = []; st.prn = []; st.unscheduled = []; st.problems = []; st.criticals = []; st.balance = null; st.balanceFailed = false; st.outbox = [];
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.resusBundles = null;
       st.err = ""; st.note = ""; st.refusal = null;
       defaultWindow();
