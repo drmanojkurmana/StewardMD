@@ -4232,6 +4232,10 @@
       " &middot; chart read " + esc(g.reads || 0) + " time" + (g.reads === 1 ? "" : "s") + "</div>" +
       /* Whether anybody was told, on the review surface itself - "declared and paged" and "declared
        * and told nobody" must be distinguishable without cross-referencing anything. */
+      /* Breaking glass granted access that could not be used: nothing opened the chart the grant was
+       * for. An active grant now opens it - read only, only what the emergency scope allows, and every
+       * read counted on the grant itself. */
+      (g.active ? '<button class="w-btn ghost sm" data-w-act="emergencychart:' + esc(g.patientId) + '">' + ms("fact_check") + "Open the chart (read only)</button>" : "") +
       '<div class="w-dt-times">' + (g.notification && g.notification.sent
         ? "notified: " + esc(g.notification.to || "yes")
         : "nobody was notified automatically") + "</div>" +
@@ -4255,6 +4259,11 @@
           '<textarea id="wBgReason" rows="3" placeholder="In your own words: what is the emergency, and why you need this chart now"></textarea>' +
           '<button class="w-btn" data-w-act="breakglassdeclare">' + ms("warning") + "Break glass</button></div>"
         : '<p class="w-hint">' + ms("info") + "Open a patient from the ward list to request emergency access to their chart.</p>") +
+      (state.emergencyChart
+        ? '<div class="w-sub w-dead"><h4>' + ms("warning") + "Emergency read-only chart</h4>" +
+          (state.emergencyChart.ok ? reportValue(state.emergencyChart.chart) : '<p class="w-hint warn">' + esc(state.emergencyChart.detail || state.emergencyChart.error || "Could not open the chart.") + "</p>") +
+          "</div>"
+        : "") +
       '<div class="w-sub"><h4>Review log</h4>' +
       (d && d.active ? '<p class="w-hint warn">' + ms("warning") + esc(d.active) + " emergency access grant" + (d.active === 1 ? " is" : "s are") + " active now.</p>" : "") +
       (d == null ? '<p class="w-empty">Loading.</p>'
@@ -6878,6 +6887,13 @@
       })
       .catch(function () { st.busy = false; st.breakGlass = null; st.err = "Could not load the emergency access log."; paint(); });
   }
+  function emergencyChartOpen(patientId) {
+    if (!patientId) return;
+    st.emergencyChart = null; st.busy = true; paint();
+    apiGet("/ward/emergency-chart?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(patientId))
+      .then(function (r) { st.busy = false; st.emergencyChart = r || { ok: false, error: "no_response" }; paint(); })
+      .catch(function () { st.busy = false; st.emergencyChart = { ok: false, detail: "Could not open the chart." }; paint(); });
+  }
   function breakGlassDeclare() {
     var s = st.sel; if (!s) { st.err = "Open a patient first."; paint(); return; }
     var reason = val("wBgReason");
@@ -8243,6 +8259,7 @@
     if (cmd === "ordersetapply") { orderSetApply(); return; }
     if (cmd === "breakglass") { breakGlassOpen(); return; }
     if (cmd === "breakglassdeclare") { breakGlassDeclare(); return; }
+    if (cmd === "emergencychart") { emergencyChartOpen(arg); return; }
     if (cmd === "wounds") { woundOpen(); return; }
     if (cmd === "woundchart") { woundChart(); return; }
     if (cmd === "risks") { riskOpenView(); return; }
@@ -8388,7 +8405,7 @@
     st.handovers = null; st.handoverState = "";
     st.medRec = null;
     st.wounds = null; st.risks = null; st.riskForm = null; st.riskTools = null;
-    st.breakGlass = null;
+    st.breakGlass = null; st.emergencyChart = null;
     st.orderSets = null; st.orderSetPick = null; st.orderSetResult = null;
     st.admReqs = null;
     st.infusions = null;
