@@ -4466,7 +4466,6 @@
         '</aside>' +
       '</div>' +
       '<div class="maik-cmp">' +
-        '<button class="maik-extract" id="maikExtract" type="button">' + svg("brain", "smd-ico") + ' Extract findings for Clinical Reasoning →</button>' +
         '<div class="maik-cmp-in">' +
           '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
           (researchModeAvail() ? '<button class="maik-research" id="maikResearch" type="button" title="Research mode: review journals" aria-label="Research mode: review journals" aria-pressed="false">' + MK.research + '</button>' : '') +
@@ -4476,6 +4475,7 @@
           '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
+          '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
       '</div>';
@@ -6926,7 +6926,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
-    function autosizeQ() { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; }
+    function autosizeQ() { qEl.style.removeProperty("height"); }
     function refreshExtract() { if (extractBtn) extractBtn.classList.toggle("show", !!((qEl.value || "").trim() && reasoningReady())); }
     // MaiK Scribe mic → the shared voice dialog (the same one that works in Clinical
     // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
@@ -7033,9 +7033,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
       }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
-    qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
+    qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
-    if (prefill && typeof prefill === "string") { try { qEl.value = prefill; qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; } catch (e) {} }
+    if (prefill && typeof prefill === "string") { try { qEl.value = prefill; autosizeQ(); } catch (e) {} }
     setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);
   }
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty

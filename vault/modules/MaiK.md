@@ -133,6 +133,8 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 
 ## UI polish (2026-09-12)
 
+2026-09-14 composer correction: MaiK occupies the full viewport. The composer reserves a 64px text row and a 44px tool row; longer drafts scroll within the field instead of resizing it. Extract findings now occupies an accessible brain-icon button in the reserved tool row. Typing focus uses a caret without a rectangular outline; button keyboard-focus indicators remain. Browser checks confirmed identical composer dimensions before/after multiline typing at 390x844, plus visible send controls at 320x500. Physical phone keyboard verification remains outstanding.
+
 - `maik-polish.css` is an additive layer scoped to `#maikSheet.maik-polished`: system typography, grouped quick actions, larger controls, visible keyboard focus, and a wrapping composer on narrow screens.
 - Original color/white MaiK wordmarks remain in the header and welcome view. The live doctor and its existing animation/interaction engine are preserved; horizontal stage clipping prevents off-screen travel from widening the sheet.
 - Existing engine selection, clinical disclaimer, local/cloud routing and conversation actions are unchanged. Cache tokens in `index.html` and `sw.js` include `mkpolish1`.
