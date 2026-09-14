@@ -136,3 +136,13 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 - `maik-polish.css` is an additive layer scoped to `#maikSheet.maik-polished`: system typography, grouped quick actions, larger controls, visible keyboard focus, and a wrapping composer on narrow screens.
 - Original color/white MaiK wordmarks remain in the header and welcome view. The live doctor and its existing animation/interaction engine are preserved; horizontal stage clipping prevents off-screen travel from widening the sheet.
 - Existing engine selection, clinical disclaimer, local/cloud routing and conversation actions are unchanged. Cache tokens in `index.html` and `sw.js` include `mkpolish1`.
+
+## Restored answer tools and action layout (2026-09-13)
+
+Copilot tool chips now persist their kind/argument as attributes and launch through the body click delegate, so they work after reopening saved conversation HTML. Older calculator chips resolve by an exact registered title match. MaiK closes before the target opens. Answer tools use full-width rows; ratings share one row and Copy/Regenerate/Edit use a separate equal-width row in `maik-polish.css`.
+
+## Top-right model navigation (2026-09-14)
+The original wordmark and engine selector share the first header row. Conversation actions have a compact second row, preserving all original handlers and the live doctor. Responsive grid slots constrain long model names. Touch feedback respects reduced motion.
+
+## Startup Signature Trace (2026-09-14)
+The existing 107px solid StewardMD mark is visible from the first frame. A mint contour draws over the mark, blooms once, and fades away. Dark mode uses the existing white mask with the same overlay motion. Reduced-motion users see only the solid mark.
