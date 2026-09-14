@@ -5840,3 +5840,19 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   recallable ones (queue.view). Screens: "No-show" on called rows in opd.html and queue.js; "No-shows" sheet on
   the console toolbar; the recall panel on the app timeline. Not built: the app front-desk view has no recall
   list, and no "next" message is re-sent on recall (n_stage is monotonic).
+## 2026-09-14 D11 A: per-hospital clinical settings template (Admin Center > Hospital)
+- `functions/_wardsynq/clinical-settings.js` (pure) owns six settings: highAlertDrugs, antibiotics,
+  orderVerifyWithinHours (1-168 h), edReassessMinutes (acuity 1-5, 1-1440 min), patientAccess.enabled, rpoMinutes
+  (5-10080). `GET|POST /org/clinical-settings` (staff.admin, WardSynQ hospitals only, 409 otherwise). A save
+  refuses any unknown key (so criticalEscalation, owned by the alert-path branch, cannot be written here),
+  returns 422 errors keyed by setting with nothing written, and answers with the server read-back.
+- ONE template, "not-configured": every setting explicitly empty/off. WardSynQ ships no drug list or clinical
+  interval (that would be unapproved clinical content, D10); each consumer already says "not configured".
+  The template only fills the form; Save is the write, and the templateId rides the audit row.
+- Audit in the SAME commit as the change (`ORG.updateOrg` optional auditEvent): action
+  `org:clinical_settings`, meta {changed: [setting names], template}; values are not in the audit row. A save
+  that changes nothing writes nothing. patientAccess keeps its other fields (code/session lifetimes).
+- FIX: `orderVerifyWithinHours` was missing from the org whitelist, so surveillance.js could never evaluate
+  "active order not pharmacy-verified" for any hospital.
+- Not built: optimistic concurrency on org saves (two admins saving at once, last write wins, as for every
+  org update today).

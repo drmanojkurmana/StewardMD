@@ -287,6 +287,85 @@
     draw(undefined);
     c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? (r.departments || []) : null); }, function () { draw(null); });
   }
+  /* D11 A: CLINICAL SETTINGS. The six settings each ward screen reads, in one place: apply a template to fill
+   * the form, edit, save. The server validates and answers with what it now holds, and that read-back is what
+   * this card shows after a save, never the form's own values. r: undefined = loading, null = could not be
+   * loaded (said, never drawn as empty settings), else { settings, templates }. */
+  var ACUITY = ["1", "2", "3", "4", "5"];
+  function clinicalSettingsHtml(esc, r, saved) {
+    var h = '<div class="card"><h2>Clinical settings</h2>';
+    if (r === undefined) return h + '<p><span class="spin"></span> Loading clinical settings...</p></div>';
+    if (r === null) return h + '<div class="msg err">The clinical settings could not be loaded. Do not read this as none configured.</div></div>';
+    var s = r.settings || {}, t = r.templates || {};
+    var lines = function (a) { return esc((a || []).join("\n")); };
+    var val = function (v) { return v == null ? "" : esc(v); };
+    return h + '<p class="quiet">What each ward screen uses. A blank setting is not configured, and the screen that needs it says so rather than guessing.</p>' +
+      '<div class="row"><label class="f"><span>Template</span><select id="clinTpl"><option value="">Choose a template</option>' +
+        Object.keys(t).map(function (k) { return '<option value="' + esc(k) + '">' + esc(t[k].label) + "</option>"; }).join("") + "</select></label>" +
+        '<button class="btn ghost" id="clinApply" type="button">Fill the form from the template</button></div><div id="clinTplNote" class="quiet"></div>' +
+      '<div class="row"><label class="f"><span>High-alert drugs, one per line</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
+        '<label class="f"><span>Antibiotics counted for days of therapy, one per line</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>Pharmacy verifies an order within (hours)</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="not configured"></label>' +
+        '<label class="f"><span>Backup recovery point objective (minutes)</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="not configured"></label></div>' +
+      '<p>ED reassessment interval by acuity (minutes)</p><div class="row">' + ACUITY.map(function (a) {
+        return '<label class="f" style="flex:0 1 110px"><span>Acuity ' + a + '</span><input class="clinEd" data-acuity="' + a + '" type="number" min="1" max="1440" value="' + val((s.edReassessMinutes || {})[a]) + '" placeholder="none"></label>';
+      }).join("") + "</div>" +
+      '<label class="f"><span><input type="checkbox" id="clinPortal"' + (s.patientAccess && s.patientAccess.enabled ? " checked" : "") + "> Patients may read their own record (patient access)</span></label>" +
+      '<button class="btn" id="clinSave" type="button">Save clinical settings</button><div id="clinMsg"></div>' +
+      (saved ? '<div class="msg ok">Saved' + (saved.changed.length ? ": " + esc(saved.changed.join(", ")) : ": nothing had changed") + '. The server now holds:</div>' + clinicalReadBackHtml(esc, saved.settings) : "") + "</div>";
+  }
+  function clinicalReadBackHtml(esc, s) {
+    var nc = '<span class="quiet">not configured</span>';
+    var list = function (a) { return a && a.length ? esc(a.join(", ")) : nc; };
+    var ed = ACUITY.filter(function (a) { return s.edReassessMinutes && s.edReassessMinutes[a] != null; }).map(function (a) { return "acuity " + a + ": " + s.edReassessMinutes[a] + " min"; });
+    return '<div class="kv"><dt>High-alert drugs</dt><dd>' + list(s.highAlertDrugs) + "</dd><dt>Antibiotics</dt><dd>" + list(s.antibiotics) +
+      "</dd><dt>Verify within</dt><dd>" + (s.orderVerifyWithinHours != null ? esc(s.orderVerifyWithinHours) + " hours" : nc) +
+      "</dd><dt>ED reassessment</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
+      "</dd><dt>Patient access</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? "on" : "off") +
+      "</dd><dt>Recovery point objective</dt><dd>" + (s.rpoMinutes != null ? esc(s.rpoMinutes) + " minutes" : nc) + "</dd></div>";
+  }
+  /* Reads the form. Blank numbers are "not configured" (null); the server validates the rest. */
+  function readClinicalSettings(get) {
+    var names = function (id) { return String(get(id) || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean); };
+    var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
+    var ed = {};
+    ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+  }
+  WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
+  function wireClinicalSettings(c) {
+    var box = document.getElementById("clinCard");
+    if (!box) return;
+    var draw = function (r, saved) {
+      box.innerHTML = clinicalSettingsHtml(c.esc, r, saved);
+      if (!r) return;
+      var tplUsed = "";
+      document.getElementById("clinApply").onclick = function () {
+        var id = document.getElementById("clinTpl").value, tpl = id && r.templates[id];
+        if (!tpl) { document.getElementById("clinTplNote").textContent = "Choose a template first."; return; }
+        draw({ settings: tpl.settings, templates: r.templates });
+        tplUsed = id;
+        document.getElementById("clinTpl").value = id;
+        document.getElementById("clinTplNote").textContent = tpl.description + " Nothing is saved until you press Save.";
+      };
+      document.getElementById("clinSave").onclick = function () {
+        var btn = this, m = document.getElementById("clinMsg");
+        var get = function (id) {
+          if (/^ed\d$/.test(id)) { var e = box.querySelector('.clinEd[data-acuity="' + id.slice(2) + '"]'); return e ? e.value : ""; }
+          var el = document.getElementById(id); return el ? (el.type === "checkbox" ? el.checked : el.value) : "";
+        };
+        btn.disabled = true;
+        c.api("/org/clinical-settings", { orgId: c.state.orgId, settings: readClinicalSettings(get), templateId: tplUsed || (document.getElementById("clinTpl").value || undefined) }).then(function (x) {
+          btn.disabled = false;
+          if (!x || !x.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          draw({ settings: x.settings, templates: r.templates }, { changed: x.changed || [], settings: x.settings });
+          c.toast("Clinical settings saved.");
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -306,7 +385,7 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
+      (c.isWardsynq() ? '<div id="clinCard"></div>' + noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -318,6 +397,7 @@
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");
       });
     };
+    wireClinicalSettings(c);
     wireNoteWriters(c);
     wireApprovalRules(c);
     wireLabCheck(c);

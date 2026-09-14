@@ -148,6 +148,7 @@ import { downtimePack } from "../../_wardsynq/downtime.js";
 import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, rosterStaffing } from "../../_wardsynq/digital-twin.js";
 import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
+import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
 import { predictMetric } from "../../_wardsynq/twin-predict.js";
 import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
 import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
@@ -3776,6 +3777,29 @@ export async function onRequest(context) {
       if (method === "POST" && sub === "swap-respond") return out(await ROSTER.respondSwap(env, orgId, me, rb.swapId, rb.accept === true));
       if (method === "POST" && sub === "swap-approve") return out(await ROSTER.approveSwap(env, orgId, rb.swapId, rb.approve === true, me));
       return json({ ok: false, error: "not_found" }, 404, request);
+    }
+    /* D11 A: the hospital's clinical settings template (Admin Center > Hospital). staff.admin reads and saves;
+     * only a WardSynQ hospital has these settings. The read is what the screen shows as "what is saved". */
+    if (seg === "org" && sub === "clinical-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Clinical settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: CLINICAL.readClinicalSettings(o.wardsynq), templates: CLINICAL.TEMPLATES }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const tpl = cb.templateId ? CLINICAL.TEMPLATES[cb.templateId] : null;
+      if (cb.templateId && !tpl) return json({ ok: false, error: "unknown_template", message: "There is no such template." }, 422, request);
+      const { value, errors } = CLINICAL.validateClinicalSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_clinical_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const changed = CLINICAL.changedClinicalKeys(o.wardsynq, value);
+      if (!changed.length) return json({ ok: true, changed: [], settings: CLINICAL.readClinicalSettings(o.wardsynq) }, 200, request);
+      // The audit row names the settings changed and the template, never the values (a drug list is not needed to know who changed it).
+      await ORG.updateOrg(env, orgId, { wardsynq: CLINICAL.mergeInto(o.wardsynq, value) }, actor.id,
+        { action: "org:clinical_settings", meta: JSON.stringify({ changed, template: cb.templateId || null }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed, settings: CLINICAL.readClinicalSettings(back && back.wardsynq) }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";

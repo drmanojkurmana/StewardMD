@@ -106,7 +106,9 @@ export async function deleteOrg(env, orgId, actorId) {
   await audit(env, orgId, actorId, "org:delete", "");
   return { ok: true };
 }
-export async function updateOrg(env, orgId, patch, actorId) {
+/* auditEvent: { action, meta } to write the audit row IN THE SAME COMMIT as the change, for a change that must
+ * not exist without its audit row (D11 clinical settings). Without it the audit is best-effort, as before. */
+export async function updateOrg(env, orgId, patch, actorId, auditEvent) {
   const cur = await getOrg(env, orgId); if (!cur) return null;
   /* THE WARDSYNQ CONFIG MERGES; IT DOES NOT GET REPLACED.
    *
@@ -129,6 +131,11 @@ export async function updateOrg(env, orgId, patch, actorId) {
     merged.regionProfile = Object.assign({}, (cur && cur.regionProfile) || {}, p.regionProfile);
   }
   const f = M.org(merged);
+  if (auditEvent) {
+    await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f), wCreate(env, "q_events/" + newId(),
+      { ts: now(), hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: auditEvent.action, meta: String(auditEvent.meta || "").slice(0, 200) })]);
+    return f;
+  }
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
   await audit(env, orgId, actorId, "org:update", "");
   return f;
