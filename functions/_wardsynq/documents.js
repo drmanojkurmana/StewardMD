@@ -164,8 +164,29 @@ async function listDocuments(request, env, ctx) {
   try {
     const rows = await svc.byPatient(TYPE, patientId);
     const docs = (rows || []).filter(Boolean).map(summary).sort((a, b) => String(b.uploadedAt).localeCompare(String(a.uploadedAt)));
-    return { ...base, ok: true, storageConfigured: !!ctx.store, documents: docs };
+    /* G5: which versions went to the patient portal. A failed read is `false` on every document, never an
+     * empty list: "never released" and "could not tell" are different answers to a patient's complaint. */
+    let releases;
+    try { releases = (await svc.byPatient("PatientRecordRelease", patientId)) || []; } catch (_) { releases = null; }
+    return { ...base, ok: true, storageConfigured: !!ctx.store, documents: docs.map((d) => ({ ...d, portalReleases: releases === null ? false : portalReleasesOf(d, releases) })) };
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) }; }
+}
+
+/**
+ * PURE. G5: the portal releases naming this document, newest first: release id, version, when, by whom, to whom
+ * (`scope`, the release's givenTo) and why, and whether that version is still the document's current one.
+ * doc: its latest version (summary()).
+ */
+function portalReleasesOf(doc, releases) {
+  const out = [];
+  for (const r of releases || []) for (const x of (r && r.documents) || []) {
+    if (str(x && x.id) !== str(doc.id)) continue;
+    const version = Number(x.version);
+    out.push({ releaseId: r.id, version, at: r.at || null, releasedBy: r.releasedBy || null, scope: r.givenTo || "patient-portal",
+      reason: r.reason || null, consentRef: r.consentRef || null,
+      current: version === Number(doc.version) && doc.status === "current" });
+  }
+  return out.sort((a, b) => String(b.at || "").localeCompare(String(a.at || "")));
 }
 
 /** Every version of one document, oldest first. */
@@ -281,4 +302,4 @@ async function serveDocumentLink(env, token, deps) {
   return { ok: true, bytes, contentType: rec.contentType, filename: `${slug(rec.title) || "document"}-v${rec.version}` };
 }
 
-export { TYPE, DOC_TYPES, CONTENT_TYPES, MAX_BYTES, DEFAULT_RETENTION_YEARS, uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink, retainUntilFrom, docKey, encryptBytes, decryptBytes };
+export { TYPE, DOC_TYPES, CONTENT_TYPES, MAX_BYTES, DEFAULT_RETENTION_YEARS, uploadDocument, listDocuments, portalReleasesOf, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink, retainUntilFrom, docKey, encryptBytes, decryptBytes };

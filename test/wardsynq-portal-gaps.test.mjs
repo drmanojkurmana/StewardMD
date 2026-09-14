@@ -474,8 +474,8 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.ok(keys.length > 40);
   for (const k of keys) assert.ok(Object.prototype.hasOwnProperty.call(hiCatalog, k), "Hindi for " + k);
   assert.doesNotMatch(portalJs + html + staffPage + keys.map((k) => i18n._catalogs.en[k]).join(" "), /—/, "no em dash");
-  assert.match(read("wardsynq/site/index.html"), /i18n\.js\?v=5"[\s\S]*portal\.js\?v=6"[\s\S]*ward\.js\?v=site80/);
-  assert.match(read("index.html"), /i18n\.js\?v=5" defer[\s\S]*portal\.js\?v=6" defer[\s\S]*ward\.js\?v=ward26-withhold/);
+  assert.match(read("wardsynq/site/index.html"), /i18n\.js\?v=5"[\s\S]*portal\.js\?v=6"[\s\S]*ward\.js\?v=site81/);
+  assert.match(read("index.html"), /i18n\.js\?v=5" defer[\s\S]*portal\.js\?v=6" defer[\s\S]*ward\.js\?v=ward27-docreleases/);
 });
 
 /* ---- D5: structured per-entry withholding ------------------------------------------------------ */
@@ -683,4 +683,51 @@ test("D5 screen: the Patient copy screen draws the portal preview with the porta
   vm.runInContext(src, bare);
   assert.match(bare.WARD._render({ ...bare.WARD._st, view: "pcopy", sel: { patientId: "p1" }, pcopy: pc }), /preview cannot be drawn on this screen/, "without the portal renderer the screen says so, never a blank");
   assert.match(src, /t\.id === "wPcopyScope"/);
+});
+
+/* ---- G5: the chart's Documents screen shows portal releases ------------------------------------ */
+
+test("G5 GET /api/queue/ward/documents: no session 401, wrong role 403, other hospital refused; a doctor sees each released version, its release and whether it is current", async () => {
+  const path = "/ward/documents?patientId=" + PB;
+  assert.equal((await staffGet(null, path)).__status, 401);
+  const cashier = await staffGet(CASHIER, path);
+  assert.equal(cashier.__status, 403, JSON.stringify(cashier));
+  assert.ok(!JSON.stringify(cashier).includes("B-SECRET-TITLE"));
+  const cross = await staffGet(OTHER_DOCTOR, path);
+  assert.ok(cross.__status === 403 || cross.__status === 404, JSON.stringify(cross));
+  assert.ok(!JSON.stringify(cross).includes("wsq-release"));
+
+  const list = await staffGet(DOCTOR, path);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  const docB = list.documents.find((d) => d.id === T.docB.id);
+  assert.equal(docB.version, 2);
+  assert.equal(docB.portalReleases.length, 1, "version 1 of B was released earlier in this file");
+  const r = docB.portalReleases[0];
+  assert.equal(r.version, 1);
+  assert.match(r.releaseId, /^wsq-release-/);
+  assert.ok(r.at && r.releasedBy, "when and by whom");
+  assert.equal(r.scope, "patient-portal");
+  assert.equal(r.reason, "Patient asked for their outside report");
+  assert.equal(r.current, false, "version 2 has since been uploaded");
+
+  const again = await staff(DOCTOR, "/ward/document-release", { documentId: T.docB.id, version: 2, reason: "Newer report for the patient", at: "2099-01-01T00:00:00.000Z" });
+  assert.equal(again.__status, 200, JSON.stringify(again));
+  const after = (await staffGet(NURSE, path)).documents.find((d) => d.id === T.docB.id);
+  assert.deepEqual(after.portalReleases.map((x) => [x.version, x.current]), [[2, true], [1, false]], "newest first; reading it is chart access");
+  const nothing = (await staffGet(DOCTOR, "/ward/documents?patientId=" + PD)).documents;
+  assert.deepEqual(nothing, [], "a patient with no documents has none");
+});
+
+test("G5 NEGATIVE: when the releases cannot be read the documents still list, each saying it could not tell, never 'not released'", async () => {
+  const real = RECORD.byPatient;
+  RECORD.byPatient = async function (tenantId, type, patientId) {
+    if (type === "PatientRecordRelease") throw new Error("release index unavailable");
+    return real.call(this, tenantId, type, patientId);
+  };
+  try {
+    const list = await staffGet(DOCTOR, "/ward/documents?patientId=" + PB);
+    assert.equal(list.__status, 200, JSON.stringify(list));
+    assert.ok(list.documents.length > 0);
+    assert.ok(list.documents.every((d) => d.portalReleases === false));
+  } finally { RECORD.byPatient = real; }
 });

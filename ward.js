@@ -5926,6 +5926,7 @@
         '<div class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + " &middot; " + esc(Math.max(1, Math.round((x.sizeBytes || 0) / 1024))) + " KB</div>" +
         (x.status === "entered-in-error" ? '<div class="w-dt-times">Withdrawn: ' + esc(x.withdrawnReason || "") + " (" + esc(x.withdrawnBy || "") + ")</div>" : "") +
         (x.status === "purged" ? '<div class="w-dt-times">File deleted after its retention period, ' + when(x.purgedAt) + "</div>" : "") +
+        docPortalReleases(x) +
         '</div><div class="w-mini-row-act">' +
         (x.status !== "purged" && d.storageConfigured ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") +
         (x.version > 1 ? '<button class="w-btn ghost sm" data-w-act="docversions:' + esc(x.id) + '">' + ms("history") + "Versions</button>" : "") +
@@ -5954,6 +5955,23 @@
         (target ? ' <button class="w-btn ghost" data-w-act="docnewversioncancel">Cancel</button>' : "") + "</div>";
     return '<div class="w-card">' + head + form +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No documents on file for this patient.</p>') + "</div>";
+  }
+  /* G5: which versions of this document went to the patient portal (documents.js portalReleasesOf). false = the
+   * releases could not be read, which must never read as "not released"; an older server sends nothing, and
+   * nothing is claimed. */
+  var DOC_RELEASE_SCOPE = { "patient-portal": "Patient portal (the patient, and any family member granted documents)" };
+  function docPortalReleases(x) {
+    var list = x.portalReleases;
+    if (list === false) return '<p class="w-hint warn">' + ms("error") + "Could not load which versions were released to the patient portal. Do not read this as never released.</p>";
+    if (!list) return "";
+    if (!list.length) return '<div class="w-dt-times">Not released to the patient portal.</div>';
+    return '<div class="w-sub"><h4>Released to the patient portal</h4><ul class="w-mini">' + list.map(function (r) {
+      var state = r.current ? '<span class="w-st done">Current version</span>'
+        : '<span class="w-st missed">Not current: ' + (x.status === "entered-in-error" ? "document withdrawn" : x.status === "purged" ? "file deleted" : "version " + esc(x.version) + " is newer") + "</span>";
+      return '<li class="w-mini-row"><div>Version ' + esc(r.version) + " " + state +
+        '<div class="w-dt-times">' + when(r.at) + " &middot; by " + esc(r.releasedBy || "unknown") + " &middot; " + esc(DOC_RELEASE_SCOPE[r.scope] || r.scope) + "</div>" +
+        '<div class="w-dt-times">Release ' + esc(r.releaseId) + (r.reason ? " &middot; Reason: " + esc(r.reason) : "") + (r.consentRef ? " &middot; Consent " + esc(r.consentRef) : "") + "</div></div></li>";
+    }).join("") + "</ul></div>";
   }
   function docVersionsBlock(v) {
     if (v.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the earlier versions.</p>";
@@ -9708,7 +9726,8 @@
     if (!reason.trim()) return;
     st.busy = true; paint();
     apiPost("/ward/document-release", { orgId: st.orgId, documentId: p[0], version: Number(p[1]), reason: reason.trim() })
-      .then(function (r) { settle(r, r && r.ok ? "Released to the patient portal." : null); paint(); })
+      // Reloaded, so the document's release list shows this release rather than the list from before it.
+      .then(function (r) { if (settle(r, r && r.ok ? "Released to the patient portal." : null)) loadDocuments(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not release the document. Nothing was released."; paint(); });
   }
   function peopleOpen() {
