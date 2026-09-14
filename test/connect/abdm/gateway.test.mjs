@@ -113,3 +113,43 @@ test("post() fails closed on an unknown endpoint key (no fetch)", async () => {
   await assert.rejects(() => gw.post("bogus", {}), AbdmError);
   assert.equal(mock.calls.length, 0);      // threw before any fetch (not even a session call)
 });
+
+// ── V3 pinning (2026-08-18). These paths were live-verified against the ABDM sandbox; the four
+// non-session ones were previously legacy v0.5 shapes. See docs/connect/abdm/V3-SPEC-RECONCILIATION.md.
+test("ENDPOINTS are pinned to the official V3 paths", () => {
+  assert.equal(ENDPOINTS.sessions,     "/api/hiecm/gateway/v3/sessions");
+  assert.equal(ENDPOINTS.consentInit,  "/api/hiecm/consent/v3/request/init");
+  assert.equal(ENDPOINTS.consentFetch, "/api/hiecm/consent/v3/fetch");
+  assert.equal(ENDPOINTS.hiRequest,    "/api/hiecm/data-flow/v3/health-information/request");
+  assert.equal(ENDPOINTS.hiNotify,     "/api/hiecm/data-flow/v3/health-information/notify");
+});
+
+test("no ENDPOINT retains a legacy v0.5 shape", () => {
+  for (const [k, v] of Object.entries(ENDPOINTS)) {
+    assert.ok(v.startsWith("/api/hiecm/"), `${k} must be a V3 /api/hiecm path, got ${v}`);
+  }
+});
+
+test("session() sends the three headers the gateway requires (401 without them)", async () => {
+  const { makeGateway } = await import("../../../functions/_connect/abdm/gateway.js");
+  let seen = null;
+  const gw = makeGateway({
+    baseUrl: "https://dev.abdm.gov.in",
+    cmId: "sbx",
+    kv: { get: async () => null, put: async () => {} },
+    secrets: { get: async (n) => (n === "ABDM_CLIENT_ID" ? "SBXID_TEST" : "secret") },
+    now: () => new Date(0),
+    fetch: async (_url, init) => {
+      seen = init;
+      return { ok: true, status: 200, json: async () => ({ accessToken: "tok", expiresIn: 1200 }) };
+    },
+  });
+  const tok = await gw.session();
+  assert.equal(tok, "tok");
+  assert.equal(seen.headers["X-CM-ID"], "sbx");
+  assert.equal(seen.headers.TIMESTAMP, "1970-01-01T00:00:00.000Z");
+  assert.match(seen.headers["REQUEST-ID"], /^[0-9a-f-]{36}$/i);
+  assert.equal(seen.headers["content-type"], "application/json");
+  // and no bearer on the session call itself
+  assert.equal("authorization" in seen.headers, false);
+});

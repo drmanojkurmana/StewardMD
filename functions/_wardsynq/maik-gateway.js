@@ -85,6 +85,70 @@ function geminiKey(env) {
   return null;
 }
 
+/* S7 (owner, 2026-09-14): VERTEX AI IS THE PROVIDER WITH A PHI DATA AGREEMENT.
+ *
+ * The agreement is with the Google Cloud PROJECT this deployment runs MaiK under, so patient data may
+ * reach Vertex only through that project's regional endpoint, authenticated as that project's service
+ * account. The credentials are the ones functions/api/ai already uses for MaiK (GCP_PROJECT,
+ * GCP_SA_EMAIL, and Workload Identity Federation or, legacy, a service-account key). No new binding.
+ * Express mode (an API key, no project, no region) still answers requests that carry no patient data.
+ *
+ * PHI_CAPABLE is the platform's half of the approval and a hospital cannot widen it: AI Studio
+ * ("gemini") has no data agreement, so naming it under phiApproved permits nothing. The hospital's
+ * half is still wardsynq.maik.phiApproved, and the default is still none. */
+const PHI_CAPABLE = Object.freeze(["wardsynq", "local-openai", "vertex"]);
+
+/** What is missing for the project-scoped Vertex path, by binding name. Empty when it can run. */
+function vertexProjectMissing(env) {
+  const e = env || {};
+  const missing = ["GCP_PROJECT", "GCP_SA_EMAIL"].filter((k) => !str(e[k]));
+  if (!(str(e.GCP_WIF_PRIVATE_KEY) && str(e.GCP_WIF_AUDIENCE)) && !str(e.GCP_SA_PRIVATE_KEY)) missing.push("GCP_WIF_PRIVATE_KEY and GCP_WIF_AUDIENCE (or GCP_SA_PRIVATE_KEY)");
+  return missing;
+}
+
+const b64u = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+async function rsJwt(pem, header, claims) {
+  const input = `${b64u(new TextEncoder().encode(JSON.stringify(header)))}.${b64u(new TextEncoder().encode(JSON.stringify(claims)))}`;
+  const der = Uint8Array.from(atob(String(pem).replace(/-----[^-]+-----/g, "").replace(/\s+/g, "")), (c) => c.charCodeAt(0));
+  const key = await crypto.subtle.importKey("pkcs8", der, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
+  return `${input}.${b64u(await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, new TextEncoder().encode(input)))}`;
+}
+
+/* An OAuth access token for the project's service account. Mirrors functions/api/ai/[[path]].js
+ * (keyless WIF: self-signed OIDC -> STS -> IAM Credentials; legacy SA-JWT) rather than importing a
+ * route file. ponytail: per-isolate cache, same as the AI route. */
+let vertexToken = null;
+async function vertexAccessToken(env, fetchImpl) {
+  const now = Math.floor(Date.now() / 1000);
+  if (vertexToken && vertexToken.exp > now + 60 && vertexToken.sa === env.GCP_SA_EMAIL) return vertexToken.value;
+  const f = fetchImpl || fetch;
+  const postJson = async (url, body, headers) => (await f(url, { method: "POST", headers: { "Content-Type": "application/json", ...(headers || {}) }, body: JSON.stringify(body) })).json();
+  let value, exp = now + 3600;
+  if (str(env.GCP_WIF_PRIVATE_KEY)) {
+    const oidc = await rsJwt(env.GCP_WIF_PRIVATE_KEY, { alg: "RS256", typ: "JWT", kid: env.GCP_WIF_KID || undefined },
+      { iss: env.GCP_WIF_ISSUER || "https://stewardmd.in", sub: env.GCP_WIF_SUBJECT || "maik-worker", aud: env.GCP_WIF_AUDIENCE, iat: now, exp: now + 3600 });
+    const sts = await postJson("https://sts.googleapis.com/v1/token", { grantType: "urn:ietf:params:oauth:grant-type:token-exchange", audience: env.GCP_WIF_AUDIENCE,
+      scope: "https://www.googleapis.com/auth/cloud-platform", requestedTokenType: "urn:ietf:params:oauth:token-type:access_token", subjectToken: oidc, subjectTokenType: "urn:ietf:params:oauth:token-type:jwt" });
+    if (!sts || !sts.access_token) throw new Error("the Google STS token exchange failed");
+    const ic = await postJson(`https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${encodeURIComponent(env.GCP_SA_EMAIL)}:generateAccessToken`,
+      { scope: ["https://www.googleapis.com/auth/cloud-platform"] }, { Authorization: `Bearer ${sts.access_token}` });
+    if (!ic || !ic.accessToken) throw new Error("service account impersonation failed");
+    value = ic.accessToken;
+    if (ic.expireTime) exp = Math.floor(Date.parse(ic.expireTime) / 1000);
+  } else {
+    const jwt = await rsJwt(env.GCP_SA_PRIVATE_KEY, { alg: "RS256", typ: "JWT" },
+      { iss: env.GCP_SA_EMAIL, sub: env.GCP_SA_EMAIL, aud: "https://oauth2.googleapis.com/token", scope: "https://www.googleapis.com/auth/cloud-platform", iat: now, exp: now + 3600 });
+    const r = await f("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${encodeURIComponent(jwt)}` });
+    const j = await r.json();
+    if (!j || !j.access_token) throw new Error("the service-account token exchange failed");
+    value = j.access_token;
+    if (j.expires_in) exp = now + Number(j.expires_in);
+  }
+  vertexToken = { value, exp, sa: env.GCP_SA_EMAIL };
+  return value;
+}
+
 /**
  * PURE. Remove a secret from anything about to be surfaced.
  *
@@ -110,6 +174,7 @@ function scrubSecret(text, secret) {
 function maikStatus(env, config) {
   const cfg = maikConfig(config);
   const keyPresent = !!geminiKey(env);
+  const vertexMissing = vertexProjectMissing(env);
   return {
     enabled: cfg.enabled,
     phiApproved: cfg.phiApproved,
@@ -123,18 +188,22 @@ function maikStatus(env, config) {
         credentialSource: "GEMINI_API_KEY (environment binding)",
         surface: "AI Studio (generativelanguage.googleapis.com)",
         detail: keyPresent ? "an API key is present in the environment" : "no GEMINI_API_KEY is set in the environment" },
-      { provider: "vertex", configured: keyPresent,
-        credentialSource: "GEMINI_API_KEY (environment binding)",
-        surface: "Vertex AI express mode (aiplatform.googleapis.com), publisher path, no project or region in the URL",
-        detail: keyPresent
-          ? "an API key is present in the environment; express mode needs no service account, no ADC and no region"
-          : "no GEMINI_API_KEY is set in the environment" },
+      { provider: "vertex", configured: keyPresent || !vertexMissing.length,
+        credentialSource: vertexMissing.length ? "GEMINI_API_KEY (environment binding)" : "GCP_PROJECT and service account (environment bindings)",
+        surface: vertexMissing.length
+          ? "Vertex AI express mode (aiplatform.googleapis.com), publisher path, no project or region in the URL"
+          : `Vertex AI project endpoint (${vertexRegion(env)}-aiplatform.googleapis.com), region ${vertexRegion(env)}`,
+        phiCapable: !vertexMissing.length,
+        detail: !vertexMissing.length
+          ? "the project's service account is configured; patient data may go here once this hospital approves Vertex"
+          : `patient data cannot go to Vertex on this server: the project credentials are missing (${vertexMissing.join(", ")}).`
+            + (keyPresent ? " Express mode, with no service account, no ADC and no region, answers requests without patient data." : "") },
     ],
     models: MODELS.map((m) => ({
       id: m.id, provider: m.provider, model: m.model, locality: m.locality, tasks: m.tasks,
       available: m.serverReachable !== false && m.available(env, cfg),
       autoSelect: m.autoSelect !== false,
-      phiApproved: m.provider === "wardsynq" || cfg.phiApproved.includes(m.provider) || cfg.phiApproved.includes(m.id),
+      phiApproved: phiAllowed(m, cfg, env),
     })),
     /* Said explicitly so a green status is not misread: configuration is not approval. */
     note: "A model being available means it can be reached. Whether patient data may be sent to it is wardsynq.maik.phiApproved, which is a separate decision and defaults to none.",
@@ -248,7 +317,7 @@ const MODELS = Object.freeze([
     locality: LOCALITY.CLOUD,
     tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
     latency: "medium", cost: "metered",
-    available: (env) => !!geminiKey(env),
+    available: (env) => !!geminiKey(env) || !vertexProjectMissing(env).length,
   },
   {
     id: "vertex-pro",
@@ -256,7 +325,7 @@ const MODELS = Object.freeze([
     locality: LOCALITY.CLOUD,
     tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
     latency: "slow", cost: "metered",
-    available: (env) => !!geminiKey(env),
+    available: (env) => !!geminiKey(env) || !vertexProjectMissing(env).length,
     autoSelect: false,
   },
   {
@@ -273,6 +342,15 @@ const MODELS = Object.freeze([
 ]);
 
 const byId = (id) => MODELS.find((m) => m.id === str(id)) || null;
+const vertexRegion = (env) => str(env && env.GCP_LOCATION) || "asia-south1";
+
+/** PURE. May patient data go to this model: the platform can carry it AND this hospital approved it. */
+function phiAllowed(m, cfg, env) {
+  if (m.provider === "wardsynq") return true;
+  if (!PHI_CAPABLE.includes(m.provider)) return false;
+  if (m.provider === "vertex" && vertexProjectMissing(env).length) return false;
+  return cfg.phiApproved.includes(m.provider) || cfg.phiApproved.includes(m.id);
+}
 
 /** PURE. This hospital's MaiK configuration, with every default fail-closed. */
 function maikConfig(config) {
@@ -347,7 +425,15 @@ function route(ctx) {
      * deterministic assembler is the one exception, because it sends the data nowhere at all - it
      * runs in this process, on rows the caller already read. */
     const beforeApproval = candidates;
-    candidates = candidates.filter((m) => m.provider === "wardsynq" || cfg.phiApproved.includes(m.provider) || cfg.phiApproved.includes(m.id));
+    candidates = candidates.filter((m) => phiAllowed(m, cfg, c.env));
+    /* Why an approval did not take, in words: one naming a provider the platform has no data agreement
+     * with, or Vertex approved on a server without the project credentials. */
+    const why = [
+      ...cfg.phiApproved.filter((p) => MODELS.some((m) => (m.provider === p || m.id === p) && !PHI_CAPABLE.includes(m.provider)))
+        .map((p) => `"${p}" has no patient-data agreement with this platform, so approving it permits nothing`),
+      ...(cfg.phiApproved.includes("vertex") && vertexProjectMissing(c.env).length
+        ? [`Vertex is approved but this server lacks the project credentials patient data needs (${vertexProjectMissing(c.env).join(", ")})`] : []),
+    ];
     /* A NAMED MODEL DROPPED HERE SAYS WHY IT WAS DROPPED. Without this, asking for a model the
      * hospital has not approved for patient data falls through to "not a model this hospital can
      * use", which sends an operator to look at the registry when the thing to change is the approval
@@ -355,12 +441,13 @@ function route(ctx) {
     if (wanted && beforeApproval.some((m) => m.id === wanted) && !candidates.some((m) => m.id === wanted)) {
       const m = beforeApproval.find((x) => x.id === wanted);
       return refuse("no_phi_approved_model",
-        `"${wanted}" runs on provider "${m.provider}", which this hospital has not approved to receive patient data. Approval is per provider under wardsynq.maik.phiApproved, so approving one provider never approves another. Nothing was sent.`);
+        `"${wanted}" runs on provider "${m.provider}", which this hospital has not approved to receive patient data. Approval is per provider under wardsynq.maik.phiApproved, so approving one provider never approves another.${why.length ? " " + why.join(". ") + "." : ""} Nothing was sent.`);
     }
     if (!candidates.length) {
       const floor = MODELS.find((m) => m.id === "wardsynq-deterministic" && m.tasks.includes(task));
       return refuse("no_phi_approved_model",
-        "this request carries patient data and this hospital has approved no model provider to receive it. Name the providers it has a data agreement with under wardsynq.maik.phiApproved. Nothing was sent."
+        "this request carries patient data and this hospital has approved no model provider to receive it. Name the providers it has a data agreement with under wardsynq.maik.phiApproved."
+        + (why.length ? " " + why.join(". ") + "." : "") + " Nothing was sent."
         + (floor ? " A deterministic assembly of what the record already says can run without any model and without sending anything anywhere; ask for \"wardsynq-deterministic\" by name if that is wanted." : ""));
     }
   }
@@ -394,8 +481,11 @@ function route(ctx) {
  */
 async function googleGenerate(req, opts) {
   const cfg = maikConfig(req.config);
-  const key = geminiKey(req.env);
-  if (!key) throw new Error(`no Google API key is present in the environment (GEMINI_API_KEY) for ${opts.surface}`);
+  let bearer = null;
+  try { bearer = opts.bearer ? await opts.bearer() : null; }
+  catch (e) { throw new Error(`${opts.surface} could not be authorised: ${str(e && e.message)}`); }
+  const key = bearer ? null : geminiKey(req.env);
+  if (!bearer && !key) throw new Error(`no Google API key is present in the environment (GEMINI_API_KEY) for ${opts.surface}`);
   const model = str(req.model && req.model.model) || "gemini-3.6-flash";
   const url = opts.urlFor(model);
   const controller = typeof AbortController === "function" ? new AbortController() : null;
@@ -403,7 +493,7 @@ async function googleGenerate(req, opts) {
   try {
     const res = await (req.fetchImpl || fetch)(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+      headers: { "Content-Type": "application/json", ...(bearer ? { Authorization: `Bearer ${bearer}` } : { "x-goog-api-key": key }) },
       body: JSON.stringify({
         ...(str(req.system) ? { systemInstruction: { parts: [{ text: str(req.system) }] } } : {}),
         contents: [{ role: "user", parts: [{ text: str(req.prompt) }] }],
@@ -418,7 +508,7 @@ async function googleGenerate(req, opts) {
        * RESOURCE_EXHAUSTED need completely different fixes - so it is surfaced, scrubbed. */
       const err = body && body.error;
       const cls = str(err && err.status) || `HTTP_${res.status}`;
-      const msg = scrubSecret(str(err && err.message), key);
+      const msg = scrubSecret(scrubSecret(str(err && err.message), key), bearer);
       throw new Error(`${opts.surface} refused the request [${cls}]${msg ? ": " + msg : ""}`);
     }
 
@@ -453,7 +543,7 @@ async function googleGenerate(req, opts) {
     };
   } catch (e) {
     // Last line of defence: nothing leaves this adapter carrying the key, including an abort.
-    throw new Error(scrubSecret(str(e && e.message) || `${opts.surface} could not be reached`, key));
+    throw new Error(scrubSecret(scrubSecret(str(e && e.message) || `${opts.surface} could not be reached`, key), bearer));
   } finally { if (timer) clearTimeout(timer); }
 }
 
@@ -495,13 +585,28 @@ const PROVIDERS = Object.freeze({
       surface: "AI Studio (generativelanguage.googleapis.com)",
     }),
   },
-  /* Vertex AI, express mode. Same wire format, same parsing, different host and different bill. */
+  /* Vertex AI. Patient data: the project's regional endpoint under its service account, the path the
+   * PHI agreement covers, and nothing else. Anything else keeps express mode while a key exists, so a
+   * caller that never carried PHI (the Connect agent brain, the evaluation harness) is unchanged. */
   vertex: {
-    generate: async (req) => googleGenerate(req, {
-      providerId: "vertex",
-      urlFor: (model) => `https://aiplatform.googleapis.com/v1/publishers/google/models/${encodeURIComponent(model)}:generateContent`,
-      surface: "Vertex AI express mode (aiplatform.googleapis.com)",
-    }),
+    generate: async (req) => {
+      const env = req.env || {};
+      if (!vertexProjectMissing(env).length && (req.phi || !geminiKey(env))) {
+        const region = vertexRegion(env);
+        return googleGenerate(req, {
+          providerId: "vertex",
+          bearer: () => vertexAccessToken(env, req.fetchImpl),
+          urlFor: (model) => `https://${region}-aiplatform.googleapis.com/v1/projects/${encodeURIComponent(env.GCP_PROJECT)}/locations/${region}/publishers/google/models/${encodeURIComponent(model)}:generateContent`,
+          surface: `Vertex AI project endpoint (${region}-aiplatform.googleapis.com)`,
+        });
+      }
+      if (req.phi) throw new Error(`patient data is not sent to Vertex express mode; the project credentials are missing (${vertexProjectMissing(env).join(", ")})`);
+      return googleGenerate(req, {
+        providerId: "vertex",
+        urlFor: (model) => `https://aiplatform.googleapis.com/v1/publishers/google/models/${encodeURIComponent(model)}:generateContent`,
+        surface: "Vertex AI express mode (aiplatform.googleapis.com)",
+      });
+    },
   },
   /* A model on this hospital's own hardware, over the OpenAI-compatible chat API. No key is sent
    * anywhere off-site because there is no off-site: the base URL is the hospital's own. */
@@ -555,7 +660,7 @@ async function invoke(ctx) {
   const startedAt = Date.now();
   let out;
   try {
-    out = await impl.generate({ system: c.system, prompt: c.prompt, context: c.context, model: chosen, config: c.config, env: c.env, fetchImpl: c.fetchImpl });
+    out = await impl.generate({ system: c.system, prompt: c.prompt, context: c.context, model: chosen, config: c.config, env: c.env, fetchImpl: c.fetchImpl, phi: c.phi !== false });
   } catch (e) {
     return refuse("model_unavailable", `${chosen.id} could not answer: ${str(e && e.message) || "unavailable"}. Nothing was written.`);
   }
@@ -573,4 +678,4 @@ async function invoke(ctx) {
   };
 }
 
-export { TASK, LOCALITY, MODELS, PROVIDERS, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate };
+export { TASK, LOCALITY, MODELS, PROVIDERS, PHI_CAPABLE, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate, vertexProjectMissing, phiAllowed };

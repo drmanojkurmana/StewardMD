@@ -1,7 +1,8 @@
 // test/queue-eta.test.mjs — pure queue logic: state machine, ordering, ETA, learning.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { canTransition, isTerminal, orderQueue, orderRoomView, shortName, displayBoard, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
+import { readFileSync } from "node:fs";
+import { canTransition, isTerminal, orderQueue, orderRoomView, displayBoard, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
 
 test("state machine allows real transitions, blocks illegal ones", () => {
   assert.equal(canTransition("registered", "waiting"), true);
@@ -10,7 +11,10 @@ test("state machine allows real transitions, blocks illegal ones", () => {
   assert.equal(canTransition("waiting", "completed"), false);      // can't finish someone never seen
   assert.equal(canTransition("completed", "waiting"), false);      // terminal is terminal
   assert.equal(canTransition("registered", "banana"), false);      // unknown status
-  assert.equal(isTerminal("no_show"), true);
+  assert.equal(isTerminal("no_show"), false, "D13: a no-show can be recalled, so it is not terminal");
+  assert.equal(canTransition("no_show", "waiting"), true);
+  assert.equal(canTransition("no_show", "in_consultation"), false, "a recalled patient is called or waits first");
+  assert.equal(isTerminal("cancelled"), true);
   assert.equal(isTerminal("waiting"), false);
 });
 
@@ -74,16 +78,13 @@ test("orderRoomView: in-consultation pinned on top, then priority+seq order (the
   assert.deepEqual(orderRoomView(null), []);
 });
 
-test("displayBoard: PHI-minimal wall projection (first name + last initial, calling/serving/waiting)", () => {
-  assert.equal(shortName("Ramesh Kumar Reddy"), "Ramesh R");   // first + LAST initial
-  assert.equal(shortName("Priya"), "Priya");                    // one word as-is
-  assert.equal(shortName("  "), "Patient");                     // empty guard
+test("displayBoard: the wall shows tokens and never a name (calling/serving/waiting)", () => {
   const board = { rooms: [
     { doctorUid: "d1", status: "moderate", room: { name: "Medicine 1", number: "101", department: "General" }, tickets: [
-      { status: "in_consultation", name: "Anita Sharma" },
-      { status: "called", name: "Ramesh Kumar" },
-      { status: "waiting", name: "Sita Devi" },
-      { status: "registered", name: "Vikram Rao" },
+      { status: "in_consultation", name: "Anita Sharma", mrnLast4: "4821", mobile: "9876543210", token: "3" },
+      { status: "called", name: "Ramesh Kumar", token: "7" },
+      { status: "waiting", name: "Sita Devi", token: "A-012" },
+      { status: "registered", name: "Vikram Rao" },   // registered before tokens existed: no token, still no name
     ] },
     { doctorUid: null, status: "unavailable", room: { name: "Empty" }, tickets: [] },   // no resolved doctor -> dropped
   ] };
@@ -92,12 +93,33 @@ test("displayBoard: PHI-minimal wall projection (first name + last initial, call
   assert.equal(out.org.name, "Dr MK Clinic");
   assert.equal(out.rooms.length, 1, "rooms without a resolved doctor are not shown");
   const r = out.rooms[0];
-  assert.deepEqual(r.calling, ["Ramesh K"]);
-  assert.equal(r.serving, "Anita S");
+  assert.deepEqual(r.calling, ["7"]);
+  assert.equal(r.serving, "3");
   assert.equal(r.waiting, 2);
-  assert.deepEqual(r.upcoming, ["Sita D", "Vikram R"]);
-  // NEVER leak a full name / MRN / phone anywhere in the projection.
-  assert.ok(!JSON.stringify(out).match(/Kumar|Sharma|Devi|Rao/), "no surnames in the public projection");
+  assert.deepEqual(r.upcoming, ["A-012", ""]);
+  // NEVER a name (first or last), MRN or phone anywhere in the public projection.
+  assert.ok(!JSON.stringify(out).match(/Anita|Ramesh|Sita|Vikram|Kumar|Sharma|Devi|Rao|4821|9876543210/), "no PHI in the public projection");
+});
+
+test("OPD-05 displayBoard: each token carries the department it was issued in; the scope tells the wall to group by department", () => {
+  const board = { rooms: [
+    { doctorUid: "d1", status: "normal", room: { name: "Room 4", department: "Orthopaedics" }, tickets: [
+      { status: "in_consultation", name: "Anita Sharma", token: "O-002", department: "Orthopaedics" },
+      { status: "called", name: "Ramesh Kumar", token: "M-001", department: "General Medicine" },   // moved here, kept its number
+      { status: "waiting", name: "Sita Devi", token: "O-003", department: "Orthopaedics" },
+    ] },
+  ] };
+  const out = displayBoard({ name: "H", tokens: { scope: "department" } }, board);
+  const r = out.rooms[0];
+  assert.equal(out.tokenScope, "department");
+  assert.deepEqual([r.calling, r.callingDepartments], [["M-001"], ["General Medicine"]]);
+  assert.deepEqual([r.serving, r.servingDepartment], ["O-002", "Orthopaedics"]);
+  assert.deepEqual([r.upcoming, r.upcomingDepartments], [["O-003"], ["Orthopaedics"]]);
+  assert.equal(displayBoard({}, board).tokenScope, "hospital");
+  assert.ok(!JSON.stringify(out).match(/Anita|Ramesh|Sita/), "still no names");
+  const wall = readFileSync(new URL("../opd-display.html", import.meta.url), "utf8");
+  assert.match(wall, /function whoIn\(n, dept, r\)/, "the wall names a moved token's department");
+  assert.match(wall, /renderGrid\(d\.rooms \|\| \[\], d\.tokenScope\)/, "and groups rooms by department in department scope");
 });
 
 test("concurrency: two independent moves computed against the same order never corrupt the queue", () => {

@@ -59,13 +59,15 @@ export async function sendSms(env, msg) {
 // Sends via 2Factor's ADDON_SERVICES Transactional SMS: the message text comes from the DLT-approved
 // TemplateName, filled from VAR1/VAR2 (VAR1=patient first name, VAR2=the opaque link). To = 10-digit
 // Indian mobile. Response { Status:"Success"|... }. The API key lives only in the TWOFACTOR_API_KEY secret.
-async function sendTwoFactor(env, to, msg) {
+// sender and templateName may be passed per message (WardSynQ critical-result SMS, S3 P0: each hospital
+// names its own DLT header and template); without them the FollowCare env values are used, as before.
+export async function sendTwoFactor(env, to, msg) {
   var vars = msg.vars || {};
   var to10 = String(to).length > 10 ? String(to).slice(-10) : String(to);   // 2Factor TSMS uses the 10-digit number
   var form = new URLSearchParams();
-  form.set("From", env.TWOFACTOR_SENDER);
+  form.set("From", msg.sender || env.TWOFACTOR_SENDER);
   form.set("To", to10);
-  form.set("TemplateName", env.TWOFACTOR_TEMPLATE_CHECKIN);
+  form.set("TemplateName", msg.templateName || env.TWOFACTOR_TEMPLATE_CHECKIN);
   form.set("VAR1", String(vars.var1 != null ? vars.var1 : (vars.name || "")));
   form.set("VAR2", String(vars.var2 != null ? vars.var2 : (vars.link || "")));
   var url = "https://2factor.in/API/V1/" + encodeURIComponent(env.TWOFACTOR_API_KEY) + "/ADDON_SERVICES/SEND/TSMS";

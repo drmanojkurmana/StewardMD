@@ -5,7 +5,7 @@
  * itself lives in wardsynq_record and the retry table in wardsynq_idempotency.
  *
  * No UPDATE, no DELETE. The one write is a D1 batch (atomic) of INSERTs: the record versions, the
- * idempotency key and the audit event land together or not at all. A UNIQUE violation on
+ * idempotency key, the audit event and its audit-chain link (audit-chain.js) land together or not at all. A UNIQUE violation on
  * (tenant, type, id, version) surfaces as VersionConflictError, which is how a lost race is
  * reported instead of being overwritten.
  *
@@ -16,6 +16,7 @@
 import { VersionConflictError, IdentityConflictError, RepositoryError, rowOf, rosterLimit, AUDIT_READ_MAX } from "./repository.js";
 import { patientIdentifierKeys } from "./identity-key.js";
 import { fhirId } from "./fhir-id.js";
+import { nextLinks, APPEND_ATTEMPTS, retryPause, withChainLock } from "./audit-chain.js";
 
 /** PURE. The published hashed form of a record id, or null when it is published verbatim. */
 function aliasFor(record) {
@@ -31,6 +32,12 @@ const AUDIT_INSERT = "INSERT INTO connect_audit_event (id,tenant_id,ts,actor,con
 function parseBody(row) {
   if (!row) return null;
   try { return JSON.parse(row.body); } catch { throw new RepositoryError("a stored record could not be parsed", "CORRUPT_ROW"); }
+}
+
+/* A lost race for the next audit-chain link (see _batchWithChain). Checked before every other
+ * constraint, because it is the one case where retrying the identical write is exactly right. */
+function isChainViolation(err) {
+  return /UNIQUE constraint failed|SQLITE_CONSTRAINT/i.test(String((err && err.message) || err || "")) && /wardsynq_audit_chain/i.test(String((err && err.message) || err || ""));
 }
 
 function isUniqueViolation(err) {
@@ -145,6 +152,33 @@ class D1Repository {
   }
 
   /**
+   * OPTIONAL (see repository.js): latest version per id whose body status is one of `statuses`,
+   * oldest first. The status lives in the body JSON - there is deliberately no status column (see
+   * the outbox index note in wardsynq_schema.sql) - so the predicate reads it with json_extract,
+   * which idx_wardsynq_record_outbox_status keeps cheap. Without that index this still answers
+   * correctly, only slower.
+   *
+   * The IN list is placeholders, never interpolation: statuses arrive as outbox constants, but a
+   * query builder that trusts its caller is how a constant becomes an injection one refactor later.
+   * Non-string entries are dropped before binding, so a stray value narrows the read instead of
+   * widening it.
+   */
+  async latestByStatus(tenantId, resourceType, statuses, limit) {
+    const want = (Array.isArray(statuses) ? statuses : []).filter((s) => typeof s === "string");
+    if (!want.length) return [];
+    const max = rosterLimit(limit);
+    const r = await this.db
+      .prepare(
+        "SELECT r.body FROM wardsynq_record r " +
+        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
+        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? " +
+        "AND json_extract(r.body, '$.status') IN (" + want.map(() => "?").join(",") + ") ORDER BY r.seq ASC LIMIT ?"
+      )
+      .bind(tenantId, resourceType, tenantId, resourceType, ...want, max).all();
+    return (r.results || []).map(parseBody);
+  }
+
+  /**
    * TASK 9.6. The audit INSERT, with the same two guards the OTHER writer of this table already had.
    *
    * `connect_audit_event` is documented "append-only; metadata only, NO PHI" and has two writers.
@@ -177,6 +211,7 @@ class D1Repository {
     try {
       await this.db.prepare("SELECT tenant_id FROM wardsynq_record LIMIT 0").all();
       await this.db.prepare("SELECT id FROM connect_audit_event LIMIT 0").all();
+      await this.db.prepare("SELECT chain_seq FROM wardsynq_audit_chain LIMIT 0").all();
       return { ok: true, backend: "d1", ms: Date.now() - started };
     } catch (err) {
       /* The CATEGORY, never the driver's message. This endpoint is reachable without a tenant, so a
@@ -192,14 +227,93 @@ class D1Repository {
     }
   }
 
-  _auditStatement(tenantId, e) {
-    const safe = scrubLeaves(bounded(e.scope ?? null));
-    const counts = scrubLeaves(bounded(e.resourceCounts ?? null));
-    return this.db.prepare(AUDIT_INSERT).bind(
-      e.id || newId(), tenantId, e.ts || new Date().toISOString(), e.actor || null, e.connectorId || "wardsynq",
-      e.action || null, JSON.stringify(counts), JSON.stringify(safe),
-      e.patientRefHash || null, e.latencyMs ?? null, e.outcome || null, null, null, null
-    );
+  /**
+   * The audit row exactly as it will be stored, keyed by column. It is what gets hashed into the chain
+   * AND what gets bound, so every value is already the type the column hands back (text as a string,
+   * latency as a number): a hash over a value SQL would have converted could never verify.
+   */
+  _auditRow(tenantId, e) {
+    const t = (v) => (v == null || v === "" ? null : String(v));
+    const lat = e.latencyMs == null || !Number.isFinite(Number(e.latencyMs)) ? null : Number(e.latencyMs);
+    return {
+      id: t(e.id) || newId(), tenant_id: String(tenantId), ts: t(e.ts) || new Date().toISOString(), actor: t(e.actor),
+      connector_id: t(e.connectorId) || "wardsynq", action: t(e.action),
+      resource_counts: JSON.stringify(scrubLeaves(bounded(e.resourceCounts ?? null))), scope: JSON.stringify(scrubLeaves(bounded(e.scope ?? null))),
+      patient_ref_hash: t(e.patientRefHash), latency_ms: lat, outcome: t(e.outcome), consent_id: null, transaction_id: null, care_context_hash: null,
+    };
+  }
+
+  _auditStatement(row) {
+    return this.db.prepare(AUDIT_INSERT).bind(row.id, row.tenant_id, row.ts, row.actor, row.connector_id, row.action, row.resource_counts,
+      row.scope, row.patient_ref_hash, row.latency_ms, row.outcome, row.consent_id, row.transaction_id, row.care_context_hash);
+  }
+
+  /** OPTIONAL (audit-chain.js): the newest link, or null before the first chained row. */
+  async auditChainHead(tenantId) {
+    const row = await this.db
+      .prepare("SELECT chain_seq, row_hash FROM wardsynq_audit_chain WHERE tenant_id=? ORDER BY chain_seq DESC LIMIT 1")
+      .bind(tenantId).first();
+    return row ? { seq: Number(row.chain_seq), hash: row.row_hash } : null;
+  }
+
+  /** OPTIONAL (audit-chain.js): links fromSeq..toSeq with the stored audit row each covers (null if gone). */
+  async auditChainRows(tenantId, fromSeq, toSeq) {
+    const r = await this.db
+      .prepare(
+        "SELECT c.chain_seq, c.audit_id, c.prev_hash, c.row_hash, c.legacy_boundary, a.id AS a_id, a.tenant_id AS a_tenant_id, a.ts, a.actor, a.connector_id, a.action, " +
+        "a.resource_counts, a.scope, a.patient_ref_hash, a.latency_ms, a.outcome, a.consent_id, a.transaction_id, a.care_context_hash " +
+        "FROM wardsynq_audit_chain c LEFT JOIN connect_audit_event a ON a.id = c.audit_id WHERE c.tenant_id=? AND c.chain_seq>=? AND c.chain_seq<=? ORDER BY c.chain_seq ASC"
+      )
+      .bind(tenantId, Number(fromSeq), Number(toSeq)).all();
+    return (r.results || []).map((x) => ({
+      chainSeq: Number(x.chain_seq), auditId: x.audit_id, prevHash: x.prev_hash, rowHash: x.row_hash, legacyBoundary: x.legacy_boundary,
+      row: x.a_id == null ? null : {
+        id: x.a_id, tenant_id: x.a_tenant_id, ts: x.ts, actor: x.actor, connector_id: x.connector_id, action: x.action, resource_counts: x.resource_counts,
+        scope: x.scope, patient_ref_hash: x.patient_ref_hash, latency_ms: x.latency_ms, outcome: x.outcome, consent_id: x.consent_id,
+        transaction_id: x.transaction_id, care_context_hash: x.care_context_hash,
+      },
+    }));
+  }
+
+  /**
+   * Runs `stmts` as ONE batch with the chain links for `auditRows` appended.
+   *
+   * WHY A PRIMARY KEY AND NOT A GUARDED HEAD ROW. SHA-256 cannot be computed inside SQLite, so the head
+   * must be read and the hash computed here, before the batch - and a concurrent write can extend the
+   * chain in between. The obvious guard, `UPDATE head SET hash=? WHERE hash=<what I read>`, does not
+   * work in a D1 batch: an UPDATE that matches no row SUCCEEDS with zero changes, so the batch would
+   * commit a forked link. A plain INSERT of (tenant_id, chain_seq) = head + 1 does work: the loser of
+   * the race violates the primary key, the WHOLE batch rolls back (records, idempotency key and audit
+   * row with it), and it is re-read and re-run here. Nothing landed, so re-running is safe; after
+   * APPEND_ATTEMPTS it surfaces as a VersionConflictError, which already means "nothing was written".
+   */
+  async _batchWithChain(tenantId, stmts, auditRows) {
+    if (!auditRows.length) return this.db.batch(stmts);
+    return withChainLock(this.db, tenantId, () => this._batchWithChainNow(tenantId, stmts, auditRows));
+  }
+
+  async _batchWithChainNow(tenantId, stmts, auditRows) {
+    for (let attempt = 1; ; attempt++) {
+      const head = await this.auditChainHead(tenantId);
+      let boundary = null;
+      if (!head) {
+        const last = await this.db
+          .prepare("SELECT id FROM connect_audit_event WHERE tenant_id=? AND connector_id='wardsynq' ORDER BY ts DESC LIMIT 1")
+          .bind(tenantId).first();
+        boundary = (last && last.id) || null;
+      }
+      const links = await nextLinks(head, auditRows.map((row) => ({ auditId: row.id, row })), boundary);
+      const chain = links.map((l) => this.db
+        .prepare("INSERT INTO wardsynq_audit_chain (tenant_id,chain_seq,audit_id,prev_hash,row_hash,legacy_boundary) VALUES (?,?,?,?,?,?)")
+        .bind(tenantId, l.chainSeq, l.auditId, l.prevHash, l.rowHash, l.legacyBoundary));
+      try {
+        return await this.db.batch(stmts.concat(chain));
+      } catch (err) {
+        if (!isChainViolation(err)) throw err;
+        if (attempt >= APPEND_ATTEMPTS) throw new VersionConflictError("the audit chain moved under this write; nothing was written", { auditChain: true });
+        await retryPause(attempt);
+      }
+    }
   }
 
   /**
@@ -336,8 +450,8 @@ class D1Repository {
         .prepare("INSERT INTO wardsynq_idempotency (tenant_id,key,resource_type,id,version,created_at) VALUES (?,?,?,?,?,?)")
         .bind(tenantId, k.key, k.resourceType, k.id, k.version, new Date().toISOString()));
     }
-    if (ctx.audit) stmts.push(this._auditStatement(tenantId, ctx.audit));
-    for (const a of Array.isArray(ctx.audits) ? ctx.audits : []) stmts.push(this._auditStatement(tenantId, a));
+    const auditRows = [ctx.audit, ...(Array.isArray(ctx.audits) ? ctx.audits : [])].filter(Boolean).map((a) => this._auditRow(tenantId, a));
+    for (const row of auditRows) stmts.push(this._auditStatement(row));
 
     /* The published-id alias, for the ids FHIR cannot carry verbatim. OR IGNORE because the hash is
      * a function of the id: a second row for one hash would mean a SHA-256 collision, not a claim,
@@ -398,8 +512,9 @@ class D1Repository {
 
     let results;
     try {
-      results = await this.db.batch(stmts);
+      results = await this._batchWithChain(tenantId, stmts, auditRows);
     } catch (err) {
+      if (err instanceof VersionConflictError) throw err;
       // The identity index first: a batch can only violate one constraint, and mislabelling this
       // one as a version conflict would tell the caller to retry a write that must never be retried.
       if (isIdentityViolation(err)) {
@@ -437,7 +552,8 @@ class D1Repository {
   }
 
   async auditOnly(tenantId, event) {
-    await this._auditStatement(tenantId, event).run();
+    const row = this._auditRow(tenantId, event);
+    await this._batchWithChain(tenantId, [this._auditStatement(row)], [row]);
   }
 
   /**

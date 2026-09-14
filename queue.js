@@ -11,6 +11,8 @@
   var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "",
     staffTok: "", staffWho: null, board: null };   // front-desk staff session (clinic ID + login + PIN)
 
+  // The OPD token called out in the waiting hall. A ticket registered before tokens existed has none.
+  function tok(t) { return t && t.token ? '<span class="q-tok" title="Token">' + esc(t.token) + "</span>" : ""; }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function initials(n) { n = String(n || "").trim(); if (!n) return "DR"; var p = n.split(/\s+/); return ((p[0][0] || "") + (p[1] ? p[1][0] : (p[0][1] || ""))).toUpperCase(); }
@@ -59,16 +61,47 @@
       : '<span class="q-tl-eta">' + ms(isNext ? "check_circle" : "pending", false) + (isNext ? '' : '') + " ETA: " + (etaMin == null ? "-" : etaMin + "m") + "</span>";
     return '<div class="q-tl-row' + (isNext ? " next" : "") + (late ? " late" : "") + '" data-q-tid="' + esc(t.id) + '">' +
         '<div class="q-pos">' + (idx + 1) + "</div>" +
-        '<div class="q-tl-info"><div class="q-tl-nm">' + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
+        '<div class="q-tl-info"><div class="q-tl-nm">' + tok(t) + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
         '<div class="q-tl-acts">' +
           (t.status !== "called" ? '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" : "") +   // an already-called patient can't be re-called (server rejects called->called); show Send-back instead
           (t.status === "called" ? '<button class="q-ic" title="Send back to waiting" data-q-act="sendback:' + esc(t.id) + '">' + ms("undo") + "</button>" : "") +
+          (t.status === "called" ? '<button class="q-ic" title="No-show (did not come when called)" data-q-act="noshow:' + esc(t.id) + '">' + ms("person_off") + "</button>" : "") +
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
           '<button class="q-ic q-rm" title="Remove (mistaken / duplicate / wrongly-routed)" data-q-act="remove:' + esc(t.id) + '">' + ms("person_remove") + "</button>" +
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
           '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" +   // every patient gets an Assessment button (clinic + hospital); opens the consult record
         "</div></div>";
+  }
+  /* D13: RECALL NO-SHOWS. state.noShows: undefined = closed, null = loading, false = failed (said so, never
+   * drawn as "nobody"), [] = none recallable, else the list. Recall keeps the patient's token and asks why. */
+  function noShowPanel(state) {
+    var n = state.noShows;
+    if (n === undefined) return "";
+    var h = '<div class="q-card" style="margin:8px 0"><div class="q-card-h">' + ms("person_search") + " No-shows you can recall" +
+      ' <button class="q-ic" title="Close" data-q-act="noshowsclose">' + ms("close") + "</button></div>";
+    if (n === null) return h + '<div class="q-empty">Loading no-shows...</div></div>';
+    if (n === false) return h + '<div class="q-empty">The no-shows could not be loaded. Do not read this as none. <button class="q-pause" style="width:auto;padding:6px 10px" data-q-act="noshows">Try again</button></div></div>';
+    if (!n.length) return h + '<div class="q-empty">No one marked no-show in the last 4 hours.</div></div>';
+    return h + n.map(function (t) {
+      return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + esc(t.name || "Patient") + '</b><div class="q-hint">Marked no-show ' + esc(new Date(t.noShowAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) +
+        " &middot; recall until " + esc(new Date(t.recallableUntil).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) + "</div></div>" +
+        '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="recall:' + esc(t.id) + '">Recall</button></div>';
+    }).join("") + "</div>";
+  }
+  function loadNoShows() {
+    if (!st.session) return;
+    st.noShows = null; paint();
+    apiGet("/no-show/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { st.noShows = (r && r.ok) ? (r.noShows || []) : false; paint(); }, function () { st.noShows = false; paint(); });
+  }
+  function recallNoShow(sid, ticketId) {
+    var why = "";
+    try { why = window.prompt("Why is this patient recalled? (recorded in the audit trail)", "Patient arrived late") || ""; } catch (e) {}
+    if (why.trim().length < 3) { try { G.toast && G.toast("Not recalled: a reason is required."); } catch (e) {} return; }
+    act(sid, "/no-show/recall", { ticketId: ticketId, reason: why.trim(), to: "waiting" }).then(function (r) {
+      try { G.toast && G.toast(r && r.ok ? "Recalled with the same token." : "Not recalled: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {}
+      if (r && r.ok) loadNoShows();
+    }, function () { try { G.toast && G.toast("Not recalled: the server could not be reached."); } catch (e) {} });
   }
   function orderedTickets(state) {
     return (state.tickets || []).slice()
@@ -93,7 +126,7 @@
     if (!cur) return '<div class="q-consult"><div class="q-empty">' + ms("play_circle") + "<div style=\"margin-top:8px\">No one in consultation. Tap a patient's <b>Start</b> or <b>Finish</b> to advance the queue.</div></div></div>";
     var vt = cur.visitType === "followup" ? "Follow-up" : "New";
     return '<div class="q-consult"><div class="q-consult-b">' +
-      '<div class="q-cn"><div><h3>' + esc(cur.name || "Patient") + "</h3>" +
+      '<div class="q-cn"><div><h3>' + tok(cur) + esc(cur.name || "Patient") + "</h3>" +
         '<div class="q-cn-meta"><span>' + ms("badge") + " MRN: <span class=\"mono\">" + esc(cur.mrnLast4 || "-") + "</span></span></div></div>" +
         '<div class="q-vt">' + vt + "</div></div>" +
       '<div class="q-cta">' +
@@ -130,7 +163,7 @@
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
     var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
-    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + searchBox +
+    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue <button class="q-ic" title="Recall no-shows" data-q-act="noshows">' + ms("person_search") + "</button></span></div>" + noShowPanel(state) + searchBox +
       '<div id="qTlRows">' + timelineRows(state) + "</div></div>";   // the timeline already lists the full ordered queue; the old "View full queue" foot link was a dead no-op
     var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
     return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
@@ -379,6 +412,10 @@
   var LS_STAFF = "smd_opd_staff_tok";
   function staffTok() { if (st.staffTok) return st.staffTok; try { st.staffTok = localStorage.getItem(LS_STAFF) || ""; } catch (e) {} return st.staffTok; }
   function setStaffTok(t) { st.staffTok = t || ""; try { if (t) localStorage.setItem(LS_STAFF, t); else localStorage.removeItem(LS_STAFF); } catch (e) {} }
+  /* S3 P1: critical-result alerts follow the hospital this phone works in. native-push.js binds the phone
+   * to that hospital identity (and unbinds on staff sign-out, called BEFORE the token is cleared so the
+   * request can still authenticate). Inert unless smd_wsq_push is on, and on the web. */
+  function wsqAlerts(fn, orgId, quiet) { try { if (orgId && G.SMD_WSQ_PUSH) G.SMD_WSQ_PUSH[fn](orgId, !quiet); } catch (e) {} }
   function staffCan(cap) { return !!(st.staffWho && st.staffWho.caps && st.staffWho.caps.indexOf(cap) > -1); }
   // A staff token wins when present: it is how the server knows this is reception, not the doctor.
   function authHeaders() {
@@ -506,14 +543,14 @@
     if (cmd === "rolestaff") { root().innerHTML = _staffGate(); prefillStaff(); return; }   // front-desk staff -> sign in HERE
     if (cmd === "pickghis") { _setWp("ghis"); _enterGhis(); return; }  // GITAM / GHIS: reuse a live token if present (no needless re-login), else the prefilled gate
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
-    if (cmd === "pickwsq") { _setWp("wardsynq:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "wardsynq" }; loadSession(); return; }   // WardSynQ-native hospital: no external EMR at all, no GHIS token, no auto-import.
+    if (cmd === "pickwsq") { _setWp("wardsynq:" + arg); wsqAlerts("bind", arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "wardsynq" }; loadSession(); return; }   // WardSynQ-native hospital: no external EMR at all, no GHIS token, no auto-import.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "stafflogin") { staffLogin(); return; }
-    if (cmd === "staffout") { setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
+    if (cmd === "staffout") { wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
     if (cmd === "fdadd") { frontDeskAdd(); return; }
     if (cmd === "fdroute") { frontDeskRoute(arg); return; }
@@ -556,6 +593,10 @@
       if (curId && curId !== arg) act(sid, "/status", { ticketId: curId, status: "waiting" }).then(startGo); else startGo();
     }
     else if (cmd === "call") act(sid, "/status", { ticketId: arg, status: "called" });
+    else if (cmd === "noshow") { var okn = true; try { okn = window.confirm("Mark as no-show?\n\nThe patient did not come when called. They can be recalled with the same token for 4 hours."); } catch (e) {} if (okn) act(sid, "/status", { ticketId: arg, status: "no_show" }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Not marked no-show: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } }); }
+    else if (cmd === "noshows") loadNoShows();
+    else if (cmd === "noshowsclose") { st.noShows = undefined; paint(); }
+    else if (cmd === "recall") recallNoShow(sid, arg);
     else if (cmd === "sendback") act(sid, "/status", { ticketId: arg, status: "waiting" });   // reroute from the consulting room back to the waiting hall (personal + hospital)
     else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; act(sid, "/priority", { ticketId: arg, priority: (pt && pt.priority) ? 0 : 1 }); }   // toggle Priority (1) on/off; matches the "Priority" label + is reversible (does NOT set Emergency/2)
     else if (cmd === "remove") { var okr = true; try { okr = window.confirm("Remove this patient from your queue?\n\nUse for a mistaken, duplicate, or wrongly-routed entry. Recorded in the audit trail."); } catch (e) {} if (okr) act(sid, "/status", { ticketId: arg, status: "cancelled" }); }
@@ -590,7 +631,10 @@
       if (r && r.error === "login_required") { ghisReauth(); return; }   // expired -> silent re-login from remembered cred, else the gate (no manual sign-out)
       var rows = (r && r.rows) || [];
       if (!rows.length) { say("No OPD patients found for today"); return; }
-      act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); } });
+      act(st.session.id, "/import", { rows: rows }).then(function (res) {
+        if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); }
+        importIssuesSay(res);   // shown even on a silent import: a patient left out of the queue is never quiet
+      });
     }).catch(function () { say("Could not reach Ward Sync"); });
   }
   // ONE decision point for "open this ticket's record". The WORKPLACE decides which EMR - never whether
@@ -655,21 +699,55 @@
   }
   // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab).
   function openAssessment(ticketId) { openTicketEmr(ticketId, "assess"); }
+  /* D7: the hospital's departments and token numbering, for the check-in sheet's department picker.
+   * cb({departments, required}): departments undefined = no hospital to ask (no picker), null = the list
+   * could not be loaded (the sheet says so, never "no departments"). */
+  function withDepartments(orgId, cb) {
+    // A GHIS workplace has no StewardMD hospital record (its hospital id is not an org): no picker there.
+    if (!orgId || st.ghisToken) { cb({ departments: undefined, required: false }); return; }
+    apiGet("/org?orgId=" + encodeURIComponent(orgId)).then(function (o) {
+      if (o && o.error === "org_not_found") { cb({ departments: undefined, required: false }); return; }
+      if (!o || !o.ok) { cb({ departments: null, required: false }); return; }
+      cb({ departments: o.departments || [], required: !!(o.org && o.org.tokens && o.org.tokens.scope === "department") });
+    }, function () { cb({ departments: null, required: false }); });
+  }
+  /* D7/D14: EMR rows the token rules refused (a department this hospital has not mapped, or one with no
+   * prefix) are named by department so the admin knows which alias or prefix to add. Once per distinct
+   * message, so a 40-second poll does not repeat the same toast. */
+  function importIssuesSay(r) {
+    var iss = (r && r.issues) || [];
+    if (!iss.length) return;
+    var names = {}; iss.forEach(function (x) { names[x.department || "no department"] = 1; });
+    var m = iss.length + " patient(s) not queued from the EMR: department " + Object.keys(names).join(", ") +
+      " has no token department or prefix here. An administrator adds it under Admin Center, Hospital, OPD token numbers.";
+    if (st.lastImportIssue === m) return;
+    st.lastImportIssue = m;
+    try { G.toast && G.toast(m); } catch (e) {}
+  }
+  // After registration, the queue add's own answer: a refused add is never reported as queued.
+  function queuedSay(r, q) {
+    var m = (q && q.ok) ? ("Added - " + r.mrn + (q.ticket && q.ticket.token ? " - token " + q.ticket.token : ""))
+      : ("Registered " + r.mrn + " but NOT queued: " + ((q && (q.message || q.error)) || "the server could not be reached."));
+    try { G.toast && G.toast(m); } catch (e) {}
+  }
   function openAdd() {
     // The check-in sheet (patient-register.js) is shared with the staff web console, so the two can
     // never drift apart again. It replaced four sequential prompt() boxes. The SERVER validates and
     // issues the MR number - this only carries the answers and renders the field errors it returns.
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
     var mode = inClinicWorkplace() ? "native" : (st.ghisToken ? "ghis" : ((st.openOpts && st.openOpts.source === "connect") ? "connect" : ((st.openOpts && st.openOpts.source === "wardsynq") ? "wardsynq" : "native")));
+    withDepartments(st.orgId || (st.openOpts && st.openOpts.hospitalId) || "", function (dp) {
     G.SMD_PATIENTREG.open({
       mode: mode,
       clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
+      departments: dp.departments, departmentRequired: dp.required,
       submit: function (body) {
         body.orgId = st.orgId || st.hospital || "";
         body.workplaceMode = mode;
+        body.forQueue = "session";
         return apiPost("/patient/register", body);
       },
-      onAdded: function (r) {
+      onAdded: function (r, sent) {
         // Registered -> put them in THIS doctor's queue with the identity we just created.
         // The session is re-read HERE, not captured above: the sheet can be open for a while, and
         // reaching straight into st.session.id threw when there was no session, losing a patient who
@@ -681,9 +759,11 @@
         }
         act(sid2, "/ticket", {
           name: r.patient && r.patient.name, mrn: r.mrn, mobile: r.patient && r.patient.mobile,
-          visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0
-        });
+          visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0,
+          departmentId: (sent && sent.departmentId) || ""
+        }).then(function (q) { queuedSay(r, q); }, function () { queuedSay(r, null); });
       }
+    });
     });
   }
 
@@ -802,6 +882,7 @@
       if (!w || !w.ok) { setStaffTok(""); root().innerHTML = _staffGate("Your session ended. Sign in again."); prefillStaff(); return; }
       if (w.twoStepRequired) { el.innerHTML = _wrap('<p class="q-gate-sub">Your clinic requires two-step sign-in for your role. Set it up at wardsynq.com under Sign-in security, then sign in here again.</p><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }
       st.staffWho = w; st.orgId = w.orgId || st.orgId || "";
+      if (!w.twoStepRequired) wsqAlerts("bind", st.orgId, true);
       if (!st.orgId) { el.innerHTML = _wrap('<p class="q-gate-sub">You are not assigned to a clinic yet. Ask the clinic owner to add you.</p><button class="q-gate-close" data-q-act="staffout">Back</button>'); return; }
       return apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (b) {
         if (!b || !b.ok) { el.innerHTML = _wrap('<p class="q-gate-sub">Could not load the clinic board.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }
@@ -840,8 +921,8 @@
     }).join("") : '<div class="q-empty">No rooms set up yet. The clinic owner adds rooms in the console.</div>';
 
     var poolRows = pool.length ? pool.map(function (t) {
-      return '<div class="q-fd-row"><div><b>' + esc(t.name || "Patient") + "</b>" +
-        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + "</div></div>" +
+      return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + esc(t.name || "Patient") + "</b>" +
+        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + (t.department ? " &middot; " + esc(t.department) : "") + "</div></div>" +
         (canAssign ? '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="fdroute:' + esc(t.id) + '">Route</button>' : "") +
         "</div>";
     }).join("") : '<div class="q-empty" style="padding:22px">Nobody waiting to be routed.</div>';
@@ -857,15 +938,18 @@
   // the central pool (a one-room clinic auto-routes server-side).
   function frontDeskAdd() {
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
-    G.SMD_PATIENTREG.open({
-      mode: "native",
-      clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
-      submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; return apiPost("/patient/register", body); },
-      onAdded: function (r) {
-        apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
-          mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new" })
-          .then(function () { toast("Added - " + r.mrn); loadFrontDesk(); });
-      }
+    withDepartments(st.orgId, function (dp) {
+      G.SMD_PATIENTREG.open({
+        mode: "native",
+        clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
+        departments: dp.departments, departmentRequired: dp.required,
+        submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = "pool"; return apiPost("/patient/register", body); },
+        onAdded: function (r, sent) {
+          apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
+            mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", departmentId: (sent && sent.departmentId) || "" })
+            .then(function (q) { queuedSay(r, q); loadFrontDesk(); }, function () { queuedSay(r, null); });
+        }
+      });
     });
   }
 
@@ -1022,7 +1106,7 @@
   function importFromSource(silent) {
     if (!st.session) return;
     apiPost("/import-from-source", { sessionId: st.session.id }).then(function (r) {
-      if (r && r.ok) { st.tickets = r.tickets || st.tickets; paint(); if (!silent && r.imported != null) { try { G.toast && G.toast("Imported " + r.imported + " patient(s) from the EMR"); } catch (e) {} } }
+      if (r && r.ok) { st.tickets = r.tickets || st.tickets; paint(); if (!silent && r.imported != null) { try { G.toast && G.toast("Imported " + r.imported + " patient(s) from the EMR"); } catch (e) {} } importIssuesSay(r); }
     }).catch(function () {});
   }
   // Which workplace the doctor last chose, remembered on-device so a personal-clinic doctor is not forced

@@ -6,6 +6,8 @@
  *
  *   GET    [base]/$export                 system level: every exported type the caller may read
  *   GET    [base]/Patient/$export         the patient compartment: resources that belong to a patient
+ *   GET    [base]/Group/{id}/$export      one ward's census at kick-off (fhir-group.js), its patients' resources
+ *   POST   any of the three above         the same kick-off with a Parameters body (IG v2)
  *   GET    [base]/$export-status/{id}     202 + X-Progress while running, 200 + manifest when done
  *   DELETE [base]/$export-status/{id}     cancel; the files go too
  *   GET    [base]/$export-file/{id}/{f}   one NDJSON file, with auth, audited
@@ -42,6 +44,7 @@ import { canRead } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { outboxEvent, MAX_ATTEMPTS } from "./outbox.js";
 import { FHIR_TYPE, CANONICAL_TYPE, toFhir, operationOutcome } from "./fhir.js";
+import { groupMembers } from "./fhir-group.js";
 import { sha256Hex } from "./object-store.js";
 import { docKey, encryptBytes, decryptBytes } from "./documents.js";
 
@@ -92,6 +95,27 @@ function parseExportParams(p) {
   return { types: types.filter((t) => CANONICAL_TYPE[t]).sort(), since, problems };
 }
 
+/**
+ * PURE. A POST kick-off's Parameters body as the same parameter object a GET's query gives (Bulk Data
+ * IG v2: _type as valueString, repeatable; _since as valueInstant; _outputFormat as valueString). A
+ * parameter name this server does not honour is carried through so parseExportParams names it as a 400;
+ * a body that is not Parameters is a problem of its own.
+ */
+function parametersToExportParams(body) {
+  if (body === undefined || body === null || (typeof body === "object" && !Object.keys(body).length)) return { params: {} };
+  if (!body || body.resourceType !== "Parameters") return { error: "a POST $export body must be a FHIR Parameters resource" };
+  const out = {};
+  for (const p of Array.isArray(body.parameter) ? body.parameter : []) {
+    const name = str(p && p.name);
+    if (!name) return { error: "every Parameters.parameter needs a name" };
+    const v = p.valueString !== undefined ? p.valueString : p.valueInstant !== undefined ? p.valueInstant : p.valueDateTime !== undefined ? p.valueDateTime : p.valueCode !== undefined ? p.valueCode : null;
+    if (v === null) { out[name] = out[name] || "(no value)"; continue; }
+    if (name === "_type") { out._type = [...(out._type || []), ...str(v).split(",")]; continue; }
+    out[name] = str(v);
+  }
+  return { params: out };
+}
+
 /** PURE. What a job's status is NOW: a job past its expiry is expired, a stuck one has failed. */
 function effectiveStatus(job, nowMs) {
   if (!job) return null;
@@ -116,7 +140,7 @@ function manifestOf(job, link) {
 /** PURE. The admin screen's view of one job. No file keys, no PHI. */
 function summaryOf(job, nowMs) {
   return {
-    id: job.id, status: effectiveStatus(job, nowMs), level: job.level, types: job.types, since: job.since,
+    id: job.id, status: effectiveStatus(job, nowMs), level: job.level, groupName: job.groupName || null, types: job.types, since: job.since,
     requestedAt: job.transactionTime, requestedBy: job.requestedBy, completedAt: job.completedAt || null, expiresAt: job.expiresAt || null,
     exported: job.exported || 0, files: (job.output || []).map((f) => ({ type: f.type, name: f.name, count: f.count })),
     issues: job.issues || [], error: job.error || (effectiveStatus(job, nowMs) === "failed" && job.status === "in-progress" ? "the export stopped making progress" : null),
@@ -181,6 +205,15 @@ async function kickoffExport(request, env, ctx) {
   if (refused.length) return fail(403, "forbidden", `not permitted to export ${refused.join(", ")}`);
   if (!wanted.length) return fail(403, "forbidden", "this requester may not read any exported type");
 
+  /* G9. Group/{id}/$export: the ward census frozen at kick-off, read as the requester (fhir-group.js).
+   * The member list is on the job, so a patient admitted after the kick-off is not in this export. */
+  let group = null;
+  if (ctx.level === "group") {
+    const m = await groupMembers(request, env, ctx, ctx.groupId);
+    if (m.error) return { ok: false, status: m.error.status, outcome: m.error.outcome };
+    group = { id: str(ctx.groupId), name: m.ward, members: m.patientIds };
+  }
+
   const repo = ctx.recordDeps.repository, tenantId = mig.tenantId;
   const now = new Date(), nowIso = now.toISOString();
   let slot, holder = null;
@@ -195,14 +228,15 @@ async function kickoffExport(request, env, ctx) {
   const jobId = `wsq-fhirexp-${randomHex(12)}`;
   const by = { id: requester.id, kind: requester.kind === "smart" ? "service" : "human", at: nowIso };
   const job = {
-    resourceType: JOB_TYPE, id: jobId, version: 1, status: "in-progress", level: ctx.level === "patient" ? "patient" : "system",
+    resourceType: JOB_TYPE, id: jobId, version: 1, status: "in-progress", level: ctx.level === "patient" ? "patient" : group ? "group" : "system",
+    ...(group ? { groupId: group.id, groupName: group.name, members: group.members } : {}),
     types: wanted, since, transactionTime: nowIso, request: str(ctx.requestUrl), requestedBy: requester.id, requesterKind: requester.kind,
     cursor: 0, exported: 0, output: [], errorFiles: [], issues: [], unrendered: {}, progressAt: nowIso, writtenBy: by,
   };
   const nextSlot = { resourceType: SLOT_TYPE, id: SLOT_ID, version: slot ? slot.version + 1 : 1, jobId, writtenBy: by };
   const evt = outboxEvent(TOPIC_CHUNK, { jobId, cursor: 0 }, nowIso);
   try {
-    await repo.append(tenantId, [job, nextSlot, evt], { audit: auditEvent("fhir.export.kickoff", requester.id, { resourceCounts: null, scope: { jobId, level: job.level, types: wanted, since, via: requester.kind } }) });
+    await repo.append(tenantId, [job, nextSlot, evt], { audit: auditEvent("fhir.export.kickoff", requester.id, { resourceCounts: null, scope: { jobId, level: job.level, types: wanted, since, via: requester.kind, ...(group ? { groupId: group.id, members: group.members.length } : {}) } }) });
   } catch (e) {
     if (e instanceof VersionConflictError) return { ...fail(429, "throttled", "another export was started for this hospital at the same moment"), retryAfter: 120 };
     return fail(502, "exception", "the export could not be recorded, so it was not started");
@@ -227,15 +261,25 @@ async function versionAsOf(repo, tenantId, row, txMs) {
   return asOf && asOf.version === row.version ? asOf : null;
 }
 
-async function putFile(store, tenantId, jobId, name, lines, encKey) {
+/* The storage key for one export file. Fixed here so a run can record the keys it is about to
+ * write BEFORE writing them; expiry, cancel and the failed path then delete listed keys even when
+ * the run died between the write and the recording. Keys carry no PHI, only the job id and type. */
+function exportObjectKey(tenantId, jobId, name) {
+  return `t/${tenantId.toLowerCase().replace(/[^a-z0-9]+/g, "-")}/fhir-export/${jobId}/${name}-${randomHex(8)}`;
+}
+
+async function putFile(store, tenantId, jobId, name, lines, encKey, objectKey) {
   const bytes = new TextEncoder().encode(lines.join("\n") + "\n");
-  const objectKey = `t/${tenantId.toLowerCase().replace(/[^a-z0-9]+/g, "-")}/fhir-export/${jobId}/${name}-${randomHex(8)}`;
-  await store.put(objectKey, await encryptBytes(encKey, bytes), "application/octet-stream");
-  return { key: objectKey, sha256: await sha256Hex(bytes) };
+  const key = objectKey || exportObjectKey(tenantId, jobId, name);
+  await store.put(key, await encryptBytes(encKey, bytes), "application/octet-stream");
+  return { key, sha256: await sha256Hex(bytes) };
 }
 
 async function deleteFiles(store, job) {
-  for (const f of [...(job.output || []), ...(job.errorFiles || [])]) { try { await store.delete(f.key); } catch { /* best effort; the job still says expired */ } }
+  const keys = new Set();
+  for (const f of [...((job && job.output) || []), ...((job && job.errorFiles) || [])]) if (f && f.key) keys.add(f.key);
+  for (const k of ((job && job.pendingKeys) || [])) if (typeof k === "string" && k) keys.add(k);
+  for (const key of keys) { try { await store.delete(key); } catch { /* best effort; the job still says expired */ } }
 }
 
 /**
@@ -244,12 +288,13 @@ async function deleteFiles(store, job) {
  */
 async function runExportChunk(deps, payload, event) {
   const repo = deps.repository, tenantId = deps.tenantId;
-  const job = await repo.latest(tenantId, JOB_TYPE, str(payload && payload.jobId));
+  let job = await repo.latest(tenantId, JOB_TYPE, str(payload && payload.jobId));
   if (!job || job.status !== "in-progress" || job.cursor !== payload.cursor) return;   // cancelled, finished, or a repeat of a run already recorded
   const nowIso = new Date(deps.nowMs || Date.now()).toISOString();
   /* A job already reported failed for stalling stays failed: the slot was freed on that report, and a
    * run that quietly resumed it would put two exports in flight and flip a failure into a success. */
   if (effectiveStatus(job, Date.parse(nowIso)) === "failed") {
+    if (deps.store) await deleteFiles(deps.store, job);
     try { await repo.append(tenantId, [{ ...job, version: job.version + 1, status: "failed", error: "the export stopped making progress", failedAt: nowIso, writtenBy: { id: "system:fhir-export", kind: "service", at: nowIso } }], { audit: auditEvent("fhir.export.failed", "system:fhir-export", { outcome: "error", scope: { jobId: job.id, reason: "stalled" } }) }); }
     catch (e) { if (!(e instanceof VersionConflictError)) throw e; }
     return;
@@ -270,6 +315,7 @@ async function runExportChunk(deps, payload, event) {
       for (const row of rows) {
         if (!canonical.has(row.resourceType)) continue;
         if (job.level === "patient" && row.resourceType !== "Patient" && !str(row.patientId)) continue;
+        if (job.level === "group" && !(job.members || []).includes(row.resourceType === "Patient" ? str(row.id) : str(row.patientId))) continue;
         const rec = await versionAsOf(repo, tenantId, row, txMs);
         if (!rec) continue;
         if (sinceMs !== null && !(Date.parse(recordedAt(rec)) > sinceMs)) continue;
@@ -285,45 +331,82 @@ async function runExportChunk(deps, payload, event) {
       if (rows.length < pageRows) done = true;
     }
 
-    const output = [...job.output];
+    const finished = done || !!truncatedAt;
+    /* The issues are known before any byte is stored, so every key this run is about to write can be
+     * listed on the job first. */
+    let issues = [];
+    if (finished) {
+      issues = Object.entries(unrendered).map(([type, count]) => ({ type, code: "not-mapped", count, detail: `${count} ${type} record(s) have no honest FHIR mapping and are not in the export` }));
+      if (truncatedAt) for (const type of job.types) issues.push({ type, code: "incomplete", count: null, detail: `the export stopped at the ${maxResources}-resource limit; ${type} may be incomplete. Narrow it with _type or _since.` });
+    }
+    /* Every file this run will write, with its storage key fixed now. The keys are recorded on the
+     * job before the first put, so a run that dies between the write and the recording leaves no
+     * key that expiry, cancel and the failed path cannot find. */
+    const plans = [];
     for (const type of Object.keys(lines).sort()) {
-      const name = `${type}-${output.filter((o) => o.type === type).length + 1}.ndjson`;
-      const put = await putFile(deps.store, tenantId, job.id, name, lines[type], encKey);
-      const file = { type, name, count: lines[type].length, ...put };
+      const name = `${type}-${(job.output || []).filter((o) => o.type === type).length + 1}.ndjson`;
+      plans.push({ type, name, fileLines: lines[type], key: exportObjectKey(tenantId, job.id, name) });
+    }
+    let ooLines = null;
+    if (finished && issues.length) {
+      ooLines = issues.map((i) => JSON.stringify({ resourceType: "OperationOutcome", issue: [{ severity: "error", code: i.code === "incomplete" ? "too-costly" : "not-supported", diagnostics: i.detail, expression: [i.type] }] }));
+      plans.push({ type: "OperationOutcome", name: "OperationOutcome-1.ndjson", fileLines: ooLines, key: exportObjectKey(tenantId, job.id, "OperationOutcome-1.ndjson") });
+    }
+    /* Write-ahead intent: the same versioned append the run already uses. When it conflicts the job
+     * moved under this run, so nothing is written and the conflict handling below applies. */
+    let base = job;
+    if (plans.length) {
+      const intent = [...(job.pendingKeys || []), ...plans.map((p) => p.key)];
+      const pending = { ...job, version: job.version + 1, pendingKeys: [...new Set(intent)], progressAt: nowIso, writtenBy: { id: "system:fhir-export", kind: "service", at: nowIso } };
+      await repo.append(tenantId, [pending], {});
+      base = pending;
+      job = pending;
+    }
+
+    const output = [...(base.output || [])];
+    for (const plan of plans) {
+      if (plan.type === "OperationOutcome") continue;
+      const put = await putFile(deps.store, tenantId, base.id, plan.name, plan.fileLines, encKey, plan.key);
+      const file = { type: plan.type, name: plan.name, count: plan.fileLines.length, ...put };
       written.push(file); output.push(file);
     }
 
-    const finished = done || !!truncatedAt;
-    const next = { ...job, version: job.version + 1, cursor, exported, output, unrendered, progressAt: nowIso, writtenBy: { id: "system:fhir-export", kind: "service", at: nowIso } };
+    const recorded = new Set();
+    const next = { ...base, version: base.version + 1, cursor, exported, output, unrendered, progressAt: nowIso, writtenBy: { id: "system:fhir-export", kind: "service", at: nowIso } };
     const records = [next];
     let audit;
     if (finished) {
-      const issues = Object.entries(unrendered).map(([type, count]) => ({ type, code: "not-mapped", count, detail: `${count} ${type} record(s) have no honest FHIR mapping and are not in the export` }));
-      if (truncatedAt) for (const type of job.types) issues.push({ type, code: "incomplete", count: null, detail: `the export stopped at the ${maxResources}-resource limit; ${type} may be incomplete. Narrow it with _type or _since.` });
       const errorFiles = [];
-      if (issues.length) {
-        const ooLines = issues.map((i) => JSON.stringify({ resourceType: "OperationOutcome", issue: [{ severity: "error", code: i.code === "incomplete" ? "too-costly" : "not-supported", diagnostics: i.detail, expression: [i.type] }] }));
-        const put = await putFile(deps.store, tenantId, job.id, "OperationOutcome-1.ndjson", ooLines, encKey);
-        const file = { type: "OperationOutcome", name: "OperationOutcome-1.ndjson", count: ooLines.length, ...put };
+      if (ooLines) {
+        const plan = plans.find((p) => p.type === "OperationOutcome");
+        const put = await putFile(deps.store, tenantId, base.id, plan.name, plan.fileLines, encKey, plan.key);
+        const file = { type: "OperationOutcome", name: plan.name, count: plan.fileLines.length, ...put };
         written.push(file); errorFiles.push(file);
       }
+      /* The same recording append drops the keys it just recorded; older pending keys stay listed
+       * until the run that wrote them is recorded, or until expiry, cancel or the failed path. */
+      for (const f of written) recorded.add(f.key);
+      next.pendingKeys = (base.pendingKeys || []).filter((k) => !recorded.has(k));
       const expiresAt = new Date(Date.parse(nowIso) + FILE_TTL_MS).toISOString();
       Object.assign(next, { status: "complete", issues, errorFiles, completedAt: nowIso, expiresAt });
-      records.push(outboxEvent(TOPIC_EXPIRE, { jobId: job.id }, expiresAt));
+      records.push(outboxEvent(TOPIC_EXPIRE, { jobId: base.id }, expiresAt));
       const counts = {};
       for (const o of output) counts[o.type] = (counts[o.type] || 0) + o.count;
-      audit = auditEvent("fhir.export.complete", "system:fhir-export", { resourceCounts: counts, scope: { jobId: job.id, requestedBy: job.requestedBy, exported, files: output.length, issues: issues.length, truncated: !!truncatedAt } });
+      audit = auditEvent("fhir.export.complete", "system:fhir-export", { resourceCounts: counts, scope: { jobId: base.id, requestedBy: base.requestedBy, exported, files: output.length, issues: issues.length, truncated: !!truncatedAt } });
     } else {
-      records.push(outboxEvent(TOPIC_CHUNK, { jobId: job.id, cursor }, nowIso));
+      for (const f of written) recorded.add(f.key);
+      next.pendingKeys = (base.pendingKeys || []).filter((k) => !recorded.has(k));
+      records.push(outboxEvent(TOPIC_CHUNK, { jobId: base.id, cursor }, nowIso));
     }
     await repo.append(tenantId, records, audit ? { audit } : {});
   } catch (e) {
-    for (const f of written) { try { await deps.store.delete(f.key); } catch { /* orphaned ciphertext under a random key, never in a manifest */ } }
+    for (const f of written) { try { await deps.store.delete(f.key); } catch { /* best effort; orphans stay listed in pendingKeys, so expiry, cancel or the failed path deletes them */ } }
     if (e instanceof VersionConflictError) return;                        // cancelled while this run was writing
     const attempts = ((event && event.attempts) || 0) + 1;
     if (attempts < MAX_ATTEMPTS) throw e;                                  // the outbox retries with backoff
     const reason = str(e && e.message).slice(0, 200) || "unknown error";
     try {
+      if (deps.store) await deleteFiles(deps.store, job);
       await repo.append(tenantId, [{ ...job, version: job.version + 1, status: "failed", error: reason, failedAt: nowIso, progressAt: nowIso, writtenBy: { id: "system:fhir-export", kind: "service", at: nowIso } }],
         { audit: auditEvent("fhir.export.failed", "system:fhir-export", { outcome: "error", scope: { jobId: job.id, reason } }) });
     } catch (e2) { throw e; }
@@ -435,6 +518,6 @@ async function listExports(request, env, ctx) {
 
 export {
   JOB_TYPE, SLOT_TYPE, TOPIC_CHUNK, TOPIC_EXPIRE, CHUNK_ROWS, MAX_RESOURCES, FILE_TTL_MS, STALL_MS, NDJSON,
-  parseExportParams, effectiveStatus, manifestOf, summaryOf, exportConsumers, runExportChunk, expireExport,
+  parseExportParams, parametersToExportParams, effectiveStatus, manifestOf, summaryOf, exportConsumers, runExportChunk, expireExport,
   kickoffExport, exportStatus, cancelExport, exportFile, listExports,
 };

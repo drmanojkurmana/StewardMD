@@ -69,8 +69,8 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
-<link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward23-round">
+<link rel="stylesheet" href="/queue.css?v=q11-token">
+<link rel="stylesheet" href="/ward.css?v=ward24-keys">
 <link rel="stylesheet" href="/discharge.css?v=dis1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
@@ -2139,6 +2139,11 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978-sheet1-universal1" defer></script>
 <!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
+<!-- ONE image/PDF compressor for every vision path (Scan-Meds, ICU snapshot, ABG, SknX, PDF reports).
+     Vision tokens scale with pixel DIMENSIONS, not file bytes, so the long-edge cap is the token lever and
+     JPEG quality is only a bytes lever. pdfParts() reads a PDF's text layer instead of OCR-ing a rasterised
+     page, which is both far cheaper and more accurate on numbers. Loads BEFORE the modules that use it. -->
+<script defer src="/img-compress.js?v=imgc1"></script>
 <script defer src="/medlist.js?v=hardlocal3"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
@@ -2196,7 +2201,8 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab29" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mktopright1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/abdm.js?v=abdm1" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab30" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mktopright1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2217,7 +2223,7 @@ window.openExternal = function (u) {
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
 <script src="/icd.js?v=hardlocal3" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -2244,7 +2250,7 @@ window.openExternal = function (u) {
      returned untouched.
 
      It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
-<script src="/wardsynq-flags.js?v=wsq1" defer></script>
+<script src="/wardsynq-flags.js?v=wsqp1" defer></script>
 <script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
 <!-- WardSynQ Clinical Record: the doctor's phone opening the SAME record the hospital PC charts
      into. Inert unless a tenant is named (?wardsynq_record=<tenantId>, remembered in localStorage;
@@ -2267,19 +2273,19 @@ window.openExternal = function (u) {
      in-process without a reload. -->
 <script type="module" src="/wardsynq-ghis-live-boot.js?v=wsq1"></script>
 
-<!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
-
-     Deliberately NOT behind a flag. It is inert until a push of type "wardsynq-alert" arrives, and
-     gating it off would mean an escalation that reaches a handset and cannot be answered on it,
-     which is a worse failure than the screen existing unused. -->
-<script src="/wardsynq-alert-ui.js?v=wsq1" defer></script>
+<!-- hospital-auth.js: which credential a hospital request carries (the workplace decides, S3 ID-01).
+     Before ward.js, the alert screen and native-push.js, which all read window.SMD_HOSPITAL_AUTH.
+     wardsynq-alert-ui.js: the screen a WardSynQ critical-result push opens (S3 P1). Inert unless
+     smd_wsq_push is on; it fetches the detail only after app lock, for the hospital worked in. -->
+<script src="/hospital-auth.js?v=wsqp1" defer></script>
+<script src="/wardsynq-alert-ui.js?v=wsqp1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
 <script src="/icu-collab.js?v=gold455" defer></script><script src="/referrals.js?v=ref1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold364-thread-ref1" defer></script>
+<script src="/native-push.js?v=gold364-thread-ref1-wsqp1" defer></script>
 <script src="/watch-lab.js?v=gold363-ref1" defer></script>
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on
@@ -2477,7 +2483,7 @@ window.openExternal = function (u) {
 <script src="/followcare-flags.js?v=fc12" defer></script>
 <script src="/followcare-pathways.js?v=fc7" defer></script>
 <script src="/followcare-diagnosis.js?v=fc7" defer></script>
-<script src="/followcare-i18n.js?v=fc13" defer></script>
+<script src="/followcare-i18n.js?v=fc14" defer></script>
 <script src="/followcare-comms.js?v=fc8" defer></script>
 <script src="/followcare-ai.js?v=fc2" defer></script>
 <script src="/followcare-analytics.js?v=fc3" defer></script>
@@ -2493,15 +2499,18 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
-<script src="/patient-register.js?v=preg1" defer></script>
-<script src="/queue.js?v=fdesk1-addpt4" defer></script>
+<script src="/patient-register.js?v=preg2-dept" defer></script>
+<script src="/queue.js?v=fdesk3-dept-wsqp1" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
      discharge - the whole golden path, through the same server-authoritative routes as before.
      Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
-<script src="/ward.js?v=ward23-round" defer></script>
+<!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
+<script src="/wardsynq/site/i18n.js?v=5" defer></script>
+<script src="/wardsynq/site/portal.js?v=6" defer></script>
+<script src="/ward.js?v=ward30-alerts-wsqp1" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -2523,7 +2532,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2614,7 +2623,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter13"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter14"; document.body.appendChild(s); }
     // Offline "Test Hospital" demo dataset — 25 fictional patients, real-shaped labs, no GHIS
     // login needed. Loaded alongside ghis-ward.js so the setup screen's demo button works the
     // moment Ward Sync opens.

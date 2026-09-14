@@ -30,31 +30,9 @@
     "recommend": "Superseded on the device: onco-plan-flow.js runs the same engine (onco-recommend.js, SMD_ONCORECOMMEND.recommend) over the protocols it already loaded, so the phenotype never leaves the phone. Verified 2026-09-13.",
     "roi": "Superseded by roi-requests, which the Release of information card calls and which returns the same summary() of every request for the patient. Verified 2026-09-13.",
     "round": "Superseded by schedule, which the chart's Medication round calls over a time window instead of one dueAt. Both now report an unreadable dose record as unknown, never as not started (test/wardsynq-inpatient-emar.test.mjs). Verified 2026-09-13.",
-    "flag-critical": "Called by the server itself: release-result opens critical loops against the stored report on every release (2026-09-14). This route remains only as an idempotent re-check; a screen button for it would duplicate that automatic step."
+    "flag-critical": "Called by the server itself: release-result opens critical loops against the stored report on every release (2026-09-14). This route remains only as an idempotent re-check; a screen button for it would duplicate that automatic step.",
+    "tick-all": "The stewardmd-api worker's */5 cron POSTs it with the admin token so critical results escalate with nobody on the ward (S3 P0); no screen calls it."
   },
   "knownGaps": {},
-  "untestedRoutes": [
-    "advisory-check",
-    "backup-status",
-    "bill/dispense",
-    "bill/invoice",
-    "blood-loss-list",
-    "delivery-get",
-    "device-list",
-    "from-connect",
-    "id-match",
-    "maik-status",
-    "maternity-status",
-    "mfa/status",
-    "patient-copy",
-    "risk-action",
-    "risk-tools",
-    "room/update",
-    "session/status",
-    "surgery-abandon",
-    "surgery-list",
-    "tariff",
-    "templates",
-    "upcoding"
-  ]
+  "untestedRoutes": []
 }

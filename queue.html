@@ -194,6 +194,8 @@
       return msgView("link_off","Link not valid","This queue tracking link isn't active. Ask the front desk for a new one.");
     }
     if(d.journey && d.journey.done) return msgView("task_alt","Your consultation is complete","Thank you for visiting. You may close this page.");
+    // D13: called and not there. The token can still be used for a few hours, so the link stays alive.
+    if(d.status==="no_show") return msgView("campaign","Your token was called","You were not in the waiting area when it was called. Please go to the front desk now: they can put you back in the queue with the same token.");
 
     showActions(d);
     var first = !rendered;
@@ -223,6 +225,7 @@
       '<section class="top'+rv+'"><h2>'+esc(dept)+'</h2>'+ (doc? '<p class="doc">'+ms("person")+esc(doc)+'</p>':'') +
         '<span class="live">'+ms("sync")+'Live tracking active</span></section>'+
       '<section class="card pos'+rv+'"><div class="bar"><i id="posbar" style="width:'+last.barW+'%"></i></div>'+
+        (d.token? '<div class="lbl">Your token</div><div class="n" data-token><b>'+esc(d.token)+'</b></div>' : '')+   // the number called out in the waiting hall
         '<div class="lbl">'+(inConsult?"You are being seen":"Your position")+'</div>'+ posBlock +
         '<div class="split"><div class="col"><div class="k">Patients ahead</div><div class="v">'+(inConsult?0:(d.ahead||0))+'</div></div>'+
           '<div class="col"><div class="k">Doctor status</div><div class="v" style="font-size:14px;font-weight:600"><span class="dot"></span>'+esc(docStatus)+'</div></div></div></section>'+

@@ -33,6 +33,9 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
   monthly guide authentication, faculty verification, department oversight. **PG only** — UG/CBME
   deliberately not built. Every regulatory claim traces to `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
 
+### Interop & compliance
+- [[ABDM]] — national health-data exchange (ABHA, HIP/HIU, consent); read the V3 reconciliation first
+
 ## Cross-cutting
 - [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it

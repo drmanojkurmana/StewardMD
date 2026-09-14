@@ -66,10 +66,14 @@ On the NATIVE app there is no address bar, so the query param is unreachable —
 `SMD_WARDSYNQ_FLAGS.set('smd_wardsynq_shadow', true)` in the WebView console, then reload. A
 reinstall clears `localStorage`, so a flag does NOT survive one.
 
-**Two things are deliberately NOT behind a flag**, and the reasoning is the same in both cases —
-gating them off produces a worse failure than leaving them present:
-- `wardsynq-alert-ui.js`, the forced acknowledgement screen. Inert until a `wardsynq-alert` push
-  arrives. Gated off, an escalation would reach a handset with no way to answer it.
+`smd_wsq_push` (default OFF, `wardsynq-flags.js`) gates the phone side of S3 critical-result alerts
+(2026-09-14, S3 P1): binding the phone to a hospital identity, and `wardsynq-alert-ui.js` taking a v2
+push. Off, a v2 push shows as its thin notification text (ward and bed only) and nothing is bound, so
+no alert reaches the phone to be left unanswered. The old v1 self-push screen had no runtime sender
+and was removed.
+
+**One thing is deliberately NOT behind a flag**, because gating it off produces a worse failure than
+leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 

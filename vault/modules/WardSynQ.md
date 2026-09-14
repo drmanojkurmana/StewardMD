@@ -312,6 +312,11 @@ What each piece is worth, stated separately:
   acknowledgement and leaves the escalation outstanding so the ladder finds somebody who can. A
   failed acknowledgement does not look like a successful one — the screen stays open and says the
   escalation is still live.
+  **Superseded 2026-09-14 (S3 P1):** the screen now takes only the server's v2 thin push behind
+  `smd_wsq_push`, fetches `GET /api/push/notice/<nid>` after app lock for the hospital being worked in,
+  acknowledges at `POST /api/queue/ward/acknowledge` with an action sentence, and declines at
+  `/api/push/notice/<nid>/decline`. The v1 client receipts (`SMD_wardsynqAcknowledge`, a KV receipt
+  that reported success on any HTTP answer) were removed. See Decisions 2026-09-14 S3 P1.
 
 ### The live demonstration, 2026-09-05
 

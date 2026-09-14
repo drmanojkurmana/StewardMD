@@ -63,7 +63,7 @@ function demoBanner(doc) {
   const bar = doc.createElement("div");
   bar.id = "opd-demo-banner";
   bar.setAttribute("role", "note");
-  bar.textContent = "DEMONSTRATION — invented data, not a patient record. Nothing here is a real order.";
+  bar.textContent = "DEMONSTRATION - invented data, not a patient record. Nothing here is a real order.";
   bar.style.cssText = [
     "position:sticky", "top:0", "z-index:9999", "padding:8px 12px",
     "font:600 13px/1.35 system-ui,-apple-system,sans-serif", "text-align:center",

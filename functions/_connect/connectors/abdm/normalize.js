@@ -4,7 +4,7 @@
 // partial/unknown/malformed document NEVER throws — it degrades to a meta.warnings note. Binary content
 // (base64 attachments / Binary bytes) is NEVER carried into SCCM; only by-reference/narrative metadata.
 import { coding, codeable, quantity, reference, provenance } from "../../canonical/coding.js";
-import { bundle, patient, condition, medicationStatement, allergyIntolerance, observation, diagnosticReport, documentReference } from "../../canonical/model.js";
+import { bundle, patient, condition, medicationStatement, allergyIntolerance, observation, diagnosticReport, documentReference, immunization, invoice } from "../../canonical/model.js";
 
 // Standard terminologies (identical to the FHIR R4 normalizer). Everything else is a local/proprietary code.
 const STD = ["http://loinc.org", "http://snomed.info/sct", "http://hl7.org/fhir/sid/icd-10", "http://hl7.org/fhir/sid/icd-11", "http://www.nlm.nih.gov/research/umls/rxnorm", "http://www.whocc.no/atc"];
@@ -102,7 +102,6 @@ export function normalizeNdhm(ctx, docBundle) {
     const prov = (r) => out.meta.provenance.push(provenance({ resource: r.resourceType, sourceConnector: "abdm", sourceId: r.resourceType + "/" + r.id }));
 
     // InvoiceRecord is a billing artifact, not clinical data: skip entirely, keep a trace.
-    if (recordType === "InvoiceRecord") { warn("InvoiceRecord skipped: billing artifact, not clinical data"); return out; }
 
     // Every record is captured by-reference as a documentReference (narrative text only, NO binary).
     if (comp.id) {
@@ -111,9 +110,10 @@ export function normalizeNdhm(ctx, docBundle) {
       prov(comp);
     }
 
-    // ImmunizationRecord: SCCM has no immunization resource key yet (owner decision: DEFER). Keep the
-    // Composition documentReference metadata (narrative preserves the clinical info) + warn; do NOT map.
-    if (recordType === "ImmunizationRecord") { warn("ImmunizationRecord: SCCM has no immunization resource key yet (owner decision: DEFER); recorded as documentReference metadata only"); return out; }
+    // ImmunizationRecord and InvoiceRecord used to RETURN HERE, before the sections were walked at all -
+    // one deferring immunisations ("SCCM has no immunization resource key yet"), the other dismissing
+    // billing as "not clinical data". SCCM v1.1 carries both, and ABDM makes all eight HI types mandatory
+    // for an HMIS, so both record types now fall through to the normal section walk below.
 
     const mapped = new Set();
     const cx = { recordType, resolve, out, mapped, prov, warn };
@@ -129,6 +129,21 @@ export function normalizeNdhm(ctx, docBundle) {
   }
   return out;
 }
+
+// Immunization.protocolApplied[0].doseNumber[x] is either a positiveInt or a string.
+function doseNumberOf(r) {
+  const pa = (r.protocolApplied || [])[0];
+  if (!pa) return null;
+  return pa.doseNumberPositiveInt != null ? pa.doseNumberPositiveInt : (pa.doseNumberString || null);
+}
+/** Money -> SCCM { value, currency }. Currency is carried, never invented. */
+function moneyOf(m) {
+  if (!m || m.value == null) return null;
+  const out = { value: m.value };
+  if (m.currency) out.currency = m.currency;
+  return out;
+}
+const firstIdentifierValue = (r) => ((r.identifier || []).find((i) => i && i.value) || {}).value || null;
 
 function mapResource(r, cx) {
   if (!r || !r.resourceType) return;
@@ -179,9 +194,36 @@ function mapResource(r, cx) {
     case "Binary":
       cx.warn("Binary/" + r.id + " binary content not carried into SCCM (bytes are never imported)"); break;
     case "Immunization":
-      cx.warn("Immunization/" + r.id + " skipped: SCCM has no immunization resource key yet (owner decision: DEFER)"); break;
+      // SCCM v1.1 carries immunisations. The DEFER note that used to live here is retired: ABDM makes all
+      // eight HI types mandatory for an HMIS, so a vaccination arriving from another facility has to land
+      // somewhere rather than be warned away.
+      out.immunizations.push(immunization({
+        id: r.id, status: r.status || "completed", vaccineCode: cc(r.vaccineCode, "vaccine"),
+        occurrenceDateTime: r.occurrenceDateTime || null,
+        lotNumber: r.lotNumber || null, expirationDate: r.expirationDate || null,
+        doseNumber: doseNumberOf(r),
+        site: r.site ? cc(r.site, "site") : null,
+        route: r.route ? cc(r.route, "route") : null,
+        manufacturer: (r.manufacturer && (r.manufacturer.display || r.manufacturer.reference)) || null,
+      }));
+      prov(r); break;
     case "Invoice":
-      cx.warn("Invoice/" + r.id + " skipped: billing artifact, not clinical data"); break;
+      // Billing IS part of the record ABDM asks us to exchange. A patient asking for their records is
+      // entitled to what they were charged.
+      out.invoices.push(invoice({
+        id: r.id, status: r.status || "issued", type: cc(r.type, "invoice"),
+        identifierValue: firstIdentifierValue(r), date: r.date || null,
+        lineItems: (r.lineItem || []).map((li, i) => ({
+          sequence: li.sequence != null ? li.sequence : i + 1,
+          chargeItem: cc(li.chargeItemCodeableConcept, "charge"),
+          priceComponents: (li.priceComponent || []).map((pc) => ({
+            type: pc.type || "base", code: cc(pc.code, "price component"),
+            amount: moneyOf(pc.amount), factor: pc.factor != null ? pc.factor : null,
+          })),
+        })),
+        totalNet: moneyOf(r.totalNet), totalGross: moneyOf(r.totalGross),
+      }));
+      prov(r); break;
     default:
       cx.warn("unsupported resourceType " + r.resourceType + "/" + r.id + " not mapped");
   }

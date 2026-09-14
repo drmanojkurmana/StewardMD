@@ -26,3 +26,16 @@ CREATE TABLE IF NOT EXISTS connect_audit_event (    -- append-only; metadata onl
   consent_id TEXT, transaction_id TEXT, care_context_hash TEXT );
 CREATE INDEX IF NOT EXISTS idx_connect_audit_tenant_ts ON connect_audit_event (tenant_id, ts);
 CREATE INDEX IF NOT EXISTS idx_connect_audit_consent ON connect_audit_event (consent_id);
+-- IMMUTABLE IN THE DATABASE, NOT ONLY BY CONVENTION (WardSynQ P2.17, 2026-09-14). No code path updates
+-- or deletes an audit row (part1-foundation-design: "Code path has no UPDATE/DELETE on
+-- connect_audit_event"; consent erasure retains the audit), but that stopped nothing below the
+-- application: a console query, a script, a bad migration. These cover the whole table, Connect's and
+-- ABDM's rows included. There is no retention deletion; if one is ever lawfully required it is a
+-- separate, audited, owner-only procedure, not a change to these triggers. Triggers do not stop DROP
+-- TRIGGER, DROP TABLE, a Time Travel restore or an import: the WardSynQ audit chain
+-- (functions/db/wardsynq_schema.sql wardsynq_audit_chain) is what shows rows changed or removed that way.
+-- Re-runnable like the rest of this file: wrangler d1 execute stewardmd-connect --remote --file db/connect_schema.sql
+CREATE TRIGGER IF NOT EXISTS connect_audit_event_no_update BEFORE UPDATE ON connect_audit_event
+BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;
+CREATE TRIGGER IF NOT EXISTS connect_audit_event_no_delete BEFORE DELETE ON connect_audit_event
+BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;

@@ -20,7 +20,10 @@ import {
 
 import { openInvoice, chargeTotal } from "../wardsynq/wardsynq-invoice.js";
 import i18nPkg from "../wardsynq/site/i18n.js";
+import hiCatalog from "../wardsynq/site/i18n/hi.js";
 const { t, register, missingKeys } = i18nPkg;
+// Since the D6 split each language is its own file; the browser registers it on load, the test does it here.
+register("hi", "हिन्दी", hiCatalog, { reviewed: false });
 
 test("GSTIN: normalization, check character, and format validation", () => {
   // Pinned against real GST portal formats: 2 digits, 5 letters, 4 digits, 1 letter, 1 entity, Z, check char

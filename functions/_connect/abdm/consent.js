@@ -109,6 +109,27 @@ export async function getConsentReqByConsentId(db, consentId) {
 // consent-notify (engine routing): it carries BOTH ids, so this is where the two halves converge onto ONE row.
 // // VERIFY: assumes ABDM's notify echoes our correlation requestId AND the consent artefact id (field mapping
 // unconfirmed — research WAF-blocked). Idempotent: re-linking the same consentId is a no-op-equivalent write.
+/**
+ * Record the CM's OWN consent-REQUEST id on our lifecycle row.
+ *
+ * DISTINCT from consent_id, which is the ARTEFACT id and only exists once the patient grants. The later
+ * hiu/notify carries the consentRequestId, so without this the grant cannot be matched back to the request
+ * that asked for it - and a consent we cannot attribute to a request is a consent we must not act on.
+ */
+export async function attachConsentRequestId(db, requestId, consentRequestId, now) {
+  if (requestId == null || consentRequestId == null) return { ok: false };
+  const res = await db.prepare("UPDATE connect_abdm_consent_req SET consent_request_id=?,updated_at=? WHERE request_id=?")
+    .bind(consentRequestId, now, requestId).run();
+  if (!res || res.success === false) throw new ConnectStateError("attachConsentRequestId update failed");
+  return { ok: (res.meta?.changes || 0) > 0 };
+}
+
+/** Resolve our lifecycle row from the CM's consent-request id. Null when we never asked for it. */
+export async function getConsentReqByConsentRequestId(db, consentRequestId) {
+  if (!db || consentRequestId == null) return null;
+  return db.prepare("SELECT * FROM connect_abdm_consent_req WHERE consent_request_id=?").bind(consentRequestId).first();
+}
+
 export async function linkConsentId(db, requestId, consentId, now) {
   if (requestId == null || consentId == null) return { ok: false };
   const res = await db.prepare("UPDATE connect_abdm_consent_req SET consent_id=?,updated_at=? WHERE request_id=?")
@@ -235,3 +256,38 @@ export function purposeKey(p) {
   if (typeof p === "object") return p.code ?? p.text ?? JSON.stringify(p);
   return String(p);
 }
+
+
+// ── the 14-day re-consent rule (M3) ─────────────────────────────────────────────────────────────────
+// M3 certification (HIU_FLOW_202 revoked, HIU_FLOW_301 expired) requires that data stops being visible
+// when the consent behind it dies. The related rule the docs state for the HIU is that a fetch under an
+// existing artefact may only be repeated within 14 days; past that the patient must be asked again.
+//
+// Enforced at the REQUEST, not by filtering afterwards: an expired-window fetch must never leave our
+// network, because a request we should not have made is not fixed by discarding the answer.
+export const REFETCH_WINDOW_DAYS = 14;
+
+/**
+ * May we fetch again under this consent right now?
+ * `lastFetchedAt` is the previous successful data request under the same artefact (null = never fetched,
+ * which is always allowed). Returns { ok, reason } - fail CLOSED on an unparseable clock or timestamp.
+ */
+export function withinRefetchWindow(consentRow, now, windowDays = REFETCH_WINDOW_DAYS) {
+  const nowMs = Date.parse(isoConsent(now));
+  if (!Number.isFinite(nowMs)) return { ok: false, reason: "no-clock" };
+  const last = consentRow && (consentRow.last_fetched_at ?? consentRow.lastFetchedAt);
+  if (last == null) return { ok: true };
+  const lastMs = Date.parse(last);
+  if (!Number.isFinite(lastMs)) return { ok: false, reason: "unparseable-last-fetch" };
+  const ageDays = (nowMs - lastMs) / 86400000;
+  if (ageDays < 0) return { ok: false, reason: "last-fetch-in-the-future" };
+  return ageDays <= windowDays ? { ok: true } : { ok: false, reason: "refetch-window-expired" };
+}
+
+
+const isoConsent = (now) => {
+  const d = typeof now === "function" ? now() : now;
+  if (d && typeof d.toISOString === "function") return d.toISOString();
+  if (typeof d === "string" && d) return d;
+  return new Date(typeof d === "number" ? d : Date.now()).toISOString();
+};

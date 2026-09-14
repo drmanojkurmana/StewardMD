@@ -15,11 +15,12 @@
 // HONEST INVARIANT (dual-adversarial fix #3): the ABHA is ALWAYS HMAC'd; the careContextReference is a
 // protocol-visible identifier (returned raw to the HIU, matched on serve) stored raw in ref/care_contexts —
 // an accepted exception, NOT a leak. The audit sink (fix #1) now value-scans scope/resourceCounts.
+import { makeMockKv } from "../../../functions/_connect/testkit.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { looksLikePhi, assertNoPhi, guardedKvPut, scrubPhi, PhiLeakError, RESIDENCY } from "../../../functions/_connect/abdm/no-phi.js";
+import { looksLikePhi, assertNoPhi, assertNoPhiKey, guardedKvPut, scrubPhi, PhiLeakError, RESIDENCY } from "../../../functions/_connect/abdm/no-phi.js";
 import { makeAuditSink } from "../../../functions/_connect/audit.js";
 import { makeMockDb } from "../../../functions/_connect/testkit.js";
 import { linkCareContext } from "../../../functions/_connect/abdm/hip.js";
@@ -203,8 +204,14 @@ function scan(src, file) {
   const hits = [];
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    // ABDM's own endpoints contain the token "abha" as a bounded word, in the host
+    // (https://abha.abdm.gov.in) and in the path (/abha/api/v3/...). Those are endpoints, not patient
+    // identifiers, so blank the ABDM URL literal out before matching identifiers. Narrow on purpose:
+    // only the literal is neutralised, so anything CONCATENATED onto it - a real abhaNumber or
+    // abhaAddress variable - is still caught. The planted-violation test pins both directions.
+    const probe = line.replace(/https?:\/\/[A-Za-z0-9.-]*abdm\.gov\.in[^"'`\s)]*/g, "ABDM_URL");
     for (const s of SINKS) {
-      if (s.re.test(line) && s.tiers.some((t) => t.test(line))) { hits.push({ file, line: i + 1, sink: s.name, text: line.trim().slice(0, 120) }); break; }
+      if (s.re.test(line) && s.tiers.some((t) => t.test(probe))) { hits.push({ file, line: i + 1, sink: s.name, text: line.trim().slice(0, 120) }); break; }
     }
   }
   return hits;
@@ -240,8 +247,19 @@ test("codebase-audit: the sweep WOULD flag every planted violation shape", () =>
     'await r2.put(`abdm/buffer/${txn}/${careContextReference}`, body);', // careContextReference in an R2 key
     'await db.prepare("INSERT ...").bind(id, abhaAddress).run();',       // raw ABHA into a D1 column (STRICT)
     'await r2.put("k", decryptedContent);',                              // decrypted plaintext persisted
+    'await fetch("https://abha.abdm.gov.in/x?id=" + abhaNumber);',       // ABDM host allowance must NOT hide a real leak
+    'const u = new URL("https://abhasbx.abdm.gov.in/" + abhaAddress);',  // ditto, sandbox host
   ];
   planted.forEach((code, idx) => assert.equal(scan(code, "planted-" + idx + ".js").length, 1, "planted violation NOT caught: " + code));
+});
+
+test("codebase-audit: an ABDM API hostname alone is not a PHI violation", () => {
+  const benign = [
+    'abhaApiHost: "https://abha.abdm.gov.in",',
+    'gateway: "https://dev.abdm.gov.in",',
+    'const cert = await fetch("https://abhasbx.abdm.gov.in/abha/api/v3/profile/public/certificate");',
+  ];
+  benign.forEach((code) => assert.deepEqual(scan(code, "benign.js"), [], "false positive on: " + code));
 });
 
 test("codebase-audit: careContextReference in a D1 column is the ACCEPTED protocol-visible exception (not flagged)", () => {
@@ -265,4 +283,53 @@ test("codebase-audit: the sweep does NOT false-positive on legitimate raw-PHI us
     'const careContextHash = await hmacCareContext(env, careContextRef);', // hash assignment — RAW present but not a sink
   ];
   for (const code of benign) assert.equal(scan(code, "benign.js").length, 0, "false-positive on a legitimate line: " + code);
+});
+
+// ───────────── D9: a composite KV key must not trip the guard on a concatenation artefact ─────────────
+// A KV key is a namespace plus one or more values joined by ":". Checking the JOINED string flagged 7% of
+// `prefix:hipId:<sha256>` keys, because a 64-char hex digest next to other text manufactures digit runs
+// that look like an Indian mobile. The consequence was not a leak but a DENIAL: guardedKvPut threw, the
+// caller failed closed, and roughly one patient in fourteen could never be cleared to receive a link OTP.
+// Keys are now checked segment-wise, then again with the provably-safe segments elided.
+test("D9: a hex digest inside a composite key never trips the guard", async () => {
+  const sha = async (s) => {
+    const d = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)));
+    return [...d].map((b) => b.toString(16).padStart(2, "0")).join("");
+  };
+  let tripped = 0;
+  for (let i = 0; i < 500; i++) {
+    try { assertNoPhiKey("connect:abdm:tok:IN2810006668:" + (await sha("patient-" + i))); }
+    catch { tripped++; }
+  }
+  assert.equal(tripped, 0, "a hashed pseudonym is not PHI, and denying its key denies the patient");
+});
+
+test("D9: the key guard STILL blocks real PHI in any segment", () => {
+  for (const key of [
+    "connect:abdm:tok:ramesh1985@sbx",          // ABHA address
+    "connect:abdm:x:9876543210",                // Indian mobile
+    "connect:abdm:x:234123412346",              // Aadhaar
+    "connect:abdm:x:91234567890123",            // ABHA number
+    "connect:abdm:tok:IN2810006668:9876543210", // PHI alongside a legitimate segment
+  ]) {
+    assert.throws(() => assertNoPhiKey(key), PhiLeakError, "must block: " + key);
+  }
+});
+
+test("D9: an identifier SPLIT across segments still trips on the elided remainder", () => {
+  // Neither "98765" nor "43210" is PHI-shaped alone, so segment-wise checking alone would pass it.
+  // Eliding only the provably-safe segments leaves the rest joined, which does trip.
+  assert.throws(() => assertNoPhiKey("connect:abdm:x:98765:43210"), PhiLeakError);
+});
+
+test("D9: guardedKvPut writes a composite-key record that the old guard would have refused", async () => {
+  const sha = async (s) => {
+    const d = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)));
+    return [...d].map((b) => b.toString(16).padStart(2, "0")).join("");
+  };
+  // sha256("P1") is one of the digests that used to trip it.
+  const key = "connect:abdm:otprate:t1:" + (await sha("P1"));
+  const kv = makeMockKv();
+  await guardedKvPut(kv, key, JSON.stringify({ win: 1, count: 1 }), { expirationTtl: 60 });
+  assert.ok(await kv.get(key), "the rate-limit record must actually land");
 });

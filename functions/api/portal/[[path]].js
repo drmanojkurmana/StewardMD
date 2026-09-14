@@ -24,7 +24,10 @@ import * as ORG from "../../_opd_org_store.js";
 import { recordDeps } from "../../_wardsynq/deps.js";
 import { redeemCode, portalRead, sessionPatient } from "../../_wardsynq/patient-access.js";
 import { sendMessage, requestAppointment } from "../../_wardsynq/portal-requests.js";
-import { withdrawOwnConsent } from "../../_wardsynq/portal-view.js";
+import { withdrawOwnConsent, portalDocumentFile, queueStatus } from "../../_wardsynq/portal-view.js";
+import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
+import { queueEnabled } from "../../_queue.js";
+import { listSessions, listTickets, opdDate } from "../../_queue_engine.js";
 
 function corsHeaders(request) {
   const origin = (request && request.headers && request.headers.get("Origin")) || "";
@@ -83,6 +86,26 @@ export async function onRequest(context) {
       neverRelease: (cfg && cfg.neverRelease) || null,
     });
     return json(r, r.ok ? 200 : (r.status || 502), request);
+  }
+  /* P2 gaps: the two further session reads. Each checks the session and the grant's section first,
+   * then takes the patient from the grant, exactly like the record read. */
+  if (sub === "queue" || sub === "document") {
+    const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
+    if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
+    if (sub === "queue") {
+      const r = await queueStatus({ ...deps, queue: {
+        enabled: queueEnabled(env), date: opdDate(),
+        listSessions: (date) => listSessions(env, org.id, date), listTickets: (sid) => listTickets(env, sid), listRooms: () => ORG.listRooms(env, org.id),
+      } }, session);
+      return json(r, r.ok ? 200 : (r.status || 502), request);
+    }
+    const r = await portalDocumentFile({ ...deps, env, store: documentStoreFromEnv(env), documentId: body.documentId, version: body.version }, session);
+    if (!r.ok) return json(r, r.status || 502, request);
+    /* The bytes themselves, through this response. No object-store key or address ever leaves the server. */
+    return new Response(r.bytes, { status: 200, headers: Object.assign({
+      "Content-Type": r.contentType || "application/octet-stream", "Cache-Control": "no-store",
+      "Content-Disposition": `attachment; filename="${r.filename}"`, "X-Content-Type-Options": "nosniff",
+    }, corsHeaders(request)) });
   }
   /* The two write routes. Both check the session FIRST and then take the patient id from the grant -
    * a caller cannot name whose record it writes onto, exactly as on the read side. */

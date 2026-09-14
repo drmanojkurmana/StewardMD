@@ -166,6 +166,9 @@ const RESOURCE_TYPES = Object.freeze([
    * changes anything for the patient - so the actions and what was done about them live on the
    * record beside the number. */
   "RiskAssessment",
+  /* A vaccine given, or considered and deliberately not given. Append-only so an entry later found
+   * to be wrong is withdrawn as a new version and stays readable (immunization.js). */
+  "Immunization",
   /* Sending a prescription somewhere, and knowing whether it arrived. A DELIVERY fact, never a
    * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
    * about a message, not about the treatment. */

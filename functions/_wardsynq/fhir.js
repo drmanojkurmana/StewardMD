@@ -35,6 +35,7 @@ import { parseSearch, applySearch, paginate, resolveIncludes, resolveRevIncludes
 import { SYSTEMS, UNCODED, UNMAPPED, INVALID, IDENTIFIER_SYSTEMS, systemUri, isUri, coverage, validateCode, validateCodeParameters } from "./terminology.js";
 import { validateResource, validationOutcome, VALIDATED_TYPES } from "./fhir-validate.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
+import { renderResource } from "./fhir-version.js";
 import { fhirId, hashedId, isHashedId, RECORD_ID_SYSTEM, provenanceId, parseProvenanceId } from "./fhir-id.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -685,6 +686,33 @@ function fhirImagingStudy(s) {
   });
 }
 
+/**
+ * G6. An immunization. The vaccine is the recorder's own words and goes out as text; a coding rides
+ * with it only when they gave a code from a system codeable() knows (CVX, SNOMED CT, ATC). The dose
+ * number is R4's protocolApplied, the only element that carries one, and is omitted rather than
+ * guessed when nobody wrote it down.
+ */
+function fhirImmunization(i) {
+  const status = ["completed", "not-done", "entered-in-error"].includes(str(i.status)) ? str(i.status) : "completed";
+  return clean({
+    resourceType: "Immunization", id: fhirId(i.id),
+    status,
+    statusReason: status === "not-done" && str(i.statusReason) ? { text: str(i.statusReason) } : undefined,
+    vaccineCode: codeable(i.vaccineCode || i.vaccine, i.vaccineCode ? i.vaccineCodeSystem : null, i.vaccine) || { text: "not recorded" },
+    patient: ref("Patient", i.patientId),
+    encounter: ref("Encounter", i.encounterId),
+    occurrenceDateTime: str(i.occurredOn) || undefined,
+    recorded: str(i.recordedAt) || undefined,
+    primarySource: i.primarySource !== false,
+    lotNumber: str(i.lotNumber) || undefined,
+    site: str(i.site) ? { text: str(i.site) } : undefined,
+    route: str(i.route) ? { text: str(i.route) } : undefined,
+    performer: str(i.performerId) ? [{ actor: practitioner(i.performerId) }] : str(i.performerName) ? [{ actor: { display: str(i.performerName) } }] : undefined,
+    note: str(i.note) ? [{ text: str(i.note) }] : undefined,
+    protocolApplied: Number.isInteger(i.doseNumber) && i.doseNumber > 0 ? [{ doseNumberPositiveInt: i.doseNumber }] : undefined,
+  });
+}
+
 /* NOT DONE, stated honestly rather than half-wired: RelatedPerson/FamilyLink export. FamilyLink
  * (functions/_wardsynq/migrate-maternity.js) relates TWO WardSynQ Patients (mother, newborn) -
  * which FHIR itself would model as Patient.link (R4's own "this record and that one refer to
@@ -718,6 +746,7 @@ const MAPPERS = Object.freeze({
   SurgicalCase: fhirProcedure,
   Appointment: fhirAppointment,
   RiskAssessment: fhirRiskAssessment,
+  Immunization: fhirImmunization,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -731,6 +760,7 @@ const FHIR_TYPE = Object.freeze({
   /* TASK 7.2. A surgical case IS a Procedure - the resource a receiving system files an operation
    * under. Appointment and RiskAssessment map one-to-one onto their R4 namesakes. */
   SurgicalCase: "Procedure", Appointment: "Appointment", RiskAssessment: "RiskAssessment",
+  Immunization: "Immunization",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
@@ -885,9 +915,47 @@ function capabilityStatement(opts) {
           interaction: [{ code: "read" }],
           documentation: "Derived, read-only, and only this hospital: the organisation this door belongs to. No search: this server is not a directory of organisations.",
         }),
+        /* Terminology (fhir-terminology.js). The hospital's own lists are complete; every other system
+         * is a FRAGMENT under its owner's URI, and every expansion of one says so in a warning. */
+        {
+          type: "CodeSystem",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "url", type: "uri" }],
+          operation: [{ name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code" }],
+          documentation: "This hospital's order-set investigations, formulary and allergy classes (content complete, urn:stewardmd:fhir:CodeSystem:*), and FRAGMENTS of LOINC, HL7 code systems and any system the hospital loaded codes for (content fragment). This server ships no SNOMED CT, LOINC or ICD release and is not an authoritative source for them.",
+        },
+        {
+          type: "ValueSet",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "url", type: "uri" }],
+          operation: [{ name: "expand", definition: "http://hl7.org/fhir/OperationDefinition/ValueSet-expand" }, { name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/ValueSet-validate-code" }],
+          documentation: "One value set per code system of the hospital's own, loinc-carried, and the hospital's own definitions (wardsynq.terminology.valueSets). $expand takes filter (a case-insensitive substring of code or display), count and offset; a code the hospital names that this server does not hold is left out and named in a warning parameter.",
+        },
+        {
+          type: "Group",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "name", type: "string" }],
+          operation: [{ name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/group-export" }],
+          documentation: "Derived, never stored: one Group per ward with at least one open (in-progress) encounter, whose members are those patients now (actual). Id ward-<hash of the ward name>. Read and searched as the requester, who needs Encounter read. When the census reaches the search pool cap the read is refused and the search says membership may be incomplete.",
+        },
+        {
+          type: "AuditEvent",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "date", type: "date" }, { name: "agent", type: "token" }, { name: "type", type: "token" }, { name: "entity-type", type: "token" }, { name: "outcome", type: "token" }, { name: "_count", type: "number" }],
+          documentation: "The hospital's audit trail, read-only, carrying only what the audit screen shows (when, who, action, record type and id, patient reference hash, outcome). A SMART backend-services token with system/AuditEvent.read, or a staff session with staff.admin; never a patient/ or user/ scope. Reading it is audited.",
+        },
+        {
+          type: "Subscription",
+          /* G10. create only on the staff door (a SMART bearer here is narrowed to READ and this server issues no write scopes). */
+          interaction: [{ code: "read" }, { code: "search-type" }, ...(o.smart ? [] : [{ code: "create", documentation: "staff.admin only; rest-hook, application/fhir+json, id-only, exactly one published topic, no header, no end; the destination must be a public https address; the signing secret is returned once in the X-WardSynQ-Webhook-Secret response header" }])],
+          searchParam: [{ name: "status", type: "token" }, { name: "criteria", type: "string" }],
+          operation: [{ name: "status", definition: "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status" }],
+          documentation: "R4 Subscriptions Backport, rest-hook, id-only payload, one Subscription per topic (urn:stewardmd:fhir:SubscriptionTopic:<event>). Created over FHIR on the staff door or on the Integrations screen, both through the same registration (address checks, sealed secret, audit), changed and turned off on the Integrations screen, and delivered by the webhook outbox (signed, retried, auto-disabled). Subscription/{id}/$status answers a searchset with one SubscriptionStatus (subscription, topic, status, type query-status, and the error when delivery disabled it); no event count is given. A SMART backend-services token with system/Subscription.read, or a staff session with staff.admin.",
+        },
       ],
       operation: [
-        { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export and Patient/$export: Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; files need the same authorization and expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
+        { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export, Patient/$export and Group/{id}/$export, GET or POST (a POST takes a Parameters body and no URL parameters): Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; a Group export is the ward's census frozen at kick-off; files need the same authorization, every download is audited, and they expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
+        { name: "summary", definition: "http://hl7.org/fhir/uv/ips/OperationDefinition/summary", documentation: "Patient/{id}/$summary: a document Bundle with a Composition whose sections are problems, allergies, medications and immunizations (always present) and results (when there are any). An empty section carries emptyReason text 'none recorded'; a section whose source could not be read carries emptyReason unavailable or withheld and no entries. Authorised like a compartment read. Not validated against the IPS guide's profiles, so none is claimed." },
         { name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything", documentation: "Patient/{id}/$everything: _since, _type, _count, _page, _summary, _elements, _total" },
         { name: "validate", definition: "http://hl7.org/fhir/OperationDefinition/Resource-validate", documentation: `POST {Type}/$validate or $validate (a Bundle validates every entry) with the resource as the body, or GET {Type}/{id}/$validate for a stored resource. R4 base structure, cardinality, primitives, choice types, required bindings and invariants for ${VALIDATED_TYPES.join(", ")}; codings are checked with the terminology service; profiles named in meta.profile are evaluated only when the hospital has loaded them (wardsynq.fhir.profiles), and said so otherwise.` },
         { name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code", documentation: "GET CodeSystem/$validate-code?url=<system>&code=<code>[&display=]. Answers verified (seed tables, the hospital's code lists, or its terminology server), invalid (the server says no), recognised (a real system, not verified) or unmapped (a system this server does not know). Nothing is guessed." },
@@ -909,7 +977,7 @@ function txDeps(env, ctx) {
  * information issue, because "this server cannot vouch for it" is not "it is wrong".
  */
 async function validateFully(resource, env, ctx) {
-  const v = validateResource(resource, { profiles: (ctx && ctx.profiles) || null });
+  const v = validateResource(resource, { profiles: (ctx && ctx.profiles) || null, version: (ctx && ctx.fhirVersion) || "4.0" });
   const deps = txDeps(env, ctx);
   const seen = new Map();
   for (const c of v.codings) {
@@ -942,6 +1010,12 @@ async function validateOperation(request, env, ctx) {
     const r = await readResource(request, env, { ...ctx, searchParams: "" });
     if (!r.ok) return r;
     resource = r.resource;
+    /* D9: a stored resource is validated as the version it would be served in, so $validate under fhirVersion=5.0 checks the R5 rendering. */
+    if (ctx.fhirVersion && ctx.fhirVersion !== "4.0") {
+      const rendered = renderResource(resource, ctx.fhirVersion);
+      if (!rendered.resource && rendered.unsupported.length) return { ok: false, status: 406, outcome: operationOutcome("error", "not-supported", `${rendered.unsupported.join(", ")} is not rendered in FHIR ${ctx.fhirVersion}`) };
+      if (rendered.resource) resource = rendered.resource;
+    }
   }
   if (!resource || typeof resource !== "object") return { ok: false, status: 400, outcome: operationOutcome("error", "required", "send the resource as the body, or as Parameters.parameter[name=resource].resource") };
   if (str(ctx.type) && str(resource.resourceType) !== str(ctx.type)) return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", `body is ${resource.resourceType}, URL says ${ctx.type}`) };
@@ -1329,7 +1403,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, fhirImmunization, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
-  validateFully, validateOperation, validateCodeOperation,
+  validateFully, validateOperation, validateCodeOperation, open,
 };

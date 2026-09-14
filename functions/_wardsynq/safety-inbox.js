@@ -136,7 +136,7 @@ async function safetyInbox(request, env, ctx) {
         if (!loop || str(loop.state) !== "open") continue;
         items.push({
           type: "critical-result",
-          detail: `${str(loop.display) || str(loop.code)}${loop.value != null ? ` ${loop.value}${loop.unit ? ` ${loop.unit}` : ""}` : ""} — nobody has acknowledged this yet`,
+          detail: `${str(loop.display) || str(loop.code)}${loop.value != null ? ` ${loop.value}${loop.unit ? ` ${loop.unit}` : ""}` : ""}. Nobody has acknowledged this yet`,
           since: str(loop.reportedAt) || str(loop.openedAt) || null,
           escalation: criticalEscalationOf(loop, nowMs, cfg.criticalPolicy) || { level: "escalate" },
           sourceRef: { loopId: str(loop.id) },

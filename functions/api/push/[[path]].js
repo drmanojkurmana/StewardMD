@@ -7,11 +7,26 @@
  *   POST /api/push/unregister-native body={ token }                   -> { ok }        (native app)
  *   POST /api/push/send             (admin token) -> { web, native }  (manual test blast — both channels)
  *
+ * WardSynQ hospital alerts (S3 P0), each authenticated by the HOSPITAL credential (a StewardMD account
+ * that is a member, or a staff session), identity always derived on the server, never from the body:
+ *   POST /api/push/register-member   body={ orgId, token, platform? }  -> bind this device to the member
+ *   POST /api/push/unregister-member body={ orgId, token }             -> sign-out: this device only, unbound
+ *   GET  /api/push/notice/<nid>                                       -> detail, for an addressee only
+ *   POST /api/push/notice/<nid>/decline  body={ reason? }             -> "I cannot attend": next tier now
+ *   POST /api/push/wardsynq-receipt  body={ noticeId, kind }          -> v2 notices: onto the loop record
+ *
  * Subscribing/registering is open to any user (it's their own device opting in). Sending is
  * gated by the same UPDATES_ADMIN_TOKEN as the notifications API.
  */
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
-import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens } from "../../_nativepush.js";
+import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens, tokenId, nativeTokensById } from "../../_nativepush.js";
+import { identify as identifyAccount } from "../../_usage.js";
+import { verifyStaffSession, sessionRevoked } from "../../_opd_auth.js";
+import * as ORG from "../../_opd_org_store.js";
+import { CAPS } from "../../_queue_roles.js";
+import { recordDeps } from "../../_wardsynq/deps.js";
+import { directoryFromEnv, notifyDepsFor } from "../../_wardsynq/alert-deps.js";
+import { readNotice, receiptNotice, declineNotice } from "../../_wardsynq/push-alerts.js";
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, notifyCriticalValue, remindTask } from "../../_taskpush.js";
@@ -28,6 +43,33 @@ function adminOK(request, env) {
   if (got.length !== want.length) return false;
   let d = 0; for (let i = 0; i < got.length; i++) d |= got.charCodeAt(i) ^ want.charCodeAt(i);
   return d === 0;
+}
+
+/* WHO IS ASKING, AS A MEMBER OF THIS HOSPITAL. The same two credentials the ward accepts, with the same
+ * revocation check (a reset PIN ends its sessions here too). Returns { status } on refusal, else the
+ * identity forms this caller may be addressed by: the membership identity first, then the account id. */
+async function hospitalCaller(request, env, orgId, cap) {
+  let actor = null;
+  const who = await identifyAccount(request, env);
+  if (who && !who.guest && who.id) actor = { kind: "firebase", id: who.id, email: who.email || "" };
+  else if (env.QUEUE_STAFF_ENABLED === "1") {
+    const tok = request.headers.get("X-Staff-Token") || "";
+    const ss = tok ? await verifyStaffSession(env, tok, Date.now()) : null;
+    if (ss) {
+      const m = await ORG.getMemberAuth(env, ss.orgId, ss.identity);
+      if (m && !sessionRevoked(ss, m)) actor = { kind: "staff", id: ss.identity, orgId: ss.orgId };
+    }
+  }
+  if (!actor) return { status: 401, error: "auth_required" };
+  if (!orgId) return { status: 400, error: "org_required" };
+  const az = await ORG.authorizeOrg(env, actor, orgId, cap);
+  if (!az.ok) return { status: az.reason === "org_not_found" ? 404 : 403, error: az.reason || "forbidden" };
+  let ids = [actor.id];
+  if (actor.kind === "firebase" && !az.owner) {
+    const m = (await ORG.getMembership(env, orgId, actor.id)) || (actor.email ? await ORG.getMembership(env, orgId, actor.email) : null);
+    if (m && m.identity) ids = [m.identity, actor.id];
+  }
+  return { actor, ids: [...new Set(ids)] };
 }
 
 export async function onRequest(context) {
@@ -180,11 +222,82 @@ export async function onRequest(context) {
     })).sort((a, b) => String(b.lastSeen).localeCompare(String(a.lastSeen)));
     return json({ devices: mine, total: mine.length });
   }
+  // ── WardSynQ hospital alerts (S3 P0) ─────────────────────────────────────────────────────────
+  /* Bind this phone to the caller's membership of one hospital, so the escalation ladder can reach a
+   * nurse who signs in with a PIN. The identity comes from the credential; the body names only the
+   * hospital and the device. Audited under the hospital with the device fingerprint. */
+  if (method === "POST" && seg === "register-member") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const who = await hospitalCaller(request, env, String(body.orgId || ""), CAPS.EMR_VIEW);
+    if (who.status) return json({ ok: false, error: who.error }, who.status);
+    const token = typeof body.token === "string" ? body.token.trim() : "";
+    if (!token || token.length > 4096) return json({ ok: false, error: "no-token" }, 400);
+    const dir = directoryFromEnv(env);
+    if (!dir) return json({ ok: false, error: "store-unavailable" }, 501);
+    const tid = await tokenId(token);
+    // The account-scoped record is left exactly as register-native wrote it; created only if absent.
+    if (!(await nativeTokensById(env, [tid])).length) {
+      if (!body.platform) return json({ ok: false, error: "no-platform" }, 400);
+      if (!(await saveNativeToken(env, { token, platform: body.platform, uid: null, device: body.device }))) return json({ ok: false, error: "store-unavailable" }, 501);
+    }
+    try { await dir.bind(body.orgId, who.ids, tid); }
+    catch (e) { return json({ ok: false, error: "bind_failed" }, 502); }
+    await ORG.auditLogin(env, body.orgId, who.ids[0], "push:device_bound", "device " + tid.slice(0, 8));
+    return json({ ok: true, orgId: String(body.orgId), identity: who.ids[0], device: tid.slice(0, 8) });
+  }
+  /* S3 P1: signing out of a hospital on this phone. Only THIS device leaves THIS caller's bindings at that
+   * hospital; called with the credential still valid, before the app forgets it. Audited like the bind. */
+  if (method === "POST" && seg === "unregister-member") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const who = await hospitalCaller(request, env, String(body.orgId || ""), CAPS.EMR_VIEW);
+    if (who.status) return json({ ok: false, error: who.error }, who.status);
+    const token = typeof body.token === "string" ? body.token.trim() : "";
+    if (!token || token.length > 4096) return json({ ok: false, error: "no-token" }, 400);
+    const dir = directoryFromEnv(env);
+    if (!dir) return json({ ok: false, error: "store-unavailable" }, 501);
+    const tid = await tokenId(token);
+    let out;
+    try { out = await dir.release(body.orgId, who.ids, tid); }
+    catch (e) { return json({ ok: false, error: "unbind_failed" }, 502); }
+    await ORG.auditLogin(env, body.orgId, who.ids[0], "push:device_unbound", "device " + tid.slice(0, 8));
+    return json({ ok: true, orgId: String(body.orgId), removed: out.removed });
+  }
+  /* The notice behind a thin push. Anyone it was not addressed to, in any hospital, gets 404 whatever
+   * the reason, so an nid confirms nothing (design 3.4). */
+  if (seg.indexOf("notice/") === 0) {
+    const [, nid, action] = seg.split("/");
+    const dir = directoryFromEnv(env);
+    const pointer = dir ? await dir.getNotice(nid) : null;
+    const who = await hospitalCaller(request, env, pointer ? pointer.orgId : "", CAPS.EMR_VIEW);
+    if (who.status === 401) return json({ ok: false, error: who.error }, 401);
+    if (!pointer || who.status) return json({ ok: false, error: "not_found" }, 404);
+    const org = await ORG.getOrg(env, pointer.orgId);
+    if (!org || String(org.connectTenantId || "") !== String(pointer.tenantId)) return json({ ok: false, error: "not_found" }, 404);
+    const ctx = { repository: recordDeps(env, pointer.tenantId).repository, tenantId: pointer.tenantId, nid, pointer, callerIds: who.ids.map((i) => pointer.orgId + "~" + i), actorId: who.actor.id, orgName: org.name || null, policy: (org.wardsynq && org.wardsynq.criticalEscalation) || null };
+    if (method === "GET" && !action) { const r = await readNotice(ctx); return json(r, r.ok ? 200 : r.status || 502); }
+    if (method === "POST" && action === "decline") {
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const r = await declineNotice({ ...ctx, reason: body.reason, notifyDeps: notifyDepsFor(env, org, pointer.tenantId, ctx.repository) });
+      return json(r, r.ok ? 200 : r.status || 502);
+    }
+    return json({ ok: false, error: "not_found" }, 404);
+  }
   // The handset confirming what actually happened to it: received, opened, acknowledged.
   if (method === "POST" && seg === "wardsynq-receipt") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    /* A v2 notice (one the server sent): the receipt goes on the loop record, from an addressee only.
+     * Anything else is the older self-push path, unchanged below. */
+    const dirR = directoryFromEnv(env);
+    const pointerR = dirR && typeof body.noticeId === "string" ? await dirR.getNotice(body.noticeId) : null;
+    if (pointerR) {
+      const who = await hospitalCaller(request, env, pointerR.orgId, CAPS.EMR_VIEW);
+      if (who.status === 401) return json({ ok: false, error: who.error }, 401);
+      if (who.status) return json({ ok: false, error: "not_found" }, 404);
+      const r = await receiptNotice({ repository: recordDeps(env, pointerR.tenantId).repository, tenantId: pointerR.tenantId, nid: body.noticeId, pointer: pointerR, callerIds: who.ids.map((i) => pointerR.orgId + "~" + i), actorId: who.actor.id, kind: body.kind, device: body.device });
+      return json(r, r.ok ? 200 : r.status || 502);
+    }
     const uid = await identify(request, env);
     if (!uid) return json({ error: "auth-required" }, 401);
-    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
     const out = await saveReceipt(env, uid, body);
     return json(out, out.ok ? 200 : 400);
   }

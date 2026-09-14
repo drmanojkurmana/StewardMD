@@ -546,8 +546,10 @@
   function connectionRow(c) {
     var pill = pillFor(c);
     var removable = !!(c && (c.activeVersionId || c.pendingVersionId));
+    var active = !!(c && c.activeVersionId);
     return '<div class="smd-connect-hosp"><span style="flex:1"><span>' + esc(connectionHost(c)) + '</span></span>' +
       '<span class="smd-connect-badge' + (pill.cls ? " " + pill.cls : "") + '">' + esc(pill.label) + '</span>' +
+      (active ? '<button class="smd-connect-btn primary smd-connect-openward" type="button" data-dep="' + esc(c.deploymentId) + '" style="margin-left:6px" aria-label="Open ' + esc(connectionHost(c)) + ' in Ward Sync">Open in Ward</button>' : "") +
       (removable ? '<button class="smd-connect-btn smd-connect-remove" type="button" data-dep="' + esc(c.deploymentId) + '" aria-label="Remove the adapter for ' + esc(connectionHost(c)) + '">Remove</button>' : "") + '</div>';
   }
   /* REMOVE AN ADAPTER. Owner or admin only (the server says 403 otherwise): the approved version is
@@ -643,6 +645,13 @@
     if (sw) sw.onclick = function () { S.tenant = ""; storeTenant(""); renderConnections(); };
     var rms = b.querySelectorAll(".smd-connect-remove");
     for (var k = 0; k < rms.length; k++) rms[k].onclick = function () { removeAdapter(this.getAttribute("data-dep"), this); };
+    var ows = b.querySelectorAll(".smd-connect-openward");
+    for (var m = 0; m < ows.length; m++) ows[m].onclick = function () {
+      var depId = this.getAttribute("data-dep");
+      close();
+      if (window.openGHIS) window.openGHIS();
+      if (window.ghisOpenAdapterHospital && depId) setTimeout(function () { window.ghisOpenAdapterHospital(depId); }, 150);
+    };
     b.querySelector("#smd-connect-add").onclick = function () {
       S.selected = null; S.emrUrl = "";
       show("url");
@@ -799,15 +808,33 @@
     renderLoginFallback(b);
   }
 
+  /* Three steps, plain words. A first-time doctor sees exactly what will happen before
+   * the hospital website opens: sign in, tap the patient list, tap any patient. */
+  function stepsPrimer() {
+    return '<div class="smd-connect-card"><div class="smd-connect-label">What happens next (3 steps)</div>' +
+      '<div class="smd-connect-note"><strong>Step 1: Sign in.</strong> Use your usual hospital login in the screen that opens.</div>' +
+      '<div class="smd-connect-note"><strong>Step 2: Tap your patient list.</strong> If the agent cannot find it, it will ask you to open it and tap inside it.</div>' +
+      '<div class="smd-connect-note"><strong>Step 3: Tap any patient.</strong> The agent reads that one patient to learn your hospital. You cannot break anything: the agent only reads, and you can stop it at any time.</div></div>';
+  }
+
   function renderLoginPhone(b) {
     var host = hostOf(S.selected.emrUrl);
     b.innerHTML =
       '<h2 class="smd-connect-display">Sign in to ' + esc(host) + '</h2>' +
       '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
+      stepsPrimer() +
       '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open until the connection finishes. The screen stays awake while the hospital website is open.</div>' +
-      '<div class="smd-connect-row"><button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
+      '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
+      '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
     setStatus("", S.statusText || "Opening the hospital website.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    /* SELF-REPAIR: reopening the hospital website is safe to repeat (openLoginPlugin
+     * guards double-open), so a failed first open is one tap to retry, not a restart. */
+    b.querySelector("#smd-connect-retryopen").onclick = function () {
+      S.loginOpened = false;
+      setStatus("", "Opening the hospital website.");
+      openLoginPlugin();
+    };
     openLoginPlugin();
   }
 
@@ -1621,11 +1648,22 @@
     if (!b) return;
     var name = hostOf((S.selected && S.selected.emrUrl) || "");
     var msg = S.reuse ? "Signed in. You can use this connection now." : "Approved. This connection is now active.";
+    var depId = (S.deployment && S.deployment.id) || S.deploymentId || (S.selected && S.selected.deploymentId);
     b.innerHTML =
       '<h2 class="smd-connect-display">Connected</h2>' +
       '<p class="smd-connect-lead">' + esc(name) + '. ' + msg + '</p>' +
-      '<div class="smd-connect-row"><button id="smd-connect-donebtn" class="smd-connect-btn primary" type="button">Done</button></div>';
+      '<div class="smd-connect-row">' +
+      (depId ? '<button id="smd-connect-wardgo" class="smd-connect-btn primary" type="button">Open in Ward Sync</button>' : "") +
+      '<button id="smd-connect-donebtn" class="smd-connect-btn' + (depId ? "" : " primary") + '" type="button">Done</button></div>';
     setStatus("done", "Connection active.");
+    var wbtn = b.querySelector("#smd-connect-wardgo");
+    if (wbtn) {
+      wbtn.onclick = function () {
+        close();
+        if (window.openGHIS) window.openGHIS();
+        if (window.ghisOpenAdapterHospital && depId) setTimeout(function () { window.ghisOpenAdapterHospital(depId); }, 150);
+      };
+    }
     b.querySelector("#smd-connect-donebtn").onclick = function () { close(); };
   }
 

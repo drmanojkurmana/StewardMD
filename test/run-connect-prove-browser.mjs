@@ -19,6 +19,7 @@ import { createProofBook } from "../connect-agent/phone/prove.mjs";
 import { GUIDE_SOURCES } from "../connect-agent/phone/deep-crawl.mjs";
 import { executeView, rowsFromJson } from "../connect-agent/phone/adapter-runtime.mjs";
 import { mapRows } from "../connect-agent/phone/runtime.mjs";
+import { serveGhisProxy } from "../connect-agent/phone/ghis-shim.mjs";
 
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const DBG = 9391;
@@ -34,11 +35,25 @@ const MEDS = {
   "MR900001-IP5550001": [["Tab Paracetamol 650 mg", "Oral", "TDS"], ["Inj Ceftriaxone 1 g", "IV", "BD"]],
   "MR900002-IP5550002": [["Tab Metformin 500 mg", "Oral", "BD"], ["Inj Insulin Regular 6 units", "SC", "TDS"]],
 };
+/* Lab RESULTS keyed by MR. The JSON labels its columns to fool a name guess: `Value` is a code, and the
+ * number the doctor sees lives in `ValueType`; the reference range is two fields (`LowValue`/`HighValue`).
+ * The screen shows Test / Result / Units / Range. Only value-based column learning binds these right. */
+const LABS = {
+  MR900001: [
+    { Analyte: "Haemoglobin", Value: "HB_CODE", ValueType: "11.2", UOM: "g/dL", LowValue: "13", HighValue: "17", Section: "Haematology" },
+    { Analyte: "Creatinine", Value: "CR_CODE", ValueType: "1.4", UOM: "mg/dL", LowValue: "0.6", HighValue: "1.2", Section: "Biochemistry" },
+  ],
+  MR900002: [
+    { Analyte: "Potassium", Value: "K_CODE", ValueType: "5.6", UOM: "mmol/L", LowValue: "3.5", HighValue: "5.1", Section: "Biochemistry" },
+  ],
+};
 const PAGE = `<!doctype html><html><body>
 <input type="hidden" name="__RequestVerificationToken" value="tok-abc">
 <table id="wl"><thead><tr><th>MR No</th><th>Visit</th><th>Patient name</th><th>Bed</th></tr></thead><tbody></tbody></table>
 <a href="#" id="tc">Treatment chart</a>
+<a href="#" id="lb">Labs</a>
 <div id="medsBox"></div>
+<div id="labsBox"></div>
 <script>
 var selected = null;
 function xhr(method, url, body, cb) { var x = new XMLHttpRequest(); x.open(method, url); x.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); if (body) x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); x.onload = function () { cb(x.responseText); }; x.send(body || null); }
@@ -48,6 +63,15 @@ xhr('GET', '/Doctor/Home/GetIPWL?NursingStationId=&Type=IPWorkList&__RequestVeri
   document.title = 'ready';
 });
 setInterval(function () { xhr('GET', '/Doctor/Home/DashboardUnit?type=docopdlist', null, function () {}); }, 100);
+document.getElementById('lb').onclick = function (e) {
+  e.preventDefault();
+  document.querySelector('#wl').style.display = 'none';
+  xhr('GET', '/Lab/Home/GetResults?id=' + selected.MRNo, null, function (t) {
+    var rows = JSON.parse(t), h = '<table id="labsTbl"><thead><tr><th>Test</th><th>Result</th><th>Units</th><th>Range</th></tr></thead><tbody>';
+    rows.forEach(function (r) { h += '<tr><td>' + r.Analyte + '</td><td>' + r.ValueType + '</td><td>' + r.UOM + '</td><td>' + r.LowValue + ' - ' + r.HighValue + '</td></tr>'; });
+    document.getElementById('labsBox').innerHTML = h + '</tbody></table>'; document.title = 'labs';
+  });
+};
 document.getElementById('tc').onclick = function (e) {
   e.preventDefault();
   var tok = document.querySelector('input[name=__RequestVerificationToken]').value;
@@ -83,6 +107,7 @@ function startEmr() {
       }
       if (u.pathname === "/Doctor/Home/DashboardUnit") { res.writeHead(200, { "Content-Type": "text/html" }); return res.end("<table><tr><td>5</td></tr></table>"); }
       if (u.pathname === "/Doctor/Home/GetSignatureBYid") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end('{"Signature":"sig"}'); }
+      if (u.pathname === "/Lab/Home/GetResults") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(LABS[u.searchParams.get("id")] || [])); }
       if (u.pathname === "/Doctor/Home/GetMedicines/") {
         const rec = active[sid[1]] || "";
         const rows = rec.split("-")[0] === u.searchParams.get("id") ? MEDS[rec] || [] : [];
@@ -187,6 +212,28 @@ async function main() {
     const out = await executeView({ plugin: client, origin: emr.origin, view: meds, patient: patients[1], parseHtml: tinyDom, onCall: (c) => calls.push(c.method + " " + c.url.replace(emr.origin, "") + (c.body ? " " + c.body : "")) });
     console.log("  replayed: " + JSON.stringify(calls) + " kind=" + out.kind);
     ok(out.proven && out.rows.length === 2 && /Metformin/.test(JSON.stringify(out.rows)) && !/Paracetamol/.test(JSON.stringify(out.rows)), "proven adapter returned patient two's medicines, not patient one's: " + out.rows.length + " rows");
+
+    // LAB RESULTS with a misleading payload: prove the columns are learned by value in a real browser,
+    // then read them back through the shim and check they equal what the doctor saw on the screen.
+    await client.navigate({ url: emr.origin + "/Doctor/Home" });
+    ok(await waitFor("document.title==='ready'"), "back on the ward list for the labs read");
+    await client.evaluate({ expression: GUIDE_SOURCES.arm });
+    await client.evaluate({ expression: "document.querySelectorAll('#wl tbody tr')[0].click(); document.getElementById('lb').click(); 'ok'" });
+    ok(await waitFor("document.title==='labs'"), "the labs results table rendered");
+    const labs = { resourceHint: "labs", pathTemplate: emr.origin + "/Doctor/Home", rowsSelector: "#labsTbl tbody tr", headers: ["Test", "Result", "Units", "Range"] };
+    await book.prove({ client, view: labs, label: "open Labs" });
+    ok(labs.proof.status === "proven" && labs.endpoints.at(-1).path.startsWith("/Lab/Home/GetResults"), "labs results call proven: " + JSON.stringify(labs.proof));
+    ok(labs.columns && labs.columns.Result && labs.columns.Result.key === "ValueType", "Result column learned to ValueType (the on-screen number), not the Value code: " + JSON.stringify(labs.columns));
+    ok(labs.columns.Range && Array.isArray(labs.columns.Range.keys) && labs.columns.Range.keys.join(",") === "LowValue,HighValue", "Range column learned as two joined fields: " + JSON.stringify(labs.columns.Range));
+    ok(!/HB_CODE|11\.2|Haemoglobin/.test(JSON.stringify({ p: labs.proof, c: labs.columns, e: labs.endpoints })), "no cell value is in the saved labs view");
+
+    const labCalls = [];
+    const labOut = await executeView({ plugin: client, origin: emr.origin, view: labs, patient: patients[0], parseHtml: tinyDom, onCall: (c) => labCalls.push(c.method + " " + c.url.replace(emr.origin, "")) });
+    const labsSection = [{ resource: "labs", rows: labOut.rows }];
+    const orders = serveGhisProxy({ path: "/lab?patientId=MR900001", sections: labsSection, patient: patients[0] }).body.orders;
+    const det = serveGhisProxy({ path: "/lab-detail?renderId=" + orders[0].renderId, sections: labsSection, patient: patients[0] }).body;
+    const hb = det.tests.find((t) => /Haemoglobin/.test(t.test));
+    ok(hb && hb.result === "11.2" && hb.units === "g/dL" && hb.range === "13 - 17", "shim reads the result the doctor saw, not the code: " + JSON.stringify(hb && { r: hb.result, u: hb.units, rng: hb.range }));
   } finally {
     try { chrome.kill(); } catch { /* gone */ }
     emr.server.close();

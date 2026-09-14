@@ -12,7 +12,7 @@
 // view lives on read from the DOM (runtime.mjs readView), which is the fallback, never the primary
 // path once an endpoint is known.
 
-import { READ_ROWS } from './runtime.mjs';
+import { READ_ROWS, isGimsrOrigin } from './runtime.mjs';
 
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
 export const PATIENT_KEY = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$/i;
@@ -191,6 +191,15 @@ export function classifyResponse(resp) {
   if (/json/i.test(resp.contentType || '')) return 'json';
   const t = text.trim();
   if ((t[0] === '{' || t[0] === '[')) { try { JSON.parse(t); return 'json'; } catch { /* html that starts oddly */ } }
+  if (t[0] === '"' && t[t.length - 1] === '"') {
+    try {
+      const unquoted = JSON.parse(t);
+      if (typeof unquoted === 'string') {
+        const ut = unquoted.trim();
+        if (ut[0] === '{' || ut[0] === '[') { JSON.parse(ut); return 'json'; }
+      }
+    } catch {}
+  }
   return 'html';
 }
 
@@ -208,6 +217,12 @@ function flatten(obj, prefix, out, depth) {
 
 /** JSON payload -> rows [{ field: text }]. Finds the first array of objects (top level or one level down). */
 export function rowsFromJson(payload) {
+  if (typeof payload === 'string') {
+    try { payload = JSON.parse(payload); } catch { return []; }
+  }
+  if (typeof payload === 'string') {
+    try { payload = JSON.parse(payload); } catch {}
+  }
   let list = null;
   if (Array.isArray(payload)) list = payload;
   else if (payload && typeof payload === 'object') {
@@ -253,6 +268,31 @@ export function rowsFromHtml(text, view, parse) {
   // how a six-table assessment form once passed for a medication chart.
   if (!rows.length && !(view && view.block) && (String(text || '').match(/<table/gi) || []).length <= 1) rows = tryView({ rowsSelector: 'table tbody tr, table tr', headers: (view && Array.isArray(view.headers)) ? view.headers : [] });
   return Array.isArray(rows) ? rows : [];
+}
+
+/**
+ * applyColumns(view, rows) -> rows keyed the way the screen labels them. A proven view remembers which
+ * response field each screen column shows (view.columns, learned by value on the phone); each row gets
+ * those headers FIRST, then its raw fields (a chained detail call still reads the raw id it traced).
+ * Without learned columns the rows pass through untouched.
+ */
+export function applyColumns(view, rows) {
+  const cols = view && view.columns && typeof view.columns === 'object' ? view.columns : null;
+  if (!cols || !Array.isArray(rows)) return rows;
+  const txt = (v) => (v == null ? '' : String(v).trim());
+  return rows.map((r) => {
+    if (!r || typeof r !== 'object') return r;
+    const out = {};
+    for (const h of Object.keys(cols)) {
+      const c = cols[h] || {};
+      let v = '';
+      if (c.key) v = txt(r[c.key]);
+      else if (Array.isArray(c.keys) && c.keys.length === 2) { const a = txt(r[c.keys[0]]), b = txt(r[c.keys[1]]); v = a || b ? a + (typeof c.join === 'string' ? c.join : ' ') + b : ''; }
+      if (v) out[h] = v;
+    }
+    for (const k of Object.keys(r)) if (!(k in out)) out[k] = r[k];
+    return out;
+  });
 }
 
 /** Rows worth calling data: at least two real columns (one column per row is a heading list, not results). */
@@ -397,6 +437,7 @@ async function onDataHost(plugin, view, patient, base) {
 export async function executeProven({ plugin, origin, view, patient = null, parentRow = null, tokens = null, parseHtml = null, onCall = null, now }) {
   let viewHost = origin;
   try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  if (isGimsrOrigin(viewHost)) viewHost = 'https://ghis.gitam.edu';
   const base = String(viewHost || '').replace(/\/$/, '');
   await onDataHost(plugin, view, patient, base);
   const eps = view.endpoints.filter((e) => e && (e.role === 'prerequisite' || e.role === 'data'));
@@ -414,7 +455,7 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
     let rows = [];
     if (kind === 'json') { try { rows = rowsFromJson(JSON.parse(resp.text)); } catch { rows = []; } }
     else if (kind === 'html') rows = rowsFromHtml(resp.text, view, parseHtml);
-    out = { rows, via: 'endpoint', url: req.path, kind, proven: true, method: req.method };
+    out = { rows: applyColumns(view, rows), via: 'endpoint', url: req.path, kind, proven: true, method: req.method };
   }
   return out || { rows: [], via: 'endpoint', url: '', kind: 'empty', proven: true };
 }
@@ -431,6 +472,7 @@ export async function executeView({ plugin, origin, view, patient, tokens = null
   if (!plan.calls.length && !plan.prerequisites.length) return null;   // a POST-only view (form search) is replayable too
   let viewHost = origin;
   try { const u = new URL(String(view.pathTemplate || '')); if (u.protocol === 'https:') viewHost = u.origin; } catch { /* relative */ }
+  if (isGimsrOrigin(viewHost)) viewHost = 'https://ghis.gitam.edu';
   const base = String(viewHost || '').replace(/\/$/, '');
   await onDataHost(plugin, view, patient, base);
   const wantsToken = plan.prerequisites.some((p) => p.bodyKeys.some((k) => TOKEN_KEY.test(k))) || plan.calls.some((c) => Object.keys(c.query).some((k) => TOKEN_KEY.test(k)));

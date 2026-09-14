@@ -14,9 +14,13 @@
  * and that consumer runs again. Consumers must therefore be idempotent on the event id.
  *
  * The type is internal (underscore-prefixed, like the bed claim): never served through the record API.
- * ponytail: drains the newest `limit` events per call (by last write; until P2.13 the repository handed back
- * the OLDEST, so a hospital past 200 settled events never saw a new one). An event still waiting behind
- * more than `limit` newer ones is not seen until they thin out; add a status index if a backlog outgrows it.
+ * The drain reads WAITING events by status (pending, retry, running), oldest first - never the newest
+ * N of everything. Until P2.13 the repository handed back the OLDEST rows; then the drain read the
+ * newest `limit` rows and picked out the waiting ones, so a hospital past `limit` settled events left
+ * an old pending event sitting beyond the window: never retried, never reported. Raising the limit
+ * only moves the wall; a newest-N scan is not a status seek. idx_wardsynq_record_outbox_status (in
+ * wardsynq_schema.sql) keeps the status seek cheap; without it the same query answers correctly,
+ * only slower.
  */
 
 import { VersionConflictError } from "./repository.js";
@@ -44,6 +48,25 @@ async function stageEvent(staged, tenantId, topic, payload) {
   return evt.id;
 }
 
+/* Every status that still needs a worker. `running` is here for the take-over below, not for
+ * scheduling: a claim older than ten minutes belongs to a worker that died. */
+const WAITING = ["pending", "retry", "running"];
+
+/**
+ * The waiting events, oldest first, read BY STATUS rather than as the newest N of everything.
+ * A store that speaks latestByStatus (both in-repo implementations do) seeks the waiting rows no
+ * matter how many settled events pile up; one that does not keeps the old newest-N scan, with the
+ * old blind spot past the window. The fallback stays because refusing to drain on an older store
+ * would strand MORE events than a bounded scan ever did - but it is a fallback, not a second path,
+ * and outboxHealth says which read it managed.
+ */
+async function waitingEvents(repository, tenantId, limit) {
+  if (repository && typeof repository.latestByStatus === "function") {
+    return repository.latestByStatus(tenantId, TYPE, WAITING, limit);
+  }
+  return repository.latestByType(tenantId, TYPE, limit, { newest: true });
+}
+
 /**
  * Run pending events. consumers: { [topic]: { [consumerName]: async (payload, event) => void } }.
  * Returns what happened, per event. Safe to run concurrently: a lost claim is skipped, not repeated.
@@ -51,7 +74,7 @@ async function stageEvent(staged, tenantId, topic, payload) {
 async function drainOutbox(repository, tenantId, consumers, opts) {
   const o = opts || {};
   const nowMs = o.now ? o.now() : Date.now();
-  const rows = await repository.latestByType(tenantId, TYPE, o.limit || 200, { newest: true });
+  const rows = await waitingEvents(repository, tenantId, o.limit || 200);
   // A claim older than ten minutes belongs to a worker that died; the event is taken over, not stranded.
   const stale = (e) => e.status === "running" && Date.parse(e.claimedAt) + 10 * 60 * 1000 <= nowMs;
   const due = rows.filter((e) => ((e.status === "pending" || e.status === "retry") && Date.parse(e.nextAttemptAt) <= nowMs) || stale(e))
@@ -83,15 +106,30 @@ async function drainOutbox(repository, tenantId, consumers, opts) {
   return { ran: report.filter((r) => !r.skipped).length, report };
 }
 
-/** Events that need a person: dead ones, and how many are still waiting. Never "all clear" on a partial read. */
+/**
+ * Events that need a person: dead ones, and how many are still waiting. Never "all clear" on a
+ * partial read: when a bounded read fills up, `partial` is true and `pending` is a LOWER BOUND,
+ * not a count. Both lists are read by status, so settled events piling up cannot push waiting ones
+ * out of the picture the way the old newest-N window did.
+ */
 async function outboxHealth(repository, tenantId, limit) {
-  const rows = await repository.latestByType(tenantId, TYPE, limit || 500, { newest: true });
-  const waiting = rows.filter((e) => e.status === "pending" || e.status === "retry" || e.status === "running");
+  const max = limit || 500;
+  const byStatus = repository && typeof repository.latestByStatus === "function";
+  // Without the status read there is only the newest-N window, and a full window proves nothing
+  // about what sits beyond it - so the counts stay lower bounds and `partial` says so.
+  const waiting = byStatus
+    ? await repository.latestByStatus(tenantId, TYPE, WAITING, max)
+    : (await repository.latestByType(tenantId, TYPE, max, { newest: true }))
+      .filter((e) => WAITING.indexOf(e.status) !== -1);
+  const deadRows = byStatus
+    ? await repository.latestByStatus(tenantId, TYPE, ["dead"], max)
+    : (await repository.latestByType(tenantId, TYPE, max, { newest: true }))
+      .filter((e) => e.status === "dead");
   return {
     pending: waiting.length,
     oldestPendingAt: waiting.map((e) => String(e.createdAt || "")).filter(Boolean).sort()[0] || null,
-    dead: rows.filter((e) => e.status === "dead").map((e) => ({ id: e.id, topic: e.topic, attempts: e.attempts, lastError: e.lastError })),
-    partial: rows.length >= (limit || 500),
+    dead: deadRows.map((e) => ({ id: e.id, topic: e.topic, attempts: e.attempts, lastError: e.lastError })),
+    partial: waiting.length >= max || deadRows.length >= max,
   };
 }
 
