@@ -109,6 +109,21 @@ function summariseWard(input) {
   };
 }
 
+/* summariseWard counts the [] stand-ins for unread types as zero; this blanks those counts so the
+ * response says "not readable", not "none". Without Encounter nothing is scoped, so nothing stands. */
+function blankUnreadable(metrics, unreadable) {
+  if (!unreadable || !unreadable.length) return metrics;
+  const o = metrics.open, gone = (t) => unreadable.includes(t);
+  if (gone("Encounter")) { metrics.patients = null; metrics.occupiedBeds = null; metrics.unplaced = null; for (const k of Object.keys(o)) o[k] = null; }
+  if (gone("CriticalResultLoop")) { o.criticalResults = null; o.criticalResultsEscalated = null; metrics.oldestUnacknowledgedCritical = null; }
+  if (gone("MedicationAdministration")) o.dosesInFlight = null;
+  if (gone("ShiftHandover")) o.handoversWaiting = null;
+  if (gone("MedicationReconciliation")) { o.medicinesUndecided = null; o.staysWithNoMedicationHistory = null; }
+  if (gone("MedicationOrder") || gone("MedicationVerification")) o.ordersNotPharmacyVerified = null;
+  metrics.openItems = null;
+  return metrics;
+}
+
 async function open(request, env, ctx) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, "record:read", ctx.actorDeps);
@@ -155,7 +170,8 @@ async function wardMetrics(request, env, ctx) {
     orders: orZero(orders, "MedicationOrder"),
     verifications: orZero(verifications, "MedicationVerification"),
   });
+  blankUnreadable(metrics, unreadable);
   return { ...base, ok: true, metrics, ...(unreadable.length ? { unreadable, partial: true } : {}) };
 }
 
-export { IN_FLIGHT, summariseWard, wardMetrics };
+export { IN_FLIGHT, summariseWard, blankUnreadable, wardMetrics };

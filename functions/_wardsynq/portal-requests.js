@@ -56,9 +56,10 @@ const NOT_EMERGENCY =
  * may create. It is TIER.DRAFT and not EXECUTE on purpose: what a patient sends is a REQUEST, and
  * the ladder should say so rather than relying on every route to remember.
  */
-function patientWriteActor(patientId) {
+function patientWriteActor(patientId, auditId) {
   return makeActor({
-    id: `patient:${str(patientId)}`,
+    /* P2.9: a proxy writes under its own id, so the record says a relative sent it, not the patient. */
+    id: str(auditId) || `patient:${str(patientId)}`,
     kind: KIND.HUMAN,
     tier: TIER.DRAFT,
     scope: { read: [MESSAGE_TYPE, REQUEST_TYPE], write: [MESSAGE_TYPE, REQUEST_TYPE] },
@@ -141,9 +142,10 @@ async function sendMessage(request, env, ctx) {
   const at = new Date().toISOString();
   const id = `wsq-pmsg-${str(patientId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}`;
   const record = PatientMessage({ id, patientId, subject: str(ctx.subject) || null, body, sentAt: at });
+  if (str(ctx.actorId)) record.sentBy = str(ctx.actorId);
 
   try {
-    await serviceFor(ctx, patientWriteActor(patientId)).put(record);
+    await serviceFor(ctx, patientWriteActor(patientId, ctx.actorId)).put(record);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
@@ -181,13 +183,13 @@ async function requestAppointment(request, env, ctx) {
     requestedAt: at,
     /* WHO ASKED, recorded. A follow-up a clinician promised and one a patient asked for are
      * different facts and a booking clerk reads them differently. */
-    requestedBy: `patient:${patientId}`,
+    requestedBy: str(ctx.actorId) || `patient:${patientId}`,
     origin: "patient",
     source: { system: "wardsynq-native", sourceId: `patient-appointment-request:${id}` },
   };
 
   try {
-    await serviceFor(ctx, patientWriteActor(patientId)).put(record);
+    await serviceFor(ctx, patientWriteActor(patientId, ctx.actorId)).put(record);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };

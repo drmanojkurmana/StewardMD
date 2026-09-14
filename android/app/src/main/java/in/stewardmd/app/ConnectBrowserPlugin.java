@@ -657,8 +657,22 @@ public class ConnectBrowserPlugin extends Plugin {
 
     /** One step back in the EMR's own history. Never closes the browser: Cancel does that. */
     private void goBackIfPossible() {
+        /* NEVER BACK INTO THE SIGN-IN. Walking history past the first screen after sign-in lands on
+         * the hospital's login page (GHIS: the SSO form) and reads as being signed out mid-ask
+         * (owner, 2026-09-13). The previous entry is checked first: a login-looking page is refused. */
         try {
-            if (webView != null && webView.canGoBack()) webView.goBack();
+            if (webView == null || !webView.canGoBack()) return;
+            android.webkit.WebBackForwardList list = webView.copyBackForwardList();
+            int i = list.getCurrentIndex();
+            if (i > 0) {
+                android.webkit.WebHistoryItem prev = list.getItemAtIndex(i - 1);
+                String u = prev != null && prev.getUrl() != null ? prev.getUrl().toLowerCase() : "";
+                if (u.contains("login") || u.contains("signin") || u.contains("sign-in") || u.contains("logout") || u.contains("/sso") || u.contains("auth")) {
+                    android.widget.Toast.makeText(getActivity(), "This is the first screen after sign-in.", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            webView.goBack();
         } catch (Exception ignored) {}
     }
 

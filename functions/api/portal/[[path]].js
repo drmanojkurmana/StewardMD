@@ -24,6 +24,7 @@ import * as ORG from "../../_opd_org_store.js";
 import { recordDeps } from "../../_wardsynq/deps.js";
 import { redeemCode, portalRead, sessionPatient } from "../../_wardsynq/patient-access.js";
 import { sendMessage, requestAppointment } from "../../_wardsynq/portal-requests.js";
+import { withdrawOwnConsent } from "../../_wardsynq/portal-view.js";
 
 function corsHeaders(request) {
   const origin = (request && request.headers && request.headers.get("Origin")) || "";
@@ -85,15 +86,22 @@ export async function onRequest(context) {
   }
   /* The two write routes. Both check the session FIRST and then take the patient id from the grant -
    * a caller cannot name whose record it writes onto, exactly as on the read side. */
-  if (sub === "message" || sub === "appointment-request") {
+  if (sub === "message" || sub === "appointment-request" || sub === "consent-withdraw") {
     const session = await sessionPatient({ ...deps, grantId: body.grantId, token: body.token });
     if (!session.ok) return json({ ok: false, error: session.error, detail: session.detail || null }, session.status || 401, request);
-
-    if (sub === "message") {
-      const r = await sendMessage(request, env, { ...deps, patientId: session.patientId, subject: body.subject, body: body.body });
+    /* P2.9: a proxy writes only within its grant, and never withdraws the patient's consent. */
+    const needs = sub === "message" ? "messages" : sub === "appointment-request" ? "appointments" : null;
+    if (needs && !session.sections.includes(needs)) return json({ ok: false, error: "not_in_grant", detail: "This access does not include that." }, 403, request);
+    if (sub === "consent-withdraw") {
+      const r = await withdrawOwnConsent({ ...deps, consentId: body.consentId, reason: body.reason }, session);
       return json(r, r.ok ? 200 : (r.status || 502), request);
     }
-    const r = await requestAppointment(request, env, { ...deps, patientId: session.patientId, reason: body.reason, preference: body.preference });
+
+    if (sub === "message") {
+      const r = await sendMessage(request, env, { ...deps, patientId: session.patientId, actorId: session.readerId, subject: body.subject, body: body.body });
+      return json(r, r.ok ? 200 : (r.status || 502), request);
+    }
+    const r = await requestAppointment(request, env, { ...deps, patientId: session.patientId, actorId: session.readerId, reason: body.reason, preference: body.preference });
     return json(r, r.ok ? 200 : (r.status || 502), request);
   }
 

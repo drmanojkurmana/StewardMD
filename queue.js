@@ -180,6 +180,8 @@
       return apiPost("/member/pin", { orgId: st.orgId, identity: identity, pin: pin });
     }).then(function (r) {
       if (r && r.ok) { try { G.toast && G.toast("Staff added: " + identity); } catch (e) {} if (nameEl) nameEl.value = ""; if (pinEl) pinEl.value = ""; loadClinicAdmin(); }
+      // The member exists but has no PIN yet: say why, rather than doing nothing at all.
+      else if (r) { try { G.toast && G.toast("Staff added, but the PIN was not set: " + (r.message || r.error || "refused")); } catch (e) {} loadClinicAdmin(); }
     }).catch(function () { try { G.toast && G.toast("Could not add staff"); } catch (e) {} });
   }
   function clinicAdminHtml(state) {
@@ -765,8 +767,18 @@
     fetchRetry(API + "/auth/pin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clinicCode: org, identity: user, pin: pin }) })
       .then(function (r) { return r.json(); })
       .then(function (r) {
+        // Two-step sign-in: the PIN was right; ask for the phone's code and pass the server's answer through.
+        if (!r || r.error !== "mfa_required") return r;
+        var code = ""; try { code = window.prompt((r.message || "Enter the 6-digit code from your authenticator app.") + "\n\nLost your phone? Enter a backup code instead.") || ""; } catch (e) {}
+        if (!code.trim()) return { cancelled: true };
+        return fetchRetry(API + "/auth/mfa", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ challenge: r.challenge, code: code.trim() }) }).then(function (x) { return x.json(); });
+      })
+      .then(function (r) {
         if (!r || !r.ok || !r.token) {
-          var msg = (r && r.error === "locked") ? "Too many attempts. Try again shortly."
+          var msg = (r && r.cancelled) ? "Sign-in cancelled."
+            : (r && r.error === "wrong_code") ? "That code did not match. Sign in again and use the newest code."
+            : (r && r.error === "challenge_expired") ? "That took too long. Sign in again."
+            : (r && r.error === "locked") ? "Too many attempts. Try again shortly."
             : (r && r.error === "staff_disabled") ? "Staff sign-in is not enabled for this clinic."
             : "Wrong Clinic ID, login or PIN.";
           root().innerHTML = _staffGate(msg); prefillStaff(); return;
@@ -788,6 +800,7 @@
     el.innerHTML = '<div class="q-empty" style="padding:80px">Loading the front desk…</div>';
     apiGet("/whoami").then(function (w) {
       if (!w || !w.ok) { setStaffTok(""); root().innerHTML = _staffGate("Your session ended. Sign in again."); prefillStaff(); return; }
+      if (w.twoStepRequired) { el.innerHTML = _wrap('<p class="q-gate-sub">Your clinic requires two-step sign-in for your role. Set it up at wardsynq.com under Sign-in security, then sign in here again.</p><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }
       st.staffWho = w; st.orgId = w.orgId || st.orgId || "";
       if (!st.orgId) { el.innerHTML = _wrap('<p class="q-gate-sub">You are not assigned to a clinic yet. Ask the clinic owner to add you.</p><button class="q-gate-close" data-q-act="staffout">Back</button>'); return; }
       return apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (b) {

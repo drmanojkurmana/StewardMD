@@ -410,6 +410,22 @@
           } catch (e) { /* fall through to the network */ }
           return real.apply(window, arguments);
         };
+        /* GOLD AUDIT (verification only, connect-agent/phone/gold-audit.mjs): the same proxy paths answered
+         * twice for the same patients, once by the hand-built GHIS proxy (the doctor's own GHIS sign-in in
+         * this app) and once by the approved adapter. Returns counts and names, never a value. Needs an
+         * adapter session open (the Connect Agent hospital's ward list loaded) and a GHIS sign-in. */
+        GHIS.goldAudit = function (opts) {
+          if (!_adapterCtx) return Promise.reject(new Error('open the Connect Agent hospital ward list first'));
+          var viaGold = function (path) {
+            var t = getToken();
+            if (!t) return Promise.reject(new Error('sign in to GHIS in Ward Sync first'));
+            return real.call(window, PROXY + path, { headers: { 'Authorization': 'Bearer ' + t } }).then(function (r) { return r.json(); });
+          };
+          var viaAdapter = function (path) { return adapterServe(path, { method: 'GET' }).then(function (r) { return r ? r.json() : null; }); };
+          return (new Function('p', 'return import(p)'))('/connect-agent/phone/gold-audit.mjs').then(function (m) {
+            return m.runGoldAudit({ replay: _adapterCtx.replay, gold: viaGold, adapter: viaAdapter, patientIds: (opts && opts.patientIds) || [] });
+          });
+        };
       })();
       var _adapterConns = {};
       // The registry feed: every deployment with an active version across the doctor's tenants.
@@ -612,7 +628,7 @@
             if (sec.error) return h + '<div class="ghis-lab-detail-empty">' + esc(sec.error) + '</div></div>';
             if (!sec.rows.length) return h + '<div class="ghis-lab-detail-empty">Nothing recorded.</div></div>';
             return h + sec.rows.map(function (row) {
-              return '<div class="ghis-lab-row" style="display:block">' + Object.keys(row).map(function (k) {
+              return '<div class="ghis-lab-row" style="display:block">' + Object.keys(row).filter(function (k) { return k.charAt(0) !== '_'; }).map(function (k) {
                 return '<div><span class="ghis-lab-date">' + esc(k) + '</span> <span class="ghis-lab-test">' + esc(row[k]) + '</span></div>';
               }).join('') + '</div>';
             }).join('') + '</div>';

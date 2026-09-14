@@ -160,7 +160,7 @@
       ".smd-connect-counts{display:flex;justify-content:space-between;margin-top:0}",
       // The progress bar: a filled track that animates its width, so a run that is moving looks
       // like it is moving. prefers-reduced-motion drops the animation, never the bar.
-      ".smd-connect-snake{display:flex;justify-content:center;margin:0.375rem 0}",
+      ".smd-connect-snake{display:flex;flex-direction:column;align-items:center;max-width:320px;margin:0.375rem auto}.smd-connect-snake canvas{max-width:100%;height:auto}",
       ".smd-connect-modes{margin-top:0.75rem}.smd-connect-modes .smd-connect-checkrow{margin-top:0.5rem}.smd-connect-modes strong{color:var(--ink,#14202b)}",
       ".smd-connect-remove{min-height:2rem;padding:0.25rem 0.625rem;margin-left:0.5rem;font-size:0.75rem}",
       ".smd-connect-prog{height:8px;border-radius:999px;background:rgba(20,32,43,.10);overflow:hidden;margin:2px 0 10px}",
@@ -1044,7 +1044,9 @@
       classify: function (p) { return ask("classify", p); },
       mapColumns: function (p) { return ask("map-columns", p); },
       next: function (p) { return ask("next", p); },
-      verify: function (p) { return ask("verify", p); }
+      verify: function (p) { return ask("verify", p); },
+      pickEndpoint: function (p) { return ask("pick-endpoint", p); },
+      planControls: function (p) { return ask("plan-controls", p); }
     };
   }
   /* Auto mode keeps the hospital browser to the top half while the agent drives, so the doctor sees
@@ -1285,7 +1287,7 @@
     var c = S.progressCounts || {};
     if (S.guide) {
       return '<div class="smd-connect-card">' + (S.guide.total ? progressBar() : "") + '<p class="smd-connect-lead">' + esc(S.guide.text) + '</p>' +
-        '<div class="smd-connect-note">Find it in the hospital screen, then tap Done at the top. If your hospital has no such screen, tap Not in my EMR.</div>' +
+        '<div class="smd-connect-note">Find it in the hospital screen and tap inside it: it turns green so you can see what the agent will read. Then tap Done at the top. If your hospital has no such screen, tap Not in my EMR.</div>' +
         '<div class="smd-connect-row"><button id="smd-connect-guidemissing" class="smd-connect-btn" type="button">Not in my EMR</button>' +
         '<button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip for now</button></div></div>';
     }
@@ -1502,6 +1504,9 @@
 
   /* ---- Screen 7: result (capabilities + reviewer approval) ---- */
   function loadVersionAndShowResult() {
+    /* Every path to a result screen closes the hospital browser: left open, it sat on top of the result
+     * with a dead "Done, I'm signed in" and no sign-in detection (owner, 2026-09-13). */
+    try { stopDiscoveryPlugin(); } catch (e) {}
     show("result");
     S.canApprove = true; /* optimistic; server enforces on approve/reject, see below */
     if (!S.versionId) { paintResult(); return; }
@@ -1567,7 +1572,12 @@
   function verifiedLines() {
     var v = S.result && S.result.verification;
     var checks = (v && v.checks) || [];
-    if (!checks.length) return "";
+    if (!checks.length) {
+      // No verification ran: say why, in plain words, instead of a silent probe list.
+      var why = S.result && (S.result.crawlStop || S.result.stopReason);
+      var warn = S.result && (S.result.warnings || [])[0];
+      return (why || warn) ? '<div class="smd-connect-note">Not checked against patients' + (why ? ' (the crawl stopped: ' + esc(why) + ')' : '') + (warn ? '. ' + esc(warn) : '') + '.</div>' : "";
+    }
     var items = checks.map(function (c) {
       var name = esc(VIEW_NAMES[c.resource] || c.resource);
       if (c.ok) return '<li>' + name + ': ' + esc(c.rows) + ' rows read through the ' + (c.via === 'endpoint' ? 'discovered endpoint' : 'page') + '.</li>';
@@ -1597,7 +1607,10 @@
         (proven ? "✓ " : "") + esc(CAP_LABELS[key]) + (proven ? "" : " (not found at this hospital)") + '</li>';
     }
     var list = b.querySelector("#smd-connect-caps");
-    if (list) list.innerHTML = html;
+    /* The probe list said "not found" for everything on a live run whose views were real: what the
+     * agent PROVED against patients (verifiedLines) is the truth, so it replaces the probe list. */
+    var proven = S.result && S.result.verification && (S.result.verification.checks || []).length;
+    if (list) { list.innerHTML = proven ? "" : html; list.style.display = proven ? "none" : ""; }
     var row = b.querySelector("#smd-connect-approverow");
     if (row) row.style.display = S.canApprove ? "" : "none";
   }
@@ -1702,7 +1715,8 @@
         statusText: S.statusText,
         controlOwner: S.controlOwner,
         connectionCount: S.connections.length,
-        canApprove: S.canApprove
+        canApprove: S.canApprove,
+        run: S.result ? { crawlStop: S.result.crawlStop || null, stopReason: S.result.stopReason || null, views: (S.result.observedViews || []).length, found: S.result.found || [], asked: S.result.asked || [], missing: S.result.missing || [], warnings: S.result.warnings || [], checks: ((S.result.verification || {}).checks || []).length, patients: (S.result.verification || {}).patients || 0, candidate: S.result.candidateVersionId || null } : null
       };
     }
   };

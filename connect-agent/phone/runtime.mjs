@@ -72,8 +72,10 @@ export function mapRow(row) {
   return out;
 }
 
+/* Each patient keeps the list row it came from (non-enumerable: never serialised) so a proven call can
+ * send the exact field discovery traced its value to (prove.mjs paramsOf). */
 export function mapRows(rows) {
-  return (Array.isArray(rows) ? rows : []).map(mapRow).filter((p) => p.patientFirstName || p.patientId);
+  return (Array.isArray(rows) ? rows : []).map((r) => { const p = mapRow(r); Object.defineProperty(p, '_row', { value: r, enumerable: false }); return p; }).filter((p) => p.patientFirstName || p.patientId);
 }
 
 // Page-side reader. Runs INSIDE the hospital page via plugin.evaluate and returns a JSON string of
@@ -151,11 +153,13 @@ export function isGimsrOrigin(origin) {
 }
 
 // Pick the replay views by resource. The worklist is the one the ward list is read from.
+// A view whose data call was proven wins over an unproven one for the same resource.
 export function viewsByResource(replay) {
   const by = {};
+  const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   for (const v of Array.isArray(replay) ? replay : []) {
     const r = String(v.resourceHint || v.resource || 'unknown');
-    if (!by[r]) by[r] = v;
+    if (!by[r] || (proven(v) && !proven(by[r]))) by[r] = v;
   }
   return by;
 }
@@ -187,7 +191,16 @@ function samePage(a, b) { try { const x = new URL(a), y = new URL(b); return x.h
  * reads empty, tick a toggle labelled like that once and read again. */
 export const TOGGLE_ALL = "(function(){try{var els=[].slice.call(document.querySelectorAll('label,input[type=\"checkbox\"],a,button,span,div'));for(var i=0;i<els.length;i++){var el=els[i];var t=(el.textContent||el.getAttribute('aria-label')||'').replace(/\\s+/g,' ').trim();if(!/^(all patients|show all( patients)?|all)$/i.test(t))continue;var box=el.tagName==='INPUT'?el:(el.querySelector&&el.querySelector('input[type=\"checkbox\"]'))||(el.htmlFor&&document.getElementById(el.htmlFor))||null;if(!box&&el.previousElementSibling&&el.previousElementSibling.tagName==='INPUT')box=el.previousElementSibling;if(!box&&el.parentElement)box=el.parentElement.querySelector('input[type=\"checkbox\"]');if(box){if(box.checked)return 'already';box.click();return 'ticked'}el.click();return 'clicked'}return 'none'}catch(e){return 'e'}})()";
 
+/* THE DATA HOST IS WHERE THE VIEW WAS SEEN, NOT WHERE THE DOCTOR SIGNED IN. GHIS signs in on
+ * gimsrlogin.gitam.edu and serves every screen from ghis.gitam.edu; joining the recorded calls to the
+ * login host failed every replay in Ward Sync and in verification (Pixel, 2026-09-13). */
+export function viewOrigin(view, fallback) {
+  try { const u = new URL(String(view && (view.pathTemplate || view.path) || '')); if (/^https:$/.test(u.protocol)) return u.origin; } catch { /* relative */ }
+  return fallback;
+}
+
 export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitMs = 20000, pollMs = 1000, navigate = true, toggleAll = false }) {
+  origin = viewOrigin(view, origin);
   if (navigate) {
     /* Already on the page (the doctor signed in and landed on it): reading it as it stands keeps the
      * context the EMR set for them; a reload from the address bar can lose it. */
@@ -245,7 +258,16 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
   if (!view) throw new Error('the approved adapter has no worklist view');
   if (view.block) throw new Error('the worklist view is a report block, not a table');
   let rows = null;
-  try { rows = await replayFirst({ plugin, origin, view, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; rows = null; }
+  /* Every worklist view with a data call is tried (a crawl can record the OPD list and the ward list
+   * both). Rows that are not patients (a doctor list, a dashboard count) are not a ward: next call,
+   * then the page. */
+  const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
+    .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
+  for (const cand of candidates.length ? candidates : [view]) {
+    let got = null;
+    try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+    if (got && mapRows(got).length) { rows = got; break; }
+  }
   if (!rows) {
     rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
     if (onRead) onRead({ resource: 'worklist', via: 'page', url: view.pathTemplate || view.path });
@@ -258,6 +280,7 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
 // A patient's views (medications, labs, radiology, history, discharge): each becomes a titled section
 // of [{header: text}] rows. Path placeholders ({id}, {mrn}, :id, #) are filled with the patient id.
 export const DETAIL_RESOURCES = Object.freeze(['medications', 'labs', 'radiology', 'history', 'discharge', 'patient']);
+const MAX_DETAIL_ROWS = 15;
 
 export function fillPath(path, patient, which = 'patientId') {
   const id = encodeURIComponent((which === 'episodeId' ? patient.episodeId : patient.patientId) || patient.patientId || '');
@@ -309,9 +332,29 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
      * the worklist (the single-page Doctor Home) is skipped: it never shows this patient's panel on
      * its own. Each place is read with the recorded selector, then with the fallback. */
     let replayed = null;
-    try { replayed = await replayFirst({ plugin, origin, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
-    if (replayed) { sections.push({ resource: r, rows: replayed, via: 'endpoint' }); continue; }
+    const vo = viewOrigin(v, origin);
+    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
+    if (replayed) {
+      sections.push({ resource: r, rows: replayed, via: 'endpoint' });
+      /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
+       * this list, its fields filled from that row (render id, result id). */
+      const d = views[r + '-detail'];
+      if (d && d.detailOf === r && d.proof && d.proof.status === 'proven') {
+        const ar = await import('./adapter-runtime.mjs');
+        const detailRows = [];
+        for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
+          let got = null;
+          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+          // The row's title as ghis-shim.mjs firstText() reads it: first non-meta cell that is not a bare number.
+          const title = Object.keys(row).filter((k) => k.charAt(0) !== '_').map((k) => String(row[k] == null ? '' : row[k]).trim()).find((v) => v && !/^\d+$/.test(v)) || '';
+          for (const dr of (got && got.rows) || []) detailRows.push(Object.assign({ _of: title }, dr));
+        }
+        if (detailRows.length) { sections.push({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
+      }
+      continue;
+    }
     const own = fillPath(v.pathTemplate || v.path, patient);
+    const origin_ = vo;
     const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
     const places = [];
     if (!shared) places.push(own);
@@ -320,7 +363,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     let lastErr = null;
     for (const place of places) {
       for (const candidate of [Object.assign({}, v, { pathTemplate: place }), Object.assign(fallbackView(v), { pathTemplate: place })]) {
-        try { rows = await readView({ plugin, origin, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
+        try { rows = await readView({ plugin, origin: vo, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
         if (rows.length) break;
       }
       if (rows.length) break;

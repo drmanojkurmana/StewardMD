@@ -4430,11 +4430,11 @@
         // ChatGPT-style model chip: shows what will answer, tap to switch (Cloud / KB only / any
         // downloaded on-device model). Same state as Settings, just a faster surface for it.
         ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.chipHTML) ? SMD_MAIK_ENGINE.chipHTML() : "") +
-        '<span style="flex:1"></span>' +
+        '<div class="maik-nav-actions"><span class="maik-nav-caption">Your clinical assistant</span>' +
         '<button class="maik-hd-btn" id="maikExport" type="button" title="Export conversation" aria-label="Export conversation">' + MK.export + '</button>' +
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
-      '</div></div>' +
+      '</div></div></div>' +
       // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
       // own weights, with no StewardMD sources, is simply untrue.
       '<div class="maik-disc">' + MK.shield + '<span>' +

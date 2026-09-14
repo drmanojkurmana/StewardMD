@@ -1,9 +1,12 @@
 /* functions/_connect/agent/brain.js - the model that helps the Connect Agent read a hospital's SCREENS.
  *
- * Three questions, all about STRUCTURE and never about a patient:
+ * Five questions, all about STRUCTURE and never about a patient:
  *   classify     "which resource is this screen" (labels, headers, path, redacted snapshot)
  *   map-columns  "which canonical role does each column header play"
  *   next         "which of these controls leads to the resource still missing"
+ *   verify       "do these replayed columns look like the resource they claim to be"
+ *   pick-endpoint "which of the requests this action fired returns what the screen shows" (the phone then
+ *                proves the answer against the on-screen values before anything is saved)
  *
  * THE PHI GATE IS THE CONTRACT. Nothing reaches the model unless every string in the request passes
  * phiGate(): only whitelisted keys, capped lengths, no run of 3+ digits (an MRN, a phone, a date), no
@@ -15,7 +18,7 @@
  *
  * The model is reached through the MaiK gateway's Google adapter (functions/_wardsynq/maik-gateway.js)
  * so its key handling, timeouts and error scrubbing apply. The model id comes from CONNECT_AGENT_MODEL
- * (default: the registry's newest Gemini Pro), the surface from CONNECT_AGENT_MODEL_PROVIDER
+ * (required, no default), the surface from CONNECT_AGENT_MODEL_PROVIDER
  * ("vertex" default, "gemini" for AI Studio). A dated id is never hard-coded here.
  */
 import { PROVIDERS, MODELS } from "../../_wardsynq/maik-gateway.js";
@@ -29,10 +32,14 @@ export const ROLES = Object.freeze([
   "result", "unit", "reference", "patientId", "visitId", "name", "department", "age", "sex", "bed",
   "visitType", "date", "title", "report",
 ]);
-export const OPS = Object.freeze(["classify", "map-columns", "next", "verify"]);
+export const OPS = Object.freeze(["classify", "map-columns", "next", "verify", "pick-endpoint", "plan-controls"]);
+/* What a request does for the screen it fired on (pick-endpoint). Only "data" can become a saved endpoint,
+ * and only after the phone has proven its answer carries what the screen shows. */
+export const ENDPOINT_ROLES = Object.freeze(["data", "prerequisite", "lookup", "ping", "shell"]);
+const RESPONSE_KINDS = Object.freeze(["json", "html", "text", "empty", "unknown"]);
 export const SUGGESTIONS = Object.freeze(["ok", "other-endpoint", "ask-doctor"]);
 
-const LIMITS = Object.freeze({ str: 120, list: 60, snapshot: 8000, path: 300 });
+const LIMITS = Object.freeze({ str: 120, list: 60, planList: 200, snapshot: 8000, path: 300 });
 const DIGITS = /\d{3,}/;
 const CONTROL = /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/; // newlines and tabs are fine: the snapshot is line-based
 const ALLOWED_KEYS = Object.freeze({
@@ -40,6 +47,8 @@ const ALLOWED_KEYS = Object.freeze({
   "map-columns": ["op", "origin", "resource", "headers"],
   "next": ["op", "origin", "controls", "looking", "path"],
   "verify": ["op", "origin", "resource", "headers", "rowCount", "kind", "path"],
+  "pick-endpoint": ["op", "origin", "resource", "action", "headers", "candidates"],
+  "plan-controls": ["op", "origin", "controls", "looking", "path"],
 });
 
 function str(v) { return typeof v === "string" ? v : ""; }
@@ -53,9 +62,9 @@ function badString(s, max) {
   return null;
 }
 
-function cleanList(list, name, max) {
+function cleanList(list, name, max, maxEntries = LIMITS.list) {
   if (!Array.isArray(list)) return { error: name + " must be an array" };
-  if (list.length > LIMITS.list) return { error: name + " has more than " + LIMITS.list + " entries" };
+  if (list.length > maxEntries) return { error: name + " has more than " + maxEntries + " entries" };
   const out = [];
   for (const s of list) {
     const why = badString(s, max);
@@ -95,7 +104,7 @@ export function phiGate(payload) {
   }
   for (const k of ["headers", "labels", "controls"]) {
     if (payload[k] === undefined) continue;
-    const r = cleanList(payload[k], k, LIMITS.str);
+    const r = cleanList(payload[k], k, LIMITS.str, op === "plan-controls" && k === "controls" ? LIMITS.planList : LIMITS.list);
     if (r.error) return { ok: false, reason: r.error };
     clean[k] = r.list;
   }
@@ -119,6 +128,30 @@ export function phiGate(payload) {
     if (["json", "html", "page", "endpoint", "empty", "none"].indexOf(payload.kind) < 0) return { ok: false, reason: "kind must name a response kind" };
     clean.kind = payload.kind;
   }
+  if (payload.action !== undefined) {
+    const why = badString(payload.action, LIMITS.str);
+    if (why) return { ok: false, reason: "action " + why };
+    clean.action = payload.action.replace(/\s+/g, " ").trim();
+  }
+  if (payload.candidates !== undefined) {
+    if (!Array.isArray(payload.candidates) || !payload.candidates.length || payload.candidates.length > 12) return { ok: false, reason: "candidates must be 1 to 12 requests" };
+    clean.candidates = [];
+    for (const c of payload.candidates) {
+      if (!c || typeof c !== "object" || Array.isArray(c)) return { ok: false, reason: "candidate must be an object" };
+      for (const k of Object.keys(c)) if (["method", "path", "queryKeys", "bodyKeys", "kind", "keys", "rows", "page", "xhr"].indexOf(k) < 0) return { ok: false, reason: "candidate key \"" + k + "\" is not accepted" };
+      if (c.method !== "GET" && c.method !== "POST") return { ok: false, reason: "candidate method must be GET or POST" };
+      const why = badString(c.path, LIMITS.path);
+      if (why) return { ok: false, reason: "candidate path " + why };
+      const out = { method: c.method, path: c.path, kind: RESPONSE_KINDS.indexOf(c.kind) >= 0 ? c.kind : "unknown", rows: Number.isInteger(c.rows) && c.rows >= 0 ? Math.min(c.rows, 100000) : 0, page: c.page === true, xhr: c.xhr === true };
+      for (const k of ["queryKeys", "bodyKeys", "keys"]) {
+        if (c[k] === undefined) { out[k] = []; continue; }
+        const r = cleanList(c[k], "candidate " + k, LIMITS.str);
+        if (r.error) return { ok: false, reason: r.error };
+        out[k] = r.list;
+      }
+      clean.candidates.push(out);
+    }
+  }
   if (payload.snapshot !== undefined) {
     const why = badString(payload.snapshot, LIMITS.snapshot);
     if (why) return { ok: false, reason: "snapshot " + why };
@@ -128,6 +161,8 @@ export function phiGate(payload) {
   if (op === "map-columns" && (!clean.resource || !(clean.headers || []).length)) return { ok: false, reason: "map-columns needs resource and headers" };
   if (op === "next" && (!(clean.controls || []).length || !(clean.looking || []).length)) return { ok: false, reason: "next needs controls and looking" };
   if (op === "verify" && (!clean.resource || clean.rowCount === undefined)) return { ok: false, reason: "verify needs resource and rowCount" };
+  if (op === "pick-endpoint" && !(clean.candidates || []).length) return { ok: false, reason: "pick-endpoint needs candidates" };
+  if (op === "plan-controls" && (!(clean.controls || []).length || !(clean.looking || []).length)) return { ok: false, reason: "plan-controls needs controls and looking" };
   return { ok: true, clean };
 }
 
@@ -164,6 +199,22 @@ function promptFor(clean) {
       + "\n\nRoles: " + ROLES.join(", ") + ".\n"
       + "Map each header to the ONE role it plays, or leave it out if none fits. patientId = MRN/UHID/hospital number, visitId = visit/episode/admission number, name = the patient's name (never the doctor's), sex = gender, age = age or DOB, bed = bed/room, department = ward/dept/unit, drugName = medicine, prodCode = drug code, testName = investigation name, result = the result value, reference = normal range, date = any date column, title = report/study title, report = report body or summary.\n"
       + "Answer: {\"fields\": {<header>: <role>, ...}}";
+  }
+  if (clean.op === "plan-controls") {
+    return "These are ALL the controls (buttons, tabs, menu items, including collapsed menus) of a hospital EMR screen with one patient's record open" + (clean.path ? " at path " + clean.path : "") + ". Each is \"label [where it sits]\", index = position, zero-based:\n"
+      + JSON.stringify(clean.controls) + "\n\nFor each of these resources, pick the ONE control that opens it for THIS patient: " + clean.looking.join(", ") + ".\n"
+      + "labs = the patient's lab/investigation results; radiology = imaging reports (often inside a patient profile or reports view); medications = drug chart or medicines; notes = clinical or assessment notes; history = previous visits; discharge = discharge summary (DS); patient = demographics or profile. "
+      + "Prefer the patient's own record menu over hospital-wide lists. Use -1 when none fits. Also list every control that could write, order, prescribe, print, send, sign, submit, approve, delete or sign out.\n"
+      + "Answer: {\"assign\": {<resource>: <index or -1>, ...}, \"avoid\": [<index>, ...]}";
+  }
+  if (clean.op === "pick-endpoint") {
+    return "A read-only agent did this on a hospital EMR: " + JSON.stringify(clean.action || clean.resource || "opened a screen") + ". The screen now shows "
+      + (clean.resource ? "the patient's " + clean.resource : "a table or report") + " with these column or field labels:\n" + JSON.stringify(clean.headers || [])
+      + "\n\nRight after that action the page made these requests (index is the position in this list; keys = response JSON keys or HTML table columns; rows = rows in the response; page = the response is a whole HTML page):\n"
+      + JSON.stringify(clean.candidates.map((c, i) => Object.assign({ index: i }, c)))
+      + "\n\nReason about which request returns the data the screen shows. Roles: data = returns those rows or that report; prerequisite = selects the patient, visit or context the data call needs and returns no rows of its own; lookup = a reference list (departments, doctors, dropdown values, a menu); ping = session check, counter, audit or logging; shell = the whole page layout. "
+      + "Rank EVERY request, most likely data first. The agent will replay them in your order and compare each answer with the values on screen, so put a request whose keys or columns match the labels above ahead of one that merely has a matching name.\n"
+      + "Answer: {\"ranked\": [{\"index\": <n>, \"role\": <data|prerequisite|lookup|ping|shell>, \"reason\": <short>}, ...]}";
   }
   if (clean.op === "verify") {
     return "A read-only agent replayed the call it discovered for the resource \"" + clean.resource + "\"" + (clean.path ? " (" + clean.path + ")" : "") + " for one real patient and got "
@@ -203,6 +254,26 @@ export function shapeAnswer(clean, raw) {
     }
     return { fields };
   }
+  if (clean.op === "plan-controls") {
+    const assign = {};
+    const src = a.assign && typeof a.assign === "object" && !Array.isArray(a.assign) ? a.assign : {};
+    for (const r of clean.looking) {
+      const i = src[r];
+      assign[r] = Number.isInteger(i) && i >= 0 && i < clean.controls.length ? i : -1;
+    }
+    const avoid = (Array.isArray(a.avoid) ? a.avoid : []).filter((i) => Number.isInteger(i) && i >= 0 && i < clean.controls.length);
+    return { assign, avoid: [...new Set(avoid)] };
+  }
+  if (clean.op === "pick-endpoint") {
+    const seen = new Set();
+    const ranked = [];
+    for (const r of Array.isArray(a.ranked) ? a.ranked : []) {
+      if (!r || !Number.isInteger(r.index) || r.index < 0 || r.index >= clean.candidates.length || seen.has(r.index) || ENDPOINT_ROLES.indexOf(r.role) < 0) continue;
+      seen.add(r.index);
+      ranked.push({ index: r.index, role: r.role, reason: str(r.reason).slice(0, 120) });
+    }
+    return { ranked, reason };
+  }
   if (clean.op === "verify") {
     const c = Number(a.confidence);
     return { ok: a.ok === true, resource: RESOURCES.indexOf(a.resource) >= 0 ? a.resource : "none", confidence: Number.isFinite(c) ? Math.max(0, Math.min(1, c)) : 0, reason, suggestion: SUGGESTIONS.indexOf(a.suggestion) >= 0 ? a.suggestion : (a.ok === true ? "ok" : "ask-doctor") };
@@ -214,28 +285,49 @@ export function shapeAnswer(clean, raw) {
 
 /* ---- the call ------------------------------------------------------------------------------------ */
 
-const DEFAULT_MODEL = (MODELS.find((m) => m.id === "vertex-pro") || MODELS.find((m) => m.id === "gemini-pro") || { model: "gemini-3.1-pro-preview" }).model;
 const CACHE_TTL_S = 30 * 24 * 3600;
 const CACHE_PREFIX = "connect-agent:brain:";
 
+/* THE MODEL IS CONFIGURED, NEVER DEFAULTED. The owner provisioned a specific Gemini for the Connect
+ * Agent; running on whatever the registry happens to list was a silent substitution (every brain call
+ * until 2026-09-13 went to the registry default because CONNECT_AGENT_MODEL was unset). No model id,
+ * no brain: the call fails with that reason and the phone falls back to its deterministic rules. */
 export function brainModel(env) {
-  const provider = str(env && env.CONNECT_AGENT_MODEL_PROVIDER) || "vertex";
-  const model = str(env && env.CONNECT_AGENT_MODEL) || DEFAULT_MODEL;
-  return { provider: PROVIDERS[provider] && provider !== "wardsynq" && provider !== "local-openai" ? provider : "vertex", model };
+  let provider = str(env && env.CONNECT_AGENT_MODEL_PROVIDER) || "vertex";
+  const model = str(env && env.CONNECT_AGENT_MODEL);
+  if (!model) throw new Error("CONNECT_AGENT_MODEL is not set: the Connect Agent brain has no configured model");
+  /* VERTEX THROUGH ADC. The project's API keys may only call the Gemini API and service-account keys
+   * cannot be created (org policy), so Vertex is reached through the Cloud Run brain proxy
+   * (connect-agent/brain-proxy), whose service account holds the ADC. Configured by its URL. */
+  // The owner's choice is Vertex via ADC: a configured proxy wins over any provider value.
+  if (str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL)) provider = "vertex-adc";
+  if (provider === "vertex-adc") {
+    if (!str(env && env.CONNECT_AGENT_BRAIN_PROXY_URL) || str(env && env.CONNECT_AGENT_BRAIN_PROXY_SECRET).length < 32) throw new Error("vertex-adc needs CONNECT_AGENT_BRAIN_PROXY_URL and CONNECT_AGENT_BRAIN_PROXY_SECRET");
+    return { provider, model };
+  }
+  if (!PROVIDERS[provider] || provider === "wardsynq" || provider === "local-openai") throw new Error("CONNECT_AGENT_MODEL_PROVIDER must be vertex, vertex-adc or gemini");
+  return { provider, model };
+}
+
+async function viaAdcProxy(env, fetchImpl, { model, system, prompt }) {
+  const f = fetchImpl || fetch;
+  const r = await f(str(env.CONNECT_AGENT_BRAIN_PROXY_URL).replace(/\/$/, "") + "/generate", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-brain-secret": str(env.CONNECT_AGENT_BRAIN_PROXY_SECRET) },
+    body: JSON.stringify({ model, system, prompt }),
+    signal: AbortSignal.timeout(45000),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error("Vertex (ADC proxy) refused the request [" + r.status + "]: " + str(j.error) + " " + str(j.detail).slice(0, 200));
+  return { text: str(j.text), model: str(j.model) || model };
 }
 
 async function generate({ env, fetchImpl, generateImpl, system, prompt }) {
   const { provider, model } = brainModel(env);
   const req = { env, config: { timeoutMs: 45000 }, model: { model }, system, prompt, fetchImpl };
   if (typeof generateImpl === "function") return generateImpl(req, provider);
-  try {
-    return await PROVIDERS[provider].generate(req);
-  } catch (e) {
-    /* The same key serves both Google surfaces; when nobody pinned one, a Vertex refusal (project
-     * not enabled, region) still gets an answer from AI Studio. Pinned providers fail as pinned. */
-    if (provider === "vertex" && !str(env && env.CONNECT_AGENT_MODEL_PROVIDER)) return PROVIDERS.gemini.generate(req);
-    throw e;
-  }
+  if (provider === "vertex-adc") return viaAdcProxy(env, fetchImpl, { model, system, prompt });
+  return PROVIDERS[provider].generate(req);
 }
 
 /**

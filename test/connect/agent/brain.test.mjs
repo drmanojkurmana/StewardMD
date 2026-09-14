@@ -2,7 +2,7 @@
 //   node --test test/connect/agent/brain.test.mjs
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { phiGate, askBrain, shapeAnswer, structureHash, RESOURCES, ROLES } from "../../../functions/_connect/agent/brain.js";
+import { phiGate, askBrain, shapeAnswer, structureHash, RESOURCES, ROLES, brainModel } from "../../../functions/_connect/agent/brain.js";
 import { onRequest } from "../../../functions/api/connect/agent/[[path]].js";
 import { makeAgentDb } from "./agent-db.mjs";
 import { sha256hex } from "../../../functions/_connect/agent/hmac.js";
@@ -111,7 +111,7 @@ async function routeEnv(generateImpl) {
   const env = {
     CONNECT_FLAG: "1", CONNECT_ONBOARD_FLAG: "1", CONNECT_AGENT_FLAG: "1", CONNECT_BROWSER_SESSION_FLAG: "1",
     CONNECT_CONSENT_SIGNING_KEY: "secret-consent-signing-key-32bytes", CONNECT_AGENT_TOKEN_KEY: "secret-agent-token-key-32bytes",
-    CONNECT_DB: db, identifyFn, brainGenerate: generateImpl,
+    CONNECT_DB: db, identifyFn, brainGenerate: generateImpl, CONNECT_AGENT_MODEL: "gemini-3.8-test",
   };
   const post = (path, body, headers) => onRequest({ request: new Request("https://x" + path, { method: "POST", body: JSON.stringify(body), headers: Object.assign({ "content-type": "application/json" }, headers || {}) }), env, params: {} });
   return { post, doc: { "Cf-Access-Authenticated-User-Email": email } };
@@ -137,4 +137,48 @@ test("POST /brain/classify answers a member, refuses PHI with 400 and names a mo
   const d = await down.json();
   assert.equal(d.error, "brain_unavailable");
   assert.match(d.detail, /PERMISSION_DENIED/);
+});
+
+test("the brain never runs on a default model: no CONNECT_AGENT_MODEL is a named refusal", async () => {
+  const { brainModel } = await import("../../../functions/_connect/agent/brain.js");
+  assert.throws(() => brainModel({}), /CONNECT_AGENT_MODEL is not set/);
+  assert.deepEqual(brainModel({ CONNECT_AGENT_MODEL: "gemini-3.8-pro", CONNECT_AGENT_MODEL_PROVIDER: "gemini" }), { provider: "gemini", model: "gemini-3.8-pro" });
+  await assert.rejects(askBrain({ env: {}, payload: GHIS_WORKLIST, generateImpl: async () => ({ text: "{}" }) }), /CONNECT_AGENT_MODEL is not set/);
+});
+
+test("pick-endpoint: the gate takes request STRUCTURE only and the answer is clamped to real indexes and roles", async () => {
+  const payload = {
+    op: "pick-endpoint", origin: ORIGIN, resource: "medications", action: "tap Treatment chart", headers: ["Drug", "Route", "Frequency"],
+    candidates: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", queryKeys: [], bodyKeys: ["__RequestVerificationToken", "recordNo"], kind: "html", keys: ["Chief complaint"], rows: 2, page: false, xhr: true },
+      { method: "GET", path: "/Doctor/Home/GetMedicines/", queryKeys: ["id"], bodyKeys: [], kind: "html", keys: ["Drug", "Route", "Frequency"], rows: 3, page: false, xhr: true },
+    ],
+  };
+  const g = phiGate(payload);
+  assert.equal(g.ok, true, g.reason);
+  assert.equal(g.clean.candidates[1].path, "/Doctor/Home/GetMedicines/");
+  assert.equal(phiGate(Object.assign({}, payload, { candidates: [Object.assign({}, payload.candidates[1], { path: "/Doctor/Home/GetMedicines/?id=MR25168764" })] })).ok, false);
+  assert.equal(phiGate(Object.assign({}, payload, { candidates: [Object.assign({}, payload.candidates[1], { body: "recordNo=x" })] })).ok, false, "a request body never reaches the model");
+  const a = shapeAnswer(g.clean, { ranked: [{ index: 1, role: "data" }, { index: 1, role: "data" }, { index: 0, role: "prerequisite" }, { index: 7, role: "data" }, { index: 0, role: "write" }] });
+  assert.deepEqual(a.ranked.map((r) => [r.index, r.role]), [[1, "data"], [0, "prerequisite"]]);
+  let prompt = "";
+  const out = await askBrain({ env: { CONNECT_AGENT_MODEL: "gemini-3.8-flash", CONNECT_AGENT_MODEL_PROVIDER: "vertex" }, generateImpl: async (req) => { prompt = req.prompt; assert.equal(req.model.model, "gemini-3.8-flash"); return { text: '{"ranked":[{"index":1,"role":"data","reason":"columns match"}]}', model: "gemini-3.8-flash" }; }, payload });
+  assert.equal(out.model, "gemini-3.8-flash");
+  assert.deepEqual(out.answer.ranked[0], { index: 1, role: "data", reason: "columns match" });
+  assert.match(prompt, /compare each answer with the values on screen/);
+});
+
+test("vertex-adc: with the Cloud Run proxy configured, the brain calls it with the secret and reports the served model", async () => {
+  const env = { CONNECT_AGENT_MODEL: "gemini-3.8-flash", CONNECT_AGENT_MODEL_PROVIDER: "vertex", CONNECT_AGENT_BRAIN_PROXY_URL: "https://brain.example.run.app/", CONNECT_AGENT_BRAIN_PROXY_SECRET: "s".repeat(48) };
+  assert.deepEqual(brainModel(env), { provider: "vertex-adc", model: "gemini-3.8-flash" });
+  assert.throws(() => brainModel(Object.assign({}, env, { CONNECT_AGENT_BRAIN_PROXY_SECRET: "short" })), /needs CONNECT_AGENT_BRAIN_PROXY_URL and CONNECT_AGENT_BRAIN_PROXY_SECRET/);
+  const seen = [];
+  const fetchImpl = async (url, init) => { seen.push({ url, init }); return new Response(JSON.stringify({ text: '{"resource":"labs","confidence":0.9,"reason":"x"}', model: "gemini-3.8-flash" }), { status: 200 }); };
+  const out = await askBrain({ env, fetchImpl, payload: Object.assign({}, GHIS_WORKLIST) });
+  assert.equal(seen[0].url, "https://brain.example.run.app/generate");
+  assert.equal(seen[0].init.headers["x-brain-secret"], "s".repeat(48));
+  assert.equal(JSON.parse(seen[0].init.body).model, "gemini-3.8-flash");
+  assert.equal(out.model, "gemini-3.8-flash");
+  const refused = async () => new Response(JSON.stringify({ error: "vertex_403", detail: "denied" }), { status: 502 });
+  await assert.rejects(askBrain({ env, fetchImpl: refused, payload: Object.assign({}, GHIS_WORKLIST, { labels: ["other"] }) }), /ADC proxy\) refused the request \[502\]/);
 });

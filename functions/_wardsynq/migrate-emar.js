@@ -146,19 +146,23 @@ async function medicationRound(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), due: [] }; }
 
   const due = [];
+  let unread = 0;
   for (const o of (orders || []).filter((x) => x && x.status === "active")) {
     const marId = medicationAdministrationIdFor(o.id, dueAt);
-    let mar = null;
-    try { mar = marId ? await svc.get("MedicationAdministration", marId) : null; } catch { mar = null; }
+    let mar = null, readFailed = false;
+    /* A failed read is NOT "not started". Reporting it as null invited a second dose of something
+     * already given. */
+    try { mar = marId ? await svc.get("MedicationAdministration", marId) : null; } catch { readFailed = true; unread += 1; }
     due.push({
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       administrationId: marId,
-      status: mar ? mar.status : null,          // null = this dose has not been started
+      ...(readFailed ? { readFailed: true } : {}),
+      status: readFailed ? "unknown" : mar ? mar.status : null,          // null = this dose has not been started
       administeredAt: (mar && mar.administeredAt) || null,
       administeredBy: (mar && mar.administeredBy) || null,
     });
   }
-  return { ...base, ok: true, patientId, dueAt, due };
+  return { ...base, ok: true, patientId, dueAt, due, ...(unread ? { incomplete: true, warning: `${unread} dose record${unread === 1 ? "" : "s"} could not be read. Check the chart before giving ${unread === 1 ? "that dose" : "those doses"}.` } : {}) };
 }
 
 /**
@@ -195,6 +199,27 @@ async function administerStep(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
   }
   if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId };
+  /* A RETRY IS ANSWERED WITH WHAT IT ALREADY DID, BEFORE THE STATE MACHINE IS ASKED AGAIN.
+   * Asked again, the machine refuses "administer" on a dose that is already administered, and a
+   * device replaying its offline queue after a lost response would tell the nurse a recorded dose
+   * was refused. The key is bound to this patient and this dose; anything else is a refusal. */
+  if (ctx.idempotencyKey) {
+    let prior = null;
+    try { prior = await svc.replayFor(ctx.idempotencyKey, "MedicationAdministration", order.patientId, marId); }
+    catch (e) {
+      if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "idempotency_conflict", detail: "this request key already recorded a different dose", orderId, administrationId: marId, written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+    }
+    if (prior && prior.record && prior.record.id !== marId) {
+      return { ...base, ok: false, status: 409, error: "idempotency_conflict", detail: "this request key already recorded a different dose", orderId, administrationId: marId, written: 0 };
+    }
+    if (prior && prior.record) {
+      const rec = prior.record;
+      return { ...base, ok: true, written: 0, replayed: true, action, to: rec.status, orderId, administrationId: marId,
+        patientId: order.patientId, encounterId: order.encounterId || null, administeredBy: rec.administeredBy || null,
+        administeredAt: rec.administeredAt || null, witnessedBy: rec.witnessedBy || null, version: rec.version, actor: resolved.actor.id, role: resolved.role };
+    }
+  }
   if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", orderId, orderStatus: order.status };
 
   // Wrong-patient prevention, before any state is touched: the patient the ward says it is holding

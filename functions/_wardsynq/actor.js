@@ -89,7 +89,19 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord",
   // TASK 6.14: PatientTag - assigning/replacing/ending a wristband is the same bedside act as
   // DeviceAssociation, above, and the same capability governs both.
-  "PatientTag"]);
+  "PatientTag",
+  // FormResponse: a completed hospital form (triage, nursing assessment, checklist) - documentation the
+  // nurse records at the bedside, answered against a form the hospital published for their role.
+  "FormResponse",
+  // The nursing command center (nursing.js), 2026-09-13: assigning a nurse to a patient, the shift's tasks and the
+  // observation frequency are the ward's own nursing workflow, the same authority as charting the vitals they schedule.
+  "NurseAssignment", "NursingTask", "ObservationFrequency",
+  // IcuRecord (icu-care.js): a blood gas, ventilator setting, RASS or round checklist charted at an
+  // ICU bedside is the same act as charting a vital sign, by the same nurse.
+  "IcuRecord",
+  // SurveillanceAcknowledgement (surveillance.js): acknowledging a computed signal with a note is a bedside
+  // act by whoever is looking after the patient, not a prescribing decision.
+  "SurveillanceAcknowledgement"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -268,7 +280,11 @@ function grantForCaps(caps) {
      * is granted by ORDER_VERIFY above and is a supply fact against an ORDER, which is a different
      * thing that a different check governs. Reading MedicationDispense is how the level subtracts
      * what was issued, and pharmacy already holds that read. */
-    const added = ["StockMovement"];
+    /* PurchaseOrder, Vendor and Verification joined 2026-09-13. Purchasing sits on this capability at
+     * the router, but the record grant never followed, so a pharmacist's "Raise" and "Ask for approval"
+     * were refused (SCOPE_DENIED) and only an admin could ever order stock. Verification is written
+     * only through the approval routes (the raw door refuses it), and deciding one still needs emr.treat. */
+    const added = ["StockMovement", "PurchaseOrder", "Vendor", "Verification"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.ORDER_DISPENSE };
     else grant = {
       tier: TIER.EXECUTE,
@@ -336,9 +352,9 @@ function grantForCaps(caps) {
     // invoice and posting a payment against it is the SAME financial-record authority as coding a
     // claim, not a clinical one.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", ...CAPTURE_TYPES]
-      : ["Claim", "PreAuthorisation", "Invoice"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES]
+      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds
@@ -586,11 +602,26 @@ async function resolveIdentity(request, env, deps) {
  * "smallest set of new code" instruction, when the existing scope blob already carries exactly this
  * kind of metadata for free. */
 function requestContextOf(request, identity) {
-  return {
+  const rc = {
     correlationId: request.headers.get("X-Correlation-Id") || (crypto.randomUUID ? crypto.randomUUID() : null),
     deviceId: request.headers.get("X-Device-Id") || null,
     sessionId: (identity && identity.sessionRef) || null,
   };
+  const offline = offlineContextOf(request);
+  if (offline) rc.offline = offline;
+  return rc;
+}
+
+/* P2.4: a write that a device queued while offline and is now sending (ward-offline.js). The device's
+ * created-at is DISPLAY ONLY and is accepted only as a plain ISO instant; anything else is recorded as
+ * unreadable rather than stored. The conflict reason is bounded; the audit writer value-scans it. */
+function offlineContextOf(request) {
+  const raw = String(request.headers.get("X-Offline-Created-At") || "").trim();
+  if (!raw) return null;
+  const ok = raw.length <= 40 && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,3})?)?Z$/.test(raw) && !isNaN(Date.parse(raw));
+  let reason = "";
+  try { reason = decodeURIComponent(String(request.headers.get("X-Offline-Conflict-Reason") || "")).trim().slice(0, 200); } catch { reason = ""; }
+  return { createdAt: ok ? new Date(raw).toISOString() : "unreadable", ...(reason ? { conflictReason: reason } : {}) };
 }
 
 /**

@@ -86,7 +86,8 @@
     opts = opts || {};
     var h = { "Content-Type": "application/json" };
     var send = function(){ return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
-      .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); }); };
+      .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); })
+      .catch(function(){ return { ok:false, error:"network" }; }); };
     if (tt === "firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });   // clinic owner: mint an id-token like /opd does
     if (tok) h["X-Staff-Token"] = tok;   // staff cashier session
     return send();
@@ -148,6 +149,20 @@
     inp.focus();
     go.onclick = function(){ var id = inp.value.trim(); if(!id){ document.getElementById("err").textContent = "Enter the patient's ID."; return; } loadPatient(id); };
     inp.addEventListener("keydown", function(e){ if(e.key==="Enter") go.click(); });
+    // Everyone with something waiting to be billed, so the cashier does not depend on being told an ID.
+    var q = document.createElement("section"); q.className = "card"; q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Loading…</div>';
+    app.appendChild(q);
+    if (MOCK) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">Demo: the live list shows every patient with unbilled orders.</div>'; return; }
+    api("queue?orgId="+encodeURIComponent(orgId)).then(function(r){
+      if (!r || !r.ok) { q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2><div class="msg">'+ms("error")+'The list could not be loaded. Do not read this as nothing waiting. Look a patient up by ID instead.</div>'; return; }
+      var by = {}; (r.orders||[]).forEach(function(o){ (by[o.patientId] = by[o.patientId] || []).push(o); });
+      var ids = Object.keys(by);
+      q.innerHTML = '<h2>'+ms("pending_actions")+'Waiting to be billed</h2>' + (ids.length
+        ? ids.map(function(id){ var n = by[id].length, tot = by[id].reduce(function(s,o){ return s + (o.unitPrice||0)*(o.qty||1); }, 0);
+            return '<div class="line"><span class="nm">'+esc(id)+' <small>'+n+' item'+(n===1?'':'s')+'</small></span><span class="amt">'+rupees(tot)+'</span><button class="btn ghost" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-bill="'+esc(id)+'">Open</button></div>'; }).join("")
+        : '<div class="msg">Nothing is waiting to be billed.</div>');
+      Array.prototype.forEach.call(q.querySelectorAll("[data-bill]"), function(b){ b.onclick = function(){ loadPatient(b.getAttribute("data-bill")); }; });
+    });
   }
 
   function loadPatient(id){
@@ -156,8 +171,9 @@
                   api("orders?orgId="+encodeURIComponent(orgId)+"&patientId="+encodeURIComponent(id)+"&status=ordered") ])
       .then(function(res){
         var p = res[0], o = res[1];
-        if (!p || !p.ok) { document.getElementById("err").textContent = p && p.error === "billing_disabled" ? "Billing is not enabled for this clinic yet." : "No patient found with that ID."; return; }
-        review({ patient: p, orders: (o && o.orders) || [] });
+        if (!p || !p.ok) { document.getElementById("err").textContent = p && p.error === "billing_disabled" ? "Billing is not enabled for this clinic yet." : p && p.error === "not_found" ? "No patient found with that ID." : "The patient could not be looked up. Try again."; return; }
+        if (!o || !o.ok) { document.getElementById("err").textContent = "This patient's orders could not be loaded. Do not read this as nothing to bill."; return; }
+        review({ patient: p, orders: o.orders || [] });
       });
   }
 
@@ -175,9 +191,34 @@
         '<button class="btn" id="inv">'+ms("receipt_long")+'Generate invoice</button>'
       : '<div class="msg">'+ms("inventory_2")+'No unbilled orders for this patient.</div><button class="btn ghost" id="back">'+ms("arrow_back")+'Look up another</button>';
     app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p.name))+'</div><div><b>'+esc(p.name||"Patient")+'</b><span>'+esc(p.id||"")+(p.ageYears?" · "+p.ageYears+"y":"")+(p.sex?" · "+esc(p.sex):"")+'</span></div></div>'+
-      '<h2>'+ms("assignment")+'Unbilled orders</h2>'+body+'<div class="err" id="err"></div></section>';
+      '<h2>'+ms("assignment")+'Unbilled orders</h2>'+body+'<div class="err" id="err"></div>'+
+      '<h2>'+ms("add_shopping_cart")+'Add an item</h2><div id="addItem"><div class="msg">Loading the price list…</div></div></section>';
     var inv = document.getElementById("inv"); if(inv) inv.onclick = function(){ inv.disabled=true; inv.innerHTML = ms("hourglass_top")+"Creating…"; makeInvoice(p.id); };
     var back = document.getElementById("back"); if(back) back.onclick = function(){ lookupView(); };
+    loadAddItem(p);
+  }
+  // The price is the clinic's own price list; the server takes it from there, not from this page.
+  function loadAddItem(p){
+    var box = document.getElementById("addItem");
+    if (MOCK) { box.innerHTML = '<div class="msg">'+ms("info")+'Demo: items come from the clinic price list.</div>'; return; }
+    api("tariff?orgId="+encodeURIComponent(orgId)).then(function(r){
+      if (!box) return;
+      if (!r || !r.ok) { box.innerHTML = '<div class="msg">'+ms("error")+'The price list could not be loaded.</div>'; return; }
+      var items = r.items || [];
+      if (!items.length) { box.innerHTML = '<div class="msg">'+ms("info")+'The price list is empty. The clinic owner adds items under Admin, Price list.</div>'; return; }
+      box.innerHTML = '<label>Item</label><select id="tItem">'+items.map(function(t){ return '<option value="'+esc(t.id)+'">'+esc(t.name)+' - '+rupees(t.price)+'</option>'; }).join("")+'</select>'+
+        '<label>Quantity</label><input id="tQty" type="number" min="1" value="1">'+
+        '<button class="btn ghost" id="tAdd">'+ms("add")+'Add to this bill</button>';
+      document.getElementById("tAdd").onclick = function(){
+        var b = this; b.disabled = true;
+        api("order", { method:"POST", body:{ orgId:orgId, patientId:p.id, tariffId:document.getElementById("tItem").value, qty:Number(document.getElementById("tQty").value)||1 } }).then(function(x){
+          b.disabled = false;
+          if (x && x.ok) { loadPatient(p.id); return; }
+          document.getElementById("err").textContent = x && x.error === "forbidden" ? "Your role cannot add items to a bill. A doctor or the clinic owner can." :
+            x && x.error === "tariff_item_not_found" ? "That item is no longer on the price list. Reload." : "The item was not added.";
+        });
+      };
+    });
   }
 
   function makeInvoice(patientId){

@@ -21,14 +21,15 @@
  * way for one nurse to be looking at a different rule set from the next.
  */
 
-const VERSION = "wardsynq-v1";
+const VERSION = "wardsynq-v4";
 
 /* The whole surface, listed rather than discovered. A shell that caches what it happens to fetch
    works until the one screen nobody opened before the wifi went is the one somebody needs. */
 const SHELL = [
   "./wardsynq.html",
-  "./wardsynq.css?v=8",
+  "./wardsynq.css?v=10",
   "./wardsynq-app.js",
+  "./wardsynq-app.js?v=11",
   "./opd.html",
   "./opd.css",
   "./opd-emr.js",

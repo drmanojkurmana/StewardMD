@@ -62,6 +62,10 @@ function InfusionRate(input) {
      * recorded so the integration is right - but the EVENT is what says why. */
     ratePerHour: event === "paused" || event === "stopped" ? 0 : num(i.ratePerHour),
     reason: i.reason || null,
+    /* What the bag label says, as stated by the nurse hanging it: { amount, unit, volumeMl }, e.g.
+     * 4 mg in 50 mL. Recorded as given and never defaulted - a dose worked out from a rate is only
+     * as true as this, which is why icu-care.js refuses a dose when it is absent. */
+    concentration: i.concentration || null,
     at: i.at || null,
     recordedBy: i.recordedBy || null,
     source: { system: "wardsynq-native", sourceId: `infusion:${i.id}` },
@@ -69,6 +73,15 @@ function InfusionRate(input) {
 }
 
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+/** PURE. A stated bag concentration, or null when none was given, or { error } when one was given
+ *  and is not usable. The unit is kept as written; whether it converts is the reader's question. */
+function concentrationFrom(c) {
+  if (c === undefined || c === null || c === "") return null;
+  const amount = num(c && c.amount), volumeMl = num(c && c.volumeMl), unit = str(c && c.unit);
+  if (!(amount > 0) || !(volumeMl > 0) || !unit) return { error: "a concentration needs an amount, its unit and the volume in mL, e.g. 4 mg in 50 mL" };
+  return { amount, unit, volumeMl };
+}
+
 /** PURE. One entry per (order, instant). Re-charting the same change is the same entry. */
 function rateIdFor(orderId, at) {
   const o = slug(orderId), t = slug(at);
@@ -159,6 +172,9 @@ async function chartInfusion(request, env, ctx) {
     return { ...base, ok: false, status: 422, error: "rate_required", detail: "a running infusion needs a rate in mL per hour", written: 0 };
   }
 
+  const concentration = concentrationFrom(ctx.concentration);
+  if (concentration && concentration.error) return { ...base, ok: false, status: 422, error: "bad_concentration", detail: concentration.error, written: 0 };
+
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
@@ -187,7 +203,7 @@ async function chartInfusion(request, env, ctx) {
 
   const record = InfusionRate({
     id, patientId: order.patientId, encounterId: order.encounterId || null,
-    orderId, drug: order.drug, event, ratePerHour: rate, reason: str(ctx.reason) || null,
+    orderId, drug: order.drug, event, ratePerHour: rate, reason: str(ctx.reason) || null, concentration,
     at, recordedBy: resolved.actor.id,
   });
 
@@ -249,4 +265,4 @@ async function listInfusions(request, env, ctx) {
   };
 }
 
-export { TYPE, EVENTS, STALE_AFTER_HOURS, InfusionRate, rateIdFor, isRunning, volumeSoFar, chartInfusion, listInfusions };
+export { TYPE, EVENTS, STALE_AFTER_HOURS, InfusionRate, concentrationFrom, rateIdFor, isRunning, volumeSoFar, chartInfusion, listInfusions };

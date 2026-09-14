@@ -48,6 +48,18 @@ test("a record merged into another says where the full chart is", () => {
   assert.ok(html.includes('data-w-act="mpiunmerge:p9~p1"'));
 });
 
+test("the merge preview shows both records, marks what differs, and asks for a reason before joining", () => {
+  const W = loadWard();
+  const html = W._render({ ...W._st, view: "mpi", mpi: null, sel: SEL, mpiIdentity: { ok: true, identity: { links: [] } },
+    mpiPreview: { ok: true, dryRun: true, survivor: { patientId: "p1", name: "Ramesh Kumar", mrn: "M1", dob: "1970-01-01", sex: "male" }, merged: { patientId: "p2", name: "Ramesh Kumaar", mrn: "M2", dob: "1970-01-01", sex: "male" } } });
+  assert.match(html, /Check before joining these records/);
+  assert.equal((html.match(/class="w-diff"/g) || []).length, 2, "name and MRN differ; date of birth and sex do not");
+  assert.ok(html.includes('id="wMpiReason"'));
+  assert.ok(html.includes('data-w-act="mpimergeconfirm"'));
+  assert.ok(html.includes('data-w-act="mpimergecancel"'));
+  assert.match(html, /No clinical data is moved or deleted/);
+});
+
 test("a partial history is stated, and an empty partial history is not 'never merged'", () => {
   const W = loadWard();
   const html = view(W, { ok: true, partial: true, partialWarning: "Only the first 500 merge records were checked. This history may be incomplete.", identity: { patientId: "p1", links: [], isMerged: false } });

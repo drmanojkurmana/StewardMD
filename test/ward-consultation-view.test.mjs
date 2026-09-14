@@ -79,18 +79,28 @@ test("a refused consultation names every piece that was refused, and says nothin
   assert.ok(html.includes("This role may not write the prescription."));
 });
 
-test("a part-saved consultation says what reached the chart and what never ran", () => {
+test("a consultation that failed says nothing is on the chart, names the part, and keeps what was typed", () => {
   const W = loadWard();
   const html = W._render({
     ...W._st, view: "consultation", sel: SEL, templates: [],
-    consultationResult: { ok: false, status: 207, partial: true, written: 1,
-      detail: "Part of this consultation was saved. Check what is on the chart before trying again.",
-      savedPieces: ["vitals"], failedAt: "problems", notAttempted: ["medications", "note"],
-      results: [{ piece: "problems", ok: false, error: "version_conflict" }] },
+    consultationResult: { ok: false, status: 422, error: "consultation_not_saved", written: 0,
+      detail: "Nothing from this consultation was saved, because the problem list could not be. Fix that part and save again.",
+      failedAt: "problems", notAttempted: ["medications", "note"],
+      results: [{ piece: "vitals", ok: true }, { piece: "problems", ok: false, error: "version_conflict" }] },
   });
-  assert.match(html, /Saved in part/);
-  assert.match(html, /On the chart now:<\/b> vitals/);
-  assert.match(html, /Never attempted:<\/b> medications, note/);
+  assert.match(html, /Not saved - nothing from this consultation is on the chart/);
+  assert.match(html, /because the problem list could not be/);
+  assert.match(html, /The part that failed:<\/b> problems/);
+  assert.match(html, /problems: version_conflict/);
+  assert.ok(!/On the chart now/.test(html), "there is no partial state to describe any more");
+});
+
+test("a failure with no per-piece detail (a conflict at commit) is still shown, never a blank", () => {
+  const W = loadWard();
+  const html = W._render({ ...W._st, view: "consultation", sel: SEL, templates: [],
+    consultationResult: { ok: false, status: 409, error: "consultation_conflict", written: 0, detail: "Someone else changed this chart while you were writing. Nothing from this consultation was saved; reload and save again." } });
+  assert.match(html, /Not saved/);
+  assert.match(html, /Someone else changed this chart/);
 });
 
 test("the approvals screen renders a chain, including one that was taken back", () => {

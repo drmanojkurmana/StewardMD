@@ -48,8 +48,11 @@ async function openRecordDeployment(opts) {
 /** Reads `?record=<tenantId>` (and `&patient=<id>`), the opt-in every WardSynQ page shares. */
 function recordParams(search) {
   const q = new URLSearchParams(search || (typeof location !== "undefined" ? location.search : ""));
-  const tenantId = q.get("record");
-  return tenantId ? { tenantId, patientId: q.get("patient") || null } : null;
+  const tenantId = (q.get("record") || "").trim();
+  if (!tenantId || tenantId === "none" || tenantId === "null" || tenantId === "undefined" || q.get("demo") === "1") {
+    return null;
+  }
+  return { tenantId, patientId: q.get("patient") || null };
 }
 
 /* The bearer the StewardMD shell exposes, when this page runs inside it. Null on a bare hospital PC
@@ -63,14 +66,34 @@ function recordParams(search) {
  * unavailable, so ordering is disabled." with the drug field, Sign order, Notes and Handover all
  * disabled. Found 2026-09-12 by clicking Ward on the live site. Accepting both shapes is the fix:
  * neither shell is wrong, they were simply never reconciled. */
-function shellToken() {
+async function shellToken() {
   try {
     const a = typeof window !== "undefined" ? window.SMD_AUTH : null;
-    if (!a) return Promise.resolve(null);
-    if (typeof a.token === "function") return Promise.resolve(a.token()).catch(() => null);
-    const u = a.currentUser;
-    return u && u.getIdToken ? u.getIdToken() : Promise.resolve(null);
-  } catch { return Promise.resolve(null); }
+    if (a && a.ready && typeof a.ready.then === "function") {
+      try { await a.ready; } catch {}
+    }
+    let tok = null;
+    if (a && typeof a.token === "function") {
+      try { tok = await a.token(); } catch {}
+    }
+    if (!tok && a && a.currentUser && typeof a.currentUser.getIdToken === "function") {
+      try { tok = await a.currentUser.getIdToken(); } catch {}
+    }
+    if (!tok && typeof window !== "undefined" && window.firebase && typeof window.firebase.auth === "function") {
+      try {
+        const u = window.firebase.auth().currentUser;
+        if (u && typeof u.getIdToken === "function") tok = await u.getIdToken();
+      } catch {}
+    }
+    if (!tok && typeof localStorage !== "undefined") {
+      try {
+        tok = localStorage.getItem("smd_opd_staff_tok") || null;
+      } catch {}
+    }
+    return tok || null;
+  } catch {
+    return null;
+  }
 }
 
 export { openRecordDeployment, recordParams, shellToken };

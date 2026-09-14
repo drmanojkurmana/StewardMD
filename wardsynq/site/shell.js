@@ -85,7 +85,23 @@
   }
 
   // ---- router ---------------------------------------------------------------------------------
-  function go(page, arg) { location.hash = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : ""); }
+  function go(page, arg) {
+    var target = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : "");
+    if (location.hash === target) {
+      route();
+    } else {
+      location.hash = target;
+    }
+  }
+  /* Two-step sign-in: the PIN or password was right, and the account wants a code from the phone. The
+   * server's answer is passed through untouched, so a wrong code reads as a wrong code, not a PIN. */
+  function secondStep(r) {
+    var code = "";
+    try { code = G.prompt((r.message || "Enter the 6-digit code from your authenticator app.") + "\n\nLost your phone? Enter a backup code instead.") || ""; } catch (e) {}
+    if (!code.trim()) return { cancelled: true };
+    return fetch(API + "/auth/mfa", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ challenge: r.challenge, code: code.trim() }) })
+      .then(function (x) { return x.json(); });
+  }
   function parseHash() {
     var h = (location.hash || "").replace(/^#\/?/, "").split("/");
     return { page: h[0] || "", arg: h.length > 1 ? decodeURIComponent(h.slice(1).join("/")) : "" };
@@ -98,6 +114,10 @@
     if (r.page === "login") return render("login");
     if (r.page === "logout") return signOut();
     if (!st.who) return whoami().then(route);
+    /* The hospital requires two-step sign-in for this role and it is not set up. The server refuses
+     * everything else anyway; this just takes the person to the one page that will work, before any
+     * hospital data is asked for (which would only be refused). */
+    if (st.who.twoStepRequired) return r.page === "security" ? render("security") : go("security");
     if (r.page === "hospitals") return render("hospitals");
     /* The demonstration-hospital builder runs BEFORE a hospital is chosen, because its whole job is
      * to create one. Every other page below needs st.org loaded; this one would be bounced straight
@@ -119,7 +139,13 @@
     if (PAGES[r.page]) return render(r.page);
     return render("home");
   }
-  function workstationUrl() { return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(st.org.connectTenantId || "") + "&site=1"; }
+  function workstationUrl() {
+    var t = st.org && st.org.connectTenantId;
+    if (isDemo(st.org) || !t || t === "none" || t === "undefined" || t === "null") {
+      return "/wardsynq/ui/wardsynq.html?site=1" + (isDemo(st.org) ? "&demo=1" : "");
+    }
+    return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(t) + "&site=1";
+  }
   function whoami() {
     return api("/whoami" + (st.orgId ? "?orgId=" + encodeURIComponent(st.orgId) : "")).then(function (r) {
       if (!r || !r.ok) {
@@ -175,7 +201,7 @@
     if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
     h += item("opd", "OPD desk") + item("patients", "Patients");
     if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
-    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + "</div>";
+    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + item("rota", "Staff rota") + item("accounts", "Accounts") + "</div>";
     return h;
   }
   function render(page, extra) {
@@ -318,7 +344,9 @@
         if (!hasAt && !code) { msg("Enter the hospital code, or sign in with your email."); return; }
         st._lastCode = code; msg("Checking.", "note");
         fetch(API + (isEmail ? "/auth/email" : "/auth/pin"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(isEmail ? { email: id, password: pw } : { clinicCode: code, identity: id, pin: pw }) })
-          .then(function (r) { return r.json(); }).then(function (r) {
+          .then(function (r) { return r.json(); }).then(function (r) { return r && r.error === "mfa_required" ? secondStep(r) : r; }).then(function (r) {
+            if (r && r.cancelled) { msg("Sign-in cancelled."); return; }
+            if (r && (r.error === "wrong_code" || r.error === "challenge_expired")) { msg(r.error === "wrong_code" ? "That code did not match. Sign in again and use the newest code." : "That took too long. Sign in again."); return; }
             if (!r || !r.ok || !r.token) { msg(r && r.error === "locked" ? "Too many attempts. Try again later." : r && r.error === "staff_disabled" ? "Staff access is not enabled on this server." : isEmail ? "Wrong email or password." : "Wrong hospital code, staff ID or PIN."); return; }
             setSession("staff", r.token, r.orgId || ""); st.who = null; go(r.orgId ? "landing" : "hospitals");
           }).catch(function () { msg("Could not reach the server."); });
@@ -480,6 +508,9 @@
       /* The bed waiting list sits at the capability that registers a patient - asking for a bed and
        * closing a request are front-desk and bed-management acts, and the module gates them itself. */
       tile({ go: "ward:admreqs", icon: "bed", title: "Waiting for a bed", sub: "Ask for a bed, see who is waiting and for how long", need: "queue.add" }),
+      tile({ go: "ward:nurseworklist", icon: "checklist", title: "Nurse worklist", sub: "Every patient: overdue doses, what is due next, early-warning score", need: "emr.view" }),
+      tile({ go: "ward:surveillance", icon: "monitor_heart", title: "Surveillance", sub: "Rising NEWS2, sepsis screens, worsening labs, overdue care, with the evidence", need: "emr.view" }),
+      tile({ go: "ward:referralinbox", icon: "send", title: "Referral inbox", sub: "Referrals waiting for your specialty, and the ones you sent", need: "emr.view" }),
       /* Finding and joining duplicate records is the front desk's and medical records' work, on the
        * capability that registers a patient; identity-merge.js gates the merge itself. */
       tile({ go: "ward:mpi", icon: "search", title: "Duplicate records", sub: "Find a patient who may have two records, and join them with a reason", need: "queue.add" }),
@@ -492,6 +523,7 @@
     var peopleTiles = [
       tile({ go: "patients", icon: "person_search", title: "Patients", sub: "Find by MRN, register a new patient, open the chart", need: "queue.view" }),
     ];
+    if (native) peopleTiles.push(tile({ go: "portal-access", icon: "forum", title: "Patient portal", sub: "Patient messages, and record access for patients and family", need: "emr.view" }));
     if (native) peopleTiles.push(tile({ go: "maik", icon: "psychology", title: "MaiK clinical AI", sub: "Governed summaries and draft notes, always reviewed by you", need: "emr.view" }));
     var adminTiles = [
       tile({ go: "admin", icon: "admin_panel_settings", title: "Admin Center", sub: "Wards, beds, departments, rooms, staff and roles", need: "staff.admin" }),

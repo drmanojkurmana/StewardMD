@@ -64,6 +64,7 @@ mock.module("../functions/_fbfirestore.js", {
 });
 
 const { MemoryRepository, VersionConflictError } = await import("../functions/_wardsynq/repository.js");
+const { resetMemory: resetRateLimits } = await import("../functions/_wardsynq/rate-limit.js");
 const { identify } = await import("../functions/_usage.js");
 const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
@@ -140,6 +141,10 @@ const NOTE_TEMPLATES = [{
 function seedHospital(mode = "wardsynq", region) {
   docs.clear(); clock = 1;
   RECORD = new MemoryRepository();
+  /* A new hospital starts with a fresh per-minute throttle. The limiter's memory store outlives each
+   * test, so DOCTOR's writes from every earlier test in this file counted against the later ones,
+   * and a test far down the file failed with "too many requests" whenever one above it grew. */
+  resetRateLimits();
   // ownerUid is nobody on this ward: an owner resolves to `admin` and holds every capability, which
   // would make every separation assertion below vacuous.
   docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode, ...(region ? { region } : {}), connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1, wardsynq: { orderSets: ORDER_SETS, noteTemplates: NOTE_TEMPLATES } }, updateTime: "t1" });
@@ -1101,6 +1106,28 @@ test("the round is computed from the frequency the doctor already wrote, and a g
   assert.equal(after.due[0].administrationId, given.administrationId, "the slot and the record are the same dose");
   assert.equal(after.due[0].overdue, false, "a given dose is never chased");
   assert.equal(after.due[1].status, null);
+});
+
+test("SAFETY: a dose record that cannot be read is 'unknown', never 'not started', on both the round and the legacy round", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();   // TID
+  const real = RECORD.latest.bind(RECORD);
+  RECORD.latest = async (tenantId, resourceType, id) => {
+    if (resourceType === "MedicationAdministration") throw new Error("simulated read outage");
+    return real(tenantId, resourceType, id);
+  };
+  try {
+    const from = new Date().toISOString(), to = new Date(Date.now() + 86400000).toISOString();
+    const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
+    assert.equal(s.__status, 200, JSON.stringify(s));
+    assert.ok(s.due.length > 0);
+    assert.ok(s.due.every((d) => d.status === "unknown" && d.readFailed), JSON.stringify(s.due));
+    assert.equal(s.unreadDoses, s.due.length);
+    assert.match(s.warning, /Reload before giving/);
+    const legacy = await as(NURSE, `/ward/round?orgId=${ORG}&patientId=${adm.patientId}&dueAt=${encodeURIComponent(DUE)}`);
+    assert.ok(legacy.due.every((d) => d.status === "unknown"), JSON.stringify(legacy.due));
+    assert.equal(legacy.incomplete, true);
+  } finally { RECORD.latest = real; }
 });
 
 test("a PRN drug never appears on the round, and an unreadable frequency is reported rather than dropped", async () => {
@@ -2139,8 +2166,22 @@ test("A MERGE MOVES NOTHING AND DESTROYS NOTHING, and it can be taken back", asy
   };
   assert.ok(before.survivor > 0 && before.dupe > 0);
 
+  /* THE PREVIEW RUNS EVERY CHECK AND WRITES NOTHING. It needs no reason (the person has not decided
+   * yet), shows both records, and a real merge afterwards still needs one. */
+  const linksBefore = (await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length;
+  const preview = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, dryRun: true });
+  assert.equal(preview.__status, 200, JSON.stringify(preview));
+  assert.equal(preview.dryRun, true);
+  assert.equal(preview.written, 0);
+  assert.equal(preview.survivor.patientId, adm.patientId);
+  assert.equal(preview.merged.patientId, dupe.patientId);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, linksBefore, "a preview must not write a link");
+  assert.equal((await as(DOCTOR, `/ward/identity?orgId=${ORG}&patientId=${dupe.patientId}`)).identity.isMerged, false);
+  // The same people who cannot merge cannot preview one either.
+  assert.equal((await as(LABTECH, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, dryRun: true })).__status, 403);
+
   // A merge is a claim, and it needs a reason that says what establishes it.
-  const bare = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
+  const bare =await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: dupe.patientId, reason: "same" });
   assert.equal(bare.__status, 422);
   assert.equal(bare.error, "reason_required");
   // And a record cannot absorb itself.
@@ -2206,6 +2247,24 @@ test("a merge is refused where it would create an identity by side effect or a c
   assert.equal(chained.into, adm.patientId, "and it names the link that is in the way");
   // Repeating the SAME merge is idempotent, not an error.
   assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason })).written, 0);
+});
+
+test("a merge whose chain check cannot read the existing links is refused, not waved through", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const b = await secondPatient("Medical A", "34");
+  const real = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (tenantId, resourceType, limit) => {
+    if (resourceType === "PatientLink") throw new Error("store unavailable");
+    return real(tenantId, resourceType, limit);
+  };
+  try {
+    const r = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: adm.patientId, mergedId: b.patientId, reason: "Same date of birth and mobile; confirmed at the desk." });
+    assert.equal(r.__status, 502, JSON.stringify(r));
+    assert.equal(r.error, "record_read_failed");
+    assert.equal(r.written, 0);
+  } finally { RECORD.latestByType = real; }
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "PatientLink", adm.patientId)).length, 0, "nothing was joined");
 });
 
 test("resolving identity is the registration authority, and nothing automatic does it", async () => {
@@ -2281,6 +2340,51 @@ test("ORDER -> RESULT -> CRITICAL LOOP, natively, end to end", async () => {
 
   // And the request drops off the pending list, because it has been answered.
   assert.deepEqual((await as(LABTECH, `/ward/pending-tests?orgId=${ORG}&patientId=${adm.patientId}`)).pending, []);
+});
+
+test("LAB VERIFICATION (opt-in): a result autoverification did not pass is on the chart as preliminary, still opens its critical loop, and only a DIFFERENT person makes it final", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, labVerification: { mode: "second-person" } };
+  const LAB2 = "lab2@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(LAB2))}`, { fields: { orgId: ORG, identity: idFor(LAB2), role: "lab", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  const sr = await orderTest(adm);
+
+  const rel = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr, status: "final", reportedAt: "2026-09-07T10:00:00.000Z",
+    tests: [{ test: "Potassium", value: 7.4, unit: "mmol/L", range: "3.5-5.1" }] });
+  assert.equal(rel.__status, 200, JSON.stringify(rel));
+  assert.equal(rel.status, "preliminary");
+  assert.equal(rel.awaitingVerification, true);
+  assert.equal(rel.criticalCheck.opened, 1, "held for verification is NOT held back from the critical loop");
+
+  const queue = await as(LAB2, `/ward/results-to-verify?orgId=${ORG}`);
+  assert.equal(queue.__status, 200, JSON.stringify(queue));
+  const row = queue.results.find((x) => x.reportId === rel.reportId);
+  assert.ok(row, "waiting for verification");
+  assert.equal(row.observations[0].value, 7.4);
+
+  const own = await as(LABTECH, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" });
+  assert.equal(own.__status, 403);
+  assert.equal(own.error, "cannot_verify_own");
+  assert.equal((await as(NURSE, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" })).__status, 403, "a nurse cannot verify a lab result");
+  assert.equal((await as(LAB2, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "return" })).error, "reason_required");
+
+  const ok = await as(LAB2, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.status, "final");
+  const stored = await RECORD.latest(TENANT_ROW.id, "DiagnosticReport", rel.reportId);
+  assert.equal(stored.status, "final");
+  assert.equal(stored.verifiedBy, idFor(LAB2));
+  assert.equal((await as(LAB2, "/ward/verify-result", "POST", { orgId: ORG, reportId: rel.reportId, decision: "verify" })).error, "not_awaiting_verification");
+  assert.ok(!(await as(LAB2, `/ward/results-to-verify?orgId=${ORG}`)).results.some((x) => x.reportId === rel.reportId));
+
+  // Without the setting nothing changes: final stays final.
+  org.fields.wardsynq = { ...org.fields.wardsynq, labVerification: null };
+  const sr2 = await orderTest(adm, "Sodium", "wsq-sr-2");
+  const plain = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr2, status: "final", tests: [{ test: "Sodium", value: 138, unit: "mmol/L" }] });
+  assert.equal(plain.status, "final");
+  assert.equal(plain.awaitingVerification, undefined);
 });
 
 test("A FINAL RESULT IS CORRECTED, NEVER OVERWRITTEN", async () => {
@@ -2910,6 +3014,25 @@ test("TASK 3.4: NEAR-EXPIRY appears on the real stock read, and a nurse holds no
 
   assert.equal((await as(NURSE, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "X", quantity: { value: 1, unit: "tablet" } })).__status, 403);
   assert.equal((await as(NURSE, `/ward/stock?orgId=${ORG}`)).__status, 403);
+});
+
+test("P1.2 FEFO route: earliest usable expiry first, expired batch left out, nurse refused, unbatched issue refuses advice", async () => {
+  seedHospital();
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ceftriaxone 1g", quantity: { value: 10, unit: "vial" }, location: "Main", batch: "LATE", expiry: "2099-01-01" });
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ceftriaxone 1g", quantity: { value: 4, unit: "vial" }, location: "Main", batch: "SOON", expiry: "2098-01-01" });
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Ceftriaxone 1g", quantity: { value: 3, unit: "vial" }, location: "Main", batch: "OLD", expiry: "2001-01-01" });
+  const q = `/ward/stock-fefo?orgId=${ORG}&code=${encodeURIComponent("Ceftriaxone 1g")}&unit=vial&quantity=6`;
+  const r = await as(PHARM, q);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.deepEqual(r.picks.map((p) => p.batch + ":" + p.take), ["SOON:4", "LATE:2"]);
+  assert.deepEqual(r.excluded.map((x) => x.batch), ["OLD"]);
+  assert.equal((await as(NURSE, q)).__status, 403);
+  assert.equal((await as(PHARM, `/ward/stock-fefo?orgId=${ORG}&code=x&unit=vial`)).__status, 400);
+
+  await as(PHARM, "/ward/stock-move", "POST", { orgId: ORG, kind: "wastage", code: "Ceftriaxone 1g", quantity: { value: 1, unit: "vial" }, location: "Main", reason: "dropped" });
+  const refused = await as(PHARM, q);
+  assert.equal(refused.__status, 409);
+  assert.equal(refused.error, "unbatched_issues");
 });
 
 test("A VERIFICATION IS OF ONE VERSION: change the order and it is no longer verified", async () => {
@@ -6501,4 +6624,441 @@ test("timeline: pharmacy cannot see it — the same emr.view gate the flowsheet 
   const { adm } = await admittedPatientOnDrug();
   const r = await as(PHARM, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
   assert.equal(r.__status, 403);
+});
+
+/* ---- patient documents (documents.js + object-store.js) ------------------------------------------------
+ *
+ * The real S3 adapter runs against a stand-in S3 endpoint (a fetch stub keyed on its host), so the signed
+ * request path is exercised end to end, not a memory shortcut.
+ */
+const DOC_S3 = { DOC_S3_ENDPOINT: "https://s3.docs.test", DOC_S3_BUCKET: "wsq-docs", DOC_S3_ACCESS_KEY_ID: "AK", DOC_S3_SECRET_ACCESS_KEY: "SK" };
+async function withDocStore(fn) {
+  const objects = new Map(), calls = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, init) => {
+    const u = String(url);
+    if (!u.startsWith(DOC_S3.DOC_S3_ENDPOINT)) return realFetch(url, init);
+    const key = decodeURIComponent(new URL(u).pathname.replace(/^\/wsq-docs\//, ""));
+    calls.push({ method: init.method, key, signed: /^AWS4-HMAC-SHA256 /.test(init.headers.authorization || "") });
+    if (init.method === "PUT") { objects.set(key, new Uint8Array(init.body)); return new Response("", { status: 200 }); }
+    if (init.method === "GET") return objects.has(key) ? new Response(objects.get(key), { status: 200 }) : new Response("", { status: 404 });
+    if (init.method === "DELETE") { objects.delete(key); return new Response(null, { status: 204 }); }
+    return new Response("", { status: 405 });
+  };
+  Object.assign(ENV, DOC_S3);
+  try { return await fn({ objects, calls }); }
+  finally { globalThis.fetch = realFetch; for (const k of Object.keys(DOC_S3)) delete ENV[k]; }
+}
+const PDF = Buffer.from("%PDF-1.4\n% a consent form\n%%EOF\n");
+
+test("DOCUMENTS: upload encrypts before it leaves, versions never overwrite, and the signed link opens exactly what was uploaded", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects, calls }) => {
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, docType: "consent", title: "Consent for central line", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    assert.equal(up.document.version, 1);
+    assert.ok(!("objectKey" in up.document), "the storage key is never handed to a client");
+    assert.equal(objects.size, 1);
+    assert.ok(calls.length && calls.every((c) => c.signed), "every storage request is signed");
+    const stored = [...objects.values()][0];
+    assert.ok(!Buffer.from(stored).includes(Buffer.from("consent form")), "the store holds ciphertext, never the document");
+
+    const v2 = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, documentId: up.document.id, expectedVersion: 1, docType: "consent", title: "Consent for central line (signed copy)", contentType: "application/pdf", dataBase64: Buffer.from("%PDF-1.4\n% signed\n%%EOF\n").toString("base64") });
+    assert.equal(v2.__status, 200, JSON.stringify(v2));
+    assert.equal(v2.document.version, 2);
+    assert.equal(objects.size, 2, "version 1's file is kept");
+    const stale = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, documentId: up.document.id, expectedVersion: 1, docType: "consent", title: "late", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+    assert.equal(stale.__status, 409, "a version built on an old copy is refused");
+
+    const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(list.__status, 200, JSON.stringify(list));
+    assert.equal(list.storageConfigured, true);
+    assert.equal(list.documents.length, 1);
+    assert.equal(list.documents[0].version, 2);
+    assert.equal((await as(NURSE, `/ward/document-versions?orgId=${ORG}&documentId=${up.document.id}`)).versions.length, 2);
+
+    const link = await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id, version: 1 });
+    assert.equal(link.__status, 200, JSON.stringify(link));
+    assert.match(link.url, /^\/api\/queue\/ward\/document-file\?t=/);
+    const file = await onRequest({ request: new Request("https://x" + link.url), env: ENV });
+    assert.equal(file.status, 200);
+    assert.equal(file.headers.get("content-type"), "application/pdf");
+    assert.equal(file.headers.get("cache-control"), "private, no-store");
+    assert.deepEqual(Buffer.from(await file.arrayBuffer()), PDF, "version 1 opens as version 1, byte for byte");
+
+    const tampered = await onRequest({ request: new Request("https://x" + link.url.slice(0, -4) + "AAAA"), env: ENV });
+    assert.equal(tampered.status, 401);
+  });
+});
+
+test("DOCUMENTS: who may do what - nurses read, only a doctor uploads or withdraws, pharmacy cannot list or link, purge is an admin act", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects }) => {
+    const body = { orgId: ORG, patientId: adm.patientId, docType: "outside-report", title: "Echo from City Hospital", contentType: "application/pdf", dataBase64: PDF.toString("base64") };
+    assert.equal((await as(NURSE, "/ward/document-upload", "POST", body)).__status, 403);
+    assert.equal((await as(PHARM, "/ward/document-upload", "POST", body)).__status, 403);
+    assert.equal(objects.size, 0, "a refused upload stores nothing");
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", body);
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    assert.equal((await as(PHARM, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 403);
+    assert.equal((await as(PHARM, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 403, "no link for someone who cannot read it");
+
+    assert.equal((await as(NURSE, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "Wrong patient" })).__status, 403);
+    assert.equal((await as(DOCTOR, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "no" })).__status, 422, "a withdrawal needs a reason");
+    const w = await as(DOCTOR, "/ward/document-withdraw", "POST", { orgId: ORG, documentId: up.document.id, reason: "Scanned under the wrong patient" });
+    assert.equal(w.__status, 200);
+    assert.equal(w.document.status, "entered-in-error");
+    assert.equal(objects.size, 1, "withdrawing keeps the file");
+
+    assert.equal((await as(DOCTOR, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id })).__status, 403, "deleting stored bytes is an administrator's act");
+    const bad = await as(DOCTOR, "/ward/document-upload", "POST", { ...body, contentType: "text/html", dataBase64: Buffer.from("<script>").toString("base64") });
+    assert.equal(bad.__status, 422, "only PDF and images are accepted, so nothing served back can run script");
+  });
+});
+
+test("DOCUMENTS: an administrator deletes the stored files only after retention; the record of the document stays", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  await withDocStore(async ({ objects }) => {
+    const body = { orgId: ORG, patientId: adm.patientId, docType: "id-proof", title: "Aadhaar copy", contentType: "image/png", dataBase64: Buffer.from([137, 80, 78, 71]).toString("base64") };
+    const up = await as(DOCTOR, "/ward/document-upload", "POST", body);
+    assert.equal(up.__status, 200, JSON.stringify(up));
+    await as(DOCTOR, "/ward/document-upload", "POST", { ...body, documentId: up.document.id, expectedVersion: 1, title: "Aadhaar copy, clearer" });
+    assert.equal(objects.size, 2);
+
+    const early = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    assert.equal(early.__status, 409, JSON.stringify(early));
+    assert.equal(early.error, "retention_not_expired");
+    assert.equal(objects.size, 2, "nothing is deleted before the retention date");
+
+    const realNow = Date.now;
+    Date.now = () => realNow() + 4 * 365 * 24 * 3600 * 1000;
+    let purged;
+    try { purged = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id }); }
+    finally { Date.now = realNow; }
+    assert.equal(purged.__status, 200, JSON.stringify(purged));
+    assert.equal(purged.objectsDeleted, 2, "every version's file goes");
+    assert.equal(objects.size, 0);
+    const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+    assert.equal(list.documents.length, 1, "the record that a document existed stays");
+    assert.equal(list.documents[0].status, "purged");
+    assert.equal((await as(NURSE, "/ward/document-link", "POST", { orgId: ORG, documentId: up.document.id })).__status, 410);
+  });
+});
+
+test("DOCUMENTS: with no storage configured, an upload is refused and says so, and the list says storage is off rather than looking empty", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const r = await as(DOCTOR, "/ward/document-upload", "POST", { orgId: ORG, patientId: adm.patientId, docType: "consent", title: "x", contentType: "application/pdf", dataBase64: PDF.toString("base64") });
+  assert.equal(r.__status, 503);
+  assert.equal(r.error, "document_storage_not_configured");
+  assert.match(r.message, /Nothing was saved/);
+  const list = await as(NURSE, `/ward/documents?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.__status, 200);
+  assert.equal(list.storageConfigured, false);
+});
+
+test("DOCUMENTS: the public ready check says whether storage really works - a round trip, not just settings present", async () => {
+  const ready = async () => (await (await onRequest({ request: new Request("https://x/api/queue/ready"), env: ENV })).json()).documentStorage;
+  assert.deepEqual(await ready(), { state: "not_configured" });
+  await withDocStore(async ({ objects, calls }) => {
+    assert.deepEqual(await ready(), { state: "ok" });
+    assert.deepEqual(calls.map((c) => c.method), ["PUT", "GET", "DELETE"], "it saved, read back and deleted");
+    assert.equal(objects.size, 0, "and left nothing behind");
+    await ready();
+    assert.equal(calls.length, 3, "cached, so the public endpoint cannot run up storage calls");
+  });
+});
+
+/* ---- referrals (referral.js) ----------------------------------------------------------------------- */
+test("REFERRAL: request -> accept -> schedule -> seen -> respond -> close, each step by the right side, every step on the record", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const bare = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: adm.patientId, specialty: "Cardiology", reason: "New AF" });
+  assert.equal(bare.__status, 422);
+  assert.equal(bare.error, "summary_required", "a referral with no clinical summary is refused");
+
+  const made = await as(DOCTOR, "/ward/referral-create", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, specialty: "Cardiology", urgency: "urgent", reason: "New atrial fibrillation", clinicalSummary: "72M, palpitations 2 days, AF 130 on ECG, BP stable." });
+  assert.equal(made.__status, 200, JSON.stringify(made));
+  const id = made.referral.id;
+  assert.equal(made.referral.status, "requested");
+
+  const self = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" });
+  assert.equal(self.__status, 422);
+  assert.equal(self.error, "referrer_cannot_receive");
+  assert.equal((await as(NURSE, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" })).__status, 403, "a nurse cannot accept a referral");
+
+  const inbox = await as(LOCUM, `/ward/referral-inbox?orgId=${ORG}&specialty=cardiology`);
+  assert.equal(inbox.__status, 200);
+  assert.deepEqual(inbox.referrals.map((r) => r.id), [id]);
+  assert.equal(inbox.partial, false);
+
+  const steps = [
+    ["accept", {}], ["schedule", { appointmentAt: "2026-09-20T10:00:00.000Z" }], ["seen", {}],
+    ["respond", { response: "Rate control with metoprolol; anticoagulate, CHA2DS2-VASc 3. Echo booked." }],
+  ];
+  for (const [action, extra] of steps) {
+    const r = await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action, ...extra });
+    assert.equal(r.__status, 200, action + " " + JSON.stringify(r));
+  }
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "close" })).error, "only_referrer", "the referrer closes it, having read the reply");
+  const closed = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "close" });
+  assert.equal(closed.__status, 200);
+  assert.equal(closed.referral.status, "closed");
+  assert.deepEqual(closed.referral.history.map((h) => h.status), ["requested", "accepted", "scheduled", "seen", "responded", "closed"]);
+  assert.equal(closed.referral.receivingProvider, idFor(LOCUM));
+
+  const list = await as(NURSE, `/ward/referrals?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(list.referrals[0].status, "closed");
+  assert.equal((await as(PHARM, `/ward/referrals?orgId=${ORG}&patientId=${adm.patientId}`)).__status, 403);
+  assert.equal((await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: id, action: "accept" })).error, "bad_transition", "a closed referral does not reopen");
+});
+
+test("REFERRAL: a declined referral stays on the referrer's list until they close it; cancel needs a reason; external needs a facility", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const base = { orgId: ORG, patientId: adm.patientId, specialty: "Neurology", reason: "Seizure", clinicalSummary: "First seizure, CT normal." };
+  const r1 = await as(DOCTOR, "/ward/referral-create", "POST", base);
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r1.referral.id, action: "decline" })).error, "reason_required");
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r1.referral.id, action: "decline", reason: "Epilepsy clinic takes first seizures" })).__status, 200);
+  const sent = await as(DOCTOR, `/ward/referral-inbox?orgId=${ORG}&view=sent`);
+  assert.deepEqual(sent.referrals.map((r) => r.status), ["declined"], "a declined referral is exactly the one most likely to be forgotten");
+
+  const r2 = await as(DOCTOR, "/ward/referral-create", "POST", base);
+  assert.equal((await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: r2.referral.id, action: "cancel" })).error, "reason_required");
+  assert.equal((await as(LOCUM, "/ward/referral-act", "POST", { orgId: ORG, referralId: r2.referral.id, action: "cancel", reason: "x" })).error, "only_referrer");
+
+  assert.equal((await as(DOCTOR, "/ward/referral-create", "POST", { ...base, kind: "external" })).error, "facility_required");
+  const ext = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, kind: "external", destinationFacility: "NIMHANS" });
+  const acc = await as(DOCTOR, "/ward/referral-act", "POST", { orgId: ORG, referralId: ext.referral.id, action: "accept" });
+  assert.equal(acc.__status, 200, "an external referral's acceptance is recorded by our staff on the facility's behalf");
+  assert.equal(acc.referral.history[1].onBehalfOf, "NIMHANS");
+
+  const att = await as(DOCTOR, "/ward/referral-create", "POST", { ...base, attachments: ["wsq-doc-someone-else"] });
+  assert.equal(att.error, "attachment_not_this_patient");
+});
+
+/* ---- hospital forms (wardsynq-forms.js, _forms_store.js, form-response.js) ---------------------------- */
+test("FORMS: the admin drafts and publishes; a nurse completes a published form, checked on the server; pharmacy cannot", async () => {
+  seedHospital();
+  const ADMIN = "admin@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
+  const { adm } = await admittedPatientOnDrug();
+  const def = { key: "falls", title: "Falls assessment", roles: ["nurse", "doctor"], sections: [{ title: "Risk", fields: [
+    { key: "fell_before", label: "Fallen in the last year", type: "boolean", required: true },
+    { key: "falls_count", label: "How many falls", type: "integer", min: 1, max: 50, required: true, showWhen: { field: "fell_before", op: "eq", value: true } },
+  ] }] };
+
+  assert.equal((await as(NURSE, "/forms/draft", "POST", { orgId: ORG, definition: def })).__status, 403, "a nurse cannot define forms");
+  const broken = await as(ADMIN, "/forms/draft", "POST", { orgId: ORG, definition: { ...def, sections: [{ title: "Risk", fields: [{ key: "x", label: "X", type: "slider" }] }] } });
+  assert.equal(broken.__status, 200);
+  assert.ok(broken.problems.length, "a broken draft is kept and its problems named");
+  assert.equal((await as(ADMIN, "/forms/publish", "POST", { orgId: ORG, key: "falls" })).__status, 422, "and cannot be published");
+  await as(ADMIN, "/forms/draft", "POST", { orgId: ORG, definition: def });
+  const pub = await as(ADMIN, "/forms/publish", "POST", { orgId: ORG, key: "falls" });
+  assert.equal(pub.__status, 200, JSON.stringify(pub));
+  assert.equal(pub.version, 1);
+  const defs = await as(NURSE, `/forms/definitions?orgId=${ORG}`);
+  assert.deepEqual(defs.published.map((d) => d.key + "@" + d.version), ["falls@1"]);
+
+  const body = { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, formKey: "falls", formVersion: 1 };
+  const invalid = await as(NURSE, "/ward/form-submit", "POST", { ...body, answers: { fell_before: true } });
+  assert.equal(invalid.__status, 422);
+  assert.match(invalid.errors.falls_count, /How many falls is required/);
+  assert.equal((await as(PHARM, "/ward/form-submit", "POST", { ...body, answers: { fell_before: false } })).__status, 403);
+  const ok = await as(NURSE, "/ward/form-submit", "POST", { ...body, answers: { fell_before: true, falls_count: 2 } });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.response.formVersion, 1);
+  const list = await as(DOCTOR, `/ward/form-responses?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.deepEqual(list.responses.map((x) => x.answers), [{ fell_before: true, falls_count: 2 }]);
+  assert.equal((await as(NURSE, "/ward/form-submit", "POST", { ...body, formVersion: 9, answers: { fell_before: false } })).error, "form_not_found", "an unpublished version cannot be answered");
+});
+
+test("NURSE WORKLIST: every patient on the ward with overdue doses and early-warning score; a read failure is shown, not hidden; pharmacy cannot see it", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const w = await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`);
+  assert.equal(w.__status, 200, JSON.stringify(w).slice(0, 300));
+  const row = w.rows.find((r) => r.patientId === adm.patientId);
+  assert.ok(row, "the admitted patient is on the worklist");
+  assert.deepEqual(row.problems, []);
+  assert.equal(typeof row.overdue, "number");
+  assert.equal(row.news2.scorable, false);
+  assert.equal(row.news2.total, null, "a score that could not be worked out is never shown as 0");
+  assert.equal(w.partial, false);
+  assert.equal((await as(PHARM, `/ward/nurse-worklist?orgId=${ORG}`)).__status, 403);
+});
+
+test("APPROVALS: the hospital can name which roles approve, and a request past its time limit must be asked again", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  const withPolicy = (policy) => docs.set(`q_orgs/${ORG}`, { ...org, fields: { ...org.fields, wardsynq: { ...org.fields.wardsynq, approvalPolicy: { RestrictedMedication: policy } } } });
+
+  withPolicy({ approverRoles: ["admin"] });
+  const req = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "meropenem-p1", reason: "Culture-proven ESBL" });
+  assert.equal(req.__status, 200, JSON.stringify(req));
+  const byDoctor = await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req.verificationId, decision: "approved" });
+  assert.equal(byDoctor.__status, 403);
+  assert.equal(byDoctor.error, "not_an_approver_role");
+
+  withPolicy({ expiresHours: 0.0000001 });
+  const req2 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "vanco-p1", reason: "MRSA" });
+  await new Promise((r) => setTimeout(r, 5));
+  const late = await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req2.verificationId, decision: "approved" });
+  assert.equal(late.__status, 409, JSON.stringify(late));
+  assert.equal(late.error, "request_expired");
+
+  withPolicy({});
+  const req3 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "pip-p1", reason: "Neutropenic sepsis" });
+  assert.equal((await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req3.verificationId, decision: "approved" })).__status, 200, "no policy: behaves as before");
+});
+
+test("APPROVALS BY AMOUNT: a purchase order's own priced total sets how many approvers it needs; a missing price or a typed amount never lowers it; booked-in stock reaches the stock level", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  docs.set(`q_orgs/${ORG}`, { ...org, fields: { ...org.fields, wardsynq: { ...org.fields.wardsynq, approvalPolicy: { PurchaseOrder: { amountThresholds: [{ abovePaise: 1000000, levels: 2 }] } } } } });
+
+  const raise = (lines) => as(PHARM, "/ward/purchase-order", "POST", { orgId: ORG, vendor: "MedSupply", lines });
+  const small = await raise([{ item: "Ceftriaxone 1g", quantity: 10, unit: "vial", unitPricePaise: 5000 }]);        // Rs 500
+  const big = await raise([{ item: "Albumin 20%", quantity: 50, unit: "vial", unitPricePaise: 450000 }]);          // Rs 2,25,000
+  const unpriced = await raise([{ item: "Gauze", quantity: 100, unit: "pack" }]);
+  assert.equal(small.__status, 200, JSON.stringify(small));
+  assert.equal(big.totalPaise, 22500000);
+  assert.equal(unpriced.totalPaise, null);
+  assert.equal((await raise([{ item: "X", quantity: 1, unit: "vial", unitPricePaise: -1 }])).error, "bad_price");
+
+  const ask = (id, extra) => as(PHARM, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "PurchaseOrder", subjectId: id, reason: "Stock low", ...(extra || {}) });
+  const rs = await ask(small.purchaseOrderId, { context: { amountPaise: 99999999 } });
+  assert.equal(rs.__status, 200, JSON.stringify(rs));
+  assert.equal(rs.required, 1, "the requester's typed amount is ignored; the order's own total is under the threshold");
+  const rb = await ask(big.purchaseOrderId, { context: { amountPaise: 1 } });
+  assert.equal(rb.required, 2, "typing a small amount does not dodge the second approver");
+  assert.equal((await ask(unpriced.purchaseOrderId)).required, 2, "no price means the strictest level, never the lightest");
+  assert.equal((await ask("wsq-po-does-not-exist")).__status, 404);
+  const pharmRestricted = await as(PHARM, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "Meropenem", reason: "x" });
+  assert.equal(pharmRestricted.__status, 403, "the pharmacy's approval-request authority covers supply subjects only");
+  assert.equal((await as(PHARM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: rs.verificationId, decision: "approved" })).__status, 403, "and pharmacy never decides one");
+
+  // One approval on the big order is not enough, so nothing can be booked in against it yet.
+  await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: rb.verificationId, decision: "approved" });
+  const early = await as(PHARM, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: big.purchaseOrderId, item: "Albumin 20%", quantity: 50, unit: "vial", line: 0, batch: "ALB1", expiry: "2099-01-01", location: "Main" });
+  assert.equal(early.__status, 409, JSON.stringify(early));
+  assert.equal(early.error, "order_not_approved");
+
+  const ADMIN_APPROVER = "consultant2@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN_APPROVER))}`, { fields: { orgId: ORG, identity: idFor(ADMIN_APPROVER), role: "doctor", active: true }, updateTime: "t1" });
+  await as(ADMIN_APPROVER, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: rb.verificationId, decision: "approved" });
+  const booked = await as(PHARM, "/ward/goods-receive", "POST", { orgId: ORG, purchaseOrderId: big.purchaseOrderId, item: "Albumin 20%", quantity: 50, unit: "vial", line: 0, batch: "ALB1", expiry: "2099-01-01", location: "Main" });
+  assert.equal(booked.__status, 200, JSON.stringify(booked));
+  assert.equal(booked.state, "received");
+
+  const stock = await as(PHARM, `/ward/stock?orgId=${ORG}`);
+  const row = stock.levels.find((r) => r.code === "Albumin 20%");
+  assert.ok(row, "stock booked in against an order is counted: " + JSON.stringify(stock.problems));
+  assert.equal(row.level, 50);
+  const list = await as(PHARM, `/ward/purchase-orders?orgId=${ORG}`);
+  assert.equal(list.orders.find((o) => o.purchaseOrderId === big.purchaseOrderId).approval.required, 2);
+});
+
+test("RESTRICTED MEDICINES honour the hospital's approver count at prescribing, not only on the approvals screen", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  org.fields.wardsynq = { ...org.fields.wardsynq, approvalLevels: { RestrictedMedication: 2 },
+    formulary: [{ drug: "Meropenem", restricted: true, requiresApproval: true, approvedBy: "Microbiology" }] };
+  const { adm } = await admittedPatientOnDrug();
+  RECORD.append(TENANT_ROW.id, [
+    { resourceType: "Verification", id: "wsq-verif-mero-2", version: 1, kind: "request", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: idFor(DOCTOR), reason: "ESBL", at: "2026-09-12T10:00:00.000Z" },
+    { resourceType: "Verification", id: "wsq-verif-mero-2-d1", version: 1, kind: "decision", parentVerificationId: "wsq-verif-mero-2", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: "micro.one", decision: "approved", at: "2026-09-12T10:05:00.000Z" },
+  ]);
+  const order = () => as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, approvalRef: "wsq-verif-mero-2",
+    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Meropenem", dose: { value: 1, unit: "g" }, route: "iv", frequency: "TDS" } });
+  const one = await order();
+  assert.equal(one.__status, 409, "one approver of the two this hospital asked for does not clear the block: " + JSON.stringify(one));
+  RECORD.append(TENANT_ROW.id, [{ resourceType: "Verification", id: "wsq-verif-mero-2-d2", version: 1, kind: "decision", parentVerificationId: "wsq-verif-mero-2", subjectType: "RestrictedMedication", subjectId: "Meropenem", by: "micro.two", decision: "approved", at: "2026-09-12T10:07:00.000Z" }]);
+  assert.equal((await order()).__status, 200);
+});
+
+test("APPROVALS: no policy keeps the old behaviour", async () => {
+  seedHospital();
+  const req3 = await as(DOCTOR, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "RestrictedMedication", subjectId: "pip-p1", reason: "Neutropenic sepsis" });
+  assert.equal((await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req3.verificationId, decision: "approved" })).__status, 200, "no policy: behaves as before");
+});
+
+test("NURSING ASSIGNMENT: a nurse is assigned to a patient with history kept; an inactive or non-nursing member is refused by name; pharmacy cannot assign", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const refused = await as(PHARM, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(NURSE) });
+  assert.equal(refused.__status, 403, "no queue.assign, no assigning");
+  const stranger = await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: "cfa:nobody-here" });
+  assert.equal(stranger.__status, 422); assert.equal(stranger.error, "not_an_active_member");
+  assert.match(stranger.detail, /not an active member of staff/);
+  const pharmacist = await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(PHARM) });
+  assert.equal(pharmacist.error, "cannot_record_observations");
+  const nurseKey = `q_members/${sanitize(ORG)}__${sanitize(idFor(NURSE))}`, nurseDoc = docs.get(nurseKey);
+  docs.set(nurseKey, { ...nurseDoc, fields: { ...nurseDoc.fields, active: false } });
+  assert.equal((await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(NURSE) })).error, "not_an_active_member");
+  docs.set(nurseKey, nurseDoc);
+
+  const ok = await as(DOCTOR, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, nurseId: idFor(NURSE), shift: "Night" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const w = await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`);
+  const row = w.rows.find((r) => r.patientId === adm.patientId);
+  assert.equal(row.assignment.nurseId, w.me, "the nurse's own id is what 'my patients' filters on");
+  assert.ok(w.staff.some((m) => m.identity === idFor(NURSE)) && !w.staff.some((m) => m.identity === idFor(PHARM)), "only staff who can record obs are offered");
+  const stale = await as(NURSE, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, action: "unassign", expectedVersion: 99 });
+  assert.equal(stale.__status, 409);
+  const off = await as(NURSE, "/ward/nurse-assign", "POST", { orgId: ORG, encounterId: adm.encounterId, action: "unassign", expectedVersion: ok.assignment.version, reason: "end of shift" });
+  assert.equal(off.__status, 200, JSON.stringify(off));
+  assert.equal(off.assignment.nurseId, null);
+  assert.deepEqual(off.assignment.history.map((h) => h.action), ["assign", "unassign"]);
+});
+
+test("NURSING TASKS: created, overdue when open past due, done or cancelled with a reason; counts reach the worklist; pharmacy cannot write or read them", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const past = new Date(Date.now() - 3600e3).toISOString(), later = new Date(Date.now() + 3600e3).toISOString();
+  assert.equal((await as(PHARM, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "Turn", dueAt: past })).__status, 403);
+  assert.equal((await as(PHARM, `/ward/nursing-patient?orgId=${ORG}&patientId=${adm.patientId}&encounterId=${adm.encounterId}`)).__status, 403);
+  assert.equal((await as(NURSE, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "", dueAt: past })).error, "title_required");
+  const t1 = await as(NURSE, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "Pressure area check", dueAt: past });
+  assert.equal(t1.__status, 200, JSON.stringify(t1));
+  const t2 = await as(NURSE, "/ward/nursing-task", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, title: "Catheter care", dueAt: later });
+  const row = (await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`)).rows.find((r) => r.patientId === adm.patientId);
+  assert.equal(row.tasksOpen, 2); assert.equal(row.tasksOverdue, 1);
+  assert.equal((await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t2.task.id, action: "cancel" })).error, "reason_required");
+  assert.equal((await as(PHARM, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t1.task.id, action: "done" })).__status, 403);
+  const done = await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t1.task.id, action: "done", expectedVersion: t1.task.version });
+  assert.equal(done.task.status, "done"); assert.equal(done.task.doneBy, idFor(NURSE));
+  assert.equal((await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t1.task.id, action: "done" })).error, "not_open");
+  await as(NURSE, "/ward/nursing-task-act", "POST", { orgId: ORG, taskId: t2.task.id, action: "cancel", reason: "patient discharged home" });
+  const panel = await as(NURSE, `/ward/nursing-patient?orgId=${ORG}&patientId=${adm.patientId}&encounterId=${adm.encounterId}`);
+  assert.equal(panel.__status, 200, JSON.stringify(panel));
+  assert.deepEqual(panel.tasks.map((t) => t.status).sort(), ["cancelled", "done"]);
+  assert.equal(panel.tasksOverdue, 0);
+});
+
+test("OBSERVATION FREQUENCY: none set says so (never 'not due'); a weight is not obs; set, overdue, then not due after vitals; a high NEWS2 is flagged, not paged", async () => {
+  seedHospital();
+  const { adm } = await admittedPatientOnDrug();
+  const panel = () => as(NURSE, `/ward/nursing-patient?orgId=${ORG}&patientId=${adm.patientId}&encounterId=${adm.encounterId}`);
+  let p = await panel();
+  assert.equal(p.vitals.state, "no_frequency"); assert.equal(p.vitals.text, "No observation frequency set");
+  assert.equal((await as(NURSE, "/ward/obs-frequency", "POST", { orgId: ORG, encounterId: adm.encounterId, everyHours: 7 })).error, "bad_frequency");
+  assert.equal((await as(PHARM, "/ward/obs-frequency", "POST", { orgId: ORG, encounterId: adm.encounterId, everyHours: 4 })).__status, 403);
+  const set = await as(DOCTOR, "/ward/obs-frequency", "POST", { orgId: ORG, encounterId: adm.encounterId, everyHours: 4 });
+  assert.equal(set.__status, 200, JSON.stringify(set));
+  p = await panel();
+  assert.equal(p.vitals.state, "overdue", "only a weight on the chart: observations have never been done");
+  await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId,
+    vitals: { rr: "30", spo2: "88", o2: true, sbp: "85", pulse: "140", temp: "38.5", tempUnit: "C", acvpu: "A" } });
+  p = await panel();
+  assert.equal(p.vitals.state, "not_due"); assert.equal(p.vitals.everyHours, 4); assert.ok(p.vitals.dueAt);
+  const row = (await as(NURSE, `/ward/nurse-worklist?orgId=${ORG}`)).rows.find((r) => r.patientId === adm.patientId);
+  assert.equal(row.news2.risk, "high", JSON.stringify(row.news2));
+  assert.match(row.escalation.text, /NEWS2 \d+ \(high\)\. Escalation is your call; nothing has been paged\./);
+  assert.equal(row.vitals.state, "not_due");
 });

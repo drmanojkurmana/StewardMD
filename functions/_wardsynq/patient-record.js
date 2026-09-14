@@ -254,6 +254,19 @@ async function releaseToPatient(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
   }
 
+  /* P2.9: the signed discharge summaries handed over with this release, by exact version. The patient
+   * portal shows a discharge summary only if a release named that version: a draft, or a correction
+   * signed after the handover, is not on the patient's page until a clinician releases it. */
+  let dischargeSummaries = [];
+  try {
+    dischargeSummaries = ((await svc.byPatient("ClinicalNote", patientId)) || [])
+      .filter((n) => n && n.noteType === "discharge-summary" && n.signedBy)
+      .map((n) => ({ id: n.id, version: n.version }));
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+
   const at = str(ctx.at) || new Date().toISOString();
   const id = `wsq-release-${slug(patientId)}-${slug(at)}`;
 
@@ -272,6 +285,7 @@ async function releaseToPatient(request, env, ctx) {
     medicineCount: doc.medicines.length,
     allergyCount: doc.allergies.length,
     withheldCount: doc.withheldResults.length,
+    dischargeSummaries,
     withheldReasons: [...new Set(doc.withheldResults.map((w) => w.reason))],
     sensitivityConfigured: neverRelease.length > 0,
     source: { system: "wardsynq-native", sourceId: `release:${id}` },

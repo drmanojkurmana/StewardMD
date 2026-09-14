@@ -33,11 +33,29 @@
           (p.gender || p.sex ? "<dt>Sex</dt><dd>" + esc(p.gender || p.sex) + "</dd>" : "") +
           (p.mobile ? "<dt>Mobile</dt><dd>" + esc(p.mobile) + "</dd>" : "") +
           (p.abha ? "<dt>ABHA</dt><dd class=\"mono\">" + esc(p.abha) + "</dd>" : "") +
-          "</div><div class=\"row\" style=\"margin-top:12px\">" +
+          (p.previousMrn ? "<dt>Was</dt><dd class=\"mono\">" + esc(p.previousMrn) + "</dd>" : "") +
+          "</div>" +
+          (p.supersededBy ? '<div class="msg note">This temporary number has been replaced by hospital MR number <b class="mono">' + esc(p.supersededBy) + "</b>. Use that number.</div>"
+            : (p.pending || /^TMP-/i.test(p.mrn || mrn)) && c.can("queue.add") ?
+              '<div class="row" style="margin-top:12px"><label class="f"><span>Hospital MR number issued for this patient</span><input id="pLinkMrn" autocapitalize="characters" autocorrect="off" spellcheck="false"></label>' +
+              '<button class="btn" id="pLink" type="button">' + ms("link") + "Link</button></div>" : "") +
+          "<div class=\"row\" style=\"margin-top:12px\">" +
           '<button class="btn quiet" type="button" data-go="opd">' + ms("medical_services") + "OPD desk</button>" +
           (c.isWardsynq() && c.can("queue.add") ? '<button class="btn quiet" type="button" data-go="ward:board">' + ms("hotel") + "Admit (bed board)</button>" : "") +
           (c.isWardsynq() ? '<button class="btn quiet" type="button" data-go="ward:">' + ms("bed") + "Inpatient ward</button>" : "") +
           "</div>";
+        var lb = document.getElementById("pLink");
+        if (lb) lb.onclick = function () {
+          var real = (document.getElementById("pLinkMrn").value || "").trim();
+          if (!real) { c.toast("Enter the hospital MR number."); return; }
+          lb.disabled = true;
+          c.api("/patient/link-mrn", { orgId: st.orgId, provisionalMrn: p.mrn || mrn, mrn: real }).then(function (x) {
+            lb.disabled = false;
+            if (x && x.ok) { c.toast("Linked. The patient is now " + x.mrn + "."); document.getElementById("pMrn").value = x.mrn; find(); return; }
+            var why = { mrn_in_use: "That MR number already belongs to another patient in this hospital. Nothing was changed.", already_linked: "This temporary number was already linked to " + (x && x.mrn) + ".", same_mrn: "That is the same number.", forbidden: "Your role cannot link record numbers." }[x && x.error];
+            c.toast(why || "Not linked: " + ((x && (x.message || x.error)) || "the server could not be reached") + ".");
+          });
+        };
       });
     }
     document.getElementById("pFind").onclick = find;

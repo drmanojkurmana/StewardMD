@@ -7,6 +7,7 @@
  * (never trust the frontend). No EMR/GHIS specifics — org.mode + connectorId is the only EMR coupling.
  */
 import { isRole, can } from "./_queue_roles.js";
+import { orgProfile, memberProfile } from "./_region_in.js";
 
 export const OPD_ORG_VERSION = "1.0";
 
@@ -48,7 +49,18 @@ export function org(o = {}) {
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
-           wardsynq: wardsynqConfig(o.wardsynq), createdAt: Number(o.createdAt) || 0 };
+           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security),
+           /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,
+            * which returns {} for any other region, so the core model never names a national field. */
+           regionProfile: orgProfile(o.regionProfile, REGION), createdAt: Number(o.createdAt) || 0 };
+}
+
+/* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs
+ * every staff sign-in (OPD desk included). Only real role names survive; absent means nobody is
+ * required to use two-step sign-in, which is how every existing hospital stays unchanged. */
+export function securityConfig(sec) {
+  const roles = sec && Array.isArray(sec.requireTwoStepRoles) ? sec.requireTwoStepRoles : [];
+  return { requireTwoStepRoles: Array.from(new Set(roles.map(String).filter(isRole))) };
 }
 
 /**
@@ -112,7 +124,17 @@ function wardsynqConfig(w) {
    * real wards, where the nursing note is a core part of the record. Rather than widen emr.treat
    * (which would also hand out prescribing) the hospital names the roles it trusts to document, in
    * the Admin Center. Absent means the existing behaviour, unchanged: emr.treat alone. */
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels"]) {
+  /* edReassessMinutes joined 2026-09-13: how many minutes an ED patient of each acuity may wait before
+   * reassessment, e.g. {"2": 15, "3": 60}. Only this hospital can say; absent means the ED board says
+   * "no reassessment interval set" rather than inventing a clock (migrate-ed.js reassessmentStatus). */
+  /* imagingViewer, radiologyTemplates and payers joined 2026-09-13 (P1.10, P1.5): the hospital's own
+   * PACS/OHIF launch template, its structured report templates, and its payer list (adapter kind,
+   * endpoint, rules, and a SEALED credential reference, never a plaintext credential). */
+  /* antibiotics joined for P1.14: the drug names or codes this hospital counts as antibiotics for days
+   * of therapy. Absent means "antibiotic list not configured", never a count of zero. */
+  /* specialties joined for P2.11: the hospital's specialty registry (pathways.js resolveSpecialty). Absent means
+   * the chart's Specialty panel says none is configured. */
+  for (const k of ["edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -221,6 +243,9 @@ export function membership(o = {}) {
      * why the actor records WHICH of the two vouched (wardsynq-actors.js credentialSource) and
      * every signed record carries that word. Empty means this member cannot sign, as before. */
     regNo: s(o.regNo),
+    /* Country-specific practitioner ids (India: HPR id). Shape only here; the member route refuses
+     * one for a hospital outside India (functions/_region_in.js validateMemberProfile). */
+    regionProfile: memberProfile(o.regionProfile, "IN"),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }

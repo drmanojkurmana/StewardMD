@@ -32,7 +32,7 @@ test("staff session token round-trips identity+org; tamper/expiry rejected", asy
   const now = 1000000000000;
   const tok = await mintStaffSession(ENV, "org1", "recep1", now);
   const v = await verifyStaffSession(ENV, tok, now + 1000);
-  assert.deepEqual(v, { orgId: "org1", identity: "recep1" });
+  assert.deepEqual(v, { orgId: "org1", identity: "recep1", issuedAt: now });   // issuedAt read back from the signed expiry
   assert.equal(await verifyStaffSession(ENV, tok, now + 13 * 3600 * 1000), null);   // expired (>12h)
   assert.equal(await verifyStaffSession(ENV, tok + "x", now + 1000), null);          // tampered
   assert.equal(await verifyStaffSession(ENV, "garbage", now + 1000), null);

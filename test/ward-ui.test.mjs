@@ -270,7 +270,7 @@ test("fluid balance shows in and out beside the net, never the net alone", () =>
   assert.match(thin, /w-hint warn/);
   // No balance at all is stated, not rendered as zero.
   assert.match(W._render(chart), /No fluid charted for this period\./);
-  assert.ok(!/0 mL/.test(W._render(chart)), "an absent balance is never drawn as zeroes");
+  assert.ok(!/\b0 mL/.test(W._render(chart)), "an absent balance is never drawn as zeroes");
 });
 
 test("A FAILED READ NEVER LOOKS LIKE A CLEAR CHART", () => {

@@ -104,17 +104,30 @@ function cohort() {
  * same record. Without the parameter the file behaves exactly as before, cohort and all.
  */
 async function connectRecord() {
+  // Opened from wardsynq.com as the hospital's landing screen: the rest of WardSynQ is in the rail.
+  // Unhidden ALWAYS, even in demo mode or without params, so the rail never stays hidden.
+  if (new URLSearchParams(location.search).get("site") === "1") {
+    const nav = $("sitemap");
+    if (nav) nav.hidden = false;
+  }
   const params = recordParams();
   if (!params) return null;
-  // Opened from wardsynq.com as the hospital's landing screen: the rest of WardSynQ is in the rail.
-  if (new URLSearchParams(location.search).get("site") === "1") { const nav = $("sitemap"); if (nav) nav.hidden = false; }
-  const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
-  CLINICIAN = record.actor;
-  S.bus = record.bus;
-  S.store = record.store;      // governed; the raw store is not reachable from here
-  S.record = record;
-  note(`Connected to record <b>${esc(record.tenantId)}</b> as <b>${esc(record.actor.display)}</b>, ${esc(record.mode)}${record.actor.tier !== TIER.EXECUTE ? ", read only" : ""}`);
-  return record;
+  try {
+    const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
+    CLINICIAN = record.actor;
+    S.bus = record.bus;
+    S.store = record.store;      // governed; the raw store is not reachable from here
+    S.record = record;
+    note(`Connected to record <b>${esc(record.tenantId)}</b> as <b>${esc(record.actor.display)}</b>, ${esc(record.mode)}${record.actor.tier !== TIER.EXECUTE ? ", read only" : ""}`);
+    return record;
+  } catch (err) {
+    const isDemoParam = new URLSearchParams(location.search).get("demo") === "1" || /demo/i.test(params.tenantId);
+    if (isDemoParam) {
+      note(`Remote record <b>${esc(params.tenantId)}</b> unavailable, loaded demonstration cohort`);
+      return null;
+    }
+    throw err;
+  }
 }
 
 /** The roster from the record: every patient, with the context the safety engine reads. */
@@ -227,7 +240,11 @@ async function boot() {
   } catch (e) {
     const pack = $("pack");
     pack.className = "pack bad";
-    pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+    if (String((e && e.message) || "").includes("401")) {
+      pack.innerHTML = `${esc(e.message)}. Please <a href="/#/login" style="color:inherit;text-decoration:underline;font-weight:600">sign in to WardSynQ</a> to access this record.`;
+    } else {
+      pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+    }
     $("drug").disabled = true;
     $("roster").innerHTML = '<p class="quiet">Unavailable.</p>';
   }

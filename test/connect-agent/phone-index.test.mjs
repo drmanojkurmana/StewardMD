@@ -59,7 +59,8 @@ function fakeApi(calls) {
 
 test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures the guided view with its tap path, then returns to agent mode', async () => {
   const state = { page: 'worklist', requests: [], guided: false, guideTaps: ['a "Patient profile"', 'h5#sb7 "Radiology"'] };
-  const plugin = fakePlugin(state);
+  // Frozen, exactly like the real createPluginClient(): the engine must never write onto it.
+  const plugin = Object.freeze(fakePlugin(state));
   const calls = {};
   const asks = [];
   const phases = [];
@@ -74,7 +75,9 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
       const last = plugin.modes[plugin.modes.length - 1];
       assert.equal(last.mode, 'guide');
       assert.equal(last.banner, text);
-      assert.equal(text, GAP_PROMPTS[gap]);
+      // The first ask uses the gap prompt; a re-ask says why (nothing proven from that screen).
+      if (asks.filter((a) => a === gap).length === 1) assert.equal(text, GAP_PROMPTS[gap]);
+      else assert.match(text, /None of the requests from that screen returned|could not read a table/);
       if (gap === 'radiology') { state.guided = true; return { done: true }; }
       state.guided = false;
       return { done: false }; // doctor skipped
@@ -83,13 +86,15 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
 
   // Crawl found worklist + labs; the engine asked for the rest in canonical order, capped at 4.
   // The worklist was found but its read proved nothing against this fake page, so it is asked FIRST.
-  assert.deepEqual(asks, ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  // Radiology was shown but nothing on this fake page could be proven, so the doctor was asked again.
+  assert.deepEqual([...new Set(asks)], ['worklist', 'labs', 'patient', 'notes', 'radiology', 'medications']);
+  assert.ok(asks.filter((a) => a === 'radiology').length >= 2, asks.join(','));
   assert.ok(phases.includes('CRAWLING') && phases.includes('ASKING') && phases.includes('DONE'), phases.join(','));
 
-  // Mode sequence: agent (start) -> guide x4 -> agent (before probes).
+  // Mode sequence: agent (start) -> guide once per ask -> agent (before probes).
   assert.equal(plugin.modes[0].mode, 'agent');
   assert.equal(plugin.modes[plugin.modes.length - 1].mode, 'agent');
-  assert.equal(plugin.modes.filter((m) => m.mode === 'guide').length, 6);
+  assert.equal(plugin.modes.filter((m) => m.mode === 'guide').length, asks.length);
 
   const views = calls.discovery.observedViews;
   const rad = views.find((v) => v.resourceHint === 'radiology');
@@ -100,9 +105,12 @@ test('runPhoneDiscovery: asks the doctor for each gap in guide mode, captures th
   assert.equal(rad.rowsSelector, '#divPrint > div.rreport');
   // Skipped gaps produced no view.
   assert.ok(!views.some((v) => v.resourceHint === 'discharge' || v.resourceHint === 'medications'));
-  // The labs click's endpoint rides on the labs view, query VALUE dropped.
+  // The labs click fired a request, but this page keeps no replay buffer, so nothing could be re-issued
+  // and compared with the screen: an unproven endpoint is never saved (prove.mjs).
   const labs = views.find((v) => v.resourceHint === 'labs');
-  assert.deepEqual(labs.endpoints, [{ method: 'GET', path: '/Doctor/GetLabs?pid' }]);
+  assert.equal(labs.endpoints, undefined);
+  assert.equal(labs.proof.status, 'no-requests');
+  assert.ok(result.proofs.some((p) => p.resource === 'labs' && p.status === 'no-requests'));
   assert.ok(!JSON.stringify(views).includes('MR900001'));
   assert.ok(!JSON.stringify(views).includes('SECRET'));
 

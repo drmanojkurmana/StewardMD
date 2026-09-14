@@ -46,7 +46,10 @@ const SKIP_SRC =
   'log.?out|sign.?out|log.?off|delete|remove|\\bsave|submit|update|\\bedit|\\badd\\b|\\bnew\\b|create|' +
   'order|prescri|upload|attach|send|\\bsms|whatsapp|mail|print|export|download|cancel|\\bclose|\\bback\\b|' +
   '\\bhome\\b|refresh|reload|\\bapps?\\b|switch|password|settings|transfer|admit|approve|reject|confirm|' +
-  '\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
+  '×|✕|\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
+
+// Controls that switch which patient list is shown (tabs and menu items on a worklist page).
+const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted/i;
 
 const HINT_RULES = [
   /* Indian hospital EMRs rarely say "medications": GHIS and its peers label the same chart
@@ -103,6 +106,20 @@ const STATIC_ASSET = /\.(js|css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|eot|map|js
 const BODY_KEY_HOSTILE = /\d{3,}|@/;
 const REQUEST_KINDS = new Set(['form', 'json', 'multipart', 'other']);
 export const CREDENTIAL_KEY = /passw|pwd|otp|\bpin\b|secret|captcha/i;
+/* A MODE SWITCH IS NOT PATIENT DATA. GHIS asks for its ward list with Type=IPWorkList; drop that value
+ * and the replayed call returns nothing. Only keys that name a mode (type, mode, view, tab, action,
+ * list, kind, category, status, flag) keep their value, and only a short run of letters with no digit,
+ * space or @: never an id, a date, a phone or a name typed into a search box. */
+// Query keys may start with an underscore (ASP.NET: __RequestVerificationToken); still no digits runs are checked by callers.
+const QUERY_KEY = /^[A-Za-z_][\w-]{0,59}$/;
+const CONSTANT_KEY = /^(type|mode|view|tab|action|list|listtype|kind|category|status|flag|module|screen|page_type)$/i;
+const CONSTANT_VALUE = /^[A-Za-z_]{1,32}$/;
+export function keyWithConstant(k, v) {
+  return CONSTANT_KEY.test(k) && CONSTANT_VALUE.test(String(v || '')) ? k + '=' + v : k;
+}
+export function stripConstants(path) {
+  return String(path || '').replace(/=[A-Za-z_]{1,32}(?=&|$)/g, '');
+}
 function sanitizeEndpointBodyKeys(raw) {
   if (!Array.isArray(raw)) return [];
   const out = [];
@@ -221,8 +238,8 @@ export function redactEndpoints(requests, pageUrl) {
     let u;
     try { u = new URL(rawUrl); } catch { continue; }
     if (!origin || u.origin !== origin || STATIC_ASSET.test(u.pathname)) continue;
-    const keys = [...u.searchParams.keys()].filter((k) => SAFE_IDENT.test(k)).slice(0, 12);
-    const path = u.pathname.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.join('&') : '');
+    const keys = [...u.searchParams.keys()].filter((k) => QUERY_KEY.test(k)).slice(0, 12);
+    const path = u.pathname.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.map((k) => keyWithConstant(k, u.searchParams.get(k))).join('&') : '');
     const method = String(r.method || 'GET').toUpperCase() === 'POST' ? 'POST' : 'GET';
     const key = method + ' ' + path;
     if (seen.has(key)) continue;
@@ -255,14 +272,14 @@ export function mergeEndpointDetails(endpoints, observerEvents) {
   for (const e of observerEvents) {
     if (!e || typeof e.method !== 'string' || typeof e.path !== 'string') continue;
     const method = e.method.toUpperCase() === 'POST' ? 'POST' : 'GET';
-    const keys = Array.isArray(e.queryKeys) ? e.queryKeys.filter((k) => SAFE_IDENT.test(k)).slice(0, 12) : [];
+    const keys = Array.isArray(e.queryKeys) ? e.queryKeys.filter((k) => QUERY_KEY.test(k)).slice(0, 12) : [];
     const path = (e.path.replace(/\d{3,}/g, '#') + (keys.length ? '?' + keys.join('&') : '')).slice(0, 512);
     const key = `${method} ${path}`;
     if (!byKey.has(key)) byKey.set(key, e);
   }
   return endpoints.map((ep) => {
     if (!ep || typeof ep !== 'object') return ep;
-    const match = byKey.get(`${ep.method} ${ep.path}`);
+    const match = byKey.get(`${ep.method} ${stripConstants(ep.path)}`);
     if (!match) return ep;
     const out = { ...ep };
     const bodyKeys = sanitizeEndpointBodyKeys(match.bodyKeys);
@@ -282,6 +299,8 @@ function CRAWL_ARM_OBSERVER() {
   var prev = window.__smdCrawlObs;
   if (prev && prev.mo) prev.mo.disconnect();
   var state = { changed: [], tables: [], mo: null };
+  // The proof loop (prove.mjs) takes only the requests fired after this mark as the action's candidates.
+  window.__smdProveMark = window.__SMD_REPLAY__ ? window.__SMD_REPLAY__.seq : 0;
   var all = document.querySelectorAll('table');
   for (var i = 0; i < all.length; i++) {
     state.tables.push({ el: all[i], visible: all[i].getClientRects && all[i].getClientRects().length > 0 });
@@ -315,7 +334,8 @@ function CRAWL_ARM_OBSERVER() {
 function CRAWL_RAW_TABLE() {
   var obs = window.__smdCrawlObs || null;
   if (obs && obs.mo) { obs.mo.disconnect(); obs.mo = null; }
-  var tables = document.querySelectorAll('table');
+  var pointed = window.__smdPointed; // the table the doctor tapped inside during an ask wins outright
+  var tables = (pointed && pointed.isConnected && pointed.tagName === 'TABLE') ? [pointed] : document.querySelectorAll('table');
   var DAY = /^(su|mo|tu|we|th|fr|sa|sun|mon|tue|wed|thu|fri|sat)$/i;
   var FORM_HINT = /\b(entry|requisition)\b/i;
   var LABEL_WORD = /name|date|code|route|dos|qty|quant|freq|dur|test|result|unit|type|status|remark|desc|no\b|s\.?no|sl\b|#|time|value|range|method|dept|ward|bed|age|sex|gender|doctor|drug|medic|diagnos|advice|report|title|subject|category|notes?\b|comment/i;
@@ -715,7 +735,13 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
     var tag = el.tagName;
     if (/^(TR|TD|TH|TABLE|TBODY|THEAD|INPUT|SELECT|TEXTAREA|OPTION|FORM|BODY|HTML)$/.test(tag)) continue;
     if (tag === 'BUTTON' && (el.getAttribute('type') || '').toLowerCase() === 'submit') continue;
-    if (anyVisible && !(el.getClientRects && el.getClientRects().length)) continue;
+    /* A COLLAPSED MENU IS STILL THE MENU. On a phone the EMR's navbar folds away (GHIS: Medications,
+     * Investigations, Patient profile sit in a hidden .navbar-nav / .dropdown-menu), so a visible-only
+     * walk never reached labs or medications (Pixel, 2026-09-13). A hidden item with its own click
+     * handler inside a nav or dropdown menu is kept; el.click() runs its handler without opening it. */
+    if (anyVisible && !(el.getClientRects && el.getClientRects().length)) {
+      if (!el.hasAttribute('onclick') || !(el.closest && el.closest('nav,.navbar,.navbar-nav,.dropdown-menu,[class*=sidebar],[class*=side-menu],[class*=mega-me]'))) continue;
+    }
     var text = (el.textContent || '').replace(/\s+/g, ' ').trim();
     if (!text || text.length > 80) continue;
     if (SKIP.test(text)) continue;
@@ -772,9 +798,26 @@ function CRAWL_ARM_GUIDE() {
     var label = (ctl.textContent || '').replace(/\s+/g, ' ').trim().replace(/\d{3,}/g, '#').slice(0, 60);
     var entry = ctl.tagName.toLowerCase() + id + (cls ? '.' + cls : '') + (label ? ' "' + label + '"' : '');
     if (window.__smdGuidePath.length < 20) window.__smdGuidePath.push(entry);
+    /* POINT AT IT. A tap inside a table marks THAT table as the one to read and outlines it green, so
+     * the doctor sees what the agent will take before tapping Done. A tap elsewhere (a tab, a menu)
+     * keeps the last mark. */
+    var tbl = el.closest ? el.closest('table') : null;
+    if (tbl) {
+      if (window.__smdPointed && window.__smdPointed !== tbl) { try { window.__smdPointed.style.outline = window.__smdPointedOutline || ''; } catch (e) { /* gone */ } }
+      if (window.__smdPointed !== tbl) { window.__smdPointedOutline = tbl.style.outline || ''; }
+      window.__smdPointed = tbl;
+      tbl.style.outline = '3px solid #0E7C66';
+      tbl.style.outlineOffset = '2px';
+    }
   };
   document.addEventListener('click', handler, true);
   window.__smdGuideOff = function () { document.removeEventListener('click', handler, true); };
+  return 'ok';
+}
+
+function CRAWL_CLEAR_POINT() {
+  if (window.__smdPointed) { try { window.__smdPointed.style.outline = window.__smdPointedOutline || ''; } catch (e) { /* gone */ } }
+  window.__smdPointed = null;
   return 'ok';
 }
 
@@ -817,6 +860,7 @@ const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
 const GUIDE_PATH_SRC = String(CRAWL_GUIDE_PATH);
+const CLEAR_POINT_SRC = String(CRAWL_CLEAR_POINT);
 
 async function evalJson(client, expression, fallback) {
   const res = await client.evaluate({ expression });
@@ -913,7 +957,7 @@ export async function enrichView(view, brain, ctx = {}) {
   return verdict;
 }
 
-export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, armGuide: `(${ARM_GUIDE_SRC})()`, guidePath: `(${GUIDE_PATH_SRC})()` });
+export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, armGuide: `(${ARM_GUIDE_SRC})()`, guidePath: `(${GUIDE_PATH_SRC})()`, clearPoint: `(${CLEAR_POINT_SRC})()` });
 
 /**
  * deepCrawlClinical({ client, caps, onProgress, stopSignal }) -> { observedViews, trail, stopReason, found }
@@ -922,7 +966,7 @@ export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, arm
  * again (index.mjs / UI surface it). onProgress({ opening, found, looking, clicks }) fires before each
  * click; stopSignal() true ends the walk (wired to the plugin's native Stop).
  */
-export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null } = {}) {
+export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null, book = null } = {}) {
   if (!client) throw new Error('deepCrawlClinical requires a client');
 
   const maxViews = Math.min(Math.max(caps.maxViews ?? CAPS_DEFAULT.maxViews, 1), CAPS_DEFAULT.maxViews);
@@ -998,6 +1042,69 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     await client.wait({ ms: waitMs });
   }
   if (!row) return { observedViews, trail, stopReason: stopped() ? 'stop-signal' : 'no-patient-row', found: [...found] };
+  /* PROVE THE WARD LIST while its rows are on screen: every request since the page loaded is a
+   * candidate (a DataTables list fills itself on load, before any click). */
+  const wl = observedViews.find((v) => v.resourceHint === 'worklist' && v.rowsSelector);
+  if (book && wl) await book.prove({ client, view: wl, label: 'open the patient list', since: 0 });
+  /* THE LIST'S OWN CALL OFTEN NEEDS A TAB. GHIS draws the landing list into the page HTML (nothing to
+   * prove) and fetches a list only when "In patients" or "IP worklist" is tapped (Pixel, 2026-09-13).
+   * Tap each list control once, prove what it shows, keep the proven list with the most rows first,
+   * and come back to the landing page to open a patient. */
+  if (book && typeof client.navigate === 'function') {
+    const landing = await currentUrl();
+    const listViews = [];
+    const tabs = (await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []) || [])
+      .filter((c) => c && LIST_CONTROL.test(c.label)).map((c) => c.label);
+    for (const label of [...new Set(tabs)].slice(0, 4)) {
+      if (stopped() || Date.now() >= deadline) break;
+      const now = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+      const ctl = (Array.isArray(now) ? now : []).find((c) => c.label === label);
+      if (!ctl) continue;
+      progress(label, 0);
+      await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
+      await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${ctl.index},${JSON.stringify(CONTROL_QUERY)})` });
+      /* Wait for the list itself, not a fixed time: GHIS's IP worklist fetches its dropdowns first and
+       * fills the table about 9 s after the tap (Pixel, 2026-09-13). Up to 15 s for a data table. */
+      // The old list still shows rows for a moment: wait until the visible tables CHANGE and carry rows.
+      const TABLES_SIG = "(function(){var s=[],n=0,ts=document.querySelectorAll('table');for(var i=0;i<ts.length;i++){if(!ts[i].getClientRects().length)continue;var r=0,trs=ts[i].querySelectorAll('tbody tr');for(var j=0;j<trs.length;j++){if(trs[j].querySelectorAll('td').length>=2)r++}n+=r;s.push((ts[i].id||ts[i].className)+':'+r)}return JSON.stringify({sig:s.join('|'),rows:n})})()";
+      const before = await evalJson(client, TABLES_SIG, { sig: '' });
+      for (let t = 0; t < 15; t += 1) {
+        await client.wait({ ms: 1000 });
+        const now = await evalJson(client, TABLES_SIG, { sig: '', rows: 0 });
+        if (now && now.rows > 0 && now.sig !== (before && before.sig)) { await client.wait({ ms: 1500 }); break; }
+      }
+      trail.push(label);
+      const v = await captureView({ client, resourceHint: 'worklist' });
+      if (v && v.rowsSelector && !v.block) {
+        await book.prove({ client, view: v, label: 'tap ' + label });
+        if (v.proof && v.proof.status === 'proven') listViews.push(v);
+      }
+      /* Always reload the landing page: a single-page EMR swaps the list in place with the same URL
+       * (GHIS loadView), and a row tapped in the swapped list opens no record (Pixel, 2026-09-13). */
+      if (landing) { await client.navigate({ url: landing }).catch(() => {}); await client.wait({ ms: Math.max(waitMs * 3, 4000) }); }
+    }
+    if (listViews.length) {
+      const rowsOf = (v) => ((v.endpoints || []).find((e) => e.role === 'data') || { proof: {} }).proof.rows || 0;
+      listViews.sort((a, b) => rowsOf(b) - rowsOf(a));
+      const at = observedViews.indexOf(wl);
+      observedViews.splice(at >= 0 ? at : 0, at >= 0 ? 1 : 0, ...listViews, ...(wl && wl.proof && wl.proof.status === 'proven' ? [wl] : []));
+      found.add('worklist');
+    }
+    // The landing page was reloaded: find the patient row again (rows may arrive after the page).
+    if (tabs.length) {
+      for (let attempt = 0; attempt < 8; attempt += 1) {
+        const again = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null);
+        if (again) { row = again; break; }
+        if (stopped()) break;
+        await client.wait({ ms: waitMs });
+      }
+    }
+  }
+  /* THE RECORD'S OWN CONTROLS. The list page's menu (hospital-wide Lab reports, Final discharge, Diet)
+   * stays in the DOM after a patient opens; walking it reads everyone's reports, not this patient's.
+   * GHIS adds Medications, Investigations and Patient profile only once a patient is open (Pixel,
+   * 2026-09-13), so the controls present before the row tap are skipped when opening added new ones. */
+  const landingLabels = new Set(((await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, [])) || []).map((c) => c && c.label).filter(Boolean));
   if (typeof client.drainRequests === 'function') await client.drainRequests().catch(() => null); // fresh per-click log
   await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
   await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
@@ -1005,28 +1112,58 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   trail.push('patient-record');
   // The patient hub itself often shows demographics as a label/value block: capture it as 'patient'.
   // Block only: the worklist table just hidden by the click would otherwise pass for it.
-  record(await captureView({ client, resourceHint: 'patient', blockOnly: true }));
+  const hub = await captureView({ client, resourceHint: 'patient', blockOnly: true });
+  if (book && hub) await book.prove({ client, view: hub, label: 'open one patient from the list' });
+  record(hub);
 
   // 2/3. Walk EVERY control under the record, clinical keywords first, dedup by redacted label, until a
   // cap is hit. The observer is armed before each click so the capture can attribute the table or block
   // to the panel the click populated. A click that navigates to another page is undone with history.back().
   const visited = new Set();
+  {
+    const afterOpen = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const added = (Array.isArray(afterOpen) ? afterOpen : []).filter((c) => c && c.label && !landingLabels.has(c.label));
+    if (added.length) for (const l of landingLabels) visited.add(l);
+  }
   const detailSeen = new Set();
   let stopReason = 'no-candidate';
   let clicks = 0;
   const homePath = pathOf(await currentUrl());
+
+  /* READ EVERY BUTTON ONCE, LET GEMINI ASSIGN THEM (owner, 2026-09-13). Instead of clicking blindly
+   * and guessing after, hand Gemini the whole control inventory of the open record (collapsed menus
+   * included) and ask which control opens each missing resource, and which controls could write. The
+   * plan orders the walk (assigned controls first, in resource order) and the avoid set is never
+   * clicked. Only labels leave the phone; every pick is still proven against the screen below. */
+  const planned = [];              // control labels to open first, best resource match first
+  const avoidLabels = new Set();
+  if (brain && typeof brain.planControls === 'function') {
+    const all = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const pool = (Array.isArray(all) ? all : []).filter((c) => c && c.label && !visited.has(c.label)).slice(0, 200);
+    if (pool.length) {
+      let a = null;
+      try { a = await brain.planControls(scrubForBrain({ controls: pool.map((c) => c.label), looking: looking(), path: pathOf(await currentUrl()) })); } catch { a = null; }
+      if (a && a.assign) {
+        for (const r of TARGET_HINTS) {
+          const i = a.assign[r];
+          if (Number.isInteger(i) && i >= 0 && i < pool.length && pool[i].label && !planned.includes(pool[i].label)) planned.push(pool[i].label);
+        }
+        for (const i of Array.isArray(a.avoid) ? a.avoid : []) if (Number.isInteger(i) && i >= 0 && i < pool.length && pool[i].label) avoidLabels.add(pool[i].label);
+        trail.push('gemini planned ' + planned.length + ' of ' + Object.keys(a.assign).length + ', avoid ' + avoidLabels.size);
+      }
+    }
+  }
   while (observedViews.length < maxViews) {
     if (Date.now() >= deadline) { stopReason = 'time-cap'; break; }
     if (stopped()) { stopReason = 'stop-signal'; break; }
     if (clicks >= maxClicks) { stopReason = 'max-clicks'; break; }
 
     const candidates = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
-    const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label)) : [];
-    /* THE BRAIN PICKS THE NEXT TAP when there is one to consult: given the control labels and what is
-     * still missing, it names the control most likely to open it. The keyword rule is the fallback
-     * and the answer is only ever an index into the SAME candidate list (never a free target). */
-    let next = null;
-    if (brain && typeof brain.next === 'function' && fresh.length > 1 && looking().length) {
+    const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label) && !avoidLabels.has(c.label)) : [];
+    /* Gemini's plan first: the controls it assigned to a missing resource, in resource order. Then the
+     * keyword rule, then the first fresh control. Every choice is proven against the screen below. */
+    let next = planned.map((lbl) => fresh.find((c) => c.label === lbl)).find(Boolean);
+    if (!next && brain && typeof brain.next === 'function' && fresh.length > 1 && looking().length) {
       const pool = fresh.slice(0, 60);
       let a = null;
       try { a = await brain.next(scrubForBrain({ controls: pool.map((c) => c.label), looking: looking(), path: pathOf(await currentUrl()) })); } catch { a = null; }
@@ -1049,6 +1186,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
       if (byHeaders !== 'unknown') view.resourceHint = byHeaders;
     }
     if (view) await enrichView(view, brain, { label: next.label });
+    if (book && view && view.rowsSelector) await book.prove({ client, view, label: 'tap ' + next.label });
     record(view);
 
     /* ONE LEVEL DEEPER. A list of lab orders or radiology studies is not the result: the hospital
@@ -1066,7 +1204,12 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
         trail.push(view.resourceHint + ' row');
         let detail = null;
         try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }
-        if (detail && detail.rowsSelector) { detail.detailOf = view.resourceHint; observedViews.push(detail); }
+        if (detail && detail.rowsSelector) {
+          detail.detailOf = view.resourceHint;
+          // LEARN / CHAIN: the detail call's fields are traced to the list row it was opened from.
+          if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
+          observedViews.push(detail);
+        }
         if (pathOf(await currentUrl()) !== beforePath) {
           await client.evaluate({ expression: 'history.back()' }).catch(() => {});
           await client.wait({ ms: waitMs });

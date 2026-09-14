@@ -46,7 +46,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"]);
     var tab = st._adminTab || "hospital";
-    if (tab === "maik" && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, tariff: renderTariff, advisories: renderAdvisories };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
     return renderers[tab](c, body);
   } });
 
@@ -114,6 +114,93 @@
       });
     };
   }
+  /* APPROVAL RULES (P1.3). How many people must approve each kind of request, which roles may, how
+   * long a request stays open, and extra approvers above an amount. The amount is always the one the
+   * server works out from the thing itself (a purchase order's priced lines); a request with no known
+   * amount gets the strictest level. Deciding an approval needs emr.treat, so only roles holding it
+   * are offered. ponytail: one amount step per kind on screen; the server accepts a list. */
+  var APPROVAL_KINDS = [["PurchaseOrder", "Purchase orders"], ["StockRequisition", "Stock requests"], ["RestrictedMedication", "Restricted medicines"], ["Invoice", "Invoices"], ["Discharge", "Discharges"], ["Incident", "Incident reports"]];
+  var APPROVER_ROLES = ["admin", "doctor", "pg_faculty", "pg_hod"];
+  function approvalRulesHtml(esc, cfg) {
+    cfg = cfg || {};
+    var levels = cfg.approvalLevels || {}, policy = cfg.approvalPolicy || {};
+    var rows = APPROVAL_KINDS.map(function (k) {
+      var p = policy[k[0]] || {}, t = (p.amountThresholds || [])[0] || {};
+      var roles = Array.isArray(p.approverRoles) ? p.approverRoles : [];
+      return "<tr data-kind=\"" + esc(k[0]) + "\"><td>" + esc(k[1]) + "</td>" +
+        '<td><input class="apLevels" type="number" min="1" max="5" value="' + esc(levels[k[0]] || 1) + '" style="width:4em"></td>' +
+        "<td>" + APPROVER_ROLES.map(function (r) { return '<label style="white-space:nowrap"><input type="checkbox" class="apRole" value="' + r + '"' + (roles.indexOf(r) >= 0 ? " checked" : "") + "> " + esc(r.replace(/_/g, " ")) + "</label> "; }).join("") + "</td>" +
+        '<td><input class="apExpires" type="number" min="1" placeholder="never" value="' + esc(p.expiresHours || "") + '" style="width:5em"></td>' +
+        '<td>above Rs <input class="apAbove" inputmode="decimal" placeholder="none" value="' + esc(t.abovePaise != null ? t.abovePaise / 100 : "") + '" style="width:7em"> needs <input class="apAboveLevels" type="number" min="1" max="5" value="' + esc(t.levels || "") + '" style="width:4em"></td></tr>';
+    }).join("");
+    return '<div class="card"><h2>Approval rules</h2>' +
+      '<p class="quiet">Nobody can approve their own request. No roles ticked means any role that may approve can. Amounts are taken from the request itself on the server; a request whose amount is not known needs the highest number you set.</p>' +
+      '<div class="tbl"><table><thead><tr><th>Kind</th><th>Approvals</th><th>Only these roles</th><th>Expires after (hours)</th><th>Extra approvers by amount</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
+      '<button class="btn" id="apSave" type="button">Save approval rules</button><div id="apMsg"></div></div>';
+  }
+  /* Reads the table back. Returns { approvalLevels, approvalPolicy } or { error }. */
+  function readApprovalRules(rowEls) {
+    var levels = {}, policy = {};
+    for (var i = 0; i < rowEls.length; i++) {
+      var tr = rowEls[i], kind = tr.getAttribute("data-kind");
+      var q = function (sel) { return tr.querySelector(sel); };
+      var n = parseInt(q(".apLevels").value, 10);
+      if (!(n >= 1 && n <= 5)) return { error: "Approvals must be between 1 and 5." };
+      levels[kind] = n;
+      var p = {};
+      var roles = []; tr.querySelectorAll(".apRole").forEach(function (b) { if (b.checked) roles.push(b.value); });
+      if (roles.length) p.approverRoles = roles;
+      var exp = String(q(".apExpires").value || "").trim();
+      if (exp) { var h = Number(exp); if (!(h > 0)) return { error: "Expiry must be a number of hours above zero." }; p.expiresHours = h; }
+      var above = String(q(".apAbove").value || "").trim(), aboveN = String(q(".apAboveLevels").value || "").trim();
+      if (above || aboveN) {
+        if (!/^\d+(\.\d{1,2})?$/.test(above) || !(parseInt(aboveN, 10) >= 1)) return { error: "An amount step needs both a rupee amount and a number of approvals." };
+        p.amountThresholds = [{ abovePaise: Math.round(Number(above) * 100), levels: parseInt(aboveN, 10) }];
+      }
+      policy[kind] = p;
+    }
+    return { approvalLevels: levels, approvalPolicy: policy };
+  }
+  WSQ._approvalRules = { html: approvalRulesHtml, read: readApprovalRules };
+  /* LABORATORY RESULT CHECKING (P1.9). Off: a result is released as entered. On: a final result that did
+   * not pass the hospital's autoverification goes on the chart as preliminary until a different member
+   * of the laboratory verifies it. Critical values alert either way. */
+  function labCheckHtml(esc, cfg) {
+    var on = !!(cfg && cfg.labVerification && cfg.labVerification.mode === "second-person");
+    return '<div class="card"><h2>Laboratory result checking</h2>' +
+      '<label class="f"><span><input type="checkbox" id="labSecond"' + (on ? " checked" : "") + "> Require a second member of the laboratory to verify results that did not pass autoverification</span></label>" +
+      '<p class="quiet">While waiting, the result is on the chart marked preliminary. A critical value still raises its alert straight away.</p>' +
+      '<button class="btn" id="labSecondSave" type="button">Save</button></div>';
+  }
+  WSQ._labCheck = { html: labCheckHtml };
+  function wireLabCheck(c) {
+    var btn = document.getElementById("labSecondSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var on = document.getElementById("labSecond").checked;
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { labVerification: on ? { mode: "second-person" } : null } }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { c.toast(refusal(r)); return; }
+        c.state.org = r.org; c.toast(on ? "Saved. Unverified results now need a second person." : "Saved. Results are released as entered.");
+      });
+    };
+  }
+  function wireApprovalRules(c) {
+    var btn = document.getElementById("apSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var m = document.getElementById("apMsg");
+      var out = readApprovalRules(document.querySelectorAll("tr[data-kind]"));
+      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: out }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org; c.toast("Approval rules saved.");
+      });
+    };
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -133,7 +220,7 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       "</div>" +
-      (c.isWardsynq() ? noteWritersCard(c, o) : "");
+      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -146,6 +233,8 @@
       });
     };
     wireNoteWriters(c);
+    wireApprovalRules(c);
+    wireLabCheck(c);
   }
 
   // ---- Safety reminders (dry run) ----------------------------------------------------------------
@@ -153,6 +242,103 @@
    * a badly written one either never fires or fires on everybody - both are found out on a ward. This
    * compiles the draft on the server and reports what it WOULD have done, and changes nothing: publishing
    * is the separate, existing hospital-settings step. A draft that does not compile says why. */
+  /* FORMS: write a form as JSON, save it as a draft (kept even with problems, every problem listed), publish
+   * when it has none. A published version never changes; publishing again makes the next version. */
+  function renderForms(c, body) {
+    body.innerHTML = '<span class="spin"></span>';
+    return c.api("/forms/definitions?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">Could not load the forms. ' + c.esc(refusal(r)) + "</div>"; return; }
+      var list = function (title, rows, draft) {
+        return "<h3>" + title + "</h3>" + (rows.length ? "<ul>" + rows.map(function (x) {
+          var d = draft ? x.def : x;
+          return "<li><b>" + c.esc(d.title || d.key) + "</b> (" + c.esc(d.key) + (draft ? ", draft" : ", version " + c.esc(d.version)) + ")" +
+            (draft ? (x.problems.length ? '<div class="msg err">' + x.problems.map(c.esc).join("<br>") + "</div>" : ' <button class="btn" type="button" data-form-pub="' + c.esc(d.key) + '">Publish</button>') : "") +
+            ' <button class="btn quiet" type="button" data-form-edit="' + c.esc(d.key) + '" data-form-draft="' + (draft ? "1" : "") + '">Edit</button></li>';
+        }).join("") + "</ul>" : "<p>None.</p>");
+      };
+      body.innerHTML = '<div class="card"><h2>Forms</h2>' + list("Drafts", r.drafts, true) + list("Published", r.published, false) +
+        '<h3>Edit a form (JSON)</h3><textarea id="admFormJson" rows="14" style="width:100%;font-family:monospace" placeholder=\'{"key":"nursing_admission","title":"Nursing admission assessment","roles":["nurse"],"sections":[{"title":"Risks","fields":[{"key":"falls_risk","label":"Falls risk","type":"boolean","required":true}]}]}\'></textarea>' +
+        '<button class="btn" type="button" id="admFormSave">Save draft</button><div id="admFormMsg"></div></div>';
+      body.querySelectorAll("[data-form-edit]").forEach(function (b) {
+        b.onclick = function () {
+          var key = b.getAttribute("data-form-edit"), isDraft = b.getAttribute("data-form-draft") === "1";
+          var d = isDraft ? r.drafts.filter(function (x) { return x.key === key; })[0].def : r.published.filter(function (x) { return x.key === key; })[0];
+          document.getElementById("admFormJson").value = JSON.stringify(d, null, 2);
+        };
+      });
+      body.querySelectorAll("[data-form-pub]").forEach(function (b) {
+        b.onclick = function () {
+          c.api("/forms/publish", { orgId: c.state.orgId, key: b.getAttribute("data-form-pub") }).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Published as version " + x.version + "."); WSQ.render("admin");
+          });
+        };
+      });
+      document.getElementById("admFormSave").onclick = function () {
+        var def; try { def = JSON.parse(document.getElementById("admFormJson").value); } catch (e) { document.getElementById("admFormMsg").innerHTML = '<div class="msg err">That is not valid JSON: ' + c.esc(e.message) + "</div>"; return; }
+        delete def.status; delete def.version; delete def.publishedAt;
+        c.api("/forms/draft", { orgId: c.state.orgId, definition: def }).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admFormMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast(x.problems.length ? "Draft saved with " + x.problems.length + " problem(s) to fix before publishing." : "Draft saved. It can be published."); WSQ.render("admin");
+        });
+      };
+    });
+  }
+
+  /* CLINICAL PATHWAYS (P2.12): hospital pathway definitions, draft saving, publishing immutable versions,
+   * and retiring outdated versions with a mandatory reason. */
+  function renderPathways(c, body) {
+    body.innerHTML = '<span class="spin"></span>';
+    return c.api("/pathways/definitions?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="msg err">Could not load the clinical pathways. ' + c.esc(refusal(r)) + "</div>"; return; }
+      var list = function (title, rows, draft) {
+        return "<h3>" + title + "</h3>" + (rows && rows.length ? "<ul>" + rows.map(function (x) {
+          var d = draft ? x.def : x;
+          var retired = d.status === "retired";
+          return "<li><b>" + c.esc(d.title || d.key) + "</b> (" + c.esc(d.key) + (draft ? ", draft" : ", version " + c.esc(d.version)) + (retired ? " - RETIRED" : "") + ")" +
+            (draft ? (x.problems && x.problems.length ? '<div class="msg err">' + x.problems.map(c.esc).join("<br>") + "</div>" : ' <button class="btn" type="button" data-pw-pub="' + c.esc(d.key) + '">Publish</button>') : "") +
+            (!draft && !retired ? ' <button class="btn ghost" type="button" data-pw-retire="' + c.esc(d.key) + '" data-pw-v="' + c.esc(d.version) + '">Retire</button>' : "") +
+            ' <button class="btn quiet" type="button" data-pw-edit="' + c.esc(d.key) + '" data-pw-draft="' + (draft ? "1" : "") + '">Edit</button></li>';
+        }).join("") + "</ul>" : "<p>None.</p>");
+      };
+      body.innerHTML = '<div class="card"><h2>Clinical pathways</h2>' + list("Drafts", r.drafts || [], true) + list("Published", r.published || [], false) +
+        '<h3>Edit a pathway (JSON)</h3><textarea id="admPwJson" rows="14" style="width:100%;font-family:monospace" placeholder=\'{"key":"sepsis_bundle","title":"Sepsis resuscitation bundle","owner":"Critical Care Committee","effectiveDate":"2026-01-01","reviewDate":"2027-01-01","evidence":[{"citation":"Surviving Sepsis Campaign 2021"}],"steps":[{"key":"blood_cultures","title":"Blood cultures before antibiotics","kind":"orders","orderSetId":"sepsis_labs"}]}\'></textarea>' +
+        '<button class="btn" type="button" id="admPwSave">Save draft</button><div id="admPwMsg"></div></div>';
+      body.querySelectorAll("[data-pw-edit]").forEach(function (b) {
+        b.onclick = function () {
+          var key = b.getAttribute("data-pw-edit"), isDraft = b.getAttribute("data-pw-draft") === "1";
+          var d = isDraft ? (r.drafts || []).filter(function (x) { return x.key === key; })[0].def : (r.published || []).filter(function (x) { return x.key === key; })[0];
+          document.getElementById("admPwJson").value = JSON.stringify(d, null, 2);
+        };
+      });
+      body.querySelectorAll("[data-pw-pub]").forEach(function (b) {
+        b.onclick = function () {
+          c.api("/pathways/publish", { orgId: c.state.orgId, key: b.getAttribute("data-pw-pub") }).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Published as version " + x.version + "."); WSQ.render("admin");
+          });
+        };
+      });
+      body.querySelectorAll("[data-pw-retire]").forEach(function (b) {
+        b.onclick = function () {
+          var reason = window.prompt("Reason for retiring this pathway version (mandatory):");
+          if (!reason || reason.trim().length < 5) { alert("A retirement reason of at least 5 characters is required."); return; }
+          c.api("/pathways/retire", { orgId: c.state.orgId, key: b.getAttribute("data-pw-retire"), version: b.getAttribute("data-pw-v"), reason: reason.trim() }).then(function (x) {
+            if (!x || !x.ok) { c.toast(refusal(x)); return; }
+            c.toast("Pathway version retired."); WSQ.render("admin");
+          });
+        };
+      });
+      document.getElementById("admPwSave").onclick = function () {
+        var def; try { def = JSON.parse(document.getElementById("admPwJson").value); } catch (e) { document.getElementById("admPwMsg").innerHTML = '<div class="msg err">That is not valid JSON: ' + c.esc(e.message) + "</div>"; return; }
+        delete def.status; delete def.version; delete def.publishedAt;
+        c.api("/pathways/draft", { orgId: c.state.orgId, definition: def }).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admPwMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast(x.problems && x.problems.length ? "Draft saved with " + x.problems.length + " problem(s) to fix before publishing." : "Draft saved. It can be published."); WSQ.render("admin");
+        });
+      };
+    });
+  }
   function renderAdvisories(c, body) {
     body.innerHTML = '<div class="card"><h2>Safety reminders - try a draft</h2>' +
       '<p class="quiet">Paste the draft reminder set (JSON). Nothing is published or changed by trying it.</p>' +
@@ -266,11 +452,14 @@
   function renderWards(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/wards?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var wards = (r && r.ok && r.wards) || [];
+      if (!r || !r.ok) { body.innerHTML = '<div class="card"><h2>Wards</h2><div class="msg err">Wards could not be loaded. Do not read this as no wards. ' + c.esc(refusal(r)) + "</div></div>"; return; }
+      var wards = r.wards || [];
       var wardOpts = wards.map(function (w) { return '<option value="' + c.esc(w.id) + '">' + c.esc(w.name) + "</option>"; }).join("");
       body.innerHTML = '<div class="card"><h2>Wards</h2>' +
-        (wards.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Code</th><th>Type</th><th>Active</th></tr></thead><tbody>' +
-          wards.map(function (w) { return '<tr data-ward-id="' + c.esc(w.id) + '"><td>' + c.esc(w.name) + "</td><td>" + c.esc(w.code) + "</td><td>" + c.esc(w.type) + "</td><td>" + (w.active ? "yes" : "no") + "</td></tr>"; }).join("") +
+        (wards.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Code</th><th>Type</th><th>Active</th><th></th></tr></thead><tbody>' +
+          wards.map(function (w) { return '<tr data-ward-id="' + c.esc(w.id) + '"><td>' + c.esc(w.name) + "</td><td>" + c.esc(w.code) + "</td><td>" + c.esc(w.type) + "</td><td>" + (w.active ? "yes" : "no") + "</td>" +
+            '<td><button class="btn ghost sm" type="button" data-ward-rename="' + c.esc(w.id) + '" data-ward-name="' + c.esc(w.name) + '">Rename</button> ' +
+            '<button class="btn ghost sm" type="button" data-ward-active="' + c.esc(w.id) + '" data-to="' + (w.active ? "0" : "1") + '">' + (w.active ? "Deactivate" : "Reactivate") + "</button></td></tr>"; }).join("") +
           "</tbody></table></div>" : '<p class="quiet">No wards yet.</p>') +
         '<h3>Add a ward</h3><div class="row"><label class="f"><span>Name</span><input id="admWardName"></label>' +
         '<label class="f"><span>Code</span><input id="admWardCode"></label>' +
@@ -282,6 +471,25 @@
           '<h3>Add a bed</h3><div class="row"><label class="f"><span>Name</span><input id="admBedLabel"></label>' +
           '<button class="btn" id="admBedAdd" type="button">' + c.ms("add") + "Add</button></div><div id=\"admBedMsg\"></div>"
           : '<p class="quiet">Add a ward, then its beds.</p>') + "</div>";
+      var wardUpdate = function (patch, done) {
+        c.api("/ward/update", Object.assign({ orgId: c.state.orgId }, patch)).then(function (x) {
+          if (!x || !x.ok) { document.getElementById("admWardMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast(done); WSQ.render("admin");
+        });
+      };
+      body.querySelectorAll("[data-ward-rename]").forEach(function (b) {
+        b.onclick = function () {
+          var name = (window.prompt("New name for this ward", b.getAttribute("data-ward-name")) || "").trim();
+          if (name) wardUpdate({ wardId: b.getAttribute("data-ward-rename"), name: name }, "Ward renamed.");
+        };
+      });
+      body.querySelectorAll("[data-ward-active]").forEach(function (b) {
+        b.onclick = function () {
+          var on = b.getAttribute("data-to") === "1";
+          if (!on && !window.confirm("Deactivate this ward? Nothing already recorded changes, and it can be reactivated.")) return;
+          wardUpdate({ wardId: b.getAttribute("data-ward-active"), active: on }, on ? "Ward reactivated." : "Ward deactivated.");
+        };
+      });
       document.getElementById("admWardAdd").onclick = function () {
         var name = (document.getElementById("admWardName").value || "").trim();
         if (!name) { document.getElementById("admWardMsg").innerHTML = '<div class="msg err">Give the ward a name.</div>'; return; }
@@ -354,6 +562,33 @@
   }
 
   // ---- Staff and roles ----------------------------------------------------------------------------
+  /* REQUIRE TWO-STEP SIGN-IN, per role. The server enforces it on every request; this card only sets it.
+   * Staff of a ticked role who have not set it up can still sign in, but can do nothing except set it up. */
+  function twoStepPolicyCard(c) {
+    var on = ((c.state.org && c.state.org.security && c.state.org.security.requireTwoStepRoles) || []);
+    return '<div class="card"><h2>Require two-step sign-in</h2>' +
+      '<p class="quiet">Staff in a ticked role must use a code from an authenticator app when they sign in. Anyone in that role who has not set it up yet can sign in, but can only reach the set-up page until they do. A lost phone is fixed with Reset access.</p>' +
+      '<div class="row">' + ROLES.map(function (r) {
+        return '<label class="f" style="flex:0 1 170px"><span><input type="checkbox" class="admTwoStepRole" value="' + c.esc(r) + '"' + (on.indexOf(r) >= 0 ? " checked" : "") + "> " + c.esc(r.replace(/_/g, " ")) + "</span></label>";
+      }).join("") + "</div>" +
+      '<button class="btn" id="admTwoStepSave" type="button">Save</button><div id="admTwoStepMsg"></div></div>';
+  }
+  function wireTwoStepPolicy(c) {
+    var btn = document.getElementById("admTwoStepSave"); if (!btn) return;
+    btn.onclick = function () {
+      var picked = [];
+      document.querySelectorAll(".admTwoStepRole").forEach(function (b) { if (b.checked) picked.push(b.value); });
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, security: { requireTwoStepRoles: picked } }).then(function (r) {
+        btn.disabled = false;
+        var m = document.getElementById("admTwoStepMsg");
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org;
+        var saved = (r.org && r.org.security && r.org.security.requireTwoStepRoles) || [];
+        m.innerHTML = '<div class="msg ok">' + (saved.length ? "Saved. Required for: " + c.esc(saved.join(", ")) + "." : "Saved. Two-step sign-in is optional for everyone.") + "</div>";
+      });
+    };
+  }
   function renderStaff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return c.api("/members?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
@@ -362,6 +597,7 @@
       body.innerHTML =
         '<div class="card"><h2>What each credential lets a person do</h2>' +
         ROLE_NOTES.map(function (l) { return '<p class="quiet"><b>' + c.esc(l[0]) + ":</b> " + c.esc(l[1]) + "</p>"; }).join("") + "</div>" +
+        twoStepPolicyCard(c) +
         '<div class="card"><h2>Staff</h2>' +
         (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th></th></tr></thead><tbody>' +
           members.map(function (m) {
@@ -389,6 +625,7 @@
         '<label class="f"><span>Password</span><input id="admPwVal" type="password"></label>' +
         '<button class="btn quiet" id="admPwSave" type="button">Set password</button></div><div id="admPwMsg"></div>' +
         "</div>";
+      wireTwoStepPolicy(c);
       body.querySelectorAll("[data-mact]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-mact"), id = b.getAttribute("data-id");
@@ -490,6 +727,119 @@
             if (or2 && or2.ok) c.state.org = or2.org;
             c.toast("MaiK settings saved."); WSQ.render("admin");
           });
+        });
+      };
+    });
+  }
+  // ---- Security review (P2.17) ----------------------------------------------------------------
+  /* Advisory findings over the audit trail, a review queue for break-glass and admin acts, and data
+   * protection. Loading, failed, unavailable and empty are four different sentences: a section that
+   * could not be checked must never read as "nothing found", and nothing here is green without a
+   * recorded backup AND a recorded restore test. */
+  var SEC_TYPE_LABEL = {
+    "chart-access-volume": "Unusually many patients read", "chart-access-off-hours": "Reads outside usual hours",
+    "repeated-denied": "Repeated denied actions", "unusual-export": "Unusual export volume",
+    "failed-sign-ins": "Many failed sign-ins", "new-device": "Sign-in from a new device", "many-devices": "Many devices in a short time"
+  };
+  var SEC_STATUS_LABEL = { green: "Protected: recent backup and a successful restore test on record", amber: "Needs attention", red: "Not protected", unavailable: "Unknown: could not be checked" };
+
+  function secSection(c, title, s, days) {
+    var esc = c.esc;
+    var h = "<h3>" + esc(title) + "</h3>";
+    if (!s || s.status !== "ok") return h + '<div class="msg err">Could not be checked' + (s && s.detail ? ": " + esc(s.detail) : "") + ". This is not the same as nothing being found.</div>";
+    if (s.truncated || s.partial) h += '<div class="msg note">Only part of the log could be read, so some activity may not have been checked.</div>';
+    if (!s.findings.length) return h + '<p class="quiet">No findings in the last ' + esc(days) + " days.</p>";
+    return h + s.findings.map(function (f) {
+      return "<details><summary><b>" + esc(SEC_TYPE_LABEL[f.type] || f.type) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
+        '<p class="quiet">' + esc(f.method) + "</p>" +
+        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th></tr></thead><tbody>' +
+        f.evidence.map(function (e) {
+          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + "</td></tr>";
+        }).join("") + "</tbody></table></div>" +
+        (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + "</details>";
+    }).join("");
+  }
+
+  function securityReviewHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<div class="card"><span class="spin"></span> Loading the security review...</div>';
+    if (r.failed) return '<div class="card"><div class="msg err">The security review could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being nothing to review.</div></div>";
+    var h = '<div class="card"><h2>Security review, last ' + esc(r.days) + " days</h2>" +
+      '<div class="msg note">' + esc(r.note) + "</div>";
+    var types = Object.keys(r.counts || {});
+    h += types.length ? '<div class="tbl"><table><thead><tr><th>Finding</th><th>Count</th></tr></thead><tbody>' +
+      types.map(function (t) { return "<tr><td>" + esc(SEC_TYPE_LABEL[t] || t) + "</td><td>" + esc(r.counts[t]) + "</td></tr>"; }).join("") + "</tbody></table></div>"
+      : '<p class="quiet">No findings in the sections that could be checked. Check each section below for any that could not.</p>';
+    h += secSection(c, "Chart access", r.chartAccess, r.days) + secSection(c, "Exports", r.exports, r.days) + secSection(c, "Sign-ins", r.logins, r.days);
+    h += "<h3>Not checked, and why</h3><ul>" + (r.notDetected || []).map(function (n) { return "<li>" + esc(n.rule) + ": " + esc(n.reason) + "</li>"; }).join("") + "</ul></div>";
+
+    var q = r.reviewQueue || {};
+    h += '<div class="card"><h2>Review queue</h2>';
+    if (q.status === "ok" || q.status === "partial") {
+      if (q.missing && q.missing.length) h += '<div class="msg note">Incomplete: ' + esc(q.missing.join("; ")) + ".</div>";
+      h += q.items.length ? '<p class="quiet">' + esc(q.awaiting) + " awaiting review.</p>" +
+        '<div class="tbl"><table><thead><tr><th>What</th><th>By</th><th>When</th><th>Detail</th><th>Status</th><th></th></tr></thead><tbody>' +
+        q.items.map(function (i) {
+          var key = esc(i.kind + "|" + i.subjectId);
+          var hist = i.reviews.map(function (v) { return esc(v.decision) + " by " + esc(v.reviewedBy) + " (" + esc(v.at) + ")" + (v.note ? ": " + esc(v.note) : ""); }).join("<br>");
+          return "<tr><td>" + esc(i.kind === "break-glass" ? "Break-glass" : i.action) + "</td><td>" + esc(i.actor) + "</td><td>" + esc(i.at || "") + "</td><td>" + esc(i.detail) + "</td><td>" +
+            esc(i.status === "awaiting" ? "Awaiting review" : i.status === "appropriate" ? "Reviewed, appropriate" : "Needs follow-up") + (hist ? '<br><span class="quiet">' + hist + "</span>" : "") + "</td><td>" +
+            (i.ownAction ? '<span class="quiet">Your own action: another administrator must review it.</span>'
+              : '<button type="button" class="btn ghost" data-sec-review="' + key + '|appropriate">Reviewed, appropriate</button> ' +
+                '<button type="button" class="btn ghost" data-sec-review="' + key + '|follow-up">Needs follow-up</button>') + "</td></tr>";
+        }).join("") + "</tbody></table></div>" : '<p class="quiet">No break-glass grants or admin actions to review.</p>';
+    } else h += '<div class="msg err">The review queue could not be loaded' + (q.detail ? ": " + esc(q.detail) : "") + ". This is not the same as nothing awaiting review.</div>";
+    h += '<div id="secRevMsg"></div></div>';
+
+    var d = r.dataProtection || {};
+    h += '<div class="card"><h2>Data protection</h2><p><b>' + esc(SEC_STATUS_LABEL[d.status] || "Unknown") + "</b></p>" +
+      ((d.reasons || []).length ? "<ul>" + d.reasons.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "");
+    if (d.status !== "unavailable") {
+      h += "<p>Last backup: " + (d.lastBackup ? esc(d.lastBackup.at) + ", " + esc(d.lastBackup.rows) + " rows, stored at " + esc(d.lastBackup.location) : "never recorded") + "</p>" +
+        "<p>Last restore test: " + (d.lastRestoreTest ? esc(d.lastRestoreTest.at) + ", " + esc(d.lastRestoreTest.outcome) + ", restored " + esc(d.lastRestoreTest.restoredWhat) + ", by " + esc(d.lastRestoreTest.performedBy) : "never recorded") + "</p>";
+    }
+    h += "<h3>Record a restore test</h3><div class=\"row\">" +
+      '<label class="f"><span>What was restored</span><input id="secRtWhat" placeholder="Backup of 12 Sep into a test database"></label>' +
+      '<label class="f"><span>Outcome</span><select id="secRtOutcome"><option value="">Choose</option><option value="success">Success</option><option value="partial">Partial</option><option value="failed">Failed</option></select></label>' +
+      '<label class="f"><span>Done by</span><input id="secRtBy"></label>' +
+      '<label class="f"><span>Note</span><input id="secRtNote"></label>' +
+      '</div><button type="button" class="btn" id="secRtSave">Record restore test</button><div id="secRtMsg"></div></div>';
+
+    var a = r.auditRetention || {};
+    h += '<div class="card"><h2>Audit retention</h2>';
+    h += a.status === "ok"
+      ? "<p>" + esc(a.configuredNote) + "</p><p>Oldest audit row: " + esc(a.oldestAuditAt || "none found") + "</p><p>Oldest record: " + esc(a.oldestRecordAt || "none") + "</p>" +
+        (a.gap ? '<div class="msg err">' + esc(a.gap) + "</div>" : "")
+      : '<div class="msg err">Audit retention could not be checked.</div>';
+    return h + "</div>";
+  }
+  WSQ._securityReviewHtml = securityReviewHtml;
+
+  function renderSecurity(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = securityReviewHtml(c, null);
+    return c.api("/ward/security-report" + q + "&days=7").then(function (r) {
+      body.innerHTML = securityReviewHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      if (!r || !r.ok) return;
+      body.querySelectorAll("[data-sec-review]").forEach(function (b) {
+        b.onclick = function () {
+          var parts = b.getAttribute("data-sec-review").split("|");
+          var note = "";
+          if (parts[2] === "follow-up") { note = window.prompt("What needs following up?") || ""; if (!note) return; }
+          b.disabled = true;
+          c.api("/ward/security-review", { orgId: c.state.orgId, subjectKind: parts[0], subjectId: parts.slice(1, -1).join("|"), decision: parts[parts.length - 1], note: note }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; document.getElementById("secRevMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+            c.toast("Review recorded."); WSQ.render("admin");
+          });
+        };
+      });
+      var save = document.getElementById("secRtSave");
+      if (save) save.onclick = function () {
+        var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+        save.disabled = true;
+        c.api("/ward/restore-test", { orgId: c.state.orgId, restoredWhat: val("secRtWhat"), outcome: val("secRtOutcome"), performedBy: val("secRtBy"), note: val("secRtNote") }).then(function (x) {
+          if (!x || !x.ok) { save.disabled = false; document.getElementById("secRtMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          c.toast("Restore test recorded."); WSQ.render("admin");
         });
       };
     });

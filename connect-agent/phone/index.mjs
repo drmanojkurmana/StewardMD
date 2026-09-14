@@ -4,6 +4,7 @@ import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
+import { createProofBook } from './prove.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -22,30 +23,32 @@ function browserOf(plugin) {
 
 /** Doctor-facing wording for each gap the auto crawl could not fill. No em-dash (app-facing text). */
 export const GAP_PROMPTS = Object.freeze({
-  worklist: 'I could not find your patient worklist. Tap where it lives, then tap Done.',
-  patient: 'I could not find the patient details (name, age, sex). Tap where they live, then tap Done.',
-  notes: 'I could not find the clinical or assessment notes. Tap where they live, then tap Done.',
-  medications: 'I could not find the medication chart. Tap where it lives, then tap Done.',
-  labs: 'I could not find the lab results. Tap where they live, then tap Done.',
-  radiology: 'I could not find the radiology reports. Tap where they live, then tap Done.',
-  discharge: 'I could not find the discharge summary. Tap where it lives, then tap Done.',
-  history: 'I could not find the visit history. Tap where it lives, then tap Done.',
+  worklist: 'I could not find your patient worklist. Open it and tap inside it so it turns green, then tap Done.',
+  patient: 'I could not find the patient details (name, age, sex). Open them and tap inside so they turn green, then tap Done.',
+  notes: 'I could not find the clinical or assessment notes. Open them and tap inside so they turn green, then tap Done.',
+  medications: 'I could not find the medication chart. Open it and tap inside it so it turns green, then tap Done.',
+  labs: 'I could not find the lab results. Open them and tap inside so they turn green, then tap Done.',
+  radiology: 'I could not find the radiology reports. Open them and tap inside so they turn green, then tap Done.',
+  discharge: 'I could not find the discharge summary. Open it and tap inside it so it turns green, then tap Done.',
+  history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done.',
 });
 const MAX_ASKS = 4;
+const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history' });
+const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[type=\"password\"]')?'1':'0'})()";
 
 /* MANUAL MODE: the doctor drives, the agent reads over their shoulder. One ask per resource, in the
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
 export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
 export const ASK_PROMPTS = Object.freeze({
-  worklist: 'Show me the list of all your patients (the whole ward or your own list), then tap Done.',
-  patient: 'Open one patient and show me their details (name, age, sex, ward, bed), then tap Done.',
-  notes: 'Show me the assessment or clinical notes for that patient, then tap Done.',
-  labs: 'Show me the lab results for that patient, then tap Done.',
-  radiology: 'Show me the radiology reports for that patient, then tap Done.',
-  medications: 'Show me the medication chart or prescription for that patient, then tap Done.',
-  discharge: 'Show me the discharge summary for that patient, then tap Done.',
-  history: 'Show me the visit history for that patient, then tap Done.',
+  worklist: 'Show me the list of all your patients (the whole ward or your own list), tap inside it so it turns green, then tap Done.',
+  patient: 'Open one patient and show me their details (name, age, sex, ward, bed), tap inside it so it turns green, then tap Done.',
+  notes: 'Show me the assessment or clinical notes for that patient, tap inside it so it turns green, then tap Done.',
+  labs: 'Show me the lab results for that patient, tap inside it so it turns green, then tap Done.',
+  radiology: 'Show me the radiology reports for that patient, tap inside it so it turns green, then tap Done.',
+  medications: 'Show me the medication chart or prescription for that patient, tap inside it so it turns green, then tap Done.',
+  discharge: 'Show me the discharge summary for that patient, tap inside it so it turns green, then tap Done.',
+  history: 'Show me the visit history for that patient, tap inside it so it turns green, then tap Done.',
 });
 
 /**
@@ -100,13 +103,21 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
    * keys, request field names, response type; never values). captureView asks for what arrived since
    * the last capture so a view's endpoints carry the names the runtime needs to replay a POST. */
   let observerMark = 0;
+  /* The real client is frozen (plugin-client.mjs), so the drain is added on a wrapper, never on it. */
   if (typeof plugin.drainObserverEvents !== 'function') {
-    plugin.drainObserverEvents = async () => { const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
+    const base = plugin;
+    // Drain the page observer first: raw() alone is whatever the collector last pulled, which on the
+    // phone lost every POST field name (live GHIS run, 2026-09-13).
+    const drainObserverEvents = async () => { try { await collector.ensureInstalled(); } catch { /* keep what we have */ } const all = collector.raw(); const events = all.slice(observerMark); observerMark = all.length; return { events }; };
+    plugin = Object.assign(Object.create(base), { drainObserverEvents });
   }
   notify('DISCOVERING', { steps: 0, events: 0 });
   if (typeof api.progress === 'function') await api.progress({ stage: 'DISCOVERING' }).catch(() => {});
 
   const planner = async (args) => api.plan(args);
+  /* EXPLORE -> OBSERVE -> GEMINI -> EXECUTE -> VERIFY -> LEARN: every captured screen's data call is
+   * proven against what the screen shows before it is kept (prove.mjs). */
+  const book = createProofBook({ brain });
 
   let observedViews = [];
   let found = [];
@@ -118,32 +129,60 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   /* One guided ask: hand the screen to the doctor, wait for Done / Not in my EMR / Skip, capture what
    * they landed on. Shared by both modes. Returns 'captured' | 'missing' | 'skipped' | 'unreadable'. */
   const askOne = async (gap, text, step, total) => {
-    notify('ASKING', { gap, text, step, total, found, looking: looking() });
-    await setMode('guide', text);
-    await plugin.evaluate({ expression: GUIDE_SOURCES.arm }).catch(() => {});
-    await plugin.evaluate({ expression: GUIDE_SOURCES.armGuide }).catch(() => {});
-    let answer = null;
-    try { answer = await askDoctor({ gap, text, step, total, mode }); } catch { answer = null; }
-    asked.push(gap);
-    if (answer && answer.missing) { missing.push(gap); return 'missing'; }
-    if (!answer || !answer.done) return 'skipped';
-    let guidedPath = [];
-    try { guidedPath = JSON.parse((await plugin.evaluate({ expression: GUIDE_SOURCES.guidePath }))?.result || '[]'); } catch { guidedPath = []; }
-    let view = null;
-    try { view = await captureView({ client: plugin, resourceHint: gap, blockOnly: gap === 'patient' }); } catch { view = null; }
-    if (!view || !view.rowsSelector) {
-      try { view = await captureView({ client: plugin, resourceHint: gap }); } catch { view = null; }
+    /* ASK UNTIL IT IS PROVEN (owner, 2026-09-13). The doctor opens the screen and taps Done; every
+     * request fired between the ask and Done is replayed and must carry what the screen shows, and
+     * Gemini must agree the reply is that resource. When none does, the doctor is asked again (up to
+     * three times) instead of saving a guess. */
+    let prompt = text;
+    let last = null;
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      notify('ASKING', { gap, text: prompt, step, total, found, looking: looking(), attempt: attempt + 1 });
+      await setMode('guide', prompt);
+      await plugin.evaluate({ expression: GUIDE_SOURCES.arm }).catch(() => {});
+      await plugin.evaluate({ expression: GUIDE_SOURCES.armGuide }).catch(() => {});
+      let answer = null;
+      try { answer = await askDoctor({ gap, text: prompt, step, total, mode }); } catch { answer = null; }
+      /* SIGNED OUT DURING THE ASK: the screen the doctor tapped Done on is the login page. Ask them to
+       * sign in again and show the same screen, up to twice, instead of capturing a login form. */
+      for (let tries = 0; tries < 2 && answer && answer.done; tries += 1) {
+        let onLogin = false;
+        try { onLogin = /1/.test(String((await plugin.evaluate({ expression: LOGIN_FORM_PRESENT }))?.result)); } catch { onLogin = false; }
+        if (!onLogin) break;
+        const again = 'You were signed out. Sign in again, then ' + text.charAt(0).toLowerCase() + text.slice(1);
+        notify('ASKING', { gap, text: again, step, total, found, looking: looking(), signedOut: true });
+        await setMode('guide', again);
+        try { answer = await askDoctor({ gap, text: again, step, total, mode }); } catch { answer = null; }
+      }
+      if (attempt === 0) asked.push(gap);
+      if (answer && answer.missing) { missing.push(gap); return 'missing'; }
+      if (!answer || !answer.done) break;
+      let guidedPath = [];
+      try { guidedPath = JSON.parse((await plugin.evaluate({ expression: GUIDE_SOURCES.guidePath }))?.result || '[]'); } catch { guidedPath = []; }
+      let view = null;
+      try { view = await captureView({ client: plugin, resourceHint: gap, blockOnly: gap === 'patient' }); } catch { view = null; }
+      if (!view || !view.rowsSelector) {
+        try { view = await captureView({ client: plugin, resourceHint: gap }); } catch { view = null; }
+      }
+      if (!view || !view.rowsSelector) {
+        await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+        prompt = 'I could not read a table on that screen. Open the ' + GAP_NAMES[gap] + ' for a patient, tap inside the list so it turns green, then tap Done.';
+        continue;
+      }
+      view.guided = true;
+      if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
+      const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
+      await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
+      await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
+      if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
+        warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
+      }
+      last = view;
+      if (view.proof && view.proof.status === 'proven') break;
+      prompt = 'None of the requests from that screen returned the ' + GAP_NAMES[gap] + '. Open the ' + GAP_NAMES[gap] + ' for a patient again (the list itself, not a menu), tap inside it so it turns green, then tap Done.';
     }
-    if (!view || !view.rowsSelector) { warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
-    view.guided = true;
-    if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
-    /* The brain checks the doctor's answer against the structure and maps the columns; the doctor's
-     * word on WHAT the screen is stands, a strong disagreement is only reported. */
-    const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
-    if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {
-      warnings.push('the ' + gap + ' screen looks like ' + verdict.resource + ' to the model');
-    }
-    observedViews.push(view);
+    if (!last) { warnings.push('could not read a table or report block on the ' + gap + ' screen'); return 'unreadable'; }
+    if (!(last.proof && last.proof.status === 'proven')) warnings.push('no request was proven for the ' + gap + ' screen; it will be read from its page');
+    observedViews.push(last);
     found = [...found, gap];
     notify('CAPTURED', { gap, step, total, found, looking: looking() });
     return 'captured';
@@ -175,7 +214,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];
@@ -194,12 +233,34 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     if (!observedViews.length || crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') return;
     notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
     try {
-      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
+      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
     } catch (e) {
       if (e && e.name === 'NotSignedIn') { crawlStop = 'login-required'; warnings.push(e.message); return; }
       warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
     }
   };
+  /* NOT ON THE EMR YET. Sign-in is detected when the password box goes, which on a single-sign-on
+   * hospital is the app chooser, not the EMR: the crawl then read a login or shell page, found nothing,
+   * and an empty draft was filed (owner, Pixel, 2026-09-13). Ask the doctor to open their patient list
+   * and crawl again, up to twice. */
+  for (let tries = 0; !manual && tries < 2 && (crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') && typeof askDoctor === 'function' && !stopped(); tries += 1) {
+    const text = 'Open your patient list in the hospital (for example the Doctor module), then tap Done.';
+    notify('ASKING', { gap: 'worklist', text, found, looking: looking() });
+    await setMode('guide', text);
+    let a = null;
+    try { a = await askDoctor({ gap: 'worklist', text, mode }); } catch { a = null; }
+    if (!a || !a.done) break;
+    await setMode('agent');
+    try {
+      const again = await deepCrawlClinical({
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
+        onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
+      });
+      observedViews = again.observedViews || [];
+      found = again.found || [];
+      crawlStop = again.stopReason;
+    } catch { break; }
+  }
   if (!manual) await runVerification();
 
   // Ask the doctor: in manual mode for every resource, in auto mode for what the crawl could not find
@@ -219,6 +280,11 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   // What the doctor showed (or manual mode captured) is proven the same way, once.
   if (manual || asked.length) await runVerification();
 
+  // Nothing discovered is a failure with its reason, never an "adapter created".
+  if (!observedViews.length) {
+    await collector.detach().catch(() => {});
+    throw new Error('nothing was discovered (' + (crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell' ? 'the browser was not on the EMR after sign-in' : (crawlStop || 'no clinical screen found')) + ')');
+  }
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 
@@ -233,9 +299,12 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
 
   return Object.freeze({
     spec, steps: explored.steps, stopReason: explored.stopReason, visitedUrls: explored.visitedUrls,
-    candidateVersionId: discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
+    // The version row is created by the evidence call, not discovery: without this the phone's Approve
+    // posted /versions/undefined/approve and said "Could not approve" (live GHIS run, 2026-09-13).
+    candidateVersionId: evidenceResult?.candidateVersionId || discoveryResult?.candidateVersionId, manifest: discoveryResult?.manifest,
     observedViews, found, asked, missing, warnings, crawlStop, mode,
     verification: { patients: verification.patients.length, checks: verification.checks, failed: verification.failed },
+    proofs: book.trace,
     probes: probed.probes, capabilities: evidenceResult?.capabilities, evidenceHash: evidenceResult?.evidenceHash,
     state: evidenceResult?.state,
   });

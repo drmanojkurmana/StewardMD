@@ -17,7 +17,7 @@ mock.module("../functions/_fbfirestore.js", {
     wUpdate: (_e, path, fields) => ({ path, fields }),
   },
 });
-mock.module("../functions/_opd_auth.js", { namedExports: { genSalt: () => "salt", hashSecret: async () => "hash" } });
+mock.module("../functions/_opd_auth.js", { namedExports: { genSalt: () => "salt", hashSecret: async () => "hash", passwordProblem: () => null, pinProblem: () => null } });
 const ORG = await import("../functions/_opd_org_store.js");
 
 const members = () => [...docs.keys()].filter((k) => k.startsWith("q_members/"));
@@ -66,7 +66,7 @@ test("the route is admin-only and turns a refusal into a failure, not a success"
   const block = src.slice(src.indexOf('if (seg === "member") {'), src.indexOf('if (seg === "member") {') + 1400);
   assert.match(block, /azOrg\(CAPS\.STAFF_ADMIN\); if \(!az\.ok\) return deny\(az\)/);
   for (const sub of ["pin", "password", "disable", "restore", "reset"]) assert.match(block, new RegExp('sub === "' + sub + '"\\) return lifecycle\\('));
-  assert.match(block, /r\.ok === false \? 404 : 200/);
+  assert.match(block, /r\.ok === false \? \(r\.error === "member_not_found" \? 404 : 422\) : 200/);
   const admin = readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8");
   assert.match(admin, /if \(!MEMBER_ACTION_ROUTE\[act\]\) return;/);
 });

@@ -53,6 +53,8 @@ import { assemble as patientCopyAssemble, statements as patientStatements } from
 /* One wording for the channel warning, defined where the messaging rules are. Two copies would
  * drift, and the copy that drifts is the one on the screen the patient actually reads. */
 import { NOT_EMERGENCY } from "./portal-requests.js";
+/* P2.9: what a proxy may see, the portal-only sections, and the patient's own consent withdrawal. */
+import { proxyFrom, grantSections, readerId, portalExtras, scopeDocument } from "./portal-view.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -170,6 +172,9 @@ function AccessGrant(input) {
      * them apart records neither. */
     issuedTo: i.issuedTo || "patient",
     identifiedBy: i.identifiedBy || null,
+    /* P2.9: a family member or carer. Which contact, what they may see, and who agreed and how. The
+     * sections are enforced on every read and write FROM THIS FIELD; null means the patient's own. */
+    proxy: i.proxy || null,
     issuedBy: i.issuedBy,
     issuedAt: i.issuedAt,
     codeHash: i.codeHash,
@@ -195,9 +200,10 @@ function AccessGrant(input) {
  * somebody else's chart - scopes are by type, not by person. What stops that is that every route
  * below takes the patient id FROM THE GRANT and never from the request.
  */
-function patientActor(patientId) {
+function patientActor(patientId, auditId) {
   return makeActor({
-    id: `patient:${str(patientId)}`,
+    /* A proxy reads under its own audit id (portal-view.js readerId), never as the patient. */
+    id: str(auditId) || `patient:${str(patientId)}`,
     kind: KIND.HUMAN,
     tier: TIER.READ,
     scope: {
@@ -262,11 +268,34 @@ async function enrolPatient(request, env, ctx) {
     return { ...base, ok: false, status, error: status === 401 ? "auth" : "permission", detail: str(e && e.message), written: 0 };
   }
 
+  /* P2.9 PROXY. A family member is a contact already on this patient's record, granted named sections,
+   * with who agreed and how recorded. The contact is checked against THIS patient so a grant cannot be
+   * issued to somebody else's relative. */
+  let proxy = null;
+  if (ctx.proxy) {
+    const built = proxyFrom(ctx.proxy);
+    if (built.error) return { ...base, ok: false, status: 422, error: built.error, detail: built.detail, written: 0 };
+    let person = null;
+    try {
+      const clin = new RecordService({
+        repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym,
+        tenant: resolved.tenant || { id: mig.tenantId }, actor: resolved.actor, role: resolved.role || "clinician", roleSource: resolved.source || "wardsynq",
+      });
+      person = await clin.get("RelatedPerson", built.proxy.relatedPersonId);
+    } catch (e) {
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+    }
+    if (!person || str(person.patientId) !== patientId || person.active === false) {
+      return { ...base, ok: false, status: 422, error: "related_person_not_found", detail: "that contact is not an active contact on this patient's record", written: 0 };
+    }
+    proxy = { ...built.proxy, relationship: person.relationship || null, name: person.name || null };
+  }
+
   const at = new Date().toISOString();
   const id = `wsq-pacc-${str(patientId).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}`;
   const code = makeCode();
   const grant = AccessGrant({
-    id, patientId, issuedTo: str(ctx.issuedTo) || "patient", identifiedBy,
+    id, patientId, issuedTo: proxy ? "proxy" : (str(ctx.issuedTo) || "patient"), identifiedBy, proxy,
     issuedBy: resolved.actor.id, issuedAt: at,
     codeHash: await hashSecret(code, id),
   });
@@ -372,8 +401,10 @@ async function portalRead(request, env, ctx) {
    * not by person, so if this took a patient id from the request a valid session for one patient
    * would read any chart in the hospital. */
   const patientId = str(grant.patientId);
+  /* P2.9: what THIS grant may see, from the grant. A proxy's reads are audited under its own id. */
+  const sections = grantSections(grant);
 
-  const svc = serviceFor(ctx, patientActor(patientId));
+  const svc = serviceFor(ctx, patientActor(patientId, readerId(grant)));
   let doc;
   try {
     doc = await patientCopyAssemble(svc, patientId, Array.isArray(ctx.neverRelease) ? ctx.neverRelease : []);
@@ -384,7 +415,7 @@ async function portalRead(request, env, ctx) {
   /* The patient's own messages and any replies. A portal where messages go and never come back
    * leaves the patient unable to tell "nobody has answered" from "the answer is somewhere else". */
   let messages = [];
-  try {
+  if (sections.includes("messages")) try {
     messages = (await svc.byPatient("PatientMessage", patientId).catch(() => []) || [])
       .filter(Boolean)
       .sort((a, b) => String(b.sentAt || "").localeCompare(String(a.sentAt || "")))
@@ -392,10 +423,22 @@ async function portalRead(request, env, ctx) {
       .map((m) => ({ sentAt: m.sentAt, body: m.body, reply: m.reply || null, answeredAt: m.answeredAt || null }));
   } catch (_) { messages = []; }
 
+  const extras = await portalExtras(ctx, grant);
+  const scoped = scopeDocument(doc, sections);
+
   return {
-    ...base, ok: true, patientId,
-    document: doc,
-    messages,
+    ...base, ok: true,
+    /* The patient id is only returned to the patient's own session. */
+    ...(grant.proxy ? {} : { patientId }),
+    access: grant.proxy
+      ? { kind: "proxy", sections, relationship: grant.proxy.relationship || null, name: grant.proxy.name || null }
+      : { kind: "patient", sections },
+    document: scoped,
+    ...(sections.includes("messages") ? { messages } : {}),
+    ...(extras.dischargeSummaries ? { dischargeSummaries: extras.dischargeSummaries } : {}),
+    ...(extras.bills ? { bills: extras.bills } : {}),
+    ...(extras.consents ? { consents: extras.consents } : {}),
+    failedSections: extras.failed,
     /* Carried on the read so the page can show it above the message box rather than under the send
      * button. The person about to type "my chest hurts" is the one who most needs to read it first. */
     notEmergency: NOT_EMERGENCY,
@@ -430,7 +473,7 @@ async function sessionPatient(ctx) {
   if (!live.ok) return { ok: false, status: 401, error: live.reason, detail: "This session has ended. Ask your care team for a new code." };
   if (!sameSecret(await hashSecret(token, grantId), grant.tokenHash)) return deny;
 
-  return { ok: true, patientId: str(grant.patientId), grantId };
+  return { ok: true, patientId: str(grant.patientId), grantId, proxy: !!grant.proxy, sections: grantSections(grant), readerId: readerId(grant) };
 }
 
 /**
@@ -474,8 +517,39 @@ async function revokeAccess(request, env, ctx) {
     note: "Access has ended immediately. Any live session using this grant stops at its next request." };
 }
 
+/**
+ * P2.9: the grants on one patient's record, for the clinician who may revoke them.
+ * Digests are NOT returned: a grant readable by staff must not be a way to become the patient.
+ * ctx: { migration, patientId, config, actorDeps, recordDeps }
+ */
+async function listGrants(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", grants: [] };
+  if (!accessEnabled(ctx.config)) return offResponse(base);
+  const patientId = str(ctx.patientId);
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", grants: [] };
+  try {
+    await resolveClinicalActor(request, env, mig.tenantId, "record:write", ctx.actorDeps);
+  } catch (e) {
+    const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
+    return { ...base, ok: false, status, error: status === 401 ? "auth" : "permission", grants: [] };
+  }
+  let rows;
+  try { rows = (await serviceFor(ctx, accessActor()).byPatient(GRANT_TYPE, patientId)) || []; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", grants: [] }; }
+  const now = new Date().toISOString();
+  const grants = rows.filter(Boolean).map((g) => ({
+    grantId: g.id, issuedTo: g.issuedTo, issuedAt: g.issuedAt, issuedBy: g.issuedBy,
+    proxy: g.proxy ? { name: g.proxy.name || null, relationship: g.proxy.relationship || null, sections: grantSections(g), consentFrom: g.proxy.consentFrom, consentMethod: g.proxy.consentMethod } : null,
+    state: g.revokedAt ? "revoked" : g.redeemedAt ? (sessionLive(g, now, ctx.config && ctx.config.sessionTtlMinutes).ok ? "in-use" : "session-ended") : (redeemable(g, now, ctx.config && ctx.config.codeTtlMinutes).ok ? "code-waiting" : "code-unusable"),
+    revokedAt: g.revokedAt || null, revokedReason: g.revokedReason || null,
+  })).sort((a, b) => String(b.issuedAt || "").localeCompare(String(a.issuedAt || "")));
+  return { ...base, ok: true, patientId, grants };
+}
+
 export {
   GRANT_TYPE, CODE_DIGITS, MAX_ATTEMPTS, CODE_TTL_MINUTES, SESSION_TTL_MINUTES,
   makeCode, hashSecret, sameSecret, accessEnabled, minutesOr, redeemable, sessionLive, AccessGrant,
-  patientActor, accessActor, sessionPatient, enrolPatient, redeemCode, portalRead, revokeAccess,
+  patientActor, accessActor, sessionPatient, enrolPatient, redeemCode, portalRead, revokeAccess, listGrants,
 };

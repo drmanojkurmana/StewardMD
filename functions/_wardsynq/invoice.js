@@ -23,6 +23,7 @@ import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, rece
 import { validateCollection, applyAdapterResult } from "../../wardsynq/wardsynq-payment-methods.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
+import { gstForLines } from "../_region_in.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -48,7 +49,7 @@ function writeFailure(e, extra) {
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), ...extra };
 }
 function summary(inv) {
-  return { invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, lines: inv.lines, events: inv.events, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
+  return { taxRegistration: inv.taxRegistration || null, invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, lines: inv.lines, events: inv.events, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
 }
 
 /** ctx: { migration, patientId, encounterId?, tariff?, at?, actorDeps, recordDeps } */
@@ -77,6 +78,14 @@ async function raiseInvoice(request, env, ctx) {
   const newLines = charges.priced.filter((it) => !(it.sourceType && it.sourceId && alreadyInvoiced.has(`${it.sourceType}:${it.sourceId}`)));
   if (!newLines.length) return { ...base, ok: true, written: 0, skipped: "already_invoiced", detail: "Every currently priced item is already on an earlier invoice." };
 
+  /* P2.6: tax, from the region adapter and the hospital's own tariff only. India: a tariff item with a
+   * gstRate gets a GST line, an exempt one says exempt, and one with no rate gets NO tax and is listed
+   * back to the cashier - never assumed to be 0 percent or any default slab. A rate that is not a
+   * number refuses the invoice: a bill with a guessed tax is worse than no bill. */
+  const gst = gstForLines(newLines, ctx.tariff, ctx.region);
+  if (gst.invalid.length) return { ...base, ok: false, status: 422, error: "gst_rate_invalid", codes: gst.invalid, written: 0, detail: "These tariff items carry a GST rate that is not a number from 0 to 100. Correct the tariff before raising this invoice." };
+  const taxByCode = new Map(gst.lines.map((g) => [g.code.toUpperCase(), g]));
+
   const at = str(ctx.at) || new Date().toISOString();
   const id = `wsq-invoice-${slug(patientId)}-${slug(at)}`;
 
@@ -84,16 +93,22 @@ async function raiseInvoice(request, env, ctx) {
   try {
     ep = openInvoice({
       id, patientId, encounterId: str(ctx.encounterId) || null, currency: charges.currency,
-      lines: newLines.map((l) => ({ code: l.code, display: l.display, quantity: l.quantity, amount: l.amount, line: l.line, sourceType: l.sourceType || null, sourceId: l.sourceId || null })),
+      lines: newLines.map((l) => {
+        const g = taxByCode.get(str(l.code).toUpperCase());
+        return { code: l.code, display: l.display, quantity: l.quantity, amount: l.amount, line: l.line, sourceType: l.sourceType || null, sourceId: l.sourceId || null,
+          ...(g ? { taxKind: "GST", taxRate: g.gstRate, taxExempt: g.gstExempt, tax: g.tax } : {}) };
+      }),
       actorId: resolved.actor.id, at,
     });
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
   ep.resourceType = TYPE;
   ep.source = { system: "wardsynq-native", sourceId: `invoice:${id}` };
+  if (gst.applies && str(ctx.gstin)) ep.taxRegistration = { kind: "GSTIN", id: str(ctx.gstin) };
 
   try {
     const out = await svc.put(ep, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, ...summary({ ...ep, version: out.record.version }), actor: resolved.actor.id };
+    return { ...base, ok: true, written: 1, ...summary({ ...ep, version: out.record.version }), actor: resolved.actor.id,
+      ...(gst.applies ? { gst: { totalTax: gst.totalTax, unconfigured: gst.unconfigured, taxRegistration: ep.taxRegistration || null } } : {}) };
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
 }
 

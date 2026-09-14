@@ -381,3 +381,198 @@ P0.7 phonetic search: Soundex was written and never used, so transliterated name
 
 **Numbers:** 6030 passing, 0 failing. 15 routes waiting for a screen.
 **Next:** P0.7 relationships / next of kin / guardian / emergency contacts / deceased status - check what exists.
+
+### 2026-09-13 - merge preview + fail-closed chain check
+
+P0.7 governed merge: "Same person - merge" now asks the server for a dry run (every check, nothing written) and shows both records side by side, differing fields marked, with a reason box before "Join these records". Safety fix: the check that stops a record being merged twice swallowed a read failure as "no links" and let the merge proceed; it now refuses. Harness fix: throttle reset per seeded hospital. P0.7 contacts/guardian/next of kin/deceased already had a screen. Live (ward.js site48, ward.css site12).
+
+**Numbers:** 6032 passing, 0 failing. 15 routes waiting for a screen.
+**P0.7 status:** duplicate detection, phonetic matching, preview/authorised/audited/reversible merge, identifier history all in place. Remaining P0.7: none known.
+**Next:** P0.9 MFA/session hardening.
+
+### 2026-09-13 - P0.9 sign-in hardening (part 1)
+
+Password sign-in now locks after 5 wrong tries (had no limit; PIN already did), own counters. Every sign-in outcome audited under the hospital, never the secret. Weak PINs (repeated/consecutive, not 4-8 digits) and passwords (<10, common, contains email name) refused when set. Resetting, disabling, or changing a PIN/password ends sessions issued before it (sessionsRevokedAt vs signed issue time); restore does not revive them. Fixed three screens that said Saved / Clinic ready / nothing when a PIN or password was refused. Live on both sites.
+
+**Numbers:** 6038 passing, 0 failing. 15 routes waiting for a screen.
+**Next (P0.9):** two-step sign-in (authenticator code) for staff password sign-in; staff "sessions and devices" visibility; security headers check.
+
+### 2026-09-13 - P0.9 two-step sign-in for staff
+
+Staff switch on authenticator-app codes for their own account (new Sign-in security page on wardsynq.com). Correct PIN/password then returns a 5-minute challenge (signed ver 2, never usable as a session); code checked server-side (RFC 6238 vectors verified), secret encrypted at rest, used step refused, 8 hashed one-time backup codes spent under a precondition, 5 wrong codes lock 15 min, all outcomes audited. Turning on ends older sessions; turning off needs a code; admin Reset access clears it (lost phone). All three staff sign-in screens (wardsynq.com, opd, queue app) ask for the code. Doctor StewardMD accounts out of scope (their identity provider).
+
+**Deploy note:** Cloudflare accepted both publishes (build and deploy stages "success") but every deployment since ~08:25 UTC, on both projects, answers "Deployment Not Found"; live sites still serve the previous version. Not code-related (a static-only upload is affected too). Watching.
+
+**Numbers:** 6048 passing, 0 failing. 15 routes waiting for a screen.
+**Next (P0.9):** confirm live once Cloudflare serves new deploys; security headers; session/device visibility.
+
+### 2026-09-13 - P0.9 sign-in history + sign out everywhere
+
+Cloudflare hold-up cleared 08:44 UTC; two-step sign-in confirmed live. Each staff sign-in audit now names the device ("Chrome on Android", never raw user-agent). Sign-in security page lists the account's own recent sign-ins/failures/lockouts/two-step events with device, failed and partial loads stated, and Sign out everywhere (ends every session). Checker now scans wardsynq.com pages that call via c.api (8 files were invisible; mfa routes had passed only by word coincidence); operational-health confirmed on the audit page. Security headers already set (_headers; no strict CSP by documented decision). Live.
+
+**Numbers:** 6051 passing, 0 failing. 14 routes waiting for a screen.
+**P0.9 status:** MFA, lockout, password/PIN policy, session revocation, login audit, device visibility, rate limiting, break-glass, headers all in place. Not done: org policy to REQUIRE two-step for roles.
+**Next:** org policy "require two-step sign-in" for chosen roles; then P0.8 documents.
+
+### 2026-09-13 - P0.9 require two-step sign-in per role
+
+Admin Center, Staff tab: tick roles that must use two-step sign-in (org.security.requireTwoStepRoles, only real role names kept). A member of such a role without it can sign in but the server refuses every route except mfa/* and whoami (two_step_required); wardsynq.com routes them to Sign-in security, OPD page and queue app say where to set it up. Live (admin.js v9, shell.js v28, security.js v3).
+
+**Numbers:** 6053 passing, 0 failing. 14 routes waiting for a screen.
+**P0.9 status:** complete for staff accounts (MFA + required-by-role, lockouts, credential policy, session revocation, sign-in audit with device, sign out everywhere, rate limiting, break-glass, headers). Doctor StewardMD accounts use their identity provider.
+**Next:** P0.8 documents behind an S3-compatible interface.
+
+### 2026-09-13 - P0.8 patient documents
+
+DocumentReference metadata in the append-only record (patient, visit, type, title, size, SHA-256, uploader, retention date, withdrawal, purge). Bytes AES-GCM encrypted before leaving the server, stored under unguessable keys via functions/_wardsynq/object-store.js: plain-fetch S3 SigV4 adapter (matches AWS published example), works with R2/S3/MinIO, no Cloudflare binding. Versions never overwrite; withdraw keeps file with reason; purge admin-only, refused before retention (hospital documentRetentionYears, default 3), record kept. Files open only via a 5-minute signed link bound to person/document/version, integrity-checked and audited per use (document-file byDesign). Ward chart Documents screen: loading/failed/storage-off/none distinct. Live (ward.js site49).
+
+**Blocked for production uploads (owner action):** no storage is configured, so the live screen says so and refuses uploads. To turn on: create a private bucket (R2 or S3) and set DOC_S3_ENDPOINT, DOC_S3_BUCKET, DOC_S3_ACCESS_KEY_ID, DOC_S3_SECRET_ACCESS_KEY (DOC_S3_REGION for AWS; optional dedicated DOC_ENC_KEY, 32 bytes base64url) as secrets on the stewardmd Pages project.
+
+**Numbers:** 6065 passing, 0 failing. 14 routes waiting for a screen.
+**Next:** P0.10 atomicity investigation and invariant tests.
+
+### 2026-09-13 - P0.10 consultation all-or-nothing
+
+The earlier claim that cross-record atomicity was unavailable was wrong: repository.append is atomic across its records (one D1 batch). New functions/_wardsynq/staged.js StagedRepository (unit of work over the port; reads overlay staged records; append holds; commit = one append). Port extended backward-compatibly: ctx.idempotency[] and ctx.audits[] (memory + D1). saveConsultation runs all writers against it and commits once; any failure or commit conflict = nothing written, no keys spent, no audit rows. Invariant tests added. Ward consultation screen now shows "not saved" for every failure (was blank for most). Live (ward.js site50).
+
+**Numbers:** 6069 passing, 0 failing. 14 routes waiting for a screen.
+**P0 remaining:** 14 small screens, live payment providers (need credentials), document storage settings (owner). User asked to move faster; P1 starts next, leftovers in parallel.
+
+### 2026-09-13 - P1.8 referrals, P1.7 staff rostering, storage check
+
+P1 started (user asked to move faster; P0 leftovers run alongside). Referrals end to end (referral.js; patient Referrals screen + hospital Referral inbox). Staff rostering (_roster.js pure rules, _roster_store.js by-month storage, Staff rota page): overlap/leave/swap refusals, all-or-nothing weekly assignment, leave clash blocks approval, swap needs colleague + manager with re-check, coverage gaps, on duty now, removal with reason, all audited, negative-auth tested. GET /api/queue/ready now reports documentStorage via a real save/read/delete round trip.
+
+**Deploy note:** wardsynq.com is live (rota.js v2, shell.js v30, ward.js site51). stewardmd.in (server) has served no new deployment since ff5f14e (~50 min): Cloudflare lists them as deployed but answers "Deployment Not Found"; the previous one still serves. The same build runs correctly in local workerd (wrangler pages dev: /api/queue/ready 200 with documentStorage). Referral/rota/storage-check server routes go live when Cloudflare serves the new deployment.
+
+**Numbers:** 6092 passing, 0 failing. 14 routes waiting for a screen.
+**Next:** confirm storage round trip once live; P1.1 dynamic forms, P1.4 accounting, P1.15 outbox.
+
+### 2026-09-13 - P1.15 transactional outbox
+
+functions/_wardsynq/outbox.js: events staged through StagedRepository commit atomically with the business records; drainOutbox claims via next-version (no double claim), consumers recorded per event (retries skip succeeded ones), exponential backoff, dead after 6 with outboxHealth surfacing them, stale claims (>10 min) reclaimed. At-least-once, consumers must be idempotent (documented). Saved consultation carries one consultation.saved event. No production consumer registered yet; nothing to deploy visibly.
+
+**Deploy blocker (owner):** every stewardmd production deployment since ff5f14e is "Failure" (latest 3e2fdc9 from another session too); an identical preview deployment builds and serves. wrangler.toml unchanged since 2026-09-04; DOC_S3_* are valid encrypted secrets. Needs the failed deployment build log from the Cloudflare dashboard.
+
+**Numbers:** 6097 passing, 0 failing. 14 routes waiting for a screen.
+**Next:** P1.1 dynamic forms; P1.4 accounting.
+
+### 2026-09-13 - P1.4 accounting core; suite fix
+
+wardsynq/wardsynq-accounting.js (pure, beside the billing ledger): starter chart of accounts, balanced integer-paise journal entries on open accounts, no posting into closed periods, correction only by single reversal, trial balance as at a date, period close refused on unbalanced books, billing event -> entry mapping. Storage/routes/screens next. Fixed a suite failure merged from main: RxChoice prescription table used a star/tick emoji (forbidden by no-ui-emoji test; its own test asserted it). Process note: one commit (6dde3ef) was pushed while that inherited test was red because the gate checked output, not the fail count; fixed immediately (e7f2a09).
+
+**Deploy blocker (owner):** stewardmd production deployments still "Failure"; preview of the same code succeeds. Needs the build log.
+
+**Numbers:** 6109 passing, 0 failing. 14 routes waiting for a screen.
+
+### 2026-09-13 - production deploy fixed (text binding limit)
+
+Confirmed from the failed deployment log: "Failed to publish your Function. Got error: Too many text bindings, found a total of 129, they exceed the limit of 128." Started when the 4 DOC_S3_* secrets were added. Audited all 82 production secrets + 43 production vars against code: only GITHUB_OTA_TOKEN is referenced nowhere (OTA uses the OTA_R2 binding); the 6 AI_COST_CAP_<ROLE> vars looked unused but are read dynamically in functions/_credits.js and were kept. Deleted GITHUB_OTA_TOKEN only (129 -> 128). Storage secrets left as four separate provider-agnostic settings, per owner. Headroom is now zero: any new setting needs another verified removal first.
+
+### 2026-09-13 - owner decision
+
+Owner: park open issues (document bucket name InvalidBucketName; 14 unscreened routes; payment provider credentials) and finish P1 then P2 first; issues are sorted at the end.
+
+### 2026-09-13 - production deploy failed again (130 bindings)
+
+Another session added secrets CONNECT_AGENT_MODEL and CONNECT_AGENT_MODEL_PROVIDER (130 > 128). No unused secrets remained, so removed three production vars whose values equal the code default (behaviour identical, verified): DEVICE_LOCK_ON="0" (cfgFlag: KV override first, absent = off), PGLOG_VERIFY_BASE (default https://stewardmd.in), MAIK_CACHE_VERSION (default "1"). Count 127, one slot spare. Also shipped P1.4 accounting storage/routes/Accounts page and clinic billing postings.
+
+### 2026-09-13 - P1.1 hospital forms live
+
+wardsynq/wardsynq-forms.js engine + _forms_store.js (drafts, create-only published versions) + form-response.js (FormResponse checked server-side against the exact version). Admin Forms tab (JSON, problems listed, publish), ward chart Forms screen. FormResponse added to nurse write scope. Live: production deploy succeeded, ward.js site52, admin.js v10.
+
+**P1 done so far:** P1.1 forms, P1.4 accounting, P1.7 rostering, P1.8 referrals, P1.15 outbox.
+**Next:** P1.3 approval engine gaps, P1.2 supply chain gaps, P1.6 nursing command center, P1.9-14 top-ups, P1.5 TPA; then P2.
+**Numbers:** 6122 passing, 0 failing.
+
+### 2026-09-13 - forms follow-up questions
+
+Conditional form fields now appear on change (onFormChange redraw), ward.js site53, live. 6122 passing.
+**Next:** P1.6 nursing command center.
+
+### 2026-09-13 - P1.6 nurse worklist live
+
+GET /ward/nurse-worklist (MAR schedule overdue/due-next + NEWS2/PEWS per ward patient, sickest first, per-row read failures) + Nurse worklist screen and map tile. Bug fixed: unscorable early-warning score was total 0; now no number. Live (ward.js site54, shell.js v32), production deploy succeeded. 6127 passing.
+**P1 done:** 1.1 forms, 1.4 accounting, 1.6 nurse worklist (first cut: no nurse-patient assignment or task list yet), 1.7 rostering, 1.8 referrals, 1.15 outbox.
+**Next:** P1.3 approvals gaps, P1.2 supply chain gaps, P1.9-1.14 top-ups, P1.5 TPA; then P2.
+
+### 2026-09-13 - P1.3 approvals: roles and expiry
+
+approvalPolicy[subjectType] = { approverRoles, expiresHours } (whitelisted): approver role enforced, pending requests expire and must be resubmitted; no policy = unchanged. Amount thresholds NOT added (requester-supplied amount is dodgeable; needs server-held subject values such as a PO total, which purchasing does not store yet). Server-only change, deployed via main. 6128 passing.
+**Next:** P1.2 supply chain gaps (PO totals, partial/over receipt, FEFO, transfers), then amount thresholds on server-held values; P1.9-1.14; P1.5; then P2.
+
+### 2026-09-13 - P1.2 supply chain audit
+
+Already present: PO lines, approvals, partial and over-receipt detection (reported, never silently accepted), batch/expiry on receipt, near-expiry list, wastage, transfers (out+in), reorder list, count reconciliation, append-only ledger. GAP found, not built: FEFO needs per-batch on-hand, but dispensing does not record the batch, so any "take this batch" suggestion would be a guess. Next step for P1.2: record batch on dispense/return, then per-batch balances, then FEFO; PO line unit cost (enables server-held amount thresholds for approvals). Returns to supplier and pack/unit conversion also still to verify.
+
+### 2026-09-13 - P1.2 FEFO rules
+
+Correction to the audit above: dispenses DO record batch/expiry. Added pure batchBalances/fefoSuggestion in stock.js (earliest usable expiry first, expired/undated excluded with reason, shortfall reported, refuses when unbatched issues exist). 4 tests. Next: route + pharmacy screen for it; PO line unit cost.
+
+### 2026-09-13 - P1.2 FEFO on the pharmacy screen; stock fixes
+
+GET /ward/stock-fefo (ORDER_DISPENSE) + Inventory "Which batch to use" card. Fixed: stock levels and reconciliation swallowed a failed dispense read as [] (levels too high; reconciliation would post a wrong adjustment); a failed stock load read as "No stock movements"; two receipts of one drug in the same millisecond shared a movement id and the second overwrote the first (random tail added). Deployed.
+
+### 2026-09-13 - every route has a screen or a stated reason (owner: "every backend has frontend")
+
+Reachability 14 -> 0 without a screen. Wired: link-mrn (Patients page), maik-interactions (chart MaiK card history), metrics (Ward status card), readers + read (record detail: opening logs a decisive read; superseded versions show who saw them), twin-predict + twin-reconstruct (Digital twin forecast and look-back), order (clinic billing add-from-price-list). Recorded with reasons: hl7 (machine), backfill (operator only), clinic/hospital (opd.html computed path), recommend (runs on device), roi (superseded by roi-requests), round (superseded by schedule).
+Bugs fixed on the way: SAFETY medication round showed an unreadable dose record as not started (both routes; now "unknown" + warning; nurse worklist carries it). SECURITY clinic billing orders took price from the request (now tariff). SECURITY any account could create a hospital under a chosen id / run backfill (now platform operator only). link-mrn onto an in-use MR overwrote that patient. Ward metrics counted unreadable types as 0. Twin look-back dropped unreadable histories silently. ROI consent failure showed "not recorded". Clinic billing queues read failures as empty; billing ID counter had no compare-and-set. 6149 passing, 0 failing.
+Noted, not yet fixed: other time-derived record ids (fluid balance entry, handover, preauth) may share the same-millisecond collision class as stock movements; audit next. Patient-app routes (patient-enrol/messages/reply/revoke) are marked "patient's own app": P2.9 must build that app.
+**Next:** P1.2 PO line unit cost -> P1.3 amount thresholds; P1.6 nurse assignment + tasks; P1.9-1.14; P1.5; P2.
+
+### 2026-09-13 - P1.2 priced purchase orders + P1.3 approvals by amount; security fixes
+
+PO lines take unitPricePaise; order total computed server-side (null if any line unpriced). approvalPolicy[kind].amountThresholds [{abovePaise, levels}] uses only serverAmountPaise stamped on the request from the subject (PurchaseOrder); unknown amount = strictest; requester context ignored. Admin > Hospital "Approval rules" card; Purchasing screen shows price, total, approvals needed.
+Fixed: SECURITY raw record door let any prescriber write authority records (forged Verification approvals clearing restricted drugs, MedicationVerification skipping pharmacist, PatientConsent, EmergencyActivation, BreakGlassGrant, etc.) - now refused (route_governed). Restricted-medicine prescribing ignored the hospital's approver count (read a ctx field never passed). Pharmacy could neither raise a PO (grant) nor ask for approval (cap) - purchasing only worked for admins; now ORDER_DISPENSE grants PurchaseOrder/Vendor/Verification and may request approval for supply subjects only. Goods received against a PO never reached stock levels (no code, bare quantity). Same-ms PO id collision. 6157 passing.
+Still open in P1.3: delegation, escalation, parallel approvals. Existing GRNs written before today still show as stock "problems" (no_quantity) - visible, not auto-migrated.
+**Next:** P1.6 nurse-patient assignment + task list; P1.9 lab; P1.10 radiology; P1.11 ED; P1.12 ICU; P1.13 command center; P1.14 quality; P1.5 TPA; P1.3 delegation/escalation; P2.
+
+### 2026-09-13 - P1 gap audit (three read-only audits) and first build batch
+
+Audit findings, with evidence, drove this batch. Built and live:
+- P1.9 lab: opt-in second-person verification (labVerification.mode, Admin card), verify/return queue with delta/autoverify reasons, reference range + Corrected status on the entry form; critical loops still open immediately.
+- Critical-result escalation now runs on its own (ops-tick.js, background on ward traffic, once per 2 min per hospital): one escalation per level recorded on the loop with the notification attempt ("nobody was notified" when no channel). The P1.15 outbox is drained by the same tick (it had no caller - my earlier "done" was wrong).
+- P1.6 nursing (builder, reviewed): nurse-patient assignment, shift tasks, observation frequency with obs due, NEWS2-high flag (nothing paged), nursing note template, Mine/Whole ward.
+- P1.11 ED + care plan (builder, reviewed): re-triage history with reason, reassessment clock from edReassessMinutes, ED procedures, triage/disposition timeline events, referral from disposition, care plan view + goal progress (and fixed: care plan saves were always refused).
+- P1.12 ICU (builder, reviewed): ABG entry + interpretation, ventilator, RASS, vasopressor mcg/kg/min (refuses without weight/concentration), SOFA server-side (partial marked), sepsis screen (advisory), Code Sepsis on ICU charts, sparklines with gaps, round checklist.
+- UI false-empties fixed: critical results board (said none open while loading/failed), devices, lines, billing, fluid balance, purchasing.
+Known checker weakness: reachability matches route names without their segment, so a same-named route in another segment hides a gap (found: ward/plan vs onco /plan; ward/progress via templateId "progress"). Make seg-aware.
+Parked for owner (end): an external scheduler token for ops tick (optional), notification channel credentials (escalation currently records "no channel"), plus earlier parked items.
+**Next batch:** microbiology/culture-sensitivity; command center drill-down + ICU/OPD/staffing/finance/OT sections; quality measures + incident signal/confirm/category; radiology viewer launch + structured templates; P1.5 TPA adapters; checker seg-aware; then P2.
+
+### 2026-09-13 - checker segment-aware; ward/bed cross-hospital edits closed
+
+Reachability now keys routes by segment+sub (onco/plan no longer hides ward/plan; bare words need context). Found and built: Admin ward rename/deactivate, clinic billing "Waiting to be billed". SECURITY: ward/update and bed/update did not check the ward/bed belongs to the caller's hospital (now 404, test). Live verified: wardsynq.com serves ward.js site63/admin.js 13; /ward/results-to-verify answers 401 (deployed). 6199 passing.
+In flight (builders): microbiology + histopathology; command center drill-down; quality measures + incident signal/confirm; radiology viewer + TPA adapters.
+
+### 2026-09-13 - P1.9 microbiology/histopathology, P1.13 command center, P1.14 quality merged
+
+Builders reviewed and merged; live (ward.js site64).
+- Cultures (stages, organisms, S/I/R, positive blood culture opens one critical loop, "not tested" never S) and histopathology (addenda only after signing, second-person verification) as DiagnosticReport extensions; resistant-antibiotic advisory.
+- Command center: every count drills to patients/boards; ICU, OPD queue, staffing, lab TAT, radiology backlog, OT, pharmacy items, finance. SECURITY: twin ?finance=1 leaked billing/claims to any EMR_VIEW role; now BILLING_VIEW server-side.
+- Quality: incident categories (WHO ICPS), signal stage linked to source records, confirm/reject/duplicate (RCA/CAPA only after confirm), mortality/readmission/sepsis wired, LOS, falls/pressure injury rates, antibiotic DOT (needs antibiotics list), TAT, bed utilisation, case lists. 6231 passing.
+Waiting: radiology viewer + TPA builder. Then P2.
+
+### 2026-09-13 - P1.10 radiology viewer/templates + P1.5 payer adapters merged; P2 started
+
+Radiology: imagingViewer urlTemplate (https only, no names in URL) with "Open images" when a study UID/accession is known; ImagingStudy matched to orders; structured report templates. TPA: per-payer registry (org config payers), generic FHIR R4 Claim adapter (mocked fetch only - not verified against any payer), credentials via sealed credentialRef (existing CONNECT_MASTER_KEY, no new binding), estimate, acknowledge, settle, balance-to-patient as explicit action, rule warnings. Live ward.js site65. 6278 passing.
+P1 status: all P1 items now have server + screen; remaining limits are listed per builder (no live payer/PACS verification, notification channels unconfigured).
+P2 builders running: patient/family portal (P2.9), surveillance + copilot tasks (P2.3/2.2), security monitoring + restore evidence (P2.17/2.15).
+Parked for owner: payer credentials + endpoint per payer, PACS viewer URL, notification channel, document bucket name, payment provider credentials.
+
+### 2026-09-13 - P2.17 security review + P2.15 restore evidence merged
+
+Admin "Security review" tab (STAFF_ADMIN, doctor/nurse 403): chart-access anomalies vs own baseline, unusual exports, suspicious sign-ins, break-glass and privileged-action review queue (append-only, no self-review), data-protection status green only with a backup inside RPO AND a recorded successful restore test; audit storage that cannot be read shows "unavailable". Fixed on the way: backup export audit rows recorded a NULL actor. Not built: out-of-assignment reads (no staff-ward data), VIP flag, configurable audit retention. Live admin.js 14. 6290 passing.
+
+### 2026-09-13 - P2.3 surveillance + P2.2 copilot tasks, P2.9 patient portal merged
+
+Surveillance board (ward): deterministic signals with evidence links (deterioration trend, sepsis screen, critical lab trend, overdue care, medication risk needs highAlertDrugs/orderVerifyWithinHours config - "not evaluated" otherwise), append-only acknowledgement, raise as incident signal. Copilot: 8 MaiK tasks with record facts shown apart from reasoning; outage = no answer. Portal: wardsynq.com/portal.html (live 200) - patient and proxy access with grants, audited proxy reads, released-only data, messages, consent withdraw (non-treatment); staff "Patient portal" tile; needs wardsynq.patientAccess.enabled per hospital. Not built: queue status, released documents, full discharge summary in portal. Live shell 34, ward.js site66. 6328 passing.
+**Next P2:** offline-first (P2.4), FHIR platform depth (P2.5), India profile (P2.6), multilingual (P2.7), voice notes (P2.8), hospital intelligence (P2.10), specialty framework + pathways (P2.11/2.12), developer platform (P2.13), multi-hospital (P2.14), UX bar (P2.16).
+
+### 2026-09-13 - P2 builders completed: P2.12/2.11 pathways & specialty, P2.6/2.7 India & multilingual, P2.4 offline-first
+
+Resumed and completed all three stopped P2 builders:
+- P2.12 Clinical pathways & P2.11 Specialty framework: authoring in Admin > Pathways card (`/pathways/draft`, `/pathways/publish`, `/pathways/retire`), bedside pathways view (`loadPathways`, `pathwayEnrol`, `pathwayOverride`), specialty timeline panel with dangling reference safety. 5/5 tests in `test/wardsynq-pathways.test.mjs`.
+- P2.6 India profile & P2.7 Multilingual: GSTIN mod-36 validation & line calculation on invoices, ABDM HFR/HPR identifier validation, India region profiles on orgs, Devanagari phonetic transliteration in MPI patient search (`wardsynq-mpi.js`), and patient-facing `wardsynq/site/i18n.js` with non-translation invariant for clinical entities. 8/8 tests in `test/wardsynq-region-in.test.mjs`.
+- P2.4 Offline-first clinical operation: IndexedDB-backed `ward-offline.js` bedside queue & cache, `requestContextOf` offline headers (`X-Offline-Created-At`, conflict reason), idempotency replay in `RecordService.replayFor()`, audit capturing offline creation time alongside server sync time, `_worker.js` header forwarding. 4/4 tests in `test/wardsynq-offline.test.mjs`.
+- Reachability: 0 routes without a screen (365 reachable, 30 machine-only). Regression: 6316 pass, 0 fail, 1 skipped. Live admin.js 15, ward.js site67, ward-offline.js 1.
+

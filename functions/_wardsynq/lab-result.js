@@ -226,11 +226,20 @@ async function releaseResult(request, env, ctx) {
     }
   }
 
+  /* SECOND-PERSON VERIFICATION (P1.9), when the hospital asks for it (labVerification.mode =
+   * "second-person"). A FINAL result that the hospital's own autoverification did not pass goes on the
+   * chart as PRELIMINARY, awaiting verification, and a different person makes it final. It is still on
+   * the chart and a critical value still opens its loop: holding a potassium of 7 back from the ward
+   * until somebody signs it off is the harm this must never cause. Without the setting, nothing changes. */
+  const needsSecond = str(ctx.labVerification && ctx.labVerification.mode) === "second-person"
+    && status === "final" && results.some((x) => !x.autoVerified);
+  const storedStatus = needsSecond ? "preliminary" : status;
+
   const report = DiagnosticReport({
     id: reportId, patientId, encounterId: str(ctx.encounterId) || (sr && sr.encounterId) || null,
     serviceRequestId: serviceRequestId || null,
     code: str(ctx.panel) || (sr && (sr.display || sr.code)) || "Laboratory result",
-    status,
+    status: storedStatus,
     // Never composed. A conclusion is the laboratory's own words or there is none.
     conclusion: str(ctx.conclusion) || null,
     resultObservationIds: observations.map((o) => o.id),
@@ -240,11 +249,13 @@ async function releaseResult(request, env, ctx) {
   report.reportedAt = reportedAt;
   report.releasedBy = resolved.actor.id;
   if (!serviceRequestId) report.unsolicited = true;
+  if (needsSecond) report.awaitingVerification = true;
 
   try {
     const out = await svc.put(report, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
     return {
-      ...base, ok: true, written: written + 1, reportId, patientId, status,
+      ...base, ok: true, written: written + 1, reportId, patientId, status: storedStatus,
+      ...(needsSecond ? { awaitingVerification: true, detail: "On the chart as preliminary. Another member of the laboratory must verify it before it is final. A critical value has still been checked." } : {}),
       serviceRequestId: serviceRequestId || null, unsolicited: !serviceRequestId,
       observations: results, critical: report.critical,
       /* Counted at the top level, because these are the two numbers a laboratory acts on. A breach
@@ -261,6 +272,69 @@ async function releaseResult(request, env, ctx) {
   } catch (e) {
     return { ...base, ...writeFailure(e, { reportId, written, observations: results, actor: resolved.actor.id }) };
   }
+}
+
+/** ctx: { migration, reportId, decision: "verify"|"return", reason?, expectedVersion? }. A different
+ *  person from whoever released it makes it final, or returns it for re-entry with a reason. */
+async function verifyResult(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const reportId = str(ctx.reportId), decision = str(ctx.decision), reason = str(ctx.reason);
+  if (!reportId) return { ...base, ok: false, status: 422, error: "report_required", written: 0 };
+  if (decision !== "verify" && decision !== "return") return { ...base, ok: false, status: 400, error: "unknown_decision", detail: "decision is verify or return", written: 0 };
+  if (decision === "return" && !reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "Say what needs checking or re-entering.", written: 0 };
+
+  const { svc, resolved, error } = await open(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+  let report;
+  try { report = await svc.get("DiagnosticReport", reportId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (!report) return { ...base, ok: false, status: 404, error: "report_not_found", written: 0 };
+  if (!report.awaitingVerification) return { ...base, ok: false, status: 409, error: "not_awaiting_verification", detail: "This result is not waiting for verification.", reportStatus: report.status, written: 0 };
+  if (str(report.releasedBy) === resolved.actor.id) {
+    return { ...base, ok: false, status: 403, error: "cannot_verify_own", detail: "You entered this result, so somebody else must verify it.", written: 0 };
+  }
+  const at = new Date().toISOString();
+  const next = decision === "verify"
+    ? { ...report, status: "final", awaitingVerification: false, verifiedBy: resolved.actor.id, verifiedAt: at }
+    : { ...report, awaitingVerification: false, returned: { by: resolved.actor.id, at, reason } };
+  delete next.version; delete next.meta; delete next.writtenBy;
+  try {
+    const out = await svc.put(next, { expectedVersion: ctx.expectedVersion != null ? Number(ctx.expectedVersion) : report.version });
+    return { ...base, ok: true, written: 1, reportId, decision, status: next.status, version: out.record.version, actor: resolved.actor.id };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { reportId, written: 0 }) };
+  }
+}
+
+/** Every result waiting for a second person, with the reasons autoverification gave. */
+async function resultsToVerify(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", results: [] };
+  const { svc, resolved, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error, results: [] };
+  const CAP = 500;
+  let reports;
+  try { reports = (await svc.list("DiagnosticReport", CAP)) || []; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), results: [] }; }
+  const waiting = reports.filter((r) => r && r.awaitingVerification);
+  const results = [];
+  for (const r of waiting) {
+    const obs = [];
+    let unread = 0;
+    for (const id of r.resultObservationIds || []) {
+      try {
+        const o = await svc.get("Observation", id);
+        if (o) obs.push({ id: o.id, display: o.display || o.code, value: o.value, unit: o.unit || null, referenceRange: o.referenceRange || null, deltaBreach: o.deltaBreach || null, autoVerified: o.autoVerified === true, critical: o.sourceCritical === true });
+      } catch { unread += 1; }
+    }
+    results.push({ reportId: r.id, patientId: r.patientId, panel: r.code, reportedAt: r.reportedAt || null, releasedBy: r.releasedBy || null,
+      mine: str(r.releasedBy) === resolved.actor.id, version: r.version, observations: obs, ...(unread ? { unreadObservations: unread } : {}) });
+  }
+  results.sort((a, b) => str(a.reportedAt).localeCompare(str(b.reportedAt)));
+  return { ...base, ok: true, results, ...(reports.length >= CAP ? { partial: true, partialWarning: `Only the latest ${CAP} reports were checked; older results waiting for verification may be missing.` } : {}) };
 }
 
 /** The tests still waiting on a result. ctx: { migration, patientId, actorDeps, recordDeps } */
@@ -303,5 +377,5 @@ async function pendingRequests(request, env, ctx) {
 
 export {
   CATEGORY, LOCAL_SYSTEM, STATUSES, codeForTest, reportIdFor, observationIdFor, observationsFrom,
-  releaseResult, pendingRequests,
+  releaseResult, pendingRequests, verifyResult, resultsToVerify,
 };

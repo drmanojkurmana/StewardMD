@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Your record - WardSynQ</title>
+<!-- wardsynq.com/portal.html - the patient's and family's own page (P2.9). No staff sign-in, no
+     Firebase, no shell: it calls only /api/portal/*, which checks the access on the server. -->
+<link rel="icon" type="image/png" sizes="32x32" href="/wardsynq/ui/brand/icon-32.png">
+<link rel="stylesheet" href="/wardsynq/ui/wardsynq.css?v=11">
+<link rel="stylesheet" href="/wardsynq/site/shell.css?v=5">
+<style>
+  body { margin: 0; }
+  #portal { max-width: 640px; margin: 0 auto; padding: 16px; font-size: 17px; line-height: 1.5; }
+  #portal .card { display: block; padding: 12px 0; border-bottom: 1px solid var(--hair, #ddd); }
+  #portal .card::before { display: none; }
+  #portal .f { margin: 10px 0; }
+  #portal input, #portal textarea { font-size: 17px; padding: 10px; width: 100%; box-sizing: border-box; }
+  #portal .btn { min-height: 44px; padding: 0 16px; margin-top: 8px; }
+  #portal .plist { padding-left: 18px; }
+  #portal .plist > li { margin: 10px 0; }
+  #portal h1 { font-size: 22px; }
+  #portal :focus-visible { outline: 3px solid #1c3048; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main id="portal" aria-live="polite"></main>
+<script src="/wardsynq/site/portal.js?v=1"></script>
+<script src="/wardsynq/site/bug-reporter.js?v=1"></script>
+</body>
+</html>

@@ -31,6 +31,7 @@ import { RecordService } from "./service.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { poTotalPaise } from "./purchasing.js";
 
 const str = (v) => (typeof v === "string" ? v.trim() : "");
 const lower = (v) => str(v).toLowerCase();
@@ -180,12 +181,31 @@ async function chainRows(svc, requestId) {
   return (all || []).filter((r) => r && (str(r.id) === requestId || str(r.parentVerificationId) === requestId));
 }
 
-/** How many distinct approvers this hospital wants. Org config, the same way note writers are. */
-function levelsFor(ctx, subjectType) {
+/** How many distinct approvers this hospital wants. Org config, the same way note writers are.
+ *
+ * AMOUNT THRESHOLDS (P1.3): approvalPolicy[subjectType].amountThresholds = [{ abovePaise, levels }].
+ * The amount is only ever the one the SERVER worked out from the subject when the request was made
+ * (a purchase order's own priced lines), never one the requester typed. When thresholds are set and
+ * no server amount exists - an unpriced line, a subject type with no amount - the strictest level
+ * applies, so leaving a price out can never mean fewer approvers. */
+function levelsFor(ctx, subjectType, amountPaise) {
   const cfg = ctx && ctx.wsqCfg && ctx.wsqCfg.approvalLevels;
   const n = cfg && typeof cfg === "object" ? cfg[str(subjectType)] : null;
-  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+  const base = Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+  const t = policyFor(ctx, subjectType).amountThresholds;
+  const valid = (Array.isArray(t) ? t : []).filter((x) => x && Number.isFinite(Number(x.abovePaise)) && Number(x.levels) >= 1);
+  if (!valid.length) return base;
+  const hit = Number.isFinite(amountPaise) ? valid.filter((x) => amountPaise > Number(x.abovePaise)) : valid;
+  return Math.max(base, ...hit.map((x) => Math.floor(Number(x.levels))));
 }
+/** The hospital's approval policy for a subject type: { approverRoles?, expiresHours? }. */
+function policyFor(ctx, subjectType) {
+  const all = ctx && ctx.wsqCfg && ctx.wsqCfg.approvalPolicy;
+  const p = all && typeof all === "object" ? all[str(subjectType)] : null;
+  return p && typeof p === "object" ? p : {};
+}
+/* Only the server-set amount counts. context.amountPaise is the requester's own words and is ignored. */
+const amountOf = (row) => { const a = row && row.serverAmountPaise != null ? Number(row.serverAmountPaise) : NaN; return Number.isFinite(a) ? a : undefined; };
 
 /** Asks for an approval. Creates the chain; approves nothing. */
 async function requestVerification(request, env, ctx) {
@@ -210,11 +230,22 @@ async function requestVerification(request, env, ctx) {
   const id = verificationIdFor(subjectType, subjectId, at);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
+  /* The amount an approval is judged on, read from the subject itself. A purchase order that does not
+   * exist cannot be approved into existence. */
+  let serverAmountPaise = null;
+  if (subjectType === "PurchaseOrder") {
+    let po;
+    try { po = await svc.get("PurchaseOrder", subjectId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    if (!po) return { ...base, ok: false, status: 404, error: "subject_not_found", detail: "There is no purchase order with that reference.", written: 0 };
+    serverAmountPaise = poTotalPaise(po);
+  }
+
   try {
-    const rec = requestRecord({ id, subjectType, subjectId, by: resolved.actor.id, reason, at, context: ctx.context });
+    const rec = { ...requestRecord({ id, subjectType, subjectId, by: resolved.actor.id, reason, at, context: ctx.context }), ...(serverAmountPaise !== null ? { serverAmountPaise } : {}) };
     const out = await svc.put(rec, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, verificationId: id, subjectType, subjectId,
-      state: "pending", required: levelsFor(ctx, subjectType), version: out.record.version, actor: resolved.actor.id };
+      state: "pending", required: levelsFor(ctx, subjectType, amountOf(rec)), amountPaise: serverAmountPaise, version: out.record.version, actor: resolved.actor.id };
   } catch (e) {
     return { ...base, ...writeFailure(e), written: 0 };
   }
@@ -238,7 +269,21 @@ async function recordVerification(request, env, ctx) {
   try { rows = await chainRows(svc, requestId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
 
-  const before = chainState(rows, levelsFor(ctx, rows.length ? rows[0].subjectType : ""));
+  const reqRow = rows.find((r) => lower(r.kind) === "request") || rows[0] || null;
+  const subjectTypeOf = reqRow ? reqRow.subjectType : "";
+  const before = chainState(rows, levelsFor(ctx, subjectTypeOf, amountOf(reqRow)));
+  const policy = policyFor(ctx, subjectTypeOf);
+  /* ROLE-BASED APPROVERS (P1.3): when the hospital names the roles that may approve this kind of thing,
+   * anyone else may reject or withdraw their own decision, but not approve. */
+  if (decision === "approved" && Array.isArray(policy.approverRoles) && policy.approverRoles.length && policy.approverRoles.indexOf(resolved.role) < 0) {
+    return { ...base, ok: false, status: 403, error: "not_an_approver_role", detail: "Your role cannot approve this. It needs: " + policy.approverRoles.join(", ") + ".", written: 0 };
+  }
+  /* EXPIRY (P1.3): a request still pending past the hospital's time limit cannot be approved; it is
+   * resubmitted as a fresh request, so a months-old reason is never quietly rubber-stamped. */
+  if (decision === "approved" && Number.isFinite(policy.expiresHours) && reqRow && before.state === "pending"
+      && Date.parse(reqRow.at) + policy.expiresHours * 3600e3 < Date.parse(str(ctx.at) || new Date().toISOString())) {
+    return { ...base, ok: false, status: 409, error: "request_expired", detail: `This request is older than ${policy.expiresHours} hours. Ask again with a fresh request.`, written: 0 };
+  }
   const allowed = mayDecide(before, resolved.actor.id, decision);
   if (!allowed.ok) {
     /* Each of these is a different thing to do about it, so each says so plainly rather than all
@@ -265,7 +310,7 @@ async function recordVerification(request, env, ctx) {
     const rec = decisionRecord({ id, requestId, subjectType: before.subjectType, subjectId: before.subjectId,
       by: resolved.actor.id, decision, reason: ctx.reason, at, withdraws });
     const out = await svc.put(rec, { idempotencyKey: ctx.idempotencyKey || null });
-    const after = chainState([...rows, rec], levelsFor(ctx, before.subjectType));
+    const after = chainState([...rows, rec], levelsFor(ctx, before.subjectType, amountOf(reqRow)));
     return { ...base, ok: true, written: 1, verificationId: requestId, decisionId: id,
       state: after.state, approvals: after.approvals, required: after.required, approvers: after.approvers,
       version: out.record.version, actor: resolved.actor.id };
@@ -298,7 +343,7 @@ async function listVerifications(request, env, ctx) {
 
   const wantSubject = str(ctx.subjectId);
   const verifications = [...byRequest.entries()]
-    .map(([id, rows]) => ({ verificationId: id, ...chainState(rows, levelsFor(ctx, rows[0] && rows[0].subjectType)),
+    .map(([id, rows]) => ({ verificationId: id, ...chainState(rows, levelsFor(ctx, rows[0] && rows[0].subjectType, amountOf(rows.find((r) => lower(r.kind) === "request")))),
       history: rows.slice().sort((a, b) => str(a.at).localeCompare(str(b.at)))
         .map((r) => ({ id: str(r.id), kind: str(r.kind), decision: lower(r.decision) || null, by: str(r.by), at: str(r.at), reason: str(r.reason) || null })) }))
     .filter((v) => v.state !== "none")
@@ -316,6 +361,6 @@ function writeFailure(e) {
 
 export {
   DECISIONS, SUBJECT_TYPES, verificationIdFor, chainState, mayDecide,
-  requestRecord, decisionRecord, approvalCovers,
+  requestRecord, decisionRecord, approvalCovers, levelsFor, amountOf,
   requestVerification, recordVerification, listVerifications,
 };
