@@ -549,7 +549,27 @@ function orderFromWardRequest(input) {
    * course stops has to be there before a schedule is allowed to assert anything is due. */
   const stopAt = str(input.stopAt);
   if (stopAt && Number.isFinite(Date.parse(stopAt))) order.stopAt = new Date(Date.parse(stopAt)).toISOString();
+  /* Patient instructions, bolted on the same way: CODES from a closed list, never words. Their English and
+   * every translation come from the i18n catalog (wardsynq/site/i18n.js "rx.instr.<code>"), so a printout
+   * in the patient's language can carry them without translating anything a clinician typed. Unknown
+   * codes are refused in createWardMedicationOrder before this runs; here they are simply not kept. */
+  const instr = Array.isArray(input.patientInstructions) ? PATIENT_INSTRUCTIONS.filter((c) => input.patientInstructions.includes(c)) : [];
+  if (instr.length) order.patientInstructions = instr;
   return order;
+}
+
+/* The closed list a prescriber picks patient instructions from, in the order they print. Pinned to the
+ * catalog's "rx.instr.*" keys by test/wardsynq-print-lang.test.mjs. Every negated one says "Do not", so
+ * the negation check in test/wardsynq-i18n.test.mjs applies to its translations. */
+const PATIENT_INSTRUCTIONS = Object.freeze(["after-food", "before-food", "with-food", "empty-stomach", "in-the-morning", "at-bedtime",
+  "swallow-whole", "do-not-crush", "drink-water", "do-not-drink-alcohol", "do-not-drive-if-drowsy", "do-not-stop-without-doctor", "finish-course"]);
+
+/** PURE. null when every instruction is a known code, else the refusal detail. Absent is fine. */
+function patientInstructionsRefusal(v) {
+  if (v === undefined || v === null) return null;
+  if (!Array.isArray(v)) return "patientInstructions must be a list of instruction codes.";
+  const bad = v.filter((c) => typeof c !== "string" || !PATIENT_INSTRUCTIONS.includes(c));
+  return bad.length ? "Not an instruction on the list: " + bad.map(String).join(", ") + ". Nothing was prescribed." : null;
 }
 
 /**
@@ -564,6 +584,10 @@ async function createWardMedicationOrder(request, env, ctx) {
 
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
+
+  // After authorization, so a caller who may not prescribe learns nothing about the list.
+  const instrRefusal = patientInstructionsRefusal(ctx.order && ctx.order.patientInstructions);
+  if (instrRefusal) return { ...base, ok: false, status: 422, error: "unknown_patient_instruction", detail: instrRefusal, allowed: PATIENT_INSTRUCTIONS, written: 0 };
 
   const candidate = orderFromWardRequest({ ...(ctx.order || {}), prescriberId: resolved.actor.id });
   if (!candidate) return { ...base, ok: false, status: 422, error: "order_incomplete", detail: "drug, patientId, encounterId and a numeric dose {value, unit} are all required", written: 0 };
@@ -1257,7 +1281,7 @@ async function patientTimeline(request, env, ctx) {
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
-  recordWardVitals, orderFromWardRequest, createWardMedicationOrder,
+  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,

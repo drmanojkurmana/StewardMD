@@ -414,6 +414,13 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
    both must be legible in black and white. Only the section headings are new. */
 #smdWard .w-dt-p h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: .01em; }
 #smdWard .w-dt-p h3 + .w-dt-alg { margin-top: 0; }
+/* The second language (wardsynq/site/print-lang.js): a dashed box after the English section it belongs to,
+   labelled, so on paper it can never be read as part of the English record. */
+#smdWard .p-tr { border: 1.5px dashed var(--outline-variant); border-radius: 12px; padding: 8px 12px; font-size: 14px; }
+#smdWard .p-tr h3, #smdWard .p-tr h4 { margin: 2px 0 4px; font-size: 14px; }
+#smdWard .p-tr p, #smdWard .p-tr ul { margin: 2px 0; }
+#smdWard .p-tr-l { display: block; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); }
+#smdWard .p-tr-auth { font-weight: 600; }
 
 @media print {
   /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
@@ -428,6 +435,8 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
      weight rather than relying on a tint that prints as pale grey. */
   #smdWard .w-dt-warn { background: none; color: #000 !important; border: 1.5pt solid #000; border-radius: 0; font-weight: 600; }
   #smdWard .w-dt-gap { background: none; color: #000; border: 1.5pt solid #000; border-radius: 0; }
+  #smdWard .p-tr { border: 1pt dashed #000; border-radius: 0; color: #000; page-break-inside: avoid; break-inside: avoid; margin-bottom: 12pt; }
+  #smdWard .p-tr-l { color: #000; }
   @page { size: A4; margin: 12mm; }
 }
 

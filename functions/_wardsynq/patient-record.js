@@ -169,7 +169,9 @@ async function assemble(svc, patientId, neverRelease) {
      * carries it to the next hospital, and one this file could trim would not be worth carrying. */
     allergies: (allergies || []).filter(Boolean).map((a) => ({ substance: a.substance, reaction: a.reaction || null, severity: a.severity || null, criticality: a.criticality || null })),
     medicines: (meds || []).filter(Boolean).filter((m) => str(m.status) !== "stopped" && str(m.status) !== "cancelled")
-      .map((m) => ({ drug: m.drug || m.drugCode, dose: m.dose || null, route: m.route || null, frequency: m.frequency || null, note: m.note || null })),
+      .map((m) => ({ drug: m.drug || m.drugCode, dose: m.dose || null, route: m.route || null, frequency: m.frequency || null, note: m.note || null,
+        // Closed-list codes (migrate-inpatient.js PATIENT_INSTRUCTIONS); the page prints their catalog wording.
+        ...(Array.isArray(m.patientInstructions) && m.patientInstructions.length ? { patientInstructions: m.patientInstructions.map(String) } : {}) })),
     results: released, withheldResults: withheld,
     appointments: (appointments || []).filter(Boolean).map((a) => ({ at: a.startsAt || a.at || null, with: a.clinicianName || a.clinicianId || null, kind: a.kind || null })),
   };

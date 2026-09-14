@@ -178,6 +178,47 @@
     "pcopy.apptsEmpty": "No appointment is booked.",
     "pcopy.print": "Print",
 
+    /* PRINTS IN A SECOND LANGUAGE (owner decision 2026-09-15, wardsynq/site/print-lang.js). The English print
+     * stays whole; these are the only words its translated part may carry: headings, labels, and the patient
+     * instructions a prescriber picked from the closed list (functions/_wardsynq/migrate-inpatient.js
+     * PATIENT_INSTRUCTIONS, one "rx.instr.<code>" key per code). print.dc.* match discharge.js's English
+     * headings word for word, so a heading and its translation say the same thing. */
+    "print.tr.label": "Translation",
+    "print.tr.authority.rx": "The English prescription is the authoritative one. Medicine names, doses, diagnoses, results and anything else your care team recorded are printed in English only.",
+    "print.tr.authority.dc": "The English discharge summary is the authoritative one. Medicine names, doses, diagnoses, results and anything else your care team recorded are printed in English only.",
+    "print.tr.englishOnly": "This part is printed in English only, exactly as your care team recorded it.",
+    "print.dc.title": "Discharge summary",
+    "print.dc.field.patient": "Patient",
+    "print.dc.field.sex": "Sex",
+    "print.dc.field.ward": "Ward",
+    "print.dc.field.admitted": "Admitted",
+    "print.dc.field.discharged": "Discharged",
+    "print.dc.section.admission": "Admission and stay",
+    "print.dc.section.diagnoses": "Diagnoses",
+    "print.dc.section.allergies": "Allergies",
+    "print.dc.section.vitals": "Clinical course",
+    "print.dc.section.investigations": "Investigations",
+    "print.dc.section.medications": "Medications",
+    "print.dc.section.assessment": "Assessment",
+    "print.dc.section.plan": "Plan and follow-up",
+    "print.dc.provenance": "Provenance",
+    "print.dc.signedBy": "Signed by",
+    "print.dc.unsigned": "Unsigned draft. This is not a final discharge summary.",
+
+    "rx.instr.after-food": "After food",
+    "rx.instr.before-food": "Before food",
+    "rx.instr.with-food": "With food",
+    "rx.instr.empty-stomach": "On an empty stomach",
+    "rx.instr.in-the-morning": "In the morning",
+    "rx.instr.at-bedtime": "At bedtime",
+    "rx.instr.swallow-whole": "Swallow whole",
+    "rx.instr.do-not-crush": "Do not crush or chew",
+    "rx.instr.drink-water": "Drink plenty of water",
+    "rx.instr.do-not-drink-alcohol": "Do not drink alcohol",
+    "rx.instr.do-not-drive-if-drowsy": "Do not drive if it makes you drowsy",
+    "rx.instr.do-not-stop-without-doctor": "Do not stop taking it without asking your doctor",
+    "rx.instr.finish-course": "Finish the full course",
+
     "nav.map": "Map",
     "nav.workstation": "Workstation",
     "nav.ward": "Ward",

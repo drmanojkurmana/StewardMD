@@ -6255,3 +6255,33 @@ duty. Nurses and residents can turn themselves OFF duty in the StewardMD app."
   screens), `test/wardsynq-ward-duty-team.test.mjs` (routes, negative auth, audit-in-one-commit, real-rota dispatch),
   `test/org-level2-nurse-rule-route.test.mjs`, `test/wardsynq-hospital-group.test.mjs`, `test/wardsynq-alert-dispatch.test.mjs`,
   `test/run-ward-duty-golden-path.mjs` (headless Chrome, real ward.js).
+
+## 2026-09-15 Bilingual patient prints: English whole and authoritative, a second language optional, catalog words only (owner decision)
+
+Owner decision 2026-09-15: printouts in the patient's language, "ENGLISH MAIN, other languages OPTIONAL, English must
+stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's `wardsynq-rx-print.js` stays rejected.
+- **Setting** `wardsynq.printLanguages.enabled`, default false, whitelisted in `_opd_org.js wardsynqConfig`, saved on
+  Admin > Hospital ("Printouts in the patient's language") through `POST /org/update`. Only `enabled === true` turns it on.
+- **Prints**: the Patient copy (ward.js `pcopyView`, the patient's medicines, i.e. the prescription) and the discharge
+  summary (discharge.js `printable`). `GET /ward/patient-copy` and `GET /ward/discharge-summary` return
+  `print = {languagesEnabled, timeZone, utcOffsetMinutes}` (`wsqPrintSettings` in the router). With it off there is no
+  picker. With it on, a per-print picker offers the eight other portal languages; "English only" is the default.
+- **English never changes with the option**: the English document is drawn exactly as without it; a picked language
+  only adds `<aside class="p-tr" data-print-lang>` blocks between sections (`wardsynq/site/print-lang.js`). Stripping
+  them gives the byte-identical English (golden test). An aside holds catalog strings only: headings, labels, the
+  authority line (in English and the language, at the top of the translated part), "printed in English only", and
+  closed-list patient instructions. Drug names appear only in English (`<b lang="en">`); doses, units, routes,
+  frequencies, diagnoses, results and free text never appear in an aside. Missing key: English, never blank.
+- **Patient instructions are codes from a closed list** (`PATIENT_INSTRUCTIONS` in `migrate-inpatient.js`, 13 codes),
+  picked on the consultation and the chart's prescribing card, stored as `MedicationOrder.patientInstructions`,
+  refused with 422 `unknown_patient_instruction` after authorization. English and translations come from
+  `rx.instr.<code>` catalog keys; the English print shows them under the frequency. Negated ones are worded "Do not",
+  and `test/wardsynq-i18n.test.mjs` finds every negated print/instruction key by its words and checks each language's
+  negation markers.
+- **Dates on both prints**: "15 Sep 2026, 09:05" in the hospital's clock (IANA zone, else offset, India default 330,
+  else labelled UTC); only ISO strings are read, anything else prints as stored. This applies with the option off too.
+- **Fix found on the way**: discharge.css hid every body child but `#smdDischarge` on any print, so the Patient copy
+  and the downtime pack printed blank on pages loading both files; now scoped to `body:has(> #smdDischarge.on)`.
+- Translations of the new keys are not written here (another builder fills them, `reviewed:false`).
+- Tests: `test/wardsynq-print-lang.test.mjs`, `test/wardsynq-print-lang-routes.test.mjs`, `test/run-print-lang-ui.mjs`
+  (headless Chrome print preview and PDF), `test/wardsynq-i18n.test.mjs` (negation).

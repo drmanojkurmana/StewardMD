@@ -203,6 +203,8 @@ body.dark #smdDischarge .d-btn.sign { color: #1a1030; }
 }
 #smdDischarge .d-actions .d-btn.sign { margin-left: auto; }
 #smdDischarge .d-actions .d-hint { margin: 0; flex: 1; }
+#smdDischarge .d-lang { display: inline-flex; align-items: center; gap: 6px; font: 600 12.5px var(--d-sans); color: var(--on-surface-variant); }
+#smdDischarge .d-lang select { font: 500 13px var(--d-sans); padding: 6px 8px; border-radius: 8px; border: 1px solid var(--outline-variant); background: var(--surface); color: var(--on-surface); }
 #smdDischarge .d-actwarn { display: inline-flex; align-items: center; gap: 5px; font: 600 12px var(--d-sans); color: var(--sev-warning-fg); }
 #smdDischarge .d-actwarn .material-symbols-outlined { font-size: 16px; }
 #smdDischarge .d-actions.locked { gap: 12px; }
@@ -223,7 +225,9 @@ body.dark #smdDischarge .d-btn.sign { color: #1a1030; }
  * goes wrong. Same approach protocol-sheet.css already takes.
  */
 @media print {
-  body > *:not(#smdDischarge) { display: none !important; }
+  /* Only while the summary is open. Unscoped, this hid #smdWard on every print, so the Patient copy and the
+     downtime pack printed as blank pages on any page that also loads this file (found 2026-09-15). */
+  body:has(> #smdDischarge.on) > *:not(#smdDischarge) { display: none !important; }
   #smdDischarge { position: static !important; display: block !important; background: #fff !important; color: #000 !important; }
   #smdDischarge .d-shell { display: none !important; }
   #smdDischarge .d-print { display: block !important; font: 400 11pt/1.5 Georgia, "Times New Roman", serif; color: #000; }
@@ -237,6 +241,11 @@ body.dark #smdDischarge .d-btn.sign { color: #1a1030; }
   #smdDischarge .d-print h2 em { font: italic 8.5pt var(--d-sans); text-transform: none; letter-spacing: 0; color: #444; }
   #smdDischarge .d-print p { margin: 0; white-space: pre-wrap; }
   #smdDischarge .d-print .p-prov p { font-size: 9pt; color: #333; }
+  /* The second language: a labelled dashed box after its English block, never mistaken for the record. */
+  #smdDischarge .d-print .p-tr { display: block; border: 1pt dashed #000; padding: 1.5mm 3mm; margin: 0 0 4mm; font: 400 10pt var(--d-sans); break-inside: avoid; }
+  #smdDischarge .d-print .p-tr h2 { border-bottom: 0; margin: 0 0 1mm; }
+  #smdDischarge .d-print .p-tr-l { display: block; font: 700 7.5pt var(--d-sans); text-transform: uppercase; letter-spacing: .06em; }
+  #smdDischarge .d-print .p-tr-auth { font-weight: 600; }
   #smdDischarge .d-print .p-sig { margin-top: 12mm; break-inside: avoid; }
   #smdDischarge .d-print .p-sig .ln { border-top: 1px solid #000; width: 70mm; margin-bottom: 1.5mm; }
   #smdDischarge .d-print .p-sig span { font: 600 9.5pt var(--d-sans); }

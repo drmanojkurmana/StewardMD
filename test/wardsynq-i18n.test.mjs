@@ -88,7 +88,11 @@ for (const code of LANGS) {
  * keys without a marker list here fails, so the check cannot be skipped by accident. Markers are
  * substrings (Indic negation is often a verb suffix: Telugu కాలేదు, లేరు). */
 const NEGATED_KEYS = ["lang.codedNote", "section.failed", "phase.failed", "status.failed", "status.empty", "status.ambiguous",
-  "allergy.empty", "pcopy.noAllergies", "msg.notEmergency", "action.failed", "appt.askNote", "signin.invalid"];
+  "allergy.empty", "pcopy.noAllergies", "msg.notEmergency", "action.failed", "appt.askNote", "signin.invalid",
+  /* Bilingual prints (2026-09-15): every print wording and closed-list patient instruction whose English says
+   * not / no / never / avoid ("Do not crush or chew") is found here by its words, so a new negated phrase is
+   * checked without anyone remembering to list it. */
+  ...Object.entries(loadEngine()._catalogs.en).filter(([k, v]) => /^(print|rx\.instr)\./.test(k) && /\b(not|no|never|avoid)\b/i.test(v)).map(([k]) => k)];
 const NEGATION = {
   es: ["no ", "No ", "nada", "ningun", "ninguna"],
   te: ["లేదు", "లేరు", "లేవు", "కాదు", "కాలేదు", "చెల్లదు", "లేకపోయ", "అనువదించరు"],
