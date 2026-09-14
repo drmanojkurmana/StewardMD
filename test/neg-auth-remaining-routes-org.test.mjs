@@ -267,7 +267,7 @@ test("POST /room/update: no session refused, wrong-role refused (nothing written
  * scope) - it has no way to verify the room's true owner, and nothing else in the handler does
  * either. An admin of hospital B can rename, or deactivate, hospital A's room by id - just by
  * passing their OWN orgId (which they legitimately administer) alongside hospital A's roomId. */
-test("POST /room/update should refuse to let an admin of a DIFFERENT hospital rename this room by naming it", { skip: "BUG: functions/api/queue/[[path]].js:3869 (POST /room/update) never checks the room's actual orgId against body.orgId, unlike ward/update and bed/update on the same block which both do - an admin of a different hospital can rename/deactivate this room by id, using only their own hospital's orgId to pass the capability check." }, async () => {
+test("POST /room/update should refuse to let an admin of a DIFFERENT hospital rename this room by naming it", async () => {
   seedTwoHospitals();
   const created = await api("/room", "POST", { orgId: "org-b-a", name: "Room 1", number: "1" }, asFirebase(ADMIN_A_EMAIL));
   assert.equal(created.__status, 200, JSON.stringify(created));
@@ -319,7 +319,7 @@ test("POST /session/status: no session refused, wrong-role refused, the session'
  * staff session from another hospital), and loadSessionFor is shared by every session-scoped route
  * in this file: /ticket, /import, /import-from-source, /advance, /status, /priority, /move, /assign,
  * /revoke, /session/status and /timeline/extend - eleven routes, not just this one. */
-test("POST /session/status: a staff session from a DIFFERENT hospital is cleanly refused, not crashed", { skip: "BUG: loadSessionFor's own refusal branches (functions/api/queue/[[path]].js:444,447,451) call json(...) with no `request` argument, so corsHeaders(request) throws on the undefined request and the route answers 500 with a raw exception message instead of 403/404 - see the comment above this test for the other ten routes loadSessionFor also guards." }, async () => {
+test("POST /session/status: a staff session from a DIFFERENT hospital is cleanly refused, not crashed", async () => {
   seedTwoHospitals();
   await ORG.setMembership(ENV, "org-b-a", "doc-sess2", { role: "doctor" }, "owner");
   await ORG.setMembership(ENV, "org-b-b", "doc-sess2-b", { role: "doctor" }, "owner");

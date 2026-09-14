@@ -2476,6 +2476,7 @@
    * and computes nothing of its own. */
   function meowsCard(state) {
     var m = state.maternity && state.maternity.meows;
+    if (m === false) return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>MEOWS</h3>" + '<button class="w-ic" data-w-act="maternityload" title="Refresh">' + ms("refresh") + "</button></div>" + '<p class="w-hint warn">' + ms("error") + "The observations could not be read, so MEOWS was not worked out. Do not read this as no trigger. Check the patient.</p></div>";
     if (!m) return "";
     if (!m.applicable) return '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>MEOWS</h3></div><p class=\"w-hint\">" + ms("info") + esc(m.reason) + "</p></div>";
     var red = (m.red || []).map(function (t) { return "<li class=\"lvl-escalate\">" + esc(t.label) + ": " + esc(t.value) + "</li>"; }).join("");
@@ -2492,12 +2493,14 @@
   /* BLOOD LOSS. Visual vs quantitative is never blurred - the card shows what recordBloodLoss()
    * actually returned, including the honest "plausibly double" reading of a visual estimate. */
   function bloodLossCard(state) {
-    var losses = (state.maternity && state.maternity.losses) || [];
+    var lossesRaw = state.maternity && state.maternity.losses;
+    var losses = lossesRaw || [];
     var rows = losses.map(function (l) {
       return "<li><b>" + esc(l.ml) + " mL</b><span>" + esc(l.method) + (l.quantitative ? "" : " (visual - plausibly " + esc(l.plausibleActualMl) + " mL)") + "</span></li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("water_drop") + "<h3>Blood loss</h3></div>" +
-      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No blood loss recorded.</p>') +
+      (lossesRaw === false ? '<p class="w-hint warn">' + ms("error") + "Blood loss could not be loaded. Do not read this as none recorded.</p>"
+        : rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No blood loss recorded.</p>') +
       '<div class="w-grid">' +
       '<label class="w-f"><span>mL</span><input id="wLossMl" type="text" inputmode="decimal" autocomplete="off"></label>' +
       '<label class="w-f"><span>How established</span><select id="wLossMethod"><option value="weighed">Weighed</option><option value="calibrated-drape">Calibrated drape</option><option value="suction-volume">Suction volume</option><option value="visual-estimate">Visual estimate</option></select></label>' +
@@ -2509,6 +2512,9 @@
    * delivery record exists for this encounter (migrate-maternity.js refuses it). */
   function deliveryCard(state) {
     var d = state.maternity && state.maternity.delivery;
+    // Not knowing whether she has delivered is not the same as knowing she has not: no form to record one.
+    if (d === false) return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>Delivery</h3>" + '<button class="w-ic" data-w-act="maternityload" title="Refresh">' + ms("refresh") + "</button></div>" + '<p class="w-hint warn">' + ms("error") + "The delivery record could not be read. Refresh before recording a delivery, so it is not recorded twice.</p></div>";
+    var linksFailed = state.maternity && state.maternity.links === false;
     var links = (state.maternity && state.maternity.links) || [];
     var newbornRows = links.map(function (l) {
       return "<li><b>" + esc(l.relatedPatientId) + "</b><span>linked " + when(l.recordedAt) + "</span></li>";
@@ -2523,7 +2529,7 @@
     }
     return '<div class="w-card"><div class="w-card-h">' + ms("child_care") + "<h3>Delivery &amp; newborn</h3></div>" +
       '<p class="w-hint">' + ms("check_circle") + esc(d.mode) + " delivery, " + when(d.deliveredAt) + (d.complications ? " - " + esc(d.complications) : "") + "</p>" +
-      (newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
+      (linksFailed ? '<p class="w-hint warn">' + ms("error") + "Linked newborns could not be loaded. Do not read this as none.</p>" : newbornRows ? '<ul class="w-mini">' + newbornRows + "</ul>" : "") +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Sex</span><select id="wNewbornSex"><option value="female">Female</option><option value="male">Male</option><option value="unknown">Unknown</option></select></label>' +
       '<label class="w-f"><span>Name</span><input id="wNewbornName" type="text" autocomplete="off" placeholder="optional"></label>' +
@@ -7309,10 +7315,10 @@
        * highest now" - read from the obstetric engine rather than worked out on screen. */
       apiGet("/ward/maternity-status?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.status = r && r.ok ? r.status : null; st.maternity.statusFailed = !(r && r.ok); }, function () { st.maternity.statusFailed = true; }),
       apiGet("/ward/pregnancy-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.pregFailed = !(r && r.ok); if (r && r.ok) st.maternity.pregnancy = r.pregnancy; }),
-      apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.meows = r.meows; }),
-      apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.losses = r.losses; }),
-      apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.delivery = r.delivery; }),
-      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { if (r && r.ok) st.maternity.links = r.links; }),
+      apiGet("/ward/meows?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.meows = r && r.ok ? r.meows : false; }, function () { st.maternity.meows = false; }),
+      apiGet("/ward/blood-loss-list?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.losses = r && r.ok ? (r.losses || []) : false; }, function () { st.maternity.losses = false; }),
+      apiGet("/ward/delivery-get?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.delivery = r && r.ok ? r.delivery : false; }, function () { st.maternity.delivery = false; }),
+      apiGet("/ward/family-links?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId)).then(function (r) { st.maternity.links = r && r.ok ? (r.links || []) : false; }, function () { st.maternity.links = false; }),
     ]).then(function () { paint(); });
   }
   function pregnancySave() {
@@ -7354,9 +7360,12 @@
     apiPost("/ward/blood-loss", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, loss: { ml: ml, method: method } })
       .then(function (r) {
         if (!r || !r.ok) { st.busy = false; st.err = (r && r.detail) || "Could not record blood loss."; paint(); return; }
+        st.busy = false;
         st.note = r.recognition && r.recognition.prompt
           ? "Recorded. " + r.recognition.reasons.join("; ") + (r.recognition.code ? " - consider starting " + r.recognition.code + "." : "")
           : "Recorded.";
+        // Saved, but the deterioration check could not run: said as a warning, never as an all-clear.
+        if (r.warning) st.err = r.warning;
         loadMaternity();
       })
       .catch(function () { st.busy = false; st.err = "Could not record blood loss."; paint(); });

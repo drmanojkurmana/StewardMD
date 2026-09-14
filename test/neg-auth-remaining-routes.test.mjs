@@ -258,7 +258,7 @@ test("GET /ward/maternity-status: no session refused, wrong-role refused, cross-
   assert.equal(r.status.gestationWeeks, 28);
 });
 
-test("GET /ward/maternity-status: a read that cannot reach the store is refused, never answered as an empty-but-fine status", { skip: "BUG: migrate-maternity.js's maternityView() (functions/_wardsynq/migrate-maternity.js:130-132) swallows svc.get/svc.byPatient failures with .catch(() => null)/.catch(() => []) and maternity-status returns ok:true with status.pregnant:false instead of a 502 record_read_failed - an unloaded status reads exactly like a genuinely negative one." }, async () => {
+test("GET /ward/maternity-status: a read that cannot reach the store is refused, never answered as an empty-but-fine status", async () => {
   seedHospital();
   const { patientId } = await admittedPatient();
   const preg = await as(DOCTOR, "/ward/pregnancy", "POST", { orgId: ORG, patientId, pregnancy: { gestationWeeks: 28, gravida: 2, para: 1 } });
@@ -287,7 +287,7 @@ test("GET /ward/blood-loss-list: no session refused, wrong-role refused, cross-h
   assert.equal(r.losses[0].ml, 300);
 });
 
-test("GET /ward/blood-loss-list: a read that cannot reach the store is refused, never answered as an empty-but-fine list", { skip: "BUG: listBloodLoss (functions/_wardsynq/migrate-maternity.js:249) does svc.byPatient(...).catch(() => []) and reports ok:true with losses:[] when the underlying read genuinely failed - an unloaded list reads exactly like an empty one." }, async () => {
+test("GET /ward/blood-loss-list: a read that cannot reach the store is refused, never answered as an empty-but-fine list", async () => {
   seedHospital();
   const { patientId, encounterId } = await admittedPatient();
   const loss = await as(DOCTOR, "/ward/blood-loss", "POST", { orgId: ORG, patientId, encounterId, loss: { ml: 300, method: "visual-estimate" } });
@@ -315,7 +315,7 @@ test("GET /ward/delivery-get: no session refused, wrong-role refused, cross-hosp
   assert.equal(r.delivery.mode, "vaginal");
 });
 
-test("GET /ward/delivery-get: a read that cannot reach the store is refused, never answered as an empty-but-fine delivery", { skip: "BUG: getDelivery (functions/_wardsynq/migrate-maternity.js:304) does svc.byPatient(...).catch(() => []) and reports ok:true with delivery:null when the underlying read genuinely failed - an unloaded delivery reads exactly like one that never happened." }, async () => {
+test("GET /ward/delivery-get: a read that cannot reach the store is refused, never answered as an empty-but-fine delivery", async () => {
   seedHospital();
   const { patientId, encounterId } = await admittedPatient();
   const del = await as(DOCTOR, "/ward/delivery", "POST", { orgId: ORG, patientId, encounterId, delivery: { mode: "vaginal" } });

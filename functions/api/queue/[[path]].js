@@ -440,16 +440,17 @@ async function resolveActor(request, env) {
 }
 // Session access: a doctor may only touch their OWN session; owner/admin any; staff any session in THEIR
 // hospital (hospital-scoped). Read `cap` is checked by the caller via requireCap.
-async function loadSessionFor(env, sessionId, actor) {
+async function loadSessionFor(env, sessionId, actor, request) {
+  // request is required: json() builds CORS headers from it, and without it every refusal here threw a raw 500.
   const s = sessionId ? await Q.getSession(env, sessionId) : null;
-  if (!s) return { err: json({ ok: false, error: "not_found" }, 404) };
+  if (!s) return { err: json({ ok: false, error: "not_found" }, 404, request) };
   if (actor.kind === "firebase") {
     if (actor.isOwner || s.doctorUid === actor.id) return { s };   // owner any; doctor only their own session
-    return { err: json({ ok: false, error: "forbidden" }, 403) };
+    return { err: json({ ok: false, error: "forbidden" }, 403, request) };
   }
   // staff (ghis/pin/email): must be an ACTIVE member of the session's ORG (cap+scope via requireSessionCap).
   const az = await ORG.authorizeOrg(env, actor, s.orgId || s.hospitalId, null);
-  if (!az.ok) return { err: json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403) };
+  if (!az.ok) return { err: json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request) };
   return { s };
 }
 // Capability + scope for a session op: Firebase (owner/doctor) via global role; staff via the session's
@@ -3615,7 +3616,7 @@ export async function onRequest(context) {
     // added the same way any tariff item is (bill/tariff POST). ?kind=medication added 2026-09-06
     // for native prescribing; investigation stays the default (unchanged for every existing caller).
     if (method === "GET" && seg === "inv-catalog") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
       const orgId = s.orgId || s.hospitalId;
       const q = String(url.searchParams.get("q") || "").trim().toLowerCase();
@@ -3629,7 +3630,7 @@ export async function onRequest(context) {
     // vault/modules/WardSynQ.md's STATUS line). The doctor sees this BEFORE confirming the
     // prescription; the write always proceeds regardless of what it finds.
     if (method === "GET" && seg === "rx-safety") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
@@ -3711,7 +3712,7 @@ export async function onRequest(context) {
     }
 
     if (method === "GET" && seg === "list") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
       // Only ACTIVE tickets, matching /my-room. The clients already ignore finished ones
       // (queue.js isQueued), but without this every poll shipped completed and cancelled patients to
@@ -3722,7 +3723,7 @@ export async function onRequest(context) {
 
     // Audit timeline (transparency / anti-misuse) — anyone who can view the queue can see the trail.
     if (method === "GET" && seg === "audit") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
       return json({ ok: true, events: await Q.auditTimeline(env, s, url.searchParams.get("limit")) }, 200, request);
     }
@@ -3735,7 +3736,7 @@ export async function onRequest(context) {
 
     // Encounter timeline, staff/doctor view (decrypted). Needs EMR view rights.
     if (method === "GET" && seg === "timeline") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.EMR_VIEW);
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
@@ -3769,7 +3770,7 @@ export async function onRequest(context) {
     }
 
     if (method === "GET" && seg === "link") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
@@ -3778,7 +3779,7 @@ export async function onRequest(context) {
 
     if (method === "GET" && seg === "config") return json({ ok: true, config: await Q.getConfig(env, actor.id) }, 200, request);
     if (method === "GET" && seg === "analytics") {
-      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.ANALYTICS_VIEW);
       const analytics = await Q.analytics(env, s);
       try { const rev = await BILL.revenueToday(env, s.orgId || s.hospitalId); if (rev) Object.assign(analytics, rev); } catch (e) {}   // clinic revenue dashboard: today's paid total (null when billing off)
@@ -3892,7 +3893,13 @@ export async function onRequest(context) {
       if (seg === "dept") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, department: await ORG.createDepartment(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "opd") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, opd: await ORG.createOpd(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
-      if (seg === "room" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request); }
+      if (seg === "room" && sub === "update") {
+        const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az);
+        // The room must be this hospital's: an admin elsewhere could otherwise rename or retire it by id.
+        const roomNow = await ORG.getRoom(env, body.roomId || "");
+        if (!roomNow || roomNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request);
+      }
       if (seg === "ward" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.createWard(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "ward" && sub === "update") {
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
@@ -4102,7 +4109,7 @@ export async function onRequest(context) {
         }
         return json({ ok: false, error: "not_found" }, 404, request);
       }
-      const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
+      const { s, err } = await loadSessionFor(env, body.sessionId, actor, request); if (err) return err;
       if (seg === "ticket") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
         const t = await Q.addTicket(env, s, body, actor.id);

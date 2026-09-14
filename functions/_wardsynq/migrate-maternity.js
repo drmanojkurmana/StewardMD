@@ -127,9 +127,11 @@ async function getPregnancy(request, env, ctx) {
  */
 async function maternityView(svc, patientId) {
   const [pregnancy, deliveries, labourObs] = await Promise.all([
-    svc.get(PREG_TYPE, pregnancyIdFor(patientId)).catch(() => null),
-    svc.byPatient(DELIVERY_TYPE, patientId).catch(() => []),
-    svc.byPatient("Observation", patientId).catch(() => []),
+    /* No .catch: an unreadable pregnancy or delivery read as "not pregnant, not delivered", and an
+     * unreadable observation list as a calm MEOWS. A failed read now fails the answer. */
+    svc.get(PREG_TYPE, pregnancyIdFor(patientId)),
+    svc.byPatient(DELIVERY_TYPE, patientId),
+    svc.byPatient("Observation", patientId),
   ]);
   const lastDelivery = (deliveries || []).slice().sort((a, b) => String(b.deliveredAt || "").localeCompare(String(a.deliveredAt || "")))[0] || null;
   const effectiveAt = (o) => (o && o.meta && o.meta.effectiveAt) || (o && o.effectiveAt) || "";
@@ -150,7 +152,9 @@ async function maternityStatus(request, env, ctx) {
   const patientId = str(ctx.patientId);
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, status: null };
-  const view = await maternityView(svc, patientId);
+  let view;
+  try { view = await maternityView(svc, patientId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The maternity record could not be read. Do not read this as nothing recorded.", status: null }; }
   return { ...base, ok: true, status: obstetricState(view) };
 }
 
@@ -162,7 +166,9 @@ async function maternityMeows(request, env, ctx) {
   const patientId = str(ctx.patientId);
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, meows: null };
-  const [view, observations] = await Promise.all([maternityView(svc, patientId), svc.byPatient("Observation", patientId).catch(() => [])]);
+  let view, observations;
+  try { [view, observations] = await Promise.all([maternityView(svc, patientId), svc.byPatient("Observation", patientId)]); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The maternity record could not be read. Do not read this as nothing recorded.", meows: null }; }
   return { ...base, ok: true, meows: meowsFromObservations(observations || [], view) };
 }
 
@@ -230,11 +236,15 @@ async function recordMaternalBloodLoss(request, env, ctx) {
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
     const threshold = pphThresholdReached(loss);
-    const view = await maternityView(svc, patientId);
-    const observations = await svc.byPatient("Observation", patientId).catch(() => []);
-    const meowsResult = meowsFromObservations(observations || [], view);
-    const recognition = assessObstetricRecognition({ meowsResult, loss, at });
-    return { ...base, ok: true, written: 1, lossId: id, loss, threshold, recognition, version: out.record.version, actor: resolved.actor.id };
+    let recognition = null, recognitionWarning = null;
+    try {
+      const view = await maternityView(svc, patientId);
+      const observations = await svc.byPatient("Observation", patientId);
+      recognition = assessObstetricRecognition({ meowsResult: meowsFromObservations(observations || [], view), loss, at });
+    } catch (e) {
+      recognitionWarning = "The blood loss is saved, but the observations could not be read, so the deterioration check was not done. Review the patient.";
+    }
+    return { ...base, ok: true, written: 1, lossId: id, loss, threshold, recognition, ...(recognitionWarning ? { warning: recognitionWarning } : {}), version: out.record.version, actor: resolved.actor.id };
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
 }
 
@@ -246,7 +256,9 @@ async function listBloodLoss(request, env, ctx) {
   const patientId = str(ctx.patientId);
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, losses: [] };
-  const losses = await svc.byPatient(LOSS_TYPE, patientId).catch(() => []);
+  let losses;
+  try { losses = await svc.byPatient(LOSS_TYPE, patientId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The maternity record could not be read. Do not read this as nothing recorded.", losses: null }; }
   return { ...base, ok: true, losses: losses || [] };
 }
 
@@ -301,7 +313,9 @@ async function getDelivery(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", delivery: null };
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, delivery: null };
-  const deliveries = await svc.byPatient(DELIVERY_TYPE, str(ctx.patientId)).catch(() => []);
+  let deliveries;
+  try { deliveries = await svc.byPatient(DELIVERY_TYPE, str(ctx.patientId)); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The maternity record could not be read. Do not read this as nothing recorded.", delivery: null }; }
   const delivery = (deliveries || []).slice().sort((a, b) => String(b.deliveredAt || "").localeCompare(String(a.deliveredAt || "")))[0] || null;
   return { ...base, ok: true, delivery };
 }
