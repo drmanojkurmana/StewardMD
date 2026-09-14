@@ -5636,3 +5636,20 @@ Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scal
 - Measured against ground truth on 228 HR/SpO2/RR/Pulse value boxes: 0 wrong Vision reads verified.
   The synthetic group is likely rendered in a face close to the templates; judge on real photos.
 - Bench pixel source now capped at 2400 px long edge, the same as the app's canvas (smdPixelSource).
+
+## 2026-09-15 ICU monitor OCR pass 3: label recall + pressure-source safety (branch icu-ocr-bench, PR #1115 not merged)
+
+- Baseline frozen on 268 cases (181 external, 40 human-confirmed). After: core-vital correct AUTO
+  413 -> 535 (confirmed external 47 -> 87), NEEDS_REVIEW 844 -> 720, wrong/silent 0 -> 0 in every group;
+  Philips MP40 regressions pass. Rule ablation (correct AUTO each rule adds, wrong without it always 0):
+  look-alike label text +114 (Vision reads "ABP" as Cyrillic "АВP"), PAP +78, ECG-as-HR +33, colour +44,
+  left-adjacent alarm limit (RR) +15, vocabulary (etCO2, Puise, 8p02) +8, one-label-per-reading -5
+  (kept: refuses to let an unlabelled PAP inherit "ABP"), MAP consistency 0 (no displayed MAP in the
+  benchmark is >25 mmHg off (SBP+2DBP)/3; displayed-vs-formula spread median 3, max 15.3).
+- REVERTED (silent source error): mapping Cyrillic "І" to I turned a crop re-read "ПІВP" of an NIBP label
+  into "IBP" = ART (ext-mocr-032 auto-filled NIBP as ART). Also found PRE-EXISTING: a clipped "NIBP" read as
+  "IBP" at the photo edge auto-filled as ART (ext-mocr-036). Fix: plain "IBP" is not an arterial source
+  (numbered "IBP1" is); an edge-touching source label is weak evidence. The scorer did not check sources:
+  it now counts a wrong ART/NIBP source as a wrong value.
+- Dropped as unused (0 effect): "rpm" unit as RR label; merge keeping a full-image label over a garbled crop.
+- Bench: pixels retained only for regression cases (all-case retention exhausted memory).

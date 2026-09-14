@@ -43,6 +43,9 @@ const PARSE_OPTS = POLICY === "relaxed" ? { unlabeledAuto: true } : {};
 // --verify none | <field,field>: which fields need the independent digit check (default: the parser's VERIFY_FIELDS)
 const VERIFY_OPT = opt("--verify", null);
 if (VERIFY_OPT) PARSE_OPTS.verifyFields = VERIFY_OPT === "none" ? [] : VERIFY_OPT.split(",");
+// --disable rule,rule: switch parser rules off for ablation (icu-monitor-parser.js FEATURES)
+const DISABLE_OPT = opt("--disable", null);
+if (DISABLE_OPT) PARSE_OPTS.disable = DISABLE_OPT.split(",");
 const FIX = join(HERE, "fixtures");
 mkdirSync(OUT, { recursive: true });
 
@@ -119,6 +122,9 @@ function sameReading(pred, truth) {
 function outcome(k, truth, pred) {
   const auto = pred && pred.status === "AUTO_ACCEPTED", review = pred && pred.status === "NEEDS_REVIEW";
   if (truth.status === "visible") {
+    // a pressure auto-filled from the WRONG SOURCE (ART vs NIBP) is a wrong clinical value even with right digits
+    const srcOf = (s) => (s == null ? null : /^(?:ART|ABP|IBP\d?|P1)$/i.test(s) ? "ART" : /^(?:NIBP|NBP)$/i.test(s) ? "NIBP" : String(s).toUpperCase());
+    if (auto && ["sbp", "dbp", "map"].includes(k) && truth.source && pred.source && srcOf(truth.source) !== srcOf(pred.source)) return "wrong";
     if (auto) return (SOURCES.includes(k) ? sameReading(pred.value, truth.value) : pred.value === truth.value) ? "correct" : "wrong";
     return review ? "review" : "missed";
   }
@@ -178,7 +184,10 @@ for (const casePath of cases) {
     ocrMsFull: full.ocrMs || null, ocrMsCrop: crop ? crop.ocrMs || null : null, ocrMsConfirm: confirmMs, visionLevel: [full.level, crop && crop.level].filter(Boolean),
     parseMs, quality: { status: res.quality.status, issues: res.quality.issues.map((i) => `${i.kind}:${i.severity}:${i.value}`), blur: res.quality.blur, tilt: res.quality.tilt && +res.quality.tilt.angle.toFixed(1) },
     layoutDetected: res.layout.profile, colourUsed, incompleteEvidence: incomplete, fields, networkCalls: 0, geminiCalls: 0 });
-  prepared.push({ gt, group, obs, px, imageSize, id: gt.id, twoScale });
+  // decoded pixels are ~10 MB per photo: keep them only where a later re-parse needs them (the regression
+  // cases, or every case with --sweep); holding all 268 exhausted memory (2026-09-15)
+  const keepPx = SWEEP || /^philips-mp40-owner-(?:900|1800)px$/.test(gt.id);
+  prepared.push({ gt, group, obs, px: keepPx ? px : null, imageSize, id: gt.id, twoScale });
   writeFileSync(join(OUT, gt.id + ".evidence.txt"), M.explain(res, obs));
   const Wd = imageSize.w, Ht = imageSize.h;
   writeFileSync(join(OUT, gt.id + ".overlay.svg"), M.overlaySVG(res, obs, Wd, Ht).replace(' style="position:absolute;left:0;top:0;pointer-events:none">', existsSync(img) ? '><image href="file://' + img + '" width="' + Wd + '" height="' + Ht + '"/>' : ">"));

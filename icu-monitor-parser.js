@@ -49,7 +49,25 @@
     cvp:   [/\bCVP(?=\b|\d)/,                            /\bC\s*V\s*P\b/i],
     pvc:   [/\bPVCs?(?=\b|\d)/,                          /\bP\s*V\s*C\b/i]
   };
-  var PRESSURE_SRC = { art: /\b(?:ART|ABP|Art|ARTI|IBP|P1)\b/, nibp: /\b(?:NIBP|NBP|NI\s*BP)\b/i };
+  // Plain "IBP" is NOT an arterial source: it is what a clipped or partly occluded "NIBP" reads as (ext-mocr-036: the
+  // "N" was outside the photo and the NIBP reading auto-filled as ART, 2026-09-15). A numbered channel ("IBP1") still is.
+  var PRESSURE_SRC = { art: /\b(?:ART|ABP|Art|ARTI|IBP\d|P1)\b/, nibp: /\b(?:NIBP|NBP|NI\s*BP)\b/i, pap: /\b(?:PAP|PA\s*P)\b/ };
+  /* Pass-3 rules (2026-09-15), each switchable for ablation: opts.disable = ["pap", ...].
+   *   norm     Cyrillic / Greek look-alike letters in LABEL text read as Latin (Vision: "АВP", "грm")
+   *   vocab    etCO2, Puise, 8p02, aWRR spellings seen on real monitor photos
+   *   ecg      a standalone "ECG" token labels HR (Mindray-style tiles: "ECG" + "bpm")
+   *   (edge)   a pressure-source label touching the photo edge is weak evidence, never proof
+   *   pap      PAP is a pulmonary pressure: never SBP/DBP/MAP, never a competing arterial reading
+   *   onelabel one pressure-source label serves only its nearest reading
+   *   limit1   a small number directly left of a much larger value is that value's alarm limit
+   *   mapcheck displayed MAP vs (SBP + 2 DBP) / 3 as a consistency check only (never fills MAP) */
+  var FEATURES = ["norm", "vocab", "ecg", "pap", "onelabel", "limit1", "mapcheck", "color"];   // "color": ablation switch for colour evidence (on by default, predates pass 3)
+  var MAP_CONSISTENCY_TOL = 25;   // mmHg; displayed-vs-formula spread on 212 labelled readings: median 3, max 15.3
+  function on(opts, f) { return !(opts && opts.disable && opts.disable.indexOf(f) >= 0); }
+  var LOOKALIKE = { "А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H", "О": "O", "Р": "P", "С": "C", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "у": "y", "х": "x", "г": "r", "Г": "r",
+    "Α": "A", "Β": "B", "Ε": "E", "Η": "H", "Ι": "I", "Κ": "K", "Μ": "M", "Ν": "N", "Ο": "O", "Ρ": "P", "Τ": "T", "Χ": "X", "Ζ": "Z", "ο": "o", "₂": "2" };
+  function latin(t) { return String(t).replace(/[\u0370-\u03FF\u0400-\u04FF\u2082]/g, function (c) { return LOOKALIKE[c] || c; }); }
+  var VOCAB = { etco2: /\b[Ee][Tt]\s*C\s*O\s*2(?=\b|\d)/, pulse: /\bPu[iíl1I|]se(?=\b|\d)/i, spo2: /(?:^|\W)[S58]p\s*[O0oQ]\s*[2zZ]/, rr: /\ba\s*[wW]\s*RR(?=\b|\d)/ };
   var GENERIC_ORDER = ["hr", "spo2", "pressure", "rr", "temp"];
   var PROFILES = {
     "philips-intellivue": { sig: /IntelliVue|Philips|Main\s*Screen|Main\s*Setup|Screen\s+[A-E]\b/i, order: GENERIC_ORDER },
@@ -109,8 +127,9 @@
   }
   function pressureSourceInBox(t) {
     var pre = String(t).split(/\d{1,3}\s*\/\s*\d/)[0] || "";
-    if (/\b(?:ART|ABP|IBP|P1)\b/.test(pre)) return { src: "art", strength: 1 };
+    if (/\b(?:ART|ABP|IBP\d|P1)\b/.test(pre)) return { src: "art", strength: 1 };
     if (/\b(?:NIBP|NBP)\b/i.test(pre)) return { src: "nibp", strength: 1 };
+    if (/\bPAP\b/.test(pre)) return { src: "pap", strength: 1 };
     if (/\bNB\W*$/i.test(pre) || /\bNI\s*BP/i.test(pre)) return { src: "nibp", strength: 0.8 };
     return null;
   }
@@ -466,11 +485,15 @@
       else if (/^\W*\d{1,3}\s*-\s*\d{1,3}\W*$/.test(t)) n.role = "limitRange";
       else if (/[▲▼↑↓]/.test(t) && n.nums.length) n.role = "limit";
       else if (n.nums.length && !/[A-Za-z]{3,}/.test(t)) n.role = "numeric";
+      var tl = on(opts, "norm") ? latin(t) : t;
+      n.tl = tl;
+      if (n.role === "pressure") n.gluedSrc = pressureSourceInBox(tl);
       for (var f in LABELS) if (LABELS.hasOwnProperty(f) && n.role !== "banner") {
-        if (LABELS[f][0].test(t)) n.labels.push({ field: f, strength: 1 });
-        else if (LABELS[f][1].test(t)) n.labels.push({ field: f, strength: 0.7 });
+        if (LABELS[f][0].test(tl)) n.labels.push({ field: f, strength: 1 });
+        else if (LABELS[f][1].test(tl) || (on(opts, "vocab") && VOCAB[f] && VOCAB[f].test(tl))) n.labels.push({ field: f, strength: 0.7 });
       }
-      if (n.role !== "pressure") for (var s in PRESSURE_SRC) if (PRESSURE_SRC.hasOwnProperty(s) && PRESSURE_SRC[s].test(t)) n.labels.push({ field: "press:" + s, strength: /ARTI|Art\W/.test(t) ? 0.7 : 1 });
+      if (n.role !== "banner" && on(opts, "ecg") && /^\W*ECG\W*(?:bpm)?\W*$/i.test(tl) && !n.labels.some(function (l) { return l.field === "hr"; })) n.labels.push({ field: "hr", strength: 0.7, via: "ECG" });
+      if (n.role !== "pressure") for (var s in PRESSURE_SRC) if (PRESSURE_SRC.hasOwnProperty(s) && (s !== "pap" || on(opts, "pap")) && PRESSURE_SRC[s].test(tl)) n.labels.push({ field: "press:" + s, strength: /ARTI|Art\W/.test(tl) ? 0.7 : 1 });
       B.push(n);
     }
     var maxH = 0, valueBoxes = [];
@@ -486,10 +509,18 @@
         if (s2.labels.length && !s2.nums.length && b.cy >= s2.y - s2.h * 0.3 && b.cy <= s2.y + s2.h * 1.3 && b.x > s2.x && b.x - (s2.x + s2.w) < s2.h * 10) { b.role = "limit"; b.limitPair = j; break; }
       }
     }
+    if (on(opts, "limit1")) for (i = 0; i < B.length; i++) {
+      var sm = B[i]; if (sm.role !== "numeric" || sm.h >= maxH * 0.5) continue;
+      for (var k2 = 0; k2 < B.length; k2++) {
+        var big2 = B[k2]; if (k2 === i || big2.role !== "numeric" || big2.h < sm.h * 2.2) continue;
+        var gap = big2.x - (sm.x + sm.w), vOverlap = Math.min(sm.y + sm.h, big2.y + big2.h) - Math.max(sm.y, big2.y);
+        if (gap >= -sm.h * 0.3 && gap <= big2.h * 0.6 && vOverlap >= sm.h * 0.5) { sm.role = "limit"; sm.limitPair = "left-of-value " + k2; break; }
+      }
+    }
     var allText = B.map(function (b) { return b.t; }).join(" \n "), profile = null;
     if (opts && opts.profile && PROFILES[opts.profile]) profile = opts.profile;
     else for (var p in PROFILES) if (PROFILES.hasOwnProperty(p) && PROFILES[p].sig.test(allText)) { profile = p; break; }
-    return { B: B, src: src, maxH: maxH, colX: colX, big: big.slice().sort(function (a, b) { return a.y - b.y; }), profile: profile, order: (profile ? PROFILES[profile].order : GENERIC_ORDER) };
+    return { opts: opts || {}, B: B, src: src, maxH: maxH, colX: colX, big: big.slice().sort(function (a, b) { return a.y - b.y; }), profile: profile, order: (profile ? PROFILES[profile].order : GENERIC_ORDER) };
   }
 
   /* ------------------------------------------------------------------ scoring */
@@ -540,7 +571,7 @@
       else sc.layout = 0.5;
     } else sc.layout = 0.5;
     if (!chan && px) { chan = channelColorAtValue(cand, px); why.push("channel sampled at value height"); }
-    var cc = colorCompat(cand.color, L && L.color), ch = colorCompat(cand.color, chan);
+    var noColor = !on(G.opts, "color"), cc = noColor ? { neutral: true, why: "disabled" } : colorCompat(cand.color, L && L.color), ch = noColor ? { neutral: true, why: "disabled" } : colorCompat(cand.color, chan);
     var parts = []; if (!cc.neutral) parts.push(cc.score); else if (!ch.neutral) parts.push(ch.score);
     sc.color = parts.length ? parts[0] : 0.5;
     sc.colorNeutral = !parts.length; sc.colorWhy = "label: " + cc.why + "; channel: " + ch.why + (!cc.neutral && !ch.neutral ? " (label colour used)" : "");
@@ -627,15 +658,17 @@
       if (p.gluedSrc) best = { box: p, src: p.gluedSrc.src, d: 0, strength: p.gluedSrc.strength, glued: true };
       else G.B.forEach(function (b) {
         b.labels.forEach(function (l) {
-          if (l.field !== "press:art" && l.field !== "press:nibp") return;
+          if (l.field !== "press:art" && l.field !== "press:nibp" && l.field !== "press:pap") return;
           var dx = p.x - b.x, dy = p.y - b.y;
           if (dx < -0.05 || dx > 0.30 || dy < -b.h * 1.5 || dy > b.h * 10 + 0.03) return;
           if (/\b(?:Start|Stop|Go|Setup|Zero|Menu)\b/i.test(b.t)) return;   // softkeys name a pressure without labelling a reading
           var d = Math.abs(dx) + Math.abs(dy);
-          if (!best || d < best.d) best = { box: b, src: l.field.slice(6), d: d, strength: l.strength };
+          // a source label touching the photo edge may be clipped ("NIBP" -> "IBP"): weak evidence, never proof
+          if (!best || d < best.d) best = { box: b, src: l.field.slice(6), d: d, strength: b.edge ? Math.min(l.strength, 0.5) : l.strength };
         });
       });
-      p.src = best ? best.src : null; p.srcLabel = best && !best.glued ? best.box : null; p.srcStrength = best ? best.strength : 0; p.srcGlued = !!(best && best.glued);
+      if (best && best.src === "pap" && !on(opts, "pap")) best = null;
+      p.src = best ? best.src : null; p.srcLabel = best && !best.glued ? best.box : null; p.srcStrength = best ? best.strength : 0; p.srcGlued = !!(best && best.glued); p.srcD = best ? best.d : null;
       p.mapBox = null; p.mapVal = p.paren;
       if (p.mapVal == null) G.B.forEach(function (b) {
         if (b.role !== "paren") return;
@@ -645,6 +678,14 @@
       if (p.mapVal != null && !(p.mapVal > p.press.d && p.mapVal < p.press.s)) { notes.push("MAP " + p.mapVal + " outside DBP..SBP for " + p.t + ", dropped"); p.mapVal = null; p.mapBox = null; }
       p.valid = p.press.s > p.press.d && p.press.s >= 50 && p.press.s <= 260 && p.press.d >= 20 && p.press.d <= 160;
     });
+    if (on(opts, "onelabel")) P.forEach(function (p) {
+      // a source label names ONE reading: a farther reading that picked the same label loses it
+      if (!p.srcLabel) return;
+      if (P.some(function (q) { return q !== p && q.srcLabel === p.srcLabel && q.srcD < p.srcD; })) { notes.push("source label " + JSON.stringify(p.srcLabel.t) + " belongs to a nearer reading than " + p.t); p.src = null; p.srcLabel = null; p.srcStrength = 0; }
+    });
+    var PAP = on(opts, "pap") ? P.filter(function (p) { return p.src === "pap"; }) : [];
+    if (PAP.length) { notes.push("pulmonary pressure (PAP) " + PAP.map(function (p) { return p.t; }).join(", ") + " is not SBP/DBP/MAP"); P = P.filter(function (p) { return p.src !== "pap"; }); PAP.forEach(function (p) { claimed[p.i] = true; }); }
+    if (!P.length) { out.sbp = { status: "NOT_FOUND", confidence: 0, value: null, reason: "only a pulmonary pressure (PAP) is displayed" }; out.dbp = out.sbp; out.map = out.sbp; out.pap = PAP.map(function (p) { return p.t; }); return out; }
     var V = P.filter(function (p) { return p.valid; }).sort(function (a, b) { return b.h - a.h; });
     if (!V.length) { var bad = { status: "NEEDS_REVIEW", confidence: 0.2, value: null, reason: "pressure text implausible: " + P.map(function (p) { return p.t; }).join(", ") }; out.sbp = bad; out.dbp = bad; out.map = bad; return out; }
     var unreadable = P.filter(function (p) { return !p.valid; });
@@ -676,6 +717,9 @@
         label: p.srcLabel ? { text: p.srcLabel.t, box: p.srcLabel.i, strength: p.srcStrength } : (p.srcGlued ? { text: p.t, box: p.i, strength: p.srcStrength, glued: true } : null), reason: bl.length ? bl.join("; ") : undefined };
     });
     var top = V[0], second = V.length > 1 ? V[1] : null;
+    var approx = (top.press.s + 2 * top.press.d) / 3;
+    var derivedMAP = { value: Math.round(approx), source: "CALCULATED", formula: "(SBP + 2 x DBP) / 3", note: "not a monitor reading; never fills MAP" };
+    var mapConflict = on(opts, "mapcheck") && top.mapVal != null && Math.abs(top.mapVal - approx) > MAP_CONSISTENCY_TOL;
     var sameReading = second && second.press.s === top.press.s && second.press.d === top.press.d;
     var sources = {}; V.forEach(function (p) { if (p.src) sources[p.src] = true; });
     unreadable.forEach(function (u) { if (u.src && Math.abs((u.srcLabel || u).x - (top.srcLabel ? top.srcLabel.x : top.x)) < 0.12 && !(u.labelOnly && u.srcLabel.y > top.y + top.h)) sources[u.src] = true; });
@@ -694,6 +738,7 @@
     if (otherUnread.length && !bothSources) reasons.push("another pressure on screen could not be read: " + otherUnread.map(function (u) { return JSON.stringify(u.t); }).join(", "));
     if (!top.src) reasons.push("pressure source (ART / NIBP) not identified");
     reasons = reasons.concat(blockersOf(top));
+    if (mapConflict) reasons.push("displayed MAP " + top.mapVal + " inconsistent with " + top.press.s + "/" + top.press.d + " (calculated about " + Math.round(approx) + "): one of the three readings may be misread");
     var conf = 0.72 + 0.14 * clamp(top.h / G.maxH, 0, 1) + (top.src ? 0.08 * top.srcStrength : 0) + (second ? 0 : 0.06);
     var ambiguous = reasons.length > 0 || conf < TP.conf;
     if (!reasons.length && conf < TP.conf) reasons.push("confidence " + conf.toFixed(2) + " below " + TP.conf);
@@ -707,6 +752,8 @@
       reason: ambiguous ? reasons.join("; ") : undefined,
       candidates: V.map(function (p) { return { text: p.t, source: p.src, h: p.h, box: p.i }; })
     };
+    primary.derivedMAP = derivedMAP;
+    if (on(opts, "mapcheck") && top.mapVal != null) primary.mapConsistency = { displayed: top.mapVal, calculated: +approx.toFixed(1), difference: +(top.mapVal - approx).toFixed(1), tolerance: MAP_CONSISTENCY_TOL, consistent: !mapConflict };
     out.sbp = assign({}, primary, { value: ambiguous ? null : top.press.s, suggested: top.press.s });
     out.dbp = assign({}, primary, { value: ambiguous ? null : top.press.d, suggested: top.press.d });
     if (top.mapVal != null) {
@@ -714,6 +761,7 @@
       out.map = { status: mok ? "AUTO_ACCEPTED" : "NEEDS_REVIEW", confidence: +mconf.toFixed(2), value: mok ? top.mapVal : null, suggested: top.mapVal, box: top.mapBox ? top.mapBox.i : top.i, source: top.src ? top.src.toUpperCase() : null, label: primary.label,
         mapText: top.mapBox ? top.mapBox.t : top.t, reason: mok ? undefined : (ambiguous ? reasons.join("; ") : "confidence " + mconf.toFixed(2) + " below " + TM.conf) };
     } else out.map = { status: "NOT_FOUND", confidence: 0, value: null, reason: "no (MM) read next to " + top.t + "; MAP is only ever a displayed value" };
+    if (PAP.length) out.pap = PAP.map(function (p) { return p.t; });
     out.notes = notes;
     return out;
   }

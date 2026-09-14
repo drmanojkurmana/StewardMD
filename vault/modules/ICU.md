@@ -68,6 +68,12 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   RR AUTO also requires the independent pixel digit check (`verifyDigits`, templates from
   `bench/icu-monitor/digit-templates.py`); without pixels (`px`) RR is always NEEDS_REVIEW.
   Bench `--verify none|hr,spo2,rr,pulse` changes the gated fields.
+  Pass-3 rules (`FEATURES` in the parser, ablate with bench `--disable a,b`): Cyrillic/Greek look-alike
+  label text, ECG = HR label, PAP never SBP/DBP/MAP, one source label per reading, left-adjacent alarm
+  limit, MAP consistency check (`derivedMAP`, source CALCULATED, never fills MAP). Plain "IBP" and
+  edge-clipped source labels never prove ART. Bench scorer counts a wrong pressure SOURCE as wrong.
+  Gotcha: label changes can move `monitorRegion`, invalidating crop caches; run without --cached-only
+  (and in foreground chunks on the 8 GB Mac: background runs get killed for low memory).
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
 - ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed

@@ -201,3 +201,72 @@ test("independent digit check: opts.verifyFields extends the gate to other vital
   const r = M.parseMonitor(obs, { px, verifyFields: ["hr", "rr"] });
   assert.equal(r.fields.hr.status, "NEEDS_REVIEW"); assert.equal(r.fields.hr.verify.status, "disagree");
 });
+
+/* ---------------------------------------------------------------- pass 3 (2026-09-15) */
+// Rios-style tile: ABP read with CYRILLIC letters, PAP 26/10 (15) displayed below it.
+function riosPressures(abpText = "АВP") {
+  return philips().filter((b) => !["ART", "149/66", "(98)"].includes(b.text)).concat([
+    box(abpText, 0.57, 0.40, 0.04, 0.02), box("129/86", 0.62, 0.42, 0.15, 0.06), box("(101)", 0.64, 0.48, 0.07, 0.04),
+    box("PAP", 0.57, 0.53, 0.04, 0.02), box("26/10", 0.63, 0.55, 0.12, 0.05), box("(15)", 0.63, 0.60, 0.06, 0.04)]);
+}
+
+test("pass 3: Cyrillic look-alike 'АВP' identifies the arterial source; PAP is never SBP/DBP/MAP and never a competing reading", () => {
+  const r = M.parseMonitor(riosPressures());
+  assert.equal(r.fields.sbp.status, "AUTO_ACCEPTED"); assert.equal(r.values.sbp, 129); assert.equal(r.values.dbp, 86); assert.equal(r.values.map, 101);
+  assert.equal(r.fields.sbp.source, "ART"); assert.deepEqual(r.fields.art.value, { s: 129, d: 86, map: 101 });
+  const off = M.parseMonitor(riosPressures(), { disable: ["norm", "pap"] });
+  assert.equal(off.fields.sbp.status, "NEEDS_REVIEW", "without the rules the source cannot be proven");
+});
+
+test("pass 3: a pressure whose source label is unreadable stays NEEDS_REVIEW even when PAP is identified", () => {
+  const r = M.parseMonitor(riosPressures("?#"));
+  assert.equal(r.fields.sbp.status, "NEEDS_REVIEW"); assert.match(r.fields.sbp.reason, /source \(ART \/ NIBP\) not identified/);
+  assert.notEqual(r.values.sbp, 26, "PAP is never offered as SBP");
+});
+
+test("pass 3: one source label names only its nearest reading", () => {
+  // ABP label is read, PAP label is NOT: the farther 26/10 must not inherit "ABP"
+  const obs = riosPressures().filter((b) => b.text !== "PAP");
+  const r = M.parseMonitor(obs);
+  assert.notEqual(r.fields.art && r.fields.art.value && r.fields.art.value.s, 26);
+  assert.equal(r.fields.sbp.status, "NEEDS_REVIEW", "an unlabelled second pressure keeps the primary in review");
+});
+
+test("pass 3: a small alarm limit directly left of a value is a limit, not a competing RR", () => {
+  const obs = philips().filter((b) => !["30", "8"].includes(b.text)).concat([box("30", 0.605, 0.63, 0.012, 0.025)]);
+  const r = M.parseMonitor(obs);
+  const c30 = r.fields.rr.candidates.find((c) => c.value === 30);
+  assert.ok(!c30 || c30.role === "limit", "30 is treated as a limit");
+  assert.equal(M.parseMonitor(obs, { disable: ["limit1"] }).fields.rr.candidates.find((c) => c.value === 30).role, "numeric");
+});
+
+test("pass 3: a standalone 'ECG' token labels HR (Mindray-style tile)", () => {
+  const obs = philips().map((b) => (b.text === "HR" ? Object.assign({}, b, { text: "ECG" }) : b));
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.hr.label.text, "ECG"); assert.equal(r.fields.hr.status, "AUTO_ACCEPTED"); assert.equal(r.values.hr, 105);
+  assert.equal(M.parseMonitor(obs, { disable: ["ecg"] }).fields.hr.label, null);
+});
+
+test("pass 3: MAP consistency is a check only: displayed MAP kept, derived MAP separate, gross conflict -> NEEDS_REVIEW", () => {
+  const ok = M.parseMonitor(philips());
+  assert.equal(ok.values.map, 98, "displayed 98 kept although (149 + 2*66)/3 = 94");
+  assert.deepEqual({ v: ok.fields.sbp.derivedMAP.value, s: ok.fields.sbp.derivedMAP.source }, { v: 94, s: "CALCULATED" });
+  assert.equal(ok.fields.sbp.mapConsistency.consistent, true);
+  const bad = M.parseMonitor(philips().map((b) => (b.text === "(98)" ? Object.assign({}, b, { text: "(138)" }) : b)));
+  assert.equal(bad.fields.sbp.status, "NEEDS_REVIEW"); assert.equal(bad.fields.map.status, "NEEDS_REVIEW");
+  assert.match(bad.fields.sbp.reason, /displayed MAP 138 inconsistent with 149\/66 \(calculated about 94\)/);
+  const noMap = M.parseMonitor(philips().filter((b) => b.text !== "(98)"));
+  assert.equal(noMap.values.map, undefined, "calculated MAP never fills the clinical MAP field");
+  assert.equal(noMap.fields.map.status, "NOT_FOUND"); assert.equal(noMap.fields.sbp.derivedMAP.value, 94);
+});
+
+test("source safety: plain 'IBP' (a clipped 'NIBP') or an edge-clipped source label never proves ART", () => {
+  const nibpTile = (lab, x) => philips().filter((b) => !["ART", "149/66", "(98)"].includes(b.text)).concat([box(lab, x, 0.40, 0.04, 0.02), box("141/79", 0.62, 0.42, 0.15, 0.06), box("(91)", 0.64, 0.48, 0.07, 0.04)]);
+  for (const [lab, x] of [["IBP", 0.57], ["ART", 0.0]]) {
+    const r = M.parseMonitor(nibpTile(lab, x));
+    assert.notEqual(r.fields.sbp.status === "AUTO_ACCEPTED" && r.fields.sbp.source, "ART", lab + " at x=" + x + " must not auto-fill as ART");
+    assert.notEqual(r.fields.art && r.fields.art.status, "AUTO_ACCEPTED");
+  }
+  assert.equal(M.parseMonitor(nibpTile("IBP1", 0.57)).fields.sbp.source, "ART", "a numbered IBP channel is still arterial");
+  assert.equal(M.parseMonitor(nibpTile("ПІВP", 0.57)).fields.sbp.source !== "ART", true, "Cyrillic garbage around 'IBP' is not ART");
+});
