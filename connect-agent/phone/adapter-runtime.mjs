@@ -270,6 +270,31 @@ export function rowsFromHtml(text, view, parse) {
   return Array.isArray(rows) ? rows : [];
 }
 
+/**
+ * applyColumns(view, rows) -> rows keyed the way the screen labels them. A proven view remembers which
+ * response field each screen column shows (view.columns, learned by value on the phone); each row gets
+ * those headers FIRST, then its raw fields (a chained detail call still reads the raw id it traced).
+ * Without learned columns the rows pass through untouched.
+ */
+export function applyColumns(view, rows) {
+  const cols = view && view.columns && typeof view.columns === 'object' ? view.columns : null;
+  if (!cols || !Array.isArray(rows)) return rows;
+  const txt = (v) => (v == null ? '' : String(v).trim());
+  return rows.map((r) => {
+    if (!r || typeof r !== 'object') return r;
+    const out = {};
+    for (const h of Object.keys(cols)) {
+      const c = cols[h] || {};
+      let v = '';
+      if (c.key) v = txt(r[c.key]);
+      else if (Array.isArray(c.keys) && c.keys.length === 2) { const a = txt(r[c.keys[0]]), b = txt(r[c.keys[1]]); v = a || b ? a + (typeof c.join === 'string' ? c.join : ' ') + b : ''; }
+      if (v) out[h] = v;
+    }
+    for (const k of Object.keys(r)) if (!(k in out)) out[k] = r[k];
+    return out;
+  });
+}
+
 /** Rows worth calling data: at least two real columns (one column per row is a heading list, not results). */
 export function usableRows(rows) {
   const r = Array.isArray(rows) ? rows[0] : null;
@@ -430,7 +455,7 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
     let rows = [];
     if (kind === 'json') { try { rows = rowsFromJson(JSON.parse(resp.text)); } catch { rows = []; } }
     else if (kind === 'html') rows = rowsFromHtml(resp.text, view, parseHtml);
-    out = { rows, via: 'endpoint', url: req.path, kind, proven: true, method: req.method };
+    out = { rows: applyColumns(view, rows), via: 'endpoint', url: req.path, kind, proven: true, method: req.method };
   }
   return out || { rows: [], via: 'endpoint', url: '', kind: 'empty', proven: true };
 }

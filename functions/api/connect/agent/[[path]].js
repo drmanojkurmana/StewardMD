@@ -297,6 +297,27 @@ function cleanObservedViews(raw) {
       }
       clean.fieldHints = fh;
     }
+    /* Learned on the phone by value equality against the screen (prove.mjs learnColumns): which
+     * response field each header shows, or two fields and the joiner between them. Names only; a
+     * name with an identifier-shaped digit run or an @ is refused, never stored. */
+    if (v.columns !== undefined) {
+      if (!v.columns || typeof v.columns !== "object" || Array.isArray(v.columns)) throw new OnboardError("invalid", "observedViews: columns invalid");
+      const nameOk = (s) => typeof s === "string" && s.length > 0 && s.length <= 80 && !/\d{3,}/.test(s) && s.indexOf("@") < 0;
+      const cols = {};
+      for (const h of Object.keys(v.columns)) {
+        if (clean.headers.indexOf(h) < 0) continue;
+        const c = v.columns[h];
+        if (!c || typeof c !== "object" || Array.isArray(c)) throw new OnboardError("invalid", "observedViews: columns invalid");
+        if (c.key !== undefined) {
+          if (!nameOk(c.key)) throw new OnboardError("invalid", "observedViews: columns key invalid");
+          cols[h] = { key: c.key };
+        } else if (Array.isArray(c.keys) && c.keys.length === 2 && c.keys.every(nameOk)) {
+          const join = typeof c.join === "string" && c.join.length <= 8 && !/\d/.test(c.join) ? c.join : " ";
+          cols[h] = { keys: c.keys.slice(), join };
+        } else throw new OnboardError("invalid", "observedViews: columns entry invalid");
+      }
+      if (Object.keys(cols).length) clean.columns = cols;
+    }
     if (v.detailOf !== undefined) {
       if (typeof v.detailOf !== "string" || v.detailOf.length > 32) throw new OnboardError("invalid", "observedViews: detailOf invalid");
       clean.detailOf = v.detailOf;

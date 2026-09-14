@@ -43,46 +43,63 @@ function rowsOf(sections, resource) {
   const s = (sections || []).find((x) => x && x.resource === resource && Array.isArray(x.rows));
   return s ? s.rows : [];
 }
-function looksLikeResultTable(rows) {
-  return rows.some((r) => col(r, RX.result) && (col(r, RX.units) || col(r, RX.range) || col(r, RX.name)));
+/* LEARNED BEFORE GUESSED. A section carries the column roles the brain named for the screen the rows
+ * came from (role -> header, runtime rolesOf). pick() reads that header first; the key-name regex is
+ * only the fallback for a view no brain mapped. A payload whose ValueType or LowValue precedes Result
+ * cannot pass one of them off as the result once "Result" is a learned column. */
+function rolesFor(sections, resource) {
+  const s = (sections || []).find((x) => x && x.resource === resource);
+  return s && s.roles && typeof s.roles === 'object' ? s.roles : {};
+}
+function pick(row, roles, role, re, not) {
+  const h = roles && roles[role];
+  if (h && row && row[h] != null) { const v = String(row[h]).trim(); if (v) return v; }
+  return re ? col(row, re, not) : '';
+}
+function looksLikeResultTable(rows, roles) {
+  return rows.some((r) => pick(r, roles, 'result', RX.result) && (pick(r, roles, 'unit', RX.units) || pick(r, roles, 'reference', RX.range) || pick(r, roles, 'testName', RX.name)));
 }
 
 /** GET /lab -> { orders } and GET /lab-detail -> { group, tests } from the adapter's labs view. */
 export function labOrders(sections, patient) {
   const rows = rowsOf(sections, 'labs');
   if (!rows.length) return { orders: [] };
+  const roles = rolesFor(sections, 'labs');
+  const droles = rolesFor(sections, 'labs-detail');
   const episodeId = (patient && patient.episodeId) || '';
-  if (looksLikeResultTable(rows)) {
+  if (looksLikeResultTable(rows, roles)) {
     // A flat results table (test, result, units, range): one order per distinct group or date, all
     // its rows as tests. GHIS style two-level (order list -> detail) collapses to that.
     const groups = new Map();
     rows.forEach((r) => {
-      const key = col(r, RX.dept) + '|' + col(r, RX.date);
-      if (!groups.has(key)) groups.set(key, { key, date: col(r, RX.date), dept: col(r, RX.dept), rows: [] });
+      const key = pick(r, roles, 'department', RX.dept) + '|' + pick(r, roles, 'date', RX.date);
+      if (!groups.has(key)) groups.set(key, { key, date: pick(r, roles, 'date', RX.date), dept: pick(r, roles, 'department', RX.dept), rows: [], roles });
       groups.get(key).rows.push(r);
     });
     const orders = [...groups.values()].map((g, i) => ({
-      serviceName: g.rows.length === 1 ? (col(g.rows[0], RX.name) || firstText(g.rows[0])) : (g.dept || 'Laboratory') + ' (' + g.rows.length + ' tests)',
+      serviceName: g.rows.length === 1 ? (pick(g.rows[0], roles, 'testName', RX.name) || firstText(g.rows[0])) : (g.dept || 'Laboratory') + ' (' + g.rows.length + ' tests)',
       orderDate: g.date, department: g.dept, status: col(g.rows[0], RX.status) || 'Reported',
       renderId: 'a' + i, episodeId, orderId: 'a' + i, valueType: '',
     }));
     return { orders, detailOf: (renderId) => detailFor([...groups.values()][Number(String(renderId).slice(1))] || null) };
   }
   const orders = rows.map((r, i) => ({
-    serviceName: col(r, RX.name, /\bid\b|code/i) || firstText(r), orderDate: col(r, RX.date), department: col(r, RX.dept),
+    serviceName: pick(r, roles, 'testName', RX.name, /\bid\b|code/i) || pick(r, roles, 'title') || firstText(r), orderDate: pick(r, roles, 'date', RX.date), department: pick(r, roles, 'department', RX.dept),
     status: col(r, RX.status), renderId: 'a' + i, episodeId, orderId: 'a' + i, valueType: '',
   }));
   /* The proven chain (runtime readPatientDetails): each order's own result rows, read through the
-   * detail call with that order's render id, tagged `_of` with the order's title. */
+   * detail call with that order's render id, tagged with the order's index (`_rowIndex`), its traced
+   * key (`_key`) and its title (`_of`). Index first: two orders of the same panel on different days
+   * share a title, and matching on it once lumped 42 tests under a 14-test order (2026-09-14). */
   const detailRows = rowsOf(sections, 'labs-detail');
   return { orders, detailOf: (renderId) => {
     const i = Number(String(renderId).slice(1));
     const r = rows[i];
     if (!r) return null;
-    const title = col(r, RX.name, /\bid\b|code/i) || firstText(r);
-    const renderKey = String(r.ServiceRenderId || r.renderId || '');
-    const own = detailRows.filter((d) => d._of === title || (renderKey && (d._key === renderKey || d.Render_ID === renderKey)) || d._rowIndex === i);
-    return detailFor({ dept: col(r, RX.dept), date: col(r, RX.date), rows: own.length ? own : [r] });
+    const title = pick(r, roles, 'testName', RX.name, /\bid\b|code/i) || firstText(r);
+    const byIndex = detailRows.filter((d) => d._rowIndex === i);
+    const own = byIndex.length ? byIndex : detailRows.filter((d) => d._of === title);
+    return detailFor({ dept: pick(r, roles, 'department', RX.dept), date: pick(r, roles, 'date', RX.date), rows: own.length ? own : [r], roles: own.length ? droles : roles });
   } };
 }
 /* ANALYTE NORMALIZATION. Hospitals label the same test many ways ("Hb", "HB%", "PLT",
@@ -188,14 +205,15 @@ export function numResult(val) {
 
 export function detailFor(g) {
   if (!g) return null;
+  const R = g.roles || {};
   return {
-    group: g.rows.length === 1 ? (col(g.rows[0], RX.name, /\bid\b|code/i) || firstText(g.rows[0])) : (g.dept || 'Laboratory'),
+    group: g.rows.length === 1 ? (pick(g.rows[0], R, 'testName', RX.name, /\bid\b|code/i) || firstText(g.rows[0])) : (g.dept || 'Laboratory'),
     department: g.dept || '', sampleType: '', collected: g.date || '', reported: g.date || '',
     tests: g.rows.map((r) => {
-      const low = col(r, RX.low), high = col(r, RX.high), range = col(r, RX.range) || ((low || high) ? low + ' - ' + high : '');
-      const name = col(r, RX.name, /\bid\b|code/i) || firstText(r);
-      const result = normalizeResult(col(r, RX.result, RX.units));
-      return { test: name, canonical: canonicalLabName(name), result, numValue: numResult(result), units: col(r, RX.units), low, high, range, critical: '', method: '', valueType: '', antibiogram: '' };
+      const low = col(r, RX.low), high = col(r, RX.high), range = pick(r, R, 'reference', RX.range) || ((low || high) ? low + ' - ' + high : '');
+      const name = pick(r, R, 'testName', RX.name, /\bid\b|code/i) || firstText(r);
+      const result = normalizeResult(pick(r, R, 'result', RX.result, RX.units));
+      return { test: name, canonical: canonicalLabName(name), result, numValue: numResult(result), units: pick(r, R, 'unit', RX.units), low, high, range, critical: '', method: pick(r, R, 'method'), valueType: '', antibiogram: '' };
     }),
   };
 }
@@ -323,9 +341,10 @@ export function radiologyOrders(sections, patient) {
 /** GET /medications -> { rows } in the proxy's row shape. */
 export function medicationRows(sections) {
   /* The hand-built proxy's medication rows carry no status field: mirror it exactly. */
+  const R = rolesFor(sections, 'medications');
   return { rows: rowsOf(sections, 'medications').map((r) => ({
-    productCode: col(r, RX.code), drugText: col(r, RX.drug, RX.code) || firstText(r), route: col(r, RX.route),
-    dosage: col(r, RX.dosage), frequency: col(r, RX.freq), duration: col(r, RX.duration), dept: '', dateTime: col(r, RX.date),
+    productCode: pick(r, R, 'prodCode', RX.code), drugText: pick(r, R, 'drugName', RX.drug, RX.code) || firstText(r), route: pick(r, R, 'route', RX.route),
+    dosage: pick(r, R, 'dosage', RX.dosage), frequency: pick(r, R, 'frequency', RX.freq), duration: pick(r, R, 'duration', RX.duration), dept: '', dateTime: pick(r, R, 'date', RX.date),
   })).filter((m) => m.drugText) };
 }
 

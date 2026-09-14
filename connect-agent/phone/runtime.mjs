@@ -361,106 +361,10 @@ function fallbackView(view) {
 }
 
 export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
+  /* NO HOSPITAL IS SPECIAL HERE. The views are exactly what discovery proved for this hospital; the
+   * runtime never injects an endpoint it knows from elsewhere (owner, 2026-09-13: GHIS is the test,
+   * not the target). What discovery did not prove is read from the page or reported missing. */
   const views = viewsByResource(replay);
-  if (isGimsrOrigin(origin)) {
-    if (!views.medications || !views.medications.endpoints || !views.medications.endpoints.some((e) => /GetMedicines/i.test(e.path))) {
-      views.medications = {
-        resourceHint: 'medications',
-        pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
-        proof: { status: 'proven', kind: 'html' },
-        endpoints: [{
-          method: 'GET',
-          path: '/Doctor/Home/GetMedicines/?id',
-          role: 'data',
-          params: { id: { from: 'worklist', field: 'patientId' } },
-          proof: { status: 'proven', kind: 'html' }
-        }]
-      };
-    }
-    if (!views.labs || !views.labs.endpoints || !views.labs.endpoints.some((e) => /GetSearchPatientId/i.test(e.path))) {
-      views.labs = {
-        resourceHint: 'labs',
-        pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
-        proof: { status: 'proven', kind: 'json' },
-        endpoints: [
-          {
-            method: 'GET',
-            path: '/Doctor/Home/OTLabPrintsSecretary/?id',
-            role: 'prerequisite',
-            params: { id: { from: 'worklist', field: 'patientId' } }
-          },
-          {
-            method: 'POST',
-            path: '/Lab/Home/GetSearchPatientId',
-            role: 'data',
-            bodyKeys: ['__RequestVerificationToken', 'patient_id', 'DeptID', 'FDate', 'EDate'],
-            requestKind: 'form',
-            params: {
-              __RequestVerificationToken: { token: true },
-              patient_id: { from: 'worklist', field: 'patientId' },
-              DeptID: { constant: '' },
-              FDate: { constant: '' },
-              EDate: { constant: '' }
-            },
-            proof: { status: 'proven', kind: 'json' }
-          }
-        ]
-      };
-    }
-    if (!views['labs-detail'] || !views['labs-detail'].endpoints || !views['labs-detail'].endpoints.some((e) => /GetPrintLabResultDetailsAuth/i.test(e.path))) {
-      views['labs-detail'] = {
-        resourceHint: 'labs-detail',
-        detailOf: 'labs',
-        pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
-        proof: { status: 'proven', kind: 'json' },
-        endpoints: [{
-          method: 'POST',
-          path: '/Lab/Home/GetPrintLabResultDetailsAuth',
-          role: 'data',
-          bodyKeys: ['__RequestVerificationToken', 'Render_ID', 'Episode_Id', 'Result_Type'],
-          requestKind: 'form',
-          params: {
-            __RequestVerificationToken: { token: true },
-            Render_ID: { field: 'ServiceRenderId' },
-            Episode_Id: { field: 'episode_id' },
-            Result_Type: { constant: 'a' }
-          },
-          proof: { status: 'proven', kind: 'json' }
-        }]
-      };
-    }
-    if (!views.radiology || !views.radiology.endpoints || !views.radiology.endpoints.some((e) => /Dashboardwithdate|Radio\/Home/i.test(e.path))) {
-      views.radiology = {
-        resourceHint: 'radiology',
-        pathTemplate: 'https://ghis.gitam.edu/Radio/Home?recordNo={patientId}',
-        proof: { status: 'proven', kind: 'html' },
-        rowsSelector: 'table tbody tr, table tr',
-        headers: ['Service ID', 'Visit ID', 'Date', 'Description'],
-        endpoints: [{
-          method: 'GET',
-          path: '/Radio/Home?recordNo',
-          role: 'data',
-          params: { recordNo: { from: 'worklist', field: 'patientId' } },
-          proof: { status: 'proven', kind: 'html' }
-        }]
-      };
-    }
-    if (!views['radiology-detail'] || !views['radiology-detail'].endpoints || !views['radiology-detail'].endpoints.some((e) => /GetRadiology(Automated)?ResultPrint/i.test(e.path))) {
-      views['radiology-detail'] = {
-        resourceHint: 'radiology-detail',
-        detailOf: 'radiology',
-        pathTemplate: 'https://ghis.gitam.edu/Radio/Home',
-        proof: { status: 'proven', kind: 'json' },
-        endpoints: [{
-          method: 'GET',
-          path: '/Radio/Home/GetRadiologyAutomatedResultPrint?resultid',
-          role: 'data',
-          params: { resultid: { field: 'Service ID' } },
-          proof: { status: 'proven', kind: 'json' }
-        }]
-      };
-    }
-  }
   const sections = [];
   for (const r of DETAIL_RESOURCES) {
     const v = views[r];
@@ -473,34 +377,20 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     const vo = viewOrigin(v, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
     if (replayed) {
-      sections.push({ resource: r, rows: replayed, via: 'endpoint' });
+      sections.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
       /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
        * this list, its fields filled from that row (render id, result id). */
       const d = views[r + '-detail'];
       if (d && d.detailOf === r && d.proof && d.proof.status === 'proven') {
         const ar = await import('./adapter-runtime.mjs');
         const detailRows = [];
+        /* The list field the detail call was proven to send (its render id, its result id): the key
+         * that ties each detail row back to its list row. Learned, never a guessed column name. */
+        const keyField = (d.endpoints || []).flatMap((e) => Object.values(e.params || {})).map((s) => s && s.field).find((f) => typeof f === 'string' && f) || null;
         let rowIndex = 0;
         for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
           let got = null;
           try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
-          if ((!got || !got.rows || !got.rows.length) && r === 'radiology' && row['Service ID']) {
-            try {
-              const manualView = {
-                resourceHint: 'radiology-detail',
-                pathTemplate: 'https://ghis.gitam.edu/Radiology/Home',
-                proof: { status: 'proven', kind: 'json' },
-                endpoints: [{
-                  method: 'GET',
-                  path: '/Radiology/Home/GetRadiologyResultPrint?resultid',
-                  role: 'data',
-                  params: { resultid: { field: 'Service ID' } },
-                  proof: { status: 'proven', kind: 'json' }
-                }]
-              };
-              got = await ar.executeView({ plugin, origin: viewOrigin(manualView, origin), view: manualView, patient, parentRow: row });
-            } catch (x) {}
-          }
           // The row's title: prefer description / study / parameter / test name over IDs / numeric strings
           let title = '';
           for (const k of Object.keys(row)) {
@@ -515,13 +405,13 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
               .map((k) => String(row[k] == null ? '' : row[k]).trim())
               .find((v) => v && !/^\d+$/.test(v)) || '';
           }
-          const rowKey = String(row['Service ID'] || row.ServiceRenderId || row.renderId || row.resultid || row.id || '');
+          const rowKey = keyField ? String(row[keyField] == null ? '' : row[keyField]) : '';
           for (const dr of (got && got.rows) || []) {
             detailRows.push(Object.assign({ _of: title, _key: rowKey, _rowIndex: rowIndex }, dr));
           }
           rowIndex++;
         }
-        if (detailRows.length) { sections.push({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
+        if (detailRows.length) { sections.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
       }
       continue;
     }
@@ -542,7 +432,23 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     }
     if (!rows.length && lastErr) { sections.push({ resource: r, error: lastErr.message }); continue; }
     if (rows.length && onRead) onRead({ resource: r, via: 'page' });
-    sections.push({ resource: r, rows, via: 'page' });
+    sections.push(withRoles({ resource: r, rows, via: 'page' }, v));
   }
   return sections;
+}
+
+/** role -> screen header, from the brain's column roles the view recorded (view.fieldHints: header -> role). */
+export function rolesOf(view) {
+  const fh = view && view.fieldHints && typeof view.fieldHints === 'object' ? view.fieldHints : null;
+  const out = {};
+  if (!fh) return out;
+  for (const h of Object.keys(fh)) { const role = fh[h]; if (typeof role === 'string' && role && !(role in out)) out[role] = h; }
+  return out;
+}
+
+/** Attach the section's column roles only when the view carried some (an empty map is left off). */
+function withRoles(section, view) {
+  const roles = rolesOf(view);
+  if (Object.keys(roles).length) section.roles = roles;
+  return section;
 }

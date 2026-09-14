@@ -130,6 +130,48 @@ test('numResult strips units and prefixes; narratives and ranges become null', (
   assert.equal(numResult(null), null);
 });
 
+test('learned column roles win over key-name guesses (a misleading ValueType/Value payload)', () => {
+  // The response labels its columns unhelpfully: Value is a code, ValueType is the number the doctor
+  // saw. Discovery learned the roles (role -> screen header) by value; the shim must read those, not
+  // the field a /value|result/ guess would grab.
+  const roleSections = [{
+    resource: 'labs',
+    roles: { testName: 'Analyte', result: 'ValueType', unit: 'UOM', reference: 'NormalRange', date: 'RunOn', department: 'Section' },
+    rows: [
+      { Analyte: 'Sodium', Value: 'NA_CODE', ValueType: '138', UOM: 'mmol/L', NormalRange: '135 - 145', RunOn: '04/09/2026', Section: 'Biochemistry' },
+      { Analyte: 'Potassium', Value: 'K_CODE', ValueType: '4.2', UOM: 'mmol/L', NormalRange: '3.5 - 5.1', RunOn: '04/09/2026', Section: 'Biochemistry' },
+    ],
+  }];
+  const { orders } = serveGhisProxy({ path: '/lab?patientId=K001', sections: roleSections, patient }).body;
+  assert.equal(orders[0].serviceName, 'Biochemistry (2 tests)');
+  const det = serveGhisProxy({ path: '/lab-detail?renderId=' + orders[0].renderId, sections: roleSections, patient }).body;
+  assert.deepEqual(det.tests.map((t) => [t.test, t.result, t.units, t.range]), [
+    ['Sodium', '138', 'mmol/L', '135 - 145'],
+    ['Potassium', '4.2', 'mmol/L', '3.5 - 5.1'],
+  ], 'result reads ValueType (the on-screen number), never the Value code');
+});
+
+test('a two-level lab chain keeps each order distinct: detail rows join by list index, not shared title', () => {
+  // Two CBC orders on different days: matching detail rows by title alone lumped both under one order
+  // (42 tests under a 14-test order, live 2026-09-14). _rowIndex keeps them apart.
+  const chained = [
+    { resource: 'labs', roles: { testName: 'Panel', date: 'On' }, rows: [
+      { Panel: 'CBC', On: '01/09/2026' }, { Panel: 'CBC', On: '05/09/2026' },
+    ] },
+    { resource: 'labs-detail', roles: { testName: 'T', result: 'R', unit: 'U' }, rows: [
+      { _of: 'CBC', _rowIndex: 0, T: 'Hb', R: '11.2', U: 'g/dL' },
+      { _of: 'CBC', _rowIndex: 1, T: 'Hb', R: '12.9', U: 'g/dL' },
+      { _of: 'CBC', _rowIndex: 1, T: 'WBC', R: '8.0', U: '10^3/uL' },
+    ] },
+  ];
+  const { orders } = serveGhisProxy({ path: '/lab?patientId=K001', sections: chained, patient }).body;
+  assert.equal(orders.length, 2, 'two orders, not collapsed into one');
+  const d0 = serveGhisProxy({ path: '/lab-detail?renderId=' + orders[0].renderId, sections: chained, patient }).body;
+  const d1 = serveGhisProxy({ path: '/lab-detail?renderId=' + orders[1].renderId, sections: chained, patient }).body;
+  assert.deepEqual(d0.tests.map((t) => t.result), ['11.2'], 'first order gets only its own day');
+  assert.deepEqual(d1.tests.map((t) => t.result), ['12.9', '8.0'], 'second order gets its two tests, not the first order lumped in');
+});
+
 test('detailFor and getLabDetail expose test, canonical and numValue per test', () => {
   const g = { dept: 'Biochemistry', date: '03/09/2026', rows: [
     { 'Test Name': 'SGOT', Result: '44 U/L', Units: 'U/L' },

@@ -3,8 +3,8 @@
 // Synthetic GHIS-shaped data (made-up ids and names); the real GHIS endpoint list is never given to discovery.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams } from '../../connect-agent/phone/prove.mjs';
-import { executeView, parseFetchExpression, PAGE_TOKENS, provenValue } from '../../connect-agent/phone/adapter-runtime.mjs';
+import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows } from '../../connect-agent/phone/prove.mjs';
+import { executeView, parseFetchExpression, PAGE_TOKENS, provenValue, applyColumns } from '../../connect-agent/phone/adapter-runtime.mjs';
 import { mapRows } from '../../connect-agent/phone/runtime.mjs';
 import { redactEndpoints } from '../../connect-agent/phone/deep-crawl.mjs';
 
@@ -42,6 +42,46 @@ test('paramsOf traces every field: ward-list column, joined visit id, parent row
   assert.deepEqual(paramsOf({ url: HOST + '/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001', body: null }, [radio, wl]), { resultid: { from: 'radiology', field: '_args.0' } });
   assert.equal(todayFormat('2026-09-13', now), 'YYYY-MM-DD');
   assert.deepEqual(safeParams({ id: { from: 'worklist', field: 'col123' }, x: { constant: 'a' } }), { id: { unmapped: true }, x: { constant: 'a' } });
+});
+
+test('learnColumns binds each screen column to the response field by VALUE, never by what the key is named', () => {
+  // The real GHIS lab-result defect: the payload puts ValueType and LowValue AHEAD of the result, and
+  // a name guess (/value|result/) grabs ValueType. The screen shows test, result, units, range.
+  const headers = ['Test', 'Result', 'Units', 'Range'];
+  const screen = [
+    ['Haemoglobin', '11.2', 'g/dL', '13 - 17'],
+    ['WBC', '9.1', '10^3/uL', '4 - 11'],
+    ['Creatinine', '1.4', 'mg/dL', '0.6 - 1.2'],
+  ];
+  const resp = [
+    { ValueType: 'N', TestName: 'Haemoglobin', LowValue: '13', HighValue: '17', Result: '11.2', Units: 'g/dL' },
+    { ValueType: 'N', TestName: 'WBC', LowValue: '4', HighValue: '11', Result: '9.1', Units: '10^3/uL' },
+    { ValueType: 'N', TestName: 'Creatinine', LowValue: '0.6', HighValue: '1.2', Result: '1.4', Units: 'mg/dL' },
+  ];
+  const cols = learnColumns(headers, screen, resp);
+  assert.deepEqual(cols.Test, { key: 'TestName' });
+  assert.deepEqual(cols.Result, { key: 'Result' }, 'Result binds to the field whose values are on screen, not ValueType');
+  assert.deepEqual(cols.Units, { key: 'Units' });
+  assert.deepEqual(cols.Range, { keys: ['LowValue', 'HighValue'], join: ' - ' }, 'a joined range column maps to both fields and the joiner');
+
+  // applyColumns then renames the raw rows to the screen's own labels, keeping the raw fields too.
+  const named = applyColumns({ columns: cols }, resp);
+  assert.equal(named[0].Result, '11.2');
+  assert.equal(named[0].Range, '13 - 17');
+  assert.equal(named[0].TestName, 'Haemoglobin', 'raw fields survive so a chained id is still readable');
+});
+
+test('learnColumns refuses a column no response field reproduces on screen (never a guess)', () => {
+  const cols = learnColumns(['Result', 'Comment'], [['11.2', 'looks fine'], ['9.1', 'within range']],
+    [{ Result: '11.2', Flag: 'H' }, { Result: '9.1', Flag: '' }]);
+  assert.deepEqual(cols.Result, { key: 'Result' });
+  assert.equal(cols.Comment, undefined, 'the free-text comment matches no field, so it stays unmapped');
+});
+
+test('screenRows accepts both the row-structured screen and the older flat list', () => {
+  assert.deepEqual(screenRows([['a', 'b'], ['c', 'd']]), [['a', 'b'], ['c', 'd']]);
+  assert.deepEqual(screenRows(['a', 'b', 'c']), [['a', 'b', 'c']]);
+  assert.deepEqual(screenRows(null), []);
 });
 
 /* A fake hospital page: the replay buffer the observer keeps, the cells on screen, and the answers a
