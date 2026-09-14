@@ -568,7 +568,7 @@ test("sweep: in-flight non-expired non-terminal txn → untouched (txnsSwept===0
   await bufferEntry(r2, HMAC_ENV, "txn-L", "cc-ref-1", "CIPHER-L", "chk-1", NOW);
 
   const counts = await sweep(db, r2, HMAC_ENV, 100); // not expired (100<9999), not terminal
-  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0, demographicsErased: 0 });
   const row = await getTxnByRequestId(db, "req-live");
   assert.ok(row);
   assert.equal(row.status, "RECEIVING");
@@ -591,7 +591,7 @@ test("sweep is idempotent: second sweep over a clean table → all-zero counts, 
   const first = await sweep(db, r2, HMAC_ENV, 2000);
   assert.equal(first.txnsSwept, 1);
   const second = await sweep(db, r2, HMAC_ENV, 2000); // table already clean
-  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
+  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0, demographicsErased: 0 });
 });
 
 // ---- Stage-6 Task-1: PIN the sweep expires_at/now type contract to ISO-8601 (BLOCKING) --------------
@@ -638,7 +638,7 @@ test("sweep (ISO): future expires_at non-terminal txn → retained untouched", a
   await bufferEntry(r2, HMAC_ENV, "txn-ISO-F", "cc-ref-1", "CIPHER-F", "chk-1", ISO_NOW);
 
   const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // ISO_NOW < ISO_FUTURE → NOT expired
-  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0, demographicsErased: 0 });
   const row = await getTxnByRequestId(db, "req-iso-fut");
   assert.ok(row && row.eph_privkey_sealed && row.eph_privkey_sealed.length > 0); // key intact
   assert.equal((await listBuffered(r2, "txn-ISO-F")).length, 1);                 // buffer intact
@@ -871,7 +871,7 @@ test("erase: idempotent — second sweep → zero counts, no duplicate data.eras
   const first = await sweep(db, r2, HMAC_ENV, ISO_NOW);
   assert.equal(first.consentsErased, 1);
   const second = await sweep(db, r2, HMAC_ENV, ISO_NOW);
-  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
+  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0, demographicsErased: 0 });
   assert.equal(erasedEvents(db).length, 1, "no duplicate data.erased on re-sweep");
 });
 

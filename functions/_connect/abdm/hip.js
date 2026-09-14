@@ -260,7 +260,10 @@ export async function serveTransfer(env, deps, req) {
   for (const rec of loaded) {
     const record = rec.record || {};
     if (!record.profile && (rec.recordType || record.recordType)) record.profile = rec.recordType || record.recordType;
-    const ctx = { now: (typeof deps.now === "function" ? deps.now : () => new Date(nowIso)), tenant: { id: req.tenantId } };
+    // hipId + envName drive Composition.attester.party (the HFR facility Organization) - the Main Envelope
+    // requirement. Absent hipId => the bundle is emitted unattested rather than attested to a blank facility.
+    const ctx = { now: (typeof deps.now === "function" ? deps.now : () => new Date(nowIso)), tenant: { id: req.tenantId },
+                  hipId: req.hipId || (env && env.ABDM_HIP_ID) || null, envName: (env && env.ABDM_ENV) || "sandbox" };
     const doc = serializeNdhm(ctx, record);
     const v = validateNdhmDoc(doc);
     if (!v.ok) { warnings.push({ careContextRef: rec.careContextRef, errors: v.errors }); continue; }

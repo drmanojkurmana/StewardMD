@@ -23,6 +23,10 @@ export const CAPS = {
   EMR_VITALS: "emr.vitals",         // record vitals / temperature ONLY (nurse)
   EMR_TREAT: "emr.treat",           // order investigations / prescribe / full assessment (DOCTOR ONLY)
   EMR_VIEW: "emr.view",             // open the EMR patient profile (labs/meds/history)
+  // Recording an administered vaccination. Its OWN cap rather than emr.treat, because the authority is
+  // different: a nurse who gives the dose must be able to record it, while still holding no power to
+  // prescribe or order. Owner-decided 2026-08-19: "doctor + authorised staff".
+  EMR_IMMUNISE: "emr.immunise",     // record a vaccination (doctor + authorised clinical staff)
   SESSION_MANAGE: "session.manage", // pause / emergency / session status
   ANALYTICS_VIEW: "analytics.view", // operational analytics
   STAFF_ADMIN: "staff.admin",       // manage the staff->role mapping (owner/admin only)
@@ -122,8 +126,8 @@ export const ROLE_CAPS = {
   admin: Object.values(CAPS).filter((c) => ONCQIS_CAPS.indexOf(c) < 0 && PGLOG_SIGNOFF_CAPS.indexOf(c) < 0),
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
-           C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE, C.ORDER_READ,
-           C.INCIDENT_REPORT],
+           C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
+           C.ORDER_READ, C.INCIDENT_REPORT],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
                C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT],
@@ -133,14 +137,16 @@ export const ROLE_CAPS = {
   // MED_ADMINISTER added 2026-09-07 with the inpatient eMAR: giving a dose at the bedside is the
   // nurse's job and nobody else's here. It grants the administration record ONLY - still no
   // emr.treat, so a nurse who can give a dose still cannot write the order for it.
+  // …and may RECORD A VACCINATION they administered (emr.immunise) - the nurse is usually the one giving
+  // it, so withholding that would mean the doctor typing in someone else's act.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
-          C.EMR_VITALS, C.EMR_VIEW, C.MED_ADMINISTER, C.INCIDENT_REPORT],
+          C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.MED_ADMINISTER, C.INCIDENT_REPORT],
   // Intern / resident: clinical trainees — see the queue, register a walk-in, advance status, record
   // vitals, view EMR. QUEUE_ADD added 2026-08-24: an intern is often the person handed a walk-in, and
   // withholding it meant they could move patients through consultation but not enter them. Reorder and
   // assign stay OFF - deciding who is seen next is the nurse's authority, not a trainee's.
-  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW, C.INCIDENT_REPORT],
-  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW, C.INCIDENT_REPORT],
+  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.INCIDENT_REPORT],
+  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.INCIDENT_REPORT],
   // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
   // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
   reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
