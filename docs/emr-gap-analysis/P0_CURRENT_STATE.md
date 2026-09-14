@@ -634,3 +634,10 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Regression 6593 pass, 0 fail, 1 skipped. Every route has a screen and a test. Live admin.js 24.
 **Remaining for P2:** exit evidence document (Muse, paused on quota until 11:47Z), then owner items only.
 
+### 2026-09-14 - P2 COMPLETE (engineering), owner items open
+
+- docs/emr-gap-analysis/P2_EXIT_EVIDENCE.md: all nine P2 exit criteria with verified screens, routes and quoted tests. Verdicts: 8 MET WITH LIMITS, 1 MET (modules without destabilising the core); none NOT MET. Limits are named per row.
+- Reachability checker fix: it walked dist-wardsynq/ (build output) and counted stale copies as screens; now skipped. Honest count: 23 screens, 423 routes, 0 without a screen, 0 without a test.
+- Production audit chain: schema and code live; no production writes since the 11:10Z deploy, so the first live links are still to be observed (hourly check armed).
+- Open, owner only: document bucket (DOC_S3_*), payment provider credentials, notification channel, payer endpoint and credentials, PACS viewer URL template, cloud speech decision for voice typing, two dependency advisories (@xmldom/xmldom, brace-expansion), penetration test to commission (plan in docs/PENETRATION_TEST_PLAN.md), FHIR R4B/R5 when a partner needs it. Owner confirmations requested: hospital-group counts computed by an audited system read authorised by owner acceptance; recording-dot/admin pill/portal Revoke colours.
+
