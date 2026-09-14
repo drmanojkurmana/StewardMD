@@ -1089,7 +1089,7 @@
     if (r == null) return h + '<span class="spin"></span> Loading webhooks...</div>';
     if (r.failed) return h + '<div class="msg err">Webhooks could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
     if (shown && shown.secret) {
-      h += '<div class="msg ok">Signing secret for ' + esc(shown.url) + ': <code style="user-select:all;word-break:break-all">' + esc(shown.secret) + "</code><br>Copy it now. It is not shown again.</div>";
+      h += '<div class="msg ok">Signing secret for ' + esc(shown.url) + ': <code style="user-select:all;word-break:break-all">' + esc(shown.secret) + "</code><br>Copy it now. It is not shown again. The previous secret keeps working for 24 hours so the receiving system can be updated.</div>";
     }
     var label = {};
     (r.eventTypes || []).forEach(function (t) { label[t.id] = t.label; });
@@ -1159,7 +1159,7 @@
       body.querySelectorAll("[data-wh-rotate]").forEach(function (b) {
         b.onclick = function () {
           var id = b.getAttribute("data-wh-rotate");
-          if (!window.confirm("Make a new signing secret? The current one stops verifying immediately.")) return;
+          if (!window.confirm("Make a new signing secret? The current one keeps working for 24 hours.")) return;
           b.disabled = true;
           c.api("/ward/webhook-rotate", { orgId: c.state.orgId, id: id }).then(function (x) {
             if (!x || !x.ok || !x.secret) { b.disabled = false; msg(refusal(x)); return; }

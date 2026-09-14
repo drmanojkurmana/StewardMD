@@ -456,3 +456,133 @@ test("screen: loading, failed and empty are distinct, the no-PHI note is shown, 
   assert.match(log(c, { ok: true, deliveries: [{ at: "t", eventId: "evt-1", eventType: "order.placed", attempt: 6, status: "dead", responseCode: 503, reason: "http-error" }] }), /Failed for good/);
   assert.ok(!/[—–]/.test(loading + failed + empty + withRow + l0 + l1 + l2), "no em or en dash on screen");
 });
+
+// ---------------------------------------------------------------------------------------------
+// ROTATION OVERLAP: the retired secret verifies for 24 hours, then stops
+// ---------------------------------------------------------------------------------------------
+test("right after a rotate, a delivery carries both signatures, new first", async () => {
+  seed();
+  const reg = await register(["encounter.admitted"]);
+  assert.equal(reg.__status, 200, JSON.stringify(reg));
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  assert.notEqual(rot.secret, reg.secret);
+
+  const stored = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  assert.equal(Date.parse(stored.previousSecretUntil) - Date.parse(stored.secretSetAt), W.ROTATION_OVERLAP_MS, "the window runs 24 hours from the rotation");
+
+  const rx = receiver(200);
+  const nowMs = Date.now();
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-overlap", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  assert.equal(rx.calls.length, 1);
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  const parts = String(h["X-WardSynQ-Signature"]).split(",");
+  assert.equal(parts.length, 2, h["X-WardSynQ-Signature"]);
+  for (const p of parts) assert.match(p, /^v1=[0-9a-f]{64}$/);
+  assert.notEqual(parts[0], parts[1]);
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), true, "the first signature verifies with the new secret");
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), true, "the second signature verifies with the old secret");
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), false, "the new signature does not verify with the old secret");
+});
+
+test("past the 24 hour window only the new signature is sent", async () => {
+  seed();
+  assert.equal(W.ROTATION_OVERLAP_MS, 24 * 3600 * 1000);
+  const reg = await register(["encounter.admitted"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  const rx = receiver(200);
+  const nowMs = Date.now() + W.ROTATION_OVERLAP_MS + 60000;
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-late", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  assert.equal(rx.calls.length, 1);
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  assert.ok(!String(h["X-WardSynQ-Signature"]).includes(","), h["X-WardSynQ-Signature"]);
+  assert.match(h["X-WardSynQ-Signature"], /^v1=[0-9a-f]{64}$/);
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], body, h["X-WardSynQ-Signature"], nowMs), true, "the lone signature verifies with the new secret");
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, h["X-WardSynQ-Signature"], nowMs), false, "the retired secret no longer verifies");
+});
+
+test("a test send inside the window carries both signatures too", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  const rx = receiver(200);
+  const origFetch = globalThis.fetch;
+  globalThis.fetch = rx.fetchImpl;
+  let answer;
+  try {
+    answer = await as(ADMIN, "/ward/webhook-test", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  } finally { globalThis.fetch = origFetch; }
+  assert.equal(answer.__status, 200, JSON.stringify(answer));
+  assert.equal(rx.calls.length, 1);
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  const parts = String(h["X-WardSynQ-Signature"]).split(",");
+  assert.equal(parts.length, 2, h["X-WardSynQ-Signature"]);
+  const nowMs = Date.now();
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), true);
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), true);
+});
+
+test("a previous seal that no longer opens leaves delivery on the new secret alone", async () => {
+  seed();
+  const reg = await register(["encounter.admitted"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  const stored = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  await RECORD.append(T, [{ ...stored, version: stored.version + 1, previousSecretEnc: "!!!no-longer-a-seal!!!" }], {});
+  const rx = receiver(200);
+  const nowMs = Date.now();
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-badprev", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  assert.equal(rx.calls.length, 1, "delivery does not fail because of the old secret");
+  const h = rx.calls[0].init.headers;
+  assert.match(h["X-WardSynQ-Signature"], /^v1=[0-9a-f]{64}$/, "only the new signature is sent");
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], rx.calls[0].init.body, h["X-WardSynQ-Signature"], nowMs), true);
+});
+
+test("rotating twice keeps only the most recently retired secret as previous", async () => {
+  seed();
+  const reg = await register(["encounter.admitted"]);
+  const rot1 = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot1.__status, 200, JSON.stringify(rot1));
+  const ep1 = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  const rot2 = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot2.__status, 200, JSON.stringify(rot2));
+  const ep2 = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  assert.equal(ep2.previousSecretEnc, ep1.secretEnc, "the previous seal is the secret retired just now");
+  assert.notEqual(ep2.previousSecretEnc, ep1.previousSecretEnc, "the older retired secret is gone");
+  assert.deepEqual(Object.keys(ep2).filter((k) => k.indexOf("previous") === 0).sort(), ["previousSecretEnc", "previousSecretUntil"], "never more than one previous secret");
+
+  const rx = receiver(200);
+  const nowMs = Date.now();
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-twice", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  const parts = String(h["X-WardSynQ-Signature"]).split(",");
+  assert.equal(parts.length, 2, h["X-WardSynQ-Signature"]);
+  assert.equal(await W.verifySignature(rot2.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), true);
+  assert.equal(await W.verifySignature(rot1.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), true);
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), false, "the twice-retired secret verifies nothing");
+});
+
+test("list and update answers never carry secret material", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  assert.ok(!("secretEnc" in rot.webhook) && !("previousSecretEnc" in rot.webhook));
+  assert.ok(!JSON.stringify(rot).includes("previousSecretEnc"));
+  const list = await as(ADMIN, `/ward/webhooks?orgId=${ORG_ID}`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  const shown = list.webhooks.find((w) => w.id === reg.webhook.id);
+  assert.ok(shown);
+  assert.ok(!("secretEnc" in shown) && !("previousSecretEnc" in shown), JSON.stringify(Object.keys(shown)));
+  assert.ok(!JSON.stringify(list).includes("secretEnc"), "no sealed secret anywhere in the list answer");
+  const upd = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, eventTypes: ["order.placed", "result.released"] });
+  assert.equal(upd.__status, 200, JSON.stringify(upd));
+  assert.ok(!("secretEnc" in upd.webhook) && !("previousSecretEnc" in upd.webhook));
+  assert.ok(!JSON.stringify(upd).includes("secretEnc"));
+});

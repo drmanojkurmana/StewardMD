@@ -20,6 +20,8 @@
  *
  * THE SECRET. 32 random bytes made here, shown once in the answer that created or rotated it, stored
  * AES-GCM encrypted under the document key, never returned again. No key on the server, no webhook.
+ * After a rotation the retired secret still verifies for 24 hours, so the receiving system can be
+ * updated before the old secret stops working; each send in that window carries both signatures.
  *
  * DELIVERY. webhook-events.js stages a `webhook.event` in the clinical write. The fan-out consumer turns
  * it into one `webhook.deliver` event per subscribed endpoint, so each endpoint retries and dies on the
@@ -45,6 +47,7 @@ const TIMEOUT_MS = 5000;
 const DNS_TIMEOUT_MS = 3000;
 const AUTO_DISABLE_FAILURES = 10;
 const AUTO_DISABLE_SPAN_MS = 30 * 60 * 1000;
+const ROTATION_OVERLAP_MS = 24 * 3600 * 1000;
 const SIGNATURE_TOLERANCE_S = 300;
 /* Any RFC 8484 JSON resolver. Injected as deps.resolveHost in tests and by a deployment that has its own. */
 const DOH_URL = "https://cloudflare-dns.com/dns-query";
@@ -190,12 +193,26 @@ function notificationBody(event, orgId) {
   });
 }
 
-/** One POST. Returns { ok, code, reason }: the response code only, never the response body. */
-async function sendOnce(endpoint, secret, event, deps) {
+/* The opened previous secret while its overlap window still runs, else null. A previous seal that no
+ * longer opens is the same as no previous secret: delivery on the new secret must not fail for it. */
+async function previousSecretFor(ep, env, nowMs) {
+  if (!ep || !ep.previousSecretEnc || !ep.previousSecretUntil) return null;
+  const until = Date.parse(ep.previousSecretUntil);
+  if (!Number.isFinite(until) || (nowMs || Date.now()) >= until) return null;
+  return openSecret(env, ep.previousSecretEnc);
+}
+
+/** One POST. Returns { ok, code, reason }: the response code only, never the response body.
+ * prevSecret is the still-valid retired secret, or null: inside the overlap window the signature
+ * header carries both signatures, new first, so either secret verifies at the receiver. */
+async function sendOnce(endpoint, secret, event, deps, prevSecret) {
   const dest = await checkDestination(endpoint.url, deps);
   if (!dest.ok) return { ok: false, code: 0, reason: dest.reason };
   const body = notificationBody(event, deps.orgId);
   const timestamp = Math.floor((deps.nowMs || Date.now()) / 1000);
+  const signature = prevSecret
+    ? `${await signPayload(secret, timestamp, body)},${await signPayload(prevSecret, timestamp, body)}`
+    : await signPayload(secret, timestamp, body);
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), deps.timeoutMs || TIMEOUT_MS);
   let res;
@@ -203,7 +220,7 @@ async function sendOnce(endpoint, secret, event, deps) {
     res = await (deps.fetchImpl || fetch)(dest.url, {
       method: "POST", redirect: "manual", signal: controller.signal, body,
       headers: { "Content-Type": "application/json", "User-Agent": "WardSynQ-Webhooks/1", "X-WardSynQ-Event-Id": event.id, "X-WardSynQ-Event-Type": event.type,
-        "X-WardSynQ-Timestamp": String(timestamp), "X-WardSynQ-Signature": await signPayload(secret, timestamp, body) },
+        "X-WardSynQ-Timestamp": String(timestamp), "X-WardSynQ-Signature": signature },
     });
   } catch (e) {
     return { ok: false, code: 0, reason: controller.signal.aborted ? "timeout" : "unreachable" };
@@ -296,7 +313,8 @@ async function deliverOne(deps, payload, event) {
     return;
   }
   const secret = await openSecret(deps.env, ep.secretEnc);
-  const result = secret ? await sendOnce(ep, secret, notice, deps) : { ok: false, code: 0, reason: "no-key" };
+  const prev = secret ? await previousSecretFor(ep, deps.env, deps.nowMs || Date.now()) : null;
+  const result = secret ? await sendOnce(ep, secret, notice, deps, prev) : { ok: false, code: 0, reason: "no-key" };
   const status = result.ok ? "delivered" : attempt >= MAX_ATTEMPTS ? "dead" : "failed";
   await recordAttempt(deps, ep, { ...entry, status, responseCode: result.code, reason: result.reason });
   if (!result.ok) throw new Error(`webhook ${ep.id} attempt ${attempt}: ${result.reason}${result.code ? " " + result.code : ""}`);
@@ -403,7 +421,8 @@ async function updateWebhook(request, env, ctx) {
   return { ok: true, webhook: summaryOf(next, records[1] || null) };
 }
 
-/** ctx: { ..., id }. A new secret, shown once; the old one stops verifying at once. */
+/** ctx: { ..., id }. A new secret, shown once; the retired one keeps verifying for 24 hours, then stops.
+ * A second rotation inside the window retires the current secret in its turn: only ever one previous. */
 async function rotateWebhookSecret(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
@@ -414,10 +433,12 @@ async function rotateWebhookSecret(request, env, ctx) {
   const secretEnc = await sealSecret(env, secret);
   if (!secretEnc) return { ok: false, status: 503, error: "webhook_key_not_configured", message: "The new secret cannot be stored encrypted on this server, so the secret was not changed." };
   const at = new Date().toISOString();
-  const next = { ...ep, version: ep.version + 1, secretEnc, secretSetAt: at, writtenBy: { id: who.actorId, kind: "human", at } };
+  const next = { ...ep, version: ep.version + 1, secretEnc, secretSetAt: at,
+    previousSecretEnc: ep.secretEnc || null, previousSecretUntil: new Date(Date.parse(at) + ROTATION_OVERLAP_MS).toISOString(),
+    writtenBy: { id: who.actorId, kind: "human", at } };
   try { await who.repo.append(who.tenantId, [next], { audit: auditEvent("webhook.rotate", who.actorId, { webhookId: ep.id, host: hostOf(ep.url) }) }); }
   catch (e) { return writeFailed(e); }
-  return { ok: true, webhook: summaryOf(next), secret, secretNote: "Copy this secret now. It is not shown again. The previous secret no longer verifies." };
+  return { ok: true, webhook: summaryOf(next), secret, secretNote: "Copy this secret now. It is not shown again. The previous secret keeps working for 24 hours so the receiving system can be updated." };
 }
 
 /** ctx: { ..., id, orgId }. One signed webhook.test, sent now, once, and logged. Not counted towards auto-disable. */
@@ -431,7 +452,7 @@ async function testWebhook(request, env, ctx) {
   if (!secret) return { ok: false, status: 503, error: "webhook_key_not_configured", message: "The signing secret cannot be read on this server, so no test was sent." };
   const notice = { id: `evt-test-${randomHex(8)}`, type: "webhook.test", occurredAt: new Date().toISOString(), resource: null };
   const deps = { ...ctx, repository: who.repo, tenantId: who.tenantId, env };
-  const result = await sendOnce(ep, secret, notice, deps);
+  const result = await sendOnce(ep, secret, notice, deps, await previousSecretFor(ep, env, deps.nowMs || Date.now()));
   const status = result.ok ? "delivered" : "failed";
   try {
     await recordAttempt(deps, ep, { logId: `whd-${ep.id}-${notice.id}-a1`, eventId: notice.id, eventType: notice.type, attempt: 1, status, responseCode: result.code, reason: result.reason, test: true });
@@ -472,7 +493,7 @@ async function listWebhookDeliveries(request, env, ctx) {
 }
 
 export {
-  DELIVERY_TYPE, HEALTH_TYPE, TOPIC_DELIVER, TIMEOUT_MS, AUTO_DISABLE_FAILURES, AUTO_DISABLE_SPAN_MS,
+  DELIVERY_TYPE, HEALTH_TYPE, TOPIC_DELIVER, TIMEOUT_MS, AUTO_DISABLE_FAILURES, AUTO_DISABLE_SPAN_MS, ROTATION_OVERLAP_MS,
   addressBlocked, checkDestination, signPayload, verifySignature, notificationBody, sendOnce, summaryOf,
   fanOut, deliverOne, webhookConsumers,
   registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries,
