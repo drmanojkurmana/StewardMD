@@ -5909,3 +5909,19 @@ Tests: `test/wardsynq-org-audit-chain.test.mjs`.
 - WHAT REMAINS: for the hospital event log, which itself lives in Firestore, the Firestore anchor shares its trust
   domain, so only KV is outside it. An attacker holding D1, KV AND Firestore can still move all three. No Firestore
   index or rule change (reads by id; the service account bypasses rules).
+
+## 2026-09-14 G11: out-of-assignment reads use ward history, one reader across sign-ins, and open their audit rows
+
+`functions/_wardsynq/security-review.js` (`wardHistoryStays`, `readerAliases`, `readerAliasesFor`,
+`auditRowsForReview`), `auditRowsById` on both repositories, `accountEmail` in `_opd_org_store.js`, route
+`GET /api/queue/ward/audit-rows` (STAFF_ADMIN, record:read). Screen: Admin Center > Security review > Reads outside an
+assignment. Tests: `test/wardsynq-out-of-assignment.test.mjs`.
+- WARD AT THE TIME: a transferred admission (`movedAt`) is split into one stay per ward from its version history
+  (at most 200 history reads per report). A history that cannot be read is INCOMPLETE data (reads not evaluated).
+- ONE READER: ids are linked by email (membership identity and email, email and its `cfa:` access id, a Google
+  `fb:` account and its `q_users` email) and named by the membership identity. A link that could not be made is a
+  NOTE on the section, not incomplete data: it can split one person in two, which the note says, but must not turn
+  every read in the hospital into "not evaluated". A flag lists the sign-in ids its reads came from.
+- EVIDENCE: each flagged read carries the patient's ward then and the wards the reader was rostered on then. "Open
+  these audit rows" reads them back by id with their chain link number; the read is audited (`security.audit_rows`)
+  and refused if it cannot be; ids not found are named; a failed load says so.

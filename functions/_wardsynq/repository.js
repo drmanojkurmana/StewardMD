@@ -485,6 +485,14 @@ class MemoryRepository {
     const oldest = mine.map((e) => String(e.ts || "")).filter(Boolean).sort()[0] || null;
     return { events: all.slice(-limit), oldestAt: oldest, truncated: all.length > limit };
   }
+
+  /** OPTIONAL (see repository-d1.js auditRowsById): this hospital's audit rows with these ids, ids as auditTrail names them. */
+  async auditRowsById(tenantId, ids) {
+    const want = new Set((ids || []).map(String));
+    const seqOf = new Map(this._chain.map((l) => [l.event, l.chainSeq]));
+    return this.audit.map((e, i) => ({ id: e.id || `mem-${i}`, ...clone(e), chainSeq: seqOf.has(e) ? seqOf.get(e) : null }))
+      .filter((e) => e.tenantId === tenantId && want.has(String(e.id)));
+  }
 }
 
 export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX };

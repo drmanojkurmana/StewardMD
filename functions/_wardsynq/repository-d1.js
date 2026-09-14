@@ -582,6 +582,18 @@ class D1Repository {
       })),
     };
   }
+
+  /** OPTIONAL (G11): this hospital's audit rows with these ids, in the auditTrail shape, each with its chain link number (null when unlinked). */
+  async auditRowsById(tenantId, ids) {
+    const list = [...new Set((ids || []).map(String))].slice(0, 200);
+    if (!list.length) return [];
+    const r = await this.db
+      .prepare(`SELECT a.id, a.ts, a.actor, a.action, a.resource_counts, a.scope, a.patient_ref_hash, a.outcome, c.chain_seq FROM connect_audit_event a LEFT JOIN wardsynq_audit_chain c ON c.audit_id=a.id AND c.tenant_id=a.tenant_id WHERE a.tenant_id=? AND a.id IN (${list.map(() => "?").join(",")})`)
+      .bind(tenantId, ...list).all();
+    const json = (v) => { try { return v == null ? null : JSON.parse(v); } catch { return null; } };
+    return (r.results || []).map((row) => ({ id: row.id, ts: row.ts, actor: row.actor, action: row.action, resourceCounts: json(row.resource_counts),
+      scope: json(row.scope), patientRefHash: row.patient_ref_hash, outcome: row.outcome, chainSeq: row.chain_seq == null ? null : Number(row.chain_seq) }));
+  }
 }
 
 export { D1Repository };

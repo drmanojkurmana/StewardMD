@@ -1033,15 +1033,41 @@
     if (s.truncated || s.partial) h += '<div class="msg note">Only part of the log could be read, so some activity may not have been checked.</div>';
     if (!s.findings.length) return h + '<p class="quiet">No findings in the last ' + esc(days) + " days.</p>";
     return h + s.findings.map(function (f) {
+      /* G11: an out-of-assignment finding shows the ward history behind each read. */
+      var wards = f.type === "out-of-assignment";
       return "<details><summary><b>" + esc(SEC_TYPE_LABEL[f.type] || f.type) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
         '<p class="quiet">' + esc(f.method) + "</p>" +
-        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th><th>Audit row</th></tr></thead><tbody>' +
+        ((f.signIns || []).length ? '<p class="quiet">Counted as one reader across these sign-ins: <span class="mono">' + f.signIns.map(esc).join(", ") + "</span></p>" : "") +
+        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th>' + (wards ? "<th>Patient's ward then</th><th>Reader rostered on then</th>" : "") + "<th>Outcome</th><th>Detail</th><th>Audit row</th></tr></thead><tbody>" +
         f.evidence.map(function (e) {
-          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + '</td><td class="mono">' + esc(e.id || "") + (e.recordId ? "<br>" + esc(e.recordId) : "") + "</td></tr>";
+          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td>" +
+            (wards ? "<td>" + esc(e.wardAtRead || "") + "</td><td>" + esc((e.readerWardsAtRead || []).length ? e.readerWardsAtRead.join(", ") : "No ward shift") + "</td>" : "") +
+            "<td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + '</td><td class="mono">' + esc(e.id || "") + (e.recordId ? "<br>" + esc(e.recordId) : "") + "</td></tr>";
         }).join("") + "</tbody></table></div>" +
-        (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + "</details>";
+        (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + openRowsHtml(c, f.evidence) + "</details>";
     }).join("");
   }
+
+  /* G11 CLICKABLE EVIDENCE. A button that reads the audit rows behind a finding back from the audit trail
+   * (GET /ward/audit-rows): null while loading, a failure says so, ids not found are named. */
+  function openRowsHtml(c, evidence) {
+    var ids = (evidence || []).map(function (e) { return e.id; }).filter(Boolean);
+    if (!ids.length) return "";
+    return '<button type="button" class="btn ghost sm" data-sec-rows="' + c.esc(ids.join(",")) + '">Open these audit rows</button><div class="sec-rows-out"></div>';
+  }
+  function auditRowsHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<p class="quiet"><span class="spin"></span> Reading the audit rows...</p>';
+    if (r.failed) return '<div class="msg err">The audit rows could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div>";
+    var h = (r.missing || []).length ? '<div class="msg err">' + esc(r.missing.length) + " of the audit rows named were not found in this hospital's audit trail: <span class=\"mono\">" + r.missing.map(esc).join(", ") + "</span></div>" : "";
+    if (!(r.rows || []).length) return h + '<p class="quiet">No audit row was returned.</p>';
+    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>By</th><th>Action</th><th>Type</th><th>Record</th><th>Patient ref</th><th>Outcome</th><th>Chained row</th><th>Audit row</th></tr></thead><tbody>' +
+      r.rows.map(function (e) {
+        return "<tr><td>" + esc(e.ts) + '</td><td class="mono">' + esc(e.actor || "") + "</td><td>" + esc(e.action || "") + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.recordId || "") +
+          '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + (e.chainSeq == null ? "Not linked" : esc(e.chainSeq)) + '</td><td class="mono">' + esc(e.id || "") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  WSQ._auditRowsHtml = auditRowsHtml;
 
   /* Reads outside an assignment. "Not evaluated" is its own state and never renders as no findings. */
   function secAssignment(c, s, days) {
@@ -1052,12 +1078,13 @@
     if (s.status === "not_evaluated") return h + '<div class="msg note">Not evaluated: ' + esc(s.reason) + " This is not the same as no findings.</div>" + ex;
     if (s.truncated) h += '<div class="msg note">Only part of the log could be read, so some reads may not have been checked.</div>';
     if ((s.incomplete || []).length) h += '<div class="msg note">Incomplete: ' + esc(s.incomplete.join("; ")) + ".</div>";
+    if ((s.matching || []).length) h += '<div class="msg note">' + esc(s.matching.join(" ")) + "</div>";
     h += '<p class="quiet">' + esc(s.readsInPeriod) + " reads in the period: " + esc(s.assignedReads) + " within an assignment.</p>";
     h += s.findings.length ? secSection(c, "", { status: "ok", findings: s.findings }, days).replace("<h3></h3>", "") : '<p class="quiet">No reads outside an assignment among the reads that could be compared.</p>';
     var list = function (title, rows, field) {
       return rows.length ? "<details><summary>" + esc(title) + " (" + rows.reduce(function (n, x) { return n + x.reads; }, 0) + " reads)</summary><ul>" +
         rows.map(function (x) {
-          return "<li>" + esc(x.actor) + ": " + esc(x.reads) + " reads. " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span></li>";
+          return "<li>" + esc(x.actor) + ": " + esc(x.reads) + " reads. " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span> " + openRowsHtml(c, x.evidence) + "</li>";
         }).join("") + "</ul></details>" : "";
     };
     return h + list("Not evaluated", s.notEvaluated || [], "reason") + list("Exempt", s.exempt || [], "exemption") + ex;
@@ -1402,6 +1429,17 @@
             if (!x || !x.ok) { b.disabled = false; document.getElementById("secRevMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
             c.toast("Review recorded."); WSQ.render("admin");
           });
+        };
+      });
+      body.querySelectorAll("[data-sec-rows]").forEach(function (b) {
+        b.onclick = function () {
+          var out = b.nextElementSibling;
+          b.disabled = true;
+          out.innerHTML = auditRowsHtml(c, null);
+          c.api("/ward/audit-rows" + q + "&ids=" + encodeURIComponent(b.getAttribute("data-sec-rows"))).then(function (x) {
+            b.disabled = false;
+            out.innerHTML = auditRowsHtml(c, x && x.ok ? x : { failed: true, message: refusal(x) });
+          }, function () { b.disabled = false; out.innerHTML = auditRowsHtml(c, { failed: true, message: "No response from the server." }); });
         };
       });
       var save = document.getElementById("secRtSave");

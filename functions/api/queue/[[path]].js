@@ -16,7 +16,7 @@
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
  */
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
-import { identify } from "../../_usage.js";
+import { identify, sha256hex } from "../../_usage.js";
 import { ownerEmails, ownerOK } from "../../_adminauth.js";
 import { lookupUidByEmail } from "../../_fbadmin.js";
 // NOTE: roleForActor is deliberately NOT imported. It prefers actor.role, which resolveActor
@@ -208,7 +208,7 @@ import { codeClaimForEncounter, claimAction, recordPreAuth, claimsForPatient, wa
 import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRelease, readRoi, roiRequestsForPatient } from "../../_wardsynq/roi.js";
 import { patientCopy, releaseToPatient, releaseDocumentToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
-import { securityReport, recordSecurityReview, recordRestoreTest } from "../../_wardsynq/security-review.js";
+import { securityReport, recordSecurityReview, recordRestoreTest, auditRowsForReview } from "../../_wardsynq/security-review.js";
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
@@ -1429,7 +1429,7 @@ export async function onRequest(context) {
         /* P2.17. Reading everyone's access pattern, and recording a review or a restore test, is the
          * deployment owner's act. No clinical capability reaches it: a doctor or nurse gets 403.
          * safety_officer is NOT added - it is clinical-incident safety, not account security. */
-        "security-report": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
+        "security-report": CAPS.STAFF_ADMIN, "audit-rows": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
         /* P2.17 anchor acknowledgement. The capability gate only narrows this to staff.admin, which
          * hr and admin members hold too: the hospital-owner check happens at the route itself, fail
          * closed, so naming the capability here grants nobody the acknowledgement. */
@@ -2706,7 +2706,13 @@ export async function onRequest(context) {
         const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
           auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN",
           anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
+          /* G11: one person across sign-in methods. Access ids are "cfa:" + the same hash identify() makes. */
+          readerDirectory: { accountEmail: (id) => ORG.accountEmail(env, id), accessIdOf: async (email) => "cfa:" + (await sha256hex(String(email).toLowerCase())) },
           viewerIsOwner: isOwnerOfOrg(wOrg, actor.id) || !!actor.isOwner });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "audit-rows" && method === "GET") {
+        const r = await auditRowsForReview(request, env, { ...deps, ids: url.searchParams.get("ids") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "system-health" && method === "GET") {
