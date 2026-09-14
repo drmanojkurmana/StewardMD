@@ -36,7 +36,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -138,7 +138,9 @@ import { submitNote, signNote, listAwaitingCoSign } from "../../_wardsynq/note-c
 import { chartCompletionQueue } from "../../_wardsynq/chart-completion.js";
 import { patientFlowReport, clinicalOperationsReport, billingReport, claimsReport, pharmacyReport, himReport } from "../../_wardsynq/reports.js";
 import { downtimePack } from "../../_wardsynq/downtime.js";
-import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport } from "../../_wardsynq/digital-twin.js";
+import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, rosterStaffing } from "../../_wardsynq/digital-twin.js";
+import * as GROUP from "../../_hospital_group_store.js";
+import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
 import { predictMetric } from "../../_wardsynq/twin-predict.js";
 import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
 import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
@@ -674,6 +676,129 @@ export async function onRequest(context) {
       await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
       const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
       return json(Object.assign({ ok: true }, res), 200, request);
+    }
+
+    /* ---- HOSPITAL GROUPS (P2.14) ------------------------------------------------------------------
+     *
+     * The only entity above a hospital, and it is deliberately thin: see _hospital_group_store.js for
+     * the model and vault/decisions/Decisions.md for why only aggregate counts cross hospitals.
+     * Nothing here authorises anything inside a member hospital. The group view never goes through a
+     * clinical actor, so a group admin who is not also that hospital's staff still gets 403 on its
+     * chart, patient and record routes, exactly as before this existed.
+     *
+     * Authority per route, failing closed on anything unnamed:
+     *   account          any StewardMD account (never a staff sign-in: a group's admins are accounts)
+     *   group_admin      an account named on THIS group
+     *   hospital_owner   the account that owns THIS hospital - the only one who can accept a group
+     *   either           the group admin or the hospital owner (either side can end a membership)
+     *   staff.admin      the hospital's own admin, for its side of the list and for adopting a policy
+     */
+    if (seg === "group") {
+      const ACCOUNT = "account", GROUP_ADMIN = "group_admin", OWNER = "hospital_owner", EITHER = "either";
+      const capFor = {
+        "my-groups": ACCOUNT, create: ACCOUNT, invite: GROUP_ADMIN, policy: GROUP_ADMIN, overview: GROUP_ADMIN,
+        remove: EITHER, accept: OWNER, decline: OWNER, memberships: CAPS.STAFF_ADMIN, adopt: CAPS.STAFF_ADMIN,
+      };
+      const need = capFor[sub]; if (!need) return json({ ok: false, error: "not_found" }, 404, request);
+      const GET_SUBS = new Set(["my-groups", "overview", "memberships"]);
+      if (method !== (GET_SUBS.has(sub) ? "GET" : "POST")) return json({ ok: false, error: "not_found" }, 404, request);
+      const body = method === "POST" ? await readBody(request) : {};
+      const arg = (k) => String(url.searchParams.get(k) || (body && body[k]) || "").trim();
+      const refuse = (status, error, message) => json({ ok: false, error, message }, status, request);
+      const isAccount = actor.kind === "firebase" && !!actor.id;
+      if (need !== CAPS.STAFF_ADMIN && !isAccount) return refuse(403, "account_required", "Hospital groups are run from a StewardMD account, not a staff sign-in.");
+
+      let g = null, org = null, side = "";
+      if (need === GROUP_ADMIN || need === EITHER) g = await GROUP.getGroup(env, arg("groupId"));
+      if (need === OWNER || need === EITHER || sub === "invite") {
+        const oid = await ORG.resolveOrgId(env, arg("orgId"));
+        org = oid ? await ORG.getOrg(env, oid) : null;
+      }
+      if (need === GROUP_ADMIN && !GROUP.isGroupAdmin(g, actor)) return refuse(403, "not_group_admin", "Only an administrator of this hospital group can do that.");
+      if (need === OWNER) {
+        if (!org) return refuse(404, "org_not_found", "No hospital with that id.");
+        if (!isOwnerOfOrg(org, actor.id)) return refuse(403, "not_hospital_owner", "Only the owner of this hospital can accept or decline a group.");
+      }
+      if (need === EITHER) {
+        side = GROUP.isGroupAdmin(g, actor) ? "group" : (org && isOwnerOfOrg(org, actor.id)) ? "hospital" : "";
+        if (!side) return refuse(403, "forbidden", "Only the group's administrator or the hospital's owner can end this membership.");
+      }
+      if (need === CAPS.STAFF_ADMIN) {
+        const az = await ORG.authorizeOrg(env, actor, arg("orgId"), CAPS.STAFF_ADMIN);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      }
+      const done = (r) => json(r, r.ok ? 200 : (r.status || 502), request);
+
+      if (sub === "my-groups") {
+        const groups = await GROUP.listGroupsForAdmin(env, actor.id);
+        const out = [];
+        for (const gr of groups) {
+          const links = await GROUP.linksForGroup(env, gr.id);
+          const members = [];
+          for (const l of links.filter((x) => x.state === "member")) {
+            const o = await ORG.getOrg(env, l.orgId);
+            members.push({ orgId: l.orgId, name: o ? o.name : null });
+          }
+          out.push({ id: gr.id, name: gr.name, policy: gr.policy, policyVersion: gr.policyVersion, members,
+            invited: links.filter((x) => x.state === "invited").map((x) => ({ orgId: x.orgId, invitedAt: x.invitedAt })) });
+        }
+        return json({ ok: true, groups: out }, 200, request);
+      }
+      if (sub === "create") {
+        const name = arg("name");
+        if (!name) return refuse(422, "name_required", "Give the group a name.");
+        return json({ ok: true, group: await GROUP.createGroup(env, name, actor.id) }, 200, request);
+      }
+      if (sub === "invite") {
+        if (!org) return refuse(404, "org_not_found", "No hospital with that id or code.");
+        return done(await GROUP.transition(env, "invite", g.id, org.id, actor.id, "group"));
+      }
+      if (sub === "remove") {
+        if (!org) return refuse(404, "org_not_found", "No hospital with that id.");
+        return done(await GROUP.transition(env, "remove", g ? g.id : arg("groupId"), org.id, actor.id, side));
+      }
+      if (sub === "accept" || sub === "decline") return done(await GROUP.transition(env, sub, arg("groupId"), org.id, actor.id, "hospital"));
+      if (sub === "policy") {
+        const p = body && body.policy;
+        if (p != null && !GROUP.policySubset(p)) return refuse(422, "no_recognised_settings", "None of those settings can be recommended by a group. Allowed: " + GROUP.POLICY_KEYS.join(", ") + ".");
+        return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
+      }
+      if (sub === "overview") {
+        const links = (await GROUP.linksForGroup(env, g.id)).filter((l) => l.state === "member");
+        const hospitals = await Promise.all(links.map(async (l) => {
+          const o = await ORG.getOrg(env, l.orgId).catch(() => null);
+          const row = { orgId: l.orgId, name: o ? o.name : null, code: o ? o.code : null };
+          if (!o) return { ...row, status: "unreadable", why: "hospital_not_found", counts: null };
+          // The hospital's own audit trail records the read BEFORE anything is counted: no audit row, no read.
+          try { await GROUP.auditSummaryRead(env, o.id, g.id, actor.id); }
+          catch { return { ...row, status: "unreadable", why: "audit_failed", counts: null }; }
+          const mig = await wsqForcedMigration(env, o).catch(() => null);
+          const tenantId = mig && !mig.error ? mig.tenantId : null;
+          return { ...row, ...(await hospitalCounts({
+            tenantId, repository: tenantId ? wsqRecordDeps(env, tenantId).repository : null,
+            listBeds: () => ORG.listBeds(env, o.id),
+            staffing: () => rosterStaffing(env, o.id, o.wardsynq, ORG.listMembers, Date.now()),
+          })) };
+        }));
+        return json({ ok: true, group: { id: g.id, name: g.name }, generatedAt: new Date().toISOString(), hospitals }, 200, request);
+      }
+      if (sub === "memberships") {
+        const links = (await GROUP.linksForOrg(env, arg("orgId"))).filter((l) => l.state === "invited" || l.state === "member");
+        const rows = [];
+        for (const l of links) {
+          const gr = await GROUP.getGroup(env, l.groupId);
+          rows.push({ groupId: l.groupId, name: gr ? gr.name : null, state: l.state, invitedAt: l.invitedAt,
+            ...(l.state === "member" && gr ? { policy: gr.policy, policyVersion: gr.policyVersion } : {}) });
+        }
+        return json({ ok: true, groups: rows }, 200, request);
+      }
+      if (sub === "adopt") {
+        const { link: l } = await GROUP.getLink(env, arg("groupId"), arg("orgId"));
+        if (!l || l.state !== "member") return refuse(409, "not_a_member", "This hospital is not a member of that group.");
+        const [gr, o] = await Promise.all([GROUP.getGroup(env, arg("groupId")), ORG.getOrg(env, arg("orgId"))]);
+        if (!gr || !o) return refuse(404, "not_found", "The group or the hospital could not be found.");
+        return done(await GROUP.adoptPolicy(env, o, gr, actor.id));
+      }
     }
 
     // ---- Patient registration (ABDM-ready identity + MR allocation) -----------------------------
