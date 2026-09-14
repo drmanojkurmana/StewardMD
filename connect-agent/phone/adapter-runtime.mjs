@@ -191,6 +191,15 @@ export function classifyResponse(resp) {
   if (/json/i.test(resp.contentType || '')) return 'json';
   const t = text.trim();
   if ((t[0] === '{' || t[0] === '[')) { try { JSON.parse(t); return 'json'; } catch { /* html that starts oddly */ } }
+  if (t[0] === '"' && t[t.length - 1] === '"') {
+    try {
+      const unquoted = JSON.parse(t);
+      if (typeof unquoted === 'string') {
+        const ut = unquoted.trim();
+        if (ut[0] === '{' || ut[0] === '[') { JSON.parse(ut); return 'json'; }
+      }
+    } catch {}
+  }
   return 'html';
 }
 
@@ -208,6 +217,12 @@ function flatten(obj, prefix, out, depth) {
 
 /** JSON payload -> rows [{ field: text }]. Finds the first array of objects (top level or one level down). */
 export function rowsFromJson(payload) {
+  if (typeof payload === 'string') {
+    try { payload = JSON.parse(payload); } catch { return []; }
+  }
+  if (typeof payload === 'string') {
+    try { payload = JSON.parse(payload); } catch {}
+  }
   let list = null;
   if (Array.isArray(payload)) list = payload;
   else if (payload && typeof payload === 'object') {

@@ -19,6 +19,7 @@
   var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS();try{window.SMD_showHome&&window.SMD_showHome()}catch(e){}\" aria-label=\"Back to home\">{{ic:back}}</button>\n    <div class=\"ghis-title\">{{ic:ward}} Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7, background lab alerts\" aria-label=\"Lab Watch\">{{ic:bell}}</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\" aria-label=\"Refresh\">{{ic:refresh}}</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div id=\"ghisAddTarget\" style=\"display:none;align-items:center;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6)\"></div>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Sign out\" aria-label=\"Sign out\">{{ic:logout}}</button>\n    </div>\n    <div class=\"ghis-filter-row2\">\n      <select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by branch/department\"><option value=\"\">All branches</option></select>\n      <select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by treating doctor\"><option value=\"\">All doctors</option></select>\n      <select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by gender\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select>\n      <select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Sort patients\"><option value=\"\">Default order</option><option value=\"name\">Name A–Z</option><option value=\"branch\">Branch</option><option value=\"doctor\">Doctor</option><option value=\"bed\">Bed</option></select>\n    </div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">{{ic:back}} Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
 
   function inject() {
+    var GHIS = window.GHIS = window.GHIS || {};
     if (!document.getElementById('ghisPanel')) {
       var style = document.createElement('style');
       style.setAttribute('data-ghis', '1');
@@ -365,9 +366,15 @@
         for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
         ctx.sections[patientId] = loadWardRuntime().then(function (rt) {
           ctx.browserOpen = true;
-          return plugin.open({ url: ctx.origin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '' }).then(function () {
-            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins }); } catch (e) {}
-            return rt.readPatientDetails({ plugin: plugin, origin: ctx.origin, replay: ctx.replay, patient: p || { patientId: patientId } });
+          var targetOrigin = ctx.origin;
+          if (ctx.origins && ctx.origins.length) {
+            for (var oi = 0; oi < ctx.origins.length; oi++) {
+              if (/ghis\.gitam\.edu/i.test(ctx.origins[oi])) { targetOrigin = ctx.origins[oi]; break; }
+            }
+          }
+          return plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function () {
+            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true }); } catch (e) {}
+            return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
           });
         }).then(function (sections) {
           ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
@@ -1320,6 +1327,26 @@
             })
             .catch(function() { sec.innerHTML = ''; });
         },
+        // Structured radiology report: the adapter splits IMPRESSION / FINDINGS into
+        // sections; the Impression (the answer) leads, the rest follows in order. A flat
+        // report (no sections, e.g. hand-built GHIS) renders as one block exactly as before.
+        renderRadReport: function(d) {
+          d = d || {};
+          var meta = [];
+          if (d.reported) meta.push('Reported ' + esc(d.reported));
+          if (d.enteredBy) meta.push(esc(d.enteredBy));
+          var h = meta.length ? '<div class="ghis-rad-meta">' + meta.join(' · ') + '</div>' : '';
+          var secs = (d.sections && d.sections.length) ? d.sections : null;
+          if (!secs) return h + '<div class="ghis-rad-report">' + esc(d.report || 'No report text.') + '</div>';
+          var imp = null, rest = [];
+          secs.forEach(function(s) { if (!imp && s && s.heading === 'Impression') imp = s; else if (s && s.body) rest.push(s); });
+          if (imp) h += '<div class="ghis-lab-group-name">Impression</div><div class="ghis-lab-abx">' + esc(imp.body) + '</div>';
+          rest.forEach(function(s) {
+            h += '<div class="ghis-lab-group-name">' + esc(s.heading) + '</div>' +
+              '<div class="ghis-rad-report" style="margin-bottom:8px">' + esc(s.body) + '</div>';
+          });
+          return h;
+        },
         toggleRad: function(el, resultid, type) {
           var det = el.querySelector('.ghis-lab-detail');
           if (!det) return;
@@ -1334,11 +1361,7 @@
           authFetch('/radiology-report?resultid=' + encodeURIComponent(resultid) + '&type=' + encodeURIComponent(type))
             .then(function(d) {
               if (d && d.error === 'session_expired') { det.innerHTML = '<div class="ghis-lab-detail-empty">Session expired — reconnect.</div>'; return; }
-              var meta = [];
-              if (d.reported) meta.push('Reported ' + esc(d.reported));
-              if (d.enteredBy) meta.push(esc(d.enteredBy));
-              det.innerHTML = (meta.length ? '<div class="ghis-rad-meta">' + meta.join(' · ') + '</div>' : '') +
-                '<div class="ghis-rad-report">' + esc(d.report || 'No report text.') + '</div>';
+              det.innerHTML = GHIS.renderRadReport(d);
               det.setAttribute('data-loaded', '1');
             })
             .catch(function(e) { det.innerHTML = '<div class="ghis-lab-detail-empty">Error: ' + esc(e.message) + '</div>'; });

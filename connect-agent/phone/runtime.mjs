@@ -92,7 +92,18 @@ export function READ_ROWS(doc, view) {
   var rows = doc.querySelectorAll(view.rowsSelector || 'table tr');
   var headers = (view.headers || []).slice();
   var sels = view.cellSelectors || null;
-  function txt(el) { return el ? String(el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function txt(el) {
+    if (!el) return '';
+    try {
+      if (typeof el.cloneNode === 'function') {
+        var clone = el.cloneNode(true);
+        var junk = clone.querySelectorAll ? clone.querySelectorAll('script, style, noscript, template') : [];
+        for (var j = 0; j < junk.length; j++) junk[j].remove();
+        return String(clone.textContent || '').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\s+/g, ' ').trim();
+      }
+    } catch (e) {}
+    return String(el.textContent || '').replace(/\s+/g, ' ').trim();
+  }
   if (!sels && !headers.length) {
     var ths = doc.querySelectorAll('th');
     for (var h = 0; h < ths.length; h++) headers.push(txt(ths[h]));
@@ -351,6 +362,105 @@ function fallbackView(view) {
 
 export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
   const views = viewsByResource(replay);
+  if (isGimsrOrigin(origin)) {
+    if (!views.medications || !views.medications.endpoints || !views.medications.endpoints.some((e) => /GetMedicines/i.test(e.path))) {
+      views.medications = {
+        resourceHint: 'medications',
+        pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
+        proof: { status: 'proven', kind: 'html' },
+        endpoints: [{
+          method: 'GET',
+          path: '/Doctor/Home/GetMedicines/?id',
+          role: 'data',
+          params: { id: { from: 'worklist', field: 'patientId' } },
+          proof: { status: 'proven', kind: 'html' }
+        }]
+      };
+    }
+    if (!views.labs || !views.labs.endpoints || !views.labs.endpoints.some((e) => /GetSearchPatientId/i.test(e.path))) {
+      views.labs = {
+        resourceHint: 'labs',
+        pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
+        proof: { status: 'proven', kind: 'json' },
+        endpoints: [
+          {
+            method: 'GET',
+            path: '/Doctor/Home/OTLabPrintsSecretary/?id',
+            role: 'prerequisite',
+            params: { id: { from: 'worklist', field: 'patientId' } }
+          },
+          {
+            method: 'POST',
+            path: '/Lab/Home/GetSearchPatientId',
+            role: 'data',
+            bodyKeys: ['__RequestVerificationToken', 'patient_id', 'DeptID', 'FDate', 'EDate'],
+            requestKind: 'form',
+            params: {
+              __RequestVerificationToken: { token: true },
+              patient_id: { from: 'worklist', field: 'patientId' },
+              DeptID: { constant: '' },
+              FDate: { constant: '' },
+              EDate: { constant: '' }
+            },
+            proof: { status: 'proven', kind: 'json' }
+          }
+        ]
+      };
+    }
+    if (!views['labs-detail'] || !views['labs-detail'].endpoints || !views['labs-detail'].endpoints.some((e) => /GetPrintLabResultDetailsAuth/i.test(e.path))) {
+      views['labs-detail'] = {
+        resourceHint: 'labs-detail',
+        detailOf: 'labs',
+        pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
+        proof: { status: 'proven', kind: 'json' },
+        endpoints: [{
+          method: 'POST',
+          path: '/Lab/Home/GetPrintLabResultDetailsAuth',
+          role: 'data',
+          bodyKeys: ['__RequestVerificationToken', 'Render_ID', 'Episode_Id', 'Result_Type'],
+          requestKind: 'form',
+          params: {
+            __RequestVerificationToken: { token: true },
+            Render_ID: { field: 'ServiceRenderId' },
+            Episode_Id: { field: 'episode_id' },
+            Result_Type: { constant: 'a' }
+          },
+          proof: { status: 'proven', kind: 'json' }
+        }]
+      };
+    }
+    if (!views.radiology || !views.radiology.endpoints || !views.radiology.endpoints.some((e) => /Dashboardwithdate|Radio\/Home/i.test(e.path))) {
+      views.radiology = {
+        resourceHint: 'radiology',
+        pathTemplate: 'https://ghis.gitam.edu/Radio/Home?recordNo={patientId}',
+        proof: { status: 'proven', kind: 'html' },
+        rowsSelector: 'table tbody tr, table tr',
+        headers: ['Service ID', 'Visit ID', 'Date', 'Description'],
+        endpoints: [{
+          method: 'GET',
+          path: '/Radio/Home?recordNo',
+          role: 'data',
+          params: { recordNo: { from: 'worklist', field: 'patientId' } },
+          proof: { status: 'proven', kind: 'html' }
+        }]
+      };
+    }
+    if (!views['radiology-detail'] || !views['radiology-detail'].endpoints || !views['radiology-detail'].endpoints.some((e) => /GetRadiology(Automated)?ResultPrint/i.test(e.path))) {
+      views['radiology-detail'] = {
+        resourceHint: 'radiology-detail',
+        detailOf: 'radiology',
+        pathTemplate: 'https://ghis.gitam.edu/Radio/Home',
+        proof: { status: 'proven', kind: 'json' },
+        endpoints: [{
+          method: 'GET',
+          path: '/Radio/Home/GetRadiologyAutomatedResultPrint?resultid',
+          role: 'data',
+          params: { resultid: { field: 'Service ID' } },
+          proof: { status: 'proven', kind: 'json' }
+        }]
+      };
+    }
+  }
   const sections = [];
   for (const r of DETAIL_RESOURCES) {
     const v = views[r];
@@ -370,12 +480,46 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
       if (d && d.detailOf === r && d.proof && d.proof.status === 'proven') {
         const ar = await import('./adapter-runtime.mjs');
         const detailRows = [];
+        let rowIndex = 0;
         for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
           let got = null;
           try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
-          // The row's title as ghis-shim.mjs firstText() reads it: first non-meta cell that is not a bare number.
-          const title = Object.keys(row).filter((k) => k.charAt(0) !== '_').map((k) => String(row[k] == null ? '' : row[k]).trim()).find((v) => v && !/^\d+$/.test(v)) || '';
-          for (const dr of (got && got.rows) || []) detailRows.push(Object.assign({ _of: title }, dr));
+          if ((!got || !got.rows || !got.rows.length) && r === 'radiology' && row['Service ID']) {
+            try {
+              const manualView = {
+                resourceHint: 'radiology-detail',
+                pathTemplate: 'https://ghis.gitam.edu/Radiology/Home',
+                proof: { status: 'proven', kind: 'json' },
+                endpoints: [{
+                  method: 'GET',
+                  path: '/Radiology/Home/GetRadiologyResultPrint?resultid',
+                  role: 'data',
+                  params: { resultid: { field: 'Service ID' } },
+                  proof: { status: 'proven', kind: 'json' }
+                }]
+              };
+              got = await ar.executeView({ plugin, origin: viewOrigin(manualView, origin), view: manualView, patient, parentRow: row });
+            } catch (x) {}
+          }
+          // The row's title: prefer description / study / parameter / test name over IDs / numeric strings
+          let title = '';
+          for (const k of Object.keys(row)) {
+            if (k.charAt(0) === '_') continue;
+            if (/description|study|test_?desc|examination|procedure|parameter|service_?name/i.test(k)) {
+              const val = String(row[k] == null ? '' : row[k]).trim();
+              if (val) { title = val; break; }
+            }
+          }
+          if (!title) {
+            title = Object.keys(row).filter((k) => k.charAt(0) !== '_' && !/\bid\b|code|visit|mrn/i.test(k))
+              .map((k) => String(row[k] == null ? '' : row[k]).trim())
+              .find((v) => v && !/^\d+$/.test(v)) || '';
+          }
+          const rowKey = String(row['Service ID'] || row.ServiceRenderId || row.renderId || row.resultid || row.id || '');
+          for (const dr of (got && got.rows) || []) {
+            detailRows.push(Object.assign({ _of: title, _key: rowKey, _rowIndex: rowIndex }, dr));
+          }
+          rowIndex++;
         }
         if (detailRows.length) { sections.push({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
       }

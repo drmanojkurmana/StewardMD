@@ -808,15 +808,33 @@
     renderLoginFallback(b);
   }
 
+  /* Three steps, plain words. A first-time doctor sees exactly what will happen before
+   * the hospital website opens: sign in, tap the patient list, tap any patient. */
+  function stepsPrimer() {
+    return '<div class="smd-connect-card"><div class="smd-connect-label">What happens next (3 steps)</div>' +
+      '<div class="smd-connect-note"><strong>Step 1: Sign in.</strong> Use your usual hospital login in the screen that opens.</div>' +
+      '<div class="smd-connect-note"><strong>Step 2: Tap your patient list.</strong> If the agent cannot find it, it will ask you to open it and tap inside it.</div>' +
+      '<div class="smd-connect-note"><strong>Step 3: Tap any patient.</strong> The agent reads that one patient to learn your hospital. You cannot break anything: the agent only reads, and you can stop it at any time.</div></div>';
+  }
+
   function renderLoginPhone(b) {
     var host = hostOf(S.selected.emrUrl);
     b.innerHTML =
       '<h2 class="smd-connect-display">Sign in to ' + esc(host) + '</h2>' +
       '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
+      stepsPrimer() +
       '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open until the connection finishes. The screen stays awake while the hospital website is open.</div>' +
-      '<div class="smd-connect-row"><button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
+      '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
+      '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
     setStatus("", S.statusText || "Opening the hospital website.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    /* SELF-REPAIR: reopening the hospital website is safe to repeat (openLoginPlugin
+     * guards double-open), so a failed first open is one tap to retry, not a restart. */
+    b.querySelector("#smd-connect-retryopen").onclick = function () {
+      S.loginOpened = false;
+      setStatus("", "Opening the hospital website.");
+      openLoginPlugin();
+    };
     openLoginPlugin();
   }
 

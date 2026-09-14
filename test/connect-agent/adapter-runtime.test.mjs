@@ -87,9 +87,11 @@ test('responses: login page and 401 are login; JSON lists and HTML tables become
   assert.equal(classifyResponse({ status: 200, contentType: 'text/html', text: '<form><input type="password" name="p"></form>', url: ORIGIN + '/Login' }), 'login');
   assert.equal(classifyResponse({ status: 200, contentType: 'application/json', text: '[]' }), 'json');
   assert.equal(classifyResponse({ status: 200, contentType: 'text/html', text: '{"data":[{"a":1}]}' }), 'json');
+  assert.equal(classifyResponse({ status: 200, contentType: 'text/html', text: '"[{\\"ServiceRenderId\\":123}]"' }), 'json', 'double-encoded JSON is classified as json');
   assert.equal(classifyResponse({ status: 200, contentType: 'text/html', text: '   ' }), 'empty');
   assert.deepEqual(rowsFromJson({ data: [{ Drug: 'Amoxicillin', dose: { qty: '500', unit: 'mg' } }] }), [{ Drug: 'Amoxicillin', 'dose.qty': '500', 'dose.unit': 'mg' }]);
   assert.deepEqual(rowsFromJson([{ a: 1 }, 'x']), [{ a: '1' }, { value: 'x' }]);
+  assert.deepEqual(rowsFromJson('[{"ServiceRenderId":123,"parameter_long_desc":"CBP"}]'), [{ ServiceRenderId: '123', parameter_long_desc: 'CBP' }], 'stringified JSON array parses cleanly');
   const rows = rowsFromHtml('<table><tr><th>Drug</th><th>Dose</th></tr><tr><td>Amoxicillin</td><td>500 mg</td></tr></table>', { rowsSelector: '#accordionEx table tbody tr', headers: ['Drug', 'Dose'] }, miniParse);
   assert.deepEqual(rows, [{ Drug: 'Amoxicillin', Dose: '500 mg' }], 'the view selector missed the bare fragment, any table row was read with the view headers');
 });
