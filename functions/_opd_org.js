@@ -163,7 +163,10 @@ function wardsynqConfig(w) {
    * (audit-chain.js auditRetentionSetting) or "kept indefinitely". */
   /* specialties joined for P2.11: the hospital's specialty registry (pathways.js resolveSpecialty). Absent means
    * the chart's Specialty panel says none is configured. */
-  for (const k of ["edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears"]) {
+  /* alerts joined for S3 P0: alerts.push.enabled turns on pushing critical results to phones through the
+   * StewardMD app (functions/_wardsynq/alert-deps.js). Absent or false means nothing is pushed and every
+   * loop records NO_CHANNEL, as before. */
+  for (const k of ["alerts", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -253,6 +256,7 @@ export function roomForActor(rooms, actor) {
 }
 
 // ---- membership (org-based access: role + scope) -----------------------------------------------
+export function alertMobileOf(v) { const m = String(v == null ? "" : v).replace(/[\s()-]/g, ""); return /^\+?\d{10,15}$/.test(m) ? m : ""; }
 export function membership(o = {}) {
   requireId(o);
   const role = isRole(o.role) ? o.role : "viewer";
@@ -275,6 +279,9 @@ export function membership(o = {}) {
     /* Country-specific practitioner ids (India: HPR id). Shape only here; the member route refuses
      * one for a hospital outside India (functions/_region_in.js validateMemberProfile). */
     regionProfile: memberProfile(o.regionProfile, "IN"),
+    /* S3 P0 (owner decision O4): the mobile a critical-result SMS goes to when no phone confirmed the push.
+     * Staff contact data set by an admin, never a patient's. Digits with an optional leading +, else empty. */
+    alertMobile: alertMobileOf(o.alertMobile),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }

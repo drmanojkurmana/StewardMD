@@ -21,7 +21,7 @@ import { drainOutbox } from "./outbox.js";
 import { anchorHead } from "./audit-chain.js";
 import { escalationOf } from "./critical-results.js";
 import { VersionConflictError } from "./repository.js";
-import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
+import { dispatchLevel, smsFallbackDue } from "./push-alerts.js";
 
 const RANK = { none: 0, due: 0, overdue: 1, escalate: 2 };
 /* ponytail: no downstream consumer is registered yet, so drained events are marked done. A consumer
@@ -33,26 +33,31 @@ async function escalateCriticals(repository, tenantId, opts) {
   const o = opts || {};
   const nowMs = o.nowMs || Date.now();
   const loops = await repository.latestByType(tenantId, "CriticalResultLoop", SCAN);
-  const out = { checked: 0, escalated: 0, conflicts: 0, partial: loops.length >= SCAN };
+  const out = { checked: 0, escalated: 0, texted: 0, conflicts: 0, partial: loops.length >= SCAN };
   for (const loop of loops || []) {
     if (!loop || loop.state !== "open") continue;
     out.checked += 1;
     const e = escalationOf(loop, nowMs, o.policy);
-    if (RANK[e.level] <= RANK[loop.escalatedLevel || "none"]) continue;
-    let notification;
-    try {
-      const sent = await new Dispatcher(o.notifyDeps || {}).send({ loopId: loop.id, patientId: loop.patientId, code: loop.code, display: loop.display, value: loop.value, unit: loop.unit, escalation: e.level }, undefined, { retries: 2 });
-      notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })) };
-    } catch (err) {
-      notification = { attempted: true, delivered: false, reason: err instanceof NotifyError ? err.code : "NOTIFY_ERROR", detail: String((err && err.message) || err).slice(0, 200) };
-    }
+    const crossed = RANK[e.level] > RANK[loop.escalatedLevel || "none"];
+    // S3 P0 (owner decision O4): a push no handset confirmed within its level window goes out by SMS once.
+    const owedSms = o.notifyDeps && typeof o.notifyDeps.smsFallback === "function" ? smsFallbackDue(loop, nowMs, o.policy) : [];
+    if (!crossed && !owedSms.length) continue;
     const at = new Date(nowMs).toISOString();
-    const next = {
-      ...loop, version: loop.version + 1, escalatedLevel: e.level,
-      escalations: [...(Array.isArray(loop.escalations) ? loop.escalations : []), { level: e.level, at, minutesOpen: e.minutesOpen, notification }],
-      writtenBy: { id: "system:escalation", kind: "service", at },
-    };
-    try { await repository.append(tenantId, [next], {}); out.escalated += 1; }
+    let next = { ...loop, version: loop.version + 1, writtenBy: { id: "system:escalation", kind: "service", at } };
+    if (owedSms.length) {
+      const sms = await o.notifyDeps.smsFallback(loop, owedSms);
+      next.notifications = (loop.notifications || []).map((n) => (n && sms[n.nid] ? { ...n, sms: sms[n.nid] } : n));
+    }
+    if (crossed) {
+      // S3 P0: the same dispatch the decline route uses, so a notice made by the timer lands on the loop too.
+      const { notification, notices } = await dispatchLevel(o.notifyDeps, loop, e.level);
+      next = {
+        ...next, escalatedLevel: e.level,
+        escalations: [...(Array.isArray(loop.escalations) ? loop.escalations : []), { level: e.level, at, minutesOpen: e.minutesOpen, notification }],
+        notifications: [...(Array.isArray(next.notifications) ? next.notifications : (loop.notifications || [])), ...notices],
+      };
+    }
+    try { await repository.append(tenantId, [next], {}); if (crossed) out.escalated += 1; if (owedSms.length) out.texted += owedSms.length; }
     catch (err) { if (err instanceof VersionConflictError) { out.conflicts += 1; continue; } throw err; }
   }
   return out;

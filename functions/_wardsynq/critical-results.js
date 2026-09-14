@@ -208,6 +208,9 @@ function CriticalResultLoop(input) {
     // Each time the unacknowledged loop crossed a level (overdue, escalate), what was attempted. ops-tick.js.
     escalations: Array.isArray(i.escalations) ? i.escalations : [],
     escalatedLevel: i.escalatedLevel || null,
+    // S3 P0: every push notice sent for this loop (nid, level, recipients, noDevice, sent, total,
+    // receipts), so who was told and what their phone said is part of the loop's own story.
+    notifications: Array.isArray(i.notifications) ? i.notifications : [],
     source: i.source || { system: "wardsynq-native", sourceId: `critical:${i.id}` },
   };
 }
@@ -295,12 +298,15 @@ async function openCriticalLoops(request, env, ctx) {
     // A site wires its own channels via ctx.notifyDeps.channels; wiring none is a real, common state
     // and gets NO_CHANNEL recorded, never a silent "sent".
     let notification;
+    // S3 P0: the push channel writes the notice it made here, so it lands on the loop below.
+    const notices = [];
     try {
       const dispatcher = new Dispatcher(ctx.notifyDeps || {});
       // Retried up to twice: a critical result failing to notify on a momentary network blip is
       // exactly the case retry exists for - see wardsynq-notify.js's own note.
-      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit }, undefined, { retries: 2 });
+      const sent = await dispatcher.send({ loopId: id, patientId: report.patientId, reportId, encounterId: report.encounterId || null, code: hit.code, display: hit.display, value: hit.value, unit: hit.unit, level: "due", notices }, undefined, { retries: 2 });
       notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })), at: new Date().toISOString() };
+      if (notices.some((n) => n.reason === "NO_RECIPIENT")) notification.reason = "NO_RECIPIENT";
     } catch (e) {
       notification = { attempted: true, delivered: false, reason: e instanceof NotifyError ? e.code : "NOTIFY_ERROR", detail: str(e && e.message), at: new Date().toISOString() };
     }
@@ -310,7 +316,7 @@ async function openCriticalLoops(request, env, ctx) {
       reportId, observationId: obs.id || null,
       code: hit.code, display: hit.display, value: hit.value, unit: hit.unit,
       basis: hit.basis, bound: hit.bound, state: "open",
-      reportedAt, openedAt: new Date().toISOString(), notification,
+      reportedAt, openedAt: new Date().toISOString(), notification, notifications: notices,
     });
     try {
       const res = await svc.put(loop, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${id}` : null });
@@ -340,6 +346,7 @@ function summary(l, nowMs, policy) {
     escalation: escalationOf(l, nowMs, policy),
     notification: l.notification || null,
     escalations: l.escalations || [],
+    notifications: l.notifications || [],
   };
 }
 
