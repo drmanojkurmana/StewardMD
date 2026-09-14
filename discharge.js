@@ -46,7 +46,8 @@
     signed: false, signedBy: null, noteId: null, version: null, recordedAt: null,
     canAuthor: false, hasDraft: false,
     editing: "", compare: {},           // which section is open for editing; which show the record's version
-    busy: false, loaded: false, err: "", note: "", refusal: null
+    busy: false, loaded: false, err: "", note: "", refusal: null,
+    print: null, printLang: ""          // the hospital's print settings; the second language picked for this print
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -291,15 +292,15 @@
       // one that must fail is worse than not offering it.
       return '<div class="d-actions locked"><div class="d-lock">' + ms("lock") + "<span>Signed off</span></div>" +
         '<div class="d-lockmsg">' + ms("verified") + "Signed" + (s.signedBy ? " by " + esc(s.signedBy) : "") + " &middot; this version is locked</div>" +
-        '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button></div>";
+        langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button></div>";
     }
     if (!s.canAuthor) {
       return '<div class="d-actions"><p class="d-hint">' + ms("info") + "You can read this summary. Authoring and signing it needs a treating clinician.</p>" +
-        '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button></div>";
+        langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button></div>";
     }
     var n = (s.pending || []).length;
     return '<div class="d-actions">' +
-      '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button>" +
+      langPicker(s) + '<button class="d-btn ghost" data-d-act="print">' + ms("print") + "Print</button>" +
       '<button class="d-btn" data-d-act="draft" title="Save the assembled summary as a draft">' + ms("save") + (s.hasDraft ? "Refresh draft" : "Save draft") + "</button>" +
       '<button class="d-btn sign" data-d-act="sign">' + ms("verified") + "Sign and finalise</button>" +
       (n ? '<span class="d-actwarn">' + ms("pending_actions") + n + " outstanding</span>" : "") +
@@ -353,6 +354,7 @@
     st.noteId = stored ? stored.noteId : null;
     st.version = stored ? stored.version : null;
     st.recordedAt = stored ? stored.recordedAt : null;
+    st.print = r.print || null;          // { languagesEnabled, timeZone, utcOffsetMinutes } from the hospital's settings
   }
 
   function load(msg) {
@@ -385,30 +387,49 @@
   /* Printed as its own document, not as the screen with the chrome hidden: a summary handed to a
    * patient must not depend on the app's theme, and @media print on a dark-mode overlay is exactly
    * how that goes wrong. The markup is plain and self-contained. */
+  /* A SECOND LANGUAGE IS OPTIONAL AND ENGLISH STAYS WHOLE (owner decision 2026-09-15, wardsynq/site/print-lang.js).
+   * With a language picked, `tr(...)` asides are added between the English blocks, carrying only catalog words:
+   * the headings and labels, the authority line, and the signature wording. Every section's text is recorded or
+   * assembled clinical text, so its aside says it is printed in English only. Without one, tr() is "". */
   function printable(s) {
     s = s || st;                       // the controller prints what is on screen; callers may pass a state
     var p = s.patient || {}, e = s.encounter || {};
-    var head = [
-      ["Patient", p.name || s.patientId], ["MRN", p.mrn], ["Sex", p.sex],
-      ["Ward", e.ward ? e.ward + (e.bed ? ", bed " + e.bed : "") : null],
-      ["Admitted", when(e.admittedAt)], ["Discharged", when(e.dischargedAt)]
-    ].filter(function (r) { return r[1]; })
-      .map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
+    var WP = G.WSQPrint, lang = WP && WP.enabled(s.print) && WP.valid(s.printLang) ? s.printLang : "";
+    var tr = function (html) { return lang ? WP.aside(lang, html) : ""; };
+    var T = function (k) { return lang ? esc(WP.t(k, lang)) : ""; };
+    var pd = function (iso) { return WP ? WP.date(iso, s.print, true) : when(iso); };   // the hospital's clock, "15 Sep 2026, 09:05"
+    var rows = [
+      ["Patient", p.name || s.patientId, "patient"], ["MRN", p.mrn], ["Sex", p.sex, "sex"],
+      ["Ward", e.ward ? e.ward + (e.bed ? ", bed " + e.bed : "") : null, "ward"],
+      ["Admitted", pd(e.admittedAt), "admitted"], ["Discharged", pd(e.dischargedAt), "discharged"]
+    ].filter(function (r) { return r[1]; });
+    var head = rows.map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
+    var headTr = rows.filter(function (r) { return r[2]; }).map(function (r) { return esc(r[0]) + ": " + T("print.dc.field." + r[2]); }).join(" &middot; ");
     var body = SECTIONS.map(function (sec, i) {
-      return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(textOf(s, sec.k) || NOT_RECORDED) + "</p></section>";
+      return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(textOf(s, sec.k) || NOT_RECORDED) + "</p></section>" +
+        tr("<h2>" + (i + 1) + ". " + T("print.dc.section." + sec.k) + "</h2><p>" + T("print.tr.englishOnly") + "</p>");
     }).join("");
     var prov = (s.sections && s.sections.provenance) || (s.assembled && s.assembled.provenance) || "";
     var sig = s.signed
-      ? '<div class="p-sig"><div class="ln"></div><span>Signed by ' + esc(s.signedBy || "") + (s.recordedAt ? " on " + esc(when(s.recordedAt)) : "") + " &middot; version " + esc(s.version) + "</span></div>"
-      : '<div class="p-sig"><div class="ln"></div><span>Signature</span><p class="p-draft">UNSIGNED DRAFT - not a final discharge summary.</p></div>';
-    return "<h1>Discharge summary</h1><div class=\"p-head\">" + head + "</div>" + body +
-      (prov ? '<section class="p-prov"><h2>Provenance</h2><p>' + esc(prov) + "</p></section>" : "") + sig;
+      ? '<div class="p-sig"><div class="ln"></div><span>Signed by ' + esc(s.signedBy || "") + (s.recordedAt ? " on " + esc(pd(s.recordedAt)) : "") + " &middot; version " + esc(s.version) + "</span></div>" +
+        tr("<p>" + T("print.dc.signedBy") + "</p>")
+      : '<div class="p-sig"><div class="ln"></div><span>Signature</span><p class="p-draft">UNSIGNED DRAFT - not a final discharge summary.</p></div>' +
+        tr('<p class="p-draft">' + T("print.dc.unsigned") + "</p>");
+    return "<h1>Discharge summary</h1><div class=\"p-head\">" + head + "</div>" +
+      tr("<h2>" + T("print.dc.title") + "</h2>" + (lang ? WP.authority("dc", lang) : "") + "<p>" + headTr + "</p>") + body +
+      (prov ? '<section class="p-prov"><h2>Provenance</h2><p>' + esc(prov) + "</p></section>" + tr("<h2>" + T("print.dc.provenance") + "</h2><p>" + T("print.tr.englishOnly") + "</p>") : "") + sig;
   }
   function doPrint() {
     var w = root().querySelector(".d-print");
     if (!w) { w = document.createElement("div"); w.className = "d-print"; root().appendChild(w); }
-    w.innerHTML = printable();
-    try { G.print(); } catch (e) {}
+    var go = function () { w.innerHTML = printable(); try { G.print(); } catch (e) {} };
+    // The picked language's catalog is loaded first, so the paper never goes out half in English by accident.
+    if (st.printLang && G.WSQPrint) G.WSQPrint.ensureLoaded(st.printLang, go); else go();
+  }
+  /* Offered only when the hospital turned it on (Admin > Hospital). Off means no picker at all. */
+  function langPicker(s) {
+    var WP = G.WSQPrint;
+    return WP && WP.enabled(s.print) ? '<label class="d-lang"><span>Second language on the print</span>' + WP.picker("dPrintLang", s.printLang || "") + "</label>" : "";
   }
 
   function onClick(e) {
@@ -437,15 +458,22 @@
     }
   }
 
+  function onChange(e) {
+    if (!e.target || e.target.id !== "dPrintLang") return;
+    st.printLang = e.target.value;
+    if (G.WSQPrint) G.WSQPrint.ensureLoaded(st.printLang);
+  }
+
   function open(opts) {
     opts = opts || {};
     st.orgId = opts.orgId || st.orgId || "";
     st.encounterId = opts.encounterId || "";
     st.patientId = opts.patientId || "";
     if (!st.orgId || !st.encounterId) { try { G.toast && G.toast("A discharge summary needs an admission."); } catch (e) {} return; }
-    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {};
+    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {}; st.printLang = "";
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
     paint(); load();
   }
   function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; }

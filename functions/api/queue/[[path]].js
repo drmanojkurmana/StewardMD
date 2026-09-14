@@ -328,6 +328,14 @@ function wsqSchedule(c) {
   return { marTimes: (c && c.marTimes) || null, offsetMinutes: Number.isFinite(c && c.utcOffsetMinutes) ? c.utcOffsetMinutes : undefined,
     timeZone: (c && c.timeZone) || undefined, graceMinutes: Number.isFinite(c && c.marGraceMinutes) ? c.marGraceMinutes : undefined };
 }
+/* Bilingual prints (owner decision 2026-09-15): whether this hospital offers a second language on the patient's
+ * prescription and discharge summary prints, and the clock their dates are written in. Display facts from org
+ * config only; English is always printed whole. India without a configured offset is IST, as elsewhere here. */
+function wsqPrintSettings(org) {
+  const c = (org && org.wardsynq) || {};
+  return { languagesEnabled: !!(c.printLanguages && c.printLanguages.enabled === true), timeZone: (typeof c.timeZone === "string" && c.timeZone) || null,
+    utcOffsetMinutes: Number.isFinite(c.utcOffsetMinutes) ? c.utcOffsetMinutes : (org && org.region === "US" ? null : 330) };
+}
 function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in", "https://wardsynq.com", "https://www.wardsynq.com"];
@@ -2848,6 +2856,7 @@ export async function onRequest(context) {
       }
       if (sub === "patient-copy" && method === "GET") {
         const r = await patientCopy(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", neverRelease: (wsqCfg && wsqCfg.neverRelease) || null });
+        if (r.ok) r.print = wsqPrintSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-release" && method === "POST") {
@@ -3657,6 +3666,7 @@ export async function onRequest(context) {
          * It is a display fact, not a grant: drafting and signing re-check the capability and the
          * signing credential on their own routes regardless of what the screen chose to render. */
         if (r.ok) r.canAuthor = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT)).ok === true;
+        if (r.ok) r.print = wsqPrintSettings(wOrg);
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "POST") {

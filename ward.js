@@ -1779,7 +1779,7 @@
       '<label class="w-f"><span>Unit</span><input id="wMoUnit" type="text" autocomplete="off" placeholder="mg" value="' + esc(o.unit || "") + '"></label>' +
       '<label class="w-f"><span>Route</span><input id="wMoRoute" type="text" autocomplete="off" placeholder="oral / IV" value="' + esc(o.route || "") + '"></label>' +
       '<label class="w-f"><span>Frequency</span><input id="wMoFreq" type="text" autocomplete="off" placeholder="e.g. BD, 8th hourly" value="' + esc(o.frequency || "") + '"></label>' +
-      "</div>" +
+      "</div>" + instructionPicker("wMoInstr", []) +
       '<div class="w-sub" style="margin-top:10px;"><h4>' + ms("water_drop") + "IV Infusion / Diluent Builder (optional)</h4>" +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Carrier / Diluent</span><select id="wMoDiluent" onchange="var d=document.getElementById(\'wMoDiluentVal\');if(d&&this.value)d.value=this.value;">' +
@@ -2068,6 +2068,24 @@
       return arr && arr.length ? "<ul class=\"w-dt-meds\">" + arr.map(fn).join("") + "</ul>" : '<p class="w-empty">' + empty + "</p>";
     };
 
+    /* OWNER DECISION 2026-09-15: ENGLISH MAIN, A SECOND LANGUAGE OPTIONAL (wardsynq/site/print-lang.js). The
+     * English below is drawn exactly as without the option; a picked language only adds `tr(...)` asides
+     * between sections, holding catalog words: headings, empty-list sentences and the patient instructions
+     * picked from the closed list. Drugs, doses, frequencies, diagnoses and results stay English only. */
+    var WP = G.WSQPrint, clock = r.print || null;
+    var lang = WP && WP.enabled(r.print) && WP.valid(state.pcopyLang) ? state.pcopyLang : "";
+    var tr = function (html) { return lang ? WP.aside(lang, html) : ""; };
+    var T = function (k) { return lang ? esc(WP.t(k, lang)) : ""; };   // "" without a language, so nothing below needs WP
+    var trHead = function (k, emptyKey, arr) {
+      return "<h4>" + T(k) + "</h4><p>" + (arr && arr.length ? T("print.tr.englishOnly") : T(emptyKey)) + "</p>";
+    };
+    var pdate = function (iso, withTime) { return WP ? esc(WP.date(iso, clock, withTime)) || "-" : when(iso); };
+    var instrEn = function (codes) { return (codes || []).map(function (c) { return WP ? WP.instruction(c, "en") : c; }).join("; "); };
+    var meds = d.medicines || [];
+    var medsTr = !lang ? "" : meds.filter(function (m) { return m.patientInstructions && m.patientInstructions.length; }).map(function (m) {
+      return '<li><b lang="en">' + esc(m.drug) + "</b>: " + m.patientInstructions.map(function (c) { return esc(WP.instruction(c, lang)); }).join("; ") + "</li>";
+    }).join("");
+
     /* The allergies are never filtered by anything, and an empty list is stated in words. A blank
      * allergy block reads as "no known allergies" to every clinician alive, and this page is one a
      * patient carries to the next hospital. */
@@ -2078,8 +2096,8 @@
     var withheld = (d.withheldResults || []).length
       ? '<section class="w-dt-p"><h3>Not included here</h3>' +
         "<ul class=\"w-dt-meds\">" + d.withheldResults.map(function (w) {
-          return "<li>" + esc(w.say) + (w.reportedAt ? ' <span class="w-dt-times">' + when(w.reportedAt) + "</span>" : "") + "</li>";
-        }).join("") + "</ul></section>"
+          return "<li>" + esc(w.say) + (w.reportedAt ? ' <span class="w-dt-times">' + pdate(w.reportedAt) + "</span>" : "") + "</li>";
+        }).join("") + "</ul></section>" + tr("<h4>" + T("pcopy.withheld") + "</h4><p>" + T("print.tr.englishOnly") + "</p>")
       : "";
 
     /* D5: WHAT THE PORTAL WILL SHOW, drawn by the portal's own renderer (portal.js dischargeSection) from the
@@ -2096,6 +2114,8 @@
     return '<div class="w-dt">' +
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
+      // Offered only when the hospital turned it on (Admin > Hospital); off means no picker at all.
+      (WP && WP.enabled(r.print) ? '<label class="w-f"><span>Second language on the print</span>' + WP.picker("wPcopyLang", lang) + "</label>" : "") +
       /* P2: what the patient portal shows of a signed discharge summary this handover releases. The patient
        * copy is the default; a full summary still withholds what this page withholds. */
       '<label class="w-f"><span>Discharge summary in the portal</span><select id="wPcopyScope">' +
@@ -2104,7 +2124,7 @@
       '<button class="w-btn ghost" data-w-act="pcopyGive" title="Record that you gave this to the patient">' + ms("how_to_reg") + "Record handover</button>" +
       '<button class="w-btn ghost" data-w-act="pcopy">' + ms("refresh") + "Refresh</button></div>" +
       '<header class="w-dt-h"><h2>Your record</h2>' +
-      "<p><b>" + esc(p.name || r.patientId || "") + "</b>" + (p.mrn ? " &middot; " + esc(p.mrn) : "") + (p.dob ? " &middot; " + esc(p.dob) : "") + "</p>" +
+      "<p><b>" + esc(p.name || r.patientId || "") + "</b>" + (p.mrn ? " &middot; " + esc(p.mrn) : "") + (p.dob ? " &middot; " + (WP ? esc(WP.date(p.dob, clock, false)) : esc(p.dob)) : "") + "</p>" +
       /* Two audiences, and they are never mixed. `statements` is addressed to the patient and
        * prints. `clinicianWarnings` is w-noprint: a line reading "not for the patient" printed on
        * the patient's own copy would be the most careless thing on the page. */
@@ -2113,26 +2133,34 @@
       (r.release ? '<p class="w-ok w-noprint">Handover recorded at ' + when(r.release.at) + "." +
         ((r.release.dischargeSummaries || []).length ? " Discharge summary released to the portal as the " + (r.release.dischargeScope === "full" ? "full summary." : "patient copy.") : "") + "</p>" : "") +
       "</header>" + portalPreview +
+      tr("<h3>" + T("portal.title.yours") + "</h3>" + (lang ? WP.authority("rx", lang) : "")) +
       '<section class="w-dt-p"><h3>Allergies</h3><p class="w-dt-alg">' + allergies + "</p></section>" +
+      tr(d.allergies && d.allergies.length ? "<h4>" + T("allergy.title") + "</h4><p>" + T("print.tr.englishOnly") + "</p>" : "<h4>" + T("allergy.title") + "</h4><p>" + T("pcopy.noAllergies") + "</p>") +
       '<section class="w-dt-p"><h3>Your diagnoses</h3>' +
       list(d.diagnoses, "No diagnoses are recorded.", function (x) {
         return "<li><b>" + esc(x.display) + "</b>" + (x.note ? '<div class="w-dt-times">' + esc(x.note) + "</div>" : "") + "</li>";
       }) + "</section>" +
+      tr(trHead("pcopy.dx", "pcopy.dxEmpty", d.diagnoses)) +
       '<section class="w-dt-p"><h3>Your medicines</h3>' +
       list(d.medicines, "No medicines are recorded.", function (m) {
         return "<li><b>" + esc(m.drug) + "</b> " + dose(m.dose) + (m.route ? " &middot; " + esc(m.route) : "") +
-          (m.frequency ? '<div class="w-dt-times">' + esc(m.frequency) + "</div>" : "") + "</li>";
+          (m.frequency ? '<div class="w-dt-times">' + esc(m.frequency) + "</div>" : "") +
+          // The prescriber's closed-list picks, in the catalog's English. Printed whether or not a language is.
+          (m.patientInstructions && m.patientInstructions.length ? '<div class="w-dt-times">' + esc(instrEn(m.patientInstructions)) + "</div>" : "") + "</li>";
       }) + "</section>" +
+      tr(trHead("pcopy.meds", "pcopy.medsEmpty", meds) + (medsTr ? "<ul>" + medsTr + "</ul>" : "")) +
       '<section class="w-dt-p"><h3>Your results</h3>' +
       list(d.results, "No results are ready to be given to you yet.", function (x) {
         return "<li><b>" + esc(x.name) + "</b>" + (x.conclusion ? "<div>" + esc(x.conclusion) + "</div>" : "") +
-          '<div class="w-dt-times">' + when(x.reportedAt) + "</div></li>";
+          '<div class="w-dt-times">' + pdate(x.reportedAt) + "</div></li>";
       }) + "</section>" +
+      tr(trHead("pcopy.results", "pcopy.resultsEmpty", d.results)) +
       withheld +
       '<section class="w-dt-p"><h3>Next appointments</h3>' +
       list(d.appointments, "No appointment is booked.", function (a) {
-        return "<li>" + when(a.at) + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
+        return "<li>" + pdate(a.at) + (a.with ? " &middot; " + esc(a.with) : "") + "</li>";
       }) + "</section>" +
+      tr(trHead("pcopy.appts", "pcopy.apptsEmpty", d.appointments)) +
       "</div>";
   }
 
@@ -4996,10 +5024,26 @@
       return '<option value="' + esc(o[0]) + '"' + (String(o[0]) === String(cur) ? " selected" : "") + ">" + esc(o[1]) + "</option>";
     }).join("");
   }
+  /* PATIENT INSTRUCTIONS FROM A CLOSED LIST (owner decision 2026-09-15). Codes, never typed words: their
+   * English and every translation come from the i18n catalog, which is what lets the patient's print carry
+   * them in a second language without translating anything a clinician wrote. The server refuses a code
+   * that is not on its list (migrate-inpatient.js PATIENT_INSTRUCTIONS). */
+  function instructionPicker(cls, chosen) {
+    var P = G.WSQPrint; if (!P) return "";
+    return '<div class="w-sub"><h4>Instructions for the patient <i>optional</i></h4>' + P.instructionCodes().map(function (c) {
+      return '<label class="w-chk"><input type="checkbox" class="' + cls + '" value="' + esc(c) + '"' + (chosen.indexOf(c) >= 0 ? " checked" : "") + "> " + esc(P.instruction(c, "en")) + "</label>";
+    }).join("") + "</div>";
+  }
+  function checkedInstructions(cls) {
+    var out = [];
+    Array.prototype.forEach.call(document.querySelectorAll("." + cls), function (b) { if (b.checked) out.push(b.value); });
+    return out;
+  }
   function cSnapshot() {
     var d = st.cDraft || {};
     VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) d["wc_" + f.k] = el.value; });
     C_FIELDS.forEach(function (id) { var el = document.getElementById(id); if (el) d[id] = el.value; });
+    if (document.querySelectorAll(".wcInstr").length) d.wcInstr = checkedInstructions("wcInstr");
     st.cDraft = d;
   }
 
@@ -5050,6 +5094,7 @@
       '<label class="w-f"><span>Unit</span><input id="wcMoUnit" value="' + esc(cDraft(d, "wcMoUnit")) + '"></label></div>' +
       '<input id="wcMoRoute" placeholder="Route (optional)" value="' + esc(cDraft(d, "wcMoRoute")) + '">' +
       '<input id="wcMoFreq" placeholder="How often (optional)" value="' + esc(cDraft(d, "wcMoFreq")) + '">' +
+      instructionPicker("wcInstr", (d && d.wcInstr) || []) +
       '<p class="w-hint">Drug, dose and unit go together. Any one of them on its own is not enough to prescribe.</p></div>' +
 
       '<div class="w-sub"><h4>Test to order</h4>' +
@@ -8737,7 +8782,7 @@
   function orderMedication() {
     var s = st.sel; if (!s) return;
     var drug = val("wMoDrug"), value = val("wMoValue"), unit = val("wMoUnit"), route = val("wMoRoute"), frequency = val("wMoFreq");
-    var diluent = val("wMoDiluentVal"), duration = val("wMoInfDuration");
+    var diluent = val("wMoDiluentVal"), duration = val("wMoInfDuration"), instr = checkedInstructions("wMoInstr");
     if (!drug || !value || !unit) { st.err = "Drug, dose and unit are required."; paint(); return; }
     if (diluent || duration) {
       var infNote = " in " + (diluent || "diluent") + (duration ? " over " + duration : "");
@@ -8747,10 +8792,11 @@
     st.busy = true; paint();
     apiPost("/ward/medication-order", {
       orgId: st.orgId,
-      order: { patientId: s.patientId, encounterId: s.encounterId, drug: drug, dose: { value: value, unit: unit }, route: route || undefined, frequency: frequency || undefined },
+      order: { patientId: s.patientId, encounterId: s.encounterId, drug: drug, dose: { value: value, unit: unit }, route: route || undefined, frequency: frequency || undefined, patientInstructions: instr.length ? instr : undefined },
     }).then(function (r) {
       if (settle(r, r && r.written ? "Prescribed " + drug + "." : null)) {
         ["wMoDrug", "wMoValue", "wMoUnit", "wMoRoute", "wMoFreq", "wMoDiluentVal", "wMoInfDuration"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+        Array.prototype.forEach.call(document.querySelectorAll(".wMoInstr"), function (b) { b.checked = false; });
         var dEl = document.getElementById("wMoDiluent"); if (dEl) dEl.value = "";
         loadRound();
       } else paint();
@@ -9881,6 +9927,8 @@
     var t = ev && ev.target;
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
+    // The print's second language: its catalog file is loaded before the page is drawn with it.
+    if (st.view === "pcopy" && t && t.id === "wPcopyLang") { st.pcopyLang = t.value; if (G.WSQPrint) G.WSQPrint.ensureLoaded(t.value, paint); else paint(); return; }
     if (st.view !== "forms" || !st.formSel || !t || !(t.hasAttribute("data-w-formfield") || t.hasAttribute("data-w-formmulti"))) return;
     readFormAnswers(); paint();
   }
@@ -10195,14 +10243,16 @@
         verificationStatus: val("wcProbVs") || undefined }];
     }
 
-    var drug = val("wcMoDrug"), dv = val("wcMoValue"), du = val("wcMoUnit");
+    var drug = val("wcMoDrug"), dv = val("wcMoValue"), du = val("wcMoUnit"), instr = checkedInstructions("wcInstr");
+    if (!drug && !dv && !du && instr.length) { st.err = "Instructions for the patient belong to a prescription. Fill in the drug, dose and unit, or clear the instructions."; paint(); return; }
     if (drug || dv || du) {
       /* Refused HERE rather than sent, because a half-written prescription is the one section where
        * sending what was typed and letting the server sort it out is the wrong answer: the whole
        * consultation would be refused for a typo, after the doctor had filled in everything else. */
       if (!drug || !dv || !du) { st.err = "A prescription needs the drug, the dose and the unit. Fill all three, or clear them."; paint(); return; }
       body.medications = [{ patientId: s.patientId, encounterId: s.encounterId, drug: drug,
-        dose: { value: dv, unit: du }, route: val("wcMoRoute") || undefined, frequency: val("wcMoFreq") || undefined }];
+        dose: { value: dv, unit: du }, route: val("wcMoRoute") || undefined, frequency: val("wcMoFreq") || undefined,
+        patientInstructions: instr.length ? instr : undefined }];
     }
 
     var inv = val("wcInvCode");
@@ -10272,6 +10322,7 @@
     ["wc_o2", "wc_acvpu", "wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
       "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText"]
       .forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+    Array.prototype.forEach.call(document.querySelectorAll(".wcInstr"), function (b) { b.checked = false; });
   }
 
   function loadTemplates() {
@@ -10565,7 +10616,7 @@
   function loadPatientCopy() {
     if (!st.sel || !st.sel.patientId) return;
     // A scope chosen for one patient is never carried to the next: each starts at the patient copy.
-    if (st.pcopyFor !== st.sel.patientId) { st.pcopyScope = null; st.pcopyFor = st.sel.patientId; }
+    if (st.pcopyFor !== st.sel.patientId) { st.pcopyScope = null; st.pcopyLang = ""; st.pcopyFor = st.sel.patientId; }
     st.busy = true; st.view = "pcopy"; st.pcopy = null; paint();
     return apiGet("/ward/patient-copy?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
       .then(function (r) { if (settle(r)) st.pcopy = r; paint(); })

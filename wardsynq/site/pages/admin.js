@@ -161,6 +161,32 @@
       });
     };
   }
+  /* PRINTOUTS IN THE PATIENT'S LANGUAGE (owner decision 2026-09-15: English main, other languages optional).
+   * Off by default. On, the Patient copy and the discharge summary offer a second language per print, beside an
+   * English print that is always whole; only headings, labels and the closed-list patient instructions are
+   * translated (wardsynq/site/print-lang.js). */
+  function printLangCard(c, o) {
+    var on = !!(o && o.wardsynq && o.wardsynq.printLanguages && o.wardsynq.printLanguages.enabled === true);
+    return '<div class="card"><h2>' + c.ms("translate") + " Printouts in the patient's language</h2>" +
+      '<label class="f"><span><input type="checkbox" id="admPrintLang"' + (on ? " checked" : "") + "> Offer a second language on the patient's prescription and discharge summary prints</span></label>" +
+      '<p class="quiet">The English print is always complete and is the authoritative one. The second language is printed beside it, marked as a translation, and covers only headings, labels and the patient instructions a prescriber picked from the fixed list. Medicine names, doses, frequencies, diagnoses, results and anything typed are printed in English only. Translations not yet written show in English.</p>' +
+      '<button class="btn" id="admPrintLangSave" type="button">Save</button><div id="admPrintLangMsg"></div></div>';
+  }
+  function wirePrintLang(c) {
+    var btn = document.getElementById("admPrintLangSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var enabled = !!document.getElementById("admPrintLang").checked;
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, wardsynq: { printLanguages: { enabled: enabled } } }).then(function (r) {
+        btn.disabled = false;
+        var m = document.getElementById("admPrintLangMsg");
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        c.state.org = r.org;
+        c.toast(enabled ? "Saved. Prints offer a second language." : "Saved. Prints are in English only.");
+      });
+    };
+  }
   /* APPROVAL RULES (P1.3). How many people must approve each kind of request, which roles may, how
    * long a request stays open, and extra approvers above an amount. The amount is always the one the
    * server works out from the thing itself (a purchase order's priced lines); a request with no known
@@ -547,7 +573,7 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -564,6 +590,7 @@
     };
     wireClinicalSettings(c);
     wireNoteWriters(c);
+    wirePrintLang(c);
     wireApprovalRules(c);
     wireLabCheck(c);
     wireTokenCard(c);
