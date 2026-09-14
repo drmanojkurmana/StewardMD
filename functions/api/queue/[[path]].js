@@ -211,7 +211,7 @@ import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backu
 import { securityReport, recordSecurityReview, recordRestoreTest } from "../../_wardsynq/security-review.js";
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
-import { orgAuditChain } from "../../_q_audit_chain.js";
+import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
@@ -537,12 +537,12 @@ async function wsqTick(env, org, mig) {
    * two-minute tick gate. Hourly, not per tick: anchors are compared one by one, so an
    * anchor per tick would grow the log without adding evidence. The gate failing open only
    * means an extra anchor attempt; anchorHead() itself skips a head it already holds. */
-  let anchorStore;
+  let anchorStores;
   try {
     const anchorGate = await rateHit({ kv: env && env.MAIK_KV }, { key: `audit-anchor:${mig.tenantId}`, limit: 1, windowMs: 3600000 });
-    anchorStore = anchorGate.allowed ? auditAnchorStore(env && env.MAIK_KV) : null;
-  } catch { anchorStore = null; }
-  const t = await runTick(repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: notifyDepsFor(env, org, mig.tenantId, repository), anchorStore: anchorStore || undefined, consumers: { ...exportConsumers({ repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository, tenantId: mig.tenantId, env, orgId: org.id }) } });
+    anchorStores = anchorGate.allowed ? anchorStoresFor(env) : null;
+  } catch { anchorStores = null; }
+  const t = await runTick(repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: notifyDepsFor(env, org, mig.tenantId, repository), anchorStores: anchorStores || undefined, orgAuditChain: org && org.id ? orgAuditChain(env, org.id) : undefined, consumers: { ...exportConsumers({ repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository, tenantId: mig.tenantId, env, orgId: org.id }) } });
   /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
    * whether escalation is actually running rather than assume it. P2.17: the anchor outcome
    * rides along the same way. A run that did not attempt an anchor carries the previous
@@ -554,7 +554,7 @@ async function wsqTick(env, org, mig) {
     const entry = { at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) };
     if (t.anchor && t.anchor.status !== "skipped") {
       entry.anchorFailed = !!t.anchor.error;
-      entry.anchorStatus = t.anchor.error ? "failed" : t.anchor.status;
+      entry.anchorStatus = t.anchor.error ? (t.anchor.failedIn ? `failed in ${t.anchor.failedIn}` : "failed") : t.anchor.status;
       entry.anchorAt = t.anchor.at || t.at;
     } else if (prevAnchor && (prevAnchor.anchorFailed || prevAnchor.anchorStatus)) {
       entry.anchorFailed = !!prevAnchor.anchorFailed;
@@ -588,7 +588,10 @@ async function unbindMemberDevices(env, orgId, identity, actorId) {
  * written with NO expiry: unlike the tick log, an anchor must still be there when it is compared.
  * Null when KV is not bound: without a second trust domain there is nothing worth anchoring to. */
 const auditAnchorStore = (kv) => (!kv || typeof kv.get !== "function" || typeof kv.put !== "function") ? null
-  : { get: (key) => kv.get(key), put: (key, value) => kv.put(key, value) };
+  : { name: "KV", get: (key) => kv.get(key), put: (key, value) => kv.put(key, value) };
+/* G12: the second outside anchor, neither D1 nor KV (Firestore, behind the same {name, get, put} port).
+ * Both chains are anchored into, and compared against, every store here. */
+const anchorStoresFor = (env) => [auditAnchorStore(env && env.MAIK_KV), firestoreAnchorStore(env)].filter(Boolean);
 async function documentStorageProbe(env) {
   const store = documentStoreFromEnv(env);
   if (!store) return { state: "not_configured" };
@@ -2702,14 +2705,14 @@ export async function onRequest(context) {
         const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
         const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
           auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN",
-          anchorStore: auditAnchorStore(env && env.MAIK_KV), orgAuditChain: orgAuditChain(env, wOrgId),
+          anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
           viewerIsOwner: isOwnerOfOrg(wOrg, actor.id) || !!actor.isOwner });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "system-health" && method === "GET") {
         const r = await systemHealthReport({
           repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, maik: (wsqCfg && wsqCfg.maik) || null, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
-          anchorStore: auditAnchorStore(env && env.MAIK_KV), orgAuditChain: orgAuditChain(env, wOrgId),
+          anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
           orgProbe: () => ORG.getOrg(env, wOrgId),
           documentProbe: async () => { const d = await documentStorageProbe(env); return { ...d, checkedAt: d.state !== "not_configured" && docProbeCache ? new Date(docProbeCache.at).toISOString() : null }; },
           lastTick: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },
@@ -2746,7 +2749,10 @@ export async function onRequest(context) {
           return json({ ok: false, error: "reason_required",
             message: "Give a reason of at least 20 characters saying why the database was restored, and the incident reference it was recorded under." }, 422, request);
         }
-        const r = await acknowledgeAnchorBreak(deps.recordDeps.repository, mig.tenantId, auditAnchorStore(env && env.MAIK_KV),
+        /* G12: the hospital event log's chain is acknowledged the same way, under its own chain id. */
+        const eventLog = body && body.chain === "event-log";
+        const ackChain = eventLog ? orgAuditChain(env, wOrgId) : null;
+        const r = await acknowledgeAnchorBreak(eventLog ? ackChain : deps.recordDeps.repository, eventLog ? ackChain.chainId : mig.tenantId, anchorStoresFor(env),
           { by: actor.email || actor.id, reason, incidentRef, nowIso: new Date().toISOString() });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }

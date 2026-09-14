@@ -284,6 +284,7 @@ test("route POSITIVE: the admin sees the event-log chain intact in both, then br
   assert.equal(rep.auditRetention.orgIntegrity.status, "ok", JSON.stringify(rep.auditRetention.orgIntegrity));
   assert.equal(rep.auditRetention.orgUnlinked.before, 1, JSON.stringify(rep.auditRetention.orgUnlinked));
   assert.equal(rep.auditRetention.orgUnlinked.after, 0);
+  await AC.anchorHead(QC.orgAuditChain({}, ORG_ID), "q:" + ORG_ID, QC.firestoreAnchorStore({}), new Date().toISOString());
   let health = await as(ADMIN, `/ward/system-health?orgId=${ORG_ID}`);
   let line = health.dependencies.find((d) => d.id === "org-audit-chain");
   assert.equal(line.status, "up", JSON.stringify(line));

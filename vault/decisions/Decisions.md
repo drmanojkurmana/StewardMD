@@ -5888,3 +5888,24 @@ Tests: `test/wardsynq-org-audit-chain.test.mjs`.
 - ponytail: one chain per hospital serialises that hospital's event-log writes (a head read and a commit each);
   a sharded chain is the upgrade if one head doc contends. No Firestore index or rule change: reads are by id and
   the existing single-field `hospitalId` query.
+
+## 2026-09-14 G12: a second outside anchor (Firestore) behind an AnchorStore port, and copies compared with each other
+
+`functions/_wardsynq/audit-chain.js` (`anchorStoresOf`, `checkAnchorStores`, `anchorDisagreement`, multi-store
+`acknowledgeAnchorBreak`), `firestoreAnchorStore` in `functions/_q_audit_chain.js`, `anchorStoresFor` in the router,
+`anchorTick` in `ops-tick.js`. Tests: `test/wardsynq-anchor-stores.test.mjs`. Owner S1 (bucket name pending) and D12
+(AWS move about 2026-09-28).
+- THE PORT IS `{name, get(key), put(key, value)}` ON STRINGS. KV and Firestore implement it; the S3 bucket at the AWS
+  move is a third adapter, no domain change. Firestore stores one doc per key in `q_audit_anchors/<escaped key>`.
+- BOTH CHAINS INTO BOTH STORES, hourly, beside the tick gate. Each (chain, store) attempt stands alone: one store
+  down never stops the other's copy, and the tick log names where it failed (`failed in Firestore (event log)`).
+- CHECKS: each store against the chain (checkAnchors), and the stores against each other. The worst wins:
+  rewritten/truncated, then `disagree`, not-verified, no-anchors, ok. A disagreement is reported as its own finding
+  (message first, `disagreement.seq`), down with the governance consequence in System health. One store empty while
+  the other matches is no-anchors (degraded), never ok.
+- ACKNOWLEDGEMENT: one chained row; every rewritten/truncated store archived and restarted, empty stores seeded (a
+  failed seed is named, not fatal). A failed restart of a broken store fails the call with `restarted` listed; a retry
+  redoes only that store. `chain: "event-log"` acknowledges the hospital event log's chain the same way.
+- WHAT REMAINS: for the hospital event log, which itself lives in Firestore, the Firestore anchor shares its trust
+  domain, so only KV is outside it. An attacker holding D1, KV AND Firestore can still move all three. No Firestore
+  index or rule change (reads by id; the service account bypasses rules).

@@ -163,4 +163,26 @@ function orgAuditChain(env, hospitalId) {
   };
 }
 
-export { EVENTS, HEADS, CHAIN_PREFIX, chainKey, eventFields, hashedRow, appendOrgAudit, writeOrgAudit, orgAuditChain };
+/* G12. The second outside anchor store, neither D1 nor KV: the AnchorStore port from audit-chain.js
+ * ({name, get, put} on strings) over one Firestore doc per key in q_audit_anchors. The key is escaped
+ * with chainKey, so ":" in anchor keys never becomes a path. The value is written unguarded: the
+ * never-overwrite rule lives in audit-chain.js (appendAnchorEntry), not in the store.
+ * For the clinical chain this is a separate trust domain from D1 and KV. For the hospital event log,
+ * which itself lives in Firestore, it is the SAME domain, so there only KV is truly outside; the
+ * disagreement check still compares the two. The S3 store for the AWS move replaces this adapter. */
+const ANCHORS = "q_audit_anchors";
+function firestoreAnchorStore(env) {
+  const path = (key) => `${ANCHORS}/${chainKey(key)}`;
+  return {
+    name: "Firestore",
+    async get(key) {
+      const d = await FS.fsGet(env, path(key));
+      return d && d.fields && d.fields.value != null ? String(d.fields.value) : null;
+    },
+    async put(key, value) {
+      await FS.fsCommit(env, [FS.wUpdate(env, path(key), { key: String(key), value: String(value), updatedAt: Date.now() })]);
+    },
+  };
+}
+
+export { EVENTS, HEADS, ANCHORS, CHAIN_PREFIX, chainKey, eventFields, hashedRow, appendOrgAudit, writeOrgAudit, orgAuditChain, firestoreAnchorStore };

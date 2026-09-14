@@ -402,7 +402,12 @@ test("route POSITIVE: the admin sees integrity and retention in the security rev
   assert.equal(rep.auditRetention.integrity.status, "ok", JSON.stringify(rep.auditRetention));
   assert.equal(rep.auditRetention.configuredRetention, 3, "an Indian hospital with nothing set gets the cited default");
   assert.equal(rep.auditRetention.retentionSource, "region-default");
+  /* G12: the route now always has the Firestore anchor store, so nothing anchored reads degraded, not up. */
   let health = await as(ADMIN, `/ward/system-health?orgId=${ORG_ID}`);
+  assert.equal(health.dependencies.find((d) => d.id === "audit-chain").status, "degraded");
+  const { firestoreAnchorStore } = await import("../functions/_q_audit_chain.js");
+  await AC.anchorHead(RECORD, TENANT_ROW.id, firestoreAnchorStore({}), new Date().toISOString());
+  health = await as(ADMIN, `/ward/system-health?orgId=${ORG_ID}`);
   let chain = health.dependencies.find((d) => d.id === "audit-chain");
   assert.equal(chain.status, "up", JSON.stringify(chain));
   assert.equal(chain.consequence, null);

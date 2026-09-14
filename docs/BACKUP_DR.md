@@ -36,7 +36,11 @@ WardSynQ record repository writes has a hash-chain link in `wardsynq_audit_chain
      row, and the acknowledgement itself is written to the audit trail. System health and Security review
      then read up, naming who acknowledged the restore, when, and under which incident.
   Do not delete the KV key by hand, because it is the evidence of what was lost.
-  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
+  **Two outside copies (G12).** The same head is also copied hourly into Firestore (`q_audit_anchors`, one doc per
+  anchor key, via `firestoreAnchorStore`), for the clinical chain and for the hospital event log (`q:<orgId>`).
+  Each copy is compared with the database and the two are compared with each other; a disagreement between them is
+  reported on its own, down in System health. The acknowledgement restarts every broken copy (and seeds an empty one)
+  under one chained row, and archives each old log in its own store. Delete neither copy by hand.  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
   take a manual export (`scripts/backup-d1.sh`). After restoring, the difference is the audit rows the restore
   discarded; keep that export as the record of them.
 - **Never merge rows from a cold copy back into a restored database.** New writes continue from the restored

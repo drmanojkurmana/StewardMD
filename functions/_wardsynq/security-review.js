@@ -34,7 +34,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { RUN_TYPE, rpoVerdict } from "./backup-run.js";
 import { span } from "../_roster.js";
-import { verifyAuditChain, checkAnchors, auditRetentionSetting } from "./audit-chain.js";
+import { verifyAuditChain, checkAnchorStores, anchorStoresOf, auditRetentionSetting } from "./audit-chain.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000;
@@ -457,7 +457,7 @@ const unavailable = (e) => ({ status: "unavailable", error: e instanceof Governa
 const section = (findings) => ({ status: "ok", findings, counts: findings.reduce((m, f) => { m[f.type] = (m[f.type] || 0) + 1; return m; }, {}) });
 
 /**
- * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore?, viewerIsOwner?,
+ * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore? | anchorStores?, orgAuditChain?, viewerIsOwner?,
  *   orgEvents: {events, partial} | {error}, viewerId,
  *   assignmentSources: { members: [{identity, role}] | {error}, roster: {shifts, assignments, partial} | {error}, utcOffsetMinutes } }
  */
@@ -498,8 +498,11 @@ async function securityReport(request, env, ctx) {
   /* P2.17: the outside anchors compared against the rows they name. checkAnchors() never throws and
    * is never "ok" on a failed read, so it rides on the section the same way. Without a store there
    * is nothing outside the database to compare against, and the report says so plainly. */
-  retention.anchors = ctx.anchorStore
-    ? await checkAnchors(repository, tenantId, ctx.anchorStore)
+  /* G12: every store handed in (KV and Firestore in production), each compared with the chain and with
+   * each other; a disagreement between the copies is its own finding. */
+  const stores = anchorStoresOf(ctx.anchorStores || ctx.anchorStore).map((x) => x.store);
+  retention.anchors = stores.length
+    ? await checkAnchorStores(repository, tenantId, stores)
     : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the database to compare against." };
   /* P2.17 acknowledgement. Only the hospital owner may acknowledge a legitimate restore, so the
    * report tells the screen whether the viewer is one (decided by the route, which knows the org,
@@ -516,6 +519,12 @@ async function securityReport(request, env, ctx) {
   retention.orgIntegrity = orgChain
     ? await verifyAuditChain(orgChain, orgChain.chainId, { limit: ORG_VERIFY_LIMIT })
     : { status: "not_verified", message: "Not verified: the hospital event log chain could not be reached, so its integrity is unknown." };
+  if (orgChain) {
+    retention.orgAnchors = stores.length
+      ? await checkAnchorStores(orgChain, orgChain.chainId, stores)
+      : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the store to compare against." };
+    retention.orgAnchors.canAcknowledge = ctx.viewerIsOwner === true;
+  }
   const noStart = { status: "unavailable", message: "When linking began could not be read, so unlinked rows could not be counted." };
   if (orgEvents.error) retention.orgUnlinked = { status: "unavailable", message: "The hospital event log could not be read, so unlinked rows could not be counted." };
   else if (!orgChain || typeof orgChain.chainStart !== "function") retention.orgUnlinked = noStart;
