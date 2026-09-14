@@ -608,3 +608,11 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Regression 6459 pass, 0 fail, 1 skipped. Reachability 0 without a screen, 22 without a test. Live ward.js site74, admin.js 19.
 **P2 remaining:** P2.5 depth (terminology service, Subscription, IPS, Consent/AuditEvent as FHIR, R4B/R5), P2.13 SMART app registration UI for third parties, P2.16 doctor keyboard shortcuts and tablet nurse layout, and the 22 routes without a test.
 
+### 2026-09-14 (night) - P2.16 keyboard and tablet, P2.5 FHIR depth, three Muse follow-ups
+
+- P2.16 (p2-ux-speed): ward keyboard layer (/ search, g w/c/l, n/o/r/v on a chart, ? sheet, Esc), never fires while typing, never bound to a write (test fails on any non-GET), aria labels on icon buttons, focus ring. Tablet 768-1180 px: 44 px targets, sticky "next due" (says "not known" when a dose was unreadable), two-pane round in landscape; headless check test/run-ward-tablet-ui.mjs 35/35.
+- P2.5 (p2-fhir-depth): terminology (CodeSystem/ValueSet, $expand, $validate-code; external systems served only as flagged fragments), Patient/$summary IPS (emptyReason vs unavailable vs withheld), AuditEvent (system/ or admin only, reading audited), Consent tests, FHIR Subscription notifications on the webhooks outbox; Admin > FHIR tab and chart "IPS summary". docs/FHIR_STRATEGY.md: R4 only for now. Not built: R4B/R5, IPS immunizations (no source type), Subscription create over FHIR.
+- Muse (muse-spark-1.3, reviewed and verified here): webhook secret rotation keeps the old secret valid 24 h (dual signature); bulk export records file keys before writing so failed runs cannot orphan encrypted files (failed and stalled jobs now delete files); hospital groups can have several administrators (last one cannot be removed).
+- Regression 6515 pass, 0 fail, 1 skipped. Reachability 0 without a screen. Live admin.js 22, ward.js site76.
+**P2 remaining:** 22 routes without a test (builder running), SMART third-party app registration screen, R4B/R5 when a partner needs it. Owner items unchanged.
+
