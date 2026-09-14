@@ -127,6 +127,15 @@ export function READ_ROWS(doc, view) {
         var t = txt(cells[c]);
         if (t) { rec[headers[c] || ('col' + c)] = t; filled++; }
       }
+      /* A HEADER ROW RENDERED IN CELLS IS NOT DATA. Some tables (DataTables' fixed header, a
+       * radiology list) repeat their column labels as a row of <td>s; read as a record it became
+       * eight "studies" called Patient ID, Age / Gender, ... (iPhone, 2026-09-15). When every cell
+       * of a row is one of the table's own labels, skip it. */
+      if (filled && headers.length) {
+        var labelHits = 0, labelNorm = headers.map(function (h) { return String(h).toLowerCase().replace(/[^a-z0-9]/g, ''); });
+        for (var lk in rec) { if (lk.charAt(0) !== '_' && labelNorm.indexOf(String(rec[lk]).toLowerCase().replace(/[^a-z0-9]/g, '')) >= 0) labelHits++; }
+        if (labelHits === filled) continue;
+      }
     }
     /* ROW-LEVEL IDENTIFIERS stay with the row (on the phone only): the first link's href and the
      * arguments of the row's onclick, so a detail call (a lab render, a radiology report) can be
