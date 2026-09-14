@@ -84,8 +84,10 @@ async function drainOutbox(repository, tenantId, consumers, opts) {
 /** Events that need a person: dead ones, and how many are still waiting. Never "all clear" on a partial read. */
 async function outboxHealth(repository, tenantId, limit) {
   const rows = await repository.latestByType(tenantId, TYPE, limit || 500);
+  const waiting = rows.filter((e) => e.status === "pending" || e.status === "retry" || e.status === "running");
   return {
-    pending: rows.filter((e) => e.status === "pending" || e.status === "retry" || e.status === "running").length,
+    pending: waiting.length,
+    oldestPendingAt: waiting.map((e) => String(e.createdAt || "")).filter(Boolean).sort()[0] || null,
     dead: rows.filter((e) => e.status === "dead").map((e) => ({ id: e.id, topic: e.topic, attempts: e.attempts, lastError: e.lastError })),
     partial: rows.length >= (limit || 500),
   };

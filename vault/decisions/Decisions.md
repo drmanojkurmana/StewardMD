@@ -5371,3 +5371,31 @@ bug - not re-verified live on device this session.
 - Not built: ward/assignment reads (no assignment data), staff-as-patient (would need new PHI
   linkage), VIP flag (does not exist), denied READS (the service only audits denied writes).
 - Backup export audit rows now carry `actor` (they landed as NULL before) and a row count.
+
+
+## 2026-09-14 Out-of-assignment reads (P2.17) and per-dependency system health (P2.15)
+
+Out-of-assignment: `outOfAssignmentFindings` in `functions/_wardsynq/security-review.js`, returned as
+`assignmentAccess` on `GET /ward/security-report`, shown in Admin > Security review.
+- Assignment sources are the ones that already exist: NurseAssignment history (per admission) and the
+  rota (`q_roster_assign` shift unit, matched to the admission's `location.ward` ignoring case, UTC via
+  `wardsynq.utcOffsetMinutes`, default 330). No new assignment store.
+- The join is on the pseudonymised patient reference already on each audit row; nothing new is written
+  to the audit trail.
+- Exemptions are explicit and listed on the report: the reader's own live break-glass grant, roles
+  `lab, pharmacy, cashier, billing, radiographer, radiologist, blood_bank, him`, and the admission's
+  `attendingId`. Everyone else (admin and supervisor included) is compared.
+- No usable assignment data for a person (or anyone) in the period is `not_evaluated` with a reason. Any
+  unreadable or capped source turns would-be flags into not-evaluated reads, never flags or clean.
+- Known ceiling: only the admission's current ward is known, so a read before a transfer compares against
+  the current ward. A Firebase user whose membership identity is an email, not the uid on the audit row,
+  matches no assignment and shows as not evaluated.
+
+System health: `functions/_wardsynq/system-health.js`, `GET /ward/system-health` (STAFF_ADMIN, bulk rate
+tier), Admin > System health, playbooks in `docs/INCIDENT_RESPONSE.md`.
+- Seven real probes under a 3 s timeout; failed or timed-out is `down`. Reasons are the module's own
+  sentences, never provider error text (no keys or internal URLs).
+- The last ops-tick run is recorded in the existing `MAIK_KV` binding (`wsq:tick:last:<tenant>`, outcome
+  flags only, 30 day TTL) by the router; the domain module only receives a `lastTick()` function. No new
+  env var or binding.
+- MaiK probe is a model metadata read (Google) or `GET <localBaseUrl>/models`; it generates nothing.
