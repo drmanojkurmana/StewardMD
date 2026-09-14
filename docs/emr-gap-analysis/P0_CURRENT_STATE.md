@@ -616,3 +616,11 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Regression 6515 pass, 0 fail, 1 skipped. Reachability 0 without a screen. Live admin.js 22, ward.js site76.
 **P2 remaining:** 22 routes without a test (builder running), SMART third-party app registration screen, R4B/R5 when a partner needs it. Owner items unchanged.
 
+### 2026-09-14 (late) - every route has a test; three bugs they found; SMART apps screen; no em dash
+
+- Tests for the last 22 routes (tests/remaining-routes). Bugs fixed: maternity status/MEOWS/blood-loss/delivery swallowed failed reads and answered ok (now 502, and the screen shows each failure and hides the delivery form when delivery state is unknown); POST /room/update had no hospital ownership check; loadSessionFor refusals threw a raw 500 on 11 session routes. Reachability: "Every route has a screen and a test."
+- Muse: Admin > Integrations > Connected apps (SMART) registers clients in wardsynq.fhir.smart with strict validation, private JWKs refused, removal revokes live tokens; em dash removed from app-facing text with test/wsq-no-emdash.test.mjs.
+- Flaky outbound test fixed (T0 fixed one second after load; under load later deliveries were never due).
+- Regression 6552 pass, 0 fail, 1 skipped. Live admin.js 23, ward.js site78.
+**In progress:** P2.17 security scanning plus penetration test plan (Muse), P2.17 tamper-evident audit chain with database-level immutability (builder). After these, P2 is complete except R4B/R5 (deferred by docs/FHIR_STRATEGY.md) and owner items.
+
