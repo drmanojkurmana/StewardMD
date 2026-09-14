@@ -362,3 +362,111 @@ test("THE SMART DOOR /api/fhir/{org}/$export: no token 401, a user token 403, an
   assert.equal((await smart(ORG, filePath, obsOnly)).status, 403, "a narrower token of the same client may not read a type it was not granted");
   assert.equal((await smart(ORG, statusPath, sys, "DELETE")).status, 202);
 });
+
+test("ORPHAN COVERAGE: keys written before a failed recording are deleted by cancel and by expiry", async () => {
+  // The run writes its files, then the recording append throws, then the best effort delete
+  // flakes too. The ciphertext is still in storage, listed by nothing but pendingKeys.
+  const realAppend = RECORD.append.bind(RECORD);
+  const failRecordings = async (tenantId, records, ctx) => {
+    if ((records || []).length > 1) throw new Error("recording append failed");
+    return realAppend(tenantId, records, ctx);
+  };
+  const writtenKeys = [], deleteCalls = [];
+  const realPut = STORE.put.bind(STORE), realDelete = STORE.delete.bind(STORE);
+  let deleteFails = true;
+  STORE.put = async (key, bytes, ct) => { writtenKeys.push(key); return realPut(key, bytes, ct); };
+  STORE.delete = async (key) => { deleteCalls.push(key); if (deleteFails) throw new Error("store flaky"); return realDelete(key); };
+
+  const makeOrphan = async () => {
+    const k = await as(ADMIN, "/ward/fhir-export", "POST", { orgId: ORG, types: ["Patient"] });
+    assert.equal(k.status, 202);
+    const { jobId } = await k.json();
+    const evt = (await RECORD.latestByType(TENANT, "_wardsynq_outbox", 10)).find((e) => e.payload.jobId === jobId);
+    writtenKeys.length = 0; deleteCalls.length = 0; deleteFails = true;
+    RECORD.append = failRecordings;
+    await assert.rejects(
+      B.runExportChunk({ repository: RECORD, tenantId: TENANT, store: STORE, env: ENV }, evt.payload, { attempts: 0 }),
+      /recording append failed/);
+    const job = await RECORD.latest(TENANT, B.JOB_TYPE, jobId);
+    assert.equal(job.status, "in-progress", "a first failure is retried, never failed");
+    assert.ok(writtenKeys.length > 0, "the run wrote files before the recording failed");
+    for (const key of writtenKeys) assert.ok((job.pendingKeys || []).includes(key), "every written key was listed before it was written");
+    assert.ok(STORE._objects.size > 0, "the best effort delete flaked, so ciphertext is still in storage");
+    return jobId;
+  };
+
+  // Cancel path: withdrawing the running export deletes the listed orphans too.
+  const jobA = await makeOrphan();
+  deleteFails = false;
+  assert.equal((await as(ADMIN, `/ward/fhir/$export-status/${jobA}?orgId=${ORG}`, "DELETE")).status, 202);
+  for (const key of writtenKeys) assert.ok(deleteCalls.includes(key), `cancel deleted ${key}`);
+  assert.equal(STORE._objects.size, 0, "cancel removed the orphaned files");
+
+  // Expiry path: the 24 hour deletion finds the same keys through pendingKeys.
+  RECORD.append = realAppend;
+  const jobB = await makeOrphan();
+  deleteFails = false;
+  await B.expireExport({ repository: RECORD, tenantId: TENANT, store: STORE, env: ENV }, { jobId: jobB });
+  for (const key of writtenKeys) assert.ok(deleteCalls.includes(key), `expiry deleted ${key}`);
+  assert.equal(STORE._objects.size, 0, "expiry removed the orphaned files");
+  assert.equal((await RECORD.latest(TENANT, B.JOB_TYPE, jobB)).filesDeleted, true);
+  RECORD.append = realAppend;
+});
+
+test("COMPLETED EXPORTS carry no pendingKeys, and neither the manifest nor the summary exposes them", async () => {
+  const k = await as(ADMIN, KICK + "&_type=Patient,Observation", "GET", null, { Prefer: "respond-async" });
+  assert.equal(k.status, 202);
+  await tick();
+  const jobId = k.headers.get("Content-Location").match(/(wsq-fhirexp-[0-9a-f]+)/)[1];
+  const job = await RECORD.latest(TENANT, B.JOB_TYPE, jobId);
+  assert.equal(job.status, "complete");
+  assert.ok(!job.pendingKeys || job.pendingKeys.length === 0, "nothing is left pending once the recording landed");
+  const res = await as(ADMIN, k.headers.get("Content-Location").replace("https://x/api/queue", ""));
+  assert.equal(res.status, 200);
+  const m = await res.json();
+  assert.ok(!("pendingKeys" in m), "the served manifest never lists storage keys");
+  assert.ok(!("pendingKeys" in B.manifestOf(job, (n) => "https://x/" + n)));
+  assert.ok(!("pendingKeys" in B.summaryOf(job, Date.now())));
+});
+
+test("A JOB THAT KEEPS FAILING deletes its pending and written files instead of orphaning them", async () => {
+  const k = await as(ADMIN, "/ward/fhir-export", "POST", { orgId: ORG, types: ["Patient", "Observation"] });
+  assert.equal(k.status, 202);
+  const { jobId } = await k.json();
+  const evt = (await RECORD.latestByType(TENANT, "_wardsynq_outbox", 10)).find((e) => e.payload.jobId === jobId);
+  const writtenKeys = [], deleteCalls = [];
+  const realPut = STORE.put.bind(STORE), realDelete = STORE.delete.bind(STORE);
+  STORE.put = async (key, bytes, ct) => { writtenKeys.push(key); return realPut(key, bytes, ct); };
+  STORE.delete = async (key) => { deleteCalls.push(key); return realDelete(key); };
+  const realAppend = RECORD.append.bind(RECORD);
+  RECORD.append = async (tenantId, records, ctx) => {
+    if ((records || []).length > 1) throw new Error("recording append failed");
+    return realAppend(tenantId, records, ctx);
+  };
+  await B.runExportChunk({ repository: RECORD, tenantId: TENANT, store: STORE, env: ENV }, evt.payload, { attempts: 5 });
+  const job = await RECORD.latest(TENANT, B.JOB_TYPE, jobId);
+  assert.equal(job.status, "failed");
+  assert.ok(writtenKeys.length > 0, "the final run wrote files before its recording failed");
+  for (const key of writtenKeys) assert.ok(deleteCalls.includes(key), `the failed path deleted ${key}`);
+  for (const key of (job.pendingKeys || [])) assert.ok(deleteCalls.includes(key), `pending key ${key} was deleted`);
+  assert.equal(STORE._objects.size, 0, "no ciphertext is left behind");
+  RECORD.append = realAppend;
+});
+
+test("A STALLED RUN deletes listed files when it reports the job failed", async () => {
+  const k = await as(ADMIN, "/ward/fhir-export", "POST", { orgId: ORG, types: ["Patient"] });
+  const { jobId } = await k.json();
+  const deleteCalls = [];
+  const realDelete = STORE.delete.bind(STORE);
+  STORE.delete = async (key) => { deleteCalls.push(key); return realDelete(key); };
+  // Plant listed files and freeze progress in the past; the cursor is untouched.
+  const plantedOutput = { type: "Patient", name: "Patient-1.ndjson", count: 1, key: `t/tenant-wsq/fhir-export/${jobId}/stalled-1`, sha256: "x" };
+  const plantedPending = `t/tenant-wsq/fhir-export/${jobId}/stalled-2`;
+  const job = await RECORD.latest(TENANT, B.JOB_TYPE, jobId);
+  await RECORD.append(TENANT, [{ ...job, version: job.version + 1, output: [plantedOutput], pendingKeys: [plantedPending], progressAt: "2026-01-01T00:00:00.000Z", writtenBy: { id: "system:fhir-export", kind: "service", at: "2026-01-01T00:00:00.000Z" } }], {});
+  const evt = (await RECORD.latestByType(TENANT, "_wardsynq_outbox", 10)).find((e) => e.payload.jobId === jobId);
+  await B.runExportChunk({ repository: RECORD, tenantId: TENANT, store: STORE, env: ENV }, evt.payload, { attempts: 0 });
+  assert.equal((await RECORD.latest(TENANT, B.JOB_TYPE, jobId)).status, "failed");
+  assert.ok(deleteCalls.includes(plantedOutput.key), "the stalled path deleted the recorded file");
+  assert.ok(deleteCalls.includes(plantedPending), "the stalled path deleted the pending key");
+});
