@@ -40,7 +40,7 @@ function smsSetup(env, org) {
   return make ? make(env, c) : { missing: [`SMS provider "${provider}" is not supported. Supported: ${Object.keys(SMS_ADAPTERS).join(", ")}.`], send: null };
 }
 
-/** The hospital's staff and rota, as the recipient and phone-coverage readers use them. Members are read once. */
+/** The hospital's staff, rota and self-marked duty, as the recipient and phone-coverage readers use them. Members are read once. */
 function staffReaders(env, org) {
   const cfg = org.wardsynq || {};
   const offset = cfg.utcOffsetMinutes != null ? cfg.utcOffsetMinutes : 330;
@@ -48,6 +48,7 @@ function staffReaders(env, org) {
   return {
     members: async () => (members = members || await ORG.listMembers(env, org.id)),
     onDuty: (unit) => ROSTER.onDuty(env, org.id, unit || "", offset),
+    dutyStatuses: () => ROSTER.dutyStatuses(env, org.id),
   };
 }
 

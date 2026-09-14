@@ -26,7 +26,7 @@
 
 import { VersionConflictError } from "./repository.js";
 import { escalationOf } from "./critical-results.js";
-import { LEVELS, resolveRecipients, nextLevel, levelsFor, level2NurseRuleOf, DEFAULT_LEVELS } from "./alert-recipients.js";
+import { LEVELS, resolveRecipients, nextLevel, levelsFor, level2WardRuleOf, onDutyNow, WARD_TEAM_ROLES, DEFAULT_LEVELS } from "./alert-recipients.js";
 import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
 import { ReadLog, READ_KIND } from "../../wardsynq/wardsynq-readlog.js";
 import { ClinicalRead, readIdFor } from "./read-log.js";
@@ -80,8 +80,8 @@ function serverPushChannel(deps) {
     const loop = { id: payload.loopId, reportId: payload.reportId, encounterId: payload.encounterId };
     const who = await resolveRecipients({ orgId: deps.orgId, loop, level, policy: deps.policy }, deps.readers);
     const notice = { nid: null, kind: "critical", level, at, recipients: who.recipients, noDevice: [], sent: 0, total: 0, receipts: [] };
-    // The named level-2 nurse rule that decided the nurses, with how many it found and the total resolved (owner decision 2026-09-14).
-    if (who.nurseRule) notice.nurseRule = { ...who.nurseRule, recipients: who.recipients.length };
+    // The named level-2 ward rule, the ward it tested (null: no ward recorded), people per role, and the total resolved (owner 2026-09-15).
+    if (who.wardRule) notice.wardRule = { ...who.wardRule, recipients: who.recipients.length };
     let result;
     if (!who.recipients.length) {
       notice.reason = "NO_RECIPIENT";
@@ -289,21 +289,25 @@ async function declineNotice(ctx) {
 
 /**
  * Who the ladder would tell NOW with no phone registered, read from the DeviceDirectory rather than from past
- * notices (which only name people an alert already went to): every active member on duty in any ward with a
- * role on some level, and every named contact. ctx: { orgId, directory, readers: {members, onDuty(unit)} }.
+ * notices (which only name people an alert already went to): every active member on duty now in any ward with a
+ * role on some level (the level-2 ward-team slot adds the rule's roles), and every named contact.
+ * ctx: { orgId, directory, readers: {members, onDuty(unit), dutyStatuses?} }. rule: the level-2 ward rule in force.
  * -> { ok: true, checked, noDevice: [{identity, role, why}], partial } or { ok: false, error }. Never throws.
  */
-async function phoneCoverage(ctx, levels) {
+async function phoneCoverage(ctx, levels, rule) {
   if (!ctx.directory || !ctx.readers) return { ok: false, error: "store_unavailable" };
   try {
-    const roles = new Set(LEVELS.flatMap((k) => levels[k].roles));
+    const team = levels.overdue.roles.includes("nurse") ? (rule === "all-on-duty-nurses-in-ward" ? WARD_TEAM_ROLES.nurse : Object.values(WARD_TEAM_ROLES).flat()) : [];
+    const roles = new Set([...LEVELS.flatMap((k) => levels[k].roles), ...team]);
     const members = (await ctx.readers.members()) || [];
     const active = new Map(members.filter((m) => m && m.active !== false).map((m) => [str(m.identity), str(m.role)]));
     const duty = roles.size ? await ctx.readers.onDuty("") : { onDuty: [] };
     if (!duty || duty.ok === false) return { ok: false, error: "rota_read_failed" };
+    const st = roles.size && ctx.readers.dutyStatuses ? await ctx.readers.dutyStatuses() : { statuses: [] };
+    if (!st || st.ok === false) return { ok: false, error: "duty_status_read_failed" };
     const people = new Map();
-    for (const a of duty.onDuty || []) {
-      const id = str(a.identity);
+    for (const a of onDutyNow({ unit: "", duty: duty.onDuty, statuses: st.statuses })) {
+      const id = a.identity;
       if (roles.has(active.get(id))) people.set(id, { identity: id, role: active.get(id), why: "on duty" });
     }
     for (const id of new Set(LEVELS.flatMap((k) => levels[k].contacts))) if (!people.has(id)) people.set(id, { identity: id, role: active.get(id) || null, why: "named contact" });
@@ -340,11 +344,12 @@ async function alertDeliveryStatus(ctx) {
   try { await ctx.repository.auditOnly(ctx.tenantId, auditEvent(ctx.actorId, "record.list", { resourceType: LOOP, purpose: "alert-delivery-status" }, at)); }
   catch (e) { return { ok: false, status: 502, error: "audit_write_failed" }; }
   const levels = levelsFor(cfg.criticalEscalation);
+  const wardRule = level2WardRuleOf(cfg.criticalEscalation);
   return {
     ok: true,
     enabled: !!(cfg.alerts && cfg.alerts.push && cfg.alerts.push.enabled === true),
-    levels, defaults: DEFAULT_LEVELS, nurseRule: level2NurseRuleOf(cfg.criticalEscalation),
-    phones: await phoneCoverage(ctx, levels),
+    levels, defaults: DEFAULT_LEVELS, wardRule,
+    phones: await phoneCoverage(ctx, levels, wardRule.rule),
     minutes: { acknowledgeWithinMinutes: (cfg.criticalEscalation && cfg.criticalEscalation.acknowledgeWithinMinutes) || 30, escalateAfterMinutes: (cfg.criticalEscalation && cfg.criticalEscalation.escalateAfterMinutes) || 60 },
     failures: failures.sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 50),
     noDevice: [...noDevice].map(([identity, times]) => ({ identity, times })),

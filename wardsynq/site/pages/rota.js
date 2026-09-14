@@ -52,6 +52,24 @@
     if (!r.onDuty.length) return "<p>" + (r.partial ? "Nobody found on the rota for now, but the rota could not be read in full." : "Nobody is on the rota for right now.") + "</p>";
     return "<ul>" + r.onDuty.map(function (d) { return "<li>" + c.esc(d.identity) + ": " + c.esc(d.shift) + " (" + c.esc(d.unit) + ")</li>"; }).join("") + "</ul>";
   }
+  /* Owner 2026-09-15: who is on duty now in each ward (the rota, or marked on duty by themselves) and who marked
+   * themselves off duty, from GET /roster/duty. Off duty overrides the rota: those people get no critical-result alert. */
+  var VIA = { rota: "rota", self: "marked on duty" };
+  function dutyWardsHtml(c, r) {
+    if (r == null) return loading(c, "duty by ward");
+    if (!r.ok) return failed(c, "duty by ward");
+    var esc = c.esc;
+    var when = function (iso) { return esc(String(iso || "").slice(0, 16).replace("T", " ")); };
+    var wards = r.wards.length ? r.wards.map(function (w) {
+      return "<h3>" + esc(w.ward || "No ward") + " (" + w.people.length + ")</h3><ul>" + w.people.map(function (p) {
+        return "<li>" + esc(p.identity) + (p.role ? ", " + esc(p.role) : "") + ": " + esc(VIA[p.via] || p.via) + (p.until ? " until " + when(p.until) : "") + "</li>";
+      }).join("") + "</ul>";
+    }).join("") : "<p>Nobody is on duty in any ward right now.</p>";
+    var off = "<h3>Marked off duty (" + r.off.length + ")</h3>" + (r.off.length ? "<ul>" + r.off.map(function (p) {
+      return "<li>" + esc(p.identity) + (p.role ? ", " + esc(p.role) : "") + ": off duty until " + when(p.until) + ". Not alerted.</li>";
+    }).join("") + "</ul>" : "<p>Nobody has marked themselves off duty.</p>");
+    return (r.partial ? '<div class="msg note">The rota or duty list could not be read in full; some people may be missing.</div>' : "") + wards + off;
+  }
   function pendingHtml(c, leave, swaps) {
     var esc = c.esc;
     var l = leave == null ? loading(c, "leave requests") : !leave.ok ? failed(c, "leave requests")
@@ -72,7 +90,8 @@
     el.innerHTML = '<div class="title"><h1>Staff rota</h1></div>' +
       '<div class="card"><h2>My shifts</h2><div id="rotaMine"></div><div id="rotaMsg"></div></div>' +
       '<div class="card"><h2>On duty now</h2><div id="rotaDuty"></div></div>' +
-      (admin ? '<div class="card"><h2>Shifts</h2><div id="rotaShifts"></div>' +
+      (admin ? '<div class="card"><h2>On and off duty by ward</h2><div id="rotaDutyWards"></div></div>' +
+        '<div class="card"><h2>Shifts</h2><div id="rotaShifts"></div>' +
         '<div class="row"><label class="f"><span>Name</span><input id="rotaShName" placeholder="Day"></label><label class="f"><span>Unit</span><input id="rotaShUnit" placeholder="Ward A"></label>' +
         '<label class="f"><span>Start</span><input id="rotaShStart" type="time"></label><label class="f"><span>End</span><input id="rotaShEnd" type="time"></label>' +
         '<label class="f"><span>Minimum nurses</span><input id="rotaShNurse" type="number" min="0"></label><label class="f"><span>Minimum doctors</span><input id="rotaShDoctor" type="number" min="0"></label>' +
@@ -93,6 +112,8 @@
     set("rotaDuty", loading(c, "who is on duty"));
     c.api("/roster/on-duty" + q).then(function (r) { set("rotaDuty", dutyHtml(c, r || { ok: false })); });
     if (admin) {
+      set("rotaDutyWards", dutyWardsHtml(c, null));
+      c.api("/roster/duty" + q).then(function (r) { set("rotaDutyWards", dutyWardsHtml(c, r || { ok: false })); }, function () { set("rotaDutyWards", dutyWardsHtml(c, { ok: false })); });
       c.api("/roster/shifts" + q).then(function (r) {
         if (!r || !r.ok) { set("rotaShifts", failed(c, "shifts")); return; }
         set("rotaShifts", r.shifts.length ? "<ul>" + r.shifts.map(function (s) { return "<li>" + c.esc(s.name + " (" + s.unit + ") " + s.start + "-" + s.end) + "</li>"; }).join("") + "</ul>" : "<p>No shifts defined yet.</p>");
@@ -118,5 +139,5 @@
     };
   } });
 
-  WSQ._rota = { mineHtml: mineHtml, coverageHtml: coverageHtml, pendingHtml: pendingHtml, dutyHtml: dutyHtml };
+  WSQ._rota = { mineHtml: mineHtml, coverageHtml: coverageHtml, pendingHtml: pendingHtml, dutyHtml: dutyHtml, dutyWardsHtml: dutyWardsHtml };
 })();

@@ -177,65 +177,159 @@ test("Admin card: phones now, from the registrations; a failed read is never sho
   assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
 });
 
-/* Owner decision 2026-09-14: level-2 nurses by a named per-hospital rule (criticalEscalation.level2NurseRule). */
-const { level2NurseRuleOf, level2NurseRuleRefusal, level2NurseRecipients, LEVEL2_NURSE_RULES } = await import("../functions/_wardsynq/alert-recipients.js");
+/* Owner decision 2026-09-15: level 2 tells the WARD TEAM on duty now (nurses, residents, consultants) by a named rule
+ * (criticalEscalation.level2WardRule, the earlier level2NurseRule read as a fallback). Each condition of the rule is
+ * pinned by its own case below, so removing any one of them fails a named assertion. */
+const AR = await import("../functions/_wardsynq/alert-recipients.js");
+const NOW = Date.parse("2026-09-15T10:00:00Z");
+const esc0 = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+const team = [
+  { identity: "n1", role: "nurse" }, { identity: "n2", role: "nurse" }, { identity: "r1", role: "resident" }, { identity: "pg1", role: "pg_resident" },
+  { identity: "c1", role: "doctor" }, { identity: "cash", role: "cashier" }, { identity: "sup", role: "supervisor" }, { identity: "nx", role: "nurse", active: false },
+];
+const activeOf = (list) => new Map(list.filter((m) => m.active !== false).map((m) => [m.identity, m.role]));
+const ids = (people) => people.map((p) => p.identity).sort();
+const rotaMedA = ["n1", "r1", "c1", "cash", "sup", "nx"].map((identity) => ({ identity, unit: "Medical A" }));
+const later = NOW + 3600000, earlier = NOW - 1;
 
-test("level-2 nurse rule: one rule, absent is the default, an unknown stored rule is applied as the default and named; a save naming another is refused", () => {
-  assert.deepEqual(Object.keys(LEVEL2_NURSE_RULES), ["all-on-duty-nurses-in-ward"]);
-  const d = level2NurseRuleOf(null);
-  assert.deepEqual([d.rule, d.source], ["all-on-duty-nurses-in-ward", "default"]);
-  assert.match(d.note, /until a Nurse-in-Charge role or assignment is implemented/);
-  assert.equal(level2NurseRuleOf({ level2NurseRule: "all-on-duty-nurses-in-ward" }).source, "hospital");
-  const odd = level2NurseRuleOf({ level2NurseRule: "nurse-in-charge" });
-  assert.deepEqual([odd.rule, odd.source, odd.configured], ["all-on-duty-nurses-in-ward", "unrecognised", "nurse-in-charge"]);
-  assert.equal(level2NurseRuleRefusal({ level2NurseRule: "all-on-duty-nurses-in-ward" }), null);
-  assert.equal(level2NurseRuleRefusal({ acknowledgeWithinMinutes: 20 }), null);
-  assert.equal(level2NurseRuleRefusal(null), null);
-  assert.match(level2NurseRuleRefusal({ level2NurseRule: "nurse-in-charge" }), /"nurse-in-charge" was not saved\. The only rule built is "all-on-duty-nurses-in-ward"/);
-  assert.throws(() => level2NurseRecipients("nurse-in-charge", { active: new Map(), duty: [] }), /has no resolver/);
+test("ward team rule: ROLE - only nurses, residents and consultants who are active members; a cashier or supervisor on duty is not in the team", () => {
+  const got = AR.level2WardRecipients("all-on-duty-ward-team", { unit: "Medical A", active: activeOf(team), duty: rotaMedA, statuses: [], nowMs: NOW });
+  assert.deepEqual(ids(got), ["c1", "n1", "r1"]);
+  assert.deepEqual(got.map((p) => p.group).sort(), ["consultant", "nurse", "resident"]);
+  assert.deepEqual([...AR.WARD_TEAM_ROLES.resident], ["resident", "pg_resident"]);
+  assert.equal(AR.wardTeamGroupOf("pg_hod"), "consultant");
+  assert.equal(AR.wardTeamGroupOf("intern"), null, "interns are not in the ward team (owner follow-up)");
 });
 
-test("level 2: a nurse off duty, or on duty in another ward, is not alerted; the result names the rule and how many nurses", async () => {
-  const people = [...members, { identity: "nurse-off", role: "nurse" }, { identity: "nurse-surg", role: "nurse" }];
-  // A rota reader that (wrongly) hands back another ward's nurse too: the rule checks the assignment's own ward itself.
-  const leaky = { ...readers(), members: async () => people,
-    onDuty: async (unit) => ({ onDuty: [...onDutyIn[unit].map((identity) => ({ identity, unit })), { identity: "nurse-surg", unit: "Surgical B" }] }) };
-  const over = await resolveRecipients({ orgId: "o", loop, level: "overdue" }, leaky);
-  assert.ok(over.recipients.includes("o~nurse"), "the on-duty nurse in the patient's ward");
-  assert.ok(!over.recipients.includes("o~nurse-off"), "a nurse with no shift now is not alerted");
-  assert.ok(!over.recipients.includes("o~nurse-surg"), "a nurse on duty in another ward is not alerted");
-  assert.deepEqual(over.nurseRule, { rule: "all-on-duty-nurses-in-ward", source: "default", ward: "Medical A", nurses: 1 });
-  assert.equal((await resolveRecipients({ orgId: "o", loop, level: "due" }, leaky)).nurseRule, undefined, "level 1 has no nurse rule");
-  const top = await resolveRecipients({ orgId: "o", loop, level: "escalate", policy: { level2NurseRule: "all-on-duty-nurses-in-ward" } }, leaky);
-  assert.deepEqual([top.nurseRule.source, top.nurseRule.nurses], ["hospital", 1], "the top tier still carries the level-2 nurses, by the same rule");
-  const odd = await resolveRecipients({ orgId: "o", loop, level: "overdue", policy: { level2NurseRule: "nurse-in-charge" } }, leaky);
-  assert.ok(odd.recipients.includes("o~nurse"), "an unknown stored rule never silences the ward's nurses");
-  assert.deepEqual([odd.nurseRule.source, odd.nurseRule.configured], ["unrecognised", "nurse-in-charge"]);
+test("ward team rule: WARD - on the rota in another ward, or marked on duty for another ward, is not told", () => {
+  const duty = [...rotaMedA, { identity: "n2", unit: "Surgical B" }];
+  const statuses = [{ identity: "pg1", status: "on", unit: "Surgical B", expiresAt: later }];
+  const got = AR.level2WardRecipients("all-on-duty-ward-team", { unit: "Medical A", active: activeOf(team), duty, statuses, nowMs: NOW });
+  assert.ok(!ids(got).includes("n2"), "rostered in another ward");
+  assert.ok(!ids(got).includes("pg1"), "marked on duty for another ward");
+  assert.deepEqual(ids(AR.level2WardRecipients("all-on-duty-ward-team", { unit: "Surgical B", active: activeOf(team), duty, statuses, nowMs: NOW })), ["n2", "pg1"]);
 });
 
-test("level 2: the ward's on-duty nurse set empty and nobody else on the tier is NO_RECIPIENT, with the rule and zero nurses recorded", async () => {
-  const empty = { ...readers(), onDuty: async () => ({ onDuty: [{ identity: "nurse", unit: "Surgical B" }] }) };
+test("ward team rule: DUTY - not on the rota is not told; marked ON for this ward is told without a rota shift; OFF overrides the rota; an expired mark counts for nothing", () => {
+  const ctx = (statuses) => ({ unit: "Medical A", active: activeOf(team), duty: rotaMedA, statuses, nowMs: NOW });
+  assert.ok(!ids(AR.level2WardRecipients("all-on-duty-ward-team", ctx([]))).includes("n2"), "a nurse member with no shift and no mark");
+  assert.ok(ids(AR.level2WardRecipients("all-on-duty-ward-team", ctx([{ identity: "n2", status: "on", unit: "Medical A", expiresAt: later }]))).includes("n2"), "self-marked on duty in this ward");
+  const off = AR.level2WardRecipients("all-on-duty-ward-team", ctx([{ identity: "n1", status: "off", unit: "", expiresAt: later }]));
+  assert.ok(!ids(off).includes("n1"), "off duty overrides the rota");
+  const expired = AR.level2WardRecipients("all-on-duty-ward-team", ctx([{ identity: "n1", status: "off", expiresAt: earlier }, { identity: "n2", status: "on", unit: "Medical A", expiresAt: earlier }]));
+  assert.ok(ids(expired).includes("n1"), "an expired OFF no longer excludes");
+  assert.ok(!ids(expired).includes("n2"), "an expired ON no longer includes");
+});
+
+test("rule of record: absent = ward team (default); level2WardRule wins; level2NurseRule is the fallback that keeps nurse-only; unknown applies the default and is named", () => {
+  assert.deepEqual(Object.keys(AR.LEVEL2_WARD_RULES), ["all-on-duty-ward-team", "all-on-duty-nurses-in-ward"]);
+  const d = AR.level2WardRuleOf(null);
+  assert.deepEqual([d.rule, d.source, d.key], ["all-on-duty-ward-team", "default", undefined]);
+  const old = AR.level2WardRuleOf({ level2NurseRule: "all-on-duty-nurses-in-ward" });
+  assert.deepEqual([old.rule, old.source, old.key], ["all-on-duty-nurses-in-ward", "hospital", "level2NurseRule"], "a hospital that chose nurse-only keeps it");
+  const both = AR.level2WardRuleOf({ level2WardRule: "all-on-duty-ward-team", level2NurseRule: "all-on-duty-nurses-in-ward" });
+  assert.deepEqual([both.rule, both.key], ["all-on-duty-ward-team", "level2WardRule"]);
+  const odd = AR.level2WardRuleOf({ level2WardRule: "nurse-in-charge" });
+  assert.deepEqual([odd.rule, odd.source, odd.configured], ["all-on-duty-ward-team", "unrecognised", "nurse-in-charge"]);
+  assert.equal(AR.level2WardRuleRefusal({ level2WardRule: "all-on-duty-ward-team", level2NurseRule: "all-on-duty-nurses-in-ward" }), null);
+  assert.equal(AR.level2WardRuleRefusal(null), null);
+  assert.match(AR.level2WardRuleRefusal({ level2NurseRule: "x" }), /"x" was not saved/);
+  assert.throws(() => AR.level2WardRecipients("nurse-in-charge", { active: new Map(), duty: [] }), /has no resolver/);
+  assert.deepEqual(ids(AR.level2WardRecipients("all-on-duty-nurses-in-ward", { unit: "Medical A", active: activeOf(team), duty: rotaMedA, statuses: [], nowMs: NOW })), ["n1"], "nurse-only tells no resident or consultant");
+});
+
+test("resolveRecipients at level 2: the record keeps the rule, source, ward and counts per role; off duty is told nothing, not even as the orderer", async () => {
+  const people = [...members, { identity: "dr-order", role: "doctor" }, { identity: "pg-self", role: "pg_resident" }, { identity: "nurse-off", role: "nurse" }];
+  const hour = Date.now() + 3600000;
+  const rs = { ...readers(), members: async () => people,
+    onDuty: async (unit) => ({ onDuty: [...onDutyIn[unit].map((identity) => ({ identity, unit })), { identity: "nurse-off", unit }] }),
+    dutyStatuses: async () => ({ statuses: [
+      { identity: "pg-self", status: "on", unit: "Medical A", expiresAt: hour },
+      { identity: "nurse-off", status: "off", unit: "", expiresAt: hour },
+      { identity: "dr-order", status: "off", unit: "", expiresAt: hour },
+    ] }) };
+  const over = await resolveRecipients({ orgId: "o", loop, level: "overdue" }, rs);
+  assert.ok(over.recipients.includes("o~pg-self"), "a PG resident marked on duty in the ward, with no shift");
+  assert.ok(!over.recipients.includes("o~nurse-off"), "a rostered nurse marked off duty");
+  assert.ok(!over.recipients.includes("o~dr-order"), "the ordering doctor marked off duty");
+  assert.deepEqual(over.wardRule, { rule: "all-on-duty-ward-team", source: "default", ward: "Medical A", counts: { nurse: 1, resident: 2, consultant: 1 } });
+  const due = await resolveRecipients({ orgId: "o", loop, level: "due" }, rs);
+  assert.equal(due.wardRule, undefined, "level 1 has no ward rule");
+  const nurseOnly = await resolveRecipients({ orgId: "o", loop, level: "overdue", policy: { level2NurseRule: "all-on-duty-nurses-in-ward" } }, rs);
+  assert.deepEqual([nurseOnly.wardRule.rule, nurseOnly.wardRule.key, nurseOnly.wardRule.counts], ["all-on-duty-nurses-in-ward", "level2NurseRule", { nurse: 1 }]);
+});
+
+test("level 2 with nobody on duty in the ward is NO_RECIPIENT with zero counts; a patient with no ward keeps hospital-wide cover and records ward null", async () => {
+  const empty = { ...readers(), onDuty: async () => ({ onDuty: [{ identity: "nurse", unit: "Surgical B" }] }), dutyStatuses: async () => ({ statuses: [] }) };
   const policy = { levels: { due: { orderer: false, roles: [] }, overdue: { orderer: false, roles: ["nurse"] } } };
   const r = await resolveRecipients({ orgId: "o", loop, level: "overdue", policy }, empty);
-  assert.deepEqual(r.recipients, []);
-  assert.equal(r.reason, "NO_RECIPIENT");
-  assert.equal(r.nurseRule.nurses, 0);
+  assert.deepEqual([r.recipients, r.reason], [[], "NO_RECIPIENT"]);
+  assert.deepEqual(r.wardRule.counts, { nurse: 0, resident: 0, consultant: 0 });
+  const seen = [];
+  const noWard = await resolveRecipients({ orgId: "o", loop: { id: "l3", reportId: "r1", encounterId: "missing" }, level: "overdue", policy }, { ...empty, onDuty: async (u) => { seen.push(u); return { onDuty: [{ identity: "nurse", unit: "Surgical B" }] }; } });
+  assert.deepEqual(seen, [""]);
+  assert.equal(noWard.wardRule.ward, null);
+  assert.deepEqual(noWard.recipients, ["o~nurse"], "hospital-wide cover, as before");
 });
 
-test("Critical result alerts card: the level 2 nurse rule is shown read-only with its Nurse-in-Charge note", () => {
-  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
-  const sb = { window: { WSQ: { page() {} } } };
-  sb.WSQ = sb.window.WSQ;
+test("wardAlertCover: counts per role now, zeros named; dutyExpiry: end of the rostered shift, else 12 hours, never later", async () => {
+  const cover = AR.wardAlertCover({ policy: null, members: team, duty: rotaMedA, statuses: [{ identity: "n1", status: "off", expiresAt: later }], unit: "Medical A", nowMs: NOW });
+  assert.deepEqual(cover, { rule: "all-on-duty-ward-team", source: "default", ward: "Medical A", counts: { nurse: 0, resident: 1, consultant: 1 }, total: 2 });
+  const R = await import("../functions/_roster.js");
+  const shifts = { day: { id: "day", name: "Day", unit: "Medical A", start: "08:00", end: "20:00" }, long: { id: "long", name: "Long", unit: "Medical A", start: "08:00", end: "07:59" } };
+  const at = Date.parse("2026-09-15T10:00:00Z"); // 15:30 local at +330
+  const day = R.dutyExpiry(at, 330, shifts, [{ identity: "n1", date: "2026-09-15", shiftId: "day" }], "n1");
+  assert.deepEqual([new Date(day.expiresAt).toISOString(), day.basis, day.shift.unit], ["2026-09-15T14:30:00.000Z", "shift", "Medical A"]);
+  const none = R.dutyExpiry(at, 330, shifts, [], "n1");
+  assert.deepEqual([none.expiresAt - at, none.basis, none.shift], [12 * 3600000, "hours", null]);
+  const capped = R.dutyExpiry(at, 330, shifts, [{ identity: "n1", date: "2026-09-15", shiftId: "long" }], "n1");
+  assert.deepEqual([capped.expiresAt - at, capped.basis], [12 * 3600000, "hours"], "a shift ending after 12 hours is capped");
+});
+
+test("screens: the Alerts card explains the ward rule; the ward board names who would be alerted now; the critical board says ward null; the rota lists duty by ward", () => {
+  const sb = { window: { WSQ: { page() {} } } }; sb.WSQ = sb.window.WSQ;
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
   const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true }, phones: { ok: true, checked: 0, noDevice: [] } };
-  const html = C.html(esc, { ...base, nurseRule: level2NurseRuleOf(null) });
-  assert.match(html, /Level 2 nurse rule<\/dt><dd><span class="mono">all-on-duty-nurses-in-ward<\/span> <span class="quiet">\(default\)/);
-  assert.match(html, /until a Nurse-in-Charge role or assignment is implemented\. It cannot be changed on this card/);
+  const html = C.html(esc0, { ...base, wardRule: AR.level2WardRuleOf(null) });
+  assert.match(html, /Level 2 ward rule<\/dt><dd><span class="mono">all-on-duty-ward-team<\/span> <span class="quiet">\(default\)/);
+  assert.match(html, /Every nurse, resident and consultant on duty now in the patient&#39;s ward/);
+  assert.match(html, /off duty lasts until the end of their rostered shift, or 12 hours/);
+  assert.match(C.html(esc0, { ...base, wardRule: AR.level2WardRuleOf({ level2WardRule: "x" }) }), /saved rule "x" is not one this build has/);
+  assert.match(C.html(esc0, base), /level 2 ward rule could not be read/);
   assert.doesNotMatch(html, /—/);
-  assert.match(C.html(esc, { ...base, nurseRule: level2NurseRuleOf({ level2NurseRule: "nurse-in-charge" }) }), /saved rule "nurse-in-charge" is not one this build has/);
-  assert.match(C.html(esc, base), /level 2 nurse rule could not be read/);
-  // The card's own save keeps the saved rule: readAlertCard carries every criticalEscalation key it does not edit.
   const out = C.read({ enabled: true, senderId: "", templateName: "", escalation: { level2NurseRule: "all-on-duty-nurses-in-ward" }, levels: {} });
-  assert.equal(out.wardsynq.criticalEscalation.level2NurseRule, "all-on-duty-nurses-in-ward");
+  assert.equal(out.wardsynq.criticalEscalation.level2NurseRule, "all-on-duty-nurses-in-ward", "the card's own save keeps a saved rule");
+
+  const wsb = { navigator: { userAgent: "node" }, location: { hash: "", href: "" },
+    document: { getElementById: () => null, createElement: () => ({ style: {}, classList: { add() {}, remove() {} }, appendChild() {}, setAttribute() {} }), addEventListener() {}, body: { appendChild() {} }, querySelector: () => null, querySelectorAll: () => [] },
+    localStorage: { getItem: () => "", setItem() {}, removeItem() {} }, fetch: () => Promise.resolve({ json: () => Promise.resolve({}) }), setTimeout, clearTimeout, console, Promise, Date };
+  wsb.window = wsb; wsb.self = wsb; vm.createContext(wsb); vm.runInContext(readFileSync(new URL("../ward.js", import.meta.url), "utf8"), wsb);
+  const W = wsb.window.WARD;
+  const list = (extra) => W._render({ ...W._st, view: "list", loaded: true, ...extra });
+  assert.match(list({ alertCover: null }), /Loading who would be alerted now/);
+  assert.match(list({ alertCover: false }), /could not be read\. Do not read this as nobody on duty/);
+  const cov = list({ alertCover: { ok: true, wards: [{ ward: "Cardio", total: 0, counts: { nurse: 0, resident: 0, consultant: 0 } }, { ward: "Medical A", total: 3, counts: { nurse: 2, resident: 1, consultant: 0 } }] } });
+  assert.match(cov, /<b>Cardio<\/b>: level 2 alert would reach <b>nobody on duty<\/b>/);
+  assert.match(cov, /<b>Medical A<\/b>: level 2 alert would reach 2 nurses, 1 resident, 0 consultants/);
+  assert.match(list({ duty: null }), /Loading your duty status/);
+  assert.match(list({ duty: false }), /Do not read this as on or off duty/);
+  assert.doesNotMatch(list({ duty: { notWardTeam: true } }), /My duty/, "no card for a role outside the ward team");
+  const off = list({ duty: { ok: true, status: { status: "off", unit: "", expiresAt: "2026-09-15T14:30:00Z", basis: "shift" }, rota: { name: "Day", unit: "Medical A" }, wards: ["Medical A"], hours: 12 } });
+  assert.match(off, /<b>Off duty<\/b> until .*\(end of your shift\)\. You get no critical-result alerts until then/);
+  assert.match(off, /data-w-act="dutyset:on"/); assert.match(off, /data-w-act="dutyset:off"/);
+  assert.match(list({ duty: { ok: true, status: null, rota: null, wards: ["Medical A"], hours: 12 } }), /Not on the rota now and not marked on duty/);
+  const board = (wardRule) => W._render({ ...W._st, view: "critsboard", critsBoard: [{ loopId: "c1", patientId: "p1", display: "Potassium", value: 7.1, state: "open", escalation: { level: "overdue" }, notifications: [{ nid: "a", level: "overdue", sent: 1, wardRule }] }] });
+  assert.match(board({ rule: "all-on-duty-ward-team", ward: "Medical A", counts: { nurse: 2, resident: 1, consultant: 1 } }), /Level 2 ward team on duty in Medical A: 2 nurses, 1 resident, 1 consultant/);
+  assert.match(board({ rule: "all-on-duty-ward-team", ward: null, counts: { nurse: 3, resident: 0, consultant: 1 } }), /<b>No ward recorded for this patient:<\/b> level 2 went to everyone on duty in the hospital/);
+
+  const rsb = { window: { WSQ: { page() {} } } }; rsb.WSQ = rsb.window.WSQ;
+  vm.createContext(rsb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/rota.js", import.meta.url), "utf8"), rsb);
+  const Rt = rsb.window.WSQ._rota, c = { esc: esc0 };
+  assert.match(Rt.dutyWardsHtml(c, null), /Loading duty by ward/);
+  assert.match(Rt.dutyWardsHtml(c, { ok: false }), /Do not read this as none/);
+  const dw = Rt.dutyWardsHtml(c, { ok: true, wards: [{ ward: "Medical A", people: [{ identity: "n1", role: "nurse", via: "rota" }, { identity: "pg1", role: "pg_resident", via: "self", until: "2026-09-15T20:00:00Z" }] }], off: [{ identity: "n2", role: "nurse", until: "2026-09-15T14:30:00Z" }] });
+  assert.match(dw, /Medical A \(2\)/); assert.match(dw, /pg1, pg_resident: marked on duty until 2026-09-15 20:00/);
+  assert.match(dw, /Marked off duty \(1\).*n2, nurse: off duty until 2026-09-15 14:30\. Not alerted/);
 });
+

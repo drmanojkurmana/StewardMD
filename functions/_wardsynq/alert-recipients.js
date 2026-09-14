@@ -19,9 +19,9 @@
 const LEVELS = Object.freeze(["due", "overdue", "escalate"]);
 
 /* orderer: the clinician who placed the order the report answers (ServiceRequest.requesterId).
- * roles: member roles ON DUTY NOW in the patient's unit (the rota). contacts: named member identities.
- * There is no nurse-in-charge role in _queue_roles.js, so "nurse in charge" is the nurses on duty in
- * the unit, decided by the named level-2 nurse rule below; a hospital that wants none removes "nurse" here.
+ * roles: member roles ON DUTY NOW in the patient's unit (the rota, and self-marked duty). contacts: named member
+ * identities. There is no nurse-in-charge role in _queue_roles.js: "nurse" on the overdue tier is the ward-team
+ * slot, decided by the named level-2 ward rule below; a hospital that wants none removes "nurse" here.
  * No responsible-clinician field exists on Encounter, so it is not a source until one does. */
 const DEFAULT_LEVELS = Object.freeze({
   approval: Object.freeze({ approvedBy: "Dr Manoj Kurmana", approvedOn: "2026-09-14", decision: "O5" }),
@@ -33,48 +33,105 @@ const DEFAULT_LEVELS = Object.freeze({
 const str = (v) => (v == null ? "" : String(v).trim());
 const list = (v) => (Array.isArray(v) ? v.map(str).filter(Boolean) : null);
 
-/* OWNER DECISION 2026-09-14: which nurses the level-2 ("overdue") alert tells, as a named per-hospital rule
- * (wardsynq.criticalEscalation.level2NurseRule; absent = the default). Only one rule exists until a
- * Nurse-in-Charge role or assignment does; that rule is one new entry here and one new case in
- * level2NurseRecipients. A save naming any other rule is refused (level2NurseRuleRefusal). */
-const LEVEL2_NURSE_RULES = Object.freeze({
-  "all-on-duty-nurses-in-ward": "Every nurse marked on duty in the rota for the patient's ward. Applies until a Nurse-in-Charge role or assignment is implemented.",
+/* OWNER DECISION 2026-09-15, replacing the nurse-only default of 2026-09-14: the level-2 ("overdue") alert tells the
+ * WARD TEAM ON DUTY NOW in the patient's ward (the nurses, the residents and the consultant there) and nobody who is
+ * not on duty. A named per-hospital rule under wardsynq.criticalEscalation.level2WardRule; the earlier key
+ * level2NurseRule is still read when the new one is absent, so a hospital that explicitly chose the nurse-only rule
+ * keeps it. Absent both = the default. A save naming any other rule is refused (level2WardRuleRefusal).
+ *
+ * WHO IS WHICH: the groups below, by member role. There is no "consultant" role in _queue_roles.js: a consultant is
+ * a doctor (or PG faculty / HoD). Interns are not in the ward team (owner follow-up). */
+const WARD_TEAM_ROLES = Object.freeze({
+  nurse: Object.freeze(["nurse"]),
+  resident: Object.freeze(["resident", "pg_resident"]),
+  consultant: Object.freeze(["doctor", "pg_faculty", "pg_hod"]),
 });
-const LEVEL2_NURSE_DEFAULT = "all-on-duty-nurses-in-ward";
+const WARD_TEAM_GROUPS = Object.freeze(Object.keys(WARD_TEAM_ROLES));
+/** PURE. The ward-team group a member role belongs to, or null. */
+const wardTeamGroupOf = (role) => WARD_TEAM_GROUPS.find((g) => WARD_TEAM_ROLES[g].includes(str(role))) || null;
 
-/** PURE. The rule in force. A stored rule this build does not have is never followed silently: the default
- * applies (a critical result must still reach the ward's nurses) and the stored value is named. */
-function level2NurseRuleOf(policy) {
-  const raw = policy && typeof policy === "object" ? policy.level2NurseRule : undefined;
-  const set = raw !== undefined && raw !== null && raw !== "";
-  const known = set && Object.prototype.hasOwnProperty.call(LEVEL2_NURSE_RULES, raw);
-  const rule = known ? raw : LEVEL2_NURSE_DEFAULT;
-  return { rule, source: !set ? "default" : known ? "hospital" : "unrecognised", ...(set && !known ? { configured: str(raw).slice(0, 60) } : {}), note: LEVEL2_NURSE_RULES[rule] };
+const LEVEL2_WARD_RULES = Object.freeze({
+  "all-on-duty-ward-team": "Every nurse, resident and consultant on duty now in the patient's ward: on the rota for that ward now, or marked on duty there by themselves, and not marked off duty. Nobody off duty is told.",
+  "all-on-duty-nurses-in-ward": "Every nurse on duty now in the patient's ward, and nobody off duty (the earlier nurse-only rule, kept for a hospital that chose it). Applies until a Nurse-in-Charge role or assignment is implemented.",
+});
+const LEVEL2_WARD_DEFAULT = "all-on-duty-ward-team";
+const RULE_KEYS = Object.freeze(["level2WardRule", "level2NurseRule"]);
+const isSet = (v) => v !== undefined && v !== null && v !== "";
+const knownRule = (v) => typeof v === "string" && Object.prototype.hasOwnProperty.call(LEVEL2_WARD_RULES, v);
+
+/** PURE. The rule in force and where it came from. A stored rule this build does not have is never followed silently:
+ * the default applies (a critical result must still reach the ward) and the stored value is named. */
+function level2WardRuleOf(policy) {
+  const p = policy && typeof policy === "object" ? policy : {};
+  const key = RULE_KEYS.find((k) => isSet(p[k])) || null;
+  const known = !!key && knownRule(p[key]);
+  const rule = known ? p[key] : LEVEL2_WARD_DEFAULT;
+  return { rule, source: !key ? "default" : known ? "hospital" : "unrecognised", ...(key ? { key } : {}), ...(key && !known ? { configured: str(p[key]).slice(0, 60) } : {}), note: LEVEL2_WARD_RULES[rule] };
 }
 
-/** PURE. A sentence when a criticalEscalation being saved names a level-2 nurse rule this build does not have, else null. */
-function level2NurseRuleRefusal(criticalEscalation) {
-  const v = criticalEscalation && typeof criticalEscalation === "object" ? criticalEscalation.level2NurseRule : undefined;
-  if (v === undefined || v === null || Object.prototype.hasOwnProperty.call(LEVEL2_NURSE_RULES, v)) return null;
-  return `Level 2 nurse rule "${str(v).slice(0, 60)}" was not saved. The only rule built is "${LEVEL2_NURSE_DEFAULT}": every nurse on duty in the patient's ward. It applies until a Nurse-in-Charge role or assignment is implemented.`;
+/** PURE. A sentence when a criticalEscalation being saved names a level-2 ward rule this build does not have, else null. */
+function level2WardRuleRefusal(criticalEscalation) {
+  const ce = criticalEscalation && typeof criticalEscalation === "object" ? criticalEscalation : {};
+  const bad = RULE_KEYS.find((k) => ce[k] !== undefined && ce[k] !== null && !knownRule(ce[k]));
+  if (!bad) return null;
+  return `Level 2 ward rule "${str(ce[bad]).slice(0, 60)}" was not saved. The rules built are "all-on-duty-ward-team" (the default: every nurse, resident and consultant on duty in the patient's ward) and "all-on-duty-nurses-in-ward" (nurses only).`;
 }
 
 /**
- * THE ONE PLACE the level-2 nurses are decided, keyed by rule name.
- * ctx: { unit, active: Map(identity -> role), duty: [{identity, unit}] } where duty is the rota's on-duty list
- * for the unit. Both conditions are checked here, not trusted to the reader: ON DUTY (in the rota's on-duty
- * list) and IN THE AFFECTED WARD (the assignment's own unit is the patient's ward). A patient whose ward is
- * unknown keeps the ladder's hospital-wide rule (resolveRecipients), so no ward test is possible there.
+ * PURE. Who is ON DUTY NOW: the one definition every recipient path uses.
+ * ctx: { unit, duty: [{identity, unit}] (the rota's on-duty list), statuses: [{identity, status, unit, expiresAt}]
+ * (people marking themselves on or off duty; expiresAt in ms), nowMs } -> [{identity, unit, via: "rota"|"self"}]
+ *   DUTY: on the rota now, or an unexpired "on" the person set; an unexpired "off" overrides both.
+ *   WARD: when the patient's ward is known, the rota assignment's own ward, or the ward the person chose, is it.
  */
-function level2NurseRecipients(rule, ctx) {
+function onDutyNow(ctx) {
+  const now = Number(ctx.nowMs) || Date.now();
+  const live = (ctx.statuses || []).filter((s) => s && Number(s.expiresAt) > now);
+  const off = new Set(live.filter((s) => s.status === "off").map((s) => str(s.identity)));
+  const out = new Map();
+  const add = (identity, unit, via) => {
+    const id = str(identity);
+    if (!id || off.has(id)) return;
+    if (ctx.unit && str(unit) !== ctx.unit) return;
+    if (!out.has(id)) out.set(id, { identity: id, unit: str(unit), via });
+  };
+  for (const a of ctx.duty || []) if (a) add(a.identity, a.unit, "rota");
+  for (const s of live) if (s.status === "on") add(s.identity, s.unit, "self");
+  return [...out.values()];
+}
+
+/**
+ * THE ONE PLACE the level-2 ward recipients are decided, keyed by rule name.
+ * ctx: onDutyNow's ctx plus active: Map(identity -> role). Every condition is checked here, none trusted to a reader:
+ * ROLE (an active member in one of the rule's groups), DUTY and WARD (onDutyNow). A patient whose ward is unknown
+ * keeps the ladder's hospital-wide cover (ctx.unit ""), so no ward test is possible there.
+ * -> [{identity, group, unit, via}]
+ */
+function level2WardRecipients(rule, ctx) {
+  const team = (groups) => onDutyNow(ctx)
+    .map((a) => ({ ...a, group: wardTeamGroupOf(ctx.active.get(a.identity)) }))
+    .filter((a) => groups.includes(a.group));
   switch (rule) {
-    case "all-on-duty-nurses-in-ward":
-      return [...new Set((ctx.duty || [])
-        .filter((a) => a && ctx.active.get(str(a.identity)) === "nurse" && (!ctx.unit || str(a.unit) === ctx.unit))
-        .map((a) => str(a.identity)))];
-    default:
-      throw new Error(`level-2 nurse rule "${rule}" has no resolver`);
+    case "all-on-duty-ward-team": return team(WARD_TEAM_GROUPS);
+    case "all-on-duty-nurses-in-ward": return team(["nurse"]);
+    default: throw new Error(`level-2 ward rule "${rule}" has no resolver`);
   }
+}
+
+/** PURE. People per group, every group of the rule named (a zero is shown, not left out). */
+function countsByGroup(rule, people) {
+  const c = {};
+  for (const g of rule === "all-on-duty-nurses-in-ward" ? ["nurse"] : WARD_TEAM_GROUPS) c[g] = 0;
+  for (const p of people) if (p.group in c) c[p.group] += 1;
+  return c;
+}
+
+/** PURE. Who the level-2 rule would tell NOW in `unit`, as counts: the ward board shows this before an alert happens. */
+function wardAlertCover({ policy, members, duty, statuses, unit, nowMs }) {
+  const r = level2WardRuleOf(policy);
+  const active = new Map((members || []).filter((m) => m && m.active !== false).map((m) => [str(m.identity), str(m.role)]));
+  const people = level2WardRecipients(r.rule, { unit: str(unit), active, duty, statuses, nowMs });
+  return { rule: r.rule, source: r.source, ward: str(unit) || null, counts: countsByGroup(r.rule, people), total: people.length };
 }
 
 /** PURE. The hospital's levels over the defaults, per level and per field. The approval is never read
@@ -104,14 +161,16 @@ function nextLevel(level) {
 /**
  * Member identities, as `orgId~identity`, for a loop at a level.
  *
- * readers: { latest(type, id), members() -> [{identity, role, active}], onDuty(unit) -> {onDuty: [{identity, unit}]} }
- * Returns { recipients, reason?, unit, location: {ward, bed}, sources, nurseRule? }. nurseRule, when the level
- * reaches the level-2 tier and it lists "nurse": { rule, source, configured?, ward, nurses }.
+ * readers: { latest(type, id), members() -> [{identity, role, active}], onDuty(unit) -> {onDuty: [{identity, unit}]},
+ * dutyStatuses?() -> {statuses: [{identity, status, unit, expiresAt}]} }. Returns { recipients, reason?, unit,
+ * location: {ward, bed}, sources, wardRule? }. wardRule, when the level reaches the level-2 tier and it lists "nurse"
+ * (the ward-team slot): { rule, source, key?, configured?, ward, counts: {group: n} }.
  */
-async function resolveRecipients({ orgId, loop, level, policy }, readers) {
+async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers) {
   const lv = LEVELS.includes(level) ? level : "due";
   const levels = levelsFor(policy);
   const tiers = LEVELS.slice(0, LEVELS.indexOf(lv) + 1).map((k) => levels[k]);
+  const now = Number(nowMs) || Date.now();
 
   let orderer = "";
   if (tiers.some((t) => t.orderer) && loop && loop.reportId) {
@@ -123,23 +182,27 @@ async function resolveRecipients({ orgId, loop, level, policy }, readers) {
   // A patient whose ward is unknown is covered by everyone on duty in the hospital, not by nobody.
   const unit = str(encounter && encounter.location && encounter.location.ward);
 
-  /* "nurse" on the level-2 tier is decided by the hospital's named rule (level2NurseRecipients); every other
-   * role on a reached tier is everyone on duty in the unit with that role, as before. */
-  const level2Nurses = LEVELS.indexOf(lv) >= 1 && levels.overdue.roles.includes("nurse");
-  const roles = new Set(tiers.flatMap((t, i) => (LEVELS[i] === "overdue" && level2Nurses ? t.roles.filter((r) => r !== "nurse") : t.roles)));
-  let onDuty = [], nurseRule = null;
-  if (roles.size || level2Nurses) {
+  /* "nurse" on the level-2 tier is the ward-team slot, decided by the hospital's named rule (level2WardRecipients);
+   * every other role on a reached tier is everyone on duty now in the unit with that role. */
+  const level2 = LEVELS.indexOf(lv) >= 1 && levels.overdue.roles.includes("nurse");
+  const roles = new Set(tiers.flatMap((t, i) => (LEVELS[i] === "overdue" && level2 ? t.roles.filter((r) => r !== "nurse") : t.roles)));
+  let onDuty = [], wardRule = null, statuses = [];
+  if ((roles.size || level2 || orderer) && readers.dutyStatuses) statuses = ((await readers.dutyStatuses()) || {}).statuses || [];
+  if (roles.size || level2) {
     const members = await readers.members();
     const active = new Map((members || []).filter((m) => m && m.active !== false).map((m) => [str(m.identity), str(m.role)]));
     const duty = ((await readers.onDuty(unit)) || {}).onDuty || [];
-    onDuty = duty.map((a) => str(a.identity)).filter((id) => roles.has(active.get(id)));
-    if (level2Nurses) {
-      const r = level2NurseRuleOf(policy);
-      const nurses = level2NurseRecipients(r.rule, { unit, active, duty });
-      nurseRule = { rule: r.rule, source: r.source, ...(r.configured ? { configured: r.configured } : {}), ward: unit || null, nurses: nurses.length };
-      onDuty = [...new Set([...onDuty, ...nurses])];
+    const ctx = { unit, active, duty, statuses, nowMs: now };
+    onDuty = onDutyNow(ctx).map((a) => a.identity).filter((id) => roles.has(active.get(id)));
+    if (level2) {
+      const r = level2WardRuleOf(policy);
+      const team = level2WardRecipients(r.rule, ctx);
+      wardRule = { rule: r.rule, source: r.source, ...(r.key ? { key: r.key } : {}), ...(r.configured ? { configured: r.configured } : {}), ward: unit || null, counts: countsByGroup(r.rule, team) };
+      onDuty = [...new Set([...onDuty, ...team.map((a) => a.identity)])];
     }
   }
+  // The ordering clinician is told by name, but not while they have marked themselves off duty (owner 2026-09-15).
+  if (orderer && statuses.some((s) => s && str(s.identity) === orderer && s.status === "off" && Number(s.expiresAt) > now)) orderer = "";
   const contacts = tiers.flatMap((t) => t.contacts);
 
   const ids = [...new Set([...(orderer ? [orderer] : []), ...onDuty, ...contacts])];
@@ -149,8 +212,8 @@ async function resolveRecipients({ orgId, loop, level, policy }, readers) {
     unit: unit || null,
     location: { ward: unit || null, bed: str(encounter && encounter.location && encounter.location.bed) || null },
     sources: { orderer: orderer || null, onDuty: onDuty.length, contacts: contacts.length },
-    ...(nurseRule ? { nurseRule } : {}),
+    ...(wardRule ? { wardRule } : {}),
   };
 }
 
-export { LEVELS, DEFAULT_LEVELS, LEVEL2_NURSE_RULES, levelsFor, nextLevel, level2NurseRuleOf, level2NurseRuleRefusal, level2NurseRecipients, resolveRecipients };
+export { LEVELS, DEFAULT_LEVELS, LEVEL2_WARD_RULES, WARD_TEAM_ROLES, WARD_TEAM_GROUPS, wardTeamGroupOf, levelsFor, nextLevel, level2WardRuleOf, level2WardRuleRefusal, onDutyNow, level2WardRecipients, countsByGroup, wardAlertCover, resolveRecipients };
