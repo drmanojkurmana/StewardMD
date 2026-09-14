@@ -2715,7 +2715,8 @@ test("the FHIR door is not a way around the record's own access rules", async ()
   // The CapabilityStatement is public to any clinician and advertises read and search only.
   const cap = await as(NURSE, `/ward/fhir/metadata?orgId=${ORG}`);
   assert.equal(cap.resourceType, "CapabilityStatement");
-  const codes = new Set(cap.rest[0].resource.flatMap((r) => r.interaction.map((i) => i.code)));
+  // G10 (2026-09-14): Subscription create is declared on the staff door; it registers a webhook, not a clinical record.
+  const codes = new Set(cap.rest[0].resource.filter((r) => r.type !== "Subscription").flatMap((r) => r.interaction.map((i) => i.code)));
   // Widened 2026-09-08 when vread and history were implemented. Still nothing that writes.
   assert.deepEqual([...codes].sort(), ["history-instance", "read", "search-type", "vread"]);
 
