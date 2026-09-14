@@ -386,6 +386,18 @@ over every new log and KV write; nothing claims "verified against ABDM" without 
 
 ## 7. Owner decisions needed for S6
 
+**Owner answers, 2026-09-14** (binding; the questions are kept below for the record):
+- A1: shared StewardMD bridge, each hospital links its own facility. No own-bridge credentials, not built and not shown.
+- A2: all production ABDM traffic is held until the India-region hosting from the AWS move exists.
+- A3: the orchestrator merges `feat/abdm-v3-reconcile`.
+- A4: records received from ABDM under consent stay in the chart, marked as received under that consent, even if consent is
+  later withdrawn. No erase flow.
+- A5: billing and front desk staff may create new ABHA numbers by Aadhaar OTP as well as verify them (role rule for phase A5).
+
+Phase A1 as built: `functions/_wardsynq/abdm-hospital.js` (pure rules), stored as the `abdm` connector in
+`functions/_wardsynq/connectors.js` rather than `connect_connector_config` (see `vault/decisions/Decisions.md`, 2026-09-14 S6
+phase A1), `GET /api/queue/ward/abdm-profile`, and the ABDM card on Admin Center > Integrations (`wardsynq/site/pages/abdm.js`).
+
 - **A1** Shared StewardMD bridge with each hospital linking its own facility (recommended), or also let a hospital bring its own
   bridge credentials?
 - **A2** Hold all production ABDM traffic until the India-region hosting from the AWS move exists?
