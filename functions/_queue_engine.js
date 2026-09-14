@@ -8,7 +8,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { brandingFor } from "./_clinic_branding.js";
-import { writeOrgAudit } from "./_q_audit_chain.js";
+import { writeOrgAudit, appendOrgAudit } from "./_q_audit_chain.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
@@ -234,7 +234,8 @@ export async function recallNoShow(env, session, ticketId, opts, actor) {
   let meta, r = reason;
   do { meta = JSON.stringify({ to, reason: r, noShowAt: t.noShowAt, token: t.token || "" }); r = r.slice(0, -10); } while (meta.length > 200);
   const ev = { ts: now(), hospitalId: session.hospitalId || "", ticketId, actor: String(actor || ""), action: "recall_no_show", meta };
-  try { await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime }), wCreate(env, "q_events/" + newId(), ev)]); }
+  // G3: the recall and its hash-chained audit row in one commit; the ticket guard's refusal comes back as precondition.
+  try { await appendOrgAudit(env, ev, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime })]); }
   catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were recalling them. Reload and try again." }); throw e; }
   return recompute(env, session);
 }

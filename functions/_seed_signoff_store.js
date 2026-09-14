@@ -5,16 +5,16 @@
  * audit row (q_events, hospitalId "platform") go in ONE commit, so a sign-off without its audit row cannot
  * exist, and a second sign-off of the same content fails the create precondition.
  */
-import { fsQuery, fsCommit, wCreate } from "./_fbfirestore.js";
+import { fsQuery, wCreate } from "./_fbfirestore.js";
+import { appendOrgAudit } from "./_q_audit_chain.js";
 
 export async function listSignoffs(env) {
   return (await fsQuery(env, "q_seed_signoffs", { limit: 2000 })).map((r) => Object.assign({ id: r.id }, r.fields));
 }
 /** Throws { code: "precondition" } when this exact content is already signed. */
 export async function createSignoff(env, id, rec, actorId) {
-  await fsCommit(env, [
-    wCreate(env, "q_seed_signoffs/" + id, rec),
-    wCreate(env, "q_events/" + crypto.randomUUID().replace(/-/g, ""), { ts: Date.now(), hospitalId: "platform", ticketId: "", actor: String(actorId || ""),
-      action: "seed:signoff", meta: JSON.stringify({ list: rec.listId, item: rec.itemId, version: rec.version }).slice(0, 200) }),
-  ]);
+  // G3: the record and its hash-chained audit row in one commit; an already-signed create still refuses as precondition.
+  await appendOrgAudit(env, { ts: Date.now(), hospitalId: "platform", ticketId: "", actor: String(actorId || ""),
+    action: "seed:signoff", meta: JSON.stringify({ list: rec.listId, item: rec.itemId, version: rec.version }).slice(0, 200) },
+  [wCreate(env, "q_seed_signoffs/" + id, rec)]);
 }

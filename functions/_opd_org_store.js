@@ -9,6 +9,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
+import { appendOrgAudit } from "./_q_audit_chain.js";
 import * as M from "./_opd_org.js";
 import { genSalt, hashSecret, passwordProblem, pinProblem } from "./_opd_auth.js";
 import * as A from "./_opd_auth.js";
@@ -139,8 +140,9 @@ export async function updateOrg(env, orgId, patch, actorId, auditEvent) {
   }
   const f = M.org(merged);
   if (auditEvent) {
-    await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f), wCreate(env, "q_events/" + newId(),
-      { ts: now(), hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: auditEvent.action, meta: String(auditEvent.meta || "").slice(0, 200) })]);
+    // G3: the change and its hash-chained audit row in one commit.
+    await appendOrgAudit(env, { ts: now(), hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: auditEvent.action, meta: String(auditEvent.meta || "").slice(0, 200) },
+      [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);
     return f;
   }
   await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), f)]);

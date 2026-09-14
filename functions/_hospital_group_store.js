@@ -238,7 +238,7 @@ export async function publishSnapshot(env, orgId, counts, actorId) {
   const t = now();
   const fields = { orgId: sanitize(orgId), status: counts.status, counts: counts.counts, reasons: counts.reasons || {}, capped: !!counts.capped, why: counts.why || null, publishedBy: String(actorId || ""), publishedAt: t };
   try {
-    await fsCommit(env, [wUpdate(env, "q_group_snapshots/" + sanitize(orgId), fields), event(env, orgId, actorId, "group:snapshot_published", "status " + fields.status)]);
+    await commitAudited(env, [wUpdate(env, "q_group_snapshots/" + sanitize(orgId), fields)], event(env, orgId, actorId, "group:snapshot_published", "status " + fields.status));
   } catch (e) {
     return { ok: false, status: 502, error: "not_saved", message: "The counts were not published. The groups still see the previous snapshot, with its own time." };
   }
@@ -255,7 +255,7 @@ export async function setStaleAfter(env, g, minutes, actorId) {
   const n = Number(minutes);
   if (!Number.isInteger(n) || n < 5 || n > 10080) return { ok: false, status: 422, error: "invalid_minutes", message: "Stale after must be a whole number of minutes from 5 to 10080." };
   try {
-    await fsCommit(env, [wUpdate(env, "q_groups/" + sanitize(g.id), { staleAfterMinutes: n }, { exists: true }), event(env, "group:" + g.id, actorId, "group:stale_after", String(n))]);
+    await commitAudited(env, [wUpdate(env, "q_groups/" + sanitize(g.id), { staleAfterMinutes: n }, { exists: true })], event(env, "group:" + g.id, actorId, "group:stale_after", String(n)));
   } catch (e) {
     return { ok: false, status: 502, error: "not_saved", message: "The setting was not saved." };
   }
