@@ -1,0 +1,89 @@
+{
+  "id": "nihon-kohden-limit-vs-value-42",
+  "manufacturer": "nihon-kohden",
+  "layout": "right-column-label-left-limits-right",
+  "difficulty": [
+    "clean"
+  ],
+  "image": "nihon-kohden-limit-vs-value-42.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 90
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 94
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 90
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 14
+    },
+    "temp": {
+      "status": "visible",
+      "value": 36.8
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 108,
+        "dbp": 64,
+        "map": 79
+      }
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 108,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 64,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 79,
+      "source": "NIBP"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        150,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "06:29"
+  },
+  "notes": "alarm limits 150/50 (HR) and 100 (SpO2) are plausible-looking numbers but are LIMITS, not the current reading."
+}

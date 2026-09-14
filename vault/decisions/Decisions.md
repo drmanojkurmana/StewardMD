@@ -5554,6 +5554,115 @@ Admin Center tab "Integrations" (Webhooks card). Test: `test/wardsynq-webhooks.t
   once 200 settled ones existed. Webhook volume would hit that in a day. `latestByType(..., { newest: true })`
   now serves drain and health. Still a scan with a ceiling; a status index is the upgrade.
 
+
+## 2026-09-14 ICU monitor OCR v2: 2-D parser, colour + layout signals, strict NEEDS_REVIEW, benchmark (branch icu-ocr-bench)
+
+Builds on PR #1112 (device OCR on the original image, box-aware pairing). New module `icu-monitor-parser.js`
+(UMD: WebView `SMD_ICU_MONITOR`, Node tests, `bench/icu-monitor`). Apple Vision stays the only OCR; no
+new OCR/AI model. Gemini is a fallback offered only after a NEEDS_REVIEW, only on a tap.
+- Every field is decided from scored candidates over the observation graph (text, conf, box, height,
+  colour): spatial, size, alignment, label, layout, colour, plausibility, weighted over the signals that
+  are informative. AUTO_ACCEPTED needs confidence >= 0.80, a margin over the runner-up (0.20 when the
+  rival is the same size on the same row), and >= 2 independent signals among label / layout relation /
+  colour / label-glued value. Size alone or colour alone never selects. Otherwise NEEDS_REVIEW with the
+  suggestion and its evidence, or NOT_FOUND. Nothing is ever derived: no MAP from SBP/DBP, no Pulse from HR.
+- Colour is sampled ONCE (same JS) from the original pixels: canvas in the app, PIL dump in the bench.
+  Per box: dominant hue cluster (15° histogram peak share), white as its own class, unreliable → neutral.
+  Compared to the label colour (white label vs coloured value = neutral, not a mismatch) and to the
+  waveform band beside the value; the band nearest the numerics wins over the full band.
+- Layout is RELATIONAL (HR topmost and above the pressure, SpO2 between, RR below), not a fixed slot:
+  Dräger puts TEMP before RESP, GE NBP before ART. Profiles (Philips/GE/Dräger/Mindray/Nihon Kohden)
+  are detected from on-screen vocabulary and only shape expectations.
+- Alarm limits: hi/lo pairs in one box, stacked pairs, or small numerics on the label's row; they stay
+  in the candidate list (debug shows "120 → alarm limit") and lose on geometry, never on size alone.
+- Pressures: the tallest SSS/DD with "(MM)" as MAP; TWO different readings (ART + NIBP) or a second
+  pressure that could not be read make the primary NEEDS_REVIEW while `art`/`nibp` are reported
+  separately. OCR repairs ("T18/76", "1 08/64") only ever produce a suggestion.
+- POLICY (owner rules 16 vs 17 collide on the 2x Philips photo, where Vision dropped the SpO2 and RR
+  labels): default STRICT = an unlabeled value is NEEDS_REVIEW even when slot and colour agree
+  (suggestion shown). `unlabeledAuto` (app: localStorage smd_icu_unlabeled_auto=1; bench --policy relaxed)
+  reproduces the 6/6. Reason: a yellow EtCO2 in slot 4 on another vendor would become RR silently.
+- App: `readImageLocal` routes monitor kinds through the parser with the original pixels; only
+  AUTO_ACCEPTED numerics fill; vitals are never auto-filled from flattened text; `r.monitor` carries
+  per-field status/confidence/suggestion. `image-engine` offers AI Vision only when a core vital needs
+  review, counts local_success / local_needs_review / gemini_fallback / gemini_success / gemini_failure /
+  network_calls (`SMD_IMAGE_ENGINE.stats()`). Debug: localStorage smd_icu_ocr_debug=1 prints the evidence
+  and draws the overlay (boxes, labels, selected, rejected, limits, association lines) on the review sheet.
+- Benchmark `bench/icu-monitor/run.mjs`: 2 real (owner MP40 at 900px and 2x) + 39 synthetic screens
+  (6 layouts, clean / limit-vs-value / high-acuity / tilt+glare / low-light+blur / partial+label-obscured
+  / close-candidates; rendered with headless Chrome from bench/icu-monitor/fixtures/gen.mjs). Metrics per
+  field: exact, recall, precision, FP, needs-review, silent-guess, safe; per manufacturer and layout;
+  OCR/parse ms; network 0. Ground truth distinguishes visible / not_visible / ambiguous / not_applicable.
+  Synthetic renders stand in for real de-identified photos of GE / Dräger / Mindray / Nihon Kohden, which
+  we do not have yet; numbers on them measure layout handling, not photographic robustness.
+Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scale Vision union.
+
+
+## 2026-09-14 ICU monitor OCR v2.1: two-pass confirmation is the safety mechanism, not thresholds (branch icu-ocr-bench, PR #1115 not merged)
+
+- Two-scale Vision (full image + numeric-region crop at 2-3x) plus a third targeted read of large values
+  still unconfirmed (scaled to ~110 px numerals). With two-scale on, a NUMBER auto-fills only if both
+  reads agree (multi-digit tokens equal; glued icon digits like "2° 100" are not a disagreement, a split
+  "1 08/64" is). The third read can only confirm or conflict, never add. If the second pass cannot run,
+  nothing numeric auto-fills. Reason: a single pass read DBP 66 as 86 at confidence 1.0 on a 12°-rotated
+  photo, and no image-quality signal caught it.
+- Merge: a crop box belongs to a full reading only when inside it AND >= half its text height (limits
+  and "(MM)" inside a value's rectangle are separate objects; folding them in created false conflicts).
+- Tilt/perspective from Vision quadrilaterals is INFORMATIONAL: measured 0° at 5°, -7° at 12°, none at
+  25°, 6° "perspective" on an undistorted photo. It never decides RETAKE/DEGRADED.
+- Pressure AUTO requires an identified source (ART/NIBP label, fuzzy "ARTI" accepted, or glued in the
+  box); the same rule for the primary and the separate ART/NIBP fields. Both displayed → primary review.
+- Benchmark harness: the probe never degrades to Vision .fast (it produced "1491F6"); non-accurate runs
+  are OCR failures, not data. Groups reported separately: real (1 photo), perturbed-real (21 derived
+  from it, incl. the 2x regression fixture), synthetic (39). Sweep: 0 guesses even at conf 0.60, so
+  thresholds were NOT lowered; they only trade recall for review.
+- Environment gotcha: macOS Vision text recognition failed system-wide for ~30 min after aned restarted
+  (e5rt create_precompiled_compute_operation); recovered on its own.
+- RESOLVED by the independent digit verification gate (below). Was: one silent guess on the iPhone run (rebuilt plugin, 26 owner photos). owner-2d6f5cea RR shows 16
+  (glare haze on the "6"); full pass read "15" conf 1, crop "= 15" conf 0.5, and every letterboxed
+  re-read on the phone (scale 1.2-4, pad 1-2) also read "15". Tried and REJECTED (reverted):
+  (a) confidence-gated confirmation (agreement counts only if both reads conf >= 0.8): iOS/macOS Vision
+  conf is quantized 1 / 0.5 / 0.3 and correct reads sit at 0.3 ("° 105" on the MP40 2x, even a bare
+  "105" in the confirmation read), so it blocked 34 Mac fields and failed the Philips 2x regression;
+  (b) per-value background haze: 2d6f5cea 66-73 vs 87-97 on cc56af64 whose 7 AUTO fields are correct.
+  Neither OCR re-reads nor confidence nor that pixel signal separates this misread. Side finding: phone
+  Vision read only "RR" from a tight 251x198 crop whose "22" filled half the height, and "RR 30 22" at
+  conf 1 when letterboxed 2x on black (not adopted; only needed by (a)).
+
+## 2026-09-14 ICU monitor OCR: independent digit verification gate for RR (branch icu-ocr-bench, PR #1115 not merged)
+
+- A second Apple Vision pass is not independent verification: identical passes repeat the same misread.
+  RR AUTO now also needs `verifyDigits` (icu-monitor-parser.js) to read the same digits from the PIXELS:
+  Otsu binarisation of the value box, connected-component glyphs, Pearson correlation against 20x20
+  digit templates (16 sans-serif faces + seven-segment, `bench/icu-monitor/digit-templates.py`), hole
+  topology as a consistency penalty. Result is verified / disagree / unsure; only verified auto-fills.
+  It never proposes a value: a disagreement keeps OCR's reading as the suggestion (15 stays 15, never 16);
+  no plausibility, no history. No pixels, too small (<14 px), low contrast → unsure → NEEDS_REVIEW.
+- Default gated fields: RR (`VERIFY_FIELDS`); `opts.verifyFields` / bench `--verify` extend it. Why RR
+  only: on the benchmark the RR gate changed exactly one outcome (owner-2d6f5cea RR 15 → review, the
+  checker read "16") with no recall loss; gating HR/SpO2/RR/Pulse also stays at 0 guesses but loses
+  real HR 7/14 → 6/14 and synthetic Pulse 20/27 → 5/27 (small glued Pulse digits, 10-13 px, "unsure").
+- Measured against ground truth on 228 HR/SpO2/RR/Pulse value boxes: 0 wrong Vision reads verified.
+  The synthetic group is likely rendered in a face close to the templates; judge on real photos.
+- Bench pixel source now capped at 2400 px long edge, the same as the app's canvas (smdPixelSource).
+
+## 2026-09-15 ICU monitor OCR pass 3: label recall + pressure-source safety (branch icu-ocr-bench, PR #1115 not merged)
+
+- Baseline frozen on 268 cases (181 external, 40 human-confirmed). After: core-vital correct AUTO
+  413 -> 535 (confirmed external 47 -> 87), NEEDS_REVIEW 844 -> 720, wrong/silent 0 -> 0 in every group;
+  Philips MP40 regressions pass. Rule ablation (correct AUTO each rule adds, wrong without it always 0):
+  look-alike label text +114 (Vision reads "ABP" as Cyrillic "АВP"), PAP +78, ECG-as-HR +33, colour +44,
+  left-adjacent alarm limit (RR) +15, vocabulary (etCO2, Puise, 8p02) +8, one-label-per-reading -5
+  (kept: refuses to let an unlabelled PAP inherit "ABP"), MAP consistency 0 (no displayed MAP in the
+  benchmark is >25 mmHg off (SBP+2DBP)/3; displayed-vs-formula spread median 3, max 15.3).
+- REVERTED (silent source error): mapping Cyrillic "І" to I turned a crop re-read "ПІВP" of an NIBP label
+  into "IBP" = ART (ext-mocr-032 auto-filled NIBP as ART). Also found PRE-EXISTING: a clipped "NIBP" read as
+  "IBP" at the photo edge auto-filled as ART (ext-mocr-036). Fix: plain "IBP" is not an arterial source
+  (numbered "IBP1" is); an edge-touching source label is weak evidence. The scorer did not check sources:
+  it now counts a wrong ART/NIBP source as a wrong value.
+- Dropped as unused (0 effect): "rpm" unit as RR label; merge keeping a full-image label over a garbled crop.
+- Bench: pixels retained only for regression cases (all-case retention exhausted memory).
+
 ## 2026-09-14 Ward keyboard layer and tablet round (P2.16): shortcuts navigate, they never write
 
 - ONE DECLARATIVE MAP (`SHORTCUTS` in ward.js). Each entry focuses a field, shows the sheet, or sends an

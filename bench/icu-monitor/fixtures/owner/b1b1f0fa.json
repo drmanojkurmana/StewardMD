@@ -1,0 +1,82 @@
+{
+  "id": "owner-b1b1f0fa",
+  "manufacturer": "ventilator-other",
+  "layout": "niv-vent-right-column",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured",
+    "glass-smudge"
+  ],
+  "image": "b1b1f0fa.jpg",
+  "imageSize": {
+    "w": 1280,
+    "h": 960
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 12
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "backupRR": 15,
+    "rrLimits": [
+      30,
+      5
+    ],
+    "ppeak": 14,
+    "mve": 1.3,
+    "o2conc": 36,
+    "leakage": 99,
+    "settings": {
+      "o2": 100,
+      "peep": 5.0,
+      "psAbovePeep": 10,
+      "backupPcAbovePeep": 5,
+      "apnea": 20,
+      "endInsp": 30,
+      "backupIE": "1:4",
+      "timeRise": 0.4
+    },
+    "clock": "18:15",
+    "banner": "Expiratory minute volume low",
+    "bedLabel": "MICU41"
+  },
+  "notes": "Same NIV ventilator as 49cd8f46. Measured RR 12 b/min; Backup RR 15 is a setting."
+}

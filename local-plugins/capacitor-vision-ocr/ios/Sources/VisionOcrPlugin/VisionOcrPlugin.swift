@@ -123,13 +123,19 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
                     if let top = observation.topCandidates(1).first {
                         lines.append(top.string)
                         let bb = observation.boundingBox
+                        // q: the recognizer's quadrilateral (tl, tr, br, bl), top-left origin. The axis-aligned box
+                        // hides rotation; the ICU monitor parser's image-quality gate reads tilt and perspective from it.
                         boxes.append([
                             "text": top.string,
                             "conf": Double(top.confidence),
                             "x": Double(bb.origin.x),
                             "y": Double(1.0 - (bb.origin.y + bb.size.height)),
                             "w": Double(bb.size.width),
-                            "h": Double(bb.size.height)
+                            "h": Double(bb.size.height),
+                            "q": [Double(observation.topLeft.x), Double(1.0 - observation.topLeft.y),
+                                  Double(observation.topRight.x), Double(1.0 - observation.topRight.y),
+                                  Double(observation.bottomRight.x), Double(1.0 - observation.bottomRight.y),
+                                  Double(observation.bottomLeft.x), Double(1.0 - observation.bottomLeft.y)]
                         ])
                     }
                 }

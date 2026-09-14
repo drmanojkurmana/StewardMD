@@ -1,0 +1,91 @@
+{
+  "id": "owner-6d18c24a",
+  "manufacturer": "oricare-ventilator",
+  "layout": "oricare-v8800",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured"
+  ],
+  "image": "6d18c24a.jpg",
+  "imageSize": {
+    "w": 1280,
+    "h": 576
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "ambiguous",
+      "why": "labelled ftotal, not RR",
+      "value": 29
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "setF": 20,
+    "ppeak": 22,
+    "pplat": 21,
+    "peep": 5,
+    "o2": 41,
+    "mve": 6.3,
+    "vti": 319,
+    "vte": 255,
+    "leak": 0.0,
+    "limits": {
+      "ppeak": [
+        40,
+        5
+      ],
+      "peep": [
+        10,
+        "OFF"
+      ],
+      "mve": [
+        30.0,
+        1.0
+      ],
+      "vti": 700
+    },
+    "settings": {
+      "o2": 40,
+      "peep": 5,
+      "pinsp": 16
+    },
+    "clock": "3:00",
+    "banner": "High Inspiratory Tidal Volume !!!"
+  },
+  "notes": "Oricare V8800 NIV/PCV."
+}

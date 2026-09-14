@@ -1,0 +1,78 @@
+{
+  "id": "owner-b9278080",
+  "manufacturer": "philips-intellivue",
+  "layout": "intellivue-mx450",
+  "difficulty": [
+    "real-photo",
+    "distance",
+    "tiny-labels",
+    "big-clock",
+    "trend-table"
+  ],
+  "image": "b9278080.jpg",
+  "imageSize": {
+    "w": 900,
+    "h": 1600
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 103
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 99
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 169,
+      "source": "NBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 98,
+      "source": "NBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 114,
+      "source": "NBP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 17
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 103
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 169,
+        "dbp": 98,
+        "map": 114
+      }
+    }
+  },
+  "distractors": {
+    "bigClock": "20:38",
+    "nbpTrendList": "5 small red rows right of the current NBP",
+    "asset": "MHB 08003039"
+  },
+  "notes": "IntelliVue MX450 at distance; labels illegible but values clear. NBP trend list is a distractor."
+}

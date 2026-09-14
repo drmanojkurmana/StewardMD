@@ -1,0 +1,94 @@
+{
+  "id": "ge-carescape-close-03",
+  "manufacturer": "ge-carescape",
+  "layout": "right-column-label-above",
+  "difficulty": [
+    "close-candidates"
+  ],
+  "image": "ge-carescape-close-03.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 106
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 98
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 105
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "rr": {
+      "status": "visible",
+      "value": 16
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 121,
+        "dbp": 79,
+        "map": 93
+      }
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 119,
+        "dbp": 66,
+        "map": 84
+      }
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 119,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 66,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 84,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "20:38"
+  },
+  "notes": "Combined close-candidate case: HR/Pulse (106/105) and NIBP/ART (121/79(93) vs 119/66(84)) both close."
+}
