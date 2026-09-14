@@ -203,8 +203,9 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
    * the two identity types are read-only and say outright that this server is not a directory. */
   /* P2.5 added three more that are not stored canonical types and are read-only: CodeSystem and
    * ValueSet (terminology) and AuditEvent (the audit trail). Their own tests pin what they declare. */
-  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 7, "it advertises exactly what it maps, plus the derived and terminology types");
-  for (const r of c.rest[0].resource.filter((x) => ["CodeSystem", "ValueSet", "AuditEvent", "Subscription"].includes(x.type))) assert.deepEqual(r.interaction.map((i) => i.code), ["read", "search-type"], r.type + " is read-only");
+  // G9 added Group: derived (the ward census), read and search only.
+  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 8, "it advertises exactly what it maps, plus the derived and terminology types");
+  for (const r of c.rest[0].resource.filter((x) => ["CodeSystem", "ValueSet", "AuditEvent", "Subscription", "Group"].includes(x.type))) assert.deepEqual(r.interaction.map((i) => i.code), ["read", "search-type"], r.type + " is read-only");
   const derived = c.rest[0].resource.filter((r) => ["Provenance", "Practitioner", "Organization"].includes(r.type));
   assert.equal(derived.length, 3);
   for (const r of derived.filter((x) => x.type !== "Provenance")) {

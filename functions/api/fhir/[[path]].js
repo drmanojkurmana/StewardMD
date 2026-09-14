@@ -96,7 +96,9 @@ export async function onRequest(context) {
   }
 
   /* DELETE exists for one path only: cancelling a bulk export this bearer started. It removes files, never a record. */
-  if (request.method !== "GET" && !(request.method === "DELETE" && sub === "$export-status")) return fhirResponse(operationOutcome("error", "not-supported", "this door is read-only"), 405, { Allow: "GET" }, cors(request));
+  /* POST exists for the bulk kick-off only (G9, Bulk Data IG v2): it starts a job, it writes no clinical record. */
+  const postKickoff = request.method === "POST" && (sub === "$export" && !sub2 || (sub === "Patient" && sub2 === "$export" && !parts[3]) || (sub === "Group" && sub2 && parts[3] === "$export" && !parts[4]));
+  if (request.method !== "GET" && !(request.method === "DELETE" && sub === "$export-status") && !postKickoff) return fhirResponse(operationOutcome("error", "not-supported", "this door is read-only"), 405, { Allow: "GET" }, cors(request));
   /* The CapabilityStatement is PUBLIC. It is how a client discovers the endpoints before it holds
    * any token, it names no patient, and hiding it would only hide the door - not lock it. */
   if (sub === "metadata") {
@@ -127,7 +129,13 @@ export async function onRequest(context) {
   /* BULK DATA ($export). Backend-services tokens only (fhir-bulk.js checks the system/ scopes). A
    * status poll also runs this hospital's background tick, gated to once per two minutes, because
    * a bulk client polling is exactly the traffic that should move its export along. */
-  const bulk = await dispatchBulk(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer, store: documentStoreFromEnv(env) }, { cors: cors(request) });
+  let kickoffBody;
+  if (postKickoff) {
+    const text = await request.text().catch(() => "");
+    try { kickoffBody = text.trim() ? JSON.parse(text) : {}; }
+    catch { return fhirResponse(operationOutcome("error", "invalid", "the body is not JSON"), 400, null, cors(request)); }
+  }
+  const bulk = await dispatchBulk(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer, store: documentStoreFromEnv(env) }, { cors: cors(request), body: kickoffBody });
   if (bulk) {
     if (sub === "$export-status" && context.waitUntil && env.WSQ_TICK_OFF !== "1") {
       context.waitUntil((async () => {

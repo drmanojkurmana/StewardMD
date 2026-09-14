@@ -1357,7 +1357,7 @@ export async function onRequest(context) {
        * open the summary and see what is still outstanding without being able to write it. */
       /* A bulk export under /ward/fhir is not a chart read: it is the whole hospital, so it takes the
        * fhir-export gate rather than the fhir sub's emr.view. */
-      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export"));
+      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export") || (parts[2] === "Group" && parts[4] === "$export"));
       const need = sub === "mar" ? CAPS.MED_ADMINISTER
         : bulkFhirPath ? capFor["fhir-export"]
         /* The audit trail as FHIR AuditEvent is not a chart read either: the security review's own gate. */
@@ -2085,8 +2085,9 @@ export async function onRequest(context) {
        * the FHIR door serves as $export, in the JSON the admin screen reads. staff.admin at the route
        * AND a clinical actor that may read each type, inside the handler. */
       if (sub === "fhir-export" && method === "POST") {
-        const level = body.level === "patient" ? "patient" : "system";
-        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : ""}$export` });
+        const groupId = String(body.groupId || "");
+        const level = body.level === "patient" ? "patient" : groupId ? "group" : "system";
+        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, groupId, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : level === "group" ? `Group/${encodeURIComponent(groupId)}/` : ""}$export` });
         if (!r.ok) return json({ ok: false, error: r.status === 429 ? "export_running" : r.status === 401 ? "auth" : r.status === 403 ? "permission" : "export_refused", message: r.outcome.issue.map((i) => i.diagnostics).join("; ") }, r.status, request);
         return json({ ok: true, jobId: r.jobId, status: "in-progress" }, 202, request);
       }
@@ -2227,7 +2228,7 @@ export async function onRequest(context) {
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "", wardsynq: wsqCfg || null, org: wOrg || null, hospitalName: (wOrg && wOrg.name) || "" };
         /* $export, $export-status, $export-file: gated staff.admin above (bulkFhirPath), before any read grammar. */
-        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}` });
+        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}`, body });
         if (bulk) return bulk;
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */

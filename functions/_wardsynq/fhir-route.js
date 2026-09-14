@@ -8,7 +8,8 @@
 
 import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation } from "./fhir.js";
 import { practitionerRead, organizationRead } from "./fhir-identity.js";
-import { kickoffExport, exportStatus, cancelExport, exportFile, NDJSON } from "./fhir-bulk.js";
+import { kickoffExport, exportStatus, cancelExport, exportFile, parametersToExportParams, NDJSON } from "./fhir-bulk.js";
+import { groups } from "./fhir-group.js";
 import { dispatchTerminology } from "./fhir-terminology.js";
 import { patientSummary } from "./fhir-ips.js";
 import { auditEvents } from "./fhir-audit.js";
@@ -61,6 +62,11 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
     if (fOp) return { obj: operationOutcome("error", "not-supported", "Subscription is read and searched only; $status is not offered"), status: 404 };
     return subscriptions(request, env, { ...fctx, id: fId }, url);
   }
+  /* G9. Group: the ward census, derived (fhir-group.js). Read and search only; $export is dispatchBulk's. */
+  if (fType === "Group") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "Group is read and searched; Group/{id}/$export starts a bulk export"), status: 404 };
+    return groups(request, env, { ...fctx, id: fId }, url);
+  }
   if (fType === "Patient" && fId && fOp === "$summary") {
     const r = await patientSummary(request, env, { ...fctx, patientId: fId });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
@@ -112,19 +118,29 @@ async function dispatchOperation(request, env, parts, body, fctx) {
  * The Bulk Data paths ($export, Patient/$export, $export-status/{id}, $export-file/{id}/{name}), for
  * both doors. Returns a Response, or null when the path is not one of them. The caller has already
  * decided the door's own gate (a staff.admin session, or a resolved bearer in fctx.actorOverride).
- * fctx: { migration, recordDeps, actorDeps, actorOverride?, store, base }  opts: { cors, suffix }
+ * fctx: { migration, recordDeps, actorDeps, actorOverride?, store, base }  opts: { cors, suffix, body (a POST kick-off) }
  */
 async function dispatchBulk(request, env, parts, url, fctx, opts) {
   const o = opts || {}, cors = o.cors || {}, suffix = o.suffix || "";
   const p0 = parts[0] || "", p1 = parts[1] || "", p2 = parts[2] || "";
   const method = request.method;
   const out = (r) => fhirResponse(r.outcome, r.status, r.retryAfter ? { "Retry-After": String(r.retryAfter) } : null, cors);
-  const level = p0 === "$export" && !p1 ? "system" : (p0 === "Patient" && p1 === "$export" && !p2) ? "patient" : null;
+  const level = p0 === "$export" && !p1 ? "system" : (p0 === "Patient" && p1 === "$export" && !p2) ? "patient"
+    : (p0 === "Group" && p1 && p2 === "$export" && !parts[3]) ? "group" : null;
   if (level) {
-    if (method !== "GET") return fhirResponse(operationOutcome("error", "not-supported", "$export is GET"), 405, { Allow: "GET" }, cors);
+    if (method !== "GET" && method !== "POST") return fhirResponse(operationOutcome("error", "not-supported", "$export is GET or POST"), 405, { Allow: "GET, POST" }, cors);
     /* The IG makes the async pattern mandatory; a client that does not ask for it is not a bulk client. */
     if (!/respond-async/i.test(str(request.headers.get("Prefer")))) return fhirResponse(operationOutcome("error", "invalid", "Prefer: respond-async is required for $export"), 400, null, cors);
-    const r = await kickoffExport(request, env, { ...fctx, level, params: url.searchParams, requestUrl: url.href });
+    /* G9. POST kick-off: the parameters travel in a Parameters body. Both at once is refused, because a
+     * client that put _type in the URL and _since in the body would not get the export it believes. */
+    let params = url.searchParams;
+    if (method === "POST") {
+      if ([...url.searchParams.keys()].some((k) => k !== "orgId")) return fhirResponse(operationOutcome("error", "invalid", "a POST $export takes its parameters in the Parameters body, not the URL"), 400, null, cors);
+      const pb = parametersToExportParams(o.body);
+      if (pb.error) return fhirResponse(operationOutcome("error", "invalid", pb.error), 400, null, cors);
+      params = pb.params;
+    }
+    const r = await kickoffExport(request, env, { ...fctx, level, groupId: level === "group" ? decodeURIComponent(p1) : undefined, params, requestUrl: url.href });
     if (!r.ok) return out(r);
     return fhirResponse(operationOutcome("information", "informational", "export accepted"), 202, { "Content-Location": `${fctx.base}/$export-status/${encodeURIComponent(r.jobId)}${suffix}` }, cors);
   }

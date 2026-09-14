@@ -931,6 +931,13 @@ function capabilityStatement(opts) {
           documentation: "One value set per code system of the hospital's own, loinc-carried, and the hospital's own definitions (wardsynq.terminology.valueSets). $expand takes filter (a case-insensitive substring of code or display), count and offset; a code the hospital names that this server does not hold is left out and named in a warning parameter.",
         },
         {
+          type: "Group",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "name", type: "string" }],
+          operation: [{ name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/group-export" }],
+          documentation: "Derived, never stored: one Group per ward with at least one open (in-progress) encounter, whose members are those patients now (actual). Id ward-<hash of the ward name>. Read and searched as the requester, who needs Encounter read. When the census reaches the search pool cap the read is refused and the search says membership may be incomplete.",
+        },
+        {
           type: "AuditEvent",
           interaction: [{ code: "read" }, { code: "search-type" }],
           searchParam: [{ name: "date", type: "date" }, { name: "agent", type: "token" }, { name: "type", type: "token" }, { name: "entity-type", type: "token" }, { name: "outcome", type: "token" }, { name: "_count", type: "number" }],
@@ -944,7 +951,7 @@ function capabilityStatement(opts) {
         },
       ],
       operation: [
-        { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export and Patient/$export: Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; files need the same authorization and expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
+        { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export, Patient/$export and Group/{id}/$export, GET or POST (a POST takes a Parameters body and no URL parameters): Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; a Group export is the ward's census frozen at kick-off; files need the same authorization, every download is audited, and they expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
         { name: "summary", definition: "http://hl7.org/fhir/uv/ips/OperationDefinition/summary", documentation: "Patient/{id}/$summary: a document Bundle with a Composition whose sections are problems, allergies, medications and immunizations (always present) and results (when there are any). An empty section carries emptyReason text 'none recorded'; a section whose source could not be read carries emptyReason unavailable or withheld and no entries. Authorised like a compartment read. Not validated against the IPS guide's profiles, so none is claimed." },
         { name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything", documentation: "Patient/{id}/$everything: _since, _type, _count, _page, _summary, _elements, _total" },
         { name: "validate", definition: "http://hl7.org/fhir/OperationDefinition/Resource-validate", documentation: `POST {Type}/$validate or $validate (a Bundle validates every entry) with the resource as the body, or GET {Type}/{id}/$validate for a stored resource. R4 base structure, cardinality, primitives, choice types, required bindings and invariants for ${VALIDATED_TYPES.join(", ")}; codings are checked with the terminology service; profiles named in meta.profile are evaluated only when the hospital has loaded them (wardsynq.fhir.profiles), and said so otherwise.` },
