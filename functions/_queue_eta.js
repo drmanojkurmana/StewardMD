@@ -49,6 +49,10 @@ export function orderRoomView(tickets) {
 // the hall calls out, so a patient recognises their turn without anyone else learning who they are. A
 // ticket registered before tokens existed has none and is shown as "" (the screen draws a blank, not a name).
 const wallToken = (t) => String((t && t.token) || "");
+// D7: the department each token was issued in, aligned with the token arrays. A department name names no
+// patient. Shown beside a token when it differs from the room's own (a patient moved between departments
+// keeps the number they already heard).
+const wallDept = (t) => String((t && t.department) || "");
 // Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-free.
 // Tickets are already priority/seq-ordered by boardForOrg (orderRoomView), so `calling`/`upcoming`
 // reflect true order. `calling` = summoned-not-yet-entered (the attention state); `serving` = in room.
@@ -56,15 +60,17 @@ export function displayBoard(org, board) {
   const rooms = (board.rooms || []).filter((rm) => rm.doctorUid).map((rm) => {
     const ts = rm.tickets || [];
     const waiting = ts.filter((t) => t.status === "registered" || t.status === "waiting");
+    const calling = ts.filter((t) => t.status === "called"), serving = ts.filter((t) => t.status === "in_consultation")[0];
     return {
       name: (rm.room && rm.room.name) || "Room", number: (rm.room && rm.room.number) || "",
       department: (rm.room && rm.room.department) || "", status: rm.status,
-      calling: ts.filter((t) => t.status === "called").map(wallToken),
-      serving: ts.filter((t) => t.status === "in_consultation").map(wallToken)[0] || "",
-      waiting: waiting.length, upcoming: waiting.slice(0, 3).map(wallToken),
+      calling: calling.map(wallToken), callingDepartments: calling.map(wallDept),
+      serving: serving ? wallToken(serving) : "", servingDepartment: serving ? wallDept(serving) : "",
+      waiting: waiting.length, upcoming: waiting.slice(0, 3).map(wallToken), upcomingDepartments: waiting.slice(0, 3).map(wallDept),
     };
   });
-  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, rooms: rooms };
+  const scope = org && org.tokens && org.tokens.scope === "department" ? "department" : "hospital";
+  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, tokenScope: scope, rooms: rooms };
 }
 
 // PURE: the new `seq` to give `moveId` so it lands at visible index `toIndex` in the CURRENT ordered

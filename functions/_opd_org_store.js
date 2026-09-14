@@ -153,23 +153,44 @@ export async function createOpd(env, orgId, body, actorId) {
 }
 
 // ---- rooms (room != doctor: configurable assignment) -------------------------------------------
+export async function getDepartment(env, deptId) {
+  const id = sanitize(deptId); if (!id) return null;
+  const d = await fsGet(env, "q_departments/" + id);
+  return d ? M.department(withId(id, d.fields)) : null;
+}
+/* A room's department NAME is read from q_departments by the room's departmentId on every read and never
+ * stored on the room, so a renamed department shows its new name everywhere at once. */
+const roomOut = (fields, id, depts) => {
+  const rm = M.room(withId(id, fields));
+  const d = rm.departmentId ? (depts || []).find((x) => x.id === rm.departmentId) : null;
+  rm.department = d ? d.name : "";
+  return rm;
+};
+const roomStored = (rm) => { const f = Object.assign({}, rm); delete f.department; return f; };
 export async function createRoom(env, orgId, body, actorId) {
   const b = body || {};
   const id = newId();
-  const f = M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active });
+  const f = roomStored(M.room({ id, orgId, departmentId: b.departmentId, opdId: b.opdId, name: b.name, number: b.number, assignment: b.assignment, active: b.active }));
   await fsCommit(env, [wCreate(env, "q_rooms/" + id, f)]);
-  await audit(env, orgId, actorId, "room:create", f.name); return f;
+  await audit(env, orgId, actorId, "room:create", f.name);
+  return roomOut(f, id, f.departmentId ? [await getDepartment(env, f.departmentId)].filter((x) => x && x.orgId === f.orgId) : []);
 }
-export async function getRoom(env, roomId) { const d = await fsGet(env, "q_rooms/" + sanitize(roomId)); return d ? M.room(withId(sanitize(roomId), d.fields)) : null; }
+export async function getRoom(env, roomId) {
+  const d = await fsGet(env, "q_rooms/" + sanitize(roomId)); if (!d) return null;
+  const dep = d.fields && d.fields.departmentId ? await getDepartment(env, d.fields.departmentId) : null;
+  return roomOut(d.fields, sanitize(roomId), dep && dep.orgId === String(d.fields.orgId || "") ? [dep] : []);
+}
 export async function listRooms(env, orgId) {
   const r = await fsQuery(env, "q_rooms", { where: { field: "orgId", value: sanitize(orgId) }, limit: 200 });
-  return r.map((x) => M.room(withId(x.id, x.fields)));
+  const depts = r.some((x) => x.fields && x.fields.departmentId) ? await listDepartments(env, orgId) : [];
+  return r.map((x) => roomOut(x.fields, x.id, depts));
 }
 export async function updateRoom(env, roomId, patch, actorId) {
   const cur = await getRoom(env, roomId); if (!cur) return null;
-  const f = M.room(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId }));   // orgId immutable
+  const f = roomStored(M.room(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId })));   // orgId immutable
   await fsCommit(env, [wUpdate(env, "q_rooms/" + sanitize(roomId), f)]);
-  await audit(env, cur.orgId, actorId, "room:update", (patch && patch.assignment) ? "assignment" : ""); return f;
+  await audit(env, cur.orgId, actorId, "room:update", (patch && patch.assignment) ? "assignment" : (patch && patch.departmentId !== undefined) ? "department" : "");
+  return roomOut(f, cur.id, f.departmentId ? [await getDepartment(env, f.departmentId)].filter((x) => x && x.orgId === f.orgId) : []);
 }
 
 // ---- wards / beds (TASK 4.1: Enterprise -> ... -> Ward -> Bed) ----------------------------------

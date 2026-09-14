@@ -28,3 +28,11 @@ test("registered and next messages lead with the token; other tiers and old tick
   assert.match(sent[4], /^आपका टोकन: 7।/);
   for (const b of sent) assert.doesNotMatch(b, /Asha|Kumar|4821|9876543210/, "no PHI in a message body");
 });
+
+test("D7: the message names the department the ticket was registered in, not the session's (a pool session has none)", async () => {
+  sent.length = 0;
+  await notifyTicket({}, { hospitalId: "h", department: "", doctorName: "" }, T({ token: "O-004", department: "Orthopaedics" }), "registered", {});
+  await notifyTicket({}, { hospitalId: "h", department: "", doctorName: "" }, T({ token: "5" }), "registered", {});
+  assert.match(sent[0], /^Your token: O-004\. You're in the queue at Orthopaedics/);
+  assert.match(sent[1], /the clinic/, "no department anywhere: the existing wording");
+});

@@ -391,6 +391,19 @@ function azRefusal(az) {
   }
   return out;
 }
+/* A registration the token rules refused (D7/D14): a department that is not this hospital's, no department
+ * where each department numbers separately, a department with no prefix, or contention. The desk gets the
+ * engine's own sentence, because each has a different fix, and no ticket and no number exist. `request` is
+ * bound where it is used. */
+const TOKEN_SAY = {
+  department_not_found: "That department is not an active department of this hospital.",
+  token_department_required: "Choose a department to give a token. Each department in this hospital numbers its own tokens.",
+  token_prefix_missing: "This department has no token prefix, so its numbers would collide with another department's. An administrator sets one under Admin Center, Hospital, OPD token numbers.",
+  token_contention: "Another desk registered at the same moment. Try again.",
+};
+function tokenRefusalFor(request) {
+  return (e) => json({ ok: false, error: e.message, message: TOKEN_SAY[e.message] || e.detail || "The patient could not be added to the queue.", ...(e.departmentName ? { department: e.departmentName } : {}) }, e.status, request);
+}
 function today() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return ""; } }
 
 const staffEnabled = (env) => env && env.QUEUE_STAFF_ENABLED === "1";
@@ -4011,6 +4024,7 @@ export async function onRequest(context) {
       // ---- org / rooms / members config + onboarding (Phase 3, isolation-gated) ----
       const azOrg = async (cap, target) => ORG.authorizeOrg(env, actor, body.orgId, cap, target);
       const deny = (az) => json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const tokenRefusal = tokenRefusalFor(request);
       const needAccount = () => actor.kind !== "firebase";   // creating an org needs a StewardMD account (= the owner)
       if (seg === "org" && !sub) {
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
@@ -4049,12 +4063,24 @@ export async function onRequest(context) {
       }
       if (seg === "dept") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, department: await ORG.createDepartment(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "opd") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, opd: await ORG.createOpd(env, body.orgId, body, actor.id) }, 200, request); }
-      if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
+      /* D7: a room's department is the id of one of THIS hospital's departments, or none. A department id
+       * from another hospital would put this room's tokens on that hospital's counter name. */
+      const roomDeptRefusal = async () => {
+        if (!body.departmentId) return null;
+        const d = await ORG.getDepartment(env, body.departmentId);
+        return d && d.orgId === String(body.orgId) ? null : json({ ok: false, error: "department_not_found", message: "That department is not one of this hospital's departments." }, 422, request);
+      };
+      if (seg === "room" && !sub) {
+        const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        const bad = await roomDeptRefusal(); if (bad) return bad;
+        return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request);
+      }
       if (seg === "room" && sub === "update") {
         const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az);
         // The room must be this hospital's: an admin elsewhere could otherwise rename or retire it by id.
         const roomNow = await ORG.getRoom(env, body.roomId || "");
         if (!roomNow || roomNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        const bad = await roomDeptRefusal(); if (bad) return bad;
         return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request);
       }
       if (seg === "ward" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, ward: await ORG.createWard(env, body.orgId, body, actor.id) }, 200, request); }
@@ -4142,7 +4168,9 @@ export async function onRequest(context) {
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
         const org = await ORG.getOrg(env, body.orgId);
-        let t = await Q.addToPool(env, org, body, actor.id);
+        let t;
+        try { t = await Q.addToPool(env, org, body, actor.id); }
+        catch (e) { if (e && e.status >= 400 && e.status < 500) return tokenRefusal(e); throw e; }
         // AUTO-ROUTE (2026-08-24): the pool exists so a big hospital's reception can triage into many
         // rooms. A clinic with exactly ONE staffed room has nothing to triage - but the ticket still sat
         // in the pool until someone tapped "Route to a room", and the doctor's app (which polls only its
@@ -4269,7 +4297,9 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, body.sessionId, actor, request); if (err) return err;
       if (seg === "ticket") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
-        const t = await Q.addTicket(env, s, body, actor.id);
+        let t;
+        try { t = await Q.addTicket(env, s, body, actor.id); }
+        catch (e) { if (e && e.status >= 400 && e.status < 500) return tokenRefusal(e); throw e; }
         await syncEncounter(request, env, s, t);   // open: today's visit begins at check-in
         return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request);
       }

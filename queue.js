@@ -657,21 +657,40 @@
   }
   // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab).
   function openAssessment(ticketId) { openTicketEmr(ticketId, "assess"); }
+  /* D7: the hospital's departments and token numbering, for the check-in sheet's department picker.
+   * cb({departments, required}): departments undefined = no hospital to ask (no picker), null = the list
+   * could not be loaded (the sheet says so, never "no departments"). */
+  function withDepartments(orgId, cb) {
+    if (!orgId) { cb({ departments: undefined, required: false }); return; }
+    apiGet("/org?orgId=" + encodeURIComponent(orgId)).then(function (o) {
+      if (!o || !o.ok) { cb({ departments: null, required: false }); return; }
+      cb({ departments: o.departments || [], required: !!(o.org && o.org.tokens && o.org.tokens.scope === "department") });
+    }, function () { cb({ departments: null, required: false }); });
+  }
+  // After registration, the queue add's own answer: a refused add is never reported as queued.
+  function queuedSay(r, q) {
+    var m = (q && q.ok) ? ("Added - " + r.mrn + (q.ticket && q.ticket.token ? " - token " + q.ticket.token : ""))
+      : ("Registered " + r.mrn + " but NOT queued: " + ((q && (q.message || q.error)) || "the server could not be reached."));
+    try { G.toast && G.toast(m); } catch (e) {}
+  }
   function openAdd() {
     // The check-in sheet (patient-register.js) is shared with the staff web console, so the two can
     // never drift apart again. It replaced four sequential prompt() boxes. The SERVER validates and
     // issues the MR number - this only carries the answers and renders the field errors it returns.
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
     var mode = inClinicWorkplace() ? "native" : (st.ghisToken ? "ghis" : ((st.openOpts && st.openOpts.source === "connect") ? "connect" : ((st.openOpts && st.openOpts.source === "wardsynq") ? "wardsynq" : "native")));
+    withDepartments(st.orgId || (st.openOpts && st.openOpts.hospitalId) || "", function (dp) {
     G.SMD_PATIENTREG.open({
       mode: mode,
       clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
+      departments: dp.departments, departmentRequired: dp.required,
       submit: function (body) {
         body.orgId = st.orgId || st.hospital || "";
         body.workplaceMode = mode;
+        body.forQueue = true;
         return apiPost("/patient/register", body);
       },
-      onAdded: function (r) {
+      onAdded: function (r, sent) {
         // Registered -> put them in THIS doctor's queue with the identity we just created.
         // The session is re-read HERE, not captured above: the sheet can be open for a while, and
         // reaching straight into st.session.id threw when there was no session, losing a patient who
@@ -683,9 +702,11 @@
         }
         act(sid2, "/ticket", {
           name: r.patient && r.patient.name, mrn: r.mrn, mobile: r.patient && r.patient.mobile,
-          visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0
-        });
+          visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0,
+          departmentId: (sent && sent.departmentId) || ""
+        }).then(function (q) { queuedSay(r, q); }, function () { queuedSay(r, null); });
       }
+    });
     });
   }
 
@@ -843,7 +864,7 @@
 
     var poolRows = pool.length ? pool.map(function (t) {
       return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + esc(t.name || "Patient") + "</b>" +
-        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + "</div></div>" +
+        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + (t.department ? " &middot; " + esc(t.department) : "") + "</div></div>" +
         (canAssign ? '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="fdroute:' + esc(t.id) + '">Route</button>' : "") +
         "</div>";
     }).join("") : '<div class="q-empty" style="padding:22px">Nobody waiting to be routed.</div>';
@@ -859,15 +880,18 @@
   // the central pool (a one-room clinic auto-routes server-side).
   function frontDeskAdd() {
     if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
-    G.SMD_PATIENTREG.open({
-      mode: "native",
-      clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
-      submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; return apiPost("/patient/register", body); },
-      onAdded: function (r) {
-        apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
-          mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new" })
-          .then(function () { toast("Added - " + r.mrn); loadFrontDesk(); });
-      }
+    withDepartments(st.orgId, function (dp) {
+      G.SMD_PATIENTREG.open({
+        mode: "native",
+        clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
+        departments: dp.departments, departmentRequired: dp.required,
+        submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = true; return apiPost("/patient/register", body); },
+        onAdded: function (r, sent) {
+          apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
+            mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", departmentId: (sent && sent.departmentId) || "" })
+            .then(function (q) { queuedSay(r, q); loadFrontDesk(); }, function () { queuedSay(r, null); });
+        }
+      });
     });
   }
 

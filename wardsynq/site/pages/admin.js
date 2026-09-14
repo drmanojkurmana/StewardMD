@@ -205,44 +205,80 @@
    * default; per department when chosen, each department with an optional letter prefix ("A-012") so
    * two departments' number 12 are told apart. Applies to tickets registered after saving; a token
    * already given is never changed. */
-  function tokenCardHtml(esc, tokens) {
-    var t = tokens || {}, dept = t.scope === "department", pre = t.prefixes || {};
-    var lines = Object.keys(pre).map(function (k) { return k + " = " + pre[k]; }).join("\n");
-    return '<div class="card"><h2>OPD token numbers</h2>' +
+  /* D7: one row per ACTIVE department, keyed by its id, so renaming a department keeps its prefix and its
+   * running sequence. A prefix saved before this was keyed by the department's name: it is shown in the
+   * row whose name matches, and a saved name that matches no department is listed so it is not silently
+   * lost on the next save. "Also known as" maps the names the EMR or a doctor's session use for this
+   * department ("Gen Med", "General Medicine OPD") to it; each is used to number imported patients.
+   * departments: undefined = loading, null = could not be loaded, [] = none set up. */
+  function lc(x) { return String(x == null ? "" : x).trim().toLowerCase(); }
+  function tokenCardHtml(esc, tokens, departments) {
+    var t = tokens || {}, dept = t.scope === "department", pre = t.prefixes || {}, al = t.deptAliases || {};
+    var h = '<div class="card"><h2>OPD token numbers</h2>' +
       '<label class="f"><span>Numbering</span><select id="tokScope">' +
         '<option value="hospital"' + (dept ? "" : " selected") + ">One sequence for the whole hospital</option>" +
-        '<option value="department"' + (dept ? " selected" : "") + ">Each department numbers separately</option></select></label>" +
-      '<label class="f"><span>Department prefixes, one per line (Department name = letters)</span><textarea id="tokPrefixes" rows="4" placeholder="General Medicine = A">' + esc(lines) + "</textarea></label>" +
-      '<p class="quiet">Prefixes are used only when each department numbers separately. Without a prefix two departments can both call number 12. Numbers start again at 1 each day, and a token already given never changes.</p>' +
+        '<option value="department"' + (dept ? " selected" : "") + ">Each department numbers separately</option></select></label>";
+    if (departments === undefined) return h + '<p><span class="spin"></span> Loading departments...</p></div>';
+    if (departments === null) return h + '<div class="msg err">The departments could not be loaded, so prefixes cannot be shown or saved. Do not read this as no departments.</div></div>';
+    var act = departments.filter(function (d) { return d && d.id && d.active !== false; });
+    var used = {};
+    var rows = act.map(function (d) {
+      var p = pre[lc(d.id)] || pre[lc(d.name)] || "";
+      if (pre[lc(d.id)]) used[lc(d.id)] = 1; else if (pre[lc(d.name)]) used[lc(d.name)] = 1;
+      var aka = Object.keys(al).filter(function (k) { return al[k] === d.id; });
+      return '<tr data-tok-dept="' + esc(d.id) + '"><td>' + esc(d.name) + (d.code ? ' <span class="quiet">(' + esc(d.code) + ")</span>" : "") + "</td>" +
+        '<td><input class="tokPrefix" maxlength="3" style="width:5em" value="' + esc(p) + '" placeholder="' + esc(/^[A-Za-z0-9]{1,3}$/.test(d.code || "") ? String(d.code).toUpperCase() : "") + '"></td>' +
+        '<td><input class="tokAka" style="width:100%" value="' + esc(aka.join(", ")) + '" placeholder="Names the EMR uses, comma separated"></td></tr>';
+    }).join("");
+    var stale = Object.keys(pre).filter(function (k) { return !used[k]; });
+    return h + (act.length
+        ? '<div class="tbl"><table><thead><tr><th>Department</th><th>Prefix</th><th>Also known as</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+        : '<p class="quiet">No active departments. Add them under Departments before numbering per department.</p>') +
+      (stale.length ? '<div class="msg note">Saved prefixes that name no department: ' + esc(stale.map(function (k) { return k + " = " + pre[k]; }).join(", ")) + ". Saving this card drops them.</div>" : "") +
+      '<p class="quiet">Prefixes are used only when each department numbers separately. A blank prefix uses the department code shown grey when that code is one to three letters or digits. Numbers start again at 1 each day, and a token already given never changes, including when the patient is moved to a room in another department.</p>' +
       '<button class="btn" id="tokSave" type="button">Save</button><div id="tokMsg"></div></div>';
   }
-  function readTokenCard(scope, text) {
-    var prefixes = {}, bad = "";
-    String(text || "").split(/\n/).forEach(function (ln) {
-      if (!ln.trim()) return;
-      var i = ln.lastIndexOf("=");
-      var name = i > 0 ? ln.slice(0, i).trim() : "", p = i > 0 ? ln.slice(i + 1).trim().toUpperCase() : "";
-      if (!name || !/^[A-Z0-9]{1,3}$/.test(p)) { bad = bad || ln.trim(); return; }
-      prefixes[name] = p;
-    });
-    if (bad) return { error: "Each line needs a department name, \"=\", and one to three letters or digits: " + bad };
-    return { tokens: { scope: scope === "department" ? "department" : "hospital", prefixes: prefixes } };
+  /* rows: [{ departmentId, prefix, aka }] read from the table. Returns { tokens } or { error }. */
+  function readTokenCard(scope, rows) {
+    var prefixes = {}, deptAliases = {};
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], p = String(r.prefix || "").trim().toUpperCase();
+      if (p && !/^[A-Z0-9]{1,3}$/.test(p)) return { error: "A prefix is one to three letters or digits: " + p };
+      if (p) prefixes[r.departmentId] = p;
+      var names = String(r.aka || "").split(",");
+      for (var j = 0; j < names.length; j++) {
+        var n = lc(names[j]); if (!n) continue;
+        if (deptAliases[n] && deptAliases[n] !== r.departmentId) return { error: "\"" + names[j].trim() + "\" is given to two departments. A name can point to one department only." };
+        deptAliases[n] = r.departmentId;
+      }
+    }
+    return { tokens: { scope: scope === "department" ? "department" : "hospital", prefixes: prefixes, deptAliases: deptAliases } };
   }
   WSQ._tokenCard = { html: tokenCardHtml, read: readTokenCard };
   function wireTokenCard(c) {
-    var btn = document.getElementById("tokSave");
-    if (!btn) return;
-    btn.onclick = function () {
-      var m = document.getElementById("tokMsg");
-      var out = readTokenCard(document.getElementById("tokScope").value, document.getElementById("tokPrefixes").value);
-      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
-      btn.disabled = true;
-      c.api("/org/update", { orgId: c.state.orgId, tokens: out.tokens }).then(function (r) {
-        btn.disabled = false;
-        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
-        m.innerHTML = ""; c.state.org = r.org; c.toast("Token numbering saved.");
-      });
+    var box = document.getElementById("tokCard");
+    if (!box) return;
+    var draw = function (depts) {
+      box.innerHTML = tokenCardHtml(c.esc, (c.state.org || {}).tokens, depts);
+      var btn = document.getElementById("tokSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var m = document.getElementById("tokMsg");
+        var rows = Array.prototype.map.call(box.querySelectorAll("tr[data-tok-dept]"), function (tr) {
+          return { departmentId: tr.getAttribute("data-tok-dept"), prefix: tr.querySelector(".tokPrefix").value, aka: tr.querySelector(".tokAka").value };
+        });
+        var out = readTokenCard(document.getElementById("tokScope").value, rows);
+        if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+        btn.disabled = true;
+        c.api("/org/update", { orgId: c.state.orgId, tokens: out.tokens }).then(function (r) {
+          btn.disabled = false;
+          if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+          c.state.org = r.org; draw(depts); c.toast("Token numbering saved.");
+        });
+      };
     };
+    draw(undefined);
+    c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? (r.departments || []) : null); }, function () { draw(null); });
   }
   function renderHospital(c, body) {
     var o = c.state.org || {};
@@ -262,7 +298,7 @@
        * say: nothing is converted, and nothing already recorded is rewritten. */
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
-      "</div>" + tokenCardHtml(c.esc, o.tokens) +
+      '</div><div id="tokCard"></div>' +
       (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
@@ -586,18 +622,37 @@
   // ---- Rooms (OPD consulting rooms) --------------------------------------------------------------
   function renderRooms(c, body) {
     body.innerHTML = '<span class="spin"></span>';
-    return c.api("/rooms?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var rooms = (r && r.ok && r.rooms) || [];
+    /* D7: a room belongs to a department (or none). A patient registered into the room is numbered in that
+     * department when each department numbers separately, and the waiting hall shows the room under it. */
+    return c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="card"><h2>Rooms</h2><div class="msg err">Rooms could not be loaded. Do not read this as no rooms. ' + c.esc(refusal(r)) + "</div></div>"; return; }
+      var rooms = r.rooms || [], depts = (r.departments || []).filter(function (d) { return d.active !== false; });
+      var deptSel = function (cls, cur, attr) {
+        return '<select class="' + cls + '"' + (attr || "") + '><option value="">No department</option>' + depts.map(function (d) {
+          return '<option value="' + c.esc(d.id) + '"' + (d.id === cur ? " selected" : "") + ">" + c.esc(d.name) + "</option>";
+        }).join("") + "</select>";
+      };
       body.innerHTML = '<div class="card"><h2>Rooms</h2>' +
-        (rooms.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Number</th><th>Assignment</th><th>Active</th></tr></thead><tbody>' +
-          rooms.map(function (rm) { return "<tr><td>" + c.esc(rm.name) + "</td><td>" + c.esc(rm.number) + "</td><td>" + c.esc((rm.assignment && rm.assignment.mode) || "") + "</td><td>" + (rm.active ? "yes" : "no") + "</td></tr>"; }).join("") +
+        (rooms.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Number</th><th>Department</th><th>Assignment</th><th>Active</th></tr></thead><tbody>' +
+          rooms.map(function (rm) { return "<tr><td>" + c.esc(rm.name) + "</td><td>" + c.esc(rm.number) + "</td><td>" + deptSel("admRoomDept", rm.departmentId || "", ' data-room="' + c.esc(rm.id) + '"') + "</td><td>" + c.esc((rm.assignment && rm.assignment.mode) || "") + "</td><td>" + (rm.active ? "yes" : "no") + "</td></tr>"; }).join("") +
           "</tbody></table></div>" : '<p class="quiet">No consulting rooms yet.</p>') +
         '<h3>Add a room</h3><div class="row"><label class="f"><span>Name</span><input id="admRoomName"></label>' +
+        '<label class="f"><span>Department</span>' + deptSel("", "", ' id="admRoomNewDept"') + "</label>" +
         '<button class="btn" id="admRoomAdd" type="button">' + c.ms("add") + "Add</button></div><div id=\"admRoomMsg\"></div></div>";
+      body.querySelectorAll(".admRoomDept").forEach(function (sel) {
+        sel.onchange = function () {
+          sel.disabled = true;
+          c.api("/room/update", { orgId: c.state.orgId, roomId: sel.getAttribute("data-room"), departmentId: sel.value || null }).then(function (x) {
+            sel.disabled = false;
+            if (!x || !x.ok) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">The department was not saved: ' + c.esc(refusal(x)) + "</div>"; WSQ.render("admin"); return; }
+            c.toast("Room department saved" + (x.room && x.room.department ? ": " + x.room.department : ": none") + ".");
+          });
+        };
+      });
       document.getElementById("admRoomAdd").onclick = function () {
         var name = (document.getElementById("admRoomName").value || "").trim();
         if (!name) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">Give the room a name.</div>'; return; }
-        c.api("/room", { orgId: c.state.orgId, name: name }).then(function (r) {
+        c.api("/room", { orgId: c.state.orgId, name: name, departmentId: document.getElementById("admRoomNewDept").value || null }).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
           c.toast("Room added."); WSQ.render("admin");
         });

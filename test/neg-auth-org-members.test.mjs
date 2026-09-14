@@ -293,7 +293,7 @@ test("POST /org/update tokens: no session 401, nurse 403, other hospital refused
   assert.equal(await scopeNow(), "hospital");
   const ok = await api("/org/update", "POST", body, asFirebase(HR_A_EMAIL));
   assert.equal(ok.__status, 200, JSON.stringify(ok));
-  assert.deepEqual((await ORG.getOrg(ENV, "org-a")).tokens, { scope: "department", prefixes: { cardiology: "C" } });
+  assert.deepEqual((await ORG.getOrg(ENV, "org-a")).tokens, { scope: "department", prefixes: { cardiology: "C" }, deptAliases: {} });
 });
 
 /* ==================================================================================================

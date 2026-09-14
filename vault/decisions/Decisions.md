@@ -5791,3 +5791,23 @@ Supersedes the coarse part of "FULL DISCHARGE SUMMARY" above for summaries signe
   index.html files). Staff only, `w-noprint`. English, as the patient's own access sees it.
 - Not built: sensitivity is still by report code only; a Condition whose code is on `neverRelease` is shown, as
   in #940's patient copy.
+## 2026-09-14 D7 B: OPD tokens per department, keyed by departmentId (owner chose B)
+Extends "OPD token numbers" above; allocation is still in the ticket's own commit.
+- A DEPARTMENT IS ITS q_departments ID. Counter `q_token_counters/<hospital>__<day>__dept-<departmentId>`; prefixes
+  `org.tokens.prefixes[<departmentId>]`; `org.tokens.deptAliases{<name lower-cased>: departmentId}` maps the
+  names an EMR import or a doctor session uses. A rename keeps the sequence and the prefix. Old name-keyed
+  prefixes are still read by name until the Admin card resaves by id (stale ones are listed on the card). A
+  department with no prefix falls back to its own code when that code is 1 to 3 letters/digits.
+- Continuity at deploy: a department's first allocation of the day under the id key continues a counter already
+  running today under the old name-slug key, so no C-001 is issued twice on the day this ships.
+- WHERE THE DEPARTMENT COMES FROM, server-side in addTicket (`_opd_org.js resolveTokenDepartment`): the desk
+  picker's departmentId (exact or refused 422 `department_not_found`, never guessed), then the room's
+  departmentId, then the ticket's own department name (import row), then the session's name. Deviation from
+  S3 design 4.3: the ticket's own name comes BEFORE the session's, because an import row names that patient's
+  department and a doctor session's free text does not.
+- M.room carries `department`, filled from q_departments on every store read and never stored on the room.
+  Room sessions stay keyed with department "" (as they always effectively were), so filling the name did
+  not move any room onto a new session id mid-day.
+- A ticket routed to another department's room takes that department's id and name and KEEPS its token; the
+  wall shows the issuing department beside such a token and groups rooms by department in department scope.
+- SMS/WhatsApp "at <dept>" uses the ticket's department before the session's (a pool session has none).

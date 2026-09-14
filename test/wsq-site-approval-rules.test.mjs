@@ -49,14 +49,20 @@ test("half-filled or impossible rules are refused on screen, not saved", () => {
 test("OPD token numbering card: what is saved is exactly what the org model keeps", async () => {
   const { tokenConfig } = await import("../functions/_opd_org.js");
   const K = sb.window.WSQ._tokenCard;
-  const html = K.html(esc, { scope: "department", prefixes: { cardiology: "C" } });
+  const depts = [{ id: "dcard", name: "Cardiology", code: "CAR", active: true }, { id: "dmed", name: "General Medicine", code: "GM", active: true }, { id: "dx", name: "Closed", active: false }];
+  const html = K.html(esc, { scope: "department", prefixes: { cardiology: "C", ghost: "G" }, deptAliases: { "gen med": "dmed" } }, depts);
   assert.match(html, /value="department" selected/);
-  assert.match(html, /cardiology = C/);
-  assert.match(K.html(esc, undefined), /value="hospital" selected/, "default is one sequence for the hospital");
-  const out = K.read("department", "Cardiology = c\n\nGeneral Medicine = GM\n");
-  assert.deepEqual(JSON.parse(JSON.stringify(out.tokens)), { scope: "department", prefixes: { Cardiology: "C", "General Medicine": "GM" } });
-  assert.deepEqual(tokenConfig(out.tokens), { scope: "department", prefixes: { cardiology: "C", "general medicine": "GM" } });
-  assert.match(K.read("department", "Cardiology = TOOLONG").error, /one to three letters/);
-  assert.match(K.read("hospital", "no equals sign").error, /no equals sign/);
+  assert.match(html, /data-tok-dept="dcard"[\s\S]*?value="C"/, "a legacy name-keyed prefix shows in its department's row");
+  assert.match(html, /data-tok-dept="dmed"[\s\S]*?placeholder="GM"[\s\S]*?value="gen med"/, "the code is the default prefix; aliases shown");
+  assert.doesNotMatch(html, /data-tok-dept="dx"/, "inactive departments are not offered");
+  assert.match(html, /name no department: ghost = G/, "a stale saved prefix is visible, not silently dropped");
+  assert.match(K.html(esc, undefined, depts), /value="hospital" selected/, "default is one sequence for the hospital");
+  assert.match(K.html(esc, {}, undefined), /Loading departments/);
+  assert.match(K.html(esc, {}, null), /could not be loaded[\s\S]*Do not read this as no departments/);
+  const out = K.read("department", [{ departmentId: "dcard", prefix: "c", aka: "Heart OPD, cardio" }, { departmentId: "dmed", prefix: "", aka: "" }]);
+  assert.deepEqual(JSON.parse(JSON.stringify(out.tokens)), { scope: "department", prefixes: { dcard: "C" }, deptAliases: { "heart opd": "dcard", cardio: "dcard" } });
+  assert.deepEqual(tokenConfig(out.tokens), { scope: "department", prefixes: { dcard: "C" }, deptAliases: { "heart opd": "dcard", cardio: "dcard" } });
+  assert.match(K.read("department", [{ departmentId: "dcard", prefix: "TOOLONG" }]).error, /one to three letters/);
+  assert.match(K.read("department", [{ departmentId: "dcard", aka: "OPD" }, { departmentId: "dmed", aka: "opd" }]).error, /two departments/);
   assert.doesNotMatch(html, /—/, "no em dash");
 });

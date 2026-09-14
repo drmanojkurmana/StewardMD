@@ -212,7 +212,7 @@
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
-<script src="/patient-register.js?v=preg1" defer></script>
+<script src="/patient-register.js?v=preg2-dept" defer></script>
 </head>
 <body>
 <div id="app"></div>
@@ -1076,10 +1076,11 @@
     var dept=(pt.department||"").toLowerCase();
     // GIMSR routing: matching-department rooms first, then the rest; shortest queue reads at a glance.
     var rooms=((st.opd&&st.opd.rooms)||[]).filter(function(r){return r.doctorUid;});
-    var match=function(r){ return dept && String(r.room.department||"").toLowerCase()===dept; };
+    // D7: by department id when both carry one (a renamed department still matches), else by name.
+    var match=function(r){ if(pt.departmentId&&r.room.departmentId) return pt.departmentId===r.room.departmentId; return dept && String(r.room.department||"").toLowerCase()===dept; };
     rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
     var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' - '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
-    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first.":"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
+    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> - matching rooms first."+(pt.token?" A room in another department keeps token "+esc(pt.token)+".":""):"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
       (can("queue.priority")?'<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>':'')+   // only roles with the priority right may mark urgent (reception cannot)
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
@@ -1098,16 +1099,27 @@
     // The server validates and issues the MR number; this only carries the answers.
     if(!(window.SMD_PATIENTREG&&SMD_PATIENTREG.open)){ toast("Patient check-in is unavailable."); return; }
     var mode=(st.opd&&st.opd.mode==="connect")?"connect":"native";
-    SMD_PATIENTREG.open({
-      mode: mode,
-      clinicName: st.orgCode||"Check-in",
-      submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; return api("patient/register",{method:"POST",body:b}); },
-      onAdded: function(r){
-        // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
-        api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
-          mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date}})
-          .then(function(){ toast("Added - "+r.mrn); refresh(); });
-      }
+    // D7: the hospital's departments and token numbering first, so the desk picks the department the
+    // token is numbered in. A failed load is said on the sheet (departments:null), never an empty list.
+    api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){ return o&&o.ok?o:null; },function(){ return null; }).then(function(o){
+      var perDept=!!(o&&o.org&&o.org.tokens&&o.org.tokens.scope==="department");
+      SMD_PATIENTREG.open({
+        mode: mode,
+        clinicName: st.orgCode||"Check-in",
+        departments: o?(o.departments||[]):null,
+        departmentRequired: perDept,
+        submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; b.forQueue=true; return api("patient/register",{method:"POST",body:b}); },
+        onAdded: function(r,sent){
+          // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
+          api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
+            mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date,departmentId:(sent&&sent.departmentId)||""}})
+            .then(function(q){
+              // A refused queue add is never shown as added: the patient is registered but has no token.
+              if(!q||!q.ok){ toast("Registered "+r.mrn+" but NOT queued: "+((q&&q.message)||(q&&q.error)||"no response")); refresh(); return; }
+              toast("Added - "+r.mrn+(q.ticket&&q.ticket.token?" - token "+q.ticket.token:"")); refresh();
+            },function(){ toast("Registered "+r.mrn+" but NOT queued: the server could not be reached."); });
+        }
+      });
     });
   }
 
@@ -1138,11 +1150,19 @@
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
       '<input id="nrn" placeholder="New room name (e.g. Room 1 / Cardiology)" style="margin-bottom:8px">'+
       '<input id="nrnum" placeholder="Room number (optional)">'+
+      // D7: the room's department. Patients registered into this room are numbered in it.
+      '<select id="nrdept" style="margin-top:8px"><option value="">Department: loading...</option></select>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Add room</button></div></div>');
+    api("org?orgId="+encodeURIComponent(st.orgId)).then(function(o){
+      var sel=sheet.querySelector("#nrdept"); if(!sel) return;
+      if(!o||!o.ok){ sel.innerHTML='<option value="">Departments could not be loaded (room added without one)</option>'; return; }
+      var ds=(o.departments||[]).filter(function(d){return d.active!==false;});
+      sel.innerHTML='<option value="">'+(ds.length?"No department":"No departments set up")+'</option>'+ds.map(function(d){return '<option value="'+esc(d.id)+'">'+esc(d.name)+'</option>';}).join("");
+    },function(){ var sel=sheet.querySelector("#nrdept"); if(sel) sel.innerHTML='<option value="">Departments could not be loaded (room added without one)</option>'; });
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
       var n=sheet.querySelector("#nrn").value.trim(); if(!n){toast("Enter a room name");return;}
-      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
+      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),departmentId:sheet.querySelector("#nrdept").value||null,assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
         if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added (assigned to you)"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value=""; loadRoomsList();
       });
     };
@@ -1154,7 +1174,7 @@
       var el=sheet.querySelector("#rlist"); if(!el) return;
       var rooms=(r&&r.rooms)||[];
       el.innerHTML=rooms.length? rooms.map(function(rm){
-        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+'</div></div>'+
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+(rm.department?" · "+esc(rm.department):"")+'</div></div>'+
           '<button class="cancel" data-assign="'+esc(rm.id)+'" style="padding:6px 10px">Assign</button></div>';
       }).join("") : '<div class="empty">No rooms yet. Add one below.</div>';
       Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openRoomAssign(b.getAttribute("data-assign"));};});

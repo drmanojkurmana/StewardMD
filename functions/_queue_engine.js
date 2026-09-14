@@ -12,7 +12,7 @@ import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken }
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
-import { resolveRoomDoctor, tokenScope, formatToken } from "./_opd_org.js";
+import { resolveRoomDoctor, tokenScope, tokenConfig, formatToken, resolveTokenDepartment, department as M_department } from "./_opd_org.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -49,7 +49,7 @@ export async function decorateForDoctor(env, tickets) {
   return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
     name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
     ghisPatientId: t.ghisPatientId || "",   // full MR# for the View-EMR-profile action (smd_opd_emr)
-    roomId: t.roomId || "", department: t.department || ""   // OPD platform: room + department (Phase 4)
+    roomId: t.roomId || "", department: t.department || "", departmentId: t.departmentId || ""   // OPD platform: room + department (Phase 4); departmentId since D7
   })));
 }
 
@@ -102,15 +102,38 @@ export async function recompute(env, session, tickets) {
 // so a move, reassignment, reprioritisation or recall keeps it, and a cancelled number is never reissued
 // (the counter only ever goes up). A new day is a new counter, so it starts again at 1.
 const TOKEN_TRIES = 5;
-async function allocateToken(env, session, f, id, org) {
+/* D7: which department this ticket belongs to, decided here on the server from the picker's
+ * departmentId, the room, the ticket's own department name, then the session's (see _opd_org.js
+ * resolveTokenDepartment). The hospital's departments are read only when they can matter: department
+ * scope, or a picker id to check. A picker id that is not an active department of this hospital is
+ * refused rather than replaced by a guess. */
+async function tokenDepartment(env, session, body, org) {
   let cfg = org && org.tokens;
   if (!org) { const o = await fsGet(env, "q_orgs/" + sanitize(session.hospitalId)); cfg = o && o.fields && o.fields.tokens; }
-  const scope = tokenScope(cfg, f.department);
+  cfg = tokenConfig(cfg);
+  const hosp = (org && org.id) || session.hospitalId || "";
+  if (!hosp || (cfg.scope !== "department" && !body.departmentId)) return { cfg, department: null };
+  const rows = await fsQuery(env, "q_departments", { where: { field: "orgId", value: sanitize(hosp) }, limit: 200 });
+  const departments = rows.map((r) => M_department(withId(r.id, r.fields)));
+  let roomDepartmentId = "";
+  const roomId = body.roomId || session.roomId;
+  if (!body.departmentId && roomId) { const rm = await fsGet(env, "q_rooms/" + sanitize(roomId)); roomDepartmentId = (rm && rm.fields && rm.fields.orgId === hosp && rm.fields.departmentId) || ""; }
+  const r = resolveTokenDepartment(departments, cfg, { departmentId: body.departmentId, roomDepartmentId, department: body.department, sessionDepartment: session.department });
+  if (r.badId) throw Object.assign(new Error("department_not_found"), { status: 422, detail: "That department is not an active department of this hospital." });
+  return Object.assign({ cfg }, r);
+}
+async function allocateToken(env, session, f, id, cfg, dept) {
+  const scope = tokenScope(cfg, dept);
   const hosp = session.hospitalId || ("doc-" + session.doctorUid);
   const path = "q_token_counters/" + [hosp, session.date, scope.key].map(sanitize).join("__");
+  const legacyPath = scope.legacyKey ? "q_token_counters/" + [hosp, session.date, scope.legacyKey].map(sanitize).join("__") : "";
   for (let i = 0; i < TOKEN_TRIES; i++) {
     const d = await fsGet(env, path);
-    const n = (((d && d.fields && d.fields.n) || 0) | 0) + 1;
+    /* A department counter keyed by id that does not exist yet today may have a sequence already running
+     * under the name-slug key counters used before D7. Continue it, or the morning's C-001 is issued twice. */
+    let start = (d && d.fields && d.fields.n) || 0;
+    if (!d && legacyPath) { const old = await fsGet(env, legacyPath); start = (old && old.fields && old.fields.n) || 0; }
+    const n = (start | 0) + 1;
     f.token = formatToken(scope.prefix, n); f.tokenNo = n; f.tokenScope = scope.key;
     const counter = d
       ? wUpdate(env, path, { n: n, updatedAt: now() }, { updateTime: d.updateTime })
@@ -140,7 +163,10 @@ export async function addTicket(env, session, body, actor, org) {
     registeredAt: now(), calledAt: 0, consultStartAt: 0, consultEndAt: 0, etaStart: 0, etaEnd: 0, etaConfidence: 0,
     createdAt: now(), updatedAt: now(), expiresAt: session.expiresAt
   };
-  await allocateToken(env, session, f, id, org);
+  const td = await tokenDepartment(env, session, body, org);
+  // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
+  if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
+  await allocateToken(env, session, f, id, td.cfg, td.department);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token });
   await recompute(env, session);
   const ticket = withId(id, f);
@@ -318,7 +344,11 @@ export async function addToPool(env, org, body, actor) {
 export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
   const doctorUid = resolveRoomDoctor(room);
   if (!doctorUid) return null;   // temporarily-unassigned room has no queue to route into
-  const s = await getOrCreateSession(env, { hospitalId: org.id, doctorUid: doctorUid, department: room.department || "", date: opdDate(date), source: "room", doctorName: doctorName || "" });
+  /* department "" ON PURPOSE. The session id is built from the department, and until 2026-09-14 a room's
+   * department always read as "" (M.room dropped it). Now that rooms carry their department name, passing
+   * it here would move every departmental room onto a NEW session id mid-day and strand the tickets
+   * already in the old one. The room's department reaches tickets through roomId -> room.departmentId. */
+  const s = await getOrCreateSession(env, { hospitalId: org.id, doctorUid: doctorUid, department: "", date: opdDate(date), source: "room", doctorName: doctorName || "" });
   if (s.roomId !== room.id) { try { await fsCommit(env, [wUpdate(env, "q_sessions/" + s.id, { roomId: room.id, updatedAt: now() })]); s.roomId = room.id; } catch (e) {} }
   return s;
 }
@@ -333,8 +363,10 @@ export async function assignToRoom(env, org, ticketId, room, opts, actor) {
   if (!doctorUid) throw Object.assign(new Error("room_unassigned"), { status: 400 });
   const target = await getOrCreateRoomSession(env, org, room, opts.date, opts.doctorName);
   const fromSessionId = t.sessionId;
+  /* A ticket moved into another department's room shows that department from now on, and KEEPS its token:
+   * the patient has already heard that number, and the counter it came from is not reopened. */
   await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, {
-    sessionId: target.id, roomId: room.id, department: room.department || t.department || "",
+    sessionId: target.id, roomId: room.id, department: room.department || t.department || "", departmentId: room.departmentId || t.departmentId || "",
     status: "registered", position: 0, seq: (t.registeredAt || now()), updatedAt: now(), expiresAt: target.expiresAt
   })]);
   if (opts.priority) { try { await setPriority(env, target, ticketId, opts.priority, actor); } catch (e) {} }   // priority -> front

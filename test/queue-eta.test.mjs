@@ -1,6 +1,7 @@
 // test/queue-eta.test.mjs — pure queue logic: state machine, ordering, ETA, learning.
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { canTransition, isTerminal, orderQueue, orderRoomView, displayBoard, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
 
 test("state machine allows real transitions, blocks illegal ones", () => {
@@ -95,6 +96,27 @@ test("displayBoard: the wall shows tokens and never a name (calling/serving/wait
   assert.deepEqual(r.upcoming, ["A-012", ""]);
   // NEVER a name (first or last), MRN or phone anywhere in the public projection.
   assert.ok(!JSON.stringify(out).match(/Anita|Ramesh|Sita|Vikram|Kumar|Sharma|Devi|Rao|4821|9876543210/), "no PHI in the public projection");
+});
+
+test("OPD-05 displayBoard: each token carries the department it was issued in; the scope tells the wall to group by department", () => {
+  const board = { rooms: [
+    { doctorUid: "d1", status: "normal", room: { name: "Room 4", department: "Orthopaedics" }, tickets: [
+      { status: "in_consultation", name: "Anita Sharma", token: "O-002", department: "Orthopaedics" },
+      { status: "called", name: "Ramesh Kumar", token: "M-001", department: "General Medicine" },   // moved here, kept its number
+      { status: "waiting", name: "Sita Devi", token: "O-003", department: "Orthopaedics" },
+    ] },
+  ] };
+  const out = displayBoard({ name: "H", tokens: { scope: "department" } }, board);
+  const r = out.rooms[0];
+  assert.equal(out.tokenScope, "department");
+  assert.deepEqual([r.calling, r.callingDepartments], [["M-001"], ["General Medicine"]]);
+  assert.deepEqual([r.serving, r.servingDepartment], ["O-002", "Orthopaedics"]);
+  assert.deepEqual([r.upcoming, r.upcomingDepartments], [["O-003"], ["Orthopaedics"]]);
+  assert.equal(displayBoard({}, board).tokenScope, "hospital");
+  assert.ok(!JSON.stringify(out).match(/Anita|Ramesh|Sita/), "still no names");
+  const wall = readFileSync(new URL("../opd-display.html", import.meta.url), "utf8");
+  assert.match(wall, /function whoIn\(n, dept, r\)/, "the wall names a moved token's department");
+  assert.match(wall, /renderGrid\(d\.rooms \|\| \[\], d\.tokenScope\)/, "and groups rooms by department in department scope");
 });
 
 test("concurrency: two independent moves computed against the same order never corrupt the queue", () => {
