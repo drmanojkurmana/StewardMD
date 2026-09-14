@@ -24,6 +24,9 @@
   #portal h1 { font-size: 22px; }
   #portal :focus-visible { outline: 3px solid #1c3048; outline-offset: 2px; }
   #portal .ds-full h4 { margin: 14px 0 4px; font-size: 17px; }
+  #portal .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  #portal .lang-switch { text-align: right; margin-bottom: 8px; }
+  #portal .lang-switch select { font-size: 15px; padding: 6px 8px; }
   /* A full discharge summary prints on its own: everything else on the page is hidden while it does. */
   @media print {
     body.printing * { visibility: hidden; }
@@ -35,8 +38,8 @@
 </head>
 <body>
 <main id="portal" aria-live="polite"></main>
-<script src="/wardsynq/site/i18n.js?v=2"></script>
-<script src="/wardsynq/site/portal.js?v=3"></script>
+<script src="/wardsynq/site/i18n.js?v=3"></script>
+<script src="/wardsynq/site/portal.js?v=4"></script>
 <script src="/wardsynq/site/bug-reporter.js?v=2"></script>
 </body>
 </html>

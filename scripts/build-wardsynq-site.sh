@@ -22,6 +22,8 @@ cp "$ROOT/wardsynq/site/_worker.js" "$OUT/_worker.js"
 cp "$ROOT/wardsynq/site/"*.js "$ROOT/wardsynq/site/"*.css "$ROOT/wardsynq/site/"*.webmanifest "$OUT/wardsynq/site/"
 rm -f "$OUT/wardsynq/site/_worker.js"
 cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
+# Per-language catalogs (D6): one file per language, loaded on demand by portal.js's switcher.
+cp -R "$ROOT/wardsynq/site/i18n" "$OUT/wardsynq/site/i18n"
 
 # The clinical surfaces, byte-identical to what the app runs.
 # discharge.css was missing from this list until 2026-09-12. discharge.js shipped without it, so the
