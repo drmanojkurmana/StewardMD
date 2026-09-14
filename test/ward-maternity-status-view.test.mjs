@@ -44,3 +44,16 @@ test("a genuinely absent pregnancy still says so", () => {
   const html = chart(W, { pregFailed: false });
   assert.match(html, /No pregnancy episode recorded/);
 });
+
+test("FAILED MEOWS, BLOOD LOSS AND DELIVERY LOADS SAY SO: no calm score, no 'none recorded', no delivery form", () => {
+  const W = loadWard();
+  const html = chart(W, { meows: false, losses: false, delivery: false, links: false });
+  assert.match(html, /MEOWS was not worked out. Do not read this as no trigger/);
+  assert.match(html, /Blood loss could not be loaded. Do not read this as none recorded/);
+  assert.ok(!html.includes("No blood loss recorded."));
+  assert.match(html, /delivery record could not be read/);
+  assert.ok(!html.includes('data-w-act="deliverysave"'), "not knowing whether she delivered must not offer a form to record a delivery");
+  const ok = chart(W, { meows: null, losses: [], delivery: null });
+  assert.match(ok, /No blood loss recorded\./);
+  assert.ok(ok.includes('data-w-act="deliverysave"'));
+});

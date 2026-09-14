@@ -1,0 +1,69 @@
+/* Prescription editor only. Printed prescriptions keep their established layout. */
+@media screen {
+html body #rxSheet{--rx-bg:#f5f5f7;--rx-card:#fff;--rx-ink:#172126;--rx-muted:#667178;--rx-line:#e2e6e7;--rx-soft:#f3f5f5;--rx-accent:#087c70;background:var(--rx-bg);color:var(--rx-ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+html body:is(.dark,.v3-dark) #rxSheet{--rx-bg:#000;--rx-card:#101112;--rx-ink:#f3f5f5;--rx-muted:#aab3b7;--rx-line:#2a2e30;--rx-soft:#191c1e;--rx-accent:#63d7c4}
+html body #rxSheet .rx-head{background:var(--rx-card);padding:8px 16px 12px;border-color:var(--rx-line)}
+html body #rxSheet .rx-head-inner{gap:10px}
+html body #rxSheet .rx-head-title{text-align:left}
+html body #rxSheet .rx-title-main{font-size:18px;font-weight:650;justify-content:flex-start;flex-wrap:wrap;gap:4px 8px;color:var(--rx-ink)}
+html body #rxSheet .rx-title-sub{font-size:12px;margin-top:4px;color:var(--rx-muted)}
+html body #rxSheet .rx-saved-indicator{font-size:10px;background:transparent;border:0;padding:2px 0;color:var(--rx-accent)}
+html body #rxSheet .rx-x,html body #rxSheet .rx-del{width:44px;height:44px;min-width:44px;border-radius:14px;background:var(--rx-soft);color:var(--rx-muted)}
+html body #rxSheet .rx-del{color:#d14c4c;background:transparent}
+html body #rxSheet .rx-top-export{min-width:44px;min-height:44px;border-radius:14px;background:var(--rx-soft);color:var(--rx-accent);padding:8px 10px;font-size:12px;box-shadow:none}
+html body #rxSheet .rx-scroll-body{padding:18px 16px 28px;scroll-padding:20px}
+html body #rxSheet .rx-disc{font-size:12px;line-height:1.55;font-weight:400;border:0;border-left:3px solid #d69b35;border-radius:0;background:transparent;color:var(--rx-muted);padding:4px 0 4px 12px;margin:0 0 20px}
+html body #rxSheet .rx-clinic-slot{margin-bottom:18px}
+html body #rxSheet #rxClinicAdd{width:100%;min-height:48px;border-radius:14px;background:var(--rx-card);border:1px solid var(--rx-line);color:var(--rx-accent);padding:12px 14px;text-align:left;font-size:13px;white-space:normal;line-height:1.45}
+html body #rxSheet :is(.rx-pt-card,.rx-line,.rx-tpl-card,.rx-clinic-card){background:var(--rx-card);border:1px solid var(--rx-line);border-radius:18px;box-shadow:none;padding:16px;margin-bottom:18px;color:var(--rx-ink)}
+html body #rxSheet :is(.rx-pt-card-title,.rx-sec-title){font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--rx-muted)}
+html body #rxSheet .rx-pt-card-title{margin-bottom:16px}
+html body #rxSheet .rx-field{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:12px;font-weight:500;color:var(--rx-muted)}
+html body #rxSheet .rx-pt-row{margin-bottom:14px}
+html body #rxSheet .rx-pt-grid{gap:12px}
+html body #rxSheet .rx-in{font:400 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:48px;padding:11px 12px;border-radius:12px;background:var(--rx-soft);color:var(--rx-ink);border:1px solid transparent}
+html body #rxSheet .rx-in::placeholder{color:var(--rx-muted);opacity:1}
+html body #rxSheet .rx-in:focus{border-color:var(--rx-accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--rx-accent) 15%,transparent)}
+html body #rxSheet .rx-line{overflow:visible;margin:12px 0 18px}
+html body #rxSheet .rx-line.adv{background:var(--rx-card)}
+html body #rxSheet .rx-line.unv{border-color:#d69b35}
+html body #rxSheet .rx-line .r1{gap:10px}
+html body #rxSheet .rx-line .r2{gap:8px;margin-top:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
+html body #rxSheet .rx-line .r2 input{padding-left:9px;padding-right:9px;font-size:15px}
+html body #rxSheet .rx-freq-pills{display:flex;flex-wrap:wrap;overflow:visible;gap:6px;margin-top:12px}
+html body #rxSheet .rx-freq-pill{min-width:44px;min-height:44px;padding:8px;font-size:12px;border-radius:10px;background:var(--rx-soft);border-color:var(--rx-line);color:var(--rx-muted)}
+html body #rxSheet .rx-freq-pill.active{background:var(--rx-accent);border-color:var(--rx-accent);color:var(--rx-card)}
+html body #rxSheet .rx-dock{display:flex;flex-direction:column;gap:10px;padding:10px 16px max(14px,env(safe-area-inset-bottom));background:var(--rx-card);border-top:1px solid var(--rx-line);box-shadow:none;flex:none}
+html body #rxSheet .rx-dock-quick{display:flex;width:100%;gap:8px;overflow:visible;flex-wrap:wrap}
+html body #rxSheet .rx-dock-quick .rx-btn{flex:1 1 0;min-width:0;min-height:44px;border-radius:12px;padding:10px 4px;font-size:13px;font-weight:600;white-space:nowrap;background:var(--rx-soft);color:var(--rx-accent);border:0;box-shadow:none}
+html body #rxSheet .rx-hero-export{width:100%;min-height:48px;border-radius:14px;padding:12px;font-size:15px;font-weight:600;box-shadow:none;background:#087c70;color:#fff}
+html body #rxSheet :is(.rx-tpl-sel,.rx-tpl-btn){min-height:44px;background:var(--rx-soft);color:var(--rx-ink);border-color:var(--rx-line)}
+html body #rxSheet .rx-tpl-row{flex-wrap:wrap}
+html body #rxSheet .rx-sign-bar{flex-wrap:wrap;gap:8px;color:var(--rx-muted);border-color:var(--rx-line);padding:12px 2px}
+html body #rxSheet .rx-sign-dr{color:var(--rx-ink)}
+html body #rxSheet :is(button,select):focus-visible{outline:2px solid var(--rx-accent);outline-offset:3px}
+@media(max-width:640px){html body #rxSheet{height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;max-height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;border-radius:24px 24px 0 0!important}html body #rxSheet .rx-title-main{display:block}html body #rxSheet .rx-saved-indicator{display:flex;margin-top:3px}html body #rxSheet .rx-pt-grid{grid-template-columns:1fr}html body #rxSheet .rx-title-sub{max-width:210px}}
+@media(prefers-reduced-motion:reduce){html body #rxSheet,html body #rxSheet *{transition:none!important}}
+}
+@media screen {
+/* Full-screen editor: viewport edges are independent of sheet centering rules. */
+html body #rxSheet,html body #rxSheet.on{inset:0!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border-radius:0!important;transform:none!important;box-shadow:none!important}
+html body #rxSheet .rx-wrap{height:100%;min-height:0;max-height:100%;width:100%;padding:0;display:flex;flex-direction:column;overflow:hidden}
+html body #rxSheet .rx-handle-bar{display:none}
+html body #rxSheet .rx-head{padding:calc(env(safe-area-inset-top,0px) + 10px) max(14px,env(safe-area-inset-right,0px)) 12px max(14px,env(safe-area-inset-left,0px))}
+html body #rxSheet .rx-head-inner{display:grid;grid-template-columns:64px minmax(0,1fr) 58px;gap:8px;align-items:center}
+html body #rxSheet .rx-head-title{text-align:center;min-width:0}
+html body #rxSheet .rx-title-main{display:block;font-size:17px;line-height:1.35}
+html body #rxSheet .rx-saved-indicator{display:flex;justify-content:center;font-size:11px}
+html body #rxSheet .rx-title-sub{max-width:100%;font-size:11px}
+html body #rxSheet #rxX{width:64px;background:transparent;border-radius:10px;color:var(--rx-accent);font-size:14px;font-weight:500;gap:3px;padding:0}
+html body #rxSheet #rxX .rx-back-chevron{font-size:26px;line-height:1}
+html body #rxSheet .rx-top-export{width:58px;min-width:0;justify-content:center;box-shadow:none!important;background:var(--rx-soft)!important;color:var(--rx-accent)!important}
+html body #rxSheet .rx-top-export .rx-ico{display:none}
+html body #rxSheet .rx-dock{align-items:stretch;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+html body #rxSheet .rx-dock-quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+html body #rxSheet .rx-dock-quick .rx-btn,html body #rxSheet .rx-hero-export{display:flex;align-items:center;justify-content:center;gap:5px;text-align:center;box-shadow:none!important}
+html body #rxSheet .rx-tpl-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+html body #rxSheet .rx-tpl-row>*{width:100%;white-space:normal;text-align:center}
+html body #rxSheet .rx-scroll-body{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));min-height:0}
+}

@@ -567,3 +567,60 @@ Admin "Security review" tab (STAFF_ADMIN, doctor/nurse 403): chart-access anomal
 
 Surveillance board (ward): deterministic signals with evidence links (deterioration trend, sepsis screen, critical lab trend, overdue care, medication risk needs highAlertDrugs/orderVerifyWithinHours config - "not evaluated" otherwise), append-only acknowledgement, raise as incident signal. Copilot: 8 MaiK tasks with record facts shown apart from reasoning; outage = no answer. Portal: wardsynq.com/portal.html (live 200) - patient and proxy access with grants, audited proxy reads, released-only data, messages, consent withdraw (non-treatment); staff "Patient portal" tile; needs wardsynq.patientAccess.enabled per hospital. Not built: queue status, released documents, full discharge summary in portal. Live shell 34, ward.js site66. 6328 passing.
 **Next P2:** offline-first (P2.4), FHIR platform depth (P2.5), India profile (P2.6), multilingual (P2.7), voice notes (P2.8), hospital intelligence (P2.10), specialty framework + pathways (P2.11/2.12), developer platform (P2.13), multi-hospital (P2.14), UX bar (P2.16).
+
+### 2026-09-13 - P2 builders completed: P2.12/2.11 pathways & specialty, P2.6/2.7 India & multilingual, P2.4 offline-first
+
+Resumed and completed all three stopped P2 builders:
+- P2.12 Clinical pathways & P2.11 Specialty framework: authoring in Admin > Pathways card (`/pathways/draft`, `/pathways/publish`, `/pathways/retire`), bedside pathways view (`loadPathways`, `pathwayEnrol`, `pathwayOverride`), specialty timeline panel with dangling reference safety. 5/5 tests in `test/wardsynq-pathways.test.mjs`.
+- P2.6 India profile & P2.7 Multilingual: GSTIN mod-36 validation & line calculation on invoices, ABDM HFR/HPR identifier validation, India region profiles on orgs, Devanagari phonetic transliteration in MPI patient search (`wardsynq-mpi.js`), and patient-facing `wardsynq/site/i18n.js` with non-translation invariant for clinical entities. 8/8 tests in `test/wardsynq-region-in.test.mjs`.
+- P2.4 Offline-first clinical operation: IndexedDB-backed `ward-offline.js` bedside queue & cache, `requestContextOf` offline headers (`X-Offline-Created-At`, conflict reason), idempotency replay in `RecordService.replayFor()`, audit capturing offline creation time alongside server sync time, `_worker.js` header forwarding. 4/4 tests in `test/wardsynq-offline.test.mjs`.
+- Reachability: 0 routes without a screen (365 reachable, 30 machine-only). Regression: 6316 pass, 0 fail, 1 skipped. Live admin.js 15, ward.js site67, ward-offline.js 1.
+
+### 2026-09-14 - Review of the bulk "36 bugs" and workstation commits; P2.8 voice typing
+
+A read-only review of 84a5f176 / ff5fd900 / 40ff5a45 / 8d759a70 / 8e1b75a1 found regressions; each verified, then fixed (66b49de8, f7fd8dac):
+- Whole blood was checked with the red-cell ABO table (O whole blood passed for an A patient). Now identical group only; test added.
+- 2D echo, angiogram and critical-result follow-up posted to `/ward/timeline-note` (no such route) and reported "recorded"/"notification sent". Echo/angio now write through `/ward/note` with settle; the follow-up sheet is gone. Blank angiogram vessels are "not reported", never "Normal".
+- Unidentified FEMALE shown as MALE (MRN substring). Add/Remove bed browser-only. Blood bank "auto-detected" Hb/PLT/group banner. Instruction notes claiming notification; FollowCare enrolment the server ignores. Dead buttons fronting fabricated imaging findings, a fake QR "secret token", scheme search. Invented oncology protocol versions. All removed or reworded; ED trauma checkbox now sent.
+- Lab templates prefilled adult ranges/units: now test names only, unit/range as hints; blank template rows not sent.
+- Workstation: removed the demo-cohort fallback on a failed real record, and a real hospital (site=1, not demo) with no record connected now stops with a message instead of showing demo patients.
+- Two tests the bulk change broke were repaired (lab hint restored; timeline test checks the Billing chip, not the word).
+P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.available/processLocally`); a browser that would stream audio to an outside service is refused. Indian English or Hindi toggle, language-pack download, named errors (blocked mic, no speech), transcript lands only in an editable box. Tests: ward-dictation, ward-no-fake-success. Regression 6358 pass, 0 fail. Live ward.js site72, wardsynq-app.js 13, sw wardsynq-v6.
+**Decision for the owner:** voice typing now needs Chrome 139+ on-device speech; Safari/older browsers get "type instead". Say if cloud speech is acceptable for your hospitals and under what agreement.
+**Next P2:** P2.1 chart-grounded intelligence gaps, P2.5 FHIR depth, P2.10 hospital intelligence, P2.13 developer platform, P2.14 multi-hospital, P2.15 reliability, P2.16 UX bar.
+
+### 2026-09-14 (later) - staff-admin escalation fixed; P2.5 bulk export, P2.14 groups, P2.15 health, P2.17 assignment reads merged
+
+- Negative-authorization tests for 10 sensitive routes (tests/neg-auth-sensitive) exposed three holes, fixed in the router via `memberChangeRefusal` (functions/_opd_org.js): a non-owner staff.admin (e.g. hr) could promote itself to admin, and disable or re-PIN the owner's staff sign-in. Now: no own-role change, owner untouchable, no acting on or granting a staff-managing role holding permissions the caller lacks; hr managing clinicians unchanged. Untested-route worklist 32 -> 22.
+- P2.5 FHIR Bulk Data (p2-fhir-bulk): `$export` system and Patient level, async via outbox/tick, encrypted NDJSON in existing document storage, manifest error[] for anything truncated or unconvertible, one export per hospital, 24h expiry, audited downloads. Admin > Data export. Not built: download buttons in the admin screen (files are fetched through the FHIR API), POST kick-off, Group/$export.
+- P2.14 Hospital groups (p2-hospital-group): invite plus owner acceptance, aggregate-only overview (#/group) read as an audited system read per hospital, recommended-settings policy adopted explicitly. Group admins get 403 on every member hospital's patient routes. **Owner to confirm:** counts are computed by a system read authorised by the hospital owner's acceptance (Decisions.md).
+- P2.15 System health (p2-access-reliability): seven dependency probes with a 3 s timeout, fixed plain-language consequences, Admin > System health; docs/INCIDENT_RESPONSE.md; last tick outcome kept in MAIK_KV.
+- P2.17 Reads outside assignment: `outOfAssignmentFindings` in the Security review, with exemptions listed and "not evaluated" when no assignment data.
+- Regression 6435 pass, 0 fail, 1 skipped. Reachability 0 without a screen. Live admin.js 18, group.js 1.
+**Next P2:** P2.13 webhooks on the outbox, P2.10 longitudinal trends, P2.16 severity-colour audit, P2.5 remaining (terminology, Subscription, IPS).
+
+### 2026-09-14 (evening) - P2.10 trends, P2.13 webhooks, P2.16 colour audit merged; approval race fixed
+
+- Approval decisions used requestId + millisecond as their id; two approvers in the same millisecond overwrote each other and the chain counted one. Random tail added; clock-frozen test fails without the fix (was an intermittent 409 order_not_approved under parallel load).
+- P2.10 Trends (p2-trends): Digital twin > Trends. Ten metrics plus billed charges (BILLING_VIEW), computed from record history (no snapshot store; Decisions.md), hospital time zone buckets, numerator/denominator/coverage per point, null with a reason for unreadable sources, drill to ward then record ids gated like record-detail plus a department-scope check (a nurse scoped to Surgery gets 403 on a Medicine ward's records). Limits: current ward per stay, today's bed count for past occupancy, 1000-row cap marked partial.
+- P2.13 Webhooks (p2-webhooks): Admin > Integrations > Webhooks. Thin HMAC-signed notifications (hashed ids, event type only, no PHI; receivers read through FHIR/SMART), staged in the same append as the record in TenantBackend.write so a failed write emits nothing, one outbox event per endpoint, 5 s timeout, no redirects, private and metadata addresses refused at registration and before each send, auto-disable after sustained failure, secret shown once and stored encrypted. Also fixed outbox drain reading the OLDEST 200 events (new events became invisible after 200 settled ones). Open: DNS pinning is not possible in this runtime, no secret overlap on rotation, delivery log reads the newest 1000 attempts.
+- P2.16 (p2-ux-severity): stock adjust/wastage and rota "Block period" buttons no longer warning-coloured; test/wsq-severity-colour-audit.test.mjs blocks new decorative red/amber. Owner decisions: recording dot, admin status pills, portal Revoke button.
+- Regression 6459 pass, 0 fail, 1 skipped. Reachability 0 without a screen, 22 without a test. Live ward.js site74, admin.js 19.
+**P2 remaining:** P2.5 depth (terminology service, Subscription, IPS, Consent/AuditEvent as FHIR, R4B/R5), P2.13 SMART app registration UI for third parties, P2.16 doctor keyboard shortcuts and tablet nurse layout, and the 22 routes without a test.
+
+### 2026-09-14 (night) - P2.16 keyboard and tablet, P2.5 FHIR depth, three Muse follow-ups
+
+- P2.16 (p2-ux-speed): ward keyboard layer (/ search, g w/c/l, n/o/r/v on a chart, ? sheet, Esc), never fires while typing, never bound to a write (test fails on any non-GET), aria labels on icon buttons, focus ring. Tablet 768-1180 px: 44 px targets, sticky "next due" (says "not known" when a dose was unreadable), two-pane round in landscape; headless check test/run-ward-tablet-ui.mjs 35/35.
+- P2.5 (p2-fhir-depth): terminology (CodeSystem/ValueSet, $expand, $validate-code; external systems served only as flagged fragments), Patient/$summary IPS (emptyReason vs unavailable vs withheld), AuditEvent (system/ or admin only, reading audited), Consent tests, FHIR Subscription notifications on the webhooks outbox; Admin > FHIR tab and chart "IPS summary". docs/FHIR_STRATEGY.md: R4 only for now. Not built: R4B/R5, IPS immunizations (no source type), Subscription create over FHIR.
+- Muse (muse-spark-1.3, reviewed and verified here): webhook secret rotation keeps the old secret valid 24 h (dual signature); bulk export records file keys before writing so failed runs cannot orphan encrypted files (failed and stalled jobs now delete files); hospital groups can have several administrators (last one cannot be removed).
+- Regression 6515 pass, 0 fail, 1 skipped. Reachability 0 without a screen. Live admin.js 22, ward.js site76.
+**P2 remaining:** 22 routes without a test (builder running), SMART third-party app registration screen, R4B/R5 when a partner needs it. Owner items unchanged.
+
+### 2026-09-14 (late) - every route has a test; three bugs they found; SMART apps screen; no em dash
+
+- Tests for the last 22 routes (tests/remaining-routes). Bugs fixed: maternity status/MEOWS/blood-loss/delivery swallowed failed reads and answered ok (now 502, and the screen shows each failure and hides the delivery form when delivery state is unknown); POST /room/update had no hospital ownership check; loadSessionFor refusals threw a raw 500 on 11 session routes. Reachability: "Every route has a screen and a test."
+- Muse: Admin > Integrations > Connected apps (SMART) registers clients in wardsynq.fhir.smart with strict validation, private JWKs refused, removal revokes live tokens; em dash removed from app-facing text with test/wsq-no-emdash.test.mjs.
+- Flaky outbound test fixed (T0 fixed one second after load; under load later deliveries were never due).
+- Regression 6552 pass, 0 fail, 1 skipped. Live admin.js 23, ward.js site78.
+**In progress:** P2.17 security scanning plus penetration test plan (Muse), P2.17 tamper-evident audit chain with database-level immutability (builder). After these, P2 is complete except R4B/R5 (deferred by docs/FHIR_STRATEGY.md) and owner items.
+

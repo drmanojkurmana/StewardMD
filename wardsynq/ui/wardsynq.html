@@ -30,8 +30,10 @@
      already says what this is, and a screen reader announcing "WardSynQ logo" before every ward
      round is noise. -->
 <div class="brandbar">
-  <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
-       width="261" height="61" decoding="async">
+  <a href="/#/home" title="Return to WardSynQ Map" style="text-decoration:none;display:inline-block">
+    <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
+         width="261" height="61" decoding="async">
+  </a>
 </div>
 
 <div class="pack" id="pack" role="status">Loading clinical rules.</div>
@@ -57,13 +59,17 @@
     <nav class="sitemap" id="sitemap" hidden aria-label="WardSynQ">
       <div class="heading">WardSynQ</div>
       <a href="/#/home">Map</a>
-      <a href="/#/ward/">Ward</a>
+      <a href="/#/ward">Ward</a>
       <a href="/#/ward/board">Bed board</a>
       <a href="/#/ward/edboard">Emergency</a>
       <a href="/#/ward/critsboard">Critical results</a>
+      <a href="/#/ward/labboard">Laboratory</a>
+      <a href="/#/ward/radboard">Radiology</a>
       <a href="/#/ward/flowcommand">Command center</a>
       <a href="/#/ward/twin">Digital twin</a>
       <a href="/#/patients">Patients</a>
+      <a href="/#/ward/cashier">Billing</a>
+      <a href="/#/ward/reports">Reports</a>
       <a href="/#/maik">MaiK</a>
       <a href="/#/admin">Admin Center</a>
       <a href="/#/audit">Audit</a>
@@ -157,28 +163,106 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
-  try {
-    firebase.initializeApp({ apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain: "stewardmd-498ec.firebaseapp.com", projectId: "stewardmd-498ec", appId: "1:911280405587:web:d09038e15e98d69dc79aa6" });
-    /* WAIT FOR THE SESSION TO RESTORE BEFORE ANSWERING. firebase.auth().currentUser is null for the
-     * first moments after load while the SDK rehydrates from IndexedDB, and this page opens the
-     * record service immediately - so answering "no token" straight away would reproduce the very
-     * 401 this is here to fix, just with a smaller window. Resolves once on the first auth state,
-     * and is capped so a page with no session (a hospital PC behind Cloudflare Access, which needs
-     * no bearer at all) opens promptly rather than hanging on a sign-in that is never coming. */
-    var ready = new Promise(function (resolve) {
-      var done = false;
-      var settle = function (u) { if (!done) { done = true; resolve(u || null); } };
-      try { firebase.auth().onAuthStateChanged(settle); } catch (e) { settle(null); }
-      setTimeout(function () { settle(null); }, 4000);
-    });
-    window.SMD_AUTH = window.SMD_AUTH || {
-      token: function () {
-        return ready.then(function (u) { return u && u.getIdToken ? u.getIdToken() : null; }).catch(function () { return null; });
+  (function () {
+    try {
+      firebase.initializeApp({
+        apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",
+        authDomain: "stewardmd-498ec.firebaseapp.com",
+        projectId: "stewardmd-498ec",
+        appId: "1:911280405587:web:d09038e15e98d69dc79aa6"
+      });
+    } catch (e) {}
+
+    var auth = null;
+    try { auth = firebase.auth(); } catch (e) {}
+
+    /* SAFARI/INDEXEDDB SESSION RESTORATION FIX:
+     * Never latch on an initial null from onAuthStateChanged. In WebKit/Safari, IndexedDB takes
+     * 100-500ms to restore the persisted session. An observer registered immediately will fire
+     * with null before the stored user is read.
+     * We:
+     * 1) Await auth.authStateReady() (native in Firebase 9.14+ / 10 compat).
+     * 2) Also listen on onAuthStateChanged to resolve immediately once a user is found.
+     * 3) Dynamic token(): ALWAYS checks auth.currentUser.getIdToken() dynamically on every call,
+     *    never relying solely on a stale settled promise.
+     * 4) Fall back to smd_opd_staff_tok if the user is a hospital staff sign-in.
+     */
+    var authReadyPromise = null;
+    function ensureAuthReady() {
+      if (!auth) return Promise.resolve(null);
+      if (auth.currentUser) return Promise.resolve(auth.currentUser);
+      if (authReadyPromise) return authReadyPromise;
+
+      authReadyPromise = new Promise(function (resolve) {
+        var settled = false;
+        function finish(u) {
+          if (settled) return;
+          settled = true;
+          resolve(u || (auth && auth.currentUser) || null);
+        }
+
+        if (typeof auth.authStateReady === "function") {
+          auth.authStateReady().then(function () {
+            finish(auth.currentUser);
+          }).catch(function () {});
+        }
+
+        var unsub = null;
+        try {
+          unsub = auth.onAuthStateChanged(function (u) {
+            if (u) {
+              if (unsub) { try { unsub(); } catch (e) {} }
+              finish(u);
+            }
+          });
+        } catch (e) {}
+
+        var tokType = "";
+        try { tokType = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
+        var maxWait = tokType === "staff" ? 300 : 3500;
+
+        setTimeout(function () {
+          if (unsub) { try { unsub(); } catch (e) {} }
+          finish(auth && auth.currentUser);
+        }, maxWait);
+      });
+
+      return authReadyPromise;
+    }
+
+    ensureAuthReady();
+
+    window.SMD_AUTH = {
+      ready: authReadyPromise,
+      token: async function () {
+        try {
+          if (auth && auth.currentUser) {
+            return await auth.currentUser.getIdToken();
+          }
+          var u = await ensureAuthReady();
+          if (u && typeof u.getIdToken === "function") {
+            return await u.getIdToken();
+          }
+          if (auth && auth.currentUser && typeof auth.currentUser.getIdToken === "function") {
+            return await auth.currentUser.getIdToken();
+          }
+        } catch (e) {}
+
+        // Fallback for staff sessions on hospital PC
+        try {
+          var st = localStorage.getItem("smd_opd_staff_tok");
+          if (st) return st;
+        } catch (e) {}
+
+        return null;
       },
+      get currentUser() {
+        return auth ? auth.currentUser : null;
+      }
     };
-  } catch (e) {}
+  })();
 </script>
-<script type="module" src="wardsynq-app.js?v=8"></script>
+<script type="module" src="wardsynq-app.js?v=13"></script>
 <script type="module">
   // Offline shell. Registered separately from the app so a caching failure never stops the
   // workstation loading: an app that says it is offline is more use than one that will not open.

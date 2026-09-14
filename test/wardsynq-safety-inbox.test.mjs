@@ -91,7 +91,7 @@ test("an unacknowledged critical result reaches the inbox even with no rules con
   assert.equal(r.items.length, 1);
   assert.equal(r.items[0].type, "critical-result");
   assert.match(r.items[0].detail, /Potassium 6\.9 mmol\/L/);
-  assert.match(r.items[0].detail, /nobody has acknowledged this yet/);
+  assert.match(r.items[0].detail, /Nobody has acknowledged this yet/);
   // And the hospital is told why the rest of the list is thin.
   assert.match(r.note, /no chart-completion rules/);
 });

@@ -85,7 +85,14 @@
   }
 
   // ---- router ---------------------------------------------------------------------------------
-  function go(page, arg) { location.hash = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : ""); }
+  function go(page, arg) {
+    var target = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : "");
+    if (location.hash === target) {
+      route();
+    } else {
+      location.hash = target;
+    }
+  }
   /* Two-step sign-in: the PIN or password was right, and the account wants a code from the phone. The
    * server's answer is passed through untouched, so a wrong code reads as a wrong code, not a PIN. */
   function secondStep(r) {
@@ -112,6 +119,8 @@
      * hospital data is asked for (which would only be refused). */
     if (st.who.twoStepRequired) return r.page === "security" ? render("security") : go("security");
     if (r.page === "hospitals") return render("hospitals");
+    // A group administrator need not work in any one hospital, so the group overview needs none chosen.
+    if (r.page === "group" && PAGES.group) return render("group");
     /* The demonstration-hospital builder runs BEFORE a hospital is chosen, because its whole job is
      * to create one. Every other page below needs st.org loaded; this one would be bounced straight
      * back to the hospital list by the next line and could never run. */
@@ -132,7 +141,13 @@
     if (PAGES[r.page]) return render(r.page);
     return render("home");
   }
-  function workstationUrl() { return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(st.org.connectTenantId || "") + "&site=1"; }
+  function workstationUrl() {
+    var t = st.org && st.org.connectTenantId;
+    if (isDemo(st.org) || !t || t === "none" || t === "undefined" || t === "null") {
+      return "/wardsynq/ui/wardsynq.html?site=1" + (isDemo(st.org) ? "&demo=1" : "");
+    }
+    return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(t) + "&site=1";
+  }
   function whoami() {
     return api("/whoami" + (st.orgId ? "?orgId=" + encodeURIComponent(st.orgId) : "")).then(function (r) {
       if (!r || !r.ok) {
@@ -188,7 +203,7 @@
     if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
     h += item("opd", "OPD desk") + item("patients", "Patients");
     if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
-    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + item("rota", "Staff rota") + item("accounts", "Accounts") + "</div>";
+    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + item("rota", "Staff rota") + item("accounts", "Accounts") + item("group", "Group overview") + "</div>";
     return h;
   }
   function render(page, extra) {

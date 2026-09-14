@@ -6,8 +6,13 @@
  * WHO is asking - it is handed a context that already carries the actor or the deps to resolve one.
  */
 
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation, validateCodeOperation } from "./fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation } from "./fhir.js";
 import { practitionerRead, organizationRead } from "./fhir-identity.js";
+import { kickoffExport, exportStatus, cancelExport, exportFile, NDJSON } from "./fhir-bulk.js";
+import { dispatchTerminology } from "./fhir-terminology.js";
+import { patientSummary } from "./fhir-ips.js";
+import { auditEvents } from "./fhir-audit.js";
+import { subscriptions } from "./fhir-subscription.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -23,7 +28,8 @@ function fhirResponse(obj, status, extraHeaders, cors) {
 /**
  * Dispatches one GET against the FHIR read grammar.
  *   metadata | {Type} | {Type}/{id} | {Type}/{id}/_history | {Type}/{id}/_history/{vid}
- *   Patient/{id}/$everything | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
+ *   Patient/{id}/$everything | Patient/{id}/$summary | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
+ *   CodeSystem | ValueSet (+ $expand, $validate-code) | AuditEvent | Subscription
  *
  * @param {string[]} parts   path segments AFTER the fhir root
  * @param {URL} url
@@ -41,6 +47,22 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "metadata") return { obj: capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1", smart: fctx.smart || null, inbound: fctx.inbound === true }), status: 200 };
   if (!fType) {
     const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", searchParams: strip(), rawQuery, lenient });
+    return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
+  }
+  /* Terminology (CodeSystem, ValueSet, $expand, $validate-code), AuditEvent and $summary: each in its
+   * own file, each authorised there or by the door, none a stored canonical type. */
+  const tx = await dispatchTerminology(request, env, parts, url, fctx);
+  if (tx) return tx;
+  if (fType === "AuditEvent") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "AuditEvent is read and searched only"), status: 404 };
+    return auditEvents(request, env, { ...fctx, id: fId }, url);
+  }
+  if (fType === "Subscription") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "Subscription is read and searched only; $status is not offered"), status: 404 };
+    return subscriptions(request, env, { ...fctx, id: fId }, url);
+  }
+  if (fType === "Patient" && fId && fOp === "$summary") {
+    const r = await patientSummary(request, env, { ...fctx, patientId: fId });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
   if (fType === "Provenance") {
@@ -61,10 +83,6 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "Patient" && fId && fOp === "$everything") {
     const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
-  }
-  if (fType === "CodeSystem" && fId === "$validate-code") {
-    const r = await validateCodeOperation(request, env, { ...fctx, searchParams: strip() });
-    return { obj: r.ok ? r.parameters : r.outcome, status: r.status };
   }
   if (fId && fOp === "$validate") {
     const r = await validateOperation(request, env, { ...fctx, type: fType, id: fId });
@@ -90,4 +108,45 @@ async function dispatchOperation(request, env, parts, body, fctx) {
   return null;
 }
 
-export { fhirResponse, dispatchRead, dispatchOperation };
+/**
+ * The Bulk Data paths ($export, Patient/$export, $export-status/{id}, $export-file/{id}/{name}), for
+ * both doors. Returns a Response, or null when the path is not one of them. The caller has already
+ * decided the door's own gate (a staff.admin session, or a resolved bearer in fctx.actorOverride).
+ * fctx: { migration, recordDeps, actorDeps, actorOverride?, store, base }  opts: { cors, suffix }
+ */
+async function dispatchBulk(request, env, parts, url, fctx, opts) {
+  const o = opts || {}, cors = o.cors || {}, suffix = o.suffix || "";
+  const p0 = parts[0] || "", p1 = parts[1] || "", p2 = parts[2] || "";
+  const method = request.method;
+  const out = (r) => fhirResponse(r.outcome, r.status, r.retryAfter ? { "Retry-After": String(r.retryAfter) } : null, cors);
+  const level = p0 === "$export" && !p1 ? "system" : (p0 === "Patient" && p1 === "$export" && !p2) ? "patient" : null;
+  if (level) {
+    if (method !== "GET") return fhirResponse(operationOutcome("error", "not-supported", "$export is GET"), 405, { Allow: "GET" }, cors);
+    /* The IG makes the async pattern mandatory; a client that does not ask for it is not a bulk client. */
+    if (!/respond-async/i.test(str(request.headers.get("Prefer")))) return fhirResponse(operationOutcome("error", "invalid", "Prefer: respond-async is required for $export"), 400, null, cors);
+    const r = await kickoffExport(request, env, { ...fctx, level, params: url.searchParams, requestUrl: url.href });
+    if (!r.ok) return out(r);
+    return fhirResponse(operationOutcome("information", "informational", "export accepted"), 202, { "Content-Location": `${fctx.base}/$export-status/${encodeURIComponent(r.jobId)}${suffix}` }, cors);
+  }
+  if (p0 === "$export-status" && p1 && !p2) {
+    const ctx = { ...fctx, jobId: decodeURIComponent(p1), link: (name) => `${fctx.base}/$export-file/${encodeURIComponent(decodeURIComponent(p1))}/${encodeURIComponent(name)}${suffix}` };
+    if (method === "DELETE") {
+      const r = await cancelExport(request, env, ctx);
+      return r.ok ? fhirResponse(operationOutcome("information", "informational", "export cancelled"), 202, null, cors) : out(r);
+    }
+    if (method !== "GET") return fhirResponse(operationOutcome("error", "not-supported", "GET or DELETE"), 405, { Allow: "GET, DELETE" }, cors);
+    const r = await exportStatus(request, env, ctx);
+    if (!r.ok) return out(r);
+    if (r.status === 202) return new Response(null, { status: 202, headers: Object.assign({ "X-Progress": r.progress, "Retry-After": "120", "Cache-Control": "no-store" }, cors) });
+    return new Response(JSON.stringify(r.manifest), { status: 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, cors) });
+  }
+  if (p0 === "$export-file" && p1 && p2 && !parts[3]) {
+    if (method !== "GET") return fhirResponse(operationOutcome("error", "not-supported", "GET"), 405, { Allow: "GET" }, cors);
+    const r = await exportFile(request, env, { ...fctx, jobId: decodeURIComponent(p1), fileName: decodeURIComponent(p2) });
+    if (!r.ok) return out(r);
+    return new Response(r.bytes, { status: 200, headers: Object.assign({ "Content-Type": NDJSON, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" }, cors) });
+  }
+  return null;
+}
+
+export { fhirResponse, dispatchRead, dispatchOperation, dispatchBulk };

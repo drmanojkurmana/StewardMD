@@ -6964,6 +6964,29 @@ test("APPROVALS BY AMOUNT: a purchase order's own priced total sets how many app
   assert.equal(list.orders.find((o) => o.purchaseOrderId === big.purchaseOrderId).approval.required, 2);
 });
 
+test("TWO APPROVERS IN THE SAME MILLISECOND are two approvals, not one overwriting the other", async () => {
+  seedHospital();
+  const org = docs.get(`q_orgs/${ORG}`);
+  docs.set(`q_orgs/${ORG}`, { ...org, fields: { ...org.fields, wardsynq: { ...org.fields.wardsynq, approvalPolicy: { PurchaseOrder: { amountThresholds: [{ abovePaise: 1, levels: 2 }] } } } } });
+  const po = await as(PHARM, "/ward/purchase-order", "POST", { orgId: ORG, vendor: "MedSupply", lines: [{ item: "Albumin 20%", quantity: 5, unit: "vial", unitPricePaise: 450000 }] });
+  const req = await as(PHARM, "/ward/approval-request", "POST", { orgId: ORG, subjectType: "PurchaseOrder", subjectId: po.purchaseOrderId, reason: "Stock low" });
+  const SECOND = "consultant3@example.test";
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(SECOND))}`, { fields: { orgId: ORG, identity: idFor(SECOND), role: "doctor", active: true }, updateTime: "t1" });
+  const realIso = Date.prototype.toISOString;
+  const frozen = realIso.call(new Date());
+  Date.prototype.toISOString = function () { return frozen; };
+  let a, b;
+  try {
+    a = await as(LOCUM, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req.verificationId, decision: "approved" });
+    b = await as(SECOND, "/ward/approval-decide", "POST", { orgId: ORG, verificationId: req.verificationId, decision: "approved" });
+  } finally { Date.prototype.toISOString = realIso; }
+  assert.equal(a.__status, 200, JSON.stringify(a));
+  assert.equal(b.__status, 200, JSON.stringify(b));
+  assert.notEqual(a.decisionId, b.decisionId);
+  assert.equal(b.state, "approved");
+  assert.equal(b.approvals, 2, "the first approver's decision must survive the second");
+});
+
 test("RESTRICTED MEDICINES honour the hospital's approver count at prescribing, not only on the approvals screen", async () => {
   seedHospital();
   const org = docs.get(`q_orgs/${ORG}`);

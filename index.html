@@ -45,7 +45,7 @@
      progressive enhancement (degrades to ligature text offline/native). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0">
 <!-- Sacramento (the "MaiKnowledge" credit wordmark, .v4-maik-name .mk-s) is now SELF-HOSTED via
      @font-face in redesign-system.css (assets/fonts/sacramento.woff2). The old Google-CDN <link>
      used a media="print" trick that never loaded in the WKWebView, so the app fell back to a
@@ -70,7 +70,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward22-round">
+<link rel="stylesheet" href="/ward.css?v=ward24-keys">
 <link rel="stylesheet" href="/discharge.css?v=dis1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
@@ -253,7 +253,8 @@ body.smd-ddi-open #infFab,
 body.smd-ddi-open .ghis-ward-fab,
 body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
-<link rel="stylesheet" href="/maik-polish.css?v=mkpolish1">
+<link rel="stylesheet" href="/maik-polish.css?v=mktopright1">
+<link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1">
 </head>
 
 
@@ -378,18 +379,18 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @keyframes sbsLogoTrace{to{stroke-dashoffset:0}}
-  /* Outline finish: one restrained halo, with the original contour always crisp on top. */
-  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:0!important}
-  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(14,110,99,.28);filter:drop-shadow(0 0 0 transparent);animation:sbsOutlineHalo 1.43s ease-in-out 1.56s both;animation-play-state:paused;shape-rendering:geometricPrecision}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.4);filter:drop-shadow(0 0 0 transparent)}
+  /* Signature Trace: the existing solid 107px mark is present from the first frame. The
+     animated contour is a short mint highlight laid over it, never a replacement logo. */
+  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1!important}
+  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(45,212,191,.52);filter:drop-shadow(0 0 0 transparent);animation:sbsSignatureGlow 2.18s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
+  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.68);filter:drop-shadow(0 0 0 transparent)}
   #smdBootSplash.sbs-visible .sbs-logo-trace{animation-play-state:running}
   #smdBootSplash .sbs-logo-trace path{stroke-width:4.4}
-  @keyframes sbsOutlineHalo{0%,100%{filter:drop-shadow(0 0 0 transparent)}45%{filter:drop-shadow(0 0 7px var(--sbs-halo))}}
+  @keyframes sbsSignatureGlow{0%,58%{opacity:1;filter:drop-shadow(0 0 0 transparent)}72%{opacity:1;filter:drop-shadow(0 0 8px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
   @media (prefers-reduced-motion:reduce){
     #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
     #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
-    #smdBootSplash .sbs-logo-trace{display:block;animation:none;filter:none}
-    #smdBootSplash .sbs-logo-trace path{animation:none;stroke-dashoffset:0}
+    #smdBootSplash .sbs-logo-trace{display:none;animation:none;filter:none}
   }
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
@@ -2091,10 +2092,10 @@ window.openExternal = function (u) {
      registry and the deterministic core must exist before prescription.js renders its button, and
      rxchoice-ui.js needs MEDAPI (api.js, loaded earlier) for the Drug Database. Defer keeps them in
      document order. With smd_rxchoice off all three are inert and the pad renders no button. -->
-<script src="/rxchoice-flags.js?v=rxc2" defer></script>
-<script src="/rxchoice-core.js?v=rxc2" defer></script>
-<script src="/rxchoice-ui.js?v=rxc4" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4" defer></script>
+<script src="/rxchoice-flags.js?v=rxc3" defer></script>
+<script src="/rxchoice-core.js?v=rxc3" defer></script>
+<script src="/rxchoice-ui.js?v=rxc5" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2180,7 +2181,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab30" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/connect-agent-boot.js?v=cab30" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mktopright1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2485,7 +2486,7 @@ window.openExternal = function (u) {
      Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
-<script src="/ward.js?v=ward22-round" defer></script>
+<script src="/ward.js?v=ward24-keys" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->

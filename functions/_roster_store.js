@@ -90,6 +90,13 @@ export async function coverageFor(env, orgId, from, to, roleOf) {
   return { ok: true, coverage: R.coverage(from, to, shifts, list, roleOf), partial };
 }
 
+/* P2.17: the rota for a span, raw, for the security review to compare chart reads against. partial is
+ * true when any month hit the scan cap, so the caller can say the comparison is incomplete. */
+export async function assignmentsBetween(env, orgId, from, to) {
+  const [shifts, { list, partial }] = await Promise.all([shiftsOf(env, orgId), rowsBy(env, "q_roster_assign", "orgMonth", monthsFor(orgId, datesBetween(from, to), 1))]);
+  return { ok: true, shifts, assignments: list.filter((a) => a.status !== "cancelled" && a.date >= R.addDays(from, -1) && a.date <= to), partial };
+}
+
 export async function onDuty(env, orgId, unit, utcOffsetMinutes) {
   const shifts = await shiftsOf(env, orgId);
   const { list, partial } = await rowsBy(env, "q_roster_assign", "orgMonth", monthsFor(orgId, [today()], 1));

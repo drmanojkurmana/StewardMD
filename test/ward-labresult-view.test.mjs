@@ -61,3 +61,27 @@ test("a sample in transit can be marked received or failed by the laboratory", (
   assert.ok(html.includes('data-w-act="specreceived:spc1"'));
   assert.ok(html.includes('data-w-act="specfailed:spc1"'));
 });
+
+test("A TEMPLATE NAMES THE TESTS ONLY: unit and reference range are never filled in for the analyser", () => {
+  const els = {};
+  const src = readFileSync(fileURLToPath(new URL("../ward.js", import.meta.url)), "utf8");
+  const el = () => ({ value: "", placeholder: "", attrs: {}, setAttribute(k, v) { this.attrs[k] = v; }, getAttribute(k) { return this.attrs[k]; } });
+  const sandbox = {
+    navigator: { userAgent: "node" }, location: { hash: "", href: "" },
+    document: {
+      getElementById: (id) => (els[id] = els[id] || el()),
+      createElement: () => ({ style: {}, classList: { add() {}, remove() {} }, appendChild() {}, setAttribute() {} }),
+      addEventListener() {}, body: { appendChild() {} }, querySelector: () => null, querySelectorAll: () => [],
+    },
+    localStorage: { getItem: () => "", setItem() {}, removeItem() {} },
+    fetch: () => Promise.resolve({ json: () => Promise.resolve({}) }),
+    setTimeout, clearTimeout, console, Promise, Date,
+  };
+  sandbox.window = sandbox; sandbox.self = sandbox;
+  vm.createContext(sandbox); vm.runInContext(src, sandbox);
+  sandbox.window.WARD._labTemplateApply("cbc");
+  assert.equal(els.wLrTest0.value, "Hemoglobin");
+  assert.equal(els.wLrUnit0.value, "", "a template must not type a unit for the laboratory");
+  assert.equal(els.wLrRange0.value, "", "an adult reference range must not be filled in");
+  assert.equal(els.wLrUnit0.placeholder, "g/dL", "the usual unit is still offered as a hint");
+});

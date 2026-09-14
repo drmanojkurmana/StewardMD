@@ -100,24 +100,32 @@
 
   function candidates(comp) {
     if (!comp || !G.MEDAPI.composition) return Promise.resolve([]);
-    return G.MEDAPI.composition(comp, "price_asc", "all", 300, 0)
-      .then(function (d) {
-        var list = (d && d.brands) || [];
-        var compName = (d && d.composition) || comp;
-        return list.map(function (b) {
-          return {
-            id: b.id,
-            brand: b.brand,
-            manufacturer: b.manufacturer,
-            mrp: b.mrp,
-            form: b.form,
-            pack: b.pack || b.form,
-            composition: b.composition || compName,
-            discontinued: b.discontinued
-          };
-        });
-      })
-      .catch(function () { return []; });
+    function fetchComp(name) {
+      return G.MEDAPI.composition(name, "price_asc", "all", 300, 0);
+    }
+    return fetchComp(comp).then(function (d) {
+      var list = (d && d.brands) || [];
+      if (!list.length && comp.indexOf("+") > -1) {
+        var alt = comp.split(/\s*\+\s*/).reverse().join(" + ");
+        if (alt !== comp) return fetchComp(alt);
+      }
+      return d;
+    }).then(function (d) {
+      var list = (d && d.brands) || [];
+      var compName = (d && d.composition) || comp;
+      return list.map(function (b) {
+        return {
+          id: b.id,
+          brand: b.brand,
+          manufacturer: b.manufacturer,
+          mrp: b.mrp,
+          form: b.form,
+          pack: b.pack || b.form,
+          composition: b.composition || compName,
+          discontinued: b.discontinued
+        };
+      });
+    }).catch(function () { return []; });
   }
 
   function choose(row, prescribed, cands) {
@@ -175,6 +183,7 @@
           if (!sh._rxChoice) sh._rxChoice = {};
           sh._rxChoice[row.drug || ("line" + Date.now())] = opt;
         }
+        try { if (G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.recordSelection) G.SMD_RXCHOICE_UI.recordSelection(result, cat, { prescriptionId: null }); } catch (e) {}
         setTimeout(schedule, 0);
       });
     });

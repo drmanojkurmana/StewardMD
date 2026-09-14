@@ -300,7 +300,10 @@ async function recordVerification(request, env, ctx) {
   }
 
   const at = str(ctx.at) || new Date().toISOString();
-  const id = requestId + "-d-" + str(at).replace(/[^0-9a-zA-Z]+/g, "");
+  /* A random tail: two approvers deciding in the same millisecond produced one id, and the second put
+   * became a new version of the first person's decision, so an approval silently vanished. Retries
+   * are de-duplicated by idempotencyKey, not by the id. */
+  const id = requestId + "-d-" + str(at).replace(/[^0-9a-zA-Z]+/g, "") + "-" + crypto.randomUUID().slice(0, 8);
   const withdraws = str(ctx.withdraws);
   if (decision === "withdrawn" && !withdraws) {
     return { ...base, ok: false, status: 422, error: "withdraws_required", detail: "Say which approval is being taken back.", written: 0 };

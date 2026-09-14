@@ -48,6 +48,17 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/ward/twin-simulate") >= 0) {
     return reply({ ok: true, label: "SIMULATION - NOT LIVE STATE", scenario: body.scenario, baseline: { occupied: 42 }, projected: { occupied: 52, wouldExceedCapacity: false } });
   }
+  /* P2.10 Trends: a series with a gap, the ward breakdown, the record ids, and a refused billing series. */
+  var METRICS = [{ id: "admissions", title: "Admissions", unit: "admissions" }, { id: "billed-charges", title: "Billed charges", unit: "amount", finance: true }];
+  var pt = function (key, value, extra) { var p = { key: key, label: key, value: value, numerator: value, denominator: null, coverage: "full" }; for (var k in (extra || {})) p[k] = extra[k]; return p; };
+  if (u.indexOf("/ward/trend-events") >= 0) return reply({ ok: true, metrics: METRICS, events: { total: 1, truncated: false, items: [{ resourceType: "Encounter", id: "enc-1" }] } });
+  if (u.indexOf("/ward/trends") >= 0) {
+    if (u.indexOf("metric=billed-charges") >= 0) return reply({ ok: false, error: "forbidden", detail: "billing_view_required", metrics: METRICS }, 403);
+    var def = { title: "Admissions", unit: "admissions", numerator: "Inpatient stays that started in the bucket.", denominator: "None.", inclusion: "IPD stays.", exclusion: "Cancelled.", wardAttribution: "Current ward." };
+    if (u.indexOf("groupBy=ward") >= 0) return reply({ ok: true, metrics: METRICS, definition: def, range: { utcOffsetMinutes: 330 }, series: [{ group: "Ward A", points: [pt("2026-09-01", 2)] }] });
+    return reply({ ok: true, metrics: METRICS, definition: def, range: { utcOffsetMinutes: 330 }, series: [{ group: null, points: [pt("2026-09-01", 2), pt("2026-09-02", 3), pt("2026-09-03", null, { numerator: null, coverage: "none", reason: "Encounter records could not be read" }), pt("2026-09-04", 1)] }] });
+  }
+  if (u.indexOf("/ward/record-detail") >= 0) return reply({ ok: true, resourceType: "Encounter", recordId: "enc-1", record: { id: "enc-1", status: "in-progress" }, versions: [{ version: 1, current: true, stood: true }], versionCount: 1 });
   return reply({ ok: true });
 };
 </script>

@@ -558,3 +558,63 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-tbl { border-collapse: collapse; width: 100%; font-size: 13px; }
 #smdWard .w-tbl th, #smdWard .w-tbl td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--outline-variant); }
 #smdWard .w-tbl tr.w-diff td { background: var(--warn-container, #fff4e0); color: var(--on-warn-container); }
+
+/* Split-pane inpatient layout and voice dictation button (BUG-MU08G0GA-VB5E, BUG-MU073XKT-7KZW, BUG-MU08NPGV-0MZX) */
+#smdWard .w-split-layout { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 960px) {
+  #smdWard .w-split-layout { grid-template-columns: 340px 1fr; align-items: start; }
+}
+#smdWard .w-col-tools { display: flex; flex-direction: column; gap: 12px; }
+#smdWard .w-col-roster { display: flex; flex-direction: column; gap: 12px; }
+#smdWard .w-mic-btn { background: none; border: 0; cursor: pointer; color: var(--primary); display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 50%; }
+#smdWard .w-mic-btn:hover { background: var(--sc); }
+#smdWard .w-mic-btn.recording { color: #d93025; animation: w-pulse 1.2s infinite; }
+@keyframes w-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+/* P2.16 keyboard. A visible ring on whatever the keyboard reached; a mouse click shows none. */
+#smdWard :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+#smdWard .w-top .w-title { flex: 1; text-align: center; }
+#smdWard .w-ic:focus-visible, #smdWard .w-x:focus-visible { background: var(--sc); }
+#smdWard .w-keys { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 5; width: min(380px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px); overflow-y: auto; background: var(--sc-lowest); border: 1px solid var(--outline); border-radius: 16px; padding: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .18); }
+#smdWard .w-keys dl { margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+#smdWard .w-keys dl > div { display: flex; gap: 12px; align-items: baseline; }
+#smdWard .w-keys dt { flex: 0 0 104px; color: var(--on-surface-variant); font-size: 12px; }
+#smdWard .w-keys dd { margin: 0; }
+#smdWard .w-keys kbd { font: 600 12px var(--mono, ui-monospace, Menlo, monospace); border: 1px solid var(--outline-variant); border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; background: var(--sc-low); color: var(--on-surface); }
+#smdWard .w-next { font-size: 12px; font-weight: 600; color: var(--on-surface-variant); }
+#smdWard .w-next.warn { color: var(--on-warn-container); }
+
+/* P2.16 nurse round and worklist on a tablet (768 to 1180 px). Touch targets of 44 px, the header with
+ * "next due" kept in view, one column in portrait and two panes in landscape, and dose actions that
+ * wrap rather than slide off the side. Phones and desktops are unchanged. */
+@media (min-width: 768px) and (max-width: 1180px) {
+  #smdWard .w-ic, #smdWard .w-x { min-width: 44px; min-height: 44px; justify-content: center; align-items: center; }
+  #smdWard .w-btn.tiny, #smdWard .w-chip { min-height: 44px; }
+  #smdWard .w-f select, #smdWard .w-f textarea { min-height: 44px; }
+  #smdWard .w-mar > .w-card-h, #smdWard .w-nw > .w-dt-bar { position: sticky; top: -12px; z-index: 2; background: var(--sc-lowest);
+    margin: -14px -14px 12px; padding: 12px 14px; border-radius: 16px 16px 0 0; border-bottom: 1px solid var(--outline-variant); flex-wrap: wrap; }
+  #smdWard .w-nw > .w-dt-bar h3 { margin: 0; flex: 1 1 auto; }
+  #smdWard .w-mar .w-next, #smdWard .w-nw .w-next { flex: 1 1 100%; order: 3; }
+  #smdWard .w-mar, #smdWard .w-mar-doses, #smdWard .w-doses li { min-width: 0; }
+  #smdWard .w-dose-h, #smdWard .w-dose-s { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; overflow-wrap: anywhere; }
+  #smdWard .w-dose-a { gap: 10px; }
+  #smdWard .w-nw .w-mini-row { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px;
+    border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 12px; background: var(--sc-low); }
+  #smdWard .w-nw .w-mini-row > div:first-child { flex: 1 1 240px; min-width: 0; overflow-wrap: anywhere; }
+  #smdWard .w-nw .w-mini-row-act { display: flex; flex-wrap: wrap; gap: 8px; }
+}
+@media (min-width: 768px) and (max-width: 1180px) and (orientation: landscape) {
+  #smdWard .w-mar-body { display: grid; grid-template-columns: minmax(240px, 320px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  #smdWard .w-mar-ctl { position: sticky; top: 84px; }
+  #smdWard .w-mar-ctl .w-scan { grid-template-columns: 1fr; }
+  #smdWard .w-mar-ctl .w-filter { flex-wrap: wrap; }
+  #smdWard .w-mar-ctl .w-filter input { flex: 1 1 100%; }
+  #smdWard .w-nw .w-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+}

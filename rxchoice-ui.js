@@ -37,6 +37,47 @@
   }
   function clearAudit() { try { localStorage.removeItem(AUDIT_KEY); } catch (e) {} }
 
+  /* Phase C: the ONLY field a selection may change is the brand. This pure helper takes the
+   * doctor's line object and the chosen option and returns a line with ONLY brand replaced;
+   * drug, dose, frequency, duration and route are copied through untouched. Garbage in returns
+   * its input (or null) rather than throwing. The DOM call sites set only the [data-f="brand"]
+   * input for the same reason. */
+  function applyBrandOnly(line, opt) {
+    try {
+      if (!line || !opt || !opt.brand) return (line == null ? null : line);
+      var out = {};
+      for (var k in line) if (Object.prototype.hasOwnProperty.call(line, k)) out[k] = line[k];
+      out.brand = opt.brand;
+      return out;
+    } catch (e) { return (line == null ? null : line); }
+  }
+
+  /* Phase C: record one doctor decision. Builds the entry with the core's recordAuditEvent (the
+   * spec section 14 shape: original + alternative products, category, reason, prices,
+   * doctorApproved, timestamp) and appends it to the local audit trail. Returns the entry, or
+   * null when there is nothing to record. Never throws. */
+  function recordSelection(result, cat, meta) {
+    try {
+      var r = result || {};
+      var opt = r[cat] || null;
+      if (!opt) return null;
+      var core = CORE();
+      var build = (core && (core.recordAuditEvent || core.auditEntry)) || null;
+      if (!build) return null;
+      var entry = build({
+        prescriptionId: (meta && meta.prescriptionId) || null,
+        original: r.prescribed || null,
+        alternative: opt,
+        category: cat,
+        reasonShown: (opt && opt.label) || (meta && meta.reasonShown) || null,
+        doctorApproved: true,
+        patientSelected: false
+      });
+      logAudit(entry);
+      return entry;
+    } catch (e) { return null; }
+  }
+
   /* ---------------- styles ---------------- */
   function injectCSS() {
     if (document.getElementById("rxcCss")) return;
@@ -186,6 +227,50 @@
       if (!rows.length) return null;
       var q = cleanBrand;
       var lineDrug = normalizeBrand(line.drug || "");
+
+      function isCompositionMatch(candComp, drugStr) {
+        if (!candComp || !drugStr) return true;
+        var core = CORE();
+        if (core && core.compositionKey) {
+          var ckCand = core.compositionKey(candComp);
+          var ckLine = core.compositionKey(drugStr);
+          if (ckCand && ckLine) {
+            if (ckCand === ckLine) return true;
+            var partsCand = ckCand.split("+").filter(Boolean);
+            var partsLine = ckLine.split("+").filter(Boolean);
+            if (partsCand.length === partsLine.length && partsCand.every(function (p) { return partsLine.indexOf(p) >= 0; })) return true;
+            return false;
+          }
+        }
+        var c = normalizeBrand(candComp);
+        var l = normalizeBrand(drugStr);
+        return c === l || c.indexOf(l) >= 0 || l.indexOf(c) >= 0;
+      }
+
+      if (lineDrug) {
+        var compMatching = rows.filter(function (r) {
+          return !r.composition || isCompositionMatch(r.composition, line.drug);
+        });
+        if (compMatching.length) {
+          rows = compMatching;
+        } else {
+          return null;
+        }
+      }
+
+      var brandMatches = function (r) {
+        var b = normalizeBrand(r.brand);
+        var stem = cleanBrand.replace(/\b(tablet|tab|cap|capsule|syrup|suspension|drops|\d+\s*(?:mg|ml|mcg|g)?)\b/gi, "").trim();
+        var bStem = b.replace(/\b(tablet|tab|cap|capsule|syrup|suspension|drops|\d+\s*(?:mg|ml|mcg|g)?)\b/gi, "").trim();
+        if (b === q || b.indexOf(q) === 0 || q.indexOf(b) === 0) return true;
+        if (stem && stem.length >= 3 && (b.indexOf(stem) === 0 || bStem.indexOf(stem) === 0 || stem.indexOf(bStem) === 0)) return true;
+        return false;
+      };
+
+      var brandMatchedRows = rows.filter(brandMatches);
+      if (!brandMatchedRows.length) return null;
+      rows = brandMatchedRows;
+
       rows = rows.filter(function (r) { return r && r.brand && !r.discontinued; })
         .concat(rows.filter(function (r) { return r && r.brand && r.discontinued; }));
 
@@ -211,11 +296,14 @@
         var form = normalizeBrand(r.form || "");
         var isLiquid = /syrup|suspension|liquid|solution|drops/.test(form);
         var isInjection = /injection|infusion|vial|ampoule/.test(form);
-        var lineRequestsLiquid = /syrup|suspension|liquid|solution|drops|ml\b/i.test((line.drug || "") + " " + (line.dose || ""));
-        var lineRequestsInjection = /injection|infusion|iv\b|im\b/i.test((line.drug || "") + " " + (line.dose || ""));
+        var lineRequestsLiquid = /syrup|suspension|liquid|solution|drops|ml\b/i.test((line.brand || "") + " " + (line.drug || "") + " " + (line.dose || ""));
+        var lineRequestsInjection = /injection|infusion|iv\b|im\b/i.test((line.brand || "") + " " + (line.drug || "") + " " + (line.dose || ""));
 
         if (!lineRequestsLiquid && isLiquid) s += 4;
+        if (lineRequestsLiquid && isLiquid) s -= 2;
+        if (lineRequestsLiquid && (form === "tablet" || form === "capsule")) s += 4;
         if (!lineRequestsInjection && isInjection) s += 5;
+        if (lineRequestsInjection && isInjection) s -= 2;
         if (!lineRequestsLiquid && !lineRequestsInjection && (form === "tablet" || form === "capsule")) s -= 1;
 
         // Pediatric penalization if line does not mention pediatric
@@ -238,24 +326,48 @@
    * cheapest arrive first even if the result is capped; the core re-ranks regardless. */
   function candidatesFor(comp) {
     if (!comp) return Promise.resolve([]);
-    return MEDAPI.composition(comp, "price_asc", "all", 300, 0)
-      .then(function (c) {
-        var list = (c && c.brands) || [];
-        var compName = (c && c.composition) || comp;
-        return list.map(function (b) {
-          return {
-            id: b.id,
-            brand: b.brand,
-            manufacturer: b.manufacturer,
-            mrp: b.mrp,
-            form: b.form,
-            pack: b.pack || b.form,
-            composition: b.composition || compName,
-            discontinued: b.discontinued
-          };
-        });
-      })
-      .catch(function () { return []; });
+    function fetchComp(name) {
+      return MEDAPI.composition(name, "price_asc", "all", 300, 0);
+    }
+    return fetchComp(comp).then(function (c) {
+      var list = (c && c.brands) || [];
+      if (!list.length && comp.indexOf("+") > -1) {
+        var alt = comp.split(/\s*\+\s*/).reverse().join(" + ");
+        if (alt !== comp) return fetchComp(alt);
+      }
+      return c;
+    }).then(function (c) {
+      var list = (c && c.brands) || [];
+      if (!list.length && /\([^)]*\)/.test(comp)) {
+        var bare = comp.replace(/\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+        if (bare && bare !== comp) {
+          return fetchComp(bare).then(function (c2) {
+            var l2 = (c2 && c2.brands) || [];
+            if (!l2.length && bare.indexOf("+") > -1) {
+              var alt2 = bare.split(/\s*\+\s*/).reverse().join(" + ");
+              if (alt2 !== bare) return fetchComp(alt2);
+            }
+            return c2;
+          });
+        }
+      }
+      return c;
+    }).then(function (c) {
+      var list = (c && c.brands) || [];
+      var compName = (c && c.composition) || comp;
+      return list.map(function (b) {
+        return {
+          id: b.id,
+          brand: b.brand,
+          manufacturer: b.manufacturer,
+          mrp: b.mrp,
+          form: b.form,
+          pack: b.pack || b.form,
+          composition: b.composition || compName,
+          discontinued: b.discontinued
+        };
+      });
+    }).catch(function () { return []; });
   }
 
   /* Resolve a single prescription line (drug, brand, dose, freq, duration) into its 4-way choices. */
@@ -300,6 +412,37 @@
 
     return resolvePrescribed(line).then(function (rec) {
       if (!rec) {
+        if (drug) {
+          return candidatesFor(drug).then(function (cands) {
+            if (!cands || !cands.length) {
+              return {
+                prescribed: { category: "prescribed", label: "Original Choice", brand: brand, manufacturer: "", composition: drug || "", courseCost: null, mrp: null },
+                generic: null, balanced: null, premium: null, blocked: false, reason: "not_in_database"
+              };
+            }
+            var combo = (brand + " " + drug + " " + rxLine.dose).toLowerCase();
+            var form = "tablet";
+            if (/syrup|suspension|liquid|solution|elixir|cough/i.test(combo)) form = "syrup";
+            else if (/drop/i.test(combo)) form = "drops";
+            else if (/injection|infusion|vial|ampoule/i.test(combo)) form = "injection";
+            else if (/cream|ointment|gel|lotion/i.test(combo)) form = "topical";
+            else if (/inhaler|rotacap|respules|puff/i.test(combo)) form = "inhaler";
+            else if (/capsule|cap\b/i.test(combo)) form = "capsule";
+
+            var rx = {
+              brand: brand,
+              composition: drug,
+              form: form,
+              pack: form,
+              mrp: null,
+              manufacturer: "Prescribed Brand",
+              dose: rxLine.dose,
+              freq: rxLine.freq,
+              duration: rxLine.duration
+            };
+            return CORE().choose(rx, cands);
+          });
+        }
         return {
           prescribed: { category: "prescribed", label: "Original Choice", brand: brand, manufacturer: "", composition: drug || "", courseCost: null, mrp: null },
           generic: null, balanced: null, premium: null, blocked: false, reason: "not_in_database"
@@ -492,7 +635,10 @@
   }
 
   /* The ONLY mutation this module performs: the doctor tapped SELECT (or KEEP), so write that
-   * product's brand into the line's brand field. Nothing else on the line is touched. */
+   * product's brand into the line's brand field. Nothing else on the line is touched. The host's
+   * onSelect callback applies the brand to its own line and re-runs safety with the new product;
+   * the audit record is written here so every modal decision is trailed even if the host's
+   * callback is a no-op. */
   function pick(st, token) {
     var parts = String(token).split(":"), i = +parts[0], key = parts[1];
     var r = st.results[i]; if (!r) return;
@@ -501,10 +647,7 @@
     try {
       if (typeof st.onSelect === "function") st.onSelect(i, o, st.lines[i], r, st);
     } catch (e) {}
-    logAudit(CORE().auditEntry({
-      prescriptionId: st.prescriptionId, original: r.prescribed, alternative: o, category: key,
-      reasonShown: o.label, doctorApproved: true, patientSelected: false
-    }));
+    recordSelection(r, key, { prescriptionId: st.prescriptionId });
     render(st);
     try { if (window.toast) window.toast(key === "prescribed" ? ("Kept " + o.brand) : ("Brand set to " + o.brand)); } catch (e) {}
   }
@@ -564,11 +707,13 @@
     close: close,
     audit: audit,
     clearAudit: clearAudit,
+    recordSelection: recordSelection,
+    applyBrandOnly: applyBrandOnly,
     resolvePrescribed: resolvePrescribed,
     resolveLine: resolveLine,
     renderInlineTray: renderInlineTray,
     normalizeBrand: normalizeBrand,
-    _version: 2
+    _version: 3
   };
   window.SMD_RXCHOICE_UI = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;

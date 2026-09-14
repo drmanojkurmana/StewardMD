@@ -4439,11 +4439,11 @@
         // ChatGPT-style model chip: shows what will answer, tap to switch (Cloud / KB only / any
         // downloaded on-device model). Same state as Settings, just a faster surface for it.
         ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.chipHTML) ? SMD_MAIK_ENGINE.chipHTML() : "") +
-        '<span style="flex:1"></span>' +
+        '<div class="maik-nav-actions"><span class="maik-nav-caption">Your clinical assistant</span>' +
         '<button class="maik-hd-btn" id="maikExport" type="button" title="Export conversation" aria-label="Export conversation">' + MK.export + '</button>' +
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
-      '</div></div>' +
+      '</div></div></div>' +
       // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
       // own weights, with no StewardMD sources, is simply untrue.
       '<div class="maik-disc">' + MK.shield + '<span>' +
@@ -4475,7 +4475,7 @@
           // Cloud/KB answers have no image path, so showing it there would be a dead button.
           '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
           '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
-          '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask a clinical question…"></textarea>' +
+          '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
       '</div>';
@@ -6062,10 +6062,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                  * close() first, which is why those worked and these did not. Same trap as SURGX. */
                 tools.slice(0, 4).forEach(function (t) {
                   var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label;
-                  b.addEventListener("click", function () {
-                    try { close(); } catch (e) {}
-                    setTimeout(function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }, 180);
-                  });
+                  // Persist the route with the chip: per-node listeners disappear when saved
+                  // conversation HTML is restored. The body delegate also closes MaiK first.
+                  b.setAttribute("data-maik-copilot", t.kind);
+                  if (t.arg != null) b.setAttribute("data-maik-arg", String(t.arg));
                   tb.appendChild(b);
                 });
                 host.appendChild(tb);
@@ -6355,7 +6355,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; }, docCue: maikDocCue, docClassify: maikDocClassify }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
-    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
+    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask MaiK…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireChip) SMD_MAIK_ENGINE.wireChip(sheet); } catch (e) {}
@@ -6634,6 +6634,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
+      var launch = ev.target && ev.target.closest ? ev.target.closest(".maik-tool:not([data-maik-tool])") : null;
+      if (launch) {
+        ev.preventDefault();
+        var kind = launch.getAttribute("data-maik-copilot"), arg = launch.getAttribute("data-maik-arg");
+        var registry = window.MaiKCopilot && window.MaiKCopilot.TOOLS;
+        // Older saved answers predate route attributes. Match only exact registered calculator
+        // titles (never evaluate saved markup or guess a clinical calculator from a partial label).
+        if (!kind && window.MEDCALC && MEDCALC.list) {
+          var label = launch.textContent.trim();
+          var matches = MEDCALC.list().filter(function (c) { return c.title === label; });
+          if (matches.length === 1) { kind = "calculator"; arg = matches[0].id; }
+        }
+        var target = registry && Object.prototype.hasOwnProperty.call(registry, kind) && registry[kind];
+        if (!target || !target.probe || !target.probe() || (kind === "calculator" && (!window.MEDCALC || !MEDCALC.get(arg)))) {
+          toast("This tool is unavailable. Try opening it from Clinical Tools."); return;
+        }
+        close();
+        setTimeout(function () { try { target.open(arg); } catch (e) { toast("Could not open this tool. Please try again."); } }, 180);
+        return;
+      }
       // Phase 2 — citation chip → reveal the numbered sources footer in the same answer bubble.
       var cite = ev.target && ev.target.closest ? ev.target.closest(".maik-cite") : null;
       if (cite) { var bub = cite.closest(".maik-b.ai") || cite.closest(".maik-b"); var det = bub && bub.querySelector(".maik-src"); if (det) { det.open = true; try { det.scrollIntoView({ block: "nearest" }); } catch (e) {} } return; }
@@ -6735,7 +6755,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function setResearchMode(on) {
       _researchMode = !!on;
       if (researchBtn) { researchBtn.classList.toggle("on", _researchMode); researchBtn.setAttribute("aria-pressed", _researchMode ? "true" : "false"); }
-      try { if (qEl) qEl.placeholder = _researchMode ? "Review the evidence on…" : ((body && body.querySelector(".maik-b")) ? "Ask a follow-up…" : "Ask a clinical question…"); } catch (e) {}
+      try { if (qEl) qEl.placeholder = _researchMode ? "Review the evidence on…" : ((body && body.querySelector(".maik-b")) ? "Ask a follow-up…" : "Ask MaiK…"); } catch (e) {}
     }
     if (researchBtn) researchBtn.addEventListener("click", function () {
       setResearchMode(!_researchMode);

@@ -118,7 +118,8 @@ async function open(request, env, ctx, need) {
 function failure(e) {
   if (e instanceof NursingError) return { ok: false, status: e.status, error: e.code, detail: e.message };
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code) };
-  if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", detail: "this changed since you opened it; reload it" };
+  if (e instanceof VersionConflictError && e.code === "IDEMPOTENCY_KEY_REUSED") return { ok: false, status: 409, error: "idempotency_conflict", detail: "this request key already recorded something else" };
+  if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", detail: "this changed since you opened it; reload it", currentVersion: e.detail && e.detail.currentVersion != null ? e.detail.currentVersion : null };
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message) };
 }
 const baseOf = (mig) => ({ mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null });
@@ -130,7 +131,7 @@ async function encounterOf(svc, encounterId, patientId) {
   return enc;
 }
 function stale(cur, expected) {
-  if (expected != null && expected !== "" && Number(expected) !== (cur ? cur.version : 0)) throw new VersionConflictError("stale");
+  if (expected != null && expected !== "" && Number(expected) !== (cur ? cur.version : 0)) throw new VersionConflictError("stale", { expectedVersion: Number(expected), currentVersion: cur ? cur.version : 0 });
 }
 
 /**
@@ -212,6 +213,13 @@ async function actOnNursingTask(request, env, ctx) {
   try {
     const cur = await svc.get(TASK, str(i.taskId));
     if (!cur) throw new NursingError("task_not_found", "this task was not found", 404);
+    // A retried request (an offline device replaying after a lost response) gets its original
+    // outcome, not a version conflict against the version its own first attempt produced.
+    const prior = ctx.idempotencyKey ? await svc.replayFor(ctx.idempotencyKey, TASK, cur.patientId || null, cur.id) : null;
+    if (prior && prior.record) {
+      if (prior.record.id !== cur.id) throw Object.assign(new VersionConflictError("idempotency key reused for another task"), { code: "IDEMPOTENCY_KEY_REUSED" });
+      return { ...base, ok: true, written: 0, replayed: true, task: prior.record };
+    }
     stale(cur, i.expectedVersion);
     const next = applyTaskAction(cur, { action: i.action, reason: i.reason, actorId: resolved.actor.id, at: new Date().toISOString() });
     delete next.version;

@@ -104,10 +104,22 @@ function cohort() {
  * same record. Without the parameter the file behaves exactly as before, cohort and all.
  */
 async function connectRecord() {
-  const params = recordParams();
-  if (!params) return null;
   // Opened from wardsynq.com as the hospital's landing screen: the rest of WardSynQ is in the rail.
-  if (new URLSearchParams(location.search).get("site") === "1") { const nav = $("sitemap"); if (nav) nav.hidden = false; }
+  // Unhidden ALWAYS, even in demo mode or without params, so the rail never stays hidden.
+  if (new URLSearchParams(location.search).get("site") === "1") {
+    const nav = $("sitemap");
+    if (nav) nav.hidden = false;
+  }
+  const params = recordParams();
+  // Opened for a real hospital (site=1, not demo) with no record connected: the demonstration cohort
+  // here would be three fake patients on a real ward, so it is a stop, not a fallback.
+  const q = new URLSearchParams(location.search);
+  if (!params && q.get("site") === "1" && q.get("demo") !== "1") {
+    throw new Error("This hospital has no patient record connected yet, so no patients can be shown. Ask the administrator to connect it");
+  }
+  if (!params) return null;
+  // A record that fails to open stays a failure: demo hospitals never reach here (?demo=1 yields no
+  // params), so falling back to the demonstration cohort would show fake patients to a real ward.
   const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
   CLINICIAN = record.actor;
   S.bus = record.bus;
@@ -227,7 +239,11 @@ async function boot() {
   } catch (e) {
     const pack = $("pack");
     pack.className = "pack bad";
-    pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+    if (String((e && e.message) || "").includes("401")) {
+      pack.innerHTML = `${esc(e.message)}. Please <a href="/#/login" style="color:inherit;text-decoration:underline;font-weight:600">sign in to WardSynQ</a> to access this record.`;
+    } else {
+      pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+    }
     $("drug").disabled = true;
     $("roster").innerHTML = '<p class="quiet">Unavailable.</p>';
   }

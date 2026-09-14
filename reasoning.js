@@ -3838,7 +3838,87 @@
   // On-device structuring: parse common labelled values from OCR text so AI Vision fills
   // fields even when the cloud is unavailable (offline / quota / endpoint not deployed).
   // Conservative — only clearly-matched values; the clinician verifies + taps the rest.
-  function parseFieldsOnDevice(text, kind) {
+  // Box-aware monitor read (2026-09-14, Philips MP40 owner test). Apple Vision returns one box per
+  // text line, NORMALIZED top-left {x,y,w,h}. On a monitor the VALUE is the tallest text near its
+  // label and the alarm limits beside it are small; flattened reading order cannot tell "HR 120 50
+  // 105" apart, box height can. Icons glue onto values ("*105", "2° 100"): keep the in-range number.
+  function parseMonitorBoxes(boxes) {
+    var out = {}, claimed = {}, B = [], valueH = 0, hrBox = null;
+    for (var i = 0; i < boxes.length; i++) {
+      var b = boxes[i]; if (!b || typeof b.text !== "string") continue;
+      var x = +b.x || 0, y = +b.y || 0, w = +b.w || 0, h = +b.h || 0;
+      B.push({ t: b.text, x: x, y: y, w: w, h: h, cx: x + w / 2, cy: y + h / 2, i: i });
+    }
+    // "20: 38" is the clock, not a value; "12.5 mm/s" is the sweep speed.
+    function nums(t) { return (String(t).replace(/\d{1,2}\s*:\s*\d{2}/g, " ").replace(/\d+(?:\.\d+)?\s*mm\/s/gi, " ").match(/\d{1,3}(?:\.\d)?/g) || []).map(parseFloat); }
+    // An alarm banner ("** RR HIGH", "*** APNEA") names a parameter without being its label.
+    function isBanner(t) { return /^\W*\*{1,3}\s*\w/.test(t) || /\b(?:HIGH|LOW|ALARM)\b/i.test(t); }
+    function pick(t, lo, hi, dec) { var n = nums(t), v = null; for (var k = 0; k < n.length; k++) if (n[k] >= lo && n[k] <= hi) v = n[k]; return v == null ? null : (dec ? v : Math.round(v)); }
+    function claim(b) { claimed[b.i] = 1; if (b.h > valueH) valueH = b.h; }
+    // 1) Blood pressure: the tallest "SSS/DD" box. MAP is the "(MM)" in the same box or just below it.
+    var bp = null;
+    B.forEach(function (b) { var m = b.t.match(/(\d{2,3})\s*\/\s*(\d{2,3})/); if (m && (!bp || b.h > bp.b.h)) bp = { b: b, s: +m[1], d: +m[2] }; });
+    if (bp && bp.s > bp.d && bp.s >= 50 && bp.s <= 260 && bp.d >= 20 && bp.d <= 160) {
+      out.sbp = bp.s; out.dbp = bp.d; claim(bp.b);
+      var same = bp.b.t.match(/\(\s*(\d{2,3})\s*\)/), mapBox = same ? { v: +same[1] } : null;
+      if (!mapBox) B.forEach(function (b) {
+        var m = b.t.match(/^\W*\(?\s*(\d{2,3})\s*\)\W*$/); if (!m) return;
+        var below = b.y >= bp.b.y && b.y <= bp.b.y + bp.b.h * 2.5, inCol = b.cx >= bp.b.x - 0.02 && b.cx <= bp.b.x + bp.b.w + 0.02;
+        if (below && inCol && (!mapBox || b.h > mapBox.b.h)) mapBox = { v: +m[1], b: b };
+      });
+      if (mapBox && mapBox.v > bp.d && mapBox.v < bp.s) { out.map = mapBox.v; if (mapBox.b) claim(mapBox.b); }
+    }
+    // 2) Labelled numerics: value = the tallest in-range numeric box just below / right of the label.
+    var LAB = [
+      ["hr",    /^\W*(?:HR|Heart\s*Rate)\W*/i,        25, 240],
+      ["spo2",  /Sp\s*[O0o]\s*[2zZ₂]/i,               50, 100],
+      ["pulse", /^\W*(?:Pulse|PR)\W*/i,               25, 240],
+      ["rr",    /^\W*(?:RR|Resp\w*|awRR)\W*/i,          4,  70],
+      ["temp",  /^\W*(?:Temp\w*|T1|Tcore)\W*/i,       34, 42.5, true],
+      ["cvp",   /^\W*CVP\W*/i,                         0,  30],
+      ["etco2", /^\W*(?:EtCO2|etCO₂|ETCO2)\W*/i,       5,  80],
+      ["map",   /^\W*(?:MAP|ABPm|Mean)\W*/i,          30, 180]
+    ];
+    LAB.forEach(function (L) {
+      var key = L[0], lo = L[2], hi = L[3], dec = L[4];
+      if (out[key] != null) return;
+      var lab = null;
+      B.forEach(function (b) { if (!claimed[b.i] && !isBanner(b.t) && L[1].test(b.t) && (!lab || b.y < lab.y)) lab = b; });
+      if (!lab) return;
+      var best = null;
+      B.forEach(function (b) {
+        if (claimed[b.i] || b === lab || b.h < lab.h * 0.8) return;   // a value is never smaller than its label
+        var dx = b.x - lab.x, dy = b.y - lab.y;
+        if (dx < -0.04 || dx > 0.30 || dy < -lab.h || dy > lab.h * 5 + 0.01) return;
+        var v = pick(b.t, lo, hi, dec); if (v == null) return;
+        if (!best || b.h > best.b.h + 1e-6 || (Math.abs(b.h - best.b.h) <= 1e-6 && dy < best.dy)) best = { b: b, v: v, dy: dy };
+      });
+      if (best) { out[key] = best.v; claim(best.b); if (key === "hr") hrBox = best.b; return; }
+      // label and value in ONE box ("PVC 0", "T 36.5"): only when it holds exactly one number
+      var own = nums(lab.t); if (own.length === 1) { var v1 = pick(lab.t, lo, hi, dec); if (v1 != null) { out[key] = v1; claim(lab); } }
+    });
+    // 3) The RR label is the one Vision drops most (small yellow text beside a big value). Below
+    // the pressure, in the same numeric column, one unclaimed integer of value-size in RR range and
+    // nothing else there → RR. ponytail: layout rule (HR/SpO2/BP/RR column), not colour; a monitor
+    // that stacks EtCO2 under BP unlabelled would need the colour channel to disambiguate.
+    // A bare value box: no word in it, at most two numbers (an icon or limit fragment fuses onto the
+    // value: "*105", "2° 100", "$22"), and the last number in range.
+    function valueLike(t, lo, hi) { var n = nums(t); return !/[A-Za-z]{2,}/.test(t) && n.length >= 1 && n.length <= 2 && n[n.length - 1] >= lo && n[n.length - 1] <= hi; }
+    function columnValue(lo, hi, yMin, yMax) {
+      var cands = B.filter(function (b) {
+        return !claimed[b.i] && b.h >= valueH * 0.6 && valueLike(b.t, lo, hi) && b.y > yMin && b.y < yMax && Math.abs(b.cx - bp.b.cx) < 0.12;
+      });
+      return cands.length === 1 ? cands[0] : null;
+    }
+    if (bp && valueH) {
+      if (out.rr == null) { var rb = columnValue(4, 70, bp.b.y, 2); if (rb) { out.rr = pick(rb.t, 4, 70); claim(rb); } }
+      // Same rule for SpO2: the small cyan label is dropped at some scales (2026-09-14: present at
+      // 900px, absent at 1800/2700px); its value sits between the HR value and the pressure.
+      if (out.spo2 == null && hrBox) { var sb = columnValue(50, 100, hrBox.y, bp.b.y); if (sb) { out.spo2 = pick(sb.t, 50, 100); claim(sb); } }
+    }
+    return out;
+  }
+  function parseFieldsOnDevice(text, kind, boxes) {
     var t = " " + String(text == null ? "" : text).replace(/[\n\r]+/g, " ") + " ";
     var out = {};
     function grab(re) { var m = t.match(re); return m ? parseFloat(m[1]) : null; }
@@ -3859,15 +3939,17 @@
       return null;
     }
     if (kind === "monitor" || kind === "vitals") {
+      // Boxes first (layout-aware); the text scan below only fills what the boxes left open.
+      if (boxes && boxes.length) { var pb = parseMonitorBoxes(boxes); for (var bk in pb) if (pb.hasOwnProperty(bk)) set(bk, pb[bk]); }
       var bp = t.match(/\b(\d{2,3})\s*\/\s*(\d{2,3})\b/);
-      if (bp) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
-      set("map", near("MAP|MAD|mean", 30, 180));
-      set("hr", near("HR|PR|pulse|heart\\s*rate", 25, 240));
-      set("spo2", near("SpO2|SpO₂|SPO2|SaO2|sat", 50, 100));
-      set("rr", near("RR|RESP|resp\\w*", 4, 70));
-      set("temp", near("TEMP|temp\\w*|T1|T", 34, 42.5, true));
-      set("cvp", near("CVP", 0, 30));
-      set("etco2", near("EtCO2|ETCO2", 5, 80));
+      if (bp && out.sbp == null) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
+      if (out.map == null) set("map", near("MAP|MAD|mean", 30, 180));
+      if (out.hr == null) set("hr", near("HR|PR|pulse|heart\\s*rate", 25, 240));
+      if (out.spo2 == null) set("spo2", near("SpO2|SpO₂|SPO2|SaO2|sat", 50, 100));
+      if (out.rr == null) set("rr", near("RR|RESP|resp\\w*", 4, 70));
+      if (out.temp == null) set("temp", near("TEMP|temp\\w*|T1|T", 34, 42.5, true));
+      if (out.cvp == null) set("cvp", near("CVP", 0, 30));
+      if (out.etco2 == null) set("etco2", near("EtCO2|ETCO2", 5, 80));
     } else if (kind === "abg") {
       set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,3})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2,3})\b/));   // analyzers report 3 decimals (7.250)
       set("paco2", grab(/\b(?:PaCO2|pCO2|PCO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
@@ -3928,7 +4010,7 @@
       // + ABG together, or multi-page PDF text) and return SECTIONS. Overlapping keys (hco3,
       // lactate, fio2, be, rr) are only kept in the ABG/ventilator section when that panel is
       // actually present — otherwise they belong to labs/vitals, so we don't invent a bogus section.
-      var _v = parseFieldsOnDevice(text, "vitals");
+      var _v = parseFieldsOnDevice(text, "vitals", boxes);
       var _g = parseFieldsOnDevice(text, "abg");
       var _l = parseFieldsOnDevice(text, "labs");
       var _vt = parseFieldsOnDevice(text, "ventilator");
@@ -4420,13 +4502,17 @@
     // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.
     readImageLocal: function (dataUrl, kind) {
       if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.resolve({ error: "ocr-unavailable" });
-      return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+      // Vision's language correction is for words; on numeric screens it rewrites digits (0→O,
+      // 1→I, "PHILIPS"→"PHILIP!"), so it is off for every numeric kind and on for case sheets.
+      var numeric = /^(?:monitor|vitals|abg|labs|mapped|ventilator|all)$/.test(String(kind));
+      return window.SMD_NATIVE.ocr(dataUrl, { languageCorrection: !numeric }).then(function (o) {
         var lines = (o && o.lines) || [];
+        var boxes = (o && o.boxes) || [];
         var text = (o && o.text) || lines.join("\n");
-        var fields = parseFieldsOnDevice(text, kind) || {};
+        var fields = parseFieldsOnDevice(text, kind, boxes) || {};
         return Object.keys(fields).length
-          ? { mode: "fields", fields: fields, lines: lines, source: "on-device" }
-          : { mode: "lines", lines: lines, source: "on-device" };
+          ? { mode: "fields", fields: fields, lines: lines, boxes: boxes, source: "on-device" }
+          : { mode: "lines", lines: lines, boxes: boxes, source: "on-device" };
       }).catch(function () { return { error: "ocr-failed" }; });
     },
     // On-device-first AI Vision (NATIVE only) — LEGACY combined path (on-device OCR + optional

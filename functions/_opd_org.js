@@ -6,7 +6,9 @@
  * scope live here as pure predicates so they are unit-tested and enforced identically server-side
  * (never trust the frontend). No EMR/GHIS specifics — org.mode + connectorId is the only EMR coupling.
  */
-import { isRole, can } from "./_queue_roles.js";
+import { isRole, can, capsFor, CAPS as ROLE_CAP_NAMES } from "./_queue_roles.js";
+import { orgProfile, memberProfile } from "./_region_in.js";
+const STAFF_ADMIN_CAP = ROLE_CAP_NAMES.STAFF_ADMIN;
 
 export const OPD_ORG_VERSION = "1.0";
 
@@ -48,7 +50,10 @@ export function org(o = {}) {
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
            mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
-           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security), createdAt: Number(o.createdAt) || 0 };
+           wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security),
+           /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,
+            * which returns {} for any other region, so the core model never names a national field. */
+           regionProfile: orgProfile(o.regionProfile, REGION), createdAt: Number(o.createdAt) || 0 };
 }
 
 /* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs
@@ -128,7 +133,9 @@ function wardsynqConfig(w) {
    * endpoint, rules, and a SEALED credential reference, never a plaintext credential). */
   /* antibiotics joined for P1.14: the drug names or codes this hospital counts as antibiotics for days
    * of therapy. Absent means "antibiotic list not configured", never a count of zero. */
-  for (const k of ["edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers"]) {
+  /* specialties joined for P2.11: the hospital's specialty registry (pathways.js resolveSpecialty). Absent means
+   * the chart's Specialty panel says none is configured. */
+  for (const k of ["edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -237,11 +244,34 @@ export function membership(o = {}) {
      * why the actor records WHICH of the two vouched (wardsynq-actors.js credentialSource) and
      * every signed record carries that word. Empty means this member cannot sign, as before. */
     regNo: s(o.regNo),
+    /* Country-specific practitioner ids (India: HPR id). Shape only here; the member route refuses
+     * one for a hospital outside India (functions/_region_in.js validateMemberProfile). */
+    regionProfile: memberProfile(o.regionProfile, "IN"),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
 }
 
 // ---- TENANT ISOLATION (pure predicates — the server enforces these on every org-scoped call) ----
+/* PURE. Why a staff-admin change must be refused, or null. staff.admin lets a role such as "hr" manage
+ * people, but never people more powerful than itself, never grant a role it does not itself hold,
+ * never change its own role, and never touch the hospital owner. Without this an hr account could
+ * promote itself to admin, or disable and re-PIN the owner's own staff sign-in.
+ * az: authorizeOrg's answer for the caller. actorIds: every identity the caller signs in as. */
+export function memberChangeRefusal(orgDoc, az, actorIds, targetIdentity, targetRole, newRole) {
+  if (az && az.owner) return null;
+  const mine = capsFor(az && az.role);
+  const covers = (role) => capsFor(role).every((c) => mine.indexOf(c) > -1);
+  const target = String(targetIdentity || "");
+  if (orgDoc && orgDoc.ownerUid && target === String(orgDoc.ownerUid)) return "owner_protected";
+  const self = (actorIds || []).some((id) => id && String(id).toLowerCase() === target.toLowerCase());
+  if (self && newRole && String(newRole) !== String(targetRole || "")) return "own_role";
+  // Only roles that can themselves manage staff are guarded: hr disabling or hiring a doctor is its job,
+  // but it may not touch, or create, a staff manager holding permissions hr lacks.
+  const manager = (role) => capsFor(role).indexOf(STAFF_ADMIN_CAP) > -1;
+  if (targetRole && manager(targetRole) && !covers(targetRole)) return "target_outranks_you";
+  if (newRole && manager(newRole) && !covers(newRole)) return "role_above_yours";
+  return null;
+}
 export function isOwnerOfOrg(orgDoc, actorId) { return !!(orgDoc && actorId && orgDoc.ownerUid && String(orgDoc.ownerUid) === String(actorId)); }
 // A membership may act in an org only if it is active AND belongs to that exact org.
 export function canAccessOrg(m, orgId) { return !!(m && m.active && m.orgId && String(m.orgId) === String(orgId)); }

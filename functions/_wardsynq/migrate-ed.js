@@ -121,7 +121,7 @@ async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
 
   let start = 1;
   try {
-    const probe = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, sequence: 1 });
+    const probe = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, isTrauma: arrival.unknown.isTrauma, sequence: 1 });
     // The token+day prefix, shared by every unidentified arrival of this sex today - so the count
     // starts past whoever else already arrived, rather than always guessing 1 and retrying every time.
     const prefix = probe.mrn.replace(/-01$/, "-");
@@ -131,7 +131,7 @@ async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
   for (let attempt = 0; attempt < MAX_SEQUENCE_ATTEMPTS; attempt++) {
     const sequence = start + attempt;
     let provisional;
-    try { provisional = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, sequence }); }
+    try { provisional = makeProvisionalIdentity({ sex: arrival.unknown.sex, name: arrival.unknown.name, arrivedAt, isTrauma: arrival.unknown.isTrauma, sequence }); }
     catch (e) { return { ...base, ok: false, status: 422, error: "invalid_arrival", detail: str(e && e.message), written: 0 }; }
     const patientId = patientIdForMrn(provisional.mrn);
     const newPatient = { ...provisional, id: patientId };
