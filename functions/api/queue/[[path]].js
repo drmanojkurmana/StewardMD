@@ -146,6 +146,7 @@ import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
 import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
 import { prepareOverdueWorkQueue } from "../../_wardsynq/twin-agent.js";
 import { qualityReport, qualitySafetyReport } from "../../_wardsynq/quality.js";
+import { DEFINITIONS as TREND_DEFINITIONS, trendCatalogue, trendSeries, trendEvents } from "../../_wardsynq/trends.js";
 import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
@@ -1069,6 +1070,10 @@ export async function onRequest(context) {
         "operational-health": CAPS.STAFF_ADMIN,
         "twin-simulate": CAPS.EMR_VIEW, "twin-copilot": CAPS.EMR_VIEW, "twin-review": CAPS.EMR_VIEW,
         "twin-agent-queue": CAPS.EMR_VIEW,
+        /* P2.10: trends. The series are the command center's numbers over time, so they sit at the twin's
+         * own emr.view; a finance series also needs billing.view, checked in the handler. The event list
+         * names records, so it is gated as record-detail is, plus the ward's department scope. */
+        trends: CAPS.EMR_VIEW, "trend-events": CAPS.EMR_VIEW,
         // TASK 4.12: hospital reports. Patient-flow/clinical-operations ride the same emr.view as the
         // live queues they wrap. Billing/claims/pharmacy/HIM report at the same capability their own
         // live routes already require - a report is not a way to read what the underlying route
@@ -2907,6 +2912,47 @@ export async function onRequest(context) {
           canViewQueue: !!queueAz.ok, listMembers: ORG.listMembers,
           resources: (wsqCfg && wsqCfg.resources) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* P2.10: trends and their drill-down (functions/_wardsynq/trends.js). */
+      if ((sub === "trends" || sub === "trend-events") && method === "GET") {
+        const q = (k) => url.searchParams.get(k) || "";
+        const metrics = trendCatalogue();
+        const def = TREND_DEFINITIONS[q("metric")];
+        if (def && def.finance) {
+          const fin = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.BILLING_VIEW);
+          if (!fin.ok) return json({ ...azRefusal(fin), detail: "billing_view_required", metrics }, 403, request);
+        }
+        /* The ward registry gives beds per ward and each ward's department. It is the org store, not the
+         * record, so its failure is carried as a reason rather than failing a series that does not need it. */
+        let wards = [], registryError = null;
+        const bedsByWard = {}, wardDepartments = {};
+        try {
+          const [ws, bs, ds] = await Promise.all([ORG.listWards(env, wOrgId), ORG.listBeds(env, wOrgId), ORG.listDepartments(env, wOrgId)]);
+          wards = ws;
+          const wardName = new Map(ws.map((w) => [w.id, w.name])), deptName = new Map(ds.map((d) => [d.id, d.name]));
+          for (const b of bs) if (b.active && wardName.has(b.wardId)) bedsByWard[wardName.get(b.wardId)] = (bedsByWard[wardName.get(b.wardId)] || 0) + 1;
+          for (const w of ws) if (w.departmentId) wardDepartments[w.name] = deptName.get(w.departmentId) || w.departmentId;
+        } catch (e) { registryError = "read failed"; }
+        // No registered beds: the same wardsynq.beds quality.js measures utilisation against.
+        if (!Object.keys(bedsByWard).length && wsqCfg && wsqCfg.beds && typeof wsqCfg.beds === "object") {
+          for (const [w, list] of Object.entries(wsqCfg.beds)) if (Array.isArray(list) && list.length) bedsByWard[w] = list.length;
+        }
+        const tctx = { ...deps, metric: q("metric"), from: q("from"), to: q("to"), bucket: q("bucket"), groupBy: q("groupBy"),
+          utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
+          antibiotics: (wsqCfg && wsqCfg.antibiotics) || null, bedsByWard, wardDepartments, registryError };
+        if (sub === "trend-events") {
+          /* A member limited to some departments may list the records of a ward in one of them only. A ward
+           * the registry places in no department is outside every such limit, so an unscoped member passes
+           * and a scoped one does not; an unreadable registry refuses everyone. Fail closed. */
+          if (registryError) return json({ ok: false, error: "registry_unavailable", detail: "the ward registry could not be read, so ward access cannot be checked", metrics }, 503, request);
+          const w = wards.find((x) => x.name.trim().toLowerCase() === q("ward").trim().toLowerCase());
+          const scope = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_VIEW, { departmentId: (w && w.departmentId) || "__no_department__" });
+          if (!scope.ok) return json({ ...azRefusal(scope), metrics }, 403, request);
+          const r = await trendEvents(request, env, { ...tctx, key: q("key"), ward: q("ward") });
+          return json({ ...r, metrics }, r.ok ? 200 : (r.status || 502), request);
+        }
+        const r = await trendSeries(request, env, tctx);
+        return json({ ...r, metrics }, r.ok ? 200 : (r.status || 502), request);
       }
       /* TASK 10.20: bounded point-in-time reconstruction. Gated at STAFF_ADMIN, one notch above the
        * live twin's EMR_VIEW, for the same forensic-reach reason backup.js's own export is: a caller

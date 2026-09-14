@@ -481,4 +481,4 @@ async function qualitySafetyReport(request, env, ctx) {
   };
 }
 
-export { MIN_DENOMINATOR, measure, notComputable, computeMeasures, qualityReport, computeQualitySafety, safetyCounts, qualitySafetyReport };
+export { MIN_DENOMINATOR, INPATIENT, DEATH, measure, notComputable, computeMeasures, qualityReport, computeQualitySafety, safetyCounts, qualitySafetyReport };

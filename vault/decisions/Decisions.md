@@ -5455,3 +5455,29 @@ routes `/api/queue/group/*`, Admin Center tab "Hospital group", page `#/group` (
   merged into its own `wardsynq` config, audited as `group:policy_adopted`. Nothing is inherited.
 - Not built: adding a second group admin (the field holds a list; groups are listed by creator), group
   deletion, trends over time.
+## 2026-09-14 Trends (P2.10) are computed from the record, not from a stored daily snapshot
+
+`functions/_wardsynq/trends.js`, routes `GET /api/queue/ward/trends` and `GET /api/queue/ward/trend-events`,
+screen: Digital twin -> "Trends" (`ward.js` trendsView). Tests: `test/wardsynq-trends.test.mjs`.
+- No daily snapshot was persisted anywhere (ops-tick escalates criticals and drains the outbox only; the twin
+  and quality.js say "computed, never stored"). Records are versioned and carry the times these measures need
+  (stay start/end, report release, loop acknowledgement, dispense time, invoice ledger), so each bucket is
+  computed on request. A snapshot written by ops-tick was rejected: it only exists from the day it starts, it
+  drifts from the record when a discharge time is corrected, and it would be a second source of truth.
+- Costs, stated on screen: each source type is read with the store's roster cap (1000); a type at the cap
+  marks every bucket `coverage: "partial"` and the response `truncated` with a warning. A stay is attributed to
+  the ward on its current version (not split across transfers). Occupancy uses today's bed count (registry,
+  else `wardsynq.beds`) for past buckets. Walking every record's version history per request was rejected as
+  too costly for the bounded read budget.
+- Every point: value, numerator, denominator, coverage (`full`, `partial`, `none`). Unreadable source or
+  missing configuration is `value: null` with a reason, never 0. Buckets use the hospital clock
+  (`timeZone`, else `utcOffsetMinutes`, default 330) via mar-schedule.js's zone helpers.
+- Definitions live once in `DEFINITIONS` and are returned with each series ("How this is counted").
+- Authorization: series at the twin's `emr.view`; `billed-charges` (finance) also needs `billing.view`.
+  trend-events returns record ids only, gated as record-detail (emr.view plus the governed read of each source
+  type, where an unreadable type is 403, not an empty list) and additionally by the member's department scope
+  for the ward (`authorizeOrg` target; a ward in no department fails for any scoped member; an unreadable ward
+  registry is 503). Records open through record-detail.
+- Not built: department-level event lists (the drill goes metric -> bucket -> ward -> records), per-transfer
+  ward attribution, historical bed counts, and a precomputed cache for very large hospitals (add a snapshot
+  only if the cap is routinely hit).
