@@ -35,6 +35,7 @@ import { parseSearch, applySearch, paginate, resolveIncludes, resolveRevIncludes
 import { SYSTEMS, UNCODED, UNMAPPED, INVALID, IDENTIFIER_SYSTEMS, systemUri, isUri, coverage, validateCode, validateCodeParameters } from "./terminology.js";
 import { validateResource, validationOutcome, VALIDATED_TYPES } from "./fhir-validate.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
+import { renderResource } from "./fhir-version.js";
 import { fhirId, hashedId, isHashedId, RECORD_ID_SYSTEM, provenanceId, parseProvenanceId } from "./fhir-id.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -976,7 +977,7 @@ function txDeps(env, ctx) {
  * information issue, because "this server cannot vouch for it" is not "it is wrong".
  */
 async function validateFully(resource, env, ctx) {
-  const v = validateResource(resource, { profiles: (ctx && ctx.profiles) || null });
+  const v = validateResource(resource, { profiles: (ctx && ctx.profiles) || null, version: (ctx && ctx.fhirVersion) || "4.0" });
   const deps = txDeps(env, ctx);
   const seen = new Map();
   for (const c of v.codings) {
@@ -1009,6 +1010,12 @@ async function validateOperation(request, env, ctx) {
     const r = await readResource(request, env, { ...ctx, searchParams: "" });
     if (!r.ok) return r;
     resource = r.resource;
+    /* D9: a stored resource is validated as the version it would be served in, so $validate under fhirVersion=5.0 checks the R5 rendering. */
+    if (ctx.fhirVersion && ctx.fhirVersion !== "4.0") {
+      const rendered = renderResource(resource, ctx.fhirVersion);
+      if (!rendered.resource && rendered.unsupported.length) return { ok: false, status: 406, outcome: operationOutcome("error", "not-supported", `${rendered.unsupported.join(", ")} is not rendered in FHIR ${ctx.fhirVersion}`) };
+      if (rendered.resource) resource = rendered.resource;
+    }
   }
   if (!resource || typeof resource !== "object") return { ok: false, status: 400, outcome: operationOutcome("error", "required", "send the resource as the body, or as Parameters.parameter[name=resource].resource") };
   if (str(ctx.type) && str(resource.resourceType) !== str(ctx.type)) return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", `body is ${resource.resourceType}, URL says ${ctx.type}`) };

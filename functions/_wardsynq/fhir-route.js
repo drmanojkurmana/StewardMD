@@ -14,8 +14,29 @@ import { dispatchTerminology } from "./fhir-terminology.js";
 import { patientSummary } from "./fhir-ips.js";
 import { auditEvents } from "./fhir-audit.js";
 import { subscriptions } from "./fhir-subscription.js";
+import { versionFromHeader, answerInVersion, contentTypeFor } from "./fhir-version.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+
+/**
+ * D9. The FHIR version one request speaks, for both doors: what it wants back (Accept) and, for a POST or
+ * PUT, what it sent (Content-Type). Returns { version, contentVersion } or { status, obj } (406 for an
+ * Accept this server does not serve, 415 for a body version it does not read).
+ */
+function negotiateVersion(request) {
+  const accept = versionFromHeader(request.headers.get("Accept"));
+  if (accept.error) return { status: 406, obj: operationOutcome("error", "not-supported", accept.error) };
+  let contentVersion = "4.0";
+  if (request.method === "POST" || request.method === "PUT") {
+    const c = versionFromHeader(request.headers.get("Content-Type"));
+    if (c.error) return { status: 415, obj: operationOutcome("error", "not-supported", c.error) };
+    contentVersion = c.version;
+  }
+  return { version: accept.version, contentVersion };
+}
+
+/** PURE. Whether a path is a Bulk Data path (kick-off, status or file), which is R4 only. */
+const isBulkPath = (parts) => /^\$export/.test(parts[0] || "") || (parts[0] === "Patient" && parts[1] === "$export") || (parts[0] === "Group" && parts[2] === "$export");
 
 /** FHIR's media type on every response, an ETag over versionId on a single resource. */
 function fhirResponse(obj, status, extraHeaders, cors) {
@@ -165,4 +186,4 @@ async function dispatchBulk(request, env, parts, url, fctx, opts) {
   return null;
 }
 
-export { fhirResponse, dispatchRead, dispatchOperation, dispatchBulk };
+export { fhirResponse, dispatchRead, dispatchOperation, dispatchBulk, negotiateVersion, isBulkPath, answerInVersion, contentTypeFor };

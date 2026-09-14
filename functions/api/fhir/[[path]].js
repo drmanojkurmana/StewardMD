@@ -25,7 +25,7 @@
 import * as ORG from "../../_opd_org_store.js";
 import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
-import { fhirResponse, dispatchRead, dispatchBulk } from "../../_wardsynq/fhir-route.js";
+import { fhirResponse, dispatchRead, dispatchBulk, negotiateVersion, isBulkPath, answerInVersion, contentTypeFor } from "../../_wardsynq/fhir-route.js";
 import { exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
@@ -101,9 +101,16 @@ export async function onRequest(context) {
   if (request.method !== "GET" && !(request.method === "DELETE" && sub === "$export-status") && !postKickoff) return fhirResponse(operationOutcome("error", "not-supported", "this door is read-only"), 405, { Allow: "GET" }, cors(request));
   /* The CapabilityStatement is PUBLIC. It is how a client discovers the endpoints before it holds
    * any token, it names no patient, and hiding it would only hide the door - not lock it. */
+  /* D9. Which FHIR version this request speaks (fhir-version.js). It says nothing about the hospital or a
+   * patient, so it is answered before the bearer is looked at. Bulk export is R4 only. */
+  const fv = negotiateVersion(request);
+  if (fv.obj) return fhirResponse(fv.obj, fv.status, null, cors(request));
+  const vHead = { "Content-Type": contentTypeFor(fv.version) };
+  if (isBulkPath(parts.slice(1)) && (fv.version !== "4.0" || fv.contentVersion !== "4.0")) return fhirResponse(operationOutcome("error", "not-supported", "Bulk Data export is served as FHIR R4 only; send it without fhirVersion"), fv.contentVersion !== "4.0" ? 415 : 406, null, cors(request));
   if (sub === "metadata") {
     const { obj, status } = await dispatchRead(request, env, ["metadata"], url, ctx, "");
-    return fhirResponse(obj, status, null, cors(request));
+    const a = answerInVersion(obj, status, fv.version, ["metadata"]);
+    return fhirResponse(a.obj, a.status, vHead, cors(request));
   }
   /* Every other read. The bearer is resolved here and handed down already narrowed; with no bearer
    * at all this door is closed - a staff session uses the ward route. */
@@ -148,6 +155,7 @@ export async function onRequest(context) {
     }
     return bulk;
   }
-  const { obj, status } = await dispatchRead(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer }, request.headers.get("Prefer") || "");
-  return fhirResponse(obj, status, null, cors(request));
+  const { obj, status } = await dispatchRead(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer, fhirVersion: fv.version }, request.headers.get("Prefer") || "");
+  const a = answerInVersion(obj, status, fv.version, parts.slice(1));
+  return fhirResponse(a.obj, a.status, vHead, cors(request));
 }
