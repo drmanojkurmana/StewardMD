@@ -397,22 +397,24 @@ test("policy: a group publishes a whitelisted subset; only a member hospital's a
   assert.equal(events("org-b", "group:policy_adopted").length, 1);
 });
 
-test("POST /group/policy with criticalEscalation.level2NurseRule (owner 2026-09-14): 401, a member hospital's owner 403, an unbuilt rule 422, nothing written; the one rule is published", async () => {
+test("POST /group/policy with criticalEscalation.level2WardRule / level2NurseRule (owner 2026-09-15): 401, a member hospital's owner 403, an unbuilt rule 422, nothing written; a built rule is published", async () => {
   seed();
   const g = await groupWithMembers([["org-b", OWNER_B]]);
-  const pol = (rule) => ({ groupId: g.id, policy: { criticalEscalation: { level2NurseRule: rule } } });
+  const pol = (rule, key) => ({ groupId: g.id, policy: { criticalEscalation: { [key || "level2WardRule"]: rule } } });
   const before = JSON.stringify(docs.get("q_groups/" + g.id).fields);
-  assert.equal((await call(null, "/group/policy", "POST", pol("all-on-duty-nurses-in-ward"))).__status, 401);
-  assert.equal((await call(OWNER_B, "/group/policy", "POST", pol("all-on-duty-nurses-in-ward"))).__status, 403, "a member hospital's owner is not the group's admin");
-  const bad = await call(GADMIN, "/group/policy", "POST", pol("nurse-in-charge"));
-  assert.equal(bad.__status, 422, JSON.stringify(bad));
-  assert.equal(bad.error, "level2_nurse_rule_not_built");
-  assert.match(bad.message, /until a Nurse-in-Charge role or assignment is implemented/);
+  assert.equal((await call(null, "/group/policy", "POST", pol("all-on-duty-ward-team"))).__status, 401);
+  assert.equal((await call(OWNER_B, "/group/policy", "POST", pol("all-on-duty-ward-team"))).__status, 403, "a member hospital's owner is not the group's admin");
+  for (const [rule, key] of [["nurse-in-charge", "level2WardRule"], ["nurse-in-charge", "level2NurseRule"]]) {
+    const bad = await call(GADMIN, "/group/policy", "POST", pol(rule, key));
+    assert.equal(bad.__status, 422, JSON.stringify(bad));
+    assert.equal(bad.error, "level2_ward_rule_not_built");
+    assert.match(bad.message, /The rules built are "all-on-duty-ward-team".*"all-on-duty-nurses-in-ward"/);
+  }
   assert.equal(JSON.stringify(docs.get("q_groups/" + g.id).fields), before);
   assert.equal(events("group:" + g.id, "group:policy").length, 0);
   const ok = await call(GADMIN, "/group/policy", "POST", pol("all-on-duty-nurses-in-ward"));
   assert.equal(ok.__status, 200, JSON.stringify(ok));
-  assert.equal(ok.group.policy.criticalEscalation.level2NurseRule, "all-on-duty-nurses-in-ward");
+  assert.equal(ok.group.policy.criticalEscalation.level2WardRule, "all-on-duty-nurses-in-ward");
 });
 
 test("a membership change whose commit fails reports failure and writes neither the change nor an audit row", async () => {

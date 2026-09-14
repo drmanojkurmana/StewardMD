@@ -121,7 +121,7 @@ import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled }
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
 import { abdmView, externalInvoiceHandlingRefusal } from "../../_wardsynq/abdm-hospital.js";
-import { level2NurseRuleRefusal } from "../../_wardsynq/alert-recipients.js";
+import { level2WardRuleRefusal, wardAlertCover, wardTeamGroupOf, WARD_TEAM_ROLES } from "../../_wardsynq/alert-recipients.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
 import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
@@ -929,9 +929,9 @@ export async function onRequest(context) {
       if (sub === "policy") {
         const p = body && body.policy;
         if (p != null && !GROUP.policySubset(p)) return refuse(422, "no_recognised_settings", "None of those settings can be recommended by a group. Allowed: " + GROUP.POLICY_KEYS.join(", ") + ".");
-        // A group recommendation is copied into hospitals on adoption, so it may not carry an unbuilt level-2 nurse rule either.
-        const groupNurseRule = level2NurseRuleRefusal(p && p.criticalEscalation);
-        if (groupNurseRule) return refuse(422, "level2_nurse_rule_not_built", groupNurseRule);
+        // A group recommendation is copied into hospitals on adoption, so it may not carry an unbuilt level-2 ward rule either.
+        const groupWardRule = level2WardRuleRefusal(p && p.criticalEscalation);
+        if (groupWardRule) return refuse(422, "level2_ward_rule_not_built", groupWardRule);
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
@@ -1093,6 +1093,8 @@ export async function onRequest(context) {
         criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
         // S3 P0: whether critical results reach phones, the ladder in force, and which loops told nobody. Ids only.
         "alert-status": CAPS.STAFF_ADMIN,
+        // Who the level-2 ward rule would tell NOW, per ward, as counts per role (no names): the ward list's own bar.
+        "alert-cover": CAPS.QUEUE_VIEW,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
@@ -3569,6 +3571,20 @@ export async function onRequest(context) {
         const r = await alertDeliveryStatus({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, wsqCfg, actorId: actor.id, smsMissing: smsSetup(env, wOrg).missing, orgId: wOrg.id, directory: directoryFromEnv(env), readers: staffReaders(env, wOrg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* Owner 2026-09-15: a ward with nobody on duty is visible BEFORE an alert happens. ?ward= one ward; blank = every
+       * ward the hospital knows (rota units, wards, bed lists). A failed read is 502, never zeros. */
+      if (sub === "alert-cover" && method === "GET") {
+        try {
+          const readers = staffReaders(env, wOrg);
+          const want = String(url.searchParams.get("ward") || "").trim();
+          const [members, duty, st, wards] = await Promise.all([readers.members(), readers.onDuty(""), readers.dutyStatuses(), want ? [want] : ROSTER.wardChoices(env, wOrg)]);
+          const nowMs = Date.now();
+          const policy = (wsqCfg && wsqCfg.criticalEscalation) || null;
+          return json({ ok: true, wards: wards.map((w) => wardAlertCover({ policy, members, duty: duty.onDuty, statuses: st.statuses, unit: w, nowMs })), partial: !!(duty.partial || st.partial) }, 200, request);
+        } catch (e) {
+          return json({ ok: false, error: "duty_read_failed", message: "Who is on duty could not be read. Do not read this as nobody on duty." }, 502, request);
+        }
+      }
       if (sub === "acknowledge" && method === "POST") {
         const r = await acknowledgeCritical(request, env, {
           ...deps, loopId: body.loopId, action: body.action, close: !!body.close,
@@ -3927,11 +3943,27 @@ export async function onRequest(context) {
     if (seg === "roster") {
       const rb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || rb.orgId || "";
-      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending"]);
+      const ADMIN_SUBS = new Set(["shift", "assign", "unassign", "leave-decide", "swap-approve", "leave-pending", "swap-pending", "duty"]);
       const az = await ORG.authorizeOrg(env, actor, orgId, ADMIN_SUBS.has(sub) ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
       if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
       const me = actor.id;
       const out = (r) => json(r, r.ok ? 200 : r.error === "not_found" ? 404 : 422, request);
+      /* SELF-MARKED DUTY (owner 2026-09-15). The caller's OWN status only: the identity is the caller's membership in
+       * THIS hospital, read from the credential (a StewardMD account by uid or email), never from the body. Only the
+       * ward team (nurse, resident, consultant roles) may mark it: nobody else is on the level-2 ladder by duty. */
+      if (sub === "duty-status" && (method === "GET" || method === "POST")) {
+        const m = az.owner ? null : (await ORG.getMembership(env, orgId, actor.id)) || (actor.email ? await ORG.getMembership(env, orgId, actor.email) : null);
+        if (!m || !m.identity || !wardTeamGroupOf(m.role)) {
+          return json({ ok: false, error: "not_ward_team", message: `Only nurses, residents and consultants (${Object.values(WARD_TEAM_ROLES).flat().join(", ")}) mark themselves on or off duty. Your role here is "${(m && m.role) || az.role || "none"}".` }, 403, request);
+        }
+        // A body naming anybody is asking to set another person's status: refused, never quietly applied to the caller.
+        if (method === "POST" && rb.identity !== undefined && String(rb.identity) !== m.identity) return json({ ok: false, error: "not_your_status", message: "You can only mark your own duty status." }, 403, request);
+        const dOrg = await ORG.getOrg(env, orgId);
+        if (method === "GET") return out(await ROSTER.myDutyStatus(env, dOrg, m.identity));
+        const r = await ROSTER.setDutyStatus(env, dOrg, m.identity, { status: rb.status, unit: rb.unit });
+        return json(r, r.ok ? 200 : r.error === "duty_status_not_saved" ? 503 : 422, request);
+      }
+      if (method === "GET" && sub === "duty") return out(await ROSTER.dutyByWard(env, await ORG.getOrg(env, orgId), await ORG.listMembers(env, orgId)));
       if (method === "GET" && sub === "shifts") return out(await ROSTER.listShifts(env, orgId));
       if (method === "GET" && sub === "mine") return out(await ROSTER.mine(env, orgId, me));
       if (method === "GET" && sub === "coverage") {
@@ -4327,9 +4359,9 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-14: an external ABDM invoice is a clinical document; no other handling is built. */
         const invoiceRefusal = externalInvoiceHandlingRefusal(body.wardsynq);
         if (invoiceRefusal) return json({ ok: false, error: "abdm_invoice_handling_not_built", message: invoiceRefusal }, 422, request);
-        /* Owner decision 2026-09-14: level-2 nurses are every on-duty nurse in the ward until Nurse-in-Charge exists. */
-        const nurseRuleRefusal = level2NurseRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
-        if (nurseRuleRefusal) return json({ ok: false, error: "level2_nurse_rule_not_built", message: nurseRuleRefusal }, 422, request);
+        /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
+        const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
+        if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.

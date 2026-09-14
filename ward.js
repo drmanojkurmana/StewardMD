@@ -465,8 +465,43 @@
       (oldest ? '<p class="w-hint warn">' + ms("priority_high") + "Oldest unacknowledged critical result: " + esc(oldest.display || "") + ", reported " + esc(String(oldest.reportedAt || "").slice(0, 16).replace("T", " ")) + "</p>" : "") +
       "</div>";
   }
+  /* SELF-MARKED DUTY (owner 2026-09-15), from GET/POST /roster/duty-status: the signed-in nurse, resident or
+   * consultant says whether they are on duty, and for which ward. null = loading, false = could not be read, and a
+   * role that is not in the ward team gets no card at all. Off duty means no critical-result alert. */
+  function dutyCardHtml(state) {
+    var d = state.duty;
+    if (d && d.notWardTeam) return "";
+    var head = '<div class="w-card" id="wDutyCard"><div class="w-card-h">' + ms("badge") + "<h3>My duty</h3></div>";
+    if (d == null) return head + '<p class="w-empty">Loading your duty status...</p></div>';
+    if (d === false || !d.ok) return head + '<p class="w-hint warn">' + ms("error") + "Your duty status could not be loaded" + (d && d.message ? ": " + esc(d.message) : "") + ". Do not read this as on or off duty.</p></div>";
+    var s = d.status, rota = d.rota, until = s ? when(s.expiresAt) + (s.basis === "shift" ? " (end of your shift)" : " (" + esc(d.hours) + " hours)") : "";
+    var now = s && s.status === "on" ? "<b>On duty</b> in " + esc(s.unit) + " until " + until + ". Critical results for that ward reach you."
+      : s && s.status === "off" ? "<b>Off duty</b> until " + until + ". You get no critical-result alerts until then, even if you are on the rota."
+      : rota ? "On the rota now: " + esc(rota.name) + " in " + esc(rota.unit) + ". Critical results for that ward reach you."
+      : "Not on the rota now and not marked on duty: ward critical-result alerts do not reach you.";
+    var pick = rota ? rota.unit : (s && s.unit) || "";
+    var opts = (d.wards || []).map(function (w) { return '<option value="' + esc(w) + '"' + (w === pick ? " selected" : "") + ">" + esc(w) + "</option>"; }).join("");
+    return head + "<p>" + now + "</p>" +
+      '<div class="w-filter"><select id="wDutyWard" aria-label="Ward"><option value="">Choose ward</option>' + opts + "</select>" +
+      '<button class="w-btn" data-w-act="dutyset:on" type="button"' + (state.dutyBusy ? " disabled" : "") + ">I am on duty</button>" +
+      '<button class="w-btn ghost" data-w-act="dutyset:off" type="button"' + (state.dutyBusy ? " disabled" : "") + ">I am off duty</button></div>" +
+      (state.dutyErr ? '<p class="w-hint warn">' + ms("error") + esc(state.dutyErr) + "</p>" : "") + "</div>";
+  }
+  /* Who the level 2 ward rule would tell NOW (owner 2026-09-15), from GET /ward/alert-cover: counts per role, so a
+   * ward with nobody on duty is seen before an alert has nowhere to go. null = loading, false = could not be read. */
+  function alertCoverHtml(state) {
+    var c = state.alertCover;
+    if (c == null) return '<p class="w-hint">Loading who would be alerted now...</p>';
+    if (c === false || !c.ok) return '<p class="w-hint warn">' + ms("error") + "Who would be alerted now could not be read. Do not read this as nobody on duty.</p>";
+    if (!c.wards.length) return '<p class="w-hint warn">' + ms("notifications_off") + "No wards are set up, so nobody can be found on duty in a ward.</p>";
+    return '<div class="w-mini">' + c.wards.map(function (w) {
+      return '<p class="w-hint' + (w.total ? "" : " warn") + '">' + ms(w.total ? "notifications_active" : "notifications_off") +
+        "<b>" + esc(w.ward) + "</b>: level 2 alert would reach " + (w.total ? esc(groupCounts(w.counts)) : "<b>nobody on duty</b> (" + esc(groupCounts(w.counts)) + ")") + "</p>";
+    }).join("") + (c.partial ? '<p class="w-hint warn">The rota could not be read in full; counts may be low.</p>' : "") + "</div>";
+  }
   function listView(state) {
     var leftTools =
+      dutyCardHtml(state) +
       wardStatusHtml(state.wardMetrics) +
       '<div class="w-card"><div class="w-card-h">' + ms("hub") + '<h3>Boards and tools</h3></div><div class="w-tools">' +
       '<button class="w-btn" data-w-act="board" title="Admit a patient to a bed">' + ms("add_circle") + "Admit</button>" +
@@ -522,6 +557,7 @@
       '<div class="w-filter"><input id="wQ" type="search" autocomplete="off" placeholder="Search name, MRN, bed or doctor" value="' + esc(state.q || "") + '">' +
       '<input id="wWard" type="text" placeholder="Ward (blank = all)" value="' + esc(state.ward) + '">' +
       '<button class="w-btn ghost" data-w-act="setward" type="button">Apply</button></div>' +
+      alertCoverHtml(state) +
       '<div id="wRoster">' + rosterHtml(state) + "</div></div>";
 
     return '<div class="w-split-layout">' +
@@ -3913,6 +3949,21 @@
     if (!why.length) return "";
     return '<div class="w-crit-m warn">' + ms("notifications_off") + "<b>Alert did not reach anyone:</b> " + esc(CRIT_NOTICE_WHY[why[why.length - 1]] || why[why.length - 1]) + "</div>";
   }
+  /* Owner 2026-09-15: which ward team the level 2 alert went to, with people per role. A patient with no ward on
+   * record was covered hospital-wide, and the board says so rather than naming a ward it never tested. */
+  var WARD_GROUP_WORDS = { nurse: ["nurse", "nurses"], resident: ["resident", "residents"], consultant: ["consultant", "consultants"] };
+  function groupCounts(counts) {
+    return Object.keys(counts || {}).map(function (g) { var n = Number(counts[g]) || 0, w = WARD_GROUP_WORDS[g] || [g, g]; return n + " " + (n === 1 ? w[0] : w[1]); }).join(", ");
+  }
+  function critWardRuleHtml(notices) {
+    var r = null;
+    (notices || []).forEach(function (n) { if (n && n.wardRule) r = n.wardRule; });
+    if (!r) return "";
+    return '<div class="w-crit-m">' + ms("groups") + (r.ward
+      ? "Level 2 ward team on duty in " + esc(r.ward) + ": " + esc(groupCounts(r.counts))
+      : "<b>No ward recorded for this patient:</b> level 2 went to everyone on duty in the hospital (" + esc(groupCounts(r.counts)) + ")") +
+      " <small>(" + esc(r.rule) + ")</small></div>";
+  }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
     var rows = loops.map(function (c) {
@@ -3925,7 +3976,7 @@
         " &middot; " + ms("schedule") + (mins == null ? "" : mins + " min since reported") +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") +
         (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
-        critEscalationsHtml(c.escalations, c.notifications) + critNoticeHtml(c) +
+        critEscalationsHtml(c.escalations, c.notifications) + critWardRuleHtml(c.notifications) + critNoticeHtml(c) +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
@@ -7152,8 +7203,33 @@
   function loadWard() {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
       .catch(function () { st.busy = false; st.err = "Could not reach the ward."; st.loaded = true; paint(); });
+  }
+  function loadDuty() {
+    st.duty = null;
+    return apiGet("/roster/duty-status?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.duty = r && r.ok ? r : r && r.error === "not_ward_team" ? { notWardTeam: true } : { ok: false, message: r && (r.message || r.error) }; paint(); })
+      .catch(function () { st.duty = false; paint(); });
+  }
+  function loadAlertCover() {
+    st.alertCover = null;
+    return apiGet("/ward/alert-cover?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
+      .then(function (r) { st.alertCover = r && r.ok ? r : false; paint(); })
+      .catch(function () { st.alertCover = false; paint(); });
+  }
+  /* Nothing is shown as changed until the server says it saved: a failed save keeps the old status on screen. */
+  function setDuty(status) {
+    var unit = val("wDutyWard");
+    st.dutyBusy = true; st.dutyErr = ""; paint();
+    return apiPost("/roster/duty-status", { orgId: st.orgId, status: status, unit: status === "on" ? unit : "" })
+      .then(function (r) {
+        st.dutyBusy = false;
+        if (r && r.ok) { st.duty = { ok: true, status: r.status, rota: r.rota, wards: (st.duty && st.duty.wards) || [], hours: (st.duty && st.duty.hours) || 12 }; loadAlertCover(); }
+        else st.dutyErr = (r && (r.message || r.error)) || "Your duty status was not saved.";
+        paint();
+      })
+      .catch(function () { st.dutyBusy = false; st.dutyErr = "Could not reach the server. Your duty status was not changed."; paint(); });
   }
   function loadChart() {
     var s = st.sel; if (!s) return Promise.resolve();
@@ -11156,6 +11232,7 @@
     if (cmd === "offlineeditsend") { offlineChoice(arg, "edit"); return; }
     if (cmd === "offlinediscard") { offlineChoice(arg, "discard"); return; }
     if (cmd === "reload") { loadWard(); return; }
+    if (cmd === "dutyset") { setDuty(arg); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
     if (cmd === "setcls") { st.cls = arg; var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint(); return; }
     if (cmd === "back") {

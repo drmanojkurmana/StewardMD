@@ -114,6 +114,25 @@ function onDutyAt(atMs, utcOffsetMinutes, shifts, assignments, unit) {
   });
 }
 
+const DUTY_STATUS_HOURS = 12;
+/**
+ * When a duty status someone sets for themselves stops counting (owner 2026-09-15): the end of the shift they are
+ * rostered on now, or DUTY_STATUS_HOURS from now when they are on none, and never later than that. A forgotten
+ * toggle must not silently include or exclude somebody for ever. -> { expiresAt (ms), basis: "shift"|"hours", shift }
+ */
+function dutyExpiry(atMs, utcOffsetMinutes, shifts, assignments, identity) {
+  const cap = atMs + DUTY_STATUS_HOURS * 3600000;
+  const off = (Number(utcOffsetMinutes) || 0) * 60000;
+  let best = null;
+  for (const a of onDutyAt(atMs, utcOffsetMinutes, shifts, assignments, "")) {
+    if (a.identity !== identity) continue;
+    const end = span(a.date, shifts[a.shiftId])[1] * 60000 - off;
+    if (!best || end > best.end) best = { end, shift: { id: a.shiftId, name: shifts[a.shiftId].name, unit: shifts[a.shiftId].unit } };
+  }
+  if (best && best.end <= cap) return { expiresAt: best.end, basis: "shift", shift: best.shift };
+  return { expiresAt: cap, basis: "hours", shift: best ? best.shift : null };
+}
+
 /**
  * A swap: `from` gives their assignment to `to`. Checked as if `to` held it and `from` did not.
  * Returns null or a RosterError.
@@ -131,4 +150,4 @@ function validLeave(input) {
   return { from: i.from, to: i.to, reason: String(i.reason).trim().slice(0, 200) };
 }
 
-export { RosterError, shiftDef, span, overlaps, onLeave, assignmentProblem, weeklyDates, coverage, onDutyAt, swapProblem, validLeave, addDays };
+export { RosterError, shiftDef, span, overlaps, onLeave, assignmentProblem, weeklyDates, coverage, onDutyAt, dutyExpiry, DUTY_STATUS_HOURS, swapProblem, validLeave, addDays };

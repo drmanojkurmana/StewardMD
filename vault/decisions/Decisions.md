@@ -6215,3 +6215,43 @@ on the overdue tier); it is now a named, per-hospital, audited rule.
   the ward the same way; decide and record what happens when none is assigned, e.g. fall back to all on-duty nurses
   with `source` saying so, never silence); add a selector on the Alerts card saving through `/org/update`; decide
   whether the default changes (hospitals without the key follow the default). Update the refusal tests' value lists.
+- **Superseded as the default on 2026-09-15** by the ward team rule below. The names above were renamed
+  (`LEVEL2_WARD_RULES`, `level2WardRecipients`, `level2WardRuleOf`, `level2WardRuleRefusal`); the value is kept.
+
+## 2026-09-15 Level-2 critical-result alerts tell the ward team ON DUTY in the patient's ward; staff mark themselves on or off duty (owner decision)
+
+Owner decision 2026-09-15, replacing the nurse-only default: "If ward Cardio has 16 beds and two sisters, the alert should
+go to everyone ON DUTY there: the nurses there, the residents there, the consultant there, and NOT to anyone who is not on
+duty. Nurses and residents can turn themselves OFF duty in the StewardMD app."
+- **Rule** `"all-on-duty-ward-team"`, the default. `"all-on-duty-nurses-in-ward"` stays accepted and resolved (a hospital
+  that saved it keeps nurse-only). Key renamed role-neutral: `wardsynq.criticalEscalation.level2WardRule`; the old key
+  `level2NurseRule` is read when the new one is absent (so explicit old choices survive with no migration), and the
+  record names which key decided (`key`). Saves under either key with any other value: 422 `level2_ward_rule_not_built`
+  (`/org/update`, `/group/policy`). The overdue tier's `"nurse"` entry is the ward-team slot (DEFAULT_LEVELS and the O5
+  approval text are untouched).
+- **Who is the team** (`WARD_TEAM_ROLES`, alert-recipients.js): nurse = `nurse`; resident = `resident`, `pg_resident`;
+  consultant = `doctor`, `pg_faculty`, `pg_hod` (there is no consultant role). Interns are NOT included: owner follow-up.
+- **One definition of on duty now** (`onDutyNow`): on the rota now, or an unexpired self-marked "on"; an unexpired "off"
+  overrides both. Ward = the rota assignment's own unit, or the ward the person chose. Used by the level-2 switch
+  (`level2WardRecipients`, which adds the role check), by the other ladder roles, by phone coverage and by the ward
+  board count. OFF also drops the ordering clinician (the owner: "NOT to anyone who is not on duty"). Named escalation
+  contacts are addressed by name and are NOT filtered by duty: owner follow-up if they should be.
+- **Record** on the notice: `wardRule = {rule, source, key?, configured?, ward, counts: {nurse, resident, consultant},
+  recipients}` (field renamed from `nurseRule`; old loops keep theirs). Empty set is NO_RECIPIENT as before.
+- **No ward on the patient**: hospital-wide on-duty cover as before, `ward: null` recorded and said on the critical
+  results board ("No ward recorded for this patient"). Owner follow-up: whether that should stay hospital-wide.
+- **Self duty status**: `GET/POST /api/queue/roster/duty-status` (roster block, not /ward: it is staff data like leave,
+  and needs no WardSynQ record tenant). Identity is the caller's membership in that hospital, from the credential; a
+  body `identity` naming anyone else is 403 `not_your_status`; only ward-team roles (403 `not_ward_team` otherwise).
+  ON needs a ward from the hospital's rota units, wards or bed lists (defaults to the current shift's unit). One row
+  `q_duty_status/<org>__<identity>`, written in the SAME commit as its chained event-log row (`appendOrgAudit`
+  extraWrites, action `roster:duty_on|off`); an audit failure is 503 `duty_status_not_saved` with nothing written.
+  Expiry (`_roster.js dutyExpiry`): end of the shift rostered now, else 12 hours, never more than 12 hours.
+- **Screens**: ward.js list view (StewardMD app hospital workplace and wardsynq.com ward screen) "My duty" card with On /
+  Off and the expiry; the Ward round card shows per ward who a level 2 alert would reach now (`GET /ward/alert-cover`,
+  counts only, queue.view), with "nobody on duty" loud; Admin > Critical result alerts card explains the ward rule;
+  rota page "On and off duty by ward" for staff.admin (`GET /roster/duty`).
+- Tests: `test/wardsynq-alert-recipients.test.mjs` (each of ROLE, WARD, DUTY, expiry pinned separately; key fallback;
+  screens), `test/wardsynq-ward-duty-team.test.mjs` (routes, negative auth, audit-in-one-commit, real-rota dispatch),
+  `test/org-level2-nurse-rule-route.test.mjs`, `test/wardsynq-hospital-group.test.mjs`, `test/wardsynq-alert-dispatch.test.mjs`,
+  `test/run-ward-duty-golden-path.mjs` (headless Chrome, real ward.js).

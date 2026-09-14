@@ -162,7 +162,7 @@ test("level 2 nurse rule (owner 2026-09-14): the real rota; the off-duty nurse a
   const p = await admittedPatient();
   await registerDevice(DOCTOR, "p".repeat(64));
   const loop = await loopOf(await releasePotassium(p, 7.2));
-  assert.equal(loop.notifications[0].nurseRule, undefined, "level 1 tells no nurse");
+  assert.equal(loop.notifications[0].wardRule, undefined, "level 1 has no ward rule");
   const d = await pushAs(DOCTOR, "/notice/" + loop.notifications[0].nid + "/decline", "POST", {});
   assert.equal(d.escalatedTo, "overdue", JSON.stringify(d));
   const over = (await H.RECORD.latest(T, "CriticalResultLoop", loop.id)).notifications.at(-1);
@@ -170,16 +170,16 @@ test("level 2 nurse rule (owner 2026-09-14): the real rota; the off-duty nurse a
   assert.ok(!over.recipients.includes(ORG + "~" + idFor(OFFDUTY)), "a nurse with no shift now");
   assert.ok(!over.recipients.includes(ORG + "~nurse1"), "a nurse member who is not rostered");
   assert.ok(!over.recipients.includes(ORG + "~surg-nurse"), "a nurse on duty in another ward");
-  assert.deepEqual(over.nurseRule, { rule: "all-on-duty-nurses-in-ward", source: "hospital", ward: WARD, nurses: 1, recipients: over.recipients.length });
+  assert.deepEqual(over.wardRule, { rule: "all-on-duty-nurses-in-ward", source: "hospital", key: "level2NurseRule", ward: WARD, counts: { nurse: 1 }, recipients: over.recipients.length });
   const st = await as(ADMIN, "/ward/alert-status?orgId=" + ORG);
-  assert.deepEqual([st.nurseRule.rule, st.nurseRule.source], ["all-on-duty-nurses-in-ward", "hospital"]);
-  assert.match(st.nurseRule.note, /until a Nurse-in-Charge role or assignment is implemented/);
+  assert.deepEqual([st.wardRule.rule, st.wardRule.source, st.wardRule.key], ["all-on-duty-nurses-in-ward", "hospital", "level2NurseRule"]);
+  assert.match(st.wardRule.note, /until a Nurse-in-Charge role or assignment is implemented/);
 });
 
-test("level 2 with nobody on duty in the ward and no other recipient on the tier: NO_RECIPIENT, loud, with zero nurses named", async () => {
+test("level 2 with nobody of the ward team on duty in the ward and no other recipient on the tier: NO_RECIPIENT, loud, with zero per role named", async () => {
   seedHospital({ ...ON, criticalEscalation: { levels: { due: { orderer: false, roles: [] }, overdue: { orderer: false, roles: ["nurse"] } } } });
-  // The ward's only rostered nurse comes off the rota: the on-duty nurse set for Medical A is empty.
-  for (const k of [...docs.keys()]) if (k.startsWith("q_roster_assign/") && docs.get(k).fields.identity === idFor(NURSE)) docs.delete(k);
+  // The ward's rostered nurse and doctor come off the rota: only the supervisor, who is not in the ward team, is left.
+  for (const k of [...docs.keys()]) if (k.startsWith("q_roster_assign/") && [idFor(NURSE), idFor(DOCTOR)].includes(docs.get(k).fields.identity)) docs.delete(k);
   const p = await admittedPatient();
   const loop = await loopOf(await releasePotassium(p, 7.3, 45));
   assert.equal(loop.notifications[0].reason, "NO_RECIPIENT");
@@ -190,7 +190,7 @@ test("level 2 with nobody on duty in the ward and no other recipient on the tier
   assert.equal(over.level, "overdue", JSON.stringify(l.notifications));
   assert.equal(over.reason, "NO_RECIPIENT");
   assert.deepEqual(over.recipients, []);
-  assert.deepEqual(over.nurseRule, { rule: "all-on-duty-nurses-in-ward", source: "default", ward: WARD, nurses: 0, recipients: 0 });
+  assert.deepEqual(over.wardRule, { rule: "all-on-duty-ward-team", source: "default", ward: WARD, counts: { nurse: 0, resident: 0, consultant: 0 }, recipients: 0 });
   assert.equal(l.state, "open");
   const st = await as(ADMIN, "/ward/alert-status?orgId=" + ORG);
   assert.ok(st.failures.some((f) => f.loopId === loop.id && f.level === "overdue" && f.reason === "NO_RECIPIENT"), "named on the Admin card");
