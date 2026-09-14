@@ -4029,6 +4029,28 @@
     return out;
   }
   window.SMD_parseFields = parseFieldsOnDevice;
+  // Pixels of the ORIGINAL capture for the monitor parser's colour signal: decoded once onto a canvas
+  // (long edge capped to bound memory; boxes are normalized so the cap changes nothing else). Any
+  // failure resolves null and colour simply becomes a neutral signal. Nothing leaves the device.
+  function smdPixelSource(dataUrl) {
+    return new Promise(function (res) {
+      try {
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var MAX = 2400, s = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+            var w = Math.max(1, Math.round(img.naturalWidth * s)), h = Math.max(1, Math.round(img.naturalHeight * s));
+            var cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+            var ctx = cv.getContext("2d", { willReadFrequently: true }); ctx.drawImage(img, 0, 0, w, h);
+            var d = ctx.getImageData(0, 0, w, h).data;
+            res({ w: w, h: h, get: function (x, y) { if (x < 0 || y < 0 || x >= w || y >= h) return null; var i = (y * w + x) * 4; return [d[i], d[i + 1], d[i + 2]]; } });
+          } catch (e) { res(null); }
+        };
+        img.onerror = function () { res(null); };
+        img.src = dataUrl;
+      } catch (e) { res(null); }
+    });
+  }
   window.SMD_AI = {
     on: aiOn,
     setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
@@ -4505,14 +4527,39 @@
       // Vision's language correction is for words; on numeric screens it rewrites digits (0→O,
       // 1→I, "PHILIPS"→"PHILIP!"), so it is off for every numeric kind and on for case sheets.
       var numeric = /^(?:monitor|vitals|abg|labs|mapped|ventilator|all)$/.test(String(kind));
+      var monitorKind = /^(?:monitor|vitals|all)$/.test(String(kind));
       return window.SMD_NATIVE.ocr(dataUrl, { languageCorrection: !numeric }).then(function (o) {
         var lines = (o && o.lines) || [];
         var boxes = (o && o.boxes) || [];
         var text = (o && o.text) || lines.join("\n");
-        var fields = parseFieldsOnDevice(text, kind, boxes) || {};
-        return Object.keys(fields).length
-          ? { mode: "fields", fields: fields, lines: lines, boxes: boxes, source: "on-device" }
-          : { mode: "lines", lines: lines, boxes: boxes, source: "on-device" };
+        var V2 = window.SMD_ICU_MONITOR;
+        function pack(fields, extra) {
+          var r = Object.keys(fields).length ? { mode: "fields", fields: fields, lines: lines, boxes: boxes, source: "on-device" } : { mode: "lines", lines: lines, boxes: boxes, source: "on-device" };
+          if (extra) r.monitor = extra;
+          return r;
+        }
+        if (!(monitorKind && V2 && boxes.length)) {
+          var f0 = parseFieldsOnDevice(text, kind, boxes) || {};
+          // Vitals are never auto-filled from flattened text (2026-09-14): without boxes the monitor
+          // reading has no 2-D evidence, so the clinician types them. Labs/ABG/vent keep the text path.
+          if (kind === "all") delete f0.vitals; else if (monitorKind) f0 = {};
+          return pack(f0);
+        }
+        // Monitor kinds: the 2-D parser (icu-monitor-parser.js) over the boxes + the ORIGINAL pixels for
+        // colour. Only AUTO_ACCEPTED values are filled; NEEDS_REVIEW / NOT_FOUND stay blank with their
+        // evidence attached for the review sheet, the AI-Vision gate and the debug overlay.
+        return smdPixelSource(dataUrl).then(function (px) {
+          var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
+          var res = V2.parseMonitor(boxes.map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; }), { px: px, unlabeledAuto: relaxed });
+          var vitals = {}; Object.keys(res.values).forEach(function (k) { if (typeof res.values[k] === "number") vitals[k] = res.values[k]; });
+          var fields;
+          if (kind === "all") { fields = parseFieldsOnDevice(text, "all", boxes) || {}; if (Object.keys(vitals).length) fields.vitals = vitals; else delete fields.vitals; }
+          else fields = vitals;
+          var conf = {}; Object.keys(res.fields).forEach(function (k) { conf[k] = { status: res.fields[k].status, confidence: res.fields[k].confidence, suggested: res.fields[k].suggested == null ? null : res.fields[k].suggested, reason: res.fields[k].reason || null }; });
+          var dbg = false; try { dbg = localStorage.getItem("smd_icu_ocr_debug") === "1"; } catch (e) {}
+          if (dbg) { try { console.info("[ICU OCR]\n" + V2.explain(res, boxes)); } catch (e) {} window.__SMD_ICU_OCR_LAST = { result: res, boxes: boxes, image: dataUrl, kind: kind }; }
+          return pack(fields, { fields: conf, review: Object.keys(res.review), notFound: res.notFound, layout: res.layout, stats: res.stats, warnings: res.warnings, colour: !!px });
+        });
       }).catch(function () { return { error: "ocr-failed" }; });
     },
     // On-device-first AI Vision (NATIVE only) — LEGACY combined path (on-device OCR + optional

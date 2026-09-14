@@ -5544,3 +5544,46 @@ Admin Center tab "Integrations" (Webhooks card). Test: `test/wardsynq-webhooks.t
 - OUTBOX FIX FOUND ON THE WAY: `latestByType` returns the OLDEST rows, so drainOutbox never saw a new event
   once 200 settled ones existed. Webhook volume would hit that in a day. `latestByType(..., { newest: true })`
   now serves drain and health. Still a scan with a ceiling; a status index is the upgrade.
+
+
+## 2026-09-14 ICU monitor OCR v2: 2-D parser, colour + layout signals, strict NEEDS_REVIEW, benchmark (branch icu-ocr-bench)
+
+Builds on PR #1112 (device OCR on the original image, box-aware pairing). New module `icu-monitor-parser.js`
+(UMD: WebView `SMD_ICU_MONITOR`, Node tests, `bench/icu-monitor`). Apple Vision stays the only OCR; no
+new OCR/AI model. Gemini is a fallback offered only after a NEEDS_REVIEW, only on a tap.
+- Every field is decided from scored candidates over the observation graph (text, conf, box, height,
+  colour): spatial, size, alignment, label, layout, colour, plausibility, weighted over the signals that
+  are informative. AUTO_ACCEPTED needs confidence >= 0.80, a margin over the runner-up (0.20 when the
+  rival is the same size on the same row), and >= 2 independent signals among label / layout relation /
+  colour / label-glued value. Size alone or colour alone never selects. Otherwise NEEDS_REVIEW with the
+  suggestion and its evidence, or NOT_FOUND. Nothing is ever derived: no MAP from SBP/DBP, no Pulse from HR.
+- Colour is sampled ONCE (same JS) from the original pixels: canvas in the app, PIL dump in the bench.
+  Per box: dominant hue cluster (15° histogram peak share), white as its own class, unreliable → neutral.
+  Compared to the label colour (white label vs coloured value = neutral, not a mismatch) and to the
+  waveform band beside the value; the band nearest the numerics wins over the full band.
+- Layout is RELATIONAL (HR topmost and above the pressure, SpO2 between, RR below), not a fixed slot:
+  Dräger puts TEMP before RESP, GE NBP before ART. Profiles (Philips/GE/Dräger/Mindray/Nihon Kohden)
+  are detected from on-screen vocabulary and only shape expectations.
+- Alarm limits: hi/lo pairs in one box, stacked pairs, or small numerics on the label's row; they stay
+  in the candidate list (debug shows "120 → alarm limit") and lose on geometry, never on size alone.
+- Pressures: the tallest SSS/DD with "(MM)" as MAP; TWO different readings (ART + NIBP) or a second
+  pressure that could not be read make the primary NEEDS_REVIEW while `art`/`nibp` are reported
+  separately. OCR repairs ("T18/76", "1 08/64") only ever produce a suggestion.
+- POLICY (owner rules 16 vs 17 collide on the 2x Philips photo, where Vision dropped the SpO2 and RR
+  labels): default STRICT = an unlabeled value is NEEDS_REVIEW even when slot and colour agree
+  (suggestion shown). `unlabeledAuto` (app: localStorage smd_icu_unlabeled_auto=1; bench --policy relaxed)
+  reproduces the 6/6. Reason: a yellow EtCO2 in slot 4 on another vendor would become RR silently.
+- App: `readImageLocal` routes monitor kinds through the parser with the original pixels; only
+  AUTO_ACCEPTED numerics fill; vitals are never auto-filled from flattened text; `r.monitor` carries
+  per-field status/confidence/suggestion. `image-engine` offers AI Vision only when a core vital needs
+  review, counts local_success / local_needs_review / gemini_fallback / gemini_success / gemini_failure /
+  network_calls (`SMD_IMAGE_ENGINE.stats()`). Debug: localStorage smd_icu_ocr_debug=1 prints the evidence
+  and draws the overlay (boxes, labels, selected, rejected, limits, association lines) on the review sheet.
+- Benchmark `bench/icu-monitor/run.mjs`: 2 real (owner MP40 at 900px and 2x) + 39 synthetic screens
+  (6 layouts, clean / limit-vs-value / high-acuity / tilt+glare / low-light+blur / partial+label-obscured
+  / close-candidates; rendered with headless Chrome from bench/icu-monitor/fixtures/gen.mjs). Metrics per
+  field: exact, recall, precision, FP, needs-review, silent-guess, safe; per manufacturer and layout;
+  OCR/parse ms; network 0. Ground truth distinguishes visible / not_visible / ambiguous / not_applicable.
+  Synthetic renders stand in for real de-identified photos of GE / Dräger / Mindray / Nihon Kohden, which
+  we do not have yet; numbers on them measure layout handling, not photographic robustness.
+Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scale Vision union.
