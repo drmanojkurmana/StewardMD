@@ -85,6 +85,7 @@ function healthy(over) {
       auditChainHead: async () => null,                     // P2.17: nothing chained yet reads as up
       auditChainRows: async () => [],
     },
+    orgAuditChain: { chainId: "q:org", auditChainHead: async () => null, auditChainRows: async () => [] },   // G3: nothing linked yet reads as up
     tenantId: "t1", env: { GEMINI_API_KEY: SECRET }, maik: { enabled: true, localBaseUrl: LOCAL, localModel: "m1" }, rpoMinutes: 60,
     orgProbe: async () => ({ id: "org" }),
     documentProbe: async () => ({ state: "ok", checkedAt: iso(NOW - 60000) }),
@@ -99,7 +100,7 @@ const byId = (r) => Object.fromEntries(r.dependencies.map((d) => [d.id, d]));
 test("all probes answer: every dependency up, overall up, no consequence text", async () => {
   const r = await H.systemHealthReport(healthy());
   assert.equal(r.overall, "up", JSON.stringify(r.dependencies.filter((d) => d.status !== "up")));
-  assert.deepEqual(r.dependencies.map((d) => d.id), ["record-store", "org-store", "document-storage", "maik-gateway", "outbox", "ops-tick", "backup", "audit-chain"]);
+  assert.deepEqual(r.dependencies.map((d) => d.id), ["record-store", "org-store", "document-storage", "maik-gateway", "outbox", "ops-tick", "backup", "audit-chain", "org-audit-chain"]);
   assert.ok(r.dependencies.every((d) => d.status === "up" && d.consequence === null && d.checkedAt));
   assert.equal(byId(r)["document-storage"].checkedAt, iso(NOW - 60000), "document storage says when its probe really ran");
 });

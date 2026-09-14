@@ -11,7 +11,8 @@ import I18n from "../followcare-i18n.js";
 import { sendSms, smsConfigured } from "./_followcare_sms.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import { decPHI, mintTicketToken } from "./_queue.js";
-import { fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsCommit, wUpdate } from "./_fbfirestore.js";
+import { writeOrgAudit } from "./_q_audit_chain.js";
 
 var DEFAULT_THRESHOLDS = { early: 5, prep: 2 };
 var STAGE = { ahead5: 1, ahead2: 2, next: 3 };   // monotonic position tiers
@@ -48,9 +49,7 @@ async function send(env, toE164, body, link) {
 }
 function mask(p) { var d = String(p || "").replace(/\D/g, ""); return d.length >= 4 ? "•••••" + d.slice(-4) : "••••"; }
 async function auditNotify(env, session, ticket, event, res, masked) {
-  var id = crypto.randomUUID().replace(/-/g, "");
-  var f = { ts: Date.now(), hospitalId: session.hospitalId || "", ticketId: ticket.id, actor: "system", action: "notify:" + event, meta: (res.ok ? "sent " : res.skipped ? "skipped " : "failed ") + masked };
-  try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}
+  await writeOrgAudit(env, { hospitalId: session.hospitalId || "", ticketId: ticket.id, actor: "system", action: "notify:" + event, meta: (res.ok ? "sent " : res.skipped ? "skipped " : "failed ") + masked });
 }
 
 // Send the sealed visit-timeline link to the patient at checkout (channel = FOLLOWCARE_MSG_CHANNEL,

@@ -42,6 +42,8 @@ const REVIEW_TYPE = "SecurityReview";
 const RESTORE_TYPE = "RestoreTest";
 const EVIDENCE_CAP = 50;
 const AUDIT_VERIFY_LIMIT = 1000;
+/* G3: the hospital event log is verified in Firestore batches, so its window is smaller. */
+const ORG_VERIFY_LIMIT = 300;
 
 /* Every threshold in one place, and returned on the report so a reviewer can see the method. */
 const RULES = Object.freeze({
@@ -414,6 +416,29 @@ function auditRetention(oldestAuditAt, oldestRecordAt, setting) {
   return out;
 }
 
+/** PURE. Hospital event-log rows that carry no chain link (G3), split at when linking began.
+ * startMs: the first linked row's time, or null when nothing has been linked yet. Unlinked rows are
+ * never verified: before linking began they are the old era; after it they are a lost linking race or
+ * a row added outside the application, and they are listed. */
+function unlinkedRows(events, startMs, partial) {
+  const all = (events || []).filter(Boolean);
+  const rows = all.filter((e) => e.rowHash == null || e.rowHash === "");
+  const start = Number.isFinite(startMs) ? startMs : null;
+  const late = start == null ? [] : rows.filter((e) => msOf(e.ts) >= start);
+  const before = rows.length - late.length;
+  const startAt = start == null ? null : new Date(start).toISOString();
+  const parts = [];
+  if (start == null) parts.push(rows.length ? `No row of the hospital event log has been linked yet: all ${rows.length} rows read are unlinked and cannot be checked.` : "The hospital event log has no rows yet.");
+  else {
+    if (before) parts.push(`${before} row${before === 1 ? " was" : "s were"} written before linking began on ${startAt.slice(0, 10)}. They are not linked and cannot be checked.`);
+    if (late.length) parts.push(`${late.length} row${late.length === 1 ? " was" : "s were"} written after linking began without a link: either linking lost a race with another writer every time, or the row was added outside the application. They cannot be checked.`);
+    if (!rows.length) parts.push(`Every row read carries a link (linking began on ${startAt.slice(0, 10)}).`);
+  }
+  if (partial) parts.push(`Only the first ${all.length} rows of the event log were read, so there may be more.`);
+  return { status: "ok", scanned: all.length, unlinked: rows.length, before, after: late.length, startAt, partial: !!partial,
+    evidence: late.slice(0, EVIDENCE_CAP).map(evidenceRow), message: parts.join(" ") };
+}
+
 async function open_(request, env, ctx, need) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, need, ctx.actorDeps);
@@ -485,6 +510,19 @@ async function securityReport(request, env, ctx) {
   }
 
   const orgEvents = ctx.orgEvents || { error: "not_supplied" };
+  /* G3: the hospital event log (sign-ins, staff and hospital changes) is chained on its own. Its
+   * verification never throws and is never ok on a failed read; its unlinked rows are named. */
+  const orgChain = ctx.orgAuditChain;
+  retention.orgIntegrity = orgChain
+    ? await verifyAuditChain(orgChain, orgChain.chainId, { limit: ORG_VERIFY_LIMIT })
+    : { status: "not_verified", message: "Not verified: the hospital event log chain could not be reached, so its integrity is unknown." };
+  const noStart = { status: "unavailable", message: "When linking began could not be read, so unlinked rows could not be counted." };
+  if (orgEvents.error) retention.orgUnlinked = { status: "unavailable", message: "The hospital event log could not be read, so unlinked rows could not be counted." };
+  else if (!orgChain || typeof orgChain.chainStart !== "function") retention.orgUnlinked = noStart;
+  else {
+    try { retention.orgUnlinked = unlinkedRows(orgEvents.events, await orgChain.chainStart(), orgEvents.partial); }
+    catch { retention.orgUnlinked = noStart; }
+  }
   const logins = orgEvents.error
     ? { status: "unavailable", error: "signin_log_unreadable", detail: str(orgEvents.error) }
     : { ...section(loginFindings(orgEvents.events, period)), partial: !!orgEvents.partial };
@@ -641,5 +679,5 @@ async function recordRestoreTest(request, env, ctx) {
 export {
   RULES, METHOD, NOT_DETECTED, REVIEW_TYPE, RESTORE_TYPE, PRIVILEGED, EXEMPT_ROLES, EXEMPTIONS,
   chartAccessFindings, nurseAssignmentIntervals, rosterIntervals, outOfAssignmentFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
-  dataProtection, auditRetention, securityReport, recordSecurityReview, recordRestoreTest,
+  dataProtection, auditRetention, unlinkedRows, ORG_VERIFY_LIMIT, securityReport, recordSecurityReview, recordRestoreTest,
 };

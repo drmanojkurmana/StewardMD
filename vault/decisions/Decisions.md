@@ -5864,3 +5864,27 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
   the hospital's DLT template on 2Factor (`alerts.sms.senderId`, `alerts.sms.templateName`; VAR1 ward, VAR2
   bed; existing `TWOFACTOR_API_KEY`), to each recipient's `alertMobile` on their membership. Anything missing
   is recorded on the notice as SMS_NOT_CONFIGURED and named on the Admin card.
+
+## 2026-09-14 G3: the hospital event log (q_events) is hash-chained like the clinical audit trail
+
+`functions/_q_audit_chain.js` (append, best-effort writer, verification adapter), `qAudit` in `_queue_engine.js`,
+`_queue_notify.js` delivery rows and `_hospital_group_store.js` all write through it. Screens: Admin Center >
+Security review (Tamper evidence: hospital event log), System health ("Staff and sign-in audit trail integrity").
+Tests: `test/wardsynq-org-audit-chain.test.mjs`.
+- ROW IS THE LINK. Each row is `q_events/<hospital key>__c<seq>` carrying `chainSeq` (hashed), `prevHash`,
+  `rowHash`; the head `q_audit_chain_head/<hospital key>` = `{seq, hash}` moves in the SAME `fsCommit`. The race
+  guard is `currentDocument.exists=false` on the row (Firestore's equivalent of the D1 primary key): a loser
+  re-reads the head and retries (APPEND_ATTEMPTS). A refused commit whose head did not move is the caller's own
+  guard and is rethrown unchanged, so hospital-group changes keep "no change without its audit row".
+- ONE ROW NOT TWO DOCS. A separate link doc was rejected: a row-as-link needs one fewer write per event and a
+  missing row is simply a missing number. The hospital key is an injective escape of the hospital id
+  (`chainKey`), because `sanitize` maps `group:a` and `group-a` to the same id.
+- VERIFICATION REUSES audit-chain.js. `orgAuditChain(env, hospitalId)` has the repository shape
+  (`auditChainHead`, `auditChainRows` via `fsBatchGet`, `auditOnly`), so `verifyAuditChain`, the anchors and the
+  owner acknowledgement run over it unchanged. Chain id `q:<orgId>` keeps its anchor keys apart from tenants.
+- UNLINKED ROWS ARE NAMED, NEVER VERIFIED. Rows without `rowHash` before link 1's `legacyBoundary` are the old
+  era; after it they are a lost race (qAudit still writes the row unlinked rather than lose it) or a row added
+  outside the application, listed with evidence in the security review.
+- ponytail: one chain per hospital serialises that hospital's event-log writes (a head read and a commit each);
+  a sharded chain is the upgrade if one head doc contends. No Firestore index or rule change: reads are by id and
+  the existing single-field `hospitalId` query.

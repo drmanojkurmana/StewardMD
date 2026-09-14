@@ -58,6 +58,12 @@ recovery. Restore via `gcloud firestore databases restore`.
 `gcloud firestore export gs://<bucket>` on a Cloud Scheduler job (this is a GCP-side cron, NOT a
 Cloudflare Worker — Firestore managed export targets GCS). Retain 30–90 days.
 Restore: `gcloud firestore import gs://<bucket>/<export>`.
+**The hospital event log is chained too (G3).** `q_events` rows (sign-ins, staff and hospital setting changes,
+queue and billing acts) are linked per hospital (`functions/_q_audit_chain.js`): row `q_events/<key>__c<seq>` with
+`prevHash`/`rowHash`, head in `q_audit_chain_head/<key>`. A PITR restore or an import rewinds rows and head
+together, so the chain verifies afterwards while every later row is gone; the same rules as 1a apply (note the
+head seq before restoring, never merge old rows back in, acknowledge the anchor break only for a planned
+restore). Rows written before linking began are shown as unlinked in Security review, never as verified.
 
 ## 3. Cloudflare KV (MAIK_KV — usage counters, remote config, client-error log, audit)
 KV holds operational metadata (no PHI), mostly TTL'd. It has no native export; if you want a copy, a

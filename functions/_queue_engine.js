@@ -8,6 +8,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { brandingFor } from "./_clinic_branding.js";
+import { writeOrgAudit } from "./_q_audit_chain.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
@@ -397,8 +398,7 @@ export async function portalContext(env, token) {
 }
 
 // ---- append-only audit (PHI-free; fixed field allow-list) ---------------------------------
+// G3: each row is hash-chained per hospital (_q_audit_chain.js). Still best-effort; never blocks the action.
 export async function qAudit(env, ev) {
-  const id = newId();
-  const f = { ts: now(), hospitalId: ev.hospitalId || "", ticketId: ev.ticketId || "", actor: ev.actor || "", action: ev.action || "", meta: String(ev.meta == null ? "" : ev.meta).slice(0, 200) };
-  try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}   // best-effort; never blocks the action
+  await writeOrgAudit(env, { ...ev, ts: now() });
 }

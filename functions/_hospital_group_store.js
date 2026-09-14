@@ -19,13 +19,16 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate, wDelete } from "./_fbfirestore.js";
 import * as M from "./_opd_org.js";
+import { appendOrgAudit } from "./_q_audit_chain.js";
 
 const now = () => Date.now();
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const newId = () => crypto.randomUUID().replace(/-/g, "");
 const linkId = (groupId, orgId) => sanitize(groupId) + "__" + sanitize(orgId);
-const event = (env, hospitalId, actor, action, meta) => wCreate(env, "q_events/" + newId(),
-  { ts: now(), hospitalId: String(hospitalId || ""), ticketId: "", actor: String(actor || ""), action, meta: String(meta || "").slice(0, 200) });
+const event = (env, hospitalId, actor, action, meta) => ({ ts: now(), hospitalId: String(hospitalId || ""), ticketId: "", actor: String(actor || ""), action, meta: String(meta || "").slice(0, 200) });
+/* G3: the audit row is hash-chained under its hospital and rides in the SAME commit as the change
+ * (appendOrgAudit), so the guarantee above is unchanged; a refused guard is handed back as before. */
+const commitAudited = (env, writes, ev) => appendOrgAudit(env, ev, writes);
 
 export const LINK_STATES = Object.freeze(["invited", "member", "declined", "removed"]);
 
@@ -80,9 +83,9 @@ export async function createGroup(env, name, actorId) {
   const id = newId();
   const a = String(actorId);
   const g = group({ id, name: String(name || "").trim().slice(0, 120), adminUids: [a], createdBy: a, createdAt: now() });
-  await fsCommit(env, [wCreate(env, "q_groups/" + id, g),
-    wCreate(env, "q_group_admins/" + adminRowId(id, a), { groupId: id, uid: a, addedBy: a, addedAt: g.createdAt }),
-    event(env, "group:" + id, a, "group:create", g.name)]);
+  await commitAudited(env, [wCreate(env, "q_groups/" + id, g),
+    wCreate(env, "q_group_admins/" + adminRowId(id, a), { groupId: id, uid: a, addedBy: a, addedAt: g.createdAt })],
+    event(env, "group:" + id, a, "group:create", g.name));
   return g;
 }
 /* ponytail: the by-admin index above only exists for groups created (or changed) since multi-admin
@@ -127,8 +130,8 @@ export async function addGroupAdmin(env, groupId, newUid, actorId) {
     ? wUpdate(env, rowPath, { groupId: id, uid, addedBy: actorId, addedAt: now() }, { updateTime: rowDoc.updateTime })
     : wCreate(env, rowPath, { groupId: id, uid, addedBy: actorId, addedAt: now() });
   try {
-    await fsCommit(env, [wUpdate(env, "q_groups/" + id, { adminUids: next }, { updateTime: doc.updateTime }),
-      rowWrite, event(env, "group:" + id, actorId, "group:admin_add", uid.slice(0, 80))]);
+    await commitAudited(env, [wUpdate(env, "q_groups/" + id, { adminUids: next }, { updateTime: doc.updateTime }),
+      rowWrite], event(env, "group:" + id, actorId, "group:admin_add", uid.slice(0, 80)));
   } catch (e) {
     if (e && e.code === "precondition") return { ok: false, status: 409, error: "changed_meanwhile", message: "This group changed while you were looking at it. Nothing was saved. Reload and try again." };
     return { ok: false, status: 502, error: "not_saved", message: "The change could not be saved. Nothing was changed." };
@@ -147,11 +150,10 @@ export async function removeGroupAdmin(env, groupId, targetUid, actorId) {
   if (!g.adminUids.includes(uid)) return { ok: false, status: 404, error: "not_an_admin", message: "That account is not an administrator of this group." };
   if (g.adminUids.length < 2) return { ok: false, status: 409, error: "last_admin", message: "A group always has at least one administrator. Add another administrator before removing this one." };
   const next = g.adminUids.filter((x) => x !== uid);
-  const writes = [wUpdate(env, "q_groups/" + id, { adminUids: next }, { updateTime: doc.updateTime }),
-    event(env, "group:" + id, actorId, "group:admin_remove", uid.slice(0, 80))];
+  const writes = [wUpdate(env, "q_groups/" + id, { adminUids: next }, { updateTime: doc.updateTime })];
   if (await fsGet(env, "q_group_admins/" + adminRowId(id, uid))) writes.push(wDelete(env, "q_group_admins/" + adminRowId(id, uid)));
   try {
-    await fsCommit(env, writes);
+    await commitAudited(env, writes, event(env, "group:" + id, actorId, "group:admin_remove", uid.slice(0, 80)));
   } catch (e) {
     if (e && e.code === "precondition") return { ok: false, status: 409, error: "changed_meanwhile", message: "This group changed while you were looking at it. Nothing was saved. Reload and try again." };
     return { ok: false, status: 502, error: "not_saved", message: "The change could not be saved. Nothing was changed." };
@@ -187,7 +189,7 @@ export async function transition(env, action, groupId, orgId, actorId, side) {
   const path = "q_group_links/" + linkId(groupId, orgId);
   const write = cur ? wUpdate(env, path, fields, { updateTime }) : wCreate(env, path, fields);
   try {
-    await fsCommit(env, [write, event(env, orgId, actorId, "group:" + action, "group " + sanitize(groupId) + (side ? " by " + side : ""))]);
+    await commitAudited(env, [write], event(env, orgId, actorId, "group:" + action, "group " + sanitize(groupId) + (side ? " by " + side : "")));
   } catch (e) {
     if (e && e.code === "precondition") return { ok: false, status: 409, error: "changed_meanwhile", message: "This membership changed while you were looking at it. Nothing was saved. Reload and try again." };
     return { ok: false, status: 502, error: "not_saved", message: "The change could not be saved. Nothing was changed." };
@@ -198,8 +200,8 @@ export async function transition(env, action, groupId, orgId, actorId, side) {
 export async function setPolicy(env, g, policy, actorId) {
   const subset = policySubset(policy);
   const fields = { policy: subset, policyVersion: g.policyVersion + 1, policyUpdatedAt: now() };
-  await fsCommit(env, [wUpdate(env, "q_groups/" + sanitize(g.id), fields, { exists: true }),
-    event(env, "group:" + g.id, actorId, "group:policy", "version " + fields.policyVersion + " keys " + (subset ? Object.keys(subset).join(",") : "none"))]);
+  await commitAudited(env, [wUpdate(env, "q_groups/" + sanitize(g.id), fields, { exists: true })],
+    event(env, "group:" + g.id, actorId, "group:policy", "version " + fields.policyVersion + " keys " + (subset ? Object.keys(subset).join(",") : "none")));
   return group({ ...g, ...fields });
 }
 
@@ -211,12 +213,12 @@ export async function setPolicy(env, g, policy, actorId) {
 export async function adoptPolicy(env, orgDoc, g, actorId) {
   if (!g.policy) return { ok: false, status: 409, error: "no_policy", message: "This group has not published a recommended configuration." };
   const merged = M.org({ ...orgDoc, wardsynq: { ...(orgDoc.wardsynq || {}), ...g.policy } });
-  await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgDoc.id), { wardsynq: merged.wardsynq }),
-    event(env, orgDoc.id, actorId, "group:policy_adopted", "group " + g.id + " version " + g.policyVersion + " keys " + Object.keys(g.policy).join(","))]);
+  await commitAudited(env, [wUpdate(env, "q_orgs/" + sanitize(orgDoc.id), { wardsynq: merged.wardsynq })],
+    event(env, orgDoc.id, actorId, "group:policy_adopted", "group " + g.id + " version " + g.policyVersion + " keys " + Object.keys(g.policy).join(",")));
   return { ok: true, org: merged, adopted: Object.keys(g.policy), policyVersion: g.policyVersion };
 }
 
 /** The audit row for a group admin reading a hospital's counts, written BEFORE the counts are read. */
 export async function auditSummaryRead(env, orgId, groupId, actorId) {
-  await fsCommit(env, [event(env, orgId, actorId, "group:summary_read", "group " + sanitize(groupId))]);
+  await commitAudited(env, [], event(env, orgId, actorId, "group:summary_read", "group " + sanitize(groupId)));
 }

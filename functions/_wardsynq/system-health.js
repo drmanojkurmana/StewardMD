@@ -32,7 +32,7 @@ const ANCHOR_TAMPER_CONSEQUENCE = "The audit trail was changed below the applica
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
 /* Thresholds, returned on the report so a reader can see what "degraded" meant. */
-const LIMITS = Object.freeze({ auditChainRows: 200, recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
+const LIMITS = Object.freeze({ auditChainRows: 200, orgAuditChainRows: 200, recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
 
 class ProbeTimeout extends Error {}
 
@@ -187,10 +187,24 @@ const DEPENDENCIES = [
       return degraded(a.message);
     },
   },
+  {
+    /* G3. The hospital event log (sign-ins, staff and hospital setting changes) has its own chain in
+     * the org store. Not handed in, or not verified, is down: nobody checked it. */
+    id: "org-audit-chain", name: "Staff and sign-in audit trail integrity",
+    consequence: {
+      down: "Staff and sign-in audit integrity not confirmed: sign-ins, staff changes and hospital setting changes in the hospital event log may have been changed or removed in the store, or the check could not run. Charting continues and nothing is blocked. Tell the information governance lead.",
+    },
+    async check(d) {
+      const chain = d.orgAuditChain;
+      if (!chain) return down("Not verified: the hospital event log chain was not handed in, so its integrity is unknown.");
+      const v = await verifyAuditChain(chain, chain.chainId, { limit: LIMITS.orgAuditChainRows });
+      return v.status === "ok" || v.status === "empty" ? up(v.message) : down(v.message);
+    },
+  },
 ];
 
 /**
- * deps: { repository, tenantId, env, maik, rpoMinutes, anchorStore?, orgProbe(), documentProbe(), lastTick(),
+ * deps: { repository, tenantId, env, maik, rpoMinutes, anchorStore?, orgAuditChain?, orgProbe(), documentProbe(), lastTick(),
  *   fetchImpl?, timeoutMs?, now?() }
  */
 async function systemHealthReport(deps) {

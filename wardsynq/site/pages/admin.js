@@ -1115,9 +1115,28 @@
         (a.gap ? '<div class="msg err">' + esc(a.gap) + "</div>" : "")
       : '<div class="msg err">Audit retention could not be checked.</div>';
     h += "<h3>Tamper evidence</h3>" + auditIntegrityHtml(c, a.integrity, a.anchors);
+    /* G3: the hospital event log is chained on its own and reported on its own. */
+    h += "<h3>Tamper evidence: hospital event log</h3><p class=\"quiet\">Sign-ins, staff changes, hospital setting changes, and queue and billing actions.</p>" +
+      auditIntegrityHtml(c, a.orgIntegrity, a.orgAnchors) + orgUnlinkedHtml(c, a.orgUnlinked);
     return h + "</div>";
   }
   WSQ._securityReviewHtml = securityReviewHtml;
+
+  /* G3. Event-log rows with no link are never verified. Rows added after linking began are listed;
+   * a count that could not be made says so, never "every row linked". */
+  function orgUnlinkedHtml(c, u) {
+    var esc = c.esc;
+    if (!u || u.status !== "ok") return '<div class="msg err">Unlinked rows not counted: ' + esc((u && u.message) || "no result was returned") + " This is not the same as every row being linked.</div>";
+    var cls = u.after ? "err" : (u.unlinked || u.partial ? "note" : "ok");
+    var h = '<div class="msg ' + cls + '"><b>' + (u.after ? "Rows without a link" : u.unlinked ? "Unlinked rows" : "Every row read is linked") + "</b>: " + esc(u.message) + "</div>";
+    if ((u.evidence || []).length) {
+      h += '<div class="tbl"><table><thead><tr><th>When</th><th>By</th><th>Action</th><th>Row</th></tr></thead><tbody>' +
+        u.evidence.map(function (e) { return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.actor || "") + "</td><td>" + esc(e.action || "") + '</td><td class="mono">' + esc(e.id || "") + "</td></tr>"; }).join("") +
+        "</tbody></table></div>" + (u.after > u.evidence.length ? '<p class="quiet">Showing ' + esc(u.evidence.length) + " of " + esc(u.after) + " rows.</p>" : "");
+    }
+    return h;
+  }
+  WSQ._orgUnlinkedHtml = orgUnlinkedHtml;
 
   /* P2.17. Only "ok" and "empty" read as fine. Broken and gap name the row; not verified and a missing
    * result both say the integrity is unknown, never that it is intact. */
