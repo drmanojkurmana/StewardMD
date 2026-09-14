@@ -109,6 +109,11 @@ td.num { font-variant-numeric: tabular-nums lining-nums; text-align: right; }
 .pill.ok { border-color: var(--sig-clear); color: var(--sig-clear); }
 .pill.warn { border-color: var(--sig-major); color: var(--sig-major); }
 .pill.stop { border-color: var(--sig-stop); color: var(--sig-stop); }
+/* D8: a warning row (a rota coverage gap, a failed/locked sign-in, a down integration, an inactive
+ * webhook or provider) - the wash carries the row, bold amber text carries the cell, and the row's
+ * own words (what the gap or failure is) carry the rest: never colour alone. */
+tr.warn { background: var(--sig-major-wash); }
+tr.warn td { color: var(--sig-major); font-weight: 600; }
 .msg { margin: var(--sp-2) 0; padding-left: 11px; border-left: 2px solid var(--hair); font-size: var(--t-small); color: var(--ink-2); max-width: 68ch; }
 .msg.err { border-left-color: var(--sig-stop); color: var(--sig-stop); }
 .msg.ok { border-left-color: var(--sig-clear); color: var(--sig-clear); }
