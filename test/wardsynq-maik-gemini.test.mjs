@@ -303,7 +303,7 @@ test("23. maikStatus distinguishes the two surfaces and still exposes no secret"
 /* ---- 24: S7, Vertex is the provider with the PHI agreement ---------------------------------------- */
 
 const { privateKey: SA_KEY } = await crypto.subtle.generateKey({ name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }, true, ["sign", "verify"]);
-const SA_PEM = `-----BEGIN PRIVATE KEY-----\n${Buffer.from(await crypto.subtle.exportKey("pkcs8", SA_KEY)).toString("base64")}\n-----END PRIVATE KEY-----`;
+const SA_PEM = `-----BEGIN PRIVATE KEY-----\n${Buffer.from(await crypto.subtle.exportKey("pkcs8", SA_KEY)).toString("base64")}\n-----END PRIVATE KEY-----`; // security-scan: allow test key generated per run, not a real credential
 const envVertex = { GCP_PROJECT: "wsq-proj", GCP_SA_EMAIL: "maik@wsq-proj.iam.gserviceaccount.com", GCP_WIF_PRIVATE_KEY: SA_PEM, GCP_WIF_AUDIENCE: "//iam.googleapis.com/projects/1/locations/global/workloadIdentityPools/p/providers/cf" };
 const ACCESS = "ya29.test-access-token-not-real-000000";
 function vertexTransport(reply) {
