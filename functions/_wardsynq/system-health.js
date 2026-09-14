@@ -21,7 +21,7 @@ import { outboxHealth } from "./outbox.js";
 import { dataProtection, RESTORE_TYPE } from "./security-review.js";
 import { RUN_TYPE } from "./backup-run.js";
 import { maikConfig, geminiKey } from "./maik-gateway.js";
-import { verifyAuditChain, checkAnchors } from "./audit-chain.js";
+import { verifyAuditChain, checkAnchorStores, anchorStoresOf } from "./audit-chain.js";
 
 /* P2.17. What the ward is told when the outside copy of the audit trail no longer matches the
  * database. Stronger than the generic integrity line on purpose: a changed trail below the
@@ -29,10 +29,25 @@ import { verifyAuditChain, checkAnchors } from "./audit-chain.js";
  * looked, because that is exactly how the evidence disappears. */
 const ANCHOR_TAMPER_CONSEQUENCE = "The audit trail was changed below the application. Tell the information governance lead. Do not restore or re-import.";
 
+/* G12. One verdict for a verified chain and its outside copies, used by both chain lines. A rewritten
+ * or truncated trail, or two copies that disagree with each other, is down with the governance
+ * consequence; nothing anchored for an empty chain is up; anything else short of ok is degraded. */
+async function anchoredVerdict(repository, chainId, v, storesIn) {
+  if (v.status !== "ok" && v.status !== "empty") return down(v.message);
+  const stores = anchorStoresOf(storesIn);
+  if (!stores.length) return up(v.message);
+  const a = await checkAnchorStores(repository, chainId, stores.map((s) => s.store));
+  if (a.status === "ok") return up(`${v.message} ${a.message}`);
+  // A hospital with no chained rows has nothing to anchor. Degraded forever would teach people to ignore this line.
+  if (v.status === "empty" && a.status === "no-anchors") return up(`${v.message} Nothing to anchor yet.`);
+  if (a.status === "rewritten" || a.status === "truncated" || a.status === "disagree") return { ...down(a.message), consequence: ANCHOR_TAMPER_CONSEQUENCE };
+  return degraded(a.message);
+}
+
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
 /* Thresholds, returned on the report so a reader can see what "degraded" meant. */
-const LIMITS = Object.freeze({ auditChainRows: 200, recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
+const LIMITS = Object.freeze({ auditChainRows: 200, orgAuditChainRows: 200, recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
 
 class ProbeTimeout extends Error {}
 
@@ -177,20 +192,28 @@ const DEPENDENCIES = [
     },
     async check(d) {
       const v = await verifyAuditChain(d.repository, d.tenantId, { limit: LIMITS.auditChainRows });
-      if (v.status !== "ok" && v.status !== "empty") return down(v.message);
-      if (!d.anchorStore) return up(v.message);
-      const a = await checkAnchors(d.repository, d.tenantId, d.anchorStore);
-      if (a.status === "ok") return up(`${v.message} ${a.message}`);
-      // A hospital with no chained rows has nothing to anchor. Degraded forever would teach people to ignore this line.
-      if (v.status === "empty" && a.status === "no-anchors") return up(`${v.message} Nothing to anchor yet.`);
-      if (a.status === "rewritten" || a.status === "truncated") return { ...down(a.message), consequence: ANCHOR_TAMPER_CONSEQUENCE };
-      return degraded(a.message);
+      return anchoredVerdict(d.repository, d.tenantId, v, d.anchorStores || d.anchorStore);
+    },
+  },
+  {
+    /* G3. The hospital event log (sign-ins, staff and hospital setting changes) has its own chain in
+     * the org store. Not handed in, or not verified, is down: nobody checked it. */
+    id: "org-audit-chain", name: "Staff and sign-in audit trail integrity",
+    consequence: {
+      down: "Staff and sign-in audit integrity not confirmed: sign-ins, staff changes and hospital setting changes in the hospital event log may have been changed or removed in the store, or the check could not run. Charting continues and nothing is blocked. Tell the information governance lead.",
+      degraded: "Staff and sign-in audit anchoring not confirmed: an outside copy has nothing to compare yet or could not be read. The chain itself checked out. Charting continues and nothing is blocked.",
+    },
+    async check(d) {
+      const chain = d.orgAuditChain;
+      if (!chain) return down("Not verified: the hospital event log chain was not handed in, so its integrity is unknown.");
+      const v = await verifyAuditChain(chain, chain.chainId, { limit: LIMITS.orgAuditChainRows });
+      return anchoredVerdict(chain, chain.chainId, v, d.anchorStores || d.anchorStore);
     },
   },
 ];
 
 /**
- * deps: { repository, tenantId, env, maik, rpoMinutes, anchorStore?, orgProbe(), documentProbe(), lastTick(),
+ * deps: { repository, tenantId, env, maik, rpoMinutes, anchorStore? | anchorStores?, orgAuditChain?, orgProbe(), documentProbe(), lastTick(),
  *   fetchImpl?, timeoutMs?, now?() }
  */
 async function systemHealthReport(deps) {

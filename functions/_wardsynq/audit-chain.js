@@ -341,6 +341,71 @@ async function checkAnchors(repository, tenantId, anchorStore) {
     message: `${base} Acknowledged restore by ${ack.by} on ${ordered[0].at || "an earlier run"}, incident ${ack.incidentRef}.` };
 }
 
+/* G12 ANCHOR STORE PORT. An anchor store is `{name, get(key) -> string|null, put(key, value)}` on
+ * strings, and nothing else. Production hands in two, neither of them D1: KV (the router's
+ * auditAnchorStore) and Firestore (functions/_q_audit_chain.js firestoreAnchorStore). The S3 bucket
+ * planned for the AWS move (owner D12) is a third implementation of the same three members, not a
+ * change here. Every function above still takes a single store, so one-store callers are unchanged.
+ *
+ * TWO STORES, TWO QUESTIONS. Does each copy match the database (checkAnchors, per store)? Do the
+ * copies agree with each other (anchorDisagreement)? A disagreement is its own finding: an attacker
+ * who controls the database and ONE store can make that store agree with a rebuilt chain, and only
+ * the other store's different hash for the same row shows it. */
+
+const ANCHOR_RANK = Object.freeze({ rewritten: 6, truncated: 6, disagree: 5, "not-verified": 4, "no-anchors": 3, ok: 1 });
+
+/** PURE. What a caller handed in, as named stores: a store, an array of stores, or nothing. */
+function anchorStoresOf(x) {
+  const list = (Array.isArray(x) ? x : x ? [x] : []).filter((s) => s && typeof s.get === "function");
+  return list.map((s, i) => ({ store: s, name: str(s.name) || (list.length === 1 ? "Outside copy" : `Outside copy ${i + 1}`) }));
+}
+
+/**
+ * The lowest chained row two stores both anchored with DIFFERENT hashes, or null when every shared
+ * row agrees. A store whose log cannot be read is skipped here: checkAnchors already names it.
+ */
+async function anchorDisagreement(tenantId, stores) {
+  const logs = [];
+  for (const s of anchorStoresOf(stores)) {
+    let log = null;
+    try { log = parseAnchorLog(await s.store.get(anchorKey(tenantId))); } catch { log = null; }
+    if (log && log.length) logs.push({ name: s.name, bySeq: new Map(log.map((a) => [a.seq, a])) });
+  }
+  let found = null;
+  for (let i = 0; i < logs.length; i++) for (let j = i + 1; j < logs.length; j++) {
+    for (const [seq, a] of logs[i].bySeq) {
+      const b = logs[j].bySeq.get(seq);
+      if (b && b.hash !== a.hash && (!found || seq < found.seq)) found = { seq, copies: [{ name: logs[i].name, hash: a.hash, at: a.at || null }, { name: logs[j].name, hash: b.hash, at: b.at || null }] };
+    }
+  }
+  if (!found) return null;
+  return { ...found, message: `The outside copies disagree at chained row ${found.seq}: ${found.copies[0].name} and ${found.copies[1].name} hold different hashes for it. One of them was changed outside the application.` };
+}
+
+/**
+ * Every store compared against the chain, and the stores compared with each other. One store
+ * returns exactly what checkAnchors returns. Several return the worst status (rewritten or
+ * truncated, then disagree, not-verified, no-anchors, ok), `stores` with each store's own result,
+ * and `disagreement`. Never throws, never ok unless every store is ok.
+ */
+async function checkAnchorStores(repository, tenantId, stores) {
+  const list = anchorStoresOf(stores);
+  if (!list.length) return { status: "no-anchors", stores: [], message: "No anchor store was handed in, so there is nothing outside the database to compare against." };
+  if (list.length === 1) return checkAnchors(repository, tenantId, list[0].store);
+  const results = [];
+  for (const s of list) results.push({ name: s.name, ...(await checkAnchors(repository, tenantId, s.store)) });
+  const disagreement = await anchorDisagreement(tenantId, list.map((s) => s.store));
+  let worst = results[0];
+  for (const r of results) if ((ANCHOR_RANK[r.status] || 4) > (ANCHOR_RANK[worst.status] || 4)) worst = r;
+  const status = disagreement && (ANCHOR_RANK[worst.status] || 4) < ANCHOR_RANK.disagree ? "disagree" : worst.status;
+  const message = [disagreement ? disagreement.message : null, ...results.map((r) => `${r.name}: ${r.message}`)].filter(Boolean).join(" ");
+  const out = { status, stores: results, disagreement, message };
+  if (status === "rewritten" || status === "truncated") Object.assign(out, { atSeq: worst.atSeq, headSeq: worst.headSeq, expected: worst.expected, found: worst.found });
+  if (status === "disagree") out.atSeq = disagreement.seq;
+  if (status === "ok") { const ack = results.find((r) => r.acknowledgement); if (ack) out.acknowledgement = ack.acknowledgement; }
+  return out;
+}
+
 /* ANCHOR ARCHIVE. acknowledgeAnchorBreak() below moves the broken log here before restarting it. The
  * key carries the acknowledgement time so every acknowledgement keeps its own archive, and archives
  * are write-once: nothing in this file ever deletes one, so the evidence of what the restore
@@ -377,6 +442,11 @@ async function acknowledgeAnchorBreak(repository, tenantId, anchorStore, opts) {
   const by = str(o.by), reason = str(o.reason), incidentRef = str(o.incidentRef);
   const nowIso = str(o.nowIso) || new Date().toISOString();
   const fail = (status, error, message, extra) => ({ ok: false, status, error, message, ...(extra || {}) });
+  /* G12: several stores. Every store that reads rewritten or truncated is restarted, and a store that
+   * holds no anchors yet is seeded with the same fresh entry, under ONE chained acknowledgement. A
+   * store that already matches is left alone, so a retry after a partial failure redoes only the rest. */
+  if (Array.isArray(anchorStore) && anchorStore.length > 1) return acknowledgeAcrossStores(repository, tenantId, anchorStoresOf(anchorStore), { by, reason, incidentRef, nowIso }, fail);
+  if (Array.isArray(anchorStore)) anchorStore = anchorStore[0];
   if (!anchorStore || typeof anchorStore.get !== "function" || typeof anchorStore.put !== "function") {
     return fail(503, "anchor_store_unavailable", "No outside copy store was handed in, so the anchor log cannot be acknowledged and nothing was changed.");
   }
@@ -429,4 +499,64 @@ async function acknowledgeAnchorBreak(repository, tenantId, anchorStore, opts) {
     message: `Acknowledged: the anchor log that reported ${current.status} at chained row ${current.atSeq} is archived, and a fresh log starts at chained row ${seq}.` };
 }
 
-export { GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, ANCHOR_ACK_ACTION, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorArchiveKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors, acknowledgeAnchorBreak };
+async function acknowledgeAcrossStores(repository, tenantId, list, k, fail) {
+  if (list.length < 2 || list.some((s) => typeof s.store.put !== "function")) {
+    return fail(503, "anchor_store_unavailable", "An outside copy store cannot be written, so the anchor logs cannot be acknowledged and nothing was changed.");
+  }
+  if (!repository || typeof repository.auditChainHead !== "function" || typeof repository.auditChainRows !== "function" || typeof repository.auditOnly !== "function") {
+    return fail(502, "repository_unavailable", "This deployment's storage cannot write the acknowledgement, so the anchor logs were left in place.");
+  }
+  const current = await checkAnchorStores(repository, tenantId, list.map((s) => s.store));
+  if (current.status !== "rewritten" && current.status !== "truncated") {
+    return { ok: false, status: 409, error: "nothing_to_acknowledge", anchorStatus: current.status,
+      message: current.status === "ok"
+        ? "Nothing to acknowledge: every outside copy matches the database, so the anchor logs were left in place."
+        : `Nothing to acknowledge: the outside copies read ${current.status}, not rewritten or truncated, so the anchor logs were left in place.` };
+  }
+  const targets = [];
+  for (const [i, r] of current.stores.entries()) {
+    if (r.status !== "rewritten" && r.status !== "truncated" && r.status !== "no-anchors") continue;
+    let raw;
+    try { raw = await list[i].store.get(anchorKey(tenantId)); }
+    catch { return fail(502, "anchor_unreadable", `${list[i].name} could not be read, so the anchor logs were left in place.`); }
+    const log = parseAnchorLog(raw);
+    if (log === null || (r.status !== "no-anchors" && !log.length)) return fail(502, "anchor_unreadable", `${list[i].name} does not hold a readable anchor log, so the anchor logs were left in place rather than acknowledged blind.`);
+    targets.push({ ...list[i], raw, log, seedOnly: r.status === "no-anchors" });
+  }
+  try {
+    await repository.auditOnly(tenantId, { ts: k.nowIso, actor: k.by, connectorId: "wardsynq",
+      action: ANCHOR_ACK_ACTION, scope: { previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null, incidentRef: k.incidentRef },
+      outcome: "ok", detail: `Anchor break acknowledged (was ${current.status} at chained row ${current.atSeq}): incident ${k.incidentRef}.` });
+  } catch { return fail(502, "audit_failed", "The acknowledgement could not be written to the audit trail, so the anchor logs were left in place."); }
+  let head;
+  try { head = await repository.auditChainHead(tenantId); }
+  catch { return fail(502, "head_unreadable", "The acknowledgement was chained but the audit chain head could not be read back, so the anchor logs were left in place."); }
+  const seq = head ? num(head.seq != null ? head.seq : head.chainSeq) : null;
+  const hash = head ? str(head.hash != null ? head.hash : head.rowHash) : "";
+  if (seq == null || seq <= 0 || !hash) return fail(502, "head_unreadable", "The acknowledgement was chained but the audit chain head could not be read back, so the anchor logs were left in place.");
+  const acknowledged = { by: k.by, reason: k.reason, incidentRef: k.incidentRef, previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null };
+  const archiveKey = anchorArchiveKey(tenantId, k.nowIso);
+  const done = [], notSeeded = [];
+  const already = () => (done.length ? `Already restarted: ${done.join(", ")}. ` : "");
+  /* Broken stores first: they are the acknowledgement. Seeding an empty store is a convenience whose
+   * failure is named but does not undo it; that store gets its copy on the next hourly anchor. */
+  targets.sort((a, b) => Number(a.seedOnly) - Number(b.seedOnly));
+  for (const t of targets) {
+    if (t.seedOnly) {
+      try { await t.store.put(anchorKey(tenantId), JSON.stringify([anchorEntry(seq, hash, k.nowIso, acknowledged)])); done.push(t.name); }
+      catch { notSeeded.push(t.name); }
+      continue;
+    }
+    try { await t.store.put(archiveKey, typeof t.raw === "string" ? t.raw : JSON.stringify(t.log)); }
+    catch { return fail(502, "archive_failed", `${t.name}: the old anchor log could not be archived, so it was left in place. ${already()}Acknowledging again is safe.`, { archived: null, restarted: done }); }
+    try { await t.store.put(anchorKey(tenantId), JSON.stringify([anchorEntry(seq, hash, k.nowIso, acknowledged)])); }
+    catch { return fail(502, "replace_failed", `${t.name}: the fresh anchor log could not be written, so its old log is still in place. ${already()}Acknowledging again is safe: it archives again rather than deleting.`, { archived: archiveKey, restarted: done }); }
+    done.push(t.name);
+  }
+  return { ok: true, status: "acknowledged", seq, hash, at: k.nowIso, by: k.by, incidentRef: k.incidentRef,
+    previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null, archived: archiveKey, restarted: done, notSeeded, anchors: 1,
+    message: `Acknowledged: the anchor logs that reported ${current.status} at chained row ${current.atSeq} are archived, and fresh logs start at chained row ${seq} in ${done.join(" and ")}.` +
+      (notSeeded.length ? ` ${notSeeded.join(" and ")} held no copy and could not be given one now; it gets one on the next hourly anchor.` : "") };
+}
+
+export { ANCHOR_RANK, anchorStoresOf, anchorDisagreement, checkAnchorStores, GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, ANCHOR_ACK_ACTION, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorArchiveKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors, acknowledgeAnchorBreak };

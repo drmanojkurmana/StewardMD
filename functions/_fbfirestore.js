@@ -78,6 +78,28 @@ export async function fsGet(env, path) {
   return { id: docId(d.name), name: d.name, fields: decodeFields(d.fields), updateTime: d.updateTime };
 }
 
+// GET many documents in ONE request (documents:batchGet). Returns a Map path -> decoded doc, or null
+// for a path that does not exist. Throws on a failed request: a failed read is never "all missing".
+export async function fsBatchGet(env, paths) {
+  const list = (paths || []).map((p) => String(p).replace(/^\/+/, ""));
+  const out = new Map(list.map((p) => [p, null]));
+  if (!list.length) return out;
+  const tok = await fsToken(env);
+  const res = await fetch(fsUrl(env, ":batchGet"), {
+    method: "POST",
+    headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" },
+    body: JSON.stringify({ documents: list.map((p) => fsDocName(env, p)) }),
+  });
+  if (!res.ok) throw Object.assign(new Error("fs_batch_get_failed"), { code: "fs_batch_get", status: res.status, detail: (await res.text()).slice(0, 300) });
+  const root = fsRoot(env) + "/";
+  for (const r of (await res.json()) || []) {
+    if (r && r.found && String(r.found.name).startsWith(root)) {
+      out.set(r.found.name.slice(root.length), { id: docId(r.found.name), name: r.found.name, fields: decodeFields(r.found.fields), updateTime: r.found.updateTime });
+    }
+  }
+  return out;
+}
+
 // ---- write builders --------------------------------------------------------------------
 // Create-if-absent: the whole doc is written only when it does not already exist. Used for
 // code generation (uniqueness) and the activation record.

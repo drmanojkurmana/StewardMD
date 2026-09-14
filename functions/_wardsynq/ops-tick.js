@@ -18,7 +18,7 @@
  */
 
 import { drainOutbox } from "./outbox.js";
-import { anchorHead } from "./audit-chain.js";
+import { anchorHead, anchorStoresOf } from "./audit-chain.js";
 import { escalationOf } from "./critical-results.js";
 import { VersionConflictError } from "./repository.js";
 import { dispatchLevel, smsFallbackDue } from "./push-alerts.js";
@@ -70,8 +70,23 @@ async function escalateCriticals(repository, tenantId, opts) {
  * the step reports skipped and writes nothing. */
 async function anchorTick(repository, tenantId, opts) {
   const o = opts || {};
-  if (!o.anchorStore) return { status: "skipped", message: "No anchor store was handed in, so the chain head was not anchored on this run." };
-  return anchorHead(repository, tenantId, o.anchorStore, new Date(o.nowMs || Date.now()).toISOString());
+  const stores = anchorStoresOf(o.anchorStores || o.anchorStore);
+  if (!stores.length) return { status: "skipped", message: "No anchor store was handed in, so the chain head was not anchored on this run." };
+  const at = new Date(o.nowMs || Date.now()).toISOString();
+  /* G12: every chain (the clinical one, and the hospital event log when handed in) into every store,
+   * each attempt on its own, so one store down never stops the other store getting its copy. */
+  const chains = [{ label: null, repository, id: tenantId }];
+  if (o.orgAuditChain) chains.push({ label: "event log", repository: o.orgAuditChain, id: o.orgAuditChain.chainId });
+  if (stores.length === 1 && chains.length === 1) return anchorHead(repository, tenantId, stores[0].store, at);
+  const results = [];
+  for (const c of chains) for (const s of stores) {
+    const where = c.label ? `${s.name} (${c.label})` : s.name;
+    try { results.push({ where, status: (await anchorHead(c.repository, c.id, s.store, at)).status }); }
+    catch (e) { results.push({ where, error: String((e && e.message) || e).slice(0, 120) }); }
+  }
+  const failed = results.filter((r) => r.error);
+  if (failed.length) return { status: "failed", at, stores: results, failedIn: failed.map((r) => r.where).join(", "), error: failed.map((r) => `${r.where}: ${r.error}`).join("; ").slice(0, 200) };
+  return { status: results.some((r) => r.status === "conflict") ? "conflict" : "ok", at, stores: results };
 }
 
 /** One pass for one hospital. Each third is reported on its own; one failing does not hide the others. */

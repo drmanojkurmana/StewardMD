@@ -70,6 +70,13 @@ export async function userSmdId(env, uid, email) {
   try { await fsCommit(env, [wUpdate(env, "q_users/" + id, { smdId, email: String(email || "").toLowerCase(), createdAt: now() })]); } catch (e) {}
   return smdId;
 }
+// G11: the email recorded for a Google account (q_users, written by userSmdId), so the security review can
+// count one person's Google and email sign-ins as one reader. null when none is recorded.
+export async function accountEmail(env, actorId) {
+  const id = sanitize(actorId); if (!id) return null;
+  const d = await fsGet(env, "q_users/" + id);
+  return d && d.fields && d.fields.email ? String(d.fields.email).toLowerCase() : null;
+}
 // Every institution, for the PLATFORM owner's tenant console only (never an org-scoped caller).
 // Decoding goes through M.org/withId like every other read in this file, so the shape cannot drift.
 export async function listAllOrgs(env, limit) {

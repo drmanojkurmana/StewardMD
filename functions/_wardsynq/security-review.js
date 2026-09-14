@@ -34,7 +34,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { RUN_TYPE, rpoVerdict } from "./backup-run.js";
 import { span } from "../_roster.js";
-import { verifyAuditChain, checkAnchors, auditRetentionSetting } from "./audit-chain.js";
+import { verifyAuditChain, checkAnchorStores, anchorStoresOf, auditRetentionSetting } from "./audit-chain.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000;
@@ -42,6 +42,8 @@ const REVIEW_TYPE = "SecurityReview";
 const RESTORE_TYPE = "RestoreTest";
 const EVIDENCE_CAP = 50;
 const AUDIT_VERIFY_LIMIT = 1000;
+/* G3: the hospital event log is verified in Firestore batches, so its window is smaller. */
+const ORG_VERIFY_LIMIT = 300;
 
 /* Every threshold in one place, and returned on the report so a reviewer can see the method. */
 const RULES = Object.freeze({
@@ -61,7 +63,7 @@ const METHOD = {
   "failed-sign-ins": "5 or more failed, locked or refused sign-in or two-step attempts for one staff ID in the period.",
   "new-device": "A successful sign-in from a device label not seen on any earlier successful sign-in for that staff ID. The device label is coarse (from the browser's user agent), so this is a prompt to ask, not proof of a different machine.",
   "many-devices": "Successful sign-ins for one staff ID from 3 or more device labels within 60 minutes.",
-  "out-of-assignment": "A read of a patient when the reader was neither the nurse assigned to that admission nor rostered on a shift whose unit is the admission's ward (names compared ignoring case), at the time of the read. Exempt reads are listed separately, and a read that cannot be compared is counted as not evaluated with its reason, never as clean. Only the admission's current ward is known, so a read made before a transfer compares against the ward the patient is on now.",
+  "out-of-assignment": "A read of a patient when the reader was neither the nurse assigned to that admission nor rostered on a shift whose unit is the ward the patient was on at the time of the read (names compared ignoring case). The ward at the time comes from the admission's version history, so a read before a transfer compares against the ward the patient was on then. One person signed in by different methods (Google account, email access, staff sign-in) is matched by email and counted as one reader. Each finding lists, per read, the patient's ward then and the wards the reader was rostered on then. Exempt reads are listed separately, and a read that cannot be compared is counted as not evaluated with its reason, never as clean.",
 };
 
 const NOT_DETECTED = [
@@ -87,7 +89,8 @@ function evidenceRow(e) {
   const scope = e.scope || {};
   return { id: e.id || null, ts: e.ts, actor: actorOf(e) || null, action: e.action || null,
     resourceType: scope.resourceType || null, recordId: scope.id || null, patientRef: e.patientRefHash || null, outcome: e.outcome || null,
-    detail: e.meta != null ? str(e.meta) : (e.detail != null ? str(e.detail) : null) };
+    detail: e.meta != null ? str(e.meta) : (e.detail != null ? str(e.detail) : null),
+    ...(e.wardAtRead !== undefined ? { wardAtRead: e.wardAtRead, readerWardsAtRead: e.readerWardsAtRead || [] } : {}) };
 }
 
 function finding(type, actor, summary, rows, extra) {
@@ -188,6 +191,85 @@ function rosterIntervals(roster, utcOffsetMinutes) {
   return out;
 }
 
+/** PURE (G11). An admission's wards over time from its version history (ascending or not): one stay per
+ * run of versions on the same ward, each starting at the transfer that moved the patient there. */
+function wardHistoryStays(versions, patientRef) {
+  const vs = (versions || []).filter(Boolean).sort((a, b) => (Number(a.version) || 0) - (Number(b.version) || 0));
+  const out = [];
+  for (const v of vs) {
+    const ward = str(v.location && v.location.ward);
+    const last = out[out.length - 1];
+    if (last && wardKey(last.ward) === wardKey(ward)) { last.attendingId = v.attendingId || last.attendingId; last.to = v.periodEnd || null; continue; }
+    /* A version on a new ward without a transfer time cannot be placed: its stay starts where the last one did,
+     * so both wards cover that span. That can only miss a finding, never make one up. */
+    const from = last ? (v.movedAt || (v.meta && v.meta.recordedAt) || (v.writtenBy && v.writtenBy.at) || last.from) : (v.periodStart || null);
+    if (last) last.to = from;
+    out.push({ patientRef, ward, attendingId: v.attendingId || null, from, to: v.periodEnd || null });
+  }
+  return out;
+}
+
+/** PURE (G11). One reader across sign-in methods. links: [[idA, idB], ...] naming the same person (a
+ * membership identity and its email, an email and its access id, a Google account and its email).
+ * preferred: ids to name the person by (membership identities). Returns {id: person}. */
+function readerAliases(links, preferred) {
+  const parent = new Map();
+  const find = (x) => { while (parent.get(x) !== x) { parent.set(x, parent.get(parent.get(x))); x = parent.get(x); } return x; };
+  const add = (x) => { if (!parent.has(x)) parent.set(x, x); };
+  for (const [a, b] of links || []) {
+    const x = str(a), y = str(b);
+    if (!x || !y) continue;
+    add(x); add(y);
+    parent.set(find(x), find(y));
+  }
+  const pref = new Set((preferred || []).map(str));
+  const groups = groupBy([...parent.keys()], find);
+  const out = {};
+  for (const ids of groups.values()) {
+    const name = ids.filter((i) => pref.has(i)).sort()[0] || ids.filter((i) => !i.includes("@")).sort()[0] || ids.sort()[0];
+    for (const i of ids) out[i] = name;
+  }
+  return out;
+}
+
+const HISTORY_READ_MAX = 200;
+const ACCOUNT_LOOKUP_MAX = 200;
+
+/**
+ * G11. The links that make one person one reader, from what the hospital already holds: each
+ * membership's identity and email, each email's access id, and each Google account's email.
+ * directory: { accountEmail(id) -> email|null, accessIdOf(email) -> id } (handed in by the router).
+ * Without a directory ids are compared as they are, and the report says so. A match that could not be
+ * made is a NOTE, not incomplete data: it can split one person in two, which the note names, but it
+ * cannot hide a read, so it must not turn every read in the hospital into "not evaluated".
+ */
+async function readerAliasesFor(directory, members, events, notes) {
+  if (!directory || typeof directory.accessIdOf !== "function") {
+    notes.push("Sign-in accounts could not be matched to staff emails, so one person signing in different ways counts as separate readers.");
+    return {};
+  }
+  const links = [];
+  const emails = new Set();
+  const isEmail = (x) => /^[^@\s]+@[^@\s]+$/.test(str(x));
+  for (const m of members) {
+    if (!m || !m.identity) continue;
+    if (m.email) { links.push([m.identity, str(m.email).toLowerCase()]); emails.add(str(m.email).toLowerCase()); }
+    if (isEmail(m.identity)) { links.push([m.identity, str(m.identity).toLowerCase()]); emails.add(str(m.identity).toLowerCase()); }
+  }
+  const accounts = [...new Set((events || []).map(actorOf).filter((a) => a.startsWith("fb:")))];
+  let unmatched = 0;
+  for (const [i, id] of accounts.entries()) {
+    if (i >= ACCOUNT_LOOKUP_MAX || typeof directory.accountEmail !== "function") { unmatched += 1; continue; }
+    try { const email = str(await directory.accountEmail(id)).toLowerCase(); if (email) { links.push([id, email]); emails.add(email); } }
+    catch { unmatched += 1; }
+  }
+  if (unmatched) notes.push(`${unmatched} Google sign-in account${unmatched === 1 ? "" : "s"} could not be matched to an email, so ${unmatched === 1 ? "it counts" : "they count"} as a separate reader.`);
+  for (const email of emails) {
+    try { links.push([email, await directory.accessIdOf(email)]); } catch { /* the email alone still links what it can */ }
+  }
+  return readerAliases(links, members.map((m) => m && m.identity).filter(Boolean));
+}
+
 /**
  * PURE. Reads of a patient the reader was not assigned to at the time.
  *   reads:        audit rows (record.read with patientRefHash)
@@ -201,15 +283,19 @@ function outOfAssignmentFindings(reads, assignments, opts) {
   const o = opts || {};
   const fromMs = msOf(o.period.from), toMs = msOf(o.period.to);
   const inTenant = (x) => !o.tenantId || x.tenantId == null || x.tenantId === o.tenantId;
+  /* G11: every id is mapped to its person first, so one person's Google, email and staff sign-ins are one reader. */
+  const aliases = o.aliases || {};
+  const who = (id) => aliases[str(id)] || str(id);
   const stays = (o.stays || []).filter((s) => s && inTenant(s));
   const knownWards = new Set(stays.map((s) => wardKey(s.ward)).filter(Boolean));
   /* A rota unit counts only when it names a ward some admission is on: a unit called "Nights" or a
    * misspelt ward would otherwise turn every read by that person into a finding. */
   const usable = (assignments || []).filter((a) => a && inTenant(a) && (a.patientRef || knownWards.has(wardKey(a.ward))));
-  const mine = groupBy(usable, (a) => str(a.staffId));
+  const mine = groupBy(usable, (a) => who(a.staffId));
   const byPatient = groupBy(stays, (s) => s.patientRef);
   const grants = (o.breakGlass || []).filter(Boolean);
   const incomplete = (o.incomplete || []).filter(Boolean);
+  const roles = o.roles ? Object.fromEntries(Object.entries(o.roles).map(([k, v]) => [who(k), v])) : null;
   const hasData = (actor) => (mine.get(actor) || []).some((a) => lo(a.from) < toMs && hi(a.to) > fromMs);
 
   const inPeriod = (reads || []).filter((e) => e && e.action === "record.read" && e.patientRefHash && actorOf(e) && inTenant(e)
@@ -224,25 +310,31 @@ function outOfAssignmentFindings(reads, assignments, opts) {
   let assigned = 0;
   const tally = (m, actor, key, e) => { const k = actor + "|" + key; if (!m.has(k)) m.set(k, { actor, key, rows: [] }); m.get(k).rows.push(e); };
   for (const e of inPeriod) {
-    const t = msOf(e.ts), actor = actorOf(e), ref = e.patientRefHash;
-    if (grants.some((g) => str(g.actorId) === actor && g.patientRef === ref && within(t, g.from, g.to))) { tally(exempt, actor, "break-glass", e); continue; }
-    const role = o.roles ? o.roles[actor] : undefined;
+    const t = msOf(e.ts), actor = who(actorOf(e)), ref = e.patientRefHash;
+    if (grants.some((g) => who(g.actorId) === actor && g.patientRef === ref && within(t, g.from, g.to))) { tally(exempt, actor, "break-glass", e); continue; }
+    const role = roles ? roles[actor] : undefined;
     if (role && EXEMPT_ROLES.includes(role)) { tally(exempt, actor, "role-not-ward-assigned", e); continue; }
     const stay = (byPatient.get(ref) || []).filter((s) => within(t, s.from, s.to));
-    if (stay.some((s) => str(s.attendingId) === actor)) { tally(exempt, actor, "treating-clinician", e); continue; }
+    if (stay.some((s) => s.attendingId && who(s.attendingId) === actor)) { tally(exempt, actor, "treating-clinician", e); continue; }
     const covered = (mine.get(actor) || []).some((a) => within(t, a.from, a.to)
       && ((a.patientRef && a.patientRef === ref) || (a.ward && stay.some((s) => wardKey(s.ward) === wardKey(a.ward)))));
     if (covered) { assigned += 1; continue; }
-    if (!o.roles) tally(notEval, actor, "Staff roles could not be read, so the role exemption could not be applied.", e);
+    if (!roles) tally(notEval, actor, "Staff roles could not be read, so the role exemption could not be applied.", e);
     else if (!hasData(actor)) tally(notEval, actor, "No nurse assignment or rota shift matching an admission's ward is recorded for this person in the period.", e);
     else if (incomplete.length) tally(notEval, actor, "Assignment data is incomplete: " + incomplete.join("; ") + ".", e);
     else if (!stay.length) tally(notEval, actor, "The patient had no admission on record at the time of the read, so there is no ward to compare against.", e);
-    else flagged.push(e);
+    else {
+      /* The ward history behind the flag: where the patient was, and where the reader was rostered, at that moment. */
+      const readerWards = [...new Set((mine.get(actor) || []).filter((a) => a.ward && within(t, a.from, a.to)).map((a) => a.ward))];
+      flagged.push({ ...e, reader: actor, wardAtRead: [...new Set(stay.map((s) => s.ward))].join(", "), readerWardsAtRead: readerWards });
+    }
   }
 
-  const findings = [...groupBy(flagged, actorOf)].map(([actor, rows]) => {
+  const findings = [...groupBy(flagged, (e) => e.reader)].map(([actor, rows]) => {
     const patients = new Set(rows.map((e) => e.patientRefHash)).size;
-    return finding("out-of-assignment", actor, `${rows.length} read${rows.length === 1 ? "" : "s"} of ${patients} patient${patients === 1 ? "" : "s"} this person was not assigned to at the time.`, rows, { patients });
+    const ids = [...new Set(rows.map(actorOf))];
+    return finding("out-of-assignment", actor, `${rows.length} read${rows.length === 1 ? "" : "s"} of ${patients} patient${patients === 1 ? "" : "s"} this person was not assigned to at the time.`, rows,
+      { patients, ...(ids.length > 1 || (ids.length === 1 && ids[0] !== actor) ? { signIns: ids } : {}) });
   });
   const summarise = (m, field) => [...m.values()].map((x) => ({ actor: x.actor, [field]: x.key, reads: x.rows.length, evidence: x.rows.slice(0, EVIDENCE_CAP).map(evidenceRow) }));
   return {
@@ -414,6 +506,29 @@ function auditRetention(oldestAuditAt, oldestRecordAt, setting) {
   return out;
 }
 
+/** PURE. Hospital event-log rows that carry no chain link (G3), split at when linking began.
+ * startMs: the first linked row's time, or null when nothing has been linked yet. Unlinked rows are
+ * never verified: before linking began they are the old era; after it they are a lost linking race or
+ * a row added outside the application, and they are listed. */
+function unlinkedRows(events, startMs, partial) {
+  const all = (events || []).filter(Boolean);
+  const rows = all.filter((e) => e.rowHash == null || e.rowHash === "");
+  const start = Number.isFinite(startMs) ? startMs : null;
+  const late = start == null ? [] : rows.filter((e) => msOf(e.ts) >= start);
+  const before = rows.length - late.length;
+  const startAt = start == null ? null : new Date(start).toISOString();
+  const parts = [];
+  if (start == null) parts.push(rows.length ? `No row of the hospital event log has been linked yet: all ${rows.length} rows read are unlinked and cannot be checked.` : "The hospital event log has no rows yet.");
+  else {
+    if (before) parts.push(`${before} row${before === 1 ? " was" : "s were"} written before linking began on ${startAt.slice(0, 10)}. They are not linked and cannot be checked.`);
+    if (late.length) parts.push(`${late.length} row${late.length === 1 ? " was" : "s were"} written after linking began without a link: either linking lost a race with another writer every time, or the row was added outside the application. They cannot be checked.`);
+    if (!rows.length) parts.push(`Every row read carries a link (linking began on ${startAt.slice(0, 10)}).`);
+  }
+  if (partial) parts.push(`Only the first ${all.length} rows of the event log were read, so there may be more.`);
+  return { status: "ok", scanned: all.length, unlinked: rows.length, before, after: late.length, startAt, partial: !!partial,
+    evidence: late.slice(0, EVIDENCE_CAP).map(evidenceRow), message: parts.join(" ") };
+}
+
 async function open_(request, env, ctx, need) {
   try {
     const resolved = await resolveClinicalActor(request, env, ctx.migration.tenantId, need, ctx.actorDeps);
@@ -432,7 +547,7 @@ const unavailable = (e) => ({ status: "unavailable", error: e instanceof Governa
 const section = (findings) => ({ status: "ok", findings, counts: findings.reduce((m, f) => { m[f.type] = (m[f.type] || 0) + 1; return m; }, {}) });
 
 /**
- * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore?, viewerIsOwner?,
+ * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore? | anchorStores?, orgAuditChain?, viewerIsOwner?,
  *   orgEvents: {events, partial} | {error}, viewerId,
  *   assignmentSources: { members: [{identity, role}] | {error}, roster: {shifts, assignments, partial} | {error}, utcOffsetMinutes } }
  */
@@ -473,8 +588,11 @@ async function securityReport(request, env, ctx) {
   /* P2.17: the outside anchors compared against the rows they name. checkAnchors() never throws and
    * is never "ok" on a failed read, so it rides on the section the same way. Without a store there
    * is nothing outside the database to compare against, and the report says so plainly. */
-  retention.anchors = ctx.anchorStore
-    ? await checkAnchors(repository, tenantId, ctx.anchorStore)
+  /* G12: every store handed in (KV and Firestore in production), each compared with the chain and with
+   * each other; a disagreement between the copies is its own finding. */
+  const stores = anchorStoresOf(ctx.anchorStores || ctx.anchorStore).map((x) => x.store);
+  retention.anchors = stores.length
+    ? await checkAnchorStores(repository, tenantId, stores)
     : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the database to compare against." };
   /* P2.17 acknowledgement. Only the hospital owner may acknowledge a legitimate restore, so the
    * report tells the screen whether the viewer is one (decided by the route, which knows the org,
@@ -485,6 +603,25 @@ async function securityReport(request, env, ctx) {
   }
 
   const orgEvents = ctx.orgEvents || { error: "not_supplied" };
+  /* G3: the hospital event log (sign-ins, staff and hospital changes) is chained on its own. Its
+   * verification never throws and is never ok on a failed read; its unlinked rows are named. */
+  const orgChain = ctx.orgAuditChain;
+  retention.orgIntegrity = orgChain
+    ? await verifyAuditChain(orgChain, orgChain.chainId, { limit: ORG_VERIFY_LIMIT })
+    : { status: "not_verified", message: "Not verified: the hospital event log chain could not be reached, so its integrity is unknown." };
+  if (orgChain) {
+    retention.orgAnchors = stores.length
+      ? await checkAnchorStores(orgChain, orgChain.chainId, stores)
+      : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the store to compare against." };
+    retention.orgAnchors.canAcknowledge = ctx.viewerIsOwner === true;
+  }
+  const noStart = { status: "unavailable", message: "When linking began could not be read, so unlinked rows could not be counted." };
+  if (orgEvents.error) retention.orgUnlinked = { status: "unavailable", message: "The hospital event log could not be read, so unlinked rows could not be counted." };
+  else if (!orgChain || typeof orgChain.chainStart !== "function") retention.orgUnlinked = noStart;
+  else {
+    try { retention.orgUnlinked = unlinkedRows(orgEvents.events, await orgChain.chainStart(), orgEvents.partial); }
+    catch { retention.orgUnlinked = noStart; }
+  }
   const logins = orgEvents.error
     ? { status: "unavailable", error: "signin_log_unreadable", detail: str(orgEvents.error) }
     : { ...section(loginFindings(orgEvents.events, period)), partial: !!orgEvents.partial };
@@ -521,16 +658,30 @@ async function securityReport(request, env, ctx) {
         intervals.push(...rosterIntervals(src.roster, src.utcOffsetMinutes));
       }
       if (encounters.v.length >= 1000) incomplete.push("only the first 1000 admissions were read");
+      /* G11: a transferred admission's wards over time come from its version history, read only for
+       * admissions that have moved (movedAt), bounded. A history that cannot be read is named. */
       const stays = [];
+      let historyReads = 0, historyFailed = 0;
       for (const enc of encounters.v) {
         if (!enc) continue;
-        stays.push({ patientRef: await refOf(enc.patientId), ward: enc.location && enc.location.ward, attendingId: enc.attendingId || null, from: enc.periodStart || null, to: enc.periodEnd || null });
+        const ref = await refOf(enc.patientId);
+        if (enc.movedAt && typeof repository.history === "function" && historyReads < HISTORY_READ_MAX) {
+          historyReads += 1;
+          try { const vs = await repository.history(tenantId, "Encounter", enc.id); if (Array.isArray(vs) && vs.length) { stays.push(...wardHistoryStays(vs, ref)); continue; } }
+          catch { /* counted below */ }
+          historyFailed += 1;
+        } else if (enc.movedAt) historyFailed += 1;
+        stays.push({ patientRef: ref, ward: enc.location && enc.location.ward, attendingId: enc.attendingId || null, from: enc.periodStart || null, to: enc.periodEnd || null });
       }
+      if (historyFailed) incomplete.push(`the ward history of ${historyFailed} transferred admission${historyFailed === 1 ? "" : "s"} could not be read, so only the current ward is known for ${historyFailed === 1 ? "it" : "them"}`);
       const breakGlass = [];
       for (const g of grants.v || []) if (g) breakGlass.push({ actorId: g.actorId, patientRef: await refOf(g.patientId), from: g.grantedAt, to: g.expiresAt });
       if (grants.e) incomplete.push("break-glass grants could not be read");
       const roles = Array.isArray(src.members) ? Object.fromEntries(src.members.filter((m) => m && m.identity).map((m) => [str(m.identity), str(m.role)])) : null;
-      assignmentAccess = outOfAssignmentFindings(auditRead.events, intervals, { period, tenantId, roles, stays, breakGlass, incomplete });
+      const matching = [];
+      const aliases = await readerAliasesFor(ctx.readerDirectory, Array.isArray(src.members) ? src.members : [], auditRead.events, matching);
+      assignmentAccess = outOfAssignmentFindings(auditRead.events, intervals, { period, tenantId, roles, stays, breakGlass, incomplete, aliases });
+      assignmentAccess.matching = matching;
       if (auditRead.truncated) assignmentAccess.truncated = true;
     } catch (e) { assignmentAccess = unavailable(e); }
   }
@@ -563,6 +714,37 @@ async function securityReport(request, env, ctx) {
     counts, chartAccess, assignmentAccess, exports, logins, reviewQueue: queue, dataProtection: protection, auditRetention: retention,
     rules: RULES, methods: METHOD, notDetected: NOT_DETECTED,
   };
+}
+
+const AUDIT_ROWS_MAX = 200;
+const AUDIT_ID_RE = /^[A-Za-z0-9_.:-]{1,120}$/;
+
+/**
+ * G11 CLICKABLE EVIDENCE. The audit rows behind a finding, read back by id, as the reviewer sees them
+ * (envelope only, never record content) with each row's chain link number. Reading them is itself
+ * audited, and a read that could not be recorded is refused. Ids that were not found are listed, so
+ * a partial answer never looks whole. ctx: { migration, ids: "a,b" | [] }
+ */
+async function auditRowsForReview(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", rows: [] };
+  const { resolved, error } = await open_(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  const ids = [...new Set((Array.isArray(ctx.ids) ? ctx.ids : str(ctx.ids).split(",")).map(str).filter(Boolean))];
+  if (!ids.length || ids.length > AUDIT_ROWS_MAX || ids.some((i) => !AUDIT_ID_RE.test(i))) {
+    return { ...base, ok: false, status: 422, error: "ids_invalid", message: `Name between 1 and ${AUDIT_ROWS_MAX} audit rows by id.` };
+  }
+  const repository = ctx.recordDeps.repository;
+  if (typeof repository.auditRowsById !== "function") return { ...base, ok: false, status: 501, error: "audit_unreadable", message: "This deployment's storage cannot read audit rows back by id." };
+  let rows;
+  try { rows = await repository.auditRowsById(mig.tenantId, ids); }
+  catch { return { ...base, ok: false, status: 502, error: "read_failed", message: "The audit rows could not be read." }; }
+  try { await repository.auditOnly(mig.tenantId, { ts: new Date().toISOString(), actor: resolved.actor.id, connectorId: "wardsynq", action: "security.audit_rows", scope: { rows: ids.length }, outcome: "ok" }); }
+  catch { return { ...base, ok: false, status: 502, error: "audit_failed", message: "The audit rows were not shown because reading them could not be recorded in the audit trail." }; }
+  const found = new Set(rows.map((r) => str(r.id)));
+  return { ...base, ok: true, rows: rows.sort((a, b) => str(a.ts).localeCompare(str(b.ts))).map((r) => ({ ...evidenceRow(r), chainSeq: r.chainSeq == null ? null : r.chainSeq })),
+    missing: ids.filter((i) => !found.has(i)) };
 }
 
 /** ctx: { migration, subjectKind, subjectId, decision, note, orgEvents, viewerId, idempotencyKey? } */
@@ -640,6 +822,6 @@ async function recordRestoreTest(request, env, ctx) {
 
 export {
   RULES, METHOD, NOT_DETECTED, REVIEW_TYPE, RESTORE_TYPE, PRIVILEGED, EXEMPT_ROLES, EXEMPTIONS,
-  chartAccessFindings, nurseAssignmentIntervals, rosterIntervals, outOfAssignmentFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
-  dataProtection, auditRetention, securityReport, recordSecurityReview, recordRestoreTest,
+  chartAccessFindings, nurseAssignmentIntervals, rosterIntervals, wardHistoryStays, readerAliases, readerAliasesFor, outOfAssignmentFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
+  dataProtection, auditRetention, unlinkedRows, ORG_VERIFY_LIMIT, securityReport, auditRowsForReview, recordSecurityReview, recordRestoreTest,
 };

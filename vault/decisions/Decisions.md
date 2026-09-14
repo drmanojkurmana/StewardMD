@@ -6051,3 +6051,63 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
 - Sign-out on wardsynq.com warns when entries are held and clears the device store on confirm. The phone app has
   no equivalent sign-out hook: a different person signing in clears the previous person's entries (ward-offline.js
   rule 4).
+## 2026-09-14 G3: the hospital event log (q_events) is hash-chained like the clinical audit trail
+
+`functions/_q_audit_chain.js` (append, best-effort writer, verification adapter), `qAudit` in `_queue_engine.js`,
+`_queue_notify.js` delivery rows and `_hospital_group_store.js` all write through it. Screens: Admin Center >
+Security review (Tamper evidence: hospital event log), System health ("Staff and sign-in audit trail integrity").
+Tests: `test/wardsynq-org-audit-chain.test.mjs`.
+- ROW IS THE LINK. Each row is `q_events/<hospital key>__c<seq>` carrying `chainSeq` (hashed), `prevHash`,
+  `rowHash`; the head `q_audit_chain_head/<hospital key>` = `{seq, hash}` moves in the SAME `fsCommit`. The race
+  guard is `currentDocument.exists=false` on the row (Firestore's equivalent of the D1 primary key): a loser
+  re-reads the head and retries (APPEND_ATTEMPTS). A refused commit whose head did not move is the caller's own
+  guard and is rethrown unchanged, so hospital-group changes keep "no change without its audit row".
+- ONE ROW NOT TWO DOCS. A separate link doc was rejected: a row-as-link needs one fewer write per event and a
+  missing row is simply a missing number. The hospital key is an injective escape of the hospital id
+  (`chainKey`), because `sanitize` maps `group:a` and `group-a` to the same id.
+- VERIFICATION REUSES audit-chain.js. `orgAuditChain(env, hospitalId)` has the repository shape
+  (`auditChainHead`, `auditChainRows` via `fsBatchGet`, `auditOnly`), so `verifyAuditChain`, the anchors and the
+  owner acknowledgement run over it unchanged. Chain id `q:<orgId>` keeps its anchor keys apart from tenants.
+- UNLINKED ROWS ARE NAMED, NEVER VERIFIED. Rows without `rowHash` before link 1's `legacyBoundary` are the old
+  era; after it they are a lost race (qAudit still writes the row unlinked rather than lose it) or a row added
+  outside the application, listed with evidence in the security review.
+- ponytail: one chain per hospital serialises that hospital's event-log writes (a head read and a commit each);
+  a sharded chain is the upgrade if one head doc contends. No Firestore index or rule change: reads are by id and
+  the existing single-field `hospitalId` query.
+
+## 2026-09-14 G12: a second outside anchor (Firestore) behind an AnchorStore port, and copies compared with each other
+
+`functions/_wardsynq/audit-chain.js` (`anchorStoresOf`, `checkAnchorStores`, `anchorDisagreement`, multi-store
+`acknowledgeAnchorBreak`), `firestoreAnchorStore` in `functions/_q_audit_chain.js`, `anchorStoresFor` in the router,
+`anchorTick` in `ops-tick.js`. Tests: `test/wardsynq-anchor-stores.test.mjs`. Owner S1 (bucket name pending) and D12
+(AWS move about 2026-09-28).
+- THE PORT IS `{name, get(key), put(key, value)}` ON STRINGS. KV and Firestore implement it; the S3 bucket at the AWS
+  move is a third adapter, no domain change. Firestore stores one doc per key in `q_audit_anchors/<escaped key>`.
+- BOTH CHAINS INTO BOTH STORES, hourly, beside the tick gate. Each (chain, store) attempt stands alone: one store
+  down never stops the other's copy, and the tick log names where it failed (`failed in Firestore (event log)`).
+- CHECKS: each store against the chain (checkAnchors), and the stores against each other. The worst wins:
+  rewritten/truncated, then `disagree`, not-verified, no-anchors, ok. A disagreement is reported as its own finding
+  (message first, `disagreement.seq`), down with the governance consequence in System health. One store empty while
+  the other matches is no-anchors (degraded), never ok.
+- ACKNOWLEDGEMENT: one chained row; every rewritten/truncated store archived and restarted, empty stores seeded (a
+  failed seed is named, not fatal). A failed restart of a broken store fails the call with `restarted` listed; a retry
+  redoes only that store. `chain: "event-log"` acknowledges the hospital event log's chain the same way.
+- WHAT REMAINS: for the hospital event log, which itself lives in Firestore, the Firestore anchor shares its trust
+  domain, so only KV is outside it. An attacker holding D1, KV AND Firestore can still move all three. No Firestore
+  index or rule change (reads by id; the service account bypasses rules).
+
+## 2026-09-14 G11: out-of-assignment reads use ward history, one reader across sign-ins, and open their audit rows
+
+`functions/_wardsynq/security-review.js` (`wardHistoryStays`, `readerAliases`, `readerAliasesFor`,
+`auditRowsForReview`), `auditRowsById` on both repositories, `accountEmail` in `_opd_org_store.js`, route
+`GET /api/queue/ward/audit-rows` (STAFF_ADMIN, record:read). Screen: Admin Center > Security review > Reads outside an
+assignment. Tests: `test/wardsynq-out-of-assignment.test.mjs`.
+- WARD AT THE TIME: a transferred admission (`movedAt`) is split into one stay per ward from its version history
+  (at most 200 history reads per report). A history that cannot be read is INCOMPLETE data (reads not evaluated).
+- ONE READER: ids are linked by email (membership identity and email, email and its `cfa:` access id, a Google
+  `fb:` account and its `q_users` email) and named by the membership identity. A link that could not be made is a
+  NOTE on the section, not incomplete data: it can split one person in two, which the note says, but must not turn
+  every read in the hospital into "not evaluated". A flag lists the sign-in ids its reads came from.
+- EVIDENCE: each flagged read carries the patient's ward then and the wards the reader was rostered on then. "Open
+  these audit rows" reads them back by id with their chain link number; the read is audited (`security.audit_rows`)
+  and refused if it cannot be; ids not found are named; a failed load says so.

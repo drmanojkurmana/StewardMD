@@ -36,7 +36,17 @@ WardSynQ record repository writes has a hash-chain link in `wardsynq_audit_chain
      row, and the acknowledgement itself is written to the audit trail. System health and Security review
      then read up, naming who acknowledged the restore, when, and under which incident.
   Do not delete the KV key by hand, because it is the evidence of what was lost.
-  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
+  **Two outside copies (G12).** The same head is also copied hourly into Firestore (`q_audit_anchors`, one doc per
+  anchor key, via `firestoreAnchorStore`), for the clinical chain and for the hospital event log (`q:<orgId>`).
+  Each copy is compared with the database and the two are compared with each other; a disagreement between them is
+  reported on its own, down in System health. The acknowledgement restarts every broken copy (and seeds an empty one)
+  under one chained row, and archives each old log in its own store. Delete neither copy by hand.
+  **Confirm the live chain without the cron (G4):** `node scripts/audit-chain-live-check.mjs --since <ISO time>`
+  (optional `--db stewardmd-connect`, `--tenant <id>`, `--limit 500`; needs `wrangler login`; sends SELECTs only).
+  It compares `connect_audit_event` rows (connector wardsynq) written since then with `wardsynq_audit_chain` links
+  and re-hashes each hospital's newest links with the app's own code. Exit 0: every row since then has a link,
+  no link lost its row, no link number is missing, every chain verifies. 1: findings, named. 2: nothing was
+  written since then, so the live chain was NOT observed. 3: the database could not be read.  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
   take a manual export (`scripts/backup-d1.sh`). After restoring, the difference is the audit rows the restore
   discarded; keep that export as the record of them.
 - **Never merge rows from a cold copy back into a restored database.** New writes continue from the restored
@@ -58,6 +68,12 @@ recovery. Restore via `gcloud firestore databases restore`.
 `gcloud firestore export gs://<bucket>` on a Cloud Scheduler job (this is a GCP-side cron, NOT a
 Cloudflare Worker — Firestore managed export targets GCS). Retain 30–90 days.
 Restore: `gcloud firestore import gs://<bucket>/<export>`.
+**The hospital event log is chained too (G3).** `q_events` rows (sign-ins, staff and hospital setting changes,
+queue and billing acts) are linked per hospital (`functions/_q_audit_chain.js`): row `q_events/<key>__c<seq>` with
+`prevHash`/`rowHash`, head in `q_audit_chain_head/<key>`. A PITR restore or an import rewinds rows and head
+together, so the chain verifies afterwards while every later row is gone; the same rules as 1a apply (note the
+head seq before restoring, never merge old rows back in, acknowledge the anchor break only for a planned
+restore). Rows written before linking began are shown as unlinked in Security review, never as verified.
 
 ## 3. Cloudflare KV (MAIK_KV — usage counters, remote config, client-error log, audit)
 KV holds operational metadata (no PHI), mostly TTL'd. It has no native export; if you want a copy, a

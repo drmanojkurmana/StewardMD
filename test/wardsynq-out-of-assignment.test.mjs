@@ -274,3 +274,168 @@ test("screen: not evaluated reads as not evaluated, never as no findings", () =>
   assert.match(failed, /Could not be checked: Admissions could not be read/);
   assert.ok(!/[—–]/.test(notEval + flagged + failed), "no em or en dash on screen");
 });
+
+// ---------------------------------------------------------------------------------------------
+// G11: WARD HISTORY, ONE READER ACROSS SIGN-INS, CLICKABLE EVIDENCE
+// ---------------------------------------------------------------------------------------------
+test("G11 ward history: a read before a transfer compares against the ward the patient was on THEN, and the flag names both wards", () => {
+  const versions = [
+    { version: 1, patientId: "p", location: { ward: "Ward A" }, periodStart: iso(NOW - 5 * D), attendingId: null },
+    { version: 2, patientId: "p", location: { ward: "Ward A", bed: "3" }, periodStart: iso(NOW - 5 * D) },
+    { version: 3, patientId: "p", location: { ward: "Ward B" }, periodStart: iso(NOW - 5 * D), movedAt: iso(NOW - 2 * D) },
+  ];
+  const stays = SR.wardHistoryStays(versions, "p9");
+  assert.deepEqual(stays.map((s) => [s.ward, s.from, s.to]), [["Ward A", iso(NOW - 5 * D), iso(NOW - 2 * D)], ["Ward B", iso(NOW - 2 * D), null]]);
+
+  const rota = [{ staffId: "doc", ward: "Ward A", from: iso(NOW - 4 * D), to: iso(NOW - 1 * D), source: "roster" }];
+  const opts = { period: PERIOD, tenantId: "t1", roles: { doc: "doctor" }, stays, breakGlass: [] };
+  const before = SR.outOfAssignmentFindings([read("doc", NOW - 3 * D, "p9")], rota, opts);
+  assert.equal(before.findings.length, 0, "on Ward A then, rostered on Ward A then: within the assignment");
+  assert.equal(before.assignedReads, 1);
+  const after = SR.outOfAssignmentFindings([read("doc", NOW - 1.5 * D, "p9")], rota, opts);
+  assert.equal(after.findings.length, 1, JSON.stringify(after));
+  const row = after.findings[0].evidence[0];
+  assert.equal(row.wardAtRead, "Ward B", "the patient had moved to Ward B");
+  assert.deepEqual(row.readerWardsAtRead, ["Ward A"], "the reader was rostered on Ward A at that moment");
+});
+
+test("G11 one reader: Google, email access and staff sign-in ids linked by email are one person, for assignments and findings", () => {
+  const aliases = SR.readerAliases([["fb:u1", "nurse@x.test"], ["nurse@x.test", "cfa:n1"], ["staff-n1", "nurse@x.test"]], ["staff-n1"]);
+  assert.deepEqual([aliases["fb:u1"], aliases["cfa:n1"], aliases["nurse@x.test"]], ["staff-n1", "staff-n1", "staff-n1"], "named by the membership identity");
+  const assign = [{ staffId: "staff-n1", patientRef: "p1", from: iso(NOW - 3 * D), to: null, source: "nurse-assignment" }];
+  const opts = { ...OPTS, roles: { "staff-n1": "nurse" }, aliases };
+  const r = SR.outOfAssignmentFindings([read("fb:u1", NOW - H, "p1"), read("cfa:n1", NOW - H, "p2"), read("cfa:n1", NOW - 2 * H, "p2")], assign, opts);
+  assert.equal(r.assignedReads, 1, "the Google sign-in read is covered by the assignment made to the staff identity");
+  assert.equal(r.findings.length, 1);
+  assert.equal(r.findings[0].actor, "staff-n1");
+  assert.deepEqual(r.findings[0].signIns, ["cfa:n1"], "the finding names which sign-in made the reads");
+  const without = SR.outOfAssignmentFindings([read("fb:u1", NOW - H, "p1")], assign, { ...OPTS, roles: { "staff-n1": "nurse", "fb:u1": "nurse" } });
+  assert.equal(without.assignedReads, 0, "without matching, the same person would not be recognised");
+});
+
+const OTHER_ADMIN = "boss@other.test";
+function seedOther() {
+  docs.set("q_orgs/org-other", { fields: { id: "org-other", code: "SMD-OTHER1", name: "Other Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: "tenant-other", ownerUid: idFor(OTHER_ADMIN), createdAt: 1, wardsynq: {} }, updateTime: "t1" });
+  docs.set(`q_members/org-other__${sanitize(idFor(OTHER_ADMIN))}`, { fields: { orgId: "org-other", identity: idFor(OTHER_ADMIN), role: "admin", active: true }, updateTime: "t1" });
+}
+async function bare(path) {
+  const res = await onRequest({ request: new Request("https://x/api/queue" + path), env: ENV });
+  let j; try { j = await res.json(); } catch { j = {}; }
+  j.__status = res.status;
+  return j;
+}
+
+test("G11 route: GET /api/queue/ward/security-report uses the ward history and matches a Google sign-in to the assigned nurse by email", async () => {
+  seedHospital();
+  const now = Date.now();
+  const T = TENANT_ROW.id;
+  await RECORD.append(T, [rec("Encounter", "enc-t", { patientId: "pat-t", location: { ward: "Ward A", bed: "1" }, periodStart: iso(now - 5 * D), class: "inpatient", status: "in-progress" })], {});
+  await RECORD.append(T, [rec("Encounter", "enc-t", { version: 2, patientId: "pat-t", location: { ward: "Ward B", bed: "4" }, periodStart: iso(now - 5 * D), movedAt: iso(now - 2 * D), class: "inpatient", status: "in-progress" }),
+    rec("NurseAssignment", "wsq-nassign-x", { patientId: "pat-other", encounterId: "enc-x", nurseId: idFor(NURSE), history: [{ action: "assign", nurseId: idFor(NURSE), at: iso(now - 4 * D), by: "seed" }] })], {});
+  docs.set("q_users/fb-uid-nurse", { fields: { smdId: "SMD-U-1", email: NURSE }, updateTime: "t1" });
+  // The doctor is rostered on Ward A three days ago, when the patient was still there.
+  const day = new Date(now - 3 * D + 6 * H + 330 * 60000).toISOString().slice(0, 10);
+  docs.set(`q_roster_shifts/${ORG_ID}__day`, { fields: { orgId: ORG_ID, shiftId: "day", name: "Day", unit: "Ward A", start: "00:00", end: "00:00", active: true }, updateTime: "t1" });
+  docs.set("q_roster_assign/a1", { fields: { orgId: ORG_ID, orgMonth: ORG_ID + "|" + day.slice(0, 7), identity: idFor(DOCTOR), date: day, shiftId: "day", status: "active" }, updateTime: "t1" });
+  const readAt = (who, ms) => RECORD.auditOnly(T, { ts: iso(ms), actor: who, action: "record.read", patientRefHash: "ref-pat-t", scope: { resourceType: "Observation", id: "o-t" }, outcome: "ok" });
+  await readAt(idFor(DOCTOR), now - 3 * D + 6 * H);
+  await readAt("fb:uid-nurse", now - H);
+
+  const rep = await as(ADMIN, `/ward/security-report?orgId=${ORG_ID}&days=7`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 300));
+  const a = rep.assignmentAccess;
+  assert.equal(a.status, "ok", JSON.stringify(a));
+  assert.ok(a.assignedReads >= 1, "the doctor's read before the transfer is within the Ward A shift: " + JSON.stringify(a));
+  assert.ok(!a.findings.some((f) => f.actor === idFor(DOCTOR)), JSON.stringify(a.findings));
+  const nurse = a.findings.find((f) => f.actor === idFor(NURSE));
+  assert.ok(nurse, "the Google sign-in's read is attributed to the nurse's membership: " + JSON.stringify(a));
+  assert.deepEqual(nurse.signIns, ["fb:uid-nurse"]);
+  assert.equal(nurse.evidence[0].wardAtRead, "Ward B");
+});
+
+test("G11 route NEGATIVE: GET /api/queue/ward/audit-rows refuses no session (401), a nurse (403), another hospital's admin, and bad ids (422); nothing is audited", async () => {
+  seedHospital();
+  seedOther();
+  await RECORD.auditOnly(TENANT_ROW.id, { ts: iso(Date.now() - H), actor: idFor(NURSE), action: "record.read", patientRefHash: "ref-p", scope: { resourceType: "Observation", id: "o1" }, outcome: "ok" });
+  const id = (await RECORD.auditTrail(TENANT_ROW.id, {})).events[0].id;
+  const path = `/ward/audit-rows?orgId=${ORG_ID}&ids=${id}`;
+  const audits = RECORD.audit.length;
+  assert.equal((await bare(path)).__status, 401);
+  const nurse = await as(NURSE, path);
+  assert.equal(nurse.__status, 403, JSON.stringify(nurse));
+  assert.equal(nurse.rows, undefined);
+  const other = await as(OTHER_ADMIN, path);
+  assert.ok(other.__status === 403 || other.__status === 404, JSON.stringify(other));
+  assert.equal(other.rows, undefined);
+  assert.equal((await as(ADMIN, `/ward/audit-rows?orgId=${ORG_ID}&ids=`)).__status, 422);
+  assert.equal((await as(ADMIN, `/ward/audit-rows?orgId=${ORG_ID}&ids=${encodeURIComponent("bad id;drop")}`)).__status, 422);
+  assert.equal(RECORD.audit.length, audits, "no refused call wrote an audit row");
+});
+
+test("G11 route POSITIVE: the admin opens the audit rows behind a flag, with the chained row number; unknown ids are named; the read is audited", async () => {
+  seedHospital();
+  await RECORD.auditOnly(TENANT_ROW.id, { ts: iso(Date.now() - H), actor: idFor(NURSE), action: "record.read", patientRefHash: "ref-p", scope: { resourceType: "Observation", id: "o1" }, outcome: "ok" });
+  await RECORD.auditOnly("tenant-other", { ts: iso(Date.now() - H), actor: "x", action: "record.read", outcome: "ok" });
+  const mine = (await RECORD.auditTrail(TENANT_ROW.id, {})).events[0].id;
+  const theirs = (await RECORD.auditTrail("tenant-other", {})).events[0].id;
+  const r = await as(ADMIN, `/ward/audit-rows?orgId=${ORG_ID}&ids=${mine},${theirs},nope-1`);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.rows.length, 1, "another hospital's row is never returned");
+  assert.equal(r.rows[0].id, mine);
+  assert.equal(r.rows[0].recordId, "o1");
+  assert.equal(r.rows[0].chainSeq, 1);
+  assert.deepEqual(r.missing.sort(), [theirs, "nope-1"].sort());
+  assert.ok(RECORD.audit.some((e) => e.action === "security.audit_rows"), "opening the rows is itself in the audit trail");
+});
+
+test("G11 D1 repository: auditRowsById reads this hospital's rows by id with their chain link number, on real SQLite", async (t) => {
+  let DatabaseSync;
+  try { ({ DatabaseSync } = await import("node:sqlite")); } catch { t.skip("node:sqlite unavailable"); return; }
+  const { D1Repository } = await import("../functions/_wardsynq/repository-d1.js");
+  const { openSqlite } = await import("../functions/_wardsynq/repository-sqlite.js");
+  const readSchema = (name) => readFileSync(new URL(name === "connect" ? "../db/connect_schema.sql" : "../functions/db/wardsynq_schema.sql", import.meta.url), "utf8");
+  const { binding } = openSqlite({ DatabaseSync, readSchema }, { path: ":memory:" });
+  const repo = new D1Repository(binding);
+  await repo.auditOnly("t-a", { ts: iso(NOW), actor: "n", action: "record.read", patientRefHash: "ref", scope: { resourceType: "Observation", id: "o1" }, outcome: "ok" });
+  await repo.auditOnly("t-b", { ts: iso(NOW), actor: "m", action: "record.read", outcome: "ok" });
+  const a = (await repo.auditTrail("t-a", {})).events[0].id, b = (await repo.auditTrail("t-b", {})).events[0].id;
+  const rows = await repo.auditRowsById("t-a", [a, b, "nope"]);
+  assert.equal(rows.length, 1, "another hospital's row is not returned");
+  assert.equal(rows[0].id, a);
+  assert.equal(rows[0].chainSeq, 1);
+  assert.equal(rows[0].scope.id, "o1");
+});
+
+test("G11 screen: ward columns and sign-ins on a flag, a button to open its rows; loading, failed and not-found read differently", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const emptyOk = { status: "ok", findings: [], counts: {} };
+  const page = win.WSQ._securityReviewHtml(c, { days: 7, note: "n", counts: {}, notDetected: [], chartAccess: emptyOk, exports: emptyOk, logins: emptyOk,
+    reviewQueue: { status: "ok", items: [], awaiting: 0, missing: [] }, dataProtection: { status: "red", reasons: [] }, auditRetention: { status: "ok" },
+    assignmentAccess: { status: "ok", readsInPeriod: 2, assignedReads: 0, incomplete: [], matching: ["1 Google sign-in account could not be matched to an email, so it counts as a separate reader."], exemptions: [],
+      findings: [{ type: "out-of-assignment", actor: "n1", signIns: ["fb:u9"], summary: "1 read.", method: "m", evidence: [{ id: "aud-5", ts: "t", action: "record.read", wardAtRead: "Ward B", readerWardsAtRead: ["Ward A"] }], evidenceTotal: 1 }],
+      notEvaluated: [{ actor: "x", reason: "No data.", reads: 1, evidence: [{ id: "aud-6" }] }], exempt: [] } });
+  assert.match(page, /Patient's ward then/);
+  assert.match(page, /Ward B/);
+  assert.match(page, /Reader rostered on then/);
+  assert.match(page, /fb:u9/);
+  assert.match(page, /data-sec-rows="aud-5"/);
+  assert.match(page, /data-sec-rows="aud-6"/);
+  assert.match(page, /could not be matched to an email/);
+  const rows = win.WSQ._auditRowsHtml;
+  assert.match(rows(c, null), /Reading the audit rows/);
+  const failed = rows(c, { failed: true, message: "Forbidden" });
+  assert.match(failed, /could not be loaded: Forbidden/);
+  assert.match(failed, /not the same as there being none/);
+  const part = rows(c, { rows: [{ id: "aud-5", ts: "t", action: "record.read", chainSeq: 7 }, { id: "aud-8", ts: "t", chainSeq: null }], missing: ["aud-6"] });
+  assert.match(part, /1 of the audit rows named were not found/);
+  assert.match(part, /aud-6/);
+  assert.match(part, />7</);
+  assert.match(part, /Not linked/);
+  assert.ok(!/[—–]/.test(page + failed + part), "no em or en dash on screen");
+});
