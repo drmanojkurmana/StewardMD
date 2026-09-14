@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WardSynQ alert screen harness</title>
+<script>
+/* test/run-wsq-alert-screen.mjs drives this page. The API is stubbed here: window.__routes maps
+ * "METHOD /path" to {status, body} or "network"; every request lands in window.__calls. App lock is
+ * stubbed as window.SMD_APPLOCK with __locked / __unlocks. */
+localStorage.clear();
+localStorage.setItem("smd_wsq_push", "1");
+window.__routes = {}; window.__calls = []; window.__unlocks = []; window.__locked = false;
+window.SMD_APPLOCK = { required: function () { return window.__locked; }, unlock: function (cb) { window.__unlocks.push(cb); } };
+window.SMD_AUTH = { currentUser: { getIdToken: function () { return Promise.resolve("acct-jwt"); } }, onAuthStateChanged: function (fn) { fn(null); return function () {}; } };
+window.fetch = function (url, opts) {
+  opts = opts || {};
+  var method = opts.method || "GET", path = String(url).split("?")[0];
+  window.__calls.push({ method: method, path: path, headers: opts.headers || {}, body: opts.body ? JSON.parse(opts.body) : null });
+  var r = window.__routes[method + " " + path];
+  if (r === "network") return Promise.reject(new TypeError("Failed to fetch"));
+  r = r || { status: 404, body: { ok: false, error: "not_found" } };
+  return new Promise(function (res) { setTimeout(function () { res(new Response(JSON.stringify(r.body), { status: r.status, headers: { "Content-Type": "application/json" } })); }, 30); });
+};
+</script>
+</head><body>
+<main id="home"><h1>Home</h1></main>
+<script src="/wardsynq-flags.js"></script>
+<script src="/hospital-auth.js"></script>
+<script src="/wardsynq-alert-ui.js"></script>
+<script src="/swipe-back.js"></script>
+</body></html>

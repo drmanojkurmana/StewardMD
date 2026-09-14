@@ -50,6 +50,17 @@ function deviceDirectory(store) {
       for (const k of keys) await store.delete(k);
       return { removed: (cur.tokenIds || []).length };
     },
+    /** This one device stops receiving this hospital's alerts (a sign-out on it); the person's other phones keep them. */
+    async release(orgId, identities, tokenId) {
+      let removed = 0;
+      for (const id of new Set((identities || []).map(str).filter(Boolean))) {
+        const cur = await readJson(store, key(orgId, id));
+        if (!cur || !(cur.tokenIds || []).includes(str(tokenId))) continue;
+        await store.put(key(orgId, id), JSON.stringify({ ...cur, tokenIds: cur.tokenIds.filter((t) => t !== str(tokenId)), at: new Date().toISOString() }));
+        removed++;
+      }
+      return { removed };
+    },
     async devicesFor(orgId, identity) {
       const cur = await readJson(store, key(orgId, identity));
       return cur && Array.isArray(cur.tokenIds) ? cur.tokenIds : [];

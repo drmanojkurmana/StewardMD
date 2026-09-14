@@ -150,6 +150,8 @@
   function goBack() {
     var now = Date.now();
     if (now - _last < 400) return true;                        // debounce: one back per gesture
+    // A WardSynQ critical-result alert (wardsynq-alert-ui.js) owns the screen: back does nothing and never exits.
+    if (document.getElementById("wsq-alert")) return true;
     // 0) FundX / Atlas AI full-screen overlay owns back while open.
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
@@ -194,6 +196,7 @@
    * could fall through to goBack() ON HOME and click whatever stray "-close" element BACK_SEL
    * matched there. Home (and only home) opens the menu; every other screen goes back. */
   function edgeSwipeAction() {
+    if (document.getElementById("wsq-alert")) return true;   // the alert screen owns the edge gesture too
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
     if (homeIsForeground()) return openMenuAtHome();
     return goBack();

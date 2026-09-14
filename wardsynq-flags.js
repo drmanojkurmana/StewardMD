@@ -36,6 +36,10 @@
     smd_wardsynq_cutover: {
       type: "bool", def: false, query: "wardsynq_cutover",
       desc: "Feed ward data through the WardSynQ adapter into the canonical model, alongside the legacy ingest. DEFAULT OFF. IMPLEMENTED (wardsynq/wardsynq-ghis-live.js) and WIRED (wardsynq-ghis-live-boot.js, 2026-09-06) — window.SMD_WARDSYNQ_LIVE once installed. The legacy path still owns STATE and the mobile UI and is not modified: it runs FIRST and its result is returned untouched, so enabling this cannot change what the app shows. The adapter path can never throw into the caller, is idempotent on the source event identity, writes as an ADAPTER actor and is therefore capped at DRAFT, and can be halted in-process without a reload via window.SMD_WARDSYNQ_LIVE.halt(). Writes only through the tenant already opened by ?wardsynq_record=<tenantId>; with none configured this runs as a dry run (mapped and counted, nothing written)."
+    },
+    smd_wsq_push: {
+      type: "bool", def: false, query: "wsq_push",
+      desc: "S3 P1 critical-result alerts on this phone. DEFAULT OFF. When on: choosing a WardSynQ hospital (or a staff sign-in) binds this phone to that hospital identity (POST /api/push/register-member), staff sign-out unbinds it, and a v2 thin push opens the alert screen, which fetches the detail only after app lock and only for the hospital being worked in. Off: a v2 push is shown as a plain notification and nothing is bound. The server side is separately gated per hospital by wardsynq.alerts.push.enabled."
     }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }
