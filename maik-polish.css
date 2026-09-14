@@ -68,3 +68,7 @@ html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.m
 html body #maikSheet.maik-polished .maik-body{-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 @media(max-width:360px){html body #maikSheet.maik-polished .maik-hd{padding-left:10px;padding-right:10px}html body #maikSheet.maik-polished .maik-hd-row{grid-template-columns:44px minmax(64px,1fr) minmax(100px,130px);column-gap:6px}html body #maikSheet.maik-polished .maik-nav-caption{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html body #maikSheet.maik-polished :is(.maik-hd-btn,#maikModelChip,.maik-card,.maik-send){transition:none;transform:none}}
+
+html body #maikSheet.maik-polished .maik-ta{resize:none;scrollbar-width:none;background:transparent;border:0;box-shadow:none}
+html body #maikSheet.maik-polished .maik-ta::-webkit-scrollbar{display:none}
+html body #maikSheet.maik-polished .maik-body::-webkit-scrollbar{width:3px}
