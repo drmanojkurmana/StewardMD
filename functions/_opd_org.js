@@ -225,6 +225,11 @@ export function bed(o = {}) {
     genderRestriction: o.genderRestriction === "male" || o.genderRestriction === "female" ? o.genderRestriction : null,
     isolation: !!o.isolation,
     active: o.active !== false,
+    /* G7 BED HISTORY, so a past day's bed count is read from what the registry held that day, not from
+     * today. `since` is when the bed was added (ms); every turn off or on appends {active, at}. Only the
+     * store writes these; a patch never sets them. */
+    since: Number(o.since) > 0 ? Number(o.since) : null,
+    activeHistory: (Array.isArray(o.activeHistory) ? o.activeHistory : []).filter((c) => c && Number(c.at) > 0).map((c) => ({ active: c.active === true, at: Number(c.at) })),
   };
 }
 // The doctor "on" a room right now (pure). Rooms are never permanently one doctor's.

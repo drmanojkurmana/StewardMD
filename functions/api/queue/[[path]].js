@@ -3251,21 +3251,22 @@ export async function onRequest(context) {
         /* The ward registry gives beds per ward and each ward's department. It is the org store, not the
          * record, so its failure is carried as a reason rather than failing a series that does not need it. */
         let wards = [], registryError = null;
-        const bedsByWard = {}, wardDepartments = {};
+        const bedHistory = [], wardDepartments = {};
         try {
           const [ws, bs, ds] = await Promise.all([ORG.listWards(env, wOrgId), ORG.listBeds(env, wOrgId), ORG.listDepartments(env, wOrgId)]);
           wards = ws;
           const wardName = new Map(ws.map((w) => [w.id, w.name])), deptName = new Map(ds.map((d) => [d.id, d.name]));
-          for (const b of bs) if (b.active && wardName.has(b.wardId)) bedsByWard[wardName.get(b.wardId)] = (bedsByWard[wardName.get(b.wardId)] || 0) + 1;
+          // G7: every bed with its own history (added, turned off or on), so a past day counts the beds it had.
+          for (const b of bs) if (wardName.has(b.wardId)) bedHistory.push({ ward: wardName.get(b.wardId), since: b.since, active: b.active, changes: b.activeHistory, legacy: !!b.legacy });
           for (const w of ws) if (w.departmentId) wardDepartments[w.name] = deptName.get(w.departmentId) || w.departmentId;
         } catch (e) { registryError = "read failed"; }
-        // No registered beds: the same wardsynq.beds quality.js measures utilisation against.
-        if (!Object.keys(bedsByWard).length && wsqCfg && wsqCfg.beds && typeof wsqCfg.beds === "object") {
-          for (const [w, list] of Object.entries(wsqCfg.beds)) if (Array.isArray(list) && list.length) bedsByWard[w] = list.length;
+        // No registered beds: the wardsynq.beds list quality.js measures against. It keeps no history, so a bucket needing it is not known.
+        if (!bedHistory.length && wsqCfg && wsqCfg.beds && typeof wsqCfg.beds === "object") {
+          for (const [w, list] of Object.entries(wsqCfg.beds)) if (Array.isArray(list)) for (let k = 0; k < list.length; k++) bedHistory.push({ ward: w, since: null });
         }
         const tctx = { ...deps, metric: q("metric"), from: q("from"), to: q("to"), bucket: q("bucket"), groupBy: q("groupBy"),
           utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined,
-          antibiotics: (wsqCfg && wsqCfg.antibiotics) || null, bedsByWard, wardDepartments, registryError };
+          antibiotics: (wsqCfg && wsqCfg.antibiotics) || null, bedHistory, wardDepartments, registryError };
         if (sub === "trend-events") {
           /* A member limited to some departments may list the records of a ward in one of them only. A ward
            * the registry places in no department is outside every such limit, so an unscoped member passes

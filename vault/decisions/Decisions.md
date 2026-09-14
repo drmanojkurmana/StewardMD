@@ -5899,3 +5899,17 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
 - **A5**: `ABHA_DESK_ROLES` in `_queue_roles.js` (reception, cashier and billing create and verify). Not enforced
   until the ABHA desk phase moves M1 off Connect membership.
 - **Fidelius**: the branch's HKDF over the Weierstrass x is the only copy (the product never changed it).
+
+## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
+- Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed
+  only to its current ward, and past buckets no longer use today's bed count.
+- Stays: the Encounter's version history is the movement history (transfer = new version with `movedAt`).
+  `staySegments` in `trends.js` splits a stay into ward pieces. `bed-occupancy` and the new `ward-los` read the
+  histories of changed stays overlapping the range through `RecordService.histories` (one grant check, one
+  audited list row). A history that cannot be read, or a move with no time, leaves the stay unplaced: its
+  buckets are null with a reason by ward (hospital-wide occupancy keeps its bed-days).
+- Beds: `q_beds` carries `since` (set at create) and `activeHistory` (appended by `updateBed` on each turn off
+  or on; a patch cannot set either). A bed from before this has no `since`; its Firestore `createTime` is used
+  and it is marked legacy: counted from registration, but unknown after that if it is now turned off. Beds
+  listed only in `wardsynq.beds` keep no history, so a bucket needing them is unknown, never today's count.
+- Not built: an admin "in service since" edit for legacy beds; blocked/closed state history (still not subtracted).

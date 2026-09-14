@@ -6713,7 +6713,11 @@
     if (e.data === false) return h + '<p class="w-hint warn">' + ms("error") + (e.status === 403 ? "You do not have access to this ward's records." : "The records could not be loaded" + (e.err ? ": " + esc(e.err) : "") + ".") + "</p></div>";
     var ev = e.data.events || { items: [] };
     var rows = ev.items.map(function (x) {
-      return '<li class="w-mini-row"><div>' + esc(x.resourceType) + " &middot; " + esc(x.id) + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="timelinedetail:' + esc(x.resourceType) + "~" + esc(x.id) + '">Open</button></div></li>';
+      /* G7: a stay ward by ward, each piece with its length. A running piece says so rather than showing a length. */
+      var segs = x.segments ? '<div class="w-dt-times">' + (x.transferred ? "Transferred: " : "One ward: ") + x.segments.map(function (g) {
+        return esc(g.ward || "(no ward)") + (g.bed ? " bed " + esc(g.bed) : "") + " " + esc(g.days) + " day" + (g.days === 1 ? "" : "s") + (g.running ? " so far (still there)" : "");
+      }).join(", then ") + "</div>" : "";
+      return '<li class="w-mini-row"><div>' + esc(x.resourceType) + " &middot; " + esc(x.id) + segs + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="timelinedetail:' + esc(x.resourceType) + "~" + esc(x.id) + '">Open</button></div></li>';
     }).join("");
     return h + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No records behind this bucket on this ward.</p>') +
       (ev.truncated ? '<p class="w-hint warn">Showing ' + esc(ev.items.length) + " of " + esc(ev.total) + ", or the read was capped. The list is not complete.</p>" : "") + "</div>";
