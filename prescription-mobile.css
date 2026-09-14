@@ -45,3 +45,25 @@ html body #rxSheet :is(button,select):focus-visible{outline:2px solid var(--rx-a
 @media(max-width:640px){html body #rxSheet{height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;max-height:calc(100dvh - max(12px,env(safe-area-inset-top)))!important;border-radius:24px 24px 0 0!important}html body #rxSheet .rx-title-main{display:block}html body #rxSheet .rx-saved-indicator{display:flex;margin-top:3px}html body #rxSheet .rx-pt-grid{grid-template-columns:1fr}html body #rxSheet .rx-title-sub{max-width:210px}}
 @media(prefers-reduced-motion:reduce){html body #rxSheet,html body #rxSheet *{transition:none!important}}
 }
+@media screen {
+/* Full-screen editor: viewport edges are independent of sheet centering rules. */
+html body #rxSheet,html body #rxSheet.on{inset:0!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border-radius:0!important;transform:none!important;box-shadow:none!important}
+html body #rxSheet .rx-wrap{height:100%;min-height:0;max-height:100%;width:100%;padding:0;display:flex;flex-direction:column;overflow:hidden}
+html body #rxSheet .rx-handle-bar{display:none}
+html body #rxSheet .rx-head{padding:calc(env(safe-area-inset-top,0px) + 10px) max(14px,env(safe-area-inset-right,0px)) 12px max(14px,env(safe-area-inset-left,0px))}
+html body #rxSheet .rx-head-inner{display:grid;grid-template-columns:64px minmax(0,1fr) 58px;gap:8px;align-items:center}
+html body #rxSheet .rx-head-title{text-align:center;min-width:0}
+html body #rxSheet .rx-title-main{display:block;font-size:17px;line-height:1.35}
+html body #rxSheet .rx-saved-indicator{display:flex;justify-content:center;font-size:11px}
+html body #rxSheet .rx-title-sub{max-width:100%;font-size:11px}
+html body #rxSheet #rxX{width:64px;background:transparent;border-radius:10px;color:var(--rx-accent);font-size:14px;font-weight:500;gap:3px;padding:0}
+html body #rxSheet #rxX .rx-back-chevron{font-size:26px;line-height:1}
+html body #rxSheet .rx-top-export{width:58px;min-width:0;justify-content:center;box-shadow:none!important;background:var(--rx-soft)!important;color:var(--rx-accent)!important}
+html body #rxSheet .rx-top-export .rx-ico{display:none}
+html body #rxSheet .rx-dock{align-items:stretch;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+html body #rxSheet .rx-dock-quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+html body #rxSheet .rx-dock-quick .rx-btn,html body #rxSheet .rx-hero-export{display:flex;align-items:center;justify-content:center;gap:5px;text-align:center;box-shadow:none!important}
+html body #rxSheet .rx-tpl-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+html body #rxSheet .rx-tpl-row>*{width:100%;white-space:normal;text-align:center}
+html body #rxSheet .rx-scroll-body{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));min-height:0}
+}
