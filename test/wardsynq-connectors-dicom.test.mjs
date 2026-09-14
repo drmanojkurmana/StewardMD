@@ -181,6 +181,34 @@ test("imaging-studies opens the study from the connector's viewer, with no patie
   assert.equal(H.RECORD.audit.filter((a) => a.action === "connector.disable").length, 1);
 });
 
+test("Admin > Integrations screen: loading, failed and none are distinct; credentials show by name only; the gateway address is shown", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { catalogue } = await import("../functions/_wardsynq/connectors.js");
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "", origin: "https://wardsynq.example" }, { getItem: () => null, setItem() {}, removeItem() {} });
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc, state: { orgId: ORG_ID } };
+  const html = win.WSQ._connectorsHtml;
+  assert.match(html(c, null), /Loading connectors/);
+  assert.match(html(c, { failed: true, message: "forbidden" }), /could not be loaded: forbidden. This is not the same as there being none/);
+  const cat = catalogue();
+  const none = html(c, { ok: true, keyConfigured: true, catalogue: cat, connectors: [] });
+  for (const k of cat) assert.ok(none.includes(k.label), k.kind);
+  assert.match(none, /None configured for this hospital/);
+  assert.ok(none.includes('data-cn-save="dicom"') && none.includes('data-cn-save="payment"') && none.includes('data-cn-save="payer"'));
+  const some = html(c, { ok: true, keyConfigured: false, catalogue: cat, connectors: [
+    { id: "dicom", kind: "dicom", provider: "dicomweb", settings: { qidoUrl: PACS, authType: "bearer" }, secretsSet: ["credential"], secretsSetAt: "2026-09-14T10:00:00Z", active: true },
+    { id: "payment", kind: "payment", provider: "razorpay", settings: { keyId: "rzp_test" }, secretsSet: ["keySecret", "webhookSecret"], secretsSetAt: "2026-09-14T10:00:00Z", active: false }] });
+  assert.ok(some.includes('data-cn-test="dicom"'), "the archive has a Test connection button");
+  assert.ok(!some.includes('data-cn-test="payment"'), "a gateway has none");
+  assert.match(some, /credential<br>/);
+  assert.ok(some.includes("https://wardsynq.example/api/queue/payment-callback/org-wsq"));
+  assert.match(some, /cannot be stored encrypted on this server/);
+  assert.ok(!some.includes('data-cn-save="dicom"'), "a singleton that exists is changed, not added twice");
+});
+
 test("another hospital sees none of these connectors", async () => {
   seed();
   await save(ADMIN);
