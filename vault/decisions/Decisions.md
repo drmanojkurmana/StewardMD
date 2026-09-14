@@ -5871,3 +5871,16 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
 - Admin Center > Clinical seed data (WardSynQ hospitals) marks every unsigned item UNAPPROVED; a failed load says
   treat every item as unapproved. This build signs nothing. Signing does NOT change engine behaviour: rx-safety
   still never gates, and existing "unapproved" wording on ward screens is unchanged.
+## 2026-09-14 D4 B: group counts come from a snapshot each hospital publishes (owner chose B)
+- Supersedes the live cross-hospital read in GET /group/overview. WardSynQ is deployed per hospital, so a
+  group reads `q_group_snapshots/<orgId>` only: {status, counts, reasons, capped, publishedBy, publishedAt}.
+- `POST /group/publish-counts` (the hospital's own staff.admin; a group admin is refused) computes the same
+  hospitalCounts() in the hospital's own tenant and writes the snapshot and `group:snapshot_published` under
+  the hospital in one commit. A failed publish leaves the previous snapshot, with its own time.
+- Overview: never published = status `not_published`, counts null, shown as "Not published" (never zeros);
+  `stale` when older than the group's `staleAfterMinutes` (default 60, 5-10080, set by the group admin via
+  `POST /group/stale-after`, audited `group:stale_after`). Each view is still audited `group:summary_read`
+  under the hospital before its snapshot is read.
+- Admin > Hospital group shows what this hospital last published (by whom, when) and "Publish counts now".
+- Not built: automatic publishing on a schedule (the ops tick could publish; today a snapshot is published by
+  a person and the stale marker says when it is old).

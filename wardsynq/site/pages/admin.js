@@ -903,14 +903,23 @@
    * A group sees counts only, never a patient. An invitation alone does not make a hospital a member. */
   // The only actions each half sends to /group/<action>; anything else sends nothing.
   var GROUP_SIDE_ROUTE = { accept: "accept", decline: "decline", remove: "remove", adopt: "adopt" };
-  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy", adminAdd: "admin-add", adminRemove: "admin-remove" };
+  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy", adminAdd: "admin-add", adminRemove: "admin-remove", staleAfter: "stale-after" };
   function groupSideHtml(c, r) {
     var esc = c.esc;
     var h = '<div class="card"><h2>This hospital\'s groups</h2>';
     if (r == null) return h + '<span class="spin"></span> Loading...</div>';
     if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ". Do not read this as no groups or invitations.</div></div>";
     if (!r.groups.length) return h + '<p class="quiet">This hospital is not in a hospital group and has no invitations.</p></div>';
-    return h + '<p class="quiet">A group sees this hospital\'s counts (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' +
+    /* D4 B: groups read what this hospital PUBLISHES, not its live record. Say what was last published, by whom
+     * and when, and offer to publish now. A snapshot that could not be read is said, never shown as none. */
+    var s = r.snapshot, when = function (ms) { return new Date(ms).toLocaleString(); };
+    var member = r.groups.some(function (g) { return g.state === "member"; });
+    var pub = !member ? "" : '<h3>Counts published to groups</h3>' +
+      (s === false ? '<div class="msg err">What this hospital last published could not be read.</div>'
+        : s ? "<p>Last published " + esc(when(s.publishedAt)) + " by " + esc(s.publishedBy || "unknown") + ".</p>"
+        : '<p class="quiet">Not published yet: groups see this hospital as "not published".</p>') +
+      '<p><button type="button" class="btn" data-grp-publish="1">Publish counts now</button> <span class="quiet">Groups see the counts as they are at this moment, with this time on them.</span></p>';
+    return h + '<p class="quiet">A group sees the counts this hospital publishes (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' + pub +
       '<div class="tbl"><table><thead><tr><th>Group</th><th>Status</th><th>Recommended settings</th><th></th></tr></thead><tbody>' +
       r.groups.map(function (g) {
         var id = esc(g.groupId);
@@ -953,6 +962,8 @@
         '<button type="button" class="btn" data-grp-run="invite" data-grp="' + id + '">Invite</button></div>' +
         '<label class="f"><span>Recommended settings (JSON, version ' + esc(g.policyVersion) + ')</span><textarea rows="5" style="width:100%;font-family:monospace" data-grp-policy-input="' + id + '">' + esc(g.policy ? JSON.stringify(g.policy, null, 2) : "") + "</textarea></label>" +
         '<button type="button" class="btn ghost" data-grp-run="policy" data-grp="' + id + '">Publish recommended settings</button>' +
+        '<div class="row"><label class="f" style="flex:0 1 260px"><span>Mark a hospital\'s counts stale after (minutes)</span><input type="number" min="5" max="10080" data-grp-stale-input="' + id + '" value="' + esc(g.staleAfterMinutes || 60) + '"></label>' +
+        '<button type="button" class="btn ghost" data-grp-run="staleAfter" data-grp="' + id + '">Save</button></div>' +
         '<p class="quiet">A member hospital\'s admin decides whether to adopt them. Nothing changes in any hospital until they do.</p>';
     }).join("") : '<p class="quiet">You do not run a hospital group.</p>';
     return h + '<h3>Create a group</h3><div class="row"><label class="f"><span>Group name</span><input id="grpNewName"></label>' +
@@ -967,6 +978,14 @@
     var side = c.api("/group/memberships" + q).then(function (r) {
       var box = document.getElementById("grpSide");
       box.innerHTML = groupSideHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      var pb = box.querySelector("[data-grp-publish]");
+      if (pb) pb.onclick = function () {
+        pb.disabled = true;
+        c.api("/group/publish-counts", { orgId: c.state.orgId }).then(function (x) {
+          if (!x || !x.ok) { pb.disabled = false; say("grpSideMsg", x); return; }
+          c.toast("Counts published."); WSQ.render("admin");
+        });
+      };
       box.querySelectorAll("[data-grp-side]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-grp-side"), gid = b.getAttribute("data-grp");
@@ -1015,11 +1034,13 @@
           } else if (act === "adminRemove") {
             payload.uid = b.getAttribute("data-uid");
             if (!window.confirm("Remove this administrator from the group? They stop seeing it at once.")) return;
+          } else if (act === "staleAfter") {
+            payload.minutes = Number(box.querySelector('[data-grp-stale-input="' + gid + '"]').value);
           }
           b.disabled = true;
           c.api("/group/" + GROUP_RUN_ROUTE[act], payload).then(function (x) {
             if (!x || !x.ok) { b.disabled = false; say("grpRunMsg", x); return; }
-            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published.", adminAdd: "Administrator added.", adminRemove: "Administrator removed." }[act]);
+            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published.", adminAdd: "Administrator added.", adminRemove: "Administrator removed.", staleAfter: "Saved." }[act]);
             WSQ.render("admin");
           });
         };

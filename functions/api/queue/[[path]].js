@@ -744,6 +744,8 @@ export async function onRequest(context) {
         "my-groups": ACCOUNT, create: ACCOUNT, invite: GROUP_ADMIN, policy: GROUP_ADMIN, overview: GROUP_ADMIN,
         "admin-add": GROUP_ADMIN, "admin-remove": GROUP_ADMIN,
         remove: EITHER, accept: OWNER, decline: OWNER, memberships: CAPS.STAFF_ADMIN, adopt: CAPS.STAFF_ADMIN,
+        // D4 B: the hospital's own admin publishes its counts; the group admin sets when a snapshot reads as stale.
+        "publish-counts": CAPS.STAFF_ADMIN, "stale-after": GROUP_ADMIN,
       };
       const need = capFor[sub]; if (!need) return json({ ok: false, error: "not_found" }, 404, request);
       const GET_SUBS = new Set(["my-groups", "overview", "memberships"]);
@@ -785,7 +787,7 @@ export async function onRequest(context) {
             const o = await ORG.getOrg(env, l.orgId);
             members.push({ orgId: l.orgId, name: o ? o.name : null });
           }
-          out.push({ id: gr.id, name: gr.name, policy: gr.policy, policyVersion: gr.policyVersion, members,
+          out.push({ id: gr.id, name: gr.name, policy: gr.policy, policyVersion: gr.policyVersion, staleAfterMinutes: gr.staleAfterMinutes, members,
             invited: links.filter((x) => x.state === "invited").map((x) => ({ orgId: x.orgId, invitedAt: x.invitedAt })),
             adminUids: gr.adminUids });
         }
@@ -830,24 +832,38 @@ export async function onRequest(context) {
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
+        /* D4 B: the group reads each member's PUBLISHED snapshot, never the member's record. A hospital that
+         * never published is "not_published" with no counts (never zeros); an old one is marked stale after
+         * the group's own age setting. The hospital's audit trail still records the group's read first. */
         const links = (await GROUP.linksForGroup(env, g.id)).filter((l) => l.state === "member");
+        const at = Date.now();
         const hospitals = await Promise.all(links.map(async (l) => {
           const o = await ORG.getOrg(env, l.orgId).catch(() => null);
           const row = { orgId: l.orgId, name: o ? o.name : null, code: o ? o.code : null };
           if (!o) return { ...row, status: "unreadable", why: "hospital_not_found", counts: null };
-          // The hospital's own audit trail records the read BEFORE anything is counted: no audit row, no read.
           try { await GROUP.auditSummaryRead(env, o.id, g.id, actor.id); }
           catch { return { ...row, status: "unreadable", why: "audit_failed", counts: null }; }
-          const mig = await wsqForcedMigration(env, o).catch(() => null);
-          const tenantId = mig && !mig.error ? mig.tenantId : null;
-          return { ...row, ...(await hospitalCounts({
-            tenantId, repository: tenantId ? wsqRecordDeps(env, tenantId).repository : null,
-            listBeds: () => ORG.listBeds(env, o.id),
-            staffing: () => rosterStaffing(env, o.id, o.wardsynq, ORG.listMembers, Date.now()),
-          })) };
+          let snap;
+          try { snap = await GROUP.getSnapshot(env, o.id); }
+          catch { return { ...row, status: "unreadable", why: "snapshot_unreadable", counts: null }; }
+          return { ...row, ...GROUP.snapshotView(snap, g.staleAfterMinutes, at) };
         }));
-        return json({ ok: true, group: { id: g.id, name: g.name }, generatedAt: new Date().toISOString(), hospitals }, 200, request);
+        return json({ ok: true, group: { id: g.id, name: g.name, staleAfterMinutes: g.staleAfterMinutes }, generatedAt: new Date(at).toISOString(), hospitals }, 200, request);
       }
+      if (sub === "publish-counts") {
+        // The hospital's own counts, read in its own tenant exactly as the overview used to, then published.
+        const o = await ORG.getOrg(env, arg("orgId"));
+        if (!o) return refuse(404, "org_not_found", "No hospital with that id.");
+        const mig = await wsqForcedMigration(env, o).catch(() => null);
+        const tenantId = mig && !mig.error ? mig.tenantId : null;
+        const counts = await hospitalCounts({
+          tenantId, repository: tenantId ? wsqRecordDeps(env, tenantId).repository : null,
+          listBeds: () => ORG.listBeds(env, o.id),
+          staffing: () => rosterStaffing(env, o.id, o.wardsynq, ORG.listMembers, Date.now()),
+        });
+        return done(await GROUP.publishSnapshot(env, o.id, counts, actor.id));
+      }
+      if (sub === "stale-after") return done(await GROUP.setStaleAfter(env, g, body.minutes, actor.id));
       if (sub === "memberships") {
         const links = (await GROUP.linksForOrg(env, arg("orgId"))).filter((l) => l.state === "invited" || l.state === "member");
         const rows = [];
@@ -856,7 +872,10 @@ export async function onRequest(context) {
           rows.push({ groupId: l.groupId, name: gr ? gr.name : null, state: l.state, invitedAt: l.invitedAt,
             ...(l.state === "member" && gr ? { policy: gr.policy, policyVersion: gr.policyVersion } : {}) });
         }
-        return json({ ok: true, groups: rows }, 200, request);
+        // D4 B: what this hospital last published (null = never), so its admin sees what groups are reading.
+        let snapshot;
+        try { snapshot = await GROUP.getSnapshot(env, arg("orgId")); } catch { snapshot = false; }
+        return json({ ok: true, groups: rows, snapshot }, 200, request);
       }
       if (sub === "adopt") {
         const { link: l } = await GROUP.getLink(env, arg("groupId"), arg("orgId"));
