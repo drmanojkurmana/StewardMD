@@ -319,6 +319,13 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
         if vc.mode == "agent" && vc.compact {
             vc.view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height * 0.52).rounded())
             vc.view.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        } else if vc.mode == "agent" {
+            // AGENT READS RUN OUT OF SIGHT. While the browser covered the whole app view, the app's own
+            // WKWebView (where the engine runs) stopped answering for minutes at a time and every
+            // iPhone read stalled (2026-09-15). A 2pt strip keeps the hospital page alive (cookies,
+            // tokens, fetch) with the app view fully visible - the same idea as Android's hidden read.
+            vc.view.frame = CGRect(x: 0, y: bounds.height - 2, width: bounds.width, height: 2)
+            vc.view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         } else {
             vc.view.frame = bounds
             vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
