@@ -4094,6 +4094,7 @@
       return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>Digital twin</b><small>hospital-wide</small></div>" +
         '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+        '<div class="w-actions"><button class="w-btn ghost" data-w-act="trends">' + ms("query_stats") + "Trends</button></div>" +
         (tw.loaded && tw.err ? '<p class="w-hint warn">' + ms("error") + "The hospital snapshot could not be loaded: " + esc(tw.err) + ". Do not read this as zero.</p>"
           : '<p class="w-empty">' + (tw.loaded ? "Nothing to show yet." : "Loading&hellip;") + "</p>");
     }
@@ -4120,6 +4121,7 @@
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Digital twin</b><small>" + esc(t.sectionsOk) + "/" + esc(t.sectionsTotal) + " sections &middot; " + when(t.generatedAt) + "</small></div>" +
       '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-actions"><button class="w-btn ghost" data-w-act="trends" title="These measures over days, weeks or months, by ward">' + ms("query_stats") + "Trends</button></div>" +
       twinDrillHtml(t, tw.drill) +
 
       twinSectionCard("hub", "Flow &amp; capacity", s.flow, function (d) {
@@ -6429,6 +6431,107 @@
       safety + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No measures returned.</p>') + "</div>";
   }
 
+  /* P2.10 TRENDS (functions/_wardsynq/trends.js), reached from the digital twin. A metric over time, then
+   * one bucket by ward, then the record ids behind one ward. `data` is null while loading and false when it
+   * failed; a bucket the server could not compute has a null value and is drawn as a GAP in the line and
+   * written out in the table with its reason, never plotted as zero. */
+  var TREND_BUCKETS = [["day", "Day"], ["week", "Week"], ["month", "Month"]];
+  function trendValue(p, unit) {
+    if (p.value == null) return null;
+    var v = unit === "%" ? Math.round(p.value * 1000) / 10 + "%" : esc(p.value) + (unit === "amount" ? "" : " " + esc(unit));
+    return p.p90 != null ? "median " + v + ", p90 " + esc(p.p90) + " " + esc(unit) : v;
+  }
+  function trendCell(p, unit) {
+    var v = trendValue(p, unit);
+    return (v != null ? "<b>" + v + "</b>" : '<span class="w-hint warn">no value: ' + esc(p.reason || "not known") + "</span>") +
+      (p.numerator != null || p.denominator != null ? " <small>(" + esc(p.numerator == null ? "-" : p.numerator) + (p.denominator != null ? " / " + esc(p.denominator) : "") + ")</small>" : "") +
+      (p.unacknowledged ? " <small>" + esc(p.unacknowledged) + " unacknowledged</small>" : "") +
+      (p.excluded ? " <small>" + esc(p.excluded) + " excluded</small>" : "") +
+      (p.pending ? " <small>" + esc(p.pending) + " pending</small>" : "") +
+      (p.byCategory ? " <small>" + esc(Object.keys(p.byCategory).map(function (k) { return k + " " + p.byCategory[k]; }).join(", ")) + "</small>" : "") +
+      (p.coverage === "partial" ? ' <span class="w-st due">' + (p.inProgress ? "in progress" : "partial") + "</span>" : "");
+  }
+  function trendChart(points, unit) {
+    var W = 600, H = 160, vals = points.map(function (p) { return p.value; }).filter(function (v) { return typeof v === "number"; });
+    if (!vals.length) return '<p class="w-hint warn">' + ms("warning") + "No bucket in this range has a value, so there is nothing to draw. The table below says why for each one.</p>";
+    var hi = Math.max.apply(null, vals.concat([0])) || 1, n = points.length, segs = [], seg = [], dots = "";
+    points.forEach(function (p, i) {
+      if (typeof p.value !== "number") { if (seg.length) segs.push(seg); seg = []; return; }
+      var x = n > 1 ? (i / (n - 1)) * (W - 20) + 10 : W / 2, y = H - 10 - (p.value / hi) * (H - 20);
+      seg.push(x.toFixed(1) + "," + y.toFixed(1));
+      dots += '<circle r="4" fill="currentColor" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" data-w-act="trendbucket:' + i + '"><title>' + esc(p.label) + ": " + esc(p.value) + "</title></circle>";
+    });
+    if (seg.length) segs.push(seg);
+    var lines = segs.map(function (s) { return s.length > 1 ? '<polyline class="w-trend-line" fill="none" stroke="currentColor" stroke-width="2" points="' + s.join(" ") + '"/>' : ""; }).join("");
+    return '<div style="overflow-x:auto"><svg class="w-trend" width="100%" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" role="img" aria-label="trend, ' + esc(unit) + '">' +
+      '<line x1="0" y1="' + (H - 10) + '" x2="' + W + '" y2="' + (H - 10) + '" stroke="currentColor" stroke-opacity="0.2"/>' + lines + dots + "</svg></div>" +
+      '<p class="w-dt-times">0 to ' + esc(unit === "%" ? Math.round(hi * 1000) / 10 + "%" : hi + " " + unit) + ". A break in the line is a bucket with no value, not a zero.</p>";
+  }
+  function trendsView(state) {
+    var t = state.trends || {}, d = t.data;
+    var metrics = t.metrics || [{ id: t.metric, title: t.metric }];
+    var head = '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Trends</b><small>hospital-wide, over time</small></div>" +
+      '<button class="w-ic" data-w-act="trendsload" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-card"><div class="w-filter">' +
+      '<select id="wTrMetric" aria-label="Metric">' + metrics.map(function (m) { return '<option value="' + esc(m.id) + '"' + (m.id === t.metric ? " selected" : "") + ">" + esc(m.title) + (m.finance ? " (billing)" : "") + "</option>"; }).join("") + "</select>" +
+      '<input id="wTrFrom" type="date" aria-label="From" value="' + esc(t.from || "") + '">' +
+      '<input id="wTrTo" type="date" aria-label="To" value="' + esc(t.to || "") + '">' +
+      '<select id="wTrBucket" aria-label="Bucket">' + TREND_BUCKETS.map(function (b) { return '<option value="' + b[0] + '"' + (b[0] === t.bucket ? " selected" : "") + ">" + b[1] + "</option>"; }).join("") + "</select>" +
+      '<button class="w-btn" data-w-act="trendsload">' + ms("query_stats") + "Show</button></div></div>";
+    if (d === null || d === undefined) return head + '<p class="w-empty">Loading the trend&hellip;</p>';
+    if (d === false) {
+      return head + '<p class="w-hint warn">' + ms("error") + (t.status === "billing_view_required" ? "This is a billing series and your role has no billing rights."
+        : t.status === 403 ? "Your role cannot read this trend." : "The trend could not be loaded" + (t.err ? ": " + esc(t.err) : "") + ".") +
+        " Do not read this as zero.</p>";
+    }
+    var def = d.definition || {}, unit = def.unit || "";
+    var points = (d.series && d.series[0] && d.series[0].points) || [];
+    var how = '<details class="w-card"><summary>' + ms("help") + "How this is counted</summary><ul class=\"w-mini\">" +
+      "<li><b>Numerator</b><span>" + esc(def.numerator) + "</span></li><li><b>Denominator</b><span>" + esc(def.denominator) + "</span></li>" +
+      "<li><b>Included</b><span>" + esc(def.inclusion) + "</span></li><li><b>Excluded</b><span>" + esc(def.exclusion) + "</span></li>" +
+      "<li><b>Ward</b><span>" + esc(def.wardAttribution) + "</span></li>" +
+      "<li><b>Clock</b><span>" + esc(d.range && (d.range.timeZone || "UTC offset " + d.range.utcOffsetMinutes + " minutes")) + "</span></li></ul></details>";
+    var warn = (d.warning ? '<p class="w-hint warn">' + ms("warning") + esc(d.warning) + "</p>" : "") +
+      (d.unreadable && d.unreadable.length ? '<p class="w-hint warn">' + ms("block") + "Not readable: " + esc(d.unreadable.join(", ")) + ". Buckets that need them have no value.</p>" : "");
+    var rows = points.map(function (p, i) {
+      return "<tr><td>" + esc(p.label) + "</td><td>" + trendCell(p, unit) + "</td><td>" +
+        (p.value != null || p.numerator ? '<button class="w-btn ghost tiny" data-w-act="trendbucket:' + i + '">By ward</button>' : "") + "</td></tr>";
+    }).join("");
+    var main = '<div class="w-card"><div class="w-card-h">' + ms("query_stats") + "<h3>" + esc(def.title) + "</h3></div>" +
+      (points.length ? trendChart(points, unit) + '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>Bucket</th><th>Value (numerator / denominator)</th><th></th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+        : '<p class="w-empty">No buckets in this range.</p>') + "</div>";
+    return head + warn + main + trendWardHtml(t, unit) + trendEventsHtml(t) + detailPanel(state) + how;
+  }
+  function trendWardHtml(t, unit) {
+    var w = t.ward; if (!w) return "";
+    var h = '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>By ward: " + esc(w.label) + "</h3>" +
+      '<button class="w-ic" data-w-act="trendwardclose" title="Close">' + ms("close") + "</button></div>";
+    if (w.data === null) return h + '<p class="w-empty">Loading the wards&hellip;</p></div>';
+    if (w.data === false) return h + '<p class="w-hint warn">' + ms("error") + "The ward breakdown could not be loaded" + (w.err ? ": " + esc(w.err) : "") + ". Do not read this as zero.</p></div>";
+    var rows = (w.data.series || []).map(function (s, i) {
+      var p = (s.points || []).filter(function (x) { return x.key === w.key; })[0];
+      if (!p) return "";
+      return "<tr><td>" + esc(s.group) + "</td><td>" + trendCell(p, unit) + "</td><td>" +
+        (p.value != null || p.numerator ? '<button class="w-btn ghost tiny" data-w-act="trendevents:' + i + '">Records</button>' : "") + "</td></tr>";
+    }).join("");
+    return h + (rows ? '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>Ward</th><th>Value</th><th></th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+      : '<p class="w-empty">No ward had anything in this bucket.</p>') + "</div>";
+  }
+  function trendEventsHtml(t) {
+    var e = t.events; if (!e) return "";
+    var h = '<div class="w-card"><div class="w-card-h">' + ms("list") + "<h3>Records: " + esc(e.ward) + "</h3>" +
+      '<button class="w-ic" data-w-act="trendeventsclose" title="Close">' + ms("close") + "</button></div>";
+    if (e.data === null) return h + '<p class="w-empty">Loading the records&hellip;</p></div>';
+    if (e.data === false) return h + '<p class="w-hint warn">' + ms("error") + (e.status === 403 ? "You do not have access to this ward's records." : "The records could not be loaded" + (e.err ? ": " + esc(e.err) : "") + ".") + "</p></div>";
+    var ev = e.data.events || { items: [] };
+    var rows = ev.items.map(function (x) {
+      return '<li class="w-mini-row"><div>' + esc(x.resourceType) + " &middot; " + esc(x.id) + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="timelinedetail:' + esc(x.resourceType) + "~" + esc(x.id) + '">Open</button></div></li>';
+    }).join("");
+    return h + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No records behind this bucket on this ward.</p>') +
+      (ev.truncated ? '<p class="w-hint warn">Showing ' + esc(ev.items.length) + " of " + esc(ev.total) + ", or the read was capped. The list is not complete.</p>" : "") + "</div>";
+  }
+
   var EMERGENCY_KINDS = [["mass-casualty", "Mass casualty"], ["disaster", "Disaster"], ["downtime", "Major downtime"], ["evacuation", "Evacuation"], ["surge", "Surge"], ["network-outage", "Network outage"], ["other", "Other"]];
   function emergencyAdminView(state) {
     var e = state.emergencyAdmin || {};
@@ -6629,6 +6732,7 @@
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
         : state.view === "flowcommand" ? flowCommandView(state)
         : state.view === "twin" ? twinView(state)
+        : state.view === "trends" ? trendsView(state)
         : state.view === "scheduling" ? schedulingView(state)
         : state.view === "cashier" ? cashierView(state)
         : listView(state)) + "</div></div>";
@@ -7792,6 +7896,46 @@
   }
   function twinOpen() {
     st.view = "twin"; st.twin = {}; paint(); loadTwin();
+  }
+  function trendsOpen() {
+    var day = function (msAgo) { var x = new Date(Date.now() - msAgo); return x.getFullYear() + "-" + ("0" + (x.getMonth() + 1)).slice(-2) + "-" + ("0" + x.getDate()).slice(-2); };
+    st.view = "trends"; st.recordDetail = null;
+    st.trends = { metric: "admissions", bucket: "day", from: day(29 * 86400000), to: day(0), data: null, ward: null, events: null };
+    paint(); loadTrends();
+  }
+  function trendsPath(t) {
+    return "/ward/trends?orgId=" + encodeURIComponent(st.orgId) + "&metric=" + encodeURIComponent(t.metric) +
+      "&from=" + encodeURIComponent(t.from) + "&to=" + encodeURIComponent(t.to) + "&bucket=" + encodeURIComponent(t.bucket);
+  }
+  function trendFailure(target, r) {
+    target.data = false;
+    target.status = r && r.detail === "billing_view_required" ? "billing_view_required" : (r && (r.error === "forbidden" || r.error === "permission" || r.error === "out_of_scope")) ? 403 : null;
+    target.err = (r && (r.message || r.detail || r.error)) || "no response";
+  }
+  function loadTrends() {
+    var t = st.trends; if (!t) return;
+    t.metric = val("wTrMetric") || t.metric; t.from = val("wTrFrom") || t.from; t.to = val("wTrTo") || t.to; t.bucket = val("wTrBucket") || t.bucket;
+    t.data = null; t.ward = null; t.events = null; st.recordDetail = null; paint();
+    apiGet(trendsPath(t))
+      .then(function (r) { if (st.trends !== t) return; if (r && r.metrics) t.metrics = r.metrics; if (r && r.ok) t.data = r; else trendFailure(t, r); paint(); })
+      .catch(function () { if (st.trends !== t) return; t.data = false; t.err = "Could not reach the server."; paint(); });
+  }
+  function trendBucket(i) {
+    var t = st.trends, p = t && t.data && t.data.series && t.data.series[0] && t.data.series[0].points[i]; if (!p) return;
+    var w = { key: p.key, label: p.label, data: null };
+    t.ward = w; t.events = null; st.recordDetail = null; paint();
+    apiGet(trendsPath(t) + "&groupBy=ward")
+      .then(function (r) { if (t.ward !== w) return; if (r && r.ok) w.data = r; else trendFailure(w, r); paint(); })
+      .catch(function () { if (t.ward !== w) return; w.data = false; w.err = "Could not reach the server."; paint(); });
+  }
+  function trendEventsLoad(i) {
+    var t = st.trends, w = t && t.ward, s = w && w.data && w.data.series && w.data.series[i]; if (!s) return;
+    var e = { ward: s.group, data: null };
+    t.events = e; st.recordDetail = null; paint();
+    apiGet("/ward/trend-events?orgId=" + encodeURIComponent(st.orgId) + "&metric=" + encodeURIComponent(t.metric) + "&from=" + encodeURIComponent(t.from) +
+      "&to=" + encodeURIComponent(t.to) + "&bucket=" + encodeURIComponent(t.bucket) + "&key=" + encodeURIComponent(w.key) + "&ward=" + encodeURIComponent(s.group))
+      .then(function (r) { if (t.events !== e) return; if (r && r.ok) e.data = r; else trendFailure(e, r); paint(); })
+      .catch(function () { if (t.events !== e) return; e.data = false; e.err = "Could not reach the server."; paint(); });
   }
   function loadTwin() {
     if (!st.twin) st.twin = {};
@@ -10378,6 +10522,7 @@
       if (st.view === "bedmgmt") { st.bedMgmt = {}; st.view = "list"; paint(); return; }
       if (st.view === "flowcommand") { st.flow = {}; st.view = "list"; paint(); return; }
       if (st.view === "twin") { st.twin = {}; st.view = "list"; paint(); return; }
+      if (st.view === "trends") { st.trends = null; st.recordDetail = null; twinOpen(); return; }
       if (st.view === "scheduling") { st.scheduling = {}; st.view = "list"; paint(); return; }
       if (st.view === "cashier") { st.cashier = {}; st.view = "list"; paint(); return; }
       if (st.view === "reports") { st.reports = {}; st.view = "list"; paint(); return; }
@@ -10512,6 +10657,12 @@
     if (cmd === "twinload") { loadTwin(); return; }
     if (cmd === "twindrill") { var dp = arg.split("."); st.twin = st.twin || {}; st.twin.drill = { section: dp[0], key: dp[1] || "" }; paint(); return; }
     if (cmd === "twindrillclose") { if (st.twin) st.twin.drill = null; paint(); return; }
+    if (cmd === "trends") { trendsOpen(); return; }
+    if (cmd === "trendsload") { loadTrends(); return; }
+    if (cmd === "trendbucket") { trendBucket(Number(arg)); return; }
+    if (cmd === "trendevents") { trendEventsLoad(Number(arg)); return; }
+    if (cmd === "trendwardclose") { if (st.trends) { st.trends.ward = null; st.trends.events = null; } st.recordDetail = null; paint(); return; }
+    if (cmd === "trendeventsclose") { if (st.trends) st.trends.events = null; st.recordDetail = null; paint(); return; }
     if (cmd === "flowdrill") { st.flow = st.flow || {}; st.flow.drill = arg; paint(); return; }
     if (cmd === "flowdrillclose") { if (st.flow) st.flow.drill = null; paint(); return; }
     if (cmd === "cmdopen") { commandOpenChart(arg); return; }
@@ -11003,7 +11154,7 @@
     // list's own toolbar offers: a chart-scoped verb needs a selected patient and is not honoured.
     if (opts.act && HOSPITAL_ACTS.indexOf(opts.act) >= 0) dispatch(opts.act);
   }
-  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview"];
+  var HOSPITAL_ACTS = ["board", "edboard", "surgeryboard", "inventoryboard", "critsboard", "labboard", "radboard", "bedmgmt", "flowcommand", "twin", "trends", "scheduling", "cashier", "reports", "emergencyadmin", "integration", "downtime", "incidents", "approvals", "purchasing", "safetyinbox", "handovers", "breakglass", "admreqs", "mpi", "referralinbox", "nurseworklist", "surveillance", "qualityview"];
   /* CLOSING THE WARD FORGETS THE PATIENTS.
    *
    * close() used to empty the markup and leave every patient in memory - the roster, the open
