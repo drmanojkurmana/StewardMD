@@ -6,7 +6,8 @@
  *   wardsynq-alert-ui.js  v2 payload parsing, nothing rendered from the push itself, app lock before
  *                         any fetch, cross-hospital guard, failure states for load and every answer
  *   native-push.js        a v2 tap opens the screen; register-member on token registration with the
- *                         workplace's own credential; unregister-member on sign-out
+ *                         workplace's own credential; unregister-member on staff sign-out, and on
+ *                         account sign-out (signout-fix.js) with the account credential before Firebase
  * Routes named: GET /api/push/notice/<nid>, POST /api/push/notice/<nid>/decline,
  * POST /api/push/wardsynq-receipt, POST /api/queue/ward/acknowledge, POST /api/push/register-member,
  * POST /api/push/unregister-member. The browser run is test/run-wsq-alert-screen.mjs.
@@ -374,7 +375,7 @@ function nativeSandbox(opts) {
     addListener: (ev, fn) => { listeners[ev] = fn; },
     checkPermissions: () => Promise.resolve({ receive: "granted" }), requestPermissions: () => Promise.resolve({ receive: "granted" }), register: () => Promise.resolve(),
   };
-  const box = sandbox({ ...opts, files: ["hospital-auth.js", "wardsynq-alert-ui.js", "native-push.js"], extra: { Capacitor: { isNativePlatform: () => true, getPlatform: () => "ios", Plugins: { PushNotifications: plugin } }, crypto: webcrypto } });
+  const box = sandbox({ ...opts, files: ["hospital-auth.js", "wardsynq-alert-ui.js", "native-push.js"], extra: { ...(opts && opts.extra), Capacitor: { isNativePlatform: () => true, getPlatform: () => "ios", Plugins: { PushNotifications: plugin } }, crypto: webcrypto } });
   return { ...box, listeners };
 }
 
@@ -418,3 +419,77 @@ test("native-push: a new device token binds every hospital with that hospital's 
   assert.equal(un.body.orgId, "org-a");
   assert.equal(JSON.parse(ls.get("smd_wsq_push_orgs"))["org-a"], undefined);
 });
+
+// ---- account sign-out (S3 P1 follow-up) --------------------------------------------------------------
+
+const TAIL = "abcdef123456", DEVICE = "device-token-" + TAIL;
+async function signedInPhone(unregister, store) {
+  const tokB = await tokFor("org-b", "nurse1");
+  const order = [];
+  const box = nativeSandbox({
+    store: { smd_opd_staff_tok: tokB, smd_opd_workplace: "wardsynq:org-b", smd_wsq_push_orgs: JSON.stringify({ "org-b": TAIL }), ...(store || {}) },
+    routes: { "POST /api/push/register-native": { status: 200, body: { ok: true } }, "POST /api/push/unregister-member": (c) => (order.push("unregister-member"), unregister) },
+  });
+  box.listeners.registration({ value: DEVICE });
+  await settle();
+  return { ...box, order, tokB };
+}
+
+test("signing out of the account releases this phone at the workplace with the ACCOUNT credential, before Firebase signs out", async () => {
+  const { sb, calls, ls, order, tokB } = await signedInPhone({ status: 200, body: { ok: true, removed: 1 } });
+  assert.equal(calls.filter((c) => c.path === "/api/push/register-member").length, 0, "already bound with this token");
+  const clicks = [];
+  sb.document.addEventListener = (type, fn) => { if (type === "click") clicks.push(fn); };
+  sb.location.reload = () => order.push("reload");
+  sb.SMD_AUTH.signOut = () => { order.push("signOut"); return Promise.resolve(); };
+  vm.runInContext(src("signout-fix.js"), sb, { filename: "signout-fix.js" });
+  const target = { closest: () => target };
+  clicks[0]({ target, preventDefault() {}, stopImmediatePropagation() {} });
+  await settle();
+  assert.deepEqual(order, ["unregister-member", "signOut", "reload"], "released while the account credential is still valid");
+  const un = calls.find((c) => c.path === "/api/push/unregister-member");
+  assert.equal(un.headers.Authorization, "Bearer acct-jwt");
+  assert.equal(un.headers["X-Staff-Token"], undefined, "the account's own binding: a staff session for the same hospital is not what is signing out");
+  assert.notEqual(un.headers["X-Staff-Token"], tokB);
+  assert.deepEqual({ orgId: un.body.orgId, token: un.body.token }, { orgId: "org-b", token: DEVICE });
+  assert.equal(ls.get("smd_wsq_push_unbind_failed"), undefined, "a confirmed unbind leaves no failure behind");
+  assert.equal(JSON.parse(ls.get("smd_wsq_push_orgs"))["org-b"], undefined);
+});
+
+test("a failed account-sign-out release is recorded and said on the next launch, never as removed; nothing bound means nothing sent", async () => {
+  for (const answer of [{ status: 502, body: { ok: false, error: "unbind_failed" } }, "network", { status: 200, body: { ok: false } }]) {
+    const { sb, ls } = await signedInPhone(answer);
+    const r = await sb.SMD_WSQ_PUSH.accountSignOut();
+    assert.equal(r.ok, false, JSON.stringify(answer));
+    assert.equal(JSON.parse(ls.get("smd_wsq_push_unbind_failed")).orgId, "org-b", "recorded");
+  }
+  // No account left to authenticate with: no request, still recorded.
+  const gone = await signedInPhone({ status: 200, body: { ok: true } });
+  gone.sb.SMD_AUTH.currentUser = null;
+  assert.equal((await gone.sb.SMD_WSQ_PUSH.accountSignOut()).ok, false);
+  assert.equal(gone.order.length, 0);
+  assert.ok(gone.ls.get("smd_wsq_push_unbind_failed"));
+
+  // The next launch says it once, in words that do not claim the phone was removed.
+  const said = [];
+  const next = nativeSandbox({ store: { smd_wsq_push_unbind_failed: JSON.stringify({ orgId: "org-b", at: "2026-09-14T10:00:00Z" }) }, extra: { toast: (m) => said.push(m) } });
+  await new Promise((r) => setTimeout(r, 3100));
+  assert.equal(said.length, 1);
+  assert.match(said[0], /could not be taken off .* critical-result alerts, so it may still receive them/);
+  assert.equal(next.ls.get("smd_wsq_push_unbind_failed"), undefined, "said once");
+
+  // A phone never bound at its workplace sends nothing and records nothing.
+  const none = await signedInPhone({ status: 200, body: { ok: true } }, { smd_wsq_push_orgs: "{}" });
+  assert.equal((await none.sb.SMD_WSQ_PUSH.accountSignOut()).unchanged, true);
+  assert.equal(none.order.length, 0);
+  assert.equal(none.ls.get("smd_wsq_push_unbind_failed"), undefined);
+});
+
+test("the other account sign-outs (verify.js 'Use a different account', account.js device lock) release before Firebase signs out", () => {
+  for (const [file, anchor] of [["verify.js", "Use a different account"], ["account.js", "active on another device"]]) {
+    const code = src(file), at = code.indexOf(anchor), part = code.slice(at, at + 2600);
+    assert.ok(at > 0, file);
+    assert.match(part, /accountSignOut\(\)[\s\S]*rel\.then\(function \(\) \{[\s\S]*a\.signOut\(\)/, file + ": signOut runs only after the release settles");
+  }
+});
+
