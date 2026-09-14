@@ -6017,7 +6017,15 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   is cleared.
 - **Known ceiling**: with an account credential in a different workplace, the server releases the
   notice detail (and writes its read-log row) before the client sees `orgId` and refuses to show it.
-  Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading.
+  Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading. (Done, below.)
+
+## 2026-09-14 S3 P1 follow-ups: the limits P1 left
+- **Notice in the workplace only**: `GET /api/push/notice/<nid>?orgId=<workplace>`. A missing, empty or other
+  hospital's orgId is 404 after the KV pointer read and BEFORE the membership, loop, patient or read-log write
+  (no session is still 401). The app sends the workplace and, with no WardSynQ workplace chosen, asks nothing
+  and says to choose one. The switch screen stays as a guard but a real server no longer feeds it, so a
+  multi-hospital clinician in the wrong workplace sees "switch to the one it was sent from" without the name.
+  Decline and receipts are unchanged (decline is only offered from a detail the workplace already opened).
 
 ## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
 - Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed

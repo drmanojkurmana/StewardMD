@@ -175,7 +175,7 @@ test("app lock first: no request until the lock is passed, then the detail for t
   sb.unlocked = true; sb.unlocks[0]();
   await settle();
   assert.equal(A(sb)._state().phase, "detail");
-  assert.equal(calls[0].path, "/api/push/notice/" + NID);
+  assert.equal(calls[0].path, "/api/push/notice/" + NID + "?orgId=org-a", "the workplace is named, so the server can refuse any other hospital's notice");
   assert.equal(calls[0].headers.Authorization, "Bearer acct-jwt");
   const html = root(sb).innerHTML;
   for (const want of ["Ramesh Kumar", "MRN-778812", "Ward Medical A, bed 7", "Potassium 7.2 mmol/L", "Asha Hospital"]) assert.ok(html.includes(want), want);
@@ -194,12 +194,34 @@ test("EMR-05: a notice for hospital A while working in B asks to switch and neve
   for (const p of PHI.slice(0, 4)) assert.ok(!html.includes(p), "shown inside B: " + p);
   assert.equal(A(sb)._state().notice, null, "A's detail is not kept");
   assert.ok(!calls.some((c) => c.path.includes("wardsynq-receipt")), "no viewed receipt for an alert not shown");
+  assert.equal(calls[0].path, "/api/push/notice/" + NID + "?orgId=org-b");
   click(sb, "switch");
   await settle();
   assert.equal(ls.get("smd_opd_workplace"), "wardsynq:org-a");
   assert.equal(wardClosed, true, "an open ward on B is closed");
   assert.equal(asked, 2);
   assert.equal(A(sb)._state().phase, "detail");
+  assert.equal(calls.filter((c) => c.path.startsWith("/api/push/notice/")).at(-1).path, "/api/push/notice/" + NID + "?orgId=org-a");
+});
+
+test("S3 P1 follow-up: the server refuses another workplace's notice (404), so nothing is shown; no workplace, no request", async () => {
+  // What the server now does: 404 unless ?orgId= is the notice's own hospital.
+  const route = (c) => (c.path.endsWith("?orgId=org-a") ? notice("org-a") : { status: 404, body: { ok: false, error: "not_found" } });
+  const b = sandbox({ store: { smd_opd_workplace: "wardsynq:org-b" }, routes: { ["GET /api/push/notice/" + NID]: route, "POST /api/push/wardsynq-receipt": { status: 200, body: { ok: true } } } });
+  A(b.sb).handle({ type: "wardsynq-alert", v: "2", nid: NID, kind: "critical" });
+  await settle();
+  assert.equal(A(b.sb)._state().phase, "failed");
+  const html = root(b.sb).innerHTML;
+  assert.ok(html.includes("switch to the one it was sent from"), html);
+  for (const p of PHI) assert.ok(!html.includes(p), p);
+  assert.ok(!b.calls.some((c) => c.path.includes("wardsynq-receipt")), "no viewed receipt");
+
+  const none = sandbox({ routes: { ["GET /api/push/notice/" + NID]: route } });
+  A(none.sb).handle({ type: "wardsynq-alert", v: "2", nid: NID, kind: "critical" });
+  await settle();
+  assert.equal(A(none.sb)._state().phase, "failed");
+  assert.match(root(none.sb).innerHTML, /Choose the hospital you are working in/);
+  assert.equal(none.calls.length, 0, "no hospital chosen: nothing asked of the server");
 });
 
 test("a failed load is a failure state with the reason and a retry, never an empty or successful screen", async () => {

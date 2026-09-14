@@ -10,8 +10,10 @@
  *
  * DETAIL AFTER UNLOCK, FOR THIS HOSPITAL ONLY. With app lock set and not yet passed, the screen sits
  * under the lock and fetches nothing. After it, GET /api/push/notice/<nid> is sent with the credential
- * of the hospital this phone is working in (hospital-auth.js). If the notice belongs to another
- * hospital the patient and result are dropped unshown and the screen asks to switch (parity EMR-05).
+ * of the hospital this phone is working in (hospital-auth.js) and that hospital's id (?orgId=). The server
+ * answers 404 for a notice from any other hospital before reading it or logging a read, so the detail of
+ * another hospital's alert never reaches this phone. If a server ever answers one anyway, the patient and
+ * result are dropped unshown and the screen asks to switch (parity EMR-05). No hospital chosen: no request.
  *
  * THE ANSWERS.
  *   Acknowledge          POST /api/queue/ward/acknowledge {orgId, loopId, action}. Human, with the
@@ -41,6 +43,7 @@
     test: { tag: "TEST ALERT", title: "Test alert" }
   };
   var LEVEL_WORDS = { due: "First alert", overdue: "Overdue: not acknowledged in time", escalate: "Escalated to the hospital's named contacts" };
+  var NO_WORKPLACE = "Choose the hospital you are working in on this phone, then try again. The alert opens only in the hospital it was sent from.";
   var STILL_OPEN = "The result stays open on the critical results board and keeps escalating until someone acknowledges it.";
 
   var st = null;   // the alert on screen; one at a time, deliberately
@@ -163,13 +166,15 @@
     if (!s) return;
     s.phase = "loading"; s.err = ""; paint();
     var org = ha ? ha.currentOrg() : "";
-    (ha ? ha.authReady(8000) : Promise.resolve()).then(function () {
-      return send("GET", PUSH_API + "/notice/" + s.nid, org);
+    // The server releases the detail only for the hospital named here, so with none chosen there is nothing to ask.
+    if (!org) { s.phase = "failed"; s.err = NO_WORKPLACE; paint(); return; }
+    ha.authReady(8000).then(function () {
+      return send("GET", PUSH_API + "/notice/" + s.nid + "?orgId=" + encodeURIComponent(org), org);
     }).then(function (r) {
       if (st !== s) return;
       var n = r.body && r.body.notice;
       if (r.status === 200 && r.body.ok && n) {
-        if (!org || String(n.orgId) !== org) {
+        if (String(n.orgId) !== org) {
           // Another hospital's alert: keep only which hospital, never the patient or the result.
           s.other = { orgId: String(n.orgId || ""), hospital: String(n.hospital || "") };
           s.phase = "switch"; paint();
