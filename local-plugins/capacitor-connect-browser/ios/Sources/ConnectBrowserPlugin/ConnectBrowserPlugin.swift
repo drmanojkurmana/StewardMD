@@ -36,6 +36,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
     private var sawPasswordField = false
     private var autoLoginNotified = false
+    private var loginOrigin = ""   // origin the browser was opened at; landing elsewhere = signed in
 
     // Capped request log fed by main-frame navigations (decidePolicyFor) and the document-start
     // fetch/XHR-wrapping user script (didReceive message), drained by drainRequests().
@@ -106,6 +107,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             self.teardownExistingBrowser(reason: "closed", notify: false)
             self.sawPasswordField = false
             self.autoLoginNotified = false
+            self.loginOrigin = Self.origin(of: url)
             self.requestLog.removeAll()
 
             let config = WKWebViewConfiguration()
@@ -377,7 +379,14 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
                 return
             }
             if flag == "e" { return } // could not tell: say nothing
-            guard self.sawPasswordField, !self.autoLoginNotified else { return }
+            /* COOKIE AUTO-LOGIN, like Android's maybeAutoLoggedIn: a stored session skips the password
+             * form entirely, so "saw a password field" never happens. Landing on an allowed https origin
+             * other than the one the browser was opened at (GIMSR sign-in host -> GHIS data host), with no
+             * password field on it, is a sign-in too. Seen on an iPhone 15 Pro: the reuse path sat on
+             * "Signing in..." over a signed-in ward list until the doctor tapped Done (2026-09-15). */
+            let landed = Self.origin(of: vc.webView.url ?? URL(string: "about:blank")!)
+            let movedOff = !self.loginOrigin.isEmpty && landed != self.loginOrigin && vc.allowedOrigins.contains(landed)
+            guard (self.sawPasswordField || movedOff), !self.autoLoginNotified else { return }
             self.autoLoginNotified = true
             self.notifyListeners("loggedIn", data: [
                 "url": vc.webView.url?.absoluteString ?? "",
