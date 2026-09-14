@@ -50,7 +50,11 @@ const CORE = ["hr", "spo2", "sbp", "dbp", "map", "rr"];
 const OPTIONAL = ["pulse", "pvc", "temp", "etco2"];
 const SOURCES = ["art", "nibp"];
 const ALL = CORE.concat(OPTIONAL, SOURCES);
-const GROUPS = ["real", "perturbed-real", "synthetic"];
+// external-real / external-draft: third-party monitor photos (fixtures/external, internal use only, not
+// committed). Values are labelled by us; "draft" labels are not yet human-confirmed, so guesses there are
+// reported as "check the label" and do not fail acceptance.
+const GROUPS = ["real", "perturbed-real", "synthetic", "external-real", "external-draft"];
+const ACCEPTANCE_GROUPS = ["real", "perturbed-real", "synthetic", "external-real"];
 
 function findCases(dir, acc = []) {
   for (const f of readdirSync(dir, { withFileTypes: true })) {
@@ -113,6 +117,7 @@ function outcome(k, truth, pred) {
     if (auto) return (SOURCES.includes(k) ? sameReading(pred.value, truth.value) : pred.value === truth.value) ? "correct" : "wrong";
     return review ? "review" : "missed";
   }
+  if (truth.status === "unlabelled") return auto ? "auto-unlabelled" : "unlabelled";   // never scored
   if (truth.status === "ambiguous") return auto ? "silent-guess" : "correct-review";
   return auto ? "silent-guess" : "correct-abstain";
 }
@@ -179,9 +184,10 @@ const pct = (a, b) => (b ? +(100 * a / b).toFixed(1) : null);
 function metrics(rows, keys) {
   const m = {};
   for (const k of keys) {
-    const o = { visible: 0, correct: 0, wrong: 0, review: 0, missed: 0, autoEmitted: 0, silentGuess: 0, correctReview: 0, correctAbstain: 0, scored: 0, retake: 0 };
+    const o = { visible: 0, correct: 0, wrong: 0, review: 0, missed: 0, autoEmitted: 0, silentGuess: 0, correctReview: 0, correctAbstain: 0, scored: 0, retake: 0, autoUnlabelled: 0 };
     for (const r of rows) {
       const f = r.fields[k]; if (!f) continue;
+      if (f.truth === "unlabelled") { if (f.status === "AUTO_ACCEPTED") o.autoUnlabelled++; continue; }
       if (f.truth === "not_applicable" && f.status !== "AUTO_ACCEPTED") continue;
       o.scored++;
       if (f.truth === "visible") o.visible++;
@@ -264,8 +270,10 @@ L.push(`# ICU monitor extraction benchmark: parser v${M.VERSION}, policy ${POLIC
 L.push(`Generated ${new Date().toISOString()}. Local extraction only (Apple Vision on macOS + icu-monitor-parser.js). **Gemini calls: 0** (not part of this benchmark; the app's on-tap fallback is counted separately). Network calls: 0.`, "");
 L.push("**Groups are reported separately and never pooled.** `real` = photographs as taken. `perturbed-real` = images derived from a real photograph (robustness, not new monitors). `synthetic` = rendered layouts (layout handling, not photographic accuracy). Unit-test fixtures are not included.", "");
 L.push("## Acceptance", "");
-const totalGuesses = Object.values(byGroup).reduce((n, g) => n + g.silentGuesses, 0), totalIncomplete = Object.values(byGroup).reduce((n, g) => n + g.incompleteEvidence, 0);
-L.push(`- Silent guesses (all groups): **${totalGuesses}**`, `- AUTO fields without complete evidence: **${totalIncomplete}**`);
+const accepted = ACCEPTANCE_GROUPS.map((g) => byGroup[g]).filter(Boolean);
+const totalGuesses = accepted.reduce((n, g) => n + g.silentGuesses, 0), totalIncomplete = Object.values(byGroup).reduce((n, g) => n + g.incompleteEvidence, 0);
+L.push(`- Silent guesses (${ACCEPTANCE_GROUPS.filter((g) => byGroup[g]).join(", ")}): **${totalGuesses}**`, `- AUTO fields without complete evidence (all groups): **${totalIncomplete}**`);
+if (byGroup["external-draft"]) L.push(`- external-draft (labels NOT yet human-confirmed): ${byGroup["external-draft"].silentGuesses} disagreement(s) with the draft label; check the label before counting any as a silent guess`);
 for (const r of regressions) L.push(`- ${r.pass ? "PASS" : "**FAIL**"}: ${r.name} (${r.got})`);
 L.push("");
 for (const g of GROUPS) {
@@ -273,8 +281,10 @@ for (const g of GROUPS) {
   L.push(`## Group: ${g} (${G.cases} case${G.cases === 1 ? "" : "s"})`, "");
   L.push(`Silent guesses ${G.silentGuesses} · incomplete evidence ${G.incompleteEvidence} · RETAKE_PHOTO ${G.retake} · DEGRADED ${G.degraded} · avg Vision full ${G.avgOcrMsFull ?? "cached"} ms + crop ${G.avgOcrMsCrop ?? "-"} ms · parse ${G.avgParseMs} ms · boxes ${G.avgBoxesFull} (+${G.avgRecovered} from crop) · colour used in ${G.colourUsed}`, "");
   L.push("| field | visible | correct | wrong | review | missed | exact % | precision % | needs-review % | silent-guess % | safe % |", "|---|---|---|---|---|---|---|---|---|---|---|");
+  const autoUnl = ALL.reduce((n, k) => n + G.overall[k].autoUnlabelled, 0);
+  if (autoUnl) L.push(`AUTO on fields the dataset does not label (not scored): ${autoUnl}`, "");
   for (const k of ALL) { const m = G.overall[k]; if (!m.scored) continue; L.push(`| ${k} | ${m.visible} | ${m.correct} | ${m.wrong + m.silentGuess} | ${m.review + m.correctReview} | ${m.missed} | ${m.exactAccuracy ?? "-"} | ${m.precision ?? "-"} | ${m.needsReviewRate ?? "-"} | ${m.silentGuessRate ?? "-"} | ${m.safeAccuracy ?? "-"} |`); }
-  if (g !== "real") {
+  if (g !== "real" && !g.startsWith("external")) {
     L.push("", `Per manufacturer (${g}; core fields exact % / safe %)`, "", "| manufacturer | cases | " + CORE.join(" | ") + " |", "|---|---|" + CORE.map(() => "---").join("|") + "|");
     for (const [k, v] of Object.entries(G.byManufacturer)) L.push(`| ${k} | ${v.cases} | ` + CORE.map((f) => `${v.m[f].exactAccuracy ?? "-"} / ${v.m[f].safeAccuracy ?? "-"}`).join(" | ") + " |");
   }
