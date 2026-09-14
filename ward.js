@@ -1718,6 +1718,7 @@
         '<button class="w-btn ghost" data-w-act="pharmacyopen" title="Verification queue and dispense">' + ms("medication") + "Pharmacy</button>" +
         '<button class="w-btn ghost" data-w-act="txopen" title="Transfusion request, crossmatch, bedside verification">' + ms("bloodtype") + "Blood bank</button>" +
         '<button class="w-btn ghost" data-w-act="consentopen" title="What this patient has agreed to and refused">' + ms("fact_check") + "Consent</button>" +
+        '<button class="w-btn ghost" data-w-act="ipsopen" title="The International Patient Summary another hospital would receive for this patient">' + ms("summarize") + "IPS summary</button>" +
         '<button class="w-btn ghost" data-w-act="completionopen" title="What is still outstanding on this chart">' + ms("checklist") + "Chart check</button>" +
         '<button class="w-btn ghost" data-w-act="roiopen" title="Third-party requests to release this record">' + ms("outbox") + "ROI</button>" +
         '<button class="w-btn ghost" data-w-act="tpaopen" title="Claims and pre-authorisations">' + ms("gavel") + "TPA</button>" +
@@ -1952,6 +1953,37 @@
     ["patient", "Patient"], ["parent", "Parent"], ["legal-guardian", "Legal guardian"],
     ["next-of-kin", "Next of kin"], ["power-of-attorney", "Power of attorney"], ["clinician-emergency", "Clinician (emergency)"],
   ];
+  /* P2.5 IPS SUMMARY (functions/_wardsynq/fhir-ips.js): the document /ward/fhir/Patient/{id}/$summary returns,
+   * read back section by section. null = loading, failed = the whole summary could not be had. Within it
+   * a section that could not be read and a section with nothing recorded are different sentences, and
+   * neither is ever shown as "no known allergies". Entries are drawn from the resources in the Bundle
+   * with esc(), never from the server's narrative HTML. */
+  function ipsView(state) {
+    var d = state.ips;
+    var bar = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>International Patient Summary</h3>" +
+      '<button class="w-ic" data-w-act="ipsopen" title="Refresh">' + ms("refresh") + "</button></div>";
+    if (d === null || d === undefined) return '<div class="w-card">' + bar + '<p class="w-empty">Loading the summary...</p></div>';
+    if (d.failed) return '<div class="w-card">' + bar + '<p class="w-hint warn">' + ms("error") + "The summary could not be produced: " + esc(d.failed) + ". Nothing is known from this screen about this patient's problems, allergies or medicines.</p></div>";
+    var byRef = {};
+    (d.entry || []).forEach(function (e) { if (e.resource) byRef[e.resource.resourceType + "/" + e.resource.id] = e.resource; });
+    var comp = (d.entry && d.entry[0] && d.entry[0].resource) || {};
+    var label = function (r) {
+      var cc = r.code || r.medicationCodeableConcept || {};
+      var name = cc.text || (cc.coding && cc.coding[0] && (cc.coding[0].display || cc.coding[0].code)) || r.resourceType;
+      var q = r.valueQuantity, v = q ? " " + q.value + (q.unit ? " " + q.unit : "") : (r.valueString ? " " + r.valueString : "");
+      var when = r.effectiveDateTime || r.authoredOn || r.recordedDate || "";
+      return esc(name + v) + (when ? ' <span class="w-dt-times">' + esc(String(when).slice(0, 10)) + "</span>" : "");
+    };
+    var sections = (comp.section || []).map(function (s) {
+      var body;
+      var why = s.emptyReason && s.emptyReason.coding && s.emptyReason.coding[0] && s.emptyReason.coding[0].code;
+      if (why) body = '<p class="w-warn">' + ms("error") + (why === "withheld" ? "Not shown: your access does not include this section." : "Could not be read. This is not the same as none.") + "</p>";
+      else if (s.emptyReason) body = '<p class="w-empty">None recorded in this record. That is not a statement that the patient has none.</p>';
+      else body = '<ul class="w-mini">' + (s.entry || []).map(function (e) { var r = byRef[e.reference]; return '<li class="w-mini-row"><div>' + (r ? label(r) : esc(e.reference)) + "</div></li>"; }).join("") + "</ul>";
+      return '<div class="w-sub"><h4>' + esc(s.title) + "</h4>" + body + "</div>";
+    }).join("");
+    return '<div class="w-card">' + bar + '<p class="w-dt-times">Generated ' + when(d.timestamp) + (comp.author && comp.author[0] ? " by " + esc(comp.author[0].display || "") : "") + "</p>" + sections + "</div>";
+  }
   function consentView(state) {
     var c = state.consent || {};
     var opts = function (list, cur) {
@@ -6710,6 +6742,7 @@
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
         : state.view === "consent" ? consentView(state)
+        : state.view === "ips" ? ipsView(state)
         : state.view === "completion" ? completionView(state)
         : state.view === "roi" ? roiView(state)
         : state.view === "tpa" ? tpaView(state)
@@ -10103,6 +10136,19 @@
       .then(function (r) { if (settle(r)) { st.pcopy = r; st.ok = "Handover recorded."; } paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the handover."; paint(); });
   }
+  function ipsOpen() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.view = "ips"; st.ips = null; paint();
+    var pid = st.sel.patientId;
+    return apiGet("/ward/fhir/Patient/" + encodeURIComponent(pid) + "/$summary?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) {
+        if (!st.sel || st.sel.patientId !== pid) return;
+        st.ips = r && r.resourceType === "Bundle" ? r
+          : { failed: (r && r.issue && r.issue[0] && r.issue[0].diagnostics) || (r && r.error) || "no answer from the server" };
+        paint();
+      })
+      .catch(function () { st.ips = { failed: "could not reach the ward" }; paint(); });
+  }
   function consentOpen() {
     st.view = "consent"; st.consent = {}; paint(); loadConsent();
   }
@@ -10504,6 +10550,7 @@
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
       if (st.view === "consent") { st.view = "chart"; st.consent = null; paint(); return; }
+      if (st.view === "ips") { st.view = "chart"; st.ips = null; paint(); return; }
       if (st.view === "completion") { st.view = "chart"; st.completion = null; paint(); return; }
       if (st.view === "roi") { st.view = "chart"; st.roi = null; paint(); return; }
       if (st.view === "tpa") { st.view = "chart"; st.tpa = null; paint(); return; }
@@ -11055,6 +11102,7 @@
     if (cmd === "pcopy") { loadPatientCopy(); return; }
     if (cmd === "pcopyGive") { givePatientCopy(); return; }
     if (cmd === "consentopen") { consentOpen(); return; }
+    if (cmd === "ipsopen") { ipsOpen(); return; }
     if (cmd === "consentrecord") { recordConsentAction(); return; }
     if (cmd === "consentwithdraw") { var parts = arg.split("|"); withdrawConsentAction(parts[0], parts[1]); return; }
     if (cmd === "completionopen") { completionOpen(); return; }

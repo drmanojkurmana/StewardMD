@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["integrations", "Integrations"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
 
@@ -1012,6 +1012,79 @@
           c.api("/ward/fhir-export-cancel", { orgId: c.state.orgId, id: b.getAttribute("data-exp-cancel") }).then(function (x) {
             if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
             c.toast("Export cancelled and its files deleted."); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
+
+  /* FHIR (functions/_wardsynq/fhir-terminology.js, fhir.js capabilityStatement). What this hospital's FHIR
+   * server declares, and the value sets it serves, each expandable in place. Each load is null while
+   * loading and a failure when it failed: a list that failed never reads as "no value sets", and a
+   * fragment's warning is shown above its codes, never dropped. */
+  function fhirFailed(r, type) {
+    if (r && r.resourceType === type) return null;
+    if (r && r.resourceType === "OperationOutcome") return (r.issue || []).map(function (i) { return i.diagnostics || i.code; }).join("; ");
+    return refusal(r);
+  }
+  function fhirHtml(c, meta, sets) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("hub") + " FHIR server</h2>" +
+      '<p class="quiet">What this hospital\'s FHIR R4 API declares to other systems. A patient\'s International Patient Summary opens from their chart on the ward.</p>';
+    if (meta === null) h += '<span class="spin"></span>';
+    else if (fhirFailed(meta, "CapabilityStatement")) h += '<div class="msg err">The capability statement could not be loaded: ' + esc(fhirFailed(meta, "CapabilityStatement")) + ".</div>";
+    else {
+      var rest = (meta.rest && meta.rest[0]) || {};
+      h += '<div class="kv"><dt>FHIR version</dt><dd>' + esc(meta.fhirVersion) + "</dd><dt>Software</dt><dd>" + esc((meta.software && meta.software.name) || "") + " " + esc((meta.software && meta.software.version) || "") + "</dd>" +
+        "<dt>SMART on FHIR</dt><dd>" + (rest.security && rest.security.service ? "enabled" : "not enabled") + "</dd>" +
+        "<dt>Writes</dt><dd>" + ((rest.interaction || []).length ? "accepted (inbound FHIR is enabled)" : "none, read only") + "</dd>" +
+        "<dt>Operations</dt><dd>" + esc((rest.operation || []).map(function (o) { return "$" + o.name; }).join(", ")) + "</dd></div>" +
+        '<div class="tbl"><table><thead><tr><th>Resource</th><th>Interactions</th></tr></thead><tbody>' +
+        (rest.resource || []).map(function (r) {
+          return "<tr><td>" + esc(r.type) + "</td><td>" + esc((r.interaction || []).map(function (i) { return i.code; }).join(", ")) + "</td></tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    h += '</div><div class="card"><h2>' + c.ms("menu_book") + " Terminology</h2>" +
+      '<p class="quiet">The code lists this server answers $expand and $validate-code for. This hospital\'s own lists are complete. LOINC and other published systems are only the codes this server carries: it is not an authoritative source for them.</p>';
+    if (sets === null) return h + '<span class="spin"></span></div>';
+    if (fhirFailed(sets, "Bundle")) return h + '<div class="msg err">Value sets could not be loaded: ' + esc(fhirFailed(sets, "Bundle")) + ". This is not the same as there being none.</div></div>";
+    var entries = sets.entry || [];
+    entries.forEach(function (e) { if (e.resource && e.resource.resourceType === "OperationOutcome") h += '<div class="msg note">' + esc(fhirFailed(e.resource, "Bundle")) + "</div>"; });
+    var vs = entries.filter(function (e) { return e.resource && e.resource.resourceType === "ValueSet"; }).map(function (e) { return e.resource; });
+    if (!vs.length) return h + '<p class="quiet">This server serves no value sets.</p></div>';
+    return h + '<div class="row"><label class="f"><span>Filter codes when expanding (optional)</span><input id="admVsFilter" placeholder="code or name"></label></div>' +
+      vs.map(function (v) {
+        return "<h3>" + esc(v.title || v.id) + (v.experimental ? ' <span class="pill warn">draft</span>' : "") + "</h3>" +
+          '<p class="quiet">' + esc(v.description || "") + ' <span class="mono">' + esc(v.url) + "</span></p>" +
+          '<button type="button" class="btn ghost" data-vs-expand="' + esc(v.id) + '">Expand</button><div id="admVs-' + esc(v.id) + '"></div>';
+      }).join("") + "</div>";
+  }
+  WSQ._fhirHtml = fhirHtml;
+  function expansionHtml(c, r) {
+    var esc = c.esc;
+    if (r === null) return '<span class="spin"></span>';
+    if (fhirFailed(r, "ValueSet") || !r.expansion) return '<div class="msg err">Could not expand: ' + esc(fhirFailed(r, "ValueSet") || "no expansion returned") + ".</div>";
+    var x = r.expansion, rows = x.contains || [];
+    return (x.parameter || []).filter(function (p) { return p.name === "warning"; }).map(function (w) { return '<div class="msg note">' + esc(w.valueString) + "</div>"; }).join("") +
+      '<p class="quiet">' + esc(x.total) + " code(s)" + (rows.length < x.total ? ", showing the first " + rows.length : "") + ".</p>" +
+      (rows.length ? '<div class="tbl"><table><thead><tr><th>Code</th><th>Display</th><th>System</th></tr></thead><tbody>' +
+        rows.map(function (k) { return '<tr><td class="mono">' + esc(k.code) + "</td><td>" + esc(k.display || "") + '</td><td class="mono">' + esc(k.system) + "</td></tr>"; }).join("") +
+        "</tbody></table></div>" : '<p class="quiet">No codes match.</p>');
+  }
+  WSQ._expansionHtml = expansionHtml;
+
+  function renderFhir(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = fhirHtml(c, null, null);
+    return Promise.all([c.api("/ward/fhir/metadata" + q), c.api("/ward/fhir/ValueSet" + q)]).then(function (res) {
+      body.innerHTML = fhirHtml(c, res[0] || {}, res[1] || {});
+      body.querySelectorAll("[data-vs-expand]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-vs-expand"), out = document.getElementById("admVs-" + id);
+          var filter = String(document.getElementById("admVsFilter").value || "").trim();
+          out.innerHTML = expansionHtml(c, null);
+          c.api("/ward/fhir/ValueSet/" + encodeURIComponent(id) + "/$expand" + q + "&count=200" + (filter ? "&filter=" + encodeURIComponent(filter) : "")).then(function (x) {
+            out.innerHTML = expansionHtml(c, x || {});
           });
         };
       });

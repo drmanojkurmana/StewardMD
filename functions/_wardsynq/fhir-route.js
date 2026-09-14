@@ -6,9 +6,12 @@
  * WHO is asking - it is handed a context that already carries the actor or the deps to resolve one.
  */
 
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation, validateCodeOperation } from "./fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation } from "./fhir.js";
 import { practitionerRead, organizationRead } from "./fhir-identity.js";
 import { kickoffExport, exportStatus, cancelExport, exportFile, NDJSON } from "./fhir-bulk.js";
+import { dispatchTerminology } from "./fhir-terminology.js";
+import { patientSummary } from "./fhir-ips.js";
+import { auditEvents } from "./fhir-audit.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -24,7 +27,8 @@ function fhirResponse(obj, status, extraHeaders, cors) {
 /**
  * Dispatches one GET against the FHIR read grammar.
  *   metadata | {Type} | {Type}/{id} | {Type}/{id}/_history | {Type}/{id}/_history/{vid}
- *   Patient/{id}/$everything | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
+ *   Patient/{id}/$everything | Patient/{id}/$summary | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
+ *   CodeSystem | ValueSet (+ $expand, $validate-code) | AuditEvent
  *
  * @param {string[]} parts   path segments AFTER the fhir root
  * @param {URL} url
@@ -42,6 +46,18 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "metadata") return { obj: capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1", smart: fctx.smart || null, inbound: fctx.inbound === true }), status: 200 };
   if (!fType) {
     const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", searchParams: strip(), rawQuery, lenient });
+    return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
+  }
+  /* Terminology (CodeSystem, ValueSet, $expand, $validate-code), AuditEvent and $summary: each in its
+   * own file, each authorised there or by the door, none a stored canonical type. */
+  const tx = await dispatchTerminology(request, env, parts, url, fctx);
+  if (tx) return tx;
+  if (fType === "AuditEvent") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "AuditEvent is read and searched only"), status: 404 };
+    return auditEvents(request, env, { ...fctx, id: fId }, url);
+  }
+  if (fType === "Patient" && fId && fOp === "$summary") {
+    const r = await patientSummary(request, env, { ...fctx, patientId: fId });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
   if (fType === "Provenance") {
@@ -62,10 +78,6 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "Patient" && fId && fOp === "$everything") {
     const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
-  }
-  if (fType === "CodeSystem" && fId === "$validate-code") {
-    const r = await validateCodeOperation(request, env, { ...fctx, searchParams: strip() });
-    return { obj: r.ok ? r.parameters : r.outcome, status: r.status };
   }
   if (fId && fOp === "$validate") {
     const r = await validateOperation(request, env, { ...fctx, type: fType, id: fId });

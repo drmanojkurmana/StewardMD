@@ -295,7 +295,9 @@ test("THE CAPABILITYSTATEMENT IS DERIVED FROM THE SAME TABLES THE PARSER USES", 
      * and Organization are derived too and read-only: they declare no search params because this
      * server holds no directory to search, so there is no parser table for them to agree with.
      * Every STORED type is versioned. */
-    if (r.type === "Provenance" || r.type === "Practitioner" || r.type === "Organization") continue;
+    /* P2.5's CodeSystem, ValueSet and AuditEvent are not stored canonical types either: each has its own
+     * small parser in its own file and its own test (wardsynq-fhir-terminology / -ips). */
+    if (["Provenance", "Practitioner", "Organization", "CodeSystem", "ValueSet", "AuditEvent"].includes(r.type)) continue;
     const d = declaredSearch(r.type);
     assert.deepEqual(r.searchParam.map((p) => p.name), d.params.map((p) => p.name), r.type);
     assert.deepEqual(r.interaction.map((i) => i.code), ["read", "vread", "history-instance", "search-type"], "and nothing that writes");
@@ -312,7 +314,7 @@ test("THE CAPABILITYSTATEMENT IS DERIVED FROM THE SAME TABLES THE PARSER USES", 
     // Every parameter of the table is declared, under its own name.
     for (const name of Object.keys(PARAMS[r.type] || {})) if (name !== "subject") assert.ok(r.searchParam.some((p) => p.name === name), `${r.type}.${name} undeclared`);
   }
-  assert.ok(cs.rest[0].resource.every((r) => ["Provenance", "Practitioner", "Organization"].includes(r.type) || Object.values(FHIR_TYPE).includes(r.type)));
+  assert.ok(cs.rest[0].resource.every((r) => ["Provenance", "Practitioner", "Organization", "CodeSystem", "ValueSet", "AuditEvent"].includes(r.type) || Object.values(FHIR_TYPE).includes(r.type)));
   assert.equal(cs.format[0], "application/fhir+json");
   assert.ok(!/create|update|delete/.test(JSON.stringify(cs.rest[0].resource.map((r) => r.interaction))));
   assert.equal(cs.rest[0].interaction, undefined, "no transaction or batch on a read-only door");

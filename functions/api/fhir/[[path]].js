@@ -58,7 +58,7 @@ export async function onRequest(context) {
   const base = `${url.origin}/api/fhir/${orgId}`;
   const smart = smartEnabled(cfg) ? { authorize: `${base}/smart/authorize`, token: `${base}/smart/token`, revoke: `${base}/smart/revoke` } : null;
   const key = signingKey(env);
-  const ctx = { migration, config: cfg, base, hospitalName: str(org.name), actorDeps: actorDeps(env), recordDeps: recordDeps(env, migration.tenantId), smart, terminology: (org.wardsynq && org.wardsynq.terminology) || null, profiles: (cfg && cfg.profiles) || null, region: str(org.region) };
+  const ctx = { migration, config: cfg, base, hospitalName: str(org.name), actorDeps: actorDeps(env), recordDeps: recordDeps(env, migration.tenantId), smart, terminology: (org.wardsynq && org.wardsynq.terminology) || null, profiles: (cfg && cfg.profiles) || null, region: str(org.region), wardsynq: org.wardsynq || null, org };
 
   const sub = parts[1] || "", sub2 = parts[2] || "";
 

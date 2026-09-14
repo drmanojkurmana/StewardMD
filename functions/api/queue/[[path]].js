@@ -1313,6 +1313,8 @@ export async function onRequest(context) {
       const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export"));
       const need = sub === "mar" ? CAPS.MED_ADMINISTER
         : bulkFhirPath ? capFor["fhir-export"]
+        /* The audit trail as FHIR AuditEvent is not a chart read either: the security review's own gate. */
+        : (sub === "fhir" && parts[2] === "AuditEvent") ? capFor["security-report"]
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
@@ -2107,7 +2109,7 @@ export async function onRequest(context) {
          *   GET /ward/fhir/Patient/{id}/$everything          everything for one patient
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
-        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "" };
+        const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "", wardsynq: wsqCfg || null, org: wOrg || null, hospitalName: (wOrg && wOrg.name) || "" };
         /* $export, $export-status, $export-file: gated staff.admin above (bulkFhirPath), before any read grammar. */
         const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}` });
         if (bulk) return bulk;
