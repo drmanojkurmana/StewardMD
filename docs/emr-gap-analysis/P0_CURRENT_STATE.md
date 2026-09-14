@@ -734,7 +734,7 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 
 - wardsynq.abdm.externalInvoiceHandling = "clinical-document" (only value; absent = default; other values 422). ABDM landing reads the hospital setting, names policy, value and source on each landed external-invoice audit row, and refuses to write Invoice, Claim, PreAuthorisation or CostEstimate whatever the mapping produces; billing report and patient invoice list count zero. Shown read-only on Admin > Integrations > ABDM.
 - wardsynq.criticalEscalation.level2NurseRule = "all-on-duty-nurses-in-ward" (only value; absent = default; other values 422 on org and group policy saves). One resolver switch in alert-recipients.js enforces nurse role, on duty now and the patient ward; the loop records {rule, source, ward, nurses, recipients}; empty set is NO_RECIPIENT. Shown read-only on the Critical result alerts card with "Applies until a Nurse-in-Charge role or assignment is implemented".
-- Open: a patient with no ward still uses hospital-wide cover, so level-2 nurses come from every ward (owner to decide).
+- Decided 2026-09-15: a patient with no ward alerts the admitting doctor (unless off duty) and the residents on duty in that doctor's department, or hospital-wide when the department is unknown; no nurses (branch no-ward-alert-cover).
 - Regression 6931, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live admin.js 37, abdm.js 2.
 
 ### 2026-09-15 (early) - ward on-duty team alerts, bilingual prints, complete translations, rota window fix

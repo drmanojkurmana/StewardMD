@@ -6349,6 +6349,7 @@ duty. Nurses and residents can turn themselves OFF duty in the StewardMD app."
   recipients}` (field renamed from `nurseRule`; old loops keep theirs). Empty set is NO_RECIPIENT as before.
 - **No ward on the patient**: hospital-wide on-duty cover as before, `ward: null` recorded and said on the critical
   results board ("No ward recorded for this patient"). Owner follow-up: whether that should stay hospital-wide.
+  **Superseded the same day** by the no-ward entry below (admitting doctor and residents on duty).
 - **Self duty status**: `GET/POST /api/queue/roster/duty-status` (roster block, not /ward: it is staff data like leave,
   and needs no WardSynQ record tenant). Identity is the caller's membership in that hospital, from the credential; a
   body `identity` naming anyone else is 403 `not_your_status`; only ward-team roles (403 `not_ward_team` otherwise).
@@ -6364,6 +6365,42 @@ duty. Nurses and residents can turn themselves OFF duty in the StewardMD app."
   screens), `test/wardsynq-ward-duty-team.test.mjs` (routes, negative auth, audit-in-one-commit, real-rota dispatch),
   `test/org-level2-nurse-rule-route.test.mjs`, `test/wardsynq-hospital-group.test.mjs`, `test/wardsynq-alert-dispatch.test.mjs`,
   `test/run-ward-duty-golden-path.mjs` (headless Chrome, real ward.js).
+
+## 2026-09-15 A critical result for a patient with no ward alerts the admitting doctor and the residents on duty (owner decision)
+
+Owner decision 2026-09-15: "No ward: alert the doctor the patient is admitted under, and the resident on duty." This
+replaces hospital-wide on-duty cover for a patient whose Encounter has no `location.ward`.
+- **Rule** `NO_WARD_RULE = "no-ward-admitting-doctor-and-residents"` in `alert-recipients.js`. Not a hospital choice:
+  not in `LEVEL2_WARD_RULES`, so `/org/update` and `/group/policy` still refuse it as a ward rule. It is a `case` of the
+  same keyed resolver (`level2WardRecipients`), with every condition in `noWardCover`.
+- **Where it applies**: `resolveRecipients`, at every level whose tiers ask who is on duty (any role, or the level-2
+  slot). Every on-duty role path (doctor, resident, supervisor, the ward team) is replaced by it for a no-ward patient.
+  The ordering clinician (off-duty check unchanged) and named escalation contacts (by name, not filtered by duty) are
+  kept as on any result: owner follow-up if the orderer should also be dropped for a no-ward patient.
+- **Admitting doctor** = `Encounter.attendingId` (set by admission and OPD ticket sync, carried forward by later
+  encounter versions). Told unless an unexpired "off" duty status exists (`admittingSkipped: "marked off duty until <iso>"`), or
+  the identity is a member row that is not active (`"not an active member of this hospital"`). Not required to be on the
+  rota: the owner named the doctor, not the doctor on duty.
+- **Residents** = roles `resident`, `pg_resident` (`WARD_TEAM_ROLES.resident`; interns still excluded), ON DUTY now by
+  `onDutyNow` over the whole hospital's rota and self-marked duty (off overrides). **Department known** = the admitting
+  doctor's membership `scope.departments` is non-empty: a resident counts when their own `scope.departments` shares one,
+  or the ward they are on duty in (`q_wards` name) has one of those `departmentId`s (reader `wards()` in `alert-deps.js`,
+  read only then). A resident whose membership has no department and who is on duty in a ward with no department is NOT
+  counted in that case. **Department not known** (no admitting doctor, or no departments on their membership): residents
+  on duty anywhere. There is no department on Encounter itself, and the doctor's own rota unit is not used.
+- **Nobody else**: no nurse, supervisor or consultant other than the admitting doctor, at any level.
+- **Record** on the notice: `wardRule = {rule, ward: null, noWardCover: {admittingDoctor, admittingSkipped, residentScope:
+  "department"|"hospital", residents}, recipients}`. Empty set: NO_RECIPIENT as before, plus `why` (e.g. "no ward, no
+  admitting doctor, no resident on duty"; the channel detail carries the same sentence).
+- **Screens**: critical results board (ward.js `critWardRuleHtml`) names the admitting doctor (or why skipped) and the
+  residents on duty with the scope; a NO_RECIPIENT line adds the `why`. Loops recorded before this keep the old
+  "went to everyone on duty in the hospital" line. Admin > Critical result alerts card explains the no-ward rule.
+- **Not changed**: Admin "Phones registered for alerts now" still checks people on duty with a ladder role and named
+  contacts; an admitting doctor who is neither is not checked there.
+- Tests: `test/wardsynq-alert-recipients.test.mjs` (admitting doctor told; off duty skipped, expired off not; department
+  residents by membership and by ward; off-duty and not-on-duty residents; other department excluded; hospital scope when
+  unknown, with and without an admitting doctor; nurse, supervisor, other consultant not told at any level; NO_RECIPIENT
+  reason through `serverPushChannel`; board and card text). Each condition was mutation-checked.
 
 ## 2026-09-15 Bilingual patient prints: English whole and authoritative, a second language optional, catalog words only (owner decision)
 

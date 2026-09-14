@@ -496,7 +496,8 @@
     if (!r) return '<div class="msg err">The level 2 ward rule could not be read.</div>';
     return '<div class="kv"><dt>Level 2 ward rule</dt><dd><span class="mono">' + esc(r.rule) + "</span>" +
       (r.source === "default" ? ' <span class="quiet">(default)</span>' : r.source === "unrecognised" ? ' <span class="msg err">the saved rule "' + esc(r.configured) + '" is not one this build has, so this rule is applied</span>' : "") + "</dd></div>" +
-      '<p class="quiet">' + esc(r.note) + ' On level 2, "nurse" in the table below stands for this rule. Nurses, residents and consultants mark themselves on or off duty in the ward screen; off duty lasts until the end of their rostered shift, or 12 hours. The rule cannot be changed on this card.</p>';
+      '<p class="quiet">' + esc(r.note) + ' On level 2, "nurse" in the table below stands for this rule. Nurses, residents and consultants mark themselves on or off duty in the ward screen; off duty lasts until the end of their rostered shift, or 12 hours. The rule cannot be changed on this card.</p>' +
+      '<p class="quiet"><b>Patient with no ward recorded:</b> at every level the alert goes to the doctor the patient is admitted under, unless that doctor has marked themselves off duty, and to the residents on duty now in that doctor\'s department (anywhere in the hospital when the department is not known). No nurse, supervisor or other consultant on duty is told. The ordering clinician and named contacts are still told by name. If there is no admitting doctor and no resident on duty, the alert is recorded as reaching nobody.</p>';
   }
   /* Read from the phone registrations themselves (not from past alerts): everyone on duty with a role on the
    * ladder, and every named contact. A failed read is said, never shown as everyone having a phone. */

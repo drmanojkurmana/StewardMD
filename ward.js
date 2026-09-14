@@ -3975,10 +3975,14 @@
     var why = [];
     (c.notifications || []).forEach(function (n) { if (n && n.reason && !(n.sms && n.sms.sent)) why.push(n.reason); if (n && n.sms && n.sms.reason) why.push(n.sms.reason); });
     if (!why.length) return "";
-    return '<div class="w-crit-m warn">' + ms("notifications_off") + "<b>Alert did not reach anyone:</b> " + esc(CRIT_NOTICE_WHY[why[why.length - 1]] || why[why.length - 1]) + "</div>";
+    var said = null;
+    (c.notifications || []).forEach(function (n) { if (n && n.reason === "NO_RECIPIENT" && n.why) said = n.why; });
+    var last = why[why.length - 1];
+    return '<div class="w-crit-m warn">' + ms("notifications_off") + "<b>Alert did not reach anyone:</b> " + esc(CRIT_NOTICE_WHY[last] || last) + (last === "NO_RECIPIENT" && said ? " (" + esc(said) + ")" : "") + "</div>";
   }
   /* Owner 2026-09-15: which ward team the level 2 alert went to, with people per role. A patient with no ward on
-   * record was covered hospital-wide, and the board says so rather than naming a ward it never tested. */
+   * record is covered by the admitting doctor and the residents on duty (noWardCover), and the board names that; an
+   * older loop recorded before that rule was covered hospital-wide and still says so. */
   var WARD_GROUP_WORDS = { nurse: ["nurse", "nurses"], resident: ["resident", "residents"], consultant: ["consultant", "consultants"] };
   function groupCounts(counts) {
     return Object.keys(counts || {}).map(function (g) { var n = Number(counts[g]) || 0, w = WARD_GROUP_WORDS[g] || [g, g]; return n + " " + (n === 1 ? w[0] : w[1]); }).join(", ");
@@ -3987,6 +3991,14 @@
     var r = null;
     (notices || []).forEach(function (n) { if (n && n.wardRule) r = n.wardRule; });
     if (!r) return "";
+    var nw = r.noWardCover;
+    if (!r.ward && nw) {
+      var n = Number(nw.residents) || 0;
+      return '<div class="w-crit-m">' + ms("groups") + "<b>No ward recorded for this patient:</b> " +
+        (!nw.admittingDoctor ? "no admitting doctor recorded" : nw.admittingSkipped ? "admitting doctor " + esc(nw.admittingDoctor) + " not alerted (" + esc(nw.admittingSkipped) + ")" : "alerted the admitting doctor " + esc(nw.admittingDoctor)) +
+        ", and " + n + " resident" + (n === 1 ? "" : "s") + " on duty " + (nw.residentScope === "department" ? "in the admitting doctor's department" : "anywhere in the hospital (department not known)") +
+        " <small>(" + esc(r.rule) + ")</small></div>";
+    }
     return '<div class="w-crit-m">' + ms("groups") + (r.ward
       ? "Level 2 ward team on duty in " + esc(r.ward) + ": " + esc(groupCounts(r.counts))
       : "<b>No ward recorded for this patient:</b> level 2 went to everyone on duty in the hospital (" + esc(groupCounts(r.counts)) + ")") +
