@@ -130,8 +130,9 @@ test("PRESCRIPTION: the translated part holds catalog words only, the authority 
 });
 
 test("PRESCRIPTION: a translation not yet written falls back to English, never a blank or a key", () => {
-  const sb = sandbox();
-  vm.runInContext(read("wardsynq/site/i18n/te.js"), sb);   // the real file, which has none of the print keys yet
+  // Real catalogs are complete now (no partial languages), so a key "not yet written" is simulated: every
+  // key except the print and instruction wording.
+  const sb = withFakeTelugu(sandbox(), (k) => !/^(print|rx\.instr|pcopy)\./.test(k));
   const tr = asides(sb.WARD._render(copyState(sb, { pcopyLang: "te" }))).join("\n");
   assert.ok(tr.length > 0);
   assert.ok(tr.includes("The English prescription is the authoritative one."));
