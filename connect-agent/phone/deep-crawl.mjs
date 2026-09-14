@@ -924,6 +924,45 @@ export function scrubForBrain(value) {
   return value;
 }
 
+/* A LINE THAT IDENTIFIES A PERSON, not a line that describes a finding. Labels first (the header block
+ * of every Indian hospital report), then the words a demographic block is made of. */
+const IDENTITY_LINE = /\b(?:patient|pt)\.?\s*name|^\s*name\b|\bs\/o\b|\bd\/o\b|\bw\/o\b|\bc\/o\b|address|residen|\bmobile\b|\bphone\b|\bcontact\b|\bfather\b|\bmother\b|\bguardian\b|\bhusband\b|\bwife\b|\bspouse\b|\bd\.?o\.?b\b|date\s*of\s*birth|\buhid\b|\bmrn\b|\bmr\.?\s*no\b|\bip\s*n[o0]\b|\bop\s*n[o0]\b|\breg(?:istration)?\s*n[o0]\b|\baadhaar\b|\bpassport\b|\be-?mail\b|\battendant\b|\bconsultant\b|\breferr?(?:ed|ing)\s*(?:by|dr)|\bbill(?:ing)?\s*n[o0]\b|\bage\s*[\/:]|\bsex\s*[\/:]|\bgender\s*[\/:]/i;
+
+/**
+ * scrubExcerpt(text, identity) -> a PHI-free excerpt of a clinical narrative, or ''.
+ *
+ * THE OWNER AUTHORIZED THE MODEL TO READ A REPORT'S WORDS (2026-09-15) so it can say whether a proven
+ * "radiology" call returned a radiology report, a lab sheet, or only the patient's name and address.
+ * That answer needs the prose to survive and the person not to: an identifying line is REPLACED by the
+ * marker `[identifier]`, never dropped, so a page made only of identifiers still reads as what it is.
+ * Every run of 3+ digits becomes '#', every e-mail '[email]', and any value from the patient's own row
+ * (their name, their numbers) is masked wherever it appears inline. The server refuses anything that
+ * gets through (functions/_connect/agent/brain.js phiGate).
+ */
+export function scrubExcerpt(text, identity = [], max = 1200) {
+  let s = String(text == null ? '' : text);
+  if (!s.trim()) return '';
+  s = s.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>');
+  // The patient's own values, longest first so "John Smith" masks before "John".
+  const marks = [...new Set((Array.isArray(identity) ? identity : []).map((v) => String(v == null ? '' : v).trim()).filter((v) => v.length >= 3 && v.length <= 60))]
+    .sort((a, b) => b.length - a.length);
+  for (const m of marks) {
+    try { s = s.replace(new RegExp(m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '[identifier]'); } catch { /* not a usable mark */ }
+  }
+  const out = [];
+  for (let line of s.split(/\r?\n/)) {
+    line = line.replace(/[\t ]+/g, ' ').replace(/ {2,}/g, ' ').trim();
+    if (!line) continue;
+    if (IDENTITY_LINE.test(line)) { if (out[out.length - 1] !== '[identifier]') out.push('[identifier]'); continue; }
+    line = line.replace(/[^\s@]+@[^\s@]+/g, '[email]').replace(/\d{3,}/g, '#');
+    // Control characters would trip the server gate before the model ever sees the line.
+    line = line.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, ' ').replace(/ {2,}/g, ' ').trim();
+    if (line) out.push(line);
+    if (out.join('\n').length >= max) break;
+  }
+  return out.join('\n').slice(0, max).trim();
+}
+
 function pathOnly(u) { try { return new URL(u).pathname; } catch { return String(u || '').split('?')[0]; } }
 
 /**

@@ -14,7 +14,7 @@
 // like the runtime's own replays. What leaves the phone: the redacted endpoint, the field-name mapping
 // and counts (overlap, hits, cells, rows). The brain sees paths, key names and column labels only.
 
-import { redactEndpoints, scrubForBrain } from './deep-crawl.mjs';
+import { redactEndpoints, scrubForBrain, scrubExcerpt } from './deep-crawl.mjs';
 import { rowsFromJson, TOKEN_KEY, PAGE_SIZE_KEY, PAGE_START_KEY, PAGE_NUMBER_KEY } from './adapter-runtime.mjs';
 
 export const ROLES = Object.freeze(['data', 'prerequisite', 'lookup', 'ping', 'shell']);
@@ -22,6 +22,10 @@ const WRITE_PATH = /save|update|insert|delete|remove|create|submit|approve|cance
 const MAX_EXEC = 6;
 export const CONSTANT_VALUE = /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/;
 const BRAIN_RESOURCES =['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history'];
+/* Resources whose truth is PROSE, not columns. A radiology call can carry the right column names and
+ * still hand back the demographics header; only the words tell the two apart, so for these the brain is
+ * shown a redacted excerpt as well (connect-agent/phone/deep-crawl.mjs scrubExcerpt). */
+const NARRATIVE = ['radiology', 'notes', 'discharge', 'history'];
 export const ACCEPT = Object.freeze({ ratio: 0.5, hits: 3 });
 
 /* ---- page realm ---------------------------------------------------------------------------------- */
@@ -93,6 +97,38 @@ function PROVE_SCREEN(spec) {
     }
   } catch (x) { /* an unreadable screen proves nothing */ }
   return JSON.stringify(out);
+}
+
+/**
+ * narrativeExcerpt(rows, identity) -> the longest piece of prose those rows carry, redacted, or ''.
+ * Short cells are labels and codes; a report is the long one. Nothing here is stored or displayed: it
+ * goes to the brain to answer "is this a report at all" and is dropped with the answer.
+ */
+export function narrativeExcerpt(rows, identity = []) {
+  let best = '';
+  for (const row of (Array.isArray(rows) ? rows : []).slice(0, 8)) {
+    if (!row || typeof row !== 'object') continue;
+    for (const k of Object.keys(row)) {
+      if (k.charAt(0) === '_') continue;
+      const v = row[k];
+      if (typeof v !== 'string' || v.length <= best.length) continue;
+      best = v;
+    }
+  }
+  return best.length >= 40 ? scrubExcerpt(best, identity) : '';
+}
+
+/** The patient's own values, so they can be masked out of the excerpt wherever they appear inline. */
+export function identityValues(parents) {
+  const out = [];
+  for (const p of (Array.isArray(parents) ? parents : []).slice(0, 4)) {
+    if (!p || typeof p !== 'object') continue;
+    for (const k of Object.keys(p)) {
+      const v = p[k];
+      if (typeof v === 'string' && v.trim().length >= 3 && v.length <= 60) out.push(v.trim());
+    }
+  }
+  return out;
 }
 
 /** What PROVE_SCREEN returned, as rows of cell texts (an older page build answered a flat list: one row). */
@@ -437,8 +473,14 @@ export async function proveView({ client, view, brain = null, since = -1, label 
       const rows = rowsForChain(resp.text, resp.contentType);
       const cols = [];
       for (const row of rows.slice(0, 5)) for (const k of Object.keys(row)) if (k.charAt(0) !== '_' && !cols.includes(k)) cols.push(k);
+      const payload = scrubForBrain({ resource, headers: cols.slice(0, 24), rowCount: rows.length, kind: kind === 'json' ? 'json' : 'html', path: candidateStructure(e).path });
+      // Columns alone cannot tell a report from the header block above it; for prose, send the prose.
+      if (NARRATIVE.includes(resource)) {
+        const ex = narrativeExcerpt(rows, identityValues(parents));
+        if (ex) payload.excerpt = ex;
+      }
       let v = null;
-      try { v = await brain.verify(scrubForBrain({ resource, headers: cols.slice(0, 24), rowCount: rows.length, kind: kind === 'json' ? 'json' : 'html', path: candidateStructure(e).path })); } catch { v = null; }
+      try { v = await brain.verify(payload); } catch { v = null; }
       const last = trace.tried[trace.tried.length - 1];
       if (v && typeof v.ok === 'boolean') { trace.brain = true; trace.model = trace.model || v.model || null; last.gemini = v.ok ? 'ok' : 'rejected'; }
       if (v && v.ok === false && Number(v.confidence) >= 0.7) continue;
