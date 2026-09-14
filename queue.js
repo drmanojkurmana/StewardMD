@@ -699,8 +699,10 @@
    * cb({departments, required}): departments undefined = no hospital to ask (no picker), null = the list
    * could not be loaded (the sheet says so, never "no departments"). */
   function withDepartments(orgId, cb) {
-    if (!orgId) { cb({ departments: undefined, required: false }); return; }
+    // A GHIS workplace has no StewardMD hospital record (its hospital id is not an org): no picker there.
+    if (!orgId || st.ghisToken) { cb({ departments: undefined, required: false }); return; }
     apiGet("/org?orgId=" + encodeURIComponent(orgId)).then(function (o) {
+      if (o && o.error === "org_not_found") { cb({ departments: undefined, required: false }); return; }
       if (!o || !o.ok) { cb({ departments: null, required: false }); return; }
       cb({ departments: o.departments || [], required: !!(o.org && o.org.tokens && o.org.tokens.scope === "department") });
     }, function () { cb({ departments: null, required: false }); });
