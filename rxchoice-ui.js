@@ -238,24 +238,32 @@
    * cheapest arrive first even if the result is capped; the core re-ranks regardless. */
   function candidatesFor(comp) {
     if (!comp) return Promise.resolve([]);
-    return MEDAPI.composition(comp, "price_asc", "all", 300, 0)
-      .then(function (c) {
-        var list = (c && c.brands) || [];
-        var compName = (c && c.composition) || comp;
-        return list.map(function (b) {
-          return {
-            id: b.id,
-            brand: b.brand,
-            manufacturer: b.manufacturer,
-            mrp: b.mrp,
-            form: b.form,
-            pack: b.pack || b.form,
-            composition: b.composition || compName,
-            discontinued: b.discontinued
-          };
-        });
-      })
-      .catch(function () { return []; });
+    function fetchComp(name) {
+      return MEDAPI.composition(name, "price_asc", "all", 300, 0);
+    }
+    return fetchComp(comp).then(function (c) {
+      var list = (c && c.brands) || [];
+      if (!list.length && comp.indexOf("+") > -1) {
+        var alt = comp.split(/\s*\+\s*/).reverse().join(" + ");
+        if (alt !== comp) return fetchComp(alt);
+      }
+      return c;
+    }).then(function (c) {
+      var list = (c && c.brands) || [];
+      var compName = (c && c.composition) || comp;
+      return list.map(function (b) {
+        return {
+          id: b.id,
+          brand: b.brand,
+          manufacturer: b.manufacturer,
+          mrp: b.mrp,
+          form: b.form,
+          pack: b.pack || b.form,
+          composition: b.composition || compName,
+          discontinued: b.discontinued
+        };
+      });
+    }).catch(function () { return []; });
   }
 
   /* Resolve a single prescription line (drug, brand, dose, freq, duration) into its 4-way choices. */

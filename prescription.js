@@ -328,12 +328,13 @@
   function rxNative() { try { var C = window.Capacitor; return !!(C && (C.isNativePlatform ? C.isNativePlatform() : C.isNative)); } catch (e) { return false; } }
   function rxPlugins() { try { return (window.Capacitor && window.Capacitor.Plugins) || {}; } catch (e) { return {}; } }
   function collectRx() {
-    if (!sheet) return { name: "", age: "", dx: "", complaints: "", vitals: "", lines: [] };
+    if (!sheet) return { name: "", age: "", dx: "", complaints: "", vitals: "", allergies: "", lines: [] };
     var name = (sheet.querySelector("#rxPtName") || {}).value || "";
     var age = (sheet.querySelector("#rxPtAge") || {}).value || "";
     var dx = ((sheet.querySelector("#rxDx") || {}).value || "").trim();
     var cc = ((sheet.querySelector("#rxCc") || {}).value || "").trim();
     var vitals = ((sheet.querySelector("#rxVitals") || {}).value || "").trim();
+    var allergies = ((sheet.querySelector("#rxAllergies") || {}).value || "").trim();
     var lines = [];
     sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) {
       if (ln.style.display === "none") return;
@@ -348,7 +349,7 @@
         duration: ((ln.querySelector('[data-f="duration"]') || {}).value || "").trim()
       });
     });
-    return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, lines: lines };
+    return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, allergies: allergies, lines: lines };
   }
   /* The RxChoice section of the printout: a SEPARATE block under the conventional prescription,
    * which is unchanged above it. It lists the four options that were shown and names the product the
@@ -360,7 +361,9 @@
     if (opts && opts.includeRxChoice === false) return "";
     var sel = sheet && sheet._rxChoice;
     if (!sel) return "";
-    try { if (!(window.SMD_RXCHOICE_FLAGS && window.SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
+    if (opts && opts.includeRxChoice !== true) {
+      try { if (!(window.SMD_RXCHOICE_FLAGS && window.SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
+    }
     var costStr = function (c) { return (c != null && isFinite(c)) ? ("\u20b9" + (Math.round(c * 100) / 100).toLocaleString("en-IN")) : "—"; };
 
     // 4-Way Comparison Table when full results are available (Reference Image 3 & Final Plan §3)
@@ -456,7 +459,7 @@
     var cost = function (o) { return (o && o.courseCost != null) ? (" &middot; \u20b9" + o.courseCost + " for this course") : ""; };
     var rows = keys.map(function (k) {
       var o = sel[k]; if (!o) return "";
-      var cat = o.category === "prescribed" ? "Doctor Prescribed" : (o.category.charAt(0).toUpperCase() + o.category.slice(1));
+      var cat = !o.category ? "Alternative" : o.category === "prescribed" ? "Doctor Prescribed" : (o.category.charAt(0).toUpperCase() + o.category.slice(1));
       return '<div class="rxcline"><b>' + esc(k) + '</b> &nbsp;<span class="rxccat">' + esc(cat) + '</span><br>' +
         'Prescribed therapy: ' + esc(o.composition || "") + '<br>' +
         'Final selected product: <b>' + esc(o.brand || "") + '</b>' + (o.manufacturer ? ' (' + esc(o.manufacturer) + ')' : '') + cost(o) + '</div>';
@@ -995,10 +998,103 @@
     }
   }
 
+  // Standard Clinical Regimens for Indian practice (Dose, Frequency, Route, Duration, Timing)
+  var STANDARD_REGIMENS = {
+    "paracetamol": { dose: "650 mg PO", freq: "TDS", dur: "3 days", timing: "After Food" },
+    "pantoprazole": { dose: "40 mg PO", freq: "OD", dur: "14 days", timing: "30m Before Breakfast" },
+    "omeprazole": { dose: "20 mg PO", freq: "OD", dur: "14 days", timing: "30m Before Breakfast" },
+    "rabeprazole": { dose: "20 mg PO", freq: "OD", dur: "14 days", timing: "30m Before Breakfast" },
+    "esomeprazole": { dose: "40 mg PO", freq: "OD", dur: "14 days", timing: "30m Before Breakfast" },
+    "amoxicillin": { dose: "500 mg PO", freq: "TDS", dur: "5 days", timing: "After Food" },
+    "amoxycillin": { dose: "500 mg PO", freq: "TDS", dur: "5 days", timing: "After Food" },
+    "amoxicillin+clavulanic acid": { dose: "625 mg PO", freq: "BD", dur: "5 days", timing: "Start of Meals" },
+    "amoxycillin+clavulanic acid": { dose: "625 mg PO", freq: "BD", dur: "5 days", timing: "Start of Meals" },
+    "azithromycin": { dose: "500 mg PO", freq: "OD", dur: "3 days", timing: "1h Before / 2h After Food" },
+    "cefixime": { dose: "200 mg PO", freq: "BD", dur: "5 days", timing: "After Food" },
+    "ciprofloxacin": { dose: "500 mg PO", freq: "BD", dur: "5 days", timing: "2h After Food" },
+    "levofloxacin": { dose: "500 mg PO", freq: "OD", dur: "5 days", timing: "With or Without Food" },
+    "ofloxacin": { dose: "200 mg PO", freq: "BD", dur: "5 days", timing: "After Food" },
+    "doxycycline": { dose: "100 mg PO", freq: "BD", dur: "7 days", timing: "With Full Glass of Water" },
+    "metronidazole": { dose: "400 mg PO", freq: "TDS", dur: "5 days", timing: "After Food" },
+    "metformin": { dose: "500 mg PO", freq: "BD", dur: "30 days", timing: "With Meals" },
+    "glimepiride": { dose: "1 mg PO", freq: "OD", dur: "30 days", timing: "Before Breakfast" },
+    "atorvastatin": { dose: "10 mg PO", freq: "HS", dur: "30 days", timing: "At Bedtime" },
+    "rosuvastatin": { dose: "10 mg PO", freq: "HS", dur: "30 days", timing: "At Bedtime" },
+    "amlodipine": { dose: "5 mg PO", freq: "OD", dur: "30 days", timing: "Morning or Evening" },
+    "telmisartan": { dose: "40 mg PO", freq: "OD", dur: "30 days", timing: "Morning" },
+    "losartan": { dose: "50 mg PO", freq: "OD", dur: "30 days", timing: "Morning" },
+    "aceclofenac+paracetamol": { dose: "1 tab PO", freq: "BD", dur: "3 days", timing: "After Food" },
+    "ibuprofen+paracetamol": { dose: "1 tab PO", freq: "TDS", dur: "3 days", timing: "After Food" },
+    "domperidone+pantoprazole": { dose: "1 cap PO", freq: "OD", dur: "14 days", timing: "30m Before Breakfast" },
+    "domperidone+rabeprazole": { dose: "1 cap PO", freq: "OD", dur: "14 days", timing: "30m Before Breakfast" },
+    "levocetirizine+montelukast": { dose: "1 tab PO", freq: "HS", dur: "10 days", timing: "At Bedtime" },
+    "cetirizine": { dose: "10 mg PO", freq: "HS", dur: "5 days", timing: "At Bedtime" },
+    "levocetirizine": { dose: "5 mg PO", freq: "HS", dur: "5 days", timing: "At Bedtime" },
+    "fexofenadine": { dose: "120 mg PO", freq: "OD", dur: "5 days", timing: "Before Food" },
+    "ondansetron": { dose: "4 mg PO", freq: "TDS", dur: "3 days", timing: "Before Food" },
+    "tramadol+paracetamol": { dose: "1 tab PO", freq: "BD", dur: "3 days", timing: "After Food" },
+    "diclofenac": { dose: "50 mg PO", freq: "BD", dur: "3 days", timing: "After Food" },
+    "diclofenac+paracetamol": { dose: "1 tab PO", freq: "BD", dur: "3 days", timing: "After Food" },
+    "ibuprofen": { dose: "400 mg PO", freq: "TDS", dur: "3 days", timing: "After Food" },
+    "ranitidine": { dose: "150 mg PO", freq: "BD", dur: "14 days", timing: "Before Meals" },
+    "ofloxacin+ornidazole": { dose: "1 tab PO", freq: "BD", dur: "5 days", timing: "After Food" },
+    "cefixime+ofloxacin": { dose: "1 tab PO", freq: "BD", dur: "5 days", timing: "After Food" },
+    "thyroxine": { dose: "50 mcg PO", freq: "OD", dur: "30 days", timing: "Empty Stomach Early Morning" },
+    "levothyroxine": { dose: "50 mcg PO", freq: "OD", dur: "30 days", timing: "Empty Stomach Early Morning" }
+  };
+
+  function resolveStandardRegimen(generic, rawDose) {
+    var norm = String(generic || "").toLowerCase().replace(/[^a-z0-9.+/ -]+/g, " ").replace(/\s+/g, " ").trim();
+    var compKey = norm.indexOf("+") > -1 ? norm.split(/\s*\+\s*/).map(function(s){return s.trim();}).sort().join("+") : norm;
+    var std = STANDARD_REGIMENS[norm] || STANDARD_REGIMENS[compKey];
+    if (std) return std;
+
+    var doseText = String(rawDose || "");
+    var out = { dose: "", freq: "OD", dur: "5 days", timing: "" };
+
+    if (/\b(?:tds|tid|thrice|three\s*times|every\s*8\s*h)\b/i.test(doseText)) out.freq = "TDS";
+    else if (/\b(?:bd|bid|twice|every\s*12\s*h)\b/i.test(doseText)) out.freq = "BD";
+    else if (/\b(?:qid|four\s*times|every\s*6\s*h)\b/i.test(doseText)) out.freq = "QID";
+    else if (/\b(?:hs|bedtime|at\s*night)\b/i.test(doseText)) out.freq = "HS";
+    else if (/\b(?:sos|prn|as\s*needed)\b/i.test(doseText)) out.freq = "SOS";
+    else if (/\b(?:stat)\b/i.test(doseText)) out.freq = "STAT";
+    else out.freq = "OD";
+
+    var mDose = doseText.match(/(\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu|units?|%)(?:\s*[-–]\s*\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu)?)?)/i);
+    var route = /\b(?:iv\/po|po\/iv|oral|po)\b/i.test(doseText) ? "PO" : (/\b(?:iv|intravenous)\b/i.test(doseText) ? "IV" : "");
+    if (mDose) {
+      out.dose = mDose[1].replace(/\s*[-–]\s*\d+.*$/, "") + (route ? (" " + route) : " PO");
+    } else {
+      out.dose = doseText.split(/[.;]/)[0].trim() || (norm.indexOf("+") > -1 ? "1 tab PO" : "1 tab PO");
+    }
+
+    if (/antibiotic|penicillin|cephalosporin|fluoroquinolone|macrolide|antifungal|antiviral/i.test(doseText)) out.dur = "5 days";
+    else if (/analgesic|nsaid|antipyretic|pain|spasm/i.test(doseText)) out.dur = "3 days";
+    else if (/ppi|antacid|ulcer|gerd/i.test(doseText)) out.dur = "14 days";
+    else if (/hypertension|diabetes|statin|lipid|cardiac|thyroid/i.test(doseText)) out.dur = "30 days";
+    else out.dur = "5 days";
+
+    return out;
+  }
+
+  function canonDrugKey(name) {
+    var s = String(name || "").trim();
+    if (!s) return "";
+    if (/\s*\+\s*|\s+and\s+/i.test(s)) {
+      var parts = s.split(/\s*\+\s*/).map(function (p) {
+        return p.replace(/\([^)]*\)/g, "").replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu|units?|%)\b/gi, "").trim().toLowerCase();
+      }).filter(Boolean);
+      return parts.sort().join(" + ");
+    }
+    var clean = s.replace(/\([^)]*\)/g, "")
+      .replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu|units?|%)?\b/gi, "")
+      .replace(/\b(tablet|tablets|tab|capsule|capsules|cap|injection|inj|syrup|suspension|drops|dt|sr|er|mr)\b/gi, "");
+    return clean.replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
   // Live brand/composition search on a drug line, powered by the Drug Index (MEDDRUGS).
   // Typing in the Drug (generic) OR Brand field shows matching medicines; picking one auto-fills
-  // the composition (generic), a matching brand and the DB dose — the "auto-add once composition
-  // is selected" path, for a doctor-typed line or an AI-suggested one being edited.
+  // the composition (generic), a matching brand, standard dose + route, frequency and duration.
   function acAttach(line) {
     if (!line || line.classList.contains("adv") || line._acWired) return;
     line._acWired = true;
@@ -1014,25 +1110,41 @@
         if (typedBrand) { var q = typedBrand.toLowerCase(); b = (r.brands || []).filter(function (x) { return x.toLowerCase().indexOf(q) >= 0; })[0] || ""; }
         brandIn.value = b || (r.brands || [])[0] || brandIn.value || "";
       }
-      var doseIn = line.querySelector(".rx-dose"); if (doseIn && r.dose) doseIn.value = r.dose;
+
+      // Auto-populate standard dosing: dose + route, frequency, duration
+      var regimen = resolveStandardRegimen(r.generic, r.dose);
+      var doseIn = line.querySelector(".rx-dose");
+      if (doseIn) {
+        if (!doseIn.value.trim() || doseIn.value === "1") {
+          doseIn.value = regimen.dose || (r.dose ? r.dose.split(/[.;]/)[0].trim() : "1 tab PO");
+        }
+      }
+      var freqIn = line.querySelector(".rx-freq");
+      if (freqIn) {
+        if (!freqIn.value.trim()) {
+          freqIn.value = regimen.freq || "OD";
+        }
+        var fVal = freqIn.value.trim().toUpperCase();
+        line.querySelectorAll(".rx-freq-pill").forEach(function (pill) {
+          pill.classList.toggle("active", (pill.getAttribute("data-freq") || "").toUpperCase() === fVal);
+        });
+      }
+      var durIn = line.querySelector(".rx-dur");
+      if (durIn && !durIn.value.trim()) {
+        durIn.value = regimen.dur || "5 days";
+      }
+
       line.classList.remove("unv"); var fl = line.querySelector(".rx-flag"); if (fl) fl.remove();  // now DB-sourced
       closeAc();
       try { updateLineTiming(line); } catch (e) {}
       try { refreshSafety(); } catch (e) {}   // re-run allergy + interaction checks with the newly picked drug
       try { showPriceHint(line, r.generic); } catch (e) {}   // lowest-cost brand awareness
+      if (freqIn) {
+        try { freqIn.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {}
+      }
     }
     function paint() { Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b, i) { b.classList.toggle("on", i === active); }); }
-    /* THE SAME DRUG DATABASE THE ICU TREATMENT SEARCH USES.
-     *
-     * This searched MEDDRUGS.searchIndex alone - the on-device ward formulary, ~70 drugs - so most
-     * molecules simply "were not in the database" when typed here, while ICU's Add Treatment search
-     * found them at once. Two search bars over two different datasets, inside one app.
-     *
-     * Same arrangement as icu.js txRemoteSearch, deliberately: the local formulary answers instantly
-     * and is the only thing that works with no signal, and the server's hits (MEDAPI, the full
-     * composition index) merge in when they arrive. Debounced, and a reply for a query the doctor
-     * has already typed past is dropped rather than painted over what they are reading.
-     */
+
     var remoteRows = [], remoteQ = "", remoteT = null;
     function remoteSearch(q, fromBrand) {
       if (q.length < 2 || !window.MEDAPI || !MEDAPI.searchCompositions) return;
@@ -1045,8 +1157,6 @@
           MEDAPI.searchCompositions(q, 8).then(function (d) {
             if (q !== remoteQ) return;                  // newer query typed - discard this reply
             remoteRows = ((d && d.results) || []).map(function (x) {
-              // `brands` from the API is a COUNT, not a list, so it is kept as one and never handed
-              // to fill() as though it were an array of brand names.
               return { generic: x.composition, brands: [], dose: "", cls: x["class"] || "",
                        brandCount: Number(x.brands) || 0, remote: true };
             });
@@ -1065,27 +1175,43 @@
 
     function paintList(q, fromBrand) {
       var local = (window.MEDDRUGS && MEDDRUGS.searchIndex) ? MEDDRUGS.searchIndex(q).slice(0, 8) : [];
-      // Local first - it carries doses and real brand names - then server molecules the formulary
-      // does not have. Deduped on the generic, so a drug never appears twice.
+      // Deduplicate on canonical generic key, so "Paracetamol" and "Paracetamol 500" merge into one,
+      // while keeping distinct combinations intact (e.g. "Paracetamol + Tramadol").
       var seen = {}, merged = [];
-      local.forEach(function (r) { seen[String(r.generic || "").toLowerCase()] = 1; merged.push(r); });
+      local.forEach(function (r) {
+        var ck = canonDrugKey(r.generic);
+        var rawk = String(r.generic || "").toLowerCase();
+        seen[ck] = 1; seen[rawk] = 1;
+        merged.push(r);
+      });
       remoteRows.forEach(function (r) {
-        var k = String(r.generic || "").toLowerCase();
-        if (!k || seen[k] || merged.length >= 10) return;
-        seen[k] = 1; merged.push(r);
+        var ck = canonDrugKey(r.generic);
+        var rawk = String(r.generic || "").toLowerCase();
+        if (!ck || seen[ck] || seen[rawk] || merged.length >= 10) return;
+        seen[ck] = 1; seen[rawk] = 1;
+        // Clean display name for single entities that carry redundant inline strength
+        if (r.generic && r.generic.indexOf("+") === -1 && (/\([^)]*\)/.test(r.generic) || /\b\d+\s*mg\b/i.test(r.generic))) {
+          var cleanName = r.generic.replace(/\s*\([^)]*\)/g, "").replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu|units?|%)\b/gi, "").trim();
+          if (cleanName) r = Object.assign({}, r, { generic: cleanName });
+        }
+        merged.push(r);
       });
       rows = merged; active = -1;
       if (!rows.length) { closeAc(); return; }
       if (!ac) { ac = document.createElement("div"); ac.className = "rx-ac"; r1.insertAdjacentElement("afterend", ac); }
       ac.innerHTML = rows.map(function (r, i) {
-        // A local row lists real brand names; a server row has only a count, so it says how many
-        // rather than pretending to name them.
         var brands = (r.brands || []).slice(0, 3).join(", ");
         if (!brands && r.remote && r.brandCount) brands = r.brandCount + (r.brandCount === 1 ? " brand" : " brands");
         return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(r.generic) + '</span>' + (brands ? ' <span class="rx-ac-b">' + esc(brands) + '</span>' : '') + '<span class="rx-ac-d">' + esc(r.dose || '') + '</span></button>';
       }).join("");
       Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b) {
-        b.addEventListener("mousedown", function (e) { e.preventDefault(); fill(rows[+b.getAttribute("data-i")], fromBrand ? q : ""); });
+        var onSelect = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          fill(rows[+b.getAttribute("data-i")], fromBrand ? q : "");
+        };
+        b.addEventListener("pointerdown", onSelect);
+        b.addEventListener("mousedown", onSelect);
       });
     }
     function onKey(e, fromBrand, val) {
@@ -1097,7 +1223,7 @@
     }
     drugIn.addEventListener("input", function () { search(drugIn.value, false); });
     drugIn.addEventListener("keydown", function (e) { onKey(e, false, drugIn.value); });
-    drugIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
+    drugIn.addEventListener("blur", function () { setTimeout(closeAc, 250); });
     // The Brand field is handled by rxBrandAC() — a live MEDAPI lookup of real brands + prices for the
     // drug on this line (resolves the molecule fuzzily, so spelling slips still find brands). Wired in renderRx.
   }
@@ -1568,17 +1694,33 @@
     var alg = String(allergiesStr || "").toLowerCase().split(/[,;]+/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 2; });
     if (alg.length) {
       meds.forEach(function (m) {
-        var names = [m.drug, m.brand].filter(Boolean).map(function (s) { return String(s).toLowerCase(); });
+        var raw = m.drug || m.brand || "";
+        var norm = normalizeDrugName(raw);
+        var info = RX_CLINICAL_KB[norm] || {};
+        var tags = (info.tags || []).concat(info.cls ? [String(info.cls).toLowerCase()] : []).concat(info.generic ? [String(info.generic).toLowerCase()] : []);
+        var names = [m.drug, m.brand].filter(Boolean).map(function (s) { return String(s).toLowerCase(); }).concat(tags);
+
         alg.forEach(function (a) {
-          names.forEach(function (n) {
-            if (n.indexOf(a) > -1) {
-              outFindings.push({
-                sev: "critical",
-                type: "allergy",
-                txt: "Documented Allergy — patient has reported reaction to “" + a + "”; " + (m.drug || m.brand) + " is prescribed"
-              });
-            }
-          });
+          var matched = false;
+          for (var ni = 0; ni < names.length; ni++) {
+            var n = names[ni];
+            if (n && (n.indexOf(a) > -1 || a.indexOf(n) > -1)) { matched = true; break; }
+          }
+          if (!matched) {
+            if (/penicillin|amox|ampicil|augmentin|clav/i.test(a) && (tags.indexOf("penicillin") > -1 || tags.indexOf("beta_lactam") > -1 || /amox|ampicil|penicillin/i.test(norm))) matched = true;
+            else if (/sulfa|sulfonamide/i.test(a) && (tags.indexOf("sulfa") > -1 || tags.indexOf("sulfonamide") > -1 || /sulfa|cotrimoxazole/i.test(norm))) matched = true;
+            else if (/nsaid|aspirin|brufen|ibuprofen|diclofenac/i.test(a) && (tags.indexOf("nsaid") > -1 || /ibuprofen|diclofenac|aceclofenac|naproxen|piroxicam/i.test(norm))) matched = true;
+            else if (/cephalosporin|cefixime|ceftriaxone/i.test(a) && (tags.indexOf("cephalosporin") > -1 || /^cef/i.test(norm))) matched = true;
+            else if (/macrolide|azithromycin|clarithromycin/i.test(a) && (tags.indexOf("macrolide") > -1 || /azithro|clarithro|erythro/i.test(norm))) matched = true;
+            else if (/fluoroquinolone|cipro|oflox/i.test(a) && (tags.indexOf("fluoroquinolone") > -1 || /cipro|oflox|levoflox/i.test(norm))) matched = true;
+          }
+          if (matched) {
+            outFindings.push({
+              sev: "critical",
+              type: "allergy",
+              txt: "Documented Allergy — patient has reported reaction to “" + a + "”; " + (m.drug || m.brand) + " is prescribed"
+            });
+          }
         });
       });
     }
@@ -1586,13 +1728,16 @@
     // Pediatric & Age-Specific Safety Precautions
     var ageNum = null;
     if (patientAge != null && patientAge !== "") {
-      var mAge = String(patientAge).match(/(\d+(?:\.\d+)?)\s*(y|yr|yrs|year|years|m|mo|month|months|d|day|days)?/i);
+      var mAge = String(patientAge).match(/(\d+(?:\.\d+)?)\s*(y(?:ears?|rs?)?|months?|mos?|days?|d)\b/i);
       if (mAge) {
         var val = parseFloat(mAge[1]);
         var unit = (mAge[2] || "y").toLowerCase();
-        if (unit.indexOf("m") === 0) ageNum = val / 12;
+        if (unit.indexOf("mo") === 0) ageNum = val / 12;
         else if (unit.indexOf("d") === 0) ageNum = val / 365;
         else ageNum = val;
+      } else {
+        var mBare = String(patientAge).match(/^\s*(\d+(?:\.\d+)?)\s*(?:[/\s]*[MFmf])?\s*$/);
+        if (mBare) ageNum = parseFloat(mBare[1]);
       }
     }
 
@@ -1721,8 +1866,9 @@
       var raw = line.drug || line.brand || "";
       var norm = normalizeDrugName(raw);
       var info = RX_CLINICAL_KB[norm];
-      if (!info && window.MEDDRUGS && window.MEDDRUGS.all) {
-        var drugMatch = window.MEDDRUGS.all.filter(function (d) {
+      if (!info && window.MEDDRUGS && (window.MEDDRUGS._list || window.MEDDRUGS.all)) {
+        var list = window.MEDDRUGS._list || window.MEDDRUGS.all || [];
+        var drugMatch = list.filter(function (d) {
           if (!d.generic) return false;
           var dg = d.generic.toLowerCase();
           return dg === norm || norm.indexOf(dg) > -1 || dg.indexOf(norm) > -1;
@@ -2231,7 +2377,7 @@
       '<div class="rx-head">' +
         '<div class="rx-handle-bar"></div>' +
         '<div class="rx-head-inner">' +
-          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
           '<div class="rx-head-title">' +
             '<span class="rx-title-main">Prescription <span class="rx-saved-indicator"><span class="rx-saved-dot"></span> Draft saved</span></span>' +
             '<span class="rx-title-sub">Dr. ' + esc(docName() || "—") + '</span>' +
@@ -2329,6 +2475,7 @@
             });
             updateLineTiming(ln);
             refreshSafety();
+            try { freqInp.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {}
           }
         }
       });
@@ -2386,7 +2533,7 @@
       '<div class="rx-head">' +
         '<div class="rx-handle-bar"></div>' +
         '<div class="rx-head-inner">' +
-          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
           '<div class="rx-head-title"><span class="rx-title-main">Prescriber Details</span></div>' +
           '<div style="width:32px"></div>' +
         '</div>' +
@@ -2413,7 +2560,7 @@
       '<div class="rx-head">' +
         '<div class="rx-handle-bar"></div>' +
         '<div class="rx-head-inner">' +
-          '<button class="rx-x" id="rxX" aria-label="Close">' + rxIco("close") + '</button>' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
           '<div class="rx-head-title"><span class="rx-title-main">Doctor Verification</span></div>' +
           '<div style="width:32px"></div>' +
         '</div>' +
@@ -2536,10 +2683,14 @@
     function up(){ drawing=false; }
     cv.addEventListener("mousedown",down); cv.addEventListener("mousemove",move); window.addEventListener("mouseup",up);
     cv.addEventListener("touchstart",down,{passive:false}); cv.addEventListener("touchmove",move,{passive:false}); cv.addEventListener("touchend",up);
-    ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
+    function cleanupSign() {
+      try { window.removeEventListener("mouseup", up); } catch (e) {}
+      ov.remove();
+    }
+    ov.querySelector(".rx-bp-x").addEventListener("click", cleanupSign);
     ov.querySelector("#rxSignClear").addEventListener("click", function(){ ctx.clearRect(0,0,cv.width,cv.height); drew=false; upImg=""; });
     ov.querySelector("#rxSignUp").addEventListener("change", function(){ var f=this.files&&this.files[0]; if(f) rxImgToDataURL(f,600,function(d){ upImg=d; drew=true; var im=new Image(); im.onload=function(){ ctx.clearRect(0,0,cv.width,cv.height); ctx.drawImage(im,0,0,cv.width,cv.height); }; im.src=d; }); });
-    ov.querySelector("#rxSignUse").addEventListener("click", function(){ if(!drew){ rxToast("Please sign or upload first"); return; } var data=upImg||cv.toDataURL("image/png"); setSign(ov.querySelector("#rxSignSave").checked?data:""); ov.remove(); if(onDone) onDone(data); });
+    ov.querySelector("#rxSignUse").addEventListener("click", function(){ if(!drew){ rxToast("Please sign or upload first"); return; } var data=upImg||cv.toDataURL("image/png"); setSign(ov.querySelector("#rxSignSave").checked?data:""); cleanupSign(); if(onDone) onDone(data); });
   }
   // StewardMD logo → data-URL once (via Image→canvas, so it renders reliably inside html2canvas,
   // on web AND native, with no image-load timing race). Falls back to a text wordmark until ready.
@@ -2569,7 +2720,8 @@
           '<div class="rxdoc-cl">' +
             '<div class="rxdoc-nm">' + esc(c.name || dn || "Prescription") + '</div>' +
             (c.address ? '<div class="rxdoc-ad">' + esc(c.address) + '</div>' : '') +
-            '<div class="rxdoc-reg-top">Reg. No: ' + esc(regNo || c.phone || "—") + '</div>' +
+            '<div class="rxdoc-reg-top">Reg. No: ' + esc(regNo || "—") + '</div>' +
+            (c.phone ? '<div class="rxdoc-ad" style="font-size:11px">Ph: ' + esc(c.phone) + '</div>' : '') +
           '</div>' +
         '</div>' +
         '<div class="rxdoc-hd-right">' +
@@ -2584,10 +2736,11 @@
           '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">DATE OF VISIT</div><div class="rxdoc-meta-val">' + esc(date) + '</div></div>' +
           ((d.dx || topic) ? '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">DIAGNOSIS</div><div class="rxdoc-meta-val"><span class="rxdoc-pill-dx">' + esc(d.dx || topic) + '</span></div></div>' : '<div class="rxdoc-meta-cell"></div>') +
         '</div>' +
-        ((d.complaints || d.vitals) ? (
+        ((d.complaints || d.vitals || d.allergies) ? (
           '<div class="rxdoc-meta-divider"></div><div class="rxdoc-meta-grid">' +
-          (d.complaints ? '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">CHIEF COMPLAINTS</div><div class="rxdoc-meta-val">' + esc(d.complaints) + '</div></div>' : '<div class="rxdoc-meta-cell"></div>') +
-          (d.vitals ? '<div class="rxdoc-meta-cell" style="grid-column:span 2"><div class="rxdoc-meta-lbl">VITALS</div><div class="rxdoc-meta-val">' + esc(d.vitals) + '</div></div>' : '') +
+          (d.complaints ? '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">CHIEF COMPLAINTS</div><div class="rxdoc-meta-val">' + esc(d.complaints) + '</div></div>' : '') +
+          (d.vitals ? '<div class="rxdoc-meta-cell"><div class="rxdoc-meta-lbl">VITALS</div><div class="rxdoc-meta-val">' + esc(d.vitals) + '</div></div>' : '') +
+          (d.allergies ? '<div class="rxdoc-meta-cell" style="grid-column:span 2"><div class="rxdoc-meta-lbl">KNOWN ALLERGIES</div><div class="rxdoc-meta-val" style="color:#d70015;font-weight:600">' + esc(d.allergies) + '</div></div>' : '') +
           '</div>'
         ) : '') +
       '</div>' +
@@ -2617,8 +2770,23 @@
     return node;
   }
   function rxSaveOrShare(dataURL, filename){
-    if(rxNative()){ var P=rxPlugins(); var b64=(dataURL.split(",")[1]||""); if(P.Filesystem&&P.Filesystem.writeFile&&P.Share&&P.Share.share){ P.Filesystem.writeFile({ path:filename, data:b64, directory:"CACHE" }).then(function(res){ return P.Share.share({ title:"Prescription", url:res.uri, dialogTitle:"Save or share prescription" }); }).catch(function(){ rxToast("Export failed"); }); return; } }
-    try{ var a=document.createElement("a"); a.href=dataURL; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ rxToast("Export failed"); }
+    if (rxNative()) {
+      var P = rxPlugins();
+      var b64 = (dataURL.split(",")[1] || "");
+      if (P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
+        P.Filesystem.writeFile({ path: filename, data: b64, directory: "CACHE" })
+          .then(function () {
+            if (P.Filesystem.getUri) return P.Filesystem.getUri({ path: filename, directory: "CACHE" });
+            return { uri: "" };
+          })
+          .then(function (res) {
+            return P.Share.share({ title: "Prescription", url: (res && res.uri) || "", dialogTitle: "Save or share prescription" });
+          })
+          .catch(function () { rxToast("Export failed"); });
+        return;
+      }
+    }
+    try { var a = document.createElement("a"); a.href = dataURL; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); } catch (e) { rxToast("Export failed"); }
   }
   /* Mint BEFORE rendering, exactly as doRxPrint does - html2canvas rasterises whatever the node
    * holds at that instant, so a record arriving later would be a PDF with an empty box where the QR
@@ -2626,8 +2794,11 @@
    * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
   function exportRx(kind, topic, regNo, signImg){
     var opts = arguments[4] || {};
-    var v1 = smdLazy('/vendor-html2canvas.js?v=1');
-    var p = kind === "pdf" ? v1.then(function(){ return smdLazy('/vendor-jspdf.js?v=1'); }) : v1;
+    var lazy = window.smdLazy || function () { return Promise.resolve(); };
+    var v1 = window.html2canvas ? Promise.resolve() : lazy('/vendor-html2canvas.js?v=1');
+    var p = kind === "pdf"
+      ? v1.then(function () { return (window.jspdf || window.jsPDF) ? Promise.resolve() : lazy('/vendor-jspdf.js?v=1'); })
+      : v1;
     p.then(function() {
       var d=collectRx()||{}, lines=d.lines;
       rxIssueVerification(lines, d.name).then(function(rxv){
