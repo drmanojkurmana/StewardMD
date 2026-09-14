@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["integrations", "Integrations"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
 
@@ -1074,5 +1074,128 @@
       var again = document.getElementById("healthRecheck");
       if (again) again.onclick = function () { WSQ.render("admin"); };
     }, function () { body.innerHTML = systemHealthHtml(c, { failed: true, message: "No response from the server." }); });
+  }
+
+  // ---- Integrations > Webhooks (P2.13) --------------------------------------------------------
+  /* null = loading, {failed} = the list did not load. Neither may look like "no webhooks". `shown` is the
+   * secret from the registration or rotation that just happened: it is in that one answer only. */
+  var WH_STATUS = { active: "Active", disabled: "Disabled", "auto-disabled": "Turned off after repeated failures" };
+  function webhooksHtml(c, r, shown) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>Webhooks</h2>' +
+      '<p class="quiet">A webhook tells another system that something happened here. It carries the event type and an opaque id only: never a name, a number, a test or a value. ' +
+      "The receiving system reads the details through the WardSynQ FHIR API with its own SMART access, where this hospital's permissions and audit trail apply. " +
+      "Each call is signed: X-WardSynQ-Signature is HMAC-SHA256 of the X-WardSynQ-Timestamp, a dot, and the body, with the endpoint's secret.</p>";
+    if (r == null) return h + '<span class="spin"></span> Loading webhooks...</div>';
+    if (r.failed) return h + '<div class="msg err">Webhooks could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
+    if (shown && shown.secret) {
+      h += '<div class="msg ok">Signing secret for ' + esc(shown.url) + ': <code style="user-select:all;word-break:break-all">' + esc(shown.secret) + "</code><br>Copy it now. It is not shown again.</div>";
+    }
+    var label = {};
+    (r.eventTypes || []).forEach(function (t) { label[t.id] = t.label; });
+    h += "<h3>Registered webhooks</h3>";
+    if (!r.webhooks.length) h += '<p class="quiet">No webhooks are registered for this hospital.</p>';
+    else {
+      h += '<div class="tbl"><table><thead><tr><th>Address</th><th>Events</th><th>Status</th><th>Last attempt</th><th></th></tr></thead><tbody>' +
+        r.webhooks.map(function (w) {
+          var status = "<b>" + esc(WH_STATUS[w.status] || w.status) + "</b>" + (w.disabledReason ? '<br><span class="quiet">' + esc(w.disabledReason) + "</span>" : "") +
+            (w.consecutiveFailures ? '<br><span class="msg err">' + esc(w.consecutiveFailures) + " failed in a row</span>" : "");
+          var last = w.lastAttemptAt ? esc(w.lastAttemptAt) + "<br>" + (w.lastOk ? "Delivered" : "Failed") + (w.lastResponseCode ? " (" + esc(w.lastResponseCode) + ")" : "") : '<span class="quiet">None yet</span>';
+          return '<tr class="' + (w.active ? "" : "warn") + '"><td>' + esc(w.url) + (w.description ? '<br><span class="quiet">' + esc(w.description) + "</span>" : "") + "</td><td>" +
+            w.eventTypes.map(function (t) { return esc(label[t] || t); }).join("<br>") + "</td><td>" + status + "</td><td>" + last + "</td><td>" +
+            '<button type="button" class="btn ghost" data-wh-test="' + esc(w.id) + '"' + (w.active ? "" : " disabled") + ">Send test</button> " +
+            '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Recent deliveries</button> ' +
+            '<button type="button" class="btn ghost" data-wh-rotate="' + esc(w.id) + '">Rotate secret</button> ' +
+            '<button type="button" class="btn ghost" data-wh-active="' + esc(w.id) + '" data-on="' + (w.active ? "0" : "1") + '">' + (w.active ? "Disable" : "Enable") + "</button></td></tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    h += '<div id="whLog"></div><div id="whMsg"></div><h3>Add a webhook</h3>';
+    if (!r.keyConfigured) return h + '<div class="msg err">Webhook secrets cannot be stored encrypted on this server, so a webhook cannot be added.</div></div>';
+    return h + '<div class="row"><label class="f"><span>Address (https only)</span><input type="url" id="whUrl" placeholder="https://"></label>' +
+      '<label class="f"><span>Label (optional)</span><input type="text" id="whDesc" maxlength="120"></label></div><div class="row">' +
+      (r.eventTypes || []).map(function (t) {
+        return '<label class="f" style="flex:0 1 240px"><span><input type="checkbox" class="whType" value="' + esc(t.id) + '"> ' + esc(t.label) + "</span></label>";
+      }).join("") + '</div><button type="button" class="btn" id="whAdd">Add webhook</button></div>';
+  }
+  WSQ._webhooksHtml = webhooksHtml;
+
+  var DELIVERY_STATUS = { delivered: "Delivered", failed: "Failed, will retry", dead: "Failed for good", skipped: "Not sent" };
+  function webhookDeliveriesHtml(c, d) {
+    var esc = c.esc;
+    var h = "<h3>Recent deliveries</h3>";
+    if (d == null) return h + '<span class="spin"></span> Loading deliveries...';
+    if (d.failed) return h + '<div class="msg err">The delivery log could not be loaded: ' + esc(d.message || "failed") + ". This is not the same as nothing having been sent.</div>";
+    if (!d.deliveries.length) return h + '<p class="quiet">No delivery attempts are recorded for this webhook yet.</p>';
+    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>Event</th><th>Attempt</th><th>Result</th><th>Response code</th></tr></thead><tbody>' +
+      d.deliveries.map(function (x) {
+        return '<tr class="' + (x.status === "delivered" ? "" : "warn") + '"><td>' + esc(x.at) + "</td><td>" + esc(x.eventType) + (x.test ? " (test)" : "") + '<br><span class="quiet">' + esc(x.eventId) + "</span></td><td>" + esc(x.attempt) +
+          "</td><td>" + esc(DELIVERY_STATUS[x.status] || x.status) + (x.reason ? '<br><span class="quiet">' + esc(x.reason) + "</span>" : "") + "</td><td>" + (x.responseCode ? esc(x.responseCode) : "none") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  WSQ._webhookDeliveriesHtml = webhookDeliveriesHtml;
+
+  function renderIntegrations(c, body, shown) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = webhooksHtml(c, null);
+    var fail = function (r) { return { failed: true, message: r ? refusal(r) : "No response from the server." }; };
+    return c.api("/ward/webhooks" + q).then(function (r) {
+      body.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
+      if (!r || !r.ok) return;
+      var msg = function (t) { document.getElementById("whMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
+      var urlOf = function (id) { var w = r.webhooks.filter(function (x) { return x.id === id; })[0]; return w ? w.url : ""; };
+      var add = document.getElementById("whAdd");
+      if (add) add.onclick = function () {
+        var types = [];
+        document.querySelectorAll(".whType").forEach(function (b) { if (b.checked) types.push(b.value); });
+        var url = String(document.getElementById("whUrl").value || "").trim();
+        if (!/^https:\/\//i.test(url)) { msg("The address must start with https://."); return; }
+        if (!types.length) { msg("Choose at least one event."); return; }
+        add.disabled = true;
+        c.api("/ward/webhook", { orgId: c.state.orgId, url: url, eventTypes: types, description: document.getElementById("whDesc").value }).then(function (x) {
+          if (!x || !x.ok || !x.secret) { add.disabled = false; msg(refusal(x)); return; }
+          renderIntegrations(c, body, { url: x.webhook.url, secret: x.secret });
+        }, function () { add.disabled = false; msg("No response from the server. The webhook may not have been added; reload to check."); });
+      };
+      body.querySelectorAll("[data-wh-rotate]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-wh-rotate");
+          if (!window.confirm("Make a new signing secret? The current one stops verifying immediately.")) return;
+          b.disabled = true;
+          c.api("/ward/webhook-rotate", { orgId: c.state.orgId, id: id }).then(function (x) {
+            if (!x || !x.ok || !x.secret) { b.disabled = false; msg(refusal(x)); return; }
+            renderIntegrations(c, body, { url: urlOf(id), secret: x.secret });
+          });
+        };
+      });
+      body.querySelectorAll("[data-wh-active]").forEach(function (b) {
+        b.onclick = function () {
+          var on = b.getAttribute("data-on") === "1";
+          b.disabled = true;
+          c.api("/ward/webhook-update", { orgId: c.state.orgId, id: b.getAttribute("data-wh-active"), active: on }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
+            c.toast(on ? "Webhook enabled." : "Webhook disabled. Nothing more is sent to it."); renderIntegrations(c, body);
+          });
+        };
+      });
+      body.querySelectorAll("[data-wh-test]").forEach(function (b) {
+        b.onclick = function () {
+          b.disabled = true;
+          c.api("/ward/webhook-test", { orgId: c.state.orgId, id: b.getAttribute("data-wh-test") }).then(function (x) {
+            b.disabled = false;
+            if (!x || !x.ok) { msg(refusal(x)); return; }
+            c.toast("Test event delivered (response " + x.responseCode + ").");
+          });
+        };
+      });
+      body.querySelectorAll("[data-wh-log]").forEach(function (b) {
+        b.onclick = function () {
+          var log = document.getElementById("whLog");
+          log.innerHTML = webhookDeliveriesHtml(c, null);
+          c.api("/ward/webhook-deliveries" + q + "&id=" + encodeURIComponent(b.getAttribute("data-wh-log"))).then(function (d) {
+            log.innerHTML = webhookDeliveriesHtml(c, d && d.ok && d.deliveries ? d : fail(d));
+          }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null)); });
+        };
+      });
+    }, function () { body.innerHTML = webhooksHtml(c, fail(null)); });
   }
 })();

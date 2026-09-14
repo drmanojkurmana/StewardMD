@@ -113,6 +113,7 @@ import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-sto
 import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/fhir-route.js";
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
+import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -1030,6 +1031,10 @@ export async function onRequest(context) {
         /* FHIR Bulk Data export: the whole hospital's record, by type. staff.admin, the backup
          * export's own gate, plus a clinical read of every type inside fhir-bulk.js. */
         "fhir-export": CAPS.STAFF_ADMIN, "fhir-exports": CAPS.STAFF_ADMIN, "fhir-export-cancel": CAPS.STAFF_ADMIN,
+        /* P2.13 webhooks: the integration administrator's act, like the outbound destinations below.
+         * staff.admin here AND a clinical actor that may write the record, inside webhooks.js. */
+        webhooks: CAPS.STAFF_ADMIN, webhook: CAPS.STAFF_ADMIN, "webhook-update": CAPS.STAFF_ADMIN,
+        "webhook-rotate": CAPS.STAFF_ADMIN, "webhook-test": CAPS.STAFF_ADMIN, "webhook-deliveries": CAPS.STAFF_ADMIN,
         // TASK 7 STEP 1: who WardSynQ believes when a feed says who it is. staff.admin, the same
         // capability that manages the staff->role mapping - registering a trusted source system is
         // exactly that kind of hospital-administration act, never a clinical one.
@@ -1429,7 +1434,7 @@ export async function onRequest(context) {
           try {
             const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
             if (!gate.allowed) return;
-            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, consumers: exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }) });
+            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, consumers: { ...exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, orgId: wOrgId }) } });
             /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
              * whether escalation is actually running rather than assume it. */
             if (env.MAIK_KV) await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify({ at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) }), { expirationTtl: 30 * 86400 }).catch(() => {});
@@ -1988,6 +1993,32 @@ export async function onRequest(context) {
       if (sub === "fhir-export-cancel" && method === "POST") {
         const r = await cancelExport(request, env, { ...deps, store: documentStoreFromEnv(env), jobId: String(body.id || "") });
         return json(r.ok ? { ok: true, cancelled: String(body.id || "") } : { ok: false, error: "cancel_refused", message: r.outcome.issue.map((i) => i.diagnostics).join("; ") }, r.ok ? 200 : r.status, request);
+      }
+      /* WEBHOOKS (webhooks.js), Admin Center > Integrations. The secret is in the answer to a
+       * registration or a rotation and in no other answer. */
+      if (sub === "webhooks" && method === "GET") {
+        const r = await listWebhooks(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "webhook" && method === "POST") {
+        const r = await registerWebhook(request, env, { ...deps, url: body.url, eventTypes: body.eventTypes, description: body.description });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "webhook-update" && method === "POST") {
+        const r = await updateWebhook(request, env, { ...deps, id: body.id, eventTypes: body.eventTypes, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "webhook-rotate" && method === "POST") {
+        const r = await rotateWebhookSecret(request, env, { ...deps, id: body.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "webhook-test" && method === "POST") {
+        const r = await testWebhook(request, env, { ...deps, id: body.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "webhook-deliveries" && method === "GET") {
+        const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fhir-exceptions" && method === "GET") {
         const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
