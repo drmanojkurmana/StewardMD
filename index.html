@@ -270,6 +270,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     <div class="sbs-logo-stage">
       <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="107" height="107">
       <span class="sbs-mark" aria-hidden="true"></span>
+      <span class="sbs-reflection" aria-hidden="true"></span>
       <svg class="sbs-logo-trace" viewBox="0 0 368 368" aria-hidden="true" focusable="false">
         <path pathLength="1" style="--sbs-trace-duration:.468s;--sbs-trace-delay:0s" d="M143 53 Q143 53 145.4 53.45 L156.6 55.55 Q159 56 161.25 57.05 L171.75 61.95 Q174 63 179.4 68.25 L204.6 92.75 Q210 98 210 98.45 L210 100.55 Q210 101 208.05 102.5 L198.95 109.5 Q197 111 196.4 111 L193.6 111 Q193 111 188.95 106.8 L170.05 87.2 Q166 83 163.45 81.8 L151.55 76.2 Q149 75 145.85 75 L131.15 75 Q128 75 125.6 76.05 L114.4 80.95 Q112 82 110.2 83.8 L101.8 92.2 Q100 94 99.25 95.5 L95.75 102.5 Q95 104 94.7 104.9 L93.3 109.1 Q93 110 93 113.15 L93 127.85 Q93 131 94.5 133.85 L101.5 147.15 Q103 150 107.05 153.9 L125.95 172.1 Q130 176 127.75 177.95 L117.25 187.05 Q115 189 109.9 183.9 L86.1 160.1 Q81 155 79.65 151.1 L73.35 132.9 Q72 129 72.15 125.55 L72.85 109.45 Q73 106 74.2 103 L79.8 89 Q81 86 83.7 83 L96.3 69 Q99 66 102.45 64.35 L118.55 56.65 Q122 55 125.15 54.7 L139.85 53.3 Q143 53 143 53 Z"></path>
         <path pathLength="1" style="--sbs-trace-duration:.468s;--sbs-trace-delay:.468s" d="M186 171 Q186 171 176.85 178.95 L134.15 216.05 Q125 224 122.75 225.35 L112.25 231.65 Q110 233 108.05 233.45 L98.95 235.55 Q97 236 95.05 235.85 L85.95 235.15 Q84 235 82.5 234.55 L75.5 232.45 Q74 232 72.2 230.8 L63.8 225.2 Q62 224 62 223.7 L62 222.3 Q62 222 64.25 220.35 L74.75 212.65 Q77 211 78.35 211.6 L84.65 214.4 Q86 215 89 214.7 L103 213.3 Q106 213 122.05 199.65 L196.95 137.35 Q213 124 216.3 123.1 L231.7 118.9 Q235 118 238.15 118.3 L252.85 119.7 Q256 120 258.7 121.35 L271.3 127.65 Q274 129 275.5 130.35 L282.5 136.65 Q284 138 284 138.45 L284 140.55 Q284 141 282.05 142.5 L272.95 149.5 Q271 151 270.55 151 L268.45 151 Q268 151 266.65 149.8 L260.35 144.2 Q259 143 257.5 142.4 L250.5 139.6 Q249 139 246.15 139 L232.85 139 Q230 139 227.9 140.05 L218.1 144.95 Q216 146 211.5 149.75 L190.5 167.25 Q186 171 186 171 Z"></path>
@@ -380,17 +381,31 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @keyframes sbsLogoTrace{to{stroke-dashoffset:0}}
   /* Signature Trace: the existing solid 107px mark is present from the first frame. The
-     animated contour is a short mint highlight laid over it, never a replacement logo. */
-  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1!important}
-  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(45,212,191,.52);filter:drop-shadow(0 0 0 transparent);animation:sbsSignatureGlow 2.18s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.68);filter:drop-shadow(0 0 0 transparent)}
+     pearl highlight traces over a lighter base that settles into the original colour. */
+  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+  /* Selected variant 5 for light mode: focus settles, then a soft reflection crosses. */
+  #smdBootSplash:not(.sbs-dark) .sbs-logo{animation:sbsQuietFocus 2.4s cubic-bezier(.2,.8,.2,1) both;animation-play-state:paused}
+  #smdBootSplash .sbs-reflection{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.65;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
+  #smdBootSplash .sbs-reflection::after{content:"";position:absolute;inset:-40%;background:linear-gradient(110deg,transparent 30%,#dbeaff88 42%,#fff 49%,#fff 51%,#dbeaff88 58%,transparent 70%);animation:sbsQuietReflection 2.4s ease-in-out both;animation-play-state:paused}
+  #smdBootSplash.sbs-dark .sbs-reflection{display:none}
+  #smdBootSplash:not(.sbs-dark) .sbs-logo-trace{display:none}
+  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(188,215,255,.95);color:#fffdf4;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo));animation:sbsSignatureGlow 2.4s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
+  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(206,225,255,1);color:#fffdf4;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo))}
+  #smdBootSplash.sbs-dark .sbs-mark{background:#9bb5ae;animation:sbsSignatureFillDark 1.35s ease-in-out both;animation-play-state:paused}
+  #smdBootSplash.sbs-visible:not(.sbs-dark) .sbs-logo,#smdBootSplash.sbs-visible .sbs-mark,#smdBootSplash.sbs-visible .sbs-reflection::after{animation-play-state:running}
   #smdBootSplash.sbs-visible .sbs-logo-trace{animation-play-state:running}
-  #smdBootSplash .sbs-logo-trace path{stroke-width:4.4}
-  @keyframes sbsSignatureGlow{0%,58%{opacity:1;filter:drop-shadow(0 0 0 transparent)}72%{opacity:1;filter:drop-shadow(0 0 8px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
+  #smdBootSplash .sbs-logo-trace path{stroke-width:6;animation-duration:calc(var(--sbs-trace-duration) * .72);animation-delay:calc(var(--sbs-trace-delay) * .72)}
+  /* Variant 1 for dark mode keeps the pearl light on the contour, without a background aura. */
+  @keyframes sbsSignatureGlow{0%,35%{opacity:1;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo))}48%,58%{opacity:1;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 8px var(--sbs-halo)) drop-shadow(0 0 14px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
+  @keyframes sbsQuietFocus{0%{filter:blur(1.6px);transform:scale(.96);opacity:.45}30%,100%{filter:blur(0);transform:scale(1);opacity:1}}
+  @keyframes sbsQuietReflection{0%,22%{transform:translateX(-100%)}65%,100%{transform:translateX(100%)}}
+  @keyframes sbsSignatureFillDark{0%,12%{background:#9bb5ae}100%{background:#4b9e8d}}
   @media (prefers-reduced-motion:reduce){
     #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
-    #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+    #smdBootSplash:not(.sbs-dark) .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
+    #smdBootSplash.sbs-dark .sbs-mark{animation:none;background:#fff}
     #smdBootSplash .sbs-logo-trace{display:none;animation:none;filter:none}
+    #smdBootSplash .sbs-reflection{display:none}
   }
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
