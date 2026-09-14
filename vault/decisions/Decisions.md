@@ -5371,3 +5371,35 @@ bug - not re-verified live on device this session.
 - Not built: ward/assignment reads (no assignment data), staff-as-patient (would need new PHI
   linkage), VIP flag (does not exist), denied READS (the service only audits denied writes).
 - Backup export audit rows now carry `actor` (they landed as NULL before) and a row count.
+
+
+## 2026-09-14 WardSynQ FHIR Bulk Data export (P2.5) runs on the outbox, walks the change stream, and names every gap
+
+`functions/_wardsynq/fhir-bulk.js`, dispatched once in `fhir-route.js` `dispatchBulk` for both doors:
+`[base]/$export`, `[base]/Patient/$export`, `$export-status/{id}` (GET, DELETE), `$export-file/{id}/{name}`
+on `/api/fhir/{org}` (bearer) and `/api/queue/ward/fhir` (staff). Admin JSON: `POST /ward/fhir-export`,
+`GET /ward/fhir-exports`, `POST /ward/fhir-export-cancel`. Admin Center tab "Data export".
+- Who: a SMART backend-services token (source `smart:backend`, system/ scopes, no patient context), types
+  limited to its readTypes; or staff.admin at the route AND a clinical actor that canRead every type
+  (hr gets 403, as in the security review). No new capability, no grant widened. A client sees only its
+  own exports; staff see the hospital's. A file download re-checks the type against the token.
+- Work: kick-off appends job + slot + outbox event + audit in ONE append. ops-tick drains
+  `fhir.export.chunk` (router waitUntil passes `exportConsumers`; the bearer door also ticks on status
+  polls). Each run reads up to 10 pages of 200 rows of `repository.changes()`, writes one AES-GCM
+  NDJSON part per type to the existing document object store (DOC_S3_*, doc key), appends the next job
+  version with the next event. No new bindings, env vars or secrets.
+- Snapshot rule: a row is exported when it is the version current at transactionTime (latest, or the last
+  version at or before tx via history when edited mid-export). Rows after tx are skipped, so no duplicates.
+- One active export per hospital via a versioned slot record (`_wardsynq_fhir_export_slot`); a racing
+  second kick-off loses on VersionConflict (429). A job with no progress for 1 hour reads as failed and
+  frees the slot; a run that fails MAX_ATTEMPTS times writes status failed with the reason.
+- Nothing silently omitted: a record whose mapper throws is counted as `not-mapped`; hitting
+  MAX_RESOURCES (200000) stops the job and names every requested type as possibly incomplete. Both go to
+  an OperationOutcome NDJSON in manifest error[] and to `extension` on the manifest.
+- Files expire 24h after completion (a `fhir.export.expire` outbox event scheduled at expiresAt deletes
+  them); cancel deletes them at once. Kick-off, completion, failure, cancel and every download are audited;
+  a download that cannot be audited is refused.
+- Strict parameters: only `_type`, `_since`, `_outputFormat` (ndjson). `_typeFilter`, `patient` are 400 and
+  POST kick-off is 405, never ignored. Group/$export is not offered (404).
+- Not built: download buttons on the admin screen (files are fetched through the FHIR API with auth);
+  a status index for the outbox (drainOutbox's latestByType ceiling still applies to a very busy tenant).

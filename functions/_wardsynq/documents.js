@@ -281,4 +281,4 @@ async function serveDocumentLink(env, token, deps) {
   return { ok: true, bytes, contentType: rec.contentType, filename: `${slug(rec.title) || "document"}-v${rec.version}` };
 }
 
-export { TYPE, DOC_TYPES, CONTENT_TYPES, MAX_BYTES, DEFAULT_RETENTION_YEARS, uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink, retainUntilFrom };
+export { TYPE, DOC_TYPES, CONTENT_TYPES, MAX_BYTES, DEFAULT_RETENTION_YEARS, uploadDocument, listDocuments, documentVersions, withdrawDocument, purgeDocument, documentLink, serveDocumentLink, retainUntilFrom, docKey, encryptBytes, decryptBytes };

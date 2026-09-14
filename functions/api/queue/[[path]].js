@@ -111,7 +111,8 @@ import { createReferral, actOnReferral, patientReferrals, referralInbox } from "
 import { assignNurse, setObservationFrequency, createNursingTask, actOnNursingTask, nursingPatient, nursingWard } from "../../_wardsynq/nursing.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
-import { dispatchRead, dispatchOperation } from "../../_wardsynq/fhir-route.js";
+import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/fhir-route.js";
+import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -707,7 +708,7 @@ export async function onRequest(context) {
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report", "fhir-export"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -899,6 +900,9 @@ export async function onRequest(context) {
         fhir: CAPS.EMR_VIEW,
         // What another system sent that WardSynQ would not write without a person deciding.
         "fhir-exceptions": CAPS.EMR_VIEW,
+        /* FHIR Bulk Data export: the whole hospital's record, by type. staff.admin, the backup
+         * export's own gate, plus a clinical read of every type inside fhir-bulk.js. */
+        "fhir-export": CAPS.STAFF_ADMIN, "fhir-exports": CAPS.STAFF_ADMIN, "fhir-export-cancel": CAPS.STAFF_ADMIN,
         // TASK 7 STEP 1: who WardSynQ believes when a feed says who it is. staff.admin, the same
         // capability that manages the staff->role mapping - registering a trusted source system is
         // exactly that kind of hospital-administration act, never a clinical one.
@@ -1164,7 +1168,11 @@ export async function onRequest(context) {
       /* READING the discharge summary is reading the chart; DRAFTING one authors a clinical
        * document. The same path is both, so the capability follows the method: a ward nurse can
        * open the summary and see what is still outstanding without being able to write it. */
+      /* A bulk export under /ward/fhir is not a chart read: it is the whole hospital, so it takes the
+       * fhir-export gate rather than the fhir sub's emr.view. */
+      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export"));
       const need = sub === "mar" ? CAPS.MED_ADMINISTER
+        : bulkFhirPath ? capFor["fhir-export"]
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
@@ -1291,7 +1299,7 @@ export async function onRequest(context) {
           try {
             const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
             if (!gate.allowed) return;
-            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {} });
+            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, consumers: exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }) });
             if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
           } catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
         })());
@@ -1831,6 +1839,23 @@ export async function onRequest(context) {
        *   /ward/fhir/Patient/<id>                one resource
        *   /ward/fhir?patient=<id>[&_type=A,B]    everything for one patient, as a Bundle
        * Errors come back as OperationOutcome, because that is what a FHIR client parses. */
+      /* FHIR BULK EXPORT from the Admin Center (fhir-bulk.js). The same kick-off, cancel and job list
+       * the FHIR door serves as $export, in the JSON the admin screen reads. staff.admin at the route
+       * AND a clinical actor that may read each type, inside the handler. */
+      if (sub === "fhir-export" && method === "POST") {
+        const level = body.level === "patient" ? "patient" : "system";
+        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : ""}$export` });
+        if (!r.ok) return json({ ok: false, error: r.status === 429 ? "export_running" : r.status === 401 ? "auth" : r.status === 403 ? "permission" : "export_refused", message: r.outcome.issue.map((i) => i.diagnostics).join("; ") }, r.status, request);
+        return json({ ok: true, jobId: r.jobId, status: "in-progress" }, 202, request);
+      }
+      if (sub === "fhir-exports" && method === "GET") {
+        const r = await listExports(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "fhir-export-cancel" && method === "POST") {
+        const r = await cancelExport(request, env, { ...deps, store: documentStoreFromEnv(env), jobId: String(body.id || "") });
+        return json(r.ok ? { ok: true, cancelled: String(body.id || "") } : { ok: false, error: "cancel_refused", message: r.outcome.issue.map((i) => i.diagnostics).join("; ") }, r.ok ? 200 : r.status, request);
+      }
       if (sub === "fhir-exceptions" && method === "GET") {
         const r = await listExceptions(request, env, { ...deps, config: (wsqCfg && wsqCfg.fhir) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -1914,6 +1939,9 @@ export async function onRequest(context) {
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "" };
+        /* $export, $export-status, $export-file: gated staff.admin above (bulkFhirPath), before any read grammar. */
+        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}` });
+        if (bulk) return bulk;
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */
         if (method === "POST") {

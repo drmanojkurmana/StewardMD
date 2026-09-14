@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["export", "Data export"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security" || tab === "export") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, export: renderExport, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
     return renderers[tab](c, body);
   } });
 
@@ -814,6 +814,73 @@
     return h + "</div>";
   }
   WSQ._securityReviewHtml = securityReviewHtml;
+
+  /* DATA EXPORT (FHIR). The hospital's record as FHIR Bulk Data NDJSON (functions/_wardsynq/fhir-bulk.js).
+   * The list is null while loading and false when it failed, and a failed load never renders as "no
+   * exports". Each status reads differently: running, done (with its files and counts, even when a
+   * type had nothing), failed (with the reason), cancelled, expired. Anything the export could not
+   * include is listed under the job, never hidden. */
+  var EXPORT_STATUS = { "in-progress": "Running", complete: "Done", failed: "Failed", cancelled: "Cancelled", expired: "Expired, files deleted" };
+  function exportHtml(c, r) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("cloud_download") + " Data export (FHIR)</h2>" +
+      '<p class="quiet">Exports this hospital\'s record as FHIR R4 NDJSON, one file per resource type, in the background. One export runs at a time. Files are fetched through the FHIR Bulk Data API ($export-status) with this hospital\'s authorization, are recorded in the audit trail when downloaded, and are deleted after 24 hours.</p>';
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (r === false || r.failed) return h + '<div class="msg err">Exports could not be loaded' + (r && r.message ? ": " + esc(r.message) : "") + ". This is not the same as there being none.</div></div>";
+    h += "<h3>Start an export</h3><div class=\"row\">" + (r.exportable || []).map(function (t) {
+      return '<label class="f" style="flex:0 1 190px"><span><input type="checkbox" class="admExpType" value="' + esc(t) + '" checked> ' + esc(t) + "</span></label>";
+    }).join("") + "</div>" +
+      '<div class="row"><label class="f"><span>Only changed since (optional)</span><input type="datetime-local" id="admExpSince"></label></div>' +
+      '<button type="button" class="btn" id="admExpStart">Start export</button> <button type="button" class="btn ghost" id="admExpRefresh">Refresh</button><div id="admExpMsg"></div>';
+    h += "<h3>Exports</h3>";
+    if (!r.exports.length) return h + '<p class="quiet">No export has been started for this hospital.</p></div>';
+    h += '<div class="tbl"><table><thead><tr><th>Started</th><th>Types</th><th>Since</th><th>Status</th><th>Files</th><th></th></tr></thead><tbody>' +
+      r.exports.map(function (x) {
+        var status = esc(EXPORT_STATUS[x.status] || x.status);
+        if (x.status === "in-progress") status += '<br><span class="quiet">' + esc(x.exported) + " resources so far</span>";
+        if (x.status === "failed") status = '<span class="msg err">Failed: ' + esc(x.error || "no reason recorded") + "</span>";
+        var files = x.status === "complete"
+          ? (x.files.length ? x.files.map(function (f) { return esc(f.name) + ": " + esc(f.count); }).join("<br>") : "Done. No resources matched this export.")
+          : '<span class="quiet">' + (x.files.length ? x.files.length + " file(s) written" : "none") + "</span>";
+        if (x.issues && x.issues.length) files += '<div class="msg err">Not included: ' + x.issues.map(function (i) { return esc(i.detail); }).join("<br>") + "</div>";
+        var act = (x.status === "in-progress" || x.status === "complete") ? '<button type="button" class="btn ghost" data-exp-cancel="' + esc(x.id) + '">' + (x.status === "complete" ? "Delete files" : "Cancel") + "</button>" : "";
+        return "<tr><td>" + esc(x.requestedAt) + "<br><span class=\"quiet\">" + esc(x.requestedBy) + "</span></td><td>" + esc((x.types || []).join(", ")) + "</td><td>" + esc(x.since || "all") + "</td><td>" + status + "</td><td>" + files + "</td><td>" + act + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    return h + "</div>";
+  }
+  WSQ._exportHtml = exportHtml;
+
+  function renderExport(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = exportHtml(c, null);
+    return c.api("/ward/fhir-exports" + q).then(function (r) {
+      body.innerHTML = exportHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      if (!r || !r.ok) return;
+      var msg = function (t) { document.getElementById("admExpMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
+      document.getElementById("admExpRefresh").onclick = function () { WSQ.render("admin"); };
+      document.getElementById("admExpStart").onclick = function () {
+        var btn = this, types = [];
+        document.querySelectorAll(".admExpType").forEach(function (b) { if (b.checked) types.push(b.value); });
+        if (!types.length) { msg("Choose at least one resource type."); return; }
+        var sinceRaw = document.getElementById("admExpSince").value, since = "";
+        if (sinceRaw) { var d = new Date(sinceRaw); if (isNaN(d.getTime())) { msg("That date is not valid."); return; } since = d.toISOString(); }
+        btn.disabled = true;
+        c.api("/ward/fhir-export", { orgId: c.state.orgId, types: types, since: since }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; msg(refusal(x)); return; }
+          c.toast("Export started."); WSQ.render("admin");
+        });
+      };
+      body.querySelectorAll("[data-exp-cancel]").forEach(function (b) {
+        b.onclick = function () {
+          b.disabled = true;
+          c.api("/ward/fhir-export-cancel", { orgId: c.state.orgId, id: b.getAttribute("data-exp-cancel") }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
+            c.toast("Export cancelled and its files deleted."); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
 
   function renderSecurity(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
