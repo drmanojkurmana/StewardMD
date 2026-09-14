@@ -29,7 +29,12 @@ at once, targeted tests in builders, full suite once at merge by the orchestrato
   and conventional clinical colour meaning, never colour alone.
 
 ## Wave 3
-- S3 and S6 build phases from the design docs.
+- S3 and S6 build phases from the design docs (S3_UNIFIED_WARD_APP_DESIGN.md section 6,
+  S6_ABDM_INTEGRATION_DESIGN.md section 5). Start without owner answers: S3 P0 server alert path behind
+  `wardsynq.alerts.push.enabled` (default off, escalation defaults labelled UNAPPROVED until D10 sign-off);
+  S6 A1 ABDM hospital profile (new files only). Waiting on owner: S3 O1-O5, S6 A1-A5 (asked 2026-09-14).
+- Design found live gaps: no critical result reaches a phone (empty channel lists), escalation only runs while
+  someone uses the ward, existing ICU push shows value and bed on the lock screen, ward-offline.js not wired.
 - Antigravity translations land on i18n/<code> branches; we test and improve (D6).
 - D12: AWS migration around 2026-09-28; keep domain logic free of new Cloudflare coupling.
 - Not doing: D3 paid pen test (no budget), S1 until the owner names the bucket.
