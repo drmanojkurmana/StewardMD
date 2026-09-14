@@ -8,8 +8,12 @@
 (function () {
   "use strict";
   var WSQ = window.WSQ;
-  var SECTIONS = [["appointments", "Appointments"], ["medicines", "Medicines"], ["results", "Results"], ["diagnoses", "Diagnoses and allergies"],
-    ["discharge", "Discharge summaries"], ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"]];
+  /* The server's own list (portal-view.js SECTIONS). "Full discharge summary" and "Released documents" are
+   * separate choices on purpose: a relative trusted with care instructions is not automatically trusted
+   * with the whole signed summary or every document a clinician releases. */
+  var SECTIONS = [["status", "OPD queue status"], ["appointments", "Appointments"], ["medicines", "Medicines"], ["results", "Results"], ["diagnoses", "Diagnoses and allergies"],
+    ["discharge", "Discharge summaries (patient copy)"], ["discharge-full", "Full discharge summary"], ["documents", "Released documents"],
+    ["bills", "Bills"], ["consents", "Consents (view only)"], ["messages", "Messages"]];
   function val(id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; }
   /* The record id every OPD-registered patient files under (functions/_wardsynq/opd-identity.js patientIdForMrn). */
   function patientIdForMrn(mrn) { var m = String(mrn || "").trim(); return m ? "opd-pat-" + m.toLowerCase().replace(/[^a-z0-9]+/g, "-") : ""; }

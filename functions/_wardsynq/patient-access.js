@@ -423,7 +423,7 @@ async function portalRead(request, env, ctx) {
       .map((m) => ({ sentAt: m.sentAt, body: m.body, reply: m.reply || null, answeredAt: m.answeredAt || null }));
   } catch (_) { messages = []; }
 
-  const extras = await portalExtras(ctx, grant);
+  const extras = await portalExtras(ctx, grant, doc);
   const scoped = scopeDocument(doc, sections);
 
   return {
@@ -436,6 +436,7 @@ async function portalRead(request, env, ctx) {
     document: scoped,
     ...(sections.includes("messages") ? { messages } : {}),
     ...(extras.dischargeSummaries ? { dischargeSummaries: extras.dischargeSummaries } : {}),
+    ...(extras.documents ? { documents: extras.documents } : {}),
     ...(extras.bills ? { bills: extras.bills } : {}),
     ...(extras.consents ? { consents: extras.consents } : {}),
     failedSections: extras.failed,

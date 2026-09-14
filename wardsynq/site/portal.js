@@ -12,10 +12,19 @@
  * LOADING, FAILED AND EMPTY ARE THREE DIFFERENT SCREENS. "We could not load your bills" must never
  * look like "you have no bills": a patient who reads a failure as "nothing owed" or "no results" has
  * been told something false.
+ *
+ * P2 GAPS: queue status, released documents and the full discharge summary. Their words come from
+ * i18n.js (loaded first by portal.html); queue status and withheld text carry a fourth state each, "ask
+ * at the desk" and "withheld until your care team discusses it", which is neither empty nor failed.
  */
 (function () {
   "use strict";
   var KEY = "wsqPortalSession";
+  function tr(key, vars) {
+    var I = typeof window !== "undefined" && window.WSQI18n, lang = "en";
+    try { lang = document.documentElement.lang || "en"; } catch (e) {}
+    return I ? I.t(key, vars, lang) : key;
+  }
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function when(iso) { var t = Date.parse(iso || ""); return isFinite(t) ? new Date(t).toLocaleString() : ""; }
@@ -31,6 +40,47 @@
     return '<section class="card" aria-labelledby="h-' + esc(id) + '" data-section="' + esc(id) + '"><h2 id="h-' + esc(id) + '">' + esc(title) + "</h2>" + body + "</section>";
   }
 
+  /** PURE. Queue status. q: undefined/null = loading, false = failed, else the /api/portal/queue answer. */
+  function statusSection(q) {
+    var body;
+    if (q == null) body = '<p role="status" data-state="loading"><span class="spin"></span> ' + esc(tr("status.loading")) + "</p>";
+    else if (q === false) body = '<div class="msg err" role="alert" data-state="failed">' + esc(tr("status.failed")) + "</div>";
+    else if (!q.available) body = '<p class="quiet" data-state="off">' + esc(tr("status.off")) + "</p>";
+    /* Not "empty": the queue may well hold this patient, it just cannot prove which entry is theirs. */
+    else if (q.ambiguous) body = '<div class="msg note" data-state="ambiguous">' + esc(tr("status.ambiguous")) + "</div>";
+    else if (!q.tickets || !q.tickets.length) body = '<p class="quiet" data-empty="status">' + esc(tr("status.empty")) + "</p>";
+    else body = '<ul class="plist">' + q.tickets.map(function (t) {
+      var where = t.desk ? tr("status.desk") : (t.label || tr("status.opd"));
+      var eta = Date.parse(t.eta || "");
+      return '<li data-ticket-state="' + esc(t.state) + '"><b>' + esc(tr("status.state." + t.state)) + "</b><br>" + esc(tr("status.where", { place: where })) +
+        (t.ahead == null ? "" : "<br>" + esc(t.ahead === 0 ? tr("status.aheadNone") : t.ahead === 1 ? tr("status.aheadOne") : tr("status.ahead", { n: t.ahead })) +
+          "<br>" + esc(isFinite(eta) ? tr("status.eta", { time: new Date(eta).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }) : tr("status.noEta"))) + "</li>";
+    }).join("") + "</ul>";
+    return '<section class="card" aria-labelledby="h-status" data-section="status"><h2 id="h-status">' + esc(tr("status.title")) + "</h2>" + body +
+      (q == null ? "" : '<button class="btn" type="button" data-act="queue">' + esc(tr("status.refresh")) + "</button>") + "</section>";
+  }
+
+  /** PURE. One released discharge summary: the patient copy's three sections, or the full signed summary. */
+  function dischargeItem(d) {
+    if (d.scope === "full") {
+      return '<article class="ds-full" data-ds="' + esc(d.id) + '"><h3>' + esc(tr("dc.full")) + "</h3>" + (d.sections || []).map(function (s) {
+        return "<h4>" + esc(tr("dc.section." + s.key)) + "</h4>" +
+          (s.withheld ? '<p class="msg note" data-withheld="' + esc(s.key) + '">' + esc(tr("dc.withheld")) + "</p>" : "<p>" + lines(s.text) + "</p>");
+      }).join("") + '<button class="btn noprint" type="button" data-act="print">' + esc(tr("dc.print")) + "</button></article>";
+    }
+    return (d.admission ? "<h3>Your stay</h3><p>" + lines(d.admission) + "</p>" : "") +
+      (d.medicines ? "<h3>Medicines</h3><p>" + lines(d.medicines) + "</p>" : "") +
+      (d.careInstructions ? "<h3>Care instructions</h3><p>" + lines(d.careInstructions) + "</p>" : "");
+  }
+
+  /** PURE. One released document, or the line that says it has been taken back. */
+  function documentItem(d) {
+    if (d.unavailable) return '<span data-doc-state="' + esc(d.unavailable) + '">' + esc(tr(d.unavailable === "withdrawn" ? "docs.withdrawn" : "docs.unavailable")) + "</span>";
+    var type = tr("docs.type." + d.docType);
+    return "<b>" + esc(d.title) + "</b><br>" + esc(type.indexOf("docs.type.") === 0 ? d.docType : type) + ", " + esc(when(d.uploadedAt)) + ", " + esc(tr("docs.version", { n: d.version })) +
+      '<br><button class="btn" type="button" data-act="doc" data-id="' + esc(d.documentId) + '" data-version="' + esc(d.version) + '">' + esc(tr("docs.download")) + '</button> <span class="quiet" aria-live="polite"></span>';
+  }
+
   /** PURE. The whole signed-in page from the server's answer. Only granted sections are drawn. */
   function renderRecord(r) {
     var access = r.access || { kind: "patient", sections: [] };
@@ -42,6 +92,7 @@
     out.push('<div class="title"><h1>' + (access.kind === "proxy" ? "Record of " + esc(who || "the patient") : "Your record") + "</h1></div>");
     if (access.kind === "proxy") out.push('<div class="msg note">You are viewing as ' + esc(access.relationship || "a family member") + ", with the patient's agreement. You can see only what they agreed to share.</div>");
     if (r.statements && r.statements.length && (has("results") || has("diagnoses"))) out.push('<div class="msg note">' + r.statements.map(esc).join("<br>") + "</div>");
+    if (has("status")) out.push(statusSection(r.queue));
 
     if (has("appointments")) {
       out.push(section("appointments", "Appointments", "ok", doc.appointments, function (a) {
@@ -65,11 +116,8 @@
       out.push(section("diagnoses", "Diagnoses", "ok", doc.diagnoses, function (d) { return "<b>" + esc(d.display) + "</b>" + (d.note ? "<br>" + esc(d.note) : ""); }, "No diagnoses are listed."));
       out.push(section("allergies", "Allergies", "ok", doc.allergies, function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? ": " + esc(a.reaction) : ""); }, "No allergies are recorded."));
     }
-    if (has("discharge")) out.push(section("discharge", "Discharge summaries and care instructions", failed("discharge"), r.dischargeSummaries, function (d) {
-      return (d.admission ? "<h3>Your stay</h3><p>" + lines(d.admission) + "</p>" : "") +
-        (d.medicines ? "<h3>Medicines</h3><p>" + lines(d.medicines) + "</p>" : "") +
-        (d.careInstructions ? "<h3>Care instructions</h3><p>" + lines(d.careInstructions) + "</p>" : "");
-    }, "No discharge summary has been shared with you."));
+    if (has("discharge") || has("discharge-full")) out.push(section("discharge", "Discharge summaries and care instructions", failed("discharge"), r.dischargeSummaries, dischargeItem, "No discharge summary has been shared with you."));
+    if (has("documents")) out.push(section("documents", tr("docs.title"), failed("documents"), r.documents, documentItem, tr("docs.empty")));
     if (has("bills")) out.push(section("bills", "Bills and payments", failed("bills"), r.bills, function (b) {
       var state = b.status === "void" ? "Cancelled" : b.status === "paid" ? "Paid" : "Balance due " + money(b.balance, b.currency);
       return "<b>" + esc(state) + "</b><br>Charged " + money(b.charged, b.currency) + ", paid " + money(b.paid, b.currency) +
@@ -108,7 +156,7 @@
   }
 
   var api = {
-    esc: esc, section: section, renderRecord: renderRecord, renderPhase: renderPhase
+    esc: esc, section: section, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, documentItem: documentItem
   };
   if (typeof window !== "undefined") window.WSQPortal = api;
   if (typeof document === "undefined" || !document.getElementById("portal")) return;
@@ -128,10 +176,56 @@
     if (!s) return show({ phase: "signin", orgId: orgFromHash() });
     show({ phase: "loading" });
     post("record", s).then(function (r) {
-      if (r && r.ok) return show({ phase: "ready", data: r });
+      if (r && r.ok) { show({ phase: "ready", data: r }); if (r.access && (r.access.sections || []).indexOf("status") >= 0) loadQueue(s); return; }
       if (r && r.httpStatus === 401) { save(null); return show({ phase: "ended", detail: r.detail }); }
       show({ phase: "failed" });
     }, function () { show({ phase: "failed" }); });
+  }
+
+  /* Queue status loads after the record and redraws only its own section, so a message being typed
+   * is never wiped by it. */
+  function loadQueue(s) {
+    var put = function (q) { var el = root.querySelector('[data-section="status"]'); if (el) el.outerHTML = statusSection(q); };
+    put(null);
+    post("queue", { orgId: s.orgId, grantId: s.grantId, token: s.token }).then(function (q) {
+      if (q && q.httpStatus === 401) { save(null); return show({ phase: "ended", detail: q.detail }); }
+      put(q && q.ok ? q : false);
+    }, function () { put(false); });
+  }
+
+  /* The bytes come back in the response and are saved from a local object URL: the page never holds an
+   * address for the stored file. A document withdrawn since the page loaded redraws the page without it. */
+  function downloadDocument(s, b) {
+    var note = b.nextElementSibling;
+    var body = JSON.stringify({ orgId: s.orgId, grantId: s.grantId, token: s.token, documentId: b.getAttribute("data-id"), version: Number(b.getAttribute("data-version")) });
+    var fail = function () { b.disabled = false; if (note) note.textContent = tr("docs.failed"); };
+    if (note) note.textContent = tr("docs.downloading");
+    fetch("/api/portal/document", { method: "POST", headers: { "Content-Type": "application/json" }, body: body, credentials: "omit" }).then(function (res) {
+      var type = res.headers.get("Content-Type") || "";
+      if (res.ok && type.indexOf("application/json") < 0) {
+        return res.blob().then(function (blob) {
+          var url = URL.createObjectURL(blob), a = document.createElement("a");
+          var named = /filename="([^"]+)"/.exec(res.headers.get("Content-Disposition") || "");
+          a.href = url; a.download = named ? named[1] : "document";
+          document.body.appendChild(a); a.click(); a.parentNode.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+          b.disabled = false; if (note) note.textContent = "";
+        }, fail);
+      }
+      return res.json().then(null, function () { return {}; }).then(function (j) {
+        if (res.status === 401) { save(null); return show({ phase: "ended", detail: j.detail }); }
+        if (res.status === 404 || res.status === 410) return refresh();
+        fail();
+      });
+    }, fail);
+  }
+
+  function printSummary(b) {
+    var article = b.closest(".ds-full"); if (!article) return;
+    var done = function () { article.classList.remove("printing"); document.body.classList.remove("printing"); };
+    article.classList.add("printing"); document.body.classList.add("printing");
+    window.onafterprint = done;
+    window.print();
   }
 
   root.addEventListener("submit", function (ev) {
@@ -150,7 +244,10 @@
     var act = b.getAttribute("data-act"), s = load();
     if (act === "retry") return refresh();
     if (act === "signout") { save(null); return refresh(); }
+    if (act === "print") return printSummary(b);
     if (!s) return refresh();
+    if (act === "queue") return loadQueue(s);
+    if (act === "doc") { b.disabled = true; return downloadDocument(s, b); }
     function say(id, r, okText) {
       var el = document.getElementById(id); if (!el) return;
       el.innerHTML = '<div class="msg ' + (r && r.ok ? "ok" : "err") + '">' + esc(r && r.ok ? okText : ((r && r.detail) || "That did not go through. Nothing was sent.")) + "</div>";
