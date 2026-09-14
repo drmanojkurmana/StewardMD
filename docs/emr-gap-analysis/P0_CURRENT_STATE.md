@@ -695,3 +695,10 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - D10: Admin > Clinical seed data lists every seed item as UNAPPROVED; only the platform owner can sign in the name of Dr Manoj Kurmana; nothing signed yet. D4 B: hospitals publish group counts; overview shows who and when, Stale after the group age, "Not published" never zero.
 - App pages (queue.js, patient-register.js, root index.html, opd.html) reach phones only after a native rebuild or OTA; opd-display.html and queue.html are live on push.
 - Regression 6832, 0 fail; headless OPD run 14/14. Every route has a screen and a test. Security scan 0 findings. Live admin.js 32.
+
+### 2026-09-14 (night, 8) - S3 P1: the app opens critical alerts
+
+- App (flag smd_wsq_push, default off): tapping a v:2 push opens a non-dismissable alert screen that fetches detail after app lock, shows patient, ward, bed and result; Acknowledge needs what was done and reports success only on a written record; decline; cross-hospital alert asks to switch and shows nothing. Phones bind to a hospital on workplace pick or staff sign-in, rebind on token refresh, unbind on staff sign-out (new POST /api/push/unregister-member, audited). hospital-auth.js: a staff token is sent only to the hospital it was issued for (ward.js).
+- Reaches phones only after build-www, cap sync and OTA or native rebuild; then per device flag plus wardsynq.alerts.push.enabled per hospital.
+- Follow-ups: notice detail route should take the workplace orgId and 404 before reading; queue.js and discharge.js still choose credentials the old way; account sign-out does not unbind; Admin no-phone list is per sent alert, not live registrations.
+- Regression 6848, 0 fail; headless alert screen all pass. Every route has a screen and a test. Security scan 0 findings. Live ward.js site85.
