@@ -45,11 +45,16 @@ try {
   if (!hasOcr) throw new Error("SMD_NATIVE.ocr missing: not the native app, or the plugin failed to load");
   // network tripwire + inject the parser under test
   await c.evaluate(`(function(){
-    window.__smdNet = 0;
-    var of = window.fetch; window.fetch = function(){ window.__smdNet++; return of.apply(this, arguments); };
-    var oo = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function(){ window.__smdNet++; return oo.apply(this, arguments); };
+    window.__smdNet = [];
+    function u(a){ try { return String(a && a.url ? a.url : a); } catch (e) { return "?"; } }
+    var of = window.fetch; window.fetch = function(){ window.__smdNet.push(u(arguments[0])); return of.apply(this, arguments); };
+    var oo = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function(m, url){ window.__smdNet.push(String(url)); return oo.apply(this, arguments); };
     window.__smdParse = (function(){ ${PARSER} return parseFieldsOnDevice; })();
     return 1; })()`);
+  // control: the app's own background traffic over an idle window of the same order as the OCR
+  await new Promise((r) => setTimeout(r, 3000));
+  const idle = JSON.parse(await c.evaluate(`JSON.stringify(window.__smdNet.splice(0))`));
+  console.log(`app background traffic over 3 s idle (control): ${idle.length} call(s)`, idle.length ? JSON.stringify(idle) : "");
   // image height, for pixel text heights
   await c.evaluateAsync(`var im = new Image(); im.onload = function(){ window.__smdres = im.naturalWidth + "x" + im.naturalHeight; }; im.onerror = function(){ window.__smdres = "0x0"; }; im.src = ${JSON.stringify(dataUrl)};`, 60);
   const dims = await c.evaluate(`String(window.__smdres)`);
@@ -70,8 +75,11 @@ try {
     const conf = b.conf == null ? "  -  " : Number(b.conf).toFixed(2).padEnd(5);
     console.log(JSON.stringify(b.text).padEnd(28), conf, b.x.toFixed(3), b.y.toFixed(3), b.w.toFixed(3), b.h.toFixed(4), (b.h * H).toFixed(1));
   }
-  const net = await c.evaluate(`window.__smdNet`);
-  console.log(`\nnetwork calls during OCR: ${net}  (fetch + XHR; must be 0)`);
+  const netUrls = JSON.parse(await c.evaluate(`JSON.stringify(window.__smdNet.splice(0))`));
+  const aiCalls = netUrls.filter((x) => /\/api\/ai|vision|generativelanguage|aiplatform|gemini/i.test(x));
+  const net = netUrls.length;
+  console.log(`\nnetwork calls during OCR window: ${net}` + (net ? "  " + JSON.stringify(netUrls) : ""));
+  console.log(`AI / vision endpoint calls during OCR: ${aiCalls.length}  (must be 0)`);
 
   const text = raw.text || (raw.lines || []).join("\n");
   const mine = JSON.parse(await c.evaluate(`JSON.stringify(window.__smdParse(${JSON.stringify(text)}, ${JSON.stringify(kind)}, ${JSON.stringify(boxes)}))`));
