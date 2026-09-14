@@ -745,3 +745,7 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Fix: security report read the rota by UTC date, so between midnight and 05:30 IST rostered staff were flagged as out-of-assignment; now one day of margin each side.
 - Regression 6954, 0 fail (before merging a large ICU OCR update from main; re-run on the merged tree in progress). Every route has a screen and a test. Security scan 0 findings. Live ward.js site90-duty-printlang, admin.js 39, i18n.js 8, print-lang.js 2.
 - Open: staff navigation label translation (approved, not built); owner questions: interns in the ward team, named contacts skipped when off duty, no-ward patient cover.
+
+### 2026-09-15 - G4 closed: live audit chain confirmed in production
+
+- First production WardSynQ writes since the 2026-09-14 11:10Z deploy: 14 connect_audit_event rows (tenant wardsynq-demo-superspecialty-hospital-1b10ee), 14 wardsynq_audit_chain rows. `node scripts/audit-chain-live-check.mjs --since 2026-09-14T11:10:00Z` reports CONFIRMED: all linked, chain head 14, newest 14 verified. The hourly session cron was removed.
