@@ -13,6 +13,7 @@ import { putConsentReq, putTxn, tryJoin, unsealTxnKey, claimAck, deleteBuffered,
 import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, abdmKeyMaterial, readDhPublicKey, FideliusError } from "./fidelius.js";
 import { revalidateForRequest, getConsentReqByConsentId, withinRefetchWindow } from "./consent.js";
 import { AbdmError } from "./gateway.js";
+import { abdmConfig } from "./config.js";
 import { PermissionError } from "../permission.js";
 
 // ── ADR-2H consent-body field-name seam. Corroborated-not-official (ABDM research was WAF-blocked and V1↔V3
@@ -95,8 +96,10 @@ export async function requestConsent(env, deps, req) {
   if (!requester || !requester.identifier || !requester.identifier.value) {
     throw new PermissionError("consent request needs a requester with a medical registration number");
   }
-  const hiuId = (env && env.ABDM_HIU_ID) || null;
-  if (!hiuId) throw new AbdmError("ABDM_HIU_ID is not configured");
+  // One env scheme: the HIU id comes from abdmConfig (an override, else the sandbox's own identity). A
+  // production configuration has none, so it fails closed here.
+  const hiuId = abdmConfig(env).hiuId || null;
+  if (!hiuId) throw new AbdmError("ABDM HIU id is not configured");
 
   const body = buildConsentInitBody(CONSENT_FIELDS, {
     requestId, now,

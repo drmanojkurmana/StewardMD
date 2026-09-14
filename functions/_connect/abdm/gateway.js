@@ -62,16 +62,26 @@ export function gatewayHeaders({ token, cmId, hiuId, hipId, now }) {
   return h;
 }
 
-export function makeGateway({ baseUrl, cmId, hiuId, hipId, fetch, kv, now, secrets }) {
+// Owner A2 (2026-09-14): no production ABDM traffic until India-region hosting exists. Checked on the HOST, not
+// only on a config flag, so a gateway built by hand with a production base is refused too. Every outbound
+// call (sessions first, then every post, and M1, which needs a session) passes through session().
+export const PRODUCTION_GATEWAY_HOSTS = Object.freeze(["apis.abdm.gov.in"]);
+export function productionHeld(baseUrl) {
+  try { return PRODUCTION_GATEWAY_HOSTS.includes(new URL(String(baseUrl)).hostname); } catch { return false; }
+}
+
+export function makeGateway({ baseUrl, cmId, hiuId, hipId, clientId: defaultClientId, trafficHeld, fetch, kv, now, secrets }) {
   const tokKey = "connect:abdm:tok:" + (hiuId || hipId || "default");   // KV: NON-PHI token only (R16)
   const clock = now || (() => new Date());
 
   async function session() {
+    if (trafficHeld || productionHeld(baseUrl)) throw new AbdmError(trafficHeld || "production ABDM traffic is held until India-region hosting exists (owner decision A2)");
     try {
       const cached = await kv.get(tokKey);
       if (cached) { const c = JSON.parse(cached); if (c.exp > clock().getTime()) return c.token; }
     } catch { /* fall through to refresh */ }
-    const clientId = await secrets.get("ABDM_CLIENT_ID");
+    // The bridge id is not a secret; config.js supplies the sandbox one when no override is set.
+    const clientId = (await secrets.get("ABDM_CLIENT_ID")) || defaultClientId || null;
     const clientSecret = await secrets.get("ABDM_CLIENT_SECRET");
     if (!clientId || !clientSecret) throw new AbdmError("ABDM client credentials not configured");
     let res;

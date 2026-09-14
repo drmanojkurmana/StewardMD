@@ -148,23 +148,32 @@ export async function makeHiuMockGateway({ env, deps, handleIngress, tenantId = 
     // Knobs: `partial` (corrupt entry 0) + `callbackDelayMs` are consumed HERE; the ordering knobs (outOfOrder /
     // duplicate / retryAfterAck) are realized by the test's explicit fire/consume sequencing over these primitives.
     firePush: async ({ docs = [], partial = behavior.partial, transactionId = state.transactionId, includeConsentId = true } = {}) => {
-      const hip = await hipSession();
-      const entries = [];
-      for (let i = 0; i < docs.length; i++) {
-        const e = await hip.seal(JSON.stringify(docs[i]));
-        let content = e.content;
-        if (partial && i === 0) { const raw = [...atob(e.content)]; raw[raw.length - 1] = String.fromCharCode(raw[raw.length - 1].charCodeAt(0) ^ 1); content = btoa(raw.join("")); }
-        entries.push({ careContextReference: "cc-" + i, content, checksum: e.checksum });
-      }
-      /* TASK 7.8: the push carries its page keyMaterial, as this repository's own HIP push does
-       * (abdm/hip.js#pushPage puts { transactionId, keyMaterial, careContextReference, entries } on
-       * the wire). It was omitted here while every test passed hipKeyMaterial to consumeTransfer by
-       * hand; the ingress now reads it off the event, so the mock has to send what a real HIP sends. */
-      const payload = { type: "data-push", transactionId, entries, keyMaterial: state.hip && state.hip.keyMaterial };
+      const payload = await pushPayload({ docs, partial, transactionId });
       if (includeConsentId) payload.consentId = state.consentId;
       return deliverWebhook(payload);
     },
+    // The V3 shape of the same push: plain JSON to the dataPushUrl, no JWS envelope, no `type`.
+    v3PushBody: async ({ docs = [], partial = behavior.partial, transactionId = state.transactionId } = {}) => {
+      const { type, ...body } = await pushPayload({ docs, partial, transactionId });
+      return body;
+    },
   };
+
+  async function pushPayload({ docs, partial, transactionId }) {
+    const hip = await hipSession();
+    const entries = [];
+    for (let i = 0; i < docs.length; i++) {
+      const e = await hip.seal(JSON.stringify(docs[i]));
+      let content = e.content;
+      if (partial && i === 0) { const raw = [...atob(e.content)]; raw[raw.length - 1] = String.fromCharCode(raw[raw.length - 1].charCodeAt(0) ^ 1); content = btoa(raw.join("")); }
+      entries.push({ careContextReference: "cc-" + i, content, checksum: e.checksum });
+    }
+    /* TASK 7.8: the push carries its page keyMaterial, as this repository's own HIP push does
+     * (abdm/hip.js#pushPage puts { transactionId, keyMaterial, careContextReference, entries } on
+     * the wire). It was omitted here while every test passed hipKeyMaterial to consumeTransfer by
+     * hand; the ingress now reads it off the event, so the mock has to send what a real HIP sends. */
+    return { type: "data-push", transactionId, entries, keyMaterial: state.hip && state.hip.keyMaterial };
+  }
 }
 
 // ── Stage-5 Task-9: the end-to-end mock plays a HIU vs the REAL HIP SERVE path (mirror/inverse of the above) ──

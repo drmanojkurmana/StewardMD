@@ -84,7 +84,9 @@ test("1b. a consent request with no medical registration number is REFUSED", asy
 
 test("1c. an unconfigured HIU id fails closed rather than sending an unroutable request", async () => {
   const deps = makeDeps();
-  await assert.rejects(() => requestConsent({ ...ENV, ABDM_HIU_ID: "" }, deps, makeReq()));
+  // Since the V3 merge the sandbox has its own HIU id in code (config.js), so "unconfigured" is now only
+  // reachable where no identity exists in code: production.
+  await assert.rejects(() => requestConsent({ ...ENV, ABDM_ENV: "production", ABDM_HIU_ID: "" }, deps, makeReq()));
   assert.equal(deps.gateway.calls.length, 0);
 });
 

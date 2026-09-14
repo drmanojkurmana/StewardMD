@@ -43,7 +43,8 @@ export async function onRequest(context) {
 
   // One gateway session, shared by every ABHA call in this request.
   const gw = makeGateway({
-    baseUrl: cfg.gatewayBase, cmId: cfg.cmId, fetch, kv: env.MAIK_KV, secrets: makeSecrets(env),
+    baseUrl: cfg.gatewayBase, cmId: cfg.cmId, clientId: cfg.clientId, trafficHeld: cfg.trafficHeld,
+    fetch, kv: env.MAIK_KV, secrets: makeSecrets(env),
   });
 
   let token;

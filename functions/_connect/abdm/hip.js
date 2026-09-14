@@ -12,6 +12,7 @@
 // WHOLE transfer (never drop-and-serve-the-rest) on ANY cross-patient / out-of-scope record, so no cross-patient
 // bytes ever reach sealEntries. It is DUAL-ADVERSARIAL-reviewed — see the invariants inline.
 import { flagOn } from "../testkit.js";
+import { abdmConfig } from "./config.js";
 import { sealEntries } from "./hip-crypto.js";                                  // Task 3: ONE fresh keyMaterial per page (call WITHOUT io — prod path)
 import { serializeNdhm, validateNdhmDoc } from "../connectors/abdm/serialize.js"; // Task 2: SCCM -> NDHM-FHIR + structural gate
 import { revalidateForRequest, getConsentReqByConsentId } from "./consent.js";  // Stage-4: the request-time R4 checklist + the FRESH by-consentId D1 reload (R5 authority)
@@ -263,7 +264,7 @@ export async function serveTransfer(env, deps, req) {
     // hipId + envName drive Composition.attester.party (the HFR facility Organization) - the Main Envelope
     // requirement. Absent hipId => the bundle is emitted unattested rather than attested to a blank facility.
     const ctx = { now: (typeof deps.now === "function" ? deps.now : () => new Date(nowIso)), tenant: { id: req.tenantId },
-                  hipId: req.hipId || (env && env.ABDM_HIP_ID) || null, envName: (env && env.ABDM_ENV) || "sandbox" };
+                  hipId: req.hipId || abdmConfig(env).hipId || null, envName: abdmConfig(env).envName };
     const doc = serializeNdhm(ctx, record);
     const v = validateNdhmDoc(doc);
     if (!v.ok) { warnings.push({ careContextRef: rec.careContextRef, errors: v.errors }); continue; }

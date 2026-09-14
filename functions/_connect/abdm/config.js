@@ -20,6 +20,11 @@ const ENVS = {
     abhaAddressApiHost: "https://abhasbx.abdm.gov.in", // ABHA-address verification lives under /abha/api/v3/phr/web
     abhaAddressPrefix: "/abha/api/v3/phr/web",
     abhaPrefix: "/abha/api/v3",
+    // StewardMD's OWN sandbox registration (bridge SBXID_062379, MAIKNOWLEDGE LLP; HFR facility IN2810006668
+    // linked as HIP + HIU). Moved out of the deploy config at the 2026-09-14 merge: production text bindings
+    // are at their limit and the owner forbids new vars. It lives ONLY on the sandbox entry, so a
+    // production configuration can never inherit a sandbox identity. The secret stays a Pages secret.
+    identity: { clientId: "SBXID_062379", hipId: "IN2810006668", hiuId: "IN2810006668" },
   },
   production: {
     cmId: "abdm",
@@ -28,6 +33,10 @@ const ENVS = {
     abhaPrefix: "/api/abha/v3",                      // prod ABHA base is https://abha.abdm.gov.in/api/abha
     abhaAddressApiHost: "https://phr.abdm.gov.in",
     abhaAddressPrefix: "/api/phr/web/v3",
+    identity: null,                                  // none: a hospital's production IDs come from its own abdm profile
+    // Owner A2 (2026-09-14): NO production ABDM traffic until India-region hosting from the AWS move exists.
+    // gateway.js refuses every outbound call while this is set.
+    trafficHeld: "production ABDM traffic is held until India-region hosting exists (owner decision A2)",
   },
 };
 
@@ -47,8 +56,12 @@ export function abdmConfig(env) {
     abhaAddressBase: base.abhaAddressApiHost,
     abhaAddressPrefix: base.abhaAddressPrefix,
     callbackBase,
-    hipId: (env && env.ABDM_HIP_ID) || "",            // HFR facility id; empty until Software Linkage is done
-    hiuId: (env && env.ABDM_HIU_ID) || "",            // may be the same facility id as the HIP (FAQ Q22)
+    // An env override still wins (tests, the local receiver script); otherwise the environment's own
+    // identity, which only the sandbox has. Production resolves to empty and every caller fails closed.
+    clientId: (env && env.ABDM_CLIENT_ID) || (base.identity && base.identity.clientId) || "",
+    hipId: (env && env.ABDM_HIP_ID) || (base.identity && base.identity.hipId) || "",   // HFR facility id
+    hiuId: (env && env.ABDM_HIU_ID) || (base.identity && base.identity.hiuId) || "",   // may equal the HIP id (FAQ Q22)
+    trafficHeld: base.trafficHeld || null,
   };
 }
 

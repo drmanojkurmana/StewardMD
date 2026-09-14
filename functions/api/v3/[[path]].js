@@ -57,7 +57,7 @@ export async function onGenerateToken({ env, deps, body }) {
     await deps.audit({ action: "abdm.linktoken.uncorrelated", outcome: "skipped", ts: deps.now() }).catch(() => {});
     return;
   }
-  await putToken(deps, { hipId: env.ABDM_HIP_ID, abhaHash, token });
+  await putToken(deps, { hipId: abdmConfig(env).hipId, abhaHash, token });
 }
 
 const HANDLERS = {
@@ -87,7 +87,7 @@ export async function onRequest(context) {
     // hip/on-notify, hip/on-request, hiNotify, on-share). Same session-token seam as the outbound side.
     gateway: makeGateway({
       baseUrl: cfg.gatewayBase, cmId: cfg.cmId, hipId: cfg.hipId, hiuId: cfg.hiuId,
-      fetch, kv: env.MAIK_KV, now: () => new Date(), secrets: makeSecrets(env),
+      clientId: cfg.clientId, trafficHeld: cfg.trafficHeld, fetch, kv: env.MAIK_KV, now: () => new Date(), secrets: makeSecrets(env),
     }),
     // The only HIP source that can answer without the doctor's device being awake, which is the whole
     // point of the 20-minute data-push budget. See consented-store.js.
