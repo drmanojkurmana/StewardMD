@@ -391,7 +391,7 @@
         return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>Free</span></button>";
       }).join("") : '<div class="w-bedcell unknown"><span>Bed list not configured</span></div>';
       var unplaced = (w.unplaced || []).map(function (o) {
-        return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
+        return '<div class="w-bedcell occ"><b>-</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
       }).join("");
       return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4></div>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
@@ -1450,7 +1450,7 @@
        * long list. */
       (t != null && state.timelineFilter
         ? '<p class="w-hint">' + ms("info") + "Showing only " + esc(filterLabel(state.timelineFilter)).toLowerCase() +
-          " &mdash; " + esc(shown.length) + " of " + esc(t.length) + ". " +
+          " - " + esc(shown.length) + " of " + esc(t.length) + ". " +
           '<button class="w-btn ghost sm" data-w-act="timelinefilter:all">Show everything</button></p>'
         : "") +
       (t == null ? '<p class="w-empty">Loading the history.</p>'
