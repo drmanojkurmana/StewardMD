@@ -168,14 +168,23 @@ export function learnColumns(headers, screen, resp) {
   const S = (Array.isArray(screen) ? screen : []).slice(0, 200);
   const out = {};
   if (!H.length || !rows.length || !S.length) return out;
+  /* PHONE BUDGET. This runs synchronously on the app WebView's only thread, right after a proof, on
+   * lists the size of a ward (GHIS: 668 rows, ~30 fields). The first version paired every key with
+   * every other key over every row with an array `includes` inside: tens of millions of string
+   * compares, a 30-40s freeze per view on an iPhone that read as "stuck" (2026-09-15). Now: Set
+   * membership, the pair pass only over keys whose values actually begin or end some screen cell,
+   * and a smaller row sample for the pair pass. Same answers on every test, milliseconds instead. */
   const keys = [];
   for (const r of rows) for (const k of Object.keys(r || {})) if (k.charAt(0) !== '_' && !keys.includes(k)) keys.push(k);
   const nv = (v) => norm(v);
-  const byKey = new Map(keys.map((k) => [k, new Set(rows.map((r) => nv(r[k])).filter((x) => x.length >= 2))]));
+  const normed = rows.map((r) => { const o = {}; for (const k of keys) o[k] = nv(r[k]); return o; });
+  const byKey = new Map(keys.map((k) => [k, new Set(normed.map((r) => r[k]).filter((x) => x.length >= 2))]));
+  const PAIR_ROWS = 60;
   for (let i = 0; i < H.length; i += 1) {
     const cells = S.map((r) => r[i]).filter((c) => c != null && String(c).trim());
     const cellsN = cells.map(nv).filter((x) => x.length >= 2);
     if (!cellsN.length) continue;
+    const cellSet = new Set(cellsN);
     const need = Math.max(1, Math.ceil(cellsN.length * 0.5));
     let best = null, bestHits = 0;
     for (const k of keys) {
@@ -185,14 +194,24 @@ export function learnColumns(headers, screen, resp) {
       if (hits > bestHits) { best = k; bestHits = hits; }
     }
     if (best && bestHits >= need) { out[H[i]] = { key: best }; continue; }
+    // Composite: only keys whose values start or end some cell can be half of a joined column.
+    const sample = normed.slice(0, PAIR_ROWS);
+    const starts = [], ends = [];
+    for (const k of keys) {
+      let s = false, e = false;
+      for (const r of sample) { const v = r[k]; if (!v) continue; for (const c of cellsN) { if (!s && c.startsWith(v) && v.length < c.length) s = true; if (!e && c.endsWith(v) && v.length < c.length) e = true; if (s && e) break; } if (s && e) break; }
+      if (s) starts.push(k);
+      if (e) ends.push(k);
+    }
     let pair = null, pairHits = 0;
-    for (const a of keys) for (const b of keys) {
+    for (const a of starts) for (const b of ends) {
       if (a === b) continue;
       let hits = 0;
-      for (const r of rows) { const j = nv(r[a]) + nv(r[b]); if (j.length >= 2 && cellsN.includes(j)) hits += 1; }
+      for (const r of sample) { const j = r[a] + r[b]; if (j.length >= 2 && cellSet.has(j)) hits += 1; }
       if (hits > pairHits) { pair = [a, b]; pairHits = hits; }
     }
-    if (!pair || pairHits < need) continue;
+    const needPair = Math.max(1, Math.ceil(Math.min(cellsN.length, sample.length) * 0.5));
+    if (!pair || pairHits < needPair) continue;
     let join = ' ';
     for (const r of rows) {
       const a = String(r[pair[0]] == null ? '' : r[pair[0]]).trim(), b = String(r[pair[1]] == null ? '' : r[pair[1]]).trim();

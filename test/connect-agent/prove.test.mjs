@@ -71,6 +71,26 @@ test('learnColumns binds each screen column to the response field by VALUE, neve
   assert.equal(named[0].TestName, 'Haemoglobin', 'raw fields survive so a chained id is still readable');
 });
 
+test('learnColumns stays within a phone budget on a ward-sized list (668 rows x 30 fields, 8 headers)', () => {
+  // It runs synchronously on the app WebView's only thread; the first version froze an iPhone for
+  // 30-40s per view on exactly this shape. Same answer, but it must be fast.
+  const headers = ['MR', 'Name', 'Bed', 'Age', 'Sex', 'Ward', 'Doctor', 'Range'];
+  const rows = [], screen = [];
+  for (let i = 0; i < 668; i += 1) {
+    const r = { MRNo: 'MR9' + String(100000 + i), PatientName: 'PATIENT NUMBER ' + i, BedName: 'B-' + (i % 40), AgeYears: String(20 + (i % 60)), Gender: i % 2 ? 'Male' : 'Female', WardName: 'WARD ' + (i % 7), Consultant: 'DR X ' + (i % 9), Low: String(i % 13), High: String(17 + (i % 5)) };
+    for (let k = 0; k < 21; k += 1) r['extra' + k] = 'v' + ((i * 7 + k) % 97);
+    rows.push(r);
+    screen.push([r.MRNo, r.PatientName, r.BedName, r.AgeYears, r.Gender, r.WardName, r.Consultant, r.Low + ' - ' + r.High]);
+  }
+  const t = Date.now();
+  const cols = learnColumns(headers, screen, rows);
+  const ms = Date.now() - t;
+  assert.deepEqual(cols.MR, { key: 'MRNo' });
+  assert.deepEqual(cols.Name, { key: 'PatientName' });
+  assert.deepEqual(cols.Range, { keys: ['Low', 'High'], join: ' - ' });
+  assert.ok(ms < 400, 'learnColumns took ' + ms + 'ms on a ward-sized list; must stay well under a second on a phone');
+});
+
 test('learnColumns refuses a column no response field reproduces on screen (never a guess)', () => {
   const cols = learnColumns(['Result', 'Comment'], [['11.2', 'looks fine'], ['9.1', 'within range']],
     [{ Result: '11.2', Flag: 'H' }, { Result: '9.1', Flag: '' }]);
