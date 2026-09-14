@@ -19,6 +19,12 @@
  *   byPatient(tenantId, resourceType, patientId)     -> record[]            latest version per id
  *   latestByType(tenantId, resourceType, limit, opts) -> record[]           latest per id, a roster;
  *                                                                           opts.newest: most recently written first
+ *   latestByStatus(tenantId, resourceType, statuses, limit) -> record[]     OPTIONAL, latest per id
+ *                                                                           whose body status is one of statuses,
+ *                                                                           oldest first. The outbox drain reads waiting
+ *                                                                           events through it instead of the newest N of
+ *                                                                           everything; an implementation without it gets
+ *                                                                           the old newest-N scan (see outbox.js).
  *   patientsByIdentifier(tenantId, keys)             -> Patient[]           an INDEX SEEK, not a scan
  *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
  *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
@@ -255,6 +261,27 @@ class MemoryRepository {
     }
     const rows = [...byId.values()];
     if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
+    return rows.slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): the latest version of each id whose body status is one
+   * of `statuses`, oldest first, bounded like every other roster read.
+   *
+   * Oldest first is the point. The outbox drain asks for waiting events through here, and the one
+   * that has waited longest must come back first: a newest-first cap is what stranded old pending
+   * events behind settled ones. A caller that needs newer-first already has latestByType.
+   */
+  async latestByStatus(tenantId, resourceType, statuses, limit) {
+    const want = new Set((Array.isArray(statuses) ? statuses : []).filter((s) => typeof s === "string"));
+    const max = rosterLimit(limit);
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
+      byId.set(r.id, r);                     // rows are in seq order, so the last wins
+    }
+    const rows = [...byId.values()].filter((r) => want.has(r.body && r.body.status));
+    rows.sort((a, b) => a.seq - b.seq);
     return rows.slice(0, max).map((r) => clone(r.body));
   }
 

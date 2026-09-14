@@ -75,6 +75,10 @@ for (const code of LANGS) {
 test("every language file is registered as its own native name, and English stays reviewed", () => {
   const I = loadEngine();
   for (const code of LANGS) vm.runInNewContext(read("wardsynq/site/i18n/" + code + ".js"), { window: { WSQI18n: I } });
+  // All eight are offered even before any language file loads (the portal loads one only when picked).
+  const fresh = loadEngine();
+  assert.deepEqual(Array.from(fresh.languages(), (l) => l.code), ["en", "es", "te", "hi", "bn", "kn", "ta", "ml"]);
+  assert.equal(fresh.offered("../x"), false);
   const codes = I.languages().map((l) => l.code);
   assert.deepEqual(new Set(codes), new Set(["en", ...LANGS]));
   assert.equal(I.languages().find((l) => l.code === "en").reviewed, true);

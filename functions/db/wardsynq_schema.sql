@@ -158,3 +158,22 @@ CREATE TRIGGER IF NOT EXISTS wardsynq_audit_chain_no_update BEFORE UPDATE ON war
 BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;
 CREATE TRIGGER IF NOT EXISTS wardsynq_audit_chain_no_delete BEFORE DELETE ON wardsynq_audit_chain
 BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;
+
+-- THE OUTBOX STATUS INDEX (2026-09-14, closing the 200-row scan gap).
+--
+-- The outbox drain used to read the newest N events of the internal _wardsynq_outbox type and pick
+-- out the waiting ones. On a hospital past N settled events an old pending event sat beyond the
+-- window forever: never retried, never reported, while the health check counted only what the same
+-- window could see. Raising N only moves the wall; a newest-N scan is not a status seek.
+--
+-- So the drain now asks for waiting rows BY STATUS (pending, retry, running), oldest first, and
+-- this index is what keeps that seek cheap no matter how many settled events pile up. The status
+-- lives inside the body JSON next to everything else the event carries - a dedicated column would
+-- mean backfilling every existing row, and a backfill that rewrites history is exactly what an
+-- append-only store must not do. An expression index walks the same field with no row touched.
+--
+-- Re-runnable like everything else in this file (IF NOT EXISTS): applying the file again, or
+-- applying it to a database that already has the index, changes nothing. A database WITHOUT it
+-- still answers the status query correctly, only slower, so code can deploy before or after.
+CREATE INDEX IF NOT EXISTS idx_wardsynq_record_outbox_status
+  ON wardsynq_record (tenant_id, resource_type, json_extract(body, '$.status'));

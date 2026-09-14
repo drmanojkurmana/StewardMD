@@ -232,9 +232,22 @@
     return true;
   }
 
-  function languages() { return LANGS.slice(); }
+  /* The languages the portal OFFERS (owner decision D6), listed before their files load: portal.js loads a
+   * language file only when it is picked, so a list built from register() alone would show English only. */
+  var OFFERED = [["en", "English"], ["es", "Español"], ["te", "తెలుగు"], ["hi", "हिन्दी"], ["bn", "বাংলা"], ["kn", "ಕನ್ನಡ"], ["ta", "தமிழ்"], ["ml", "മലയാളം"]];
 
-  var api = { t: t, normalize: normalize, missingKeys: missingKeys, register: register, languages: languages, _catalogs: CATALOGS };
+  /** True for a code the portal offers; the loader fetches no other file. */
+  function offered(code) { return OFFERED.some(function (o) { return o[0] === code; }); }
+
+  /** Offered languages (registered state where loaded, reviewed:false until then), then any other registered. */
+  function languages() {
+    var byCode = {};
+    LANGS.forEach(function (l) { byCode[l.code] = l; });
+    return OFFERED.map(function (o) { return byCode[o[0]] || { code: o[0], name: o[1], reviewed: false }; })
+      .concat(LANGS.filter(function (l) { return !offered(l.code); }));
+  }
+
+  var api = { t: t, normalize: normalize, missingKeys: missingKeys, register: register, languages: languages, offered: offered, _catalogs: CATALOGS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   if (root) root.WSQI18n = api;
 })(typeof window !== "undefined" ? window : null);

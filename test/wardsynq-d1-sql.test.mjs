@@ -34,6 +34,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { D1Repository } from "../functions/_wardsynq/repository-d1.js";
+import { TYPE, outboxEvent } from "../functions/_wardsynq/outbox.js";
 import { VersionConflictError, MemoryRepository, MAX_ROSTER } from "../functions/_wardsynq/repository.js";
 import { RecordService } from "../functions/_wardsynq/service.js";
 import { makeActor, KIND, TIER } from "../wardsynq/wardsynq-actors.js";
@@ -261,4 +262,45 @@ test("the roster limit is honoured up to one shared ceiling, and the memory and 
   // The ceiling is still a ceiling, and it is the SAME one on both sides of the port.
   assert.equal((await mem.latestByType("t1", "Patient", 99999)).length, MAX_ROSTER);
   assert.equal((await sql.latestByType("t1", "Patient", 99999)).length, MAX_ROSTER);
+});
+
+/* REGRESSION, 2026-09-14. The outbox drain read the newest N events and picked out the waiting
+ * ones, so an old pending event behind more than N settled events was never retried or reported.
+ * The drain now reads waiting rows BY STATUS through latestByStatus, oldest first, with
+ * idx_wardsynq_record_outbox_status keeping the seek cheap.
+ *
+ * The two implementations are asserted TOGETHER, like the roster ceiling above: a status read
+ * that differs between the memory double and the real D1 store is how a test suite stays green
+ * over a defect only production has. The shipped schema is applied, not hand-written SQL, so this
+ * also proves the index declaration itself runs. */
+test("waiting outbox events are read by status on real SQL: an old pending row behind 200 settled rows is found, on both stores", { skip: DatabaseSync ? false : SKIP }, async () => {
+  const raw = freshDb();
+  const mem = new MemoryRepository();
+  const sql = new D1Repository(d1(raw));
+
+  const idx = raw.prepare("SELECT name FROM sqlite_master WHERE type='index' AND name='idx_wardsynq_record_outbox_status'").all();
+  assert.equal(idx.length, 1, "the shipped schema declares the outbox status index");
+
+  const old = outboxEvent("consultation.saved", { encounterId: "old" }, "2026-01-01T00:00:00.000Z");
+  await mem.append("t1", [old]);
+  await sql.append("t1", [old]);
+  for (let i = 0; i < 250; i++) {
+    const done = { ...outboxEvent("bulk.ping", { i }), status: "done", doneAt: "2026-06-01T00:00:00.000Z" };
+    await mem.append("t1", [done]);
+    await sql.append("t1", [done]);
+  }
+
+  const waiting = ["pending", "retry", "running"];
+  const fromMem = await mem.latestByStatus("t1", TYPE, waiting, 200);
+  const fromSql = await sql.latestByStatus("t1", TYPE, waiting, 200);
+  assert.deepEqual(fromSql.map((e) => e.id), fromMem.map((e) => e.id), "both sides of the port agree on who is waiting");
+  assert.equal(fromSql.length, 1, "the settled pile does not hide the waiter on real SQL");
+  assert.equal(fromSql[0].id, old.id, "the old pending row is found behind 250 newer delivered rows");
+
+  // Settled rows are latest-per-id too: a retried event whose newest version is done is not waiting.
+  const retried = { ...old, version: 2, status: "done", doneAt: "2026-06-02T00:00:00.000Z" };
+  await mem.append("t1", [retried]);
+  await sql.append("t1", [retried]);
+  assert.equal((await mem.latestByStatus("t1", TYPE, waiting, 200)).length, 0);
+  assert.equal((await sql.latestByStatus("t1", TYPE, waiting, 200)).length, 0);
 });

@@ -152,6 +152,33 @@ class D1Repository {
   }
 
   /**
+   * OPTIONAL (see repository.js): latest version per id whose body status is one of `statuses`,
+   * oldest first. The status lives in the body JSON - there is deliberately no status column (see
+   * the outbox index note in wardsynq_schema.sql) - so the predicate reads it with json_extract,
+   * which idx_wardsynq_record_outbox_status keeps cheap. Without that index this still answers
+   * correctly, only slower.
+   *
+   * The IN list is placeholders, never interpolation: statuses arrive as outbox constants, but a
+   * query builder that trusts its caller is how a constant becomes an injection one refactor later.
+   * Non-string entries are dropped before binding, so a stray value narrows the read instead of
+   * widening it.
+   */
+  async latestByStatus(tenantId, resourceType, statuses, limit) {
+    const want = (Array.isArray(statuses) ? statuses : []).filter((s) => typeof s === "string");
+    if (!want.length) return [];
+    const max = rosterLimit(limit);
+    const r = await this.db
+      .prepare(
+        "SELECT r.body FROM wardsynq_record r " +
+        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
+        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? " +
+        "AND json_extract(r.body, '$.status') IN (" + want.map(() => "?").join(",") + ") ORDER BY r.seq ASC LIMIT ?"
+      )
+      .bind(tenantId, resourceType, tenantId, resourceType, ...want, max).all();
+    return (r.results || []).map(parseBody);
+  }
+
+  /**
    * TASK 9.6. The audit INSERT, with the same two guards the OTHER writer of this table already had.
    *
    * `connect_audit_event` is documented "append-only; metadata only, NO PHI" and has two writers.

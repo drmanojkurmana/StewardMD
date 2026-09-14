@@ -27,6 +27,8 @@
   "use strict";
   var KEY = "wsqPortalSession";
   var LANG_KEY = "wsqPortalLang";
+  // Cache token for wardsynq/site/i18n/<code>.js. Bump it (here, not in the language files) when translations merge.
+  var LANG_FILES_V = 1;
   function tr(key, vars) {
     var I = typeof window !== "undefined" && window.WSQI18n, lang = "en";
     try { lang = document.documentElement.lang || "en"; } catch (e) {}
@@ -185,8 +187,10 @@
   var loadedLangs = { en: true };
   function ensureLangLoaded(code, cb) {
     if (loadedLangs[code]) return cb();
+    // The code comes from localStorage or the switcher: only an offered language names a file.
+    if (!window.WSQI18n || !window.WSQI18n.offered(code)) return cb();
     var el = document.createElement("script");
-    el.src = "/wardsynq/site/i18n/" + code + ".js";
+    el.src = "/wardsynq/site/i18n/" + code + ".js?v=" + LANG_FILES_V;
     el.onload = el.onerror = function () { loadedLangs[code] = true; cb(); };
     document.head.appendChild(el);
   }
@@ -309,6 +313,6 @@
     }
   });
 
-  var savedLang = loadLang();
+  var savedLang = window.WSQI18n && window.WSQI18n.offered(loadLang()) ? loadLang() : "en";
   ensureLangLoaded(savedLang, function () { document.documentElement.lang = savedLang; refresh(); });
 })();

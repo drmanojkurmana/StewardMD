@@ -125,7 +125,7 @@ const DEPENDENCIES = [
       const notes = [];
       if (age >= LIMITS.outboxDegradedMinutes) notes.push(`the oldest waiting event has waited ${age} minutes`);
       if (h.dead.length) notes.push(`${h.dead.length} event${h.dead.length === 1 ? " has" : "s have"} failed for good`);
-      if (h.partial) notes.push("only the newest 500 events were checked");
+      if (h.partial) notes.push("the queue could not be read in full, so these counts are lower bounds");
       return notes.length ? degraded(notes.join("; ") + ".") : up(h.pending ? `${h.pending} waiting, oldest ${age} minutes.` : "Nothing waiting.");
     },
   },
