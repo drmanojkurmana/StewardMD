@@ -317,7 +317,8 @@ test("THE CAPABILITYSTATEMENT IS DERIVED FROM THE SAME TABLES THE PARSER USES", 
   }
   assert.ok(cs.rest[0].resource.every((r) => ["Provenance", "Practitioner", "Organization", "CodeSystem", "ValueSet", "AuditEvent", "Subscription", "Group"].includes(r.type) || Object.values(FHIR_TYPE).includes(r.type)));
   assert.equal(cs.format[0], "application/fhir+json");
-  assert.ok(!/create|update|delete/.test(JSON.stringify(cs.rest[0].resource.map((r) => r.interaction))));
+  // G10: Subscription create on the staff door is the only write a non-inbound statement declares.
+  assert.ok(!/create|update|delete/.test(JSON.stringify(cs.rest[0].resource.filter((r) => r.type !== "Subscription").map((r) => r.interaction))));
   assert.equal(cs.rest[0].interaction, undefined, "no transaction or batch on a read-only door");
 
   // With the inbound door open, and only then, writes are declared exactly as implemented.

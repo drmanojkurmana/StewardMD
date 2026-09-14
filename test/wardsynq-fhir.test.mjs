@@ -189,9 +189,14 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
   /* READ, VREAD, HISTORY and SEARCH - every one of them real - and nothing that writes. This list
    * widened on 2026-09-08 when vread and history were implemented; it must never widen ahead of
    * the implementation, because a client trusts the declaration. */
-  const codes = new Set(c.rest[0].resource.flatMap((r) => r.interaction.map((i) => i.code)));
+  /* G10: Subscription create is the one write, and only on the staff door (no smart option); the SMART
+   * door's statement advertises none. Every clinical type stays read-only either way. */
+  const codes = new Set(c.rest[0].resource.filter((r) => r.type !== "Subscription").flatMap((r) => r.interaction.map((i) => i.code)));
   assert.deepEqual([...codes].sort(), ["history-instance", "read", "search-type", "vread"]);
   for (const bad of ["create", "update", "delete", "patch"]) assert.ok(!codes.has(bad), `must not advertise ${bad}`);
+  assert.deepEqual(c.rest[0].resource.find((r) => r.type === "Subscription").interaction.map((i) => i.code), ["read", "search-type", "create"]);
+  const smartCs = capabilityStatement({ date: "2026-09-07T00:00:00.000Z", smart: { authorize: "https://x/a", token: "https://x/t" } });
+  assert.ok(!smartCs.rest[0].resource.some((r) => r.interaction.some((i) => ["create", "update", "delete", "patch"].includes(i.code))), "the SMART door advertises no write at all");
   // And it says outright that this is not profile-validated, where a machine and a human both see
   // it - because a CapabilityStatement that overstates is how a receiver trusts what it should not.
   assert.match(c.implementation.description, /no implementation guide is carried/);
@@ -205,7 +210,7 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
    * ValueSet (terminology) and AuditEvent (the audit trail). Their own tests pin what they declare. */
   // G9 added Group: derived (the ward census), read and search only.
   assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 8, "it advertises exactly what it maps, plus the derived and terminology types");
-  for (const r of c.rest[0].resource.filter((x) => ["CodeSystem", "ValueSet", "AuditEvent", "Subscription", "Group"].includes(x.type))) assert.deepEqual(r.interaction.map((i) => i.code), ["read", "search-type"], r.type + " is read-only");
+  for (const r of c.rest[0].resource.filter((x) => ["CodeSystem", "ValueSet", "AuditEvent", "Group"].includes(x.type))) assert.deepEqual(r.interaction.map((i) => i.code), ["read", "search-type"], r.type + " is read-only");
   const derived = c.rest[0].resource.filter((r) => ["Provenance", "Practitioner", "Organization"].includes(r.type));
   assert.equal(derived.length, 3);
   for (const r of derived.filter((x) => x.type !== "Provenance")) {

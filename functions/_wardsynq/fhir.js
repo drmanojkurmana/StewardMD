@@ -945,9 +945,11 @@ function capabilityStatement(opts) {
         },
         {
           type: "Subscription",
-          interaction: [{ code: "read" }, { code: "search-type" }],
+          /* G10. create only on the staff door (a SMART bearer here is narrowed to READ and this server issues no write scopes). */
+          interaction: [{ code: "read" }, { code: "search-type" }, ...(o.smart ? [] : [{ code: "create", documentation: "staff.admin only; rest-hook, application/fhir+json, id-only, exactly one published topic, no header, no end; the destination must be a public https address; the signing secret is returned once in the X-WardSynQ-Webhook-Secret response header" }])],
           searchParam: [{ name: "status", type: "token" }, { name: "criteria", type: "string" }],
-          documentation: "R4 Subscriptions Backport, rest-hook, id-only payload, one Subscription per topic (urn:stewardmd:fhir:SubscriptionTopic:<event>). Created and managed by the hospital administrator on the Integrations screen and delivered by the webhook outbox (signed, retried, auto-disabled); not created over FHIR, and $status is not offered. A SMART backend-services token with system/Subscription.read, or a staff session with staff.admin.",
+          operation: [{ name: "status", definition: "http://hl7.org/fhir/uv/subscriptions-backport/OperationDefinition/backport-subscription-status" }],
+          documentation: "R4 Subscriptions Backport, rest-hook, id-only payload, one Subscription per topic (urn:stewardmd:fhir:SubscriptionTopic:<event>). Created over FHIR on the staff door or on the Integrations screen, both through the same registration (address checks, sealed secret, audit), changed and turned off on the Integrations screen, and delivered by the webhook outbox (signed, retried, auto-disabled). Subscription/{id}/$status answers a searchset with one SubscriptionStatus (subscription, topic, status, type query-status, and the error when delivery disabled it); no event count is given. A SMART backend-services token with system/Subscription.read, or a staff session with staff.admin.",
         },
       ],
       operation: [

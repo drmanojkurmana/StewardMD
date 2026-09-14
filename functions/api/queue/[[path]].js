@@ -115,6 +115,7 @@ import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/fhir-route.js";
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
+import { createSubscription } from "../../_wardsynq/fhir-subscription.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
@@ -2235,6 +2236,13 @@ export async function onRequest(context) {
         if (method === "POST") {
           const op = await dispatchOperation(request, env, parts.slice(2), body, fctx);
           if (op) return fhirJson(op.obj, op.status, request);
+          /* G10. POST Subscription is not a clinical write and not the inbound door: it registers a
+           * FHIR-payload webhook through registerWebhook (fhir-subscription.js), under the webhooks'
+           * own gate already applied above (staff.admin), so it answers whether or not inbound is on. */
+          if (parts[2] === "Subscription" && !parts[3]) {
+            const r = await createSubscription(request, env, { ...fctx, body });
+            return fhirJson(r.obj, r.status, request, r.headers);
+          }
         }
         /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
          * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write

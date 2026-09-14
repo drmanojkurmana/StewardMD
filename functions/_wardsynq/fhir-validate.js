@@ -119,6 +119,8 @@ const VS = Object.freeze({
   allergyClinical: "active|inactive|resolved",
   allergyVer: "unconfirmed|confirmed|refuted|entered-in-error",
   immunizationStatus: "completed|entered-in-error|not-done",
+  subscriptionStatus: "requested|active|error|off",
+  subscriptionChannel: "rest-hook|websocket|email|sms|message",
 });
 
 /** A CodeableConcept whose R4 binding is REQUIRED: at least one coding must carry one of these codes in this system. */
@@ -355,6 +357,9 @@ const RESOURCES = Object.freeze({
     "reaction[]": { ...BACKBONE, date: "dateTime", detail: "Reference(Observation)", reported: "boolean" },
     "protocolApplied[]": { ...BACKBONE, series: "string", authority: "Reference(Organization)", "targetDisease[]": "CodeableConcept",
       "doseNumber[x]!": { doseNumberPositiveInt: "positiveInt", doseNumberString: "string" }, "seriesDoses[x]": { seriesDosesPositiveInt: "positiveInt", seriesDosesString: "string" } } },
+  /* G10. R4 Subscription, so a create over FHIR is checked structurally before its meaning is. */
+  Subscription: { ...DOMAIN, "status!": `code:${VS.subscriptionStatus}`, "contact[]": "ContactPoint", end: "instant", "reason!": "string", "criteria!": "string", error: "string",
+    "channel!": { ...BACKBONE, "type!": `code:${VS.subscriptionChannel}`, endpoint: "url", payload: "code", "header[]": "string" } },
   Bundle: { ...RESOURCE, identifier: "Identifier", "type!": `code:${VS.bundleType}`, timestamp: "instant", total: "unsignedInt",
     "link[]": { ...BACKBONE, "relation!": "string", "url!": "uri" },
     "entry[]": { ...BACKBONE, "link[]": { ...BACKBONE, "relation!": "string", "url!": "uri" }, fullUrl: "uri", resource: "Resource",

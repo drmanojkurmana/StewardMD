@@ -59,8 +59,8 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
     return auditEvents(request, env, { ...fctx, id: fId }, url);
   }
   if (fType === "Subscription") {
-    if (fOp) return { obj: operationOutcome("error", "not-supported", "Subscription is read and searched only; $status is not offered"), status: 404 };
-    return subscriptions(request, env, { ...fctx, id: fId }, url);
+    if (fOp && !(fId && fOp === "$status" && !fVid)) return { obj: operationOutcome("error", "not-supported", "Subscription is read, searched and asked for $status (Subscription/{id}/$status)"), status: 404 };
+    return subscriptions(request, env, { ...fctx, id: fId, op: fOp }, url);
   }
   /* G9. Group: the ward census, derived (fhir-group.js). Read and search only; $export is dispatchBulk's. */
   if (fType === "Group") {
