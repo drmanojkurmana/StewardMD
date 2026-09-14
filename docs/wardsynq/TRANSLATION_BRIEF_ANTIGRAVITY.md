@@ -137,3 +137,10 @@ Not taken, and not to be re-submitted in this form:
   diagnosis and terminology display (2B, 22 to 25, 47) and external translation services (69) contradict
   WardSynQ's rule that clinical text is never machine translated, so it was not imported. The file is in
   commit 363117f5 at `vault/standards/Multilingual-Translation-Rulebook.md`.
+
+## Status (2026-09-15)
+
+All nine portal languages are complete: every English key is translated (test/wardsynq-i18n.test.mjs fails if any
+offered language is missing a key). Keys not already present were machine-translated with Gemini via Vertex AI
+(project stewardmd-498ec), validated for placeholders, digits, em dash, emoji and negation, and the safety-relevant
+keys back-translated to English; meaning held. Every language stays reviewed:false until a human reviewer checks it.

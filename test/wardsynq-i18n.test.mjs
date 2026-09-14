@@ -76,6 +76,8 @@ for (const code of LANGS) {
 
     const missing = I.missingKeys(code);
     console.log(code + ": " + missing.length + " keys still fall back to English");
+    // Owner, 2026-09-15: no partial languages. A new English key ships only with every offered language translated.
+    assert.deepEqual(Array.from(missing), [], code + " is missing translations: " + missing.join(", "));
   });
 }
 
@@ -91,10 +93,10 @@ const NEGATION = {
   es: ["no ", "No ", "nada", "ningun", "ninguna"],
   te: ["లేదు", "లేరు", "లేవు", "కాదు", "కాలేదు", "చెల్లదు", "లేకపోయ", "అనువదించరు"],
   hi: ["नहीं"],
-  bn: ["না", "নেই", "নয়"],
-  kn: ["ಇಲ್ಲ", "ಅಲ್ಲ"],
-  ta: ["இல்லை", "அல்ல"],
-  ml: ["ഇല്ല", "അല്ല"],
+  bn: ["না", "নেই", "নয়", "হয়নি", "হয়নি"],
+  kn: ["ಇಲ್ಲ", "ಅಲ್ಲ", "ಿಲ್ಲ", "ವಲ್ಲ"],
+  ta: ["இல்லை", "அல்ல", "வில்லை", "மில்லை", "ப்படாது", "யாகாது"],
+  ml: ["ഇല്ല", "അല്ല", "ില്ല", "യല്ല", "തല്ല"],
   mr: ["नाही", "नये"],
 };
 

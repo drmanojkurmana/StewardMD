@@ -7,6 +7,9 @@
  * First pass imported from Antigravity's branch feat/wardsynq-multilingual-emr (363117f5), checked for
  * clinical meaning (negation, numbers, placeholders) but not by a native speaker.
  *
+ * COMPLETE (owner: no partial languages, 2026-09-15). Keys not already here were machine-translated with Gemini
+ * via Vertex AI, checked for placeholders, digits and negation, and the safety-relevant keys back-translated.
+ *
  * This file does ONE thing: register this catalog with the engine (window.WSQI18n, loaded first).
  * module.exports = the catalog, for tests. No other logic belongs here.
  */
@@ -16,15 +19,12 @@
   var catalog = {
     "lang.label": "భాష",
     "lang.codedNote": "మందుల పేర్లు, మోతాదులు, పరీక్షల పేర్లు, ఫలితాలు మరియు నిర్ధారణలు మీ వైద్య బృందం నమోదు చేసినట్లే చూపబడతాయి. వాటిని అనువదించరు.",
-
     "portal.title.yours": "మీ రికార్డు",
     "portal.title.proxy": "{name} గారి రికార్డు",
     "portal.thePatient": "రోగి",
     "portal.proxyNote": "మీరు {relationship} గా, రోగి అంగీకారంతో చూస్తున్నారు. వారు పంచుకోవడానికి అంగీకరించినది మాత్రమే మీరు చూడగలరు.",
     "portal.familyMember": "కుటుంబ సభ్యుడు",
-
     "section.failed": "మీ రికార్డులోని ఈ భాగాన్ని లోడ్ చేయలేకపోయాము. ఇక్కడ ఏమీ లేదని దీని అర్థం కాదు. తర్వాత మళ్లీ ప్రయత్నించండి.",
-
     "appt.title": "అపాయింట్‌మెంట్లు",
     "appt.tbc": "సమయం ధృవీకరించాలి",
     "appt.with": "{who} తో",
@@ -35,38 +35,30 @@
     "appt.pref": "మీకు అనుకూలమైన రోజులు లేదా సమయాలు (ఐచ్ఛికం)",
     "appt.send": "అభ్యర్థన పంపండి",
     "appt.sent": "అభ్యర్థన పంపబడింది.",
-
     "meds.title": "ప్రిస్క్రిప్షన్లు మరియు మందులు",
     "meds.empty": "ప్రస్తుత మందులు ఏవీ జాబితాలో లేవు.",
-
     "results.title": "ల్యాబ్ మరియు రేడియాలజీ ఫలితాలు",
     "results.empty": "మీతో ఇంకా ఏ ఫలితాలు పంచుకోబడలేదు.",
-
     "dx.title": "నిర్ధారణలు",
     "dx.empty": "ఏ నిర్ధారణలు జాబితాలో లేవు.",
-
     "allergy.title": "అలర్జీలు",
     "allergy.empty": "ఏ అలర్జీలు నమోదు కాలేదు.",
-
     "dc.title": "డిశ్చార్జి సారాంశాలు మరియు సంరక్షణ సూచనలు",
     "dc.stay": "మీ బస",
     "dc.meds": "మందులు",
     "dc.care": "సంరక్షణ సూచనలు",
     "dc.empty": "మీతో ఏ డిశ్చార్జి సారాంశం పంచుకోబడలేదు.",
-
     "bills.title": "బిల్లులు మరియు చెల్లింపులు",
     "bills.cancelled": "రద్దు చేయబడింది",
     "bills.paid": "చెల్లించబడింది",
     "bills.due": "మిగిలిన బకాయి {amount}",
     "bills.summary": "ఛార్జి {charged}, చెల్లించినది {paid}",
     "bills.empty": "మీకు బిల్లులు లేవు.",
-
     "consents.title": "సమ్మతులు",
     "consents.withdraw": "ఈ సమ్మతిని ఉపసంహరించండి",
     "consents.speak": "దీన్ని ఉపసంహరించడానికి మీ వైద్య బృందంతో మాట్లాడండి.",
     "consents.empty": "ఏ సమ్మతులు నమోదు కాలేదు.",
     "consents.confirm": "ఇప్పటి నుండి ఈ సమ్మతిని ఉపసంహరించాలా? మీ వైద్య బృందం దీన్ని చూస్తుంది.",
-
     "msg.title": "మీ వైద్య బృందానికి సందేశాలు",
     "msg.notEmergency": "ఇది అత్యవసర సహాయం పొందే మార్గం కాదు.",
     "msg.label": "మీ సందేశం",
@@ -76,16 +68,13 @@
     "msg.unanswered": "ఇంకా సమాధానం రాలేదు.",
     "msg.empty": "మీరు ఇంకా ఏ సందేశాలు పంపలేదు.",
     "msg.writeFirst": "ముందు సందేశం రాయండి.",
-
     "phase.loading": "మీ రికార్డు లోడ్ అవుతోంది...",
     "phase.failed": "మీ రికార్డును లోడ్ చేయలేకపోయాము. ఇది కనెక్షన్ లేదా సర్వర్ సమస్య, రికార్డు ఖాళీ అని కాదు.",
     "phase.retry": "మళ్లీ ప్రయత్నించండి",
     "phase.ended": "మీ సెషన్ ముగిసింది.",
     "phase.newCode": "కొత్త కోడ్ కోసం మీ వైద్య బృందాన్ని అడగండి.",
     "phase.startAgain": "మళ్లీ ప్రారంభించండి",
-
     "signout": "సైన్ అవుట్",
-
     "signin.title": "మీ రికార్డులోకి సైన్ ఇన్ చేయండి",
     "signin.intro": "మీ వైద్య బృందం మీకు స్వయంగా ఇచ్చిన యాక్సెస్ ID మరియు కోడ్‌ను వాడండి. కోడ్ ఒక్కసారి మాత్రమే పనిచేస్తుంది.",
     "signin.hospital": "ఆసుపత్రి ID",
@@ -95,10 +84,8 @@
     "signin.checking": "తనిఖీ చేస్తోంది...",
     "signin.invalid": "ఆ కోడ్ చెల్లదు.",
     "signin.unreachable": "ఆసుపత్రిని చేరుకోలేకపోయాము. మీ కనెక్షన్ తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
-
     "action.failed": "అది పూర్తి కాలేదు. ఏమీ పంపబడలేదు.",
     "action.failedShort": "అది పూర్తి కాలేదు.",
-
     "status.title": "ఈరోజు OPD క్యూలో మీ స్థానం",
     "status.loading": "క్యూ తనిఖీ చేస్తోంది...",
     "status.failed": "మీ క్యూ స్థితిని లోడ్ చేయలేకపోయాము. మీరు క్యూలో లేరని దీని అర్థం కాదు. దయచేసి డెస్క్ వద్ద అడగండి.",
@@ -107,6 +94,7 @@
     "status.empty": "మీరు ఈరోజు OPD క్యూలో లేరు.",
     "status.where": "ఎక్కడ: {place}",
     "status.desk": "రిజిస్ట్రేషన్ డెస్క్, ఇంకా ఏ గదికి పంపలేదు",
+    "status.opd": "OPD",
     "status.state.waiting": "వేచి ఉన్నారు",
     "status.state.called": "మిమ్మల్ని పిలిచారు. దయచేసి ఇప్పుడే లోపలికి వెళ్లండి.",
     "status.state.in-consultation": "డాక్టర్‌తో",
@@ -121,7 +109,6 @@
     "status.eta": "అంచనా సమయం: {time}",
     "status.noEta": "సమయ అంచనా లేదు",
     "status.refresh": "మళ్లీ తనిఖీ చేయండి",
-
     "docs.title": "మీ వైద్య బృందం నుండి పత్రాలు",
     "docs.empty": "మీతో ఏ పత్రాలు పంచుకోబడలేదు.",
     "docs.version": "వెర్షన్ {n}",
@@ -138,10 +125,12 @@
     "docs.type.insurance": "బీమా",
     "docs.type.prescription-outside": "మరో డాక్టర్ ప్రిస్క్రిప్షన్",
     "docs.type.other": "ఇతర పత్రం",
-
     "dc.full": "పూర్తి డిశ్చార్జి సారాంశం",
     "dc.print": "ఈ సారాంశాన్ని ప్రింట్ చేయండి",
     "dc.withheld": "మీ వైద్య బృందం మీతో దీని గురించి మాట్లాడే వరకు ఇది నిలిపివేయబడింది.",
+    "dc.entryWithheld": "మీ సంరక్షణ బృందం మీతో చర్చించే వరకు ఇక్కడ ఒక నమోదు నిలిపివేయబడింది. దయచేసి మీ సంరక్షణ బృందాన్ని అడగండి.",
+    "dc.group.active": "సక్రియంగా ఉన్నవి",
+    "dc.group.closed": "పరిష్కరించబడినవి లేదా నిష్క్రియంగా ఉన్నవి",
     "dc.section.admission": "మీ బస",
     "dc.section.diagnoses": "నిర్ధారణలు",
     "dc.section.allergies": "అలర్జీలు",
@@ -151,7 +140,6 @@
     "dc.section.homeMedicines": "బసకు ముందటి మందులు",
     "dc.section.assessment": "డాక్టర్ అంచనా",
     "dc.section.plan": "సంరక్షణ ప్రణాళిక",
-
     "pcopy.noAllergies": "మీకు ఏ అలర్జీలు నమోదు కాలేదు. మీకు తెలిసినవి ఉంటే మీ వైద్య బృందానికి చెప్పండి.",
     "pcopy.dx": "మీ నిర్ధారణలు",
     "pcopy.dxEmpty": "ఏ నిర్ధారణలు నమోదు కాలేదు.",
@@ -163,7 +151,6 @@
     "pcopy.appts": "తర్వాతి అపాయింట్‌మెంట్లు",
     "pcopy.apptsEmpty": "ఏ అపాయింట్‌మెంట్ బుక్ కాలేదు.",
     "pcopy.print": "ప్రింట్",
-
     "nav.map": "మ్యాప్",
     "nav.workstation": "వర్క్‌స్టేషన్",
     "nav.ward": "వార్డు",
@@ -180,6 +167,7 @@
     "nav.reports": "నివేదికలు",
     "nav.billing": "బిల్లింగ్",
     "nav.integration": "ఇంటిగ్రేషన్",
+    "nav.maik": "MaiK",
     "nav.administration": "నిర్వహణ",
     "nav.adminCenter": "అడ్మిన్ సెంటర్",
     "nav.audit": "ఆడిట్ మరియు భద్రత",

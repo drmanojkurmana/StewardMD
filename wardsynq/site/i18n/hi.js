@@ -4,6 +4,9 @@
  * reviewed:false - NOT yet checked by a native speaker with clinical context. English (i18n.js) is
  * the fallback for any key not yet here, so a partial file is always safe to ship.
  *
+ * COMPLETE (owner: no partial languages, 2026-09-15). Keys not already here were machine-translated with Gemini
+ * via Vertex AI, checked for placeholders, digits and negation, and the safety-relevant keys back-translated.
+ *
  * This file does ONE thing: register this catalog with the engine (window.WSQI18n, loaded first).
  * module.exports = the catalog, for tests. No other logic belongs here.
  */
@@ -13,14 +16,12 @@
   var catalog = {
     "lang.label": "भाषा",
     "lang.codedNote": "दवाओं के नाम, खुराक, जाँच के नाम, रिपोर्ट और निदान ठीक वैसे ही दिखाए जाते हैं जैसे आपकी देखभाल टीम ने दर्ज किए हैं। इनका अनुवाद नहीं किया जाता।",
-
     "portal.title.yours": "आपका रिकॉर्ड",
     "portal.title.proxy": "{name} का रिकॉर्ड",
     "portal.thePatient": "मरीज़",
     "portal.proxyNote": "आप {relationship} के रूप में, मरीज़ की सहमति से देख रहे हैं। आप केवल वही देख सकते हैं जो उन्होंने साझा करने की सहमति दी है।",
     "portal.familyMember": "परिवार के सदस्य",
     "section.failed": "हम आपके रिकॉर्ड का यह हिस्सा लोड नहीं कर सके। इसका मतलब यह नहीं है कि यहाँ कुछ नहीं है। बाद में फिर से कोशिश करें।",
-
     "appt.title": "अपॉइंटमेंट",
     "appt.tbc": "समय की पुष्टि होनी बाकी है",
     "appt.with": "{who} के साथ",
@@ -31,7 +32,6 @@
     "appt.pref": "आपके लिए सुविधाजनक दिन या समय (वैकल्पिक)",
     "appt.send": "अनुरोध भेजें",
     "appt.sent": "अनुरोध भेज दिया गया।",
-
     "meds.title": "पर्चे और दवाइयाँ",
     "meds.empty": "अभी कोई दवा सूचीबद्ध नहीं है।",
     "results.title": "लैब और रेडियोलॉजी रिपोर्ट",
@@ -40,26 +40,22 @@
     "dx.empty": "कोई निदान सूचीबद्ध नहीं है।",
     "allergy.title": "एलर्जी",
     "allergy.empty": "कोई एलर्जी दर्ज नहीं है।",
-
     "dc.title": "डिस्चार्ज सारांश और देखभाल के निर्देश",
     "dc.stay": "अस्पताल में आपका समय",
     "dc.meds": "दवाइयाँ",
     "dc.care": "देखभाल के निर्देश",
     "dc.empty": "आपके साथ कोई डिस्चार्ज सारांश साझा नहीं किया गया है।",
-
     "bills.title": "बिल और भुगतान",
     "bills.cancelled": "रद्द",
     "bills.paid": "भुगतान हो गया",
     "bills.due": "बकाया राशि {amount}",
     "bills.summary": "कुल शुल्क {charged}, भुगतान {paid}",
     "bills.empty": "आपका कोई बिल नहीं है।",
-
     "consents.title": "सहमतियाँ",
     "consents.withdraw": "यह सहमति वापस लें",
     "consents.speak": "इसे वापस लेने के लिए अपनी देखभाल टीम से बात करें।",
     "consents.empty": "कोई सहमति दर्ज नहीं है।",
     "consents.confirm": "क्या आप अभी से यह सहमति वापस लेना चाहते हैं? आपकी देखभाल टीम इसे देखेगी।",
-
     "msg.title": "आपकी देखभाल टीम को संदेश",
     "msg.notEmergency": "यह तुरंत मदद पाने का तरीका नहीं है।",
     "msg.label": "आपका संदेश",
@@ -69,7 +65,6 @@
     "msg.unanswered": "अभी तक जवाब नहीं आया है।",
     "msg.empty": "आपने अभी तक कोई संदेश नहीं भेजा है।",
     "msg.writeFirst": "पहले संदेश लिखें।",
-
     "phase.loading": "आपका रिकॉर्ड लोड हो रहा है...",
     "phase.failed": "हम आपका रिकॉर्ड लोड नहीं कर सके। यह कनेक्शन या सर्वर की समस्या है, इसका मतलब यह नहीं कि रिकॉर्ड खाली है।",
     "phase.retry": "फिर से कोशिश करें",
@@ -77,7 +72,6 @@
     "phase.newCode": "नए कोड के लिए अपनी देखभाल टीम से पूछें।",
     "phase.startAgain": "फिर से शुरू करें",
     "signout": "साइन आउट करें",
-
     "signin.title": "अपने रिकॉर्ड में साइन इन करें",
     "signin.intro": "वह एक्सेस आईडी और कोड इस्तेमाल करें जो आपकी देखभाल टीम ने आपको स्वयं दिया था। कोड केवल एक बार काम करता है।",
     "signin.hospital": "अस्पताल आईडी",
@@ -87,10 +81,8 @@
     "signin.checking": "जाँच हो रही है...",
     "signin.invalid": "यह कोड मान्य नहीं है।",
     "signin.unreachable": "हम अस्पताल से संपर्क नहीं कर सके। अपना कनेक्शन जाँचें और फिर से कोशिश करें।",
-
     "action.failed": "यह पूरा नहीं हुआ। कुछ भी नहीं भेजा गया।",
     "action.failedShort": "यह पूरा नहीं हुआ।",
-
     "status.title": "आज ओपीडी कतार में आपकी जगह",
     "status.loading": "कतार देखी जा रही है...",
     "status.failed": "हम आपकी कतार की स्थिति लोड नहीं कर सके। इसका मतलब यह नहीं है कि आप कतार में नहीं हैं। कृपया डेस्क पर पूछें।",
@@ -114,7 +106,6 @@
     "status.eta": "अनुमानित समय: {time}",
     "status.noEta": "समय का कोई अनुमान नहीं",
     "status.refresh": "फिर से देखें",
-
     "docs.title": "आपकी देखभाल टीम के दस्तावेज़",
     "docs.empty": "आपके साथ कोई दस्तावेज़ साझा नहीं किया गया है।",
     "docs.version": "संस्करण {n}",
@@ -131,10 +122,12 @@
     "docs.type.insurance": "बीमा",
     "docs.type.prescription-outside": "दूसरे डॉक्टर का पर्चा",
     "docs.type.other": "अन्य दस्तावेज़",
-
     "dc.full": "पूरा डिस्चार्ज सारांश",
     "dc.print": "यह सारांश प्रिंट करें",
     "dc.withheld": "जब तक आपकी देखभाल टीम आपसे इस पर बात नहीं करती, इसे रोका गया है।",
+    "dc.entryWithheld": "यहाँ एक प्रविष्टि तब तक रोक कर रखी गई है जब तक आपकी देखभाल टीम इस पर आपसे चर्चा नहीं कर लेती। कृपया अपनी देखभाल टीम से पूछें।",
+    "dc.group.active": "सक्रिय",
+    "dc.group.closed": "हल हो चुका या निष्क्रिय",
     "dc.section.admission": "अस्पताल में आपका समय",
     "dc.section.diagnoses": "निदान",
     "dc.section.allergies": "एलर्जी",
@@ -144,7 +137,6 @@
     "dc.section.homeMedicines": "भर्ती से पहले की दवाइयाँ",
     "dc.section.assessment": "डॉक्टर का आकलन",
     "dc.section.plan": "देखभाल की योजना",
-
     "pcopy.noAllergies": "आपके लिए कोई एलर्जी दर्ज नहीं है। अगर आपको किसी एलर्जी के बारे में पता है तो अपनी देखभाल टीम को बताएँ।",
     "pcopy.dx": "आपके निदान",
     "pcopy.dxEmpty": "कोई निदान दर्ज नहीं है।",
@@ -156,7 +148,6 @@
     "pcopy.appts": "अगले अपॉइंटमेंट",
     "pcopy.apptsEmpty": "कोई अपॉइंटमेंट बुक नहीं है।",
     "pcopy.print": "प्रिंट करें",
-
     "nav.map": "मैप",
     "nav.workstation": "वर्कस्टेशन",
     "nav.ward": "वार्ड",
@@ -173,6 +164,7 @@
     "nav.reports": "रिपोर्ट",
     "nav.billing": "बिलिंग",
     "nav.integration": "इंटीग्रेशन",
+    "nav.maik": "MaiK",
     "nav.administration": "प्रशासन",
     "nav.adminCenter": "एडमिन सेंटर",
     "nav.audit": "ऑडिट और सुरक्षा",

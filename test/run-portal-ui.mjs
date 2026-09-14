@@ -96,9 +96,9 @@ try {
   ok(await ev(`return Array.from(document.getElementById("pLang").options, function(o){return o.value;}).join(",")`) === "en,es,te,hi,bn,kn,ta,ml,mr", "the switcher offers the owner's nine languages");
   await pick("te");
   ok(await waitFor(`document.documentElement.lang==="te" && /రికార్డులోకి సైన్ ఇన్/.test(document.body.textContent)`), "Telugu: the sign-in screen redraws in Telugu");
-  ok(await ev(`return Array.from(document.scripts, function(s){return s.src;}).filter(function(u){return /\\/i18n\\//.test(u);}).join(",").replace(/^https?:\\/\\/[^/]+/,"")`) === "/wardsynq/site/i18n/te.js?v=2", "only the chosen language file is fetched, with the bumped token");
+  ok((await ev(`return Array.from(document.scripts, function(s){return s.src;}).filter(function(u){return /\\/i18n\\//.test(u);}).join(",").replace(/^https?:\\/\\/[^/]+/,"")`)).match(/^\/wardsynq\/site\/i18n\/te\.js\?v=\d+$/) !== null, "only the chosen language file is fetched, with a cache token");
   await pick("mr");
-  ok(await waitFor(`document.documentElement.lang==="mr" && /Sign in to your record/.test(document.body.textContent) && document.getElementById("pLang").value==="mr"`), "Marathi: untranslated keys fall back to English, never a raw key");
+  ok(await waitFor(`document.documentElement.lang==="mr" && /तुमच्या नोंदीमध्ये साइन इन करा/.test(document.body.textContent) && !/signin\.title/.test(document.body.textContent) && document.getElementById("pLang").value==="mr"`), "Marathi: the sign-in screen is in Marathi, never a raw key");
   ok(await ev(`return !/signin\\.title|lang\\.label/.test(document.body.textContent)`), "no raw keys on screen");
   await pick("en");
   ok(await waitFor(`document.documentElement.lang==="en" && /Sign in to your record/.test(document.body.textContent)`), "back to English");
