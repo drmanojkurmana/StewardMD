@@ -6167,3 +6167,35 @@ above, "External invoice is not an Invoice"); it is now an explicit policy.
   keeps mapping to the note; the new handling decides what else is written); narrow `BILLING_TYPES` for that value
   only, never globally; add a control to the ABDM card that saves through `/org/update`; update both tests (the
   refusal test's value list and the "count nothing" test). Hospitals without the key stay on `clinical-document`.
+
+## 2026-09-14 Level-2 critical-result alerts tell every on-duty nurse in the ward: a named rule until Nurse-in-Charge exists (owner decision)
+
+Owner decision 2026-09-14: level-2 ("overdue") critical-result alerts go to every nurse marked ON DUTY in the affected
+ward until a proper Nurse-in-Charge role or assignment exists. It was implicit in the S3 P0 default ladder ("nurse"
+on the overdue tier); it is now a named, per-hospital, audited rule.
+- **Rule** `wardsynq.criticalEscalation.level2NurseRule`, one allowed value `"all-on-duty-nurses-in-ward"`, absent =
+  that default (`LEVEL2_NURSE_RULES`, `level2NurseRuleOf`, `level2NurseRuleRefusal` in `alert-recipients.js`).
+- **One resolver keyed by rule name**: `level2NurseRecipients(rule, {unit, active, duty})`. It checks BOTH conditions
+  itself rather than trusting the rota reader: the member is active with role `nurse`, is in the rota's on-duty list
+  now, and the assignment's own `unit` is the patient's ward. `resolveRecipients` sends "nurse" on the overdue tier
+  through it (so it also applies at the escalate tier, which is cumulative); other roles and tiers are unchanged.
+- **Unknown ward**: kept as before (the ladder's hospital-wide cover for a patient with no ward); the rule then has no
+  ward to test and records `ward: null`. Flagged, not decided by the owner.
+- **Unknown stored rule** (rollback, group adoption from before the check): never followed silently; the default rule
+  applies so the ward's nurses are still told, and `source: "unrecognised"`, `configured` are recorded and shown.
+- **Record**: the loop notice (`notifications[]`, versioned and audited with the loop) carries `nurseRule = {rule,
+  source, ward, nurses, recipients}`. NO_RECIPIENT is unchanged: loud when the whole tier resolves nobody, with
+  `nurses: 0` naming why.
+- **Save**: `POST /api/queue/org/update` and `POST /api/queue/group/policy` refuse any other rule with 422
+  `level2_nurse_rule_not_built`, after authorization, nothing written. The Alerts card's own save carries the saved key.
+- **Screen**: Admin > Hospital > Critical result alerts to phones shows the rule read-only with "Applies until a
+  Nurse-in-Charge role or assignment is implemented" (from `GET /ward/alert-status` `nurseRule`).
+- Tests: `test/wardsynq-alert-recipients.test.mjs` (rule, off-duty, other ward with a leaky reader, empty set, card),
+  `test/wardsynq-alert-dispatch.test.mjs` (real rota: off-duty, unrostered and other-ward nurses not told; notice
+  names the rule; empty ward nurse set NO_RECIPIENT through the tick), `test/org-level2-nurse-rule-route.test.mjs`,
+  `test/wardsynq-hospital-group.test.mjs` (group policy 422).
+- **Change later** (when a Nurse-in-Charge role or assignment exists): add `"nurse-in-charge"` to `LEVEL2_NURSE_RULES`
+  with its note; add its `case` to `level2NurseRecipients` (read the assignment for the ward, checked on duty and in
+  the ward the same way; decide and record what happens when none is assigned, e.g. fall back to all on-duty nurses
+  with `source` saying so, never silence); add a selector on the Alerts card saving through `/org/update`; decide
+  whether the default changes (hospitals without the key follow the default). Update the refusal tests' value lists.

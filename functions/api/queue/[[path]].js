@@ -121,6 +121,7 @@ import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled }
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
 import { abdmView, externalInvoiceHandlingRefusal } from "../../_wardsynq/abdm-hospital.js";
+import { level2NurseRuleRefusal } from "../../_wardsynq/alert-recipients.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
 import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
@@ -928,6 +929,9 @@ export async function onRequest(context) {
       if (sub === "policy") {
         const p = body && body.policy;
         if (p != null && !GROUP.policySubset(p)) return refuse(422, "no_recognised_settings", "None of those settings can be recommended by a group. Allowed: " + GROUP.POLICY_KEYS.join(", ") + ".");
+        // A group recommendation is copied into hospitals on adoption, so it may not carry an unbuilt level-2 nurse rule either.
+        const groupNurseRule = level2NurseRuleRefusal(p && p.criticalEscalation);
+        if (groupNurseRule) return refuse(422, "level2_nurse_rule_not_built", groupNurseRule);
         return json({ ok: true, group: await GROUP.setPolicy(env, g, p, actor.id) }, 200, request);
       }
       if (sub === "overview") {
@@ -4323,6 +4327,9 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-14: an external ABDM invoice is a clinical document; no other handling is built. */
         const invoiceRefusal = externalInvoiceHandlingRefusal(body.wardsynq);
         if (invoiceRefusal) return json({ ok: false, error: "abdm_invoice_handling_not_built", message: invoiceRefusal }, 422, request);
+        /* Owner decision 2026-09-14: level-2 nurses are every on-duty nurse in the ward until Nurse-in-Charge exists. */
+        const nurseRuleRefusal = level2NurseRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
+        if (nurseRuleRefusal) return json({ ok: false, error: "level2_nurse_rule_not_built", message: nurseRuleRefusal }, 422, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.

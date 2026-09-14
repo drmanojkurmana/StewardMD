@@ -450,7 +450,8 @@
       "<h3>Who each level tells</h3>" +
       (lv.approval ? '<p class="msg ok">Default ladder approved by ' + esc(ap.approvedBy) + " on " + esc(ap.approvedOn) + " (owner decision " + esc(ap.decision) + ").</p>"
         : '<p class="msg note">This hospital has set its own ladder. The approved default (' + esc(ap.approvedBy) + ", " + esc(ap.approvedOn) + ") is ordering clinician and on-duty doctors, then supervisors and nurses on duty, then named contacts.</p>") +
-      '<p class="quiet">Each level tells the people of the levels before it again. On-duty roles come from the rota for the patient\'s ward. There is no nurse-in-charge role, so "nurse" means every nurse on duty in that ward.</p>' +
+      '<p class="quiet">Each level tells the people of the levels before it again. On-duty roles come from the rota for the patient\'s ward.</p>' +
+      nurseRuleHtml(esc, s.nurseRule) +
       '<div class="tbl"><table><thead><tr><th>Level</th><th></th><th>On duty with role</th><th>Named contacts</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
       "<h3>SMS when no phone confirms</h3>" +
       '<p class="quiet">If no phone confirms a push within its level\'s time, it is sent once by SMS to each person\'s alert mobile (set on Staff and roles), using your DLT-approved 2Factor template whose first variable is the ward and second the bed.</p>' +
@@ -463,6 +464,13 @@
       "<h3>Phones registered for alerts now</h3>" + phonesHtml(esc, s.phones) +
       ((s.noDevice || []).length ? '<p class="msg note">Alerts already sent to people with no phone registered: ' + s.noDevice.map(function (x) { return esc(x.identity); }).join(", ") + "</p>" : "") +
       "</div>";
+  }
+  /* Owner decision 2026-09-14, read-only: the named rule that picks the nurses a level 2 alert tells. */
+  function nurseRuleHtml(esc, r) {
+    if (!r) return '<div class="msg err">The level 2 nurse rule could not be read.</div>';
+    return '<div class="kv"><dt>Level 2 nurse rule</dt><dd><span class="mono">' + esc(r.rule) + "</span>" +
+      (r.source === "default" ? ' <span class="quiet">(default)</span>' : r.source === "unrecognised" ? ' <span class="msg err">the saved rule "' + esc(r.configured) + '" is not one this build has, so this rule is applied</span>' : "") + "</dd></div>" +
+      '<p class="quiet">' + esc(r.note) + " It cannot be changed on this card.</p>";
   }
   /* Read from the phone registrations themselves (not from past alerts): everyone on duty with a role on the
    * ladder, and every named contact. A failed read is said, never shown as everyone having a phone. */
