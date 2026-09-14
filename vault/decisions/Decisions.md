@@ -5684,3 +5684,27 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   token beside the name. SMS/WhatsApp "registered" and "next" lead with "Your token: X" (a token names nobody).
   Patient portal and the /queue link page show "Your token: X" for the patient's own ticket only.
 - Not built: no recall out of `no_show` (it is terminal; "recall" today is called -> waiting -> called).
+
+## 2026-09-14 S3 P0: critical results pushed to hospital staff phones, server-side, behind a hospital setting
+- Off unless the hospital sets `wardsynq.alerts.push.enabled` (Admin > Hospital > Critical result alerts). No env
+  var. With it off every loop records NO_CHANNEL exactly as before.
+- Recipients (`functions/_wardsynq/alert-recipients.js`): cumulative ladder of ordering clinician, on-duty roles
+  from the rota for the patient's ward, and named contacts. Default ladder approved by the owner, Dr Manoj
+  Kurmana, 2026-09-14 (O5); the approval is stored on the defaults and dropped when a hospital sets its own.
+  There is no nurse-in-charge role, so the default overdue tier uses every nurse on duty in the ward.
+  NO_RECIPIENT is recorded on the loop and shown on the board and the Admin card, never "sent".
+- Devices: `DeviceDirectory` port (`device-directory.js`) over any get/put/delete store, KV today
+  (`push:who:<orgId>~<identity>` -> token ids, `push:notice:<nid>` -> {orgId, tenantId, loopId}). Bound by
+  `POST /api/push/register-member` with the identity derived from the credential; unbound on PIN/password
+  change, reset, disable/remove and sign-out-everywhere; bind and unbind audited in q_events.
+- Payload (O3): fixed title, body naming ward and bed only, data `{type, v, nid, kind, urgency}`. Never the
+  patient name or MRN. Detail from `GET /api/push/notice/<nid>` for addressees only (404 otherwise), with a
+  read-log row and audit row written first; no row, no detail.
+- Everything about delivery lives on the loop record (`notifications[]`: nid, level, recipients, noDevice,
+  sent, total, receipts, sms). SENT is never delivered; acknowledgement stays `/ward/acknowledge`.
+- Timer: worker cron `*/5` POSTs `/api/queue/ops/tick-all` (admin token), same 2-minute gate as traffic;
+  `WSQ_TICK_OFF` stops both. Decline sends the next tier immediately.
+- SMS fallback (O4): a notice with no `delivered` receipt after its level's window goes once by SMS through
+  the hospital's DLT template on 2Factor (`alerts.sms.senderId`, `alerts.sms.templateName`; VAR1 ward, VAR2
+  bed; existing `TWOFACTOR_API_KEY`), to each recipient's `alertMobile` on their membership. Anything missing
+  is recorded on the notice as SMS_NOT_CONFIGURED and named on the Admin card.
