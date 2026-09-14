@@ -270,7 +270,9 @@ test("report -> self-review refused -> another admin reviews -> restore test -> 
   assert.match(rep.dataProtection.reasons.join(" "), /No restore test has ever been recorded/);
   assert.equal(rep.auditRetention.status, "ok");
   assert.ok(rep.auditRetention.oldestAuditAt);
-  assert.equal(rep.notDetected.length, 3);
+  assert.equal(rep.notDetected.length, 2, "reads outside an assignment are now checked, not listed as undetected");
+  assert.equal(rep.assignmentAccess.status, "not_evaluated", "no assignments recorded is not evaluated, never clean");
+  assert.equal(rep.assignmentAccess.findings, undefined);
   const kinds = rep.reviewQueue.items.map((i) => i.kind + ":" + i.status).sort();
   assert.deepEqual(kinds, ["break-glass:awaiting", "privileged-action:awaiting"]);
   assert.equal(rep.reviewQueue.items.find((i) => i.kind === "privileged-action").ownAction, true);

@@ -14,14 +14,15 @@
  * is green only when a backup meets its objective AND a successful restore test is on the record.
  *
  * WHAT IS NOT DETECTED, AND WHY (stated on the report too):
- *   - reads of a patient outside the reader's ward/assignment: there is no staff-to-ward assignment
- *     data (memberships scope departments/OPDs/rooms only), and audit rows carry a pseudonymised
- *     patient reference, not a ward.
  *   - reads of a patient who is also staff: not identifiable without joining staff identity to
  *     patient identity, which is new PHI processing this review must not introduce.
  *   - VIP / sensitive patients: no such flag exists on the record.
  *   - denied READS: the record service audits denied WRITES (record.denied); a refused read throws
  *     before any row is written, so repeated-denial counts writes and any row whose outcome is denied.
+ *
+ * READS OUTSIDE AN ASSIGNMENT ARE checked (outOfAssignmentFindings). The pseudonymised reference on
+ * each audit row is joined to the same pseudonym of the admission, the nurse assignment and the
+ * break-glass grant, so no patient identifier is added to the audit trail to do it.
  *
  * Storage-agnostic: audit rows come from the repository's optional auditTrail(), sign-in and admin
  * rows are handed in by the router from the hospital's own event log. No platform calls here.
@@ -32,6 +33,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { RUN_TYPE, rpoVerdict } from "./backup-run.js";
+import { span } from "../_roster.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000;
@@ -57,10 +59,10 @@ const METHOD = {
   "failed-sign-ins": "5 or more failed, locked or refused sign-in or two-step attempts for one staff ID in the period.",
   "new-device": "A successful sign-in from a device label not seen on any earlier successful sign-in for that staff ID. The device label is coarse (from the browser's user agent), so this is a prompt to ask, not proof of a different machine.",
   "many-devices": "Successful sign-ins for one staff ID from 3 or more device labels within 60 minutes.",
+  "out-of-assignment": "A read of a patient when the reader was neither the nurse assigned to that admission nor rostered on a shift whose unit is the admission's ward (names compared ignoring case), at the time of the read. Exempt reads are listed separately, and a read that cannot be compared is counted as not evaluated with its reason, never as clean. Only the admission's current ward is known, so a read made before a transfer compares against the ward the patient is on now.",
 };
 
 const NOT_DETECTED = [
-  { rule: "reads outside ward or assignment", reason: "No staff-to-ward assignment data exists, and audit rows carry a pseudonymised patient reference, not a ward." },
   { rule: "reads of a patient who is also staff", reason: "Not identifiable without linking staff identity to patient identity, which would be new PHI processing." },
   { rule: "VIP or sensitive-flagged patients", reason: "No VIP or sensitive flag exists on the patient record." },
 ];
@@ -82,7 +84,7 @@ const actorOf = (e) => str(e.actor || e.actorId);
 function evidenceRow(e) {
   const scope = e.scope || {};
   return { id: e.id || null, ts: e.ts, actor: actorOf(e) || null, action: e.action || null,
-    resourceType: scope.resourceType || null, patientRef: e.patientRefHash || null, outcome: e.outcome || null,
+    resourceType: scope.resourceType || null, recordId: scope.id || null, patientRef: e.patientRefHash || null, outcome: e.outcome || null,
     detail: e.meta != null ? str(e.meta) : (e.detail != null ? str(e.detail) : null) };
 }
 
@@ -146,6 +148,106 @@ function chartAccessFindings(events, period) {
     if (rows.length >= RULES.denied.threshold) out.push(finding("repeated-denied", actor, `${rows.length} denied record actions in the period.`, rows, { count: rows.length }));
   }
   return out;
+}
+
+/* OUT-OF-ASSIGNMENT EXEMPTIONS, each one stated on the report. Roles whose work is the whole hospital
+ * rather than a ward have no assignment to compare against; everyone else is compared, and a person
+ * with no assignment data is "not evaluated", never exempt and never clean. */
+const EXEMPT_ROLES = Object.freeze(["lab", "pharmacy", "cashier", "billing", "radiographer", "radiologist", "blood_bank", "him"]);
+const EXEMPTIONS = Object.freeze([
+  { id: "break-glass", rule: "Reads of a patient under the reader's own break-glass grant for that patient, while it was live.", reason: "Every break-glass grant is already reviewed on its own in the review queue." },
+  { id: "role-not-ward-assigned", rule: "Reads by staff whose role is not assigned to wards: " + EXEMPT_ROLES.join(", ") + ".", reason: "These roles serve every ward, so there is no ward assignment to compare their reads against." },
+  { id: "treating-clinician", rule: "Reads by the admission's named attending clinician during that admission.", reason: "The treating relationship is recorded on the admission itself." },
+]);
+
+const lo = (v) => (Number.isFinite(msOf(v)) ? msOf(v) : -Infinity);
+const hi = (v) => (v == null || v === "" || !Number.isFinite(msOf(v)) ? Infinity : msOf(v));
+const within = (t, from, to) => t >= lo(from) && t < hi(to);
+const wardKey = (w) => str(w).toLowerCase();
+
+/** PURE. A NurseAssignment's history as intervals: each assign runs until the next event on that admission. */
+function nurseAssignmentIntervals(rec, patientRef) {
+  const ev = ((rec && rec.history) || []).filter((h) => h && Number.isFinite(msOf(h.at))).sort((a, b) => msOf(a.at) - msOf(b.at));
+  return ev.map((h, i) => (h.action === "assign" && str(h.nurseId)
+    ? { staffId: str(h.nurseId), patientRef, from: h.at, to: ev[i + 1] ? ev[i + 1].at : null, source: "nurse-assignment" } : null)).filter(Boolean);
+}
+
+/** PURE. Rota assignments as UTC intervals on a ward. roster: { shifts: {id: shift}, assignments: [] }. */
+function rosterIntervals(roster, utcOffsetMinutes) {
+  const shifts = (roster && roster.shifts) || {};
+  const off = Number(utcOffsetMinutes) || 0;
+  const out = [];
+  for (const a of (roster && roster.assignments) || []) {
+    const s = a && a.status !== "cancelled" && shifts[a.shiftId];
+    if (!s || !str(a.identity)) continue;
+    const [a0, a1] = span(a.date, s);
+    out.push({ staffId: str(a.identity), ward: s.unit, from: new Date((a0 - off) * 60000).toISOString(), to: new Date((a1 - off) * 60000).toISOString(), source: "roster" });
+  }
+  return out;
+}
+
+/**
+ * PURE. Reads of a patient the reader was not assigned to at the time.
+ *   reads:        audit rows (record.read with patientRefHash)
+ *   assignments:  [{ staffId, from, to|null, patientRef? , ward?, source, tenantId? }]
+ *   opts: { period, tenantId, roles: {staffId: role} | null when unreadable,
+ *           stays: [{ patientRef, ward, attendingId, from, to, tenantId? }],
+ *           breakGlass: [{ actorId, patientRef, from, to }], incomplete: [sentence] }
+ * Rows carrying another hospital's tenantId are dropped before anything is counted.
+ */
+function outOfAssignmentFindings(reads, assignments, opts) {
+  const o = opts || {};
+  const fromMs = msOf(o.period.from), toMs = msOf(o.period.to);
+  const inTenant = (x) => !o.tenantId || x.tenantId == null || x.tenantId === o.tenantId;
+  const stays = (o.stays || []).filter((s) => s && inTenant(s));
+  const knownWards = new Set(stays.map((s) => wardKey(s.ward)).filter(Boolean));
+  /* A rota unit counts only when it names a ward some admission is on: a unit called "Nights" or a
+   * misspelt ward would otherwise turn every read by that person into a finding. */
+  const usable = (assignments || []).filter((a) => a && inTenant(a) && (a.patientRef || knownWards.has(wardKey(a.ward))));
+  const mine = groupBy(usable, (a) => str(a.staffId));
+  const byPatient = groupBy(stays, (s) => s.patientRef);
+  const grants = (o.breakGlass || []).filter(Boolean);
+  const incomplete = (o.incomplete || []).filter(Boolean);
+  const hasData = (actor) => (mine.get(actor) || []).some((a) => lo(a.from) < toMs && hi(a.to) > fromMs);
+
+  const inPeriod = (reads || []).filter((e) => e && e.action === "record.read" && e.patientRefHash && actorOf(e) && inTenant(e)
+    && msOf(e.ts) >= fromMs && msOf(e.ts) < toMs);
+  if (!usable.some((a) => lo(a.from) < toMs && hi(a.to) > fromMs)) {
+    return { status: "not_evaluated", reason: incomplete.length ? "Assignment data could not be read: " + incomplete.join("; ") + "."
+      : "No nurse assignment or rota shift matching an admission's ward is recorded for anyone in this period, so reads cannot be compared with assignments.",
+    readsInPeriod: inPeriod.length, exemptions: EXEMPTIONS };
+  }
+
+  const flagged = [], notEval = new Map(), exempt = new Map();
+  let assigned = 0;
+  const tally = (m, actor, key, e) => { const k = actor + "|" + key; if (!m.has(k)) m.set(k, { actor, key, rows: [] }); m.get(k).rows.push(e); };
+  for (const e of inPeriod) {
+    const t = msOf(e.ts), actor = actorOf(e), ref = e.patientRefHash;
+    if (grants.some((g) => str(g.actorId) === actor && g.patientRef === ref && within(t, g.from, g.to))) { tally(exempt, actor, "break-glass", e); continue; }
+    const role = o.roles ? o.roles[actor] : undefined;
+    if (role && EXEMPT_ROLES.includes(role)) { tally(exempt, actor, "role-not-ward-assigned", e); continue; }
+    const stay = (byPatient.get(ref) || []).filter((s) => within(t, s.from, s.to));
+    if (stay.some((s) => str(s.attendingId) === actor)) { tally(exempt, actor, "treating-clinician", e); continue; }
+    const covered = (mine.get(actor) || []).some((a) => within(t, a.from, a.to)
+      && ((a.patientRef && a.patientRef === ref) || (a.ward && stay.some((s) => wardKey(s.ward) === wardKey(a.ward)))));
+    if (covered) { assigned += 1; continue; }
+    if (!o.roles) tally(notEval, actor, "Staff roles could not be read, so the role exemption could not be applied.", e);
+    else if (!hasData(actor)) tally(notEval, actor, "No nurse assignment or rota shift matching an admission's ward is recorded for this person in the period.", e);
+    else if (incomplete.length) tally(notEval, actor, "Assignment data is incomplete: " + incomplete.join("; ") + ".", e);
+    else if (!stay.length) tally(notEval, actor, "The patient had no admission on record at the time of the read, so there is no ward to compare against.", e);
+    else flagged.push(e);
+  }
+
+  const findings = [...groupBy(flagged, actorOf)].map(([actor, rows]) => {
+    const patients = new Set(rows.map((e) => e.patientRefHash)).size;
+    return finding("out-of-assignment", actor, `${rows.length} read${rows.length === 1 ? "" : "s"} of ${patients} patient${patients === 1 ? "" : "s"} this person was not assigned to at the time.`, rows, { patients });
+  });
+  const summarise = (m, field) => [...m.values()].map((x) => ({ actor: x.actor, [field]: x.key, reads: x.rows.length, evidence: x.rows.slice(0, EVIDENCE_CAP).map(evidenceRow) }));
+  return {
+    status: "ok", findings, counts: findings.length ? { "out-of-assignment": findings.length } : {},
+    assignedReads: assigned, notEvaluated: summarise(notEval, "reason"), exempt: summarise(exempt, "exemption"),
+    readsInPeriod: inPeriod.length, exemptions: EXEMPTIONS, incomplete,
+  };
 }
 
 /** PURE. How many rows one audit row took out, and through which channel. Null when it took none out. */
@@ -322,7 +424,8 @@ const section = (findings) => ({ status: "ok", findings, counts: findings.reduce
 
 /**
  * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?,
- *   orgEvents: {events, partial} | {error}, viewerId }
+ *   orgEvents: {events, partial} | {error}, viewerId,
+ *   assignmentSources: { members: [{identity, role}] | {error}, roster: {shifts, assignments, partial} | {error}, utcOffsetMinutes } }
  */
 async function securityReport(request, env, ctx) {
   const mig = ctx.migration;
@@ -361,12 +464,51 @@ async function securityReport(request, env, ctx) {
     ? { status: "unavailable", error: "signin_log_unreadable", detail: str(orgEvents.error) }
     : { ...section(loginFindings(orgEvents.events, period)), partial: !!orgEvents.partial };
 
-  const [grants, reviews, runs, tests] = await Promise.all([
+  const [grants, reviews, runs, tests, nurseAssignments, encounters] = await Promise.all([
     svc.list("BreakGlassGrant", 1000).then((v) => ({ v }), (e) => ({ e })),
     svc.list(REVIEW_TYPE, 1000).then((v) => ({ v }), (e) => ({ e })),
     svc.list(RUN_TYPE, 50).then((v) => ({ v }), (e) => ({ e })),
     svc.list(RESTORE_TYPE, 200).then((v) => ({ v }), (e) => ({ e })),
+    svc.list("NurseAssignment", 1000).then((v) => ({ v }), (e) => ({ e })),
+    svc.list("Encounter", 1000).then((v) => ({ v }), (e) => ({ e })),
   ]);
+
+  /* OUT-OF-ASSIGNMENT. Needs the audit rows, the admissions (ward, attending), and at least one
+   * assignment source. Each missing piece is named; none of them silently becomes "no findings". */
+  let assignmentAccess;
+  if (!auditRead) assignmentAccess = chartAccess.status === "ok" ? { status: "unavailable", error: "audit_unreadable" } : chartAccess;
+  else if (encounters.e) assignmentAccess = { ...unavailable(encounters.e), detail: "Admissions could not be read, so wards are not known." };
+  else {
+    try {
+      const src = ctx.assignmentSources || {};
+      const refs = new Map();
+      const refOf = async (patientId) => { const k = str(patientId); if (!k) return null; if (!refs.has(k)) refs.set(k, await ctx.recordDeps.pseudonym(k)); return refs.get(k); };
+      const incomplete = [];
+      const intervals = [];
+      if (nurseAssignments.e) incomplete.push("nurse assignments could not be read");
+      else {
+        if (nurseAssignments.v.length >= 1000) incomplete.push("only the first 1000 nurse assignments were read");
+        for (const a of nurseAssignments.v) if (a) intervals.push(...nurseAssignmentIntervals(a, await refOf(a.patientId)));
+      }
+      if (!src.roster || src.roster.error) incomplete.push("the rota could not be read");
+      else {
+        if (src.roster.partial) incomplete.push("only part of the rota could be read");
+        intervals.push(...rosterIntervals(src.roster, src.utcOffsetMinutes));
+      }
+      if (encounters.v.length >= 1000) incomplete.push("only the first 1000 admissions were read");
+      const stays = [];
+      for (const enc of encounters.v) {
+        if (!enc) continue;
+        stays.push({ patientRef: await refOf(enc.patientId), ward: enc.location && enc.location.ward, attendingId: enc.attendingId || null, from: enc.periodStart || null, to: enc.periodEnd || null });
+      }
+      const breakGlass = [];
+      for (const g of grants.v || []) if (g) breakGlass.push({ actorId: g.actorId, patientRef: await refOf(g.patientId), from: g.grantedAt, to: g.expiresAt });
+      if (grants.e) incomplete.push("break-glass grants could not be read");
+      const roles = Array.isArray(src.members) ? Object.fromEntries(src.members.filter((m) => m && m.identity).map((m) => [str(m.identity), str(m.role)])) : null;
+      assignmentAccess = outOfAssignmentFindings(auditRead.events, intervals, { period, tenantId, roles, stays, breakGlass, incomplete });
+      if (auditRead.truncated) assignmentAccess.truncated = true;
+    } catch (e) { assignmentAccess = unavailable(e); }
+  }
 
   let queue;
   if (reviews.e) queue = unavailable(reviews.e);
@@ -389,11 +531,11 @@ async function securityReport(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "audit_failed", detail: "The security report was refused because reading it could not be recorded in the audit trail." }; }
 
   const counts = {};
-  for (const s of [chartAccess, exports, logins]) for (const [k, v] of Object.entries(s.counts || {})) counts[k] = v;
+  for (const s of [chartAccess, assignmentAccess, exports, logins]) for (const [k, v] of Object.entries(s.counts || {})) counts[k] = v;
   return {
     ...base, ok: true, generatedAt: now, period, days, advisory: true,
     note: "Findings are advisory. Nothing here locks an account or blocks access.",
-    counts, chartAccess, exports, logins, reviewQueue: queue, dataProtection: protection, auditRetention: retention,
+    counts, chartAccess, assignmentAccess, exports, logins, reviewQueue: queue, dataProtection: protection, auditRetention: retention,
     rules: RULES, methods: METHOD, notDetected: NOT_DETECTED,
   };
 }
@@ -472,7 +614,7 @@ async function recordRestoreTest(request, env, ctx) {
 }
 
 export {
-  RULES, METHOD, NOT_DETECTED, REVIEW_TYPE, RESTORE_TYPE, PRIVILEGED,
-  chartAccessFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
+  RULES, METHOD, NOT_DETECTED, REVIEW_TYPE, RESTORE_TYPE, PRIVILEGED, EXEMPT_ROLES, EXEMPTIONS,
+  chartAccessFindings, nurseAssignmentIntervals, rosterIntervals, outOfAssignmentFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
   dataProtection, auditRetention, securityReport, recordSecurityReview, recordRestoreTest,
 };

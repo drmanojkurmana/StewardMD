@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security" || tab === "health") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
     return renderers[tab](c, body);
   } });
 
@@ -739,7 +739,7 @@
   var SEC_TYPE_LABEL = {
     "chart-access-volume": "Unusually many patients read", "chart-access-off-hours": "Reads outside usual hours",
     "repeated-denied": "Repeated denied actions", "unusual-export": "Unusual export volume",
-    "failed-sign-ins": "Many failed sign-ins", "new-device": "Sign-in from a new device", "many-devices": "Many devices in a short time"
+    "out-of-assignment": "Read outside an assignment", "failed-sign-ins": "Many failed sign-ins", "new-device": "Sign-in from a new device", "many-devices": "Many devices in a short time"
   };
   var SEC_STATUS_LABEL = { green: "Protected: recent backup and a successful restore test on record", amber: "Needs attention", red: "Not protected", unavailable: "Unknown: could not be checked" };
 
@@ -752,12 +752,32 @@
     return h + s.findings.map(function (f) {
       return "<details><summary><b>" + esc(SEC_TYPE_LABEL[f.type] || f.type) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
         '<p class="quiet">' + esc(f.method) + "</p>" +
-        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th></tr></thead><tbody>' +
+        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th><th>Audit row</th></tr></thead><tbody>' +
         f.evidence.map(function (e) {
-          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + "</td></tr>";
+          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + '</td><td class="mono">' + esc(e.id || "") + (e.recordId ? "<br>" + esc(e.recordId) : "") + "</td></tr>";
         }).join("") + "</tbody></table></div>" +
         (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + "</details>";
     }).join("");
+  }
+
+  /* Reads outside an assignment. "Not evaluated" is its own state and never renders as no findings. */
+  function secAssignment(c, s, days) {
+    var esc = c.esc;
+    var h = "<h3>Reads outside an assignment</h3>";
+    if (!s || (s.status !== "ok" && s.status !== "not_evaluated")) return h + '<div class="msg err">Could not be checked' + (s && s.detail ? ": " + esc(s.detail) : "") + ". This is not the same as nothing being found.</div>";
+    var ex = (s.exemptions || []).length ? "<details><summary>Exempt from this check</summary><ul>" + s.exemptions.map(function (x) { return "<li>" + esc(x.rule) + " " + esc(x.reason) + "</li>"; }).join("") + "</ul></details>" : "";
+    if (s.status === "not_evaluated") return h + '<div class="msg note">Not evaluated: ' + esc(s.reason) + " This is not the same as no findings.</div>" + ex;
+    if (s.truncated) h += '<div class="msg note">Only part of the log could be read, so some reads may not have been checked.</div>';
+    if ((s.incomplete || []).length) h += '<div class="msg note">Incomplete: ' + esc(s.incomplete.join("; ")) + ".</div>";
+    h += '<p class="quiet">' + esc(s.readsInPeriod) + " reads in the period: " + esc(s.assignedReads) + " within an assignment.</p>";
+    h += s.findings.length ? secSection(c, "", { status: "ok", findings: s.findings }, days).replace("<h3></h3>", "") : '<p class="quiet">No reads outside an assignment among the reads that could be compared.</p>';
+    var list = function (title, rows, field) {
+      return rows.length ? "<details><summary>" + esc(title) + " (" + rows.reduce(function (n, x) { return n + x.reads; }, 0) + " reads)</summary><ul>" +
+        rows.map(function (x) {
+          return "<li>" + esc(x.actor) + ": " + esc(x.reads) + " reads. " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span></li>";
+        }).join("") + "</ul></details>" : "";
+    };
+    return h + list("Not evaluated", s.notEvaluated || [], "reason") + list("Exempt", s.exempt || [], "exemption") + ex;
   }
 
   function securityReviewHtml(c, r) {
@@ -770,7 +790,7 @@
     h += types.length ? '<div class="tbl"><table><thead><tr><th>Finding</th><th>Count</th></tr></thead><tbody>' +
       types.map(function (t) { return "<tr><td>" + esc(SEC_TYPE_LABEL[t] || t) + "</td><td>" + esc(r.counts[t]) + "</td></tr>"; }).join("") + "</tbody></table></div>"
       : '<p class="quiet">No findings in the sections that could be checked. Check each section below for any that could not.</p>';
-    h += secSection(c, "Chart access", r.chartAccess, r.days) + secSection(c, "Exports", r.exports, r.days) + secSection(c, "Sign-ins", r.logins, r.days);
+    h += secSection(c, "Chart access", r.chartAccess, r.days) + secAssignment(c, r.assignmentAccess, r.days) + secSection(c, "Exports", r.exports, r.days) + secSection(c, "Sign-ins", r.logins, r.days);
     h += "<h3>Not checked, and why</h3><ul>" + (r.notDetected || []).map(function (n) { return "<li>" + esc(n.rule) + ": " + esc(n.reason) + "</li>"; }).join("") + "</ul></div>";
 
     var q = r.reviewQueue || {};
@@ -843,5 +863,33 @@
         });
       };
     });
+  }
+
+  // ---- System health (P2.15) ------------------------------------------------------------------
+  /* null = loading, {failed} = the report itself did not load. Neither may look like all healthy. */
+  var HEALTH_LABEL = { up: "Up", degraded: "Degraded", down: "Down" };
+  function systemHealthHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<div class="card"><h2>System health</h2><span class="spin"></span> Checking each dependency...</div>';
+    if (r.failed) return '<div class="card"><h2>System health</h2><div class="msg err">System health could not be loaded: ' + esc(r.message || "failed") +
+      ". The status of every dependency is unknown. This is not the same as everything being up.</div></div>";
+    var head = r.overall === "up" ? '<div class="msg ok">Every dependency answered its check.</div>'
+      : '<div class="msg err">' + esc(r.dependencies.filter(function (d) { return d.status !== "up"; }).length) + " of " + esc(r.dependencies.length) + " dependencies are not fully up.</div>";
+    return '<div class="card"><h2>System health</h2><p class="quiet">Checked ' + esc(r.generatedAt) + ". Each check gives up after " + esc(r.timeoutMs) + " ms and counts as down.</p>" + head +
+      '<div class="tbl"><table><thead><tr><th>Dependency</th><th>Status</th><th>Checked</th><th>What it means</th></tr></thead><tbody>' +
+      r.dependencies.map(function (d) {
+        return '<tr class="' + (d.status === "up" ? "" : "warn") + '"><td>' + esc(d.name) + "</td><td><b>" + esc(HEALTH_LABEL[d.status] || "Unknown") + "</b></td><td>" + esc(d.checkedAt) + "</td><td>" +
+          (d.consequence ? esc(d.consequence) + "<br>" : "") + (d.reason ? '<span class="quiet">' + esc(d.reason) + "</span>" : "") + "</td></tr>";
+      }).join("") + '</tbody></table></div><button type="button" class="btn ghost" id="healthRecheck">Check again</button></div>';
+  }
+  WSQ._systemHealthHtml = systemHealthHtml;
+
+  function renderHealth(c, body) {
+    body.innerHTML = systemHealthHtml(c, null);
+    return c.api("/ward/system-health?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      body.innerHTML = systemHealthHtml(c, r && r.ok && r.dependencies ? r : { failed: true, message: refusal(r) });
+      var again = document.getElementById("healthRecheck");
+      if (again) again.onclick = function () { WSQ.render("admin"); };
+    }, function () { body.innerHTML = systemHealthHtml(c, { failed: true, message: "No response from the server." }); });
   }
 })();

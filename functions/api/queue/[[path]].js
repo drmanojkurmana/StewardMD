@@ -192,6 +192,7 @@ import { requestRelease, authorizeRelease, denyRelease, cancelRelease, fulfillRe
 import { patientCopy, releaseToPatient } from "../../_wardsynq/patient-record.js";
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { securityReport, recordSecurityReview, recordRestoreTest } from "../../_wardsynq/security-review.js";
+import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
@@ -503,6 +504,7 @@ function opdOrgFor(env, hospitalId) {
  * configured" or which step failed with the provider's status. Cached per isolate for ten minutes so
  * a public endpoint cannot be used to run up storage calls. */
 let docProbeCache = null;
+const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
 async function documentStorageProbe(env) {
   const store = documentStoreFromEnv(env);
   if (!store) return { state: "not_configured" };
@@ -707,7 +709,7 @@ export async function onRequest(context) {
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
        * bulk exfiltration tool in a loop. */
-      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report"]);
+      const RL_BULK = new Set(["backup", "downtime", "analytics-extract", "roi-export", "twin-reconstruct", "operational-health", "security-report", "system-health"]);
       /* Emergency access is bounded but never scarce: the limit is here to make scripted break-glass
        * abuse visible and finite, and it sits far above the handful of declarations a real shift
        * produces. Refusing a genuine emergency to enforce a quota would be the worse failure. */
@@ -1129,6 +1131,9 @@ export async function onRequest(context) {
          * deployment owner's act. No clinical capability reaches it: a doctor or nurse gets 403.
          * safety_officer is NOT added - it is clinical-incident safety, not account security. */
         "security-report": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
+        /* P2.15. Which dependencies are down and what that means on a ward. The deployment owner's view:
+         * it names storage and provider state, never patient data, and no clinical capability reaches it. */
+        "system-health": CAPS.STAFF_ADMIN,
         // ADT out. Reading a stay in another wire format is still reading a chart, so it needs the
         // authority to read one. It writes nothing and there is no inbound listener.
         adt: CAPS.EMR_VIEW, oru: CAPS.EMR_VIEW, cda: CAPS.EMR_VIEW,
@@ -1292,6 +1297,9 @@ export async function onRequest(context) {
             const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
             if (!gate.allowed) return;
             const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {} });
+            /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
+             * whether escalation is actually running rather than assume it. */
+            if (env.MAIK_KV) await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify({ at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) }), { expirationTtl: 30 * 86400 }).catch(() => {});
             if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
           } catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
         })());
@@ -2234,8 +2242,26 @@ export async function onRequest(context) {
       }
       if (sub === "security-report" && method === "GET") {
         const orgEvents = await ORG.orgAuditEvents(env, wOrgId).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) }));
-        const r = await securityReport(request, env, { ...deps, orgEvents, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        /* P2.17: who was assigned where, for the out-of-assignment check. Each source that fails is
+         * handed in as an error so the section says so rather than reading silence as clean. */
+        const rDays = Math.max(1, Math.min(90, Number(url.searchParams.get("days")) || 7));
+        const rTo = new Date().toISOString().slice(0, 10), rFrom = new Date(Date.now() - rDays * 86400000).toISOString().slice(0, 10);
+        const [members, roster] = await Promise.all([
+          ORG.listMembers(env, wOrgId).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),
+          ROSTER.assignmentsBetween(env, wOrgId, rFrom, rTo).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),
+        ]);
+        const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
+        const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "system-health" && method === "GET") {
+        const r = await systemHealthReport({
+          repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, maik: (wsqCfg && wsqCfg.maik) || null, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
+          orgProbe: () => ORG.getOrg(env, wOrgId),
+          documentProbe: async () => { const d = await documentStorageProbe(env); return { ...d, checkedAt: d.state !== "not_configured" && docProbeCache ? new Date(docProbeCache.at).toISOString() : null }; },
+          lastTick: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },
+        });
+        return json(r, 200, request);
       }
       if (sub === "security-review" && method === "POST") {
         const orgEvents = body.subjectKind === "privileged-action"
