@@ -81,7 +81,9 @@ class RemoteBackend {
   _url(path) { return `${this.baseUrl}/api/wardsynq/${encodeURIComponent(this.tenantId)}${path}`; }
 
   async _headers(extra) {
-    const h = { "Content-Type": "application/json", ...(this.extraHeaders() || {}), ...(extra || {}) };
+    const cleanExtra = { ...(extra || {}) };
+    delete cleanExtra._refreshed;
+    const h = { "Content-Type": "application/json", ...(this.extraHeaders() || {}), ...cleanExtra };
     const t = await this.token();
     if (t) h.Authorization = `Bearer ${t}`;
     const st = await this.staffToken();
@@ -92,6 +94,16 @@ class RemoteBackend {
   async _request(method, path, body, extra) {
     if (this._closed) throw new RemoteStoreError("RemoteBackend is closed", "CLOSED");
     const res = await this._fetch(this._url(path), { method, headers: await this._headers(extra), body: body === undefined ? undefined : JSON.stringify(body) });
+    if (res.status === 401 && !(extra && extra._refreshed) && typeof window !== "undefined" && window.firebase && window.firebase.auth && window.firebase.auth().currentUser) {
+      try {
+        await window.firebase.auth().currentUser.getIdToken(true);
+        const retryExtra = { ...(extra || {}), _refreshed: true };
+        const retryRes = await this._fetch(this._url(path), { method, headers: await this._headers(retryExtra), body: body === undefined ? undefined : JSON.stringify(body) });
+        let retryData = null;
+        try { retryData = await retryRes.json(); } catch { retryData = null; }
+        return { status: retryRes.status, data: retryData };
+      } catch {}
+    }
     let data = null;
     try { data = await res.json(); } catch { data = null; }
     return { status: res.status, data };

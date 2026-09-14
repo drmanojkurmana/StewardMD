@@ -30,8 +30,10 @@
      already says what this is, and a screen reader announcing "WardSynQ logo" before every ward
      round is noise. -->
 <div class="brandbar">
-  <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
-       width="261" height="61" decoding="async">
+  <a href="/#/home" title="Return to WardSynQ Map" style="text-decoration:none;display:inline-block">
+    <img class="brand-mark" src="brand/wardsynq-lockup.png" alt="" aria-hidden="true"
+         width="261" height="61" decoding="async">
+  </a>
 </div>
 
 <div class="pack" id="pack" role="status">Loading clinical rules.</div>
@@ -61,9 +63,13 @@
       <a href="/#/ward/board">Bed board</a>
       <a href="/#/ward/edboard">Emergency</a>
       <a href="/#/ward/critsboard">Critical results</a>
+      <a href="/#/ward/labboard">Laboratory</a>
+      <a href="/#/ward/radboard">Radiology</a>
       <a href="/#/ward/flowcommand">Command center</a>
       <a href="/#/ward/twin">Digital twin</a>
       <a href="/#/patients">Patients</a>
+      <a href="/#/ward/cashier">Billing</a>
+      <a href="/#/ward/reports">Reports</a>
       <a href="/#/maik">MaiK</a>
       <a href="/#/admin">Admin Center</a>
       <a href="/#/audit">Audit</a>
@@ -256,7 +262,7 @@
     };
   })();
 </script>
-<script type="module" src="wardsynq-app.js?v=9"></script>
+<script type="module" src="wardsynq-app.js?v=10"></script>
 <script type="module">
   // Offline shell. Registered separately from the app so a caching failure never stops the
   // workstation loading: an app that says it is offline is more use than one that will not open.
