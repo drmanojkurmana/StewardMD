@@ -273,3 +273,19 @@ export function requireCap(role, cap) {
   }
   return true;
 }
+
+/* ABHA at the desk (ABDM M1), owner decision A5 (2026-09-14): billing and front desk staff may CREATE a new
+ * ABHA number by Aadhaar OTP as well as VERIFY an existing one - the desk that registers the patient is the
+ * desk that meets them without an ABHA. Clinical staff who register walk-ins hold both too. Pharmacy, lab,
+ * imaging, HR and HIM hold neither: none of them registers a patient. One table, PURE, so the ABHA desk
+ * phase enforces exactly this. NOT enforced yet: the M1 routes (functions/api/abdm) still authenticate by
+ * Connect tenant membership, which has no desk roles; the desk phase moves them onto the org's own staff.
+ * An unknown role or action is refused. */
+export const ABHA_DESK_ROLES = Object.freeze({
+  verify: Object.freeze(["admin", "doctor", "nurse", "intern", "resident", "supervisor", "reception", "cashier", "billing"]),
+  create: Object.freeze(["admin", "doctor", "nurse", "intern", "resident", "supervisor", "reception", "cashier", "billing"]),
+});
+export function abhaDeskCan(role, action) {
+  const list = Object.prototype.hasOwnProperty.call(ABHA_DESK_ROLES, action) ? ABHA_DESK_ROLES[action] : null;
+  return !!(list && typeof role === "string" && list.indexOf(role) > -1);
+}

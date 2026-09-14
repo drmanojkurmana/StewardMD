@@ -679,6 +679,10 @@ export async function onRequest(context) {
       } catch (e) { return json({ ok: false, error: "no_logo" }, 404, request); }
     }
 
+    // The immunisation picker's options (NDHM IG value set, functions/_vaccines.js). Static, so cacheable; no PHI
+    // and no session. On the branch this sat inside the POST block, so the client's GET never reached it.
+    if (method === "GET" && seg === "vaccines") return json({ ok: true, catalogue: vaccineCatalogue() }, 200, request, { "Cache-Control": "public, max-age=86400" });
+
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
     const actor = await resolveActor(request, env);
     if (!actor) return json({ ok: false, error: "unauthorized" }, 401, request);
@@ -4407,7 +4411,8 @@ export async function onRequest(context) {
           // functions/_wardsynq/immunization.js, and what ABDM lands is filed there (sccm adapter).
           const built = buildImmunisation(body);
           if (built.error) return json({ ok: false, error: built.error }, 400, request);
-          return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, "immunization", built.data.text, actor.id, built.data)), 200, request);
+          const imm = await QT.appendTimeline(env, s, t, "immunization", built.data.text, actor.id, built.data);
+          return json(Object.assign({ ok: true }, imm), 200, request);
         }
         // NATIVE WARDSYNQ HOSPITAL (org.mode "wardsynq"): vitals, assessment and investigation orders
         // go DIRECTLY to the WardSynQ record for such an org - no GHIS to shadow, so this bypasses the
@@ -4497,8 +4502,6 @@ export async function onRequest(context) {
         // Best-effort either way: GHIS's read already happened and is not reopened by this outcome.
         return json({ ok: true, wardsynq: rec }, 200, request);
       }
-      // The picker's options. Static, so it is cacheable; no PHI, and it needs no session.
-      if (seg === "vaccines") return json({ ok: true, catalogue: vaccineCatalogue() }, 200, request, { "Cache-Control": "public, max-age=86400" });
       // Slide-to-checkout: seal + share the timeline, close the patient, call the next.
       if (seg === "checkout") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS);
