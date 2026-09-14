@@ -639,13 +639,33 @@
     };
   }
 
+  /* Phase C selection record. Same contract as auditEntry - the original product stays a field
+   * of its own so the prescription is always reconstructable - wrapped so garbage in still
+   * returns a well-formed record instead of throwing. */
+  function recordAuditEvent(o) {
+    try {
+      return auditEntry(o || {});
+    } catch (e) {
+      try {
+        return auditEntry({});
+      } catch (e2) {
+        return {
+          prescriptionId: null, originalProduct: null, alternativeProduct: null, category: null,
+          reasonShown: null, priceAtTime: null, courseCostAtTime: null,
+          doctorApproved: false, patientSelected: false, timestamp: new Date().toISOString()
+        };
+      }
+    }
+  }
+
   var API = {
     norm: norm, canonStrength: canonStrength, parseComposition: parseComposition, compositionKey: compositionKey,
     normalizeForm: normalizeForm, releaseKey: releaseKey, brandStrengths: brandStrengths, strengthKey: strengthKey,
     restricted: restricted, eligibility: eligibility, eligible: eligible,
     parsePack: parsePack, requiredQuantity: requiredQuantity, courseCost: courseCost,
     tierOf: tierOf, choose: choose, totals: totals, auditEntry: auditEntry,
-    WEIGHTS: WEIGHTS, _version: 1
+    recordAuditEvent: recordAuditEvent,
+    WEIGHTS: WEIGHTS, _version: 2
   };
   try { root.SMD_RXCHOICE = API; } catch (e) {}
   if (typeof module !== "undefined" && module.exports) module.exports = API;

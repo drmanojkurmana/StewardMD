@@ -169,7 +169,10 @@
       ".rxdoc-adv-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font:500 11.5px/1.35 -apple-system,BlinkMacSystemFont,sans-serif;color:#334155;display:flex;align-items:baseline;gap:8px}" +
       ".rxdoc-adv-lbl{font:700 8px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#0e6e63;background:#ecfdf5;border:1px solid #a7f3d0;padding:1px 5px;border-radius:4px;flex:none}" +
       ".rx-ac-x{color:#ef4444;font-size:10px;font-weight:600}" +
-      ".rxcsec{margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;page-break-inside:avoid;break-inside:avoid}" +
+      ".rxcsec{margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0}" +
+      ".rxcsec thead{display:table-header-group}.rxcsec tfoot{display:table-footer-group}" +
+      ".rxcrow,.rxcmed{page-break-inside:avoid;break-inside:avoid}" +
+      ".rxccard{border:1px solid #e2e8f0;border-radius:8px;padding:6px 10px;margin:6px 0;background:#fff}" +
       ".rxcsec h3{font:700 10.5px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#0f172a;margin:0 0 2px}" +
       ".rxchd{margin-bottom:6px}" +
       ".rxcttl{font:700 11px -apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;letter-spacing:.03em;color:#334155;text-transform:uppercase}" +
@@ -364,11 +367,43 @@
     if (opts && opts.includeRxChoice !== true) {
       try { if (!(window.SMD_RXCHOICE_FLAGS && window.SMD_RXCHOICE_FLAGS.bool("smd_rxchoice_pdf"))) return ""; } catch (e) { return ""; }
     }
-    var costStr = function (c) { return (c != null && isFinite(c)) ? ("\u20b9" + (Math.round(c * 100) / 100).toLocaleString("en-IN")) : "—"; };
 
-    // 4-Way Comparison Table when full results are available (Reference Image 3 & Final Plan §3)
+    // 4-Way Comparison Table when full results are available (Reference Image 3 & Final Plan §3).
+    // Built by renderRxChoicePrintTable below so the table has ONE builder for screen, print and
+    // tests; this wrapper only decides WHEN the section appears (never above the legal Rx).
     if (sel._allResults && sel._allResults.length) {
-      var results = sel._allResults, lines = sel._allLines || [], selectedKeys = sel._allSelected || [];
+      return renderRxChoicePrintTable(sel._allResults, sel._allLines || [], sel._allSelected || [], sel, esc);
+    }
+
+    // Fallback simple list (preserves backward-compatibility if only selected single products exist)
+    var keys = Object.keys(sel).filter(function (k) { return k && k.charAt(0) !== "_"; });
+    if (!keys.length) return "";
+    var cost = function (o) { return (o && o.courseCost != null) ? (" &middot; \u20b9" + o.courseCost + " for this course") : ""; };
+    var rows = keys.map(function (k) {
+      var o = sel[k]; if (!o) return "";
+      var cat = !o.category ? "Alternative" : o.category === "prescribed" ? "Doctor Prescribed" : (o.category.charAt(0).toUpperCase() + o.category.slice(1));
+      return '<div class="rxcline rxccard rxcmed"><b>' + esc(k) + '</b> &nbsp;<span class="rxccat">' + esc(cat) + '</span><br>' +
+        'Prescribed therapy: ' + esc(o.composition || "") + '<br>' +
+        'Final selected product: <b>' + esc(o.brand || "") + '</b>' + (o.manufacturer ? ' (' + esc(o.manufacturer) + ')' : '') + cost(o) + '</div>';
+    }).join("");
+    if (!rows) return "";
+    return '<section class="rxcsec"><h3>RxChoice&trade;</h3>' + rows +
+      '<div class="rxcnote">The therapy above is the doctor\u2019s. RxChoice lists products from the StewardMD Drug Database carrying that same therapy at different prices. A lower price is not a claim that a product is clinically better. Prices are list MRP for the prescribed course, not a pharmacy quote.</div></section>';
+  }
+  /* renderRxChoicePrintTable(results, lines, selectedKeys, sel, esc) — the ONE builder for the
+   * Phase D 4-way print/PDF table (Final Plan sections 2 and 3). The conventional prescription
+   * above it is built elsewhere and is never touched here: no tier names, no marketing, only the
+   * doctor's drug + brand + dose/frequency/duration in the first column, then GENERIC, BALANCED,
+   * PREMIUM and DOCTOR PRESCRIBED with course costs and unit details (units needed, pack size,
+   * packs required). Each medicine is one <tr class="rxcrow"> with its own page-break-inside:avoid,
+   * so a long prescription may span pages BETWEEN medicines but never THROUGH one; thead/tfoot
+   * repeat via CSS. The chosen cell carries SELECTED/KEPT + rxc-chosen. Garbage in returns "". */
+  function renderRxChoicePrintTable(results, lines, selectedKeys, sel, esc) {
+    try {
+      results = results || []; lines = lines || []; selectedKeys = selectedKeys || []; sel = sel || {};
+      if (!Array.isArray(results) || !Array.isArray(lines) || !Array.isArray(selectedKeys)) return "";
+      if (typeof esc !== "function") esc = function (s) { return String(s == null ? "" : s); };
+      var costStr = function (c) { return (c != null && isFinite(c)) ? ("\u20b9" + (Math.round(c * 100) / 100).toLocaleString("en-IN")) : "—"; };
       var tableRows = "";
       for (var i = 0; i < results.length; i++) {
         var r = results[i], line = lines[i] || {};
@@ -389,14 +424,16 @@
           var brandNm = '<div class="rxc-brand"><b>' + esc(opt.brand || "-") + '</b></div>';
           var mfrNm = opt.manufacturer ? ('<div class="rxc-mfr">' + esc(opt.manufacturer) + '</div>') : '';
           var packInfo = (opt.packsRequired != null && opt.requiredUnits != null)
-            ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + '&nbsp;needed&nbsp;(' + (opt.packsRequired > 1 ? (opt.packsRequired + '&nbsp;packs') : '1&nbsp;pack') + ')</div>')
+            ? ('<div class="rxc-pack">' + esc(opt.requiredUnits) + '&nbsp;units for this course' +
+               (opt.unitsPerPack != null ? '&nbsp;&middot;&nbsp;pack of ' + esc(opt.unitsPerPack) : '') +
+               '&nbsp;&middot;&nbsp;' + (opt.packsRequired > 1 ? (esc(opt.packsRequired) + '&nbsp;packs') : '1&nbsp;pack') + '</div>')
             : '';
           var priceVal = opt.courseCost != null ? ('<div class="rxc-cost">' + costStr(opt.courseCost) + '<small>&nbsp;/&nbsp;course</small></div>') : '<div class="rxc-cost">-</div>';
           return '<td class="' + cls + '">' + tag + brandNm + mfrNm + packInfo + priceVal + '</td>';
         };
 
-        tableRows += '<tr class="rxc-tr">' +
-          '<td class="rxc-td rxc-rxcol"><div class="rxc-num">' + (i + 1) + '. ' + drugTitle + '</div>' +
+        tableRows += '<tr class="rxc-tr rxcrow">' +
+          '<td class="rxc-td rxc-rxcol rxcmed"><div class="rxc-num">' + (i + 1) + '. ' + drugTitle + '</div>' +
           (activeComp ? ('<div class="rxc-comp">' + activeComp + '</div>') : '') +
           (rxDetails ? ('<div class="rxc-dose">' + rxDetails + '</div>') : '') + '</td>' +
           cell(r.generic, "generic") +
@@ -405,6 +442,7 @@
           cell(r.prescribed, "prescribed") +
           '</tr>';
       }
+      if (!tableRows) return "";
 
       var totalsFoot = "";
       if (window.SMD_RXCHOICE && SMD_RXCHOICE.totals) {
@@ -451,22 +489,7 @@
         '</table>' +
         '<div class="rxcnote">Costs are calculated from the Drug Database MRP and the pack size for the course you prescribed. MRP is a list price, not a pharmacy quote, and availability is not checked. A lower price is an economic choice, never a claim that one product is clinically better than another. Final product selection remains the prescriber\u2019s responsibility.</div>' +
         '</section>';
-    }
-
-    // Fallback simple list (preserves backward-compatibility if only selected single products exist)
-    var keys = Object.keys(sel).filter(function (k) { return k && k.charAt(0) !== "_"; });
-    if (!keys.length) return "";
-    var cost = function (o) { return (o && o.courseCost != null) ? (" &middot; \u20b9" + o.courseCost + " for this course") : ""; };
-    var rows = keys.map(function (k) {
-      var o = sel[k]; if (!o) return "";
-      var cat = !o.category ? "Alternative" : o.category === "prescribed" ? "Doctor Prescribed" : (o.category.charAt(0).toUpperCase() + o.category.slice(1));
-      return '<div class="rxcline"><b>' + esc(k) + '</b> &nbsp;<span class="rxccat">' + esc(cat) + '</span><br>' +
-        'Prescribed therapy: ' + esc(o.composition || "") + '<br>' +
-        'Final selected product: <b>' + esc(o.brand || "") + '</b>' + (o.manufacturer ? ' (' + esc(o.manufacturer) + ')' : '') + cost(o) + '</div>';
-    }).join("");
-    if (!rows) return "";
-    return '<section class="rxcsec"><h3>RxChoice&trade;</h3>' + rows +
-      '<div class="rxcnote">The therapy above is the doctor\u2019s. RxChoice lists products from the StewardMD Drug Database carrying that same therapy at different prices. A lower price is not a claim that a product is clinically better. Prices are list MRP for the prescribed course, not a pharmacy quote.</div></section>';
+    } catch (e) { return ""; }
   }
   /* ---- Verifiable prescriptions (habit-forming drugs + antibiotics) --------------------------
    * A printed prescription is trivially forged: a name, a registration number and a drug list on
@@ -800,7 +823,10 @@
       '.adv{padding:6px 0;color:#475569;font-size:13px}' +
       '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
       '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
-      '.rxcsec{margin-top:20px;padding-top:14px;border-top:1px solid #e5e5ea;page-break-inside:avoid;break-inside:avoid}' +
+      '.rxcsec{margin-top:20px;padding-top:14px;border-top:1px solid #e5e5ea;break-inside:auto;page-break-inside:auto}' +
+      '.rxcsec thead{display:table-header-group}.rxcsec tfoot{display:table-footer-group}' +
+      '.rxcrow,.rxcmed{break-inside:avoid;page-break-inside:avoid}' +
+      '.rxccard{border:1px solid #e5e5ea;border-radius:8px;padding:6px 10px;margin:6px 0;background:#fff}' +
       '.rxchd{margin-bottom:8px}.rxcttl{font:600 13px -apple-system,BlinkMacSystemFont,\'SF Pro Display\',system-ui;color:#1d1d1f;letter-spacing:.02em;text-transform:uppercase}.rxcsub{font:400 10.5px -apple-system,BlinkMacSystemFont,system-ui;color:#86868b;margin-top:2px}' +
       '.rxctbl{width:100%;border-collapse:separate;border-spacing:0;margin:8px 0;font-size:11px;border:1px solid #e5e5ea;border-radius:8px;overflow:hidden}' +
       '.rxctbl th{padding:6px 8px;font:600 9.5px -apple-system,BlinkMacSystemFont,system-ui;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e5e5ea;border-right:1px solid #e5e5ea;background:#f5f5f7;vertical-align:top;text-align:left;color:#1d1d1f}' +
@@ -831,7 +857,7 @@
       '.rxv svg{width:96px;height:96px;flex:0 0 auto}' +
       '.rxv-c{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:#0f172a}' +
       '.rxv-l{font-size:11px;color:#64748b;margin-top:2px}.rxv-u{font-size:11px;color:#0e6e63;font-weight:700;margin-top:2px}' +
-      '@media print{body{padding:0}@page{margin:16mm}}' +
+      '@media print{body{padding:0}@page{margin:16mm}.rxcsec{break-inside:auto;page-break-inside:auto}.rxcrow,.rxcmed{break-inside:avoid;page-break-inside:avoid}.rxctbl thead{display:table-header-group}.rxctbl tfoot{display:table-footer-group}}' +
       '</style></head><body>' +
       '<div class="hd"><span class="logo">Steward<b>MD</b></span><span class="tag">Prescription</span></div>' +
       '<div class="clinic">StewardMD' + (topic ? ' &middot; ' + esc(topic) : '') + '</div>' +
@@ -2171,14 +2197,22 @@
       onSelect: function (i, opt, line, res, st) {
         var ln = map[i]; if (!ln) return;
         var bi = ln.querySelector('[data-f="brand"]');
+        // Brand ONLY: drug, dose, frequency and duration stay exactly as the doctor wrote them.
+        // The audit record for this decision is written by rxchoice-ui pick(); Doctor Prescribed
+        // restores the original brand through the same path (opt IS the original product there).
         if (bi && opt && opt.brand) { bi.value = opt.brand; try { bi.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {} }
         if (!sheet._rxChoice) sheet._rxChoice = {};
         sheet._rxChoice[(rows[i] && rows[i].drug) || ("line" + i)] = opt;
         if (st) {
-          sheet._rxChoice._allResults = st.results;
-          sheet._rxChoice._allLines = st.lines;
-          sheet._rxChoice._allSelected = st.selected;
+          // Copies, never aliases: the inline tray writes its own resolutions into
+          // sheet._rxChoice._allResults by index as the doctor keeps typing, and an aliased
+          // array would let those writes overwrite this panel's live results - so a SELECT
+          // followed by KEEP would "restore" the just-selected brand instead of the original.
+          sheet._rxChoice._allResults = (st.results || []).slice();
+          sheet._rxChoice._allLines = (st.lines || []).slice();
+          sheet._rxChoice._allSelected = (st.selected || []).slice();
         }
+        try { refreshSafety(); } catch (e) {}   // re-run allergy + interaction checks with the newly selected product
       }
     });
   }
@@ -2262,8 +2296,13 @@
 
         function onPick(cat, opt, allRes) {
           if (!opt || !brandIn) return;
+          // Brand ONLY: the drug, dose, frequency and duration inputs on this line are never
+          // touched. Doctor Prescribed restores the original brand through this same path.
           brandIn.value = opt.brand;
           try { brandIn.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {}
+          try {
+            if (window.SMD_RXCHOICE_UI && SMD_RXCHOICE_UI.recordSelection) SMD_RXCHOICE_UI.recordSelection(allRes || res, cat, { prescriptionId: null });
+          } catch (e) {}
 
           if (!sheet._rxChoice) sheet._rxChoice = {};
           var lineKey = drug || ("line" + (line.getAttribute("data-i") || "0"));
@@ -2280,6 +2319,7 @@
           sheet._rxChoice._allResults[lineIdx] = allRes;
           sheet._rxChoice._allSelected[lineIdx] = cat;
 
+          try { refreshSafety(); } catch (e) {}   // re-run allergy + interaction checks with the newly selected product
           try {
             if (window.toast) window.toast(cat === "prescribed" ? ("Kept " + opt.brand) : ("Brand set to " + opt.brand));
           } catch (e) {}

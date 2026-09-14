@@ -37,6 +37,47 @@
   }
   function clearAudit() { try { localStorage.removeItem(AUDIT_KEY); } catch (e) {} }
 
+  /* Phase C: the ONLY field a selection may change is the brand. This pure helper takes the
+   * doctor's line object and the chosen option and returns a line with ONLY brand replaced;
+   * drug, dose, frequency, duration and route are copied through untouched. Garbage in returns
+   * its input (or null) rather than throwing. The DOM call sites set only the [data-f="brand"]
+   * input for the same reason. */
+  function applyBrandOnly(line, opt) {
+    try {
+      if (!line || !opt || !opt.brand) return (line == null ? null : line);
+      var out = {};
+      for (var k in line) if (Object.prototype.hasOwnProperty.call(line, k)) out[k] = line[k];
+      out.brand = opt.brand;
+      return out;
+    } catch (e) { return (line == null ? null : line); }
+  }
+
+  /* Phase C: record one doctor decision. Builds the entry with the core's recordAuditEvent (the
+   * spec section 14 shape: original + alternative products, category, reason, prices,
+   * doctorApproved, timestamp) and appends it to the local audit trail. Returns the entry, or
+   * null when there is nothing to record. Never throws. */
+  function recordSelection(result, cat, meta) {
+    try {
+      var r = result || {};
+      var opt = r[cat] || null;
+      if (!opt) return null;
+      var core = CORE();
+      var build = (core && (core.recordAuditEvent || core.auditEntry)) || null;
+      if (!build) return null;
+      var entry = build({
+        prescriptionId: (meta && meta.prescriptionId) || null,
+        original: r.prescribed || null,
+        alternative: opt,
+        category: cat,
+        reasonShown: (opt && opt.label) || (meta && meta.reasonShown) || null,
+        doctorApproved: true,
+        patientSelected: false
+      });
+      logAudit(entry);
+      return entry;
+    } catch (e) { return null; }
+  }
+
   /* ---------------- styles ---------------- */
   function injectCSS() {
     if (document.getElementById("rxcCss")) return;
@@ -500,7 +541,10 @@
   }
 
   /* The ONLY mutation this module performs: the doctor tapped SELECT (or KEEP), so write that
-   * product's brand into the line's brand field. Nothing else on the line is touched. */
+   * product's brand into the line's brand field. Nothing else on the line is touched. The host's
+   * onSelect callback applies the brand to its own line and re-runs safety with the new product;
+   * the audit record is written here so every modal decision is trailed even if the host's
+   * callback is a no-op. */
   function pick(st, token) {
     var parts = String(token).split(":"), i = +parts[0], key = parts[1];
     var r = st.results[i]; if (!r) return;
@@ -509,10 +553,7 @@
     try {
       if (typeof st.onSelect === "function") st.onSelect(i, o, st.lines[i], r, st);
     } catch (e) {}
-    logAudit(CORE().auditEntry({
-      prescriptionId: st.prescriptionId, original: r.prescribed, alternative: o, category: key,
-      reasonShown: o.label, doctorApproved: true, patientSelected: false
-    }));
+    recordSelection(r, key, { prescriptionId: st.prescriptionId });
     render(st);
     try { if (window.toast) window.toast(key === "prescribed" ? ("Kept " + o.brand) : ("Brand set to " + o.brand)); } catch (e) {}
   }
@@ -572,11 +613,13 @@
     close: close,
     audit: audit,
     clearAudit: clearAudit,
+    recordSelection: recordSelection,
+    applyBrandOnly: applyBrandOnly,
     resolvePrescribed: resolvePrescribed,
     resolveLine: resolveLine,
     renderInlineTray: renderInlineTray,
     normalizeBrand: normalizeBrand,
-    _version: 2
+    _version: 3
   };
   window.SMD_RXCHOICE_UI = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;

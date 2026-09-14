@@ -183,6 +183,7 @@
           if (!sh._rxChoice) sh._rxChoice = {};
           sh._rxChoice[row.drug || ("line" + Date.now())] = opt;
         }
+        try { if (G.SMD_RXCHOICE_UI && G.SMD_RXCHOICE_UI.recordSelection) G.SMD_RXCHOICE_UI.recordSelection(result, cat, { prescriptionId: null }); } catch (e) {}
         setTimeout(schedule, 0);
       });
     });
