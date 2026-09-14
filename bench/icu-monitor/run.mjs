@@ -53,7 +53,7 @@ function findCases(dir, acc = []) {
   for (const f of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, f.name);
     if (f.isDirectory()) findCases(p, acc);
-    else if (f.name.endsWith(".json") && !/\.(obs|crop)\.json$/.test(f.name) && !f.name.startsWith("AUDIT")) acc.push(p);
+    else if (f.name.endsWith(".json") && !/\.(obs|crop|confirm\.cache)\.json$/.test(f.name) && !f.name.startsWith("AUDIT")) acc.push(p);
   }
   return acc;
 }
@@ -80,7 +80,7 @@ function fullPass(casePath, img) {
   const j = vision(img); writeFileSync(cache, JSON.stringify(j)); return j;
 }
 function cropPass(casePath, img, region) {
-  const cache = casePath.replace(/\.json$/, ".crop.json");
+  const cache = casePath.endsWith(".confirm.json") ? casePath.replace(/\.confirm\.json$/, ".confirm.cache.json") : casePath.replace(/\.json$/, ".crop.json");
   const key = [region.x, region.y, region.w, region.h, region.scale].map((v) => (+v).toFixed(4)).join(",");
   if (!LIVE_OCR && existsSync(cache)) { const j = JSON.parse(readFileSync(cache, "utf8")); if (j.key === key && admissible(j)) return j; }
   const j = vision(img, [`crop=${region.x},${region.y},${region.w},${region.h}`, `scale=${region.scale}`]);
@@ -132,27 +132,37 @@ for (const casePath of cases) {
   try { full = fullPass(casePath, img); } catch (e) { console.error("OCR failed for", gt.id, String(e.message).slice(0, 200)); continue; }
   const imageSize = full.image || gt.imageSize;
   const fullObs = (full.obs || []).map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h, q: o.q }));
-  let obs = fullObs, mergeNotes = [];
+  let obs = fullObs, mergeNotes = [], confirmMs = null, confirmRan = false;
   if (SCALES === 2) {
     region = M.monitorRegion(fullObs, imageSize);
     if (region) {
       try { crop = cropPass(casePath, img, region); } catch (e) { console.error("crop OCR failed for", gt.id, String(e.message).slice(0, 160)); }
       if (crop) { const mapped = M.mapCropObservations(crop.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h, q: o.q })), region); obs = M.mergeObservations(fullObs, mapped); mergeNotes = obs.notes || []; }
     }
+    // third, targeted read: confirm (or conflict) large values the first two passes did not both read
+    const creg = M.confirmationRegion(obs, imageSize);
+    if (creg && (crop || !region)) {
+      try {
+        const conf = cropPass(casePath.replace(/\.json$/, ".confirm.json"), img, creg);
+        obs = M.applyConfirmation(obs, M.mapCropObservations(conf.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h })), creg));
+        mergeNotes = obs.notes || mergeNotes; confirmMs = conf.ocrMs || null; confirmRan = true;
+      } catch (e) { console.error("confirmation OCR failed for", gt.id, String(e.message).slice(0, 120)); }
+    }
   }
   let px = null; try { if (existsSync(img)) px = pixelSource(img); } catch (e) { /* colour + quality pixel checks become neutral */ }
   const t0 = Date.now();
-  const res = M.parseMonitor(obs, Object.assign({ px, imageSize }, PARSE_OPTS));
+  const twoScale = SCALES === 2 ? { ran: !!crop || confirmRan } : null;
+  const res = M.parseMonitor(obs, Object.assign({ px, imageSize, twoScale }, PARSE_OPTS));
   const parseMs = Date.now() - t0;
   const fields = scoreCase(gt, res);
   const incomplete = Object.entries(res.fields).filter(([, f]) => f.status === "AUTO_ACCEPTED" && !(f.proof && f.proof.complete)).map(([k]) => k);
   const colourUsed = Object.values(res.fields).some((f) => (f.candidates || []).some((c) => c.parts && !c.parts.colorNeutral));
   results.push({ id: gt.id, group, manufacturer: gt.manufacturer, layout: gt.layout, difficulty: gt.difficulty || [], perturbation: gt.perturbation || null, mandatoryRegression: !!gt.mandatoryRegression,
     image: gt.image, imageSize, boxesFull: fullObs.length, boxesMerged: obs.length, recovered: obs.filter((o) => o.scale === "crop").length, region, mergeNotes,
-    ocrMsFull: full.ocrMs || null, ocrMsCrop: crop ? crop.ocrMs || null : null, visionLevel: [full.level, crop && crop.level].filter(Boolean),
+    ocrMsFull: full.ocrMs || null, ocrMsCrop: crop ? crop.ocrMs || null : null, ocrMsConfirm: confirmMs, visionLevel: [full.level, crop && crop.level].filter(Boolean),
     parseMs, quality: { status: res.quality.status, issues: res.quality.issues.map((i) => `${i.kind}:${i.severity}:${i.value}`), blur: res.quality.blur, tilt: res.quality.tilt && +res.quality.tilt.angle.toFixed(1) },
     layoutDetected: res.layout.profile, colourUsed, incompleteEvidence: incomplete, fields, networkCalls: 0, geminiCalls: 0 });
-  prepared.push({ gt, group, obs, px, imageSize, id: gt.id });
+  prepared.push({ gt, group, obs, px, imageSize, id: gt.id, twoScale });
   writeFileSync(join(OUT, gt.id + ".evidence.txt"), M.explain(res, obs));
   const Wd = imageSize.w, Ht = imageSize.h;
   writeFileSync(join(OUT, gt.id + ".overlay.svg"), M.overlaySVG(res, obs, Wd, Ht).replace(' style="position:absolute;left:0;top:0;pointer-events:none">', existsSync(img) ? '><image href="file://' + img + '" width="' + Wd + '" height="' + Ht + '"/>' : ">"));
@@ -200,18 +210,18 @@ const regressions = [];
 {
   const p = prepared.find((c) => c.id === "philips-mp40-owner-1800px");
   if (p) {
-    const relaxed = M.parseMonitor(p.obs, { px: p.px, imageSize: p.imageSize, unlabeledAuto: true }).values;
+    const relaxed = M.parseMonitor(p.obs, { px: p.px, imageSize: p.imageSize, twoScale: p.twoScale, unlabeledAuto: true }).values;
     const want = { hr: 105, spo2: 100, sbp: 149, dbp: 66, map: 98, rr: 22 };
     const got = Object.fromEntries(Object.keys(want).map((k) => [k, relaxed[k]]));
     regressions.push({ name: "Philips 2x photo, unlabeledAuto: HR 105, SpO2 100, 149/66, MAP 98, RR 22 (Pulse not inferred)", pass: JSON.stringify(got) === JSON.stringify(want) && relaxed.pulse == null, got: JSON.stringify(got) + " pulse=" + relaxed.pulse });
-    const strict = M.parseMonitor(p.obs, { px: p.px, imageSize: p.imageSize });
+    const strict = M.parseMonitor(p.obs, { px: p.px, imageSize: p.imageSize, twoScale: p.twoScale });
     const wrong = CORE.filter((k) => strict.fields[k].status === "AUTO_ACCEPTED" && strict.fields[k].value !== want[k]);
     const autoCore = CORE.filter((k) => strict.fields[k].status === "AUTO_ACCEPTED");
     regressions.push({ name: "Philips 2x photo, strict: no wrong auto-fill; every non-auto core field suggests the true value", pass: !wrong.length && CORE.every((k) => strict.fields[k].status === "AUTO_ACCEPTED" || strict.fields[k].suggested === want[k]), got: "auto " + autoCore.join(",") + (wrong.length ? " WRONG " + wrong.join(",") : "") });
   }
   const r9 = prepared.find((c) => c.id === "philips-mp40-owner-900px");
   if (r9) {
-    const s = M.parseMonitor(r9.obs, { px: r9.px, imageSize: r9.imageSize });
+    const s = M.parseMonitor(r9.obs, { px: r9.px, imageSize: r9.imageSize, twoScale: r9.twoScale });
     const want = { hr: 105, spo2: 100, sbp: 149, dbp: 66, rr: 22 };
     const wrong = Object.keys(want).filter((k) => s.fields[k].status === "AUTO_ACCEPTED" && s.fields[k].value !== want[k]);
     regressions.push({ name: "Philips real 900px, strict: no wrong auto-fill, MAP never computed, Pulse never inferred", pass: !wrong.length && (s.fields.map.value == null || s.fields.map.value === 98) && s.fields.pulse.value !== 105 || (!wrong.length && s.fields.pulse.status === "AUTO_ACCEPTED" && s.fields.pulse.label), got: "auto " + Object.keys(s.values).join(",") });
@@ -230,7 +240,7 @@ if (SWEEP) {
       sweep[g][tf] = TS.map((t) => {
         let correct = 0, guesses = 0, review = 0;
         for (const p of rows) {
-          const res = M.parseMonitor(p.obs, Object.assign({ px: p.px, imageSize: p.imageSize, thresholds: { [tf]: { conf: t } } }, PARSE_OPTS));
+          const res = M.parseMonitor(p.obs, Object.assign({ px: p.px, imageSize: p.imageSize, twoScale: p.twoScale, thresholds: { [tf]: { conf: t } } }, PARSE_OPTS));
           const sc = scoreCase(p.gt, res);
           for (const k of keys) { const o = sc[k].outcome; if (o === "correct") correct++; else if (o === "wrong" || o === "silent-guess") guesses++; else if (o === "review" || o === "correct-review") review++; }
         }

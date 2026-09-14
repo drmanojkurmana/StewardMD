@@ -5587,3 +5587,25 @@ new OCR/AI model. Gemini is a fallback offered only after a NEEDS_REVIEW, only o
   Synthetic renders stand in for real de-identified photos of GE / Dräger / Mindray / Nihon Kohden, which
   we do not have yet; numbers on them measure layout handling, not photographic robustness.
 Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scale Vision union.
+
+
+## 2026-09-14 ICU monitor OCR v2.1: two-pass confirmation is the safety mechanism, not thresholds (branch icu-ocr-bench, PR #1115 not merged)
+
+- Two-scale Vision (full image + numeric-region crop at 2-3x) plus a third targeted read of large values
+  still unconfirmed (scaled to ~110 px numerals). With two-scale on, a NUMBER auto-fills only if both
+  reads agree (multi-digit tokens equal; glued icon digits like "2° 100" are not a disagreement, a split
+  "1 08/64" is). The third read can only confirm or conflict, never add. If the second pass cannot run,
+  nothing numeric auto-fills. Reason: a single pass read DBP 66 as 86 at confidence 1.0 on a 12°-rotated
+  photo, and no image-quality signal caught it.
+- Merge: a crop box belongs to a full reading only when inside it AND >= half its text height (limits
+  and "(MM)" inside a value's rectangle are separate objects; folding them in created false conflicts).
+- Tilt/perspective from Vision quadrilaterals is INFORMATIONAL: measured 0° at 5°, -7° at 12°, none at
+  25°, 6° "perspective" on an undistorted photo. It never decides RETAKE/DEGRADED.
+- Pressure AUTO requires an identified source (ART/NIBP label, fuzzy "ARTI" accepted, or glued in the
+  box); the same rule for the primary and the separate ART/NIBP fields. Both displayed → primary review.
+- Benchmark harness: the probe never degrades to Vision .fast (it produced "1491F6"); non-accurate runs
+  are OCR failures, not data. Groups reported separately: real (1 photo), perturbed-real (21 derived
+  from it, incl. the 2x regression fixture), synthetic (39). Sweep: 0 guesses even at conf 0.60, so
+  thresholds were NOT lowered; they only trade recall for review.
+- Environment gotcha: macOS Vision text recognition failed system-wide for ~30 min after aned restarted
+  (e5rt create_precompiled_compute_operation); recovered on its own.

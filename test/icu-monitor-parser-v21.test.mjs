@@ -124,11 +124,20 @@ test("quality gate: unreadable display → RETAKE_PHOTO, nothing extracted", () 
   for (const k of ["hr", "spo2", "sbp", "rr"]) { assert.equal(r.fields[k].status, "NEEDS_REVIEW"); assert.ok(r.fields[k].retake); }
 });
 
-test("quality gate: severe tilt from Vision quadrilaterals → RETAKE_PHOTO", () => {
+test("quality gate: tilt from Vision quadrilaterals is INFORMATIONAL only (benchmark showed it unreliable both ways)", () => {
   const rot = (b, deg) => { const a = deg * Math.PI / 180, dy = Math.tan(a) * b.w * (900 / 1600); return Object.assign({}, b, { q: [b.x, b.y, b.x + b.w, b.y + dy, b.x + b.w, b.y + b.h + dy, b.x, b.y + b.h] }); };
   const obs = philips().map((b) => rot(Object.assign({}, b, { w: Math.max(b.w, b.h * 3) }), 24));
   const r = M.parseMonitor(obs, { imageSize: { w: 900, h: 1600 } });
-  assert.equal(r.quality.status, "RETAKE_PHOTO"); assert.ok(r.quality.issues.some((i) => i.kind === "tilt" && i.severity === "severe"));
+  assert.ok(r.quality.issues.some((i) => i.kind === "tilt" && i.severity === "info"), "reported");
+  assert.notEqual(r.quality.status, "RETAKE_PHOTO", "never decides the verdict on its own");
+});
+
+test("DEGRADED photo: a value read by only one OCR pass cannot auto-fill; a two-pass confirmed value can", () => {
+  const obs = philips().map((b) => (b.text === "105" ? Object.assign({}, b, { confirmed: true, scale: "both" }) : b));
+  const r = M.parseMonitor(obs, { imageSize: { w: 240, h: 240 } });
+  assert.equal(r.quality.status, "DEGRADED");
+  assert.equal(r.fields.hr.status, "AUTO_ACCEPTED", "confirmed by both passes");
+  assert.equal(r.fields.spo2.status, "NEEDS_REVIEW"); assert.match(r.fields.spo2.reason, /not read identically by both OCR passes/);
 });
 
 test("quality gate: tiny text → RETAKE_PHOTO; moderate → DEGRADED raises thresholds", () => {

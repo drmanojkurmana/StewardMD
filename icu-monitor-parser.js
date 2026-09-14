@@ -141,6 +141,14 @@
     return out;
   }
   function normText(t) { return String(t).replace(/[^A-Za-z0-9]/g, "").toUpperCase(); }
+  // Two readings agree when their digits match, or when their MULTI-DIGIT tokens match exactly: a stray
+  // single digit from a glued icon ("2° 100": the SpO2 subscript) is not a different reading, while a
+  // split number ("1 08/64" vs "108/64") still is.
+  function digitsAgree(a, b) {
+    if (digitsOf(a) === digitsOf(b)) return true;
+    var ma = (String(a).match(/\d{2,}/g) || []).join(","), mb = (String(b).match(/\d{2,}/g) || []).join(",");
+    return !!ma && ma === mb;
+  }
   function lev(a, b) {
     var m = a.length, n = b.length, prev = [], cur, i, j;
     for (j = 0; j <= n; j++) prev[j] = j;
@@ -205,19 +213,33 @@
     full = (full || []).map(function (o) { return assign({}, o, { scale: o.scale || "full" }); });
     crop = crop || [];
     var used = {}, out = [], notes = [];
-    full.forEach(function (f) {
+    // A crop box is PART of a full-pass reading only when it lies inside it AND is at least half its text
+    // height: alarm limits and "(MM)" sitting inside a large value's rectangle are separate objects, and
+    // folding them in turned every core field into a false scale conflict (2026-09-14 benchmark).
+    function partOf(f, c) { return overlapMin(f, c) > 0.5 && c.h >= 0.5 * f.h && c.h <= 1.8 * f.h; }
+    // first give every crop box to the full box it matches best, so a crop box is never counted twice
+    var owner = {};
+    crop.forEach(function (c, ci) {
+      var best = -1, bestO = 0;
+      full.forEach(function (f, fi) { if (partOf(f, c)) { var o = overlapMin(f, c); if (o > bestO) { bestO = o; best = fi; } } });
+      if (best >= 0) owner[ci] = best;
+    });
+    full.forEach(function (f, fi) {
       var inside = [];
-      crop.forEach(function (c, ci) { if (overlapMin(f, c) > 0.5) inside.push(ci); });
+      crop.forEach(function (c, ci) { if (owner[ci] === fi) inside.push(ci); });
       if (!inside.length) { out.push(f); return; }
       var cs = inside.map(function (ci) { return crop[ci]; }).sort(function (a, b) { return (Math.abs(a.y - b.y) < Math.min(a.h, b.h) * 0.5) ? a.x - b.x : a.y - b.y; });
       var joined = cs.map(function (c) { return c.text; }).join(" ");
       var dF = digitsOf(f.text), dC = digitsOf(joined);
-      var sim = similarity(f.text, joined);
       inside.forEach(function (ci) { used[ci] = true; });
-      if (dF === dC && sim >= 0.6) {
-        if (cs.length === 1 && normText(cs[0].text) === normText(f.text)) { out.push(assign(f, { conf: Math.max(f.conf == null ? 0 : f.conf, cs[0].conf == null ? 0 : cs[0].conf), scale: "both" })); return; }
+      if (dF === dC || (dF && dC && digitsAgree(f.text, joined))) {
+        // same numbers at both scales: one crop box CONFIRMS the full box (letter noise like "WN 22" is
+        // not a disagreement); several crop boxes are a finer split (label separated from value)
+        // ...unless that one crop box is clearly narrower: the crop separated a fused label ("ART T18/76"
+        // → "118/76 (90)"; the small "ART" is added on its own as a recovered box)
+        if (cs.length === 1 && !(cs[0].w < 0.85 * f.w && normText(cs[0].text) !== normText(f.text))) { out.push(assign(f, { conf: Math.max(f.conf == null ? 0 : f.conf, cs[0].conf == null ? 0 : cs[0].conf), scale: "both", confirmed: true })); return; }
         if (normText(joined) !== normText(f.text)) notes.push("crop re-read " + JSON.stringify(f.text) + " as " + JSON.stringify(joined));
-        cs.forEach(function (c) { out.push(assign({}, c, { scale: "crop", replaced: f.text })); });
+        cs.forEach(function (c) { out.push(assign({}, c, { scale: "crop", replaced: f.text, confirmed: !!digitsOf(c.text) })); });
         return;
       }
       if (!dF && !dC) {
@@ -228,7 +250,51 @@
       notes.push("OCR scales disagree: " + JSON.stringify(f.text) + " vs " + JSON.stringify(joined));
       out.push(assign(f, { ocrConflict: joined }));
     });
-    crop.forEach(function (c, ci) { if (!used[ci]) out.push(assign({}, c, { scale: "crop", recovered: true })); });
+    crop.forEach(function (c, ci) {
+      if (used[ci]) return;
+      // an unowned crop box re-reading the same digits as an overlapping full box (offset / height
+      // mismatch) confirms that box instead of duplicating it
+      var dc = digitsOf(c.text), twin = dc ? out.filter(function (o) { return o.scale !== "crop" && overlapMin(o, c) > 0.3 && digitsAgree(o.text, c.text); })[0] : null;
+      if (twin) { twin.confirmed = true; twin.scale = "both"; return; }
+      out.push(assign({}, c, { scale: "crop", recovered: true }));
+    });
+    out.notes = notes;
+    return out;
+  }
+
+  /* Confirmation read (third, optional pass). The region crop is scaled for small LABELS; a large value it
+   * failed to read ("22" on the 2x MP40 came back as waveform "WN") stays unconfirmed. confirmationRegion
+   * returns a tight crop around the still-unconfirmed large values, scaled so the numerals are ~110 px tall;
+   * applyConfirmation may ONLY mark an existing box confirmed (same digits) or conflicted (different
+   * digits). It never adds a value, so it cannot introduce a reading the first two passes did not make. */
+  function confirmationRegion(obs, imageSize) {
+    var G = buildGraph(obs, {}), SH = imageSize && imageSize.h || 1000, SW = imageSize && imageSize.w || 1000;
+    var targets = G.B.filter(function (b) { return (b.role === "numeric" || b.role === "pressure") && b.h >= G.maxH * 0.55 && !b.confirmed && !b.conflict; });
+    if (!targets.length) return null;
+    var x0 = 1, y0 = 1, x1 = 0, y1 = 0;
+    targets.forEach(function (b) { x0 = Math.min(x0, b.x - b.w * 0.25); y0 = Math.min(y0, b.y - b.h * 0.4); x1 = Math.max(x1, b.x + b.w * 1.25); y1 = Math.max(y1, b.y + b.h * 1.4); });
+    var reg = { x: clamp(x0, 0, 1), y: clamp(y0, 0, 1) }; reg.w = clamp(x1, 0, 1) - reg.x; reg.h = clamp(y1, 0, 1) - reg.y;
+    var valPx = median(targets.map(function (b) { return b.h; })) * SH;
+    var scale = clamp(110 / Math.max(1, valPx), 1.2, 4);
+    scale = Math.min(scale, 3200 / Math.max(1, Math.max(reg.w * SW, reg.h * SH)));
+    if (scale < 1.05) scale = 1.05;
+    reg.scale = +scale.toFixed(2); reg.targets = targets.map(function (b) { return b.t; });
+    return reg;
+  }
+  function applyConfirmation(obs, confirmObs) {
+    var notes = (obs.notes || []).slice();
+    var out = obs.map(function (o) { return assign({}, o); });
+    out.forEach(function (o) {
+      var d = digitsOf(o.text); if (!d || o.confirmed || o.ocrConflict) return;
+      var same = null, diff = null;
+      (confirmObs || []).forEach(function (c) {
+        if (overlapMin(o, c) < 0.3 || c.h < 0.5 * o.h) return;
+        var dc = digitsOf(c.text); if (!dc) return;
+        if (digitsAgree(o.text, c.text)) same = c; else if (!same) diff = c;
+      });
+      if (same) { o.confirmed = true; o.confirmedBy = "confirmation read"; }
+      else if (diff) { o.ocrConflict = diff.text; notes.push("confirmation read disagrees: " + JSON.stringify(o.text) + " vs " + JSON.stringify(diff.text)); }
+    });
     out.notes = notes;
     return out;
   }
@@ -368,14 +434,16 @@
     var imgSize = (opts && opts.imageSize) || (px ? { w: px.w, h: px.h } : null);
     var tl = tiltOf(G.B.map(function (b) { return G.src[b.i]; }), imgSize);
     if (tl) {
-      if (Math.abs(tl.angle) >= Q.tiltSevere) add("tilt", "severe", tl.angle, Q.tiltSevere, "photo rotated " + tl.angle.toFixed(0) + "°");
-      else if (Math.abs(tl.angle) >= Q.tiltModerate) add("tilt", "moderate", tl.angle, Q.tiltModerate, "photo rotated " + tl.angle.toFixed(0) + "°");
-      if (tl.spread >= Q.skewSevere) add("perspective", "severe", tl.spread, Q.skewSevere, "strong perspective distortion");
-      else if (tl.spread >= Q.skewModerate) add("perspective", "moderate", tl.spread, Q.skewModerate, "perspective distortion");
+      // INFORMATIONAL ONLY (2026-09-14 benchmark): Vision's quadrilaterals measured 0° on a 5° rotation,
+      // -7° on 12°, nothing on 25°, and a 6° "perspective" on an undistorted photo. A signal that wrong in
+      // both directions may not decide RETAKE or DEGRADED; rotated photos are protected instead by the
+      // two-pass confirmation rule and the edge / conflict blockers.
+      if (Math.abs(tl.angle) >= Q.tiltModerate) add("tilt", "info", tl.angle, Q.tiltModerate, "text lines measured at " + tl.angle.toFixed(0) + "° (unreliable estimate)");
+      if (tl.spread >= Q.skewModerate) add("perspective", "info", tl.spread, Q.skewModerate, "text-line angle spread " + tl.spread.toFixed(0) + "° (unreliable estimate)");
     }
     var edge = G.B.filter(function (b) { return b.edge && (b.role === "numeric" || b.role === "pressure"); });
     if (edge.length) add("partial", "moderate", edge.length, 0, "monitor partially cropped: " + edge.map(function (b) { return JSON.stringify(b.t); }).join(", ") + " touch the photo edge");
-    var severe = issues.some(function (i) { return i.severity === "severe"; }), moderate = issues.length > 0;
+    var severe = issues.some(function (i) { return i.severity === "severe"; }), moderate = issues.some(function (i) { return i.severity === "moderate"; });
     return { status: severe ? "RETAKE_PHOTO" : moderate ? "DEGRADED" : "OK", issues: issues, blur: mb == null ? null : +mb.toFixed(2), tilt: tl };
   }
 
@@ -386,7 +454,7 @@
       o = obs[i]; src[i] = o; if (!o || typeof o.text !== "string") continue;
       var x = +o.x || 0, y = +o.y || 0, w = +o.w || 0, h = +o.h || 0, t = o.text.trim();
       var n = { i: i, t: t, conf: (o.conf == null ? null : +o.conf), x: x, y: y, w: w, h: h, cx: x + w / 2, cy: y + h / 2, color: o.color || null, role: "text", nums: nums(t), labels: [],
-        scale: o.scale || null, conflict: o.ocrConflict || null, edge: (x <= 0.004 || y <= 0.004 || x + w >= 0.996 || y + h >= 0.996) };
+        scale: o.scale || null, confirmed: !!(o.confirmed || o.scale === "both"), conflict: o.ocrConflict || null, edge: (x <= 0.004 || y <= 0.004 || x + w >= 0.996 || y + h >= 0.996) };
       if (isClock(t)) n.role = "clock";
       else if (isDate(t)) n.role = "date";
       else if (isBanner(t)) n.role = "banner";
@@ -486,6 +554,16 @@
     if (cand.conf != null && cand.conf < 0.3) { total *= 0.85; why.push("low OCR confidence"); }
     return { box: cand, value: v, score: clamp(total, 0, 1), parts: sc, role: role, why: why, chan: chan };
   }
+  /* Two-pass confirmation (2026-09-14). A single Vision pass misread DBP 66 as 86 at confidence 1.0 on
+   * a 12°-rotated photo, and no image-quality signal flagged it reliably. So when the caller ran the
+   * two-scale pipeline (opts.twoScale = {ran: bool}), every auto-filled NUMBER must be read with the same
+   * digits by both passes; if the second pass could not run, nothing numeric auto-fills. Degraded photos
+   * require it even from single-scale callers. */
+  function needsConfirmation(opts) { return !!(opts && (opts.twoScale || opts.__degraded)); }
+  function confirmationReason(opts) {
+    if (opts && opts.twoScale && !opts.twoScale.ran) return "second OCR pass could not locate the monitor numerics, so the value is unconfirmed";
+    return (opts && opts.__degraded ? "photo quality degraded and the" : "the") + " value was not read identically by both OCR passes";
+  }
   function thresholdFor(field, opts) {
     var t = assign({}, THRESH[field] || THRESH.hr, opts && opts.thresholds && opts.thresholds[field]);
     if (opts && opts.__degraded) { t.conf = Math.min(0.99, t.conf + DEGRADED_BUMP); if (t.margin != null) t.margin += 0.03; }
@@ -509,6 +587,9 @@
     if (top.box.conflict) blockers.push("OCR scales disagree (" + JSON.stringify(top.box.t) + " vs " + JSON.stringify(top.box.conflict) + ")");
     if (top.box.edge) blockers.push("value touches the photo edge (may be truncated)");
     if (top.glueConflict) blockers.push(top.glueConflict);
+    // On a DEGRADED photo a single OCR reading is not enough: the 12°-rotated MP40 read DBP 66 as 86 at
+    // confidence 1.0 in one pass (2026-09-14). Only digits read identically by both passes may auto-fill.
+    if (!top.box.confirmed && needsConfirmation(opts)) blockers.push(confirmationReason(opts));
     if (!blockers.length && conf >= T.conf && margin >= needMargin && ev >= 2 && sizeOk && labelOk && top.role !== "limit" && top.role !== "limitRange")
       return { status: "AUTO_ACCEPTED", confidence: +conf.toFixed(2), value: top.value, margin: +margin.toFixed(2), evidence: ev, threshold: T.conf };
     var reason = blockers.length ? blockers.join("; ") : second && margin < needMargin ? "two candidates too close (" + top.value + " vs " + second.value + (sizeTie ? ", same size and row" : "") + ")" : !labelOk ? "label not read (slot" + (ev >= 2 ? " and colour agree" : " only") + ")" : ev < 2 ? "only " + ev + " independent signal(s)" : !sizeOk ? "size/position inconsistent" : "confidence " + conf.toFixed(2) + " below " + T.conf;
@@ -577,6 +658,7 @@
       if (p.press.repaired) bl.push("OCR repaired (" + p.press.repaired + "): " + JSON.stringify(p.t) + " read as " + p.press.s + "/" + p.press.d);
       if (p.conflict) bl.push("OCR scales disagree (" + JSON.stringify(p.t) + " vs " + JSON.stringify(p.conflict) + ")");
       if (p.edge) bl.push("reading touches the photo edge (may be truncated)");
+      if (!p.confirmed && needsConfirmation(opts)) bl.push(confirmationReason(opts));
       return bl;
     }
     function reading(p) { return { s: p.press.s, d: p.press.d, map: p.mapVal == null ? null : p.mapVal }; }
@@ -585,8 +667,8 @@
     V.forEach(function (p) {
       if (!p.src || out[p.src]) return;
       var bl = blockersOf(p), c = 0.6 + 0.25 * p.srcStrength + 0.15 * clamp(p.h / G.maxH, 0, 1);
-      var ok = !bl.length && c >= TP.conf && p.srcStrength >= 0.9;
-      if (!ok && !bl.length && p.srcStrength < 0.9) bl.push("source label weak (" + JSON.stringify(p.srcLabel ? p.srcLabel.t : p.t) + ")");
+      var ok = !bl.length && c >= TP.conf && p.srcStrength >= 0.7;   // same source rule as the primary pressure
+      if (!ok && !bl.length && p.srcStrength < 0.7) bl.push("source label weak (" + JSON.stringify(p.srcLabel ? p.srcLabel.t : p.t) + ")");
       out[p.src] = { status: ok ? "AUTO_ACCEPTED" : "NEEDS_REVIEW", confidence: +c.toFixed(2), value: ok ? reading(p) : null, suggested: reading(p), source: p.src.toUpperCase(), box: p.i, mapBox: p.mapBox ? p.mapBox.i : (p.mapVal != null ? p.i : null),
         label: p.srcLabel ? { text: p.srcLabel.t, box: p.srcLabel.i, strength: p.srcStrength } : (p.srcGlued ? { text: p.t, box: p.i, strength: p.srcStrength, glued: true } : null), reason: bl.length ? bl.join("; ") : undefined };
     });
@@ -770,6 +852,6 @@
     return out.join("");
   }
 
-  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
+  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
     _internals: { buildGraph: buildGraph, assessQuality: assessQuality, blurOf: blurOf, tiltOf: tiltOf, digitsOf: digitsOf, similarity: similarity, gluedValue: gluedValue, FIELDS: FIELDS, LABELS: LABELS, rgbToHsv: rgbToHsv, sampleRegion: sampleRegion, channelColorAtValue: channelColorAtValue, channelColor: channelColor } };
 });

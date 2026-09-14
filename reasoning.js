@@ -4586,11 +4586,23 @@
               return { obs: merged, crop: { region: region, boxes: cb.length, notes: merged.notes || [] } };
             }).catch(function () { return { obs: fullObs, crop: { region: region, error: "crop-ocr-failed" } }; });
           }) : Promise.resolve({ obs: fullObs, crop: null });
-          return second.then(function (pass) { return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop }; });
+          return second.then(function (pass) {
+            // third, targeted read: large values the first two passes did not both read are re-read in a
+            // tight crop sized to the numerals; it can only confirm or conflict, never add a value
+            var creg = null; try { creg = (imageSize && pass.crop && !pass.crop.error) ? V2.confirmationRegion(pass.obs, imageSize) : null; } catch (e) {}
+            if (!creg) return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop };
+            return smdCropDataUrl(dataUrl, creg).then(function (url) {
+              if (!url) return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop };
+              return window.SMD_NATIVE.ocr(url, { languageCorrection: false }).then(function (co) {
+                var cb = ((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; });
+                return { px: px, imageSize: imageSize, obs: V2.applyConfirmation(pass.obs, V2.mapCropObservations(cb, creg)), crop: assign2(pass.crop, { confirm: { region: creg, boxes: cb.length } }) };
+              }).catch(function () { return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop }; });
+            });
+          });
         }).then(function (ctx) {
           var px = ctx.px, obsM = ctx.obs;
           var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
-          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, unlabeledAuto: relaxed });
+          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed });
           boxes = obsM;   // evidence and overlay refer to the merged observation list
           var vitals = {}; Object.keys(res.values).forEach(function (k) { if (typeof res.values[k] === "number") vitals[k] = res.values[k]; });
           var fields;
