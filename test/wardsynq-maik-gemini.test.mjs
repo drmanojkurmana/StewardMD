@@ -16,7 +16,7 @@ import assert from "node:assert/strict";
 
 import { TASK, MODELS, PROVIDERS, route, invoke, maikStatus, scrubSecret, geminiKey } from "../functions/_wardsynq/maik-gateway.js";
 
-const KEY = "AIzaSy-TEST-KEY-not-a-real-credential-000000";
+const KEY = "AIzaSy-TEST-KEY-not-a-real-credential-000000"; // security-scan: allow test placeholder, not a real key
 const envWithKey = { GEMINI_API_KEY: KEY };
 const on = (over) => ({ enabled: true, phiApproved: ["gemini"], ...(over || {}) });
 
