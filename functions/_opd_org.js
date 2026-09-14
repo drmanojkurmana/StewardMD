@@ -6,8 +6,9 @@
  * scope live here as pure predicates so they are unit-tested and enforced identically server-side
  * (never trust the frontend). No EMR/GHIS specifics — org.mode + connectorId is the only EMR coupling.
  */
-import { isRole, can } from "./_queue_roles.js";
+import { isRole, can, capsFor, CAPS as ROLE_CAP_NAMES } from "./_queue_roles.js";
 import { orgProfile, memberProfile } from "./_region_in.js";
+const STAFF_ADMIN_CAP = ROLE_CAP_NAMES.STAFF_ADMIN;
 
 export const OPD_ORG_VERSION = "1.0";
 
@@ -251,6 +252,26 @@ export function membership(o = {}) {
 }
 
 // ---- TENANT ISOLATION (pure predicates — the server enforces these on every org-scoped call) ----
+/* PURE. Why a staff-admin change must be refused, or null. staff.admin lets a role such as "hr" manage
+ * people, but never people more powerful than itself, never grant a role it does not itself hold,
+ * never change its own role, and never touch the hospital owner. Without this an hr account could
+ * promote itself to admin, or disable and re-PIN the owner's own staff sign-in.
+ * az: authorizeOrg's answer for the caller. actorIds: every identity the caller signs in as. */
+export function memberChangeRefusal(orgDoc, az, actorIds, targetIdentity, targetRole, newRole) {
+  if (az && az.owner) return null;
+  const mine = capsFor(az && az.role);
+  const covers = (role) => capsFor(role).every((c) => mine.indexOf(c) > -1);
+  const target = String(targetIdentity || "");
+  if (orgDoc && orgDoc.ownerUid && target === String(orgDoc.ownerUid)) return "owner_protected";
+  const self = (actorIds || []).some((id) => id && String(id).toLowerCase() === target.toLowerCase());
+  if (self && newRole && String(newRole) !== String(targetRole || "")) return "own_role";
+  // Only roles that can themselves manage staff are guarded: hr disabling or hiring a doctor is its job,
+  // but it may not touch, or create, a staff manager holding permissions hr lacks.
+  const manager = (role) => capsFor(role).indexOf(STAFF_ADMIN_CAP) > -1;
+  if (targetRole && manager(targetRole) && !covers(targetRole)) return "target_outranks_you";
+  if (newRole && manager(newRole) && !covers(newRole)) return "role_above_yours";
+  return null;
+}
 export function isOwnerOfOrg(orgDoc, actorId) { return !!(orgDoc && actorId && orgDoc.ownerUid && String(orgDoc.ownerUid) === String(actorId)); }
 // A membership may act in an org only if it is active AND belongs to that exact org.
 export function canAccessOrg(m, orgId) { return !!(m && m.active && m.orgId && String(m.orgId) === String(orgId)); }

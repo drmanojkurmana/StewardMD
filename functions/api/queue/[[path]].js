@@ -36,7 +36,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -3635,6 +3635,11 @@ export async function onRequest(context) {
       }
       if (seg === "member") {   // staff lifecycle (owner/admin only): invite/role/scope + credentials + enable/disable
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        // staff.admin manages people no more powerful than the caller, and never the owner or the caller's own role.
+        const mTarget = await ORG.getMembership(env, body.orgId, body.identity || "");
+        const refusal = memberChangeRefusal(await ORG.getOrg(env, body.orgId), az, [actor.id, actor.email],
+          body.identity, mTarget && mTarget.role, !sub && !body.remove ? body.role : null);
+        if (refusal) return json({ ok: false, error: refusal, message: "Only the hospital owner, or someone holding every permission involved, can make this change." }, 403, request);
         // Each refuses an identity with no member row instead of creating one (memberMissing in the store).
         const lifecycle = async (p) => { const r = await p; return json(r, r && r.ok === false ? (r.error === "member_not_found" ? 404 : 422) : 200, request); };
         if (sub === "pin") return lifecycle(ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id));

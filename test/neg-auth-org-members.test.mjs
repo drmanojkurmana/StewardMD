@@ -161,7 +161,7 @@ test("POST /member/disable: the hospital's own staff.admin succeeds (proves the 
  * staff sign-in with no special-case protection at all. The Firebase-side ownership check
  * (isOwnerOfOrg in functions/_opd_org.js) still lets the owner use the console, but their staff/PIN
  * identity is disabled by a subordinate with no recourse recorded anywhere in this code path. */
-test("BUG: POST /member/disable should refuse to disable the hospital owner's own staff-credential row", { skip: "BUG: functions/_opd_org_store.js:301 setMemberActive has no ownerUid check - a non-owner staff.admin holder ('hr') currently succeeds (200) at disabling a member row whose identity is the org's own owner, flipping active:false and revoking their staff/PIN sessions. Not fixed here per task instructions; this test documents the intended-safe behaviour (403) that the code does not yet enforce." }, async () => {
+test("POST /member/disable should refuse to disable the hospital owner's own staff-credential row", async () => {
   seedTwoHospitals();
   // The owner is ALSO enrolled as an ordinary staff member (identity = their own email), the
   // realistic shape for an owner who also signs in with a hospital PIN.
@@ -207,7 +207,7 @@ test("POST /member/pin: the hospital's own staff.admin succeeds (proves the refu
  * non-owner staff.admin holder can overwrite the PIN credential on a member row that happens to be
  * the org owner's own staff identity - a straightforward account-takeover path if that owner also
  * signs in via PIN, with nothing in this route or the store refusing it. */
-test("BUG: POST /member/pin should refuse to overwrite the hospital owner's own PIN credential", { skip: "BUG: functions/_opd_org_store.js:309 setMemberPin has no ownerUid check - a non-owner staff.admin holder ('hr') currently succeeds (200) at overwriting the PIN credential on a member row that is the org owner's own staff identity, a straightforward account-takeover path if that owner also signs in via PIN. Not fixed here per task instructions; this test documents the intended-safe behaviour (403) that the code does not yet enforce." }, async () => {
+test("POST /member/pin should refuse to overwrite the hospital owner's own PIN credential", async () => {
   seedTwoHospitals();
   seedMember("org-a", OWNER_A_EMAIL, "admin");
   const r = await api("/member/pin", "POST", { orgId: "org-a", identity: OWNER_A_EMAIL, pin: "4826" }, asFirebase(HR_A_EMAIL));
@@ -222,7 +222,20 @@ test("BUG: POST /member/pin should refuse to overwrite the hospital owner's own 
  * staff.admin but none of the "admin" role's clinical/billing/technical capabilities, can call
  * POST /member on themselves with { role: "admin" } and walk away holding every capability "admin"
  * carries (ROLE_CAPS.admin in functions/_queue_roles.js is effectively "every capability"). */
-test.todo("BUG: POST /member lets a staff.admin holder self-escalate their own role to \"admin\" (functions/_opd_org_store.js:242 setMembership has no self-target / role-escalation guard) - flagged alongside member/disable and member/pin, same STAFF_ADMIN gate, general /member route not one of the ten assigned");
+test("POST /member: a staff.admin holder cannot promote themselves, grant a role above their own, or touch someone who outranks them", async () => {
+  seedTwoHospitals();
+  const self = await api("/member", "POST", { orgId: "org-a", identity: HR_A_EMAIL, role: "admin" }, asFirebase(HR_A_EMAIL));
+  assert.equal(self.__status, 403, JSON.stringify(self));
+  assert.equal(memberDoc("org-a", HR_A_EMAIL).fields.role, "hr", "hr must still be hr");
+  const grant = await api("/member", "POST", { orgId: "org-a", identity: VICTIM_A_EMAIL, role: "admin" }, asFirebase(HR_A_EMAIL));
+  assert.equal(grant.__status, 403, JSON.stringify(grant));
+  seedMember("org-a", "peer-admin@example.test", "admin");
+  const up = await api("/member/disable", "POST", { orgId: "org-a", identity: "peer-admin@example.test" }, asFirebase(HR_A_EMAIL));
+  assert.equal(up.__status, 403, JSON.stringify(up));
+  assert.equal(memberDoc("org-a", "peer-admin@example.test").fields.active, true);
+  const owner = await api("/member", "POST", { orgId: "org-a", identity: VICTIM_A_EMAIL, role: "admin" }, asFirebase(OWNER_A_EMAIL));
+  assert.equal(owner.__status, 200, "the owner can still grant admin: " + JSON.stringify(owner));
+});
 
 /* ==================================================================================================
  * POST /org/update
