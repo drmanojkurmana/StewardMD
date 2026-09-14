@@ -63,7 +63,7 @@ test("a real member is disabled (loses access), restored, reset, and each step i
 
 test("the route is admin-only and turns a refusal into a failure, not a success", () => {
   const src = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
-  const block = src.slice(src.indexOf('if (seg === "member") {'), src.indexOf('if (seg === "member") {') + 1400);
+  const block = src.slice(src.indexOf('if (seg === "member") {'), src.indexOf('if (seg === "member") {') + 2400);
   assert.match(block, /azOrg\(CAPS\.STAFF_ADMIN\); if \(!az\.ok\) return deny\(az\)/);
   for (const sub of ["pin", "password", "disable", "restore", "reset"]) assert.match(block, new RegExp('sub === "' + sub + '"\\) return lifecycle\\('));
   assert.match(block, /r\.ok === false \? \(r\.error === "member_not_found" \? 404 : 422\) : 200/);

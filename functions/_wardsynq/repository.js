@@ -17,7 +17,8 @@
  *   latest(tenantId, resourceType, id)               -> record | null       the highest version
  *   history(tenantId, resourceType, id)              -> record[]            every version, ascending
  *   byPatient(tenantId, resourceType, patientId)     -> record[]            latest version per id
- *   latestByType(tenantId, resourceType, limit)      -> record[]            latest per id, a roster
+ *   latestByType(tenantId, resourceType, limit, opts) -> record[]           latest per id, a roster;
+ *                                                                           opts.newest: most recently written first
  *   patientsByIdentifier(tenantId, keys)             -> Patient[]           an INDEX SEEK, not a scan
  *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
  *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
@@ -28,7 +29,9 @@
  * deletes. It MUST be atomic across the records, the idempotency key and the audit event it is
  * given - and across the optional ctx.idempotency ([{key, resourceType, id, version}]) and
  * ctx.audits ([event]) lists, which let one append carry several logical writes (see staged.js,
- * the consultation's unit of work) with every key and every audit row they would have had alone - and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
+ * the consultation's unit of work) with every key and every audit row they would have had alone.
+ * ctx.aliases ([{hash, resourceType, id}]) adds published-id aliases beyond the automatic ones, so an
+ * opaque id handed to another system (a webhook notification) resolves on the FHIR door - and it MUST throw VersionConflictError if any (resourceType, id, version) already exists
  * for that tenant. That last rule is the concurrency control for the whole system: two clients
  * that both derive version N+1 from version N cannot both land, whatever the network did.
  *
@@ -192,14 +195,16 @@ class MemoryRepository {
     return [...byId.values()].map((r) => clone(r.body));
   }
 
-  async latestByType(tenantId, resourceType, limit) {
+  async latestByType(tenantId, resourceType, limit, opts) {
     const max = rosterLimit(limit);
     const byId = new Map();
     for (const r of this._rows) {
       if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
       byId.set(r.id, r);
     }
-    return [...byId.values()].slice(0, max).map((r) => clone(r.body));
+    const rows = [...byId.values()];
+    if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
+    return rows.slice(0, max).map((r) => clone(r.body));
   }
 
   /**
@@ -351,6 +356,9 @@ class MemoryRepository {
       if (alias && !this._alias.has(`${tenantId}|${alias}`)) {
         this._alias.set(`${tenantId}|${alias}`, { resourceType: rec.resourceType, id: rec.id });
       }
+    }
+    for (const a of Array.isArray(ctx.aliases) ? ctx.aliases : []) {
+      if (!this._alias.has(`${tenantId}|${a.hash}`)) this._alias.set(`${tenantId}|${a.hash}`, { resourceType: a.resourceType, id: a.id });
     }
     if (ctx.idempotencyKey && records.length) {
       const r = records[records.length - 1];

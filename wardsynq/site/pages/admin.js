@@ -46,7 +46,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"], ["group", "Hospital group"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"]);
+    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["integrations", "Integrations"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
 
@@ -662,6 +662,122 @@
       };
     });
   }
+  // ---- Hospital group (P2.14) ------------------------------------------------------------------
+  /* Two halves on one tab, because the same person is often on both sides. THIS HOSPITAL'S SIDE:
+   * invitations to accept or decline (only the owner can; the server says so to anyone else), groups
+   * it belongs to, leaving, and adopting a group's recommended settings as a copy. GROUPS YOU RUN:
+   * create, invite by hospital id or code, remove, publish recommended settings, open the overview.
+   * A group sees counts only, never a patient. An invitation alone does not make a hospital a member. */
+  // The only actions each half sends to /group/<action>; anything else sends nothing.
+  var GROUP_SIDE_ROUTE = { accept: "accept", decline: "decline", remove: "remove", adopt: "adopt" };
+  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy" };
+  function groupSideHtml(c, r) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>This hospital\'s groups</h2>';
+    if (r == null) return h + '<span class="spin"></span> Loading...</div>';
+    if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ". Do not read this as no groups or invitations.</div></div>";
+    if (!r.groups.length) return h + '<p class="quiet">This hospital is not in a hospital group and has no invitations.</p></div>';
+    return h + '<p class="quiet">A group sees this hospital\'s counts (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' +
+      '<div class="tbl"><table><thead><tr><th>Group</th><th>Status</th><th>Recommended settings</th><th></th></tr></thead><tbody>' +
+      r.groups.map(function (g) {
+        var id = esc(g.groupId);
+        var pol = g.policy ? Object.keys(g.policy) : [];
+        return "<tr><td>" + esc(g.name || g.groupId) + "</td><td>" + (g.state === "member" ? '<span class="pill ok">member</span>' : '<span class="pill warn">invited, not a member yet</span>') + "</td><td>" +
+          (g.state !== "member" ? "" : pol.length ? esc(pol.join(", ")) + " (version " + esc(g.policyVersion) + ")" : '<span class="quiet">none published</span>') + "</td><td>" +
+          (g.state === "invited"
+            ? '<button type="button" class="btn" data-grp-side="accept" data-grp="' + id + '">Accept</button> <button type="button" class="btn ghost" data-grp-side="decline" data-grp="' + id + '">Decline</button>'
+            : (pol.length ? '<button type="button" class="btn" data-grp-side="adopt" data-grp="' + id + '">Adopt recommended settings</button> ' : "") +
+              '<button type="button" class="btn ghost" data-grp-side="remove" data-grp="' + id + '">Leave group</button>') + "</td></tr>";
+      }).join("") + '</tbody></table></div><div id="grpSideMsg"></div></div>';
+  }
+  function groupRunHtml(c, r) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>Hospital groups you run</h2>';
+    if (r == null) return h + '<span class="spin"></span> Loading...</div>';
+    if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ".</div></div>";
+    h += r.groups.length ? r.groups.map(function (g) {
+      var id = esc(g.id);
+      return "<h3>" + esc(g.name) + "</h3>" +
+        '<p><button type="button" class="btn ghost" data-go="group/' + id + '">Open group overview</button></p>' +
+        (g.members.length ? "<p>Members:</p><ul>" + g.members.map(function (m) {
+          return "<li>" + esc(m.name || m.orgId) + ' <span class="mono">' + esc(m.orgId) + '</span> <button type="button" class="btn quiet" data-grp-run="remove" data-grp="' + id + '" data-org="' + esc(m.orgId) + '">Remove</button></li>';
+        }).join("") + "</ul>" : '<p class="quiet">No member hospitals yet.</p>') +
+        (g.invited.length ? "<p>Invited, waiting for the hospital's owner to accept:</p><ul>" + g.invited.map(function (m) {
+          return '<li><span class="mono">' + esc(m.orgId) + '</span> <button type="button" class="btn quiet" data-grp-run="remove" data-grp="' + id + '" data-org="' + esc(m.orgId) + '">Withdraw invitation</button></li>';
+        }).join("") + "</ul>" : "") +
+        '<div class="row"><label class="f"><span>Invite a hospital (id or SMD code)</span><input data-grp-invite-input="' + id + '"></label>' +
+        '<button type="button" class="btn" data-grp-run="invite" data-grp="' + id + '">Invite</button></div>' +
+        '<label class="f"><span>Recommended settings (JSON, version ' + esc(g.policyVersion) + ')</span><textarea rows="5" style="width:100%;font-family:monospace" data-grp-policy-input="' + id + '">' + esc(g.policy ? JSON.stringify(g.policy, null, 2) : "") + "</textarea></label>" +
+        '<button type="button" class="btn ghost" data-grp-run="policy" data-grp="' + id + '">Publish recommended settings</button>' +
+        '<p class="quiet">A member hospital\'s admin decides whether to adopt them. Nothing changes in any hospital until they do.</p>';
+    }).join("") : '<p class="quiet">You do not run a hospital group.</p>';
+    return h + '<h3>Create a group</h3><div class="row"><label class="f"><span>Group name</span><input id="grpNewName"></label>' +
+      '<button type="button" class="btn" id="grpCreate">Create group</button></div><div id="grpRunMsg"></div></div>';
+  }
+  WSQ._groupAdmin = { side: groupSideHtml, run: groupRunHtml };
+
+  function renderGroup(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = '<div id="grpSide">' + groupSideHtml(c, null) + '</div><div id="grpRun">' + groupRunHtml(c, null) + "</div>";
+    var say = function (id, x) { var m = document.getElementById(id); if (m) m.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; };
+    var side = c.api("/group/memberships" + q).then(function (r) {
+      var box = document.getElementById("grpSide");
+      box.innerHTML = groupSideHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      box.querySelectorAll("[data-grp-side]").forEach(function (b) {
+        b.onclick = function () {
+          var act = b.getAttribute("data-grp-side"), gid = b.getAttribute("data-grp");
+          if (!GROUP_SIDE_ROUTE[act]) return;
+          if (act === "remove" && !window.confirm("Leave this group? It stops seeing this hospital's counts at once.")) return;
+          if (act === "adopt" && !window.confirm("Copy the group's recommended settings into this hospital's own configuration? Settings of the same name are replaced; this is recorded in the audit trail.")) return;
+          b.disabled = true;
+          c.api("/group/" + GROUP_SIDE_ROUTE[act], { orgId: c.state.orgId, groupId: gid }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; say("grpSideMsg", x); return; }
+            if (act === "adopt" && x.org) c.state.org = x.org;
+            c.toast({ accept: "Joined the group.", decline: "Invitation declined.", remove: "Left the group.", adopt: "Recommended settings copied into this hospital." }[act]);
+            WSQ.render("admin");
+          });
+        };
+      });
+    });
+    var run = c.api("/group/my-groups").then(function (r) {
+      var box = document.getElementById("grpRun");
+      box.innerHTML = groupRunHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      var create = document.getElementById("grpCreate");
+      if (create) create.onclick = function () {
+        var name = (document.getElementById("grpNewName").value || "").trim();
+        if (!name) { say("grpRunMsg", { message: "Give the group a name." }); return; }
+        create.disabled = true;
+        c.api("/group/create", { name: name }).then(function (x) {
+          if (!x || !x.ok) { create.disabled = false; say("grpRunMsg", x); return; }
+          c.toast("Group created."); WSQ.render("admin");
+        });
+      };
+      box.querySelectorAll("[data-grp-run]").forEach(function (b) {
+        b.onclick = function () {
+          var act = b.getAttribute("data-grp-run"), gid = b.getAttribute("data-grp"), payload = { groupId: gid };
+          if (!GROUP_RUN_ROUTE[act]) return;
+          if (act === "invite") {
+            payload.orgId = (box.querySelector('[data-grp-invite-input="' + gid + '"]').value || "").trim();
+            if (!payload.orgId) { say("grpRunMsg", { message: "Enter the hospital's id or SMD code." }); return; }
+          } else if (act === "remove") {
+            payload.orgId = b.getAttribute("data-org");
+            if (!window.confirm("Remove this hospital from the group?")) return;
+          } else if (act === "policy") {
+            var raw = (box.querySelector('[data-grp-policy-input="' + gid + '"]').value || "").trim();
+            try { payload.policy = raw ? JSON.parse(raw) : null; } catch (e) { say("grpRunMsg", { message: "That is not valid JSON, so nothing was published." }); return; }
+          }
+          b.disabled = true;
+          c.api("/group/" + GROUP_RUN_ROUTE[act], payload).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; say("grpRunMsg", x); return; }
+            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published." }[act]);
+            WSQ.render("admin");
+          });
+        };
+      });
+    });
+    return Promise.all([side, run]);
+  }
+
   // ---- MaiK clinical AI (WardSynQ hospitals only) --------------------------------------------------
   // Status shape comes verbatim from functions/_wardsynq/maik-gateway.js maikStatus(), wrapped in
   // {ok:true,...} by GET /ward/maik-status (functions/api/queue/[[path]].js). No key material is ever
@@ -739,7 +855,7 @@
   var SEC_TYPE_LABEL = {
     "chart-access-volume": "Unusually many patients read", "chart-access-off-hours": "Reads outside usual hours",
     "repeated-denied": "Repeated denied actions", "unusual-export": "Unusual export volume",
-    "failed-sign-ins": "Many failed sign-ins", "new-device": "Sign-in from a new device", "many-devices": "Many devices in a short time"
+    "out-of-assignment": "Read outside an assignment", "failed-sign-ins": "Many failed sign-ins", "new-device": "Sign-in from a new device", "many-devices": "Many devices in a short time"
   };
   var SEC_STATUS_LABEL = { green: "Protected: recent backup and a successful restore test on record", amber: "Needs attention", red: "Not protected", unavailable: "Unknown: could not be checked" };
 
@@ -752,12 +868,32 @@
     return h + s.findings.map(function (f) {
       return "<details><summary><b>" + esc(SEC_TYPE_LABEL[f.type] || f.type) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
         '<p class="quiet">' + esc(f.method) + "</p>" +
-        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th></tr></thead><tbody>' +
+        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th><th>Audit row</th></tr></thead><tbody>' +
         f.evidence.map(function (e) {
-          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + "</td></tr>";
+          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + '</td><td class="mono">' + esc(e.id || "") + (e.recordId ? "<br>" + esc(e.recordId) : "") + "</td></tr>";
         }).join("") + "</tbody></table></div>" +
         (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + "</details>";
     }).join("");
+  }
+
+  /* Reads outside an assignment. "Not evaluated" is its own state and never renders as no findings. */
+  function secAssignment(c, s, days) {
+    var esc = c.esc;
+    var h = "<h3>Reads outside an assignment</h3>";
+    if (!s || (s.status !== "ok" && s.status !== "not_evaluated")) return h + '<div class="msg err">Could not be checked' + (s && s.detail ? ": " + esc(s.detail) : "") + ". This is not the same as nothing being found.</div>";
+    var ex = (s.exemptions || []).length ? "<details><summary>Exempt from this check</summary><ul>" + s.exemptions.map(function (x) { return "<li>" + esc(x.rule) + " " + esc(x.reason) + "</li>"; }).join("") + "</ul></details>" : "";
+    if (s.status === "not_evaluated") return h + '<div class="msg note">Not evaluated: ' + esc(s.reason) + " This is not the same as no findings.</div>" + ex;
+    if (s.truncated) h += '<div class="msg note">Only part of the log could be read, so some reads may not have been checked.</div>';
+    if ((s.incomplete || []).length) h += '<div class="msg note">Incomplete: ' + esc(s.incomplete.join("; ")) + ".</div>";
+    h += '<p class="quiet">' + esc(s.readsInPeriod) + " reads in the period: " + esc(s.assignedReads) + " within an assignment.</p>";
+    h += s.findings.length ? secSection(c, "", { status: "ok", findings: s.findings }, days).replace("<h3></h3>", "") : '<p class="quiet">No reads outside an assignment among the reads that could be compared.</p>';
+    var list = function (title, rows, field) {
+      return rows.length ? "<details><summary>" + esc(title) + " (" + rows.reduce(function (n, x) { return n + x.reads; }, 0) + " reads)</summary><ul>" +
+        rows.map(function (x) {
+          return "<li>" + esc(x.actor) + ": " + esc(x.reads) + " reads. " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span></li>";
+        }).join("") + "</ul></details>" : "";
+    };
+    return h + list("Not evaluated", s.notEvaluated || [], "reason") + list("Exempt", s.exempt || [], "exemption") + ex;
   }
 
   function securityReviewHtml(c, r) {
@@ -770,7 +906,7 @@
     h += types.length ? '<div class="tbl"><table><thead><tr><th>Finding</th><th>Count</th></tr></thead><tbody>' +
       types.map(function (t) { return "<tr><td>" + esc(SEC_TYPE_LABEL[t] || t) + "</td><td>" + esc(r.counts[t]) + "</td></tr>"; }).join("") + "</tbody></table></div>"
       : '<p class="quiet">No findings in the sections that could be checked. Check each section below for any that could not.</p>';
-    h += secSection(c, "Chart access", r.chartAccess, r.days) + secSection(c, "Exports", r.exports, r.days) + secSection(c, "Sign-ins", r.logins, r.days);
+    h += secSection(c, "Chart access", r.chartAccess, r.days) + secAssignment(c, r.assignmentAccess, r.days) + secSection(c, "Exports", r.exports, r.days) + secSection(c, "Sign-ins", r.logins, r.days);
     h += "<h3>Not checked, and why</h3><ul>" + (r.notDetected || []).map(function (n) { return "<li>" + esc(n.rule) + ": " + esc(n.reason) + "</li>"; }).join("") + "</ul></div>";
 
     var q = r.reviewQueue || {};
@@ -815,6 +951,73 @@
   }
   WSQ._securityReviewHtml = securityReviewHtml;
 
+  /* DATA EXPORT (FHIR). The hospital's record as FHIR Bulk Data NDJSON (functions/_wardsynq/fhir-bulk.js).
+   * The list is null while loading and false when it failed, and a failed load never renders as "no
+   * exports". Each status reads differently: running, done (with its files and counts, even when a
+   * type had nothing), failed (with the reason), cancelled, expired. Anything the export could not
+   * include is listed under the job, never hidden. */
+  var EXPORT_STATUS = { "in-progress": "Running", complete: "Done", failed: "Failed", cancelled: "Cancelled", expired: "Expired, files deleted" };
+  function exportHtml(c, r) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("cloud_download") + " Data export (FHIR)</h2>" +
+      '<p class="quiet">Exports this hospital\'s record as FHIR R4 NDJSON, one file per resource type, in the background. One export runs at a time. Files are fetched through the FHIR Bulk Data API ($export-status) with this hospital\'s authorization, are recorded in the audit trail when downloaded, and are deleted after 24 hours.</p>';
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (r === false || r.failed) return h + '<div class="msg err">Exports could not be loaded' + (r && r.message ? ": " + esc(r.message) : "") + ". This is not the same as there being none.</div></div>";
+    h += "<h3>Start an export</h3><div class=\"row\">" + (r.exportable || []).map(function (t) {
+      return '<label class="f" style="flex:0 1 190px"><span><input type="checkbox" class="admExpType" value="' + esc(t) + '" checked> ' + esc(t) + "</span></label>";
+    }).join("") + "</div>" +
+      '<div class="row"><label class="f"><span>Only changed since (optional)</span><input type="datetime-local" id="admExpSince"></label></div>' +
+      '<button type="button" class="btn" id="admExpStart">Start export</button> <button type="button" class="btn ghost" id="admExpRefresh">Refresh</button><div id="admExpMsg"></div>';
+    h += "<h3>Exports</h3>";
+    if (!r.exports.length) return h + '<p class="quiet">No export has been started for this hospital.</p></div>';
+    h += '<div class="tbl"><table><thead><tr><th>Started</th><th>Types</th><th>Since</th><th>Status</th><th>Files</th><th></th></tr></thead><tbody>' +
+      r.exports.map(function (x) {
+        var status = esc(EXPORT_STATUS[x.status] || x.status);
+        if (x.status === "in-progress") status += '<br><span class="quiet">' + esc(x.exported) + " resources so far</span>";
+        if (x.status === "failed") status = '<span class="msg err">Failed: ' + esc(x.error || "no reason recorded") + "</span>";
+        var files = x.status === "complete"
+          ? (x.files.length ? x.files.map(function (f) { return esc(f.name) + ": " + esc(f.count); }).join("<br>") : "Done. No resources matched this export.")
+          : '<span class="quiet">' + (x.files.length ? x.files.length + " file(s) written" : "none") + "</span>";
+        if (x.issues && x.issues.length) files += '<div class="msg err">Not included: ' + x.issues.map(function (i) { return esc(i.detail); }).join("<br>") + "</div>";
+        var act = (x.status === "in-progress" || x.status === "complete") ? '<button type="button" class="btn ghost" data-exp-cancel="' + esc(x.id) + '">' + (x.status === "complete" ? "Delete files" : "Cancel") + "</button>" : "";
+        return "<tr><td>" + esc(x.requestedAt) + "<br><span class=\"quiet\">" + esc(x.requestedBy) + "</span></td><td>" + esc((x.types || []).join(", ")) + "</td><td>" + esc(x.since || "all") + "</td><td>" + status + "</td><td>" + files + "</td><td>" + act + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    return h + "</div>";
+  }
+  WSQ._exportHtml = exportHtml;
+
+  function renderExport(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = exportHtml(c, null);
+    return c.api("/ward/fhir-exports" + q).then(function (r) {
+      body.innerHTML = exportHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      if (!r || !r.ok) return;
+      var msg = function (t) { document.getElementById("admExpMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
+      document.getElementById("admExpRefresh").onclick = function () { WSQ.render("admin"); };
+      document.getElementById("admExpStart").onclick = function () {
+        var btn = this, types = [];
+        document.querySelectorAll(".admExpType").forEach(function (b) { if (b.checked) types.push(b.value); });
+        if (!types.length) { msg("Choose at least one resource type."); return; }
+        var sinceRaw = document.getElementById("admExpSince").value, since = "";
+        if (sinceRaw) { var d = new Date(sinceRaw); if (isNaN(d.getTime())) { msg("That date is not valid."); return; } since = d.toISOString(); }
+        btn.disabled = true;
+        c.api("/ward/fhir-export", { orgId: c.state.orgId, types: types, since: since }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; msg(refusal(x)); return; }
+          c.toast("Export started."); WSQ.render("admin");
+        });
+      };
+      body.querySelectorAll("[data-exp-cancel]").forEach(function (b) {
+        b.onclick = function () {
+          b.disabled = true;
+          c.api("/ward/fhir-export-cancel", { orgId: c.state.orgId, id: b.getAttribute("data-exp-cancel") }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
+            c.toast("Export cancelled and its files deleted."); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
+
   function renderSecurity(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = securityReviewHtml(c, null);
@@ -843,5 +1046,156 @@
         });
       };
     });
+  }
+
+  // ---- System health (P2.15) ------------------------------------------------------------------
+  /* null = loading, {failed} = the report itself did not load. Neither may look like all healthy. */
+  var HEALTH_LABEL = { up: "Up", degraded: "Degraded", down: "Down" };
+  function systemHealthHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<div class="card"><h2>System health</h2><span class="spin"></span> Checking each dependency...</div>';
+    if (r.failed) return '<div class="card"><h2>System health</h2><div class="msg err">System health could not be loaded: ' + esc(r.message || "failed") +
+      ". The status of every dependency is unknown. This is not the same as everything being up.</div></div>";
+    var head = r.overall === "up" ? '<div class="msg ok">Every dependency answered its check.</div>'
+      : '<div class="msg err">' + esc(r.dependencies.filter(function (d) { return d.status !== "up"; }).length) + " of " + esc(r.dependencies.length) + " dependencies are not fully up.</div>";
+    return '<div class="card"><h2>System health</h2><p class="quiet">Checked ' + esc(r.generatedAt) + ". Each check gives up after " + esc(r.timeoutMs) + " ms and counts as down.</p>" + head +
+      '<div class="tbl"><table><thead><tr><th>Dependency</th><th>Status</th><th>Checked</th><th>What it means</th></tr></thead><tbody>' +
+      r.dependencies.map(function (d) {
+        return '<tr class="' + (d.status === "up" ? "" : "warn") + '"><td>' + esc(d.name) + "</td><td><b>" + esc(HEALTH_LABEL[d.status] || "Unknown") + "</b></td><td>" + esc(d.checkedAt) + "</td><td>" +
+          (d.consequence ? esc(d.consequence) + "<br>" : "") + (d.reason ? '<span class="quiet">' + esc(d.reason) + "</span>" : "") + "</td></tr>";
+      }).join("") + '</tbody></table></div><button type="button" class="btn ghost" id="healthRecheck">Check again</button></div>';
+  }
+  WSQ._systemHealthHtml = systemHealthHtml;
+
+  function renderHealth(c, body) {
+    body.innerHTML = systemHealthHtml(c, null);
+    return c.api("/ward/system-health?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      body.innerHTML = systemHealthHtml(c, r && r.ok && r.dependencies ? r : { failed: true, message: refusal(r) });
+      var again = document.getElementById("healthRecheck");
+      if (again) again.onclick = function () { WSQ.render("admin"); };
+    }, function () { body.innerHTML = systemHealthHtml(c, { failed: true, message: "No response from the server." }); });
+  }
+
+  // ---- Integrations > Webhooks (P2.13) --------------------------------------------------------
+  /* null = loading, {failed} = the list did not load. Neither may look like "no webhooks". `shown` is the
+   * secret from the registration or rotation that just happened: it is in that one answer only. */
+  var WH_STATUS = { active: "Active", disabled: "Disabled", "auto-disabled": "Turned off after repeated failures" };
+  function webhooksHtml(c, r, shown) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>Webhooks</h2>' +
+      '<p class="quiet">A webhook tells another system that something happened here. It carries the event type and an opaque id only: never a name, a number, a test or a value. ' +
+      "The receiving system reads the details through the WardSynQ FHIR API with its own SMART access, where this hospital's permissions and audit trail apply. " +
+      "Each call is signed: X-WardSynQ-Signature is HMAC-SHA256 of the X-WardSynQ-Timestamp, a dot, and the body, with the endpoint's secret.</p>";
+    if (r == null) return h + '<span class="spin"></span> Loading webhooks...</div>';
+    if (r.failed) return h + '<div class="msg err">Webhooks could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
+    if (shown && shown.secret) {
+      h += '<div class="msg ok">Signing secret for ' + esc(shown.url) + ': <code style="user-select:all;word-break:break-all">' + esc(shown.secret) + "</code><br>Copy it now. It is not shown again.</div>";
+    }
+    var label = {};
+    (r.eventTypes || []).forEach(function (t) { label[t.id] = t.label; });
+    h += "<h3>Registered webhooks</h3>";
+    if (!r.webhooks.length) h += '<p class="quiet">No webhooks are registered for this hospital.</p>';
+    else {
+      h += '<div class="tbl"><table><thead><tr><th>Address</th><th>Events</th><th>Status</th><th>Last attempt</th><th></th></tr></thead><tbody>' +
+        r.webhooks.map(function (w) {
+          var status = "<b>" + esc(WH_STATUS[w.status] || w.status) + "</b>" + (w.disabledReason ? '<br><span class="quiet">' + esc(w.disabledReason) + "</span>" : "") +
+            (w.consecutiveFailures ? '<br><span class="msg err">' + esc(w.consecutiveFailures) + " failed in a row</span>" : "");
+          var last = w.lastAttemptAt ? esc(w.lastAttemptAt) + "<br>" + (w.lastOk ? "Delivered" : "Failed") + (w.lastResponseCode ? " (" + esc(w.lastResponseCode) + ")" : "") : '<span class="quiet">None yet</span>';
+          return '<tr class="' + (w.active ? "" : "warn") + '"><td>' + esc(w.url) + (w.description ? '<br><span class="quiet">' + esc(w.description) + "</span>" : "") + "</td><td>" +
+            w.eventTypes.map(function (t) { return esc(label[t] || t); }).join("<br>") + "</td><td>" + status + "</td><td>" + last + "</td><td>" +
+            '<button type="button" class="btn ghost" data-wh-test="' + esc(w.id) + '"' + (w.active ? "" : " disabled") + ">Send test</button> " +
+            '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Recent deliveries</button> ' +
+            '<button type="button" class="btn ghost" data-wh-rotate="' + esc(w.id) + '">Rotate secret</button> ' +
+            '<button type="button" class="btn ghost" data-wh-active="' + esc(w.id) + '" data-on="' + (w.active ? "0" : "1") + '">' + (w.active ? "Disable" : "Enable") + "</button></td></tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    h += '<div id="whLog"></div><div id="whMsg"></div><h3>Add a webhook</h3>';
+    if (!r.keyConfigured) return h + '<div class="msg err">Webhook secrets cannot be stored encrypted on this server, so a webhook cannot be added.</div></div>';
+    return h + '<div class="row"><label class="f"><span>Address (https only)</span><input type="url" id="whUrl" placeholder="https://"></label>' +
+      '<label class="f"><span>Label (optional)</span><input type="text" id="whDesc" maxlength="120"></label></div><div class="row">' +
+      (r.eventTypes || []).map(function (t) {
+        return '<label class="f" style="flex:0 1 240px"><span><input type="checkbox" class="whType" value="' + esc(t.id) + '"> ' + esc(t.label) + "</span></label>";
+      }).join("") + '</div><button type="button" class="btn" id="whAdd">Add webhook</button></div>';
+  }
+  WSQ._webhooksHtml = webhooksHtml;
+
+  var DELIVERY_STATUS = { delivered: "Delivered", failed: "Failed, will retry", dead: "Failed for good", skipped: "Not sent" };
+  function webhookDeliveriesHtml(c, d) {
+    var esc = c.esc;
+    var h = "<h3>Recent deliveries</h3>";
+    if (d == null) return h + '<span class="spin"></span> Loading deliveries...';
+    if (d.failed) return h + '<div class="msg err">The delivery log could not be loaded: ' + esc(d.message || "failed") + ". This is not the same as nothing having been sent.</div>";
+    if (!d.deliveries.length) return h + '<p class="quiet">No delivery attempts are recorded for this webhook yet.</p>';
+    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>Event</th><th>Attempt</th><th>Result</th><th>Response code</th></tr></thead><tbody>' +
+      d.deliveries.map(function (x) {
+        return '<tr class="' + (x.status === "delivered" ? "" : "warn") + '"><td>' + esc(x.at) + "</td><td>" + esc(x.eventType) + (x.test ? " (test)" : "") + '<br><span class="quiet">' + esc(x.eventId) + "</span></td><td>" + esc(x.attempt) +
+          "</td><td>" + esc(DELIVERY_STATUS[x.status] || x.status) + (x.reason ? '<br><span class="quiet">' + esc(x.reason) + "</span>" : "") + "</td><td>" + (x.responseCode ? esc(x.responseCode) : "none") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  WSQ._webhookDeliveriesHtml = webhookDeliveriesHtml;
+
+  function renderIntegrations(c, body, shown) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = webhooksHtml(c, null);
+    var fail = function (r) { return { failed: true, message: r ? refusal(r) : "No response from the server." }; };
+    return c.api("/ward/webhooks" + q).then(function (r) {
+      body.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
+      if (!r || !r.ok) return;
+      var msg = function (t) { document.getElementById("whMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
+      var urlOf = function (id) { var w = r.webhooks.filter(function (x) { return x.id === id; })[0]; return w ? w.url : ""; };
+      var add = document.getElementById("whAdd");
+      if (add) add.onclick = function () {
+        var types = [];
+        document.querySelectorAll(".whType").forEach(function (b) { if (b.checked) types.push(b.value); });
+        var url = String(document.getElementById("whUrl").value || "").trim();
+        if (!/^https:\/\//i.test(url)) { msg("The address must start with https://."); return; }
+        if (!types.length) { msg("Choose at least one event."); return; }
+        add.disabled = true;
+        c.api("/ward/webhook", { orgId: c.state.orgId, url: url, eventTypes: types, description: document.getElementById("whDesc").value }).then(function (x) {
+          if (!x || !x.ok || !x.secret) { add.disabled = false; msg(refusal(x)); return; }
+          renderIntegrations(c, body, { url: x.webhook.url, secret: x.secret });
+        }, function () { add.disabled = false; msg("No response from the server. The webhook may not have been added; reload to check."); });
+      };
+      body.querySelectorAll("[data-wh-rotate]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-wh-rotate");
+          if (!window.confirm("Make a new signing secret? The current one stops verifying immediately.")) return;
+          b.disabled = true;
+          c.api("/ward/webhook-rotate", { orgId: c.state.orgId, id: id }).then(function (x) {
+            if (!x || !x.ok || !x.secret) { b.disabled = false; msg(refusal(x)); return; }
+            renderIntegrations(c, body, { url: urlOf(id), secret: x.secret });
+          });
+        };
+      });
+      body.querySelectorAll("[data-wh-active]").forEach(function (b) {
+        b.onclick = function () {
+          var on = b.getAttribute("data-on") === "1";
+          b.disabled = true;
+          c.api("/ward/webhook-update", { orgId: c.state.orgId, id: b.getAttribute("data-wh-active"), active: on }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
+            c.toast(on ? "Webhook enabled." : "Webhook disabled. Nothing more is sent to it."); renderIntegrations(c, body);
+          });
+        };
+      });
+      body.querySelectorAll("[data-wh-test]").forEach(function (b) {
+        b.onclick = function () {
+          b.disabled = true;
+          c.api("/ward/webhook-test", { orgId: c.state.orgId, id: b.getAttribute("data-wh-test") }).then(function (x) {
+            b.disabled = false;
+            if (!x || !x.ok) { msg(refusal(x)); return; }
+            c.toast("Test event delivered (response " + x.responseCode + ").");
+          });
+        };
+      });
+      body.querySelectorAll("[data-wh-log]").forEach(function (b) {
+        b.onclick = function () {
+          var log = document.getElementById("whLog");
+          log.innerHTML = webhookDeliveriesHtml(c, null);
+          c.api("/ward/webhook-deliveries" + q + "&id=" + encodeURIComponent(b.getAttribute("data-wh-log"))).then(function (d) {
+            log.innerHTML = webhookDeliveriesHtml(c, d && d.ok && d.deliveries ? d : fail(d));
+          }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null)); });
+        };
+      });
+    }, function () { body.innerHTML = webhooksHtml(c, fail(null)); });
   }
 })();

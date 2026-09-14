@@ -33,6 +33,7 @@ class StagedRepository {
     this.records = [];            // in append order
     this.keys = [];               // [{ key, resourceType, id, version }]
     this.audits = [];
+    this.aliases = [];
   }
 
   _tenant(tenantId) {
@@ -58,8 +59,8 @@ class StagedRepository {
     const staged = this._latestStagedById((r) => r.resourceType === resourceType && subjectOf(r) === patientId);
     return [...real.filter((r) => !staged.has(r.id)), ...[...staged.values()].map(clone)];
   }
-  async latestByType(tenantId, resourceType, limit) {
-    const real = await this.real.latestByType(tenantId, resourceType, limit);
+  async latestByType(tenantId, resourceType, limit, opts) {
+    const real = await this.real.latestByType(tenantId, resourceType, limit, opts);
     const staged = this._latestStagedById((r) => r.resourceType === resourceType);
     return [...real.filter((r) => !staged.has(r.id)), ...[...staged.values()].map(clone)];
   }
@@ -95,6 +96,7 @@ class StagedRepository {
       this.keys.push({ key: ctx.idempotencyKey, resourceType: r.resourceType, id: r.id, version: r.version });
     }
     if (ctx.audit) this.audits.push(clone(ctx.audit));
+    if (Array.isArray(ctx.aliases)) this.aliases.push(...clone(ctx.aliases));
     return { seq: null, staged: true };
   }
 
@@ -103,13 +105,13 @@ class StagedRepository {
   /** Everything staged, in one atomic append. Throws whatever the real store throws; then nothing landed. */
   async commit() {
     if (!this.records.length) return { seq: null, committed: 0 };
-    const out = await this.real.append(this.tenantId, this.records, { idempotency: this.keys, audits: this.audits });
+    const out = await this.real.append(this.tenantId, this.records, { idempotency: this.keys, audits: this.audits, aliases: this.aliases });
     const committed = this.records.length;
     this.discard();
     return { ...out, committed };
   }
 
-  discard() { this.records = []; this.keys = []; this.audits = []; }
+  discard() { this.records = []; this.keys = []; this.audits = []; this.aliases = []; }
 }
 
 export { StagedRepository };

@@ -5398,3 +5398,149 @@ photo at 900/1800/2700px. `test/icu-ocr-monitor-boxes.test.mjs` executes the rea
 Not done: Scan-Meds' `onDeviceRead` still calls the legacy `readImage` (compressed image + scrubbed-text
 cloud call); Android has no on-device OCR (no ML Kit bridge); Vision found "(98)" only at 2x, so a
 two-scale union pass would raise recall further. Cloud tokens for this path: zero.
+## 2026-09-14 Out-of-assignment reads (P2.17) and per-dependency system health (P2.15)
+
+Out-of-assignment: `outOfAssignmentFindings` in `functions/_wardsynq/security-review.js`, returned as
+`assignmentAccess` on `GET /ward/security-report`, shown in Admin > Security review.
+- Assignment sources are the ones that already exist: NurseAssignment history (per admission) and the
+  rota (`q_roster_assign` shift unit, matched to the admission's `location.ward` ignoring case, UTC via
+  `wardsynq.utcOffsetMinutes`, default 330). No new assignment store.
+- The join is on the pseudonymised patient reference already on each audit row; nothing new is written
+  to the audit trail.
+- Exemptions are explicit and listed on the report: the reader's own live break-glass grant, roles
+  `lab, pharmacy, cashier, billing, radiographer, radiologist, blood_bank, him`, and the admission's
+  `attendingId`. Everyone else (admin and supervisor included) is compared.
+- No usable assignment data for a person (or anyone) in the period is `not_evaluated` with a reason. Any
+  unreadable or capped source turns would-be flags into not-evaluated reads, never flags or clean.
+- Known ceiling: only the admission's current ward is known, so a read before a transfer compares against
+  the current ward. A Firebase user whose membership identity is an email, not the uid on the audit row,
+  matches no assignment and shows as not evaluated.
+
+System health: `functions/_wardsynq/system-health.js`, `GET /ward/system-health` (STAFF_ADMIN, bulk rate
+tier), Admin > System health, playbooks in `docs/INCIDENT_RESPONSE.md`.
+- Seven real probes under a 3 s timeout; failed or timed-out is `down`. Reasons are the module's own
+  sentences, never provider error text (no keys or internal URLs).
+- The last ops-tick run is recorded in the existing `MAIK_KV` binding (`wsq:tick:last:<tenant>`, outcome
+  flags only, 30 day TTL) by the router; the domain module only receives a `lastTick()` function. No new
+  env var or binding.
+- MaiK probe is a model metadata read (Google) or `GET <localBaseUrl>/models`; it generates nothing.
+## 2026-09-14 WardSynQ FHIR Bulk Data export (P2.5) runs on the outbox, walks the change stream, and names every gap
+
+`functions/_wardsynq/fhir-bulk.js`, dispatched once in `fhir-route.js` `dispatchBulk` for both doors:
+`[base]/$export`, `[base]/Patient/$export`, `$export-status/{id}` (GET, DELETE), `$export-file/{id}/{name}`
+on `/api/fhir/{org}` (bearer) and `/api/queue/ward/fhir` (staff). Admin JSON: `POST /ward/fhir-export`,
+`GET /ward/fhir-exports`, `POST /ward/fhir-export-cancel`. Admin Center tab "Data export".
+- Who: a SMART backend-services token (source `smart:backend`, system/ scopes, no patient context), types
+  limited to its readTypes; or staff.admin at the route AND a clinical actor that canRead every type
+  (hr gets 403, as in the security review). No new capability, no grant widened. A client sees only its
+  own exports; staff see the hospital's. A file download re-checks the type against the token.
+- Work: kick-off appends job + slot + outbox event + audit in ONE append. ops-tick drains
+  `fhir.export.chunk` (router waitUntil passes `exportConsumers`; the bearer door also ticks on status
+  polls). Each run reads up to 10 pages of 200 rows of `repository.changes()`, writes one AES-GCM
+  NDJSON part per type to the existing document object store (DOC_S3_*, doc key), appends the next job
+  version with the next event. No new bindings, env vars or secrets.
+- Snapshot rule: a row is exported when it is the version current at transactionTime (latest, or the last
+  version at or before tx via history when edited mid-export). Rows after tx are skipped, so no duplicates.
+- One active export per hospital via a versioned slot record (`_wardsynq_fhir_export_slot`); a racing
+  second kick-off loses on VersionConflict (429). A job with no progress for 1 hour reads as failed and
+  frees the slot; a run that fails MAX_ATTEMPTS times writes status failed with the reason.
+- Nothing silently omitted: a record whose mapper throws is counted as `not-mapped`; hitting
+  MAX_RESOURCES (200000) stops the job and names every requested type as possibly incomplete. Both go to
+  an OperationOutcome NDJSON in manifest error[] and to `extension` on the manifest.
+- Files expire 24h after completion (a `fhir.export.expire` outbox event scheduled at expiresAt deletes
+  them); cancel deletes them at once. Kick-off, completion, failure, cancel and every download are audited;
+  a download that cannot be audited is refused.
+- Strict parameters: only `_type`, `_since`, `_outputFormat` (ndjson). `_typeFilter`, `patient` are 400 and
+  POST kick-off is 405, never ignored. Group/$export is not offered (404).
+- Not built: download buttons on the admin screen (files are fetched through the FHIR API with auth);
+  a status index for the outbox (drainOutbox's latestByType ceiling still applies to a very busy tenant).
+## 2026-09-14 Hospital groups (P2.14): only aggregate counts cross a hospital boundary
+
+`functions/_hospital_group_store.js` (model + Firestore), `functions/_wardsynq/hospital-group.js` (counts),
+routes `/api/queue/group/*`, Admin Center tab "Hospital group", page `#/group` (`wardsynq/site/pages/group.js`).
+- A group is `q_groups/<id>` (name, adminUids, recommended policy) plus one `q_group_links/<groupId>__<orgId>`
+  row per hospital, the way `q_members` sits beside `q_orgs`. States: invited, member, declined, removed.
+  Member only after the group admin invites AND the hospital's owner accepts; either side can remove.
+  Every change is committed in the same Firestore commit as its `q_events` audit row under the hospital.
+- WHY ONLY COUNTS. Each hospital is its own data controller and its patients consented to that
+  hospital, not to a group. A group needs to compare load (census, free beds, ED waiting, open critical
+  results, staff short), and none of that needs a patient. Letting identifiers through would make the
+  group a second, weaker door into every member's charts, with no membership, role or break-glass behind
+  it. So the response is built field by field from five numbers; the test seeds names, MRNs, patient and
+  record ids and asserts none appear. There is no drill-down by design.
+- The counts are each hospital's own computation (summariseWard, bedStateCounts, listEd's ED filter,
+  rosterStaffing) over that hospital's own repository, resolved from its org document. The authority is
+  the owner's acceptance, re-checked on every call; it is a no-user service read like ops-tick, never a
+  clinical actor, so a group admin still gets 403 on every chart, patient and record route. Every group
+  read writes `group:summary_read` into the hospital's audit trail first; no audit row, no read.
+- A count not read is null with `could_not_be_read`; not configured is `not_set_up`; a hospital with
+  nothing readable is `unreadable`. Never zero.
+- Group policy is a whitelist (`POLICY_KEYS`: clinical-practice settings only; never beds, people, money,
+  legal agreements, integrations or credentials). A member hospital's admin adopts it as a one-time copy
+  merged into its own `wardsynq` config, audited as `group:policy_adopted`. Nothing is inherited.
+- Not built: adding a second group admin (the field holds a list; groups are listed by creator), group
+  deletion, trends over time.
+## 2026-09-14 Trends (P2.10) are computed from the record, not from a stored daily snapshot
+
+`functions/_wardsynq/trends.js`, routes `GET /api/queue/ward/trends` and `GET /api/queue/ward/trend-events`,
+screen: Digital twin -> "Trends" (`ward.js` trendsView). Tests: `test/wardsynq-trends.test.mjs`.
+- No daily snapshot was persisted anywhere (ops-tick escalates criticals and drains the outbox only; the twin
+  and quality.js say "computed, never stored"). Records are versioned and carry the times these measures need
+  (stay start/end, report release, loop acknowledgement, dispense time, invoice ledger), so each bucket is
+  computed on request. A snapshot written by ops-tick was rejected: it only exists from the day it starts, it
+  drifts from the record when a discharge time is corrected, and it would be a second source of truth.
+- Costs, stated on screen: each source type is read with the store's roster cap (1000); a type at the cap
+  marks every bucket `coverage: "partial"` and the response `truncated` with a warning. A stay is attributed to
+  the ward on its current version (not split across transfers). Occupancy uses today's bed count (registry,
+  else `wardsynq.beds`) for past buckets. Walking every record's version history per request was rejected as
+  too costly for the bounded read budget.
+- Every point: value, numerator, denominator, coverage (`full`, `partial`, `none`). Unreadable source or
+  missing configuration is `value: null` with a reason, never 0. Buckets use the hospital clock
+  (`timeZone`, else `utcOffsetMinutes`, default 330) via mar-schedule.js's zone helpers.
+- Definitions live once in `DEFINITIONS` and are returned with each series ("How this is counted").
+- Authorization: series at the twin's `emr.view`; `billed-charges` (finance) also needs `billing.view`.
+  trend-events returns record ids only, gated as record-detail (emr.view plus the governed read of each source
+  type, where an unreadable type is 403, not an empty list) and additionally by the member's department scope
+  for the ward (`authorizeOrg` target; a ward in no department fails for any scoped member; an unreadable ward
+  registry is 503). Records open through record-detail.
+- Not built: department-level event lists (the drill goes metric -> bucket -> ward -> records), per-transfer
+  ward attribution, historical bed counts, and a precomputed cache for very large hospitals (add a snapshot
+  only if the cap is routinely hit).
+## 2026-09-14 Webhooks (P2.13): thin notifications, staged in the clinical write, delivered through the outbox
+
+`functions/_wardsynq/webhook-events.js` (what a write is), `functions/_wardsynq/webhooks.js` (admin routes,
+fan-out, delivery), routes `/api/queue/ward/webhooks|webhook|webhook-update|webhook-rotate|webhook-test|webhook-deliveries`,
+Admin Center tab "Integrations" (Webhooks card). Test: `test/wardsynq-webhooks.test.mjs`.
+- ONE CHOKE POINT, NOT ONE HOOK PER ROUTE. Every RecordService write reaches the repository through
+  `TenantBackend.write()` in service.js, so events are recognised there by comparing each record with its
+  previous version (admitted, transferred, discharged on admission-class Encounters; order.placed on a
+  MedicationOrder/ServiceRequest becoming active; result.released on a DiagnosticReport status change or
+  correction; critical-result.raised on a new CriticalResultLoop). The outbox row goes in the SAME append,
+  before the records (the idempotency key binds to the last record). A failed or refused write emits
+  nothing, and ADT/FHIR feeds emit exactly as the ward routes do. A hospital with no subscribed endpoint
+  stages nothing; if the endpoint list cannot be read the event is staged anyway and fan-out decides.
+- NO PHI, INCLUDING IN IDS. Canonical ids embed an MRN, an admission time or a test code
+  (`wsq-adm-<mrn>-<time>`), so the payload carries `hashedId()` of the id, never the id. Its alias is written
+  in the same append (new optional `ctx.aliases` on the repository port, Memory and D1) so the FHIR door
+  resolves it for a receiver with its own SMART token. Body: id, type, occurredAt, hospital, resource
+  {resourceType, id}, and a note. Residual: SHA-256 of a structured id is pseudonymous, not anonymous.
+- FAN-OUT, THEN ONE OUTBOX EVENT PER ENDPOINT, so each endpoint retries on the outbox backoff and dies
+  after `MAX_ATTEMPTS` without holding the others back. fhir-outbound.js was not reused: it is a queue of
+  whole FHIR resources (PHI) with its own backoff, the opposite of a thin notification.
+- ADDRESSES. https, no userinfo or local names, and no private/loopback/link-local/CGNAT/metadata/
+  documentation/benchmark/multicast address, including IPv4-mapped, NAT64, 6to4 and Teredo forms. A name is
+  resolved (DNS-over-HTTPS, injectable) and EVERY address must be public, at registration, re-enable and
+  before every send. No redirect followed, 5 s timeout. Residual: the runtime's fetch resolves again, so a
+  resolver changing its answer within milliseconds is not closed (no socket pinning in this runtime).
+- SECRET: 32 random bytes, returned only by register and rotate, AES-GCM under the document key; no key,
+  no webhook. Signature `X-WardSynQ-Signature: v1=hex(HMAC-SHA256(secret, "<timestamp>.<body>"))`, with
+  `X-WardSynQ-Timestamp` and `X-WardSynQ-Event-Id`. Rotation has no overlap window (not built).
+- AUTHORITY: staff.admin at the route plus a clinical actor that may write the record, the outbound
+  destinations' gate, so hr is refused. Register, update, enable, disable, rotate, test and auto-disable are
+  audited in the append that makes the change.
+- LOG AND AUTO-DISABLE: one row per attempt (status, attempt, response code, our own reason word; never a
+  response body) plus the endpoint's failure streak in the same append. 10 failures in a row spanning 30
+  minutes turns the endpoint off as `auto-disabled`, audited, shown on the screen; re-enable clears it.
+- OUTBOX FIX FOUND ON THE WAY: `latestByType` returns the OLDEST rows, so drainOutbox never saw a new event
+  once 200 settled ones existed. Webhook volume would hit that in a day. `latestByType(..., { newest: true })`
+  now serves drain and health. Still a scan with a ceiling; a status index is the upgrade.

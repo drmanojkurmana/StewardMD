@@ -170,6 +170,19 @@ function staffingNow(nowMs, utcOffsetMinutes, shifts, coverageRows, onDuty) {
   };
 }
 
+/** The roster read behind staffingNow(), shared by the twin and the hospital-group summary so the two
+ *  cannot disagree about what "short now" means. The caller decides who may see it. */
+async function rosterStaffing(env, orgId, wsqCfg, listMembers, nowMs) {
+  const offset = (wsqCfg && wsqCfg.utcOffsetMinutes != null) ? wsqCfg.utcOffsetMinutes : 330;
+  const today = new Date(nowMs + offset * 60000).toISOString().slice(0, 10);
+  const [shiftsR, members] = await Promise.all([ROSTER_STORE.listShifts(env, orgId), listMembers ? listMembers(env, orgId) : []]);
+  const shifts = {}; for (const sh of (shiftsR && shiftsR.shifts) || []) shifts[sh.id] = sh;
+  if (!Object.keys(shifts).length) return { ok: true, generatedAt: new Date().toISOString(), rosterConfigured: false, onDutyNow: null, requiredNow: null, gaps: [], reason: "no shifts are set up in the roster" };
+  const roleOf = (id) => (((members || []).find((m) => m.identity === id) || {}).role || "");
+  const [cov, duty] = await Promise.all([ROSTER_STORE.coverageFor(env, orgId, addDays(today, -1), today, roleOf), ROSTER_STORE.onDuty(env, orgId, "", offset)]);
+  if (!cov.ok) return cov;
+  return { ok: true, generatedAt: new Date().toISOString(), rosterConfigured: true, partial: !!(cov.partial || duty.partial), ...staffingNow(nowMs, offset, shifts, cov.coverage, duty.onDuty) };
+}
 
 /**
  * Runs one existing aggregator and wraps its answer with freshness/provenance, catching failure
@@ -327,15 +340,7 @@ async function buildTwinSnapshot(request, env, ctx) {
 
   const staffing = await section("staffing", ["q_roster_shifts", "q_roster_assign"], async (rq, e, c) => {
     if (!c.canViewQueue) return { ok: false, error: "not_permitted", detail: "reading the roster needs queue.view" };
-    const offset = (c.wsqCfg && c.wsqCfg.utcOffsetMinutes != null) ? c.wsqCfg.utcOffsetMinutes : 330;
-    const today = new Date(nowMs + offset * 60000).toISOString().slice(0, 10);
-    const [shiftsR, members] = await Promise.all([ROSTER_STORE.listShifts(e, c.orgId), c.listMembers ? c.listMembers(e, c.orgId) : []]);
-    const shifts = {}; for (const sh of (shiftsR && shiftsR.shifts) || []) shifts[sh.id] = sh;
-    if (!Object.keys(shifts).length) return { ok: true, generatedAt: new Date().toISOString(), rosterConfigured: false, onDutyNow: null, requiredNow: null, gaps: [], reason: "no shifts are set up in the roster" };
-    const roleOf = (id) => (((members || []).find((m) => m.identity === id) || {}).role || "");
-    const [cov, duty] = await Promise.all([ROSTER_STORE.coverageFor(e, c.orgId, addDays(today, -1), today, roleOf), ROSTER_STORE.onDuty(e, c.orgId, "", offset)]);
-    if (!cov.ok) return cov;
-    return { ok: true, generatedAt: new Date().toISOString(), rosterConfigured: true, partial: !!(cov.partial || duty.partial), ...staffingNow(nowMs, offset, shifts, cov.coverage, duty.onDuty) };
+    return rosterStaffing(e, c.orgId, c.wsqCfg, c.listMembers, nowMs);
   }, request, env, ctx);
 
   /* Lab TAT and the radiology backlog share one read of requests and reports. */
@@ -564,4 +569,4 @@ async function operationalHealthReport(request, env, ctx) {
   };
 }
 
-export { FRESHNESS, NOT_BUILT, freshnessOf, percentile, labTurnaround, radiologyBacklog, staffingNow, buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport };
+export { FRESHNESS, NOT_BUILT, freshnessOf, percentile, labTurnaround, radiologyBacklog, staffingNow, rosterStaffing, buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport };

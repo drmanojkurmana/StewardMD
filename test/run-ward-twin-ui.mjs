@@ -91,6 +91,26 @@ try {
   // result exists - the actual PROJECTED result from the last run is what must clear.
   ok(!/wouldExceedCapacity/.test(t7), "and the previous simulation's projected result");
 
+  // 7b. P2.10 Trends: opened from the twin; a null bucket is a break in the line; bucket -> ward -> records -> record.
+  await ev(`document.querySelector('[data-w-act="trends"]').click(); return true;`);
+  ok(await waitFor("svg.w-trend"), "Trends opened from the twin and drew a chart");
+  ok(await ev(`return document.querySelectorAll("svg.w-trend polyline").length === 1 && document.querySelectorAll("svg.w-trend circle").length === 3;`), "the null bucket is a gap: one joined line, no dot for it");
+  ok(/no value: Encounter records could not be read/.test(await text()), "the table says why that bucket has no value");
+  ok(/How this is counted/.test(await text()), "the definition is on screen");
+  await ev(`document.querySelector('circle[data-w-act="trendbucket:0"]').dispatchEvent(new MouseEvent("click", { bubbles: true })); return true;`);
+  ok(await waitFor('[data-w-act="trendevents:0"]'), "a bucket opens its ward breakdown");
+  ok((await calls("groupBy=ward")).length === 1, "the breakdown asked for groupBy=ward");
+  await ev(`document.querySelector('[data-w-act="trendevents:0"]').click(); return true;`);
+  ok(await waitFor('[data-w-act="timelinedetail:Encounter~enc-1"]'), "a ward opens the record ids behind it");
+  ok((await calls("/ward/trend-events")).length === 1, "through /ward/trend-events");
+  await ev(`document.querySelector('[data-w-act="timelinedetail:Encounter~enc-1"]').click(); return true;`);
+  ok(await waitText(/What the record says now/), "a record opens through record-detail");
+  await ev(`document.getElementById("wTrMetric").value = "billed-charges"; document.querySelector('.w-filter [data-w-act="trendsload"]').click(); return true;`);
+  ok(await waitText(/billing series and your role has no billing rights/), "a refused billing series is a failure, not an empty chart");
+  ok(!(await ev(`return !!document.querySelector("svg.w-trend");`)), "and draws no chart");
+  await ev(`document.querySelector('[data-w-act="back"]').click(); return true;`);
+  ok(await waitFor('[data-w-act="twinask"]'), "back from Trends returns to the twin");
+
   // 8. Back leaves the view and drops its state.
   await ev(`document.querySelector('[data-w-act="back"]').click(); return true;`);
   await sleep(150);
