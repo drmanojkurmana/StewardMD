@@ -112,22 +112,15 @@ async function connectRecord() {
   }
   const params = recordParams();
   if (!params) return null;
-  try {
-    const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
-    CLINICIAN = record.actor;
-    S.bus = record.bus;
-    S.store = record.store;      // governed; the raw store is not reachable from here
-    S.record = record;
-    note(`Connected to record <b>${esc(record.tenantId)}</b> as <b>${esc(record.actor.display)}</b>, ${esc(record.mode)}${record.actor.tier !== TIER.EXECUTE ? ", read only" : ""}`);
-    return record;
-  } catch (err) {
-    const isDemoParam = new URLSearchParams(location.search).get("demo") === "1" || /demo/i.test(params.tenantId);
-    if (isDemoParam) {
-      note(`Remote record <b>${esc(params.tenantId)}</b> unavailable, loaded demonstration cohort`);
-      return null;
-    }
-    throw err;
-  }
+  // A record that fails to open stays a failure: demo hospitals never reach here (?demo=1 yields no
+  // params), so falling back to the demonstration cohort would show fake patients to a real ward.
+  const record = await openRecordDeployment({ tenantId: params.tenantId, token: shellToken, nodeId: "workstation", onDenied: showDenial });
+  CLINICIAN = record.actor;
+  S.bus = record.bus;
+  S.store = record.store;      // governed; the raw store is not reachable from here
+  S.record = record;
+  note(`Connected to record <b>${esc(record.tenantId)}</b> as <b>${esc(record.actor.display)}</b>, ${esc(record.mode)}${record.actor.tier !== TIER.EXECUTE ? ", read only" : ""}`);
+  return record;
 }
 
 /** The roster from the record: every patient, with the context the safety engine reads. */

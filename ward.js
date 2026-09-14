@@ -3467,7 +3467,7 @@
     return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Result for " + esc(f.display || f.code) + "</h3>" +
       '<button class="w-ic" data-w-act="labresultclose" title="Close">' + ms("close") + "</button></div>" +
       imgNotice + tmplBar +
-      '<p class="w-hint">' + ms("info") + "Type each value as the analyser reported it or pick a template above. Unused rows can be left blank." + "</p>" +
+      '<p class="w-hint">' + ms("info") + "Type each value, unit and range exactly as the analyser reported it. Nothing is converted or rounded. A template only names the tests; rows left without a value are not sent." + "</p>" +
       rows +
       '<select id="wLrStatus"><option value="final">Final</option><option value="preliminary">Preliminary</option><option value="corrected">Corrected (replaces a final result)</option></select>' +
       '<textarea id="wLrConc" rows="2" placeholder="Comment or conclusion (optional)"></textarea>' +
@@ -8654,9 +8654,12 @@
       var elT = document.getElementById("wLrTest" + i);
       var elU = document.getElementById("wLrUnit" + i);
       var elR = document.getElementById("wLrRange" + i);
-      if (elT) elT.value = t.test;
-      if (elU) elU.value = t.unit;
-      if (elR) elR.value = t.range;
+      // A template names the tests only. Unit and range are shown as hints, never filled in: an
+      // adult reference range or a mg/dL unit typed for the analyser is a wrong result waiting to be
+      // released, so both stay what the laboratory's own analyser printed.
+      if (elT) { elT.value = t.test; elT.setAttribute("data-tmpl", t.test); }
+      if (elU) { elU.value = ""; elU.placeholder = t.unit || ""; }
+      if (elR) { elR.value = ""; elR.placeholder = t.range ? "e.g. " + t.range + ", use the analyser's" : "as the analyser reports it"; }
     });
   }
   function labResultSave() {
@@ -8665,6 +8668,10 @@
     for (var i = 0; i < 10; i++) {
       var t = val("wLrTest" + i), v = val("wLrVal" + i), u = val("wLrUnit" + i), rg = val("wLrRange" + i);
       if (!t && !v) continue;
+      // A blank row a template named is simply unused. A test typed by hand without a value is still
+      // sent, so the server names it as not saved rather than it vanishing here.
+      var elT = document.getElementById("wLrTest" + i);
+      if (!v && elT && elT.getAttribute("data-tmpl") === t) continue;
       tests.push({ test: t, value: v, unit: u || undefined, range: rg || undefined });
     }
     if (!tests.length) { st.err = "Enter at least one result."; paint(); return; }
@@ -11248,5 +11255,5 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply };
 })();

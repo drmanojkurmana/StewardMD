@@ -93,7 +93,8 @@ test("filters are offered with counts, and only for kinds that actually have som
   assert.ok(html.includes("Tests ordered"));
   assert.ok(html.includes("Critical events"));
   // Nothing billing-related is on this chart, so that chip is not offered at all.
-  assert.ok(!html.includes("Billing"), "an empty filter should not be offered");
+  // The chart header has its own Billing button, so look for the filter chip itself.
+  assert.ok(!html.includes('data-w-act="timelinefilter:billing"'), "an empty filter should not be offered");
 });
 
 test("choosing a filter narrows the list and says so in words", () => {
