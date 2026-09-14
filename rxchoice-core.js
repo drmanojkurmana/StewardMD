@@ -57,6 +57,16 @@
 
   var STRENGTH_RE = /(\d+(?:\.\d+)?)\s*(mcg|ug|mg|gm|g|ml|l|iu|units?|%)\b/gi;
 
+  var SYNONYMS = {
+    "amoxicillin": "amoxycillin",
+    "clavulanate": "clavulanic acid",
+    "potassium clavulanate": "clavulanic acid",
+    "clavulanate potassium": "clavulanic acid",
+    "acetaminophen": "paracetamol",
+    "guaiphenesin": "guaifenesin",
+    "levalbuterol": "levosalbutamol"
+  };
+
   /* "Amoxycillin (500mg) + Clavulanic Acid (125mg)" ->
    *   { ingredients: [{name:"amoxycillin", strength:{500,mg}}, {name:"clavulanic acid", strength:{125,mg}}],
    *     strengthsKnown: true }
@@ -67,7 +77,8 @@
     var parts = String(str == null ? "" : str).split(/\s*\+\s*/).map(function (p) { return p.trim(); }).filter(Boolean);
     var ingredients = parts.map(function (p) {
       var m = p.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
-      var name = norm(m ? m[1] : p).replace(/\(|\)/g, "").trim();
+      var rawName = norm(m ? m[1] : p).replace(/\(|\)/g, "").trim();
+      var name = SYNONYMS[rawName] || rawName;
       var strength = null;
       if (m) {
         STRENGTH_RE.lastIndex = 0;
@@ -109,6 +120,8 @@
     var f = norm(form);
     if (!f) return "";
     if (FORM_ALIAS[f]) return FORM_ALIAS[f];
+    var m = f.match(/\b(tablets?|tabs?|capsules?|caps?|syrup|suspension|injection|inj|drops|solution|cream|ointment|gel|patch|inhaler|powder)\b/i);
+    if (m && FORM_ALIAS[m[1].toLowerCase()]) return FORM_ALIAS[m[1].toLowerCase()];
     // Strip leading count/volume (e.g. "3 tablet dt" -> "tablet dt", "10 tablets" -> "tablets")
     var stripped = f.replace(/^\d+(\.\d+)?\s*(ml|l|gm|g|mg)?\s*/i, "").trim();
     if (FORM_ALIAS[stripped]) return FORM_ALIAS[stripped];
@@ -142,10 +155,8 @@
     return Object.keys(out).sort().join(",");
   }
 
-  /* Strength tokens in a brand name: "Augmentin 625 Tablet" -> [625mg]. A bare number with no unit
-   * is read as mg ONLY when the product is an oral solid, which is the Indian brand-naming
-   * convention the database follows; anywhere else a unitless number is ignored as unsafe to guess.
-   * Pack descriptors ("strip of 10") never reach here - this reads the brand name only. */
+  /* Parse brand-name strengths when the composition has none. "Augmentin 625 Duo Tablet" -> [625mg];
+   * "Dolo 650" -> [650mg]; "Pan 40" -> [40mg]. */
   function brandStrengths(brandName, formFamily) {
     var s = String(brandName == null ? "" : brandName);
     var out = [], m;
@@ -167,6 +178,74 @@
   function populationKey(text) {
     return POPULATION_RE.test(String(text || "")) ? "pediatric" : "adult";
   }
+
+  /* Comprehensive Fixed-Dose Combination (FDC) standard strength registry for Indian practice.
+   * Enables exact substitution matching for major combination medicines that lack numeric tokens
+   * in brand names (e.g. Zerodol-P, Combiflam, Pan-D, Ultracet, Ciplox-TZ, Ascoril-LS). */
+  var FDC_REGISTRY = {
+    "levocetirizine+montelukast": {
+      defaultAdult: "brand:5mg|10mg",
+      defaultPed: "brand:2.5mg|4mg"
+    },
+    "aceclofenac+paracetamol": {
+      defaultAdult: "brand:100mg|325mg"
+    },
+    "ibuprofen+paracetamol": {
+      defaultAdult: "brand:400mg|325mg",
+      defaultPed: "brand:100mg|162.5mg"
+    },
+    "domperidone+pantoprazole": {
+      defaultAdult: "brand:30mg|40mg"
+    },
+    "domperidone+rabeprazole": {
+      defaultAdult: "brand:30mg|20mg"
+    },
+    "domperidone+omeprazole": {
+      defaultAdult: "brand:10mg|20mg"
+    },
+    "domperidone+esomeprazole": {
+      defaultAdult: "brand:30mg|40mg"
+    },
+    "paracetamol+tramadol": {
+      defaultAdult: "brand:325mg|37.5mg"
+    },
+    "ciprofloxacin+tinidazole": {
+      defaultAdult: "brand:500mg|600mg"
+    },
+    "ofloxacin+ornidazole": {
+      defaultAdult: "brand:200mg|500mg"
+    },
+    "cefixime+ofloxacin": {
+      defaultAdult: "brand:200mg|200mg"
+    },
+    "ambroxol+guaifenesin+levosalbutamol": {
+      defaultAdult: "brand:1mg|30mg|50mg"
+    },
+    "ambroxol+guaifenesin+terbutaline": {
+      defaultAdult: "brand:1.25mg|30mg|50mg"
+    },
+    "diclofenac+paracetamol": {
+      defaultAdult: "brand:50mg|325mg"
+    },
+    "glimepiride+metformin": {
+      defaultAdult: "brand:1mg|500mg"
+    },
+    "amlodipine+telmisartan": {
+      defaultAdult: "brand:5mg|40mg"
+    },
+    "hydrochlorothiazide+telmisartan": {
+      defaultAdult: "brand:12.5mg|40mg"
+    },
+    "hydrochlorothiazide+losartan": {
+      defaultAdult: "brand:12.5mg|50mg"
+    },
+    "atorvastatin+clopidogrel": {
+      defaultAdult: "brand:10mg|75mg"
+    },
+    "drotaverine+mefenamic acid": {
+      defaultAdult: "brand:80mg|250mg"
+    }
+  };
 
   /* The provenance-tagged strength key. "" means the strength could not be established, which makes
    * the product ineligible as either side of a substitution. */
@@ -191,12 +270,13 @@
       }
     }
 
-    // Standard fixed-dose combination resolution (e.g. Levocetirizine + Montelukast)
+    // Standard fixed-dose combination resolution (e.g. Levocetirizine + Montelukast, Zerodol-P, Combiflam, Pan-D)
     var compKey = compositionKey(rec && rec.composition);
-    if (compKey === "levocetirizine+montelukast") {
+    var fdc = FDC_REGISTRY[compKey];
+    if (fdc) {
       var s = String((rec && rec.brand) || "");
-      if (POPULATION_RE.test(s)) return "brand:2.5mg|4mg";
-      return "brand:5mg|10mg";
+      if (fdc.defaultPed && POPULATION_RE.test(s)) return fdc.defaultPed;
+      return fdc.defaultAdult;
     }
 
     return "";
@@ -256,7 +336,7 @@
     if (compositionKey(rxComp) !== compositionKey(candComp)) return { ok: false, reason: "composition_mismatch" };
     // Form and release are checked BEFORE strength: both are cheaper to establish and give the more
     // useful reason (a tablet-vs-suspension mismatch should not be reported as an unknown strength).
-    var rf = normalizeForm(rx.form), cf = normalizeForm(cand.form);
+    var rf = normalizeForm(rx.form) || normalizeForm(rx.brand), cf = normalizeForm(cand.form) || normalizeForm(cand.brand);
     if (!rf || !cf) return { ok: false, reason: "form_unknown" };
     if (rf !== cf) return { ok: false, reason: "form_mismatch" };
     if (releaseKey((rx.brand || "") + " " + (rx.form || "")) !== releaseKey((cand.brand || "") + " " + (cand.form || ""))) {
@@ -407,9 +487,10 @@
    * the Drugs Database already sorts by - not a second opinion invented here. Keep the three in step. */
   var TIERS = {
     branded: ["sun pharma", "abbott", "cipla", "dr reddy", "lupin", "torrent", "zydus", "alkem",
-      "sanofi", "glaxo", "pfizer", "astrazeneca", "boehringer", "novo nordisk", "eli lilly"],
+      "sanofi", "glaxo", "pfizer", "astrazeneca", "boehringer", "novo nordisk", "eli lilly",
+      "ipca", "jb chemicals", "wockhardt", "cadila", "hetero"],
     generic: ["mankind", "aristo", "intas", "macleods", "micro labs", "emcure", "alembic", "usv",
-      "eris", "glenmark", "blue cross", "franco", "wallace", "medley", "akumentis"]
+      "eris", "glenmark", "blue cross", "franco", "wallace", "medley", "akumentis", "leford", "apex"]
   };
   function tierOf(manufacturer) {
     var m = norm(manufacturer);
