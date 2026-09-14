@@ -1086,6 +1086,15 @@ test showed only a 23% gain from parallelism on an UNTHROTTLED session, so the p
 untested and worth measuring), or host the files closer to the user (R2, APAC). Do NOT reintroduce a
 foreground/background handoff. **Status**: reverted, background-only shipped.
 
+## 2026-08-19 · Recording a vaccination is its own capability
+`CAPS.EMR_IMMUNISE`, held by doctor + nurse + intern/resident (owner: "doctor + auth staff"). NOT `emr.treat` (the nurse usually gives the dose, so doctor-only would mean the doctor typing in someone else's act) and NOT `emr.vitals` (once a care context is linked to an ABHA it can never be withdrawn, so this can land permanently in a national health record). Reception/supervisor/cashier hold neither. **Status**: live behind `smd_opd_immunization` (def true, inside the already-gated OPD EMR surface).
+
+## 2026-08-19 · Clinical code lists are GENERATED from the IG, never hand-written
+`functions/_vaccines.js` is emitted by `scripts/gen-vaccines.mjs` from the NDHM IG's own `ndhm-vaccine-codes` value set; the server refuses any code outside it and always takes the display from the IG, never the request body. **Why**: a vaccine code in a patient's national health record is a clinical claim ABDM can never retract, and typing SNOMED from memory is how a wrong one ships - the generator's assertion caught HPV as `...109` vs the IG's `...103` on the first run. **Applies to**: any future coded clinical list (route, body site, billing codes). **Status**: live.
+
+## 2026-08-19 · Validate PROJECTIONS against the real validator, not just fixtures
+The HAPI/NRCES gate emits two extra bundles built from real product data (a `q_invoices` bill, an OPD vaccination) alongside the eight fixtures. **Why**: fixture ids are hand-written and happen to be legal - the first projected bundle failed with 3 errors because FHIR `Resource.id` forbids underscores and the billing store mints `inv_<hex>`. Fixed at `entryOf()` (the one funnel every resource passes through) and `validateNdhmDoc` now checks the charset, so the class is caught without a JDK. **Status**: live.
+
 ## Standing principles
 - **Reversible changes**: big/risky changes go behind a feature **flag** + a git **recovery point** (tag/branch); made permanent only after owner approval.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.
@@ -5864,3 +5873,29 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
   the hospital's DLT template on 2Factor (`alerts.sms.senderId`, `alerts.sms.templateName`; VAR1 ward, VAR2
   bed; existing `TWOFACTOR_API_KEY`), to each recipient's `alertMobile` on their membership. Anything missing
   is recorded on the notice as SMS_NOT_CONFIGURED and named on the Admin card.
+
+## 2026-09-14 ABDM V3 merge (owner A3): one scheme, no deploy vars, production held, one landing
+`origin/feat/abdm-v3-reconcile` merged into `wardsynq-product` on branch `abdm-v3-merge`. Checklist:
+`docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` section 2. The branch itself was not touched.
+- **SCCM**: one 1.1 with administrations, serviceRequests, consents, immunizations, invoices (all optional,
+  additive). The branch had kept 1.0 while adding two collections; the product had bumped to 1.1 for three.
+- **Env**: `ABDM_ENV` with host-only bases is the only scheme; `ABDM_GATEWAY_URL` removed from the connect
+  route (a base with a path doubled every V3 path).
+- **Identity out of deploy config**: the branch's five ABDM vars were not added to `wrangler.toml`. The sandbox
+  bridge id and facility id sit on the sandbox entry of `config.js` ENVS; production has no identity in code, so
+  a production deploy cannot inherit sandbox identity. Per-hospital production IDs come from the `abdm`
+  connector profile when phase A2 wires `abdmConfigFor`. An env override is still read (tests, local receiver).
+- **A2 enforced in code**: `gateway.js` refuses the production gateway host before the session call.
+- **Requester**: the consent route resolves the doctor with `resolveClinicalActor` and sends
+  `{type:"REGNO", value, system:"https://www.mciindia.org"}`; no registration number is a 422 naming the fix.
+- **One landing path**: the V3 HIU data push gets its own receiver (`/api/connect/abdm/hiu/data`) that ends in
+  the same `makeConsumeAndLand` as the V0.5 ingress. `LANDABLE` adds Immunization and Invoice.
+- **Immunization, one record type**: the branch's OPD capture is a queue timeline kind (IG-coded, for the OPD
+  HIP source), not a record type, so it stays. What ABDM LANDS files as the product's `Immunization` record.
+  The IG catalogue (`_vaccines.js`) and the ward chart's free-text rule (`immunization.js`) both stand: the
+  first is what ABDM conformance requires of what we SEND, the second is how the ward records a dose.
+- **External invoice is not an Invoice**: filed as `ClinicalNote` `external-invoice` with the sender's invoice
+  verbatim, because reports, trends and the payment desk sum `Invoice` rows.
+- **A5**: `ABHA_DESK_ROLES` in `_queue_roles.js` (reception, cashier and billing create and verify). Not enforced
+  until the ABHA desk phase moves M1 off Connect membership.
+- **Fidelius**: the branch's HKDF over the Weierstrass x is the only copy (the product never changed it).

@@ -30,6 +30,7 @@ import * as ACCOUNTS from "../../_accounts_store.js";
 import * as FORMS from "../../_forms_store.js";
 import * as PATHWAYS from "../../_pathways_store.js";
 import { submitFormResponse, patientFormResponses } from "../../_wardsynq/form-response.js";
+import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
@@ -763,6 +764,10 @@ export async function onRequest(context) {
         return new Response(obj.body, { status: 200, headers: Object.assign({ "Content-Type": ctype, "Cache-Control": "public, max-age=300" }, corsHeaders(request)) });
       } catch (e) { return json({ ok: false, error: "no_logo" }, 404, request); }
     }
+
+    // The immunisation picker's options (NDHM IG value set, functions/_vaccines.js). Static, so cacheable; no PHI
+    // and no session. On the branch this sat inside the POST block, so the client's GET never reached it.
+    if (method === "GET" && seg === "vaccines") return json({ ok: true, catalogue: vaccineCatalogue() }, 200, request, { "Cache-Control": "public, max-age=86400" });
 
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
     const actor = await resolveActor(request, env);
@@ -4462,9 +4467,25 @@ export async function onRequest(context) {
         // structured `rx` payload. A "medication" line with no `rx` (the local clinic store's
         // "Medication added to the record") is not a prescription and is untouched.
         const isPrescription = QT.tlKind(body.kind) === "medication" && !!body.rx && typeof body.rx === "object";
-        await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        // Immunisation has its OWN cap (owner-decided: doctor + authorised staff). Not emr.treat, because
+        // the nurse who administers the dose must be able to record it; not emr.vitals, because this can
+        // end up permanently in a national health record once the care context is linked. Reception,
+        // supervisor and cashier hold neither and are refused.
+        const isImmunization = QT.tlKind(body.kind) === "immunization";
+        await requireSessionCap(env, actor, s, isVitals ? CAPS.EMR_VITALS : isImmunization ? CAPS.EMR_IMMUNISE : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        if (isImmunization) {
+          // The CODE is validated against the IG's value set server-side. A client-supplied code is a
+          // claim, and an unrecognised one would put an invented SNOMED concept into a patient's PHR - so
+          // it is refused rather than stored as free text. The display is taken from the IG, never the body.
+          // An OPD timeline entry, not a WardSynQ record type: the ward chart's Immunization record is
+          // functions/_wardsynq/immunization.js, and what ABDM lands is filed there (sccm adapter).
+          const built = buildImmunisation(body);
+          if (built.error) return json({ ok: false, error: built.error }, 400, request);
+          const imm = await QT.appendTimeline(env, s, t, "immunization", built.data.text, actor.id, built.data);
+          return json(Object.assign({ ok: true }, imm), 200, request);
+        }
         // NATIVE WARDSYNQ HOSPITAL (org.mode "wardsynq"): vitals, assessment and investigation orders
         // go DIRECTLY to the WardSynQ record for such an org - no GHIS to shadow, so this bypasses the
         // global WARDSYNQ_RECORD flag entirely (stays OFF/untouched - it governs the separate

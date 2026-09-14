@@ -113,7 +113,9 @@ async function setup(opts) {
 
 /** consent request -> GRANT notify -> artifact fetch -> on-fetch verify -> data request -> on-request. */
 async function driveToTransfer(h) {
-  const { requestId } = await requestConsent(ENV, h.outDeps, { request: {}, tenantId: TENANT, abhaAddress: ABHA, purpose: SCOPE.purpose, hiTypes: SCOPE.hiTypes, dateRange: SCOPE.dateRange, dataEraseAt: SCOPE.dataEraseAt });
+  const { requestId } = await requestConsent(ENV, h.outDeps, { request: {}, tenantId: TENANT, abhaAddress: ABHA, purpose: SCOPE.purpose, hiTypes: SCOPE.hiTypes, dateRange: SCOPE.dateRange, dataEraseAt: SCOPE.dataEraseAt,
+    // ABDM V3 (merge 2026-09-14): the consent names the doctor asking by registration number.
+    requester: { name: "Dr Test", identifier: { type: "REGNO", value: "TSMC-2019-44821", system: "https://www.mciindia.org" } } });
   assert.equal((await h.mock.fireConsentNotify()).status, 202);
   await fetchConsentArtifact(ENV, h.outDeps, { requestId, consentId: h.mock.consentId });
   assert.equal((await h.mock.fireOnFetch(SCOPE)).status, 202);

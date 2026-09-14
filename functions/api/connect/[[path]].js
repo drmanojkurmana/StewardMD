@@ -18,7 +18,10 @@ import { consumeTransfer, requestConsent, requestHealthInformation } from "../..
 import { makeGateway, AbdmError } from "../../_connect/abdm/gateway.js";
 import { getConsentReqByConsentId, fetchConsentArtifact } from "../../_connect/abdm/consent.js";
 import { makeConsumeAndLand } from "../../_wardsynq/abdm-land.js";
-import { recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
+import { recordDeps as wsqRecordDeps, actorDeps as wsqActorDeps } from "../../_wardsynq/deps.js";
+import { resolveClinicalActor } from "../../_wardsynq/actor.js";
+import { abdmConfig } from "../../_connect/abdm/config.js";
+import { receiveDataPush } from "../../_connect/abdm/hiu-push.js";
 import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
 import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-gated legacy-feed ingest
 import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
@@ -39,19 +42,41 @@ const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.n
 
 /* TASK 7.8. The ABDM gateway this deployment talks to, or null when it is not configured.
  *
- * Built ONLY from environment the operator set. A gateway invented from defaults would be a client
- * pointed at somebody else's endpoint, so an absent base URL or an absent HIU identity means no
- * gateway and therefore no consume tail - the push stays buffered and recoverable rather than
- * half-consumed against a server this hospital never registered with.
+ * ONE env scheme since the V3 merge (2026-09-14): abdmConfig (ABDM_ENV, host-only bases, the sandbox's own
+ * identity in code). The old ABDM_GATEWAY_URL is gone - a base carrying a path would double every V3 path.
+ * No HIU identity (production has none in code), an unknown ABDM_ENV or no KV means no gateway and therefore
+ * no consume tail. Production is refused outright (owner A2): `held` says why, and gateway.js refuses it too.
  */
 function abdmGatewayFor(env, deps) {
-  const baseUrl = String((env && env.ABDM_GATEWAY_URL) || "").trim();
-  const hiuId = String((env && env.ABDM_HIU_ID) || "").trim();
-  if (!baseUrl || !hiuId || !deps.kv) return null;
+  let cfg;
+  try { cfg = abdmConfig(env); } catch { return null; }
+  if (cfg.trafficHeld) return { held: cfg.trafficHeld };
+  if (!cfg.hiuId || !deps.kv) return null;
   return makeGateway({
-    baseUrl, hiuId, cmId: String((env && env.ABDM_CM_ID) || "").trim() || null,
-    hipId: String((env && env.ABDM_HIP_ID) || "").trim() || null,
+    baseUrl: cfg.gatewayBase, hiuId: cfg.hiuId, cmId: cfg.cmId, hipId: cfg.hipId || null,
+    clientId: cfg.clientId, trafficHeld: cfg.trafficHeld,
     fetch, kv: deps.kv, secrets: deps.secrets, now: () => new Date(),
+  });
+}
+const heldResponse = (gw) => jsonResponse({ error: "abdm_production_held", detail: gw.held }, { status: 503 });
+
+/* The consume tail both push doors share: the V0.5 JWS ingress and the V3 dataPushUrl receiver. One ending. */
+function consumeAndLandFor(env, deps, gateway) {
+  return makeConsumeAndLand({
+    env,
+    consumeTransfer,
+    consumeDeps: { db: deps.db, r2: deps.r2, secrets: deps.secrets, gateway, now: deps.now() },
+    recordDeps: (tenantId) => wsqRecordDeps(env, tenantId),
+    consentFor: async (consentId) => {
+      if (consentId == null) return null;
+      const row = await getConsentReqByConsentId(deps.db, consentId);
+      if (!row) return null;
+      // The purpose is stored as the JSON the VERIFIED artifact carried; it binds what this data
+      // may be used for. An unparseable one is passed through as-is rather than dropped.
+      let purpose = null;
+      try { purpose = row.purpose ? JSON.parse(row.purpose) : null; } catch { purpose = row.purpose || null; }
+      return { consentId, purpose, actor: row.actor || null };
+    },
   });
 }
 
@@ -79,23 +104,8 @@ export async function onRequest(context) {
      * deployment needs to acknowledge a transfer is actually configured; without that, a push is
      * still buffered durably and recovered by the reconcile pass rather than half-consumed. */
     const abdmGateway = abdmGatewayFor(env, deps);
-    if (abdmGateway) {
-      deps.consumeAndLand = makeConsumeAndLand({
-        env,
-        consumeTransfer,
-        consumeDeps: { db: deps.db, r2: deps.r2, secrets: deps.secrets, gateway: abdmGateway, now: deps.now() },
-        recordDeps: (tenantId) => wsqRecordDeps(env, tenantId),
-        consentFor: async (consentId) => {
-          if (consentId == null) return null;
-          const row = await getConsentReqByConsentId(deps.db, consentId);
-          if (!row) return null;
-          // The purpose is stored as the JSON the VERIFIED artifact carried; it binds what this data
-          // may be used for. An unparseable one is passed through as-is rather than dropped.
-          let purpose = null;
-          try { purpose = row.purpose ? JSON.parse(row.purpose) : null; } catch { purpose = row.purpose || null; }
-          return { consentId, purpose, actor: row.actor || null };
-        },
-      });
+    if (abdmGateway && !abdmGateway.held) {
+      deps.consumeAndLand = consumeAndLandFor(env, deps, abdmGateway);
       /* THE ARTIFACT FETCH, wired for the same reason. A GRANT notification says the patient agreed;
        * the signed artifact that says WHAT they agreed to arrives only if we ask for it, and the
        * data request cannot pass its own scope check until that artifact has been verified and
@@ -116,6 +126,24 @@ export async function onRequest(context) {
   }
   if (/^\/ingress\//.test(path)) return jsonResponse({ error: "not_implemented", phase: 1 }, { status: 501 });
 
+  /* ABDM V3 HIU data push: the HIP posts the encrypted records to the dataPushUrl our hiRequest named
+   * (CONNECT_ABDM_DATA_PUSH_URL). No StewardMD actor, like the ingress: correlation and Fidelius are the
+   * authority (hiu-push.js says what is UNCONFIRMED about it). It ends in the same consumeAndLand. */
+  if (path === "/abdm/hiu/data" && request.method === "POST") {
+    const deps = { db: env.CONNECT_DB, r2: env.CONNECT_R2, kv: env.MAIK_KV, secrets: makeSecrets(env),
+      audit: makeAuditSink(env, env.CONNECT_DB), now: () => new Date().toISOString() };
+    const gw = abdmGatewayFor(env, deps);
+    if (!gw) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (gw.held) return heldResponse(gw);
+    let body = {}; try { body = await request.json(); } catch {}
+    try {
+      const out = await receiveDataPush(env, { ...deps, consumeAndLand: consumeAndLandFor(env, deps, gw) }, body);
+      return jsonResponse(out.body, { status: out.status });
+    } catch {
+      return jsonResponse({ error: "push_error" }, { status: 500 });   // storage failure: the HIP retries
+    }
+  }
+
   /* ABDM HIU: the two doors that START an exchange.
    *
    * These existed as functions with real consent binding, real crypto and a real state machine, and
@@ -133,6 +161,7 @@ export async function onRequest(context) {
   if (path === "/abdm/hiu/consent-request" && request.method === "POST") {
     const gw = abdmGatewayFor(env, { kv: env.MAIK_KV, secrets: makeSecrets(env) });
     if (!gw) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (gw.held) return heldResponse(gw);
     let body = {}; try { body = await request.json(); } catch {}
     /* PURPOSE AND HITYPES ARE REQUIRED HERE, not because ABDM demands them in this shape but because
      * a consent granted without them can never be USED: revalidateForRequest fails closed on an
@@ -144,11 +173,22 @@ export async function onRequest(context) {
     if (!Array.isArray(body.hiTypes) || !body.hiTypes.length) return jsonResponse({ error: "hi_types_required", detail: "name at least one health-information type; a consent for nothing grants nothing" }, { status: 422 });
     if (!body.dateRange || !body.dateRange.from || !body.dateRange.to) return jsonResponse({ error: "date_range_required", detail: "a consent is for a period; an unbounded one is not asked for here" }, { status: 422 });
     if (!body.dataEraseAt) return jsonResponse({ error: "data_erase_at_required", detail: "say when this data must be erased; an expiry this server cannot state is one it cannot honour" }, { status: 422 });
+    /* THE REQUESTER (ABDM V3). The consent the patient approves in their ABHA app names the doctor asking, by
+     * medical registration number, and the V3 requestConsent refuses without one. It is taken from who is
+     * signed in, never from the body: the hospital's staff registry (member regNo) or the platform's verified
+     * claim, through the same resolution every chart write uses. No registration number, no request - and the
+     * refusal says what to fix, before anything reaches the gateway. */
+    let signer;
+    try { signer = await resolveClinicalActor(request, env, body.tenantId, "record:read", wsqActorDeps(env)); }
+    catch (e) { return jsonResponse({ error: CODE(e) }, { status: STATUS(e) }); }
+    const regNo = String((signer && signer.actor && signer.actor.credential) || "").trim();
+    if (!regNo) return jsonResponse({ error: "requester_registration_required", detail: "ABDM names the doctor asking by medical registration number. Ask the hospital admin to add your registration number on the Staff tab, then try again." }, { status: 422 });
+    const requester = { name: String((signer.actor && signer.actor.display) || ""), identifier: { type: "REGNO", value: regNo, system: "https://www.mciindia.org" } };
     const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, secrets: makeSecrets(env), gateway: gw,
       identifyFn: identify, audit: makeAuditSink(env, env.CONNECT_DB), now: () => new Date().toISOString() };
     try {
       const out = await requestConsent(env, deps, { request, tenantId: body.tenantId, abhaAddress: body.abhaAddress,
-        purpose: body.purpose, hiTypes: body.hiTypes, dateRange: body.dateRange, dataEraseAt: body.dataEraseAt });
+        purpose: body.purpose, hiTypes: body.hiTypes, dateRange: body.dateRange, dataEraseAt: body.dataEraseAt, requester });
       /* The requestId and nothing else. The raw ABHA went into the POST body to the gateway and is
        * never echoed back, never stored and never audited - it is HMAC'd before it reaches D1. */
       return jsonResponse({ ok: true, requestId: out.requestId, status: out.status });
@@ -159,6 +199,7 @@ export async function onRequest(context) {
   if (path === "/abdm/hiu/data-request" && request.method === "POST") {
     const gw = abdmGatewayFor(env, { kv: env.MAIK_KV, secrets: makeSecrets(env) });
     if (!gw) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (gw.held) return heldResponse(gw);
     let body = {}; try { body = await request.json(); } catch {}
     if (!body.consentId) return jsonResponse({ error: "consent_id_required" }, { status: 422 });
     /* Every one of these is a thing the consent gate compares the request against, and every one of
