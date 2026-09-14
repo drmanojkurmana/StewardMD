@@ -1,0 +1,141 @@
+{
+  "id": "breast-inavolisib-palbo-fulv",
+  "diseaseId": "breast_cancer",
+  "name": "Inavolisib + Palbociclib + Fulvestrant (INAVO120)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Cycled every 28 days continuously until disease progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
+    "primaryStudy": "INAVO120: Turner NC, Im SA, Saura C, et al. N Engl J Med 2024;391:1584-1596; Jhaveri KL, et al. N Engl J Med 2025;393:151-161"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 6, 14 of 15)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "PIK3CA": "positive",
+    "note": "Requires HR-positive, HER2-negative locally advanced or metastatic breast cancer with a confirmed PIK3CA activating mutation and disease progression on or within 12 months of adjuvant endocrine therapy completion. Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-Q (6 of 15 and 14 of 15) (Category 1, Preferred)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "invasive breast carcinoma (HR-positive, HER2-negative)",
+  "premedications": [],
+  "supportiveCare": [
+    "Hyperglycemia prophylaxis/management: check fasting glucose and HbA1c at baseline. Monitor glucose levels regularly. Initiate metformin if FPG exceeds 160 mg/dL.",
+    "Stomatitis prophylaxis: consider steroid mouth rinse (dexamethasone 0.5 mg/5 mL) starting on Day 1 to prevent mucositis.",
+    "Neutropenia monitoring (Palbociclib): monitor CBC on Day 1 and Day 15 of early cycles.",
+    "Premenopausal patients must receive concurrent ovarian function suppression (GnRH analog)."
+  ],
+  "monitoring": [
+    "Fasting plasma glucose at baseline, Day 8, Day 15, Day 28, then monthly",
+    "HbA1c at baseline and every 3 months",
+    "CBC with differential prior to starting, on Day 15 of first 2 cycles, and before each cycle",
+    "Comprehensive metabolic panel / LFTs before each cycle"
+  ],
+  "clearanceChecks": [
+    "fasting plasma glucose (< 160 mg/dL)",
+    "CBC / absolute neutrophil count (ANC ≥ 1000/mcL, platelets ≥ 50,000/mcL)",
+    "liver function tests",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 hyperglycemia (fasting glucose > 250 mg/dL)",
+      "drug": "inavolisib",
+      "action": "hold/reduce",
+      "text": "Hold inavolisib. Initiate/intensify antidiabetic therapy. Resume at reduced dose (6 mg daily) when fasting glucose ≤ 160 mg/dL."
+    },
+    {
+      "condition": "grade 3 neutropenia on Day 1 of cycle",
+      "drug": "palbociclib",
+      "action": "delay",
+      "text": "Hold palbociclib until ANC ≥ 1000/mcL. Resume at 125 mg or reduce to 100 mg for prolonged or recurrent grade 3."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "inavolisib",
+      "name": "Inavolisib",
+      "basis": "flat",
+      "dosePerUnit": 9,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Inavolisib 9 mg PO once daily on Days 1 to 28 of each 28-day cycle.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 6 and 14 of 15 (INAVO120)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "palbociclib",
+      "name": "Palbociclib",
+      "basis": "flat",
+      "dosePerUnit": 125,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Palbociclib 125 mg PO once daily on Days 1 to 21 of each 28-day cycle (7 days off).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 14 of 15",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fulvestrant",
+      "name": "Fulvestrant",
+      "basis": "flat",
+      "dosePerUnit": 500,
+      "unit": "mg",
+      "route": "IM",
+      "notes": "Fulvestrant 500 mg IM (two 250 mg injections) on Days 1 and 15 of Cycle 1, then Day 1 of each subsequent 28-day cycle.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "locator": "BINV-Q 14 of 15",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}
