@@ -185,7 +185,9 @@ const queue = (org, state) => as(ADMIN, `/ward/outbound${state ? `?state=${state
  * without waiting. T0 is anchored just AFTER the wall clock, because a delivery is queued due-now
  * against the real clock - a hard-coded date in the past would simply never be due, and a test that
  * passes only because nothing ran would prove nothing. */
-const T0 = new Date(Date.now() + 1000).toISOString();
+/* An hour ahead, not a second: T0 is fixed when the file loads, and on a loaded machine the first
+ * tests took longer than a second, so later deliveries were queued AFTER T0 and were never due. */
+const T0 = new Date(Date.now() + 3600 * 1000).toISOString();
 const at = (ms) => new Date(Date.parse(T0) + ms).toISOString();
 
 /* ---- 1: the whole pipeline, end to end, and the far end really got it -------------------------- */

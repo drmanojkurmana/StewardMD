@@ -115,6 +115,7 @@ import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/fhir-route.js";
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
+import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -1059,6 +1060,11 @@ export async function onRequest(context) {
          * staff.admin here AND a clinical actor that may write the record, inside webhooks.js. */
         webhooks: CAPS.STAFF_ADMIN, webhook: CAPS.STAFF_ADMIN, "webhook-update": CAPS.STAFF_ADMIN,
         "webhook-rotate": CAPS.STAFF_ADMIN, "webhook-test": CAPS.STAFF_ADMIN, "webhook-deliveries": CAPS.STAFF_ADMIN,
+        /* Connected apps (SMART client registration, smart-clients.js), Admin Center > Integrations.
+         * staff.admin here AND a clinical actor that may write the record, inside the handlers -
+         * the webhooks' own double gate, so hr is refused on every one of these too. */
+        "smart-clients": CAPS.STAFF_ADMIN, "smart-client-save": CAPS.STAFF_ADMIN,
+        "smart-client-remove": CAPS.STAFF_ADMIN, "smart-enable": CAPS.STAFF_ADMIN,
         // TASK 7 STEP 1: who WardSynQ believes when a feed says who it is. staff.admin, the same
         // capability that manages the staff->role mapping - registering a trusted source system is
         // exactly that kind of hospital-administration act, never a clinical one.
@@ -2050,6 +2056,25 @@ export async function onRequest(context) {
       }
       if (sub === "webhook-deliveries" && method === "GET") {
         const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* CONNECTED APPS (smart-clients.js), Admin Center > Integrations. The hospital's SMART client
+       * registry: the enable switch, the client list with key counts but never key material, and
+       * the save/remove writes through ORG.updateOrg, audited with the clientId and the action. */
+      if (sub === "smart-clients" && method === "GET") {
+        const r = await listSmartClients(request, env, { ...deps, org: wOrg });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "smart-client-save" && method === "POST") {
+        const r = await saveSmartClient(request, env, { ...deps, org: wOrg, orgId: wOrgId, client: body.client, actorId: actor.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "smart-client-remove" && method === "POST") {
+        const r = await removeSmartClient(request, env, { ...deps, org: wOrg, orgId: wOrgId, clientId: body.clientId, actorId: actor.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "smart-enable" && method === "POST") {
+        const r = await setSmartEnabled(request, env, { ...deps, org: wOrg, orgId: wOrgId, enabled: body.enabled, actorId: actor.id });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fhir-exceptions" && method === "GET") {

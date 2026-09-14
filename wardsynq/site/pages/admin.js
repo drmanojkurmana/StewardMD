@@ -1227,12 +1227,170 @@
   }
   WSQ._webhookDeliveriesHtml = webhookDeliveriesHtml;
 
+  // ---- Integrations > Connected apps (SMART) ---------------------------------------------
+  /* null = loading, {failed} = the list did not load. Neither may look like "no apps". The scope
+   * checkboxes are built from the answer's own scopeCatalog, never from a list kept here: a scope
+   * the server would refuse is a scope the screen must not offer. `editingId` is the client shown
+   * in the form, or null for adding. Keys are never shown again (the answer carries counts and key
+   * ids only), so editing a backend client replaces its keys only when new ones are pasted. */
+  var scCache = null;
+  function scScopeChecks(esc, catalog, kind, selected) {
+    var groups = kind === "backend" ? [["system", "System (a backend system reads across patients)"], ["special", "Special"]]
+      : [["user", "User (reads as the clinician)"], ["patient", "Patient (confined to one patient)"], ["special", "Special"]];
+    var sel = {};
+    (selected || []).forEach(function (s) { sel[s] = true; });
+    return groups.map(function (g) {
+      return '<div style="flex:1 1 220px"><b>' + esc(g[1]) + "</b><br>" + (((catalog && catalog[g[0]]) || []).map(function (s) {
+        return '<label class="f" style="font-weight:normal"><span><input type="checkbox" class="scScope" value="' + esc(s) + '"' + (sel[s] ? " checked" : "") + "> <code>" + esc(s) + "</code></span></label>";
+      }).join("") || '<span class="quiet">none</span>') + "</div>";
+    }).join("");
+  }
+  function smartClientsHtml(c, r, editingId) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>Connected apps (SMART)</h2>' +
+      '<p class="quiet">Outside applications this hospital allows to read its record over SMART on FHIR: an app a clinician uses (public), or a registered system with a key (backend). ' +
+      "Registration is the allowlist: an app not named here gets nothing, and removing one stops its tokens at once. Turning the switch off closes the SMART door for every app.</p>";
+    if (r == null) return h + '<span class="spin"></span> Loading connected apps...</div>';
+    if (r.failed) return h + '<div class="msg err">Connected apps could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
+    h += '<label class="f"><span><input type="checkbox" id="scEnabled"' + (r.enabled ? " checked" : "") + "> SMART access is on for this hospital</span></label>";
+    var list = r.clients || [];
+    h += "<h3>Registered apps</h3>";
+    if (!list.length) h += '<p class="quiet">No connected apps are registered for this hospital. Until one is, no outside application can connect.</p>';
+    else {
+      h += '<div class="tbl"><table><thead><tr><th>Name</th><th>Client ID</th><th>Kind</th><th>Redirects</th><th>Scopes</th><th>Keys</th><th></th></tr></thead><tbody>' +
+        list.map(function (a) {
+          var kids = (a.keys || []).map(function (k) { return k.kid || "(no kid)"; }).join(", ");
+          var keys = esc(a.keyCount || 0) + " inline" + (kids ? '<br><span class="quiet">' + esc(kids) + "</span>" : "") +
+            (a.jwksUri ? '<br><span class="quiet">JWKS address set</span>' : "");
+          return "<tr><td>" + esc(a.name) + "</td><td><code>" + esc(a.clientId) + "</code></td><td>" + esc(a.kind) + "</td><td>" +
+            ((a.redirectUris || []).length ? a.redirectUris.map(function (u) { return esc(u); }).join("<br>") : '<span class="quiet">none</span>') + "</td><td>" +
+            (a.scopes || []).map(function (s) { return "<code>" + esc(s) + "</code>"; }).join("<br>") + "</td><td>" + keys + "</td><td>" +
+            '<button type="button" class="btn ghost" data-sc-edit="' + esc(a.clientId) + '">Edit</button> ' +
+            '<button type="button" class="btn ghost" data-sc-remove="' + esc(a.clientId) + '">Remove</button></td></tr>';
+        }).join("") + "</tbody></table></div>";
+    }
+    var ed = null;
+    if (editingId) ed = list.filter(function (a) { return a.clientId === editingId; })[0] || null;
+    var kind = ed ? ed.kind : "public";
+    h += '<div id="scMsg"></div><h3 id="scFormHead">' + (ed ? "Edit " + esc(ed.clientId) : "Add a connected app") + "</h3>" +
+      '<div class="row"><label class="f"><span>Client ID (letters, digits, dot, underscore, hyphen)</span><input type="text" id="scId" maxlength="64" value="' + esc(ed ? ed.clientId : "") + '"' + (ed ? " disabled" : "") + "></label>" +
+      '<label class="f"><span>Name (shown on the consent screen)</span><input type="text" id="scName" maxlength="120" value="' + esc(ed ? ed.name : "") + '"></label>' +
+      '<label class="f"><span>Kind</span><select id="scKind"><option value="public"' + (kind === "public" ? " selected" : "") + ">Public (an app a clinician uses)</option>" +
+      '<option value="backend"' + (kind === "backend" ? " selected" : "") + ">Backend (a system with a key)</option></select></label></div>" +
+      '<div class="row" id="scRedirectWrap" style="' + (kind === "public" ? "" : "display:none") + '"><label class="f"><span>Redirect URIs, one per line (https, no fragment)</span><textarea id="scRedirects" rows="2">' +
+      esc(ed ? (ed.redirectUris || []).join("\n") : "") + "</textarea></label></div>" +
+      '<div id="scBackendWrap" style="' + (kind === "backend" ? "" : "display:none") + '"><div class="row"><label class="f"><span>Public keys (JWKS JSON with a keys list)</span><textarea id="scJwks" rows="3" placeholder=\'{"keys": [...]}\'></textarea></label>' +
+      '<label class="f"><span>Or a JWKS address (https)</span><input type="url" id="scJwksUri" placeholder="https://"></label></div>' +
+      '<p class="quiet">Send only the public half. A private key is refused, never stored.' + (ed ? " Keys are never shown again: paste them only to replace what is registered." : "") + "</p></div>" +
+      "<h3>Scopes</h3>" + '<div class="row" id="scScopes">' + scScopeChecks(esc, r.scopeCatalog || {}, kind, ed ? ed.scopes : []) + "</div>" +
+      '<button type="button" class="btn" id="scSave"' + (ed ? ' data-sc-editing="' + esc(ed.clientId) + '"' : "") + ">" + (ed ? "Save changes" : "Add connected app") + "</button>";
+    if (ed) h += ' <button type="button" class="btn ghost" id="scCancel">Cancel</button>';
+    return h + "</div>";
+  }
+  WSQ._smartClientsHtml = smartClientsHtml;
+
+  function bindSmart(c, body) {
+    var msg = function (t) { var m = document.getElementById("scMsg"); if (m) m.innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
+    var en = document.getElementById("scEnabled");
+    if (en) en.onchange = function () {
+      var want = en.checked;
+      en.disabled = true;
+      c.api("/ward/smart-enable", { orgId: c.state.orgId, enabled: want }).then(function (x) {
+        if (!x || !x.ok) { en.disabled = false; en.checked = !want; msg(refusal(x)); return; }
+        c.toast(want ? "SMART access is on for this hospital." : "SMART access is off. No outside app can connect until it is back on.");
+        renderIntegrations(c, body);
+      }, function () { en.disabled = false; en.checked = !want; msg("No response from the server. The switch may not have moved; reload to check."); });
+    };
+    var kind = document.getElementById("scKind");
+    var paintScopes = function () {
+      var box = document.getElementById("scScopes");
+      var k = document.getElementById("scKind");
+      var isB = !!(k && k.value === "backend");
+      var rw = document.getElementById("scRedirectWrap"), bw = document.getElementById("scBackendWrap");
+      if (rw) rw.style.display = isB ? "none" : "";
+      if (bw) bw.style.display = isB ? "" : "none";
+      if (!box || !scCache || !scCache.scopeCatalog) return;
+      var keep = {};
+      box.querySelectorAll(".scScope").forEach(function (b) { if (b.checked) keep[b.value] = true; });
+      box.innerHTML = scScopeChecks(c.esc, scCache.scopeCatalog, isB ? "backend" : "public", Object.keys(keep));
+    };
+    if (kind) kind.onchange = paintScopes;
+    var cancel = document.getElementById("scCancel");
+    if (cancel) cancel.onclick = function () {
+      var card = document.getElementById("scCard");
+      card.innerHTML = smartClientsHtml(c, scCache, null);
+      bindSmart(c, body);
+    };
+    var save = document.getElementById("scSave");
+    if (save) save.onclick = function () {
+      var editing = save.getAttribute("data-sc-editing") || "";
+      var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+      var k = val("scKind") === "backend" ? "backend" : "public";
+      var scopes = [];
+      document.querySelectorAll(".scScope").forEach(function (b) { if (b.checked) scopes.push(b.value); });
+      var client = { clientId: editing || val("scId"), name: val("scName"), kind: k,
+        redirectUris: val("scRedirects").split("\n").map(function (s) { return s.trim(); }).filter(Boolean), scopes: scopes };
+      if (k === "backend") {
+        var jwt = val("scJwks");
+        if (jwt) {
+          try { client.jwks = JSON.parse(jwt); }
+          catch (e) { msg("The keys are not valid JSON: " + e.message); return; }
+        } else if (!editing) {
+          /* A new backend client with neither keys nor address is the server's refusal, with the
+           * field named; an edit may keep what is registered, so it is allowed through. */
+        }
+        client.jwksUri = val("scJwksUri");
+      }
+      save.disabled = true;
+      c.api("/ward/smart-client-save", { orgId: c.state.orgId, client: client }).then(function (x) {
+        if (!x || !x.ok) { save.disabled = false; msg(refusal(x)); return; }
+        c.toast(editing ? "Connected app updated." : "Connected app registered.");
+        renderIntegrations(c, body);
+      }, function () { save.disabled = false; msg("No response from the server. The app may not have been saved; reload to check."); });
+    };
+    body.querySelectorAll("[data-sc-edit]").forEach(function (b) {
+      b.onclick = function () {
+        var card = document.getElementById("scCard");
+        card.innerHTML = smartClientsHtml(c, scCache, b.getAttribute("data-sc-edit"));
+        bindSmart(c, body);
+        var head = document.getElementById("scFormHead");
+        if (head && head.scrollIntoView) head.scrollIntoView();
+      };
+    });
+    body.querySelectorAll("[data-sc-remove]").forEach(function (b) {
+      b.onclick = function () {
+        var id = b.getAttribute("data-sc-remove");
+        if (!window.confirm("Remove " + id + "? Its tokens stop working at once, and it cannot connect again until it is re-registered.")) return;
+        b.disabled = true;
+        c.api("/ward/smart-client-remove", { orgId: c.state.orgId, clientId: id }).then(function (x) {
+          if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
+          c.toast("Connected app removed. Its tokens no longer work.");
+          renderIntegrations(c, body);
+        }, function () { b.disabled = false; msg("No response from the server. The app may not have been removed; reload to check."); });
+      };
+    });
+  }
+
   function renderIntegrations(c, body, shown) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
-    body.innerHTML = webhooksHtml(c, null);
+    body.innerHTML = '<div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
     var fail = function (r) { return { failed: true, message: r ? refusal(r) : "No response from the server." }; };
+    /* The connected-apps card loads beside the webhooks, into its own wrapper, so whichever answer
+     * arrives first is never wiped by the other. */
+    c.api("/ward/smart-clients" + q).then(function (sc) {
+      var card = document.getElementById("scCard");
+      if (!card) return;
+      scCache = (sc && sc.ok && sc.clients && sc.scopeCatalog) ? sc : null;
+      card.innerHTML = smartClientsHtml(c, scCache || fail(sc));
+      if (scCache) bindSmart(c, body);
+    }, function () {
+      var card = document.getElementById("scCard");
+      if (card) card.innerHTML = smartClientsHtml(c, fail(null));
+    });
     return c.api("/ward/webhooks" + q).then(function (r) {
-      body.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
+      var wh = document.getElementById("whCard");
+      if (wh) wh.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
+      else body.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
       if (!r || !r.ok) return;
       var msg = function (t) { document.getElementById("whMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
       var urlOf = function (id) { var w = r.webhooks.filter(function (x) { return x.id === id; })[0]; return w ? w.url : ""; };
@@ -1289,6 +1447,10 @@
           }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null)); });
         };
       });
-    }, function () { body.innerHTML = webhooksHtml(c, fail(null)); });
+    }, function () {
+      var wh = document.getElementById("whCard");
+      if (wh) wh.innerHTML = webhooksHtml(c, fail(null));
+      else body.innerHTML = webhooksHtml(c, fail(null));
+    });
   }
 })();
