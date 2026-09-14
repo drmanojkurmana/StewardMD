@@ -25,7 +25,11 @@
 import * as ORG from "../../_opd_org_store.js";
 import { actorDeps, recordDeps } from "../../_wardsynq/deps.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
-import { fhirResponse, dispatchRead } from "../../_wardsynq/fhir-route.js";
+import { fhirResponse, dispatchRead, dispatchBulk } from "../../_wardsynq/fhir-route.js";
+import { exportConsumers } from "../../_wardsynq/fhir-bulk.js";
+import { runTick } from "../../_wardsynq/ops-tick.js";
+import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
+import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { practitionerRead } from "../../_wardsynq/fhir-identity.js";
 import { smartEnabled, smartConfiguration, authorize, decide, token, revoke, resolveBearer, signingKey, publicJwks } from "../../_wardsynq/smart-server.js";
 
@@ -33,7 +37,7 @@ const str = (v) => (v == null ? "" : String(v).trim());
 
 function cors(request) {
   const origin = (request && request.headers && request.headers.get("Origin")) || "";
-  return { "Access-Control-Allow-Origin": origin || "*", "Access-Control-Allow-Headers": "Content-Type, Authorization, Prefer, If-Match", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Expose-Headers": "ETag, Last-Modified, Location", Vary: "Origin" };
+  return { "Access-Control-Allow-Origin": origin || "*", "Access-Control-Allow-Headers": "Content-Type, Authorization, Prefer, If-Match", "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS", "Access-Control-Expose-Headers": "ETag, Last-Modified, Location, Content-Location, X-Progress, Retry-After", Vary: "Origin" };
 }
 const oauth = (obj, status, request, extra) => new Response(JSON.stringify(obj), { status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store", Pragma: "no-cache" }, cors(request), extra || {}) });
 /* The consent page: no script of its own, no external asset, and a policy that says so. Not CORS-exposed: it is a page a person sees. */
@@ -91,7 +95,8 @@ export async function onRequest(context) {
     return oauth({ error: "not_found" }, 404, request);
   }
 
-  if (request.method !== "GET") return fhirResponse(operationOutcome("error", "not-supported", "this door is read-only"), 405, { Allow: "GET" }, cors(request));
+  /* DELETE exists for one path only: cancelling a bulk export this bearer started. It removes files, never a record. */
+  if (request.method !== "GET" && !(request.method === "DELETE" && sub === "$export-status")) return fhirResponse(operationOutcome("error", "not-supported", "this door is read-only"), 405, { Allow: "GET" }, cors(request));
   /* The CapabilityStatement is PUBLIC. It is how a client discovers the endpoints before it holds
    * any token, it names no patient, and hiding it would only hide the door - not lock it. */
   if (sub === "metadata") {
@@ -119,6 +124,22 @@ export async function onRequest(context) {
     return fhirResponse(r.ok ? r.resource : r.outcome, r.status, null, cors(request));
   }
 
+  /* BULK DATA ($export). Backend-services tokens only (fhir-bulk.js checks the system/ scopes). A
+   * status poll also runs this hospital's background tick, gated to once per two minutes, because
+   * a bulk client polling is exactly the traffic that should move its export along. */
+  const bulk = await dispatchBulk(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer, store: documentStoreFromEnv(env) }, { cors: cors(request) });
+  if (bulk) {
+    if (sub === "$export-status" && context.waitUntil && env.WSQ_TICK_OFF !== "1") {
+      context.waitUntil((async () => {
+        try {
+          const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${migration.tenantId}`, limit: 1, windowMs: 120000 });
+          if (!gate.allowed) return;
+          await runTick(ctx.recordDeps.repository, migration.tenantId, { policy: (org.wardsynq && org.wardsynq.criticalEscalation) || null, notifyDeps: {}, consumers: exportConsumers({ repository: ctx.recordDeps.repository, tenantId: migration.tenantId, store: documentStoreFromEnv(env), env }) });
+        } catch (e) { console.error("wsq tick failed", migration.tenantId, String((e && e.message) || e).slice(0, 200)); }
+      })());
+    }
+    return bulk;
+  }
   const { obj, status } = await dispatchRead(request, env, parts.slice(1), url, { ...ctx, actorOverride: bearer }, request.headers.get("Prefer") || "");
   return fhirResponse(obj, status, null, cors(request));
 }
