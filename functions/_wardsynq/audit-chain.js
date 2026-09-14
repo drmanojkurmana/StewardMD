@@ -14,15 +14,28 @@
  * WHAT IT IS NOT. It is evidence, not prevention: someone who can write to the database can rebuild
  * the whole chain. The prevention is the BEFORE UPDATE / BEFORE DELETE triggers in
  * functions/db/wardsynq_schema.sql; this is what tells you when those were bypassed (a restore, a
- * dropped trigger, an import). Nothing anchors the head outside the database, so rows removed from
- * the END of the chain are not detectable here; see docs/BACKUP_DR.md.
+ * dropped trigger, an import). The chain alone cannot see a rebuild that recomputes every hash, or
+ * rows removed from the END (the head just moves back); that is what the outside anchors below are
+ * for. What remains even with anchors: an attacker who controls BOTH the database and the anchor
+ * store can move both together, and anything in the window before the first anchor. See
+ * docs/BACKUP_DR.md.
+ *
+ * OUTSIDE ANCHORS. Once an hour the background tick copies the head ({seq, hash}) into a bounded log
+ * (the last 200, `{seq, hash, at}`) kept OUTSIDE the database (KV in production), under
+ * `wsq:auditanchor:<tenantId>`. checkAnchors() compares every stored anchor against the chain row at
+ * that sequence number: a rebuild after an anchor reads `rewritten`, a removed tail reads
+ * `truncated`. An older anchor is never overwritten by a different hash for the same seq; that
+ * conflict is itself the tamper finding. Anchors are evidence, not prevention, and the first anchor
+ * only covers what comes after it.
  *
  * ROWS WRITTEN BEFORE THIS EXISTED ARE THE UNCHAINED GENESIS ERA. They cannot be verified and are not
  * pretended to be. Link 1 names the newest of them (legacy_boundary) and its prev_hash is derived from
  * that name, so the boundary itself cannot be moved without breaking link 1.
  *
  * Storage-agnostic: pure functions plus verifyAuditChain() over the repository's optional
- * auditChainHead()/auditChainRows(). No platform calls here.
+ * auditChainHead()/auditChainRows(). The anchors take an injected `{get(key), put(key, value)}`
+ * store (KV-shaped), so this file still makes no platform calls. No PHI in any message here: seqs,
+ * hashes and timestamps only.
  */
 
 import { sha256Hex } from "./object-store.js";
@@ -160,4 +173,145 @@ function auditRetentionSetting(configured, region) {
   return d ? { years: d.years, source: "region-default", citation: d.source } : { years: null, source: "not-configured" };
 }
 
-export { GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting };
+/* OUTSIDE ANCHORS. The newest link copied somewhere a database write cannot move.
+ *
+ * WHY A SEPARATE STORE AND NOT ANOTHER TABLE. Another table in the same database shares the same
+ * trust domain: anyone who can rebuild the chain can rebuild the anchors in the same transaction.
+ * KV is written through a different binding with different credentials, so moving both means
+ * compromising two places, not one. The anchors are still evidence, not prevention.
+ *
+ * WHY NEVER OVERWRITE. A rebuilt chain reuses the same sequence numbers with different hashes. If
+ * anchoring replaced the old hash with the new one, the rebuild would erase its own evidence on the
+ * next tick. So a seq that is already anchored keeps its FIRST hash; a head that disagrees with it
+ * is left unrecorded and checkAnchors() reports it.
+ */
+
+const ANCHOR_PREFIX = "wsq:auditanchor:";
+const ANCHOR_MAX = 200;
+
+/** PURE. The store key for a hospital's anchor log. */
+const anchorKey = (tenantId) => ANCHOR_PREFIX + str(tenantId);
+
+/** PURE. A stored anchor is a seq, the hash the chain had there, and when it was copied. */
+const anchorEntry = (seq, hash, at) => ({ seq: Number(seq), hash: String(hash), at: String(at) });
+
+const validAnchor = (a) => !!a && Number.isFinite(Number(a.seq)) && Number(a.seq) > 0 && typeof a.hash === "string" && a.hash.length > 0;
+
+/**
+ * PURE. Parses a stored anchor log. Returns the anchors (oldest first), [] when nothing was ever
+ * stored, or null when something was stored that is not a log: corrupt is not empty, and must never
+ * read as "nothing to compare yet".
+ */
+function parseAnchorLog(raw) {
+  if (raw == null || raw === "") return [];
+  let v = raw;
+  if (typeof v === "string") {
+    try { v = JSON.parse(v); }
+    catch { return null; }
+  }
+  if (!Array.isArray(v)) return null;
+  return v.filter(validAnchor).map((a) => anchorEntry(a.seq, a.hash, a.at || ""));
+}
+
+/**
+ * PURE. Folds one head into the log, oldest first, bounded to ANCHOR_MAX. Never overwrites: a seq
+ * already present with the same hash is already anchored (no duplicate written); a seq already
+ * present with a DIFFERENT hash keeps its first hash and the new head is left out (conflict).
+ */
+function appendAnchorEntry(log, entry, max) {
+  const kept = (log || []).filter(validAnchor).map((a) => anchorEntry(a.seq, a.hash, a.at));
+  const same = kept.filter((a) => a.seq === entry.seq);
+  if (same.length) {
+    if (same.some((a) => a.hash === entry.hash)) {
+      const first = same.filter((a) => a.hash === entry.hash)[0];
+      return { log: kept, appended: false, status: "already", at: first.at };
+    }
+    return { log: kept, appended: false, status: "conflict", seq: entry.seq, expected: same[0].hash, found: entry.hash, at: same[0].at };
+  }
+  const next = kept.concat([anchorEntry(entry.seq, entry.hash, entry.at)]);
+  const bound = Math.max(1, Math.floor(Number(max)) || ANCHOR_MAX);
+  return { log: next.slice(-bound), appended: true, status: "ok" };
+}
+
+const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
+
+/**
+ * Copies the current head into the anchor log. Reads the head, appends `{seq, hash, at}`, keeps
+ * the last ANCHOR_MAX. Returns `{status: "ok", ...}` on a stored anchor, `"already"` folded into
+ * ok with `anchored: false` when this head is already the newest anchor, `"empty"` when the chain
+ * has no rows yet (nothing stored), or `"conflict"` when the head disagrees with an older anchor
+ * for the same seq (the old anchor is kept; checkAnchors() names it). A failed READ or WRITE
+ * throws: nothing may report success when the anchor did not land, and writing blind over a log
+ * that could not be read would destroy older anchors. The tick catches this and records it.
+ */
+async function anchorHead(repository, tenantId, anchorStore, nowIso) {
+  if (!repository || typeof repository.auditChainHead !== "function") throw new Error("this deployment's storage cannot read the audit chain head");
+  if (!anchorStore || typeof anchorStore.get !== "function" || typeof anchorStore.put !== "function") throw new Error("no anchor store was handed in");
+  const head = await repository.auditChainHead(tenantId);
+  if (!head) return { status: "empty", anchored: false, message: "No chained audit rows exist yet, so there is nothing to anchor." };
+  const seq = num(head.seq != null ? head.seq : head.chainSeq);
+  const hash = head.hash != null && head.hash !== "" ? String(head.hash) : (head.rowHash != null && head.rowHash !== "" ? String(head.rowHash) : "");
+  if (seq == null || seq <= 0 || !hash) throw new Error("the audit chain head could not be read");
+  const at = str(nowIso) || new Date().toISOString();
+  const log = parseAnchorLog(await anchorStore.get(anchorKey(tenantId)));
+  if (log === null) throw new Error("the stored anchor log could not be read");
+  const folded = appendAnchorEntry(log, anchorEntry(seq, hash, at));
+  if (!folded.appended && folded.status === "conflict") {
+    return { status: "conflict", anchored: false, seq, expected: folded.expected, found: folded.found,
+      message: `Not anchored: chained row ${seq} no longer matches the outside copy from ${folded.at || "an earlier run"}. The earlier copy was kept.` };
+  }
+  if (!folded.appended) {
+    return { status: "ok", anchored: false, seq, hash, at: folded.at || at, anchors: folded.log.length,
+      message: `Already anchored: chained row ${seq} matches the outside copy from ${folded.at || "an earlier run"}.` };
+  }
+  await anchorStore.put(anchorKey(tenantId), JSON.stringify(folded.log));
+  return { status: "ok", anchored: true, seq, hash, at, anchors: folded.log.length,
+    message: `Anchored chained row ${seq} outside the database (${folded.log.length} kept).` };
+}
+
+/**
+ * Compares every stored anchor against the chain row at that seq. Never throws and never "ok" on
+ * a read that failed. @returns ok | rewritten (names atSeq) | truncated (head below an anchor) |
+ * no-anchors (nothing stored yet) | not-verified (a read failed).
+ */
+async function checkAnchors(repository, tenantId, anchorStore) {
+  const fail = (message) => ({ status: "not-verified", message });
+  if (!repository || typeof repository.auditChainHead !== "function" || typeof repository.auditChainRows !== "function") {
+    return fail("Not verified: this deployment's storage cannot read the audit chain back, so anchors cannot be compared.");
+  }
+  if (!anchorStore || typeof anchorStore.get !== "function") {
+    return fail("Not verified: the outside copy could not be read, so its integrity is unknown.");
+  }
+  let log;
+  try { log = parseAnchorLog(await anchorStore.get(anchorKey(tenantId))); }
+  catch { return fail("Not verified: the outside copy could not be read, so its integrity is unknown."); }
+  if (log === null) return fail("Not verified: the stored outside copy is not readable, so its integrity is unknown.");
+  if (!log.length) return { status: "no-anchors", message: "No outside copy has been recorded yet, so there is nothing outside the database to compare against." };
+  const ordered = [...log].sort((a, b) => a.seq - b.seq);
+  const newest = ordered[ordered.length - 1].seq;
+  let headSeq;
+  try {
+    const head = await repository.auditChainHead(tenantId);
+    headSeq = head ? num(head.seq != null ? head.seq : head.chainSeq) : 0;
+    if (head && headSeq == null) return fail("Not verified: the audit chain head could not be read, so anchors cannot be compared.");
+  } catch { return fail("Not verified: the audit chain head could not be read, so anchors cannot be compared."); }
+  for (const a of ordered) {
+    if (a.seq > headSeq) {
+      return { status: "truncated", atSeq: a.seq, headSeq, anchors: ordered.length,
+        message: `Truncated: the chain now ends at row ${headSeq}, below anchored row ${a.seq} from ${a.at || "an earlier run"}. Newest rows were removed from the audit trail below the application.` };
+    }
+    let link;
+    try {
+      const rows = await repository.auditChainRows(tenantId, a.seq, a.seq);
+      link = Array.isArray(rows) ? rows[0] : null;
+    } catch { return fail(`Not verified: chained row ${a.seq} could not be read back, so its anchor cannot be compared.`); }
+    if (!link || link.rowHash !== a.hash) {
+      return { status: "rewritten", atSeq: a.seq, expected: a.hash, found: link ? link.rowHash : null, headSeq, anchors: ordered.length,
+        message: `Rewritten at chained row ${a.seq}: it no longer matches the outside copy from ${a.at || "an earlier run"}. The audit trail was changed below the application.` };
+    }
+  }
+  return { status: "ok", anchors: ordered.length, newestSeq: newest, headSeq,
+    message: `Outside copy matches: all ${ordered.length} anchored rows still match the database (newest anchored row ${newest}, chain head ${headSeq}).` };
+}
+
+export { GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors };

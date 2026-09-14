@@ -34,7 +34,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { RUN_TYPE, rpoVerdict } from "./backup-run.js";
 import { span } from "../_roster.js";
-import { verifyAuditChain, auditRetentionSetting } from "./audit-chain.js";
+import { verifyAuditChain, checkAnchors, auditRetentionSetting } from "./audit-chain.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000;
@@ -432,7 +432,7 @@ const unavailable = (e) => ({ status: "unavailable", error: e instanceof Governa
 const section = (findings) => ({ status: "ok", findings, counts: findings.reduce((m, f) => { m[f.type] = (m[f.type] || 0) + 1; return m; }, {}) });
 
 /**
- * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?,
+ * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore?,
  *   orgEvents: {events, partial} | {error}, viewerId,
  *   assignmentSources: { members: [{identity, role}] | {error}, roster: {shifts, assignments, partial} | {error}, utcOffsetMinutes } }
  */
@@ -470,6 +470,12 @@ async function securityReport(request, env, ctx) {
   /* Tamper evidence over the newest rows, bounded. It never throws and is never "ok" on a failed or
    * short read, so it rides on the section whatever the retention read did. */
   retention.integrity = await verifyAuditChain(repository, tenantId, { limit: AUDIT_VERIFY_LIMIT });
+  /* P2.17: the outside anchors compared against the rows they name. checkAnchors() never throws and
+   * is never "ok" on a failed read, so it rides on the section the same way. Without a store there
+   * is nothing outside the database to compare against, and the report says so plainly. */
+  retention.anchors = ctx.anchorStore
+    ? await checkAnchors(repository, tenantId, ctx.anchorStore)
+    : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the database to compare against." };
 
   const orgEvents = ctx.orgEvents || { error: "not_supplied" };
   const logins = orgEvents.error

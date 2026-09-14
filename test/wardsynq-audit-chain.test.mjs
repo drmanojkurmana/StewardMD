@@ -73,6 +73,8 @@ mock.module("../functions/_wardsynq/deps.js", {
 });
 
 const AC = await import("../functions/_wardsynq/audit-chain.js");
+const { runTick } = await import("../functions/_wardsynq/ops-tick.js");
+const { systemHealthReport, ANCHOR_TAMPER_CONSEQUENCE } = await import("../functions/_wardsynq/system-health.js");
 const { D1Repository } = await import("../functions/_wardsynq/repository-d1.js");
 const { openSqlite } = await import("../functions/_wardsynq/repository-sqlite.js");
 const SR = await import("../functions/_wardsynq/security-review.js");
@@ -448,4 +450,285 @@ test("screen: broken names the row, not verified and a missing result never read
   assert.match(page, /Tamper evidence/);
   assert.match(page, /Rows missing/);
   assert.ok(!/[—–]/.test(broken + unknown + page), "no em or en dash on screen");
+});
+
+/* ---- 11: outside anchors --------------------------------------------------------------------------------
+ *
+ * The head copied outside the database (KV in production, a Map here), then compared row by row.
+ * The store is KV-shaped {get, put} on strings under `wsq:auditanchor:<tenantId>`, so the domain
+ * logic is exercised here with no platform in the room.
+ */
+
+const memAnchorStore = () => {
+  const m = new Map();
+  return { map: m, get: async (k) => (m.has(k) ? m.get(k) : null), put: async (k, v) => { m.set(k, v); } };
+};
+
+test("anchors: anchor then check is ok, on memory and on real SQL; the log is bounded and keyed per hospital", async () => {
+  assert.equal(AC.anchorKey(T), "wsq:auditanchor:tenant-chain");
+  assert.notEqual(AC.anchorKey(T), AC.anchorKey("another-tenant"), "each hospital anchors under its own key");
+
+  const mem = new MemoryRepository();
+  const store = memAnchorStore();
+  assert.equal((await AC.checkAnchors(mem, T, store)).status, "no-anchors");
+  assert.equal((await AC.anchorHead(mem, T, store, "2026-09-14T09:00:00.000Z")).status, "empty", "nothing chained yet anchors nothing");
+  assert.equal(store.map.size, 0, "an empty chain writes nothing");
+
+  for (let i = 1; i <= 3; i++) await mem.auditOnly(T, ev("record.read", i));
+  const a = await AC.anchorHead(mem, T, store, "2026-09-14T10:00:00.000Z");
+  assert.equal(a.status, "ok", JSON.stringify(a));
+  assert.equal(a.seq, 3);
+  assert.equal(a.anchored, true);
+  assert.deepEqual(JSON.parse(store.map.get(AC.anchorKey(T))), [{ seq: 3, hash: a.hash, at: "2026-09-14T10:00:00.000Z" }]);
+  const again = await AC.anchorHead(mem, T, store, "2026-09-14T11:00:00.000Z");
+  assert.equal(again.anchored, false, "the same head is not written twice");
+  assert.equal(JSON.parse(store.map.get(AC.anchorKey(T))).length, 1);
+  assert.equal((await AC.checkAnchors(mem, T, store)).status, "ok");
+
+  await mem.auditOnly(T, ev("record.read", 4));
+  assert.equal((await AC.checkAnchors(mem, T, store)).status, "ok", "older anchors still match after the chain grows");
+  assert.equal((await AC.anchorHead(mem, T, store, "2026-09-14T12:00:00.000Z")).seq, 4);
+  assert.equal(JSON.parse(store.map.get(AC.anchorKey(T))).length, 2);
+
+  const folded = Array.from({ length: 250 }, (_, i) => ({ seq: i + 1, hash: "h" + (i + 1), at: "t" }))
+    .reduce((l, e) => AC.appendAnchorEntry(l, e).log, []);
+  assert.equal(folded.length, 200, "only the last 200 anchors are kept");
+  assert.equal(folded[0].seq, 51);
+  assert.equal(folded[199].seq, 250);
+
+  if (SQL_SKIP) return;
+  const { repo } = sqlRepo();
+  const sstore = memAnchorStore();
+  for (let i = 1; i <= 3; i++) await repo.auditOnly(T, ev("record.read", i));
+  assert.equal((await AC.anchorHead(repo, T, sstore)).status, "ok");
+  assert.equal((await AC.checkAnchors(repo, T, sstore)).status, "ok");
+});
+
+test("anchors: a rebuilt chain with different hashes reads rewritten at that seq, and the old anchor is kept", async () => {
+  const mem = new MemoryRepository();
+  const store = memAnchorStore();
+  for (let i = 1; i <= 3; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T10:00:00.000Z");
+  for (let i = 4; i <= 5; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T10:30:00.000Z");
+  /* Rebuild: change row 3 and recompute every hash from it forward, so the chain verifies but the
+   * anchor does not. Indexes align because every row here belongs to the one hospital in order. */
+  mem.audit[2].action = "record.list";
+  for (let i = 2; i < mem._chain.length; i++) {
+    const prev = mem._chain[i - 1].rowHash;
+    mem._chain[i].prevHash = prev;
+    mem._chain[i].rowHash = await AC.chainHash(prev, mem.audit[i]);
+  }
+  assert.equal((await AC.verifyAuditChain(mem, T)).status, "ok", "the rebuild is self-consistent, which is exactly what anchors are for");
+  const c = await AC.checkAnchors(mem, T, store);
+  assert.equal(c.status, "rewritten", JSON.stringify(c));
+  assert.equal(c.atSeq, 3);
+  assert.match(c.message, /Rewritten at chained row 3/);
+  const re = await AC.anchorHead(mem, T, store, "2026-09-14T11:00:00.000Z");
+  assert.equal(re.status, "conflict", "the new hash does not overwrite the old anchor");
+  assert.equal((await AC.checkAnchors(mem, T, store)).atSeq, 3, "the evidence survives the next tick");
+
+  if (SQL_SKIP) return;
+  const { db, repo } = sqlRepo();
+  const sstore = memAnchorStore();
+  for (let i = 1; i <= 3; i++) await repo.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(repo, T, sstore);
+  for (let i = 4; i <= 5; i++) await repo.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(repo, T, sstore);
+  db.exec("DROP TRIGGER connect_audit_event_no_update");       // what a console, a script or a restore can do
+  db.exec("DROP TRIGGER wardsynq_audit_chain_no_update");
+  const ids = db.prepare("SELECT audit_id FROM wardsynq_audit_chain WHERE tenant_id=? ORDER BY chain_seq").all(T).map((r) => r.audit_id);
+  db.prepare("UPDATE connect_audit_event SET actor='cfa:someone-else' WHERE id=?").run(ids[2]);
+  const COLS = "id, tenant_id, ts, actor, connector_id, action, resource_counts, scope, patient_ref_hash, latency_ms, outcome, consent_id, transaction_id, care_context_hash";
+  for (let seq = 3; seq <= 5; seq++) {
+    const row = db.prepare(`SELECT ${COLS} FROM connect_audit_event WHERE id=?`).get(ids[seq - 1]);
+    const prev = db.prepare("SELECT row_hash FROM wardsynq_audit_chain WHERE tenant_id=? AND chain_seq=?").get(T, seq - 1).row_hash;
+    db.prepare("UPDATE wardsynq_audit_chain SET prev_hash=?, row_hash=? WHERE tenant_id=? AND chain_seq=?").run(prev, await AC.chainHash(prev, row), T, seq);
+  }
+  assert.equal((await AC.verifyAuditChain(repo, T)).status, "ok", "the rebuilt SQL chain verifies");
+  const s = await AC.checkAnchors(repo, T, sstore);
+  assert.equal(s.status, "rewritten", JSON.stringify(s));
+  assert.equal(s.atSeq, 3);
+});
+
+test("anchors: deleting the newest links reads truncated, while the chain itself still verifies", async () => {
+  const mem = new MemoryRepository();
+  const store = memAnchorStore();
+  for (let i = 1; i <= 3; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T10:00:00.000Z");
+  for (let i = 4; i <= 5; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T11:00:00.000Z");
+  mem._chain.splice(3);                                        // the newest two links are gone below the app
+  assert.equal((await AC.verifyAuditChain(mem, T)).status, "ok", "the remaining chain verifies: a tail cut is invisible without anchors");
+  const c = await AC.checkAnchors(mem, T, store);
+  assert.equal(c.status, "truncated", JSON.stringify(c));
+  assert.equal(c.atSeq, 5);
+  assert.equal(c.headSeq, 3);
+  assert.match(c.message, /Truncated/);
+
+  if (SQL_SKIP) return;
+  const { db, repo } = sqlRepo();
+  const sstore = memAnchorStore();
+  for (let i = 1; i <= 3; i++) await repo.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(repo, T, sstore);
+  for (let i = 4; i <= 5; i++) await repo.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(repo, T, sstore);
+  db.exec("DROP TRIGGER wardsynq_audit_chain_no_delete");      // what a console, a script or a restore can do
+  db.prepare("DELETE FROM wardsynq_audit_chain WHERE tenant_id=? AND chain_seq>?").run(T, 3);
+  assert.equal((await AC.verifyAuditChain(repo, T)).status, "ok", "the cut SQL chain verifies");
+  const s = await AC.checkAnchors(repo, T, sstore);
+  assert.equal(s.status, "truncated", JSON.stringify(s));
+  assert.equal(s.atSeq, 5);
+  assert.equal(s.headSeq, 3);
+});
+
+test("anchors: no anchors reads no-anchors, an unreadable or corrupt store reads not-verified and never ok", async () => {
+  const mem = new MemoryRepository();
+  for (let i = 1; i <= 2; i++) await mem.auditOnly(T, ev("record.read", i));
+  const none = await AC.checkAnchors(mem, T, memAnchorStore());
+  assert.equal(none.status, "no-anchors");
+  assert.match(none.message, /nothing outside the database to compare/);
+  const down = await AC.checkAnchors(mem, T, { get: async () => { throw new Error("KV_ERROR: down"); } });
+  assert.equal(down.status, "not-verified", JSON.stringify(down));
+  assert.match(down.message, /Not verified/);
+  assert.ok(!/KV_ERROR/.test(down.message), "no driver text");
+  assert.equal((await AC.checkAnchors({ auditOnly() {} }, T, memAnchorStore())).status, "not-verified", "a store without the chain methods");
+  const corrupt = memAnchorStore();
+  corrupt.map.set(AC.anchorKey(T), "{not json");
+  assert.equal((await AC.checkAnchors(mem, T, corrupt)).status, "not-verified", "a corrupt log is not nothing");
+});
+
+/* ---- 12: the tick anchors without ever risking the tick ------------------------------------------------ */
+
+test("anchors: a failed anchor write never fails the tick; the failure is recorded on the tick result", async () => {
+  const mem = new MemoryRepository();
+  for (let i = 1; i <= 2; i++) await mem.auditOnly(T, ev("record.read", i));
+  const failing = { get: async () => null, put: async () => { throw new Error("KV down"); } };
+  const t = await runTick(mem, T, { anchorStore: failing, nowMs: Date.parse("2026-09-14T10:00:00.000Z") });
+  assert.ok(t.anchor && t.anchor.error, "the failure is recorded: " + JSON.stringify(t.anchor));
+  assert.ok(t.criticals && t.outbox, "the clinical halves still report: " + JSON.stringify({ criticals: t.criticals, outbox: t.outbox }));
+  assert.equal((await AC.checkAnchors(mem, T, memAnchorStore())).status, "no-anchors", "a failed write anchored nothing");
+
+  const store = memAnchorStore();
+  const ok = await runTick(mem, T, { anchorStore: store, nowMs: Date.parse("2026-09-14T11:00:00.000Z") });
+  assert.equal(ok.anchor.status, "ok", JSON.stringify(ok.anchor));
+  assert.equal((await AC.checkAnchors(mem, T, store)).status, "ok");
+
+  const skipped = await runTick(mem, T, {});
+  assert.equal(skipped.anchor.status, "skipped", "no store handed in anchors nothing");
+});
+
+/* ---- 13: the probe maps every anchor state --------------------------------------------------------------- */
+
+test("anchors: the system-health probe maps every anchor state", async () => {
+  const NOW = Date.parse("2026-09-14T12:00:00.000Z");
+  const depsFor = (repository, anchorStore) => ({
+    repository, tenantId: T, env: {}, maik: { enabled: false }, rpoMinutes: null, anchorStore,
+    orgProbe: async () => ({ id: "org" }),
+    documentProbe: async () => ({ state: "not_configured" }),
+    lastTick: async () => ({ at: new Date(NOW - 60000).toISOString() }),
+    timeoutMs: 1000, now: () => NOW,
+  });
+  const probe = async (repository, anchorStore) =>
+    (await systemHealthReport(depsFor(repository, anchorStore))).dependencies.find((d) => d.id === "audit-chain");
+  const chained = async () => {
+    const mem = new MemoryRepository();
+    for (let i = 1; i <= 3; i++) await mem.auditOnly(T, ev("record.read", i));
+    const store = memAnchorStore();
+    await AC.anchorHead(mem, T, store, new Date(NOW - 3600000).toISOString());
+    return { mem, store };
+  };
+
+  { const { mem, store } = await chained();
+    const p = await probe(mem, store);
+    assert.equal(p.status, "up", JSON.stringify(p));
+    assert.equal(p.consequence, null);
+    assert.match(p.reason, /Outside copy matches/); }
+
+  /* Rewritten so the chain still verifies: only the anchor can see it. */
+  { const { mem, store } = await chained();
+    mem.audit[2].action = "record.list";
+    mem._chain[2].rowHash = await AC.chainHash(mem._chain[2].prevHash, mem.audit[2]);
+    assert.equal((await AC.verifyAuditChain(mem, T)).status, "ok");
+    const p = await probe(mem, store);
+    assert.equal(p.status, "down", JSON.stringify(p));
+    assert.equal(p.consequence, ANCHOR_TAMPER_CONSEQUENCE);
+    assert.match(p.reason, /Rewritten at chained row 3/); }
+
+  { const { mem, store } = await chained();
+    mem._chain.splice(2);
+    assert.equal((await AC.verifyAuditChain(mem, T)).status, "ok");
+    const p = await probe(mem, store);
+    assert.equal(p.status, "down", JSON.stringify(p));
+    assert.equal(p.consequence, ANCHOR_TAMPER_CONSEQUENCE);
+    assert.match(p.reason, /Truncated/); }
+
+  { const mem = new MemoryRepository();
+    for (let i = 1; i <= 2; i++) await mem.auditOnly(T, ev("record.read", i));
+    const p = await probe(mem, memAnchorStore());
+    assert.equal(p.status, "degraded", JSON.stringify(p));
+    assert.match(p.reason, /No outside copy/); }
+
+  { const { mem } = await chained();
+    const p = await probe(mem, { get: async () => { throw new Error("KV down"); } });
+    assert.equal(p.status, "degraded", JSON.stringify(p));
+    assert.match(p.reason, /Not verified/); }
+
+  { const { mem } = await chained();
+    const p = await probe(mem, null);
+    assert.equal(p.status, "up", "without a store the probe keeps the old chain-only behaviour"); }
+
+  /* A hospital with no chained rows has nothing to anchor: up, not a permanent degraded that trains people to ignore it. */
+  { const p = await probe(new MemoryRepository(), memAnchorStore());
+    assert.equal(p.status, "up", JSON.stringify(p));
+    assert.match(p.reason, /Nothing to anchor yet/); }
+});
+
+/* ---- 14: the screen shows one line per anchor state ------------------------------------------------------- */
+
+test("screen: the tamper-evidence block shows one line per anchor state", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const line = win.WSQ._anchorHtml;
+  const ok = line(c, { status: "ok", message: "Outside copy matches: all 1 anchored rows still match." });
+  const rewritten = line(c, { status: "rewritten", atSeq: 3, message: "Rewritten at chained row 3: it no longer matches the outside copy." });
+  const truncated = line(c, { status: "truncated", atSeq: 5, headSeq: 3, message: "Truncated: the chain now ends at row 3, below anchored row 5." });
+  const noAnchors = line(c, { status: "no-anchors", message: "No outside copy has been recorded yet." });
+  const notVerified = line(c, { status: "not-verified", message: "Not verified: the outside copy could not be read." });
+  assert.match(ok, /msg ok/);
+  assert.match(ok, /Outside copy matches/);
+  assert.match(rewritten, /msg err/);
+  assert.match(rewritten, /Outside copy differs/);
+  assert.match(rewritten, /information governance lead/);
+  assert.match(rewritten, /Do not restore or re-import/);
+  assert.match(truncated, /Newest rows removed/);
+  assert.match(truncated, /information governance lead/);
+  assert.match(noAnchors, /msg note/);
+  assert.match(noAnchors, /No outside copy yet/);
+  assert.match(notVerified, /msg err/);
+  assert.match(notVerified, /Outside copy not verified/);
+  assert.equal(line(c, null), "", "a missing anchor result adds no line");
+  assert.ok(!/Intact/.test(rewritten + truncated + noAnchors + notVerified), "no tamper state reads as intact");
+
+  const ig = { status: "ok", message: "Intact: all 3 chained rows checked." };
+  const combined = win.WSQ._auditIntegrityHtml(c, ig, { status: "rewritten", atSeq: 3, message: "Rewritten at chained row 3." });
+  assert.match(combined, /Intact/);
+  assert.match(combined, /Outside copy differs/);
+  const without = win.WSQ._auditIntegrityHtml(c, ig);
+  assert.ok(!/Outside copy/.test(without), "older callers without anchors render as before");
+  assert.ok(!/[—–]/.test(ok + rewritten + truncated + noAnchors + notVerified + combined), "no em or en dash on screen");
+});
+
+test("route: the security review carries the anchor comparison, plainly empty before any anchor exists", async () => {
+  seedHospital();
+  for (let i = 1; i <= 2; i++) await RECORD.auditOnly(TENANT_ROW.id, ev("record.read", i));
+  const rep = await as(ADMIN, `/ward/security-report?orgId=${ORG_ID}`);
+  assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 300));
+  assert.equal(rep.auditRetention.anchors.status, "no-anchors", JSON.stringify(rep.auditRetention.anchors));
+  assert.match(rep.auditRetention.anchors.message, /nothing outside the database to compare/);
 });

@@ -20,8 +20,12 @@ WardSynQ record repository writes has a hash-chain link in `wardsynq_audit_chain
 - **Triggers do not stop a restore.** Time Travel and a cold-copy import work below them. That is expected; the
   chain is what shows what a restore changed.
 - **A Time Travel restore rewinds the rows and their links together**, so the chain verifies as intact afterwards.
-  That does NOT prove nothing was lost: every audit row written after the restore point is gone, and the head of
-  the chain is not anchored outside the database, so a shortened chain looks the same as "no writes since".
+  That does NOT prove nothing was lost: every audit row written after the restore point is gone. The chain head is
+  copied to KV at most hourly (`anchorHead`, `wsq:auditanchor:<tenant>`), outside the database, so once an anchor
+  newer than the restore point exists, System health and Security review report the trail as **truncated** or
+  **rewritten**. After a legitimate restore that report is correct and expected, and it stays until the anchor log
+  is acknowledged. There is no acknowledge screen yet: record the restore in the incident log
+  (`docs/INCIDENT_RESPONSE.md`) and do not delete the KV key by hand, because it is the evidence of what was lost.
   **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
   take a manual export (`scripts/backup-d1.sh`). After restoring, the difference is the audit rows the restore
   discarded; keep that export as the record of them.

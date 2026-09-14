@@ -964,7 +964,7 @@
       ? "<p>" + esc(a.configuredNote) + "</p><p>Oldest audit row: " + esc(a.oldestAuditAt || "none found") + "</p><p>Oldest record: " + esc(a.oldestRecordAt || "none") + "</p>" +
         (a.gap ? '<div class="msg err">' + esc(a.gap) + "</div>" : "")
       : '<div class="msg err">Audit retention could not be checked.</div>';
-    h += "<h3>Tamper evidence</h3>" + auditIntegrityHtml(c, a.integrity);
+    h += "<h3>Tamper evidence</h3>" + auditIntegrityHtml(c, a.integrity, a.anchors);
     return h + "</div>";
   }
   WSQ._securityReviewHtml = securityReviewHtml;
@@ -972,9 +972,22 @@
   /* P2.17. Only "ok" and "empty" read as fine. Broken and gap name the row; not verified and a missing
    * result both say the integrity is unknown, never that it is intact. */
   var INTEGRITY_LABEL = { ok: "Intact", empty: "Nothing to verify yet", broken: "Altered", gap: "Rows missing", not_verified: "Not verified" };
-  function auditIntegrityHtml(c, ig) {
+  /* P2.17 anchors. One line for the outside copy whatever state it is in: matches, differs, nothing
+   * recorded yet, or not verified. A missing anchor result is unknown, never intact. A differing
+   * copy names the governance lead because restoring over it would destroy the evidence. */
+  var ANCHOR_LABEL = { ok: "Outside copy matches", rewritten: "Outside copy differs", truncated: "Newest rows removed", "no-anchors": "No outside copy yet", not_verified: "Outside copy not verified" };
+  function anchorHtml(c, a) {
     var esc = c.esc;
-    if (!ig) return '<div class="msg err">Not verified: no integrity result was returned. This is not the same as the audit trail being intact.</div>';
+    if (a == null) return "";
+    var cls = a.status === "ok" ? "ok" : (a.status === "no-anchors" ? "note" : "err");
+    var h = '<div class="msg ' + cls + '"><b>' + esc(ANCHOR_LABEL[a.status] || "Outside copy not verified") + "</b>: " + esc(a.message || "");
+    if (a.status === "rewritten" || a.status === "truncated") h += " Tell the information governance lead. Do not restore or re-import.";
+    return h + "</div>";
+  }
+  WSQ._anchorHtml = anchorHtml;
+  function auditIntegrityHtml(c, ig, anchors) {
+    var esc = c.esc;
+    if (!ig) return '<div class="msg err">Not verified: no integrity result was returned. This is not the same as the audit trail being intact.</div>' + anchorHtml(c, anchors === undefined ? null : anchors);
     var fine = ig.status === "ok" || ig.status === "empty";
     var h = '<div class="msg ' + (fine ? "ok" : "err") + '"><b>' + esc(INTEGRITY_LABEL[ig.status] || "Not verified") + "</b>: " + esc(ig.message || "") + "</div>";
     if (ig.atSeq != null) {
@@ -983,7 +996,8 @@
         (ig.expected ? '<tr><th>Expected</th><td class="mono">' + esc(ig.expected) + '</td></tr><tr><th>Found</th><td class="mono">' + esc(ig.found || "") + "</td></tr>" : "") +
         "</tbody></table></div>";
     }
-    return h + '<p class="quiet">Each audit row is linked to the one before it by a hash, so a change or removal made in the database itself shows here. The newest rows are checked each time. Rows written before this was switched on are not linked and cannot be checked.</p>';
+    if (anchors !== undefined && anchors !== null) h += anchorHtml(c, anchors);
+    return h + '<p class="quiet">Each audit row is linked to the one before it by a hash, so a change or removal made in the database itself shows here. The newest rows are checked each time. Once an hour the newest row number is also copied outside the database and compared here. Rows written before this was switched on are not linked and cannot be checked.</p>';
   }
   WSQ._auditIntegrityHtml = auditIntegrityHtml;
 

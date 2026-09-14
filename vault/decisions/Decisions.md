@@ -5600,8 +5600,17 @@ Tests: `test/wardsynq-fhir-terminology.test.mjs`, `-ips`, `-subscription`. Strat
 System health ("Audit trail integrity"). Tests: `test/wardsynq-audit-chain.test.mjs`. Restore notes: `docs/BACKUP_DR.md` 1a.
 - PREVENTION IS THE DATABASE, EVIDENCE IS THE CHAIN. BEFORE UPDATE/DELETE triggers on `connect_audit_event`
   (whole table: Connect/ABDM already promise no UPDATE/DELETE) and on the chain table. The chain catches what
-  goes around them (dropped trigger, console, restore, import). Anyone with DB write can rebuild a chain; there is
-  no external anchor of the head, so a removed TAIL is not detectable. Not built: anchoring the head elsewhere.
+  goes around them (dropped trigger, console, restore, import).
+- THE HEAD IS ANCHORED OUTSIDE THE DATABASE. The background tick copies the head (`{seq, hash}`) at most once
+  an hour per hospital into KV `wsq:auditanchor:<tenantId>` (last 200 `{seq, hash, at}`, no expiry), a separate
+  trust domain from D1. `anchorHead`/`checkAnchors` in `audit-chain.js` take an injected KV-shaped store, so the
+  domain logic has no platform coupling. System health ("Audit trail integrity") and the Security review compare
+  every anchor against the row it names: a rebuild after an anchor reads `rewritten` (names the seq), a removed
+  tail reads `truncated` (head below an anchored seq). An older anchor is never overwritten by a different hash
+  for the same seq; that conflict is itself the finding. A failed anchor write never fails the tick or a clinical
+  write; the outcome rides the tick log so health can show it. THIS CLOSES a rebuild or truncation AFTER an
+  anchor. WHAT REMAINS: an attacker who controls BOTH D1 and KV can move both together; anything in the window
+  before the first anchor; anchors are evidence, not prevention.
 - SIDE TABLE, NOT COLUMNS. `wardsynq_audit_chain (tenant_id, chain_seq, audit_id, prev_hash, row_hash,
   legacy_boundary)`, one link per audit row the record repository writes (Connect's own audit writer is not
   chained). `connect_audit_event` is shared and live, and ALTER TABLE ADD COLUMN is not re-runnable under the

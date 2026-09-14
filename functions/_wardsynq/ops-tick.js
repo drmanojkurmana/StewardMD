@@ -18,6 +18,7 @@
  */
 
 import { drainOutbox } from "./outbox.js";
+import { anchorHead } from "./audit-chain.js";
 import { escalationOf } from "./critical-results.js";
 import { VersionConflictError } from "./repository.js";
 import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
@@ -57,7 +58,18 @@ async function escalateCriticals(repository, tenantId, opts) {
   return out;
 }
 
-/** One pass for one hospital. Each half is reported on its own; one failing does not hide the other. */
+/* ANCHORING RIDES ON THE TICK BUT NEVER RISKS IT. Copying the audit-chain head outside the
+ * database is housekeeping: when the copy fails (KV down, head unreadable) the failure is recorded
+ * on result.anchor for the tick log, and the tick still reports its clinical halves. Callers hand in
+ * opts.anchorStore only when an anchor is due (hourly, decided beside the tick gate); without one
+ * the step reports skipped and writes nothing. */
+async function anchorTick(repository, tenantId, opts) {
+  const o = opts || {};
+  if (!o.anchorStore) return { status: "skipped", message: "No anchor store was handed in, so the chain head was not anchored on this run." };
+  return anchorHead(repository, tenantId, o.anchorStore, new Date(o.nowMs || Date.now()).toISOString());
+}
+
+/** One pass for one hospital. Each third is reported on its own; one failing does not hide the others. */
 async function runTick(repository, tenantId, opts) {
   const o = opts || {};
   const result = { tenantId, at: new Date(o.nowMs || Date.now()).toISOString() };
@@ -65,6 +77,8 @@ async function runTick(repository, tenantId, opts) {
   catch (e) { result.criticals = { error: String((e && e.message) || e).slice(0, 200) }; }
   try { result.outbox = await drainOutbox(repository, tenantId, o.consumers || CONSUMERS, { now: () => o.nowMs || Date.now() }); }
   catch (e) { result.outbox = { error: String((e && e.message) || e).slice(0, 200) }; }
+  try { result.anchor = await anchorTick(repository, tenantId, o); }
+  catch (e) { result.anchor = { error: String((e && e.message) || e).slice(0, 200) }; }
   return result;
 }
 

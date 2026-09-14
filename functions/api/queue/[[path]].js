@@ -513,6 +513,13 @@ function opdOrgFor(env, hospitalId) {
  * a public endpoint cannot be used to run up storage calls. */
 let docProbeCache = null;
 const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
+/* P2.17 ANCHOR STORE. The audit-chain head anchored someplace a database write cannot move: KV is a
+ * separate trust domain from D1 (different binding, different credentials). The domain logic only
+ * needs {get, put} on strings, so this adapter keeps Cloudflare out of audit-chain.js. Anchors are
+ * written with NO expiry: unlike the tick log, an anchor must still be there when it is compared.
+ * Null when KV is not bound: without a second trust domain there is nothing worth anchoring to. */
+const auditAnchorStore = (kv) => (!kv || typeof kv.get !== "function" || typeof kv.put !== "function") ? null
+  : { get: (key) => kv.get(key), put: (key, value) => kv.put(key, value) };
 async function documentStorageProbe(env) {
   const store = documentStoreFromEnv(env);
   if (!store) return { state: "not_configured" };
@@ -1472,11 +1479,38 @@ export async function onRequest(context) {
           try {
             const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
             if (!gate.allowed) return;
-            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, consumers: { ...exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, orgId: wOrgId }) } });
+            /* P2.17: the chain head is anchored at most once an hour per hospital, beside the
+             * two-minute tick gate. Hourly, not per tick: anchors are compared one by one, so an
+             * anchor per tick would grow the log without adding evidence. The gate failing open only
+             * means an extra anchor attempt; anchorHead() itself skips a head it already holds. */
+            let anchorStore;
+            try {
+              const anchorGate = await rateHit({ kv: env && env.MAIK_KV }, { key: `audit-anchor:${mig.tenantId}`, limit: 1, windowMs: 3600000 });
+              anchorStore = anchorGate.allowed ? auditAnchorStore(env && env.MAIK_KV) : null;
+            } catch { anchorStore = null; }
+            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, anchorStore: anchorStore || undefined, consumers: { ...exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, orgId: wOrgId }) } });
             /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
-             * whether escalation is actually running rather than assume it. */
-            if (env.MAIK_KV) await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify({ at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) }), { expirationTtl: 30 * 86400 }).catch(() => {});
+             * whether escalation is actually running rather than assume it. P2.17: the anchor outcome
+             * rides along the same way. A run that did not attempt an anchor carries the previous
+             * run's anchor fields forward, so one failed hourly attempt stays visible until the next
+             * attempt replaces it instead of being cleared two minutes later by a run that skipped. */
+            if (env.MAIK_KV) {
+              let prevAnchor = null;
+              try { const prev = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); prevAnchor = prev ? JSON.parse(prev) : null; } catch { prevAnchor = null; }
+              const entry = { at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) };
+              if (t.anchor && t.anchor.status !== "skipped") {
+                entry.anchorFailed = !!t.anchor.error;
+                entry.anchorStatus = t.anchor.error ? "failed" : t.anchor.status;
+                entry.anchorAt = t.anchor.at || t.at;
+              } else if (prevAnchor && (prevAnchor.anchorFailed || prevAnchor.anchorStatus)) {
+                entry.anchorFailed = !!prevAnchor.anchorFailed;
+                entry.anchorStatus = prevAnchor.anchorStatus;
+                entry.anchorAt = prevAnchor.anchorAt;
+              }
+              await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify(entry), { expirationTtl: 30 * 86400 }).catch(() => {});
+            }
             if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
+            if (t.anchor && t.anchor.error) console.error("wsq tick anchor failed", mig.tenantId);
           } catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
         })());
       }
@@ -2493,12 +2527,14 @@ export async function onRequest(context) {
         ]);
         const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
         const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
-          auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN" });
+          auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN",
+          anchorStore: auditAnchorStore(env && env.MAIK_KV) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "system-health" && method === "GET") {
         const r = await systemHealthReport({
           repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, maik: (wsqCfg && wsqCfg.maik) || null, rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
+          anchorStore: auditAnchorStore(env && env.MAIK_KV),
           orgProbe: () => ORG.getOrg(env, wOrgId),
           documentProbe: async () => { const d = await documentStorageProbe(env); return { ...d, checkedAt: d.state !== "not_configured" && docProbeCache ? new Date(docProbeCache.at).toISOString() : null }; },
           lastTick: async () => { if (!env.MAIK_KV) return undefined; const v = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); return v ? JSON.parse(v) : null; },

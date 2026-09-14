@@ -21,7 +21,13 @@ import { outboxHealth } from "./outbox.js";
 import { dataProtection, RESTORE_TYPE } from "./security-review.js";
 import { RUN_TYPE } from "./backup-run.js";
 import { maikConfig, geminiKey } from "./maik-gateway.js";
-import { verifyAuditChain } from "./audit-chain.js";
+import { verifyAuditChain, checkAnchors } from "./audit-chain.js";
+
+/* P2.17. What the ward is told when the outside copy of the audit trail no longer matches the
+ * database. Stronger than the generic integrity line on purpose: a changed trail below the
+ * application must not be "fixed" by restoring or re-importing over it before governance has
+ * looked, because that is exactly how the evidence disappears. */
+const ANCHOR_TAMPER_CONSEQUENCE = "The audit trail was changed below the application. Tell the information governance lead. Do not restore or re-import.";
 
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
@@ -138,6 +144,9 @@ const DEPENDENCIES = [
       const notes = [];
       if (t.criticalsFailed) notes.push("critical-result escalation failed on the last run");
       if (t.outboxFailed) notes.push("event processing failed on the last run");
+      /* P2.17: a failed anchor copy is housekeeping, not clinical work, so it degrades rather than
+       * downs: escalation and the queue are still running, but the outside copy may be going stale. */
+      if (t.anchorFailed) notes.push(`copying the audit trail head outside the database failed on the last attempt${t.anchorStatus ? ` (${t.anchorStatus})` : ""}`);
       if (age >= LIMITS.tickDegradedMinutes) notes.push(`the last run was ${age} minutes ago`);
       return notes.length ? degraded(notes.join("; ") + ".") : up(`Last run ${age} minutes ago.`);
     },
@@ -156,21 +165,32 @@ const DEPENDENCIES = [
     },
   },
   {
-    /* P2.17. The newest rows of the tamper-evident audit chain, re-hashed. Not verified counts as down:
-     * an integrity nobody could check is not an integrity anybody can rely on. */
+    /* P2.17. The newest rows of the tamper-evident audit chain, re-hashed, AND every outside anchor
+     * compared against the row it names. Not verified counts as down: an integrity nobody could
+     * check is not an integrity anybody can rely on. A deployment with no anchor store keeps the old
+     * behaviour (the chain alone); once a store is handed in, no anchors yet (or an unreadable one)
+     * is degraded, and a rewritten or truncated trail is down with the governance consequence. */
     id: "audit-chain", name: "Audit trail integrity",
     consequence: {
       down: "Audit trail integrity not confirmed: audit rows may have been changed or removed in the database, or the check could not run. Charting continues and nothing is blocked. Tell the information governance lead, and do not restore or re-import the database until the audit trail has been examined.",
+      degraded: "Audit trail anchoring not confirmed: the outside-the-database copy has nothing to compare yet or could not be read. The chain itself checked out. Charting continues and nothing is blocked.",
     },
     async check(d) {
       const v = await verifyAuditChain(d.repository, d.tenantId, { limit: LIMITS.auditChainRows });
-      return v.status === "ok" || v.status === "empty" ? up(v.message) : down(v.message);
+      if (v.status !== "ok" && v.status !== "empty") return down(v.message);
+      if (!d.anchorStore) return up(v.message);
+      const a = await checkAnchors(d.repository, d.tenantId, d.anchorStore);
+      if (a.status === "ok") return up(`${v.message} ${a.message}`);
+      // A hospital with no chained rows has nothing to anchor. Degraded forever would teach people to ignore this line.
+      if (v.status === "empty" && a.status === "no-anchors") return up(`${v.message} Nothing to anchor yet.`);
+      if (a.status === "rewritten" || a.status === "truncated") return { ...down(a.message), consequence: ANCHOR_TAMPER_CONSEQUENCE };
+      return degraded(a.message);
     },
   },
 ];
 
 /**
- * deps: { repository, tenantId, env, maik, rpoMinutes, orgProbe(), documentProbe(), lastTick(),
+ * deps: { repository, tenantId, env, maik, rpoMinutes, anchorStore?, orgProbe(), documentProbe(), lastTick(),
  *   fetchImpl?, timeoutMs?, now?() }
  */
 async function systemHealthReport(deps) {
@@ -181,10 +201,12 @@ async function systemHealthReport(deps) {
     try { r = await withTimeout(() => dep.check(deps, now()), ms); }
     catch (e) { r = down(e instanceof ProbeTimeout ? `No answer within ${ms} ms.` : "The check failed before it could answer."); }
     if (!r || !["up", "degraded", "down"].includes(r.status)) r = down("The check returned no result.");
-    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : dep.consequence[r.status] };
+    /* A probe may carry its own consequence for a specific finding (the anchor probe does for a
+     * rewritten or truncated trail); otherwise the dependency's consequence for the status applies. */
+    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : (r.consequence || dep.consequence[r.status]) };
   }));
   const worst = dependencies.some((x) => x.status === "down") ? "down" : dependencies.some((x) => x.status === "degraded") ? "degraded" : "up";
   return { ok: true, generatedAt: new Date(now()).toISOString(), overall: worst, dependencies, timeoutMs: ms, limits: LIMITS };
 }
 
-export { TIMEOUT_MS, LIMITS, DEPENDENCIES, withTimeout, systemHealthReport };
+export { TIMEOUT_MS, LIMITS, DEPENDENCIES, withTimeout, systemHealthReport, ANCHOR_TAMPER_CONSEQUENCE };
