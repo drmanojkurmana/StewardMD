@@ -12,7 +12,7 @@ import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken }
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
-import { resolveRoomDoctor } from "./_opd_org.js";
+import { resolveRoomDoctor, tokenScope, formatToken } from "./_opd_org.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -94,8 +94,38 @@ export async function recompute(env, session, tickets) {
   return tickets;
 }
 
+// ---- OPD token number: allocated WITH the ticket, never after it -----------------------------------
+// Counter q_token_counters/<hospital>__<OPD day>__<scope>. The ticket create and the counter increment go
+// in ONE commit guarded on the counter being unchanged since it was read (compare-and-set), so a failed
+// commit neither burns a number nor leaves a ticket without one, and two desks registering at once can
+// never both take the same number: the loser re-reads and takes the next. The token is written only here,
+// so a move, reassignment, reprioritisation or recall keeps it, and a cancelled number is never reissued
+// (the counter only ever goes up). A new day is a new counter, so it starts again at 1.
+const TOKEN_TRIES = 5;
+async function allocateToken(env, session, f, id, org) {
+  let cfg = org && org.tokens;
+  if (!org) { const o = await fsGet(env, "q_orgs/" + sanitize(session.hospitalId)); cfg = o && o.fields && o.fields.tokens; }
+  const scope = tokenScope(cfg, f.department);
+  const hosp = session.hospitalId || ("doc-" + session.doctorUid);
+  const path = "q_token_counters/" + [hosp, session.date, scope.key].map(sanitize).join("__");
+  for (let i = 0; i < TOKEN_TRIES; i++) {
+    const d = await fsGet(env, path);
+    const n = (((d && d.fields && d.fields.n) || 0) | 0) + 1;
+    f.token = formatToken(scope.prefix, n); f.tokenNo = n; f.tokenScope = scope.key;
+    const counter = d
+      ? wUpdate(env, path, { n: n, updatedAt: now() }, { updateTime: d.updateTime })
+      : wCreate(env, path, { n: n, hospitalId: String(hosp), date: String(session.date || ""), scope: scope.key, createdAt: now(), expiresAt: endOfDayMs(session.date) + 2 * 86400e3 });
+    try { await fsCommit(env, [counter, wCreate(env, "q_tickets/" + id, f)]); return; }
+    catch (e) {
+      if (!(e && e.code === "precondition")) throw e;
+      await new Promise((r) => setTimeout(r, 3 + Math.floor(Math.random() * 12)));
+    }
+  }
+  throw Object.assign(new Error("token_contention"), { status: 409, detail: "Another desk registered at the same moment. Try again." });
+}
+
 // ---- add a ticket (manual or import) ------------------------------------------------------
-export async function addTicket(env, session, body, actor) {
+export async function addTicket(env, session, body, actor, org) {
   const id = newId();
   const f = {
     sessionId: session.id, hospitalId: session.hospitalId, status: "registered", position: 0,
@@ -110,8 +140,8 @@ export async function addTicket(env, session, body, actor) {
     registeredAt: now(), calledAt: 0, consultStartAt: 0, consultEndAt: 0, etaStart: 0, etaEnd: 0, etaConfidence: 0,
     createdAt: now(), updatedAt: now(), expiresAt: session.expiresAt
   };
-  await fsCommit(env, [wCreate(env, "q_tickets/" + id, f)]);
-  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType });
+  await allocateToken(env, session, f, id, org);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token });
   await recompute(env, session);
   const ticket = withId(id, f);
   try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
@@ -282,7 +312,7 @@ export async function getOrCreatePoolSession(env, org, date) {
 // Register an unassigned (department-level) patient into the central pool.
 export async function addToPool(env, org, body, actor) {
   const pool = await getOrCreatePoolSession(env, org, body && body.date);
-  return addTicket(env, pool, body || {}, actor);
+  return addTicket(env, pool, body || {}, actor, org);
 }
 // The session backing a room = its resolved doctor's session (roomId stamped for the board label).
 export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
@@ -359,7 +389,7 @@ export async function portalContext(env, token) {
     ok: true,
     clinicLogo: brand.clinicLogo || "", clinicName: brand.clinicName || "",
     department: session ? session.department : "", doctorName: session ? session.doctorName : "", doctorStatus: session ? session.doctorStatus : "consulting",
-    status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead,
+    status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead, token: t.token || "",
     etaStart: t.etaStart || 0, etaEnd: t.etaEnd || 0, confidence: t.etaConfidence || 0,
     journey: { registeredAt: t.registeredAt || 0, calledAt: t.calledAt || 0, consultStartAt: t.consultStartAt || 0, done: isTerminal(t.status) },
     lastUpdated: now()

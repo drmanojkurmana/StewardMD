@@ -52,7 +52,7 @@
     else body = '<ul class="plist">' + q.tickets.map(function (t) {
       var where = t.desk ? tr("status.desk") : (t.label || tr("status.opd"));
       var eta = Date.parse(t.eta || "");
-      return '<li data-ticket-state="' + esc(t.state) + '"><b>' + esc(tr("status.state." + t.state)) + "</b><br>" + esc(tr("status.where", { place: where })) +
+      return '<li data-ticket-state="' + esc(t.state) + '"><b>' + esc(tr("status.state." + t.state)) + "</b>" + (t.token ? '<br><strong class="token" data-token="' + esc(t.token) + '">' + esc(tr("status.token", { token: t.token })) + "</strong>" : "") + "<br>" + esc(tr("status.where", { place: where })) +
         (t.ahead == null ? "" : "<br>" + esc(t.ahead === 0 ? tr("status.aheadNone") : t.ahead === 1 ? tr("status.aheadOne") : tr("status.ahead", { n: t.ahead })) +
           "<br>" + esc(isFinite(eta) ? tr("status.eta", { time: new Date(eta).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }) : tr("status.noEta"))) + "</li>";
     }).join("") + "</ul>";

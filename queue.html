@@ -223,6 +223,7 @@
       '<section class="top'+rv+'"><h2>'+esc(dept)+'</h2>'+ (doc? '<p class="doc">'+ms("person")+esc(doc)+'</p>':'') +
         '<span class="live">'+ms("sync")+'Live tracking active</span></section>'+
       '<section class="card pos'+rv+'"><div class="bar"><i id="posbar" style="width:'+last.barW+'%"></i></div>'+
+        (d.token? '<div class="lbl">Your token</div><div class="n" data-token><b>'+esc(d.token)+'</b></div>' : '')+   // the number called out in the waiting hall
         '<div class="lbl">'+(inConsult?"You are being seen":"Your position")+'</div>'+ posBlock +
         '<div class="split"><div class="col"><div class="k">Patients ahead</div><div class="v">'+(inConsult?0:(d.ahead||0))+'</div></div>'+
           '<div class="col"><div class="k">Doctor status</div><div class="v" style="font-size:14px;font-weight:600"><span class="dot"></span>'+esc(docStatus)+'</div></div></div></section>'+

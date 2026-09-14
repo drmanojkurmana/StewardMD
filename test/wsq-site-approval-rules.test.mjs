@@ -45,3 +45,18 @@ test("half-filled or impossible rules are refused on screen, not saved", () => {
   assert.match(A.read([row("Invoice", { levels: "0" })]).error, /between 1 and 5/);
   assert.match(A.read([row("Invoice", { expires: "-3" })]).error, /above zero/);
 });
+
+test("OPD token numbering card: what is saved is exactly what the org model keeps", async () => {
+  const { tokenConfig } = await import("../functions/_opd_org.js");
+  const K = sb.window.WSQ._tokenCard;
+  const html = K.html(esc, { scope: "department", prefixes: { cardiology: "C" } });
+  assert.match(html, /value="department" selected/);
+  assert.match(html, /cardiology = C/);
+  assert.match(K.html(esc, undefined), /value="hospital" selected/, "default is one sequence for the hospital");
+  const out = K.read("department", "Cardiology = c\n\nGeneral Medicine = GM\n");
+  assert.deepEqual(JSON.parse(JSON.stringify(out.tokens)), { scope: "department", prefixes: { Cardiology: "C", "General Medicine": "GM" } });
+  assert.deepEqual(tokenConfig(out.tokens), { scope: "department", prefixes: { cardiology: "C", "general medicine": "GM" } });
+  assert.match(K.read("department", "Cardiology = TOOLONG").error, /one to three letters/);
+  assert.match(K.read("hospital", "no equals sign").error, /no equals sign/);
+  assert.doesNotMatch(html, /—/, "no em dash");
+});

@@ -361,8 +361,9 @@ const mrnKey = (v) => str(v).toUpperCase();
  * sessions: today's sessions; ticketsBySession: { [sessionId]: tickets }; rooms: the hospital's rooms;
  * patientMrn: the MRN on the patient's record, when there is one.
  *
- * The queue has no token number of its own, so none is shown: a number made up here would be read
- * as the one called out in the waiting hall.
+ * The token is the one the queue allocated with the ticket (_queue_engine.js allocateToken), the number
+ * called out in the waiting hall. A ticket registered before tokens existed has none, and none is made
+ * up here: an invented number would be read as the one being called.
  */
 function queueStatusFor(patientId, patientMrn, sessions, ticketsBySession, rooms, nowMs) {
   const mine = [];
@@ -385,7 +386,7 @@ function queueStatusFor(patientId, patientMrn, sessions, ticketsBySession, rooms
       /* Only the ETA the queue's own model (_queue_eta.js computeEtas, stored on the ticket) produced,
        * and only while it is still ahead of now. A past estimate is not an estimate. */
       const eta = queued && Number(t.etaStart) > nowMs ? new Date(Number(t.etaStart)).toISOString() : null;
-      return { label: label || null, desk: !room && s.doctorUid === "__pool__", state: TICKET_STATE[t.status] || "waiting", ahead: idx >= 0 ? idx : null, eta };
+      return { label: label || null, desk: !room && s.doctorUid === "__pool__", state: TICKET_STATE[t.status] || "waiting", token: str(t.token) || null, ahead: idx >= 0 ? idx : null, eta };
     }),
   };
 }

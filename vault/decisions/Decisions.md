@@ -5665,3 +5665,22 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   result, so this is coarse; per-result redaction would need structured summary sections.
 - Correction rule unchanged: only the latest version of a note is shown, and only if a release named it.
 - Portal strings for the new sections live in `wardsynq/site/i18n.js` (English and Hindi); portal.html now loads it.
+
+## 2026-09-14 OPD token numbers: allocated in the ticket's own commit, never changed, never reused
+- A queue ticket gets `token` (display string), `tokenNo` and `tokenScope` in `_queue_engine.js addTicket`. The
+  counter is `q_token_counters/<hospital>__<OPD day>__<scope>` (the session's date). The counter increment
+  (compare-and-set on its `updateTime`, or create-if-absent) and the ticket create go in ONE `fsCommit`, so a
+  failed commit burns no number and no ticket exists without one. A lost race re-reads; after 5 tries the
+  desk gets 409 `token_contention` rather than a possible duplicate.
+- Stability: only `addTicket` writes the token. Move, reassign, room routing, priority, send-back and recall
+  patch other fields. The counter only rises, so a cancelled number is not reissued. A new day is a new doc.
+  Tickets from before this have no token and are not backfilled.
+- Scope config is a top-level org field `tokens: { scope: "hospital"|"department", prefixes }` in
+  `_opd_org.js org()` beside `thresholds` (an OPD setting, not ward config), edited on WardSynQ Admin >
+  Hospital. Department prefixes are 1 to 3 letters/digits, keyed by the ticket's department name,
+  case-insensitive; no prefix means a plain number. Default: one sequence for the whole hospital.
+- The waiting-hall wall (`displayBoard`, `/api/queue/display`) now shows tokens ONLY; the first-name-plus-
+  initial projection is gone. An old ticket there reads "Patient". Staff screens (queue.js, opd.html) show the
+  token beside the name. SMS/WhatsApp "registered" and "next" lead with "Your token: X" (a token names nobody).
+  Patient portal and the /queue link page show "Your token: X" for the patient's own ticket only.
+- Not built: no recall out of `no_show` (it is terminal; "recall" today is called -> waiting -> called).

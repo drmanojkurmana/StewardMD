@@ -27,6 +27,31 @@ export function roomStatus(waiting, inConsult, t) {
   return "normal";
 }
 
+// ---- OPD token numbers (the number called out in the waiting hall) ------------------------------
+// One counter per hospital, per OPD day, per scope. "hospital" (default): one sequence for the whole
+// hospital. "department": each department counts separately, with an optional letter prefix so two
+// departments' "12" are told apart ("A-012"). Prefixes are keyed by the department name as it rides on
+// the ticket, compared case-insensitively.
+const deptKey = (d) => s(d).trim().toLowerCase();
+export function tokenConfig(t) {
+  t = t && typeof t === "object" ? t : {};
+  const prefixes = {};
+  const src = t.prefixes && typeof t.prefixes === "object" && !Array.isArray(t.prefixes) ? t.prefixes : {};
+  Object.keys(src).forEach((k) => {
+    const key = deptKey(k), p = s(src[k]).toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3);
+    if (key && p) prefixes[key] = p;
+  });
+  return { scope: t.scope === "department" ? "department" : "hospital", prefixes };
+}
+// PURE: which counter a ticket in `department` draws from, and the prefix its token carries.
+export function tokenScope(cfg, department) {
+  cfg = tokenConfig(cfg);
+  if (cfg.scope !== "department") return { key: "hospital", prefix: "" };
+  const k = deptKey(department);
+  return { key: "dept-" + (k.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "none"), prefix: cfg.prefixes[k] || "" };
+}
+export function formatToken(prefix, n) { return prefix ? prefix + "-" + String(n).padStart(3, "0") : String(n); }
+
 // ---- entities ----------------------------------------------------------------------------------
 export function org(o = {}) {
   requireId(o);
@@ -49,7 +74,7 @@ export function org(o = {}) {
    * What it actually implies lives in functions/_region.js and nowhere else. */
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
   return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
-           mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds),
+           mode: MODE, connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), tokens: tokenConfig(o.tokens),
            wardsynq: wardsynqConfig(o.wardsynq), security: securityConfig(o.security),
            /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,
             * which returns {} for any other region, so the core model never names a national field. */

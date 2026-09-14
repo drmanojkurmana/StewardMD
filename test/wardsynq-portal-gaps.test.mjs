@@ -347,8 +347,8 @@ function seedQueue() {
   docs.set("q_sessions/s-pool", { fields: { hospitalId: ORG, doctorUid: "__pool__", department: "", date }, updateTime: "t1" });
   docs.set("q_sessions/s-other-hospital", { fields: { hospitalId: OTHER_ORG, doctorUid: "dr-x", department: "X", date }, updateTime: "t1" });
   const t = (id, fields) => docs.set("q_tickets/" + id, { fields: { priority: 0, ...fields }, updateTime: "t1" });
-  t("tk-x", { sessionId: "s-card", hospitalId: ORG, status: "waiting", registeredAt: 1, ghisPatientId: "GAPS-X", encName: "OTHER-PATIENT-NAME", mrnLast4: "9999" });
-  t("tk-a", { sessionId: "s-card", hospitalId: ORG, status: "waiting", registeredAt: 2, ghisPatientId: "GAPS-A", etaStart: Date.now() + 20 * 60000, roomId: "room-7" });
+  t("tk-x", { sessionId: "s-card", hospitalId: ORG, status: "waiting", registeredAt: 1, ghisPatientId: "GAPS-X", encName: "OTHER-PATIENT-NAME", mrnLast4: "9999", token: "A-013" });
+  t("tk-a", { sessionId: "s-card", hospitalId: ORG, status: "waiting", registeredAt: 2, ghisPatientId: "GAPS-A", etaStart: Date.now() + 20 * 60000, roomId: "room-7", token: "A-014" });
   t("tk-c1", { sessionId: "s-pool", hospitalId: ORG, status: "registered", registeredAt: 3, ghisPatientId: "GAPS-C" });
   t("tk-c2", { sessionId: "s-card", hospitalId: ORG, status: "waiting", registeredAt: 4, ghisPatientId: "gaps c" });
   t("tk-b", { sessionId: "s-other-hospital", hospitalId: OTHER_ORG, status: "waiting", registeredAt: 1, ghisPatientId: "GAPS-B" });
@@ -365,9 +365,10 @@ test("POST /api/portal/queue shows the patient's own ticket only: place, state, 
   assert.equal(tk.label, "Cardiology 7");
   assert.equal(tk.state, "waiting");
   assert.equal(tk.ahead, 1);
+  assert.equal(tk.token, "A-014", "the patient's own token, the number called in the hall");
   assert.ok(Date.parse(tk.eta) > Date.now());
   const text = JSON.stringify(q.body);
-  for (const leak of ["OTHER-PATIENT-NAME", "GAPS-X", "9999", "tk-x", "tk-a", "GAPS-A"]) assert.ok(!text.includes(leak), "no other patient's data, and no ids: " + leak);
+  for (const leak of ["OTHER-PATIENT-NAME", "GAPS-X", "9999", "tk-x", "tk-a", "GAPS-A", "A-013"]) assert.ok(!text.includes(leak), "no other patient's data, and no ids: " + leak);
   assert.ok(RECORD.audit.some((e) => e.action === "record.read" && e.actor === "patient:" + PA && e.scope && e.scope.resourceType === "QueueTicket"), "the queue read is audited under the reader");
 });
 
@@ -397,6 +398,7 @@ test("NEGATIVE: a failed queue read says it failed, never an empty queue; an exp
   const called = PV.queueStatusFor(PA, "GAPS-A", s, { s: [{ id: "t", status: "in_consultation", ghisPatientId: "GAPS-A" }] }, [], Date.now());
   assert.equal(called.tickets[0].state, "in-consultation");
   assert.equal(called.tickets[0].ahead, null);
+  assert.equal(called.tickets[0].token, null, "a ticket registered before tokens existed has none, and none is made up");
   assert.equal(PV.queueStatusFor(PA, "GAPS-Z", s, { s: [{ id: "t", status: "waiting", ghisPatientId: "GAPS-A" }] }, [], 0).ambiguous, true, "the record's MRN disagreeing is ambiguous too");
 });
 
@@ -433,6 +435,9 @@ test("portal screen: queue status has distinct loading, failed, off, ask-at-the-
   const one = P.statusSection({ available: true, tickets: [{ label: "Cardiology 7", state: "waiting", ahead: 2, eta: null }] });
   assert.match(one, /2 people ahead of you/);
   assert.match(one, /No estimate/);
+  assert.doesNotMatch(one, /token/i, "an old ticket without a token keeps today's wording");
+  const withTok = P.statusSection({ available: true, tickets: [{ label: "Cardiology 7", state: "waiting", token: "A-014", ahead: 2, eta: null }] });
+  assert.match(withTok, /Your token: A-014[\s\S]*2 people ahead of you[\s\S]*No estimate/);
   assert.doesNotMatch(one, /status\./, "every string resolves from the catalog");
 });
 
@@ -457,7 +462,7 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.match(portalJs, /post\("queue"/);
   assert.match(portalJs, /"\/api\/portal\/document"/);
   assert.doesNotMatch(portalJs, /fetch\([^)]*\?/, "no query strings on portal calls");
-  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=2/);
+  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=3/);
   assert.match(html, /@media print/);
   assert.match(ward, /apiPost\("\/ward\/document-release"/);
   assert.match(ward, /dischargeScope: scope/);

@@ -109,6 +109,9 @@
   clock(); setInterval(clock, 5000);
 
   function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" })[c]; }); }
+  // The board sends each patient's TOKEN, never a name. A ticket registered before tokens existed has
+  // none (""), and is drawn as a plain "Patient" rather than left blank.
+  function who(n){ return n ? "Token " + n : "Patient"; }
   function message(t){ grid.innerHTML = '<div class="msg">' + esc(t) + '</div>'; banner.classList.remove("on"); }
 
   // White-label: a Pro clinic's logo becomes the primary brand with "powered by StewardMD" (server sends org.logo).
@@ -128,7 +131,7 @@
     var calls = [];
     rooms.forEach(function(r){ (r.calling || []).forEach(function(n){ calls.push({ n: n, room: r.number || r.name }); }); });
     if (!calls.length){ banner.classList.remove("on"); return; }
-    bannerItems.innerHTML = calls.map(function(c){ return '<span class="item"><b>' + esc(c.n) + '</b><span class="arrow">&rarr;</span>Room ' + esc(c.room) + '</span>'; }).join("");
+    bannerItems.innerHTML = calls.map(function(c){ return '<span class="item"><b>' + esc(who(c.n)) + '</b><span class="arrow">&rarr;</span>Room ' + esc(c.room) + '</span>'; }).join("");
     banner.classList.add("on");
     // new call since last poll? one-shot attention pulse on the whole banner
     var fresh = calls.some(function(c){ return !prevCalling.has(c.room + "|" + c.n); });
@@ -138,16 +141,16 @@
   function card(r){
     var el = document.createElement("div");
     el.className = "card " + (r.status || "");
-    var calling = (r.calling && r.calling.length) ? r.calling[0] : "";
-    if (calling) el.classList.add("calling");
+    var calling = (r.calling && r.calling.length) ? r.calling[0] : null;
+    if (calling != null) el.classList.add("calling");
     var now;
-    if (calling) now = '<div class="now call"><div class="lbl">Now calling</div><div class="who">' + esc(calling) + '</div></div>';
-    else if (r.serving) now = '<div class="now serve"><div class="lbl">In consultation</div><div class="who">' + esc(r.serving) + '</div></div>';
+    if (calling != null) now = '<div class="now call"><div class="lbl">Now calling</div><div class="who">' + esc(who(calling)) + '</div></div>';
+    else if (r.serving) now = '<div class="now serve"><div class="lbl">In consultation</div><div class="who">' + esc(who(r.serving)) + '</div></div>';
     else if (r.status === "unavailable") now = '<div class="now idle"><div class="lbl">Not available</div><div class="who">&middot;</div></div>';
     else now = '<div class="now idle"><div class="lbl">Waiting</div><div class="cnt">' + (r.waiting || 0) + '</div></div>';
     var up = r.upcoming || [];
-    var serveLine = (calling && r.serving) ? '<span class="up-serve">In consultation: <b>' + esc(r.serving) + '</b></span> ' : '';
-    var upTxt = (up.length ? 'Next: ' + up.map(function(n){ return '<b>' + esc(n) + '</b>'; }).join(" &middot; ") : (r.waiting ? '' : (calling || r.serving ? '' : 'No one waiting')));
+    var serveLine = (calling != null && r.serving) ? '<span class="up-serve">In consultation: <b>' + esc(who(r.serving)) + '</b></span> ' : '';
+    var upTxt = (up.length ? 'Next: ' + up.map(function(n){ return '<b>' + esc(who(n)) + '</b>'; }).join(" &middot; ") : (r.waiting ? '' : (calling != null || r.serving ? '' : 'No one waiting')));
     el.innerHTML = '<div class="rhead"><span class="rname">' + esc(r.name) + '</span>' + (r.number ? '<span class="rnum">' + esc(r.number) + '</span>' : '') + '</div>' +
       (r.department ? '<div class="rdept">' + esc(r.department) + '</div>' : '') + now +
       '<div class="up">' + serveLine + upTxt + '</div>';
@@ -163,9 +166,9 @@
   function load(){
     if (P.get("mock") === "1"){
       var rooms = [
-        { name:"Dr. Richardson", number:"1", department:"Cardiology", status:"busy", calling:["Asha Kumar"], serving:"R. Mehta", waiting:6, upcoming:["S. Rao","N. Iyer","T. Das"] },
-        { name:"Dr. Sharma", number:"2", department:"General Medicine", status:"moderate", serving:"P. Nair", waiting:3, upcoming:["V. Singh","M. Bose"] },
-        { name:"Dr. Fernandez", number:"3", department:"Pediatrics", status:"normal", waiting:1, upcoming:["Baby of L. Roy"] },
+        { name:"Dr. Richardson", number:"1", department:"Cardiology", status:"busy", calling:["14"], serving:"13", waiting:6, upcoming:["15","17","18"] },
+        { name:"Dr. Sharma", number:"2", department:"General Medicine", status:"moderate", serving:"11", waiting:3, upcoming:["16","19"] },
+        { name:"Dr. Fernandez", number:"3", department:"Pediatrics", status:"normal", waiting:1, upcoming:["20"] },
         { name:"Dr. Gupta", number:"4", department:"Orthopedics", status:"unavailable", waiting:0, upcoming:[] }
       ];
       setBrand({ name: P.get("name") || "Sunrise Clinic", logo: P.get("logo") || "" });

@@ -104,6 +104,7 @@
   .pos{width:28px;height:28px;border-radius:8px;background:var(--tl);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px;flex:none}
   @media (prefers-color-scheme:dark){.pos{color:#04322c}}
   .pos.consult{background:var(--ok)}
+  .tok{display:inline-block;min-width:28px;padding:1px 7px;margin-right:6px;border-radius:6px;background:var(--ink);color:#fff;font:800 14px/1.5 ui-monospace,monospace;text-align:center}
   .nm{font-weight:700;font-size:14.5px;color:var(--ink)}.mrn{color:var(--mut);font-weight:600;font-size:12px;margin-left:4px;font-family:ui-monospace,monospace}
   .meta{color:var(--mut);font-size:12px;margin-top:2px}
   .st{margin-left:auto;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--tl);display:flex;align-items:center;gap:4px}
@@ -229,6 +230,8 @@
   function istDay(){ return new Date(Date.now()+19800000).toISOString().slice(0,10); }
   var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
+  // The OPD token (called out in the waiting hall). A ticket registered before tokens existed has none.
+  var tok=function(t){return t&&t.token?'<span class="tok" title="Token">'+esc(t.token)+'</span>':"";};
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
   function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
@@ -489,7 +492,7 @@
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Vitals</button>');   // nurse records BP/temp/SpO2 etc. onto the encounter timeline
     if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
       '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
       '<div class="acts">'+b.join("")+'</div></div>';
@@ -571,6 +574,8 @@
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
       refresh();
+      var nx=(r.tickets||[]).filter(function(x){return x.status==="called";})[0];
+      if(nx&&nx.token) toast("Now calling token "+nx.token);
       if(r.timelineUrl){
         open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary:")+'</p><div class="link">'+esc(r.timelineUrl)+'</div>'+
           '<p id="lx" style="color:var(--mut)">'+linkUntil(r.linkExpiresAt)+'</p>'+
@@ -1000,7 +1005,7 @@
     rooms.forEach(function(rm){ inRooms+=rm.waiting||0; (rm.tickets||[]).forEach(function(t){ if(t.status==="in_consultation") consulting++; }); });
     // routing inbox
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
-      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
+      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:var(--red-soft);color:var(--red)">URGENT</span>':'')+'</div>'+
         '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
         (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room <span class="ms sm">chevron_right</span></button>':"")+'</div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
@@ -1032,7 +1037,7 @@
     if(can("emr.vitals")) b.push('<button data-a="vitals" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Vitals</button>');   // nurse records vitals onto the timeline
     if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
-      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div><div class="nm">'+tok(t)+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   // Nurse records vitals -> a compact timeline entry (kind:"vitals", EMR_VITALS cap). This is the nurse's

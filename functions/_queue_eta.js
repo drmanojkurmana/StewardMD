@@ -45,14 +45,11 @@ export function orderRoomView(tickets) {
   return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t));
 }
 
-// PHI-minimal name for a PUBLIC waiting-room screen: first name + last initial only (e.g. "Ramesh K"),
-// never full name / MRN / phone. A one-word name is shown as-is.
-export function shortName(n) {
-  const p = String(n || "").trim().split(/\s+/).filter(Boolean);
-  if (!p.length) return "Patient";
-  return p.length > 1 ? p[0] + " " + p[p.length - 1][0].toUpperCase() : p[0];
-}
-// Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-minimal.
+// A PUBLIC waiting-room screen shows the ticket's TOKEN and never a name, MRN or phone: the token is what
+// the hall calls out, so a patient recognises their turn without anyone else learning who they are. A
+// ticket registered before tokens existed has none and is shown as "" (the screen draws a blank, not a name).
+const wallToken = (t) => String((t && t.token) || "");
+// Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-free.
 // Tickets are already priority/seq-ordered by boardForOrg (orderRoomView), so `calling`/`upcoming`
 // reflect true order. `calling` = summoned-not-yet-entered (the attention state); `serving` = in room.
 export function displayBoard(org, board) {
@@ -62,9 +59,9 @@ export function displayBoard(org, board) {
     return {
       name: (rm.room && rm.room.name) || "Room", number: (rm.room && rm.room.number) || "",
       department: (rm.room && rm.room.department) || "", status: rm.status,
-      calling: ts.filter((t) => t.status === "called").map((t) => shortName(t.name)),
-      serving: ts.filter((t) => t.status === "in_consultation").map((t) => shortName(t.name))[0] || "",
-      waiting: waiting.length, upcoming: waiting.slice(0, 3).map((t) => shortName(t.name)),
+      calling: ts.filter((t) => t.status === "called").map(wallToken),
+      serving: ts.filter((t) => t.status === "in_consultation").map(wallToken)[0] || "",
+      waiting: waiting.length, upcoming: waiting.slice(0, 3).map(wallToken),
     };
   });
   return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, rooms: rooms };

@@ -201,6 +201,49 @@
       });
     };
   }
+  /* OPD TOKEN NUMBERS. The number the waiting hall calls out. One sequence for the whole hospital by
+   * default; per department when chosen, each department with an optional letter prefix ("A-012") so
+   * two departments' number 12 are told apart. Applies to tickets registered after saving; a token
+   * already given is never changed. */
+  function tokenCardHtml(esc, tokens) {
+    var t = tokens || {}, dept = t.scope === "department", pre = t.prefixes || {};
+    var lines = Object.keys(pre).map(function (k) { return k + " = " + pre[k]; }).join("\n");
+    return '<div class="card"><h2>OPD token numbers</h2>' +
+      '<label class="f"><span>Numbering</span><select id="tokScope">' +
+        '<option value="hospital"' + (dept ? "" : " selected") + ">One sequence for the whole hospital</option>" +
+        '<option value="department"' + (dept ? " selected" : "") + ">Each department numbers separately</option></select></label>" +
+      '<label class="f"><span>Department prefixes, one per line (Department name = letters)</span><textarea id="tokPrefixes" rows="4" placeholder="General Medicine = A">' + esc(lines) + "</textarea></label>" +
+      '<p class="quiet">Prefixes are used only when each department numbers separately. Without a prefix two departments can both call number 12. Numbers start again at 1 each day, and a token already given never changes.</p>' +
+      '<button class="btn" id="tokSave" type="button">Save</button><div id="tokMsg"></div></div>';
+  }
+  function readTokenCard(scope, text) {
+    var prefixes = {}, bad = "";
+    String(text || "").split(/\n/).forEach(function (ln) {
+      if (!ln.trim()) return;
+      var i = ln.lastIndexOf("=");
+      var name = i > 0 ? ln.slice(0, i).trim() : "", p = i > 0 ? ln.slice(i + 1).trim().toUpperCase() : "";
+      if (!name || !/^[A-Z0-9]{1,3}$/.test(p)) { bad = bad || ln.trim(); return; }
+      prefixes[name] = p;
+    });
+    if (bad) return { error: "Each line needs a department name, \"=\", and one to three letters or digits: " + bad };
+    return { tokens: { scope: scope === "department" ? "department" : "hospital", prefixes: prefixes } };
+  }
+  WSQ._tokenCard = { html: tokenCardHtml, read: readTokenCard };
+  function wireTokenCard(c) {
+    var btn = document.getElementById("tokSave");
+    if (!btn) return;
+    btn.onclick = function () {
+      var m = document.getElementById("tokMsg");
+      var out = readTokenCard(document.getElementById("tokScope").value, document.getElementById("tokPrefixes").value);
+      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+      btn.disabled = true;
+      c.api("/org/update", { orgId: c.state.orgId, tokens: out.tokens }).then(function (r) {
+        btn.disabled = false;
+        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+        m.innerHTML = ""; c.state.org = r.org; c.toast("Token numbering saved.");
+      });
+    };
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -219,7 +262,7 @@
        * say: nothing is converted, and nothing already recorded is rewritten. */
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
-      "</div>" +
+      "</div>" + tokenCardHtml(c.esc, o.tokens) +
       (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
@@ -235,6 +278,7 @@
     wireNoteWriters(c);
     wireApprovalRules(c);
     wireLabCheck(c);
+    wireTokenCard(c);
   }
 
   // ---- Safety reminders (dry run) ----------------------------------------------------------------

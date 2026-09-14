@@ -1,6 +1,6 @@
 /* functions/_queue_notify.js — Smart OPD Queue patient notifications. Reuses the FollowCare SMS/WhatsApp
  * senders + the shared i18n engine; logs its own PHI-free delivery events into q_events (NOT fc_delivery).
- * PHI-light: message bodies carry NO patient name/MRN — only dept, doctor, an opaque link, counts/times.
+ * PHI-light: message bodies carry NO patient name/MRN — only dept, doctor, the OPD token, an opaque link, counts/times.
  *
  * Idempotency: position tiers use ONE MONOTONIC stage counter on the ticket (n_stage: 0→ahead5(1)→
  * ahead2(2)→next(3)) so advancing never re-sends or back-sends a lower tier (a patient added straight at
@@ -85,6 +85,7 @@ export async function notifyTicket(env, session, ticket, event, vars) {
       dept: session.department || "the clinic", doctor: session.doctorName || "", link: link,
       ahead: vars.ahead != null ? vars.ahead : Math.max(0, (ticket.position || 1) - 1), eta: vars.eta || ""
     });
+    if (ticket.token && (event === "registered" || event === "next")) body = I18n.t("queue.msg.token", ticket.lang || "en", { token: ticket.token }) + " " + body;
     res = await send(env, mobile, body, link);
   } catch (e) { res = { ok: false, reason: "exception" }; }
   // Mark the tier attempted (we had a number) so it never re-fires; audit masked. Best-effort writes.
