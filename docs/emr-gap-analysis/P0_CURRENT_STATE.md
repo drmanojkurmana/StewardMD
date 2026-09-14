@@ -749,3 +749,9 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 ### 2026-09-15 - G4 closed: live audit chain confirmed in production
 
 - First production WardSynQ writes since the 2026-09-14 11:10Z deploy: 14 connect_audit_event rows (tenant wardsynq-demo-superspecialty-hospital-1b10ee), 14 wardsynq_audit_chain rows. `node scripts/audit-chain-live-check.mjs --since 2026-09-14T11:10:00Z` reports CONFIRMED: all linked, chain head 14, newest 14 verified. The hourly session cron was removed.
+
+### 2026-09-15 - staff navigation labels in nine languages; no-ward alert cover
+
+- Staff shell language picker (next to Sign out) translates only the sidebar rail and the Admin Center tab strip; clinical screens stay English and the page lang stays en. 18 new nav keys translated in every language via Gemini on Vertex, validated. Headless staff nav 7/7.
+- Owner: a patient with no ward alerts the doctor they are admitted under (skipped and recorded when marked off duty or inactive) and the residents on duty in that doctor department (hospital-wide when the department is unknown); nurses and other consultants are not alerted; NO_RECIPIENT carries why. Builder kept the ordering clinician alerted as on any result. Headless crits board and duty runs pass.
+- Regression: full suite green except three source-check tests updated for the nav.* keys (16/16 after). Every route has a screen and a test. Security scan 0 findings. Live shell.js 39, admin.js 41, ward.js site91-noward.
