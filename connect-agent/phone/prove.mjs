@@ -55,20 +55,29 @@ function PROVE_EXEC(seq) {
   }).catch(function (x) { return JSON.stringify({ status: 0, error: String(x && x.message || x) }); });
 }
 
-/* The texts of the cells the screen shows for the captured view: the table the doctor pointed at, the
- * block's value elements, or the view's rows. */
+/* The cells the screen shows for the captured view, ROW BY ROW (one array of cell texts per row, in
+ * column order): the table the doctor pointed at, the block's value elements, or the view's rows. Row
+ * order and column order are what lets a response key be traced to a screen column (learnColumns). */
 function PROVE_SCREEN(spec) {
   var out = [];
-  var add = function (el) { var t = (el && el.textContent || '').replace(/\s+/g, ' ').trim(); if (t) out.push(t.slice(0, 400)); };
+  var total = 0;
+  var text = function (el) { return (el && el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 400); };
+  var addRow = function (els) {
+    var row = [];
+    for (var i = 0; i < els.length; i++) row.push(text(els[i]));
+    if (row.some(function (t) { return t; })) { out.push(row); total += row.length; }
+  };
   try {
     var p = window.__smdPointed;
     if (p && p.isConnected && p.tagName === 'TABLE') {
-      var tds = p.querySelectorAll('td');
-      for (var i = 0; i < tds.length && out.length < 400; i++) add(tds[i]);
+      var trs = p.querySelectorAll('tr');
+      for (var i = 0; i < trs.length && total < 400; i++) { var tds = trs[i].querySelectorAll('td'); if (tds.length) addRow(tds); }
     } else if (spec.block) {
       var roots = document.querySelectorAll(spec.rowsSelector);
-      for (var r = 0; r < roots.length && out.length < 400; r++) {
-        for (var c = 0; c < (spec.cellSelectors || []).length; c++) add(roots[r].querySelector(spec.cellSelectors[c]));
+      for (var r = 0; r < roots.length && total < 400; r++) {
+        var vals = [];
+        for (var c = 0; c < (spec.cellSelectors || []).length; c++) vals.push(roots[r].querySelector(spec.cellSelectors[c]));
+        addRow(vals);
       }
     } else if (spec.rowsSelector) {
       var rows = document.querySelectorAll(spec.rowsSelector);
@@ -79,11 +88,18 @@ function PROVE_SCREEN(spec) {
         if (laidOut && !rows[k].getClientRects().length) continue;
         n++;
         var cells = rows[k].querySelectorAll('td');
-        for (var j = 0; j < cells.length; j++) add(cells[j]);
+        if (cells.length) addRow(cells);
       }
     }
   } catch (x) { /* an unreadable screen proves nothing */ }
   return JSON.stringify(out);
+}
+
+/** What PROVE_SCREEN returned, as rows of cell texts (an older page build answered a flat list: one row). */
+export function screenRows(raw) {
+  if (!Array.isArray(raw)) return [];
+  if (raw.length && raw.every((x) => typeof x === 'string')) return [raw];
+  return raw.filter(Array.isArray).map((r) => r.map((c) => String(c == null ? '' : c)));
 }
 
 export const PROVE_SOURCES = Object.freeze({
@@ -136,6 +152,59 @@ export function overlapOf(cells, text, contentType) {
 }
 
 export function accepted(o) { return o.cells > 0 && o.hits >= Math.min(ACCEPT.hits, o.cells) && o.ratio >= ACCEPT.ratio; }
+
+/**
+ * learnColumns(headers, screenRows, respRows) -> { header: { key } | { keys: [a, b], join } }
+ * Which response field feeds each screen column, decided by VALUE EQUALITY against the cells the doctor
+ * sees, never by what a key is called: a payload whose `ValueType` or `LowValue` comes before `Result`
+ * still maps the "Result" column to `Result`. A column the response shows as two fields joined
+ * ("13 - 17" from LowValue and HighValue) maps to both with the joiner the screen used. A column no
+ * field reproduces in at least half of its cells stays unmapped, and the consumer must not guess it.
+ * Names only leave the phone (header labels and key names); the cells never do.
+ */
+export function learnColumns(headers, screen, resp) {
+  const H = Array.isArray(headers) ? headers : [];
+  const rows = (Array.isArray(resp) ? resp : []).slice(0, 200);
+  const S = (Array.isArray(screen) ? screen : []).slice(0, 200);
+  const out = {};
+  if (!H.length || !rows.length || !S.length) return out;
+  const keys = [];
+  for (const r of rows) for (const k of Object.keys(r || {})) if (k.charAt(0) !== '_' && !keys.includes(k)) keys.push(k);
+  const nv = (v) => norm(v);
+  const byKey = new Map(keys.map((k) => [k, new Set(rows.map((r) => nv(r[k])).filter((x) => x.length >= 2))]));
+  for (let i = 0; i < H.length; i += 1) {
+    const cells = S.map((r) => r[i]).filter((c) => c != null && String(c).trim());
+    const cellsN = cells.map(nv).filter((x) => x.length >= 2);
+    if (!cellsN.length) continue;
+    const need = Math.max(1, Math.ceil(cellsN.length * 0.5));
+    let best = null, bestHits = 0;
+    for (const k of keys) {
+      const set = byKey.get(k);
+      let hits = 0;
+      for (const c of cellsN) if (set.has(c)) hits += 1;
+      if (hits > bestHits) { best = k; bestHits = hits; }
+    }
+    if (best && bestHits >= need) { out[H[i]] = { key: best }; continue; }
+    let pair = null, pairHits = 0;
+    for (const a of keys) for (const b of keys) {
+      if (a === b) continue;
+      let hits = 0;
+      for (const r of rows) { const j = nv(r[a]) + nv(r[b]); if (j.length >= 2 && cellsN.includes(j)) hits += 1; }
+      if (hits > pairHits) { pair = [a, b]; pairHits = hits; }
+    }
+    if (!pair || pairHits < need) continue;
+    let join = ' ';
+    for (const r of rows) {
+      const a = String(r[pair[0]] == null ? '' : r[pair[0]]).trim(), b = String(r[pair[1]] == null ? '' : r[pair[1]]).trim();
+      const raw = cells.map((c) => String(c).trim()).find((c) => nv(c) === nv(a) + nv(b));
+      if (!raw) continue;
+      if (a && b && raw.startsWith(a) && raw.endsWith(b) && raw.length > a.length + b.length) join = raw.slice(a.length, raw.length - b.length);
+      break;
+    }
+    out[H[i]] = { keys: pair, join: join.slice(0, 8) };
+  }
+  return out;
+}
 
 export function responseKind(resp) {
   if (!resp) return 'empty';
@@ -306,7 +375,8 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   }).slice(-12);
   if (!entries.length) return done('no-requests');
 
-  const cells = consideredCells(await evalJson(client, PROVE_SOURCES.screen(view), []));
+  const shown = screenRows(await evalJson(client, PROVE_SOURCES.screen(view), []));
+  const cells = consideredCells(shown.flat());
   if (!cells.length) return done('no-screen-values');
 
   // REASON: the brain ranks from structure; its order is the execution order.
@@ -375,12 +445,16 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     const ep = endpointOf(e, 'prerequisite', { kind: 'fired-before' });
     if (ep) eps.push(ep);
   }
-  const dataEp = endpointOf(hit.e, 'data', { kind: hit.kind, hits: hit.o.hits, cells: hit.o.cells, overlap: hit.o.ratio, rows: rowsForChain(hit.resp.text, hit.resp.contentType).length });
+  const dataRows = rowsForChain(hit.resp.text, hit.resp.contentType);
+  const dataEp = endpointOf(hit.e, 'data', { kind: hit.kind, hits: hit.o.hits, cells: hit.o.cells, overlap: hit.o.ratio, rows: dataRows.length });
   if (!dataEp) return done('unproven');
   eps.push(dataEp);
   view.endpoints = eps.slice(-8);
+  // LEARN the columns too: which response field the screen shows under each header, by value.
+  const columns = learnColumns(view.headers, shown, dataRows);
+  if (Object.keys(columns).length) view.columns = columns; else delete view.columns;
   view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind }, trace.model ? { model: trace.model } : {});
-  return { proven: { label: view.resourceHint, rows: rowsForChain(hit.resp.text, hit.resp.contentType) }, trace };
+  return { proven: { label: view.resourceHint, rows: dataRows }, trace };
 }
 
 /**
