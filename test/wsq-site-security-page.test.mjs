@@ -65,5 +65,5 @@ test("every staff sign-in screen asks for the code instead of reporting a wrong 
     assert.match(src, /That code did not match/, f + " must say a wrong code is a wrong code");
   }
   assert.match(read("wardsynq/site/index.html"), /pages\/security\.js\?v=\d+/);
-  assert.match(read("wardsynq/site/shell.js"), /item\("security", "Sign-in security"\)/);
+  assert.match(read("wardsynq/site/shell.js"), /item\("security", "nav.security"\)/);
 });

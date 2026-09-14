@@ -222,7 +222,7 @@ test("ADMIN FHIR CARD (wardsynq/site/pages/admin.js): capability summary, value 
   const c = { esc: win.WSQ.esc, ms: win.WSQ.ms };
   const card = win.WSQ._fhirHtml, expansion = win.WSQ._expansionHtml;
   assert.ok(adminSrc.includes('c.api("/ward/fhir/metadata" + q)') && adminSrc.includes('c.api("/ward/fhir/ValueSet" + q)') && adminSrc.includes('"/$expand" + q'), "the card calls the real routes");
-  assert.ok(adminSrc.includes('["fhir", "FHIR"]'), "the Admin Center has the tab");
+  assert.ok(adminSrc.includes('["fhir", "nav.admin.fhir"]'), "the Admin Center has the tab");
 
   assert.equal((card(c, null, null).match(/spin/g) || []).length, 2);
   const failed = card(c, { resourceType: "OperationOutcome", issue: [{ diagnostics: "forbidden" }] }, { ok: false, error: "network" });
