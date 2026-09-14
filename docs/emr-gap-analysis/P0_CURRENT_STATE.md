@@ -716,3 +716,9 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - G13: ward repaint keeps scroll and focus, warnings take focus. G14: nursing panel two panes at tablet width. D8: warning rows styled, contrast tests for signal washes.
 - Fix found at merge: the group store and three writers from other branches (org clinical settings, no-show recall, seed sign-off) still wrote q_events directly, so publish-counts and stale-after failed and the others would have shown as chain breaks. All go through appendOrgAudit; test/q-events-only-through-chain.test.mjs guards it.
 - Headless tablet, offline conflict, golden path and alert screen pass. Regression 6900, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site88, admin.js 35.
+
+### 2026-09-14 (night, 11) - S3 P1 follow-ups; Antigravity translation work under review
+
+- GET /api/push/notice/<nid> requires the workplace orgId and 404s before reading or logging on a mismatch; queue.js and discharge.js pick credentials through hospital-auth.js; StewardMD account sign-out unbinds the phone first (failure recorded, never claimed removed); Admin phones list reads live DeviceDirectory registrations. App-side parts need an app update; old app builds get 404 on notice detail (push feature is flag-off by default).
+- Antigravity finished its multilingual branch feat/wardsynq-multilingual-emr (local, 4 commits on 79aa6bed, before the per-language split): rewrote i18n.js with 8 languages (Marathi instead of Spanish), a staff shell switcher, terminology engine, dual-presentation rx print and translation guard. Being safety-reviewed and ported onto the per-language files on branch d6-antigravity-integrate; nothing from it is live yet.
+- Regression 6911, 0 fail (run in 4 chunks after two low-memory kills). Every route has a screen and a test. Security scan 0 findings. Live admin.js 36.
