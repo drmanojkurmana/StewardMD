@@ -44,6 +44,8 @@ const PARSE_OPTS = POLICY === "relaxed" ? { unlabeledAuto: true } : {};
 const VERIFY_OPT = opt("--verify", null);
 if (VERIFY_OPT) PARSE_OPTS.verifyFields = VERIFY_OPT === "none" ? [] : VERIFY_OPT.split(",");
 // --disable rule,rule: switch parser rules off for ablation (icu-monitor-parser.js FEATURES)
+// --detections <json>: on-device vital-tile detector output per image ({ "<abs jpg path>": [{cls,conf,x,y,w,h}] })
+const DETECTIONS = opt("--detections", null) ? JSON.parse(readFileSync(opt("--detections", null), "utf8")) : null;
 const DISABLE_OPT = opt("--disable", null);
 if (DISABLE_OPT) PARSE_OPTS.disable = DISABLE_OPT.split(",");
 const FIX = join(HERE, "fixtures");
@@ -174,7 +176,7 @@ for (const casePath of cases) {
   let px = null; try { if (existsSync(img)) px = pixelSource(img); } catch (e) { /* colour + quality pixel checks become neutral */ }
   const t0 = Date.now();
   const twoScale = SCALES === 2 ? { ran: !!crop || confirmRan } : null;
-  const res = M.parseMonitor(obs, Object.assign({ px, imageSize, twoScale }, PARSE_OPTS));
+  const res = M.parseMonitor(obs, Object.assign({ px, imageSize, twoScale, detections: DETECTIONS ? DETECTIONS[img] || [] : undefined }, PARSE_OPTS));
   const parseMs = Date.now() - t0;
   const fields = scoreCase(gt, res);
   const incomplete = Object.entries(res.fields).filter(([, f]) => f.status === "AUTO_ACCEPTED" && !(f.proof && f.proof.complete)).map(([k]) => k);

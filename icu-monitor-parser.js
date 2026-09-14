@@ -61,7 +61,7 @@
    *   onelabel one pressure-source label serves only its nearest reading
    *   limit1   a small number directly left of a much larger value is that value's alarm limit
    *   mapcheck displayed MAP vs (SBP + 2 DBP) / 3 as a consistency check only (never fills MAP) */
-  var FEATURES = ["norm", "vocab", "ecg", "pap", "onelabel", "limit1", "mapcheck", "color"];   // "color": ablation switch for colour evidence (on by default, predates pass 3)
+  var FEATURES = ["norm", "vocab", "ecg", "pap", "onelabel", "limit1", "mapcheck", "color", "detector"];   // "color": ablation switch for colour evidence (on by default, predates pass 3)
   var MAP_CONSISTENCY_TOL = 25;   // mmHg; displayed-vs-formula spread on 212 labelled readings: median 3, max 15.3
   function on(opts, f) { return !(opts && opts.disable && opts.disable.indexOf(f) >= 0); }
   var LOOKALIKE = { "А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H", "О": "O", "Р": "P", "С": "C", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "у": "y", "х": "x", "г": "r", "Г": "r",
@@ -772,7 +772,7 @@
     var boxIdx = f.box != null ? f.box : null;
     if (boxIdx == null && f.candidates) for (var i = 0; i < f.candidates.length; i++) if (f.candidates[i].value === f.value) { boxIdx = f.candidates[i].box; break; }
     var o = boxIdx != null ? G.src[boxIdx] : null;
-    var kind = f.label ? (f.label.glued || f.glued ? "glued-label" : "label") : "layout+colour";
+    var kind = f.label ? (f.label.detector ? "detector" : f.label.glued || f.glued ? "glued-label" : "label") : "layout+colour";
     var src = f.source || (f.label ? "label " + JSON.stringify(f.label.text) : "layout slot + channel colour (unlabeledAuto)");
     var ev = {
       ocr: o ? { text: o.text, conf: o.conf == null ? null : +(+o.conf).toFixed(2), scale: o.scale || "full" } : null,
@@ -949,9 +949,17 @@
     }
     var pr = parsePressures(G, px, claimed, claimedLabels, opts);
     fields.sbp = pr.sbp; fields.dbp = pr.dbp; fields.map = pr.map; if (pr.art) fields.art = pr.art; if (pr.nibp) fields.nibp = pr.nibp;
+    // On-device vital-tile detector (opts.detections from Core ML): a detector box of a field's class can
+    // stand in for an UNREAD label. It only associates; digits are still Vision's, and every gate still applies.
+    var DET_MIN = 0.5;
+    var dets = on(opts, "detector") ? (opts.detections || []).filter(function (d) { return d && d.conf >= DET_MIN && d.w > 0 && d.h > 0; }) : [];
+    function inDet(b, d) { var cx = b.x + b.w / 2, cy = b.y + b.h / 2, mx = d.w * 0.1, my = d.h * 0.1; return cx >= d.x - mx && cx <= d.x + d.w + mx && cy >= d.y - my && cy <= d.y + d.h + my; }
+    function bestDet(field) { var best = null; dets.forEach(function (d) { if (d.cls === field && (!best || d.conf > best.conf)) best = d; }); return best; }
+    function claimedByOther(b, field, d) { return dets.some(function (o) { return o !== d && o.cls !== field && o.conf > d.conf && inDet(b, o); }); }
     var ORDER = ["hr", "spo2", "rr", "pulse", "temp", "etco2", "cvp", "pvc"];
     ORDER.forEach(function (field) {
       var f = FIELDS[field], label = findLabel(G, field, claimedLabels), L = label && label.box;
+      var det = !L ? bestDet(field) : null;
       var chan = L && px ? channelColor(L, px) : null;
       var cands = [];
       G.B.forEach(function (b) {
@@ -959,6 +967,7 @@
         if (b.role !== "numeric" && b.role !== "limit" && b.role !== "limitRange") return;
         if (!valueLike(b.t, f)) return;
         if (L) { var dx = b.x - L.x, dy = b.y - L.y; if (dx < -4 * L.h || dx > 30 * L.h || dy < -1.5 * L.h || dy > 7 * L.h + 0.01) return; }
+        else if (det) { if (!inDet(b, det) || claimedByOther(b, field, det)) return; }
         else { if (G.order.indexOf(field) < 0 || field === "temp") return; if (G.colX == null || Math.abs(b.cx - G.colX) > 0.12 || b.h < G.maxH * 0.55) return; }
         cands.push(scoreCandidate(G, field, b, label, px, chan));
       });
@@ -976,7 +985,8 @@
           cands.push(own);
         }
       }
-      var d = decide(cands, !!L, assign({}, opts, { __field: field }));
+      if (det) cands.forEach(function (c) { c.parts.label = det.conf; c.viaDetector = det; c.why.push("inside detector box " + field + " " + det.conf.toFixed(2)); });
+      var d = decide(cands, !!L || (!!det && cands.length > 0), assign({}, opts, { __field: field }));
       // independent digit verification gate: a second OCR pass can repeat Vision's misread, the pixels cannot
       if (verifyRequired(field, opts)) {
         d.verifyRequired = true;
@@ -987,8 +997,8 @@
         }
       }
       if (d.status === "AUTO_ACCEPTED") { claimed[cands[0].box.i] = true; if (L) claimedLabels[L.i] = true; if (field === "hr") G.hrBox = cands[0].box; d.box = cands[0].box.i; d.glued = !!cands[0].glued; }
-      d.label = L ? { text: L.t, box: L.i, strength: label.strength, glued: d.status === "AUTO_ACCEPTED" && !!cands[0].glued } : null;
-      d.source = L ? "label " + JSON.stringify(L.t) : (d.status === "AUTO_ACCEPTED" ? "layout slot + channel colour (unlabeledAuto)" : null);
+      d.label = L ? { text: L.t, box: L.i, strength: label.strength, glued: d.status === "AUTO_ACCEPTED" && !!cands[0].glued } : det && cands.length ? { text: "detector:" + field, box: null, strength: +det.conf.toFixed(2), detector: { x: det.x, y: det.y, w: det.w, h: det.h, conf: det.conf } } : null;
+      d.source = L ? "label " + JSON.stringify(L.t) : det && cands.length ? "on-device detector (" + field + " " + det.conf.toFixed(2) + ")" : (d.status === "AUTO_ACCEPTED" ? "layout slot + channel colour (unlabeledAuto)" : null);
       d.channel = chan && chan.reliable ? { kind: chan.kind, h: chan.h == null ? null : +chan.h.toFixed(0) } : null;
       d.candidates = cands.map(function (c) { return { text: c.box.t, value: c.value, score: +c.score.toFixed(2), role: c.role, box: c.box.i, scale: c.box.scale, parts: roundParts(c.parts), why: c.why }; });
       fields[field] = d;

@@ -219,6 +219,16 @@
     },
     // On-device OCR via ML Kit text recognition. The IMAGE NEVER LEAVES THE DEVICE —
     // only recognized text is returned to JS. Resolves { text, lines:[string] }.
+    // On-device vital-tile detector (Core ML, iOS). Resolves { available, detections:[{cls,conf,x,y,w,h}] }
+    // (normalized top-left). available=false on builds without the model or on Android: callers fall back.
+    detectVitals: function (dataUrl) {
+      var P = plugins(), TR = P && P.VisionOcr;
+      if (!(TR && TR.detectVitals)) return Promise.resolve({ available: false, detections: [] });
+      var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+      return TR.detectVitals({ base64Image: b64 }).then(function (r) {
+        return { available: !!(r && r.available), detections: (r && Array.isArray(r.detections)) ? r.detections : [] };
+      }, function () { return { available: false, detections: [] }; });
+    },
     ocr: function (dataUrl, opts) {
       var P = plugins();
       var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr)

@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
 import Vision
+import CoreML
 import UIKit
 import WebKit
 
@@ -19,6 +20,7 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
     public let jsName = "VisionOcr"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "detectText", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "detectVitals", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "htmlToPdf", returnType: CAPPluginReturnPromise)
     ]
 
@@ -166,6 +168,54 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
         DispatchQueue.global(qos: .userInitiated).async {
             do { try handler.perform([request]) }
             catch { settle { call.reject(error.localizedDescription) } }
+        }
+    }
+
+    // On-device vital-tile detector (YOLO nano exported to Core ML with NMS). It finds WHERE each vital is on
+    // a monitor photo by appearance (hr, spo2, rr, sbp, dbp, map, pulse, etco2), so a value whose label Vision
+    // could not read can still be associated. It never reads digits: Vision OCR does. Nothing leaves the device.
+    // Returns { available, detections:[{cls, conf, x, y, w, h}] } with NORMALIZED TOP-LEFT boxes (same space
+    // as detectText boxes). available=false when the model is not bundled (older builds): JS falls back.
+    private static var vitalModel: VNCoreMLModel?
+    private static func loadVitalModel() -> VNCoreMLModel? {
+        if let m = vitalModel { return m }
+        let bundles = [Bundle.main, Bundle(for: VisionOcrPlugin.self)] + Bundle.allBundles
+        for b in bundles {
+            if let url = b.url(forResource: "VitalDetector", withExtension: "mlmodelc"),
+               let ml = try? MLModel(contentsOf: url), let vm = try? VNCoreMLModel(for: ml) {
+                vitalModel = vm; return vm
+            }
+        }
+        return nil
+    }
+
+    @objc func detectVitals(_ call: CAPPluginCall) {
+        guard var b64 = call.getString("base64Image"), !b64.isEmpty else { call.reject("Missing base64Image"); return }
+        if let r = b64.range(of: "base64,") { b64 = String(b64[r.upperBound...]) }
+        guard let data = Data(base64Encoded: b64, options: .ignoreUnknownCharacters),
+              let image = UIImage(data: data), let cgImage = image.cgImage else { call.reject("Invalid image data"); return }
+        guard let model = VisionOcrPlugin.loadVitalModel() else { call.resolve(["available": false, "detections": []]); return }
+        let minConf = call.getFloat("minConfidence") ?? 0.25
+        let settleLock = NSLock()
+        var settled = false
+        func settle(_ block: () -> Void) { settleLock.lock(); defer { settleLock.unlock() }; if settled { return }; settled = true; block() }
+        let request = VNCoreMLRequest(model: model) { req, err in
+            if let err = err { settle { call.reject(err.localizedDescription) }; return }
+            var dets: [[String: Any]] = []
+            for o in (req.results as? [VNRecognizedObjectObservation]) ?? [] {
+                guard let top = o.labels.first, top.confidence >= minConf else { continue }
+                let bb = o.boundingBox
+                dets.append(["cls": top.identifier, "conf": Double(top.confidence), "x": Double(bb.origin.x),
+                             "y": Double(1.0 - (bb.origin.y + bb.size.height)), "w": Double(bb.size.width), "h": Double(bb.size.height)])
+            }
+            settle { call.resolve(["available": true, "detections": dets]) }
+        }
+        // the model was trained on letterboxed square inputs; scaleFit keeps the aspect ratio the same way
+        request.imageCropAndScaleOption = .scaleFit
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 20) { settle { call.reject("detector-timeout") } }
+        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        DispatchQueue.global(qos: .userInitiated).async {
+            do { try handler.perform([request]) } catch { settle { call.reject(error.localizedDescription) } }
         }
     }
 }

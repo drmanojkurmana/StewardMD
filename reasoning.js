@@ -4600,9 +4600,14 @@
             });
           });
         }).then(function (ctx) {
+          // on-device vital-tile detector (Core ML): associates values whose label Vision could not read;
+          // unavailable on older builds / Android, where the parser behaves exactly as before
+          var dv = window.SMD_NATIVE.detectVitals ? window.SMD_NATIVE.detectVitals(dataUrl) : Promise.resolve({ available: false, detections: [] });
+          return dv.then(function (r) { ctx.detections = r && r.available ? r.detections : null; return ctx; }, function () { return ctx; });
+        }).then(function (ctx) {
           var px = ctx.px, obsM = ctx.obs;
           var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
-          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed });
+          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed, detections: ctx.detections || undefined });
           boxes = obsM;   // evidence and overlay refer to the merged observation list
           var vitals = {}; Object.keys(res.values).forEach(function (k) { if (typeof res.values[k] === "number") vitals[k] = res.values[k]; });
           var fields;
