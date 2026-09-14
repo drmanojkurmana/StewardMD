@@ -556,3 +556,90 @@ test("RxChoice Sprint 2: resolves standard adult combinations (Montair LC) and r
   assert.notEqual(res.premium.brand, "Miontizee-L Kid Tablet");
 });
 
+test("RxChoice Safety: prevents cross-molecule brand match (Ascoril LD Syrup must NEVER resolve to Deflazacort)", async () => {
+  const env = createEnv();
+  // Simulate D1 where searching "Ascoril LD" fuzzy matched "Ascort 6mg Tablet" (Deflazacort)
+  const ASCORT_DEFLAZACORT = [
+    { id: 401, brand: "Ascort 6mg Tablet", composition: "Deflazacort (6mg)", manufacturer: "Apex Laboratories", mrp: 110, form: "tablet", pack: "strip of 10 tablets", discontinued: 0 },
+    { id: 402, brand: "Safecort 6mg Tablet", composition: "Deflazacort (6mg)", manufacturer: "Macleods Pharmaceuticals", mrp: 85, form: "tablet", pack: "strip of 10 tablets", discontinued: 0 }
+  ];
+
+  const AMBRO_GUAIF_ROWS = [
+    { id: 501, brand: "Ambrodil Syrup", composition: "Ambroxol (30mg) + Guaifenesin (50mg)", manufacturer: "Aristo Pharmaceuticals", mrp: 65, form: "syrup", pack: "bottle of 100 ml", discontinued: 0 },
+    { id: 502, brand: "Mucolite Syrup", composition: "Ambroxol (30mg) + Guaifenesin (50mg)", manufacturer: "Dr Reddy's Laboratories", mrp: 95, form: "syrup", pack: "bottle of 100 ml", discontinued: 0 },
+    { id: 503, brand: "Kuff-Q Syrup", composition: "Ambroxol (30mg) + Guaifenesin (50mg)", manufacturer: "Cipla Ltd", mrp: 80, form: "syrup", pack: "bottle of 100 ml", discontinued: 0 }
+  ];
+
+  env.MEDAPI.searchBrands = (q) => {
+    q = q.toLowerCase();
+    // If searching ascoril, return Ascort (the bug scenario)
+    if (q.indexOf("ascoril") >= 0 || q.indexOf("ascort") >= 0) {
+      return Promise.resolve({ results: ASCORT_DEFLAZACORT });
+    }
+    return Promise.resolve({ results: [] });
+  };
+
+  env.MEDAPI.composition = (name) => {
+    if (name.toLowerCase().indexOf("deflazacort") >= 0) {
+      return Promise.resolve({ composition: name, brands: ASCORT_DEFLAZACORT });
+    }
+    if (name.toLowerCase().indexOf("ambroxol") >= 0) {
+      return Promise.resolve({ composition: name, brands: AMBRO_GUAIF_ROWS });
+    }
+    return Promise.resolve({ composition: name, brands: [] });
+  };
+
+  const line = {
+    drug: "Ambroxol (30mg) + Guaifenesin (50mg)",
+    brand: "Ascoril LD Syrup",
+    dose: "10 ml PO",
+    freq: "TDS",
+    duration: "5 days"
+  };
+
+  const res = await env.SMD_RXCHOICE_UI.resolveLine(line);
+  assert.ok(res, "Result must exist");
+
+  // Invariant 1: Prescribed card must NEVER resolve to Deflazacort
+  assert.notEqual(res.prescribed.composition.toLowerCase(), "deflazacort (6mg)");
+  assert.notEqual(res.prescribed.brand, "Ascort 6mg Tablet");
+  assert.equal(res.prescribed.brand, "Ascoril LD Syrup");
+
+  // Invariant 2: Alternatives must be Ambroxol + Guaifenesin syrups, NEVER Deflazacort steroids
+  assert.ok(res.generic, "Generic alternative must be found for ambroxol+guaifenesin");
+  assert.equal(res.generic.brand, "Ambrodil Syrup");
+  assert.equal(res.generic.composition, "Ambroxol (30mg) + Guaifenesin (50mg)");
+  assert.ok(res.balanced, "Balanced alternative must be found");
+  assert.ok(res.premium, "Premium alternative must be found");
+  assert.notEqual(res.generic.brand, "Safecort 6mg Tablet");
+  assert.notEqual(res.premium.brand, "Ascort 6mg Tablet");
+});
+
+test("RxChoice: uncatalogued brand fallback (Ambro GT Syrup) resolves alternatives for generic", async () => {
+  const env = createEnv();
+  const AMBRO_GUAIF_ROWS = [
+    { id: 501, brand: "Ambrodil Syrup", composition: "Ambroxol + Guaifenesin", manufacturer: "Aristo Pharmaceuticals", mrp: 65, form: "syrup", pack: "bottle of 100 ml", discontinued: 0 },
+    { id: 502, brand: "Mucolite Syrup", composition: "Ambroxol + Guaifenesin", manufacturer: "Dr Reddy's Laboratories", mrp: 95, form: "syrup", pack: "bottle of 100 ml", discontinued: 0 }
+  ];
+
+  // Brand "Ambro GT Syrup" is not in searchBrands
+  env.MEDAPI.searchBrands = () => Promise.resolve({ results: [] });
+  env.MEDAPI.composition = (name) => Promise.resolve({ composition: name, brands: AMBRO_GUAIF_ROWS });
+
+  const line = {
+    drug: "Ambroxol + Guaifenesin",
+    brand: "Ambro GT Syrup",
+    dose: "10 ml PO",
+    freq: "TDS",
+    duration: "5 days"
+  };
+
+  const res = await env.SMD_RXCHOICE_UI.resolveLine(line);
+  assert.ok(res, "Result must resolve");
+  assert.equal(res.prescribed.brand, "Ambro GT Syrup");
+  assert.ok(res.generic, "Generic syrup should be found");
+  assert.equal(res.generic.brand, "Ambrodil Syrup");
+  assert.ok(res.balanced, "Balanced syrup should be found");
+});
+
+
