@@ -589,3 +589,13 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 **Decision for the owner:** voice typing now needs Chrome 139+ on-device speech; Safari/older browsers get "type instead". Say if cloud speech is acceptable for your hospitals and under what agreement.
 **Next P2:** P2.1 chart-grounded intelligence gaps, P2.5 FHIR depth, P2.10 hospital intelligence, P2.13 developer platform, P2.14 multi-hospital, P2.15 reliability, P2.16 UX bar.
 
+### 2026-09-14 (later) - staff-admin escalation fixed; P2.5 bulk export, P2.14 groups, P2.15 health, P2.17 assignment reads merged
+
+- Negative-authorization tests for 10 sensitive routes (tests/neg-auth-sensitive) exposed three holes, fixed in the router via `memberChangeRefusal` (functions/_opd_org.js): a non-owner staff.admin (e.g. hr) could promote itself to admin, and disable or re-PIN the owner's staff sign-in. Now: no own-role change, owner untouchable, no acting on or granting a staff-managing role holding permissions the caller lacks; hr managing clinicians unchanged. Untested-route worklist 32 -> 22.
+- P2.5 FHIR Bulk Data (p2-fhir-bulk): `$export` system and Patient level, async via outbox/tick, encrypted NDJSON in existing document storage, manifest error[] for anything truncated or unconvertible, one export per hospital, 24h expiry, audited downloads. Admin > Data export. Not built: download buttons in the admin screen (files are fetched through the FHIR API), POST kick-off, Group/$export.
+- P2.14 Hospital groups (p2-hospital-group): invite plus owner acceptance, aggregate-only overview (#/group) read as an audited system read per hospital, recommended-settings policy adopted explicitly. Group admins get 403 on every member hospital's patient routes. **Owner to confirm:** counts are computed by a system read authorised by the hospital owner's acceptance (Decisions.md).
+- P2.15 System health (p2-access-reliability): seven dependency probes with a 3 s timeout, fixed plain-language consequences, Admin > System health; docs/INCIDENT_RESPONSE.md; last tick outcome kept in MAIK_KV.
+- P2.17 Reads outside assignment: `outOfAssignmentFindings` in the Security review, with exemptions listed and "not evaluated" when no assignment data.
+- Regression 6435 pass, 0 fail, 1 skipped. Reachability 0 without a screen. Live admin.js 18, group.js 1.
+**Next P2:** P2.13 webhooks on the outbox, P2.10 longitudinal trends, P2.16 severity-colour audit, P2.5 remaining (terminology, Subscription, IPS).
+
