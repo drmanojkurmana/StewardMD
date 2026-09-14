@@ -2,62 +2,81 @@
   "id": "breast-tdxd",
   "diseaseId": "breast_cancer",
   "name": "Fam-Trastuzumab Deruxtecan-nxki (T-DXd)",
-  "version": "1.0",
+  "version": "1.1",
   "lifecycleState": "draft",
   "experimental": true,
   "intentOptions": [
+    "curative",
     "palliative"
   ],
   "cycleLengthDays": 21,
-  "cycles": 1,
+  "cycles": 14,
+  "cyclesNote": "Curative adjuvant: 14 cycles every 21 days for high-risk residual disease (DESTINY-Breast05). Metastatic setting: cycled every 21 days continuously until disease progression or unacceptable toxicity.",
   "caps": "protocol",
   "source": {
-    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
     "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
-    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-M 4, 7 of 10; BINV-Q 2, 3, 4, 10 of 15)",
     "approval": null
   },
   "biomarkers": {
-    "HER2": "positive",
-    "note": "HER2-directed antibody-drug conjugate (trastuzumab linked to a topoisomerase-1 inhibitor payload, deruxtecan): modeled here for HER2-positive metastatic disease (IHC 3+ or ISH-amplified). The guideline also supports use in HER2-low disease (IHC 1+ or 2+/ISH-negative), which is a separate indication not modeled here. Per Standard Guidelines (NCCN), Invasive Breast Cancer."
+    "HER2": "tested",
+    "note": "HER2-directed antibody-drug conjugate (trastuzumab linked to topoisomerase-1 inhibitor deruxtecan): (1) Curative adjuvant setting: Category 1 preferred for HER2-positive early breast cancer with high-risk residual disease after neoadjuvant therapy (DESTINY-Breast05); (2) Metastatic setting: Category 1 preferred for 2L+ HER2-positive disease (DESTINY-Breast03); Category 1 preferred for HER2-low metastatic breast cancer (IHC 1+ or 2+/ISH-) after prior chemotherapy/endocrine therapy (DESTINY-Breast04); and Category 2A recommended for HER2-ultralow (IHC 0+) metastatic disease (DESTINY-Breast06). Per Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026."
   },
   "stage": [
+    "II",
+    "III",
     "IV"
   ],
-  "treatmentSetting": "metastatic",
-  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "treatmentSetting": [
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "invasive breast carcinoma (histology-agnostic; includes IDC, ILC, and HR-negative/positive)",
   "premedications": [
     {
       "name": "Antiemetic prophylaxis",
-      "notes": "T-DXd is moderately-to-highly emetogenic; provide prophylaxis per emetogenicity tier (verify exact NCCN antiemesis tier)."
+      "notes": "T-DXd is moderately-to-highly emetogenic; provide two- or three-drug antiemetic prophylaxis (e.g. 5-HT3 receptor antagonist + dexamethasone ± NK1 antagonist) prior to infusion."
     }
   ],
   "supportiveCare": [
-    "Pulmonary: monitor for interstitial lung disease (ILD)/pneumonitis, a serious class toxicity; discontinue for confirmed ILD per guidance (BINV-Q 3 of 15 footnote o).",
+    "Pulmonary / ILD vigilance: monitor actively for signs and symptoms of interstitial lung disease (ILD) / pneumonitis (cough, dyspnea, fever, new lung infiltrates on CT). Hold T-DXd for suspected ILD; permanently discontinue for confirmed grade ≥2 ILD/pneumonitis.",
     "Antiemetics: provide prophylaxis per emetogenicity tier.",
-    "Cardiac: evaluate LVEF before and during HER2-targeted therapy."
+    "Cardiac: evaluate LVEF at baseline and every 3 months during therapy. Hold for significant LVEF decline."
   ],
   "monitoring": [
-    "pulmonary symptoms and imaging for ILD/pneumonitis",
-    "CBC before each cycle (neutropenia)",
-    "LVEF at baseline and periodically",
-    "hepatic function"
+    "Chest CT and pulmonary symptoms for ILD/pneumonitis at baseline and periodically",
+    "CBC with differential before each cycle (neutropenia, anemia, thrombocytopenia)",
+    "LVEF at baseline and every 3 months during treatment",
+    "Hepatic function tests (ALT, AST, bilirubin) before each cycle"
   ],
   "clearanceChecks": [
-    "CBC/platelets",
-    "liver",
-    "LVEF",
-    "pulmonary status",
+    "CBC/platelets (ANC ≥ 1000/mcL, platelets ≥ 75,000/mcL)",
+    "liver function tests",
+    "LVEF (≥ 50% and within normal institutional limits)",
+    "pulmonary status (absence of suspected or confirmed pneumonitis)",
     "prior-cycle status"
   ],
   "doseModificationRules": [
     {
-      "condition": "any grade of confirmed interstitial lung disease / pneumonitis",
+      "condition": "confirmed interstitial lung disease (ILD) / pneumonitis of any symptomatic grade (grade ≥ 2)",
       "drug": "fam-trastuzumab deruxtecan-nxki",
-      "action": "hold/discontinue",
-      "text": "Hold for suspected ILD; permanently discontinue for confirmed symptomatic (grade 2 or higher) ILD/pneumonitis per labeling and guideline (BINV-Q 3 of 15 footnote o). Obtain clinical review."
+      "action": "discontinue",
+      "text": "Permanently discontinue T-DXd in patients diagnosed with symptomatic (Grade 2 or greater) ILD/pneumonitis. Initiate systemic corticosteroids (prednisone ≥1 mg/kg/day or equivalent) immediately for at least 14 days followed by gradual taper. For asymptomatic Grade 1 ILD, hold until resolution and consider resuming with dose reduction."
+    },
+    {
+      "condition": "LVEF decline: absolute decrease > 16% from baseline or LVEF below institutional lower limit with absolute decrease > 10%",
+      "drug": "fam-trastuzumab deruxtecan-nxki",
+      "action": "hold",
+      "text": "Withhold T-DXd. Repeat LVEF in 3 weeks. If LVEF recovers, resume. If persistent decline, permanently discontinue."
+    },
+    {
+      "condition": "grade 3 or 4 hematologic toxicity (ANC < 1000/mcL, platelets < 50,000/mcL)",
+      "drug": "fam-trastuzumab deruxtecan-nxki",
+      "action": "hold/reduce",
+      "text": "Hold until resolution to grade ≤ 1. Resume at next lower dose level: first reduction 4.4 mg/kg; second reduction 3.2 mg/kg."
     }
   ],
   "drugs": [
@@ -68,13 +87,13 @@
       "dosePerUnit": 5.4,
       "unit": "mg/kg",
       "route": "IV",
-      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 10 of 15. Fam-trastuzumab deruxtecan-nxki 5.4 mg/kg IV day 1, every 21 days. The BREAST dose is 5.4 mg/kg (weight-based). Do NOT apply the DeVita gastric/esophagogastric value of 6.4 mg/m2 (line 99219, DESTINY-Gastric) to breast cancer. Same 5.4 mg/kg every-21-day dose is used adjuvantly for 14 cycles in high-risk residual HER2-positive disease (DESTINY-Breast11, BINV-M 7 of 10).",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10 and BINV-Q 10 of 15. Fam-trastuzumab deruxtecan-nxki 5.4 mg/kg IV Day 1, cycled every 21 days (for 14 cycles in curative adjuvant residual setting; continuous until progression in metastatic setting).",
       "provenance": {
         "layer": "guideline",
         "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
         "version": "6.2026",
-        "date": null,
-        "locator": "BINV-Q 10 of 15, Fam-trastuzumab deruxtecan-nxki 5.4 mg/kg IV day 1, cycled every 21 days",
+        "date": "2026-07-29",
+        "locator": "BINV-M 7 of 10; BINV-Q 10 of 15",
         "evidenceStatus": "current"
       },
       "caps": {
