@@ -203,14 +203,30 @@ export function classifyResponse(resp) {
   return 'html';
 }
 
+/* Flatten one record to leaf fields. Objects AND arrays are walked (arrays indexed: `referenceRange.0.low.value`)
+ * so a value buried in a nested array - the FHIR shape, where a lab result's range is
+ * referenceRange[0].low.value - becomes a reachable field for value-based column learning, not an opaque
+ * JSON blob. Bounded: depth <= 4 and the first 8 elements of any array, so a large collection cannot explode
+ * the row. The whole array is also kept stringified under its own key, so a consumer that wants the raw list
+ * still has it. Deeper or overflow branches keep the old stringified form. */
 function flatten(obj, prefix, out, depth) {
-  if (depth > 2 || obj == null) return out;
-  if (typeof obj !== 'object' || Array.isArray(obj)) { out[prefix || 'value'] = Array.isArray(obj) ? JSON.stringify(obj) : String(obj); return out; }
+  if (depth > 4 || obj == null) return out;
+  if (typeof obj !== 'object') { out[prefix || 'value'] = String(obj); return out; }
+  if (Array.isArray(obj)) {
+    out[prefix || 'value'] = JSON.stringify(obj);
+    for (let i = 0; i < obj.length && i < 8; i += 1) {
+      const v = obj[i];
+      const name = (prefix ? prefix + '.' : '') + i;
+      if (v && typeof v === 'object') flatten(v, name, out, depth + 1);
+      else out[name] = v == null ? '' : String(v);
+    }
+    return out;
+  }
   for (const k of Object.keys(obj)) {
     const v = obj[k];
     const name = prefix ? prefix + '.' + k : k;
-    if (v && typeof v === 'object' && !Array.isArray(v)) flatten(v, name, out, depth + 1);
-    else out[name] = v == null ? '' : (Array.isArray(v) ? JSON.stringify(v) : String(v));
+    if (v && typeof v === 'object') flatten(v, name, out, depth + 1);
+    else out[name] = v == null ? '' : String(v);
   }
   return out;
 }
