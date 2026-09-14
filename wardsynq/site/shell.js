@@ -85,7 +85,14 @@
   }
 
   // ---- router ---------------------------------------------------------------------------------
-  function go(page, arg) { location.hash = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : ""); }
+  function go(page, arg) {
+    var target = "#/" + page + (arg ? "/" + encodeURIComponent(arg) : "");
+    if (location.hash === target) {
+      route();
+    } else {
+      location.hash = target;
+    }
+  }
   /* Two-step sign-in: the PIN or password was right, and the account wants a code from the phone. The
    * server's answer is passed through untouched, so a wrong code reads as a wrong code, not a PIN. */
   function secondStep(r) {
@@ -132,7 +139,13 @@
     if (PAGES[r.page]) return render(r.page);
     return render("home");
   }
-  function workstationUrl() { return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(st.org.connectTenantId || "") + "&site=1"; }
+  function workstationUrl() {
+    var t = st.org && st.org.connectTenantId;
+    if (isDemo(st.org) || !t || t === "none" || t === "undefined" || t === "null") {
+      return "/wardsynq/ui/wardsynq.html?site=1" + (isDemo(st.org) ? "&demo=1" : "");
+    }
+    return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(t) + "&site=1";
+  }
   function whoami() {
     return api("/whoami" + (st.orgId ? "?orgId=" + encodeURIComponent(st.orgId) : "")).then(function (r) {
       if (!r || !r.ok) {

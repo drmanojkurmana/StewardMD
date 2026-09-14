@@ -48,8 +48,11 @@ async function openRecordDeployment(opts) {
 /** Reads `?record=<tenantId>` (and `&patient=<id>`), the opt-in every WardSynQ page shares. */
 function recordParams(search) {
   const q = new URLSearchParams(search || (typeof location !== "undefined" ? location.search : ""));
-  const tenantId = q.get("record");
-  return tenantId ? { tenantId, patientId: q.get("patient") || null } : null;
+  const tenantId = (q.get("record") || "").trim();
+  if (!tenantId || tenantId === "none" || tenantId === "null" || tenantId === "undefined" || q.get("demo") === "1") {
+    return null;
+  }
+  return { tenantId, patientId: q.get("patient") || null };
 }
 
 /* The bearer the StewardMD shell exposes, when this page runs inside it. Null on a bare hospital PC

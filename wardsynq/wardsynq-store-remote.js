@@ -124,7 +124,11 @@ class RemoteBackend {
       }
     }
     if (status !== 200 || !data || !data.ok) {
-      throw new RemoteStoreError(`record service refused to open (${status})`, status === 401 ? "UNAUTHENTICATED" : status === 403 ? "FORBIDDEN" : status === 404 ? "NOT_AVAILABLE" : "OPEN_FAILED", status, data);
+      const code = status === 401 ? "UNAUTHENTICATED" : status === 403 ? "FORBIDDEN" : status === 404 ? "NOT_AVAILABLE" : (!data ? "NOT_AVAILABLE" : "OPEN_FAILED");
+      const msg = !data && status === 200
+        ? "record service returned non-JSON response (200)"
+        : `record service refused to open (${status})`;
+      throw new RemoteStoreError(msg, code, status, data);
     }
     this.descriptor = data;
     this._opened = true;

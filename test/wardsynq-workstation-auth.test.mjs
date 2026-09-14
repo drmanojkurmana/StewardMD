@@ -10,7 +10,7 @@
 import { test, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
 
-import { shellToken } from "../wardsynq/ui/record-deployment.js";
+import { shellToken, recordParams } from "../wardsynq/ui/record-deployment.js";
 import { RemoteBackend } from "../wardsynq/wardsynq-store-remote.js";
 
 const SAVED = {};
@@ -139,4 +139,32 @@ test("RemoteBackend._request() force-refreshes the Firebase token and retries on
   assert.equal(out2.status, 401);
   assert.equal(n, 2);
   assert.equal(refreshed, 1);
+});
+
+test("recordParams() returns null for sentinel tenant values and demo mode", () => {
+  assert.equal(recordParams("?record=none"), null);
+  assert.equal(recordParams("?record=undefined"), null);
+  assert.equal(recordParams("?record=null"), null);
+  assert.equal(recordParams("?record="), null);
+  assert.equal(recordParams(""), null);
+  assert.equal(recordParams("?record=gimsr&demo=1"), null);
+  assert.equal(recordParams("?site=1&demo=1"), null);
+});
+
+test("recordParams() parses valid tenant and patient IDs", () => {
+  assert.deepEqual(recordParams("?record=gimsr"), { tenantId: "gimsr", patientId: null });
+  assert.deepEqual(recordParams("?record=gimsr&patient=p-1"), { tenantId: "gimsr", patientId: "p-1" });
+});
+
+test("RemoteBackend.open() throws NOT_AVAILABLE when the server returns 200 HTML / non-JSON", async () => {
+  globalThis.window = {};
+  // res.json() throws, as it does for a Cloudflare Pages 200 HTML fallback page.
+  const fetch = async () => ({ status: 200, json: async () => { throw new SyntaxError("Unexpected token '<'"); } });
+  const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch });
+  await assert.rejects(() => b.open(), (err) => {
+    assert.equal(err.code, "NOT_AVAILABLE");
+    assert.equal(err.status, 200);
+    assert.match(err.message, /non-JSON response \(200\)/);
+    return true;
+  });
 });
