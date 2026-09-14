@@ -28,6 +28,7 @@ import { operationOutcome } from "../../_wardsynq/fhir.js";
 import { fhirResponse, dispatchRead, dispatchBulk, negotiateVersion, isBulkPath, answerInVersion, contentTypeFor } from "../../_wardsynq/fhir-route.js";
 import { exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
+import { notifyDepsFor } from "../../_wardsynq/alert-deps.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { practitionerRead } from "../../_wardsynq/fhir-identity.js";
@@ -149,7 +150,7 @@ export async function onRequest(context) {
         try {
           const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${migration.tenantId}`, limit: 1, windowMs: 120000 });
           if (!gate.allowed) return;
-          await runTick(ctx.recordDeps.repository, migration.tenantId, { policy: (org.wardsynq && org.wardsynq.criticalEscalation) || null, notifyDeps: {}, consumers: exportConsumers({ repository: ctx.recordDeps.repository, tenantId: migration.tenantId, store: documentStoreFromEnv(env), env }) });
+          await runTick(ctx.recordDeps.repository, migration.tenantId, { policy: (org.wardsynq && org.wardsynq.criticalEscalation) || null, notifyDeps: notifyDepsFor(env, org, migration.tenantId, ctx.recordDeps.repository), consumers: exportConsumers({ repository: ctx.recordDeps.repository, tenantId: migration.tenantId, store: documentStoreFromEnv(env), env }) });
         } catch (e) { console.error("wsq tick failed", migration.tenantId, String((e && e.message) || e).slice(0, 200)); }
       })());
     }
