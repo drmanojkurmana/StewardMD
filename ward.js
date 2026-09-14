@@ -3065,8 +3065,8 @@
       "</div>" +
       '<label class="w-f"><span>Reason (required)</span><input id="wAdjReason" type="text" autocomplete="off"></label>' +
       '<div class="w-actions">' +
-      '<button class="w-btn warn" data-w-act="stockadjust">' + ms("edit") + "Adjust</button>" +
-      '<button class="w-btn warn" data-w-act="stockwaste">' + ms("delete") + "Wastage</button>" +
+      '<button class="w-btn go" data-w-act="stockadjust">' + ms("edit") + "Adjust</button>" +
+      '<button class="w-btn go" data-w-act="stockwaste">' + ms("delete") + "Wastage</button>" +
       "</div></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>Reconciliation</h3></div>" +
@@ -4328,7 +4328,7 @@
       '<label class="w-f"><span>To (ISO)</span><input id="wBoTo" type="text" autocomplete="off"></label>' +
       '<label class="w-f"><span>Reason</span><input id="wBoReason" type="text" autocomplete="off"></label>' +
       "</div>" +
-      '<button class="w-btn warn" data-w-act="blackoutadd">' + ms("block") + "Block period</button></div>";
+      '<button class="w-btn go" data-w-act="blackoutadd">' + ms("block") + "Block period</button></div>";
   }
 
   /* TASK 4.7: the cashier workstation. wardsynq-invoice.js already enforces every rule that
