@@ -565,7 +565,7 @@ Admin "Security review" tab (STAFF_ADMIN, doctor/nurse 403): chart-access anomal
 
 ### 2026-09-13 - P2.3 surveillance + P2.2 copilot tasks, P2.9 patient portal merged
 
-Surveillance board (ward): deterministic signals with evidence links (deterioration trend, sepsis screen, critical lab trend, overdue care, medication risk needs highAlertDrugs/orderVerifyWithinHours config - "not evaluated" otherwise), append-only acknowledgement, raise as incident signal. Copilot: 8 MaiK tasks with record facts shown apart from reasoning; outage = no answer. Portal: wardsynq.com/portal.html (live 200) - patient and proxy access with grants, audited proxy reads, released-only data, messages, consent withdraw (non-treatment); staff "Patient portal" tile; needs wardsynq.patientAccess.enabled per hospital. Not built: queue status, released documents, full discharge summary in portal. Live shell 34, ward.js site66. 6328 passing.
+Surveillance board (ward): deterministic signals with evidence links (deterioration trend, sepsis screen, critical lab trend, overdue care, medication risk needs highAlertDrugs/orderVerifyWithinHours config - "not evaluated" otherwise), append-only acknowledgement, raise as incident signal. Copilot: 8 MaiK tasks with record facts shown apart from reasoning; outage = no answer. Portal: wardsynq.com/portal.html (live 200) - patient and proxy access with grants, audited proxy reads, released-only data, messages, consent withdraw (non-treatment); staff "Patient portal" tile; needs wardsynq.patientAccess.enabled per hospital. Queue status, released documents and full discharge summary in portal built 2026-09-14 (branch p2-portal-gaps). Live shell 34, ward.js site66. 6328 passing.
 **Next P2:** offline-first (P2.4), FHIR platform depth (P2.5), India profile (P2.6), multilingual (P2.7), voice notes (P2.8), hospital intelligence (P2.10), specialty framework + pathways (P2.11/2.12), developer platform (P2.13), multi-hospital (P2.14), UX bar (P2.16).
 
 ### 2026-09-13 - P2 builders completed: P2.12/2.11 pathways & specialty, P2.6/2.7 India & multilingual, P2.4 offline-first
@@ -608,3 +608,131 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Regression 6459 pass, 0 fail, 1 skipped. Reachability 0 without a screen, 22 without a test. Live ward.js site74, admin.js 19.
 **P2 remaining:** P2.5 depth (terminology service, Subscription, IPS, Consent/AuditEvent as FHIR, R4B/R5), P2.13 SMART app registration UI for third parties, P2.16 doctor keyboard shortcuts and tablet nurse layout, and the 22 routes without a test.
 
+### 2026-09-14 (night) - P2.16 keyboard and tablet, P2.5 FHIR depth, three Muse follow-ups
+
+- P2.16 (p2-ux-speed): ward keyboard layer (/ search, g w/c/l, n/o/r/v on a chart, ? sheet, Esc), never fires while typing, never bound to a write (test fails on any non-GET), aria labels on icon buttons, focus ring. Tablet 768-1180 px: 44 px targets, sticky "next due" (says "not known" when a dose was unreadable), two-pane round in landscape; headless check test/run-ward-tablet-ui.mjs 35/35.
+- P2.5 (p2-fhir-depth): terminology (CodeSystem/ValueSet, $expand, $validate-code; external systems served only as flagged fragments), Patient/$summary IPS (emptyReason vs unavailable vs withheld), AuditEvent (system/ or admin only, reading audited), Consent tests, FHIR Subscription notifications on the webhooks outbox; Admin > FHIR tab and chart "IPS summary". docs/FHIR_STRATEGY.md: R4 only for now. Not built: R4B/R5, IPS immunizations (no source type), Subscription create over FHIR.
+- Muse (muse-spark-1.3, reviewed and verified here): webhook secret rotation keeps the old secret valid 24 h (dual signature); bulk export records file keys before writing so failed runs cannot orphan encrypted files (failed and stalled jobs now delete files); hospital groups can have several administrators (last one cannot be removed).
+- Regression 6515 pass, 0 fail, 1 skipped. Reachability 0 without a screen. Live admin.js 22, ward.js site76.
+**P2 remaining:** 22 routes without a test (builder running), SMART third-party app registration screen, R4B/R5 when a partner needs it. Owner items unchanged.
+
+### 2026-09-14 (late) - every route has a test; three bugs they found; SMART apps screen; no em dash
+
+- Tests for the last 22 routes (tests/remaining-routes). Bugs fixed: maternity status/MEOWS/blood-loss/delivery swallowed failed reads and answered ok (now 502, and the screen shows each failure and hides the delivery form when delivery state is unknown); POST /room/update had no hospital ownership check; loadSessionFor refusals threw a raw 500 on 11 session routes. Reachability: "Every route has a screen and a test."
+- Muse: Admin > Integrations > Connected apps (SMART) registers clients in wardsynq.fhir.smart with strict validation, private JWKs refused, removal revokes live tokens; em dash removed from app-facing text with test/wsq-no-emdash.test.mjs.
+- Flaky outbound test fixed (T0 fixed one second after load; under load later deliveries were never due).
+- Regression 6552 pass, 0 fail, 1 skipped. Live admin.js 23, ward.js site78.
+**In progress:** P2.17 security scanning plus penetration test plan (Muse), P2.17 tamper-evident audit chain with database-level immutability (builder). After these, P2 is complete except R4B/R5 (deferred by docs/FHIR_STRATEGY.md) and owner items.
+
+### 2026-09-14 (evening, 2) - P2.17 security scan and tamper-evident audit trail live
+
+- Security scan (Muse, two rounds): scripts/security-scan.mjs in its own CI job. Current tree: 0 findings, 16 public-by-design values recognised by SHA-256 fingerprint, 2 dependency advisories reported as non-blocking WARN for the owner (@xmldom/xmldom GHSA-6gmq-8vp8-gcm6, brace-expansion GHSA-rgw5-rvv9-x895). docs/PENETRATION_TEST_PLAN.md written; the test itself has not been done.
+- Audit trail (p2-audit-immutable): wardsynq_audit_chain hash-links every clinical audit row in the same batch; BEFORE UPDATE/DELETE triggers on connect_audit_event and the chain table. Verification in Admin > Security review and System health. auditRetentionYears informational (India default 3 years per IMC 1.3.1). Also fixed a double-admission bed race in claimBed (2-minute in-flight window).
+- Deploy order followed: schema applied to production D1 (stewardmd-connect) BEFORE the code, after a local wrangler D1 run confirmed the triggers parse and refuse DELETE. Production now shows both tables' triggers and the chain table.
+- Post-deploy: /api/queue/ready 200. No production writes since deploy (last audit row 07:57Z), so the chain is still empty in production. Verified instead on workerd's D1 (wrangler getPlatformProxy) with the real D1Repository: writes, multi-audit batch, auditOnly and two racing writers gave "Intact: all 6 chained rows checked", and DELETE was refused. Watch: first production writes should show wardsynq_audit_chain rows equal to new audit rows.
+- Not built: anchoring the chain head outside the database (a DB-level attacker can rebuild the chain or truncate its tail), chaining the Firestore org/staff audit, retention deletion.
+- Regression 6593 pass, 0 fail, 1 skipped. Every route has a screen and a test. Live admin.js 24.
+**Remaining for P2:** exit evidence document (Muse, paused on quota until 11:47Z), then owner items only.
+
+### 2026-09-14 - P2 COMPLETE (engineering), owner items open
+
+- docs/emr-gap-analysis/P2_EXIT_EVIDENCE.md: all nine P2 exit criteria with verified screens, routes and quoted tests. Verdicts: 8 MET WITH LIMITS, 1 MET (modules without destabilising the core); none NOT MET. Limits are named per row.
+- Reachability checker fix: it walked dist-wardsynq/ (build output) and counted stale copies as screens; now skipped. Honest count: 23 screens, 423 routes, 0 without a screen, 0 without a test.
+- Production audit chain: schema and code live; no production writes since the 11:10Z deploy, so the first live links are still to be observed (hourly check armed).
+- Update later the same day: portal gaps closed (p2-portal-gaps) and the audit chain head anchored outside D1 (Muse). See the next entry.
+- Open, owner only: document bucket (DOC_S3_*), payment provider credentials, notification channel, payer endpoint and credentials, PACS viewer URL template, cloud speech decision for voice typing, two dependency advisories (@xmldom/xmldom, brace-expansion), penetration test to commission (plan in docs/PENETRATION_TEST_PLAN.md), FHIR R4B/R5 when a partner needs it. Owner confirmations requested: hospital-group counts computed by an audited system read authorised by owner acceptance; recording-dot/admin pill/portal Revoke colours.
+
+
+### 2026-09-14 (night) - portal gaps closed; audit chain anchored outside the database
+
+- Portal (p2-portal-gaps): queue status (own tickets only, people ahead as a count, stored ETA or "No estimate", ambiguous MRN link shows "ask at the desk"; POST /api/portal/queue audited); released documents (clinician releases an exact version from Chart > Documents via POST /ward/document-release, emr.treat; portal download via POST /api/portal/document streams bytes only if released, current and within retention, audited before sending); full discharge summary (clinician chooses patient copy or full at release; while any result is withheld or a diagnosis is differential, Tests/Assessment/Diagnoses stay withheld). Proxies get the new sections only when granted. 19 new tests, headless portal check 25/25.
+- Owner decisions: the OPD queue has no token numbers (portal shows people ahead, not a token); full-summary withholding is per section, not per result (needs structured summary storage to refine); portal's older sections are still English-only.
+- Audit anchors (Muse): chain head copied to KV hourly; rewritten/truncated after an anchor shows in System health and Security review. Owner acknowledgement of a legitimate restore is being built (Muse).
+- Regression 6620 pass, 0 fail, 1 skipped. Every route has a screen and a test. Live portal.js 2, ward.js site79, admin.js 25.
+
+### 2026-09-14 (night, 2) - OPD token numbers; owner-confirmed restore
+
+- Token numbers (opd-token-numbers): per hospital, per OPD day, per scope (default whole hospital; department scope with 1-3 character prefixes set in Admin > Hospital). Counter and ticket written in one compare-and-set commit (no burnt numbers, no ticket without a token; 5 retries then 409 token_contention). Stable across move, reassign, priority and send-back; cancelled numbers never reused; new day restarts at 1; no backfill. Shown on desk, doctor queue, OPD console, waiting-hall display (token only, names removed), patient portal ("Your token") and SMS/WhatsApp text (no PHI).
+- Notes: no recall out of no-show exists (no_show is terminal); department scope without prefixes can repeat numbers across departments (admin card warns); native app not rebuilt.
+- Audit anchor acknowledgement (Muse): hospital owner or platform owner only, reason plus incident reference, old anchor log archived, acknowledgement chained.
+- Regression 6640 pass, 0 fail. Every route has a screen and a test. Security scan 0 findings.
+
+### 2026-09-14 (night, 3) - owner answers recorded; portal languages ready for translation; outbox status read
+
+- Owner answered S1-S7, D1-D14, G1-G15 (top of HANDOVER_2026-09-14.md); build waves in OWNER_ANSWERS_BUILD_PLAN.md.
+- D6: one file per portal language (en in i18n.js; es, te, hi, bn, kn, ta, ml in wardsynq/site/i18n/), switch on every portal section listing all eight, only the chosen file loads (offered codes only). Antigravity brief: docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md (154 English keys).
+- G1 (Muse): outbox drain and health read waiting events by status; idx_wardsynq_record_outbox_status applied to production D1 first. D2 (Muse): @xmldom/xmldom 0.9.12, brace-expansion 5.0.9. G15: no dead tr.warn CSS existed (the warn rows are unstyled; D8 work); CI already runs the security scan.
+- Disk was full (0.6 GB); 19 merged clean agent worktrees removed (18 GB free). Old muse-* worktrees still hold unstaged copies of merged work.
+- Regression 6653, 0 fail after two tests updated for the language split. Every route has a screen and a test. Live portal.js 5, i18n.js 4.
+
+### 2026-09-14 (night, 4) - connectors, per-entry withholding, FHIR R4B/R5, immunizations
+
+- Connectors (S2/S4/S5/S7): Admin > Integrations cards for payment gateway (manual, Razorpay, Stripe), payers/TPA (FHIR Claim, NHCX envelope only, manual) and DICOMweb (server-side test connection); credentials sealed, shown once; cashier online payment link; POST /api/queue/payment-callback/<org> marks paid only after signature, gateway read-back and exact amount/currency, else flagged. PHI to AI only via Vertex (wardsynq.maik.phiApproved). Not live-tested against any real gateway, PACS or payer; NHCX needs onboarding.
+- D5/G5: full discharge summary withholds entry by entry (open critical loop, preliminary, never-release test, differential/refuted diagnosis); assessment, rewritten sections and older summaries still withheld whole; staff preview uses the portal renderer. Chart > Documents lists portal releases per version.
+- G6/G9/G10/D9: Immunization record, chart screen, FHIR and IPS section; ward Group $export with POST kick-off and Admin downloads; FHIR Subscription create and $status; R4B and R5 by fhirVersion (R5 for Patient, Encounter, Observation, Condition, AllergyIntolerance, MedicationRequest, Immunization; 406 elsewhere).
+- S3/S6 designs merged (S3_UNIFIED_WARD_APP_DESIGN.md, S6_ABDM_INTEGRATION_DESIGN.md). Found: no critical result reaches a phone today; escalation runs only while the ward is open; ICU push shows value and bed on the lock screen. Owner questions O1-O5, A1-A5 open (O1 Pro paywall deadline 2026-09-15 23:59 IST).
+- Regression 6724, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site83, admin.js 29, shell.js 37, portal.js 6, i18n.js 5.
+
+### 2026-09-14 (night, 5) - owner answers O1-O5 and A1-A5; Pro gate off for hospital staff; ABDM profile; alerts to phones
+
+- O1: POST /api/ghis/login no longer calls requirePro (hospital credentials are the entitlement); live before the promo ends 2026-09-15 23:59 IST.
+- S6 A1: Admin > Integrations > ABDM card, profile stored as the `abdm` connector on the shared StewardMD bridge (A1); production linking shown blocked until India hosting (A2); A4 and A5 recorded.
+- S3 P0: critical results pushed to clinicians via the existing StewardMD push (O2), no patient name in push or SMS, bed and ward allowed (O3), SMS fallback via 2Factor with per-hospital DLT template (O4; TWOFACTOR_API_KEY present in Pages), default ladder approved by Dr Manoj Kurmana (O5). Off until a hospital turns on wardsynq.alerts.push.enabled. Worker stewardmd-api deployed with */5 cron to /api/queue/ops/tick-all (UPDATES_ADMIN_TOKEN present). Nurse-in-charge has no role marker, so level 2 tells every nurse on duty in the ward; app client (P1: register-member caller, thin payload handling) not built, so phones receive nothing until P1 ships.
+- A3: ABDM v3 branch merge in progress on abdm-v3-merge (sandbox ABDM vars kept out of wrangler.toml).
+- Regression 6768, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site84, admin.js 31.
+
+### 2026-09-14 (night, 6) - ABDM v3 branch merged (owner A3)
+
+- origin/feat/abdm-v3-reconcile merged into wardsynq-product (merge 6cc399e1): one SCCM 1.1 with five collections, one ABDM_ENV scheme with sandbox identity in config.js only (no ABDM vars in wrangler.toml), production gateway calls refused (A2), consent route sends the doctor registration number, V3 HIU data push lands through makeConsumeAndLand (shape UNCONFIRMED), received immunizations filed as Immunization, external invoices as a clinical note (not money owed; owner to confirm). A5 role table recorded, enforced with the ABHA desk phase.
+- Production D1: db/connect_abdm_schema.sql applied (connect_abdm_enrol_consent, connect_abdm_demographic added) and scripts/abdm-migrate.mjs --apply added consent_request_id and last_fetched_at; re-plan reports current.
+- The branch owner session should rebase any further ABDM work on wardsynq-product.
+- Regression 6796, 0 fail (plus 2837 ABDM/connect tests in the merge worktree). Every route has a screen and a test. Security scan 0 findings.
+
+### 2026-09-14 (night, 7) - OPD department tokens, no-show recall, clinical settings, seed sign-off, group snapshots
+
+- D7 B: department picker at check-in, rooms carry a department, tokens keyed by departmentId with alias names; hall display groups by department; SMS names the department. D14: department numbering refuses a department without a prefix (Admin save and registration). D13: No-show then recall within 4 hours with the same token, reason required, audited.
+- D11 A: Admin > Hospital > Clinical settings card (template ships no clinical values). Fix: orderVerifyWithinHours was dropped by the org whitelist, so the pharmacy-verification surveillance rule never ran.
+- D10: Admin > Clinical seed data lists every seed item as UNAPPROVED; only the platform owner can sign in the name of Dr Manoj Kurmana; nothing signed yet. D4 B: hospitals publish group counts; overview shows who and when, Stale after the group age, "Not published" never zero.
+- App pages (queue.js, patient-register.js, root index.html, opd.html) reach phones only after a native rebuild or OTA; opd-display.html and queue.html are live on push.
+- Regression 6832, 0 fail; headless OPD run 14/14. Every route has a screen and a test. Security scan 0 findings. Live admin.js 32.
+
+### 2026-09-14 (night, 8) - S3 P1: the app opens critical alerts
+
+- App (flag smd_wsq_push, default off): tapping a v:2 push opens a non-dismissable alert screen that fetches detail after app lock, shows patient, ward, bed and result; Acknowledge needs what was done and reports success only on a written record; decline; cross-hospital alert asks to switch and shows nothing. Phones bind to a hospital on workplace pick or staff sign-in, rebind on token refresh, unbind on staff sign-out (new POST /api/push/unregister-member, audited). hospital-auth.js: a staff token is sent only to the hospital it was issued for (ward.js).
+- Reaches phones only after build-www, cap sync and OTA or native rebuild; then per device flag plus wardsynq.alerts.push.enabled per hospital.
+- Follow-ups: notice detail route should take the workplace orgId and 404 before reading; queue.js and discharge.js still choose credentials the old way; account sign-out does not unbind; Admin no-phone list is per sent alert, not live registrations.
+- Regression 6848, 0 fail; headless alert screen all pass. Every route has a screen and a test. Security scan 0 findings. Live ward.js site85.
+
+### 2026-09-14 (night, 9) - G2 offline bedside writes, G7 trends history, G8 webhook edit and log
+
+- G2: vitals, nursing task done, notes, dose steps, ICU records and fluid entries are kept on the device when offline, shown as "saved on this device, not yet sent: it is NOT in the record"; after reconnect a conflict or changed order opens a review (resend with reason, edit, discard), each choice audited via POST /ward/offline-resolve before the device acts. /ward/mar refuses order_changed when the order version moved (also for online rounds loaded before a change). ward-offline.js now loads in the app and the site.
+- G7: length of stay by ward segment from encounter versions; past bed occupancy by the ward the patient was on and bed history; unknown shown as unknown with a reason, never zero. Beds registered before today counted from their creation time.
+- G8: Integrations: change a webhook address (same checks, secret unchanged, audited host only) and a per-webhook delivery log, paged.
+- Headless: offline conflict, alert screen and ward golden path pass on the merged code. Regression 6868, 0 fail (also after merging main). Every route has a screen and a test. Security scan 0 findings. Live ward.js site87, admin.js 33, shell.js 38.
+
+### 2026-09-14 (night, 10) - audit trail G3/G12/G11/G4, screen polish G13/G14/D8, event-log writers fixed
+
+- G3: every q_events row (sign-ins, staff and settings changes, queue, group acts) is hash-chained per hospital in the same commit; Security review and System health verify the newest rows and name unlinked ones. G12: clinical and event-log chain heads anchored hourly in KV and Firestore (AnchorStore port for S3 at the AWS move); a disagreement between anchors is its own finding. System health reads degraded until the first Firestore anchor is written. G11: out-of-assignment reads judged against the ward the patient was on at the time, one person across sign-in methods, clickable audit rows (GET /ward/audit-rows). G4: scripts/audit-chain-live-check.mjs.
+- G13: ward repaint keeps scroll and focus, warnings take focus. G14: nursing panel two panes at tablet width. D8: warning rows styled, contrast tests for signal washes.
+- Fix found at merge: the group store and three writers from other branches (org clinical settings, no-show recall, seed sign-off) still wrote q_events directly, so publish-counts and stale-after failed and the others would have shown as chain breaks. All go through appendOrgAudit; test/q-events-only-through-chain.test.mjs guards it.
+- Headless tablet, offline conflict, golden path and alert screen pass. Regression 6900, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site88, admin.js 35.
+
+### 2026-09-14 (night, 11) - S3 P1 follow-ups; Antigravity translation work under review
+
+- GET /api/push/notice/<nid> requires the workplace orgId and 404s before reading or logging on a mismatch; queue.js and discharge.js pick credentials through hospital-auth.js; StewardMD account sign-out unbinds the phone first (failure recorded, never claimed removed); Admin phones list reads live DeviceDirectory registrations. App-side parts need an app update; old app builds get 404 on notice detail (push feature is flag-off by default).
+- Antigravity finished its multilingual branch feat/wardsynq-multilingual-emr (local, 4 commits on 79aa6bed, before the per-language split): rewrote i18n.js with 8 languages (Marathi instead of Spanish), a staff shell switcher, terminology engine, dual-presentation rx print and translation guard. Being safety-reviewed and ported onto the per-language files on branch d6-antigravity-integrate; nothing from it is live yet.
+- Regression 6911, 0 fail (run in 4 chunks after two low-memory kills). Every route has a screen and a test. Security scan 0 findings. Live admin.js 36.
+
+### 2026-09-14 (night, 12) - Antigravity translations reviewed; nine portal languages
+
+- Antigravity branch feat/wardsynq-multilingual-emr reviewed: its code (rx-print, terminology engine, translation guard, detectLanguage, i18n.js rewrite, staff switcher, rulebook) rejected on clinical safety (frequencies dropped from prints, PRN shown as SOS, US date parse, sepsis as blood poisoning, US-only ICD-10-CM codes, a safety validator that passes mg/mcg and negation errors, unreviewed text marked verified) and because no screen used it. Findings in docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md.
+- Kept translations only: Telugu 152 portal keys; Tamil, Kannada, Malayalam, Bengali, Marathi a few labels; Spanish English fallback. Marathi offered (owner): nine languages. All reviewed:false. Tests: negation markers kept in safety-critical keys, numbers identical to English, no network or AI-translation wording in catalogs.
+- Regression 6914, 0 fail; headless portal all pass. Every route has a screen and a test. Security scan 0 findings. Live i18n.js 6, portal.js 7.
+- Owner questions open: staff UI translation scope; who does native clinical review; patient-language prescription and discharge prints (fresh build, English source of truth, off by default); hide partly translated languages or not.
+
+### 2026-09-14 (night, 13) - explicit tenant policies: external ABDM invoices, level-2 nurse alerts
+
+- wardsynq.abdm.externalInvoiceHandling = "clinical-document" (only value; absent = default; other values 422). ABDM landing reads the hospital setting, names policy, value and source on each landed external-invoice audit row, and refuses to write Invoice, Claim, PreAuthorisation or CostEstimate whatever the mapping produces; billing report and patient invoice list count zero. Shown read-only on Admin > Integrations > ABDM.
+- wardsynq.criticalEscalation.level2NurseRule = "all-on-duty-nurses-in-ward" (only value; absent = default; other values 422 on org and group policy saves). One resolver switch in alert-recipients.js enforces nurse role, on duty now and the patient ward; the loop records {rule, source, ward, nurses, recipients}; empty set is NO_RECIPIENT. Shown read-only on the Critical result alerts card with "Applies until a Nurse-in-Charge role or assignment is implemented".
+- Open: a patient with no ward still uses hospital-wide cover, so level-2 nurses come from every ward (owner to decide).
+- Regression 6931, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live admin.js 37, abdm.js 2.

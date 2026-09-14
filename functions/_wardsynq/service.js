@@ -166,6 +166,9 @@ const RESOURCE_TYPES = Object.freeze([
    * changes anything for the patient - so the actions and what was done about them live on the
    * record beside the number. */
   "RiskAssessment",
+  /* A vaccine given, or considered and deliberately not given. Append-only so an entry later found
+   * to be wrong is withdrawn as a new version and stays readable (immunization.js). */
+  "Immunization",
   /* Sending a prescription somewhere, and knowing whether it arrived. A DELIVERY fact, never a
    * clinical one: nothing here touches the MedicationOrder, because "we sent this" is a statement
    * about a message, not about the treatment. */
@@ -655,6 +658,23 @@ class RecordService {
   }
 
   /**
+   * The version histories of many records of one type, for a measure over a roster (trends reads where
+   * each stay was, day by day). One read grant check and ONE audited list row, like list(), rather than
+   * a row per record. A history that could not be read is null in the answer, never an empty history.
+   */
+  async histories(resourceType, ids) {
+    this._assertType(resourceType);
+    this.governed._assertRead(this.actor, resourceType);
+    const list = [...new Set((ids || []).map(String))], out = new Map();
+    for (let i = 0; i < list.length; i += 8) {
+      const got = await Promise.allSettled(list.slice(i, i + 8).map((id) => this.repository.history(this.tenantId, resourceType, id)));
+      got.forEach((g, k) => out.set(list[i + k], g.status === "fulfilled" ? g.value : null));
+    }
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.list", { scope: { resourceType, history: true, records: list.length }, resourceCounts: { [resourceType]: list.length } }));
+    return out;
+  }
+
+  /**
    * A roster: the latest version of every record of one type in this tenant. Capped, and audited
    * as a list rather than a read, because a ward list is the one legitimate cross-patient query.
    */
@@ -885,7 +905,8 @@ class RecordService {
         const patientId = entity.resourceType === "Patient" ? entity.id : (entity.patientId || null);
         const current = await self.repository.latest(self.tenantId, entity.resourceType, entity.id);
         const auditEvent = await self._audit("record.ingest", {
-          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system },
+          // opts.auditScope(entity): what the caller must say on this entity's audit row (the policy that decided it).
+          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system, ...((opts.auditScope && opts.auditScope(entity)) || {}) },
           resourceCounts: { [entity.resourceType]: 1 }, patientId,
         });
         auditEvent.actor = adapterActor.id;

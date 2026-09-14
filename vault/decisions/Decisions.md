@@ -1086,6 +1086,15 @@ test showed only a 23% gain from parallelism on an UNTHROTTLED session, so the p
 untested and worth measuring), or host the files closer to the user (R2, APAC). Do NOT reintroduce a
 foreground/background handoff. **Status**: reverted, background-only shipped.
 
+## 2026-08-19 · Recording a vaccination is its own capability
+`CAPS.EMR_IMMUNISE`, held by doctor + nurse + intern/resident (owner: "doctor + auth staff"). NOT `emr.treat` (the nurse usually gives the dose, so doctor-only would mean the doctor typing in someone else's act) and NOT `emr.vitals` (once a care context is linked to an ABHA it can never be withdrawn, so this can land permanently in a national health record). Reception/supervisor/cashier hold neither. **Status**: live behind `smd_opd_immunization` (def true, inside the already-gated OPD EMR surface).
+
+## 2026-08-19 · Clinical code lists are GENERATED from the IG, never hand-written
+`functions/_vaccines.js` is emitted by `scripts/gen-vaccines.mjs` from the NDHM IG's own `ndhm-vaccine-codes` value set; the server refuses any code outside it and always takes the display from the IG, never the request body. **Why**: a vaccine code in a patient's national health record is a clinical claim ABDM can never retract, and typing SNOMED from memory is how a wrong one ships - the generator's assertion caught HPV as `...109` vs the IG's `...103` on the first run. **Applies to**: any future coded clinical list (route, body site, billing codes). **Status**: live.
+
+## 2026-08-19 · Validate PROJECTIONS against the real validator, not just fixtures
+The HAPI/NRCES gate emits two extra bundles built from real product data (a `q_invoices` bill, an OPD vaccination) alongside the eight fixtures. **Why**: fixture ids are hand-written and happen to be legal - the first projected bundle failed with 3 errors because FHIR `Resource.id` forbids underscores and the billing store mints `inv_<hex>`. Fixed at `entryOf()` (the one funnel every resource passes through) and `validateNdhmDoc` now checks the charset, so the class is caught without a JDK. **Status**: live.
+
 ## Standing principles
 - **Reversible changes**: big/risky changes go behind a feature **flag** + a git **recovery point** (tag/branch); made permanent only after owner approval.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.
@@ -5653,3 +5662,665 @@ Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scal
   it now counts a wrong ART/NIBP source as a wrong value.
 - Dropped as unused (0 effect): "rpm" unit as RR label; merge keeping a full-image label over a garbled crop.
 - Bench: pixels retained only for regression cases (all-case retention exhausted memory).
+
+## 2026-09-14 Ward keyboard layer and tablet round (P2.16): shortcuts navigate, they never write
+
+- ONE DECLARATIVE MAP (`SHORTCUTS` in ward.js). Each entry focuses a field, shows the sheet, or sends an
+  existing navigation verb through `dispatch()`, the same path a click takes. No write verb is bound, ever:
+  a stray key at a bedside must not verify, give, acknowledge or sign. `test/ward-keyboard.test.mjs` runs
+  every entry on the list and on a chart and fails on any non-GET request.
+- NEVER WHILE TYPING. Inputs, textareas, selects and contenteditable swallow every shortcut; Escape there
+  only leaves the field. A shortcut that would repaint is refused while the screen holds unsaved typing,
+  because `paint()` replaces the overlay and discards uncontrolled values.
+- THE KEYBOARD YIELDS to the forced acknowledgement screen (`#wsq-alert`), the discharge summary and any
+  sheet that holds focus outside `#smdWard`.
+- FOCUS IS NOT RESTORED to the pressed button after a repaint. Considered and rejected: a second Enter would
+  repeat a write, and a reloaded round can put a different dose at the same index.
+- TABLET (768 to 1180 px) IS CSS plus two wrapper divs in the round: 44 px targets, a sticky header carrying
+  "next due", two panes in landscape. The next-due line is picked from the server's due times and the
+  display-only NEXT table; it names nothing for an empty round and no dose at all when any dose was unreadable.
+## 2026-09-14 FHIR depth (P2.5): terminology from what the hospital holds, IPS that tells empty from unreadable, AuditEvent and Subscription as views
+
+`functions/_wardsynq/fhir-terminology.js`, `fhir-ips.js`, `fhir-audit.js`, `fhir-subscription.js`, wired in
+`fhir-route.js` so both doors (`/api/queue/ward/fhir/...`, `/api/fhir/{org}/...`) answer the same paths.
+Screens: Admin Center "FHIR" tab, Integrations webhook payload choice, ward chart "IPS summary".
+Tests: `test/wardsynq-fhir-terminology.test.mjs`, `-ips`, `-subscription`. Strategy: `docs/FHIR_STRATEGY.md`.
+- STILL R4 ONLY. R4B/R5 not served until a per-version mapper and validator exist; see the strategy doc.
+- TERMINOLOGY IS A VIEW, NOT A RELEASE. The hospital's order-set investigations, formulary and the allergy
+  class seed are our code systems (content complete; the seed is draft/experimental because it is unapproved).
+  LOINC, HL7 systems and hospital-loaded codes (`wardsynq.terminology.codeSystems`) are served as FRAGMENTS under
+  their owners' URIs and every expansion carries a warning. Hospital value sets come from
+  `wardsynq.terminology.valueSets` (no new config key: `terminology` was already whitelisted); a code named but
+  not held is left out and named. SNOMED CT/ICD with nothing loaded are not served at all. The external ICD
+  D1 (`/api/icd`) is deliberately not exposed as a CodeSystem: it is a search aid, not a vocabulary we version.
+- IPS: required sections always present. Readable and empty = emptyReason TEXT ONLY ("none recorded"), no
+  list-empty-reason code, because a record with no allergy rows is neither `nilknown` nor `notasked`. A failed
+  or refused read = emptyReason `unavailable`/`withheld` and no entries even if a sibling source read fine.
+  No IPS profile in meta: nothing validates against it. Immunizations omitted: no canonical type. Results capped
+  at the newest 100, said in the section text.
+- AUDITEVENT: the security review's evidence envelope only, never resourceCounts/latency. SMART `system/`
+  scope or staff.admin + a clinical actor; never patient/ or user/. The read is itself audited and refused if
+  that audit write fails. Action words are our own `urn:stewardmd` codes, not mapped onto DICOM. Read by id
+  scans the newest 20000 rows (ponytail; search with date= reaches older).
+- CONSENT was already exported from PatientConsent; now pinned by tests on both doors.
+- SUBSCRIPTION IS THE WEBHOOK, NOT A SECOND DELIVERY SYSTEM. A webhook registered with payload
+  `fhir-id-only` gets the R4 backport id-only notification Bundle (same outbox, signature, retries,
+  auto-disable) and is shown read-only as one Subscription per event type (`<endpoint>.<event>`, criteria
+  `urn:stewardmd:fhir:SubscriptionTopic:<event>`). No FHIR create and no `$status`: management stays on the
+  Integrations screen where the address checks and the secret live. `event-number` carries the outbox event id,
+  not a per-subscription sequence (no counter exists); a receiver needing strict sequence cannot rely on it.
+
+## 2026-09-14 Immutable audit retention (P2.17): triggers refuse, a hash chain detects, nothing deletes
+
+`functions/_wardsynq/audit-chain.js` (chain, `verifyAuditChain`, `auditRetentionSetting`), both repositories
+(`repository.js` MemoryRepository, `repository-d1.js`), triggers in `db/connect_schema.sql`, chain table in
+`functions/db/wardsynq_schema.sql`. Screens: Admin Center > Security review (Audit retention > Tamper evidence),
+System health ("Audit trail integrity"). Tests: `test/wardsynq-audit-chain.test.mjs`. Restore notes: `docs/BACKUP_DR.md` 1a.
+- PREVENTION IS THE DATABASE, EVIDENCE IS THE CHAIN. BEFORE UPDATE/DELETE triggers on `connect_audit_event`
+  (whole table: Connect/ABDM already promise no UPDATE/DELETE) and on the chain table. The chain catches what
+  goes around them (dropped trigger, console, restore, import).
+- THE HEAD IS ANCHORED OUTSIDE THE DATABASE. The background tick copies the head (`{seq, hash}`) at most once
+  an hour per hospital into KV `wsq:auditanchor:<tenantId>` (last 200 `{seq, hash, at}`, no expiry), a separate
+  trust domain from D1. `anchorHead`/`checkAnchors` in `audit-chain.js` take an injected KV-shaped store, so the
+  domain logic has no platform coupling. System health ("Audit trail integrity") and the Security review compare
+  every anchor against the row it names: a rebuild after an anchor reads `rewritten` (names the seq), a removed
+  tail reads `truncated` (head below an anchored seq). An older anchor is never overwritten by a different hash
+  for the same seq; that conflict is itself the finding. A failed anchor write never fails the tick or a clinical
+  write; the outcome rides the tick log so health can show it. THIS CLOSES a rebuild or truncation AFTER an
+  anchor. WHAT REMAINS: an attacker who controls BOTH D1 and KV can move both together; anything in the window
+  before the first anchor; anchors are evidence, not prevention.
+- SIDE TABLE, NOT COLUMNS. `wardsynq_audit_chain (tenant_id, chain_seq, audit_id, prev_hash, row_hash,
+  legacy_boundary)`, one link per audit row the record repository writes (Connect's own audit writer is not
+  chained). `connect_audit_event` is shared and live, and ALTER TABLE ADD COLUMN is not re-runnable under the
+  on-prem boot that applies the schema files every time.
+- row_hash = SHA-256(prev_hash || canonical JSON of the row AS STORED), with values normalised to the type the
+  column returns, so what is hashed is exactly what is read back.
+- CONCURRENCY: the head is read and the hash computed before the batch (SQLite has no SHA-256), so the guard is
+  the PRIMARY KEY (tenant_id, chain_seq): the loser's whole batch rolls back and is retried (8 attempts, jittered),
+  then a VersionConflictError. A guarded head-row UPDATE was rejected: in a D1 batch an UPDATE matching no row
+  succeeds and the fork commits. Plus an in-process per-store, per-tenant lock, because a chart open fires many
+  audited reads at once and without it they livelock on the key. ponytail: one chain per hospital serialises its
+  audit writes.
+- FAILS CLOSED: an audit row that cannot be chained is not written, and neither is the record write it belongs to.
+  The chain table must be applied BEFORE deploy; the record-store probe checks it.
+- GENESIS ERA: rows before the chain are unchained. Link 1 stores the newest legacy row id and its prev_hash is
+  derived from it, so the boundary cannot be moved without breaking link 1.
+- VERIFY never says ok on a failed or short read: ok / empty / broken (row, expected vs found) / gap (missing
+  link or missing audit row) / not_verified. Bounded: newest 1000 rows in Security review, 200 in System health;
+  not_verified is "down" in System health.
+- RETENTION: `wardsynq.auditRetentionYears`, informational only. India defaults to 3 years citing Indian Medical
+  Council regulation 1.3.1 (the citation documents.js already uses); other regions "not configured, kept
+  indefinitely". No deletion procedure exists; one would be separate, audited and owner-only.
+- FOUND ON THE WAY (migrate-inpatient.js claimBed): the bed claim only caught two admissions that read the claim at
+  the same instant. One reading it just after another's claim landed, before that Encounter was written, admitted a
+  second patient to the bed. Surfaced because audited reads now take real time in tests. Fixed: a claim naming
+  another admission that is open in the bed, or unwritten and under 2 minutes old, is occupancy; a failed Encounter
+  write releases its claim. A crashed admission holds the bed for up to 2 minutes.
+## 2026-09-14 Patient portal gaps: queue status, released documents, full discharge summary
+
+All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type and no parallel release concept.
+- SECTIONS gains `status`, `discharge-full`, `documents`. A patient's own grant sees all of them; a proxy only what
+  its grant names (the enrolment screen offers each). Existing proxy grants see none of the new sections.
+- QUEUE STATUS: `POST /api/portal/queue`. Tickets are linked the way the queue files them
+  (`opd-identity.js patientIdForTicket`, from the MRN), today's sessions of THIS hospital only. If the matched
+  tickets, or the patient record's MRN, carry more than one MRN spelling (two spellings slug to one patient id),
+  nothing is shown and the patient is told to ask at the desk. Output per own ticket: room or department label,
+  state, a count ahead, and the ETA the queue model already stored (`etaStart`, only while still in the future),
+  else "no estimate". The queue has no token number, so none is shown. The read is audited as `record.read` of
+  `QueueTicket` under the reader's id.
+- RELEASED DOCUMENTS: a `PatientRecordRelease` with `kind: "document"`, `documents: [{id, version}]`, and a reason
+  or consent reference, written by `POST /ward/document-release` (EMR_TREAT; patient taken from the document).
+  Refused for a withdrawn, purged or past-retention document. `POST /api/portal/document` streams bytes through
+  the existing decrypt and sha256 check only while the named version is released and the document's LATEST
+  version is current and within retention; every download writes a `document.download` audit row (via
+  `patient-portal`) and is refused if that row cannot be written. A withdrawn document stays as a titleless
+  "withdrawn by the hospital" line. No object key or URL reaches the browser.
+- FULL DISCHARGE SUMMARY: the release's discharge entries carry `scope` (`patient-copy` default, or `full`) chosen
+  on the Patient copy screen. Old releases have no scope and stay patient copy. A full release shows every
+  section except `provenance` (a note to the signer). Withholding reuses #940's assembled copy: while ANY result
+  is withheld (open critical loop, preliminary, sensitive) `investigations` and `assessment` are withheld, and
+  while any condition is differential or refuted `diagnoses` is. ponytail: free text cannot be checked result by
+  result, so this is coarse; per-result redaction would need structured summary sections.
+- Correction rule unchanged: only the latest version of a note is shown, and only if a release named it.
+- Portal strings for the new sections live in `wardsynq/site/i18n.js` (English and Hindi); portal.html now loads it.
+
+## 2026-09-14 OPD token numbers: allocated in the ticket's own commit, never changed, never reused
+- A queue ticket gets `token` (display string), `tokenNo` and `tokenScope` in `_queue_engine.js addTicket`. The
+  counter is `q_token_counters/<hospital>__<OPD day>__<scope>` (the session's date). The counter increment
+  (compare-and-set on its `updateTime`, or create-if-absent) and the ticket create go in ONE `fsCommit`, so a
+  failed commit burns no number and no ticket exists without one. A lost race re-reads; after 5 tries the
+  desk gets 409 `token_contention` rather than a possible duplicate.
+- Stability: only `addTicket` writes the token. Move, reassign, room routing, priority, send-back and recall
+  patch other fields. The counter only rises, so a cancelled number is not reissued. A new day is a new doc.
+  Tickets from before this have no token and are not backfilled.
+- Scope config is a top-level org field `tokens: { scope: "hospital"|"department", prefixes }` in
+  `_opd_org.js org()` beside `thresholds` (an OPD setting, not ward config), edited on WardSynQ Admin >
+  Hospital. Department prefixes are 1 to 3 letters/digits, keyed by the ticket's department name,
+  case-insensitive; no prefix means a plain number. Default: one sequence for the whole hospital.
+- The waiting-hall wall (`displayBoard`, `/api/queue/display`) now shows tokens ONLY; the first-name-plus-
+  initial projection is gone. An old ticket there reads "Patient". Staff screens (queue.js, opd.html) show the
+  token beside the name. SMS/WhatsApp "registered" and "next" lead with "Your token: X" (a token names nobody).
+  Patient portal and the /queue link page show "Your token: X" for the patient's own ticket only.
+- Not built: no recall out of `no_show` (it is terminal; "recall" today is called -> waiting -> called).
+
+## 2026-09-14 Hospital connectors (owner S2, S4, S5, S7): pluggable per hospital, secrets sealed, nothing trusted from a browser
+
+### S7 Vertex AI is the PHI provider (functions/_wardsynq/maik-gateway.js)
+- Two halves of approval. PLATFORM: `PHI_CAPABLE = wardsynq, local-openai, vertex`; a hospital cannot widen it,
+  so `phiApproved: ["gemini"]` (AI Studio, no data agreement) now permits nothing and the refusal says so.
+  HOSPITAL: `wardsynq.maik.phiApproved` as before (the owner wrote `wardsynq.ai.phiApproved`; the existing key is
+  `maik`, kept), default none. Admin > MaiK clinical AI's cloud switch writes `["vertex"]` only.
+- Patient data reaches Vertex ONLY through the project's regional endpoint
+  (`<GCP_LOCATION|asia-south1>-aiplatform.googleapis.com/v1/projects/<GCP_PROJECT>/locations/...`) with an OAuth
+  token for `GCP_SA_EMAIL` (Workload Identity Federation, or legacy SA key). These are the bindings
+  functions/api/ai already uses for MaiK in production (vault/modules/MaiK.md: "Vertex (prod only)"); no binding
+  added. The token code mirrors the AI route rather than importing a route file (same choice as _fundx_ai.js).
+- Why not express mode for PHI: no project, no region, no residency (2026-09-10 entry), and the project's API
+  keys are restricted to the Gemini API by org policy (Connect Agent note), so it answers PERMISSION_DENIED in
+  production anyway. Non-PHI calls keep express mode while a key exists, so the Connect agent brain and the eval
+  harness are unchanged.
+- A server without the project bindings: Vertex is not PHI-capable, maikStatus names the missing bindings and
+  the Admin screen shows them. NOT verified: that gemini-3.6-flash is served in asia-south1 for this project.
+
+### The connector pattern (functions/_wardsynq/connectors.js), shared by S2, S4, S5
+- One record type `_wardsynq_connector` in the tenant repository (append-only, versioned, like webhook endpoints):
+  `{kind, provider, name, settings, secretsEnc{key: sealed}, secretsSetAt, active}`. Kinds and providers are
+  code (`KINDS`), each provider declaring `settings[]`, `secrets[]`, `validate()` and optionally `test()`; the
+  Admin > Integrations forms are drawn from that catalogue. Singleton kinds (dicom, payment) have id = kind.
+- Why the repository and not the org document: the org whitelist passes config through unvalidated, has no
+  version check, and is readable wherever the org is read. A connector needs sealed credentials, optimistic
+  concurrency and an audit row in the same append. Existing org fields (`imagingViewer`, `payers`) stay as the
+  fallback so no hospital's configuration stops working.
+- Credentials: sealed with the document key (webhooks.js sealSecret, now exported), never returned by any route,
+  opened only where an adapter uses them. A save carrying new credentials only is audited `connector.rotate`;
+  others `connector.create/update/enable/disable`; `connector.test` for tests. Scope names keys and hosts only.
+- Gate: staff.admin at the route plus a clinical actor that may write the record (the webhooks' double gate).
+- URL settings pass webhooks.js checkDestination at save (https, no private/metadata address, every resolved
+  address); each adapter checks again before calling and never follows a redirect.
+
+### S5 DICOMweb (functions/_wardsynq/dicomweb.js)
+- Settings: QIDO-RS base (required), WADO-RS base, auth none/bearer/basic with the credential sealed, a viewer
+  template, or an OHIF base that becomes `<ohif>/viewer?StudyInstanceUIDs={studyInstanceUid}` (OHIF docs).
+- Viewer placeholders are now `{studyInstanceUid}`, `{accession}` (and the older `{accessionNumber}`).
+  `{patientId}` (the MRN) was WITHDRAWN from imaging-viewer.js: owner rule, no name or MRN in a viewer URL. A
+  hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
+- Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
+  redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- NOT verified against a real PACS; mocked transport only.
+
+### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)
+- The registry stays wardsynq-tpa-adapter.js `adapterForPayer` with injected kinds; kinds are now `fhir-claim`
+  (existing adapter), `nhcx`, `manual`. Payer connectors (id `payer-<ref>`) become registry payers with
+  `auth.connectorSecret` (document-key seal, opened in billing.js sealedCredentialAuthorizer at send time);
+  `wardsynq.payers` entries keep `credentialRef` (Connect envelope). Same id: the connector wins, no merging.
+- claim-state, preauth and claims read the merged registry; a registry that cannot be read refuses with 502
+  rather than recording the payer as "not configured".
+- NHCX, verified from the HCX Protocol OpenAPI and the NRCES IG: `/claim/submit`, `/preauth/submit`, JWE body
+  with `alg RSA-OAEP`, `enc A256GCM`, `x-hcx-sender_code`, `x-hcx-recipient_code`, `x-hcx-api_call_id`,
+  `x-hcx-correlation_id`, `x-hcx-timestamp`; ClaimBundle is a Bundle of type collection. The adapter builds
+  that envelope and SENDS NOTHING (`not_configured`, with the list). Missing: JWE encryption with the
+  recipient key from the HCX registry, NHCX profile URLs and mandatory elements, participant authentication
+  and gateway URLs, and an on_submit callback route. Those need NHCX onboarding; the hospital submits through
+  the payer portal meanwhile.
+
+### S2 Payment gateways (functions/_wardsynq/payment-gateways.js, payment-links.js)
+- Contract per gateway: createPaymentRequest, verifyWebhook (raw body), parseWebhook, fetchStatus, refund.
+  Shipped: `manual` (default, no link), `razorpay` (Payment Links), `stripe` (Checkout Sessions). Endpoints,
+  auth, amount units and signature schemes were read from the official docs on 2026-09-14 and are listed in the
+  file header. Only currencies with a 1/100 minor unit are accepted; any other is refused, never guessed.
+- A link is a `_wardsynq_payment_request` record (invoice, amount minor, currency, gateway reference), one open
+  link per invoice, created by billing.charge. It records nothing on the invoice.
+- `POST /api/queue/payment-callback/<orgId>` is public by design (the gateway has no session). The invoice is
+  marked paid only when: the signature verifies with the sealed webhook secret, the event is a paid event for
+  a request this hospital issued with the same gateway reference, the gateway's own API (this hospital's key)
+  says that reference is paid, and amount and currency equal the request exactly. Otherwise the request is
+  flagged (audited `payment.callback.flagged`, shown on the cashier screen), the invoice untouched, 200 so the
+  gateway stops retrying. A transient failure (gateway API down, a version conflict) answers 503/409 so it
+  retries. A bad signature writes nothing, so the public door cannot grow the audit chain.
+- Why fetchStatus as well as the signature: a leaked webhook secret alone must not be able to mark bills paid.
+- The ledger payment is posted by a SERVICE actor (`service:payment-gateway`, write scope Invoice only) with
+  `reference <provider>:<paymentId>` and `collection.capture "integrated"` via applyAdapterResult, the only
+  path that produces it. Idempotency is the reference on the ledger plus the request status: the invoice
+  write and the request update are two appends, and a retry completes the second.
+- NOT built: gateway refunds from the cashier screen (adapter refund() exists and is contract-tested; the
+  ledger refund is still entered by hand), partial payments, and a rate limit on the public callback (a bad
+  signature costs one org read and one HMAC). NOT verified against live Razorpay or Stripe.
+## 2026-09-14 D5: a full discharge summary is withheld entry by entry (owner chose B)
+Supersedes the coarse part of "FULL DISCHARGE SUMMARY" above for summaries signed from now on.
+- ENTRIES ARE WRITTEN WITH THE DRAFT. `migrate-discharge.js structuredSections` stores `structured.diagnoses`
+  (conditionId, active/closed group, whether it was a diagnosis, the problem-list line) and
+  `structured.investigations` (serviceRequestId, code, the request line) on the ClinicalNote, beside
+  `editedSections`, and signing carries it. Each set records the section `text` it describes.
+- JUDGED WHEN THE PATIENT READS. `portal-view.js structuredSection` over `patient-record.js withholdingFacts`
+  (the reports #940 withholds, the never-release codes, the conditions that are diagnoses now), read fresh.
+  An investigation is withheld when a withheld report answers its request (or shares its code when the report
+  names none) or its code is never-release; a withheld report tied to no entry and not known to be another
+  stay's withholds every entry. A diagnosis is withheld unless it was one when signed and still is. A withheld
+  entry keeps its place and group and becomes "One entry is withheld here ... Please ask your care team." No
+  reason category, no name, no id. Acknowledging a loop releases only that entry.
+- FREE TEXT STAYS COARSE. The assessment, any section without entries (every summary signed before D5), and a
+  section whose stored text no longer equals the entries' `text` (a clinician rewrote it) keep the old rule.
+- FAILS CLOSED. Facts are read without #940's catch-to-empty; an unreadable read withholds every guarded entry
+  and section (previously a failed report read inside assemble() looked like "nothing withheld").
+- PREVIEW IS THE PORTAL. `patient-record.js portalPreview` runs the portal's own function over releases on file
+  plus the pending handover, per scope; GET /ward/patient-copy and POST /ward/patient-release return it, and the
+  Patient copy screen draws it with `portal.js dischargeSection` (portal.js and i18n.js now load in both
+  index.html files). Staff only, `w-noprint`. English, as the patient's own access sees it.
+- Not built: sensitivity is still by report code only; a Condition whose code is on `neverRelease` is shown, as
+  in #940's patient copy.
+## 2026-09-14 FHIR: immunizations, ward Groups, Subscription create, and R4B/R5 by fhirVersion (G6, G9, G10, D9)
+- G6: `Immunization` is its own append-only record type, granted with EMR_VITALS. The vaccine is free text;
+  no catalogue is shipped. A code needs a known system (CVX added to terminology.js as a system). Not-done
+  needs a reason; a wrong entry is withdrawn as `entered-in-error`, never deleted. IPS immunizations section is
+  always present (none recorded / unavailable / populated).
+- G9: FHIR Group is DERIVED, never stored: one per ward with an open encounter (`ward-<hash of ward name>`),
+  because the record has no patient-group concept and a maintained cohort list would be a second source of
+  truth. A Group export freezes members on the job at kick-off. A census at the pool cap refuses rather than
+  exporting part of a ward. POST kick-off takes a Parameters body only. Admin downloads reuse `$export-file`.
+- G10: `POST Subscription` goes through `registerWebhook()` unchanged, after narrowing to exactly what is
+  delivered (rest-hook, fhir+json, id-only, one published topic, no header, no end, no other extension);
+  anything else is a 422 naming the element. Secret returned once in `X-WardSynQ-Webhook-Secret` (no
+  Subscription element may carry it). Staff door only. `$status` returns no event count.
+- D9 (owner answer B, supersedes "R4 only until a partner asks"): version by the `fhirVersion` MIME parameter,
+  default R4. Separate validator tables per version (`TABLES` in fhir-validate.js): R4B derived from R4 by the
+  published diff; R5 GENERATED from the R5 StructureDefinitions by scripts/fhir-gen-validator-tables.mjs. R5
+  renders Patient, Encounter, Observation, Condition, AllergyIntolerance, MedicationRequest, Immunization;
+  every other type, and any answer that fails the version's tables, is a 406 naming it. Writes, bulk export,
+  Subscription create/$status are R4 only (415/406). R5 drops Immunization.recorded and sends a missing
+  Condition clinicalStatus as `unknown`; both are stated in the R5 CapabilityStatement. See docs/FHIR_STRATEGY.md.
+
+## 2026-09-14 S6 phase A1: the ABDM hospital profile is a per-hospital connector (owner A1-A5)
+Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2, 4.2, phase A1).
+- **Storage: the connector framework, not `connect_connector_config`.** The profile is the singleton `abdm`
+  connector (`functions/_wardsynq/connectors.js` kind `abdm`, provider `shared-bridge`, record
+  `_wardsynq_connector/abdm`). Reasons: it is already per hospital, versioned and append-only in the WardSynQ
+  record, audited in the same append, gated by staff.admin plus a clinical actor, and seals credentials under
+  the document key. `connect_connector_config` is a Connect D1 table with no version history or chained
+  audit, sealed under a different key. Cost, for phase A2: the v3 branch's `resolveHipTenant` reads
+  `connect_connector_config` rows; it must read this connector instead (or a projection written beside it).
+- The framework's `validate` hook now receives `{ org, previous }` (the saved settings of the same provider),
+  so a kind can check against the hospital record and enforce transitions. Existing validators ignore it.
+- Rules (pure, `functions/_wardsynq/abdm-hospital.js`): HFR facility ID is `IN` + 10 digits and must equal the
+  org's `regionProfile.hfrId` (one source of truth; the Hospital tab now edits it); HIP/HIU IDs are a
+  conservative character shape only (format UNVERIFIED); status `draft -> submitted -> sandbox-linked ->
+  production-linked -> suspended`, `submitted -> draft`, `suspended -> draft`; the IDs freeze once linked.
+- Owner answers S6, 2026-09-14:
+  - A1 shared StewardMD bridge, each hospital links its own facility. The kind declares no secret; a secret
+    sent with a save is dropped. No own-bridge field is built or shown.
+  - A2 all production ABDM traffic held until India-region hosting from the AWS move exists. The
+    `production-linked` transition is refused and the checklist says "Awaiting India hosting".
+  - A3 the orchestrator merges `feat/abdm-v3-reconcile`; A1 work stays in new files.
+  - A4 records received from ABDM under consent stay in the chart, marked as received under that consent, even
+    after withdrawal. No erase flow. (Shown on the ABDM card.)
+  - A5 role rule for the later ABHA desk phase: billing and front desk staff may create new ABHA numbers by
+    Aadhaar OTP as well as verify existing ones. Not built in A1.
+- The checklist never says verified: "entered" (typed by the hospital, not checked against ABDM), "missing",
+  "mismatch", "not built" (session check, sandbox run, counters, DPDP confirmation), "blocked" (production).
+- NOT built: any ABDM gateway call, the "Check session" action (A2), per-tenant gateway identity, audit of the
+  from/to status beyond the versioned record, and a UI to set a doctor's registration number here (Staff tab).
+## 2026-09-14 S3 P0: critical results pushed to hospital staff phones, server-side, behind a hospital setting
+- Off unless the hospital sets `wardsynq.alerts.push.enabled` (Admin > Hospital > Critical result alerts). No env
+  var. With it off every loop records NO_CHANNEL exactly as before.
+- Recipients (`functions/_wardsynq/alert-recipients.js`): cumulative ladder of ordering clinician, on-duty roles
+  from the rota for the patient's ward, and named contacts. Default ladder approved by the owner, Dr Manoj
+  Kurmana, 2026-09-14 (O5); the approval is stored on the defaults and dropped when a hospital sets its own.
+  There is no nurse-in-charge role, so the default overdue tier uses every nurse on duty in the ward.
+  NO_RECIPIENT is recorded on the loop and shown on the board and the Admin card, never "sent".
+- Devices: `DeviceDirectory` port (`device-directory.js`) over any get/put/delete store, KV today
+  (`push:who:<orgId>~<identity>` -> token ids, `push:notice:<nid>` -> {orgId, tenantId, loopId}). Bound by
+  `POST /api/push/register-member` with the identity derived from the credential; unbound on PIN/password
+  change, reset, disable/remove and sign-out-everywhere; bind and unbind audited in q_events.
+- Payload (O3): fixed title, body naming ward and bed only, data `{type, v, nid, kind, urgency}`. Never the
+  patient name or MRN. Detail from `GET /api/push/notice/<nid>` for addressees only (404 otherwise), with a
+  read-log row and audit row written first; no row, no detail.
+- Everything about delivery lives on the loop record (`notifications[]`: nid, level, recipients, noDevice,
+  sent, total, receipts, sms). SENT is never delivered; acknowledgement stays `/ward/acknowledge`.
+- Timer: worker cron `*/5` POSTs `/api/queue/ops/tick-all` (admin token), same 2-minute gate as traffic;
+  `WSQ_TICK_OFF` stops both. Decline sends the next tier immediately.
+- SMS fallback (O4): a notice with no `delivered` receipt after its level's window goes once by SMS through
+  the hospital's DLT template on 2Factor (`alerts.sms.senderId`, `alerts.sms.templateName`; VAR1 ward, VAR2
+  bed; existing `TWOFACTOR_API_KEY`), to each recipient's `alertMobile` on their membership. Anything missing
+  is recorded on the notice as SMS_NOT_CONFIGURED and named on the Admin card.
+
+## 2026-09-14 ABDM V3 merge (owner A3): one scheme, no deploy vars, production held, one landing
+`origin/feat/abdm-v3-reconcile` merged into `wardsynq-product` on branch `abdm-v3-merge`. Checklist:
+`docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` section 2. The branch itself was not touched.
+- **SCCM**: one 1.1 with administrations, serviceRequests, consents, immunizations, invoices (all optional,
+  additive). The branch had kept 1.0 while adding two collections; the product had bumped to 1.1 for three.
+- **Env**: `ABDM_ENV` with host-only bases is the only scheme; `ABDM_GATEWAY_URL` removed from the connect
+  route (a base with a path doubled every V3 path).
+- **Identity out of deploy config**: the branch's five ABDM vars were not added to `wrangler.toml`. The sandbox
+  bridge id and facility id sit on the sandbox entry of `config.js` ENVS; production has no identity in code, so
+  a production deploy cannot inherit sandbox identity. Per-hospital production IDs come from the `abdm`
+  connector profile when phase A2 wires `abdmConfigFor`. An env override is still read (tests, local receiver).
+- **A2 enforced in code**: `gateway.js` refuses the production gateway host before the session call.
+- **Requester**: the consent route resolves the doctor with `resolveClinicalActor` and sends
+  `{type:"REGNO", value, system:"https://www.mciindia.org"}`; no registration number is a 422 naming the fix.
+- **One landing path**: the V3 HIU data push gets its own receiver (`/api/connect/abdm/hiu/data`) that ends in
+  the same `makeConsumeAndLand` as the V0.5 ingress. `LANDABLE` adds Immunization and Invoice.
+- **Immunization, one record type**: the branch's OPD capture is a queue timeline kind (IG-coded, for the OPD
+  HIP source), not a record type, so it stays. What ABDM LANDS files as the product's `Immunization` record.
+  The IG catalogue (`_vaccines.js`) and the ward chart's free-text rule (`immunization.js`) both stand: the
+  first is what ABDM conformance requires of what we SEND, the second is how the ward records a dose.
+- **External invoice is not an Invoice**: filed as `ClinicalNote` `external-invoice` with the sender's invoice
+  verbatim, because reports, trends and the payment desk sum `Invoice` rows.
+- **A5**: `ABHA_DESK_ROLES` in `_queue_roles.js` (reception, cashier and billing create and verify). Not enforced
+  until the ABHA desk phase moves M1 off Connect membership.
+- **Fidelius**: the branch's HKDF over the Weierstrass x is the only copy (the product never changed it).
+## 2026-09-14 D7 B: OPD tokens per department, keyed by departmentId (owner chose B)
+Extends "OPD token numbers" above; allocation is still in the ticket's own commit.
+- A DEPARTMENT IS ITS q_departments ID. Counter `q_token_counters/<hospital>__<day>__dept-<departmentId>`; prefixes
+  `org.tokens.prefixes[<departmentId>]`; `org.tokens.deptAliases{<name lower-cased>: departmentId}` maps the
+  names an EMR import or a doctor session uses. A rename keeps the sequence and the prefix. Old name-keyed
+  prefixes are still read by name until the Admin card resaves by id (stale ones are listed on the card). A
+  department with no prefix falls back to its own code when that code is 1 to 3 letters/digits.
+- Continuity at deploy: a department's first allocation of the day under the id key continues a counter already
+  running today under the old name-slug key, so no C-001 is issued twice on the day this ships.
+- WHERE THE DEPARTMENT COMES FROM, server-side in addTicket (`_opd_org.js resolveTokenDepartment`): the desk
+  picker's departmentId (exact or refused 422 `department_not_found`, never guessed), then the room's
+  departmentId, then the ticket's own department name (import row), then the session's name. Deviation from
+  S3 design 4.3: the ticket's own name comes BEFORE the session's, because an import row names that patient's
+  department and a doctor session's free text does not.
+- M.room carries `department`, filled from q_departments on every store read and never stored on the room.
+  Room sessions stay keyed with department "" (as they always effectively were), so filling the name did
+  not move any room onto a new session id mid-day.
+- A ticket routed to another department's room takes that department's id and name and KEEPS its token; the
+  wall shows the issuing department beside such a token and groups rooms by department in department scope.
+- SMS/WhatsApp "at <dept>" uses the ticket's department before the session's (a pool session has none).
+## 2026-09-14 D14: per-department numbering requires a prefix per department; nothing numbered without one
+- `_opd_org.js tokenScope` in department scope refuses, before any read or write: no resolved department
+  (422 `token_department_required`, the offered name returned so an import can name it) and a department whose
+  effective prefix (own, legacy name key, or a 1-3 character code) is empty (422 `token_prefix_missing`). The
+  `dept-none` counter is gone; hospital scope is unchanged.
+- `POST /org/update` with `tokens` refuses 422 `token_prefixes_required` (problems listed by department name)
+  while any ACTIVE department lacks a prefix, two share one, or an alias points at no active department.
+  Creating a department is NOT refused: a department that issues no tokens (Laboratory) may have none; the
+  desk is refused for it with a sentence naming the Admin card instead.
+- `POST /patient/register` with `forQueue` checks the same BEFORE issuing an MR number ("pool" needs the picked
+  department; "session" only checks a picked one, since the room or session may supply it). The queue add
+  still decides; this is only the early answer so a patient is not registered and then left unqueued.
+- An EMR import returns `issues[{reason, department}]` for refused rows (department names only) and the app
+  shows them once per distinct message.
+## 2026-09-14 D13: a no-show is recalled with the same token (recommendation applied; owner did not answer)
+- `no_show -> waiting | called` in `_queue_eta.js`, and `no_show` is no longer terminal: marking a no-show no longer
+  bumps tokenVer, so the patient link keeps working and `queue.html` says "Your token was called ... go to the
+  front desk". `noShowAt` starts the window. Its OPD Encounter is not closed on no-show (a closed Encounter can
+  never reopen); a never-recalled no-show stays "planned" in the record. Not built: closing it when the window ends.
+- ONLY `POST /no-show/recall` leaves no_show (`/status` answers 400 `use_recall`). It needs `queue.reorder`
+  (the recall jumps the patient to the head of their priority band, which is a reorder; reception can mark a
+  no-show but not recall), a reason, and the window: 4 hours from noShowAt or the session end, whichever is
+  first (409 `recall_window_passed` / `session_ended`). The ticket patch and the `recall_no_show` q_events row
+  (actor, ts, meta {to, reason, noShowAt, token}) are ONE commit guarded on the ticket updateTime, so a recall
+  without its audit row cannot exist and two desks cannot both recall.
+- `GET /no-show/list?sessionId=` (app doctor queue) or `?orgId=&date=` (console, every queue that day) lists the
+  recallable ones (queue.view). Screens: "No-show" on called rows in opd.html and queue.js; "No-shows" sheet on
+  the console toolbar; the recall panel on the app timeline. Not built: the app front-desk view has no recall
+  list, and no "next" message is re-sent on recall (n_stage is monotonic).
+## 2026-09-14 D11 A: per-hospital clinical settings template (Admin Center > Hospital)
+- `functions/_wardsynq/clinical-settings.js` (pure) owns six settings: highAlertDrugs, antibiotics,
+  orderVerifyWithinHours (1-168 h), edReassessMinutes (acuity 1-5, 1-1440 min), patientAccess.enabled, rpoMinutes
+  (5-10080). `GET|POST /org/clinical-settings` (staff.admin, WardSynQ hospitals only, 409 otherwise). A save
+  refuses any unknown key (so criticalEscalation, owned by the alert-path branch, cannot be written here),
+  returns 422 errors keyed by setting with nothing written, and answers with the server read-back.
+- ONE template, "not-configured": every setting explicitly empty/off. WardSynQ ships no drug list or clinical
+  interval (that would be unapproved clinical content, D10); each consumer already says "not configured".
+  The template only fills the form; Save is the write, and the templateId rides the audit row.
+- Audit in the SAME commit as the change (`ORG.updateOrg` optional auditEvent): action
+  `org:clinical_settings`, meta {changed: [setting names], template}; values are not in the audit row. A save
+  that changes nothing writes nothing. patientAccess keeps its other fields (code/session lifetimes).
+- FIX: `orderVerifyWithinHours` was missing from the org whitelist, so surveillance.js could never evaluate
+  "active order not pharmacy-verified" for any hospital.
+- Not built: optimistic concurrency on org saves (two admins saving at once, last write wins, as for every
+  org update today).
+## 2026-09-14 D10: clinical seed data sign-off by Dr Manoj Kurmana, per item, by content fingerprint
+- Seed lists read from the modules that use them (`functions/_wardsynq/seed-signoff.js`): allergy classes and
+  cross-reactivity, dose ceilings, default critical limits, the critical threshold seed, PEWS bands, MEOWS bands,
+  NEWS2 escalation and responder ladder, quality measure definitions. Each item has a SHA-256 of its canonical
+  content (function bodies included). Other UNAPPROVED seeds (consent and population intervals, incident
+  categories, MLOps promotion defaults, emergency recognition) are not listed yet.
+- A sign-off is `q_seed_signoffs/<list>__<item>__<fingerprint prefix>`, created once with its `seed:signoff` audit
+  row in the same commit, text "Signed off by Dr Manoj Kurmana, <date>, version <seedVersion>#<hash12>". A record
+  for other content does not match, so changed content is UNAPPROVED again. No revocation route (not asked for).
+- `POST /seed/signoff` is the platform owner only (StewardMD owner account; a hospital owner or admin is 403),
+  in the name SIGNATORY only (422 otherwise), with `attest: true`, and the contentHash the signer was shown (409
+  if the content differs). `GET /seed/status` for the platform owner or a hospital staff.admin (?orgId=).
+- Admin Center > Clinical seed data (WardSynQ hospitals) marks every unsigned item UNAPPROVED; a failed load says
+  treat every item as unapproved. This build signs nothing. Signing does NOT change engine behaviour: rx-safety
+  still never gates, and existing "unapproved" wording on ward screens is unchanged.
+## 2026-09-14 D4 B: group counts come from a snapshot each hospital publishes (owner chose B)
+- Supersedes the live cross-hospital read in GET /group/overview. WardSynQ is deployed per hospital, so a
+  group reads `q_group_snapshots/<orgId>` only: {status, counts, reasons, capped, publishedBy, publishedAt}.
+- `POST /group/publish-counts` (the hospital's own staff.admin; a group admin is refused) computes the same
+  hospitalCounts() in the hospital's own tenant and writes the snapshot and `group:snapshot_published` under
+  the hospital in one commit. A failed publish leaves the previous snapshot, with its own time.
+- Overview: never published = status `not_published`, counts null, shown as "Not published" (never zeros);
+  `stale` when older than the group's `staleAfterMinutes` (default 60, 5-10080, set by the group admin via
+  `POST /group/stale-after`, audited `group:stale_after`). Each view is still audited `group:summary_read`
+  under the hospital before its snapshot is read.
+- Admin > Hospital group shows what this hospital last published (by whom, when) and "Publish counts now".
+- Not built: automatic publishing on a schedule (the ops tick could publish; today a snapshot is published by
+  a person and the stale marker says when it is old).
+
+## 2026-09-14 S3 P1: the phone opens critical-result alerts; the workplace decides the credential
+- **Credential rule** (`hospital-auth.js`, design 2.3, parity ID-01/EMR-05): a staff token is sent only
+  for the hospital it names (its first segment is base64url `orgId~identity.exp`, read to choose, never
+  to grant). A token for another hospital is never sent; the account bearer is. A token that names no
+  hospital (local and harness sessions) is sent as before. Staff token and bearer are never sent
+  together, because the push routes prefer the bearer. ward.js uses it; pages without the file keep the
+  old rule, and a test pins that index.html and wardsynq/site/index.html load it before ward.js.
+- **ward.js open()**: the remembered workplace now wins over the last hospital the overlay showed, so a
+  switch cannot leave the ward on the previous hospital.
+- **Alert screen** (`wardsynq-alert-ui.js`, flag `smd_wsq_push`, default off): renders nothing from the
+  push (only nid and kind are kept); no request under app lock; detail fetched with the current
+  workplace's credential; a notice whose `orgId` is not that workplace is dropped unshown and the screen
+  asks to switch. Acknowledge is success only on `written === 1`. "I have informed the doctor"
+  (receipt `informed`) is offered only after the acknowledgement is refused for the role. The v1 client
+  path (self-push receipts that reported success on any HTTP answer) was removed.
+- **Binding**: bound on choosing a WardSynQ hospital (OPD chooser, alert screen switch) and on a staff
+  front-desk sign-in; re-bound when the device token changes (per-org token tail in
+  `smd_wsq_push_orgs`, so a launch with an unchanged token sends nothing).
+- **New server route `POST /api/push/unregister-member`** (the one server change in P1): removes THIS
+  device from the caller's bindings at one hospital, audited `push:device_unbound`. Without it a staff
+  sign-out on a phone had no way to stop that phone being counted as reached. Called before the token
+  is cleared.
+- **Known ceiling**: with an account credential in a different workplace, the server releases the
+  notice detail (and writes its read-log row) before the client sees `orgId` and refuses to show it.
+  Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading. (Done, below.)
+
+## 2026-09-14 S3 P1 follow-ups: the limits P1 left
+- **Notice in the workplace only**: `GET /api/push/notice/<nid>?orgId=<workplace>`. A missing, empty or other
+  hospital's orgId is 404 after the KV pointer read and BEFORE the membership, loop, patient or read-log write
+  (no session is still 401). The app sends the workplace and, with no WardSynQ workplace chosen, asks nothing
+  and says to choose one. The switch screen stays as a guard but a real server no longer feeds it, so a
+  multi-hospital clinician in the wrong workplace sees "switch to the one it was sent from" without the name.
+  Decline and receipts are unchanged (decline is only offered from a detail the workplace already opened).
+- **queue.js and discharge.js follow the credential rule**: discharge.js calls `headersFor(st.orgId)` like
+  ward.js. queue.js keeps its cached token and drops it when `staffTokenOrg` names a hospital other than the
+  request's (st.orgId, else the open WardSynQ/Connect session's hospital, else "" for GHIS). The front desk
+  sets st.orgId from its own token before `/whoami`, so a cold start still signs the desk in. Tokens that name
+  no hospital and pages without hospital-auth.js keep the old rule.
+- **Account sign-out unbinds the phone first**: `SMD_WSQ_PUSH.accountSignOut()` (native-push.js) calls
+  `unregister-member` for the WardSynQ WORKPLACE with the account's bearer only (a staff session for the same
+  hospital is not what is signing out), when this phone had bound that hospital. signout-fix.js (the app's Sign
+  out, the drawer, the account sheet, app lock's "sign out instead"), verify.js "Use a different account" and
+  account.js's device lock wait for it (at most 6 s) before `signOut()`. `smd_wsq_push_unbind_failed` is written
+  BEFORE the call and removed only on `ok`, so a refusal, network failure, missing account or a reload that cuts
+  the call off stays recorded; the next launch says once that the phone may still receive the alerts. Not
+  covered: account deletion (home.js), and hospitals other than the workplace that the account bound earlier.
+- **"No phone registered" is read from the DeviceDirectory now**: `GET /ward/alert-status` returns `phones`
+  (`phoneCoverage` in push-alerts.js, readers `staffReaders` in alert-deps.js): every active member on duty
+  now in any ward whose role is on some level, plus every named contact, each checked with `devicesFor`.
+  `{ok:false}` on any failed read (store, rota, members), shown on the Admin card as "could not be read. Do not
+  read this as everyone having one". The per-alert `noDevice` stays, relabelled as alerts already sent. Checks
+  the membership identity the rota uses; a contact typed as an email is checked under that email.
+
+## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
+- Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed
+  only to its current ward, and past buckets no longer use today's bed count.
+- Stays: the Encounter's version history is the movement history (transfer = new version with `movedAt`).
+  `staySegments` in `trends.js` splits a stay into ward pieces. `bed-occupancy` and the new `ward-los` read the
+  histories of changed stays overlapping the range through `RecordService.histories` (one grant check, one
+  audited list row). A history that cannot be read, or a move with no time, leaves the stay unplaced: its
+  buckets are null with a reason by ward (hospital-wide occupancy keeps its bed-days).
+- Beds: `q_beds` carries `since` (set at create) and `activeHistory` (appended by `updateBed` on each turn off
+  or on; a patch cannot set either). A bed from before this has no `since`; its Firestore `createTime` is used
+  and it is marked legacy: counted from registration, but unknown after that if it is now turned off. Beds
+  listed only in `wardsynq.beds` keep no history, so a bucket needing them is unknown, never today's count.
+- Not built: an admin "in service since" edit for legacy beds; blocked/closed state history (still not subtracted).
+
+## 2026-09-14 G2: offline bedside writes wired, conflict review, and a dose checked against the order it was charted on
+- `ward-offline.js` is now used: ward.js `bedsideWrite()` carries vitals, nursing task done, notes (timeline and
+  templated), dose steps, ICU records and fluid entries. The request key and bedside time are fixed before the
+  first attempt; offline or with no answer the entry is queued in IndexedDB and the screen says "saved on this
+  device, not yet sent: NOT in the record". The app's `index.html` loads `ward-offline.js` before `ward.js`.
+- Conflicts: `version_conflict` and the new `order_changed` come back with the record as it is now (nursing
+  `failure()` and `administerStep`), shown beside the entry on the "Saved on this device" view. Resend (reason,
+  against the current version), edit (vitals, note sections, ICU values, fluid entries only) or discard.
+- Every decision is audited server-side first: `POST /ward/offline-resolve` (door `emr.view`, then the write's
+  own capability; a note also accepts `noteWriterRoles`), audit action `offline.<choice>`, patient pseudonymised.
+  The device drops or re-queues nothing unless that answers ok.
+- eMAR: the round (`/ward/schedule`) returns `orderVersion`; `/ward/mar` with `expectedOrderVersion` refuses
+  `order_changed` when the order has a newer version (a stopped order is still `order_not_active`, checked first;
+  a retry of a recorded dose still replays). ward.js sends it online too, so a round loaded before a prescriber's
+  change cannot chart against the old order.
+- Sign-out on wardsynq.com warns when entries are held and clears the device store on confirm. The phone app has
+  no equivalent sign-out hook: a different person signing in clears the previous person's entries (ward-offline.js
+  rule 4).
+## 2026-09-14 G3: the hospital event log (q_events) is hash-chained like the clinical audit trail
+
+`functions/_q_audit_chain.js` (append, best-effort writer, verification adapter), `qAudit` in `_queue_engine.js`,
+`_queue_notify.js` delivery rows and `_hospital_group_store.js` all write through it. Screens: Admin Center >
+Security review (Tamper evidence: hospital event log), System health ("Staff and sign-in audit trail integrity").
+Tests: `test/wardsynq-org-audit-chain.test.mjs`.
+- ROW IS THE LINK. Each row is `q_events/<hospital key>__c<seq>` carrying `chainSeq` (hashed), `prevHash`,
+  `rowHash`; the head `q_audit_chain_head/<hospital key>` = `{seq, hash}` moves in the SAME `fsCommit`. The race
+  guard is `currentDocument.exists=false` on the row (Firestore's equivalent of the D1 primary key): a loser
+  re-reads the head and retries (APPEND_ATTEMPTS). A refused commit whose head did not move is the caller's own
+  guard and is rethrown unchanged, so hospital-group changes keep "no change without its audit row".
+- ONE ROW NOT TWO DOCS. A separate link doc was rejected: a row-as-link needs one fewer write per event and a
+  missing row is simply a missing number. The hospital key is an injective escape of the hospital id
+  (`chainKey`), because `sanitize` maps `group:a` and `group-a` to the same id.
+- VERIFICATION REUSES audit-chain.js. `orgAuditChain(env, hospitalId)` has the repository shape
+  (`auditChainHead`, `auditChainRows` via `fsBatchGet`, `auditOnly`), so `verifyAuditChain`, the anchors and the
+  owner acknowledgement run over it unchanged. Chain id `q:<orgId>` keeps its anchor keys apart from tenants.
+- UNLINKED ROWS ARE NAMED, NEVER VERIFIED. Rows without `rowHash` before link 1's `legacyBoundary` are the old
+  era; after it they are a lost race (qAudit still writes the row unlinked rather than lose it) or a row added
+  outside the application, listed with evidence in the security review.
+- ponytail: one chain per hospital serialises that hospital's event-log writes (a head read and a commit each);
+  a sharded chain is the upgrade if one head doc contends. No Firestore index or rule change: reads are by id and
+  the existing single-field `hospitalId` query.
+
+## 2026-09-14 G12: a second outside anchor (Firestore) behind an AnchorStore port, and copies compared with each other
+
+`functions/_wardsynq/audit-chain.js` (`anchorStoresOf`, `checkAnchorStores`, `anchorDisagreement`, multi-store
+`acknowledgeAnchorBreak`), `firestoreAnchorStore` in `functions/_q_audit_chain.js`, `anchorStoresFor` in the router,
+`anchorTick` in `ops-tick.js`. Tests: `test/wardsynq-anchor-stores.test.mjs`. Owner S1 (bucket name pending) and D12
+(AWS move about 2026-09-28).
+- THE PORT IS `{name, get(key), put(key, value)}` ON STRINGS. KV and Firestore implement it; the S3 bucket at the AWS
+  move is a third adapter, no domain change. Firestore stores one doc per key in `q_audit_anchors/<escaped key>`.
+- BOTH CHAINS INTO BOTH STORES, hourly, beside the tick gate. Each (chain, store) attempt stands alone: one store
+  down never stops the other's copy, and the tick log names where it failed (`failed in Firestore (event log)`).
+- CHECKS: each store against the chain (checkAnchors), and the stores against each other. The worst wins:
+  rewritten/truncated, then `disagree`, not-verified, no-anchors, ok. A disagreement is reported as its own finding
+  (message first, `disagreement.seq`), down with the governance consequence in System health. One store empty while
+  the other matches is no-anchors (degraded), never ok.
+- ACKNOWLEDGEMENT: one chained row; every rewritten/truncated store archived and restarted, empty stores seeded (a
+  failed seed is named, not fatal). A failed restart of a broken store fails the call with `restarted` listed; a retry
+  redoes only that store. `chain: "event-log"` acknowledges the hospital event log's chain the same way.
+- WHAT REMAINS: for the hospital event log, which itself lives in Firestore, the Firestore anchor shares its trust
+  domain, so only KV is outside it. An attacker holding D1, KV AND Firestore can still move all three. No Firestore
+  index or rule change (reads by id; the service account bypasses rules).
+
+## 2026-09-14 G11: out-of-assignment reads use ward history, one reader across sign-ins, and open their audit rows
+
+`functions/_wardsynq/security-review.js` (`wardHistoryStays`, `readerAliases`, `readerAliasesFor`,
+`auditRowsForReview`), `auditRowsById` on both repositories, `accountEmail` in `_opd_org_store.js`, route
+`GET /api/queue/ward/audit-rows` (STAFF_ADMIN, record:read). Screen: Admin Center > Security review > Reads outside an
+assignment. Tests: `test/wardsynq-out-of-assignment.test.mjs`.
+- WARD AT THE TIME: a transferred admission (`movedAt`) is split into one stay per ward from its version history
+  (at most 200 history reads per report). A history that cannot be read is INCOMPLETE data (reads not evaluated).
+- ONE READER: ids are linked by email (membership identity and email, email and its `cfa:` access id, a Google
+  `fb:` account and its `q_users` email) and named by the membership identity. A link that could not be made is a
+  NOTE on the section, not incomplete data: it can split one person in two, which the note says, but must not turn
+  every read in the hospital into "not evaluated". A flag lists the sign-in ids its reads came from.
+- EVIDENCE: each flagged read carries the patient's ward then and the wards the reader was rostered on then. "Open
+  these audit rows" reads them back by id with their chain link number; the read is audited (`security.audit_rows`)
+  and refused if it cannot be; ids not found are named; a failed load says so.
+
+## 2026-09-14 D6: Antigravity's multilingual branch reviewed; only translations integrated, nine portal languages
+
+Source: local branch `feat/wardsynq-multilingual-emr` (363117f5..844a8b4e). Integrated on
+`d6-antigravity-integrate` into the per-language files (`wardsynq/site/i18n/<code>.js`), all `reviewed:false`.
+Owner answer 2026-09-14: Marathi added, Spanish kept (`OFFERED` in `wardsynq/site/i18n.js` lists nine).
+- KEPT: Telugu portal catalog; label/sign-out/nav strings for ta, kn, ml, bn, mr. Tests
+  (`test/wardsynq-i18n.test.mjs`) now pin negation in safety-critical keys and exact digits.
+- NOT TAKEN: the `i18n.js` rewrite (self-marked reviewed:true, global active language in `t()`, AI-translation
+  notice), the staff shell switcher (staff UI translation is not in D6; owner to decide), address-based
+  `detectLanguage`, `wardsynq-terminology.js`, `wardsynq-rx-print.js` (drops unknown frequencies from the
+  "canonical" line, rewrites PRN/TDS, misreads dates), `wardsynq-translation-guard.js` (machine translation of
+  clinical text), and the general rulebook (permits labelled AI translation of clinical text). Findings in
+  `docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md` "What happened to the first pass".
+- RULE STANDS: clinical text is never machine translated. A localized prescription or discharge print, if ever
+  built, keeps the English order as the source of truth beside it, behind a per-hospital setting default off,
+  with golden tests for negation, decimals, frequency and dose preservation.
+## 2026-09-14 External ABDM invoices are clinical documents: a named per-hospital policy, never billing (owner decision)
+
+Owner decision 2026-09-14: an invoice received from another facility over ABDM is stored as a clinical/document record
+for now and must never become a WardSynQ billing transaction. It was an implicit code path (the ABDM V3 merge entry
+above, "External invoice is not an Invoice"); it is now an explicit policy.
+- **Policy** `wardsynq.abdm.externalInvoiceHandling`, one allowed value `"clinical-document"`, absent = that default.
+  Pure in `functions/_wardsynq/abdm-hospital.js` (`EXTERNAL_INVOICE_HANDLINGS`, `externalInvoiceHandling`,
+  `externalInvoiceHandlingRefusal`). `abdm` joined the org whitelist (`_opd_org.js wardsynqConfig`).
+- **Save**: `POST /api/queue/org/update` refuses any other value (or a non-object `abdm`) with 422
+  `abdm_invoice_handling_not_built` and a sentence saying the billing model is not built, after authorization, nothing
+  written. No screen writes it today; the value is shown read-only on Admin > Integrations > ABDM with its reason.
+- **Landing** (`abdm-land.js`): `makeConsumeAndLand` reads the hospital's config (`hospitalConfigFor`, wired in
+  `functions/api/connect/[[path]].js` through `orgForTenant`). A stored value this build does not know is NOT followed:
+  the default is applied and named (`source: "unrecognised"`, `configured`). A config that cannot be read applies the
+  default with `source: "unread"`; the transfer is already acknowledged, so holding it would lose the record.
+- **Audit**: each landed external invoice note's `record.ingest` row carries `scope.decidedBy = {policy, value,
+  source}` (new `governedForIngest` option `auditScope(entity)` in `service.js`, generic, used only here).
+- **Guard on the write**: the ABDM landing refuses to write any `Invoice`, `Claim`, `PreAuthorisation` or
+  `CostEstimate` (`BILLING_TYPES`; charges, deposits, payments, refunds and write-offs are all appends to an Invoice),
+  whatever the document or a future adapter mapping produces (GovernanceError `ABDM_NO_BILLING`, quarantined by the hub).
+- Tests: `test/abdm-external-invoice-policy.test.mjs` (resolver, landing audit, the write guard with a mocked adapter
+  that emits billing types, billingReport and invoicesForPatient count nothing, composition sources, the card),
+  `test/org-abdm-invoice-policy-route.test.mjs` (401/403/other hospital/422/positive).
+- **Change later** (when a billing model for external invoices is designed and approved): add the new value to
+  `EXTERNAL_INVOICE_HANDLINGS` with its reason; branch on `handling.value` in `landNdhmDocuments` (the SCCM adapter
+  keeps mapping to the note; the new handling decides what else is written); narrow `BILLING_TYPES` for that value
+  only, never globally; add a control to the ABDM card that saves through `/org/update`; update both tests (the
+  refusal test's value list and the "count nothing" test). Hospitals without the key stay on `clinical-document`.
+
+## 2026-09-14 Level-2 critical-result alerts tell every on-duty nurse in the ward: a named rule until Nurse-in-Charge exists (owner decision)
+
+Owner decision 2026-09-14: level-2 ("overdue") critical-result alerts go to every nurse marked ON DUTY in the affected
+ward until a proper Nurse-in-Charge role or assignment exists. It was implicit in the S3 P0 default ladder ("nurse"
+on the overdue tier); it is now a named, per-hospital, audited rule.
+- **Rule** `wardsynq.criticalEscalation.level2NurseRule`, one allowed value `"all-on-duty-nurses-in-ward"`, absent =
+  that default (`LEVEL2_NURSE_RULES`, `level2NurseRuleOf`, `level2NurseRuleRefusal` in `alert-recipients.js`).
+- **One resolver keyed by rule name**: `level2NurseRecipients(rule, {unit, active, duty})`. It checks BOTH conditions
+  itself rather than trusting the rota reader: the member is active with role `nurse`, is in the rota's on-duty list
+  now, and the assignment's own `unit` is the patient's ward. `resolveRecipients` sends "nurse" on the overdue tier
+  through it (so it also applies at the escalate tier, which is cumulative); other roles and tiers are unchanged.
+- **Unknown ward**: kept as before (the ladder's hospital-wide cover for a patient with no ward); the rule then has no
+  ward to test and records `ward: null`. Flagged, not decided by the owner.
+- **Unknown stored rule** (rollback, group adoption from before the check): never followed silently; the default rule
+  applies so the ward's nurses are still told, and `source: "unrecognised"`, `configured` are recorded and shown.
+- **Record**: the loop notice (`notifications[]`, versioned and audited with the loop) carries `nurseRule = {rule,
+  source, ward, nurses, recipients}`. NO_RECIPIENT is unchanged: loud when the whole tier resolves nobody, with
+  `nurses: 0` naming why.
+- **Save**: `POST /api/queue/org/update` and `POST /api/queue/group/policy` refuse any other rule with 422
+  `level2_nurse_rule_not_built`, after authorization, nothing written. The Alerts card's own save carries the saved key.
+- **Screen**: Admin > Hospital > Critical result alerts to phones shows the rule read-only with "Applies until a
+  Nurse-in-Charge role or assignment is implemented" (from `GET /ward/alert-status` `nurseRule`).
+- Tests: `test/wardsynq-alert-recipients.test.mjs` (rule, off-duty, other ward with a leaky reader, empty set, card),
+  `test/wardsynq-alert-dispatch.test.mjs` (real rota: off-duty, unrostered and other-ward nurses not told; notice
+  names the rule; empty ward nurse set NO_RECIPIENT through the tick), `test/org-level2-nurse-rule-route.test.mjs`,
+  `test/wardsynq-hospital-group.test.mjs` (group policy 422).
+- **Change later** (when a Nurse-in-Charge role or assignment exists): add `"nurse-in-charge"` to `LEVEL2_NURSE_RULES`
+  with its note; add its `case` to `level2NurseRecipients` (read the assignment for the ward, checked on duty and in
+  the ward the same way; decide and record what happens when none is assigned, e.g. fall back to all on-duty nurses
+  with `source` saying so, never silence); add a selector on the Alerts card saving through `/org/update`; decide
+  whether the default changes (hospitals without the key follow the default). Update the refusal tests' value lists.

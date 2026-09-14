@@ -32,6 +32,29 @@ test('mapRow builds the renderPatients shape and splits Age/Sex', () => {
   assert.deepEqual(mapRows([{ 'S.No': '1' }, { 'Name': 'X' }]).map((r) => r.patientFirstName), ['X']);
 });
 
+test('mapRow handles direct camelCase properties from API responses', () => {
+  const p = mapRow({
+    patientId: 'MR26167311',
+    episodeId: 'IPMR260026514',
+    patientFirstName: 'Mr. SOMAYAJULA BALA SUBRAHMANYAM',
+    gender: 'Male',
+    bedName: 'Room9',
+    deptDescription: 'GENERAL MEDICINE',
+    employeeFirstName: 'Dr VAMSI KRISHNA',
+    dob: '56',
+    queueStatus: 'Arrived and Occupied'
+  });
+  assert.equal(p.patientId, 'MR26167311');
+  assert.equal(p.episodeId, 'IPMR260026514');
+  assert.equal(p.patientFirstName, 'Mr. SOMAYAJULA BALA SUBRAHMANYAM');
+  assert.equal(p.dob, '56');
+  assert.equal(p.gender, 'Male');
+  assert.equal(p.bedName, 'Room9');
+  assert.equal(p.deptDescription, 'GENERAL MEDICINE');
+  assert.equal(p.employeeFirstName, 'Dr VAMSI KRISHNA');
+  assert.equal(p.queueStatus, 'Arrived and Occupied');
+});
+
 // Minimal DOM stub: the reader only touches querySelectorAll / querySelector / textContent.
 function el(text, children = [], sel = {}) {
   return { textContent: text, querySelectorAll: (q) => sel[q] || children.filter((c) => c.tag === q), querySelector: (q) => (sel[q] || [])[0] || null };

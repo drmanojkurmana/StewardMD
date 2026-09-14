@@ -252,7 +252,7 @@
     var targetSnippet = pickedElement
       ? '<div style="background:#ffebee;border:1px solid #ffcdd2;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:13px;color:#b71c1c;">' +
         '<b>🎯 Target Element:</b> <code>' + esc(pickedElement.selector) + '</code>' +
-        (pickedElement.snippet ? ' &mdash; <i>"' + esc(pickedElement.snippet) + '"</i>' : '') +
+        (pickedElement.snippet ? ' - <i>"' + esc(pickedElement.snippet) + '"</i>' : '') +
         (pickedElement.parentContext ? ' in <b>' + esc(pickedElement.parentContext) + '</b>' : '') +
         ' <button id="wsqClearTarget" style="float:right;background:none;border:none;color:#b71c1c;text-decoration:underline;cursor:pointer;font-size:12px;">Clear</button></div>'
       : '<div style="margin-bottom:12px;"><button id="wsqPickElBtn" type="button" style="background:#f5f5f5;border:1px dashed #d32f2f;color:#d32f2f;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;">🎯 Point to Exact Element on Screen</button></div>';

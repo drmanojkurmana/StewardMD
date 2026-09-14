@@ -22,7 +22,12 @@ import { makeAbdmDb } from "../../../functions/_connect/abdm/abdm-testkit.js";
 const NOW = "2026-06-01T00:00:00.000Z";
 // An allow-listed ABDM JWKS host (see jws.js ABDM_JWKS_HOSTS) so the REAL getPinnedJwks succeeds under a mock fetch.
 const JWKS_ENV = { ABDM_JWKS_URL: "https://healthidsbx.abdm.gov.in/certs" };
-const NO_JWKS_ENV = {};   // unset URL => getPinnedJwks throws (fail-closed) before any verify
+// An UNREACHABLE JWKS, which is the real availability failure. This used to be `{}` - an env with no
+// ABDM_JWKS_URL - but since D14 the URL is derived from the gateway host, so "unconfigured" is no longer
+// a way to make the JWKS unavailable and the test was silently exercising a path that cannot happen.
+// (The config-side failure, an unknown ABDM_ENV, is covered in wire-config.test.mjs.)
+const NO_JWKS_ENV = {};
+const deadJwksFetch = () => async () => { throw new Error("certs endpoint unreachable"); };
 
 function kvMock() { const m = new Map(); return { get: async (k) => m.get(k) ?? null, put: async (k, v) => void m.set(k, String(v)) }; }
 function jwksFetch() { return async () => ({ ok: true, status: 200, json: async () => ({ keys: [{ kid: "k1", kty: "RSA" }] }) }); }
@@ -122,10 +127,10 @@ test("invalid signature => NOT persisted, fail-closed ok:false, audit consent.de
 });
 
 test("JWKS unavailable during verify => fail-closed (NEVER ok:true) and verifyJws is never reached", async () => {
-  // env has no ABDM_JWKS_URL => the REAL getPinnedJwks throws before any signature check. Even though the
-  // injected verifyJws would say ok:true, it must never be called and nothing must persist.
+  // The JWKS cannot be fetched => the REAL getPinnedJwks throws before any signature check. Even though
+  // the injected verifyJws would say ok:true, it must never be called and nothing must persist.
   const verify = stubVerify({ ok: true, payload: signedDetail() });
-  const deps = makeDeps({ verifyJws: verify });
+  const deps = makeDeps({ verifyJws: verify, fetch: deadJwksFetch() });
   const r = await verifyConsentArtifact(NO_JWKS_ENV, deps, { signature: "h.p.s" });
   assert.equal(r.ok, false, "fail-closed when JWKS unavailable");
   assert.notEqual(r.ok, true);

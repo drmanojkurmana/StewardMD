@@ -35,12 +35,14 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
-import { problemsForSummary } from "./migrate-problem.js";
+import { problemLine, problemsForSummary } from "./migrate-problem.js";
+import { diagnosisFor } from "./patient-record.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
 import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
+const investigationLine = (s) => `${s.display || s.code} (${s.status})`;
 
 /** Builds the governed service, or a shaped refusal. Never throws. */
 async function openService(request, env, ctx, need) {
@@ -137,7 +139,7 @@ function assembleDischargeSummary(r) {
     : "None documented on this admission.";
 
   const investigations = (r.serviceRequests || []).length
-    ? r.serviceRequests.map((s) => `${s.display || s.code} (${s.status})`).join("\n")
+    ? r.serviceRequests.map(investigationLine).join("\n")
     : NOT_RECORDED;
 
   // Assessment/plan are COPIED from what a clinician actually wrote, never composed.
@@ -171,6 +173,30 @@ function assembleDischargeSummary(r) {
       + "recorded observations, medication orders and administrations, documented allergies, "
       + "investigation requests and clinician notes. Nothing here is generated or inferred; a section "
       + "reading \"Not recorded.\" means no such entry exists in the record. Review and sign before use.",
+  };
+}
+
+/**
+ * PURE. D5: the diagnoses and investigations sections as entries, so the patient portal can withhold ONE
+ * entry (a differential, a result still under review, a sensitive test) instead of the whole section.
+ *
+ * Each entry names the record it came from and is the same line the section text carries. `text` is the
+ * section text the entries describe: the portal uses the entries only while the stored section still
+ * equals it, so a section a clinician rewrote is free text again and is withheld whole, as before.
+ * Nothing here decides what is withheld; that is judged when the patient reads it (portal-view.js).
+ *
+ * @param r the same inputs assembleDischargeSummary took; sections: what it returned
+ */
+function structuredSections(r, sections) {
+  const rows = (r.problems || []).filter(Boolean);
+  const ordered = [...rows.filter((c) => c.clinicalStatus === "active"), ...rows.filter((c) => c.clinicalStatus !== "active")];
+  return {
+    diagnoses: { text: sections.diagnoses, items: ordered.map((c) => ({
+      conditionId: c.id, group: c.clinicalStatus === "active" ? "active" : "closed",
+      /* Whether it was a diagnosis when this line was written. A differential stays withheld even after it is confirmed: the line still says differential. */
+      diagnosis: !!diagnosisFor(c), text: problemLine(c) })) },
+    investigations: { text: sections.investigations, items: (r.serviceRequests || []).filter(Boolean).map((s) => ({
+      serviceRequestId: s.id, code: s.code || null, text: investigationLine(s) })) },
   };
 }
 
@@ -218,7 +244,7 @@ async function draftDischargeSummary(request, env, ctx) {
   administrations = native(administrations);
   serviceRequests = native(serviceRequests);
   const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
-  const assembled = assembleDischargeSummary({
+  const inputs = {
     encounter, patient,
     observations: mine(observations),
     orders: mine(orders),
@@ -231,7 +257,8 @@ async function draftDischargeSummary(request, env, ctx) {
     problems: problems || [],
     reconciliation,
     dischargedAt: ctx.dischargedAt || encounter.periodEnd || null,
-  });
+  };
+  const assembled = assembleDischargeSummary(inputs);
 
   const id = dischargeSummaryIdFor(encounterId);
   let current;
@@ -256,6 +283,7 @@ async function draftDischargeSummary(request, env, ctx) {
   // assembled text, and the summary would have to either claim everything is sourced or claim
   // nothing is.
   candidate.editedSections = editedSections;
+  candidate.structured = structuredSections(inputs, assembled);
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
@@ -321,6 +349,8 @@ async function signDischargeSummary(request, env, ctx) {
   // Carried onto the signed version. Signing must not erase the record of which words were the
   // clinician's own: that provenance is part of what is being signed.
   if (Array.isArray(current.editedSections)) signed.editedSections = current.editedSections;
+  // And the entries the portal withholds one at a time. A note drafted before D5 has none and stays coarse.
+  if (current.structured) signed.structured = current.structured;
   try {
     const out = await svc.put(signed, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, noteId: id, signed: true, signedBy: resolved.actor.id, editedSections: signed.editedSections || [], version: out.record.version, actor: resolved.actor.id };
@@ -507,7 +537,7 @@ async function readDischargeSummary(request, env, ctx) {
 }
 
 export {
-  NOT_RECORDED, dischargeSummaryIdFor, lengthOfStayDays, assembleDischargeSummary,
+  NOT_RECORDED, dischargeSummaryIdFor, lengthOfStayDays, assembleDischargeSummary, structuredSections,
   mergeSections, pendingItems, readDischargeSummary,
   draftDischargeSummary, signDischargeSummary, dischargePatient,
 };

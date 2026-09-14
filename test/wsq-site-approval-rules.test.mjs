@@ -45,3 +45,28 @@ test("half-filled or impossible rules are refused on screen, not saved", () => {
   assert.match(A.read([row("Invoice", { levels: "0" })]).error, /between 1 and 5/);
   assert.match(A.read([row("Invoice", { expires: "-3" })]).error, /above zero/);
 });
+
+test("OPD token numbering card: what is saved is exactly what the org model keeps", async () => {
+  const { tokenConfig } = await import("../functions/_opd_org.js");
+  const K = sb.window.WSQ._tokenCard;
+  const depts = [{ id: "dcard", name: "Cardiology", code: "CAR", active: true }, { id: "dmed", name: "General Medicine", code: "GM", active: true }, { id: "dx", name: "Closed", active: false }];
+  const html = K.html(esc, { scope: "department", prefixes: { cardiology: "C", ghost: "G" }, deptAliases: { "gen med": "dmed" } }, depts);
+  assert.match(html, /value="department" selected/);
+  assert.match(html, /data-tok-dept="dcard"[\s\S]*?value="C"/, "a legacy name-keyed prefix shows in its department's row");
+  assert.match(html, /data-tok-dept="dmed"[\s\S]*?placeholder="GM"[\s\S]*?value="gen med"/, "the code is the default prefix; aliases shown");
+  assert.doesNotMatch(html, /data-tok-dept="dx"/, "inactive departments are not offered");
+  assert.match(html, /name no department: ghost = G/, "a stale saved prefix is visible, not silently dropped");
+  assert.match(K.html(esc, undefined, depts), /value="hospital" selected/, "default is one sequence for the hospital");
+  assert.match(K.html(esc, {}, undefined), /Loading departments/);
+  assert.match(K.html(esc, {}, null), /could not be loaded[\s\S]*Do not read this as no departments/);
+  const out = K.read("department", [{ departmentId: "dcard", prefix: "c", aka: "Heart OPD, cardio" }, { departmentId: "dmed", name: "General Medicine", prefix: "", code: "GM", aka: "" }]);
+  // D14: per department, every department needs its own prefix (typed or its code) and no two alike.
+  assert.match(K.read("department", [{ departmentId: "dmed", name: "General Medicine", prefix: "", code: "" }]).error, /General Medicine needs a prefix/);
+  assert.match(K.read("department", [{ departmentId: "a", name: "A", prefix: "GM" }, { departmentId: "b", name: "B", code: "GM" }]).error, /A and B both use the prefix GM/);
+  assert.equal(K.read("hospital", [{ departmentId: "dmed", name: "General Medicine", prefix: "", code: "" }]).error, undefined, "one sequence for the hospital needs no prefixes");
+  assert.deepEqual(JSON.parse(JSON.stringify(out.tokens)), { scope: "department", prefixes: { dcard: "C" }, deptAliases: { "heart opd": "dcard", cardio: "dcard" } });
+  assert.deepEqual(tokenConfig(out.tokens), { scope: "department", prefixes: { dcard: "C" }, deptAliases: { "heart opd": "dcard", cardio: "dcard" } });
+  assert.match(K.read("department", [{ departmentId: "dcard", prefix: "TOOLONG" }]).error, /one to three letters/);
+  assert.match(K.read("hospital", [{ departmentId: "dcard", aka: "OPD" }, { departmentId: "dmed", aka: "opd" }]).error, /two departments/);
+  assert.doesNotMatch(html, /—/, "no em dash");
+});

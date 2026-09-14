@@ -219,6 +219,12 @@ const PARAMS = Object.freeze({
     basedOn: { type: "reference", get: (r) => r.basedOn, target: "ServiceRequest" },
     started: { type: "date", get: (r) => r.started },
   },
+  /* G6. An immunization is searched the way a clinic asks: by patient, by status, by vaccine, by date given. */
+  Immunization: {
+    status: { type: "token", get: (r) => r.status },
+    "vaccine-code": { type: "token", get: (r) => r.vaccineCode },
+    date: { type: "date", get: (r) => r.occurrenceDateTime },
+  },
   Provenance: {
     target: { type: "reference", get: (r) => r.target, target: "*" },
     recorded: { type: "date", get: (r) => r.recorded },
@@ -234,7 +240,7 @@ const PATIENT_REF = Object.freeze({
   Consent: (r) => r.patient, Provenance: null,
   Specimen: (r) => r.subject, MedicationDispense: (r) => r.subject,
   CarePlan: (r) => r.subject, ImagingStudy: (r) => r.subject,
-  Procedure: (r) => r.subject, RiskAssessment: (r) => r.subject,
+  Procedure: (r) => r.subject, RiskAssessment: (r) => r.subject, Immunization: (r) => r.patient,
   /* An Appointment's patient is a PARTICIPANT, not a subject: R4 models it as a list of actors, one
    * of whom is the patient. The compartment is that actor, found rather than assumed to be first. */
   Appointment: (r) => ((r.participant || []).map((x) => x && x.actor).find((a) => a && /^Patient\//.test(String(a.reference || ""))) || null),
@@ -715,6 +721,7 @@ const SUMMARY = Object.freeze({
   Procedure: ["identifier", "status", "code", "subject", "encounter", "performedPeriod", "performedDateTime"],
   Appointment: ["identifier", "status", "start", "end", "participant", "reasonCode"],
   RiskAssessment: ["identifier", "status", "subject", "encounter", "occurrenceDateTime", "prediction", "method"],
+  Immunization: ["identifier", "status", "statusReason", "vaccineCode", "patient", "encounter", "occurrenceDateTime", "primarySource"],
 });
 const ALWAYS = ["resourceType", "id", "meta"];
 const SUBSETTED = { system: "http://terminology.hl7.org/CodeSystem/v3-ObservationValue", code: "SUBSETTED", display: "Resource encoded in summary mode" };

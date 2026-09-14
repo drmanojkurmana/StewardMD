@@ -45,6 +45,7 @@ import { sccmAdapter } from "../../wardsynq/adapters/wardsynq-sccm-adapter.js";
 import { RecordService } from "./service.js";
 import { reconcileIdentity, identityCandidates, rebind } from "./fhir-inbound.js";
 import { consumeNdhmBundle } from "../_connect/engine.js";
+import { externalInvoiceHandling } from "./abdm-hospital.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -59,8 +60,17 @@ function abdmServiceActor() {
     scope: { read: ["Patient"], write: [] } });
 }
 
-/** PURE. The SCCM types this bridge will land, which is what the adapter can map. */
-const LANDABLE = Object.freeze(["Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference", "ImagingStudy"]);
+/** PURE. The SCCM types this bridge will land, which is what the adapter can map. Immunization and Invoice
+ *  since the ABDM V3 merge (SCCM 1.1): an immunization files as the chart's own Immunization record; another
+ *  facility's invoice files as an external note, never as this hospital's bill (sccm adapter explains). */
+const LANDABLE = Object.freeze(["Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference", "ImagingStudy", "Immunization", "Invoice"]);
+
+/* This hospital's money records: the invoice ledger (charges, deposits, payments, refunds and write-offs are all
+ * appends to an Invoice), claims, pre-authorisations and estimates. Owner decision 2026-09-14: nothing that
+ * arrives over ABDM is ever written as one, whatever the document or the adapter produced. The guard sits on
+ * the write itself, so a future mapping that emitted one is refused and quarantined, not filed. */
+const BILLING_TYPES = Object.freeze(["Invoice", "Claim", "PreAuthorisation", "CostEstimate"]);
+const isExternalInvoiceNote = (e) => !!(e && e.resourceType === "ClinicalNote" && e.noteType === "external-invoice");
 
 /**
  * Lands the documents from ONE completed ABDM transfer.
@@ -68,7 +78,8 @@ const LANDABLE = Object.freeze(["Encounter", "Condition", "MedicationStatement",
  * @param {object} env
  * @param {{repository: object, pseudonym?: Function, now?: Function}} deps
  * @param {{tenantId: string, transactionId: string, documents: object[], consent: object|null,
- *          onBehalfOf?: string, scope?: string[]}} input
+ *          onBehalfOf?: string, scope?: string[], invoiceHandling?: object}} input
+ *   invoiceHandling: externalInvoiceHandling() of this hospital's config (abdm-hospital.js); absent is the default.
  * @returns {Promise<{ok: boolean, landed: number, written: number, quarantined: number, refused: number, results: object[]}>}
  */
 async function landNdhmDocuments(env, deps, input) {
@@ -87,6 +98,8 @@ async function landNdhmDocuments(env, deps, input) {
     error: "no_consent", detail: "a transfer with no consent artifact to bind it is not filed; nothing was written" };
 
   const now = deps.now || (() => new Date().toISOString());
+  const handling = i.invoiceHandling && i.invoiceHandling.policy ? i.invoiceHandling : externalInvoiceHandling(null);
+  const decidedBy = { policy: handling.policy, value: handling.value, source: handling.source, ...(handling.configured ? { configured: handling.configured } : {}) };
   const svc = new RecordService({
     repository: deps.repository, pseudonym: deps.pseudonym || (async () => null),
     tenant: { id: tenantId }, actor: abdmServiceActor(), role: "abdm", roleSource: "wardsynq-abdm", now,
@@ -125,7 +138,15 @@ async function landNdhmDocuments(env, deps, input) {
      * exchange and the document's ordinal distinguishes the pages within it, so a gateway that
      * re-delivers a transfer lands it once. */
     const key = `ingest:abdm:${transactionId}:${n}`;
-    const governed = svc.governedForIngest({ idempotencyKey: key });
+    // Every landed external invoice's audit row names the policy and value that decided what it became.
+    const governed = svc.governedForIngest({ idempotencyKey: key, auditScope: (e) => (isExternalInvoiceNote(e) ? { decidedBy } : null) });
+    const put = governed.put;
+    governed.put = async (actor, entity) => {
+      if (entity && BILLING_TYPES.includes(entity.resourceType)) {
+        throw new GovernanceError(`an ABDM transfer never writes a ${entity.resourceType}: ${handling.policy} is "${handling.value}"`, "ABDM_NO_BILLING");
+      }
+      return put(actor, entity);
+    };
     if (await governed.alreadyIngested()) {
       results.push({ index: n, ok: true, duplicate: true, reason: "this document has already been filed" });
       continue;
@@ -177,7 +198,7 @@ async function landNdhmDocuments(env, deps, input) {
  * only do that from RECEIVING. It is also a NO-OP whenever the two halves of the exchange have not
  * both arrived - a push that lands before our own request simply stays buffered.
  *
- * deps: { env, consumeTransfer, consumeDeps, recordDeps, consentFor?, now? }
+ * deps: { env, consumeTransfer, consumeDeps, recordDeps, consentFor?, hospitalConfigFor?(tenantId) -> org.wardsynq, now? }
  */
 function makeConsumeAndLand(deps) {
   const d = deps || {};
@@ -192,12 +213,18 @@ function makeConsumeAndLand(deps) {
      * it is honoured here by simply doing nothing. */
     if (!out || !out.acked || !documents.length) return { ok: true, landed: 0, written: 0, quarantined: 0, refused: 0, results: [], skipped: !out || !out.acked ? "not-the-ack-winner" : "nothing-decrypted" };
     const consent = d.consentFor ? await d.consentFor(i.consentId) : null;
+    /* The hospital's own policy for external invoices. A config that cannot be read never holds up a transfer
+     * that is already acknowledged: the default (the only built handling, and never billing) is applied and
+     * the audit row says the hospital's setting was unread. */
+    let invoiceHandling;
+    try { invoiceHandling = externalInvoiceHandling(d.hospitalConfigFor ? await d.hospitalConfigFor(i.tenantId) : null); }
+    catch { invoiceHandling = { ...externalInvoiceHandling(null), source: "unread" }; }
     return landNdhmDocuments(d.env, d.recordDeps(i.tenantId), {
-      tenantId: i.tenantId, transactionId: i.transactionId, documents, consent,
+      tenantId: i.tenantId, transactionId: i.transactionId, documents, consent, invoiceHandling,
       // Whoever asked for this data. The consent row is the authority on that, not the webhook.
       onBehalfOf: i.onBehalfOf || (consent && consent.actor) || null,
     });
   };
 }
 
-export { LANDABLE, abdmServiceActor, landNdhmDocuments, makeConsumeAndLand };
+export { LANDABLE, BILLING_TYPES, abdmServiceActor, landNdhmDocuments, makeConsumeAndLand };

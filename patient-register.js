@@ -62,6 +62,27 @@
    * hospital could not even TYPE the field it needed. Unset means IN - no existing caller changes. */
   function isUS(o) { return String(o && o.region).toUpperCase() === "US"; }
 
+  /* D7: WHICH DEPARTMENT the patient is queued in, when the hospital has departments. The department
+   * decides the token sequence (and its prefix) when each department numbers separately, so the server
+   * resolves and checks it; this only offers the hospital's own active departments. opts.departments:
+   * undefined = not a queue registration (no picker), null = the list could not be loaded (said so, never
+   * drawn as "no departments"), [] = the hospital has none. opts.departmentRequired: each department
+   * numbers separately, so a choice is needed. */
+  function deptHtml(o) {
+    if (o.departments === undefined) return "";
+    if (o.departments === null) {
+      return '<p class="pr-warn" data-f="departmentId">The hospital\'s departments could not be loaded.' +
+        (o.departmentRequired ? " A token cannot be given without one: close this and try again." : " The patient is queued without a department.") + "</p>";
+    }
+    var act = o.departments.filter(function (d) { return d && d.id && d.active !== false; });
+    if (!act.length) return o.departmentRequired ? '<p class="pr-warn" data-f="departmentId">This hospital numbers tokens per department but has no active department. An administrator adds one under Admin Center, Departments.</p>' : "";
+    return '<div class="pr-f" data-f="departmentId"><label for="pr_departmentId">Department' + (o.departmentRequired ? '<i aria-hidden="true">*</i>' : "") + "</label>" +
+      '<select id="pr_departmentId"><option value="">' + (o.departmentRequired ? "Choose a department" : "No department") + "</option>" +
+      act.map(function (d) { return '<option value="' + esc(d.id) + '"' + (d.id === o.departmentId ? " selected" : "") + ">" + esc(d.name || d.code || "Department") + "</option>"; }).join("") +
+      "</select>" + (o.departmentRequired ? '<small class="pr-hint">Each department calls its own token numbers.</small>' : "") +
+      '<small class="pr-err" role="alert"></small></div>';
+  }
+
   function sheetHtml(o) {
     var us = isUS(o);
     var mrLine = o.mode === "native"
@@ -91,6 +112,7 @@
 
           '<h3 class="pr-sec">Visit</h3>' +
           '<div class="pr-f" data-f="visitType"><label>Visit type</label>' + seg("visitType", VISITS, "new") + "</div>" +
+          deptHtml(o) +
           (o.mode === "native" ? "" : field("mrn", "Hospital MR number", { ph: "Leave blank if not issued", max: 40 })) +
           '<p class="pr-note">' + esc(mrLine) + "</p>" +
 
@@ -182,6 +204,7 @@
         abhaConsent: !!(q("abhaConsent") && q("abhaConsent").checked),
         address: val("address"), district: val("district"), state: val("state"), pincode: val("pincode"),
         referredBy: val("referredBy"),
+        departmentId: q("departmentId") ? q("departmentId").value : "",
         confirmDuplicate: state.confirmDuplicate
       };
     }
@@ -199,6 +222,7 @@
        * still worth catching locally; the shape is the server's answer, per the comment up top. */
       if (!val("mobile")) { setErr("mobile", "Mobile number is required."); ok = false; }
       if (!val("ageYears") && !val("ageMonths")) { setErr("ageYears", "Enter the patient's age."); ok = false; }
+      if (opts.departmentRequired && q("departmentId") && !q("departmentId").value) { setErr("departmentId", "Choose a department to give a token."); ok = false; }
       return ok;
     }
 
@@ -218,16 +242,20 @@
       var btn = host.querySelector("#prSave");
       btn.disabled = true; btn.textContent = "Adding…";
       var reset = function () { btn.disabled = false; btn.textContent = SUBMIT_LABEL; };
-      Promise.resolve(opts.submit(payload())).then(function (r) {
+      var sent = payload();
+      Promise.resolve(opts.submit(sent)).then(function (r) {
         if (r && r.ok) {
           host.innerHTML = doneHtml({ mrn: r.mrn, pending: r.pending, name: val("name") });
-          try { if (opts.onAdded) opts.onAdded(r); } catch (e) {}
+          // The answers travel with the result so the caller queues the patient in the department chosen.
+          try { if (opts.onAdded) opts.onAdded(r, sent); } catch (e) {}
           return;
         }
         reset();
         if (r && r.error === "duplicate" && r.duplicateOf) { showDuplicate(r.duplicateOf); return; }
         if (r && r.errors) {
           Object.keys(r.errors).forEach(function (k) { setErr(k === "age" ? "ageYears" : k, r.errors[k]); });
+          // A refusal about the queue (D14) may name a field the sheet is not showing: say it at the foot too.
+          if (r.errors.departmentId && r.message) host.querySelector("#prFerr").textContent = r.message;
           var first = host.querySelector(".pr-f.bad input");
           if (first) first.focus();
           return;

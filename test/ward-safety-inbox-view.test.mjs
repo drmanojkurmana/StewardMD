@@ -29,7 +29,7 @@ function loadWard() {
 
 const ITEM = {
   type: "critical-result",
-  detail: "Potassium 6.9 mmol/L — nobody has acknowledged this yet",
+  detail: "Potassium 6.9 mmol/L. Nobody has acknowledged this yet",
   since: "2026-09-13T09:00:00.000Z",
   escalation: { level: "escalate", hoursOpen: 3 },
   sourceRef: { loopId: "loop1" },

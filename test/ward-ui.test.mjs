@@ -421,7 +421,9 @@ test("THE NOTE COMPOSER SUPPLIES HEADINGS AND NEVER CONTENT", () => {
   const src = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
   const saveNote = src.slice(src.indexOf("function saveNote"), src.indexOf("function findCode"));
   assert.ok(saveNote.length > 100, "found the composer's save");
-  assert.match(saveNote, /apiPost\("\/ward\/note",/);
+  // G2: through the bedside-write path, which posts to /ward/note (or keeps it on the device offline).
+  assert.match(saveNote, /bedsideWrite\("note",/);
+  assert.match(src, /note: "\/ward\/note"/);
   assert.ok(!/note-sign|signedBy|sign\(/.test(saveNote), "and it carries no signature");
 });
 

@@ -369,7 +369,8 @@ async function marSchedule(request, env, ctx) {
   let truncated = false, unreadDoses = 0;
 
   for (const o of (orders || []).filter((x) => x && x.status === "active")) {
-    const card = { orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
+    // orderVersion: the order as the nurse saw it. A dose charted against it is refused if the order changed (G2).
+    const card = { orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
     const spec = parseFrequency(o.frequency);
     if (!spec) {
       // Named, not omitted. A ward that cannot see this order has no way to know a dose is missing.

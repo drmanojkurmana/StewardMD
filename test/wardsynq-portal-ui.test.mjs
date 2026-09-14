@@ -12,12 +12,14 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
 const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
+const I18N = read("wardsynq/site/i18n.js");
 const PORTAL = read("wardsynq/site/portal.js");
 const STAFF = read("wardsynq/site/pages/portal-access.js");
 const ROUTER = read("functions/api/queue/[[path]].js");
 
 function loadPortal() {
   const window = {};
+  vm.runInNewContext(I18N, { window });
   vm.runInNewContext(PORTAL, { window });
   return window.WSQPortal;
 }
@@ -69,8 +71,14 @@ test("portal: messages show the not-an-emergency warning above the box, and esca
 });
 
 test("portal: no staff session, no PHI in the address, POST only", () => {
-  assert.doesNotMatch(PORTAL, /firebase|api\/queue|Authorization|localStorage/);
+  assert.doesNotMatch(PORTAL, /firebase|api\/queue|Authorization/);
   assert.match(PORTAL, /sessionStorage/);
+  // localStorage (D6) holds only the chosen language code, never the session: PHI still lives only
+  // in sessionStorage, and only under the session key.
+  assert.match(PORTAL, /localStorage/, "language preference");
+  const localStorageCalls = PORTAL.match(/localStorage\.\w+\(([^)]*)\)/g) || [];
+  assert.ok(localStorageCalls.length > 0);
+  for (const call of localStorageCalls) assert.doesNotMatch(call, /\bKEY\b/, "the session key never reaches localStorage: " + call);
   assert.doesNotMatch(PORTAL, /fetch\([^)]*\?/, "no query strings on portal calls");
   assert.match(PORTAL, /method: "POST"/);
   const html = read("wardsynq/site/portal.html");

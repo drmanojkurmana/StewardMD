@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["integrations", "Integrations"]);
+    if (c.isWardsynq()) tabs.push(["seed", "Clinical seed data"], ["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,9 +67,56 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
+
+  // ---- Clinical seed data (D10) ------------------------------------------------------------------
+  /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
+   * the other seed lists), item by item. An item is UNAPPROVED until signed off by the named signatory for its
+   * CURRENT content; a signed item whose content later changed is unapproved again (the server decides by
+   * fingerprint). Every hospital admin sees the state; only the StewardMD platform owner is offered sign-off,
+   * and the server refuses anyone else. r: undefined = loading, { failed } = could not be loaded. */
+  function seedHtml(esc, r) {
+    var h = '<div class="card"><h2>Clinical seed data</h2>';
+    if (r === undefined) return h + '<p><span class="spin"></span> Loading...</p></div>';
+    if (r.failed) return h + '<div class="msg err">The sign-off state could not be loaded: ' + esc(r.message || "failed") + ". Treat every item as UNAPPROVED.</div></div>";
+    var total = 0, unapproved = 0;
+    r.lists.forEach(function (l) { total += l.items.length; unapproved += l.unapproved; });
+    return h + '<p class="quiet">Clinical content shipped with WardSynQ. Each item is UNAPPROVED until ' + esc(r.signatory) + " signs off its exact current content. " +
+      "Signing records the sign-off; it does not change how any safety check behaves.</p>" +
+      '<p><span class="pill ' + (unapproved ? "warn" : "ok") + '">' + unapproved + " of " + total + " items unapproved</span></p>" +
+      r.lists.map(function (l) {
+        return "<h3>" + esc(l.title) + ' <span class="quiet">(' + esc(l.source) + ")</span></h3>" +
+          '<div class="tbl"><table><thead><tr><th>Item</th><th>Version</th><th>Sign-off</th>' + (r.canSign ? "<th></th>" : "") + "</tr></thead><tbody>" +
+          l.items.map(function (it) {
+            var signed = it.status === "signed";
+            return '<tr data-seed="' + esc(l.id) + "/" + esc(it.id) + '"><td>' + esc(it.label) + '<details><summary class="quiet">content</summary><pre style="white-space:pre-wrap;max-width:60ch">' + esc(it.content) + "</pre></details></td>" +
+              '<td class="mono">' + esc(it.version) + "</td>" +
+              "<td>" + (signed ? '<span class="pill ok">' + esc(it.signoff.text) + "</span>" : '<span class="pill stop">UNAPPROVED</span>') + "</td>" +
+              (r.canSign ? "<td>" + (signed ? "" : '<button type="button" class="btn ghost" data-seed-sign="' + esc(l.id) + '" data-seed-item="' + esc(it.id) + '" data-seed-hash="' + esc(it.contentHash) + '">Sign off</button>') + "</td>" : "") + "</tr>";
+          }).join("") + "</tbody></table></div>";
+      }).join("") + '<div id="seedMsg"></div></div>';
+  }
+  WSQ._seedHtml = seedHtml;
+  function renderSeed(c, body) {
+    body.innerHTML = seedHtml(c.esc, undefined);
+    return c.api("/seed/status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      body.innerHTML = seedHtml(c.esc, r && r.ok ? r : { failed: true, message: refusal(r) });
+      body.querySelectorAll("[data-seed-sign]").forEach(function (b) {
+        b.onclick = function () {
+          var name = window.prompt("Sign off this item's content as shown.\n\nType the signatory's name exactly (" + r.signatory + "):", "");
+          if (name == null) return;
+          if (!window.confirm("I have reviewed the content of " + b.getAttribute("data-seed-item") + " and sign it off as " + name + ".")) return;
+          b.disabled = true;
+          c.api("/seed/signoff", { listId: b.getAttribute("data-seed-sign"), itemId: b.getAttribute("data-seed-item"), contentHash: b.getAttribute("data-seed-hash"), signatory: name, attest: true }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; document.getElementById("seedMsg").innerHTML = '<div class="msg err">Not signed: ' + c.esc(refusal(x)) + "</div>"; return; }
+            c.toast(x.signoff.text); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
 
   // ---- Hospital -------------------------------------------------------------------------------
   /* WHO MAY WRITE A CLINICAL NOTE. Writing a note needs emr.treat, the prescribing capability, so
@@ -201,6 +248,284 @@
       });
     };
   }
+  /* OPD TOKEN NUMBERS. The number the waiting hall calls out. One sequence for the whole hospital by
+   * default; per department when chosen, each department with an optional letter prefix ("A-012") so
+   * two departments' number 12 are told apart. Applies to tickets registered after saving; a token
+   * already given is never changed. */
+  /* D7: one row per ACTIVE department, keyed by its id, so renaming a department keeps its prefix and its
+   * running sequence. A prefix saved before this was keyed by the department's name: it is shown in the
+   * row whose name matches, and a saved name that matches no department is listed so it is not silently
+   * lost on the next save. "Also known as" maps the names the EMR or a doctor's session use for this
+   * department ("Gen Med", "General Medicine OPD") to it; each is used to number imported patients.
+   * departments: undefined = loading, null = could not be loaded, [] = none set up. */
+  function lc(x) { return String(x == null ? "" : x).trim().toLowerCase(); }
+  function tokenCardHtml(esc, tokens, departments) {
+    var t = tokens || {}, dept = t.scope === "department", pre = t.prefixes || {}, al = t.deptAliases || {};
+    var h = '<div class="card"><h2>OPD token numbers</h2>' +
+      '<label class="f"><span>Numbering</span><select id="tokScope">' +
+        '<option value="hospital"' + (dept ? "" : " selected") + ">One sequence for the whole hospital</option>" +
+        '<option value="department"' + (dept ? " selected" : "") + ">Each department numbers separately</option></select></label>";
+    if (departments === undefined) return h + '<p><span class="spin"></span> Loading departments...</p></div>';
+    if (departments === null) return h + '<div class="msg err">The departments could not be loaded, so prefixes cannot be shown or saved. Do not read this as no departments.</div></div>';
+    var act = departments.filter(function (d) { return d && d.id && d.active !== false; });
+    var used = {};
+    var rows = act.map(function (d) {
+      var p = pre[lc(d.id)] || pre[lc(d.name)] || "";
+      if (pre[lc(d.id)]) used[lc(d.id)] = 1; else if (pre[lc(d.name)]) used[lc(d.name)] = 1;
+      var aka = Object.keys(al).filter(function (k) { return al[k] === d.id; });
+      return '<tr data-tok-dept="' + esc(d.id) + '" data-tok-name="' + esc(d.name) + '"><td>' + esc(d.name) + (d.code ? ' <span class="quiet">(' + esc(d.code) + ")</span>" : "") + "</td>" +
+        '<td><input class="tokPrefix" maxlength="3" style="width:5em" value="' + esc(p) + '" placeholder="' + esc(/^[A-Za-z0-9]{1,3}$/.test(d.code || "") ? String(d.code).toUpperCase() : "") + '"></td>' +
+        '<td><input class="tokAka" style="width:100%" value="' + esc(aka.join(", ")) + '" placeholder="Names the EMR uses, comma separated"></td></tr>';
+    }).join("");
+    var stale = Object.keys(pre).filter(function (k) { return !used[k]; });
+    return h + (act.length
+        ? '<div class="tbl"><table><thead><tr><th>Department</th><th>Prefix</th><th>Also known as</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+        : '<p class="quiet">No active departments. Add them under Departments before numbering per department.</p>') +
+      (stale.length ? '<div class="msg note">Saved prefixes that name no department: ' + esc(stale.map(function (k) { return k + " = " + pre[k]; }).join(", ")) + ". Saving this card drops them.</div>" : "") +
+      '<p class="quiet">Prefixes are used only when each department numbers separately, and then every department needs its own: the desk cannot give a token in a department without one. A blank prefix uses the department code shown grey when that code is one to three letters or digits. Numbers start again at 1 each day, and a token already given never changes, including when the patient is moved to a room in another department.</p>' +
+      '<button class="btn" id="tokSave" type="button">Save</button><div id="tokMsg"></div></div>';
+  }
+  /* rows: [{ departmentId, prefix, aka }] read from the table. Returns { tokens } or { error }. */
+  function readTokenCard(scope, rows) {
+    var prefixes = {}, deptAliases = {}, taken = {}, perDept = scope === "department";
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], p = String(r.prefix || "").trim().toUpperCase();
+      if (p && !/^[A-Z0-9]{1,3}$/.test(p)) return { error: "A prefix is one to three letters or digits: " + p };
+      if (p) prefixes[r.departmentId] = p;
+      /* D14: numbering per department needs every department's own prefix (typed, or its code shown grey),
+       * and no two alike, or two departments call the same number. The server refuses the same. */
+      var eff = p || String(r.code || "").trim().toUpperCase();
+      if (perDept && !/^[A-Z0-9]{1,3}$/.test(eff)) return { error: (r.name || "A department") + " needs a prefix before each department can number separately." };
+      if (perDept && taken[eff]) return { error: taken[eff] + " and " + (r.name || "another department") + " both use the prefix " + eff + ". Give each department its own." };
+      if (perDept) taken[eff] = r.name || r.departmentId;
+      var names = String(r.aka || "").split(",");
+      for (var j = 0; j < names.length; j++) {
+        var n = lc(names[j]); if (!n) continue;
+        if (deptAliases[n] && deptAliases[n] !== r.departmentId) return { error: "\"" + names[j].trim() + "\" is given to two departments. A name can point to one department only." };
+        deptAliases[n] = r.departmentId;
+      }
+    }
+    return { tokens: { scope: scope === "department" ? "department" : "hospital", prefixes: prefixes, deptAliases: deptAliases } };
+  }
+  WSQ._tokenCard = { html: tokenCardHtml, read: readTokenCard };
+  function wireTokenCard(c) {
+    var box = document.getElementById("tokCard");
+    if (!box) return;
+    var draw = function (depts) {
+      box.innerHTML = tokenCardHtml(c.esc, (c.state.org || {}).tokens, depts);
+      var btn = document.getElementById("tokSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var m = document.getElementById("tokMsg");
+        var rows = Array.prototype.map.call(box.querySelectorAll("tr[data-tok-dept]"), function (tr) {
+          var pin = tr.querySelector(".tokPrefix");
+          return { departmentId: tr.getAttribute("data-tok-dept"), name: tr.getAttribute("data-tok-name"), prefix: pin.value, code: pin.getAttribute("placeholder"), aka: tr.querySelector(".tokAka").value };
+        });
+        var out = readTokenCard(document.getElementById("tokScope").value, rows);
+        if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+        btn.disabled = true;
+        c.api("/org/update", { orgId: c.state.orgId, tokens: out.tokens }).then(function (r) {
+          btn.disabled = false;
+          if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+          c.state.org = r.org; draw(depts); c.toast("Token numbering saved.");
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? (r.departments || []) : null); }, function () { draw(null); });
+  }
+  /* D11 A: CLINICAL SETTINGS. The six settings each ward screen reads, in one place: apply a template to fill
+   * the form, edit, save. The server validates and answers with what it now holds, and that read-back is what
+   * this card shows after a save, never the form's own values. r: undefined = loading, null = could not be
+   * loaded (said, never drawn as empty settings), else { settings, templates }. */
+  var ACUITY = ["1", "2", "3", "4", "5"];
+  function clinicalSettingsHtml(esc, r, saved) {
+    var h = '<div class="card"><h2>Clinical settings</h2>';
+    if (r === undefined) return h + '<p><span class="spin"></span> Loading clinical settings...</p></div>';
+    if (r === null) return h + '<div class="msg err">The clinical settings could not be loaded. Do not read this as none configured.</div></div>';
+    var s = r.settings || {}, t = r.templates || {};
+    var lines = function (a) { return esc((a || []).join("\n")); };
+    var val = function (v) { return v == null ? "" : esc(v); };
+    return h + '<p class="quiet">What each ward screen uses. A blank setting is not configured, and the screen that needs it says so rather than guessing.</p>' +
+      '<div class="row"><label class="f"><span>Template</span><select id="clinTpl"><option value="">Choose a template</option>' +
+        Object.keys(t).map(function (k) { return '<option value="' + esc(k) + '">' + esc(t[k].label) + "</option>"; }).join("") + "</select></label>" +
+        '<button class="btn ghost" id="clinApply" type="button">Fill the form from the template</button></div><div id="clinTplNote" class="quiet"></div>' +
+      '<div class="row"><label class="f"><span>High-alert drugs, one per line</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
+        '<label class="f"><span>Antibiotics counted for days of therapy, one per line</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>Pharmacy verifies an order within (hours)</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="not configured"></label>' +
+        '<label class="f"><span>Backup recovery point objective (minutes)</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="not configured"></label></div>' +
+      '<p>ED reassessment interval by acuity (minutes)</p><div class="row">' + ACUITY.map(function (a) {
+        return '<label class="f" style="flex:0 1 110px"><span>Acuity ' + a + '</span><input class="clinEd" data-acuity="' + a + '" type="number" min="1" max="1440" value="' + val((s.edReassessMinutes || {})[a]) + '" placeholder="none"></label>';
+      }).join("") + "</div>" +
+      '<label class="f"><span><input type="checkbox" id="clinPortal"' + (s.patientAccess && s.patientAccess.enabled ? " checked" : "") + "> Patients may read their own record (patient access)</span></label>" +
+      '<button class="btn" id="clinSave" type="button">Save clinical settings</button><div id="clinMsg"></div>' +
+      (saved ? '<div class="msg ok">Saved' + (saved.changed.length ? ": " + esc(saved.changed.join(", ")) : ": nothing had changed") + '. The server now holds:</div>' + clinicalReadBackHtml(esc, saved.settings) : "") + "</div>";
+  }
+  function clinicalReadBackHtml(esc, s) {
+    var nc = '<span class="quiet">not configured</span>';
+    var list = function (a) { return a && a.length ? esc(a.join(", ")) : nc; };
+    var ed = ACUITY.filter(function (a) { return s.edReassessMinutes && s.edReassessMinutes[a] != null; }).map(function (a) { return "acuity " + a + ": " + s.edReassessMinutes[a] + " min"; });
+    return '<div class="kv"><dt>High-alert drugs</dt><dd>' + list(s.highAlertDrugs) + "</dd><dt>Antibiotics</dt><dd>" + list(s.antibiotics) +
+      "</dd><dt>Verify within</dt><dd>" + (s.orderVerifyWithinHours != null ? esc(s.orderVerifyWithinHours) + " hours" : nc) +
+      "</dd><dt>ED reassessment</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
+      "</dd><dt>Patient access</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? "on" : "off") +
+      "</dd><dt>Recovery point objective</dt><dd>" + (s.rpoMinutes != null ? esc(s.rpoMinutes) + " minutes" : nc) + "</dd></div>";
+  }
+  /* Reads the form. Blank numbers are "not configured" (null); the server validates the rest. */
+  function readClinicalSettings(get) {
+    var names = function (id) { return String(get(id) || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean); };
+    var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
+    var ed = {};
+    ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+  }
+  WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
+  function wireClinicalSettings(c) {
+    var box = document.getElementById("clinCard");
+    if (!box) return;
+    var draw = function (r, saved) {
+      box.innerHTML = clinicalSettingsHtml(c.esc, r, saved);
+      if (!r) return;
+      var tplUsed = "";
+      document.getElementById("clinApply").onclick = function () {
+        var id = document.getElementById("clinTpl").value, tpl = id && r.templates[id];
+        if (!tpl) { document.getElementById("clinTplNote").textContent = "Choose a template first."; return; }
+        draw({ settings: tpl.settings, templates: r.templates });
+        tplUsed = id;
+        document.getElementById("clinTpl").value = id;
+        document.getElementById("clinTplNote").textContent = tpl.description + " Nothing is saved until you press Save.";
+      };
+      document.getElementById("clinSave").onclick = function () {
+        var btn = this, m = document.getElementById("clinMsg");
+        var get = function (id) {
+          if (/^ed\d$/.test(id)) { var e = box.querySelector('.clinEd[data-acuity="' + id.slice(2) + '"]'); return e ? e.value : ""; }
+          var el = document.getElementById(id); return el ? (el.type === "checkbox" ? el.checked : el.value) : "";
+        };
+        btn.disabled = true;
+        c.api("/org/clinical-settings", { orgId: c.state.orgId, settings: readClinicalSettings(get), templateId: tplUsed || (document.getElementById("clinTpl").value || undefined) }).then(function (x) {
+          btn.disabled = false;
+          if (!x || !x.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          draw({ settings: x.settings, templates: r.templates }, { changed: x.changed || [], settings: x.settings });
+          c.toast("Clinical settings saved.");
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
+  /* CRITICAL RESULT ALERTS TO PHONES (S3 P0). Whether a critical result is pushed through the StewardMD
+   * app, who each level tells, the SMS fallback when no phone confirms, and - loudest - every open result
+   * that told nobody. Everything shown comes from GET /ward/alert-status, so this card never has its own
+   * idea of the ladder or of which defaults were approved. null = loading, false = could not be read. */
+  var ALERT_LEVELS = [["due", "When the result is released"], ["overdue", "Not acknowledged in time"], ["escalate", "Still not acknowledged"]];
+  var ALERT_ROLES = ["doctor", "resident", "supervisor", "nurse", "intern", "pg_resident", "pg_faculty", "pg_hod"];
+  var ALERT_REASON = {
+    NO_RECIPIENT: "nobody could be found to tell (no ordering clinician, nobody with a listed role on duty, no named contact)",
+    NO_DEVICE: "nobody it was addressed to has a phone registered for alerts",
+    PUSH_NOT_CONFIGURED: "push is not configured on the server",
+    SMS_NOT_CONFIGURED: "the SMS fallback is not configured",
+    NO_MOBILE: "nobody it was addressed to has an alert mobile",
+    SMS_FAILED: "the SMS could not be sent",
+  };
+  function alertCardHtml(esc, s) {
+    var h = '<div class="card" id="admAlertCard"><h2>Critical result alerts to phones</h2>';
+    if (s == null) return h + '<span class="spin"></span> Loading...</div>';
+    if (s === false || !s.ok) return h + '<div class="msg err">The alert settings could not be loaded' + (s && s.error ? " (" + esc(s.error) + ")" : "") + ". Do not read this as alerts being off or as nothing having failed.</div></div>";
+    var lv = s.levels || {}, d = s.defaults || {}, ap = d.approval || {};
+    var rows = ALERT_LEVELS.map(function (L) {
+      var x = lv[L[0]] || { roles: [], contacts: [] };
+      var when = L[0] === "due" ? "at once" : L[0] === "overdue" ? "after " + esc(s.minutes && s.minutes.acknowledgeWithinMinutes) + " min" : "after " + esc(s.minutes && s.minutes.escalateAfterMinutes) + " min";
+      return '<tr data-level="' + L[0] + '"><td><b>' + esc(L[1]) + "</b><br><small>" + when + "</small></td>" +
+        '<td><label><input type="checkbox" class="alOrderer"' + (x.orderer ? " checked" : "") + "> ordering clinician</label></td>" +
+        "<td>" + ALERT_ROLES.map(function (r) { return '<label style="white-space:nowrap"><input type="checkbox" class="alRole" value="' + r + '"' + ((x.roles || []).indexOf(r) >= 0 ? " checked" : "") + "> " + esc(r.replace(/_/g, " ")) + "</label> "; }).join("") + "</td>" +
+        '<td><textarea class="alContacts" rows="2" placeholder="one staff ID or email per line">' + esc((x.contacts || []).join("\n")) + "</textarea></td></tr>";
+    }).join("");
+    var sms = s.sms || {};
+    var fails = (s.failures || []).map(function (f) {
+      return "<tr><td>" + esc(f.at || "") + "</td><td>" + esc(f.level || "") + (f.sms ? " (SMS)" : "") + '</td><td class="mono">' + esc(f.loopId) + "</td><td>" + esc(ALERT_REASON[f.reason] || f.reason) + "</td></tr>";
+    }).join("");
+    return h +
+      '<label class="f"><span><input type="checkbox" id="alEnabled"' + (s.enabled ? " checked" : "") + "> Push critical results to phones through the StewardMD app</span></label>" +
+      '<p class="quiet">The push names the ward and bed only, never the patient. The detail opens after the phone is unlocked, and only for the people it was sent to. Acknowledging is still done with a sentence saying what was done.</p>' +
+      "<h3>Who each level tells</h3>" +
+      (lv.approval ? '<p class="msg ok">Default ladder approved by ' + esc(ap.approvedBy) + " on " + esc(ap.approvedOn) + " (owner decision " + esc(ap.decision) + ").</p>"
+        : '<p class="msg note">This hospital has set its own ladder. The approved default (' + esc(ap.approvedBy) + ", " + esc(ap.approvedOn) + ") is ordering clinician and on-duty doctors, then supervisors and nurses on duty, then named contacts.</p>") +
+      '<p class="quiet">Each level tells the people of the levels before it again. On-duty roles come from the rota for the patient\'s ward.</p>' +
+      nurseRuleHtml(esc, s.nurseRule) +
+      '<div class="tbl"><table><thead><tr><th>Level</th><th></th><th>On duty with role</th><th>Named contacts</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
+      "<h3>SMS when no phone confirms</h3>" +
+      '<p class="quiet">If no phone confirms a push within its level\'s time, it is sent once by SMS to each person\'s alert mobile (set on Staff and roles), using your DLT-approved 2Factor template whose first variable is the ward and second the bed.</p>' +
+      '<div class="row"><label class="f"><span>DLT sender ID</span><input id="alSender" value="' + esc(sms.senderId || "") + '"></label>' +
+      '<label class="f"><span>DLT template name</span><input id="alTemplate" value="' + esc(sms.templateName || "") + '"></label></div>' +
+      (sms.ready ? '<p class="msg ok">SMS fallback is ready.</p>' : '<div class="msg err"><b>SMS fallback is not configured.</b> Missing:<br>' + (sms.missing || []).map(esc).join("<br>") + "</div>") +
+      '<button class="btn" id="alSave" type="button">Save alert settings</button><div id="alMsg"></div>' +
+      "<h3>Open results that told nobody</h3>" +
+      (fails ? '<div class="tbl"><table><thead><tr><th>When</th><th>Level</th><th>Loop</th><th>Why</th></tr></thead><tbody>' + fails + "</tbody></table></div>" : '<p class="quiet">None among the open critical results read' + (s.partial ? " (only the newest 500 were checked)" : "") + ".</p>") +
+      "<h3>Phones registered for alerts now</h3>" + phonesHtml(esc, s.phones) +
+      ((s.noDevice || []).length ? '<p class="msg note">Alerts already sent to people with no phone registered: ' + s.noDevice.map(function (x) { return esc(x.identity); }).join(", ") + "</p>" : "") +
+      "</div>";
+  }
+  /* Owner decision 2026-09-14, read-only: the named rule that picks the nurses a level 2 alert tells. */
+  function nurseRuleHtml(esc, r) {
+    if (!r) return '<div class="msg err">The level 2 nurse rule could not be read.</div>';
+    return '<div class="kv"><dt>Level 2 nurse rule</dt><dd><span class="mono">' + esc(r.rule) + "</span>" +
+      (r.source === "default" ? ' <span class="quiet">(default)</span>' : r.source === "unrecognised" ? ' <span class="msg err">the saved rule "' + esc(r.configured) + '" is not one this build has, so this rule is applied</span>' : "") + "</dd></div>" +
+      '<p class="quiet">' + esc(r.note) + " It cannot be changed on this card.</p>";
+  }
+  /* Read from the phone registrations themselves (not from past alerts): everyone on duty with a role on the
+   * ladder, and every named contact. A failed read is said, never shown as everyone having a phone. */
+  function phonesHtml(esc, p) {
+    if (!p || !p.ok) return '<div class="msg err">Which phones are registered could not be read' + (p && p.error ? " (" + esc(p.error) + ")" : "") + ". Do not read this as everyone having one.</div>";
+    var note = p.partial ? " The rota was too large to read in full, so some people on duty may not be listed." : "";
+    if (!p.checked) return '<p class="quiet">Nobody is on duty now with a role on the ladder, and no contact is named, so there is nobody to check.' + note + "</p>";
+    if (!(p.noDevice || []).length) return '<p class="msg ok">All ' + esc(p.checked) + " people on duty with a role on the ladder, and the named contacts, have a phone registered." + note + "</p>";
+    return '<div class="msg err"><b>No phone registered for alerts (' + esc(p.noDevice.length) + " of " + esc(p.checked) + "):</b><br>" +
+      p.noDevice.map(function (x) { return esc(x.identity) + " (" + esc(x.why === "named contact" ? "named contact" : "on duty") + (x.role ? ", " + esc(x.role) : "") + ")"; }).join("<br>") +
+      "<br>They get an alert only by SMS, if that is set up." + note + "</div>";
+  }
+  /* Reads the card back. v = { enabled, senderId, templateName, levels: {due: {orderer, roles, contactsText}}, escalation }. */
+  function readAlertCard(v) {
+    var levels = {}, bad = "";
+    ALERT_LEVELS.forEach(function (L) {
+      var x = (v.levels && v.levels[L[0]]) || {};
+      var contacts = String(x.contactsText || "").split(/\n/).map(function (t) { return t.trim(); }).filter(Boolean);
+      if (contacts.some(function (t) { return t.length > 120; })) bad = "A named contact is too long: use the staff ID or email.";
+      levels[L[0]] = { orderer: !!x.orderer, roles: (x.roles || []).slice(), contacts: contacts };
+    });
+    if (bad) return { error: bad };
+    var esc0 = v.escalation && typeof v.escalation === "object" ? v.escalation : {};
+    var escalation = {}; Object.keys(esc0).forEach(function (k) { escalation[k] = esc0[k]; }); escalation.levels = levels;
+    return { wardsynq: {
+      alerts: { push: { enabled: !!v.enabled }, sms: { provider: "twofactor", senderId: String(v.senderId || "").trim(), templateName: String(v.templateName || "").trim() } },
+      criticalEscalation: escalation,
+    } };
+  }
+  WSQ._alertCard = { html: alertCardHtml, read: readAlertCard };
+  function loadAlertCard(c) {
+    var slot = document.getElementById("admAlertSlot");
+    if (!slot) return;
+    slot.innerHTML = alertCardHtml(c.esc, null);
+    c.api("/ward/alert-status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      slot.innerHTML = alertCardHtml(c.esc, r && r.ok ? r : false);
+      var btn = document.getElementById("alSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var m = document.getElementById("alMsg"), lv = {};
+        document.querySelectorAll("#admAlertCard tr[data-level]").forEach(function (tr) {
+          var roles = []; tr.querySelectorAll(".alRole").forEach(function (b) { if (b.checked) roles.push(b.value); });
+          lv[tr.getAttribute("data-level")] = { orderer: tr.querySelector(".alOrderer").checked, roles: roles, contactsText: tr.querySelector(".alContacts").value };
+        });
+        var out = readAlertCard({ enabled: document.getElementById("alEnabled").checked, senderId: document.getElementById("alSender").value, templateName: document.getElementById("alTemplate").value, levels: lv, escalation: ((c.state.org || {}).wardsynq || {}).criticalEscalation });
+        if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+        btn.disabled = true;
+        c.api("/org/update", { orgId: c.state.orgId, wardsynq: out.wardsynq }).then(function (u) {
+          btn.disabled = false;
+          if (!u || !u.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(u)) + "</div>"; return; }
+          c.state.org = u.org; c.toast(out.wardsynq.alerts.push.enabled ? "Saved. Critical results are pushed to phones." : "Saved. Critical results are not pushed to phones."); loadAlertCard(c);
+        });
+      };
+    });
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -214,27 +539,35 @@
       '<label class="f" style="flex:0 1 180px"><span>Country</span><select id="admHospRegion">' +
         '<option value="IN"' + (o.region === "US" ? "" : " selected") + ">India</option>" +
         '<option value="US"' + (o.region === "US" ? " selected" : "") + ">United States</option></select></label>" +
+      /* India: the HFR facility ID the ABDM profile must match (Integrations > ABDM). Validated on the server. */
+      (o.region === "US" ? "" : '<label class="f" style="flex:0 1 200px"><span>HFR facility ID (India)</span><input id="admHospHfr" class="mono" maxlength="20" placeholder="IN and 10 digits" value="' + c.esc((o.regionProfile && o.regionProfile.hfrId) || "") + '"></label>') +
       '<button class="btn" id="admHospSave" type="button">Save</button></div>' +
       /* Said plainly, because it changes how numbers already on the chart are READ, not what they
        * say: nothing is converted, and nothing already recorded is rewritten. */
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
-      "</div>" +
-      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
+      '</div><div id="tokCard"></div>' +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
       if (!name) { document.getElementById("admHospMsg").innerHTML = '<div class="msg err">Give the hospital a name.</div>'; return; }
       btn.disabled = true;
-      c.api("/org/update", { orgId: c.state.orgId, name: name, region: document.getElementById("admHospRegion").value }).then(function (r) {
+      var upd = { orgId: c.state.orgId, name: name, region: document.getElementById("admHospRegion").value };
+      var hfrEl = document.getElementById("admHospHfr");
+      if (hfrEl && upd.region === "IN") upd.regionProfile = { hfrId: String(hfrEl.value || "").replace(/[\s-]+/g, "").toUpperCase() };
+      c.api("/org/update", upd).then(function (r) {
         btn.disabled = false;
         if (!r || !r.ok) { document.getElementById("admHospMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");
       });
     };
+    wireClinicalSettings(c);
     wireNoteWriters(c);
     wireApprovalRules(c);
     wireLabCheck(c);
+    wireTokenCard(c);
+    if (c.isWardsynq()) loadAlertCard(c);
   }
 
   // ---- Safety reminders (dry run) ----------------------------------------------------------------
@@ -542,18 +875,37 @@
   // ---- Rooms (OPD consulting rooms) --------------------------------------------------------------
   function renderRooms(c, body) {
     body.innerHTML = '<span class="spin"></span>';
-    return c.api("/rooms?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var rooms = (r && r.ok && r.rooms) || [];
+    /* D7: a room belongs to a department (or none). A patient registered into the room is numbered in that
+     * department when each department numbers separately, and the waiting hall shows the room under it. */
+    return c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="card"><h2>Rooms</h2><div class="msg err">Rooms could not be loaded. Do not read this as no rooms. ' + c.esc(refusal(r)) + "</div></div>"; return; }
+      var rooms = r.rooms || [], depts = (r.departments || []).filter(function (d) { return d.active !== false; });
+      var deptSel = function (cls, cur, attr) {
+        return '<select class="' + cls + '"' + (attr || "") + '><option value="">No department</option>' + depts.map(function (d) {
+          return '<option value="' + c.esc(d.id) + '"' + (d.id === cur ? " selected" : "") + ">" + c.esc(d.name) + "</option>";
+        }).join("") + "</select>";
+      };
       body.innerHTML = '<div class="card"><h2>Rooms</h2>' +
-        (rooms.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Number</th><th>Assignment</th><th>Active</th></tr></thead><tbody>' +
-          rooms.map(function (rm) { return "<tr><td>" + c.esc(rm.name) + "</td><td>" + c.esc(rm.number) + "</td><td>" + c.esc((rm.assignment && rm.assignment.mode) || "") + "</td><td>" + (rm.active ? "yes" : "no") + "</td></tr>"; }).join("") +
+        (rooms.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Number</th><th>Department</th><th>Assignment</th><th>Active</th></tr></thead><tbody>' +
+          rooms.map(function (rm) { return "<tr><td>" + c.esc(rm.name) + "</td><td>" + c.esc(rm.number) + "</td><td>" + deptSel("admRoomDept", rm.departmentId || "", ' data-room="' + c.esc(rm.id) + '"') + "</td><td>" + c.esc((rm.assignment && rm.assignment.mode) || "") + "</td><td>" + (rm.active ? "yes" : "no") + "</td></tr>"; }).join("") +
           "</tbody></table></div>" : '<p class="quiet">No consulting rooms yet.</p>') +
         '<h3>Add a room</h3><div class="row"><label class="f"><span>Name</span><input id="admRoomName"></label>' +
+        '<label class="f"><span>Department</span>' + deptSel("", "", ' id="admRoomNewDept"') + "</label>" +
         '<button class="btn" id="admRoomAdd" type="button">' + c.ms("add") + "Add</button></div><div id=\"admRoomMsg\"></div></div>";
+      body.querySelectorAll(".admRoomDept").forEach(function (sel) {
+        sel.onchange = function () {
+          sel.disabled = true;
+          c.api("/room/update", { orgId: c.state.orgId, roomId: sel.getAttribute("data-room"), departmentId: sel.value || null }).then(function (x) {
+            sel.disabled = false;
+            if (!x || !x.ok) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">The department was not saved: ' + c.esc(refusal(x)) + "</div>"; WSQ.render("admin"); return; }
+            c.toast("Room department saved" + (x.room && x.room.department ? ": " + x.room.department : ": none") + ".");
+          });
+        };
+      });
       document.getElementById("admRoomAdd").onclick = function () {
         var name = (document.getElementById("admRoomName").value || "").trim();
         if (!name) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">Give the room a name.</div>'; return; }
-        c.api("/room", { orgId: c.state.orgId, name: name }).then(function (r) {
+        c.api("/room", { orgId: c.state.orgId, name: name, departmentId: document.getElementById("admRoomNewDept").value || null }).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
           c.toast("Room added."); WSQ.render("admin");
         });
@@ -599,9 +951,9 @@
         ROLE_NOTES.map(function (l) { return '<p class="quiet"><b>' + c.esc(l[0]) + ":</b> " + c.esc(l[1]) + "</p>"; }).join("") + "</div>" +
         twoStepPolicyCard(c) +
         '<div class="card"><h2>Staff</h2>' +
-        (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th></th></tr></thead><tbody>' +
+        (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th>Alert mobile</th><th></th></tr></thead><tbody>' +
           members.map(function (m) {
-            return '<tr data-identity="' + c.esc(m.identity) + '"><td>' + c.esc(m.identity) + "</td><td>" + c.esc(m.role) + "</td><td>" + (m.active ? "yes" : "no") + "</td><td>" + c.esc(m.email || "none") + "</td><td>" + (m.hasPin ? "yes" : "no") + "</td><td>" +
+            return '<tr data-identity="' + c.esc(m.identity) + '"><td>' + c.esc(m.identity) + "</td><td>" + c.esc(m.role) + "</td><td>" + (m.active ? "yes" : "no") + "</td><td>" + c.esc(m.email || "none") + "</td><td>" + (m.hasPin ? "yes" : "no") + "</td><td>" + (m.alertMobile ? "set" : "none") + "</td><td>" +
               '<button type="button" class="btn quiet" data-mact="' + (m.active ? "disable" : "restore") + '" data-id="' + c.esc(m.identity) + '">' + (m.active ? "Disable" : "Restore") + "</button> " +
               '<button type="button" class="btn quiet" data-mact="reset" data-id="' + c.esc(m.identity) + '">Reset access</button></td></tr>';
           }).join("") + "</tbody></table></div>" : '<p class="quiet">No staff added yet.</p>') +
@@ -615,6 +967,8 @@
          * credential is a StewardMD account's verified claim. Every signed record records which of
          * the two vouched, so this is an assertion the hospital makes and is accountable for. */
         '<label class="f"><span>Registration number (prescribers)</span><input id="admMemberRegNo" placeholder="leave blank if not a prescriber"></label>' +
+        // S3 P0: where a critical-result SMS goes when no phone confirmed the push. Blank keeps what is saved.
+        '<label class="f"><span>Alert mobile (critical-result SMS)</span><input id="admMemberMobile" inputmode="tel" placeholder="blank keeps the saved number"></label>' +
         '<button class="btn" id="admMemberAdd" type="button">Save membership</button></div><div id="admMemMsg"></div>' +
         '<p class="quiet">A member with no registration number can use WardSynQ but cannot sign a prescription, a note or a discharge summary. The hospital is asserting this number; a StewardMD account that is already verified uses its own instead.</p>' +
         '<h3>Set PIN</h3><div class="row"><label class="f"><span>Identity</span><input id="admPinId"></label>' +
@@ -639,7 +993,10 @@
       document.getElementById("admMemberAdd").onclick = function () {
         var id = (document.getElementById("admMemberIdentity").value || "").trim();
         if (!id) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">Enter the staff ID or email.</div>'; return; }
-        c.api("/member", { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value, regNo: (document.getElementById("admMemberRegNo").value || "").trim() }).then(function (r) {
+        var memberBody = { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value, regNo: (document.getElementById("admMemberRegNo").value || "").trim() };
+        var mobile = (document.getElementById("admMemberMobile").value || "").trim();
+        if (mobile) memberBody.alertMobile = mobile;
+        c.api("/member", memberBody).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
           c.toast("Staff saved."); WSQ.render("admin");
         });
@@ -670,14 +1027,23 @@
    * A group sees counts only, never a patient. An invitation alone does not make a hospital a member. */
   // The only actions each half sends to /group/<action>; anything else sends nothing.
   var GROUP_SIDE_ROUTE = { accept: "accept", decline: "decline", remove: "remove", adopt: "adopt" };
-  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy" };
+  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy", adminAdd: "admin-add", adminRemove: "admin-remove", staleAfter: "stale-after" };
   function groupSideHtml(c, r) {
     var esc = c.esc;
     var h = '<div class="card"><h2>This hospital\'s groups</h2>';
     if (r == null) return h + '<span class="spin"></span> Loading...</div>';
     if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ". Do not read this as no groups or invitations.</div></div>";
     if (!r.groups.length) return h + '<p class="quiet">This hospital is not in a hospital group and has no invitations.</p></div>';
-    return h + '<p class="quiet">A group sees this hospital\'s counts (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' +
+    /* D4 B: groups read what this hospital PUBLISHES, not its live record. Say what was last published, by whom
+     * and when, and offer to publish now. A snapshot that could not be read is said, never shown as none. */
+    var s = r.snapshot, when = function (ms) { return new Date(ms).toLocaleString(); };
+    var member = r.groups.some(function (g) { return g.state === "member"; });
+    var pub = !member ? "" : '<h3>Counts published to groups</h3>' +
+      (s === false ? '<div class="msg err">What this hospital last published could not be read.</div>'
+        : s ? "<p>Last published " + esc(when(s.publishedAt)) + " by " + esc(s.publishedBy || "unknown") + ".</p>"
+        : '<p class="quiet">Not published yet: groups see this hospital as "not published".</p>') +
+      '<p><button type="button" class="btn" data-grp-publish="1">Publish counts now</button> <span class="quiet">Groups see the counts as they are at this moment, with this time on them.</span></p>';
+    return h + '<p class="quiet">A group sees the counts this hospital publishes (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' + pub +
       '<div class="tbl"><table><thead><tr><th>Group</th><th>Status</th><th>Recommended settings</th><th></th></tr></thead><tbody>' +
       r.groups.map(function (g) {
         var id = esc(g.groupId);
@@ -697,8 +1063,19 @@
     if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ".</div></div>";
     h += r.groups.length ? r.groups.map(function (g) {
       var id = esc(g.id);
+      /* Who runs this group beside you. The server names opaque account ids, not emails, so they
+       * read as-is; removing is per admin, and the last one has no button because the server
+       * refuses to leave a group with nobody able to run it. */
+      var admins = Array.isArray(g.adminUids) ? g.adminUids : [];
+      var adminHtml = "<p>Administrators:</p><ul>" + admins.map(function (u) {
+        return '<li><span class="mono">' + esc(u) + "</span>" + (admins.length > 1 ?
+          ' <button type="button" class="btn quiet" data-grp-run="adminRemove" data-grp="' + id + '" data-uid="' + esc(u) + '">Remove</button>' : "") + "</li>";
+      }).join("") + "</ul>" +
+        '<div class="row"><label class="f"><span>Add administrator (their StewardMD account email)</span><input type="email" data-grp-adminadd-input="' + id + '"></label>' +
+        '<button type="button" class="btn" data-grp-run="adminAdd" data-grp="' + id + '">Add administrator</button></div>';
       return "<h3>" + esc(g.name) + "</h3>" +
         '<p><button type="button" class="btn ghost" data-go="group/' + id + '">Open group overview</button></p>' +
+        adminHtml +
         (g.members.length ? "<p>Members:</p><ul>" + g.members.map(function (m) {
           return "<li>" + esc(m.name || m.orgId) + ' <span class="mono">' + esc(m.orgId) + '</span> <button type="button" class="btn quiet" data-grp-run="remove" data-grp="' + id + '" data-org="' + esc(m.orgId) + '">Remove</button></li>';
         }).join("") + "</ul>" : '<p class="quiet">No member hospitals yet.</p>') +
@@ -709,6 +1086,8 @@
         '<button type="button" class="btn" data-grp-run="invite" data-grp="' + id + '">Invite</button></div>' +
         '<label class="f"><span>Recommended settings (JSON, version ' + esc(g.policyVersion) + ')</span><textarea rows="5" style="width:100%;font-family:monospace" data-grp-policy-input="' + id + '">' + esc(g.policy ? JSON.stringify(g.policy, null, 2) : "") + "</textarea></label>" +
         '<button type="button" class="btn ghost" data-grp-run="policy" data-grp="' + id + '">Publish recommended settings</button>' +
+        '<div class="row"><label class="f" style="flex:0 1 260px"><span>Mark a hospital\'s counts stale after (minutes)</span><input type="number" min="5" max="10080" data-grp-stale-input="' + id + '" value="' + esc(g.staleAfterMinutes || 60) + '"></label>' +
+        '<button type="button" class="btn ghost" data-grp-run="staleAfter" data-grp="' + id + '">Save</button></div>' +
         '<p class="quiet">A member hospital\'s admin decides whether to adopt them. Nothing changes in any hospital until they do.</p>';
     }).join("") : '<p class="quiet">You do not run a hospital group.</p>';
     return h + '<h3>Create a group</h3><div class="row"><label class="f"><span>Group name</span><input id="grpNewName"></label>' +
@@ -723,6 +1102,14 @@
     var side = c.api("/group/memberships" + q).then(function (r) {
       var box = document.getElementById("grpSide");
       box.innerHTML = groupSideHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      var pb = box.querySelector("[data-grp-publish]");
+      if (pb) pb.onclick = function () {
+        pb.disabled = true;
+        c.api("/group/publish-counts", { orgId: c.state.orgId }).then(function (x) {
+          if (!x || !x.ok) { pb.disabled = false; say("grpSideMsg", x); return; }
+          c.toast("Counts published."); WSQ.render("admin");
+        });
+      };
       box.querySelectorAll("[data-grp-side]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-grp-side"), gid = b.getAttribute("data-grp");
@@ -765,11 +1152,19 @@
           } else if (act === "policy") {
             var raw = (box.querySelector('[data-grp-policy-input="' + gid + '"]').value || "").trim();
             try { payload.policy = raw ? JSON.parse(raw) : null; } catch (e) { say("grpRunMsg", { message: "That is not valid JSON, so nothing was published." }); return; }
+          } else if (act === "adminAdd") {
+            payload.email = (box.querySelector('[data-grp-adminadd-input="' + gid + '"]').value || "").trim();
+            if (!payload.email) { say("grpRunMsg", { message: "Enter the administrator's StewardMD account email." }); return; }
+          } else if (act === "adminRemove") {
+            payload.uid = b.getAttribute("data-uid");
+            if (!window.confirm("Remove this administrator from the group? They stop seeing it at once.")) return;
+          } else if (act === "staleAfter") {
+            payload.minutes = Number(box.querySelector('[data-grp-stale-input="' + gid + '"]').value);
           }
           b.disabled = true;
           c.api("/group/" + GROUP_RUN_ROUTE[act], payload).then(function (x) {
             if (!x || !x.ok) { b.disabled = false; say("grpRunMsg", x); return; }
-            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published." }[act]);
+            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published.", adminAdd: "Administrator added.", adminRemove: "Administrator removed.", staleAfter: "Saved." }[act]);
             WSQ.render("admin");
           });
         };
@@ -788,17 +1183,18 @@
     return c.api("/ward/maik-status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
       if (!r || !r.ok) { body.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
       // wardsynq.maik.phiApproved is a per-provider allowlist (see maik-gateway.js maikConfig), not a
-      // plain flag. The switch below is a yes/no simplification over "gemini" + "vertex", the two
-      // providers that leave the hospital; it never touches the local/on-prem entries.
+      // plain flag. S7: Vertex AI is the one cloud provider with a patient-data agreement, so the cloud
+      // switch approves "vertex" and nothing else; the gateway refuses PHI to AI Studio whatever is saved.
       var approved = Array.isArray(r.phiApproved) ? r.phiApproved : [];
-      var cloudApproved = approved.indexOf("gemini") >= 0 || approved.indexOf("vertex") >= 0;
+      var cloudApproved = approved.indexOf("vertex") >= 0;
+      var vx = (r.providers || []).filter(function (p) { return p.provider === "vertex"; })[0] || {};
       var localApproved = approved.indexOf("local-openai") >= 0;
       // The on-premises endpoint is configuration, not status, so it comes from the org document.
       var curMaik = ((c.state.org && c.state.org.wardsynq) || {}).maik || {};
       var localUrl = curMaik.localBaseUrl || "", localModel = curMaik.localModel || "";
       body.innerHTML = '<div class="card"><h2>MaiK clinical AI</h2>' +
         '<div class="kv"><dt>Enabled</dt><dd>' + (r.enabled ? "yes" : "no") + "</dd>" +
-        "<dt>Patient data approved for a cloud model</dt><dd>" + (cloudApproved ? "yes (" + c.esc(r.phiApproved.join(", ")) + ")" : "no") + "</dd>" +
+        "<dt>Patient data approved for Vertex AI</dt><dd>" + (cloudApproved ? (vx.phiCapable ? "yes" : "approved, but this server cannot send patient data to Vertex yet") : "no") + "</dd>" +
         "<dt>Model allowlist</dt><dd>" + (Array.isArray(r.allow) && r.allow.length ? c.esc(r.allow.join(", ")) : "none (registry default)") + "</dd>" +
         "<dt>Timeout</dt><dd>" + c.esc(String(r.timeoutMs || "")) + " ms</dd></div>" +
         '<h3>Providers</h3><div class="tbl"><table><thead><tr><th>Provider</th><th>Configured</th><th>Detail</th><th>Credential</th></tr></thead><tbody>' +
@@ -815,7 +1211,8 @@
         '<label class="f"><span>Model name</span><input id="admMaikLocalModel" placeholder="the name the server answers to" value="' + c.esc(localModel) + '"></label></div>' +
         '<div class="row"><label class="f"><input type="checkbox" id="admMaikPhiLocal"' + (localApproved ? " checked" : "") + "> Patient data may be sent to the on-premises model</label></div>" +
         '<h3>Cloud model</h3><div class="row">' +
-        '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to an approved cloud model</label>" +
+        '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to Vertex AI (the cloud provider with a patient-data agreement)</label>" +
+        (vx.phiCapable === false ? '<div class="msg err">' + c.esc(vx.detail || "Vertex AI cannot receive patient data on this server.") + "</div>" : "") +
         '<button class="btn" id="admMaikSave" type="button">Save</button></div><div id="admMaikMsg"></div>' +
         '<div class="msg note">Enabling MaiK uses the providers listed above. A cloud provider only answers when the environment holds its key (named under Credential). Patient data leaves the hospital only when the second switch is on. Clinical content from MaiK is not signed off.</div>' +
         "</div>";
@@ -830,7 +1227,7 @@
         // model must not silently approve a cloud one, which is exactly what one boolean would do.
         var approve = [];
         if (phiLocal) approve.push("local-openai");
-        if (phi) { approve.push("gemini"); approve.push("vertex"); }
+        if (phi) approve.push("vertex");
         var existing = (c.state.org && c.state.org.wardsynq) || {};
         var wsq = Object.assign({}, existing, { maik: Object.assign({}, existing.maik, {
           enabled: enabled, phiApproved: approve, localBaseUrl: lUrl || null, localModel: lModel || null
@@ -843,7 +1240,7 @@
             if (or2 && or2.ok) c.state.org = or2.org;
             c.toast("MaiK settings saved."); WSQ.render("admin");
           });
-        });
+        }, function () { btn.disabled = false; document.getElementById("admMaikMsg").innerHTML = '<div class="msg err">No response from the server. The settings may not have been saved; reload to check.</div>'; });
       };
     });
   }
@@ -866,15 +1263,41 @@
     if (s.truncated || s.partial) h += '<div class="msg note">Only part of the log could be read, so some activity may not have been checked.</div>';
     if (!s.findings.length) return h + '<p class="quiet">No findings in the last ' + esc(days) + " days.</p>";
     return h + s.findings.map(function (f) {
+      /* G11: an out-of-assignment finding shows the ward history behind each read. */
+      var wards = f.type === "out-of-assignment";
       return "<details><summary><b>" + esc(SEC_TYPE_LABEL[f.type] || f.type) + "</b>: " + esc(f.actor) + ". " + esc(f.summary) + "</summary>" +
         '<p class="quiet">' + esc(f.method) + "</p>" +
-        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th><th>Outcome</th><th>Detail</th><th>Audit row</th></tr></thead><tbody>' +
+        ((f.signIns || []).length ? '<p class="quiet">Counted as one reader across these sign-ins: <span class="mono">' + f.signIns.map(esc).join(", ") + "</span></p>" : "") +
+        '<div class="tbl"><table><thead><tr><th>When</th><th>Action</th><th>Type</th><th>Patient ref</th>' + (wards ? "<th>Patient's ward then</th><th>Reader rostered on then</th>" : "") + "<th>Outcome</th><th>Detail</th><th>Audit row</th></tr></thead><tbody>" +
         f.evidence.map(function (e) {
-          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + '</td><td class="mono">' + esc(e.id || "") + (e.recordId ? "<br>" + esc(e.recordId) : "") + "</td></tr>";
+          return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.action) + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.patientRef || "") + "</td>" +
+            (wards ? "<td>" + esc(e.wardAtRead || "") + "</td><td>" + esc((e.readerWardsAtRead || []).length ? e.readerWardsAtRead.join(", ") : "No ward shift") + "</td>" : "") +
+            "<td>" + esc(e.outcome || "") + "</td><td>" + esc(e.detail || "") + '</td><td class="mono">' + esc(e.id || "") + (e.recordId ? "<br>" + esc(e.recordId) : "") + "</td></tr>";
         }).join("") + "</tbody></table></div>" +
-        (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + "</details>";
+        (f.evidenceTotal > f.evidence.length ? '<p class="quiet">Showing ' + f.evidence.length + " of " + esc(f.evidenceTotal) + " rows.</p>" : "") + openRowsHtml(c, f.evidence) + "</details>";
     }).join("");
   }
+
+  /* G11 CLICKABLE EVIDENCE. A button that reads the audit rows behind a finding back from the audit trail
+   * (GET /ward/audit-rows): null while loading, a failure says so, ids not found are named. */
+  function openRowsHtml(c, evidence) {
+    var ids = (evidence || []).map(function (e) { return e.id; }).filter(Boolean);
+    if (!ids.length) return "";
+    return '<button type="button" class="btn ghost sm" data-sec-rows="' + c.esc(ids.join(",")) + '">Open these audit rows</button><div class="sec-rows-out"></div>';
+  }
+  function auditRowsHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<p class="quiet"><span class="spin"></span> Reading the audit rows...</p>';
+    if (r.failed) return '<div class="msg err">The audit rows could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div>";
+    var h = (r.missing || []).length ? '<div class="msg err">' + esc(r.missing.length) + " of the audit rows named were not found in this hospital's audit trail: <span class=\"mono\">" + r.missing.map(esc).join(", ") + "</span></div>" : "";
+    if (!(r.rows || []).length) return h + '<p class="quiet">No audit row was returned.</p>';
+    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>By</th><th>Action</th><th>Type</th><th>Record</th><th>Patient ref</th><th>Outcome</th><th>Chained row</th><th>Audit row</th></tr></thead><tbody>' +
+      r.rows.map(function (e) {
+        return "<tr><td>" + esc(e.ts) + '</td><td class="mono">' + esc(e.actor || "") + "</td><td>" + esc(e.action || "") + "</td><td>" + esc(e.resourceType || "") + '</td><td class="mono">' + esc(e.recordId || "") +
+          '</td><td class="mono">' + esc(e.patientRef || "") + "</td><td>" + esc(e.outcome || "") + "</td><td>" + (e.chainSeq == null ? "Not linked" : esc(e.chainSeq)) + '</td><td class="mono">' + esc(e.id || "") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  WSQ._auditRowsHtml = auditRowsHtml;
 
   /* Reads outside an assignment. "Not evaluated" is its own state and never renders as no findings. */
   function secAssignment(c, s, days) {
@@ -885,12 +1308,13 @@
     if (s.status === "not_evaluated") return h + '<div class="msg note">Not evaluated: ' + esc(s.reason) + " This is not the same as no findings.</div>" + ex;
     if (s.truncated) h += '<div class="msg note">Only part of the log could be read, so some reads may not have been checked.</div>';
     if ((s.incomplete || []).length) h += '<div class="msg note">Incomplete: ' + esc(s.incomplete.join("; ")) + ".</div>";
+    if ((s.matching || []).length) h += '<div class="msg note">' + esc(s.matching.join(" ")) + "</div>";
     h += '<p class="quiet">' + esc(s.readsInPeriod) + " reads in the period: " + esc(s.assignedReads) + " within an assignment.</p>";
     h += s.findings.length ? secSection(c, "", { status: "ok", findings: s.findings }, days).replace("<h3></h3>", "") : '<p class="quiet">No reads outside an assignment among the reads that could be compared.</p>';
     var list = function (title, rows, field) {
       return rows.length ? "<details><summary>" + esc(title) + " (" + rows.reduce(function (n, x) { return n + x.reads; }, 0) + " reads)</summary><ul>" +
         rows.map(function (x) {
-          return "<li>" + esc(x.actor) + ": " + esc(x.reads) + " reads. " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span></li>";
+          return "<li>" + esc(x.actor) + ": " + esc(x.reads) + " reads. " + esc(x[field]) + ' <span class="quiet mono">' + x.evidence.map(function (e) { return esc(e.id); }).join(", ") + "</span> " + openRowsHtml(c, x.evidence) + "</li>";
         }).join("") + "</ul></details>" : "";
     };
     return h + list("Not evaluated", s.notEvaluated || [], "reason") + list("Exempt", s.exempt || [], "exemption") + ex;
@@ -947,9 +1371,111 @@
       ? "<p>" + esc(a.configuredNote) + "</p><p>Oldest audit row: " + esc(a.oldestAuditAt || "none found") + "</p><p>Oldest record: " + esc(a.oldestRecordAt || "none") + "</p>" +
         (a.gap ? '<div class="msg err">' + esc(a.gap) + "</div>" : "")
       : '<div class="msg err">Audit retention could not be checked.</div>';
+    h += "<h3>Tamper evidence</h3>" + auditIntegrityHtml(c, a.integrity, a.anchors);
+    /* G3: the hospital event log is chained on its own and reported on its own. */
+    h += "<h3>Tamper evidence: hospital event log</h3><p class=\"quiet\">Sign-ins, staff changes, hospital setting changes, and queue and billing actions.</p>" +
+      auditIntegrityHtml(c, a.orgIntegrity, a.orgAnchors, "event-log") + orgUnlinkedHtml(c, a.orgUnlinked);
     return h + "</div>";
   }
   WSQ._securityReviewHtml = securityReviewHtml;
+
+  /* G3. Event-log rows with no link are never verified. Rows added after linking began are listed;
+   * a count that could not be made says so, never "every row linked". */
+  function orgUnlinkedHtml(c, u) {
+    var esc = c.esc;
+    if (!u || u.status !== "ok") return '<div class="msg err">Unlinked rows not counted: ' + esc((u && u.message) || "no result was returned") + " This is not the same as every row being linked.</div>";
+    var cls = u.after ? "err" : (u.unlinked || u.partial ? "note" : "ok");
+    var h = '<div class="msg ' + cls + '"><b>' + (u.after ? "Rows without a link" : u.unlinked ? "Unlinked rows" : "Every row read is linked") + "</b>: " + esc(u.message) + "</div>";
+    if ((u.evidence || []).length) {
+      h += '<div class="tbl"><table><thead><tr><th>When</th><th>By</th><th>Action</th><th>Row</th></tr></thead><tbody>' +
+        u.evidence.map(function (e) { return "<tr><td>" + esc(e.ts) + "</td><td>" + esc(e.actor || "") + "</td><td>" + esc(e.action || "") + '</td><td class="mono">' + esc(e.id || "") + "</td></tr>"; }).join("") +
+        "</tbody></table></div>" + (u.after > u.evidence.length ? '<p class="quiet">Showing ' + esc(u.evidence.length) + " of " + esc(u.after) + " rows.</p>" : "");
+    }
+    return h;
+  }
+  WSQ._orgUnlinkedHtml = orgUnlinkedHtml;
+
+  /* P2.17. Only "ok" and "empty" read as fine. Broken and gap name the row; not verified and a missing
+   * result both say the integrity is unknown, never that it is intact. */
+  var INTEGRITY_LABEL = { ok: "Intact", empty: "Nothing to verify yet", broken: "Altered", gap: "Rows missing", not_verified: "Not verified" };
+  /* P2.17 anchors. One line for the outside copy whatever state it is in: matches, differs, nothing
+   * recorded yet, or not verified. A missing anchor result is unknown, never intact. A differing
+   * copy names the governance lead because restoring over it would destroy the evidence. */
+  var ANCHOR_LABEL = { ok: "Outside copy matches", rewritten: "Outside copy differs", truncated: "Newest rows removed", "no-anchors": "No outside copy yet", "not-verified": "Outside copy not verified", disagree: "Outside copies disagree" };
+  /* G12: `chain` is "" for the clinical audit trail and "event-log" for the hospital event log; the
+   * acknowledgement form of each carries its own ids so both can be on the page at once. */
+  var ACK_SUFFIX = { "": "", "event-log": "Org" };
+  function anchorHtml(c, a, chain) {
+    var esc = c.esc;
+    if (a == null) return "";
+    /* A restarted log names its acknowledgement instead of reading silently green. */
+    if (a.status === "ok" && a.acknowledgement) return anchorAckLineHtml(c, a.acknowledgement);
+    var cls = a.status === "ok" ? "ok" : (a.status === "no-anchors" ? "note" : "err");
+    var h = '<div class="msg ' + cls + '"><b>' + esc(ANCHOR_LABEL[a.status] || "Outside copy not verified") + "</b>: " + esc(a.message || "");
+    if (a.status === "disagree") return h + " Tell the information governance lead. Do not restore or re-import.</div>";
+    if (a.status === "rewritten" || a.status === "truncated") {
+      h += " Tell the information governance lead. Do not restore or re-import.</div>";
+      h += '<div class="msg note">If the database was restored on purpose (for example a point in time restore), this report is expected and stays until it is acknowledged. Only the owner of this hospital can acknowledge a legitimate restore, with a reason and an incident reference. Do not acknowledge a difference nobody can explain: ask the information governance lead first.</div>';
+      /* The form is the owner's alone. Everyone else sees what happened and who may act. Whether
+       * this viewer is the owner arrives on the report from the server; anything else would let a
+       * screen decide its own authority. */
+      if (a.canAcknowledge === true) h += anchorAckFormHtml(c, chain);
+      return h;
+    }
+    return h + "</div>";
+  }
+  WSQ._anchorHtml = anchorHtml;
+  /* P2.17 acknowledgement line: who accepted the restore, when, why, under which incident, and
+   * what the copy reported before. Rendered instead of the tamper line once the log restarts. */
+  var ACK_PREVIOUS_LABEL = { rewritten: "differed from the database", truncated: "showed rows removed below the application" };
+  function anchorAckLineHtml(c, k) {
+    var esc = c.esc;
+    k = k || {};
+    var h = '<div class="msg ok"><b>Acknowledged restore</b>: ' + esc(k.by || "") + " acknowledged a legitimate restore on " + esc(k.at || "") +
+      " (incident " + esc(k.incidentRef || "") + "). Before the acknowledgement the outside copy " +
+      esc(ACK_PREVIOUS_LABEL[k.previousStatus] || ("reported " + (k.previousStatus || "a break"))) +
+      (k.previousAtSeq != null ? " at chained row " + esc(k.previousAtSeq) : "") + ".";
+    if (k.reason) h += "<br>Reason given: " + esc(k.reason);
+    h += "</div>" + '<p class="quiet">The anchor log from before this acknowledgement is kept as an archive and is never deleted. A new difference after this point is reported again.</p>';
+    return h;
+  }
+  WSQ._anchorAckLineHtml = anchorAckLineHtml;
+  /* P2.17 acknowledgement form (owner only, see anchorHtml). The reason needs at least 20
+   * characters and an incident reference; the server checks both again. Nothing here decides
+   * authority: a non-owner who forges this form gets a 403 from the route. */
+  function anchorAckFormHtml(c, chain) {
+    var x = ACK_SUFFIX[chain || ""] || "";
+    return '<div class="card"><h3>Acknowledge a legitimate restore' + (x ? " of the hospital event log" : "") + "</h3>" +
+      '<p class="quiet">This archives the current outside copy and restarts it from the newest row, and records the acknowledgement in the audit trail under your name. Only do this when the restore was planned and is written up under the incident reference below. Never put patient details in the reason.</p>' +
+      '<div class="row"><label class="f"><span>Why was the database restored (at least 20 characters)</span><input id="secAckReason' + x + '" placeholder="Planned point in time restore after..."></label>' +
+      '<label class="f"><span>Incident reference</span><input id="secAckIncident' + x + '" placeholder="INC-123"></label></div>' +
+      '<button type="button" class="btn" id="secAckReview' + x + '">Review acknowledgement</button><div id="secAckConfirm' + x + '"></div><div id="secAckMsg' + x + '"></div></div>';
+  }
+  WSQ._anchorAckFormHtml = anchorAckFormHtml;
+  /* The confirm step: the entered values read back before anything is sent. Pure so it renders
+   * the same in the page and in tests. */
+  function anchorAckConfirmHtml(c, reason, incident, chain) {
+    var esc = c.esc, x = ACK_SUFFIX[chain || ""] || "";
+    return '<div class="msg note"><b>Check before confirming.</b> You are acknowledging a legitimate restore of ' + (x ? "the hospital event log" : "the audit trail") + ".<br>" +
+      "Reason: " + esc(reason) + "<br>Incident: " + esc(incident) + "</div>" +
+      '<button type="button" class="btn" id="secAckGo' + x + '">Confirm acknowledgement</button> <button type="button" class="btn ghost" id="secAckBack' + x + '">Back</button>';
+  }
+  WSQ._anchorAckConfirmHtml = anchorAckConfirmHtml;
+  function auditIntegrityHtml(c, ig, anchors, chain) {
+    var esc = c.esc;
+    if (!ig) return '<div class="msg err">Not verified: no integrity result was returned. This is not the same as the audit trail being intact.</div>' + anchorHtml(c, anchors === undefined ? null : anchors, chain);
+    var fine = ig.status === "ok" || ig.status === "empty";
+    var h = '<div class="msg ' + (fine ? "ok" : "err") + '"><b>' + esc(INTEGRITY_LABEL[ig.status] || "Not verified") + "</b>: " + esc(ig.message || "") + "</div>";
+    if (ig.atSeq != null) {
+      h += '<div class="tbl"><table><tbody><tr><th>Chained row</th><td>' + esc(ig.atSeq) + "</td></tr>" +
+        (ig.auditId ? '<tr><th>Audit row</th><td class="mono">' + esc(ig.auditId) + "</td></tr>" : "") +
+        (ig.expected ? '<tr><th>Expected</th><td class="mono">' + esc(ig.expected) + '</td></tr><tr><th>Found</th><td class="mono">' + esc(ig.found || "") + "</td></tr>" : "") +
+        "</tbody></table></div>";
+    }
+    if (anchors !== undefined && anchors !== null) h += anchorHtml(c, anchors, chain);
+    return h + '<p class="quiet">Each audit row is linked to the one before it by a hash, so a change or removal made in the database itself shows here. The newest rows are checked each time. Once an hour the newest row number is also copied to two stores outside the database (KV and Firestore) and compared here, and the two copies are compared with each other. Rows written before this was switched on are not linked and cannot be checked.</p>';
+  }
+  WSQ._auditIntegrityHtml = auditIntegrityHtml;
 
   /* DATA EXPORT (FHIR). The hospital's record as FHIR Bulk Data NDJSON (functions/_wardsynq/fhir-bulk.js).
    * The list is null while loading and false when it failed, and a failed load never renders as "no
@@ -957,13 +1483,24 @@
    * type had nothing), failed (with the reason), cancelled, expired. Anything the export could not
    * include is listed under the job, never hidden. */
   var EXPORT_STATUS = { "in-progress": "Running", complete: "Done", failed: "Failed", cancelled: "Cancelled", expired: "Expired, files deleted" };
-  function exportHtml(c, r) {
+  /* G9. `groups` is the ward census as a FHIR Bundle of Group (fhir-group.js): null while loading, false when
+   * it failed. A failed ward list leaves the whole-hospital export available and says the wards could not be
+   * listed, rather than offering none. */
+  function exportHtml(c, r, groups) {
     var esc = c.esc;
     var h = '<div class="card"><h2>' + c.ms("cloud_download") + " Data export (FHIR)</h2>" +
-      '<p class="quiet">Exports this hospital\'s record as FHIR R4 NDJSON, one file per resource type, in the background. One export runs at a time. Files are fetched through the FHIR Bulk Data API ($export-status) with this hospital\'s authorization, are recorded in the audit trail when downloaded, and are deleted after 24 hours.</p>';
+      '<p class="quiet">Exports this hospital\'s record as FHIR R4 NDJSON, one file per resource type, in the background. One export runs at a time. Files are downloaded here, or through the FHIR Bulk Data API ($export-status), with this hospital\'s authorization; every download is recorded in the audit trail, and files are deleted after 24 hours.</p>';
     if (r === null) return h + '<span class="spin"></span></div>';
     if (r === false || r.failed) return h + '<div class="msg err">Exports could not be loaded' + (r && r.message ? ": " + esc(r.message) : "") + ". This is not the same as there being none.</div></div>";
-    h += "<h3>Start an export</h3><div class=\"row\">" + (r.exportable || []).map(function (t) {
+    var wardOpts = groups && groups.entry ? groups.entry.filter(function (e) { return e.resource && e.resource.resourceType === "Group"; }).map(function (e) {
+      return '<option value="' + esc(e.resource.id) + '">' + esc(e.resource.name) + " (" + esc(e.resource.quantity) + " patients now)</option>";
+    }).join("") : "";
+    h += "<h3>Start an export</h3>" +
+      '<div class="row"><label class="f"><span>Which patients</span><select id="admExpGroup"><option value="">The whole hospital</option>' + wardOpts + "</select></label></div>" +
+      (groups === null || groups === undefined ? '<p class="quiet">Loading the wards...</p>'
+        : groups === false || !groups.entry ? '<div class="msg err">The wards could not be listed, so a single-ward export cannot be chosen right now. The whole-hospital export still works.</div>'
+        : !wardOpts ? '<p class="quiet">No ward has an admitted patient right now, so there is no ward to export on its own.</p>' : "") +
+      '<div class="row">' + (r.exportable || []).map(function (t) {
       return '<label class="f" style="flex:0 1 190px"><span><input type="checkbox" class="admExpType" value="' + esc(t) + '" checked> ' + esc(t) + "</span></label>";
     }).join("") + "</div>" +
       '<div class="row"><label class="f"><span>Only changed since (optional)</span><input type="datetime-local" id="admExpSince"></label></div>' +
@@ -976,11 +1513,11 @@
         if (x.status === "in-progress") status += '<br><span class="quiet">' + esc(x.exported) + " resources so far</span>";
         if (x.status === "failed") status = '<span class="msg err">Failed: ' + esc(x.error || "no reason recorded") + "</span>";
         var files = x.status === "complete"
-          ? (x.files.length ? x.files.map(function (f) { return esc(f.name) + ": " + esc(f.count); }).join("<br>") : "Done. No resources matched this export.")
+          ? (x.files.length ? x.files.map(function (f) { return esc(f.name) + ": " + esc(f.count) + ' <button type="button" class="btn ghost sm" data-exp-file="' + esc(x.id) + '" data-exp-name="' + esc(f.name) + '">Download</button>'; }).join("<br>") : "Done. No resources matched this export.")
           : '<span class="quiet">' + (x.files.length ? x.files.length + " file(s) written" : "none") + "</span>";
         if (x.issues && x.issues.length) files += '<div class="msg err">Not included: ' + x.issues.map(function (i) { return esc(i.detail); }).join("<br>") + "</div>";
         var act = (x.status === "in-progress" || x.status === "complete") ? '<button type="button" class="btn ghost" data-exp-cancel="' + esc(x.id) + '">' + (x.status === "complete" ? "Delete files" : "Cancel") + "</button>" : "";
-        return "<tr><td>" + esc(x.requestedAt) + "<br><span class=\"quiet\">" + esc(x.requestedBy) + "</span></td><td>" + esc((x.types || []).join(", ")) + "</td><td>" + esc(x.since || "all") + "</td><td>" + status + "</td><td>" + files + "</td><td>" + act + "</td></tr>";
+        return "<tr><td>" + esc(x.requestedAt) + "<br><span class=\"quiet\">" + esc(x.requestedBy) + "</span></td><td>" + esc((x.types || []).join(", ")) + (x.groupName ? '<br><span class="quiet">ward: ' + esc(x.groupName) + "</span>" : "") + "</td><td>" + esc(x.since || "all") + "</td><td>" + status + "</td><td>" + files + "</td><td>" + act + "</td></tr>";
       }).join("") + "</tbody></table></div>";
     return h + "</div>";
   }
@@ -989,8 +1526,9 @@
   function renderExport(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = exportHtml(c, null);
-    return c.api("/ward/fhir-exports" + q).then(function (r) {
-      body.innerHTML = exportHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+    return Promise.all([c.api("/ward/fhir-exports" + q), c.api("/ward/fhir/Group" + q)]).then(function (rs) {
+      var r = rs[0], groups = rs[1] && rs[1].resourceType === "Bundle" ? rs[1] : false;
+      body.innerHTML = exportHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) }, groups);
       if (!r || !r.ok) return;
       var msg = function (t) { document.getElementById("admExpMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
       document.getElementById("admExpRefresh").onclick = function () { WSQ.render("admin"); };
@@ -1001,17 +1539,104 @@
         var sinceRaw = document.getElementById("admExpSince").value, since = "";
         if (sinceRaw) { var d = new Date(sinceRaw); if (isNaN(d.getTime())) { msg("That date is not valid."); return; } since = d.toISOString(); }
         btn.disabled = true;
-        c.api("/ward/fhir-export", { orgId: c.state.orgId, types: types, since: since }).then(function (x) {
+        var groupSel = document.getElementById("admExpGroup");
+        c.api("/ward/fhir-export", { orgId: c.state.orgId, types: types, since: since, groupId: groupSel ? groupSel.value : "" }).then(function (x) {
           if (!x || !x.ok) { btn.disabled = false; msg(refusal(x)); return; }
           c.toast("Export started."); WSQ.render("admin");
         });
       };
+      /* A download goes through the same authorised, audited $export-file route a bulk client uses: the
+       * server refuses a download it could not record in the audit trail, and that refusal is shown. */
+      body.querySelectorAll("[data-exp-file]").forEach(function (b) {
+        b.onclick = function () {
+          var name = b.getAttribute("data-exp-name");
+          b.disabled = true;
+          c.download("/ward/fhir/$export-file/" + encodeURIComponent(b.getAttribute("data-exp-file")) + "/" + encodeURIComponent(name) + q, name).then(function (x) {
+            b.disabled = false;
+            if (!x || !x.ok) { msg("Download refused: " + ((x && x.message) || "no answer from the server")); return; }
+            c.toast("Downloaded " + name + ". The download is in the audit trail.");
+          });
+        };
+      });
       body.querySelectorAll("[data-exp-cancel]").forEach(function (b) {
         b.onclick = function () {
           b.disabled = true;
           c.api("/ward/fhir-export-cancel", { orgId: c.state.orgId, id: b.getAttribute("data-exp-cancel") }).then(function (x) {
             if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
             c.toast("Export cancelled and its files deleted."); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
+
+  /* FHIR (functions/_wardsynq/fhir-terminology.js, fhir.js capabilityStatement). What this hospital's FHIR
+   * server declares, and the value sets it serves, each expandable in place. Each load is null while
+   * loading and a failure when it failed: a list that failed never reads as "no value sets", and a
+   * fragment's warning is shown above its codes, never dropped. */
+  function fhirFailed(r, type) {
+    if (r && r.resourceType === type) return null;
+    if (r && r.resourceType === "OperationOutcome") return (r.issue || []).map(function (i) { return i.diagnostics || i.code; }).join("; ");
+    return refusal(r);
+  }
+  function fhirHtml(c, meta, sets) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("hub") + " FHIR server</h2>" +
+      '<p class="quiet">What this hospital\'s FHIR R4 API declares to other systems. A patient\'s International Patient Summary opens from their chart on the ward.</p>';
+    if (meta === null) h += '<span class="spin"></span>';
+    else if (fhirFailed(meta, "CapabilityStatement")) h += '<div class="msg err">The capability statement could not be loaded: ' + esc(fhirFailed(meta, "CapabilityStatement")) + ".</div>";
+    else {
+      var rest = (meta.rest && meta.rest[0]) || {};
+      h += '<div class="kv"><dt>FHIR version</dt><dd>' + esc(meta.fhirVersion) + "</dd><dt>Software</dt><dd>" + esc((meta.software && meta.software.name) || "") + " " + esc((meta.software && meta.software.version) || "") + "</dd>" +
+        "<dt>SMART on FHIR</dt><dd>" + (rest.security && rest.security.service ? "enabled" : "not enabled") + "</dd>" +
+        "<dt>Writes</dt><dd>" + ((rest.interaction || []).length ? "accepted (inbound FHIR is enabled)" : "none, read only") + "</dd>" +
+        "<dt>Operations</dt><dd>" + esc((rest.operation || []).map(function (o) { return "$" + o.name; }).join(", ")) + "</dd></div>" +
+        '<div class="tbl"><table><thead><tr><th>Resource</th><th>Interactions</th></tr></thead><tbody>' +
+        (rest.resource || []).map(function (r) {
+          return "<tr><td>" + esc(r.type) + "</td><td>" + esc((r.interaction || []).map(function (i) { return i.code; }).join(", ")) + "</td></tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    h += '</div><div class="card"><h2>' + c.ms("menu_book") + " Terminology</h2>" +
+      '<p class="quiet">The code lists this server answers $expand and $validate-code for. This hospital\'s own lists are complete. LOINC and other published systems are only the codes this server carries: it is not an authoritative source for them.</p>';
+    if (sets === null) return h + '<span class="spin"></span></div>';
+    if (fhirFailed(sets, "Bundle")) return h + '<div class="msg err">Value sets could not be loaded: ' + esc(fhirFailed(sets, "Bundle")) + ". This is not the same as there being none.</div></div>";
+    var entries = sets.entry || [];
+    entries.forEach(function (e) { if (e.resource && e.resource.resourceType === "OperationOutcome") h += '<div class="msg note">' + esc(fhirFailed(e.resource, "Bundle")) + "</div>"; });
+    var vs = entries.filter(function (e) { return e.resource && e.resource.resourceType === "ValueSet"; }).map(function (e) { return e.resource; });
+    if (!vs.length) return h + '<p class="quiet">This server serves no value sets.</p></div>';
+    return h + '<div class="row"><label class="f"><span>Filter codes when expanding (optional)</span><input id="admVsFilter" placeholder="code or name"></label></div>' +
+      vs.map(function (v) {
+        return "<h3>" + esc(v.title || v.id) + (v.experimental ? ' <span class="pill warn">draft</span>' : "") + "</h3>" +
+          '<p class="quiet">' + esc(v.description || "") + ' <span class="mono">' + esc(v.url) + "</span></p>" +
+          '<button type="button" class="btn ghost" data-vs-expand="' + esc(v.id) + '">Expand</button><div id="admVs-' + esc(v.id) + '"></div>';
+      }).join("") + "</div>";
+  }
+  WSQ._fhirHtml = fhirHtml;
+  function expansionHtml(c, r) {
+    var esc = c.esc;
+    if (r === null) return '<span class="spin"></span>';
+    if (fhirFailed(r, "ValueSet") || !r.expansion) return '<div class="msg err">Could not expand: ' + esc(fhirFailed(r, "ValueSet") || "no expansion returned") + ".</div>";
+    var x = r.expansion, rows = x.contains || [];
+    return (x.parameter || []).filter(function (p) { return p.name === "warning"; }).map(function (w) { return '<div class="msg note">' + esc(w.valueString) + "</div>"; }).join("") +
+      '<p class="quiet">' + esc(x.total) + " code(s)" + (rows.length < x.total ? ", showing the first " + rows.length : "") + ".</p>" +
+      (rows.length ? '<div class="tbl"><table><thead><tr><th>Code</th><th>Display</th><th>System</th></tr></thead><tbody>' +
+        rows.map(function (k) { return '<tr><td class="mono">' + esc(k.code) + "</td><td>" + esc(k.display || "") + '</td><td class="mono">' + esc(k.system) + "</td></tr>"; }).join("") +
+        "</tbody></table></div>" : '<p class="quiet">No codes match.</p>');
+  }
+  WSQ._expansionHtml = expansionHtml;
+
+  function renderFhir(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = fhirHtml(c, null, null);
+    return Promise.all([c.api("/ward/fhir/metadata" + q), c.api("/ward/fhir/ValueSet" + q)]).then(function (res) {
+      body.innerHTML = fhirHtml(c, res[0] || {}, res[1] || {});
+      body.querySelectorAll("[data-vs-expand]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-vs-expand"), out = document.getElementById("admVs-" + id);
+          var filter = String(document.getElementById("admVsFilter").value || "").trim();
+          out.innerHTML = expansionHtml(c, null);
+          c.api("/ward/fhir/ValueSet/" + encodeURIComponent(id) + "/$expand" + q + "&count=200" + (filter ? "&filter=" + encodeURIComponent(filter) : "")).then(function (x) {
+            out.innerHTML = expansionHtml(c, x || {});
           });
         };
       });
@@ -1036,6 +1661,17 @@
           });
         };
       });
+      body.querySelectorAll("[data-sec-rows]").forEach(function (b) {
+        b.onclick = function () {
+          var out = b.nextElementSibling;
+          b.disabled = true;
+          out.innerHTML = auditRowsHtml(c, null);
+          c.api("/ward/audit-rows" + q + "&ids=" + encodeURIComponent(b.getAttribute("data-sec-rows"))).then(function (x) {
+            b.disabled = false;
+            out.innerHTML = auditRowsHtml(c, x && x.ok ? x : { failed: true, message: refusal(x) });
+          }, function () { b.disabled = false; out.innerHTML = auditRowsHtml(c, { failed: true, message: "No response from the server." }); });
+        };
+      });
       var save = document.getElementById("secRtSave");
       if (save) save.onclick = function () {
         var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
@@ -1045,6 +1681,30 @@
           c.toast("Restore test recorded."); WSQ.render("admin");
         });
       };
+      /* P2.17 anchor acknowledgement (owner only; the form renders only for the owner). Review
+       * first, then confirm: acknowledging archives the outside copy, which must stay deliberate. */
+      /* G12: one form per chain (clinical, hospital event log), each with its own ids. */
+      ["", "event-log"].forEach(function (chain) {
+        var sx = ACK_SUFFIX[chain];
+        var ackReview = document.getElementById("secAckReview" + sx);
+        if (ackReview) ackReview.onclick = function () {
+          var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+          var reason = val("secAckReason" + sx), incident = val("secAckIncident" + sx), msg = document.getElementById("secAckMsg" + sx);
+          if (reason.length < 20 || !incident) { msg.innerHTML = '<div class="msg err">Give a reason of at least 20 characters and the incident reference. The server checks both again.</div>'; return; }
+          msg.innerHTML = "";
+          document.getElementById("secAckConfirm" + sx).innerHTML = anchorAckConfirmHtml(c, reason, incident, chain);
+          document.getElementById("secAckBack" + sx).onclick = function () { document.getElementById("secAckConfirm" + sx).innerHTML = ""; };
+          document.getElementById("secAckGo" + sx).onclick = function () {
+            var go = document.getElementById("secAckGo" + sx);
+            go.disabled = true;
+            c.api("/ward/audit-anchor-acknowledge", { orgId: c.state.orgId, reason: reason, incidentRef: incident, chain: chain }).then(function (x) {
+              if (!x || !x.ok) { go.disabled = false; msg.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+              c.toast("Restore acknowledged. The outside copies restart from the newest row.");
+              WSQ.render("admin");
+            });
+          };
+        };
+      });
     });
   }
 
@@ -1089,7 +1749,7 @@
     if (r == null) return h + '<span class="spin"></span> Loading webhooks...</div>';
     if (r.failed) return h + '<div class="msg err">Webhooks could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
     if (shown && shown.secret) {
-      h += '<div class="msg ok">Signing secret for ' + esc(shown.url) + ': <code style="user-select:all;word-break:break-all">' + esc(shown.secret) + "</code><br>Copy it now. It is not shown again.</div>";
+      h += '<div class="msg ok">Signing secret for ' + esc(shown.url) + ': <code style="user-select:all;word-break:break-all">' + esc(shown.secret) + "</code><br>Copy it now. It is not shown again. The previous secret keeps working for 24 hours so the receiving system can be updated.</div>";
     }
     var label = {};
     (r.eventTypes || []).forEach(function (t) { label[t.id] = t.label; });
@@ -1101,10 +1761,12 @@
           var status = "<b>" + esc(WH_STATUS[w.status] || w.status) + "</b>" + (w.disabledReason ? '<br><span class="quiet">' + esc(w.disabledReason) + "</span>" : "") +
             (w.consecutiveFailures ? '<br><span class="msg err">' + esc(w.consecutiveFailures) + " failed in a row</span>" : "");
           var last = w.lastAttemptAt ? esc(w.lastAttemptAt) + "<br>" + (w.lastOk ? "Delivered" : "Failed") + (w.lastResponseCode ? " (" + esc(w.lastResponseCode) + ")" : "") : '<span class="quiet">None yet</span>';
-          return '<tr class="' + (w.active ? "" : "warn") + '"><td>' + esc(w.url) + (w.description ? '<br><span class="quiet">' + esc(w.description) + "</span>" : "") + "</td><td>" +
+          return '<tr class="' + (w.active ? "" : "warn") + '"><td>' + esc(w.url) + (w.description ? '<br><span class="quiet">' + esc(w.description) + "</span>" : "") +
+            (w.payload === "fhir-id-only" ? '<br><span class="pill">FHIR Subscription, id only</span>' : "") + "</td><td>" +
             w.eventTypes.map(function (t) { return esc(label[t] || t); }).join("<br>") + "</td><td>" + status + "</td><td>" + last + "</td><td>" +
             '<button type="button" class="btn ghost" data-wh-test="' + esc(w.id) + '"' + (w.active ? "" : " disabled") + ">Send test</button> " +
-            '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Recent deliveries</button> ' +
+            '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Delivery log</button> ' +
+            '<button type="button" class="btn ghost" data-wh-edit="' + esc(w.id) + '">Change address</button> ' +
             '<button type="button" class="btn ghost" data-wh-rotate="' + esc(w.id) + '">Rotate secret</button> ' +
             '<button type="button" class="btn ghost" data-wh-active="' + esc(w.id) + '" data-on="' + (w.active ? "0" : "1") + '">' + (w.active ? "Disable" : "Enable") + "</button></td></tr>";
         }).join("") + "</tbody></table></div>";
@@ -1112,7 +1774,9 @@
     h += '<div id="whLog"></div><div id="whMsg"></div><h3>Add a webhook</h3>';
     if (!r.keyConfigured) return h + '<div class="msg err">Webhook secrets cannot be stored encrypted on this server, so a webhook cannot be added.</div></div>';
     return h + '<div class="row"><label class="f"><span>Address (https only)</span><input type="url" id="whUrl" placeholder="https://"></label>' +
-      '<label class="f"><span>Label (optional)</span><input type="text" id="whDesc" maxlength="120"></label></div><div class="row">' +
+      '<label class="f"><span>Label (optional)</span><input type="text" id="whDesc" maxlength="120"></label>' +
+      '<label class="f"><span>Payload</span><select id="whPayload"><option value="wardsynq">WardSynQ JSON (event type and id)</option>' +
+      '<option value="fhir-id-only">FHIR Subscription notification (R4 backport, id only)</option></select></label></div><div class="row">' +
       (r.eventTypes || []).map(function (t) {
         return '<label class="f" style="flex:0 1 240px"><span><input type="checkbox" class="whType" value="' + esc(t.id) + '"> ' + esc(t.label) + "</span></label>";
       }).join("") + '</div><button type="button" class="btn" id="whAdd">Add webhook</button></div>';
@@ -1120,26 +1784,327 @@
   WSQ._webhooksHtml = webhooksHtml;
 
   var DELIVERY_STATUS = { delivered: "Delivered", failed: "Failed, will retry", dead: "Failed for good", skipped: "Not sent" };
-  function webhookDeliveriesHtml(c, d) {
+  /* One endpoint's attempts, newest first, a page at a time. `older` says whether this is past the first page. */
+  function webhookDeliveriesHtml(c, d, url, older) {
     var esc = c.esc;
-    var h = "<h3>Recent deliveries</h3>";
+    var h = "<h3>Delivery log" + (url ? " for " + esc(url) : "") + "</h3>";
     if (d == null) return h + '<span class="spin"></span> Loading deliveries...';
     if (d.failed) return h + '<div class="msg err">The delivery log could not be loaded: ' + esc(d.message || "failed") + ". This is not the same as nothing having been sent.</div>";
-    if (!d.deliveries.length) return h + '<p class="quiet">No delivery attempts are recorded for this webhook yet.</p>';
-    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>Event</th><th>Attempt</th><th>Result</th><th>Response code</th></tr></thead><tbody>' +
+    var nav = (older ? '<button type="button" class="btn ghost" data-wh-page="">Newest</button> ' : "") +
+      (d.next ? '<button type="button" class="btn ghost" data-wh-page="' + esc(d.next) + '">Older</button>' : "");
+    if (!d.deliveries.length) return h + '<p class="quiet">' + (older ? "No older delivery attempts." : "No delivery attempts are recorded for this webhook yet.") + "</p>" + nav;
+    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>Event</th><th>Attempts</th><th>Result</th><th>Response code</th></tr></thead><tbody>' +
       d.deliveries.map(function (x) {
         return '<tr class="' + (x.status === "delivered" ? "" : "warn") + '"><td>' + esc(x.at) + "</td><td>" + esc(x.eventType) + (x.test ? " (test)" : "") + '<br><span class="quiet">' + esc(x.eventId) + "</span></td><td>" + esc(x.attempt) +
           "</td><td>" + esc(DELIVERY_STATUS[x.status] || x.status) + (x.reason ? '<br><span class="quiet">' + esc(x.reason) + "</span>" : "") + "</td><td>" + (x.responseCode ? esc(x.responseCode) : "none") + "</td></tr>";
-      }).join("") + "</tbody></table></div>";
+      }).join("") + "</tbody></table></div>" + nav;
   }
+  /* Changing where an endpoint points. The server re-runs the https and public-address checks; the secret stays. */
+  function webhookEditHtml(c, w) {
+    var esc = c.esc;
+    return "<h3>Change address</h3><p class=\"quiet\">The new address is checked like a new webhook (https, a public address). The signing secret does not change.</p>" +
+      '<div class="row"><label class="f"><span>Address (https only)</span><input type="url" id="whEditUrl" value="' + esc(w.url) + '"></label></div>' +
+      '<button type="button" class="btn" id="whEditSave" data-id="' + esc(w.id) + '">Save address</button> <button type="button" class="btn ghost" id="whEditCancel">Cancel</button>';
+  }
+  WSQ._webhookEditHtml = webhookEditHtml;
   WSQ._webhookDeliveriesHtml = webhookDeliveriesHtml;
+
+  // ---- Integrations > Connected apps (SMART) ---------------------------------------------
+  /* null = loading, {failed} = the list did not load. Neither may look like "no apps". The scope
+   * checkboxes are built from the answer's own scopeCatalog, never from a list kept here: a scope
+   * the server would refuse is a scope the screen must not offer. `editingId` is the client shown
+   * in the form, or null for adding. Keys are never shown again (the answer carries counts and key
+   * ids only), so editing a backend client replaces its keys only when new ones are pasted. */
+  var scCache = null;
+  function scScopeChecks(esc, catalog, kind, selected) {
+    var groups = kind === "backend" ? [["system", "System (a backend system reads across patients)"], ["special", "Special"]]
+      : [["user", "User (reads as the clinician)"], ["patient", "Patient (confined to one patient)"], ["special", "Special"]];
+    var sel = {};
+    (selected || []).forEach(function (s) { sel[s] = true; });
+    return groups.map(function (g) {
+      return '<div style="flex:1 1 220px"><b>' + esc(g[1]) + "</b><br>" + (((catalog && catalog[g[0]]) || []).map(function (s) {
+        return '<label class="f" style="font-weight:normal"><span><input type="checkbox" class="scScope" value="' + esc(s) + '"' + (sel[s] ? " checked" : "") + "> <code>" + esc(s) + "</code></span></label>";
+      }).join("") || '<span class="quiet">none</span>') + "</div>";
+    }).join("");
+  }
+  function smartClientsHtml(c, r, editingId) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>Connected apps (SMART)</h2>' +
+      '<p class="quiet">Outside applications this hospital allows to read its record over SMART on FHIR: an app a clinician uses (public), or a registered system with a key (backend). ' +
+      "Registration is the allowlist: an app not named here gets nothing, and removing one stops its tokens at once. Turning the switch off closes the SMART door for every app.</p>";
+    if (r == null) return h + '<span class="spin"></span> Loading connected apps...</div>';
+    if (r.failed) return h + '<div class="msg err">Connected apps could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
+    h += '<label class="f"><span><input type="checkbox" id="scEnabled"' + (r.enabled ? " checked" : "") + "> SMART access is on for this hospital</span></label>";
+    var list = r.clients || [];
+    h += "<h3>Registered apps</h3>";
+    if (!list.length) h += '<p class="quiet">No connected apps are registered for this hospital. Until one is, no outside application can connect.</p>';
+    else {
+      h += '<div class="tbl"><table><thead><tr><th>Name</th><th>Client ID</th><th>Kind</th><th>Redirects</th><th>Scopes</th><th>Keys</th><th></th></tr></thead><tbody>' +
+        list.map(function (a) {
+          var kids = (a.keys || []).map(function (k) { return k.kid || "(no kid)"; }).join(", ");
+          var keys = esc(a.keyCount || 0) + " inline" + (kids ? '<br><span class="quiet">' + esc(kids) + "</span>" : "") +
+            (a.jwksUri ? '<br><span class="quiet">JWKS address set</span>' : "");
+          return "<tr><td>" + esc(a.name) + "</td><td><code>" + esc(a.clientId) + "</code></td><td>" + esc(a.kind) + "</td><td>" +
+            ((a.redirectUris || []).length ? a.redirectUris.map(function (u) { return esc(u); }).join("<br>") : '<span class="quiet">none</span>') + "</td><td>" +
+            (a.scopes || []).map(function (s) { return "<code>" + esc(s) + "</code>"; }).join("<br>") + "</td><td>" + keys + "</td><td>" +
+            '<button type="button" class="btn ghost" data-sc-edit="' + esc(a.clientId) + '">Edit</button> ' +
+            '<button type="button" class="btn ghost" data-sc-remove="' + esc(a.clientId) + '">Remove</button></td></tr>';
+        }).join("") + "</tbody></table></div>";
+    }
+    var ed = null;
+    if (editingId) ed = list.filter(function (a) { return a.clientId === editingId; })[0] || null;
+    var kind = ed ? ed.kind : "public";
+    h += '<div id="scMsg"></div><h3 id="scFormHead">' + (ed ? "Edit " + esc(ed.clientId) : "Add a connected app") + "</h3>" +
+      '<div class="row"><label class="f"><span>Client ID (letters, digits, dot, underscore, hyphen)</span><input type="text" id="scId" maxlength="64" value="' + esc(ed ? ed.clientId : "") + '"' + (ed ? " disabled" : "") + "></label>" +
+      '<label class="f"><span>Name (shown on the consent screen)</span><input type="text" id="scName" maxlength="120" value="' + esc(ed ? ed.name : "") + '"></label>' +
+      '<label class="f"><span>Kind</span><select id="scKind"><option value="public"' + (kind === "public" ? " selected" : "") + ">Public (an app a clinician uses)</option>" +
+      '<option value="backend"' + (kind === "backend" ? " selected" : "") + ">Backend (a system with a key)</option></select></label></div>" +
+      '<div class="row" id="scRedirectWrap" style="' + (kind === "public" ? "" : "display:none") + '"><label class="f"><span>Redirect URIs, one per line (https, no fragment)</span><textarea id="scRedirects" rows="2">' +
+      esc(ed ? (ed.redirectUris || []).join("\n") : "") + "</textarea></label></div>" +
+      '<div id="scBackendWrap" style="' + (kind === "backend" ? "" : "display:none") + '"><div class="row"><label class="f"><span>Public keys (JWKS JSON with a keys list)</span><textarea id="scJwks" rows="3" placeholder=\'{"keys": [...]}\'></textarea></label>' +
+      '<label class="f"><span>Or a JWKS address (https)</span><input type="url" id="scJwksUri" placeholder="https://"></label></div>' +
+      '<p class="quiet">Send only the public half. A private key is refused, never stored.' + (ed ? " Keys are never shown again: paste them only to replace what is registered." : "") + "</p></div>" +
+      "<h3>Scopes</h3>" + '<div class="row" id="scScopes">' + scScopeChecks(esc, r.scopeCatalog || {}, kind, ed ? ed.scopes : []) + "</div>" +
+      '<button type="button" class="btn" id="scSave"' + (ed ? ' data-sc-editing="' + esc(ed.clientId) + '"' : "") + ">" + (ed ? "Save changes" : "Add connected app") + "</button>";
+    if (ed) h += ' <button type="button" class="btn ghost" id="scCancel">Cancel</button>';
+    return h + "</div>";
+  }
+  WSQ._smartClientsHtml = smartClientsHtml;
+
+  function bindSmart(c, body) {
+    var msg = function (t) { var m = document.getElementById("scMsg"); if (m) m.innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
+    var en = document.getElementById("scEnabled");
+    if (en) en.onchange = function () {
+      var want = en.checked;
+      en.disabled = true;
+      c.api("/ward/smart-enable", { orgId: c.state.orgId, enabled: want }).then(function (x) {
+        if (!x || !x.ok) { en.disabled = false; en.checked = !want; msg(refusal(x)); return; }
+        c.toast(want ? "SMART access is on for this hospital." : "SMART access is off. No outside app can connect until it is back on.");
+        renderIntegrations(c, body);
+      }, function () { en.disabled = false; en.checked = !want; msg("No response from the server. The switch may not have moved; reload to check."); });
+    };
+    var kind = document.getElementById("scKind");
+    var paintScopes = function () {
+      var box = document.getElementById("scScopes");
+      var k = document.getElementById("scKind");
+      var isB = !!(k && k.value === "backend");
+      var rw = document.getElementById("scRedirectWrap"), bw = document.getElementById("scBackendWrap");
+      if (rw) rw.style.display = isB ? "none" : "";
+      if (bw) bw.style.display = isB ? "" : "none";
+      if (!box || !scCache || !scCache.scopeCatalog) return;
+      var keep = {};
+      box.querySelectorAll(".scScope").forEach(function (b) { if (b.checked) keep[b.value] = true; });
+      box.innerHTML = scScopeChecks(c.esc, scCache.scopeCatalog, isB ? "backend" : "public", Object.keys(keep));
+    };
+    if (kind) kind.onchange = paintScopes;
+    var cancel = document.getElementById("scCancel");
+    if (cancel) cancel.onclick = function () {
+      var card = document.getElementById("scCard");
+      card.innerHTML = smartClientsHtml(c, scCache, null);
+      bindSmart(c, body);
+    };
+    var save = document.getElementById("scSave");
+    if (save) save.onclick = function () {
+      var editing = save.getAttribute("data-sc-editing") || "";
+      var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+      var k = val("scKind") === "backend" ? "backend" : "public";
+      var scopes = [];
+      document.querySelectorAll(".scScope").forEach(function (b) { if (b.checked) scopes.push(b.value); });
+      var client = { clientId: editing || val("scId"), name: val("scName"), kind: k,
+        redirectUris: val("scRedirects").split("\n").map(function (s) { return s.trim(); }).filter(Boolean), scopes: scopes };
+      if (k === "backend") {
+        var jwt = val("scJwks");
+        if (jwt) {
+          try { client.jwks = JSON.parse(jwt); }
+          catch (e) { msg("The keys are not valid JSON: " + e.message); return; }
+        } else if (!editing) {
+          /* A new backend client with neither keys nor address is the server's refusal, with the
+           * field named; an edit may keep what is registered, so it is allowed through. */
+        }
+        client.jwksUri = val("scJwksUri");
+      }
+      save.disabled = true;
+      c.api("/ward/smart-client-save", { orgId: c.state.orgId, client: client }).then(function (x) {
+        if (!x || !x.ok) { save.disabled = false; msg(refusal(x)); return; }
+        c.toast(editing ? "Connected app updated." : "Connected app registered.");
+        renderIntegrations(c, body);
+      }, function () { save.disabled = false; msg("No response from the server. The app may not have been saved; reload to check."); });
+    };
+    body.querySelectorAll("[data-sc-edit]").forEach(function (b) {
+      b.onclick = function () {
+        var card = document.getElementById("scCard");
+        card.innerHTML = smartClientsHtml(c, scCache, b.getAttribute("data-sc-edit"));
+        bindSmart(c, body);
+        var head = document.getElementById("scFormHead");
+        if (head && head.scrollIntoView) head.scrollIntoView();
+      };
+    });
+    body.querySelectorAll("[data-sc-remove]").forEach(function (b) {
+      b.onclick = function () {
+        var id = b.getAttribute("data-sc-remove");
+        if (!window.confirm("Remove " + id + "? Its tokens stop working at once, and it cannot connect again until it is re-registered.")) return;
+        b.disabled = true;
+        c.api("/ward/smart-client-remove", { orgId: c.state.orgId, clientId: id }).then(function (x) {
+          if (!x || !x.ok) { b.disabled = false; msg(refusal(x)); return; }
+          c.toast("Connected app removed. Its tokens no longer work.");
+          renderIntegrations(c, body);
+        }, function () { b.disabled = false; msg("No response from the server. The app may not have been removed; reload to check."); });
+      };
+    });
+  }
+
+  // ---- Integrations > Connectors (owner S2, S4, S5) -------------------------------------------
+  /* The hospital's own imaging archive, payers and payment gateway. Every form is drawn from the
+   * server's catalogue, so a field the server does not take is never offered. Credentials are typed in
+   * and never shown again: the list says which are set and when. null = loading, {failed} = not loaded. */
+  var CN_STATE = { editing: null, result: {} };
+  function connectorFormHtml(esc, kind, cur) {
+    var provs = kind.providers;
+    var pid = (cur && cur.provider) || CN_STATE.provider && CN_STATE.provider[kind.kind] || provs[0].id;
+    var p = provs.filter(function (x) { return x.id === pid; })[0] || provs[0];
+    var settings = (cur && cur.settings) || {}, set = (cur && cur.secretsSet) || [];
+    var h = '<div class="cnForm" data-cn-kind="' + esc(kind.kind) + '"><h3>' + (cur ? "Change " + esc(cur.name || cur.id) : "Add") + "</h3>";
+    h += '<div class="row"><label class="f"><span>Provider</span><select class="cnProvider">' + provs.map(function (x) {
+      return '<option value="' + esc(x.id) + '"' + (x.id === p.id ? " selected" : "") + ">" + esc(x.label) + "</option>";
+    }).join("") + "</select></label>" +
+      '<label class="f"><span>Label (optional)</span><input class="cnName" maxlength="120" value="' + esc((cur && cur.name) || "") + '"></label></div>';
+    if (p.help) h += '<p class="quiet">' + esc(p.help) + "</p>";
+    h += '<div class="row">' + p.settings.map(function (f) {
+      var v = settings[f.key];
+      if (f.type === "checkbox") return '<label class="f"><span><input type="checkbox" class="cnSet" data-key="' + esc(f.key) + '" data-type="checkbox"' + (v ? " checked" : "") + "> " + esc(f.label) + "</span></label>";
+      if (f.type === "select") return '<label class="f"><span>' + esc(f.label) + '</span><select class="cnSet" data-key="' + esc(f.key) + '">' + f.options.map(function (o) {
+        return '<option value="' + esc(o[0]) + '"' + (v === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select></label>";
+      return '<label class="f"><span>' + esc(f.label) + (f.required ? " *" : "") + '</span><input class="cnSet" data-key="' + esc(f.key) + '"' + (f.type === "url" ? ' type="url" placeholder="https://"' : "") +
+        ' value="' + esc(v == null ? "" : v) + '"' + (cur && f.key === "ref" ? " readonly" : "") + "></label>";
+    }).join("") + "</div>";
+    if (p.secrets.length) h += '<div class="row">' + p.secrets.map(function (f) {
+      var isSet = cur && cur.provider === p.id && set.indexOf(f.key) >= 0;
+      return '<label class="f"><span>' + esc(f.label) + (isSet ? " (set; leave blank to keep, type a new one to rotate)" : "") + '</span><input type="password" autocomplete="new-password" class="cnSecret" data-key="' + esc(f.key) + '"></label>';
+    }).join("") + "</div>";
+    return h + '<button type="button" class="btn" data-cn-save="' + esc(kind.kind) + '"' + (cur ? ' data-cn-id="' + esc(cur.id) + '"' : "") + ">Save</button>" +
+      (cur ? ' <button type="button" class="btn ghost" data-cn-cancel="1">Cancel</button>' : "") + "</div>";
+  }
+  function connectorsHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<div class="card"><h2>Connectors</h2><span class="spin"></span> Loading connectors...</div>';
+    if (r.failed) return '<div class="card"><h2>Connectors</h2><div class="msg err">Connectors could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
+    return r.catalogue.filter(function (kind) { return kind.kind !== "abdm"; }).map(function (kind) {   // ABDM: pages/abdm.js
+      var mine = r.connectors.filter(function (x) { return x.kind === kind.kind; });
+      var h = '<div class="card"><h2>' + esc(kind.label) + "</h2>" + (kind.help ? '<p class="quiet">' + esc(kind.help) + "</p>" : "");
+      if (!mine.length) h += '<p class="quiet">None configured for this hospital.</p>';
+      else h += '<div class="tbl"><table><thead><tr><th>Connector</th><th>Provider</th><th>Status</th><th>Credentials</th><th></th></tr></thead><tbody>' + mine.map(function (x) {
+        var prov = kind.providers.filter(function (p) { return p.id === x.provider; })[0] || {};
+        var res = CN_STATE.result[x.id];
+        /* The gateway's webhook goes to this address. It names the hospital only; the gateway's signature is what is trusted. */
+        var callback = x.kind === "payment" && x.provider !== "manual"
+          ? '<br><span class="quiet">Gateway webhook address: <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
+        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + (x.active ? "On" : "Off") + "</b></td><td>" +
+          (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">set ' + esc(x.secretsSetAt || "") + "</span>" : '<span class="quiet">none</span>') + "</td><td>" +
+          '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">Change</button> ' +
+          (prov.testable ? '<button type="button" class="btn ghost" data-cn-test="' + esc(x.id) + '">Test connection</button> ' : "") +
+          '<button type="button" class="btn ghost" data-cn-active="' + esc(x.id) + '" data-on="' + (x.active ? "0" : "1") + '">' + (x.active ? "Turn off" : "Turn on") + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>";
+      var editing = mine.filter(function (x) { return x.id === CN_STATE.editing; })[0];
+      if (!r.keyConfigured) h += '<div class="msg err">Credentials cannot be stored encrypted on this server, so a connector with credentials cannot be saved.</div>';
+      if (editing) h += connectorFormHtml(esc, kind, editing);
+      else if (!(kind.singleton && mine.length)) h += connectorFormHtml(esc, kind, null);
+      return h + '<div class="cnMsg" data-cn-msg="' + esc(kind.kind) + '"></div></div>';
+    }).join("");
+  }
+  WSQ._connectorsHtml = connectorsHtml;
+  function loadConnectors(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    var card = document.getElementById("cnCard");
+    if (!card) return;
+    c.api("/ward/connectors" + q).then(function (r) {
+      var ok = r && r.ok && r.catalogue && r.connectors;
+      card.innerHTML = connectorsHtml(c, ok ? r : { failed: true, message: r ? refusal(r) : "No response from the server." });
+      if (ok) bindConnectors(c, body, r);
+    }, function () { card.innerHTML = connectorsHtml(c, { failed: true, message: "No response from the server." }); });
+  }
+  function bindConnectors(c, body, r) {
+    var card = document.getElementById("cnCard");
+    var say = function (kind, t, ok) { var m = card.querySelector('[data-cn-msg="' + kind + '"]'); if (m) m.innerHTML = '<div class="msg ' + (ok ? "ok" : "err") + '">' + c.esc(t) + "</div>"; };
+    var byId = function (id) { return r.connectors.filter(function (x) { return x.id === id; })[0]; };
+    card.querySelectorAll(".cnProvider").forEach(function (sel) {
+      sel.onchange = function () {
+        var form = sel.closest(".cnForm"), kind = form.getAttribute("data-cn-kind");
+        CN_STATE.provider = CN_STATE.provider || {}; CN_STATE.provider[kind] = sel.value;
+        var k = r.catalogue.filter(function (x) { return x.kind === kind; })[0];
+        var cur = CN_STATE.editing ? byId(CN_STATE.editing) : null;
+        var shadow = document.createElement("div");
+        // Another provider starts with no settings and no credentials set: the old ones do not carry over.
+        var same = cur && cur.provider === sel.value;
+        shadow.innerHTML = connectorFormHtml(c.esc, k, cur ? Object.assign({}, cur, { provider: sel.value, settings: same ? cur.settings : { ref: cur.settings.ref }, secretsSet: same ? cur.secretsSet : [] }) : null);
+        form.parentNode.replaceChild(shadow.firstChild, form);
+        bindConnectors(c, body, r);
+      };
+    });
+    card.querySelectorAll("[data-cn-save]").forEach(function (b) {
+      b.onclick = function () {
+        var form = b.closest(".cnForm"), kind = b.getAttribute("data-cn-save");
+        var settings = {}, secrets = {};
+        form.querySelectorAll(".cnSet").forEach(function (i) { settings[i.getAttribute("data-key")] = i.getAttribute("data-type") === "checkbox" ? i.checked : String(i.value || "").trim(); });
+        form.querySelectorAll(".cnSecret").forEach(function (i) { if (String(i.value || "").trim()) secrets[i.getAttribute("data-key")] = String(i.value).trim(); });
+        b.disabled = true;
+        c.api("/ward/connector-save", { orgId: c.state.orgId, kind: kind, provider: form.querySelector(".cnProvider").value, name: form.querySelector(".cnName").value,
+          settings: settings, secrets: Object.keys(secrets).length ? secrets : undefined, id: b.getAttribute("data-cn-id") || undefined }).then(function (x) {
+          if (!x || !x.ok) { b.disabled = false; say(kind, refusal(x)); return; }
+          form.querySelectorAll(".cnSecret").forEach(function (i) { i.value = ""; });
+          CN_STATE.editing = null;
+          c.toast(x.unchanged ? "Nothing changed." : "Connector saved." + (x.secretsNote ? " " + x.secretsNote : ""));
+          loadConnectors(c, body);
+        }, function () { b.disabled = false; say(kind, "No response from the server. The connector may not have been saved; reload to check."); });
+      };
+    });
+    card.querySelectorAll("[data-cn-edit]").forEach(function (b) { b.onclick = function () { CN_STATE.editing = b.getAttribute("data-cn-edit"); card.innerHTML = connectorsHtml(c, r); bindConnectors(c, body, r); }; });
+    card.querySelectorAll("[data-cn-cancel]").forEach(function (b) { b.onclick = function () { CN_STATE.editing = null; card.innerHTML = connectorsHtml(c, r); bindConnectors(c, body, r); }; });
+    card.querySelectorAll("[data-cn-test]").forEach(function (b) {
+      b.onclick = function () {
+        var x = byId(b.getAttribute("data-cn-test"));
+        b.disabled = true;
+        c.api("/ward/connector-test", { orgId: c.state.orgId, id: x.id }).then(function (t) {
+          b.disabled = false;
+          if (!t || !t.ok || !t.test) { say(x.kind, refusal(t)); return; }
+          CN_STATE.result[x.id] = t.test;
+          card.innerHTML = connectorsHtml(c, r); bindConnectors(c, body, r);
+        }, function () { b.disabled = false; say(x.kind, "No response from the server. The test result is not known."); });
+      };
+    });
+    card.querySelectorAll("[data-cn-active]").forEach(function (b) {
+      b.onclick = function () {
+        var x = byId(b.getAttribute("data-cn-active")), on = b.getAttribute("data-on") === "1";
+        b.disabled = true;
+        c.api("/ward/connector-save", { orgId: c.state.orgId, kind: x.kind, provider: x.provider, name: x.name, settings: x.settings, active: on }).then(function (y) {
+          if (!y || !y.ok) { b.disabled = false; say(x.kind, refusal(y)); return; }
+          c.toast(on ? "Connector turned on." : "Connector turned off."); loadConnectors(c, body);
+        }, function () { b.disabled = false; say(x.kind, "No response from the server. The switch may not have moved; reload to check."); });
+      };
+    });
+  }
 
   function renderIntegrations(c, body, shown) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
-    body.innerHTML = webhooksHtml(c, null);
+    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="abdmCard"></div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
+    loadConnectors(c, body);
+    if (WSQ._abdmLoad) WSQ._abdmLoad(c);   // pages/abdm.js: the ABDM connector has its own card
     var fail = function (r) { return { failed: true, message: r ? refusal(r) : "No response from the server." }; };
+    /* The connected-apps card loads beside the webhooks, into its own wrapper, so whichever answer
+     * arrives first is never wiped by the other. */
+    c.api("/ward/smart-clients" + q).then(function (sc) {
+      var card = document.getElementById("scCard");
+      if (!card) return;
+      scCache = (sc && sc.ok && sc.clients && sc.scopeCatalog) ? sc : null;
+      card.innerHTML = smartClientsHtml(c, scCache || fail(sc));
+      if (scCache) bindSmart(c, body);
+    }, function () {
+      var card = document.getElementById("scCard");
+      if (card) card.innerHTML = smartClientsHtml(c, fail(null));
+    });
     return c.api("/ward/webhooks" + q).then(function (r) {
-      body.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
+      var wh = document.getElementById("whCard");
+      if (wh) wh.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
+      else body.innerHTML = webhooksHtml(c, r && r.ok && r.webhooks ? r : fail(r), shown);
       if (!r || !r.ok) return;
       var msg = function (t) { document.getElementById("whMsg").innerHTML = '<div class="msg err">' + c.esc(t) + "</div>"; };
       var urlOf = function (id) { var w = r.webhooks.filter(function (x) { return x.id === id; })[0]; return w ? w.url : ""; };
@@ -1151,7 +2116,7 @@
         if (!/^https:\/\//i.test(url)) { msg("The address must start with https://."); return; }
         if (!types.length) { msg("Choose at least one event."); return; }
         add.disabled = true;
-        c.api("/ward/webhook", { orgId: c.state.orgId, url: url, eventTypes: types, description: document.getElementById("whDesc").value }).then(function (x) {
+        c.api("/ward/webhook", { orgId: c.state.orgId, url: url, eventTypes: types, description: document.getElementById("whDesc").value, payload: document.getElementById("whPayload").value }).then(function (x) {
           if (!x || !x.ok || !x.secret) { add.disabled = false; msg(refusal(x)); return; }
           renderIntegrations(c, body, { url: x.webhook.url, secret: x.secret });
         }, function () { add.disabled = false; msg("No response from the server. The webhook may not have been added; reload to check."); });
@@ -1159,7 +2124,7 @@
       body.querySelectorAll("[data-wh-rotate]").forEach(function (b) {
         b.onclick = function () {
           var id = b.getAttribute("data-wh-rotate");
-          if (!window.confirm("Make a new signing secret? The current one stops verifying immediately.")) return;
+          if (!window.confirm("Make a new signing secret? The current one keeps working for 24 hours.")) return;
           b.disabled = true;
           c.api("/ward/webhook-rotate", { orgId: c.state.orgId, id: id }).then(function (x) {
             if (!x || !x.ok || !x.secret) { b.disabled = false; msg(refusal(x)); return; }
@@ -1187,15 +2152,38 @@
           });
         };
       });
+      var showLog = function (id, before) {
+        var log = document.getElementById("whLog");
+        log.innerHTML = webhookDeliveriesHtml(c, null, urlOf(id));
+        c.api("/ward/webhook-deliveries" + q + "&id=" + encodeURIComponent(id) + (before ? "&before=" + encodeURIComponent(before) : "")).then(function (d) {
+          log.innerHTML = webhookDeliveriesHtml(c, d && d.ok && d.deliveries ? d : fail(d), urlOf(id), !!before);
+          log.querySelectorAll("[data-wh-page]").forEach(function (p) { p.onclick = function () { showLog(id, p.getAttribute("data-wh-page")); }; });
+        }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null), urlOf(id), !!before); });
+      };
       body.querySelectorAll("[data-wh-log]").forEach(function (b) {
+        b.onclick = function () { showLog(b.getAttribute("data-wh-log"), ""); };
+      });
+      body.querySelectorAll("[data-wh-edit]").forEach(function (b) {
         b.onclick = function () {
-          var log = document.getElementById("whLog");
-          log.innerHTML = webhookDeliveriesHtml(c, null);
-          c.api("/ward/webhook-deliveries" + q + "&id=" + encodeURIComponent(b.getAttribute("data-wh-log"))).then(function (d) {
-            log.innerHTML = webhookDeliveriesHtml(c, d && d.ok && d.deliveries ? d : fail(d));
-          }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null)); });
+          var id = b.getAttribute("data-wh-edit"), log = document.getElementById("whLog");
+          log.innerHTML = webhookEditHtml(c, { id: id, url: urlOf(id) });
+          document.getElementById("whEditCancel").onclick = function () { log.innerHTML = ""; };
+          var save = document.getElementById("whEditSave");
+          save.onclick = function () {
+            var url = String(document.getElementById("whEditUrl").value || "").trim();
+            if (!/^https:\/\//i.test(url)) { msg("The address must start with https://."); return; }
+            save.disabled = true;
+            c.api("/ward/webhook-update", { orgId: c.state.orgId, id: id, url: url }).then(function (x) {
+              if (!x || !x.ok) { save.disabled = false; msg(refusal(x)); return; }
+              c.toast(x.unchanged ? "That is already the address." : "Address changed. The signing secret is the same."); renderIntegrations(c, body);
+            }, function () { save.disabled = false; msg("No response from the server. The address may not have changed; reload to check."); });
+          };
         };
       });
-    }, function () { body.innerHTML = webhooksHtml(c, fail(null)); });
+    }, function () {
+      var wh = document.getElementById("whCard");
+      if (wh) wh.innerHTML = webhooksHtml(c, fail(null));
+      else body.innerHTML = webhooksHtml(c, fail(null));
+    });
   }
 })();

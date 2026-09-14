@@ -172,6 +172,7 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-tl-row.next .q-pos { background: var(--primary-container); color: var(--on-primary-container); }
 #smdQueue .q-tl-row.late .q-pos { background: var(--error-container); color: var(--on-error-container); }
 #smdQueue .q-tl-nm { font: 600 14px var(--q-sans); color: var(--on-surface); }
+#smdQueue .q-tok { display: inline-block; min-width: 26px; padding: 0 7px; margin-right: 6px; border-radius: 6px; background: var(--on-surface); color: var(--surface); font: 700 14px/1.5 var(--q-mono); text-align: center; vertical-align: middle; }
 #smdQueue .q-tl-nm .id { color: var(--secondary); font: 400 12px var(--q-mono); margin-left: 4px; }
 #smdQueue .q-pri { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font: 700 9.5px var(--q-sans); text-transform: uppercase; letter-spacing: .05em; vertical-align: middle; }
 #smdQueue .q-pri.emerg { background: var(--error-container); color: var(--on-error-container); }

@@ -18,9 +18,10 @@
  */
 
 import { drainOutbox } from "./outbox.js";
+import { anchorHead, anchorStoresOf } from "./audit-chain.js";
 import { escalationOf } from "./critical-results.js";
 import { VersionConflictError } from "./repository.js";
-import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
+import { dispatchLevel, smsFallbackDue } from "./push-alerts.js";
 
 const RANK = { none: 0, due: 0, overdue: 1, escalate: 2 };
 /* ponytail: no downstream consumer is registered yet, so drained events are marked done. A consumer
@@ -32,32 +33,63 @@ async function escalateCriticals(repository, tenantId, opts) {
   const o = opts || {};
   const nowMs = o.nowMs || Date.now();
   const loops = await repository.latestByType(tenantId, "CriticalResultLoop", SCAN);
-  const out = { checked: 0, escalated: 0, conflicts: 0, partial: loops.length >= SCAN };
+  const out = { checked: 0, escalated: 0, texted: 0, conflicts: 0, partial: loops.length >= SCAN };
   for (const loop of loops || []) {
     if (!loop || loop.state !== "open") continue;
     out.checked += 1;
     const e = escalationOf(loop, nowMs, o.policy);
-    if (RANK[e.level] <= RANK[loop.escalatedLevel || "none"]) continue;
-    let notification;
-    try {
-      const sent = await new Dispatcher(o.notifyDeps || {}).send({ loopId: loop.id, patientId: loop.patientId, code: loop.code, display: loop.display, value: loop.value, unit: loop.unit, escalation: e.level }, undefined, { retries: 2 });
-      notification = { attempted: true, delivered: sent.delivered, channels: sent.attempts.map((a) => ({ channel: a.channel, delivered: a.delivered, detail: a.detail })) };
-    } catch (err) {
-      notification = { attempted: true, delivered: false, reason: err instanceof NotifyError ? err.code : "NOTIFY_ERROR", detail: String((err && err.message) || err).slice(0, 200) };
-    }
+    const crossed = RANK[e.level] > RANK[loop.escalatedLevel || "none"];
+    // S3 P0 (owner decision O4): a push no handset confirmed within its level window goes out by SMS once.
+    const owedSms = o.notifyDeps && typeof o.notifyDeps.smsFallback === "function" ? smsFallbackDue(loop, nowMs, o.policy) : [];
+    if (!crossed && !owedSms.length) continue;
     const at = new Date(nowMs).toISOString();
-    const next = {
-      ...loop, version: loop.version + 1, escalatedLevel: e.level,
-      escalations: [...(Array.isArray(loop.escalations) ? loop.escalations : []), { level: e.level, at, minutesOpen: e.minutesOpen, notification }],
-      writtenBy: { id: "system:escalation", kind: "service", at },
-    };
-    try { await repository.append(tenantId, [next], {}); out.escalated += 1; }
+    let next = { ...loop, version: loop.version + 1, writtenBy: { id: "system:escalation", kind: "service", at } };
+    if (owedSms.length) {
+      const sms = await o.notifyDeps.smsFallback(loop, owedSms);
+      next.notifications = (loop.notifications || []).map((n) => (n && sms[n.nid] ? { ...n, sms: sms[n.nid] } : n));
+    }
+    if (crossed) {
+      // S3 P0: the same dispatch the decline route uses, so a notice made by the timer lands on the loop too.
+      const { notification, notices } = await dispatchLevel(o.notifyDeps, loop, e.level);
+      next = {
+        ...next, escalatedLevel: e.level,
+        escalations: [...(Array.isArray(loop.escalations) ? loop.escalations : []), { level: e.level, at, minutesOpen: e.minutesOpen, notification }],
+        notifications: [...(Array.isArray(next.notifications) ? next.notifications : (loop.notifications || [])), ...notices],
+      };
+    }
+    try { await repository.append(tenantId, [next], {}); if (crossed) out.escalated += 1; if (owedSms.length) out.texted += owedSms.length; }
     catch (err) { if (err instanceof VersionConflictError) { out.conflicts += 1; continue; } throw err; }
   }
   return out;
 }
 
-/** One pass for one hospital. Each half is reported on its own; one failing does not hide the other. */
+/* ANCHORING RIDES ON THE TICK BUT NEVER RISKS IT. Copying the audit-chain head outside the
+ * database is housekeeping: when the copy fails (KV down, head unreadable) the failure is recorded
+ * on result.anchor for the tick log, and the tick still reports its clinical halves. Callers hand in
+ * opts.anchorStore only when an anchor is due (hourly, decided beside the tick gate); without one
+ * the step reports skipped and writes nothing. */
+async function anchorTick(repository, tenantId, opts) {
+  const o = opts || {};
+  const stores = anchorStoresOf(o.anchorStores || o.anchorStore);
+  if (!stores.length) return { status: "skipped", message: "No anchor store was handed in, so the chain head was not anchored on this run." };
+  const at = new Date(o.nowMs || Date.now()).toISOString();
+  /* G12: every chain (the clinical one, and the hospital event log when handed in) into every store,
+   * each attempt on its own, so one store down never stops the other store getting its copy. */
+  const chains = [{ label: null, repository, id: tenantId }];
+  if (o.orgAuditChain) chains.push({ label: "event log", repository: o.orgAuditChain, id: o.orgAuditChain.chainId });
+  if (stores.length === 1 && chains.length === 1) return anchorHead(repository, tenantId, stores[0].store, at);
+  const results = [];
+  for (const c of chains) for (const s of stores) {
+    const where = c.label ? `${s.name} (${c.label})` : s.name;
+    try { results.push({ where, status: (await anchorHead(c.repository, c.id, s.store, at)).status }); }
+    catch (e) { results.push({ where, error: String((e && e.message) || e).slice(0, 120) }); }
+  }
+  const failed = results.filter((r) => r.error);
+  if (failed.length) return { status: "failed", at, stores: results, failedIn: failed.map((r) => r.where).join(", "), error: failed.map((r) => `${r.where}: ${r.error}`).join("; ").slice(0, 200) };
+  return { status: results.some((r) => r.status === "conflict") ? "conflict" : "ok", at, stores: results };
+}
+
+/** One pass for one hospital. Each third is reported on its own; one failing does not hide the others. */
 async function runTick(repository, tenantId, opts) {
   const o = opts || {};
   const result = { tenantId, at: new Date(o.nowMs || Date.now()).toISOString() };
@@ -65,6 +97,8 @@ async function runTick(repository, tenantId, opts) {
   catch (e) { result.criticals = { error: String((e && e.message) || e).slice(0, 200) }; }
   try { result.outbox = await drainOutbox(repository, tenantId, o.consumers || CONSUMERS, { now: () => o.nowMs || Date.now() }); }
   catch (e) { result.outbox = { error: String((e && e.message) || e).slice(0, 200) }; }
+  try { result.anchor = await anchorTick(repository, tenantId, o); }
+  catch (e) { result.anchor = { error: String((e && e.message) || e).slice(0, 200) }; }
   return result;
 }
 

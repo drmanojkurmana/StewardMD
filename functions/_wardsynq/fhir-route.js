@@ -6,11 +6,37 @@
  * WHO is asking - it is handed a context that already carries the actor or the deps to resolve one.
  */
 
-import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation, validateCodeOperation } from "./fhir.js";
+import { patientEverything, readResource, capabilityStatement, searchType, historyOf, vread, operationOutcome, provenanceRead, provenanceSearch, validateOperation } from "./fhir.js";
 import { practitionerRead, organizationRead } from "./fhir-identity.js";
-import { kickoffExport, exportStatus, cancelExport, exportFile, NDJSON } from "./fhir-bulk.js";
+import { kickoffExport, exportStatus, cancelExport, exportFile, parametersToExportParams, NDJSON } from "./fhir-bulk.js";
+import { groups } from "./fhir-group.js";
+import { dispatchTerminology } from "./fhir-terminology.js";
+import { patientSummary } from "./fhir-ips.js";
+import { auditEvents } from "./fhir-audit.js";
+import { subscriptions } from "./fhir-subscription.js";
+import { versionFromHeader, answerInVersion, contentTypeFor } from "./fhir-version.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
+
+/**
+ * D9. The FHIR version one request speaks, for both doors: what it wants back (Accept) and, for a POST or
+ * PUT, what it sent (Content-Type). Returns { version, contentVersion } or { status, obj } (406 for an
+ * Accept this server does not serve, 415 for a body version it does not read).
+ */
+function negotiateVersion(request) {
+  const accept = versionFromHeader(request.headers.get("Accept"));
+  if (accept.error) return { status: 406, obj: operationOutcome("error", "not-supported", accept.error) };
+  let contentVersion = "4.0";
+  if (request.method === "POST" || request.method === "PUT") {
+    const c = versionFromHeader(request.headers.get("Content-Type"));
+    if (c.error) return { status: 415, obj: operationOutcome("error", "not-supported", c.error) };
+    contentVersion = c.version;
+  }
+  return { version: accept.version, contentVersion };
+}
+
+/** PURE. Whether a path is a Bulk Data path (kick-off, status or file), which is R4 only. */
+const isBulkPath = (parts) => /^\$export/.test(parts[0] || "") || (parts[0] === "Patient" && parts[1] === "$export") || (parts[0] === "Group" && parts[2] === "$export");
 
 /** FHIR's media type on every response, an ETag over versionId on a single resource. */
 function fhirResponse(obj, status, extraHeaders, cors) {
@@ -24,7 +50,8 @@ function fhirResponse(obj, status, extraHeaders, cors) {
 /**
  * Dispatches one GET against the FHIR read grammar.
  *   metadata | {Type} | {Type}/{id} | {Type}/{id}/_history | {Type}/{id}/_history/{vid}
- *   Patient/{id}/$everything | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
+ *   Patient/{id}/$everything | Patient/{id}/$summary | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
+ *   CodeSystem | ValueSet (+ $expand, $validate-code) | AuditEvent | Subscription
  *
  * @param {string[]} parts   path segments AFTER the fhir root
  * @param {URL} url
@@ -42,6 +69,27 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "metadata") return { obj: capabilityStatement({ date: new Date().toISOString(), version: "wardsynq-1", smart: fctx.smart || null, inbound: fctx.inbound === true }), status: 200 };
   if (!fType) {
     const r = await patientEverything(request, env, { ...fctx, patientId: url.searchParams.get("patient") || url.searchParams.get("patientId") || "", searchParams: strip(), rawQuery, lenient });
+    return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
+  }
+  /* Terminology (CodeSystem, ValueSet, $expand, $validate-code), AuditEvent and $summary: each in its
+   * own file, each authorised there or by the door, none a stored canonical type. */
+  const tx = await dispatchTerminology(request, env, parts, url, fctx);
+  if (tx) return tx;
+  if (fType === "AuditEvent") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "AuditEvent is read and searched only"), status: 404 };
+    return auditEvents(request, env, { ...fctx, id: fId }, url);
+  }
+  if (fType === "Subscription") {
+    if (fOp && !(fId && fOp === "$status" && !fVid)) return { obj: operationOutcome("error", "not-supported", "Subscription is read, searched and asked for $status (Subscription/{id}/$status)"), status: 404 };
+    return subscriptions(request, env, { ...fctx, id: fId, op: fOp }, url);
+  }
+  /* G9. Group: the ward census, derived (fhir-group.js). Read and search only; $export is dispatchBulk's. */
+  if (fType === "Group") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "Group is read and searched; Group/{id}/$export starts a bulk export"), status: 404 };
+    return groups(request, env, { ...fctx, id: fId }, url);
+  }
+  if (fType === "Patient" && fId && fOp === "$summary") {
+    const r = await patientSummary(request, env, { ...fctx, patientId: fId });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
   }
   if (fType === "Provenance") {
@@ -62,10 +110,6 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "Patient" && fId && fOp === "$everything") {
     const r = await patientEverything(request, env, { ...fctx, patientId: fId, searchParams: strip(), rawQuery, lenient });
     return { obj: r.ok ? r.bundle : r.outcome, status: r.status };
-  }
-  if (fType === "CodeSystem" && fId === "$validate-code") {
-    const r = await validateCodeOperation(request, env, { ...fctx, searchParams: strip() });
-    return { obj: r.ok ? r.parameters : r.outcome, status: r.status };
   }
   if (fId && fOp === "$validate") {
     const r = await validateOperation(request, env, { ...fctx, type: fType, id: fId });
@@ -95,19 +139,29 @@ async function dispatchOperation(request, env, parts, body, fctx) {
  * The Bulk Data paths ($export, Patient/$export, $export-status/{id}, $export-file/{id}/{name}), for
  * both doors. Returns a Response, or null when the path is not one of them. The caller has already
  * decided the door's own gate (a staff.admin session, or a resolved bearer in fctx.actorOverride).
- * fctx: { migration, recordDeps, actorDeps, actorOverride?, store, base }  opts: { cors, suffix }
+ * fctx: { migration, recordDeps, actorDeps, actorOverride?, store, base }  opts: { cors, suffix, body (a POST kick-off) }
  */
 async function dispatchBulk(request, env, parts, url, fctx, opts) {
   const o = opts || {}, cors = o.cors || {}, suffix = o.suffix || "";
   const p0 = parts[0] || "", p1 = parts[1] || "", p2 = parts[2] || "";
   const method = request.method;
   const out = (r) => fhirResponse(r.outcome, r.status, r.retryAfter ? { "Retry-After": String(r.retryAfter) } : null, cors);
-  const level = p0 === "$export" && !p1 ? "system" : (p0 === "Patient" && p1 === "$export" && !p2) ? "patient" : null;
+  const level = p0 === "$export" && !p1 ? "system" : (p0 === "Patient" && p1 === "$export" && !p2) ? "patient"
+    : (p0 === "Group" && p1 && p2 === "$export" && !parts[3]) ? "group" : null;
   if (level) {
-    if (method !== "GET") return fhirResponse(operationOutcome("error", "not-supported", "$export is GET"), 405, { Allow: "GET" }, cors);
+    if (method !== "GET" && method !== "POST") return fhirResponse(operationOutcome("error", "not-supported", "$export is GET or POST"), 405, { Allow: "GET, POST" }, cors);
     /* The IG makes the async pattern mandatory; a client that does not ask for it is not a bulk client. */
     if (!/respond-async/i.test(str(request.headers.get("Prefer")))) return fhirResponse(operationOutcome("error", "invalid", "Prefer: respond-async is required for $export"), 400, null, cors);
-    const r = await kickoffExport(request, env, { ...fctx, level, params: url.searchParams, requestUrl: url.href });
+    /* G9. POST kick-off: the parameters travel in a Parameters body. Both at once is refused, because a
+     * client that put _type in the URL and _since in the body would not get the export it believes. */
+    let params = url.searchParams;
+    if (method === "POST") {
+      if ([...url.searchParams.keys()].some((k) => k !== "orgId")) return fhirResponse(operationOutcome("error", "invalid", "a POST $export takes its parameters in the Parameters body, not the URL"), 400, null, cors);
+      const pb = parametersToExportParams(o.body);
+      if (pb.error) return fhirResponse(operationOutcome("error", "invalid", pb.error), 400, null, cors);
+      params = pb.params;
+    }
+    const r = await kickoffExport(request, env, { ...fctx, level, groupId: level === "group" ? decodeURIComponent(p1) : undefined, params, requestUrl: url.href });
     if (!r.ok) return out(r);
     return fhirResponse(operationOutcome("information", "informational", "export accepted"), 202, { "Content-Location": `${fctx.base}/$export-status/${encodeURIComponent(r.jobId)}${suffix}` }, cors);
   }
@@ -132,4 +186,4 @@ async function dispatchBulk(request, env, parts, url, fctx, opts) {
   return null;
 }
 
-export { fhirResponse, dispatchRead, dispatchOperation, dispatchBulk };
+export { fhirResponse, dispatchRead, dispatchOperation, dispatchBulk, negotiateVersion, isBulkPath, answerInVersion, contentTypeFor };

@@ -20,6 +20,8 @@
  *
  * THE SECRET. 32 random bytes made here, shown once in the answer that created or rotated it, stored
  * AES-GCM encrypted under the document key, never returned again. No key on the server, no webhook.
+ * After a rotation the retired secret still verifies for 24 hours, so the receiving system can be
+ * updated before the old secret stops working; each send in that window carries both signatures.
  *
  * DELIVERY. webhook-events.js stages a `webhook.event` in the clinical write. The fan-out consumer turns
  * it into one `webhook.deliver` event per subscribed endpoint, so each endpoint retries and dies on the
@@ -36,7 +38,7 @@ import { assertPublicHttpsUrl } from "../_connect/onboard/ssrf.js";
 import { VersionConflictError } from "./repository.js";
 import { outboxEvent, MAX_ATTEMPTS } from "./outbox.js";
 import { docKey, encryptBytes, decryptBytes } from "./documents.js";
-import { ENDPOINT_TYPE, TOPIC_EVENT, MAX_ENDPOINTS, EVENT_TYPES } from "./webhook-events.js";
+import { ENDPOINT_TYPE, TOPIC_EVENT, MAX_ENDPOINTS, EVENT_TYPES, PAYLOAD_FHIR, PAYLOADS, topicFor, subscriptionIdFor } from "./webhook-events.js";
 
 const DELIVERY_TYPE = "_wardsynq_webhook_delivery";
 const HEALTH_TYPE = "_wardsynq_webhook_health";
@@ -45,6 +47,7 @@ const TIMEOUT_MS = 5000;
 const DNS_TIMEOUT_MS = 3000;
 const AUTO_DISABLE_FAILURES = 10;
 const AUTO_DISABLE_SPAN_MS = 30 * 60 * 1000;
+const ROTATION_OVERLAP_MS = 24 * 3600 * 1000;
 const SIGNATURE_TOLERANCE_S = 300;
 /* Any RFC 8484 JSON resolver. Injected as deps.resolveHost in tests and by a deployment that has its own. */
 const DOH_URL = "https://cloudflare-dns.com/dns-query";
@@ -181,8 +184,34 @@ const newSecret = () => `whsec_${b64(crypto.getRandomValues(new Uint8Array(32)))
 
 /* ---- one send ------------------------------------------------------------------------------------ */
 
-/** PURE. The notification body. Ids and the event type only. */
-function notificationBody(event, orgId) {
+/**
+ * PURE. The notification body. Ids and the event type only.
+ *
+ * An endpoint registered with payload "fhir-id-only" is a FHIR Subscription (R4 Subscriptions Backport,
+ * rest-hook, id-only) and receives the backport's notification Bundle instead: a history Bundle whose
+ * first entry is the SubscriptionStatus Parameters and whose other entries are the focus resource's
+ * fullUrl with no resource. The same ids, the same signature headers, the same delivery; only the shape
+ * differs. `webhook.test` goes out as a handshake. References are relative to the hospital's FHIR base.
+ */
+function notificationBody(event, orgId, endpoint) {
+  if (endpoint && endpoint.payload === PAYLOAD_FHIR) {
+    const test = event.type === "webhook.test";
+    const focus = event.resource ? `${event.resource.resourceType}/${event.resource.id}` : null;
+    const subscription = `Subscription/${subscriptionIdFor(endpoint.id, test ? (endpoint.eventTypes || [])[0] : event.type)}`;
+    return JSON.stringify({
+      resourceType: "Bundle", type: "history", timestamp: event.occurredAt,
+      entry: [
+        { fullUrl: `urn:uuid:${crypto.randomUUID()}`, resource: { resourceType: "Parameters", parameter: [
+          { name: "subscription", valueReference: { reference: subscription } },
+          { name: "topic", valueCanonical: topicFor(test ? (endpoint.eventTypes || [])[0] : event.type) },
+          { name: "status", valueCode: "active" },
+          { name: "type", valueCode: test ? "handshake" : "event-notification" },
+          ...(test || !focus ? [] : [{ name: "notification-event", part: [{ name: "event-number", valueString: event.id }, { name: "timestamp", valueInstant: event.occurredAt }, { name: "focus", valueReference: { reference: focus } }] }]),
+        ] }, request: { method: "GET", url: `${subscription}/$status` }, response: { status: "200" } },
+        ...(test || !focus ? [] : [{ fullUrl: focus, request: { method: "GET", url: focus }, response: { status: "200" } }]),
+      ],
+    });
+  }
   return JSON.stringify({
     id: event.id, type: event.type, occurredAt: event.occurredAt, hospital: orgId || null,
     resource: event.resource ? { resourceType: event.resource.resourceType, id: event.resource.id } : null,
@@ -190,20 +219,34 @@ function notificationBody(event, orgId) {
   });
 }
 
-/** One POST. Returns { ok, code, reason }: the response code only, never the response body. */
-async function sendOnce(endpoint, secret, event, deps) {
+/* The opened previous secret while its overlap window still runs, else null. A previous seal that no
+ * longer opens is the same as no previous secret: delivery on the new secret must not fail for it. */
+async function previousSecretFor(ep, env, nowMs) {
+  if (!ep || !ep.previousSecretEnc || !ep.previousSecretUntil) return null;
+  const until = Date.parse(ep.previousSecretUntil);
+  if (!Number.isFinite(until) || (nowMs || Date.now()) >= until) return null;
+  return openSecret(env, ep.previousSecretEnc);
+}
+
+/** One POST. Returns { ok, code, reason }: the response code only, never the response body.
+ * prevSecret is the still-valid retired secret, or null: inside the overlap window the signature
+ * header carries both signatures, new first, so either secret verifies at the receiver. */
+async function sendOnce(endpoint, secret, event, deps, prevSecret) {
   const dest = await checkDestination(endpoint.url, deps);
   if (!dest.ok) return { ok: false, code: 0, reason: dest.reason };
-  const body = notificationBody(event, deps.orgId);
+  const body = notificationBody(event, deps.orgId, endpoint);
   const timestamp = Math.floor((deps.nowMs || Date.now()) / 1000);
+  const signature = prevSecret
+    ? `${await signPayload(secret, timestamp, body)},${await signPayload(prevSecret, timestamp, body)}`
+    : await signPayload(secret, timestamp, body);
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), deps.timeoutMs || TIMEOUT_MS);
   let res;
   try {
     res = await (deps.fetchImpl || fetch)(dest.url, {
       method: "POST", redirect: "manual", signal: controller.signal, body,
-      headers: { "Content-Type": "application/json", "User-Agent": "WardSynQ-Webhooks/1", "X-WardSynQ-Event-Id": event.id, "X-WardSynQ-Event-Type": event.type,
-        "X-WardSynQ-Timestamp": String(timestamp), "X-WardSynQ-Signature": await signPayload(secret, timestamp, body) },
+      headers: { "Content-Type": endpoint.payload === PAYLOAD_FHIR ? "application/fhir+json" : "application/json", "User-Agent": "WardSynQ-Webhooks/1", "X-WardSynQ-Event-Id": event.id, "X-WardSynQ-Event-Type": event.type,
+        "X-WardSynQ-Timestamp": String(timestamp), "X-WardSynQ-Signature": signature },
     });
   } catch (e) {
     return { ok: false, code: 0, reason: controller.signal.aborted ? "timeout" : "unreachable" };
@@ -223,7 +266,7 @@ const hostOf = (url) => { try { return new URL(url).host; } catch { return null;
 function summaryOf(ep, health) {
   const h = health || {};
   return {
-    id: ep.id, url: ep.url, description: ep.description || null, eventTypes: ep.eventTypes || [], active: ep.active === true,
+    id: ep.id, url: ep.url, description: ep.description || null, eventTypes: ep.eventTypes || [], active: ep.active === true, payload: ep.payload || "wardsynq",
     status: ep.active === true ? "active" : ep.status === "auto-disabled" ? "auto-disabled" : "disabled",
     disabledAt: ep.disabledAt || null, disabledReason: ep.disabledReason || null,
     createdAt: ep.createdAt, createdBy: ep.createdBy, secretSetAt: ep.secretSetAt, version: ep.version,
@@ -296,7 +339,8 @@ async function deliverOne(deps, payload, event) {
     return;
   }
   const secret = await openSecret(deps.env, ep.secretEnc);
-  const result = secret ? await sendOnce(ep, secret, notice, deps) : { ok: false, code: 0, reason: "no-key" };
+  const prev = secret ? await previousSecretFor(ep, deps.env, deps.nowMs || Date.now()) : null;
+  const result = secret ? await sendOnce(ep, secret, notice, deps, prev) : { ok: false, code: 0, reason: "no-key" };
   const status = result.ok ? "delivered" : attempt >= MAX_ATTEMPTS ? "dead" : "failed";
   await recordAttempt(deps, ep, { ...entry, status, responseCode: result.code, reason: result.reason });
   if (!result.ok) throw new Error(`webhook ${ep.id} attempt ${attempt}: ${result.reason}${result.code ? " " + result.code : ""}`);
@@ -332,6 +376,7 @@ function eventTypesFrom(v) {
   return { types: list.sort() };
 }
 
+const badPayload = { ok: false, status: 422, error: "unknown_payload", message: "The payload must be wardsynq (thin JSON) or fhir-id-only (FHIR Subscription notification)." };
 const readFailed = { ok: false, status: 502, error: "record_read_failed", message: "The webhook could not be read, so nothing was changed." };
 const writeFailed = (e) => e instanceof VersionConflictError
   ? { ok: false, status: 409, error: "version_conflict", message: "This webhook changed at the same moment. Reload and try again; nothing was saved." }
@@ -343,6 +388,8 @@ async function registerWebhook(request, env, ctx) {
   if (who.error) return who.error;
   const { types, error } = eventTypesFrom(ctx.eventTypes);
   if (error) return error;
+  const payload = ctx.payload === undefined || ctx.payload === null || ctx.payload === "" ? "wardsynq" : str(ctx.payload);
+  if (!PAYLOADS.includes(payload)) return badPayload;
   const dest = await checkDestination(ctx.url, ctx);
   if (!dest.ok) return { ok: false, status: 422, error: dest.reason === "dns-failed" ? "url_unresolvable" : "url_refused", message: dest.detail };
   let existing;
@@ -352,9 +399,9 @@ async function registerWebhook(request, env, ctx) {
   const secretEnc = await sealSecret(env, secret);
   if (!secretEnc) return { ok: false, status: 503, error: "webhook_key_not_configured", message: "Webhook secrets cannot be stored encrypted on this server, so no webhook was registered." };
   const at = new Date().toISOString();
-  const ep = { resourceType: ENDPOINT_TYPE, id: `wh-${randomHex(8)}`, version: 1, url: dest.url, description: str(ctx.description).slice(0, 120) || null, eventTypes: types,
+  const ep = { resourceType: ENDPOINT_TYPE, id: `wh-${randomHex(8)}`, version: 1, url: dest.url, description: str(ctx.description).slice(0, 120) || null, eventTypes: types, payload,
     active: true, status: "active", secretEnc, secretSetAt: at, createdAt: at, createdBy: who.actorId, writtenBy: { id: who.actorId, kind: "human", at } };
-  try { await who.repo.append(who.tenantId, [ep], { audit: auditEvent("webhook.register", who.actorId, { webhookId: ep.id, host: hostOf(ep.url), eventTypes: types }) }); }
+  try { await who.repo.append(who.tenantId, [ep], { audit: auditEvent("webhook.register", who.actorId, { webhookId: ep.id, host: hostOf(ep.url), eventTypes: types, payload }) }); }
   catch (e) { return writeFailed(e); }
   return { ok: true, webhook: summaryOf(ep), secret, secretNote: "Copy this secret now. It is not shown again." };
 }
@@ -364,7 +411,8 @@ async function loadEndpoint(who, id) {
 }
 const notFound = { ok: false, status: 404, error: "webhook_not_found", message: "No such webhook at this hospital." };
 
-/** ctx: { ..., id, eventTypes?, active? }. Turning one off is a disable; turning it on re-checks the address and clears the streak. */
+/** ctx: { ..., id, url?, eventTypes?, active? }. Turning one off is a disable; turning it on re-checks the address and clears the streak.
+ * A new address goes through the same https and public-address checks as a registration. The secret is not changed. */
 async function updateWebhook(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
@@ -373,10 +421,19 @@ async function updateWebhook(request, env, ctx) {
   if (!ep) return notFound;
   const next = { ...ep, version: ep.version + 1 };
   const changes = {};
+  if (ctx.url !== undefined && ctx.url !== null && str(ctx.url) !== ep.url) {
+    const dest = await checkDestination(ctx.url, ctx);
+    if (!dest.ok) return { ok: false, status: 422, error: dest.reason === "dns-failed" ? "url_unresolvable" : "url_refused", message: `Address not changed: ${dest.detail}` };
+    if (dest.url !== ep.url) { changes.url = { fromHost: hostOf(ep.url), toHost: hostOf(dest.url) }; next.url = dest.url; }
+  }
   if (ctx.eventTypes !== undefined) {
     const t = eventTypesFrom(ctx.eventTypes);
     if (t.error) return t.error;
     if (t.types.join() !== (ep.eventTypes || []).join()) { changes.eventTypes = { from: ep.eventTypes, to: t.types }; next.eventTypes = t.types; }
+  }
+  if (ctx.payload !== undefined && ctx.payload !== null && str(ctx.payload) !== (ep.payload || "wardsynq")) {
+    if (!PAYLOADS.includes(str(ctx.payload))) return badPayload;
+    changes.payload = { from: ep.payload || "wardsynq", to: str(ctx.payload) }; next.payload = str(ctx.payload);
   }
   if (typeof ctx.active === "boolean" && ctx.active !== (ep.active === true)) {
     changes.active = ctx.active;
@@ -403,7 +460,8 @@ async function updateWebhook(request, env, ctx) {
   return { ok: true, webhook: summaryOf(next, records[1] || null) };
 }
 
-/** ctx: { ..., id }. A new secret, shown once; the old one stops verifying at once. */
+/** ctx: { ..., id }. A new secret, shown once; the retired one keeps verifying for 24 hours, then stops.
+ * A second rotation inside the window retires the current secret in its turn: only ever one previous. */
 async function rotateWebhookSecret(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
@@ -414,10 +472,12 @@ async function rotateWebhookSecret(request, env, ctx) {
   const secretEnc = await sealSecret(env, secret);
   if (!secretEnc) return { ok: false, status: 503, error: "webhook_key_not_configured", message: "The new secret cannot be stored encrypted on this server, so the secret was not changed." };
   const at = new Date().toISOString();
-  const next = { ...ep, version: ep.version + 1, secretEnc, secretSetAt: at, writtenBy: { id: who.actorId, kind: "human", at } };
+  const next = { ...ep, version: ep.version + 1, secretEnc, secretSetAt: at,
+    previousSecretEnc: ep.secretEnc || null, previousSecretUntil: new Date(Date.parse(at) + ROTATION_OVERLAP_MS).toISOString(),
+    writtenBy: { id: who.actorId, kind: "human", at } };
   try { await who.repo.append(who.tenantId, [next], { audit: auditEvent("webhook.rotate", who.actorId, { webhookId: ep.id, host: hostOf(ep.url) }) }); }
   catch (e) { return writeFailed(e); }
-  return { ok: true, webhook: summaryOf(next), secret, secretNote: "Copy this secret now. It is not shown again. The previous secret no longer verifies." };
+  return { ok: true, webhook: summaryOf(next), secret, secretNote: "Copy this secret now. It is not shown again. The previous secret keeps working for 24 hours so the receiving system can be updated." };
 }
 
 /** ctx: { ..., id, orgId }. One signed webhook.test, sent now, once, and logged. Not counted towards auto-disable. */
@@ -431,7 +491,7 @@ async function testWebhook(request, env, ctx) {
   if (!secret) return { ok: false, status: 503, error: "webhook_key_not_configured", message: "The signing secret cannot be read on this server, so no test was sent." };
   const notice = { id: `evt-test-${randomHex(8)}`, type: "webhook.test", occurredAt: new Date().toISOString(), resource: null };
   const deps = { ...ctx, repository: who.repo, tenantId: who.tenantId, env };
-  const result = await sendOnce(ep, secret, notice, deps);
+  const result = await sendOnce(ep, secret, notice, deps, await previousSecretFor(ep, env, deps.nowMs || Date.now()));
   const status = result.ok ? "delivered" : "failed";
   try {
     await recordAttempt(deps, ep, { logId: `whd-${ep.id}-${notice.id}-a1`, eventId: notice.id, eventType: notice.type, attempt: 1, status, responseCode: result.code, reason: result.reason, test: true });
@@ -456,24 +516,26 @@ async function listWebhooks(request, env, ctx) {
   };
 }
 
-/** ctx: { ..., id }. The newest 50 attempts for one endpoint. */
+/** ctx: { ..., id, limit?, before? }. One page of this endpoint's attempts, newest first; `next` is the cursor for older ones. */
 async function listWebhookDeliveries(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
   const { ep, error } = await loadEndpoint(who, ctx.id);
   if (error) return error;
   if (!ep) return notFound;
-  let rows;
-  // ponytail: newest 1000 attempts across the hospital, filtered here; a per-endpoint index if a hospital outgrows it.
-  try { rows = await who.repo.latestByType(who.tenantId, DELIVERY_TYPE, 1000, { newest: true }); }
+  const limit = Math.max(1, Math.min(100, Number(ctx.limit) || 50));
+  const before = /^\d+$/.test(str(ctx.before)) ? Number(ctx.before) : null;
+  let page;
+  // Every attempt's id starts whd-<endpoint id>- (deliverOne, testWebhook), so this is an index range.
+  try { page = await who.repo.pageByIdPrefix(who.tenantId, DELIVERY_TYPE, `whd-${ep.id}-`, { limit, before }); }
   catch { return { ok: false, status: 502, error: "record_read_failed", message: "The delivery log could not be read." }; }
-  return { ok: true, webhookId: ep.id, deliveries: (rows || []).filter((r) => r.endpointId === ep.id).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 50)
-    .map((r) => ({ at: r.at, eventId: r.eventId, eventType: r.eventType, attempt: r.attempt, status: r.status, responseCode: r.responseCode, reason: r.reason, test: r.test })) };
+  return { ok: true, webhookId: ep.id, limit, next: page.next == null ? null : String(page.next),
+    deliveries: page.records.map((r) => ({ at: r.at, eventId: r.eventId, eventType: r.eventType, attempt: r.attempt, status: r.status, responseCode: r.responseCode, reason: r.reason, test: r.test })) };
 }
 
 export {
-  DELIVERY_TYPE, HEALTH_TYPE, TOPIC_DELIVER, TIMEOUT_MS, AUTO_DISABLE_FAILURES, AUTO_DISABLE_SPAN_MS,
-  addressBlocked, checkDestination, signPayload, verifySignature, notificationBody, sendOnce, summaryOf,
+  DELIVERY_TYPE, HEALTH_TYPE, TOPIC_DELIVER, TIMEOUT_MS, AUTO_DISABLE_FAILURES, AUTO_DISABLE_SPAN_MS, ROTATION_OVERLAP_MS,
+  addressBlocked, checkDestination, signPayload, verifySignature, notificationBody, sendOnce, summaryOf, sealSecret, openSecret, hmacHex,
   fanOut, deliverOne, webhookConsumers,
   registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries,
 };

@@ -456,3 +456,232 @@ test("screen: loading, failed and empty are distinct, the no-PHI note is shown, 
   assert.match(log(c, { ok: true, deliveries: [{ at: "t", eventId: "evt-1", eventType: "order.placed", attempt: 6, status: "dead", responseCode: 503, reason: "http-error" }] }), /Failed for good/);
   assert.ok(!/[—–]/.test(loading + failed + empty + withRow + l0 + l1 + l2), "no em or en dash on screen");
 });
+
+// ---------------------------------------------------------------------------------------------
+// ROTATION OVERLAP: the retired secret verifies for 24 hours, then stops
+// ---------------------------------------------------------------------------------------------
+test("right after a rotate, a delivery carries both signatures, new first", async () => {
+  seed();
+  const reg = await register(["encounter.admitted"]);
+  assert.equal(reg.__status, 200, JSON.stringify(reg));
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  assert.notEqual(rot.secret, reg.secret);
+
+  const stored = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  assert.equal(Date.parse(stored.previousSecretUntil) - Date.parse(stored.secretSetAt), W.ROTATION_OVERLAP_MS, "the window runs 24 hours from the rotation");
+
+  const rx = receiver(200);
+  const nowMs = Date.now();
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-overlap", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  assert.equal(rx.calls.length, 1);
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  const parts = String(h["X-WardSynQ-Signature"]).split(",");
+  assert.equal(parts.length, 2, h["X-WardSynQ-Signature"]);
+  for (const p of parts) assert.match(p, /^v1=[0-9a-f]{64}$/);
+  assert.notEqual(parts[0], parts[1]);
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), true, "the first signature verifies with the new secret");
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), true, "the second signature verifies with the old secret");
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), false, "the new signature does not verify with the old secret");
+});
+
+test("past the 24 hour window only the new signature is sent", async () => {
+  seed();
+  assert.equal(W.ROTATION_OVERLAP_MS, 24 * 3600 * 1000);
+  const reg = await register(["encounter.admitted"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  const rx = receiver(200);
+  const nowMs = Date.now() + W.ROTATION_OVERLAP_MS + 60000;
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-late", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  assert.equal(rx.calls.length, 1);
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  assert.ok(!String(h["X-WardSynQ-Signature"]).includes(","), h["X-WardSynQ-Signature"]);
+  assert.match(h["X-WardSynQ-Signature"], /^v1=[0-9a-f]{64}$/);
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], body, h["X-WardSynQ-Signature"], nowMs), true, "the lone signature verifies with the new secret");
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, h["X-WardSynQ-Signature"], nowMs), false, "the retired secret no longer verifies");
+});
+
+test("a test send inside the window carries both signatures too", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  const rx = receiver(200);
+  const origFetch = globalThis.fetch;
+  globalThis.fetch = rx.fetchImpl;
+  let answer;
+  try {
+    answer = await as(ADMIN, "/ward/webhook-test", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  } finally { globalThis.fetch = origFetch; }
+  assert.equal(answer.__status, 200, JSON.stringify(answer));
+  assert.equal(rx.calls.length, 1);
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  const parts = String(h["X-WardSynQ-Signature"]).split(",");
+  assert.equal(parts.length, 2, h["X-WardSynQ-Signature"]);
+  const nowMs = Date.now();
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), true);
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), true);
+});
+
+test("a previous seal that no longer opens leaves delivery on the new secret alone", async () => {
+  seed();
+  const reg = await register(["encounter.admitted"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  const stored = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  await RECORD.append(T, [{ ...stored, version: stored.version + 1, previousSecretEnc: "!!!no-longer-a-seal!!!" }], {});
+  const rx = receiver(200);
+  const nowMs = Date.now();
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-badprev", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  assert.equal(rx.calls.length, 1, "delivery does not fail because of the old secret");
+  const h = rx.calls[0].init.headers;
+  assert.match(h["X-WardSynQ-Signature"], /^v1=[0-9a-f]{64}$/, "only the new signature is sent");
+  assert.equal(await W.verifySignature(rot.secret, h["X-WardSynQ-Timestamp"], rx.calls[0].init.body, h["X-WardSynQ-Signature"], nowMs), true);
+});
+
+test("rotating twice keeps only the most recently retired secret as previous", async () => {
+  seed();
+  const reg = await register(["encounter.admitted"]);
+  const rot1 = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot1.__status, 200, JSON.stringify(rot1));
+  const ep1 = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  const rot2 = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot2.__status, 200, JSON.stringify(rot2));
+  const ep2 = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  assert.equal(ep2.previousSecretEnc, ep1.secretEnc, "the previous seal is the secret retired just now");
+  assert.notEqual(ep2.previousSecretEnc, ep1.previousSecretEnc, "the older retired secret is gone");
+  assert.deepEqual(Object.keys(ep2).filter((k) => k.indexOf("previous") === 0).sort(), ["previousSecretEnc", "previousSecretUntil"], "never more than one previous secret");
+
+  const rx = receiver(200);
+  const nowMs = Date.now();
+  await W.deliverOne({ repository: RECORD, tenantId: T, env: ENV, orgId: ORG_ID, fetchImpl: rx.fetchImpl, nowMs },
+    { endpointId: reg.webhook.id, event: { id: "evt-twice", type: "encounter.admitted", occurredAt: "t", resource: null } }, { attempts: 0 });
+  const h = rx.calls[0].init.headers, body = rx.calls[0].init.body;
+  const parts = String(h["X-WardSynQ-Signature"]).split(",");
+  assert.equal(parts.length, 2, h["X-WardSynQ-Signature"]);
+  assert.equal(await W.verifySignature(rot2.secret, h["X-WardSynQ-Timestamp"], body, parts[0], nowMs), true);
+  assert.equal(await W.verifySignature(rot1.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), true);
+  assert.equal(await W.verifySignature(reg.secret, h["X-WardSynQ-Timestamp"], body, parts[1], nowMs), false, "the twice-retired secret verifies nothing");
+});
+
+test("list and update answers never carry secret material", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const rot = await as(ADMIN, "/ward/webhook-rotate", "POST", { orgId: ORG_ID, id: reg.webhook.id });
+  assert.equal(rot.__status, 200, JSON.stringify(rot));
+  assert.ok(!("secretEnc" in rot.webhook) && !("previousSecretEnc" in rot.webhook));
+  assert.ok(!JSON.stringify(rot).includes("previousSecretEnc"));
+  const list = await as(ADMIN, `/ward/webhooks?orgId=${ORG_ID}`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  const shown = list.webhooks.find((w) => w.id === reg.webhook.id);
+  assert.ok(shown);
+  assert.ok(!("secretEnc" in shown) && !("previousSecretEnc" in shown), JSON.stringify(Object.keys(shown)));
+  assert.ok(!JSON.stringify(list).includes("secretEnc"), "no sealed secret anywhere in the list answer");
+  const upd = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, eventTypes: ["order.placed", "result.released"] });
+  assert.equal(upd.__status, 200, JSON.stringify(upd));
+  assert.ok(!("secretEnc" in upd.webhook) && !("previousSecretEnc" in upd.webhook));
+  assert.ok(!JSON.stringify(upd).includes("secretEnc"));
+});
+
+// ---------------------------------------------------------------------------------------------
+// G8: EDIT AN ADDRESS, AND ONE ENDPOINT'S DELIVERY LOG A PAGE AT A TIME
+// ---------------------------------------------------------------------------------------------
+test("G8 POST /api/queue/ward/webhook-update {url}: re-checked, audited by host, the secret unchanged; a private address is refused and nothing written", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const sealed = (await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id)).secretEnc;
+  const NEW_URL = "https://93.184.216.35/hooks/v2";
+  const before = writesNow();
+  for (const url of ["https://10.0.0.1/hook", "http://93.184.216.35/hook", "https://169.254.169.254/latest/meta-data/"]) {
+    const r = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, url });
+    assert.equal(r.__status, 422, url + JSON.stringify(r));
+    assert.match(r.message, /Address not changed/);
+  }
+  assert.equal(writesNow(), before, "a refused address writes nothing");
+
+  const ok = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, url: NEW_URL });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.webhook.url, NEW_URL);
+  assert.equal(ok.secret, undefined, "no secret in the answer");
+  const stored = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  assert.equal(stored.url, NEW_URL);
+  assert.equal(stored.version, 2);
+  assert.equal(stored.secretEnc, sealed, "the signing secret is not changed");
+  const audit = RECORD.audit.filter((a) => a.action === "webhook.update").pop();
+  assert.deepEqual(audit.scope.url, { fromHost: "93.184.216.34", toHost: "93.184.216.35" });
+  assert.ok(audit.actor);
+  assert.ok(!JSON.stringify(audit).includes("/hooks/v2"), "the audit names hosts, not the full address");
+  const same = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, url: NEW_URL });
+  assert.equal(same.unchanged, true);
+});
+
+test("G8 NEGATIVE POST /api/queue/ward/webhook-update {url}: no session 401, nurse 403, hr 403, another hospital 403/404; nothing written", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const before = writesNow();
+  const body = { orgId: ORG_ID, id: reg.webhook.id, url: "https://93.184.216.35/elsewhere" };
+  assert.equal((await as(null, "/ward/webhook-update", "POST", body)).__status, 401);
+  assert.equal((await as(NURSE, "/ward/webhook-update", "POST", body)).__status, 403);
+  assert.equal((await as(HR, "/ward/webhook-update", "POST", body)).__status, 403);
+  const other = await as(OTHER_ADMIN, "/ward/webhook-update", "POST", body);
+  assert.ok(other.__status === 403 || other.__status === 404, JSON.stringify(other));
+  assert.equal((await as(OTHER_ADMIN, "/ward/webhook-update", "POST", { ...body, orgId: OTHER })).__status, 404, "named from their own hospital: not found");
+  assert.equal(writesNow(), before);
+  assert.equal((await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id)).url, PUBLIC_URL);
+});
+
+test("G8 GET /api/queue/ward/webhook-deliveries: one endpoint only, newest first, paged past the old 50 and 1000 caps", async () => {
+  seed();
+  const a = await register(["order.placed"]), b = await register(["order.placed"]);
+  const row = (ep, i) => ({ resourceType: W.DELIVERY_TYPE, id: `whd-${ep}-evt-${String(i).padStart(4, "0")}-a1`, version: 1, endpointId: ep, eventId: `evt-${i}`, eventType: "order.placed",
+    attempt: 1, status: i % 2 ? "failed" : "delivered", responseCode: i % 2 ? 503 : 200, reason: null, test: false, at: new Date(1e12 + i * 1000).toISOString(), writtenBy: { id: "system:webhooks", kind: "service" } });
+  // 1100 attempts for B written AFTER A's 70: the hospital-wide newest-1000 scan would have shown A nothing.
+  for (let i = 0; i < 70; i++) await RECORD.append(T, [row(a.webhook.id, i)], {});
+  for (let i = 0; i < 1100; i++) await RECORD.append(T, [row(b.webhook.id, i)], {});
+  const p1 = await as(ADMIN, `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${a.webhook.id}`);
+  assert.equal(p1.__status, 200, JSON.stringify(p1).slice(0, 300));
+  assert.equal(p1.deliveries.length, 50);
+  assert.equal(p1.deliveries[0].eventId, "evt-69", "newest first");
+  assert.ok(p1.deliveries.every((d) => d.eventId && d.status && d.attempt === 1 && "responseCode" in d && d.at));
+  assert.ok(p1.next, "a cursor to older attempts");
+  const p2 = await as(ADMIN, `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${a.webhook.id}&before=${p1.next}`);
+  assert.equal(p2.deliveries.length, 20);
+  assert.equal(p2.deliveries[0].eventId, "evt-19");
+  assert.equal(p2.next, null, "no page after the last");
+  const seen = new Set([...p1.deliveries, ...p2.deliveries].map((d) => d.eventId));
+  assert.equal(seen.size, 70, "every attempt once, none from the other endpoint");
+  const small = await as(ADMIN, `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${b.webhook.id}&limit=5`);
+  assert.equal(small.deliveries.length, 5);
+  assert.equal(small.deliveries[0].eventId, "evt-1099");
+  const path = `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${a.webhook.id}&before=${p1.next}`;
+  assert.equal((await as(null, path)).__status, 401);
+  assert.equal((await as(NURSE, path)).__status, 403);
+  assert.equal((await as(HR, path)).__status, 403);
+  assert.equal((await as(OTHER_ADMIN, `/ward/webhook-deliveries?orgId=${OTHER}&id=${a.webhook.id}&before=${p1.next}`)).__status, 404);
+});
+
+test("G8 screen: change-address form, and the delivery log pages with Older and Newest", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const list = win.WSQ._webhooksHtml(c, { ok: true, keyConfigured: true, webhooks: [{ id: "wh-1", url: PUBLIC_URL, eventTypes: ["order.placed"], active: true, status: "active" }], eventTypes: [] });
+  assert.match(list, /data-wh-edit="wh-1"/);
+  const edit = win.WSQ._webhookEditHtml(c, { id: "wh-1", url: PUBLIC_URL });
+  assert.match(edit, /id="whEditUrl" value="https:\/\/93\.184\.216\.34\/hooks\/wardsynq"/);
+  assert.match(edit, /signing secret does not change/);
+  const log = win.WSQ._webhookDeliveriesHtml;
+  const d = { ok: true, next: "42", deliveries: [{ at: "t", eventId: "evt-1", eventType: "order.placed", attempt: 2, status: "failed", responseCode: 503, reason: "http-error" }] };
+  const first = log(c, d, PUBLIC_URL, false);
+  assert.match(first, /data-wh-page="42">Older/);
+  assert.ok(!/Newest/.test(first));
+  assert.match(log(c, { ok: true, next: null, deliveries: [] }, PUBLIC_URL, true), /No older delivery attempts[\s\S]*Newest/);
+  assert.ok(!/[—–]/.test(list + edit + first));
+});

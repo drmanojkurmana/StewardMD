@@ -22,6 +22,8 @@ cp "$ROOT/wardsynq/site/_worker.js" "$OUT/_worker.js"
 cp "$ROOT/wardsynq/site/"*.js "$ROOT/wardsynq/site/"*.css "$ROOT/wardsynq/site/"*.webmanifest "$OUT/wardsynq/site/"
 rm -f "$OUT/wardsynq/site/_worker.js"
 cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
+# Per-language catalogs (D6): one file per language, loaded on demand by portal.js's switcher.
+cp -R "$ROOT/wardsynq/site/i18n" "$OUT/wardsynq/site/i18n"
 
 # The clinical surfaces, byte-identical to what the app runs.
 # discharge.css was missing from this list until 2026-09-12. discharge.js shipped without it, so the
@@ -30,7 +32,7 @@ cp -R "$ROOT/wardsynq/site/pages" "$OUT/wardsynq/site/pages"
 # opened), every Material Symbols ligature printed as its own name — "medicationMedications",
 # "fact_checkProvenance" — and the print stylesheet was absent, which is why the printed PDF came out
 # as unstyled running text. One file, four symptoms.
-for f in ward.js ward-offline.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
+for f in hospital-auth.js ward.js ward-offline.js ward.css discharge.js discharge.css patient-register.js patient-register.css opd.html opd-display.html; do
   cp "$ROOT/$f" "$OUT/$f"
 done
 # The order-safety workstation and the WardSynQ client libraries it imports.

@@ -7,7 +7,7 @@ mock.module(new URL("../functions/_wardsynq/actor.js", import.meta.url).href, {
 });
 const { MemoryRepository } = await import("../functions/_wardsynq/repository.js");
 const { StagedRepository } = await import("../functions/_wardsynq/staged.js");
-const { TYPE, MAX_ATTEMPTS, stageEvent, drainOutbox, outboxHealth } = await import("../functions/_wardsynq/outbox.js");
+const { TYPE, MAX_ATTEMPTS, outboxEvent, stageEvent, drainOutbox, outboxHealth } = await import("../functions/_wardsynq/outbox.js");
 const { saveConsultation } = await import("../functions/_wardsynq/consultation.js");
 
 const T = "t1";
@@ -81,6 +81,47 @@ test("a failing consumer retries with growing waits, keeps the consumers that al
   const h = await outboxHealth(repo, T);
   assert.equal(h.dead.length, 1, "a dead event is surfaced for a person, not dropped");
   assert.equal(h.pending, 0);
+});
+
+/* REGRESSION, 2026-09-14. The drain used to read the newest 200 events and pick out the
+ * waiting ones, so one old pending event behind more than 200 newer settled events sat beyond the
+ * window: never retried, never reported. The drain now seeks waiting rows by status, oldest first,
+ * so the oldest waiter is found no matter how many settled events pile up in front of it. */
+test("an old pending row beyond 200 newer delivered rows is still found, drained and reported", async () => {
+  const repo = new MemoryRepository();
+  const old = outboxEvent("consultation.saved", { encounterId: "old" }, "2026-01-01T00:00:00.000Z");
+  await repo.append(T, [old]);
+  for (let i = 0; i < 250; i++) {
+    await repo.append(T, [{ ...outboxEvent("bulk.ping", { i }), status: "done", doneAt: "2026-06-01T00:00:00.000Z" }]);
+  }
+
+  const newest = await repo.latestByType(T, TYPE, 200, { newest: true });
+  assert.ok(!newest.some((e) => e.id === old.id), "precondition: the old row sits outside the newest-200 window the drain used to read");
+
+  const before = await outboxHealth(repo, T);
+  assert.equal(before.pending, 1, "health sees the old waiter through the settled pile, not just the window");
+  assert.equal(before.oldestPendingAt, "2026-01-01T00:00:00.000Z");
+  assert.equal(before.partial, false, "one waiting row in a status read is a full count, not a lower bound");
+
+  let runs = 0;
+  const r = await drainOutbox(repo, T, { "consultation.saved": { billing: async () => { runs += 1; } } });
+  assert.equal(runs, 1, "the old pending event is drained despite 250 newer settled events");
+  assert.equal(r.ran, 1);
+  assert.equal(r.report[0].id, old.id);
+  assert.equal(r.report[0].status, "done");
+
+  assert.equal((await outboxHealth(repo, T)).pending, 0, "nothing waiting after the drain");
+});
+
+test("outboxHealth calls a bounded read that filled up a lower bound, not a count", async () => {
+  const repo = new MemoryRepository();
+  for (let i = 0; i < 6; i++) await repo.append(T, [outboxEvent("bulk.ping", { i })]);
+  const full = await outboxHealth(repo, T, 50);
+  assert.equal(full.pending, 6);
+  assert.equal(full.partial, false);
+  const bounded = await outboxHealth(repo, T, 5);
+  assert.equal(bounded.pending, 5);
+  assert.equal(bounded.partial, true, "a filled bound means more may wait beyond it");
 });
 
 test("two workers draining at once: one claims, the other skips, the consumer runs once", async () => {

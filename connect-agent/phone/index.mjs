@@ -1,6 +1,7 @@
 // connect-agent/phone/index.mjs — orchestrates one phone discovery run end to end.
 // See connect-agent/phone/CONTRACT.md. Loaded via dynamic import() in the app WebView.
 import { createCollector, PHASE_AGENT_READ } from '../discovery.mjs';
+import { guidedPrompt, REASSURANCE } from './onboard.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
@@ -21,16 +22,18 @@ function browserOf(plugin) {
   return 'phone-ios';
 }
 
-/** Doctor-facing wording for each gap the auto crawl could not fill. No em-dash (app-facing text). */
+/* Doctor-facing wording for each gap the auto crawl could not fill. No em-dash (app-facing text).
+ * Every fallback names what to tap and ends with the onboard reassurance (onboard.mjs): the
+ * doctor shows the screen once and the AI learns the layout from it. */
 export const GAP_PROMPTS = Object.freeze({
-  worklist: 'I could not find your patient worklist. Open it and tap inside it so it turns green, then tap Done.',
-  patient: 'I could not find the patient details (name, age, sex). Open them and tap inside so they turn green, then tap Done.',
-  notes: 'I could not find the clinical or assessment notes. Open them and tap inside so they turn green, then tap Done.',
-  medications: 'I could not find the medication chart. Open it and tap inside it so it turns green, then tap Done.',
-  labs: 'I could not find the lab results. Open them and tap inside so they turn green, then tap Done.',
-  radiology: 'I could not find the radiology reports. Open them and tap inside so they turn green, then tap Done.',
-  discharge: 'I could not find the discharge summary. Open it and tap inside it so it turns green, then tap Done.',
-  history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done.',
+  worklist: 'I could not find your patient worklist. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  patient: 'I could not find the patient details (name, age, sex). Open them and tap inside so they turn green, then tap Done. ' + REASSURANCE,
+  notes: 'I could not find the clinical or assessment notes. Open them and tap inside so they turn green, then tap Done. ' + REASSURANCE,
+  medications: 'I could not find the medication chart. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  labs: 'I could not find the lab results. Open them and tap inside so they turn green, then tap Done. ' + REASSURANCE,
+  radiology: 'I could not find the radiology reports. Open them and tap inside so they turn green, then tap Done. ' + REASSURANCE,
+  discharge: 'I could not find the discharge summary. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
+  history: 'I could not find the visit history. Open it and tap inside it so it turns green, then tap Done. ' + REASSURANCE,
 });
 const MAX_ASKS = 4;
 const GAP_NAMES = Object.freeze({ worklist: 'patient list', patient: 'patient details', notes: 'clinical notes', labs: 'lab results', radiology: 'radiology reports', medications: 'medication chart', discharge: 'discharge summary', history: 'visit history' });
@@ -40,15 +43,19 @@ const LOGIN_FORM_PRESENT = "(function(){return document.querySelector('input[typ
  * order a ward round reads a chart. Each ask has "Not in my EMR" in the browser header (the native
  * guideSkip event) so a hospital without, say, radiology never blocks the run. */
 export const ASK_ORDER = Object.freeze(['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history']);
+/* MANUAL MODE: the doctor drives using the universal 6-tap script (onboard.mjs: the six steps
+ * plus the three follow-up screens). One plain sentence per ask, each ending with the reassurance
+ * that the AI learns the layout automatically. The sentences themselves live in onboard.mjs so
+ * both modes and the sheet share one script. */
 export const ASK_PROMPTS = Object.freeze({
-  worklist: 'Show me the list of all your patients (the whole ward or your own list), tap inside it so it turns green, then tap Done.',
-  patient: 'Open one patient and show me their details (name, age, sex, ward, bed), tap inside it so it turns green, then tap Done.',
-  notes: 'Show me the assessment or clinical notes for that patient, tap inside it so it turns green, then tap Done.',
-  labs: 'Show me the lab results for that patient, tap inside it so it turns green, then tap Done.',
-  radiology: 'Show me the radiology reports for that patient, tap inside it so it turns green, then tap Done.',
-  medications: 'Show me the medication chart or prescription for that patient, tap inside it so it turns green, then tap Done.',
-  discharge: 'Show me the discharge summary for that patient, tap inside it so it turns green, then tap Done.',
-  history: 'Show me the visit history for that patient, tap inside it so it turns green, then tap Done.',
+  worklist: guidedPrompt('worklist'),
+  patient: guidedPrompt('patient'),
+  notes: guidedPrompt('notes'),
+  labs: guidedPrompt('labs'),
+  radiology: guidedPrompt('radiology'),
+  medications: guidedPrompt('medications'),
+  discharge: guidedPrompt('discharge'),
+  history: guidedPrompt('history'),
 });
 
 /**

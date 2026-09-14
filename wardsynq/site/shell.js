@@ -55,6 +55,27 @@
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad_response", status: r.status }; }); })
       .catch(function (e) { return { ok: false, error: "network", detail: String(e && e.message || e) }; });
   }
+  /** download("/ward/fhir/$export-file/j/Patient-1.ndjson?orgId=o", "Patient-1.ndjson") -> {ok} or {ok:false, message}.
+   *  The bytes are fetched with this session's credentials and saved from a local object URL, so the page
+   *  never holds a link that works without them. A refusal comes back as the server's own words. */
+  function download(path, name, base) {
+    return headers().then(function (h) { return fetch((base || API) + path, { headers: h, credentials: "include" }); }).then(function (res) {
+      var type = res.headers.get("Content-Type") || "";
+      if (res.ok && type.indexOf("json") < 0) {
+        return res.blob().then(function (blob) {
+          var url = URL.createObjectURL(blob), a = document.createElement("a");
+          a.href = url; a.download = name || "download";
+          document.body.appendChild(a); a.click(); a.parentNode.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+          return { ok: true };
+        });
+      }
+      return res.json().then(null, function () { return {}; }).then(function (j) {
+        var why = (j.issue && j.issue[0] && j.issue[0].diagnostics) || j.message || j.error || ("the server answered " + res.status);
+        return { ok: false, status: res.status, message: why };
+      });
+    }).catch(function (e) { return { ok: false, error: "network", message: "The download could not reach the server." }; });
+  }
   function can(cap) { return !!(st.who && st.who.caps && st.who.caps.indexOf(cap) >= 0); }
   /* A demonstration hospital says so, on every screen, permanently. Demo and real tenant data are
    * separate records, but that separation is invisible to somebody looking at a chart over a
@@ -75,6 +96,16 @@
     if (!quiet) go("landing");
   }
   function signOut() {
+    /* G2: bedside entries kept on this device while offline leave with the person who charted them. Signing
+     * out with some still unsent deletes them from this device, so it is said first and can be refused. */
+    var off = G.WARD_OFFLINE && G.WARD_OFFLINE.device() ? G.WARD_OFFLINE.device().state() : null;
+    var held = off ? (off.waiting || 0) + (off.conflicts || 0) + (off.refused || 0) : 0;
+    if (held) {
+      var sure = true;
+      try { sure = G.confirm(held + " bedside " + (held === 1 ? "entry is" : "entries are") + " saved on this device and not in the record. Signing out deletes " + (held === 1 ? "it" : "them") + " from this device.\n\nSign out anyway? Cancel stays signed in, so you can send or review them in the ward."); } catch (e) {}
+      if (!sure) return;
+    }
+    try { if (G.WARD_OFFLINE) G.WARD_OFFLINE.clearDevice(); } catch (e) {}
     var wasAccount = st.tokType === "account";
     st.tokType = ""; st.tok = ""; st.orgId = ""; st.who = null; st.org = null; st.orgs = null;
     lsSet(LS.tt, ""); lsSet(LS.tok, ""); lsSet(LS.hosp, ""); lsSet(LS.wp, "");
@@ -221,7 +252,7 @@
       app.innerHTML = bar() + '<div class="wrap' + (railHtml ? "" : " norail") + '">' + railHtml + '<main class="work" id="page"></main></div>';
     }
     var el = $("page");
-    var ctx = { el: el, api: api, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when };
+    var ctx = { el: el, api: api, download: download, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when };
     try { var out = def.render(ctx, extra); if (out && typeof out.then === "function") out.catch(function (e) { el.innerHTML += '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }); }
     catch (e) { el.innerHTML = '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }
   }
@@ -567,7 +598,7 @@
   } };
 
   // ---- registry + boot ------------------------------------------------------------------------------------
-  G.WSQ = { page: function (name, def) { PAGES[name] = def; }, api: api, esc: esc, ms: ms, go: go, can: can, state: st, toast: toast, render: render, _signInError: signInError };
+  G.WSQ = { page: function (name, def) { PAGES[name] = def; }, api: api, download: download, esc: esc, ms: ms, go: go, can: can, state: st, toast: toast, render: render, _signInError: signInError };
 
   function boot() {
     st.tokType = lsGet(LS.tt); st.tok = lsGet(LS.tok); st.orgId = lsGet(LS.hosp);

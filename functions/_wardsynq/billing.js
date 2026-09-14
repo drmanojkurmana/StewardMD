@@ -51,6 +51,8 @@ import {
 } from "../../wardsynq/wardsynq-billing.js";
 import { submitViaAdapter, adapterForPayer, payerById, publicPayers, payerRuleWarnings } from "../../wardsynq/wardsynq-tpa-adapter.js";
 import { FhirClaimAdapter } from "../../wardsynq/wardsynq-fhir-claim-adapter.js";
+import { NhcxAdapter } from "../../wardsynq/wardsynq-nhcx-adapter.js";
+import { openSecret } from "./webhooks.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { makeSecrets } from "../_connect/secrets.js";
 import { priceWith } from "./charge-capture.js";
@@ -73,16 +75,19 @@ function sealedCredentialAuthorizer(env, payers, secretsImpl) {
     const payer = payerById(payers, request && request.payerId);
     const auth = payer && payer.auth && typeof payer.auth === "object" ? payer.auth : null;
     const ref = str(auth && auth.credentialRef);
-    if (!ref.startsWith("sealed:")) return null;
     let token;
-    try { token = str(await (secretsImpl || makeSecrets(env)).open(ref.slice(7))); } catch { return null; }
+    /* Owner S4: a payer saved as a connector carries its credential sealed under the document key
+     * (connectors.js); a wardsynq.payers entry keeps the Connect envelope reference. */
+    if (auth && auth.connectorSecret) token = str(await openSecret(env, auth.connectorSecret));
+    else if (!ref.startsWith("sealed:")) return null;
+    else { try { token = str(await (secretsImpl || makeSecrets(env)).open(ref.slice(7))); } catch { return null; } }
     if (!token) return null;
     if (auth.type === "header" && str(auth.headerName)) return { [str(auth.headerName)]: token };
     return { authorization: `Bearer ${token}` };
   };
 }
 
-const ADAPTER_KINDS = Object.freeze({ "fhir-claim": FhirClaimAdapter });
+const ADAPTER_KINDS = Object.freeze({ "fhir-claim": FhirClaimAdapter, nhcx: NhcxAdapter });
 
 /** The adapter for a payer id, with a hardened transport. ctx.tpaAdapter (a site's own) wins when given. */
 function resolveAdapter(env, ctx, payerId) {

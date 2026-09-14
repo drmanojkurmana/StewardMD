@@ -25,41 +25,6 @@
   // ghis-ward deep-link handler opens it on load (covers cold-start taps).
   // `ref` is opaque (see functions/api/watch/[[path]].js), never the real patientId, so it must be
   // resolved through SMD_WATCH.resolveRef() (the doctor's own authenticated session) first.
-  /* ── WardSynQ escalation receipts (HAZ-DET-01) ─────────────────────────────
-   * The one thing a push gateway cannot tell you is whether the handset got it. This posts that
-   * fact back from the handset itself, which is what lets a WardSynQ notice move to DELIVERED
-   * honestly instead of on the strength of APNs returning 200.
-   *
-   * Three receipts, three different facts, never collapsed:
-   *   delivered     the alert arrived on this device
-   *   viewed        the clinician opened it. NOT an answer.
-   *   acknowledged  the clinician took it. This is the only one that closes the loop, and the
-   *                 server stamps it with the verified uid so a device cannot answer for somebody.
-   *
-   * Best-effort and silent on failure by design: a receipt that does not post leaves the alert
-   * OUTSTANDING and the escalation timer running, which is the safe direction to fail in. */
-  function wardsynqReceipt(kind, data, extra) {
-    try {
-      if (!data || !data.noticeId) return Promise.resolve(false);
-      return idToken().then(function (jwt) {
-        var headers = { "Content-Type": "application/json" };
-        if (jwt) headers["Authorization"] = "Bearer " + jwt;
-        return fetch(api("/api/push/wardsynq-receipt"), {
-          method: "POST", headers: headers,
-          body: JSON.stringify({
-            noticeId: data.noticeId, kind: kind,
-            patientId: data.patientId || null, alertId: data.alertId || null,
-            device: (window.SMD_DEVICE_ID || platform() || "device"),
-            action: (extra && extra.action) || null
-          })
-        });
-      }).then(function () { return true; }).catch(function () { return false; });
-    } catch (e) { return Promise.resolve(false); }
-  }
-  // Exposed so the alert UI can report the two states only a human can produce.
-  window.SMD_wardsynqViewed = function (data) { return wardsynqReceipt("viewed", data); };
-  window.SMD_wardsynqAcknowledge = function (data, action) { return wardsynqReceipt("acknowledged", data, { action: action }); };
-
   function routeUrl(url) {
     try {
       var m = url && String(url).match(/[?&]ghisRef=([^&]+)/);
@@ -178,6 +143,96 @@
 
   var _token = null, _wired = false;
 
+  /* ── WardSynQ hospital alerts (S3 P1) ─────────────────────────────────────────────────────────
+   * A hospital's critical-result ladder reaches this phone only once the phone is bound to the
+   * clinician's identity AT THAT HOSPITAL (POST /api/push/register-member). Bound when a WardSynQ
+   * hospital is chosen or a staff session signs in, re-bound when the device token changes, unbound
+   * (POST /api/push/unregister-member) when a staff session signs out. Each request carries that
+   * hospital's own credential (hospital-auth.js), never whichever token happens to be stored.
+   * localStorage smd_wsq_push_orgs = { orgId: tail of the token it was bound with, "" = pending }.
+   * Inert unless smd_wsq_push is on. */
+  var LS_WSQ = "smd_wsq_push_orgs";
+  function wsqOn() { try { return !!(window.SMD_WARDSYNQ_FLAGS && SMD_WARDSYNQ_FLAGS.get("smd_wsq_push")); } catch (e) { return false; } }
+  function wsqBound() { try { var o = JSON.parse(localStorage.getItem(LS_WSQ) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+  function wsqSave(o) { try { localStorage.setItem(LS_WSQ, JSON.stringify(o)); } catch (e) {} }
+  function wsqToast(msg) { try { if (window.toast) window.toast(msg); else if (window.SMD_toast) window.SMD_toast(msg); } catch (e) {} }
+  var NOT_REMOVED = "This phone may still receive this hospital's alerts. Ask the hospital admin to reset your access.";
+  // -> Promise<{ok, status, error}>. The credential is read synchronously, before a caller signs out.
+  // accountOnly: the StewardMD account's bearer and nothing else (its own sign-out; a staff session stays).
+  function memberCall(route, orgId, accountOnly) {
+    var HA = window.SMD_HOSPITAL_AUTH;
+    if (!HA) return Promise.resolve({ ok: false, status: 0, error: "auth_module_missing" });
+    var body = JSON.stringify({ orgId: orgId, token: _token, platform: platform(), device: deviceIdentity() });
+    var headers = accountOnly ? idToken().then(function (t) { return t ? { "Content-Type": "application/json", Authorization: "Bearer " + t } : null; }) : HA.headersFor(orgId, idToken);
+    return headers.then(function (h) {
+      if (!h) return { ok: false, status: 401, json: function () { return Promise.resolve({ error: "no_account" }); } };
+      return fetch(api("/api/push/" + route), { method: "POST", headers: h, body: body });
+    }).then(function (r) {
+      return r.json().then(function (j) { return { ok: r.ok && !!(j && j.ok), status: r.status, error: j && j.error }; }, function () { return { ok: false, status: r.status }; });
+    }, function () { return { ok: false, status: 0, error: "network" }; });
+  }
+  function wsqBind(orgId, explicit) {
+    if (!wsqOn() || !orgId) return Promise.resolve({ ok: false, error: "off" });
+    var b = wsqBound();
+    if (!_token) {
+      if (b[orgId] === undefined) { b[orgId] = ""; wsqSave(b); }
+      // The registration listener binds it once the device token arrives.
+      return window.SMD_enableNativePush().then(function (on) {
+        if (!on && explicit) wsqToast("Turn on notifications for StewardMD to receive this hospital's critical-result alerts.");
+        return { ok: false, error: on ? "pending" : "notifications_off" };
+      });
+    }
+    var tail = _token.slice(-12);
+    if (b[orgId] === tail) return Promise.resolve({ ok: true, unchanged: true });
+    return memberCall("register-member", orgId).then(function (r) {
+      var c = wsqBound();
+      // A refusal (not a member, no chart access) is not retried on later launches; anything else is.
+      if (r.ok) c[orgId] = tail; else if (r.status === 403 || r.status === 404) delete c[orgId]; else if (c[orgId] === undefined) c[orgId] = "";
+      wsqSave(c);
+      if (!r.ok && explicit) wsqToast("This phone could not be registered for this hospital's critical-result alerts. Choose the hospital again to retry.");
+      return r;
+    });
+  }
+  function wsqUnbind(orgId) {
+    var b = wsqBound();
+    if (!orgId || b[orgId] === undefined) return Promise.resolve({ ok: true, unchanged: true });
+    delete b[orgId]; wsqSave(b);
+    if (!_token) { wsqToast(NOT_REMOVED); return Promise.resolve({ ok: false, error: "no_token" }); }
+    return memberCall("unregister-member", orgId).then(function (r) { if (!r.ok) wsqToast(NOT_REMOVED); return r; });
+  }
+  // Every hospital this phone should be bound to: the ones it was bound for, and the one it works in now.
+  function wsqRebindAll() {
+    if (!wsqOn()) return;
+    var b = wsqBound(), cur = window.SMD_HOSPITAL_AUTH ? SMD_HOSPITAL_AUTH.currentOrg() : "";
+    if (cur && b[cur] === undefined) b[cur] = "";
+    Object.keys(b).forEach(function (orgId) { wsqBind(orgId, false); });
+  }
+  /* Signing out of the StewardMD ACCOUNT (not a staff session). Its binding at the hospital this phone works
+   * in is released first, with the account's own bearer while it is still valid; signout-fix.js, verify.js
+   * and account.js wait for this (at most maxMs) before ending the Firebase session. The failure is written
+   * BEFORE the call and cleared only by a confirmed unbind, so a refusal, a network failure or a reload that
+   * cuts the call short all leave it recorded; the next launch says so once. Never reports "removed". */
+  var LS_UNBIND_FAILED = "smd_wsq_push_unbind_failed";
+  function wsqAccountSignOut(maxMs) {
+    var HA = window.SMD_HOSPITAL_AUTH, b = wsqBound(), orgId = "";
+    try { orgId = HA ? HA.workplaceOrg(localStorage.getItem("smd_opd_workplace")) : ""; } catch (e) {}
+    if (!orgId || b[orgId] === undefined) return Promise.resolve({ ok: true, unchanged: true });
+    delete b[orgId]; wsqSave(b);
+    try { localStorage.setItem(LS_UNBIND_FAILED, JSON.stringify({ orgId: orgId, at: new Date().toISOString() })); } catch (e) {}
+    var call = !_token ? Promise.resolve({ ok: false, error: "no_token" }) : memberCall("unregister-member", orgId, true).then(function (r) {
+      if (r.ok) { try { localStorage.removeItem(LS_UNBIND_FAILED); } catch (e) {} }
+      return r;
+    });
+    return Promise.race([call, new Promise(function (res) { setTimeout(function () { res({ ok: false, error: "timeout" }); }, maxMs || 6000); })]);
+  }
+  function wsqSayUnbindFailed() {
+    var rec = null;
+    try { rec = JSON.parse(localStorage.getItem(LS_UNBIND_FAILED) || "null"); localStorage.removeItem(LS_UNBIND_FAILED); } catch (e) {}
+    if (rec && rec.orgId) wsqToast("When you signed out, this phone could not be taken off a hospital's critical-result alerts, so it may still receive them. Ask the hospital admin to reset your access.");
+  }
+  window.SMD_WSQ_PUSH = { bind: wsqBind, unbind: wsqUnbind, bound: wsqBound, accountSignOut: wsqAccountSignOut };
+  setTimeout(wsqSayUnbindFailed, 3000);   // after app.js has put up its toast
+
   function wireListeners() {
     if (_wired) return; _wired = true;
     var P = plugin();
@@ -193,6 +248,7 @@
           body: JSON.stringify({ token: _token, platform: platform(), workspaces: workspaces(), categories: categories(), device: deviceIdentity() })
         });
       }).then(function () { flag("1"); }).catch(function () {});
+      wsqRebindAll();
     });
     P.addListener("registrationError", function (e) {
       try { console.warn("[StewardMD] push registration error:", e && (e.error || e)); } catch (x) {}
@@ -205,17 +261,15 @@
         // this handler ONLY fires in the foreground. So re-raise it as a LOCAL notification, which
         // manages its own channel — the doctor gets a real banner on Android even with the app open.
         var d = (n && n.data) || {};
-        // The handset has it. Receipt it BEFORE anything that could throw (rendering, routing),
-        // because the delivery fact is what an escalation timer depends on.
-        if (d.type === "wardsynq-alert") wardsynqReceipt("delivered", d);
         var title = (n && n.title) || d.title || "StewardMD";
         var body = (n && n.body) || d.body || "New update";
         var url = d.url || d.URL || "/";
-        // A deterioration escalation arriving while the app is OPEN goes straight to the
-        // acknowledgement screen rather than becoming a banner behind whatever is on screen. An
-        // escalation that waits politely for a tap is an escalation nobody has answered.
-        if (d.type === "wardsynq-alert" && window.SMD_showWardSynQAlert) {
-          if (window.SMD_showWardSynQAlert(d, title, body)) return;
+        // A WardSynQ alert arriving while the app is OPEN: receipt it first (the escalation timer
+        // depends on that fact), then straight to the alert screen rather than a banner behind
+        // whatever is on screen. With smd_wsq_push off the screen declines and the thin text shows.
+        if (d.type === "wardsynq-alert" && window.SMD_WSQ_ALERT) {
+          window.SMD_WSQ_ALERT.delivered(d);
+          if (window.SMD_WSQ_ALERT.handle(d)) return;
         }
         if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
         else if (window.SMD_toast) window.SMD_toast(title + " — " + body);
@@ -229,14 +283,11 @@
         var url = (data && (data.url || data.URL)) || "/";
         // A tap is evidence the alert reached this handset AND that a person opened it. Both are
         // recorded; neither is an acknowledgement, which stays an explicit act in the alert UI.
-        if (data && data.type === "wardsynq-alert") {
-          wardsynqReceipt("delivered", data);
-          // The acknowledgement screen posts `viewed` itself when it opens, so this path does not
-          // duplicate it. Opening the screen is the whole purpose of the tap: routing to "/" left a
-          // clinician with a banner and nowhere to answer it.
-          var n = (a && a.notification) || {};
-          if (window.SMD_showWardSynQAlert && window.SMD_showWardSynQAlert(data, n.title, n.body)) return;
-          wardsynqReceipt("viewed", data);   // the screen is unavailable; the view still happened
+        // The alert screen posts `viewed` itself once the detail is on screen; opening it is the
+        // whole purpose of the tap. It fetches nothing until app lock is passed.
+        if (data && data.type === "wardsynq-alert" && window.SMD_WSQ_ALERT) {
+          window.SMD_WSQ_ALERT.delivered(data);
+          if (window.SMD_WSQ_ALERT.handle(data)) return;
         }
         // FollowCare push → deep-link straight to that patient's recovery detail in-app (covers cold-launch).
         if (data && data.type === "followcare" && data.episodeId && window.FollowCare && window.FollowCare.openDetail) {

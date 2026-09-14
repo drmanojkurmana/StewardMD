@@ -16,6 +16,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const css = await readFile(new URL("../wardsynq/ui/wardsynq.css", import.meta.url), "utf8");
+const shellCss = await readFile(new URL("../wardsynq/site/shell.css", import.meta.url), "utf8");
 
 /**
  * Pulls the custom properties out of the stylesheet, PER PALETTE.
@@ -114,6 +115,28 @@ test("every signal colour clears AA on every surface, in both palettes", () => {
       }
     }
   }
+});
+
+/* D8: a signal colour is also laid, as text, directly on its OWN wash - a warning row (tr.warn in
+ * shell.css), .msg.err/.msg.note, .w-sub.warn and the demo-hospital tag all do this. That pairing was
+ * never measured before; it is not the same as the signal-on-SURFACES test above. */
+test("each signal with a wash clears AA laid as text on that same wash, in both palettes", () => {
+  const WASHED = [["--sig-stop", "--sig-stop-wash"], ["--sig-major", "--sig-major-wash"], ["--sig-clear", "--sig-clear-wash"]];
+  for (const [name, P] of PALETTES) {
+    for (const [sig, wash] of WASHED) {
+      const r = contrast(P[sig], P[wash]);
+      assert.ok(r >= 4.5, `${name}: ${sig} on ${wash} is ${r.toFixed(2)}:1, below AA`);
+    }
+  }
+});
+
+test("D8: a warning row (rota/security/admin's tr.warn) is actually styled - not colour-only", () => {
+  // rota.js and security.js render `<tr class="warn">` for a coverage gap or a failed/locked sign-in;
+  // admin.js does the same for a down integration, an inactive webhook or a disabled provider. All
+  // three files carry the WORD (the gap, the failure) already; this only asserts the row itself is
+  // not left with no style at all, and that the cue is more than colour.
+  assert.match(shellCss, /tr\.warn\s*\{[^}]*background/, "tr.warn needs a background wash so the row itself is visibly distinct");
+  assert.match(shellCss, /tr\.warn\s+td\s*\{[^}]*font-weight/, "tr.warn text needs a second cue (weight), not colour alone");
 });
 
 test("the on-signal colour clears AA on a signal fill, which is what a filled badge needs", () => {
