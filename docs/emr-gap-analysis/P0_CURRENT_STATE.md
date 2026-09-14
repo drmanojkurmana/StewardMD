@@ -672,3 +672,11 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - G6/G9/G10/D9: Immunization record, chart screen, FHIR and IPS section; ward Group $export with POST kick-off and Admin downloads; FHIR Subscription create and $status; R4B and R5 by fhirVersion (R5 for Patient, Encounter, Observation, Condition, AllergyIntolerance, MedicationRequest, Immunization; 406 elsewhere).
 - S3/S6 designs merged (S3_UNIFIED_WARD_APP_DESIGN.md, S6_ABDM_INTEGRATION_DESIGN.md). Found: no critical result reaches a phone today; escalation runs only while the ward is open; ICU push shows value and bed on the lock screen. Owner questions O1-O5, A1-A5 open (O1 Pro paywall deadline 2026-09-15 23:59 IST).
 - Regression 6724, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site83, admin.js 29, shell.js 37, portal.js 6, i18n.js 5.
+
+### 2026-09-14 (night, 5) - owner answers O1-O5 and A1-A5; Pro gate off for hospital staff; ABDM profile; alerts to phones
+
+- O1: POST /api/ghis/login no longer calls requirePro (hospital credentials are the entitlement); live before the promo ends 2026-09-15 23:59 IST.
+- S6 A1: Admin > Integrations > ABDM card, profile stored as the `abdm` connector on the shared StewardMD bridge (A1); production linking shown blocked until India hosting (A2); A4 and A5 recorded.
+- S3 P0: critical results pushed to clinicians via the existing StewardMD push (O2), no patient name in push or SMS, bed and ward allowed (O3), SMS fallback via 2Factor with per-hospital DLT template (O4; TWOFACTOR_API_KEY present in Pages), default ladder approved by Dr Manoj Kurmana (O5). Off until a hospital turns on wardsynq.alerts.push.enabled. Worker stewardmd-api deployed with */5 cron to /api/queue/ops/tick-all (UPDATES_ADMIN_TOKEN present). Nurse-in-charge has no role marker, so level 2 tells every nurse on duty in the ward; app client (P1: register-member caller, thin payload handling) not built, so phones receive nothing until P1 ships.
+- A3: ABDM v3 branch merge in progress on abdm-v3-merge (sandbox ABDM vars kept out of wrangler.toml).
+- Regression 6768, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site84, admin.js 31.
