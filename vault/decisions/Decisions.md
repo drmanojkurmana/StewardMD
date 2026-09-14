@@ -6138,3 +6138,20 @@ assignment. Tests: `test/wardsynq-out-of-assignment.test.mjs`.
 - EVIDENCE: each flagged read carries the patient's ward then and the wards the reader was rostered on then. "Open
   these audit rows" reads them back by id with their chain link number; the read is audited (`security.audit_rows`)
   and refused if it cannot be; ids not found are named; a failed load says so.
+
+## 2026-09-14 D6: Antigravity's multilingual branch reviewed; only translations integrated, nine portal languages
+
+Source: local branch `feat/wardsynq-multilingual-emr` (363117f5..844a8b4e). Integrated on
+`d6-antigravity-integrate` into the per-language files (`wardsynq/site/i18n/<code>.js`), all `reviewed:false`.
+Owner answer 2026-09-14: Marathi added, Spanish kept (`OFFERED` in `wardsynq/site/i18n.js` lists nine).
+- KEPT: Telugu portal catalog; label/sign-out/nav strings for ta, kn, ml, bn, mr. Tests
+  (`test/wardsynq-i18n.test.mjs`) now pin negation in safety-critical keys and exact digits.
+- NOT TAKEN: the `i18n.js` rewrite (self-marked reviewed:true, global active language in `t()`, AI-translation
+  notice), the staff shell switcher (staff UI translation is not in D6; owner to decide), address-based
+  `detectLanguage`, `wardsynq-terminology.js`, `wardsynq-rx-print.js` (drops unknown frequencies from the
+  "canonical" line, rewrites PRN/TDS, misreads dates), `wardsynq-translation-guard.js` (machine translation of
+  clinical text), and the general rulebook (permits labelled AI translation of clinical text). Findings in
+  `docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md` "What happened to the first pass".
+- RULE STANDS: clinical text is never machine translated. A localized prescription or discharge print, if ever
+  built, keeps the English order as the source of truth beside it, behind a per-hospital setting default off,
+  with golden tests for negation, decimals, frequency and dose preservation.
