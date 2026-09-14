@@ -33,28 +33,5 @@
     "flag-critical": "Called by the server itself: release-result opens critical loops against the stored report on every release (2026-09-14). This route remains only as an idempotent re-check; a screen button for it would duplicate that automatic step."
   },
   "knownGaps": {},
-  "untestedRoutes": [
-    "advisory-check",
-    "backup-status",
-    "bill/dispense",
-    "bill/invoice",
-    "blood-loss-list",
-    "delivery-get",
-    "device-list",
-    "from-connect",
-    "id-match",
-    "maik-status",
-    "maternity-status",
-    "mfa/status",
-    "patient-copy",
-    "risk-action",
-    "risk-tools",
-    "room/update",
-    "session/status",
-    "surgery-abandon",
-    "surgery-list",
-    "tariff",
-    "templates",
-    "upcoding"
-  ]
+  "untestedRoutes": []
 }
