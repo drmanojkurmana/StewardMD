@@ -119,6 +119,8 @@
      * hospital data is asked for (which would only be refused). */
     if (st.who.twoStepRequired) return r.page === "security" ? render("security") : go("security");
     if (r.page === "hospitals") return render("hospitals");
+    // A group administrator need not work in any one hospital, so the group overview needs none chosen.
+    if (r.page === "group" && PAGES.group) return render("group");
     /* The demonstration-hospital builder runs BEFORE a hospital is chosen, because its whole job is
      * to create one. Every other page below needs st.org loaded; this one would be bounced straight
      * back to the hospital list by the next line and could never run. */
@@ -201,7 +203,7 @@
     if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
     h += item("opd", "OPD desk") + item("patients", "Patients");
     if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
-    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + item("rota", "Staff rota") + item("accounts", "Accounts") + "</div>";
+    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + item("rota", "Staff rota") + item("accounts", "Accounts") + item("group", "Group overview") + "</div>";
     return h;
   }
   function render(page, extra) {

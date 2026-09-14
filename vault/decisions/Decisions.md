@@ -5371,3 +5371,31 @@ bug - not re-verified live on device this session.
 - Not built: ward/assignment reads (no assignment data), staff-as-patient (would need new PHI
   linkage), VIP flag (does not exist), denied READS (the service only audits denied writes).
 - Backup export audit rows now carry `actor` (they landed as NULL before) and a row count.
+
+
+## 2026-09-14 Hospital groups (P2.14): only aggregate counts cross a hospital boundary
+
+`functions/_hospital_group_store.js` (model + Firestore), `functions/_wardsynq/hospital-group.js` (counts),
+routes `/api/queue/group/*`, Admin Center tab "Hospital group", page `#/group` (`wardsynq/site/pages/group.js`).
+- A group is `q_groups/<id>` (name, adminUids, recommended policy) plus one `q_group_links/<groupId>__<orgId>`
+  row per hospital, the way `q_members` sits beside `q_orgs`. States: invited, member, declined, removed.
+  Member only after the group admin invites AND the hospital's owner accepts; either side can remove.
+  Every change is committed in the same Firestore commit as its `q_events` audit row under the hospital.
+- WHY ONLY COUNTS. Each hospital is its own data controller and its patients consented to that
+  hospital, not to a group. A group needs to compare load (census, free beds, ED waiting, open critical
+  results, staff short), and none of that needs a patient. Letting identifiers through would make the
+  group a second, weaker door into every member's charts, with no membership, role or break-glass behind
+  it. So the response is built field by field from five numbers; the test seeds names, MRNs, patient and
+  record ids and asserts none appear. There is no drill-down by design.
+- The counts are each hospital's own computation (summariseWard, bedStateCounts, listEd's ED filter,
+  rosterStaffing) over that hospital's own repository, resolved from its org document. The authority is
+  the owner's acceptance, re-checked on every call; it is a no-user service read like ops-tick, never a
+  clinical actor, so a group admin still gets 403 on every chart, patient and record route. Every group
+  read writes `group:summary_read` into the hospital's audit trail first; no audit row, no read.
+- A count not read is null with `could_not_be_read`; not configured is `not_set_up`; a hospital with
+  nothing readable is `unreadable`. Never zero.
+- Group policy is a whitelist (`POLICY_KEYS`: clinical-practice settings only; never beds, people, money,
+  legal agreements, integrations or credentials). A member hospital's admin adopts it as a one-time copy
+  merged into its own `wardsynq` config, audited as `group:policy_adopted`. Nothing is inherited.
+- Not built: adding a second group admin (the field holds a list; groups are listed by creator), group
+  deletion, trends over time.

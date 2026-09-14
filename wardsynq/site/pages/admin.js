@@ -46,7 +46,7 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"]];
+  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"], ["group", "Hospital group"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -67,7 +67,7 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways };
+    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
 
@@ -662,6 +662,122 @@
       };
     });
   }
+  // ---- Hospital group (P2.14) ------------------------------------------------------------------
+  /* Two halves on one tab, because the same person is often on both sides. THIS HOSPITAL'S SIDE:
+   * invitations to accept or decline (only the owner can; the server says so to anyone else), groups
+   * it belongs to, leaving, and adopting a group's recommended settings as a copy. GROUPS YOU RUN:
+   * create, invite by hospital id or code, remove, publish recommended settings, open the overview.
+   * A group sees counts only, never a patient. An invitation alone does not make a hospital a member. */
+  // The only actions each half sends to /group/<action>; anything else sends nothing.
+  var GROUP_SIDE_ROUTE = { accept: "accept", decline: "decline", remove: "remove", adopt: "adopt" };
+  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy" };
+  function groupSideHtml(c, r) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>This hospital\'s groups</h2>';
+    if (r == null) return h + '<span class="spin"></span> Loading...</div>';
+    if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ". Do not read this as no groups or invitations.</div></div>";
+    if (!r.groups.length) return h + '<p class="quiet">This hospital is not in a hospital group and has no invitations.</p></div>';
+    return h + '<p class="quiet">A group sees this hospital\'s counts (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' +
+      '<div class="tbl"><table><thead><tr><th>Group</th><th>Status</th><th>Recommended settings</th><th></th></tr></thead><tbody>' +
+      r.groups.map(function (g) {
+        var id = esc(g.groupId);
+        var pol = g.policy ? Object.keys(g.policy) : [];
+        return "<tr><td>" + esc(g.name || g.groupId) + "</td><td>" + (g.state === "member" ? '<span class="pill ok">member</span>' : '<span class="pill warn">invited, not a member yet</span>') + "</td><td>" +
+          (g.state !== "member" ? "" : pol.length ? esc(pol.join(", ")) + " (version " + esc(g.policyVersion) + ")" : '<span class="quiet">none published</span>') + "</td><td>" +
+          (g.state === "invited"
+            ? '<button type="button" class="btn" data-grp-side="accept" data-grp="' + id + '">Accept</button> <button type="button" class="btn ghost" data-grp-side="decline" data-grp="' + id + '">Decline</button>'
+            : (pol.length ? '<button type="button" class="btn" data-grp-side="adopt" data-grp="' + id + '">Adopt recommended settings</button> ' : "") +
+              '<button type="button" class="btn ghost" data-grp-side="remove" data-grp="' + id + '">Leave group</button>') + "</td></tr>";
+      }).join("") + '</tbody></table></div><div id="grpSideMsg"></div></div>';
+  }
+  function groupRunHtml(c, r) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>Hospital groups you run</h2>';
+    if (r == null) return h + '<span class="spin"></span> Loading...</div>';
+    if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ".</div></div>";
+    h += r.groups.length ? r.groups.map(function (g) {
+      var id = esc(g.id);
+      return "<h3>" + esc(g.name) + "</h3>" +
+        '<p><button type="button" class="btn ghost" data-go="group/' + id + '">Open group overview</button></p>' +
+        (g.members.length ? "<p>Members:</p><ul>" + g.members.map(function (m) {
+          return "<li>" + esc(m.name || m.orgId) + ' <span class="mono">' + esc(m.orgId) + '</span> <button type="button" class="btn quiet" data-grp-run="remove" data-grp="' + id + '" data-org="' + esc(m.orgId) + '">Remove</button></li>';
+        }).join("") + "</ul>" : '<p class="quiet">No member hospitals yet.</p>') +
+        (g.invited.length ? "<p>Invited, waiting for the hospital's owner to accept:</p><ul>" + g.invited.map(function (m) {
+          return '<li><span class="mono">' + esc(m.orgId) + '</span> <button type="button" class="btn quiet" data-grp-run="remove" data-grp="' + id + '" data-org="' + esc(m.orgId) + '">Withdraw invitation</button></li>';
+        }).join("") + "</ul>" : "") +
+        '<div class="row"><label class="f"><span>Invite a hospital (id or SMD code)</span><input data-grp-invite-input="' + id + '"></label>' +
+        '<button type="button" class="btn" data-grp-run="invite" data-grp="' + id + '">Invite</button></div>' +
+        '<label class="f"><span>Recommended settings (JSON, version ' + esc(g.policyVersion) + ')</span><textarea rows="5" style="width:100%;font-family:monospace" data-grp-policy-input="' + id + '">' + esc(g.policy ? JSON.stringify(g.policy, null, 2) : "") + "</textarea></label>" +
+        '<button type="button" class="btn ghost" data-grp-run="policy" data-grp="' + id + '">Publish recommended settings</button>' +
+        '<p class="quiet">A member hospital\'s admin decides whether to adopt them. Nothing changes in any hospital until they do.</p>';
+    }).join("") : '<p class="quiet">You do not run a hospital group.</p>';
+    return h + '<h3>Create a group</h3><div class="row"><label class="f"><span>Group name</span><input id="grpNewName"></label>' +
+      '<button type="button" class="btn" id="grpCreate">Create group</button></div><div id="grpRunMsg"></div></div>';
+  }
+  WSQ._groupAdmin = { side: groupSideHtml, run: groupRunHtml };
+
+  function renderGroup(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    body.innerHTML = '<div id="grpSide">' + groupSideHtml(c, null) + '</div><div id="grpRun">' + groupRunHtml(c, null) + "</div>";
+    var say = function (id, x) { var m = document.getElementById(id); if (m) m.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; };
+    var side = c.api("/group/memberships" + q).then(function (r) {
+      var box = document.getElementById("grpSide");
+      box.innerHTML = groupSideHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      box.querySelectorAll("[data-grp-side]").forEach(function (b) {
+        b.onclick = function () {
+          var act = b.getAttribute("data-grp-side"), gid = b.getAttribute("data-grp");
+          if (!GROUP_SIDE_ROUTE[act]) return;
+          if (act === "remove" && !window.confirm("Leave this group? It stops seeing this hospital's counts at once.")) return;
+          if (act === "adopt" && !window.confirm("Copy the group's recommended settings into this hospital's own configuration? Settings of the same name are replaced; this is recorded in the audit trail.")) return;
+          b.disabled = true;
+          c.api("/group/" + GROUP_SIDE_ROUTE[act], { orgId: c.state.orgId, groupId: gid }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; say("grpSideMsg", x); return; }
+            if (act === "adopt" && x.org) c.state.org = x.org;
+            c.toast({ accept: "Joined the group.", decline: "Invitation declined.", remove: "Left the group.", adopt: "Recommended settings copied into this hospital." }[act]);
+            WSQ.render("admin");
+          });
+        };
+      });
+    });
+    var run = c.api("/group/my-groups").then(function (r) {
+      var box = document.getElementById("grpRun");
+      box.innerHTML = groupRunHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      var create = document.getElementById("grpCreate");
+      if (create) create.onclick = function () {
+        var name = (document.getElementById("grpNewName").value || "").trim();
+        if (!name) { say("grpRunMsg", { message: "Give the group a name." }); return; }
+        create.disabled = true;
+        c.api("/group/create", { name: name }).then(function (x) {
+          if (!x || !x.ok) { create.disabled = false; say("grpRunMsg", x); return; }
+          c.toast("Group created."); WSQ.render("admin");
+        });
+      };
+      box.querySelectorAll("[data-grp-run]").forEach(function (b) {
+        b.onclick = function () {
+          var act = b.getAttribute("data-grp-run"), gid = b.getAttribute("data-grp"), payload = { groupId: gid };
+          if (!GROUP_RUN_ROUTE[act]) return;
+          if (act === "invite") {
+            payload.orgId = (box.querySelector('[data-grp-invite-input="' + gid + '"]').value || "").trim();
+            if (!payload.orgId) { say("grpRunMsg", { message: "Enter the hospital's id or SMD code." }); return; }
+          } else if (act === "remove") {
+            payload.orgId = b.getAttribute("data-org");
+            if (!window.confirm("Remove this hospital from the group?")) return;
+          } else if (act === "policy") {
+            var raw = (box.querySelector('[data-grp-policy-input="' + gid + '"]').value || "").trim();
+            try { payload.policy = raw ? JSON.parse(raw) : null; } catch (e) { say("grpRunMsg", { message: "That is not valid JSON, so nothing was published." }); return; }
+          }
+          b.disabled = true;
+          c.api("/group/" + GROUP_RUN_ROUTE[act], payload).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; say("grpRunMsg", x); return; }
+            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published." }[act]);
+            WSQ.render("admin");
+          });
+        };
+      });
+    });
+    return Promise.all([side, run]);
+  }
+
   // ---- MaiK clinical AI (WardSynQ hospitals only) --------------------------------------------------
   // Status shape comes verbatim from functions/_wardsynq/maik-gateway.js maikStatus(), wrapped in
   // {ok:true,...} by GET /ward/maik-status (functions/api/queue/[[path]].js). No key material is ever
