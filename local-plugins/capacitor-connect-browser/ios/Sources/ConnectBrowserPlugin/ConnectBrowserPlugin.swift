@@ -327,7 +327,10 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             vc.view.frame = CGRect(x: 0, y: bounds.height - 2, width: bounds.width, height: 2)
             vc.view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         } else {
-            vc.view.frame = bounds
+            // Never cover the app view completely: once it was fully occluded the app WKWebView (the
+            // engine) stopped running, so the doctor's sign-in was never noticed in login mode
+            // (iPhone 15 Pro, 2026-09-15, seen on screen). A 2pt strip left uncovered keeps it alive.
+            vc.view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: max(bounds.height - 2, 0))
             vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }

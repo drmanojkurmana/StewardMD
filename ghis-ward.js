@@ -1243,11 +1243,14 @@
         loadMedications: function(patientId) {
           var sec = document.getElementById('ghisMedSection');
           if (!sec) return;
+          // Medications sit LAST in the drawer and fold shut: a 166-item chart pushed labs and imaging
+          // off the screen (owner, 2026-09-15). Labs and imaging are what the doctor opened this for.
+          try { if (sec.parentNode && sec.parentNode.lastElementChild !== sec) sec.parentNode.appendChild(sec); } catch (e) {}
           authFetch('/medications?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
               var rows = (j && j.rows) || [];
               if (rows.length === 0) { sec.innerHTML = ''; return; }
-              var html = '<div class="ghis-lab-section-title">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + '</div>';
+              var html = '<details class="ghis-med-fold"><summary class="ghis-lab-section-title" style="cursor:pointer;list-style:none">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + ' <span style="font-weight:400;opacity:.6">(tap to expand)</span></summary>';
               rows.forEach(function(m) {
                 var title = m.drugText || m.genericName || 'Medication';
                 var sub = [m.dosage, m.route, m.frequency, m.duration].filter(Boolean).join(' · ');
@@ -1259,7 +1262,7 @@
                   (sub ? '<div class="ghis-pt-meta" style="margin-top:4px">' + esc(sub) + '</div>' : '') +
                 '</div>';
               });
-              html += '<div class="ghis-rad-divider"></div>';
+              html += '</details><div class="ghis-rad-divider"></div>';
               sec.innerHTML = html;
             })
             .catch(function() { sec.innerHTML = ''; });

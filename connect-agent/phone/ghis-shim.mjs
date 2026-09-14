@@ -15,8 +15,8 @@ const RX = {
   result: /result|value|finding/i,
   units: /unit/i,
   range: /range|reference|normal|biological/i,
-  low: /\blow\b|\bmin/i,
-  high: /\bhigh\b|\bmax/i,
+  low: /\blow\b|^low(value|limit|range)?$|\bmin|lower/i,
+  high: /\bhigh\b|^high(value|limit|range)?$|\bmax|upper/i,
   drug: /drug|medicine|medication|product\s*name|item|generic|brand/i,
   code: /code/i,
   dosage: /dos/i,
@@ -28,9 +28,18 @@ const RX = {
   visit: /visit|episode|admission|encounter|ip\s*no/i,
 };
 
+/* EXACT BEATS FUZZY. A payload that carries ResultDate, Result_Type and Result answers "result" with
+ * the key named exactly `result`, not whichever fuzzy match came first in key order (that is how a
+ * live adapter read 0 of 14 lab values right, 2026-09-15). Exact match on the bare word first, then the
+ * fuzzy fallback for views no brain mapped. */
 function col(row, re, not) {
-  for (const k of Object.keys(row || {})) {
-    if (k.charAt(0) === '_') continue;
+  const keys = Object.keys(row || {}).filter((k) => k.charAt(0) !== '_');
+  const word = String(re.source).replace(/^[^a-z]*/i, '').match(/^[a-z]+/i);
+  if (word) {
+    const exact = keys.find((k) => k.toLowerCase().replace(/[^a-z]/g, '') === word[0].toLowerCase() && !(not && not.test(k)));
+    if (exact) { const v = String(row[exact] == null ? '' : row[exact]).trim(); if (v) return v; }
+  }
+  for (const k of keys) {
     if (re.test(k) && !(not && not.test(k))) { const v = String(row[k] == null ? '' : row[k]).trim(); if (v) return v; }
   }
   return '';
@@ -288,8 +297,22 @@ export function sectionBody(sections, heading) {
 }
 
 /** GET /radiology -> { orders }; GET /radiology-report -> the report text of one row. */
+/* A HEADER ROW IS NOT A STUDY. A radiology list read from a page can leak its column labels as a row
+ * ({col0:'Patient ID'}, {col1:'Age / Gender'}, ...): every value is a label that also names a column
+ * somewhere in the rows. Those rows are dropped, as is any "order" with neither a date nor a title
+ * beyond a label - the live drawer once showed eight such "studies" for a patient with none. */
+function dropHeaderRows(rows) {
+  const labels = new Set();
+  for (const r of rows) for (const k of Object.keys(r)) if (k.charAt(0) !== '_') labels.add(String(k).toLowerCase().replace(/[^a-z0-9]/g, ''));
+  return rows.filter((r) => {
+    const vals = Object.keys(r).filter((k) => k.charAt(0) !== '_').map((k) => String(r[k] == null ? '' : r[k]).trim()).filter(Boolean);
+    if (!vals.length) return false;
+    return !vals.every((v) => labels.has(v.toLowerCase().replace(/[^a-z0-9]/g, '')));
+  });
+}
+
 export function radiologyOrders(sections, patient) {
-  const rows = rowsOf(sections, 'radiology');
+  const rows = dropHeaderRows(rowsOf(sections, 'radiology'));
   const titleOf = (r) => col(r, /description|study|test_?desc|examination|procedure/i) || col(r, RX.name, /\bid\b|code/i) || firstText(r) || 'Radiology';
   /* The hand-built proxy's radiology orders carry no status field: mirror it exactly. */
   const orders = rows.map((r, i) => ({

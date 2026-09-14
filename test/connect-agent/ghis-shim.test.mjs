@@ -130,6 +130,17 @@ test('numResult strips units and prefixes; narratives and ranges become null', (
   assert.equal(numResult(null), null);
 });
 
+test('without roles, an exact key name beats a fuzzy match that comes first, and LowValue/HighValue make a range', () => {
+  // The live approved GHIS adapter (discovered before column learning) returns rows shaped like this:
+  // ResultDate and Result_Type precede Result, LowValue/HighValue carry the range. A fuzzy /result/
+  // match on key order read 0 of 14 values right; exact-first reads them all.
+  const d = detailFor({ dept: 'Haematology', date: '02/09/2026', rows: [
+    { ResultDate: '02/09/2026', Result_Type: 'a', TestName: 'Haemoglobin', LowValue: '13', HighValue: '17', Units: 'g/dL', Result: '11.2' },
+    { ResultDate: '02/09/2026', Result_Type: 'a', TestName: 'WBC', LowValue: '4', HighValue: '11', Units: '10^3/uL', Result: '9.1' },
+  ] });
+  assert.deepEqual(d.tests.map((t) => [t.test, t.result, t.units, t.range]), [['Haemoglobin', '11.2', 'g/dL', '13 - 17'], ['WBC', '9.1', '10^3/uL', '4 - 11']]);
+});
+
 test('learned column roles win over key-name guesses (a misleading ValueType/Value payload)', () => {
   // The response labels its columns unhelpfully: Value is a code, ValueType is the number the doctor
   // saw. Discovery learned the roles (role -> screen header) by value; the shim must read those, not
