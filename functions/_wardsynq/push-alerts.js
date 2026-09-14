@@ -80,12 +80,14 @@ function serverPushChannel(deps) {
     const loop = { id: payload.loopId, reportId: payload.reportId, encounterId: payload.encounterId };
     const who = await resolveRecipients({ orgId: deps.orgId, loop, level, policy: deps.policy }, deps.readers);
     const notice = { nid: null, kind: "critical", level, at, recipients: who.recipients, noDevice: [], sent: 0, total: 0, receipts: [] };
-    // The named level-2 ward rule, the ward it tested (null: no ward recorded), people per role, and the total resolved (owner 2026-09-15).
+    // The named level-2 ward rule, the ward it tested, people per role, and the total resolved (owner 2026-09-15); for a patient with
+    // no ward, ward null and noWardCover: the admitting doctor (or why skipped) and the residents on duty, by department or hospital.
     if (who.wardRule) notice.wardRule = { ...who.wardRule, recipients: who.recipients.length };
     let result;
     if (!who.recipients.length) {
       notice.reason = "NO_RECIPIENT";
-      result = { delivered: false, detail: "NO_RECIPIENT: nobody could be resolved to tell about this result (no ordering clinician, nobody on duty in the unit with a listed role, no escalation contact)" };
+      if (who.why) notice.why = who.why;
+      result = { delivered: false, detail: who.why ? `NO_RECIPIENT: ${who.why}` : "NO_RECIPIENT: nobody could be resolved to tell about this result (no ordering clinician, nobody on duty in the unit with a listed role, no escalation contact)" };
     } else {
       const tokenIds = new Set();
       for (const r of who.recipients) {
