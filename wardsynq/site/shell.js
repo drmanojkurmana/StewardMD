@@ -15,8 +15,8 @@
   "use strict";
   var G = window;
   var API = "/api/queue";
-  var LS = { tok: "smd_opd_staff_tok", tt: "smd_opd_toktype", hosp: "smd_opd_hospital", wp: "smd_opd_workplace" };
-  var st = { tokType: "", tok: "", orgId: "", who: null, org: null, orgs: null, page: "", arg: "", fbUser: null, fbReady: false };
+  var LS = { tok: "smd_opd_staff_tok", tt: "smd_opd_toktype", hosp: "smd_opd_hospital", wp: "smd_opd_workplace", navLang: "wsqStaffNavLang" };
+  var st = { tokType: "", tok: "", orgId: "", who: null, org: null, orgs: null, page: "", arg: "", fbUser: null, fbReady: false, navLang: "en" };
   var PAGES = {};
 
   // ---- small helpers -----------------------------------------------------------------------
@@ -31,6 +31,29 @@
   }
   G.toast = G.toast || toast;
   function when(ms_) { return new Promise(function (r) { setTimeout(r, ms_); }); }
+
+  /* ---- staff-shell navigation language (owner decision 2026-09-15): NAV LABELS ONLY ------------
+   * Every clinical screen stays English; only the rail, the top toolbar and the Admin Center tabs
+   * (nav.* keys in i18n.js) are looked up through st.navLang. document.documentElement.lang is never
+   * touched - a screen reader must still read clinical content as English - so the translated lang
+   * attribute is set on the rail/tabs containers only (ctx.navLang, below).
+   * Loading: reuses print-lang.js's ensureLoaded() and its wardsynq/site/i18n/<code>.js cache token,
+   * already on this page for the bilingual print preview - a second loader would duplicate it. */
+  function navTr(key) { return G.WSQI18n ? G.WSQI18n.t(key, null, st.navLang) : key; }
+  function setNavLang(code) {
+    var apply = function () {
+      st.navLang = (G.WSQI18n && G.WSQI18n.offered(code)) ? code : "en";
+      lsSet(LS.navLang, st.navLang === "en" ? "" : st.navLang);
+      render(st.page);
+    };
+    if (code !== "en" && G.WSQPrint && G.WSQPrint.ensureLoaded) G.WSQPrint.ensureLoaded(code, apply); else apply();
+  }
+  function langPicker() {
+    var langs = G.WSQI18n ? G.WSQI18n.languages() : [{ code: "en", name: "English" }];
+    var opts = langs.map(function (l) { return '<option value="' + esc(l.code) + '"' + (l.code === st.navLang ? " selected" : "") + ">" + esc(l.name) + "</option>"; }).join("");
+    return '<label class="nav-lang"><span class="sr-only">' + esc(navTr("lang.label")) + '</span><select id="navLangPick">' + opts + "</select></label>";
+  }
+  document.addEventListener("change", function (e) { if (e.target && e.target.id === "navLangPick") setNavLang(e.target.value); });
 
   // ---- identity: the SAME two credentials ward.js and the OPD console accept ----------------
   G.SMD_AUTH = {
@@ -205,6 +228,7 @@
     var tools = st.tokType ? '<div class="tools">' +
       (org ? '<button class="btn" type="button" data-go="home">Map</button>' : "") +
       '<button class="btn" type="button" data-go="hospitals">Hospital</button>' +
+      langPicker() +
       '<button class="btn" type="button" data-go="logout">Sign out</button></div>' : "";
     var h = '<div class="brandbar"><img class="brand-mark" src="/wardsynq/ui/brand/wardsynq-lockup.png" alt="" aria-hidden="true" width="261" height="61" decoding="async"><span class="spring"></span>' + tools + "</div>";
     if (org) h += '<div class="hospbar"><span class="name">' + esc(org.name || org.id) + '</span><span class="facts">' + esc(org.code || org.id) +
@@ -229,12 +253,14 @@
   function rail(page) {
     if (!st.org) return "";
     var native = isWardsynq();
-    var item = function (go, label) { return '<a href="#/' + go.replace(/^ward:/, "ward/") + '"' + (page === go ? ' aria-current="page"' : "") + ">" + esc(label) + "</a>"; };
-    var h = '<div class="rail"><div class="heading">WardSynQ</div>' + item("home", "Map");
-    if (native) h += item("workstation", "Workstation") + item("ward:", "Ward") + item("ward:board", "Bed board") + item("ward:edboard", "Emergency") + item("ward:critsboard", "Critical results") + item("ward:labboard", "Laboratory") + item("ward:radboard", "Radiology");
-    h += item("opd", "OPD desk") + item("patients", "Patients");
-    if (native) h += '<div class="heading">Command</div>' + item("ward:flowcommand", "Command center") + item("ward:twin", "Digital twin") + item("ward:reports", "Reports") + item("ward:cashier", "Billing") + item("ward:integration", "Integration") + item("maik", "MaiK");
-    h += '<div class="heading">Administration</div>' + item("admin", "Admin Center") + item("audit", "Audit and security") + item("security", "Sign-in security") + item("rota", "Staff rota") + item("accounts", "Accounts") + item("group", "Group overview") + "</div>";
+    // WardSynQ is the product's own name, unchanged in every language - not a nav.* key.
+    var item = function (go, key) { return '<a href="#/' + go.replace(/^ward:/, "ward/") + '"' + (page === go ? ' aria-current="page"' : "") + ">" + esc(navTr(key)) + "</a>"; };
+    var heading = function (key) { return '<div class="heading">' + esc(navTr(key)) + "</div>"; };
+    var h = '<div class="rail" lang="' + esc(G.WSQI18n ? G.WSQI18n.normalize(st.navLang) : "en") + '"><div class="heading">WardSynQ</div>' + item("home", "nav.map");
+    if (native) h += item("workstation", "nav.workstation") + item("ward:", "nav.ward") + item("ward:board", "nav.beds") + item("ward:edboard", "nav.emergency") + item("ward:critsboard", "nav.criticals") + item("ward:labboard", "nav.lab") + item("ward:radboard", "nav.radiology");
+    h += item("opd", "nav.opd") + item("patients", "nav.patients");
+    if (native) h += heading("nav.command") + item("ward:flowcommand", "nav.commandCenter") + item("ward:twin", "nav.twin") + item("ward:reports", "nav.reports") + item("ward:cashier", "nav.billing") + item("ward:integration", "nav.integration") + item("maik", "nav.maik");
+    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("rota", "nav.rota") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
     return h;
   }
   function render(page, extra) {
@@ -252,7 +278,8 @@
       app.innerHTML = bar() + '<div class="wrap' + (railHtml ? "" : " norail") + '">' + railHtml + '<main class="work" id="page"></main></div>';
     }
     var el = $("page");
-    var ctx = { el: el, api: api, download: download, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when };
+    var ctx = { el: el, api: api, download: download, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when,
+      navTr: navTr, navLang: G.WSQI18n ? G.WSQI18n.normalize(st.navLang) : "en" };
     try { var out = def.render(ctx, extra); if (out && typeof out.then === "function") out.catch(function (e) { el.innerHTML += '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }); }
     catch (e) { el.innerHTML = '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }
   }
@@ -602,14 +629,21 @@
 
   function boot() {
     st.tokType = lsGet(LS.tt); st.tok = lsGet(LS.tok); st.orgId = lsGet(LS.hosp);
-    if (st.tokType === "account" && !st.tok) {
-      // Wait for the Firebase session to restore before deciding the account is gone.
-      var settled = false;
-      var done = function (u) { if (settled) return; settled = true; st.fbReady = true; st.fbUser = u || null; if (!u) { st.tokType = ""; lsSet(LS.tt, ""); } route(); };
-      try { firebase.auth().onAuthStateChanged(done); setTimeout(function () { done(firebase.auth().currentUser); }, 4000); } catch (e) { done(null); }
-    } else if (st.tokType === "staff" && !st.tok) { st.tokType = ""; route(); }
-    else route();
-    window.addEventListener("hashchange", route);
+    var savedNavLang = lsGet(LS.navLang);
+    st.navLang = (G.WSQI18n && G.WSQI18n.offered(savedNavLang)) ? savedNavLang : "en";
+    var afterLang = function () {
+      if (st.tokType === "account" && !st.tok) {
+        // Wait for the Firebase session to restore before deciding the account is gone.
+        var settled = false;
+        var done = function (u) { if (settled) return; settled = true; st.fbReady = true; st.fbUser = u || null; if (!u) { st.tokType = ""; lsSet(LS.tt, ""); } route(); };
+        try { firebase.auth().onAuthStateChanged(done); setTimeout(function () { done(firebase.auth().currentUser); }, 4000); } catch (e) { done(null); }
+      } else if (st.tokType === "staff" && !st.tok) { st.tokType = ""; route(); }
+      else route();
+      window.addEventListener("hashchange", route);
+    };
+    // Load the remembered nav language's file BEFORE the first paint, so a returning visitor never
+    // sees an English flash while it loads (there is no re-render once it arrives).
+    if (st.navLang !== "en" && G.WSQPrint && G.WSQPrint.ensureLoaded) G.WSQPrint.ensureLoaded(st.navLang, afterLang); else afterLang();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();

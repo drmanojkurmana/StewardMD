@@ -16,8 +16,11 @@
 /* ---- chrome: the mark above, the hospital line below, exactly the workstation's two bars ---- */
 .brandbar { display: flex; align-items: center; gap: var(--sp-4); }
 .brandbar .spring { flex: 1 1 auto; }
-.brandbar .tools { display: flex; gap: var(--sp-2); }
+.brandbar .tools { display: flex; gap: var(--sp-2); align-items: center; }
 .brandbar .tools .btn { min-height: 32px; padding: 0 11px; font-size: var(--t-micro); }
+/* Staff-shell nav-language picker (owner decision 2026-09-15): its own size, not the form-field 100%. */
+.brandbar .tools .nav-lang select { width: auto; min-height: 32px; padding: 0 7px; font-size: var(--t-micro); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 .hospbar {
   display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap;
   padding: var(--sp-3) var(--sp-6) var(--sp-3);
