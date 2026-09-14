@@ -680,3 +680,10 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - S3 P0: critical results pushed to clinicians via the existing StewardMD push (O2), no patient name in push or SMS, bed and ward allowed (O3), SMS fallback via 2Factor with per-hospital DLT template (O4; TWOFACTOR_API_KEY present in Pages), default ladder approved by Dr Manoj Kurmana (O5). Off until a hospital turns on wardsynq.alerts.push.enabled. Worker stewardmd-api deployed with */5 cron to /api/queue/ops/tick-all (UPDATES_ADMIN_TOKEN present). Nurse-in-charge has no role marker, so level 2 tells every nurse on duty in the ward; app client (P1: register-member caller, thin payload handling) not built, so phones receive nothing until P1 ships.
 - A3: ABDM v3 branch merge in progress on abdm-v3-merge (sandbox ABDM vars kept out of wrangler.toml).
 - Regression 6768, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live ward.js site84, admin.js 31.
+
+### 2026-09-14 (night, 6) - ABDM v3 branch merged (owner A3)
+
+- origin/feat/abdm-v3-reconcile merged into wardsynq-product (merge 6cc399e1): one SCCM 1.1 with five collections, one ABDM_ENV scheme with sandbox identity in config.js only (no ABDM vars in wrangler.toml), production gateway calls refused (A2), consent route sends the doctor registration number, V3 HIU data push lands through makeConsumeAndLand (shape UNCONFIRMED), received immunizations filed as Immunization, external invoices as a clinical note (not money owed; owner to confirm). A5 role table recorded, enforced with the ABHA desk phase.
+- Production D1: db/connect_abdm_schema.sql applied (connect_abdm_enrol_consent, connect_abdm_demographic added) and scripts/abdm-migrate.mjs --apply added consent_request_id and last_fetched_at; re-plan reports current.
+- The branch owner session should rebase any further ABDM work on wardsynq-product.
+- Regression 6796, 0 fail (plus 2837 ABDM/connect tests in the merge worktree). Every route has a screen and a test. Security scan 0 findings.
