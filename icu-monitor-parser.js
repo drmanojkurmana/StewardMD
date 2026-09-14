@@ -144,6 +144,9 @@
   // Two readings agree when their digits match, or when their MULTI-DIGIT tokens match exactly: a stray
   // single digit from a glued icon ("2° 100": the SpO2 subscript) is not a different reading, while a
   // split number ("1 08/64" vs "108/64") still is.
+  // An OCR engine that reports no confidence (older iOS plugin builds) must stay UNKNOWN, not become 0:
+  // a 0 here made the quality gate call every phone photo "unreadable" (2026-09-14 device benchmark).
+  function maxConf(a, b) { return a == null ? (b == null ? null : b) : (b == null ? a : Math.max(a, b)); }
   function digitsAgree(a, b) {
     if (digitsOf(a) === digitsOf(b)) return true;
     var ma = (String(a).match(/\d{2,}/g) || []).join(","), mb = (String(b).match(/\d{2,}/g) || []).join(",");
@@ -237,7 +240,7 @@
         // not a disagreement); several crop boxes are a finer split (label separated from value)
         // ...unless that one crop box is clearly narrower: the crop separated a fused label ("ART T18/76"
         // → "118/76 (90)"; the small "ART" is added on its own as a recovered box)
-        if (cs.length === 1 && !(cs[0].w < 0.85 * f.w && normText(cs[0].text) !== normText(f.text))) { out.push(assign(f, { conf: Math.max(f.conf == null ? 0 : f.conf, cs[0].conf == null ? 0 : cs[0].conf), scale: "both", confirmed: true })); return; }
+        if (cs.length === 1 && !(cs[0].w < 0.85 * f.w && normText(cs[0].text) !== normText(f.text))) { out.push(assign(f, { conf: maxConf(f.conf, cs[0].conf), scale: "both", confirmed: true })); return; }
         if (normText(joined) !== normText(f.text)) notes.push("crop re-read " + JSON.stringify(f.text) + " as " + JSON.stringify(joined));
         cs.forEach(function (c) { out.push(assign({}, c, { scale: "crop", replaced: f.text, confirmed: !!digitsOf(c.text) })); });
         return;

@@ -1,0 +1,78 @@
+{
+  "id": "owner-49cd8f46",
+  "manufacturer": "ventilator-other",
+  "layout": "niv-vent-right-column",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured"
+  ],
+  "image": "49cd8f46.jpg",
+  "imageSize": {
+    "w": 1280,
+    "h": 720
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 22
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "setRR": 15,
+    "rrLimits": [
+      30,
+      5
+    ],
+    "ppeak": 13,
+    "mve": 5.0,
+    "o2conc": 36,
+    "leakage": 100,
+    "settings": {
+      "o2": 100,
+      "peep": 5.0,
+      "pcAbovePeep": 10,
+      "ie": "1:4",
+      "timeRise": 5
+    },
+    "o2boost": 100,
+    "banner": "O2 concentration low",
+    "bedLabel": "MICU41"
+  },
+  "notes": "NIV ventilator (brand not visible; MICU41). Measured RR 22 b/min labelled RR; settings row RR 15 is the set rate."
+}

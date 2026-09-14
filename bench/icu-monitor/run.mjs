@@ -59,6 +59,7 @@ function findCases(dir, acc = []) {
 }
 let probeBin = null;
 function probe() {
+  if (flag("--cached-only")) throw new Error("--cached-only: no admissible cache, refusing to run Mac Vision");
   if (probeBin) return probeBin;
   const src = join(HERE, "visionprobe.swift"), bin = join(HERE, "out", "visionprobe");
   mkdirSync(join(HERE, "out"), { recursive: true });
@@ -73,7 +74,9 @@ function vision(img, extra) {
   if (j.level !== "accurate") throw new Error("vision ran at level " + j.level + "; refusing to score it");
   return j;
 }
-const admissible = (j) => j && j.level === "accurate" && j.obs && (j.obs.length === 0 || j.obs[0].q);
+// Mac Vision caches carry the quad (q); caches read on the iPhone (bench/icu-monitor/device-run.mjs,
+// engine "ios-device") may not, because the installed plugin does not return it
+const admissible = (j) => j && j.level === "accurate" && j.obs && (j.obs.length === 0 || j.obs[0].q || j.engine === "ios-device");
 function fullPass(casePath, img) {
   const cache = casePath.replace(/\.json$/, ".obs.json");
   if (!LIVE_OCR && existsSync(cache)) { const j = JSON.parse(readFileSync(cache, "utf8")); if (admissible(j)) return j; }

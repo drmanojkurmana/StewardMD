@@ -1,0 +1,91 @@
+{
+  "id": "owner-stock-dreamstime",
+  "manufacturer": "other",
+  "layout": "or-widescreen",
+  "difficulty": [
+    "stock-photo",
+    "watermark",
+    "low-resolution",
+    "dual-pressure"
+  ],
+  "image": "stock-dreamstime.jpg",
+  "imageSize": {
+    "w": 800,
+    "h": 534
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 65
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 98
+    },
+    "sbp": {
+      "status": "ambiguous",
+      "why": "ART 90/45(60) under watermark and NIBP 89/41(54) both shown",
+      "value": 90
+    },
+    "dbp": {
+      "status": "ambiguous",
+      "why": "ART and NIBP both shown",
+      "value": 45
+    },
+    "map": {
+      "status": "ambiguous",
+      "why": "ART and NIBP both shown",
+      "value": 60
+    },
+    "rr": {
+      "status": "not_visible",
+      "why": "no RR numeric"
+    },
+    "pulse": {
+      "status": "ambiguous",
+      "why": "small 65 beside PI 5.92; label unreadable",
+      "value": 65
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "ambiguous",
+      "why": "20.1 and 33.8 shown with unreadable labels"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "ambiguous",
+      "why": "dreamstime watermark runs across the ART row",
+      "value": {
+        "sbp": 90,
+        "dbp": 45,
+        "map": 60
+      }
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 89,
+        "dbp": 41,
+        "map": 54
+      }
+    }
+  },
+  "distractors": {
+    "timers": [
+      "03:46:13",
+      "01:53:58"
+    ],
+    "trendTable": "tiny table centre",
+    "pi": 5.92,
+    "clock": "13:26",
+    "anaesthesiaScreen": "second device on the right",
+    "watermark": "dreamstime"
+  },
+  "notes": "Operating-room monitor stock photo (brand not visible, Turkish UI), 800x534."
+}

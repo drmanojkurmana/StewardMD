@@ -1,0 +1,109 @@
+{
+  "id": "owner-97c20181",
+  "manufacturer": "philips-g40e",
+  "layout": "g40e-12lead-nibp-trend",
+  "difficulty": [
+    "real-photo",
+    "trend-table",
+    "invalid-values",
+    "window-glare"
+  ],
+  "image": "97c20181.jpg",
+  "imageSize": {
+    "w": 1280,
+    "h": 576
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 59
+    },
+    "spo2": {
+      "status": "not_visible",
+      "why": "SpO2 shows - (probe off)"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 73,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 36,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 49,
+      "source": "NIBP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 15
+    },
+    "pulse": {
+      "status": "not_visible",
+      "why": "PR shows -"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "visible",
+      "value": 22.3
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 73,
+        "dbp": 36,
+        "map": 49
+      }
+    }
+  },
+  "distractors": {
+    "nibpTrend": {
+      "07:18": [
+        187,
+        137,
+        155
+      ],
+      "07:49": [
+        86,
+        54,
+        66
+      ],
+      "08:24": [
+        73,
+        36,
+        49
+      ]
+    },
+    "nibpLimits": [
+      160,
+      100
+    ],
+    "hrLimits": [
+      120,
+      40
+    ],
+    "rrLimits": [
+      40,
+      6
+    ],
+    "datetime": "21-08-2025 12:31:58",
+    "banner": [
+      "!!! V-Tach",
+      "!! RESP: RR Low"
+    ]
+  },
+  "notes": "Same G40E as 4e9c199c, 80 min later. Trend table SYS 187 86 73 are distractors."
+}
