@@ -204,7 +204,25 @@
     "nav.audit": "ऑडिट और सुरक्षा",
     "nav.security": "साइन-इन सुरक्षा",
     "nav.rota": "स्टाफ रोस्टर",
-    "nav.accounts": "अकाउंट"
+    "nav.accounts": "अकाउंट",
+    "nav.group": "समूह अवलोकन",
+    "nav.admin.hospital": "अस्पताल",
+    "nav.admin.departments": "विभाग",
+    "nav.admin.wards": "वार्ड और बेड",
+    "nav.admin.rooms": "कमरे",
+    "nav.admin.staff": "स्टाफ और भूमिकाएं",
+    "nav.admin.tariff": "दर सूची",
+    "nav.admin.advisories": "सुरक्षा रिमाइंडर",
+    "nav.admin.forms": "फॉर्म",
+    "nav.admin.pathways": "क्लिनिकल पाथवे",
+    "nav.admin.group": "अस्पताल समूह",
+    "nav.admin.seed": "क्लिनिकल सीड डेटा",
+    "nav.admin.maik": "MaiK क्लिनिकल AI",
+    "nav.admin.security": "सुरक्षा समीक्षा",
+    "nav.admin.health": "सिस्टम स्वास्थ्य",
+    "nav.admin.export": "डेटा निर्यात",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "इंटीग्रेशन"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("hi", "हिन्दी", catalog, { reviewed: false });

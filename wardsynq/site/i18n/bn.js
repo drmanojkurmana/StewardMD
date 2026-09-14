@@ -207,7 +207,25 @@
     "nav.audit": "নিরীক্ষা ও নিরাপত্তা",
     "nav.security": "সাইন-ইন নিরাপত্তা",
     "nav.rota": "কর্মী তালিকা",
-    "nav.accounts": "অ্যাকাউন্ট"
+    "nav.accounts": "অ্যাকাউন্ট",
+    "nav.group": "গ্রুপ ওভারভিউ",
+    "nav.admin.hospital": "হাসপাতাল",
+    "nav.admin.departments": "বিভাগসমূহ",
+    "nav.admin.wards": "ওয়ার্ড এবং বেডসমূহ",
+    "nav.admin.rooms": "রুমসমূহ",
+    "nav.admin.staff": "কর্মী ও ভূমিকা",
+    "nav.admin.tariff": "মূল্য তালিকা",
+    "nav.admin.advisories": "সুরক্ষা পরামর্শ",
+    "nav.admin.forms": "ফর্মসমূহ",
+    "nav.admin.pathways": "ক্লিনিক্যাল পাথওয়ে",
+    "nav.admin.group": "হাসপাতাল গ্রুপ",
+    "nav.admin.seed": "ক্লিনিক্যাল সিড ডেটা",
+    "nav.admin.maik": "MaiK ক্লিনিক্যাল এআই",
+    "nav.admin.security": "নিরাপত্তা পর্যালোচনা",
+    "nav.admin.health": "সিস্টেমের অবস্থা",
+    "nav.admin.export": "ডেটা এক্সপোর্ট",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "ইন্টিগ্রেশন"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("bn", "বাংলা", catalog, { reviewed: false });

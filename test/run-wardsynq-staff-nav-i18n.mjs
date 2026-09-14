@@ -85,13 +85,13 @@ try {
     if (rail.getAttribute('lang') !== 'te') return 'the rail container should carry lang=te, the translated chrome only';
     return true;`));
 
-  await step("Admin Center: nav.admin.* has no Telugu yet, so tabs correctly fall back to English, never a raw key", async () => {
+  await step("Admin Center: the tab strip is in Telugu (catalogs are complete), never a raw key", async () => {
     await ev(`location.hash = '#/admin'; return 1;`);
     const ok = await until(`return document.querySelector('.tabs [data-tab="hospital"]') ? 'y' : '';`, 8000);
     if (ok !== "y") return "admin page never rendered";
     return ev(`
       var b = document.querySelector('.tabs [data-tab="hospital"]');
-      if (b.textContent !== 'Hospital') return 'expected the English fallback, got: ' + b.textContent;
+      if (b.textContent === 'Hospital' || !/[\\u0C00-\\u0C7F]/.test(b.textContent)) return 'expected the Telugu tab label, got: ' + b.textContent;
       if (/nav\\.admin/.test(b.textContent)) return 'a raw key leaked onto the screen';
       return true;`);
   });

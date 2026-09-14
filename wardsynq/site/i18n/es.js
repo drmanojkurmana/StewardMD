@@ -204,7 +204,25 @@
     "nav.audit": "Auditoría y seguridad",
     "nav.security": "Seguridad de inicio de sesión",
     "nav.rota": "Turnos del personal",
-    "nav.accounts": "Cuentas"
+    "nav.accounts": "Cuentas",
+    "nav.group": "Resumen del grupo",
+    "nav.admin.hospital": "Hospital",
+    "nav.admin.departments": "Departamentos",
+    "nav.admin.wards": "Salas y camas",
+    "nav.admin.rooms": "Habitaciones",
+    "nav.admin.staff": "Personal y roles",
+    "nav.admin.tariff": "Lista de precios",
+    "nav.admin.advisories": "Recordatorios de seguridad",
+    "nav.admin.forms": "Formularios",
+    "nav.admin.pathways": "Rutas clínicas",
+    "nav.admin.group": "Grupo hospitalario",
+    "nav.admin.seed": "Datos clínicos iniciales",
+    "nav.admin.maik": "IA clínica MaiK",
+    "nav.admin.security": "Revisión de seguridad",
+    "nav.admin.health": "Estado del sistema",
+    "nav.admin.export": "Exportación de datos",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "Integraciones"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("es", "Español", catalog, { reviewed: false });

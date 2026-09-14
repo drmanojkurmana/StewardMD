@@ -207,7 +207,25 @@
     "nav.audit": "ഓഡിറ്റും സുരക്ഷയും",
     "nav.security": "സൈൻ-ഇൻ സുരക്ഷ",
     "nav.rota": "സ്റ്റാഫ് റോസ്റ്റർ",
-    "nav.accounts": "അക്കൗണ്ടുകൾ"
+    "nav.accounts": "അക്കൗണ്ടുകൾ",
+    "nav.group": "ഗ്രൂപ്പ് അവലോകനം",
+    "nav.admin.hospital": "ആശുപത്രി",
+    "nav.admin.departments": "ഡിപ്പാർട്ട്‌മെന്റുകൾ",
+    "nav.admin.wards": "വാർഡുകളും ബെഡുകളും",
+    "nav.admin.rooms": "മുറികൾ",
+    "nav.admin.staff": "ജീവനക്കാരും ചുമതലകളും",
+    "nav.admin.tariff": "നിരക്ക് പട്ടിക",
+    "nav.admin.advisories": "സുരക്ഷാ നിർദ്ദേശങ്ങൾ",
+    "nav.admin.forms": "ഫോമുകൾ",
+    "nav.admin.pathways": "ക്ലിനിക്കൽ പാത്ത്‌വേകൾ",
+    "nav.admin.group": "ഹോസ്പിറ്റൽ ഗ്രൂപ്പ്",
+    "nav.admin.seed": "ക്ലിനിക്കൽ സീഡ് ഡാറ്റ",
+    "nav.admin.maik": "MaiK ക്ലിനിക്കൽ AI",
+    "nav.admin.security": "സെക്യൂരിറ്റി റിവ്യൂ",
+    "nav.admin.health": "സിസ്റ്റം ഹെൽത്ത്",
+    "nav.admin.export": "ഡാറ്റാ എക്‌സ്‌പോർട്ട്",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "ഇന്റഗ്രേഷനുകൾ"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("ml", "മലയാളം", catalog, { reviewed: false });

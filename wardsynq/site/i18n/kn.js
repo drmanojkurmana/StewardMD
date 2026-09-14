@@ -207,7 +207,25 @@
     "nav.audit": "ಲೆಕ್ಕಪರಿಶೋಧನೆ ಮತ್ತು ಭದ್ರತೆ",
     "nav.security": "ಸೈನ್-ಇನ್ ಭದ್ರತೆ",
     "nav.rota": "ಸಿಬ್ಬಂದಿ ವೇಳಾಪಟ್ಟಿ",
-    "nav.accounts": "ಖಾತೆಗಳು"
+    "nav.accounts": "ಖಾತೆಗಳು",
+    "nav.group": "ಗುಂಪಿನ ಅವಲೋಕನ",
+    "nav.admin.hospital": "ಆಸ್ಪತ್ರೆ",
+    "nav.admin.departments": "ವಿಭಾಗಗಳು",
+    "nav.admin.wards": "ವಾರ್ಡ್‌ಗಳು ಮತ್ತು ಹಾಸಿಗೆಗಳು",
+    "nav.admin.rooms": "ಕೊಠಡಿಗಳು",
+    "nav.admin.staff": "ಸಿಬ್ಬಂದಿ ಮತ್ತು ಪಾತ್ರಗಳು",
+    "nav.admin.tariff": "ದರ ಪಟ್ಟಿ",
+    "nav.admin.advisories": "ಸುರಕ್ಷತಾ ಜ್ಞಾಪನೆಗಳು",
+    "nav.admin.forms": "ನಮೂನೆಗಳು",
+    "nav.admin.pathways": "ಕ್ಲಿನಿಕಲ್ ಮಾರ್ಗಗಳು",
+    "nav.admin.group": "ಆಸ್ಪತ್ರೆ ಗುಂಪು",
+    "nav.admin.seed": "ಕ್ಲಿನಿಕಲ್ ಸೀಡ್ ಡೇಟಾ",
+    "nav.admin.maik": "MaiK ಕ್ಲಿನಿಕಲ್ AI",
+    "nav.admin.security": "ಭದ್ರತಾ ಪರಿಶೀಲನೆ",
+    "nav.admin.health": "ಸಿಸ್ಟಮ್ ಆರೋಗ್ಯ",
+    "nav.admin.export": "ಡೇಟಾ ರಫ್ತು",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "ಸಂಯೋಜನೆಗಳು"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("kn", "ಕನ್ನಡ", catalog, { reviewed: false });

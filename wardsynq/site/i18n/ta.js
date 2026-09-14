@@ -207,7 +207,25 @@
     "nav.audit": "தணிக்கை மற்றும் பாதுகாப்பு",
     "nav.security": "உள்நுழைவு பாதுகாப்பு",
     "nav.rota": "பணியாளர் அட்டவணை",
-    "nav.accounts": "கணக்குகள்"
+    "nav.accounts": "கணக்குகள்",
+    "nav.group": "குழு கண்ணோட்டம்",
+    "nav.admin.hospital": "மருத்துவமனை",
+    "nav.admin.departments": "துறைகள்",
+    "nav.admin.wards": "வார்டுகள் மற்றும் படுக்கைகள்",
+    "nav.admin.rooms": "அறைகள்",
+    "nav.admin.staff": "பணியாளர்கள் மற்றும் பொறுப்புகள்",
+    "nav.admin.tariff": "விலைப் பட்டியல்",
+    "nav.admin.advisories": "பாதுகாப்பு நினைவூட்டல்கள்",
+    "nav.admin.forms": "படிவங்கள்",
+    "nav.admin.pathways": "மருத்துவ பாதைகள்",
+    "nav.admin.group": "மருத்துவமனை குழு",
+    "nav.admin.seed": "மருத்துவ அடிப்படைத் தரவு",
+    "nav.admin.maik": "MaiK மருத்துவ AI",
+    "nav.admin.security": "பாதுகாப்பு ஆய்வு",
+    "nav.admin.health": "அமைப்பின் ஆரோக்கியம்",
+    "nav.admin.export": "தரவு ஏற்றுமதி",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "ஒருங்கிணைப்புகள்"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("ta", "தமிழ்", catalog, { reviewed: false });

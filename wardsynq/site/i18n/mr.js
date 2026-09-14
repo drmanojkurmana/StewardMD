@@ -207,7 +207,25 @@
     "nav.audit": "लेखापरीक्षण आणि सुरक्षा",
     "nav.security": "साइन-इन सुरक्षा",
     "nav.rota": "कर्मचारी वेळापत्रक",
-    "nav.accounts": "खाती"
+    "nav.accounts": "खाती",
+    "nav.group": "गट विहंगावलोकन",
+    "nav.admin.hospital": "रुग्णालय",
+    "nav.admin.departments": "विभाग",
+    "nav.admin.wards": "वॉर्ड आणि खाटा",
+    "nav.admin.rooms": "खोल्या",
+    "nav.admin.staff": "कर्मचारी आणि भूमिका",
+    "nav.admin.tariff": "दरपत्रक",
+    "nav.admin.advisories": "सुरक्षितता स्मरणपत्रे",
+    "nav.admin.forms": "फॉर्म",
+    "nav.admin.pathways": "क्लिनिकल पाथवे",
+    "nav.admin.group": "रुग्णालय गट",
+    "nav.admin.seed": "क्लिनिकल सीड डेटा",
+    "nav.admin.maik": "MaiK क्लिनिकल AI",
+    "nav.admin.security": "सुरक्षा पुनरावलोकन",
+    "nav.admin.health": "सिस्टम हेल्थ",
+    "nav.admin.export": "डेटा निर्यात",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "इंटिग्रेशन्स"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("mr", "मराठी", catalog, { reviewed: false });

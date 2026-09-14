@@ -207,7 +207,25 @@
     "nav.audit": "ఆడిట్ మరియు భద్రత",
     "nav.security": "సైన్-ఇన్ భద్రత",
     "nav.rota": "సిబ్బంది రోస్టర్",
-    "nav.accounts": "ఖాతాలు"
+    "nav.accounts": "ఖాతాలు",
+    "nav.group": "గ్రూప్ అవలోకనం",
+    "nav.admin.hospital": "ఆసుపత్రి",
+    "nav.admin.departments": "విభాగాలు",
+    "nav.admin.wards": "వార్డులు మరియు పడకలు",
+    "nav.admin.rooms": "గదులు",
+    "nav.admin.staff": "సిబ్బంది మరియు పాత్రలు",
+    "nav.admin.tariff": "ధరల జాబితా",
+    "nav.admin.advisories": "భద్రతా హెచ్చరికలు",
+    "nav.admin.forms": "ఫారమ్‌లు",
+    "nav.admin.pathways": "క్లినికల్ మార్గాలు",
+    "nav.admin.group": "ఆసుపత్రి గ్రూప్",
+    "nav.admin.seed": "క్లినికల్ సీడ్ డేటా",
+    "nav.admin.maik": "MaiK క్లినికల్ AI",
+    "nav.admin.security": "భద్రతా సమీక్ష",
+    "nav.admin.health": "సిస్టమ్ ఆరోగ్యం",
+    "nav.admin.export": "డేటా ఎగుమతి",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "అనుసంధానాలు"
   };
 
   if (root && root.WSQI18n) root.WSQI18n.register("te", "తెలుగు", catalog, { reviewed: false });
