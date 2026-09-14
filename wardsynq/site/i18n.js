@@ -241,7 +241,29 @@
     "nav.audit": "Audit and security",
     "nav.security": "Sign-in security",
     "nav.rota": "Staff rota",
-    "nav.accounts": "Accounts"
+    "nav.accounts": "Accounts",
+    "nav.group": "Group overview",
+
+    /* Admin Center tab names (owner decision 2026-09-15: staff-shell navigation labels only - the
+     * tab strip is part of the shell's navigation, the panels it opens are not). One key per tab id
+     * in wardsynq/site/pages/admin.js TABS. */
+    "nav.admin.hospital": "Hospital",
+    "nav.admin.departments": "Departments",
+    "nav.admin.wards": "Wards and beds",
+    "nav.admin.rooms": "Rooms",
+    "nav.admin.staff": "Staff and roles",
+    "nav.admin.tariff": "Price list",
+    "nav.admin.advisories": "Safety reminders",
+    "nav.admin.forms": "Forms",
+    "nav.admin.pathways": "Clinical pathways",
+    "nav.admin.group": "Hospital group",
+    "nav.admin.seed": "Clinical seed data",
+    "nav.admin.maik": "MaiK clinical AI",
+    "nav.admin.security": "Security review",
+    "nav.admin.health": "System health",
+    "nav.admin.export": "Data export",
+    "nav.admin.fhir": "FHIR",
+    "nav.admin.integrations": "Integrations"
   };
 
   var CATALOGS = { en: EN };

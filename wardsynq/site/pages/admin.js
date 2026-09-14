@@ -46,7 +46,9 @@
     return r.error || "failed";
   }
 
-  var TABS = [["hospital", "Hospital"], ["departments", "Departments"], ["wards", "Wards and beds"], ["rooms", "Rooms"], ["staff", "Staff and roles"], ["tariff", "Price list"], ["advisories", "Safety reminders"], ["forms", "Forms"], ["pathways", "Clinical pathways"], ["group", "Hospital group"]];
+  // Tab labels are nav.admin.<id> keys in wardsynq/site/i18n.js (owner decision 2026-09-15: the tab
+  // strip is shell navigation, the panels it opens are clinical/admin content and stay English).
+  var TABS = [["hospital", "nav.admin.hospital"], ["departments", "nav.admin.departments"], ["wards", "nav.admin.wards"], ["rooms", "nav.admin.rooms"], ["staff", "nav.admin.staff"], ["tariff", "nav.admin.tariff"], ["advisories", "nav.admin.advisories"], ["forms", "nav.admin.forms"], ["pathways", "nav.admin.pathways"], ["group", "nav.admin.group"]];
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
@@ -56,12 +58,13 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["seed", "Clinical seed data"], ["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
+    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"]);
     var tab = st._adminTab || "hospital";
     if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
+    var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
-      '<div class="tabs" role="tablist">' + tabs.map(function (t) {
-        return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
+      '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
+        return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(navTr(t[1])) + "</button>";
       }).join("") + '</div><div id="adminBody"><span class="spin"></span></div>';
     el.querySelectorAll("[data-tab]").forEach(function (b) {
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
