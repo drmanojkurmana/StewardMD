@@ -37,7 +37,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -188,6 +188,9 @@ import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty } from "../../_wardsynq/pathways.js";
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
+// S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
+import { notifyDepsFor, directoryFromEnv, smsSetup } from "../../_wardsynq/alert-deps.js";
+import { alertDeliveryStatus } from "../../_wardsynq/push-alerts.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
 import { checkAdvisories } from "../../_wardsynq/advisory-authoring.js";
@@ -514,6 +517,63 @@ function opdOrgFor(env, hospitalId) {
  * a public endpoint cannot be used to run up storage calls. */
 let docProbeCache = null;
 const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
+/* ONE HOSPITAL'S BACKGROUND PASS, from either trigger: ordinary ward traffic, or the worker's cron through
+ * /ops/tick-all (S3 P0, so a quiet hospital at 03:00 still escalates). The same two-minute gate serves
+ * both, so the two triggers never double-run a hospital. Returns null when the gate said not yet. */
+async function wsqTick(env, org, mig) {
+  const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
+  if (!gate.allowed) return null;
+  const wsqCfg = (org && org.wardsynq) || null;
+  const repository = wsqRecordDeps(env, mig.tenantId).repository;
+  /* P2.17: the chain head is anchored at most once an hour per hospital, beside the
+   * two-minute tick gate. Hourly, not per tick: anchors are compared one by one, so an
+   * anchor per tick would grow the log without adding evidence. The gate failing open only
+   * means an extra anchor attempt; anchorHead() itself skips a head it already holds. */
+  let anchorStore;
+  try {
+    const anchorGate = await rateHit({ kv: env && env.MAIK_KV }, { key: `audit-anchor:${mig.tenantId}`, limit: 1, windowMs: 3600000 });
+    anchorStore = anchorGate.allowed ? auditAnchorStore(env && env.MAIK_KV) : null;
+  } catch { anchorStore = null; }
+  const t = await runTick(repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: notifyDepsFor(env, org, mig.tenantId, repository), anchorStore: anchorStore || undefined, consumers: { ...exportConsumers({ repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository, tenantId: mig.tenantId, env, orgId: org.id }) } });
+  /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
+   * whether escalation is actually running rather than assume it. P2.17: the anchor outcome
+   * rides along the same way. A run that did not attempt an anchor carries the previous
+   * run's anchor fields forward, so one failed hourly attempt stays visible until the next
+   * attempt replaces it instead of being cleared two minutes later by a run that skipped. */
+  if (env.MAIK_KV) {
+    let prevAnchor = null;
+    try { const prev = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); prevAnchor = prev ? JSON.parse(prev) : null; } catch { prevAnchor = null; }
+    const entry = { at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) };
+    if (t.anchor && t.anchor.status !== "skipped") {
+      entry.anchorFailed = !!t.anchor.error;
+      entry.anchorStatus = t.anchor.error ? "failed" : t.anchor.status;
+      entry.anchorAt = t.anchor.at || t.at;
+    } else if (prevAnchor && (prevAnchor.anchorFailed || prevAnchor.anchorStatus)) {
+      entry.anchorFailed = !!prevAnchor.anchorFailed;
+      entry.anchorStatus = prevAnchor.anchorStatus;
+      entry.anchorAt = prevAnchor.anchorAt;
+    }
+    await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify(entry), { expirationTtl: 30 * 86400 }).catch(() => {});
+  }
+  if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
+  if (t.anchor && t.anchor.error) console.error("wsq tick anchor failed", mig.tenantId);
+  return t;
+}
+/* S3 P0: a member's phones stop receiving alerts when their access is reset, their PIN or password
+ * changes, they are disabled or removed, or they sign out everywhere. Audited under the hospital. A
+ * failure is returned, never swallowed: an access change that left a phone still receiving alerts is
+ * not a success. */
+async function unbindMemberDevices(env, orgId, identity, actorId) {
+  const dir = directoryFromEnv(env);
+  if (!dir) return { ok: true, removed: 0, store: "none" };
+  try {
+    const r = await dir.unbind(orgId, identity);
+    if (r.removed) await ORG.auditLogin(env, orgId, actorId, "push:devices_unbound", String(identity) + " x" + r.removed);
+    return { ok: true, removed: r.removed };
+  } catch (e) {
+    return { ok: false, error: "push_unbind_failed" };
+  }
+}
 /* P2.17 ANCHOR STORE. The audit-chain head anchored someplace a database write cannot move: KV is a
  * separate trust domain from D1 (different binding, different credentials). The domain logic only
  * needs {get, put} on strings, so this adapter keeps Cloudflare out of audit-chain.js. Anchors are
@@ -623,6 +683,32 @@ export async function onRequest(context) {
         "Content-Type": r.contentType, "Content-Disposition": `inline; filename="${r.filename}"`,
         "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff",
       }, corsHeaders(request)) });
+    }
+    /* S3 P0: THE ESCALATION TIMER THAT DOES NOT NEED ANYBODY ON THE WARD. The stewardmd-api worker's
+     * cron POSTs here every five minutes with the admin token; every WardSynQ hospital gets the same
+     * tick ordinary ward traffic gives it, behind the same two-minute gate. WSQ_TICK_OFF stops both. */
+    if (method === "POST" && seg === "ops" && sub === "tick-all") {
+      if (!(await ownerOK(request, env))) {
+        const who = await resolveActor(request, env);
+        return json({ ok: false, error: who ? "forbidden" : "auth_required" }, who ? 403 : 401, request);
+      }
+      if (env.WSQ_TICK_OFF === "1") return json({ ok: true, skipped: "WSQ_TICK_OFF", tenants: 0 }, 200, request);
+      /* ponytail: one sequential pass over at most 300 hospitals in one request. Fan out per hospital
+       * (a queue, or one request each) when a deployment has enough hospitals to near the time limit. */
+      const orgs = (await ORG.listAllOrgs(env, 300)).filter((o) => o && o.mode === "wardsynq" && o.connectTenantId);
+      const results = [];
+      for (const o of orgs) {
+        try {
+          const mig = await wsqForcedMigration(env, o);
+          if (!mig || mig.error) { results.push({ orgId: o.id, skipped: (mig && mig.error) || "not_configured" }); continue; }
+          const t = await wsqTick(env, o, mig);
+          results.push(t ? { orgId: o.id, ran: true, escalated: (t.criticals && t.criticals.escalated) || 0, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) } : { orgId: o.id, ran: false, skipped: "gate" });
+        } catch (e) {
+          console.error("wsq tick-all failed", o.id, String((e && e.message) || e).slice(0, 200));
+          results.push({ orgId: o.id, ran: false, failed: true });
+        }
+      }
+      return json({ ok: results.every((x) => !x.failed && !x.criticalsFailed), tenants: orgs.length, results }, 200, request);
     }
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
@@ -934,6 +1020,8 @@ export async function onRequest(context) {
          * authority to act. ACKNOWLEDGING is emr.treat: it is a clinical decision recorded against a
          * named clinician, and the store enforces the write scope independently. */
         criticals: CAPS.EMR_VIEW, acknowledge: CAPS.EMR_TREAT, "flag-critical": CAPS.EMR_TREAT,
+        // S3 P0: whether critical results reach phones, the ladder in force, and which loops told nobody. Ids only.
+        "alert-status": CAPS.STAFF_ADMIN,
         // Moving a patient between beds is the same administrative act as admitting them to one.
         transfer: CAPS.QUEUE_ADD, beds: CAPS.QUEUE_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
@@ -1488,42 +1576,8 @@ export async function onRequest(context) {
        * scheduler is required for a hospital that is in use; ops-tick.js is callable by one as well. */
       if (context.waitUntil && env.WSQ_TICK_OFF !== "1") {
         context.waitUntil((async () => {
-          try {
-            const gate = await rateHit({ kv: env && env.MAIK_KV }, { key: `tick:${mig.tenantId}`, limit: 1, windowMs: 120000 });
-            if (!gate.allowed) return;
-            /* P2.17: the chain head is anchored at most once an hour per hospital, beside the
-             * two-minute tick gate. Hourly, not per tick: anchors are compared one by one, so an
-             * anchor per tick would grow the log without adding evidence. The gate failing open only
-             * means an extra anchor attempt; anchorHead() itself skips a head it already holds. */
-            let anchorStore;
-            try {
-              const anchorGate = await rateHit({ kv: env && env.MAIK_KV }, { key: `audit-anchor:${mig.tenantId}`, limit: 1, windowMs: 3600000 });
-              anchorStore = anchorGate.allowed ? auditAnchorStore(env && env.MAIK_KV) : null;
-            } catch { anchorStore = null; }
-            const t = await runTick(deps.recordDeps.repository, mig.tenantId, { policy: (wsqCfg && wsqCfg.criticalEscalation) || null, notifyDeps: {}, anchorStore: anchorStore || undefined, consumers: { ...exportConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, store: documentStoreFromEnv(env), env }), ...webhookConsumers({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, env, orgId: wOrgId }) } });
-            /* P2.15: the last run is kept (outcome flags only, no error text) so System health can say
-             * whether escalation is actually running rather than assume it. P2.17: the anchor outcome
-             * rides along the same way. A run that did not attempt an anchor carries the previous
-             * run's anchor fields forward, so one failed hourly attempt stays visible until the next
-             * attempt replaces it instead of being cleared two minutes later by a run that skipped. */
-            if (env.MAIK_KV) {
-              let prevAnchor = null;
-              try { const prev = await env.MAIK_KV.get(tickLogKey(mig.tenantId)); prevAnchor = prev ? JSON.parse(prev) : null; } catch { prevAnchor = null; }
-              const entry = { at: t.at, criticalsFailed: !!(t.criticals && t.criticals.error), outboxFailed: !!(t.outbox && t.outbox.error) };
-              if (t.anchor && t.anchor.status !== "skipped") {
-                entry.anchorFailed = !!t.anchor.error;
-                entry.anchorStatus = t.anchor.error ? "failed" : t.anchor.status;
-                entry.anchorAt = t.anchor.at || t.at;
-              } else if (prevAnchor && (prevAnchor.anchorFailed || prevAnchor.anchorStatus)) {
-                entry.anchorFailed = !!prevAnchor.anchorFailed;
-                entry.anchorStatus = prevAnchor.anchorStatus;
-                entry.anchorAt = prevAnchor.anchorAt;
-              }
-              await env.MAIK_KV.put(tickLogKey(mig.tenantId), JSON.stringify(entry), { expirationTtl: 30 * 86400 }).catch(() => {});
-            }
-            if ((t.criticals && t.criticals.error) || (t.outbox && t.outbox.error)) console.error("wsq tick", mig.tenantId, JSON.stringify({ criticals: t.criticals && t.criticals.error, outbox: t.outbox && t.outbox.error }));
-            if (t.anchor && t.anchor.error) console.error("wsq tick anchor failed", mig.tenantId);
-          } catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
+          try { await wsqTick(env, wOrg, mig); }
+          catch (e) { console.error("wsq tick failed", mig.tenantId, String((e && e.message) || e).slice(0, 200)); }
         })());
       }
 
@@ -2794,7 +2848,7 @@ export async function onRequest(context) {
          * critical; a check that fails is reported, never swallowed. */
         if (r && r.ok && r.reportId && body.critical === true) {
           try {
-            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, limits: (wsqCfg && wsqCfg.criticalLimits) || null, notifyDeps: {}, idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
+            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, limits: (wsqCfg && wsqCfg.criticalLimits) || null, notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository), idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
             r.criticalCheck = crit && crit.ok ? { checked: true, opened: crit.opened || 0, loops: crit.loops || [] } : { checked: false, error: (crit && crit.error) || "critical_check_failed" };
           } catch (e) { r.criticalCheck = { checked: false, error: "critical_check_failed" }; }
         }
@@ -2982,7 +3036,7 @@ export async function onRequest(context) {
             const crit = await openCriticalLoops(request, env, {
               ...deps, reportId: r.reportId,
               limits: (wsqCfg && wsqCfg.criticalLimits) || null,
-              notifyDeps: {},
+              notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository),
               idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null,
             });
             r.criticalCheck = crit && crit.ok
@@ -3003,7 +3057,7 @@ export async function onRequest(context) {
          * later finds it instead of opening a second one. A failure to open it is reported, never swallowed. */
         if (r && r.ok && r.positiveBloodCulture) {
           try {
-            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, observations: [r.criticalRow], notifyDeps: {}, idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
+            const crit = await openCriticalLoops(request, env, { ...deps, reportId: r.reportId, observations: [r.criticalRow], notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository), idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null });
             r.criticalCheck = crit && crit.ok ? { checked: true, opened: crit.opened || 0, loops: crit.loops || [] } : { checked: false, error: (crit && crit.error) || "critical_check_failed" };
           } catch (e) { r.criticalCheck = { checked: false, error: "critical_check_failed" }; }
         }
@@ -3334,14 +3388,16 @@ export async function onRequest(context) {
           // The site's limits, never a request parameter: a caller who could pass these could decide
           // a potassium of 7 was not critical by asking differently.
           limits: (wsqCfg && wsqCfg.criticalLimits) || null,
-          // No channel is wired in this build (a channel is a FUNCTION - wardsynq-notify.js's own
-          // Dispatcher deps - not JSON an org's Firestore config document could ever carry; wiring a
-          // real one means reusing StewardMD's existing APNs/FCM push infrastructure, per
-          // wardsynq-safety-case.js's HAZ-DET-01, and is future work, not fabricated here). Every
-          // opened loop therefore honestly records NO_CHANNEL rather than a silent "sent".
-          notifyDeps: {},
+          // S3 P0: the StewardMD app push channel when this hospital turned alerts on
+          // (wardsynq.alerts.push.enabled); otherwise none, and every opened loop honestly records
+          // NO_CHANNEL rather than a silent "sent".
+          notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository),
           idempotencyKey: body.idempotencyKey || null,
         });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "alert-status" && method === "GET") {
+        const r = await alertDeliveryStatus({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, wsqCfg, actorId: actor.id, smsMissing: smsSetup(env, wOrg).missing });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "acknowledge" && method === "POST") {
@@ -3581,7 +3637,11 @@ export async function onRequest(context) {
       if (method === "POST" && sub === "disable") return reply(await ORG.disableMfa(env, actor.orgId, actor.id, mb.code));
       if (method === "GET" && sub === "signins") return reply(await ORG.recentSignIns(env, actor.orgId, actor.id));
       // Ends every session of this account, the one making the request included.
-      if (method === "POST" && sub === "signout-all") return reply(await ORG.signOutEverywhere(env, actor.orgId, actor.id));
+      if (method === "POST" && sub === "signout-all") {
+        const so = await ORG.signOutEverywhere(env, actor.orgId, actor.id);
+        if (so.ok) { const u = await unbindMemberDevices(env, actor.orgId, actor.id, actor.id); if (!u.ok) return json({ ok: false, error: u.error, applied: true, message: "Signed out everywhere, but this account's phones could not be removed from critical-result alerts. Try again." }, 502, request); }
+        return reply(so);
+      }
       return json({ ok: false, error: "not_found" }, 404, request);
     }
     if (method === "GET" && seg === "whoami") {
@@ -4032,13 +4092,25 @@ export async function onRequest(context) {
           body.identity, mTarget && mTarget.role, !sub && !body.remove ? body.role : null);
         if (refusal) return json({ ok: false, error: refusal, message: "Only the hospital owner, or someone holding every permission involved, can make this change." }, 403, request);
         // Each refuses an identity with no member row instead of creating one (memberMissing in the store).
-        const lifecycle = async (p) => { const r = await p; return json(r, r && r.ok === false ? (r.error === "member_not_found" ? 404 : 422) : 200, request); };
-        if (sub === "pin") return lifecycle(ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id));
-        if (sub === "password") return lifecycle(ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id));
-        if (sub === "disable") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id));
+        const lifecycle = async (p, unbind) => {
+          const r = await p;
+          const status = r && r.ok === false ? (r.error === "member_not_found" ? 404 : 422) : 200;
+          // S3 P0: a credential change or removal also stops this member's phones receiving alerts.
+          if (status === 200 && unbind) {
+            const u = await unbindMemberDevices(env, body.orgId, body.identity, actor.id);
+            if (!u.ok) return json({ ok: false, error: u.error, applied: true, message: "The change was saved, but this person's phones could not be removed from critical-result alerts. Try again." }, 502, request);
+          }
+          return json(r, status, request);
+        };
+        if (sub === "pin") return lifecycle(ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id), true);
+        if (sub === "password") return lifecycle(ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id), true);
+        if (sub === "disable") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id), true);
         if (sub === "restore") return lifecycle(ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id));
-        if (sub === "reset") return lifecycle(ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id));
-        if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id));
+        if (sub === "reset") return lifecycle(ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id), true);
+        if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id), true);
+        if (body.alertMobile !== undefined && String(body.alertMobile).trim() && !alertMobileOf(body.alertMobile)) {
+          return json({ ok: false, error: "invalid_alert_mobile", message: "The alert mobile must be 10 to 15 digits, with the country code if outside India." }, 422, request);
+        }
         if (body.regionProfile !== undefined) {
           const mOrg = await ORG.getOrg(env, body.orgId);
           const errors = validateMemberProfile(body.regionProfile, mOrg && mOrg.region);

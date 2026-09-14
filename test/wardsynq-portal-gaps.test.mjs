@@ -474,5 +474,5 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.ok(keys.length > 40);
   for (const k of keys) assert.ok(Object.prototype.hasOwnProperty.call(hiCatalog, k), "Hindi for " + k);
   assert.doesNotMatch(portalJs + html + staffPage + keys.map((k) => i18n._catalogs.en[k]).join(" "), /—/, "no em dash");
-  assert.match(read("wardsynq/site/index.html"), /ward\.js\?v=site79/);
+  assert.match(read("wardsynq/site/index.html"), /ward\.js\?v=site80/);
 });

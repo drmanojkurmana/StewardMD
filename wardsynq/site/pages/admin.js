@@ -244,6 +244,99 @@
       });
     };
   }
+  /* CRITICAL RESULT ALERTS TO PHONES (S3 P0). Whether a critical result is pushed through the StewardMD
+   * app, who each level tells, the SMS fallback when no phone confirms, and - loudest - every open result
+   * that told nobody. Everything shown comes from GET /ward/alert-status, so this card never has its own
+   * idea of the ladder or of which defaults were approved. null = loading, false = could not be read. */
+  var ALERT_LEVELS = [["due", "When the result is released"], ["overdue", "Not acknowledged in time"], ["escalate", "Still not acknowledged"]];
+  var ALERT_ROLES = ["doctor", "resident", "supervisor", "nurse", "intern", "pg_resident", "pg_faculty", "pg_hod"];
+  var ALERT_REASON = {
+    NO_RECIPIENT: "nobody could be found to tell (no ordering clinician, nobody with a listed role on duty, no named contact)",
+    NO_DEVICE: "nobody it was addressed to has a phone registered for alerts",
+    PUSH_NOT_CONFIGURED: "push is not configured on the server",
+    SMS_NOT_CONFIGURED: "the SMS fallback is not configured",
+    NO_MOBILE: "nobody it was addressed to has an alert mobile",
+    SMS_FAILED: "the SMS could not be sent",
+  };
+  function alertCardHtml(esc, s) {
+    var h = '<div class="card" id="admAlertCard"><h2>Critical result alerts to phones</h2>';
+    if (s == null) return h + '<span class="spin"></span> Loading...</div>';
+    if (s === false || !s.ok) return h + '<div class="msg err">The alert settings could not be loaded' + (s && s.error ? " (" + esc(s.error) + ")" : "") + ". Do not read this as alerts being off or as nothing having failed.</div></div>";
+    var lv = s.levels || {}, d = s.defaults || {}, ap = d.approval || {};
+    var rows = ALERT_LEVELS.map(function (L) {
+      var x = lv[L[0]] || { roles: [], contacts: [] };
+      var when = L[0] === "due" ? "at once" : L[0] === "overdue" ? "after " + esc(s.minutes && s.minutes.acknowledgeWithinMinutes) + " min" : "after " + esc(s.minutes && s.minutes.escalateAfterMinutes) + " min";
+      return '<tr data-level="' + L[0] + '"><td><b>' + esc(L[1]) + "</b><br><small>" + when + "</small></td>" +
+        '<td><label><input type="checkbox" class="alOrderer"' + (x.orderer ? " checked" : "") + "> ordering clinician</label></td>" +
+        "<td>" + ALERT_ROLES.map(function (r) { return '<label style="white-space:nowrap"><input type="checkbox" class="alRole" value="' + r + '"' + ((x.roles || []).indexOf(r) >= 0 ? " checked" : "") + "> " + esc(r.replace(/_/g, " ")) + "</label> "; }).join("") + "</td>" +
+        '<td><textarea class="alContacts" rows="2" placeholder="one staff ID or email per line">' + esc((x.contacts || []).join("\n")) + "</textarea></td></tr>";
+    }).join("");
+    var sms = s.sms || {};
+    var fails = (s.failures || []).map(function (f) {
+      return "<tr><td>" + esc(f.at || "") + "</td><td>" + esc(f.level || "") + (f.sms ? " (SMS)" : "") + '</td><td class="mono">' + esc(f.loopId) + "</td><td>" + esc(ALERT_REASON[f.reason] || f.reason) + "</td></tr>";
+    }).join("");
+    return h +
+      '<label class="f"><span><input type="checkbox" id="alEnabled"' + (s.enabled ? " checked" : "") + "> Push critical results to phones through the StewardMD app</span></label>" +
+      '<p class="quiet">The push names the ward and bed only, never the patient. The detail opens after the phone is unlocked, and only for the people it was sent to. Acknowledging is still done with a sentence saying what was done.</p>' +
+      "<h3>Who each level tells</h3>" +
+      (lv.approval ? '<p class="msg ok">Default ladder approved by ' + esc(ap.approvedBy) + " on " + esc(ap.approvedOn) + " (owner decision " + esc(ap.decision) + ").</p>"
+        : '<p class="msg note">This hospital has set its own ladder. The approved default (' + esc(ap.approvedBy) + ", " + esc(ap.approvedOn) + ") is ordering clinician and on-duty doctors, then supervisors and nurses on duty, then named contacts.</p>") +
+      '<p class="quiet">Each level tells the people of the levels before it again. On-duty roles come from the rota for the patient\'s ward. There is no nurse-in-charge role, so "nurse" means every nurse on duty in that ward.</p>' +
+      '<div class="tbl"><table><thead><tr><th>Level</th><th></th><th>On duty with role</th><th>Named contacts</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
+      "<h3>SMS when no phone confirms</h3>" +
+      '<p class="quiet">If no phone confirms a push within its level\'s time, it is sent once by SMS to each person\'s alert mobile (set on Staff and roles), using your DLT-approved 2Factor template whose first variable is the ward and second the bed.</p>' +
+      '<div class="row"><label class="f"><span>DLT sender ID</span><input id="alSender" value="' + esc(sms.senderId || "") + '"></label>' +
+      '<label class="f"><span>DLT template name</span><input id="alTemplate" value="' + esc(sms.templateName || "") + '"></label></div>' +
+      (sms.ready ? '<p class="msg ok">SMS fallback is ready.</p>' : '<div class="msg err"><b>SMS fallback is not configured.</b> Missing:<br>' + (sms.missing || []).map(esc).join("<br>") + "</div>") +
+      '<button class="btn" id="alSave" type="button">Save alert settings</button><div id="alMsg"></div>' +
+      "<h3>Open results that told nobody</h3>" +
+      (fails ? '<div class="tbl"><table><thead><tr><th>When</th><th>Level</th><th>Loop</th><th>Why</th></tr></thead><tbody>' + fails + "</tbody></table></div>" : '<p class="quiet">None among the open critical results read' + (s.partial ? " (only the newest 500 were checked)" : "") + ".</p>") +
+      ((s.noDevice || []).length ? '<p class="msg err">No phone registered for alerts: ' + s.noDevice.map(function (x) { return esc(x.identity); }).join(", ") + "</p>" : "") +
+      "</div>";
+  }
+  /* Reads the card back. v = { enabled, senderId, templateName, levels: {due: {orderer, roles, contactsText}}, escalation }. */
+  function readAlertCard(v) {
+    var levels = {}, bad = "";
+    ALERT_LEVELS.forEach(function (L) {
+      var x = (v.levels && v.levels[L[0]]) || {};
+      var contacts = String(x.contactsText || "").split(/\n/).map(function (t) { return t.trim(); }).filter(Boolean);
+      if (contacts.some(function (t) { return t.length > 120; })) bad = "A named contact is too long: use the staff ID or email.";
+      levels[L[0]] = { orderer: !!x.orderer, roles: (x.roles || []).slice(), contacts: contacts };
+    });
+    if (bad) return { error: bad };
+    var esc0 = v.escalation && typeof v.escalation === "object" ? v.escalation : {};
+    var escalation = {}; Object.keys(esc0).forEach(function (k) { escalation[k] = esc0[k]; }); escalation.levels = levels;
+    return { wardsynq: {
+      alerts: { push: { enabled: !!v.enabled }, sms: { provider: "twofactor", senderId: String(v.senderId || "").trim(), templateName: String(v.templateName || "").trim() } },
+      criticalEscalation: escalation,
+    } };
+  }
+  WSQ._alertCard = { html: alertCardHtml, read: readAlertCard };
+  function loadAlertCard(c) {
+    var slot = document.getElementById("admAlertSlot");
+    if (!slot) return;
+    slot.innerHTML = alertCardHtml(c.esc, null);
+    c.api("/ward/alert-status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      slot.innerHTML = alertCardHtml(c.esc, r && r.ok ? r : false);
+      var btn = document.getElementById("alSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var m = document.getElementById("alMsg"), lv = {};
+        document.querySelectorAll("#admAlertCard tr[data-level]").forEach(function (tr) {
+          var roles = []; tr.querySelectorAll(".alRole").forEach(function (b) { if (b.checked) roles.push(b.value); });
+          lv[tr.getAttribute("data-level")] = { orderer: tr.querySelector(".alOrderer").checked, roles: roles, contactsText: tr.querySelector(".alContacts").value };
+        });
+        var out = readAlertCard({ enabled: document.getElementById("alEnabled").checked, senderId: document.getElementById("alSender").value, templateName: document.getElementById("alTemplate").value, levels: lv, escalation: ((c.state.org || {}).wardsynq || {}).criticalEscalation });
+        if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+        btn.disabled = true;
+        c.api("/org/update", { orgId: c.state.orgId, wardsynq: out.wardsynq }).then(function (u) {
+          btn.disabled = false;
+          if (!u || !u.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(u)) + "</div>"; return; }
+          c.state.org = u.org; c.toast(out.wardsynq.alerts.push.enabled ? "Saved. Critical results are pushed to phones." : "Saved. Critical results are not pushed to phones."); loadAlertCard(c);
+        });
+      };
+    });
+  }
   function renderHospital(c, body) {
     var o = c.state.org || {};
     body.innerHTML = '<div class="card"><h2>' + c.ms("local_hospital") + " Hospital</h2>" +
@@ -263,7 +356,7 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       "</div>" + tokenCardHtml(c.esc, o.tokens) +
-      (c.isWardsynq() ? noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div>' + noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -279,6 +372,7 @@
     wireApprovalRules(c);
     wireLabCheck(c);
     wireTokenCard(c);
+    if (c.isWardsynq()) loadAlertCard(c);
   }
 
   // ---- Safety reminders (dry run) ----------------------------------------------------------------
@@ -643,9 +737,9 @@
         ROLE_NOTES.map(function (l) { return '<p class="quiet"><b>' + c.esc(l[0]) + ":</b> " + c.esc(l[1]) + "</p>"; }).join("") + "</div>" +
         twoStepPolicyCard(c) +
         '<div class="card"><h2>Staff</h2>' +
-        (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th></th></tr></thead><tbody>' +
+        (members.length ? '<div class="tbl"><table><thead><tr><th>Identity</th><th>Role</th><th>Active</th><th>Email</th><th>PIN set</th><th>Alert mobile</th><th></th></tr></thead><tbody>' +
           members.map(function (m) {
-            return '<tr data-identity="' + c.esc(m.identity) + '"><td>' + c.esc(m.identity) + "</td><td>" + c.esc(m.role) + "</td><td>" + (m.active ? "yes" : "no") + "</td><td>" + c.esc(m.email || "none") + "</td><td>" + (m.hasPin ? "yes" : "no") + "</td><td>" +
+            return '<tr data-identity="' + c.esc(m.identity) + '"><td>' + c.esc(m.identity) + "</td><td>" + c.esc(m.role) + "</td><td>" + (m.active ? "yes" : "no") + "</td><td>" + c.esc(m.email || "none") + "</td><td>" + (m.hasPin ? "yes" : "no") + "</td><td>" + (m.alertMobile ? "set" : "none") + "</td><td>" +
               '<button type="button" class="btn quiet" data-mact="' + (m.active ? "disable" : "restore") + '" data-id="' + c.esc(m.identity) + '">' + (m.active ? "Disable" : "Restore") + "</button> " +
               '<button type="button" class="btn quiet" data-mact="reset" data-id="' + c.esc(m.identity) + '">Reset access</button></td></tr>';
           }).join("") + "</tbody></table></div>" : '<p class="quiet">No staff added yet.</p>') +
@@ -659,6 +753,8 @@
          * credential is a StewardMD account's verified claim. Every signed record records which of
          * the two vouched, so this is an assertion the hospital makes and is accountable for. */
         '<label class="f"><span>Registration number (prescribers)</span><input id="admMemberRegNo" placeholder="leave blank if not a prescriber"></label>' +
+        // S3 P0: where a critical-result SMS goes when no phone confirmed the push. Blank keeps what is saved.
+        '<label class="f"><span>Alert mobile (critical-result SMS)</span><input id="admMemberMobile" inputmode="tel" placeholder="blank keeps the saved number"></label>' +
         '<button class="btn" id="admMemberAdd" type="button">Save membership</button></div><div id="admMemMsg"></div>' +
         '<p class="quiet">A member with no registration number can use WardSynQ but cannot sign a prescription, a note or a discharge summary. The hospital is asserting this number; a StewardMD account that is already verified uses its own instead.</p>' +
         '<h3>Set PIN</h3><div class="row"><label class="f"><span>Identity</span><input id="admPinId"></label>' +
@@ -683,7 +779,10 @@
       document.getElementById("admMemberAdd").onclick = function () {
         var id = (document.getElementById("admMemberIdentity").value || "").trim();
         if (!id) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">Enter the staff ID or email.</div>'; return; }
-        c.api("/member", { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value, regNo: (document.getElementById("admMemberRegNo").value || "").trim() }).then(function (r) {
+        var memberBody = { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value, regNo: (document.getElementById("admMemberRegNo").value || "").trim() };
+        var mobile = (document.getElementById("admMemberMobile").value || "").trim();
+        if (mobile) memberBody.alertMobile = mobile;
+        c.api("/member", memberBody).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
           c.toast("Staff saved."); WSQ.render("admin");
         });

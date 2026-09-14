@@ -3717,13 +3717,23 @@
   }
   /* What the background escalation did for a loop nobody acknowledged. "Not delivered" is said as
    * plainly as "delivered": a hospital with no notification channel must see that nobody was paged. */
-  function critEscalationsHtml(list) {
+  function critEscalationsHtml(list, notices) {
     if (!list || !list.length) return "";
     return '<div class="w-crit-m">' + list.map(function (x) {
       var n = x.notification || {};
+      // S3 P0: a push accepted by the phone gateways is SENT, which is neither delivered nor nobody told.
+      var pushed = (notices || []).filter(function (m) { return m && m.level === x.level; }).map(function (m) { return m.sent || 0; }).pop();
       return ms("campaign") + (x.level === "escalate" ? "Escalated" : "Overdue") + " " + when(x.at) + " after " + esc(x.minutesOpen) + " min: " +
-        (n.delivered ? "notification delivered" : '<b>nobody was notified</b> (' + esc(n.reason === "NO_CHANNEL" ? "no notification channel is set up" : (n.reason || "delivery failed")) + ")");
+        (n.delivered ? "notification delivered" : pushed ? "sent to " + esc(pushed) + " phone(s), not yet confirmed" : '<b>nobody was notified</b> (' + esc(n.reason === "NO_CHANNEL" ? "no notification channel is set up" : (n.reason || "delivery failed")) + ")");
     }).join("<br>") + "</div>";
+  }
+  /* S3 P0: a result whose push reached nobody says so on the board, in words, never as a quiet gap. */
+  var CRIT_NOTICE_WHY = { NO_RECIPIENT: "nobody could be found to tell", NO_DEVICE: "nobody it was sent to has a phone registered for alerts", PUSH_NOT_CONFIGURED: "push is not configured on the server", SMS_NOT_CONFIGURED: "no phone confirmed and the SMS fallback is not configured", NO_MOBILE: "no phone confirmed and nobody has an alert mobile", SMS_FAILED: "no phone confirmed and the SMS could not be sent" };
+  function critNoticeHtml(c) {
+    var why = [];
+    (c.notifications || []).forEach(function (n) { if (n && n.reason && !(n.sms && n.sms.sent)) why.push(n.reason); if (n && n.sms && n.sms.reason) why.push(n.sms.reason); });
+    if (!why.length) return "";
+    return '<div class="w-crit-m warn">' + ms("notifications_off") + "<b>Alert did not reach anyone:</b> " + esc(CRIT_NOTICE_WHY[why[why.length - 1]] || why[why.length - 1]) + "</div>";
   }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
@@ -3737,7 +3747,7 @@
         " &middot; " + ms("schedule") + (mins == null ? "" : mins + " min since reported") +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; overdue" : "") +
         (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
-        critEscalationsHtml(c.escalations) +
+        critEscalationsHtml(c.escalations, c.notifications) + critNoticeHtml(c) +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
