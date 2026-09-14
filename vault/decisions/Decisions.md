@@ -5703,3 +5703,30 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   harness are unchanged.
 - A server without the project bindings: Vertex is not PHI-capable, maikStatus names the missing bindings and
   the Admin screen shows them. NOT verified: that gemini-3.6-flash is served in asia-south1 for this project.
+
+### The connector pattern (functions/_wardsynq/connectors.js), shared by S2, S4, S5
+- One record type `_wardsynq_connector` in the tenant repository (append-only, versioned, like webhook endpoints):
+  `{kind, provider, name, settings, secretsEnc{key: sealed}, secretsSetAt, active}`. Kinds and providers are
+  code (`KINDS`), each provider declaring `settings[]`, `secrets[]`, `validate()` and optionally `test()`; the
+  Admin > Integrations forms are drawn from that catalogue. Singleton kinds (dicom, payment) have id = kind.
+- Why the repository and not the org document: the org whitelist passes config through unvalidated, has no
+  version check, and is readable wherever the org is read. A connector needs sealed credentials, optimistic
+  concurrency and an audit row in the same append. Existing org fields (`imagingViewer`, `payers`) stay as the
+  fallback so no hospital's configuration stops working.
+- Credentials: sealed with the document key (webhooks.js sealSecret, now exported), never returned by any route,
+  opened only where an adapter uses them. A save carrying new credentials only is audited `connector.rotate`;
+  others `connector.create/update/enable/disable`; `connector.test` for tests. Scope names keys and hosts only.
+- Gate: staff.admin at the route plus a clinical actor that may write the record (the webhooks' double gate).
+- URL settings pass webhooks.js checkDestination at save (https, no private/metadata address, every resolved
+  address); each adapter checks again before calling and never follows a redirect.
+
+### S5 DICOMweb (functions/_wardsynq/dicomweb.js)
+- Settings: QIDO-RS base (required), WADO-RS base, auth none/bearer/basic with the credential sealed, a viewer
+  template, or an OHIF base that becomes `<ohif>/viewer?StudyInstanceUIDs={studyInstanceUid}` (OHIF docs).
+- Viewer placeholders are now `{studyInstanceUid}`, `{accession}` (and the older `{accessionNumber}`).
+  `{patientId}` (the MRN) was WITHDRAWN from imaging-viewer.js: owner rule, no name or MRN in a viewer URL. A
+  hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
+- Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
+  redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- NOT verified against a real PACS; mocked transport only.

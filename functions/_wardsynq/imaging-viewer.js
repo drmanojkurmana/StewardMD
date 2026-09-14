@@ -8,9 +8,12 @@
  *
  * RULES, each one a way a launch link goes wrong:
  *   - https only. A plain-http template would carry a study identifier and an MRN in clear text.
- *   - Only three placeholders exist: {studyInstanceUid}, {accessionNumber}, {patientId}. {patientId}
- *     is the MRN (the DICOM PatientID the worklist sends), never the patient's name. A template naming
- *     anything else is refused as a configuration fault rather than half-filled.
+ *   - Only identifiers of the STUDY exist: {studyInstanceUid}, {accession} (and its older spelling
+ *     {accessionNumber}). Owner S5: study UIDs and accession numbers are identifiers, not names, and a
+ *     viewer URL never carries a patient name or MRN, so {patientId} (the MRN) was withdrawn. A template
+ *     naming anything else is refused as a configuration fault rather than half-filled.
+ *   - The template comes from the hospital's DICOMweb connector (dicomweb.js, Admin > Integrations) when
+ *     one is saved, else from wardsynq.imagingViewer as before.
  *   - Every value is URL-encoded.
  *   - A placeholder with no known value means NO link, and the answer names what is missing.
  *
@@ -28,9 +31,9 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
-const PLACEHOLDERS = Object.freeze(["studyInstanceUid", "accessionNumber", "patientId"]);
+const PLACEHOLDERS = Object.freeze(["studyInstanceUid", "accession", "accessionNumber"]);
 
-/** PURE. The launch URL, or why there is none. values: { studyInstanceUid, accessionNumber, patientId } */
+/** PURE. The launch URL, or why there is none. values: { studyInstanceUid, accessionNumber } */
 function viewerLaunch(config, values) {
   const tpl = str(config && config.urlTemplate);
   if (!tpl) return { available: false, reason: "not_configured", detail: "No image viewer is configured for this hospital (wardsynq.imagingViewer.urlTemplate)." };
@@ -39,7 +42,9 @@ function viewerLaunch(config, values) {
   const unknown = used.filter((p) => !PLACEHOLDERS.includes(p));
   if (unknown.length) return { available: false, reason: "template_unsupported_placeholder", detail: `The viewer template names placeholders that do not exist: ${unknown.join(", ")}.` };
   if (!used.length) return { available: false, reason: "template_has_no_placeholder", detail: "The viewer template names no study, so it cannot open this one." };
-  const v = values || {};
+  const v = { ...(values || {}) };
+  v.accession = v.accession || v.accessionNumber;
+  v.accessionNumber = v.accessionNumber || v.accession;
   const missing = [...new Set(used.filter((p) => !str(v[p])))];
   if (missing.length) return { available: false, reason: "missing_identifier", missing, detail: `The viewer needs ${missing.join(", ")}, which is not known for this study.` };
   const url = tpl.replace(/\{([^}]*)\}/g, (_, p) => encodeURIComponent(str(v[p])));
@@ -129,19 +134,13 @@ async function imagingStudies(request, env, ctx) {
 
   let studies = [];
   try { studies = await svc.byPatient("ImagingStudy", patientId); } catch { unreadable.push("ImagingStudy"); }
-  const tpl = str(ctx.viewerConfig && ctx.viewerConfig.urlTemplate);
-  let mrn = "";
-  if (tpl.includes("{patientId}")) {
-    try { const p = await svc.get("Patient", patientId); mrn = str(p && p.mrn); } catch { unreadable.push("Patient"); }
-  }
-
   const { templates, rejected } = templatesOf(ctx.templatesConfig);
   return {
     ...base, ok: true, patientId,
     orders: orders.map((o) => {
       const s = studyForOrder(o, studies);
       // The accession is the study's own when one landed; otherwise the id this hospital issued the order under.
-      const values = { studyInstanceUid: s && s.studyUid, accessionNumber: (s && s.accessionNumber) || o.id, patientId: mrn };
+      const values = { studyInstanceUid: s && s.studyUid, accessionNumber: (s && s.accessionNumber) || o.id };
       return {
         serviceRequestId: o.id, display: o.display || o.code || null,
         study: s ? { id: s.id, studyUid: s.studyUid || null, accessionNumber: s.accessionNumber || null, modality: s.modality || null, started: s.started || null, seriesCount: s.seriesCount == null ? null : s.seriesCount, instanceCount: s.instanceCount == null ? null : s.instanceCount } : null,

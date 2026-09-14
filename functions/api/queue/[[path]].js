@@ -116,6 +116,8 @@ import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/f
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
+import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
+import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -1070,6 +1072,9 @@ export async function onRequest(context) {
          * staff.admin here AND a clinical actor that may write the record, inside webhooks.js. */
         webhooks: CAPS.STAFF_ADMIN, webhook: CAPS.STAFF_ADMIN, "webhook-update": CAPS.STAFF_ADMIN,
         "webhook-rotate": CAPS.STAFF_ADMIN, "webhook-test": CAPS.STAFF_ADMIN, "webhook-deliveries": CAPS.STAFF_ADMIN,
+        /* Owner S2/S4/S5 connectors (connectors.js), Admin Center > Integrations: the webhooks' own double
+         * gate, staff.admin here AND a clinical actor that may write the record inside the handler. */
+        connectors: CAPS.STAFF_ADMIN, "connector-save": CAPS.STAFF_ADMIN, "connector-test": CAPS.STAFF_ADMIN,
         /* Connected apps (SMART client registration, smart-clients.js), Admin Center > Integrations.
          * staff.admin here AND a clinical actor that may write the record, inside the handlers -
          * the webhooks' own double gate, so hr is refused on every one of these too. */
@@ -2108,6 +2113,20 @@ export async function onRequest(context) {
         const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
+      if (sub === "connectors" && method === "GET") {
+        const r = await listConnectors(request, env, { ...deps, kind: url.searchParams.get("kind") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "connector-save" && method === "POST") {
+        const r = await saveConnector(request, env, { ...deps, kind: body.kind, provider: body.provider, name: body.name, settings: body.settings, secrets: body.secrets,
+          active: typeof body.active === "boolean" ? body.active : undefined, id: body.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "connector-test" && method === "POST") {
+        const r = await testConnector(request, env, { ...deps, id: body.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       /* CONNECTED APPS (smart-clients.js), Admin Center > Integrations. The hospital's SMART client
        * registry: the enable switch, the client list with key counts but never key material, and
        * the save/remove writes through ORG.updateOrg, audited with the clientId and the action. */
@@ -2781,8 +2800,12 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-studies" && method === "GET") {
+        // The hospital's DICOMweb connector decides the viewer when one is saved; the older org field otherwise.
+        let dicomConn = null;
+        try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-imaging" && method === "POST") {

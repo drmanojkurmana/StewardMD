@@ -527,7 +527,7 @@ async function listWebhookDeliveries(request, env, ctx) {
 
 export {
   DELIVERY_TYPE, HEALTH_TYPE, TOPIC_DELIVER, TIMEOUT_MS, AUTO_DISABLE_FAILURES, AUTO_DISABLE_SPAN_MS, ROTATION_OVERLAP_MS,
-  addressBlocked, checkDestination, signPayload, verifySignature, notificationBody, sendOnce, summaryOf,
+  addressBlocked, checkDestination, signPayload, verifySignature, notificationBody, sendOnce, summaryOf, sealSecret, openSecret, hmacHex,
   fanOut, deliverOne, webhookConsumers,
   registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries,
 };

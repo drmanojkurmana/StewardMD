@@ -37,11 +37,11 @@ test("viewerLaunch: an unknown placeholder is refused as a configuration fault",
 });
 
 test("viewerLaunch: a missing identifier names what is missing", () => {
-  const r = viewerLaunch({ urlTemplate: "https://pacs.example/viewer?acc={accessionNumber}&pid={patientId}" }, { accessionNumber: "A1" });
+  const r = viewerLaunch({ urlTemplate: "https://pacs.example/viewer?acc={accessionNumber}&uid={studyInstanceUid}" }, { accessionNumber: "A1" });
   assert.equal(r.available, false);
   assert.equal(r.reason, "missing_identifier");
-  assert.deepEqual(r.missing, ["patientId"]);
-  assert.match(r.detail, /patientId/);
+  assert.deepEqual(r.missing, ["studyInstanceUid"]);
+  assert.match(r.detail, /studyInstanceUid/);
 });
 
 test("viewerLaunch: every value is URL-encoded", () => {
@@ -51,12 +51,15 @@ test("viewerLaunch: every value is URL-encoded", () => {
   assert.ok(!r.url.includes("A 1&B"));
 });
 
-test("viewerLaunch: the patient's NAME never reaches the link, even if offered", () => {
-  const r = viewerLaunch({ urlTemplate: "https://pacs.example/viewer?acc={accessionNumber}&pid={patientId}" },
+test("viewerLaunch: the patient's NAME and MRN never reach the link, even if offered (owner S5)", () => {
+  const r = viewerLaunch({ urlTemplate: "https://pacs.example/viewer?acc={accessionNumber}" },
     { accessionNumber: "A1", patientId: "MRN-1", name: "Manoj Kurmana" });
   assert.equal(r.available, true);
   assert.ok(!r.url.includes("Manoj"));
   assert.ok(!r.url.toLowerCase().includes("kurmana"));
+  assert.ok(!r.url.includes("MRN-1"));
+  const withMrn = viewerLaunch({ urlTemplate: "https://pacs.example/viewer?pid={patientId}" }, { patientId: "MRN-1" });
+  assert.equal(withMrn.reason, "template_unsupported_placeholder", "the MRN placeholder no longer exists");
 });
 
 test("studyForOrder: matches by serviceRequestId first", () => {
@@ -229,7 +232,7 @@ function seedHospital() {
   docs.set(`q_orgs/${ORG}`, { fields: {
     id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode: "wardsynq", connectTenantId: TENANT_ROW.id, ownerUid: "cfa:nobody", createdAt: 1,
     wardsynq: {
-      imagingViewer: { urlTemplate: "https://pacs.example.test/viewer?acc={accessionNumber}&pid={patientId}" },
+      imagingViewer: { urlTemplate: "https://pacs.example.test/viewer?acc={accession}" },
       radiologyTemplates: RADIOLOGY_TEMPLATES,
     },
   }, updateTime: "t1" });
