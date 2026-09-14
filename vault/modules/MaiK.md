@@ -146,3 +146,5 @@ The original wordmark and engine selector share the first header row. Conversati
 
 ## Startup Signature Trace (2026-09-14)
 The existing 107px solid StewardMD mark is visible from the first frame. A mint contour draws over the mark, blooms once, and fades away. Dark mode uses the existing white mask with the same overlay motion. Reduced-motion users see only the solid mark.
+
+The brighter revision uses an ice-mint contour with a white light core, two teal glow layers, and a soft background halo. Drawing completes in 1.12 seconds so the luminous finish appears before the personalised-screen transition at 1.56 seconds. Logo dimensions remain 107px; reduced-motion suppresses both overlays.

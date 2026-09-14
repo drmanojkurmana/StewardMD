@@ -382,15 +382,19 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* Signature Trace: the existing solid 107px mark is present from the first frame. The
      animated contour is a short mint highlight laid over it, never a replacement logo. */
   #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1!important}
-  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(45,212,191,.52);filter:drop-shadow(0 0 0 transparent);animation:sbsSignatureGlow 2.18s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.68);filter:drop-shadow(0 0 0 transparent)}
+  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(0,190,153,.9);color:#baffea;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo));animation:sbsSignatureGlow 2.4s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
+  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(40,255,201,.95);color:#baffea;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo))}
   #smdBootSplash.sbs-visible .sbs-logo-trace{animation-play-state:running}
-  #smdBootSplash .sbs-logo-trace path{stroke-width:4.4}
-  @keyframes sbsSignatureGlow{0%,58%{opacity:1;filter:drop-shadow(0 0 0 transparent)}72%{opacity:1;filter:drop-shadow(0 0 8px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
+  #smdBootSplash .sbs-logo-trace path{stroke-width:6;animation-duration:calc(var(--sbs-trace-duration) * .72);animation-delay:calc(var(--sbs-trace-delay) * .72)}
+  #smdBootSplash .sbs-logo-stage::before{content:"";position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle,rgba(48,222,179,.4),rgba(48,222,179,0) 72%);filter:blur(10px);opacity:0;animation:sbsSignatureAura 2.4s ease-in-out both;animation-play-state:paused;pointer-events:none}
+  #smdBootSplash.sbs-visible .sbs-logo-stage::before{animation-play-state:running}
+  @keyframes sbsSignatureGlow{0%,35%{opacity:1;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--sbs-halo))}48%,58%{opacity:1;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 8px var(--sbs-halo)) drop-shadow(0 0 14px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
+  @keyframes sbsSignatureAura{0%{opacity:0;transform:scale(.8)}48%,58%{opacity:1;transform:scale(1.35)}100%{opacity:0;transform:scale(1.5)}}
   @media (prefers-reduced-motion:reduce){
     #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
     #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
     #smdBootSplash .sbs-logo-trace{display:none;animation:none;filter:none}
+    #smdBootSplash .sbs-logo-stage::before{display:none;animation:none}
   }
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
