@@ -639,5 +639,13 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - docs/emr-gap-analysis/P2_EXIT_EVIDENCE.md: all nine P2 exit criteria with verified screens, routes and quoted tests. Verdicts: 8 MET WITH LIMITS, 1 MET (modules without destabilising the core); none NOT MET. Limits are named per row.
 - Reachability checker fix: it walked dist-wardsynq/ (build output) and counted stale copies as screens; now skipped. Honest count: 23 screens, 423 routes, 0 without a screen, 0 without a test.
 - Production audit chain: schema and code live; no production writes since the 11:10Z deploy, so the first live links are still to be observed (hourly check armed).
+- Update later the same day: portal gaps closed (p2-portal-gaps) and the audit chain head anchored outside D1 (Muse). See the next entry.
 - Open, owner only: document bucket (DOC_S3_*), payment provider credentials, notification channel, payer endpoint and credentials, PACS viewer URL template, cloud speech decision for voice typing, two dependency advisories (@xmldom/xmldom, brace-expansion), penetration test to commission (plan in docs/PENETRATION_TEST_PLAN.md), FHIR R4B/R5 when a partner needs it. Owner confirmations requested: hospital-group counts computed by an audited system read authorised by owner acceptance; recording-dot/admin pill/portal Revoke colours.
 
+
+### 2026-09-14 (night) - portal gaps closed; audit chain anchored outside the database
+
+- Portal (p2-portal-gaps): queue status (own tickets only, people ahead as a count, stored ETA or "No estimate", ambiguous MRN link shows "ask at the desk"; POST /api/portal/queue audited); released documents (clinician releases an exact version from Chart > Documents via POST /ward/document-release, emr.treat; portal download via POST /api/portal/document streams bytes only if released, current and within retention, audited before sending); full discharge summary (clinician chooses patient copy or full at release; while any result is withheld or a diagnosis is differential, Tests/Assessment/Diagnoses stay withheld). Proxies get the new sections only when granted. 19 new tests, headless portal check 25/25.
+- Owner decisions: the OPD queue has no token numbers (portal shows people ahead, not a token); full-summary withholding is per section, not per result (needs structured summary storage to refine); portal's older sections are still English-only.
+- Audit anchors (Muse): chain head copied to KV hourly; rewritten/truncated after an anchor shows in System health and Security review. Owner acknowledgement of a legitimate restore is being built (Muse).
+- Regression 6620 pass, 0 fail, 1 skipped. Every route has a screen and a test. Live portal.js 2, ward.js site79, admin.js 25.
