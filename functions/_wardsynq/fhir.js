@@ -885,9 +885,38 @@ function capabilityStatement(opts) {
           interaction: [{ code: "read" }],
           documentation: "Derived, read-only, and only this hospital: the organisation this door belongs to. No search: this server is not a directory of organisations.",
         }),
+        /* Terminology (fhir-terminology.js). The hospital's own lists are complete; every other system
+         * is a FRAGMENT under its owner's URI, and every expansion of one says so in a warning. */
+        {
+          type: "CodeSystem",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "url", type: "uri" }],
+          operation: [{ name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code" }],
+          documentation: "This hospital's order-set investigations, formulary and allergy classes (content complete, urn:stewardmd:fhir:CodeSystem:*), and FRAGMENTS of LOINC, HL7 code systems and any system the hospital loaded codes for (content fragment). This server ships no SNOMED CT, LOINC or ICD release and is not an authoritative source for them.",
+        },
+        {
+          type: "ValueSet",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "url", type: "uri" }],
+          operation: [{ name: "expand", definition: "http://hl7.org/fhir/OperationDefinition/ValueSet-expand" }, { name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/ValueSet-validate-code" }],
+          documentation: "One value set per code system of the hospital's own, loinc-carried, and the hospital's own definitions (wardsynq.terminology.valueSets). $expand takes filter (a case-insensitive substring of code or display), count and offset; a code the hospital names that this server does not hold is left out and named in a warning parameter.",
+        },
+        {
+          type: "AuditEvent",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "date", type: "date" }, { name: "agent", type: "token" }, { name: "type", type: "token" }, { name: "entity-type", type: "token" }, { name: "outcome", type: "token" }, { name: "_count", type: "number" }],
+          documentation: "The hospital's audit trail, read-only, carrying only what the audit screen shows (when, who, action, record type and id, patient reference hash, outcome). A SMART backend-services token with system/AuditEvent.read, or a staff session with staff.admin; never a patient/ or user/ scope. Reading it is audited.",
+        },
+        {
+          type: "Subscription",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "status", type: "token" }, { name: "criteria", type: "string" }],
+          documentation: "R4 Subscriptions Backport, rest-hook, id-only payload, one Subscription per topic (urn:stewardmd:fhir:SubscriptionTopic:<event>). Created and managed by the hospital administrator on the Integrations screen and delivered by the webhook outbox (signed, retried, auto-disabled); not created over FHIR, and $status is not offered. A SMART backend-services token with system/Subscription.read, or a staff session with staff.admin.",
+        },
       ],
       operation: [
         { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export and Patient/$export: Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; files need the same authorization and expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
+        { name: "summary", definition: "http://hl7.org/fhir/uv/ips/OperationDefinition/summary", documentation: "Patient/{id}/$summary: a document Bundle with a Composition whose sections are problems, allergies and medications (always present) and results (when there are any). An empty section carries emptyReason text 'none recorded'; a section whose source could not be read carries emptyReason unavailable or withheld and no entries. Authorised like a compartment read. Not validated against the IPS guide's profiles, so none is claimed." },
         { name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything", documentation: "Patient/{id}/$everything: _since, _type, _count, _page, _summary, _elements, _total" },
         { name: "validate", definition: "http://hl7.org/fhir/OperationDefinition/Resource-validate", documentation: `POST {Type}/$validate or $validate (a Bundle validates every entry) with the resource as the body, or GET {Type}/{id}/$validate for a stored resource. R4 base structure, cardinality, primitives, choice types, required bindings and invariants for ${VALIDATED_TYPES.join(", ")}; codings are checked with the terminology service; profiles named in meta.profile are evaluated only when the hospital has loaded them (wardsynq.fhir.profiles), and said so otherwise.` },
         { name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code", documentation: "GET CodeSystem/$validate-code?url=<system>&code=<code>[&display=]. Answers verified (seed tables, the hospital's code lists, or its terminology server), invalid (the server says no), recognised (a real system, not verified) or unmapped (a system this server does not know). Nothing is guessed." },
@@ -1331,5 +1360,5 @@ export {
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
   fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
-  validateFully, validateOperation, validateCodeOperation,
+  validateFully, validateOperation, validateCodeOperation, open,
 };

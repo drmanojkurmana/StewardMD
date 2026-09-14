@@ -5561,3 +5561,33 @@ Admin Center tab "Integrations" (Webhooks card). Test: `test/wardsynq-webhooks.t
 - TABLET (768 to 1180 px) IS CSS plus two wrapper divs in the round: 44 px targets, a sticky header carrying
   "next due", two panes in landscape. The next-due line is picked from the server's due times and the
   display-only NEXT table; it names nothing for an empty round and no dose at all when any dose was unreadable.
+## 2026-09-14 FHIR depth (P2.5): terminology from what the hospital holds, IPS that tells empty from unreadable, AuditEvent and Subscription as views
+
+`functions/_wardsynq/fhir-terminology.js`, `fhir-ips.js`, `fhir-audit.js`, `fhir-subscription.js`, wired in
+`fhir-route.js` so both doors (`/api/queue/ward/fhir/...`, `/api/fhir/{org}/...`) answer the same paths.
+Screens: Admin Center "FHIR" tab, Integrations webhook payload choice, ward chart "IPS summary".
+Tests: `test/wardsynq-fhir-terminology.test.mjs`, `-ips`, `-subscription`. Strategy: `docs/FHIR_STRATEGY.md`.
+- STILL R4 ONLY. R4B/R5 not served until a per-version mapper and validator exist; see the strategy doc.
+- TERMINOLOGY IS A VIEW, NOT A RELEASE. The hospital's order-set investigations, formulary and the allergy
+  class seed are our code systems (content complete; the seed is draft/experimental because it is unapproved).
+  LOINC, HL7 systems and hospital-loaded codes (`wardsynq.terminology.codeSystems`) are served as FRAGMENTS under
+  their owners' URIs and every expansion carries a warning. Hospital value sets come from
+  `wardsynq.terminology.valueSets` (no new config key: `terminology` was already whitelisted); a code named but
+  not held is left out and named. SNOMED CT/ICD with nothing loaded are not served at all. The external ICD
+  D1 (`/api/icd`) is deliberately not exposed as a CodeSystem: it is a search aid, not a vocabulary we version.
+- IPS: required sections always present. Readable and empty = emptyReason TEXT ONLY ("none recorded"), no
+  list-empty-reason code, because a record with no allergy rows is neither `nilknown` nor `notasked`. A failed
+  or refused read = emptyReason `unavailable`/`withheld` and no entries even if a sibling source read fine.
+  No IPS profile in meta: nothing validates against it. Immunizations omitted: no canonical type. Results capped
+  at the newest 100, said in the section text.
+- AUDITEVENT: the security review's evidence envelope only, never resourceCounts/latency. SMART `system/`
+  scope or staff.admin + a clinical actor; never patient/ or user/. The read is itself audited and refused if
+  that audit write fails. Action words are our own `urn:stewardmd` codes, not mapped onto DICOM. Read by id
+  scans the newest 20000 rows (ponytail; search with date= reaches older).
+- CONSENT was already exported from PatientConsent; now pinned by tests on both doors.
+- SUBSCRIPTION IS THE WEBHOOK, NOT A SECOND DELIVERY SYSTEM. A webhook registered with payload
+  `fhir-id-only` gets the R4 backport id-only notification Bundle (same outbox, signature, retries,
+  auto-disable) and is shown read-only as one Subscription per event type (`<endpoint>.<event>`, criteria
+  `urn:stewardmd:fhir:SubscriptionTopic:<event>`). No FHIR create and no `$status`: management stays on the
+  Integrations screen where the address checks and the secret live. `event-number` carries the outbox event id,
+  not a per-subscription sequence (no counter exists); a receiver needing strict sequence cannot rely on it.

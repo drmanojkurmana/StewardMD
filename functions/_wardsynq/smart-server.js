@@ -61,8 +61,10 @@ const ASSERTION_MAX_LIFETIME_SECONDS = 300;
 const JWKS_CACHE_MS = 3600000;
 const JWT_BEARER = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
-/** The FHIR resource names a scope may name: everything exported, plus Provenance. */
-const SCOPE_RESOURCES = Object.freeze([...Object.values(FHIR_TYPE), "Provenance", "*"]);
+/** The FHIR resource names a scope may name: everything exported, plus Provenance, plus AuditEvent and
+ *  Subscription (honoured only as system/ scopes, by fhir-audit.js and fhir-subscription.js; neither
+ *  names a clinical type to read). */
+const SCOPE_RESOURCES = Object.freeze([...Object.values(FHIR_TYPE), "Provenance", "AuditEvent", "Subscription", "*"]);
 /** The scopes that are not resource scopes but mean something here. */
 const SPECIAL_SCOPES = Object.freeze(["launch", "launch/patient", "openid", "fhirUser", "offline_access", "online_access"]);
 

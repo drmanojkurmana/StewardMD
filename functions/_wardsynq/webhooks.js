@@ -38,7 +38,7 @@ import { assertPublicHttpsUrl } from "../_connect/onboard/ssrf.js";
 import { VersionConflictError } from "./repository.js";
 import { outboxEvent, MAX_ATTEMPTS } from "./outbox.js";
 import { docKey, encryptBytes, decryptBytes } from "./documents.js";
-import { ENDPOINT_TYPE, TOPIC_EVENT, MAX_ENDPOINTS, EVENT_TYPES } from "./webhook-events.js";
+import { ENDPOINT_TYPE, TOPIC_EVENT, MAX_ENDPOINTS, EVENT_TYPES, PAYLOAD_FHIR, PAYLOADS, topicFor, subscriptionIdFor } from "./webhook-events.js";
 
 const DELIVERY_TYPE = "_wardsynq_webhook_delivery";
 const HEALTH_TYPE = "_wardsynq_webhook_health";
@@ -184,8 +184,34 @@ const newSecret = () => `whsec_${b64(crypto.getRandomValues(new Uint8Array(32)))
 
 /* ---- one send ------------------------------------------------------------------------------------ */
 
-/** PURE. The notification body. Ids and the event type only. */
-function notificationBody(event, orgId) {
+/**
+ * PURE. The notification body. Ids and the event type only.
+ *
+ * An endpoint registered with payload "fhir-id-only" is a FHIR Subscription (R4 Subscriptions Backport,
+ * rest-hook, id-only) and receives the backport's notification Bundle instead: a history Bundle whose
+ * first entry is the SubscriptionStatus Parameters and whose other entries are the focus resource's
+ * fullUrl with no resource. The same ids, the same signature headers, the same delivery; only the shape
+ * differs. `webhook.test` goes out as a handshake. References are relative to the hospital's FHIR base.
+ */
+function notificationBody(event, orgId, endpoint) {
+  if (endpoint && endpoint.payload === PAYLOAD_FHIR) {
+    const test = event.type === "webhook.test";
+    const focus = event.resource ? `${event.resource.resourceType}/${event.resource.id}` : null;
+    const subscription = `Subscription/${subscriptionIdFor(endpoint.id, test ? (endpoint.eventTypes || [])[0] : event.type)}`;
+    return JSON.stringify({
+      resourceType: "Bundle", type: "history", timestamp: event.occurredAt,
+      entry: [
+        { fullUrl: `urn:uuid:${crypto.randomUUID()}`, resource: { resourceType: "Parameters", parameter: [
+          { name: "subscription", valueReference: { reference: subscription } },
+          { name: "topic", valueCanonical: topicFor(test ? (endpoint.eventTypes || [])[0] : event.type) },
+          { name: "status", valueCode: "active" },
+          { name: "type", valueCode: test ? "handshake" : "event-notification" },
+          ...(test || !focus ? [] : [{ name: "notification-event", part: [{ name: "event-number", valueString: event.id }, { name: "timestamp", valueInstant: event.occurredAt }, { name: "focus", valueReference: { reference: focus } }] }]),
+        ] }, request: { method: "GET", url: `${subscription}/$status` }, response: { status: "200" } },
+        ...(test || !focus ? [] : [{ fullUrl: focus, request: { method: "GET", url: focus }, response: { status: "200" } }]),
+      ],
+    });
+  }
   return JSON.stringify({
     id: event.id, type: event.type, occurredAt: event.occurredAt, hospital: orgId || null,
     resource: event.resource ? { resourceType: event.resource.resourceType, id: event.resource.id } : null,
@@ -208,7 +234,7 @@ async function previousSecretFor(ep, env, nowMs) {
 async function sendOnce(endpoint, secret, event, deps, prevSecret) {
   const dest = await checkDestination(endpoint.url, deps);
   if (!dest.ok) return { ok: false, code: 0, reason: dest.reason };
-  const body = notificationBody(event, deps.orgId);
+  const body = notificationBody(event, deps.orgId, endpoint);
   const timestamp = Math.floor((deps.nowMs || Date.now()) / 1000);
   const signature = prevSecret
     ? `${await signPayload(secret, timestamp, body)},${await signPayload(prevSecret, timestamp, body)}`
@@ -219,7 +245,7 @@ async function sendOnce(endpoint, secret, event, deps, prevSecret) {
   try {
     res = await (deps.fetchImpl || fetch)(dest.url, {
       method: "POST", redirect: "manual", signal: controller.signal, body,
-      headers: { "Content-Type": "application/json", "User-Agent": "WardSynQ-Webhooks/1", "X-WardSynQ-Event-Id": event.id, "X-WardSynQ-Event-Type": event.type,
+      headers: { "Content-Type": endpoint.payload === PAYLOAD_FHIR ? "application/fhir+json" : "application/json", "User-Agent": "WardSynQ-Webhooks/1", "X-WardSynQ-Event-Id": event.id, "X-WardSynQ-Event-Type": event.type,
         "X-WardSynQ-Timestamp": String(timestamp), "X-WardSynQ-Signature": signature },
     });
   } catch (e) {
@@ -240,7 +266,7 @@ const hostOf = (url) => { try { return new URL(url).host; } catch { return null;
 function summaryOf(ep, health) {
   const h = health || {};
   return {
-    id: ep.id, url: ep.url, description: ep.description || null, eventTypes: ep.eventTypes || [], active: ep.active === true,
+    id: ep.id, url: ep.url, description: ep.description || null, eventTypes: ep.eventTypes || [], active: ep.active === true, payload: ep.payload || "wardsynq",
     status: ep.active === true ? "active" : ep.status === "auto-disabled" ? "auto-disabled" : "disabled",
     disabledAt: ep.disabledAt || null, disabledReason: ep.disabledReason || null,
     createdAt: ep.createdAt, createdBy: ep.createdBy, secretSetAt: ep.secretSetAt, version: ep.version,
@@ -350,6 +376,7 @@ function eventTypesFrom(v) {
   return { types: list.sort() };
 }
 
+const badPayload = { ok: false, status: 422, error: "unknown_payload", message: "The payload must be wardsynq (thin JSON) or fhir-id-only (FHIR Subscription notification)." };
 const readFailed = { ok: false, status: 502, error: "record_read_failed", message: "The webhook could not be read, so nothing was changed." };
 const writeFailed = (e) => e instanceof VersionConflictError
   ? { ok: false, status: 409, error: "version_conflict", message: "This webhook changed at the same moment. Reload and try again; nothing was saved." }
@@ -361,6 +388,8 @@ async function registerWebhook(request, env, ctx) {
   if (who.error) return who.error;
   const { types, error } = eventTypesFrom(ctx.eventTypes);
   if (error) return error;
+  const payload = ctx.payload === undefined || ctx.payload === null || ctx.payload === "" ? "wardsynq" : str(ctx.payload);
+  if (!PAYLOADS.includes(payload)) return badPayload;
   const dest = await checkDestination(ctx.url, ctx);
   if (!dest.ok) return { ok: false, status: 422, error: dest.reason === "dns-failed" ? "url_unresolvable" : "url_refused", message: dest.detail };
   let existing;
@@ -370,9 +399,9 @@ async function registerWebhook(request, env, ctx) {
   const secretEnc = await sealSecret(env, secret);
   if (!secretEnc) return { ok: false, status: 503, error: "webhook_key_not_configured", message: "Webhook secrets cannot be stored encrypted on this server, so no webhook was registered." };
   const at = new Date().toISOString();
-  const ep = { resourceType: ENDPOINT_TYPE, id: `wh-${randomHex(8)}`, version: 1, url: dest.url, description: str(ctx.description).slice(0, 120) || null, eventTypes: types,
+  const ep = { resourceType: ENDPOINT_TYPE, id: `wh-${randomHex(8)}`, version: 1, url: dest.url, description: str(ctx.description).slice(0, 120) || null, eventTypes: types, payload,
     active: true, status: "active", secretEnc, secretSetAt: at, createdAt: at, createdBy: who.actorId, writtenBy: { id: who.actorId, kind: "human", at } };
-  try { await who.repo.append(who.tenantId, [ep], { audit: auditEvent("webhook.register", who.actorId, { webhookId: ep.id, host: hostOf(ep.url), eventTypes: types }) }); }
+  try { await who.repo.append(who.tenantId, [ep], { audit: auditEvent("webhook.register", who.actorId, { webhookId: ep.id, host: hostOf(ep.url), eventTypes: types, payload }) }); }
   catch (e) { return writeFailed(e); }
   return { ok: true, webhook: summaryOf(ep), secret, secretNote: "Copy this secret now. It is not shown again." };
 }
@@ -395,6 +424,10 @@ async function updateWebhook(request, env, ctx) {
     const t = eventTypesFrom(ctx.eventTypes);
     if (t.error) return t.error;
     if (t.types.join() !== (ep.eventTypes || []).join()) { changes.eventTypes = { from: ep.eventTypes, to: t.types }; next.eventTypes = t.types; }
+  }
+  if (ctx.payload !== undefined && ctx.payload !== null && str(ctx.payload) !== (ep.payload || "wardsynq")) {
+    if (!PAYLOADS.includes(str(ctx.payload))) return badPayload;
+    changes.payload = { from: ep.payload || "wardsynq", to: str(ctx.payload) }; next.payload = str(ctx.payload);
   }
   if (typeof ctx.active === "boolean" && ctx.active !== (ep.active === true)) {
     changes.active = ctx.active;

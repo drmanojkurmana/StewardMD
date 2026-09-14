@@ -109,4 +109,13 @@ async function stageWebhookEvents(repository, tenantId, records, memo) {
   return out;
 }
 
-export { ENDPOINT_TYPE, TOPIC_EVENT, MAX_ENDPOINTS, EVENT_TYPES, webhookEventsFor, stageWebhookEvents };
+/* P2.5: an endpoint's payload shape. "wardsynq" is the thin JSON above; "fhir-id-only" makes the same
+ * endpoint an R4 backport Subscription (fhir-subscription.js) with one topic per event type. */
+const PAYLOAD_FHIR = "fhir-id-only";
+const PAYLOADS = Object.freeze(["wardsynq", PAYLOAD_FHIR]);
+/** The canonical of the topic an event type is. Ours, in our own namespace. */
+const topicFor = (type) => `urn:stewardmd:fhir:SubscriptionTopic:${str(type)}`;
+/** One Subscription per (endpoint, event type): R4 backport criteria name exactly one topic. */
+const subscriptionIdFor = (endpointId, type) => `${str(endpointId)}.${str(type)}`;
+
+export { ENDPOINT_TYPE, TOPIC_EVENT, MAX_ENDPOINTS, EVENT_TYPES, PAYLOAD_FHIR, PAYLOADS, topicFor, subscriptionIdFor, webhookEventsFor, stageWebhookEvents };
