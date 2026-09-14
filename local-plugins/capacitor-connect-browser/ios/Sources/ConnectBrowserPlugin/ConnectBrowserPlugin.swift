@@ -138,6 +138,12 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
                 webView.customUserAgent = ua
             }
             webView.navigationDelegate = self
+            #if DEBUG
+            // Debug builds only: let ios_webkit_debug_proxy see the hospital page, so a stall in the
+            // in-app browser can be read instead of guessed at (never in release: the doctor's EMR
+            // session must not be inspectable from a cable).
+            if #available(iOS 16.4, *) { webView.isInspectable = true }
+            #endif
 
             let vc = ConnectBrowserViewController(webView: webView, origins: origins, title: title)
             vc.delegate = self
@@ -250,6 +256,19 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("expression required")
             return
         }
+        // A 30s timeout, exactly like the Android plugin. WKWebView's callAsyncJavaScript is known to
+        // never call its completion when the page navigates while the call is pending (the GIMSR
+        // sign-in redirects through SSO to the data host while the engine is polling the page): the
+        // first live iPhone run hung forever on "Starting a new discovery" (2026-09-14). A rejection
+        // lets the engine's own catch/retry carry on; a hang has no way out.
+        let settled = NSLock()
+        var done = false
+        func finish(_ block: () -> Void) {
+            settled.lock(); defer { settled.unlock() }
+            if done { return }
+            done = true
+            block()
+        }
         DispatchQueue.main.async {
             vc.webView.callAsyncJavaScript(
                 "return (\(expression));",
@@ -257,12 +276,17 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
                 in: nil,
                 in: .page
             ) { result in
-                switch result {
-                case .success(let value):
-                    call.resolve(["result": Self.stringify(value)])
-                case .failure(let error):
-                    call.reject(error.localizedDescription)
+                finish {
+                    switch result {
+                    case .success(let value):
+                        call.resolve(["result": Self.stringify(value)])
+                    case .failure(let error):
+                        call.reject(error.localizedDescription)
+                    }
                 }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+                finish { call.reject("evaluate timed out") }
             }
         }
     }

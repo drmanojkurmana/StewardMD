@@ -50,7 +50,14 @@ export function createPluginClient({ plugin, storeId, origins, userAgent, title 
     // which are shared with the Camofox path) is stripped before it ever reaches the plugin.
     async evaluate({ expression }) {
       const expr = String(expression).startsWith('mw:') ? String(expression).slice(3) : String(expression);
-      const result = await plugin.evaluate({ expression: expr });
+      /* NO PLATFORM MAY HANG THE ENGINE. The native evaluate is expected to time out on its own
+       * (Android 30s; iOS since 2026-09-14), but the engine guards itself too: an orphaned
+       * evaluate (WKWebView drops a pending call when the page navigates) once froze the whole
+       * discovery on "Starting a new discovery" with no way out. */
+      const result = await Promise.race([
+        plugin.evaluate({ expression: expr }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('evaluate timed out')), 35000)),
+      ]);
       return { result: result?.result ?? null };
     },
 
