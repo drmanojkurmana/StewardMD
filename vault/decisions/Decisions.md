@@ -5684,3 +5684,87 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   token beside the name. SMS/WhatsApp "registered" and "next" lead with "Your token: X" (a token names nobody).
   Patient portal and the /queue link page show "Your token: X" for the patient's own ticket only.
 - Not built: no recall out of `no_show` (it is terminal; "recall" today is called -> waiting -> called).
+
+## 2026-09-14 Hospital connectors (owner S2, S4, S5, S7): pluggable per hospital, secrets sealed, nothing trusted from a browser
+
+### S7 Vertex AI is the PHI provider (functions/_wardsynq/maik-gateway.js)
+- Two halves of approval. PLATFORM: `PHI_CAPABLE = wardsynq, local-openai, vertex`; a hospital cannot widen it,
+  so `phiApproved: ["gemini"]` (AI Studio, no data agreement) now permits nothing and the refusal says so.
+  HOSPITAL: `wardsynq.maik.phiApproved` as before (the owner wrote `wardsynq.ai.phiApproved`; the existing key is
+  `maik`, kept), default none. Admin > MaiK clinical AI's cloud switch writes `["vertex"]` only.
+- Patient data reaches Vertex ONLY through the project's regional endpoint
+  (`<GCP_LOCATION|asia-south1>-aiplatform.googleapis.com/v1/projects/<GCP_PROJECT>/locations/...`) with an OAuth
+  token for `GCP_SA_EMAIL` (Workload Identity Federation, or legacy SA key). These are the bindings
+  functions/api/ai already uses for MaiK in production (vault/modules/MaiK.md: "Vertex (prod only)"); no binding
+  added. The token code mirrors the AI route rather than importing a route file (same choice as _fundx_ai.js).
+- Why not express mode for PHI: no project, no region, no residency (2026-09-10 entry), and the project's API
+  keys are restricted to the Gemini API by org policy (Connect Agent note), so it answers PERMISSION_DENIED in
+  production anyway. Non-PHI calls keep express mode while a key exists, so the Connect agent brain and the eval
+  harness are unchanged.
+- A server without the project bindings: Vertex is not PHI-capable, maikStatus names the missing bindings and
+  the Admin screen shows them. NOT verified: that gemini-3.6-flash is served in asia-south1 for this project.
+
+### The connector pattern (functions/_wardsynq/connectors.js), shared by S2, S4, S5
+- One record type `_wardsynq_connector` in the tenant repository (append-only, versioned, like webhook endpoints):
+  `{kind, provider, name, settings, secretsEnc{key: sealed}, secretsSetAt, active}`. Kinds and providers are
+  code (`KINDS`), each provider declaring `settings[]`, `secrets[]`, `validate()` and optionally `test()`; the
+  Admin > Integrations forms are drawn from that catalogue. Singleton kinds (dicom, payment) have id = kind.
+- Why the repository and not the org document: the org whitelist passes config through unvalidated, has no
+  version check, and is readable wherever the org is read. A connector needs sealed credentials, optimistic
+  concurrency and an audit row in the same append. Existing org fields (`imagingViewer`, `payers`) stay as the
+  fallback so no hospital's configuration stops working.
+- Credentials: sealed with the document key (webhooks.js sealSecret, now exported), never returned by any route,
+  opened only where an adapter uses them. A save carrying new credentials only is audited `connector.rotate`;
+  others `connector.create/update/enable/disable`; `connector.test` for tests. Scope names keys and hosts only.
+- Gate: staff.admin at the route plus a clinical actor that may write the record (the webhooks' double gate).
+- URL settings pass webhooks.js checkDestination at save (https, no private/metadata address, every resolved
+  address); each adapter checks again before calling and never follows a redirect.
+
+### S5 DICOMweb (functions/_wardsynq/dicomweb.js)
+- Settings: QIDO-RS base (required), WADO-RS base, auth none/bearer/basic with the credential sealed, a viewer
+  template, or an OHIF base that becomes `<ohif>/viewer?StudyInstanceUIDs={studyInstanceUid}` (OHIF docs).
+- Viewer placeholders are now `{studyInstanceUid}`, `{accession}` (and the older `{accessionNumber}`).
+  `{patientId}` (the MRN) was WITHDRAWN from imaging-viewer.js: owner rule, no name or MRN in a viewer URL. A
+  hospital whose org template used it now gets "template_unsupported_placeholder" and no link, stated.
+- Test connection = one `GET <qido>/studies?limit=1`, Accept `application/dicom+json` (PS3.18 10.6), 5 s, no
+  redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
+- WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
+- NOT verified against a real PACS; mocked transport only.
+
+### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)
+- The registry stays wardsynq-tpa-adapter.js `adapterForPayer` with injected kinds; kinds are now `fhir-claim`
+  (existing adapter), `nhcx`, `manual`. Payer connectors (id `payer-<ref>`) become registry payers with
+  `auth.connectorSecret` (document-key seal, opened in billing.js sealedCredentialAuthorizer at send time);
+  `wardsynq.payers` entries keep `credentialRef` (Connect envelope). Same id: the connector wins, no merging.
+- claim-state, preauth and claims read the merged registry; a registry that cannot be read refuses with 502
+  rather than recording the payer as "not configured".
+- NHCX, verified from the HCX Protocol OpenAPI and the NRCES IG: `/claim/submit`, `/preauth/submit`, JWE body
+  with `alg RSA-OAEP`, `enc A256GCM`, `x-hcx-sender_code`, `x-hcx-recipient_code`, `x-hcx-api_call_id`,
+  `x-hcx-correlation_id`, `x-hcx-timestamp`; ClaimBundle is a Bundle of type collection. The adapter builds
+  that envelope and SENDS NOTHING (`not_configured`, with the list). Missing: JWE encryption with the
+  recipient key from the HCX registry, NHCX profile URLs and mandatory elements, participant authentication
+  and gateway URLs, and an on_submit callback route. Those need NHCX onboarding; the hospital submits through
+  the payer portal meanwhile.
+
+### S2 Payment gateways (functions/_wardsynq/payment-gateways.js, payment-links.js)
+- Contract per gateway: createPaymentRequest, verifyWebhook (raw body), parseWebhook, fetchStatus, refund.
+  Shipped: `manual` (default, no link), `razorpay` (Payment Links), `stripe` (Checkout Sessions). Endpoints,
+  auth, amount units and signature schemes were read from the official docs on 2026-09-14 and are listed in the
+  file header. Only currencies with a 1/100 minor unit are accepted; any other is refused, never guessed.
+- A link is a `_wardsynq_payment_request` record (invoice, amount minor, currency, gateway reference), one open
+  link per invoice, created by billing.charge. It records nothing on the invoice.
+- `POST /api/queue/payment-callback/<orgId>` is public by design (the gateway has no session). The invoice is
+  marked paid only when: the signature verifies with the sealed webhook secret, the event is a paid event for
+  a request this hospital issued with the same gateway reference, the gateway's own API (this hospital's key)
+  says that reference is paid, and amount and currency equal the request exactly. Otherwise the request is
+  flagged (audited `payment.callback.flagged`, shown on the cashier screen), the invoice untouched, 200 so the
+  gateway stops retrying. A transient failure (gateway API down, a version conflict) answers 503/409 so it
+  retries. A bad signature writes nothing, so the public door cannot grow the audit chain.
+- Why fetchStatus as well as the signature: a leaked webhook secret alone must not be able to mark bills paid.
+- The ledger payment is posted by a SERVICE actor (`service:payment-gateway`, write scope Invoice only) with
+  `reference <provider>:<paymentId>` and `collection.capture "integrated"` via applyAdapterResult, the only
+  path that produces it. Idempotency is the reference on the ledger plus the request status: the invoice
+  write and the request update are two appends, and a retry completes the second.
+- NOT built: gateway refunds from the cashier screen (adapter refund() exists and is contract-tested; the
+  ledger refund is still entered by hand), partial payments, and a rate limit on the public callback (a bad
+  signature costs one org read and one HMAC). NOT verified against live Razorpay or Stripe.

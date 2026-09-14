@@ -116,6 +116,10 @@ import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/f
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
+import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
+import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
+import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
+import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -624,6 +628,18 @@ export async function onRequest(context) {
         "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff",
       }, corsHeaders(request)) });
     }
+    /* A PAYMENT GATEWAY'S NOTICE (owner S2, payment-links.js). Before authentication on purpose: the
+     * gateway carries no staff session. Its signature over the raw body, checked with this hospital's
+     * sealed webhook secret, and the gateway's own API confirming the payment are the authorisation; an
+     * unsigned or mis-signed notice writes nothing. The path names the hospital, never a patient. */
+    if (method === "POST" && seg === "payment-callback" && parts[1]) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const payOrg = await ORG.getOrg(env, parts[1]);
+      const payMig = await wsqForcedMigration(env, payOrg);
+      if (!payMig || payMig.error) return json({ ok: false, error: "not_found" }, 404, request);
+      const r = await receivePaymentCallback(request, env, { migration: payMig, recordDeps: wsqRecordDeps(env, payMig.tenantId), fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+      return json(r.body, r.status, request);
+    }
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
@@ -1070,6 +1086,9 @@ export async function onRequest(context) {
          * staff.admin here AND a clinical actor that may write the record, inside webhooks.js. */
         webhooks: CAPS.STAFF_ADMIN, webhook: CAPS.STAFF_ADMIN, "webhook-update": CAPS.STAFF_ADMIN,
         "webhook-rotate": CAPS.STAFF_ADMIN, "webhook-test": CAPS.STAFF_ADMIN, "webhook-deliveries": CAPS.STAFF_ADMIN,
+        /* Owner S2/S4/S5 connectors (connectors.js), Admin Center > Integrations: the webhooks' own double
+         * gate, staff.admin here AND a clinical actor that may write the record inside the handler. */
+        connectors: CAPS.STAFF_ADMIN, "connector-save": CAPS.STAFF_ADMIN, "connector-test": CAPS.STAFF_ADMIN,
         /* Connected apps (SMART client registration, smart-clients.js), Admin Center > Integrations.
          * staff.admin here AND a clinical actor that may write the record, inside the handlers -
          * the webhooks' own double gate, so hr is refused on every one of these too. */
@@ -1269,6 +1288,8 @@ export async function onRequest(context) {
         // billing.view - the actual reason that capability exists, per the note above.
         invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, "invoice-discount": CAPS.BILLING_CHARGE, "invoice-deposit": CAPS.BILLING_CHARGE,
         "invoice-payment": CAPS.BILLING_CHARGE, "invoice-refund": CAPS.BILLING_CHARGE, "invoice-adjustment": CAPS.BILLING_CHARGE,
+        // Owner S2: asking the gateway for a link is taking money (billing.charge); reading them is reading bills.
+        "invoice-payment-link": CAPS.BILLING_CHARGE, "payment-requests": CAPS.BILLING_VIEW,
         "invoice-writeoff": CAPS.BILLING_CHARGE, "invoice-void": CAPS.BILLING_CHARGE,
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
@@ -2108,6 +2129,20 @@ export async function onRequest(context) {
         const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
+      if (sub === "connectors" && method === "GET") {
+        const r = await listConnectors(request, env, { ...deps, kind: url.searchParams.get("kind") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "connector-save" && method === "POST") {
+        const r = await saveConnector(request, env, { ...deps, kind: body.kind, provider: body.provider, name: body.name, settings: body.settings, secrets: body.secrets,
+          active: typeof body.active === "boolean" ? body.active : undefined, id: body.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "connector-test" && method === "POST") {
+        const r = await testConnector(request, env, { ...deps, id: body.id });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       /* CONNECTED APPS (smart-clients.js), Admin Center > Integrations. The hospital's SMART client
        * registry: the enable switch, the client list with key counts but never key material, and
        * the save/remove writes through ORG.updateOrg, audited with the clientId and the action. */
@@ -2384,15 +2419,22 @@ export async function onRequest(context) {
         const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, invoiceId: body.invoiceId, payerId: body.payerId, policyNumber: body.policyNumber, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* Owner S4: the payer registry is this hospital's payer connectors, then wardsynq.payers. A registry
+       * that could not be read refuses the claim action: falling back to "not configured" would record a
+       * payer as absent when it was only unread. */
+      const payersNow = async () => mergePayers(payersFromConnectors(await activeConnectors(deps.recordDeps.repository, mig.tenantId, "payer")), (wsqCfg && wsqCfg.payers) || null);
+      const payersUnread = { ok: false, error: "payer_registry_unread", message: "This hospital's payer list could not be read, so nothing was done. Try again." };
       if (sub === "claim-state" && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
           payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
-          payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null,
-          payerId: body.payerId, requestedAmount: body.requestedAmount, payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payerId: body.payerId, requestedAmount: body.requestedAmount, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim-estimate" && method === "POST") {
@@ -2400,7 +2442,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claims" && method === "GET") {
-        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers: (wsqCfg && wsqCfg.payers) || null });
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "upcoding" && method === "GET") {
@@ -2491,6 +2534,14 @@ export async function onRequest(context) {
           method: body.method, paymentDetails: body.paymentDetails || body.details || null,
           paymentMethods: (wsqCfg && wsqCfg.payment) || null,
           idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-payment-link" && method === "POST") {
+        const r = await createPaymentLink(request, env, { ...deps, invoiceId: body.invoiceId, fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "payment-requests" && method === "GET") {
+        const r = await listPaymentRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-payment" && method === "POST") {
@@ -2781,8 +2832,12 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-studies" && method === "GET") {
+        // The hospital's DICOMweb connector decides the viewer when one is saved; the older org field otherwise.
+        let dicomConn = null;
+        try { dicomConn = (await activeConnectors(deps.recordDeps.repository, mig.tenantId, "dicom"))[0] || null; }
+        catch { return json({ ok: false, error: "record_read_failed", message: "The imaging connector could not be read." }, 502, request); }
         const r = await imagingStudies(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", serviceRequestId: url.searchParams.get("serviceRequestId") || "",
-          viewerConfig: (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
+          viewerConfig: (dicomConn && viewerConfigOf(dicomConn.settings)) || (wsqCfg && wsqCfg.imagingViewer) || null, templatesConfig: (wsqCfg && wsqCfg.radiologyTemplates) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "report-imaging" && method === "POST") {

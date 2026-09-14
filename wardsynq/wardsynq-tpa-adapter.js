@@ -66,6 +66,8 @@ async function submitViaAdapter(claim, adapter, opts) {
 }
 
 /* ---- P1.5: THE PAYER REGISTRY ------------------------------------------------------------------
+ * Payers saved as connectors (functions/_wardsynq/payer-connectors.js, owner S4) arrive in the same shape
+ * with auth.connectorSecret instead of credentialRef, and adapter kind "nhcx" joins the injected kinds.
  * wardsynq.payers is the hospital's list: [{ id, name, adapter: "fhir-claim" | "manual", endpoint,
  * currency, auth: "none" | { type: "bearer" | "header", headerName, credentialRef }, rules }].
  * The claim record carries only a payerId. Everything payer-specific is resolved here, at the edge. */
@@ -115,7 +117,7 @@ function publicPayers(payers) {
   return (Array.isArray(payers) ? payers : []).filter((p) => p && str(p.id)).map((p) => ({
     id: str(p.id), name: str(p.name) || str(p.id), adapter: str(p.adapter) || "manual",
     endpointConfigured: /^https:\/\//i.test(str(p.endpoint)),
-    credentialConfigured: !!(p.auth && typeof p.auth === "object" && str(p.auth.credentialRef)),
+    credentialConfigured: !!(p.auth && typeof p.auth === "object" && (str(p.auth.credentialRef) || str(p.auth.connectorSecret))),
   }));
 }
 

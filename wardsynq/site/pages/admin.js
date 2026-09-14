@@ -849,17 +849,18 @@
     return c.api("/ward/maik-status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
       if (!r || !r.ok) { body.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
       // wardsynq.maik.phiApproved is a per-provider allowlist (see maik-gateway.js maikConfig), not a
-      // plain flag. The switch below is a yes/no simplification over "gemini" + "vertex", the two
-      // providers that leave the hospital; it never touches the local/on-prem entries.
+      // plain flag. S7: Vertex AI is the one cloud provider with a patient-data agreement, so the cloud
+      // switch approves "vertex" and nothing else; the gateway refuses PHI to AI Studio whatever is saved.
       var approved = Array.isArray(r.phiApproved) ? r.phiApproved : [];
-      var cloudApproved = approved.indexOf("gemini") >= 0 || approved.indexOf("vertex") >= 0;
+      var cloudApproved = approved.indexOf("vertex") >= 0;
+      var vx = (r.providers || []).filter(function (p) { return p.provider === "vertex"; })[0] || {};
       var localApproved = approved.indexOf("local-openai") >= 0;
       // The on-premises endpoint is configuration, not status, so it comes from the org document.
       var curMaik = ((c.state.org && c.state.org.wardsynq) || {}).maik || {};
       var localUrl = curMaik.localBaseUrl || "", localModel = curMaik.localModel || "";
       body.innerHTML = '<div class="card"><h2>MaiK clinical AI</h2>' +
         '<div class="kv"><dt>Enabled</dt><dd>' + (r.enabled ? "yes" : "no") + "</dd>" +
-        "<dt>Patient data approved for a cloud model</dt><dd>" + (cloudApproved ? "yes (" + c.esc(r.phiApproved.join(", ")) + ")" : "no") + "</dd>" +
+        "<dt>Patient data approved for Vertex AI</dt><dd>" + (cloudApproved ? (vx.phiCapable ? "yes" : "approved, but this server cannot send patient data to Vertex yet") : "no") + "</dd>" +
         "<dt>Model allowlist</dt><dd>" + (Array.isArray(r.allow) && r.allow.length ? c.esc(r.allow.join(", ")) : "none (registry default)") + "</dd>" +
         "<dt>Timeout</dt><dd>" + c.esc(String(r.timeoutMs || "")) + " ms</dd></div>" +
         '<h3>Providers</h3><div class="tbl"><table><thead><tr><th>Provider</th><th>Configured</th><th>Detail</th><th>Credential</th></tr></thead><tbody>' +
@@ -876,7 +877,8 @@
         '<label class="f"><span>Model name</span><input id="admMaikLocalModel" placeholder="the name the server answers to" value="' + c.esc(localModel) + '"></label></div>' +
         '<div class="row"><label class="f"><input type="checkbox" id="admMaikPhiLocal"' + (localApproved ? " checked" : "") + "> Patient data may be sent to the on-premises model</label></div>" +
         '<h3>Cloud model</h3><div class="row">' +
-        '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to an approved cloud model</label>" +
+        '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to Vertex AI (the cloud provider with a patient-data agreement)</label>" +
+        (vx.phiCapable === false ? '<div class="msg err">' + c.esc(vx.detail || "Vertex AI cannot receive patient data on this server.") + "</div>" : "") +
         '<button class="btn" id="admMaikSave" type="button">Save</button></div><div id="admMaikMsg"></div>' +
         '<div class="msg note">Enabling MaiK uses the providers listed above. A cloud provider only answers when the environment holds its key (named under Credential). Patient data leaves the hospital only when the second switch is on. Clinical content from MaiK is not signed off.</div>' +
         "</div>";
@@ -891,7 +893,7 @@
         // model must not silently approve a cloud one, which is exactly what one boolean would do.
         var approve = [];
         if (phiLocal) approve.push("local-openai");
-        if (phi) { approve.push("gemini"); approve.push("vertex"); }
+        if (phi) approve.push("vertex");
         var existing = (c.state.org && c.state.org.wardsynq) || {};
         var wsq = Object.assign({}, existing, { maik: Object.assign({}, existing.maik, {
           enabled: enabled, phiApproved: approve, localBaseUrl: lUrl || null, localModel: lModel || null
@@ -904,7 +906,7 @@
             if (or2 && or2.ok) c.state.org = or2.org;
             c.toast("MaiK settings saved."); WSQ.render("admin");
           });
-        });
+        }, function () { btn.disabled = false; document.getElementById("admMaikMsg").innerHTML = '<div class="msg err">No response from the server. The settings may not have been saved; reload to check.</div>'; });
       };
     });
   }
@@ -1513,9 +1515,140 @@
     });
   }
 
+  // ---- Integrations > Connectors (owner S2, S4, S5) -------------------------------------------
+  /* The hospital's own imaging archive, payers and payment gateway. Every form is drawn from the
+   * server's catalogue, so a field the server does not take is never offered. Credentials are typed in
+   * and never shown again: the list says which are set and when. null = loading, {failed} = not loaded. */
+  var CN_STATE = { editing: null, result: {} };
+  function connectorFormHtml(esc, kind, cur) {
+    var provs = kind.providers;
+    var pid = (cur && cur.provider) || CN_STATE.provider && CN_STATE.provider[kind.kind] || provs[0].id;
+    var p = provs.filter(function (x) { return x.id === pid; })[0] || provs[0];
+    var settings = (cur && cur.settings) || {}, set = (cur && cur.secretsSet) || [];
+    var h = '<div class="cnForm" data-cn-kind="' + esc(kind.kind) + '"><h3>' + (cur ? "Change " + esc(cur.name || cur.id) : "Add") + "</h3>";
+    h += '<div class="row"><label class="f"><span>Provider</span><select class="cnProvider">' + provs.map(function (x) {
+      return '<option value="' + esc(x.id) + '"' + (x.id === p.id ? " selected" : "") + ">" + esc(x.label) + "</option>";
+    }).join("") + "</select></label>" +
+      '<label class="f"><span>Label (optional)</span><input class="cnName" maxlength="120" value="' + esc((cur && cur.name) || "") + '"></label></div>';
+    if (p.help) h += '<p class="quiet">' + esc(p.help) + "</p>";
+    h += '<div class="row">' + p.settings.map(function (f) {
+      var v = settings[f.key];
+      if (f.type === "checkbox") return '<label class="f"><span><input type="checkbox" class="cnSet" data-key="' + esc(f.key) + '" data-type="checkbox"' + (v ? " checked" : "") + "> " + esc(f.label) + "</span></label>";
+      if (f.type === "select") return '<label class="f"><span>' + esc(f.label) + '</span><select class="cnSet" data-key="' + esc(f.key) + '">' + f.options.map(function (o) {
+        return '<option value="' + esc(o[0]) + '"' + (v === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select></label>";
+      return '<label class="f"><span>' + esc(f.label) + (f.required ? " *" : "") + '</span><input class="cnSet" data-key="' + esc(f.key) + '"' + (f.type === "url" ? ' type="url" placeholder="https://"' : "") +
+        ' value="' + esc(v == null ? "" : v) + '"' + (cur && f.key === "ref" ? " readonly" : "") + "></label>";
+    }).join("") + "</div>";
+    if (p.secrets.length) h += '<div class="row">' + p.secrets.map(function (f) {
+      var isSet = cur && cur.provider === p.id && set.indexOf(f.key) >= 0;
+      return '<label class="f"><span>' + esc(f.label) + (isSet ? " (set; leave blank to keep, type a new one to rotate)" : "") + '</span><input type="password" autocomplete="new-password" class="cnSecret" data-key="' + esc(f.key) + '"></label>';
+    }).join("") + "</div>";
+    return h + '<button type="button" class="btn" data-cn-save="' + esc(kind.kind) + '"' + (cur ? ' data-cn-id="' + esc(cur.id) + '"' : "") + ">Save</button>" +
+      (cur ? ' <button type="button" class="btn ghost" data-cn-cancel="1">Cancel</button>' : "") + "</div>";
+  }
+  function connectorsHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return '<div class="card"><h2>Connectors</h2><span class="spin"></span> Loading connectors...</div>';
+    if (r.failed) return '<div class="card"><h2>Connectors</h2><div class="msg err">Connectors could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
+    return r.catalogue.map(function (kind) {
+      var mine = r.connectors.filter(function (x) { return x.kind === kind.kind; });
+      var h = '<div class="card"><h2>' + esc(kind.label) + "</h2>" + (kind.help ? '<p class="quiet">' + esc(kind.help) + "</p>" : "");
+      if (!mine.length) h += '<p class="quiet">None configured for this hospital.</p>';
+      else h += '<div class="tbl"><table><thead><tr><th>Connector</th><th>Provider</th><th>Status</th><th>Credentials</th><th></th></tr></thead><tbody>' + mine.map(function (x) {
+        var prov = kind.providers.filter(function (p) { return p.id === x.provider; })[0] || {};
+        var res = CN_STATE.result[x.id];
+        /* The gateway's webhook goes to this address. It names the hospital only; the gateway's signature is what is trusted. */
+        var callback = x.kind === "payment" && x.provider !== "manual"
+          ? '<br><span class="quiet">Gateway webhook address: <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
+        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + (x.active ? "On" : "Off") + "</b></td><td>" +
+          (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">set ' + esc(x.secretsSetAt || "") + "</span>" : '<span class="quiet">none</span>') + "</td><td>" +
+          '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">Change</button> ' +
+          (prov.testable ? '<button type="button" class="btn ghost" data-cn-test="' + esc(x.id) + '">Test connection</button> ' : "") +
+          '<button type="button" class="btn ghost" data-cn-active="' + esc(x.id) + '" data-on="' + (x.active ? "0" : "1") + '">' + (x.active ? "Turn off" : "Turn on") + "</button></td></tr>";
+      }).join("") + "</tbody></table></div>";
+      var editing = mine.filter(function (x) { return x.id === CN_STATE.editing; })[0];
+      if (!r.keyConfigured) h += '<div class="msg err">Credentials cannot be stored encrypted on this server, so a connector with credentials cannot be saved.</div>';
+      if (editing) h += connectorFormHtml(esc, kind, editing);
+      else if (!(kind.singleton && mine.length)) h += connectorFormHtml(esc, kind, null);
+      return h + '<div class="cnMsg" data-cn-msg="' + esc(kind.kind) + '"></div></div>';
+    }).join("");
+  }
+  WSQ._connectorsHtml = connectorsHtml;
+  function loadConnectors(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    var card = document.getElementById("cnCard");
+    if (!card) return;
+    c.api("/ward/connectors" + q).then(function (r) {
+      var ok = r && r.ok && r.catalogue && r.connectors;
+      card.innerHTML = connectorsHtml(c, ok ? r : { failed: true, message: r ? refusal(r) : "No response from the server." });
+      if (ok) bindConnectors(c, body, r);
+    }, function () { card.innerHTML = connectorsHtml(c, { failed: true, message: "No response from the server." }); });
+  }
+  function bindConnectors(c, body, r) {
+    var card = document.getElementById("cnCard");
+    var say = function (kind, t, ok) { var m = card.querySelector('[data-cn-msg="' + kind + '"]'); if (m) m.innerHTML = '<div class="msg ' + (ok ? "ok" : "err") + '">' + c.esc(t) + "</div>"; };
+    var byId = function (id) { return r.connectors.filter(function (x) { return x.id === id; })[0]; };
+    card.querySelectorAll(".cnProvider").forEach(function (sel) {
+      sel.onchange = function () {
+        var form = sel.closest(".cnForm"), kind = form.getAttribute("data-cn-kind");
+        CN_STATE.provider = CN_STATE.provider || {}; CN_STATE.provider[kind] = sel.value;
+        var k = r.catalogue.filter(function (x) { return x.kind === kind; })[0];
+        var cur = CN_STATE.editing ? byId(CN_STATE.editing) : null;
+        var shadow = document.createElement("div");
+        // Another provider starts with no settings and no credentials set: the old ones do not carry over.
+        var same = cur && cur.provider === sel.value;
+        shadow.innerHTML = connectorFormHtml(c.esc, k, cur ? Object.assign({}, cur, { provider: sel.value, settings: same ? cur.settings : { ref: cur.settings.ref }, secretsSet: same ? cur.secretsSet : [] }) : null);
+        form.parentNode.replaceChild(shadow.firstChild, form);
+        bindConnectors(c, body, r);
+      };
+    });
+    card.querySelectorAll("[data-cn-save]").forEach(function (b) {
+      b.onclick = function () {
+        var form = b.closest(".cnForm"), kind = b.getAttribute("data-cn-save");
+        var settings = {}, secrets = {};
+        form.querySelectorAll(".cnSet").forEach(function (i) { settings[i.getAttribute("data-key")] = i.getAttribute("data-type") === "checkbox" ? i.checked : String(i.value || "").trim(); });
+        form.querySelectorAll(".cnSecret").forEach(function (i) { if (String(i.value || "").trim()) secrets[i.getAttribute("data-key")] = String(i.value).trim(); });
+        b.disabled = true;
+        c.api("/ward/connector-save", { orgId: c.state.orgId, kind: kind, provider: form.querySelector(".cnProvider").value, name: form.querySelector(".cnName").value,
+          settings: settings, secrets: Object.keys(secrets).length ? secrets : undefined, id: b.getAttribute("data-cn-id") || undefined }).then(function (x) {
+          if (!x || !x.ok) { b.disabled = false; say(kind, refusal(x)); return; }
+          form.querySelectorAll(".cnSecret").forEach(function (i) { i.value = ""; });
+          CN_STATE.editing = null;
+          c.toast(x.unchanged ? "Nothing changed." : "Connector saved." + (x.secretsNote ? " " + x.secretsNote : ""));
+          loadConnectors(c, body);
+        }, function () { b.disabled = false; say(kind, "No response from the server. The connector may not have been saved; reload to check."); });
+      };
+    });
+    card.querySelectorAll("[data-cn-edit]").forEach(function (b) { b.onclick = function () { CN_STATE.editing = b.getAttribute("data-cn-edit"); card.innerHTML = connectorsHtml(c, r); bindConnectors(c, body, r); }; });
+    card.querySelectorAll("[data-cn-cancel]").forEach(function (b) { b.onclick = function () { CN_STATE.editing = null; card.innerHTML = connectorsHtml(c, r); bindConnectors(c, body, r); }; });
+    card.querySelectorAll("[data-cn-test]").forEach(function (b) {
+      b.onclick = function () {
+        var x = byId(b.getAttribute("data-cn-test"));
+        b.disabled = true;
+        c.api("/ward/connector-test", { orgId: c.state.orgId, id: x.id }).then(function (t) {
+          b.disabled = false;
+          if (!t || !t.ok || !t.test) { say(x.kind, refusal(t)); return; }
+          CN_STATE.result[x.id] = t.test;
+          card.innerHTML = connectorsHtml(c, r); bindConnectors(c, body, r);
+        }, function () { b.disabled = false; say(x.kind, "No response from the server. The test result is not known."); });
+      };
+    });
+    card.querySelectorAll("[data-cn-active]").forEach(function (b) {
+      b.onclick = function () {
+        var x = byId(b.getAttribute("data-cn-active")), on = b.getAttribute("data-on") === "1";
+        b.disabled = true;
+        c.api("/ward/connector-save", { orgId: c.state.orgId, kind: x.kind, provider: x.provider, name: x.name, settings: x.settings, active: on }).then(function (y) {
+          if (!y || !y.ok) { b.disabled = false; say(x.kind, refusal(y)); return; }
+          c.toast(on ? "Connector turned on." : "Connector turned off."); loadConnectors(c, body);
+        }, function () { b.disabled = false; say(x.kind, "No response from the server. The switch may not have moved; reload to check."); });
+      };
+    });
+  }
+
   function renderIntegrations(c, body, shown) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
-    body.innerHTML = '<div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
+    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
+    loadConnectors(c, body);
     var fail = function (r) { return { failed: true, message: r ? refusal(r) : "No response from the server." }; };
     /* The connected-apps card loads beside the webhooks, into its own wrapper, so whichever answer
      * arrives first is never wiped by the other. */
