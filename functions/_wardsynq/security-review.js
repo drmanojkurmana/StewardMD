@@ -34,12 +34,14 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { RUN_TYPE, rpoVerdict } from "./backup-run.js";
 import { span } from "../_roster.js";
+import { verifyAuditChain, auditRetentionSetting } from "./audit-chain.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000;
 const REVIEW_TYPE = "SecurityReview";
 const RESTORE_TYPE = "RestoreTest";
 const EVIDENCE_CAP = 50;
+const AUDIT_VERIFY_LIMIT = 1000;
 
 /* Every threshold in one place, and returned on the report so a reviewer can see the method. */
 const RULES = Object.freeze({
@@ -392,11 +394,18 @@ function dataProtection(backupRuns, restoreTests, rpoMinutes, now) {
   };
 }
 
-/** PURE. What the audit trail still holds, and whether rows that should be there are not. */
-function auditRetention(oldestAuditAt, oldestRecordAt) {
+const NEVER_DELETED = "It is informational only: this application never deletes audit rows, and a change or removal made in the database itself shows in the integrity check.";
+
+/** PURE. What the audit trail still holds, and whether rows that should be there are not.
+ * setting: auditRetentionSetting() (audit-chain.js), or absent when none was worked out. */
+function auditRetention(oldestAuditAt, oldestRecordAt, setting) {
+  const s = setting || {};
+  const note = s.source === "configured" ? `Audit retention period: ${s.years} years, set by this hospital. ${NEVER_DELETED}`
+    : s.source === "region-default" ? `Audit retention period: ${s.years} years, the default for this region (${s.citation}); this hospital has not set one. ${NEVER_DELETED}`
+    : `${s.source === "invalid" ? s.note + " " : ""}No audit retention period is configured, so audit rows are kept indefinitely. This application never deletes audit rows; any removal would have happened in the database itself.`;
   const out = {
-    configuredRetention: null,
-    configuredNote: "No audit retention period is configured. This application never deletes audit rows; any removal would have happened in the database itself.",
+    configuredRetention: s.years || null, retentionSource: s.source || "not-configured",
+    configuredNote: note,
     oldestAuditAt: oldestAuditAt || null, oldestRecordAt: oldestRecordAt || null, gap: null,
   };
   const a = msOf(oldestAuditAt), r = msOf(oldestRecordAt);
@@ -423,7 +432,7 @@ const unavailable = (e) => ({ status: "unavailable", error: e instanceof Governa
 const section = (findings) => ({ status: "ok", findings, counts: findings.reduce((m, f) => { m[f.type] = (m[f.type] || 0) + 1; return m; }, {}) });
 
 /**
- * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?,
+ * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?,
  *   orgEvents: {events, partial} | {error}, viewerId,
  *   assignmentSources: { members: [{identity, role}] | {error}, roster: {shifts, assignments, partial} | {error}, utcOffsetMinutes } }
  */
@@ -456,8 +465,11 @@ async function securityReport(request, env, ctx) {
     const first = await repository.changes(tenantId, 0, 1);
     const rec = first && first.records && first.records[0];
     const oldestRecordAt = rec ? ((rec.meta && rec.meta.recordedAt) || (rec.writtenBy && rec.writtenBy.at) || null) : null;
-    retention = auditRead ? { status: "ok", ...auditRetention(auditRead.oldestAt, oldestRecordAt) } : { status: "unavailable", error: "audit_unreadable" };
+    retention = auditRead ? { status: "ok", ...auditRetention(auditRead.oldestAt, oldestRecordAt, auditRetentionSetting(ctx.auditRetentionYears, ctx.region)) } : { status: "unavailable", error: "audit_unreadable" };
   } catch (e) { retention = unavailable(e); }
+  /* Tamper evidence over the newest rows, bounded. It never throws and is never "ok" on a failed or
+   * short read, so it rides on the section whatever the retention read did. */
+  retention.integrity = await verifyAuditChain(repository, tenantId, { limit: AUDIT_VERIFY_LIMIT });
 
   const orgEvents = ctx.orgEvents || { error: "not_supplied" };
   const logins = orgEvents.error

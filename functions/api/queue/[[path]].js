@@ -2492,7 +2492,8 @@ export async function onRequest(context) {
           ROSTER.assignmentsBetween(env, wOrgId, rFrom, rTo).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),
         ]);
         const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
-        const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null });
+        const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
+          auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "system-health" && method === "GET") {

@@ -25,6 +25,10 @@
  *   recall(tenantId, idempotencyKey)                 -> {resourceType,id,version} | null
  *   auditOnly(tenantId, event)                       -> void                a read's audit row
  *
+ * Every audit row either write produces is CHAINED (audit-chain.js): a link row with the previous
+ * link's hash lands in the same atomic write, and a lost race for the next link number retries the
+ * whole write rather than forking the chain. auditChainHead/auditChainRows read it back (optional).
+ *
  * append() is the only write and it is append-only: it inserts new versions and never updates or
  * deletes. It MUST be atomic across the records, the idempotency key and the audit event it is
  * given - and across the optional ctx.idempotency ([{key, resourceType, id, version}]) and
@@ -41,6 +45,7 @@
 
 import { patientIdentifierKeys } from "./identity-key.js";
 import { fhirId, hashedId } from "./fhir-id.js";
+import { nextLinks, withChainLock } from "./audit-chain.js";
 
 /**
  * PURE. The published hashed form of a record id, or null when the id is published verbatim.
@@ -171,6 +176,52 @@ class MemoryRepository {
      * `${tenant}|${idHash}` -> {resourceType, id}. Only non-conforming ids appear here. */
     this._alias = new Map();
     this.audit = [];            // audit events, in order, for inspection
+    /* The tamper-evidence chain, mirroring wardsynq_audit_chain. Each link holds the audit event
+     * OBJECT it covers, so a test that edits or splices this.audit is detected exactly as a database
+     * UPDATE or DELETE would be. */
+    this._chain = [];
+  }
+
+  _chainHead(tenantId) {
+    for (let i = this._chain.length - 1; i >= 0; i--) {
+      const l = this._chain[i];
+      if (l.tenantId === tenantId) return { seq: l.chainSeq, hash: l.rowHash };
+    }
+    return null;
+  }
+
+  /**
+   * Links `events` onto the tenant's chain, then runs `commit` (synchronous: every check and write the
+   * append makes; a throw leaves nothing) and pushes the events and links. The hashing awaits, so the
+   * chain lock is what stops a second write extending the same head in between. In one process that is
+   * the whole story; D1 adds the primary key for writers the lock cannot see.
+   */
+  _withChain(tenantId, events, commit) {
+    return withChainLock(this, tenantId, async () => {
+      const head = this._chainHead(tenantId);
+      let boundary = null;
+      if (!head) {
+        const mine = this.audit.map((e, i) => [e, i]).filter(([e]) => e.tenantId === tenantId);
+        const last = mine[mine.length - 1];
+        boundary = last ? (last[0].id || `mem-${last[1]}`) : null;
+      }
+      const links = await nextLinks(head, events.map((e, i) => ({ auditId: e.id || `mem-${this.audit.length + i}`, row: e })), boundary);
+      const out = commit();
+      events.forEach((e, i) => { this.audit.push(e); this._chain.push({ tenantId, event: e, ...links[i] }); });
+      return out;
+    });
+  }
+
+  /** OPTIONAL (audit-chain.js): the newest link, or null before the first chained row. */
+  async auditChainHead(tenantId) {
+    return this._chainHead(tenantId);
+  }
+
+  /** OPTIONAL (audit-chain.js): links fromSeq..toSeq with the audit row each covers (null if gone). */
+  async auditChainRows(tenantId, fromSeq, toSeq) {
+    const present = new Set(this.audit);
+    return this._chain.filter((l) => l.tenantId === tenantId && l.chainSeq >= fromSeq && l.chainSeq <= toSeq)
+      .map((l) => ({ chainSeq: l.chainSeq, auditId: l.auditId, prevHash: l.prevHash, rowHash: l.rowHash, legacyBoundary: l.legacyBoundary, row: present.has(l.event) ? clone(l.event) : null }));
   }
 
   _versionsOf(tenantId, resourceType, id) {
@@ -290,6 +341,13 @@ class MemoryRepository {
    */
   async append(tenantId, records, ctx) {
     ctx = ctx || {};
+    const events = [ctx.audit, ...(Array.isArray(ctx.audits) ? ctx.audits : [])].filter(Boolean).map((a) => ({ tenantId, ...clone(a) }));
+    // No audit row, no link: nothing to wait for, and the chain lock is not taken.
+    if (!events.length) return this._appendNow(tenantId, records, ctx);
+    return this._withChain(tenantId, events, () => this._appendNow(tenantId, records, ctx));
+  }
+
+  _appendNow(tenantId, records, ctx) {
     // Atomicity: check every row first, then write every row. Nothing lands if anything conflicts.
     for (const rec of records) {
       const dup = this._rows.find((r) => r.tenantId === tenantId && r.resourceType === rec.resourceType && r.id === rec.id && r.version === rec.version);
@@ -365,8 +423,6 @@ class MemoryRepository {
       this._idem.set(`${tenantId}|${ctx.idempotencyKey}`, { resourceType: r.resourceType, id: r.id, version: r.version });
     }
     for (const k of extraKeys) this._idem.set(`${tenantId}|${k.key}`, { resourceType: k.resourceType, id: k.id, version: k.version });
-    if (ctx.audit) this.audit.push({ tenantId, ...clone(ctx.audit) });
-    for (const a of Array.isArray(ctx.audits) ? ctx.audits : []) this.audit.push({ tenantId, ...clone(a) });
     return { seq: last };
   }
 
@@ -389,7 +445,7 @@ class MemoryRepository {
   }
 
   async auditOnly(tenantId, event) {
-    this.audit.push({ tenantId, ...clone(event) });
+    await this._withChain(tenantId, [{ tenantId, ...clone(event) }], () => null);
   }
 
   /** OPTIONAL (see repository-d1.js auditTrail): same contract, newest rows win the limit. */

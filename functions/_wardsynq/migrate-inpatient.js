@@ -236,6 +236,7 @@ async function admitPatient(request, env, ctx) {
     }
     return { ...base, ok: true, written: 1, encounterId: candidate.id, patientId: candidate.patientId, version: out.record.version, replayed: out.replayed, actor: resolved.actor.id, role: resolved.role, ...(admissionOverride ? { emergencyOverride: admissionOverride } : {}) };
   } catch (e) {
+    if (candidate.location.bed) await releaseBedClaim(svc, candidate);
     return { ...base, ...writeFailure(e, { encounterId: candidate.id, written: 0, actor: resolved.actor.id }) };
   }
 }
@@ -328,6 +329,7 @@ function bedOccupied(base, candidate) {
  * unchanged, and a patient who has moved away makes their old bed's claim stale by the simple fact
  * that their Encounter's location has changed under it). */
 const BED_CLAIM_TYPE = "_wardsynq_bed_claim";
+const CLAIM_IN_FLIGHT_MS = 2 * 60 * 1000;
 function bedClaimIdFor(ward, bed) {
   return `wsq-bedclaim-${str(ward).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${str(bed).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 }
@@ -335,6 +337,20 @@ async function claimBed(svc, candidate) {
   const { ward, bed } = candidate.location;
   const claimId = bedClaimIdFor(ward, bed);
   const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
+  /* A LIVE CLAIM BY ANOTHER ADMISSION IS OCCUPANCY (found 2026-09-14, P2.17). The version race below
+   * only catches two admissions that read the claim at the same instant. One that reads it a moment
+   * AFTER the other's claim landed, but before that admission's Encounter was written, used to see a
+   * bed its list-scan had already called free, write the next version and admit a second patient into
+   * the bed. So the claim's holder is read: still open in this bed, or not written yet and claimed in
+   * the last CLAIM_IN_FLIGHT_MS, is occupied. An admission whose Encounter write fails releases its
+   * claim (releaseBedClaim); one that died without saying so frees the bed after that window, so a
+   * failed admission cannot hold a bed shut. */
+  if (latest && latest.encounterId && latest.encounterId !== candidate.id) {
+    const holder = await svc.repository.latest(svc.tenantId, "Encounter", latest.encounterId);
+    const inFlight = !holder && Date.now() - Date.parse(latest.claimedAt) < CLAIM_IN_FLIGHT_MS;
+    const occupying = holder && ADMISSION_CLASSES.includes(holder.class) && holder.status === OPEN && sameBed(holder.location, candidate.location);
+    if (inFlight || occupying) throw new VersionConflictError(`${ward} bed ${bed} is claimed by another admission`, { claimId });
+  }
   const version = latest ? latest.version + 1 : 1;
   const at = new Date().toISOString();
   await svc.repository.append(svc.tenantId, [{
@@ -348,6 +364,23 @@ async function claimBed(svc, candidate) {
      * machinery such as the escalation monitor") is exactly what this is. */
     writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
   }], {});
+}
+
+/** Best-effort: the admission this claim was for did not land, so the claim stops naming it. A newer
+ * claim by someone else is left alone, and a failure here leaves the in-flight window to free the bed. */
+async function releaseBedClaim(svc, candidate) {
+  try {
+    const { ward, bed } = candidate.location;
+    const claimId = bedClaimIdFor(ward, bed);
+    const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
+    if (!latest || latest.encounterId !== candidate.id) return;
+    const at = new Date().toISOString();
+    await svc.repository.append(svc.tenantId, [{
+      resourceType: BED_CLAIM_TYPE, id: claimId, version: latest.version + 1,
+      patientId: null, encounterId: null, releasedFrom: candidate.id, ward, bed, claimedAt: at,
+      writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
+    }], {});
+  } catch (e) { /* the in-flight window frees it */ }
 }
 
 /**

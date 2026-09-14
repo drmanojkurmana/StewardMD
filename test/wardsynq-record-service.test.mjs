@@ -585,6 +585,7 @@ test("D1 repository speaks the schema: append is one atomic batch, a UNIQUE viol
   assert.ok(sql.some((q) => /INSERT INTO connect_audit_event/.test(q)));
   failBatch = new Error("D1_ERROR: UNIQUE constraint failed: wardsynq_record.tenant_id, wardsynq_record.resource_type, wardsynq_record.id, wardsynq_record.version");
   await assert.rejects(repo.append("t1", [rec]), VersionConflictError);
+  failBatch = null;                                  // auditOnly is a batch too now (audit row + chain link)
   await repo.latest("t1", "Patient", "p"); await repo.history("t1", "Patient", "p"); await repo.byPatient("t1", "Observation", "p");
   await repo.changes("t1", 0, 10); await repo.recall("t1", "k"); await repo.latestByType("t1", "Patient", 5); await repo.auditOnly("t1", { action: "record.read" });
   assert.ok(!sql.some((q) => /\b(UPDATE|DELETE)\b/i.test(q)), "append-only by construction");
