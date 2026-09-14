@@ -50,6 +50,7 @@ const RHD = Object.freeze(["positive", "negative"]);
  * Who may receive whose red cells. Recipient group -> acceptable donor groups.
  * O is the universal red cell donor; AB the universal red cell recipient.
  */
+const WHOLE_BLOOD_COMPATIBILITY = Object.freeze({ O: ["O"], A: ["A"], B: ["B"], AB: ["AB"] });
 const RED_CELL_COMPATIBILITY = Object.freeze({
   O: Object.freeze(["O"]),
   A: Object.freeze(["A", "O"]),
@@ -114,12 +115,16 @@ function checkCompatibility(patient, unit, opts) {
   if (!ABO.includes(pAbo)) reasons.push({ code: "PATIENT_GROUP_UNKNOWN", message: "the patient's ABO group is not determined" });
   if (!ABO.includes(uAbo)) reasons.push({ code: "UNIT_GROUP_UNKNOWN", message: "the unit's ABO group is not recorded" });
 
-  const isRedCells = component === COMPONENT.RED_CELLS || component === "prbc" || component === "whole-blood";
+  // Whole blood carries red cells AND plasma, so neither one-way table is safe on its own: an O unit's
+  // anti-A/anti-B would pass the red-cell table into an A patient. Only the identical group is.
+  const isWholeBlood = component === COMPONENT.WHOLE_BLOOD;
+  const isRedCells = component === COMPONENT.RED_CELLS || component === "prbc" || isWholeBlood;
   const isPlasma = component === COMPONENT.PLASMA || component === "ffp" || component === "cryo";
 
-  const table = isRedCells ? RED_CELL_COMPATIBILITY
-    : isPlasma ? PLASMA_COMPATIBILITY
-      : null;
+  const table = isWholeBlood ? WHOLE_BLOOD_COMPATIBILITY
+    : isRedCells ? RED_CELL_COMPATIBILITY
+      : isPlasma ? PLASMA_COMPATIBILITY
+        : null;
   if (!table) {
     // Platelets, SDP and anything else: this module will not guess a compatibility direction.
     reasons.push({ code: "COMPONENT_NOT_SUPPORTED", message: `compatibility for component "${unit && unit.component}" is not modelled here and must be determined by the blood bank` });
@@ -128,7 +133,7 @@ function checkCompatibility(patient, unit, opts) {
   if (table && ABO.includes(pAbo) && ABO.includes(uAbo) && !table[pAbo].includes(uAbo)) {
     reasons.push({
       code: "ABO_INCOMPATIBLE",
-      message: `${isPlasma ? "plasma" : "red cells"} of group ${uAbo} must never be given to a group ${pAbo} patient`,
+      message: `${isWholeBlood ? "whole blood" : isPlasma ? "plasma" : "red cells"} of group ${uAbo} must never be given to a group ${pAbo} patient`,
     });
   }
 

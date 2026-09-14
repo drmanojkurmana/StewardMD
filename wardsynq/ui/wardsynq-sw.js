@@ -21,7 +21,7 @@
  * way for one nurse to be looking at a different rule set from the next.
  */
 
-const VERSION = "wardsynq-v5";
+const VERSION = "wardsynq-v6";
 
 /* The whole surface, listed rather than discovered. A shell that caches what it happens to fetch
    works until the one screen nobody opened before the wifi went is the one somebody needs. */

@@ -111,6 +111,12 @@ async function connectRecord() {
     if (nav) nav.hidden = false;
   }
   const params = recordParams();
+  // Opened for a real hospital (site=1, not demo) with no record connected: the demonstration cohort
+  // here would be three fake patients on a real ward, so it is a stop, not a fallback.
+  const q = new URLSearchParams(location.search);
+  if (!params && q.get("site") === "1" && q.get("demo") !== "1") {
+    throw new Error("This hospital has no patient record connected yet, so no patients can be shown. Ask the administrator to connect it");
+  }
   if (!params) return null;
   // A record that fails to open stays a failure: demo hospitals never reach here (?demo=1 yields no
   // params), so falling back to the demonstration cohort would show fake patients to a real ward.

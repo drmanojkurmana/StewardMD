@@ -393,11 +393,7 @@
       var unplaced = (w.unplaced || []).map(function (o) {
         return '<div class="w-bedcell occ"><b>&mdash;</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
       }).join("");
-      return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4>" +
-        '<div style="display:flex; gap:6px;">' +
-          '<button class="w-btn ghost sm" data-w-act="bedadd:' + esc(w.ward) + '" title="Add bed to ' + esc(w.ward) + '">' + ms("add") + "Add Bed</button>" +
-          '<button class="w-btn ghost sm" data-w-act="bedremove:' + esc(w.ward) + '" title="Remove bed from ' + esc(w.ward) + '">' + ms("remove") + "Remove Bed</button>" +
-        '</div></div>' +
+      return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4></div>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
     }).join("");
 
@@ -452,7 +448,7 @@
   function edBoardView(state) {
     var rows = (state.ed && state.ed.patients || []).map(function (p) {
       var sexAge = (p.gender ? ' &middot; <b>' + esc(p.gender).toUpperCase() + (p.ageYears ? ', ' + esc(p.ageYears) + 'y' : '') + '</b>'
-        : (p.mrn && p.mrn.indexOf('MALE') >= 0 ? ' &middot; <b>MALE</b>' : p.mrn && p.mrn.indexOf('FEMALE') >= 0 ? ' &middot; <b>FEMALE</b>' : ''));
+        : '');
       return "<li>" + '<button class="w-bed" data-w-act="openEd:' + esc(p.encounterId) + '">' +
         '<span class="w-bed-no' + (p.acuity == null ? " untriaged" : " acuity-" + esc(p.acuity)) + '">' + (p.acuity == null ? ms("priority_high") : esc(p.acuity)) + "</span>" +
         '<span class="w-bed-b"><b>' + esc(p.mrn || p.patientId) + "</b>" + sexAge + "<small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small>" +
@@ -1388,7 +1384,7 @@
       if (checked("wNoteRecPharm")) targets.push("Pharmacy");
       if (checked("wNoteRecBilling")) targets.push("Billing");
       var tgtStr = targets.length ? targets.join(", ") : "Care team";
-      prefix = (kind === "both" ? "[CLINICAL NOTE & INSTRUCTION \u2014 For " : "[CLINICAL INSTRUCTION \u2014 For ") + tgtStr + "]: ";
+      prefix = (kind === "both" ? "[Clinical note and instruction for " : "[Instruction for ") + tgtStr + "]: ";
     }
     var fullText = prefix + text;
     st.noteDraft = text;               // survives the repaint, and every refusal below
@@ -1398,7 +1394,7 @@
      * replaces it, and this keeps working. */
     apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: fullText } })
       .then(function (r) {
-        if (settle(r, r && r.written ? (kind === "instruction" ? "Instruction sent to team." : kind === "both" ? "Note and instruction recorded." : "Note added.") : null)) {
+        if (settle(r, r && r.written ? (kind === "instruction" ? "Instruction written on the chart. No one is notified by this; tell the team directly if it is urgent." : kind === "both" ? "Note and instruction recorded." : "Note added.") : null)) {
           st.noteDraft = "";           // on the record now, so the draft has done its job
           var el = document.getElementById("wTlNote"); if (el) el.value = "";
           // Re-read rather than repaint from what the browser believes.
@@ -1427,12 +1423,12 @@
       '<label class="w-f"><span>Entry purpose</span>' +
         '<select id="wTlNoteKind" onchange="var r=document.getElementById(\'wTlRecipients\'); if(r) r.style.display=(this.value===\'clinical\'?\'none\':\'flex\');">' +
           '<option value="clinical">Clinical Note only</option>' +
-          '<option value="instruction">Instruction only (requires acknowledgement)</option>' +
+          '<option value="instruction">Instruction only (written on the chart)</option>' +
           '<option value="both">Both Clinical Note &amp; Instruction</option>' +
         '</select>' +
       '</label></div>' +
       '<div id="wTlRecipients" style="display:none; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; padding:8px 12px; background:var(--w-surface-2, rgba(0,0,0,0.03)); border-radius:6px;">' +
-        '<small style="font-weight:600; color:var(--w-ink-dim, #5b7083); width:100%; display:block; margin-bottom:4px;">Send instruction notification to:</small>' +
+        '<small style="font-weight:600; color:var(--w-ink-dim, #5b7083); width:100%; display:block; margin-bottom:4px;">Addressed to (shown on the chart; no notification is sent):</small>' +
         '<label class="w-f-check" style="margin-right:12px;"><input type="checkbox" id="wNoteRecNurse" checked> Nurse</label>' +
         '<label class="w-f-check" style="margin-right:12px;"><input type="checkbox" id="wNoteRecResident" checked> Resident</label>' +
         '<label class="w-f-check" style="margin-right:12px;"><input type="checkbox" id="wNoteRecLab"> Laboratory</label>' +
@@ -1633,40 +1629,6 @@
    * stays with lab-result.js and is reached from wherever a report actually gets entered. */
   var INV_CATEGORY = [["laboratory", "Laboratory"], ["imaging", "Imaging"], ["procedure", "Procedure"], ["other", "Other"]];
   var INV_PRIORITY = [["routine", "Routine"], ["urgent", "Urgent"], ["stat", "STAT"]];
-  var QUICK_INVS = [
-    ["CBC / Hemogram", "laboratory"], ["LFT", "laboratory"], ["RFT / KFT", "laboratory"],
-    ["Serum Electrolytes", "laboratory"], ["Blood Sugar (RBS)", "laboratory"], ["PT / INR", "laboratory"],
-    ["Troponin-I", "laboratory"], ["ABG", "laboratory"], ["Urine Routine", "laboratory"],
-    ["Chest X-Ray PA", "imaging"], ["Abdomen X-Ray Erect", "imaging"], ["USG Whole Abdomen", "imaging"],
-    ["CT Brain Plain", "imaging"], ["CT Chest (HRCT)", "imaging"], ["CT Abdomen & Pelvis", "imaging"],
-    ["MRI Brain", "imaging"], ["2D Echocardiogram", "imaging"]
-  ];
-
-  function imageStudyModal(state) {
-    var id = state.viewImageStudyId;
-    if (!id) return "";
-    var rep = (state.results || []).filter(function (r) { return r.id === id; })[0];
-    var title = rep ? rep.display : "Imaging study";
-    var impression = rep ? (rep.conclusion || "Preliminary radiologic interpretation pending.") : "";
-    return '<div class="w-card" style="border: 2px solid var(--w-primary, #0284c7); background: #f8fafc; margin-bottom: 16px;">' +
-      '<div class="w-card-h">' + ms("image") + '<h3>' + esc(title) + ' &middot; Imaging &amp; PACS viewer</h3>' +
-      '<button class="w-ic" data-w-act="closeimagestudy">' + ms("close") + '</button></div>' +
-      '<div class="w-grid">' +
-      '<div><b>Patient:</b> ' + esc((state.sel && state.sel.name) || (state.sel && state.sel.mrn) || "Patient") + '</div>' +
-      '<div><b>Reported:</b> ' + when(rep ? rep.reportedAt : null) + '</div>' +
-      '<div><b>Modality:</b> ' + (title.indexOf("CT") >= 0 ? "Computed Tomography (CT)" : title.indexOf("MRI") >= 0 ? "Magnetic Resonance (MRI)" : title.indexOf("USG") >= 0 ? "Ultrasound (USG)" : "Radiography (X-Ray)") + '</div>' +
-      '<div><b>Status:</b> ' + esc((rep && rep.status) || "final") + '</div>' +
-      '</div>' +
-      '<div class="w-sub" style="margin-top:10px;"><h4>' + ms("analytics") + 'Radiologist Findings</h4>' +
-      '<p>' + esc(rep && rep.findings ? rep.findings : "Normal anatomical landmarks identified. No acute bone fracture, pneumothorax, or focal consolidation. Cardiac silhouette within normal limits.") + '</p>' +
-      '<h4>' + ms("fact_check") + 'Impression</h4>' +
-      '<p style="font-weight:600; color:var(--w-ink, #0f172a);">' + esc(impression) + '</p>' +
-      '<div class="w-actions" style="margin-top:10px;">' +
-      '<button class="w-btn go" type="button" onclick="window.open(\'/api/pacs/view?study=' + esc(id) + '\', \'_blank\');">' + ms("open_in_new") + 'Open High-Resolution DICOM PACS Viewer</button>' +
-      '<button class="w-btn ghost" type="button" data-w-act="closeimagestudy">' + ms("check") + 'Close viewer</button>' +
-      '</div></div></div>';
-  }
-
   function investigationsCard(state) {
     var o = state.invOrder || {};
     var inv = state.investigations;
@@ -1691,26 +1653,15 @@
        * a card that scrolls to a list of eight results and highlights none of them has not really
        * opened anything. */
       var picked = state.highlightReportId && r.id === state.highlightReportId;
-      var isImg = r.isImaging || (r.display && /x-ray|xray|ct|mri|usg|ultrasound|echo|radiograph|scan/i.test(r.display));
       return '<li' + (picked ? ' class="w-res-on"' : "") + "><b>" + esc(r.display) + "</b> <span>" + esc(r.status || "") + "</span>" +
-        (isImg ? ' <span class="w-st done">Imaging study</span>' : "") +
         (picked ? ' <span class="w-st due">the one you opened</span>' : "") +
         (r.conclusion ? '<div class="w-res-conc"><b>Impression:</b> ' + esc(r.conclusion) + "</div>" : "") +
-        (isImg ? '<div style="margin-top:4px;"><button class="w-btn ghost tiny" type="button" data-w-act="viewimage:' + esc(r.id) + '">' + ms("image") + "View Images &amp; PACS Report</button></div>" : "") +
         "<small>" + when(r.reportedAt) + "</small></li>";
     }).join("");
 
-    var quickChips = '<div class="w-chips" style="margin-bottom:8px;">' +
-      QUICK_INVS.map(function (q) {
-        return '<button class="w-chip" type="button" data-w-act="invquick:' + esc(q[0]) + '|' + esc(q[1]) + '">' + esc(q[0]) + '</button>';
-      }).join("") +
-      '</div>';
-
-    return imageStudyModal(state) +
+    return '' +
       '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>Investigations</h3>" +
       '<button class="w-ic" data-w-act="investigations" title="Refresh">' + ms("refresh") + "</button></div>" +
-      '<p class="w-hint">Quick test templates:</p>' +
-      quickChips +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Test</span><input id="wInvCode" type="text" autocomplete="off" placeholder="e.g. Chest X-ray, CBC" value="' + esc(o.display || "") + '"></label>' +
       '<label class="w-f"><span>Category</span><select id="wInvCat">' + INV_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '"' + (o.category === c[0] ? " selected" : "") + ">" + esc(c[1]) + "</option>"; }).join("") + "</select></label>" +
@@ -1723,59 +1674,6 @@
       "</div>";
   }
 
-  function patientQrModal(state) {
-    if (!state.showPatientQr) return "";
-    var s = state.sel || {};
-    var mrn = s.mrn || s.patientId || "";
-    var name = s.name || s.patientName || mrn;
-    var hash = 0;
-    for (var i = 0; i < mrn.length; i++) hash = ((hash << 5) - hash) + mrn.charCodeAt(i) | 0;
-    var secToken = "SEC-" + Math.abs(hash).toString(36).toUpperCase() + "-" + (st.orgId ? st.orgId.slice(0, 4) : "SQ");
-    return '<div class="w-card" style="border: 2px solid var(--w-primary, #0284c7); background: #ffffff; margin-bottom: 16px;">' +
-      '<div class="w-card-h">' + ms("qr_code_2") + '<h3>Patient QR code &amp; Wristband identifier</h3>' +
-      '<button class="w-ic" data-w-act="closepatientqr">' + ms("close") + '</button></div>' +
-      '<div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin:12px 0;">' +
-      '<div style="padding:12px; border:2px solid #0f172a; border-radius:8px; background:#fff; text-align:center; min-width:140px;">' +
-      '<div style="font-family:monospace; font-size:28px; line-height:1; letter-spacing:2px;">&#9632;&#9633;&#9632;&#9632;&#9633;<br>&#9633;&#9632;&#9633;&#9632;&#9632;<br>&#9632;&#9632;&#9633;&#9633;&#9632;<br>&#9633;&#9632;&#9632;&#9633;&#9632;</div>' +
-      '<small style="font-size:10px; color:#64748b; font-family:monospace; display:block; margin-top:4px;">' + esc(secToken) + '</small>' +
-      '</div>' +
-      '<div style="flex:1; min-width:200px;">' +
-      '<h4 style="margin:0 0 4px 0;">' + esc(name) + '</h4>' +
-      '<div><b>MRN:</b> <code>' + esc(mrn) + '</code></div>' +
-      '<div><b>Secret verification token:</b> <code>' + esc(secToken) + '</code></div>' +
-      '<p class="w-hint" style="margin-top:6px;">' + ms("verified") + ' Scannable by nurses at bedside for eMAR medication matching, specimen labeling, and blood bank crossmatch verification.</p>' +
-      '<div class="w-actions"><button class="w-btn go sm" type="button" onclick="window.print();">' + ms("print") + 'Print wristband</button>' +
-      '<button class="w-btn ghost sm" type="button" data-w-act="closepatientqr">' + ms("check") + 'Done</button></div>' +
-      '</div></div></div>';
-  }
-
-  function schemeSearchModal(state) {
-    if (!state.schemeSearchOpen) return "";
-    var rows = (state.schemeResults || []).map(function (p) {
-      return '<li style="padding:8px 0; border-bottom:1px solid var(--w-hair, #e2e8f0);">' +
-        '<b>' + esc(p.name || p.package_name || "") + '</b> ' +
-        (p.code ? '<code style="background:#e0f2fe; padding:2px 6px; border-radius:4px;">' + esc(p.code) + '</code>' : '') +
-        (p.rate != null ? '<span style="float:right; font-weight:700; color:#16a34a;">&#8377; ' + esc(p.rate) + '</span>' : '') +
-        '<div style="font-size:12px; color:#64748b;">' + esc(p.scheme || "Rajiv Aarogyasri / PM-JAY") +
-        (p.speciality ? ' &middot; ' + esc(p.speciality) : '') +
-        (p.preauth_required ? ' &middot; <span class="w-st due">Pre-auth required</span>' : '') + '</div>' +
-        '<div style="margin-top:4px;"><button class="w-btn tiny ghost" type="button" data-w-act="applyschemecode:' + esc(p.code || p.name) + '">' + ms("check") + 'Use package code</button></div>' +
-        '</li>';
-    }).join("");
-
-    return '<div class="w-card" style="border: 2px solid var(--w-primary, #0284c7); background: #ffffff; margin-bottom: 16px;">' +
-      '<div class="w-card-h">' + ms("search") + '<h3>Government Health Schemes &amp; Aarogyasri Package Search</h3>' +
-      '<button class="w-ic" data-w-act="schemesearchclose">' + ms("close") + '</button></div>' +
-      '<p class="w-hint">Search Aarogyasri, PM-JAY, CGHS, and state government health scheme packages, pre-auth requirements and rates:</p>' +
-      '<div class="w-filter">' +
-      '<input id="wSchemeQ" type="search" placeholder="Search procedure (e.g. Appendectomy, Caesarean, Dialysis, Stent)" value="' + esc(state.schemeQ || "") + '">' +
-      '<button class="w-btn go" type="button" data-w-act="schemesearchgo">' + ms("search") + 'Search scheme</button>' +
-      '</div>' +
-      (state.schemeSearching ? '<p class="w-hint">' + ms("hourglass_empty") + 'Searching scheme package master...</p>' : '') +
-      (rows ? '<ul class="w-mini" style="margin-top:10px; max-height:260px; overflow-y:auto;">' + rows + '</ul>' : state.schemeSearched ? '<p class="w-empty">No scheme packages match that query.</p>' : '') +
-      '</div>';
-  }
-
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
@@ -1784,18 +1682,15 @@
     var isPediatric = s.class === "PEDIATRICS" || s.class === "NICU";
     var isNicu = s.class === "NICU";
     var edDemog = s.gender ? (" &middot; <b>" + esc(s.gender).toUpperCase() + (s.ageYears ? ", " + esc(s.ageYears) + "y" : "") + "</b>")
-      : (s.mrn && s.mrn.indexOf("MALE") >= 0 ? " &middot; <b>MALE</b>" : s.mrn && s.mrn.indexOf("FEMALE") >= 0 ? " &middot; <b>FEMALE</b>" : "");
+      : "";
     var header = isEd
       ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" + edDemog +
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
-        '<button class="w-btn ghost" data-w-act="patientqrcode" title="Patient QR Code for wristband and bedside check">' + ms("qr_code_2") + "QR code</button>" +
         '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this visit and whether each was met">' + ms("flag") + "Care plan</button>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
       : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.name || s.patientId || "") + "</b><small>" + (s.name && s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
-        '<button class="w-btn ghost" data-w-act="patientqrcode" title="Patient QR Code for wristband and bedside check">' + ms("qr_code_2") + "QR code</button>" +
-        '<button class="w-btn ghost" data-w-act="schemesearchopen" title="Search Aarogyasri and Government Health Schemes">' + ms("search") + "Schemes</button>" +
         '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
         '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
@@ -1833,8 +1728,6 @@
     var standardVitalsAndNote = isEd ? "" : (noteCard(state) + vitalsCard());
 
     return header +
-      patientQrModal(state) +
-      schemeSearchModal(state) +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
       problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
@@ -2683,13 +2576,13 @@
    * diagnosis/staging IT resolved, an adverse-event grade IT assigned, and a chemo administration's
    * documentation. Nothing here computes a stage, a dose or a grade. */
   var ONCO_PROTOCOLS = {
-    "AC": { name: "AC (Doxorubicin + Cyclophosphamide)", version: "2026.1", cycles: 4, drug: "Doxorubicin" },
-    "AC-T": { name: "AC-T (Doxorubicin + Cyclophosphamide -> Paclitaxel)", version: "2026.1", cycles: 8, drug: "Paclitaxel" },
-    "mFOLFOX6": { name: "mFOLFOX6 (Oxaliplatin + Leucovorin + 5-FU)", version: "2026.2", cycles: 12, drug: "Oxaliplatin" },
-    "FOLFIRI": { name: "FOLFIRI (Irinotecan + Leucovorin + 5-FU)", version: "2026.1", cycles: 12, drug: "Irinotecan" },
-    "R-CHOP": { name: "R-CHOP (Rituximab + CHOP)", version: "2026.1", cycles: 6, drug: "Rituximab" },
-    "ABVD": { name: "ABVD (Hodgkin Lymphoma)", version: "2026.1", cycles: 6, drug: "Doxorubicin" },
-    "Carbo-Pac": { name: "Carboplatin + Paclitaxel", version: "2026.1", cycles: 6, drug: "Carboplatin" }
+    "AC": { name: "AC (Doxorubicin + Cyclophosphamide)", drug: "Doxorubicin" },
+    "AC-T": { name: "AC-T (Doxorubicin + Cyclophosphamide -> Paclitaxel)", drug: "Paclitaxel" },
+    "mFOLFOX6": { name: "mFOLFOX6 (Oxaliplatin + Leucovorin + 5-FU)", drug: "Oxaliplatin" },
+    "FOLFIRI": { name: "FOLFIRI (Irinotecan + Leucovorin + 5-FU)", drug: "Irinotecan" },
+    "R-CHOP": { name: "R-CHOP (Rituximab + CHOP)", drug: "Rituximab" },
+    "ABVD": { name: "ABVD (Hodgkin Lymphoma)", drug: "Doxorubicin" },
+    "Carbo-Pac": { name: "Carboplatin + Paclitaxel", drug: "Carboplatin" }
   };
 
   function oncologyView(state) {
@@ -2764,6 +2657,13 @@
       '<p class="w-hint">' + ms("info") + "This documents what a cycle's administration was; it does not re-run the bedside five-rights scan, which stays on the ordinary eMAR." + "</p></div>";
   }
 
+  function cardioNote(text, okMsg, failMsg) {
+    var s = st.sel || {};
+    st.busy = true; paint();
+    apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: text } })
+      .then(function (r) { settle(r, r && r.written ? okMsg : null); if (!r || !r.written) st.err = st.err || failMsg; paint(); })
+      .catch(function () { st.busy = false; st.err = failMsg; paint(); });
+  }
   function cardiologyView(state) {
     var tl = (state.cardiology && state.cardiology.timeline) || null;
     var linkRows = ((tl && tl.links) || []).map(function (l) {
@@ -2774,12 +2674,6 @@
         (e.heartScore != null ? "HEART " + esc(e.heartScore) + " &middot; " : "") +
         (e.timiScore != null ? "TIMI " + esc(e.timiScore) + " &middot; " : "") +
         '<span class="w-st overdue">unvalidated AI output</span> &middot; ' + when(e.capturedAt || e.recordedAt) + "</span></li>";
-    }).join("");
-    var echoRows = ((state.cardiology && state.cardiology.echos) || []).map(function (e) {
-      return "<li><b>LVEF " + esc(e.ef || "") + "%</b><span>" + (e.rwma ? "RWMA: " + esc(e.rwma) + " &middot; " : "") + (e.valves ? "Valves: " + esc(e.valves) + " &middot; " : "") + when(e.at) + "</span></li>";
-    }).join("");
-    var cagRows = ((state.cardiology && state.cardiology.cags) || []).map(function (c) {
-      return "<li><b>" + esc(c.access || "CAG") + "</b><span>" + esc(c.findings || "") + " &middot; " + when(c.at) + "</span></li>";
     }).join("");
 
     /* A part of this history that could not be read is said above everything, never shown as empty. */
@@ -2807,7 +2701,7 @@
       '<p class="w-hint">' + ms("warning") + "KardiQ X is self-declared clinically unvalidated, regulatory-pending. This records its AI verdict as external, unvalidated output - never a validated clinical finding." + "</p></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("ecg_heart") + "<h3>2D Echocardiography</h3></div>" +
-      (echoRows ? '<ul class="w-mini">' + echoRows + "</ul>" : '<p class="w-empty">No 2D Echo recorded on this chart.</p>') +
+      '<p class="w-hint">' + ms("info") + "Saved as a note on the patient's timeline, where earlier echo reports are read." + "</p>" +
       '<div class="w-grid">' +
       '<label class="w-f"><span>LVEF (%)</span><input id="wCardioEf" type="text" inputmode="numeric" placeholder="e.g. 55-60"></label>' +
       '<label class="w-f"><span>RWMA</span><input id="wCardioRwma" type="text" placeholder="e.g. None / Hypokinesia in LAD territory"></label>' +
@@ -2818,7 +2712,7 @@
       '<button class="w-btn go" data-w-act="cardioechosave">' + ms("save") + "Record 2D Echo</button></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("monitor_heart") + "<h3>Coronary Angiography (CAG) / Cath Lab</h3></div>" +
-      (cagRows ? '<ul class="w-mini">' + cagRows + "</ul>" : '<p class="w-empty">No Angiography recorded on this chart.</p>') +
+      '<p class="w-hint">' + ms("info") + "Saved as a note on the patient's timeline. A vessel left blank is written as not reported, never as normal." + "</p>" +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Access route</span><select id="wCardioCagAccess"><option value="Right Radial">Right Radial</option><option value="Left Radial">Left Radial</option><option value="Femoral">Femoral</option></select></label>' +
       '<label class="w-f"><span>LMCA</span><input id="wCardioLmc" placeholder="e.g. Normal / 50% ostial"></label>' +
@@ -3791,22 +3685,9 @@
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
     }).join("");
-    var nextActionSheet = state.lastAckAction ? (
-      '<div class="w-card" style="border: 2px solid var(--primary, #1a73e8); background: var(--sc-low, #f0f7ff); padding:14px; margin-bottom:14px;">' +
-      '<div class="w-card-h">' + ms("task_alt") + '<h3>Action acknowledged &mdash; What to do next?</h3></div>' +
-      '<p class="w-hint" style="color:var(--on-surface);">Recorded: "<b>' + esc(state.lastAckAction.action || "") + '</b>". Dispatch immediate instructions or clinical note:</p>' +
-      '<div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">' +
-        '<button class="w-btn sm" data-w-act="acknext:instruct_nurse">' + ms("notifications_active") + "Instruction to Nurse</button>" +
-        '<button class="w-btn sm" data-w-act="acknext:instruct_resident">' + ms("medical_services") + "Instruction to Resident</button>" +
-        '<button class="w-btn ghost sm" data-w-act="acknext:clinical_note">' + ms("edit_note") + "Write Clinical Note</button>" +
-        '<button class="w-btn ghost sm" data-w-act="acknext:repeat_lab">' + ms("science") + "Order Repeat Lab</button>" +
-        '<button class="w-btn ghost sm" data-w-act="acknext:dismiss">' + ms("close") + "Dismiss</button>" +
-      '</div></div>'
-    ) : "";
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Critical results</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="critsboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      nextActionSheet +
       '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops" + (Array.isArray(state.critsBoard) ? " &middot; " + loops.length : "") + "</h3></div>" +
       '<p class="w-hint">Acknowledging records that you have seen this and what you did. It is not a way to clear the list.</p>' +
       (state.critsBoard === false ? '<p class="w-hint warn">' + ms("error") + "Critical results could not be loaded. Do not read this as none open. Check the laboratory system directly.</p>"
@@ -4618,37 +4499,11 @@
       return "<li><b>" + esc(l.event) + "</b><span>" + (l.actorId ? esc(l.actorId) + " &middot; " : "") + when(l.at) + (l.detail ? " &middot; " + esc(l.detail) : "") + "</span></li>";
     }).join("") : "";
 
-    // Auto-detection of Hb, PLT, and Blood Group from patient data / reports (BUG-MU091LTG-5A0Q)
-    var autoHb = null, autoPlt = null, autoBloodGroup = (state.sel && (state.sel.bloodGroup || state.sel.abo)) || null;
-    var scanItems = (state.results || []).concat(state.timeline || []);
-    scanItems.forEach(function (it) {
-      var txt = String(it.test || it.code || it.display || it.name || it.label || "").toLowerCase();
-      var val = it.value != null ? it.value : it.val;
-      if (!autoHb && (txt.indexOf("haemoglobin") >= 0 || txt.indexOf("hemoglobin") >= 0 || txt === "hb" || /hb\b/.test(txt))) {
-        autoHb = val + (it.unit ? " " + it.unit : " g/dL");
-      }
-      if (!autoPlt && (txt.indexOf("platelet") >= 0 || txt === "plt" || /plt\b/.test(txt))) {
-        autoPlt = val + (it.unit ? " " + it.unit : " /mcL");
-      }
-      if (!autoBloodGroup && (txt.indexOf("blood group") >= 0 || txt.indexOf("abo") >= 0)) {
-        autoBloodGroup = val;
-      }
-    });
-
-    var autoDetectBanner = '<div class="w-sub" style="background:#e8f4fd; border:1px solid #90caf9; padding:8px 12px; border-radius:6px; margin-bottom:12px;">' +
-      '<b>' + ms("auto_awesome") + 'Auto-detected from latest patient records:</b><br>' +
-      '<span>' +
-      (autoHb ? 'Hb: <b style="color:var(--primary);">' + esc(autoHb) + '</b> &middot; ' : 'Hb: <i>not found</i> &middot; ') +
-      (autoPlt ? 'Platelets: <b style="color:var(--primary);">' + esc(autoPlt) + '</b> &middot; ' : 'Platelets: <i>not found</i> &middot; ') +
-      (autoBloodGroup ? 'Blood Group: <b style="color:var(--primary);">' + esc(autoBloodGroup) + '</b>' : 'Blood Group: <i>not recorded</i>') +
-      '</span></div>';
-
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
       "<div><b>Blood bank</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="txload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
       '<div class="w-card"><div class="w-card-h">' + ms("bloodtype") + "<h3>Requests</h3></div>" +
-      autoDetectBanner +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No transfusion requested for this patient.</p>') +
       '<div class="w-grid">' +
       '<label class="w-f"><span>Component</span><select id="wTxComponent">' +
@@ -6944,7 +6799,7 @@
   function edArriveKnown() { if (st.edMrnLookup) edArrive({ mrn: st.edMrnLookup.mrn }); }
   function edArriveUnknown() {
     var sex = val("wEdSex"), cc = val("wEdUnkCc");
-    edArrive({ unknown: { sex: sex }, chiefComplaint: cc || undefined });
+    edArrive({ unknown: { sex: sex, isTrauma: checked("wEdIsTrauma") }, chiefComplaint: cc || undefined });
   }
   function recordTriage() {
     var s = st.sel; if (!s) return;
@@ -7772,7 +7627,6 @@
        * the inbox would leave the row the person just acted on still sitting there. */
       .then(function (r) {
         if (settle(r, "Acknowledged.")) {
-          st.lastAckAction = { loopId: loopId, action: why.trim() };
           if (st.view === "safetyinbox") loadSafetyInbox(); else loadCritsBoard();
         } else paint();
       })
@@ -8556,26 +8410,22 @@
   }
   function followUpRequest() {
     var s = st.sel; if (!s) return;
-    var reason = "", dueBy = "", maitriEnroll = false;
+    var reason = "", dueBy = "";
     try { reason = G.prompt("Why should this patient be seen again?") || ""; } catch (e) {}
     if (!reason) { st.err = "A follow-up needs a reason."; paint(); return; }
     try { dueBy = G.prompt("Seen by when? (YYYY-MM-DD)") || ""; } catch (e) {}
     /* A follow-up with no date is one nobody books, so the date is required and must be a real date. */
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dueBy).trim())) { st.err = "Give a date like 2026-10-01."; paint(); return; }
-    try {
-      maitriEnroll = /^(y|yes)/i.test(G.prompt("Enroll in MAiTRI / FollowCare automated post-discharge pathway & reminders? (y/n)", "y") || "");
-    } catch (e) {}
     st.busy = true; paint();
     apiPost("/ward/follow-up", {
       orgId: st.orgId,
       patientId: s.patientId,
       encounterId: s.encounterId,
       reason: reason,
-      dueBy: String(dueBy).trim(),
-      maitriFollowCare: maitriEnroll
+      dueBy: String(dueBy).trim()
     })
       .then(function (r) {
-        settle(r, r && r.ok ? ("Follow-up requested" + (maitriEnroll ? " & enrolled in MAiTRI/FollowCare." : ".")) : null);
+        settle(r, r && r.ok ? "Follow-up requested." : null);
         paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not request that follow-up."; paint(); });
@@ -10873,139 +10723,34 @@
         .catch(function () { st.err = "Could not open patient chart."; paint(); });
       return;
     }
-    if (cmd === "bedadd") {
-      var wardName = arg;
-      var newBed = ""; try { newBed = G.prompt("Enter new bed identifier to add to " + wardName + ":") || ""; } catch (e) {}
-      if (!newBed || !newBed.trim()) return;
-      if (st.board && st.board.wards) {
-        var wObj = st.board.wards.find(function (w) { return w.ward === wardName; });
-        if (wObj) {
-          wObj.free = wObj.free || [];
-          if (wObj.free.indexOf(newBed.trim()) === -1) wObj.free.push(newBed.trim());
-          wObj.bedsKnown = true;
-        }
-      }
-      st.note = "Bed " + newBed.trim() + " added to " + wardName + ".";
-      paint();
-      return;
-    }
-    if (cmd === "bedremove") {
-      var wardName = arg;
-      var rmBed = ""; try { rmBed = G.prompt("Enter bed identifier to remove from " + wardName + ":") || ""; } catch (e) {}
-      if (!rmBed || !rmBed.trim()) return;
-      if (st.board && st.board.wards) {
-        var wObj2 = st.board.wards.find(function (w) { return w.ward === wardName; });
-        if (wObj2 && wObj2.free) {
-          var idx = wObj2.free.indexOf(rmBed.trim());
-          if (idx >= 0) wObj2.free.splice(idx, 1);
-        }
-      }
-      st.note = "Bed " + rmBed.trim() + " removed from " + wardName + ".";
-      paint();
-      return;
-    }
     if (cmd === "cardioechosave") {
       var ef = val("wCardioEf"), rwma = val("wCardioRwma"), valves = val("wCardioValves"), pasp = val("wCardioPasp"), peri = val("wCardioPericardial");
       if (!ef && !rwma && !valves) { st.err = "Enter at least LVEF, RWMA or valve assessment."; paint(); return; }
-      var echoText = "[2D ECHOCARDIOGRAPHY]: LVEF: " + (ef || "Not recorded") + "%" + (rwma ? " | RWMA: " + rwma : "") + (valves ? " | Valves: " + valves : "") + (pasp ? " | PASP: " + pasp : "") + (peri ? " | Pericardium: " + peri : "");
-      st.busy = true; paint();
-      apiPost("/ward/timeline-note", { orgId: st.orgId, patientId: st.sel && st.sel.patientId, text: echoText })
-        .then(function () {
-          st.busy = false; st.note = "2D Echo recorded on chart.";
-          if (!st.cardiology) st.cardiology = {};
-          if (!st.cardiology.echos) st.cardiology.echos = [];
-          st.cardiology.echos.push({ ef: ef, rwma: rwma, valves: valves, pasp: pasp, at: new Date().toISOString() });
-          paint();
-        }).catch(function () { st.busy = false; st.err = "Could not record 2D Echo."; paint(); });
+      var echoText = "2D echocardiography: LVEF " + (ef ? ef + "%" : "not reported") + (rwma ? " | RWMA: " + rwma : "") + (valves ? " | Valves: " + valves : "") + (pasp ? " | PASP: " + pasp : "") + (peri ? " | Pericardium: " + peri : "");
+      cardioNote(echoText, "2D echo saved as a note on the chart.", "Could not save the 2D echo.");
       return;
     }
     if (cmd === "cardiocagsave") {
       var access = val("wCardioCagAccess") || "Radial", lm = val("wCardioLmc"), lad = val("wCardioLad"), lcx = val("wCardioLcx"), rca = val("wCardioRca"), stnt = val("wCardioStents");
       if (!lad && !rca && !stnt && !lm) { st.err = "Enter vessel findings or intervention."; paint(); return; }
-      var cagText = "[CORONARY ANGIOGRAM (" + access + ")]: LMCA: " + (lm || "Normal") + " | LAD: " + (lad || "Normal") + " | LCx: " + (lcx || "Normal") + " | RCA: " + (rca || "Normal") + (stnt ? " | Intervention: " + stnt : "");
-      st.busy = true; paint();
-      apiPost("/ward/timeline-note", { orgId: st.orgId, patientId: st.sel && st.sel.patientId, text: cagText })
-        .then(function () {
-          st.busy = false; st.note = "Angiogram report recorded on chart.";
-          if (!st.cardiology) st.cardiology = {};
-          if (!st.cardiology.cags) st.cardiology.cags = [];
-          st.cardiology.cags.push({ access: access, findings: cagText, at: new Date().toISOString() });
-          paint();
-        }).catch(function () { st.busy = false; st.err = "Could not record Angiogram."; paint(); });
+      var nr = "not reported";
+      var cagText = "Coronary angiogram (" + access + "): LMCA " + (lm || nr) + " | LAD " + (lad || nr) + " | LCx " + (lcx || nr) + " | RCA " + (rca || nr) + (stnt ? " | Intervention: " + stnt : "");
+      cardioNote(cagText, "Angiogram report saved as a note on the chart.", "Could not save the angiogram report.");
       return;
     }
     if (cmd === "oncoproto") {
       var proto = ONCO_PROTOCOLS[arg];
       if (proto) {
         st.oncoRegimen = proto.name;
-        st.oncoVersion = proto.version;
+        st.oncoVersion = "";
         st.oncoDrug = proto.drug;
         var elReg = document.getElementById("wOncoRegimen"); if (elReg) elReg.value = proto.name;
-        var elVer = document.getElementById("wOncoVersion"); if (elVer) elVer.value = proto.version;
+        var elVer = document.getElementById("wOncoVersion"); if (elVer) elVer.value = "";
         var elDrug = document.getElementById("wOncoDrug"); if (elDrug) elDrug.value = proto.drug;
-        st.note = "Protocol " + arg + " applied.";
+        st.note = "Regimen " + arg + " filled in. Type the protocol version from the ONCqis plan.";
         paint();
       }
       return;
-    }
-    if (cmd === "acknext") {
-      var ackAct = st.lastAckAction || {};
-      if (arg === "dismiss") {
-        st.lastAckAction = null;
-        paint();
-        return;
-      }
-      if (arg === "instruct_nurse" || arg === "instruct_resident") {
-        var targetRole = (arg === "instruct_nurse" ? "nurse" : "resident");
-        var text = "";
-        try { text = G.prompt("Enter urgent instruction for " + targetRole + ":") || ""; } catch (e) {}
-        if (text && text.trim()) {
-          st.busy = true; paint();
-          apiPost("/ward/timeline-note", {
-            orgId: st.orgId,
-            text: "[CRITICAL RESULT ACTION — Instruction to " + targetRole + "]: " + text.trim() + " (action: " + (ackAct.action || "critical result acknowledged") + ")"
-          }).then(function () {
-            st.busy = false;
-            st.lastAckAction = null;
-            st.note = "Instruction dispatched to " + targetRole + ". Notification sent.";
-            paint();
-          }).catch(function () {
-            st.busy = false;
-            st.lastAckAction = null;
-            st.note = "Instruction recorded for " + targetRole + ".";
-            paint();
-          });
-        }
-        return;
-      }
-      if (arg === "clinical_note") {
-        var noteText = "";
-        try { noteText = G.prompt("Enter clinical note regarding critical result action:") || ""; } catch (e) {}
-        if (noteText && noteText.trim()) {
-          st.busy = true; paint();
-          apiPost("/ward/timeline-note", {
-            orgId: st.orgId,
-            text: "[CRITICAL RESULT CLINICAL NOTE]: " + noteText.trim()
-          }).then(function () {
-            st.busy = false;
-            st.lastAckAction = null;
-            st.note = "Clinical note recorded.";
-            paint();
-          }).catch(function () {
-            st.busy = false;
-            st.lastAckAction = null;
-            st.note = "Clinical note recorded.";
-            paint();
-          });
-        }
-        return;
-      }
-      if (arg === "repeat_lab") {
-        st.lastAckAction = null;
-        st.view = "labboard";
-        loadLabBoard();
-        return;
-      }
     }
     if (cmd === "specreceived") { specimenOutcomeAct(arg, "received"); return; }
     if (cmd === "specfailed") { specimenOutcomeAct(arg, "failed"); return; }
