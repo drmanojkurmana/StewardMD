@@ -462,7 +462,7 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.match(portalJs, /post\("queue"/);
   assert.match(portalJs, /"\/api\/portal\/document"/);
   assert.doesNotMatch(portalJs, /fetch\([^)]*\?/, "no query strings on portal calls");
-  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=4/);
+  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=5/);
   assert.match(html, /@media print/);
   assert.match(ward, /apiPost\("\/ward\/document-release"/);
   assert.match(ward, /dischargeScope: scope/);
