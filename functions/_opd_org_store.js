@@ -285,7 +285,7 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
 export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });

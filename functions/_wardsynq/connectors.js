@@ -30,12 +30,14 @@ import { sealSecret, openSecret, checkDestination } from "./webhooks.js";
 import { DICOM_KIND } from "./dicomweb.js";
 import { PAYER_KIND } from "./payer-connectors.js";
 import { PAYMENT_KIND } from "./payment-gateways.js";
+import { ABDM_KIND } from "./abdm-hospital.js";
 
 const CONNECTOR_TYPE = "_wardsynq_connector";
 const MAX_CONNECTORS = 100;
 
-/* kind -> { label, singleton, providers: { id -> { label, settings[], secrets[], validate?, test? } } } */
-const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND });
+/* kind -> { label, singleton, providers: { id -> { label, settings[], secrets[], validate?, test? } } }
+ * validate(settings, secretsPresent, { org, previous }): previous is the saved settings of the same provider, or null. */
+const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND, abdm: ABDM_KIND });
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
@@ -125,7 +127,8 @@ async function saveConnector(request, env, ctx) {
   // A different provider's credentials are not these credentials: switching provider keeps none, so each validate() asks again.
   const kept = cur && cur.provider === str(ctx.provider) ? { ...(cur.secretsEnc || {}) } : {};
   for (const k of Object.keys(kept)) if (!spec.secrets.some((f) => f.key === k)) delete kept[k];
-  const invalid = spec.validate ? spec.validate(s.settings, { ...Object.fromEntries(Object.keys(kept).map((k) => [k, true])), ...supplied }) : null;
+  const invalid = spec.validate ? spec.validate(s.settings, { ...Object.fromEntries(Object.keys(kept).map((k) => [k, true])), ...supplied },
+    { org: ctx.org || null, previous: cur && cur.provider === str(ctx.provider) ? cur.settings || {} : null }) : null;
   if (invalid) return refuse("invalid_connector", invalid);
 
   const sealed = { ...kept };

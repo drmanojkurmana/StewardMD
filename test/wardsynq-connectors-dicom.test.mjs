@@ -193,7 +193,7 @@ test("Admin > Integrations screen: loading, failed and none are distinct; creden
   const html = win.WSQ._connectorsHtml;
   assert.match(html(c, null), /Loading connectors/);
   assert.match(html(c, { failed: true, message: "forbidden" }), /could not be loaded: forbidden. This is not the same as there being none/);
-  const cat = catalogue();
+  const cat = catalogue().filter((k) => k.kind !== "abdm");   // ABDM has its own card (wardsynq-abdm-hospital.test.mjs)
   const none = html(c, { ok: true, keyConfigured: true, catalogue: cat, connectors: [] });
   for (const k of cat) assert.ok(none.includes(k.label), k.kind);
   assert.match(none, /None configured for this hospital/);

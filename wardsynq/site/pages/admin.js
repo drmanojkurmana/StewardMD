@@ -257,6 +257,8 @@
       '<label class="f" style="flex:0 1 180px"><span>Country</span><select id="admHospRegion">' +
         '<option value="IN"' + (o.region === "US" ? "" : " selected") + ">India</option>" +
         '<option value="US"' + (o.region === "US" ? " selected" : "") + ">United States</option></select></label>" +
+      /* India: the HFR facility ID the ABDM profile must match (Integrations > ABDM). Validated on the server. */
+      (o.region === "US" ? "" : '<label class="f" style="flex:0 1 200px"><span>HFR facility ID (India)</span><input id="admHospHfr" class="mono" maxlength="20" placeholder="IN and 10 digits" value="' + c.esc((o.regionProfile && o.regionProfile.hfrId) || "") + '"></label>') +
       '<button class="btn" id="admHospSave" type="button">Save</button></div>' +
       /* Said plainly, because it changes how numbers already on the chart are READ, not what they
        * say: nothing is converted, and nothing already recorded is rewritten. */
@@ -269,7 +271,10 @@
       var name = (document.getElementById("admHospName").value || "").trim();
       if (!name) { document.getElementById("admHospMsg").innerHTML = '<div class="msg err">Give the hospital a name.</div>'; return; }
       btn.disabled = true;
-      c.api("/org/update", { orgId: c.state.orgId, name: name, region: document.getElementById("admHospRegion").value }).then(function (r) {
+      var upd = { orgId: c.state.orgId, name: name, region: document.getElementById("admHospRegion").value };
+      var hfrEl = document.getElementById("admHospHfr");
+      if (hfrEl && upd.region === "IN") upd.regionProfile = { hfrId: String(hfrEl.value || "").replace(/[\s-]+/g, "").toUpperCase() };
+      c.api("/org/update", upd).then(function (r) {
         btn.disabled = false;
         if (!r || !r.ok) { document.getElementById("admHospMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");
@@ -1576,7 +1581,7 @@
     var esc = c.esc;
     if (r == null) return '<div class="card"><h2>Connectors</h2><span class="spin"></span> Loading connectors...</div>';
     if (r.failed) return '<div class="card"><h2>Connectors</h2><div class="msg err">Connectors could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as there being none.</div></div>";
-    return r.catalogue.map(function (kind) {
+    return r.catalogue.filter(function (kind) { return kind.kind !== "abdm"; }).map(function (kind) {   // ABDM: pages/abdm.js
       var mine = r.connectors.filter(function (x) { return x.kind === kind.kind; });
       var h = '<div class="card"><h2>' + esc(kind.label) + "</h2>" + (kind.help ? '<p class="quiet">' + esc(kind.help) + "</p>" : "");
       if (!mine.length) h += '<p class="quiet">None configured for this hospital.</p>';
@@ -1673,8 +1678,9 @@
 
   function renderIntegrations(c, body, shown) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
-    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
+    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="abdmCard"></div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
     loadConnectors(c, body);
+    if (WSQ._abdmLoad) WSQ._abdmLoad(c);   // pages/abdm.js: the ABDM connector has its own card
     var fail = function (r) { return { failed: true, message: r ? refusal(r) : "No response from the server." }; };
     /* The connected-apps card loads beside the webhooks, into its own wrapper, so whichever answer
      * arrives first is never wiped by the other. */

@@ -119,6 +119,7 @@ import { createSubscription } from "../../_wardsynq/fhir-subscription.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
+import { abdmView } from "../../_wardsynq/abdm-hospital.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
 import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
@@ -1094,6 +1095,8 @@ export async function onRequest(context) {
         /* Owner S2/S4/S5 connectors (connectors.js), Admin Center > Integrations: the webhooks' own double
          * gate, staff.admin here AND a clinical actor that may write the record inside the handler. */
         connectors: CAPS.STAFF_ADMIN, "connector-save": CAPS.STAFF_ADMIN, "connector-test": CAPS.STAFF_ADMIN,
+        // Owner S6 A1: the hospital's ABDM profile is the "abdm" connector; this is its checklist view.
+        "abdm-profile": CAPS.STAFF_ADMIN,
         /* Connected apps (SMART client registration, smart-clients.js), Admin Center > Integrations.
          * staff.admin here AND a clinical actor that may write the record, inside the handlers -
          * the webhooks' own double gate, so hr is refused on every one of these too. */
@@ -2154,8 +2157,18 @@ export async function onRequest(context) {
       }
       if (sub === "connector-save" && method === "POST") {
         const r = await saveConnector(request, env, { ...deps, kind: body.kind, provider: body.provider, name: body.name, settings: body.settings, secrets: body.secrets,
-          active: typeof body.active === "boolean" ? body.active : undefined, id: body.id });
+          active: typeof body.active === "boolean" ? body.active : undefined, id: body.id, org: wOrg });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ABDM PROFILE (abdm-hospital.js), Admin Center > Integrations > ABDM. The connector list's own gate
+       * decides who may see it; the members read only adds each doctor's registration and HPR readiness. */
+      if (sub === "abdm-profile" && method === "GET") {
+        const r = await listConnectors(request, env, { ...deps, kind: "abdm" });
+        if (!r.ok) return json(r, r.status || 502, request);
+        let members;
+        try { members = await ORG.listMembers(env, wOrgId); }
+        catch { return json({ ok: false, error: "members_read_failed", message: "The staff list could not be read, so the checklist is not shown." }, 502, request); }
+        return json({ ok: true, keyConfigured: r.keyConfigured, catalogue: r.catalogue, ...abdmView(r.connectors[0] || null, wOrg, members) }, 200, request);
       }
       if (sub === "connector-test" && method === "POST") {
         const r = await testConnector(request, env, { ...deps, id: body.id });

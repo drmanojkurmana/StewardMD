@@ -5811,3 +5811,33 @@ Supersedes the coarse part of "FULL DISCHARGE SUMMARY" above for summaries signe
   every other type, and any answer that fails the version's tables, is a 406 naming it. Writes, bulk export,
   Subscription create/$status are R4 only (415/406). R5 drops Immunization.recorded and sends a missing
   Condition clinicalStatus as `unknown`; both are stated in the R5 CapabilityStatement. See docs/FHIR_STRATEGY.md.
+
+## 2026-09-14 S6 phase A1: the ABDM hospital profile is a per-hospital connector (owner A1-A5)
+Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2, 4.2, phase A1).
+- **Storage: the connector framework, not `connect_connector_config`.** The profile is the singleton `abdm`
+  connector (`functions/_wardsynq/connectors.js` kind `abdm`, provider `shared-bridge`, record
+  `_wardsynq_connector/abdm`). Reasons: it is already per hospital, versioned and append-only in the WardSynQ
+  record, audited in the same append, gated by staff.admin plus a clinical actor, and seals credentials under
+  the document key. `connect_connector_config` is a Connect D1 table with no version history or chained
+  audit, sealed under a different key. Cost, for phase A2: the v3 branch's `resolveHipTenant` reads
+  `connect_connector_config` rows; it must read this connector instead (or a projection written beside it).
+- The framework's `validate` hook now receives `{ org, previous }` (the saved settings of the same provider),
+  so a kind can check against the hospital record and enforce transitions. Existing validators ignore it.
+- Rules (pure, `functions/_wardsynq/abdm-hospital.js`): HFR facility ID is `IN` + 10 digits and must equal the
+  org's `regionProfile.hfrId` (one source of truth; the Hospital tab now edits it); HIP/HIU IDs are a
+  conservative character shape only (format UNVERIFIED); status `draft -> submitted -> sandbox-linked ->
+  production-linked -> suspended`, `submitted -> draft`, `suspended -> draft`; the IDs freeze once linked.
+- Owner answers S6, 2026-09-14:
+  - A1 shared StewardMD bridge, each hospital links its own facility. The kind declares no secret; a secret
+    sent with a save is dropped. No own-bridge field is built or shown.
+  - A2 all production ABDM traffic held until India-region hosting from the AWS move exists. The
+    `production-linked` transition is refused and the checklist says "Awaiting India hosting".
+  - A3 the orchestrator merges `feat/abdm-v3-reconcile`; A1 work stays in new files.
+  - A4 records received from ABDM under consent stay in the chart, marked as received under that consent, even
+    after withdrawal. No erase flow. (Shown on the ABDM card.)
+  - A5 role rule for the later ABHA desk phase: billing and front desk staff may create new ABHA numbers by
+    Aadhaar OTP as well as verify existing ones. Not built in A1.
+- The checklist never says verified: "entered" (typed by the hospital, not checked against ABDM), "missing",
+  "mismatch", "not built" (session check, sandbox run, counters, DPDP confirmation), "blocked" (production).
+- NOT built: any ABDM gateway call, the "Check session" action (A2), per-tenant gateway identity, audit of the
+  from/to status beyond the versioned record, and a UI to set a doctor's registration number here (Staff tab).
