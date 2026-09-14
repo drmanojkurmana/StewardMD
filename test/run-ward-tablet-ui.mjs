@@ -65,6 +65,11 @@ try {
   await ev(`WARD.open({ orgId: "org-tablet-harness" }); return true;`);
   ok(await waitFor(`return !!document.querySelector('[data-w-act="open:enc-1"]');`), "the ward list rendered at 1024x768");
 
+  // G13: a filter action (the class chip) keeps keyboard focus on the control pressed, even though
+  // the roster it sits in was just replaced under it.
+  ok(await ev(`var b = document.querySelector('[data-w-act="setcls:IPD"]'); b.focus(); b.click(); return document.activeElement && document.activeElement.getAttribute("data-w-act") === "setcls:IPD";`), "G13: a roster filter chip keeps focus after the roster repaints");
+  await ev(`document.querySelector('[data-w-act="setcls:"]').click(); return true;`);
+
   // 1. Keyboard on the list: "?" shows the sheet, Escape closes it.
   await press("?");
   ok(await ev(`var s = document.getElementById("wKeys"); return !!s && s.getBoundingClientRect().height > 0 && /Keyboard shortcuts/.test(s.textContent);`), '"?" shows the shortcut sheet');
@@ -105,6 +110,11 @@ try {
     var h = card.querySelector(".w-card-h").getBoundingClientRect(), c = cv.getBoundingClientRect(), k = card.getBoundingClientRect();
     return JSON.stringify({ headTop: h.top, canvasTop: c.top, cardTop: k.top });`));
   ok(stuck.cardTop < stuck.canvasTop - 100 && Math.abs(stuck.headTop - stuck.canvasTop) <= 2, `the "next due" header stays in view while the round scrolls (header ${stuck.headTop}, canvas ${stuck.canvasTop})`);
+  // G13: refreshing the round (a repaint of the same screen) keeps this scroll position.
+  const preScroll = await ev(`return document.getElementById("wCanvas").scrollTop;`);
+  await ev(`document.querySelector('.w-mar .w-card-h [data-w-act="round"]').click(); return true;`);
+  await sleep(200);
+  ok(await ev(`return Math.abs(document.getElementById("wCanvas").scrollTop - ${preScroll}) <= 2;`), `G13: the canvas scroll position holds across a repaint (was ${preScroll})`);
   await call("Page.captureScreenshot", { format: "png" }).then((r) => import("node:fs").then((fs) => fs.writeFileSync((process.env.CLAUDE_JOB_DIR || "/tmp") + "/ward-tablet-landscape.png", Buffer.from(r.result.data, "base64"))));
 
   // 4. Chart keys: v focuses the vitals card's own control, n opens notes, Escape goes back.
@@ -150,6 +160,24 @@ try {
   ok(wl.sticky === "sticky", "the worklist bar is sticky");
   await size(768, 1024); await sleep(250);
   ok(await ev(`var r = document.querySelectorAll(".w-nw .w-mini-row"); return r[1].getBoundingClientRect().top >= r[0].getBoundingClientRect().bottom;`), "portrait: the worklist is one column");
+
+  // 7. G14: the single-patient nursing panel - tasks on the left, assignment/observations on the
+  // right in landscape; one column in portrait.
+  await size(1024, 768); await sleep(200);
+  await ev(`document.querySelector('[data-w-act="nursingpatient:pat-1~enc-1"]').click(); return true;`);
+  ok(await waitFor(`return WARD._st.view === "nursingpatient" && document.querySelectorAll(".w-np-list .w-mini-row").length === 2;`), "the nursing panel opened with its tasks");
+  const np = JSON.parse(await ev(`var l = document.querySelector(".w-np-list").getBoundingClientRect(), d = document.querySelector(".w-np-detail").getBoundingClientRect();
+    return JSON.stringify({ sameRow: Math.abs(l.top - d.top) < 4, listLeft: l.left < d.left });`));
+  ok(np.sameRow && np.listLeft, "landscape: the nursing panel is two panes, tasks on the left");
+  await size(768, 1024); await sleep(250);
+  ok(await ev(`var l = document.querySelector(".w-np-list").getBoundingClientRect(), d = document.querySelector(".w-np-detail").getBoundingClientRect();
+    return d.top < l.top && l.top >= d.bottom - 1;`), "portrait: the nursing panel is one column");
+
+  // 8. G13: a refused write takes focus onto the banner instead of leaving it on the control pressed.
+  await size(1024, 768); await sleep(200);
+  await ev(`document.querySelector('[data-w-act="nurseassign:assign"]').focus(); document.querySelector('[data-w-act="nurseassign:assign"]').click(); return true;`);
+  ok(await waitFor(`return document.getElementById("wBanner") != null;`), "a refused write shows the refusal banner");
+  ok(await ev(`return document.activeElement && document.activeElement.id === "wBanner";`), "G13: a refusal takes focus so it is seen");
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }
 console.log(fails ? `\n${fails} check(s) failed` : "\nALL CHECKS PASSED");

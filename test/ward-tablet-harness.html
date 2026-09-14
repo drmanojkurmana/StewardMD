@@ -40,6 +40,13 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
   if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
   if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  // G13: a fixed refusal, so the test can prove a warning/error takes focus instead of the control pressed.
+  if (u.indexOf("/ward/nurse-assign") >= 0) return reply({ ok: false, error: "refused", reasons: ["harness: nurse assignment refused for this test"] });
+  if (u.indexOf("/ward/nursing-patient") >= 0) return reply({ ok: true, problems: [],
+    assignment: { nurseId: "cfa:nurse", nurseLabel: "nurse@h.test", shift: "Day", assignedAt: at(6) },
+    vitals: { state: "due", text: "Observations every 4 h", dueAt: at(10), everyHours: 4 },
+    tasks: [{ id: "t1", title: "Reposition", status: "open", dueAt: at(12), createdBy: "cfa:nurse", overdue: false, version: 1 },
+      { id: "t2", title: "Wound check", status: "open", dueAt: at(6), createdBy: "cfa:nurse", overdue: true, version: 1 }] });
   if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", entry: [] });
   return reply({ ok: true });
 };

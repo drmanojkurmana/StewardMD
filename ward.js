@@ -239,12 +239,12 @@
       var rs = (state.refusal.reasons || []).map(function (r) {
         return "<li>" + esc(typeof r === "string" ? r : (r.code || JSON.stringify(r))) + "</li>";
       }).join("");
-      return emBanner + '<div class="w-refusal">' + ms("gpp_maybe") + "<div><h4>Refused" + (state.refusal.action ? " on " + esc(state.refusal.action) : "") + "</h4>" +
+      return emBanner + '<div class="w-refusal" id="wBanner" tabindex="-1">' + ms("gpp_maybe") + "<div><h4>Refused" + (state.refusal.action ? " on " + esc(state.refusal.action) : "") + "</h4>" +
         (rs ? "<ul>" + rs + "</ul>" : "") +
         (state.refusal.detail ? "<p>" + esc(state.refusal.detail) + "</p>" : "") +
         '</div><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     }
-    if (state.err) return emBanner + '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
+    if (state.err) return emBanner + '<div class="w-err" id="wBanner" tabindex="-1">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     if (state.note) return emBanner + '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     return emBanner;
   }
@@ -6348,7 +6348,12 @@
       : '<p class="w-empty">No tasks for this patient.</p>';
     var add = '<div class="w-sub"><label class="w-f"><span>New task</span><input id="wNtTitle" placeholder="What needs doing"></label>' +
       '<label class="w-f"><span>Due</span><input id="wNtDue" type="datetime-local"></label><button class="w-btn sm" data-w-act="ntaskadd">Add task</button></div>';
-    return '<div class="w-card">' + head + problems + assign + obs + '<div class="w-sub"><h4>Tasks</h4>' + tasks + add + "</div></div>";
+    // G14: at tablet widths, tasks (the list) sits on the left and the patient's own
+    // assignment/observation detail on the right (ward.css puts .w-np-list first with `order`, so
+    // the phone/DOM reading order below - detail, then tasks - is unchanged either way).
+    return '<div class="w-card w-np">' + head + problems +
+      '<div class="w-np-body"><div class="w-np-detail">' + assign + obs + "</div>" +
+      '<div class="w-np-list"><div class="w-sub"><h4>Tasks</h4>' + tasks + add + "</div></div></div></div>";
   }
   function formVisible(cond, a) {
     if (!cond) return true;
@@ -7032,7 +7037,7 @@
       (state.demo ? '<span class="w-demo" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") +
       '<button class="w-ic" data-w-act="keys" aria-label="Keyboard shortcuts" aria-keyshortcuts="?">' + ms("keyboard") + "</button></header>" +
-      '<div class="w-canvas">' + banner(state) + offlineBar(state) +
+      '<div class="w-canvas" id="wCanvas">' + banner(state) + offlineBar(state) +
       (state.view === "offline" ? offlineView(state)
         : state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
@@ -7100,16 +7105,48 @@
 
   // ---- controller --------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdWard"); if (!el) { el = document.createElement("div"); el.id = "smdWard"; document.body.appendChild(el); } return el; }
+  /* G13: every repaint replaces the whole subtree, so the element that was focused is gone. Mark it
+   * by id, or by its data-w-act and position among elements sharing that same verb, before the
+   * repaint - then find its match afterwards and focus that. Good enough to put focus back on the
+   * button just pressed, or on the same-shaped control in a reloaded list; not a promise that it is
+   * literally the same DOM node. */
+  function focusMark() {
+    var a = (typeof document !== "undefined") && document.activeElement;
+    if (!a || a === document.body || typeof a.getAttribute !== "function") return null;
+    if (a.id) return { id: a.id };
+    var act = a.getAttribute("data-w-act");
+    if (!act) return null;
+    var all = document.querySelectorAll('[data-w-act="' + act.replace(/"/g, '\\"') + '"]');
+    return { act: act, idx: Array.prototype.indexOf.call(all, a) };
+  }
+  function focusRestore(mark) {
+    // A warning or error must be seen: it takes focus and is scrolled into view instead of whatever
+    // triggered the repaint. A plain success note does not steal focus this way.
+    if (st.err || st.refusal) {
+      var b = document.getElementById("wBanner");
+      if (b) { try { b.focus(); b.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+      return;
+    }
+    if (!mark) return;
+    var t = mark.id ? document.getElementById(mark.id) : null;
+    if (!t && mark.act) {
+      var all = document.querySelectorAll('[data-w-act="' + mark.act.replace(/"/g, '\\"') + '"]');
+      t = all[mark.idx] || all[0];
+    }
+    if (t) { try { t.focus(); } catch (e) {} }
+  }
   function paint() {
+    var canvas = document.getElementById("wCanvas");
+    var cy = canvas ? canvas.scrollTop : 0;
     var sy = (typeof window !== "undefined" && window.scrollY != null) ? window.scrollY : 0;
+    var mark = focusMark();
     var el = root();
     el.innerHTML = _render(st);
-    /* Focus is deliberately NOT restored to the pressed button after a repaint: a second Enter would
-     * then repeat a write, and a reloaded round can put a different dose at the same index. */
     markShortcuts(el);
-    if (typeof window !== "undefined" && sy > 0) {
-      window.scrollTo(0, sy);
-    }
+    canvas = document.getElementById("wCanvas");
+    if (canvas) canvas.scrollTop = cy;
+    if (typeof window !== "undefined" && sy > 0) window.scrollTo(0, sy);
+    focusRestore(mark);
   }
 
   function loadWard() {
@@ -11120,7 +11157,7 @@
     if (cmd === "offlinediscard") { offlineChoice(arg, "discard"); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
-    if (cmd === "setcls") { st.cls = arg; var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st); else paint(); return; }
+    if (cmd === "setcls") { st.cls = arg; var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint(); return; }
     if (cmd === "back") {
       /* The patient's copy is opened FROM a chart, so back returns to that chart rather than
        * throwing the selection away - and the copy itself is always dropped, because a page with
@@ -11488,7 +11525,7 @@
         var elS = document.getElementById("wRosterStayFilter");
         st.rosterFilters.stay = elS ? elS.value : "";
       }
-      var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st); else paint();
+      var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint();
       return;
     }
     if (cmd === "openbedpatient") {

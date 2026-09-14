@@ -618,3 +618,9 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
   #smdWard .w-mar-ctl .w-filter input { flex: 1 1 100%; }
   #smdWard .w-nw .w-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 }
+/* G14: the single-patient nursing panel (tasks list, then assignment/observations) as two panes from
+ * 768 to 1366 px landscape; a phone, a portrait tablet, or a wider desktop stay one column. */
+@media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
+  #smdWard .w-np-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 320px); gap: 16px; align-items: start; }
+  #smdWard .w-np-list { order: -1; }
+}
