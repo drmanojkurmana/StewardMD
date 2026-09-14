@@ -979,12 +979,57 @@
   function anchorHtml(c, a) {
     var esc = c.esc;
     if (a == null) return "";
+    /* A restarted log names its acknowledgement instead of reading silently green. */
+    if (a.status === "ok" && a.acknowledgement) return anchorAckLineHtml(c, a.acknowledgement);
     var cls = a.status === "ok" ? "ok" : (a.status === "no-anchors" ? "note" : "err");
     var h = '<div class="msg ' + cls + '"><b>' + esc(ANCHOR_LABEL[a.status] || "Outside copy not verified") + "</b>: " + esc(a.message || "");
-    if (a.status === "rewritten" || a.status === "truncated") h += " Tell the information governance lead. Do not restore or re-import.";
+    if (a.status === "rewritten" || a.status === "truncated") {
+      h += " Tell the information governance lead. Do not restore or re-import.</div>";
+      h += '<div class="msg note">If the database was restored on purpose (for example a point in time restore), this report is expected and stays until it is acknowledged. Only the owner of this hospital can acknowledge a legitimate restore, with a reason and an incident reference. Do not acknowledge a difference nobody can explain: ask the information governance lead first.</div>';
+      /* The form is the owner's alone. Everyone else sees what happened and who may act. Whether
+       * this viewer is the owner arrives on the report from the server; anything else would let a
+       * screen decide its own authority. */
+      if (a.canAcknowledge === true) h += anchorAckFormHtml(c);
+      return h;
+    }
     return h + "</div>";
   }
   WSQ._anchorHtml = anchorHtml;
+  /* P2.17 acknowledgement line: who accepted the restore, when, why, under which incident, and
+   * what the copy reported before. Rendered instead of the tamper line once the log restarts. */
+  var ACK_PREVIOUS_LABEL = { rewritten: "differed from the database", truncated: "showed rows removed below the application" };
+  function anchorAckLineHtml(c, k) {
+    var esc = c.esc;
+    k = k || {};
+    var h = '<div class="msg ok"><b>Acknowledged restore</b>: ' + esc(k.by || "") + " acknowledged a legitimate restore on " + esc(k.at || "") +
+      " (incident " + esc(k.incidentRef || "") + "). Before the acknowledgement the outside copy " +
+      esc(ACK_PREVIOUS_LABEL[k.previousStatus] || ("reported " + (k.previousStatus || "a break"))) +
+      (k.previousAtSeq != null ? " at chained row " + esc(k.previousAtSeq) : "") + ".";
+    if (k.reason) h += "<br>Reason given: " + esc(k.reason);
+    h += "</div>" + '<p class="quiet">The anchor log from before this acknowledgement is kept as an archive and is never deleted. A new difference after this point is reported again.</p>';
+    return h;
+  }
+  WSQ._anchorAckLineHtml = anchorAckLineHtml;
+  /* P2.17 acknowledgement form (owner only, see anchorHtml). The reason needs at least 20
+   * characters and an incident reference; the server checks both again. Nothing here decides
+   * authority: a non-owner who forges this form gets a 403 from the route. */
+  function anchorAckFormHtml(c) {
+    return '<div class="card"><h3>Acknowledge a legitimate restore</h3>' +
+      '<p class="quiet">This archives the current outside copy and restarts it from the newest row, and records the acknowledgement in the audit trail under your name. Only do this when the restore was planned and is written up under the incident reference below. Never put patient details in the reason.</p>' +
+      '<div class="row"><label class="f"><span>Why was the database restored (at least 20 characters)</span><input id="secAckReason" placeholder="Planned point in time restore after..."></label>' +
+      '<label class="f"><span>Incident reference</span><input id="secAckIncident" placeholder="INC-123"></label></div>' +
+      '<button type="button" class="btn" id="secAckReview">Review acknowledgement</button><div id="secAckConfirm"></div><div id="secAckMsg"></div></div>';
+  }
+  WSQ._anchorAckFormHtml = anchorAckFormHtml;
+  /* The confirm step: the entered values read back before anything is sent. Pure so it renders
+   * the same in the page and in tests. */
+  function anchorAckConfirmHtml(c, reason, incident) {
+    var esc = c.esc;
+    return '<div class="msg note"><b>Check before confirming.</b> You are acknowledging a legitimate restore of the audit trail.<br>' +
+      "Reason: " + esc(reason) + "<br>Incident: " + esc(incident) + "</div>" +
+      '<button type="button" class="btn" id="secAckGo">Confirm acknowledgement</button> <button type="button" class="btn ghost" id="secAckBack">Back</button>';
+  }
+  WSQ._anchorAckConfirmHtml = anchorAckConfirmHtml;
   function auditIntegrityHtml(c, ig, anchors) {
     var esc = c.esc;
     if (!ig) return '<div class="msg err">Not verified: no integrity result was returned. This is not the same as the audit trail being intact.</div>' + anchorHtml(c, anchors === undefined ? null : anchors);
@@ -1167,6 +1212,26 @@
           if (!x || !x.ok) { save.disabled = false; document.getElementById("secRtMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
           c.toast("Restore test recorded."); WSQ.render("admin");
         });
+      };
+      /* P2.17 anchor acknowledgement (owner only; the form renders only for the owner). Review
+       * first, then confirm: acknowledging archives the outside copy, which must stay deliberate. */
+      var ackReview = document.getElementById("secAckReview");
+      if (ackReview) ackReview.onclick = function () {
+        var val = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+        var reason = val("secAckReason"), incident = val("secAckIncident"), msg = document.getElementById("secAckMsg");
+        if (reason.length < 20 || !incident) { msg.innerHTML = '<div class="msg err">Give a reason of at least 20 characters and the incident reference. The server checks both again.</div>'; return; }
+        msg.innerHTML = "";
+        document.getElementById("secAckConfirm").innerHTML = anchorAckConfirmHtml(c, reason, incident);
+        document.getElementById("secAckBack").onclick = function () { document.getElementById("secAckConfirm").innerHTML = ""; };
+        document.getElementById("secAckGo").onclick = function () {
+          var go = document.getElementById("secAckGo");
+          go.disabled = true;
+          c.api("/ward/audit-anchor-acknowledge", { orgId: c.state.orgId, reason: reason, incidentRef: incident }).then(function (x) {
+            if (!x || !x.ok) { go.disabled = false; msg.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+            c.toast("Restore acknowledged. The outside copy restarts from the newest row.");
+            WSQ.render("admin");
+          });
+        };
       };
     });
   }

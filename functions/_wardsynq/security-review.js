@@ -432,7 +432,7 @@ const unavailable = (e) => ({ status: "unavailable", error: e instanceof Governa
 const section = (findings) => ({ status: "ok", findings, counts: findings.reduce((m, f) => { m[f.type] = (m[f.type] || 0) + 1; return m; }, {}) });
 
 /**
- * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore?,
+ * The whole report. ctx: { migration, actorDeps, recordDeps, days?, now?, rpoMinutes?, auditRetentionYears?, region?, anchorStore?, viewerIsOwner?,
  *   orgEvents: {events, partial} | {error}, viewerId,
  *   assignmentSources: { members: [{identity, role}] | {error}, roster: {shifts, assignments, partial} | {error}, utcOffsetMinutes } }
  */
@@ -476,6 +476,13 @@ async function securityReport(request, env, ctx) {
   retention.anchors = ctx.anchorStore
     ? await checkAnchors(repository, tenantId, ctx.anchorStore)
     : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the database to compare against." };
+  /* P2.17 acknowledgement. Only the hospital owner may acknowledge a legitimate restore, so the
+   * report tells the screen whether the viewer is one (decided by the route, which knows the org,
+   * never by the screen). Stamped on the anchors section, not decided from it: checkAnchors knows
+   * the log, not the viewer. Absent means not allowed: a hand-built report never opens the form. */
+  if (retention.anchors && typeof retention.anchors === "object") {
+    retention.anchors.canAcknowledge = ctx.viewerIsOwner === true;
+  }
 
   const orgEvents = ctx.orgEvents || { error: "not_supplied" };
   const logins = orgEvents.error

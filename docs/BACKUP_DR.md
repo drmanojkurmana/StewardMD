@@ -24,8 +24,18 @@ WardSynQ record repository writes has a hash-chain link in `wardsynq_audit_chain
   copied to KV at most hourly (`anchorHead`, `wsq:auditanchor:<tenant>`), outside the database, so once an anchor
   newer than the restore point exists, System health and Security review report the trail as **truncated** or
   **rewritten**. After a legitimate restore that report is correct and expected, and it stays until the anchor log
-  is acknowledged. There is no acknowledge screen yet: record the restore in the incident log
-  (`docs/INCIDENT_RESPONSE.md`) and do not delete the KV key by hand, because it is the evidence of what was lost.
+  is acknowledged. To acknowledge it, once the restore is confirmed legitimate and written up:
+  1. Record the restore in the incident log (`docs/INCIDENT_RESPONSE.md`) and keep its incident reference.
+  2. Open Admin Center > Security review > Audit retention > Tamper evidence. The outside-copy line names
+     the break; only the hospital owner sees the acknowledgement form (a StewardMD platform owner may do
+     it in their place). Do not acknowledge a difference nobody can explain: ask the information
+     governance lead first.
+  3. Enter why the database was restored (at least 20 characters, no patient details) and the incident
+     reference, review the read-back, and confirm. The old anchor log is archived unchanged under
+     `wsq:auditanchor:<tenant>:archived:<time>` and never deleted, a fresh log restarts from the newest
+     row, and the acknowledgement itself is written to the audit trail. System health and Security review
+     then read up, naming who acknowledged the restore, when, and under which incident.
+  Do not delete the KV key by hand, because it is the evidence of what was lost.
   **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
   take a manual export (`scripts/backup-d1.sh`). After restoring, the difference is the audit rows the restore
   discarded; keep that export as the record of them.

@@ -192,8 +192,27 @@ const ANCHOR_MAX = 200;
 /** PURE. The store key for a hospital's anchor log. */
 const anchorKey = (tenantId) => ANCHOR_PREFIX + str(tenantId);
 
-/** PURE. A stored anchor is a seq, the hash the chain had there, and when it was copied. */
-const anchorEntry = (seq, hash, at) => ({ seq: Number(seq), hash: String(hash), at: String(at) });
+/** PURE. A stored anchor is a seq, the hash the chain had there, and when it was copied.
+ * A restarted log's oldest entry also carries `acknowledged` (see acknowledgeAnchorBreak): who said
+ * the break was a legitimate restore, when, and under which incident. It rides on the entry so the
+ * acknowledgement survives exactly as long as the log it restarted, and no longer. */
+const anchorEntry = (seq, hash, at, acknowledged) => {
+  const e = { seq: Number(seq), hash: String(hash), at: String(at) };
+  if (acknowledged && typeof acknowledged === "object") e.acknowledged = { ...acknowledged };
+  return e;
+};
+
+/** PURE. The acknowledgement on a restarted log's oldest entry, or null when there is none worth
+ * naming. `by` and `incidentRef` are required: an acknowledgement that cannot say who or under
+ * which incident is not one the health line may quote. */
+function acknowledgedOf(a) {
+  const k = a && a.acknowledged;
+  if (!k || typeof k !== "object") return null;
+  if (!str(k.by) || !str(k.incidentRef)) return null;
+  return { by: str(k.by), reason: str(k.reason), incidentRef: str(k.incidentRef),
+    previousStatus: str(k.previousStatus) || null,
+    previousAtSeq: k.previousAtSeq != null && Number.isFinite(Number(k.previousAtSeq)) ? Number(k.previousAtSeq) : null };
+}
 
 const validAnchor = (a) => !!a && Number.isFinite(Number(a.seq)) && Number(a.seq) > 0 && typeof a.hash === "string" && a.hash.length > 0;
 
@@ -210,7 +229,7 @@ function parseAnchorLog(raw) {
     catch { return null; }
   }
   if (!Array.isArray(v)) return null;
-  return v.filter(validAnchor).map((a) => anchorEntry(a.seq, a.hash, a.at || ""));
+  return v.filter(validAnchor).map((a) => anchorEntry(a.seq, a.hash, a.at || "", a.acknowledged));
 }
 
 /**
@@ -219,7 +238,7 @@ function parseAnchorLog(raw) {
  * present with a DIFFERENT hash keeps its first hash and the new head is left out (conflict).
  */
 function appendAnchorEntry(log, entry, max) {
-  const kept = (log || []).filter(validAnchor).map((a) => anchorEntry(a.seq, a.hash, a.at));
+  const kept = (log || []).filter(validAnchor).map((a) => anchorEntry(a.seq, a.hash, a.at, a.acknowledged));
   const same = kept.filter((a) => a.seq === entry.seq);
   if (same.length) {
     if (same.some((a) => a.hash === entry.hash)) {
@@ -310,8 +329,104 @@ async function checkAnchors(repository, tenantId, anchorStore) {
         message: `Rewritten at chained row ${a.seq}: it no longer matches the outside copy from ${a.at || "an earlier run"}. The audit trail was changed below the application.` };
     }
   }
+  const base = `Outside copy matches: all ${ordered.length} anchored rows still match the database (newest anchored row ${newest}, chain head ${headSeq}).`;
+  /* An acknowledged restore stays VISIBLE, never silently green: the oldest entry of a restarted log
+   * names who accepted the break, when, and under which incident. A health line that went back to up
+   * with no trace of why would teach people the tamper line clears itself. */
+  const ack = acknowledgedOf(ordered[0]);
+  if (!ack) return { status: "ok", anchors: ordered.length, newestSeq: newest, headSeq, message: base };
   return { status: "ok", anchors: ordered.length, newestSeq: newest, headSeq,
-    message: `Outside copy matches: all ${ordered.length} anchored rows still match the database (newest anchored row ${newest}, chain head ${headSeq}).` };
+    acknowledgement: { by: ack.by, reason: ack.reason, incidentRef: ack.incidentRef,
+      previousStatus: ack.previousStatus, previousAtSeq: ack.previousAtSeq, at: ordered[0].at || null },
+    message: `${base} Acknowledged restore by ${ack.by} on ${ordered[0].at || "an earlier run"}, incident ${ack.incidentRef}.` };
 }
 
-export { GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors };
+/* ANCHOR ARCHIVE. acknowledgeAnchorBreak() below moves the broken log here before restarting it. The
+ * key carries the acknowledgement time so every acknowledgement keeps its own archive, and archives
+ * are write-once: nothing in this file ever deletes one, so the evidence of what the restore
+ * discarded stays readable after the health line is back up. */
+
+/** PURE. The archive key for a hospital's anchor log at one acknowledgement time. */
+const anchorArchiveKey = (tenantId, iso) => ANCHOR_PREFIX + str(tenantId) + ":archived:" + str(iso);
+
+/** The audit action recorded when an anchor break is acknowledged. The entry carries the previous
+ * status, the row it broke at and the incident reference; the free-text reason lives on the anchor
+ * entry (operational metadata, never patient data), not in the chained row. */
+const ANCHOR_ACK_ACTION = "audit.anchor_acknowledged";
+
+/**
+ * Acknowledges a LEGITIMATE restore of the audit trail: after a Time Travel restore the anchor
+ * comparison correctly reports rewritten/truncated, and stays that way, because no new anchor may
+ * overwrite the evidence. The hospital owner says "we restored on purpose", and the log restarts
+ * from the current head with that statement attached.
+ *
+ * Only a log checkAnchors() currently reports as rewritten or truncated may be acknowledged;
+ * anything else is refused with nothing_to_acknowledge. On success the old log is moved UNCHANGED
+ * to anchorArchiveKey() and a fresh one-entry log for the current head takes its place, and the
+ * acknowledgement itself is written through the repository so it is chained like any other audit
+ * row. The audit write happens FIRST, so the fresh anchor already covers the acknowledgement row.
+ *
+ * Never a half move: the archive is written before the log is replaced, and every failure leaves
+ * the old log in place and says so. A failed archive changes nothing; a failed replace keeps the
+ * archive and reports replace_failed, so a retry archives again rather than losing the old log; a
+ * failed audit write stops before the store is touched at all. Nothing here throws and nothing
+ * reports ok unless the fresh log landed.
+ */
+async function acknowledgeAnchorBreak(repository, tenantId, anchorStore, opts) {
+  const o = opts || {};
+  const by = str(o.by), reason = str(o.reason), incidentRef = str(o.incidentRef);
+  const nowIso = str(o.nowIso) || new Date().toISOString();
+  const fail = (status, error, message, extra) => ({ ok: false, status, error, message, ...(extra || {}) });
+  if (!anchorStore || typeof anchorStore.get !== "function" || typeof anchorStore.put !== "function") {
+    return fail(503, "anchor_store_unavailable", "No outside copy store was handed in, so the anchor log cannot be acknowledged and nothing was changed.");
+  }
+  if (!repository || typeof repository.auditChainHead !== "function" || typeof repository.auditChainRows !== "function" || typeof repository.auditOnly !== "function") {
+    return fail(502, "repository_unavailable", "This deployment's storage cannot write the acknowledgement, so the anchor log was left in place.");
+  }
+  const current = await checkAnchors(repository, tenantId, anchorStore);
+  if (current.status !== "rewritten" && current.status !== "truncated") {
+    return { ok: false, status: 409, error: "nothing_to_acknowledge", anchorStatus: current.status,
+      message: current.status === "ok"
+        ? "Nothing to acknowledge: the outside copy matches the database, so the anchor log was left in place."
+        : `Nothing to acknowledge: the outside copy is ${current.status}, not rewritten or truncated, so the anchor log was left in place.` };
+  }
+  let raw;
+  try { raw = await anchorStore.get(anchorKey(tenantId)); }
+  catch { return fail(502, "anchor_unreadable", "The outside copy could not be read, so the anchor log was left in place."); }
+  const log = parseAnchorLog(raw);
+  if (log === null || !log.length) {
+    return fail(502, "anchor_unreadable", "The stored outside copy is not a readable anchor log, so it was left in place rather than acknowledged blind.");
+  }
+  /* The acknowledgement is chained before anything is archived, so a later reader can see who said
+   * the restore was legitimate without trusting the anchor store alone. A failed write stops here,
+   * before the store is touched, and the break is still reported on the next check. */
+  try {
+    await repository.auditOnly(tenantId, { ts: nowIso, actor: by, connectorId: "wardsynq",
+      action: ANCHOR_ACK_ACTION, scope: { previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null, incidentRef },
+      outcome: "ok", detail: `Anchor break acknowledged (was ${current.status} at chained row ${current.atSeq}): incident ${incidentRef}.` });
+  } catch { return fail(502, "audit_failed", "The acknowledgement could not be written to the audit trail, so the anchor log was left in place."); }
+  let head;
+  try { head = await repository.auditChainHead(tenantId); }
+  catch { return fail(502, "head_unreadable", "The acknowledgement was chained but the audit chain head could not be read back, so the anchor log was left in place."); }
+  const seq = head ? num(head.seq != null ? head.seq : head.chainSeq) : null;
+  const hash = head ? (head.hash != null && head.hash !== "" ? String(head.hash) : (head.rowHash != null && head.rowHash !== "" ? String(head.rowHash) : "")) : "";
+  if (seq == null || seq <= 0 || !hash) {
+    return fail(502, "head_unreadable", "The acknowledgement was chained but the audit chain head could not be read back, so the anchor log was left in place.");
+  }
+  const acknowledged = { by, reason, incidentRef, previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null };
+  const archiveKey = anchorArchiveKey(tenantId, nowIso);
+  try { await anchorStore.put(archiveKey, typeof raw === "string" ? raw : JSON.stringify(log)); }
+  catch { return fail(502, "archive_failed", "The old anchor log could not be archived, so it was left in place and nothing was acknowledged.", { archived: null }); }
+  try { await anchorStore.put(anchorKey(tenantId), JSON.stringify([anchorEntry(seq, hash, nowIso, acknowledged)])); }
+  catch {
+    return fail(502, "replace_failed",
+      "The old anchor log was archived but the fresh log could not be written, so the old log is still in place and nothing was acknowledged. Acknowledging again is safe: it archives again rather than deleting.",
+      { archived: archiveKey, previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null });
+  }
+  return { ok: true, status: "acknowledged", seq, hash, at: nowIso, by, incidentRef,
+    previousStatus: current.status, previousAtSeq: current.atSeq != null ? current.atSeq : null,
+    archived: archiveKey, anchors: 1,
+    message: `Acknowledged: the anchor log that reported ${current.status} at chained row ${current.atSeq} is archived, and a fresh log starts at chained row ${seq}.` };
+}
+
+export { GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, ANCHOR_ACK_ACTION, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorArchiveKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors, acknowledgeAnchorBreak };

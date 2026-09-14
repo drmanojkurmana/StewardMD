@@ -200,6 +200,7 @@ import { patientCopy, releaseToPatient, releaseDocumentToPatient } from "../../_
 import { exportPage, recordBackupRun, backupStatus } from "../../_wardsynq/backup-run.js";
 import { securityReport, recordSecurityReview, recordRestoreTest } from "../../_wardsynq/security-review.js";
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
+import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
@@ -1308,6 +1309,10 @@ export async function onRequest(context) {
          * deployment owner's act. No clinical capability reaches it: a doctor or nurse gets 403.
          * safety_officer is NOT added - it is clinical-incident safety, not account security. */
         "security-report": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
+        /* P2.17 anchor acknowledgement. The capability gate only narrows this to staff.admin, which
+         * hr and admin members hold too: the hospital-owner check happens at the route itself, fail
+         * closed, so naming the capability here grants nobody the acknowledgement. */
+        "audit-anchor-acknowledge": CAPS.STAFF_ADMIN,
         /* P2.15. Which dependencies are down and what that means on a ward. The deployment owner's view:
          * it names storage and provider state, never patient data, and no clinical capability reaches it. */
         "system-health": CAPS.STAFF_ADMIN,
@@ -1428,6 +1433,11 @@ export async function onRequest(context) {
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
+      /* P2.17 anchor acknowledgement. The capability gate cannot see hospital ownership, so a
+       * StewardMD platform owner who holds no membership in this hospital would be refused here
+       * before the route that is allowed to stand in for the owner ever runs. Let only that one
+       * route through to its own ownership check; every other route keeps the gate as it was. */
+      if (!wAz.ok && sub === "audit-anchor-acknowledge" && method === "POST" && actor.isOwner) wAz = { ok: true, role: "admin", platformOwner: true };
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       /* TASK 9.15/9.1: A THROTTLE ON THE CLINICAL DOOR, which had none.
@@ -2534,7 +2544,8 @@ export async function onRequest(context) {
         const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
         const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
           auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN",
-          anchorStore: auditAnchorStore(env && env.MAIK_KV) });
+          anchorStore: auditAnchorStore(env && env.MAIK_KV),
+          viewerIsOwner: isOwnerOfOrg(wOrg, actor.id) || !!actor.isOwner });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "system-health" && method === "GET") {
@@ -2556,6 +2567,29 @@ export async function onRequest(context) {
       }
       if (sub === "restore-test" && method === "POST") {
         const r = await recordRestoreTest(request, env, { ...deps, restoredWhat: body.restoredWhat, outcome: body.outcome, at: body.at, performedBy: body.performedBy, note: body.note, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "audit-anchor-acknowledge" && method === "POST") {
+        /* P2.17. Acknowledging a legitimate restore restarts the anchor log, so it is the hospital
+         * owner's act, not any administrator's. Ownership is decided the way memberChangeRefusal
+         * decides it: the authorizeOrg answer's owner short-circuit, which is exactly what
+         * isOwnerOfOrg names (both checked: the short-circuit is the live decision, the predicate
+         * is the readable one). A StewardMD platform owner (actor.isOwner, as elsewhere in this
+         * router) may stand in for the owner. Everyone else, including hr and admin members who
+         * passed the staff.admin gate above, is refused here, fail closed. */
+        const ownsHospital = isOwnerOfOrg(wOrg, actor.id) || !!(wAz && wAz.owner);
+        if (!ownsHospital && !actor.isOwner) {
+          return json({ ok: false, error: "not_hospital_owner",
+            message: "Only the owner of this hospital can acknowledge a legitimate restore of the audit trail. Tell the information governance lead." }, 403, request);
+        }
+        const reason = String((body && body.reason) || "").trim();
+        const incidentRef = String((body && body.incidentRef) || "").trim();
+        if (reason.length < 20 || !incidentRef) {
+          return json({ ok: false, error: "reason_required",
+            message: "Give a reason of at least 20 characters saying why the database was restored, and the incident reference it was recorded under." }, 422, request);
+        }
+        const r = await acknowledgeAnchorBreak(deps.recordDeps.repository, mig.tenantId, auditAnchorStore(env && env.MAIK_KV),
+          { by: actor.email || actor.id, reason, incidentRef, nowIso: new Date().toISOString() });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "advisory-check" && method === "POST") {

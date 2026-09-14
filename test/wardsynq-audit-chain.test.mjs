@@ -732,3 +732,231 @@ test("route: the security review carries the anchor comparison, plainly empty be
   assert.equal(rep.auditRetention.anchors.status, "no-anchors", JSON.stringify(rep.auditRetention.anchors));
   assert.match(rep.auditRetention.anchors.message, /nothing outside the database to compare/);
 });
+
+/* ---- 15: acknowledging a legitimate restore --------------------------------------------------------
+ *
+ * After a Time Travel restore the anchor comparison correctly stays down: nothing may clear it
+ * except the hospital owner saying "we restored on purpose". The old log moves UNCHANGED to an
+ * archive key, a fresh one-entry log restarts at the head with the acknowledgement attached, the
+ * acknowledgement itself is chained, and checkAnchors reads ok while still naming who, when and
+ * under which incident.
+ */
+
+const ACK_BY = "admin@example.test";
+const ACK_REASON = "Planned point in time restore after the failed migration rehearsal";
+const ACK_INCIDENT = "INC-2026-0914";
+const ACK_AT = "2026-09-14T12:00:00.000Z";
+
+async function truncatedRepo() {
+  const mem = new MemoryRepository();
+  const store = memAnchorStore();
+  for (let i = 1; i <= 3; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T10:00:00.000Z");
+  for (let i = 4; i <= 5; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T11:00:00.000Z");
+  const before = JSON.parse(await store.get(AC.anchorKey(T)));
+  mem._chain.splice(3);                                     // the restore discarded the newest rows below the app
+  assert.equal((await AC.checkAnchors(mem, T, store)).status, "truncated");
+  return { mem, store, before };
+}
+
+test("acknowledge: a truncated chain acknowledged by the owner archives the old log and restarts at the head", async () => {
+  const { mem, store, before } = await truncatedRepo();
+  const auditsBefore = mem.audit.length;
+  const r = await AC.acknowledgeAnchorBreak(mem, T, store, { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, nowIso: ACK_AT });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.equal(r.status, "acknowledged");
+  assert.equal(r.previousStatus, "truncated");
+  assert.equal(r.previousAtSeq, 5);
+  assert.equal(r.archived, AC.anchorArchiveKey(T, ACK_AT));
+  assert.match(r.archived, /^wsq:auditanchor:tenant-chain:archived:/);
+  assert.deepEqual(JSON.parse(await store.get(r.archived)), before, "the archive holds the old log unchanged");
+
+  // The fresh log starts at the head: the acknowledgement row itself was chained first.
+  const head = await mem.auditChainHead(T);
+  const fresh = JSON.parse(await store.get(AC.anchorKey(T)));
+  assert.equal(fresh.length, 1);
+  assert.equal(fresh[0].seq, head.seq);
+  assert.equal(fresh[0].hash, head.hash);
+  assert.deepEqual(fresh[0].acknowledged, { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, previousStatus: "truncated", previousAtSeq: 5 });
+
+  // checkAnchors is ok and names the acknowledgement: who, when, incident. Never silently green.
+  const c = await AC.checkAnchors(mem, T, store);
+  assert.equal(c.status, "ok", JSON.stringify(c));
+  assert.match(c.message, /Acknowledged restore by admin@example\.test/);
+  assert.match(c.message, /2026-09-14T12:00:00/);
+  assert.match(c.message, /INC-2026-0914/);
+  assert.deepEqual(c.acknowledgement, { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, previousStatus: "truncated", previousAtSeq: 5, at: ACK_AT });
+
+  // An audit event was written for the acknowledgement, and it is chained.
+  assert.equal(mem.audit.length, auditsBefore + 1);
+  const wrote = mem.audit[mem.audit.length - 1];
+  assert.equal(wrote.action, AC.ANCHOR_ACK_ACTION);
+  assert.equal(wrote.actor, ACK_BY);
+  assert.equal(wrote.outcome, "ok");
+  assert.equal((await AC.verifyAuditChain(mem, T)).status, "ok", "the chained acknowledgement verifies");
+});
+
+test("acknowledge: refused when nothing is broken, and the log is untouched", async () => {
+  const mem = new MemoryRepository();
+  const store = memAnchorStore();
+  for (let i = 1; i <= 2; i++) await mem.auditOnly(T, ev("record.read", i));
+  await AC.anchorHead(mem, T, store, "2026-09-14T10:00:00.000Z");
+  const auditsBefore = mem.audit.length;
+  const logBefore = await store.get(AC.anchorKey(T));
+  const r = await AC.acknowledgeAnchorBreak(mem, T, store, { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, nowIso: ACK_AT });
+  assert.equal(r.ok, false, JSON.stringify(r));
+  assert.equal(r.error, "nothing_to_acknowledge");
+  assert.equal(await store.get(AC.anchorKey(T)), logBefore, "the log is untouched");
+  assert.equal(mem.audit.length, auditsBefore, "a refused acknowledgement chains nothing");
+  assert.equal(store.map.size, 1, "no archive key was written");
+
+  const r2 = await AC.acknowledgeAnchorBreak(mem, T, memAnchorStore(), { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, nowIso: ACK_AT });
+  assert.equal(r2.ok, false);
+  assert.equal(r2.error, "nothing_to_acknowledge", "no anchors at all is also nothing to acknowledge");
+});
+
+test("acknowledge: a failing replace keeps the archive and reports the failure", async () => {
+  const { mem, store, before } = await truncatedRepo();
+  const realPut = store.put;
+  let puts = 0;
+  store.put = async (k, v) => { puts += 1; if (puts === 2) throw new Error("KV down"); return realPut(k, v); };
+  const r = await AC.acknowledgeAnchorBreak(mem, T, store, { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, nowIso: ACK_AT });
+  assert.equal(r.ok, false, JSON.stringify(r));
+  assert.equal(r.error, "replace_failed");
+  assert.equal(r.archived, AC.anchorArchiveKey(T, ACK_AT));
+  assert.deepEqual(JSON.parse(await store.get(r.archived)), before, "the archive was kept");
+  assert.deepEqual(JSON.parse(await store.get(AC.anchorKey(T))), before, "the old log is still in place: never a half move");
+  assert.equal((await AC.checkAnchors(mem, T, store)).status, "truncated", "the break is still reported, so acknowledging again is safe");
+});
+
+/* ---- 16: the acknowledgement route ------------------------------------------------------------------ */
+
+const DEPUTY = "deputy@example.test";
+function seedHospitalWithDeputy(wardsynq) {
+  seedHospital(wardsynq);
+  docs.set(`q_members/${sanitize(ORG_ID)}__${sanitize(idFor(DEPUTY))}`, { fields: { orgId: ORG_ID, identity: idFor(DEPUTY), role: "admin", active: true }, updateTime: "t1" });
+}
+async function postAs(email, path, body, env) {
+  const headers = { "Content-Type": "application/json" };
+  if (email) headers["Cf-Access-Authenticated-User-Email"] = email;
+  const res = await onRequest({ request: new Request("https://x/api/queue" + path, { method: "POST", headers, body: JSON.stringify(body || {}) }), env: env || ENV });
+  let j; try { j = await res.json(); } catch { j = {}; }
+  j.__status = res.status;
+  return j;
+}
+async function getAs(email, path, env) {
+  const headers = email ? { "Cf-Access-Authenticated-User-Email": email } : {};
+  const res = await onRequest({ request: new Request("https://x/api/queue" + path, { headers }), env: env || ENV });
+  let j; try { j = await res.json(); } catch { j = {}; }
+  j.__status = res.status;
+  return j;
+}
+/* The route writes anchors through env.MAIK_KV, so the test drives the domain through the same map. */
+function sharedKv() {
+  const m = new Map();
+  const kv = { get: async (k) => (m.has(k) ? m.get(k) : null), put: async (k, v) => { m.set(k, String(v)); } };
+  return { map: m, kv };
+}
+const GOOD_ACK = { orgId: ORG_ID, reason: ACK_REASON, incidentRef: ACK_INCIDENT };
+
+test("route: POST /ward/audit-anchor-acknowledge is owner-only, needs a real reason, and restarts the log", async () => {
+  seedHospitalWithDeputy();
+  for (let i = 1; i <= 3; i++) await RECORD.auditOnly(TENANT_ROW.id, ev("record.read", i));
+  const { map, kv } = sharedKv();
+  const env = { ...ENV, MAIK_KV: kv };
+  await AC.anchorHead(RECORD, TENANT_ROW.id, kv, "2026-09-14T10:00:00.000Z");
+  for (let i = 4; i <= 5; i++) await RECORD.auditOnly(TENANT_ROW.id, ev("record.read", i));
+  await AC.anchorHead(RECORD, TENANT_ROW.id, kv, "2026-09-14T11:00:00.000Z");
+  RECORD._chain.splice(3);                                  // the restore, below the application
+  assert.equal((await AC.checkAnchors(RECORD, TENANT_ROW.id, kv)).status, "truncated");
+  const PATH = "/ward/audit-anchor-acknowledge";
+  const logBefore = map.get(AC.anchorKey(TENANT_ROW.id));
+
+  assert.equal((await postAs(null, PATH, GOOD_ACK, env)).__status, 401);
+  for (const who of [DOCTOR, HR, DEPUTY]) {
+    const r = await postAs(who, PATH, GOOD_ACK, env);
+    assert.equal(r.__status, 403, who + " " + JSON.stringify(r));
+    assert.equal(r.ok, false);
+  }
+  const cross = await postAs(OTHER_ADMIN, PATH, GOOD_ACK, env);
+  assert.ok(cross.__status === 403 || cross.__status === 404, "another hospital's owner: " + JSON.stringify(cross));
+  assert.equal((await postAs(ADMIN, PATH, { orgId: ORG_ID, reason: "too short", incidentRef: ACK_INCIDENT }, env)).__status, 422);
+  assert.equal((await postAs(ADMIN, PATH, { orgId: ORG_ID, reason: ACK_REASON, incidentRef: "" }, env)).__status, 422);
+  assert.equal(map.get(AC.anchorKey(TENANT_ROW.id)), logBefore, "every refused call moved nothing");
+
+  /* Every report read below is itself an audited read, so the chain keeps growing past the fresh
+   * anchor: remember which row the acknowledgement chained at, for the new-tamper step. */
+  const ackIdx = RECORD.audit.length;
+  const ok = await postAs(ADMIN, PATH, GOOD_ACK, env);
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.ok, true);
+  assert.equal(ok.previousStatus, "truncated");
+  assert.ok(ok.archived && map.has(ok.archived), "the archive key holds the old log");
+  assert.deepEqual(JSON.parse(map.get(ok.archived)), JSON.parse(logBefore));
+
+  const rep = await getAs(ADMIN, `/ward/security-report?orgId=${ORG_ID}`, env);
+  assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 300));
+  assert.equal(rep.auditRetention.anchors.status, "ok", JSON.stringify(rep.auditRetention.anchors));
+  assert.match(rep.auditRetention.anchors.message, /Acknowledged restore by admin@example\.test/);
+  assert.match(rep.auditRetention.anchors.message, /INC-2026-0914/);
+  assert.equal(rep.auditRetention.anchors.canAcknowledge, true, "the owner sees the form");
+  const dep = await getAs(DEPUTY, `/ward/security-report?orgId=${ORG_ID}`, env);
+  assert.equal(dep.auditRetention.anchors.canAcknowledge, false, "an admin member does not");
+  const health = await getAs(ADMIN, `/ward/system-health?orgId=${ORG_ID}`, env);
+  const chain = health.dependencies.find((d) => d.id === "audit-chain");
+  assert.equal(chain.status, "up", JSON.stringify(chain));
+  assert.match(chain.reason, /Acknowledged restore/);
+  assert.match(chain.reason, /INC-2026-0914/);
+
+  // After acknowledgement, a NEW tamper (a row rewritten after the fresh anchor, with its link
+  // rebuilt so the chain verifies on its own, exactly what anchors are for) is detected again.
+  RECORD.audit[ackIdx].action = "record.list";
+  const freshLink = RECORD._chain.find((l) => l.tenantId === TENANT_ROW.id && l.chainSeq === ok.seq);
+  freshLink.rowHash = await AC.chainHash(freshLink.prevHash, RECORD.audit[ackIdx]);
+  const again = await getAs(ADMIN, `/ward/security-report?orgId=${ORG_ID}`, env);
+  assert.equal(again.auditRetention.anchors.status, "rewritten", JSON.stringify(again.auditRetention.anchors));
+  const health2 = await getAs(ADMIN, `/ward/system-health?orgId=${ORG_ID}`, env);
+  assert.equal(health2.dependencies.find((d) => d.id === "audit-chain").status, "down");
+});
+
+/* ---- 17: the screen names the acknowledgement and gates the form ------------------------------------- */
+
+test("screen: the acknowledgement line names who, when, reason and incident; the form is the owner's alone", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const ack = { by: ACK_BY, reason: ACK_REASON, incidentRef: ACK_INCIDENT, previousStatus: "truncated", previousAtSeq: 5, at: ACK_AT };
+
+  const line = win.WSQ._anchorAckLineHtml(c, ack);
+  assert.match(line, /Acknowledged restore/);
+  assert.match(line, /admin@example\.test/);
+  assert.match(line, /2026-09-14T12:00:00/);
+  assert.match(line, /INC-2026-0914/);
+  assert.match(line, /Planned point in time restore/);
+  assert.match(line, /kept as an archive and is never deleted/);
+  const viaAnchor = win.WSQ._anchorHtml(c, { status: "ok", acknowledgement: ack, message: "Outside copy matches. Acknowledged restore by admin@example.test." });
+  assert.match(viaAnchor, /Acknowledged restore/);
+
+  // Everyone sees what happened and that only the hospital owner may acknowledge.
+  const pub = win.WSQ._anchorHtml(c, { status: "truncated", atSeq: 5, headSeq: 3, message: "Truncated: the chain now ends at row 3, below anchored row 5." });
+  assert.match(pub, /Newest rows removed/);
+  assert.match(pub, /Only the owner of this hospital can acknowledge/);
+  assert.ok(!/secAckReason/.test(pub), "no form for a viewer who is not the owner");
+
+  // The owner gets the form: reason and incident reference fields, and a confirm step.
+  const own = win.WSQ._anchorHtml(c, { status: "truncated", atSeq: 5, headSeq: 3, message: "Truncated: the chain now ends at row 3, below anchored row 5.", canAcknowledge: true });
+  assert.match(own, /secAckReason/);
+  assert.match(own, /secAckIncident/);
+  assert.match(own, /secAckReview/);
+  assert.match(own, /Review acknowledgement/);
+  const confirm = win.WSQ._anchorAckConfirmHtml(c, ACK_REASON, ACK_INCIDENT);
+  assert.match(confirm, /Confirm acknowledgement/);
+  assert.match(confirm, /INC-2026-0914/);
+  assert.match(confirm, /Planned point in time restore/);
+  assert.ok(!/[—–]/.test(line + viaAnchor + pub + own + confirm), "no em or en dash on screen");
+});
