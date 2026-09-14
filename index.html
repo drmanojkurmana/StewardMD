@@ -379,18 +379,18 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @keyframes sbsLogoTrace{to{stroke-dashoffset:0}}
-  /* Outline finish: one restrained halo, with the original contour always crisp on top. */
-  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:0!important}
-  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(14,110,99,.28);filter:drop-shadow(0 0 0 transparent);animation:sbsOutlineHalo 1.43s ease-in-out 1.56s both;animation-play-state:paused;shape-rendering:geometricPrecision}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.4);filter:drop-shadow(0 0 0 transparent)}
+  /* Signature Trace: the existing solid 107px mark is present from the first frame. The
+     animated contour is a short mint highlight laid over it, never a replacement logo. */
+  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1!important}
+  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(45,212,191,.52);filter:drop-shadow(0 0 0 transparent);animation:sbsSignatureGlow 2.18s cubic-bezier(.4,0,.2,1) both;animation-play-state:paused;shape-rendering:geometricPrecision;pointer-events:none}
+  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.68);filter:drop-shadow(0 0 0 transparent)}
   #smdBootSplash.sbs-visible .sbs-logo-trace{animation-play-state:running}
   #smdBootSplash .sbs-logo-trace path{stroke-width:4.4}
-  @keyframes sbsOutlineHalo{0%,100%{filter:drop-shadow(0 0 0 transparent)}45%{filter:drop-shadow(0 0 7px var(--sbs-halo))}}
+  @keyframes sbsSignatureGlow{0%,58%{opacity:1;filter:drop-shadow(0 0 0 transparent)}72%{opacity:1;filter:drop-shadow(0 0 8px var(--sbs-halo))}100%{opacity:0;filter:drop-shadow(0 0 0 transparent)}}
   @media (prefers-reduced-motion:reduce){
     #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
     #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
-    #smdBootSplash .sbs-logo-trace{display:block;animation:none;filter:none}
-    #smdBootSplash .sbs-logo-trace path{animation:none;stroke-dashoffset:0}
+    #smdBootSplash .sbs-logo-trace{display:none;animation:none;filter:none}
   }
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script

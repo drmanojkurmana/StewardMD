@@ -143,3 +143,6 @@ Copilot tool chips now persist their kind/argument as attributes and launch thro
 
 ## Top-right model navigation (2026-09-14)
 The original wordmark and engine selector share the first header row. Conversation actions have a compact second row, preserving all original handlers and the live doctor. Responsive grid slots constrain long model names. Touch feedback respects reduced motion.
+
+## Startup Signature Trace (2026-09-14)
+The existing 107px solid StewardMD mark is visible from the first frame. A mint contour draws over the mark, blooms once, and fades away. Dark mode uses the existing white mask with the same overlay motion. Reduced-motion users see only the solid mark.
