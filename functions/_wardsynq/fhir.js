@@ -685,6 +685,33 @@ function fhirImagingStudy(s) {
   });
 }
 
+/**
+ * G6. An immunization. The vaccine is the recorder's own words and goes out as text; a coding rides
+ * with it only when they gave a code from a system codeable() knows (CVX, SNOMED CT, ATC). The dose
+ * number is R4's protocolApplied, the only element that carries one, and is omitted rather than
+ * guessed when nobody wrote it down.
+ */
+function fhirImmunization(i) {
+  const status = ["completed", "not-done", "entered-in-error"].includes(str(i.status)) ? str(i.status) : "completed";
+  return clean({
+    resourceType: "Immunization", id: fhirId(i.id),
+    status,
+    statusReason: status === "not-done" && str(i.statusReason) ? { text: str(i.statusReason) } : undefined,
+    vaccineCode: codeable(i.vaccineCode || i.vaccine, i.vaccineCode ? i.vaccineCodeSystem : null, i.vaccine) || { text: "not recorded" },
+    patient: ref("Patient", i.patientId),
+    encounter: ref("Encounter", i.encounterId),
+    occurrenceDateTime: str(i.occurredOn) || undefined,
+    recorded: str(i.recordedAt) || undefined,
+    primarySource: i.primarySource !== false,
+    lotNumber: str(i.lotNumber) || undefined,
+    site: str(i.site) ? { text: str(i.site) } : undefined,
+    route: str(i.route) ? { text: str(i.route) } : undefined,
+    performer: str(i.performerId) ? [{ actor: practitioner(i.performerId) }] : str(i.performerName) ? [{ actor: { display: str(i.performerName) } }] : undefined,
+    note: str(i.note) ? [{ text: str(i.note) }] : undefined,
+    protocolApplied: Number.isInteger(i.doseNumber) && i.doseNumber > 0 ? [{ doseNumberPositiveInt: i.doseNumber }] : undefined,
+  });
+}
+
 /* NOT DONE, stated honestly rather than half-wired: RelatedPerson/FamilyLink export. FamilyLink
  * (functions/_wardsynq/migrate-maternity.js) relates TWO WardSynQ Patients (mother, newborn) -
  * which FHIR itself would model as Patient.link (R4's own "this record and that one refer to
@@ -718,6 +745,7 @@ const MAPPERS = Object.freeze({
   SurgicalCase: fhirProcedure,
   Appointment: fhirAppointment,
   RiskAssessment: fhirRiskAssessment,
+  Immunization: fhirImmunization,
 });
 
 /** Our type name to the FHIR one it renders as. */
@@ -731,6 +759,7 @@ const FHIR_TYPE = Object.freeze({
   /* TASK 7.2. A surgical case IS a Procedure - the resource a receiving system files an operation
    * under. Appointment and RiskAssessment map one-to-one onto their R4 namesakes. */
   SurgicalCase: "Procedure", Appointment: "Appointment", RiskAssessment: "RiskAssessment",
+  Immunization: "Immunization",
 });
 /** And back, so a caller can ask for the FHIR name. */
 const CANONICAL_TYPE = Object.freeze(Object.fromEntries(Object.entries(FHIR_TYPE).map(([k, v]) => [v, k])));
@@ -916,7 +945,7 @@ function capabilityStatement(opts) {
       ],
       operation: [
         { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export and Patient/$export: Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; files need the same authorization and expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
-        { name: "summary", definition: "http://hl7.org/fhir/uv/ips/OperationDefinition/summary", documentation: "Patient/{id}/$summary: a document Bundle with a Composition whose sections are problems, allergies and medications (always present) and results (when there are any). An empty section carries emptyReason text 'none recorded'; a section whose source could not be read carries emptyReason unavailable or withheld and no entries. Authorised like a compartment read. Not validated against the IPS guide's profiles, so none is claimed." },
+        { name: "summary", definition: "http://hl7.org/fhir/uv/ips/OperationDefinition/summary", documentation: "Patient/{id}/$summary: a document Bundle with a Composition whose sections are problems, allergies, medications and immunizations (always present) and results (when there are any). An empty section carries emptyReason text 'none recorded'; a section whose source could not be read carries emptyReason unavailable or withheld and no entries. Authorised like a compartment read. Not validated against the IPS guide's profiles, so none is claimed." },
         { name: "everything", definition: "http://hl7.org/fhir/OperationDefinition/Patient-everything", documentation: "Patient/{id}/$everything: _since, _type, _count, _page, _summary, _elements, _total" },
         { name: "validate", definition: "http://hl7.org/fhir/OperationDefinition/Resource-validate", documentation: `POST {Type}/$validate or $validate (a Bundle validates every entry) with the resource as the body, or GET {Type}/{id}/$validate for a stored resource. R4 base structure, cardinality, primitives, choice types, required bindings and invariants for ${VALIDATED_TYPES.join(", ")}; codings are checked with the terminology service; profiles named in meta.profile are evaluated only when the hospital has loaded them (wardsynq.fhir.profiles), and said so otherwise.` },
         { name: "validate-code", definition: "http://hl7.org/fhir/OperationDefinition/CodeSystem-validate-code", documentation: "GET CodeSystem/$validate-code?url=<system>&code=<code>[&display=]. Answers verified (seed tables, the hospital's code lists, or its terminology server), invalid (the server says no), recognised (a real system, not verified) or unmapped (a system this server does not know). Nothing is guessed." },
@@ -1358,7 +1387,7 @@ export {
   systemUriFor, codeable, identifier, withMeta, toFhir, bundle, capabilityStatement, operationOutcome,
   fhirPatient, fhirEncounter, fhirCondition, fhirAllergy, fhirObservation,
   fhirMedicationRequest, fhirMedicationAdministration, fhirServiceRequest,
-  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
+  fhirDiagnosticReport, fhirDocumentReference, fhirConsent, fhirProvenance, fhirImagingStudy, fhirProcedure, fhirAppointment, fhirRiskAssessment, fhirImmunization, parseProvenanceId, compartmentOf, parseEverything, resolveId, fenced,
   patientEverything, readResource, searchType, historyOf, vread, provenanceRead, provenanceSearch,
   validateFully, validateOperation, validateCodeOperation, open,
 };

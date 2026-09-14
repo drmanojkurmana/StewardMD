@@ -118,6 +118,7 @@ const VS = Object.freeze({
   conditionVer: "unconfirmed|provisional|differential|confirmed|refuted|entered-in-error",
   allergyClinical: "active|inactive|resolved",
   allergyVer: "unconfirmed|confirmed|refuted|entered-in-error",
+  immunizationStatus: "completed|entered-in-error|not-done",
 });
 
 /** A CodeableConcept whose R4 binding is REQUIRED: at least one coding must carry one of these codes in this system. */
@@ -339,6 +340,21 @@ const RESOURCES = Object.freeze({
   Provenance: { ...DOMAIN, "target[]!": "Reference", "occurred[x]": { occurredPeriod: "Period", occurredDateTime: "dateTime" }, "recorded!": "instant", "policy[]": "uri", location: "Reference(Location)", "reason[]": "CodeableConcept", activity: "CodeableConcept",
     "agent[]!": { ...BACKBONE, type: "CodeableConcept", "role[]": "CodeableConcept", "who!": "Reference", onBehalfOf: "Reference" },
     "entity[]": { ...BACKBONE, "role!": `code:${VS.entityRole}`, "what!": "Reference", "agent[]": "any" }, "signature[]": "any" },
+  /* G6. The full R4 Immunization element set; education, reaction and protocolApplied's authority are
+   * listed so an element added to the mapper later is checked rather than unknown. */
+  Immunization: { ...DOMAIN, "identifier[]": "Identifier", "status!": `code:${VS.immunizationStatus}`, statusReason: "CodeableConcept",
+    "vaccineCode!": "CodeableConcept", "patient!": "Reference(Patient)", encounter: "Reference(Encounter)",
+    "occurrence[x]!": { occurrenceDateTime: "dateTime", occurrenceString: "string" }, recorded: "dateTime", primarySource: "boolean",
+    reportOrigin: "CodeableConcept", location: "Reference(Location)", manufacturer: "Reference(Organization)", lotNumber: "string", expirationDate: "date",
+    site: "CodeableConcept", route: "CodeableConcept", doseQuantity: "Quantity",
+    "performer[]": { ...BACKBONE, function: "CodeableConcept", "actor!": "Reference(Practitioner|PractitionerRole|Organization)" },
+    "note[]": "Annotation", "reasonCode[]": "CodeableConcept", "reasonReference[]": "Reference(Condition|Observation|DiagnosticReport)",
+    isSubpotent: "boolean", "subpotentReason[]": "CodeableConcept",
+    "education[]": { ...BACKBONE, documentType: "string", reference: "uri", publicationDate: "dateTime", presentationDate: "dateTime" },
+    "programEligibility[]": "CodeableConcept", fundingSource: "CodeableConcept",
+    "reaction[]": { ...BACKBONE, date: "dateTime", detail: "Reference(Observation)", reported: "boolean" },
+    "protocolApplied[]": { ...BACKBONE, series: "string", authority: "Reference(Organization)", "targetDisease[]": "CodeableConcept",
+      "doseNumber[x]!": { doseNumberPositiveInt: "positiveInt", doseNumberString: "string" }, "seriesDoses[x]": { seriesDosesPositiveInt: "positiveInt", seriesDosesString: "string" } } },
   Bundle: { ...RESOURCE, identifier: "Identifier", "type!": `code:${VS.bundleType}`, timestamp: "instant", total: "unsignedInt",
     "link[]": { ...BACKBONE, "relation!": "string", "url!": "uri" },
     "entry[]": { ...BACKBONE, "link[]": { ...BACKBONE, "relation!": "string", "url!": "uri" }, fullUrl: "uri", resource: "Resource",

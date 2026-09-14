@@ -23,8 +23,10 @@
  *   second source for the same section was readable: a half list that looks whole is the harm.
  *
  * A required section (problems, allergies, medications) is never omitted. Results appear when there
- * are any, or when they could not be read. Immunizations are not included: this record has no
- * immunization type, so there is nothing to summarise and nothing is invented.
+ * are any, or when they could not be read. Immunizations (G6, immunization.js) are always present too:
+ * "no vaccines recorded here" and "the vaccine history could not be read" are the same two different
+ * facts as for allergies, and a receiving clinic deciding whether to give a dose needs to tell them
+ * apart. A withdrawn (entered-in-error) entry is left out; a dose recorded as not given stays, marked.
  *
  * Not claimed: conformance to the IPS implementation guide's profiles. No meta.profile is set,
  * because nothing here validates against them.
@@ -50,6 +52,8 @@ const SECTIONS = Object.freeze([
     keep: (r) => code0(r.clinicalStatus) !== "inactive" },
   { key: "medications", title: "Medication summary", code: "10160-0", display: "History of Medication use Narrative", types: ["MedicationOrder"], required: true,
     keep: (r) => ["active", "on-hold"].includes(str(r.status)) },
+  { key: "immunizations", title: "Immunizations", code: "11369-6", display: "History of Immunization Narrative", types: ["Immunization"], required: true,
+    keep: (r) => str(r.status) !== "entered-in-error" },
   { key: "results", title: "Results", code: "30954-2", display: "Relevant diagnostic tests/laboratory data Narrative", types: ["DiagnosticReport", "Observation"], required: false,
     keep: (r) => r.resourceType === "DiagnosticReport" || (r.category || []).some((c) => code0(c) === "laboratory") },
 ]);
@@ -59,11 +63,12 @@ const div = (inner) => ({ status: "generated", div: `<div xmlns="http://www.w3.o
 
 /** PURE. One line a reader can scan: the concept's own text, and a value where there is one. */
 function labelOf(r) {
-  const cc = r.code || r.medicationCodeableConcept || {};
+  const cc = r.code || r.medicationCodeableConcept || r.vaccineCode || {};
   const name = str(cc.text) || str(cc.coding && cc.coding[0] && (cc.coding[0].display || cc.coding[0].code)) || r.resourceType;
   const q = r.valueQuantity;
-  const value = q ? ` ${q.value}${q.unit ? " " + q.unit : ""}` : r.valueString ? ` ${r.valueString}` : "";
-  const when = str(r.effectiveDateTime || r.authoredOn || r.recordedDate || r.onsetDateTime);
+  const value = q ? ` ${q.value}${q.unit ? " " + q.unit : ""}` : r.valueString ? ` ${r.valueString}`
+    : r.resourceType === "Immunization" && r.status === "not-done" ? ` - not given${r.statusReason && r.statusReason.text ? ": " + r.statusReason.text : ""}` : "";
+  const when = str(r.effectiveDateTime || r.authoredOn || r.recordedDate || r.onsetDateTime || r.occurrenceDateTime);
   return `${name}${value}${when ? ` (${when.slice(0, 10)})` : ""}`;
 }
 

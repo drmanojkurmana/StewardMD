@@ -101,7 +101,10 @@ const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassG
   "IcuRecord",
   // SurveillanceAcknowledgement (surveillance.js): acknowledging a computed signal with a note is a bedside
   // act by whoever is looking after the patient, not a prescribing decision.
-  "SurveillanceAcknowledgement"]);
+  "SurveillanceAcknowledgement",
+  // Immunization (immunization.js), 2026-09-14: giving a vaccine and charting it is ward nursing work, the same
+  // bedside act as a medicine round's record; a doctor holds it through EMR_TREAT's unrestricted scope.
+  "Immunization"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers

@@ -163,6 +163,7 @@ import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
 import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
+import { recordImmunization, markImmunizationError, listImmunizations } from "../../_wardsynq/immunization.js";
 import { recordDetail } from "../../_wardsynq/record-detail.js";
 import { safetyInbox } from "../../_wardsynq/safety-inbox.js";
 
@@ -917,6 +918,9 @@ export async function onRequest(context) {
          * them is emr.view: a nurse looking for somebody to ring must not need prescribing rights. */
         "related-person": CAPS.QUEUE_ADD, "related-person-remove": CAPS.QUEUE_ADD,
         "related-people": CAPS.EMR_VIEW,
+        /* Giving a vaccine and charting it is ward nursing work, the same bar as a vital sign; withdrawing a
+         * wrong entry sits at the same bar and needs a reason. Reading the list is emr.view. */
+        immunization: CAPS.EMR_VITALS, "immunization-error": CAPS.EMR_VITALS, immunizations: CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
@@ -1574,6 +1578,18 @@ export async function onRequest(context) {
       }
       if (sub === "related-people" && method === "GET") {
         const r = await listRelatedPeople(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunization" && method === "POST") {
+        const r = await recordImmunization(request, env, { ...deps, patientId: body.patientId, immunization: body.immunization || {}, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunization-error" && method === "POST") {
+        const r = await markImmunizationError(request, env, { ...deps, immunizationId: body.immunizationId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunizations" && method === "GET") {
+        const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "purchase-order" && method === "POST") {
