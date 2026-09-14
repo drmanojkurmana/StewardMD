@@ -31,7 +31,11 @@
 (function () {
   "use strict";
 
-  var AGENT_BASE = "/api/connect/agent";
+  /* Absolute on native, like every other API caller (home.js, native-ota.js): the iOS WebView is served
+   * from capacitor://localhost, where a relative /api path resolves to nothing and every call came
+   * back "Could not load your connections" (iPhone 15 Pro, 2026-09-14). Android's https://localhost
+   * happened to tolerate the relative form; the web app has SMD_API_BASE empty and is unchanged. */
+  var AGENT_BASE = (window.SMD_API_BASE || "") + "/api/connect/agent";
   var POLL_MS = 1500;
 
   function esc(s) {

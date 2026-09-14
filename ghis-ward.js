@@ -321,7 +321,8 @@
       // session (the server reuses the active adapter), sign in inside the native ConnectBrowser, hand off,
       // then the phone runtime (connect-agent/phone/runtime.mjs) reads the ward list from the hospital's
       // own pages in the doctor's session. Cell text never leaves the phone.
-      var AGENT_BASE = '/api/connect/agent';
+      // Absolute on native (SMD_API_BASE), relative on the web: a bare /api path is dead on iOS's capacitor:// origin.
+      var AGENT_BASE = (window.SMD_API_BASE || '') + '/api/connect/agent';
       var _agentApi = function (path, tid, opts) {
         var q = tid ? (path.indexOf('?') >= 0 ? '&' : '?') + 'tenant=' + encodeURIComponent(tid) : '';
         var tok;
