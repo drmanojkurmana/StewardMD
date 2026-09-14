@@ -64,6 +64,10 @@ test("positive: the admin sets up, submits, links in sandbox and suspends; each 
   assert.equal(fresh.hfrOnOrg, HFR);
   assert.deepEqual(fresh.statusOptions.map((o) => o.status), ["draft", "submitted"]);
   assert.equal(fresh.bridge, "shared");
+  // Owner decision 2026-09-14: the external invoice policy rides the card's read, from this hospital's config.
+  assert.deepEqual([fresh.invoiceHandling.policy, fresh.invoiceHandling.value, fresh.invoiceHandling.source], ["wardsynq.abdm.externalInvoiceHandling", "clinical-document", "default"]);
+  docs.get(`q_orgs/${ORG_ID}`).fields.wardsynq = { abdm: { externalInvoiceHandling: "clinical-document" } };
+  assert.equal((await view(ADMIN)).invoiceHandling.source, "hospital");
   assert.ok(!/verified/i.test(fresh.checklist.map((i) => i.status + i.detail).join(" ")), "nothing claims verification");
 
   const draft = await save(ADMIN);

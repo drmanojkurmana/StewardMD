@@ -6138,3 +6138,32 @@ assignment. Tests: `test/wardsynq-out-of-assignment.test.mjs`.
 - EVIDENCE: each flagged read carries the patient's ward then and the wards the reader was rostered on then. "Open
   these audit rows" reads them back by id with their chain link number; the read is audited (`security.audit_rows`)
   and refused if it cannot be; ids not found are named; a failed load says so.
+
+## 2026-09-14 External ABDM invoices are clinical documents: a named per-hospital policy, never billing (owner decision)
+
+Owner decision 2026-09-14: an invoice received from another facility over ABDM is stored as a clinical/document record
+for now and must never become a WardSynQ billing transaction. It was an implicit code path (the ABDM V3 merge entry
+above, "External invoice is not an Invoice"); it is now an explicit policy.
+- **Policy** `wardsynq.abdm.externalInvoiceHandling`, one allowed value `"clinical-document"`, absent = that default.
+  Pure in `functions/_wardsynq/abdm-hospital.js` (`EXTERNAL_INVOICE_HANDLINGS`, `externalInvoiceHandling`,
+  `externalInvoiceHandlingRefusal`). `abdm` joined the org whitelist (`_opd_org.js wardsynqConfig`).
+- **Save**: `POST /api/queue/org/update` refuses any other value (or a non-object `abdm`) with 422
+  `abdm_invoice_handling_not_built` and a sentence saying the billing model is not built, after authorization, nothing
+  written. No screen writes it today; the value is shown read-only on Admin > Integrations > ABDM with its reason.
+- **Landing** (`abdm-land.js`): `makeConsumeAndLand` reads the hospital's config (`hospitalConfigFor`, wired in
+  `functions/api/connect/[[path]].js` through `orgForTenant`). A stored value this build does not know is NOT followed:
+  the default is applied and named (`source: "unrecognised"`, `configured`). A config that cannot be read applies the
+  default with `source: "unread"`; the transfer is already acknowledged, so holding it would lose the record.
+- **Audit**: each landed external invoice note's `record.ingest` row carries `scope.decidedBy = {policy, value,
+  source}` (new `governedForIngest` option `auditScope(entity)` in `service.js`, generic, used only here).
+- **Guard on the write**: the ABDM landing refuses to write any `Invoice`, `Claim`, `PreAuthorisation` or
+  `CostEstimate` (`BILLING_TYPES`; charges, deposits, payments, refunds and write-offs are all appends to an Invoice),
+  whatever the document or a future adapter mapping produces (GovernanceError `ABDM_NO_BILLING`, quarantined by the hub).
+- Tests: `test/abdm-external-invoice-policy.test.mjs` (resolver, landing audit, the write guard with a mocked adapter
+  that emits billing types, billingReport and invoicesForPatient count nothing, composition sources, the card),
+  `test/org-abdm-invoice-policy-route.test.mjs` (401/403/other hospital/422/positive).
+- **Change later** (when a billing model for external invoices is designed and approved): add the new value to
+  `EXTERNAL_INVOICE_HANDLINGS` with its reason; branch on `handling.value` in `landNdhmDocuments` (the SCCM adapter
+  keeps mapping to the note; the new handling decides what else is written); narrow `BILLING_TYPES` for that value
+  only, never globally; add a control to the ABDM card that saves through `/org/update`; update both tests (the
+  refusal test's value list and the "count nothing" test). Hospitals without the key stay on `clinical-document`.

@@ -905,7 +905,8 @@ class RecordService {
         const patientId = entity.resourceType === "Patient" ? entity.id : (entity.patientId || null);
         const current = await self.repository.latest(self.tenantId, entity.resourceType, entity.id);
         const auditEvent = await self._audit("record.ingest", {
-          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system },
+          // opts.auditScope(entity): what the caller must say on this entity's audit row (the policy that decided it).
+          scope: { resourceType: entity.resourceType, id: entity.id, version: (current ? current.version : 0) + 1, system: entity.meta && entity.meta.source && entity.meta.source.system, ...((opts.auditScope && opts.auditScope(entity)) || {}) },
           resourceCounts: { [entity.resourceType]: 1 }, patientId,
         });
         auditEvent.actor = adapterActor.id;

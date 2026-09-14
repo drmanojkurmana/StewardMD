@@ -120,7 +120,7 @@ import { createSubscription } from "../../_wardsynq/fhir-subscription.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
-import { abdmView } from "../../_wardsynq/abdm-hospital.js";
+import { abdmView, externalInvoiceHandlingRefusal } from "../../_wardsynq/abdm-hospital.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
 import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
@@ -4320,6 +4320,9 @@ export async function onRequest(context) {
           const problems = tokenConfigProblems(body.tokens, await ORG.listDepartments(env, body.orgId));
           if (problems.length) return json({ ok: false, error: "token_prefixes_required", problems, message: "Token numbering was not saved. Each department numbers separately only when every department has its own prefix: " + problems.join(" ") }, 422, request);
         }
+        /* Owner decision 2026-09-14: an external ABDM invoice is a clinical document; no other handling is built. */
+        const invoiceRefusal = externalInvoiceHandlingRefusal(body.wardsynq);
+        if (invoiceRefusal) return json({ ok: false, error: "abdm_invoice_handling_not_built", message: invoiceRefusal }, 422, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
