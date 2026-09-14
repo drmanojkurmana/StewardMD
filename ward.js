@@ -4438,12 +4438,20 @@
           (r.adapter ? " &middot; " + esc(r.adapter.state) : "") + "</span></li>";
       }).join("");
       var live = inv.status !== "void";
+      var links = c.payLinks === undefined ? "" : c.payLinks === null ? '<p class="w-hint">Loading payment links...</p>'
+        : c.payLinks === false ? '<p class="w-hint warn">' + ms("warning") + "Payment links could not be loaded. Do not read this as none sent.</p>"
+        : c.payLinks.filter(function (l) { return l.invoiceId === inv.invoiceId; }).map(function (l) {
+          return '<p class="w-hint' + (l.status === "flagged" ? " warn" : "") + '">' + ms("link") + "<b>" + esc(PAY_LINK_WORDS[l.status] || l.status) + "</b> " + esc(l.amount) + " " + esc(l.currency) + " via " + esc(l.provider) +
+            (l.url ? ' &middot; <a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.url) + "</a>" : "") +
+            (l.flag ? " &middot; " + esc(PAY_FLAG_WORDS[l.flag.reason] || l.flag.reason) : "") + "</p>";
+        }).join("");
       return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(INVOICE_STATUS_WORDS[inv.status] || inv.status) + "</span></h4>" +
         "<p>Charged " + esc(inv.charged) + " &middot; Paid in " + esc(inv.paidIn) + " &middot; Balance " + esc(inv.balance) + (inv.creditBalance ? " &middot; Credit " + esc(inv.creditBalance) : "") + "</p>" +
         (eventRows ? '<ul class="w-mini">' + eventRows + "</ul>" : "") +
-        (receiptRows ? "<h4>Receipts</h4><ul class=\"w-mini\">" + receiptRows + "</ul>" : "") +
+        (receiptRows ? "<h4>Receipts</h4><ul class=\"w-mini\">" + receiptRows + "</ul>" : "") + links +
         (live ? '<div class="w-actions">' +
           '<button class="w-btn tiny go" data-w-act="invpay:' + esc(inv.invoiceId) + '">' + ms("payments") + "Collect payment</button>" +
+          (inv.balance > 0 ? '<button class="w-btn tiny ghost" data-w-act="invpaylink:' + esc(inv.invoiceId) + '">' + ms("link") + "Online payment link</button>" : "") +
           '<button class="w-btn tiny ghost" data-w-act="invdeposit:' + esc(inv.invoiceId) + '">' + ms("savings") + "Deposit</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invdiscount:' + esc(inv.invoiceId) + '">' + ms("percent") + "Discount</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invrefund:' + esc(inv.invoiceId) + '">' + ms("undo") + "Refund</button>" +
@@ -4502,6 +4510,15 @@
       '<p class="w-hint">' + ms("info") + "This records what the slip, screen or drawer says. It is never marked as confirmed by a card machine from here." + "</p></div>" +
       "</div>";
   }
+  var PAY_LINK_WORDS = { open: "Payment link sent, not paid yet", paid: "Paid online, confirmed by the gateway", flagged: "Online payment needs reconciling" };
+  var PAY_FLAG_WORDS = {
+    amount_or_currency_mismatch: "the gateway reported a different amount or currency, so the bill was not marked paid",
+    gateway_says_not_paid: "the gateway does not confirm the payment, so the bill was not marked paid",
+    second_payment_on_paid_request: "a second payment arrived on an already paid link",
+    payment_not_on_gateway_record: "the payment is not on the gateway's record, so the bill was not marked paid",
+    invoice_void: "the bill was cancelled before the payment arrived",
+    invoice_missing: "the bill could not be found when the payment arrived",
+  };
   var CASH_METHODS = [["cash", "Cash"], ["upi", "UPI"], ["card", "Card"], ["neft", "NEFT"], ["rtgs", "RTGS"],
     ["imps", "IMPS"], ["bank-transfer", "Bank transfer"], ["cheque", "Cheque"], ["online", "Online"], ["other", "Other"]];
   /* Mirrors what wardsynq-payment-methods.js requires, so the right boxes appear. The server's copy
@@ -7847,6 +7864,11 @@
     apiGet("/ward/upcoding?" + q)
       .then(function (r) { st.cashier.watch = r && r.ok ? r : { failed: true }; paint(); })
       .catch(function () { st.cashier.watch = { failed: true }; paint(); });
+    // Online payment links (owner S2). null = loading, false = could not be read: never "no links".
+    st.cashier.payLinks = null;
+    apiGet("/ward/payment-requests?" + q)
+      .then(function (r) { st.cashier.payLinks = r && r.ok ? (r.requests || []) : false; paint(); })
+      .catch(function () { st.cashier.payLinks = false; paint(); });
     return apiGet("/ward/invoices?" + q)
       .then(function (r) {
         if (r && r.ok) { st.cashier.invoices = r.invoices || []; st.cashier.outstandingBalance = r.outstandingBalance; st.cashier.invoicesFailed = false; }
@@ -7866,6 +7888,19 @@
         paint();
       })
       .catch(function () { st.busy = false; st.cashier.err = "Could not reach the server."; paint(); });
+  }
+  /* A LINK IS NOT A PAYMENT. Asking for one records nothing on the bill; the bill is marked paid only
+   * when the gateway's signed notice arrives and the gateway confirms it (payment-links.js). */
+  function cashPayLink(invoiceId) {
+    st.cashier.err = ""; st.busy = true; paint();
+    apiPost("/ward/invoice-payment-link", { orgId: st.orgId, invoiceId: invoiceId })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { loadCashier(); return; }
+        st.cashier.err = (r && (r.message || r.detail || r.error)) || "No payment link was made.";
+        paint();
+      })
+      .catch(function () { st.busy = false; st.cashier.err = "Could not reach the server. No payment link was made."; paint(); });
   }
   var CASH_ACTION_ROUTE = { pay: "invoice-payment", deposit: "invoice-deposit", discount: "invoice-discount", refund: "invoice-refund", adjust: "invoice-adjustment", writeoff: "invoice-writeoff" };
   function cashPost(invoiceId, kind) {
@@ -10956,6 +10991,7 @@
     if (cmd === "cashlookup") { cashLookup(); return; }
     if (cmd === "cashraise") { cashRaise(); return; }
     if (cmd === "invpay") { cashPost(arg, "pay"); return; }
+    if (cmd === "invpaylink") { cashPayLink(arg); return; }
     if (cmd === "invdeposit") { cashPost(arg, "deposit"); return; }
     if (cmd === "invdiscount") { cashPost(arg, "discount"); return; }
     if (cmd === "invrefund") { cashPost(arg, "refund"); return; }

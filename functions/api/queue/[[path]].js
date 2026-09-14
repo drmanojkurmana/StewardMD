@@ -119,6 +119,7 @@ import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled }
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
+import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -626,6 +627,18 @@ export async function onRequest(context) {
         "Content-Type": r.contentType, "Content-Disposition": `inline; filename="${r.filename}"`,
         "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff",
       }, corsHeaders(request)) });
+    }
+    /* A PAYMENT GATEWAY'S NOTICE (owner S2, payment-links.js). Before authentication on purpose: the
+     * gateway carries no staff session. Its signature over the raw body, checked with this hospital's
+     * sealed webhook secret, and the gateway's own API confirming the payment are the authorisation; an
+     * unsigned or mis-signed notice writes nothing. The path names the hospital, never a patient. */
+    if (method === "POST" && seg === "payment-callback" && parts[1]) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const payOrg = await ORG.getOrg(env, parts[1]);
+      const payMig = await wsqForcedMigration(env, payOrg);
+      if (!payMig || payMig.error) return json({ ok: false, error: "not_found" }, 404, request);
+      const r = await receivePaymentCallback(request, env, { migration: payMig, recordDeps: wsqRecordDeps(env, payMig.tenantId), fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+      return json(r.body, r.status, request);
     }
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
@@ -1275,6 +1288,8 @@ export async function onRequest(context) {
         // billing.view - the actual reason that capability exists, per the note above.
         invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, "invoice-discount": CAPS.BILLING_CHARGE, "invoice-deposit": CAPS.BILLING_CHARGE,
         "invoice-payment": CAPS.BILLING_CHARGE, "invoice-refund": CAPS.BILLING_CHARGE, "invoice-adjustment": CAPS.BILLING_CHARGE,
+        // Owner S2: asking the gateway for a link is taking money (billing.charge); reading them is reading bills.
+        "invoice-payment-link": CAPS.BILLING_CHARGE, "payment-requests": CAPS.BILLING_VIEW,
         "invoice-writeoff": CAPS.BILLING_CHARGE, "invoice-void": CAPS.BILLING_CHARGE,
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
@@ -2519,6 +2534,14 @@ export async function onRequest(context) {
           method: body.method, paymentDetails: body.paymentDetails || body.details || null,
           paymentMethods: (wsqCfg && wsqCfg.payment) || null,
           idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-payment-link" && method === "POST") {
+        const r = await createPaymentLink(request, env, { ...deps, invoiceId: body.invoiceId, fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "payment-requests" && method === "GET") {
+        const r = await listPaymentRequests(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-payment" && method === "POST") {

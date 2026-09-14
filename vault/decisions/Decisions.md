@@ -5745,3 +5745,26 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   recipient key from the HCX registry, NHCX profile URLs and mandatory elements, participant authentication
   and gateway URLs, and an on_submit callback route. Those need NHCX onboarding; the hospital submits through
   the payer portal meanwhile.
+
+### S2 Payment gateways (functions/_wardsynq/payment-gateways.js, payment-links.js)
+- Contract per gateway: createPaymentRequest, verifyWebhook (raw body), parseWebhook, fetchStatus, refund.
+  Shipped: `manual` (default, no link), `razorpay` (Payment Links), `stripe` (Checkout Sessions). Endpoints,
+  auth, amount units and signature schemes were read from the official docs on 2026-09-14 and are listed in the
+  file header. Only currencies with a 1/100 minor unit are accepted; any other is refused, never guessed.
+- A link is a `_wardsynq_payment_request` record (invoice, amount minor, currency, gateway reference), one open
+  link per invoice, created by billing.charge. It records nothing on the invoice.
+- `POST /api/queue/payment-callback/<orgId>` is public by design (the gateway has no session). The invoice is
+  marked paid only when: the signature verifies with the sealed webhook secret, the event is a paid event for
+  a request this hospital issued with the same gateway reference, the gateway's own API (this hospital's key)
+  says that reference is paid, and amount and currency equal the request exactly. Otherwise the request is
+  flagged (audited `payment.callback.flagged`, shown on the cashier screen), the invoice untouched, 200 so the
+  gateway stops retrying. A transient failure (gateway API down, a version conflict) answers 503/409 so it
+  retries. A bad signature writes nothing, so the public door cannot grow the audit chain.
+- Why fetchStatus as well as the signature: a leaked webhook secret alone must not be able to mark bills paid.
+- The ledger payment is posted by a SERVICE actor (`service:payment-gateway`, write scope Invoice only) with
+  `reference <provider>:<paymentId>` and `collection.capture "integrated"` via applyAdapterResult, the only
+  path that produces it. Idempotency is the reference on the ledger plus the request status: the invoice
+  write and the request update are two appends, and a retry completes the second.
+- NOT built: gateway refunds from the cashier screen (adapter refund() exists and is contract-tested; the
+  ledger refund is still entered by hand), partial payments, and a rate limit on the public callback (a bad
+  signature costs one org read and one HMAC). NOT verified against live Razorpay or Stripe.

@@ -1557,7 +1557,10 @@
       else h += '<div class="tbl"><table><thead><tr><th>Connector</th><th>Provider</th><th>Status</th><th>Credentials</th><th></th></tr></thead><tbody>' + mine.map(function (x) {
         var prov = kind.providers.filter(function (p) { return p.id === x.provider; })[0] || {};
         var res = CN_STATE.result[x.id];
-        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + (x.active ? "On" : "Off") + "</b></td><td>" +
+        /* The gateway's webhook goes to this address. It names the hospital only; the gateway's signature is what is trusted. */
+        var callback = x.kind === "payment" && x.provider !== "manual"
+          ? '<br><span class="quiet">Gateway webhook address: <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
+        return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + (x.active ? "On" : "Off") + "</b></td><td>" +
           (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">set ' + esc(x.secretsSetAt || "") + "</span>" : '<span class="quiet">none</span>') + "</td><td>" +
           '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">Change</button> ' +
           (prov.testable ? '<button type="button" class="btn ghost" data-cn-test="' + esc(x.id) + '">Test connection</button> ' : "") +
@@ -1592,7 +1595,9 @@
         var k = r.catalogue.filter(function (x) { return x.kind === kind; })[0];
         var cur = CN_STATE.editing ? byId(CN_STATE.editing) : null;
         var shadow = document.createElement("div");
-        shadow.innerHTML = connectorFormHtml(c.esc, k, cur ? Object.assign({}, cur, { provider: sel.value }) : null);
+        // Another provider starts with no settings and no credentials set: the old ones do not carry over.
+        var same = cur && cur.provider === sel.value;
+        shadow.innerHTML = connectorFormHtml(c.esc, k, cur ? Object.assign({}, cur, { provider: sel.value, settings: same ? cur.settings : { ref: cur.settings.ref }, secretsSet: same ? cur.secretsSet : [] }) : null);
         form.parentNode.replaceChild(shadow.firstChild, form);
         bindConnectors(c, body, r);
       };

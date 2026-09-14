@@ -29,12 +29,13 @@ import { docKey } from "./documents.js";
 import { sealSecret, openSecret, checkDestination } from "./webhooks.js";
 import { DICOM_KIND } from "./dicomweb.js";
 import { PAYER_KIND } from "./payer-connectors.js";
+import { PAYMENT_KIND } from "./payment-gateways.js";
 
 const CONNECTOR_TYPE = "_wardsynq_connector";
 const MAX_CONNECTORS = 100;
 
 /* kind -> { label, singleton, providers: { id -> { label, settings[], secrets[], validate?, test? } } } */
-const KINDS = Object.freeze({ dicom: DICOM_KIND, payer: PAYER_KIND });
+const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND });
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
@@ -119,13 +120,9 @@ async function saveConnector(request, env, ctx) {
     try { all = (await who.repo.latestByType(who.tenantId, CONNECTOR_TYPE, MAX_CONNECTORS * 2)) || []; } catch { return readFailed; }
     if (all.length >= MAX_CONNECTORS) return { ok: false, status: 409, error: "too_many_connectors", message: `A hospital may keep ${MAX_CONNECTORS} connectors.` };
   }
-  if (cur && cur.provider !== str(ctx.provider) && !ctx.secrets) {
-    /* A different provider's credentials are not these credentials: switching needs them typed again. */
-    return refuse("secrets_required", "Changing the provider needs its credentials entered again.");
-  }
-
   const supplied = {};
   for (const f of spec.secrets) { const v = str(ctx.secrets && ctx.secrets[f.key]); if (v) supplied[f.key] = v; }
+  // A different provider's credentials are not these credentials: switching provider keeps none, so each validate() asks again.
   const kept = cur && cur.provider === str(ctx.provider) ? { ...(cur.secretsEnc || {}) } : {};
   for (const k of Object.keys(kept)) if (!spec.secrets.some((f) => f.key === k)) delete kept[k];
   const invalid = spec.validate ? spec.validate(s.settings, { ...Object.fromEntries(Object.keys(kept).map((k) => [k, true])), ...supplied }) : null;
