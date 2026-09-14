@@ -220,14 +220,20 @@ export async function updateWard(env, wardId, patch, actorId) {
 }
 export async function createBed(env, orgId, body, actorId) {
   const b = body || {};
-  const id = newId(); const f = M.bed({ id, orgId, wardId: b.wardId, name: b.name, state: b.state, genderRestriction: b.genderRestriction, isolation: b.isolation, active: b.active });
+  const id = newId(); const f = M.bed({ id, orgId, wardId: b.wardId, name: b.name, state: b.state, genderRestriction: b.genderRestriction, isolation: b.isolation, active: b.active, since: now() });
   await fsCommit(env, [wCreate(env, "q_beds/" + id, f)]);
   await audit(env, orgId, actorId, "bed:create", f.name); return f;
 }
 export async function getBed(env, bedId) { const d = await fsGet(env, "q_beds/" + sanitize(bedId)); return d ? M.bed(withId(sanitize(bedId), d.fields)) : null; }
 export async function listBeds(env, orgId, wardId) {
   const r = await fsQuery(env, "q_beds", { where: { field: "orgId", value: sanitize(orgId) }, limit: 500 });
-  const beds = r.map((x) => M.bed(withId(x.id, x.fields)));
+  /* A bed added before bed history was kept has no `since`: Firestore's own creation time of its document
+   * is when it was registered, and `legacy` says its turn-offs before then were not recorded. */
+  const beds = r.map((x) => {
+    const b = M.bed(withId(x.id, x.fields));
+    if (!b.since && x.createTime && Date.parse(x.createTime) > 0) { b.since = Date.parse(x.createTime); b.legacy = true; }
+    return b;
+  });
   return wardId ? beds.filter((b) => b.wardId === sanitize(wardId)) : beds;
 }
 // Name-based lookups: ADT (migrate-inpatient.js) works with the free-text ward/bed NAMES a caller
@@ -255,7 +261,8 @@ export async function updateBed(env, bedId, patch, actorId) {
   const id = sanitize(bedId);
   const raw = await fsGet(env, "q_beds/" + id); if (!raw) return null;
   const cur = M.bed(withId(id, raw.fields));
-  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  const f = M.bed(Object.assign({}, cur, patch || {}, { id: cur.id, orgId: cur.orgId, wardId: cur.wardId, since: cur.since, activeHistory: cur.activeHistory }));   // orgId/wardId immutable - move a bed by retiring and recreating it, never by relabeling it into a different ward's history
+  if (f.active !== cur.active) f.activeHistory = cur.activeHistory.concat([{ active: f.active, at: now() }]);
   try {
     await fsCommit(env, [wUpdate(env, "q_beds/" + id, f, { updateTime: raw.updateTime })]);
   } catch (e) {

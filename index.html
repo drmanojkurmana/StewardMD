@@ -2495,7 +2495,9 @@ window.openExternal = function (u) {
 <!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
 <script src="/wardsynq/site/i18n.js?v=5" defer></script>
 <script src="/wardsynq/site/portal.js?v=6" defer></script>
-<script src="/ward.js?v=ward30-alerts-wsqp1" defer></script>
+<!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
+<script src="/ward-offline.js?v=2" defer></script>
+<script src="/ward.js?v=ward33-offline-alerts" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->

@@ -143,6 +143,6 @@ export async function fsQuery(env, collectionId, opts) {
   if (!res.ok) throw Object.assign(new Error("fs_query_failed"), { code: "fs_query", status: res.status, detail: (await res.text()).slice(0, 300) });
   const rows = await res.json();
   const out = [];
-  (rows || []).forEach((r) => { if (r && r.document) out.push({ id: docId(r.document.name), name: r.document.name, fields: decodeFields(r.document.fields), updateTime: r.document.updateTime }); });
+  (rows || []).forEach((r) => { if (r && r.document) out.push({ id: docId(r.document.name), name: r.document.name, fields: decodeFields(r.document.fields), updateTime: r.document.updateTime, createTime: r.document.createTime }); });
   return out;
 }

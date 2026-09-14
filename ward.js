@@ -105,6 +105,67 @@
   }
   function apiPost(path, body) { return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
 
+  /* ---- G2: THE SIX BEDSIDE WRITES SURVIVE A LOST CONNECTION (ward-offline.js) ------------------------
+   *
+   * Vitals, a nursing task done, a note, a dose step, an ICU observation and a fluid entry go through
+   * bedsideWrite(). The request key and the bedside time are fixed BEFORE the first attempt, so an attempt
+   * whose answer was lost and its later resend from the device are one write, not two. With no connection,
+   * or no answer at all, the entry is kept on this device and the nurse is told exactly that: saved on this
+   * device, NOT in the record until it is sent. An answer, even a refusal, is handled as before.
+   *
+   * What comes back as a conflict (the record changed, or a dose's order changed) or a refusal waits on the
+   * "Saved on this device" screen until a person resends, edits or discards it. Each decision is recorded on
+   * the server (/ward/offline-resolve) before this device drops or re-sends anything. */
+  var OFF_KIND_PATH = { vitals: "/ward/vitals", "nursing-task-done": "/ward/nursing-task-act", note: "/ward/note", mar: "/ward/mar", icu: "/ward/icu-record", fluid: "/ward/fluid" };
+  var OFF = null, offPrev = null;
+  function isOnline() { try { return G.navigator.onLine !== false; } catch (e) { return true; } }
+  function offlineKey() {
+    var s = "";
+    try { var a = new Uint8Array(16); G.crypto.getRandomValues(a); for (var i = 0; i < a.length; i++) s += (a[i] + 256).toString(16).slice(1); }
+    catch (e) { s = Date.now().toString(16) + Math.random().toString(16).slice(2); }
+    return "off-" + s;
+  }
+  /* Who owns what this device holds: the signed-in person, read from their own credential. Ownership on the
+   * device only; the server authorises every send. A different person signing in never sees or sends it. */
+  function offlineActor() {
+    var t = staffTok();
+    if (t) {
+      try { var b = G.atob(t.split(".")[0].replace(/-/g, "+").replace(/_/g, "/")), i = b.lastIndexOf("."); return i > 0 ? "staff:" + b.slice(0, i) : null; } catch (e) { return null; }
+    }
+    try { if (G.firebase && firebase.auth && firebase.auth().currentUser) return "fb:" + firebase.auth().currentUser.uid; } catch (e) {}
+    return null;
+  }
+  function outbox() {
+    if (OFF || !G.WARD_OFFLINE) return OFF;
+    OFF = G.WARD_OFFLINE.deviceFor({ api: API, headers: authHeaders, actor: offlineActor, onChange: offlineChanged });
+    OFF.load();
+    return OFF;
+  }
+  function offlineChanged(s) {
+    var prev = offPrev; offPrev = s; st.offline = s;
+    // Something that was waiting has reached the record: re-read the open chart so it shows what the server holds.
+    if (prev && prev.syncing && !s.syncing && s.waiting < prev.waiting && st.sel && st.view === "chart") { loadChart(); return; }
+    if (st.view === "offline") { paint(); return; }
+    var bar = typeof document !== "undefined" && document.getElementById ? document.getElementById("wOffBar") : null;
+    if (bar) bar.outerHTML = offlineBar(st);
+  }
+  function syncOutbox() { var box = outbox(); if (box) box.sync().then(function () {}, function () {}); }
+  function bedsideWrite(kind, body, opts, onAnswer, failMsg) {
+    body.idempotencyKey = body.idempotencyKey || offlineKey();
+    var box = outbox();
+    var keep = function () {
+      if (!box) { st.busy = false; st.err = failMsg + " No connection, and this device cannot keep it: record it on paper."; paint(); return; }
+      box.enqueue(kind, body, { label: opts.label, patientId: opts.patientId, expectedVersion: opts.expectedVersion }).then(function () {
+        st.busy = false; st.err = ""; st.refusal = null;
+        st.note = "No connection. " + opts.label + " saved on this device, not yet sent: it is NOT in the record until it is sent, and it sends when the connection returns.";
+        if (opts.onKept) opts.onKept();
+        paint();
+      }, function (e) { st.busy = false; st.err = failMsg + " " + ((e && e.message) || "It could not be kept on this device") + "."; paint(); });
+    };
+    if (box && !isOnline()) { st.busy = true; paint(); keep(); return; }
+    apiPost(OFF_KIND_PATH[kind], body).then(onAnswer, keep);
+  }
+
   var HOSPITAL_DEPARTMENTS = [
     "General Medicine", "General Surgery", "Emergency Medicine", "Intensive Care Unit (ICU)",
     "Cardiology", "Cardiothoracic Surgery", "Neurology", "Neurosurgery",
@@ -186,6 +247,106 @@
     if (state.err) return emBanner + '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     if (state.note) return emBanner + '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     return emBanner;
+  }
+
+  /* G2: what this device holds, on every screen. Hidden only when online with nothing held. */
+  function offlineBar(state) {
+    var s = state.offline, WO = G.WARD_OFFLINE;
+    if (!s || !WO || (s.online && !s.waiting && !s.conflicts && !s.refused && !s.readFailed && !s.authNeeded)) return '<div id="wOffBar"></div>';
+    var back = (s.conflicts || 0) + (s.refused || 0);
+    return '<div id="wOffBar" class="w-hint warn" role="status">' + ms(s.online ? "sync_problem" : "cloud_off") + "<b>" + esc(WO.label(s).text) + "</b>" +
+      (s.waiting ? " &middot; " + esc(s.waiting) + " saved on this device, not yet sent" : (!s.online ? " &middot; bedside entries will be kept on this device" : "")) +
+      (s.refused ? " &middot; " + esc(s.refused) + " refused" : "") +
+      ' <button class="w-btn ghost sm" data-w-act="offlinereview">' + (back ? "Review (" + back + ")" : "Show") + "</button></div>";
+  }
+  var OFF_SKIP = /^(orgId|idempotencyKey|expectedVersion|expectedOrderVersion|meta|writtenBy|history|resourceType|patientId|encounterId|id|tenantId|source|patient)$/;
+  /* PURE. [path, value] for each plain value in an entry or a record, for the side by side and the editor. */
+  function offFlat(o, prefix, out) {
+    out = out || [];
+    if (!o || typeof o !== "object") return out;
+    Object.keys(o).forEach(function (k) {
+      if (OFF_SKIP.test(k)) return;
+      var v = o[k], p = prefix ? prefix + "." + k : k;
+      if (v && typeof v === "object") offFlat(v, p, out); else if (v !== undefined && v !== null && v !== "") out.push([p, v]);
+    });
+    return out;
+  }
+  function offRows(pairs) {
+    return pairs.length ? '<ul class="w-mini">' + pairs.map(function (kv) { return "<li><b>" + esc(kv[0]) + "</b> <span>" + esc(kv[1]) + "</span></li>"; }).join("") + "</ul>" : '<p class="w-empty">Nothing to show.</p>';
+  }
+  function offEdId(id, path) { return "wOffEd_" + id + "_" + path.replace(/[^A-Za-z0-9]/g, "_"); }
+  function offlineItemHtml(it, state) {
+    var WO = G.WARD_OFFLINE, conflict = it.state === "conflict", part = WO.EDITABLE[it.kind];
+    var mine = offRows(offFlat(it.body, "", []));
+    var now = conflict
+      ? (it.current ? offRows(offFlat(it.current, "", [])) : '<p class="w-hint">The server did not send the record with its answer.</p>') +
+        (it.currentVersion != null ? '<p class="w-dt-times">' + (it.kind === "mar" ? "order" : "record") + " version now " + esc(it.currentVersion) + (it.expectedVersion != null ? ", you saw version " + esc(it.expectedVersion) : "") + "</p>" : "")
+      : '<p class="w-hint warn">' + ms("block") + "Refused: " + esc(it.reason) + "</p>";
+    var editing = state.offEdit === it.id && part;
+    var editor = editing ? '<div class="w-card"><div class="w-card-h">' + ms("edit") + "<h3>Edit your entry</h3></div><div class=\"w-grid\">" +
+      offFlat(it.body[part], "", []).map(function (kv) { return '<label class="w-f"><span>' + esc(kv[0]) + '</span><input id="' + esc(offEdId(it.id, kv[0])) + '" type="text" value="' + esc(kv[1]) + '"></label>'; }).join("") +
+      '</div><button class="w-btn go" data-w-act="offlineeditsend:' + esc(it.id) + '">' + ms("send") + "Send edited entry</button></div>" : "";
+    return '<div class="w-card"><div class="w-card-h">' + ms(conflict ? "sync_problem" : "block") + "<h3>" + esc(it.label) + "</h3></div>" +
+      '<p class="w-hint warn">' + esc(WO.itemText(it)) + "</p>" +
+      '<p class="w-dt-times">charted on this device ' + when(it.createdAt) + " &middot; never in the record</p>" +
+      '<div class="w-grid"><div><h4>Your entry</h4>' + mine + "</div><div><h4>" + (conflict ? "The record now" : "The server's answer") + "</h4>" + now + "</div></div>" + editor +
+      '<label class="w-f"><span>Why (recorded with your decision; needed to resend or edit)</span><input id="wOffWhy_' + esc(it.id) + '" type="text" autocomplete="off"></label>' +
+      '<div class="w-actions">' +
+      (conflict ? '<button class="w-btn go" data-w-act="offlineresend:' + esc(it.id) + '">' + ms("send") + "Resend mine</button>" : "") +
+      (part && !editing ? '<button class="w-btn ghost" data-w-act="offlineedit:' + esc(it.id) + '">' + ms("edit") + "Edit</button>" : "") +
+      '<button class="w-btn ghost" data-w-act="offlinediscard:' + esc(it.id) + '">' + ms("delete") + "Discard</button></div></div>";
+  }
+  function offlineView(state) {
+    var s = state.offline, WO = G.WARD_OFFLINE;
+    var head = '<div class="w-chart-h"><button class="w-ic" data-w-act="offlineback" aria-label="Back">' + ms("arrow_back") + "</button>" +
+      "<div><b>Saved on this device</b><small>entries that are not in the record yet</small></div>" +
+      '<button class="w-ic" data-w-act="offlinesync" title="Send now">' + ms("sync") + "</button></div>";
+    if (!WO) return head + '<p class="w-hint warn">' + ms("error") + "This device cannot keep bedside entries offline. Record on paper when there is no connection.</p>";
+    if (!s) return head + '<p class="w-empty">Reading what this device holds&hellip;</p>';
+    if (s.readFailed) return head + '<p class="w-hint warn">' + ms("error") + "What this device holds could not be read. Do not read this as nothing waiting: tell the nurse in charge and check the paper record.</p>";
+    var queued = s.queued || [], items = s.items || [];
+    return head +
+      (s.authNeeded ? '<p class="w-hint warn">' + ms("lock") + "Sign in again to send what is waiting.</p>" : "") +
+      '<div class="w-card"><div class="w-card-h">' + ms("schedule_send") + "<h3>Waiting to send (" + queued.length + ")</h3></div>" +
+      (queued.length ? '<ul class="w-mini">' + queued.map(function (q) {
+        return '<li class="w-mini-row"><div><b>' + esc(q.label) + '</b><div class="w-dt-times">charted ' + when(q.createdAt) + " &middot; saved on this device, not yet sent</div></div></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">Nothing is waiting to send.</p>') + "</div>" +
+      "<h3>Came back from the server (" + items.length + ")</h3>" +
+      (items.length ? items.map(function (it) { return offlineItemHtml(it, state); }).join("") : '<p class="w-empty">Nothing came back in conflict or refused.</p>');
+  }
+  /* G2: the person's decision, recorded on the server first; only then does the device act on it. */
+  function offlineChoice(id, choice) {
+    var WO = G.WARD_OFFLINE, box = outbox(), s = st.offline;
+    var it = s && (s.items || []).filter(function (x) { return x.id === id; })[0];
+    if (!it || !box) { st.err = "That entry is no longer on this device."; paint(); return; }
+    var why = val("wOffWhy_" + id), edit;
+    if (choice !== "discard" && why.length < 5) { st.err = "Say why your entry should stand, in a few words. It is recorded with your decision."; paint(); return; }
+    if (choice === "edit") {
+      edit = JSON.parse(JSON.stringify(it.body[WO.EDITABLE[it.kind]]));
+      offFlat(edit, "", []).forEach(function (kv) {
+        var el = document.getElementById(offEdId(id, kv[0])); if (!el) return;
+        var ks = kv[0].split("."), o = edit; for (var k = 0; k < ks.length - 1; k++) o = o[ks[k]];
+        o[ks[ks.length - 1]] = String(el.value);
+      });
+    }
+    if (choice === "discard") {
+      var sure = true;
+      try { sure = G.confirm("Discard this " + it.label + "? It was never in the record and it will be gone from this device. Your decision is recorded."); } catch (e) {}
+      if (!sure) return;
+    }
+    st.busy = true; paint();
+    apiPost("/ward/offline-resolve", { orgId: st.orgId, kind: it.kind, choice: choice, idempotencyKey: it.idempotencyKey, patientId: it.patientId, error: it.error,
+      expectedVersion: it.expectedVersion, currentVersion: it.currentVersion, reason: why, createdAt: it.createdAt })
+      .then(function (r) {
+        if (!r || !r.ok) { settle(r); if (!st.err && !st.refusal) st.err = "Your decision was not recorded, so nothing changed on this device."; paint(); return; }
+        var act = choice === "discard" ? box.discard(id) : box.keepMine(id, why, it.currentVersion, choice === "edit" ? edit : undefined);
+        return act.then(function () {
+          st.busy = false; st.offEdit = null; st.err = "";
+          st.note = choice === "discard" ? "Discarded. It was never in the record." : "Queued again: saved on this device, not yet sent.";
+          paint();
+          if (choice !== "discard") syncOutbox();
+        }, function (e) { st.busy = false; st.err = (e && e.message) || "What this device holds could not be changed."; paint(); });
+      }, function () { st.busy = false; st.err = "No connection: your decision could not be recorded, so nothing changed. Try again when online."; paint(); });
   }
 
   /* THE WARD ROUND LIST. Grouped by ward, ordered by bed, filtered by admission class and a live
@@ -1396,16 +1557,16 @@
     /* "progress" is the built-in free-text template every hospital has without configuring one
      * (functions/_wardsynq/note-templates.js). A hospital that defines its own `progress` template
      * replaces it, and this keeps working. */
-    apiPost("/ward/note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, sections: { narrative: fullText } })
-      .then(function (r) {
+    bedsideWrite("note", { orgId: st.orgId, templateId: "progress", encounterId: s.encounterId, patientId: s.patientId, sections: { narrative: fullText }, at: new Date().toISOString() },
+      { label: kind === "instruction" ? "Instruction" : "Note", patientId: s.patientId, onKept: function () { st.noteDraft = ""; } },
+      function (r) {
         if (settle(r, r && r.written ? (kind === "instruction" ? "Instruction written on the chart. No one is notified by this; tell the team directly if it is urgent." : kind === "both" ? "Note and instruction recorded." : "Note added.") : null)) {
           st.noteDraft = "";           // on the record now, so the draft has done its job
           var el = document.getElementById("wTlNote"); if (el) el.value = "";
           // Re-read rather than repaint from what the browser believes.
           loadChart();
         } else paint();
-      })
-      .catch(function () { st.busy = false; st.noteErr = "Could not save that note."; paint(); });
+      }, "Could not save that note.");
   }
   function filterLabel(v) {
     for (var i = 0; i < TIMELINE_FILTERS.length; i++) if (TIMELINE_FILTERS[i][0] === v) return TIMELINE_FILTERS[i][1];
@@ -6717,7 +6878,11 @@
     if (e.data === false) return h + '<p class="w-hint warn">' + ms("error") + (e.status === 403 ? "You do not have access to this ward's records." : "The records could not be loaded" + (e.err ? ": " + esc(e.err) : "") + ".") + "</p></div>";
     var ev = e.data.events || { items: [] };
     var rows = ev.items.map(function (x) {
-      return '<li class="w-mini-row"><div>' + esc(x.resourceType) + " &middot; " + esc(x.id) + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="timelinedetail:' + esc(x.resourceType) + "~" + esc(x.id) + '">Open</button></div></li>';
+      /* G7: a stay ward by ward, each piece with its length. A running piece says so rather than showing a length. */
+      var segs = x.segments ? '<div class="w-dt-times">' + (x.transferred ? "Transferred: " : "One ward: ") + x.segments.map(function (g) {
+        return esc(g.ward || "(no ward)") + (g.bed ? " bed " + esc(g.bed) : "") + " " + esc(g.days) + " day" + (g.days === 1 ? "" : "s") + (g.running ? " so far (still there)" : "");
+      }).join(", then ") + "</div>" : "";
+      return '<li class="w-mini-row"><div>' + esc(x.resourceType) + " &middot; " + esc(x.id) + segs + '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="timelinedetail:' + esc(x.resourceType) + "~" + esc(x.id) + '">Open</button></div></li>';
     }).join("");
     return h + (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No records behind this bucket on this ward.</p>') +
       (ev.truncated ? '<p class="w-hint warn">Showing ' + esc(ev.items.length) + " of " + esc(ev.total) + ", or the read was capped. The list is not complete.</p>" : "") + "</div>";
@@ -6867,8 +7032,9 @@
       (state.demo ? '<span class="w-demo" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
       (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") +
       '<button class="w-ic" data-w-act="keys" aria-label="Keyboard shortcuts" aria-keyshortcuts="?">' + ms("keyboard") + "</button></header>" +
-      '<div class="w-canvas">' + banner(state) +
-      (state.view === "chart" ? chartView(state)
+      '<div class="w-canvas">' + banner(state) + offlineBar(state) +
+      (state.view === "offline" ? offlineView(state)
+        : state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
@@ -7258,16 +7424,16 @@
     var at = icuAtValue();
     if (at === "bad") { st.err = "The time is not a date."; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/icu-record", { orgId: st.orgId, kind: kind, patientId: s.patientId, encounterId: s.encounterId, at: at, values: values })
-      .then(function (r) {
+    bedsideWrite("icu", { orgId: st.orgId, kind: kind, patientId: s.patientId, encounterId: s.encounterId, at: at || new Date().toISOString(), values: values },
+      { label: "ICU " + kind, patientId: s.patientId },
+      function (r) {
         if (r && !r.ok && r.error === "invalid_values") {
           st.busy = false;
           st.err = "Not recorded: " + (r.problems || []).map(function (p) { return p.field + " " + p.reason; }).join("; ") + ".";
           paint(); return;
         }
         if (settle(r, okMsg)) loadIcu(); else paint();
-      })
-      .catch(function () { st.busy = false; st.err = "Could not record that."; paint(); });
+      }, "Could not record that.");
   }
   function icuAbg() {
     icuRecord("abg", { sampleType: val("wAbgType"), ph: val("wAbgPh"), pco2: val("wAbgPco2"), po2: val("wAbgPo2"), hco3: val("wAbgHco3"),
@@ -8480,15 +8646,16 @@
     var v = val("wFVal");
     if (!v) { st.err = "How much?"; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/fluid", {
+    var clearFluid = function () { var el = document.getElementById("wFVal"); if (el) el.value = ""; };
+    bedsideWrite("fluid", {
       orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId,
       entries: [{ direction: val("wFDir"), kind: val("wFKind"), value: v, at: new Date().toISOString() }],
-    }).then(function (r) {
+    }, { label: "Fluid entry", patientId: s.patientId, onKept: clearFluid }, function (r) {
       // A rejected row is the answer, not something to hide behind a success message.
       if (r && r.rejected && r.rejected.length && !r.written) { st.busy = false; st.err = "Not recorded: " + r.rejected[0].reason.replace(/_/g, " ") + "."; paint(); return; }
-      if (settle(r, "Charted.")) { var el = document.getElementById("wFVal"); if (el) el.value = ""; loadBalance(); }
+      if (settle(r, "Charted.")) { clearFluid(); loadBalance(); }
       else paint();
-    }).catch(function () { st.busy = false; st.err = "Could not chart that."; paint(); });
+    }, "Could not chart that.");
   }
   function acknowledge(loopId) {
     var why = ""; try { why = G.prompt("What did you do about this result?") || ""; } catch (e) {}
@@ -10087,16 +10254,17 @@
     var sections = {};
     tpl.sections.forEach(function (sec) { var v = val("wNote_" + sec.key); if (v) sections[sec.key] = v; });
     st.busy = true; paint();
-    apiPost("/ward/note", { orgId: st.orgId, templateId: tpl.id, encounterId: s.encounterId, sections: sections })
-      .then(function (r) {
+    var clearNote = function () { tpl.sections.forEach(function (sec) { var el = document.getElementById("wNote_" + sec.key); if (el) el.value = ""; }); };
+    bedsideWrite("note", { orgId: st.orgId, templateId: tpl.id, encounterId: s.encounterId, patientId: s.patientId, sections: sections, at: new Date().toISOString() },
+      { label: (tpl.name || "Note"), patientId: s.patientId, onKept: clearNote },
+      function (r) {
         if (settle(r, r && r.incomplete ? null : "Note saved.")) {
           st.noteResult = r;
-          tpl.sections.forEach(function (sec) { var el = document.getElementById("wNote_" + sec.key); if (el) el.value = ""; });
+          clearNote();
           loadCosigns();
         }
         paint();
-      })
-      .catch(function () { st.busy = false; st.err = "Could not save the note."; paint(); });
+      }, "Could not save the note.");
   }
 
   function findCode() {
@@ -10722,15 +10890,18 @@
     var ac = val("wv_acvpu"); if (ac) { v.acvpu = ac; any = true; }
     if (!any) { st.err = "Nothing to record."; paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v })
-      .then(function (r) {
+    var clearVitals = function () {
+      VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
+      ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+    };
+    bedsideWrite("vitals", { orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId, vitals: v, recordedAt: new Date().toISOString() },
+      { label: "Vitals", patientId: s.patientId, onKept: clearVitals }, function (r) {
         // `written: 0` with ok:true is the server saying nothing was numeric. Say so plainly rather
         // than showing a success message for a save that recorded nothing.
         if (settle(r, r && r.written ? "Recorded " + r.written + " observation" + (r.written === 1 ? "" : "s") + "." : null)) {
           if (r && !r.written) st.err = "Nothing was recorded - no field held a plain number.";
           else {
-            VITALS.forEach(function (f) { var el = document.getElementById("wv_" + f.k); if (el) el.value = ""; });
-            ["wv_o2", "wv_acvpu"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+            clearVitals();
             /* THE SCORE PANEL HAS TO RE-READ, OR IT REPORTS THE OBSERVATIONS AS MISSING.
              *
              * Recording vitals repainted from existing client state, so the Flowsheet sitting
@@ -10744,8 +10915,7 @@
           }
         }
         paint();
-      })
-      .catch(function () { st.busy = false; st.err = "Could not record vitals."; paint(); });
+      }, "Could not record vitals.");
   }
   function marAction(action, idx) {
     var s = st.sel, d = st.due[idx];
@@ -10756,6 +10926,9 @@
       orgId: st.orgId, action: action, orderId: d.orderId, dueAt: d.dueAt,
       patient: { id: s.patientId }
     };
+    /* G2: the order as the nurse saw it on the round. The eMAR refuses the step if the order has changed
+     * since, which is what makes a dose charted offline safe to send later. */
+    if (d.orderVersion != null) body.expectedOrderVersion = d.orderVersion;
     // The five rights are checked on the server against what was actually scanned. The UI passes the
     // scans through untouched; it does not compare them itself and does not proceed on its own.
     if (action === "scan") body.scan = { patient: val("wScanP"), drug: val("wScanD") };
@@ -10769,9 +10942,11 @@
       body.reason = why.trim();
     }
     st.busy = true; paint();
-    apiPost("/ward/mar", body)
-      .then(function (r) { if (settle(r, r && r.to ? action + ": " + r.from + " → " + r.to : null)) loadRound(); else paint(); })
-      .catch(function () { st.busy = false; st.err = "Could not reach the eMAR."; paint(); });
+    bedsideWrite("mar", body, { label: (d.drug || "Dose") + " " + action, patientId: s.patientId, expectedVersion: d.orderVersion },
+      function (r) {
+        if (r && r.error === "order_changed") { st.busy = false; st.err = "Not recorded: this order changed after the round was loaded. Reload the round and check the order before giving or charting."; paint(); return; }
+        if (settle(r, r && r.to ? action + ": " + r.from + " → " + r.to : null)) loadRound(); else paint();
+      }, "Could not reach the eMAR.");
   }
 
   /* P2.16 THE KEYBOARD LAYER. ONE declarative map, and nothing in it writes.
@@ -10936,6 +11111,13 @@
     if (cmd === "keys") { showKeys(); return; }
     if (cmd === "keysclose") { hideKeys(); return; }
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
+    if (cmd === "offlinereview") { outbox(); st.offBack = st.view === "offline" ? st.offBack : st.view; st.view = "offline"; st.offEdit = null; paint(); return; }
+    if (cmd === "offlineback") { st.view = st.offBack || (st.sel ? "chart" : "list"); st.offEdit = null; paint(); return; }
+    if (cmd === "offlinesync") { syncOutbox(); return; }
+    if (cmd === "offlineedit") { st.offEdit = arg; paint(); return; }
+    if (cmd === "offlineresend") { offlineChoice(arg, "resend"); return; }
+    if (cmd === "offlineeditsend") { offlineChoice(arg, "edit"); return; }
+    if (cmd === "offlinediscard") { offlineChoice(arg, "discard"); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
     if (cmd === "setcls") { st.cls = arg; var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st); else paint(); return; }
@@ -11389,7 +11571,16 @@
     if (cmd === "ntaskact") {
       var ta = String(arg || "").split("~"), tb = { taskId: ta[0], action: ta[1], expectedVersion: Number(ta[2]) };
       if (ta[1] === "cancel") { try { tb.reason = G.prompt("Why is this task cancelled?") || ""; } catch (e) { tb.reason = ""; } if (!tb.reason.trim()) return; }
-      nursingPost("/ward/nursing-task-act", tb, ta[1] === "done" ? "Task done." : "Task cancelled.");
+      if (ta[1] === "done" && st.nursingPanel) {
+        var np = st.nursingPanel;
+        tb.orgId = st.orgId; tb.encounterId = np.encounterId;
+        st.busy = true; paint();
+        bedsideWrite("nursing-task-done", tb, { label: "Nursing task done", patientId: np.patientId, expectedVersion: tb.expectedVersion },
+          function (r) { if (settle(r, r && r.ok ? "Task done." : null)) { np.data = null; paint(); loadNursingPanel(); } else paint(); },
+          "Could not save. Nothing was changed.");
+        return;
+      }
+      nursingPost("/ward/nursing-task-act", tb, "Task cancelled.");
       return;
     }
     if (cmd === "forms") {
@@ -11582,6 +11773,7 @@
     if (opts.demo !== undefined) st.demo = !!opts.demo;
     if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;
+    outbox();
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("change", onFormChange); el.addEventListener("change", onFormChange);
@@ -11664,5 +11856,5 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
 })();

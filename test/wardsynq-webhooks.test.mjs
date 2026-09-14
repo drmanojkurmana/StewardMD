@@ -586,3 +586,102 @@ test("list and update answers never carry secret material", async () => {
   assert.ok(!("secretEnc" in upd.webhook) && !("previousSecretEnc" in upd.webhook));
   assert.ok(!JSON.stringify(upd).includes("secretEnc"));
 });
+
+// ---------------------------------------------------------------------------------------------
+// G8: EDIT AN ADDRESS, AND ONE ENDPOINT'S DELIVERY LOG A PAGE AT A TIME
+// ---------------------------------------------------------------------------------------------
+test("G8 POST /api/queue/ward/webhook-update {url}: re-checked, audited by host, the secret unchanged; a private address is refused and nothing written", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const sealed = (await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id)).secretEnc;
+  const NEW_URL = "https://93.184.216.35/hooks/v2";
+  const before = writesNow();
+  for (const url of ["https://10.0.0.1/hook", "http://93.184.216.35/hook", "https://169.254.169.254/latest/meta-data/"]) {
+    const r = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, url });
+    assert.equal(r.__status, 422, url + JSON.stringify(r));
+    assert.match(r.message, /Address not changed/);
+  }
+  assert.equal(writesNow(), before, "a refused address writes nothing");
+
+  const ok = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, url: NEW_URL });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.webhook.url, NEW_URL);
+  assert.equal(ok.secret, undefined, "no secret in the answer");
+  const stored = await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id);
+  assert.equal(stored.url, NEW_URL);
+  assert.equal(stored.version, 2);
+  assert.equal(stored.secretEnc, sealed, "the signing secret is not changed");
+  const audit = RECORD.audit.filter((a) => a.action === "webhook.update").pop();
+  assert.deepEqual(audit.scope.url, { fromHost: "93.184.216.34", toHost: "93.184.216.35" });
+  assert.ok(audit.actor);
+  assert.ok(!JSON.stringify(audit).includes("/hooks/v2"), "the audit names hosts, not the full address");
+  const same = await as(ADMIN, "/ward/webhook-update", "POST", { orgId: ORG_ID, id: reg.webhook.id, url: NEW_URL });
+  assert.equal(same.unchanged, true);
+});
+
+test("G8 NEGATIVE POST /api/queue/ward/webhook-update {url}: no session 401, nurse 403, hr 403, another hospital 403/404; nothing written", async () => {
+  seed();
+  const reg = await register(["order.placed"]);
+  const before = writesNow();
+  const body = { orgId: ORG_ID, id: reg.webhook.id, url: "https://93.184.216.35/elsewhere" };
+  assert.equal((await as(null, "/ward/webhook-update", "POST", body)).__status, 401);
+  assert.equal((await as(NURSE, "/ward/webhook-update", "POST", body)).__status, 403);
+  assert.equal((await as(HR, "/ward/webhook-update", "POST", body)).__status, 403);
+  const other = await as(OTHER_ADMIN, "/ward/webhook-update", "POST", body);
+  assert.ok(other.__status === 403 || other.__status === 404, JSON.stringify(other));
+  assert.equal((await as(OTHER_ADMIN, "/ward/webhook-update", "POST", { ...body, orgId: OTHER })).__status, 404, "named from their own hospital: not found");
+  assert.equal(writesNow(), before);
+  assert.equal((await RECORD.latest(T, E.ENDPOINT_TYPE, reg.webhook.id)).url, PUBLIC_URL);
+});
+
+test("G8 GET /api/queue/ward/webhook-deliveries: one endpoint only, newest first, paged past the old 50 and 1000 caps", async () => {
+  seed();
+  const a = await register(["order.placed"]), b = await register(["order.placed"]);
+  const row = (ep, i) => ({ resourceType: W.DELIVERY_TYPE, id: `whd-${ep}-evt-${String(i).padStart(4, "0")}-a1`, version: 1, endpointId: ep, eventId: `evt-${i}`, eventType: "order.placed",
+    attempt: 1, status: i % 2 ? "failed" : "delivered", responseCode: i % 2 ? 503 : 200, reason: null, test: false, at: new Date(1e12 + i * 1000).toISOString(), writtenBy: { id: "system:webhooks", kind: "service" } });
+  // 1100 attempts for B written AFTER A's 70: the hospital-wide newest-1000 scan would have shown A nothing.
+  for (let i = 0; i < 70; i++) await RECORD.append(T, [row(a.webhook.id, i)], {});
+  for (let i = 0; i < 1100; i++) await RECORD.append(T, [row(b.webhook.id, i)], {});
+  const p1 = await as(ADMIN, `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${a.webhook.id}`);
+  assert.equal(p1.__status, 200, JSON.stringify(p1).slice(0, 300));
+  assert.equal(p1.deliveries.length, 50);
+  assert.equal(p1.deliveries[0].eventId, "evt-69", "newest first");
+  assert.ok(p1.deliveries.every((d) => d.eventId && d.status && d.attempt === 1 && "responseCode" in d && d.at));
+  assert.ok(p1.next, "a cursor to older attempts");
+  const p2 = await as(ADMIN, `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${a.webhook.id}&before=${p1.next}`);
+  assert.equal(p2.deliveries.length, 20);
+  assert.equal(p2.deliveries[0].eventId, "evt-19");
+  assert.equal(p2.next, null, "no page after the last");
+  const seen = new Set([...p1.deliveries, ...p2.deliveries].map((d) => d.eventId));
+  assert.equal(seen.size, 70, "every attempt once, none from the other endpoint");
+  const small = await as(ADMIN, `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${b.webhook.id}&limit=5`);
+  assert.equal(small.deliveries.length, 5);
+  assert.equal(small.deliveries[0].eventId, "evt-1099");
+  const path = `/ward/webhook-deliveries?orgId=${ORG_ID}&id=${a.webhook.id}&before=${p1.next}`;
+  assert.equal((await as(null, path)).__status, 401);
+  assert.equal((await as(NURSE, path)).__status, 403);
+  assert.equal((await as(HR, path)).__status, 403);
+  assert.equal((await as(OTHER_ADMIN, `/ward/webhook-deliveries?orgId=${OTHER}&id=${a.webhook.id}&before=${p1.next}`)).__status, 404);
+});
+
+test("G8 screen: change-address form, and the delivery log pages with Older and Newest", () => {
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const list = win.WSQ._webhooksHtml(c, { ok: true, keyConfigured: true, webhooks: [{ id: "wh-1", url: PUBLIC_URL, eventTypes: ["order.placed"], active: true, status: "active" }], eventTypes: [] });
+  assert.match(list, /data-wh-edit="wh-1"/);
+  const edit = win.WSQ._webhookEditHtml(c, { id: "wh-1", url: PUBLIC_URL });
+  assert.match(edit, /id="whEditUrl" value="https:\/\/93\.184\.216\.34\/hooks\/wardsynq"/);
+  assert.match(edit, /signing secret does not change/);
+  const log = win.WSQ._webhookDeliveriesHtml;
+  const d = { ok: true, next: "42", deliveries: [{ at: "t", eventId: "evt-1", eventType: "order.placed", attempt: 2, status: "failed", responseCode: 503, reason: "http-error" }] };
+  const first = log(c, d, PUBLIC_URL, false);
+  assert.match(first, /data-wh-page="42">Older/);
+  assert.ok(!/Newest/.test(first));
+  assert.match(log(c, { ok: true, next: null, deliveries: [] }, PUBLIC_URL, true), /No older delivery attempts[\s\S]*Newest/);
+  assert.ok(!/[—–]/.test(list + edit + first));
+});

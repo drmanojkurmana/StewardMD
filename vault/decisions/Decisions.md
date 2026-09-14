@@ -6018,3 +6018,36 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
 - **Known ceiling**: with an account credential in a different workplace, the server releases the
   notice detail (and writes its read-log row) before the client sees `orgId` and refuses to show it.
   Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading.
+
+## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
+- Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed
+  only to its current ward, and past buckets no longer use today's bed count.
+- Stays: the Encounter's version history is the movement history (transfer = new version with `movedAt`).
+  `staySegments` in `trends.js` splits a stay into ward pieces. `bed-occupancy` and the new `ward-los` read the
+  histories of changed stays overlapping the range through `RecordService.histories` (one grant check, one
+  audited list row). A history that cannot be read, or a move with no time, leaves the stay unplaced: its
+  buckets are null with a reason by ward (hospital-wide occupancy keeps its bed-days).
+- Beds: `q_beds` carries `since` (set at create) and `activeHistory` (appended by `updateBed` on each turn off
+  or on; a patch cannot set either). A bed from before this has no `since`; its Firestore `createTime` is used
+  and it is marked legacy: counted from registration, but unknown after that if it is now turned off. Beds
+  listed only in `wardsynq.beds` keep no history, so a bucket needing them is unknown, never today's count.
+- Not built: an admin "in service since" edit for legacy beds; blocked/closed state history (still not subtracted).
+
+## 2026-09-14 G2: offline bedside writes wired, conflict review, and a dose checked against the order it was charted on
+- `ward-offline.js` is now used: ward.js `bedsideWrite()` carries vitals, nursing task done, notes (timeline and
+  templated), dose steps, ICU records and fluid entries. The request key and bedside time are fixed before the
+  first attempt; offline or with no answer the entry is queued in IndexedDB and the screen says "saved on this
+  device, not yet sent: NOT in the record". The app's `index.html` loads `ward-offline.js` before `ward.js`.
+- Conflicts: `version_conflict` and the new `order_changed` come back with the record as it is now (nursing
+  `failure()` and `administerStep`), shown beside the entry on the "Saved on this device" view. Resend (reason,
+  against the current version), edit (vitals, note sections, ICU values, fluid entries only) or discard.
+- Every decision is audited server-side first: `POST /ward/offline-resolve` (door `emr.view`, then the write's
+  own capability; a note also accepts `noteWriterRoles`), audit action `offline.<choice>`, patient pseudonymised.
+  The device drops or re-queues nothing unless that answers ok.
+- eMAR: the round (`/ward/schedule`) returns `orderVersion`; `/ward/mar` with `expectedOrderVersion` refuses
+  `order_changed` when the order has a newer version (a stopped order is still `order_not_active`, checked first;
+  a retry of a recorded dose still replays). ward.js sends it online too, so a round loaded before a prescriber's
+  change cannot chart against the old order.
+- Sign-out on wardsynq.com warns when entries are held and clears the device store on confirm. The phone app has
+  no equivalent sign-out hook: a different person signing in clears the previous person's entries (ward-offline.js
+  rule 4).
