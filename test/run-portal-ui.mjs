@@ -37,7 +37,10 @@ const RECORD_OK = {
 };
 const RECORD_FULL = {
   ok: true, access: { kind: "patient", sections: ["discharge", "discharge-full"] }, document: {}, failedSections: [],
-  dischargeSummaries: [{ id: "ds", scope: "full", sections: [{ key: "admission", text: "Ward 5." }, { key: "assessment", withheld: true }] }],
+  dischargeSummaries: [{ id: "ds", scope: "full", sections: [{ key: "admission", text: "Ward 5." },
+    { key: "diagnoses", items: [{ group: "active", text: "Pneumonia [J18] - confirmed" }, { group: "active", withheld: true }, { group: "closed", text: "Asthma [J45] - confirmed" }] },
+    { key: "investigations", items: [{ withheld: true }, { text: "Full blood count (completed)" }] },
+    { key: "assessment", withheld: true }] }],
 };
 /* What the fake server answers for /api/portal/queue. */
 let queueMode = "ok";
@@ -123,6 +126,8 @@ try {
   recordMode = "full";
   await call("Page.reload");
   ok(await waitFor(`document.querySelector('.ds-full [data-withheld="assessment"]')`), "full summary shows a withheld section as withheld");
+  ok(await ev(`var d=document.querySelector('.ds-full'); return d.querySelectorAll('[data-withheld-entry="investigations"]').length===1 && d.querySelectorAll('[data-withheld-entry="diagnoses"]').length===1 && /Full blood count/.test(d.textContent) && /Resolved or inactive/.test(d.textContent) && /Please ask your care team/.test(d.textContent)`), "D5: one withheld entry is a line in its place; the other entries still show");
+  if (process.env.SHOT) { const s = await call("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }); (await import("node:fs")).writeFileSync(process.env.SHOT, Buffer.from(s.result.data, "base64")); }
   await call("Emulation.setEmulatedMedia", { media: "print" });
   await ev(`document.body.classList.add("printing"); document.querySelector(".ds-full").classList.add("printing"); return 1;`);
   ok(await ev(`return getComputedStyle(document.querySelector('[data-act="signout"]')).visibility==="hidden" && getComputedStyle(document.querySelector('.ds-full h4')).visibility==="visible" && getComputedStyle(document.querySelector('.ds-full [data-act="print"]')).display==="none"`), "print CSS shows only the summary");

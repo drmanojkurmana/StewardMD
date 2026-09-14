@@ -31,10 +31,12 @@
  * past retention. No object-store key or address is ever returned.
  *
  * FULL DISCHARGE SUMMARY ("discharge-full"). A release says "patient-copy" (the three sections above)
- * or "full". Even a full release withholds what #940 withholds, computed from the SAME assembled copy
- * the page already reads: free text cannot be checked result by result, so while any result is
- * withheld the sections that can quote one stay withheld, and while any entry is only a possibility
- * the diagnosis section does.
+ * or "full". Even a full release withholds what #940 withholds, judged by #940's own rules when the
+ * patient reads it. D5: a summary signed with structured entries withholds its diagnoses and
+ * investigations ONE ENTRY AT A TIME, each replaced by a "please ask your care team" line. Free text
+ * cannot be checked result by result, so while any result is withheld the assessment (and any section
+ * without usable entries) stays withheld whole, and while any entry is only a possibility such a
+ * diagnosis section does.
  *
  * A PATIENT MAY WITHDRAW ONLY DATA-USE CONSENTS HERE. Sharing, registry, research and photography are
  * choices about the record, and withdrawing one online harms nobody. Consent to treatment, to a
@@ -65,6 +67,9 @@ const FULL_SECTIONS = Object.freeze(["admission", "diagnoses", "allergies", "vit
  * the section that can name a possibility as a diagnosis. */
 const RESULT_TEXT = Object.freeze(["investigations", "assessment"]);
 const WITHHELD_SAY = "Withheld until your care team discusses it with you.";
+/* D5: the sections a summary signed since D5 carries as entries, and the line that stands in for one withheld entry. */
+const STRUCTURED = Object.freeze(["diagnoses", "investigations"]);
+const ITEM_WITHHELD_SAY = "One entry is withheld here until your care team discusses it with you. Please ask your care team.";
 /** Consents a patient may withdraw from the portal. Data use only - see the header. */
 const PATIENT_WITHDRAWABLE = Object.freeze(["share-external", "share-registry", "research", "photography"]);
 /** Who may agree to a proxy. The patient, or the person legally deciding for them. Never the proxy. */
@@ -116,11 +121,48 @@ function serviceFor(ctx, actor) {
 }
 
 /**
+ * PURE. D5: one structured section, entry by entry, or null when it cannot be checked entry by entry (no
+ * entries, as on every summary signed before D5, or a section text that is no longer the one the entries
+ * describe because a clinician rewrote it). null means the coarse, whole-section rule applies.
+ *
+ * facts: patient-record.js withholdingFacts, or null when they could not be read: then every entry is withheld.
+ * An investigation is withheld when a withheld report answers its request, or shares its code when the report
+ * names no request, or its own code is on the hospital's never-release list. A withheld report that cannot be
+ * tied to any entry (no request, no matching code, not known to be another stay's) withholds every entry.
+ * A diagnosis is withheld unless it was a diagnosis when signed AND its condition is one now.
+ * A withheld entry keeps only its place (and for a diagnosis its active or resolved group): never its words.
+ */
+function structuredSection(key, note, facts) {
+  const st = note.structured && note.structured[key];
+  const text = (note.sections || {})[key];
+  if (!st || !Array.isArray(st.items) || typeof st.text !== "string" || st.text !== text) return null;
+  if (!st.items.length) return { key, text };
+  const say = { withheld: true, say: ITEM_WITHHELD_SAY };
+  if (key === "diagnoses") {
+    return { key, items: st.items.map((i) => (facts && i.diagnosis === true && facts.diagnosisIds.includes(str(i.conditionId))
+      ? { group: i.group, text: i.text } : { group: i.group, ...say })) };
+  }
+  if (!facts) return { key, items: st.items.map(() => ({ ...say })) };
+  const codeOf = (i) => str(i.code).toUpperCase();
+  const codes = new Set(st.items.map(codeOf).filter(Boolean));
+  const untied = facts.withheldReports.some((r) => !(r.serviceRequestId || (r.code && codes.has(r.code)) || (r.encounterId && r.encounterId !== str(note.encounterId))));
+  return { key, items: st.items.map((i) => {
+    const hit = untied || (codeOf(i) && facts.blockedCodes.includes(codeOf(i))) || facts.withheldReports.some((r) =>
+      r.serviceRequestId ? r.serviceRequestId === str(i.serviceRequestId) : r.code && r.code === codeOf(i));
+    return hit ? { ...say } : { text: i.text };
+  }) };
+}
+
+/**
  * PURE. Signed discharge summaries whose EXACT version a clinician's handover named.
  *
- * opts: { patientCopy, full } - which of the two views this grant may see - and { withheldResults,
- * excludedDiagnoses }, the counts from #940's assembled copy. Without opts it is the patient copy.
- * A version released both ways is full: that handover happened.
+ * opts: { patientCopy, full } - which of the two views this grant may see - and { facts }, from
+ * patient-record.js withholdingFacts; missing facts withhold everything they guard. Without opts it is the
+ * patient copy. A version released both ways is full: that handover happened.
+ *
+ * D5: the diagnoses and investigations of a summary signed with structured entries are withheld entry by
+ * entry (structuredSection). Free text (the assessment, and any section without usable entries) keeps the
+ * whole-section rule: withheld while any result is withheld, or, for diagnoses, while any is not a diagnosis.
  */
 function releasedDischargeSummaries(notes, releases, opts) {
   const o = opts || { patientCopy: true };
@@ -133,9 +175,11 @@ function releasedDischargeSummaries(notes, releases, opts) {
     .map((n) => {
       const s = n.sections || {};
       if (named.get(`${str(n.id)}|${Number(n.version)}`) === "full" && o.full) {
-        const hideResults = Number(o.withheldResults) > 0, hideDx = Number(o.excludedDiagnoses) > 0;
+        const f = o.facts || null;
+        const hideResults = !f || f.withheldReports.length > 0, hideDx = !f || f.excludedDiagnoses > 0;
         return { id: n.id, scope: "full", sections: FULL_SECTIONS.filter((k) => str(s[k])).map((k) =>
-          (hideResults && RESULT_TEXT.includes(k)) || (hideDx && k === "diagnoses") ? { key: k, withheld: true, say: WITHHELD_SAY } : { key: k, text: s[k] }) };
+          (STRUCTURED.includes(k) && structuredSection(k, n, f)) ||
+          ((hideResults && RESULT_TEXT.includes(k)) || (hideDx && k === "diagnoses") ? { key: k, withheld: true, say: WITHHELD_SAY } : { key: k, text: s[k] })) };
       }
       if (!o.patientCopy) return null;
       return { id: n.id, scope: "patient-copy", admission: s.admission || null, medicines: s.medications || null, careInstructions: s.plan || null };
@@ -210,9 +254,9 @@ function consentView(consents, ownAccess, nowMs) {
 /**
  * The portal-only sections, each read only if the grant allows it.
  * A failed read is reported as failed for that section, never as an empty one.
- * doc: #940's assembled copy, for its withholding counts.
+ * facts: patient-record.js withholdingFacts for this patient (null when unread), judged per summary entry.
  */
-async function portalExtras(ctx, grant, doc) {
+async function portalExtras(ctx, grant, facts) {
   const sections = grantSections(grant);
   const patientId = str(grant.patientId);
   const svc = serviceFor(ctx, portalReader(grant));
@@ -225,8 +269,8 @@ async function portalExtras(ctx, grant, doc) {
     if (notes === null || releases === null) out.failed.push("discharge");
     else out.dischargeSummaries = releasedDischargeSummaries(notes, releases, {
       patientCopy: sections.includes("discharge"), full: sections.includes("discharge-full"),
-      /* No assembled copy means the withholding cannot be established, so everything it guards stays withheld. */
-      withheldResults: doc ? (doc.withheldResults || []).length : 1, excludedDiagnoses: doc ? doc.excludedDiagnoses : 1,
+      /* No facts means the withholding cannot be established, so everything it guards stays withheld. */
+      facts: facts || null,
     });
   }
   if (sections.includes("documents")) {
@@ -423,7 +467,7 @@ async function queueStatus(ctx, session) {
 }
 
 export {
-  SECTIONS, DISCHARGE_SCOPES, FULL_SECTIONS, WITHHELD_SAY, PATIENT_WITHDRAWABLE, PROXY_CONSENT_FROM, PROXY_CONSENT_METHOD,
+  SECTIONS, DISCHARGE_SCOPES, FULL_SECTIONS, WITHHELD_SAY, ITEM_WITHHELD_SAY, structuredSection, PATIENT_WITHDRAWABLE, PROXY_CONSENT_FROM, PROXY_CONSENT_METHOD,
   grantSections, readerId, proxyFrom, portalReader, releasedDischargeSummaries, releasedDocumentKeys, documentUnavailable, releasedDocuments,
   billView, consentView, portalExtras, scopeDocument, withdrawOwnConsent, portalDocumentFile, queueStatusFor, queueStatus,
 };

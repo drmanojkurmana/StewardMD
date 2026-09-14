@@ -1916,6 +1916,17 @@
         }).join("") + "</ul></section>"
       : "";
 
+    /* D5: WHAT THE PORTAL WILL SHOW, drawn by the portal's own renderer (portal.js dischargeSection) from the
+     * server's own answer (patient-record.js portalPreview, the portal's function over the same facts), so
+     * the preview cannot drift from the patient's page. Staff only: never printed on the handout. */
+    var P = G.WSQPortal, pv = r.portalPreview, pscope = state.pcopyScope === "full" ? "full" : "patient-copy";
+    var portalPreview = '<section class="w-dt-p w-noprint" data-w-portal-preview="' + pscope + '"><h3>What the patient portal will show</h3>' +
+      (!pv ? '<p class="w-hint warn">' + ms("error") + "Could not work out what the portal will show. Do not assume it matches this page.</p>"
+        : !P ? '<p class="w-hint warn">' + ms("error") + "The portal preview cannot be drawn on this screen. Reload the page before recording the handover.</p>"
+        : (pv.checked ? "" : '<p class="w-hint warn">' + ms("warning") + "Results and diagnoses could not be checked just now, so the portal would withhold every one of them.</p>") +
+          '<p class="w-dt-times">' + (r.release ? "The discharge summary as the patient's own portal access now shows it" : "The discharge summary as the patient's own portal access will show it once you record this handover") +
+          ", in English. A family member sees only what their access allows.</p>" + P.dischargeSection("ok", pv.scopes[pscope])) + "</section>";
+
     return '<div class="w-dt">' +
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
@@ -1923,7 +1934,7 @@
        * copy is the default; a full summary still withholds what this page withholds. */
       '<label class="w-f"><span>Discharge summary in the portal</span><select id="wPcopyScope">' +
         '<option value="patient-copy">Patient copy (stay, medicines, care instructions)</option>' +
-        '<option value="full">Full summary (all sections; withheld results stay withheld)</option></select></label>' +
+        '<option value="full"' + (pscope === "full" ? " selected" : "") + '>Full summary (all sections; withheld entries stay withheld)</option></select></label>' +
       '<button class="w-btn ghost" data-w-act="pcopyGive" title="Record that you gave this to the patient">' + ms("how_to_reg") + "Record handover</button>" +
       '<button class="w-btn ghost" data-w-act="pcopy">' + ms("refresh") + "Refresh</button></div>" +
       '<header class="w-dt-h"><h2>Your record</h2>' +
@@ -1935,7 +1946,7 @@
       (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") +
       (r.release ? '<p class="w-ok w-noprint">Handover recorded at ' + when(r.release.at) + "." +
         ((r.release.dischargeSummaries || []).length ? " Discharge summary released to the portal as the " + (r.release.dischargeScope === "full" ? "full summary." : "patient copy.") : "") + "</p>" : "") +
-      "</header>" +
+      "</header>" + portalPreview +
       '<section class="w-dt-p"><h3>Allergies</h3><p class="w-dt-alg">' + allergies + "</p></section>" +
       '<section class="w-dt-p"><h3>Your diagnoses</h3>' +
       list(d.diagnoses, "No diagnoses are recorded.", function (x) {
@@ -5932,6 +5943,7 @@
         '<div class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + " &middot; " + esc(Math.max(1, Math.round((x.sizeBytes || 0) / 1024))) + " KB</div>" +
         (x.status === "entered-in-error" ? '<div class="w-dt-times">Withdrawn: ' + esc(x.withdrawnReason || "") + " (" + esc(x.withdrawnBy || "") + ")</div>" : "") +
         (x.status === "purged" ? '<div class="w-dt-times">File deleted after its retention period, ' + when(x.purgedAt) + "</div>" : "") +
+        docPortalReleases(x) +
         '</div><div class="w-mini-row-act">' +
         (x.status !== "purged" && d.storageConfigured ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") +
         (x.version > 1 ? '<button class="w-btn ghost sm" data-w-act="docversions:' + esc(x.id) + '">' + ms("history") + "Versions</button>" : "") +
@@ -5960,6 +5972,23 @@
         (target ? ' <button class="w-btn ghost" data-w-act="docnewversioncancel">Cancel</button>' : "") + "</div>";
     return '<div class="w-card">' + head + form +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">No documents on file for this patient.</p>') + "</div>";
+  }
+  /* G5: which versions of this document went to the patient portal (documents.js portalReleasesOf). false = the
+   * releases could not be read, which must never read as "not released"; an older server sends nothing, and
+   * nothing is claimed. */
+  var DOC_RELEASE_SCOPE = { "patient-portal": "Patient portal (the patient, and any family member granted documents)" };
+  function docPortalReleases(x) {
+    var list = x.portalReleases;
+    if (list === false) return '<p class="w-hint warn">' + ms("error") + "Could not load which versions were released to the patient portal. Do not read this as never released.</p>";
+    if (!list) return "";
+    if (!list.length) return '<div class="w-dt-times">Not released to the patient portal.</div>';
+    return '<div class="w-sub"><h4>Released to the patient portal</h4><ul class="w-mini">' + list.map(function (r) {
+      var state = r.current ? '<span class="w-st done">Current version</span>'
+        : '<span class="w-st missed">Not current: ' + (x.status === "entered-in-error" ? "document withdrawn" : x.status === "purged" ? "file deleted" : "version " + esc(x.version) + " is newer") + "</span>";
+      return '<li class="w-mini-row"><div>Version ' + esc(r.version) + " " + state +
+        '<div class="w-dt-times">' + when(r.at) + " &middot; by " + esc(r.releasedBy || "unknown") + " &middot; " + esc(DOC_RELEASE_SCOPE[r.scope] || r.scope) + "</div>" +
+        '<div class="w-dt-times">Release ' + esc(r.releaseId) + (r.reason ? " &middot; Reason: " + esc(r.reason) : "") + (r.consentRef ? " &middot; Consent " + esc(r.consentRef) : "") + "</div></div></li>";
+    }).join("") + "</ul></div>";
   }
   function docVersionsBlock(v) {
     if (v.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the earlier versions.</p>";
@@ -9570,6 +9599,8 @@
    * answer it depends on is given. "change" (not "input") so typing in a text box never loses focus. */
   function onFormChange(ev) {
     var t = ev && ev.target;
+    /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
+    if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     if (st.view !== "forms" || !st.formSel || !t || !(t.hasAttribute("data-w-formfield") || t.hasAttribute("data-w-formmulti"))) return;
     readFormAnswers(); paint();
   }
@@ -9730,7 +9761,8 @@
     if (!reason.trim()) return;
     st.busy = true; paint();
     apiPost("/ward/document-release", { orgId: st.orgId, documentId: p[0], version: Number(p[1]), reason: reason.trim() })
-      .then(function (r) { settle(r, r && r.ok ? "Released to the patient portal." : null); paint(); })
+      // Reloaded, so the document's release list shows this release rather than the list from before it.
+      .then(function (r) { if (settle(r, r && r.ok ? "Released to the patient portal." : null)) loadDocuments(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not release the document. Nothing was released."; paint(); });
   }
   function peopleOpen() {
@@ -10209,6 +10241,8 @@
   }
   function loadPatientCopy() {
     if (!st.sel || !st.sel.patientId) return;
+    // A scope chosen for one patient is never carried to the next: each starts at the patient copy.
+    if (st.pcopyFor !== st.sel.patientId) { st.pcopyScope = null; st.pcopyFor = st.sel.patientId; }
     st.busy = true; st.view = "pcopy"; st.pcopy = null; paint();
     return apiGet("/ward/patient-copy?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
       .then(function (r) { if (settle(r)) st.pcopy = r; paint(); })
@@ -10220,7 +10254,7 @@
   function givePatientCopy() {
     if (!st.sel || !st.sel.patientId) return;
     var scope = val("wPcopyScope") || "patient-copy";   // read before paint() redraws the select
-    st.busy = true; paint();
+    st.pcopyScope = scope; st.busy = true; paint();
     return apiPost("/ward/patient-release", { orgId: st.orgId, patientId: st.sel.patientId, dischargeScope: scope })
       /* The response carries the document it recorded, so the page then on screen is the page that
        * was released - not the one loaded some minutes earlier that the record may have moved past. */

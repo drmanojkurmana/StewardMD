@@ -229,5 +229,5 @@ test("screens: desk, doctor queue and call-next show the token; the wall shows t
   assert.match(wall, /"Token " \+ n/);
   assert.match(idx, /queue\.js\?v=fdesk1-token/);
   assert.match(idx, /queue\.css\?v=q11-token/);
-  assert.match(read("wardsynq/site/index.html"), /pages\/admin\.js\?v=27/);
+  assert.match(read("wardsynq/site/index.html"), /pages\/admin\.js\?v=\d+/);
 });

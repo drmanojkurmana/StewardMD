@@ -49,7 +49,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 /* The SAME assembler the clinician's handout uses. Every withholding rule argued in #940 - no result
  * with an open critical loop, nothing preliminary, no differential printed as a diagnosis - applies
  * here unchanged, because this is one view of the chart with two doors and not two views. */
-import { assemble as patientCopyAssemble, statements as patientStatements } from "./patient-record.js";
+import { assemble as patientCopyAssemble, statements as patientStatements, readWithholdingFacts } from "./patient-record.js";
 /* One wording for the channel warning, defined where the messaging rules are. Two copies would
  * drift, and the copy that drifts is the one on the screen the patient actually reads. */
 import { NOT_EMERGENCY } from "./portal-requests.js";
@@ -423,7 +423,10 @@ async function portalRead(request, env, ctx) {
       .map((m) => ({ sentAt: m.sentAt, body: m.body, reply: m.reply || null, answeredAt: m.answeredAt || null }));
   } catch (_) { messages = []; }
 
-  const extras = await portalExtras(ctx, grant, doc);
+  /* D5: a full discharge summary is judged entry by entry against the record as it is now. Read only for a
+   * grant that can see one; a failed read is null, and null withholds everything it guards. */
+  const facts = sections.includes("discharge-full") ? await readWithholdingFacts(svc, patientId, Array.isArray(ctx.neverRelease) ? ctx.neverRelease : []) : null;
+  const extras = await portalExtras(ctx, grant, facts);
   const scoped = scopeDocument(doc, sections);
 
   return {

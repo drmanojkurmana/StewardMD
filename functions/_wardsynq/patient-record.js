@@ -51,7 +51,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { TYPE as DOC_TYPE } from "./documents.js";
-import { DISCHARGE_SCOPES, documentUnavailable } from "./portal-view.js";
+import { DISCHARGE_SCOPES, documentUnavailable, releasedDischargeSummaries } from "./portal-view.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -176,6 +176,56 @@ async function assemble(svc, patientId, neverRelease) {
 }
 
 /**
+ * PURE. D5: what the portal needs to judge each entry of a signed discharge summary, now. Internal to the
+ * server: it describes withheld reports, so it is never sent to a browser.
+ * withheldReports: every report #940 withholds (any reason); diagnosisIds: conditions that are diagnoses;
+ * excludedDiagnoses: how many are not, counted exactly as assemble() counts them.
+ */
+function withholdingFacts(reports, loops, conditions, neverRelease) {
+  const openIds = openCriticalReportIds(loops);
+  const rows = (conditions || []).filter(Boolean);
+  const diagnosisIds = rows.filter((c) => diagnosisFor(c)).map((c) => str(c.id));
+  return {
+    withheldReports: (reports || []).filter(Boolean).filter((r) => !releasableReport(r, openIds, neverRelease).ok)
+      .map((r) => ({ serviceRequestId: str(r.serviceRequestId), code: str(r.code).toUpperCase(), encounterId: str(r.encounterId) })),
+    blockedCodes: (neverRelease || []).map((c) => str(c).toUpperCase()).filter(Boolean),
+    diagnosisIds, excludedDiagnoses: rows.length - diagnosisIds.length,
+  };
+}
+
+/** The facts, or null when any of their reads failed. Unlike assemble(), a failed read is never an empty list here. */
+async function readWithholdingFacts(svc, patientId, neverRelease) {
+  try {
+    const [reports, loops, conditions] = await Promise.all([
+      svc.byPatient("DiagnosticReport", patientId), svc.byPatient("CriticalResultLoop", patientId), svc.byPatient("Condition", patientId),
+    ]);
+    return withholdingFacts(reports, loops, conditions, neverRelease);
+  } catch (_) { return null; }
+}
+
+/**
+ * D5: what the patient's own portal access shows of the signed discharge summaries once a handover with
+ * each scope is recorded: the releases already on file plus that one, through the portal's own function
+ * with the same facts. The Patient copy screen draws it with the portal's own renderer.
+ * Returns { scopes: { "patient-copy": [...], full: [...] }, checked } or null when the notes or releases
+ * could not be read. checked false: the facts could not be read, so every guarded entry shows withheld.
+ */
+async function portalPreview(svc, patientId, neverRelease) {
+  let notes, releases;
+  try {
+    [notes, releases] = await Promise.all([svc.byPatient("ClinicalNote", patientId), svc.byPatient(RELEASE_TYPE, patientId)]);
+  } catch (_) { return null; }
+  const facts = await readWithholdingFacts(svc, patientId, neverRelease);
+  const signed = (notes || []).filter((n) => n && n.noteType === "discharge-summary" && n.signedBy);
+  const scopes = {};
+  for (const scope of DISCHARGE_SCOPES) {
+    const handover = { dischargeSummaries: signed.map((n) => ({ id: n.id, version: n.version, scope })) };
+    scopes[scope] = releasedDischargeSummaries(notes, [...(releases || []), handover], { patientCopy: true, full: true, facts });
+  }
+  return { scopes, checked: facts !== null };
+}
+
+/**
  * PURE. The sentences that must appear on the document however it is rendered.
  *
  * ADDRESSED TO THE PATIENT, all of them. A warning meant for the clinician is returned separately by
@@ -228,6 +278,7 @@ async function patientCopy(request, env, ctx) {
     statements: statements(doc),
     clinicianWarnings: clinicianWarnings(neverRelease.length > 0),
     sensitivityConfigured: neverRelease.length > 0,
+    portalPreview: await portalPreview(svc, patientId, neverRelease),
     /* Said on the preview, which is the moment a clinician can still act on it. */
     preview: "Nothing has been given to the patient. Recording the handover is a separate, deliberate act.",
   };
@@ -304,6 +355,8 @@ async function releaseToPatient(request, env, ctx) {
       document: doc, statements: statements(doc),
       clinicianWarnings: clinicianWarnings(neverRelease.length > 0),
       release: record, actor: resolved.actor.id,
+      /* Read after the write, so it includes this release: what the patient's portal now shows. */
+      portalPreview: await portalPreview(svc, patientId, neverRelease),
       note: "Recorded so it is answerable later what this patient was given and when. Nothing was sent anywhere; handing it over is a human act.",
     };
   } catch (e) {
@@ -376,5 +429,6 @@ async function releaseDocumentToPatient(request, env, ctx) {
 export {
   RELEASE_TYPE, RELEASABLE_STATUS, NOT_A_DIAGNOSIS,
   openCriticalReportIds, releasableReport, diagnosisFor, statements, clinicianWarnings, assemble,
+  withholdingFacts, readWithholdingFacts, portalPreview,
   patientCopy, releaseToPatient, releaseDocumentToPatient,
 };
