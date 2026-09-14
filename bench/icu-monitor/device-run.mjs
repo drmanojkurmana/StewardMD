@@ -29,6 +29,7 @@ const args = process.argv.slice(2);
 const opt = (n, d) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : d; };
 const DIR = join(HERE, opt("--dir", "fixtures/owner"));
 const ONLY = opt("--only", null);
+const APP_PARSER = args.includes("--app-parser");
 const wsArg = args.find((a) => a.startsWith("ws://"));
 const PARSER_SRC = readFileSync(join(HERE, "..", "..", "icu-monitor-parser.js"), "utf8");
 const M = createRequire(import.meta.url)(join(HERE, "..", "..", "icu-monitor-parser.js"));
@@ -63,11 +64,17 @@ try {
       if (navigator.sendBeacon) { var ob = navigator.sendBeacon.bind(navigator); navigator.sendBeacon = function(url){ window.__smdNet.push(String(url)); return ob.apply(null, arguments); }; }
       var OW = window.WebSocket; if (OW) window.WebSocket = function(url, p){ window.__smdNet.push(String(url)); return p === undefined ? new OW(url) : new OW(url, p); };
     }
-    window.__smdV2 = (function(){ var module = { exports: {} }; ${PARSER_SRC.replace(/\bself\b/g, "undefined")}; return module.exports; })();
+    // --app-parser: use the parser the INSTALLED app loaded (verifies the shipped bundle, not this checkout)
+    window.__smdV2 = ${APP_PARSER ? "window.SMD_ICU_MONITOR" : '(function(){ var module = { exports: {} }; ' + PARSER_SRC.replace(/\bself\b/g, "undefined") + '; return module.exports; })()'};
     window.__benchPx = function (dataUrl) { return new Promise(function (res) { try { var img = new Image(); img.onload = function () { try { var MAX = 2400, s = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight)); var w = Math.max(1, Math.round(img.naturalWidth * s)), h = Math.max(1, Math.round(img.naturalHeight * s)); var cv = document.createElement("canvas"); cv.width = w; cv.height = h; var ctx = cv.getContext("2d", { willReadFrequently: true }); ctx.drawImage(img, 0, 0, w, h); var d = ctx.getImageData(0, 0, w, h).data; res({ w: w, h: h, natW: img.naturalWidth, natH: img.naturalHeight, get: function (x, y) { if (x < 0 || y < 0 || x >= w || y >= h) return null; var i = (y * w + x) * 4; return [d[i], d[i + 1], d[i + 2]]; } }); } catch (e) { res(null); } }; img.onerror = function () { res(null); }; img.src = dataUrl; } catch (e) { res(null); } }); };
     window.__benchCrop = function (dataUrl, region) { return new Promise(function (res) { try { var img = new Image(); img.onload = function () { try { var sx = region.x * img.naturalWidth, sy = region.y * img.naturalHeight, sw = region.w * img.naturalWidth, sh = region.h * img.naturalHeight; var ow = Math.max(1, Math.round(sw * region.scale)), oh = Math.max(1, Math.round(sh * region.scale)); var cv = document.createElement("canvas"); cv.width = ow; cv.height = oh; var ctx = cv.getContext("2d"); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.drawImage(img, sx, sy, sw, sh, 0, 0, ow, oh); res({ url: cv.toDataURL("image/jpeg", 0.92), w: ow, h: oh }); } catch (e) { res(null); } }; img.onerror = function () { res(null); }; img.src = dataUrl; } catch (e) { res(null); } }); };
     return window.__smdV2.VERSION; })()`);
   if (inj !== M.VERSION) throw new Error("parser injection failed: " + inj);
+  if (APP_PARSER) {
+    const shipped = await c.evaluate(`JSON.stringify({ v: window.SMD_ICU_MONITOR.VERSION, verifyDigits: typeof window.SMD_ICU_MONITOR.verifyDigits, verifyFields: window.SMD_ICU_MONITOR.VERIFY_FIELDS, pap: (function(){ try { var r = window.SMD_ICU_MONITOR.parseMonitor([{text:"АВP",conf:1,x:.57,y:.40,w:.04,h:.02},{text:"129/86",conf:1,x:.62,y:.42,w:.15,h:.06},{text:"PAP",conf:1,x:.57,y:.53,w:.04,h:.02},{text:"26/10",conf:1,x:.63,y:.55,w:.12,h:.05}]); return r.fields.sbp.source + " " + r.fields.sbp.suggested; } catch (e) { return String(e); } })() })`);
+    console.log("shipped parser in the running app:", shipped);
+    summary.appParser = JSON.parse(shipped);
+  }
   await sleep(8000);
   const idle = JSON.parse(await c.evaluate(`JSON.stringify(window.__smdNet.splice(0))`));
   summary.idleControl = { seconds: 8, calls: idle.length, urls: idle.map((x) => x.replace(/\?.*/, "")) };
