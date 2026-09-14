@@ -144,7 +144,7 @@ Copilot tool chips now persist their kind/argument as attributes and launch thro
 ## Top-right model navigation (2026-09-14)
 The original wordmark and engine selector share the first header row. Conversation actions have a compact second row, preserving all original handlers and the live doctor. Responsive grid slots constrain long model names. Touch feedback respects reduced motion.
 
-## Startup Signature Trace (2026-09-14)
-The existing 107px solid StewardMD mark is visible from the first frame. A mint contour draws over the mark, blooms once, and fades away. Dark mode uses the existing white mask with the same overlay motion. Reduced-motion users see only the solid mark.
+## Startup motion (2026-09-14)
+The existing 107px solid StewardMD mark remains present throughout startup. Light and dark appearance each use the owner's selected animation below. Reduced-motion users see only the static mark.
 
-The brighter revision uses a pearl-white contour with cool-white glow layers and a soft background halo. The solid logo begins lighter and less saturated, deepening to its original teal as drawing completes. Dark mode starts with a pale teal mask and settles into a deeper teal. Drawing completes in 1.12 seconds so the luminous finish appears before the personalised-screen transition at 1.56 seconds. Logo dimensions remain 107px; reduced-motion suppresses both overlays and immediately shows the final static mark.
+Selected modes: light uses variant 5, Quiet Focus (a gentle focus reveal followed by a masked silver reflection); dark uses variant 1, Pearl Circuit (a pearl-white contour over a pale teal mask that deepens as drawing completes). No background halo. Drawing completes in 1.12 seconds so the luminous finish appears before the personalised-screen transition at 1.56 seconds. Logo dimensions remain 107px; reduced-motion suppresses overlays and immediately shows the static mark. All motion waits for the native splash handoff class.
