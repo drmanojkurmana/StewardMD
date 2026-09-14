@@ -5684,3 +5684,27 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   token beside the name. SMS/WhatsApp "registered" and "next" lead with "Your token: X" (a token names nobody).
   Patient portal and the /queue link page show "Your token: X" for the patient's own ticket only.
 - Not built: no recall out of `no_show` (it is terminal; "recall" today is called -> waiting -> called).
+
+## 2026-09-14 D5: a full discharge summary is withheld entry by entry (owner chose B)
+Supersedes the coarse part of "FULL DISCHARGE SUMMARY" above for summaries signed from now on.
+- ENTRIES ARE WRITTEN WITH THE DRAFT. `migrate-discharge.js structuredSections` stores `structured.diagnoses`
+  (conditionId, active/closed group, whether it was a diagnosis, the problem-list line) and
+  `structured.investigations` (serviceRequestId, code, the request line) on the ClinicalNote, beside
+  `editedSections`, and signing carries it. Each set records the section `text` it describes.
+- JUDGED WHEN THE PATIENT READS. `portal-view.js structuredSection` over `patient-record.js withholdingFacts`
+  (the reports #940 withholds, the never-release codes, the conditions that are diagnoses now), read fresh.
+  An investigation is withheld when a withheld report answers its request (or shares its code when the report
+  names none) or its code is never-release; a withheld report tied to no entry and not known to be another
+  stay's withholds every entry. A diagnosis is withheld unless it was one when signed and still is. A withheld
+  entry keeps its place and group and becomes "One entry is withheld here ... Please ask your care team." No
+  reason category, no name, no id. Acknowledging a loop releases only that entry.
+- FREE TEXT STAYS COARSE. The assessment, any section without entries (every summary signed before D5), and a
+  section whose stored text no longer equals the entries' `text` (a clinician rewrote it) keep the old rule.
+- FAILS CLOSED. Facts are read without #940's catch-to-empty; an unreadable read withholds every guarded entry
+  and section (previously a failed report read inside assemble() looked like "nothing withheld").
+- PREVIEW IS THE PORTAL. `patient-record.js portalPreview` runs the portal's own function over releases on file
+  plus the pending handover, per scope; GET /ward/patient-copy and POST /ward/patient-release return it, and the
+  Patient copy screen draws it with `portal.js dischargeSection` (portal.js and i18n.js now load in both
+  index.html files). Staff only, `w-noprint`. English, as the patient's own access sees it.
+- Not built: sensitivity is still by report code only; a Condition whose code is on `neverRelease` is shown, as
+  in #940's patient copy.

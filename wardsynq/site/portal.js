@@ -69,12 +69,22 @@
       (q == null ? "" : '<button class="btn" type="button" data-act="queue">' + esc(tr("status.refresh")) + "</button>") + "</section>";
   }
 
+  /** PURE. D5: a section withheld entry by entry. A withheld entry is one translated line in its place, never its words. */
+  function summaryEntries(s) {
+    var group = null;
+    return s.items.map(function (it) {
+      var head = it.group && it.group !== group ? "<h5>" + esc(tr("dc.group." + it.group)) + "</h5>" : "";
+      if (it.group) group = it.group;
+      return head + (it.withheld ? '<p class="msg note" data-withheld-entry="' + esc(s.key) + '">' + esc(tr("dc.entryWithheld")) + "</p>" : "<p>" + lines(it.text) + "</p>");
+    }).join("");
+  }
+
   /** PURE. One released discharge summary: the patient copy's three sections, or the full signed summary. */
   function dischargeItem(d) {
     if (d.scope === "full") {
       return '<article class="ds-full" data-ds="' + esc(d.id) + '"><h3>' + esc(tr("dc.full")) + "</h3>" + (d.sections || []).map(function (s) {
         return "<h4>" + esc(tr("dc.section." + s.key)) + "</h4>" +
-          (s.withheld ? '<p class="msg note" data-withheld="' + esc(s.key) + '">' + esc(tr("dc.withheld")) + "</p>" : "<p>" + lines(s.text) + "</p>");
+          (s.withheld ? '<p class="msg note" data-withheld="' + esc(s.key) + '">' + esc(tr("dc.withheld")) + "</p>" : s.items ? summaryEntries(s) : "<p>" + lines(s.text) + "</p>");
       }).join("") + '<button class="btn noprint" type="button" data-act="print">' + esc(tr("dc.print")) + "</button></article>";
     }
     return (d.admission ? "<h3>" + esc(tr("dc.stay")) + "</h3><p>" + lines(d.admission) + "</p>" : "") +
@@ -89,6 +99,9 @@
     return "<b>" + esc(d.title) + "</b><br>" + esc(type.indexOf("docs.type.") === 0 ? d.docType : type) + ", " + esc(when(d.uploadedAt)) + ", " + esc(tr("docs.version", { n: d.version })) +
       '<br><button class="btn" type="button" data-act="doc" data-id="' + esc(d.documentId) + '" data-version="' + esc(d.version) + '">' + esc(tr("docs.download")) + '</button> <span class="quiet" aria-live="polite"></span>';
   }
+
+  /** PURE. The discharge section. The staff Patient copy screen (ward.js) draws its preview with this too. */
+  function dischargeSection(state, list) { return section("discharge", tr("dc.title"), state, list, dischargeItem, tr("dc.empty")); }
 
   /** PURE. The whole signed-in page from the server's answer. Only granted sections are drawn. */
   function renderRecord(r) {
@@ -126,7 +139,7 @@
       out.push(section("diagnoses", tr("dx.title"), "ok", doc.diagnoses, function (d) { return "<b>" + esc(d.display) + "</b>" + (d.note ? "<br>" + esc(d.note) : ""); }, tr("dx.empty")));
       out.push(section("allergies", tr("allergy.title"), "ok", doc.allergies, function (a) { return "<b>" + esc(a.substance) + "</b>" + (a.reaction ? ": " + esc(a.reaction) : ""); }, tr("allergy.empty")));
     }
-    if (has("discharge") || has("discharge-full")) out.push(section("discharge", tr("dc.title"), failed("discharge"), r.dischargeSummaries, dischargeItem, tr("dc.empty")));
+    if (has("discharge") || has("discharge-full")) out.push(dischargeSection(failed("discharge"), r.dischargeSummaries));
     if (has("documents")) out.push(section("documents", tr("docs.title"), failed("documents"), r.documents, documentItem, tr("docs.empty")));
     if (has("bills")) out.push(section("bills", tr("bills.title"), failed("bills"), r.bills, function (b) {
       var state = b.status === "void" ? tr("bills.cancelled") : b.status === "paid" ? tr("bills.paid") : tr("bills.due", { amount: money(b.balance, b.currency) });
@@ -166,7 +179,7 @@
   }
 
   var api = {
-    esc: esc, section: section, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, documentItem: documentItem
+    esc: esc, section: section, renderRecord: renderRecord, renderPhase: renderPhase, statusSection: statusSection, dischargeItem: dischargeItem, dischargeSection: dischargeSection, documentItem: documentItem
   };
   if (typeof window !== "undefined") window.WSQPortal = api;
   if (typeof document === "undefined" || !document.getElementById("portal")) return;

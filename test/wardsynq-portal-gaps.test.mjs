@@ -407,7 +407,7 @@ test("PURE: existing releases stay patient copy, and a full release without the 
   assert.equal(PV.releasedDischargeSummaries(notes, [{ dischargeSummaries: [{ id: "ds", version: 1 }] }], { patientCopy: true, full: true })[0].scope, "patient-copy");
   assert.equal(PV.releasedDischargeSummaries(notes, [{ dischargeSummaries: [{ id: "ds", version: 1, scope: "full" }] }], { patientCopy: true, full: false })[0].scope, "patient-copy");
   assert.deepEqual(PV.releasedDischargeSummaries(notes, [{ dischargeSummaries: [{ id: "ds", version: 1 }] }], { patientCopy: false, full: true }), []);
-  const dx = PV.releasedDischargeSummaries([{ ...notes[0], sections: { diagnoses: "Active:\nX - differential" } }], [{ dischargeSummaries: [{ id: "ds", version: 1, scope: "full" }] }], { full: true, withheldResults: 0, excludedDiagnoses: 1 });
+  const dx = PV.releasedDischargeSummaries([{ ...notes[0], sections: { diagnoses: "Active:\nX - differential" } }], [{ dischargeSummaries: [{ id: "ds", version: 1, scope: "full" }] }], { full: true, facts: { withheldReports: [], blockedCodes: [], diagnosisIds: [], excludedDiagnoses: 1 } });
   assert.equal(dx[0].sections[0].withheld, true, "a differential is not printed as a diagnosis, even in full");
   assert.ok(PV.SECTIONS.includes("status") && PV.SECTIONS.includes("documents") && PV.SECTIONS.includes("discharge-full"));
   assert.equal(PV.documentUnavailable({ status: "current", retainUntil: "not a date" }, Date.now()).reason, "retention_ended", "unreadable retention fails closed");
@@ -462,7 +462,7 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.match(portalJs, /post\("queue"/);
   assert.match(portalJs, /"\/api\/portal\/document"/);
   assert.doesNotMatch(portalJs, /fetch\([^)]*\?/, "no query strings on portal calls");
-  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=5/);
+  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=6/);
   assert.match(html, /@media print/);
   assert.match(ward, /apiPost\("\/ward\/document-release"/);
   assert.match(ward, /dischargeScope: scope/);
@@ -474,5 +474,213 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.ok(keys.length > 40);
   for (const k of keys) assert.ok(Object.prototype.hasOwnProperty.call(hiCatalog, k), "Hindi for " + k);
   assert.doesNotMatch(portalJs + html + staffPage + keys.map((k) => i18n._catalogs.en[k]).join(" "), /—/, "no em dash");
-  assert.match(read("wardsynq/site/index.html"), /ward\.js\?v=site79/);
+  assert.match(read("wardsynq/site/index.html"), /i18n\.js\?v=5"[\s\S]*portal\.js\?v=6"[\s\S]*ward\.js\?v=site80/);
+  assert.match(read("index.html"), /i18n\.js\?v=5" defer[\s\S]*portal\.js\?v=6" defer[\s\S]*ward\.js\?v=ward26-withhold/);
+});
+
+/* ---- D5: structured per-entry withholding ------------------------------------------------------ */
+
+const PD = "opd-pat-gaps-d";
+const CASHIER = "cashier@example.test";
+async function staffGet(email, path) {
+  const headers = {};
+  if (email) headers["Cf-Access-Authenticated-User-Email"] = email;
+  const res = await queueRouter({ request: new Request("https://x/api/queue" + path + (path.includes("?") ? "&" : "?") + "orgId=" + ORG, { method: "GET", headers }), env: ENV });
+  let j; try { j = await res.json(); } catch { j = {}; }
+  j.__status = res.status;
+  return j;
+}
+function withNeverRelease(codes) {
+  const org = docs.get(`q_orgs/${ORG}`);
+  const before = org.fields.wardsynq;
+  org.fields.wardsynq = { ...before, neverRelease: codes };
+  return () => { org.fields.wardsynq = before; };
+}
+const SECRETS = ["KSECRET", "PRELIMSECRET", "HIVSECRET", "DIFFSECRET", "ASSESS-FREE-TEXT"];
+
+test("D5 setup: a stay drafted and signed through POST /api/queue/ward/discharge-summary and /ward/sign-discharge-summary carries entries", async () => {
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(CASHIER))}`, { fields: { orgId: ORG, identity: idFor(CASHIER), role: "cashier", active: true }, updateTime: "t1" });
+  await seed({ resourceType: "Patient", id: PD, name: "Deepa Gaps", mrn: "GAPS-D", dob: "1985-01-01" });
+  T.d = await grant("g-d", PD);
+  T.dProxy = await grant("g-d-proxy", PD, { issuedTo: "proxy", proxy: { relatedPersonId: "rp-d", name: "Dev", relationship: "brother", sections: ["discharge"], consentFrom: "patient", consentMethod: "in-person-verbal" } });
+  const enc = "enc-gaps-d";
+  await seed({ resourceType: "Encounter", id: enc, patientId: PD, class: "IPD", status: "finished", periodStart: "2026-09-10T08:00:00.000Z", periodEnd: "2026-09-13T08:00:00.000Z", location: { ward: "W5", bed: "3" } });
+  await seed({ resourceType: "Condition", id: "c-d-conf", patientId: PD, code: "J18", codeSystem: "icd10", display: "Pneumonia", clinicalStatus: "active", verificationStatus: "confirmed" });
+  await seed({ resourceType: "Condition", id: "c-d-diff", patientId: PD, code: "I26", codeSystem: "icd10", display: "DIFFSECRET embolism", clinicalStatus: "active", verificationStatus: "differential" });
+  await seed({ resourceType: "Condition", id: "c-d-old", patientId: PD, code: "J45", codeSystem: "icd10", display: "Asthma", clinicalStatus: "resolved", verificationStatus: "confirmed" });
+  const sr = (id, code, display) => seed({ resourceType: "ServiceRequest", id, patientId: PD, encounterId: enc, code, display, category: "laboratory", requesterId: "dr:1", status: "completed" });
+  await sr("sr-d-k", "K", "KSECRET Potassium");
+  await sr("sr-d-p", "TROP", "PRELIMSECRET Troponin");
+  await sr("sr-d-h", "HIV-1", "HIVSECRET serology");
+  await sr("sr-d-c", "CBC", "Full blood count");
+  await seed({ resourceType: "DiagnosticReport", id: "rep-d-k", patientId: PD, encounterId: enc, serviceRequestId: "sr-d-k", code: "K", status: "final", conclusion: "7.2" });
+  await seed({ resourceType: "CriticalResultLoop", id: "loop-d-k", patientId: PD, reportId: "rep-d-k", state: "open" });
+  await seed({ resourceType: "DiagnosticReport", id: "rep-d-p", patientId: PD, encounterId: enc, serviceRequestId: "sr-d-p", code: "TROP", status: "preliminary" });
+  /* No request link: tied to its entry by code. */
+  await seed({ resourceType: "DiagnosticReport", id: "rep-d-h", patientId: PD, encounterId: enc, code: "HIV-1", status: "final", conclusion: "reactive" });
+  await seed({ resourceType: "DiagnosticReport", id: "rep-d-c", patientId: PD, encounterId: enc, serviceRequestId: "sr-d-c", code: "CBC", status: "final", conclusion: "normal" });
+  await seed({ resourceType: "ClinicalNote", id: "note-d-prog", patientId: PD, encounterId: enc, noteType: "progress", sections: { assessment: "ASSESS-FREE-TEXT", plan: "Home with antibiotics." } });
+
+  const draft = await staff(DOCTOR, "/ward/discharge-summary", { encounterId: enc });
+  assert.equal(draft.__status, 200, JSON.stringify(draft));
+  const sign = await staff(DOCTOR, "/ward/sign-discharge-summary", { encounterId: enc });
+  assert.equal(sign.__status, 200, JSON.stringify(sign));
+  const note = RECORD._rows.filter((r) => r.resourceType === "ClinicalNote" && r.body.id === draft.noteId).pop().body;
+  assert.ok(note.signedBy);
+  assert.equal(note.structured.investigations.text, note.sections.investigations, "the entries describe the signed text");
+  assert.deepEqual(note.structured.investigations.items.map((i) => i.serviceRequestId), ["sr-d-k", "sr-d-p", "sr-d-h", "sr-d-c"]);
+  assert.deepEqual(note.structured.diagnoses.items.map((i) => [i.conditionId, i.group, i.diagnosis]),
+    [["c-d-conf", "active", true], ["c-d-diff", "active", false], ["c-d-old", "closed", true]]);
+});
+
+test("D5 GET /api/queue/ward/patient-copy and POST /ward/patient-release: no session 401, wrong role 403 with nothing written, other hospital refused", async () => {
+  const path = "/ward/patient-copy?patientId=" + PD;
+  assert.equal((await staffGet(null, path)).__status, 401);
+  const cashier = await staffGet(CASHIER, path);
+  assert.equal(cashier.__status, 403, JSON.stringify(cashier));
+  assert.ok(!("portalPreview" in cashier));
+  const cross = await staffGet(OTHER_DOCTOR, path);
+  assert.ok(cross.__status === 403 || cross.__status === 404, JSON.stringify(cross));
+  assert.ok(!JSON.stringify(cross).includes("Pneumonia"));
+  const before = releases();
+  assert.equal((await staff(null, "/ward/patient-release", { patientId: PD, dischargeScope: "full" })).__status, 401);
+  assert.equal((await staff(NURSE, "/ward/patient-release", { patientId: PD, dischargeScope: "full" })).__status, 403);
+  const crossRel = await staff(OTHER_DOCTOR, "/ward/patient-release", { patientId: PD, dischargeScope: "full" });
+  assert.ok(crossRel.__status === 403 || crossRel.__status === 404, JSON.stringify(crossRel));
+  assert.equal(releases(), before, "nothing was written by a refused call");
+  assert.equal((await staffGet(NURSE, path)).__status, 200, "reading the copy is chart access");
+});
+
+test("D5: each entry is withheld for its own reason, free text stays withheld whole, and the preview is exactly the portal's answer", async () => {
+  const restore = withNeverRelease(["HIV-1"]);
+  try {
+    const copy = await staffGet(DOCTOR, "/ward/patient-copy?patientId=" + PD);
+    assert.equal(copy.__status, 200, JSON.stringify(copy));
+    assert.equal(copy.portalPreview.checked, true);
+    const preview = copy.portalPreview.scopes.full;
+    assert.equal(preview.length, 1);
+    assert.equal(copy.portalPreview.scopes["patient-copy"][0].scope, "patient-copy");
+
+    const rel = await staff(DOCTOR, "/ward/patient-release", { patientId: PD, dischargeScope: "full", at: "2026-09-14T12:00:00.000Z" });
+    assert.equal(rel.__status, 200, JSON.stringify(rel));
+    const rec = await portal("record", { grantId: "g-d", token: T.d });
+    assert.equal(rec.status, 200, JSON.stringify(rec.body));
+    assert.deepEqual(rec.body.dischargeSummaries, preview, "the Patient copy preview is exactly what the portal returns");
+    assert.deepEqual(rel.portalPreview.scopes.full, preview, "and so is the preview returned with the recorded handover");
+
+    const byKey = Object.fromEntries(rec.body.dischargeSummaries[0].sections.map((s) => [s.key, s]));
+    const inv = byKey.investigations.items;
+    assert.equal(inv.length, 4, "every entry keeps its place");
+    assert.equal(inv[0].withheld, true, "open critical loop");
+    assert.equal(inv[1].withheld, true, "preliminary");
+    assert.equal(inv[2].withheld, true, "sensitive, tied by code");
+    assert.deepEqual(inv[3], { text: "Full blood count (completed)" });
+    assert.match(inv[0].say, /Please ask your care team/);
+    assert.ok(!("reason" in inv[0]) && !("serviceRequestId" in inv[0]), "no reason category and no record id on a withheld entry");
+    const dx = byKey.diagnoses.items;
+    assert.equal(dx[0].text, "Pneumonia [J18] - confirmed");
+    assert.deepEqual(dx[1], { group: "active", withheld: true, say: PV.ITEM_WITHHELD_SAY });
+    assert.equal(dx[2].group, "closed");
+    assert.equal(byKey.assessment.withheld, true, "free text cannot be checked entry by entry");
+    const text = JSON.stringify(rec.body);
+    for (const s of SECRETS) assert.ok(!text.includes(s), "never shown: " + s);
+
+    const P = loadPortal();
+    const html = P.dischargeSection("ok", rec.body.dischargeSummaries);
+    assert.equal((html.match(/data-withheld-entry="investigations"/g) || []).length, 3);
+    assert.equal((html.match(/data-withheld-entry="diagnoses"/g) || []).length, 1);
+    assert.match(html, /<h5>Active<\/h5>[\s\S]*<h5>Resolved or inactive<\/h5>/);
+    for (const s of SECRETS) assert.ok(!html.includes(s));
+
+    const proxy = await portal("record", { grantId: "g-d-proxy", token: T.dProxy });
+    assert.equal(proxy.body.dischargeSummaries[0].scope, "patient-copy", "a proxy without discharge-full sees no entries at all");
+    assert.ok(!JSON.stringify(proxy.body).includes("Full blood count"));
+
+    await RECORD.append(TENANT, [{ version: 2, meta: { recordedAt: NOW }, resourceType: "CriticalResultLoop", id: "loop-d-k", patientId: PD, reportId: "rep-d-k", state: "acknowledged" }], { idempotencyKey: "ack-d" });
+    const after = Object.fromEntries((await portal("record", { grantId: "g-d", token: T.d })).body.dischargeSummaries[0].sections.map((s) => [s.key, s]));
+    assert.equal(after.investigations.items[0].text, "KSECRET Potassium (completed)", "acknowledging the loop releases that entry");
+    assert.equal(after.investigations.items[1].withheld, true, "and only that one");
+    assert.equal(after.investigations.items[2].withheld, true);
+  } finally { restore(); }
+});
+
+test("D5 PURE: unverifiable free text, old releases, unreadable facts and untied reports all stay withheld", () => {
+  const facts = { withheldReports: [], blockedCodes: [], diagnosisIds: ["c1"], excludedDiagnoses: 0 };
+  const rel = [{ dischargeSummaries: [{ id: "ds", version: 1, scope: "full" }] }];
+  const structured = {
+    investigations: { text: "A (completed)\nB (completed)", items: [{ serviceRequestId: "sa", code: "A", text: "A (completed)" }, { serviceRequestId: "sb", code: "B", text: "B (completed)" }] },
+    diagnoses: { text: "Active:\nX - confirmed", items: [{ conditionId: "c1", group: "active", diagnosis: true, text: "X - confirmed" }] },
+  };
+  const note = (sections, extra) => [{ id: "ds", version: 1, noteType: "discharge-summary", signedBy: "dr", encounterId: "e1", sections, structured, ...(extra || {}) }];
+  const sec = (out, k) => out[0].sections.find((s) => s.key === k);
+  const base = { investigations: structured.investigations.text, diagnoses: structured.diagnoses.text, assessment: "free" };
+
+  const one = { ...facts, withheldReports: [{ serviceRequestId: "sb", code: "B", encounterId: "e1" }] };
+  let out = PV.releasedDischargeSummaries(note(base), rel, { full: true, facts: one });
+  assert.deepEqual(sec(out, "investigations").items.map((i) => !!i.withheld), [false, true]);
+  assert.equal(sec(out, "assessment").withheld, true);
+
+  out = PV.releasedDischargeSummaries(note({ ...base, investigations: "A (completed)\nB result 7.2 rewritten by a clinician" }), rel, { full: true, facts: one });
+  assert.equal(sec(out, "investigations").withheld, true, "a rewritten section is free text again: withheld whole");
+  assert.ok(!JSON.stringify(out).includes("7.2"));
+
+  out = PV.releasedDischargeSummaries(note(base, { structured: undefined }), rel, { full: true, facts: one });
+  assert.equal(sec(out, "investigations").withheld, true, "a summary signed before D5 keeps the whole-section rule");
+  assert.equal(sec(out, "diagnoses").text, base.diagnoses);
+  out = PV.releasedDischargeSummaries(note(base, { structured: undefined }), rel, { full: true, facts });
+  assert.equal(sec(out, "investigations").text, base.investigations, "and shows it whole when nothing is withheld, as before");
+
+  out = PV.releasedDischargeSummaries(note(base), rel, { full: true, facts: null });
+  assert.ok(sec(out, "investigations").items.every((i) => i.withheld) && sec(out, "diagnoses").items.every((i) => i.withheld), "unread facts withhold every entry");
+  assert.equal(sec(out, "assessment").withheld, true);
+
+  const untied = { ...facts, withheldReports: [{ serviceRequestId: "", code: "ZZ", encounterId: "" }] };
+  out = PV.releasedDischargeSummaries(note(base), rel, { full: true, facts: untied });
+  assert.ok(sec(out, "investigations").items.every((i) => i.withheld), "a withheld result tied to no entry withholds them all");
+  const otherStay = { ...facts, withheldReports: [{ serviceRequestId: "", code: "ZZ", encounterId: "e-other" }] };
+  out = PV.releasedDischargeSummaries(note(base), rel, { full: true, facts: otherStay });
+  assert.ok(sec(out, "investigations").items.every((i) => !i.withheld), "another stay's result does not");
+
+  out = PV.releasedDischargeSummaries(note(base), rel, { full: true, facts: { ...facts, blockedCodes: ["A"] } });
+  assert.equal(sec(out, "investigations").items[0].withheld, true, "a never-release code withholds its entry even with no report yet");
+  out = PV.releasedDischargeSummaries(note(base), rel, { full: true, facts: { ...facts, diagnosisIds: [] } });
+  assert.equal(sec(out, "diagnoses").items[0].withheld, true, "a condition no longer a diagnosis is withheld");
+  const wasDiff = { ...structured, diagnoses: { ...structured.diagnoses, items: [{ ...structured.diagnoses.items[0], diagnosis: false }] } };
+  out = PV.releasedDischargeSummaries(note(base, { structured: wasDiff }), rel, { full: true, facts });
+  assert.equal(sec(out, "diagnoses").items[0].withheld, true, "a line signed as a differential stays withheld after confirmation");
+});
+
+function wardSandbox() {
+  const sb = {
+    navigator: { userAgent: "node" }, location: { hash: "", href: "" },
+    document: { getElementById: () => null, createElement: () => ({ style: {}, classList: { add() {}, remove() {} }, appendChild() {}, setAttribute() {} }), addEventListener() {}, body: { appendChild() {} }, querySelector: () => null, querySelectorAll: () => [], documentElement: { lang: "en" } },
+    localStorage: { getItem: () => "", setItem() {}, removeItem() {} },
+    fetch: () => Promise.resolve({ json: () => Promise.resolve({}) }), setTimeout, clearTimeout, console, Promise, Date,
+  };
+  sb.window = sb; sb.self = sb; vm.createContext(sb);
+  return sb;
+}
+
+test("D5 screen: the Patient copy screen draws the portal preview with the portal's renderer, and never on the printout", () => {
+  const src = read("ward.js");
+  const sb = wardSandbox();
+  vm.runInContext(read("wardsynq/site/i18n.js"), sb);
+  vm.runInContext(read("wardsynq/site/portal.js"), sb);
+  vm.runInContext(src, sb);
+  const W = sb.WARD;
+  const list = [{ id: "ds", scope: "full", sections: [{ key: "investigations", items: [{ text: "CBC (completed)" }, { withheld: true, say: "x" }] }, { key: "assessment", withheld: true }] }];
+  const pc = { ok: true, patientId: "p1", document: { patient: { name: "Deepa" } }, statements: [], clinicianWarnings: [], portalPreview: { checked: true, scopes: { "patient-copy": [], full: list } } };
+  const draw = (extra) => W._render({ ...W._st, view: "pcopy", sel: { patientId: "p1" }, pcopy: pc, ...extra });
+  const full = draw({ pcopyScope: "full" });
+  const block = /<section class="w-dt-p w-noprint" data-w-portal-preview="full">([\s\S]*?)<section class="w-dt-p"><h3>Allergies/.exec(full);
+  assert.ok(block, "a staff-only (w-noprint) preview section");
+  assert.ok(block[1].includes(sb.WSQPortal.dischargeSection("ok", list)), "exactly the portal's own markup");
+  assert.match(full, /<option value="full" selected>/);
+  assert.match(draw({}), /data-w-portal-preview="patient-copy"[\s\S]*No discharge summary has been shared with you/);
+  assert.match(draw({ pcopy: { ...pc, portalPreview: null } }), /Could not work out what the portal will show/);
+  assert.match(draw({ pcopy: { ...pc, portalPreview: { ...pc.portalPreview, checked: false } }, pcopyScope: "full" }), /could not be checked just now/);
+  const bare = wardSandbox();
+  vm.runInContext(src, bare);
+  assert.match(bare.WARD._render({ ...bare.WARD._st, view: "pcopy", sel: { patientId: "p1" }, pcopy: pc }), /preview cannot be drawn on this screen/, "without the portal renderer the screen says so, never a blank");
+  assert.match(src, /t\.id === "wPcopyScope"/);
 });

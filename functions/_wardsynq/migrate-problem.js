@@ -179,16 +179,19 @@ async function listProblems(request, env, ctx) {
  * PURE. The problem list as the line a discharge summary carries. Kept here, beside the list itself,
  * so the summary and the chart cannot describe the same problems differently.
  */
+/** PURE. One problem as its summary line. The structured summary entry (migrate-discharge.js) uses the same line. */
+const problemLine = (c) => `${c.display}${c.codeSystem && c.codeSystem !== "text" ? ` [${c.code}]` : ""} - ${c.verificationStatus}${c.onsetDate ? `, onset ${c.onsetDate}` : ""}`;
+
 function problemsForSummary(conditions) {
   const rows = (conditions || []).filter(Boolean);
   if (!rows.length) return null;
   const active = rows.filter((c) => c.clinicalStatus === "active");
   const closed = rows.filter((c) => c.clinicalStatus !== "active");
-  const line = (c) => `${c.display}${c.codeSystem && c.codeSystem !== "text" ? ` [${c.code}]` : ""} - ${c.verificationStatus}${c.onsetDate ? `, onset ${c.onsetDate}` : ""}`;
+  const line = problemLine;
   return [
     active.length ? `Active:\n${active.map(line).join("\n")}` : "Active: none recorded.",
     closed.length ? `Resolved or inactive:\n${closed.map(line).join("\n")}` : null,
   ].filter(Boolean).join("\n");
 }
 
-export { VERIFICATION, CLINICAL, problemIdFor, conditionFromRequest, sameProblem, recordProblem, listProblems, problemsForSummary };
+export { VERIFICATION, CLINICAL, problemIdFor, conditionFromRequest, sameProblem, recordProblem, listProblems, problemLine, problemsForSummary };
