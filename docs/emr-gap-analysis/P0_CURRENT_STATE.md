@@ -624,3 +624,13 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Regression 6552 pass, 0 fail, 1 skipped. Live admin.js 23, ward.js site78.
 **In progress:** P2.17 security scanning plus penetration test plan (Muse), P2.17 tamper-evident audit chain with database-level immutability (builder). After these, P2 is complete except R4B/R5 (deferred by docs/FHIR_STRATEGY.md) and owner items.
 
+### 2026-09-14 (evening, 2) - P2.17 security scan and tamper-evident audit trail live
+
+- Security scan (Muse, two rounds): scripts/security-scan.mjs in its own CI job. Current tree: 0 findings, 16 public-by-design values recognised by SHA-256 fingerprint, 2 dependency advisories reported as non-blocking WARN for the owner (@xmldom/xmldom GHSA-6gmq-8vp8-gcm6, brace-expansion GHSA-rgw5-rvv9-x895). docs/PENETRATION_TEST_PLAN.md written; the test itself has not been done.
+- Audit trail (p2-audit-immutable): wardsynq_audit_chain hash-links every clinical audit row in the same batch; BEFORE UPDATE/DELETE triggers on connect_audit_event and the chain table. Verification in Admin > Security review and System health. auditRetentionYears informational (India default 3 years per IMC 1.3.1). Also fixed a double-admission bed race in claimBed (2-minute in-flight window).
+- Deploy order followed: schema applied to production D1 (stewardmd-connect) BEFORE the code, after a local wrangler D1 run confirmed the triggers parse and refuse DELETE. Production now shows both tables' triggers and the chain table.
+- Post-deploy: /api/queue/ready 200. No production writes since deploy (last audit row 07:57Z), so the chain is still empty in production. Verified instead on workerd's D1 (wrangler getPlatformProxy) with the real D1Repository: writes, multi-audit batch, auditOnly and two racing writers gave "Intact: all 6 chained rows checked", and DELETE was refused. Watch: first production writes should show wardsynq_audit_chain rows equal to new audit rows.
+- Not built: anchoring the chain head outside the database (a DB-level attacker can rebuild the chain or truncate its tail), chaining the Firestore org/staff audit, retention deletion.
+- Regression 6593 pass, 0 fail, 1 skipped. Every route has a screen and a test. Live admin.js 24.
+**Remaining for P2:** exit evidence document (Muse, paused on quota until 11:47Z), then owner items only.
+
