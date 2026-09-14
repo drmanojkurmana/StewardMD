@@ -1,4 +1,4 @@
-/* wardsynq/site/i18n.js - the words AROUND a patient's record, in the patient's language. P2.7.
+/* wardsynq/site/i18n.js - the words AROUND a patient's record, in the patient's language. P2.7, D6.
  *
  * Buildless ES5, no dependency. window.WSQI18n, and module.exports for tests.
  *
@@ -13,9 +13,15 @@
  * key and never a blank. missingKeys(lang) lists them, and test/wardsynq-i18n.test.mjs prints that
  * list, so a gap is visible rather than silent.
  *
- * PLUGGABLE. register(code, name, catalog) adds a language; nothing else changes. The Hindi catalog
- * below is marked reviewed:false - it was written without a native-speaker clinical review and must
- * get one before it is relied on.
+ * ONE FILE PER LANGUAGE (D6). This file owns only the engine and the English catalog - English is
+ * the source of truth, owned by us. Every other language lives in its own wardsynq/site/i18n/<code>.js
+ * (es, te, hi, bn, kn, ta, ml), which does nothing but call register() below; portal.js loads only
+ * the visitor's chosen file (plus this one), so translators can never conflict with each other or
+ * with this file. See docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md.
+ *
+ * PLUGGABLE. register(code, nativeName, catalog, {reviewed:false}) adds a language; nothing else
+ * changes. A language registered with reviewed:false was written without a native-speaker clinical
+ * review and must get one before it is relied on.
  *
  * t() returns PLAIN TEXT. Variables are substituted as given; the caller escapes the result.
  */
@@ -194,180 +200,8 @@
     "nav.accounts": "Accounts"
   };
 
-  /* Hindi. reviewed:false - NOT yet checked by a native speaker with clinical context. */
-  var HI = {
-    "lang.label": "भाषा",
-    "lang.codedNote": "दवाओं के नाम, खुराक, जाँच के नाम, रिपोर्ट और निदान ठीक वैसे ही दिखाए जाते हैं जैसे आपकी देखभाल टीम ने दर्ज किए हैं। इनका अनुवाद नहीं किया जाता।",
-
-    "portal.title.yours": "आपका रिकॉर्ड",
-    "portal.title.proxy": "{name} का रिकॉर्ड",
-    "portal.thePatient": "मरीज़",
-    "portal.proxyNote": "आप {relationship} के रूप में, मरीज़ की सहमति से देख रहे हैं। आप केवल वही देख सकते हैं जो उन्होंने साझा करने की सहमति दी है।",
-    "portal.familyMember": "परिवार के सदस्य",
-    "section.failed": "हम आपके रिकॉर्ड का यह हिस्सा लोड नहीं कर सके। इसका मतलब यह नहीं है कि यहाँ कुछ नहीं है। बाद में फिर से कोशिश करें।",
-
-    "appt.title": "अपॉइंटमेंट",
-    "appt.tbc": "समय की पुष्टि होनी बाकी है",
-    "appt.with": "{who} के साथ",
-    "appt.empty": "कोई अपॉइंटमेंट बुक नहीं है।",
-    "appt.ask": "अपॉइंटमेंट का अनुरोध करें",
-    "appt.askNote": "इससे केवल एक अनुरोध भेजा जाता है। जब तक अस्पताल आपसे संपर्क नहीं करता, कुछ भी बुक नहीं होता।",
-    "appt.reason": "यह किस लिए है?",
-    "appt.pref": "आपके लिए सुविधाजनक दिन या समय (वैकल्पिक)",
-    "appt.send": "अनुरोध भेजें",
-    "appt.sent": "अनुरोध भेज दिया गया।",
-
-    "meds.title": "पर्चे और दवाइयाँ",
-    "meds.empty": "अभी कोई दवा सूचीबद्ध नहीं है।",
-    "results.title": "लैब और रेडियोलॉजी रिपोर्ट",
-    "results.empty": "अभी तक आपके साथ कोई रिपोर्ट साझा नहीं की गई है।",
-    "dx.title": "निदान",
-    "dx.empty": "कोई निदान सूचीबद्ध नहीं है।",
-    "allergy.title": "एलर्जी",
-    "allergy.empty": "कोई एलर्जी दर्ज नहीं है।",
-
-    "dc.title": "डिस्चार्ज सारांश और देखभाल के निर्देश",
-    "dc.stay": "अस्पताल में आपका समय",
-    "dc.meds": "दवाइयाँ",
-    "dc.care": "देखभाल के निर्देश",
-    "dc.empty": "आपके साथ कोई डिस्चार्ज सारांश साझा नहीं किया गया है।",
-
-    "bills.title": "बिल और भुगतान",
-    "bills.cancelled": "रद्द",
-    "bills.paid": "भुगतान हो गया",
-    "bills.due": "बकाया राशि {amount}",
-    "bills.summary": "कुल शुल्क {charged}, भुगतान {paid}",
-    "bills.empty": "आपका कोई बिल नहीं है।",
-
-    "consents.title": "सहमतियाँ",
-    "consents.withdraw": "यह सहमति वापस लें",
-    "consents.speak": "इसे वापस लेने के लिए अपनी देखभाल टीम से बात करें।",
-    "consents.empty": "कोई सहमति दर्ज नहीं है।",
-    "consents.confirm": "क्या आप अभी से यह सहमति वापस लेना चाहते हैं? आपकी देखभाल टीम इसे देखेगी।",
-
-    "msg.title": "आपकी देखभाल टीम को संदेश",
-    "msg.notEmergency": "यह तुरंत मदद पाने का तरीका नहीं है।",
-    "msg.label": "आपका संदेश",
-    "msg.send": "संदेश भेजें",
-    "msg.sent": "भेज दिया गया।",
-    "msg.reply": "जवाब {when}:",
-    "msg.unanswered": "अभी तक जवाब नहीं आया है।",
-    "msg.empty": "आपने अभी तक कोई संदेश नहीं भेजा है।",
-    "msg.writeFirst": "पहले संदेश लिखें।",
-
-    "phase.loading": "आपका रिकॉर्ड लोड हो रहा है...",
-    "phase.failed": "हम आपका रिकॉर्ड लोड नहीं कर सके। यह कनेक्शन या सर्वर की समस्या है, इसका मतलब यह नहीं कि रिकॉर्ड खाली है।",
-    "phase.retry": "फिर से कोशिश करें",
-    "phase.ended": "आपका सत्र समाप्त हो गया है।",
-    "phase.newCode": "नए कोड के लिए अपनी देखभाल टीम से पूछें।",
-    "phase.startAgain": "फिर से शुरू करें",
-    "signout": "साइन आउट करें",
-
-    "signin.title": "अपने रिकॉर्ड में साइन इन करें",
-    "signin.intro": "वह एक्सेस आईडी और कोड इस्तेमाल करें जो आपकी देखभाल टीम ने आपको स्वयं दिया था। कोड केवल एक बार काम करता है।",
-    "signin.hospital": "अस्पताल आईडी",
-    "signin.access": "एक्सेस आईडी",
-    "signin.code": "कोड",
-    "signin.submit": "साइन इन करें",
-    "signin.checking": "जाँच हो रही है...",
-    "signin.invalid": "यह कोड मान्य नहीं है।",
-    "signin.unreachable": "हम अस्पताल से संपर्क नहीं कर सके। अपना कनेक्शन जाँचें और फिर से कोशिश करें।",
-
-    "action.failed": "यह पूरा नहीं हुआ। कुछ भी नहीं भेजा गया।",
-    "action.failedShort": "यह पूरा नहीं हुआ।",
-
-    "status.title": "आज ओपीडी कतार में आपकी जगह",
-    "status.loading": "कतार देखी जा रही है...",
-    "status.failed": "हम आपकी कतार की स्थिति लोड नहीं कर सके। इसका मतलब यह नहीं है कि आप कतार में नहीं हैं। कृपया डेस्क पर पूछें।",
-    "status.off": "यह अस्पताल यहाँ कतार की स्थिति नहीं दिखाता। कृपया डेस्क पर पूछें।",
-    "status.ambiguous": "हम पक्का नहीं कर सकते कि कतार में कौन-सी एंट्री आपकी है, इसलिए कोई नहीं दिखाई गई। कृपया डेस्क पर पूछें।",
-    "status.empty": "आज आप ओपीडी कतार में नहीं हैं।",
-    "status.where": "कहाँ: {place}",
-    "status.desk": "रजिस्ट्रेशन डेस्क, अभी किसी कमरे में नहीं भेजा गया",
-    "status.opd": "ओपीडी",
-    "status.state.waiting": "इंतज़ार में",
-    "status.state.called": "आपको बुलाया गया है। कृपया अभी अंदर जाएँ।",
-    "status.state.in-consultation": "डॉक्टर के साथ",
-    "status.state.investigation": "जाँच के लिए गए हैं",
-    "status.state.done": "पूरा हुआ",
-    "status.state.cancelled": "रद्द",
-    "status.state.missed": "आपकी बारी निकल गई। कृपया डेस्क पर पूछें।",
-    "status.token": "आपका टोकन: {token}",
-    "status.aheadNone": "अगली बारी आपकी है",
-    "status.aheadOne": "आपसे पहले 1 व्यक्ति है",
-    "status.ahead": "आपसे पहले {n} लोग हैं",
-    "status.eta": "अनुमानित समय: {time}",
-    "status.noEta": "समय का कोई अनुमान नहीं",
-    "status.refresh": "फिर से देखें",
-
-    "docs.title": "आपकी देखभाल टीम के दस्तावेज़",
-    "docs.empty": "आपके साथ कोई दस्तावेज़ साझा नहीं किया गया है।",
-    "docs.version": "संस्करण {n}",
-    "docs.download": "डाउनलोड करें",
-    "docs.downloading": "डाउनलोड हो रहा है...",
-    "docs.failed": "यह दस्तावेज़ डाउनलोड नहीं हो सका। बाद में फिर से कोशिश करें।",
-    "docs.withdrawn": "अस्पताल ने एक दस्तावेज़ वापस ले लिया है।",
-    "docs.unavailable": "एक दस्तावेज़ अब उपलब्ध नहीं है।",
-    "docs.type.consent": "सहमति पत्र",
-    "docs.type.referral-letter": "रेफ़रल पत्र",
-    "docs.type.outside-report": "दूसरे अस्पताल की रिपोर्ट",
-    "docs.type.outside-imaging": "दूसरे अस्पताल का स्कैन",
-    "docs.type.id-proof": "पहचान पत्र",
-    "docs.type.insurance": "बीमा",
-    "docs.type.prescription-outside": "दूसरे डॉक्टर का पर्चा",
-    "docs.type.other": "अन्य दस्तावेज़",
-
-    "dc.full": "पूरा डिस्चार्ज सारांश",
-    "dc.print": "यह सारांश प्रिंट करें",
-    "dc.withheld": "जब तक आपकी देखभाल टीम आपसे इस पर बात नहीं करती, इसे रोका गया है।",
-    "dc.section.admission": "अस्पताल में आपका समय",
-    "dc.section.diagnoses": "निदान",
-    "dc.section.allergies": "एलर्जी",
-    "dc.section.vitals": "जाँच के माप",
-    "dc.section.investigations": "जाँचें",
-    "dc.section.medications": "अस्पताल में दी गई दवाइयाँ",
-    "dc.section.homeMedicines": "भर्ती से पहले की दवाइयाँ",
-    "dc.section.assessment": "डॉक्टर का आकलन",
-    "dc.section.plan": "देखभाल की योजना",
-
-    "pcopy.noAllergies": "आपके लिए कोई एलर्जी दर्ज नहीं है। अगर आपको किसी एलर्जी के बारे में पता है तो अपनी देखभाल टीम को बताएँ।",
-    "pcopy.dx": "आपके निदान",
-    "pcopy.dxEmpty": "कोई निदान दर्ज नहीं है।",
-    "pcopy.meds": "आपकी दवाइयाँ",
-    "pcopy.medsEmpty": "कोई दवा दर्ज नहीं है।",
-    "pcopy.results": "आपकी रिपोर्ट",
-    "pcopy.resultsEmpty": "अभी आपको देने के लिए कोई रिपोर्ट तैयार नहीं है।",
-    "pcopy.withheld": "यहाँ शामिल नहीं है",
-    "pcopy.appts": "अगले अपॉइंटमेंट",
-    "pcopy.apptsEmpty": "कोई अपॉइंटमेंट बुक नहीं है।",
-    "pcopy.print": "प्रिंट करें",
-
-    "nav.map": "मैप",
-    "nav.workstation": "वर्कस्टेशन",
-    "nav.ward": "वार्ड",
-    "nav.beds": "बेड बोर्ड",
-    "nav.emergency": "इमरजेंसी",
-    "nav.criticals": "क्रिटिकल रिपोर्ट",
-    "nav.lab": "लैब",
-    "nav.radiology": "रेडियोलॉजी",
-    "nav.opd": "ओपीडी डेस्क",
-    "nav.patients": "मरीज़",
-    "nav.command": "कमांड",
-    "nav.commandCenter": "कमांड सेंटर",
-    "nav.twin": "डिजिटल ट्विन",
-    "nav.reports": "रिपोर्ट",
-    "nav.billing": "बिलिंग",
-    "nav.integration": "इंटीग्रेशन",
-    "nav.administration": "प्रशासन",
-    "nav.adminCenter": "एडमिन सेंटर",
-    "nav.audit": "ऑडिट और सुरक्षा",
-    "nav.security": "साइन-इन सुरक्षा",
-    "nav.rota": "स्टाफ रोस्टर",
-    "nav.accounts": "अकाउंट"
-  };
-
-  var CATALOGS = { en: EN, hi: HI };
-  var LANGS = [{ code: "en", name: "English", reviewed: true }, { code: "hi", name: "हिन्दी", reviewed: false }];
+  var CATALOGS = { en: EN };
+  var LANGS = [{ code: "en", name: "English", reviewed: true }];
   var has = function (o, k) { return Object.prototype.hasOwnProperty.call(o, k); };
 
   /** A supported language code, or "en". */
@@ -387,12 +221,14 @@
     return Object.keys(EN).filter(function (k) { return !has(cat, k); }).sort();
   }
 
-  /** Adds or replaces a language. Keys not in English are ignored by t(), so a typo cannot hide. */
-  function register(code, name, catalog, reviewed) {
+  /** Adds or replaces a language. Keys not in English are ignored by t(), so a typo cannot hide.
+   *  opts is {reviewed:false} (a bare boolean is accepted too, for old callers). */
+  function register(code, name, catalog, opts) {
     var c = String(code || "").toLowerCase();
     if (!/^[a-z]{2,3}$/.test(c) || !catalog || typeof catalog !== "object") return false;
+    var reviewed = opts && typeof opts === "object" ? opts.reviewed === true : opts === true;
     CATALOGS[c] = catalog;
-    LANGS = LANGS.filter(function (l) { return l.code !== c; }).concat([{ code: c, name: String(name || c), reviewed: reviewed === true }]);
+    LANGS = LANGS.filter(function (l) { return l.code !== c; }).concat([{ code: c, name: String(name || c), reviewed: reviewed }]);
     return true;
   }
 
