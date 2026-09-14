@@ -5481,3 +5481,41 @@ screen: Digital twin -> "Trends" (`ward.js` trendsView). Tests: `test/wardsynq-t
 - Not built: department-level event lists (the drill goes metric -> bucket -> ward -> records), per-transfer
   ward attribution, historical bed counts, and a precomputed cache for very large hospitals (add a snapshot
   only if the cap is routinely hit).
+## 2026-09-14 Webhooks (P2.13): thin notifications, staged in the clinical write, delivered through the outbox
+
+`functions/_wardsynq/webhook-events.js` (what a write is), `functions/_wardsynq/webhooks.js` (admin routes,
+fan-out, delivery), routes `/api/queue/ward/webhooks|webhook|webhook-update|webhook-rotate|webhook-test|webhook-deliveries`,
+Admin Center tab "Integrations" (Webhooks card). Test: `test/wardsynq-webhooks.test.mjs`.
+- ONE CHOKE POINT, NOT ONE HOOK PER ROUTE. Every RecordService write reaches the repository through
+  `TenantBackend.write()` in service.js, so events are recognised there by comparing each record with its
+  previous version (admitted, transferred, discharged on admission-class Encounters; order.placed on a
+  MedicationOrder/ServiceRequest becoming active; result.released on a DiagnosticReport status change or
+  correction; critical-result.raised on a new CriticalResultLoop). The outbox row goes in the SAME append,
+  before the records (the idempotency key binds to the last record). A failed or refused write emits
+  nothing, and ADT/FHIR feeds emit exactly as the ward routes do. A hospital with no subscribed endpoint
+  stages nothing; if the endpoint list cannot be read the event is staged anyway and fan-out decides.
+- NO PHI, INCLUDING IN IDS. Canonical ids embed an MRN, an admission time or a test code
+  (`wsq-adm-<mrn>-<time>`), so the payload carries `hashedId()` of the id, never the id. Its alias is written
+  in the same append (new optional `ctx.aliases` on the repository port, Memory and D1) so the FHIR door
+  resolves it for a receiver with its own SMART token. Body: id, type, occurredAt, hospital, resource
+  {resourceType, id}, and a note. Residual: SHA-256 of a structured id is pseudonymous, not anonymous.
+- FAN-OUT, THEN ONE OUTBOX EVENT PER ENDPOINT, so each endpoint retries on the outbox backoff and dies
+  after `MAX_ATTEMPTS` without holding the others back. fhir-outbound.js was not reused: it is a queue of
+  whole FHIR resources (PHI) with its own backoff, the opposite of a thin notification.
+- ADDRESSES. https, no userinfo or local names, and no private/loopback/link-local/CGNAT/metadata/
+  documentation/benchmark/multicast address, including IPv4-mapped, NAT64, 6to4 and Teredo forms. A name is
+  resolved (DNS-over-HTTPS, injectable) and EVERY address must be public, at registration, re-enable and
+  before every send. No redirect followed, 5 s timeout. Residual: the runtime's fetch resolves again, so a
+  resolver changing its answer within milliseconds is not closed (no socket pinning in this runtime).
+- SECRET: 32 random bytes, returned only by register and rotate, AES-GCM under the document key; no key,
+  no webhook. Signature `X-WardSynQ-Signature: v1=hex(HMAC-SHA256(secret, "<timestamp>.<body>"))`, with
+  `X-WardSynQ-Timestamp` and `X-WardSynQ-Event-Id`. Rotation has no overlap window (not built).
+- AUTHORITY: staff.admin at the route plus a clinical actor that may write the record, the outbound
+  destinations' gate, so hr is refused. Register, update, enable, disable, rotate, test and auto-disable are
+  audited in the append that makes the change.
+- LOG AND AUTO-DISABLE: one row per attempt (status, attempt, response code, our own reason word; never a
+  response body) plus the endpoint's failure streak in the same append. 10 failures in a row spanning 30
+  minutes turns the endpoint off as `auto-disabled`, audited, shown on the screen; re-enable clears it.
+- OUTBOX FIX FOUND ON THE WAY: `latestByType` returns the OLDEST rows, so drainOutbox never saw a new event
+  once 200 settled ones existed. Webhook volume would hit that in a day. `latestByType(..., { newest: true })`
+  now serves drain and health. Still a scan with a ceiling; a status index is the upgrade.

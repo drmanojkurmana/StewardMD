@@ -34,6 +34,7 @@ import { GovernedStore, GovernanceError, canRead } from "../../wardsynq/wardsynq
 import { VersionConflictError, assertRepository } from "./repository.js";
 import { patientIdentifierKeys } from "./identity-key.js";
 import { actorFromConnectRole, aiActorFor, isAiOrigin } from "./actor.js";
+import { stageWebhookEvents } from "./webhook-events.js";
 
 /** The canonical resource types. Mirrors wardsynq-model.js; a type not listed here is refused. */
 const RESOURCE_TYPES = Object.freeze([
@@ -508,7 +509,12 @@ class TenantBackend {
   async write(records) {
     const ctx = this._ctx || {};
     this._ctx = null;
-    return this.repository.append(this.tenantId, records, { idempotencyKey: ctx.idempotencyKey || null, audit: ctx.audit || null });
+    /* P2.13: every record write passes here, so this is where a webhook event is staged - in the same
+     * append, so it exists exactly when the write does (webhook-events.js). Events go FIRST: the
+     * idempotency key binds to the last record, which must stay the clinical one. */
+    const hooks = await stageWebhookEvents(this.repository, this.tenantId, records, this);
+    return this.repository.append(this.tenantId, [...hooks.events, ...records], {
+      idempotencyKey: ctx.idempotencyKey || null, audit: ctx.audit || null, ...(hooks.aliases.length ? { aliases: hooks.aliases } : {}) });
   }
 }
 

@@ -14,7 +14,9 @@
  * and that consumer runs again. Consumers must therefore be idempotent on the event id.
  *
  * The type is internal (underscore-prefixed, like the bed claim): never served through the record API.
- * ponytail: drains the newest `limit` events per call; add a status index if a backlog ever outgrows it.
+ * ponytail: drains the newest `limit` events per call (by last write; until P2.13 the repository handed back
+ * the OLDEST, so a hospital past 200 settled events never saw a new one). An event still waiting behind
+ * more than `limit` newer ones is not seen until they thin out; add a status index if a backlog outgrows it.
  */
 
 import { VersionConflictError } from "./repository.js";
@@ -49,7 +51,7 @@ async function stageEvent(staged, tenantId, topic, payload) {
 async function drainOutbox(repository, tenantId, consumers, opts) {
   const o = opts || {};
   const nowMs = o.now ? o.now() : Date.now();
-  const rows = await repository.latestByType(tenantId, TYPE, o.limit || 200);
+  const rows = await repository.latestByType(tenantId, TYPE, o.limit || 200, { newest: true });
   // A claim older than ten minutes belongs to a worker that died; the event is taken over, not stranded.
   const stale = (e) => e.status === "running" && Date.parse(e.claimedAt) + 10 * 60 * 1000 <= nowMs;
   const due = rows.filter((e) => ((e.status === "pending" || e.status === "retry") && Date.parse(e.nextAttemptAt) <= nowMs) || stale(e))
@@ -83,7 +85,7 @@ async function drainOutbox(repository, tenantId, consumers, opts) {
 
 /** Events that need a person: dead ones, and how many are still waiting. Never "all clear" on a partial read. */
 async function outboxHealth(repository, tenantId, limit) {
-  const rows = await repository.latestByType(tenantId, TYPE, limit || 500);
+  const rows = await repository.latestByType(tenantId, TYPE, limit || 500, { newest: true });
   const waiting = rows.filter((e) => e.status === "pending" || e.status === "retry" || e.status === "running");
   return {
     pending: waiting.length,

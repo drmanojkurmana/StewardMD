@@ -132,13 +132,13 @@ class D1Repository {
     return (r.results || []).map(parseBody);
   }
 
-  async latestByType(tenantId, resourceType, limit) {
+  async latestByType(tenantId, resourceType, limit, opts) {
     const max = rosterLimit(limit);
     const r = await this.db
       .prepare(
         "SELECT r.body FROM wardsynq_record r " +
         "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
-        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? ORDER BY r.seq ASC LIMIT ?"
+        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? ORDER BY r.seq " + (opts && opts.newest ? "DESC" : "ASC") + " LIMIT ?"
       )
       .bind(tenantId, resourceType, tenantId, resourceType, max).all();
     return (r.results || []).map(parseBody);
@@ -342,12 +342,12 @@ class D1Repository {
     /* The published-id alias, for the ids FHIR cannot carry verbatim. OR IGNORE because the hash is
      * a function of the id: a second row for one hash would mean a SHA-256 collision, not a claim,
      * and it must never fail a clinical write. */
-    for (const rec of records) {
-      const alias = aliasFor(rec);
-      if (!alias) continue;
+    const aliases = records.map((rec) => ({ hash: aliasFor(rec), resourceType: rec.resourceType, id: rec.id })).filter((a) => a.hash)
+      .concat(Array.isArray(ctx.aliases) ? ctx.aliases : []);
+    for (const a of aliases) {
       stmts.push(this.db
         .prepare("INSERT OR IGNORE INTO wardsynq_id_alias (tenant_id,id_hash,resource_type,id,first_seen) VALUES (?,?,?,?,?)")
-        .bind(tenantId, alias, rec.resourceType, rec.id, new Date().toISOString()));
+        .bind(tenantId, a.hash, a.resourceType, a.id, new Date().toISOString()));
     }
 
     /* THE IDENTITY INDEX. One indexed read for everything being claimed, then an insert per key
