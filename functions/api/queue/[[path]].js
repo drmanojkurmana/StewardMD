@@ -201,7 +201,7 @@ import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty 
 import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 // S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
-import { notifyDepsFor, directoryFromEnv, smsSetup } from "../../_wardsynq/alert-deps.js";
+import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders } from "../../_wardsynq/alert-deps.js";
 import { alertDeliveryStatus } from "../../_wardsynq/push-alerts.js";
 import { KIND, logEvent } from "../../_wardsynq/observability.js";
 import { explainOrderSafety } from "../../_wardsynq/maik-cds.js";
@@ -3562,7 +3562,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "alert-status" && method === "GET") {
-        const r = await alertDeliveryStatus({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, wsqCfg, actorId: actor.id, smsMissing: smsSetup(env, wOrg).missing });
+        const r = await alertDeliveryStatus({ repository: deps.recordDeps.repository, tenantId: mig.tenantId, wsqCfg, actorId: actor.id, smsMissing: smsSetup(env, wOrg).missing, orgId: wOrg.id, directory: directoryFromEnv(env), readers: staffReaders(env, wOrg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "acknowledge" && method === "POST") {

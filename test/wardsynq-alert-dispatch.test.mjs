@@ -232,3 +232,27 @@ test("O4 SMS not configured: recorded on the notice and named exactly on the Adm
   assert.ok(st.failures.some((f) => f.sms && f.reason === "SMS_NOT_CONFIGURED"));
   assert.equal(st.levels.approval.decision, "O5", "the defaults carry the owner's sign-off");
 });
+
+test("GET /api/queue/ward/alert-status: phones are read from the device registrations of everyone on duty and every named contact; a failed read says so", async () => {
+  seedHospital({ ...ON, criticalEscalation: { levels: { escalate: { contacts: ["cmo-contact"] } } } });
+  await registerDevice(DOCTOR, "d".repeat(64));
+  const st = await as(ADMIN, "/ward/alert-status?orgId=" + ORG);
+  assert.equal(st.__status, 200, JSON.stringify(st));
+  assert.equal(st.phones.ok, true, JSON.stringify(st.phones));
+  assert.deepEqual(st.phones.noDevice.map((p) => [p.identity, p.why, p.role]).sort(), [
+    [idFor(NURSE), "on duty", "nurse"], [idFor(SUPERVISOR), "on duty", "supervisor"], ["cmo-contact", "named contact", null],
+  ].sort(), "no alert has been sent, yet the people the ladder would tell without a phone are listed");
+  assert.equal(st.phones.checked, 4, "doctor, nurse, supervisor on duty and the contact; the off-duty nurse and the lab are not on the ladder now");
+  assert.deepEqual(st.noDevice, [], "the per-alert list is still only what alerts recorded");
+
+  const get = KV.current.get;
+  KV.current.get = async (k, t) => { if (String(k).startsWith("push:who:")) throw new Error("kv down"); return get(k, t); };
+  try {
+    const down = await as(ADMIN, "/ward/alert-status?orgId=" + ORG);
+    assert.equal(down.__status, 200);
+    assert.equal(down.phones.ok, false, "a failed read is a failure, never an empty list");
+    assert.equal(down.phones.noDevice, undefined);
+  } finally { KV.current.get = get; }
+  assert.equal((await as(null, "/ward/alert-status?orgId=" + ORG)).__status, 401);
+  assert.equal((await as(NURSE, "/ward/alert-status?orgId=" + ORG)).__status, 403, "still staff.admin only");
+});

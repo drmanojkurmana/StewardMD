@@ -6039,6 +6039,12 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   BEFORE the call and removed only on `ok`, so a refusal, network failure, missing account or a reload that cuts
   the call off stays recorded; the next launch says once that the phone may still receive the alerts. Not
   covered: account deletion (home.js), and hospitals other than the workplace that the account bound earlier.
+- **"No phone registered" is read from the DeviceDirectory now**: `GET /ward/alert-status` returns `phones`
+  (`phoneCoverage` in push-alerts.js, readers `staffReaders` in alert-deps.js): every active member on duty
+  now in any ward whose role is on some level, plus every named contact, each checked with `devicesFor`.
+  `{ok:false}` on any failed read (store, rota, members), shown on the Admin card as "could not be read. Do not
+  read this as everyone having one". The per-alert `noDevice` stays, relabelled as alerts already sent. Checks
+  the membership identity the rota uses; a contact typed as an email is checked under that email.
 
 ## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
 - Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed

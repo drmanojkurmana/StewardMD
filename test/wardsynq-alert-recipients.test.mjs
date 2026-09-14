@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import { resolveRecipients, levelsFor, nextLevel, DEFAULT_LEVELS } from "../functions/_wardsynq/alert-recipients.js";
 import { deviceDirectory } from "../functions/_wardsynq/device-directory.js";
-import { smsFallbackDue, levelWindowMinutes } from "../functions/_wardsynq/push-alerts.js";
+import { smsFallbackDue, levelWindowMinutes, phoneCoverage } from "../functions/_wardsynq/push-alerts.js";
 import { alertMobileOf, membership } from "../functions/_opd_org.js";
 
 const records = {
@@ -141,4 +141,38 @@ test("critical results board (GET /ward/criticals on ward.js): a push to nobody 
   assert.match(pushed, /sent to 2 phone\(s\), not yet confirmed/);
   assert.doesNotMatch(pushed, /nobody was notified|did not reach anyone/);
   assert.doesNotMatch(board({ notifications: [{ nid: "a", level: "due", reason: "NO_DEVICE", sms: { sent: 1 } }] }), /did not reach anyone/, "an SMS that went out told somebody");
+});
+
+test("phoneCoverage: on-duty members with a ladder role and named contacts, checked against the directory; any failed read is ok:false", async () => {
+  const kv = new Map();
+  const dir = deviceDirectory({ get: async (k) => kv.get(k) || null, put: async (k, v) => { kv.set(k, v); }, delete: async (k) => { kv.delete(k); } });
+  await dir.bind("o", ["dr-duty"], "tok1");
+  const rs = { members: async () => members, onDuty: async (unit) => ({ onDuty: unit === "" ? ["dr-duty", "nurse", "gone", "lab"].map((identity) => ({ identity })) : [] }) };
+  const levels = levelsFor({ levels: { escalate: { contacts: ["cmo"] } } });
+  const r = await phoneCoverage({ orgId: "o", directory: dir, readers: rs }, levels);
+  assert.deepEqual(r, { ok: true, checked: 3, partial: false, noDevice: [{ identity: "nurse", role: "nurse", why: "on duty" }, { identity: "cmo", role: null, why: "named contact" }] });
+  const broken = { ...dir, devicesFor: async () => { throw new Error("store down"); } };
+  assert.equal((await phoneCoverage({ orgId: "o", directory: broken, readers: rs }, levels)).ok, false);
+  assert.equal((await phoneCoverage({ orgId: "o", directory: dir, readers: { ...rs, onDuty: async () => { throw new Error("rota"); } } }, levels)).ok, false);
+  assert.equal((await phoneCoverage({ orgId: "o", directory: null, readers: rs }, levels)).ok, false, "no store is not everyone having a phone");
+});
+
+test("Admin card: phones now, from the registrations; a failed read is never shown as everyone having one", () => {
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+  const sb = { window: { WSQ: { page() {} } } };
+  sb.WSQ = sb.window.WSQ;
+  vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
+  const C = sb.window.WSQ._alertCard;
+  const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true } };
+  const some = C.html(esc, { ...base, phones: { ok: true, checked: 3, noDevice: [{ identity: "nurse7", role: "nurse", why: "on duty" }, { identity: "cmo@h.in", role: null, why: "named contact" }] } });
+  assert.match(some, /No phone registered for alerts \(2 of 3\)/);
+  assert.match(some, /nurse7 \(on duty, nurse\)/);
+  assert.match(some, /cmo@h.in \(named contact\)/);
+  assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 3, noDevice: [] } }), /All 3 people on duty/);
+  for (const p of [{ ok: false, error: "read_failed" }, undefined]) {
+    const h = C.html(esc, { ...base, phones: p });
+    assert.match(h, /could not be read/);
+    assert.doesNotMatch(h, /have a phone registered\./);
+  }
+  assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
 });

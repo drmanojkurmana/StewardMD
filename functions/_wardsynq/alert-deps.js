@@ -40,6 +40,17 @@ function smsSetup(env, org) {
   return make ? make(env, c) : { missing: [`SMS provider "${provider}" is not supported. Supported: ${Object.keys(SMS_ADAPTERS).join(", ")}.`], send: null };
 }
 
+/** The hospital's staff and rota, as the recipient and phone-coverage readers use them. Members are read once. */
+function staffReaders(env, org) {
+  const cfg = org.wardsynq || {};
+  const offset = cfg.utcOffsetMinutes != null ? cfg.utcOffsetMinutes : 330;
+  let members = null;
+  return {
+    members: async () => (members = members || await ORG.listMembers(env, org.id)),
+    onDuty: (unit) => ROSTER.onDuty(env, org.id, unit || "", offset),
+  };
+}
+
 /** { channels: { mobile } } for a hospital that turned alerts on, else {}. */
 function notifyDepsFor(env, org, tenantId, repository) {
   if (!alertsEnabled(org)) return {};
@@ -47,13 +58,7 @@ function notifyDepsFor(env, org, tenantId, repository) {
   // Turned on with no store to find a phone in: no channel is the honest answer, recorded as NO_CHANNEL.
   if (!directory) return {};
   const cfg = org.wardsynq || {};
-  const offset = cfg.utcOffsetMinutes != null ? cfg.utcOffsetMinutes : 330;
-  let members = null;
-  const readers = {
-    latest: (type, id) => repository.latest(String(tenantId), type, id),
-    members: async () => (members = members || await ORG.listMembers(env, org.id)),
-    onDuty: (unit) => ROSTER.onDuty(env, org.id, unit || "", offset),
-  };
+  const readers = { ...staffReaders(env, org), latest: (type, id) => repository.latest(String(tenantId), type, id) };
   const sendToTokens = async (ids, msg) => sendNativeToTokens(env, await nativeTokensById(env, ids), msg);
   return {
     channels: { mobile: serverPushChannel({ orgId: org.id, tenantId: String(tenantId), policy: cfg.criticalEscalation || null, readers, directory, sendToTokens }) },
@@ -61,4 +66,4 @@ function notifyDepsFor(env, org, tenantId, repository) {
   };
 }
 
-export { alertsEnabled, directoryFromEnv, smsSetup, notifyDepsFor };
+export { alertsEnabled, directoryFromEnv, smsSetup, staffReaders, notifyDepsFor };
