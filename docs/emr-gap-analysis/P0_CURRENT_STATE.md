@@ -702,3 +702,10 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Reaches phones only after build-www, cap sync and OTA or native rebuild; then per device flag plus wardsynq.alerts.push.enabled per hospital.
 - Follow-ups: notice detail route should take the workplace orgId and 404 before reading; queue.js and discharge.js still choose credentials the old way; account sign-out does not unbind; Admin no-phone list is per sent alert, not live registrations.
 - Regression 6848, 0 fail; headless alert screen all pass. Every route has a screen and a test. Security scan 0 findings. Live ward.js site85.
+
+### 2026-09-14 (night, 9) - G2 offline bedside writes, G7 trends history, G8 webhook edit and log
+
+- G2: vitals, nursing task done, notes, dose steps, ICU records and fluid entries are kept on the device when offline, shown as "saved on this device, not yet sent: it is NOT in the record"; after reconnect a conflict or changed order opens a review (resend with reason, edit, discard), each choice audited via POST /ward/offline-resolve before the device acts. /ward/mar refuses order_changed when the order version moved (also for online rounds loaded before a change). ward-offline.js now loads in the app and the site.
+- G7: length of stay by ward segment from encounter versions; past bed occupancy by the ward the patient was on and bed history; unknown shown as unknown with a reason, never zero. Beds registered before today counted from their creation time.
+- G8: Integrations: change a webhook address (same checks, secret unchanged, audited host only) and a per-webhook delivery log, paged.
+- Headless: offline conflict, alert screen and ward golden path pass on the merged code. Regression 6868, 0 fail (also after merging main). Every route has a screen and a test. Security scan 0 findings. Live ward.js site87, admin.js 33, shell.js 38.
