@@ -670,7 +670,7 @@
    * A group sees counts only, never a patient. An invitation alone does not make a hospital a member. */
   // The only actions each half sends to /group/<action>; anything else sends nothing.
   var GROUP_SIDE_ROUTE = { accept: "accept", decline: "decline", remove: "remove", adopt: "adopt" };
-  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy" };
+  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy", adminAdd: "admin-add", adminRemove: "admin-remove" };
   function groupSideHtml(c, r) {
     var esc = c.esc;
     var h = '<div class="card"><h2>This hospital\'s groups</h2>';
@@ -697,8 +697,19 @@
     if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ".</div></div>";
     h += r.groups.length ? r.groups.map(function (g) {
       var id = esc(g.id);
+      /* Who runs this group beside you. The server names opaque account ids, not emails, so they
+       * read as-is; removing is per admin, and the last one has no button because the server
+       * refuses to leave a group with nobody able to run it. */
+      var admins = Array.isArray(g.adminUids) ? g.adminUids : [];
+      var adminHtml = "<p>Administrators:</p><ul>" + admins.map(function (u) {
+        return '<li><span class="mono">' + esc(u) + "</span>" + (admins.length > 1 ?
+          ' <button type="button" class="btn quiet" data-grp-run="adminRemove" data-grp="' + id + '" data-uid="' + esc(u) + '">Remove</button>' : "") + "</li>";
+      }).join("") + "</ul>" +
+        '<div class="row"><label class="f"><span>Add administrator (their StewardMD account email)</span><input type="email" data-grp-adminadd-input="' + id + '"></label>' +
+        '<button type="button" class="btn" data-grp-run="adminAdd" data-grp="' + id + '">Add administrator</button></div>';
       return "<h3>" + esc(g.name) + "</h3>" +
         '<p><button type="button" class="btn ghost" data-go="group/' + id + '">Open group overview</button></p>' +
+        adminHtml +
         (g.members.length ? "<p>Members:</p><ul>" + g.members.map(function (m) {
           return "<li>" + esc(m.name || m.orgId) + ' <span class="mono">' + esc(m.orgId) + '</span> <button type="button" class="btn quiet" data-grp-run="remove" data-grp="' + id + '" data-org="' + esc(m.orgId) + '">Remove</button></li>';
         }).join("") + "</ul>" : '<p class="quiet">No member hospitals yet.</p>') +
@@ -765,11 +776,17 @@
           } else if (act === "policy") {
             var raw = (box.querySelector('[data-grp-policy-input="' + gid + '"]').value || "").trim();
             try { payload.policy = raw ? JSON.parse(raw) : null; } catch (e) { say("grpRunMsg", { message: "That is not valid JSON, so nothing was published." }); return; }
+          } else if (act === "adminAdd") {
+            payload.email = (box.querySelector('[data-grp-adminadd-input="' + gid + '"]').value || "").trim();
+            if (!payload.email) { say("grpRunMsg", { message: "Enter the administrator's StewardMD account email." }); return; }
+          } else if (act === "adminRemove") {
+            payload.uid = b.getAttribute("data-uid");
+            if (!window.confirm("Remove this administrator from the group? They stop seeing it at once.")) return;
           }
           b.disabled = true;
           c.api("/group/" + GROUP_RUN_ROUTE[act], payload).then(function (x) {
             if (!x || !x.ok) { b.disabled = false; say("grpRunMsg", x); return; }
-            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published." }[act]);
+            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published.", adminAdd: "Administrator added.", adminRemove: "Administrator removed." }[act]);
             WSQ.render("admin");
           });
         };

@@ -7,7 +7,7 @@
  *
  * Routes: GET /group/my-groups, POST /group/create, POST /group/invite, POST /group/accept,
  * POST /group/decline, POST /group/remove, POST /group/policy, GET /group/overview,
- * GET /group/memberships, POST /group/adopt.
+ * GET /group/memberships, POST /group/adopt, POST /group/admin-add, POST /group/admin-remove.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-hospital-group.test.mjs
  */
@@ -89,6 +89,25 @@ mock.module("../functions/_wardsynq/deps.js", {
   },
 });
 
+/* The Firebase directory behind POST /group/admin-add. Test accounts resolve to the same id
+ * identify() derives for them (idFor below); any other email is unknown, which is the 404 path.
+ * The claim dummies keep _entitlement.js (which shares this module) behaving as it does today,
+ * when the real directory throws for lack of a service account and every caller falls back. */
+const KNOWN_ACCOUNTS = new Set(["groupadmin@example.test", "othergroup@example.test", "coadmin@example.test",
+  "owner-b@example.test", "doctor-b@example.test", "nurse-b@example.test", "owner-n@example.test", "owner-c@example.test"]);
+mock.module("../functions/_fbadmin.js", {
+  namedExports: {
+    lookupUidByEmail: async (_e, email) => {
+      const norm = String(email || "").trim().toLowerCase();
+      if (!KNOWN_ACCOUNTS.has(norm)) return null;
+      return { uid: idFor(norm), email: norm, name: "" };
+    },
+    lookupUserByUid: async () => null,
+    getUserClaims: async () => ({}),
+    mergeUserClaims: async () => ({}),
+  },
+});
+
 const { onRequest } = await import("../functions/api/queue/[[path]].js");
 const RECORD_DOOR = await import("../functions/api/wardsynq/[[path]].js");
 const { projectCounts, hospitalCounts } = await import("../functions/_wardsynq/hospital-group.js");
@@ -98,7 +117,7 @@ const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
 const ENV = { QUEUE_ENABLED: "1", WARDSYNQ_RECORD: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac", FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url"), CONNECT_DB: tenantDb };
 
-const GADMIN = "groupadmin@example.test", OTHER_GADMIN = "othergroup@example.test";
+const GADMIN = "groupadmin@example.test", OTHER_GADMIN = "othergroup@example.test", COADMIN = "coadmin@example.test";
 const OWNER_B = "owner-b@example.test", DOC_B = "doctor-b@example.test", NURSE_B = "nurse-b@example.test";
 const OWNER_N = "owner-n@example.test", OWNER_C = "owner-c@example.test";
 
@@ -332,6 +351,111 @@ test("a membership change whose commit fails reports failure and writes neither 
   assert.equal(docs.size, before);
 });
 
+test("a second admin can be added by email, sees the group and can open it; re-adding is a no-op", async () => {
+  seed();
+  const g = (await call(GADMIN, "/group/create", "POST", { name: "Northern Hospitals" })).group;
+  assert.deepEqual((await call(GADMIN, "/group/my-groups")).groups[0].adminUids, [idFor(GADMIN)]);
+  const adminRow = [...docs.keys()].find((k) => k.startsWith("q_group_admins/"));
+  assert.ok(adminRow, "create writes the by-admin index row");
+
+  // Unknown account, missing email, wrong method: refused, nothing written.
+  const before = docs.size;
+  assert.equal((await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id, email: "stranger@example.test" })).__status, 404);
+  assert.equal((await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id, email: "stranger@example.test" })).error, "account_not_found");
+  assert.equal((await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id })).__status, 422);
+  assert.equal((await call(GADMIN, "/group/admin-add")).__status, 404);
+  assert.equal((await call(GADMIN, "/group/admin-add", "POST", { groupId: "no-such-group", email: COADMIN })).__status, 403);
+  assert.equal(docs.size, before);
+
+  const added = await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id, email: COADMIN });
+  assert.equal(added.__status, 200, JSON.stringify(added));
+  assert.deepEqual([...added.group.adminUids].sort(), [idFor(COADMIN), idFor(GADMIN)].sort());
+  assert.equal(events("group:" + g.id, "group:admin_add").length, 1);
+
+  // Re-adding is a no-op 200: same admins, no second audit row.
+  const again = await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id, email: COADMIN });
+  assert.equal(again.__status, 200);
+  assert.equal(again.group.adminUids.length, 2);
+  assert.equal(events("group:" + g.id, "group:admin_add").length, 1);
+
+  // The co-admin lists the group (via the index, not the creator fallback) and opens the overview.
+  const mine = await call(COADMIN, "/group/my-groups");
+  assert.deepEqual(mine.groups.map((x) => x.name), ["Northern Hospitals"]);
+  assert.deepEqual([...mine.groups[0].adminUids].sort(), [idFor(COADMIN), idFor(GADMIN)].sort());
+  assert.equal((await call(COADMIN, `/group/overview?groupId=${g.id}`)).__status, 200);
+});
+
+test("a non-admin, or another group's admin, gets 403 on admin-add and admin-remove, and nothing is written", async () => {
+  seed();
+  const g = await groupWithMembers([["org-b", OWNER_B]]);
+  await call(OTHER_GADMIN, "/group/create", "POST", { name: "Elsewhere" });
+  assert.equal((await call(null, "/group/admin-add", "POST", { groupId: g.id, email: COADMIN })).__status, 401);
+  assert.equal((await call(null, "/group/admin-remove", "POST", { groupId: g.id, uid: idFor(GADMIN) })).__status, 401);
+  const before = docs.size;
+  for (const who of [NURSE_B, DOC_B, OWNER_B, OTHER_GADMIN]) {
+    const a = await call(who, "/group/admin-add", "POST", { groupId: g.id, email: COADMIN });
+    assert.equal(a.__status, 403, who + " " + JSON.stringify(a));
+    assert.equal(a.error, "not_group_admin");
+    const r = await call(who, "/group/admin-remove", "POST", { groupId: g.id, uid: idFor(GADMIN) });
+    assert.equal(r.__status, 403, who + " " + JSON.stringify(r));
+  }
+  assert.equal((await call(GADMIN, "/group/admin-remove", "POST", { groupId: g.id })).__status, 422);
+  assert.equal(docs.size, before);
+  assert.deepEqual((await call(GADMIN, "/group/my-groups")).groups[0].adminUids, [idFor(GADMIN)]);
+  assert.equal(events("group:" + g.id, "group:admin_add").length, 0);
+  assert.equal(events("group:" + g.id, "group:admin_remove").length, 0);
+  assert.equal(linkState(g.id, "org-b"), "member");
+});
+
+test("the last admin cannot be removed; a removed co-admin loses the group; self-removal works while another remains", async () => {
+  seed();
+  const g = (await call(GADMIN, "/group/create", "POST", { name: "Northern Hospitals" })).group;
+  assert.equal((await call(GADMIN, "/group/admin-remove", "POST", { groupId: g.id, uid: idFor(GADMIN) })).error, "last_admin");
+  assert.equal((await call(GADMIN, "/group/admin-remove", "POST", { groupId: g.id, uid: idFor(GADMIN) })).__status, 409);
+  assert.deepEqual((await call(GADMIN, "/group/my-groups")).groups[0].adminUids, [idFor(GADMIN)]);
+
+  assert.equal((await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id, email: COADMIN })).__status, 200);
+  assert.equal((await call(GADMIN, "/group/admin-remove", "POST", { groupId: g.id, uid: "cfa:never-an-admin" })).__status, 404);
+
+  // The creator removes themself while the co-admin remains: allowed, and audited.
+  const selfOut = await call(GADMIN, "/group/admin-remove", "POST", { groupId: g.id, uid: idFor(GADMIN) });
+  assert.equal(selfOut.__status, 200, JSON.stringify(selfOut));
+  assert.deepEqual(selfOut.group.adminUids, [idFor(COADMIN)]);
+  assert.equal(events("group:" + g.id, "group:admin_remove").length, 1);
+  assert.deepEqual((await call(GADMIN, "/group/my-groups")).groups, []);
+  assert.equal((await call(GADMIN, `/group/overview?groupId=${g.id}`)).__status, 403);
+
+  // Now the co-admin is the last one: removing them is refused and changes nothing.
+  const last = await call(COADMIN, "/group/admin-remove", "POST", { groupId: g.id, uid: idFor(COADMIN) });
+  assert.equal(last.__status, 409);
+  assert.equal(last.error, "last_admin");
+  assert.deepEqual((await call(COADMIN, "/group/my-groups")).groups[0].adminUids, [idFor(COADMIN)]);
+  assert.equal((await call(COADMIN, `/group/overview?groupId=${g.id}`)).__status, 200);
+});
+
+test("a group created before the by-admin index still lists for its creator", async () => {
+  seed();
+  const g = (await call(GADMIN, "/group/create", "POST", { name: "Northern Hospitals" })).group;
+  for (const k of [...docs.keys()]) if (k.startsWith("q_group_admins/")) docs.delete(k);
+  const mine = await call(GADMIN, "/group/my-groups");
+  assert.deepEqual(mine.groups.map((x) => x.name), ["Northern Hospitals"]);
+  assert.equal((await call(COADMIN, "/group/my-groups")).groups.length, 0);
+  assert.equal((await call(GADMIN, `/group/overview?groupId=${g.id}`)).__status, 200);
+});
+
+test("a co-admin still cannot open any member hospital's patient routes", async () => {
+  seed();
+  const seeded = await seedClinicalB();
+  await groupWithMembers([["org-b", OWNER_B]]);
+  const g = (await call(GADMIN, "/group/my-groups")).groups[0];
+  assert.equal((await call(GADMIN, "/group/admin-add", "POST", { groupId: g.id, email: COADMIN })).__status, 200);
+  const enc = seeded.encounters[0];
+  assert.equal((await call(COADMIN, "/ward/list?orgId=org-b")).__status, 403);
+  assert.equal((await call(COADMIN, `/ward/record-detail?orgId=org-b&type=Encounter&id=${enc.id}`)).__status, 403);
+  const reg = await call(COADMIN, "/patient/register", "POST", { orgId: "org-b", name: "Should Not", mobile: "9876500399", gender: "male", ageYears: 30 });
+  assert.equal(reg.__status, 403);
+});
+
 test("pure: a count not read is null with a reason, never zero; the policy whitelist; transitions", async () => {
   const none = projectCounts({});
   assert.equal(none.status, "unreadable");
@@ -403,4 +527,37 @@ test("screens: loading, failed and empty read differently; unread counts are wor
   assert.equal((table.match(/could not be read/g) || []).length, 2);
   assert.match(table, /November<\/td><td colspan="5"><span class="pill stop">Could not be read/);
   assert.ok(!/[—–]/.test(all.join("")), "no em or en dash on screen");
+});
+
+test("screens: groups you run names administrators with add and per-admin remove; one admin has no remove", async () => {
+  const { readFileSync } = await import("node:fs");
+  const win = { addEventListener() {} };
+  const doc = { readyState: "complete", getElementById: () => ({ innerHTML: "", querySelectorAll: () => [] }), createElement: () => ({ innerHTML: "" }), body: { appendChild() {} }, addEventListener() {} };
+  const ls = { getItem: () => null, setItem() {}, removeItem() {} };
+  const run = (src) => new Function("window", "document", "location", "localStorage", src)(win, doc, { hash: "", search: "" }, ls);
+  run(readFileSync(new URL("../wardsynq/site/shell.js", import.meta.url), "utf8"));
+  run(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"));
+  const c = { esc: win.WSQ.esc };
+  const { run: runHtml } = win.WSQ._groupAdmin;
+  const grp = (adminUids) => ({ id: "g1", name: "North", policy: null, policyVersion: 0, members: [], invited: [], ...(adminUids === undefined ? {} : { adminUids }) });
+
+  const two = runHtml(c, { groups: [grp(["cfa:aaa", "cfa:bbb"])] });
+  assert.match(two, /Administrators/);
+  assert.match(two, /cfa:aaa/);
+  assert.match(two, /cfa:bbb/);
+  assert.match(two, /Add administrator/);
+  assert.match(two, /data-grp-run="adminAdd"/);
+  assert.match(two, /data-grp-adminadd-input/);
+  assert.equal((two.match(/data-grp-run="adminRemove"/g) || []).length, 2);
+
+  const one = runHtml(c, { groups: [grp(["cfa:aaa"])] });
+  assert.ok(!/data-grp-run="adminRemove"/.test(one), "no remove button when only one administrator remains");
+  assert.match(one, /Add administrator/);
+
+  // A group payload from before adminUids was served still renders.
+  const legacy = runHtml(c, { groups: [grp(undefined)] });
+  assert.match(legacy, /Administrators/);
+  assert.match(legacy, /Add administrator/);
+
+  assert.ok(!/[—–]/.test(two + one + legacy), "no em or en dash on screen");
 });

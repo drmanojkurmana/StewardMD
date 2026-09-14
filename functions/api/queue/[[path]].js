@@ -18,6 +18,7 @@
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
 import { identify } from "../../_usage.js";
 import { ownerEmails, ownerOK } from "../../_adminauth.js";
+import { lookupUidByEmail } from "../../_fbadmin.js";
 // NOTE: roleForActor is deliberately NOT imported. It prefers actor.role, which resolveActor
 // hardcodes to "viewer" for staff sessions, so using it here would silently demote every nurse
 // and receptionist to read-only. Org roles resolve through ORG.authorizeOrg / whoami instead.
@@ -699,6 +700,7 @@ export async function onRequest(context) {
       const ACCOUNT = "account", GROUP_ADMIN = "group_admin", OWNER = "hospital_owner", EITHER = "either";
       const capFor = {
         "my-groups": ACCOUNT, create: ACCOUNT, invite: GROUP_ADMIN, policy: GROUP_ADMIN, overview: GROUP_ADMIN,
+        "admin-add": GROUP_ADMIN, "admin-remove": GROUP_ADMIN,
         remove: EITHER, accept: OWNER, decline: OWNER, memberships: CAPS.STAFF_ADMIN, adopt: CAPS.STAFF_ADMIN,
       };
       const need = capFor[sub]; if (!need) return json({ ok: false, error: "not_found" }, 404, request);
@@ -742,7 +744,8 @@ export async function onRequest(context) {
             members.push({ orgId: l.orgId, name: o ? o.name : null });
           }
           out.push({ id: gr.id, name: gr.name, policy: gr.policy, policyVersion: gr.policyVersion, members,
-            invited: links.filter((x) => x.state === "invited").map((x) => ({ orgId: x.orgId, invitedAt: x.invitedAt })) });
+            invited: links.filter((x) => x.state === "invited").map((x) => ({ orgId: x.orgId, invitedAt: x.invitedAt })),
+            adminUids: gr.adminUids });
         }
         return json({ ok: true, groups: out }, 200, request);
       }
@@ -750,6 +753,25 @@ export async function onRequest(context) {
         const name = arg("name");
         if (!name) return refuse(422, "name_required", "Give the group a name.");
         return json({ ok: true, group: await GROUP.createGroup(env, name, actor.id) }, 200, request);
+      }
+      if (sub === "admin-add") {
+        const email = String(body.email || "").trim().toLowerCase();
+        if (!email || email.indexOf("@") < 0) return refuse(422, "email_required", "Give the StewardMD account email to add as an administrator.");
+        /* lookupUidByEmail resolves to { uid, email, name }, NOT a bare uid: taking the object made
+         * identity "fb:[object Object]" on the tenants and pglog routes, a college owned by nobody.
+         * The directory hands back the bare Firebase localId; group membership is keyed on actor
+         * ids, which carry their namespace ("fb:" for Firebase-token sign-ins, "cfa:" for Cloudflare
+         * Access), so a bare uid is namespaced here and an already-namespaced one passes through. */
+        let found = null;
+        try { found = await lookupUidByEmail(env, email); } catch (e) { found = null; }
+        if (!found || !found.uid) return refuse(404, "account_not_found", "No StewardMD account uses that email. They need to have signed in to StewardMD at least once.");
+        const raw = String(found.uid).trim();
+        return done(await GROUP.addGroupAdmin(env, g.id, raw.indexOf(":") >= 0 ? raw : "fb:" + raw, actor.id));
+      }
+      if (sub === "admin-remove") {
+        const target = String(body.uid || "").trim();
+        if (!target) return refuse(422, "uid_required", "Name the administrator to remove.");
+        return done(await GROUP.removeGroupAdmin(env, g.id, target, actor.id));
       }
       if (sub === "invite") {
         if (!org) return refuse(404, "org_not_found", "No hospital with that id or code.");

@@ -17,7 +17,7 @@
  * qAudit's best-effort write is not enough for a change that decides what crosses a boundary. Every
  * change is also guarded on the row being unchanged since it was read.
  */
-import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsQuery, fsCommit, wCreate, wUpdate, wDelete } from "./_fbfirestore.js";
 import * as M from "./_opd_org.js";
 
 const now = () => Date.now();
@@ -69,17 +69,94 @@ export async function getGroup(env, groupId) {
   const d = await fsGet(env, "q_groups/" + id);
   return d ? group({ ...d.fields, id }) : null;
 }
+/* One row per (group, admin) beside the group doc, the way q_members holds one row per
+ * (org, identity): Firestore cannot query inside the group's adminUids array, so the array stays
+ * the membership truth (isGroupAdmin reads it) and these rows are the by-admin index for listing.
+ * Row id mirrors q_members: sanitize(groupId) + "__" + sanitize(uid), written in the SAME commit
+ * as the group change so an admin without its row (or a row without its admin) cannot exist. */
+const adminRowId = (groupId, uid) => sanitize(groupId) + "__" + sanitize(uid);
+
 export async function createGroup(env, name, actorId) {
   const id = newId();
-  const g = group({ id, name: String(name || "").trim().slice(0, 120), adminUids: [actorId], createdBy: actorId, createdAt: now() });
-  await fsCommit(env, [wCreate(env, "q_groups/" + id, g), event(env, "group:" + id, actorId, "group:create", g.name)]);
+  const a = String(actorId);
+  const g = group({ id, name: String(name || "").trim().slice(0, 120), adminUids: [a], createdBy: a, createdAt: now() });
+  await fsCommit(env, [wCreate(env, "q_groups/" + id, g),
+    wCreate(env, "q_group_admins/" + adminRowId(id, a), { groupId: id, uid: a, addedBy: a, addedAt: g.createdAt }),
+    event(env, "group:" + id, a, "group:create", g.name)]);
   return g;
 }
-/* ponytail: lists by creator; adminUids can hold more than one account but no route adds a second
- * admin yet. Add a q_group_admins row per admin when one does, so this can query by admin. */
+/* ponytail: the by-admin index above only exists for groups created (or changed) since multi-admin
+ * landed. Older groups have no q_group_admins rows, so the creator query stays as a fallback and
+ * the two lists are merged, de-duplicated. Every hit is re-checked against the group's own
+ * adminUids: a wedged row must never list a group its admin can no longer open. */
 export async function listGroupsForAdmin(env, actorId) {
-  const r = await fsQuery(env, "q_groups", { where: { field: "createdBy", value: String(actorId) }, limit: 50 });
-  return r.map((x) => group({ ...x.fields, id: x.id })).filter((g) => g.adminUids.includes(String(actorId)));
+  const uid = String(actorId);
+  const seen = new Map();
+  const keep = (g) => { if (g && g.id && g.adminUids.includes(uid) && !seen.has(g.id)) seen.set(g.id, g); };
+  const indexed = await fsQuery(env, "q_group_admins", { where: { field: "uid", value: uid }, limit: 50 });
+  for (const r of indexed) {
+    const gid = r.fields && r.fields.groupId;
+    if (!gid) continue;
+    const d = await fsGet(env, "q_groups/" + sanitize(gid));
+    if (d) keep(group({ ...d.fields, id: String(gid) }));
+  }
+  const legacy = await fsQuery(env, "q_groups", { where: { field: "createdBy", value: uid }, limit: 50 });
+  for (const x of legacy) keep(group({ ...x.fields, id: x.id }));
+  return [...seen.values()];
+}
+/* Read the group WITH its updateTime: every admin change below guards its commit on the doc being
+ * unchanged since this read, the same compare-and-set transition() uses for membership, so two
+ * concurrent changes cannot silently drop an admin. */
+async function readGroupForAdminChange(env, groupId) {
+  const id = sanitize(groupId);
+  if (!id) return { id: "", doc: null };
+  return { id, doc: await fsGet(env, "q_groups/" + id) };
+}
+/* Name a second (or third) administrator. Adding someone already named is a no-op success. */
+export async function addGroupAdmin(env, groupId, newUid, actorId) {
+  const { id, doc } = await readGroupForAdminChange(env, groupId);
+  if (!doc) return { ok: false, status: 404, error: "not_found", message: "The group could not be found." };
+  const g = group({ ...doc.fields, id });
+  const uid = String(newUid || "");
+  if (!uid) return { ok: false, status: 422, error: "uid_required", message: "Name the administrator to add." };
+  if (g.adminUids.includes(uid)) return { ok: true, group: g, noop: true };
+  const next = [...g.adminUids, uid];
+  const rowPath = "q_group_admins/" + adminRowId(id, uid);
+  const rowDoc = await fsGet(env, rowPath);
+  const rowWrite = rowDoc
+    ? wUpdate(env, rowPath, { groupId: id, uid, addedBy: actorId, addedAt: now() }, { updateTime: rowDoc.updateTime })
+    : wCreate(env, rowPath, { groupId: id, uid, addedBy: actorId, addedAt: now() });
+  try {
+    await fsCommit(env, [wUpdate(env, "q_groups/" + id, { adminUids: next }, { updateTime: doc.updateTime }),
+      rowWrite, event(env, "group:" + id, actorId, "group:admin_add", uid.slice(0, 80))]);
+  } catch (e) {
+    if (e && e.code === "precondition") return { ok: false, status: 409, error: "changed_meanwhile", message: "This group changed while you were looking at it. Nothing was saved. Reload and try again." };
+    return { ok: false, status: 502, error: "not_saved", message: "The change could not be saved. Nothing was changed." };
+  }
+  return { ok: true, group: group({ ...g, adminUids: next }) };
+}
+/* Un-name an administrator, but never the last one: a group with nobody able to run it is a group
+ * nobody can fix. An admin may remove themself while another remains; that is just this function
+ * with targetUid === actorId, and needs no special case. */
+export async function removeGroupAdmin(env, groupId, targetUid, actorId) {
+  const { id, doc } = await readGroupForAdminChange(env, groupId);
+  if (!doc) return { ok: false, status: 404, error: "not_found", message: "The group could not be found." };
+  const g = group({ ...doc.fields, id });
+  const uid = String(targetUid || "");
+  if (!uid) return { ok: false, status: 422, error: "uid_required", message: "Name the administrator to remove." };
+  if (!g.adminUids.includes(uid)) return { ok: false, status: 404, error: "not_an_admin", message: "That account is not an administrator of this group." };
+  if (g.adminUids.length < 2) return { ok: false, status: 409, error: "last_admin", message: "A group always has at least one administrator. Add another administrator before removing this one." };
+  const next = g.adminUids.filter((x) => x !== uid);
+  const writes = [wUpdate(env, "q_groups/" + id, { adminUids: next }, { updateTime: doc.updateTime }),
+    event(env, "group:" + id, actorId, "group:admin_remove", uid.slice(0, 80))];
+  if (await fsGet(env, "q_group_admins/" + adminRowId(id, uid))) writes.push(wDelete(env, "q_group_admins/" + adminRowId(id, uid)));
+  try {
+    await fsCommit(env, writes);
+  } catch (e) {
+    if (e && e.code === "precondition") return { ok: false, status: 409, error: "changed_meanwhile", message: "This group changed while you were looking at it. Nothing was saved. Reload and try again." };
+    return { ok: false, status: 502, error: "not_saved", message: "The change could not be saved. Nothing was changed." };
+  }
+  return { ok: true, group: group({ ...g, adminUids: next }) };
 }
 export async function linksForGroup(env, groupId) {
   const r = await fsQuery(env, "q_group_links", { where: { field: "groupId", value: sanitize(groupId) }, limit: 200 });
