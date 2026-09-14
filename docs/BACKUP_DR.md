@@ -40,7 +40,13 @@ WardSynQ record repository writes has a hash-chain link in `wardsynq_audit_chain
   anchor key, via `firestoreAnchorStore`), for the clinical chain and for the hospital event log (`q:<orgId>`).
   Each copy is compared with the database and the two are compared with each other; a disagreement between them is
   reported on its own, down in System health. The acknowledgement restarts every broken copy (and seeds an empty one)
-  under one chained row, and archives each old log in its own store. Delete neither copy by hand.  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
+  under one chained row, and archives each old log in its own store. Delete neither copy by hand.
+  **Confirm the live chain without the cron (G4):** `node scripts/audit-chain-live-check.mjs --since <ISO time>`
+  (optional `--db stewardmd-connect`, `--tenant <id>`, `--limit 500`; needs `wrangler login`; sends SELECTs only).
+  It compares `connect_audit_event` rows (connector wardsynq) written since then with `wardsynq_audit_chain` links
+  and re-hashes each hospital's newest links with the app's own code. Exit 0: every row since then has a link,
+  no link lost its row, no link number is missing, every chain verifies. 1: findings, named. 2: nothing was
+  written since then, so the live chain was NOT observed. 3: the database could not be read.  **Before restoring**, note the number of chained rows shown in Security review > Audit retention > Tamper evidence and
   take a manual export (`scripts/backup-d1.sh`). After restoring, the difference is the audit rows the restore
   discarded; keep that export as the record of them.
 - **Never merge rows from a cold copy back into a restored database.** New writes continue from the restored
