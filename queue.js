@@ -65,12 +65,43 @@
         '<div class="q-tl-acts">' +
           (t.status !== "called" ? '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" : "") +   // an already-called patient can't be re-called (server rejects called->called); show Send-back instead
           (t.status === "called" ? '<button class="q-ic" title="Send back to waiting" data-q-act="sendback:' + esc(t.id) + '">' + ms("undo") + "</button>" : "") +
+          (t.status === "called" ? '<button class="q-ic" title="No-show (did not come when called)" data-q-act="noshow:' + esc(t.id) + '">' + ms("person_off") + "</button>" : "") +
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
           '<button class="q-ic q-rm" title="Remove (mistaken / duplicate / wrongly-routed)" data-q-act="remove:' + esc(t.id) + '">' + ms("person_remove") + "</button>" +
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
           '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" +   // every patient gets an Assessment button (clinic + hospital); opens the consult record
         "</div></div>";
+  }
+  /* D13: RECALL NO-SHOWS. state.noShows: undefined = closed, null = loading, false = failed (said so, never
+   * drawn as "nobody"), [] = none recallable, else the list. Recall keeps the patient's token and asks why. */
+  function noShowPanel(state) {
+    var n = state.noShows;
+    if (n === undefined) return "";
+    var h = '<div class="q-card" style="margin:8px 0"><div class="q-card-h">' + ms("person_search") + " No-shows you can recall" +
+      ' <button class="q-ic" title="Close" data-q-act="noshowsclose">' + ms("close") + "</button></div>";
+    if (n === null) return h + '<div class="q-empty">Loading no-shows...</div></div>';
+    if (n === false) return h + '<div class="q-empty">The no-shows could not be loaded. Do not read this as none. <button class="q-pause" style="width:auto;padding:6px 10px" data-q-act="noshows">Try again</button></div></div>';
+    if (!n.length) return h + '<div class="q-empty">No one marked no-show in the last 4 hours.</div></div>';
+    return h + n.map(function (t) {
+      return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + esc(t.name || "Patient") + '</b><div class="q-hint">Marked no-show ' + esc(new Date(t.noShowAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) +
+        " &middot; recall until " + esc(new Date(t.recallableUntil).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) + "</div></div>" +
+        '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="recall:' + esc(t.id) + '">Recall</button></div>';
+    }).join("") + "</div>";
+  }
+  function loadNoShows() {
+    if (!st.session) return;
+    st.noShows = null; paint();
+    apiGet("/no-show/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { st.noShows = (r && r.ok) ? (r.noShows || []) : false; paint(); }, function () { st.noShows = false; paint(); });
+  }
+  function recallNoShow(sid, ticketId) {
+    var why = "";
+    try { why = window.prompt("Why is this patient recalled? (recorded in the audit trail)", "Patient arrived late") || ""; } catch (e) {}
+    if (why.trim().length < 3) { try { G.toast && G.toast("Not recalled: a reason is required."); } catch (e) {} return; }
+    act(sid, "/no-show/recall", { ticketId: ticketId, reason: why.trim(), to: "waiting" }).then(function (r) {
+      try { G.toast && G.toast(r && r.ok ? "Recalled with the same token." : "Not recalled: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {}
+      if (r && r.ok) loadNoShows();
+    }, function () { try { G.toast && G.toast("Not recalled: the server could not be reached."); } catch (e) {} });
   }
   function orderedTickets(state) {
     return (state.tickets || []).slice()
@@ -132,7 +163,7 @@
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
     var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
-    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + searchBox +
+    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue <button class="q-ic" title="Recall no-shows" data-q-act="noshows">' + ms("person_search") + "</button></span></div>" + noShowPanel(state) + searchBox +
       '<div id="qTlRows">' + timelineRows(state) + "</div></div>";   // the timeline already lists the full ordered queue; the old "View full queue" foot link was a dead no-op
     var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
     return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
@@ -558,6 +589,10 @@
       if (curId && curId !== arg) act(sid, "/status", { ticketId: curId, status: "waiting" }).then(startGo); else startGo();
     }
     else if (cmd === "call") act(sid, "/status", { ticketId: arg, status: "called" });
+    else if (cmd === "noshow") { var okn = true; try { okn = window.confirm("Mark as no-show?\n\nThe patient did not come when called. They can be recalled with the same token for 4 hours."); } catch (e) {} if (okn) act(sid, "/status", { ticketId: arg, status: "no_show" }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Not marked no-show: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } }); }
+    else if (cmd === "noshows") loadNoShows();
+    else if (cmd === "noshowsclose") { st.noShows = undefined; paint(); }
+    else if (cmd === "recall") recallNoShow(sid, arg);
     else if (cmd === "sendback") act(sid, "/status", { ticketId: arg, status: "waiting" });   // reroute from the consulting room back to the waiting hall (personal + hospital)
     else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; act(sid, "/priority", { ticketId: arg, priority: (pt && pt.priority) ? 0 : 1 }); }   // toggle Priority (1) on/off; matches the "Priority" label + is reversible (does NOT set Emergency/2)
     else if (cmd === "remove") { var okr = true; try { okr = window.confirm("Remove this patient from your queue?\n\nUse for a mistaken, duplicate, or wrongly-routed entry. Recorded in the audit trail."); } catch (e) {} if (okr) act(sid, "/status", { ticketId: arg, status: "cancelled" }); }

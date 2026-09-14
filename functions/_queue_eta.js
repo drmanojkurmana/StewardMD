@@ -21,10 +21,25 @@ const NEXT = {
   followup:        ["completed", "cancelled"],
   completed:       [],
   cancelled:       [],
-  no_show:         []
+  // D13 (2026-09-14): a patient marked no-show who then turns up is recalled with the SAME token, back to
+  // waiting or straight to called. Only through recallNoShow (_queue_engine.js), which requires a reason,
+  // the queue-management capability, and the recall window below; setStatus refuses it.
+  no_show:         ["waiting", "called"]
 };
 export function canTransition(from, to) { return STATUS.indexOf(to) >= 0 && (NEXT[from] || []).indexOf(to) >= 0; }
-export function isTerminal(s) { return s === "completed" || s === "cancelled" || s === "no_show"; }
+// no_show is no longer terminal (D13): the patient link keeps working so a recalled patient still sees
+// their place. It is still not queued (no position, no ETA) until recalled.
+export function isTerminal(s) { return s === "completed" || s === "cancelled"; }
+export const NO_SHOW_RECALL_MS = 4 * 3600e3;
+/* PURE (D13). Why this no-show cannot be recalled now, or null. The window is 4 hours from being marked
+ * no-show, or the end of the OPD session, whichever comes first: after that the number has been skipped
+ * for long enough that calling it again would confuse the hall more than it helps the patient. */
+export function recallRefusal(ticket, session, nowMs) {
+  if (!ticket || ticket.status !== "no_show") return "not_no_show";
+  if (session && (session.status === "finished" || (session.expiresAt && nowMs > session.expiresAt))) return "session_ended";
+  if (!ticket.noShowAt || nowMs - ticket.noShowAt > NO_SHOW_RECALL_MS) return "recall_window_passed";
+  return null;
+}
 // Tickets still waiting for the doctor (get a position + ETA). in_consultation/investigation/terminal excluded.
 export function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
 

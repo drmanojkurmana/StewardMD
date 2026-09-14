@@ -11,7 +11,10 @@ test("state machine allows real transitions, blocks illegal ones", () => {
   assert.equal(canTransition("waiting", "completed"), false);      // can't finish someone never seen
   assert.equal(canTransition("completed", "waiting"), false);      // terminal is terminal
   assert.equal(canTransition("registered", "banana"), false);      // unknown status
-  assert.equal(isTerminal("no_show"), true);
+  assert.equal(isTerminal("no_show"), false, "D13: a no-show can be recalled, so it is not terminal");
+  assert.equal(canTransition("no_show", "waiting"), true);
+  assert.equal(canTransition("no_show", "in_consultation"), false, "a recalled patient is called or waits first");
+  assert.equal(isTerminal("cancelled"), true);
   assert.equal(isTerminal("waiting"), false);
 });
 

@@ -320,7 +320,7 @@ test("screens: desk, doctor queue and call-next show the token; the wall shows t
   assert.match(q, /q-tl-nm">' \+ tok\(t\)/, "doctor queue row");
   assert.match(q, /<h3>' \+ tok\(cur\)/, "doctor consult card");
   assert.match(q, /q-fd-row"><div>' \+ tok\(t\)/, "front desk pool row");
-  assert.equal((opd.match(/'\+tok\(t\)\+esc\(t\.name/g) || []).length, 3, "OPD console rows");
+  assert.ok((opd.match(/'\+tok\(t\)\+esc\(t\.name/g) || []).length >= 3, "OPD console rows (and the no-show recall list)");
   assert.match(opd, /Now calling token "\+nx\.token/, "call-next result after checkout");
   assert.doesNotMatch(wall, /Asha Kumar|R\. Mehta|shortName/, "no patient names on the wall, not even in its preview");
   assert.match(wall, /"Token " \+ n/);

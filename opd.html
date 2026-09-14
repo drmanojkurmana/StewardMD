@@ -403,8 +403,10 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        (st.orgId&&can("queue.view")?'<button class="ghost" id="noshows">No-shows</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
+    var nsb=document.getElementById("noshows"); if(nsb) nsb.onclick=openNoShows;
     document.getElementById("lo").onclick=function(){logout();};
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
@@ -415,6 +417,33 @@
     var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
   }
   function refresh(){ st.opd?loadDash():loadBoard(); }
+  /* D13: RECALL NO-SHOWS. Every queue in this hospital today; a patient marked no-show in the last 4 hours
+   * (and before the session ended) goes back to waiting with the SAME token, at the head of their priority
+   * band. A reason is required and recorded with who and when. A failed load is said, never "nobody". */
+  function openNoShows(){
+    open('<h3>No-shows you can recall</h3><div id="nsl"><div class="empty">Loading...</div></div><div class="row2"><button class="cancel" id="cx">Close</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    api("no-show/list?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
+      var el=sheet.querySelector("#nsl"); if(!el) return;
+      if(!r||!r.ok){ el.innerHTML='<div class="empty">The no-shows could not be loaded ('+esc((r&&(r.message||r.error))||"no response")+'). Do not read this as none.</div>'; return; }
+      var list=r.noShows||[];
+      if(!list.length){ el.innerHTML='<div class="empty">No one marked no-show in the last 4 hours.</div>'; return; }
+      var hm=function(ms){ return new Date(ms).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}); };
+      el.innerHTML=list.map(function(t){ return '<div class="ev"><b>'+tok(t)+esc(t.name||"Patient")+'</b> <span class="t">'+esc(t.department||"")+' · marked '+hm(t.noShowAt)+' · recall until '+hm(t.recallableUntil)+'</span>'+
+        (can("queue.reorder")?'<input class="nsr" data-t="'+esc(t.id)+'" placeholder="Why recalled (required)" style="margin:6px 0">'+
+        '<div class="row2"><button class="cancel" data-nsr="waiting" data-s="'+esc(t.sessionId)+'" data-t="'+esc(t.id)+'">Back to waiting</button><button class="btn" data-nsr="called" data-s="'+esc(t.sessionId)+'" data-t="'+esc(t.id)+'" style="margin:0">Call now</button></div>':'<div class="t">Recalling needs the queue.reorder permission.</div>')+'</div>'; }).join("");
+      Array.prototype.forEach.call(el.querySelectorAll("[data-nsr]"),function(b){ b.onclick=function(){
+        var tid=b.getAttribute("data-t"), inp=el.querySelector('.nsr[data-t="'+tid+'"]'), why=inp?inp.value.trim():"";
+        if(why.length<3){ toast("Say why the patient is recalled"); if(inp) inp.focus(); return; }
+        b.disabled=true;
+        api("no-show/recall",{method:"POST",body:{sessionId:b.getAttribute("data-s"),ticketId:tid,reason:why,to:b.getAttribute("data-nsr")}}).then(function(x){
+          b.disabled=false;
+          if(!x||!x.ok){ toast("Not recalled: "+((x&&(x.message||x.error))||"no response")); return; }
+          toast("Recalled with the same token"); openNoShows(); refresh();
+        },function(){ b.disabled=false; toast("Not recalled: the server could not be reached."); });
+      }; });
+    },function(){ var el=sheet.querySelector("#nsl"); if(el) el.innerHTML='<div class="empty">The no-shows could not be loaded (no connection). Do not read this as none.</div>'; });
+  }
   // Owner/admin: mint the login-free waiting-room display link for a wall TV/tablet.
   function openDisplayLink(){
     api("display-link",{method:"POST",body:{orgId:st.orgId}}).then(function(r){
@@ -481,6 +510,7 @@
     var b=[];
     if(!consult&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
     if(!consult&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">No-show</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
     if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
@@ -504,6 +534,7 @@
         if(a==="call") post("status",{sessionId:sid,ticketId:tid,status:"called"});
         else if(a==="start") post("status",{sessionId:sid,ticketId:tid,status:"in_consultation"});
         else if(a==="sendback") post("status",{sessionId:sid,ticketId:tid,status:"waiting"});
+        else if(a==="noshow") openNoShowMark(sid,tid,btn.getAttribute("data-n"));
         else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
         else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
         else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
@@ -517,7 +548,7 @@
     });
   }
   function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope."}[e]||e; }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope.",use_recall:"A no-show is brought back from No-shows, which records why."}[e]||e; }
 
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
@@ -537,6 +568,11 @@
     };
   }
   // ---- remove-patient modal (mistaken / duplicate / wrongly-routed entry) ----
+  function openNoShowMark(sid,tid,name){
+    open('<h3>Mark '+esc(name||"patient")+' as no-show?</h3><p class="t">Called and did not come. The token is kept: for 4 hours the patient can be recalled from <b>No-shows</b>.</p><div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Mark no-show</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){ close(); post("status",{sessionId:sid,ticketId:tid,status:"no_show"}); };
+  }
   function openRemove(sid,tid,name){
     open('<h3>Remove patient</h3><p style="color:var(--mut);margin:0 0 10px">Remove <b>'+esc(name||"this patient")+'</b> from the queue? Use this for a mistaken, duplicate, or wrongly-routed entry — it is recorded in the audit trail. To send them to another doctor instead, use <b>Move to doctor</b>.</p>'+
       '<div class="row2"><button class="cancel" id="cx">Keep in queue</button><button class="btn danger" id="ok" style="margin:0">Remove patient</button></div>');
@@ -1030,6 +1066,7 @@
     var consult=t.status==="in_consultation"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
     var b=[];
     if(!consult&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(t.status==="called"&&can("queue.status")) b.push('<button data-a="noshow" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">No-show</button>');   // D13: called and did not come; recallable with the same token
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
     if(consult&&can("queue.status")) b.push('<button data-a="sendback" data-s="'+s.id+'" data-t="'+t.id+'">Send back</button>');   // room -> waiting hall (in_consultation -> waiting)

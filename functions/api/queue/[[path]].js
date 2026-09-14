@@ -3892,6 +3892,26 @@ export async function onRequest(context) {
       return json({ ok: true, board: board }, 200, request);
     }
 
+    /* D13: the no-shows still recallable (4 hours or the session's end). ?sessionId= for one queue (the
+     * doctor's app), ?orgId=&date= for every queue in a hospital that day (the desk). Staff view: names
+     * are shown, as on /list. queue.view reads; recalling needs queue.reorder (below). */
+    if (method === "GET" && seg === "no-show" && sub === "list") {
+      const sid = url.searchParams.get("sessionId");
+      let sessions;
+      if (sid) {
+        const { s, err } = await loadSessionFor(env, sid, actor, request); if (err) return err;
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
+        sessions = [s];
+      } else {
+        const orgId = url.searchParams.get("orgId") || "";
+        const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        sessions = await Q.listSessions(env, orgId, url.searchParams.get("date") || today());
+      }
+      const out = [];
+      for (const s of sessions) for (const t of await Q.recallableNoShows(env, s)) out.push(t);
+      return json({ ok: true, noShows: await ticketView(env, out) }, 200, request);
+    }
     if (method === "GET" && seg === "list") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor, request); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
@@ -4352,8 +4372,21 @@ export async function onRequest(context) {
         // Continuation and close both land here: recordEncounterSync reads the ticket's CURRENT
         // status (whatever it just became) and maps it itself — see migrate-encounter.js's header.
         const changed = tickets.find((x) => x.id === body.ticketId);
-        if (changed) await syncEncounter(request, env, s, changed);
+        /* D13: a no-show is not the end of the visit any more (it can be recalled), so its Encounter is not
+         * closed on it: a closed Encounter can never be reopened (migrate-encounter.js), and a recalled
+         * patient's visit would have nowhere to be recorded. */
+        if (changed && changed.status !== "no_show") await syncEncounter(request, env, s, changed);
         return json({ ok: true, tickets: await ticketView(env, tickets) }, 200, request);
+      }
+      if (seg === "no-show" && sub === "recall") {
+        // Recalling puts the patient at the head of their band: that is a reorder, so it needs queue.reorder.
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER);
+        try { return json({ ok: true, tickets: await ticketView(env, await Q.recallNoShow(env, s, body.ticketId, body, actor.id)) }, 200, request); }
+        catch (e) {
+          const say = { reason_required: "Say why the patient is recalled.", not_no_show: "This patient is not marked no-show.", recall_window_passed: "A no-show can be recalled for 4 hours. Register the patient again.", session_ended: "This OPD session has ended. Register the patient again.", ticket_changed: "This patient changed while you were recalling them. Reload and try again." };
+          if (e && say[e.message]) return json({ ok: false, error: e.message, message: say[e.message] }, e.status, request);
+          throw e;
+        }
       }
       if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
       if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }

@@ -9,7 +9,7 @@
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { brandingFor } from "./_clinic_branding.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
-import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, recallRefusal, NO_SHOW_RECALL_MS, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
 import { resolveRoomDoctor, tokenScope, tokenConfig, formatToken, resolveTokenDepartment, department as M_department } from "./_opd_org.js";
@@ -181,9 +181,12 @@ export async function setStatus(env, session, ticketId, to, actor) {
   const t = await getTicket(env, ticketId);
   if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
   const from = t.status;
+  // D13: out of no_show only through recallNoShow, which carries the reason, the capability and the window.
+  if (from === "no_show") throw Object.assign(new Error("use_recall"), { status: 400, detail: "A no-show is brought back with Recall, which records why." });
   if (!canTransition(from, to)) throw Object.assign(new Error("bad_transition"), { status: 400, detail: from + "->" + to });
   const patch = { status: to, updatedAt: now() };
   const sessPatch = {};
+  if (to === "no_show") patch.noShowAt = now();   // starts the recall window
   if (to === "called" && !t.calledAt) patch.calledAt = now();
   if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
   // Send back to the waiting hall (doctor/nurse reroute from the consulting room): free the room, drop the
@@ -205,6 +208,40 @@ export async function setStatus(env, session, ticketId, to, actor) {
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: to, meta: from });
   if (to === "completed") { try { await notifyTicket(env, session, Object.assign({}, t, patch), "complete", {}); } catch (e) {} }
   return recompute(env, session);
+}
+
+/* ---- D13: recall a no-show with the SAME token ------------------------------------------------------
+ * The patient heard their number, was not there, and has now arrived. They go back to waiting (or straight
+ * to called) keeping the token, at the head of their own priority band (an emergency still comes first,
+ * and their priority is unchanged). A reason is mandatory. The ticket change and its audit row (who, when,
+ * why) are ONE commit guarded on the ticket being unchanged since it was read, so two desks recalling at
+ * once cannot both succeed and a recall without its audit row cannot exist. */
+export async function recallNoShow(env, session, ticketId, opts, actor) {
+  opts = opts || {};
+  const reason = String(opts.reason || "").trim().slice(0, 180);
+  const to = opts.to === "called" ? "called" : "waiting";
+  if (reason.length < 3) throw Object.assign(new Error("reason_required"), { status: 400, detail: "Say why the patient is recalled." });
+  const d = await fsGet(env, "q_tickets/" + ticketId);
+  const t = d ? withId(ticketId, d.fields) : null;
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  const why = recallRefusal(t, session, now());
+  if (why) throw Object.assign(new Error(why), { status: 409 });
+  const band = orderQueue(await listTickets(env, session.id)).filter((x) => (x.priority || 0) === (t.priority || 0));
+  const head = band.length ? Math.min.apply(null, band.map((x) => (x.seq != null && isFinite(x.seq) ? x.seq : x.registeredAt || 0))) : (t.registeredAt || now());
+  const patch = { status: to, seq: head - 1000, calledAt: to === "called" ? now() : 0, recalledAt: now(), recallCount: (t.recallCount || 0) + 1, updatedAt: now() };
+  // The audit meta holds 200 characters; the reason is shortened to fit rather than cutting the JSON.
+  let meta, r = reason;
+  do { meta = JSON.stringify({ to, reason: r, noShowAt: t.noShowAt, token: t.token || "" }); r = r.slice(0, -10); } while (meta.length > 200);
+  const ev = { ts: now(), hospitalId: session.hospitalId || "", ticketId, actor: String(actor || ""), action: "recall_no_show", meta };
+  try { await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, patch, { updateTime: d.updateTime }), wCreate(env, "q_events/" + newId(), ev)]); }
+  catch (e) { if (e && e.code === "precondition") throw Object.assign(new Error("ticket_changed"), { status: 409, detail: "This patient changed while you were recalling them. Reload and try again." }); throw e; }
+  return recompute(env, session);
+}
+// The no-shows still inside their recall window, for the desk's and the doctor's "Recall no-shows" list.
+export async function recallableNoShows(env, session) {
+  const at = now();
+  return (await listTickets(env, session.id)).filter((t) => !recallRefusal(t, session, at))
+    .map((t) => Object.assign(t, { recallableUntil: Math.min(t.noShowAt + NO_SHOW_RECALL_MS, session.expiresAt || Infinity) }));
 }
 
 // DPDP erasure: kill the patient link (bump ver) AND wipe the encrypted name/mobile at rest. Used for an

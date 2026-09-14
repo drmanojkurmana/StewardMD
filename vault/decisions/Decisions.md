@@ -5825,3 +5825,18 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   still decides; this is only the early answer so a patient is not registered and then left unqueued.
 - An EMR import returns `issues[{reason, department}]` for refused rows (department names only) and the app
   shows them once per distinct message.
+## 2026-09-14 D13: a no-show is recalled with the same token (recommendation applied; owner did not answer)
+- `no_show -> waiting | called` in `_queue_eta.js`, and `no_show` is no longer terminal: marking a no-show no longer
+  bumps tokenVer, so the patient link keeps working and `queue.html` says "Your token was called ... go to the
+  front desk". `noShowAt` starts the window. Its OPD Encounter is not closed on no-show (a closed Encounter can
+  never reopen); a never-recalled no-show stays "planned" in the record. Not built: closing it when the window ends.
+- ONLY `POST /no-show/recall` leaves no_show (`/status` answers 400 `use_recall`). It needs `queue.reorder`
+  (the recall jumps the patient to the head of their priority band, which is a reorder; reception can mark a
+  no-show but not recall), a reason, and the window: 4 hours from noShowAt or the session end, whichever is
+  first (409 `recall_window_passed` / `session_ended`). The ticket patch and the `recall_no_show` q_events row
+  (actor, ts, meta {to, reason, noShowAt, token}) are ONE commit guarded on the ticket updateTime, so a recall
+  without its audit row cannot exist and two desks cannot both recall.
+- `GET /no-show/list?sessionId=` (app doctor queue) or `?orgId=&date=` (console, every queue that day) lists the
+  recallable ones (queue.view). Screens: "No-show" on called rows in opd.html and queue.js; "No-shows" sheet on
+  the console toolbar; the recall panel on the app timeline. Not built: the app front-desk view has no recall
+  list, and no "next" message is re-sent on recall (n_stage is monotonic).

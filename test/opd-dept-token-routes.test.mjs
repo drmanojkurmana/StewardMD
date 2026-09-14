@@ -7,92 +7,10 @@
  *
  * node --test --experimental-test-module-mocks test/opd-dept-token-routes.test.mjs
  */
-import { registerHooks } from "node:module";
-registerHooks({ resolve(spec, ctx, next) { const r = next(spec, ctx); if (r.url.endsWith(".json")) r.importAttributes = { type: "json" }; return r; } });
-
-import { test, mock } from "node:test";
+import { test } from "node:test";
 import assert from "node:assert/strict";
-import { webcrypto, createHash } from "node:crypto";
-if (!globalThis.crypto) globalThis.crypto = webcrypto;
+import { docs, ORG, api, seed, dept, ENV, OWNER_A, OWNER_B, HR_A, HR_B, NURSE_A, VIEWER_A, CASHIER_A, DAY } from "./helpers/opd-router-harness.mjs";
 
-const docs = new Map();
-let clock = 1;
-mock.module("../functions/_fbfirestore.js", {
-  namedExports: {
-    fsGet: async (_e, path) => { const d = docs.get(path); return d ? { id: path, name: path, fields: { ...d.fields }, updateTime: d.updateTime } : null; },
-    fsQuery: async (_e, coll, opts) => {
-      const where = opts && opts.where, limit = (opts && opts.limit) || 100, out = [];
-      for (const [path, d] of docs) {
-        if (!path.startsWith(coll + "/") || path.indexOf("/", coll.length + 1) >= 0) continue;
-        if (where && String(d.fields[where.field]) !== String(where.value)) continue;
-        out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime });
-        if (out.length >= limit) break;
-      }
-      return out;
-    },
-    fsCommit: async (_e, writes) => {
-      for (const w of writes || []) {
-        if (w.delete) continue;
-        const cur = docs.get(w.update.name), cd = w.currentDocument;
-        if (cd && cd.exists === false && cur) throw Object.assign(new Error("exists"), { code: "precondition" });
-        if (cd && cd.exists === true && !cur) throw Object.assign(new Error("missing"), { code: "precondition" });
-        if (cd && cd.updateTime && (!cur || cur.updateTime !== cd.updateTime)) throw Object.assign(new Error("stale"), { code: "precondition" });
-      }
-      for (const w of writes || []) {
-        if (w.delete) { docs.delete(w.delete); continue; }
-        const prev = docs.get(w.update.name);
-        docs.set(w.update.name, { fields: { ...(prev ? prev.fields : {}), ...w.update.fields }, updateTime: "t" + (++clock) });
-      }
-      return { ok: true };
-    },
-    wCreate: (_e, path, fields) => ({ update: { name: path, fields }, currentDocument: { exists: false } }),
-    wUpdate: (_e, path, fields, opts) => {
-      const w = { update: { name: path, fields } };
-      if (opts && opts.updateTime) w.currentDocument = { updateTime: opts.updateTime };
-      else if (opts && opts.exists === true) w.currentDocument = { exists: true };
-      return w;
-    },
-    wDelete: (_e, path) => ({ delete: path }),
-    fsProject: () => "test", fsDocName: (_e, p) => p,
-    encodeValue: (v) => v, encodeFields: (o) => o, decodeValue: (v) => v, decodeFields: (f) => f,
-  },
-});
-
-const ORG = await import("../functions/_opd_org_store.js");
-const { onRequest } = await import("../functions/api/queue/[[path]].js");
-
-const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
-const uidFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
-export const OWNER_A = "owner-a@example.test", OWNER_B = "owner-b@example.test";
-export const HR_A = "hr-a@example.test", HR_B = "hr-b@example.test", NURSE_A = "nurse-a@example.test", VIEWER_A = "viewer-a@example.test", CASHIER_A = "cashier-a@example.test";
-export const DAY = "2026-09-14";
-
-let ENV;
-export function reset() {
-  docs.clear(); clock = 1;
-  ENV = { QUEUE_ENABLED: "1", QUEUE_STAFF_ENABLED: "1", QUEUE_TOKEN_SECRET: "test-secret-that-is-long-enough-for-hmac", FOLLOWCARE_PHI_KEY: Buffer.alloc(32, 7).toString("base64url") };
-}
-export async function api(path, method, body, email) {
-  const headers = { "Content-Type": "application/json" };
-  if (email) headers["Cf-Access-Authenticated-User-Email"] = email;
-  const res = await onRequest({ request: new Request("https://x/api/queue" + path, { method: method || "GET", headers, body: body ? JSON.stringify(body) : undefined }), env: ENV });
-  let j; try { j = await res.json(); } catch { j = {}; }
-  j.__status = res.status;
-  return j;
-}
-const org = (id, owner, extra) => docs.set(`q_orgs/${id}`, { fields: { id, code: "SMD-" + id.toUpperCase().replace(/[^A-Z]/g, "").padEnd(6, "X").slice(0, 6), name: id, kind: "clinic", mode: "native", ownerUid: uidFor(owner), createdAt: 1, ...(extra || {}) }, updateTime: "t1" });
-const member = (orgId, email, role) => docs.set(`q_members/${sanitize(orgId)}__${sanitize(email)}`, { fields: { orgId, identity: email, role, active: true, createdAt: 1 }, updateTime: "t1" });
-const dept = (id, orgId, name, code) => docs.set(`q_departments/${id}`, { fields: { id, orgId, name, code: code || "", type: "general", active: true }, updateTime: "t1" });
-export function seed(tokens) {
-  reset();
-  org("org-a", OWNER_A, tokens ? { tokens } : {});
-  org("org-b", OWNER_B);
-  member("org-a", HR_A, "hr"); member("org-a", NURSE_A, "nurse"); member("org-a", VIEWER_A, "viewer"); member("org-a", CASHIER_A, "cashier");
-  member("org-b", HR_B, "admin");
-  dept("dcard", "org-a", "Cardiology", "CAR"); dept("dmed", "org-a", "General Medicine", "GM");
-  dept("dtheirs", "org-b", "Their Cardiology", "TC");
-}
-export { docs, ORG };
 const tickets = () => [...docs.entries()].filter(([k]) => k.startsWith("q_tickets/")).map(([, d]) => d.fields);
 const rooms = () => [...docs.entries()].filter(([k]) => k.startsWith("q_rooms/")).map(([k, d]) => ({ id: k.slice(8), ...d.fields }));
 
