@@ -5591,3 +5591,41 @@ Tests: `test/wardsynq-fhir-terminology.test.mjs`, `-ips`, `-subscription`. Strat
   `urn:stewardmd:fhir:SubscriptionTopic:<event>`). No FHIR create and no `$status`: management stays on the
   Integrations screen where the address checks and the secret live. `event-number` carries the outbox event id,
   not a per-subscription sequence (no counter exists); a receiver needing strict sequence cannot rely on it.
+
+## 2026-09-14 Immutable audit retention (P2.17): triggers refuse, a hash chain detects, nothing deletes
+
+`functions/_wardsynq/audit-chain.js` (chain, `verifyAuditChain`, `auditRetentionSetting`), both repositories
+(`repository.js` MemoryRepository, `repository-d1.js`), triggers in `db/connect_schema.sql`, chain table in
+`functions/db/wardsynq_schema.sql`. Screens: Admin Center > Security review (Audit retention > Tamper evidence),
+System health ("Audit trail integrity"). Tests: `test/wardsynq-audit-chain.test.mjs`. Restore notes: `docs/BACKUP_DR.md` 1a.
+- PREVENTION IS THE DATABASE, EVIDENCE IS THE CHAIN. BEFORE UPDATE/DELETE triggers on `connect_audit_event`
+  (whole table: Connect/ABDM already promise no UPDATE/DELETE) and on the chain table. The chain catches what
+  goes around them (dropped trigger, console, restore, import). Anyone with DB write can rebuild a chain; there is
+  no external anchor of the head, so a removed TAIL is not detectable. Not built: anchoring the head elsewhere.
+- SIDE TABLE, NOT COLUMNS. `wardsynq_audit_chain (tenant_id, chain_seq, audit_id, prev_hash, row_hash,
+  legacy_boundary)`, one link per audit row the record repository writes (Connect's own audit writer is not
+  chained). `connect_audit_event` is shared and live, and ALTER TABLE ADD COLUMN is not re-runnable under the
+  on-prem boot that applies the schema files every time.
+- row_hash = SHA-256(prev_hash || canonical JSON of the row AS STORED), with values normalised to the type the
+  column returns, so what is hashed is exactly what is read back.
+- CONCURRENCY: the head is read and the hash computed before the batch (SQLite has no SHA-256), so the guard is
+  the PRIMARY KEY (tenant_id, chain_seq): the loser's whole batch rolls back and is retried (8 attempts, jittered),
+  then a VersionConflictError. A guarded head-row UPDATE was rejected: in a D1 batch an UPDATE matching no row
+  succeeds and the fork commits. Plus an in-process per-store, per-tenant lock, because a chart open fires many
+  audited reads at once and without it they livelock on the key. ponytail: one chain per hospital serialises its
+  audit writes.
+- FAILS CLOSED: an audit row that cannot be chained is not written, and neither is the record write it belongs to.
+  The chain table must be applied BEFORE deploy; the record-store probe checks it.
+- GENESIS ERA: rows before the chain are unchained. Link 1 stores the newest legacy row id and its prev_hash is
+  derived from it, so the boundary cannot be moved without breaking link 1.
+- VERIFY never says ok on a failed or short read: ok / empty / broken (row, expected vs found) / gap (missing
+  link or missing audit row) / not_verified. Bounded: newest 1000 rows in Security review, 200 in System health;
+  not_verified is "down" in System health.
+- RETENTION: `wardsynq.auditRetentionYears`, informational only. India defaults to 3 years citing Indian Medical
+  Council regulation 1.3.1 (the citation documents.js already uses); other regions "not configured, kept
+  indefinitely". No deletion procedure exists; one would be separate, audited and owner-only.
+- FOUND ON THE WAY (migrate-inpatient.js claimBed): the bed claim only caught two admissions that read the claim at
+  the same instant. One reading it just after another's claim landed, before that Encounter was written, admitted a
+  second patient to the bed. Surfaced because audited reads now take real time in tests. Fixed: a claim naming
+  another admission that is open in the bed, or unwritten and under 2 minutes old, is occupancy; a failed Encounter
+  write releases its claim. A crashed admission holds the bed for up to 2 minutes.

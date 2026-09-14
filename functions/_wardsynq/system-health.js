@@ -21,11 +21,12 @@ import { outboxHealth } from "./outbox.js";
 import { dataProtection, RESTORE_TYPE } from "./security-review.js";
 import { RUN_TYPE } from "./backup-run.js";
 import { maikConfig, geminiKey } from "./maik-gateway.js";
+import { verifyAuditChain } from "./audit-chain.js";
 
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
 /* Thresholds, returned on the report so a reader can see what "degraded" meant. */
-const LIMITS = Object.freeze({ recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
+const LIMITS = Object.freeze({ auditChainRows: 200, recordSlowMs: 1500, outboxDegradedMinutes: 15, outboxDownMinutes: 60, tickDegradedMinutes: 15, tickDownMinutes: 60 });
 
 class ProbeTimeout extends Error {}
 
@@ -152,6 +153,18 @@ const DEPENDENCIES = [
       const p = dataProtection(runs, tests, d.rpoMinutes, new Date(nowMs).toISOString());
       const reason = p.reasons.join(" ") || null;
       return p.status === "green" ? up(`Last backup ${p.lastBackup.at}; last restore test ${p.lastRestoreTest.at}.`) : p.status === "amber" ? degraded(reason) : down(reason);
+    },
+  },
+  {
+    /* P2.17. The newest rows of the tamper-evident audit chain, re-hashed. Not verified counts as down:
+     * an integrity nobody could check is not an integrity anybody can rely on. */
+    id: "audit-chain", name: "Audit trail integrity",
+    consequence: {
+      down: "Audit trail integrity not confirmed: audit rows may have been changed or removed in the database, or the check could not run. Charting continues and nothing is blocked. Tell the information governance lead, and do not restore or re-import the database until the audit trail has been examined.",
+    },
+    async check(d) {
+      const v = await verifyAuditChain(d.repository, d.tenantId, { limit: LIMITS.auditChainRows });
+      return v.status === "ok" || v.status === "empty" ? up(v.message) : down(v.message);
     },
   },
 ];

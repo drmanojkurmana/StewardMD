@@ -964,9 +964,28 @@
       ? "<p>" + esc(a.configuredNote) + "</p><p>Oldest audit row: " + esc(a.oldestAuditAt || "none found") + "</p><p>Oldest record: " + esc(a.oldestRecordAt || "none") + "</p>" +
         (a.gap ? '<div class="msg err">' + esc(a.gap) + "</div>" : "")
       : '<div class="msg err">Audit retention could not be checked.</div>';
+    h += "<h3>Tamper evidence</h3>" + auditIntegrityHtml(c, a.integrity);
     return h + "</div>";
   }
   WSQ._securityReviewHtml = securityReviewHtml;
+
+  /* P2.17. Only "ok" and "empty" read as fine. Broken and gap name the row; not verified and a missing
+   * result both say the integrity is unknown, never that it is intact. */
+  var INTEGRITY_LABEL = { ok: "Intact", empty: "Nothing to verify yet", broken: "Altered", gap: "Rows missing", not_verified: "Not verified" };
+  function auditIntegrityHtml(c, ig) {
+    var esc = c.esc;
+    if (!ig) return '<div class="msg err">Not verified: no integrity result was returned. This is not the same as the audit trail being intact.</div>';
+    var fine = ig.status === "ok" || ig.status === "empty";
+    var h = '<div class="msg ' + (fine ? "ok" : "err") + '"><b>' + esc(INTEGRITY_LABEL[ig.status] || "Not verified") + "</b>: " + esc(ig.message || "") + "</div>";
+    if (ig.atSeq != null) {
+      h += '<div class="tbl"><table><tbody><tr><th>Chained row</th><td>' + esc(ig.atSeq) + "</td></tr>" +
+        (ig.auditId ? '<tr><th>Audit row</th><td class="mono">' + esc(ig.auditId) + "</td></tr>" : "") +
+        (ig.expected ? '<tr><th>Expected</th><td class="mono">' + esc(ig.expected) + '</td></tr><tr><th>Found</th><td class="mono">' + esc(ig.found || "") + "</td></tr>" : "") +
+        "</tbody></table></div>";
+    }
+    return h + '<p class="quiet">Each audit row is linked to the one before it by a hash, so a change or removal made in the database itself shows here. The newest rows are checked each time. Rows written before this was switched on are not linked and cannot be checked.</p>';
+  }
+  WSQ._auditIntegrityHtml = auditIntegrityHtml;
 
   /* DATA EXPORT (FHIR). The hospital's record as FHIR Bulk Data NDJSON (functions/_wardsynq/fhir-bulk.js).
    * The list is null while loading and false when it failed, and a failed load never renders as "no

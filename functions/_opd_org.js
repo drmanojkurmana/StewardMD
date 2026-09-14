@@ -133,9 +133,12 @@ function wardsynqConfig(w) {
    * endpoint, rules, and a SEALED credential reference, never a plaintext credential). */
   /* antibiotics joined for P1.14: the drug names or codes this hospital counts as antibiotics for days
    * of therapy. Absent means "antibiotic list not configured", never a count of zero. */
+  /* auditRetentionYears joined for P2.17: how long this hospital says its audit trail is kept, shown in the
+   * Security review. INFORMATIONAL ONLY, nothing deletes on it; absent means the region default
+   * (audit-chain.js auditRetentionSetting) or "kept indefinitely". */
   /* specialties joined for P2.11: the hospital's specialty registry (pathways.js resolveSpecialty). Absent means
    * the chart's Specialty panel says none is configured. */
-  for (const k of ["edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties"]) {
+  for (const k of ["edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;

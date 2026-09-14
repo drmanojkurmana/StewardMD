@@ -455,8 +455,17 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
 
   const realLatestByType = RECORD.latestByType.bind(RECORD);
   const realAppend = RECORD.append.bind(RECORD);
-  let arrived = 0, releaseGate, claimConflicts = 0;
+  const realLatest = RECORD.latest.bind(RECORD);
+  let arrived = 0, releaseGate, claimConflicts = 0, claimReads = 0, releaseClaim;
   const gate = new Promise((resolve) => { releaseGate = resolve; });
+  /* The claim read is held too. Audited reads take real time now (each extends the audit chain), so
+   * without this one request can land its claim before the other reads it, and the live-claim check
+   * in claimBed() (not the version race this test is about) refuses it. */
+  const claimGate = new Promise((resolve) => { releaseClaim = resolve; });
+  RECORD.latest = async (tenantId, resourceType, id) => {
+    if (resourceType === "_wardsynq_bed_claim") { claimReads += 1; if (claimReads === 2) releaseClaim(); await claimGate; }
+    return realLatest(tenantId, resourceType, id);
+  };
   RECORD.latestByType = async (tenantId, resourceType, limit) => {
     if (resourceType === "Encounter") {
       arrived += 1;
@@ -479,7 +488,7 @@ test("wrong-patient / bed-safety, THE ATOMIC PATH ITSELF: forced to race inside 
       as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regA.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:00.000Z" }),
       as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "ICU", bed: "6", admittedAt: "2026-09-07T08:00:01.000Z" }),
     ]);
-  } finally { RECORD.latestByType = realLatestByType; RECORD.append = realAppend; }
+  } finally { RECORD.latestByType = realLatestByType; RECORD.append = realAppend; RECORD.latest = realLatest; }
 
   assert.equal(arrived, 2, "both requests genuinely reached the list-scan before either was released - the race was real, not assumed");
   assert.equal(claimConflicts, 1, "claimBed()'s own append() genuinely threw VersionConflictError for the loser - the atomic path, not the list-scan, decided this");
