@@ -119,7 +119,8 @@ function failure(e) {
   if (e instanceof NursingError) return { ok: false, status: e.status, error: e.code, detail: e.message };
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code) };
   if (e instanceof VersionConflictError && e.code === "IDEMPOTENCY_KEY_REUSED") return { ok: false, status: 409, error: "idempotency_conflict", detail: "this request key already recorded something else" };
-  if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", detail: "this changed since you opened it; reload it", currentVersion: e.detail && e.detail.currentVersion != null ? e.detail.currentVersion : null };
+  // G2: the record as it is now travels with the conflict, so a device's conflict review can show it beside the entry.
+  if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", detail: "this changed since you opened it; reload it", currentVersion: e.detail && e.detail.currentVersion != null ? e.detail.currentVersion : null, ...(e.detail && e.detail.current ? { current: e.detail.current } : {}) };
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message) };
 }
 const baseOf = (mig) => ({ mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null });
@@ -131,7 +132,7 @@ async function encounterOf(svc, encounterId, patientId) {
   return enc;
 }
 function stale(cur, expected) {
-  if (expected != null && expected !== "" && Number(expected) !== (cur ? cur.version : 0)) throw new VersionConflictError("stale", { expectedVersion: Number(expected), currentVersion: cur ? cur.version : 0 });
+  if (expected != null && expected !== "" && Number(expected) !== (cur ? cur.version : 0)) throw new VersionConflictError("stale", { expectedVersion: Number(expected), currentVersion: cur ? cur.version : 0, current: cur || null });
 }
 
 /**

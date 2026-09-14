@@ -96,6 +96,16 @@
     if (!quiet) go("landing");
   }
   function signOut() {
+    /* G2: bedside entries kept on this device while offline leave with the person who charted them. Signing
+     * out with some still unsent deletes them from this device, so it is said first and can be refused. */
+    var off = G.WARD_OFFLINE && G.WARD_OFFLINE.device() ? G.WARD_OFFLINE.device().state() : null;
+    var held = off ? (off.waiting || 0) + (off.conflicts || 0) + (off.refused || 0) : 0;
+    if (held) {
+      var sure = true;
+      try { sure = G.confirm(held + " bedside " + (held === 1 ? "entry is" : "entries are") + " saved on this device and not in the record. Signing out deletes " + (held === 1 ? "it" : "them") + " from this device.\n\nSign out anyway? Cancel stays signed in, so you can send or review them in the ward."); } catch (e) {}
+      if (!sure) return;
+    }
+    try { if (G.WARD_OFFLINE) G.WARD_OFFLINE.clearDevice(); } catch (e) {}
     var wasAccount = st.tokType === "account";
     st.tokType = ""; st.tok = ""; st.orgId = ""; st.who = null; st.org = null; st.orgs = null;
     lsSet(LS.tt, ""); lsSet(LS.tok, ""); lsSet(LS.hosp, ""); lsSet(LS.wp, "");

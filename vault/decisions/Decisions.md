@@ -5913,3 +5913,22 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
   and it is marked legacy: counted from registration, but unknown after that if it is now turned off. Beds
   listed only in `wardsynq.beds` keep no history, so a bucket needing them is unknown, never today's count.
 - Not built: an admin "in service since" edit for legacy beds; blocked/closed state history (still not subtracted).
+
+## 2026-09-14 G2: offline bedside writes wired, conflict review, and a dose checked against the order it was charted on
+- `ward-offline.js` is now used: ward.js `bedsideWrite()` carries vitals, nursing task done, notes (timeline and
+  templated), dose steps, ICU records and fluid entries. The request key and bedside time are fixed before the
+  first attempt; offline or with no answer the entry is queued in IndexedDB and the screen says "saved on this
+  device, not yet sent: NOT in the record". The app's `index.html` loads `ward-offline.js` before `ward.js`.
+- Conflicts: `version_conflict` and the new `order_changed` come back with the record as it is now (nursing
+  `failure()` and `administerStep`), shown beside the entry on the "Saved on this device" view. Resend (reason,
+  against the current version), edit (vitals, note sections, ICU values, fluid entries only) or discard.
+- Every decision is audited server-side first: `POST /ward/offline-resolve` (door `emr.view`, then the write's
+  own capability; a note also accepts `noteWriterRoles`), audit action `offline.<choice>`, patient pseudonymised.
+  The device drops or re-queues nothing unless that answers ok.
+- eMAR: the round (`/ward/schedule`) returns `orderVersion`; `/ward/mar` with `expectedOrderVersion` refuses
+  `order_changed` when the order has a newer version (a stopped order is still `order_not_active`, checked first;
+  a retry of a recorded dose still replays). ward.js sends it online too, so a round loaded before a prescriber's
+  change cannot chart against the old order.
+- Sign-out on wardsynq.com warns when entries are held and clears the device store on confirm. The phone app has
+  no equivalent sign-out hook: a different person signing in clears the previous person's entries (ward-offline.js
+  rule 4).

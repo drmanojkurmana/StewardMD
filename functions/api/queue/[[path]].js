@@ -139,6 +139,7 @@ import { recordConsent, withdrawConsent, consentStatus } from "../../_wardsynq/c
 import { bookAppointment, setAppointmentState, requestFollowUp, listSchedule } from "../../_wardsynq/scheduling.js";
 import { setCarePlan, recordProgress, readCarePlan } from "../../_wardsynq/care-plan.js";
 import { listTemplates, writeTemplatedNote } from "../../_wardsynq/note-templates.js";
+import { recordOfflineChoice } from "../../_wardsynq/offline-resolve.js";
 import { encounterIdForTicket } from "../../_wardsynq/opd-identity.js";
 /* Aliased: `recordAssessment` is already the OPD assessment writer in this file, and a risk
  * assessment is a different thing entirely. Two names that read the same for two different
@@ -1359,6 +1360,9 @@ export async function onRequest(context) {
          * through in actor.js. Reading the ICU cards, with the SOFA and the advisory sepsis screen
          * worked out from them, is reading the chart. */
         "icu-record": CAPS.EMR_VITALS, icu: CAPS.EMR_VIEW,
+        /* G2: a decision about a bedside write that waited on a device and came back as a conflict or a
+         * refusal. emr.view opens the door; the route then asks for the capability the write itself needs. */
+        "offline-resolve": CAPS.EMR_VIEW,
         /* Recording that a value was decisive is part of reading a chart, so it needs the authority
          * to read one - emr.vitals, the same bar as charting an observation about the patient.
          * Asking WHO to tell about a correction is emr.view: it is the safety question, and the
@@ -3611,9 +3615,26 @@ export async function onRequest(context) {
         const r = await signDischargeSummary(request, env, { ...deps, encounterId: body.encounterId, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* G2 conflict review (ward.js offline view, ward-offline.js). Only somebody who could have made the write
+       * may record what happens to it: the kind names the capability, and a note also accepts the hospital's
+       * noteWriterRoles exactly as /ward/note does. Audited before the device drops or re-sends anything. */
+      if (sub === "offline-resolve" && method === "POST") {
+        const kind = String(body.kind || "");
+        const kindCap = { vitals: CAPS.EMR_VITALS, icu: CAPS.EMR_VITALS, fluid: CAPS.EMR_VITALS, "nursing-task-done": CAPS.EMR_VITALS, note: CAPS.EMR_TREAT, mar: CAPS.MED_ADMINISTER }[kind];
+        if (!kindCap) return json({ ok: false, error: "unknown_kind" }, 422, request);
+        let kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
+        if (!kAz.ok && kind === "note") {
+          const roles = (wsqCfg && Array.isArray(wsqCfg.noteWriterRoles) ? wsqCfg.noteWriterRoles : []).map((x) => String(x || "").trim());
+          if (roles.indexOf(String(wAz.role || "")) >= 0) kAz = wAz;
+        }
+        if (!kAz.ok) return json(azRefusal(kAz), 403, request);
+        const r = await recordOfflineChoice(request, env, { ...deps, kind, choice: body.choice, idempotencyKey: body.idempotencyKey, patientId: body.patientId,
+          error: body.error, expectedVersion: body.expectedVersion, currentVersion: body.currentVersion, reason: body.reason, createdAt: body.createdAt });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "mar" && method === "POST") {
         const r = await administerStep(request, env, {
-          ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt,
+          ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt, expectedOrderVersion: body.expectedOrderVersion,
           patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
           rulePack: getRulePack(), highAlertDrugs: (wsqCfg && wsqCfg.highAlertDrugs) || [],
           idempotencyKey: body.idempotencyKey || null,

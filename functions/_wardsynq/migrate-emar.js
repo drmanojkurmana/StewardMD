@@ -154,7 +154,7 @@ async function medicationRound(request, env, ctx) {
      * already given. */
     try { mar = marId ? await svc.get("MedicationAdministration", marId) : null; } catch { readFailed = true; unread += 1; }
     due.push({
-      orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
+      orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       administrationId: marId,
       ...(readFailed ? { readFailed: true } : {}),
       status: readFailed ? "unknown" : mar ? mar.status : null,          // null = this dose has not been started
@@ -169,7 +169,7 @@ async function medicationRound(request, env, ctx) {
  * One governed transition of one dose.
  *
  * ctx: { migration, action, orderId, dueAt, patient, scan?, reason?, witnessId?, rulePack?,
- *        highAlertDrugs?, actorDeps, recordDeps }
+ *        highAlertDrugs?, expectedOrderVersion?, actorDeps, recordDeps }
  */
 async function administerStep(request, env, ctx) {
   const mig = ctx.migration;
@@ -221,6 +221,16 @@ async function administerStep(request, env, ctx) {
     }
   }
   if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", orderId, orderStatus: order.status };
+  /* G2: THE ORDER THE NURSE SAW IS THE ORDER THE DOSE IS RECORDED AGAINST. A dose charted on a device while
+   * offline reaches here minutes or hours later; if the prescriber changed the order meanwhile, recording it
+   * against the new dose, route or frequency would chart something nobody gave. So a caller that names the
+   * order version it acted on is refused when that is no longer the order, and shown the order as it is now.
+   * A stopped order is refused above, before this. A retry of a dose already recorded was answered above too. */
+  if (ctx.expectedOrderVersion !== undefined && ctx.expectedOrderVersion !== null && ctx.expectedOrderVersion !== "" && Number(ctx.expectedOrderVersion) !== Number(order.version)) {
+    return { ...base, ok: false, status: 409, error: "order_changed", detail: "this order changed after the dose was charted; nothing was recorded", orderId, administrationId: marId, written: 0,
+      expectedOrderVersion: Number(ctx.expectedOrderVersion), currentVersion: order.version,
+      current: { drug: order.drug || null, dose: order.dose || null, route: order.route || null, frequency: order.frequency || null, status: order.status, version: order.version } };
+  }
 
   // Wrong-patient prevention, before any state is touched: the patient the ward says it is holding
   // must be the patient the ORDER names. The five rights check this again at the bedside against the

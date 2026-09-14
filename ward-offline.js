@@ -13,8 +13,10 @@
  *    online one. A medication step offline is checked by the eMAR on sync exactly as it would have been
  *    at the bedside; a refusal is shown loudly and never retried on its own.
  * 3. NO SILENT OVERWRITE. Every write carries its own idempotency key (a resend replays the original
- *    outcome) and the version the user saw. A version conflict becomes a CONFLICT item that stays until a
- *    person keeps theirs (as a new version, with a reason) or discards it.
+ *    outcome) and the version the user saw (for a dose, the ORDER's version). A version conflict, or a dose
+ *    whose order changed, becomes a CONFLICT item that stays until a person resends theirs (as a new version,
+ *    with a reason), edits it, or discards it. ward.js records that decision on the server first
+ *    (/ward/offline-resolve); nothing here drops or re-sends an item on a decision the server did not record.
  * 4. PHI STAYS ON THIS DEVICE AND LEAVES WITH THE USER. Queue and read cache live only in this device's
  *    IndexedDB, are owned by the user who wrote them, and are cleared on sign-out or when a different
  *    user is signed in. No credential is ever stored: headers are asked for at send time.
@@ -35,6 +37,11 @@
     fluid: "/ward/fluid"
   };
   var WORDS = { vitals: "vitals", "nursing-task-done": "nursing task", note: "note", mar: "dose record", icu: "ICU observation", fluid: "fluid entry" };
+  /* Where the version a write was made against travels in its body. A dose is checked against its order. */
+  function versionField(kind) { return kind === "mar" ? "expectedOrderVersion" : "expectedVersion"; }
+  /* The part of a body a person may change on the conflict screen. A task done and a dose step have none:
+   * a different task or a different dose is a new act at the bedside, not an edit. */
+  var EDITABLE = { vitals: "vitals", note: "sections", icu: "values", fluid: "entries" };
 
   function OfflineRefused(message, code) { var e = new Error(message); e.code = code; return e; }
   function copy(o) { return JSON.parse(JSON.stringify(o)); }
@@ -135,7 +142,7 @@
     if (status === 401 || status === 403 && r && (r.error === "auth" || r.error === "permission" || r.error === "unauthorized" || r.error === "forbidden")) return "auth";
     if (r && (r.error === "auth" || r.error === "unauthorized")) return "auth";
     if (!r || status >= 500 || status === 0 || r.error === "upstream_unreachable") return "retry";
-    if (r.error === "version_conflict") return "conflict";
+    if (r.error === "version_conflict" || r.error === "order_changed") return "conflict";
     if (r.ok) {
       // ok:true that recorded nothing is not a save.
       if (r.skipped === "no_numeric_values" || r.skipped === "no_entries") return "refused";
@@ -155,7 +162,7 @@
     var now = deps.now || function () { return Date.now(); };
     var online = deps.online || function () { return true; };
     var actor = deps.actor || function () { return null; };
-    var syncing = false, authNeeded = false, items = [], loaded = null, seq = 0;
+    var syncing = false, authNeeded = false, items = [], loaded = null, seq = 0, readFailed = false;
 
     function sorted() { return items.slice().sort(function (a, b) { return a.seq - b.seq; }); }
     function snapshot() {
@@ -163,10 +170,12 @@
       var waiting = mine.filter(function (i) { return i.state === "queued"; }).length;
       var conflicts = mine.filter(function (i) { return i.state === "conflict"; }).length;
       var refused = mine.filter(function (i) { return i.state === "refused"; }).length;
-      return { online: !!online(), syncing: syncing, waiting: waiting, conflicts: conflicts, refused: refused, authNeeded: authNeeded, durable: !!store.durable,
+      return { online: !!online(), syncing: syncing, waiting: waiting, conflicts: conflicts, refused: refused, authNeeded: authNeeded, durable: !!store.durable, readFailed: readFailed,
         items: mine.filter(function (i) { return i.state !== "queued"; }).map(function (i) {
-          return { id: i.id, kind: i.kind, label: i.label, state: i.state, createdAt: iso(i.createdAt), reason: i.reason || "", currentVersion: i.currentVersion, expectedVersion: i.expectedVersion };
-        }) };
+          return { id: i.id, kind: i.kind, label: i.label, state: i.state, createdAt: iso(i.createdAt), reason: i.reason || "", error: i.error || "", currentVersion: i.currentVersion, expectedVersion: i.expectedVersion,
+            patientId: i.patientId, idempotencyKey: i.idempotencyKey, body: copy(i.body), current: i.current ? copy(i.current) : null, editable: !!EDITABLE[i.kind] };
+        }),
+        queued: mine.filter(function (i) { return i.state === "queued"; }).map(function (i) { return { id: i.id, kind: i.kind, label: i.label, createdAt: iso(i.createdAt), patientId: i.patientId }; }) };
     }
     function changed() { if (deps.onChange) { try { deps.onChange(snapshot()); } catch (e) {} } }
 
@@ -177,8 +186,9 @@
         var me = actor(), drop = [];
         items = [];
         rows.forEach(function (r) { if (me && r.actor !== me) drop.push(r.id); else items.push(r); seq = Math.max(seq, r.seq || 0); });
+        readFailed = false;
         if (drop.length) return clearAll();
-      }).catch(function () { items = []; }).then(changed);
+      }).catch(function () { items = []; readFailed = true; loaded = null; }).then(changed);
       return loaded;
     }
     function save(item) { return store.put("outbox", item.id, item); }
@@ -194,7 +204,7 @@
         var t = now(), b = stampTime(kind, copy(body), iso(t));
         b.idempotencyKey = b.idempotencyKey || randomKey();
         var ev = opts.expectedVersion == null ? null : Number(opts.expectedVersion);
-        if (ev != null) b.expectedVersion = ev;
+        if (ev != null) b[versionField(kind)] = ev;
         var item = { id: b.idempotencyKey, seq: ++seq, kind: kind, path: KINDS[kind], body: b, idempotencyKey: b.idempotencyKey,
           expectedVersion: ev, createdAt: t, actor: who, patientId: opts.patientId || b.patientId || null,
           label: String(opts.label || WORDS[kind]), state: "queued", attempts: 0 };
@@ -240,8 +250,13 @@
               items = items.filter(function (i) { return i.id !== item.id; });
               return store.del("outbox", item.id).then(next);
             }
-            item.state = c; item.reason = reasonOf(r);
-            if (c === "conflict") { out.conflicts++; item.currentVersion = r.currentVersion != null ? r.currentVersion : (r.detail && r.detail.currentVersion != null ? r.detail.currentVersion : null); }
+            item.state = c; item.reason = reasonOf(r); item.error = String(r.error || "");
+            if (c === "conflict") {
+              out.conflicts++;
+              item.currentVersion = r.currentVersion != null ? r.currentVersion : (r.detail && r.detail.currentVersion != null ? r.detail.currentVersion : null);
+              // The record as it is now, for the side by side on the conflict screen.
+              item.current = r.current || (r.detail && r.detail.current) || null;
+            }
             else out.refused++;
             return save(item).then(next);
           }, function () { out.stopped = "offline"; return out; });
@@ -263,22 +278,29 @@
       });
     }
 
-    /* KEEP MINE: re-sent as a NEW version on top of the one the server now holds, with the reason on the
-     * audit. A fresh idempotency key, because it is a different write from the one that conflicted. */
-    function keepMine(id, reason, currentVersion) {
+    /* KEEP MINE (resend): re-sent as a NEW version on top of the one the server now holds, with the reason on
+     * the audit. EDIT: the same, with the editable part of the body replaced; a refused entry may be edited
+     * too. A fresh idempotency key either way, because it is a different write from the one that came back.
+     * A dose whose ORDER changed is re-sent against the order as it is now, and the eMAR checks it again. */
+    function keepMine(id, reason, currentVersion, edit) {
       return load().then(function () {
         var it = find(id);
         if (!it || it.actor !== actor()) throw OfflineRefused("not your write", "NOT_FOUND");
-        if (it.state !== "conflict") throw OfflineRefused("only a conflict can be kept", "NOT_CONFLICT");
+        if (edit !== undefined) {
+          if (!EDITABLE[it.kind]) throw OfflineRefused("this kind of entry cannot be edited here", "NOT_EDITABLE");
+          if (it.state !== "conflict" && it.state !== "refused") throw OfflineRefused("only a returned entry can be edited", "NOT_RETURNED");
+        } else if (it.state !== "conflict") throw OfflineRefused("only a conflict can be kept", "NOT_CONFLICT");
         var why = String(reason || "").trim();
         if (why.length < 5) throw OfflineRefused("say why your version should stand over the one on the server", "NO_REASON");
         var cv = currentVersion != null ? currentVersion : it.currentVersion;
-        if (it.expectedVersion != null) {
+        var versioned = it.kind === "mar" ? it.error === "order_changed" : true;
+        if (it.state === "conflict" && it.expectedVersion != null && versioned) {
           if (cv == null || !(Number(cv) >= 0) || Math.floor(Number(cv)) !== Number(cv)) throw OfflineRefused("reload the record to see the version you are replacing", "NO_CURRENT_VERSION");
-          it.expectedVersion = Number(cv); it.body.expectedVersion = Number(cv);
+          it.expectedVersion = Number(cv); it.body[versionField(it.kind)] = Number(cv);
         }
+        if (edit !== undefined) it.body[EDITABLE[it.kind]] = copy(edit);
         it.body.idempotencyKey = randomKey(); it.idempotencyKey = it.body.idempotencyKey;
-        it.state = "queued"; it.conflictReason = why.slice(0, 200); it.reason = ""; it.seq = ++seq;
+        it.state = "queued"; it.conflictReason = why.slice(0, 200); it.reason = ""; it.error = ""; it.current = null; it.seq = ++seq;
         return save(it).then(function () { changed(); return copy(it); });
       });
     }
@@ -314,6 +336,7 @@
   /* PURE. The words for the sync state, the same on every screen. */
   function label(s) {
     if (!s) return { kind: "online", text: "Online" };
+    if (s.readFailed) return { kind: "conflicts", text: "Entries kept on this device could not be read" };
     if (s.syncing) return { kind: "syncing", text: "Syncing" };
     if (s.conflicts) return { kind: "conflicts", text: "Conflicts (" + s.conflicts + ")" };
     if (!s.online) return { kind: "offline", text: "Offline (" + s.waiting + " waiting)" };
@@ -327,6 +350,7 @@
       return it.kind === "mar" ? "Not recorded - the dose record was refused: " + it.reason
         : "Not recorded - the " + (WORDS[it.kind] || "write") + " was refused: " + it.reason;
     }
+    if (it.state === "conflict" && it.error === "order_changed") return "CONFLICT: the order changed after this dose was charted. Nothing was recorded. Compare it with the order as it is now.";
     if (it.state === "conflict") return "CONFLICT: this " + (WORDS[it.kind] || "record") + " changed on the server after you saw it. Nothing was overwritten.";
     return "Saved on this device, not yet sent.";
   }
@@ -345,6 +369,6 @@
     return device;
   }
 
-  G.WARD_OFFLINE = { KINDS: KINDS, create: create, memoryStore: memoryStore, idbStore: idbStore, classify: classify, label: label, itemText: itemText, deviceFor: deviceFor,
+  G.WARD_OFFLINE = { KINDS: KINDS, EDITABLE: EDITABLE, WORDS: WORDS, create: create, memoryStore: memoryStore, idbStore: idbStore, classify: classify, label: label, itemText: itemText, deviceFor: deviceFor,
     clearDevice: function () { return device ? device.clearAll() : Promise.resolve(); }, device: function () { return device; } };
 })();
