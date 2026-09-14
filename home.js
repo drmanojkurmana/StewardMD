@@ -139,6 +139,15 @@
     } catch (e) { /* fall through to the message: a thrown door is still a door that did not open */ }
     // Nothing opened. Say which one is coming rather than a bare "loading", and never stay silent.
     try { toast(wardsynqWorkplace() ? "The ward is still loading…" : "Ward Sync loading…"); } catch (e) {}
+    var t0 = Date.now();
+    var poll = setInterval(function () {
+      try {
+        if (wardsynqWorkplace() && window.WARD && window.WARD.open) { clearInterval(poll); window.WARD.open(); return; }
+        if (window.openGHIS) { clearInterval(poll); window.openGHIS(); return; }
+        if (window.GHIS && window.GHIS.open) { clearInterval(poll); window.GHIS.open(); return; }
+      } catch (e) {}
+      if (Date.now() - t0 > 3000) clearInterval(poll);
+    }, 100);
   }
   var IS_V2 = flagged();
 

@@ -78,6 +78,7 @@ public class ConnectBrowserPlugin extends Plugin {
 
     private String mode = "login";
     private boolean compact = false;
+    private boolean hidden = false;
     // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
     private boolean sawPasswordField = false;
     private boolean autoLoginNotified = false;
@@ -144,6 +145,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 allowedOrigins = new HashSet<>(origins);
                 mode = "login";
                 compact = false;
+                hidden = call.getBoolean("hidden", false);
                 sawPasswordField = false;
                 autoLoginNotified = false;
                 hostTitle = title != null ? title : hostOf(urlStr);
@@ -367,6 +369,7 @@ public class ConnectBrowserPlugin extends Plugin {
         final String banner = call.getString("banner");
         final JSArray originsArr = call.getArray("origins");
         final boolean newCompact = call.getBoolean("compact", false);
+        final Boolean newHidden = call.getBoolean("hidden");
         final Activity activity = getActivity();
         if (activity == null) {
             call.reject("no activity");
@@ -377,6 +380,7 @@ public class ConnectBrowserPlugin extends Plugin {
             public void run() {
                 mode = newMode;
                 compact = newCompact;
+                if (newHidden != null) hidden = newHidden;
                 if (originsArr != null) {
                     try {
                         Set<String> next = new HashSet<>();
@@ -640,6 +644,30 @@ public class ConnectBrowserPlugin extends Plugin {
         if (dialog == null) return;
         Window window = dialog.getWindow();
         if (window == null) return;
+        /* HIDDEN AGENT READ. Full-size window so the hospital page lays out exactly as it would on
+         * screen (a 1x1 window gives it a 1x0 viewport and collapses every responsive layout), but
+         * fully transparent and untouchable so the doctor keeps seeing and using their own screen. */
+        if (hidden) {
+            window.setGravity(Gravity.NO_GRAVITY);
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                    | android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.setDimAmount(0f);
+            window.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(Color.TRANSPARENT));
+            View decor = window.getDecorView();
+            if (decor != null) decor.setAlpha(0f);
+            return;
+        }
+        /* LEAVING HIDDEN MODE IS UNCONDITIONAL. The dialog and its window are reused across opens, so
+         * the transparent/untouchable state of a hidden read survives into the next visible one: the
+         * doctor was shown an invisible sign-in page that refused every tap (owner, 2026-09-14).
+         * Never guard this on the current alpha - always restore before laying the window out. */
+        View decor = window.getDecorView();
+        if (decor != null) decor.setAlpha(1f);
+        window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         Activity activity = getActivity();
         boolean useCompact = compact && "agent".equals(mode);
         if (useCompact && activity != null) {

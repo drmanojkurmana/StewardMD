@@ -944,9 +944,11 @@ export async function enrichView(view, brain, ctx = {}) {
       view.resourceHint = verdict.resource;
     }
   }
-  if (typeof brain.mapColumns === 'function' && Array.isArray(view.headers) && view.headers.length && TARGET_HINTS.includes(view.resourceHint)) {
+  // A detail view (one lab result panel, one report) is mapped as its parent resource's columns.
+  const base = String(view.resourceHint || '').replace(/-detail$/, '');
+  if (typeof brain.mapColumns === 'function' && Array.isArray(view.headers) && view.headers.length && TARGET_HINTS.includes(base)) {
     let m = null;
-    try { m = await brain.mapColumns(scrubForBrain({ resource: view.resourceHint, headers: view.headers })); } catch { m = null; }
+    try { m = await brain.mapColumns(scrubForBrain({ resource: base, headers: view.headers })); } catch { m = null; }
     const fields = m && m.fields && typeof m.fields === 'object' ? m.fields : null;
     if (fields) {
       const fh = {};

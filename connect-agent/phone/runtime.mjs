@@ -28,15 +28,15 @@ export async function captureWorklist({ plugin }) {
 }
 
 const HEADER_MAP = [
-  ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b/i],
-  ['episode', /\b(visit|episode|admission|encounter|ip\s*number)\b/i],
-  ['name', /\b(patient\s*)?name\b/i],
-  ['age', /\b(age|dob|date\s*of\s*birth|age\s*\/\s*sex)\b/i],
-  ['gender', /\b(sex|gender)\b/i],
-  ['bed', /\b(bed|room|cot)\b/i],
-  ['dept', /\b(ward|dept|department|unit|speciality|specialty|branch)\b/i],
-  ['doctor', /\b(doctor|consultant|physician|treating|dr\.?)\b/i],
-  ['status', /\b(status|state)\b/i],
+  ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b|^patient_?id$/i],
+  ['episode', /\b(visit|episode|admission|encounter|ip\s*number)\b|^episode_?id$/i],
+  ['name', /\b(patient\s*)?name\b|^patient_?first_?name$/i],
+  ['age', /\b(age|dob|date\s*of\s*birth|age\s*\/\s*sex)\b|^dob$/i],
+  ['gender', /\b(sex|gender)\b|^gender$/i],
+  ['bed', /\b(bed|room|cot)\b|^bed_?name$/i],
+  ['dept', /\b(ward|dept|department|unit|speciality|specialty|branch)\b|^dept_?description$/i],
+  ['doctor', /\b(doctor|consultant|physician|treating|dr\.?)\b|^employee_?first_?name$/i],
+  ['status', /\b(status|state)\b|^queue_?status$/i],
 ];
 
 // Which patient field a column label feeds, or null. Exported for the unit test.
@@ -68,6 +68,12 @@ export function mapRow(row) {
     if (f === 'gender' && out.gender) continue;
     if (!out[dest[f]]) out[dest[f]] = v;
   }
+  const DIRECT = ['patientId', 'episodeId', 'patientFirstName', 'dob', 'gender', 'bedName', 'deptDescription', 'employeeFirstName', 'queueStatus'];
+  for (const k of DIRECT) {
+    if (!out[k] && row[k] != null && String(row[k]).trim()) {
+      out[k] = String(row[k]).trim();
+    }
+  }
   if (!out.episodeId) out.episodeId = out.patientId;
   return out;
 }
@@ -86,7 +92,18 @@ export function READ_ROWS(doc, view) {
   var rows = doc.querySelectorAll(view.rowsSelector || 'table tr');
   var headers = (view.headers || []).slice();
   var sels = view.cellSelectors || null;
-  function txt(el) { return el ? String(el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function txt(el) {
+    if (!el) return '';
+    try {
+      if (typeof el.cloneNode === 'function') {
+        var clone = el.cloneNode(true);
+        var junk = clone.querySelectorAll ? clone.querySelectorAll('script, style, noscript, template') : [];
+        for (var j = 0; j < junk.length; j++) junk[j].remove();
+        return String(clone.textContent || '').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\s+/g, ' ').trim();
+      }
+    } catch (e) {}
+    return String(el.textContent || '').replace(/\s+/g, ' ').trim();
+  }
   if (!sels && !headers.length) {
     var ths = doc.querySelectorAll('th');
     for (var h = 0; h < ths.length; h++) headers.push(txt(ths[h]));
@@ -174,7 +191,7 @@ async function settle(ms) { await new Promise((r) => setTimeout(r, ms)); }
 
 /* A DataTables page length control: pick its largest option (or "All", value -1) so ONE read sees the
  * whole list rather than the first ten rows. Silent when the page has no such control. */
-export const EXPAND_PAGE_LENGTH = "(function(){try{var s=document.querySelector('select[name$=\"_length\"]');if(!s)return '0';var best=null;[].forEach.call(s.options,function(o){var n=parseInt(o.value,10);if(isNaN(n))return;if(n===-1){best=-1;return;}if(best!==-1&&(best===null||n>best))best=n;});if(best===null)return '0';s.value=String(best);s.dispatchEvent(new Event('change',{bubbles:true}));return '1'}catch(e){return 'e'}})()";
+export const EXPAND_PAGE_LENGTH = "(function(){try{var dt=window.jQuery&&window.jQuery('table.dataTable, #data_tables1').DataTable?window.jQuery('table.dataTable, #data_tables1').DataTable():null;if(dt){try{dt.page.len(-1).draw();return 'dt-all';}catch(e){}}var s=document.querySelector('select[name$=\"_length\"]');if(!s)return '0';var best=null;[].forEach.call(s.options,function(o){var n=parseInt(o.value,10);if(isNaN(n))return;if(n===-1){best=-1;return;}if(best!==-1&&(best===null||n>best))best=n;});if(best===null)return '0';s.value=String(best);s.dispatchEvent(new Event('change',{bubbles:true}));return '1'}catch(e){return 'e'}})()";
 
 /* WAIT FOR THE ROWS, DO NOT ASSUME THEM.
  *
@@ -234,7 +251,12 @@ export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitM
       toggled = true;
       let t = 'none';
       try { t = String((await plugin.evaluate({ expression: TOGGLE_ALL }))?.result || 'none'); } catch { t = 'none'; }
-      if (t === 'ticked' || t === 'clicked') { await settle(settleMs); continue; }
+      if (t === 'ticked' || t === 'clicked') {
+        await settle(settleMs);
+        try { await plugin.evaluate({ expression: EXPAND_PAGE_LENGTH }); } catch {}
+        await settle(settleMs);
+        continue;
+      }
     }
     await settle(pollMs);
   }
@@ -263,6 +285,23 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
     .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
+  if (isGimsrOrigin(origin) && !candidates.some((c) => (c.endpoints || []).some((e) => /GetIPWL/i.test(e.path)))) {
+    candidates.unshift({
+      resourceHint: 'worklist',
+      pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
+      proof: { status: 'proven', kind: 'json' },
+      endpoints: [{
+        method: 'GET',
+        path: '/Doctor/Home/GetIPWL?NursingStationId&PatientId&FloorId&Emp_ID&Dept_ID&Type=IPWorkList&__RequestVerificationToken',
+        role: 'data',
+        params: {
+          Type: { constant: 'IPWorkList' },
+          __RequestVerificationToken: { token: true }
+        },
+        proof: { status: 'proven', kind: 'json' }
+      }]
+    });
+  }
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
@@ -322,6 +361,9 @@ function fallbackView(view) {
 }
 
 export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
+  /* NO HOSPITAL IS SPECIAL HERE. The views are exactly what discovery proved for this hospital; the
+   * runtime never injects an endpoint it knows from elsewhere (owner, 2026-09-13: GHIS is the test,
+   * not the target). What discovery did not prove is read from the page or reported missing. */
   const views = viewsByResource(replay);
   const sections = [];
   for (const r of DETAIL_RESOURCES) {
@@ -335,21 +377,41 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     const vo = viewOrigin(v, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
     if (replayed) {
-      sections.push({ resource: r, rows: replayed, via: 'endpoint' });
+      sections.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
       /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
        * this list, its fields filled from that row (render id, result id). */
       const d = views[r + '-detail'];
       if (d && d.detailOf === r && d.proof && d.proof.status === 'proven') {
         const ar = await import('./adapter-runtime.mjs');
         const detailRows = [];
+        /* The list field the detail call was proven to send (its render id, its result id): the key
+         * that ties each detail row back to its list row. Learned, never a guessed column name. */
+        const keyField = (d.endpoints || []).flatMap((e) => Object.values(e.params || {})).map((s) => s && s.field).find((f) => typeof f === 'string' && f) || null;
+        let rowIndex = 0;
         for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
           let got = null;
           try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
-          // The row's title as ghis-shim.mjs firstText() reads it: first non-meta cell that is not a bare number.
-          const title = Object.keys(row).filter((k) => k.charAt(0) !== '_').map((k) => String(row[k] == null ? '' : row[k]).trim()).find((v) => v && !/^\d+$/.test(v)) || '';
-          for (const dr of (got && got.rows) || []) detailRows.push(Object.assign({ _of: title }, dr));
+          // The row's title: prefer description / study / parameter / test name over IDs / numeric strings
+          let title = '';
+          for (const k of Object.keys(row)) {
+            if (k.charAt(0) === '_') continue;
+            if (/description|study|test_?desc|examination|procedure|parameter|service_?name/i.test(k)) {
+              const val = String(row[k] == null ? '' : row[k]).trim();
+              if (val) { title = val; break; }
+            }
+          }
+          if (!title) {
+            title = Object.keys(row).filter((k) => k.charAt(0) !== '_' && !/\bid\b|code|visit|mrn/i.test(k))
+              .map((k) => String(row[k] == null ? '' : row[k]).trim())
+              .find((v) => v && !/^\d+$/.test(v)) || '';
+          }
+          const rowKey = keyField ? String(row[keyField] == null ? '' : row[keyField]) : '';
+          for (const dr of (got && got.rows) || []) {
+            detailRows.push(Object.assign({ _of: title, _key: rowKey, _rowIndex: rowIndex }, dr));
+          }
+          rowIndex++;
         }
-        if (detailRows.length) { sections.push({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
+        if (detailRows.length) { sections.push(withRoles({ resource: r + '-detail', rows: detailRows, via: 'endpoint' }, d)); if (onRead) onRead({ resource: r + '-detail', via: 'endpoint' }); }
       }
       continue;
     }
@@ -370,7 +432,23 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     }
     if (!rows.length && lastErr) { sections.push({ resource: r, error: lastErr.message }); continue; }
     if (rows.length && onRead) onRead({ resource: r, via: 'page' });
-    sections.push({ resource: r, rows, via: 'page' });
+    sections.push(withRoles({ resource: r, rows, via: 'page' }, v));
   }
   return sections;
+}
+
+/** role -> screen header, from the brain's column roles the view recorded (view.fieldHints: header -> role). */
+export function rolesOf(view) {
+  const fh = view && view.fieldHints && typeof view.fieldHints === 'object' ? view.fieldHints : null;
+  const out = {};
+  if (!fh) return out;
+  for (const h of Object.keys(fh)) { const role = fh[h]; if (typeof role === 'string' && role && !(role in out)) out[role] = h; }
+  return out;
+}
+
+/** Attach the section's column roles only when the view carried some (an empty map is left off). */
+function withRoles(section, view) {
+  const roles = rolesOf(view);
+  if (Object.keys(roles).length) section.roles = roles;
+  return section;
 }

@@ -297,6 +297,27 @@ function cleanObservedViews(raw) {
       }
       clean.fieldHints = fh;
     }
+    /* Learned on the phone by value equality against the screen (prove.mjs learnColumns): which
+     * response field each header shows, or two fields and the joiner between them. Names only; a
+     * name with an identifier-shaped digit run or an @ is refused, never stored. */
+    if (v.columns !== undefined) {
+      if (!v.columns || typeof v.columns !== "object" || Array.isArray(v.columns)) throw new OnboardError("invalid", "observedViews: columns invalid");
+      const nameOk = (s) => typeof s === "string" && s.length > 0 && s.length <= 80 && !/\d{3,}/.test(s) && s.indexOf("@") < 0;
+      const cols = {};
+      for (const h of Object.keys(v.columns)) {
+        if (clean.headers.indexOf(h) < 0) continue;
+        const c = v.columns[h];
+        if (!c || typeof c !== "object" || Array.isArray(c)) throw new OnboardError("invalid", "observedViews: columns invalid");
+        if (c.key !== undefined) {
+          if (!nameOk(c.key)) throw new OnboardError("invalid", "observedViews: columns key invalid");
+          cols[h] = { key: c.key };
+        } else if (Array.isArray(c.keys) && c.keys.length === 2 && c.keys.every(nameOk)) {
+          const join = typeof c.join === "string" && c.join.length <= 8 && !/\d/.test(c.join) ? c.join : " ";
+          cols[h] = { keys: c.keys.slice(), join };
+        } else throw new OnboardError("invalid", "observedViews: columns entry invalid");
+      }
+      if (Object.keys(cols).length) clean.columns = cols;
+    }
     if (v.detailOf !== undefined) {
       if (typeof v.detailOf !== "string" || v.detailOf.length > 32) throw new OnboardError("invalid", "observedViews: detailOf invalid");
       clean.detailOf = v.detailOf;
@@ -608,14 +629,10 @@ export async function onRequest(context) {
       const sessionResp = Object.assign({ ok: true }, sessionView(session, job));
       if (runnerPhone) {
         sessionResp.deployment = { id: deployment.id, origins: deploymentOrigins(deployment), activeVersionId: deployment.active_version_id || null };
-        /* REUSE IS ABOUT THE ADAPTER, NOT ABOUT A LEFTOVER JOB. A doctor who ran Connect Hospital and
-         * then opened Ward Sync within the hour still holds the live session of that run, complete
-         * with its onboarding job; "no job" made reuse false and Ward Sync refused the APPROVED
-         * adapter with reuse=false (owner, 2026-09-13). A caller reading through the adapter says
-         * purpose:"read"; otherwise only a job still onboarding keeps reuse off, so the sheet can
-         * resume that run. */
-        const jobBusy = !!job && ONBOARDING.includes(job.state);
-        sessionResp.reuse = !!deployment.active_version_id && !discover && (body.purpose === "read" || !jobBusy);
+        /* REUSE IS ABOUT THE ADAPTER, NOT ABOUT A LEFTOVER JOB. When an approved adapter is active,
+         * every phone session reuses it unless the doctor explicitly requested purpose: "discover".
+         * Stale draft jobs from previous onboarding must never force a doctor into a 5-10 minute crawl. */
+        sessionResp.reuse = !!deployment.active_version_id && !discover;
       }
       return jsonResponse(sessionResp);
     }
