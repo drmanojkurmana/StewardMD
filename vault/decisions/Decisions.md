@@ -5684,3 +5684,22 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   token beside the name. SMS/WhatsApp "registered" and "next" lead with "Your token: X" (a token names nobody).
   Patient portal and the /queue link page show "Your token: X" for the patient's own ticket only.
 - Not built: no recall out of `no_show` (it is terminal; "recall" today is called -> waiting -> called).
+
+## 2026-09-14 Hospital connectors (owner S2, S4, S5, S7): pluggable per hospital, secrets sealed, nothing trusted from a browser
+
+### S7 Vertex AI is the PHI provider (functions/_wardsynq/maik-gateway.js)
+- Two halves of approval. PLATFORM: `PHI_CAPABLE = wardsynq, local-openai, vertex`; a hospital cannot widen it,
+  so `phiApproved: ["gemini"]` (AI Studio, no data agreement) now permits nothing and the refusal says so.
+  HOSPITAL: `wardsynq.maik.phiApproved` as before (the owner wrote `wardsynq.ai.phiApproved`; the existing key is
+  `maik`, kept), default none. Admin > MaiK clinical AI's cloud switch writes `["vertex"]` only.
+- Patient data reaches Vertex ONLY through the project's regional endpoint
+  (`<GCP_LOCATION|asia-south1>-aiplatform.googleapis.com/v1/projects/<GCP_PROJECT>/locations/...`) with an OAuth
+  token for `GCP_SA_EMAIL` (Workload Identity Federation, or legacy SA key). These are the bindings
+  functions/api/ai already uses for MaiK in production (vault/modules/MaiK.md: "Vertex (prod only)"); no binding
+  added. The token code mirrors the AI route rather than importing a route file (same choice as _fundx_ai.js).
+- Why not express mode for PHI: no project, no region, no residency (2026-09-10 entry), and the project's API
+  keys are restricted to the Gemini API by org policy (Connect Agent note), so it answers PERMISSION_DENIED in
+  production anyway. Non-PHI calls keep express mode while a key exists, so the Connect agent brain and the eval
+  harness are unchanged.
+- A server without the project bindings: Vertex is not PHI-capable, maikStatus names the missing bindings and
+  the Admin screen shows them. NOT verified: that gemini-3.6-flash is served in asia-south1 for this project.

@@ -849,17 +849,18 @@
     return c.api("/ward/maik-status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
       if (!r || !r.ok) { body.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
       // wardsynq.maik.phiApproved is a per-provider allowlist (see maik-gateway.js maikConfig), not a
-      // plain flag. The switch below is a yes/no simplification over "gemini" + "vertex", the two
-      // providers that leave the hospital; it never touches the local/on-prem entries.
+      // plain flag. S7: Vertex AI is the one cloud provider with a patient-data agreement, so the cloud
+      // switch approves "vertex" and nothing else; the gateway refuses PHI to AI Studio whatever is saved.
       var approved = Array.isArray(r.phiApproved) ? r.phiApproved : [];
-      var cloudApproved = approved.indexOf("gemini") >= 0 || approved.indexOf("vertex") >= 0;
+      var cloudApproved = approved.indexOf("vertex") >= 0;
+      var vx = (r.providers || []).filter(function (p) { return p.provider === "vertex"; })[0] || {};
       var localApproved = approved.indexOf("local-openai") >= 0;
       // The on-premises endpoint is configuration, not status, so it comes from the org document.
       var curMaik = ((c.state.org && c.state.org.wardsynq) || {}).maik || {};
       var localUrl = curMaik.localBaseUrl || "", localModel = curMaik.localModel || "";
       body.innerHTML = '<div class="card"><h2>MaiK clinical AI</h2>' +
         '<div class="kv"><dt>Enabled</dt><dd>' + (r.enabled ? "yes" : "no") + "</dd>" +
-        "<dt>Patient data approved for a cloud model</dt><dd>" + (cloudApproved ? "yes (" + c.esc(r.phiApproved.join(", ")) + ")" : "no") + "</dd>" +
+        "<dt>Patient data approved for Vertex AI</dt><dd>" + (cloudApproved ? (vx.phiCapable ? "yes" : "approved, but this server cannot send patient data to Vertex yet") : "no") + "</dd>" +
         "<dt>Model allowlist</dt><dd>" + (Array.isArray(r.allow) && r.allow.length ? c.esc(r.allow.join(", ")) : "none (registry default)") + "</dd>" +
         "<dt>Timeout</dt><dd>" + c.esc(String(r.timeoutMs || "")) + " ms</dd></div>" +
         '<h3>Providers</h3><div class="tbl"><table><thead><tr><th>Provider</th><th>Configured</th><th>Detail</th><th>Credential</th></tr></thead><tbody>' +
@@ -876,7 +877,8 @@
         '<label class="f"><span>Model name</span><input id="admMaikLocalModel" placeholder="the name the server answers to" value="' + c.esc(localModel) + '"></label></div>' +
         '<div class="row"><label class="f"><input type="checkbox" id="admMaikPhiLocal"' + (localApproved ? " checked" : "") + "> Patient data may be sent to the on-premises model</label></div>" +
         '<h3>Cloud model</h3><div class="row">' +
-        '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to an approved cloud model</label>" +
+        '<label class="f"><input type="checkbox" id="admMaikPhi"' + (cloudApproved ? " checked" : "") + "> Patient data may be sent to Vertex AI (the cloud provider with a patient-data agreement)</label>" +
+        (vx.phiCapable === false ? '<div class="msg err">' + c.esc(vx.detail || "Vertex AI cannot receive patient data on this server.") + "</div>" : "") +
         '<button class="btn" id="admMaikSave" type="button">Save</button></div><div id="admMaikMsg"></div>' +
         '<div class="msg note">Enabling MaiK uses the providers listed above. A cloud provider only answers when the environment holds its key (named under Credential). Patient data leaves the hospital only when the second switch is on. Clinical content from MaiK is not signed off.</div>' +
         "</div>";
@@ -891,7 +893,7 @@
         // model must not silently approve a cloud one, which is exactly what one boolean would do.
         var approve = [];
         if (phiLocal) approve.push("local-openai");
-        if (phi) { approve.push("gemini"); approve.push("vertex"); }
+        if (phi) approve.push("vertex");
         var existing = (c.state.org && c.state.org.wardsynq) || {};
         var wsq = Object.assign({}, existing, { maik: Object.assign({}, existing.maik, {
           enabled: enabled, phiApproved: approve, localBaseUrl: lUrl || null, localModel: lModel || null
@@ -904,7 +906,7 @@
             if (or2 && or2.ok) c.state.org = or2.org;
             c.toast("MaiK settings saved."); WSQ.render("admin");
           });
-        });
+        }, function () { btn.disabled = false; document.getElementById("admMaikMsg").innerHTML = '<div class="msg err">No response from the server. The settings may not have been saved; reload to check.</div>'; });
       };
     });
   }
