@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
+    if (c.isWardsynq()) tabs.push(["seed", "Clinical seed data"], ["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,9 +67,56 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
+
+  // ---- Clinical seed data (D10) ------------------------------------------------------------------
+  /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
+   * the other seed lists), item by item. An item is UNAPPROVED until signed off by the named signatory for its
+   * CURRENT content; a signed item whose content later changed is unapproved again (the server decides by
+   * fingerprint). Every hospital admin sees the state; only the StewardMD platform owner is offered sign-off,
+   * and the server refuses anyone else. r: undefined = loading, { failed } = could not be loaded. */
+  function seedHtml(esc, r) {
+    var h = '<div class="card"><h2>Clinical seed data</h2>';
+    if (r === undefined) return h + '<p><span class="spin"></span> Loading...</p></div>';
+    if (r.failed) return h + '<div class="msg err">The sign-off state could not be loaded: ' + esc(r.message || "failed") + ". Treat every item as UNAPPROVED.</div></div>";
+    var total = 0, unapproved = 0;
+    r.lists.forEach(function (l) { total += l.items.length; unapproved += l.unapproved; });
+    return h + '<p class="quiet">Clinical content shipped with WardSynQ. Each item is UNAPPROVED until ' + esc(r.signatory) + " signs off its exact current content. " +
+      "Signing records the sign-off; it does not change how any safety check behaves.</p>" +
+      '<p><span class="pill ' + (unapproved ? "warn" : "ok") + '">' + unapproved + " of " + total + " items unapproved</span></p>" +
+      r.lists.map(function (l) {
+        return "<h3>" + esc(l.title) + ' <span class="quiet">(' + esc(l.source) + ")</span></h3>" +
+          '<div class="tbl"><table><thead><tr><th>Item</th><th>Version</th><th>Sign-off</th>' + (r.canSign ? "<th></th>" : "") + "</tr></thead><tbody>" +
+          l.items.map(function (it) {
+            var signed = it.status === "signed";
+            return '<tr data-seed="' + esc(l.id) + "/" + esc(it.id) + '"><td>' + esc(it.label) + '<details><summary class="quiet">content</summary><pre style="white-space:pre-wrap;max-width:60ch">' + esc(it.content) + "</pre></details></td>" +
+              '<td class="mono">' + esc(it.version) + "</td>" +
+              "<td>" + (signed ? '<span class="pill ok">' + esc(it.signoff.text) + "</span>" : '<span class="pill stop">UNAPPROVED</span>') + "</td>" +
+              (r.canSign ? "<td>" + (signed ? "" : '<button type="button" class="btn ghost" data-seed-sign="' + esc(l.id) + '" data-seed-item="' + esc(it.id) + '" data-seed-hash="' + esc(it.contentHash) + '">Sign off</button>') + "</td>" : "") + "</tr>";
+          }).join("") + "</tbody></table></div>";
+      }).join("") + '<div id="seedMsg"></div></div>';
+  }
+  WSQ._seedHtml = seedHtml;
+  function renderSeed(c, body) {
+    body.innerHTML = seedHtml(c.esc, undefined);
+    return c.api("/seed/status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      body.innerHTML = seedHtml(c.esc, r && r.ok ? r : { failed: true, message: refusal(r) });
+      body.querySelectorAll("[data-seed-sign]").forEach(function (b) {
+        b.onclick = function () {
+          var name = window.prompt("Sign off this item's content as shown.\n\nType the signatory's name exactly (" + r.signatory + "):", "");
+          if (name == null) return;
+          if (!window.confirm("I have reviewed the content of " + b.getAttribute("data-seed-item") + " and sign it off as " + name + ".")) return;
+          b.disabled = true;
+          c.api("/seed/signoff", { listId: b.getAttribute("data-seed-sign"), itemId: b.getAttribute("data-seed-item"), contentHash: b.getAttribute("data-seed-hash"), signatory: name, attest: true }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; document.getElementById("seedMsg").innerHTML = '<div class="msg err">Not signed: ' + c.esc(refusal(x)) + "</div>"; return; }
+            c.toast(x.signoff.text); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
 
   // ---- Hospital -------------------------------------------------------------------------------
   /* WHO MAY WRITE A CLINICAL NOTE. Writing a note needs emr.treat, the prescribing capability, so

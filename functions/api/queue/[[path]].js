@@ -149,6 +149,8 @@ import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, roster
 import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
 import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
+import * as SEED from "../../_wardsynq/seed-signoff.js";
+import * as SEEDSTORE from "../../_seed_signoff_store.js";
 import { predictMetric } from "../../_wardsynq/twin-predict.js";
 import { simulateScenario } from "../../_wardsynq/twin-simulate.js";
 import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-copilot.js";
@@ -3776,6 +3778,47 @@ export async function onRequest(context) {
       if (method === "POST" && sub === "swap-propose") return out(await ROSTER.proposeSwap(env, orgId, me, rb.assignmentId, rb.to));
       if (method === "POST" && sub === "swap-respond") return out(await ROSTER.respondSwap(env, orgId, me, rb.swapId, rb.accept === true));
       if (method === "POST" && sub === "swap-approve") return out(await ROSTER.approveSwap(env, orgId, rb.swapId, rb.approve === true, me));
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
+    /* D10: CLINICAL SEED DATA SIGN-OFF. GET /seed/status lists every seed item with its sign-off state: the
+     * platform owner, or a hospital's staff.admin (?orgId=) so an admin can see what is still unapproved. POST
+     * /seed/signoff records one item's sign-off and is the PLATFORM OWNER's act only (a StewardMD owner
+     * account, never a hospital role), in the name the owner's decision gives, for the exact content the
+     * signer was shown (its fingerprint), with an explicit attestation. The record and its audit row are one
+     * commit; a record is created once and never rewritten. Nothing here is PHI. */
+    if (seg === "seed" && (sub === "status" || sub === "signoff")) {
+      const records = () => SEEDSTORE.listSignoffs(env);
+      if (sub === "status" && method === "GET") {
+        if (!actor.isOwner) {
+          const az = await ORG.authorizeOrg(env, actor, url.searchParams.get("orgId") || "", CAPS.STAFF_ADMIN);
+          if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        }
+        let held;
+        try { held = await records(); } catch (e) { return json({ ok: false, error: "signoffs_unreadable", message: "The sign-off records could not be read, so no item can be shown as signed." }, 503, request); }
+        return json({ ok: true, signatory: SEED.SIGNATORY, canSign: !!(actor.kind === "firebase" && actor.isOwner), lists: await SEED.seedStatus(held) }, 200, request);
+      }
+      if (sub === "signoff" && method === "POST") {
+        if (!(actor.kind === "firebase" && actor.isOwner)) return json({ ok: false, error: "platform_owner_only", message: "Clinical seed data is signed off by the StewardMD platform owner only." }, 403, request);
+        const sb = await readBody(request);
+        const list = SEED.seedLists().find((l) => l.id === sb.listId);
+        const item = list && list.items.find((i) => i.id === sb.itemId);
+        if (!item) return json({ ok: false, error: "not_found", message: "No such seed item." }, 404, request);
+        if (sb.attest !== true) return json({ ok: false, error: "attestation_required", message: "Confirm that you have reviewed this item's content." }, 422, request);
+        if (String(sb.signatory || "").trim() !== SEED.SIGNATORY) return json({ ok: false, error: "wrong_signatory", message: "Clinical seed data is signed off by " + SEED.SIGNATORY + " (owner decision D10)." }, 422, request);
+        const hash = await SEED.fingerprint(item.content);
+        if (sb.contentHash !== hash) return json({ ok: false, error: "content_changed", message: "This item's content is not what was shown for signing. Reload and review it again." }, 409, request);
+        const at = new Date().toISOString();
+        const version = list.seedVersion + "#" + hash.slice(0, 12);
+        const rec = { listId: list.id, itemId: item.id, contentHash: hash, version, signedBy: SEED.SIGNATORY, signedByAccount: actor.id, signedAt: at,
+          text: "Signed off by " + SEED.SIGNATORY + ", " + at.slice(0, 10) + ", version " + version };
+        const id = SEED.signoffId(list.id, item.id, hash);
+        try { await SEEDSTORE.createSignoff(env, id, rec, actor.id); }
+        catch (e) {
+          if (e && e.code === "precondition") return json({ ok: false, error: "already_signed", message: "This exact content is already signed off." }, 409, request);
+          return json({ ok: false, error: "signoff_not_saved", message: "The sign-off was not saved. Nothing was recorded; try again." }, 503, request);
+        }
+        return json({ ok: true, signoff: { id, ...rec } }, 200, request);
+      }
       return json({ ok: false, error: "not_found" }, 404, request);
     }
     /* D11 A: the hospital's clinical settings template (Admin Center > Hospital). staff.admin reads and saves;

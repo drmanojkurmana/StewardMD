@@ -5856,3 +5856,18 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   "active order not pharmacy-verified" for any hospital.
 - Not built: optimistic concurrency on org saves (two admins saving at once, last write wins, as for every
   org update today).
+## 2026-09-14 D10: clinical seed data sign-off by Dr Manoj Kurmana, per item, by content fingerprint
+- Seed lists read from the modules that use them (`functions/_wardsynq/seed-signoff.js`): allergy classes and
+  cross-reactivity, dose ceilings, default critical limits, the critical threshold seed, PEWS bands, MEOWS bands,
+  NEWS2 escalation and responder ladder, quality measure definitions. Each item has a SHA-256 of its canonical
+  content (function bodies included). Other UNAPPROVED seeds (consent and population intervals, incident
+  categories, MLOps promotion defaults, emergency recognition) are not listed yet.
+- A sign-off is `q_seed_signoffs/<list>__<item>__<fingerprint prefix>`, created once with its `seed:signoff` audit
+  row in the same commit, text "Signed off by Dr Manoj Kurmana, <date>, version <seedVersion>#<hash12>". A record
+  for other content does not match, so changed content is UNAPPROVED again. No revocation route (not asked for).
+- `POST /seed/signoff` is the platform owner only (StewardMD owner account; a hospital owner or admin is 403),
+  in the name SIGNATORY only (422 otherwise), with `attest: true`, and the contentHash the signer was shown (409
+  if the content differs). `GET /seed/status` for the platform owner or a hospital staff.admin (?orgId=).
+- Admin Center > Clinical seed data (WardSynQ hospitals) marks every unsigned item UNAPPROVED; a failed load says
+  treat every item as unapproved. This build signs nothing. Signing does NOT change engine behaviour: rx-safety
+  still never gates, and existing "unapproved" wording on ward screens is unchanged.
