@@ -59,8 +59,10 @@ function abdmServiceActor() {
     scope: { read: ["Patient"], write: [] } });
 }
 
-/** PURE. The SCCM types this bridge will land, which is what the adapter can map. */
-const LANDABLE = Object.freeze(["Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference", "ImagingStudy"]);
+/** PURE. The SCCM types this bridge will land, which is what the adapter can map. Immunization and Invoice
+ *  since the ABDM V3 merge (SCCM 1.1): an immunization files as the chart's own Immunization record; another
+ *  facility's invoice files as an external note, never as this hospital's bill (sccm adapter explains). */
+const LANDABLE = Object.freeze(["Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference", "ImagingStudy", "Immunization", "Invoice"]);
 
 /**
  * Lands the documents from ONE completed ABDM transfer.

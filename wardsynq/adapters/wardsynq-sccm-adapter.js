@@ -38,7 +38,7 @@
 
 import {
   Patient, Encounter, Condition, AllergyIntolerance, Observation, MedicationOrder,
-  DiagnosticReport, ClinicalNote, MedicationAdministration, ServiceRequest, ImagingStudy,
+  DiagnosticReport, ClinicalNote, MedicationAdministration, ServiceRequest, ImagingStudy, makeMeta,
 } from "../wardsynq-model.js";
 import { Adapter } from "../wardsynq-interop.js";
 
@@ -354,6 +354,50 @@ function mapSccmBundle(bundle) {
       effectiveAt: st.studyDate || undefined,
     }));
     if (accession && !order) issues.push({ code: "SCCM_IMAGING_NO_ORDER", message: `study ${st.id} quotes accession ${accession}, which matches no imaging order from ${system} in this message; the study was filed without an order link` });
+  }
+
+  /* SCCM 1.1 (ABDM V3 merge, 2026-09-14): vaccinations from another facility, filed as the ONE Immunization
+   * record type the ward chart already has (functions/_wardsynq/immunization.js) - never a second shape. Its
+   * rules hold here too: a date is required, not-done needs a reason (SCCM carries none, so a not-done dose
+   * is named, not filed), entered-in-error is never filed. primarySource is false: it is another facility's
+   * account, not this hospital's evidence. The coding is kept verbatim under the sender's system. */
+  for (const im of bundle.immunizations || []) {
+    if (!im || !im.id) continue;
+    const k = codeOf(im.vaccineCode);
+    if (!k.display && !k.code) { issues.push({ code: "SCCM_IMMUNIZATION_NO_VACCINE", message: `immunization ${im.id} named no vaccine and was skipped` }); continue; }
+    if (im.status !== "completed") { issues.push({ code: "SCCM_IMMUNIZATION_STATE", message: `immunization ${im.id} status "${im.status}" is not a given dose WardSynQ can file without a reason and was not written` }); continue; }
+    const occurredOn = String(im.occurrenceDateTime || "");
+    if (!occurredOn || Number.isNaN(Date.parse(occurredOn))) { issues.push({ code: "SCCM_IMMUNIZATION_NO_DATE", message: `immunization ${im.id} carried no date and was skipped` }); continue; }
+    const dose = Number(im.doseNumber);
+    const meta = makeMeta({ source: src("imm", im.id), effectiveAt: occurredOn });
+    entities.push({
+      resourceType: "Immunization", id: sourceId(system, "imm", im.id), patientId: patient.id,
+      encounterId: encRef(im.encounter),
+      vaccine: k.display || k.code, vaccineCode: k.code || null, vaccineCodeSystem: k.code ? (k.system || "unspecified") : null,
+      status: "completed", statusReason: null, occurredOn, doseNumber: Number.isInteger(dose) && dose >= 1 ? dose : null,
+      lotNumber: im.lotNumber || null, site: codeOf(im.site).display || null, route: codeOf(im.route).display || null,
+      primarySource: false, performerId: null, performerName: null, note: null,
+      recordedBy: `external:${system}`, recordedAt: meta.recordedAt, meta,
+    });
+  }
+
+  /* SCCM 1.1: a bill from ANOTHER facility. It is deliberately NOT an Invoice record: that type is this
+   * hospital's own billing, which revenue reports, trends and the payment desk sum - another hospital's bill
+   * filed there would read as money owed here. It is kept on the chart as an external note carrying the
+   * sender's invoice verbatim (owner A4: received records stay, marked as received). */
+  for (const inv of bundle.invoices || []) {
+    if (!inv || !inv.id) continue;
+    const total = inv.totalGross || inv.totalNet || null;
+    const words = [`Invoice from another facility${inv.identifierValue ? " " + inv.identifierValue : ""}`,
+      inv.date ? `dated ${inv.date}` : null, inv.status ? `status ${inv.status}` : null,
+      total && total.value != null ? `total ${total.value}${total.currency ? " " + total.currency : ""}` : null].filter(Boolean).join(", ");
+    entities.push(ClinicalNote({
+      id: sourceId(system, "inv", inv.id), patientId: patient.id, encounterId: encRef(inv.encounter),
+      noteType: "external-invoice", sections: { text: words, type: codeOf(inv.type).display || null, invoice: inv },
+      authorId: null, aiDrafted: false, signedBy: null,
+      effectiveAt: inv.date || undefined,
+      source: src("inv", inv.id),
+    }));
   }
 
   return { patient, entities, issues };
