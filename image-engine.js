@@ -388,6 +388,18 @@
       }
       log("device ok:", r.mode);
       r.engine = "device";
+      // Image-quality gate (2026-09-14): too blurred / glared / tilted / low-resolution / unreadable →
+      // nothing is extracted; the clinician retakes the photo, types the values, or taps AI Vision.
+      if (r.monitor && r.monitor.quality && r.monitor.quality.status === "RETAKE_PHOTO") {
+        stat("local_retake");
+        var why = (r.monitor.quality.issues || []).filter(function (i) { return i.severity === "severe"; }).map(function (i) { return i.message; }).join("; ");
+        return fallbackDialog("This photo cannot be read safely (" + (why || "image quality") + "). Retake it straight-on, closer, without glare, or fill the values by hand.",
+          { ai: aiAvailable() && online(), device: false, retryLabel: "Use AI Vision (Pro)", title: "Retake the photo" }).then(function (f) {
+          if (f !== "ai") return r;
+          stat("gemini_fallback");
+          return routeAI(image, kind).then(function (ar) { stat(ar && ar.mode === "fields" ? "gemini_success" : "gemini_failure"); return (ar && !ar.cancelled && ar.mode === "fields") ? ar : r; });
+        });
+      }
       // Confidence gate (2026-09-14): a monitor read that left core vitals in NEEDS_REVIEW may be sent to
       // AI Vision, but only on an explicit tap. High-confidence local reads never touch the network.
       var core = (r.monitor && r.monitor.review || []).filter(function (k) { return /^(?:hr|spo2|sbp|dbp|map|rr)$/.test(k); });

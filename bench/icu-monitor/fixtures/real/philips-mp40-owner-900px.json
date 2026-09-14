@@ -2,25 +2,103 @@
   "id": "philips-mp40-owner-900px",
   "manufacturer": "philips-intellivue",
   "layout": "right-column-limits-left",
-  "difficulty": ["real-photo", "low-resolution", "reflections"],
+  "difficulty": [
+    "real-photo",
+    "low-resolution",
+    "reflections"
+  ],
   "image": "philips-mp40-owner-900px.jpg",
-  "imageSize": { "w": 900, "h": 1600 },
+  "imageSize": {
+    "w": 900,
+    "h": 1600
+  },
   "synthetic": false,
   "fields": {
-    "hr":    { "status": "visible", "value": 105 },
-    "spo2":  { "status": "visible", "value": 100 },
-    "sbp":   { "status": "visible", "value": 149, "source": "ART" },
-    "dbp":   { "status": "visible", "value": 66,  "source": "ART" },
-    "map":   { "status": "visible", "value": 98,  "source": "ART" },
-    "rr":    { "status": "visible", "value": 22 },
-    "pulse": { "status": "visible", "value": 105 },
-    "pvc":   { "status": "visible", "value": 0 },
-    "temp":  { "status": "not_applicable" },
-    "etco2": { "status": "not_applicable" },
-    "art":   { "status": "visible", "value": { "sbp": 149, "dbp": 66, "map": 98 } },
-    "nibp":  { "status": "not_visible", "why": "NBP in Auto mode with limits 160/90 shown, no measurement on screen" },
-    "st":    { "status": "visible", "value": { "I": 0.0, "II": 0.5, "III": 0.5 } }
+    "hr": {
+      "status": "visible",
+      "value": 105
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 100
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 149,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 66,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 98,
+      "source": "ART"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 22
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 105
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 149,
+        "dbp": 66,
+        "map": 98
+      }
+    },
+    "nibp": {
+      "status": "not_visible",
+      "why": "NBP in Auto mode with limits 160/90 shown, no measurement on screen"
+    },
+    "st": {
+      "status": "visible",
+      "value": {
+        "I": 0,
+        "II": 0.5,
+        "III": 0.5
+      }
+    }
   },
-  "distractors": { "alarmLimits": { "hr": [120, 50], "spo2": [100, 90], "rr": [30, 8], "nibp": [160, 90] }, "clock": "20:38", "banner": "** RR HIGH", "rhythm": "Sinus Tach" },
-  "notes": "Owner's photo of a Philips IntelliVue MP40 (2026-09-14), as shared: 900x1600 downscale. Patient 'Not Admitted'. The 1800px sibling is the same file upscaled 2x as a stand-in for the phone's full-resolution original. Pulse label is not emitted by Vision at any scale, so Pulse is expected to be a MISS (recall), never a guess."
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ],
+      "nibp": [
+        160,
+        90
+      ]
+    },
+    "clock": "20:38",
+    "banner": "** RR HIGH",
+    "rhythm": "Sinus Tach"
+  },
+  "notes": "Owner's photo of a Philips IntelliVue MP40 (2026-09-14), as shared: 900x1600 downscale. Patient 'Not Admitted'. The 1800px sibling is the same file upscaled 2x as a stand-in for the phone's full-resolution original. Pulse label is not emitted by Vision at any scale, so Pulse is expected to be a MISS (recall), never a guess.",
+  "group": "real"
 }

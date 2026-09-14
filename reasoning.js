@@ -4043,7 +4043,7 @@
             var cv = document.createElement("canvas"); cv.width = w; cv.height = h;
             var ctx = cv.getContext("2d", { willReadFrequently: true }); ctx.drawImage(img, 0, 0, w, h);
             var d = ctx.getImageData(0, 0, w, h).data;
-            res({ w: w, h: h, get: function (x, y) { if (x < 0 || y < 0 || x >= w || y >= h) return null; var i = (y * w + x) * 4; return [d[i], d[i + 1], d[i + 2]]; } });
+            res({ w: w, h: h, natW: img.naturalWidth, natH: img.naturalHeight, get: function (x, y) { if (x < 0 || y < 0 || x >= w || y >= h) return null; var i = (y * w + x) * 4; return [d[i], d[i + 1], d[i + 2]]; } });
           } catch (e) { res(null); }
         };
         img.onerror = function () { res(null); };
@@ -4051,6 +4051,29 @@
       } catch (e) { res(null); }
     });
   }
+  // The monitor region of the ORIGINAL capture, enlarged by region.scale (monitorRegion already caps the
+  // long edge at ~3200 px), as a high-quality JPEG for the second on-device Vision pass. Resolves null on
+  // any failure: the full pass alone is then parsed, which is the v2.0 behaviour.
+  function smdCropDataUrl(dataUrl, region) {
+    return new Promise(function (res) {
+      try {
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var sx = region.x * img.naturalWidth, sy = region.y * img.naturalHeight, sw = region.w * img.naturalWidth, sh = region.h * img.naturalHeight;
+            var ow = Math.max(1, Math.round(sw * region.scale)), oh = Math.max(1, Math.round(sh * region.scale));
+            var cv = document.createElement("canvas"); cv.width = ow; cv.height = oh;
+            var ctx = cv.getContext("2d"); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 0, ow, oh);
+            res(cv.toDataURL("image/jpeg", 0.92));
+          } catch (e) { res(null); }
+        };
+        img.onerror = function () { res(null); };
+        img.src = dataUrl;
+      } catch (e) { res(null); }
+    });
+  }
+  function assign2(a, b) { var o = {}, k; for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) o[k] = a[k]; for (k in b) if (Object.prototype.hasOwnProperty.call(b, k)) o[k] = b[k]; return o; }
   window.SMD_AI = {
     on: aiOn,
     setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
@@ -4546,19 +4569,38 @@
           return pack(f0);
         }
         // Monitor kinds: the 2-D parser (icu-monitor-parser.js) over the boxes + the ORIGINAL pixels for
-        // colour. Only AUTO_ACCEPTED values are filled; NEEDS_REVIEW / NOT_FOUND stay blank with their
-        // evidence attached for the review sheet, the AI-Vision gate and the debug overlay.
+        // colour and the image-quality gate. Two-scale (2026-09-14): Vision drops small labels at one
+        // scale, so the numeric region the first pass found is cropped from the ORIGINAL, enlarged, read
+        // again on-device and unioned with the first pass (digit disagreements block auto-fill). Only
+        // AUTO_ACCEPTED values are filled; NEEDS_REVIEW / NOT_FOUND stay blank with their evidence.
+        var fullObs = boxes.map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h, q: b.q }; });
+        var _tPass = Date.now();
         return smdPixelSource(dataUrl).then(function (px) {
+          var imageSize = px ? { w: px.natW, h: px.natH } : null;
+          var region = null; try { region = imageSize ? V2.monitorRegion(fullObs, imageSize) : null; } catch (e) {}
+          var second = region ? smdCropDataUrl(dataUrl, region).then(function (cropUrl) {
+            if (!cropUrl) return { obs: fullObs, crop: null };
+            return window.SMD_NATIVE.ocr(cropUrl, { languageCorrection: false }).then(function (co) {
+              var cb = ((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h, q: b.q }; });
+              var merged = V2.mergeObservations(fullObs, V2.mapCropObservations(cb, region));
+              return { obs: merged, crop: { region: region, boxes: cb.length, notes: merged.notes || [] } };
+            }).catch(function () { return { obs: fullObs, crop: { region: region, error: "crop-ocr-failed" } }; });
+          }) : Promise.resolve({ obs: fullObs, crop: null });
+          return second.then(function (pass) { return { px: px, imageSize: imageSize, obs: pass.obs, crop: pass.crop }; });
+        }).then(function (ctx) {
+          var px = ctx.px, obsM = ctx.obs;
           var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
-          var res = V2.parseMonitor(boxes.map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; }), { px: px, unlabeledAuto: relaxed });
+          var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, unlabeledAuto: relaxed });
+          boxes = obsM;   // evidence and overlay refer to the merged observation list
           var vitals = {}; Object.keys(res.values).forEach(function (k) { if (typeof res.values[k] === "number") vitals[k] = res.values[k]; });
           var fields;
           if (kind === "all") { fields = parseFieldsOnDevice(text, "all", boxes) || {}; if (Object.keys(vitals).length) fields.vitals = vitals; else delete fields.vitals; }
           else fields = vitals;
-          var conf = {}; Object.keys(res.fields).forEach(function (k) { conf[k] = { status: res.fields[k].status, confidence: res.fields[k].confidence, suggested: res.fields[k].suggested == null ? null : res.fields[k].suggested, reason: res.fields[k].reason || null }; });
+          var conf = {}; Object.keys(res.fields).forEach(function (k) { conf[k] = { status: res.fields[k].status, confidence: res.fields[k].confidence, suggested: res.fields[k].suggested == null ? null : res.fields[k].suggested, reason: res.fields[k].reason || null, source: res.fields[k].source || null, retake: !!res.fields[k].retake }; });
           var dbg = false; try { dbg = localStorage.getItem("smd_icu_ocr_debug") === "1"; } catch (e) {}
           if (dbg) { try { console.info("[ICU OCR]\n" + V2.explain(res, boxes)); } catch (e) {} window.__SMD_ICU_OCR_LAST = { result: res, boxes: boxes, image: dataUrl, kind: kind }; }
-          return pack(fields, { fields: conf, review: Object.keys(res.review), notFound: res.notFound, layout: res.layout, stats: res.stats, warnings: res.warnings, colour: !!px });
+          return pack(fields, { fields: conf, review: Object.keys(res.review), notFound: res.notFound, layout: res.layout, stats: assign2(res.stats, { totalMs: Date.now() - _tPass, twoScale: !!ctx.crop, crop: ctx.crop }), warnings: res.warnings, colour: !!px,
+            quality: { status: res.quality.status, issues: res.quality.issues }, sources: { art: res.fields.art ? { status: res.fields.art.status, value: res.fields.art.value, suggested: res.fields.art.suggested } : null, nibp: res.fields.nibp ? { status: res.fields.nibp.status, value: res.fields.nibp.value, suggested: res.fields.nibp.suggested } : null } });
         });
       }).catch(function () { return { error: "ocr-failed" }; });
     },

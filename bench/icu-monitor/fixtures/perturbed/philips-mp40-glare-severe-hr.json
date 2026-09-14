@@ -1,22 +1,22 @@
 {
-  "id": "philips-mp40-owner-1800px",
+  "id": "philips-mp40-glare-severe-hr",
   "manufacturer": "philips-intellivue",
   "layout": "right-column-limits-left",
   "difficulty": [
-    "real-photo",
-    "upscaled-2x",
-    "reflections"
+    "perturbed",
+    "glare"
   ],
-  "image": "philips-mp40-owner-1800px.jpg",
+  "image": "philips-mp40-glare-severe-hr.jpg",
   "imageSize": {
-    "w": 1800,
-    "h": 3200
+    "w": 900,
+    "h": 1600
   },
   "synthetic": false,
   "fields": {
     "hr": {
-      "status": "visible",
-      "value": 105
+      "status": "ambiguous",
+      "value": 105,
+      "why": "HR value under glare, only faintly legible"
     },
     "spo2": {
       "status": "visible",
@@ -70,7 +70,7 @@
     "st": {
       "status": "visible",
       "value": {
-        "I": 0,
+        "I": 0.0,
         "II": 0.5,
         "III": 0.5
       }
@@ -99,11 +99,10 @@
     "banner": "** RR HIGH",
     "rhythm": "Sinus Tach"
   },
-  "notes": "Mandatory regression fixture: the 2026-09-14 on-device 6/6 (HR 105, SpO2 100, ART 149/66, MAP 98, RR 22) under the opt-in unlabeledAuto policy. Same photo as the 900px real case, upscaled 2x: a DERIVED image, reported with the perturbed-real group, not as a second real photograph.",
+  "notes": "Derived from the owner's real MP40 photo by perturb.py; truth changed only for fields listed in the perturbation's overrides.",
   "group": "perturbed-real",
   "derivedFrom": "philips-mp40-owner-900px",
   "perturbation": {
-    "resize": 2
-  },
-  "mandatoryRegression": true
+    "glare": "alpha 0.97 over the HR value"
+  }
 }

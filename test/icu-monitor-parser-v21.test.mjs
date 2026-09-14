@@ -1,0 +1,145 @@
+/* test/icu-monitor-parser-v21.test.mjs — v2.1 safety rules on constructed observation graphs:
+ * two-scale merge (finer split replaces a fused box only when digits agree; digit disagreement blocks
+ * auto-fill), quality gate (RETAKE_PHOTO extracts nothing), field-specific thresholds, pressure source
+ * required and ART / NIBP never merged, MAP only when displayed, Pulse never from HR, glued label
+ * tokens, edge-truncated values, and evidence on every AUTO field. */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const M = require("../icu-monitor-parser.js");
+const box = (text, x, y, w, h, extra) => Object.assign({ text, conf: 1, x, y, w, h }, extra);
+
+// a clean Philips-like column: HR / SpO2 / ART / RR with labels and limits
+function philips() {
+  return [
+    box("HR", 0.57, 0.10, 0.03, 0.02), box("120", 0.57, 0.125, 0.03, 0.02), box("50", 0.57, 0.15, 0.02, 0.02), box("105", 0.62, 0.10, 0.14, 0.08),
+    box("SpO2", 0.57, 0.25, 0.04, 0.02), box("100", 0.62, 0.25, 0.14, 0.08),
+    box("ART", 0.57, 0.40, 0.03, 0.02), box("149/66", 0.62, 0.40, 0.20, 0.08), box("(98)", 0.68, 0.485, 0.06, 0.03),
+    box("RR", 0.57, 0.60, 0.03, 0.02), box("30", 0.57, 0.625, 0.02, 0.02), box("8", 0.57, 0.65, 0.01, 0.02), box("22", 0.62, 0.60, 0.10, 0.08)
+  ];
+}
+
+test("clean column: all six core fields AUTO with complete evidence and a source", () => {
+  const r = M.parseMonitor(philips());
+  assert.deepEqual({ hr: r.values.hr, spo2: r.values.spo2, sbp: r.values.sbp, dbp: r.values.dbp, map: r.values.map, rr: r.values.rr }, { hr: 105, spo2: 100, sbp: 149, dbp: 66, map: 98, rr: 22 });
+  for (const k of ["hr", "spo2", "sbp", "dbp", "map", "rr", "art"]) {
+    const f = r.fields[k];
+    assert.equal(f.status, "AUTO_ACCEPTED", k);
+    assert.ok(f.proof && f.proof.complete, k + " evidence complete");
+    assert.ok(f.proof.ocr.text && f.proof.box && f.proof.association.kind && typeof f.proof.confidence === "number" && f.proof.source, k + " evidence fields");
+  }
+  assert.equal(r.fields.sbp.source, "ART"); assert.deepEqual(r.fields.art.value, { s: 149, d: 66, map: 98 });
+});
+
+test("Pulse is never copied from HR; MAP is never computed", () => {
+  const obs = philips().filter((b) => b.text !== "(98)");
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.pulse.value, null); assert.notEqual(r.fields.pulse.status, "AUTO_ACCEPTED");
+  assert.equal(r.fields.map.value, null); assert.equal(r.fields.map.status, "NOT_FOUND");
+  assert.match(r.fields.map.reason, /only ever a displayed value/);
+});
+
+test("pressure with no identifiable source → NEEDS_REVIEW (source required for AUTO)", () => {
+  const obs = philips().filter((b) => b.text !== "ART");
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.sbp.status, "NEEDS_REVIEW"); assert.equal(r.fields.sbp.suggested, 149);
+  assert.match(r.fields.sbp.reason, /source \(ART \/ NIBP\) not identified/);
+  assert.equal(r.fields.map.status, "NEEDS_REVIEW", "MAP follows its pressure's ambiguity");
+});
+
+test("pressure source glued in the same box ('NBP 121/79 (93)') counts as the source", () => {
+  const obs = philips().filter((b) => !["ART", "149/66", "(98)"].includes(b.text)).concat([box("NBP 121/79 (93)", 0.57, 0.40, 0.25, 0.08)]);
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.nibp.status, "AUTO_ACCEPTED"); assert.deepEqual(r.fields.nibp.value, { s: 121, d: 79, map: 93 });
+  assert.equal(r.fields.sbp.source, "NIBP");
+});
+
+test("ART and NIBP both displayed (even the SAME numbers): never merged, primary is NEEDS_REVIEW", () => {
+  const obs = philips().concat([box("NBP", 0.57, 0.52, 0.03, 0.02), box("149/66 (98)", 0.62, 0.52, 0.20, 0.07)]);
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.sbp.status, "NEEDS_REVIEW"); assert.match(r.fields.sbp.reason, /ART and NIBP are both displayed/);
+  assert.equal(r.fields.art.status, "AUTO_ACCEPTED"); assert.equal(r.fields.nibp.status, "AUTO_ACCEPTED");
+  assert.equal(r.fields.art.source, "ART"); assert.equal(r.fields.nibp.source, "NIBP");
+});
+
+test("merge: a fused full-pass box is replaced by the crop's finer split when digits agree (T→1 confusable)", () => {
+  const full = [box("ART T18/76 (90)", 0.55, 0.40, 0.35, 0.10)];
+  const crop = [box("ART", 0.55, 0.40, 0.05, 0.03, { scale: "crop" }), box("118/76 (90)", 0.62, 0.41, 0.28, 0.09, { scale: "crop" })];
+  const m = M.mergeObservations(full, crop);
+  assert.deepEqual(m.map((o) => o.text).sort(), ["118/76 (90)", "ART"]);
+  assert.ok(m.every((o) => o.scale === "crop"));
+});
+
+test("merge: digit-vs-digit disagreement keeps the full box flagged; it can never auto-fill", () => {
+  const full = philips();
+  const i = full.findIndex((b) => b.text === "105");
+  const crop = [box("108", full[i].x + 0.005, full[i].y, 0.13, 0.08, { scale: "crop" })];
+  const m = M.mergeObservations(full, crop);
+  const hrBox = m.find((o) => o.text === "105");
+  assert.equal(hrBox.ocrConflict, "108");
+  const r = M.parseMonitor(m);
+  assert.equal(r.fields.hr.status, "NEEDS_REVIEW"); assert.match(r.fields.hr.reason, /OCR scales disagree/);
+});
+
+test("merge: crop boxes that overlap nothing are recovered (small labels)", () => {
+  const full = philips().filter((b) => b.text !== "SpO2");
+  const crop = [box("SpO2", 0.57, 0.25, 0.04, 0.02, { scale: "crop" })];
+  const m = M.mergeObservations(full, crop);
+  assert.ok(m.find((o) => o.text === "SpO2" && o.recovered));
+  assert.equal(M.parseMonitor(m).fields.spo2.status, "AUTO_ACCEPTED");
+});
+
+test("monitorRegion picks the numeric column with a scale that enlarges small labels", () => {
+  const reg = M.monitorRegion(philips(), { w: 900, h: 1600 });
+  assert.ok(reg && reg.x < 0.57 && reg.x + reg.w > 0.82 && reg.y < 0.10 && reg.y + reg.h > 0.68, JSON.stringify(reg));
+  assert.ok(reg.scale >= 2 && reg.scale <= 3);
+});
+
+test("glued secondary values: 'PR72' and '... PVC 0' read as Pulse and PVC", () => {
+  const obs = philips().concat([box("PR72", 0.78, 0.26, 0.04, 0.02), box("Sinus Tach ST-I 0 ST-II 0.1 PVC 0", 0.05, 0.30, 0.25, 0.02)]);
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.pulse.status, "AUTO_ACCEPTED"); assert.equal(r.fields.pulse.value, 72); assert.equal(r.fields.pulse.proof.association.kind, "glued-label");
+  assert.equal(r.fields.pvc.status, "AUTO_ACCEPTED"); assert.equal(r.fields.pvc.value, 0);
+});
+
+test("a number glued to the HR label that differs from the large HR value blocks auto-fill (likely a limit)", () => {
+  const obs = philips().filter((b) => !["HR", "120"].includes(b.text)).concat([box("HR 120", 0.57, 0.10, 0.04, 0.02)]);
+  const r = M.parseMonitor(obs);
+  assert.equal(r.fields.hr.status, "NEEDS_REVIEW"); assert.match(r.fields.hr.reason, /glued to the HR label \(120\) differs from the large value \(105\)/);
+});
+
+test("value touching the photo edge (possibly truncated) never auto-fills", () => {
+  const obs = philips().map((b) => (b.text === "22" ? Object.assign({}, b, { x: 0.905, w: 0.095 }) : b));
+  const r = M.parseMonitor(obs);
+  assert.notEqual(r.fields.rr.status, "AUTO_ACCEPTED"); assert.match(r.fields.rr.reason, /touches the photo edge/);
+  assert.ok(r.quality.issues.some((i) => i.kind === "partial"));
+});
+
+test("quality gate: unreadable display → RETAKE_PHOTO, nothing extracted", () => {
+  const r = M.parseMonitor([box("Main Screen", 0.8, 0.95, 0.1, 0.02), box("Not Admitted", 0.2, 0.02, 0.2, 0.02)]);
+  assert.equal(r.quality.status, "RETAKE_PHOTO");
+  assert.deepEqual(r.values, {});
+  for (const k of ["hr", "spo2", "sbp", "rr"]) { assert.equal(r.fields[k].status, "NEEDS_REVIEW"); assert.ok(r.fields[k].retake); }
+});
+
+test("quality gate: severe tilt from Vision quadrilaterals → RETAKE_PHOTO", () => {
+  const rot = (b, deg) => { const a = deg * Math.PI / 180, dy = Math.tan(a) * b.w * (900 / 1600); return Object.assign({}, b, { q: [b.x, b.y, b.x + b.w, b.y + dy, b.x + b.w, b.y + b.h + dy, b.x, b.y + b.h] }); };
+  const obs = philips().map((b) => rot(Object.assign({}, b, { w: Math.max(b.w, b.h * 3) }), 24));
+  const r = M.parseMonitor(obs, { imageSize: { w: 900, h: 1600 } });
+  assert.equal(r.quality.status, "RETAKE_PHOTO"); assert.ok(r.quality.issues.some((i) => i.kind === "tilt" && i.severity === "severe"));
+});
+
+test("quality gate: tiny text → RETAKE_PHOTO; moderate → DEGRADED raises thresholds", () => {
+  assert.equal(M.parseMonitor(philips(), { imageSize: { w: 150, h: 150 } }).quality.status, "RETAKE_PHOTO");
+  const deg = M.parseMonitor(philips(), { imageSize: { w: 240, h: 240 } });
+  assert.equal(deg.quality.status, "DEGRADED");
+  assert.ok(deg.fields.hr.threshold >= M.THRESH.hr.conf + 0.05 - 1e-9);
+});
+
+test("field-specific thresholds exist and are stricter for RR / Pulse / PVC than for HR", () => {
+  assert.ok(M.THRESH.rr.conf > M.THRESH.hr.conf); assert.ok(M.THRESH.pulse.conf > M.THRESH.hr.conf); assert.ok(M.THRESH.pvc.conf > M.THRESH.rr.conf);
+  const r = M.parseMonitor(philips(), { thresholds: { rr: { conf: 0.999 } } });
+  assert.equal(r.fields.rr.status, "NEEDS_REVIEW"); assert.equal(r.fields.hr.status, "AUTO_ACCEPTED");
+});

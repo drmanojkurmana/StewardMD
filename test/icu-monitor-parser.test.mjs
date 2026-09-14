@@ -70,7 +70,10 @@ test("two pressures of similar size (ART vs NIBP) → primary NEEDS_REVIEW, both
   ];
   const r = M.parseMonitor(obs);
   assert.equal(r.fields.sbp.status, "NEEDS_REVIEW"); assert.equal(r.fields.sbp.value, null);
-  assert.deepEqual(r.fields.art.suggested, { s: 119, d: 66 }); assert.deepEqual(r.fields.nibp.suggested, { s: 121, d: 79 });
+  assert.match(r.fields.sbp.reason, /ART and NIBP are both displayed/);
+  // never merged: each source keeps its own reading, and MAP is null because no "(MM)" was displayed
+  assert.equal(r.fields.art.status, "AUTO_ACCEPTED"); assert.deepEqual(r.fields.art.value, { s: 119, d: 66, map: null }); assert.equal(r.fields.art.source, "ART");
+  assert.equal(r.fields.nibp.status, "AUTO_ACCEPTED"); assert.deepEqual(r.fields.nibp.value, { s: 121, d: 79, map: null }); assert.equal(r.fields.nibp.source, "NIBP");
 });
 
 test("the clock is never RR, the banner is never a label, SpO2 > 100 is rejected", () => {

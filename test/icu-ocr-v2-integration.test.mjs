@@ -1,35 +1,55 @@
 /* test/icu-ocr-v2-integration.test.mjs — source-level pins for wiring icu-monitor-parser.js into the
- * app (reasoning.js / image-engine.js / icu.js / index.html are WebView IIFEs):
+ * app (reasoning.js / image-engine.js / icu.js / index.html / the VisionOcr plugin):
  *   - monitor kinds go through the 2-D parser with the original pixels; vitals are never auto-filled
- *     from flattened text; only AUTO_ACCEPTED values reach the fields
- *   - the AI-Vision fallback is offered only when core vitals need review, only on a tap, and every
- *     outcome is counted; high-confidence local reads make no network call
- *   - debug mode (localStorage smd_icu_ocr_debug=1) dumps evidence and draws the overlay */
+ *     from flattened text; only AUTO_ACCEPTED values reach the fields; unlabeledAuto is opt-in only
+ *   - two-scale: the numeric region is cropped from the ORIGINAL, read again on-device, mapped back
+ *     and merged BEFORE parsing; a crop failure falls back to the full pass
+ *   - image-quality gate: RETAKE_PHOTO extracts nothing and says why; AI Vision only on tap
+ *   - the AI-Vision fallback is offered only when core vitals need review, and every outcome is counted
+ *   - ART and NIBP are surfaced separately; debug mode dumps evidence and draws the overlay */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const read = (f) => readFileSync(new URL("../" + f, import.meta.url), "utf8");
 const reasoning = read("reasoning.js"), engine = read("image-engine.js"), icu = read("icu.js"), html = read("index.html");
+const plugin = read("local-plugins/capacitor-vision-ocr/ios/Sources/VisionOcrPlugin/VisionOcrPlugin.swift");
 
 test("index.html loads the parser before reasoning.js", () => {
   const a = html.indexOf('src="/icu-monitor-parser.js'), b = html.indexOf('src="/reasoning.js');
   assert.ok(a > 0 && b > a, "parser script tag precedes reasoning.js");
 });
 
-test("readImageLocal: monitor kinds use SMD_ICU_MONITOR.parseMonitor with a pixel source; text-only vitals are dropped", () => {
+test("readImageLocal: monitor kinds use the 2-D parser; text-only vitals are dropped; strict unless explicitly opted in", () => {
   assert.match(reasoning, /var monitorKind = \/\^\(\?:monitor\|vitals\|all\)\$\/\.test\(String\(kind\)\)/);
-  assert.match(reasoning, /return smdPixelSource\(dataUrl\)\.then\(function \(px\) \{/);
-  assert.match(reasoning, /V2\.parseMonitor\(boxes\.map\([\s\S]{0,200}\{ px: px, unlabeledAuto: relaxed \}\)/);
   assert.match(reasoning, /if \(kind === "all"\) delete f0\.vitals; else if \(monitorKind\) f0 = \{\};/, "no 2-D evidence → no auto-filled vitals");
   assert.match(reasoning, /if \(typeof res\.values\[k\] === "number"\) vitals\[k\] = res\.values\[k\];/, "only AUTO_ACCEPTED numerics");
-  assert.match(reasoning, /localStorage\.getItem\("smd_icu_unlabeled_auto"\) === "1"/, "relaxed policy is an explicit opt-in");
+  assert.match(reasoning, /relaxed = localStorage\.getItem\("smd_icu_unlabeled_auto"\) === "1"/, "relaxed policy is an explicit opt-in");
+  assert.doesNotMatch(reasoning, /unlabeledAuto: true/, "never enabled by default in the app");
 });
 
-test("pixel source is the original capture on a canvas, capped, and fails soft to null (colour neutral)", () => {
-  assert.match(reasoning, /function smdPixelSource\(dataUrl\)/);
-  assert.match(reasoning, /var MAX = 2400/);
-  assert.match(reasoning, /img\.onerror = function \(\) \{ res\(null\); \};/);
+test("two-scale: crop the ORIGINAL at the parser's region, OCR on-device again, map back, merge, then parse", () => {
+  assert.match(reasoning, /region = imageSize \? V2\.monitorRegion\(fullObs, imageSize\) : null/);
+  assert.match(reasoning, /smdCropDataUrl\(dataUrl, region\)/, "crop comes from the original capture, not the 900px cloud copy");
+  assert.match(reasoning, /window\.SMD_NATIVE\.ocr\(cropUrl, \{ languageCorrection: false \}\)/);
+  assert.match(reasoning, /V2\.mergeObservations\(fullObs, V2\.mapCropObservations\(cb, region\)\)/);
+  assert.match(reasoning, /\.catch\(function \(\) \{ return \{ obs: fullObs, crop: \{ region: region, error: "crop-ocr-failed" \} \}; \}\)/, "crop failure → full pass only");
+  assert.match(reasoning, /ctx\.imageSmoothingQuality = "high"/);
+});
+
+test("plugin returns Vision's quadrilateral for the tilt/perspective gate", () => {
+  assert.match(plugin, /"q": \[Double\(observation\.topLeft\.x\), Double\(1\.0 - observation\.topLeft\.y\),/);
+});
+
+test("quality gate: RETAKE_PHOTO extracts nothing, explains why, AI Vision only on tap", () => {
+  assert.match(reasoning, /quality: \{ status: res\.quality\.status, issues: res\.quality\.issues \}/);
+  assert.match(engine, /r\.monitor\.quality\.status === "RETAKE_PHOTO"/);
+  assert.match(engine, /stat\("local_retake"\);/);
+  assert.match(engine, /title: "Retake the photo"/);
+});
+
+test("ART and NIBP are surfaced separately, never merged", () => {
+  assert.match(reasoning, /sources: \{ art: res\.fields\.art \? \{[^}]*\} : null, nibp: res\.fields\.nibp \? \{/);
 });
 
 test("image-engine: AI Vision offered only when core vitals need review, only on tap; counters cover every outcome", () => {
