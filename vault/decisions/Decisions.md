@@ -5811,3 +5811,17 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
 - A ticket routed to another department's room takes that department's id and name and KEEPS its token; the
   wall shows the issuing department beside such a token and groups rooms by department in department scope.
 - SMS/WhatsApp "at <dept>" uses the ticket's department before the session's (a pool session has none).
+## 2026-09-14 D14: per-department numbering requires a prefix per department; nothing numbered without one
+- `_opd_org.js tokenScope` in department scope refuses, before any read or write: no resolved department
+  (422 `token_department_required`, the offered name returned so an import can name it) and a department whose
+  effective prefix (own, legacy name key, or a 1-3 character code) is empty (422 `token_prefix_missing`). The
+  `dept-none` counter is gone; hospital scope is unchanged.
+- `POST /org/update` with `tokens` refuses 422 `token_prefixes_required` (problems listed by department name)
+  while any ACTIVE department lacks a prefix, two share one, or an alias points at no active department.
+  Creating a department is NOT refused: a department that issues no tokens (Laboratory) may have none; the
+  desk is refused for it with a sentence naming the Admin card instead.
+- `POST /patient/register` with `forQueue` checks the same BEFORE issuing an MR number ("pool" needs the picked
+  department; "session" only checks a picked one, since the room or session may supply it). The queue add
+  still decides; this is only the early answer so a patient is not registered and then left unqueued.
+- An EMR import returns `issues[{reason, department}]` for refused rows (department names only) and the app
+  shows them once per distinct message.

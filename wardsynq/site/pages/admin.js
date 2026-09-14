@@ -226,7 +226,7 @@
       var p = pre[lc(d.id)] || pre[lc(d.name)] || "";
       if (pre[lc(d.id)]) used[lc(d.id)] = 1; else if (pre[lc(d.name)]) used[lc(d.name)] = 1;
       var aka = Object.keys(al).filter(function (k) { return al[k] === d.id; });
-      return '<tr data-tok-dept="' + esc(d.id) + '"><td>' + esc(d.name) + (d.code ? ' <span class="quiet">(' + esc(d.code) + ")</span>" : "") + "</td>" +
+      return '<tr data-tok-dept="' + esc(d.id) + '" data-tok-name="' + esc(d.name) + '"><td>' + esc(d.name) + (d.code ? ' <span class="quiet">(' + esc(d.code) + ")</span>" : "") + "</td>" +
         '<td><input class="tokPrefix" maxlength="3" style="width:5em" value="' + esc(p) + '" placeholder="' + esc(/^[A-Za-z0-9]{1,3}$/.test(d.code || "") ? String(d.code).toUpperCase() : "") + '"></td>' +
         '<td><input class="tokAka" style="width:100%" value="' + esc(aka.join(", ")) + '" placeholder="Names the EMR uses, comma separated"></td></tr>';
     }).join("");
@@ -235,16 +235,22 @@
         ? '<div class="tbl"><table><thead><tr><th>Department</th><th>Prefix</th><th>Also known as</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
         : '<p class="quiet">No active departments. Add them under Departments before numbering per department.</p>') +
       (stale.length ? '<div class="msg note">Saved prefixes that name no department: ' + esc(stale.map(function (k) { return k + " = " + pre[k]; }).join(", ")) + ". Saving this card drops them.</div>" : "") +
-      '<p class="quiet">Prefixes are used only when each department numbers separately. A blank prefix uses the department code shown grey when that code is one to three letters or digits. Numbers start again at 1 each day, and a token already given never changes, including when the patient is moved to a room in another department.</p>' +
+      '<p class="quiet">Prefixes are used only when each department numbers separately, and then every department needs its own: the desk cannot give a token in a department without one. A blank prefix uses the department code shown grey when that code is one to three letters or digits. Numbers start again at 1 each day, and a token already given never changes, including when the patient is moved to a room in another department.</p>' +
       '<button class="btn" id="tokSave" type="button">Save</button><div id="tokMsg"></div></div>';
   }
   /* rows: [{ departmentId, prefix, aka }] read from the table. Returns { tokens } or { error }. */
   function readTokenCard(scope, rows) {
-    var prefixes = {}, deptAliases = {};
+    var prefixes = {}, deptAliases = {}, taken = {}, perDept = scope === "department";
     for (var i = 0; i < rows.length; i++) {
       var r = rows[i], p = String(r.prefix || "").trim().toUpperCase();
       if (p && !/^[A-Z0-9]{1,3}$/.test(p)) return { error: "A prefix is one to three letters or digits: " + p };
       if (p) prefixes[r.departmentId] = p;
+      /* D14: numbering per department needs every department's own prefix (typed, or its code shown grey),
+       * and no two alike, or two departments call the same number. The server refuses the same. */
+      var eff = p || String(r.code || "").trim().toUpperCase();
+      if (perDept && !/^[A-Z0-9]{1,3}$/.test(eff)) return { error: (r.name || "A department") + " needs a prefix before each department can number separately." };
+      if (perDept && taken[eff]) return { error: taken[eff] + " and " + (r.name || "another department") + " both use the prefix " + eff + ". Give each department its own." };
+      if (perDept) taken[eff] = r.name || r.departmentId;
       var names = String(r.aka || "").split(",");
       for (var j = 0; j < names.length; j++) {
         var n = lc(names[j]); if (!n) continue;
@@ -265,7 +271,8 @@
       btn.onclick = function () {
         var m = document.getElementById("tokMsg");
         var rows = Array.prototype.map.call(box.querySelectorAll("tr[data-tok-dept]"), function (tr) {
-          return { departmentId: tr.getAttribute("data-tok-dept"), prefix: tr.querySelector(".tokPrefix").value, aka: tr.querySelector(".tokAka").value };
+          var pin = tr.querySelector(".tokPrefix");
+          return { departmentId: tr.getAttribute("data-tok-dept"), name: tr.getAttribute("data-tok-name"), prefix: pin.value, code: pin.getAttribute("placeholder"), aka: tr.querySelector(".tokAka").value };
         });
         var out = readTokenCard(document.getElementById("tokScope").value, rows);
         if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }

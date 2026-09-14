@@ -122,8 +122,10 @@ async function tokenDepartment(env, session, body, org) {
   if (r.badId) throw Object.assign(new Error("department_not_found"), { status: 422, detail: "That department is not an active department of this hospital." });
   return Object.assign({ cfg }, r);
 }
-async function allocateToken(env, session, f, id, cfg, dept) {
+async function allocateToken(env, session, f, id, cfg, dept, unmatched) {
   const scope = tokenScope(cfg, dept);
+  // D14: refused before anything is read or written, so a refusal burns no number and leaves no ticket.
+  if (scope.error) throw Object.assign(new Error(scope.error), { status: 422, departmentName: scope.departmentName || unmatched || "" });
   const hosp = session.hospitalId || ("doc-" + session.doctorUid);
   const path = "q_token_counters/" + [hosp, session.date, scope.key].map(sanitize).join("__");
   const legacyPath = scope.legacyKey ? "q_token_counters/" + [hosp, session.date, scope.legacyKey].map(sanitize).join("__") : "";
@@ -166,7 +168,7 @@ export async function addTicket(env, session, body, actor, org) {
   const td = await tokenDepartment(env, session, body, org);
   // The ticket carries the resolved department's id and its CURRENT name; the name is display only.
   if (td.department) { f.departmentId = td.department.id; f.department = td.department.name; }
-  await allocateToken(env, session, f, id, td.cfg, td.department);
+  await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + " token:" + f.token });
   await recompute(env, session);
   const ticket = withId(id, f);

@@ -254,6 +254,8 @@
         if (r && r.error === "duplicate" && r.duplicateOf) { showDuplicate(r.duplicateOf); return; }
         if (r && r.errors) {
           Object.keys(r.errors).forEach(function (k) { setErr(k === "age" ? "ageYears" : k, r.errors[k]); });
+          // A refusal about the queue (D14) may name a field the sheet is not showing: say it at the foot too.
+          if (r.errors.departmentId && r.message) host.querySelector("#prFerr").textContent = r.message;
           var first = host.querySelector(".pr-f.bad input");
           if (first) first.focus();
           return;

@@ -94,18 +94,36 @@ export function resolveTokenDepartment(departments, cfg, hints) {
 // PURE: which counter a ticket in `dept` (a department record, or null) draws from, and the prefix its
 // token carries. The counter key is the department's id; `legacyKey` is the name-slug key counters used
 // before D7, read once on a day's first allocation so a sequence already running today is continued.
+/* D14 (2026-09-14): in department scope a token is NEVER issued without a department, and never without a
+ * prefix. Two departments both calling a plain "12" is exactly the collision department prefixes exist to
+ * prevent, and a shared "dept-none" counter would give a patient with no department a number that means
+ * nothing in any department's column. Both are refused with a reason the desk can act on. */
 export function tokenScope(cfg, dept) {
   cfg = tokenConfig(cfg);
   if (cfg.scope !== "department") return { key: "hospital", prefix: "" };
-  if (!dept || !dept.id) return { key: "dept-none", prefix: "" };
-  return { key: "dept-" + s(dept.id).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 60), prefix: departmentPrefix(cfg, dept), legacyKey: "dept-" + (slugOf(dept.name) || "none") };
+  if (!dept || !dept.id) return { error: "token_department_required" };
+  const prefix = departmentPrefix(cfg, dept);
+  if (!prefix) return { error: "token_prefix_missing", departmentId: s(dept.id), departmentName: s(dept.name) };
+  return { key: "dept-" + s(dept.id).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 60), prefix, legacyKey: "dept-" + (slugOf(dept.name) || "none") };
 }
-// PURE: saved prefix keys that name no active department by id or by name - shown in the Admin card so a
-// stale entry is visible rather than silently ignored.
-export function unmatchedPrefixKeys(cfg, departments) {
+/* PURE (D14). Why this token configuration cannot be saved, as sentences naming departments; [] = it can.
+ * Only department scope is checked: every ACTIVE department needs a prefix (its own or its code), no two
+ * active departments may share one, and an alias must point at an active department. */
+export function tokenConfigProblems(cfg, departments) {
   cfg = tokenConfig(cfg);
+  if (cfg.scope !== "department") return [];
   const act = (departments || []).filter((d) => d && d.id && d.active !== false);
-  return Object.keys(cfg.prefixes).filter((k) => !act.some((d) => deptKey(d.id) === k || deptKey(d.name) === k));
+  const out = [], seen = {};
+  for (const d of act) {
+    const p = departmentPrefix(cfg, d);
+    if (!p) { out.push(`${d.name || d.id} has no prefix.`); continue; }
+    if (seen[p]) out.push(`${seen[p]} and ${d.name || d.id} both use the prefix ${p}.`);
+    else seen[p] = d.name || d.id;
+  }
+  for (const k of Object.keys(cfg.deptAliases)) {
+    if (!act.some((d) => String(d.id) === cfg.deptAliases[k])) out.push(`The name "${k}" points to a department that is not active here.`);
+  }
+  return out;
 }
 export function formatToken(prefix, n) { return prefix ? prefix + "-" + String(n).padStart(3, "0") : String(n); }
 

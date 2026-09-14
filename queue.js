@@ -592,7 +592,10 @@
       if (r && r.error === "login_required") { ghisReauth(); return; }   // expired -> silent re-login from remembered cred, else the gate (no manual sign-out)
       var rows = (r && r.rows) || [];
       if (!rows.length) { say("No OPD patients found for today"); return; }
-      act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); } });
+      act(st.session.id, "/import", { rows: rows }).then(function (res) {
+        if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); }
+        importIssuesSay(res);   // shown even on a silent import: a patient left out of the queue is never quiet
+      });
     }).catch(function () { say("Could not reach Ward Sync"); });
   }
   // ONE decision point for "open this ticket's record". The WORKPLACE decides which EMR - never whether
@@ -667,6 +670,19 @@
       cb({ departments: o.departments || [], required: !!(o.org && o.org.tokens && o.org.tokens.scope === "department") });
     }, function () { cb({ departments: null, required: false }); });
   }
+  /* D7/D14: EMR rows the token rules refused (a department this hospital has not mapped, or one with no
+   * prefix) are named by department so the admin knows which alias or prefix to add. Once per distinct
+   * message, so a 40-second poll does not repeat the same toast. */
+  function importIssuesSay(r) {
+    var iss = (r && r.issues) || [];
+    if (!iss.length) return;
+    var names = {}; iss.forEach(function (x) { names[x.department || "no department"] = 1; });
+    var m = iss.length + " patient(s) not queued from the EMR: department " + Object.keys(names).join(", ") +
+      " has no token department or prefix here. An administrator adds it under Admin Center, Hospital, OPD token numbers.";
+    if (st.lastImportIssue === m) return;
+    st.lastImportIssue = m;
+    try { G.toast && G.toast(m); } catch (e) {}
+  }
   // After registration, the queue add's own answer: a refused add is never reported as queued.
   function queuedSay(r, q) {
     var m = (q && q.ok) ? ("Added - " + r.mrn + (q.ticket && q.ticket.token ? " - token " + q.ticket.token : ""))
@@ -687,7 +703,7 @@
       submit: function (body) {
         body.orgId = st.orgId || st.hospital || "";
         body.workplaceMode = mode;
-        body.forQueue = true;
+        body.forQueue = "session";
         return apiPost("/patient/register", body);
       },
       onAdded: function (r, sent) {
@@ -885,7 +901,7 @@
         mode: "native",
         clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
         departments: dp.departments, departmentRequired: dp.required,
-        submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = true; return apiPost("/patient/register", body); },
+        submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; body.forQueue = "pool"; return apiPost("/patient/register", body); },
         onAdded: function (r, sent) {
           apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
             mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", departmentId: (sent && sent.departmentId) || "" })
@@ -1048,7 +1064,7 @@
   function importFromSource(silent) {
     if (!st.session) return;
     apiPost("/import-from-source", { sessionId: st.session.id }).then(function (r) {
-      if (r && r.ok) { st.tickets = r.tickets || st.tickets; paint(); if (!silent && r.imported != null) { try { G.toast && G.toast("Imported " + r.imported + " patient(s) from the EMR"); } catch (e) {} } }
+      if (r && r.ok) { st.tickets = r.tickets || st.tickets; paint(); if (!silent && r.imported != null) { try { G.toast && G.toast("Imported " + r.imported + " patient(s) from the EMR"); } catch (e) {} } importIssuesSay(r); }
     }).catch(function () {});
   }
   // Which workplace the doctor last chose, remembered on-device so a personal-clinic doctor is not forced

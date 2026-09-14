@@ -37,7 +37,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -3535,6 +3535,17 @@ export async function onRequest(context) {
         if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
         const org = await ORG.getOrg(env, pOrg);
         if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+        /* D14: a desk registering a patient FOR THE QUEUE in a hospital that numbers per department is told
+         * before an MR number is issued that the token cannot be given, rather than registering the patient
+         * and then failing to queue them. "pool" (the front desk) needs the picked department; "session" (a
+         * doctor's own queue) may take it from its room or session, so only a picked one is checked here.
+         * The queue add itself checks again: this is the early answer, not the authority. */
+        if (body.forQueue && org.tokens && org.tokens.scope === "department") {
+          const pre = resolveTokenDepartment(await ORG.listDepartments(env, pOrg), org.tokens, { departmentId: body.departmentId });
+          const why = pre.badId ? "department_not_found" : (!pre.department && body.forQueue === "pool") ? "token_department_required"
+            : pre.department ? tokenScope(org.tokens, pre.department).error : null;
+          if (why) return json({ ok: false, error: why, message: TOKEN_SAY[why], errors: { departmentId: TOKEN_SAY[why] } }, 422, request);
+        }
         const r = await PAT.registerPatient(env, org, body, actor.id || "");
         /* A PATIENT WHO IS ALREADY REGISTERED STILL NEEDS A CLINICAL RECORD MASTER.
          *
@@ -4045,6 +4056,12 @@ export async function onRequest(context) {
           const errors = validateOrgProfile(body.regionProfile, body.region !== undefined ? body.region : (cur && cur.region));
           if (Object.keys(errors).length) return json({ ok: false, error: "invalid_region_profile", errors }, 422, request);
         }
+        /* D14: numbering per department is saved only when every active department has its own prefix and
+         * no two share one. Checked against the departments as they are now, after authorization. */
+        if (body.tokens !== undefined) {
+          const problems = tokenConfigProblems(body.tokens, await ORG.listDepartments(env, body.orgId));
+          if (problems.length) return json({ ok: false, error: "token_prefixes_required", problems, message: "Token numbering was not saved. Each department numbers separately only when every department has its own prefix: " + problems.join(" ") }, 422, request);
+        }
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
@@ -4311,7 +4328,7 @@ export async function onRequest(context) {
         // Only the tickets THIS import actually created — not the whole roster on every poll (see
         // migrate-encounter.js's header on the reconciliation cancel this diff does not catch either).
         for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
-        return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, tickets) }, 200, request);
+        return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, issues: r.issues || [], tickets: await ticketView(env, tickets) }, 200, request);
       }
       // OPD engine → resolveOpdSource(org) → connector → existing EMR. Server pulls the worklist via the
       // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
@@ -4326,7 +4343,7 @@ export async function onRequest(context) {
         const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
         const tickets = await Q.listTickets(env, s.id);
         for (const t of tickets) { if (!before.has(t.id)) await syncEncounter(request, env, s, t); }
-        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, tickets) }, 200, request);
+        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, issues: r.issues || [], degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, tickets) }, 200, request);
       }
       if (seg === "advance") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
       if (seg === "status") {

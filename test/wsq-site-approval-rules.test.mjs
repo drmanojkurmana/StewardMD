@@ -59,10 +59,14 @@ test("OPD token numbering card: what is saved is exactly what the org model keep
   assert.match(K.html(esc, undefined, depts), /value="hospital" selected/, "default is one sequence for the hospital");
   assert.match(K.html(esc, {}, undefined), /Loading departments/);
   assert.match(K.html(esc, {}, null), /could not be loaded[\s\S]*Do not read this as no departments/);
-  const out = K.read("department", [{ departmentId: "dcard", prefix: "c", aka: "Heart OPD, cardio" }, { departmentId: "dmed", prefix: "", aka: "" }]);
+  const out = K.read("department", [{ departmentId: "dcard", prefix: "c", aka: "Heart OPD, cardio" }, { departmentId: "dmed", name: "General Medicine", prefix: "", code: "GM", aka: "" }]);
+  // D14: per department, every department needs its own prefix (typed or its code) and no two alike.
+  assert.match(K.read("department", [{ departmentId: "dmed", name: "General Medicine", prefix: "", code: "" }]).error, /General Medicine needs a prefix/);
+  assert.match(K.read("department", [{ departmentId: "a", name: "A", prefix: "GM" }, { departmentId: "b", name: "B", code: "GM" }]).error, /A and B both use the prefix GM/);
+  assert.equal(K.read("hospital", [{ departmentId: "dmed", name: "General Medicine", prefix: "", code: "" }]).error, undefined, "one sequence for the hospital needs no prefixes");
   assert.deepEqual(JSON.parse(JSON.stringify(out.tokens)), { scope: "department", prefixes: { dcard: "C" }, deptAliases: { "heart opd": "dcard", cardio: "dcard" } });
   assert.deepEqual(tokenConfig(out.tokens), { scope: "department", prefixes: { dcard: "C" }, deptAliases: { "heart opd": "dcard", cardio: "dcard" } });
   assert.match(K.read("department", [{ departmentId: "dcard", prefix: "TOOLONG" }]).error, /one to three letters/);
-  assert.match(K.read("department", [{ departmentId: "dcard", aka: "OPD" }, { departmentId: "dmed", aka: "opd" }]).error, /two departments/);
+  assert.match(K.read("hospital", [{ departmentId: "dcard", aka: "OPD" }, { departmentId: "dmed", aka: "opd" }]).error, /two departments/);
   assert.doesNotMatch(html, /—/, "no em dash");
 });

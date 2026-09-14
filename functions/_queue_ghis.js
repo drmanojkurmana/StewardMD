@@ -69,13 +69,21 @@ export async function importRoster(env, session, rows, actor) {
   var current = await listTickets(env, session.id);
   var existing = current.map(function (t) { return t.ghisEpisodeId; }).filter(Boolean);
   var fresh = filterNew(rows, existing);
-  var imported = 0;
-  for (var i = 0; i < fresh.length; i++) { try { await addTicket(env, session, fresh[i], actor || "import"); imported++; } catch (e) {} }
+  var imported = 0, issues = [];
+  for (var i = 0; i < fresh.length; i++) {
+    try { await addTicket(env, session, fresh[i], actor || "import"); imported++; }
+    catch (e) {
+      /* D7/D14: a row the token rules refused (its department maps to no department of this hospital, or
+       * that department has no prefix) is an import ISSUE naming the department, never a silent skip and
+       * never a shared "no department" number. A department name identifies no patient. */
+      if (e && e.status === 422) issues.push({ reason: e.message, department: e.departmentName || fresh[i].department || "" });
+    }
+  }
   var batchEpi = (rows || []).map(function (r) { return mapGhisRow(r).ghisEpisodeId; }).filter(Boolean);
   var stale = staleImportedIds(current, batchEpi);
   var removed = 0;
   for (var k = 0; k < stale.length; k++) { try { await setStatus(env, session, stale[k], "cancelled", actor || "import:reconcile"); removed++; } catch (e) {} }
-  return { imported: imported, skipped: (rows || []).length - imported, removed: removed };
+  return { imported: imported, skipped: (rows || []).length - imported, removed: removed, issues: issues };
 }
 
 // OPD-engine → EMR boundary: pull today's worklist through the org's OPD source (connector or native) and

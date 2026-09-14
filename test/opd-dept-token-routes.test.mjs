@@ -186,3 +186,60 @@ test("screens: the desk sheet offers the hospital's departments, says when they 
   assert.match(idx, /patient-register\.js\?v=[\w-]+/);
   for (const t of [two, opd.slice(opd.indexOf("function openPoolAdd"), opd.indexOf("function openPoolAdd") + 3000)]) assert.doesNotMatch(t, /[—–]/, "no em or en dash");
 });
+
+test("D14 POST /api/queue/org/update tokens: per-department numbering is refused while a department lacks its own prefix; 401, 403 and another hospital write nothing; the admin saves once each has one", async () => {
+  seed();
+  dept("dnone", "org-a", "Dermatology", "");   // no code, so no default prefix
+  const scope = async () => (await ORG.getOrg(ENV, "org-a")).tokens.scope;
+  const body = { orgId: "org-a", tokens: { scope: "department", prefixes: { dcard: "C" } } };
+  assert.equal((await api("/org/update", "POST", body)).__status, 401);
+  assert.equal((await api("/org/update", "POST", body, NURSE_A)).__status, 403);
+  const other = await api("/org/update", "POST", body, HR_B);
+  assert.ok(other.__status === 403 || other.__status === 404);
+  const refused = await api("/org/update", "POST", body, HR_A);
+  assert.equal(refused.__status, 422, JSON.stringify(refused));
+  assert.equal(refused.error, "token_prefixes_required");
+  assert.deepEqual(refused.problems, ["Dermatology has no prefix."]);
+  assert.match(refused.message, /was not saved[\s\S]*Dermatology has no prefix/);
+  const dup = await api("/org/update", "POST", { orgId: "org-a", tokens: { scope: "department", prefixes: { dcard: "GM", dnone: "D" } } }, HR_A);
+  assert.equal(dup.__status, 422); assert.match(dup.message, /both use the prefix GM/);
+  assert.equal(await scope(), "hospital", "nothing refused was saved");
+  const ok = await api("/org/update", "POST", { orgId: "org-a", tokens: { scope: "department", prefixes: { dcard: "C", dnone: "D" } } }, HR_A);
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(await scope(), "department");
+  assert.equal((await api("/org/update", "POST", { orgId: "org-a", tokens: { scope: "hospital" } }, HR_A)).__status, 200, "going back to one sequence needs no prefixes");
+});
+
+test("D14 POST /api/queue/patient/register forQueue: in per-department numbering the desk is refused BEFORE an MR number is issued when no department or no prefix; the queue add refuses the same", async () => {
+  seed({ scope: "department", prefixes: { dcard: "C" } });
+  dept("dnone", "org-a", "Dermatology", "");
+  const reg = { orgId: "org-a", name: "Meena Rao", mobile: "9876500001", gender: "female", ageYears: 40, forQueue: "pool" };
+  const patients = () => [...docs.keys()].filter((k) => k.startsWith("q_patients/")).length;
+  assert.equal((await api("/patient/register", "POST", reg)).__status, 401);
+  assert.equal((await api("/patient/register", "POST", reg, CASHIER_A)).__status, 403);
+  const none = await api("/patient/register", "POST", reg, NURSE_A);
+  assert.equal(none.__status, 422); assert.equal(none.error, "token_department_required"); assert.match(none.errors.departmentId, /Choose a department/);
+  const noPrefix = await api("/patient/register", "POST", { ...reg, departmentId: "dnone" }, NURSE_A);
+  assert.equal(noPrefix.__status, 422); assert.equal(noPrefix.error, "token_prefix_missing"); assert.match(noPrefix.message, /no token prefix/);
+  assert.equal(patients(), 0, "no MR number issued for a registration the queue would refuse");
+  const pool = await api("/pool", "POST", { orgId: "org-a", name: "x", mobile: "9876500002", date: DAY }, NURSE_A);
+  assert.equal(pool.__status, 422); assert.equal(pool.error, "token_department_required"); assert.match(pool.message, /Choose a department to give a token/);
+  assert.equal([...docs.keys()].filter((k) => k.startsWith("q_tickets/")).length, 0);
+  const ok = await api("/patient/register", "POST", { ...reg, departmentId: "dcard" }, NURSE_A);
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const noQueue = await api("/patient/register", "POST", { ...reg, mobile: "9876500003", forQueue: undefined }, NURSE_A);
+  assert.equal(noQueue.__status, 200, "a registration not for the queue (a ward admission) is not held to the token rules");
+});
+
+test("D14 POST /api/queue/import: a roster row whose department has no token department is an issue naming it, not a silent skip", async () => {
+  seed({ scope: "department", prefixes: { dcard: "C" }, deptAliases: { "cardio opd": "dcard" } });
+  const sess = await api(`/session?hospitalId=org-a&date=${DAY}`, "GET", null, OWNER_A);
+  const body = { sessionId: sess.session.id, rows: [{ PatientName: "Asha", PatientId: "MR7", VisitId: "e1", Department: "Cardio OPD" }, { PatientName: "Ravi", PatientId: "MR8", VisitId: "e2", Department: "ENT" }] };
+  assert.equal((await api("/import", "POST", body)).__status, 401);
+  assert.equal((await api("/import", "POST", body, OWNER_B)).__status, 403);
+  const r = await api("/import", "POST", body, OWNER_A);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.imported, 1);
+  assert.deepEqual(r.issues, [{ reason: "token_department_required", department: "ENT" }]);
+  assert.equal(r.tickets[0].token, "C-001");
+});
