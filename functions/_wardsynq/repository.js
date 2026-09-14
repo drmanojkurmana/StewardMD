@@ -25,6 +25,9 @@
  *                                                                           events through it instead of the newest N of
  *                                                                           everything; an implementation without it gets
  *                                                                           the old newest-N scan (see outbox.js).
+ *   pageByIdPrefix(tenantId, resourceType, prefix, {limit, before}) -> {records, next}   OPTIONAL, latest per id
+ *                                                                           whose id starts with prefix, newest first,
+ *                                                                           one page; next is the cursor for the page after
  *   patientsByIdentifier(tenantId, keys)             -> Patient[]           an INDEX SEEK, not a scan
  *   append(tenantId, records, ctx)                   -> {seq}               ATOMIC; see below
  *   changes(tenantId, sinceSeq, limit)               -> {records, cursor}   ascending by seq
@@ -262,6 +265,24 @@ class MemoryRepository {
     const rows = [...byId.values()];
     if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
     return rows.slice(0, max).map((r) => clone(r.body));
+  }
+
+  /**
+   * OPTIONAL (see the port contract above): one page of the latest version of each id that starts
+   * with `prefix`, most recently written first. `before` is the cursor a previous page handed back.
+   * A per-owner log whose ids carry the owner (a webhook's delivery attempts) is read through here
+   * as an index range, instead of the hospital's newest N rows filtered afterwards.
+   */
+  async pageByIdPrefix(tenantId, resourceType, prefix, opts) {
+    const max = rosterLimit(opts && opts.limit), before = Number(opts && opts.before) || Infinity, pre = String(prefix || "");
+    if (!pre) return { records: [], next: null };
+    const byId = new Map();
+    for (const r of this._rows) {
+      if (r.tenantId !== tenantId || r.resourceType !== resourceType || !r.id.startsWith(pre)) continue;
+      byId.set(r.id, r);
+    }
+    const rows = [...byId.values()].filter((r) => r.seq < before).sort((a, b) => b.seq - a.seq);
+    return { records: rows.slice(0, max).map((r) => clone(r.body)), next: rows.length > max ? rows[max - 1].seq : null };
   }
 
   /**

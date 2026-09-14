@@ -411,7 +411,8 @@ async function loadEndpoint(who, id) {
 }
 const notFound = { ok: false, status: 404, error: "webhook_not_found", message: "No such webhook at this hospital." };
 
-/** ctx: { ..., id, eventTypes?, active? }. Turning one off is a disable; turning it on re-checks the address and clears the streak. */
+/** ctx: { ..., id, url?, eventTypes?, active? }. Turning one off is a disable; turning it on re-checks the address and clears the streak.
+ * A new address goes through the same https and public-address checks as a registration. The secret is not changed. */
 async function updateWebhook(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
@@ -420,6 +421,11 @@ async function updateWebhook(request, env, ctx) {
   if (!ep) return notFound;
   const next = { ...ep, version: ep.version + 1 };
   const changes = {};
+  if (ctx.url !== undefined && ctx.url !== null && str(ctx.url) !== ep.url) {
+    const dest = await checkDestination(ctx.url, ctx);
+    if (!dest.ok) return { ok: false, status: 422, error: dest.reason === "dns-failed" ? "url_unresolvable" : "url_refused", message: `Address not changed: ${dest.detail}` };
+    if (dest.url !== ep.url) { changes.url = { fromHost: hostOf(ep.url), toHost: hostOf(dest.url) }; next.url = dest.url; }
+  }
   if (ctx.eventTypes !== undefined) {
     const t = eventTypesFrom(ctx.eventTypes);
     if (t.error) return t.error;
@@ -510,19 +516,21 @@ async function listWebhooks(request, env, ctx) {
   };
 }
 
-/** ctx: { ..., id }. The newest 50 attempts for one endpoint. */
+/** ctx: { ..., id, limit?, before? }. One page of this endpoint's attempts, newest first; `next` is the cursor for older ones. */
 async function listWebhookDeliveries(request, env, ctx) {
   const who = await open(request, env, ctx);
   if (who.error) return who.error;
   const { ep, error } = await loadEndpoint(who, ctx.id);
   if (error) return error;
   if (!ep) return notFound;
-  let rows;
-  // ponytail: newest 1000 attempts across the hospital, filtered here; a per-endpoint index if a hospital outgrows it.
-  try { rows = await who.repo.latestByType(who.tenantId, DELIVERY_TYPE, 1000, { newest: true }); }
+  const limit = Math.max(1, Math.min(100, Number(ctx.limit) || 50));
+  const before = /^\d+$/.test(str(ctx.before)) ? Number(ctx.before) : null;
+  let page;
+  // Every attempt's id starts whd-<endpoint id>- (deliverOne, testWebhook), so this is an index range.
+  try { page = await who.repo.pageByIdPrefix(who.tenantId, DELIVERY_TYPE, `whd-${ep.id}-`, { limit, before }); }
   catch { return { ok: false, status: 502, error: "record_read_failed", message: "The delivery log could not be read." }; }
-  return { ok: true, webhookId: ep.id, deliveries: (rows || []).filter((r) => r.endpointId === ep.id).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 50)
-    .map((r) => ({ at: r.at, eventId: r.eventId, eventType: r.eventType, attempt: r.attempt, status: r.status, responseCode: r.responseCode, reason: r.reason, test: r.test })) };
+  return { ok: true, webhookId: ep.id, limit, next: page.next == null ? null : String(page.next),
+    deliveries: page.records.map((r) => ({ at: r.at, eventId: r.eventId, eventType: r.eventType, attempt: r.attempt, status: r.status, responseCode: r.responseCode, reason: r.reason, test: r.test })) };
 }
 
 export {

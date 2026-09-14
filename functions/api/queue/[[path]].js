@@ -2194,7 +2194,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-update" && method === "POST") {
-        const r = await updateWebhook(request, env, { ...deps, id: body.id, eventTypes: body.eventTypes, payload: body.payload, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
+        const r = await updateWebhook(request, env, { ...deps, id: body.id, url: body.url, eventTypes: body.eventTypes, payload: body.payload, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-rotate" && method === "POST") {
@@ -2206,7 +2206,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-deliveries" && method === "GET") {
-        const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        const r = await listWebhookDeliveries(request, env, { ...deps, id: url.searchParams.get("id") || "", limit: url.searchParams.get("limit") || "", before: url.searchParams.get("before") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */

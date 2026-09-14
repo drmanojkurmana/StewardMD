@@ -304,3 +304,25 @@ test("waiting outbox events are read by status on real SQL: an old pending row b
   assert.equal((await mem.latestByStatus("t1", TYPE, waiting, 200)).length, 0);
   assert.equal((await sql.latestByStatus("t1", TYPE, waiting, 200)).length, 0);
 });
+
+test("G8 pageByIdPrefix: one owner's rows as an index range, newest first, paged, identical on memory and real SQL", { skip: DatabaseSync ? false : SKIP }, async () => {
+  const mem = new MemoryRepository();
+  const sql = new D1Repository(d1(freshDb()));
+  const row = (owner, i) => ({ resourceType: "_log", id: `whd-${owner}-evt-${i}`, version: 1, owner, i, meta: { recordedAt: "2026-09-14T00:00:00.000Z" }, writtenBy: { id: "system", kind: "service" } });
+  for (let i = 0; i < 12; i++) {
+    for (const repo of [mem, sql]) { await repo.append("t1", [row("wh-a", i)]); await repo.append("t1", [row("wh-ab", i)]); await repo.append("t2", [row("wh-a", 100 + i)]); }
+  }
+  // A second version of one row: latest per id, placed where it was last written.
+  for (const repo of [mem, sql]) await repo.append("t1", [{ ...row("wh-a", 3), version: 2, i: 33 }]);
+  for (const repo of [mem, sql]) {
+    const p1 = await repo.pageByIdPrefix("t1", "_log", "whd-wh-a-", { limit: 5 });
+    assert.deepEqual(p1.records.map((r) => r.i), [33, 11, 10, 9, 8]);
+    assert.ok(p1.next);
+    const p2 = await repo.pageByIdPrefix("t1", "_log", "whd-wh-a-", { limit: 5, before: p1.next });
+    assert.deepEqual(p2.records.map((r) => r.i), [7, 6, 5, 4, 2]);
+    const p3 = await repo.pageByIdPrefix("t1", "_log", "whd-wh-a-", { limit: 5, before: p2.next });
+    assert.deepEqual(p3.records.map((r) => r.i), [1, 0]);
+    assert.equal(p3.next, null);
+    assert.deepEqual((await repo.pageByIdPrefix("t1", "_log", "", {})).records, []);
+  }
+});

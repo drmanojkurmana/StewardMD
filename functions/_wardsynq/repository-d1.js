@@ -152,6 +152,27 @@ class D1Repository {
   }
 
   /**
+   * OPTIONAL (see repository.js): one page, newest first, of the latest version per id starting with
+   * `prefix`. The prefix is a RANGE on the UNIQUE (tenant_id, resource_type, id, version) index, not a
+   * LIKE, so a hospital's other rows are never walked. The cursor is the seq of the last row handed back.
+   */
+  async pageByIdPrefix(tenantId, resourceType, prefix, opts) {
+    const pre = String(prefix || "");
+    if (!pre) return { records: [], next: null };
+    const max = rosterLimit(opts && opts.limit), before = Number(opts && opts.before) || null;
+    const hi = pre.slice(0, -1) + String.fromCharCode(pre.charCodeAt(pre.length - 1) + 1);
+    const r = await this.db
+      .prepare(
+        "SELECT r.body, r.seq FROM wardsynq_record r " +
+        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? AND id>=? AND id<? GROUP BY id) m " +
+        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=?" + (before ? " AND r.seq<?" : "") + " ORDER BY r.seq DESC LIMIT ?"
+      )
+      .bind(...[tenantId, resourceType, pre, hi, tenantId, resourceType, ...(before ? [before] : []), max + 1]).all();
+    const rows = r.results || [];
+    return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+  }
+
+  /**
    * OPTIONAL (see repository.js): latest version per id whose body status is one of `statuses`,
    * oldest first. The status lives in the body JSON - there is deliberately no status column (see
    * the outbox index note in wardsynq_schema.sql) - so the predicate reads it with json_extract,

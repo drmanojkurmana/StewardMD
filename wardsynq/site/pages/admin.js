@@ -1469,7 +1469,8 @@
             (w.payload === "fhir-id-only" ? '<br><span class="pill">FHIR Subscription, id only</span>' : "") + "</td><td>" +
             w.eventTypes.map(function (t) { return esc(label[t] || t); }).join("<br>") + "</td><td>" + status + "</td><td>" + last + "</td><td>" +
             '<button type="button" class="btn ghost" data-wh-test="' + esc(w.id) + '"' + (w.active ? "" : " disabled") + ">Send test</button> " +
-            '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Recent deliveries</button> ' +
+            '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Delivery log</button> ' +
+            '<button type="button" class="btn ghost" data-wh-edit="' + esc(w.id) + '">Change address</button> ' +
             '<button type="button" class="btn ghost" data-wh-rotate="' + esc(w.id) + '">Rotate secret</button> ' +
             '<button type="button" class="btn ghost" data-wh-active="' + esc(w.id) + '" data-on="' + (w.active ? "0" : "1") + '">' + (w.active ? "Disable" : "Enable") + "</button></td></tr>";
         }).join("") + "</tbody></table></div>";
@@ -1487,18 +1488,29 @@
   WSQ._webhooksHtml = webhooksHtml;
 
   var DELIVERY_STATUS = { delivered: "Delivered", failed: "Failed, will retry", dead: "Failed for good", skipped: "Not sent" };
-  function webhookDeliveriesHtml(c, d) {
+  /* One endpoint's attempts, newest first, a page at a time. `older` says whether this is past the first page. */
+  function webhookDeliveriesHtml(c, d, url, older) {
     var esc = c.esc;
-    var h = "<h3>Recent deliveries</h3>";
+    var h = "<h3>Delivery log" + (url ? " for " + esc(url) : "") + "</h3>";
     if (d == null) return h + '<span class="spin"></span> Loading deliveries...';
     if (d.failed) return h + '<div class="msg err">The delivery log could not be loaded: ' + esc(d.message || "failed") + ". This is not the same as nothing having been sent.</div>";
-    if (!d.deliveries.length) return h + '<p class="quiet">No delivery attempts are recorded for this webhook yet.</p>';
-    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>Event</th><th>Attempt</th><th>Result</th><th>Response code</th></tr></thead><tbody>' +
+    var nav = (older ? '<button type="button" class="btn ghost" data-wh-page="">Newest</button> ' : "") +
+      (d.next ? '<button type="button" class="btn ghost" data-wh-page="' + esc(d.next) + '">Older</button>' : "");
+    if (!d.deliveries.length) return h + '<p class="quiet">' + (older ? "No older delivery attempts." : "No delivery attempts are recorded for this webhook yet.") + "</p>" + nav;
+    return h + '<div class="tbl"><table><thead><tr><th>When</th><th>Event</th><th>Attempts</th><th>Result</th><th>Response code</th></tr></thead><tbody>' +
       d.deliveries.map(function (x) {
         return '<tr class="' + (x.status === "delivered" ? "" : "warn") + '"><td>' + esc(x.at) + "</td><td>" + esc(x.eventType) + (x.test ? " (test)" : "") + '<br><span class="quiet">' + esc(x.eventId) + "</span></td><td>" + esc(x.attempt) +
           "</td><td>" + esc(DELIVERY_STATUS[x.status] || x.status) + (x.reason ? '<br><span class="quiet">' + esc(x.reason) + "</span>" : "") + "</td><td>" + (x.responseCode ? esc(x.responseCode) : "none") + "</td></tr>";
-      }).join("") + "</tbody></table></div>";
+      }).join("") + "</tbody></table></div>" + nav;
   }
+  /* Changing where an endpoint points. The server re-runs the https and public-address checks; the secret stays. */
+  function webhookEditHtml(c, w) {
+    var esc = c.esc;
+    return "<h3>Change address</h3><p class=\"quiet\">The new address is checked like a new webhook (https, a public address). The signing secret does not change.</p>" +
+      '<div class="row"><label class="f"><span>Address (https only)</span><input type="url" id="whEditUrl" value="' + esc(w.url) + '"></label></div>' +
+      '<button type="button" class="btn" id="whEditSave" data-id="' + esc(w.id) + '">Save address</button> <button type="button" class="btn ghost" id="whEditCancel">Cancel</button>';
+  }
+  WSQ._webhookEditHtml = webhookEditHtml;
   WSQ._webhookDeliveriesHtml = webhookDeliveriesHtml;
 
   // ---- Integrations > Connected apps (SMART) ---------------------------------------------
@@ -1844,13 +1856,32 @@
           });
         };
       });
+      var showLog = function (id, before) {
+        var log = document.getElementById("whLog");
+        log.innerHTML = webhookDeliveriesHtml(c, null, urlOf(id));
+        c.api("/ward/webhook-deliveries" + q + "&id=" + encodeURIComponent(id) + (before ? "&before=" + encodeURIComponent(before) : "")).then(function (d) {
+          log.innerHTML = webhookDeliveriesHtml(c, d && d.ok && d.deliveries ? d : fail(d), urlOf(id), !!before);
+          log.querySelectorAll("[data-wh-page]").forEach(function (p) { p.onclick = function () { showLog(id, p.getAttribute("data-wh-page")); }; });
+        }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null), urlOf(id), !!before); });
+      };
       body.querySelectorAll("[data-wh-log]").forEach(function (b) {
+        b.onclick = function () { showLog(b.getAttribute("data-wh-log"), ""); };
+      });
+      body.querySelectorAll("[data-wh-edit]").forEach(function (b) {
         b.onclick = function () {
-          var log = document.getElementById("whLog");
-          log.innerHTML = webhookDeliveriesHtml(c, null);
-          c.api("/ward/webhook-deliveries" + q + "&id=" + encodeURIComponent(b.getAttribute("data-wh-log"))).then(function (d) {
-            log.innerHTML = webhookDeliveriesHtml(c, d && d.ok && d.deliveries ? d : fail(d));
-          }, function () { log.innerHTML = webhookDeliveriesHtml(c, fail(null)); });
+          var id = b.getAttribute("data-wh-edit"), log = document.getElementById("whLog");
+          log.innerHTML = webhookEditHtml(c, { id: id, url: urlOf(id) });
+          document.getElementById("whEditCancel").onclick = function () { log.innerHTML = ""; };
+          var save = document.getElementById("whEditSave");
+          save.onclick = function () {
+            var url = String(document.getElementById("whEditUrl").value || "").trim();
+            if (!/^https:\/\//i.test(url)) { msg("The address must start with https://."); return; }
+            save.disabled = true;
+            c.api("/ward/webhook-update", { orgId: c.state.orgId, id: id, url: url }).then(function (x) {
+              if (!x || !x.ok) { save.disabled = false; msg(refusal(x)); return; }
+              c.toast(x.unchanged ? "That is already the address." : "Address changed. The signing secret is the same."); renderIntegrations(c, body);
+            }, function () { save.disabled = false; msg("No response from the server. The address may not have changed; reload to check."); });
+          };
         };
       });
     }, function () {
