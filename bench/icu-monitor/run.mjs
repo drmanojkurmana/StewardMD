@@ -84,10 +84,15 @@ function vision(img, extra) {
 // Mac Vision caches carry the quad (q); caches read on the iPhone (bench/icu-monitor/device-run.mjs,
 // engine "ios-device") may not, because the installed plugin does not return it
 const admissible = (j) => j && j.level === "accurate" && j.obs && (j.obs.length === 0 || j.obs[0].q || j.engine === "ios-device");
+// During the macOS Neural Engine fault Vision can also "succeed" with ZERO observations on a perfectly
+// readable photo (8 Rios frames, 2026-09-14). An empty full-image read is an OCR failure: never cached,
+// never scored (a real blank screen still has chrome text; RETAKE cases in the fixtures all have boxes).
 function fullPass(casePath, img) {
   const cache = casePath.replace(/\.json$/, ".obs.json");
-  if (!LIVE_OCR && existsSync(cache)) { const j = JSON.parse(readFileSync(cache, "utf8")); if (admissible(j)) return j; }
-  const j = vision(img); writeFileSync(cache, JSON.stringify(j)); return j;
+  if (!LIVE_OCR && existsSync(cache)) { const j = JSON.parse(readFileSync(cache, "utf8")); if (admissible(j) && j.obs.length) return j; }
+  const j = vision(img);
+  if (!j.obs.length) throw new Error("Vision returned no text for the full image (treated as an OCR failure, not cached)");
+  writeFileSync(cache, JSON.stringify(j)); return j;
 }
 function cropPass(casePath, img, region) {
   const cache = casePath.endsWith(".confirm.json") ? casePath.replace(/\.confirm\.json$/, ".confirm.cache.json") : casePath.replace(/\.json$/, ".crop.json");
