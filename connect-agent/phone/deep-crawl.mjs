@@ -669,11 +669,38 @@ function CRAWL_PAGE_STATE() {
     if (/datepicker|calendar/i.test((t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || ''))) continue;
     if (t.querySelector('th') && t.querySelector('tr td')) dataTableCount++;
   }
+  /* AN EMR WITHOUT A <table> IS STILL AN EMR. Counting only tables and characters made every
+   * table-less screen look like a dead post-expiry shell, so a modern SPA worklist - divs rendered
+   * from JSON, a handful of links - was abandoned as "the browser was not on the EMR after sign-in".
+   * A way FURTHER IN is the signal that the page is alive, so count the controls that are not the
+   * way back OUT: a sign-in or log-out link is exactly what a dead shell has. */
+  var controls = 0;
+  var els = document.querySelectorAll('a[href], button, [role="button"], [role="tab"], [role="menuitem"]');
+  for (var j = 0; j < els.length && controls < 6; j++) {
+    var el = els[j];
+    if (el.getClientRects && !el.getClientRects().length) continue;
+    var label = ((el.textContent || '') + ' ' + (el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('title') || '')).replace(/\s+/g, ' ').trim();
+    if (/\b(sign ?in|log ?in|log ?on|sign ?out|log ?out|log ?off)\b/i.test(label)) continue;
+    /* A LINK THAT GOES NOWHERE IS NOT A WAY IN. The expired GHIS shell keeps its whole nav bar, every
+     * item an <a href="#" onclick="return false"> that renders nothing; counting those would make a
+     * dead page look alive. Only a real destination counts. */
+    if (el.tagName === 'A') {
+      var href = el.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#' || /^javascript:/i.test(href)) continue;
+    }
+    controls++;
+  }
+  // Repeated siblings are how a SPA draws a list when it draws no table at all.
+  var lists = 0;
+  var conts = document.querySelectorAll('ul, ol, [role="list"], [role="grid"], [role="table"]');
+  for (var k = 0; k < conts.length && lists < 3; k++) if (conts[k].children && conts[k].children.length >= 3) lists++;
   return JSON.stringify({
     textLen: ((document.body && document.body.innerText) || '').length,
     hasPasswordInput: !!document.querySelector('input[type=password]'),
     dataTableCount: dataTableCount,
     anyVisible: anyVisible,
+    controls: controls,
+    lists: lists,
   });
 }
 
@@ -1038,7 +1065,12 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // after the frame), so a shell verdict is confirmed once after one wait. A null state (evaluate
   // failed) is treated as unknown and the walk proceeds.
   const pageState = () => evalJson(client, `(${PAGE_STATE_SRC})()`, null);
-  const isShell = (s) => !!s && s.dataTableCount === 0 && s.textLen < SHELL_TEXT_MAX;
+  /* A shell is a page with nothing on it and nowhere to go: no data table, almost no text, and no
+   * control that leads further in. A table-less SPA screen has controls, so it is walked, not
+   * abandoned (older builds answered "the browser was not on the EMR after sign-in" for those).
+   * `controls`/`lists` are absent from an older page build's answer; treat that as the old rule. */
+  const isShell = (s) => !!s && s.dataTableCount === 0 && s.textLen < SHELL_TEXT_MAX
+    && !(s.controls > 0) && !(s.lists > 0);
   let state = await pageState();
   if (state && state.hasPasswordInput) return { observedViews, trail, stopReason: 'login-required', found: [] };
   if (isShell(state)) {

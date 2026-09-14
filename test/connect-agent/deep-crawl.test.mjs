@@ -668,6 +668,24 @@ test('deepCrawlClinical: real DOM, dead shell -> session-expired-or-shell, nothi
   }, SHELL_HTML);
 });
 
+// A MODERN EMR MAY HAVE NO <table> AT ALL: cards drawn from JSON, one real link into a patient. That
+// used to look exactly like the dead shell above (no data table, little text) and the whole crawl was
+// abandoned with "the browser was not on the EMR after sign-in". The difference is that this page has
+// somewhere to go; the shell's nav links are all href="#".
+const SPA_HTML = `<!doctype html><html><body>
+<div id="ready">authenticated</div>
+<a id="summary" href="/patients/pt-482910">Open patient summary</a>
+</body></html>`;
+
+test('deepCrawlClinical: real DOM, table-less SPA screen with a real link is NOT a dead shell', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+  await withChrome(async (evaluate) => {
+    const client = { evaluate, async wait({ ms }) { await sleep(Math.min(ms, 200)); }, async currentUrl() { return { url: 'https://emr.example/worklist' }; } };
+    const { stopReason } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 200 } });
+    assert.notEqual(stopReason, 'session-expired-or-shell', 'a table-less SPA screen must be walked, not abandoned');
+    assert.notEqual(stopReason, 'login-required');
+  }, SPA_HTML);
+});
+
 test('deepCrawlClinical: real DOM, login form -> login-required', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
   await withChrome(async (evaluate) => {
     const client = { evaluate, async wait() {}, async currentUrl() { return { url: 'https://emr.example/login' }; } };
