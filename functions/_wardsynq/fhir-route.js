@@ -12,6 +12,7 @@ import { kickoffExport, exportStatus, cancelExport, exportFile, NDJSON } from ".
 import { dispatchTerminology } from "./fhir-terminology.js";
 import { patientSummary } from "./fhir-ips.js";
 import { auditEvents } from "./fhir-audit.js";
+import { subscriptions } from "./fhir-subscription.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -28,7 +29,7 @@ function fhirResponse(obj, status, extraHeaders, cors) {
  * Dispatches one GET against the FHIR read grammar.
  *   metadata | {Type} | {Type}/{id} | {Type}/{id}/_history | {Type}/{id}/_history/{vid}
  *   Patient/{id}/$everything | Patient/{id}/$summary | Provenance?target= | Provenance/{id} | ?patient= (the old spelling)
- *   CodeSystem | ValueSet (+ $expand, $validate-code) | AuditEvent
+ *   CodeSystem | ValueSet (+ $expand, $validate-code) | AuditEvent | Subscription
  *
  * @param {string[]} parts   path segments AFTER the fhir root
  * @param {URL} url
@@ -55,6 +56,10 @@ async function dispatchRead(request, env, parts, url, fctx, prefer) {
   if (fType === "AuditEvent") {
     if (fOp) return { obj: operationOutcome("error", "not-supported", "AuditEvent is read and searched only"), status: 404 };
     return auditEvents(request, env, { ...fctx, id: fId }, url);
+  }
+  if (fType === "Subscription") {
+    if (fOp) return { obj: operationOutcome("error", "not-supported", "Subscription is read and searched only; $status is not offered"), status: 404 };
+    return subscriptions(request, env, { ...fctx, id: fId }, url);
   }
   if (fType === "Patient" && fId && fOp === "$summary") {
     const r = await patientSummary(request, env, { ...fctx, patientId: fId });

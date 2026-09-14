@@ -1174,7 +1174,8 @@
           var status = "<b>" + esc(WH_STATUS[w.status] || w.status) + "</b>" + (w.disabledReason ? '<br><span class="quiet">' + esc(w.disabledReason) + "</span>" : "") +
             (w.consecutiveFailures ? '<br><span class="msg err">' + esc(w.consecutiveFailures) + " failed in a row</span>" : "");
           var last = w.lastAttemptAt ? esc(w.lastAttemptAt) + "<br>" + (w.lastOk ? "Delivered" : "Failed") + (w.lastResponseCode ? " (" + esc(w.lastResponseCode) + ")" : "") : '<span class="quiet">None yet</span>';
-          return '<tr class="' + (w.active ? "" : "warn") + '"><td>' + esc(w.url) + (w.description ? '<br><span class="quiet">' + esc(w.description) + "</span>" : "") + "</td><td>" +
+          return '<tr class="' + (w.active ? "" : "warn") + '"><td>' + esc(w.url) + (w.description ? '<br><span class="quiet">' + esc(w.description) + "</span>" : "") +
+            (w.payload === "fhir-id-only" ? '<br><span class="pill">FHIR Subscription, id only</span>' : "") + "</td><td>" +
             w.eventTypes.map(function (t) { return esc(label[t] || t); }).join("<br>") + "</td><td>" + status + "</td><td>" + last + "</td><td>" +
             '<button type="button" class="btn ghost" data-wh-test="' + esc(w.id) + '"' + (w.active ? "" : " disabled") + ">Send test</button> " +
             '<button type="button" class="btn ghost" data-wh-log="' + esc(w.id) + '">Recent deliveries</button> ' +
@@ -1185,7 +1186,9 @@
     h += '<div id="whLog"></div><div id="whMsg"></div><h3>Add a webhook</h3>';
     if (!r.keyConfigured) return h + '<div class="msg err">Webhook secrets cannot be stored encrypted on this server, so a webhook cannot be added.</div></div>';
     return h + '<div class="row"><label class="f"><span>Address (https only)</span><input type="url" id="whUrl" placeholder="https://"></label>' +
-      '<label class="f"><span>Label (optional)</span><input type="text" id="whDesc" maxlength="120"></label></div><div class="row">' +
+      '<label class="f"><span>Label (optional)</span><input type="text" id="whDesc" maxlength="120"></label>' +
+      '<label class="f"><span>Payload</span><select id="whPayload"><option value="wardsynq">WardSynQ JSON (event type and id)</option>' +
+      '<option value="fhir-id-only">FHIR Subscription notification (R4 backport, id only)</option></select></label></div><div class="row">' +
       (r.eventTypes || []).map(function (t) {
         return '<label class="f" style="flex:0 1 240px"><span><input type="checkbox" class="whType" value="' + esc(t.id) + '"> ' + esc(t.label) + "</span></label>";
       }).join("") + '</div><button type="button" class="btn" id="whAdd">Add webhook</button></div>';
@@ -1224,7 +1227,7 @@
         if (!/^https:\/\//i.test(url)) { msg("The address must start with https://."); return; }
         if (!types.length) { msg("Choose at least one event."); return; }
         add.disabled = true;
-        c.api("/ward/webhook", { orgId: c.state.orgId, url: url, eventTypes: types, description: document.getElementById("whDesc").value }).then(function (x) {
+        c.api("/ward/webhook", { orgId: c.state.orgId, url: url, eventTypes: types, description: document.getElementById("whDesc").value, payload: document.getElementById("whPayload").value }).then(function (x) {
           if (!x || !x.ok || !x.secret) { add.disabled = false; msg(refusal(x)); return; }
           renderIntegrations(c, body, { url: x.webhook.url, secret: x.secret });
         }, function () { add.disabled = false; msg("No response from the server. The webhook may not have been added; reload to check."); });

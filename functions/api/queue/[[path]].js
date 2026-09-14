@@ -1315,6 +1315,8 @@ export async function onRequest(context) {
         : bulkFhirPath ? capFor["fhir-export"]
         /* The audit trail as FHIR AuditEvent is not a chart read either: the security review's own gate. */
         : (sub === "fhir" && parts[2] === "AuditEvent") ? capFor["security-report"]
+        // A Subscription is a webhook seen through FHIR: the webhooks' own gate.
+        : (sub === "fhir" && parts[2] === "Subscription") ? capFor.webhooks
         : (sub === "discharge-summary" && method === "GET") ? CAPS.EMR_VIEW
         : capFor[sub];
       if (!need) return json({ ok: false, error: "not_found" }, 404, request);
@@ -2008,11 +2010,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook" && method === "POST") {
-        const r = await registerWebhook(request, env, { ...deps, url: body.url, eventTypes: body.eventTypes, description: body.description });
+        const r = await registerWebhook(request, env, { ...deps, url: body.url, eventTypes: body.eventTypes, description: body.description, payload: body.payload });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-update" && method === "POST") {
-        const r = await updateWebhook(request, env, { ...deps, id: body.id, eventTypes: body.eventTypes, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
+        const r = await updateWebhook(request, env, { ...deps, id: body.id, eventTypes: body.eventTypes, payload: body.payload, active: typeof body.active === "boolean" ? body.active : undefined, reason: body.reason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "webhook-rotate" && method === "POST") {

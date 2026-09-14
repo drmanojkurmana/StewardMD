@@ -907,6 +907,12 @@ function capabilityStatement(opts) {
           searchParam: [{ name: "date", type: "date" }, { name: "agent", type: "token" }, { name: "type", type: "token" }, { name: "entity-type", type: "token" }, { name: "outcome", type: "token" }, { name: "_count", type: "number" }],
           documentation: "The hospital's audit trail, read-only, carrying only what the audit screen shows (when, who, action, record type and id, patient reference hash, outcome). A SMART backend-services token with system/AuditEvent.read, or a staff session with staff.admin; never a patient/ or user/ scope. Reading it is audited.",
         },
+        {
+          type: "Subscription",
+          interaction: [{ code: "read" }, { code: "search-type" }],
+          searchParam: [{ name: "status", type: "token" }, { name: "criteria", type: "string" }],
+          documentation: "R4 Subscriptions Backport, rest-hook, id-only payload, one Subscription per topic (urn:stewardmd:fhir:SubscriptionTopic:<event>). Created and managed by the hospital administrator on the Integrations screen and delivered by the webhook outbox (signed, retried, auto-disabled); not created over FHIR, and $status is not offered. A SMART backend-services token with system/Subscription.read, or a staff session with staff.admin.",
+        },
       ],
       operation: [
         { name: "export", definition: "http://hl7.org/fhir/uv/bulkdata/OperationDefinition/export", documentation: "Bulk Data v2, $export and Patient/$export: Prefer: respond-async required; _type and _since only (anything else is a 400); NDJSON; one active export per hospital; files need the same authorization and expire after 24 hours. A SMART backend-services token with system/ scopes, or a staff session with staff.admin." },
