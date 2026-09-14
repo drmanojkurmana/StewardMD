@@ -1066,14 +1066,26 @@
     "ofloxacin+ornidazole": { dose: "1 tab PO", freq: "BD", dur: "5 days", timing: "After Food" },
     "cefixime+ofloxacin": { dose: "1 tab PO", freq: "BD", dur: "5 days", timing: "After Food" },
     "thyroxine": { dose: "50 mcg PO", freq: "OD", dur: "30 days", timing: "Empty Stomach Early Morning" },
-    "levothyroxine": { dose: "50 mcg PO", freq: "OD", dur: "30 days", timing: "Empty Stomach Early Morning" }
+    "levothyroxine": { dose: "50 mcg PO", freq: "OD", dur: "30 days", timing: "Empty Stomach Early Morning" },
+    "ambroxol+guaifenesin": { dose: "10 ml PO", freq: "TDS", dur: "5 days", timing: "After Food" },
+    "ambroxol+guaifenesin+levosalbutamol": { dose: "10 ml PO", freq: "TDS", dur: "5 days", timing: "After Food" },
+    "ambroxol+guaifenesin+terbutaline": { dose: "10 ml PO", freq: "TDS", dur: "5 days", timing: "After Food" },
+    "dextromethorphan+chlorpheniramine": { dose: "10 ml PO", freq: "TDS", dur: "5 days", timing: "After Food" }
   };
 
-  function resolveStandardRegimen(generic, rawDose) {
+  function resolveStandardRegimen(generic, rawDose, brandName) {
+    var bareKey = canonDrugKey(generic).replace(/\s*\+\s*/g, "+");
     var norm = String(generic || "").toLowerCase().replace(/[^a-z0-9.+/ -]+/g, " ").replace(/\s+/g, " ").trim();
     var compKey = norm.indexOf("+") > -1 ? norm.split(/\s*\+\s*/).map(function(s){return s.trim();}).sort().join("+") : norm;
-    var std = STANDARD_REGIMENS[norm] || STANDARD_REGIMENS[compKey];
+    var std = STANDARD_REGIMENS[bareKey] || STANDARD_REGIMENS[norm] || STANDARD_REGIMENS[compKey];
     if (std) return std;
+
+    var comboText = (String(generic || "") + " " + String(brandName || "") + " " + String(rawDose || "")).toLowerCase();
+    var isLiquid = /\b(syrup|suspension|liquid|solution|elixir|cough|oral\s*liquid|oral\s*solution)\b/i.test(comboText);
+    var isDrops = /\b(drops?|eye\s*drops?|ear\s*drops?|nasal\s*drops?)\b/i.test(comboText);
+    var isTopical = /\b(cream|ointment|gel|lotion|liniment|paste)\b/i.test(comboText);
+    var isInhaler = /\b(inhaler|rotacap|respules|puffs?|spray)\b/i.test(comboText);
+    var isInjection = /\b(injection|inj|infusion|vial|ampoule)\b/i.test(comboText);
 
     var doseText = String(rawDose || "");
     var out = { dose: "", freq: "OD", dur: "5 days", timing: "" };
@@ -1084,12 +1096,29 @@
     else if (/\b(?:hs|bedtime|at\s*night)\b/i.test(doseText)) out.freq = "HS";
     else if (/\b(?:sos|prn|as\s*needed)\b/i.test(doseText)) out.freq = "SOS";
     else if (/\b(?:stat)\b/i.test(doseText)) out.freq = "STAT";
+    else if (isLiquid || isDrops) out.freq = "TDS";
+    else if (isTopical || isInhaler) out.freq = "BD";
     else out.freq = "OD";
 
     var mDose = doseText.match(/(\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu|units?|%)(?:\s*[-–]\s*\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu)?)?)/i);
     var route = /\b(?:iv\/po|po\/iv|oral|po)\b/i.test(doseText) ? "PO" : (/\b(?:iv|intravenous)\b/i.test(doseText) ? "IV" : "");
     if (mDose) {
       out.dose = mDose[1].replace(/\s*[-–]\s*\d+.*$/, "") + (route ? (" " + route) : " PO");
+    } else if (isLiquid) {
+      out.dose = "10 ml PO";
+      out.timing = "After Food";
+    } else if (isDrops) {
+      out.dose = "2 drops";
+      out.timing = "As Directed";
+    } else if (isTopical) {
+      out.dose = "Apply locally";
+      out.timing = "As Directed";
+    } else if (isInhaler) {
+      out.dose = "1-2 puffs";
+      out.timing = "As Directed";
+    } else if (isInjection) {
+      out.dose = "1 vial IV";
+      out.timing = "Stat / As Directed";
     } else {
       out.dose = doseText.split(/[.;]/)[0].trim() || (norm.indexOf("+") > -1 ? "1 tab PO" : "1 tab PO");
     }
@@ -1098,6 +1127,8 @@
     else if (/analgesic|nsaid|antipyretic|pain|spasm/i.test(doseText)) out.dur = "3 days";
     else if (/ppi|antacid|ulcer|gerd/i.test(doseText)) out.dur = "14 days";
     else if (/hypertension|diabetes|statin|lipid|cardiac|thyroid/i.test(doseText)) out.dur = "30 days";
+    else if (isTopical) out.dur = "7 days";
+    else if (isInhaler) out.dur = "30 days";
     else out.dur = "5 days";
 
     return out;
@@ -1138,7 +1169,8 @@
       }
 
       // Auto-populate standard dosing: dose + route, frequency, duration
-      var regimen = resolveStandardRegimen(r.generic, r.dose);
+      var bName = brandIn ? brandIn.value : "";
+      var regimen = resolveStandardRegimen(r.generic, r.dose, bName);
       var doseIn = line.querySelector(".rx-dose");
       if (doseIn) {
         if (!doseIn.value.trim() || doseIn.value === "1") {
@@ -1205,16 +1237,16 @@
       // while keeping distinct combinations intact (e.g. "Paracetamol + Tramadol").
       var seen = {}, merged = [];
       local.forEach(function (r) {
-        var ck = canonDrugKey(r.generic);
+        var k = canonDrugKey(r.generic);
         var rawk = String(r.generic || "").toLowerCase();
-        seen[ck] = 1; seen[rawk] = 1;
+        seen[k] = 1; seen[rawk] = 1;
         merged.push(r);
       });
       remoteRows.forEach(function (r) {
-        var ck = canonDrugKey(r.generic);
+        var k = canonDrugKey(r.generic);
         var rawk = String(r.generic || "").toLowerCase();
-        if (!ck || seen[ck] || seen[rawk] || merged.length >= 10) return;
-        seen[ck] = 1; seen[rawk] = 1;
+        if (!k || seen[k] || seen[rawk] || merged.length >= 10) return;
+        seen[k] = 1; seen[rawk] = 1;
         // Clean display name for single entities that carry redundant inline strength
         if (r.generic && r.generic.indexOf("+") === -1 && (/\([^)]*\)/.test(r.generic) || /\b\d+\s*mg\b/i.test(r.generic))) {
           var cleanName = r.generic.replace(/\s*\([^)]*\)/g, "").replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|gm|ml|iu|units?|%)\b/gi, "").trim();

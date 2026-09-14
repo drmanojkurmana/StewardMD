@@ -218,6 +218,10 @@
     "cefixime+ofloxacin": {
       defaultAdult: "brand:200mg|200mg"
     },
+    "ambroxol+guaifenesin": {
+      defaultAdult: "brand:30mg|50mg",
+      defaultPed: "brand:15mg|50mg"
+    },
     "ambroxol+guaifenesin+levosalbutamol": {
       defaultAdult: "brand:1mg|30mg|50mg"
     },
@@ -328,6 +332,24 @@
    *   same population target (adult vs pediatric)
    *   on the market (not discontinued)
    * Anything else returns a reason, which the UI can show instead of a product. */
+  function strengthsEqual(k1, k2) {
+    if (!k1 || !k2) return false;
+    if (k1 === k2) return true;
+    var normVal = function (k) {
+      if (k.indexOf("comp:") === 0) {
+        return k.slice(5).split("|").map(function (p) {
+          var eq = p.indexOf("=");
+          return eq >= 0 ? p.slice(eq + 1) : p;
+        }).sort().join("|");
+      }
+      if (k.indexOf("brand:") === 0) {
+        return k.slice(6).split("|").sort().join("|");
+      }
+      return k;
+    };
+    return normVal(k1) === normVal(k2);
+  }
+
   function eligibility(rx, cand) {
     if (!rx || !cand) return { ok: false, reason: "missing_record" };
     if (cand.discontinued) return { ok: false, reason: "discontinued" };
@@ -351,7 +373,7 @@
     }
     var rk = strengthKey(rx), ck = strengthKey(candForStrength);
     if (!rk || !ck) return { ok: false, reason: "strength_unknown" };
-    if (rk !== ck) return { ok: false, reason: "strength_mismatch" };
+    if (!strengthsEqual(rk, ck)) return { ok: false, reason: "strength_mismatch" };
     return { ok: true, reason: "exact" };
   }
   function eligible(rx, cand) { return eligibility(rx, cand).ok; }
@@ -429,19 +451,34 @@
     var liq = dose.match(/(\d+(?:\.\d+)?)\s*(ml|l)\b/);
     if (liq) { var c = canonStrength(parseFloat(liq[1]), liq[2]); if (c) { units = c.value; unit = "ml"; } }
     if (units == null) {
+      var tsp = dose.match(/(\d+(?:\.\d+)?)\s*(?:tsp|teaspoons?|spoons?)\b/i);
+      if (tsp) { units = parseFloat(tsp[1]) * 5; unit = "ml"; }
+    }
+    if (units == null) {
       var solid = dose.match(/(\d+(?:\.\d+)?)\s*(tablets?|tabs?|capsules?|caps?|puffs?|drops?|sachets?)\b/);
-      if (solid) { units = parseFloat(solid[1]); unit = formFamily === "capsule" ? "capsule" : "tablet"; }
+      if (solid) {
+        units = parseFloat(solid[1]);
+        unit = formFamily === "capsule" ? "capsule" : (formFamily === "liquid" ? "ml" : "tablet");
+        if (formFamily === "liquid" && units === 1) units = 10;
+      }
     }
     if (units == null && (/(?:^|\d|\s)(mg|mcg|ug|g|gm|iu|units?)\b/.test(dose) || STRENGTH_RE.test(dose))) {
-      units = 1; unit = (formFamily === "capsule" ? "capsule" : "tablet");
+      units = (formFamily === "liquid" ? 10 : 1);
+      unit = (formFamily === "capsule" ? "capsule" : (formFamily === "liquid" ? "ml" : "tablet"));
     }
     if (units == null && /^\s*\d+(\.\d+)?\s*$/.test(dose)) {
       var rawNum = parseFloat(dose);
-      if ((formFamily === "tablet" || formFamily === "capsule" || !formFamily) && rawNum > 10) {
+      if (formFamily === "liquid") {
+        units = rawNum >= 5 ? rawNum : rawNum * 5;
+        unit = "ml";
+      } else if ((formFamily === "tablet" || formFamily === "capsule" || !formFamily) && rawNum > 10) {
         units = 1; unit = (formFamily === "capsule" ? "capsule" : "tablet");
       } else {
         units = rawNum; unit = (formFamily === "capsule" ? "capsule" : "tablet");
       }
+    }
+    if (units == null && formFamily === "liquid") {
+      units = 10; unit = "ml";
     }
     if (units == null) return null;
     return { units: units * per * days, unit: unit, perDose: units, perDay: per, days: days };
