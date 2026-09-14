@@ -1,6 +1,6 @@
-# ICU monitor extraction benchmark: parser v2.1.0, policy strict, 2-scale Vision
+# ICU monitor extraction benchmark: parser v2.1.0, policy strict, 2-scale Vision, digit verification: rr
 
-Generated 2026-09-14T12:02:57.279Z. Local extraction only (Apple Vision on macOS + icu-monitor-parser.js). **Gemini calls: 0** (not part of this benchmark; the app's on-tap fallback is counted separately). Network calls: 0.
+Generated 2026-09-14T15:24:48.520Z. Local extraction only (Apple Vision on macOS + icu-monitor-parser.js). **Gemini calls: 0** (not part of this benchmark; the app's on-tap fallback is counted separately). Network calls: 0.
 
 **Groups are reported separately and never pooled.** `real` = photographs as taken. `perturbed-real` = images derived from a real photograph (robustness, not new monitors). `synthetic` = rendered layouts (layout handling, not photographic accuracy). Unit-test fixtures are not included.
 
@@ -12,26 +12,28 @@ Generated 2026-09-14T12:02:57.279Z. Local extraction only (Apple Vision on macOS
 - PASS: Philips 2x photo, strict: no wrong auto-fill; every non-auto core field suggests the true value (auto hr,spo2,sbp,dbp,map,rr)
 - PASS: Philips real 900px, strict: no wrong auto-fill, MAP never computed, Pulse never inferred (auto sbp,dbp,map,art,hr,spo2,pvc)
 
-## Group: real (1 case)
+## Group: real (27 cases)
 
-Silent guesses 0 · incomplete evidence 0 · RETAKE_PHOTO 0 · DEGRADED 0 · avg Vision full 202 ms + crop 272 ms · parse 2 ms · boxes 47 (+13 from crop) · colour used in 1
+Silent guesses 0 · incomplete evidence 0 · RETAKE_PHOTO 1 · DEGRADED 2 · avg Vision full 170.6 ms + crop 126.1 ms · parse 2.4 ms · boxes 32.6 (+8.6 from crop) · colour used in 22
 
 | field | visible | correct | wrong | review | missed | exact % | precision % | needs-review % | silent-guess % | safe % |
 |---|---|---|---|---|---|---|---|---|---|---|
-| hr | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| spo2 | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| sbp | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| dbp | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| map | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| rr | 1 | 0 | 0 | 1 | 0 | 0 | - | 100 | 0 | 0 |
-| pulse | 1 | 0 | 0 | 1 | 0 | 0 | - | 100 | 0 | 0 |
-| pvc | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| art | 1 | 1 | 0 | 0 | 0 | 100 | 100 | 0 | 0 | 100 |
-| nibp | 0 | 0 | 0 | 0 | 0 | - | - | 0 | 0 | 100 |
+| hr | 14 | 7 | 0 | 8 | 1 | 50 | 100 | 47.1 | 0 | 58.8 |
+| spo2 | 13 | 3 | 0 | 7 | 4 | 23.1 | 100 | 41.2 | 0 | 41.2 |
+| sbp | 14 | 3 | 0 | 11 | 2 | 21.4 | 100 | 68.8 | 0 | 31.3 |
+| dbp | 14 | 3 | 0 | 11 | 2 | 21.4 | 100 | 68.8 | 0 | 31.3 |
+| map | 13 | 3 | 0 | 7 | 5 | 23.1 | 100 | 43.8 | 0 | 37.5 |
+| rr | 19 | 4 | 0 | 17 | 3 | 21.1 | 100 | 65.4 | 0 | 42.3 |
+| pulse | 9 | 0 | 0 | 9 | 4 | 0 | - | 52.9 | 0 | 47.1 |
+| pvc | 6 | 3 | 0 | 2 | 1 | 50 | 100 | 33.3 | 0 | 50 |
+| temp | 4 | 0 | 0 | 4 | 2 | 0 | - | 50 | 0 | 50 |
+| etco2 | 1 | 0 | 0 | 1 | 0 | 0 | - | 100 | 0 | 0 |
+| art | 5 | 3 | 0 | 2 | 2 | 60 | 100 | 28.6 | 0 | 71.4 |
+| nibp | 12 | 0 | 0 | 1 | 11 | 0 | - | 5.9 | 0 | 29.4 |
 
 ## Group: perturbed-real (21 cases)
 
-Silent guesses 0 · incomplete evidence 0 · RETAKE_PHOTO 0 · DEGRADED 3 · avg Vision full 221.8 ms + crop 238.7 ms · parse 2 ms · boxes 32.4 (+8.9 from crop) · colour used in 20
+Silent guesses 0 · incomplete evidence 0 · RETAKE_PHOTO 0 · DEGRADED 3 · avg Vision full 221.8 ms + crop 238.7 ms · parse 2.7 ms · boxes 32.4 (+8.9 from crop) · colour used in 20
 
 | field | visible | correct | wrong | review | missed | exact % | precision % | needs-review % | silent-guess % | safe % |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -78,7 +80,7 @@ Per manufacturer (perturbed-real; core fields exact % / safe %)
 
 ## Group: synthetic (39 cases)
 
-Silent guesses 0 · incomplete evidence 0 · RETAKE_PHOTO 0 · DEGRADED 2 · avg Vision full 223.9 ms + crop 285.3 ms · parse 1.8 ms · boxes 22 (+1.2 from crop) · colour used in 37
+Silent guesses 0 · incomplete evidence 0 · RETAKE_PHOTO 0 · DEGRADED 2 · avg Vision full 223.9 ms + crop 285.3 ms · parse 3.8 ms · boxes 22 (+1.2 from crop) · colour used in 37
 
 | field | visible | correct | wrong | review | missed | exact % | precision % | needs-review % | silent-guess % | safe % |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -104,47 +106,6 @@ Per manufacturer (synthetic; core fields exact % / safe %)
 | mindray-beneview | 7 | 100 / 100 | 100 / 100 | 0 / 0 | 0 / 0 | 0 / 0 | 100 / 100 |
 | nihon-kohden | 6 | 100 / 100 | 100 / 100 | 16.7 / 16.7 | 16.7 / 16.7 | 16.7 / 16.7 | 100 / 100 |
 | philips-intellivue | 7 | 85.7 / 85.7 | 100 / 100 | 100 / 100 | 100 / 100 | 100 / 100 | 100 / 100 |
-
-## Threshold sweep (confidence threshold per field; correct auto / silent guesses)
-
-real:
-
-| field | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | 0.85 | 0.90 | 0.95 | current |
-|---|---|---|---|---|---|---|---|---|---|
-| hr | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 0/0 | 0.8 |
-| spo2 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 0/0 | 0/0 | 0.82 |
-| rr | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0.85 |
-| pulse | 1/0 | 1/0 | 1/0 | 1/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0.85 |
-| pvc | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 0.88 |
-| temp | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0.85 |
-| pressure | 2/0 | 2/0 | 2/0 | 2/0 | 2/0 | 2/0 | 2/0 | 2/0 | 0.8 |
-| map | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 1/0 | 0/0 | 0.85 |
-
-perturbed-real:
-
-| field | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | 0.85 | 0.90 | 0.95 | current |
-|---|---|---|---|---|---|---|---|---|---|
-| hr | 13/0 | 13/0 | 13/0 | 13/0 | 13/0 | 12/0 | 10/0 | 6/0 | 0.8 |
-| spo2 | 8/0 | 8/0 | 8/0 | 8/0 | 7/0 | 6/0 | 4/0 | 0/0 | 0.82 |
-| rr | 6/0 | 6/0 | 6/0 | 6/0 | 6/0 | 6/0 | 4/0 | 2/0 | 0.85 |
-| pulse | 7/0 | 7/0 | 7/0 | 7/0 | 6/0 | 0/0 | 0/0 | 0/0 | 0.85 |
-| pvc | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0.88 |
-| temp | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0/0 | 0.85 |
-| pressure | 20/0 | 20/0 | 20/0 | 20/0 | 20/0 | 20/0 | 18/0 | 14/0 | 0.8 |
-| map | 10/0 | 10/0 | 10/0 | 10/0 | 10/0 | 10/0 | 9/0 | 0/0 | 0.85 |
-
-synthetic:
-
-| field | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | 0.85 | 0.90 | 0.95 | current |
-|---|---|---|---|---|---|---|---|---|---|
-| hr | 36/0 | 36/0 | 36/0 | 35/0 | 35/0 | 34/0 | 29/0 | 9/0 | 0.8 |
-| spo2 | 33/0 | 33/0 | 33/0 | 33/0 | 32/0 | 32/0 | 21/0 | 4/0 | 0.82 |
-| rr | 28/0 | 28/0 | 28/0 | 28/0 | 27/0 | 24/0 | 22/0 | 4/0 | 0.85 |
-| pulse | 20/0 | 20/0 | 20/0 | 20/0 | 20/0 | 20/0 | 20/0 | 20/0 | 0.85 |
-| pvc | 13/0 | 13/0 | 13/0 | 13/0 | 13/0 | 13/0 | 13/0 | 13/0 | 0.88 |
-| temp | 10/0 | 10/0 | 10/0 | 10/0 | 10/0 | 10/0 | 6/0 | 0/0 | 0.85 |
-| pressure | 32/0 | 32/0 | 32/0 | 32/0 | 32/0 | 32/0 | 32/0 | 32/0 | 0.8 |
-| map | 16/0 | 16/0 | 16/0 | 16/0 | 16/0 | 16/0 | 15/0 | 0/0 | 0.85 |
 
 ## Every non-correct outcome
 
@@ -181,6 +142,26 @@ synthetic:
 - **philips-intellivue-low-light-blur-05** [synthetic] (philips-intellivue, low-light+blur, quality OK): pulse review (exp 96, sug 96: the value was not read identically by both OCR passes); pvc review (exp 1, sug 1: the value was not read identically by both OCR passes)
 - **philips-intellivue-partial-obscured-06** [synthetic] (philips-intellivue, partial+label-obscured, quality OK): pulse review (exp 88, sug 88: the value was not read identically by both OCR passes); pvc review (exp 0, sug 0: the value was not read identically by both OCR passes)
 - **philips-intellivue-tilt-glare-04** [synthetic] (philips-intellivue, tilt+glare, quality OK): pulse missed (exp 82: no readable candidate); pvc review (exp 0, sug 0: the value was not read identically by both OCR passes)
+- **owner-2d6f5cea** [real] (philips-intellivue, real-photo+glare+invalid-values+big-clock, quality OK): sbp review (exp 96, sug 96: pressure source (ART / NIBP) not identified); dbp review (exp 47, sug 47: pressure source (ART / NIBP) not identified); map missed (exp 68: no (MM) read next to 96/47; MAP is only ever a displayed value); rr review (exp 16, sug 15: independent digit check reads "16", OCR read "15"); art missed (exp {"sbp":96,"dbp":47,"map":68})
+- **owner-3e5ad24b** [real] (contec, real-photo+seven-segment+occlusion+low-light+unreadable-labels, quality OK): spo2 review (exp 94, sug 94: label not read (slot only)); sbp missed (exp 171: no SSS/DD box); dbp missed (exp 107: no SSS/DD box); pulse missed (exp 118: no readable candidate); nibp missed (exp {"sbp":171,"dbp":107,"map":null})
+- **owner-4e9c199c** [real] (philips-g40e, real-photo+trend-table+invalid-values+window-glare, quality OK): sbp review (exp 73, sug 73: pressure source (ART / NIBP) not identified); dbp review (exp 36, sug 36: pressure source (ART / NIBP) not identified); map review (exp 49, sug 49: pressure source (ART / NIBP) not identified); rr review (exp 12, sug 12: confidence 0.78 below 0.85); temp review (exp 23.3, sug 42: size/position inconsistent); nibp missed (exp {"sbp":73,"dbp":36,"map":49})
+- **owner-576e6ab4** [real] (philips-g40e, real-photo+distance+glass-reflection+trend-table, quality OK): spo2 review (exp 94, sug 100: the value was not read identically by both OCR passes); sbp review (exp 112, sug 112: pressure source (ART / NIBP) not identified; the value was not read identically by both OCR passes); dbp review (exp 53, sug 53: pressure source (ART / NIBP) not identified; the value was not read identically by both OCR passes); map missed (exp 81: no (MM) read next to E 112/53(81; MAP is only ever a displayed value); rr review (exp 53, sug 4: OCR scales disagree ("пилиллла мамлиля 04" vs "wwwnrw"); the value was not read identically by both OCR passes); pulse review (exp 53, sug 53: the value was not read identically by both OCR passes); nibp missed (exp {"sbp":112,"dbp":53,"map":81})
+- **owner-840e2f7e** [real] (meditec, product-photo+low-resolution+demo-watermark, quality RETAKE_PHOTO): hr review (exp 60: RETAKE_PHOTO: no monitor numerics were read); spo2 review (exp 98: RETAKE_PHOTO: no monitor numerics were read); sbp review (exp 120: RETAKE_PHOTO: no monitor numerics were read); dbp review (exp 80: RETAKE_PHOTO: no monitor numerics were read); map review (exp 90: RETAKE_PHOTO: no monitor numerics were read); rr review (exp 27: RETAKE_PHOTO: no monitor numerics were read); pulse review (exp 60: RETAKE_PHOTO: no monitor numerics were read); etco2 review (exp 38: RETAKE_PHOTO: no monitor numerics were read); nibp missed (exp {"sbp":120,"dbp":80,"map":90})
+- **owner-97c20181** [real] (philips-g40e, real-photo+trend-table+invalid-values+window-glare, quality OK): sbp review (exp 73, sug 73: the value was not read identically by both OCR passes); dbp review (exp 36, sug 36: the value was not read identically by both OCR passes); map review (exp 49, sug 49: the value was not read identically by both OCR passes); rr review (exp 15, sug 15: the value was not read identically by both OCR passes); temp review (exp 22.3, sug 42: the value was not read identically by both OCR passes); nibp review (exp {"sbp":73,"dbp":36,"map":49}, sug {"s":73,"d":36,"map":49}: the value was not read identically by both OCR passes)
+- **owner-9f8f815b** [real] (philips-g40e, real-photo+distance+low-resolution+glass-reflection+second-screen, quality OK): sbp review (exp 193, sug 193: pressure source (ART / NIBP) not identified); dbp review (exp 105, sug 105: pressure source (ART / NIBP) not identified); map missed (exp 142: no (MM) read next to 193/105; MAP is only ever a displayed value); nibp missed (exp {"sbp":193,"dbp":105,"map":142})
+- **owner-aa0cb94d** [real] (ge-dash, published-photo+low-resolution+dual-pressure+alarm-list, quality OK): hr review (exp 84, sug 84: label not read (slot and colour agree)); spo2 review (exp 97, sug 84: two candidates too close (84 vs 70)); rr review (exp 24, sug 43: two candidates too close (43 vs 24)); pvc review (exp 0, sug 0: the value was not read identically by both OCR passes); temp missed (exp 36.5: no readable candidate); art missed (exp {"sbp":141,"dbp":43,"map":70}); nibp missed (exp {"sbp":113,"dbp":60,"map":81})
+- **owner-b1b1f0fa** [real] (ventilator-other, real-photo+ventilator+set-vs-measured+glass-smudge, quality OK): rr review (exp 12, sug 12: confidence 0.85 below 0.85)
+- **owner-b9278080** [real] (philips-intellivue, real-photo+distance+tiny-labels+big-clock+trend-table, quality OK): hr review (exp 103, sug 199: two candidates too close (199 vs 103)); spo2 review (exp 99, sug 99: the value was not read identically by both OCR passes); sbp review (exp 169, sug 169: pressure source (ART / NIBP) not identified); dbp review (exp 98, sug 98: pressure source (ART / NIBP) not identified); map review (exp 114, sug 114: pressure source (ART / NIBP) not identified); rr missed (exp 17: no readable candidate); pulse missed (exp 103: no readable candidate); nibp missed (exp {"sbp":169,"dbp":98,"map":114})
+- **owner-c5ed1725** [real] (nihon-kohden, real-photo+plastic-wrap-glare+exif-rotated+distance, quality OK): hr review (exp 144, sug 144: the value was not read identically by both OCR passes); spo2 missed (exp 96: no readable candidate); sbp review (exp 145, sug 145: pressure source (ART / NIBP) not identified; the value was not read identically by both OCR passes); dbp review (exp 82, sug 82: pressure source (ART / NIBP) not identified; the value was not read identically by both OCR passes); map missed (exp 103: no (MM) read next to 145/ 82; MAP is only ever a displayed value); rr missed (exp 19: no readable candidate); pvc missed (exp 0: no readable candidate); temp missed (exp 21: no readable candidate); nibp missed (exp {"sbp":145,"dbp":82,"map":103})
+- **owner-cc56af64** [real] (philips-intellivue, real-photo+glare+tilt, quality OK): pulse review (exp 61, sug 61: two candidates too close (61 vs 123)); pvc review (exp 0, sug 61: only 1 independent signal(s))
+- **owner-fb589478** [real] (philips-intellivue, real-photo+low-resolution+reflections+duplicate-of-real-case, quality OK): pulse review (exp 105, sug 105: confidence 0.79 below 0.85)
+- **owner-img_7635** [real] (philips-g40e, real-photo+motion-blur+tilt+distance, quality OK): spo2 missed (exp 88: no readable candidate); pulse missed (exp 131: no readable candidate)
+- **owner-img_7945** [real] (ventilator-other, real-photo+ventilator+set-vs-measured+glare+possible-patient-name, quality OK): rr review (exp 35, sug 12: two candidates too close (12 vs 24))
+- **owner-img_8377** [real] (ventilator-other, real-photo+ventilator+tilt+glare+set-vs-measured, quality OK): rr review (exp 18, sug 18: two candidates too close (18 vs 30))
+- **owner-img_8379** [real] (ventilator-other, real-photo+ventilator+glare+set-vs-measured+cropped-edge, quality DEGRADED): rr review (exp 20, sug 20: only 1 independent signal(s))
+- **owner-stock-123rf-ge-dash4000** [real] (ge-dash, stock-photo+watermark+tilt+big-clock, quality OK): hr review (exp 56, sug 56: label not read (slot only)); spo2 missed (exp 96: no readable candidate); sbp missed (exp 132: no SSS/DD box); dbp missed (exp 61: no SSS/DD box); map missed (exp 90: no pressure); rr review (exp 16, sug 16: two candidates too close (16 vs 23, same size and row)); nibp missed (exp {"sbp":132,"dbp":61,"map":90})
+- **owner-stock-dreamstime** [real] (other, stock-photo+watermark+low-resolution+dual-pressure, quality OK): hr review (exp 65, sug 68: OCR scales disagree ("W/68*" vs "89 / 41"); the value was not read identically by both OCR passes); spo2 review (exp 98, sug 68: OCR scales disagree ("W/68*" vs "89 / 41"); the value was not read identically by both OCR passes); nibp missed (exp {"sbp":89,"dbp":41,"map":54})
+- **owner-stock-vecteezy** [real] (nihon-kohden, stock-photo+watermark+colour-cast+distance, quality OK): hr missed (exp 110: no readable candidate); spo2 missed (exp 99: no readable candidate); sbp review (exp 149, sug 149: pressure source (ART / NIBP) not identified); dbp review (exp 97, sug 97: pressure source (ART / NIBP) not identified); map review (exp 112, sug 112: pressure source (ART / NIBP) not identified); rr missed (exp 22: no readable candidate); pulse missed (exp 109: no readable candidate); nibp missed (exp {"sbp":149,"dbp":97,"map":112})
 - **philips-mp40-blur-r1** [perturbed-real] (philips-intellivue, perturbed+gaussianBlur, quality OK): spo2 review (exp 100, sug 100: label not read (slot and colour agree)); sbp review (exp 149, sug 149: pressure source (ART / NIBP) not identified); dbp review (exp 66, sug 66: pressure source (ART / NIBP) not identified); map review (exp 98, sug 98: pressure source (ART / NIBP) not identified); rr review (exp 22, sug 22: label not read (slot and colour agree)); pulse missed (exp 105: no readable candidate); pvc review (exp 0, sug 0: the value was not read identically by both OCR passes); art missed (exp {"sbp":149,"dbp":66,"map":98})
 - **philips-mp40-blur-r2_5** [perturbed-real] (philips-intellivue, perturbed+gaussianBlur, quality OK): hr review (exp 105, sug 100: label not read (slot only)); spo2 review (exp 100, sug 100: label not read (slot only)); sbp review (exp 149, sug 149: pressure source (ART / NIBP) not identified); dbp review (exp 66, sug 66: pressure source (ART / NIBP) not identified); map missed (exp 98: no (MM) read next to 149/66; MAP is only ever a displayed value); rr missed (exp 22: no readable candidate); pulse missed (exp 105: no readable candidate); pvc missed (exp 0: no readable candidate); art missed (exp {"sbp":149,"dbp":66,"map":98})
 - **philips-mp40-blur-r4** [perturbed-real] (philips-intellivue, perturbed+gaussianBlur, quality DEGRADED): hr review (exp 105, sug 100: two candidates too close (100 vs 105)); spo2 review (exp 100, sug 100: label not read (slot only)); sbp missed (exp 149: no SSS/DD box); dbp missed (exp 66: no SSS/DD box); map missed (exp 98: no pressure); rr missed (exp 22: no readable candidate); pulse missed (exp 105: no readable candidate); pvc missed (exp 0: no readable candidate); art missed (exp {"sbp":149,"dbp":66,"map":98})

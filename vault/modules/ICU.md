@@ -65,6 +65,9 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   AI Vision is offered only when a core vital needs review (`image-engine.js`), counters in
   `SMD_IMAGE_ENGINE.stats()`. Benchmark: `node bench/icu-monitor/run.mjs [--policy relaxed] [--ocr]`,
   report in `bench/icu-monitor/out/report.md`; device check `test/run-icu-ocr-device.mjs`.
+  RR AUTO also requires the independent pixel digit check (`verifyDigits`, templates from
+  `bench/icu-monitor/digit-templates.py`); without pixels (`px`) RR is always NEEDS_REVIEW.
+  Bench `--verify none|hr,spo2,rr,pulse` changes the gated fields.
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
 - ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed

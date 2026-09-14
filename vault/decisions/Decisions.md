@@ -5609,7 +5609,7 @@ Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scal
   thresholds were NOT lowered; they only trade recall for review.
 - Environment gotcha: macOS Vision text recognition failed system-wide for ~30 min after aned restarted
   (e5rt create_precompiled_compute_operation); recovered on its own.
-- OPEN: one silent guess on the iPhone run (rebuilt plugin, 26 owner photos). owner-2d6f5cea RR shows 16
+- RESOLVED by the independent digit verification gate (below). Was: one silent guess on the iPhone run (rebuilt plugin, 26 owner photos). owner-2d6f5cea RR shows 16
   (glare haze on the "6"); full pass read "15" conf 1, crop "= 15" conf 0.5, and every letterboxed
   re-read on the phone (scale 1.2-4, pad 1-2) also read "15". Tried and REJECTED (reverted):
   (a) confidence-gated confirmation (agreement counts only if both reads conf >= 0.8): iOS/macOS Vision
@@ -5619,3 +5619,20 @@ Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scal
   Neither OCR re-reads nor confidence nor that pixel signal separates this misread. Side finding: phone
   Vision read only "RR" from a tight 251x198 crop whose "22" filled half the height, and "RR 30 22" at
   conf 1 when letterboxed 2x on black (not adopted; only needed by (a)).
+
+## 2026-09-14 ICU monitor OCR: independent digit verification gate for RR (branch icu-ocr-bench, PR #1115 not merged)
+
+- A second Apple Vision pass is not independent verification: identical passes repeat the same misread.
+  RR AUTO now also needs `verifyDigits` (icu-monitor-parser.js) to read the same digits from the PIXELS:
+  Otsu binarisation of the value box, connected-component glyphs, Pearson correlation against 20x20
+  digit templates (16 sans-serif faces + seven-segment, `bench/icu-monitor/digit-templates.py`), hole
+  topology as a consistency penalty. Result is verified / disagree / unsure; only verified auto-fills.
+  It never proposes a value: a disagreement keeps OCR's reading as the suggestion (15 stays 15, never 16);
+  no plausibility, no history. No pixels, too small (<14 px), low contrast → unsure → NEEDS_REVIEW.
+- Default gated fields: RR (`VERIFY_FIELDS`); `opts.verifyFields` / bench `--verify` extend it. Why RR
+  only: on the benchmark the RR gate changed exactly one outcome (owner-2d6f5cea RR 15 → review, the
+  checker read "16") with no recall loss; gating HR/SpO2/RR/Pulse also stays at 0 guesses but loses
+  real HR 7/14 → 6/14 and synthetic Pulse 20/27 → 5/27 (small glued Pulse digits, 10-13 px, "unsure").
+- Measured against ground truth on 228 HR/SpO2/RR/Pulse value boxes: 0 wrong Vision reads verified.
+  The synthetic group is likely rendered in a face close to the templates; judge on real photos.
+- Bench pixel source now capped at 2400 px long edge, the same as the app's canvas (smdPixelSource).

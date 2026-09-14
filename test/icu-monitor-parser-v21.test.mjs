@@ -21,8 +21,27 @@ function philips() {
   ];
 }
 
+// A pixel source for the independent digit check: light digits (Helvetica Bold template cells) drawn on
+// a dark screen inside each box. draw[text] overrides what is drawn, so pixels can say "16" where OCR said "15".
+function pixels(obs, draw = {}, W = 900, H = 1600) {
+  const T = M._internals.DIGIT_TEMPLATES["helvetica-bold"], buf = new Uint8Array(W * H).fill(20);
+  for (const b of obs) {
+    const s = (draw[b.text] != null ? draw[b.text] : b.text).replace(/\D/g, ""); if (!s) continue;
+    const bw = b.w * W, bh = b.h * H, k = Math.min(0.8 * bh / 20, bw / (s.length * 22));
+    const x0 = b.x * W + (bw - s.length * 22 * k) / 2, y0 = b.y * H + (bh - 20 * k) / 2;
+    [...s].forEach((ch, i) => {
+      const t = T[+ch];
+      for (let y = 0; y < Math.ceil(20 * k); y++) for (let x = 0; x < Math.ceil(20 * k); x++) {
+        if (parseInt(t[Math.min(19, Math.floor(y / k)) * 20 + Math.min(19, Math.floor(x / k))], 16) < 8) continue;
+        const X = Math.round(x0 + i * 22 * k + x), Y = Math.round(y0 + y); if (X >= 0 && Y >= 0 && X < W && Y < H) buf[Y * W + X] = 235;
+      }
+    });
+  }
+  return { w: W, h: H, get: (x, y) => (x < 0 || y < 0 || x >= W || y >= H ? null : [buf[y * W + x], buf[y * W + x], buf[y * W + x]]) };
+}
+
 test("clean column: all six core fields AUTO with complete evidence and a source", () => {
-  const r = M.parseMonitor(philips());
+  const r = M.parseMonitor(philips(), { px: pixels(philips()) });
   assert.deepEqual({ hr: r.values.hr, spo2: r.values.spo2, sbp: r.values.sbp, dbp: r.values.dbp, map: r.values.map, rr: r.values.rr }, { hr: 105, spo2: 100, sbp: 149, dbp: 66, map: 98, rr: 22 });
   for (const k of ["hr", "spo2", "sbp", "dbp", "map", "rr", "art"]) {
     const f = r.fields[k];
@@ -151,4 +170,34 @@ test("field-specific thresholds exist and are stricter for RR / Pulse / PVC than
   assert.ok(M.THRESH.rr.conf > M.THRESH.hr.conf); assert.ok(M.THRESH.pulse.conf > M.THRESH.hr.conf); assert.ok(M.THRESH.pvc.conf > M.THRESH.rr.conf);
   const r = M.parseMonitor(philips(), { thresholds: { rr: { conf: 0.999 } } });
   assert.equal(r.fields.rr.status, "NEEDS_REVIEW"); assert.equal(r.fields.hr.status, "AUTO_ACCEPTED");
+});
+
+test("independent digit check: OCR 22 and pixels 22 → AUTO, with the verification in the evidence", () => {
+  const r = M.parseMonitor(philips(), { px: pixels(philips()) });
+  assert.equal(r.fields.rr.status, "AUTO_ACCEPTED"); assert.equal(r.fields.rr.value, 22);
+  assert.equal(r.fields.rr.proof.verify.status, "verified"); assert.equal(r.fields.rr.proof.verify.read, "22");
+  assert.ok(r.fields.rr.proof.complete);
+});
+
+test("independent digit check: OCR reads 15 where the pixels show 16 → NEEDS_REVIEW, suggestion stays OCR's 15 (never corrected to 16)", () => {
+  const obs = philips().map((b) => (b.text === "22" ? Object.assign({}, b, { text: "15" }) : b));
+  const r = M.parseMonitor(obs, { px: pixels(obs, { 15: "16" }) });
+  assert.equal(r.fields.rr.status, "NEEDS_REVIEW"); assert.equal(r.fields.rr.value, null); assert.equal(r.fields.rr.suggested, 15);
+  assert.equal(r.fields.rr.verify.status, "disagree"); assert.match(r.fields.rr.reason, /independent digit check reads "16", OCR read "15"/);
+  assert.equal(r.fields.hr.status, "AUTO_ACCEPTED", "other fields unaffected");
+});
+
+test("independent digit check: no pixels, or nothing legible in the box → NEEDS_REVIEW (never auto-filled unverified)", () => {
+  const none = M.parseMonitor(philips());
+  assert.equal(none.fields.rr.status, "NEEDS_REVIEW"); assert.match(none.fields.rr.reason, /could not run: no pixels/);
+  const blank = M.parseMonitor(philips(), { px: pixels(philips(), { 22: "" }) });
+  assert.equal(blank.fields.rr.status, "NEEDS_REVIEW"); assert.equal(blank.fields.rr.verify.status, "unsure");
+});
+
+test("independent digit check: opts.verifyFields extends the gate to other vitals", () => {
+  const obs = philips().map((b) => (b.text === "105" ? Object.assign({}, b, { text: "106" }) : b));
+  const px = pixels(obs, { 106: "105" });
+  assert.equal(M.parseMonitor(obs, { px }).fields.hr.status, "AUTO_ACCEPTED", "HR is not gated by default");
+  const r = M.parseMonitor(obs, { px, verifyFields: ["hr", "rr"] });
+  assert.equal(r.fields.hr.status, "NEEDS_REVIEW"); assert.equal(r.fields.hr.verify.status, "disagree");
 });

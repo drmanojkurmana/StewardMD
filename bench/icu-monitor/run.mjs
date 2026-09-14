@@ -40,6 +40,9 @@ const ONLY = opt("--only", null);
 const LIVE_OCR = flag("--ocr");
 const SWEEP = flag("--sweep");
 const PARSE_OPTS = POLICY === "relaxed" ? { unlabeledAuto: true } : {};
+// --verify none | <field,field>: which fields need the independent digit check (default: the parser's VERIFY_FIELDS)
+const VERIFY_OPT = opt("--verify", null);
+if (VERIFY_OPT) PARSE_OPTS.verifyFields = VERIFY_OPT === "none" ? [] : VERIFY_OPT.split(",");
 const FIX = join(HERE, "fixtures");
 mkdirSync(OUT, { recursive: true });
 
@@ -257,7 +260,7 @@ writeFileSync(join(OUT, "results.json"), JSON.stringify({ generated: new Date().
 
 /* ------------------------------------------------------------------ report */
 const L = [];
-L.push(`# ICU monitor extraction benchmark: parser v${M.VERSION}, policy ${POLICY}, ${SCALES}-scale Vision`, "");
+L.push(`# ICU monitor extraction benchmark: parser v${M.VERSION}, policy ${POLICY}, ${SCALES}-scale Vision, digit verification: ${(PARSE_OPTS.verifyFields || M.VERIFY_FIELDS).join(",") || "none"}`, "");
 L.push(`Generated ${new Date().toISOString()}. Local extraction only (Apple Vision on macOS + icu-monitor-parser.js). **Gemini calls: 0** (not part of this benchmark; the app's on-tap fallback is counted separately). Network calls: 0.`, "");
 L.push("**Groups are reported separately and never pooled.** `real` = photographs as taken. `perturbed-real` = images derived from a real photograph (robustness, not new monitors). `synthetic` = rendered layouts (layout handling, not photographic accuracy). Unit-test fixtures are not included.", "");
 L.push("## Acceptance", "");
