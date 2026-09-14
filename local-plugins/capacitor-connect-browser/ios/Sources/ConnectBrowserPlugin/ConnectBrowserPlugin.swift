@@ -37,6 +37,16 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     private var sawPasswordField = false
     private var autoLoginNotified = false
     private var loginOrigin = ""   // origin the browser was opened at; landing elsewhere = signed in
+    private var loginPoll: Timer?  // sign-in is not always a navigation; see startLoginPoll()
+
+    /* LAW III, ZERO WEBSITE HIJACKING. `hidden: true` is what ghis-ward.js asks for on every background
+     * read, Android has honoured it since the first build, and iOS silently DROPPED it: the flag was
+     * never read, so a patient read threw the hospital portal over the whole phone with an orange
+     * "Reading ... for this patient" banner while the doctor was trying to work (seen on an iPhone 15
+     * Pro, 2026-09-15). It also starved the app's own WebView behind it, which is why those reads
+     * crawled. Hidden here means the same 2pt strip agent reads already used: the page keeps its
+     * cookies, its timers and its network, and the doctor keeps their screen. */
+    private var hiddenRead = false
 
     // Capped request log fed by main-frame navigations (decidePolicyFor) and the document-start
     // fetch/XHR-wrapping user script (didReceive message), drained by drainRequests().
@@ -102,9 +112,11 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         let title = call.getString("title") ?? url.host ?? ""
         let userAgent = call.getString("userAgent")
+        let hidden = call.getBool("hidden", false)
 
         DispatchQueue.main.async {
             self.teardownExistingBrowser(reason: "closed", notify: false)
+            self.hiddenRead = hidden
             self.sawPasswordField = false
             self.autoLoginNotified = false
             self.loginOrigin = Self.origin(of: url)
@@ -166,6 +178,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             self.updateContainerFrame(for: vc)
             vc.endAppearanceTransition()
             vc.didMove(toParent: presenter)
+
+            if vc.mode == "login" { self.startLoginPoll() }
 
             self.notifyListeners("opened", data: [
                 "initScriptMode": "documentStart",
@@ -230,9 +244,14 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
         let banner = call.getString("banner")
         let origins = call.getArray("origins", String.self)
         let compact = call.getBool("compact", false)
+        // A mode change may ask to hide the browser, or to bring it back; only login mode is ever shown.
+        let hidden = call.getBool("hidden", false) && mode != "login"
         DispatchQueue.main.async {
+            self.hiddenRead = hidden
             vc.applyMode(mode, banner: banner, origins: origins, compact: compact)
             self.updateContainerFrame(for: vc)
+            // Entering login mode arms the watcher; leaving it (the agent takes over) disarms it.
+            if mode == "login" && !self.autoLoginNotified { self.startLoginPoll() } else if mode != "login" { self.stopLoginPoll() }
             call.resolve(["ok": true])
         }
     }
@@ -296,6 +315,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     // MARK: - Teardown
 
     private func teardownExistingBrowser(reason: String, notify: Bool = true) {
+        stopLoginPoll()
+        hiddenRead = false
         guard let vc = browserVC else { return }
         vc.webView.navigationDelegate = nil
         vc.webView.configuration.userContentController.removeScriptMessageHandler(forName: Self.requestLogMessageHandler)
@@ -318,10 +339,28 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     private func updateContainerFrame(for vc: ConnectBrowserViewController) {
         guard let superview = vc.view.superview else { return }
         let bounds = superview.bounds
-        if vc.mode == "agent" && vc.compact {
+        if hiddenRead {
+            /* HIDDEN THE WAY ANDROID DOES IT: full size, transparent, untouchable.
+             *
+             * The first try shrank the view to a 2pt strip, and a screenshot of the phone showed the
+             * hospital portal still filling the screen with its orange banner (2026-09-15): a frame
+             * set here does not survive the parent's next layout pass, so "out of sight" was a lie
+             * every time the layout ran. Alpha and hit-testing are not laid out, so they hold. Full
+             * size also keeps WebKit treating the page as visible, so the read runs at full speed
+             * instead of being throttled to a crawl the way a 2pt or zero-sized view would be.
+             * Not quite 0: a view at alpha 0 is treated as invisible and the page stops. */
+            vc.view.frame = bounds
+            vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            vc.view.alpha = 0.01
+            vc.view.isUserInteractionEnabled = false
+        } else if vc.mode == "agent" && vc.compact {
+            vc.view.alpha = 1
+            vc.view.isUserInteractionEnabled = true
             vc.view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height * 0.52).rounded())
             vc.view.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
         } else if vc.mode == "agent" {
+            vc.view.alpha = 1
+            vc.view.isUserInteractionEnabled = true
             // AGENT READS RUN OUT OF SIGHT. While the browser covered the whole app view, the app's own
             // WKWebView (where the engine runs) stopped answering for minutes at a time and every
             // iPhone read stalled (2026-09-15). A 2pt strip keeps the hospital page alive (cookies,
@@ -329,6 +368,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             vc.view.frame = CGRect(x: 0, y: bounds.height - 2, width: bounds.width, height: 2)
             vc.view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         } else {
+            vc.view.alpha = 1
+            vc.view.isUserInteractionEnabled = true
             // Never cover the app view completely: once it was fully occluded the app WKWebView (the
             // engine) stopped running, so the doctor's sign-in was never noticed in login mode
             // (iPhone 15 Pro, 2026-09-15, seen on screen). A 2pt strip left uncovered keeps it alive.
@@ -367,6 +408,32 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     // Fires at most once per session, only in login mode, and the Done button still works for the
     // EMR that keeps a password field on every page. No credential is read — only whether such a
     // field EXISTS.
+    /* A SIGN-IN IS NOT ALWAYS A NAVIGATION. maybeAutoLoggedIn used to run only on didFinish, which is
+     * one page load too few: GHIS signs the doctor in on the SAME origin and swaps the body in place,
+     * so no later didFinish ever arrives, sawPasswordField never gets its second look, and the sheet
+     * sat on "Signing in..." over a signed-in patient list until the doctor tapped Done (iPhone 15 Pro,
+     * 2026-09-15 - the very friction auto-login was meant to remove). The app's own WebView cannot
+     * cover this from JS: it is behind a full-screen browser and barely scheduled. So the browser
+     * watches itself, every second and a half, until it has an answer. Stops at the first "loggedIn",
+     * when the mode leaves login, and with the browser. */
+    private func startLoginPoll() {
+        loginPoll?.invalidate()
+        loginPoll = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { [weak self] timer in
+            guard let self = self else { timer.invalidate(); return }
+            guard let vc = self.browserVC, vc.mode == "login", !self.autoLoginNotified else {
+                timer.invalidate()
+                if self.loginPoll === timer { self.loginPoll = nil }
+                return
+            }
+            self.maybeAutoLoggedIn(vc)
+        }
+    }
+
+    private func stopLoginPoll() {
+        loginPoll?.invalidate()
+        loginPoll = nil
+    }
+
     private func maybeAutoLoggedIn(_ vc: ConnectBrowserViewController) {
         guard !autoLoginNotified, vc.mode == "login" else { return }
         vc.webView.evaluateJavaScript(
@@ -388,6 +455,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             let movedOff = !self.loginOrigin.isEmpty && landed != self.loginOrigin && vc.allowedOrigins.contains(landed)
             guard (self.sawPasswordField || movedOff), !self.autoLoginNotified else { return }
             self.autoLoginNotified = true
+            self.stopLoginPoll()
             self.notifyListeners("loggedIn", data: [
                 "url": vc.webView.url?.absoluteString ?? "",
                 "auto": true
