@@ -6017,7 +6017,34 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   is cleared.
 - **Known ceiling**: with an account credential in a different workplace, the server releases the
   notice detail (and writes its read-log row) before the client sees `orgId` and refuses to show it.
-  Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading.
+  Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading. (Done, below.)
+
+## 2026-09-14 S3 P1 follow-ups: the limits P1 left
+- **Notice in the workplace only**: `GET /api/push/notice/<nid>?orgId=<workplace>`. A missing, empty or other
+  hospital's orgId is 404 after the KV pointer read and BEFORE the membership, loop, patient or read-log write
+  (no session is still 401). The app sends the workplace and, with no WardSynQ workplace chosen, asks nothing
+  and says to choose one. The switch screen stays as a guard but a real server no longer feeds it, so a
+  multi-hospital clinician in the wrong workplace sees "switch to the one it was sent from" without the name.
+  Decline and receipts are unchanged (decline is only offered from a detail the workplace already opened).
+- **queue.js and discharge.js follow the credential rule**: discharge.js calls `headersFor(st.orgId)` like
+  ward.js. queue.js keeps its cached token and drops it when `staffTokenOrg` names a hospital other than the
+  request's (st.orgId, else the open WardSynQ/Connect session's hospital, else "" for GHIS). The front desk
+  sets st.orgId from its own token before `/whoami`, so a cold start still signs the desk in. Tokens that name
+  no hospital and pages without hospital-auth.js keep the old rule.
+- **Account sign-out unbinds the phone first**: `SMD_WSQ_PUSH.accountSignOut()` (native-push.js) calls
+  `unregister-member` for the WardSynQ WORKPLACE with the account's bearer only (a staff session for the same
+  hospital is not what is signing out), when this phone had bound that hospital. signout-fix.js (the app's Sign
+  out, the drawer, the account sheet, app lock's "sign out instead"), verify.js "Use a different account" and
+  account.js's device lock wait for it (at most 6 s) before `signOut()`. `smd_wsq_push_unbind_failed` is written
+  BEFORE the call and removed only on `ok`, so a refusal, network failure, missing account or a reload that cuts
+  the call off stays recorded; the next launch says once that the phone may still receive the alerts. Not
+  covered: account deletion (home.js), and hospitals other than the workplace that the account bound earlier.
+- **"No phone registered" is read from the DeviceDirectory now**: `GET /ward/alert-status` returns `phones`
+  (`phoneCoverage` in push-alerts.js, readers `staffReaders` in alert-deps.js): every active member on duty
+  now in any ward whose role is on some level, plus every named contact, each checked with `devicesFor`.
+  `{ok:false}` on any failed read (store, rota, members), shown on the Admin card as "could not be read. Do not
+  read this as everyone having one". The per-alert `noDevice` stays, relabelled as alerts already sent. Checks
+  the membership identity the rota uses; a contact typed as an email is checked under that email.
 
 ## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
 - Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed

@@ -1,11 +1,13 @@
 /* S3 P1: the phone side of WardSynQ critical-result alerts, driven in a small fake DOM.
  *
  *   hospital-auth.js      the workplace decides the credential (ID-01, EMR-05)
- *   ward.js               sends that credential, never a stale staff token for another hospital
+ *   ward.js, queue.js,    send that credential, never a stale staff token for another hospital
+ *   discharge.js
  *   wardsynq-alert-ui.js  v2 payload parsing, nothing rendered from the push itself, app lock before
  *                         any fetch, cross-hospital guard, failure states for load and every answer
  *   native-push.js        a v2 tap opens the screen; register-member on token registration with the
- *                         workplace's own credential; unregister-member on sign-out
+ *                         workplace's own credential; unregister-member on staff sign-out, and on
+ *                         account sign-out (signout-fix.js) with the account credential before Firebase
  * Routes named: GET /api/push/notice/<nid>, POST /api/push/notice/<nid>/decline,
  * POST /api/push/wardsynq-receipt, POST /api/queue/ward/acknowledge, POST /api/push/register-member,
  * POST /api/push/unregister-member. The browser run is test/run-wsq-alert-screen.mjs.
@@ -122,11 +124,71 @@ test("ID-01 in ward.js: in hospital B the ward never sends hospital A's stored s
   assert.equal(list.headers.Authorization, "Bearer acct-jwt");
 });
 
+const QUEUE_EXTRA = { addEventListener() {}, setInterval: () => 0, clearInterval() {}, prompt: () => "", toast() {} };
+const lastCall = (calls, prefix) => calls.filter((c) => c.path.startsWith(prefix)).at(-1);
+
+test("ID-01 in queue.js: a doctor's queue in hospital B never sends hospital A's stored staff token", async () => {
+  const tokA = await tokFor("org-a", "nurse1");
+  const { sb, calls } = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["hospital-auth.js", "queue.js"], extra: QUEUE_EXTRA });
+  const st = sb.QUEUE._st;
+  st.session = { id: "s1" };
+  for (const [label, orgId, openOpts, sendsStaff] of [
+    ["clinic B", "org-b", {}, false],
+    ["WardSynQ hospital B session", null, { source: "wardsynq", hospitalId: "org-b" }, false],
+    ["Connect hospital B session", null, { source: "connect", hospitalId: "org-b" }, false],
+    ["a GHIS session (no StewardMD hospital)", null, { source: "manual", hospitalId: "manual" }, false],
+    ["its own hospital A", "org-a", {}, true],
+  ]) {
+    st.orgId = orgId; st.openOpts = openOpts;
+    sb.QUEUE.refresh();
+    await settle();
+    const c = lastCall(calls, "/api/queue/list");
+    assert.equal(c.headers["X-Staff-Token"], sendsStaff ? tokA : undefined, label);
+    assert.equal(c.headers.Authorization, sendsStaff ? undefined : "Bearer acct-jwt", label);
+  }
+});
+
+test("queue.js front desk: a cold start sends the stored staff session to its own hospital; harness tokens and pages keep the old rule", async () => {
+  const tokA = await tokFor("org-a", "nurse1");
+  const desk = sandbox({ store: { smd_opd_staff_tok: tokA, smd_opd_workplace: "wardsynq:org-b" }, files: ["hospital-auth.js", "queue.js"], extra: QUEUE_EXTRA });
+  desk.sb.QUEUE.open();
+  await settle();
+  assert.equal(lastCall(desk.calls, "/api/queue/whoami").headers["X-Staff-Token"], tokA, "the desk is the session's own hospital, not the remembered workplace");
+
+  const opaque = sandbox({ store: { smd_opd_staff_tok: "harness-token" }, files: ["hospital-auth.js", "queue.js"], extra: QUEUE_EXTRA });
+  Object.assign(opaque.sb.QUEUE._st, { session: { id: "s1" }, orgId: "org-b" });
+  opaque.sb.QUEUE.refresh(); await settle();
+  assert.equal(lastCall(opaque.calls, "/api/queue/list").headers["X-Staff-Token"], "harness-token", "a token naming no hospital is sent as before");
+
+  const bare = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["queue.js"], extra: QUEUE_EXTRA });
+  Object.assign(bare.sb.QUEUE._st, { session: { id: "s1" }, orgId: "org-b" });
+  bare.sb.QUEUE.refresh(); await settle();
+  assert.equal(lastCall(bare.calls, "/api/queue/list").headers["X-Staff-Token"], tokA, "without hospital-auth.js (opd-doctor-harness.html) the old rule");
+});
+
+test("ID-01 in discharge.js: a summary in hospital B never sends hospital A's stored staff token", async () => {
+  const tokA = await tokFor("org-a", "nurse1");
+  for (const [orgId, sendsStaff] of [["org-b", false], ["org-a", true]]) {
+    const { sb, calls } = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["hospital-auth.js", "discharge.js"], extra: { firebase: { auth: () => ({ currentUser: { getIdToken: () => Promise.resolve("acct-jwt") } }) } } });
+    sb.DISCHARGE.open({ orgId, encounterId: "enc-1" });
+    await settle();
+    const c = lastCall(calls, "/api/queue/ward/discharge-summary");
+    assert.ok(c, "the summary was requested for " + orgId);
+    assert.equal(c.headers["X-Staff-Token"], sendsStaff ? tokA : undefined, orgId);
+    assert.equal(c.headers.Authorization, sendsStaff ? undefined : "Bearer acct-jwt", orgId);
+  }
+  const bare = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["discharge.js"], extra: { firebase: { auth: () => ({ currentUser: null }) } } });
+  bare.sb.DISCHARGE.open({ orgId: "org-b", encounterId: "enc-1" });
+  await settle();
+  assert.equal(lastCall(bare.calls, "/api/queue/ward/discharge-summary").headers["X-Staff-Token"], tokA, "without hospital-auth.js the old rule");
+});
+
 test("both real pages load hospital-auth.js before ward.js, and the site build ships it", () => {
   for (const page of ["index.html", "wardsynq/site/index.html"]) {
-    const html = src(page), a = html.indexOf('src="/hospital-auth.js'), w = html.indexOf('src="/ward.js');
-    assert.ok(a > 0 && a < w, page);
+    const html = src(page), a = html.indexOf('src="/hospital-auth.js');
+    for (const f of ["ward.js", "discharge.js"]) { const w = html.indexOf('src="/' + f); assert.ok(a > 0 && a < w, page + " " + f); }
   }
+  assert.ok(src("index.html").indexOf('src="/hospital-auth.js') < src("index.html").indexOf('src="/queue.js'), "index.html queue.js");
   const idx = src("index.html");
   assert.ok(idx.indexOf('src="/hospital-auth.js') < idx.indexOf('src="/wardsynq-alert-ui.js') && idx.indexOf('src="/wardsynq-alert-ui.js') < idx.indexOf('src="/native-push.js'), "auth, then the alert screen, then native push");
   assert.match(src("scripts/build-wardsynq-site.sh"), /for f in hospital-auth\.js ward\.js/);
@@ -175,7 +237,7 @@ test("app lock first: no request until the lock is passed, then the detail for t
   sb.unlocked = true; sb.unlocks[0]();
   await settle();
   assert.equal(A(sb)._state().phase, "detail");
-  assert.equal(calls[0].path, "/api/push/notice/" + NID);
+  assert.equal(calls[0].path, "/api/push/notice/" + NID + "?orgId=org-a", "the workplace is named, so the server can refuse any other hospital's notice");
   assert.equal(calls[0].headers.Authorization, "Bearer acct-jwt");
   const html = root(sb).innerHTML;
   for (const want of ["Ramesh Kumar", "MRN-778812", "Ward Medical A, bed 7", "Potassium 7.2 mmol/L", "Asha Hospital"]) assert.ok(html.includes(want), want);
@@ -194,12 +256,34 @@ test("EMR-05: a notice for hospital A while working in B asks to switch and neve
   for (const p of PHI.slice(0, 4)) assert.ok(!html.includes(p), "shown inside B: " + p);
   assert.equal(A(sb)._state().notice, null, "A's detail is not kept");
   assert.ok(!calls.some((c) => c.path.includes("wardsynq-receipt")), "no viewed receipt for an alert not shown");
+  assert.equal(calls[0].path, "/api/push/notice/" + NID + "?orgId=org-b");
   click(sb, "switch");
   await settle();
   assert.equal(ls.get("smd_opd_workplace"), "wardsynq:org-a");
   assert.equal(wardClosed, true, "an open ward on B is closed");
   assert.equal(asked, 2);
   assert.equal(A(sb)._state().phase, "detail");
+  assert.equal(calls.filter((c) => c.path.startsWith("/api/push/notice/")).at(-1).path, "/api/push/notice/" + NID + "?orgId=org-a");
+});
+
+test("S3 P1 follow-up: the server refuses another workplace's notice (404), so nothing is shown; no workplace, no request", async () => {
+  // What the server now does: 404 unless ?orgId= is the notice's own hospital.
+  const route = (c) => (c.path.endsWith("?orgId=org-a") ? notice("org-a") : { status: 404, body: { ok: false, error: "not_found" } });
+  const b = sandbox({ store: { smd_opd_workplace: "wardsynq:org-b" }, routes: { ["GET /api/push/notice/" + NID]: route, "POST /api/push/wardsynq-receipt": { status: 200, body: { ok: true } } } });
+  A(b.sb).handle({ type: "wardsynq-alert", v: "2", nid: NID, kind: "critical" });
+  await settle();
+  assert.equal(A(b.sb)._state().phase, "failed");
+  const html = root(b.sb).innerHTML;
+  assert.ok(html.includes("switch to the one it was sent from"), html);
+  for (const p of PHI) assert.ok(!html.includes(p), p);
+  assert.ok(!b.calls.some((c) => c.path.includes("wardsynq-receipt")), "no viewed receipt");
+
+  const none = sandbox({ routes: { ["GET /api/push/notice/" + NID]: route } });
+  A(none.sb).handle({ type: "wardsynq-alert", v: "2", nid: NID, kind: "critical" });
+  await settle();
+  assert.equal(A(none.sb)._state().phase, "failed");
+  assert.match(root(none.sb).innerHTML, /Choose the hospital you are working in/);
+  assert.equal(none.calls.length, 0, "no hospital chosen: nothing asked of the server");
 });
 
 test("a failed load is a failure state with the reason and a retry, never an empty or successful screen", async () => {
@@ -291,7 +375,7 @@ function nativeSandbox(opts) {
     addListener: (ev, fn) => { listeners[ev] = fn; },
     checkPermissions: () => Promise.resolve({ receive: "granted" }), requestPermissions: () => Promise.resolve({ receive: "granted" }), register: () => Promise.resolve(),
   };
-  const box = sandbox({ ...opts, files: ["hospital-auth.js", "wardsynq-alert-ui.js", "native-push.js"], extra: { Capacitor: { isNativePlatform: () => true, getPlatform: () => "ios", Plugins: { PushNotifications: plugin } }, crypto: webcrypto } });
+  const box = sandbox({ ...opts, files: ["hospital-auth.js", "wardsynq-alert-ui.js", "native-push.js"], extra: { ...(opts && opts.extra), Capacitor: { isNativePlatform: () => true, getPlatform: () => "ios", Plugins: { PushNotifications: plugin } }, crypto: webcrypto } });
   return { ...box, listeners };
 }
 
@@ -335,3 +419,77 @@ test("native-push: a new device token binds every hospital with that hospital's 
   assert.equal(un.body.orgId, "org-a");
   assert.equal(JSON.parse(ls.get("smd_wsq_push_orgs"))["org-a"], undefined);
 });
+
+// ---- account sign-out (S3 P1 follow-up) --------------------------------------------------------------
+
+const TAIL = "abcdef123456", DEVICE = "device-token-" + TAIL;
+async function signedInPhone(unregister, store) {
+  const tokB = await tokFor("org-b", "nurse1");
+  const order = [];
+  const box = nativeSandbox({
+    store: { smd_opd_staff_tok: tokB, smd_opd_workplace: "wardsynq:org-b", smd_wsq_push_orgs: JSON.stringify({ "org-b": TAIL }), ...(store || {}) },
+    routes: { "POST /api/push/register-native": { status: 200, body: { ok: true } }, "POST /api/push/unregister-member": (c) => (order.push("unregister-member"), unregister) },
+  });
+  box.listeners.registration({ value: DEVICE });
+  await settle();
+  return { ...box, order, tokB };
+}
+
+test("signing out of the account releases this phone at the workplace with the ACCOUNT credential, before Firebase signs out", async () => {
+  const { sb, calls, ls, order, tokB } = await signedInPhone({ status: 200, body: { ok: true, removed: 1 } });
+  assert.equal(calls.filter((c) => c.path === "/api/push/register-member").length, 0, "already bound with this token");
+  const clicks = [];
+  sb.document.addEventListener = (type, fn) => { if (type === "click") clicks.push(fn); };
+  sb.location.reload = () => order.push("reload");
+  sb.SMD_AUTH.signOut = () => { order.push("signOut"); return Promise.resolve(); };
+  vm.runInContext(src("signout-fix.js"), sb, { filename: "signout-fix.js" });
+  const target = { closest: () => target };
+  clicks[0]({ target, preventDefault() {}, stopImmediatePropagation() {} });
+  await settle();
+  assert.deepEqual(order, ["unregister-member", "signOut", "reload"], "released while the account credential is still valid");
+  const un = calls.find((c) => c.path === "/api/push/unregister-member");
+  assert.equal(un.headers.Authorization, "Bearer acct-jwt");
+  assert.equal(un.headers["X-Staff-Token"], undefined, "the account's own binding: a staff session for the same hospital is not what is signing out");
+  assert.notEqual(un.headers["X-Staff-Token"], tokB);
+  assert.deepEqual({ orgId: un.body.orgId, token: un.body.token }, { orgId: "org-b", token: DEVICE });
+  assert.equal(ls.get("smd_wsq_push_unbind_failed"), undefined, "a confirmed unbind leaves no failure behind");
+  assert.equal(JSON.parse(ls.get("smd_wsq_push_orgs"))["org-b"], undefined);
+});
+
+test("a failed account-sign-out release is recorded and said on the next launch, never as removed; nothing bound means nothing sent", async () => {
+  for (const answer of [{ status: 502, body: { ok: false, error: "unbind_failed" } }, "network", { status: 200, body: { ok: false } }]) {
+    const { sb, ls } = await signedInPhone(answer);
+    const r = await sb.SMD_WSQ_PUSH.accountSignOut();
+    assert.equal(r.ok, false, JSON.stringify(answer));
+    assert.equal(JSON.parse(ls.get("smd_wsq_push_unbind_failed")).orgId, "org-b", "recorded");
+  }
+  // No account left to authenticate with: no request, still recorded.
+  const gone = await signedInPhone({ status: 200, body: { ok: true } });
+  gone.sb.SMD_AUTH.currentUser = null;
+  assert.equal((await gone.sb.SMD_WSQ_PUSH.accountSignOut()).ok, false);
+  assert.equal(gone.order.length, 0);
+  assert.ok(gone.ls.get("smd_wsq_push_unbind_failed"));
+
+  // The next launch says it once, in words that do not claim the phone was removed.
+  const said = [];
+  const next = nativeSandbox({ store: { smd_wsq_push_unbind_failed: JSON.stringify({ orgId: "org-b", at: "2026-09-14T10:00:00Z" }) }, extra: { toast: (m) => said.push(m) } });
+  await new Promise((r) => setTimeout(r, 3100));
+  assert.equal(said.length, 1);
+  assert.match(said[0], /could not be taken off .* critical-result alerts, so it may still receive them/);
+  assert.equal(next.ls.get("smd_wsq_push_unbind_failed"), undefined, "said once");
+
+  // A phone never bound at its workplace sends nothing and records nothing.
+  const none = await signedInPhone({ status: 200, body: { ok: true } }, { smd_wsq_push_orgs: "{}" });
+  assert.equal((await none.sb.SMD_WSQ_PUSH.accountSignOut()).unchanged, true);
+  assert.equal(none.order.length, 0);
+  assert.equal(none.ls.get("smd_wsq_push_unbind_failed"), undefined);
+});
+
+test("the other account sign-outs (verify.js 'Use a different account', account.js device lock) release before Firebase signs out", () => {
+  for (const [file, anchor] of [["verify.js", "Use a different account"], ["account.js", "active on another device"]]) {
+    const code = src(file), at = code.indexOf(anchor), part = code.slice(at, at + 2600);
+    assert.ok(at > 0, file);
+    assert.match(part, /accountSignOut\(\)[\s\S]*rel\.then\(function \(\) \{[\s\S]*a\.signOut\(\)/, file + ": signOut runs only after the release settles");
+  }
+});
+

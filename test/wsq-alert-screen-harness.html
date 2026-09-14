@@ -12,7 +12,7 @@ window.SMD_AUTH = { currentUser: { getIdToken: function () { return Promise.reso
 window.fetch = function (url, opts) {
   opts = opts || {};
   var method = opts.method || "GET", path = String(url).split("?")[0];
-  window.__calls.push({ method: method, path: path, headers: opts.headers || {}, body: opts.body ? JSON.parse(opts.body) : null });
+  window.__calls.push({ method: method, path: path, url: String(url), headers: opts.headers || {}, body: opts.body ? JSON.parse(opts.body) : null });
   var r = window.__routes[method + " " + path];
   if (r === "network") return Promise.reject(new TypeError("Failed to fetch"));
   r = r || { status: 404, body: { ok: false, error: "not_found" } };

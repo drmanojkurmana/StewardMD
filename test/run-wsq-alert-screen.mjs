@@ -114,6 +114,7 @@ try {
     __routes["POST /api/push/wardsynq-receipt"] = {status:200, body:{ok:true}}; return 1;`);
   await ev(`SMD_WSQ_ALERT.handle(${JSON.stringify(PUSH)}); return 1;`);
   ok(await until(`document.querySelector('#wsq-alert [data-wsq-act="switch"]')`), "an alert from another hospital asks to switch");
+  ok(/\?orgId=org-b$/.test(await ev(`return __calls.filter(function(c){return c.path.indexOf("/api/push/notice/")===0})[0].url`)), "GET /api/push/notice/<nid> named the workplace, so the real server refuses it before reading");
   const sw = await text();
   ok(sw.includes("Asha Hospital") && !/Ramesh|MRN-778812|Potassium|7\.2/.test(sw), "names the hospital, shows no patient or result");
   await clickAct("switch");

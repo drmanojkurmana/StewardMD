@@ -158,11 +158,14 @@
   function wsqToast(msg) { try { if (window.toast) window.toast(msg); else if (window.SMD_toast) window.SMD_toast(msg); } catch (e) {} }
   var NOT_REMOVED = "This phone may still receive this hospital's alerts. Ask the hospital admin to reset your access.";
   // -> Promise<{ok, status, error}>. The credential is read synchronously, before a caller signs out.
-  function memberCall(route, orgId) {
+  // accountOnly: the StewardMD account's bearer and nothing else (its own sign-out; a staff session stays).
+  function memberCall(route, orgId, accountOnly) {
     var HA = window.SMD_HOSPITAL_AUTH;
     if (!HA) return Promise.resolve({ ok: false, status: 0, error: "auth_module_missing" });
     var body = JSON.stringify({ orgId: orgId, token: _token, platform: platform(), device: deviceIdentity() });
-    return HA.headersFor(orgId, idToken).then(function (h) {
+    var headers = accountOnly ? idToken().then(function (t) { return t ? { "Content-Type": "application/json", Authorization: "Bearer " + t } : null; }) : HA.headersFor(orgId, idToken);
+    return headers.then(function (h) {
+      if (!h) return { ok: false, status: 401, json: function () { return Promise.resolve({ error: "no_account" }); } };
       return fetch(api("/api/push/" + route), { method: "POST", headers: h, body: body });
     }).then(function (r) {
       return r.json().then(function (j) { return { ok: r.ok && !!(j && j.ok), status: r.status, error: j && j.error }; }, function () { return { ok: false, status: r.status }; });
@@ -204,7 +207,31 @@
     if (cur && b[cur] === undefined) b[cur] = "";
     Object.keys(b).forEach(function (orgId) { wsqBind(orgId, false); });
   }
-  window.SMD_WSQ_PUSH = { bind: wsqBind, unbind: wsqUnbind, bound: wsqBound };
+  /* Signing out of the StewardMD ACCOUNT (not a staff session). Its binding at the hospital this phone works
+   * in is released first, with the account's own bearer while it is still valid; signout-fix.js, verify.js
+   * and account.js wait for this (at most maxMs) before ending the Firebase session. The failure is written
+   * BEFORE the call and cleared only by a confirmed unbind, so a refusal, a network failure or a reload that
+   * cuts the call short all leave it recorded; the next launch says so once. Never reports "removed". */
+  var LS_UNBIND_FAILED = "smd_wsq_push_unbind_failed";
+  function wsqAccountSignOut(maxMs) {
+    var HA = window.SMD_HOSPITAL_AUTH, b = wsqBound(), orgId = "";
+    try { orgId = HA ? HA.workplaceOrg(localStorage.getItem("smd_opd_workplace")) : ""; } catch (e) {}
+    if (!orgId || b[orgId] === undefined) return Promise.resolve({ ok: true, unchanged: true });
+    delete b[orgId]; wsqSave(b);
+    try { localStorage.setItem(LS_UNBIND_FAILED, JSON.stringify({ orgId: orgId, at: new Date().toISOString() })); } catch (e) {}
+    var call = !_token ? Promise.resolve({ ok: false, error: "no_token" }) : memberCall("unregister-member", orgId, true).then(function (r) {
+      if (r.ok) { try { localStorage.removeItem(LS_UNBIND_FAILED); } catch (e) {} }
+      return r;
+    });
+    return Promise.race([call, new Promise(function (res) { setTimeout(function () { res({ ok: false, error: "timeout" }); }, maxMs || 6000); })]);
+  }
+  function wsqSayUnbindFailed() {
+    var rec = null;
+    try { rec = JSON.parse(localStorage.getItem(LS_UNBIND_FAILED) || "null"); localStorage.removeItem(LS_UNBIND_FAILED); } catch (e) {}
+    if (rec && rec.orgId) wsqToast("When you signed out, this phone could not be taken off a hospital's critical-result alerts, so it may still receive them. Ask the hospital admin to reset your access.");
+  }
+  window.SMD_WSQ_PUSH = { bind: wsqBind, unbind: wsqUnbind, bound: wsqBound, accountSignOut: wsqAccountSignOut };
+  setTimeout(wsqSayUnbindFailed, 3000);   // after app.js has put up its toast
 
   function wireListeners() {
     if (_wired) return; _wired = true;

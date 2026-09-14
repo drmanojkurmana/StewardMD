@@ -76,7 +76,10 @@
     try { if (G.firebase && firebase.auth && firebase.auth().currentUser) return firebase.auth().currentUser.getIdToken(); } catch (e) {}
     return Promise.resolve(null);
   }
+  /* S3 ID-01, as ward.js: a staff token only for the hospital it was minted for (hospital-auth.js), else the
+   * account bearer. Pages without that file keep the old rule. */
   function authHeaders() {
+    if (G.SMD_HOSPITAL_AUTH) return G.SMD_HOSPITAL_AUTH.headersFor(st.orgId, fbToken);
     var t = staffTok();
     if (t) return Promise.resolve({ "Content-Type": "application/json", "X-Staff-Token": t });
     return fbToken().then(function (t2) { var h = { "Content-Type": "application/json" }; if (t2) h.Authorization = "Bearer " + t2; return h; });

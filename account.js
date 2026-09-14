@@ -133,7 +133,13 @@
     }).then(function (d) {
       if (!d || !d.enforced) return;                       // lock off → never sign out
       var mine = deviceId(), ok = (d.devices || []).some(function (x) { return x.id === mine; });
-      if (!ok) { try { (window.toast || function () {})("Signed out: this account is active on another device."); } catch (e) {} try { var a = auth(); if (a && a.signOut) a.signOut(); } catch (e) {} }
+      if (!ok) {
+        try { (window.toast || function () {})("Signed out: this account is active on another device."); } catch (e) {}
+        // S3: off the hospital's critical-result alerts first, while the account still works (native-push.js).
+        var P = window.SMD_WSQ_PUSH, rel = Promise.resolve();
+        try { if (P && P.accountSignOut) rel = Promise.resolve(P.accountSignOut()).catch(function () {}); } catch (e) {}
+        rel.then(function () { try { var a = auth(); if (a && a.signOut) a.signOut(); } catch (e) {} });
+      }
     }, function () {});
   }
   onChange(function () { try { checkDevice(); } catch (e) {} });

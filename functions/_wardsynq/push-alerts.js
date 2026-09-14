@@ -286,8 +286,36 @@ async function declineNotice(ctx) {
 }
 
 /**
+ * Who the ladder would tell NOW with no phone registered, read from the DeviceDirectory rather than from past
+ * notices (which only name people an alert already went to): every active member on duty in any ward with a
+ * role on some level, and every named contact. ctx: { orgId, directory, readers: {members, onDuty(unit)} }.
+ * -> { ok: true, checked, noDevice: [{identity, role, why}], partial } or { ok: false, error }. Never throws.
+ */
+async function phoneCoverage(ctx, levels) {
+  if (!ctx.directory || !ctx.readers) return { ok: false, error: "store_unavailable" };
+  try {
+    const roles = new Set(LEVELS.flatMap((k) => levels[k].roles));
+    const members = (await ctx.readers.members()) || [];
+    const active = new Map(members.filter((m) => m && m.active !== false).map((m) => [str(m.identity), str(m.role)]));
+    const duty = roles.size ? await ctx.readers.onDuty("") : { onDuty: [] };
+    if (!duty || duty.ok === false) return { ok: false, error: "rota_read_failed" };
+    const people = new Map();
+    for (const a of duty.onDuty || []) {
+      const id = str(a.identity);
+      if (roles.has(active.get(id))) people.set(id, { identity: id, role: active.get(id), why: "on duty" });
+    }
+    for (const id of new Set(LEVELS.flatMap((k) => levels[k].contacts))) if (!people.has(id)) people.set(id, { identity: id, role: active.get(id) || null, why: "named contact" });
+    const noDevice = [];
+    for (const p of people.values()) if (!(await ctx.directory.devicesFor(ctx.orgId, p.identity)).length) noDevice.push(p);
+    return { ok: true, checked: people.size, noDevice, partial: !!duty.partial };
+  } catch (e) {
+    return { ok: false, error: "read_failed", detail: str(e && e.message).slice(0, 200) };
+  }
+}
+
+/**
  * For the Admin Center: is the push path on, what ladder is in force, and which open loops told nobody.
- * Ids only: no patient, no value. ctx: { repository, tenantId, wsqCfg, actorId, smsMissing }
+ * Ids only: no patient, no value. ctx: { repository, tenantId, wsqCfg, actorId, smsMissing, orgId, directory, readers }
  */
 async function alertDeliveryStatus(ctx) {
   const cfg = ctx.wsqCfg || {};
@@ -309,10 +337,12 @@ async function alertDeliveryStatus(ctx) {
   const at = new Date().toISOString();
   try { await ctx.repository.auditOnly(ctx.tenantId, auditEvent(ctx.actorId, "record.list", { resourceType: LOOP, purpose: "alert-delivery-status" }, at)); }
   catch (e) { return { ok: false, status: 502, error: "audit_write_failed" }; }
+  const levels = levelsFor(cfg.criticalEscalation);
   return {
     ok: true,
     enabled: !!(cfg.alerts && cfg.alerts.push && cfg.alerts.push.enabled === true),
-    levels: levelsFor(cfg.criticalEscalation), defaults: DEFAULT_LEVELS,
+    levels, defaults: DEFAULT_LEVELS,
+    phones: await phoneCoverage(ctx, levels),
     minutes: { acknowledgeWithinMinutes: (cfg.criticalEscalation && cfg.criticalEscalation.acknowledgeWithinMinutes) || 30, escalateAfterMinutes: (cfg.criticalEscalation && cfg.criticalEscalation.escalateAfterMinutes) || 60 },
     failures: failures.sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 50),
     noDevice: [...noDevice].map(([identity, times]) => ({ identity, times })),
@@ -321,4 +351,4 @@ async function alertDeliveryStatus(ctx) {
   };
 }
 
-export { PUSH_TITLES, PAYLOAD_KEYS, RECEIPT_KINDS, thinPayload, serverPushChannel, dispatchLevel, levelWindowMinutes, smsFallbackDue, smsFallbackSender, readNotice, receiptNotice, declineNotice, alertDeliveryStatus };
+export { PUSH_TITLES, PAYLOAD_KEYS, RECEIPT_KINDS, thinPayload, serverPushChannel, dispatchLevel, levelWindowMinutes, smsFallbackDue, smsFallbackSender, readNotice, receiptNotice, declineNotice, phoneCoverage, alertDeliveryStatus };

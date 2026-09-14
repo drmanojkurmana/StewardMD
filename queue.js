@@ -417,9 +417,19 @@
    * request can still authenticate). Inert unless smd_wsq_push is on, and on the web. */
   function wsqAlerts(fn, orgId, quiet) { try { if (orgId && G.SMD_WSQ_PUSH) G.SMD_WSQ_PUSH[fn](orgId, !quiet); } catch (e) {} }
   function staffCan(cap) { return !!(st.staffWho && st.staffWho.caps && st.staffWho.caps.indexOf(cap) > -1); }
+  /* The hospital a request is for: the clinic or front desk in st.orgId, else the Connect/WardSynQ hospital
+   * whose session is open. A GHIS session is no StewardMD hospital, so "". */
+  function requestOrg() {
+    var o = st.openOpts || {};
+    return st.orgId || ((o.source === "wardsynq" || o.source === "connect") ? String(o.hospitalId || "") : "");
+  }
   // A staff token wins when present: it is how the server knows this is reception, not the doctor.
+  // S3 ID-01 (hospital-auth.js): but only for the hospital it was minted for. A stale session from another
+  // hospital is never sent; the account bearer is. Tokens that name no hospital, and pages without
+  // hospital-auth.js (test/opd-doctor-harness.html), keep the old rule.
   function authHeaders() {
-    var t = staffTok();
+    var t = staffTok(), HA = G.SMD_HOSPITAL_AUTH, bound = HA && t ? HA.staffTokenOrg(t) : "";
+    if (bound && bound !== requestOrg()) t = "";
     if (t) return Promise.resolve({ "Content-Type": "application/json", "X-Staff-Token": t });
     return fbToken().then(function (t2) { var h = { "Content-Type": "application/json" }; if (t2) h.Authorization = "Bearer " + t2; return h; });
   }
@@ -878,6 +888,9 @@
   function loadFrontDesk() {
     var el = root();
     el.innerHTML = '<div class="q-empty" style="padding:80px">Loading the front desk…</div>';
+    // The desk is the staff session's own hospital; at a cold start that is known only from the token.
+    var own = G.SMD_HOSPITAL_AUTH ? G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok()) : "";
+    if (own) st.orgId = own;
     apiGet("/whoami").then(function (w) {
       if (!w || !w.ok) { setStaffTok(""); root().innerHTML = _staffGate("Your session ended. Sign in again."); prefillStaff(); return; }
       if (w.twoStepRequired) { el.innerHTML = _wrap('<p class="q-gate-sub">Your clinic requires two-step sign-in for your role. Set it up at wardsynq.com under Sign-in security, then sign in here again.</p><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }

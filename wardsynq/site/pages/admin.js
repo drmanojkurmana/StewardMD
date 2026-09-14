@@ -460,8 +460,20 @@
       '<button class="btn" id="alSave" type="button">Save alert settings</button><div id="alMsg"></div>' +
       "<h3>Open results that told nobody</h3>" +
       (fails ? '<div class="tbl"><table><thead><tr><th>When</th><th>Level</th><th>Loop</th><th>Why</th></tr></thead><tbody>' + fails + "</tbody></table></div>" : '<p class="quiet">None among the open critical results read' + (s.partial ? " (only the newest 500 were checked)" : "") + ".</p>") +
-      ((s.noDevice || []).length ? '<p class="msg err">No phone registered for alerts: ' + s.noDevice.map(function (x) { return esc(x.identity); }).join(", ") + "</p>" : "") +
+      "<h3>Phones registered for alerts now</h3>" + phonesHtml(esc, s.phones) +
+      ((s.noDevice || []).length ? '<p class="msg note">Alerts already sent to people with no phone registered: ' + s.noDevice.map(function (x) { return esc(x.identity); }).join(", ") + "</p>" : "") +
       "</div>";
+  }
+  /* Read from the phone registrations themselves (not from past alerts): everyone on duty with a role on the
+   * ladder, and every named contact. A failed read is said, never shown as everyone having a phone. */
+  function phonesHtml(esc, p) {
+    if (!p || !p.ok) return '<div class="msg err">Which phones are registered could not be read' + (p && p.error ? " (" + esc(p.error) + ")" : "") + ". Do not read this as everyone having one.</div>";
+    var note = p.partial ? " The rota was too large to read in full, so some people on duty may not be listed." : "";
+    if (!p.checked) return '<p class="quiet">Nobody is on duty now with a role on the ladder, and no contact is named, so there is nobody to check.' + note + "</p>";
+    if (!(p.noDevice || []).length) return '<p class="msg ok">All ' + esc(p.checked) + " people on duty with a role on the ladder, and the named contacts, have a phone registered." + note + "</p>";
+    return '<div class="msg err"><b>No phone registered for alerts (' + esc(p.noDevice.length) + " of " + esc(p.checked) + "):</b><br>" +
+      p.noDevice.map(function (x) { return esc(x.identity) + " (" + esc(x.why === "named contact" ? "named contact" : "on duty") + (x.role ? ", " + esc(x.role) : "") + ")"; }).join("<br>") +
+      "<br>They get an alert only by SMS, if that is set up." + note + "</div>";
   }
   /* Reads the card back. v = { enabled, senderId, templateName, levels: {due: {orderer, roles, contactsText}}, escalation }. */
   function readAlertCard(v) {

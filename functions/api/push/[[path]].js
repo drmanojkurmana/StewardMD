@@ -11,7 +11,7 @@
  * that is a member, or a staff session), identity always derived on the server, never from the body:
  *   POST /api/push/register-member   body={ orgId, token, platform? }  -> bind this device to the member
  *   POST /api/push/unregister-member body={ orgId, token }             -> sign-out: this device only, unbound
- *   GET  /api/push/notice/<nid>                                       -> detail, for an addressee only
+ *   GET  /api/push/notice/<nid>?orgId=<workplace>                     -> detail, for an addressee in that hospital only
  *   POST /api/push/notice/<nid>/decline  body={ reason? }             -> "I cannot attend": next tier now
  *   POST /api/push/wardsynq-receipt  body={ noticeId, kind }          -> v2 notices: onto the loop record
  *
@@ -263,14 +263,19 @@ export async function onRequest(context) {
     return json({ ok: true, orgId: String(body.orgId), removed: out.removed });
   }
   /* The notice behind a thin push. Anyone it was not addressed to, in any hospital, gets 404 whatever
-   * the reason, so an nid confirms nothing (design 3.4). */
+   * the reason, so an nid confirms nothing (design 3.4).
+   * GET names the hospital the phone is working in (?orgId=, the workplace). A notice from any other
+   * hospital is 404 before its membership, loop or patient is read and before any read-log row: an
+   * account that belongs to two hospitals never releases one hospital's detail inside the other. */
   if (seg.indexOf("notice/") === 0) {
     const [, nid, action] = seg.split("/");
     const dir = directoryFromEnv(env);
     const pointer = dir ? await dir.getNotice(nid) : null;
-    const who = await hospitalCaller(request, env, pointer ? pointer.orgId : "", CAPS.EMR_VIEW);
+    const workplace = method === "GET" && !action ? new URL(request.url).searchParams.get("orgId") || "" : null;
+    const inWorkplace = !!pointer && (workplace === null || workplace === String(pointer.orgId));
+    const who = await hospitalCaller(request, env, inWorkplace ? pointer.orgId : "", CAPS.EMR_VIEW);
     if (who.status === 401) return json({ ok: false, error: who.error }, 401);
-    if (!pointer || who.status) return json({ ok: false, error: "not_found" }, 404);
+    if (!inWorkplace || who.status) return json({ ok: false, error: "not_found" }, 404);
     const org = await ORG.getOrg(env, pointer.orgId);
     if (!org || String(org.connectTenantId || "") !== String(pointer.tenantId)) return json({ ok: false, error: "not_found" }, 404);
     const ctx = { repository: recordDeps(env, pointer.tenantId).repository, tenantId: pointer.tenantId, nid, pointer, callerIds: who.ids.map((i) => pointer.orgId + "~" + i), actorId: who.actor.id, orgName: org.name || null, policy: (org.wardsynq && org.wardsynq.criticalEscalation) || null };
