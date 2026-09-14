@@ -576,3 +576,16 @@ Resumed and completed all three stopped P2 builders:
 - P2.4 Offline-first clinical operation: IndexedDB-backed `ward-offline.js` bedside queue & cache, `requestContextOf` offline headers (`X-Offline-Created-At`, conflict reason), idempotency replay in `RecordService.replayFor()`, audit capturing offline creation time alongside server sync time, `_worker.js` header forwarding. 4/4 tests in `test/wardsynq-offline.test.mjs`.
 - Reachability: 0 routes without a screen (365 reachable, 30 machine-only). Regression: 6316 pass, 0 fail, 1 skipped. Live admin.js 15, ward.js site67, ward-offline.js 1.
 
+### 2026-09-14 - Review of the bulk "36 bugs" and workstation commits; P2.8 voice typing
+
+A read-only review of 84a5f176 / ff5fd900 / 40ff5a45 / 8d759a70 / 8e1b75a1 found regressions; each verified, then fixed (66b49de8, f7fd8dac):
+- Whole blood was checked with the red-cell ABO table (O whole blood passed for an A patient). Now identical group only; test added.
+- 2D echo, angiogram and critical-result follow-up posted to `/ward/timeline-note` (no such route) and reported "recorded"/"notification sent". Echo/angio now write through `/ward/note` with settle; the follow-up sheet is gone. Blank angiogram vessels are "not reported", never "Normal".
+- Unidentified FEMALE shown as MALE (MRN substring). Add/Remove bed browser-only. Blood bank "auto-detected" Hb/PLT/group banner. Instruction notes claiming notification; FollowCare enrolment the server ignores. Dead buttons fronting fabricated imaging findings, a fake QR "secret token", scheme search. Invented oncology protocol versions. All removed or reworded; ED trauma checkbox now sent.
+- Lab templates prefilled adult ranges/units: now test names only, unit/range as hints; blank template rows not sent.
+- Workstation: removed the demo-cohort fallback on a failed real record, and a real hospital (site=1, not demo) with no record connected now stops with a message instead of showing demo patients.
+- Two tests the bulk change broke were repaired (lab hint restored; timeline test checks the Billing chip, not the word).
+P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.available/processLocally`); a browser that would stream audio to an outside service is refused. Indian English or Hindi toggle, language-pack download, named errors (blocked mic, no speech), transcript lands only in an editable box. Tests: ward-dictation, ward-no-fake-success. Regression 6358 pass, 0 fail. Live ward.js site72, wardsynq-app.js 13, sw wardsynq-v6.
+**Decision for the owner:** voice typing now needs Chrome 139+ on-device speech; Safari/older browsers get "type instead". Say if cloud speech is acceptable for your hospitals and under what agreement.
+**Next P2:** P2.1 chart-grounded intelligence gaps, P2.5 FHIR depth, P2.10 hospital intelligence, P2.13 developer platform, P2.14 multi-hospital, P2.15 reliability, P2.16 UX bar.
+
