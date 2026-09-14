@@ -656,3 +656,11 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Notes: no recall out of no-show exists (no_show is terminal); department scope without prefixes can repeat numbers across departments (admin card warns); native app not rebuilt.
 - Audit anchor acknowledgement (Muse): hospital owner or platform owner only, reason plus incident reference, old anchor log archived, acknowledgement chained.
 - Regression 6640 pass, 0 fail. Every route has a screen and a test. Security scan 0 findings.
+
+### 2026-09-14 (night, 3) - owner answers recorded; portal languages ready for translation; outbox status read
+
+- Owner answered S1-S7, D1-D14, G1-G15 (top of HANDOVER_2026-09-14.md); build waves in OWNER_ANSWERS_BUILD_PLAN.md.
+- D6: one file per portal language (en in i18n.js; es, te, hi, bn, kn, ta, ml in wardsynq/site/i18n/), switch on every portal section listing all eight, only the chosen file loads (offered codes only). Antigravity brief: docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md (154 English keys).
+- G1 (Muse): outbox drain and health read waiting events by status; idx_wardsynq_record_outbox_status applied to production D1 first. D2 (Muse): @xmldom/xmldom 0.9.12, brace-expansion 5.0.9. G15: no dead tr.warn CSS existed (the warn rows are unstyled; D8 work); CI already runs the security scan.
+- Disk was full (0.6 GB); 19 merged clean agent worktrees removed (18 GB free). Old muse-* worktrees still hold unstaged copies of merged work.
+- Regression 6653, 0 fail after two tests updated for the language split. Every route has a screen and a test. Live portal.js 5, i18n.js 4.
