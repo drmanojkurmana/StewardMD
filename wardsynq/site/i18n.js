@@ -15,7 +15,7 @@
  *
  * ONE FILE PER LANGUAGE (D6). This file owns only the engine and the English catalog - English is
  * the source of truth, owned by us. Every other language lives in its own wardsynq/site/i18n/<code>.js
- * (es, te, hi, bn, kn, ta, ml), which does nothing but call register() below; portal.js loads only
+ * (es, te, hi, bn, kn, ta, ml, mr), which does nothing but call register() below; portal.js loads only
  * the visitor's chosen file (plus this one), so translators can never conflict with each other or
  * with this file. See docs/wardsynq/TRANSLATION_BRIEF_ANTIGRAVITY.md.
  *
@@ -237,7 +237,7 @@
 
   /* The languages the portal OFFERS (owner decision D6), listed before their files load: portal.js loads a
    * language file only when it is picked, so a list built from register() alone would show English only. */
-  var OFFERED = [["en", "English"], ["es", "Español"], ["te", "తెలుగు"], ["hi", "हिन्दी"], ["bn", "বাংলা"], ["kn", "ಕನ್ನಡ"], ["ta", "தமிழ்"], ["ml", "മലയാളം"]];
+  var OFFERED = [["en", "English"], ["es", "Español"], ["te", "తెలుగు"], ["hi", "हिन्दी"], ["bn", "বাংলা"], ["kn", "ಕನ್ನಡ"], ["ta", "தமிழ்"], ["ml", "മലയാളം"], ["mr", "मराठी"]];
 
   /** True for a code the portal offers; the loader fetches no other file. */
   function offered(code) { return OFFERED.some(function (o) { return o[0] === code; }); }

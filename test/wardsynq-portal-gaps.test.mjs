@@ -462,7 +462,7 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.match(portalJs, /post\("queue"/);
   assert.match(portalJs, /"\/api\/portal\/document"/);
   assert.doesNotMatch(portalJs, /fetch\([^)]*\?/, "no query strings on portal calls");
-  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=6/);
+  assert.match(html, /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=\d+"/);
   assert.match(html, /@media print/);
   assert.match(ward, /apiPost\("\/ward\/document-release"/);
   assert.match(ward, /dischargeScope: scope/);
@@ -474,8 +474,8 @@ test("screens reach every new route; i18n has English and Hindi for every new ke
   assert.ok(keys.length > 40);
   for (const k of keys) assert.ok(Object.prototype.hasOwnProperty.call(hiCatalog, k), "Hindi for " + k);
   assert.doesNotMatch(portalJs + html + staffPage + keys.map((k) => i18n._catalogs.en[k]).join(" "), /—/, "no em dash");
-  assert.match(read("wardsynq/site/index.html"), /i18n\.js\?v=5"[\s\S]*portal\.js\?v=6"[\s\S]*ward\.js\?v=site\d+/);
-  assert.match(read("index.html"), /i18n\.js\?v=5" defer[\s\S]*portal\.js\?v=6" defer[\s\S]*ward\.js\?v=[\w-]+"/);
+  assert.match(read("wardsynq/site/index.html"), /i18n\.js\?v=\d+"[\s\S]*portal\.js\?v=\d+"[\s\S]*ward\.js\?v=site\d+/);
+  assert.match(read("index.html"), /i18n\.js\?v=\d+" defer[\s\S]*portal\.js\?v=\d+" defer[\s\S]*ward\.js\?v=[\w-]+"/);
 });
 
 /* ---- D5: structured per-entry withholding ------------------------------------------------------ */

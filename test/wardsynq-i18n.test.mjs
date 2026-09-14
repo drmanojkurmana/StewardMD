@@ -11,7 +11,14 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
 const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
-const LANGS = ["es", "te", "hi", "bn", "kn", "ta", "ml"];
+const LANGS = ["es", "te", "hi", "bn", "kn", "ta", "ml", "mr"];
+
+/** The catalog a language file registers, loaded the way the portal loads it. */
+function catalogOf(code) {
+  const I = loadEngine();
+  vm.runInNewContext(read("wardsynq/site/i18n/" + code + ".js"), { window: { WSQI18n: I } });
+  return I._catalogs[code];
+}
 
 function loadEngine() {
   const window = {};
@@ -72,13 +79,58 @@ for (const code of LANGS) {
   });
 }
 
+/* NEGATION AND NUMBERS SURVIVE TRANSLATION. These English strings each say "no", "not" or "nothing", and
+ * a translation that drops it tells a patient something false: "no allergies recorded" read as "allergies
+ * recorded", "this does not mean you are not in the queue" read as "you are not in the queue". Each
+ * translated one must still carry a negation of its own language. A language that translates one of these
+ * keys without a marker list here fails, so the check cannot be skipped by accident. Markers are
+ * substrings (Indic negation is often a verb suffix: Telugu కాలేదు, లేరు). */
+const NEGATED_KEYS = ["lang.codedNote", "section.failed", "phase.failed", "status.failed", "status.empty", "status.ambiguous",
+  "allergy.empty", "pcopy.noAllergies", "msg.notEmergency", "action.failed", "appt.askNote", "signin.invalid"];
+const NEGATION = {
+  es: ["no ", "No ", "nada", "ningun", "ninguna"],
+  te: ["లేదు", "లేరు", "లేవు", "కాదు", "కాలేదు", "చెల్లదు", "లేకపోయ", "అనువదించరు"],
+  hi: ["नहीं"],
+  bn: ["না", "নেই", "নয়"],
+  kn: ["ಇಲ್ಲ", "ಅಲ್ಲ"],
+  ta: ["இல்லை", "அல்ல"],
+  ml: ["ഇല്ല", "അല്ല"],
+  mr: ["नाही", "नये"],
+};
+
+test("translations keep every negation and every number of the English string", () => {
+  const en = loadEngine()._catalogs.en;
+  const digits = (s) => String(s).match(/\p{Nd}+/gu) || [];
+  for (const code of LANGS) {
+    const cat = catalogOf(code);
+    for (const [k, v] of Object.entries(cat)) {
+      // Same digits, in ASCII: a native numeral (१, ౧) or a changed count is a different number to a reader.
+      assert.deepEqual(digits(v), digits(en[k]), code + "." + k + ": numbers differ from English");
+    }
+    for (const k of NEGATED_KEYS) {
+      if (!Object.prototype.hasOwnProperty.call(cat, k)) continue;
+      assert.ok(NEGATION[code], code + " translates " + k + " but has no negation markers in this test");
+      assert.ok(NEGATION[code].some((m) => cat[k].includes(m)), code + "." + k + ": the negation of the English string is gone");
+    }
+  }
+});
+
+test("language files hold words only: no network, no script loading, no AI-translation wording", () => {
+  for (const code of LANGS) {
+    const src = read("wardsynq/site/i18n/" + code + ".js");
+    assert.doesNotMatch(src, /\bfetch\s*\(|XMLHttpRequest|\bimport\s*\(|\brequire\s*\(|sendBeacon|WebSocket/, code + ": a catalog never calls out");
+    assert.doesNotMatch(src, /AI-translat/i, code + ": clinical text is never machine translated, so nothing may claim it was");
+  }
+});
+
 test("every language file is registered as its own native name, and English stays reviewed", () => {
   const I = loadEngine();
   for (const code of LANGS) vm.runInNewContext(read("wardsynq/site/i18n/" + code + ".js"), { window: { WSQI18n: I } });
-  // All eight are offered even before any language file loads (the portal loads one only when picked).
+  // All nine (owner decision D6, Marathi added 2026-09-14) are offered even before any language file loads (the portal loads one only when picked).
   const fresh = loadEngine();
-  assert.deepEqual(Array.from(fresh.languages(), (l) => l.code), ["en", "es", "te", "hi", "bn", "kn", "ta", "ml"]);
+  assert.deepEqual(Array.from(fresh.languages(), (l) => l.code), ["en", "es", "te", "hi", "bn", "kn", "ta", "ml", "mr"]);
   assert.equal(fresh.offered("../x"), false);
+  assert.equal(fresh.offered("gu"), false, "a language the owner did not name is not offered, so no file is fetched for it");
   const codes = I.languages().map((l) => l.code);
   assert.deepEqual(new Set(codes), new Set(["en", ...LANGS]));
   assert.equal(I.languages().find((l) => l.code === "en").reviewed, true);

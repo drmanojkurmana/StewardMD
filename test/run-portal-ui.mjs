@@ -90,6 +90,19 @@ try {
   ok(await waitFor(`document.querySelector('[data-phase="signin"]')`), "sign-in screen first");
   ok(await ev(`return document.getElementById("pOrg").value`) === "org-demo", "hospital id prefilled from #org");
 
+  /* D6 languages: the owner's nine are offered before any language file loads, and picking one fetches
+   * only that file and redraws in it. Telugu has a full first pass; Marathi falls back to English per key. */
+  const pick = (code) => ev(`var s=document.getElementById("pLang"); s.value=${JSON.stringify(code)}; s.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
+  ok(await ev(`return Array.from(document.getElementById("pLang").options, function(o){return o.value;}).join(",")`) === "en,es,te,hi,bn,kn,ta,ml,mr", "the switcher offers the owner's nine languages");
+  await pick("te");
+  ok(await waitFor(`document.documentElement.lang==="te" && /రికార్డులోకి సైన్ ఇన్/.test(document.body.textContent)`), "Telugu: the sign-in screen redraws in Telugu");
+  ok(await ev(`return Array.from(document.scripts, function(s){return s.src;}).filter(function(u){return /\\/i18n\\//.test(u);}).join(",").replace(/^https?:\\/\\/[^/]+/,"")`) === "/wardsynq/site/i18n/te.js?v=2", "only the chosen language file is fetched, with the bumped token");
+  await pick("mr");
+  ok(await waitFor(`document.documentElement.lang==="mr" && /Sign in to your record/.test(document.body.textContent) && document.getElementById("pLang").value==="mr"`), "Marathi: untranslated keys fall back to English, never a raw key");
+  ok(await ev(`return !/signin\\.title|lang\\.label/.test(document.body.textContent)`), "no raw keys on screen");
+  await pick("en");
+  ok(await waitFor(`document.documentElement.lang==="en" && /Sign in to your record/.test(document.body.textContent)`), "back to English");
+
   recordMode = "slow";
   await ev(`document.getElementById("pGrant").value="wsq-pacc-x"; document.getElementById("pCode").value="12345678"; document.getElementById("pSignin").requestSubmit(); return 1;`);
   ok(await waitFor(`document.querySelector('[data-phase="loading"]')`), "loading screen while the record loads");

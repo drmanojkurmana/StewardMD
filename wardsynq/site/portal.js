@@ -20,7 +20,7 @@
  * LANGUAGE (D6). Every patient-visible string here is a key resolved through tr(), so switching
  * languages redraws the whole page. Only two i18n files ever load: i18n.js (English, ours) and the
  * visitor's one chosen language (wardsynq/site/i18n/<code>.js, translated by Antigravity) - never all
- * eight, so an untranslated key falls back to English rather than showing a raw key. The switcher
+ * nine, so an untranslated key falls back to English rather than showing a raw key. The switcher
  * remembers the choice in localStorage and only ever sets document.documentElement.lang.
  */
 (function () {
@@ -28,7 +28,7 @@
   var KEY = "wsqPortalSession";
   var LANG_KEY = "wsqPortalLang";
   // Cache token for wardsynq/site/i18n/<code>.js. Bump it (here, not in the language files) when translations merge.
-  var LANG_FILES_V = 1;
+  var LANG_FILES_V = 2;
   function tr(key, vars) {
     var I = typeof window !== "undefined" && window.WSQI18n, lang = "en";
     try { lang = document.documentElement.lang || "en"; } catch (e) {}
