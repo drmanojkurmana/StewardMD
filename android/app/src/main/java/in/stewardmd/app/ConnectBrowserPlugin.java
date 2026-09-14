@@ -660,12 +660,14 @@ public class ConnectBrowserPlugin extends Plugin {
             if (decor != null) decor.setAlpha(0f);
             return;
         }
+        /* LEAVING HIDDEN MODE IS UNCONDITIONAL. The dialog and its window are reused across opens, so
+         * the transparent/untouchable state of a hidden read survives into the next visible one: the
+         * doctor was shown an invisible sign-in page that refused every tap (owner, 2026-09-14).
+         * Never guard this on the current alpha - always restore before laying the window out. */
         View decor = window.getDecorView();
-        if (decor != null && decor.getAlpha() != 1f) {
-            decor.setAlpha(1f);
-            window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                    | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        }
+        if (decor != null) decor.setAlpha(1f);
+        window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         Activity activity = getActivity();
         boolean useCompact = compact && "agent".equals(mode);
         if (useCompact && activity != null) {
