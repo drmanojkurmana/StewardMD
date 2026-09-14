@@ -219,13 +219,17 @@
     },
     // On-device OCR via ML Kit text recognition. The IMAGE NEVER LEAVES THE DEVICE —
     // only recognized text is returned to JS. Resolves { text, lines:[string] }.
-    ocr: function (dataUrl) {
+    ocr: function (dataUrl, opts) {
       var P = plugins();
       var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr)
       if (!(TR && TR.detectText)) return Promise.reject(new Error("ocr-unavailable"));
       var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
       if (!b64) return Promise.reject(new Error("no-image"));
-      return TR.detectText({ base64Image: b64 }).then(function (res) {
+      // opts.languageCorrection (default true): off for numeric screens, where Vision's word
+      // model rewrites digits. Older plugin builds ignore the extra keys.
+      var req = { base64Image: b64, languageCorrection: !(opts && opts.languageCorrection === false) };
+      if (opts && opts.minTextHeight > 0) req.minTextHeight = opts.minTextHeight;
+      return TR.detectText(req).then(function (res) {
         var lines = [];
         try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
         if (!lines.length && res && res.lines && res.lines.length) lines = res.lines.map(String);

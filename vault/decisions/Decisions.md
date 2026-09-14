@@ -5373,6 +5373,31 @@ bug - not re-verified live on device this session.
 - Backup export audit rows now carry `actor` (they landed as NULL before) and a row count.
 
 
+## 2026-09-14 ICU Snapshot: Private Device OCR was starved and label-blind (branch icu-ocr-device-first)
+
+Owner photographed a Philips IntelliVue MP40 (HR 105, SpO2 100, ART 149/66 (98), RR 22); on-device read
+returned "couldn't auto-structure". Root causes, each proven on the actual photo with Apple Vision:
+1. `compressImage` (900px, JPEG q0.6, built to cut CLOUD image tokens) ran BEFORE the device engine
+   too. Vision is free per pixel; at 900px it never emitted "(98)" (MAP) and dropped small labels at
+   some scales. Now `SMD_IMAGE_ENGINE.process({image, original})`: device OCR gets the uncompressed
+   capture, AI Vision keeps the small one. Every ICU entry point threads `original`.
+2. `usesLanguageCorrection = true` is a word model: "PHILIPS" -> "PHILIP!", digit runs -> letters.
+   Off for numeric kinds (monitor/vitals/abg/labs/ventilator/all), on for case sheets. Plugin also
+   returns per-line `conf`, and accepts `minTextHeight` (measured: not the limiting factor, 47 boxes
+   at every setting).
+3. `parseFieldsOnDevice` flattened the OCR to one line and took the first in-range number within 44
+   chars of the label: on a monitor that is the upper ALARM LIMIT ("HR 120 50 105" -> 120) and the
+   clock after the "** RR HIGH" banner (-> RR 20). Both reproduced on the fixtures. New
+   `parseMonitorBoxes` pairs each label with the TALLEST in-range numeric box below/right of it, takes
+   the tallest "SSS/DD" as pressure with "(MM)" as MAP, ignores alarm banners and hh:mm, and tolerates
+   icon-glued values ("*105", "2° 100"). Two column rules for labels Vision drops (SpO2, RR): sole
+   value-size integer in the pressure column in the expected slot, else nothing. MAP is never computed
+   from SBP/DBP. Text-only path unchanged as the fallback.
+Fixtures: `test/fixtures/mp40-vision-*.json` are the raw VNRecognizeTextRequest observations from the
+photo at 900/1800/2700px. `test/icu-ocr-monitor-boxes.test.mjs` executes the real parser on them.
+Not done: Scan-Meds' `onDeviceRead` still calls the legacy `readImage` (compressed image + scrubbed-text
+cloud call); Android has no on-device OCR (no ML Kit bridge); Vision found "(98)" only at 2x, so a
+two-scale union pass would raise recall further. Cloud tokens for this path: zero.
 ## 2026-09-14 Out-of-assignment reads (P2.17) and per-dependency system health (P2.15)
 
 Out-of-assignment: `outOfAssignmentFindings` in `functions/_wardsynq/security-review.js`, returned as

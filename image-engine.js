@@ -254,16 +254,20 @@
   function process(opts) {
     opts = opts || {};
     var image = opts.image, kind = opts.kind || "labs";
+    // `original` = the uncompressed capture. The 900px/q0.6 `image` exists to cut cloud image
+    // tokens; Private Device OCR pays nothing per pixel, and on a monitor photo the small labels
+    // and "(MAP)" values fall below what Apple Vision can read at 900px (2026-09-14 MP40 test).
+    var original = opts.original || image;
     var picked = opts.engineOverride ? Promise.resolve({ engine: opts.engineOverride, remember: false }) : chooseEngine(kind);
     return picked.then(function (choice) {
       if (!choice) { log("cancelled at chooser"); return { cancelled: true }; }
       if (choice.remember) setPref(choice.engine);
-      return route(choice.engine, image, kind);
+      return route(choice.engine, image, kind, original);
     });
   }
-  function route(engine, image, kind) {
+  function route(engine, image, kind, original) {
     if (engine === "local") return routeLocal(image, kind);
-    return engine === "ai" ? routeAI(image, kind) : routeDevice(image, kind);
+    return engine === "ai" ? routeAI(image, kind) : routeDevice(original || image, kind);
   }
 
   /* THIRD ENGINE: the downloaded on-device model reads the image itself.
