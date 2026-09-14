@@ -274,7 +274,7 @@ export async function callNext(env, session, actor) {
 // untouched). Only the pool is a new, doctor-less holding session (doctorUid = POOL_DOCTOR). Assigning a
 // pool patient to a room = re-parent the ticket to the room-doctor's session — the proven mechanism.
 export const POOL_DOCTOR = "__pool__";
-const opdDate = (d) => { if (d) return String(d); try { return new Date(now() + 19800000).toISOString().slice(0, 10); } catch (e) { return ""; } }; // IST day
+export const opdDate = (d) => { if (d) return String(d); try { return new Date(now() + 19800000).toISOString().slice(0, 10); } catch (e) { return ""; } }; // IST day
 
 export async function getOrCreatePoolSession(env, org, date) {
   return getOrCreateSession(env, { hospitalId: org.id, doctorUid: POOL_DOCTOR, department: "", date: opdDate(date), source: "pool", doctorName: "Unassigned" });

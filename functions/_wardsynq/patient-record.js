@@ -50,6 +50,8 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { TYPE as DOC_TYPE } from "./documents.js";
+import { DISCHARGE_SCOPES, documentUnavailable } from "./portal-view.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -242,6 +244,10 @@ async function releaseToPatient(request, env, ctx) {
 
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", written: 0 };
+  /* P2: how the signed discharge summaries go to the portal. The clinician chooses; absent is the
+   * patient copy, which is what every release before this was. */
+  const dischargeScope = str(ctx.dischargeScope) || "patient-copy";
+  if (!DISCHARGE_SCOPES.includes(dischargeScope)) return { ...base, ok: false, status: 422, error: "bad_discharge_scope", allowed: DISCHARGE_SCOPES, written: 0 };
 
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
@@ -261,7 +267,7 @@ async function releaseToPatient(request, env, ctx) {
   try {
     dischargeSummaries = ((await svc.byPatient("ClinicalNote", patientId)) || [])
       .filter((n) => n && n.noteType === "discharge-summary" && n.signedBy)
-      .map((n) => ({ id: n.id, version: n.version }));
+      .map((n) => ({ id: n.id, version: n.version, scope: dischargeScope }));
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
@@ -285,7 +291,7 @@ async function releaseToPatient(request, env, ctx) {
     medicineCount: doc.medicines.length,
     allergyCount: doc.allergies.length,
     withheldCount: doc.withheldResults.length,
-    dischargeSummaries,
+    dischargeSummaries, dischargeScope,
     withheldReasons: [...new Set(doc.withheldResults.map((w) => w.reason))],
     sensitivityConfigured: neverRelease.length > 0,
     source: { system: "wardsynq-native", sourceId: `release:${id}` },
@@ -306,8 +312,69 @@ async function releaseToPatient(request, env, ctx) {
   }
 }
 
+/**
+ * P2: a clinician releases ONE document version to the patient portal. The same receipt as a handover
+ * (PatientRecordRelease), naming the document and version and none of its content.
+ *
+ * The patient is taken from the DOCUMENT, never from the request: releasing a document "to" a
+ * patient it was not filed against would be handing it to the wrong person.
+ *
+ * A withdrawn, purged or past-retention document cannot be released: the portal would refuse to hand
+ * it out, and a release nobody can act on reads as something the patient has been given.
+ *
+ * ctx: { migration, documentId, version, reason?, consentRef?, at?, idempotencyKey? }
+ */
+async function releaseDocumentToPatient(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const documentId = str(ctx.documentId), version = Number(ctx.version);
+  if (!documentId || !Number.isInteger(version) || version < 1) return { ...base, ok: false, status: 422, error: "document_version_required", written: 0 };
+  const reason = str(ctx.reason).slice(0, 500), consentRef = str(ctx.consentRef).slice(0, 200);
+  if (reason.length < 5 && !consentRef) {
+    return { ...base, ok: false, status: 422, error: "reason_required", written: 0,
+      detail: "say why this is being released, or give the consent reference: a release is read later by somebody asking why the patient had it" };
+  }
+
+  const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let versions;
+  try { versions = (await svc.history(DOC_TYPE, documentId)) || []; }
+  catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
+  }
+  const rec = versions.find((x) => Number(x.version) === version);
+  if (!rec) return { ...base, ok: false, status: 404, error: "document_not_found", written: 0 };
+  const gone = documentUnavailable(versions[versions.length - 1], Date.now());
+  if (gone) return { ...base, ok: false, status: 409, error: "document_" + gone.reason, detail: "a withdrawn, deleted or past-retention document cannot be released to the patient", written: 0 };
+
+  const patientId = str(rec.patientId);
+  const at = str(ctx.at) || new Date().toISOString();
+  const id = `wsq-release-${slug(patientId)}-doc-${slug(documentId)}-v${version}-${slug(at)}`;
+  const record = {
+    resourceType: RELEASE_TYPE, id, patientId, at,
+    releasedBy: resolved.actor.id,
+    givenTo: "patient-portal",
+    kind: "document",
+    documents: [{ id: documentId, version }],
+    reason: reason || null, consentRef: consentRef || null,
+    source: { system: "wardsynq-native", sourceId: `release:${id}` },
+  };
+  try {
+    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, releaseId: id, at, recordVersion: out.record.version, documentId, version, actor: resolved.actor.id,
+      note: "Released to the patient portal. The patient, and a family member granted documents, can now download this version." };
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
+  }
+}
+
 export {
   RELEASE_TYPE, RELEASABLE_STATUS, NOT_A_DIAGNOSIS,
   openCriticalReportIds, releasableReport, diagnosisFor, statements, clinicianWarnings, assemble,
-  patientCopy, releaseToPatient,
+  patientCopy, releaseToPatient, releaseDocumentToPatient,
 };

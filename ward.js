@@ -1919,6 +1919,11 @@
     return '<div class="w-dt">' +
       '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
+      /* P2: what the patient portal shows of a signed discharge summary this handover releases. The patient
+       * copy is the default; a full summary still withholds what this page withholds. */
+      '<label class="w-f"><span>Discharge summary in the portal</span><select id="wPcopyScope">' +
+        '<option value="patient-copy">Patient copy (stay, medicines, care instructions)</option>' +
+        '<option value="full">Full summary (all sections; withheld results stay withheld)</option></select></label>' +
       '<button class="w-btn ghost" data-w-act="pcopyGive" title="Record that you gave this to the patient">' + ms("how_to_reg") + "Record handover</button>" +
       '<button class="w-btn ghost" data-w-act="pcopy">' + ms("refresh") + "Refresh</button></div>" +
       '<header class="w-dt-h"><h2>Your record</h2>' +
@@ -1928,7 +1933,8 @@
        * the patient's own copy would be the most careless thing on the page. */
       (r.statements || []).map(function (s) { return '<p class="w-dt-warn">' + esc(s) + "</p>"; }).join("") +
       (r.clinicianWarnings || []).map(function (s) { return '<p class="w-dt-gap w-noprint">' + esc(s) + "</p>"; }).join("") +
-      (r.release ? '<p class="w-ok w-noprint">Handover recorded at ' + when(r.release.at) + ".</p>" : "") +
+      (r.release ? '<p class="w-ok w-noprint">Handover recorded at ' + when(r.release.at) + "." +
+        ((r.release.dischargeSummaries || []).length ? " Discharge summary released to the portal as the " + (r.release.dischargeScope === "full" ? "full summary." : "patient copy.") : "") + "</p>" : "") +
       "</header>" +
       '<section class="w-dt-p"><h3>Allergies</h3><p class="w-dt-alg">' + allergies + "</p></section>" +
       '<section class="w-dt-p"><h3>Your diagnoses</h3>' +
@@ -5913,7 +5919,10 @@
         (x.status !== "purged" && d.storageConfigured ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") +
         (x.version > 1 ? '<button class="w-btn ghost sm" data-w-act="docversions:' + esc(x.id) + '">' + ms("history") + "Versions</button>" : "") +
         (!withdrawn ? '<button class="w-btn ghost sm" data-w-act="docnewversion:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("upload") + "New version</button>" +
-          '<button class="w-btn ghost sm" data-w-act="docwithdraw:' + esc(x.id) + '">' + ms("block") + "Withdraw</button>" : "") +
+          '<button class="w-btn ghost sm" data-w-act="docwithdraw:' + esc(x.id) + '">' + ms("block") + "Withdraw</button>" +
+          /* P2: this exact version, to the patient portal. The server refuses a withdrawn, purged or
+           * past-retention document whatever this screen offers. */
+          '<button class="w-btn ghost sm" data-w-act="docrelease:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("send") + "Release to patient portal</button>" : "") +
         /* Offered only once the hospital's retention period is over; the server refuses it before then,
          * and to anyone but an administrator, whatever this screen shows. */
         (x.status !== "purged" && d.storageConfigured && x.retainUntil && new Date(x.retainUntil).getTime() <= Date.now()
@@ -5938,9 +5947,11 @@
   function docVersionsBlock(v) {
     if (v.failed) return '<p class="w-hint warn">' + ms("error") + "Could not load the earlier versions.</p>";
     if (!v.versions) return '<p class="w-hint">' + ms("hourglass_empty") + "Loading versions...</p>";
+    var releasable = v.versions.length && v.versions[v.versions.length - 1].status === "current";
     return '<ul class="w-mini">' + v.versions.map(function (x) {
       return '<li class="w-mini-row"><div>Version ' + esc(x.version) + " &middot; " + esc(x.title) + ' <span class="w-dt-times">' + esc(x.uploadedBy) + " &middot; " + when(x.uploadedAt) + "</span></div>" +
-        '<div class="w-mini-row-act">' + (x.status !== "purged" ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") + "</div></li>";
+        '<div class="w-mini-row-act">' + (x.status !== "purged" ? '<button class="w-btn ghost sm" data-w-act="docopen:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("open_in_new") + "Open</button>" : "") +
+        (releasable && x.status === "current" ? '<button class="w-btn ghost sm" data-w-act="docrelease:' + esc(x.id) + "~" + esc(x.version) + '">' + ms("send") + "Release to patient portal</button>" : "") + "</div></li>";
     }).reverse().join("") + "</ul>";
   }
   /* REFERRALS (referral.js). Each referral shows its one current state and the actions that state
@@ -9678,6 +9689,15 @@
       .then(function (r) { if (settle(r, r && r.ok ? "Document withdrawn. The file is kept." : null)) loadDocuments(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not withdraw the document."; paint(); });
   }
+  function documentRelease(arg) {
+    var p = String(arg || "").split("~"), reason = "";
+    try { reason = G.prompt("Release version " + p[1] + " of this document to the patient portal?\n\nSay why, or give the consent reference. The patient, and any family member granted documents, will be able to download it.") || ""; } catch (e) {}
+    if (!reason.trim()) return;
+    st.busy = true; paint();
+    apiPost("/ward/document-release", { orgId: st.orgId, documentId: p[0], version: Number(p[1]), reason: reason.trim() })
+      .then(function (r) { settle(r, r && r.ok ? "Released to the patient portal." : null); paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not release the document. Nothing was released."; paint(); });
+  }
   function peopleOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "people"; st.people = null; paint(); loadPeople();
@@ -10164,8 +10184,9 @@
   }
   function givePatientCopy() {
     if (!st.sel || !st.sel.patientId) return;
+    var scope = val("wPcopyScope") || "patient-copy";   // read before paint() redraws the select
     st.busy = true; paint();
-    return apiPost("/ward/patient-release", { orgId: st.orgId, patientId: st.sel.patientId })
+    return apiPost("/ward/patient-release", { orgId: st.orgId, patientId: st.sel.patientId, dischargeScope: scope })
       /* The response carries the document it recorded, so the page then on screen is the page that
        * was released - not the one loaded some minutes earlier that the record may have moved past. */
       .then(function (r) { if (settle(r)) { st.pcopy = r; st.ok = "Handover recorded."; } paint(); })
@@ -11255,6 +11276,7 @@
     if (cmd === "docnewversion") { var nv = String(arg || "").split("~"); st.docNewVersion = { id: nv[0], version: Number(nv[1]) }; paint(); return; }
     if (cmd === "docnewversioncancel") { st.docNewVersion = null; paint(); return; }
     if (cmd === "docwithdraw") { documentWithdraw(arg); return; }
+    if (cmd === "docrelease") { documentRelease(arg); return; }
     if (cmd === "docpurge") { documentPurge(arg); return; }
     if (cmd === "personadd") { personAdd(); return; }
     if (cmd === "personremove") { personRemove(arg); return; }

@@ -5629,3 +5629,30 @@ System health ("Audit trail integrity"). Tests: `test/wardsynq-audit-chain.test.
   second patient to the bed. Surfaced because audited reads now take real time in tests. Fixed: a claim naming
   another admission that is open in the bed, or unwritten and under 2 minutes old, is occupancy; a failed Encounter
   write releases its claim. A crashed admission holds the bed for up to 2 minutes.
+## 2026-09-14 Patient portal gaps: queue status, released documents, full discharge summary
+
+All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type and no parallel release concept.
+- SECTIONS gains `status`, `discharge-full`, `documents`. A patient's own grant sees all of them; a proxy only what
+  its grant names (the enrolment screen offers each). Existing proxy grants see none of the new sections.
+- QUEUE STATUS: `POST /api/portal/queue`. Tickets are linked the way the queue files them
+  (`opd-identity.js patientIdForTicket`, from the MRN), today's sessions of THIS hospital only. If the matched
+  tickets, or the patient record's MRN, carry more than one MRN spelling (two spellings slug to one patient id),
+  nothing is shown and the patient is told to ask at the desk. Output per own ticket: room or department label,
+  state, a count ahead, and the ETA the queue model already stored (`etaStart`, only while still in the future),
+  else "no estimate". The queue has no token number, so none is shown. The read is audited as `record.read` of
+  `QueueTicket` under the reader's id.
+- RELEASED DOCUMENTS: a `PatientRecordRelease` with `kind: "document"`, `documents: [{id, version}]`, and a reason
+  or consent reference, written by `POST /ward/document-release` (EMR_TREAT; patient taken from the document).
+  Refused for a withdrawn, purged or past-retention document. `POST /api/portal/document` streams bytes through
+  the existing decrypt and sha256 check only while the named version is released and the document's LATEST
+  version is current and within retention; every download writes a `document.download` audit row (via
+  `patient-portal`) and is refused if that row cannot be written. A withdrawn document stays as a titleless
+  "withdrawn by the hospital" line. No object key or URL reaches the browser.
+- FULL DISCHARGE SUMMARY: the release's discharge entries carry `scope` (`patient-copy` default, or `full`) chosen
+  on the Patient copy screen. Old releases have no scope and stay patient copy. A full release shows every
+  section except `provenance` (a note to the signer). Withholding reuses #940's assembled copy: while ANY result
+  is withheld (open critical loop, preliminary, sensitive) `investigations` and `assessment` are withheld, and
+  while any condition is differential or refuted `diagnoses` is. ponytail: free text cannot be checked result by
+  result, so this is coarse; per-result redaction would need structured summary sections.
+- Correction rule unchanged: only the latest version of a note is shown, and only if a release named it.
+- Portal strings for the new sections live in `wardsynq/site/i18n.js` (English and Hindi); portal.html now loads it.

@@ -31,9 +31,16 @@ async function waitFor(expr, ms) { for (let i = 0; i < (ms || 5000) / 100; i++) 
 /* What the fake server answers for /api/portal/record. */
 let recordMode = "ok";
 const RECORD_OK = {
-  ok: true, access: { kind: "patient", sections: ["appointments", "bills", "discharge", "messages"] },
+  ok: true, access: { kind: "patient", sections: ["status", "appointments", "bills", "discharge", "documents", "messages"] },
   document: { patient: { name: "Test Patient" }, appointments: [] }, bills: [], failedSections: ["discharge"], messages: [], notEmergency: "This is not a way to get urgent help.",
+  documents: [{ documentId: "d1", version: 1, title: "Referral letter", docType: "referral-letter", uploadedAt: "2026-09-01T00:00:00Z" }, { documentId: "d2", version: 1, unavailable: "withdrawn" }],
 };
+const RECORD_FULL = {
+  ok: true, access: { kind: "patient", sections: ["discharge", "discharge-full"] }, document: {}, failedSections: [],
+  dischargeSummaries: [{ id: "ds", scope: "full", sections: [{ key: "admission", text: "Ward 5." }, { key: "assessment", withheld: true }] }],
+};
+/* What the fake server answers for /api/portal/queue. */
+let queueMode = "ok";
 
 try {
   let ver;
@@ -52,10 +59,22 @@ try {
         if (recordMode === "slow") await sleep(1500);
         if (recordMode === "fail") { status = 502; body = { ok: false, error: "record_read_failed" }; }
         else if (recordMode === "ended") { status = 401; body = { ok: false, error: "revoked", detail: "This session has ended. Ask your care team for a new code." }; }
-        else body = RECORD_OK;
+        else body = recordMode === "full" ? RECORD_FULL : RECORD_OK;
       }
-      const b64 = Buffer.from(JSON.stringify(body)).toString("base64");
-      ws.send(JSON.stringify({ id: msgId++, sessionId: m.sessionId, method: "Fetch.fulfillRequest", params: { requestId, responseCode: status, responseHeaders: [{ name: "Content-Type", value: "application/json" }], body: b64 } }));
+      if (sub === "queue") {
+        await sleep(600);
+        if (queueMode === "fail") { status = 502; body = { ok: false, error: "queue_read_failed" }; }
+        else if (queueMode === "ambiguous") body = { ok: true, available: true, ambiguous: true, tickets: [] };
+        else body = { ok: true, available: true, ambiguous: false, tickets: [{ label: "Cardiology 7", state: "waiting", ahead: 3, eta: null }] };
+      }
+      let contentType = "application/json", raw = null;
+      if (sub === "document") {
+        const asked = JSON.parse(request.postData || "{}");
+        if (asked.documentId === "d1") { contentType = "application/pdf"; raw = Buffer.from("%PDF-1.4 test"); }
+        else { status = 410; body = { ok: false, error: "withdrawn" }; }
+      }
+      const b64 = (raw || Buffer.from(JSON.stringify(body))).toString("base64");
+      ws.send(JSON.stringify({ id: msgId++, sessionId: m.sessionId, method: "Fetch.fulfillRequest", params: { requestId, responseCode: status, responseHeaders: [{ name: "Content-Type", value: contentType }, { name: "Content-Disposition", value: 'attachment; filename="referral-letter-v1"' }], body: b64 } }));
     }
   };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
@@ -77,6 +96,38 @@ try {
   ok(await ev(`return !document.querySelector('[data-section="results"]')`), "ungranted sections are not drawn");
   ok(await ev(`return location.href.indexOf("t0k3n")<0 && location.href.indexOf("wsq-pacc")<0 && sessionStorage.getItem("wsqPortalSession").indexOf("t0k3n")>0`), "session in sessionStorage, never in the address");
   ok(await ev(`var w=document.querySelector('[data-section="messages"] .msg.err'), t=document.getElementById("pMsgBody"); return !!w && !!t && (w.compareDocumentPosition(t) & 4) > 0`), "emergency warning sits above the message box");
+
+  /* P2 gaps: queue status loads after the record, in place, and typed text survives it. */
+  queueMode = "fail";
+  await ev(`document.getElementById("pMsgBody").value="half-typed"; document.querySelector('[data-act="queue"]') ? document.querySelector('[data-act="queue"]').click() : 0; return 1;`);
+  ok(await waitFor(`document.querySelector('[data-section="status"] [data-state="failed"]')`, 4000), "a failed queue read says it failed");
+  queueMode = "ok";
+  ok(await ev(`return !!document.querySelector('[data-section="status"] [data-act="queue"]')`), "the failed queue state offers a retry");
+  await ev(`document.querySelector('[data-section="status"] [data-act="queue"]').click(); return 1;`);
+  ok(await waitFor(`document.querySelector('[data-section="status"] [data-state="loading"]')`, 2000), "queue status shows loading while it checks");
+  ok(await waitFor(`/3 people ahead of you/.test((document.querySelector('[data-section="status"]')||{}).textContent||"")`, 4000), "own ticket: place, people ahead, and 'no estimate'");
+  ok(await ev(`return /Cardiology 7/.test(document.querySelector('[data-section="status"]').textContent) && /No estimate/.test(document.querySelector('[data-section="status"]').textContent)`), "place and no-estimate text");
+  ok(await ev(`return document.getElementById("pMsgBody").value==="half-typed"`), "redrawing queue status does not wipe a message being typed");
+  ok(await ev(`var b=document.querySelector('[data-section="status"] [data-act="queue"]').getBoundingClientRect(); return b.height>=44`), "queue refresh button is a 44 px touch target");
+  queueMode = "ambiguous";
+  await ev(`document.querySelector('[data-section="status"] [data-act="queue"]').click(); return 1;`);
+  ok(await waitFor(`document.querySelector('[data-section="status"] [data-state="ambiguous"]')`, 4000), "an ambiguous link shows nothing and says ask at the desk");
+
+  /* Documents: listed, withdrawn line, download through a local object URL. */
+  ok(await ev(`return !!document.querySelector('[data-act="doc"][data-id="d1"]') && !!document.querySelector('[data-doc-state="withdrawn"]')`), "released and withdrawn documents are drawn differently");
+  await ev(`window.__dl=null; var orig=HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click=function(){ window.__dl={href:this.href, name:this.download}; }; document.querySelector('[data-act="doc"][data-id="d1"]').click(); return 1;`);
+  ok(await waitFor(`window.__dl`, 4000), "download is triggered");
+  ok(await ev(`return window.__dl.href.indexOf("blob:")===0 && window.__dl.name==="referral-letter-v1"`), "the file is saved from a local object URL, never a store address");
+
+  /* A full discharge summary prints on its own. */
+  recordMode = "full";
+  await call("Page.reload");
+  ok(await waitFor(`document.querySelector('.ds-full [data-withheld="assessment"]')`), "full summary shows a withheld section as withheld");
+  await call("Emulation.setEmulatedMedia", { media: "print" });
+  await ev(`document.body.classList.add("printing"); document.querySelector(".ds-full").classList.add("printing"); return 1;`);
+  ok(await ev(`return getComputedStyle(document.querySelector('[data-act="signout"]')).visibility==="hidden" && getComputedStyle(document.querySelector('.ds-full h4')).visibility==="visible" && getComputedStyle(document.querySelector('.ds-full [data-act="print"]')).display==="none"`), "print CSS shows only the summary");
+  await call("Emulation.setEmulatedMedia", { media: "" });
+  recordMode = "ok";
 
   recordMode = "fail";
   await call("Page.reload");
