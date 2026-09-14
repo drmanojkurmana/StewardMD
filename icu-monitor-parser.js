@@ -45,7 +45,7 @@
     rr:    [/\b(?:RR|Resp|RESP|awRR|Resp\w*)(?=\b|\d)/,  /\b(?:R\s*R|RESP\w*)(?=\b|\d)/i],
     pulse: [/\b(?:Pulse|PULSE|PR)(?=\b|\d)/,             /\bPuls\w*(?=\b|\d)/i],
     temp:  [/\b(?:Temp|TEMP|Tcore|T1|T2)(?=\b|\d)/,      /\bT\s*emp\w*(?=\b|\d)/i],
-    etco2: [/\b(?:EtCO2|etCO₂|ETCO2|EtCO₂)(?=\b|\d)/,    /\bCO\s*2\b/i],
+    etco2: [/\b(?:EtCO2|etCO2|etCO₂|ETCO2|EtCO₂)(?=\b|\d)/,    /\bCO\s*2\b/i],
     cvp:   [/\bCVP(?=\b|\d)/,                            /\bC\s*V\s*P\b/i],
     pvc:   [/\bPVCs?(?=\b|\d)/,                          /\bP\s*V\s*C\b/i]
   };
