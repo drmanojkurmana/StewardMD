@@ -28,12 +28,13 @@ import { VersionConflictError } from "./repository.js";
 import { docKey } from "./documents.js";
 import { sealSecret, openSecret, checkDestination } from "./webhooks.js";
 import { DICOM_KIND } from "./dicomweb.js";
+import { PAYER_KIND } from "./payer-connectors.js";
 
 const CONNECTOR_TYPE = "_wardsynq_connector";
 const MAX_CONNECTORS = 100;
 
 /* kind -> { label, singleton, providers: { id -> { label, settings[], secrets[], validate?, test? } } } */
-const KINDS = Object.freeze({ dicom: DICOM_KIND });
+const KINDS = Object.freeze({ dicom: DICOM_KIND, payer: PAYER_KIND });
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);

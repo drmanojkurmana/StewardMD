@@ -5730,3 +5730,18 @@ All three extend P2.9 (`functions/_wardsynq/portal-view.js`); no new record type
   redirect. Reports passed/failed, HTTP status, study count; the body is never returned (it names a patient).
 - WADO-RS is stored configuration only; nothing retrieves pixel data (dicom.js position unchanged).
 - NOT verified against a real PACS; mocked transport only.
+
+### S4 Payers and TPAs (functions/_wardsynq/payer-connectors.js, wardsynq/wardsynq-nhcx-adapter.js)
+- The registry stays wardsynq-tpa-adapter.js `adapterForPayer` with injected kinds; kinds are now `fhir-claim`
+  (existing adapter), `nhcx`, `manual`. Payer connectors (id `payer-<ref>`) become registry payers with
+  `auth.connectorSecret` (document-key seal, opened in billing.js sealedCredentialAuthorizer at send time);
+  `wardsynq.payers` entries keep `credentialRef` (Connect envelope). Same id: the connector wins, no merging.
+- claim-state, preauth and claims read the merged registry; a registry that cannot be read refuses with 502
+  rather than recording the payer as "not configured".
+- NHCX, verified from the HCX Protocol OpenAPI and the NRCES IG: `/claim/submit`, `/preauth/submit`, JWE body
+  with `alg RSA-OAEP`, `enc A256GCM`, `x-hcx-sender_code`, `x-hcx-recipient_code`, `x-hcx-api_call_id`,
+  `x-hcx-correlation_id`, `x-hcx-timestamp`; ClaimBundle is a Bundle of type collection. The adapter builds
+  that envelope and SENDS NOTHING (`not_configured`, with the list). Missing: JWE encryption with the
+  recipient key from the HCX registry, NHCX profile URLs and mandatory elements, participant authentication
+  and gateway URLs, and an on_submit callback route. Those need NHCX onboarding; the hospital submits through
+  the payer portal meanwhile.

@@ -118,6 +118,7 @@ import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listW
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
+import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
 import { createLaunch } from "../../_wardsynq/smart-server.js";
@@ -2403,15 +2404,22 @@ export async function onRequest(context) {
         const r = await codeClaimForEncounter(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, codes: body.codes, now: body.now, invoiceId: body.invoiceId, payerId: body.payerId, policyNumber: body.policyNumber, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      /* Owner S4: the payer registry is this hospital's payer connectors, then wardsynq.payers. A registry
+       * that could not be read refuses the claim action: falling back to "not configured" would record a
+       * payer as absent when it was only unread. */
+      const payersNow = async () => mergePayers(payersFromConnectors(await activeConnectors(deps.recordDeps.repository, mig.tenantId, "payer")), (wsqCfg && wsqCfg.payers) || null);
+      const payersUnread = { ok: false, error: "payer_registry_unread", message: "This hospital's payer list could not be read, so nothing was done. Try again." };
       if (sub === "claim-state" && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
           payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
-          payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "preauth" && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null,
-          payerId: body.payerId, requestedAmount: body.requestedAmount, payers: (wsqCfg && wsqCfg.payers) || null, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payerId: body.payerId, requestedAmount: body.requestedAmount, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim-estimate" && method === "POST") {
@@ -2419,7 +2427,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claims" && method === "GET") {
-        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers: (wsqCfg && wsqCfg.payers) || null });
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const r = await claimsForPatient(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", payers });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "upcoding" && method === "GET") {
