@@ -381,6 +381,10 @@
   var LS_STAFF = "smd_opd_staff_tok";
   function staffTok() { if (st.staffTok) return st.staffTok; try { st.staffTok = localStorage.getItem(LS_STAFF) || ""; } catch (e) {} return st.staffTok; }
   function setStaffTok(t) { st.staffTok = t || ""; try { if (t) localStorage.setItem(LS_STAFF, t); else localStorage.removeItem(LS_STAFF); } catch (e) {} }
+  /* S3 P1: critical-result alerts follow the hospital this phone works in. native-push.js binds the phone
+   * to that hospital identity (and unbinds on staff sign-out, called BEFORE the token is cleared so the
+   * request can still authenticate). Inert unless smd_wsq_push is on, and on the web. */
+  function wsqAlerts(fn, orgId, quiet) { try { if (orgId && G.SMD_WSQ_PUSH) G.SMD_WSQ_PUSH[fn](orgId, !quiet); } catch (e) {} }
   function staffCan(cap) { return !!(st.staffWho && st.staffWho.caps && st.staffWho.caps.indexOf(cap) > -1); }
   // A staff token wins when present: it is how the server knows this is reception, not the doctor.
   function authHeaders() {
@@ -508,14 +512,14 @@
     if (cmd === "rolestaff") { root().innerHTML = _staffGate(); prefillStaff(); return; }   // front-desk staff -> sign in HERE
     if (cmd === "pickghis") { _setWp("ghis"); _enterGhis(); return; }  // GITAM / GHIS: reuse a live token if present (no needless re-login), else the prefilled gate
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
-    if (cmd === "pickwsq") { _setWp("wardsynq:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "wardsynq" }; loadSession(); return; }   // WardSynQ-native hospital: no external EMR at all, no GHIS token, no auto-import.
+    if (cmd === "pickwsq") { _setWp("wardsynq:" + arg); wsqAlerts("bind", arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "wardsynq" }; loadSession(); return; }   // WardSynQ-native hospital: no external EMR at all, no GHIS token, no auto-import.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "stafflogin") { staffLogin(); return; }
-    if (cmd === "staffout") { setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
+    if (cmd === "staffout") { wsqAlerts("unbind", (G.SMD_HOSPITAL_AUTH && G.SMD_HOSPITAL_AUTH.staffTokenOrg(staffTok())) || st.orgId); setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
     if (cmd === "fdrefresh") { loadFrontDesk(); return; }
     if (cmd === "fdadd") { frontDeskAdd(); return; }
     if (cmd === "fdroute") { frontDeskRoute(arg); return; }
@@ -804,6 +808,7 @@
       if (!w || !w.ok) { setStaffTok(""); root().innerHTML = _staffGate("Your session ended. Sign in again."); prefillStaff(); return; }
       if (w.twoStepRequired) { el.innerHTML = _wrap('<p class="q-gate-sub">Your clinic requires two-step sign-in for your role. Set it up at wardsynq.com under Sign-in security, then sign in here again.</p><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }
       st.staffWho = w; st.orgId = w.orgId || st.orgId || "";
+      if (!w.twoStepRequired) wsqAlerts("bind", st.orgId, true);
       if (!st.orgId) { el.innerHTML = _wrap('<p class="q-gate-sub">You are not assigned to a clinic yet. Ask the clinic owner to add you.</p><button class="q-gate-close" data-q-act="staffout">Back</button>'); return; }
       return apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (b) {
         if (!b || !b.ok) { el.innerHTML = _wrap('<p class="q-gate-sub">Could not load the clinic board.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }

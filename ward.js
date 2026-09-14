@@ -70,14 +70,18 @@
   function val(id) { var el = document.getElementById(id); return el ? String(el.value || "").trim() : ""; }
   function checked(id) { var el = document.getElementById(id); return !!(el && el.checked); }
 
-  // ---- transport (identical to queue.js; a staff token wins when present) -------------------
+  // ---- transport (same shape as queue.js; the workplace decides the credential) ----------------
   function staffTok() { try { return localStorage.getItem(LS_STAFF) || ""; } catch (e) { return ""; } }
   function fbToken() {
     try { if (G.SMD_AUTH && G.SMD_AUTH.token) return Promise.resolve(G.SMD_AUTH.token()); } catch (e) {}
     try { if (G.firebase && firebase.auth && firebase.auth().currentUser) return firebase.auth().currentUser.getIdToken(); } catch (e) {}
     return Promise.resolve(null);
   }
+  /* A staff token is sent only for the hospital it was minted for (hospital-auth.js, S3 ID-01): a stale
+   * session from another hospital never acts here. Pages that load ward.js without that file (the test
+   * harnesses) keep the old rule; test/wsq-push-client.test.mjs pins that both real pages load it first. */
   function authHeaders() {
+    if (G.SMD_HOSPITAL_AUTH) return G.SMD_HOSPITAL_AUTH.headersFor(st.orgId, fbToken);
     var t = staffTok();
     if (t) return Promise.resolve({ "Content-Type": "application/json", "X-Staff-Token": t });
     return fbToken().then(function (t2) { var h = { "Content-Type": "application/json" }; if (t2) h.Authorization = "Bearer " + t2; return h; });
@@ -11572,7 +11576,9 @@
   }
   function open(opts) {
     opts = opts || {};
-    st.orgId = opts.orgId || st.orgId || rememberedOrgId();
+    // The remembered workplace before the last hospital this screen showed: after a switch (the alert
+    // screen's "Switch to <hospital>", or the OPD chooser) the ward must open the hospital now chosen.
+    st.orgId = opts.orgId || rememberedOrgId() || st.orgId;
     if (opts.demo !== undefined) st.demo = !!opts.demo;
     if (!st.orgId) { try { G.toast && G.toast("The ward needs a hospital."); } catch (e) {} return; }
     st.view = "list"; st.sel = null; st.loaded = false; st.err = ""; st.note = ""; st.refusal = null;

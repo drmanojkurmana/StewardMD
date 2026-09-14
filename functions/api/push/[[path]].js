@@ -10,6 +10,7 @@
  * WardSynQ hospital alerts (S3 P0), each authenticated by the HOSPITAL credential (a StewardMD account
  * that is a member, or a staff session), identity always derived on the server, never from the body:
  *   POST /api/push/register-member   body={ orgId, token, platform? }  -> bind this device to the member
+ *   POST /api/push/unregister-member body={ orgId, token }             -> sign-out: this device only, unbound
  *   GET  /api/push/notice/<nid>                                       -> detail, for an addressee only
  *   POST /api/push/notice/<nid>/decline  body={ reason? }             -> "I cannot attend": next tier now
  *   POST /api/push/wardsynq-receipt  body={ noticeId, kind }          -> v2 notices: onto the loop record
@@ -243,6 +244,23 @@ export async function onRequest(context) {
     catch (e) { return json({ ok: false, error: "bind_failed" }, 502); }
     await ORG.auditLogin(env, body.orgId, who.ids[0], "push:device_bound", "device " + tid.slice(0, 8));
     return json({ ok: true, orgId: String(body.orgId), identity: who.ids[0], device: tid.slice(0, 8) });
+  }
+  /* S3 P1: signing out of a hospital on this phone. Only THIS device leaves THIS caller's bindings at that
+   * hospital; called with the credential still valid, before the app forgets it. Audited like the bind. */
+  if (method === "POST" && seg === "unregister-member") {
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const who = await hospitalCaller(request, env, String(body.orgId || ""), CAPS.EMR_VIEW);
+    if (who.status) return json({ ok: false, error: who.error }, who.status);
+    const token = typeof body.token === "string" ? body.token.trim() : "";
+    if (!token || token.length > 4096) return json({ ok: false, error: "no-token" }, 400);
+    const dir = directoryFromEnv(env);
+    if (!dir) return json({ ok: false, error: "store-unavailable" }, 501);
+    const tid = await tokenId(token);
+    let out;
+    try { out = await dir.release(body.orgId, who.ids, tid); }
+    catch (e) { return json({ ok: false, error: "unbind_failed" }, 502); }
+    await ORG.auditLogin(env, body.orgId, who.ids[0], "push:device_unbound", "device " + tid.slice(0, 8));
+    return json({ ok: true, orgId: String(body.orgId), removed: out.removed });
   }
   /* The notice behind a thin push. Anyone it was not addressed to, in any hospital, gets 404 whatever
    * the reason, so an nid confirms nothing (design 3.4). */

@@ -2208,7 +2208,7 @@ window.openExternal = function (u) {
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
 <script src="/icd.js?v=hardlocal3" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold482-edgeback-gestnav1" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -2235,7 +2235,7 @@ window.openExternal = function (u) {
      returned untouched.
 
      It does NOT read or enable smd_wardsynq_cutover. That is a separate flag and remains off. -->
-<script src="/wardsynq-flags.js?v=wsq1" defer></script>
+<script src="/wardsynq-flags.js?v=wsqp1" defer></script>
 <script type="module" src="/wardsynq-shadow-boot.js?v=wsq1"></script>
 <!-- WardSynQ Clinical Record: the doctor's phone opening the SAME record the hospital PC charts
      into. Inert unless a tenant is named (?wardsynq_record=<tenantId>, remembered in localStorage;
@@ -2258,19 +2258,19 @@ window.openExternal = function (u) {
      in-process without a reload. -->
 <script type="module" src="/wardsynq-ghis-live-boot.js?v=wsq1"></script>
 
-<!-- The acknowledgement screen for a deterioration escalation (HAZ-DET-01).
-
-     Deliberately NOT behind a flag. It is inert until a push of type "wardsynq-alert" arrives, and
-     gating it off would mean an escalation that reaches a handset and cannot be answered on it,
-     which is a worse failure than the screen existing unused. -->
-<script src="/wardsynq-alert-ui.js?v=wsq1" defer></script>
+<!-- hospital-auth.js: which credential a hospital request carries (the workplace decides, S3 ID-01).
+     Before ward.js, the alert screen and native-push.js, which all read window.SMD_HOSPITAL_AUTH.
+     wardsynq-alert-ui.js: the screen a WardSynQ critical-result push opens (S3 P1). Inert unless
+     smd_wsq_push is on; it fetches the detail only after app lock, for the hospital worked in. -->
+<script src="/hospital-auth.js?v=wsqp1" defer></script>
+<script src="/wardsynq-alert-ui.js?v=wsqp1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
 <script src="/icu-collab.js?v=gold455" defer></script><script src="/referrals.js?v=ref1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold364-thread-ref1" defer></script>
+<script src="/native-push.js?v=gold364-thread-ref1-wsqp1" defer></script>
 <script src="/watch-lab.js?v=gold363-ref1" defer></script>
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on
@@ -2485,7 +2485,7 @@ window.openExternal = function (u) {
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
 <script src="/patient-register.js?v=preg1" defer></script>
-<script src="/queue.js?v=fdesk1-token" defer></script>
+<script src="/queue.js?v=fdesk1-token-wsqp1" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
      discharge - the whole golden path, through the same server-authoritative routes as before.
@@ -2495,7 +2495,7 @@ window.openExternal = function (u) {
 <!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
 <script src="/wardsynq/site/i18n.js?v=5" defer></script>
 <script src="/wardsynq/site/portal.js?v=6" defer></script>
-<script src="/ward.js?v=ward30-alerts" defer></script>
+<script src="/ward.js?v=ward30-alerts-wsqp1" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->

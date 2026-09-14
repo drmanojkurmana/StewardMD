@@ -5899,3 +5899,29 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
 - **A5**: `ABHA_DESK_ROLES` in `_queue_roles.js` (reception, cashier and billing create and verify). Not enforced
   until the ABHA desk phase moves M1 off Connect membership.
 - **Fidelius**: the branch's HKDF over the Weierstrass x is the only copy (the product never changed it).
+
+## 2026-09-14 S3 P1: the phone opens critical-result alerts; the workplace decides the credential
+- **Credential rule** (`hospital-auth.js`, design 2.3, parity ID-01/EMR-05): a staff token is sent only
+  for the hospital it names (its first segment is base64url `orgId~identity.exp`, read to choose, never
+  to grant). A token for another hospital is never sent; the account bearer is. A token that names no
+  hospital (local and harness sessions) is sent as before. Staff token and bearer are never sent
+  together, because the push routes prefer the bearer. ward.js uses it; pages without the file keep the
+  old rule, and a test pins that index.html and wardsynq/site/index.html load it before ward.js.
+- **ward.js open()**: the remembered workplace now wins over the last hospital the overlay showed, so a
+  switch cannot leave the ward on the previous hospital.
+- **Alert screen** (`wardsynq-alert-ui.js`, flag `smd_wsq_push`, default off): renders nothing from the
+  push (only nid and kind are kept); no request under app lock; detail fetched with the current
+  workplace's credential; a notice whose `orgId` is not that workplace is dropped unshown and the screen
+  asks to switch. Acknowledge is success only on `written === 1`. "I have informed the doctor"
+  (receipt `informed`) is offered only after the acknowledgement is refused for the role. The v1 client
+  path (self-push receipts that reported success on any HTTP answer) was removed.
+- **Binding**: bound on choosing a WardSynQ hospital (OPD chooser, alert screen switch) and on a staff
+  front-desk sign-in; re-bound when the device token changes (per-org token tail in
+  `smd_wsq_push_orgs`, so a launch with an unchanged token sends nothing).
+- **New server route `POST /api/push/unregister-member`** (the one server change in P1): removes THIS
+  device from the caller's bindings at one hospital, audited `push:device_unbound`. Without it a staff
+  sign-out on a phone had no way to stop that phone being counted as reached. Called before the token
+  is cleared.
+- **Known ceiling**: with an account credential in a different workplace, the server releases the
+  notice detail (and writes its read-log row) before the client sees `orgId` and refuses to show it.
+  Upgrade: the notice route takes the workplace `orgId` and 404s a mismatch before reading.
