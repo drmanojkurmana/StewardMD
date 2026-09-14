@@ -1,12 +1,12 @@
 /* PUSH-09: a hospital staff member who signs in with a PIN can bind a phone to their hospital identity,
  * and every credential change or removal unbinds it, audited. Routes: POST /api/push/register-member,
- * POST /api/queue/member/reset, /api/queue/member/pin, /api/queue/member/disable, /api/queue/mfa/signout-all.
+ * POST /api/push/unregister-member, POST /api/queue/member/reset, /api/queue/member/pin, /api/queue/member/disable, /api/queue/mfa/signout-all.
  *
  * node --test --experimental-test-module-mocks test/push-member-binding.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { KV, docs, seedHospital, as, pushAs, staffToken, idFor, ORG, ADMIN, DOCTOR, NURSE } from "./_wardsynq-alert-harness.mjs";
+import { KV, docs, seedHospital, as, pushAs, staffToken, idFor, ORG, OTHER_ORG, ADMIN, DOCTOR, NURSE, LAB, OTHER_DOCTOR } from "./_wardsynq-alert-harness.mjs";
 
 const key = (identity) => "push:who:" + ORG + "~" + identity;
 const bindStaff = async (identity, token) => pushAs(null, "/register-member", "POST", { orgId: ORG, token, platform: "android" }, { "X-Staff-Token": await staffToken(ORG, identity, Date.now() - 1000) });
@@ -61,4 +61,30 @@ test("a StewardMD account is bound under its membership identity; another member
   assert.ok(await KV.current.get(key(idFor(DOCTOR))));
   const restore = await as(ADMIN, "/member/restore", "POST", { orgId: ORG, identity: "nurse1" });
   assert.equal(restore.__status, 200);
+});
+
+/* S3 P1: POST /api/push/unregister-member, the phone's own sign-out. */
+test("POST /api/push/unregister-member: this device only leaves the caller's binding, audited; no session 401, wrong role and other hospital 403 and nothing removed", async () => {
+  seedHospital({ alerts: { push: { enabled: true } } });
+  await bindStaff("nurse1", "x".repeat(64));
+  await bindStaff("nurse1", "y".repeat(64));
+  await pushAs(DOCTOR, "/register-member", "POST", { orgId: ORG, token: "x".repeat(64), platform: "ios" });
+  const devices = async (identity) => JSON.parse(await KV.current.get(key(identity))).tokenIds;
+  assert.equal((await devices("nurse1")).length, 2);
+  const before = JSON.stringify([...KV.current.m]);
+
+  const body = { orgId: ORG, token: "x".repeat(64) };
+  assert.equal((await pushAs(null, "/unregister-member", "POST", body)).__status, 401, "no session");
+  assert.equal((await pushAs(LAB, "/unregister-member", "POST", body)).__status, 403, "a role that cannot read the chart");
+  assert.equal((await pushAs(OTHER_DOCTOR, "/unregister-member", "POST", body)).__status, 403, "not a member of this hospital");
+  assert.equal((await pushAs(null, "/unregister-member", "POST", body, { "X-Staff-Token": await staffToken(OTHER_ORG, "nurse9") })).__status, 403, "a staff session for another hospital");
+  assert.equal(JSON.stringify([...KV.current.m]), before, "every refusal removed nothing");
+  assert.equal(audits("push:device_unbound").length, 0);
+
+  const r = await pushAs(null, "/unregister-member", "POST", body, { "X-Staff-Token": await staffToken(ORG, "nurse1", Date.now() - 1000) });
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.removed, 1);
+  assert.equal((await devices("nurse1")).length, 1, "the nurse's other phone still gets alerts");
+  assert.equal((await devices(idFor(DOCTOR))).length, 1, "another person on the same handset is untouched");
+  assert.equal(audits("push:device_unbound").length, 1);
 });
