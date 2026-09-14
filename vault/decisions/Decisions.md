@@ -5519,3 +5519,20 @@ Admin Center tab "Integrations" (Webhooks card). Test: `test/wardsynq-webhooks.t
 - OUTBOX FIX FOUND ON THE WAY: `latestByType` returns the OLDEST rows, so drainOutbox never saw a new event
   once 200 settled ones existed. Webhook volume would hit that in a day. `latestByType(..., { newest: true })`
   now serves drain and health. Still a scan with a ceiling; a status index is the upgrade.
+
+## 2026-09-14 Ward keyboard layer and tablet round (P2.16): shortcuts navigate, they never write
+
+- ONE DECLARATIVE MAP (`SHORTCUTS` in ward.js). Each entry focuses a field, shows the sheet, or sends an
+  existing navigation verb through `dispatch()`, the same path a click takes. No write verb is bound, ever:
+  a stray key at a bedside must not verify, give, acknowledge or sign. `test/ward-keyboard.test.mjs` runs
+  every entry on the list and on a chart and fails on any non-GET request.
+- NEVER WHILE TYPING. Inputs, textareas, selects and contenteditable swallow every shortcut; Escape there
+  only leaves the field. A shortcut that would repaint is refused while the screen holds unsaved typing,
+  because `paint()` replaces the overlay and discards uncontrolled values.
+- THE KEYBOARD YIELDS to the forced acknowledgement screen (`#wsq-alert`), the discharge summary and any
+  sheet that holds focus outside `#smdWard`.
+- FOCUS IS NOT RESTORED to the pressed button after a repaint. Considered and rejected: a second Enter would
+  repeat a write, and a reloaded round can put a different dose at the same index.
+- TABLET (768 to 1180 px) IS CSS plus two wrapper divs in the round: 44 px targets, a sticky header carrying
+  "next due", two panes in landscape. The next-due line is picked from the server's due times and the
+  display-only NEXT table; it names nothing for an empty round and no dose at all when any dose was unreadable.

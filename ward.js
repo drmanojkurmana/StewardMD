@@ -66,7 +66,7 @@
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
-  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
+  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '" aria-hidden="true">' + name + "</span>"; }
   function val(id) { var el = document.getElementById(id); return el ? String(el.value || "").trim() : ""; }
   function checked(id) { var el = document.getElementById(id); return !!(el && el.checked); }
 
@@ -177,10 +177,10 @@
       return emBanner + '<div class="w-refusal">' + ms("gpp_maybe") + "<div><h4>Refused" + (state.refusal.action ? " on " + esc(state.refusal.action) : "") + "</h4>" +
         (rs ? "<ul>" + rs + "</ul>" : "") +
         (state.refusal.detail ? "<p>" + esc(state.refusal.detail) + "</p>" : "") +
-        '</div><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+        '</div><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     }
-    if (state.err) return emBanner + '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
-    if (state.note) return emBanner + '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss">' + ms("close") + "</button></div>";
+    if (state.err) return emBanner + '<div class="w-err">' + ms("error") + "<p>" + esc(state.err) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
+    if (state.note) return emBanner + '<div class="w-ok">' + ms("check_circle") + "<p>" + esc(state.note) + '</p><button class="w-x" data-w-act="dismiss" aria-label="Dismiss">' + ms("close") + "</button></div>";
     return emBanner;
   }
 
@@ -429,7 +429,7 @@
         '<button class="w-btn" data-w-act="admitnew">' + ms("person_add") + "Register &amp; admit</button></div>" +
       "</div>";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<div><b>Bed board</b></div>' +
       '<button class="w-ic" data-w-act="board" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-card">' +
@@ -478,7 +478,7 @@
       '<button class="w-btn warn" data-w-act="edarriveunknown">' + ms("person_add") + "Arrive as unidentified</button></div>" +
       "</div>";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Emergency department</b></div>" +
       '<button class="w-btn tiny go" data-w-act="edarrivalopen">' + ms("add_circle") + "Arrival</button>" +
       '<button class="w-ic" data-w-act="edboard" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -537,7 +537,7 @@
         '<button class="w-btn tiny go" data-w-act="surgerybook">' + ms("check") + "Book case</button>" : "") +
       "</div>";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Surgery / OT / PACU</b></div>" +
       '<button class="w-btn tiny go" data-w-act="surgerybookopen">' + ms("add_circle") + "Book</button>" +
       '<button class="w-ic" data-w-act="surgeryboard" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -582,9 +582,9 @@
   }
   function surgeryCaseView(state) {
     var d = state.surgCase; var c = d && d.case;
-    if (!c) return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><div><b>Case</b></div></div><div class=\"w-card\"><p class=\"w-empty\">Loading&hellip;</p></div>";
+    if (!c) return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><div><b>Case</b></div></div><div class=\"w-card\"><p class=\"w-empty\">Loading&hellip;</p></div>";
 
-    var header = '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    var header = '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(STAGE_WORDS[c.stage] || c.stage) + "</small></div>" +
       '<button class="w-ic" data-w-act="surgeryload" title="Refresh">' + ms("refresh") + "</button></div>" +
       /* ABANDONING A CASE. A case that is not going ahead - the patient deteriorated, the list overran,
@@ -1249,7 +1249,7 @@
     if (d.loading) return '<div class="w-card"><p class="w-hint">' + ms("info") + "Opening the record…</p></div>";
     if (!d.ok) {
       return '<div class="w-card"><div class="w-card-h">' + ms("error") + "<h3>The record could not be opened</h3>" +
-        '<button class="w-ic" data-w-act="timelinedetailclose">' + ms("close") + "</button></div>" +
+        '<button class="w-ic" data-w-act="timelinedetailclose" aria-label="Close">' + ms("close") + "</button></div>" +
         '<p class="w-hint warn">' + esc(d.detail || d.error || "Not available.") + "</p></div>";
     }
     var versions = (d.versions || []).slice().reverse().map(function (v) {
@@ -1413,7 +1413,7 @@
     var shown = timelineFiltered(state);
     var openIds = state.timelineOpen || {};
     var rows = groupTimelineEvents(shown).map(function (e) { return timelineRow(e, !!openIds[e.id]); }).join("");
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
         (s.mrn ? esc(s.mrn) + " &middot; " : "") + "clinical history</small></div>" +
       '<button class="w-ic" data-w-act="timelineload" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -1565,10 +1565,22 @@
       return "<li><b>" + esc(u.drug) + "</b> <span>" + (u.frequency ? '"' + esc(u.frequency) + '"' : "no frequency written") + "</span></li>";
     }).join("");
 
-    return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>Medication round</h3>" +
+    /* P2.16: the next dose to act on, kept in view on a tablet round. Picked from the server's own due
+     * times and the display-only NEXT table above; it claims nothing when the round is empty (loading
+     * and empty look the same here) and names no dose at all when any dose could not be read. */
+    var nextDose = null, unread = false;
+    (state.due || []).forEach(function (d) {
+      if (d.readFailed) unread = true;
+      else if (nextFor(d.status).length && (!nextDose || Date.parse(d.dueAt) < Date.parse(nextDose.dueAt))) nextDose = d;
+    });
+    var nextLine = unread ? '<span class="w-next warn">Next due not known: a dose could not be read. Reload before acting.</span>'
+      : nextDose ? '<span class="w-next' + (nextDose.overdue ? " warn" : "") + '">Next due: <b>' + esc(nextDose.drug) + "</b> " + dose(nextDose.dose) + " &middot; " + when(nextDose.dueAt) +
+        (nextDose.overdue ? " &middot; overdue" : "") + (nextDose.status ? " &middot; " + esc(String(nextDose.status).toLowerCase()) : "") + "</span>" : "";
+    return '<div class="w-card w-mar"><div class="w-card-h">' + ms("pill") + "<h3>Medication round</h3>" + nextLine +
       '<button class="w-ic" data-w-act="round" title="Reload the round">' + ms("refresh") + "</button></div>" +
-      '<div class="w-filter"><input id="wFrom" type="datetime-local" value="' + esc(state.from) + '">' +
-      '<input id="wTo" type="datetime-local" value="' + esc(state.to) + '">' +
+      '<div class="w-mar-body"><div class="w-mar-ctl">' +
+      '<div class="w-filter"><input id="wFrom" type="datetime-local" aria-label="Round window from" value="' + esc(state.from) + '">' +
+      '<input id="wTo" type="datetime-local" aria-label="Round window to" value="' + esc(state.to) + '">' +
       '<button class="w-btn ghost" data-w-act="round">Load</button></div>' +
       '<div class="w-scan"><label class="w-f"><span>Wristband scan</span><input id="wScanP" type="text" autocomplete="off" placeholder="Patient barcode"></label>' +
       '<label class="w-f"><span>Drug scan</span><input id="wScanD" type="text" autocomplete="off" placeholder="Drug barcode"></label>' +
@@ -1578,13 +1590,14 @@
        * high-alert dose could not be given from this screen at all. The field is always shown, never
        * shown only for drugs the browser thinks are high-alert: that would be a second copy of the
        * formulary living in the UI. */
-      '<label class="w-f"><span>Second nurse <i>high-alert drugs only</i></span><input id="wWitness" type="text" autocomplete="off" placeholder="Witness ID"></label></div>' +
+      '<label class="w-f"><span>Second nurse <i>high-alert drugs only</i></span><input id="wWitness" type="text" autocomplete="off" placeholder="Witness ID"></label></div></div>' +
+      '<div class="w-mar-doses">' +
       (state.roundWarning ? '<p class="w-hint warn">' + ms("error") + esc(state.roundWarning) + "</p>" : "") +
       (rows ? '<ul class="w-doses">' + rows + "</ul>" : state.roundWarning && !(state.due || []).length ? "" : '<p class="w-empty">No doses fall in this window.</p>') +
       (prn ? '<div class="w-sub"><h4>' + ms("touch_app") + 'As needed (PRN)</h4><p class="w-hint">Given on the patient’s need. These are never due at a time.</p><ul class="w-mini">' + prn + "</ul></div>" : "") +
       (unsched ? '<div class="w-sub warn"><h4>' + ms("help") + 'Not on the round</h4><p class="w-hint">The frequency on these orders could not be read, so no dose times were computed. They need a look.</p><ul class="w-mini">' + unsched + "</ul></div>" : "") +
       (state.truncated ? '<p class="w-hint">' + ms("warning") + "More doses fall in this window than can be listed. Narrow it.</p>" : "") +
-      "</div>";
+      "</div></div></div>";
   }
 
   /* PRESCRIBING. Writes ONE thing: a MedicationOrder, through the same door the round already reads
@@ -1684,12 +1697,12 @@
     var edDemog = s.gender ? (" &middot; <b>" + esc(s.gender).toUpperCase() + (s.ageYears ? ", " + esc(s.ageYears) + "y" : "") + "</b>")
       : "";
     var header = isEd
-      ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" + edDemog +
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
         '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this visit and whether each was met">' + ms("flag") + "Care plan</button>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"
-      : '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      : '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
         "<div><b>" + esc(s.name || s.patientId || "") + "</b><small>" + (s.name && s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
         '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
@@ -1903,7 +1916,7 @@
       : "";
 
     return '<div class="w-dt">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
       '<button class="w-btn ghost" data-w-act="pcopyGive" title="Record that you gave this to the patient">' + ms("how_to_reg") + "Record handover</button>" +
       '<button class="w-btn ghost" data-w-act="pcopy">' + ms("refresh") + "Refresh</button></div>" +
@@ -1966,7 +1979,7 @@
         "</li>";
     }).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Consent</h3></div>" +
       (c.refused ? '<p class="w-warn">' + c.refused + " refused</p>" : "") +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No consent has been recorded for this patient.</p>') +
@@ -1996,7 +2009,7 @@
         "</div></li>";
     }).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Chart check</h3><button class=\"w-btn ghost\" data-w-act=\"completionopen\">" + ms("refresh") + "Refresh</button></div>" +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">Nothing outstanding, against what this hospital has configured to check.</p>') +
       "</div>";
@@ -2026,7 +2039,7 @@
         "</li>";
     }).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Release of information</h3><button class=\"w-btn ghost\" data-w-act=\"roiopen\">" + ms("refresh") + "Refresh</button></div>" +
       (r.shareExternalConsent ? '<p class="w-dt-times">Share-external consent: ' + esc(r.shareExternalConsent.status) + "</p>" : "") +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No release request has ever been made for this patient.</p>') +
@@ -2057,7 +2070,7 @@
     if (!state.tpa) return '<div class="w-card"><h3>TPA / Claims</h3><p class="w-empty">Loading claims&hellip;</p></div>';
     var t = state.tpa;
     if (t.failed) {
-      return '<div class="w-card"><div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      return '<div class="w-card"><div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
         "<h3>TPA / Claims</h3><button class=\"w-btn ghost\" data-w-act=\"tpaopen\">" + ms("refresh") + "Retry</button></div>" +
         '<p class="w-hint warn">' + ms("warning") + "Claims could not be read. This is not the same as this patient having none.</p></div>";
     }
@@ -2115,7 +2128,7 @@
         '<div class="w-dt-times">' + esc(e.note || "") + "</div></div></li>";
     }).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>TPA / Claims</h3><button class=\"w-btn ghost\" data-w-act=\"tpaopen\">" + ms("refresh") + "Refresh</button></div>" +
       '<div class="w-sub"><h4>Claims</h4>' +
       (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : '<p class="w-empty">No claim has been coded for this patient.</p>') +
@@ -2162,7 +2175,7 @@
         (c.approvedAmount != null ? " &middot; approved " + esc(c.approvedAmount) : "") + "</div></li>";
     }).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Billing</h3><button class=\"w-btn ghost\" data-w-act=\"billingopen\">" + ms("refresh") + "Refresh</button></div>" +
       (b.outstandingBalance != null ? '<p class="w-dt-times">Outstanding: ' + esc(b.outstandingBalance) + "</p>" : "") +
       '<div class="w-sub"><h4>Invoices</h4>' + (!state.billing ? '<p class="w-empty">Loading...</p>' : b.invoices === null ? '<p class="w-hint warn">' + ms("error") + "Invoices could not be loaded. Do not read this as none.</p>"
@@ -2605,7 +2618,7 @@
     /* A part of this history that could not be read is said above everything, never shown as empty. */
     var partialWarn = state.oncology && state.oncology.warning
       ? '<p class="w-hint warn">' + ms("warning") + esc(state.oncology.warning) + "</p>" : "";
-    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Oncology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="oncologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -2679,7 +2692,7 @@
     /* A part of this history that could not be read is said above everything, never shown as empty. */
     var partialWarn = state.cardiology && state.cardiology.warning
       ? '<p class="w-hint warn">' + ms("warning") + esc(state.cardiology.warning) + "</p>" : "";
-    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return partialWarn + '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Cardiology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="cardiologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -2793,7 +2806,7 @@
         }).join("") + "</ul>"
       : "";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Radiology</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="radiologyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -2929,7 +2942,7 @@
         "</li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Pharmacy</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="pharmacyload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -3015,7 +3028,7 @@
         (r.expired ? '<span class="w-st overdue">expired</span>' : esc(r.daysRemaining) + " days left") + "</span></li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Inventory</b></div>" +
       '<button class="w-ic" data-w-act="inventoryload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -3145,7 +3158,7 @@
         "</li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Integration</b><small>what is coming in, what is going out, and what is stuck</small></div>" +
       '<button class="w-ic" data-w-act="intload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -3450,7 +3463,7 @@
   }
   function labBoardView(state) {
     if (!state.labBoard) {
-      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><div><b>Laboratory</b><small>hospital-wide</small></div></div>" +
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><div><b>Laboratory</b><small>hospital-wide</small></div></div>" +
         '<p class="w-empty">Loading the laboratory board...</p>';
     }
     var b = state.labBoard;
@@ -3500,7 +3513,7 @@
     var showPath = dept === "all" || dept === "path";
     var showMicro = dept === "all" || dept === "micro";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Laboratory</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="labboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
       deptTabs +
@@ -3685,7 +3698,7 @@
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
     }).join("");
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Critical results</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="critsboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>Open loops" + (Array.isArray(state.critsBoard) ? " &middot; " + loops.length : "") + "</h3></div>" +
@@ -3917,7 +3930,7 @@
       "</li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Radiology</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="radboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -3971,7 +3984,7 @@
       return '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>" + esc(w.name) + (w.active === false ? " (retired)" : "") + "</h3></div>" +
         (bedRows ? '<ul class="w-mini">' + bedRows + "</ul>" : '<p class="w-empty">No beds recorded for this ward.</p>') + "</div>";
     }).join("");
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Bed management</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="bedmgmtload" title="Refresh">' + ms("refresh") + "</button></div>" +
       (bm.conflict ? '<p class="w-hint warn">' + ms("warning") + "This bed changed under you. Reloaded - check the state before applying again." + "</p>" : "") +
@@ -3987,7 +4000,7 @@
   function flowCommandView(state) {
     var f = (state.flow && state.flow.flow) || null;
     if (!f) {
-      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
         "<div><b>Patient flow</b><small>hospital-wide</small></div>" +
         '<button class="w-ic" data-w-act="flowload" title="Refresh">' + ms("refresh") + "</button></div>" +
         (state.flow && state.flow.err ? '<p class="w-hint warn">' + ms("error") + "Patient flow could not be loaded: " + esc(state.flow.err) + ". Do not read this as an empty hospital.</p>"
@@ -4007,7 +4020,7 @@
       return "<li>" + esc((t.movedFrom && t.movedFrom.ward) || "?") + " &rarr; " + esc(t.ward || "?") + '<span>' + when(t.movedAt) + (t.moveReason ? " &middot; " + esc(t.moveReason) : "") + "</span>" +
         (t.encounterId ? '<button class="w-btn ghost tiny" data-w-act="cmdopen:' + esc(t.encounterId) + '">Open chart</button>' : "") + "</li>";
     }).join("");
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Patient flow</b><small>hospital-wide &middot; " + when(f.computedAt) + "</small></div>" +
       '<button class="w-ic" data-w-act="flowload" title="Refresh">' + ms("refresh") + "</button></div>" +
       (state.flow.drill ? drillListHtml("Behind the count: " + state.flow.drill, fd[state.flow.drill], /^ed/.test(state.flow.drill) ? "edboard" : "bedmgmt", "flowdrillclose") : "") +
@@ -4091,7 +4104,7 @@
     var tw = state.twin || {};
     var t = tw.snapshot;
     if (!t) {
-      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
         "<div><b>Digital twin</b><small>hospital-wide</small></div>" +
         '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
         '<div class="w-actions"><button class="w-btn ghost" data-w-act="trends">' + ms("query_stats") + "Trends</button></div>" +
@@ -4118,7 +4131,7 @@
       var d = s.flow && s.flow.data && s.flow.data.flow && s.flow.data.flow.drill && s.flow.data.flow.drill[key];
       return drillCount(n, label, d, "twindrill:flow." + key);
     };
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Digital twin</b><small>" + esc(t.sectionsOk) + "/" + esc(t.sectionsTotal) + " sections &middot; " + when(t.generatedAt) + "</small></div>" +
       '<button class="w-ic" data-w-act="twinload" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-actions"><button class="w-btn ghost" data-w-act="trends" title="These measures over days, weeks or months, by ward">' + ms("query_stats") + "Trends</button></div>" +
@@ -4289,7 +4302,7 @@
         '<button class="w-btn tiny ghost" data-w-act="blackoutcancel:' + esc(b.blackoutId) + '">' + ms("close") + "Unblock</button></li>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Scheduling</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="schedload" title="Refresh">' + ms("refresh") + "</button></div>" +
       (sc.err ? '<p class="w-hint warn">' + ms("warning") + esc(sc.err) + "</p>" : "") +
@@ -4396,7 +4409,7 @@
           "</div>" : "") + "</div>";
     }).join("");
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Cashier</b><small>financial collection only - no clinical detail</small></div>" +
       '<button class="w-ic" data-w-act="cashload" title="Refresh">' + ms("refresh") + "</button></div>" +
       (c.err ? '<p class="w-hint warn">' + ms("warning") + esc(c.err) + "</p>" : "") +
@@ -4501,7 +4514,7 @@
       return "<li><b>" + esc(l.event) + "</b><span>" + (l.actorId ? esc(l.actorId) + " &middot; " : "") + when(l.at) + (l.detail ? " &middot; " + esc(l.detail) : "") + "</span></li>";
     }).join("") : "";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Blood bank</b><small>" + esc((state.sel && state.sel.patientId) || "") + "</small></div>" +
       '<button class="w-ic" data-w-act="txload" title="Refresh">' + ms("refresh") + "</button></div>" +
 
@@ -4754,7 +4767,7 @@
       return [t.id, t.name || t.id];
     })));
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Consultation</h3></div>" +
       '<p class="w-hint">' + ms("info") + "Fill in only what you did. Empty sections are not saved. Everything here is saved together, in one go." + "</p>" +
 
@@ -4848,7 +4861,7 @@
   function approvalsView(state) {
     var rows = (state.approvals || []).map(approvalRow).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Approvals</h3><button class=\"w-btn ghost\" data-w-act=\"approvals\">" + ms("refresh") + "Refresh</button></div>" +
       '<div class="w-sub"><h4>Ask for an approval</h4>' +
       '<select id="wApSubjType">' +
@@ -4907,7 +4920,7 @@
   function purchasingView(state) {
     var rows = (state.purchaseOrders || []).map(poRow).join("");
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Purchasing</h3><button class=\"w-btn ghost\" data-w-act=\"purchasing\">" + ms("refresh") + "Refresh</button></div>" +
       '<div class="w-sub"><h4>Raise an order</h4>' +
       '<input id="wPoVendor" placeholder="Supplier">' +
@@ -4975,7 +4988,7 @@
         '<div class="w-dt-times">by ' + esc(d.deceasedCorrected.by) + " &middot; " + when(d.deceasedCorrected.at) + "</div></div>";
     }
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Contacts and status</h3>" +
       '<button class="w-ic" data-w-act="people" title="Refresh">' + ms("refresh") + "</button></div>" +
       deceased +
@@ -5072,7 +5085,7 @@
       ? '<div class="w-card w-dead"><h4>' + ms("warning") + "This patient is recorded as deceased</h4><p>Died " + when(people.deceased.at) + "</p></div>"
       : "";
 
-    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>" + esc(s.name || s.patientId || "Patient") + "</b><small>" +
         (s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") +
         " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
@@ -5142,7 +5155,7 @@
     var rows = d && d.items ? d.items.map(inboxRow).join("") : "";
     var cur = state.inboxRole || "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Safety inbox</h3>" +
       '<button class="w-ic" data-w-act="safetyinbox" title="Refresh">' + ms("refresh") + "</button></div>" +
       /* The incompleteness warning comes FIRST and is not a footnote. */
@@ -5213,7 +5226,7 @@
     var rows = d && d.handovers ? d.handovers.map(function (h) { return handoverRow(h, state); }).join("") : "";
     var s = state.sel;
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Shift handover</h3>" +
       '<button class="w-ic" data-w-act="handovers" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-tl-filters">' +
@@ -5282,7 +5295,7 @@
     }).join("") : "";
 
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Medicines on arrival</h3>" +
       '<button class="w-ic" data-w-act="medrec" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-sub"><h4>Record what this patient was taking</h4>' +
@@ -5334,7 +5347,7 @@
     var d = state.wounds;
     var rows = d && d.wounds ? d.wounds.map(woundRow).join("") : "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Wounds</h3><button class=\"w-ic\" data-w-act=\"wounds\" title=\"Refresh\">" + ms("refresh") + "</button></div>" +
       (d && d.acquiredHere
         ? '<p class="w-hint warn">' + ms("warning") + esc(d.acquiredHere) + " wound" + (d.acquiredHere === 1 ? "" : "s") + " developed here.</p>"
@@ -5388,7 +5401,7 @@
     var rows = d && d.assessments ? d.assessments.map(riskRow).join("") : "";
     var toolList = tools && tools.tools ? tools.tools : [];
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Risk assessments</h3><button class=\"w-ic\" data-w-act=\"risks\" title=\"Refresh\">" + ms("refresh") + "</button></div>" +
       (tools && !toolList.length
         ? '<p class="w-hint">' + ms("info") + "This hospital has configured no risk tools, so none can be carried out here."
@@ -5456,7 +5469,7 @@
     var s = state.sel;
     var rows = d && d.grants ? d.grants.map(breakGlassRow).join("") : "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Emergency access</h3>" +
       '<button class="w-ic" data-w-act="breakglass" title="Refresh">' + ms("refresh") + "</button></div>" +
       (s
@@ -5531,7 +5544,7 @@
         "</div>";
     }
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Order sets</h3></div>" +
       (d && !sets.length ? '<p class="w-hint">' + ms("info") + "This hospital has not set up any order sets.</p>" : "") +
       (d == null ? '<p class="w-empty">Loading.</p>' : chooser) +
@@ -5553,7 +5566,7 @@
     var s = state.sel;
     if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
     var d = state.pathwaysData;
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Clinical pathways - " + esc(s.name || s.patientId) + "</h3>" +
       '<button class="w-ic" data-w-act="pathways" title="Refresh">' + ms("refresh") + "</button></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading clinical pathways...</p></div>";
@@ -5597,7 +5610,7 @@
     var s = state.sel;
     if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
     var d = state.specialtyData;
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Specialty framework - " + esc(s.name || s.patientId) + "</h3>" +
       '<button class="w-ic" data-w-act="specialty" title="Refresh">' + ms("refresh") + "</button></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading specialty profile...</p></div>";
@@ -5651,7 +5664,7 @@
     var d = state.admReqs;
     var rows = d && d.requests ? d.requests.map(admReqRow).join("") : "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Waiting for a bed</h3>" +
       '<button class="w-ic" data-w-act="admreqs" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-sub"><h4>Ask for a bed</h4>' +
@@ -5700,7 +5713,7 @@
     var d = state.infusions;
     var rows = d && d.infusions ? d.infusions.map(infusionRow).join("") : "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Drips and care plan</h3>" +
       '<button class="w-ic" data-w-act="infusions" title="Refresh">' + ms("refresh") + "</button></div>" +
       (d && d.stale ? '<p class="w-hint warn">' + ms("warning") + esc(d.stale) + " running infusion" + (d.stale === 1 ? " has" : "s have") + " not been charted for hours. Check the pumps.</p>" : "") +
@@ -5732,7 +5745,7 @@
     var s = state.sel;
     if (!s) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
     var d = state.carePlan;
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Care plan</h3>" +
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>Care plan</h3>" +
       '<button class="w-ic" data-w-act="careplan" title="Refresh">' + ms("refresh") + "</button></div>";
     var body;
     if (d == null) body = '<p class="w-hint">' + ms("hourglass_empty") + "Loading the care plan.</p>";
@@ -5847,7 +5860,7 @@
   var DOC_TYPE_LABEL = { "consent": "Consent", "referral-letter": "Referral letter", "outside-report": "Outside report", "outside-imaging": "Outside imaging", "id-proof": "ID proof", "insurance": "Insurance", "prescription-outside": "Outside prescription", "other": "Other" };
   function documentsView(state) {
     var d = state.docs;
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Documents</h3></div>";
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>Documents</h3></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading this patient's documents...</p></div>";
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load this patient's documents. Do not read this as none on file.</p></div>";
     var rows = (d.documents || []).map(function (x) {
@@ -5913,7 +5926,7 @@
   }
   function referralsView(state) {
     var d = state.referrals, inbox = state.view === "referralinbox";
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>" + (inbox ? "Referral inbox" : "Referrals") + "</h3></div>";
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>" + (inbox ? "Referral inbox" : "Referrals") + "</h3></div>";
     var filter = inbox ? '<div class="w-sub"><div class="w-grid"><label class="w-f"><span>Specialty</span><input id="wRefSpec" value="' + esc(state.refSpecialty || "") + '" placeholder="All specialties"></label>' +
       '<label class="w-f"><span>Show</span><select id="wRefView"><option value="">Referrals to a specialty</option><option value="sent"' + (state.refView === "sent" ? " selected" : "") + ">Referrals I sent</option></select></label></div>" +
       '<button class="w-btn" data-w-act="refinboxload">' + ms("search") + "Show</button></div>" : "";
@@ -5949,7 +5962,7 @@
   }
   function surveillanceView(state) {
     var d = state.surveillance;
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Surveillance</h3>" +
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>Surveillance</h3>" +
       '<button class="w-btn ghost sm" data-w-act="surveillance">' + ms("refresh") + "Refresh</button></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Checking every patient on the ward...</p></div>";
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load surveillance. Do not read this as no signals.</p></div>";
@@ -5993,13 +6006,21 @@
   }
   function nurseWorklistView(state) {
     var d = state.nurseWorklist;
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Nurse worklist</h3>" +
-      '<button class="w-btn ghost sm" data-w-act="nurseworklist">' + ms("refresh") + "Refresh</button></div>";
-    if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading the ward...</p></div>";
-    if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load the worklist. Do not read this as nothing due.</p></div>";
+    var bar = function (next) {
+      return '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>Nurse worklist</h3>" + (next || "") +
+        '<button class="w-btn ghost sm" data-w-act="nurseworklist">' + ms("refresh") + "Refresh</button></div>";
+    };
+    if (d == null) return '<div class="w-card w-nw">' + bar() + '<p class="w-hint">' + ms("hourglass_empty") + "Loading the ward...</p></div>";
+    if (d.failed) return '<div class="w-card w-nw">' + bar() + '<p class="w-hint warn">' + ms("error") + "Could not load the worklist. Do not read this as nothing due.</p></div>";
     var mine = state.nwScope === "mine";
     var toggle = '<div class="w-sub w-noprint"><button class="w-btn ' + (mine ? "" : "ghost ") + 'sm" data-w-act="nwscope:mine">Mine</button> <button class="w-btn ' + (mine ? "ghost " : "") + 'sm" data-w-act="nwscope:ward">Whole ward</button></div>';
     var shown = mine ? d.rows.filter(function (r) { return r.assignment && r.assignment.nurseId && r.assignment.nurseId === d.me; }) : d.rows;
+    /* P2.16: the shift's "next due" line, kept in the sticky bar. The server's own per-row counts, added
+     * up; a row whose counts could not be read is counted as unreadable, never as zero. */
+    var dueOver = 0, dueSoon = 0, dueUnread = 0;
+    shown.forEach(function (r) { if (r.overdue == null || r.dueSoon == null) dueUnread++; else { dueOver += r.overdue; dueSoon += r.dueSoon; } });
+    var head = bar(shown.length ? '<span class="w-next' + (dueOver || dueUnread ? " warn" : "") + '">Next due: ' + esc(dueOver) + " overdue &middot; " + esc(dueSoon) + " in the next 4 hours" +
+      (dueUnread ? " &middot; " + esc(dueUnread) + (dueUnread === 1 ? " patient" : " patients") + " could not be read" : "") + "</span>" : "");
     var rows = shown.map(function (r) {
       var p = r.patient || {}, n = r.news2;
       var score = !n ? "" : !n.scorable ? '<span class="w-st due">Score: not enough observations</span>' : '<span class="w-st ' + (n.risk === "high" ? "escalate" : n.risk === "medium" ? "due" : "done") + '">NEWS ' + esc(n.total) + (n.risk ? " " + esc(n.risk) : "") + "</span>";
@@ -6010,7 +6031,7 @@
         (r.problems.length ? '<div class="w-hint warn">' + ms("error") + esc(r.problems.join("; ")) + "</div>" : "") +
         "</div>" + (p.encounterId ? '<div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="nursingpatient:' + esc(r.patientId) + "~" + esc(p.encounterId) + '">Nursing</button> <button class="w-btn ghost sm" data-w-act="open:' + esc(p.encounterId) + '">Open chart</button></div>' : "") + "</li>";
     }).join("");
-    return '<div class="w-card">' + head + toggle + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+    return '<div class="w-card w-nw">' + head + toggle + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + (mine && d.rows.length ? "No patients on this ward are assigned to you." : "No patients on this ward.") + "</p>") + "</div>";
   }
   /* The nursing columns of a worklist row. A piece the server could not read is null and is never shown as
@@ -6026,7 +6047,7 @@
    * failed and empty are different sentences. */
   function nursingPatientView(state) {
     var np = state.nursingPanel || {}, d = np.data, wl = state.nurseWorklist || {};
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Nursing: " + esc(np.name || np.patientId || "") + "</h3></div>";
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>Nursing: " + esc(np.name || np.patientId || "") + "</h3></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading tasks and observations...</p></div>";
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load this patient's nursing tasks. Do not read this as nothing due.</p></div>";
     var problems = (d.problems || []).length ? '<p class="w-hint warn">' + ms("error") + esc(d.problems.join("; ")) + "</p>" : "";
@@ -6077,7 +6098,7 @@
   }
   function formsView(state) {
     var d = state.formDefs, r = state.formResponses, sel = state.formSel, a = state.formAnswers || {}, errs = (state.formResult && state.formResult.errors) || {};
-    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>Forms</h3></div>";
+    var head = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button><h3>Forms</h3></div>";
     if (d == null) return '<div class="w-card">' + head + '<p class="w-hint">' + ms("hourglass_empty") + "Loading this hospital's forms...</p></div>";
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + "Could not load the hospital's forms.</p></div>";
     var picker = d.published.length ? '<div class="w-sub"><h4>Fill in a form</h4>' + d.published.map(function (f) { return '<button class="w-btn ghost sm" data-w-act="formpick:' + esc(f.key) + '">' + esc(f.title) + " (v" + esc(f.version) + ")</button>"; }).join(" ") + "</div>"
@@ -6100,7 +6121,7 @@
     var subjectId = s ? s.patientId : "";
     var rows = d && d.candidates ? d.candidates.map(function (c) { return mpiCandidateRow(c, subjectId); }).join("") : "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Duplicate records</h3></div>" +
       '<div class="w-sub"><h4>' + (s ? "Look for other records of " + esc(s.name || s.patientId) : "Find a patient who may already have a record") + "</h4>" +
       (s ? "" :
@@ -6162,7 +6183,7 @@
           "<p>Do not give anything to this patient until the mismatch is resolved.</p></div>";
     }
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Wristband</h3>" +
       '<button class="w-ic" data-w-act="tags" title="Refresh">' + ms("refresh") + "</button></div>" +
       verdict +
@@ -6205,7 +6226,7 @@
         "</div></li>";
     }).join("") : "";
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Operations</h3></div>" +
       (d == null ? '<p class="w-empty">Loading.</p>'
         : rows ? '<ul class="w-mini">' + rows + "</ul>"
@@ -6470,7 +6491,7 @@
   function trendsView(state) {
     var t = state.trends || {}, d = t.data;
     var metrics = t.metrics || [{ id: t.metric, title: t.metric }];
-    var head = '<div class="w-chart-h"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+    var head = '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Trends</b><small>hospital-wide, over time</small></div>" +
       '<button class="w-ic" data-w-act="trendsload" title="Refresh">' + ms("refresh") + "</button></div>" +
       '<div class="w-card"><div class="w-filter">' +
@@ -6558,7 +6579,7 @@
         (recRows ? "<ul class=\"w-mini\">" + recRows + "</ul>" : "") + "</div>";
     }
     return '<div class="w-card">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<h3>Emergency mode</h3><button class=\"w-btn ghost\" data-w-act=\"emergencyadmin\">" + ms("refresh") + "Refresh</button></div>" +
       (rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : '<p class="w-empty">No emergency has ever been declared here.</p>') +
       recBlock +
@@ -6612,7 +6633,7 @@
     }).join("");
 
     return '<div class="w-dt">' +
-      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<button class="w-btn" data-w-act="printpack">' + ms("print") + "Print</button>" +
       '<button class="w-btn ghost" data-w-act="downtime">' + ms("refresh") + "Refresh</button></div>" +
       '<header class="w-dt-h"><h2>Downtime pack' + (d.ward ? " &middot; " + esc(d.ward) : "") + "</h2>" +
@@ -6668,13 +6689,14 @@
   }
 
   function _render(state) {
-    return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close">' + ms("close") + "</button>" +
+    return '<div class="w-shell"><header class="w-top"><button class="w-ic" data-w-act="close" aria-label="Close the ward">' + ms("close") + "</button>" +
       '<span class="w-title">WardSynQ &middot; Inpatient</span>' +
       /* A demonstration hospital says so on the chart itself. Demo and real records are separate
        * tenants, but that separation is invisible to somebody reading a screen over a shoulder, and
        * a fabricated patient that reads as a real one is the whole hazard. */
       (state.demo ? '<span class="w-demo" title="Fabricated patients, for demonstration. Nothing here is a real person or a real clinical record.">DEMO</span>' : "") +
-      (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") + "</header>" +
+      (state.busy ? '<span class="w-busy">' + ms("progress_activity") + "</span>" : "<span></span>") +
+      '<button class="w-ic" data-w-act="keys" aria-label="Keyboard shortcuts" aria-keyshortcuts="?">' + ms("keyboard") + "</button></header>" +
       '<div class="w-canvas">' + banner(state) +
       (state.view === "chart" ? chartView(state)
         : state.view === "downtime" ? downtimeView(state)
@@ -6742,7 +6764,11 @@
   function root() { var el = document.getElementById("smdWard"); if (!el) { el = document.createElement("div"); el.id = "smdWard"; document.body.appendChild(el); } return el; }
   function paint() {
     var sy = (typeof window !== "undefined" && window.scrollY != null) ? window.scrollY : 0;
-    root().innerHTML = _render(st);
+    var el = root();
+    el.innerHTML = _render(st);
+    /* Focus is deliberately NOT restored to the pressed button after a repaint: a second Enter would
+     * then repeat a write, and a reloaded round can put a different dose at the same index. */
+    markShortcuts(el);
     if (typeof window !== "undefined" && sy > 0) {
       window.scrollTo(0, sy);
     }
@@ -10485,6 +10511,156 @@
       .catch(function () { st.busy = false; st.err = "Could not reach the eMAR."; paint(); });
   }
 
+  /* P2.16 THE KEYBOARD LAYER. ONE declarative map, and nothing in it writes.
+   *
+   * Every entry moves focus, shows this list, or sends an EXISTING navigation verb through dispatch(),
+   * the same path a click takes. A write (verify, administer, acknowledge, save, sign) is never bound:
+   * at a bedside a stray key must not do what a deliberate press does. test/ward-keyboard.test.mjs
+   * drives every entry and fails on any POST.
+   *
+   * No shortcut fires while typing in a field; Escape there only leaves the field. A key that would
+   * repaint is refused while the screen holds unsaved typing, because a repaint discards it. */
+  var SHORTCUTS = [
+    { keys: "/", label: "Search patients, or filter the ward", focus: ["wQ", "wWard", "wTlQ"] },
+    { keys: "g w", label: "Go to the ward list", go: "list" },
+    { keys: "g c", label: "Go to the critical results board", act: "critsboard" },
+    { keys: "g l", label: "Go to the laboratory board", act: "labboard" },
+    { keys: "n", label: "Notes and timeline", act: "timeline", on: "chart" },
+    { keys: "o", label: "Order sets", act: "ordersets", on: "chart" },
+    { keys: "r", label: "Results and investigations", card: "investigations", on: "chart" },
+    { keys: "v", label: "Vitals and flowsheet", card: "flowsheet", on: "chart" },
+    { keys: "?", label: "Show these shortcuts", sheet: true },
+    { keys: "Escape", label: "Close the open panel, or go back", esc: true }
+  ];
+  /* What Escape closes, innermost first: each panel's own close verb, used only while that close button
+   * is on screen. With none of them open, Escape is Back. */
+  var ESC_CLOSES = ["labresultclose", "cultureclose", "histoclose", "timelinedetailclose", "trendeventsclose", "trendwardclose",
+    "twindrillclose", "flowdrillclose", "edarrivalclose", "surgerybookclose", "unpickbed", "riskcancel", "docnewversioncancel", "mpimergecancel"];
+  function typingIn(t) {
+    var tag = t && t.tagName ? String(t.tagName).toUpperCase() : "";
+    return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || !!(t && t.isContentEditable);
+  }
+  /* Pure: the entry a key press means on this view; {g:true} for the first half of a chord, {blur:true}
+   * for Escape inside a field, null for anything else. */
+  function keyIntent(e, view, gPending) {
+    if (!e || e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return null;
+    if (typingIn(e.target)) return e.key === "Escape" ? { blur: true } : null;
+    if (!gPending && e.key === "g") return { g: true };
+    var combo = gPending ? "g " + e.key : e.key;
+    for (var i = 0; i < SHORTCUTS.length; i++) {
+      if (SHORTCUTS[i].keys === combo && (!SHORTCUTS[i].on || SHORTCUTS[i].on === view)) return SHORTCUTS[i];
+    }
+    return null;
+  }
+  function announce(msg) {
+    var live = document.getElementById("wKeysLive");
+    if (!live) {
+      live = document.createElement("div"); live.id = "wKeysLive";
+      live.setAttribute("role", "status"); live.setAttribute("aria-live", "polite");
+      live.style.cssText = "position:fixed;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;";
+      var r = root(); r.parentNode.insertBefore(live, r);
+    }
+    live.textContent = "";
+    setTimeout(function () { live.textContent = msg; }, 30);
+  }
+  function keySheetHtml() {
+    return '<div class="w-card-h"><h3 id="wKeysTitle">Keyboard shortcuts</h3><button class="w-ic" data-w-act="keysclose" aria-label="Close shortcuts">' + ms("close") + "</button></div>" +
+      "<dl>" + SHORTCUTS.map(function (s) {
+        return "<div><dt>" + s.keys.split(" ").map(function (k) { return "<kbd>" + esc(k === "Escape" ? "Esc" : k) + "</kbd>"; }).join(" then ") + "</dt><dd>" + esc(s.label) + (s.on ? " (on a chart)" : "") + "</dd></div>";
+      }).join("") + "</dl>" +
+      '<p class="w-hint">Shortcuts only move around. Nothing is saved, given or signed from the keyboard, and no shortcut works while you are typing in a field.</p>';
+  }
+  function showKeys() {
+    var sh = document.getElementById("wKeys");
+    if (!sh) {
+      sh = document.createElement("div"); sh.id = "wKeys"; sh.className = "w-keys";
+      sh.setAttribute("role", "dialog"); sh.setAttribute("aria-labelledby", "wKeysTitle");
+      root().appendChild(sh);
+    }
+    sh.innerHTML = keySheetHtml();
+    var b = sh.querySelector && sh.querySelector('[data-w-act="keysclose"]'); if (b) { try { b.focus(); } catch (e) {} }
+    announce("Keyboard shortcuts shown. Escape closes them.");
+  }
+  function hideKeys() { var sh = document.getElementById("wKeys"); if (sh && sh.parentNode) sh.parentNode.removeChild(sh); }
+  /* Typing a repaint would throw away. A search box is excluded: the roster search is live and kept in st. */
+  function unsavedTyping(r) {
+    if (st.view === "consultation" && st.cDraft) { for (var k in st.cDraft) if (st.cDraft[k]) return true; }
+    var els = r.querySelectorAll ? r.querySelectorAll("input, textarea, select") : [];
+    for (var i = 0; i < els.length; i++) {
+      var x = els[i], t = String(x.type || "").toLowerCase();
+      if (t === "search" || x.id === "wQ" || x.id === "wWard") continue;
+      if (t === "checkbox" || t === "radio") { if (x.checked !== x.defaultChecked) return true; continue; }
+      if (String(x.tagName).toUpperCase() === "SELECT") {
+        var di = 0; for (var j = 0; j < x.options.length; j++) if (x.options[j].defaultSelected) di = j;
+        if (x.selectedIndex !== di) return true; continue;
+      }
+      if (x.value !== x.defaultValue) return true;
+    }
+    return false;
+  }
+  function runShortcut(s) {
+    var r = root();
+    if (s.sheet) { showKeys(); return; }
+    if (s.esc && document.getElementById("wKeys")) { hideKeys(); announce("Shortcuts closed."); return; }
+    if (s.focus) {
+      for (var i = 0; i < s.focus.length; i++) {
+        var f = document.getElementById(s.focus[i]);
+        if (f && r.contains(f)) { f.focus(); announce(s.label); return; }
+      }
+      announce("There is no search on this screen."); return;
+    }
+    if (s.card) {
+      var c = r.querySelector('[data-w-act="' + s.card + '"]');
+      if (!c) { announce(s.label + " is not on this screen."); return; }
+      try { c.scrollIntoView({ block: "start" }); c.focus({ preventScroll: true }); } catch (e) {}
+      announce(s.label + ". Focus is on its refresh button."); return;
+    }
+    if (unsavedTyping(r)) { announce("This screen has unsaved entries. Save or clear them first: moving now would discard them."); return; }
+    hideKeys();
+    if (s.esc) {
+      for (var j = 0; j < ESC_CLOSES.length; j++) {
+        if (r.querySelector('[data-w-act="' + ESC_CLOSES[j] + '"]')) { dispatch(ESC_CLOSES[j]); announce("Closed."); return; }
+      }
+      if (st.view !== "list") { dispatch("back"); announce("Back."); }
+      return;
+    }
+    if (s.go === "list") {
+      // ponytail: walks the existing Back verb (at most six hops) rather than a second reset path.
+      for (var hop = 0; st.view !== "list" && hop < 6; hop++) dispatch("back");
+      if (!st.loaded) loadWard();
+      announce(s.label); return;
+    }
+    dispatch(s.act); announce(s.label);
+  }
+  var _gAt = 0;
+  function onKey(e) {
+    var r = document.getElementById("smdWard");
+    if (!r || !r.classList.contains("on")) return;
+    // The forced acknowledgement screen and the sheets opened over the ward own the keyboard.
+    if (document.getElementById("wsq-alert")) return;
+    var dc = document.getElementById("smdDischarge"); if (dc && dc.classList.contains("on")) return;
+    var t = e.target;
+    if (t && t !== document.body && t !== document.documentElement && t !== document && !r.contains(t)) return;
+    var gPending = !!_gAt && Date.now() - _gAt < 1500; _gAt = 0;
+    var s = keyIntent(e, st.view, gPending);
+    if (!s) return;
+    if (s.g) { _gAt = Date.now(); announce("Go to: w ward list, c critical results, l laboratory board."); return; }
+    e.preventDefault();
+    if (s.blur) { try { t.blur(); } catch (x) {} return; }
+    runShortcut(s);
+  }
+  /* The single-key shortcuts are stated on the controls they reach, for screen readers. */
+  function markShortcuts(el) {
+    if (!el.querySelectorAll) return;
+    SHORTCUTS.forEach(function (s) {
+      if (s.keys.length !== 1) return;
+      var sel = s.act || s.card ? '[data-w-act="' + (s.act || s.card) + '"]' : s.focus ? s.focus.map(function (id) { return "#" + id; }).join(",") : "";
+      if (!sel) return;
+      var hit = el.querySelectorAll(sel);
+      for (var i = 0; i < hit.length; i++) hit[i].setAttribute("aria-keyshortcuts", s.keys);
+    });
+  }
+
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-w-act]"); if (!b) return;
     dispatch(b.getAttribute("data-w-act"));
@@ -10494,6 +10670,8 @@
   function dispatch(a) {
     var i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (cmd === "keys") { showKeys(); return; }
+    if (cmd === "keysclose") { hideKeys(); return; }
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
     if (cmd === "reload") { loadWard(); return; }
     if (cmd === "setward") { st.ward = val("wWard"); loadWard(); return; }
@@ -11136,6 +11314,7 @@
     el.removeEventListener("change", onFormChange); el.addEventListener("change", onFormChange);
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
+    document.removeEventListener("keydown", onKey); document.addEventListener("keydown", onKey);
     paint();
     /* A HOSPITAL ACT LOADS ITS OWN SCREEN, NOT THE WARD ROSTER TOO.
      *
@@ -11168,6 +11347,7 @@
    * is cleared here; nothing is kept that names a patient. */
   function close() {
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
+    try { document.removeEventListener("keydown", onKey); } catch (e) {}
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
     st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null;
@@ -11211,5 +11391,5 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
 })();
