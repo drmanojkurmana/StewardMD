@@ -1,0 +1,95 @@
+{
+  "id": "philips-intellivue-low-light-blur-05",
+  "manufacturer": "philips-intellivue",
+  "layout": "right-column-limits-left",
+  "difficulty": [
+    "low-light",
+    "blur"
+  ],
+  "image": "philips-intellivue-low-light-blur-05.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 96
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 93
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 96
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 1
+    },
+    "rr": {
+      "status": "visible",
+      "value": 20
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 122,
+        "dbp": 78,
+        "map": 93
+      }
+    },
+    "st": {
+      "status": "visible",
+      "value": {
+        "I": 0.1,
+        "II": 0.2,
+        "III": 0
+      }
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 122,
+      "source": "ART"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 78,
+      "source": "ART"
+    },
+    "map": {
+      "status": "visible",
+      "value": 93,
+      "source": "ART"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "11:55"
+  },
+  "notes": "philips-intellivue low-light-blur synthetic fixture."
+}

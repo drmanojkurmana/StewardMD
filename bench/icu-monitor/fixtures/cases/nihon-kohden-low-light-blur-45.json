@@ -1,0 +1,90 @@
+{
+  "id": "nihon-kohden-low-light-blur-45",
+  "manufacturer": "nihon-kohden",
+  "layout": "right-column-label-left-limits-right",
+  "difficulty": [
+    "low-light",
+    "blur"
+  ],
+  "image": "nihon-kohden-low-light-blur-45.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 96
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 93
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 96
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 20
+    },
+    "temp": {
+      "status": "visible",
+      "value": 37.5
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 122,
+        "dbp": 78,
+        "map": 93
+      }
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 122,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 78,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 93,
+      "source": "NIBP"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "09:14"
+  },
+  "notes": "nihon-kohden low-light-blur synthetic fixture."
+}

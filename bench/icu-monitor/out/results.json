@@ -1,0 +1,6677 @@
+{
+  "summary": {
+    "cases": 41,
+    "real": 2,
+    "synthetic": 39,
+    "manufacturers": {
+      "draeger-infinity": 6,
+      "ge-carescape": 7,
+      "generic-transport": 6,
+      "mindray-beneview": 7,
+      "nihon-kohden": 6,
+      "philips-intellivue": 9
+    },
+    "avgOcrMs": 2063.6,
+    "avgParseMs": 31.9,
+    "avgBoxes": 23.1,
+    "totalNetworkCalls": 0,
+    "geminiFallbacks": 0,
+    "silentGuessesTotal": 0,
+    "colourUsedCases": 39
+  },
+  "overall": {
+    "hr": {
+      "visible": 41,
+      "correct": 36,
+      "wrong": 0,
+      "review": 5,
+      "missed": 0,
+      "autoEmitted": 36,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 41,
+      "exactAccuracy": 87.8,
+      "recall": 87.8,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 12.2,
+      "silentGuessRate": 0,
+      "safeAccuracy": 87.8
+    },
+    "spo2": {
+      "visible": 35,
+      "correct": 33,
+      "wrong": 0,
+      "review": 2,
+      "missed": 0,
+      "autoEmitted": 33,
+      "silentGuess": 0,
+      "correctReview": 6,
+      "correctAbstain": 0,
+      "scored": 41,
+      "exactAccuracy": 94.3,
+      "recall": 94.3,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 19.5,
+      "silentGuessRate": 0,
+      "safeAccuracy": 95.1
+    },
+    "sbp": {
+      "visible": 41,
+      "correct": 33,
+      "wrong": 0,
+      "review": 8,
+      "missed": 0,
+      "autoEmitted": 33,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 41,
+      "exactAccuracy": 80.5,
+      "recall": 80.5,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 19.5,
+      "silentGuessRate": 0,
+      "safeAccuracy": 80.5
+    },
+    "dbp": {
+      "visible": 41,
+      "correct": 33,
+      "wrong": 0,
+      "review": 8,
+      "missed": 0,
+      "autoEmitted": 33,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 41,
+      "exactAccuracy": 80.5,
+      "recall": 80.5,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 19.5,
+      "silentGuessRate": 0,
+      "safeAccuracy": 80.5
+    },
+    "map": {
+      "visible": 41,
+      "correct": 32,
+      "wrong": 0,
+      "review": 7,
+      "missed": 2,
+      "autoEmitted": 32,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 41,
+      "exactAccuracy": 78,
+      "recall": 78,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 17.1,
+      "silentGuessRate": 0,
+      "safeAccuracy": 78
+    },
+    "rr": {
+      "visible": 30,
+      "correct": 28,
+      "wrong": 0,
+      "review": 2,
+      "missed": 0,
+      "autoEmitted": 28,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 5,
+      "scored": 35,
+      "exactAccuracy": 93.3,
+      "recall": 93.3,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 5.7,
+      "silentGuessRate": 0,
+      "safeAccuracy": 94.3
+    },
+    "pulse": {
+      "visible": 29,
+      "correct": 19,
+      "wrong": 0,
+      "review": 0,
+      "missed": 10,
+      "autoEmitted": 19,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 29,
+      "exactAccuracy": 65.5,
+      "recall": 65.5,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 0,
+      "silentGuessRate": 0,
+      "safeAccuracy": 65.5
+    },
+    "pvc": {
+      "visible": 23,
+      "correct": 15,
+      "wrong": 0,
+      "review": 5,
+      "missed": 3,
+      "autoEmitted": 15,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 23,
+      "exactAccuracy": 65.2,
+      "recall": 65.2,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 21.7,
+      "silentGuessRate": 0,
+      "safeAccuracy": 65.2
+    },
+    "temp": {
+      "visible": 12,
+      "correct": 10,
+      "wrong": 0,
+      "review": 2,
+      "missed": 0,
+      "autoEmitted": 10,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 12,
+      "exactAccuracy": 83.3,
+      "recall": 83.3,
+      "precision": 100,
+      "falsePositiveRate": 0,
+      "needsReviewRate": 16.7,
+      "silentGuessRate": 0,
+      "safeAccuracy": 83.3
+    },
+    "etco2": {
+      "visible": 0,
+      "correct": 0,
+      "wrong": 0,
+      "review": 0,
+      "missed": 0,
+      "autoEmitted": 0,
+      "silentGuess": 0,
+      "correctReview": 0,
+      "correctAbstain": 0,
+      "scored": 0,
+      "exactAccuracy": null,
+      "recall": null,
+      "precision": null,
+      "falsePositiveRate": null,
+      "needsReviewRate": null,
+      "silentGuessRate": null,
+      "safeAccuracy": null
+    }
+  },
+  "byManufacturer": {
+    "draeger-infinity": {
+      "hr": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "spo2": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "dbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "map": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 1,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "rr": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "ge-carescape": {
+      "hr": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "spo2": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 28.6,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "sbp": {
+        "visible": 7,
+        "correct": 3,
+        "wrong": 0,
+        "review": 4,
+        "missed": 0,
+        "autoEmitted": 3,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 42.9,
+        "recall": 42.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 57.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 42.9
+      },
+      "dbp": {
+        "visible": 7,
+        "correct": 3,
+        "wrong": 0,
+        "review": 4,
+        "missed": 0,
+        "autoEmitted": 3,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 42.9,
+        "recall": 42.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 57.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 42.9
+      },
+      "map": {
+        "visible": 7,
+        "correct": 3,
+        "wrong": 0,
+        "review": 4,
+        "missed": 0,
+        "autoEmitted": 3,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 42.9,
+        "recall": 42.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 57.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 42.9
+      },
+      "rr": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 7,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "generic-transport": {
+      "hr": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "spo2": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "dbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "map": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "rr": {
+        "visible": 0,
+        "correct": 0,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 0,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 0,
+        "exactAccuracy": null,
+        "recall": null,
+        "precision": null,
+        "falsePositiveRate": null,
+        "needsReviewRate": null,
+        "silentGuessRate": null,
+        "safeAccuracy": null
+      }
+    },
+    "mindray-beneview": {
+      "hr": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "spo2": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "dbp": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "map": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "rr": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 7,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "nihon-kohden": {
+      "hr": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "spo2": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "dbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "map": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "rr": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "philips-intellivue": {
+      "hr": {
+        "visible": 9,
+        "correct": 8,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 8,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 88.9,
+        "recall": 88.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 11.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 88.9
+      },
+      "spo2": {
+        "visible": 8,
+        "correct": 7,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 7,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 87.5,
+        "recall": 87.5,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 22.2,
+        "silentGuessRate": 0,
+        "safeAccuracy": 88.9
+      },
+      "sbp": {
+        "visible": 9,
+        "correct": 9,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 9,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "dbp": {
+        "visible": 9,
+        "correct": 9,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 9,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "map": {
+        "visible": 9,
+        "correct": 8,
+        "wrong": 0,
+        "review": 0,
+        "missed": 1,
+        "autoEmitted": 8,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 88.9,
+        "recall": 88.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 88.9
+      },
+      "rr": {
+        "visible": 8,
+        "correct": 6,
+        "wrong": 0,
+        "review": 2,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 9,
+        "exactAccuracy": 75,
+        "recall": 75,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 22.2,
+        "silentGuessRate": 0,
+        "safeAccuracy": 77.8
+      }
+    }
+  },
+  "byLayout": {
+    "right-column-triangle-limits": {
+      "hr": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "spo2": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "dbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "map": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 1,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "rr": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "right-column-label-above": {
+      "hr": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "spo2": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 28.6,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "sbp": {
+        "visible": 7,
+        "correct": 3,
+        "wrong": 0,
+        "review": 4,
+        "missed": 0,
+        "autoEmitted": 3,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 42.9,
+        "recall": 42.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 57.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 42.9
+      },
+      "dbp": {
+        "visible": 7,
+        "correct": 3,
+        "wrong": 0,
+        "review": 4,
+        "missed": 0,
+        "autoEmitted": 3,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 42.9,
+        "recall": 42.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 57.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 42.9
+      },
+      "map": {
+        "visible": 7,
+        "correct": 3,
+        "wrong": 0,
+        "review": 4,
+        "missed": 0,
+        "autoEmitted": 3,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 42.9,
+        "recall": 42.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 57.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 42.9
+      },
+      "rr": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 7,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "right-column-minimal": {
+      "hr": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "spo2": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "dbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "map": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "rr": {
+        "visible": 0,
+        "correct": 0,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 0,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 0,
+        "exactAccuracy": null,
+        "recall": null,
+        "precision": null,
+        "falsePositiveRate": null,
+        "needsReviewRate": null,
+        "silentGuessRate": null,
+        "safeAccuracy": null
+      }
+    },
+    "right-column-limits-right": {
+      "hr": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "spo2": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "dbp": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "map": {
+        "visible": 7,
+        "correct": 6,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 7,
+        "exactAccuracy": 85.7,
+        "recall": 85.7,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 14.3,
+        "silentGuessRate": 0,
+        "safeAccuracy": 85.7
+      },
+      "rr": {
+        "visible": 6,
+        "correct": 6,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 7,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "right-column-label-left-limits-right": {
+      "hr": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "spo2": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "sbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "dbp": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "map": {
+        "visible": 6,
+        "correct": 5,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 6,
+        "exactAccuracy": 83.3,
+        "recall": 83.3,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 16.7,
+        "silentGuessRate": 0,
+        "safeAccuracy": 83.3
+      },
+      "rr": {
+        "visible": 5,
+        "correct": 5,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 5,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 6,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      }
+    },
+    "right-column-limits-left": {
+      "hr": {
+        "visible": 9,
+        "correct": 8,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 8,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 88.9,
+        "recall": 88.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 11.1,
+        "silentGuessRate": 0,
+        "safeAccuracy": 88.9
+      },
+      "spo2": {
+        "visible": 8,
+        "correct": 7,
+        "wrong": 0,
+        "review": 1,
+        "missed": 0,
+        "autoEmitted": 7,
+        "silentGuess": 0,
+        "correctReview": 1,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 87.5,
+        "recall": 87.5,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 22.2,
+        "silentGuessRate": 0,
+        "safeAccuracy": 88.9
+      },
+      "sbp": {
+        "visible": 9,
+        "correct": 9,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 9,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "dbp": {
+        "visible": 9,
+        "correct": 9,
+        "wrong": 0,
+        "review": 0,
+        "missed": 0,
+        "autoEmitted": 9,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 100,
+        "recall": 100,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 100
+      },
+      "map": {
+        "visible": 9,
+        "correct": 8,
+        "wrong": 0,
+        "review": 0,
+        "missed": 1,
+        "autoEmitted": 8,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 0,
+        "scored": 9,
+        "exactAccuracy": 88.9,
+        "recall": 88.9,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 0,
+        "silentGuessRate": 0,
+        "safeAccuracy": 88.9
+      },
+      "rr": {
+        "visible": 8,
+        "correct": 6,
+        "wrong": 0,
+        "review": 2,
+        "missed": 0,
+        "autoEmitted": 6,
+        "silentGuess": 0,
+        "correctReview": 0,
+        "correctAbstain": 1,
+        "scored": 9,
+        "exactAccuracy": 75,
+        "recall": 75,
+        "precision": 100,
+        "falsePositiveRate": 0,
+        "needsReviewRate": 22.2,
+        "silentGuessRate": 0,
+        "safeAccuracy": 77.8
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "draeger-infinity-clean-21",
+      "manufacturer": "draeger-infinity",
+      "layout": "right-column-triangle-limits",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "draeger-infinity-clean-21.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 21,
+      "ocrMs": 74856,
+      "parseMs": 296,
+      "heapKB": 928,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "AUTO_ACCEPTED",
+          "value": 118,
+          "suggested": 118,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "AUTO_ACCEPTED",
+          "value": 76,
+          "suggested": 76,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": 90,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.84,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37,
+          "status": "AUTO_ACCEPTED",
+          "value": 37,
+          "suggested": null,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "draeger-infinity-high-acuity-23",
+      "manufacturer": "draeger-infinity",
+      "layout": "right-column-triangle-limits",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "draeger-infinity-high-acuity-23.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 21,
+      "ocrMs": 598,
+      "parseMs": 470,
+      "heapKB": 825,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 138,
+          "status": "AUTO_ACCEPTED",
+          "value": 138,
+          "suggested": null,
+          "confidence": 0.85,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 44,
+          "status": "AUTO_ACCEPTED",
+          "value": 44,
+          "suggested": 44,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 55,
+          "status": "AUTO_ACCEPTED",
+          "value": 55,
+          "suggested": 55,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 34,
+          "status": "AUTO_ACCEPTED",
+          "value": 34,
+          "suggested": null,
+          "confidence": 0.85,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 38.9,
+          "status": "AUTO_ACCEPTED",
+          "value": 38.9,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "draeger-infinity-limit-vs-value-22",
+      "manufacturer": "draeger-infinity",
+      "layout": "right-column-triangle-limits",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "draeger-infinity-limit-vs-value-22.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 21,
+      "ocrMs": 222,
+      "parseMs": 185,
+      "heapKB": -574,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 94,
+          "status": "AUTO_ACCEPTED",
+          "value": 94,
+          "suggested": null,
+          "confidence": 0.87,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 108,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 108,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (split hundreds digit): \"A0T 1 08/64\" read as 108/64; confirm"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 64,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 64,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (split hundreds digit): \"A0T 1 08/64\" read as 108/64; confirm"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 79,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no (MM) read next to A0T 1 08/64; MAP is never computed from SBP/DBP"
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 14,
+          "status": "AUTO_ACCEPTED",
+          "value": 14,
+          "suggested": null,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 36.8,
+          "status": "AUTO_ACCEPTED",
+          "value": 36.8,
+          "suggested": null,
+          "confidence": 0.88,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "draeger-infinity-low-light-blur-25",
+      "manufacturer": "draeger-infinity",
+      "layout": "right-column-triangle-limits",
+      "difficulty": [
+        "low-light",
+        "blur"
+      ],
+      "synthetic": true,
+      "image": "draeger-infinity-low-light-blur-25.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 19,
+      "ocrMs": 224,
+      "parseMs": 3,
+      "heapKB": 421,
+      "layoutDetected": "generic",
+      "colourUsed": false,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 122,
+          "status": "AUTO_ACCEPTED",
+          "value": 122,
+          "suggested": 122,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": 93,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 20,
+          "status": "AUTO_ACCEPTED",
+          "value": 20,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37.5,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 37.5,
+          "confidence": 0.87,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "draeger-infinity-partial-obscured-26",
+      "manufacturer": "draeger-infinity",
+      "layout": "right-column-triangle-limits",
+      "difficulty": [
+        "partial",
+        "label-obscured"
+      ],
+      "synthetic": true,
+      "image": "draeger-infinity-partial-obscured-26.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 10,
+      "ocrMs": 220,
+      "parseMs": 41,
+      "heapKB": -84,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "ambiguous",
+          "expected": 97,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 97,
+          "confidence": 0.89,
+          "outcome": "correct-review",
+          "reason": "label not read (slot only)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 126,
+          "status": "AUTO_ACCEPTED",
+          "value": 126,
+          "suggested": 126,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 80,
+          "status": "AUTO_ACCEPTED",
+          "value": 80,
+          "suggested": 80,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 95,
+          "status": "AUTO_ACCEPTED",
+          "value": 95,
+          "suggested": 95,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_visible",
+          "expected": null,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 37,
+          "confidence": 0.88,
+          "outcome": "correct-abstain",
+          "reason": "label not read (slot only)"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37,
+          "status": "AUTO_ACCEPTED",
+          "value": 37,
+          "suggested": null,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "draeger-infinity-tilt-glare-24",
+      "manufacturer": "draeger-infinity",
+      "layout": "right-column-triangle-limits",
+      "difficulty": [
+        "tilt",
+        "glare"
+      ],
+      "synthetic": true,
+      "image": "draeger-infinity-tilt-glare-24.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 16,
+      "ocrMs": 235,
+      "parseMs": 3,
+      "heapKB": -158,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "AUTO_ACCEPTED",
+          "value": 82,
+          "suggested": null,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 130,
+          "status": "AUTO_ACCEPTED",
+          "value": 130,
+          "suggested": 130,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 85,
+          "status": "AUTO_ACCEPTED",
+          "value": 85,
+          "suggested": 85,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "AUTO_ACCEPTED",
+          "value": 100,
+          "suggested": 100,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 18,
+          "status": "AUTO_ACCEPTED",
+          "value": 18,
+          "suggested": null,
+          "confidence": 0.84,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37.2,
+          "status": "AUTO_ACCEPTED",
+          "value": 37.2,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-clean-11",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-clean-11.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 23,
+      "ocrMs": 242,
+      "parseMs": 57,
+      "heapKB": -132,
+      "layoutDetected": "ge-carescape",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.88,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 118,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ART T18/76 (90)\" read as 118/76; confirm"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 76,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ART T18/76 (90)\" read as 118/76; confirm"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 90,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-close-03",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "close-candidates"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-close-03.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 24,
+      "ocrMs": 244,
+      "parseMs": 5,
+      "heapKB": 371,
+      "layoutDetected": "ge-carescape",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 106,
+          "status": "AUTO_ACCEPTED",
+          "value": 106,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.87,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 119,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 119,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ART T19/66 (84)\" read as 119/66; confirm"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 66,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 66,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ART T19/66 (84)\" read as 119/66; confirm"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 84,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 84,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 105,
+          "status": "AUTO_ACCEPTED",
+          "value": 105,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-high-acuity-13",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-high-acuity-13.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 26,
+      "ocrMs": 221,
+      "parseMs": 8,
+      "heapKB": 485,
+      "layoutDetected": "ge-carescape",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 138,
+          "status": "AUTO_ACCEPTED",
+          "value": 138,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.87,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 44,
+          "status": "AUTO_ACCEPTED",
+          "value": 44,
+          "suggested": 44,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 55,
+          "status": "AUTO_ACCEPTED",
+          "value": 55,
+          "suggested": 55,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 34,
+          "status": "AUTO_ACCEPTED",
+          "value": 34,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 136,
+          "status": "AUTO_ACCEPTED",
+          "value": 136,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 4,
+          "status": "AUTO_ACCEPTED",
+          "value": 4,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-limit-vs-value-12",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-limit-vs-value-12.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 25,
+      "ocrMs": 252,
+      "parseMs": 1,
+      "heapKB": 397,
+      "layoutDetected": "ge-carescape",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 94,
+          "status": "AUTO_ACCEPTED",
+          "value": 94,
+          "suggested": null,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 108,
+          "status": "AUTO_ACCEPTED",
+          "value": 108,
+          "suggested": 108,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 64,
+          "status": "AUTO_ACCEPTED",
+          "value": 64,
+          "suggested": 64,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 79,
+          "status": "AUTO_ACCEPTED",
+          "value": 79,
+          "suggested": 79,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 14,
+          "status": "AUTO_ACCEPTED",
+          "value": 14,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-low-light-blur-15",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "low-light",
+        "blur"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-low-light-blur-15.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 22,
+      "ocrMs": 245,
+      "parseMs": 6,
+      "heapKB": 148,
+      "layoutDetected": "ge-carescape",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": null,
+          "confidence": 0.88,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 122,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 122,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ARTT22/78 (93)\" read as 122/78; confirm"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 78,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ARTT22/78 (93)\" read as 122/78; confirm"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 93,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 20,
+          "status": "AUTO_ACCEPTED",
+          "value": 20,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 1,
+          "status": "AUTO_ACCEPTED",
+          "value": 1,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-partial-obscured-16",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "partial",
+        "label-obscured"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-partial-obscured-16.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 13,
+      "ocrMs": 220,
+      "parseMs": 2,
+      "heapKB": 339,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "ambiguous",
+          "expected": 97,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 97,
+          "confidence": 0.88,
+          "outcome": "correct-review",
+          "reason": "label not read (slot only)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 126,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 126,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ARTT26/80 (95)\" read as 126/80; confirm"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 80,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 80,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (leading 1 read as T): \"ARTT26/80 (95)\" read as 126/80; confirm"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 95,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 95,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_visible",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "ge-carescape-tilt-glare-14",
+      "manufacturer": "ge-carescape",
+      "layout": "right-column-label-above",
+      "difficulty": [
+        "tilt",
+        "glare"
+      ],
+      "synthetic": true,
+      "image": "ge-carescape-tilt-glare-14.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 18,
+      "ocrMs": 247,
+      "parseMs": 27,
+      "heapKB": -374,
+      "layoutDetected": "ge-carescape",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 82,
+          "confidence": 0.77,
+          "outcome": "review",
+          "reason": "confidence 0.77 below 0.8"
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 96,
+          "confidence": 0.79,
+          "outcome": "review",
+          "reason": "confidence 0.79 below 0.8"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 130,
+          "status": "AUTO_ACCEPTED",
+          "value": 130,
+          "suggested": 130,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 85,
+          "status": "AUTO_ACCEPTED",
+          "value": 85,
+          "suggested": 85,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "AUTO_ACCEPTED",
+          "value": 100,
+          "suggested": 100,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 18,
+          "status": "AUTO_ACCEPTED",
+          "value": 18,
+          "suggested": null,
+          "confidence": 0.83,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "AUTO_ACCEPTED",
+          "value": 82,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "generic-transport-clean-51",
+      "manufacturer": "generic-transport",
+      "layout": "right-column-minimal",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "generic-transport-clean-51.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 12,
+      "ocrMs": 225,
+      "parseMs": 2,
+      "heapKB": -47,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "AUTO_ACCEPTED",
+          "value": 118,
+          "suggested": 118,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "AUTO_ACCEPTED",
+          "value": 76,
+          "suggested": 76,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": 90,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "generic-transport-high-acuity-53",
+      "manufacturer": "generic-transport",
+      "layout": "right-column-minimal",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "generic-transport-high-acuity-53.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 13,
+      "ocrMs": 233,
+      "parseMs": 3,
+      "heapKB": -32,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 138,
+          "status": "AUTO_ACCEPTED",
+          "value": 138,
+          "suggested": null,
+          "confidence": 0.95,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 44,
+          "status": "AUTO_ACCEPTED",
+          "value": 44,
+          "suggested": 44,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 55,
+          "status": "AUTO_ACCEPTED",
+          "value": 55,
+          "suggested": 55,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "generic-transport-limit-vs-value-52",
+      "manufacturer": "generic-transport",
+      "layout": "right-column-minimal",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "generic-transport-limit-vs-value-52.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 14,
+      "ocrMs": 209,
+      "parseMs": 1,
+      "heapKB": 984,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 0.95,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 94,
+          "status": "AUTO_ACCEPTED",
+          "value": 94,
+          "suggested": null,
+          "confidence": 0.95,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 108,
+          "status": "AUTO_ACCEPTED",
+          "value": 108,
+          "suggested": 108,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 64,
+          "status": "AUTO_ACCEPTED",
+          "value": 64,
+          "suggested": 64,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 79,
+          "status": "AUTO_ACCEPTED",
+          "value": 79,
+          "suggested": 79,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "generic-transport-low-light-blur-55",
+      "manufacturer": "generic-transport",
+      "layout": "right-column-minimal",
+      "difficulty": [
+        "low-light",
+        "blur"
+      ],
+      "synthetic": true,
+      "image": "generic-transport-low-light-blur-55.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 9,
+      "ocrMs": 214,
+      "parseMs": 1,
+      "heapKB": -1118,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": null,
+          "confidence": 0.87,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 122,
+          "status": "AUTO_ACCEPTED",
+          "value": 122,
+          "suggested": 122,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": 93,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "generic-transport-partial-obscured-56",
+      "manufacturer": "generic-transport",
+      "layout": "right-column-minimal",
+      "difficulty": [
+        "partial",
+        "label-obscured"
+      ],
+      "synthetic": true,
+      "image": "generic-transport-partial-obscured-56.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 13,
+      "ocrMs": 213,
+      "parseMs": 1,
+      "heapKB": 1106,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "ambiguous",
+          "expected": 97,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 97,
+          "confidence": 0.94,
+          "outcome": "correct-review",
+          "reason": "label not read (slot only)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 126,
+          "status": "AUTO_ACCEPTED",
+          "value": 126,
+          "suggested": 126,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 80,
+          "status": "AUTO_ACCEPTED",
+          "value": 80,
+          "suggested": 80,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 95,
+          "status": "AUTO_ACCEPTED",
+          "value": 95,
+          "suggested": 95,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "generic-transport-tilt-glare-54",
+      "manufacturer": "generic-transport",
+      "layout": "right-column-minimal",
+      "difficulty": [
+        "tilt",
+        "glare"
+      ],
+      "synthetic": true,
+      "image": "generic-transport-tilt-glare-54.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 7,
+      "ocrMs": 285,
+      "parseMs": 5,
+      "heapKB": 859,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 82,
+          "confidence": 0.73,
+          "outcome": "review",
+          "reason": "two candidates too close (82 vs 96)"
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 130,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 130,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (split hundreds digit): \"NBP1 30/85 (100)\" read as 130/85; confirm"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 85,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 85,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "OCR repaired (split hundreds digit): \"NBP1 30/85 (100)\" read as 130/85; confirm"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 100,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-clean-31",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-clean-31.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 25,
+      "ocrMs": 251,
+      "parseMs": 6,
+      "heapKB": 74,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "AUTO_ACCEPTED",
+          "value": 118,
+          "suggested": 118,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "AUTO_ACCEPTED",
+          "value": 76,
+          "suggested": 76,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": 90,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.87,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-close-02",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "close-candidates"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-close-02.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 25,
+      "ocrMs": 227,
+      "parseMs": 41,
+      "heapKB": -2,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 119,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 119,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "two pressures of similar size: 119/66 (84) (art) vs 121/79 (93) (nibp)"
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 66,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 66,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "two pressures of similar size: 119/66 (84) (art) vs 121/79 (93) (nibp)"
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 84,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 84,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-high-acuity-33",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-high-acuity-33.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 26,
+      "ocrMs": 227,
+      "parseMs": 1,
+      "heapKB": 66,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 138,
+          "status": "AUTO_ACCEPTED",
+          "value": 138,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 44,
+          "status": "AUTO_ACCEPTED",
+          "value": 44,
+          "suggested": 44,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 55,
+          "status": "AUTO_ACCEPTED",
+          "value": 55,
+          "suggested": 55,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 34,
+          "status": "AUTO_ACCEPTED",
+          "value": 34,
+          "suggested": null,
+          "confidence": 0.88,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 136,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 4,
+          "status": "AUTO_ACCEPTED",
+          "value": 4,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-limit-vs-value-32",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-limit-vs-value-32.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 25,
+      "ocrMs": 268,
+      "parseMs": 9,
+      "heapKB": -5,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 94,
+          "status": "AUTO_ACCEPTED",
+          "value": 94,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 108,
+          "status": "AUTO_ACCEPTED",
+          "value": 108,
+          "suggested": 108,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 64,
+          "status": "AUTO_ACCEPTED",
+          "value": 64,
+          "suggested": 64,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 79,
+          "status": "AUTO_ACCEPTED",
+          "value": 79,
+          "suggested": 79,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 14,
+          "status": "AUTO_ACCEPTED",
+          "value": 14,
+          "suggested": null,
+          "confidence": 0.88,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-low-light-blur-35",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "low-light",
+        "blur"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-low-light-blur-35.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 26,
+      "ocrMs": 244,
+      "parseMs": 1,
+      "heapKB": 136,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 122,
+          "status": "AUTO_ACCEPTED",
+          "value": 122,
+          "suggested": 122,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": 93,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 20,
+          "status": "AUTO_ACCEPTED",
+          "value": 20,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 1,
+          "status": "AUTO_ACCEPTED",
+          "value": 1,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-partial-obscured-36",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "partial",
+        "label-obscured"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-partial-obscured-36.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 17,
+      "ocrMs": 230,
+      "parseMs": 1,
+      "heapKB": -355,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "ambiguous",
+          "expected": 97,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 97,
+          "confidence": 0.94,
+          "outcome": "correct-review",
+          "reason": "label not read (slot only)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 126,
+          "status": "AUTO_ACCEPTED",
+          "value": 126,
+          "suggested": 126,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 80,
+          "status": "AUTO_ACCEPTED",
+          "value": 80,
+          "suggested": 80,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 95,
+          "status": "AUTO_ACCEPTED",
+          "value": 95,
+          "suggested": 95,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_visible",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "mindray-beneview-tilt-glare-34",
+      "manufacturer": "mindray-beneview",
+      "layout": "right-column-limits-right",
+      "difficulty": [
+        "tilt",
+        "glare"
+      ],
+      "synthetic": true,
+      "image": "mindray-beneview-tilt-glare-34.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 21,
+      "ocrMs": 249,
+      "parseMs": 13,
+      "heapKB": 27,
+      "layoutDetected": "mindray-beneview",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 82,
+          "confidence": 0.75,
+          "outcome": "review",
+          "reason": "two candidates too close (82 vs 96)"
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.86,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 130,
+          "status": "AUTO_ACCEPTED",
+          "value": 130,
+          "suggested": 130,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 85,
+          "status": "AUTO_ACCEPTED",
+          "value": 85,
+          "suggested": 85,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "AUTO_ACCEPTED",
+          "value": 100,
+          "suggested": 100,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 18,
+          "status": "AUTO_ACCEPTED",
+          "value": 18,
+          "suggested": null,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "nihon-kohden-clean-41",
+      "manufacturer": "nihon-kohden",
+      "layout": "right-column-label-left-limits-right",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "nihon-kohden-clean-41.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 35,
+      "ocrMs": 258,
+      "parseMs": 74,
+      "heapKB": -1223,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "AUTO_ACCEPTED",
+          "value": 118,
+          "suggested": 118,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "AUTO_ACCEPTED",
+          "value": 76,
+          "suggested": 76,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": 90,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37,
+          "status": "AUTO_ACCEPTED",
+          "value": 37,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "nihon-kohden-high-acuity-43",
+      "manufacturer": "nihon-kohden",
+      "layout": "right-column-label-left-limits-right",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "nihon-kohden-high-acuity-43.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 34,
+      "ocrMs": 258,
+      "parseMs": 2,
+      "heapKB": 670,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 138,
+          "status": "AUTO_ACCEPTED",
+          "value": 138,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.95,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 44,
+          "status": "AUTO_ACCEPTED",
+          "value": 44,
+          "suggested": 44,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 55,
+          "status": "AUTO_ACCEPTED",
+          "value": 55,
+          "suggested": 55,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 34,
+          "status": "AUTO_ACCEPTED",
+          "value": 34,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 136,
+          "status": "AUTO_ACCEPTED",
+          "value": 136,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 38.9,
+          "status": "AUTO_ACCEPTED",
+          "value": 38.9,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "nihon-kohden-limit-vs-value-42",
+      "manufacturer": "nihon-kohden",
+      "layout": "right-column-label-left-limits-right",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "nihon-kohden-limit-vs-value-42.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 34,
+      "ocrMs": 286,
+      "parseMs": 3,
+      "heapKB": -862,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 90,
+          "confidence": 0.72,
+          "outcome": "review",
+          "reason": "two candidates too close (90 vs 94)"
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 94,
+          "status": "AUTO_ACCEPTED",
+          "value": 94,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 108,
+          "status": "AUTO_ACCEPTED",
+          "value": 108,
+          "suggested": 108,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 64,
+          "status": "AUTO_ACCEPTED",
+          "value": 64,
+          "suggested": 64,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 79,
+          "status": "AUTO_ACCEPTED",
+          "value": 79,
+          "suggested": 79,
+          "confidence": 0.89,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 14,
+          "status": "AUTO_ACCEPTED",
+          "value": 14,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 36.8,
+          "status": "AUTO_ACCEPTED",
+          "value": 36.8,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "nihon-kohden-low-light-blur-45",
+      "manufacturer": "nihon-kohden",
+      "layout": "right-column-label-left-limits-right",
+      "difficulty": [
+        "low-light",
+        "blur"
+      ],
+      "synthetic": true,
+      "image": "nihon-kohden-low-light-blur-45.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 28,
+      "ocrMs": 249,
+      "parseMs": 2,
+      "heapKB": 259,
+      "layoutDetected": "generic",
+      "colourUsed": false,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 122,
+          "status": "AUTO_ACCEPTED",
+          "value": 122,
+          "suggested": 122,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": 93,
+          "confidence": 0.9,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 20,
+          "status": "AUTO_ACCEPTED",
+          "value": 20,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37.5,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 37.5,
+          "confidence": 0.92,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "nihon-kohden-partial-obscured-46",
+      "manufacturer": "nihon-kohden",
+      "layout": "right-column-label-left-limits-right",
+      "difficulty": [
+        "partial",
+        "label-obscured"
+      ],
+      "synthetic": true,
+      "image": "nihon-kohden-partial-obscured-46.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 17,
+      "ocrMs": 217,
+      "parseMs": 1,
+      "heapKB": -277,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "ambiguous",
+          "expected": 97,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 97,
+          "confidence": 0.95,
+          "outcome": "correct-review",
+          "reason": "label not read (slot only)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 126,
+          "status": "AUTO_ACCEPTED",
+          "value": 126,
+          "suggested": 126,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 80,
+          "status": "AUTO_ACCEPTED",
+          "value": 80,
+          "suggested": 80,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 95,
+          "status": "AUTO_ACCEPTED",
+          "value": 95,
+          "suggested": 95,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_visible",
+          "expected": null,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 37,
+          "confidence": 1,
+          "outcome": "correct-abstain",
+          "reason": "label not read (slot and colour agree)"
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37,
+          "status": "AUTO_ACCEPTED",
+          "value": 37,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "nihon-kohden-tilt-glare-44",
+      "manufacturer": "nihon-kohden",
+      "layout": "right-column-label-left-limits-right",
+      "difficulty": [
+        "tilt",
+        "glare"
+      ],
+      "synthetic": true,
+      "image": "nihon-kohden-tilt-glare-44.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 26,
+      "ocrMs": 228,
+      "parseMs": 3,
+      "heapKB": -103,
+      "layoutDetected": "generic",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "AUTO_ACCEPTED",
+          "value": 82,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 130,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 130,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "another pressure on screen could not be read: \"NIBP\""
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 85,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 85,
+          "confidence": 0.6,
+          "outcome": "review",
+          "reason": "another pressure on screen could not be read: \"NIBP\""
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 100,
+          "confidence": 0.5,
+          "outcome": "review",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 18,
+          "status": "AUTO_ACCEPTED",
+          "value": 18,
+          "suggested": null,
+          "confidence": 0.95,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "AUTO_ACCEPTED",
+          "value": 82,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "visible",
+          "expected": 37.2,
+          "status": "AUTO_ACCEPTED",
+          "value": 37.2,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-clean-01",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-clean-01.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 31,
+      "ocrMs": 245,
+      "parseMs": 5,
+      "heapKB": 508,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "AUTO_ACCEPTED",
+          "value": 118,
+          "suggested": 118,
+          "confidence": 0.99,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "AUTO_ACCEPTED",
+          "value": 76,
+          "suggested": 76,
+          "confidence": 0.99,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": 90,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 72,
+          "status": "AUTO_ACCEPTED",
+          "value": 72,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 50,
+          "confidence": 0.24,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-close-01",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "close-candidates"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-close-01.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 31,
+      "ocrMs": 221,
+      "parseMs": 2,
+      "heapKB": -1464,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 105,
+          "status": "AUTO_ACCEPTED",
+          "value": 105,
+          "suggested": null,
+          "confidence": 0.96,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 118,
+          "status": "AUTO_ACCEPTED",
+          "value": 118,
+          "suggested": 118,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 76,
+          "status": "AUTO_ACCEPTED",
+          "value": 76,
+          "suggested": 76,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": 90,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 16,
+          "status": "AUTO_ACCEPTED",
+          "value": 16,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 104,
+          "status": "AUTO_ACCEPTED",
+          "value": 104,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 50,
+          "confidence": 0.24,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-high-acuity-03",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-high-acuity-03.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 31,
+      "ocrMs": 214,
+      "parseMs": 1,
+      "heapKB": 715,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 138,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 138,
+          "confidence": 0.79,
+          "outcome": "review",
+          "reason": "two candidates too close (138 vs 120)"
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.91,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 44,
+          "status": "AUTO_ACCEPTED",
+          "value": 44,
+          "suggested": 44,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 55,
+          "status": "AUTO_ACCEPTED",
+          "value": 55,
+          "suggested": 55,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 34,
+          "status": "AUTO_ACCEPTED",
+          "value": 34,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 136,
+          "status": "AUTO_ACCEPTED",
+          "value": 136,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 4,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-limit-vs-value-02",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "clean"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-limit-vs-value-02.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 31,
+      "ocrMs": 208,
+      "parseMs": 2,
+      "heapKB": 472,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 94,
+          "status": "AUTO_ACCEPTED",
+          "value": 94,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 108,
+          "status": "AUTO_ACCEPTED",
+          "value": 108,
+          "suggested": 108,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 64,
+          "status": "AUTO_ACCEPTED",
+          "value": 64,
+          "suggested": 64,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 79,
+          "status": "AUTO_ACCEPTED",
+          "value": 79,
+          "suggested": 79,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 14,
+          "status": "AUTO_ACCEPTED",
+          "value": 14,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 90,
+          "status": "AUTO_ACCEPTED",
+          "value": 90,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-low-light-blur-05",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "low-light",
+        "blur"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-low-light-blur-05.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 29,
+      "ocrMs": 245,
+      "parseMs": 2,
+      "heapKB": -1687,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 122,
+          "status": "AUTO_ACCEPTED",
+          "value": 122,
+          "suggested": 122,
+          "confidence": 0.99,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 78,
+          "status": "AUTO_ACCEPTED",
+          "value": 78,
+          "suggested": 78,
+          "confidence": 0.99,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 93,
+          "status": "AUTO_ACCEPTED",
+          "value": 93,
+          "suggested": 93,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 20,
+          "status": "AUTO_ACCEPTED",
+          "value": 20,
+          "suggested": null,
+          "confidence": 0.93,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 1,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 50,
+          "confidence": 0.24,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-partial-obscured-06",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "partial",
+        "label-obscured"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-partial-obscured-06.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 14,
+      "ocrMs": 198,
+      "parseMs": 1,
+      "heapKB": 1226,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "ambiguous",
+          "expected": 97,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 97,
+          "confidence": 0.89,
+          "outcome": "correct-review",
+          "reason": "label not read (slot only)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 126,
+          "status": "AUTO_ACCEPTED",
+          "value": 126,
+          "suggested": 126,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 80,
+          "status": "AUTO_ACCEPTED",
+          "value": 80,
+          "suggested": 80,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 95,
+          "status": "AUTO_ACCEPTED",
+          "value": 95,
+          "suggested": 95,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "not_visible",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 88,
+          "status": "AUTO_ACCEPTED",
+          "value": 88,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 50,
+          "confidence": 0.24,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-intellivue-tilt-glare-04",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "tilt",
+        "glare"
+      ],
+      "synthetic": true,
+      "image": "philips-intellivue-tilt-glare-04.png",
+      "imageSize": {
+        "h": 1200,
+        "w": 1800
+      },
+      "boxes": 25,
+      "ocrMs": 227,
+      "parseMs": 2,
+      "heapKB": -94,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "AUTO_ACCEPTED",
+          "value": 82,
+          "suggested": null,
+          "confidence": 0.92,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 96,
+          "status": "AUTO_ACCEPTED",
+          "value": 96,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 130,
+          "status": "AUTO_ACCEPTED",
+          "value": 130,
+          "suggested": 130,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 85,
+          "status": "AUTO_ACCEPTED",
+          "value": 85,
+          "suggested": 85,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "AUTO_ACCEPTED",
+          "value": 100,
+          "suggested": 100,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 18,
+          "status": "AUTO_ACCEPTED",
+          "value": 18,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 82,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 50,
+          "confidence": 0.23,
+          "outcome": "review",
+          "reason": "only 1 independent signal(s)"
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-mp40-owner-1800px",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "real-photo",
+        "upscaled-2x",
+        "reflections"
+      ],
+      "synthetic": false,
+      "image": "philips-mp40-owner-1800px.jpg",
+      "imageSize": {
+        "h": 3200,
+        "w": 1800
+      },
+      "boxes": 44,
+      "ocrMs": 255,
+      "parseMs": 4,
+      "heapKB": -1563,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 105,
+          "status": "AUTO_ACCEPTED",
+          "value": 105,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 100,
+          "confidence": 0.95,
+          "outcome": "review",
+          "reason": "label not read (slot and colour agree)"
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 149,
+          "status": "AUTO_ACCEPTED",
+          "value": 149,
+          "suggested": 149,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 66,
+          "status": "AUTO_ACCEPTED",
+          "value": 66,
+          "suggested": 66,
+          "confidence": 0.97,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "AUTO_ACCEPTED",
+          "value": 98,
+          "suggested": 98,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 22,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 22,
+          "confidence": 0.97,
+          "outcome": "review",
+          "reason": "label not read (slot and colour agree)"
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 105,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    },
+    {
+      "id": "philips-mp40-owner-900px",
+      "manufacturer": "philips-intellivue",
+      "layout": "right-column-limits-left",
+      "difficulty": [
+        "real-photo",
+        "low-resolution",
+        "reflections"
+      ],
+      "synthetic": false,
+      "image": "philips-mp40-owner-900px.jpg",
+      "imageSize": {
+        "h": 1600,
+        "w": 900
+      },
+      "boxes": 47,
+      "ocrMs": 199,
+      "parseMs": 15,
+      "heapKB": 1271,
+      "layoutDetected": "philips-intellivue",
+      "colourUsed": true,
+      "fields": {
+        "hr": {
+          "truth": "visible",
+          "expected": 105,
+          "status": "AUTO_ACCEPTED",
+          "value": 105,
+          "suggested": null,
+          "confidence": 0.94,
+          "outcome": "correct",
+          "reason": null
+        },
+        "spo2": {
+          "truth": "visible",
+          "expected": 100,
+          "status": "AUTO_ACCEPTED",
+          "value": 100,
+          "suggested": null,
+          "confidence": 0.88,
+          "outcome": "correct",
+          "reason": null
+        },
+        "sbp": {
+          "truth": "visible",
+          "expected": 149,
+          "status": "AUTO_ACCEPTED",
+          "value": 149,
+          "suggested": 149,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "dbp": {
+          "truth": "visible",
+          "expected": 66,
+          "status": "AUTO_ACCEPTED",
+          "value": 66,
+          "suggested": 66,
+          "confidence": 0.98,
+          "outcome": "correct",
+          "reason": null
+        },
+        "map": {
+          "truth": "visible",
+          "expected": 98,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no (MM) read next to 149/66; MAP is never computed from SBP/DBP"
+        },
+        "rr": {
+          "truth": "visible",
+          "expected": 22,
+          "status": "NEEDS_REVIEW",
+          "value": null,
+          "suggested": 22,
+          "confidence": 0.9,
+          "outcome": "review",
+          "reason": "label not read (slot and colour agree)"
+        },
+        "pulse": {
+          "truth": "visible",
+          "expected": 105,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "missed",
+          "reason": "no readable candidate"
+        },
+        "pvc": {
+          "truth": "visible",
+          "expected": 0,
+          "status": "AUTO_ACCEPTED",
+          "value": 0,
+          "suggested": null,
+          "confidence": 1,
+          "outcome": "correct",
+          "reason": null
+        },
+        "temp": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        },
+        "etco2": {
+          "truth": "not_applicable",
+          "expected": null,
+          "status": "NOT_FOUND",
+          "value": null,
+          "suggested": null,
+          "confidence": 0,
+          "outcome": "correct-abstain",
+          "reason": "no readable candidate"
+        }
+      },
+      "networkCalls": 0
+    }
+  ]
+}

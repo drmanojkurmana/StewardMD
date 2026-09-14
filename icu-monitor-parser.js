@@ -242,8 +242,9 @@
       var sdx = Math.exp(-Math.pow(Math.abs(dx) / ((sameRow || inTile ? 40 : 12) * unit), 2)), sdy = dy < -1.2 * unit && !sameRow ? 0.15 : Math.exp(-Math.pow(Math.max(0, dy) / (4 * unit), 2));
       sc.spatial = sdx * sdy; why.push("dx=" + (dx / unit).toFixed(1) + "u dy=" + (dy / unit).toFixed(1) + "u" + (sameRow ? " same row" : inTile ? " in tile" : ""));
     } else { sc.spatial = 0.5; why.push("no label: spatial neutral"); }
-    // size: relative to the tallest value on screen (limits are small)
+    // size: relative to the tallest value on screen (limits are small); labelRel = relative to the label
     sc.size = G.maxH ? Math.pow(clamp(cand.h / G.maxH, 0, 1), 0.7) : 0.5;
+    sc.labelRel = L ? clamp(cand.h / L.h, 0, 2) / 2 * 2 : 0;   // 1.0 = as tall as its label
     // alignment: left edge with label, or centre with the numeric column
     var al = L ? 1 - clamp(Math.abs(cand.x - L.x) / 0.15, 0, 1) : 0.5;
     if (G.colX != null) al = Math.max(al, 1 - clamp(Math.abs(cand.cx - G.colX) / 0.10, 0, 1));
@@ -307,7 +308,10 @@
     // independent evidence: label, layout slot, colour agreement. Size/spatial alone never suffice.
     // independent evidence: label, layout slot, colour agreement, or the OCR itself gluing label and value
     var ev = 0; if (top.parts.label >= 0.7) ev++; if (top.parts.layout >= 0.9) ev++; if (!top.parts.colorNeutral && top.parts.color >= 0.8) ev++; if (top.glued) ev++;
-    var sizeOk = top.parts.size >= 0.55 && top.parts.spatial >= 0.4;
+    // Size consistency: primary vitals are the big numerals; secondary ones (Pulse, PVC, Temp,
+    // EtCO2, CVP) are drawn small by design, so for them "big enough" means at least label-sized.
+    var secondary = /^(?:pulse|pvc|temp|etco2|cvp)$/.test(opts && opts.__field || "");
+    var sizeOk = (top.parts.size >= 0.55 || (secondary && top.parts.labelRel >= 0.8) || top.glued) && top.parts.spatial >= 0.4;
     // Policy: a value whose label could not be read is NEEDS_REVIEW by default (owner rule: unreadable
     // label = ambiguous), even when slot and colour agree. opts.unlabeledAuto lets slot + channel colour
     // carry it; the benchmark reports both policies.
@@ -433,9 +437,10 @@
       });
       // label with its own glued number ("PVC 0", "T 36.5") is a candidate of its own when it holds exactly one number
       if (L && L.nums.length === 1 && valueLike(L.t.replace(LABELS[field][0], " ").replace(LABELS[field][1], " "), f)) {
-        var own = scoreCandidate(G, field, Object.assign({}, L, { role: "numeric" }), label, px, chan); own.why.push("value glued to label"); own.glued = true; own.parts.spatial = 0.9; own.score = clamp(own.score + 0.1, 0, 1); cands.push(own);
+        // the OCR itself bound label and value into one box: that association outranks any neighbour
+        var own = scoreCandidate(G, field, Object.assign({}, L, { role: "numeric" }), label, px, chan); own.why.push("value glued to label"); own.glued = true; own.parts.spatial = 0.95; own.parts.size = Math.max(own.parts.size, 0.7); own.score = clamp(own.score + 0.25, 0, 1); cands.push(own);
       }
-      var d = decide(cands, !!L, opts);
+      var d = decide(cands, !!L, Object.assign({}, opts, { __field: field }));
       if (d.status === "AUTO_ACCEPTED") { claimed[cands[0].box.i] = true; if (L) claimedLabels[L.i] = true; if (field === "hr") G.hrBox = cands[0].box; }
       d.label = L ? { text: L.t, box: L.i, strength: label.strength } : null;
       d.channel = chan && chan.reliable ? { kind: chan.kind, h: chan.h == null ? null : +chan.h.toFixed(0) } : null;
