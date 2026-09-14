@@ -5899,3 +5899,96 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
 - **A5**: `ABHA_DESK_ROLES` in `_queue_roles.js` (reception, cashier and billing create and verify). Not enforced
   until the ABHA desk phase moves M1 off Connect membership.
 - **Fidelius**: the branch's HKDF over the Weierstrass x is the only copy (the product never changed it).
+## 2026-09-14 D7 B: OPD tokens per department, keyed by departmentId (owner chose B)
+Extends "OPD token numbers" above; allocation is still in the ticket's own commit.
+- A DEPARTMENT IS ITS q_departments ID. Counter `q_token_counters/<hospital>__<day>__dept-<departmentId>`; prefixes
+  `org.tokens.prefixes[<departmentId>]`; `org.tokens.deptAliases{<name lower-cased>: departmentId}` maps the
+  names an EMR import or a doctor session uses. A rename keeps the sequence and the prefix. Old name-keyed
+  prefixes are still read by name until the Admin card resaves by id (stale ones are listed on the card). A
+  department with no prefix falls back to its own code when that code is 1 to 3 letters/digits.
+- Continuity at deploy: a department's first allocation of the day under the id key continues a counter already
+  running today under the old name-slug key, so no C-001 is issued twice on the day this ships.
+- WHERE THE DEPARTMENT COMES FROM, server-side in addTicket (`_opd_org.js resolveTokenDepartment`): the desk
+  picker's departmentId (exact or refused 422 `department_not_found`, never guessed), then the room's
+  departmentId, then the ticket's own department name (import row), then the session's name. Deviation from
+  S3 design 4.3: the ticket's own name comes BEFORE the session's, because an import row names that patient's
+  department and a doctor session's free text does not.
+- M.room carries `department`, filled from q_departments on every store read and never stored on the room.
+  Room sessions stay keyed with department "" (as they always effectively were), so filling the name did
+  not move any room onto a new session id mid-day.
+- A ticket routed to another department's room takes that department's id and name and KEEPS its token; the
+  wall shows the issuing department beside such a token and groups rooms by department in department scope.
+- SMS/WhatsApp "at <dept>" uses the ticket's department before the session's (a pool session has none).
+## 2026-09-14 D14: per-department numbering requires a prefix per department; nothing numbered without one
+- `_opd_org.js tokenScope` in department scope refuses, before any read or write: no resolved department
+  (422 `token_department_required`, the offered name returned so an import can name it) and a department whose
+  effective prefix (own, legacy name key, or a 1-3 character code) is empty (422 `token_prefix_missing`). The
+  `dept-none` counter is gone; hospital scope is unchanged.
+- `POST /org/update` with `tokens` refuses 422 `token_prefixes_required` (problems listed by department name)
+  while any ACTIVE department lacks a prefix, two share one, or an alias points at no active department.
+  Creating a department is NOT refused: a department that issues no tokens (Laboratory) may have none; the
+  desk is refused for it with a sentence naming the Admin card instead.
+- `POST /patient/register` with `forQueue` checks the same BEFORE issuing an MR number ("pool" needs the picked
+  department; "session" only checks a picked one, since the room or session may supply it). The queue add
+  still decides; this is only the early answer so a patient is not registered and then left unqueued.
+- An EMR import returns `issues[{reason, department}]` for refused rows (department names only) and the app
+  shows them once per distinct message.
+## 2026-09-14 D13: a no-show is recalled with the same token (recommendation applied; owner did not answer)
+- `no_show -> waiting | called` in `_queue_eta.js`, and `no_show` is no longer terminal: marking a no-show no longer
+  bumps tokenVer, so the patient link keeps working and `queue.html` says "Your token was called ... go to the
+  front desk". `noShowAt` starts the window. Its OPD Encounter is not closed on no-show (a closed Encounter can
+  never reopen); a never-recalled no-show stays "planned" in the record. Not built: closing it when the window ends.
+- ONLY `POST /no-show/recall` leaves no_show (`/status` answers 400 `use_recall`). It needs `queue.reorder`
+  (the recall jumps the patient to the head of their priority band, which is a reorder; reception can mark a
+  no-show but not recall), a reason, and the window: 4 hours from noShowAt or the session end, whichever is
+  first (409 `recall_window_passed` / `session_ended`). The ticket patch and the `recall_no_show` q_events row
+  (actor, ts, meta {to, reason, noShowAt, token}) are ONE commit guarded on the ticket updateTime, so a recall
+  without its audit row cannot exist and two desks cannot both recall.
+- `GET /no-show/list?sessionId=` (app doctor queue) or `?orgId=&date=` (console, every queue that day) lists the
+  recallable ones (queue.view). Screens: "No-show" on called rows in opd.html and queue.js; "No-shows" sheet on
+  the console toolbar; the recall panel on the app timeline. Not built: the app front-desk view has no recall
+  list, and no "next" message is re-sent on recall (n_stage is monotonic).
+## 2026-09-14 D11 A: per-hospital clinical settings template (Admin Center > Hospital)
+- `functions/_wardsynq/clinical-settings.js` (pure) owns six settings: highAlertDrugs, antibiotics,
+  orderVerifyWithinHours (1-168 h), edReassessMinutes (acuity 1-5, 1-1440 min), patientAccess.enabled, rpoMinutes
+  (5-10080). `GET|POST /org/clinical-settings` (staff.admin, WardSynQ hospitals only, 409 otherwise). A save
+  refuses any unknown key (so criticalEscalation, owned by the alert-path branch, cannot be written here),
+  returns 422 errors keyed by setting with nothing written, and answers with the server read-back.
+- ONE template, "not-configured": every setting explicitly empty/off. WardSynQ ships no drug list or clinical
+  interval (that would be unapproved clinical content, D10); each consumer already says "not configured".
+  The template only fills the form; Save is the write, and the templateId rides the audit row.
+- Audit in the SAME commit as the change (`ORG.updateOrg` optional auditEvent): action
+  `org:clinical_settings`, meta {changed: [setting names], template}; values are not in the audit row. A save
+  that changes nothing writes nothing. patientAccess keeps its other fields (code/session lifetimes).
+- FIX: `orderVerifyWithinHours` was missing from the org whitelist, so surveillance.js could never evaluate
+  "active order not pharmacy-verified" for any hospital.
+- Not built: optimistic concurrency on org saves (two admins saving at once, last write wins, as for every
+  org update today).
+## 2026-09-14 D10: clinical seed data sign-off by Dr Manoj Kurmana, per item, by content fingerprint
+- Seed lists read from the modules that use them (`functions/_wardsynq/seed-signoff.js`): allergy classes and
+  cross-reactivity, dose ceilings, default critical limits, the critical threshold seed, PEWS bands, MEOWS bands,
+  NEWS2 escalation and responder ladder, quality measure definitions. Each item has a SHA-256 of its canonical
+  content (function bodies included). Other UNAPPROVED seeds (consent and population intervals, incident
+  categories, MLOps promotion defaults, emergency recognition) are not listed yet.
+- A sign-off is `q_seed_signoffs/<list>__<item>__<fingerprint prefix>`, created once with its `seed:signoff` audit
+  row in the same commit, text "Signed off by Dr Manoj Kurmana, <date>, version <seedVersion>#<hash12>". A record
+  for other content does not match, so changed content is UNAPPROVED again. No revocation route (not asked for).
+- `POST /seed/signoff` is the platform owner only (StewardMD owner account; a hospital owner or admin is 403),
+  in the name SIGNATORY only (422 otherwise), with `attest: true`, and the contentHash the signer was shown (409
+  if the content differs). `GET /seed/status` for the platform owner or a hospital staff.admin (?orgId=).
+- Admin Center > Clinical seed data (WardSynQ hospitals) marks every unsigned item UNAPPROVED; a failed load says
+  treat every item as unapproved. This build signs nothing. Signing does NOT change engine behaviour: rx-safety
+  still never gates, and existing "unapproved" wording on ward screens is unchanged.
+## 2026-09-14 D4 B: group counts come from a snapshot each hospital publishes (owner chose B)
+- Supersedes the live cross-hospital read in GET /group/overview. WardSynQ is deployed per hospital, so a
+  group reads `q_group_snapshots/<orgId>` only: {status, counts, reasons, capped, publishedBy, publishedAt}.
+- `POST /group/publish-counts` (the hospital's own staff.admin; a group admin is refused) computes the same
+  hospitalCounts() in the hospital's own tenant and writes the snapshot and `group:snapshot_published` under
+  the hospital in one commit. A failed publish leaves the previous snapshot, with its own time.
+- Overview: never published = status `not_published`, counts null, shown as "Not published" (never zeros);
+  `stale` when older than the group's `staleAfterMinutes` (default 60, 5-10080, set by the group admin via
+  `POST /group/stale-after`, audited `group:stale_after`). Each view is still audited `group:summary_read`
+  under the hospital before its snapshot is read.
+- Admin > Hospital group shows what this hospital last published (by whom, when) and "Publish counts now".
+- Not built: automatic publishing on a schedule (the ops tick could publish; today a snapshot is published by
+  a person and the stale marker says when it is old).

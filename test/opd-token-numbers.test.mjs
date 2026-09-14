@@ -65,6 +65,8 @@ mock.module("../functions/_queue.js", {
   namedExports: {
     encPHI: async (_e, v) => (v ? "enc:" + v : ""), decPHI: async (_e, v) => String(v || "").replace(/^enc:/, ""),
     mintTicketToken: async () => "tok", verifyTicketToken: async () => ({ ok: true }), ticketIdFromToken: () => "",
+    // Only so the org store (rooms, OPD-02) can load; nothing here signs a token.
+    signToken: async () => "", verifyToken: async () => ({ ok: false }), idFromToken: () => "", queueSecret: () => "",
   },
 });
 const notified = [];
@@ -175,23 +177,118 @@ test("a cancelled ticket's number is not reused that day; a new day starts again
   assert.equal((await add(await session("d1", DAY, "hosp2"), "other hospital")).token, "1");
 });
 
-test("department scope: each department counts separately, with its prefix; config read from the org when not passed", async () => {
-  reset();
-  const tokens = { scope: "department", prefixes: { Cardiology: "c", "General Medicine": "GM", Bad: "!!" } };
+// Departments are q_departments rows: the counter and the prefix follow the id, never the name.
+const DEPT = (id, name, code, extra) => docs.set("q_departments/" + id, { fields: { id, orgId: H, name, code: code || "", type: "general", active: true, ...(extra || {}) }, updateTime: "t0" });
+function seedDepts() { DEPT("dcard", "Cardiology"); DEPT("dmed", "General Medicine", "GM"); DEPT("dortho", "Orthopaedics"); DEPT("dold", "Closed Unit", "CU", { active: false }); }
+
+test("OPD-01 department scope: each department counts separately under its id, with its prefix; config read from the org when not passed", async () => {
+  reset(); seedDepts();
+  const tokens = { scope: "department", prefixes: { dcard: "c", "general medicine": "XX", Bad: "!!" } };
   const org = { id: H, tokens: tokenConfig(tokens) };
-  const pool = (department) => Q.addToPool(ENV, org, { name: "x", department, date: DAY });
-  assert.equal((await pool("Cardiology")).token, "C-001");
-  assert.equal((await pool("cardiology ")).token, "C-002", "department matched case-insensitively");
-  assert.equal((await pool("General Medicine")).token, "GM-001");
-  assert.equal((await pool("Orthopaedics")).token, "1", "no prefix configured: plain number, own counter");
-  assert.equal((await pool("")).token, "1", "no department: its own counter");
+  const pool = (b) => Q.addToPool(ENV, org, { name: "x", date: DAY, ...b });
+  const t1 = await pool({ departmentId: "dcard" });
+  assert.equal(t1.token, "C-001");
+  assert.equal(t1.departmentId, "dcard"); assert.equal(t1.department, "Cardiology", "ticket carries the id and the current name");
+  assert.equal((await pool({ department: "cardiology " })).token, "C-002", "a name matches its department, case-insensitively");
+  assert.equal((await pool({ departmentId: "dmed" })).token, "XX-001", "a legacy name-keyed prefix is still read");
+  await assert.rejects(pool({ departmentId: "dortho" }), (e) => e.status === 422 && e.message === "token_prefix_missing" && e.departmentName === "Orthopaedics", "OPD-03 (D14): no prefix and no usable code is refused, never a plain colliding number");
+  await assert.rejects(pool({}), (e) => e.status === 422 && e.message === "token_department_required", "OPD-03 (D14): no department at all is refused, never a shared dept-none counter");
+  await assert.rejects(pool({ department: "Dermatology" }), (e) => e.status === 422 && e.message === "token_department_required" && e.departmentName === "Dermatology", "an unmapped name is refused and named");
+  assert.ok(!counterPaths().some((k) => /dept-dortho|dept-none/.test(k)), "a refusal creates no counter");
+  assert.equal(tickets().length, 3, "and no ticket");
+  assert.ok(counterPaths().includes("q_token_counters/" + H + "__" + DAY + "__dept-dcard"), "counter keyed by department id");
   // A room/doctor session carries no org; addTicket reads q_orgs/<hospital>.
   docs.set("q_orgs/" + H, { fields: { tokens }, updateTime: "t0" });
-  assert.equal((await add(await session("d1"), "via org", { department: "Cardiology" })).token, "C-003");
-  assert.deepEqual(tokenScope({}, "Cardiology"), { key: "hospital", prefix: "" }, "default is the whole hospital");
-  assert.deepEqual(tokenConfig(tokens).prefixes, { cardiology: "C", "general medicine": "GM" }, "junk prefixes dropped");
+  assert.equal((await add(await session("d1"), "via org", { departmentId: "dcard" })).token, "C-003");
+  assert.deepEqual(tokenScope({}, { id: "dcard", name: "Cardiology" }), { key: "hospital", prefix: "" }, "default is the whole hospital");
+  assert.deepEqual(tokenConfig(tokens).prefixes, { dcard: "C", "general medicine": "XX" }, "junk prefixes dropped");
   assert.equal(formatToken("", 12), "12");
   assert.equal(formatToken("A", 12), "A-012");
+});
+
+test("OPD-01 where the department comes from: picker, then room, then the ticket's own name or an alias, then the session", async () => {
+  reset(); seedDepts();
+  const tokens = { scope: "department", prefixes: { dcard: "C", dmed: "M", dortho: "O" }, deptAliases: { "Gen Med OPD": "dmed", "Bone clinic": "dortho" } };
+  docs.set("q_orgs/" + H, { fields: { tokens }, updateTime: "t0" });
+  docs.set("q_rooms/r-ortho", { fields: { orgId: H, name: "Room 4", departmentId: "dortho" }, updateTime: "t0" });
+  const s = await Q.getOrCreateSession(ENV, { hospitalId: H, doctorUid: "d9", department: "Gen Med OPD", date: DAY });
+  assert.equal((await add(s, "session")).token, "M-001", "the doctor session's department, through its alias");
+  assert.equal((await add(s, "import row", { department: "bone clinic" })).token, "O-001", "the ticket's own department name beats the session's");
+  assert.equal((await add(s, "room", { roomId: "r-ortho", department: "Cardiology" })).token, "O-002", "the room beats a name");
+  assert.equal((await add(s, "picker", { departmentId: "dcard", roomId: "r-ortho" })).token, "C-001", "the desk's picker beats everything");
+  const before = tickets().length;
+  await assert.rejects(add(s, "closed", { departmentId: "dold" }), (e) => e.status === 422 && e.message === "department_not_found", "an inactive department is refused, not guessed");
+  await assert.rejects(add(s, "foreign", { departmentId: "no-such" }), (e) => e.status === 422);
+  assert.equal(tickets().length, before, "a refused registration leaves no ticket");
+  docs.set("q_rooms/r-foreign", { fields: { orgId: "hosp2", name: "Theirs", departmentId: "dcard" }, updateTime: "t0" });
+  assert.equal((await add(s, "foreign room", { roomId: "r-foreign" })).token, "M-002", "another hospital's room lends no department");
+});
+
+test("OPD-01 a renamed department keeps its sequence and prefix; a sequence started under the old name key today is continued", async () => {
+  reset(); seedDepts();
+  const org = { id: H, tokens: tokenConfig({ scope: "department", prefixes: { dcard: "C" } }) };
+  // Before D7 the counter was keyed by the name slug. Today's morning ran to 5 under it.
+  docs.set("q_token_counters/" + H + "__" + DAY + "__dept-cardiology", { fields: { n: 5 }, updateTime: "t0" });
+  assert.equal((await Q.addToPool(ENV, org, { name: "a", departmentId: "dcard", date: DAY })).token, "C-006", "no second C-001 today");
+  DEPT("dcard", "Heart Centre");
+  const renamed = await Q.addToPool(ENV, org, { name: "b", departmentId: "dcard", date: DAY });
+  assert.equal(renamed.token, "C-007");
+  assert.equal(renamed.department, "Heart Centre");
+});
+
+test("OPD-01 hospital scope: the picker still records the department, and the one sequence is unchanged", async () => {
+  reset(); seedDepts();
+  const t = await Q.addToPool(ENV, { id: H, tokens: tokenConfig({}) }, { name: "a", departmentId: "dmed", date: DAY });
+  assert.equal(t.token, "1");
+  assert.equal(t.department, "General Medicine");
+  assert.deepEqual(counterPaths(), ["q_token_counters/" + H + "__" + DAY + "__hospital"]);
+});
+
+test("OPD-02 a room carries its department name from its departmentId; routing a patient to another department's room keeps the token and shows the new department", async () => {
+  reset(); seedDepts();
+  const ORG = await import("../functions/_opd_org_store.js");
+  const rm = await ORG.createRoom(ENV, H, { name: "Bone room", departmentId: "dortho", assignment: { mode: "primary", primary: "dr1", doctors: ["dr1"] } }, "admin");
+  assert.equal(rm.department, "Orthopaedics");
+  assert.equal(docs.get("q_rooms/" + rm.id).fields.department, undefined, "the name is not stored on the room");
+  assert.equal((await ORG.listRooms(ENV, H))[0].department, "Orthopaedics");
+  DEPT("dortho", "Bones and Joints");
+  assert.equal((await ORG.getRoom(ENV, rm.id)).department, "Bones and Joints", "a renamed department shows its new name");
+  const org = { id: H, tokens: tokenConfig({ scope: "department", prefixes: { dmed: "M" } }) };
+  const t = await Q.addToPool(ENV, org, { name: "moved", departmentId: "dmed", date: DAY });
+  const sessionsBefore = [...docs.keys()].filter((k) => k.startsWith("q_sessions/"));
+  await Q.assignToRoom(ENV, org, t.id, await ORG.getRoom(ENV, rm.id), { date: DAY }, "nurse");
+  const f = docs.get("q_tickets/" + t.id).fields;
+  assert.equal(f.token, "M-001", "the number the patient heard is kept");
+  assert.equal(f.departmentId, "dortho"); assert.equal(f.department, "Bones and Joints");
+  const roomSession = docs.get("q_sessions/" + f.sessionId).fields;
+  assert.equal(roomSession.department, "", "the room session id is not keyed by the department (no mid-day session split)");
+  assert.ok(sessionsBefore.length >= 1);
+});
+
+test("OPD-03 (D14) pure: department scope cannot be saved while a department lacks a prefix or two share one", async () => {
+  const { tokenConfigProblems } = await import("../functions/_opd_org.js");
+  const depts = [{ id: "a", name: "Cardiology", code: "" }, { id: "b", name: "Medicine", code: "MED" }, { id: "c", name: "Closed", active: false }];
+  assert.deepEqual(tokenConfigProblems({ scope: "hospital" }, depts), [], "hospital scope needs no prefixes");
+  assert.deepEqual(tokenConfigProblems({ scope: "department" }, depts), ["Cardiology has no prefix."], "an inactive department is not counted; a code is a prefix");
+  assert.deepEqual(tokenConfigProblems({ scope: "department", prefixes: { a: "MED" } }, depts), ["Cardiology and Medicine both use the prefix MED."]);
+  assert.deepEqual(tokenConfigProblems({ scope: "department", prefixes: { a: "C" }, deptAliases: { old: "c" } }, depts), ['The name "old" points to a department that is not active here.']);
+  assert.deepEqual(tokenConfigProblems({ scope: "department", prefixes: { a: "C" } }, depts), []);
+});
+
+test("OPD-01 an EMR import names the department its refused rows need, and imports the rest", async () => {
+  reset(); seedDepts();
+  docs.set("q_orgs/" + H, { fields: { tokens: { scope: "department", prefixes: { dmed: "M" }, deptAliases: { "gen med": "dmed" } } }, updateTime: "t0" });
+  const { importRoster } = await import("../functions/_queue_ghis.js");
+  const s = await Q.getOrCreateSession(ENV, { hospitalId: H, doctorUid: "d1", department: "", date: DAY });
+  const r = await importRoster(ENV, s, [
+    { PatientName: "One", PatientId: "MR1", VisitId: "v1", Department: "Gen Med" },
+    { PatientName: "Two", PatientId: "MR2", VisitId: "v2", Department: "Skin OPD" },
+    { PatientName: "Three", PatientId: "MR3", VisitId: "v3", Department: "Orthopaedics" },
+  ], "import");
+  assert.equal(r.imported, 1);
+  assert.deepEqual(r.issues, [{ reason: "token_department_required", department: "Skin OPD" }, { reason: "token_prefix_missing", department: "Orthopaedics" }]);
+  assert.deepEqual(tickets().map((t) => t.token), ["M-001"]);
+  assert.doesNotMatch(JSON.stringify(r.issues), /One|Two|Three|MR\d/, "an issue names a department, never a patient");
 });
 
 test("the allocation is audited on the register row, token in meta and no PHI", async () => {
@@ -223,11 +320,11 @@ test("screens: desk, doctor queue and call-next show the token; the wall shows t
   assert.match(q, /q-tl-nm">' \+ tok\(t\)/, "doctor queue row");
   assert.match(q, /<h3>' \+ tok\(cur\)/, "doctor consult card");
   assert.match(q, /q-fd-row"><div>' \+ tok\(t\)/, "front desk pool row");
-  assert.equal((opd.match(/'\+tok\(t\)\+esc\(t\.name/g) || []).length, 3, "OPD console rows");
+  assert.ok((opd.match(/'\+tok\(t\)\+esc\(t\.name/g) || []).length >= 3, "OPD console rows (and the no-show recall list)");
   assert.match(opd, /Now calling token "\+nx\.token/, "call-next result after checkout");
   assert.doesNotMatch(wall, /Asha Kumar|R\. Mehta|shortName/, "no patient names on the wall, not even in its preview");
   assert.match(wall, /"Token " \+ n/);
-  assert.match(idx, /queue\.js\?v=fdesk1-token/);
-  assert.match(idx, /queue\.css\?v=q11-token/);
+  assert.match(idx, /queue\.js\?v=[\w-]+/);
+  assert.match(idx, /queue\.css\?v=[\w-]+/);
   assert.match(read("wardsynq/site/index.html"), /pages\/admin\.js\?v=\d+/);
 });

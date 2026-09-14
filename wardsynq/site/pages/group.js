@@ -27,14 +27,20 @@
     if (r == null) return '<div class="card"><span class="spin"></span> Loading the group overview...</div>';
     if (r.failed) return '<div class="card"><div class="msg err">The group overview could not be loaded: ' + esc(r.message || "failed") + ". This is not the same as the hospitals having nothing to report.</div></div>";
     var hs = r.hospitals || [];
+    /* D4 B: each hospital's counts are the snapshot IT published, with who published it and when. A hospital
+     * that never published says "Not published" (never zeros); an old snapshot carries a Stale pill after the
+     * group's own age setting. */
+    var stale = (r.group && r.group.staleAfterMinutes) || 60;
     var h = '<div class="card"><h2>' + esc((r.group && r.group.name) || "Hospital group") + "</h2>" +
-      '<p class="quiet">Counts only, read from each hospital\'s own record when this page loaded' + (r.generatedAt ? " (" + esc(r.generatedAt) + ")" : "") + ". No patient is shown to a group. Each read is recorded in that hospital's audit trail.</p>";
+      '<p class="quiet">Counts only, as each hospital last published them. A snapshot older than ' + esc(stale) + " minutes is marked stale. No patient is shown to a group. Each view is recorded in that hospital's audit trail.</p>";
     if (!hs.length) return h + '<p class="quiet">No hospital has accepted this group yet. An invitation alone does not add a hospital.</p></div>';
-    return h + '<div class="tbl"><table><thead><tr><th>Hospital</th>' + COLUMNS.map(function (col) { return '<th class="num">' + esc(col[1]) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+    return h + '<div class="tbl"><table><thead><tr><th>Hospital</th>' + COLUMNS.map(function (col) { return '<th class="num">' + esc(col[1]) + "</th>"; }).join("") + "<th>Published</th></tr></thead><tbody>" +
       hs.map(function (x) {
         var name = "<td>" + esc(x.name || x.orgId) + (x.capped ? '<br><span class="quiet">very large record: counts may be incomplete</span>' : "") + "</td>";
-        if (x.status === "unreadable") return "<tr>" + name + '<td colspan="' + COLUMNS.length + '"><span class="pill stop">Could not be read</span></td></tr>';
-        return "<tr>" + name + COLUMNS.map(function (col) { return cell(esc, x, col[0]); }).join("") + "</tr>";
+        if (x.status === "not_published") return "<tr>" + name + '<td colspan="' + (COLUMNS.length + 1) + '"><span class="pill warn">Not published</span> <span class="quiet">This hospital has not published its counts.</span></td></tr>';
+        var pubCell = x.publishedAt ? "<td>" + esc(new Date(x.publishedAt).toLocaleString()) + '<br><span class="quiet">by ' + esc(x.publishedBy || "unknown") + "</span>" + (x.stale ? ' <span class="pill warn">Stale</span>' : "") + "</td>" : "<td></td>";
+        if (x.status === "unreadable") return "<tr>" + name + '<td colspan="' + COLUMNS.length + '"><span class="pill stop">Could not be read</span></td>' + pubCell + "</tr>";
+        return "<tr>" + name + COLUMNS.map(function (col) { return cell(esc, x, col[0]); }).join("") + pubCell + "</tr>";
       }).join("") + "</tbody></table></div></div>";
   }
   WSQ._groupOverviewHtml = overviewHtml;

@@ -56,9 +56,9 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
+    if (c.isWardsynq()) tabs.push(["seed", "Clinical seed data"], ["maik", "MaiK clinical AI"], ["security", "Security review"], ["health", "System health"], ["export", "Data export"], ["fhir", "FHIR"], ["integrations", "Integrations"]);
     var tab = st._adminTab || "hospital";
-    if ((tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     el.innerHTML = '<div class="title"><h1>Admin Center</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === tab) + '">' + c.esc(t[1]) + "</button>";
@@ -67,9 +67,56 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
     return renderers[tab](c, body);
   } });
+
+  // ---- Clinical seed data (D10) ------------------------------------------------------------------
+  /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
+   * the other seed lists), item by item. An item is UNAPPROVED until signed off by the named signatory for its
+   * CURRENT content; a signed item whose content later changed is unapproved again (the server decides by
+   * fingerprint). Every hospital admin sees the state; only the StewardMD platform owner is offered sign-off,
+   * and the server refuses anyone else. r: undefined = loading, { failed } = could not be loaded. */
+  function seedHtml(esc, r) {
+    var h = '<div class="card"><h2>Clinical seed data</h2>';
+    if (r === undefined) return h + '<p><span class="spin"></span> Loading...</p></div>';
+    if (r.failed) return h + '<div class="msg err">The sign-off state could not be loaded: ' + esc(r.message || "failed") + ". Treat every item as UNAPPROVED.</div></div>";
+    var total = 0, unapproved = 0;
+    r.lists.forEach(function (l) { total += l.items.length; unapproved += l.unapproved; });
+    return h + '<p class="quiet">Clinical content shipped with WardSynQ. Each item is UNAPPROVED until ' + esc(r.signatory) + " signs off its exact current content. " +
+      "Signing records the sign-off; it does not change how any safety check behaves.</p>" +
+      '<p><span class="pill ' + (unapproved ? "warn" : "ok") + '">' + unapproved + " of " + total + " items unapproved</span></p>" +
+      r.lists.map(function (l) {
+        return "<h3>" + esc(l.title) + ' <span class="quiet">(' + esc(l.source) + ")</span></h3>" +
+          '<div class="tbl"><table><thead><tr><th>Item</th><th>Version</th><th>Sign-off</th>' + (r.canSign ? "<th></th>" : "") + "</tr></thead><tbody>" +
+          l.items.map(function (it) {
+            var signed = it.status === "signed";
+            return '<tr data-seed="' + esc(l.id) + "/" + esc(it.id) + '"><td>' + esc(it.label) + '<details><summary class="quiet">content</summary><pre style="white-space:pre-wrap;max-width:60ch">' + esc(it.content) + "</pre></details></td>" +
+              '<td class="mono">' + esc(it.version) + "</td>" +
+              "<td>" + (signed ? '<span class="pill ok">' + esc(it.signoff.text) + "</span>" : '<span class="pill stop">UNAPPROVED</span>') + "</td>" +
+              (r.canSign ? "<td>" + (signed ? "" : '<button type="button" class="btn ghost" data-seed-sign="' + esc(l.id) + '" data-seed-item="' + esc(it.id) + '" data-seed-hash="' + esc(it.contentHash) + '">Sign off</button>') + "</td>" : "") + "</tr>";
+          }).join("") + "</tbody></table></div>";
+      }).join("") + '<div id="seedMsg"></div></div>';
+  }
+  WSQ._seedHtml = seedHtml;
+  function renderSeed(c, body) {
+    body.innerHTML = seedHtml(c.esc, undefined);
+    return c.api("/seed/status?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      body.innerHTML = seedHtml(c.esc, r && r.ok ? r : { failed: true, message: refusal(r) });
+      body.querySelectorAll("[data-seed-sign]").forEach(function (b) {
+        b.onclick = function () {
+          var name = window.prompt("Sign off this item's content as shown.\n\nType the signatory's name exactly (" + r.signatory + "):", "");
+          if (name == null) return;
+          if (!window.confirm("I have reviewed the content of " + b.getAttribute("data-seed-item") + " and sign it off as " + name + ".")) return;
+          b.disabled = true;
+          c.api("/seed/signoff", { listId: b.getAttribute("data-seed-sign"), itemId: b.getAttribute("data-seed-item"), contentHash: b.getAttribute("data-seed-hash"), signatory: name, attest: true }).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; document.getElementById("seedMsg").innerHTML = '<div class="msg err">Not signed: ' + c.esc(refusal(x)) + "</div>"; return; }
+            c.toast(x.signoff.text); WSQ.render("admin");
+          });
+        };
+      });
+    });
+  }
 
   // ---- Hospital -------------------------------------------------------------------------------
   /* WHO MAY WRITE A CLINICAL NOTE. Writing a note needs emr.treat, the prescribing capability, so
@@ -205,44 +252,166 @@
    * default; per department when chosen, each department with an optional letter prefix ("A-012") so
    * two departments' number 12 are told apart. Applies to tickets registered after saving; a token
    * already given is never changed. */
-  function tokenCardHtml(esc, tokens) {
-    var t = tokens || {}, dept = t.scope === "department", pre = t.prefixes || {};
-    var lines = Object.keys(pre).map(function (k) { return k + " = " + pre[k]; }).join("\n");
-    return '<div class="card"><h2>OPD token numbers</h2>' +
+  /* D7: one row per ACTIVE department, keyed by its id, so renaming a department keeps its prefix and its
+   * running sequence. A prefix saved before this was keyed by the department's name: it is shown in the
+   * row whose name matches, and a saved name that matches no department is listed so it is not silently
+   * lost on the next save. "Also known as" maps the names the EMR or a doctor's session use for this
+   * department ("Gen Med", "General Medicine OPD") to it; each is used to number imported patients.
+   * departments: undefined = loading, null = could not be loaded, [] = none set up. */
+  function lc(x) { return String(x == null ? "" : x).trim().toLowerCase(); }
+  function tokenCardHtml(esc, tokens, departments) {
+    var t = tokens || {}, dept = t.scope === "department", pre = t.prefixes || {}, al = t.deptAliases || {};
+    var h = '<div class="card"><h2>OPD token numbers</h2>' +
       '<label class="f"><span>Numbering</span><select id="tokScope">' +
         '<option value="hospital"' + (dept ? "" : " selected") + ">One sequence for the whole hospital</option>" +
-        '<option value="department"' + (dept ? " selected" : "") + ">Each department numbers separately</option></select></label>" +
-      '<label class="f"><span>Department prefixes, one per line (Department name = letters)</span><textarea id="tokPrefixes" rows="4" placeholder="General Medicine = A">' + esc(lines) + "</textarea></label>" +
-      '<p class="quiet">Prefixes are used only when each department numbers separately. Without a prefix two departments can both call number 12. Numbers start again at 1 each day, and a token already given never changes.</p>' +
+        '<option value="department"' + (dept ? " selected" : "") + ">Each department numbers separately</option></select></label>";
+    if (departments === undefined) return h + '<p><span class="spin"></span> Loading departments...</p></div>';
+    if (departments === null) return h + '<div class="msg err">The departments could not be loaded, so prefixes cannot be shown or saved. Do not read this as no departments.</div></div>';
+    var act = departments.filter(function (d) { return d && d.id && d.active !== false; });
+    var used = {};
+    var rows = act.map(function (d) {
+      var p = pre[lc(d.id)] || pre[lc(d.name)] || "";
+      if (pre[lc(d.id)]) used[lc(d.id)] = 1; else if (pre[lc(d.name)]) used[lc(d.name)] = 1;
+      var aka = Object.keys(al).filter(function (k) { return al[k] === d.id; });
+      return '<tr data-tok-dept="' + esc(d.id) + '" data-tok-name="' + esc(d.name) + '"><td>' + esc(d.name) + (d.code ? ' <span class="quiet">(' + esc(d.code) + ")</span>" : "") + "</td>" +
+        '<td><input class="tokPrefix" maxlength="3" style="width:5em" value="' + esc(p) + '" placeholder="' + esc(/^[A-Za-z0-9]{1,3}$/.test(d.code || "") ? String(d.code).toUpperCase() : "") + '"></td>' +
+        '<td><input class="tokAka" style="width:100%" value="' + esc(aka.join(", ")) + '" placeholder="Names the EMR uses, comma separated"></td></tr>';
+    }).join("");
+    var stale = Object.keys(pre).filter(function (k) { return !used[k]; });
+    return h + (act.length
+        ? '<div class="tbl"><table><thead><tr><th>Department</th><th>Prefix</th><th>Also known as</th></tr></thead><tbody>' + rows + "</tbody></table></div>"
+        : '<p class="quiet">No active departments. Add them under Departments before numbering per department.</p>') +
+      (stale.length ? '<div class="msg note">Saved prefixes that name no department: ' + esc(stale.map(function (k) { return k + " = " + pre[k]; }).join(", ")) + ". Saving this card drops them.</div>" : "") +
+      '<p class="quiet">Prefixes are used only when each department numbers separately, and then every department needs its own: the desk cannot give a token in a department without one. A blank prefix uses the department code shown grey when that code is one to three letters or digits. Numbers start again at 1 each day, and a token already given never changes, including when the patient is moved to a room in another department.</p>' +
       '<button class="btn" id="tokSave" type="button">Save</button><div id="tokMsg"></div></div>';
   }
-  function readTokenCard(scope, text) {
-    var prefixes = {}, bad = "";
-    String(text || "").split(/\n/).forEach(function (ln) {
-      if (!ln.trim()) return;
-      var i = ln.lastIndexOf("=");
-      var name = i > 0 ? ln.slice(0, i).trim() : "", p = i > 0 ? ln.slice(i + 1).trim().toUpperCase() : "";
-      if (!name || !/^[A-Z0-9]{1,3}$/.test(p)) { bad = bad || ln.trim(); return; }
-      prefixes[name] = p;
-    });
-    if (bad) return { error: "Each line needs a department name, \"=\", and one to three letters or digits: " + bad };
-    return { tokens: { scope: scope === "department" ? "department" : "hospital", prefixes: prefixes } };
+  /* rows: [{ departmentId, prefix, aka }] read from the table. Returns { tokens } or { error }. */
+  function readTokenCard(scope, rows) {
+    var prefixes = {}, deptAliases = {}, taken = {}, perDept = scope === "department";
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], p = String(r.prefix || "").trim().toUpperCase();
+      if (p && !/^[A-Z0-9]{1,3}$/.test(p)) return { error: "A prefix is one to three letters or digits: " + p };
+      if (p) prefixes[r.departmentId] = p;
+      /* D14: numbering per department needs every department's own prefix (typed, or its code shown grey),
+       * and no two alike, or two departments call the same number. The server refuses the same. */
+      var eff = p || String(r.code || "").trim().toUpperCase();
+      if (perDept && !/^[A-Z0-9]{1,3}$/.test(eff)) return { error: (r.name || "A department") + " needs a prefix before each department can number separately." };
+      if (perDept && taken[eff]) return { error: taken[eff] + " and " + (r.name || "another department") + " both use the prefix " + eff + ". Give each department its own." };
+      if (perDept) taken[eff] = r.name || r.departmentId;
+      var names = String(r.aka || "").split(",");
+      for (var j = 0; j < names.length; j++) {
+        var n = lc(names[j]); if (!n) continue;
+        if (deptAliases[n] && deptAliases[n] !== r.departmentId) return { error: "\"" + names[j].trim() + "\" is given to two departments. A name can point to one department only." };
+        deptAliases[n] = r.departmentId;
+      }
+    }
+    return { tokens: { scope: scope === "department" ? "department" : "hospital", prefixes: prefixes, deptAliases: deptAliases } };
   }
   WSQ._tokenCard = { html: tokenCardHtml, read: readTokenCard };
   function wireTokenCard(c) {
-    var btn = document.getElementById("tokSave");
-    if (!btn) return;
-    btn.onclick = function () {
-      var m = document.getElementById("tokMsg");
-      var out = readTokenCard(document.getElementById("tokScope").value, document.getElementById("tokPrefixes").value);
-      if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
-      btn.disabled = true;
-      c.api("/org/update", { orgId: c.state.orgId, tokens: out.tokens }).then(function (r) {
-        btn.disabled = false;
-        if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
-        m.innerHTML = ""; c.state.org = r.org; c.toast("Token numbering saved.");
-      });
+    var box = document.getElementById("tokCard");
+    if (!box) return;
+    var draw = function (depts) {
+      box.innerHTML = tokenCardHtml(c.esc, (c.state.org || {}).tokens, depts);
+      var btn = document.getElementById("tokSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var m = document.getElementById("tokMsg");
+        var rows = Array.prototype.map.call(box.querySelectorAll("tr[data-tok-dept]"), function (tr) {
+          var pin = tr.querySelector(".tokPrefix");
+          return { departmentId: tr.getAttribute("data-tok-dept"), name: tr.getAttribute("data-tok-name"), prefix: pin.value, code: pin.getAttribute("placeholder"), aka: tr.querySelector(".tokAka").value };
+        });
+        var out = readTokenCard(document.getElementById("tokScope").value, rows);
+        if (out.error) { m.innerHTML = '<div class="msg err">' + c.esc(out.error) + "</div>"; return; }
+        btn.disabled = true;
+        c.api("/org/update", { orgId: c.state.orgId, tokens: out.tokens }).then(function (r) {
+          btn.disabled = false;
+          if (!r || !r.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
+          c.state.org = r.org; draw(depts); c.toast("Token numbering saved.");
+        });
+      };
     };
+    draw(undefined);
+    c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? (r.departments || []) : null); }, function () { draw(null); });
+  }
+  /* D11 A: CLINICAL SETTINGS. The six settings each ward screen reads, in one place: apply a template to fill
+   * the form, edit, save. The server validates and answers with what it now holds, and that read-back is what
+   * this card shows after a save, never the form's own values. r: undefined = loading, null = could not be
+   * loaded (said, never drawn as empty settings), else { settings, templates }. */
+  var ACUITY = ["1", "2", "3", "4", "5"];
+  function clinicalSettingsHtml(esc, r, saved) {
+    var h = '<div class="card"><h2>Clinical settings</h2>';
+    if (r === undefined) return h + '<p><span class="spin"></span> Loading clinical settings...</p></div>';
+    if (r === null) return h + '<div class="msg err">The clinical settings could not be loaded. Do not read this as none configured.</div></div>';
+    var s = r.settings || {}, t = r.templates || {};
+    var lines = function (a) { return esc((a || []).join("\n")); };
+    var val = function (v) { return v == null ? "" : esc(v); };
+    return h + '<p class="quiet">What each ward screen uses. A blank setting is not configured, and the screen that needs it says so rather than guessing.</p>' +
+      '<div class="row"><label class="f"><span>Template</span><select id="clinTpl"><option value="">Choose a template</option>' +
+        Object.keys(t).map(function (k) { return '<option value="' + esc(k) + '">' + esc(t[k].label) + "</option>"; }).join("") + "</select></label>" +
+        '<button class="btn ghost" id="clinApply" type="button">Fill the form from the template</button></div><div id="clinTplNote" class="quiet"></div>' +
+      '<div class="row"><label class="f"><span>High-alert drugs, one per line</span><textarea id="clinHigh" rows="4">' + lines(s.highAlertDrugs) + "</textarea></label>" +
+        '<label class="f"><span>Antibiotics counted for days of therapy, one per line</span><textarea id="clinAbx" rows="4">' + lines(s.antibiotics) + "</textarea></label></div>" +
+      '<div class="row"><label class="f"><span>Pharmacy verifies an order within (hours)</span><input id="clinVerify" type="number" min="1" max="168" value="' + val(s.orderVerifyWithinHours) + '" placeholder="not configured"></label>' +
+        '<label class="f"><span>Backup recovery point objective (minutes)</span><input id="clinRpo" type="number" min="5" max="10080" value="' + val(s.rpoMinutes) + '" placeholder="not configured"></label></div>' +
+      '<p>ED reassessment interval by acuity (minutes)</p><div class="row">' + ACUITY.map(function (a) {
+        return '<label class="f" style="flex:0 1 110px"><span>Acuity ' + a + '</span><input class="clinEd" data-acuity="' + a + '" type="number" min="1" max="1440" value="' + val((s.edReassessMinutes || {})[a]) + '" placeholder="none"></label>';
+      }).join("") + "</div>" +
+      '<label class="f"><span><input type="checkbox" id="clinPortal"' + (s.patientAccess && s.patientAccess.enabled ? " checked" : "") + "> Patients may read their own record (patient access)</span></label>" +
+      '<button class="btn" id="clinSave" type="button">Save clinical settings</button><div id="clinMsg"></div>' +
+      (saved ? '<div class="msg ok">Saved' + (saved.changed.length ? ": " + esc(saved.changed.join(", ")) : ": nothing had changed") + '. The server now holds:</div>' + clinicalReadBackHtml(esc, saved.settings) : "") + "</div>";
+  }
+  function clinicalReadBackHtml(esc, s) {
+    var nc = '<span class="quiet">not configured</span>';
+    var list = function (a) { return a && a.length ? esc(a.join(", ")) : nc; };
+    var ed = ACUITY.filter(function (a) { return s.edReassessMinutes && s.edReassessMinutes[a] != null; }).map(function (a) { return "acuity " + a + ": " + s.edReassessMinutes[a] + " min"; });
+    return '<div class="kv"><dt>High-alert drugs</dt><dd>' + list(s.highAlertDrugs) + "</dd><dt>Antibiotics</dt><dd>" + list(s.antibiotics) +
+      "</dd><dt>Verify within</dt><dd>" + (s.orderVerifyWithinHours != null ? esc(s.orderVerifyWithinHours) + " hours" : nc) +
+      "</dd><dt>ED reassessment</dt><dd>" + (ed.length ? esc(ed.join(", ")) : nc) +
+      "</dd><dt>Patient access</dt><dd>" + (s.patientAccess && s.patientAccess.enabled ? "on" : "off") +
+      "</dd><dt>Recovery point objective</dt><dd>" + (s.rpoMinutes != null ? esc(s.rpoMinutes) + " minutes" : nc) + "</dd></div>";
+  }
+  /* Reads the form. Blank numbers are "not configured" (null); the server validates the rest. */
+  function readClinicalSettings(get) {
+    var names = function (id) { return String(get(id) || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean); };
+    var num = function (v) { v = String(v == null ? "" : v).trim(); return v === "" ? null : Number(v); };
+    var ed = {};
+    ACUITY.forEach(function (a) { var v = num(get("ed" + a)); if (v != null) ed[a] = v; });
+    return { highAlertDrugs: names("clinHigh"), antibiotics: names("clinAbx"), orderVerifyWithinHours: num(get("clinVerify")), rpoMinutes: num(get("clinRpo")), edReassessMinutes: ed, patientAccess: { enabled: get("clinPortal") === true } };
+  }
+  WSQ._clinicalSettings = { html: clinicalSettingsHtml, readBack: clinicalReadBackHtml, read: readClinicalSettings };
+  function wireClinicalSettings(c) {
+    var box = document.getElementById("clinCard");
+    if (!box) return;
+    var draw = function (r, saved) {
+      box.innerHTML = clinicalSettingsHtml(c.esc, r, saved);
+      if (!r) return;
+      var tplUsed = "";
+      document.getElementById("clinApply").onclick = function () {
+        var id = document.getElementById("clinTpl").value, tpl = id && r.templates[id];
+        if (!tpl) { document.getElementById("clinTplNote").textContent = "Choose a template first."; return; }
+        draw({ settings: tpl.settings, templates: r.templates });
+        tplUsed = id;
+        document.getElementById("clinTpl").value = id;
+        document.getElementById("clinTplNote").textContent = tpl.description + " Nothing is saved until you press Save.";
+      };
+      document.getElementById("clinSave").onclick = function () {
+        var btn = this, m = document.getElementById("clinMsg");
+        var get = function (id) {
+          if (/^ed\d$/.test(id)) { var e = box.querySelector('.clinEd[data-acuity="' + id.slice(2) + '"]'); return e ? e.value : ""; }
+          var el = document.getElementById(id); return el ? (el.type === "checkbox" ? el.checked : el.value) : "";
+        };
+        btn.disabled = true;
+        c.api("/org/clinical-settings", { orgId: c.state.orgId, settings: readClinicalSettings(get), templateId: tplUsed || (document.getElementById("clinTpl").value || undefined) }).then(function (x) {
+          btn.disabled = false;
+          if (!x || !x.ok) { m.innerHTML = '<div class="msg err">' + c.esc(refusal(x)) + "</div>"; return; }
+          draw({ settings: x.settings, templates: r.templates }, { changed: x.changed || [], settings: x.settings });
+          c.toast("Clinical settings saved.");
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
   }
   /* CRITICAL RESULT ALERTS TO PHONES (S3 P0). Whether a critical result is pushed through the StewardMD
    * app, who each level tells, the SMS fallback when no phone confirms, and - loudest - every open result
@@ -357,8 +526,8 @@
        * say: nothing is converted, and nothing already recorded is rewritten. */
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
-      "</div>" + tokenCardHtml(c.esc, o.tokens) +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div>' + noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
+      '</div><div id="tokCard"></div>' +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();
@@ -373,6 +542,7 @@
         c.state.org = r.org; c.toast("Hospital updated."); WSQ.render("admin");
       });
     };
+    wireClinicalSettings(c);
     wireNoteWriters(c);
     wireApprovalRules(c);
     wireLabCheck(c);
@@ -685,18 +855,37 @@
   // ---- Rooms (OPD consulting rooms) --------------------------------------------------------------
   function renderRooms(c, body) {
     body.innerHTML = '<span class="spin"></span>';
-    return c.api("/rooms?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
-      var rooms = (r && r.ok && r.rooms) || [];
+    /* D7: a room belongs to a department (or none). A patient registered into the room is numbered in that
+     * department when each department numbers separately, and the waiting hall shows the room under it. */
+    return c.api("/org?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { body.innerHTML = '<div class="card"><h2>Rooms</h2><div class="msg err">Rooms could not be loaded. Do not read this as no rooms. ' + c.esc(refusal(r)) + "</div></div>"; return; }
+      var rooms = r.rooms || [], depts = (r.departments || []).filter(function (d) { return d.active !== false; });
+      var deptSel = function (cls, cur, attr) {
+        return '<select class="' + cls + '"' + (attr || "") + '><option value="">No department</option>' + depts.map(function (d) {
+          return '<option value="' + c.esc(d.id) + '"' + (d.id === cur ? " selected" : "") + ">" + c.esc(d.name) + "</option>";
+        }).join("") + "</select>";
+      };
       body.innerHTML = '<div class="card"><h2>Rooms</h2>' +
-        (rooms.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Number</th><th>Assignment</th><th>Active</th></tr></thead><tbody>' +
-          rooms.map(function (rm) { return "<tr><td>" + c.esc(rm.name) + "</td><td>" + c.esc(rm.number) + "</td><td>" + c.esc((rm.assignment && rm.assignment.mode) || "") + "</td><td>" + (rm.active ? "yes" : "no") + "</td></tr>"; }).join("") +
+        (rooms.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>Number</th><th>Department</th><th>Assignment</th><th>Active</th></tr></thead><tbody>' +
+          rooms.map(function (rm) { return "<tr><td>" + c.esc(rm.name) + "</td><td>" + c.esc(rm.number) + "</td><td>" + deptSel("admRoomDept", rm.departmentId || "", ' data-room="' + c.esc(rm.id) + '"') + "</td><td>" + c.esc((rm.assignment && rm.assignment.mode) || "") + "</td><td>" + (rm.active ? "yes" : "no") + "</td></tr>"; }).join("") +
           "</tbody></table></div>" : '<p class="quiet">No consulting rooms yet.</p>') +
         '<h3>Add a room</h3><div class="row"><label class="f"><span>Name</span><input id="admRoomName"></label>' +
+        '<label class="f"><span>Department</span>' + deptSel("", "", ' id="admRoomNewDept"') + "</label>" +
         '<button class="btn" id="admRoomAdd" type="button">' + c.ms("add") + "Add</button></div><div id=\"admRoomMsg\"></div></div>";
+      body.querySelectorAll(".admRoomDept").forEach(function (sel) {
+        sel.onchange = function () {
+          sel.disabled = true;
+          c.api("/room/update", { orgId: c.state.orgId, roomId: sel.getAttribute("data-room"), departmentId: sel.value || null }).then(function (x) {
+            sel.disabled = false;
+            if (!x || !x.ok) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">The department was not saved: ' + c.esc(refusal(x)) + "</div>"; WSQ.render("admin"); return; }
+            c.toast("Room department saved" + (x.room && x.room.department ? ": " + x.room.department : ": none") + ".");
+          });
+        };
+      });
       document.getElementById("admRoomAdd").onclick = function () {
         var name = (document.getElementById("admRoomName").value || "").trim();
         if (!name) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">Give the room a name.</div>'; return; }
-        c.api("/room", { orgId: c.state.orgId, name: name }).then(function (r) {
+        c.api("/room", { orgId: c.state.orgId, name: name, departmentId: document.getElementById("admRoomNewDept").value || null }).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admRoomMsg").innerHTML = '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; return; }
           c.toast("Room added."); WSQ.render("admin");
         });
@@ -818,14 +1007,23 @@
    * A group sees counts only, never a patient. An invitation alone does not make a hospital a member. */
   // The only actions each half sends to /group/<action>; anything else sends nothing.
   var GROUP_SIDE_ROUTE = { accept: "accept", decline: "decline", remove: "remove", adopt: "adopt" };
-  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy", adminAdd: "admin-add", adminRemove: "admin-remove" };
+  var GROUP_RUN_ROUTE = { invite: "invite", remove: "remove", policy: "policy", adminAdd: "admin-add", adminRemove: "admin-remove", staleAfter: "stale-after" };
   function groupSideHtml(c, r) {
     var esc = c.esc;
     var h = '<div class="card"><h2>This hospital\'s groups</h2>';
     if (r == null) return h + '<span class="spin"></span> Loading...</div>';
     if (r.failed) return h + '<div class="msg err">Could not be loaded: ' + esc(r.message || "failed") + ". Do not read this as no groups or invitations.</div></div>";
     if (!r.groups.length) return h + '<p class="quiet">This hospital is not in a hospital group and has no invitations.</p></div>';
-    return h + '<p class="quiet">A group sees this hospital\'s counts (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' +
+    /* D4 B: groups read what this hospital PUBLISHES, not its live record. Say what was last published, by whom
+     * and when, and offer to publish now. A snapshot that could not be read is said, never shown as none. */
+    var s = r.snapshot, when = function (ms) { return new Date(ms).toLocaleString(); };
+    var member = r.groups.some(function (g) { return g.state === "member"; });
+    var pub = !member ? "" : '<h3>Counts published to groups</h3>' +
+      (s === false ? '<div class="msg err">What this hospital last published could not be read.</div>'
+        : s ? "<p>Last published " + esc(when(s.publishedAt)) + " by " + esc(s.publishedBy || "unknown") + ".</p>"
+        : '<p class="quiet">Not published yet: groups see this hospital as "not published".</p>') +
+      '<p><button type="button" class="btn" data-grp-publish="1">Publish counts now</button> <span class="quiet">Groups see the counts as they are at this moment, with this time on them.</span></p>';
+    return h + '<p class="quiet">A group sees the counts this hospital publishes (census, free beds, ED waiting, open critical results, staff short). It never sees a patient. Leaving takes effect at once.</p>' + pub +
       '<div class="tbl"><table><thead><tr><th>Group</th><th>Status</th><th>Recommended settings</th><th></th></tr></thead><tbody>' +
       r.groups.map(function (g) {
         var id = esc(g.groupId);
@@ -868,6 +1066,8 @@
         '<button type="button" class="btn" data-grp-run="invite" data-grp="' + id + '">Invite</button></div>' +
         '<label class="f"><span>Recommended settings (JSON, version ' + esc(g.policyVersion) + ')</span><textarea rows="5" style="width:100%;font-family:monospace" data-grp-policy-input="' + id + '">' + esc(g.policy ? JSON.stringify(g.policy, null, 2) : "") + "</textarea></label>" +
         '<button type="button" class="btn ghost" data-grp-run="policy" data-grp="' + id + '">Publish recommended settings</button>' +
+        '<div class="row"><label class="f" style="flex:0 1 260px"><span>Mark a hospital\'s counts stale after (minutes)</span><input type="number" min="5" max="10080" data-grp-stale-input="' + id + '" value="' + esc(g.staleAfterMinutes || 60) + '"></label>' +
+        '<button type="button" class="btn ghost" data-grp-run="staleAfter" data-grp="' + id + '">Save</button></div>' +
         '<p class="quiet">A member hospital\'s admin decides whether to adopt them. Nothing changes in any hospital until they do.</p>';
     }).join("") : '<p class="quiet">You do not run a hospital group.</p>';
     return h + '<h3>Create a group</h3><div class="row"><label class="f"><span>Group name</span><input id="grpNewName"></label>' +
@@ -882,6 +1082,14 @@
     var side = c.api("/group/memberships" + q).then(function (r) {
       var box = document.getElementById("grpSide");
       box.innerHTML = groupSideHtml(c, r && r.ok ? r : { failed: true, message: refusal(r) });
+      var pb = box.querySelector("[data-grp-publish]");
+      if (pb) pb.onclick = function () {
+        pb.disabled = true;
+        c.api("/group/publish-counts", { orgId: c.state.orgId }).then(function (x) {
+          if (!x || !x.ok) { pb.disabled = false; say("grpSideMsg", x); return; }
+          c.toast("Counts published."); WSQ.render("admin");
+        });
+      };
       box.querySelectorAll("[data-grp-side]").forEach(function (b) {
         b.onclick = function () {
           var act = b.getAttribute("data-grp-side"), gid = b.getAttribute("data-grp");
@@ -930,11 +1138,13 @@
           } else if (act === "adminRemove") {
             payload.uid = b.getAttribute("data-uid");
             if (!window.confirm("Remove this administrator from the group? They stop seeing it at once.")) return;
+          } else if (act === "staleAfter") {
+            payload.minutes = Number(box.querySelector('[data-grp-stale-input="' + gid + '"]').value);
           }
           b.disabled = true;
           c.api("/group/" + GROUP_RUN_ROUTE[act], payload).then(function (x) {
             if (!x || !x.ok) { b.disabled = false; say("grpRunMsg", x); return; }
-            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published.", adminAdd: "Administrator added.", adminRemove: "Administrator removed." }[act]);
+            c.toast({ invite: "Invitation sent. The hospital's owner must accept it.", remove: "Removed.", policy: "Recommended settings published.", adminAdd: "Administrator added.", adminRemove: "Administrator removed.", staleAfter: "Saved." }[act]);
             WSQ.render("admin");
           });
         };

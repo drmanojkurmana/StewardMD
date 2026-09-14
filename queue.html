@@ -194,6 +194,8 @@
       return msgView("link_off","Link not valid","This queue tracking link isn't active. Ask the front desk for a new one.");
     }
     if(d.journey && d.journey.done) return msgView("task_alt","Your consultation is complete","Thank you for visiting. You may close this page.");
+    // D13: called and not there. The token can still be used for a few hours, so the link stays alive.
+    if(d.status==="no_show") return msgView("campaign","Your token was called","You were not in the waiting area when it was called. Please go to the front desk now: they can put you back in the queue with the same token.");
 
     showActions(d);
     var first = !rendered;

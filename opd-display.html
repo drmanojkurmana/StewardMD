@@ -112,6 +112,8 @@
   // The board sends each patient's TOKEN, never a name. A ticket registered before tokens existed has
   // none (""), and is drawn as a plain "Patient" rather than left blank.
   function who(n){ return n ? "Token " + n : "Patient"; }
+  // D7: a token issued in another department (the patient was moved) says which, beside the number.
+  function whoIn(n, dept, r){ return who(n) + (n && dept && dept !== r.department ? " (" + dept + ")" : ""); }
   function message(t){ grid.innerHTML = '<div class="msg">' + esc(t) + '</div>'; banner.classList.remove("on"); }
 
   // White-label: a Pro clinic's logo becomes the primary brand with "powered by StewardMD" (server sends org.logo).
@@ -129,9 +131,9 @@
 
   function renderBanner(rooms){
     var calls = [];
-    rooms.forEach(function(r){ (r.calling || []).forEach(function(n){ calls.push({ n: n, room: r.number || r.name }); }); });
+    rooms.forEach(function(r){ (r.calling || []).forEach(function(n, i){ calls.push({ n: n, room: r.number || r.name, label: whoIn(n, (r.callingDepartments || [])[i], r) }); }); });
     if (!calls.length){ banner.classList.remove("on"); return; }
-    bannerItems.innerHTML = calls.map(function(c){ return '<span class="item"><b>' + esc(who(c.n)) + '</b><span class="arrow">&rarr;</span>Room ' + esc(c.room) + '</span>'; }).join("");
+    bannerItems.innerHTML = calls.map(function(c){ return '<span class="item"><b>' + esc(c.label) + '</b><span class="arrow">&rarr;</span>Room ' + esc(c.room) + '</span>'; }).join("");
     banner.classList.add("on");
     // new call since last poll? one-shot attention pulse on the whole banner
     var fresh = calls.some(function(c){ return !prevCalling.has(c.room + "|" + c.n); });
@@ -144,23 +146,33 @@
     var calling = (r.calling && r.calling.length) ? r.calling[0] : null;
     if (calling != null) el.classList.add("calling");
     var now;
-    if (calling != null) now = '<div class="now call"><div class="lbl">Now calling</div><div class="who">' + esc(who(calling)) + '</div></div>';
-    else if (r.serving) now = '<div class="now serve"><div class="lbl">In consultation</div><div class="who">' + esc(who(r.serving)) + '</div></div>';
+    if (calling != null) now = '<div class="now call"><div class="lbl">Now calling</div><div class="who">' + esc(whoIn(calling, (r.callingDepartments || [])[0], r)) + '</div></div>';
+    else if (r.serving) now = '<div class="now serve"><div class="lbl">In consultation</div><div class="who">' + esc(whoIn(r.serving, r.servingDepartment, r)) + '</div></div>';
     else if (r.status === "unavailable") now = '<div class="now idle"><div class="lbl">Not available</div><div class="who">&middot;</div></div>';
     else now = '<div class="now idle"><div class="lbl">Waiting</div><div class="cnt">' + (r.waiting || 0) + '</div></div>';
     var up = r.upcoming || [];
-    var serveLine = (calling != null && r.serving) ? '<span class="up-serve">In consultation: <b>' + esc(who(r.serving)) + '</b></span> ' : '';
-    var upTxt = (up.length ? 'Next: ' + up.map(function(n){ return '<b>' + esc(who(n)) + '</b>'; }).join(" &middot; ") : (r.waiting ? '' : (calling != null || r.serving ? '' : 'No one waiting')));
+    var serveLine = (calling != null && r.serving) ? '<span class="up-serve">In consultation: <b>' + esc(whoIn(r.serving, r.servingDepartment, r)) + '</b></span> ' : '';
+    var upTxt = (up.length ? 'Next: ' + up.map(function(n, i){ return '<b>' + esc(whoIn(n, (r.upcomingDepartments || [])[i], r)) + '</b>'; }).join(" &middot; ") : (r.waiting ? '' : (calling != null || r.serving ? '' : 'No one waiting')));
     el.innerHTML = '<div class="rhead"><span class="rname">' + esc(r.name) + '</span>' + (r.number ? '<span class="rnum">' + esc(r.number) + '</span>' : '') + '</div>' +
       (r.department ? '<div class="rdept">' + esc(r.department) + '</div>' : '') + now +
       '<div class="up">' + serveLine + upTxt + '</div>';
     return el;
   }
 
-  function renderGrid(rooms){
+  // D7: when each department numbers separately, the wall groups rooms under their department so a
+  // patient holding "C-012" looks in one place.
+  function renderGrid(rooms, scope){
     grid.innerHTML = "";
     if (!rooms.length){ message("No consultation rooms are open yet."); return; }
-    rooms.map(card).forEach(function(el){ grid.appendChild(el); });
+    if (scope !== "department"){ rooms.map(card).forEach(function(el){ grid.appendChild(el); }); return; }
+    var order = [], by = {};
+    rooms.forEach(function(r){ var k = r.department || "Other rooms"; if (!by[k]){ by[k] = []; order.push(k); } by[k].push(r); });
+    order.forEach(function(k){
+      var h = document.createElement("div"); h.className = "depthead";
+      h.style.cssText = "grid-column:1/-1;font:700 22px/1.2 -apple-system,system-ui,sans-serif;color:inherit;margin:10px 0 0";
+      h.textContent = k; grid.appendChild(h);
+      by[k].map(card).forEach(function(el){ grid.appendChild(el); });
+    });
   }
 
   function load(){
@@ -187,7 +199,7 @@
         }
         setBrand(d.org);
         renderBanner(d.rooms || []);
-        renderGrid(d.rooms || []);
+        renderGrid(d.rooms || [], d.tokenScope);
         prevCalling = new Set(); (d.rooms || []).forEach(function(r){ (r.calling || []).forEach(function(n){ prevCalling.add((r.number || r.name) + "|" + n); }); });
       })
       .catch(function(){

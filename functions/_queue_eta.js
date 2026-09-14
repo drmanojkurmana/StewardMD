@@ -21,10 +21,25 @@ const NEXT = {
   followup:        ["completed", "cancelled"],
   completed:       [],
   cancelled:       [],
-  no_show:         []
+  // D13 (2026-09-14): a patient marked no-show who then turns up is recalled with the SAME token, back to
+  // waiting or straight to called. Only through recallNoShow (_queue_engine.js), which requires a reason,
+  // the queue-management capability, and the recall window below; setStatus refuses it.
+  no_show:         ["waiting", "called"]
 };
 export function canTransition(from, to) { return STATUS.indexOf(to) >= 0 && (NEXT[from] || []).indexOf(to) >= 0; }
-export function isTerminal(s) { return s === "completed" || s === "cancelled" || s === "no_show"; }
+// no_show is no longer terminal (D13): the patient link keeps working so a recalled patient still sees
+// their place. It is still not queued (no position, no ETA) until recalled.
+export function isTerminal(s) { return s === "completed" || s === "cancelled"; }
+export const NO_SHOW_RECALL_MS = 4 * 3600e3;
+/* PURE (D13). Why this no-show cannot be recalled now, or null. The window is 4 hours from being marked
+ * no-show, or the end of the OPD session, whichever comes first: after that the number has been skipped
+ * for long enough that calling it again would confuse the hall more than it helps the patient. */
+export function recallRefusal(ticket, session, nowMs) {
+  if (!ticket || ticket.status !== "no_show") return "not_no_show";
+  if (session && (session.status === "finished" || (session.expiresAt && nowMs > session.expiresAt))) return "session_ended";
+  if (!ticket.noShowAt || nowMs - ticket.noShowAt > NO_SHOW_RECALL_MS) return "recall_window_passed";
+  return null;
+}
 // Tickets still waiting for the doctor (get a position + ETA). in_consultation/investigation/terminal excluded.
 export function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
 
@@ -49,6 +64,10 @@ export function orderRoomView(tickets) {
 // the hall calls out, so a patient recognises their turn without anyone else learning who they are. A
 // ticket registered before tokens existed has none and is shown as "" (the screen draws a blank, not a name).
 const wallToken = (t) => String((t && t.token) || "");
+// D7: the department each token was issued in, aligned with the token arrays. A department name names no
+// patient. Shown beside a token when it differs from the room's own (a patient moved between departments
+// keeps the number they already heard).
+const wallDept = (t) => String((t && t.department) || "");
 // Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-free.
 // Tickets are already priority/seq-ordered by boardForOrg (orderRoomView), so `calling`/`upcoming`
 // reflect true order. `calling` = summoned-not-yet-entered (the attention state); `serving` = in room.
@@ -56,15 +75,17 @@ export function displayBoard(org, board) {
   const rooms = (board.rooms || []).filter((rm) => rm.doctorUid).map((rm) => {
     const ts = rm.tickets || [];
     const waiting = ts.filter((t) => t.status === "registered" || t.status === "waiting");
+    const calling = ts.filter((t) => t.status === "called"), serving = ts.filter((t) => t.status === "in_consultation")[0];
     return {
       name: (rm.room && rm.room.name) || "Room", number: (rm.room && rm.room.number) || "",
       department: (rm.room && rm.room.department) || "", status: rm.status,
-      calling: ts.filter((t) => t.status === "called").map(wallToken),
-      serving: ts.filter((t) => t.status === "in_consultation").map(wallToken)[0] || "",
-      waiting: waiting.length, upcoming: waiting.slice(0, 3).map(wallToken),
+      calling: calling.map(wallToken), callingDepartments: calling.map(wallDept),
+      serving: serving ? wallToken(serving) : "", servingDepartment: serving ? wallDept(serving) : "",
+      waiting: waiting.length, upcoming: waiting.slice(0, 3).map(wallToken), upcomingDepartments: waiting.slice(0, 3).map(wallDept),
     };
   });
-  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, rooms: rooms };
+  const scope = org && org.tokens && org.tokens.scope === "department" ? "department" : "hospital";
+  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, tokenScope: scope, rooms: rooms };
 }
 
 // PURE: the new `seq` to give `moveId` so it lands at visible index `toIndex` in the CURRENT ordered

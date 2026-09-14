@@ -29,26 +29,101 @@ export function roomStatus(waiting, inConsult, t) {
 
 // ---- OPD token numbers (the number called out in the waiting hall) ------------------------------
 // One counter per hospital, per OPD day, per scope. "hospital" (default): one sequence for the whole
-// hospital. "department": each department counts separately, with an optional letter prefix so two
-// departments' "12" are told apart ("A-012"). Prefixes are keyed by the department name as it rides on
-// the ticket, compared case-insensitively.
+// hospital. "department": each department counts separately, with a letter prefix so two departments'
+// "12" are told apart ("A-012").
+//
+// D7 (2026-09-14): A DEPARTMENT IS ITS departmentId, NEVER ITS NAME. The counter and the prefix are keyed
+// by the q_departments id, so renaming "General Medicine" to "Medicine" keeps its sequence and its prefix.
+// Names still arrive from outside (a GHIS deptDescription, a Connect Department, a doctor session's free
+// text); `deptAliases` maps such a name to a departmentId, and a department's own name and code match
+// without an alias. Prefixes saved before this were keyed by the lower-cased name: they are still read
+// (by name, case-insensitively) so a hospital's configuration keeps working until the Admin card resaves
+// it by id. A department with no configured prefix uses its own code when that code is a valid prefix.
 const deptKey = (d) => s(d).trim().toLowerCase();
+const PREFIX_RE = /^[A-Z0-9]{1,3}$/;
+const objOf = (x) => (x && typeof x === "object" && !Array.isArray(x) ? x : {});
+const slugOf = (x) => deptKey(x).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
 export function tokenConfig(t) {
-  t = t && typeof t === "object" ? t : {};
-  const prefixes = {};
-  const src = t.prefixes && typeof t.prefixes === "object" && !Array.isArray(t.prefixes) ? t.prefixes : {};
+  t = objOf(t);
+  const prefixes = {}, deptAliases = {};
+  const src = objOf(t.prefixes);
   Object.keys(src).forEach((k) => {
     const key = deptKey(k), p = s(src[k]).toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3);
     if (key && p) prefixes[key] = p;
   });
-  return { scope: t.scope === "department" ? "department" : "hospital", prefixes };
+  const al = objOf(t.deptAliases);
+  Object.keys(al).forEach((k) => {
+    const key = deptKey(k).slice(0, 80), id = s(al[k]).trim().slice(0, 80);
+    if (key && id) deptAliases[key] = id;
+  });
+  return { scope: t.scope === "department" ? "department" : "hospital", prefixes, deptAliases };
 }
-// PURE: which counter a ticket in `department` draws from, and the prefix its token carries.
-export function tokenScope(cfg, department) {
+// PURE: the prefix a department's tokens carry: configured by id, else a legacy name-keyed entry, else
+// the department's own code when it is 1 to 3 letters or digits. "" when none.
+export function departmentPrefix(cfg, dept) {
+  cfg = tokenConfig(cfg);
+  if (!dept) return "";
+  const code = s(dept.code).trim().toUpperCase();
+  return cfg.prefixes[deptKey(dept.id)] || cfg.prefixes[deptKey(dept.name)] || (PREFIX_RE.test(code) ? code : "");
+}
+/* PURE: which of the hospital's ACTIVE departments a ticket belongs to. First match wins:
+ *   1. hints.departmentId  - the registration desk's department picker. Exact or nothing: an id that is
+ *      not an active department of this hospital is `badId`, never quietly replaced by a guess;
+ *   2. hints.roomDepartmentId - the room the ticket is registered into;
+ *   3. hints.department    - a name the ticket itself carries (an EMR import row, a typed department);
+ *   4. hints.sessionDepartment - the doctor session's department name.
+ * A name matches an alias, then a department's name or code, case-insensitively. `unmatched` is the name
+ * that was offered and matched nothing, so an import can say which department needs an alias. */
+export function resolveTokenDepartment(departments, cfg, hints) {
+  cfg = tokenConfig(cfg); hints = hints || {};
+  const act = (departments || []).filter((d) => d && d.id && d.active !== false);
+  const byId = (id) => (id ? act.find((d) => String(d.id) === String(id)) || null : null);
+  const byName = (name) => {
+    const k = deptKey(name); if (!k) return null;
+    return byId(cfg.deptAliases[k]) || act.find((d) => deptKey(d.name) === k || (d.code && deptKey(d.code) === k)) || null;
+  };
+  if (hints.departmentId) { const d = byId(hints.departmentId); return d ? { department: d, source: "picker" } : { department: null, source: null, badId: true }; }
+  const room = byId(hints.roomDepartmentId);
+  if (room) return { department: room, source: "room" };
+  const own = byName(hints.department);
+  if (own) return { department: own, source: "ticket" };
+  const sess = byName(hints.sessionDepartment);
+  if (sess) return { department: sess, source: "session" };
+  return { department: null, source: null, unmatched: s(hints.department || hints.sessionDepartment).trim() };
+}
+// PURE: which counter a ticket in `dept` (a department record, or null) draws from, and the prefix its
+// token carries. The counter key is the department's id; `legacyKey` is the name-slug key counters used
+// before D7, read once on a day's first allocation so a sequence already running today is continued.
+/* D14 (2026-09-14): in department scope a token is NEVER issued without a department, and never without a
+ * prefix. Two departments both calling a plain "12" is exactly the collision department prefixes exist to
+ * prevent, and a shared "dept-none" counter would give a patient with no department a number that means
+ * nothing in any department's column. Both are refused with a reason the desk can act on. */
+export function tokenScope(cfg, dept) {
   cfg = tokenConfig(cfg);
   if (cfg.scope !== "department") return { key: "hospital", prefix: "" };
-  const k = deptKey(department);
-  return { key: "dept-" + (k.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "none"), prefix: cfg.prefixes[k] || "" };
+  if (!dept || !dept.id) return { error: "token_department_required" };
+  const prefix = departmentPrefix(cfg, dept);
+  if (!prefix) return { error: "token_prefix_missing", departmentId: s(dept.id), departmentName: s(dept.name) };
+  return { key: "dept-" + s(dept.id).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 60), prefix, legacyKey: "dept-" + (slugOf(dept.name) || "none") };
+}
+/* PURE (D14). Why this token configuration cannot be saved, as sentences naming departments; [] = it can.
+ * Only department scope is checked: every ACTIVE department needs a prefix (its own or its code), no two
+ * active departments may share one, and an alias must point at an active department. */
+export function tokenConfigProblems(cfg, departments) {
+  cfg = tokenConfig(cfg);
+  if (cfg.scope !== "department") return [];
+  const act = (departments || []).filter((d) => d && d.id && d.active !== false);
+  const out = [], seen = {};
+  for (const d of act) {
+    const p = departmentPrefix(cfg, d);
+    if (!p) { out.push(`${d.name || d.id} has no prefix.`); continue; }
+    if (seen[p]) out.push(`${seen[p]} and ${d.name || d.id} both use the prefix ${p}.`);
+    else seen[p] = d.name || d.id;
+  }
+  for (const k of Object.keys(cfg.deptAliases)) {
+    if (!act.some((d) => String(d.id) === cfg.deptAliases[k])) out.push(`The name "${k}" points to a department that is not active here.`);
+  }
+  return out;
 }
 export function formatToken(prefix, n) { return prefix ? prefix + "-" + String(n).padStart(3, "0") : String(n); }
 
@@ -166,7 +241,10 @@ function wardsynqConfig(w) {
   /* alerts joined for S3 P0: alerts.push.enabled turns on pushing critical results to phones through the
    * StewardMD app (functions/_wardsynq/alert-deps.js). Absent or false means nothing is pushed and every
    * loop records NO_CHANNEL, as before. */
-  for (const k of ["alerts", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears"]) {
+  /* orderVerifyWithinHours joined 2026-09-14 (D11), and it is a FIX: surveillance.js has read it since it was
+   * written ("active order not pharmacy-verified" after this many hours) and this whitelist dropped it, so
+   * that rule could never be evaluated for any hospital. */
+  for (const k of ["alerts", "orderVerifyWithinHours", "edReassessMinutes", "criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "noteWriterRoles", "riskTools", "utcOffsetMinutes", "timeZone", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik", "readLogRetentionDays", "externalMrn", "payment", "approvalLevels", "documentRetentionYears", "approvalPolicy", "labVerification", "antibiotics", "imagingViewer", "radiologyTemplates", "payers", "specialties", "auditRetentionYears"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -195,6 +273,12 @@ export function room(o = {}) {
   const mode = ROOM_ASSIGN_MODES.indexOf(a.mode) > -1 ? a.mode : "unassigned";
   return {
     id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), opdId: orNull(o.opdId),
+    /* The department NAME, for display only. It is not stored on the room: the store fills it from
+     * q_departments by departmentId on every read, so a renamed department shows its new name. Until
+     * 2026-09-14 this field was dropped here, so every room's department read as undefined: the hall
+     * display label was blank, department-matched routing on the console never matched, and a ticket
+     * routed to a room never took the room's department. */
+    department: s(o.department),
     name: s(o.name), number: s(o.number), active: o.active !== false,
     assignment: { mode, doctors: arr(a.doctors), primary: orNull(a.primary) }
   };

@@ -82,7 +82,7 @@ export async function notifyTicket(env, session, ticket, event, vars) {
   try {
     var link = await linkUrl(env, ticket);
     var body = I18n.t("queue.msg." + event, ticket.lang || "en", {
-      dept: session.department || "the clinic", doctor: session.doctorName || "", link: link,
+      dept: ticket.department || session.department || "the clinic", doctor: session.doctorName || "", link: link,
       ahead: vars.ahead != null ? vars.ahead : Math.max(0, (ticket.position || 1) - 1), eta: vars.eta || ""
     });
     if (ticket.token && (event === "registered" || event === "next")) body = I18n.t("queue.msg.token", ticket.lang || "en", { token: ticket.token }) + " " + body;
