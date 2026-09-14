@@ -2755,7 +2755,10 @@ export async function onRequest(context) {
         /* P2.17: who was assigned where, for the out-of-assignment check. Each source that fails is
          * handed in as an error so the section says so rather than reading silence as clean. */
         const rDays = Math.max(1, Math.min(90, Number(url.searchParams.get("days")) || 7));
-        const rTo = new Date().toISOString().slice(0, 10), rFrom = new Date(Date.now() - rDays * 86400000).toISOString().slice(0, 10);
+        /* Rota rows are keyed by the HOSPITAL's local date, not UTC: between midnight and 05:30 IST the UTC date is
+         * still yesterday, so a UTC window missed tonight's shifts and flagged the rostered staff. One day of margin
+         * each side; the intervals are matched by time, so an extra day's rows cannot clear a read. */
+        const rTo = new Date(Date.now() + 86400000).toISOString().slice(0, 10), rFrom = new Date(Date.now() - (rDays + 1) * 86400000).toISOString().slice(0, 10);
         const [members, roster] = await Promise.all([
           ORG.listMembers(env, wOrgId).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),
           ROSTER.assignmentsBetween(env, wOrgId, rFrom, rTo).catch((e) => ({ error: String((e && e.message) || e).slice(0, 200) })),

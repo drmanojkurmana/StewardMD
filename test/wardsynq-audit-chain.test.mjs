@@ -339,7 +339,7 @@ test("retention: configured wins, India defaults to the cited three years, elsew
   assert.match(SR.auditRetention(null, null, AC.auditRetentionSetting(null, "US")).configuredNote, /kept indefinitely/);
   assert.equal(SR.auditRetention(null, null).configuredRetention, null);
   if (wardsynqConfig) assert.equal(wardsynqConfig({ auditRetentionYears: 7 }).auditRetentionYears, 7, "whitelisted in _opd_org.js");
-  else assert.match(readFileSync(new URL("../functions/_opd_org.js", import.meta.url), "utf8"), /"auditRetentionYears"\]\) \{/, "whitelisted in _opd_org.js");
+  else assert.match(readFileSync(new URL("../functions/_opd_org.js", import.meta.url), "utf8"), /"auditRetentionYears"(, "\w+")*\]\) \{/, "whitelisted in _opd_org.js");
 });
 
 /* ---- 9: the real routes ----------------------------------------------------------------------------- */
