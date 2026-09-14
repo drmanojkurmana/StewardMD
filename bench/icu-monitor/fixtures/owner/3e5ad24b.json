@@ -1,0 +1,78 @@
+{
+  "id": "owner-3e5ad24b",
+  "manufacturer": "contec",
+  "layout": "seven-segment-vital-signs",
+  "difficulty": [
+    "real-photo",
+    "seven-segment",
+    "occlusion",
+    "low-light",
+    "unreadable-labels"
+  ],
+  "image": "3e5ad24b.jpg",
+  "imageSize": {
+    "w": 899,
+    "h": 1599
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "ambiguous",
+      "why": "only PR (SpO2 pulse rate) shown, no ECG HR; label unreadable",
+      "value": 118
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 94
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 171,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 107,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "not_visible",
+      "why": "MAP window shows -.- dashes"
+    },
+    "rr": {
+      "status": "not_applicable"
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 118
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_visible",
+      "why": "temp window blank"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 171,
+        "dbp": 107,
+        "map": null
+      }
+    }
+  },
+  "distractors": {
+    "mapDashes": "-.-",
+    "miniScreenClock": "11:31?",
+    "labels": "SYS/DIA/%SpO2/PR printed faintly beside the digits"
+  },
+  "notes": "Contec-style seven-segment vital signs monitor (CONT... logo partly hidden by a cable). Cable crosses the top of the screen. Labels faint; digits clear."
+}

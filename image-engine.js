@@ -56,6 +56,11 @@
   }
   function online() { return typeof navigator === "undefined" || navigator.onLine !== false; }
   function log() { if (!DEV) return; try { console.log.apply(console, ["[ImageEngine]"].concat([].slice.call(arguments))); } catch (e) {} }
+  // Extraction counters (device-local, no PHI): local_success, local_needs_review, gemini_fallback,
+  // gemini_success, gemini_failure, network_calls. Read with SMD_IMAGE_ENGINE.stats().
+  var STATS_KEY = "smd_ocr_stats";
+  function stat(k) { try { var s = JSON.parse(localStorage.getItem(STATS_KEY) || "{}"); s[k] = (s[k] || 0) + 1; s.updated = new Date().toISOString(); localStorage.setItem(STATS_KEY, JSON.stringify(s)); } catch (e) {} }
+  function stats() { try { return JSON.parse(localStorage.getItem(STATS_KEY) || "{}"); } catch (e) { return {}; } }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 
   /* ---------------- shared theme-aware styles ---------------- */
@@ -242,7 +247,7 @@
       if (opts.local) btns += '<button class="ie-btn' + (opts.ai ? " sec" : "") + '" id="ieUseLocal">Use On-device AI (offline)</button>';
       if (opts.device) btns += '<button class="ie-btn sec" id="ieUseDev">Use Private Device OCR</button>';
       btns += '<button class="ie-btn sec" id="ieManual">Fill manually</button>';
-      var o = overlay('<div class="ie-h">Couldn’t read the image</div><div class="ie-sub">' + esc(msg) + '</div><div class="ie-row" style="flex-direction:column">' + btns + "</div>");
+      var o = overlay('<div class="ie-h">' + esc(opts.title || "Couldn’t read the image") + '</div><div class="ie-sub">' + esc(msg) + '</div><div class="ie-row" style="flex-direction:column">' + btns + "</div>");
       var r = o.sheet.querySelector("#ieRetry"); if (r) r.addEventListener("click", function () { o.close(); resolve("ai"); });
       var l = o.sheet.querySelector("#ieUseLocal"); if (l) l.addEventListener("click", function () { o.close(); resolve("local"); });
       var d = o.sheet.querySelector("#ieUseDev"); if (d) d.addEventListener("click", function () { o.close(); resolve("device"); });
@@ -382,7 +387,31 @@
         });
       }
       log("device ok:", r.mode);
-      r.engine = "device"; return r;
+      r.engine = "device";
+      // Image-quality gate (2026-09-14): too blurred / glared / tilted / low-resolution / unreadable →
+      // nothing is extracted; the clinician retakes the photo, types the values, or taps AI Vision.
+      if (r.monitor && r.monitor.quality && r.monitor.quality.status === "RETAKE_PHOTO") {
+        stat("local_retake");
+        var why = (r.monitor.quality.issues || []).filter(function (i) { return i.severity === "severe"; }).map(function (i) { return i.message; }).join("; ");
+        return fallbackDialog("This photo cannot be read safely (" + (why || "image quality") + "). Retake it straight-on, closer, without glare, or fill the values by hand.",
+          { ai: aiAvailable() && online(), device: false, retryLabel: "Use AI Vision (Pro)", title: "Retake the photo" }).then(function (f) {
+          if (f !== "ai") return r;
+          stat("gemini_fallback");
+          return routeAI(image, kind).then(function (ar) { stat(ar && ar.mode === "fields" ? "gemini_success" : "gemini_failure"); return (ar && !ar.cancelled && ar.mode === "fields") ? ar : r; });
+        });
+      }
+      // Confidence gate (2026-09-14): a monitor read that left core vitals in NEEDS_REVIEW may be sent to
+      // AI Vision, but only on an explicit tap. High-confidence local reads never touch the network.
+      var core = (r.monitor && r.monitor.review || []).filter(function (k) { return /^(?:hr|spo2|sbp|dbp|map|rr)$/.test(k); });
+      stat(core.length ? "local_needs_review" : "local_success");
+      if (!core.length || !aiAvailable() || !online()) return r;
+      var names = { hr: "HR", spo2: "SpO2", sbp: "SBP", dbp: "DBP", map: "MAP", rr: "RR" };
+      return fallbackDialog("Read on this device. Needs your check: " + core.map(function (k) { return names[k] || k; }).join(", ") + ". Send this image to AI Vision (cloud) or fill those by hand?",
+        { ai: true, device: false, retryLabel: "Use AI Vision (Pro)", title: "Some values need review" }).then(function (f) {
+        if (f !== "ai") return r;
+        stat("gemini_fallback");
+        return routeAI(image, kind).then(function (ar) { stat(ar && ar.mode === "fields" ? "gemini_success" : "gemini_failure"); return (ar && !ar.cancelled && ar.mode === "fields") ? ar : r; });
+      });
     });
   }
 
@@ -422,6 +451,7 @@
       // account runs it on a clear thread. Native-only (matches MaiK); auto-resume after 60s safety.
       var _fsR = false, _fsResume = function () { if (_fsR) return; _fsR = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
       try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResume, 60000); } } catch (e) {}
+      stat("network_calls");
       return window.SMD_AI.vision(image, kind).then(function (r) {
         _fsResume(); done();
         if (r && !r.error) {
@@ -501,6 +531,7 @@
   }
 
   window.SMD_IMAGE_ENGINE = {
+    stats: stats,
     getPref: getPref, setPref: setPref, getConsent: getConsent, setConsent: setConsent,
     chooseEngine: chooseEngine,
     isPro: isPro, recommendFor: recommendFor, aiAvailable: aiAvailable, deviceOcrAvailable: deviceOcrAvailable,

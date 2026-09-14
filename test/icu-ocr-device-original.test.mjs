@@ -36,6 +36,8 @@ test("numeric kinds disable language correction; case sheets keep it", () => {
 });
 
 test("readImageLocal hands the boxes to the parser and returns them", () => {
-  assert.match(reasoning, /var fields = parseFieldsOnDevice\(text, kind, boxes\) \|\| \{\};/);
+  assert.match(reasoning, /parseFieldsOnDevice\(text, kind, boxes\) \|\| \{\};/, "non-monitor kinds: text parser still gets the boxes");
+  assert.match(reasoning, /var fullObs = boxes\.map\(function \(b\) \{ return \{ text: b\.text, conf: b\.conf, x: b\.x, y: b\.y, w: b\.w, h: b\.h, q: b\.q \}; \}\);/, "monitor kinds: the 2-D parser gets the boxes (with Vision's quadrilateral)");
+  assert.match(reasoning, /V2\.parseMonitor\(obsM, \{ px: px, imageSize: ctx\.imageSize, twoScale: \{ ran: !!\(ctx\.crop && !ctx\.crop\.error\) \}, unlabeledAuto: relaxed \}\)/);
   assert.match(reasoning, /\{ mode: "fields", fields: fields, lines: lines, boxes: boxes, source: "on-device" \}/);
 });

@@ -1,0 +1,90 @@
+{
+  "id": "nihon-kohden-partial-obscured-46",
+  "manufacturer": "nihon-kohden",
+  "layout": "right-column-label-left-limits-right",
+  "difficulty": [
+    "partial",
+    "label-obscured"
+  ],
+  "image": "nihon-kohden-partial-obscured-46.png",
+  "imageSize": {
+    "w": 1800,
+    "h": 1200
+  },
+  "synthetic": true,
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 88
+    },
+    "spo2": {
+      "status": "ambiguous",
+      "value": 97,
+      "why": "label obscured by glare; value legible but parameter identity unconfirmed without the label"
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 88
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "not_visible"
+    },
+    "temp": {
+      "status": "visible",
+      "value": 37
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 126,
+        "dbp": 80,
+        "map": 95
+      }
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "st": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 126,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 80,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 95,
+      "source": "NIBP"
+    }
+  },
+  "distractors": {
+    "alarmLimits": {
+      "hr": [
+        120,
+        50
+      ],
+      "spo2": [
+        100,
+        90
+      ],
+      "rr": [
+        30,
+        8
+      ]
+    },
+    "clock": "14:02"
+  },
+  "notes": "nihon-kohden partial-obscured synthetic fixture."
+}

@@ -1,0 +1,79 @@
+{
+  "id": "owner-img_7946",
+  "manufacturer": "oricare-ventilator",
+  "layout": "oricare-v8800",
+  "difficulty": [
+    "real-photo",
+    "ventilator",
+    "set-vs-measured",
+    "cropped-edge"
+  ],
+  "image": "img_7946.jpg",
+  "imageSize": {
+    "w": 4284,
+    "h": 5712
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "not_applicable"
+    },
+    "spo2": {
+      "status": "not_applicable"
+    },
+    "sbp": {
+      "status": "not_applicable"
+    },
+    "dbp": {
+      "status": "not_applicable"
+    },
+    "map": {
+      "status": "not_applicable"
+    },
+    "rr": {
+      "status": "ambiguous",
+      "why": "labelled ftotal, not RR",
+      "value": 17
+    },
+    "pulse": {
+      "status": "not_applicable"
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "not_applicable"
+    }
+  },
+  "distractors": {
+    "setF": 15,
+    "ppeak": 23,
+    "pplat": 16,
+    "peep": 6,
+    "o2": "arrow, no value",
+    "mve": 11.7,
+    "vti": 550,
+    "vte": 662,
+    "settings": {
+      "o2": 60,
+      "peep": 5,
+      "vt": 560,
+      "vsens": 2.0
+    },
+    "banner": [
+      "Low Oxygen Concentration !!",
+      "Continuous Airway Pressure !!!"
+    ]
+  },
+  "notes": "Oricare V8800 PRVC."
+}

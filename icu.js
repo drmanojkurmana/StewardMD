@@ -1907,6 +1907,31 @@
   }
   // Map an engine result (fields keyed strictly) → the numeric field map the review uses.
   // Ingest mapping is UNCHANGED — values map by key exactly as before.
+  // Debug overlay (localStorage smd_icu_ocr_debug = "1"): draws the OCR boxes, labels, selected and
+  // rejected candidates and label→value lines over the thumbnail of the LAST monitor read, using the
+  // evidence reasoning.js parked in window.__SMD_ICU_OCR_LAST. Developer aid only; no effect otherwise.
+  function smdOcrOverlay(el) {
+    try {
+      if (localStorage.getItem("smd_icu_ocr_debug") !== "1") return;
+      var last = window.__SMD_ICU_OCR_LAST, M = window.SMD_ICU_MONITOR;
+      if (!last || !M || !el) return;
+      var img = el.querySelector(".icu-imp-thumb"); if (!img) return;
+      function draw() {
+        var w = img.naturalWidth || 1000, h = img.naturalHeight || 1000;
+        var wrap = document.createElement("div"); wrap.style.cssText = "position:relative;display:inline-block;max-width:100%;margin:0 16px";
+        img.parentNode.insertBefore(wrap, img); wrap.appendChild(img);
+        img.style.margin = "0"; img.style.maxHeight = "320px"; img.style.display = "block";
+        var holder = document.createElement("div"); holder.innerHTML = M.overlaySVG(last.result, last.boxes, w, h);
+        var svg = holder.firstChild; svg.setAttribute("width", "100%"); svg.setAttribute("height", "100%"); svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        svg.style.cssText = "position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none";
+        wrap.appendChild(svg);
+        var pre = document.createElement("pre"); pre.style.cssText = "font:10px/1.35 ui-monospace,Menlo,monospace;white-space:pre-wrap;max-height:220px;overflow:auto;margin:8px 16px;padding:8px;border-radius:8px;background:var(--panel2,#f6f7f9);color:var(--muted,#555)";
+        pre.textContent = M.explain(last.result, last.boxes);
+        wrap.parentNode.insertBefore(pre, wrap.nextSibling);
+      }
+      if (img.complete && img.naturalWidth) draw(); else img.addEventListener("load", draw, { once: true });
+    } catch (e) {}
+  }
   function extractOcrFields(r) {
     var fields = {};
     if (r && r.mode === "fields") {
@@ -1992,6 +2017,7 @@
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
+    smdOcrOverlay(el);
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -2069,6 +2095,7 @@
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
+    smdOcrOverlay(el);
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });

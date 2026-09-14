@@ -1,0 +1,94 @@
+{
+  "id": "owner-2d6f5cea",
+  "manufacturer": "philips-intellivue",
+  "layout": "right-column-limits-left",
+  "difficulty": [
+    "real-photo",
+    "glare",
+    "invalid-values",
+    "big-clock"
+  ],
+  "image": "2d6f5cea.jpg",
+  "imageSize": {
+    "w": 900,
+    "h": 1600
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 95
+    },
+    "spo2": {
+      "status": "not_visible",
+      "why": "SpO2 shows -?- (SpO2 SENSOR MALF)"
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 96,
+      "source": "ABP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 47,
+      "source": "ABP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 68,
+      "source": "ABP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 16
+    },
+    "pulse": {
+      "status": "not_visible",
+      "why": "Pulse shows -?-"
+    },
+    "pvc": {
+      "status": "visible",
+      "value": 0
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "visible",
+      "value": {
+        "sbp": 96,
+        "dbp": 47,
+        "map": 68
+      }
+    },
+    "nibp": {
+      "status": "not_visible",
+      "why": "NBP row shows -?-/-?-(-?-)"
+    }
+  },
+  "distractors": {
+    "bigClock": "20:43",
+    "banner": [
+      "SpO2 SENSOR MALF",
+      "** ST-II LOW"
+    ],
+    "nbpTime": "22:02",
+    "abpWaveScale": [
+      105,
+      45
+    ],
+    "rrLimits": [
+      30,
+      8
+    ],
+    "st": {
+      "I": "-1.3?",
+      "MCL": "1.7?"
+    }
+  },
+  "notes": "IntelliVue with a large Clock numeric (20:43) in the value column: a big-number distractor. Ceiling-light reflections on the glass. HR limits faint."
+}

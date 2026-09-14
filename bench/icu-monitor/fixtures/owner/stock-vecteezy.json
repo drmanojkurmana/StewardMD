@@ -1,0 +1,81 @@
+{
+  "id": "owner-stock-vecteezy",
+  "manufacturer": "nihon-kohden",
+  "layout": "nk-large-numerics",
+  "difficulty": [
+    "stock-photo",
+    "watermark",
+    "colour-cast",
+    "distance"
+  ],
+  "image": "stock-vecteezy.jpg",
+  "imageSize": {
+    "w": 1103,
+    "h": 1960
+  },
+  "synthetic": false,
+  "group": "real",
+  "fields": {
+    "hr": {
+      "status": "visible",
+      "value": 110
+    },
+    "spo2": {
+      "status": "visible",
+      "value": 99
+    },
+    "sbp": {
+      "status": "visible",
+      "value": 149,
+      "source": "NIBP"
+    },
+    "dbp": {
+      "status": "visible",
+      "value": 97,
+      "source": "NIBP"
+    },
+    "map": {
+      "status": "visible",
+      "value": 112,
+      "source": "NIBP"
+    },
+    "rr": {
+      "status": "visible",
+      "value": 22
+    },
+    "pulse": {
+      "status": "visible",
+      "value": 109
+    },
+    "pvc": {
+      "status": "not_applicable"
+    },
+    "temp": {
+      "status": "not_applicable"
+    },
+    "etco2": {
+      "status": "not_applicable"
+    },
+    "art": {
+      "status": "not_applicable"
+    },
+    "nibp": {
+      "status": "visible",
+      "value": {
+        "sbp": 149,
+        "dbp": 97,
+        "map": 112
+      }
+    }
+  },
+  "distractors": {
+    "st2": -0.09,
+    "nibpTime": "18:00",
+    "cuff": 58,
+    "datetime": "27-10-2019 18:30",
+    "banner": "ARRHYTHMIA ANALYSIS OFF",
+    "bed": "ICU-003",
+    "watermark": "Vecteezy tiled"
+  },
+  "notes": "Nihon Kohden-style large-numerics screen (SpO2-PR 109, HR 110). Warm colour cast; watermarks near but not over the numerics."
+}
