@@ -5609,3 +5609,13 @@ Not done: Scan-Meds path unchanged; Android still has no on-device OCR; two-scal
   thresholds were NOT lowered; they only trade recall for review.
 - Environment gotcha: macOS Vision text recognition failed system-wide for ~30 min after aned restarted
   (e5rt create_precompiled_compute_operation); recovered on its own.
+- OPEN: one silent guess on the iPhone run (rebuilt plugin, 26 owner photos). owner-2d6f5cea RR shows 16
+  (glare haze on the "6"); full pass read "15" conf 1, crop "= 15" conf 0.5, and every letterboxed
+  re-read on the phone (scale 1.2-4, pad 1-2) also read "15". Tried and REJECTED (reverted):
+  (a) confidence-gated confirmation (agreement counts only if both reads conf >= 0.8): iOS/macOS Vision
+  conf is quantized 1 / 0.5 / 0.3 and correct reads sit at 0.3 ("° 105" on the MP40 2x, even a bare
+  "105" in the confirmation read), so it blocked 34 Mac fields and failed the Philips 2x regression;
+  (b) per-value background haze: 2d6f5cea 66-73 vs 87-97 on cc56af64 whose 7 AUTO fields are correct.
+  Neither OCR re-reads nor confidence nor that pixel signal separates this misread. Side finding: phone
+  Vision read only "RR" from a tight 251x198 crop whose "22" filled half the height, and "RR 30 22" at
+  conf 1 when letterboxed 2x on black (not adopted; only needed by (a)).
