@@ -65,6 +65,25 @@ placeholder, which is deliberately useful: it captures ABDM's real callback payl
   model/validator/serializer/normalizer, using the IG's own code systems (ndhm-vaccine-codes,
   ndhm-billing-codes, ndhm-price-components). Nothing POPULATES them yet - that is the remaining gap.
 
+**2026-09-14: merged into `wardsynq-product` (owner A3).** What changed on the way in (Decisions, same date):
+- **One env scheme**: `ABDM_ENV` + host-only bases (`config.js`). The product's `ABDM_GATEWAY_URL` is gone.
+- **No ABDM deploy vars.** The branch's `ABDM_ENV` / `ABDM_CLIENT_ID` / `ABDM_HIP_ID` / `ABDM_HIU_ID` /
+  `ABDM_JWKS_URL` were NOT taken into `wrangler.toml` (bindings at limit). The sandbox identity lives on the
+  sandbox entry of `config.js` ENVS only; production has none. JWKS is derived from the gateway host.
+- **Production held (A2)**: `gateway.js` refuses every outbound call to `apis.abdm.gov.in` or when
+  `abdmConfig().trafficHeld`; the connect HIU doors answer 503 `abdm_production_held`.
+- **Consent requester**: `POST /api/connect/abdm/hiu/consent-request` sends the signed-in doctor's
+  registration number (member `regNo` or verified claim); none means 422, nothing sent.
+- **V3 HIU data push**: `POST /api/connect/abdm/hiu/data` (`hiu-push.js`) -> `makeConsumeAndLand`
+  (`functions/_wardsynq/abdm-land.js`). Body shape and push authentication UNCONFIRMED.
+- **SCCM 1.1** carries all five optional collections. Landed immunizations file as the chart's
+  `Immunization` record (`immunization.js` shape, `primarySource:false`); another facility's invoice files as
+  a `ClinicalNote` `external-invoice`, never as this hospital's `Invoice` (reports and billing sum that type).
+- **A5** desk rule is `ABHA_DESK_ROLES` / `abhaDeskCan` in `_queue_roles.js`; NOT enforced yet (M1 routes
+  still authenticate by Connect membership, which has no desk roles).
+- Still reading `connect_connector_config`: `resolveHipTenant` (hip-handlers.js). Phase A2 must point it at
+  the `abdm` connector record (Decisions 2026-09-14 S6 phase A1).
+
 ## Hard rules
 - **M1 must use V3 APIs.** A V1/V2 M1 implementation is *rejected* at Sandbox Exit.
 - Care contexts **can never be unlinked or deleted** once linked. Only link finalised records.

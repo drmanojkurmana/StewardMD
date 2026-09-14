@@ -5850,3 +5850,29 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` (sections 3.1, 3.2
   "mismatch", "not built" (session check, sandbox run, counters, DPDP confirmation), "blocked" (production).
 - NOT built: any ABDM gateway call, the "Check session" action (A2), per-tenant gateway identity, audit of the
   from/to status beyond the versioned record, and a UI to set a doctor's registration number here (Staff tab).
+
+## 2026-09-14 ABDM V3 merge (owner A3): one scheme, no deploy vars, production held, one landing
+`origin/feat/abdm-v3-reconcile` merged into `wardsynq-product` on branch `abdm-v3-merge`. Checklist:
+`docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` section 2. The branch itself was not touched.
+- **SCCM**: one 1.1 with administrations, serviceRequests, consents, immunizations, invoices (all optional,
+  additive). The branch had kept 1.0 while adding two collections; the product had bumped to 1.1 for three.
+- **Env**: `ABDM_ENV` with host-only bases is the only scheme; `ABDM_GATEWAY_URL` removed from the connect
+  route (a base with a path doubled every V3 path).
+- **Identity out of deploy config**: the branch's five ABDM vars were not added to `wrangler.toml`. The sandbox
+  bridge id and facility id sit on the sandbox entry of `config.js` ENVS; production has no identity in code, so
+  a production deploy cannot inherit sandbox identity. Per-hospital production IDs come from the `abdm`
+  connector profile when phase A2 wires `abdmConfigFor`. An env override is still read (tests, local receiver).
+- **A2 enforced in code**: `gateway.js` refuses the production gateway host before the session call.
+- **Requester**: the consent route resolves the doctor with `resolveClinicalActor` and sends
+  `{type:"REGNO", value, system:"https://www.mciindia.org"}`; no registration number is a 422 naming the fix.
+- **One landing path**: the V3 HIU data push gets its own receiver (`/api/connect/abdm/hiu/data`) that ends in
+  the same `makeConsumeAndLand` as the V0.5 ingress. `LANDABLE` adds Immunization and Invoice.
+- **Immunization, one record type**: the branch's OPD capture is a queue timeline kind (IG-coded, for the OPD
+  HIP source), not a record type, so it stays. What ABDM LANDS files as the product's `Immunization` record.
+  The IG catalogue (`_vaccines.js`) and the ward chart's free-text rule (`immunization.js`) both stand: the
+  first is what ABDM conformance requires of what we SEND, the second is how the ward records a dose.
+- **External invoice is not an Invoice**: filed as `ClinicalNote` `external-invoice` with the sender's invoice
+  verbatim, because reports, trends and the payment desk sum `Invoice` rows.
+- **A5**: `ABHA_DESK_ROLES` in `_queue_roles.js` (reception, cashier and billing create and verify). Not enforced
+  until the ABHA desk phase moves M1 off Connect membership.
+- **Fidelius**: the branch's HKDF over the Weierstrass x is the only copy (the product never changed it).
