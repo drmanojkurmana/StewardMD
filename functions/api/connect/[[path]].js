@@ -20,6 +20,7 @@ import { getConsentReqByConsentId, fetchConsentArtifact } from "../../_connect/a
 import { makeConsumeAndLand } from "../../_wardsynq/abdm-land.js";
 import { recordDeps as wsqRecordDeps, actorDeps as wsqActorDeps } from "../../_wardsynq/deps.js";
 import { resolveClinicalActor } from "../../_wardsynq/actor.js";
+import { orgForTenant } from "../../_wardsynq/org.js";
 import { abdmConfig } from "../../_connect/abdm/config.js";
 import { receiveDataPush } from "../../_connect/abdm/hiu-push.js";
 import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
@@ -67,6 +68,12 @@ function consumeAndLandFor(env, deps, gateway) {
     consumeTransfer,
     consumeDeps: { db: deps.db, r2: deps.r2, secrets: deps.secrets, gateway, now: deps.now() },
     recordDeps: (tenantId) => wsqRecordDeps(env, tenantId),
+    // The hospital's wardsynq config, for its external invoice policy (owner decision 2026-09-14). A throw is applied as the default.
+    hospitalConfigFor: async (tenantId) => {
+      const tenant = await deps.db.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(String(tenantId)).first();
+      const org = tenant ? await orgForTenant(env, tenant) : null;
+      return (org && org.wardsynq) || null;
+    },
     consentFor: async (consentId) => {
       if (consentId == null) return null;
       const row = await getConsentReqByConsentId(deps.db, consentId);

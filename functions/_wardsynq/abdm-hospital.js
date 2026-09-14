@@ -132,6 +132,38 @@ function checklist(settings, org, doctors) {
 }
 
 /** PURE. What the Admin ABDM card shows. connector = the framework summary (never a secret) or null. */
+/* OWNER DECISION 2026-09-14: an invoice received from another facility over ABDM is a clinical DOCUMENT
+ * and never this hospital's bill. A named per-hospital policy so the choice is explicit, audited on every
+ * landed invoice (abdm-land.js), and one new entry here when a billing model for external invoices exists.
+ * Absent means the default. A save with any other value is refused (externalInvoiceHandlingRefusal). */
+const EXTERNAL_INVOICE_POLICY = "wardsynq.abdm.externalInvoiceHandling";
+const EXTERNAL_INVOICE_HANDLINGS = Object.freeze({
+  "clinical-document": "Kept on the patient's chart as a document from the sending facility. It never becomes a bill, charge, payment or ledger entry at this hospital, and billing screens and reports do not count it. Owner decision 2026-09-14: the billing model for external invoices is not built.",
+});
+const EXTERNAL_INVOICE_DEFAULT = "clinical-document";
+
+/** PURE. The handling that decides a landed external invoice, from the hospital's wardsynq config.
+ * A stored value this build does not know (a rollback, a hand edit) is never followed: the default is
+ * applied and the stored value is named, so the audit row says what was configured and what was done. */
+function externalInvoiceHandling(wardsynq) {
+  const raw = wardsynq && wardsynq.abdm && typeof wardsynq.abdm === "object" ? wardsynq.abdm.externalInvoiceHandling : undefined;
+  const set = raw !== undefined && raw !== null && raw !== "";
+  const known = set && Object.prototype.hasOwnProperty.call(EXTERNAL_INVOICE_HANDLINGS, raw);
+  const value = known ? raw : EXTERNAL_INVOICE_DEFAULT;
+  return { policy: EXTERNAL_INVOICE_POLICY, value, source: !set ? "default" : known ? "hospital" : "unrecognised",
+    ...(set && !known ? { configured: str(raw).slice(0, 60) } : {}), reason: EXTERNAL_INVOICE_HANDLINGS[value] };
+}
+
+/** PURE. A sentence when an org save's wardsynq patch carries an external invoice handling this build does not have, else null. */
+function externalInvoiceHandlingRefusal(wardsynqPatch) {
+  if (!wardsynqPatch || typeof wardsynqPatch !== "object" || wardsynqPatch.abdm === undefined || wardsynqPatch.abdm === null) return null;
+  const a = wardsynqPatch.abdm;
+  if (typeof a !== "object" || Array.isArray(a)) return "The ABDM settings were not saved: they must be an object.";
+  const v = a.externalInvoiceHandling;
+  if (v === undefined || v === null || Object.prototype.hasOwnProperty.call(EXTERNAL_INVOICE_HANDLINGS, v)) return null;
+  return `External ABDM invoice handling "${str(v).slice(0, 60)}" was not saved. The only handling built is "${EXTERNAL_INVOICE_DEFAULT}": an invoice received from another facility is kept on the chart as a document. The billing model for external invoices is not built, so it cannot become a bill here.`;
+}
+
 function abdmView(connector, org, members) {
   const settings = (connector && connector.settings) || {};
   const doctors = doctorReadiness(members);
@@ -148,6 +180,7 @@ function abdmView(connector, org, members) {
     }),
     doctors, checklist: checklist(settings, org, doctors),
     bridge: "shared",
+    invoiceHandling: externalInvoiceHandling(org && org.wardsynq),
   };
 }
 
@@ -171,4 +204,5 @@ const ABDM_KIND = Object.freeze({
   },
 });
 
-export { ABDM_KIND, STATUSES, TRANSITIONS, transitionRefusal, hfrRefusal, validateShared, doctorReadiness, checklist, abdmView };
+export { EXTERNAL_INVOICE_POLICY, EXTERNAL_INVOICE_HANDLINGS, externalInvoiceHandling, externalInvoiceHandlingRefusal,
+  ABDM_KIND, STATUSES, TRANSITIONS, transitionRefusal, hfrRefusal, validateShared, doctorReadiness, checklist, abdmView };

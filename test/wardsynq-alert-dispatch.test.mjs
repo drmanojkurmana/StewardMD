@@ -8,7 +8,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  H, ENV, KV, sent, seedHospital, as, pushAs, admittedPatient, registerDevice, releasePotassium, loopOf, tickAll, idFor,
+  H, ENV, KV, sent, docs, seedHospital, as, pushAs, admittedPatient, registerDevice, releasePotassium, loopOf, tickAll, idFor, OFFDUTY,
   ORG, DOCTOR, NURSE, SUPERVISOR, LAB, ADMIN, PATIENT_NAME, WARD, BED,
 } from "./_wardsynq-alert-harness.mjs";
 // Loaded after the harness has registered its module mocks: a static import would link the real Firestore first.
@@ -146,6 +146,54 @@ test("PUSH-07: declining sends the next tier at once; the tiers are cumulative; 
   assert.equal(d3.escalatedTo, null);
   assert.match(d3.detail, /top of the ladder/);
   assert.equal((await H.RECORD.latest(T, "CriticalResultLoop", loop.id)).state, "open");
+});
+
+test("level 2 nurse rule (owner 2026-09-14): the real rota; the off-duty nurse and a nurse on duty in another ward are not told; the notice names the rule and the counts", async () => {
+  seedHospital({ ...ON, criticalEscalation: { level2NurseRule: "all-on-duty-nurses-in-ward" } });
+  // A nurse on duty now in Surgical B, around the clock, as the harness rosters Medical A.
+  docs.set(`q_members/${ORG}__surg-nurse`, { fields: { orgId: ORG, identity: "surg-nurse", role: "nurse", active: true }, updateTime: "t1" });
+  for (const [id, start, end] of [["sday", "00:00", "12:00"], ["snight", "12:00", "00:00"]]) {
+    docs.set(`q_roster_shifts/${ORG}__${id}`, { fields: { orgId: ORG, shiftId: id, name: id, unit: "Surgical B", start, end, minimum: {}, active: true }, updateTime: "t1" });
+    for (const n of [-1, 0, 1]) {
+      const day = new Date(Date.now() + n * 86400000).toISOString().slice(0, 10);
+      docs.set(`q_roster_assign/s-${id}-${n}`, { fields: { orgId: ORG, orgMonth: ORG + "|" + day.slice(0, 7), identity: "surg-nurse", date: day, shiftId: id, status: "active" }, updateTime: "t1" });
+    }
+  }
+  const p = await admittedPatient();
+  await registerDevice(DOCTOR, "p".repeat(64));
+  const loop = await loopOf(await releasePotassium(p, 7.2));
+  assert.equal(loop.notifications[0].nurseRule, undefined, "level 1 tells no nurse");
+  const d = await pushAs(DOCTOR, "/notice/" + loop.notifications[0].nid + "/decline", "POST", {});
+  assert.equal(d.escalatedTo, "overdue", JSON.stringify(d));
+  const over = (await H.RECORD.latest(T, "CriticalResultLoop", loop.id)).notifications.at(-1);
+  assert.ok(over.recipients.includes(ORG + "~" + idFor(NURSE)), "the nurse on duty in the patient's ward");
+  assert.ok(!over.recipients.includes(ORG + "~" + idFor(OFFDUTY)), "a nurse with no shift now");
+  assert.ok(!over.recipients.includes(ORG + "~nurse1"), "a nurse member who is not rostered");
+  assert.ok(!over.recipients.includes(ORG + "~surg-nurse"), "a nurse on duty in another ward");
+  assert.deepEqual(over.nurseRule, { rule: "all-on-duty-nurses-in-ward", source: "hospital", ward: WARD, nurses: 1, recipients: over.recipients.length });
+  const st = await as(ADMIN, "/ward/alert-status?orgId=" + ORG);
+  assert.deepEqual([st.nurseRule.rule, st.nurseRule.source], ["all-on-duty-nurses-in-ward", "hospital"]);
+  assert.match(st.nurseRule.note, /until a Nurse-in-Charge role or assignment is implemented/);
+});
+
+test("level 2 with nobody on duty in the ward and no other recipient on the tier: NO_RECIPIENT, loud, with zero nurses named", async () => {
+  seedHospital({ ...ON, criticalEscalation: { levels: { due: { orderer: false, roles: [] }, overdue: { orderer: false, roles: ["nurse"] } } } });
+  // The ward's only rostered nurse comes off the rota: the on-duty nurse set for Medical A is empty.
+  for (const k of [...docs.keys()]) if (k.startsWith("q_roster_assign/") && docs.get(k).fields.identity === idFor(NURSE)) docs.delete(k);
+  const p = await admittedPatient();
+  const loop = await loopOf(await releasePotassium(p, 7.3, 45));
+  assert.equal(loop.notifications[0].reason, "NO_RECIPIENT");
+  const t = await tickAll();
+  assert.equal(t.__status, 200, JSON.stringify(t));
+  const l = await H.RECORD.latest(T, "CriticalResultLoop", loop.id);
+  const over = l.notifications.at(-1);
+  assert.equal(over.level, "overdue", JSON.stringify(l.notifications));
+  assert.equal(over.reason, "NO_RECIPIENT");
+  assert.deepEqual(over.recipients, []);
+  assert.deepEqual(over.nurseRule, { rule: "all-on-duty-nurses-in-ward", source: "default", ward: WARD, nurses: 0, recipients: 0 });
+  assert.equal(l.state, "open");
+  const st = await as(ADMIN, "/ward/alert-status?orgId=" + ORG);
+  assert.ok(st.failures.some((f) => f.loopId === loop.id && f.level === "overdue" && f.reason === "NO_RECIPIENT"), "named on the Admin card");
 });
 
 test("PUSH-08: the worker tick escalates with nobody using the ward; refuses anyone but the worker; WSQ_TICK_OFF stops it", async () => {

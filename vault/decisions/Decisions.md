@@ -6155,3 +6155,63 @@ Owner answer 2026-09-14: Marathi added, Spanish kept (`OFFERED` in `wardsynq/sit
 - RULE STANDS: clinical text is never machine translated. A localized prescription or discharge print, if ever
   built, keeps the English order as the source of truth beside it, behind a per-hospital setting default off,
   with golden tests for negation, decimals, frequency and dose preservation.
+## 2026-09-14 External ABDM invoices are clinical documents: a named per-hospital policy, never billing (owner decision)
+
+Owner decision 2026-09-14: an invoice received from another facility over ABDM is stored as a clinical/document record
+for now and must never become a WardSynQ billing transaction. It was an implicit code path (the ABDM V3 merge entry
+above, "External invoice is not an Invoice"); it is now an explicit policy.
+- **Policy** `wardsynq.abdm.externalInvoiceHandling`, one allowed value `"clinical-document"`, absent = that default.
+  Pure in `functions/_wardsynq/abdm-hospital.js` (`EXTERNAL_INVOICE_HANDLINGS`, `externalInvoiceHandling`,
+  `externalInvoiceHandlingRefusal`). `abdm` joined the org whitelist (`_opd_org.js wardsynqConfig`).
+- **Save**: `POST /api/queue/org/update` refuses any other value (or a non-object `abdm`) with 422
+  `abdm_invoice_handling_not_built` and a sentence saying the billing model is not built, after authorization, nothing
+  written. No screen writes it today; the value is shown read-only on Admin > Integrations > ABDM with its reason.
+- **Landing** (`abdm-land.js`): `makeConsumeAndLand` reads the hospital's config (`hospitalConfigFor`, wired in
+  `functions/api/connect/[[path]].js` through `orgForTenant`). A stored value this build does not know is NOT followed:
+  the default is applied and named (`source: "unrecognised"`, `configured`). A config that cannot be read applies the
+  default with `source: "unread"`; the transfer is already acknowledged, so holding it would lose the record.
+- **Audit**: each landed external invoice note's `record.ingest` row carries `scope.decidedBy = {policy, value,
+  source}` (new `governedForIngest` option `auditScope(entity)` in `service.js`, generic, used only here).
+- **Guard on the write**: the ABDM landing refuses to write any `Invoice`, `Claim`, `PreAuthorisation` or
+  `CostEstimate` (`BILLING_TYPES`; charges, deposits, payments, refunds and write-offs are all appends to an Invoice),
+  whatever the document or a future adapter mapping produces (GovernanceError `ABDM_NO_BILLING`, quarantined by the hub).
+- Tests: `test/abdm-external-invoice-policy.test.mjs` (resolver, landing audit, the write guard with a mocked adapter
+  that emits billing types, billingReport and invoicesForPatient count nothing, composition sources, the card),
+  `test/org-abdm-invoice-policy-route.test.mjs` (401/403/other hospital/422/positive).
+- **Change later** (when a billing model for external invoices is designed and approved): add the new value to
+  `EXTERNAL_INVOICE_HANDLINGS` with its reason; branch on `handling.value` in `landNdhmDocuments` (the SCCM adapter
+  keeps mapping to the note; the new handling decides what else is written); narrow `BILLING_TYPES` for that value
+  only, never globally; add a control to the ABDM card that saves through `/org/update`; update both tests (the
+  refusal test's value list and the "count nothing" test). Hospitals without the key stay on `clinical-document`.
+
+## 2026-09-14 Level-2 critical-result alerts tell every on-duty nurse in the ward: a named rule until Nurse-in-Charge exists (owner decision)
+
+Owner decision 2026-09-14: level-2 ("overdue") critical-result alerts go to every nurse marked ON DUTY in the affected
+ward until a proper Nurse-in-Charge role or assignment exists. It was implicit in the S3 P0 default ladder ("nurse"
+on the overdue tier); it is now a named, per-hospital, audited rule.
+- **Rule** `wardsynq.criticalEscalation.level2NurseRule`, one allowed value `"all-on-duty-nurses-in-ward"`, absent =
+  that default (`LEVEL2_NURSE_RULES`, `level2NurseRuleOf`, `level2NurseRuleRefusal` in `alert-recipients.js`).
+- **One resolver keyed by rule name**: `level2NurseRecipients(rule, {unit, active, duty})`. It checks BOTH conditions
+  itself rather than trusting the rota reader: the member is active with role `nurse`, is in the rota's on-duty list
+  now, and the assignment's own `unit` is the patient's ward. `resolveRecipients` sends "nurse" on the overdue tier
+  through it (so it also applies at the escalate tier, which is cumulative); other roles and tiers are unchanged.
+- **Unknown ward**: kept as before (the ladder's hospital-wide cover for a patient with no ward); the rule then has no
+  ward to test and records `ward: null`. Flagged, not decided by the owner.
+- **Unknown stored rule** (rollback, group adoption from before the check): never followed silently; the default rule
+  applies so the ward's nurses are still told, and `source: "unrecognised"`, `configured` are recorded and shown.
+- **Record**: the loop notice (`notifications[]`, versioned and audited with the loop) carries `nurseRule = {rule,
+  source, ward, nurses, recipients}`. NO_RECIPIENT is unchanged: loud when the whole tier resolves nobody, with
+  `nurses: 0` naming why.
+- **Save**: `POST /api/queue/org/update` and `POST /api/queue/group/policy` refuse any other rule with 422
+  `level2_nurse_rule_not_built`, after authorization, nothing written. The Alerts card's own save carries the saved key.
+- **Screen**: Admin > Hospital > Critical result alerts to phones shows the rule read-only with "Applies until a
+  Nurse-in-Charge role or assignment is implemented" (from `GET /ward/alert-status` `nurseRule`).
+- Tests: `test/wardsynq-alert-recipients.test.mjs` (rule, off-duty, other ward with a leaky reader, empty set, card),
+  `test/wardsynq-alert-dispatch.test.mjs` (real rota: off-duty, unrostered and other-ward nurses not told; notice
+  names the rule; empty ward nurse set NO_RECIPIENT through the tick), `test/org-level2-nurse-rule-route.test.mjs`,
+  `test/wardsynq-hospital-group.test.mjs` (group policy 422).
+- **Change later** (when a Nurse-in-Charge role or assignment exists): add `"nurse-in-charge"` to `LEVEL2_NURSE_RULES`
+  with its note; add its `case` to `level2NurseRecipients` (read the assignment for the ward, checked on duty and in
+  the ward the same way; decide and record what happens when none is assigned, e.g. fall back to all on-duty nurses
+  with `source` saying so, never silence); add a selector on the Alerts card saving through `/org/update`; decide
+  whether the default changes (hospitals without the key follow the default). Update the refusal tests' value lists.

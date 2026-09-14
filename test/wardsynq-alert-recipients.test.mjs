@@ -25,7 +25,7 @@ const onDutyIn = { "Medical A": ["dr-duty", "res-duty", "sup", "nurse", "gone", 
 const readers = (seen) => ({
   latest: async (t, id) => records[t + "/" + id] || null,
   members: async () => members,
-  onDuty: async (unit) => { if (seen) seen.push(unit); return { onDuty: (onDutyIn[unit] || []).map((identity) => ({ identity })) }; },
+  onDuty: async (unit) => { if (seen) seen.push(unit); return { onDuty: (onDutyIn[unit] || []).map((identity) => ({ identity, unit })) }; },
 });
 const loop = { id: "l1", reportId: "r1", encounterId: "e1" };
 
@@ -175,4 +175,67 @@ test("Admin card: phones now, from the registrations; a failed read is never sho
     assert.doesNotMatch(h, /have a phone registered\./);
   }
   assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
+});
+
+/* Owner decision 2026-09-14: level-2 nurses by a named per-hospital rule (criticalEscalation.level2NurseRule). */
+const { level2NurseRuleOf, level2NurseRuleRefusal, level2NurseRecipients, LEVEL2_NURSE_RULES } = await import("../functions/_wardsynq/alert-recipients.js");
+
+test("level-2 nurse rule: one rule, absent is the default, an unknown stored rule is applied as the default and named; a save naming another is refused", () => {
+  assert.deepEqual(Object.keys(LEVEL2_NURSE_RULES), ["all-on-duty-nurses-in-ward"]);
+  const d = level2NurseRuleOf(null);
+  assert.deepEqual([d.rule, d.source], ["all-on-duty-nurses-in-ward", "default"]);
+  assert.match(d.note, /until a Nurse-in-Charge role or assignment is implemented/);
+  assert.equal(level2NurseRuleOf({ level2NurseRule: "all-on-duty-nurses-in-ward" }).source, "hospital");
+  const odd = level2NurseRuleOf({ level2NurseRule: "nurse-in-charge" });
+  assert.deepEqual([odd.rule, odd.source, odd.configured], ["all-on-duty-nurses-in-ward", "unrecognised", "nurse-in-charge"]);
+  assert.equal(level2NurseRuleRefusal({ level2NurseRule: "all-on-duty-nurses-in-ward" }), null);
+  assert.equal(level2NurseRuleRefusal({ acknowledgeWithinMinutes: 20 }), null);
+  assert.equal(level2NurseRuleRefusal(null), null);
+  assert.match(level2NurseRuleRefusal({ level2NurseRule: "nurse-in-charge" }), /"nurse-in-charge" was not saved\. The only rule built is "all-on-duty-nurses-in-ward"/);
+  assert.throws(() => level2NurseRecipients("nurse-in-charge", { active: new Map(), duty: [] }), /has no resolver/);
+});
+
+test("level 2: a nurse off duty, or on duty in another ward, is not alerted; the result names the rule and how many nurses", async () => {
+  const people = [...members, { identity: "nurse-off", role: "nurse" }, { identity: "nurse-surg", role: "nurse" }];
+  // A rota reader that (wrongly) hands back another ward's nurse too: the rule checks the assignment's own ward itself.
+  const leaky = { ...readers(), members: async () => people,
+    onDuty: async (unit) => ({ onDuty: [...onDutyIn[unit].map((identity) => ({ identity, unit })), { identity: "nurse-surg", unit: "Surgical B" }] }) };
+  const over = await resolveRecipients({ orgId: "o", loop, level: "overdue" }, leaky);
+  assert.ok(over.recipients.includes("o~nurse"), "the on-duty nurse in the patient's ward");
+  assert.ok(!over.recipients.includes("o~nurse-off"), "a nurse with no shift now is not alerted");
+  assert.ok(!over.recipients.includes("o~nurse-surg"), "a nurse on duty in another ward is not alerted");
+  assert.deepEqual(over.nurseRule, { rule: "all-on-duty-nurses-in-ward", source: "default", ward: "Medical A", nurses: 1 });
+  assert.equal((await resolveRecipients({ orgId: "o", loop, level: "due" }, leaky)).nurseRule, undefined, "level 1 has no nurse rule");
+  const top = await resolveRecipients({ orgId: "o", loop, level: "escalate", policy: { level2NurseRule: "all-on-duty-nurses-in-ward" } }, leaky);
+  assert.deepEqual([top.nurseRule.source, top.nurseRule.nurses], ["hospital", 1], "the top tier still carries the level-2 nurses, by the same rule");
+  const odd = await resolveRecipients({ orgId: "o", loop, level: "overdue", policy: { level2NurseRule: "nurse-in-charge" } }, leaky);
+  assert.ok(odd.recipients.includes("o~nurse"), "an unknown stored rule never silences the ward's nurses");
+  assert.deepEqual([odd.nurseRule.source, odd.nurseRule.configured], ["unrecognised", "nurse-in-charge"]);
+});
+
+test("level 2: the ward's on-duty nurse set empty and nobody else on the tier is NO_RECIPIENT, with the rule and zero nurses recorded", async () => {
+  const empty = { ...readers(), onDuty: async () => ({ onDuty: [{ identity: "nurse", unit: "Surgical B" }] }) };
+  const policy = { levels: { due: { orderer: false, roles: [] }, overdue: { orderer: false, roles: ["nurse"] } } };
+  const r = await resolveRecipients({ orgId: "o", loop, level: "overdue", policy }, empty);
+  assert.deepEqual(r.recipients, []);
+  assert.equal(r.reason, "NO_RECIPIENT");
+  assert.equal(r.nurseRule.nurses, 0);
+});
+
+test("Critical result alerts card: the level 2 nurse rule is shown read-only with its Nurse-in-Charge note", () => {
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+  const sb = { window: { WSQ: { page() {} } } };
+  sb.WSQ = sb.window.WSQ;
+  vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
+  const C = sb.window.WSQ._alertCard;
+  const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true }, phones: { ok: true, checked: 0, noDevice: [] } };
+  const html = C.html(esc, { ...base, nurseRule: level2NurseRuleOf(null) });
+  assert.match(html, /Level 2 nurse rule<\/dt><dd><span class="mono">all-on-duty-nurses-in-ward<\/span> <span class="quiet">\(default\)/);
+  assert.match(html, /until a Nurse-in-Charge role or assignment is implemented\. It cannot be changed on this card/);
+  assert.doesNotMatch(html, /—/);
+  assert.match(C.html(esc, { ...base, nurseRule: level2NurseRuleOf({ level2NurseRule: "nurse-in-charge" }) }), /saved rule "nurse-in-charge" is not one this build has/);
+  assert.match(C.html(esc, base), /level 2 nurse rule could not be read/);
+  // The card's own save keeps the saved rule: readAlertCard carries every criticalEscalation key it does not edit.
+  const out = C.read({ enabled: true, senderId: "", templateName: "", escalation: { level2NurseRule: "all-on-duty-nurses-in-ward" }, levels: {} });
+  assert.equal(out.wardsynq.criticalEscalation.level2NurseRule, "all-on-duty-nurses-in-ward");
 });

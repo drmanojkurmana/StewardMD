@@ -26,7 +26,7 @@
 
 import { VersionConflictError } from "./repository.js";
 import { escalationOf } from "./critical-results.js";
-import { LEVELS, resolveRecipients, nextLevel, levelsFor, DEFAULT_LEVELS } from "./alert-recipients.js";
+import { LEVELS, resolveRecipients, nextLevel, levelsFor, level2NurseRuleOf, DEFAULT_LEVELS } from "./alert-recipients.js";
 import { Dispatcher, NotifyError } from "../../wardsynq/wardsynq-notify.js";
 import { ReadLog, READ_KIND } from "../../wardsynq/wardsynq-readlog.js";
 import { ClinicalRead, readIdFor } from "./read-log.js";
@@ -80,6 +80,8 @@ function serverPushChannel(deps) {
     const loop = { id: payload.loopId, reportId: payload.reportId, encounterId: payload.encounterId };
     const who = await resolveRecipients({ orgId: deps.orgId, loop, level, policy: deps.policy }, deps.readers);
     const notice = { nid: null, kind: "critical", level, at, recipients: who.recipients, noDevice: [], sent: 0, total: 0, receipts: [] };
+    // The named level-2 nurse rule that decided the nurses, with how many it found and the total resolved (owner decision 2026-09-14).
+    if (who.nurseRule) notice.nurseRule = { ...who.nurseRule, recipients: who.recipients.length };
     let result;
     if (!who.recipients.length) {
       notice.reason = "NO_RECIPIENT";
@@ -341,7 +343,7 @@ async function alertDeliveryStatus(ctx) {
   return {
     ok: true,
     enabled: !!(cfg.alerts && cfg.alerts.push && cfg.alerts.push.enabled === true),
-    levels, defaults: DEFAULT_LEVELS,
+    levels, defaults: DEFAULT_LEVELS, nurseRule: level2NurseRuleOf(cfg.criticalEscalation),
     phones: await phoneCoverage(ctx, levels),
     minutes: { acknowledgeWithinMinutes: (cfg.criticalEscalation && cfg.criticalEscalation.acknowledgeWithinMinutes) || 30, escalateAfterMinutes: (cfg.criticalEscalation && cfg.criticalEscalation.escalateAfterMinutes) || 60 },
     failures: failures.sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 50),

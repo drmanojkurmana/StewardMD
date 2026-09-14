@@ -54,6 +54,13 @@
         return "<tr><td>" + esc(it.label) + '</td><td><span class="msg ' + (STATUS_CLASS[it.status] || "note") + '">' + esc(STATUS_WORDS[it.status] || it.status) + "</span></td><td>" + esc(it.detail) + "</td></tr>";
       }).join("") + "</tbody></table></div>";
 
+    /* Owner decision 2026-09-14, read-only: what an invoice received from another facility becomes here. */
+    var ih = r.invoiceHandling;
+    if (ih) h += "<h3>Invoices received from other facilities</h3>" +
+      '<div class="kv"><dt>Policy</dt><dd class="mono">' + esc(ih.policy) + "</dd><dt>Value</dt><dd><b>" + esc(ih.value) + "</b>" +
+      (ih.source === "default" ? ' <span class="quiet">(default)</span>' : ih.source === "unrecognised" ? ' <span class="msg err">the saved value "' + esc(ih.configured) + '" is not one this build has, so the default is applied</span>' : "") + "</dd></div>" +
+      '<p class="quiet">' + esc(ih.reason) + " This cannot be changed on this screen.</p>";
+
     h += "<h3>Doctors</h3>";
     if (!r.doctors.length) h += '<p class="quiet">No active prescriber at this hospital.</p>';
     else h += '<p class="quiet">A registration number is needed to request records (set it on Staff and roles). The HPR ID is optional.</p><div class="tbl"><table><thead><tr><th>Staff</th><th>Role</th><th>Registration number</th><th>HPR ID</th><th></th></tr></thead><tbody>' +
