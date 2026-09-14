@@ -1,7 +1,8 @@
 /* S3 P1: the phone side of WardSynQ critical-result alerts, driven in a small fake DOM.
  *
  *   hospital-auth.js      the workplace decides the credential (ID-01, EMR-05)
- *   ward.js               sends that credential, never a stale staff token for another hospital
+ *   ward.js, queue.js,    send that credential, never a stale staff token for another hospital
+ *   discharge.js
  *   wardsynq-alert-ui.js  v2 payload parsing, nothing rendered from the push itself, app lock before
  *                         any fetch, cross-hospital guard, failure states for load and every answer
  *   native-push.js        a v2 tap opens the screen; register-member on token registration with the
@@ -122,11 +123,71 @@ test("ID-01 in ward.js: in hospital B the ward never sends hospital A's stored s
   assert.equal(list.headers.Authorization, "Bearer acct-jwt");
 });
 
+const QUEUE_EXTRA = { addEventListener() {}, setInterval: () => 0, clearInterval() {}, prompt: () => "", toast() {} };
+const lastCall = (calls, prefix) => calls.filter((c) => c.path.startsWith(prefix)).at(-1);
+
+test("ID-01 in queue.js: a doctor's queue in hospital B never sends hospital A's stored staff token", async () => {
+  const tokA = await tokFor("org-a", "nurse1");
+  const { sb, calls } = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["hospital-auth.js", "queue.js"], extra: QUEUE_EXTRA });
+  const st = sb.QUEUE._st;
+  st.session = { id: "s1" };
+  for (const [label, orgId, openOpts, sendsStaff] of [
+    ["clinic B", "org-b", {}, false],
+    ["WardSynQ hospital B session", null, { source: "wardsynq", hospitalId: "org-b" }, false],
+    ["Connect hospital B session", null, { source: "connect", hospitalId: "org-b" }, false],
+    ["a GHIS session (no StewardMD hospital)", null, { source: "manual", hospitalId: "manual" }, false],
+    ["its own hospital A", "org-a", {}, true],
+  ]) {
+    st.orgId = orgId; st.openOpts = openOpts;
+    sb.QUEUE.refresh();
+    await settle();
+    const c = lastCall(calls, "/api/queue/list");
+    assert.equal(c.headers["X-Staff-Token"], sendsStaff ? tokA : undefined, label);
+    assert.equal(c.headers.Authorization, sendsStaff ? undefined : "Bearer acct-jwt", label);
+  }
+});
+
+test("queue.js front desk: a cold start sends the stored staff session to its own hospital; harness tokens and pages keep the old rule", async () => {
+  const tokA = await tokFor("org-a", "nurse1");
+  const desk = sandbox({ store: { smd_opd_staff_tok: tokA, smd_opd_workplace: "wardsynq:org-b" }, files: ["hospital-auth.js", "queue.js"], extra: QUEUE_EXTRA });
+  desk.sb.QUEUE.open();
+  await settle();
+  assert.equal(lastCall(desk.calls, "/api/queue/whoami").headers["X-Staff-Token"], tokA, "the desk is the session's own hospital, not the remembered workplace");
+
+  const opaque = sandbox({ store: { smd_opd_staff_tok: "harness-token" }, files: ["hospital-auth.js", "queue.js"], extra: QUEUE_EXTRA });
+  Object.assign(opaque.sb.QUEUE._st, { session: { id: "s1" }, orgId: "org-b" });
+  opaque.sb.QUEUE.refresh(); await settle();
+  assert.equal(lastCall(opaque.calls, "/api/queue/list").headers["X-Staff-Token"], "harness-token", "a token naming no hospital is sent as before");
+
+  const bare = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["queue.js"], extra: QUEUE_EXTRA });
+  Object.assign(bare.sb.QUEUE._st, { session: { id: "s1" }, orgId: "org-b" });
+  bare.sb.QUEUE.refresh(); await settle();
+  assert.equal(lastCall(bare.calls, "/api/queue/list").headers["X-Staff-Token"], tokA, "without hospital-auth.js (opd-doctor-harness.html) the old rule");
+});
+
+test("ID-01 in discharge.js: a summary in hospital B never sends hospital A's stored staff token", async () => {
+  const tokA = await tokFor("org-a", "nurse1");
+  for (const [orgId, sendsStaff] of [["org-b", false], ["org-a", true]]) {
+    const { sb, calls } = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["hospital-auth.js", "discharge.js"], extra: { firebase: { auth: () => ({ currentUser: { getIdToken: () => Promise.resolve("acct-jwt") } }) } } });
+    sb.DISCHARGE.open({ orgId, encounterId: "enc-1" });
+    await settle();
+    const c = lastCall(calls, "/api/queue/ward/discharge-summary");
+    assert.ok(c, "the summary was requested for " + orgId);
+    assert.equal(c.headers["X-Staff-Token"], sendsStaff ? tokA : undefined, orgId);
+    assert.equal(c.headers.Authorization, sendsStaff ? undefined : "Bearer acct-jwt", orgId);
+  }
+  const bare = sandbox({ store: { smd_opd_staff_tok: tokA }, files: ["discharge.js"], extra: { firebase: { auth: () => ({ currentUser: null }) } } });
+  bare.sb.DISCHARGE.open({ orgId: "org-b", encounterId: "enc-1" });
+  await settle();
+  assert.equal(lastCall(bare.calls, "/api/queue/ward/discharge-summary").headers["X-Staff-Token"], tokA, "without hospital-auth.js the old rule");
+});
+
 test("both real pages load hospital-auth.js before ward.js, and the site build ships it", () => {
   for (const page of ["index.html", "wardsynq/site/index.html"]) {
-    const html = src(page), a = html.indexOf('src="/hospital-auth.js'), w = html.indexOf('src="/ward.js');
-    assert.ok(a > 0 && a < w, page);
+    const html = src(page), a = html.indexOf('src="/hospital-auth.js');
+    for (const f of ["ward.js", "discharge.js"]) { const w = html.indexOf('src="/' + f); assert.ok(a > 0 && a < w, page + " " + f); }
   }
+  assert.ok(src("index.html").indexOf('src="/hospital-auth.js') < src("index.html").indexOf('src="/queue.js'), "index.html queue.js");
   const idx = src("index.html");
   assert.ok(idx.indexOf('src="/hospital-auth.js') < idx.indexOf('src="/wardsynq-alert-ui.js') && idx.indexOf('src="/wardsynq-alert-ui.js') < idx.indexOf('src="/native-push.js'), "auth, then the alert screen, then native push");
   assert.match(src("scripts/build-wardsynq-site.sh"), /for f in hospital-auth\.js ward\.js/);

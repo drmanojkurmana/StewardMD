@@ -6026,6 +6026,11 @@ Extends "OPD token numbers" above; allocation is still in the ticket's own commi
   and says to choose one. The switch screen stays as a guard but a real server no longer feeds it, so a
   multi-hospital clinician in the wrong workplace sees "switch to the one it was sent from" without the name.
   Decline and receipts are unchanged (decline is only offered from a detail the workplace already opened).
+- **queue.js and discharge.js follow the credential rule**: discharge.js calls `headersFor(st.orgId)` like
+  ward.js. queue.js keeps its cached token and drops it when `staffTokenOrg` names a hospital other than the
+  request's (st.orgId, else the open WardSynQ/Connect session's hospital, else "" for GHIS). The front desk
+  sets st.orgId from its own token before `/whoami`, so a cold start still signs the desk in. Tokens that name
+  no hospital and pages without hospital-auth.js keep the old rule.
 
 ## 2026-09-14 G7: occupancy and ward length of stay from the movement history and the bed registry's history
 - Supersedes two stated limits of "Trends (P2.10) are computed from the record": a stay is no longer attributed
