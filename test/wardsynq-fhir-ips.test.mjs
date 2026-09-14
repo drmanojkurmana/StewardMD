@@ -299,10 +299,40 @@ test("IPS SCREEN in ward.js: reached from the chart; loading, failed, none recor
   assert.match(view(withheld), /your access does not include this section/);
 
   await RECORD.append(TENANT, [{ resourceType: "AllergyIntolerance", id: "a1", version: 1, patientId: "p1", substance: "Penicillin", substanceCodeSystem: "text", clinicalStatus: "active", ...at(T1) }]);
+  // G6: the immunizations section is always present, so a full summary needs one recorded.
+  await RECORD.append(TENANT, [{ resourceType: "Immunization", id: "imm-ui-1", version: 1, patientId: "p1", vaccine: "Tetanus toxoid", status: "completed", occurredOn: "2026-01-05", primarySource: true, ...at(T1) }]);
   const full = view(await (await as(DOCTOR, W("Patient/p1/$summary"))).json());
+  assert.match(full, /Tetanus toxoid/);
   assert.match(full, /Penicillin/);
   assert.match(full, /Amoxicillin/);
   assert.match(full, /Creatinine 1\.1 mg\/dL/);
   assert.ok(!/None recorded|Could not be read/.test(full));
   assert.ok(!/[—]/.test(full), "no em dash");
+});
+
+test("G6 IPS immunizations: none recorded, unreadable and populated are different; a withdrawn entry is left out", async () => {
+  const b0 = await (await as(DOCTOR, W("Patient/p2/$summary"))).json();
+  const empty = sectionByCode(b0, "11369-6");
+  assert.ok(empty, "the immunizations section is always present");
+  assert.match(empty.emptyReason.text, /None recorded/);
+
+  const realByPatient = RECORD.byPatient.bind(RECORD);
+  RECORD.byPatient = async (tenant, type, pid) => { if (type === "Immunization") throw new Error("storage unreachable"); return realByPatient(tenant, type, pid); };
+  const b1 = await (await as(DOCTOR, W("Patient/p2/$summary"))).json();
+  RECORD.byPatient = realByPatient;
+  const unreadable = sectionByCode(b1, "11369-6");
+  assert.equal(unreadable.emptyReason.coding[0].code, "unavailable");
+  assert.equal(unreadable.entry, undefined);
+
+  await RECORD.append(TENANT, [{ resourceType: "Immunization", id: "imm-p2-1", version: 1, patientId: "p2", vaccine: "BCG", status: "completed", occurredOn: "2026-02-01", doseNumber: 1, primarySource: true, ...at(T1) }]);
+  await RECORD.append(TENANT, [{ resourceType: "Immunization", id: "imm-p2-2", version: 1, patientId: "p2", vaccine: "OPV", status: "entered-in-error", occurredOn: "2026-02-01", primarySource: true, ...at(T1) }]);
+  await RECORD.append(TENANT, [{ resourceType: "Immunization", id: "imm-p2-3", version: 1, patientId: "p2", vaccine: "MMR", status: "not-done", statusReason: "fever on the day", occurredOn: "2026-03-01", primarySource: true, ...at(T1) }]);
+  const b2 = await (await as(DOCTOR, W("Patient/p2/$summary"))).json();
+  const s = sectionByCode(b2, "11369-6");
+  assert.equal(s.entry.length, 2, "BCG and the refused MMR; the withdrawn OPV is not in a summary");
+  assert.match(s.text.div, /BCG/);
+  assert.match(s.text.div, /MMR - not given: fever on the day/);
+  assert.ok(!/OPV/.test(s.text.div));
+  const imm = b2.entry.map((e) => e.resource).filter((r) => r.resourceType === "Immunization");
+  assert.equal(imm.length, 2);
 });

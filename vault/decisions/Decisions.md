@@ -5791,3 +5791,23 @@ Supersedes the coarse part of "FULL DISCHARGE SUMMARY" above for summaries signe
   index.html files). Staff only, `w-noprint`. English, as the patient's own access sees it.
 - Not built: sensitivity is still by report code only; a Condition whose code is on `neverRelease` is shown, as
   in #940's patient copy.
+## 2026-09-14 FHIR: immunizations, ward Groups, Subscription create, and R4B/R5 by fhirVersion (G6, G9, G10, D9)
+- G6: `Immunization` is its own append-only record type, granted with EMR_VITALS. The vaccine is free text;
+  no catalogue is shipped. A code needs a known system (CVX added to terminology.js as a system). Not-done
+  needs a reason; a wrong entry is withdrawn as `entered-in-error`, never deleted. IPS immunizations section is
+  always present (none recorded / unavailable / populated).
+- G9: FHIR Group is DERIVED, never stored: one per ward with an open encounter (`ward-<hash of ward name>`),
+  because the record has no patient-group concept and a maintained cohort list would be a second source of
+  truth. A Group export freezes members on the job at kick-off. A census at the pool cap refuses rather than
+  exporting part of a ward. POST kick-off takes a Parameters body only. Admin downloads reuse `$export-file`.
+- G10: `POST Subscription` goes through `registerWebhook()` unchanged, after narrowing to exactly what is
+  delivered (rest-hook, fhir+json, id-only, one published topic, no header, no end, no other extension);
+  anything else is a 422 naming the element. Secret returned once in `X-WardSynQ-Webhook-Secret` (no
+  Subscription element may carry it). Staff door only. `$status` returns no event count.
+- D9 (owner answer B, supersedes "R4 only until a partner asks"): version by the `fhirVersion` MIME parameter,
+  default R4. Separate validator tables per version (`TABLES` in fhir-validate.js): R4B derived from R4 by the
+  published diff; R5 GENERATED from the R5 StructureDefinitions by scripts/fhir-gen-validator-tables.mjs. R5
+  renders Patient, Encounter, Observation, Condition, AllergyIntolerance, MedicationRequest, Immunization;
+  every other type, and any answer that fails the version's tables, is a 406 naming it. Writes, bulk export,
+  Subscription create/$status are R4 only (415/406). R5 drops Immunization.recorded and sends a missing
+  Condition clinicalStatus as `unknown`; both are stated in the R5 CapabilityStatement. See docs/FHIR_STRATEGY.md.

@@ -1716,6 +1716,7 @@
         '<button class="w-btn ghost" data-w-act="patientsurgery" title="Operations for this patient and where each one stands">' + ms("fact_check") + "Operations</button>" +
         '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
         '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
+        '<button class="w-btn ghost" data-w-act="immunizations" title="Vaccines given, or not given and why">' + ms("vaccines") + "Immunizations</button>" +
         '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
         '<button class="w-btn ghost" data-w-act="documents" title="Consent forms, referral letters, outside reports">' + ms("description") + "Documents</button>" +
         '<button class="w-btn ghost" data-w-act="forms" title="Triage, nursing assessments, checklists this hospital uses">' + ms("assignment") + "Forms</button>" +
@@ -1993,15 +1994,16 @@
     var bar = '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button><h3>International Patient Summary</h3>" +
       '<button class="w-ic" data-w-act="ipsopen" title="Refresh">' + ms("refresh") + "</button></div>";
     if (d === null || d === undefined) return '<div class="w-card">' + bar + '<p class="w-empty">Loading the summary...</p></div>';
-    if (d.failed) return '<div class="w-card">' + bar + '<p class="w-hint warn">' + ms("error") + "The summary could not be produced: " + esc(d.failed) + ". Nothing is known from this screen about this patient's problems, allergies or medicines.</p></div>";
+    if (d.failed) return '<div class="w-card">' + bar + '<p class="w-hint warn">' + ms("error") + "The summary could not be produced: " + esc(d.failed) + ". Nothing is known from this screen about this patient's problems, allergies, medicines or vaccines.</p></div>";
     var byRef = {};
     (d.entry || []).forEach(function (e) { if (e.resource) byRef[e.resource.resourceType + "/" + e.resource.id] = e.resource; });
     var comp = (d.entry && d.entry[0] && d.entry[0].resource) || {};
     var label = function (r) {
-      var cc = r.code || r.medicationCodeableConcept || {};
+      var cc = r.code || r.medicationCodeableConcept || r.vaccineCode || {};
       var name = cc.text || (cc.coding && cc.coding[0] && (cc.coding[0].display || cc.coding[0].code)) || r.resourceType;
       var q = r.valueQuantity, v = q ? " " + q.value + (q.unit ? " " + q.unit : "") : (r.valueString ? " " + r.valueString : "");
-      var when = r.effectiveDateTime || r.authoredOn || r.recordedDate || "";
+      if (r.resourceType === "Immunization" && r.status === "not-done") v = " - not given" + (r.statusReason && r.statusReason.text ? ": " + r.statusReason.text : "");
+      var when = r.effectiveDateTime || r.authoredOn || r.recordedDate || r.occurrenceDateTime || "";
       return esc(name + v) + (when ? ' <span class="w-dt-times">' + esc(String(when).slice(0, 10)) + "</span>" : "");
     };
     var sections = (comp.section || []).map(function (s) {
@@ -6329,6 +6331,65 @@
       "</div>";
   }
 
+  /* IMMUNIZATIONS (G6). The vaccine is typed as it was given: there is no vaccine picker, because a
+   * catalogue shipped with the product would be wrong for most of the places it is used. A code is
+   * optional and needs its code system. Not given is recorded with a reason, and a withdrawn entry
+   * stays on screen, struck through, with who withdrew it and why.
+   *
+   * THREE STATES, NEVER TWO. null is still loading, false is a load that failed, and only a loaded
+   * empty list says none recorded - a vaccine history that failed to load must never read as "none". */
+  function immunizationRow(i) {
+    var gone = i.status === "entered-in-error";
+    return '<li class="w-mini-row' + (gone ? " w-gone" : "") + '"><div>' +
+      "<b>" + esc(i.vaccine) + "</b>" +
+      (i.vaccineCode ? " &middot; " + esc(i.vaccineCodeSystem || "") + " " + esc(i.vaccineCode) : "") +
+      " &middot; " + esc(i.occurredOn) +
+      (i.doseNumber ? " &middot; dose " + esc(i.doseNumber) : "") +
+      (i.status === "not-done" ? ' <span class="w-st due">not given</span>' : "") +
+      (gone ? ' <span class="w-st">withdrawn</span>' : "") +
+      (i.primarySource ? "" : ' <span class="w-st">reported, not given here</span>') +
+      (i.statusReason ? "<div>Reason: " + esc(i.statusReason) + "</div>" : "") +
+      '<div class="w-dt-times">' +
+      [i.lotNumber ? "lot " + esc(i.lotNumber) : "", i.site ? esc(i.site) : "", i.route ? esc(i.route) : "",
+        i.performerName ? "given by " + esc(i.performerName) : i.performerId ? "given by " + esc(i.performerId) : ""].filter(Boolean).join(" &middot; ") +
+      (i.lotNumber || i.site || i.route || i.performerName || i.performerId ? " &middot; " : "") +
+      "recorded by " + esc(i.recordedBy) + " " + when(i.recordedAt) +
+      (gone ? " &middot; withdrawn by " + esc(i.errorBy || "") + " " + when(i.errorAt) + " &middot; " + esc(i.errorReason || "") : "") + "</div>" +
+      (i.note ? "<div>" + esc(i.note) + "</div>" : "") +
+      '</div><div class="w-mini-row-act">' +
+      (gone ? "" : '<button class="w-btn ghost sm" data-w-act="immerror:' + esc(i.immunizationId) + '">' + ms("undo") + "Wrong entry</button>") +
+      "</div></li>";
+  }
+  function immunizationsView(state) {
+    if (!state.sel) return '<div class="w-card"><p class="w-empty">Open a patient first.</p></div>';
+    var d = state.immunizations;
+    var list = d === null || d === undefined ? '<p class="w-empty">Loading immunizations.</p>'
+      : d === false ? '<p class="w-hint warn">' + ms("warning") + "Could not load immunizations. This is not the same as none recorded.</p>"
+      : (d.immunizations || []).length ? '<ul class="w-mini">' + d.immunizations.map(immunizationRow).join("") + "</ul>"
+      : '<p class="w-empty">No immunizations recorded in this record. That is not a statement that the patient has had none.</p>';
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar w-noprint"><button class="w-ic" data-w-act="back">' + ms("arrow_back") + "</button>" +
+      "<h3>Immunizations</h3>" +
+      '<button class="w-ic" data-w-act="immunizations" title="Refresh">' + ms("refresh") + "</button></div>" +
+      '<div class="w-sub"><h4>Record a vaccine</h4>' +
+      '<input id="wImVac" placeholder="Vaccine, as written on the vial or card">' +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>Date given</span><input id="wImDate" type="date"></label>' +
+      '<label class="w-f"><span>Dose number</span><input id="wImDose" inputmode="numeric"></label>' +
+      '<label class="w-f"><span>Given or not</span><select id="wImStatus"><option value="completed">Given</option><option value="not-done">Not given</option></select></label>' +
+      '<label class="w-f"><span>Reason, if not given</span><input id="wImReason"></label>' +
+      '<label class="w-f"><span>Lot number</span><input id="wImLot"></label>' +
+      '<label class="w-f"><span>Site</span><input id="wImSite" placeholder="e.g. left deltoid"></label>' +
+      '<label class="w-f"><span>Route</span><input id="wImRoute" placeholder="e.g. intramuscular"></label>' +
+      '<label class="w-f"><span>Given by (if not you)</span><input id="wImBy"></label>' +
+      '<label class="w-f"><span>Code (optional)</span><input id="wImCode"></label>' +
+      '<label class="w-f"><span>Code system</span><select id="wImSys"><option value="">none</option><option value="cvx">CVX</option><option value="snomed">SNOMED CT</option><option value="atc">ATC</option></select></label>' +
+      "</div>" +
+      '<label class="w-f" style="flex-direction:row;align-items:center"><input id="wImReported" type="checkbox" style="width:auto;margin:0 8px 0 0"><span>Reported by the patient or a card, not given here</span></label>' +
+      '<button class="w-btn" data-w-act="immadd">' + ms("save") + "Record</button></div>" +
+      list + "</div>";
+  }
+
   function reportValue(v) {
     if (v === null || v === undefined || v === "") return "-";
     if (typeof v !== "object") return esc(v);
@@ -6821,6 +6882,7 @@
         : state.view === "safetyinbox" ? safetyInboxView(state)
         : state.view === "workspace" ? workspaceView(state)
         : state.view === "people" ? peopleView(state)
+        : state.view === "immunizations" ? immunizationsView(state)
         : state.view === "consultation" ? consultationView(state)
         : state.view === "incidents" ? incidentsView(state)
         : state.view === "qualitysafety" ? qualitySafetyView(state)
@@ -9765,6 +9827,48 @@
       .then(function (r) { if (settle(r, r && r.ok ? "Released to the patient portal." : null)) loadDocuments(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not release the document. Nothing was released."; paint(); });
   }
+  function immunizationsOpen() {
+    if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
+    st.view = "immunizations"; st.immunizations = null; paint(); loadImmunizations();
+  }
+  function loadImmunizations() {
+    var s = st.sel; if (!s) return Promise.resolve();
+    st.busy = true; paint();
+    return apiGet("/ward/immunizations?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId))
+      .then(function (r) { st.busy = false; st.immunizations = r && r.ok ? r : false; paint(); })
+      .catch(function () { st.busy = false; st.immunizations = false; paint(); });
+  }
+  function immunizationAdd() {
+    var s = st.sel; if (!s) return;
+    var vaccine = val("wImVac");
+    if (!vaccine) { st.err = "Write the vaccine as it was given."; paint(); return; }
+    var reported = checked("wImReported");
+    var imm = {
+      vaccine: vaccine, occurredOn: val("wImDate"), doseNumber: val("wImDose") || undefined, status: val("wImStatus") || "completed",
+      statusReason: val("wImReason") || undefined, lotNumber: val("wImLot") || undefined, site: val("wImSite") || undefined,
+      route: val("wImRoute") || undefined, performerName: val("wImBy") || undefined,
+      vaccineCode: val("wImCode") || undefined, vaccineCodeSystem: val("wImSys") || undefined,
+      primarySource: !reported, encounterId: s.encounterId || undefined,
+    };
+    st.busy = true; paint();
+    apiPost("/ward/immunization", { orgId: st.orgId, patientId: s.patientId, immunization: imm })
+      .then(function (r) {
+        if (settle(r, r && r.ok ? "Recorded." : null)) {
+          ["wImVac", "wImDate", "wImDose", "wImReason", "wImLot", "wImSite", "wImRoute", "wImBy", "wImCode"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadImmunizations();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = "Could not record that. Nothing was saved."; paint(); });
+  }
+  function immunizationError(id) {
+    var reason = prompt("Why is this entry wrong? It stays on the record, marked as withdrawn.") || "";
+    if (!reason) return;
+    st.busy = true; paint();
+    apiPost("/ward/immunization-error", { orgId: st.orgId, immunizationId: id, reason: reason })
+      .then(function (r) { if (settle(r, r && r.ok ? "Withdrawn. It stays on the record." : null)) loadImmunizations(); else paint(); })
+      .catch(function () { st.busy = false; st.err = "Could not withdraw that."; paint(); });
+  }
+
   function peopleOpen() {
     if (!st.sel) { st.err = "Open a patient first."; paint(); return; }
     st.view = "people"; st.people = null; paint(); loadPeople();
@@ -10876,6 +10980,7 @@
       if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
+      if (st.view === "immunizations") { st.immunizations = null; st.view = "chart"; paint(); return; }
       if (st.view === "consultation") { st.consultationResult = null; st.cDraft = null; st.cIcd = undefined; st.view = "chart"; paint(); return; }
       if (st.view === "incidents") { st.incidentLog = null; st.incidentHealth = null; st.view = "list"; paint(); return; }
       if (st.view === "qualitysafety") { st.qs = null; st.qsOpen = null; st.view = "list"; paint(); return; }
@@ -11339,6 +11444,9 @@
     if (cmd === "inboxopen") { inboxOpenPatient(arg); return; }
     if (cmd === "workspace") { workspaceOpen(); return; }
     if (cmd === "people") { peopleOpen(); return; }
+    if (cmd === "immunizations") { immunizationsOpen(); return; }
+    if (cmd === "immadd") { immunizationAdd(); return; }
+    if (cmd === "immerror") { immunizationError(arg); return; }
     if (cmd === "documents") { documentsOpen(); return; }
     if (cmd === "docupload") { documentUpload(); return; }
     if (cmd === "docopen") { documentOpen(arg); return; }

@@ -112,9 +112,10 @@ import { createReferral, actOnReferral, patientReferrals, referralInbox } from "
 import { assignNurse, setObservationFrequency, createNursingTask, actOnNursingTask, nursingPatient, nursingWard } from "../../_wardsynq/nursing.js";
 import { storeFromEnv as documentStoreFromEnv } from "../../_wardsynq/object-store.js";
 import { operationOutcome } from "../../_wardsynq/fhir.js";
-import { dispatchRead, dispatchOperation, dispatchBulk } from "../../_wardsynq/fhir-route.js";
+import { dispatchRead, dispatchOperation, dispatchBulk, negotiateVersion, isBulkPath, answerInVersion, contentTypeFor } from "../../_wardsynq/fhir-route.js";
 import { kickoffExport, cancelExport, listExports, exportConsumers } from "../../_wardsynq/fhir-bulk.js";
 import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listWebhooks, listWebhookDeliveries, webhookConsumers } from "../../_wardsynq/webhooks.js";
+import { createSubscription } from "../../_wardsynq/fhir-subscription.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
@@ -167,6 +168,7 @@ import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
 import { raisePurchaseOrder, receiveGoods, listPurchaseOrders } from "../../_wardsynq/purchasing.js";
 import { recordDeath, correctDeath, addRelatedPerson, removeRelatedPerson, listRelatedPeople } from "../../_wardsynq/patient-identity.js";
+import { recordImmunization, markImmunizationError, listImmunizations } from "../../_wardsynq/immunization.js";
 import { recordDetail } from "../../_wardsynq/record-detail.js";
 import { safetyInbox } from "../../_wardsynq/safety-inbox.js";
 
@@ -933,6 +935,9 @@ export async function onRequest(context) {
          * them is emr.view: a nurse looking for somebody to ring must not need prescribing rights. */
         "related-person": CAPS.QUEUE_ADD, "related-person-remove": CAPS.QUEUE_ADD,
         "related-people": CAPS.EMR_VIEW,
+        /* Giving a vaccine and charting it is ward nursing work, the same bar as a vital sign; withdrawing a
+         * wrong entry sits at the same bar and needs a reason. Reading the list is emr.view. */
+        immunization: CAPS.EMR_VITALS, "immunization-error": CAPS.EMR_VITALS, immunizations: CAPS.EMR_VIEW,
         "purchase-orders": CAPS.ORDER_DISPENSE, "purchase-order": CAPS.ORDER_DISPENSE,
         "goods-receive": CAPS.ORDER_DISPENSE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
@@ -1374,7 +1379,7 @@ export async function onRequest(context) {
        * open the summary and see what is still outstanding without being able to write it. */
       /* A bulk export under /ward/fhir is not a chart read: it is the whole hospital, so it takes the
        * fhir-export gate rather than the fhir sub's emr.view. */
-      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export"));
+      const bulkFhirPath = sub === "fhir" && (/^\$export/.test(parts[2] || "") || (parts[2] === "Patient" && parts[3] === "$export") || (parts[2] === "Group" && parts[4] === "$export"));
       const need = sub === "mar" ? CAPS.MED_ADMINISTER
         : bulkFhirPath ? capFor["fhir-export"]
         /* The audit trail as FHIR AuditEvent is not a chart read either: the security review's own gate. */
@@ -1595,6 +1600,18 @@ export async function onRequest(context) {
       }
       if (sub === "related-people" && method === "GET") {
         const r = await listRelatedPeople(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunization" && method === "POST") {
+        const r = await recordImmunization(request, env, { ...deps, patientId: body.patientId, immunization: body.immunization || {}, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunization-error" && method === "POST") {
+        const r = await markImmunizationError(request, env, { ...deps, immunizationId: body.immunizationId, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "immunizations" && method === "GET") {
+        const r = await listImmunizations(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "purchase-order" && method === "POST") {
@@ -2090,8 +2107,9 @@ export async function onRequest(context) {
        * the FHIR door serves as $export, in the JSON the admin screen reads. staff.admin at the route
        * AND a clinical actor that may read each type, inside the handler. */
       if (sub === "fhir-export" && method === "POST") {
-        const level = body.level === "patient" ? "patient" : "system";
-        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : ""}$export` });
+        const groupId = String(body.groupId || "");
+        const level = body.level === "patient" ? "patient" : groupId ? "group" : "system";
+        const r = await kickoffExport(request, env, { ...deps, store: documentStoreFromEnv(env), level, groupId, params: { _type: Array.isArray(body.types) ? body.types : [], ...(body.since ? { _since: String(body.since) } : {}) }, requestUrl: `${url.origin}/api/queue/ward/fhir/${level === "patient" ? "Patient/" : level === "group" ? `Group/${encodeURIComponent(groupId)}/` : ""}$export` });
         if (!r.ok) return json({ ok: false, error: r.status === 429 ? "export_running" : r.status === 401 ? "auth" : r.status === 403 ? "permission" : "export_refused", message: r.outcome.issue.map((i) => i.diagnostics).join("; ") }, r.status, request);
         return json({ ok: true, jobId: r.jobId, status: "in-progress" }, 202, request);
       }
@@ -2245,14 +2263,31 @@ export async function onRequest(context) {
          *   GET /ward/fhir?patient={id}[&_type=A,B]          the same, older spelling */
         const fType = parts[2] || "", fId = parts[3] || "", fOp = parts[4] || "", fVid = parts[5] || "";
         const fctx = { ...deps, base: `${url.origin}/api/queue/ward/fhir`, terminology: (wsqCfg && wsqCfg.terminology) || null, profiles: (wsqCfg && wsqCfg.fhir && wsqCfg.fhir.profiles) || null, inbound: inboundEnabled((wsqCfg && wsqCfg.fhir) || null), region: (wOrg && wOrg.region) || "", wardsynq: wsqCfg || null, org: wOrg || null, hospitalName: (wOrg && wOrg.name) || "" };
+        /* D9. The version this request speaks (fhir-version.js): Accept's fhirVersion for what comes back,
+         * Content-Type's for a body. Negotiated after the capability gate above, so a version header never
+         * changes who may ask. R4 is the default and the only version bulk export and writes speak. */
+        const fv = negotiateVersion(request);
+        if (fv.obj) return fhirJson(fv.obj, fv.status, request);
+        const vHead = { "Content-Type": contentTypeFor(fv.version) };
+        const r4Only = (what) => fhirJson(operationOutcome("error", "not-supported", `${what} is served as FHIR R4 only; send it without fhirVersion (or with fhirVersion=4.0)`), fv.contentVersion !== "4.0" ? 415 : 406, request);
         /* $export, $export-status, $export-file: gated staff.admin above (bulkFhirPath), before any read grammar. */
-        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}` });
+        if (isBulkPath(parts.slice(2)) && (fv.version !== "4.0" || fv.contentVersion !== "4.0")) return r4Only("Bulk Data export");
+        const bulk = await dispatchBulk(request, env, parts.slice(2), url, { ...fctx, store: documentStoreFromEnv(env) }, { cors: corsHeaders(request), suffix: `?orgId=${encodeURIComponent(wOrgId)}`, body });
         if (bulk) return bulk;
         /* $validate is an operation, not a write: it files nothing, so it is open to anyone who may
          * read, whether or not the hospital has opened the inbound door. */
         if (method === "POST") {
-          const op = await dispatchOperation(request, env, parts.slice(2), body, fctx);
-          if (op) return fhirJson(op.obj, op.status, request);
+          // D9: a body is validated against the tables of the version it says it is.
+          const op = await dispatchOperation(request, env, parts.slice(2), body, { ...fctx, fhirVersion: fv.contentVersion });
+          if (op) { const a = answerInVersion(op.obj, op.status, fv.version, parts.slice(2)); return fhirJson(a.obj, a.status, request, vHead); }
+          /* G10. POST Subscription is not a clinical write and not the inbound door: it registers a
+           * FHIR-payload webhook through registerWebhook (fhir-subscription.js), under the webhooks'
+           * own gate already applied above (staff.admin), so it answers whether or not inbound is on. */
+          if (parts[2] === "Subscription" && !parts[3]) {
+            if (fv.version !== "4.0" || fv.contentVersion !== "4.0") return r4Only("Subscription create");
+            const r = await createSubscription(request, env, { ...fctx, body });
+            return fhirJson(r.obj, r.status, request, r.headers);
+          }
         }
         /* WRITES. Off unless the hospital enabled wardsynq.fhir.inbound, and only for an actor who
          * may already write the chart (emr.treat) - the FHIR sub is emr.view for reads, so the write
@@ -2266,6 +2301,8 @@ export async function onRequest(context) {
           if (!inboundEnabled((wsqCfg && wsqCfg.fhir) || null)) return fhirJson(operationOutcome("error", "not-supported", "not found"), 404, request);
           const wAzW = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT);
           if (!wAzW.ok) return fhirJson(operationOutcome("error", "forbidden", "writing to the record needs emr.treat"), 403, request);
+          /* D9: the inbound normaliser reads R4. An R4B or R5 body is refused (415), never read as R4. */
+          if (fv.version !== "4.0" || fv.contentVersion !== "4.0") return r4Only("Writing to the record");
           const common = { ...fctx, body, config: (wsqCfg && wsqCfg.fhir) || null, sourceSystem: request.headers.get("X-Source-System") || "", ifMatch: request.headers.get("If-Match") || "", ifNoneExist: request.headers.get("If-None-Exist") || "", prefer: /return=minimal/i.test(request.headers.get("Prefer") || "") ? "minimal" : "representation" };
           const subjectRef = body && ((body.subject && body.subject.reference) || (body.patient && body.patient.reference) || "");
           const patientRef = (/(?:^|\/)Patient\/([^/?#]+)$/.exec(String(subjectRef || "")) || [])[1] || "";
@@ -2291,8 +2328,10 @@ export async function onRequest(context) {
         /* The read grammar lives ONCE, in fhir-route.js, shared with the external SMART door, so both
          * doors answer the same path the same way. `orgId` is this API's transport parameter, not a
          * FHIR one; the dispatcher strips it before parsing and keeps it in the Bundle links. */
-        const { obj, status } = await dispatchRead(request, env, parts.slice(2), url, fctx, request.headers.get("Prefer") || "");
-        return fhirJson(obj, status, request);
+        const { obj, status } = await dispatchRead(request, env, parts.slice(2), url, { ...fctx, fhirVersion: fv.version }, request.headers.get("Prefer") || "");
+        // D9: rendered in the requested version, or a 406 naming what is not.
+        const a = answerInVersion(obj, status, fv.version, parts.slice(2));
+        return fhirJson(a.obj, a.status, request, vHead);
       }
       if (sub === "transmit" && method === "POST") {
         const r = await queueTransmission(request, env, { ...deps, orderId: body.orderId, channel: body.channel, destination: body.destination, idempotencyKey: body.idempotencyKey || null });
