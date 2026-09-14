@@ -47,6 +47,15 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   a new field (also in the manual "Patient details" form, `buildSummary`/`buildSBAR`, and the MaiK/
   Deep-Review evidence pack `correlationEvidence()`). Test hooks: `ICU._patientReview`,
   `ICU._savePatientCapture`. Test: `test/run-icu-patient-capture.mjs`.
+- Private Device OCR (2026-09-14): `SMD_IMAGE_ENGINE.process({image, original, kind})`. `image` is the
+  900px/q0.6 JPEG that exists to cut cloud image tokens and goes to AI Vision only; `original` is the
+  uncompressed capture and is what Apple Vision reads (free per pixel; at 900px it missed "(98)" MAP on
+  an MP40). Numeric kinds run Vision with `languageCorrection:false`. `parseFieldsOnDevice(text, kind,
+  boxes)` pairs labels with the TALLEST nearby numeric box (alarm limits are small), never computes
+  MAP, and has one column rule each for SpO2 and RR when Vision drops their small labels. Fixtures =
+  real Vision observations: `test/fixtures/mp40-vision-*.json`; test `test/icu-ocr-monitor-boxes.test.mjs`.
+  Gotcha: the "Recognized: ..." status line shows `lines.slice(0, 8)`; it is not the OCR's full output.
+  See [[Decisions]] (2026-09-14).
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
 - ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed

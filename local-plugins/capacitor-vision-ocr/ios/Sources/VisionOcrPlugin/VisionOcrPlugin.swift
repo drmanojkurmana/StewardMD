@@ -125,6 +125,7 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
                         let bb = observation.boundingBox
                         boxes.append([
                             "text": top.string,
+                            "conf": Double(top.confidence),
                             "x": Double(bb.origin.x),
                             "y": Double(1.0 - (bb.origin.y + bb.size.height)),
                             "w": Double(bb.size.width),
@@ -142,7 +143,10 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
             }
         }
         request.recognitionLevel = .accurate
-        request.usesLanguageCorrection = true
+        // Language correction is a word model: it rewrote "PHILIPS" as "PHILIP!" and digit runs
+        // as letters on a monitor photo (2026-09-14). JS turns it off for numeric screens.
+        request.usesLanguageCorrection = call.getBool("languageCorrection") ?? true
+        if let mh = call.getFloat("minTextHeight"), mh > 0 { request.minimumTextHeight = mh }
         // Pin to English so Vision never has to load additional language models at request time
         // (a plausible source of the first-use stall on some devices). Prescriptions here are English.
         request.recognitionLanguages = ["en-US"]
