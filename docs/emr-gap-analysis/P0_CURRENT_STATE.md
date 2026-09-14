@@ -649,3 +649,10 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Owner decisions: the OPD queue has no token numbers (portal shows people ahead, not a token); full-summary withholding is per section, not per result (needs structured summary storage to refine); portal's older sections are still English-only.
 - Audit anchors (Muse): chain head copied to KV hourly; rewritten/truncated after an anchor shows in System health and Security review. Owner acknowledgement of a legitimate restore is being built (Muse).
 - Regression 6620 pass, 0 fail, 1 skipped. Every route has a screen and a test. Live portal.js 2, ward.js site79, admin.js 25.
+
+### 2026-09-14 (night, 2) - OPD token numbers; owner-confirmed restore
+
+- Token numbers (opd-token-numbers): per hospital, per OPD day, per scope (default whole hospital; department scope with 1-3 character prefixes set in Admin > Hospital). Counter and ticket written in one compare-and-set commit (no burnt numbers, no ticket without a token; 5 retries then 409 token_contention). Stable across move, reassign, priority and send-back; cancelled numbers never reused; new day restarts at 1; no backfill. Shown on desk, doctor queue, OPD console, waiting-hall display (token only, names removed), patient portal ("Your token") and SMS/WhatsApp text (no PHI).
+- Notes: no recall out of no-show exists (no_show is terminal); department scope without prefixes can repeat numbers across departments (admin card warns); native app not rebuilt.
+- Audit anchor acknowledgement (Muse): hospital owner or platform owner only, reason plus incident reference, old anchor log archived, acknowledgement chained.
+- Regression 6640 pass, 0 fail. Every route has a screen and a test. Security scan 0 findings.
