@@ -893,7 +893,7 @@
        * server, which refuses and says why. A UI that hides a refusal teaches people the feature does
        * not exist. */
       '<div class="w-sub"><h4>' + ms("add") + "Add a problem</h4>" +
-      '<div class="w-prob"><div style="position:relative; flex:1; display:inline-flex; align-items:center;"><input id="wProbText" type="text" autocomplete="off" placeholder="Diagnosis, in words" value="' + esc(state.probText || "") + '" style="width:100%; padding-right:28px;"><div style="position:absolute; right:4px; top:50%; transform:translateY(-50%);">' + micBtn("wProbText") + '</div></div>' +
+      '<div class="w-prob"><div style="position:relative; flex:1; display:inline-flex; align-items:center;"><input id="wProbText" type="text" autocomplete="off" placeholder="Diagnosis, in words" value="' + esc(state.probText || "") + '" style="width:100%; padding-right:60px;"><div style="position:absolute; right:4px; top:50%; transform:translateY(-50%);">' + micBtn("wProbText") + '</div></div>' +
       '<input id="wProbCode" type="text" autocomplete="off" placeholder="ICD code (optional)" value="' + esc(state.probCode || "") + '">' +
       '<select id="wProbVs">' + opts + "</select>" +
       '<button class="w-btn ghost" data-w-act="icd">' + ms("search") + "Find code</button>" +
@@ -1042,14 +1042,29 @@
    * The colour is the CATEGORY the server assigned, never anything decided here - a screen that
    * works out for itself what kind of event something is will eventually disagree with the record. */
   /* VOICE DICTATION SUPPORT (BUG-MU08NPGV-0MZX) */
+  /* P2.8: voice -> text in the box -> the clinician reads and edits -> save -> submit -> sign. The
+   * transcript only ever lands in an editable field; nothing is saved or signed by speaking.
+   * PRIVACY: dictation is a patient's clinical story, so it runs ON THIS DEVICE ONLY
+   * (processLocally). A browser that would stream the audio to an outside speech service is refused
+   * rather than used quietly. Language is Indian English or Hindi, remembered per browser. */
   var _activeRec = null;
+  var DICT_LANGS = { "en-IN": "EN", "hi-IN": "\u0939\u093f" };
+  function dictLang() {
+    var l = ""; try { l = localStorage.getItem("wsqDictLang") || ""; } catch (e) {}
+    return DICT_LANGS[l] ? l : "en-IN";
+  }
+  function dictSay(msg) {
+    if (typeof G !== "undefined" && G.toast) G.toast(msg); else alert(msg);
+  }
+  var DICT_ERRORS = {
+    "not-allowed": "The microphone is blocked for this site. Allow it in the browser and try again.",
+    "service-not-allowed": "The microphone is blocked for this site. Allow it in the browser and try again.",
+    "no-speech": "Nothing was heard. Nothing was added.",
+    "audio-capture": "No microphone was found.",
+    "language-not-supported": "This language cannot be converted on this device.",
+  };
   function startDictation(targetId) {
     var SpeechRec = (typeof window !== "undefined") && (window.SpeechRecognition || window.webkitSpeechRecognition);
-    if (!SpeechRec) {
-      if (typeof G !== "undefined" && G.toast) G.toast("Speech recognition is not supported in this browser.");
-      else alert("Speech recognition is not supported in this browser.");
-      return;
-    }
     var target = document.getElementById(targetId);
     if (!target) return;
     if (_activeRec) {
@@ -1059,25 +1074,57 @@
       if (b0) b0.classList.remove("recording");
       return;
     }
+    // Without the on-device check there is no way to promise the audio stays here, so refuse.
+    if (!SpeechRec || typeof SpeechRec.available !== "function") {
+      dictSay("Voice typing needs a browser that converts speech on this device (Chrome 139 or newer). Speech is never sent to an outside service.");
+      return;
+    }
+    var lang = dictLang();
+    var opts = { langs: [lang], processLocally: true, quality: "dictation" };
+    SpeechRec.available(opts).then(function (status) {
+      if (status === "downloadable" || status === "downloading") {
+        dictSay("Downloading the speech pack for this language to this device. Try again in a minute.");
+        if (status === "downloadable" && typeof SpeechRec.install === "function") {
+          SpeechRec.install(opts).then(function (ok) {
+            dictSay(ok ? "Speech pack ready. Tap the microphone again." : "The speech pack could not be downloaded. Type instead.");
+          }, function () { dictSay("The speech pack could not be downloaded. Type instead."); });
+        }
+        return;
+      }
+      if (status !== "available") {
+        dictSay("This device cannot convert " + (lang === "hi-IN" ? "Hindi" : "English") + " speech locally. Type instead.");
+        return;
+      }
+      listen(SpeechRec, lang, target, targetId);
+    }, function () {
+      dictSay("Voice typing could not start. Type instead.");
+    });
+  }
+  function listen(SpeechRec, lang, target, targetId) {
+    var btn = document.querySelector('[data-w-act="dictate:' + targetId + '"]');
     try {
       var rec = new SpeechRec();
+      rec.processLocally = true;
       rec.continuous = false;
       rec.interimResults = false;
-      rec.lang = "en-US";
-      var btn = document.querySelector('[data-w-act="dictate:' + targetId + '"]');
+      rec.lang = lang;
       if (btn) btn.classList.add("recording");
       rec.onresult = function (event) {
         var transcript = "";
         for (var i = event.resultIndex; i < event.results.length; ++i) {
           transcript += event.results[i][0].transcript;
         }
+        if (!transcript) return;
         if (target.value && !/\s$/.test(target.value)) target.value += " ";
         target.value += transcript;
         target.dispatchEvent(new Event("input", { bubbles: true }));
+        dictSay("Dictated text added. Read and correct it before saving; nothing is saved or signed until you do.");
       };
-      rec.onerror = function () {
+      rec.onerror = function (ev) {
         if (btn) btn.classList.remove("recording");
         _activeRec = null;
+        var code = ev && ev.error;
+        if (code !== "aborted") dictSay(DICT_ERRORS[code] || "Voice typing stopped (" + (code || "unknown") + "). Nothing was added.");
       };
       rec.onend = function () {
         if (btn) btn.classList.remove("recording");
@@ -1086,11 +1133,23 @@
       _activeRec = rec;
       rec.start();
     } catch (e) {
+      if (btn) btn.classList.remove("recording");
       _activeRec = null;
+      dictSay("Voice typing could not start. Type instead.");
     }
   }
   function micBtn(targetId) {
-    return '<button type="button" class="w-mic-btn" data-w-act="dictate:' + esc(targetId) + '" title="Voice dictation">' + ms("mic") + '</button>';
+    var lang = dictLang();
+    return '<span style="display:inline-flex; gap:2px;"><button type="button" class="w-mic-btn" data-w-act="dictate:' + esc(targetId) + '" title="Voice typing on this device">' + ms("mic") + '</button>' +
+      '<button type="button" class="w-mic-btn" data-w-act="dictlang" title="Voice typing language: ' + (lang === "hi-IN" ? "Hindi" : "English") + '">' + DICT_LANGS[lang] + '</button></span>';
+  }
+  function toggleDictLang() {
+    var next = dictLang() === "en-IN" ? "hi-IN" : "en-IN";
+    try { localStorage.setItem("wsqDictLang", next); } catch (e) {}
+    var label = DICT_LANGS[next], title = "Voice typing language: " + (next === "hi-IN" ? "Hindi" : "English");
+    var els = document.querySelectorAll('[data-w-act="dictlang"]');
+    for (var i = 0; i < els.length; i++) { els[i].textContent = label; els[i].title = title; }
+    dictSay("Voice typing language: " + (next === "hi-IN" ? "Hindi" : "English") + ".");
   }
 
   /* Group concurrent observations (vitals) within 2 minutes into a single row (BUG-MU08MEQI-JZH1) */
@@ -10792,6 +10851,7 @@
     if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
     if (cmd === "bloodtrace") { bloodTrace(); return; }
     if (cmd === "dictate") { startDictation(arg); return; }
+    if (cmd === "dictlang") { toggleDictLang(); return; }
     if (cmd === "rosterfilter") {
       st.rosterFilters = st.rosterFilters || {};
       if (arg === "ward") {
@@ -11255,5 +11315,5 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation };
 })();
