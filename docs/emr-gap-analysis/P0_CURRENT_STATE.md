@@ -687,3 +687,11 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 - Production D1: db/connect_abdm_schema.sql applied (connect_abdm_enrol_consent, connect_abdm_demographic added) and scripts/abdm-migrate.mjs --apply added consent_request_id and last_fetched_at; re-plan reports current.
 - The branch owner session should rebase any further ABDM work on wardsynq-product.
 - Regression 6796, 0 fail (plus 2837 ABDM/connect tests in the merge worktree). Every route has a screen and a test. Security scan 0 findings.
+
+### 2026-09-14 (night, 7) - OPD department tokens, no-show recall, clinical settings, seed sign-off, group snapshots
+
+- D7 B: department picker at check-in, rooms carry a department, tokens keyed by departmentId with alias names; hall display groups by department; SMS names the department. D14: department numbering refuses a department without a prefix (Admin save and registration). D13: No-show then recall within 4 hours with the same token, reason required, audited.
+- D11 A: Admin > Hospital > Clinical settings card (template ships no clinical values). Fix: orderVerifyWithinHours was dropped by the org whitelist, so the pharmacy-verification surveillance rule never ran.
+- D10: Admin > Clinical seed data lists every seed item as UNAPPROVED; only the platform owner can sign in the name of Dr Manoj Kurmana; nothing signed yet. D4 B: hospitals publish group counts; overview shows who and when, Stale after the group age, "Not published" never zero.
+- App pages (queue.js, patient-register.js, root index.html, opd.html) reach phones only after a native rebuild or OTA; opd-display.html and queue.html are live on push.
+- Regression 6832, 0 fail; headless OPD run 14/14. Every route has a screen and a test. Security scan 0 findings. Live admin.js 32.
