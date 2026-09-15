@@ -418,7 +418,7 @@
   // ---- hospitals -----------------------------------------------------------------------------------
   PAGES.hospitals = { render: function (c) {
     var el = c.el;
-    el.innerHTML = '<div class="title"><h1>Choose a hospital</h1><span class="sub">' + esc(st.who && st.who.name || "") + '</span></div><div id="hospList"><span class="spin"></span></div>';
+    el.innerHTML = '<div class="hosp-page"><div class="title"><h1>Choose a hospital</h1><span class="sub">' + esc(st.who && st.who.name || "") + '</span></div><div id="hospList"><span class="spin"></span></div></div>';
     return api("/orgs").then(function (r) {
       var orgs = (r && r.ok && r.orgs) || [];
       // A staff session is minted for one hospital; the server names it on whoami.
