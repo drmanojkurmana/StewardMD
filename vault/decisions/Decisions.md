@@ -6548,3 +6548,15 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   other (+ text); `ward` stays for ICU step-down. `GET /ward/discharge-checklist` shows the same checklist.
 - A released result (final/corrected DiagnosticReport) closes its investigation on the summary, the pending list and
   the command centre; the summary line carries the values or impression. Signing an undrafted summary drafts it first.
+
+## 2026-09-15 The Order workstation is a ward screen, not a separate record client (LT-09, LT-10)
+- `wardsynq/ui/wardsynq-app.js` no longer carries a demo cohort, a browser-side governed store, an offline journal
+  or its own rule-pack evaluation. Roster: `GET /api/queue/ward/list`. Context: `/ward/fhir` (AllergyIntolerance,
+  Patient, Observation weight and labs) and `/ward/timeline` (active medicines). Sign: the chart's two steps on
+  `POST /api/queue/ward/medication-order` (checkOnly, then the order with `overrideReason`). The site shell opens it
+  with `?site=1&orgId=`, demo hospital or not. Allergies the page cannot read stop the order.
+- Dose limits may be weight-based only up to a weight (`mgPerKgUpToKg`; paracetamol 50 kg, ibuprofen 40 kg) and may
+  carry a daily ceiling checked against the order's frequency (`absoluteCeilingDaily`, `maxDaily`; the frequency
+  reading is pinned to mar-schedule.js parseFrequency). The WardSynQ adapter drops generated duplicate-therapy rules on
+  RxClass grouping classes (a class that strictly contains another class of two or more members); curated rules stay.
+  The generator (scripts/interactions/build_rules.py) and the StewardMD app's copy of the rules are unchanged.

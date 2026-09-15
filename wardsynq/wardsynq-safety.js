@@ -131,7 +131,8 @@ function resolveGeneric(text, pack) {
  *     allergyClasses: { <classTag>: [member generic, ...] },
  *     crossReactivity: [ {id, groups:[classTag, classTag], likelihood, note, disposition?} ],
  *     doseLimits: { <generic>: {maxSingle:{value,unit}, maxDaily:{value,unit},
- *                               mgPerKgSingle?, mgPerKgDaily?, absoluteCeilingSingle?} },
+ *                               mgPerKgSingle?, mgPerKgUpToKg?, absoluteCeilingSingle?,
+ *                               absoluteCeilingDaily?} },
  *     renalAdjustments: { <generic>: { <band>: {dose, note} } }
  *   }
  */
@@ -625,10 +626,21 @@ function checkDose(pack, order, clinical) {
       { generic, limit: limits.maxSingle, given: dose }));
   }
 
+  /* LT-10 (live test 2026-09-15): paracetamol 1 g for a 62 kg adult was a hard stop, "15 mg/kg x 62 kg
+   * = 930 mg". 15 mg/kg is the CHILD's dose; above 50 kg the adult dose applies. A limit that is only
+   * weight-based up to some weight says so with mgPerKgUpToKg, and a patient heavier than that is held
+   * to the adult limits above instead. A limit without it (gentamicin) is weight-based at every weight. */
   const perKg = limits.mgPerKgSingle;
-  if (perKg && lower(dose.unit) === "mg") {
-    const weight = typeof clinical.weightKg === "number" ? clinical.weightKg : null;
-    if (weight === null) {
+  const weight = typeof clinical.weightKg === "number" ? clinical.weightKg : null;
+  const upToKg = typeof limits.mgPerKgUpToKg === "number" ? limits.mgPerKgUpToKg : null;
+  if (perKg && lower(dose.unit) === "mg" && !(upToKg !== null && weight !== null && weight > upToKg)) {
+    if (weight === null && upToKg !== null && typeof clinical.ageYears === "number" && clinical.ageYears >= 18) {
+      // A known adult with no weight: the adult limits above still ran, and the small-adult mg/kg dose
+      // is said rather than turned into a stop on every adult order.
+      out.push(finding("DOSE_WEIGHT_MISSING", DISPOSITION.WARN, SEVERITY.MODERATE,
+        `No weight is recorded for this adult. Up to ${upToKg} kg ${order.drug} is dosed at ${perKg} mg/kg; record a weight to check it.`,
+        { generic, mgPerKgSingle: perKg, mgPerKgUpToKg: upToKg }));
+    } else if (weight === null) {
       out.push(finding("DOSE_WEIGHT_MISSING", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
         `${order.drug} is dosed by weight and this patient has no recorded weight, so the mg/kg ceiling cannot be checked.`,
         { generic, mgPerKgSingle: perKg }));
@@ -645,7 +657,44 @@ function checkDose(pack, order, clinical) {
       }
     }
   }
+
+  /* The day's total, when the order's frequency gives a count. 1 g four times a day is the adult
+   * paracetamol maximum; 1 g every four hours is 6 g a day, and no single dose on that order looks
+   * wrong. PRN or no frequency: nothing to multiply, so no daily finding. */
+  const perDay = dosesPerDay(order.frequency);
+  if (perDay) {
+    const daily = { value: dose.value * perDay, unit: dose.unit };
+    if (limits.absoluteCeilingDaily && sameUnit(daily, limits.absoluteCeilingDaily) && daily.value > limits.absoluteCeilingDaily.value) {
+      out.push(finding("DOSE_ABSOLUTE_CEILING_DAILY", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
+        `${dose.value} ${dose.unit} ${order.frequency} is ${daily.value} ${dose.unit} a day, above the daily ceiling for ${order.drug} (${limits.absoluteCeilingDaily.value} ${limits.absoluteCeilingDaily.unit}).`,
+        { generic, limit: limits.absoluteCeilingDaily, given: daily, dosesPerDay: perDay }));
+    } else if (limits.maxDaily && sameUnit(daily, limits.maxDaily) && daily.value > limits.maxDaily.value) {
+      out.push(finding("DOSE_ABOVE_MAX_DAILY", DISPOSITION.OVERRIDABLE, SEVERITY.MAJOR,
+        `${dose.value} ${dose.unit} ${order.frequency} is ${daily.value} ${dose.unit} a day, above the recommended daily maximum for ${order.drug} (${limits.maxDaily.value} ${limits.maxDaily.unit}).`,
+        { generic, limit: limits.maxDaily, given: daily, dosesPerDay: perDay }));
+    }
+  }
   return out;
+}
+
+/* Doses a day from the frequency as written, or null when it gives no count (PRN, blank, or not
+ * understood). The same reading as parseFrequency() in functions/_wardsynq/mar-schedule.js, which
+ * schedules the round; this file runs in the browser and cannot import that one, so
+ * test/wardsynq-safety.test.mjs pins the two together. */
+const DOSES_PER_DAY = Object.freeze({
+  OD: 1, QD: 1, DAILY: 1, ONCEDAILY: 1, ONCEADAY: 1, "1ID": 1, OM: 1, MANE: 1, MORNING: 1,
+  HS: 1, ON: 1, NOCTE: 1, ATNIGHT: 1, BEDTIME: 1, ATBEDTIME: 1, STAT: 1, ONCE: 1, ONCEONLY: 1, IMMEDIATELY: 1,
+  BD: 2, BID: 2, TWICEDAILY: 2, TWICEADAY: 2,
+  TDS: 3, TID: 3, THRICEDAILY: 3, THREETIMESADAY: 3,
+  QID: 4, QDS: 4, FOURTIMESADAY: 4,
+});
+function dosesPerDay(freq) {
+  const norm = String(freq == null ? "" : freq).toUpperCase().replace(/[\s.–—]/g, "");
+  if (!norm) return null;
+  if (/^\d(-\d){2,3}$/.test(norm)) return norm.split("-").filter((n) => Number(n) > 0).length || null;
+  const q = /^Q(\d{1,2})H$/.exec(norm);
+  if (q) { const h = Number(q[1]); return h && h <= 24 ? 24 / h : null; }
+  return Object.prototype.hasOwnProperty.call(DOSES_PER_DAY, norm) ? DOSES_PER_DAY[norm] : null;
 }
 
 /** Renal band from eGFR or CrCl. Bands match the ones already used across StewardMD. */
@@ -719,6 +768,7 @@ class SafetyEngine {
     const clinical = {
       weightKg: typeof ctx.weightKg === "number" ? ctx.weightKg : (patient && patient.weightKg),
       egfr: typeof ctx.egfr === "number" ? ctx.egfr : (patient && patient.egfr),
+      ageYears: typeof ctx.ageYears === "number" ? ctx.ageYears : (patient && patient.ageYears),
     };
 
     let findings = [];
@@ -819,6 +869,6 @@ export {
   SEVERITY, SEVERITY_ORDER, DISPOSITION, NON_OVERRIDABLE_REACTIONS,
   SafetyEngine, SafetyEngineError,
   compileRulePack, emptyRulePack, defaultDisposition,
-  checkAllergies, checkInteractions, checkDose, checkRenal, collapseDuplicateFindings,
+  checkAllergies, checkInteractions, checkDose, checkRenal, collapseDuplicateFindings, dosesPerDay,
   resolveGeneric, resolveComponents, renalBand, isSevereReaction, satisfyRule, satisfyDuplicationRule, isDuplicationRule,
 };

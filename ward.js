@@ -2717,16 +2717,16 @@
   }
 
   var FLUID_IN = [["oral", "Oral"], ["iv", "IV"], ["ng", "NG / enteral"], ["blood", "Blood"], ["other", "Other"]];
-  var FLUID_OUT = [["urine", "Urine"], ["drain", "Drain"], ["vomit", "Vomit"], ["stool", "Stool"], ["blood", "Blood loss"], ["other", "Other"]];
+  var FLUID_OUT = [["urine", "Urine"], ["drain", "Drain"], ["vomit", "Vomit"], ["ng", "NG aspirate"], ["stool", "Stool"], ["blood", "Blood loss"], ["other", "Other"]];
+  function fluidKindOpts(dir, kind) {
+    return (dir === "output" ? FLUID_OUT : FLUID_IN).map(function (x) { return '<option value="' + esc(x[0]) + '"' + (x[0] === kind ? " selected" : "") + ">" + esc(wTEn(x[1])) + "</option>"; }).join("");
+  }
   /* Fluid balance. The total is never shown on its own: "+400" hides whether that is a patient who
    * drank 400 and passed nothing, or one who took three litres and passed 2.6 - different patients,
    * one of them in trouble. And the hours nobody charted are shown beside the number, because a
    * balance presented as a fact implies a chart that was actually kept. */
   function fluidCard(state) {
     var b = state.balance;
-    var opts = function (list) {
-      return list.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("");
-    };
     var totals = state.balanceFailed ? '<p class="w-hint warn">' + ms("error") + wTH("ward.fluid-balance-could-not-be-loaded", "Fluid balance could not be loaded. Do not read this as nothing charted.", null, "", 1) + "</p>"
       : !b ? "<p class=\"w-empty\">" + wTH("ward.no-fluid-charted-for-this-period", "No fluid charted for this period.") + "</p>"
       : '<div class="w-bal">' +
@@ -2737,16 +2737,17 @@
         (b.complete
           ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.every-hour-of-this-period-has", "Every hour of this period has an entry.") + "</p>"
           : '<p class="w-hint warn">' + ms("error") + wTH("ward.of-the-last-hours-have-nothing", "{length} of the last {v} hours have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v") + "</p>");
-    var inOpts = opts(FLUID_IN);
-    var outOpts = opts(FLUID_OUT);
-    var curDir = state.fluidDir || "intake";
+    var curDir = state.fluidDir === "output" ? "output" : "intake";
     return '<div class="w-card"><div class="w-card-h">' + ms("water_drop") + "<h3>" + wTH("ward.fluid-balance", "Fluid balance") + "</h3>" +
       "<button class=\"w-ic\" data-w-act=\"balance\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       totals +
-      '<div class="w-fluid"><select id="wFDir" onchange="var k=document.getElementById(\'wFKind\');if(k){k.innerHTML=this.value===\'output\'?\'' + outOpts.replace(/'/g, "\\'") + '\':\'' + inOpts.replace(/'/g, "\\'") + '\';}">' +
+      /* LT-08: the kind list follows the direction through the ward's own change dispatch. It was an
+       * inline onchange carrying the option markup, whose double quotes ended the attribute early: the
+       * output kinds spilled into this select and the kind list never changed from the intake routes. */
+      '<div class="w-fluid"><select id="wFDir" data-w-act="fluiddir">' +
       '<option value="intake"' + (curDir === "intake" ? " selected" : "") + ">" + wTH("ward.intake", "Intake") + "</option>" +
       '<option value="output"' + (curDir === "output" ? " selected" : "") + ">" + wTH("ward.output", "Output") + "</option></select>" +
-      '<select id="wFKind">' + (curDir === "output" ? outOpts : inOpts) + "</select>" +
+      '<select id="wFKind" data-w-act="fluidkind">' + fluidKindOpts(curDir, state.fluidKind) + "</select>" +
       '<input id="wFVal" type="text" inputmode="decimal" placeholder="mL" autocomplete="off">' +
       '<button class="w-btn" data-w-act="fluid">' + ms("add") + wTH("ward.chart", "Chart") + "</button></div>" +
       "<p class=\"w-hint\">" + wTH("ward.volumes-are-recorded-in-ml-intake", "Volumes are recorded in mL. Intake includes IV, oral, NG. Output includes urine, drain, vomit, stool, blood loss.") + "</p></div>";
@@ -9364,13 +9365,16 @@
   }
   function chartFluid() {
     var s = st.sel; if (!s) return;
-    var v = val("wFVal");
+    // LT-11: every field is read BEFORE the busy repaint. paint() redraws the card with its selects at
+    // their first option, so reading them afterwards charted every entry as intake, oral.
+    var v = val("wFVal"), dir = val("wFDir"), kind = val("wFKind");
     if (!v) { st.err = wT("ward.how-much", "How much?"); paint(); return; }
+    st.fluidDir = dir; st.fluidKind = kind;
     st.busy = true; paint();
     var clearFluid = function () { var el = document.getElementById("wFVal"); if (el) el.value = ""; };
     bedsideWrite("fluid", {
       orgId: st.orgId, encounterId: s.encounterId, patientId: s.patientId,
-      entries: [{ direction: val("wFDir"), kind: val("wFKind"), value: v, at: new Date().toISOString() }],
+      entries: [{ direction: dir, kind: kind, value: v, at: new Date().toISOString() }],
     }, { label: "Fluid entry", patientId: s.patientId, onKept: clearFluid }, function (r) {
       // A rejected row is the answer, not something to hide behind a success message.
       if (r && r.rejected && r.rejected.length && !r.written) { st.busy = false; st.err = wT("ward.not-recorded", "Not recorded: {replace}.", { replace: r.rejected[0].reason.replace(/_/g, " ") }); paint(); return; }
@@ -12339,6 +12343,9 @@
     if (cmd === "collectspecimen") { collectSpecimen(arg); return; }
     if (cmd === "move") { transfer(); return; }
     if (cmd === "fluid") { chartFluid(); return; }
+    // The picked direction and kind live in state, so a repaint before Chart redraws what was picked.
+    if (cmd === "fluiddir") { st.fluidDir = val("wFDir"); st.fluidKind = ""; var fk = document.getElementById("wFKind"); if (fk) fk.innerHTML = fluidKindOpts(st.fluidDir, ""); return; }
+    if (cmd === "fluidkind") { st.fluidKind = val("wFKind"); return; }
     if (cmd === "balance") { loadBalance(); return; }
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
