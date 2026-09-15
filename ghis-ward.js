@@ -537,13 +537,17 @@
           try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins, hidden: true }); } catch (e) {}
           return rt.captureWorklist({ plugin: plugin });
         }).then(function (view) {
-          return rt.readView({ plugin: plugin, origin: ctx.origin, view: view, navigate: false }).then(function (rows) {
-            var patients = rt.mapRows(rows);
-            if (!patients.length) throw new Error('Still no patient rows on the screen you showed me (' + rows.length + ' rows read, none with a name or id). ' + err.message);
-            agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: view }) }).then(function (r) {
-              if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+          return rt.reproveWorklist({ plugin: plugin, origin: ctx.origin, view: view }).then(function (proven) {
+            if (!proven) {
+              throw new Error('I could not find a data request behind your patient list on ' + ctx.host + '. This hospital needs a fresh Connect Hospital run so the agent can learn it. ' + err.message);
+            }
+            return rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: [proven] }).then(function (patients) {
+              if (!patients.length) throw new Error('The request I learned from that screen returned no patients. ' + err.message);
+              agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: proven }) }).then(function (r) {
+                if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+              });
+              return patients;
             });
-            return patients;
           });
         });
       }

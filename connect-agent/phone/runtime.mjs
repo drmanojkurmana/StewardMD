@@ -27,6 +27,27 @@ export async function captureWorklist({ plugin }) {
   return view;
 }
 
+/* REPAIR RE-PROVES, IT DOES NOT SCRAPE (owner, 2026-09-16). The doctor showed the patient list; the
+ * requests their taps fired (fetch/XHR in the page buffer, and navigations injected from the native
+ * log) are proven against the screen, exactly as discovery does. A proven view carries a backend
+ * request the runtime replays; an unproven one is not saved. */
+export async function reproveWorklist({ plugin, origin, view, parents = [] }) {
+  const prove = await import('./prove.mjs');
+  const client = { currentUrl: () => plugin.currentUrl(), evaluate: (a) => plugin.evaluate(a) };
+  if (typeof plugin.drainRequests === 'function') {
+    try {
+      const drained = await plugin.drainRequests();
+      let pageOrigin = null;
+      try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+      const nav = prove.navToReplayEntries(drained, { pageOrigin, allowedOrigins: [origin] });
+      if (nav.length) await plugin.evaluate({ expression: '(' + prove.INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+    } catch { /* best effort */ }
+  }
+  const book = prove.createProofBook({ brain: null });
+  await book.prove({ client, view, label: 'the doctor showed the patient list', since: -1 });
+  return provenView(view) ? view : null;
+}
+
 const HEADER_MAP = [
   ['mrn', /\b(mrn?|uhid|mr\.?\s*no|patient\s*(id|no)|reg(istration)?\s*(no|#)|hosp(ital)?\s*(id|no)|ip\s*(no|#)|umr)\b|^patient_?id$/i],
   ['episode', /\b(visit|episode|admission|encounter|ip\s*number)\b|^episode_?id$/i],
@@ -323,6 +344,13 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
     if (got && mapRows(got).length) { rows = got; break; }
   }
   if (!rows) {
+    /* NO SCRAPE FOR AN ENDPOINT ADAPTER (owner, 2026-09-16). A proven worklist, or one that recorded
+     * any endpoint, that returns nothing is a drift, not a licence to read the page: it goes to repair,
+     * which re-proves a backend request. Only a worklist with no endpoint at all (a DOM-only EMR) is
+     * read from its page, the one labeled last resort. */
+    if (provenView(view) || (Array.isArray(view.endpoints) && view.endpoints.length)) {
+      throw new Error('no patient rows found at ' + (view.pathTemplate || view.path || origin) + ' through the proven request; the hospital layout may have changed');
+    }
     rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
     if (onRead) onRead({ resource: 'worklist', via: 'page', url: view.pathTemplate || view.path });
   }

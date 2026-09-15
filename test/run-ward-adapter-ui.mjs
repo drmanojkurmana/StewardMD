@@ -64,6 +64,29 @@ window.Capacitor.Plugins.ConnectBrowser = {
       return Promise.resolve({ result: JSON.stringify({ status: r.status || 200, contentType: r.contentType || "application/json", url: req.url, text: typeof r.text === "string" ? r.text : JSON.stringify(r.text) }) });
     }
     if (e.indexOf("input[type=\\"hidden\\"]") >= 0) return Promise.resolve({ result: JSON.stringify({ __RequestVerificationToken: "tok-1" }) });
+    /* The page-realm proof surface (connect-agent/phone/prove.mjs): the replay buffer the observer
+     * keeps, the cells on screen, and re-issuing a buffered request. Used by the repair scenario, where
+     * the doctor's screen must yield a BACKEND REQUEST, never a selector. */
+    if (e.indexOf("__SMD_REPLAY__") >= 0 && e.indexOf("PROVE") < 0) {
+      var inj = /\\)\\((\\[[\\s\\S]*\\])\\)$/.exec(e);
+      var add = inj ? JSON.parse(inj[1]) : [];
+      window.__replayBuf = window.__replayBuf || [];
+      for (var ii = 0; ii < add.length; ii++) {
+        window.__replayBuf.push({ seq: window.__replayBuf.length + 1, method: "GET", url: add[ii].url, body: null, reqCt: "", xhr: false, status: 200, shape: { kind: "unknown", page: true } });
+      }
+      return Promise.resolve({ result: String(window.__replayBuf.length) });
+    }
+    if (e.indexOf("PROVE_LIST") >= 0) return Promise.resolve({ result: JSON.stringify(window.__replayBuf || []) });
+    if (e.indexOf("PROVE_SCREEN") >= 0) {
+      var scr = (window.__pages[window.__url] || []).map(function (r) { return Object.keys(r).map(function (k) { return String(r[k]); }); });
+      return Promise.resolve({ result: JSON.stringify(scr) });
+    }
+    if (e.indexOf("PROVE_EXEC") >= 0) {
+      var sq = Number((/\\)\\((\\d+)\\)$/.exec(e) || [0, 0])[1]);
+      var ent = (window.__replayBuf || []).filter(function (x) { return x.seq === sq; })[0];
+      var rr = ent ? window.__routes["GET " + ent.url] : null;
+      return Promise.resolve({ result: JSON.stringify(rr ? { status: 200, contentType: rr.contentType || "application/json", url: ent.url, text: typeof rr.text === "string" ? rr.text : JSON.stringify(rr.text) } : { status: 0 }) });
+    }
     if (e.indexOf("CRAWL_RAW_TABLE") >= 0) return Promise.resolve({ result: JSON.stringify(window.__rawTables[window.__url] || null) });
     if (e.indexOf("CRAWL_RAW_BLOCK") >= 0) return Promise.resolve({ result: "null" });
     if (e.indexOf('password') >= 0) return Promise.resolve({ result: "ok" });
@@ -71,6 +94,7 @@ window.Capacitor.Plugins.ConnectBrowser = {
     return Promise.resolve({ result: JSON.stringify(window.__pages[window.__url] || []) });
   },
   currentUrl: function () { return Promise.resolve({ url: window.__url, title: "" }); },
+  drainRequests: function () { return Promise.resolve({ requests: window.__navLog || [] }); },
   setMode: function (a) { window.__pluginCalls.push({ m: "setMode", a: a }); return Promise.resolve(window.__staleHidden ? { ok: true } : { ok: true, hidden: a.hidden === true && a.mode !== "login" }); },
   close: function () { window.__pluginCalls.push({ m: "close" }); window.__open = false; return Promise.resolve({ ok: true }); },
   addListener: function (name, fn) { (window.__pluginListeners[name] = window.__pluginListeners[name] || []).push(fn); return { remove: function () { var l = window.__pluginListeners[name]; var i = l.indexOf(fn); if (i >= 0) l.splice(i, 1); } }; },
@@ -102,8 +126,14 @@ window.GHIS.__setAgentApi(function (path, tid, opts) {
   if (path === "/sessions" && opts.method === "POST") return Promise.resolve(window.__sessionResp || { s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-kims", state: "CREATED", reuse: true, deployment: { id: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-1" } } });
   if (path === "/sessions/sess-1/handoff") return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://hims.kims.example"], pendingOrigins: [] } });
   if (path === "/versions/ver-1/repair" && opts.method === "POST") return Promise.resolve({ s: 200, d: { ok: true, candidateVersionId: "ver-2", state: "AWAITING_APPROVAL", parentVersionId: "ver-1" } });
+  // KIMS is the DOM-only EMR (no endpoint discovered, so its page may still be read) until the repair
+  // scenario flips __kimsProvenWorklist: then its ward list is endpoint-backed and scraping is refused.
   if (path === "/versions/ver-1") return Promise.resolve({ s: 200, d: { ok: true, id: "ver-1", state: "ACTIVE", replay: [
-    { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false },
+    window.__kimsProvenWorklist
+      ? { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false,
+          proof: { status: "proven", kind: "json" },
+          endpoints: [{ method: "GET", path: "/api/ward/patients?unit&start&length", role: "data", params: {} }] }
+      : { resourceHint: "worklist", pathTemplate: "/ip/worklist", method: "GET", rowsSelector: "#wl tbody tr", headers: ["S.No", "UHID", "Patient Name", "Age/Sex", "Bed No", "Ward", "Consultant"], singleRecord: false },
     { resourceHint: "medications", pathTemplate: "/ip/meds/{id}", method: "GET", rowsSelector: "#rx tr", headers: ["Drug", "Dose"], singleRecord: false } ] } });
   return Promise.resolve({ s: 404, d: { ok: false, error: "not_found" } });
 });
@@ -113,6 +143,7 @@ window.__pages["https://hims.kims.example/ip/worklist"] = [
 window.__pages["https://hims.kims.example/ip/meds/K001"] = [ { "Drug": "Amoxicillin", "Dose": "500 mg TDS" } ];
 window.__rawTables = window.__rawTables || {};
 window.__fetches = []; window.__routes = window.__routes || {};
+window.__replayBuf = []; window.__navLog = []; window.__kimsProvenWorklist = false;
 return 1;`;
 
 try {
@@ -217,7 +248,11 @@ try {
 
   // Read-time self-repair: the approved adapter's worklist path reads nothing, so the browser asks the
   // doctor for the list once, reads the screen they show, and posts the correction as a new candidate.
-  await ev(`window.__pages["https://hims.kims.example/ip/worklist"] = []; window.__pluginCalls = []; window.__calls = []; return 1;`);
+  // KIMS now has a PROVEN ward-list call that answers with nothing: the runtime refuses to scrape and
+  // goes to repair, which must re-prove a backend request on the screen the doctor shows.
+  await ev(`window.__kimsProvenWorklist = true; window.__replayBuf = []; window.__navLog = [];
+    window.__routes["GET https://hims.kims.example/api/ward/patients?unit=&start=0&length=1000"] = { text: { data: [] } };
+    window.__pages["https://hims.kims.example/ip/worklist"] = []; window.__pluginCalls = []; window.__calls = []; return 1;`);
   await ev(`document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
   await waitFor(`return (window.__pluginListeners.loggedIn||[]).length>0;`, 5000);
   await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/home"}); return 1;`);
@@ -231,13 +266,18 @@ try {
       { "UHID": "K001", "Patient Name": "Ravi Kumar", "Age/Sex": "45 / M", "Ward": "MICU" },
       { "UHID": "K002", "Patient Name": "Sita Devi", "Age/Sex": "30 / F", "Ward": "General" },
       { "UHID": "K003", "Patient Name": "Arun Rao", "Age/Sex": "62 / M", "Ward": "MICU" } ];
+    /* The screen the doctor showed fires its own ward-list call; the page observer buffered it, and the
+     * native navigation log carries it too. Repair proves THAT, and saves the request, not the table. */
+    window.__routes["GET https://hims.kims.example/api/ward/all?unit=&start=0&length=1000"] = { text: { data: window.__pages["https://hims.kims.example/ip/all"] } };
+    window.__replayBuf = [{ seq: 1, method: "GET", url: "https://hims.kims.example/api/ward/all?unit=&start=0&length=1000", body: null, reqCt: "", xhr: true, status: 200, shape: { kind: "json", keys: ["UHID"], rows: 3 } }];
+    window.__navLog = [{ method: "GET", url: "https://hims.kims.example/api/ward/all?unit=&start=0&length=1000" }];
     window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/ip/all"});
     return 1;`);
   ok(await waitFor(`return document.querySelectorAll("#ghisPatientList .ghis-pt-card").length===3;`, 15000), "the screen the doctor showed is read at once and its three patients render");
-  ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && c[0].body.sessionId==="sess-1" && c[0].body.view.rowsSelector==="#allpts tbody tr" && c[0].body.view.resourceHint==="worklist" && c[0].body.view.guided===true;`, 8000), "the corrected view (selector and headers only) is posted as a repair candidate for approval");
+  ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && Array.isArray(c[0].body.view.endpoints) && c[0].body.view.endpoints.some(function(e){return e.role==="data";});`, 8000), "repair posts a proven backend request, not a page selector");
   ok(await ev(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair";})[0]; return JSON.stringify(c.body).indexOf("Ravi")<0 && JSON.stringify(c.body).indexOf("K001")<0;`) === true, "no patient cell text leaves the phone in the repair");
   ok(await ev(`return window.__open===false;`) === true, "the browser is closed after the repaired read");
-  await ev(`window.ghisDisconnect(); return 1;`);
+  await ev(`window.ghisDisconnect(); window.__kimsProvenWorklist = false; window.__navLog = []; window.__replayBuf = []; return 1;`);
 
   await ev(`window.__sessionResp = { s: 403, d: { ok: false, error: "forbidden", detail: "not a member of this tenant" } }; document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
   ok(await waitFor(`return document.getElementById("ghisPatientList").innerText.indexOf("not a member of this tenant")>=0;`, 8000), "a server failure names its reason");

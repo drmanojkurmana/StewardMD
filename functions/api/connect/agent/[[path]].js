@@ -1304,6 +1304,9 @@ export async function onRequest(context) {
       if (!body.view || typeof body.view !== "object") throw new OnboardError("invalid", "view required");
       const view = cleanObservedViews([body.view])[0];
       if (!view.rowsSelector) throw new OnboardError("invalid", "the repaired view has no row selector");
+      if (!Array.isArray(view.endpoints) || !view.endpoints.some((e) => e && e.role === "data")) {
+        throw new OnboardError("conflict", "a repaired ward list must carry a proven backend request, not a page selector");
+      }
       const job = await findJobByCandidateVersion(deps.db, tid, versionId);
       const phoneState = job ? safeJsonParse(job.phone_state) : null;
       if (!phoneState || !phoneState.manifest || !Array.isArray(phoneState.manifest.origins) || !phoneState.manifest.origins.length) {

@@ -3,7 +3,7 @@
 // against a fake plugin.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails } from '../../connect-agent/phone/runtime.mjs';
+import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails, reproveWorklist } from '../../connect-agent/phone/runtime.mjs';
 import { parseFetchExpression } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 test('fieldForHeader tolerates the labels Indian EMRs actually use', () => {
@@ -184,4 +184,40 @@ test('a refused unscoped request is reported unreadable, not as an empty result'
     endpoints: [{ method: 'GET', path: '/Lab/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] }];
   const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
   assert.deepEqual(secs.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-scoped' });
+});
+
+test('a proven worklist that returns nothing does not scrape: it throws for repair', async () => {
+  let navigated = 0;
+  const plugin = {
+    async navigate() { navigated += 1; },
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (req) return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[]' }) };
+      return { result: '[]' };
+    },
+  };
+  const replay = [{ resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: 'tr', headers: ['Patient ID'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type=IPWorkList', role: 'data', params: { Type: { constant: 'IPWorkList' } } }] }];
+  await assert.rejects(readWorklist({ plugin, origin: 'https://gimsrlogin.gitam.edu', replay, settleMs: 0, maxWaitMs: 5 }), /no patient rows found/);
+  assert.equal(navigated, 0, 'a proven adapter never navigates a page to scrape');
+});
+
+test('reproveWorklist proves a backend request on the screen the doctor showed', async () => {
+  const IPWL = JSON.stringify([{ patientId: 'MR1', patientFirstName: 'A', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'C', bedName: 'B2' }]);
+  const plugin = {
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home/Nurseipwlnew' }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      if (expression.indexOf('__SMD_REPLAY__') >= 0 && expression.indexOf('PROVE') < 0) return { result: '0' };
+      if (expression.indexOf('PROVE_LIST') >= 0) return { result: JSON.stringify([{ seq: 1, method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetIPWL?Type=IPWorkList', body: null, xhr: true, status: 200, shape: { kind: 'json', keys: ['patientId'], rows: 2 } }]) };
+      if (expression.indexOf('PROVE_SCREEN') >= 0) return { result: JSON.stringify([['MR1', 'A', 'B1'], ['MR2', 'C', 'B2']]) };
+      if (expression.indexOf('PROVE_EXEC') >= 0) return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: 'x', text: IPWL }) };
+      return { result: '[]' };
+    },
+  };
+  const view = { resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'] };
+  const out = await reproveWorklist({ plugin, origin: 'https://ghis.gitam.edu', view });
+  assert.ok(out, 'a backend request was proven');
+  assert.equal(out.endpoints.find((e) => e.role === 'data').path.split('?')[0], '/Doctor/Home/GetIPWL');
 });
