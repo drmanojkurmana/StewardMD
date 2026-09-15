@@ -105,6 +105,10 @@ final class ConnectBrowserViewController: UIViewController {
         // 2026-09-15). Keep its full width; let the title truncate first.
         doneButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         doneButton.setContentHuggingPriority(.required, for: .horizontal)
+        // adjustsFontSizeToFitWidth shrank Done to an unreadable sliver next to the long login
+        // subtitle (phone screenshot, 2026-09-15). Floor its scale, and let the title and subtitle
+        // truncate instead: they are the decoration, Done is the action.
+        doneButton.titleLabel?.minimumScaleFactor = 0.85
 
         titleLabel.text = hostTitle
         titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -115,6 +119,9 @@ final class ConnectBrowserViewController: UIViewController {
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.textAlignment = .center
         subtitleLabel.numberOfLines = 1
+        subtitleLabel.lineBreakMode = .byTruncatingTail
+        subtitleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         let titleStack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         titleStack.axis = .vertical

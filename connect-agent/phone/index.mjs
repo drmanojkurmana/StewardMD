@@ -234,7 +234,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];
@@ -256,7 +256,26 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     if (finishing()) { warnings.push('saved at your request before every screen was double-checked'); return; }
     notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
     try {
-      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, skipAt, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
+      /* VERIFICATION MAY NEVER COST THE RUN. Proving endpoints is worth doing and worth abandoning:
+       * on a real hospital one slow screen (GHIS medications) never came back, and because the save
+       * happens AFTER this, nothing was ever written - every job of 2026-09-15 ended with phone_state
+       * 0 bytes and no adapter. verifyViews records each view's result on the view as it goes, so
+       * whatever finished inside the budget is kept; the rest stay unproven and are read from their
+       * page. Abandoning the wait does not cancel the in-flight call, and does not need to: the run
+       * moves on to write the adapter. */
+      const budgetMs = caps?.verifyBudgetMs ?? 150000;
+      let timer = null;
+      const budget = new Promise((resolve) => { timer = setTimeout(() => resolve('__timeout__'), budgetMs); });
+      const outcome = await Promise.race([
+        verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, skipAt, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) }),
+        budget,
+      ]);
+      if (timer) clearTimeout(timer);
+      if (outcome === '__timeout__') {
+        warnings.push('checking the endpoints took too long, so what was not checked will be read from its page');
+        return;
+      }
+      verification = outcome;
     } catch (e) {
       if (e && e.name === 'NotSignedIn') { crawlStop = 'login-required'; warnings.push(e.message); return; }
       warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
@@ -276,7 +295,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = again.observedViews || [];
@@ -312,7 +331,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, skipSignal: skipAt, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       if (Array.isArray(again.observedViews) && again.observedViews.length) {

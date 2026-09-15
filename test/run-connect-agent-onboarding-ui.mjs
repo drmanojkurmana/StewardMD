@@ -447,6 +447,33 @@ try {
   await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("guideSkip", {url:"https://emr.newcity.example/home"}); return 1;`);
   ok(await waitFor(`return window.__ask4 && window.__ask4.done === false && window.__ask4.missing === true;`, 3000), "the browser header's Not in my EMR (native guideSkip) resolves the ask as missing");
 
+  // 6d. THE AGENT CONSOLE. Every control reaches the engine as a signal it really reads; Stop asks
+  // first; a quiet run tells the truth and grows a way to keep what it found.
+  ok(await ev(`return !!document.getElementById("smd-connect-skipstep") && !!document.getElementById("smd-connect-redo") && !!document.getElementById("smd-connect-stop") && !!document.getElementById("smd-connect-finishnow") && !!document.getElementById("smd-connect-stopconfirm");`) === true, "the console renders Skip this step, Look again, Stop, Save what you have and the Stop confirm");
+  ok(await ev(`return document.getElementById("smd-connect-finishnow").style.display==="none" && document.getElementById("smd-connect-stopconfirm").style.display==="none";`) === true, "Save and the Stop confirm start hidden");
+  ok(await ev(`var c=window.__engineCalls[window.__engineCalls.length-1]; return typeof c.finishSignal==="function" && typeof c.skipSignal==="function" && typeof c.redoSignal==="function" && c.finishSignal()===false && c.skipSignal()===0 && c.redoSignal()===0;`) === true, "the engine receives finish, skip and redo signals, all idle at first");
+  await ev(`document.getElementById("smd-connect-skipstep").click(); return 1;`);
+  ok(await waitFor(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.skipSignal()===1 && window.SMD_CONNECT_AGENT.__debug().skipRequested===1;`, 3000), "Skip this step bumps the skip signal the engine reads");
+  await ev(`document.getElementById("smd-connect-redo").click(); return 1;`);
+  ok(await waitFor(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.redoSignal()===1;`, 3000), "Look again bumps the redo signal the engine reads");
+  ok(await waitFor(`return document.getElementById("smd-connect-skipstep").disabled===false;`, 4000), "Skip re-enables after acknowledging the tap");
+  await ev(`document.getElementById("smd-connect-stop").click(); return 1;`);
+  ok(await waitFor(`var cf=document.getElementById("smd-connect-stopconfirm"); return cf.style.display!=="none" && cf.textContent.indexOf("throw away")>=0 && window.SMD_CONNECT_AGENT.__debug().stopRequested===false;`, 3000), "Stop asks first, names what would be thrown away, and has not stopped anything yet");
+  ok(await ev(`return document.getElementById("smd-connect-finishnow").style.display!=="none";`) === true, "Stop offers Save what you have alongside the confirm");
+  await ev(`document.getElementById("smd-connect-stopkeep").click(); return 1;`);
+  ok(await waitFor(`return document.getElementById("smd-connect-stopconfirm").style.display==="none";`, 3000), "Keep going closes the confirm without stopping");
+  await sleep(1300);
+  ok(await ev(`return document.getElementById("smd-connect-finishnow").style.display!=="none";`) === true, "Save stays on screen after Keep going (the ticker does not hide it)");
+  // A stalled run: nothing from the engine for a minute.
+  await ev(`window.SMD_CONNECT_AGENT.__setState({lastProgressAt: Date.now()-60000}); return 1;`);
+  ok(await waitFor(`var e=document.getElementById("smd-connect-eta"); return !!e && e.textContent.indexOf("No change for")===0;`, 3000), "a quiet run stops promising a time and says how long it has been quiet");
+  ok(await waitFor(`var n=document.getElementById("smd-connect-stallnote"); return n.style.display!=="none" && n.textContent.indexOf("already been learned")>=0;`, 3000), "the stall note says what is already learned and that Save keeps it");
+  ok(await ev(`return document.getElementById("smd-connect-dot").className.indexOf("stalled")>=0;`) === true, "the live dot goes amber when stalled");
+  await ev(`document.getElementById("smd-connect-finishnow").click(); return 1;`);
+  ok(await waitFor(`var c=window.__engineCalls[window.__engineCalls.length-1]; return c.finishSignal()===true && window.SMD_CONNECT_AGENT.__debug().finishRequested===true;`, 3000), "Save what you have raises the finish signal the engine reads");
+  ok(await waitFor(`return document.getElementById("smd-connect-eta").textContent==="Saving.";`, 3000), "and the console says it is saving");
+  ok(await ev(noDash) === true, "agent console copy has no em-dash");
+
   // Resolve discovery: result screen with proven/unproven capabilities. The first run above left
   // runPhoneDiscovery's promise deliberately unresolved (__engineOutcome's default), so this next
   // scenario opens a fresh session with __engineOutcome pre-armed to resolve immediately - matching

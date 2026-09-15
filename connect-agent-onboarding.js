@@ -1007,6 +1007,15 @@
       } else {
         setStatus("bad", "Sign in was not detected yet. Finish signing in, then try again.");
         S.loginHandled = false;
+        /* The native sign-in watcher fires once per arming. Re-enter login mode after a moment so it
+         * is armed again and the next real sign-in is caught without the doctor hunting for Done. */
+        var p = getPlugin();
+        if (p && p.setMode) {
+          setTimeout(function () {
+            if (!S || S.screen !== "login" || S.loginHandled) return;
+            try { p.setMode({ mode: "login", origins: (S.deployment && S.deployment.origins) || [] }); } catch (e) {}
+          }, 4000);
+        }
       }
     });
   }
@@ -1139,6 +1148,9 @@
     S.progressFailed = false;
     S.stopRequested = false;
     S.finishRequested = false;
+    S.skipRequested = 0;
+    S.redoRequested = 0;
+    S.saveOffered = false;
     S.lastProgressAt = Date.now();         // the clock the stall watchdog divides by
     S.guide = null;
     S.guideResolve = null;
@@ -1456,7 +1468,7 @@
       var cf = b.querySelector("#smd-connect-stopconfirm");
       if (cf) cf.style.display = "";
       var fin = b.querySelector("#smd-connect-finishnow");
-      if (fin && n) fin.style.display = "";      // offer the non-destructive way out alongside it
+      if (fin && n) { fin.style.display = ""; S.saveOffered = true; }   // the kinder way out, kept on screen
     };
     b.querySelector("#smd-connect-stopkeep").onclick = function () {
       var cf = b.querySelector("#smd-connect-stopconfirm");
@@ -1574,7 +1586,9 @@
       // engine is stuck, which is exactly why the screen had no escape before.
       var fin = document.getElementById("smd-connect-finishnow");
       var note = document.getElementById("smd-connect-stallnote");
-      if (fin && !S.finishRequested) fin.style.display = canFinishNow() ? "" : "none";
+      var dot = document.getElementById("smd-connect-dot");
+      if (dot) dot.className = "smd-agent-dot" + (stalledFor() ? " stalled" : "");
+      if (fin && !S.finishRequested) fin.style.display = (canFinishNow() || S.saveOffered) ? "" : "none";
       if (!note) return;
       if (S.finishRequested) {
         note.style.display = "";
@@ -1933,6 +1947,12 @@
         controlOwner: S.controlOwner,
         connectionCount: S.connections.length,
         canApprove: S.canApprove,
+        loginHandled: !!S.loginHandled,
+        stopRequested: !!S.stopRequested,
+        finishRequested: !!S.finishRequested,
+        skipRequested: S.skipRequested || 0,
+        redoRequested: S.redoRequested || 0,
+        lastProgressAt: S.lastProgressAt || 0,
         run: S.result ? { crawlStop: S.result.crawlStop || null, stopReason: S.result.stopReason || null, views: (S.result.observedViews || []).length, found: S.result.found || [], asked: S.result.asked || [], missing: S.result.missing || [], warnings: S.result.warnings || [], checks: ((S.result.verification || {}).checks || []).length, patients: (S.result.verification || {}).patients || 0, candidate: S.result.candidateVersionId || null } : null
       };
     }

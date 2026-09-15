@@ -36,6 +36,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     // Automatic sign-in detection state (see maybeAutoLoggedIn). Reset with every browser open.
     private var sawPasswordField = false
     private var autoLoginNotified = false
+    private var signedInTicks = 0      // consecutive polls that looked signed in; two are needed
+    private var openedURL = ""         // the address the browser was opened at; still there = not signed in
     private var loginOrigin = ""   // origin the browser was opened at; landing elsewhere = signed in
     private var loginPoll: Timer?  // sign-in is not always a navigation; see startLoginPoll()
 
@@ -120,6 +122,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             self.hiddenRead = hidden
             self.sawPasswordField = false
             self.autoLoginNotified = false
+            self.signedInTicks = 0
+            self.openedURL = url.absoluteString
             self.loginOrigin = Self.origin(of: url)
             self.requestLog.removeAll()
 
@@ -252,7 +256,11 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             vc.applyMode(mode, banner: banner, origins: origins, compact: compact)
             self.updateContainerFrame(for: vc)
             // Entering login mode arms the watcher; leaving it (the agent takes over) disarms it.
-            if mode == "login" && !self.autoLoginNotified { self.startLoginPoll() } else if mode != "login" { self.stopLoginPoll() }
+            /* Entering login mode ARMS the watcher every time. It fires once per arming; if the app
+             * decides that fire was not a sign-in (the server said not yet), it re-enters login mode
+             * and the watcher is live again. The old permanent latch meant one early fire ended
+             * detection for the rest of the session. */
+            if mode == "login" { self.autoLoginNotified = false; self.signedInTicks = 0; self.startLoginPoll() } else { self.stopLoginPoll() }
             call.resolve(["ok": true])
         }
     }
@@ -372,10 +380,22 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
         } else {
             vc.view.alpha = 1
             vc.view.isUserInteractionEnabled = true
-            // Never cover the app view completely: once it was fully occluded the app WKWebView (the
-            // engine) stopped running, so the doctor's sign-in was never noticed in login mode
-            // (iPhone 15 Pro, 2026-09-15, seen on screen). A strip left uncovered keeps it alive.
-            pin(vc, in: superview, bottomStrip: 2)
+            /* LOGIN AND GUIDE ALSO SPLIT. Same law as agent mode: a 2pt strip is not enough, iOS
+             * suspends the app WebView behind an almost-full browser. That is fatal here specifically:
+             * sign-in detection fires NATIVELY, but the JS that handles it (the handover, the guide
+             * answer) runs in the APP WebView, so a suspended app means a doctor signs in and nothing
+             * happens - detected on the owner's iPhone signed in on a live ward list with the app dead
+             * to every command (2026-09-15). The browser keeps the top 80% (plenty to sign in and to
+             * tap inside a screen), the app keeps a real 20% strip at the bottom so it stays scheduled
+             * and can react the instant sign-in happens. The keyboard covers that strip while typing
+             * anyway.
+             *
+             * 0.80 (a 20% app strip) was NOT enough: on the owner's iPhone the console still timed out
+             * in login mode, the app suspended, and a doctor signed in on the module picker with the
+             * native detector firing into a dead handler (2026-09-15). The SAME 0.52 that keeps the
+             * engine scheduled during agent reads is the proven number, so login and guide use it too:
+             * 52% browser is enough to sign in and to tap a screen, 48% app is enough to stay awake. */
+            pin(vc, in: superview, topFraction: 0.52)
         }
     }
 
@@ -460,28 +480,42 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
 
     private func maybeAutoLoggedIn(_ vc: ConnectBrowserViewController) {
         guard !autoLoginNotified, vc.mode == "login" else { return }
+        /* SIGNED IN = a finished page with no VISIBLE password box. Hidden password inputs (change-password
+         * modals, re-auth forms) used to count and could hold the poll at "still signing in" forever. */
         vc.webView.evaluateJavaScript(
-            "(function(){try{return document.querySelector('input[type=\"password\"]')?'1':'0'}catch(e){return 'e'}})()"
+            "(function(){try{if(document.readyState!=='complete')return 'loading';var all=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<all.length;i++){var e=all[i];var r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return '1'}return '0'}catch(e){return 'e'}})()"
         ) { [weak self] value, _ in
             guard let self = self else { return }
             guard let flag = value as? String else { return }
             if flag == "1" {
                 self.sawPasswordField = true
+                self.signedInTicks = 0
                 return
             }
-            if flag == "e" { return } // could not tell: say nothing
-            /* COOKIE AUTO-LOGIN, like Android's maybeAutoLoggedIn: a stored session skips the password
-             * form entirely, so "saw a password field" never happens. Landing on an allowed https origin
-             * other than the one the browser was opened at (GIMSR sign-in host -> GHIS data host), with no
-             * password field on it, is a sign-in too. Seen on an iPhone 15 Pro: the reuse path sat on
-             * "Signing in..." over a signed-in ward list until the doctor tapped Done (2026-09-15). */
+            if flag != "0" { self.signedInTicks = 0; return } // loading / could not tell: say nothing
+            /* THREE WAYS TO KNOW. (1) The doctor typed into a password box and it is gone. (2) COOKIE
+             * AUTO-LOGIN onto another allowed origin (GIMSR sign-in host -> GHIS data host). (3) COOKIE
+             * AUTO-LOGIN ON THE SAME ORIGIN: the browser was opened at the sign-in address and now sits on
+             * a different, finished page with no password box - the module picker after a stored session.
+             * (3) was missing, so a doctor whose session was still valid sat on a signed-in ward list with
+             * the sheet saying "Sign in yourself" until they found the tiny Done (owner, 2026-09-15). Two
+             * consecutive ticks (3s) so a page that has not drawn its form yet is not mistaken for one. */
+            /* Not gated on the deployment's origin list: before the handoff the data host (ghis) is
+             * often not approved yet - the handoff is what merges it - so gating here meant a doctor
+             * who landed there signed in was never noticed. Any https page that is not the address we
+             * opened counts; the server sorts the origins out at handoff. */
+            let current = vc.webView.url?.absoluteString ?? ""
             let landed = Self.origin(of: vc.webView.url ?? URL(string: "about:blank")!)
-            let movedOff = !self.loginOrigin.isEmpty && landed != self.loginOrigin && vc.allowedOrigins.contains(landed)
-            guard (self.sawPasswordField || movedOff), !self.autoLoginNotified else { return }
+            let isHttps = current.hasPrefix("https://")
+            let movedOff = isHttps && !self.loginOrigin.isEmpty && landed != self.loginOrigin
+            let movedOn = isHttps && current != self.openedURL
+            guard self.sawPasswordField || movedOff || movedOn else { self.signedInTicks = 0; return }
+            self.signedInTicks += 1
+            guard self.signedInTicks >= 2, !self.autoLoginNotified else { return }
             self.autoLoginNotified = true
             self.stopLoginPoll()
             self.notifyListeners("loggedIn", data: [
-                "url": vc.webView.url?.absoluteString ?? "",
+                "url": current,
                 "auto": true
             ])
         }

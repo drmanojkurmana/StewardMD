@@ -1154,7 +1154,7 @@ export const GUIDE_SOURCES = Object.freeze({ arm: `(${ARM_OBSERVER_SRC})()`, arm
  * again (index.mjs / UI surface it). onProgress({ opening, found, looking, clicks }) fires before each
  * click; stopSignal() true ends the walk (wired to the plugin's native Stop).
  */
-export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, brain = null, book = null } = {}) {
+export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSignal, skipSignal, brain = null, book = null } = {}) {
   if (!client) throw new Error('deepCrawlClinical requires a client');
 
   const maxViews = Math.min(Math.max(caps.maxViews ?? CAPS_DEFAULT.maxViews, 1), CAPS_DEFAULT.maxViews);
@@ -1167,6 +1167,9 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   const trail = [];
   const found = new Set();
   const stopped = () => typeof stopSignal === 'function' && !!stopSignal();
+  /* "Skip this step" while the walk is on a control: the count is read before the click and after
+   * the capture; a bump in between throws THAT screen away and moves to the next control. */
+  const skipAt = () => (typeof skipSignal === 'function' ? Number(skipSignal()) || 0 : 0);
   const looking = () => TARGET_HINTS.filter((h) => !found.has(h));
   const progress = (opening, clicks) => { try { onProgress?.({ opening, found: [...found], looking: looking(), clicks }); } catch { /* UI must never break the walk */ } };
 
@@ -1390,12 +1393,15 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     visited.add(next.label);
     clicks += 1;
     progress(next.label, clicks);
+    const skipMark = skipAt();
     await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
     await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, next.index + "," + JSON.stringify(CONTROL_QUERY)) });
     await client.wait({ ms: waitMs });
     trail.push(next.label);
+    if (skipAt() > skipMark) continue;          // the doctor skipped this screen: on to the next control
     const hint = resourceHintFor(next.label);
     const view = await captureView({ client, resourceHint: hint });
+    if (skipAt() > skipMark) continue;
     if (view && (hint === 'unknown' || hint === 'patient')) {
       const byHeaders = hintFromHeaders(view.headers);
       if (byHeaders !== 'unknown') view.resourceHint = byHeaders;
