@@ -347,6 +347,45 @@
       });
     return out.slice(0, max || 4);
   }
+  /* Hybrid check (device OCR + AI Vision on the monitor crop). Two independent readers:
+   *   device AUTO  + AI same or silent   -> stays AUTO
+   *   device AUTO  + AI different        -> NEEDS_REVIEW (both shown)
+   *   device REVIEW(suggested s) + AI s  -> AUTO, unless the block is a pressure SOURCE (ART/NIBP) question,
+   *                                         which digit agreement cannot answer
+   *   device REVIEW/NOT_FOUND + AI only  -> NEEDS_REVIEW with the AI value as a suggestion, never AUTO
+   * `fields` = the flat values the app fills, `meta` = r.monitor ({fields:{k:{status,suggested,reason,source}}}),
+   * `ai` = AI Vision fields. Returns { fields, meta, changed:[k...] } without mutating the inputs. */
+  var HYBRID_KEYS = ["hr", "spo2", "rr", "sbp", "dbp", "map", "etco2", "temp", "cvp"];
+  function hybridMerge(fields, meta, ai) {
+    var out = assign({}, fields || {}), mf = {}, changed = [];
+    var src = (meta && meta.fields) || {};
+    Object.keys(src).forEach(function (k) { mf[k] = assign({}, src[k]); });
+    function num(v) { var n = typeof v === "number" ? v : typeof v === "string" && /^\s*-?\d+(?:\.\d+)?\s*$/.test(v) ? +v : NaN; return isFinite(n) ? n : null; }
+    function same(a, b, k) { return a != null && b != null && (k === "temp" ? Math.abs(a - b) < 0.05 : a === b); }
+    HYBRID_KEYS.forEach(function (k) {
+      var a = num(ai && ai[k]), d = mf[k] || { status: "NOT_FOUND" }, dv = num(out[k]);
+      if (a == null) return;
+      if (d.status === "AUTO_ACCEPTED" || dv != null) {
+        if (same(dv, a, k)) { mf[k] = assign(d, { aiVision: a, source: (d.source ? d.source + "; " : "") + "AI Vision agrees" }); return; }
+        delete out[k];
+        mf[k] = assign(d, { status: "NEEDS_REVIEW", suggested: dv, aiVision: a, reason: "device read " + dv + ", AI Vision reads " + a });
+        changed.push(k); return;
+      }
+      var s = num(d.suggested);
+      if (d.status === "NEEDS_REVIEW" && same(s, a, k) && !/pressure source/.test(d.reason || "")) {
+        out[k] = s;
+        mf[k] = assign(d, { status: "AUTO_ACCEPTED", value: s, aiVision: a, reason: null, source: "device OCR and AI Vision read the same value (" + (d.reason || "was review") + ")" });
+        changed.push(k); return;
+      }
+      mf[k] = assign(d, { status: "NEEDS_REVIEW", suggested: s != null ? s : a, aiVision: a, reason: (d.reason ? d.reason + "; " : "") + (s != null && !same(s, a, k) ? "AI Vision reads " + a : "AI Vision only, not confirmed on device") });
+      changed.push(k);
+    });
+    // a pressure pair only fills together: if either half went to review, both do
+    if ((out.sbp == null) !== (out.dbp == null)) { ["sbp", "dbp", "map"].forEach(function (k) { if (out[k] != null) { mf[k] = assign(mf[k] || {}, { status: "NEEDS_REVIEW", suggested: out[k], reason: "the other half of the pressure needs review" }); delete out[k]; changed.push(k); } }); }
+    var m2 = assign({}, meta || {}, { fields: mf, review: Object.keys(mf).filter(function (k) { return mf[k].status === "NEEDS_REVIEW"; }), hybrid: true });
+    return { fields: out, meta: m2, changed: changed };
+  }
+
   // A tile read's boxes (already mapped to the full frame) that belong to the tile: centre inside the detector box.
   function tileObservations(mapped, region) {
     var c = region && region.core; if (!c) return mapped || [];
@@ -1103,7 +1142,7 @@
     return out.join("");
   }
 
-  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, tileRegions: tileRegions, tileObservations: tileObservations, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
+  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, tileRegions: tileRegions, tileObservations: tileObservations, hybridMerge: hybridMerge, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
     verifyDigits: verifyDigits, VERIFY: VERIFY, VERIFY_FIELDS: VERIFY_FIELDS,
     _internals: { DIGIT_TEMPLATES: DIGIT_TEMPLATES, readGlyphs: readGlyphs, classifyGlyph: classifyGlyph, buildGraph: buildGraph, assessQuality: assessQuality, blurOf: blurOf, tiltOf: tiltOf, digitsOf: digitsOf, similarity: similarity, gluedValue: gluedValue, FIELDS: FIELDS, LABELS: LABELS, rgbToHsv: rgbToHsv, sampleRegion: sampleRegion, channelColorAtValue: channelColorAtValue, channelColor: channelColor } };
 });

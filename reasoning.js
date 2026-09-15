@@ -4061,7 +4061,9 @@
         img.onload = function () {
           try {
             var sx = region.x * img.naturalWidth, sy = region.y * img.naturalHeight, sw = region.w * img.naturalWidth, sh = region.h * img.naturalHeight;
-            var ow = Math.max(1, Math.round(sw * region.scale)), oh = Math.max(1, Math.round(sh * region.scale));
+            // maxLong: cap the output's long edge (AI Vision crop), never enlarging
+            var sc = region.maxLong ? Math.min(region.scale || 1, region.maxLong / Math.max(1, sw, sh)) : region.scale;
+            var ow = Math.max(1, Math.round(sw * sc)), oh = Math.max(1, Math.round(sh * sc));
             var cv = document.createElement("canvas"); cv.width = ow; cv.height = oh;
             var ctx = cv.getContext("2d"); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
             ctx.drawImage(img, sx, sy, sw, sh, 0, 0, ow, oh);
@@ -4542,6 +4544,8 @@
           return r.json();
         }).catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
+    // Crop of the original capture (normalized region, optional scale / maxLong) as a JPEG data URL, or null.
+    cropImage: function (dataUrl, region) { return smdCropDataUrl(dataUrl, region); },
     // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
     // bridge) → on-device field parse (labels + reading order preserved) + recognized lines
     // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.

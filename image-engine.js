@@ -405,14 +405,51 @@
       var core = (r.monitor && r.monitor.review || []).filter(function (k) { return /^(?:hr|spo2|sbp|dbp|map|rr)$/.test(k); });
       stat(core.length ? "local_needs_review" : "local_success");
       if (!core.length || !aiAvailable() || !online()) return r;
+      // HYBRID (owner, 2026-09-15): with cloud consent already given, the monitor crop goes to AI Vision
+      // automatically and a value auto-fills only where BOTH readers agree (hybridMerge). Off: smd_icu_hybrid=0.
+      if (hybridOn() && getConsent()) return hybridCheck(r, image, kind);
       var names = { hr: "HR", spo2: "SpO2", sbp: "SBP", dbp: "DBP", map: "MAP", rr: "RR" };
-      return fallbackDialog("Read on this device. Needs your check: " + core.map(function (k) { return names[k] || k; }).join(", ") + ". Send this image to AI Vision (cloud) or fill those by hand?",
-        { ai: true, device: false, retryLabel: "Use AI Vision (Pro)", title: "Some values need review" }).then(function (f) {
+      return fallbackDialog("Read on this device. Needs your check: " + core.map(function (k) { return names[k] || k; }).join(", ") + ". Check these with AI Vision (cloud) or fill them by hand?",
+        { ai: true, device: false, retryLabel: "Check with AI Vision (Pro)", title: "Some values need review" }).then(function (f) {
         if (f !== "ai") return r;
         stat("gemini_fallback");
-        return routeAI(image, kind).then(function (ar) { stat(ar && ar.mode === "fields" ? "gemini_success" : "gemini_failure"); return (ar && !ar.cancelled && ar.mode === "fields") ? ar : r; });
+        var consentP = getConsent() ? Promise.resolve({ engine: "ai" }) : phiConsent();
+        return consentP.then(function (c) {
+          if (!c || c.engine !== "ai") return r;
+          if (c.remember && !getConsent()) setConsent(true);
+          return hybridCheck(r, image, kind);
+        });
       });
     });
+  }
+
+  function assign(a, b) { var o = {}, k; for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) o[k] = a[k]; for (k in b) if (Object.prototype.hasOwnProperty.call(b, k)) o[k] = b[k]; return o; }
+  function hybridOn() { try { return localStorage.getItem("smd_icu_hybrid") !== "0"; } catch (e) { return true; } }
+  /* Device read + AI Vision on the MONITOR CROP only (no patient banner, fewer image tokens). The device
+   * result stays the base; hybridMerge promotes a value only when both readers agree, and downgrades any
+   * device value AI Vision contradicts. Any AI failure returns the device result unchanged. */
+  function hybridCheck(r, image, kind) {
+    var V2 = window.SMD_ICU_MONITOR;
+    if (!V2 || !V2.hybridMerge || !window.SMD_AI || !window.SMD_AI.vision) return Promise.resolve(r);
+    var reg = r.monitor && r.monitor.stats && r.monitor.stats.crop && r.monitor.stats.crop.region;
+    var done = busy("Checking with AI Vision…");
+    stat("hybrid_check"); stat("network_calls");
+    var cropP = reg && window.SMD_AI.cropImage ? window.SMD_AI.cropImage(image, { x: reg.x, y: reg.y, w: reg.w, h: reg.h, maxLong: 1280 }) : Promise.resolve(null);
+    return cropP.then(function (crop) { log("hybrid: sending", crop ? "monitor crop" : "whole image"); return window.SMD_AI.vision(crop || image, kind); }).then(function (ar) {
+      done();
+      if (!ar || ar.error) { stat("hybrid_ai_failure"); log("hybrid: AI failed", ar && ar.error); return r; }
+      var af = (ar.fields && typeof ar.fields === "object") ? ar.fields : ar;
+      var nested = kind === "all";
+      var m = V2.hybridMerge(nested ? ((r.fields && r.fields.vitals) || {}) : (r.fields || {}), r.monitor, nested ? (af.vitals || {}) : af);
+      var out = assign({}, r, { monitor: m.meta, hybrid: { changed: m.changed } });
+      if (nested) { out.fields = assign({}, r.fields || {}); if (Object.keys(m.fields).length) out.fields.vitals = m.fields; else delete out.fields.vitals; }
+      else out.fields = m.fields;
+      out.mode = out.fields && Object.keys(out.fields).length ? "fields" : "lines";
+      out.lines = r.lines || [];
+      stat("hybrid_success");
+      log("hybrid: changed", m.changed.join(",") || "none");
+      return out;
+    }, function () { done(); stat("hybrid_ai_failure"); return r; });
   }
 
   /* The on-device model as a target of the fallback dialogs: try it, and if IT fails too, drop to the

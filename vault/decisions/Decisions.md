@@ -6408,3 +6408,15 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - Result on the iPhone (installed app, readImageLocal, 26 owner photos): 21/99 visible values auto-filled,
   0 wrong, 0 network calls. Remaining misses are mostly deliberate gates (two-pass disagreement, BP source
   unknown, confidence) and photos where Vision reads no digits at all.
+
+## 2026-09-15 ICU OCR hybrid: device OCR + AI Vision must AGREE to auto-fill
+- Owner chose hybrid. When a monitor read leaves core vitals in review and cloud consent was already given,
+  `image-engine.js hybridCheck` sends ONLY the monitor crop (`SMD_AI.cropImage`, long edge <= 1280 px) to
+  AI Vision and merges with `SMD_ICU_MONITOR.hybridMerge`: device AUTO + AI same stays; device AUTO + AI
+  different -> review; device review suggestion == AI -> AUTO (except pressure-source questions);
+  AI-only -> review suggestion, never AUTO; BP halves fill together. Any AI failure keeps the device result.
+- Replaces the old "Use AI Vision (Pro)" fallback that overwrote the device read with Gemini's values.
+- Without prior consent the dialog asks ("Check with AI Vision"); `localStorage smd_icu_hybrid=0` turns the
+  automatic check off. Choosing AI Vision as the engine explicitly is unchanged (fills from AI directly).
+- Sending OCR text instead of the image was rejected: similar or higher token cost and it loses layout/colour.
+- Tests: `test/icu-hybrid-merge.test.mjs` (merge rules + end-to-end through image-engine with stubs).
