@@ -237,6 +237,37 @@ test("BED BOARD (BUG-MU06Z46U-DMDX, BUG-MU08T4RL-GU0N): GET /api/queue/ward/beds
   assert.equal(board.wards.find((x) => x.ward === "General A").department, null, "a ward with no department is not given one");
 });
 
+test("RETIRE A BED (BUG-MU072XAL-4EHO): POST /api/queue/bed/update active:false - staff.admin only, this hospital only, never with a patient in it", async () => {
+  seedHospital();
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  const free = await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "1" }, "actor-1");
+  const busy = await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "2" }, "actor-1");
+  const { adm } = await registerAndAdmit("Medical A", "2");
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+
+  const anon = await onRequest({ request: new Request("https://x/api/queue/bed/update", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orgId: ORG, bedId: free.id, active: false }) }), env: ENV });
+  assert.equal(anon.status, 401);
+  const doctor = await as(DOCTOR, "/bed/update", "POST", { orgId: ORG, bedId: free.id, active: false });
+  assert.equal(doctor.__status, 403, JSON.stringify(doctor));
+  assert.equal((await ORG_STORE.getBed(undefined, free.id)).active, true, "a refused retire changed the bed");
+
+  const other = await ORG_STORE.createBed(undefined, "org-other", { wardId: "w-other", name: "9" }, "actor-9");
+  const cross = await as(ADMIN, "/bed/update", "POST", { orgId: ORG, bedId: other.id, active: false });
+  assert.equal(cross.__status, 404, JSON.stringify(cross));
+  assert.equal((await ORG_STORE.getBed(undefined, other.id)).active, true);
+
+  const occupied = await as(ADMIN, "/bed/update", "POST", { orgId: ORG, bedId: busy.id, active: false });
+  assert.equal(occupied.__status, 409, JSON.stringify(occupied));
+  assert.equal(occupied.error, "bed_occupied");
+  assert.equal((await ORG_STORE.getBed(undefined, busy.id)).active, true);
+
+  const ok = await as(ADMIN, "/bed/update", "POST", { orgId: ORG, bedId: free.id, active: false });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal((await ORG_STORE.getBed(undefined, free.id)).active, false);
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  assert.deepEqual(board.wards.find((x) => x.ward === "Medical A").free, [], "a retired bed is still offered as free");
+});
+
 /* TASK 4.15's emergency-mode.js declares "bed-assignment-conflict-override" as a real relaxation.
  * These tests prove it is actually consumed, not merely a name a screen displays. */
 test("EMERGENCY OVERRIDE: a blocked bed is refused without a declared emergency, and admitted with one", async () => {

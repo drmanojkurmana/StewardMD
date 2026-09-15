@@ -870,15 +870,29 @@
         var list = document.getElementById("admBedsList"), wid = sel.value;
         list.innerHTML = '<span class="spin"></span>';
         c.api("/beds?orgId=" + encodeURIComponent(c.state.orgId) + "&wardId=" + encodeURIComponent(wid)).then(function (br) {
-          var beds = (br && br.ok && br.beds) || [];
-          list.innerHTML = beds.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>State</th><th>Isolation</th><th></th></tr></thead><tbody>' +
+          if (!br || !br.ok) { list.innerHTML = '<div class="msg err">Beds could not be loaded. Do not read this as no beds. ' + c.esc(refusal(br)) + "</div>"; return; }
+          var beds = br.beds || [];
+          /* BUG-MU072XAL-4EHO: a bed is taken out of use by retiring it (kept, with its history), never deleted;
+           * the server refuses to retire a bed with a patient in it. */
+          list.innerHTML = beds.length ? '<div class="tbl"><table><thead><tr><th>Name</th><th>State</th><th>Isolation</th><th>In use</th><th></th></tr></thead><tbody>' +
             beds.map(function (bd) {
               var pillCls = bd.state === "available" ? " ok" : (bd.state === "blocked" || bd.state === "maintenance") ? " stop" : "";
-              return '<tr data-bed-id="' + c.esc(bd.id) + '"><td>' + c.esc(bd.name) + '</td><td><span class="pill' + pillCls + '">' + c.esc(bd.state) + "</span></td><td>" + (bd.isolation ? "yes" : "no") + "</td><td>" +
+              return '<tr data-bed-id="' + c.esc(bd.id) + '"><td>' + c.esc(bd.name) + '</td><td><span class="pill' + pillCls + '">' + c.esc(bd.state) + "</span></td><td>" + (bd.isolation ? "yes" : "no") + "</td><td>" + (bd.active ? "yes" : "retired") + "</td><td>" +
                 BED_STATES.filter(function (s) { return s !== bd.state; }).map(function (s) {
                   return '<button type="button" class="btn quiet" data-bed="' + c.esc(bd.id) + '" data-state="' + s + '">' + c.esc(s) + "</button>";
-                }).join(" ") + "</td></tr>";
+                }).join(" ") +
+                ' <button type="button" class="btn ghost sm" data-bed-active="' + c.esc(bd.id) + '" data-to="' + (bd.active ? "0" : "1") + '">' + (bd.active ? "Retire" : "Bring back into use") + "</button></td></tr>";
             }).join("") + "</tbody></table></div>" : '<p class="quiet">No beds in this ward yet.</p>';
+          list.querySelectorAll("[data-bed-active]").forEach(function (b) {
+            b.onclick = function () {
+              var on = b.getAttribute("data-to") === "1";
+              if (!on && !window.confirm("Retire this bed? It stays on record but can no longer be admitted into.")) return;
+              c.api("/bed/update", { orgId: c.state.orgId, bedId: b.getAttribute("data-bed-active"), active: on }).then(function (r) {
+                if (!r || !r.ok) { list.innerHTML += '<div class="msg err">' + c.esc(refusal(r)) + "</div>"; if (r && r.error === "bed_changed") loadBeds(); return; }
+                c.toast(on ? "Bed back in use." : "Bed retired."); loadBeds();
+              });
+            };
+          });
           list.querySelectorAll("[data-bed]").forEach(function (b) {
             b.onclick = function () {
               c.api("/bed/update", { orgId: c.state.orgId, bedId: b.getAttribute("data-bed"), state: b.getAttribute("data-state") }).then(function (r) {

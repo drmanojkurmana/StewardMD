@@ -24,6 +24,7 @@ function loadWard(opts) {
     setTimeout, clearTimeout, console, Promise, Date,
     confirm: opts.confirm || (() => true), prompt: opts.prompt || (() => ""),
   };
+  Object.assign(sandbox, opts.globals || {});
   sandbox.window = sandbox; sandbox.self = sandbox;
   vm.createContext(sandbox); vm.runInContext(SRC, sandbox);
   return { W: sandbox.window.WARD, posts };
@@ -112,6 +113,20 @@ test("BUG-MU08T4RL-GU0N: a transfer picks a real ward and bed on the board and p
   assert.equal(t.body.ward, "CCU");
   assert.equal(t.body.bed, "1");
   assert.equal(W._st.transferPending, false);
+});
+
+test("BUG-MU072XAL-4EHO: the bed board reaches Admin Center, Wards; it has no bed editing of its own", () => {
+  const { W } = loadWard();
+  assert.ok(!/data-w-act="managebeds"/.test(W._render({ ...W._st, view: "board", board: BOARD })), "offered where there is no Admin Center");
+  // wardsynq.com: the shell's WSQ is present.
+  const went = [];
+  const WSQ = { state: {}, go: (p) => went.push(p) };
+  const site = loadWard({ globals: { WSQ } });
+  assert.match(site.W._render({ ...site.W._st, view: "board", board: BOARD }), /data-w-act="managebeds"/);
+  site.W._dispatch("managebeds");
+  assert.deepEqual(went, ["admin"]);
+  assert.equal(WSQ.state._adminTab, "wards");
+  assert.ok(!/bedadd|bedremove/.test(SRC));
 });
 
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------

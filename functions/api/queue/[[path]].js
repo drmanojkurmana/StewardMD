@@ -4432,6 +4432,8 @@ export async function onRequest(context) {
         // The bed must be this hospital's: an admin elsewhere could otherwise block or release it by id.
         const bedNow = await ORG.getBed(env, body.bedId || "");
         if (!bedNow || bedNow.orgId !== body.orgId) return json({ ok: false, error: "not_found" }, 404, request);
+        // BUG-MU072XAL-4EHO: retiring is how a bed is removed. A bed with a patient in it is not retired out from under them.
+        if (body.active === false && bedNow.active && bedNow.state === "occupied") return json({ ok: false, error: "bed_occupied", message: "A patient is in this bed. Transfer or discharge them before retiring it." }, 409, request);
         try { return json({ ok: true, bed: await ORG.updateBed(env, body.bedId, body, actor.id) }, 200, request); }
         catch (e) { if (e && e.code === "bed_changed") return json({ ok: false, error: "bed_changed", message: "This bed changed under you - reload it and try again." }, 409, request); throw e; }
       }

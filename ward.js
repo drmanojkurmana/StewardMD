@@ -634,8 +634,12 @@
       : state.edAdmitPending && state.sel ? '<p class="w-hint">' + ms("emergency") + "Admitting <b>" + who + "</b> from the ED: choose the department, then a free bed.</p>" : "";
     var deptPick = depts.length ? '<div class="w-filter"><label class="w-f"><span>Department</span><select id="wBoardDept"><option value="">All departments</option>' +
       depts.map(function (d) { return '<option value="' + esc(d) + '"' + (d === dept ? " selected" : "") + ">" + esc(d) + "</option>"; }).join("") + "</select></label></div>" : "";
+    /* BUG-MU072XAL-4EHO: beds are added and taken out of use in Admin Center, Wards (server-side, audited,
+     * staff.admin checked there). The board links to it; it never edits a bed list of its own. Only on
+     * wardsynq.com, where the Admin Center exists. */
+    var manage = G.WSQ && G.WSQ.go ? '<button class="w-btn ghost sm" data-w-act="managebeds" type="button" title="Add beds, or mark one blocked or under maintenance, in Admin Center">' + ms("settings") + "Manage wards and beds</button>" : "";
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
-      '<div><b>Bed board</b></div>' +
+      '<div><b>Bed board</b></div>' + manage +
       '<button class="w-ic" data-w-act="board" title="Refresh">' + ms("refresh") + "</button></div>" +
       mode + deptPick +
       '<div class="w-card">' +
@@ -11404,6 +11408,7 @@
     // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
     if (cmd === "board") { if (st.view !== "board") { st.transferPending = false; st.edAdmitPending = false; } loadBoard(); return; }
     if (cmd === "transferward") { transferTo(arg, ""); return; }
+    if (cmd === "managebeds") { if (G.WSQ && G.WSQ.go) { G.WSQ.state._adminTab = "wards"; G.WSQ.go("admin"); } return; }
     if (cmd === "unpickbed") { st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; paint(); return; }
     if (cmd === "pickbed") { var pb = arg.indexOf("|"); if (pb > 0) pickBed(arg.slice(0, pb), arg.slice(pb + 1)); return; }
     if (cmd === "mrnlookup") { mrnLookup(); return; }
