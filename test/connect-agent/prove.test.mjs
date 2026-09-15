@@ -360,3 +360,53 @@ test('the ward list is saved in the form that returns every in-patient, not the 
   assert.deepEqual(data.params.Emp_ID, { empty: true }, 'the doctor filter is saved EMPTY, so every in-patient comes back');
   assert.equal(view.proof.population, 4, 'the saved request was verified to return the whole in-patient list');
 });
+
+/* GHIS-SHAPED FIXTURE, NOT A LIVE HOSPITAL. The real in-patient population can only be checked on the
+ * owner's phone against the hospital (Task 8); what is proven here is that the widened request is the
+ * one SAVED, and that replay sends exactly it: mode constant kept, live page token filled, doctor
+ * filter empty. */
+test('the widened ward list round-trips: what proof saved is what replay sends', async () => {
+  const MINE = JSON.stringify([{ patientId: 'MR1', patientFirstName: 'ALPHA', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'BRAVO', bedName: 'B2' }]);
+  const ALL = JSON.stringify([
+    { patientId: 'MR1', patientFirstName: 'ALPHA', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'BRAVO', bedName: 'B2' },
+    { patientId: 'MR3', patientFirstName: 'CHARLIE', bedName: 'B3' }, { patientId: 'MR4', patientFirstName: 'DELTA', bedName: 'B4' },
+  ]);
+  const recorded = HOST + '/Doctor/Home/GetIPWL?NursingStationId=&PatientId=&FloorId=&Emp_ID=4471&Dept_ID=1207&Type=IPWorkList&__RequestVerificationToken=abc';
+  const entries = [{ seq: 71, method: 'GET', url: recorded, body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['patientId'], rows: 2 } }];
+  const page = {
+    async currentUrl() { return { url: HOST + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression.includes('PROVE_LIST')) return { result: JSON.stringify(entries) };
+      if (expression.includes('PROVE_SCREEN')) return { result: JSON.stringify([['MR1', 'ALPHA', 'B1'], ['MR2', 'BRAVO', 'B2']]) };
+      if (expression.includes('PROVE_EXEC_REQ')) {
+        const m = /"url":"([^"]+)"/.exec(expression);
+        return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: /Emp_ID=(&|")/.test(m[1]) ? ALL : MINE }) };
+      }
+      if (expression.includes('PROVE_EXEC')) return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: MINE }) };
+      return { result: null };
+    },
+  };
+  const view = { resourceHint: 'worklist', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'] };
+  await proveView({ client: page, view });
+  assert.equal(view.proof.status, 'proven');
+  assert.equal(view.proof.population, 4, 'the recorded form answered 2, the widened form 4: the widened one is saved');
+
+  // Now the real replay path over exactly what proof saved.
+  const sent = [];
+  const plugin = {
+    async currentUrl() { return { url: HOST + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: '{"__RequestVerificationToken":"tok9"}' };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      sent.push(req.url);
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"patientId":"MR1"},{"patientId":"MR2"},{"patientId":"MR3"},{"patientId":"MR4"}]' }) };
+    },
+  };
+  const out = await executeView({ plugin, origin: HOST, view, patient: {} });
+  assert.equal(out.rows.length, 4, 'replay returns the whole in-patient population');
+  const url = sent.find((u) => /GetIPWL/.test(u));
+  assert.match(url, /Type=IPWorkList/, 'the mode constant is replayed');
+  assert.match(url, /__RequestVerificationToken=tok9/, 'the live page token is replayed');
+  assert.match(url, /Emp_ID=(&|$)/, 'the doctor filter is replayed EMPTY');
+});
