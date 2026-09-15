@@ -1,6 +1,9 @@
 /* test/run-wardsynq-staff-nav-i18n.mjs - real headless Chrome, desktop width, the staff shell's
- * navigation-language picker (owner decision 2026-09-15: NAVIGATION LABELS ONLY - shell nav items and
- * Admin Center tab names; every clinical/admin screen stays English).
+ * language picker (owner decision 2026-09-15: a staff language translates the WHOLE staff
+ * interface - shell nav items, Admin Center tab names, and every page's own text through
+ * ctx.t/ctx.tSafe/ctx.en; this superseded the earlier nav-labels-only rule). te.js (checked in)
+ * has not yet been given the newer site.shell.* keys, so most page text still reads in English
+ * here by the documented fallback - proven separately below by adding one catalog entry live.
  *
  *   node test/run-wardsynq-staff-nav-i18n.mjs        (CHROME=<path> to override; SHOTS=<dir> for screenshots)
  *
@@ -77,13 +80,30 @@ try {
     return ok === "y" || "rail never switched to Telugu";
   });
 
-  await step("the clinical tile heading beside it, and the page's own lang, are untouched", async () => ev(`
-    var tile = document.querySelector('[data-go="audit"] b');
-    if (!tile || tile.textContent !== 'Audit and security') return 'the tile heading changed - it must stay English';
-    if (document.documentElement.lang !== 'en') return 'document.documentElement.lang must stay en: ' + document.documentElement.lang;
+  await step("document.documentElement.lang follows the staff language (owner decision 2026-09-15 superseded the nav-only rule)", async () => ev(`
+    if (document.documentElement.lang !== 'te') return 'document.documentElement.lang must follow the staff language: ' + document.documentElement.lang;
     var rail = document.querySelector('.rail');
-    if (rail.getAttribute('lang') !== 'te') return 'the rail container should carry lang=te, the translated chrome only';
+    if (rail.getAttribute('lang') !== 'te') return 'the rail container should carry lang=te';
     return true;`));
+
+  await step("the clinical tile heading falls back to English today (te.js has no site.shell.* keys yet), never a raw key", async () => ev(`
+    var tile = document.querySelector('[data-go="audit"] b');
+    if (!tile || tile.textContent !== 'Audit and security') return 'expected the English fallback, got: ' + (tile && tile.textContent);
+    if (/site\\.shell/.test(tile.textContent)) return 'a raw key leaked onto the screen';
+    return true;`));
+
+  await step("page text goes through the staff language once its key is in the catalog (proves the T() pipeline, not just the fallback)", async () => {
+    // te.js (the real, checked-in translation file) has not been given the site.shell.* keys this
+    // group introduced - i18n.js's English catalog does not carry them yet either - so the step
+    // above only proves the documented fallback. Prove the live pipeline itself by adding ONE entry
+    // to the already-registered "te" catalog for the exact key the Audit tile's heading calls
+    // (wardsynq/site/shell.js PAGES.home.render, tile "audit") and re-rendering.
+    await ev(`window.WSQI18n._catalogs.te['site.shell.home.tile.audit.title'] = 'ఆడిట్ TEST'; window.WSQ.render('home'); return 1;`);
+    const ok = await until(`
+      var tile = document.querySelector('[data-go="audit"] b');
+      return (tile && tile.textContent === 'ఆడిట్ TEST') ? 'y' : '';`, 4000);
+    return ok === "y" || "the tile heading never switched once its key was in the catalog";
+  });
 
   await step("Admin Center: the tab strip is in Telugu (catalogs are complete), never a raw key", async () => {
     await ev(`location.hash = '#/admin'; return 1;`);

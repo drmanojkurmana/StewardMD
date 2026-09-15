@@ -68,7 +68,7 @@ test("default language: nav labels and the clinical tile heading are the same En
   assert.doesNotMatch(html, /nav\.audit/, "never a raw key");
 });
 
-test("picking Telugu translates the rail; the clinical tile heading beside it stays English", () => {
+test("picking Telugu translates the rail; page text also goes through the staff language (owner decision 2026-09-15 superseded the nav-only rule)", () => {
   const { win, doc, st } = loadEnv(true); // te.js registered, as if the picker's ensureLoaded already ran
   st.navLang = "te";
   win.WSQ.render("home");
@@ -79,17 +79,42 @@ test("picking Telugu translates the rail; the clinical tile heading beside it st
   const teAudit = win.WSQI18n.t("nav.audit", null, "te");
   assert.notEqual(teAudit, "Audit and security", "fixture sanity: te.js really does translate this key");
   assert.ok(rail.indexOf(teAudit) >= 0, "the rail link switched to Telugu");
-  // The Admin section tile (sec("Administration", adminTiles)) states the SAME destination in a
-  // literal English title - owner decision 2026-09-15: clinical/admin screen content is never
-  // touched by this picker, only the shell's own nav chrome.
-  assert.ok(tiles.indexOf("Audit and security") >= 0, "the tile heading is untouched, still English");
+  // te.js (a real, checked-in translation file) has never been given the newer site.shell.* keys
+  // this group introduced - i18n.js's English catalog does not carry them yet either, so T() falls
+  // back to the inline English, exactly as documented (own English when a key is missing). That is
+  // graceful degradation, not proof the pipeline never ran: prove the pipeline itself by registering
+  // a fake "xx"-style catalog entry directly for the SAME key the Audit tile's heading actually
+  // calls (site.shell.home.tile.audit.title, see wardsynq/site/shell.js PAGES.home.render) and
+  // re-rendering - once a catalog does carry the key, the page text changes with it.
+  win.WSQI18n._catalogs.te["site.shell.home.tile.audit.title"] = "ఆడిట్ TEST";
+  win.WSQ.render("home");
+  const tilesAfter = doc.getElementById("page").innerHTML;
+  assert.ok(tilesAfter.indexOf("ఆడిట్ TEST") >= 0, "the tile heading followed the staff language once its key was in the catalog");
+  assert.ok(tilesAfter.indexOf("Audit and security") < 0, "the stale English heading is gone");
 });
 
-test("the page's own lang is never touched - only clinical content's screen-reader language matters", () => {
+test("a site.shell.* key te.js does not yet have falls back to English via T(), not a raw key or blank", () => {
   const { win, doc, st } = loadEnv(true);
   st.navLang = "te";
   win.WSQ.render("home");
-  assert.equal(doc.documentElement.lang, "en", "document.documentElement.lang must stay en");
+  const tiles = doc.getElementById("page").innerHTML;
+  // te.js and i18n.js both lack site.shell.home.tile.audit.title today, so shell.js's T() falls
+  // back to the inline English it was called with - never the raw key, never a blank heading.
+  assert.ok(tiles.indexOf("Audit and security") >= 0, "the Audit tile heading falls back to its inline English");
+  assert.ok(tiles.indexOf("site.shell.home.tile.audit.title") < 0, "never a raw key");
+});
+
+test("picking a staff language sets document.documentElement.lang to that language", () => {
+  const { win, doc, st } = loadEnv(true);
+  st.navLang = "te";
+  win.WSQ.render("home");
+  assert.equal(doc.documentElement.lang, "te", "document.documentElement.lang follows the staff language (owner decision 2026-09-15)");
+});
+
+test("English stays English: document.documentElement.lang is en by default", () => {
+  const { win, doc } = loadEnv(true);
+  win.WSQ.render("home");
+  assert.equal(doc.documentElement.lang, "en");
 });
 
 test("an unknown or not-offered language code falls back to English, not a raw key", () => {

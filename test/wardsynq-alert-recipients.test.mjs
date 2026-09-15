@@ -101,12 +101,13 @@ test("Admin card: shows the sign-off and what is missing, and saves exactly the 
   sb.WSQ = sb.window.WSQ;
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
-  assert.match(C.html(esc, null), /Loading/);
-  assert.match(C.html(esc, false), /could not be loaded/);
+  const c = { esc };
+  assert.match(C.html(c, null), /Loading/);
+  assert.match(C.html(c, false), /could not be loaded/);
   const status = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: { acknowledgeWithinMinutes: 30, escalateAfterMinutes: 60 },
     failures: [{ loopId: "wsq-crit-x", level: "due", at: "2026-09-14T10:00:00Z", reason: "NO_RECIPIENT" }], noDevice: [{ identity: "o~nurse1", times: 2 }],
     sms: { ready: false, missing: ["This hospital's DLT template name for critical-result SMS is not set."], senderId: "", templateName: "" } };
-  const html = C.html(esc, status);
+  const html = C.html(c, status);
   assert.match(html, /approved by Dr Manoj Kurmana on 2026-09-14 \(owner decision O5\)/);
   assert.match(html, /id="alEnabled" checked/);
   assert.match(html, /SMS fallback is not configured/);
@@ -114,7 +115,7 @@ test("Admin card: shows the sign-off and what is missing, and saves exactly the 
   assert.match(html, /nobody could be found to tell/);
   assert.match(html, /o~nurse1/);
   assert.doesNotMatch(html, /UNAPPROVED|—/);
-  const out = C.read({ enabled: true, senderId: " WSQHSP ", templateName: "WSQ_CRITICAL", escalation: { acknowledgeWithinMinutes: 20 },
+  const out = C.read(c, { enabled: true, senderId: " WSQHSP ", templateName: "WSQ_CRITICAL", escalation: { acknowledgeWithinMinutes: 20 },
     levels: { due: { orderer: true, roles: ["doctor"], contactsText: "" }, overdue: { orderer: true, roles: ["supervisor"], contactsText: "" }, escalate: { orderer: false, roles: [], contactsText: "cmo@h.in\n\n" } } });
   const w = JSON.parse(JSON.stringify(out.wardsynq));
   assert.deepEqual(w.alerts, { push: { enabled: true }, sms: { provider: "twofactor", senderId: "WSQHSP", templateName: "WSQ_CRITICAL" } });
@@ -163,18 +164,19 @@ test("Admin card: phones now, from the registrations; a failed read is never sho
   sb.WSQ = sb.window.WSQ;
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
+  const c = { esc };
   const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true } };
-  const some = C.html(esc, { ...base, phones: { ok: true, checked: 3, noDevice: [{ identity: "nurse7", role: "nurse", why: "on duty" }, { identity: "cmo@h.in", role: null, why: "named contact" }] } });
+  const some = C.html(c, { ...base, phones: { ok: true, checked: 3, noDevice: [{ identity: "nurse7", role: "nurse", why: "on duty" }, { identity: "cmo@h.in", role: null, why: "named contact" }] } });
   assert.match(some, /No phone registered for alerts \(2 of 3\)/);
   assert.match(some, /nurse7 \(on duty, nurse\)/);
   assert.match(some, /cmo@h.in \(named contact\)/);
-  assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 3, noDevice: [] } }), /All 3 people on duty/);
+  assert.match(C.html(c, { ...base, phones: { ok: true, checked: 3, noDevice: [] } }), /All 3 people on duty/);
   for (const p of [{ ok: false, error: "read_failed" }, undefined]) {
-    const h = C.html(esc, { ...base, phones: p });
+    const h = C.html(c, { ...base, phones: p });
     assert.match(h, /could not be read/);
     assert.doesNotMatch(h, /have a phone registered\./);
   }
-  assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
+  assert.match(C.html(c, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
 });
 
 /* Owner decision 2026-09-15: level 2 tells the WARD TEAM on duty now (nurses, residents, consultants) by a named rule
@@ -377,16 +379,16 @@ test("screens: the Alerts card explains the ward rule; the ward board names who 
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
   const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true }, phones: { ok: true, checked: 0, noDevice: [] } };
-  const html = C.html(esc0, { ...base, wardRule: AR.level2WardRuleOf(null) });
+  const html = C.html({ esc: esc0 }, { ...base, wardRule: AR.level2WardRuleOf(null) });
   assert.match(html, /Level 2 ward rule<\/dt><dd><span class="mono">all-on-duty-ward-team<\/span> <span class="quiet">\(default\)/);
   assert.match(html, /Every nurse, resident and consultant on duty now in the patient&#39;s ward/);
   assert.match(html, /off duty lasts until the end of their rostered shift, or 12 hours/);
   assert.match(html, /Patient with no ward recorded:<\/b> at every level the alert goes to the doctor the patient is admitted under, unless that doctor has marked themselves off duty, and to the residents on duty now in that doctor's department \(anywhere in the hospital when the department is not known\)/);
   assert.match(html, /No nurse, supervisor or other consultant on duty is told/);
-  assert.match(C.html(esc0, { ...base, wardRule: AR.level2WardRuleOf({ level2WardRule: "x" }) }), /saved rule "x" is not one this build has/);
-  assert.match(C.html(esc0, base), /level 2 ward rule could not be read/);
+  assert.match(C.html({ esc: esc0 }, { ...base, wardRule: AR.level2WardRuleOf({ level2WardRule: "x" }) }), /saved rule "x" is not one this build has/);
+  assert.match(C.html({ esc: esc0 }, base), /level 2 ward rule could not be read/);
   assert.doesNotMatch(html, /—/);
-  const out = C.read({ enabled: true, senderId: "", templateName: "", escalation: { level2NurseRule: "all-on-duty-nurses-in-ward" }, levels: {} });
+  const out = C.read({ esc: esc0 }, { enabled: true, senderId: "", templateName: "", escalation: { level2NurseRule: "all-on-duty-nurses-in-ward" }, levels: {} });
   assert.equal(out.wardsynq.criticalEscalation.level2NurseRule, "all-on-duty-nurses-in-ward", "the card's own save keeps a saved rule");
 
   const wsb = { navigator: { userAgent: "node" }, location: { hash: "", href: "" },

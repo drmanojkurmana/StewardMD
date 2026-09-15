@@ -20,6 +20,8 @@
 .brandbar .tools .btn { min-height: 32px; padding: 0 11px; font-size: var(--t-micro); }
 /* Staff-shell nav-language picker (owner decision 2026-09-15): its own size, not the form-field 100%. */
 .brandbar .tools .nav-lang select { width: auto; min-height: 32px; padding: 0 7px; font-size: var(--t-micro); }
+/* The English original under a translated refusal or failure (TS in shell.js). */
+.en-orig { display: block; font-size: .85em; opacity: .8; margin-top: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 .hospbar {
   display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap;

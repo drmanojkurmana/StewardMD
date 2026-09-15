@@ -6475,3 +6475,14 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - Not covered: discharge.js (its printable must stay English; print.dc.* already handles the print), strings built by
   `.push()` into arrays, prompt default answers. Translations are not written on this branch.
 - Tests: `test/ward-staff-i18n.test.mjs` (fake TE[...] catalog), `test/run-ward-staff-i18n-ui.mjs` (headless Chrome).
+
+## 2026-09-15 A staff language translates the whole staff interface (replaces nav-labels-only)
+- shell.js T/TS/EN, exposed on the page context as `c.t(key, vars, en)`, `c.tSafe`, `c.en`, `c.lang`; pages carry a
+  3-line local T/TS/EN so helpers rendered without the shell stay English. The inline English must equal EN[key];
+  `test/wsq-site-i18n-catalog.test.mjs` extracts every call and pins the one block
+  `/* site pages keys (ui-i18n-site) */` at the end of EN in i18n.js (keys `site.*`, `order.*`).
+- Never translated: recorded or server values (names, codes, drugs, doses, results, hospital/ward names, audit
+  values, server messages), marked lang="en" where shown inside translated UI. Refusals and failures use TS: the
+  translated text plus the English original underneath (`.en-orig`). `document.documentElement.lang` follows.
+- The Order workstation reads the same `wsqStaffNavLang`, loads i18n.js + the language file, translates its static
+  HTML at boot. Translations of the new keys are written separately before merge.

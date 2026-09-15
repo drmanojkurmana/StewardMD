@@ -100,10 +100,11 @@ test("screens: Admin > Hospital clinical settings card: loading, failed and save
   new Function("window", readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"))(sb.window);
   const K = sb.window.WSQ._clinicalSettings;
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  assert.match(K.html(esc, undefined), /Loading clinical settings/);
-  assert.match(K.html(esc, null), /could not be loaded\. Do not read this as none configured/);
+  const c = { esc };
+  assert.match(K.html(c, undefined), /Loading clinical settings/);
+  assert.match(K.html(c, null), /could not be loaded\. Do not read this as none configured/);
   const saved = { settings: { highAlertDrugs: ["Insulin"], antibiotics: [], orderVerifyWithinHours: null, edReassessMinutes: { 2: 15 }, patientAccess: { enabled: true }, rpoMinutes: null } };
-  const html = K.html(esc, { settings: saved.settings, templates: C.TEMPLATES }, { changed: ["highAlertDrugs"], settings: saved.settings });
+  const html = K.html(c, { settings: saved.settings, templates: C.TEMPLATES }, { changed: ["highAlertDrugs"], settings: saved.settings });
   assert.match(html, /value="not-configured"/);
   assert.match(html, /Saved: highAlertDrugs\. The server now holds/);
   assert.match(html, /<dt>Antibiotics<\/dt><dd><span class="quiet">not configured/);
