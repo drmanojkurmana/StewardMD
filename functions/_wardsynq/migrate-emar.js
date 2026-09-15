@@ -76,9 +76,11 @@ async function latestWeightKg(svc, patientId) {
  * prescriber sees and the check the nurse's scan runs can never read different facts. */
 async function safetyFacts(svc, order) {
   const patientId = order && order.patientId;
+  // No catch: an unreadable allergy list or medication list is not an empty one. The callers turn the
+  // throw into "the check could not run" instead of a clean check against no allergies.
   const [allergies, orders] = await Promise.all([
-    svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-    svc.byPatient("MedicationOrder", patientId).catch(() => []),
+    svc.byPatient("AllergyIntolerance", patientId),
+    svc.byPatient("MedicationOrder", patientId),
   ]);
   const activeMeds = (orders || [])
     .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
