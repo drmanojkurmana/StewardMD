@@ -663,17 +663,23 @@
     var wards = dept ? allWards.filter(function (w) { return w.department === dept; }) : allWards;
     var moving = state.transferPending && state.sel;
     var wardRowHtml = function (w) {
-      var occ = (w.occupied || []).map(function (o) {
+      /* LT-03: occupied and free beds in ONE bed order (CAR-02, CAR-03, CAR-04...), not every occupied bed first
+       * and then every free one. And an occupied tile carries the MRN under the name: two patients can share a
+       * name, and the MRN is what tells them apart. */
+      var cells = (w.occupied || []).map(function (o) {
         // The server now sends name/mrn on every occupied bed (migrate-inpatient.js bedBoard).
         // The id is the LAST resort, never the first thing a nurse reads off a bed.
-        return '<button class="w-bedcell occ" data-w-act="openbedpatient:' + esc(o.encounterId || o.patientId || "") + "\" title=\"" + wTA("ward.open-patient-chart", "Open patient chart") + "\"><b>" + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span></button>";
-      }).join("");
+        return { bed: o.bed, html: '<button class="w-bedcell occ" data-w-act="openbedpatient:' + esc(o.encounterId || o.patientId || "") + "\" title=\"" + wTA("ward.open-patient-chart", "Open patient chart") + "\"><b>" + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span>" + (o.name && o.mrn ? "<span>" + esc(o.mrn) + "</span>" : "") + "</button>" };
+      });
       // Which free cell is highlighted as "picked" - a UI selection compare against what the board
       // itself already reported as free, never a computation of whether a bed IS free.
       var isPicked = function (b) { return !!t && t.ward === w.ward && String(t.bed) === String(b); };
-      var free = w.bedsKnown ? (w.free || []).map(function (b) {
-        return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>" + wTH("ward.free", "Free") + "</span></button>";
-      }).join("") : "<div class=\"w-bedcell unknown\"><span>" + wTH("ward.bed-list-not-configured", "Bed list not configured") + "</span></div>";
+      if (w.bedsKnown) (w.free || []).forEach(function (b) {
+        cells.push({ bed: b, html: '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>" + wTH("ward.free", "Free") + "</span></button>" });
+      });
+      cells.sort(function (a, b) { return String(a.bed).localeCompare(String(b.bed), undefined, { numeric: true }); });
+      var occ = cells.map(function (c) { return c.html; }).join("");
+      var free = w.bedsKnown ? "" : "<div class=\"w-bedcell unknown\"><span>" + wTH("ward.bed-list-not-configured", "Bed list not configured") + "</span></div>";
       var unplaced = (w.unplaced || []).map(function (o) {
         return '<div class="w-bedcell occ"><b>-</b><span>' + wTH("ward.no-bed-assigned", "{name} (no bed assigned)", { name: esc(o.name || o.mrn || o.patientId) }, "name") + "</span></div>";
       }).join("");
@@ -4605,7 +4611,9 @@
   var BOARD_WORDS = { bedmgmt: "Bed management", critsboard: "Critical results board", labboard: "Lab board", radboard: "Radiology board", inventoryboard: "Inventory", edboard: "ED board" };
   function drillCount(n, label, d, act) {
     if (n == null) return '<span class="w-hint">' + wTH("ward.not-known", "{label}: not known", { label: esc(label) }, "label") + "</span>";
-    if (!d) return "<b>" + esc(n) + "</b> " + esc(label) + " <small class=\"w-hint\">(" + wTH("ward.detail-not-available", "detail not available)") + "</small>";
+    // LT-39: a count with no list behind it is plain text (not a button). "(detail not available)" after every such
+    // number read as a glitch down the whole twin; the title still says so for anyone who looks.
+    if (!d) return '<span title="' + wTA("ward.detail-not-available-for-this-count", "Detail not available for this count.") + '"><b>' + esc(n) + "</b> " + esc(label) + "</span>";
     return '<button class="w-btn ghost tiny" data-w-act="' + esc(act) + '"><b>' + esc(n) + "</b> " + esc(label) + "</button>";
   }
   function twinCount(section, sKey, dKey, n, label) {
@@ -4671,7 +4679,7 @@
       "<div class=\"w-actions\"><button class=\"w-btn ghost\" data-w-act=\"trends\" title=\"" + wTA("ward.these-measures-over-days-weeks-or", "These measures over days, weeks or months, by ward") + "\">" + ms("query_stats") + wTH("ward.trends", "Trends") + "</button></div>" +
       twinDrillHtml(t, tw.drill) +
 
-      twinSectionCard(wTH("ward.hub", "hub"), wT("ward.flow-capacity", "Flow &amp; capacity"), s.flow, function (d) {
+      twinSectionCard("hub", wT("ward.flow-capacity", "Flow and capacity"), s.flow, function (d) {
         var f = d.flow;
         return '<div class="w-actions">' + flowDrill("occupied", f.beds.occupied, "occupied") + flowDrill("edArrivals", f.ed.arrivals, wT("ward.in-ed", "in ED")) + flowDrill("dischargeCandidates", f.dischargeCandidates, wT("ward.ready-to-leave", "ready to leave")) + "</div>";
       }) +
@@ -4682,18 +4690,18 @@
       twinSectionCard("priority_high", wT("ward.critical-results", "Critical results"), s.criticals, function (d) {
         return '<div class="w-actions">' + twinCount(s.criticals, "criticals", "open", d.open, wT("ward.open-loop-s", "open loop(s)")) + "</div>";
       }) +
-      twinSectionCard(wTH("ward.bed", "bed"), "ICU", s.icu, function (d) {
+      twinSectionCard("bed", "ICU", s.icu, function (d) {
         return '<div class="w-actions">' + twinCount(s.icu, "icu", "occupied", d.occupied, wT("ward.in-icu", "in ICU")) +
           twinCount(s.icu, "icu", "ventilated", d.ventilatedRecorded, wT("ward.ventilator-charted-in-12-h", "ventilator charted in 12 h")) +
           twinCount(s.icu, "icu", "vasopressors", d.vasopressorsRecorded, wT("ward.on-a-vasoactive-order", "on a vasoactive order")) + "</div>" +
           "<p class=\"w-hint\">" + wTH("ward.ventilation-and-vasopressors-count-what-is", "Ventilation and vasopressors count what is charted. A patient with nothing charted is not known, not \"off\".") + "</p>" +
           (d.encounterReadCapped || d.recordsCapped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-these-counts-may", "Read limit reached: these counts may be low.") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.groups", "groups"), wT("ward.opd-queue-today", "OPD queue today"), s.opdQueue, function (d) {
+      twinSectionCard("groups", wT("ward.opd-queue-today", "OPD queue today"), s.opdQueue, function (d) {
         return "<p>" + drillCount(d.waiting, "waiting") + " &middot; " + drillCount(d.inConsultation, wT("ward.in-consultation", "in consultation")) + " &middot; " + wTH("ward.session-s", "{sessions} session(s)", { sessions: esc(d.sessions) }, "sessions") + "</p>" +
           '<p class="w-hint">' + esc(d.drillNotAvailable || "") + "</p>";
       }) +
-      twinSectionCard(wTH("ward.badge", "badge"), wT("ward.staffing-now", "Staffing now"), s.staffing, function (d) {
+      twinSectionCard("badge", wT("ward.staffing-now", "Staffing now"), s.staffing, function (d) {
         if (!d.rosterConfigured) return "<p class=\"w-hint\">" + wTH("ward.not-known2", "Not known: {reason}.", { reason: esc(d.reason || wT("ward.no-roster", "no roster")) }) + "</p>";
         var gaps = (d.gaps || []).map(function (g) { return "<li><b>" + esc(g.role) + "</b><span>" + wTH("ward.short-have-of", "{shift}{v} &middot; short {short} (have {have} of {need})", { shift: esc(g.shift), v: (g.unit ? " &middot; " + esc(g.unit) : ""), short: esc(g.short), have: esc(g.have), need: esc(g.need) }, "shift short have need") + "</span></li>"; }).join("");
         return '<div class="w-actions">' + twinCount(s.staffing, "staffing", "onDuty", d.onDutyNow, wT("ward.on-duty-now", "on duty now")) + "</div>" +
@@ -4701,29 +4709,29 @@
           (gaps ? "<p class=\"w-hint warn\">" + wTH("ward.gaps", "Gaps") + "</p><ul class=\"w-mini\">" + gaps + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-gaps-against-the-roster-minimum", "No gaps against the roster minimum.") + "</p>") +
           (d.partial ? "<p class=\"w-hint warn\">" + wTH("ward.the-roster-read-was-cut-short", "The roster read was cut short; gaps may be incomplete.") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.science", "science"), wT("ward.lab-turnaround-7-days", "Lab turnaround (7 days)"), s.labTat, function (d) {
+      twinSectionCard("science", wT("ward.lab-turnaround-7-days", "Lab turnaround (7 days)"), s.labTat, function (d) {
         return (d.sampleSize ? "<p>" + wTH("ward.median", "Median") + " <b>" + wTH("ward.min2", "{medianMinutes} min", { medianMinutes: esc(d.medianMinutes) }, "medianMinutes") + "</b> &middot; " + wTH("ward.90th-percentile", "90th percentile") + " <b>" + wTH("ward.min3", "{p90Minutes} min", { p90Minutes: esc(d.p90Minutes) }, "p90Minutes") + "</b></p>" : "<p class=\"w-empty\">" + wTH("ward.no-reported-requests-with-both-times", "No reported requests with both times in the last 7 days. No figure is shown.") + "</p>") +
           '<div class="w-actions">' + twinCount(s.labTat, "labTat", "slowest", d.sampleSize, wT("ward.in-the-sample", "in the sample")) + "</div>" +
           '<p class="w-hint">' + wTH("ward.excluded-for-a-missing-or-impossible", "{excludedTotal} excluded for a missing or impossible time.", { excludedTotal: esc(d.excludedTotal) }, "excludedTotal") + "</p>" +
           (d.capped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-older-requests-may", "Read limit reached: older requests may be missing.") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.radiology", "radiology"), wT("ward.radiology-backlog", "Radiology backlog"), s.radiology, function (d) {
+      twinSectionCard("radiology", wT("ward.radiology-backlog", "Radiology backlog"), s.radiology, function (d) {
         return '<div class="w-actions">' + twinCount(s.radiology, "radiology", "waiting", d.waiting, wT("ward.not-yet-reported", "not yet reported")) + "</div>" +
           "<p>" + (d.oldestWaitingSince ? wTH("ward.oldest-waiting-since-h", "Oldest waiting since {oldestWaitingSince} ({oldestWaitingHours} h)", { oldestWaitingSince: when(d.oldestWaitingSince), oldestWaitingHours: esc(d.oldestWaitingHours) }, "oldestWaitingSince oldestWaitingHours") : wTH("ward.oldest-wait-not-known", "Oldest wait not known")) + "</p>" +
           (d.orderTimeMissing ? '<p class="w-hint">' + wTH("ward.order-s-have-no-recorded-time", "{orderTimeMissing} order(s) have no recorded time.", { orderTimeMissing: esc(d.orderTimeMissing) }, "orderTimeMissing") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.surgical", "surgical"), wT("ward.theatre-utilisation-24-h", "Theatre utilisation (24 h)"), s.otUtilisation, function (d) {
+      twinSectionCard("surgical", wT("ward.theatre-utilisation-24-h", "Theatre utilisation (24 h)"), s.otUtilisation, function (d) {
         if (!d.theatresConfigured) return "<p class=\"w-hint\">" + wTH("ward.not-known-no-theatres-are-set", "Not known: no theatres are set up for this hospital.") + "</p>";
         return "<p>" + wTH("ward.overall", "Overall") + " <b>" + pct(d.overallUtilisation) + "</b> " + wTH("ward.of-theatre-s", "of {theatresConfigured} theatre(s)", { theatresConfigured: esc(d.theatresConfigured) }, "theatresConfigured") + "</p>" +
-          '<ul class="w-mini">' + (d.perTheatre || []).map(function (x) { return "<li><b>" + esc(x.name) + "</b><span>" + pct(x.utilisation) + " &middot; " + wTH("ward.min-booked", "{bookedMinutes} min booked", { bookedMinutes: esc(x.bookedMinutes) }, "bookedMinutes") + "</span></li>"; }).join("") + "</ul>";
+          '<ul class="w-mini">' + (d.perTheatre || []).map(function (x) { return "<li><b>" + esc(x.name) + "</b> <span>" + pct(x.utilisation) + " &middot; " + wTH("ward.min-booked", "{bookedMinutes} min booked", { bookedMinutes: esc(x.bookedMinutes) }, "bookedMinutes") + "</span></li>"; }).join("") + "</ul>";
       }) +
-      twinSectionCard(wTH("ward.emergency", "emergency"), wT("ward.emergency2", "Emergency"), s.emergency, function (d) {
+      twinSectionCard("emergency", wT("ward.emergency2", "Emergency"), s.emergency, function (d) {
         return d.any ? "<p>" + wTH("ward.active-declaration-s", "{length} active declaration(s): {join}", { length: esc(d.active.length), join: esc(d.active.map(function (a) { return a.kind; }).join(", ")) }, "length join") + "</p>" : "<p class=\"w-empty\">" + wTH("ward.none-active", "None active.") + "</p>";
       }) +
       twinSectionCard("event_busy", wT("ward.blackouts", "Blackouts"), s.blackouts, function (d) {
         return d.blackouts.length ? "<p>" + wTH("ward.active-blackout-s", "{length} active blackout(s)", { length: esc(d.blackouts.length) }, "length") + "</p>" : "<p class=\"w-empty\">" + wTH("ward.none-active", "None active.") + "</p>";
       }) +
-      twinSectionCard(wTH("ward.medication", "medication"), wT("ward.pharmacy", "Pharmacy"), s.pharmacy, function (d) {
+      twinSectionCard("medication", wT("ward.pharmacy", "Pharmacy"), s.pharmacy, function (d) {
         var low = (d.stock || []).filter(function (r) { return r.belowReorder; });
         return "<p>" + wTH("ward.dispensed-pending-verification-below-reorder", "{dispenseCount} dispensed &middot; {pendingVerification} pending verification &middot; {length} below reorder", { dispenseCount: esc(d.dispenseCount), pendingVerification: esc(d.pendingVerification), length: esc(low.length) }, "dispenseCount pendingVerification length") + "</p>" +
           (low.length ? '<ul class="w-mini">' + low.map(function (r) { return "<li><b>" + esc(r.display || r.code || "") + "</b><span>" + wTH("ward.level-reorder-at", "level {level} &middot; reorder at {reorderAt}", { level: esc(r.level), reorderAt: esc(r.reorderAt) }, "level reorderAt") + "</span></li>"; }).join("") + "</ul>" +
@@ -4732,11 +4740,11 @@
       twinSectionCard("folder_shared", "HIM", s.him, function (d) {
         return "<p>" + drillCount(d.incompleteCharts, wT("ward.incomplete-chart-s", "incomplete chart(s)")) + " " + wTH("ward.of-checked", "of {chartsChecked} checked", { chartsChecked: esc(d.chartsChecked) }, "chartsChecked") + "</p>";
       }) +
-      twinSectionCard(wTH("ward.science", "science"), wT("ward.diagnostics-lis", "Diagnostics (LIS)"), s.lis, function (d) {
+      twinSectionCard("science", wT("ward.diagnostics-lis", "Diagnostics (LIS)"), s.lis, function (d) {
         return '<div class="w-actions">' + twinCount(s.lis, "lis", "outstanding", d.outstanding, wT("ward.outstanding-specimens", "outstanding specimens")) + "</div><p>" + wTH("ward.of-checked2", "of {checked} checked", { checked: esc(d.checked) }, "checked") + "</p>";
       }) +
       (t.financeWithheld ? '<div class="w-card"><div class="w-card-h">' + ms("lock") + "<h3>" + wTH("ward.finance", "Finance") + "</h3></div><p class=\"w-hint\">" + wTH("ward.billing-and-claims-need-billing-rights", "Billing and claims need billing rights, so they are not shown.") + "</p></div>" : "") +
-      twinSectionCard(wTH("ward.payments", "payments"), wT("ward.billing", "Billing"), s.billing, function (d) {
+      twinSectionCard("payments", wT("ward.billing", "Billing"), s.billing, function (d) {
         return "<p>" + drillCount(d.invoiceCount, wT("ward.invoice-s", "invoice(s)")) + " &middot; " + wTH("ward.charged-collected-outstanding", "charged {charged} &middot; collected {collected} &middot; outstanding {outstanding}", { charged: esc(d.charged), collected: esc(d.collected), outstanding: esc(d.outstanding) }, "charged collected outstanding") + "</p>";
       }) +
       twinSectionCard("request_quote", wT("ward.claims", "Claims"), s.claims, function (d) {

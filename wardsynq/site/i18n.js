@@ -1366,7 +1366,7 @@
     "ward.fio2": "FiO2 (%)",
     "ward.first-checker-you": "First checker (you)",
     "ward.flagged-by-the-lab": "flagged by the lab",
-    "ward.flow-capacity": "Flow &amp; capacity",
+    "ward.flow-capacity": "Flow and capacity",
     "ward.flowsheet": "Flowsheet",
     "ward.fluid-balance": "Fluid balance",
     "ward.fluid-balance-could-not-be-loaded": "Fluid balance could not be loaded. Do not read this as nothing charted.",

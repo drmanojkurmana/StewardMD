@@ -120,3 +120,15 @@ test("it is computed, so the clock moves the escalation without anything being r
   assert.equal(later.open.criticalResultsEscalated, 1, "the same record, an hour later");
   assert.equal(later.computedAt, "2026-09-07T13:00:00.000Z", "and it says when it was computed");
 });
+
+test("LT-39: occupancy counts admissions the way the bed board and Command center do; an ED or PACU encounter is open work, not an occupied bed", async () => {
+  const { ADMITTED } = await import("../functions/_wardsynq/ward-metrics.js");
+  const { readFileSync } = await import("node:fs");
+  const src = readFileSync(new URL("../functions/_wardsynq/migrate-inpatient.js", import.meta.url), "utf8");
+  assert.match(src, /const ADMISSION_CLASSES = Object\.freeze\(\[IPD, ICU, MATERNITY, PEDIATRICS, NICU\]\);/, "the bed board's classes");
+  assert.deepEqual([...ADMITTED], ["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"]);
+  const enc = (id, cls, bed) => ({ id, patientId: "p-" + id, class: cls, status: "in-progress", location: { ward: "Medical A", bed } });
+  const m = summariseWard({ nowMs: NOW, encounters: [enc("a", "IPD", "1"), enc("b", "ICU", "2"), enc("c", "IPD", ""), enc("d", "ED", "ED-1"), enc("e", "PACU", ""), enc("f", "SURGERY", "OT-1")] });
+  assert.deepEqual([m.patients, m.occupiedBeds, m.unplaced], [3, 2, 1], "one definition of admitted on every screen");
+  assert.equal(m.open.staysWithNoMedicationHistory, 6, "open work still covers the ED, theatre and PACU encounters");
+});

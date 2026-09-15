@@ -36,6 +36,32 @@ test("LT-02 bed board: the admit panel follows the picked bed's own ward, before
   assert.ok(!moving.includes('id="wAdmitPanel"'));
 });
 
+test("LT-03 bed board: one bed order across occupied and free beds, and the MRN under a name", () => {
+  const html = load()._render(Object.assign({}, base, { view: "board", board: { ok: true, wards: [
+    { ward: "CAR", bedsKnown: true, occupied: [{ encounterId: "e2", bed: "CAR-02", name: "Demo Arjun Synthia", mrn: "SMD-DEMO-00022" }, { encounterId: "e10", bed: "CAR-10", name: "Demo Omar", mrn: "SMD-DEMO-00082" }], free: ["CAR-03", "CAR-01", "CAR-09"], unplaced: [] },
+  ] } }));
+  const order = [...html.matchAll(/<b>(CAR-\d+)<\/b>/g)].map((m) => m[1]);
+  assert.deepEqual(order, ["CAR-01", "CAR-02", "CAR-03", "CAR-09", "CAR-10"]);
+  assert.match(html, /Demo Arjun Synthia<\/span><span>SMD-DEMO-00022<\/span>/);
+});
+
+test("LT-39 / LT-05 / LT-07: no capitalised-every-word buttons or scores; twin headings and rows read cleanly", () => {
+  const css = readFileSync(new URL("../ward.css", import.meta.url), "utf8");
+  assert.ok(!/\.w-btn\.tiny \{[^}]*text-transform: capitalize/.test(css), "a tiny button's label is shown as written");
+  assert.ok(!/\.w-news2 span \{[^}]*text-transform: capitalize/.test(css), "a score's sentence is shown as written");
+  assert.ok(!/twinSectionCard\(wTH\(/.test(SRC), "icon names are never translated text");
+  const ok = (data) => ({ status: "ok", freshness: "live", generatedAt: "2026-09-15T10:00:00.000Z", data });
+  const snap = { generatedAt: "2026-09-15T10:00:00.000Z", sectionsOk: 2, sectionsTotal: 2, notBuilt: {}, sections: {
+    flow: ok({ flow: { beds: { occupied: 83 }, ed: { arrivals: 1 }, dischargeCandidates: 2, drill: {} } }),
+    otUtilisation: ok({ theatresConfigured: 2, overallUtilisation: 0, perTheatre: [{ name: "Theatre 1", utilisation: 0, bookedMinutes: 0 }] }),
+  } };
+  const html = load()._render(Object.assign({}, base, { view: "twin", twin: { loaded: true, snapshot: snap } }));
+  assert.match(html, /<h3>Flow and capacity<\/h3>/);
+  assert.ok(!html.includes("&amp;amp;"), "no entity shown as text");
+  assert.match(html, /<b>Theatre 1<\/b> <span>0%/, "a theatre's name and its figure are apart");
+  assert.ok(!html.includes("(detail not available)"));
+});
+
 const cover = (total, shiftsDefined) => ({ ok: true, shiftsDefined, wards: [{ ward: "Medical A", counts: { nurse: total, resident: 0, consultant: 0 }, total }, { ward: "Surgical B", counts: { nurse: 0, resident: 0, consultant: 0 }, total: 0 }] });
 
 test("LT-04 ward home: an admin whose wards nobody covers is told what to set up, with a way to the rota", () => {
