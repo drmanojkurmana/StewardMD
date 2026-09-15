@@ -534,8 +534,12 @@
           try { plugin.setMode({ mode: 'guide', banner: rt.REPAIR_ASK, origins: ctx.origins }); } catch (e) { reject(err); }
         }).then(function () {
           if (el) el.innerHTML = '<div class="ghis-loading">Reading the screen you showed me...</div>';
-          try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins, hidden: true }); } catch (e) {}
-          return rt.captureWorklist({ plugin: plugin });
+          /* LAW III COVERS THE REPAIR READ TOO: the screen the doctor showed is read out of sight or
+           * not at all, exactly as adapterSections requires. */
+          return Promise.resolve(plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for your ward list', origins: ctx.origins, hidden: true })).then(function (moded) {
+            if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
+            return rt.captureWorklist({ plugin: plugin });
+          });
         }).then(function (view) {
           return rt.reproveWorklist({ plugin: plugin, origin: ctx.origin, view: view }).then(function (proven) {
             if (!proven) {

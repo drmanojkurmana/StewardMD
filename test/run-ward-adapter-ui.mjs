@@ -277,7 +277,18 @@ try {
   ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && Array.isArray(c[0].body.view.endpoints) && c[0].body.view.endpoints.some(function(e){return e.role==="data";});`, 8000), "repair posts a proven backend request, not a page selector");
   ok(await ev(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair";})[0]; return JSON.stringify(c.body).indexOf("Ravi")<0 && JSON.stringify(c.body).indexOf("K001")<0;`) === true, "no patient cell text leaves the phone in the repair");
   ok(await ev(`return window.__open===false;`) === true, "the browser is closed after the repaired read");
-  await ev(`window.ghisDisconnect(); window.__kimsProvenWorklist = false; window.__navLog = []; window.__replayBuf = []; return 1;`);
+  await ev(`window.ghisDisconnect(); return 1;`);
+
+  // LAW III COVERS THE REPAIR READ TOO: the screen the doctor showed is read only out of sight.
+  await ev(`window.__calls = []; window.__pluginCalls = []; window.__replayBuf = []; window.__navLog = []; return 1;`);
+  await ev(`document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
+  await waitFor(`return (window.__pluginListeners.loggedIn||[]).length>0;`, 5000);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/home"}); return 1;`);
+  ok(await waitFor(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="guide";});`, 30000), "the empty read asks the doctor again");
+  await ev(`window.__staleHidden = true; window.__url = "https://hims.kims.example/ip/all"; window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://hims.kims.example/ip/all"}); return 1;`);
+  ok(await waitFor(`return document.getElementById("ghisPatientList").innerText.indexOf("out of sight")>=0;`, 8000), "a repair read on a browser that will not confirm hidden reads nothing and says why");
+  ok(await ev(`return !window.__calls.some(function(x){return x.path==="/versions/ver-1/repair";});`) === true, "nothing was posted as a repair from a read that never happened");
+  await ev(`window.__staleHidden = false; window.ghisDisconnect(); window.__kimsProvenWorklist = false; window.__navLog = []; window.__replayBuf = []; return 1;`);
 
   await ev(`window.__sessionResp = { s: 403, d: { ok: false, error: "forbidden", detail: "not a member of this tenant" } }; document.querySelector('[data-adapter-dep="dep-kims"]').click(); return 1;`);
   ok(await waitFor(`return document.getElementById("ghisPatientList").innerText.indexOf("not a member of this tenant")>=0;`, 8000), "a server failure names its reason");
