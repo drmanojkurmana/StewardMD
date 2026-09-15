@@ -193,6 +193,10 @@
       ".smd-agent-chip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;border:1px solid var(--line,#d7dee3);color:var(--muted-ink,#5b6b7a);background:var(--panel,#fff)}",
       ".smd-agent-chip.done{color:#0b5f52;border-color:rgba(14,124,102,.35);background:rgba(14,124,102,.08)}",
       ".smd-agent-chip svg{flex:none;width:0.75rem;height:0.75rem}",
+      /* The control bar pins to the bottom of the sheet: the agent can be stopped at any moment without
+       * scrolling, and the status and the game scroll underneath it. */
+      ".smd-agent-bar{position:sticky;bottom:0;z-index:3;background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);padding:0.625rem 0 calc(0.625rem + env(safe-area-inset-bottom,0px));margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem}",
+      "body.dark .smd-agent-bar{background:var(--panel,#131f2f)}",
       ".smd-agent-acts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}",
       ".smd-agent-acts .smd-connect-btn{width:100%}",
       ".smd-agent-stop{grid-column:1/-1}",
@@ -533,6 +537,7 @@
       if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: true }); paintProgress(); return; }
       if (S.loginHandled) return;
       S.loginHandled = true;
+      stopPhoneSignInPoll();
       doHandoff();
     });
     on("guideSkip", function () {
@@ -876,10 +881,17 @@
       '<p class="smd-connect-lead">Sign in yourself inside the hospital website that just opened. StewardMD never asks for or stores your password.</p>' +
       stepsPrimer() +
       '<div class="smd-connect-note">Keep your phone unlocked and StewardMD open until the connection finishes. The screen stays awake while the hospital website is open.</div>' +
+      // The agent notices sign-in on its own (below). This is the sure way if the doctor wants to move
+      // on the instant they are in: it is handled inside the app, so it never depends on the hospital
+      // browser handing anything back.
+      '<button id="smd-connect-signedin" class="smd-connect-btn primary" type="button" style="width:100%">I have signed in, continue</button>' +
       '<div class="smd-connect-row"><button id="smd-connect-retryopen" class="smd-connect-btn" type="button">Try again</button>' +
       '<button id="smd-connect-cancel" class="smd-connect-btn danger" type="button">Cancel connection</button></div>';
-    setStatus("", S.statusText || "Opening the hospital website.");
+    setStatus("", S.statusText || "Opening the hospital website. Sign in, and the agent will notice on its own.");
     b.querySelector("#smd-connect-cancel").onclick = cancelSession;
+    b.querySelector("#smd-connect-signedin").onclick = function () {
+      if (S && !S.loginHandled) { S.loginHandled = true; stopPhoneSignInPoll(); doHandoff(); }
+    };
     /* SELF-REPAIR: reopening the hospital website is safe to repeat (openLoginPlugin
      * guards double-open), so a failed first open is one tap to retry, not a restart. */
     b.querySelector("#smd-connect-retryopen").onclick = function () {
@@ -913,6 +925,56 @@
     }).catch(function () {
       if (overlay() && S) setStatus("bad", "Could not open the hospital website. Try again.");
     });
+    startPhoneSignInPoll();
+  }
+
+  /* SIGN-IN DETECTION THE APP DRIVES ITSELF.
+   *
+   * The native browser CAN tell the app it is signed in, but that message has to reach a WebView iOS
+   * has throttled to near-nothing while it sits behind the full-screen hospital page, and on the
+   * owner's iPhone it did not arrive: the doctor signed in and the app never moved (2026-09-15). So
+   * the app stops waiting to be told. It ASKS: every couple of seconds it runs one tiny check inside
+   * the hospital page (is there still a visible password box?), which the app itself initiates, so it
+   * works whenever the app gets a slice, however small. A page that once showed a password box and now
+   * shows none, for two checks running, is a completed sign-in. The password value is never read; only
+   * whether a password field is on screen. */
+  function startPhoneSignInPoll() {
+    stopPhoneSignInPoll();
+    if (!S) return;
+    S.signInSawPw = false;
+    S.signInGoneTicks = 0;
+    S.signInOpenUrl = S.selected.emrUrl || "";
+    var PW = "(function(){try{if(document.readyState!=='complete')return 'loading';var a=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<a.length;i++){var e=a[i],r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return 'pw'}return 'none'}catch(e){return 'err'}})()";
+    S.signInPoll = setInterval(function () {
+      if (!S || S.screen !== "login" || S.loginHandled) { stopPhoneSignInPoll(); return; }
+      var plugin = getPlugin();
+      if (!plugin || !plugin.evaluate) return;
+      var url = "";
+      var readUrl = plugin.currentUrl ? plugin.currentUrl() : Promise.resolve(null);
+      Promise.resolve(readUrl).then(function (u) {
+        url = (u && (u.url || u)) || "";
+        return plugin.evaluate({ expression: PW });
+      }).then(function (res) {
+        if (!S || S.screen !== "login" || S.loginHandled) return;
+        var flag = res && (res.result != null ? res.result : res);
+        flag = String(flag == null ? "" : flag);
+        if (flag === "pw") { S.signInSawPw = true; S.signInGoneTicks = 0; return; }
+        if (flag !== "none") { S.signInGoneTicks = 0; return; }   // loading / error: no verdict
+        // No visible password box. Signed in if we saw one earlier OR the page moved off the address
+        // we opened (a stored session lands past the form without ever showing it).
+        var moved = url && S.signInOpenUrl && url.indexOf(S.signInOpenUrl) !== 0 && url.indexOf("http") === 0;
+        if (!(S.signInSawPw || moved)) { S.signInGoneTicks = 0; return; }
+        S.signInGoneTicks += 1;
+        if (S.signInGoneTicks >= 2 && !S.loginHandled) {
+          S.loginHandled = true;
+          stopPhoneSignInPoll();
+          doHandoff();
+        }
+      }).catch(function () { /* a throttled tick that could not read: try again next time */ });
+    }, 2000);
+  }
+  function stopPhoneSignInPoll() {
+    if (S && S.signInPoll) { clearInterval(S.signInPoll); S.signInPoll = null; }
   }
 
   function renderLoginFallback(b) {
@@ -1021,6 +1083,7 @@
   }
 
   function cancelSession() {
+    stopPhoneSignInPoll();
     removePluginListeners();
     var plugin = getPlugin();
     if (plugin && plugin.close) { try { plugin.close(); } catch (e) {} }
@@ -1444,11 +1507,18 @@
       '<h2 class="smd-connect-display">Reading ' + esc(hostOf(S.selected.emrUrl)) + '</h2>' +
       '<p id="smd-connect-phase" class="smd-connect-lead">' + phaseLabel(S.guide ? "ASKING" : c.phase) + '</p>' +
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
-      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
       '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
-      '<div id="smd-connect-stallnote" class="smd-connect-note" style="display:none"></div>' +
+      (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
       /* CONTROLS THAT REACH THE ENGINE. Each one is a real signal the run checks, never decoration:
-       * a control the doctor can press that does nothing is worse than no control at all. */
+       * a control the doctor can press that does nothing is worse than no control at all.
+       *
+       * THEY STICK TO THE BOTTOM. Laid out in the normal flow they sat under the waiting game, which on
+       * a phone pushed all four below the fold: the doctor could watch the agent work and could not
+       * reach Stop without scrolling past a game (owner, iPhone, 2026-09-15). A control that stops a
+       * running agent has to be reachable at every moment, so the bar pins to the bottom of the sheet
+       * and the rest scrolls under it - and the bottom is where the thumb already is. */
+      '<div class="smd-agent-bar">' +
+      '<div id="smd-connect-stallnote" class="smd-connect-note" style="display:none"></div>' +
       '<div class="smd-agent-acts">' +
       '<button id="smd-connect-skipstep" class="smd-connect-btn" type="button">Skip this step</button>' +
       '<button id="smd-connect-redo" class="smd-connect-btn" type="button">Look again</button>' +
@@ -1459,7 +1529,8 @@
       '<div id="smd-connect-stopconfirm" class="smd-agent-confirm" style="display:none" role="group" aria-label="Confirm stopping">' +
       '<p id="smd-connect-stoptext">Stop and throw away what the agent has found?</p>' +
       '<div class="smd-agent-acts"><button id="smd-connect-stopkeep" class="smd-connect-btn" type="button">Keep going</button>' +
-      '<button id="smd-connect-stopyes" class="smd-connect-btn danger" type="button">Stop and discard</button></div></div>';
+      '<button id="smd-connect-stopyes" class="smd-connect-btn danger" type="button">Stop and discard</button></div></div>' +
+      '</div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
     b.querySelector("#smd-connect-stop").onclick = function () {
       var n = foundCount();
