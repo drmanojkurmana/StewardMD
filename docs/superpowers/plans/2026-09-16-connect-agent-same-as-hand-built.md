@@ -1870,6 +1870,14 @@ git commit -m "Connect Agent: the runtime never scrapes when proven; repair re-p
 
 ### Task 8: On the iPhone, rediscover GHIS and reach parity with the hand-built adapter
 
+**ENTRY GATE (owner, 2026-09-16).** Do not start Task 8 until Tasks 3b, 6, 7 and 7b are each committed AND approved by the reviewer. Committed is not enough; a task the reviewer has not signed off does not count as done.
+
+**WHAT "DONE" MEANS HERE (owner, 2026-09-16).** "Do not call it DONE from fixture tests or code inspection. I want actual endpoint replay and clinical-data parity proven." Every unit test in Tasks 1 to 7b runs against fixtures and proves nothing about the hospital. This task is the only evidence that counts, and all of it is live:
+- a real rediscovery from zero against GHIS, with the previous adapter removed first, so every endpoint is learned in that run;
+- the saved endpoints actually replayed in the doctor's session on the device;
+- clinical data compared field by field against the hand-built adapter for real patients.
+A pass here is the deliverable. A green test suite is not.
+
 **Files:**
 - Modify (only if Step 7 says so): `connect-agent/phone/prove.mjs`, `test/connect-agent/prove.test.mjs`
 - Modify: `vault/modules/Connect Agent.md`, `vault/decisions/Decisions.md`
@@ -1912,9 +1920,20 @@ xcrun devicectl device install app --device 00008130-001A79E13A31401C "$APP"
 
 Verify the running bundle, not the install message: phone unlocked, app in front, then `ios_webkit_debug_proxy -c null:9221,:9222-9250` and read `typeof GHIS` and the `?v=` token of the loaded `ghis-ward.js` through `test/ios-webkit-cdp.mjs`. It must match `grep -o 'ghis-ward.js?v=[^"]*' "$APP/public/index.html"`.
 
-- [ ] **Step 4: Owner runs Connect Hospital on GHIS**
+- [ ] **Step 4: Owner runs Connect Hospital on GHIS, FROM ZERO**
 
-Owner: Menu, Connect Hospital, GIMSR, sign in, Auto mode. Do not approve yet. Note the candidate version id shown on the approval screen.
+**Remove the existing adapter first, or no discovery will happen.** `POST /sessions` answers `reuse: true` with NO onboarding job whenever the deployment already has an ACTIVE version (`connect-agent/phone/CONTRACT.md`, Broker routes), so with `ver_b16da370` still active, Connect Hospital would just reuse it and nothing would be rediscovered. The owner removes it from the Connect Hospital sheet's connection list (the remove button, owner/admin only; `DELETE /api/connect/agent/connections/:deploymentId`).
+
+Confirm it is gone before continuing:
+
+```bash
+npx wrangler d1 execute stewardmd-connect --remote --json --command "SELECT id, lifecycle FROM connect_adapter_version WHERE lifecycle='ACTIVE'" | jq -r '.[0].results[] | .id + " " + .lifecycle'
+```
+Expected: no row for the GIMSR deployment.
+
+Then, on the phone: Menu, Connect Hospital, GIMSR, sign in as the doctor, Auto mode, and let it run the full discovery. Do NOT approve yet. Note the candidate version id from the approval screen.
+
+This is a real rediscovery against the live hospital: every endpoint in the parity table below must be learned in this run, by the agent, from zero. Nothing carried over from the removed adapter counts.
 
 - [ ] **Step 5: Read the proof trace (owner runs, read-only)**
 
