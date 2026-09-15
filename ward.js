@@ -1843,6 +1843,13 @@
    * stays with lab-result.js and is reached from wherever a report actually gets entered. */
   var INV_CATEGORY = [["laboratory", "Laboratory"], ["imaging", "Imaging"], ["procedure", "Procedure"], ["other", "Other"]];
   var INV_PRIORITY = [["routine", "Routine"], ["urgent", "Urgent"], ["stat", "STAT"]];
+  /* BUG-MU2PR8I2: what kind of work an order is, from the order's OWN category. The name is read only
+   * when no category was recorded at all (legacy rows), never to overrule one. */
+  function invOrderKind(c) {
+    var cat = String((c && c.category) || "").toLowerCase();
+    if (!cat) return labIsImaging(c) ? "imaging" : "specimen";
+    return cat === "imaging" || cat === "procedure" || cat === "referral" ? cat : "specimen";
+  }
   function investigationsCard(state) {
     var o = state.invOrder || {};
     var inv = state.investigations;
@@ -1852,13 +1859,18 @@
 
     var rows = coll.map(function (c) {
       var st_ = (c.collection && c.collection.state) || "ordered";
+      var kind = invOrderKind(c);
       // TASK 3.1: the phlebotomist's actual next action, not just a status word. Only offered while
       // a sample genuinely still needs taking (none/failed) - a collected or received sample has
-      // nothing left to do here.
-      var canCollect = st_ === "none" || st_ === "failed";
+      // nothing left to do here. BUG-MU2PR8I2: and only for an order that HAS a sample. A chest X-ray
+      // is acquired, not collected: an active imaging order is already on the radiology worklist
+      // (dicom.js isPendingImaging), so the row says so and opens it there. A procedure is performed.
+      var canCollect = kind === "specimen" && (st_ === "none" || st_ === "failed");
+      var stLabel = kind === "imaging" ? "sent for imaging" : kind === "procedure" ? "to be performed" : kind === "referral" ? "referral" : st_.replace(/_/g, " ");
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
-        " " + '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
+        " " + '<span class="w-st ' + esc(kind === "specimen" ? st_ : "ordered") + '">' + esc(stLabel) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + "Collect</button>" : "") +
+        (kind === "imaging" ? '<button class="w-btn tiny go" data-w-act="radiologyopen:' + esc(c.serviceRequestId) + '">' + ms("radiology") + "Open in Radiology</button>" : "") +
       "</li>";
     }).join("");
 
@@ -3080,10 +3092,9 @@
     var picked = rad.pickedRequestId;
 
     var studyRows = studies.map(function (s) {
-      var st_ = (s.collection && s.collection.state) || "ordered";
       return '<li' + (s.serviceRequestId === picked ? ' class="picked"' : '') + '>' +
         '<button class="w-btn ghost tiny" data-w-act="radpick:' + esc(s.serviceRequestId) + '"><b>' + esc(s.display || s.code) + "</b></button>" +
-        "<span>" + (s.priority && s.priority !== "routine" ? esc(s.priority).toUpperCase() + " &middot; " : "") + esc(st_.replace(/_/g, " ")) + "</span></li>";
+        "<span>" + (s.priority && s.priority !== "routine" ? esc(s.priority).toUpperCase() + " &middot; " : "") + "on the imaging worklist</span></li>";
     }).join("");
 
     var allergyRows = pc && pc.contrastAllergies && pc.contrastAllergies.length
@@ -8002,8 +8013,8 @@
       .then(function (r) { if (settle(r, "ECG reference recorded.")) loadCardiology(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the ECG reference."; paint(); });
   }
-  function radiologyOpen() {
-    st.view = "radiology"; st.radiology = null; paint(); loadInvestigations().then(loadRadiology);
+  function radiologyOpen(pickId) {
+    st.view = "radiology"; st.radiology = pickId ? { pickedRequestId: pickId } : null; paint(); loadInvestigations().then(loadRadiology);
   }
   function radStudyEntry(list, serviceRequestId) {
     for (var i = 0; i < (list || []).length; i++) if (list[i].serviceRequestId === serviceRequestId) return list[i];
@@ -11566,7 +11577,7 @@
     if (cmd === "cardiologyload") { loadCardiology(); return; }
     if (cmd === "cardiolinksave") { cardioLinkSave(); return; }
     if (cmd === "cardioecgsave") { cardioEcgSave(); return; }
-    if (cmd === "radiologyopen") { radiologyOpen(); return; }
+    if (cmd === "radiologyopen") { radiologyOpen(arg); return; }
     if (cmd === "radiologyload") { loadInvestigations().then(loadRadiology); return; }
     if (cmd === "radpick") { radiologyPick(arg); return; }
     if (cmd === "radprotocolsave") { radiologyProtocolSave(); return; }
