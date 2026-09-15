@@ -784,7 +784,15 @@ function CRAWL_PAGE_STATE() {
 // Returns its index within `document.querySelectorAll('tr')`, or null.
 function CRAWL_FIND_PATIENT_ROW(genericClassSrc) {
   var GENERIC = new RegExp(genericClassSrc, 'i');
-  var trs = document.querySelectorAll('tr');
+  /* Rows across every frame, in one flat order. The clicker below builds the same list the same way,
+   * so an index means the same row to both - in a frameset EMR the ward list is never in the top
+   * document, and a row found there could not be clicked from here before. */
+  var trs = [];
+  var docs = CRAWL_DOCS();
+  for (var d = 0; d < docs.length; d++) {
+    var found = docs[d].doc.querySelectorAll('tr');
+    for (var f = 0; f < found.length; f++) trs.push(found[f]);
+  }
   var fallback = null;
   for (var i = 0; i < trs.length; i++) {
     var tr = trs[i];
@@ -807,7 +815,13 @@ function CRAWL_FIND_PATIENT_ROW(genericClassSrc) {
 }
 
 function CRAWL_CLICK_ROW(idx) {
-  var trs = document.querySelectorAll('tr');
+  // The same flat order the row finder used, frames included, so the index still means that row.
+  var trs = [];
+  var docs = CRAWL_DOCS();
+  for (var d = 0; d < docs.length; d++) {
+    var found = docs[d].doc.querySelectorAll('tr');
+    for (var f = 0; f < found.length; f++) trs.push(found[f]);
+  }
   var el = trs[idx];
   if (!el) return 'no-el';
   el.click();
@@ -826,7 +840,14 @@ function CRAWL_CLICK_ROW(idx) {
 function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
   var KW = new RegExp(keywordSrc, 'i');
   var SKIP = new RegExp(skipSrc, 'i');
-  var els = document.querySelectorAll(query);
+  // Every frame's controls in one flat order; the clicker below rebuilds it identically. A frameset
+  // EMR keeps its nav in one frame and the screen it opens in another.
+  var els = [];
+  var docsC = CRAWL_DOCS();
+  for (var dq = 0; dq < docsC.length; dq++) {
+    var hits = docsC[dq].doc.querySelectorAll(query);
+    for (var hq = 0; hq < hits.length; hq++) els.push(hits[hq]);
+  }
   var anyVisible = false;
   for (var v = 0; v < els.length && !anyVisible; v++) anyVisible = !!(els[v].getClientRects && els[v].getClientRects().length);
   var out = [];
@@ -847,7 +868,23 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
     if (SKIP.test(text)) continue;
     if (tag === 'A') {
       var href = el.getAttribute('href') || '';
-      if (href && !/^(#|javascript:)/i.test(href) && !el.hasAttribute('onclick')) continue;
+      /* A LINK IS A WAY IN. Only in-page anchors (#, javascript:) and handler-bound ones were walked,
+       * which is fine for an EMR that opens its screens with onclick (GHIS does) and useless for one
+       * that opens them with a plain link - a frameset EMR navigates its content frame with
+       * <a href="..." target="main"> and nothing else, so labs and medications were unreachable.
+       * A link to this hospital is now followed; one that leaves it, opens a new window, downloads a
+       * file or starts a mail or phone client is not. The walk still undoes a navigation with
+       * history.back(), and the SKIP denylist above still keeps it off log out, print and the rest. */
+      if (href && !/^(#|javascript:)/i.test(href) && !el.hasAttribute('onclick')) {
+        if (/^(mailto:|tel:|sms:|blob:|data:)/i.test(href)) continue;
+        if (el.hasAttribute('download')) continue;
+        var sameSite = false;
+        try {
+          var dest = new URL(href, el.ownerDocument.location.href);
+          sameSite = dest.origin === el.ownerDocument.location.origin && /^https?:$/.test(dest.protocol);
+        } catch (e) { sameSite = false; }
+        if (!sameSite) continue;
+      }
       if (el.getAttribute('target') === '_blank') continue;
     }
     var onAttrs = '';
@@ -876,7 +913,13 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
 }
 
 function CRAWL_CLICK_CONTROL(idx, query) {
-  var els = document.querySelectorAll(query);
+  // The same flat order the control finder used, frames included.
+  var els = [];
+  var docs = CRAWL_DOCS();
+  for (var d = 0; d < docs.length; d++) {
+    var hits = docs[d].doc.querySelectorAll(query);
+    for (var h = 0; h < hits.length; h++) els.push(hits[h]);
+  }
   var el = els[idx];
   if (!el) return 'no-el';
   el.click();
@@ -1129,6 +1172,18 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
 
   const currentUrl = async () => (await client.currentUrl().catch(() => ({})))?.url || null;
   const pathOf = (u) => { try { return new URL(u).pathname; } catch { return u; } };
+  /* WHERE THE BROWSER ACTUALLY IS. In a frameset EMR the address never changes: every screen is a
+   * navigation of the content frame, so comparing the top URL said "still here" after every click and
+   * the walk never came back to the patient record - it wandered off into the first screen it opened
+   * and lost the rest. The frames' own paths are part of the answer. */
+  const FRAME_PATHS = `(function(){var o=[location.pathname];for(var i=0;i<window.frames.length&&i<8;i++){try{o.push(window.frames[i].location.pathname)}catch(e){o.push('x')}}return o.join('|')})()`;
+  const whereAmI = async () => {
+    const top = pathOf(await currentUrl());
+    const r = await client.evaluate({ expression: FRAME_PATHS }).catch(() => null);
+    const frames = r && typeof r.result === 'string' ? r.result : '';
+    // Both halves: the address for an ordinary EMR, the frames for one that never changes its address.
+    return String(top) + '::' + frames;
+  };
 
   const record = (view) => {
     if (!view) return false;
@@ -1190,7 +1245,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // call AFTER the page and its headers render, so poll a few times before concluding there is no row.
   let row = null;
   for (let attempt = 0; attempt < 8; attempt += 1) {
-    row = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null);
+    row = await evalJson(client, withDocs(FIND_PATIENT_ROW_SRC, JSON.stringify(GENERIC_CLASS.source)), null);
     if (row) break;
     if (Date.now() >= deadline || stopped()) break;
     await client.wait({ ms: waitMs });
@@ -1207,16 +1262,16 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   if (book && typeof client.navigate === 'function') {
     const landing = await currentUrl();
     const listViews = [];
-    const tabs = (await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []) || [])
+    const tabs = (await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []) || [])
       .filter((c) => c && LIST_CONTROL.test(c.label)).map((c) => c.label);
     for (const label of [...new Set(tabs)].slice(0, 4)) {
       if (stopped() || Date.now() >= deadline) break;
-      const now = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+      const now = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
       const ctl = (Array.isArray(now) ? now : []).find((c) => c.label === label);
       if (!ctl) continue;
       progress(label, 0);
       await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
-      await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${ctl.index},${JSON.stringify(CONTROL_QUERY)})` });
+      await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, ctl.index + "," + JSON.stringify(CONTROL_QUERY)) });
       /* Wait for the list itself, not a fixed time: GHIS's IP worklist fetches its dropdowns first and
        * fills the table about 9 s after the tap (Pixel, 2026-09-13). Up to 15 s for a data table. */
       // The old list still shows rows for a moment: wait until the visible tables CHANGE and carry rows.
@@ -1247,7 +1302,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     // The landing page was reloaded: find the patient row again (rows may arrive after the page).
     if (tabs.length) {
       for (let attempt = 0; attempt < 8; attempt += 1) {
-        const again = await evalJson(client, `(${FIND_PATIENT_ROW_SRC})(${JSON.stringify(GENERIC_CLASS.source)})`, null);
+        const again = await evalJson(client, withDocs(FIND_PATIENT_ROW_SRC, JSON.stringify(GENERIC_CLASS.source)), null);
         if (again) { row = again; break; }
         if (stopped()) break;
         await client.wait({ ms: waitMs });
@@ -1258,10 +1313,16 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
    * stays in the DOM after a patient opens; walking it reads everyone's reports, not this patient's.
    * GHIS adds Medications, Investigations and Patient profile only once a patient is open (Pixel,
    * 2026-09-13), so the controls present before the row tap are skipped when opening added new ones. */
-  const landingLabels = new Set(((await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, [])) || []).map((c) => c && c.label).filter(Boolean));
+  const landingControls = (await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), [])) || [];
+  const landingLabels = new Set(landingControls.map((c) => c && c.label).filter(Boolean));
+  /* The ward list's own navigation is not worth re-walking once a patient is open - but a CLINICAL
+   * label there is the thing we came for. In a frameset EMR the nav frame never goes away, so every
+   * one of its labels looks like the landing page's, and marking them all seen left labs unreachable
+   * while medications (which only the patient page carried) was found. */
+  const landingClinical = new Set(landingControls.filter((c) => c && c.clinical).map((c) => c.label));
   if (typeof client.drainRequests === 'function') await client.drainRequests().catch(() => null); // fresh per-click log
   await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
-  await client.evaluate({ expression: `(${CLICK_ROW_SRC})(${row.index})` });
+  await client.evaluate({ expression: withDocs(CLICK_ROW_SRC, String(row.index)) });
   await client.wait({ ms: waitMs });
   trail.push('patient-record');
   // The patient hub itself often shows demographics as a label/value block: capture it as 'patient'.
@@ -1275,14 +1336,14 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // to the panel the click populated. A click that navigates to another page is undone with history.back().
   const visited = new Set();
   {
-    const afterOpen = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const afterOpen = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
     const added = (Array.isArray(afterOpen) ? afterOpen : []).filter((c) => c && c.label && !landingLabels.has(c.label));
-    if (added.length) for (const l of landingLabels) visited.add(l);
+    if (added.length) for (const l of landingLabels) if (!landingClinical.has(l)) visited.add(l);
   }
   const detailSeen = new Set();
   let stopReason = 'no-candidate';
   let clicks = 0;
-  const homePath = pathOf(await currentUrl());
+  const homePath = await whereAmI();
 
   /* READ EVERY BUTTON ONCE, LET GEMINI ASSIGN THEM (owner, 2026-09-13). Instead of clicking blindly
    * and guessing after, hand Gemini the whole control inventory of the open record (collapsed menus
@@ -1292,7 +1353,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   const planned = [];              // control labels to open first, best resource match first
   const avoidLabels = new Set();
   if (brain && typeof brain.planControls === 'function') {
-    const all = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const all = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
     const pool = (Array.isArray(all) ? all : []).filter((c) => c && c.label && !visited.has(c.label)).slice(0, 200);
     if (pool.length) {
       let a = null;
@@ -1312,7 +1373,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     if (stopped()) { stopReason = 'stop-signal'; break; }
     if (clicks >= maxClicks) { stopReason = 'max-clicks'; break; }
 
-    const candidates = await evalJson(client, `(${FIND_CONTROLS_SRC})(${JSON.stringify(CLINICAL_KEYWORDS_SRC)},${JSON.stringify(SKIP_SRC)},${JSON.stringify(CONTROL_QUERY)})`, []);
+    const candidates = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
     const fresh = Array.isArray(candidates) ? candidates.filter((c) => c && c.label && !visited.has(c.label) && !avoidLabels.has(c.label)) : [];
     /* Gemini's plan first: the controls it assigned to a missing resource, in resource order. Then the
      * keyword rule, then the first fresh control. Every choice is proven against the screen below. */
@@ -1330,7 +1391,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     clicks += 1;
     progress(next.label, clicks);
     await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` });
-    await client.evaluate({ expression: `(${CLICK_CONTROL_SRC})(${next.index},${JSON.stringify(CONTROL_QUERY)})` });
+    await client.evaluate({ expression: withDocs(CLICK_CONTROL_SRC, next.index + "," + JSON.stringify(CONTROL_QUERY)) });
     await client.wait({ ms: waitMs });
     trail.push(next.label);
     const hint = resourceHintFor(next.label);
@@ -1349,7 +1410,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
      * call it made, and come back. */
     if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks) {
       detailSeen.add(view.resourceHint);
-      const beforePath = pathOf(await currentUrl());
+      const beforePath = await whereAmI();
       await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
       const how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }).catch(() => ({ result: 'e' }));
       if (how && (how.result === 'link' || how.result === 'row')) {
@@ -1364,7 +1425,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
           if (book) await book.prove({ client, view: detail, label: 'open one ' + view.resourceHint + ' row', parent: view.resourceHint });
           observedViews.push(detail);
         }
-        if (pathOf(await currentUrl()) !== beforePath) {
+        if (await whereAmI() !== beforePath) {
           await client.evaluate({ expression: 'history.back()' }).catch(() => {});
           await client.wait({ ms: waitMs });
           trail.push('back');
@@ -1373,7 +1434,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     }
 
     // Drifted to another page (a link with a handler that navigated): come back to the record.
-    if (pathOf(await currentUrl()) !== homePath) {
+    if (await whereAmI() !== homePath) {
       await client.evaluate({ expression: 'history.back()' }).catch(() => {});
       await client.wait({ ms: waitMs });
       trail.push('back');

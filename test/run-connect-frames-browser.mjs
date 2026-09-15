@@ -114,10 +114,30 @@ async function main() {
     const framed = await evaluate({ expression: "window.frames.length" });
     ok(framed.result === 2, `the clinical screens live in ${framed.result} frames`);
 
-    const client = { evaluate, async wait({ ms }) { await sleep(Math.min(ms, 300)); }, async currentUrl() { return { url: emr.origin + "/" }; } };
-    const { observedViews, stopReason } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 300 } });
+    const trace = !!process.env.TRACE_CRAWL;
+    const tracedEvaluate = async (args) => {
+      let out;
+      try { out = await evaluate(args); }
+      catch (e) {
+        if (trace) console.log("    [THREW]", String(e.message).slice(0, 300), "| expr head:", args.expression.slice(0, 60));
+        throw e;
+      }
+      if (trace && /CRAWL_FIND_CONTROLS|CRAWL_FIND_PATIENT_ROW|CRAWL_CLICK/.test(args.expression)) {
+        const what = /FIND_CONTROLS/.test(args.expression) ? "controls" : /FIND_PATIENT_ROW/.test(args.expression) ? "row" : "click";
+        console.log(`    [${what}]`, String(out.result).slice(0, 200));
+      }
+      return out;
+    };
+    const client = { evaluate: trace ? tracedEvaluate : evaluate, async wait({ ms }) { await sleep(Math.min(ms, 300)); }, async currentUrl() { return { url: emr.origin + "/" }; } };
+    const { observedViews, stopReason, trail, found } = await deepCrawlClinical({ client, caps: { maxMs: 60000, waitMs: 300 } });
+    console.log("  trail:", JSON.stringify(trail), "found:", JSON.stringify([...(found || [])]));
 
     ok(stopReason !== "session-expired-or-shell", `a frameset EMR is not a dead page (stopReason: ${stopReason})`);
+    // The whole record, not just the front door: the nav frame and the patient page both lead further in.
+    const hints = observedViews.map((v) => v.resourceHint);
+    ok(hints.includes("labs"), `the lab screen behind a plain link was reached (${hints.join(",")})`);
+    ok(hints.includes("medications"), `and the medication screen too (${hints.join(",")})`);
+    ok((trail || []).includes("back"), `the walk came back to the record instead of wandering off (${JSON.stringify(trail)})`);
     const worklist = observedViews.find((v) => v.resourceHint === "worklist");
     ok(!!worklist, `the ward list inside the frame was captured (views: ${observedViews.map((v) => v.resourceHint).join(",") || "none"})`);
     if (worklist) {
@@ -125,13 +145,75 @@ async function main() {
       ok(Array.isArray(worklist.headers) && worklist.headers.includes("Patient name"), `its headers came from the frame (${(worklist.headers || []).join(", ")})`);
       ok(Array.isArray(worklist.framePath) && worklist.framePath.length > 0, `the view remembers which frame it came from (framePath: ${JSON.stringify(worklist.framePath)})`);
 
-      // AND THE APPROVED ADAPTER CAN READ IT BACK. Reading `document` here would read the <frameset>.
+      /* AND THE APPROVED ADAPTER CAN READ IT BACK, on a fresh load the way a ward sync does. Reading
+       * `document` here would read the <frameset>. The crawl walked on into the patient chart, so
+       * put the browser back where an adapter would find the ward list. */
+      await call("Page.navigate", { url: emr.origin + "/" });
+      for (let i = 0; i < 60; i += 1) {
+        const done = await evaluate({ expression: 'document.readyState === "complete" && window.frames.length === 2' });
+        if (done.result === true) break;
+        await sleep(200);
+      }
+      await sleep(400);
       const read = await evaluate({ expression: readRowsExpression(worklist) });
       let rows = [];
       try { rows = JSON.parse(read.result || "[]"); } catch { rows = []; }
       ok(rows.length === 2, `the adapter read the ward rows out of the frame (${rows.length} rows)`);
       const names = rows.map((r) => Object.values(r).join(" ")).join(" | ");
       ok(/Testpatient One/.test(names) && /MR100001/.test(names), `the rows carry what the doctor sees (${names.slice(0, 90)})`);
+    }
+
+    /* AND THE WHOLE PIPELINE, on a hospital that has no JSON at all. Everything here is
+     * server-rendered HTML inside frames - the shape a great many older systems still have - so an
+     * adapter for it can only come from the DOM (Channel 2), never from a replayed API call. */
+    if (!process.env.SKIP_FULL) {
+      const { runPhoneDiscovery } = await import("../connect-agent/phone/index.mjs");
+      const { defaultPlanner } = await import("../connect-agent/phone/explore.mjs");
+      const { createPluginClient } = await import("../connect-agent/phone/plugin-client.mjs");
+      const { compileManifest } = await import("../connect-agent/manifest/compile.mjs");
+
+      const rawPlugin = {
+        platform: "ios",
+        async open({ url, initScript }) {
+          if (initScript) await call("Page.addScriptToEvaluateOnNewDocument", { source: initScript });
+          await call("Page.navigate", { url });
+          for (let i = 0; i < 60; i += 1) { if ((await evaluate({ expression: 'document.readyState === "complete"' })).result === true) break; await sleep(200); }
+          return { ok: true };
+        },
+        async navigate({ url }) { return rawPlugin.open({ url }); },
+        async evaluate({ expression }) { return evaluate({ expression }); },
+        async currentUrl() { return { url: (await evaluate({ expression: "location.href" })).result }; },
+        async setMode() { return { ok: true }; },
+        async drainRequests() { return { requests: [] }; },
+        async close() { return { ok: true }; },
+      };
+      const deployment = { id: "dep-frames", origins: [emr.origin] };
+      const plugin = createPluginClient({ plugin: rawPlugin, storeId: "test-store", origins: deployment.origins, title: "Frameset EMR" });
+      let compiled = null;
+      const api = {
+        plan: (args) => defaultPlanner(args),
+        progress: async () => ({ ok: true }),
+        discovery: async ({ spec, observedViews }) => {
+          try {
+            const { manifest } = await compileManifest({ ...spec, version: 2 }, { manifestId: "frameset-emr", timezone: "Asia/Kolkata" });
+            compiled = manifest;
+          } catch { compiled = null; }
+          return { candidateVersionId: "ver_frames", manifest: compiled, probes: [], capabilities: [], observedViews };
+        },
+        evidence: async () => ({ capabilities: [], evidenceHash: "sha256:test", state: "AWAITING_APPROVAL" }),
+      };
+      let result = null, err = null;
+      try {
+        result = await runPhoneDiscovery({
+          plugin, api, session: { id: "frames-session" }, deployment,
+          startUrl: emr.origin + "/",
+          onProgress: () => {},
+          caps: { maxSteps: 8, maxMs: 60000, maxDepth: 4, waitMs: 400 },
+        });
+      } catch (e) { err = e; }
+      ok(!err, `discovery ran to the end on an EMR with no JSON at all (${err ? err.message : "ok"})`);
+      const views = (result && result.observedViews) || [];
+      ok(views.length > 0, `clinical screens were captured from the frames (${views.map((v) => v.resourceHint).join(",") || "none"})`);
     }
 
     console.log(fails === 0 ? "\nALL GREEN - connect-frames-browser test passed" : `\n${fails} FAILED`);
