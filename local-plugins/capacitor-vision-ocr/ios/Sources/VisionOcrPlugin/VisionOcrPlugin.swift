@@ -179,7 +179,10 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
     private static var vitalModel: VNCoreMLModel?
     private static func loadVitalModel() -> VNCoreMLModel? {
         if let m = vitalModel { return m }
-        let bundles = [Bundle.main, Bundle(for: VisionOcrPlugin.self)] + Bundle.allBundles
+        var bundles = [Bundle.main, Bundle(for: VisionOcrPlugin.self)] + Bundle.allBundles
+        #if SWIFT_PACKAGE
+        bundles.insert(Bundle.module, at: 0)
+        #endif
         for b in bundles {
             if let url = b.url(forResource: "VitalDetector", withExtension: "mlmodelc"),
                let ml = try? MLModel(contentsOf: url), let vm = try? VNCoreMLModel(for: ml) {

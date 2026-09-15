@@ -962,7 +962,7 @@
       var det = !L ? bestDet(field) : null;
       var chan = L && px ? channelColor(L, px) : null;
       var cands = [];
-      G.B.forEach(function (b) {
+      function gather() { G.B.forEach(function (b) {
         if (claimed[b.i] || (L && b === L)) return;
         if (b.role !== "numeric" && b.role !== "limit" && b.role !== "limitRange") return;
         if (!valueLike(b.t, f)) return;
@@ -970,7 +970,10 @@
         else if (det) { if (!inDet(b, det) || claimedByOther(b, field, det)) return; }
         else { if (G.order.indexOf(field) < 0 || field === "temp") return; if (G.colX == null || Math.abs(b.cx - G.colX) > 0.12 || b.h < G.maxH * 0.55) return; }
         cands.push(scoreCandidate(G, field, b, label, px, chan));
-      });
+      }); }
+      gather();
+      // a detector box with no OCR value inside it proves nothing: fall back to the unlabelled slot path
+      if (det && !cands.length) { det = null; gather(); }
       if (L) {
         var gv = gluedValue(L, field);
         if (gv != null) {
