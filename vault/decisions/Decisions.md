@@ -6519,3 +6519,15 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   account id is never returned as a name. Members still have no display name field (not built).
 - Tests: test/run-opd-wardsynq-session-ui.mjs, test/run-ward-livefix-site-ui.mjs, test/ward-livefix-site.test.mjs,
   test/wsq-site-livefix-site.test.mjs, test/wardsynq-livefix-site-routes.test.mjs.
+## 2026-09-15 Medication order entry runs the server safety check; prescribers cannot verify their own orders (LT-14, LT-20)
+- `POST /api/queue/ward/medication-order` runs the SafetyEngine on the server against the record (allergies, other
+  active orders, latest weight) through `orderEntrySafety` in migrate-emar.js, the same facts reader the bedside hook
+  and the pharmacy queue use. A `safety` verdict in the request body is no longer read (it was trusted for override
+  analytics, actorId included).
+- Not a gate (seed content is unapproved, seed-signoff.js): `checkOnly: true` returns the verdict and writes nothing;
+  the chart shows any finding and the prescriber proceeds with `overrideReason` (attributed server-side) or changes the
+  order. The verdict is stored on the order as `safetyAtOrder`. The Order workstation should call the same route.
+- `POST /api/queue/ward/verify-order` refuses the order's prescriber (403 `self_verification`, `record.denied` audit
+  row via `RecordService.auditDenied`), whatever their role. Unverified orders stay administrable (rule 4).
+- ward.js `paint()` puts back fields the user changed (same view and patient, same drawn default); a write the server
+  accepted (`written !== 0`) empties the card its button sits in.

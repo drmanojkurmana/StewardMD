@@ -35,6 +35,8 @@ import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
 import { chainState, approvalCovers, levelsFor } from "./verification.js";
+import { orderEntrySafety } from "./migrate-emar.js";
+import { verificationState } from "./pharmacy-verify.js";
 
 /**
  * Does this approval reference actually approve this drug, right now?
@@ -592,9 +594,19 @@ function patientInstructionsRefusal(v) {
 }
 
 /**
- * Creates an inpatient medication order. The CDSS pre-check is run and REPORTED, never used to gate:
- * the content is unapproved seed data (see rx-safety.js) and this file does not get to invent a new
- * clinical control. ctx: { migration, order: {...}, safety?, actorDeps, recordDeps }.
+ * Creates an inpatient medication order. The CDSS check is run HERE, on the server, by the same engine
+ * and against the same record facts as the pharmacy queue and the bedside scan (migrate-emar.js
+ * orderEntrySafety), and REPORTED, never used to gate: the content is unapproved seed data (see
+ * rx-safety.js and seed-signoff.js) and this file does not get to invent a new clinical control.
+ *
+ * LT-14: this used to report whatever `safety` verdict the CALLER sent, and the ward screen sent none,
+ * so every chart order was saved with `safety: null` and nothing ran. A caller's verdict is no longer
+ * read at all. `checkOnly` runs the formulary and the engine and writes nothing, so a screen can show
+ * the findings before the prescriber confirms (the OPD's /rx-safety pattern). `overrideReason` is the
+ * prescriber's reason for proceeding past overridable findings; it is attributed to the acting actor
+ * here, never to anyone a caller names.
+ *
+ * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, actorDeps, recordDeps }.
  */
 async function createWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
@@ -671,6 +683,30 @@ async function createWardMedicationOrder(request, env, ctx) {
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  /* The same drug already active on this admission: prescribing it again REPLACES that order (one order
+   * per encounter and drug). Said before the write, never discovered after it. */
+  const replaces = current && current.status === "active"
+    ? { orderId: current.id, version: current.version, dose: current.dose || null, route: current.route || null, frequency: current.frequency || null }
+    : null;
+
+  let safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, []);
+  if (ctx.checkOnly === true) {
+    return { ...base, ok: true, written: 0, checkOnly: true, drug: candidate.drug, safety, formulary: fStatus.state,
+      ...(advisories.length ? { advisories } : {}), ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
+  }
+  const overrideReason = str(ctx.overrideReason).slice(0, 500);
+  let overrides = [];
+  if (safety.checked && overrideReason && safety.overridables.length) {
+    overrides = safety.overridables.map((f) => ({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode: "prescriber-judgement", rationale: overrideReason, actorId: resolved.actor.id }));
+    safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, overrides);
+  }
+  /* What the prescriber was shown, ON the order: the pharmacist and the nurse read the order, not this
+   * response, and a finding somebody proceeded past belongs with the prescription it was about. */
+  candidate.safetyAtOrder = safety.checked
+    ? { checked: true, rulePackVersion: safety.rulePackVersion, checkedAt: new Date().toISOString(),
+        findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.overridden ? { overridden: true } : {}) })),
+        unresolvedDrug: !!safety.unresolvedDrug, ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
+    : { checked: false, code: safety.code, checkedAt: new Date().toISOString() };
 
   let out;
   try {
@@ -687,25 +723,25 @@ async function createWardMedicationOrder(request, env, ctx) {
    * A FAILURE HERE NEVER FAILS THE ORDER. The order and the prescriber's safety decision are the
    * clinical act; losing an analytics row must not cost a patient their medicine. It is reported on
    * the response rather than thrown. */
-  let overrides = null;
+  let overrideRows = null;
   try {
-    overrides = await recordOverrides(svc, {
-      safety: ctx.safety, orderId: candidate.id, patientId: candidate.patientId,
+    overrideRows = await recordOverrides(svc, {
+      safety: safety.checked ? { ...safety, overrides } : null, orderId: candidate.id, patientId: candidate.patientId,
       encounterId: candidate.encounterId, drug: candidate.drug, idempotencyKey: ctx.idempotencyKey || null,
     });
-  } catch (e) { overrides = { written: 0, overrides: [], error: "override_not_recorded", detail: str(e && e.message) }; }
+  } catch (e) { overrideRows = { written: 0, overrides: [], error: "override_not_recorded", detail: str(e && e.message) }; }
 
   return {
     ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId,
     encounterId: candidate.encounterId, version: out.record.version, status: candidate.status,
-    safety: ctx.safety || null,
+    safety, ...(replaces ? { replaced: replaces } : {}),
     /* The hospital's own advice, alongside the safety engine's findings and never mixed into them.
      * Every entry carries source:"hospital-advisory" and blocking:false. */
     ...(advisories.length ? { advisories } : {}),
     formulary: fStatus.state,
     // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
     // override, and leaving that off the response made the denominator invisible to the caller.
-    ...(overrides && (overrides.written || overrides.error || overrides.rejected || overrides.fired) ? { overridesRecorded: overrides } : {}),
+    ...(overrideRows && (overrideRows.written || overrideRows.error || overrideRows.rejected || overrideRows.fired) ? { overridesRecorded: overrideRows } : {}),
     actor: resolved.actor.id, role: resolved.role,
   };
 }
@@ -1250,6 +1286,9 @@ function timelineFromChart(chart, extras) {
       if (resourceType === "ServiceRequest") {
         const rep = reportByRequest.get(str(r.id));
         event.reportReady = !!rep;
+        // The test and its kind as fields, so a screen can say them without the label's actor and status words (LT-24).
+        event.test = str(r.display || r.code) || null;
+        event.orderCategory = str(r.category) || null;
         if (rep) {
           event.reportId = rep.id;
           event.reportStatus = rep.status || null;
@@ -1266,6 +1305,9 @@ function timelineFromChart(chart, extras) {
     .map((o) => ({
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       prescriberId: o.prescriberId || null, since: (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || null,
+      /* LT-20: whether pharmacy has checked it. null when this reader cannot see verifications at all,
+       * which is not the same as "unverified". */
+      pharmacy: Array.isArray(chart.MedicationVerification) ? verificationState(o, chart.MedicationVerification).state : null,
     }))
     .sort((a, b) => (a.since || "") < (b.since || "") ? 1 : -1);
   return { events, withoutTimestamp, activeMedications };

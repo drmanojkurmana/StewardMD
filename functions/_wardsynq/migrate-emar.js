@@ -71,40 +71,70 @@ async function latestWeightKg(svc, patientId) {
  * would surface as a server error rather than as the machine's own refusal, losing the reasons the
  * nurse needs to act on.
  */
+/* What the engine is asked about, read from the patient's record: their allergies, their OTHER active
+ * orders and their latest weight. One reader for the bedside hook and for order entry, so the check a
+ * prescriber sees and the check the nurse's scan runs can never read different facts. */
+async function safetyFacts(svc, order) {
+  const patientId = order && order.patientId;
+  const [allergies, orders] = await Promise.all([
+    svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
+    svc.byPatient("MedicationOrder", patientId).catch(() => []),
+  ]);
+  const activeMeds = (orders || [])
+    .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
+    .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode }));
+  /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
+   * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the
+   * "a weight-based drug on an unweighed patient refuses rather than passes" invariant and is
+   * correct. It is read from the record rather than taken from the request body on purpose: a
+   * client-supplied weight is a number that can be typed to make a ceiling pass. If the ward has
+   * not weighed the patient there is nothing to send, and the block stands. */
+  const weightKg = await latestWeightKg(svc, patientId);
+  return { allergies: allergies || [], activeMeds, weightKg };
+}
+
 function bedsideSafetyCheck(svc, rulePack) {
   return async (hookCtx) => {
     if (!rulePack) return { allowed: true, blocks: [], warnings: [{ code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" }] };
     try {
       const order = hookCtx && hookCtx.order;
-      const patientId = order && order.patientId;
-      const [allergies, orders] = await Promise.all([
-        svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-        svc.byPatient("MedicationOrder", patientId).catch(() => []),
-      ]);
-      const activeMeds = (orders || [])
-        .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
-        .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode }));
-
-      /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
-       * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the
-       * "a weight-based drug on an unweighed patient refuses rather than passes" invariant and is
-       * correct. It is read from the record rather than taken from the request body on purpose: a
-       * client-supplied weight is a number that can be typed to make a ceiling pass. If the ward has
-       * not weighed the patient there is nothing to send, and the block stands. */
-      const weightKg = await latestWeightKg(svc, patientId);
+      const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
       const engine = new SafetyEngine({ rulePack });
       // Carried ON the patient, not as a sibling field: hook() forwards order/patient/allergies/
       // activeMeds/overrides to evaluate() and nothing else, while evaluate() reads
       // `ctx.weightKg ?? patient.weightKg`. Attaching it here is what makes the ceiling checkable
       // without widening the engine's own hook signature.
       const patient = { ...(hookCtx.patient || {}), ...(typeof weightKg === "number" ? { weightKg } : {}) };
-      return engine.hook()({ order, patient, activeMeds, allergies: allergies || [] });
+      return engine.hook()({ order, patient, activeMeds, allergies });
     } catch (e) {
       // Could not check. Say so as a warning and let the machine's own gates decide; silently
       // returning "allowed" would be the clean-bill-of-health-for-a-check-that-never-ran failure.
       return { allowed: true, blocks: [], warnings: [{ code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" }] };
     }
   };
+}
+
+/**
+ * LT-14: the SAME engine and the SAME record facts at ORDER ENTRY, as the full verdict (findings
+ * included, so override analytics can count what fired). `overrides` are the prescriber's, already
+ * attributed by the caller. Never throws: a check that could not run says so (checked: false) and is
+ * never reported as a clean one.
+ */
+async function orderEntrySafety(svc, rulePack, order, overrides) {
+  if (!rulePack) return { checked: false, code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" };
+  try {
+    const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
+    const v = new SafetyEngine({ rulePack }).evaluate({ order, allergies, activeMeds, weightKg, overrides: overrides || [] });
+    const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
+      ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}) });
+    return {
+      checked: true, rulePackVersion: v.rulePackVersion, allowed: v.allowed,
+      blocks: v.blocks.map(pick), overridables: v.overridables.map(pick), warnings: v.warnings.map(pick), findings: v.findings.map(pick),
+      unresolvedDrug: v.unresolvedDrug, unresolvedActiveMeds: v.unresolvedActiveMeds || [],
+    };
+  } catch (e) {
+    return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };
+  }
 }
 
 /** Builds the governed service, or a shaped refusal. Never throws. */
@@ -298,4 +328,4 @@ async function administerStep(request, env, ctx) {
   }
 }
 
-export { ACTIONS, bedsideSafetyCheck, medicationRound, administerStep };
+export { ACTIONS, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };

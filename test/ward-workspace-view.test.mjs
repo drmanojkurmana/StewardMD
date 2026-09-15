@@ -49,7 +49,8 @@ const LOADED = {
   criticals: [{ code: "K", display: "Potassium", value: 6.9, unit: "mmol/L", state: "open" },
               { code: "Na", display: "Sodium", value: 120, state: "acknowledged" }],
   activeMeds: [{ drug: "Co-amoxiclav", dose: { value: 1.2, unit: "g" }, route: "iv", frequency: "TDS" }],
-  news2: { total: 8, incomplete: false },
+  // The real GET /ward/news2 shape: the score is on `score` (news2-view.js).
+  news2: { ok: true, tool: "NEWS2", score: { total: 8, risk: "high", scorable: true } },
   people: { ok: true, people: [{ active: true, emergencyContact: true }], hasEmergencyContact: true },
 };
 
@@ -105,8 +106,25 @@ test("a deceased patient is stated before anything else on the screen", () => {
 
 test("an incomplete early warning score says it is incomplete rather than reading as reassuring", () => {
   const W = loadWard();
-  const html = view(W, { news2: { total: 2, incomplete: true } });
+  const html = view(W, { news2: { ok: true, tool: "NEWS2", score: { scorable: false, reason: "RespiratoryRate was not recorded." }, note: "RespiratoryRate was not recorded." } });
   assert.match(html, /incomplete - some observations were never recorded/);
+  assert.ok(!html.includes("Early warning score"), "an unscorable result shows no number");
+});
+
+test("LT-24: a charted score on the real /ward/news2 shape is shown, never 'No score yet'", () => {
+  const W = loadWard();
+  const html = view(W, { news2: { ok: true, tool: "NEWS2", score: { total: 0, risk: "low", scorable: true } } });
+  assert.match(html, /Early warning score 0/);
+  assert.ok(!html.includes("No score yet"));
+});
+
+test("LT-24: a waiting test reads as the test and its kind, not the account name, em dash and raw status", () => {
+  const W = loadWard();
+  const html = view(W, { timeline: [{ at: "2026-09-15T15:36:00.000Z", category: "investigation", resourceType: "ServiceRequest", id: "sr9",
+    label: "a clinician account ordered Chest X-ray PA view (imaging) — active", reportReady: false, test: "Chest X-ray PA view", orderCategory: "imaging" }] });
+  assert.ok(html.includes("Chest X-ray PA view (imaging)"));
+  assert.ok(!html.includes("a clinician account ordered"));
+  assert.ok(!html.includes("— active"));
 });
 
 test("a test still waiting for its result is listed as waiting", () => {

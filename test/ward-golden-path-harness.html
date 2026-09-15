@@ -65,6 +65,8 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/ward/vitals") >= 0) return reply({ ok: true, written: Object.keys(body.vitals || {}).length });
 
   if (u.indexOf("/ward/medication-order") >= 0 && (opts && opts.method) === "POST") {
+    // LT-14: the chart asks the server's safety check first (checkOnly, nothing written); a clean check is placed at once.
+    if (body.checkOnly) return reply({ ok: true, written: 0, checkOnly: true, drug: body.order.drug, safety: { checked: true, rulePackVersion: "harness", blocks: [], overridables: [], warnings: [], findings: [], unresolvedDrug: false, unresolvedActiveMeds: [] } });
     ORDER_ID = "wsq-rx-" + ENC_ID + "-" + body.order.drug.toLowerCase().replace(/\s+/g, "-");
     DUE_STATUS = "";
     return reply({ ok: true, written: 1, orderId: ORDER_ID });
