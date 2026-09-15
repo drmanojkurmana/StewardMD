@@ -1268,6 +1268,15 @@ export async function onRequest(context) {
         if (!completeness.endpointComplete) {
           throw new OnboardError("conflict", "this adapter is not endpoint-complete: no proven backend request for " + completeness.missing.join(", ") + ". Run Connect Hospital again and show the missing screens");
         }
+      } else if (job) {
+        /* NO VIEWS AT ALL IS NOT AN EXEMPTION. A crawl that found nothing posts an empty list, which
+         * skipped the gate entirely and let the emptiest adapter through while a nearly complete one
+         * was refused. A JSON-probe adapter still approves on its own evidence: at least one capability
+         * the phone actually proved. */
+        const caps = safeJsonParse(version.capabilities);
+        if (!Array.isArray(caps) || !caps.some((c) => c && c.proven === true)) {
+          throw new OnboardError("conflict", "this adapter proved nothing: the run found no screens and no probe succeeded. Run Connect Hospital again");
+        }
       }
       const { version: activated, activation } = await activateVersion(deps.db, {
         tenantId: tid,

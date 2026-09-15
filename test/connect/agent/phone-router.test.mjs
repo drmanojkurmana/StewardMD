@@ -619,3 +619,12 @@ test("approval needs every required resource endpoint-backed; GET /versions/:id 
   assert.equal(ok.status, 200, await ok.clone().text());
   assert.equal((await ok.json()).state, "ACTIVE");
 });
+
+test("a phone run that found no screens at all is refused too: the worst adapter must not slip through the gate", async () => {
+  // The crawl found nothing, so there are no views to check. Without evidence of its own that is not an
+  // exemption from the gate, it is the emptiest adapter there is.
+  const none = await phoneCandidate([]);
+  const refused = await onRequest(post(`/api/connect/agent/versions/${none.versionId}/approve`, { tenantId: "t1" }, none.env, none.owner1.headers));
+  assert.equal(refused.status, 409, await refused.clone().text());
+  assert.match(JSON.stringify(await refused.json()), /proved nothing/);
+});
