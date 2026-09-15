@@ -37,7 +37,7 @@ export function localVerdict(resource, rows, kind) {
  * checks: [{ resource, ok, via, rows, kind, reason, url }] one per verifiable view; `failed` lists the
  * resources the doctor should be asked for. Each verified view gets `view.verified` (PHI-free).
  */
-export async function verifyViews({ plugin, origin, views, brain = null, book = null, notify = null, stopped = () => false, maxPatients = 2, waitMs = 6000, parseHtml = null }) {
+export async function verifyViews({ plugin, origin, views, brain = null, book = null, notify = null, stopped = () => false, skipAt = () => 0, maxPatients = 2, waitMs = 6000, parseHtml = null }) {
   const proven = (v) => !!(v && v.proof && v.proof.status === 'proven');
   const say = (extra) => { try { if (notify) notify('VERIFYING', extra); } catch { /* UI must never break the check */ } };
   const checks = [];
@@ -72,6 +72,16 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
   for (const view of list) {
     if (stopped()) break;
     if (!view || view === worklistView || !VERIFY_RESOURCES.includes(view.resourceHint)) continue;
+    /* SKIP THIS STEP. The doctor can abandon the screen being checked without ending the run: the
+     * count they bump is read before the slow work and again after it, and a view they skipped is
+     * kept as not proven rather than silently dropped. */
+    const skipMark = skipAt();
+    const skippedNow = () => skipAt() > skipMark;
+    const markSkipped = () => {
+      view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'skipped at your request; it will be read from its page' };
+      checks.push(Object.assign({ resource: view.resourceHint }, view.verified));
+      failed.push(view.resourceHint);
+    };
     if (!sample.length) { view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no patient to check with' }; failed.push(view.resourceHint); continue; }
     /* NOT PROVEN DURING THE CRAWL: open the view's own page for a real patient and run the proof there
      * (the page's own load calls against the rows it shows). Still nothing: no endpoint is kept. */
@@ -79,6 +89,7 @@ export async function verifyViews({ plugin, origin, views, brain = null, book = 
       say({ checking: view.resourceHint, learning: true });
       await learnPageLoadCalls({ plugin, origin, view, patient: sample[0], waitMs: Math.min(Math.max(waitMs, 6000), 12000), book });
     }
+    if (skippedNow()) { markSkipped(); continue; }
     if (book && !proven(view)) {
       const status = (view.proof && view.proof.status) || 'none';
       view.verified = { resource: view.resourceHint, ok: false, via: 'none', rows: 0, kind: 'none', reason: 'no endpoint was proven for this view (' + status + '); it will be read from its page' };

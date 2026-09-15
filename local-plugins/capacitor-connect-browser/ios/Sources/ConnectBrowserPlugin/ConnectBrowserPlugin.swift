@@ -355,21 +355,20 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             pin(vc, in: superview, bottomStrip: 0)
             vc.view.alpha = 0.01
             vc.view.isUserInteractionEnabled = false
-        } else if vc.mode == "agent" && vc.compact {
-            vc.view.alpha = 1
-            vc.view.isUserInteractionEnabled = true
-            /* A FRAME SET HERE DOES NOT SURVIVE THE PARENT'S NEXT LAYOUT PASS. That is why every
-             * attempt to leave part of the app uncovered silently failed, and it is what stalled a
-             * live GHIS crawl at 86% on the owner's phone (2026-09-15): the hospital page covered the
-             * app's own WebView to the last pixel, iOS stopped scheduling it, and the engine that
-             * drives the crawl lives in it. Constraints are not undone by layout, so they hold. */
-            pin(vc, in: superview, topFraction: 0.52)
         } else if vc.mode == "agent" {
             vc.view.alpha = 1
             vc.view.isUserInteractionEnabled = true
-            // AGENT READS RUN OUT OF SIGHT: a thin strip keeps the hospital page alive (cookies,
-            // tokens, fetch) with the app view visible and therefore still running.
-            pin(vc, in: superview, bottomStrip: 2)
+            /* AGENT READS ALWAYS SPLIT THE SCREEN. Both WebViews have to stay on screen or iOS suspends
+             * whichever is covered. The engine (crawl AND verification) lives in the APP WebView; the
+             * hospital page it reads is THIS view. A 2pt strip for the app was a lie - iOS suspended it
+             * anyway, freezing the engine and even its own 35s safety timeout, so a single slow endpoint
+             * (medications) hung the whole run with no way out, on screen, 86% forever (owner's iPhone,
+             * 2026-09-15). Only a real split keeps both alive. Constraints survive the parent's layout;
+             * a frame does not. Verification does not need the browser visible (its reads are
+             * programmatic), so the app keeps the bottom ~half - enough to stay scheduled and to show
+             * the progress and the Stop/Save controls. The old `compact` flag no longer changes this;
+             * every agent read splits. */
+            pin(vc, in: superview, topFraction: 0.52)
         } else {
             vc.view.alpha = 1
             vc.view.isUserInteractionEnabled = true

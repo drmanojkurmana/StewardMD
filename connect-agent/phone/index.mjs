@@ -75,7 +75,7 @@ export const ASK_PROMPTS = Object.freeze({
  * next }`: async advisors answering from screen STRUCTURE only (see functions/_connect/agent/brain.js);
  * any of them may reject or return null and the deterministic rules stand.
  */
-export async function runPhoneDiscovery({ plugin, api, session, deployment, startUrl, onProgress, askDoctor, stopSignal, finishSignal, caps, mode = 'auto', brain = null, compact = false } = {}) {
+export async function runPhoneDiscovery({ plugin, api, session, deployment, startUrl, onProgress, askDoctor, stopSignal, finishSignal, skipSignal, redoSignal, caps, mode = 'auto', brain = null, compact = false } = {}) {
   if (!plugin) throw new Error('runPhoneDiscovery requires a plugin client');
   if (!api || typeof api.plan !== 'function' || typeof api.discovery !== 'function' || typeof api.evidence !== 'function') {
     throw new Error('runPhoneDiscovery requires api.plan, api.discovery and api.evidence');
@@ -108,6 +108,11 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
    * destructive Stop and tears the session down. */
   const finishing = () => typeof finishSignal === 'function' && !!finishSignal();
   const stopped = () => (typeof stopSignal === 'function' && !!stopSignal()) || finishing();
+  /* The doctor's two mid-run controls, as counts rather than flags so one tap means one step:
+   * `skipAt` abandons the step being worked on, `redoAt` asks for another walk of the hospital. */
+  const skipAt = () => (typeof skipSignal === 'function' ? Number(skipSignal()) || 0 : 0);
+  const redoAt = () => (typeof redoSignal === 'function' ? Number(redoSignal()) || 0 : 0);
+  let redoMark = redoAt();
   /* `compact` (auto mode with the game on screen): the hospital browser takes the top half only while
    * the agent drives, so the sheet's progress and game stay visible; a guided ask is always full size. */
   const setMode = async (m, banner) => { if (typeof plugin.setMode === 'function') await plugin.setMode({ mode: m, banner, origins, compact: !!compact && m === 'agent' }).catch(() => {}); };
@@ -251,7 +256,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     if (finishing()) { warnings.push('saved at your request before every screen was double-checked'); return; }
     notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
     try {
-      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
+      verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, skipAt, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
     } catch (e) {
       if (e && e.name === 'NotSignedIn') { crawlStop = 'login-required'; warnings.push(e.message); return; }
       warnings.push('verification could not run: ' + String((e && e.message) || e).slice(0, 120));
@@ -297,6 +302,27 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   }
   // What the doctor showed (or manual mode captured) is proven the same way, once.
   if (manual || asked.length) await runVerification();
+
+  /* LOOK AGAIN. The doctor can send the agent back over the hospital when the first walk missed
+   * something (a tab that needed a moment, a screen they have since opened). Bounded to two extra
+   * walks so a stuck finger cannot loop the run, and anything already found survives a walk that
+   * comes back with less. */
+  for (let redos = 0; redos < 2 && !manual && redoAt() > redoMark && !stopped(); redos += 1) {
+    redoMark = redoAt();
+    await setMode('agent');
+    try {
+      const again = await deepCrawlClinical({
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, brain, book,
+        onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
+      });
+      if (Array.isArray(again.observedViews) && again.observedViews.length) {
+        observedViews = again.observedViews;
+        found = again.found || found;
+        crawlStop = again.stopReason;
+      }
+    } catch { break; }
+    await runVerification();
+  }
 
   // Nothing discovered is a failure with its reason, never an "adapter created".
   if (!observedViews.length) {

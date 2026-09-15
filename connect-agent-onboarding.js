@@ -177,7 +177,28 @@
       "@media (prefers-reduced-transparency: reduce){.smd-connect-bar{background:var(--panel,#fff);backdrop-filter:none;-webkit-backdrop-filter:none}.smd-connect-ov{background:rgba(7,17,25,.72)}}",
       "body.dark .smd-connect-ov{background:rgba(0,0,0,.65)}",
       "body.dark .smd-connect-bar{background:rgba(19,32,48,.72)}",
-      "body.dark .smd-connect-hosp{background:var(--panel)}"
+      "body.dark .smd-connect-hosp{background:var(--panel)}",
+      /* THE AGENT CONSOLE. While the agent reads, the hospital takes the top of the screen and this
+       * takes the bottom: what it is doing now, what it has found, and controls that actually reach
+       * the engine. Every control is a real signal, never decoration. */
+      ".smd-agent{display:flex;flex-direction:column;gap:0.625rem}",
+      ".smd-agent-now{display:flex;align-items:flex-start;gap:0.5rem}",
+      ".smd-agent-dot{flex:none;width:0.5rem;height:0.5rem;margin-top:0.375rem;border-radius:999px;background:#0E7C66;animation:smd-agent-pulse 1.6s ease-in-out infinite}",
+      ".smd-agent-dot.stalled{background:var(--amber,#b26a00);animation:none}",
+      "@keyframes smd-agent-pulse{0%,100%{opacity:1}50%{opacity:.35}}",
+      "@media (prefers-reduced-motion: reduce){.smd-agent-dot{animation:none}}",
+      ".smd-agent-act{flex:1;min-width:0;font-weight:600;color:var(--ink,#14202b);line-height:1.45}",
+      ".smd-agent-sub{font-size:0.75rem;color:var(--muted-ink,#5b6b7a);margin-top:0.125rem;font-weight:400}",
+      ".smd-agent-chips{display:flex;flex-wrap:wrap;gap:0.375rem}",
+      ".smd-agent-chip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;border:1px solid var(--line,#d7dee3);color:var(--muted-ink,#5b6b7a);background:var(--panel,#fff)}",
+      ".smd-agent-chip.done{color:#0b5f52;border-color:rgba(14,124,102,.35);background:rgba(14,124,102,.08)}",
+      ".smd-agent-chip svg{flex:none;width:0.75rem;height:0.75rem}",
+      ".smd-agent-acts{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}",
+      ".smd-agent-acts .smd-connect-btn{width:100%}",
+      ".smd-agent-stop{grid-column:1/-1}",
+      ".smd-agent-confirm{border:1px solid var(--red-line,#efa9b1);background:rgba(171,28,44,.06);border-radius:0.625rem;padding:0.625rem;display:flex;flex-direction:column;gap:0.5rem}",
+      ".smd-agent-confirm p{margin:0;font-size:0.8125rem;color:var(--ink,#14202b)}",
+      "body.dark .smd-agent-chip{background:transparent}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -1143,6 +1164,10 @@
         /* "Save what you have": the doctor's escape from a run that has gone quiet. Unlike Stop it
          * keeps the session and everything learned; the engine breaks out and saves. */
         finishSignal: function () { return !!(S && S.finishRequested); },
+        /* Counters, not booleans: the engine remembers the count it started a step with and abandons
+         * that step when the doctor bumps it, so one tap skips exactly one step. */
+        skipSignal: function () { return (S && S.skipRequested) || 0; },
+        redoSignal: function () { return (S && S.redoRequested) || 0; },
         /* The agent could not find something: hand the screen to the doctor (plugin guide mode) and
          * resolve when they tap Done in the browser header, or Skip here. */
         askDoctor: function (q) {
@@ -1362,8 +1387,24 @@
     var pct = Math.round(progressFraction() * 100);
     return '<div class="smd-connect-prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
       '<i style="width:' + pct + '%"></i></div>' +
-      '<div class="smd-connect-row smd-connect-counts"><span id="smd-connect-activity">' + activityLine() + '</span>' +
+      '<div class="smd-agent-now"><span id="smd-connect-dot" class="smd-agent-dot' + (stalledFor() ? " stalled" : "") + '" aria-hidden="true"></span>' +
+      '<span class="smd-agent-act" id="smd-connect-activity">' + activityLine() + '</span>' +
       '<strong id="smd-connect-eta">' + etaLine() + '</strong></div>';
+  }
+  /* WHAT IT HAS AND WHAT IS LEFT, at a glance. SVG tick, never an emoji. */
+  var TICK_SVG = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function agentChips(c) {
+    var out = "", i, n;
+    var found = c.found || [], looking = c.looking || [];
+    for (i = 0; i < found.length; i++) {
+      n = VIEW_NAMES[found[i]] || found[i];
+      out += '<span class="smd-agent-chip done">' + TICK_SVG + esc(n) + "</span>";
+    }
+    for (i = 0; i < looking.length; i++) {
+      n = VIEW_NAMES[looking[i]];
+      if (n) out += '<span class="smd-agent-chip">' + esc(n) + "</span>";
+    }
+    return out ? '<div class="smd-agent-chips" aria-label="What the agent has found so far">' + out + "</div>" : "";
   }
 
   function progressDetail() {
@@ -1374,10 +1415,9 @@
         '<div class="smd-connect-row"><button id="smd-connect-guidemissing" class="smd-connect-btn" type="button">Not in my EMR</button>' +
         '<button id="smd-connect-guideskip" class="smd-connect-btn" type="button">Skip for now</button></div></div>';
     }
-    return '<div class="smd-connect-card">' +
+    return '<div class="smd-connect-card smd-agent">' +
       progressBar() +
-      '<div class="smd-connect-row smd-connect-counts"><span>Found</span><strong>' + viewNames(c.found) + '</strong></div>' +
-      '<div class="smd-connect-row smd-connect-counts"><span>Still looking for</span><strong>' + viewNames(c.looking) + '</strong></div>' +
+      agentChips(c) +
       '<div class="smd-connect-row smd-connect-counts"><span>Pages visited</span><strong id="smd-connect-pages">' + c.pages + '</strong></div>' +
       '<div class="smd-connect-row smd-connect-counts"><span>Requests observed</span><strong id="smd-connect-reqs">' + c.requests + '</strong></div>' +
       '</div>';
@@ -1395,11 +1435,50 @@
       (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
       '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
       '<div id="smd-connect-stallnote" class="smd-connect-note" style="display:none"></div>' +
-      '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
-      '<button id="smd-connect-finishnow" class="smd-connect-btn primary" type="button" style="display:none">Save what you have</button>' +
-      '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
+      /* CONTROLS THAT REACH THE ENGINE. Each one is a real signal the run checks, never decoration:
+       * a control the doctor can press that does nothing is worse than no control at all. */
+      '<div class="smd-agent-acts">' +
+      '<button id="smd-connect-skipstep" class="smd-connect-btn" type="button">Skip this step</button>' +
+      '<button id="smd-connect-redo" class="smd-connect-btn" type="button">Look again</button>' +
+      '<button id="smd-connect-finishnow" class="smd-connect-btn primary smd-agent-stop" type="button" style="display:none">Save what you have</button>' +
+      '<button id="smd-connect-stop" class="smd-connect-btn danger smd-agent-stop" type="button">Stop</button>' +
+      '<button id="smd-connect-progretry" class="smd-connect-btn primary smd-agent-stop" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>' +
+      // Stop throws away everything the agent learned, so it asks first (and offers the kinder option).
+      '<div id="smd-connect-stopconfirm" class="smd-agent-confirm" style="display:none" role="group" aria-label="Confirm stopping">' +
+      '<p id="smd-connect-stoptext">Stop and throw away what the agent has found?</p>' +
+      '<div class="smd-agent-acts"><button id="smd-connect-stopkeep" class="smd-connect-btn" type="button">Keep going</button>' +
+      '<button id="smd-connect-stopyes" class="smd-connect-btn danger" type="button">Stop and discard</button></div></div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
-    b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    b.querySelector("#smd-connect-stop").onclick = function () {
+      var n = foundCount();
+      var t = b.querySelector("#smd-connect-stoptext");
+      if (t) t.textContent = n ? "Stop and throw away the " + n + (n === 1 ? " screen" : " screens") + " the agent has already found? Save what you have keeps them instead." : "Stop reading this hospital?";
+      var cf = b.querySelector("#smd-connect-stopconfirm");
+      if (cf) cf.style.display = "";
+      var fin = b.querySelector("#smd-connect-finishnow");
+      if (fin && n) fin.style.display = "";      // offer the non-destructive way out alongside it
+    };
+    b.querySelector("#smd-connect-stopkeep").onclick = function () {
+      var cf = b.querySelector("#smd-connect-stopconfirm");
+      if (cf) cf.style.display = "none";
+    };
+    b.querySelector("#smd-connect-stopyes").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    /* Skip: abandon the step on screen now (it is marked not proven) and move to the next one. */
+    b.querySelector("#smd-connect-skipstep").onclick = function () {
+      if (!S) return;
+      S.skipRequested = (S.skipRequested || 0) + 1;
+      S.lastProgressAt = Date.now();            // the doctor acted: the stall clock starts over
+      // If the agent is waiting on a question right now, this answers it too, so one Skip is enough.
+      if (S.guideResolve) { var r = S.guideResolve; S.guideResolve = null; S.guide = null; r({ done: false }); paintProgress(); }
+      flashAction(b, "#smd-connect-skipstep", "Skipping");
+    };
+    /* Look again: re-walk this hospital for whatever is still missing. */
+    b.querySelector("#smd-connect-redo").onclick = function () {
+      if (!S) return;
+      S.redoRequested = (S.redoRequested || 0) + 1;
+      S.lastProgressAt = Date.now();
+      flashAction(b, "#smd-connect-redo", "Looking again");
+    };
     /* NOT Stop. The session stays open and the engine keeps everything it learned: it breaks out of
      * whatever it is waiting on and goes straight to writing the connection. */
     b.querySelector("#smd-connect-finishnow").onclick = function () {
@@ -1442,6 +1521,17 @@
   }
   function stopSnake() {
     if (S && S.snake) { try { S.snake.stop(); } catch (e) {} S.snake = null; }
+  }
+
+  /* A tap has to be acknowledged at once. The engine only acts on a signal when it reaches its next
+   * checkpoint, which can be a moment away, and a button that looks inert invites a second tap. */
+  function flashAction(b, sel, label) {
+    var el = b && b.querySelector ? b.querySelector(sel) : null;
+    if (!el) return;
+    var was = el.textContent;
+    el.disabled = true;
+    el.textContent = label;
+    setTimeout(function () { if (el && el.isConnected) { el.disabled = false; el.textContent = was; } }, 2500);
   }
 
   function wireGuideSkip(b) {
