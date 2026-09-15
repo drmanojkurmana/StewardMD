@@ -26,6 +26,7 @@ const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++
 const PAGE = (body) => `<!doctype html><html><head><title>Frameset EMR</title></head>${body}</html>`;
 
 function startFramesetEmr() {
+  const traps = {};
   const server = http.createServer((req, res) => {
     const path = req.url.split("?")[0];
     const html = (b) => { res.writeHead(200, { "content-type": "text/html" }); res.end(b); };
@@ -54,8 +55,24 @@ function startFramesetEmr() {
         <script>function openPatient(a,b){ location.href = '/patient.html'; }</script></body>`));
     }
     if (path === "/patient.html") {
+      /* THE TRAPS ARE LINKS TOO. Now that a plain link is something the walk will follow, the
+       * read-only guard has to hold against links, not just against handlers. Every one of these is
+       * a GET that changes the record, sitting right beside the two the agent is meant to open. */
       return html(PAGE(`<body><h2>Patient record</h2>
-        <ul><li><a href="/labs.html">Lab reports</a></li><li><a href="/meds.html">Medications</a></li></ul></body>`));
+        <ul>
+          <li><a href="/labs.html">Lab reports</a></li>
+          <li><a href="/meds.html">Medications</a></li>
+          <li><a href="/act/discharge">Discharge patient</a></li>
+          <li><a href="/act/delete">Delete record</a></li>
+          <li><a href="/act/order">Order medication</a></li>
+          <li><a href="/act/print">Print case sheet</a></li>
+          <li><a href="/act/export">Export all records</a></li>
+          <li><a href="/act/signout">Sign out</a></li>
+        </ul></body>`));
+    }
+    if (path.startsWith("/act/")) {
+      traps[path.slice(5)] = (traps[path.slice(5)] || 0) + 1;
+      return html(PAGE(`<body><div id="done">done</div></body>`));
     }
     if (path === "/labs.html") {
       return html(PAGE(`<body><table id="labTable"><thead><tr><th>Date</th><th>Test</th><th>Result</th><th>Unit</th></tr></thead>
@@ -70,6 +87,7 @@ function startFramesetEmr() {
   return new Promise((resolve) => {
     server.listen(0, "127.0.0.1", () => resolve({
       origin: `http://127.0.0.1:${server.address().port}`,
+      traps,
       close: () => new Promise((r) => { server.closeAllConnections(); server.close(r); }),
     }));
   });
@@ -138,6 +156,9 @@ async function main() {
     ok(hints.includes("labs"), `the lab screen behind a plain link was reached (${hints.join(",")})`);
     ok(hints.includes("medications"), `and the medication screen too (${hints.join(",")})`);
     ok((trail || []).includes("back"), `the walk came back to the record instead of wandering off (${JSON.stringify(trail)})`);
+    // READ-ONLY, NOW THAT LINKS ARE FOLLOWED. Six destructive links sat beside the two it opened.
+    const moved = Object.keys(emr.traps);
+    ok(moved.length === 0, `not one destructive link was followed (touched: ${moved.join(",") || "none"})`);
     const worklist = observedViews.find((v) => v.resourceHint === "worklist");
     ok(!!worklist, `the ward list inside the frame was captured (views: ${observedViews.map((v) => v.resourceHint).join(",") || "none"})`);
     if (worklist) {
