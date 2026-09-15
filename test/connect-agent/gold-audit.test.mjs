@@ -7,14 +7,29 @@ import { serveGhisProxy } from '../../connect-agent/phone/ghis-shim.mjs';
 
 const spec = (name) => GOLD_ENDPOINTS.find((s) => s.endpoint === name);
 
-test('compareRows: same rows and fields is "same"; a missing field or row is "partial"; nothing is "missing"', () => {
+/* WAS: "a missing field OR ROW is partial". A short list is now its own verdict, "subset" (Task 2c,
+ * owner 2026-09-16), so the partial case here keeps every row and drops only a field. */
+test('compareRows: same rows and fields is "same"; a missing field is "partial"; a short list is "subset"; nothing is "missing"', () => {
   const gold = { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', frequency: 'TDS' }, { drugText: 'Inj Ceftriaxone 1 g', route: 'IV', frequency: 'BD' }] };
   assert.equal(compareRows(spec('medications'), gold, { rows: gold.rows.map((r) => ({ ...r, drugText: r.drugText.toUpperCase() })) }).verdict, 'same');
-  const partial = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: '', frequency: 'TDS' }] });
+  const partial = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: '', frequency: 'TDS' }, { drugText: 'Inj Ceftriaxone 1 g', route: 'IV', frequency: 'BD' }] });
   assert.equal(partial.verdict, 'partial');
-  assert.deepEqual(partial.fields.route, { gold: 2, adapter: 0, equal: 0 });
+  assert.deepEqual(partial.fields.route, { gold: 2, adapter: 1, equal: 1 });
+  const short = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', frequency: 'TDS' }] });
+  assert.equal(short.verdict, 'subset', 'a row the adapter never returned is never folded into "partial"');
+  assert.equal(short.missing, 1);
   assert.equal(compareRows(spec('medications'), gold, { rows: [] }).verdict, 'missing');
   assert.ok(!JSON.stringify(partial).includes('Paracetamol'), 'the grade carries no value');
+});
+
+test('an adapter that returns only some of the ward FAILS the audit as a subset', () => {
+  const spec = GOLD_ENDPOINTS[0]; // patients
+  const gold = [{ patientId: 'MR1' }, { patientId: 'MR2' }, { patientId: 'MR3' }];
+  const mine = [{ patientId: 'MR1' }, { patientId: 'MR2' }];
+  const out = compareRows(spec, gold, mine);
+  assert.equal(out.verdict, 'subset', 'fewer patients than the hand-built adapter is a named failure, not a pass');
+  assert.equal(out.missing, 1);
+  assert.equal(compareRows(spec, gold, gold).verdict, 'same');
 });
 
 test('the same day written two ways counts as the same day, and two different days never do', () => {

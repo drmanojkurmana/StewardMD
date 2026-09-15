@@ -3,7 +3,7 @@
 // Synthetic GHIS-shaped data (made-up ids and names); the real GHIS endpoint list is never given to discovery.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows, navToReplayEntries, INJECT_REPLAY_SRC } from '../../connect-agent/phone/prove.mjs';
+import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows, navToReplayEntries, INJECT_REPLAY_SRC, widenRequest } from '../../connect-agent/phone/prove.mjs';
 import { executeView, parseFetchExpression, PAGE_TOKENS, provenValue, applyColumns } from '../../connect-agent/phone/adapter-runtime.mjs';
 import { mapRows } from '../../connect-agent/phone/runtime.mjs';
 import { redactEndpoints } from '../../connect-agent/phone/deep-crawl.mjs';
@@ -307,4 +307,56 @@ test('a radiology report opened by navigation is proven and keyed to its list ro
   const data = view.endpoints.find((e) => e.role === 'data');
   assert.equal(data.path.split('?')[0], '/Radiology/Home/GetRadiologyResultPrint');
   assert.deepEqual(data.params.resultid, { from: 'radiology', field: 'resultid' });
+});
+
+test('widenRequest empties only the filters nothing could be traced to', () => {
+  const entry = { method: 'GET', url: HOST + '/Doctor/Home/GetIPWL?NursingStationId=&PatientId=&FloorId=&Emp_ID=4471&Dept_ID=12&Type=IPWorkList&__RequestVerificationToken=abc', body: null, reqCt: '' };
+  const params = { Emp_ID: { unmapped: true }, Dept_ID: { unmapped: true }, Type: { constant: 'IPWorkList' }, __RequestVerificationToken: { token: true } };
+  const wide = widenRequest(entry, params);
+  assert.ok(wide);
+  const q = new URL(wide.url).searchParams;
+  assert.equal(q.get('Emp_ID'), '', 'an untraceable filter is emptied');
+  assert.equal(q.get('Dept_ID'), '');
+  assert.equal(q.get('Type'), 'IPWorkList', 'a mode constant is kept');
+  assert.equal(q.get('__RequestVerificationToken'), 'abc', 'the token is kept');
+
+  // A patient-scoped request is NEVER widened: that would read every patient's labs.
+  const labs = { method: 'POST', url: HOST + '/Lab/Home/GetSearchPatientId', body: '__RequestVerificationToken=abc&patient_id=MR900001&DeptID=', reqCt: 'application/x-www-form-urlencoded' };
+  assert.equal(widenRequest(labs, { patient_id: { from: 'worklist', field: 'MRNo' }, __RequestVerificationToken: { token: true }, DeptID: { empty: true } }), null, 'nothing untraceable and filled: no widening');
+  const scoped = { method: 'GET', url: HOST + '/Lab/Home/Get?patient_id=MR900001', body: null, reqCt: '' };
+  assert.equal(widenRequest(scoped, { patient_id: { from: 'worklist', field: 'MRNo' } }), null, 'a row-traced id is never emptied');
+});
+
+test('the ward list is saved in the form that returns every in-patient, not the doctor filtered one', async () => {
+  const MINE = JSON.stringify([{ patientId: 'MR1', patientFirstName: 'ALPHA', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'BRAVO', bedName: 'B2' }]);
+  const ALL = JSON.stringify([
+    { patientId: 'MR1', patientFirstName: 'ALPHA', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'BRAVO', bedName: 'B2' },
+    { patientId: 'MR3', patientFirstName: 'CHARLIE', bedName: 'B3' }, { patientId: 'MR4', patientFirstName: 'DELTA', bedName: 'B4' },
+  ]);
+  const filtered = HOST + '/Doctor/Home/GetIPWL?Emp_ID=4471&Type=IPWorkList';
+  const entries = [{ seq: 61, method: 'GET', url: filtered, body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['patientId'], rows: 2 } }];
+  const answers = { 61: { status: 200, contentType: 'application/json', text: MINE } };
+  const page = {
+    executed: [],
+    async currentUrl() { return { url: HOST + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression.includes('PROVE_LIST')) return { result: JSON.stringify(entries) };
+      if (expression.includes('PROVE_SCREEN')) return { result: JSON.stringify([['MR1', 'ALPHA', 'B1'], ['MR2', 'BRAVO', 'B2']]) };
+      if (expression.includes('PROVE_EXEC_REQ')) {
+        // the widened replay: filters emptied, Type kept
+        const m = /"url":"([^"]+)"/.exec(expression);
+        page.executed.push(m && m[1]);
+        return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: /Emp_ID=&/.test(m[1]) || /Emp_ID=$/.test(m[1]) ? ALL : MINE }) };
+      }
+      if (expression.includes('PROVE_EXEC')) return { result: JSON.stringify(answers[61]) };
+      return { result: null };
+    },
+  };
+  const view = { resourceHint: 'worklist', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'] };
+  await proveView({ client: page, view });
+  assert.equal(view.proof.status, 'proven');
+  const data = view.endpoints.find((e) => e.role === 'data');
+  assert.match(data.path, /Type=IPWorkList/, 'the mode constant is saved');
+  assert.deepEqual(data.params.Emp_ID, { empty: true }, 'the doctor filter is saved EMPTY, so every in-patient comes back');
+  assert.equal(view.proof.population, 4, 'the saved request was verified to return the whole in-patient list');
 });

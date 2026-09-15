@@ -190,7 +190,8 @@ function cleanProofCounts(raw, kinds, name) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new OnboardError("invalid", "observedViews: " + name + " invalid");
   const out = {};
   if (raw.kind !== undefined) { if (kinds.indexOf(raw.kind) < 0) throw new OnboardError("invalid", "observedViews: " + name + " kind invalid"); out.kind = raw.kind; }
-  for (const k of ["hits", "cells", "rows"]) {
+  // `population`: how many rows the SAVED (widened) list request returned, so a subset is visible later.
+  for (const k of ["hits", "cells", "rows", "population"]) {
     if (raw[k] === undefined) continue;
     if (!Number.isInteger(raw[k]) || raw[k] < 0 || raw[k] > 100000) throw new OnboardError("invalid", "observedViews: " + name + " " + k + " invalid");
     out[k] = raw[k];

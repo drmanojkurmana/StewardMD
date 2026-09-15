@@ -59,6 +59,23 @@ function PROVE_EXEC(seq) {
   }).catch(function (x) { return JSON.stringify({ status: 0, error: String(x && x.message || x) }); });
 }
 
+/* Execute a request the page did not make as recorded: the widened form of a list call. Same session,
+ * same cookies, same realm as PROVE_EXEC; only the url and body differ. */
+function PROVE_EXEC_REQ(req) {
+  var headers = { Accept: 'application/json, text/html, */*' };
+  if (req.xhr) headers['X-Requested-With'] = 'XMLHttpRequest';
+  var init = { method: req.method, credentials: 'include', headers: headers, redirect: 'follow' };
+  if (req.body != null && req.method !== 'GET' && req.method !== 'HEAD') {
+    init.body = req.body;
+    headers['Content-Type'] = req.reqCt || 'application/x-www-form-urlencoded; charset=UTF-8';
+  }
+  return fetch(req.url, init).then(function (r) {
+    return r.text().then(function (t) {
+      return JSON.stringify({ status: r.status, contentType: r.headers.get('content-type') || '', url: r.url, text: t.length > 2097152 ? t.slice(0, 2097152) : t });
+    });
+  }).catch(function (x) { return JSON.stringify({ status: 0, error: String(x && x.message || x) }); });
+}
+
 /* The cells the screen shows for the captured view, ROW BY ROW (one array of cell texts per row, in
  * column order): the table the doctor pointed at, the block's value elements, or the view's rows. Row
  * order and column order are what lets a response key be traced to a screen column (learnColumns). */
@@ -141,6 +158,7 @@ export function screenRows(raw) {
 export const PROVE_SOURCES = Object.freeze({
   list: (since) => `(${String(PROVE_LIST)})(${Number.isInteger(since) ? since : -1})`,
   exec: (seq) => `(${String(PROVE_EXEC)})(${Number(seq) || 0})`,
+  execRequest: (req) => `(${String(PROVE_EXEC_REQ)})(${JSON.stringify(req)})`,
   screen: (spec) => `(${String(PROVE_SCREEN)})(${JSON.stringify({ rowsSelector: spec.rowsSelector || '', cellSelectors: spec.cellSelectors || [], block: !!spec.block })})`,
 });
 
@@ -431,6 +449,35 @@ export function navToReplayEntries(drained, { pageOrigin, allowedOrigins = [] } 
  * report is usually the only candidate, so it is still executed and accepted on overlap. */
 export const INJECT_REPLAY_SRC = "(function(entries){try{var R=window.__SMD_REPLAY__=window.__SMD_REPLAY__||{seq:0,list:[]};for(var i=0;i<entries.length;i++){var e=entries[i];R.seq+=1;R.list.push({seq:R.seq,sig:'GET '+e.url,method:'GET',url:e.url,body:null,reqCt:'',xhr:false,status:200,shape:{kind:'unknown',page:true}});}if(R.list.length>60)R.list.splice(0,R.list.length-60);return R.seq;}catch(x){return 0;}})";
 
+/* THE WIDEST FORM THAT STILL SHOWS THIS DOCTOR'S PATIENTS (owner, 2026-09-16). A ward list request can
+ * carry filters the hospital's own page filled in (the signed-in doctor, their unit): replayed as
+ * recorded it returns a subset forever and patients silently vanish. Only a parameter nothing could be
+ * traced to (`unmapped`) is emptied. A value traced to the worklist or a parent row is the patient's
+ * own identity and is never touched: emptying it would turn this patient's labs into everyone's. */
+export function widenRequest(entry, params) {
+  const src = params || {};
+  const loose = (k, v) => !!v && !!src[k] && src[k].unmapped === true;
+  let u;
+  try { u = new URL(entry.url); } catch { return null; }
+  let changed = false;
+  const q = [];
+  u.searchParams.forEach((v, k) => { q.push([k, loose(k, v) ? '' : v]); if (loose(k, v)) changed = true; });
+  let body = entry.body == null ? null : String(entry.body);
+  if (body && /urlencoded|^$/i.test(String(entry.reqCt || '')) && body.indexOf('=') >= 0) {
+    const parts = body.split('&').map((p) => {
+      const i = p.indexOf('=');
+      const k = i >= 0 ? p.slice(0, i) : p;
+      const v = i >= 0 ? decodeURIComponent(p.slice(i + 1).replace(/\+/g, ' ')) : '';
+      if (loose(k, v)) { changed = true; return k + '='; }
+      return p;
+    });
+    body = parts.join('&');
+  }
+  if (!changed) return null;
+  const search = q.map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v)).join('&');
+  return { url: u.origin + u.pathname + (search ? '?' + search : ''), body };
+}
+
 /* THE LIST, NOT THE PAGE THAT CONTAINS IT. A whole patient page carries every lab name and every
  * radiology line the screen shows, so "carries the screen's values" accepted GHIS's visit page
  * (POST Searchnew) as the labs call and the visits page as radiology (adapter ver_b16da370,
@@ -534,6 +581,30 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   const hit = hits.slice().sort((a, b) => specificity(b, shown.length) - specificity(a, shown.length))[0] || null;
   if (!hit) return done('unproven');
 
+  /* VERIFY THE POPULATION, NOT JUST THE SCREEN. The screen can be a filtered view of the ward, so the
+   * request that matches it can still be a subset. The same call with its untraceable filters emptied
+   * is replayed in the doctor's session; when it answers with MORE rows, the same kind, and still
+   * carries the screen, THAT is the request saved (owner, 2026-09-16). */
+  const LIST_RESOURCES = ['worklist', 'labs', 'radiology', 'medications', 'notes', 'history', 'discharge'];
+  if (LIST_RESOURCES.includes(String(view.resourceHint || ''))) {
+    const wide = widenRequest(hit.e, paramsOf(hit.e, parents));
+    if (wide) {
+      const resp2 = await evalJson(client, PROVE_SOURCES.execRequest({ method: hit.e.method, url: wide.url, body: wide.body, reqCt: hit.e.reqCt, xhr: hit.e.xhr }), null);
+      const kind2 = responseKind(resp2);
+      if (resp2 && kind2 !== 'login' && kind2 !== 'empty') {
+        const rows2 = rowsForChain(resp2.text, resp2.contentType);
+        const o2 = overlapOf(cells, resp2.text, resp2.contentType);
+        trace.tried.push({ method: hit.e.method, path: candidateStructure(hit.e).path.replace(/\d{3,}/g, '#'), role: 'data', kind: kind2, hits: o2.hits, ratio: o2.ratio, widened: true });
+        if (kind2 === hit.kind && rows2.length > hit.rows.length && accepted(o2)) {
+          hit.e = Object.assign({}, hit.e, { url: wide.url, body: wide.body });
+          hit.resp = resp2;
+          hit.rows = rows2;
+          hit.o = o2;
+        }
+      }
+    }
+  }
+
   // LEARN: where every field the proven call sends comes from; the page-fired prerequisites that are
   // patient-bound ride along, in the order the page sent them.
   const endpointOf = (e, role, proof) => {
@@ -558,7 +629,7 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   // LEARN the columns too: which response field the screen shows under each header, by value.
   const columns = learnColumns(view.headers, shown, dataRows);
   if (Object.keys(columns).length) view.columns = columns; else delete view.columns;
-  view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind }, trace.model ? { model: trace.model } : {});
+  view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind, population: dataRows.length }, trace.model ? { model: trace.model } : {});
   return { proven: { label: view.resourceHint, rows: dataRows }, trace };
 }
 

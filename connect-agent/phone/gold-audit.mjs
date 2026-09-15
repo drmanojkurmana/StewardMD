@@ -90,12 +90,16 @@ export function compareRows(spec, goldBody, adapterBody) {
   }
   const filled = spec.fields.filter((f) => fields[f].gold > 0);
   const fieldsSame = filled.every((f) => fields[f].equal === fields[f].gold);
+  /* A SUBSET IS A FAILURE WITH ITS OWN NAME (owner, 2026-09-16). An adapter that returns some of the
+   * ward is more dangerous than one that returns none: the missing patients look like patients who do
+   * not exist. It is never folded into "partial". */
   let verdict;
   if (!gold.length && !mine.length) verdict = 'both-empty';
   else if (!mine.length) verdict = 'missing';
   else if (matched === gold.length && mine.length === gold.length && fieldsSame) verdict = 'same';
+  else if (mine.length < gold.length && matched === mine.length) verdict = 'subset';
   else verdict = 'partial';
-  return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, fields, verdict };
+  return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, missing: Math.max(0, gold.length - matched), fields, verdict };
 }
 
 function callOf(view) {
