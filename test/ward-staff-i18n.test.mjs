@@ -114,7 +114,7 @@ test("English is unchanged: English picked renders exactly what ward.js without 
   assert.equal(en._render(stateFor(en, bad)), plain._render(stateFor(plain, bad)));
 });
 
-test("every key ward.js calls is in the EN catalog with the same English, in one contiguous block at the end of EN", () => {
+test("every key ward.js calls is in the EN catalog with the same English, in one contiguous block of EN", () => {
   const sb = {}; vm.runInNewContext(I18N_SRC, { window: sb });
   const en = sb.WSQI18n._catalogs.en;
   let n = 0;
@@ -128,7 +128,8 @@ test("every key ward.js calls is in the EN catalog with the same English, in one
   assert.ok(start > 0 && end > start, "the block is delimited");
   const inside = I18N_SRC.slice(start, end);
   for (const k of Object.keys(en).filter((x) => x.indexOf("ward.") === 0)) assert.ok(inside.includes(JSON.stringify(k) + ":"), k + " sits inside the block");
-  assert.match(I18N_SRC.slice(end), /^\/\* end ward\.js keys \*\/\n\s*\};/, "the block closes EN");
+  // The site pages block (ui-i18n-site) follows it; both end EN.
+  assert.match(I18N_SRC.slice(end), /^\/\* end ward\.js keys \*\/\n\s*(\/\* site pages keys \(ui-i18n-site\) \*\/|\};)/, "the block closes EN or is followed by the site pages block");
 });
 
 test("no recorded value is a catalog entry: nothing clinical can be looked up and translated", () => {

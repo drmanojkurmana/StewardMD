@@ -92,16 +92,21 @@ const NEGATED_KEYS = ["lang.codedNote", "section.failed", "phase.failed", "statu
   /* Bilingual prints (2026-09-15): every print wording and closed-list patient instruction whose English says
    * not / no / never / avoid ("Do not crush or chew") is found here by its words, so a new negated phrase is
    * checked without anyone remembering to list it. */
-  ...Object.entries(loadEngine()._catalogs.en).filter(([k, v]) => /^(print|rx\.instr)\./.test(k) && /\b(not|no|never|avoid)\b/i.test(v)).map(([k]) => k)];
+  ...Object.entries(loadEngine()._catalogs.en).filter(([k, v]) => /^(print|rx\.instr)\./.test(k) && /\b(not|no|never|avoid)\b/i.test(v)).map(([k]) => k),
+  /* Staff screens (2026-09-15, whole staff UI translated): every non-portal string whose English says not / no /
+   * never / cannot / nothing / none. Machine translations of these were also re-checked for meaning by a second
+   * model pass; this test is the floor that cannot be skipped. The markers include the negative participles
+   * ("without doing") and negative future forms those strings need. */
+  ...Object.entries(loadEngine()._catalogs.en).filter(([k, v]) => !k.startsWith("portal.") && /\b(not|no|never|cannot|can't|don't|doesn't|won't|isn't|nothing|none)\b/i.test(v)).map(([k]) => k)];
 const NEGATION = {
-  es: ["no ", "No ", "nada", "ningun", "ninguna"],
-  te: ["లేదు", "లేరు", "లేవు", "కాదు", "కాలేదు", "చెల్లదు", "లేకపోయ", "అనువదించరు", "వద్దు"],
-  hi: ["नहीं", "मत", " न "],
-  bn: ["না", "নেই", "নয়", "হয়নি", "হয়নি"],
-  kn: ["ಇಲ್ಲ", "ಅಲ್ಲ", "ಿಲ್ಲ", "ವಲ್ಲ", "ಬೇಡ"],
-  ta: ["இல்லை", "அல்ல", "வில்லை", "மில்லை", "ப்படாது", "யாகாது", "வேண்டாம்", "ாதீர்"],
-  ml: ["ഇല്ല", "അല്ല", "ില്ല", "യല്ല", "തല്ല", "രുത്"],
-  mr: ["नाही", "नये", "नका"],
+  es: ["no ", "No ", "nada", "ningun", "ninguna", "nunca", "sin ", "ni "],
+  te: ["లేదు", "లేరు", "లేవు", "కాదు", "కాలేదు", "చెల్లదు", "లేక", "అనువదించరు", "వద్దు", "కూడదు", "రాదు", "ఎప్పుడూ"],
+  hi: ["नहीं", "मत", " न ", "बिना", "कभी"],
+  bn: ["ছাড়া", "কখনও", "না", "নেই", "নয়", "হয়নি", "হয়নি"],
+  kn: ["ಇಲ್ಲ", "ಅಲ್ಲ", "ಿಲ್ಲ", "ವಲ್ಲ", "ಬೇಡ", "ಲಾರ", "ಬಾರದು", "ಎಂದಿಗೂ"],
+  ta: ["இல்லை", "அல்ல", "வில்லை", "மில்லை", "ப்படாது", "யாகாது", "வேண்டாம்", "ாதீர்", "ாது", "ாமல்", "ஒருபோதும்"],
+  ml: ["ഇല്ല", "അല്ല", "ില്ല", "യല്ല", "തല്ല", "രുത്", "ാതെ", "ാത്ത", "ഒരിക്കലും"],
+  mr: ["नाही", "नये", "नका", "शिवाय", "कधीही"],
 };
 
 test("translations keep every negation and every number of the English string", () => {
