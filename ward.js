@@ -7138,6 +7138,12 @@
    * IT NEVER SIGNS. Signing is its own act with its own authority (note-cosign.js), and a composer
    * that signed on the way past would put a name against a note nobody re-read. */
   function noteCard(state) {
+    /* BUG-MU06DWAT-VZ9C: a template list that could not load hid this whole card, so the note looked
+     * missing rather than broken. undefined = not asked yet, false = failed. */
+    if (state.templates === false) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Ward round note</h3></div>" +
+        '<p class="w-hint warn">' + ms("error") + "The note templates could not be loaded, so a note cannot be written here yet. Refresh the chart.</p></div>";
+    }
     var tpls = state.templates || [];
     if (!tpls.length) return "";
     var chosen = null, i;
@@ -7154,8 +7160,8 @@
 
     var r = state.noteResult;
     return '<div class="w-card"><div class="w-card-h">' + ms("edit_note") + "<h3>Ward round note</h3></div>" +
-      '<div class="w-filter"><select id="wNoteTpl">' + opts + "</select>" +
-      '<button class="w-btn ghost" data-w-act="pickTpl">Open</button></div>' +
+      // BUG-MU06DWAT-VZ9C: choosing a note opens its headings; there is no separate Open to click.
+      '<div class="w-filter"><select id="wNoteTpl" aria-label="Note">' + opts + "</select></div>" +
       (chosen
         ? '<div class="w-note">' + fields + "</div>" +
           '<p class="w-hint">' + ms("info") + "A blank section is recorded as not recorded, and the note says so. Nothing here writes text for you.</p>" +
@@ -10047,6 +10053,7 @@
     var t = ev && ev.target;
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "board" && t && t.id === "wBoardDept") { st.boardDept = t.value; paint(); return; }
+    if (t && t.id === "wNoteTpl") { st.noteTemplateId = t.value; st.noteResult = null; paint(); return; }
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     // The print's second language: its catalog file is loaded before the page is drawn with it.
     if (st.view === "pcopy" && t && t.id === "wPcopyLang") { st.pcopyLang = t.value; if (G.WSQPrint) G.WSQPrint.ensureLoaded(t.value, paint); else paint(); return; }
@@ -10448,10 +10455,9 @@
 
   function loadTemplates() {
     return apiGet("/ward/templates?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { if (r && r.ok) st.templates = r.templates || []; paint(); })
-      // Silent: a ward whose note templates would not load can still chart everything else, and an
-      // error banner over the whole chart for a missing composer helps nobody.
-      .catch(function () {});
+      // No banner over the chart (everything else still charts), but the note card itself says it failed.
+      .then(function (r) { st.templates = r && r.ok ? (r.templates || []) : false; paint(); })
+      .catch(function () { st.templates = false; paint(); });
   }
   /* Saves the note. The sections go up exactly as typed - this screen composes nothing, expands no
    * abbreviation and fills nothing in. */

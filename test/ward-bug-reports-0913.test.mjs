@@ -152,6 +152,25 @@ test("BUG-MU09DOEX-I3GT: a critical result offers Open chart, and acknowledging 
   assert.match(SRC, /Acknowledged\. Next: Open chart to write a note, place an order or reassess\./);
 });
 
+// ---- BUG-MU06DWAT-VZ9C: the note opens on choosing it, and a failed template list is visible ------------
+test("BUG-MU06DWAT-VZ9C: choosing a note template opens its headings without a separate Open click", () => {
+  const { W } = loadWard();
+  const TPL = [{ id: "assessment", name: "Clinical assessment & admission", sections: [{ key: "complaints", title: "Chief complaints" }] }];
+  const sel = { class: "ED", patientId: "p1", encounterId: "e1" };
+  const before = W._render({ ...W._st, view: "chart", sel, templates: TPL, noteTemplateId: "" });
+  assert.ok(!/data-w-act="pickTpl"/.test(before), "the extra Open button is still there");
+  assert.match(SRC, /t\.id === "wNoteTpl"\) \{ st\.noteTemplateId = t\.value;/);
+  const after = W._render({ ...W._st, view: "chart", sel, templates: TPL, noteTemplateId: "assessment" });
+  assert.match(after, /Chief complaints/);
+});
+
+test("BUG-MU06DWAT-VZ9C: note templates that failed to load say so instead of the note card vanishing", async () => {
+  const { W } = loadWard({ fetch: () => Promise.resolve({ ok: false, status: 502, json: () => Promise.resolve({ ok: false, error: "record_read_failed" }) }) });
+  W._st.orgId = "org-test";
+  const html = W._render({ ...W._st, view: "chart", sel: { class: "ED", patientId: "p1", encounterId: "e1" }, templates: false });
+  assert.match(html, /note templates could not be loaded/);
+});
+
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
 const LAB_BOARD = {
   specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},
