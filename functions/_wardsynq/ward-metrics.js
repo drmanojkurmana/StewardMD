@@ -94,7 +94,10 @@ function summariseWard(input) {
   return {
     ward: str(i.ward) || null,
     computedAt: new Date(nowMs).toISOString(),
-    patients: admitted.length,
+    // patients: every open stay (theatre and ED included; the group census and a theatre ward's home read it).
+    // admitted: the LT-39 count the hospital-wide ward home compares with the Map and Command center.
+    patients: stays.length,
+    admitted: admitted.length,
     occupiedBeds: beds.size,
     unplaced,
     open: {

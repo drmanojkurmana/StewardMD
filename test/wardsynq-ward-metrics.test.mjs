@@ -129,6 +129,7 @@ test("LT-39: occupancy counts admissions the way the bed board and Command cente
   assert.deepEqual([...ADMITTED], ["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"]);
   const enc = (id, cls, bed) => ({ id, patientId: "p-" + id, class: cls, status: "in-progress", location: { ward: "Medical A", bed } });
   const m = summariseWard({ nowMs: NOW, encounters: [enc("a", "IPD", "1"), enc("b", "ICU", "2"), enc("c", "IPD", ""), enc("d", "ED", "ED-1"), enc("e", "PACU", ""), enc("f", "SURGERY", "OT-1")] });
-  assert.deepEqual([m.patients, m.occupiedBeds, m.unplaced], [3, 2, 1], "one definition of admitted on every screen");
+  assert.deepEqual([m.admitted, m.occupiedBeds, m.unplaced], [3, 2, 1], "one definition of admitted on every screen");
+  assert.equal(m.patients, 6, "patients counts every open stay: the group census and a theatre ward's home read it");
   assert.equal(m.open.staysWithNoMedicationHistory, 6, "open work still covers the ED, theatre and PACU encounters");
 });

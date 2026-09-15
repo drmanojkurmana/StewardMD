@@ -520,7 +520,7 @@
     var oldest = x.oldestUnacknowledgedCritical;
     return head +
       (m.partial ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.some-records-could-not-be-read", "Some records could not be read with your role ({join}). Those counts are left blank.", { join: esc((m.unreadable || []).join(", ")) }, "join", 1) + "</p>" : "") +
-      "<p><b>" + n(x.openItems) + "</b> " + wTH("ward.open-items-patients-beds-occupied-without", "open items &middot; {n} patients &middot; {n2} beds occupied &middot; {n3} without a bed", { n: n(x.patients), n2: n(x.occupiedBeds), n3: n(x.unplaced) }) + "</p>" +
+      "<p><b>" + n(x.openItems) + "</b> " + wTH("ward.open-items-patients-beds-occupied-without", "open items &middot; {n} patients &middot; {n2} beds occupied &middot; {n3} without a bed", { n: n(x.ward || x.admitted == null ? x.patients : x.admitted), n2: n(x.occupiedBeds), n3: n(x.unplaced) }) + "</p>" +
       '<ul class="w-mini">' +
       row(wTH("ward.critical-results-not-acknowledged", "Critical results not acknowledged", null, "", 1), o.criticalResults) +
       row(wTH("ward.of-those-escalated", "of those, escalated"), o.criticalResultsEscalated) +
