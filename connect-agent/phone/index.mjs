@@ -303,6 +303,13 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await collector.detach().catch(() => {});
     throw new Error('nothing was discovered (' + (crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell' ? 'the browser was not on the EMR after sign-in' : (crawlStop || 'no clinical screen found')) + ')');
   }
+  /* SCRUB THE HUMAN-READABLE REASON BEFORE IT LEAVES THE PHONE. verify.mjs writes sentences like
+   * "127 rows through the page"; the server's PHI gate rejects any verified.reason with a 3+ digit run
+   * or an @ (it cannot tell a row count from a patient id), so a ward list of 100+ patients failed the
+   * whole save with "verified reason invalid" (owner, iPhone GHIS, 2026-09-15). The count is not lost:
+   * the server keeps it as the integer `rows`. Digits -> #, any address -> [email]. */
+  const scrubReason = (r) => typeof r === 'string' ? r.replace(/\S+@\S+/g, '[email]').replace(/\d{3,}/g, '#').slice(0, 200) : r;
+  for (const v of observedViews) { if (v && v.verified && typeof v.verified.reason === 'string') v.verified.reason = scrubReason(v.verified.reason); }
   const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 

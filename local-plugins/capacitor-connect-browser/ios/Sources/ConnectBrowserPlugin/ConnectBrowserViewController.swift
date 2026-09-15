@@ -99,6 +99,12 @@ final class ConnectBrowserViewController: UIViewController {
         doneButton.titleLabel?.numberOfLines = 1
         doneButton.titleLabel?.adjustsFontSizeToFitWidth = true
         doneButton.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
+        // Done is the primary action and must never be the control that clips off the edge: the doctor
+        // reported "no Done button to click" because the guide-mode header (Cancel, Back, URL, "Not in
+        // my EMR", Done) overflowed the phone width and pushed Done off-screen (owner, iPhone,
+        // 2026-09-15). Keep its full width; let the title truncate first.
+        doneButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        doneButton.setContentHuggingPriority(.required, for: .horizontal)
 
         titleLabel.text = hostTitle
         titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -231,7 +237,11 @@ final class ConnectBrowserViewController: UIViewController {
         subtitleLabel.text = (isAgent || isGuide) ? "" : "Sign in yourself. StewardMD never sees your password."
         doneButton.isHidden = isAgent
         doneButton.setTitle(isGuide ? "Done" : "Done, I'm signed in", for: .normal)
-        backButton.isHidden = isAgent
+        // Guide mode already carries the instruction in the banner and shows two trailing actions
+        // ("Not in my EMR" + Done); Back and the URL title are dead weight there and were crowding Done
+        // off the edge, so drop both to give the actions room. The URL still shows in login/agent.
+        backButton.isHidden = isAgent || isGuide
+        titleLabel.text = isGuide ? "" : hostTitle
         skipButton.isHidden = !isGuide
         bannerLabel.text = banner ?? "StewardMD is reading \(hostTitle) on your behalf. Tap Stop to end."
         bannerHeightConstraint.constant = (isAgent || isGuide) ? 44 : 0
