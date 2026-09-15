@@ -7254,7 +7254,31 @@
     }
     if (t) { try { t.focus(); } catch (e) {} }
   }
+  /* BUG-MU2PKIS3: A NATIVE SELECT IS NEVER RE-RENDERED WHILE ITS LIST IS OPEN. paint() replaces the
+   * whole screen, and the ward's loads land one after another (duty, alert cover, metrics...), so a
+   * select opened in that window was swapped for a fresh copy and its list shut under the user. A paint
+   * that arrives while a select is open is held and run once the select closes (changed, left, or
+   * another press). ponytail: the hold is capped at 15 s, because a browser that never reports the list
+   * closing must not freeze a clinical screen. */
+  var _openSelect = null, _openSelectAt = 0, _paintHeld = false;
+  function selectIsOpen() {
+    return !!_openSelect && _openSelect.isConnected && Date.now() - _openSelectAt < 15000;
+  }
+  function onSelectPress(e) {
+    var t = e.target;
+    if (t && t.tagName === "SELECT") { _openSelect = t; _openSelectAt = Date.now(); if (!_paintHeld) setTimeout(flushHeldPaint, 15050); return; }
+    if (_openSelect && e.type !== "keydown") selectClosed();
+  }
+  function selectClosed(e) {
+    if (e && e.target !== _openSelect) return;
+    _openSelect = null;
+    // After the change handlers have read the select's value, never before.
+    if (_paintHeld) setTimeout(flushHeldPaint, 0);
+  }
+  function flushHeldPaint() { if (_paintHeld && !selectIsOpen()) paint(); }
   function paint() {
+    if (selectIsOpen()) { _paintHeld = true; return; }
+    _paintHeld = false;
     var canvas = document.getElementById("wCanvas");
     var cy = canvas ? canvas.scrollTop : 0;
     var sy = (typeof window !== "undefined" && window.scrollY != null) ? window.scrollY : 0;
@@ -10024,6 +10048,7 @@
    * answer it depends on is given. "change" (not "input") so typing in a text box never loses focus. */
   function onFormChange(ev) {
     var t = ev && ev.target;
+    if (t && t.tagName === "SELECT" && t.hasAttribute("data-w-act")) { dispatch(t.getAttribute("data-w-act")); return; }
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     // The print's second language: its catalog file is loaded before the page is drawn with it.
@@ -11288,6 +11313,9 @@
 
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-w-act]"); if (!b) return;
+    // A select acts when its value changes (onFormChange), never on the click that opens it: that click
+    // re-rendered the roster and closed the list before anything could be chosen.
+    if (b.tagName === "SELECT") return;
     dispatch(b.getAttribute("data-w-act"));
   }
   /* One dispatcher for a click on a data-w-act button AND for the wardsynq.com shell, which opens
@@ -11965,6 +11993,8 @@
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("change", onFormChange); el.addEventListener("change", onFormChange);
+    ["mousedown", "pointerdown", "keydown"].forEach(function (t) { el.removeEventListener(t, onSelectPress, true); el.addEventListener(t, onSelectPress, true); });
+    ["change", "focusout"].forEach(function (t) { el.removeEventListener(t, selectClosed, true); el.addEventListener(t, selectClosed, true); });
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     document.removeEventListener("keydown", onKey); document.addEventListener("keydown", onKey);
