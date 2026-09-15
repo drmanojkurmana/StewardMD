@@ -577,7 +577,14 @@
       '<p class="quiet">The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "");
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + approvalRulesHtml(c.esc, o.wardsynq) + labCheckHtml(c.esc, o.wardsynq) : "") +
+      /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
+      (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
+        ? '<div class="card"><h2>Remove this hospital</h2><p class="quiet">Removes it from every hospital list. Patient records, documents and the audit trail are kept.</p>' +
+          '<div class="row"><button class="btn danger" id="admHospRemove" type="button">' + c.ms("delete") + "Remove hospital</button></div></div>"
+        : "");
+    var rmBtn = document.getElementById("admHospRemove");
+    if (rmBtn) rmBtn.onclick = function () { c.removeHospital(o.id ? o : { id: c.state.orgId, name: o.name }, function () { c.go("hospitals"); }); };
     document.getElementById("admHospSave").onclick = function () {
       var btn = document.getElementById("admHospSave");
       var name = (document.getElementById("admHospName").value || "").trim();

@@ -363,8 +363,11 @@
     document.getElementById("lo2").onclick=function(){logout();};
   }
   function delClinic(id,name){
-    if(!confirm('Delete "'+name+'"? Its queue and rooms will be removed. This cannot be undone.')) return;
-    api("org/delete",{method:"POST",body:{orgId:id}}).then(function(r){
+    if(!confirm('Remove "'+name+'"? It leaves your clinic list. Patient records and the audit trail are kept.')) return;
+    /* The server removes a clinic only for its owner and only with the word DELETE (BUG-MU2PHANW). */
+    var typed=prompt('Type DELETE to remove "'+name+'"');
+    if(typed!=="DELETE"){ if(typed!==null) toast("Nothing was removed. Type DELETE exactly."); return; }
+    api("org/delete",{method:"POST",body:{orgId:id,confirm:typed}}).then(function(r){
       if(!r||!r.ok){ toast(r&&r.error?friendly(r.error):"Could not delete the clinic"); return; }
       toast("Clinic deleted"); openClinics();
     }).catch(function(){ toast("Could not reach the server"); });

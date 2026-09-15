@@ -118,6 +118,55 @@
     lsSet(LS.hosp, orgId); lsSet(LS.wp, orgId ? "wardsynq:" + orgId : "");
     if (!quiet) go("landing");
   }
+  /* BUG-MU2PHANW: REMOVING A HOSPITAL, the owner's act, in two deliberate steps. First what happens
+   * (it leaves the lists; the clinical record, documents and audit trail are kept, as the law requires),
+   * then the word DELETE typed exactly. The server checks the owner and the word again; nothing here
+   * says removed until the server has written it. Offered from #/hospitals and Admin > Hospital. */
+  function removeHospital(org, done) {
+    var d = document.createElement("dialog");
+    d.className = "wsq-dialog"; d.setAttribute("aria-labelledby", "rmHospTitle");
+    var name = esc(org.name || org.id);
+    function close() { try { d.close(); } catch (e) {} if (d.parentNode) d.parentNode.removeChild(d); }
+    function stepOne() {
+      d.innerHTML = '<h2 id="rmHospTitle">Remove ' + name + "?</h2>" +
+        "<p>" + name + " will disappear from the hospital list for everyone, and nobody will be able to choose it.</p>" +
+        "<p><b>No clinical record is deleted.</b> Patient records, documents and the audit trail are kept, because medical records must be retained by law. The removal itself is written to the audit trail.</p>" +
+        '<div class="acts"><button class="btn" type="button" data-rm="cancel" autofocus>Cancel</button><button class="btn danger" type="button" data-rm="next">Continue</button></div>';
+      d.querySelector('[data-rm="cancel"]').onclick = close;
+      d.querySelector('[data-rm="next"]').onclick = stepTwo;
+    }
+    function stepTwo() {
+      d.innerHTML = '<h2 id="rmHospTitle">Type DELETE to remove ' + name + "</h2>" +
+        '<label class="f"><span>Type DELETE in capitals</span><input id="rmHospWord" autocomplete="off" autocapitalize="off" spellcheck="false"></label>' +
+        '<div id="rmHospMsg"></div>' +
+        '<div class="acts"><button class="btn" type="button" data-rm="cancel">Cancel</button><button class="btn danger" type="button" data-rm="go" disabled>Remove hospital</button></div>';
+      var word = d.querySelector("#rmHospWord"), go_ = d.querySelector('[data-rm="go"]');
+      d.querySelector('[data-rm="cancel"]').onclick = close;
+      word.oninput = function () { go_.disabled = word.value !== "DELETE"; };
+      word.focus();
+      go_.onclick = function () {
+        if (word.value !== "DELETE") return;
+        go_.disabled = true; word.disabled = true;
+        api("/org/delete", { orgId: org.id, confirm: word.value }).then(function (r) {
+          if (r && r.ok) {
+            close(); toast("Hospital removed. Its records are kept.");
+            if (st.orgId === org.id) { st.org = null; selectOrg("", true); }
+            if (done) done();
+            return;
+          }
+          word.disabled = false; go_.disabled = word.value !== "DELETE";
+          var why = r && r.error === "owner_only" ? "Only the hospital's owner can remove it." :
+            r && r.error === "confirm_required" ? "Type DELETE exactly, in capitals." :
+            r && r.error === "network" ? "Could not reach the server. Nothing was removed." : "The hospital was not removed (" + ((r && r.error) || "failed") + ").";
+          d.querySelector("#rmHospMsg").innerHTML = '<div class="msg err">' + esc(why) + "</div>";
+        });
+      };
+    }
+    d.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
+    document.body.appendChild(d);
+    stepOne();
+    d.showModal();
+  }
   function signOut() {
     /* G2: bedside entries kept on this device while offline leave with the person who charted them. Signing
      * out with some still unsent deletes them from this device, so it is said first and can be refused. */
@@ -278,7 +327,7 @@
       app.innerHTML = bar() + '<div class="wrap' + (railHtml ? "" : " norail") + '">' + railHtml + '<main class="work" id="page"></main></div>';
     }
     var el = $("page");
-    var ctx = { el: el, api: api, download: download, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when,
+    var ctx = { el: el, api: api, download: download, esc: esc, ms: ms, go: go, can: can, toast: toast, state: st, isWardsynq: isWardsynq, selectOrg: selectOrg, setSession: setSession, when: when, removeHospital: removeHospital,
       navTr: navTr, navLang: G.WSQI18n ? G.WSQI18n.normalize(st.navLang) : "en" };
     try { var out = def.render(ctx, extra); if (out && typeof out.then === "function") out.catch(function (e) { el.innerHTML += '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }); }
     catch (e) { el.innerHTML = '<div class="msg err">' + esc(String(e && e.message || e)) + "</div>"; }
@@ -425,8 +474,10 @@
       if (!orgs.length && st.who && (st.who.orgId || st.who.hospitalId)) orgs = [{ id: st.who.orgId || st.who.hospitalId, name: st.who.orgCode || st.who.orgId || st.who.hospitalId, code: st.who.orgCode, memberRole: st.who.role }];
       st.orgs = orgs;
       var html = orgs.length ? '<div class="hosp-list">' + orgs.map(function (o) {
-        return '<button type="button" class="hosp-row" data-org="' + esc(o.id) + '">' + ms(o.mode === "wardsynq" ? "local_hospital" : "medical_services") +
-          "<div><b>" + esc(o.name || o.id) + "</b><span>" + esc(o.code || o.id) + (o.memberRole ? " · " + esc(o.memberRole) : "") + (o.mode === "wardsynq" ? " · WardSynQ record" : o.mode ? " · " + esc(o.mode) + " mode (OPD only)" : "") + "</span></div></button>";
+        var canRemove = o.memberRole === "owner" || !!(st.who && st.who.platformOwner);
+        return '<div class="hosp-item"><button type="button" class="hosp-row" data-org="' + esc(o.id) + '">' + ms(o.mode === "wardsynq" ? "local_hospital" : "medical_services") +
+          "<div><b>" + esc(o.name || o.id) + "</b><span>" + esc(o.code || o.id) + (o.memberRole ? " · " + esc(o.memberRole) : "") + (o.mode === "wardsynq" ? " · WardSynQ record" : o.mode ? " · " + esc(o.mode) + " mode (OPD only)" : "") + "</span></div></button>" +
+          (canRemove ? '<button type="button" class="btn quiet hosp-rm" data-rmorg="' + esc(o.id) + '" aria-label="Remove ' + esc(o.name || o.id) + '">' + ms("delete") + "Remove</button>" : "") + "</div>";
       }).join("") + "</div>" : '<div class="msg note">No hospital is linked to this sign-in yet.' + (st.who && st.who.kind === "firebase" ? " Create one below, or ask a hospital admin to add you as a member." : " Ask your hospital admin to add you as a member.") + "</div>";
       if (st.who && st.who.kind === "firebase") html +=
         '<div class="card" style="margin-top:18px"><h2>Create a WardSynQ hospital</h2><p class="quiet">Creates the hospital, its clinical record and makes you its owner. Wards, beds, departments and staff are set up next in the Admin Center.</p>' +
@@ -436,6 +487,12 @@
         '<p class="quiet">The country decides what counts as a valid phone number and which unit a temperature is charted in. It can be changed later in the Admin Center.</p><div id="mkMsg"></div></div>';
       $("hospList").innerHTML = html;
       el.querySelectorAll("[data-org]").forEach(function (b) { b.onclick = function () { selectOrg(b.getAttribute("data-org")); }; });
+      el.querySelectorAll("[data-rmorg]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-rmorg"), o = orgs.filter(function (x) { return x.id === id; })[0];
+          if (o) removeHospital(o, function () { render("hospitals"); });
+        };
+      });
       var mk = $("mkHosp"); if (mk) mk.onclick = function () {
         var name = ($("newHosp").value || "").trim(); if (!name) { $("mkMsg").innerHTML = '<div class="msg err">Give the hospital a name.</div>'; return; }
         mk.disabled = true; $("mkMsg").innerHTML = '<div class="msg note">Creating the hospital and its record.</div>';

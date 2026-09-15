@@ -6431,3 +6431,15 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - Translations of the new keys are not written here (another builder fills them, `reviewed:false`).
 - Tests: `test/wardsynq-print-lang.test.mjs`, `test/wardsynq-print-lang-routes.test.mjs`, `test/run-print-lang-ui.mjs`
   (headless Chrome print preview and PDF), `test/wardsynq-i18n.test.mjs` (negation).
+
+## 2026-09-15 Removing a hospital is the owner's act: soft delete, typed DELETE, audited in the same commit (BUG-MU2PHANW-T18X)
+- `POST /api/queue/org/delete` was open to any staff admin with no confirmation. It now needs the hospital's owner
+  (`ownerUid`) or the platform owner, and `confirm: "DELETE"` in the body (422 `confirm_required` otherwise).
+  Non-owner admin 403 `owner_only`; another hospital 403/404.
+- Still the existing soft delete (`deleted: true`, now with `deletedBy`): the hospital leaves every list; its clinical
+  record, documents and audit trail are kept (medical records retention). The flag and its hash-chained
+  `org:delete` row go in one commit via `appendOrgAudit`, no longer a best-effort row after the write.
+- Screens: #/hospitals (owner rows) and Admin > Hospital, one shared two-step dialog in shell.js (explain, then
+  type DELETE). `whoami` carries `orgOwner` / `platformOwner` as UI hints only. The OPD console (opd.html) asks
+  for the typed word too; an older native app build that sends no `confirm` is refused and removes nothing.
+- Tests: `test/queue-orgs-onboard.test.mjs` (REMOVE HOSPITAL), `test/run-wardsynq-hospitals-page.mjs`.

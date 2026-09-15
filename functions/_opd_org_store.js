@@ -109,9 +109,14 @@ export async function listOrgsForMember(env, identities) {
   }
   return out;
 }
+/* SOFT DELETE ONLY. The hospital leaves every list; its clinical record, documents and audit trail are
+ * untouched (medical records must be retained). BUG-MU2PHANW: the flag and its hash-chained audit row
+ * are ONE commit, so a removed hospital without its audit row cannot exist (it was a best-effort row
+ * written after the fact). */
 export async function deleteOrg(env, orgId, actorId) {
-  await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
-  await audit(env, orgId, actorId, "org:delete", "");
+  const ts = now();
+  await appendOrgAudit(env, { ts, hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: "org:delete", meta: "soft delete; records retained" },
+    [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: ts, deletedBy: String(actorId || "") })]);
   return { ok: true };
 }
 /* auditEvent: { action, meta } to write the audit row IN THE SAME COMMIT as the change, for a change that must

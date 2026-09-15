@@ -161,6 +161,23 @@ tr.warn td { color: var(--sig-major); font-weight: 600; }
 .hosp-row b { display: block; font-size: var(--t-body); font-weight: 600; overflow-wrap: anywhere; }
 .hosp-row div > span { display: block; margin-top: 2px; font-size: var(--t-micro); color: var(--ink-3); overflow-wrap: anywhere; }
 .hosp-page .row .btn { min-height: 44px; }
+.hosp-item { display: flex; align-items: center; gap: var(--sp-3); border-bottom: 1px solid var(--hair); }
+.hosp-item > .hosp-row { flex: 1 1 auto; min-width: 0; border-bottom: 0; }
+.hosp-item > .hosp-rm { flex: none; min-height: 44px; }
+.hosp-item > .hosp-rm:hover { color: var(--sig-stop); }
+@media (max-width: 600px) { .hosp-item > .hosp-rm { font-size: 0; gap: 0; padding: 0 12px; } .hosp-item > .hosp-rm .ms { font-size: 20px; } }
+
+/* ---- the two-step removal dialog (BUG-MU2PHANW) ---- */
+.wsq-dialog { width: min(480px, calc(100vw - 32px)); padding: var(--sp-5); border: 1px solid var(--hair); border-radius: var(--r); background: var(--surface); color: var(--ink); }
+.wsq-dialog::backdrop { background: rgba(0, 0, 0, .55); }
+.wsq-dialog h2 { font-size: var(--t-lead); font-weight: 600; margin-bottom: var(--sp-3); overflow-wrap: anywhere; }
+.wsq-dialog p { font-size: var(--t-small); color: var(--ink-2); line-height: 1.5; margin-bottom: var(--sp-3); }
+.wsq-dialog p b { color: var(--ink); }
+.wsq-dialog .f { margin-bottom: var(--sp-3); }
+.wsq-dialog .acts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-4); }
+.wsq-dialog .acts .btn { min-height: 44px; }
+.wsq-dialog .btn.danger { font-weight: 600; }
+.wsq-dialog .btn[disabled] { opacity: .5; cursor: not-allowed; }
 @media (max-width: 600px) { .hosp-page .row { align-items: stretch; } .hosp-page .row .btn { width: 100%; justify-content: center; } }
 
 /* ---- toast ---- */
