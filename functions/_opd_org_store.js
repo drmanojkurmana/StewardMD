@@ -39,6 +39,10 @@ export async function createOrg(env, body, ownerUid) {
 }
 export async function getOrg(env, orgId) {
   let id = sanitize(orgId);
+  /* No hospital named is no hospital found. Reading "q_orgs/" answered with a document that has no id, and
+   * M.org threw "opd_org: id required": a request that forgot ?orgId= became a 500 instead of a refusal
+   * (LT-16, GET /ward/pathway-progress). */
+  if (!id) return null;
   let d = await fsGet(env, "q_orgs/" + id);
   /* Document ids are lower-case hex, and clients have upper-cased them: the pglog setup screen
    * applied .toUpperCase() to every handle a user typed, which is correct for an SMD-XXXXXX code

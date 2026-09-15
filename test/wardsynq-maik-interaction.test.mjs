@@ -479,7 +479,8 @@ test("13. a model that cannot answer refuses plainly and records nothing", async
   seed(undefined, s);
   await patient("pat-1", "GH-1", "Anjali Menon");
   const r = await ask(DOCTOR, { patientId: "pat-1", task: TASK.SUMMARISE });
-  assert.equal(r.__status, 502, JSON.stringify(r));
+  // 503, never 502: Cloudflare swaps a Function's 502 for an HTML page and the reason is lost (LT-40).
+  assert.equal(r.__status, 503, JSON.stringify(r));
   assert.equal(r.error, "model_unavailable");
   assert.match(r.detail, /Nothing was written/);
   assert.equal((await interactions(DOCTOR, "pat-1")).interactions.length, 0);

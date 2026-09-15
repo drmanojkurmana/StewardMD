@@ -149,6 +149,13 @@ test("pharmacy report: real dispense volume and pending-verification count, reus
   envelopeOk(r);
   assert.equal(r.dispenseCount, 1);
   assert.equal(r.dispenseVolume.Amoxicillin, 30);
+  // LT-38: the shape pharmacy-dispense.js actually writes is {value, unit}; it used to sum as 0.
+  await RECORD.append(TENANT_ROW.id, [
+    { resourceType: "MedicationDispense", id: "disp-2", version: 1, patientId: "p1", orderId: "order-1", drug: "Amoxicillin", quantity: { value: 28, unit: "tablet" }, state: "issued", dispensedAt: "2026-09-02T00:00:00.000Z" },
+    { resourceType: "MedicationDispense", id: "disp-3", version: 1, patientId: "p1", orderId: "order-1", drug: "Amoxicillin", quantity: { value: 12, unit: "tablet" }, state: "issued", dispensedAt: "2026-09-03T00:00:00.000Z" },
+  ]);
+  const r2 = await as(ADMIN, `/ward/report-pharmacy?orgId=${ORG}`);
+  assert.equal(r2.dispenseVolume["Amoxicillin (tablet)"], 40, JSON.stringify(r2.dispenseVolume));
   assert.equal(r.pendingVerification, 1, "the active order with no MedicationVerification row is pending");
   assert.ok(Array.isArray(r.stock), "stockLevels() is reused unchanged: " + JSON.stringify(r.stock));
 });

@@ -3589,10 +3589,13 @@ export async function onRequest(context) {
         try {
           const readers = staffReaders(env, wOrg);
           const want = String(url.searchParams.get("ward") || "").trim();
-          const [members, duty, st, wards] = await Promise.all([readers.members(), readers.onDuty(""), readers.dutyStatuses(), want ? [want] : ROSTER.wardChoices(env, wOrg)]);
+          /* LT-04: how many shifts the rota defines, so a ward nobody covers can tell an admin WHAT to set up
+           * (define shifts, or assign staff to them). null = could not be read; never read as none. */
+          const [members, duty, st, wards, shiftList] = await Promise.all([readers.members(), readers.onDuty(""), readers.dutyStatuses(), want ? [want] : ROSTER.wardChoices(env, wOrg), ROSTER.listShifts(env, wOrgId).catch(() => null)]);
           const nowMs = Date.now();
           const policy = (wsqCfg && wsqCfg.criticalEscalation) || null;
-          return json({ ok: true, wards: wards.map((w) => wardAlertCover({ policy, members, duty: duty.onDuty, statuses: st.statuses, unit: w, nowMs })), partial: !!(duty.partial || st.partial) }, 200, request);
+          const shiftsDefined = shiftList && shiftList.ok ? shiftList.shifts.filter((s) => s.active !== false).length : null;
+          return json({ ok: true, wards: wards.map((w) => wardAlertCover({ policy, members, duty: duty.onDuty, statuses: st.statuses, unit: w, nowMs })), partial: !!(duty.partial || st.partial), shiftsDefined }, 200, request);
         } catch (e) {
           return json({ ok: false, error: "duty_read_failed", message: "Who is on duty could not be read. Do not read this as nobody on duty." }, 502, request);
         }
@@ -3969,6 +3972,10 @@ export async function onRequest(context) {
       if (sub === "duty-status" && (method === "GET" || method === "POST")) {
         const m = az.owner ? null : (await ORG.getMembership(env, orgId, actor.id)) || (actor.email ? await ORG.getMembership(env, orgId, actor.email) : null);
         if (!m || !m.identity || !wardTeamGroupOf(m.role)) {
+          /* LT-04: READING is not refused. The ward home asks every signed-in member (an admin included) for
+           * their own duty status; a 403 there was a console error on every ward open. The answer says this
+           * role has no duty status to show. Marking duty (POST) stays the ward team's alone. */
+          if (method === "GET") return json({ ok: true, notWardTeam: true, role: (m && m.role) || az.role || null, status: null }, 200, request);
           return json({ ok: false, error: "not_ward_team", message: `Only nurses, residents and consultants (${Object.values(WARD_TEAM_ROLES).flat().join(", ")}) mark themselves on or off duty. Your role here is "${(m && m.role) || az.role || "none"}".` }, 403, request);
         }
         // A body naming anybody is asking to set another person's status: refused, never quietly applied to the caller.

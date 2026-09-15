@@ -150,6 +150,13 @@ test("enrol, progress from real records, override with a mandatory reason; nurse
   assert.equal(en.__status, 200, JSON.stringify(en));
   assert.equal((await as(DOCTOR, "/ward/pathway-enrol", "POST", enrolBody)).error, "already_enrolled");
 
+  /* LT-16: the ward screen asked without ?orgId=, and reading "q_orgs/" (Firestore answers the collection path with
+   * a document that has no id) threw "opd_org: id required" as a 500. No hospital named is now a refusal. */
+  docs.set("q_orgs/", { fields: {}, updateTime: "t1" });
+  const noOrg = await as(NURSE, "/ward/pathway-progress?patientId=" + adm.patientId);
+  assert.ok(noOrg.__status === 403 || noOrg.__status === 404, JSON.stringify(noOrg));
+  docs.delete("q_orgs/");
+
   let prog = await as(NURSE, "/ward/pathway-progress?orgId=" + ORG + "&patientId=" + adm.patientId);
   assert.equal(prog.__status, 200, JSON.stringify(prog));
   assert.deepEqual(prog.enrolments[0].steps.map((s) => s.status), ["pending", "pending"]);
