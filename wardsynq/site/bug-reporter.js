@@ -22,6 +22,10 @@
   window.__WSQ_BUG_REPORTER_INITIALIZED__ = true;
 
   var G = window;
+  /* The staff language (owner decision 2026-09-15): on wardsynq.com the shell's picker (G.WSQ.t, keys "site.bug.*"
+   * in the site pages block of wardsynq/site/i18n.js); on a page without the shell (opd.html, the portal) the English.
+   * What goes to the server and the developer's Markdown copy stay English. */
+  function T(c, key, en, vars) { return c && c.t ? c.t(key, vars, en) : String(en).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? String(vars[k]) : m; }); }
   var consoleBuffer = [];
   var MAX_BUFFER = 25;
 
@@ -223,7 +227,7 @@
     var banner = document.createElement("div");
     banner.id = "wsqBugBanner";
     banner.style.cssText = "position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:2147483646;background:#d32f2f;color:#fff;padding:10px 22px;border-radius:24px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,0.35);display:flex;align-items:center;gap:12px;cursor:default;";
-    banner.innerHTML = '<span>Click on the exact button, card, or element where the bug is</span><button id="wsqBugCancelPick" style="background:#fff;color:#d32f2f;border:none;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700;cursor:pointer;">Esc to Cancel</button>';
+    banner.innerHTML = "<span>" + esc(T(G.WSQ, "site.bug.pickPrompt", "Click on the exact button, card, or element where the bug is")) + '</span><button id="wsqBugCancelPick" style="background:#fff;color:#d32f2f;border:none;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700;cursor:pointer;">' + esc(T(G.WSQ, "site.bug.escToCancel", "Esc to Cancel")) + "</button>";
     document.body.appendChild(banner);
 
     function move(e) {
@@ -308,9 +312,9 @@
 
     fab = document.createElement("button");
     fab.id = "wsqBugFab";
-    fab.title = "Report a bug on this page or element";
+    fab.title = T(G.WSQ, "site.bug.fabTitle", "Report a bug on this page or element");
     fab.style.cssText = "position:fixed;bottom:18px;right:18px;z-index:2147483647;background:#d32f2f;color:#fff;border:2px solid #ffffff;border-radius:24px;padding:9px 15px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,0.35);cursor:pointer;display:flex;align-items:center;gap:6px;outline:none;user-select:none;transition:transform 0.15s ease,background 0.15s ease;";
-    fab.innerHTML = '<span>Report Bug</span><span id="wsqBugBadge" style="display:none;background:#ffea00;color:#000;border-radius:10px;padding:1px 6px;font-size:11px;font-weight:800;margin-left:2px;">0</span>';
+    fab.innerHTML = "<span>" + esc(T(G.WSQ, "site.bug.fab", "Report Bug")) + '</span><span id="wsqBugBadge" style="display:none;background:#ffea00;color:#000;border-radius:10px;padding:1px 6px;font-size:11px;font-weight:800;margin-left:2px;">0</span>';
 
     fab.onmouseenter = function () { fab.style.transform = "scale(1.05)"; fab.style.background = "#b71c1c"; };
     fab.onmouseleave = function () { fab.style.transform = "scale(1)"; fab.style.background = "#d32f2f"; };
@@ -329,9 +333,9 @@
     if (prepicked) pickedElement = prepicked;
 
     var ctx = getContext();
-    var locationSummary = (ctx.surface === "ward" ? "Ward (" + (ctx.wardView || "main") + ")" : "Shell (" + (ctx.page || "door") + ")") +
-      (ctx.tab ? " › Tab: " + ctx.tab : "") +
-      (ctx.patient ? " › Patient: " + (ctx.patient.id || "") + (ctx.patient.bed ? " (bed " + ctx.patient.bed + ")" : "") : "");
+    var locationSummary = (ctx.surface === "ward" ? T(G.WSQ, "site.bug.locWard", "Ward ({view})", { view: ctx.wardView || "main" }) : T(G.WSQ, "site.bug.locShell", "Shell ({page})", { page: ctx.page || "door" })) +
+      (ctx.tab ? " › " + T(G.WSQ, "site.bug.locTab", "Tab: {tab}", { tab: ctx.tab }) : "") +
+      (ctx.patient ? " › " + (ctx.patient.bed ? T(G.WSQ, "site.bug.locPatientBed", "Patient: {id} (bed {bed})", { id: ctx.patient.id || "", bed: ctx.patient.bed }) : T(G.WSQ, "site.bug.locPatient", "Patient: {id}", { id: ctx.patient.id || "" })) : "");
 
     modal = document.createElement("div");
     modal.id = "wsqBugModal";
@@ -339,47 +343,47 @@
 
     var targetSnippet = pickedElement
       ? '<div style="background:#ffebee;border:1px solid #ffcdd2;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:13px;color:#b71c1c;">' +
-        '<b>Target element:</b> <code>' + esc(pickedElement.selector) + '</code>' +
+        "<b>" + esc(T(G.WSQ, "site.bug.targetElement", "Target element:")) + "</b> <code>" + esc(pickedElement.selector) + '</code>' +
         (pickedElement.snippet ? ' - <i>"' + esc(pickedElement.snippet) + '"</i>' : '') +
-        (pickedElement.parentContext ? ' in <b>' + esc(pickedElement.parentContext) + '</b>' : '') +
-        ' <button id="wsqClearTarget" style="float:right;background:none;border:none;color:#b71c1c;text-decoration:underline;cursor:pointer;font-size:12px;">Clear</button></div>'
-      : '<div style="margin-bottom:12px;"><button id="wsqPickElBtn" type="button" style="background:#f5f5f5;border:1px dashed #d32f2f;color:#d32f2f;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;">Point to Exact Element on Screen</button></div>';
+        (pickedElement.parentContext ? " " + esc(T(G.WSQ, "site.bug.in", "in")) + " <b>" + esc(pickedElement.parentContext) + '</b>' : '') +
+        ' <button id="wsqClearTarget" style="float:right;background:none;border:none;color:#b71c1c;text-decoration:underline;cursor:pointer;font-size:12px;">' + esc(T(G.WSQ, "site.bug.clear", "Clear")) + "</button></div>"
+      : '<div style="margin-bottom:12px;"><button id="wsqPickElBtn" type="button" style="background:#f5f5f5;border:1px dashed #d32f2f;color:#d32f2f;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;">' + esc(T(G.WSQ, "site.bug.pointToElement", "Point to Exact Element on Screen")) + "</button></div>";
 
     var errorNotice = consoleBuffer.length > 0
-      ? '<div style="background:#fff3e0;border:1px solid #ffe0b2;padding:6px 10px;border-radius:6px;margin-bottom:12px;font-size:12px;color:#e65100;"><b>' + consoleBuffer.length + ' runtime error(s)</b> captured from console will be attached automatically.</div>'
+      ? '<div style="background:#fff3e0;border:1px solid #ffe0b2;padding:6px 10px;border-radius:6px;margin-bottom:12px;font-size:12px;color:#e65100;">' + esc(T(G.WSQ, "site.bug.runtimeErrors", "{n} runtime error(s) captured from console will be attached automatically.", { n: consoleBuffer.length })) + "</div>"
       : '';
 
     modal.innerHTML =
       '<div style="background:#fff;border-radius:12px;width:100%;max-width:540px;box-shadow:0 12px 36px rgba(0,0,0,0.3);overflow:hidden;animation:wsqPop 0.2s ease;">' +
         '<div style="background:#d32f2f;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">' +
-          '<div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;"><span>Report a Bug on This Spot</span></div>' +
-          '<button id="wsqBugClose" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>' +
+          '<div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;"><span>' + esc(T(G.WSQ, "site.bug.modalTitle", "Report a Bug on This Spot")) + "</span></div>" +
+          '<button id="wsqBugClose" aria-label="' + esc(T(G.WSQ, "site.bug.close", "Close")) + '" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>' +
         '</div>' +
         '<div style="padding:16px 20px;max-height:80vh;overflow-y:auto;box-sizing:border-box;">' +
-          '<div style="font-size:12px;color:#666;margin-bottom:8px;"><b>Location:</b> ' + esc(locationSummary) + '</div>' +
+          '<div style="font-size:12px;color:#666;margin-bottom:8px;"><b>' + esc(T(G.WSQ, "site.bug.location", "Location:")) + "</b> " + esc(locationSummary) + '</div>' +
           targetSnippet +
           errorNotice +
           '<div style="margin-bottom:12px;">' +
-            '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:#333;">What went wrong? (What happened vs what you expected)</label>' +
-            '<textarea id="wsqBugDesc" rows="4" style="width:100%;box-sizing:border-box;border:1.5px solid #ccc;border-radius:6px;padding:10px;font-size:14px;font-family:inherit;" placeholder="Describe the issue at this spot..."></textarea>' +
+            '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:#333;">' + esc(T(G.WSQ, "site.bug.whatWentWrong", "What went wrong? (What happened vs what you expected)")) + "</label>" +
+            '<textarea id="wsqBugDesc" rows="4" style="width:100%;box-sizing:border-box;border:1.5px solid #ccc;border-radius:6px;padding:10px;font-size:14px;font-family:inherit;" placeholder="' + esc(T(G.WSQ, "site.bug.describePlaceholder", "Describe the issue at this spot...")) + '"></textarea>' +
           '</div>' +
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">' +
             '<div>' +
-              '<label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:#333;">Severity</label>' +
+              '<label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:#333;">' + esc(T(G.WSQ, "site.bug.severity", "Severity")) + "</label>" +
               '<select id="wsqBugSev" style="width:100%;border:1.5px solid #ccc;border-radius:6px;padding:6px;font-size:13px;">' +
-                '<option value="minor">Minor / UI defect</option>' +
-                '<option value="major" selected>Major / Feature broken</option>' +
-                '<option value="blocker">Blocker / Crash</option>' +
+                '<option value="minor">' + esc(T(G.WSQ, "site.bug.sevMinor", "Minor / UI defect")) + "</option>" +
+                '<option value="major" selected>' + esc(T(G.WSQ, "site.bug.sevMajor", "Major / Feature broken")) + "</option>" +
+                '<option value="blocker">' + esc(T(G.WSQ, "site.bug.sevBlocker", "Blocker / Crash")) + "</option>" +
               '</select>' +
             '</div>' +
             '<div style="display:flex;align-items:flex-end;">' +
-              '<button id="wsqViewLogsBtn" type="button" style="background:none;border:none;color:#1976d2;text-decoration:underline;cursor:pointer;font-size:13px;padding:6px 0;">View Past Bugs' + (unsentBugs().length ? " (" + unsentBugs().length + " waiting to send)" : "") + '</button>' +
+              '<button id="wsqViewLogsBtn" type="button" style="background:none;border:none;color:#1976d2;text-decoration:underline;cursor:pointer;font-size:13px;padding:6px 0;">' + esc(unsentBugs().length ? T(G.WSQ, "site.bug.viewPastWaiting", "View Past Bugs ({n} waiting to send)", { n: unsentBugs().length }) : T(G.WSQ, "site.bug.viewPast", "View Past Bugs")) + "</button>" +
             '</div>' +
           '</div>' +
           '<div id="wsqBugStatus" style="font-size:13px;margin-bottom:12px;display:none;"></div>' +
           '<div style="display:flex;justify-content:flex-end;gap:10px;">' +
-            '<button id="wsqBugCancel" type="button" style="background:#f5f5f5;border:1px solid #ccc;padding:9px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;">Cancel</button>' +
-            '<button id="wsqBugSubmit" type="button" style="background:#d32f2f;color:#fff;border:none;padding:9px 20px;border-radius:6px;font-weight:700;cursor:pointer;font-size:13px;box-shadow:0 2px 8px rgba(211,47,47,0.4);">Submit Bug Report</button>' +
+            '<button id="wsqBugCancel" type="button" style="background:#f5f5f5;border:1px solid #ccc;padding:9px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;">' + esc(T(G.WSQ, "site.bug.cancel", "Cancel")) + "</button>" +
+            '<button id="wsqBugSubmit" type="button" style="background:#d32f2f;color:#fff;border:none;padding:9px 20px;border-radius:6px;font-weight:700;cursor:pointer;font-size:13px;box-shadow:0 2px 8px rgba(211,47,47,0.4);">' + esc(T(G.WSQ, "site.bug.submit", "Submit Bug Report")) + "</button>" +
           '</div>' +
         '</div>' +
       '</div>';
@@ -415,7 +419,7 @@
     modal.querySelector("#wsqBugSubmit").onclick = function () {
       var desc = (modal.querySelector("#wsqBugDesc").value || "").trim();
       if (!desc) {
-        alert("Please provide a short description of the bug.");
+        alert(T(G.WSQ, "site.bug.needDescription", "Please provide a short description of the bug."));
         modal.querySelector("#wsqBugDesc").focus();
         return;
       }
@@ -470,10 +474,10 @@
     var timedOut = new Promise(function (res) { timer = setTimeout(function () { res({ ok: false, pending: true }); }, SEND_WAIT_MS); });
     return Promise.race([sendOne(report), timedOut]).then(function (r) {
       clearTimeout(timer);
-      if (r.ok) return { sent: true, saved: saved, message: "Bug report sent to the hospital's server (reference " + String(r.serverId).slice(0, 12) + ")." };
-      if (!saved) return { sent: false, saved: false, message: "Bug report NOT sent (" + (r.reason || "no answer yet") + ") and this device could not keep it. Copy the details before closing." };
-      if (r.pending) return { sent: false, saved: true, message: "Bug report saved on this device. The server has not answered yet; it will keep trying. View Past Bugs shows when it arrives." };
-      return { sent: false, saved: true, message: "Bug report saved on this device and NOT sent yet (" + r.reason + "). It will be sent automatically when you are online and signed in." };
+      if (r.ok) return { sent: true, saved: saved, message: T(G.WSQ, "site.bug.msgSent", "Bug report sent to the hospital's server (reference {ref}).", { ref: String(r.serverId).slice(0, 12) }) };
+      if (!saved) return { sent: false, saved: false, message: T(G.WSQ, "site.bug.msgNotSentNotKept", "Bug report NOT sent ({reason}) and this device could not keep it. Copy the details before closing.", { reason: r.reason ? reasonText(r.reason) : T(G.WSQ, "site.bug.noAnswerYet", "no answer yet") }) };
+      if (r.pending) return { sent: false, saved: true, message: T(G.WSQ, "site.bug.msgPending", "Bug report saved on this device. The server has not answered yet; it will keep trying. View Past Bugs shows when it arrives.") };
+      return { sent: false, saved: true, message: T(G.WSQ, "site.bug.msgSavedNotSent", "Bug report saved on this device and NOT sent yet ({reason}). It will be sent automatically when you are online and signed in.", { reason: reasonText(r.reason) }) };
     });
   }
 
@@ -482,7 +486,7 @@
     var btn = modal.querySelector("#wsqBugSubmit");
     statusEl.style.display = "block";
     statusEl.style.color = "#666";
-    statusEl.textContent = "Sending bug report...";
+    statusEl.textContent = T(G.WSQ, "site.bug.sending", "Sending bug report...");
     if (btn) btn.disabled = true;
     recordReport(description, severity, ctx, target).then(function (res) {
       closeModal();
@@ -513,7 +517,17 @@
   }
 
   // ---- Logs Viewer Modal -------------------------------------------------------------------
-  var STATUS_LABEL = { open: "Open", in_progress: "In progress", solved: "Solved", removed: "Solved and archived" };
+  function statusLabel(s) {
+    return s === "open" ? T(G.WSQ, "site.bug.statusOpen", "Open") : s === "in_progress" ? T(G.WSQ, "site.bug.statusInProgress", "In progress")
+      : s === "solved" ? T(G.WSQ, "site.bug.statusSolved", "Solved") : s === "removed" ? T(G.WSQ, "site.bug.statusRemoved", "Solved and archived") : s;
+  }
+  /* This file's own reasons for a report not being sent, in words; a reason the server gave stays as it came. */
+  function reasonText(r) {
+    return r === "no hospital is open on this device" ? T(G.WSQ, "site.bug.reasonNoHospital", "no hospital is open on this device")
+      : r === "not signed in" ? T(G.WSQ, "site.bug.reasonNotSignedIn", "not signed in")
+      : r === "the server did not accept it" ? T(G.WSQ, "site.bug.reasonNotAccepted", "the server did not accept it")
+      : r === "no connection to the server" ? T(G.WSQ, "site.bug.reasonNoConnection", "no connection to the server") : r;
+  }
   function pill(text, bg, fg) {
     return '<span style="display:inline-block;background:' + bg + ";color:" + fg + ';border-radius:10px;padding:1px 8px;font-size:11px;font-weight:700;">' + esc(text) + "</span>";
   }
@@ -527,30 +541,30 @@
         '<div style="margin:4px 0;">' + badge + "</div>" +
         '<div style="font-weight:600;font-size:14px;color:#333;margin:4px 0;">' + esc(desc) + "</div>" +
         '<div style="font-size:12px;color:#666;">' + esc(where) + "</div>" + (extra || "") +
-        (copyId ? '<button class="wsqCopyBugBtn" data-id="' + esc(copyId) + '" style="margin-top:6px;background:#f5f5f5;border:1px solid #ccc;padding:3px 8px;border-radius:4px;font-size:11px;cursor:pointer;">Copy Markdown</button>' : "") +
+        (copyId ? '<button class="wsqCopyBugBtn" data-id="' + esc(copyId) + '" style="margin-top:6px;background:#f5f5f5;border:1px solid #ccc;padding:3px 8px;border-radius:4px;font-size:11px;cursor:pointer;">' + esc(T(G.WSQ, "site.bug.copyMarkdown", "Copy Markdown")) + "</button>" : "") +
       "</div>";
     };
     var html = waiting.map(function (b) {
-      return row(b.id, b.timestamp, b.description, b.location, pill("Waiting to send", "#fff3e0", "#e65100"),
-        '<div style="font-size:12px;color:#e65100;margin-top:4px;">Saved on this device only.' + (b.lastError ? " Last try: " + esc(b.lastError) + "." : "") + "</div>", b.id);
+      return row(b.id, b.timestamp, b.description, b.location, pill(T(G.WSQ, "site.bug.waitingToSend", "Waiting to send"), "#fff3e0", "#e65100"),
+        '<div style="font-size:12px;color:#e65100;margin-top:4px;">' + esc(T(G.WSQ, "site.bug.savedOnDeviceOnly", "Saved on this device only.")) + (b.lastError ? " " + esc(T(G.WSQ, "site.bug.lastTry", "Last try: {reason}.", { reason: reasonText(b.lastError) })) : "") + "</div>", b.id);
     }).join("");
     if (server === null) {
-      html += '<p style="color:#666;padding:12px 0;">Loading reports from the server...</p>';
+      html += '<p style="color:#666;padding:12px 0;">' + esc(T(G.WSQ, "site.bug.loadingServer", "Loading reports from the server...")) + "</p>";
     } else if (server === false) {
-      html += '<p style="color:#b71c1c;padding:12px 0;">Reports on the server could not be loaded: ' + esc(failMessage || "no answer") + ". Their status is unknown here.</p>";
+      html += '<p style="color:#b71c1c;padding:12px 0;">' + esc(T(G.WSQ, "site.bug.serverNotLoaded", "Reports on the server could not be loaded: {reason}. Their status is unknown here.", { reason: failMessage ? reasonText(failMessage) : T(G.WSQ, "site.bug.noAnswer", "no answer") })) + "</p>";
       html += local.filter(function (b) { return b && b.sent; }).map(function (b) {
-        return row(b.id, b.timestamp, b.description, b.location, pill("Sent to the server", "#e8f5e9", "#1b5e20"), "", b.id);
+        return row(b.id, b.timestamp, b.description, b.location, pill(T(G.WSQ, "site.bug.sentToServer", "Sent to the server"), "#e8f5e9", "#1b5e20"), "", b.id);
       }).join("");
     } else {
       var reports = server.reports || [];
       html += reports.map(function (r) {
-        var badge = r.status === "solved" || r.status === "removed" ? pill(STATUS_LABEL[r.status], "#e8f5e9", "#1b5e20")
-          : r.status === "in_progress" ? pill(STATUS_LABEL[r.status], "#e3f2fd", "#0d47a1") : pill(STATUS_LABEL[r.status] || r.status, "#ffebee", "#b71c1c");
-        var extra = r.solution && r.solution.note ? '<div style="font-size:12px;color:#1b5e20;margin-top:4px;">How it was solved: ' + esc(r.solution.note) + "</div>" : "";
-        if (server.manager && r.reporter) extra += '<div style="font-size:12px;color:#888;margin-top:2px;">Reported by ' + esc(r.reporter.name || r.reporter.id) + "</div>";
+        var badge = r.status === "solved" || r.status === "removed" ? pill(statusLabel(r.status), "#e8f5e9", "#1b5e20")
+          : r.status === "in_progress" ? pill(statusLabel(r.status), "#e3f2fd", "#0d47a1") : pill(statusLabel(r.status), "#ffebee", "#b71c1c");
+        var extra = r.solution && r.solution.note ? '<div style="font-size:12px;color:#1b5e20;margin-top:4px;">' + esc(T(G.WSQ, "site.bug.howSolved", "How it was solved:")) + " " + esc(r.solution.note) + "</div>" : "";
+        if (server.manager && r.reporter) extra += '<div style="font-size:12px;color:#888;margin-top:2px;">' + esc(T(G.WSQ, "site.bug.reportedBy", "Reported by {name}", { name: r.reporter.name || r.reporter.id })) + "</div>";
         return row(r.clientReportId || r.id, r.reportedAt, r.description, r.location, badge, extra, null);
       }).join("");
-      if (!reports.length && !waiting.length) html += '<p style="color:#888;text-align:center;padding:24px 0;">No bug reports yet.</p>';
+      if (!reports.length && !waiting.length) html += '<p style="color:#888;text-align:center;padding:24px 0;">' + esc(T(G.WSQ, "site.bug.noReportsYet", "No bug reports yet.")) + "</p>";
     }
     return html;
   }
@@ -574,14 +588,14 @@
       v.innerHTML =
         '<div style="background:#fff;border-radius:12px;width:100%;max-width:600px;max-height:85vh;box-shadow:0 12px 36px rgba(0,0,0,0.3);display:flex;flex-direction:column;overflow:hidden;">' +
           '<div style="background:#f5f5f5;border-bottom:1px solid #ddd;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">' +
-            '<h3 style="margin:0;font-size:16px;color:#333;">Bug reports</h3>' +
-            '<button id="wsqCloseLogsViewer" aria-label="Close" style="background:none;border:none;font-size:20px;cursor:pointer;">&times;</button>' +
+            '<h3 style="margin:0;font-size:16px;color:#333;">' + esc(T(G.WSQ, "site.bug.reportsTitle", "Bug reports")) + "</h3>" +
+            '<button id="wsqCloseLogsViewer" aria-label="' + esc(T(G.WSQ, "site.bug.close", "Close")) + '" style="background:none;border:none;font-size:20px;cursor:pointer;">&times;</button>' +
           "</div>" +
           '<div style="padding:16px;flex:1;overflow-y:auto;">' + logsHtml(list, server, failMessage) + "</div>" +
           '<div style="background:#fafafa;border-top:1px solid #eee;padding:10px 16px;display:flex;justify-content:space-between;gap:8px;">' +
-            '<button id="wsqClearAllLogs" style="background:none;border:none;color:#d32f2f;cursor:pointer;font-size:12px;">Clear sent copies from this device</button>' +
-            (manage ? '<button id="wsqManageBugs" style="background:none;border:1px solid #1976d2;color:#1976d2;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:13px;">Manage all reports</button>' : "") +
-            '<button id="wsqCloseLogsBtn" style="background:#333;color:#fff;border:none;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:13px;">Close</button>' +
+            '<button id="wsqClearAllLogs" style="background:none;border:none;color:#d32f2f;cursor:pointer;font-size:12px;">' + esc(T(G.WSQ, "site.bug.clearSent", "Clear sent copies from this device")) + "</button>" +
+            (manage ? '<button id="wsqManageBugs" style="background:none;border:1px solid #1976d2;color:#1976d2;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:13px;">' + esc(T(G.WSQ, "site.bug.manageAll", "Manage all reports")) + "</button>" : "") +
+            '<button id="wsqCloseLogsBtn" style="background:#333;color:#fff;border:none;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:13px;">' + esc(T(G.WSQ, "site.bug.close", "Close")) + "</button>" +
           "</div>" +
         "</div>";
       v.querySelector("#wsqCloseLogsViewer").onclick = closeLogs;
@@ -594,14 +608,14 @@
           var b = list.filter(function (x) { return x.id === id; })[0];
           if (b && navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(formatBugMarkdown(b)).then(function () {
-              btn.textContent = "Copied";
-              setTimeout(function () { btn.textContent = "Copy Markdown"; }, 1500);
+              btn.textContent = T(G.WSQ, "site.bug.copied", "Copied");
+              setTimeout(function () { btn.textContent = T(G.WSQ, "site.bug.copyMarkdown", "Copy Markdown"); }, 1500);
             }, function () {});
           }
         };
       });
       v.querySelector("#wsqClearAllLogs").onclick = function () {
-        if (confirm("Clear the copies of reports already sent to the server from this device? Reports waiting to be sent are kept.")) {
+        if (confirm(T(G.WSQ, "site.bug.clearConfirm", "Clear the copies of reports already sent to the server from this device? Reports waiting to be sent are kept."))) {
           putStoredBugs(unsentBugs());
           paint();
         }

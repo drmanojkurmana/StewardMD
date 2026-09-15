@@ -1633,7 +1633,7 @@
         "<p>" + esc(T(c, "site.admin.security.lastRestoreLead", "Last restore test:")) + " " + (d.lastRestoreTest ? esc(T(c, "site.admin.security.lastRestore", "{at}, {outcome}, restored {what}, by {by}", { at: d.lastRestoreTest.at, outcome: d.lastRestoreTest.outcome, what: d.lastRestoreTest.restoredWhat, by: d.lastRestoreTest.performedBy })) : esc(T(c, "site.admin.security.neverRecorded", "never recorded"))) + "</p>";
     }
     h += "<h3>" + esc(T(c, "site.admin.security.recordRestoreTest", "Record a restore test")) + "</h3><div class=\"row\">" +
-      '<label class="f"><span>' + esc(T(c, "site.admin.security.whatWasRestored", "What was restored")) + '</span><input id="secRtWhat" placeholder="Backup of 12 Sep into a test database"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.admin.security.whatWasRestored", "What was restored")) + '</span><input id="secRtWhat" placeholder="' + esc(T(c, "site.admin.security.whatWasRestoredPlaceholder", "Backup of 12 Sep into a test database")) + '"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.admin.security.outcome", "Outcome")) + '</span><select id="secRtOutcome"><option value="">' + esc(T(c, "site.admin.security.choose", "Choose")) + '</option><option value="success">' + esc(T(c, "site.admin.security.success", "Success")) + '</option><option value="partial">' + esc(T(c, "site.admin.security.partial", "Partial")) + '</option><option value="failed">' + esc(T(c, "site.admin.security.failed", "Failed")) + '</option></select></label>' +
       '<label class="f"><span>' + esc(T(c, "site.admin.security.doneBy", "Done by")) + '</span><input id="secRtBy"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.admin.security.note", "Note")) + '</span><input id="secRtNote"></label>' +
@@ -1742,7 +1742,7 @@
     var x = ACK_SUFFIX[chain || ""] || "";
     return '<div class="card"><h3>' + esc(x ? T(c, "site.admin.security.ackFormTitleOrg", "Acknowledge a legitimate restore of the hospital event log") : T(c, "site.admin.security.ackFormTitle", "Acknowledge a legitimate restore")) + "</h3>" +
       '<p class="quiet">' + TS(c, "site.admin.security.ackFormIntro", "This archives the current outside copy and restarts it from the newest row, and records the acknowledgement in the audit trail under your name. Only do this when the restore was planned and is written up under the incident reference below. Never put patient details in the reason.") + "</p>" +
-      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.security.whyRestored", "Why was the database restored (at least 20 characters)")) + '</span><input id="secAckReason' + x + '" placeholder="Planned point in time restore after..."></label>' +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.security.whyRestored", "Why was the database restored (at least 20 characters)")) + '</span><input id="secAckReason' + x + '" placeholder="' + esc(T(c, "site.admin.security.whyRestoredPlaceholder", "Planned point in time restore after...")) + '"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.admin.security.incidentRef", "Incident reference")) + '</span><input id="secAckIncident' + x + '" placeholder="INC-123"></label></div>' +
       '<button type="button" class="btn" id="secAckReview' + x + '">' + esc(T(c, "site.admin.security.reviewAck", "Review acknowledgement")) + '</button><div id="secAckConfirm' + x + '"></div><div id="secAckMsg' + x + '"></div></div>';
   }

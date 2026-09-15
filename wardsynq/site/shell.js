@@ -118,10 +118,10 @@
         });
       }
       return res.json().then(null, function () { return {}; }).then(function (j) {
-        var why = (j.issue && j.issue[0] && j.issue[0].diagnostics) || j.message || j.error || ("the server answered " + res.status);
+        var why = (j.issue && j.issue[0] && j.issue[0].diagnostics) || j.message || j.error || T(null, "site.shell.download.serverAnswered", "the server answered {status}", { status: res.status });
         return { ok: false, status: res.status, message: why };
       });
-    }).catch(function (e) { return { ok: false, error: "network", message: "The download could not reach the server." }; });
+    }).catch(function (e) { return { ok: false, error: "network", message: T(null, "site.shell.download.unreachable", "The download could not reach the server.") }; });
   }
   function can(cap) { return !!(st.who && st.who.caps && st.who.caps.indexOf(cap) >= 0); }
   /* A demonstration hospital says so, on every screen, permanently. Demo and real tenant data are
@@ -284,7 +284,7 @@
     return api("/whoami" + (st.orgId ? "?orgId=" + encodeURIComponent(st.orgId) : "")).then(function (r) {
       if (!r || !r.ok) {
         if (r && (r.error === "unauthorized" || r.status === 401)) { st.tokType = ""; st.tok = ""; lsSet(LS.tt, ""); lsSet(LS.tok, ""); }
-        else toast(T(null, "site.shell.whoami.unreachable", "Could not reach WardSynQ: {reason}", { reason: (r && (r.error || r.detail)) || "no answer" }));
+        else toast(T(null, "site.shell.whoami.unreachable", "Could not reach WardSynQ: {reason}", { reason: (r && (r.error || r.detail)) || T(null, "site.shell.whoami.noAnswer", "no answer") }));
         st.who = null; return;
       }
       st.who = r;

@@ -6573,3 +6573,21 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   solved and archives (status removed), never deletes. Screen: Admin Center > Bug reports.
 - The widget keeps a device outbox: unsent until the server returns its id, retried on load, online and every
   minute; the pre-change localStorage log is uploaded once. Only sent copies are trimmed or cleared.
+
+## 2026-09-16 A staff screen's English goes through the catalog, and the server's display text travels as a code
+- Owner: with Telugu picked, screens still showed English. The catalog was 5,169 of 5,249 keys complete, so what was
+  left was text that never went through it. scripts/wardsynq-i18n-unwrapped.mjs finds string literals a screen shows
+  as words (text between tags, a title/placeholder/aria-label, a sentence) that are not an argument of a translation
+  helper; test/wardsynq-i18n-unwrapped.test.mjs pins each file's list against an allowlist of the deliberate
+  exceptions, so a new unwrapped literal fails there. discharge.js (the discharge workstation, "ward.dc-*") and
+  patient-register.js (the check-in sheet, "ward.reg-*") now carry the same wT/wTH/wTD helpers as ward.js, and the
+  Report Bug widget uses the site pages' T()/TS() ("site.bug.*").
+- SERVER DISPLAY TEXT IS NOT TRANSLATED ON THE SERVER. functions/_wardsynq/quality.js keeps sending its English and
+  sends a stable code beside it (a measure's id for its title; reasonCode, noteCode, note2Code with the numbers in
+  reasonVars/noteVars). ward.js maps code -> key with wTS(key, english, sent, vars), which shows the translation ONLY
+  when the server's English is exactly the catalog's English filled with those values, and the server's own words
+  otherwise - so a sentence changed on the server can never be shown as the translation of an older one.
+- A count is two keys ("{n} nurse" and "{n} nurses"), never one key with "s" glued on: the English "1 resident" that
+  the alert-cover tests pin cannot survive a single plural form, and no other language pluralises like English.
+- Icon ligature names (card/icuHead/wsBlock's icon argument) are never catalog words: a translated "verified" put
+  Telugu where the Material Symbols glyph belongs.
