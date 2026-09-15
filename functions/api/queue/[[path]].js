@@ -95,7 +95,7 @@ import {
   transfusionQueue, traceBloodUnit,
 } from "../../_wardsynq/migrate-transfusion.js";
 import { medicationRound, administerStep } from "../../_wardsynq/migrate-emar.js";
-import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary } from "../../_wardsynq/migrate-discharge.js";
+import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDischargeSummary, readDischargeChecklist } from "../../_wardsynq/migrate-discharge.js";
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
@@ -218,7 +218,7 @@ import { securityReport, recordSecurityReview, recordRestoreTest, auditRowsForRe
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
-import { chargesForPatient } from "../../_wardsynq/charge-capture.js";
+import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
@@ -331,6 +331,15 @@ function wsqSchedule(c) {
 /* Bilingual prints (owner decision 2026-09-15): whether this hospital offers a second language on the patient's
  * prescription and discharge summary prints, and the clock their dates are written in. Display facts from org
  * config only; English is always printed whole. India without a configured offset is IST, as elsewhere here. */
+/* ONE PRICE TABLE FOR THE WARD BILL (LT-30): the hospital's configured wardsynq.tariff and the Price list
+ * the Admin Center edits (q_tariff, behind the clinic billing store). The ward bill read only the first
+ * while the screen wrote only the second. An unreadable price list is an error, never an empty one. */
+async function wsqTariff(env, orgId, wsqCfg) {
+  const cfg = (wsqCfg && wsqCfg.tariff) || null;
+  if (!BILL.billingEnabled(env)) return { table: tariffTable(cfg, []), error: null };
+  try { return { table: tariffTable(cfg, await BILL.listTariff(env, orgId)), error: null }; }
+  catch { return { table: tariffTable(cfg, []), error: "The price list could not be read, so prices cannot be checked." }; }
+}
 function wsqPrintSettings(org) {
   const c = (org && org.wardsynq) || {};
   return { languagesEnabled: !!(c.printLanguages && c.printLanguages.enabled === true), timeZone: (typeof c.timeZone === "string" && c.timeZone) || null,
@@ -1514,6 +1523,8 @@ export async function onRequest(context) {
         // Closing a stay is the administrative act QUEUE_ADD already covers for opening one.
         // The summary is a clinical document: drafting and signing it are EMR_TREAT.
         discharge: CAPS.QUEUE_ADD, "discharge-summary": CAPS.EMR_TREAT, "sign-discharge-summary": CAPS.EMR_TREAT,
+        // What stands between this stay and its discharge: seen by whoever may close it.
+        "discharge-checklist": CAPS.QUEUE_ADD,
         // Asserting a diagnosis is a clinical act; reading the list is not.
         problem: CAPS.EMR_TREAT, problems: CAPS.EMR_VIEW,
       };
@@ -2606,7 +2617,9 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim-estimate" && method === "POST") {
-        const r = await raiseEstimate(request, env, { ...deps, patientId: body.patientId, lines: body.lines, payerId: body.payerId, tariff: (wsqCfg && wsqCfg.tariff) || null, idempotencyKey: body.idempotencyKey || null });
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error }, 502, request);
+        const r = await raiseEstimate(request, env, { ...deps, patientId: body.patientId, lines: body.lines, payerId: body.payerId, tariff: tf.table, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claims" && method === "GET") {
@@ -2671,15 +2684,19 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "charges" && method === "GET") {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error }, 502, request);
         const r = await chargesForPatient(request, env, {
           ...deps, patientId: url.searchParams.get("patientId") || "",
           encounterId: url.searchParams.get("encounterId") || "",
-          tariff: (wsqCfg && wsqCfg.tariff) || null,
+          tariff: tf.table,
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "POST") {
-        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: (wsqCfg && wsqCfg.tariff) || null, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error, written: 0 }, 502, request);
+        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "GET") {
@@ -3672,8 +3689,18 @@ export async function onRequest(context) {
         const r = await listProblems(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", includeInactive: url.searchParams.get("includeInactive") === "1" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
-      if (sub === "discharge" && method === "POST") {
-        const r = await dischargePatient(request, env, { ...deps, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition, idempotencyKey: body.idempotencyKey || null });
+      /* LT-32: the checklist is decided here, not on the screen. Deferring the bill needs a reason; an
+       * override for open orders or pending results needs a reason AND a treating clinician (emr.treat),
+       * decided server-side and handed to the domain as a fact, never taken from the body. */
+      if ((sub === "discharge" && method === "POST") || (sub === "discharge-checklist" && method === "GET")) {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        const canOverride = (await ORG.authorizeOrg(env, actor, wOrgId, CAPS.EMR_TREAT)).ok === true;
+        const common = { ...deps, tariff: tf.table, tariffError: tf.error, canOverride };
+        const r = sub === "discharge-checklist"
+          ? await readDischargeChecklist(request, env, { ...common, encounterId: url.searchParams.get("encounterId") || "" })
+          : await dischargePatient(request, env, { ...common, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition,
+            destination: body.destination, dispositionNote: body.dispositionNote, billDeferredReason: body.billDeferredReason, overrideReason: body.overrideReason,
+            idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "discharge-summary" && method === "GET") {

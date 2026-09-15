@@ -70,8 +70,8 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q11-token">
-<link rel="stylesheet" href="/ward.css?v=ward30-i18n">
-<link rel="stylesheet" href="/discharge.css?v=dis2-printlang">
+<link rel="stylesheet" href="/ward.css?v=ward31-dcbill">
+<link rel="stylesheet" href="/discharge.css?v=dis3-dcbill">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d2">
@@ -2509,16 +2509,16 @@ window.openExternal = function (u) {
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
 <!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
-<script src="/wardsynq/site/i18n.js?v=11" defer></script>
+<script src="/wardsynq/site/i18n.js?v=12" defer></script>
 <script src="/wardsynq/site/print-lang.js?v=2" defer></script>
 <script src="/wardsynq/site/portal.js?v=9" defer></script>
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
-<script src="/ward.js?v=ward41-i18n" defer></script>
+<script src="/ward.js?v=ward42-dcbill" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
-<script src="/discharge.js?v=dis3-printlang" defer></script>
+<script src="/discharge.js?v=dis4-dcbill" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>

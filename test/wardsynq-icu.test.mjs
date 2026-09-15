@@ -167,7 +167,7 @@ test("TRANSFER and DISCHARGE both work on an ICU-class stay, unchanged for IPD",
   assert.equal(afterMove.class, "ICU", "a transfer never changes what class a stay is");
   assert.equal(afterMove.location.bed, "5");
 
-  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T18:00:00.000Z", disposition: "ward" });
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T18:00:00.000Z", disposition: "ward", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(out.__status, 200, JSON.stringify(out));
   const afterDischarge = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
   assert.equal(afterDischarge.status, "finished");

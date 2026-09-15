@@ -6486,3 +6486,21 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   translated text plus the English original underneath (`.en-orig`). `document.documentElement.lang` follows.
 - The Order workstation reads the same `wsqStaffNavLang`, loads i18n.js + the language file, translates its static
   HTML at boot. Translations of the new keys are written separately before merge.
+
+## 2026-09-15 One price list for the ward bill; the discharge checklist is enforced on the server (LT-30, LT-32)
+- The ward bill (`/ward/charges`, `/ward/invoice`, claim estimates, the discharge bill check) prices from ONE table:
+  `wardsynq.tariff` merged with the Admin Center Price list (q_tariff via the clinic billing store), Price list wins
+  (`charge-capture.js tariffTable`, router `wsqTariff`). Before, the screen wrote q_tariff and the bill read only the
+  config, so prices set on screen never reached a bill. An unreadable Price list is an error (502), never "unpriced".
+- Price list kinds `bed`, `nursing`, `visit` are per day of an inpatient stay, optionally for one ward (by name). A day
+  is charged once started; the ward is the one the Encounter history says the day began on. A bed day with no price
+  is listed unpriced (`BED-DAY`), never free. Tests and medicines match by code, then by the name they were recorded
+  under. `billing.charge` now reads Encounter (read only) for this.
+- `/ward/discharge` refuses (409 `discharge_blocked`, nothing written) until the bill is settled or deferred with a
+  reason, and open orders / pending results / unreadable order lists carry an override reason from a caller holding
+  `emr.treat` (403 `override_not_permitted` otherwise, decided in the router, never from the body). Deferral and
+  override are written on the finished Encounter (`billDeferred`, `dischargeOverride`, `dischargeChecklist`).
+  Destination is coded: home, transferred (+ receiving hospital), left-against-advice, died (needs a recorded death),
+  other (+ text); `ward` stays for ICU step-down. `GET /ward/discharge-checklist` shows the same checklist.
+- A released result (final/corrected DiagnosticReport) closes its investigation on the summary, the pending list and
+  the command centre; the summary line carries the values or impression. Signing an undrafted summary drafts it first.

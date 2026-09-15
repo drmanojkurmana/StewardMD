@@ -191,7 +191,7 @@ test("TASK 4.18: the full enterprise journey, same patient and encounter through
   assert.equal(submitted.claim.adapter.state, "not_configured", JSON.stringify(submitted.claim.adapter));
 
   // 9. Discharge, of the SAME encounter.
-  const discharge = await as("/ward/discharge", "POST", { orgId: ORG, encounterId: encounterId, disposition: "home" });
+  const discharge = await as("/ward/discharge", "POST", { orgId: ORG, encounterId: encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(discharge.__status, 200, JSON.stringify(discharge));
   assert.equal(discharge.patientId, patientId, "the discharge is confirmed for the SAME patient");
 

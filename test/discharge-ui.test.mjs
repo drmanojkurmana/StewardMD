@@ -149,18 +149,20 @@ test("signing is guarded, visually distinct from saving, and warns about what is
   assert.match(code, /still outstanding on this stay/, "and repeats what is unresolved at the moment of signing");
 });
 
-test("OUTSTANDING WORK IS SHOWN BEFORE SIGN-OFF, and restrained: it does not block a discharge", () => {
+test("OUTSTANDING WORK IS SHOWN BEFORE SIGN-OFF, and restrained: it says what the discharge will ask for", () => {
   const W = load();
   const html = W._render(S({ pending: [
     { kind: "dose", id: "m1", status: "verified", orderId: "rx-1", drug: "Paracetamol" },
-    { kind: "investigation", id: "sr-1", status: "active", display: "Blood culture" },
+    { kind: "investigation", id: "sr-1", status: "no result yet", display: "Blood culture" },
     { kind: "problem", id: "p1", status: "provisional", display: "Query sepsis" },
   ] }));
   assert.match(html, /Outstanding &middot; 3/);
   assert.match(html, /Dose not finished/);
+  assert.match(html, /Result pending/);
   assert.match(html, /Blood culture/);
   assert.match(html, /Diagnosis unconfirmed/);
-  assert.match(html, /None of this stops a discharge\. It should be a decision, not a discovery\./);
+  // LT-32: open orders and pending results now stop a discharge until a clinician overrides, and the card says so.
+  assert.match(html, /stop the discharge until a treating clinician records why/);
   // Amber, never the critical tier: this is information, not an alarm.
   assert.match(html, /class="d-card warn"/);
   assert.ok(!/d-banner err/.test(html), "nothing here is an error");
@@ -220,4 +222,34 @@ test("no emoji anywhere: icons are the bundled Material Symbols, as everywhere e
   // trusting, because one stray emoji in a medico-legal document is a real problem.
   assert.ok(!/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(SRC), "discharge.js carries no emoji");
   assert.match(SRC, /function ms\(name, fill\)/);
+});
+
+/* ---- LT-19 (live test 2026-09-15) ------------------------------------------------------------------------- */
+function loadWithPrintHelper() {
+  const win = {};
+  const doc = { getElementById: () => null, createElement: () => ({ classList: { add() {}, remove() {} } }), body: { appendChild() {} } };
+  new Function("window", readFileSync(new URL("../wardsynq/site/print-lang.js", import.meta.url), "utf8"))(win);
+  new Function("window", "document", "location", "localStorage", SRC)(win, doc, { search: "" }, { getItem: () => null, setItem: () => {} });
+  return win.DISCHARGE;
+}
+
+test("LT-19: times read in the hospital's clock through the shared print helper, never as raw UTC ISO", () => {
+  const W = loadWithPrintHelper();
+  const admission = "Ward: GAS, bed 3.\nAdmitted: 2026-09-15T15:23:31.058Z.";
+  const html = W._render(S({ print: { timeZone: "Asia/Kolkata", utcOffsetMinutes: 330 }, sections: { ...ASSEMBLED, admission }, assembled: { ...ASSEMBLED, admission },
+    encounter: { ...base.encounter, admittedAt: "2026-09-15T15:23:31.058Z" } }));
+  assert.ok(!html.includes("2026-09-15T15:23"), "no raw ISO instant on screen");
+  assert.match(html, /Admitted: 15 Sep 2026, 20:53\./, "the section text");
+  assert.match(html, /<dd>15 Sep 2026, 20:53<\/dd>/, "the identity band");
+  // A plain date, a dose or a clinician's words are not instants and are left exactly as recorded.
+  assert.match(html, /On admission \(2026-09-07\)/);
+});
+
+test("LT-19/LT-31: icon ligatures are hidden from assistive tech, and no text rule can print their names as words", () => {
+  const html = load()._render(S({ hasDraft: false }));
+  assert.match(html, /<span class="material-symbols-outlined" aria-hidden="true">auto_awesome_motion<\/span>/);
+  assert.ok(!/material-symbols-outlined">/.test(html), "every icon carries aria-hidden");
+  const css = readFileSync(new URL("../discharge.css", import.meta.url), "utf8");
+  assert.ok(!/\.d-stat span \{/.test(css) && !/\.d-signed span \{/.test(css), "a bare span rule would override the icon font");
+  assert.match(css, /body:has\(#wsqBugFab\) #smdDischarge \.d-actions \{ padding-right: 170px; \}/, "the Report Bug corner stays clear of Sign and finalise");
 });

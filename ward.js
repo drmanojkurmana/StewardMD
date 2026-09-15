@@ -4882,12 +4882,32 @@
           (ch.unpriced || []).map(function (i) { return "<li><span class=\"w-st due\">" + wTH("ward.no-price-set", "no price set") + "</span> " + esc(i.display || i.code) + "</li>"; }).join("") +
         "</ul>" +
         (ch.tariffWarning ? '<p class="w-hint warn">' + ms("warning") + esc(ch.tariffWarning) + "</p>" : "") +
+        (ch.unreadableWarning ? '<p class="w-hint warn">' + ms("warning") + esc(ch.unreadableWarning) + "</p>" : "") +
         (!(ch.priced || []).length && !(ch.unpriced || []).length ? "<p class=\"w-empty\">" + wTH("ward.nothing-waiting-to-be-billed", "Nothing waiting to be billed.") + "</p>" : "");
     var wBody = !w ? "<p class=\"w-empty\">" + wTH("ward.loading3", "Loading.") + "</p>"
       : w.failed ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.the-coding-watchlist-could-not-be", "The coding watchlist could not be loaded.", null, "", 1) + "</p>"
       : (w.count ? '<p class="w-hint warn">' + ms("warning") + esc(w.reading) + "</p>" : "<p class=\"w-empty\">" + wTH("ward.no-claims-need-a-second-look", "No claims need a second look.") + "</p>");
     return '<div class="w-card"><div class="w-card-h">' + ms("receipt_long") + "<h3>" + wTH("ward.not-billed-yet", "Not billed yet") + "</h3></div>" + chBody + "</div>" +
       '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + wTH("ward.claims-worth-a-second-look", "Claims worth a second look") + "</h3></div>" + wBody + "</div>";
+  }
+  /* PURE. What the last "Raise invoice" did. Nothing priced names every charge with no price and sends
+   * an administrator to the Price list, which is where that is fixed. */
+  function cashRaisedHtml(r) {
+    if (!r) return "";
+    var priceLink = ' <a class="w-btn ghost sm" href="#/admin/tariff">' + ms("sell") + wTH("ward.open-the-price-list-admin", "Open the Price list (administrator)") + "</a>";
+    var names = (r.unpriced || []).map(function (u) { return "<li>" + esc(u.display || u.code) + "</li>"; }).join("");
+    var unread = (r.unreadable || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.part-of-the-record-could-not", "Part of the record could not be read, so some charges may be missing from this bill.", null, "", 1) + "</p>" : "";
+    if (r.skipped === "nothing_priced") {
+      return '<div class="w-hint warn" role="alert">' + ms("warning") + "<div><p>" + wTH("ward.no-invoice-was-raised-nothing-from", "No invoice was raised: nothing from this patient's care has a price yet.", null, "", 1) + "</p>" +
+        (names ? "<p>" + wTH("ward.these-charges-have-no-price", "These charges have no price:") + '</p><ul class="w-mini">' + names + "</ul>" : "") +
+        "<p>" + wTH("ward.an-administrator-sets-prices-on-the", "An administrator sets prices on the Price list in the Admin Center.") + priceLink + "</p></div></div>" + unread;
+    }
+    if (r.skipped === "already_invoiced") return '<p class="w-hint">' + ms("info") + wTH("ward.no-new-invoice-every-priced-charge", "No new invoice: every priced charge is already on a bill.") + "</p>" + unread;
+    if (r.written) {
+      return '<p class="w-hint">' + ms("check_circle") + wTH("ward.invoice-raised-id", "Invoice raised: {invoiceId}", { invoiceId: esc(r.invoiceId || "") }, "invoiceId") + "</p>" +
+        (names ? '<div class="w-hint warn">' + ms("warning") + "<div><p>" + wTH("ward.left-off-this-bill-because-they", "Left off this bill because they have no price:") + '</p><ul class="w-mini">' + names + "</ul><p>" + priceLink + "</p></div></div>" : "") + unread;
+    }
+    return "";
   }
   function cashierView(state) {
     var c = state.cashier || {};
@@ -4947,6 +4967,7 @@
       (c.patientId ? '<div class="w-card"><div class="w-card-h">' + ms("account_balance") + "<h3>" + wTH("ward.outstanding-balance", "Outstanding balance") + "</h3></div>" +
         "<p><b>" + esc(c.outstandingBalance == null ? "-" : c.outstandingBalance) + "</b></p>" +
         '<button class="w-btn" data-w-act="cashraise">' + ms("receipt_long") + wTH("ward.raise-invoice-from-today-s-charges", "Raise invoice from today's charges") + "</button>" +
+        cashRaisedHtml(c.raised) +
         (c.invoicesFailed
           ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.the-bills-could-not-be-loaded", "The bills could not be loaded. Do not read this as nothing owed.", null, "", 1) + "</p>"
           : (invRows || "<p class=\"w-empty\">" + wTH("ward.no-invoices-for-this-patient-yet", "No invoices for this patient yet.") + "</p>")) + "</div>" : "") +
@@ -7361,6 +7382,8 @@
         : state.view === "qualitysafety" ? qualitySafetyView(state)
         : state.view === "emergencyadmin" ? emergencyAdminView(state)
         : state.view === "pcopy" ? pcopyView(state)
+        : state.view === "discharge" ? dischargeView(state)
+        : state.view === "followup" ? followUpView(state)
         : state.view === "consent" ? consentView(state)
         : state.view === "ips" ? ipsView(state)
         : state.view === "completion" ? completionView(state)
@@ -8487,7 +8510,7 @@
   function cashLookup() {
     var mrn = val("wCashMrn");
     if (!mrn) { st.cashier.err = wT("ward.enter-an-mrn", "Enter an MRN."); paint(); return; }
-    st.cashier.mrn = mrn; st.cashier.err = ""; st.busy = true; paint();
+    st.cashier.mrn = mrn; st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
     // The same deterministic patientId every other ward flow derives from an MRN - never guessed,
     // never a second identity scheme.
     var patientId = "opd-pat-" + mrn.toLowerCase();
@@ -8528,11 +8551,14 @@
   }
   function cashRaise() {
     if (!st.cashier || !st.cashier.patientId) return;
-    st.cashier.err = ""; st.busy = true; paint();
+    st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
     apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId })
       .then(function (r) {
         st.busy = false;
-        if (r && r.ok) { loadCashier(); return; }
+        /* EVERY OUTCOME IS SAID (LT-30). "Nothing priced" came back ok with nothing written and the
+         * screen showed nothing at all, so the cashier could not tell a click that did nothing from one
+         * that was never sent. */
+        if (r && r.ok) { st.cashier.raised = r; loadCashier(); return; }
         st.cashier.err = (r && (r.detail || r.error)) || wT("ward.could-not-raise-an-invoice", "Could not raise an invoice.");
         paint();
       })
@@ -9295,50 +9321,149 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
   }
 
-  var WARD_DISPOSITIONS = [["home", "home"], ["transferred", "to another hospital"], ["left-against-advice", "left against medical advice"], ["died", "died"]];
+  /* ENDING A STAY AND ASKING FOR A FOLLOW-UP ARE FORMS, NOT PROMPT BOXES (LT-17).
+   *
+   * Both were a chain of browser prompts: where the patient went was typed ("died" included), a
+   * cancelled prompt left a red error on every later chart screen, and a phone WebView blocks
+   * prompts outright. They are now screens of their own. What is typed lives in st.dc / st.fu as it
+   * is typed (data-w-dc / data-w-fu), so a repaint of the ward never wipes it.
+   *
+   * THE CHECKLIST IS THE SERVER'S (LT-32). The screen shows what /ward/discharge-checklist says is
+   * open and asks for the answers the server needs; /ward/discharge decides again on its own, so a
+   * screen that showed nothing open can still be refused, and says why. */
+  var WARD_DISPOSITIONS = [["home", "Home"], ["transferred", "Transferred to another hospital"], ["left-against-advice", "Left against medical advice (LAMA / DAMA)"], ["died", "Died"], ["other", "Other"]];
   function wardDischarge() {
     var s = st.sel; if (!s) return;
-    var pick = "";
-    try {
-      pick = G.prompt(wTD("ward.where-did-go-type", "Where did {name} go? Type:", { name: (s.name || wTD("ward.the-patient", "the patient")) }) + " " + WARD_DISPOSITIONS.map(function (d) { return d[0]; }).join(", ")) || "";
-      pick = String(pick).trim().toLowerCase();
-    } catch (e) {}
-    var known = WARD_DISPOSITIONS.filter(function (d) { return d[0] === pick; })[0];
-    if (!known) { st.err = wT("ward.say-where-the-patient-went", "Say where the patient went: {join}.", { join: WARD_DISPOSITIONS.map(function (d) { return d[0]; }).join(", ") }); paint(); return; }
-    /* A death is not recorded from here: it is a clinical statement with its own confirmation and its
-     * own record, on the Contacts and status screen. Ending the stay as "died" without it would leave
-     * the patient alive on their own record. */
-    if (known[0] === "died") { st.err = wT("ward.record-the-death-first-on-the", "Record the death first on the Contacts screen, then close the stay."); paint(); return; }
-    if (!confirm(wTD("ward.end-this-stay-went-the-bed", "End this stay: {name} went {known}?\n\nThe bed is released.", { name: (s.name || s.patientId), known: known[1] }))) return;
-    st.busy = true; paint();
-    apiPost("/ward/discharge", { orgId: st.orgId, encounterId: s.encounterId, disposition: known[0] })
+    st.dc = { encounterId: s.encounterId, checklist: null, loadFailed: false, canOverride: false, deceasedRecorded: false,
+      disposition: "", destination: "", note: "", billReason: "", overrideReason: "", blockers: null, err: "" };
+    st.err = ""; st.note = ""; st.refusal = null;
+    st.view = "discharge"; paint();
+    loadDischargeChecklist();
+  }
+  function loadDischargeChecklist() {
+    var dc = st.dc; if (!dc) return;
+    dc.checklist = null; dc.loadFailed = false; paint();
+    apiGet("/ward/discharge-checklist?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(dc.encounterId))
       .then(function (r) {
-        if (settle(r, r && r.ok ? wT("ward.stay-ended-the-bed-is-free", "Stay ended. The bed is free.") : null)) { st.sel = null; st.view = "list"; loadWard(); }
-        else paint();
+        if (st.dc !== dc) return;
+        if (r && r.ok && r.checklist) { dc.checklist = r.checklist; dc.canOverride = !!r.canOverride; dc.deceasedRecorded = !!r.deceasedRecorded; }
+        else dc.loadFailed = (r && (r.detail || r.error)) || true;
+        paint();
       })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-end-the-stay", "Could not end the stay."); paint(); });
+      .catch(function () { if (st.dc !== dc) return; dc.loadFailed = true; paint(); });
+  }
+  function dischargeSubmit() {
+    var dc = st.dc, s = st.sel; if (!dc || !s) return;
+    dc.err = "";
+    if (!dc.disposition) dc.err = wT("ward.say-where-the-patient-went2", "Say where the patient went.");
+    else if (dc.disposition === "transferred" && !String(dc.destination).trim()) dc.err = wT("ward.name-the-hospital-the-patient-was", "Name the hospital the patient was transferred to.");
+    else if (dc.disposition === "other" && !String(dc.note).trim()) dc.err = wT("ward.say-where-the-patient-went2", "Say where the patient went.");
+    else if (dc.disposition === "died" && !dc.deceasedRecorded) dc.err = wT("ward.record-the-death-first-on-the", "Record the death first on the Contacts screen, then close the stay.");
+    if (dc.err) { paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/discharge", { orgId: st.orgId, encounterId: dc.encounterId, disposition: dc.disposition,
+      destination: dc.disposition === "transferred" ? String(dc.destination).trim() : undefined,
+      dispositionNote: dc.disposition === "other" ? String(dc.note).trim() : undefined,
+      billDeferredReason: String(dc.billReason).trim() || undefined, overrideReason: String(dc.overrideReason).trim() || undefined })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) {
+          // Said after the ward list reloads: loading the list clears the banner, which hid this success before.
+          var said = wT("ward.stay-ended-the-bed-is-free", "Stay ended. The bed is free.");
+          st.dc = null; st.sel = null; st.view = "list"; st.note = said;
+          loadWard().then(function () { if (!st.err) { st.note = said; paint(); } });
+          return;
+        }
+        if (st.dc !== dc) return;
+        if (r && r.checklist) dc.checklist = r.checklist;
+        dc.blockers = (r && r.blockers) || null;
+        dc.err = (r && (r.detail || r.error)) || wT("ward.could-not-end-the-stay", "Could not end the stay.");
+        paint();
+      })
+      .catch(function () { st.busy = false; if (st.dc !== dc) return; dc.err = wT("ward.could-not-end-the-stay", "Could not end the stay."); paint(); });
+  }
+  /* PURE. The discharge screen. */
+  function dischargeView(state) {
+    var dc = state.dc || {}, s = state.sel || {}, c = dc.checklist;
+    var opt = function (v, label, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? " selected" : "") + ">" + label + "</option>"; };
+    var BILL_WORDS = {
+      settled: wTH("ward.the-bill-is-settled", "The bill is settled."),
+      balance_due: wTH("ward.money-is-still-owed-on-a", "Money is still owed on a bill."),
+      unbilled: wTH("ward.charges-from-this-stay-are-not", "Charges from this stay are not on a bill yet."),
+      unreadable: wTH("ward.the-bill-could-not-be-checked", "The bill could not be checked. Do not read this as settled.", null, "", 1)
+    };
+    var itemList = function (rows, what) {
+      return rows.length ? '<ul class="w-mini">' + rows.map(function (p) { return "<li><b>" + esc(what(p)) + "</b> " + (p.status ? '<span class="w-st due">' + esc(p.status) + "</span>" : "") + "</li>"; }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.nothing-open", "Nothing open.") + "</p>";
+    };
+    var checklist = !c
+      ? (dc.loadFailed ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.the-discharge-checklist-could-not-be", "The discharge checklist could not be loaded. Do not read this as nothing open.", null, "", 1) +
+          ' <button class="w-btn ghost sm" data-w-act="dischargecheck">' + ms("refresh") + wTH("ward.try-again", "Try again") + "</button></p>"
+        : '<p class="w-empty">' + wTH("ward.loading3", "Loading.") + "</p>")
+      : '<div class="w-sub"><h4>' + ms(c.bill.state === "settled" ? "check_circle" : "receipt_long") + wTH("ward.bill", "Bill") + "</h4>" +
+          "<p" + (c.bill.state === "settled" ? "" : ' class="w-hint warn"') + ">" + (BILL_WORDS[c.bill.state] || esc(c.bill.state)) +
+          (c.bill.balance > 0 ? " " + wTH("ward.balance-owed", "Balance owed: {balance}", { balance: esc(c.bill.balance) }, "balance") : "") + "</p>" +
+          ((c.bill.unpriced || []).length ? "<p>" + wTH("ward.no-price-set-for", "No price set for:") + " " + c.bill.unpriced.map(function (u) { return "<b>" + esc(u.display) + "</b>"; }).join(", ") + "</p>" : "") +
+          ((c.bill.unbilled || []).length ? "<p>" + wTH("ward.not-on-a-bill-yet", "Not on a bill yet:") + " " + c.bill.unbilled.map(function (u) { return esc(u.display); }).join(", ") + "</p>" : "") +
+          (c.bill.state !== "settled" ? '<label class="w-f"><span>' + wTH("ward.defer-the-bill-reason", "Defer the bill: reason") + '</span><input type="text" autocomplete="off" data-w-dc="billReason" value="' + esc(dc.billReason || "") + '"></label>' : "") +
+        "</div>" +
+        '<div class="w-sub"><h4>' + ms("medication") + wTH("ward.open-orders", "Open orders") + "</h4>" + itemList(c.openOrders || [], function (p) { return p.drug || p.display || p.id; }) + "</div>" +
+        '<div class="w-sub"><h4>' + ms("science") + wTH("ward.pending-results", "Pending results") + "</h4>" + itemList(c.pendingResults || [], function (p) { return p.display || p.id; }) + "</div>" +
+        ((c.unreadable || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.some-of-this-stay-could-not", "Some of this stay could not be read, so open orders or results may be missing.", null, "", 1) + "</p>" : "") +
+        ((c.openOrders || []).length || (c.pendingResults || []).length || (c.unreadable || []).length
+          ? (dc.canOverride
+            ? '<label class="w-f"><span>' + wTH("ward.discharge-with-these-open-reason-recorded", "Discharge with these open: reason (recorded with your name)") + '</span><textarea rows="2" data-w-dc="overrideReason">' + esc(dc.overrideReason || "") + "</textarea></label>"
+            : '<p class="w-hint warn">' + ms("lock") + wTH("ward.only-a-treating-clinician-can-discharge", "Only a treating clinician can discharge with orders or results still open.") + "</p>")
+          : "");
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar"><button class="w-ic" data-w-act="back" aria-label="' + wTA("ward.back2", "Back") + '">' + ms("arrow_back") + "</button>" +
+      "<h3>" + wTH("ward.end-this-stay", "End this stay") + "</h3><small>" + esc(s.name || "") + (s.mrn ? " &middot; " + esc(s.mrn) : "") + "</small></div>" +
+      '<label class="w-f"><span>' + wTH("ward.where-did-the-patient-go", "Where did the patient go?") + '</span><select data-w-dc="disposition">' +
+        opt("", wTH("ward.choose", "Choose&hellip;"), dc.disposition) +
+        WARD_DISPOSITIONS.map(function (d) { return opt(d[0], esc(wTEn(d[1])), dc.disposition); }).join("") + "</select></label>" +
+      (dc.disposition === "transferred" ? '<label class="w-f"><span>' + wTH("ward.receiving-hospital", "Receiving hospital") + '</span><input type="text" autocomplete="off" data-w-dc="destination" value="' + esc(dc.destination || "") + '"></label>' : "") +
+      (dc.disposition === "other" ? '<label class="w-f"><span>' + wTH("ward.where-the-patient-went", "Where the patient went") + '</span><input type="text" autocomplete="off" data-w-dc="note" value="' + esc(dc.note || "") + '"></label>' : "") +
+      (dc.disposition === "died" && !dc.deceasedRecorded ? '<p class="w-hint warn">' + ms("info") + wTH("ward.record-the-death-first-on-the", "Record the death first on the Contacts screen, then close the stay.") +
+        ' <button class="w-btn ghost sm" data-w-act="people">' + ms("person") + wTH("ward.contacts", "Contacts") + "</button></p>" : "") +
+      "<h4>" + wTH("ward.before-the-patient-leaves", "Before the patient leaves") + "</h4>" + checklist +
+      (dc.err ? '<p class="w-hint warn" role="alert">' + ms("error") + esc(dc.err) + "</p>" : "") +
+      '<div class="w-actions"><button class="w-btn go" data-w-act="dischargesubmit"' + (state.busy ? " disabled" : "") + ">" + ms("logout") + wTH("ward.end-the-stay-and-free-the", "End the stay and free the bed") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="back">' + wTH("ward.cancel", "Cancel") + "</button></div></div>";
   }
   function followUpRequest() {
     var s = st.sel; if (!s) return;
-    var reason = "", dueBy = "";
-    try { reason = G.prompt(wTD("ward.why-should-this-patient-be-seen", "Why should this patient be seen again?")) || ""; } catch (e) {}
-    if (!reason) { st.err = wT("ward.a-follow-up-needs-a-reason", "A follow-up needs a reason."); paint(); return; }
-    try { dueBy = G.prompt(wTD("ward.seen-by-when-yyyy-mm-dd", "Seen by when? (YYYY-MM-DD)")) || ""; } catch (e) {}
+    st.fu = { reason: "", dueBy: "", err: "" };
+    st.err = ""; st.note = ""; st.refusal = null;
+    st.view = "followup"; paint();
+  }
+  function followUpSubmit() {
+    var fu = st.fu, s = st.sel; if (!fu || !s) return;
+    fu.err = "";
+    if (!String(fu.reason).trim()) fu.err = wT("ward.a-follow-up-needs-a-reason", "A follow-up needs a reason.");
     /* A follow-up with no date is one nobody books, so the date is required and must be a real date. */
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dueBy).trim())) { st.err = wT("ward.give-a-date-like-2026-10", "Give a date like 2026-10-01."); paint(); return; }
+    else if (!/^\d{4}-\d{2}-\d{2}$/.test(String(fu.dueBy).trim())) fu.err = wT("ward.give-a-date-like-2026-10", "Give a date like 2026-10-01.");
+    if (fu.err) { paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/follow-up", {
-      orgId: st.orgId,
-      patientId: s.patientId,
-      encounterId: s.encounterId,
-      reason: reason,
-      dueBy: String(dueBy).trim()
-    })
+    apiPost("/ward/follow-up", { orgId: st.orgId, patientId: s.patientId, encounterId: s.encounterId, reason: String(fu.reason).trim(), dueBy: String(fu.dueBy).trim() })
       .then(function (r) {
-        settle(r, r && r.ok ? wT("ward.follow-up-requested", "Follow-up requested.") : null);
+        st.busy = false;
+        if (r && r.ok) { st.fu = null; st.view = "chart"; st.note = wT("ward.follow-up-requested", "Follow-up requested."); paint(); return; }
+        if (st.fu === fu) fu.err = (r && (r.detail || r.message || r.error)) || wT("ward.could-not-request-that-follow-up", "Could not request that follow-up.");
         paint();
       })
-      .catch(function () { st.busy = false; st.err = wT("ward.could-not-request-that-follow-up", "Could not request that follow-up."); paint(); });
+      .catch(function () { st.busy = false; if (st.fu === fu) fu.err = wT("ward.could-not-request-that-follow-up", "Could not request that follow-up."); paint(); });
+  }
+  /* PURE. The follow-up screen. */
+  function followUpView(state) {
+    var fu = state.fu || {}, s = state.sel || {};
+    return '<div class="w-card">' +
+      '<div class="w-dt-bar"><button class="w-ic" data-w-act="back" aria-label="' + wTA("ward.back2", "Back") + '">' + ms("arrow_back") + "</button>" +
+      "<h3>" + wTH("ward.follow-up", "Follow-up") + "</h3><small>" + esc(s.name || "") + "</small></div>" +
+      '<label class="w-f"><span>' + wTH("ward.why-should-this-patient-be-seen","Why should this patient be seen again?") + '</span><textarea rows="3" data-w-fu="reason">' + esc(fu.reason || "") + "</textarea></label>" +
+      '<label class="w-f"><span>' + wTH("ward.seen-by", "Seen by") + '</span><input type="date" data-w-fu="dueBy" value="' + esc(fu.dueBy || "") + '"></label>' +
+      (fu.err ? '<p class="w-hint warn" role="alert">' + ms("error") + esc(fu.err) + "</p>" : "") +
+      '<div class="w-actions"><button class="w-btn go" data-w-act="followupsubmit"' + (state.busy ? " disabled" : "") + ">" + ms("schedule") + wTH("ward.request-follow-up", "Request follow-up") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="back">' + wTH("ward.cancel", "Cancel") + "</button></div></div>";
   }
 
   function invoiceVoid(invoiceId) {
@@ -10223,6 +10348,10 @@
   function onFormChange(ev) {
     var t = ev && ev.target;
     if (t && t.tagName === "SELECT" && t.hasAttribute("data-w-act")) { dispatch(t.getAttribute("data-w-act")); return; }
+    // Where the patient went decides which other boxes the discharge form asks for.
+    var kept = keepFormField(t);
+    if (kept === "disposition") { st.dc.err = ""; paint(); return; }
+    if (kept) return;
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "board" && t && t.id === "wBoardDept") { st.boardDept = t.value; paint(); return; }
     if (t && t.id === "wNoteTpl") { st.noteTemplateId = t.value; st.noteResult = null; paint(); return; }
@@ -11505,6 +11634,9 @@
    * a hospital-level view directly (open({act:"twin"})) with the SAME verb a click would send. */
   function dispatch(a) {
     var i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
+    /* LT-19: the discharge summary is a layer over the ward. Any other ward action means the person has
+     * moved on, so the layer goes with it instead of staying on top and taking their next click. */
+    if (cmd !== "summary") closeSummaryLayer();
     if (cmd === "close") { close(); return; }
     if (cmd === "chartcat") { chartNavShow(arg); return; }
     chartNavNote(cmd);
@@ -11528,6 +11660,8 @@
        * one patient's diagnoses left on screen is how the next person gets handed the wrong one. */
       if (st.view === "pcopy") { st.view = "chart"; st.pcopy = null; paint(); return; }
       if (st.view === "consent") { st.view = "chart"; st.consent = null; paint(); return; }
+      if (st.view === "discharge") { st.view = "chart"; st.dc = null; paint(); return; }
+      if (st.view === "followup") { st.view = "chart"; st.fu = null; paint(); return; }
       if (st.view === "ips") { st.view = "chart"; st.ips = null; paint(); return; }
       if (st.view === "completion") { st.view = "chart"; st.completion = null; paint(); return; }
       if (st.view === "roi") { st.view = "chart"; st.roi = null; paint(); return; }
@@ -11879,6 +12013,9 @@
     if (cmd === "surgeryabandon") { surgeryAbandon(arg); return; }
     if (cmd === "wardcloseopen") { wardDischarge(); return; }
     if (cmd === "followup") { followUpRequest(); return; }
+    if (cmd === "followupsubmit") { followUpSubmit(); return; }
+    if (cmd === "dischargecheck") { loadDischargeChecklist(); return; }
+    if (cmd === "dischargesubmit") { dischargeSubmit(); return; }
     if (cmd === "invvoid") { invoiceVoid(arg); return; }
     if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
     if (cmd === "bloodtrace") { bloodTrace(); return; }
@@ -12129,8 +12266,17 @@
     return "";
   }
   var _probDebounce = null;
+  /* The discharge and follow-up forms keep what is typed in state, so a repaint cannot wipe it (LT-17). */
+  function keepFormField(t) {
+    if (!t || !t.getAttribute) return false;
+    var k = t.getAttribute("data-w-dc"), f = t.getAttribute("data-w-fu");
+    if (k && st.dc) { st.dc[k] = String(t.value == null ? "" : t.value); return k; }
+    if (f && st.fu) { st.fu[f] = String(t.value == null ? "" : t.value); return f; }
+    return false;
+  }
   function onInput(e) {
     if (!e.target) return;
+    if (keepFormField(e.target)) return;
     if (e.target.id === "wQ") {
       st.q = String(e.target.value || "");
       var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st);
@@ -12214,7 +12360,13 @@
    *
    * Found 2026-09-12 signing out of a nurse's session and in as the pharmacist. Everything clinical
    * is cleared here; nothing is kept that names a patient. */
+  function closeSummaryLayer() {
+    var dc = typeof document !== "undefined" && document.getElementById("smdDischarge");
+    if (dc && dc.classList && dc.classList.contains("on") && G.DISCHARGE && G.DISCHARGE.close) { try { G.DISCHARGE.close(); } catch (e) {} }
+  }
   function close() {
+    closeSummaryLayer();
+    st.dc = null; st.fu = null;
     var el = root(); el.classList.remove("on"); el.innerHTML = "";
     try { document.removeEventListener("keydown", onKey); } catch (e) {}
     st.list = null; st.sel = null; st.timeline = null; st.activeMeds = null; st.timelineGap = 0;
