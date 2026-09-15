@@ -81,7 +81,11 @@ function load({ local, ai, localAnswer, consent = true, hybrid, cloudAllowed = t
     addEventListener() {}, Capacitor: { isNativePlatform: () => true, Plugins: {} },
     SMD_MAIK_ENGINE: { cloudAllowed: () => cloudAllowed },
     SMD_MAIK_LOCAL: { visionReady: () => visionReady, currentPack: () => "maik-mxcore", answer: async (...args) => { sent.push({ local: args }); return localAnswer; } },
-    SMD_NATIVE: { ocr: () => Promise.resolve({}) },
+    SMD_NATIVE: {
+      ocr: () => Promise.resolve({}),
+      writeTempImage: (dataUrl) => { sent.push({ writeTempImage: dataUrl }); return Promise.resolve("file:///tmp/smd-test.jpg"); },
+      removeTempImage: (path) => { sent.push({ removeTempImage: path }); }
+    },
     SMD_ICU_MONITOR: M,
     SMD_AI: {
       readImageLocal: async () => JSON.parse(JSON.stringify(local)),
@@ -112,6 +116,10 @@ test("Local engine selected: the hybrid check runs on-device (no upload, no cons
   assert.equal(sent.some((s) => s.img), false, "nothing was sent to AI Vision");
   assert.ok(sent.some((s) => s.local), "the on-device model was asked");
   assert.equal(sent.find((s) => s.crop)?.crop.maxLong, 1024, "a smaller crop for the slower on-device model");
+  assert.ok(sent.some((s) => s.writeTempImage), "the crop is written to a device file before the model reads it (mtmd needs a real path, not a data: URL)");
+  const localArgs = sent.find((s) => s.local)?.local;
+  assert.equal(localArgs[1].images[0], "/tmp/smd-test.jpg", "the model gets the temp file's path, not a data: URL");
+  assert.ok(sent.some((s) => s.removeTempImage === "file:///tmp/smd-test.jpg"), "the temp file is cleaned up");
   assert.equal(r.fields.hr, 72);
   assert.equal(r.fields.rr, 16, "device suggestion confirmed by the on-device model");
   assert.equal(r.fields.spo2, undefined, "97 vs 95 stays review");

@@ -148,6 +148,11 @@
   }
 
   window.SMD_NATIVE = {
+    // Write a data: URL to a device-local temp file and return its path, for native calls (the
+    // on-device vision model, ML Kit OCR) that read the image file themselves rather than take
+    // base64/data-URL bytes over the JS bridge. Caller must removeTempImage() when done.
+    writeTempImage: writeTempImage,
+    removeTempImage: removeTempImage,
     // Route to the iOS share sheet (offers Save to Files / Print / Markup / Mail).
     share: function (opts) {
       var P = plugins();

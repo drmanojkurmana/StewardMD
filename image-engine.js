@@ -475,7 +475,18 @@
     var ask = "Read this clinical image and return ONLY JSON matching " + schema + ". Omit any field you cannot read with confidence. No prose, no explanation, no code fence.";
     var sysOverride = "You read clinical images and return ONLY the JSON asked for. No prose, no explanation, no code fence, no commentary. Omit any field you cannot read with confidence. Never invent a value.";
     var cropP = reg ? window.SMD_AI.cropImage(image, { x: reg.x, y: reg.y, w: reg.w, h: reg.h, maxLong: 1024 }) : Promise.resolve(null);
-    return cropP.then(function (crop) { return Promise.resolve(L.answer({ question: ask }, { images: [stripFileScheme(crop || image)], systemOverride: sysOverride }, null)); })
+    // The on-device vision model reads the image file itself (mtmd, native side) - it needs a real
+    // device path, never a data: URL or base64 over the bridge. Write the crop (or the full capture,
+    // when there is no crop region) to a temp file first, and always clean it up.
+    var N = window.SMD_NATIVE;
+    return cropP.then(function (crop) {
+      var dataUrl = crop || image;
+      if (!(N && N.writeTempImage)) return Promise.resolve(L.answer({ question: ask }, { images: [stripFileScheme(dataUrl)], systemOverride: sysOverride }, null));
+      return N.writeTempImage(dataUrl).then(function (path) {
+        return Promise.resolve(L.answer({ question: ask }, { images: [stripFileScheme(path)], systemOverride: sysOverride }, null))
+          .finally(function () { N.removeTempImage(path); });
+      });
+    })
       .then(function (resp) {
         done();
         var f = resp && !resp.error ? parseLooseJson(String(resp.text || "")) : null;
