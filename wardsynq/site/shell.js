@@ -274,12 +274,11 @@
     if (PAGES[r.page]) return render(r.page);
     return render("home");
   }
+  /* LT-09: the workstation lists this hospital's admitted patients and signs through the ward routes, so it
+   * is opened for the hospital, demo or not. The fabricated demo patients and the separate record
+   * connection are gone. */
   function workstationUrl() {
-    var t = st.org && st.org.connectTenantId;
-    if (isDemo(st.org) || !t || t === "none" || t === "undefined" || t === "null") {
-      return "/wardsynq/ui/wardsynq.html?site=1" + (isDemo(st.org) ? "&demo=1" : "");
-    }
-    return "/wardsynq/ui/wardsynq.html?record=" + encodeURIComponent(t) + "&site=1";
+    return "/wardsynq/ui/wardsynq.html?site=1&orgId=" + encodeURIComponent(st.orgId || "");
   }
   function whoami() {
     return api("/whoami" + (st.orgId ? "?orgId=" + encodeURIComponent(st.orgId) : "")).then(function (r) {

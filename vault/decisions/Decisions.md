@@ -6499,3 +6499,15 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   row via `RecordService.auditDenied`), whatever their role. Unverified orders stay administrable (rule 4).
 - ward.js `paint()` puts back fields the user changed (same view and patient, same drawn default); a write the server
   accepted (`written !== 0`) empties the card its button sits in.
+
+## 2026-09-15 The Order workstation is a ward screen, not a separate record client (LT-09, LT-10)
+- `wardsynq/ui/wardsynq-app.js` no longer carries a demo cohort, a browser-side governed store, an offline journal
+  or its own rule-pack evaluation. Roster: `GET /api/queue/ward/list`. Context: `/ward/fhir` (AllergyIntolerance,
+  Patient, Observation weight and labs) and `/ward/timeline` (active medicines). Sign: the chart's two steps on
+  `POST /api/queue/ward/medication-order` (checkOnly, then the order with `overrideReason`). The site shell opens it
+  with `?site=1&orgId=`, demo hospital or not. Allergies the page cannot read stop the order.
+- Dose limits may be weight-based only up to a weight (`mgPerKgUpToKg`; paracetamol 50 kg, ibuprofen 40 kg) and may
+  carry a daily ceiling checked against the order's frequency (`absoluteCeilingDaily`, `maxDaily`; the frequency
+  reading is pinned to mar-schedule.js parseFrequency). The WardSynQ adapter drops generated duplicate-therapy rules on
+  RxClass grouping classes (a class that strictly contains another class of two or more members); curated rules stay.
+  The generator (scripts/interactions/build_rules.py) and the StewardMD app's copy of the rules are unchanged.
