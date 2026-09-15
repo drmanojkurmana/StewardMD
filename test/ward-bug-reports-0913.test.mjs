@@ -188,6 +188,32 @@ test("BUG-MU08MEQI-JZH1: vitals charted together are one row; a laboratory value
   assert.match(html, /Thrombocytes: 90/);
 });
 
+// ---- BUG-MU06HOBO-488C: an infusion's duration never becomes its frequency ------------------------------
+function orderWith(vals) {
+  const els = {};
+  for (const [k, v] of Object.entries(vals)) els[k] = { value: v };
+  const posts = [];
+  const { W } = loadWard({ els, fetch: (url, init) => { if (init && init.method === "POST") posts.push({ url, body: JSON.parse(init.body) }); return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ ok: true, written: 1, due: [] }) }); } });
+  W._st.orgId = "org-test";
+  W._st.sel = { class: "IPD", patientId: "p1", encounterId: "e1" };
+  return { W, posts };
+}
+test("BUG-MU06HOBO-488C: thiamine in 100 mL D25 over 3 hrs is refused without a frequency, and sent as written with one", async () => {
+  const base = { wMoDrug: "Thiamine", wMoValue: "200", wMoUnit: "mg", wMoRoute: "", wMoDiluentVal: "100 mL D25", wMoInfDuration: "3 hrs" };
+  const a = orderWith({ ...base, wMoFreq: "" });
+  a.W._dispatch("medorder");
+  await tick();
+  assert.equal(a.posts.filter((p) => /medication-order/.test(p.url)).length, 0, "an order with an invented frequency was sent");
+  assert.match(a.W._st.err, /duration is not a frequency/);
+  const b = orderWith({ ...base, wMoFreq: "OD" });
+  b.W._dispatch("medorder");
+  await tick();
+  const sent = b.posts.find((p) => /medication-order/.test(p.url));
+  assert.ok(sent, "the order was not sent");
+  assert.equal(sent.body.order.frequency, "OD");
+  assert.equal(sent.body.order.route, "IV infusion in 100 mL D25 over 3 hrs");
+});
+
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
 const LAB_BOARD = {
   specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},

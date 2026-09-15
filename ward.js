@@ -8914,10 +8914,13 @@
     var drug = val("wMoDrug"), value = val("wMoValue"), unit = val("wMoUnit"), route = val("wMoRoute"), frequency = val("wMoFreq");
     var diluent = val("wMoDiluentVal"), duration = val("wMoInfDuration"), instr = checkedInstructions("wMoInstr");
     if (!drug || !value || !unit) { st.err = "Drug, dose and unit are required."; paint(); return; }
+    /* BUG-MU06HOBO-488C: the carrier and duration ride on the route as written ("IV infusion in 100 mL D25
+     * over 3 hrs"). How often it is given is only ever what the prescriber typed: a blank frequency used to
+     * become "over 3 hrs", which the round cannot schedule and which nobody prescribed. */
     if (diluent || duration) {
+      if (!frequency) { st.err = "Say how often this infusion is given (for example STAT, OD or BD). The duration is not a frequency."; paint(); return; }
       var infNote = " in " + (diluent || "diluent") + (duration ? " over " + duration : "");
-      route = route ? (route + " (IV Infusion" + infNote + ")") : ("IV Infusion" + infNote);
-      if (!frequency && duration) frequency = "over " + duration;
+      route = route ? (route + " (IV infusion" + infNote + ")") : ("IV infusion" + infNote);
     }
     st.busy = true; paint();
     apiPost("/ward/medication-order", {
