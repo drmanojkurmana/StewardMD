@@ -64,6 +64,12 @@ const evalValue = async (expression) => {
   return r.result && r.result.result ? r.result.result.value : null;
 };
 
+/* ROUND TRIPS ARE THE DEVICE'S CLOCK. Headless, an evaluate costs about a millisecond; through the
+ * Capacitor bridge to a WKWebView it costs tens of milliseconds and sometimes far more, so the wall
+ * clock a doctor experiences tracks the NUMBER of calls, not the time this harness reports. Counting
+ * them here is how the five-minute promise gets measured without a phone in hand. */
+export const calls = { evaluate: 0, navigate: 0, other: 0, waitMs: 0, loadMs: 0 };
+
 function makeCdpPlugin() {
   return {
     platform: "ios",
@@ -73,8 +79,9 @@ function makeCdpPlugin() {
       await waitReady();
       return { ok: true };
     },
-    async navigate({ url }) { await call("Page.navigate", { url }); await waitReady(); return { ok: true }; },
+    async navigate({ url }) { calls.navigate += 1; await call("Page.navigate", { url }); await waitReady(); return { ok: true }; },
     async evaluate({ expression }) {
+      calls.evaluate += 1;
       const r = await call("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
       if (r.result && r.result.exceptionDetails) throw new Error(r.result.exceptionDetails.text || "evaluate failed");
       const v = r.result && r.result.result ? r.result.result.value : null;
@@ -185,7 +192,7 @@ async function main() {
       plugin, api, session: { id: "hospital-session-1" }, deployment,
       startUrl: `${hospital.origin}/t/${tenantId}/worklist`,
       onProgress: (p) => phases.push(p.phase),
-      caps: { maxSteps: 8, maxMs: 60000, maxDepth: 4, waitMs: 700 },
+      caps: { maxSteps: 8, maxMs: 60000, maxDepth: 4, waitMs: Number(process.env.WAIT_MS || 700) },
     });
 
     ok(phases.includes("DISCOVERING") && phases.includes("DONE"), `discovery ran to DONE (${phases.join(",")})`);
@@ -208,6 +215,14 @@ async function main() {
 
     const elapsed = Date.now() - started;
     ok(elapsed < BUDGET_MS, `a hospital nobody had seen before was integrated in ${(elapsed / 1000).toFixed(1)}s (budget ${(BUDGET_MS / 1000).toFixed(0)}s)`);
+
+    /* WHAT IT WILL COST ON A PHONE. Each evaluate is a bridge round trip there, not a microsecond.
+     * At a pessimistic 120ms per call the whole onboarding still has to fit inside five minutes. */
+    const PHONE_MS_PER_CALL = Number(process.env.PHONE_MS_PER_CALL || 120);
+    const trips = calls.evaluate + calls.navigate;
+    const projected = trips * PHONE_MS_PER_CALL;
+    console.log(`  round trips: ${calls.evaluate} evaluate + ${calls.navigate} navigate = ${trips}`);
+    ok(projected < BUDGET_MS, `at ${PHONE_MS_PER_CALL}ms a call that is ${(projected / 1000).toFixed(0)}s on a phone (budget ${(BUDGET_MS / 1000).toFixed(0)}s)`);
 
     console.log(fails === 0 ? "\nALL GREEN - connect-hospital-browser test passed" : `\n${fails} FAILED`);
   } catch (e) {
