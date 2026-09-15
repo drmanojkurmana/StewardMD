@@ -237,6 +237,18 @@ test("BED BOARD (BUG-MU06Z46U-DMDX, BUG-MU08T4RL-GU0N): GET /api/queue/ward/beds
   assert.equal(board.wards.find((x) => x.ward === "General A").department, null, "a ward with no department is not given one");
 });
 
+test("WARD LIST (BUG-MU0710W4-04KD): GET /api/queue/ward/list names each patient's department from the ward's master data", async () => {
+  seedHospital();
+  const cardio = await ORG_STORE.createDepartment(undefined, ORG, { name: "Cardiology" }, "actor-1");
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "CCU", departmentId: cardio.id }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "1" }, "actor-1");
+  const { adm } = await registerAndAdmit("CCU", "1");
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+  const list = await as(DOCTOR, `/ward/list?orgId=${ORG}`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  assert.equal(list.patients.find((p) => p.ward === "CCU").department, "Cardiology");
+});
+
 test("RETIRE A BED (BUG-MU072XAL-4EHO): POST /api/queue/bed/update active:false - staff.admin only, this hospital only, never with a patient in it", async () => {
   seedHospital();
   const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");

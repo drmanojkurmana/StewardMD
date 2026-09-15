@@ -388,6 +388,17 @@ async function releaseBedClaim(svc, candidate) {
  * A caller with no read grant gets a refusal, not an empty list — an empty ward and a forbidden ward
  * must never look the same to a nurse.
  */
+/* Ward name -> its department's name, from the hospital's own master data (Admin, departments and wards).
+ * A ward with no department, or departments that cannot be read, is simply absent: never guessed. */
+async function departmentNames(env, orgId, wards) {
+  const out = new Map();
+  if (!orgId || !(wards || []).some((w) => w && w.departmentId)) return out;
+  let depts = [];
+  try { depts = await listDepartments(env, orgId); } catch { return out; }
+  for (const w of wards) { const d = depts.find((x) => x.id === w.departmentId); if (d && d.name) out.set(w.name, d.name); }
+  return out;
+}
+
 async function listWard(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -427,6 +438,9 @@ async function listWard(request, env, ctx) {
     const roster = await svc.list("Patient", 400);
     byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+  // BUG-MU0710W4-04KD: the ward list filters by department.
+  let deptOf = new Map();
+  if (ctx.orgId) { try { deptOf = await departmentNames(env, ctx.orgId, await listWards(env, ctx.orgId)); } catch { deptOf = new Map(); } }
 
   const patients = open.map((e) => {
     const p = byId.get(e.patientId) || null;
@@ -436,6 +450,7 @@ async function listWard(request, env, ctx) {
       name: (p && (p.name || p.display)) || null,
       mrn: (p && p.mrn) || null,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
+      department: (e.location && deptOf.get(e.location.ward)) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
     };
   });
@@ -863,11 +878,7 @@ async function bedBoard(request, env, ctx) {
     try { masterWards = (await listWards(env, ctx.orgId)).filter((w) => w.active); } catch { masterWards = []; }
     /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: admitting and transferring pick a department by picking one of
      * its wards, so the board names each ward's department. Unreadable departments leave it null. */
-    if (masterWards.some((w) => w.departmentId)) {
-      let depts = [];
-      try { depts = await listDepartments(env, ctx.orgId); } catch { depts = []; }
-      for (const w of masterWards) { const d = depts.find((x) => x.id === w.departmentId); if (d && d.name) deptOf.set(w.name, d.name); }
-    }
+    for (const [k, v] of await departmentNames(env, ctx.orgId, masterWards)) deptOf.set(k, v);
     if (masterWards.length) {
       cfg = {};
       for (const w of masterWards) {

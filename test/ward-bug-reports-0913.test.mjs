@@ -214,6 +214,21 @@ test("BUG-MU06HOBO-488C: thiamine in 100 mL D25 over 3 hrs is refused without a 
   assert.equal(sent.body.order.route, "IV infusion in 100 mL D25 over 3 hrs");
 });
 
+// ---- BUG-MU0710W4-04KD: ward list filters ---------------------------------------------------------------
+test("BUG-MU0710W4-04KD: department filter from the record; no 'doctor' search that matched nothing; selects apply on change", () => {
+  const { W } = loadWard();
+  const pts = [
+    { encounterId: "e1", patientId: "p1", name: "Alpha Test", ward: "CCU", department: "Cardiology", class: "IPD", admittedAt: new Date().toISOString() },
+    { encounterId: "e2", patientId: "p2", name: "Beta Test", ward: "General A", department: null, class: "IPD", admittedAt: new Date().toISOString() },
+  ];
+  assert.deepEqual(W.filterRoster(pts, "", "", { dept: "Cardiology" }).map((p) => p.encounterId), ["e1"]);
+  assert.deepEqual(W.filterRoster(pts, "", "cardio", {}).map((p) => p.encounterId), ["e1"], "search reaches the department");
+  const html = W._render({ ...W._st, view: "list", patients: pts, loaded: true });
+  assert.match(html, /<select id="wRosterDeptFilter"/);
+  assert.ok(!/or doctor/.test(html), "the search box still promises a doctor search the list cannot do");
+  assert.ok(!/data-w-act="rosterfilter:/.test(html), "a filter select still repaints on click, closing itself");
+});
+
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
 const LAB_BOARD = {
   specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},

@@ -364,7 +364,7 @@
     return (patients || []).filter(function (p) {
       if (cls && p.class !== cls) return false;
       if (extra.ward && p.ward !== extra.ward) return false;
-      if (extra.doctor && p.doctor && p.doctor.toLowerCase().indexOf(extra.doctor.toLowerCase()) === -1) return false;
+      if (extra.dept && p.department !== extra.dept) return false;
       if (extra.stay) {
         var day = stayDay(p.admittedAt);
         var dayNum = parseInt((day || "").replace("day ", ""), 10) || 0;
@@ -373,7 +373,7 @@
         if (extra.stay === "long" && dayNum <= 7) return false;
       }
       if (!needle) return true;
-      return [p.name, p.mrn, p.bed, p.ward, p.patientId, p.doctor].some(function (v) { return v != null && String(v).toLowerCase().indexOf(needle) >= 0; });
+      return [p.name, p.mrn, p.bed, p.ward, p.patientId, p.department].some(function (v) { return v != null && String(v).toLowerCase().indexOf(needle) >= 0; });
     });
   }
   function rosterHtml(state) {
@@ -384,16 +384,26 @@
     var uniqueWards = [];
     all.forEach(function (p) { if (p.ward && uniqueWards.indexOf(p.ward) === -1) uniqueWards.push(p.ward); });
     uniqueWards.sort();
+    var uniqueDepts = [];
+    all.forEach(function (p) { if (p.department && uniqueDepts.indexOf(p.department) === -1) uniqueDepts.push(p.department); });
+    uniqueDepts.sort();
 
+    /* BUG-MU0710W4-04KD: the selects apply on change (onFormChange). As click actions they repainted the
+     * roster the moment the list was tapped open, which closed it before anything could be chosen. */
     var filterRow = '<div class="w-roster-filter-bar" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; align-items:center;">' +
+      (uniqueDepts.length ? '<label style="font-size:12px; color:var(--on-surface-variant); display:inline-flex; align-items:center; gap:4px;">' + ms("domain") + "Department: " +
+        '<select id="wRosterDeptFilter" style="padding:4px 8px; border-radius:6px; border:1px solid var(--outline-variant); font-size:12px; background:var(--sc-low); color:var(--on-surface);">' +
+          '<option value="">All departments</option>' +
+          uniqueDepts.map(function (d) { return '<option value="' + esc(d) + '"' + (extra.dept === d ? " selected" : "") + ">" + esc(d) + "</option>"; }).join("") +
+        "</select></label>" : "") +
       '<label style="font-size:12px; color:var(--on-surface-variant); display:inline-flex; align-items:center; gap:4px;">' + ms("filter_alt") + 'Ward: ' +
-        '<select id="wRosterWardFilter" data-w-act="rosterfilter:ward" style="padding:4px 8px; border-radius:6px; border:1px solid var(--outline-variant); font-size:12px; background:var(--sc-low); color:var(--on-surface);">' +
+        '<select id="wRosterWardFilter" style="padding:4px 8px; border-radius:6px; border:1px solid var(--outline-variant); font-size:12px; background:var(--sc-low); color:var(--on-surface);">' +
           '<option value="">All Wards</option>' +
           uniqueWards.map(function (w) { return '<option value="' + esc(w) + '"' + (extra.ward === w ? " selected" : "") + ">" + esc(w) + "</option>"; }).join("") +
         '</select>' +
       '</label>' +
       '<label style="font-size:12px; color:var(--on-surface-variant); display:inline-flex; align-items:center; gap:4px;">' + ms("schedule") + 'Stay: ' +
-        '<select id="wRosterStayFilter" data-w-act="rosterfilter:stay" style="padding:4px 8px; border-radius:6px; border:1px solid var(--outline-variant); font-size:12px; background:var(--sc-low); color:var(--on-surface);">' +
+        '<select id="wRosterStayFilter" style="padding:4px 8px; border-radius:6px; border:1px solid var(--outline-variant); font-size:12px; background:var(--sc-low); color:var(--on-surface);">' +
           '<option value="">Any duration</option>' +
           '<option value="short"' + (extra.stay === "short" ? " selected" : "") + '>1-3 days</option>' +
           '<option value="medium"' + (extra.stay === "medium" ? " selected" : "") + '>4-7 days</option>' +
@@ -544,7 +554,7 @@
     var rightRoster =
       '<div class="w-card"><div class="w-card-h">' + ms("bed") + "<h3>Ward round" + (state.ward ? ": " + esc(state.ward) : "") + "</h3>" +
       '<button class="w-ic" data-w-act="reload" title="Refresh">' + ms("refresh") + "</button></div>" +
-      '<div class="w-filter"><input id="wQ" type="search" autocomplete="off" placeholder="Search name, MRN, bed or doctor" value="' + esc(state.q || "") + '">' +
+      '<div class="w-filter"><input id="wQ" type="search" autocomplete="off" placeholder="Search name, MRN, bed, ward or department" value="' + esc(state.q || "") + '">' +
       '<input id="wWard" type="text" placeholder="Ward (blank = all)" value="' + esc(state.ward) + '">' +
       '<button class="w-btn ghost" data-w-act="setward" type="button">Apply</button></div>' +
       alertCoverHtml(state) +
@@ -10061,6 +10071,13 @@
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "board" && t && t.id === "wBoardDept") { st.boardDept = t.value; paint(); return; }
     if (t && t.id === "wNoteTpl") { st.noteTemplateId = t.value; st.noteResult = null; paint(); return; }
+    var ROSTER_FILTER = { wRosterWardFilter: "ward", wRosterStayFilter: "stay", wRosterDeptFilter: "dept" };
+    if (t && ROSTER_FILTER[t.id]) {
+      st.rosterFilters = st.rosterFilters || {};
+      st.rosterFilters[ROSTER_FILTER[t.id]] = t.value;
+      var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint();
+      return;
+    }
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     // The print's second language: its catalog file is loaded before the page is drawn with it.
     if (st.view === "pcopy" && t && t.id === "wPcopyLang") { st.pcopyLang = t.value; if (G.WSQPrint) G.WSQPrint.ensureLoaded(t.value, paint); else paint(); return; }
@@ -11706,18 +11723,6 @@
     if (cmd === "bloodtrace") { bloodTrace(); return; }
     if (cmd === "dictate") { startDictation(arg); return; }
     if (cmd === "dictlang") { toggleDictLang(); return; }
-    if (cmd === "rosterfilter") {
-      st.rosterFilters = st.rosterFilters || {};
-      if (arg === "ward") {
-        var elW = document.getElementById("wRosterWardFilter");
-        st.rosterFilters.ward = elW ? elW.value : "";
-      } else if (arg === "stay") {
-        var elS = document.getElementById("wRosterStayFilter");
-        st.rosterFilters.stay = elS ? elS.value : "";
-      }
-      var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint();
-      return;
-    }
     /* BUG-MU08DSH6-N7FM / BUG-MU09DOEX-I3GT: a bed tile, or a critical result, opens that patient's chart.
      * This used to call loadRound(id), which ignores its argument and reads whatever chart was already
      * selected, and fell back to GET /ward/encounter, a route that does not exist: the tap did nothing. */
