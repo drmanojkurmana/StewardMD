@@ -661,3 +661,6 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
   #smdWard .w-np-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 320px); gap: 16px; align-items: start; }
   #smdWard .w-np-list { order: -1; }
 }
+
+/* The staff language: a translated safety text keeps the English it was translated from right under it. */
+#smdWard .w-en { display: block; flex-basis: 100%; font-size: .82em; font-weight: 400; opacity: .85; margin-top: 2px; }
