@@ -75,7 +75,7 @@ export const ASK_PROMPTS = Object.freeze({
  * next }`: async advisors answering from screen STRUCTURE only (see functions/_connect/agent/brain.js);
  * any of them may reject or return null and the deterministic rules stand.
  */
-export async function runPhoneDiscovery({ plugin, api, session, deployment, startUrl, onProgress, askDoctor, stopSignal, caps, mode = 'auto', brain = null, compact = false } = {}) {
+export async function runPhoneDiscovery({ plugin, api, session, deployment, startUrl, onProgress, askDoctor, stopSignal, finishSignal, caps, mode = 'auto', brain = null, compact = false } = {}) {
   if (!plugin) throw new Error('runPhoneDiscovery requires a plugin client');
   if (!api || typeof api.plan !== 'function' || typeof api.discovery !== 'function' || typeof api.evidence !== 'function') {
     throw new Error('runPhoneDiscovery requires api.plan, api.discovery and api.evidence');
@@ -99,7 +99,15 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   } catch { /* no current URL: fall back to the typed address */ }
 
   const notify = (phase, extra = {}) => { try { onProgress?.({ phase, mode, ...extra }); } catch { /* never let UI feedback break discovery */ } };
-  const stopped = () => typeof stopSignal === 'function' && !!stopSignal();
+  /* SAVE WHAT YOU HAVE. A run that stalls late (a verify call that never returns) used to leave the
+   * doctor a frozen bar and one button that THREW THE WHOLE CRAWL AWAY, so a run that had already
+   * learned the EMR looked identical to one that had failed (owner, iPhone, 2026-09-15). `finishSignal`
+   * is the doctor saying "stop looking, keep what you found": every stop check below honours it, so the
+   * crawl, the verification and the guided asks all break out and the run falls THROUGH to the
+   * discovery/evidence save with whatever was learned. Distinct from `stopSignal`, which is the
+   * destructive Stop and tears the session down. */
+  const finishing = () => typeof finishSignal === 'function' && !!finishSignal();
+  const stopped = () => (typeof stopSignal === 'function' && !!stopSignal()) || finishing();
   /* `compact` (auto mode with the game on screen): the hospital browser takes the top half only while
    * the agent drives, so the sheet's progress and game stay visible; a guided ask is always full size. */
   const setMode = async (m, banner) => { if (typeof plugin.setMode === 'function') await plugin.setMode({ mode: m, banner, origins, compact: !!compact && m === 'agent' }).catch(() => {}); };
@@ -204,7 +212,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // The touch overlay is armed ONLY while the agent clicks autonomously (here and in the crawl), never
     // while waiting for the doctor.
     await setMode('agent');
-    explored = await explorePhone({ client: plugin, collector, planner, startUrl: url, caps, stopSignal });
+    explored = await explorePhone({ client: plugin, collector, planner, startUrl: url, caps, stopSignal: stopped });
     notify('EXPLORED', { steps: explored.steps.length, events: collector.raw().length });
   }
 
@@ -221,7 +229,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     // yields no html ops.
     try {
       const crawl = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = crawl.observedViews || [];
@@ -238,6 +246,9 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
   let verification = { patients: [], checks: [], failed: [] };
   const runVerification = async () => {
     if (!observedViews.length || crawlStop === 'login-required' || crawlStop === 'session-expired-or-shell') return;
+    /* The doctor asked to keep what was found: skip proving it rather than sit in a verify call that
+     * is not returning. The views are still saved; they are saved UNPROVEN, and say so. */
+    if (finishing()) { warnings.push('saved at your request before every screen was double-checked'); return; }
     notify('VERIFYING', { found, looking: looking(), checking: 'worklist' });
     try {
       verification = await verifyViews({ plugin, origin: origins[0], views: observedViews, brain, book, stopped, waitMs: caps?.verifyWaitMs ?? 6000, notify: (phase, extra) => notify(phase, { found, looking: looking(), ...extra }) });
@@ -260,7 +271,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
     await setMode('agent');
     try {
       const again = await deepCrawlClinical({
-        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal, brain, book,
+        client: plugin, caps: Object.assign({ exploreDetails: true }, caps || {}), stopSignal: stopped, brain, book,
         onProgress: (p) => notify('CRAWLING', { steps: explored.steps.length, events: collector.raw().length, opening: p.opening, found: p.found, looking: p.looking }),
       });
       observedViews = again.observedViews || [];

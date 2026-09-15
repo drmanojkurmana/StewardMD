@@ -1117,6 +1117,8 @@
     S.progressCounts = { pages: 0, requests: 0, phase: "DISCOVERING", opening: "", found: [], looking: [] };
     S.progressFailed = false;
     S.stopRequested = false;
+    S.finishRequested = false;
+    S.lastProgressAt = Date.now();         // the clock the stall watchdog divides by
     S.guide = null;
     S.guideResolve = null;
     show("progress");
@@ -1138,6 +1140,9 @@
         brain: brainApi(),
         compact: wantsCompact(),
         stopSignal: function () { return !!(S && S.stopRequested); },
+        /* "Save what you have": the doctor's escape from a run that has gone quiet. Unlike Stop it
+         * keeps the session and everything learned; the engine breaks out and saves. */
+        finishSignal: function () { return !!(S && S.finishRequested); },
         /* The agent could not find something: hand the screen to the doctor (plugin guide mode) and
          * resolve when they tap Done in the browser header, or Skip here. */
         askDoctor: function (q) {
@@ -1155,6 +1160,7 @@
           // agent opened, events are requests it observed, opening is the control it is clicking now,
           // found / looking are the canonical views captured so far / still missing.
           var c = S.progressCounts;
+          S.lastProgressAt = Date.now();
           S.progressCounts = {
             pages: (p && p.steps != null) ? p.steps : (p && p.pages != null) ? p.pages : c.pages,
             requests: (p && p.events != null) ? p.events : (p && p.requests != null) ? p.requests : c.requests,
@@ -1263,6 +1269,21 @@
    * captured, the sentence from the view being opened, the time from this run's own elapsed clock. */
   var TARGET_VIEWS = 8;                     // worklist, patient, notes, labs, radiology, medications, discharge, history
   function isManual() { return !!(S && S.mode === "manual"); }
+  /* THE RUN HAS GONE QUIET.
+   *
+   * The engine pushes progress at every step, so silence means a call that is not coming back. The
+   * screen used to keep counting down through it - a frozen 86% still promising "about a minute
+   * left" - and the only control was Stop, which DELETES the session and throws away a crawl that
+   * had already learned the whole EMR (owner, iPhone, 2026-09-15). Past STALL_MS the estimate is
+   * replaced by the truth, and if anything was found there is a way to keep it that is not Stop. */
+  var STALL_MS = 45000;
+  function stalledFor() {
+    if (!S || S.guide || S.progressFailed || S.finishRequested) return 0;
+    var idle = Date.now() - (S.lastProgressAt || 0);
+    return (S.lastProgressAt && idle > STALL_MS) ? idle : 0;
+  }
+  function foundCount() { return (((S && S.progressCounts) || {}).found || []).length; }
+  function canFinishNow() { return stalledFor() > 0 && foundCount() > 0; }
   function progressFraction() {
     var c = S.progressCounts || {};
     var found = (c.found || []).length;
@@ -1298,6 +1319,10 @@
   /* A coarse estimate from THIS run's own pace. Silent until there is enough of a run to divide by,
    * and never a false precision: a doctor needs "about two minutes", not a countdown. */
   function etaLine() {
+    if (S.finishRequested) return "Saving.";
+    // A stalled run must never keep promising a time. Say how long it has been quiet instead.
+    var idle = stalledFor();
+    if (idle) return "No change for " + Math.round(idle / 1000) + "s.";
     if (S.guide || (isManual() && progressFraction() < 0.9)) return "";
     var started = S.progressStartedAt || 0;
     var f = progressFraction();
@@ -1369,10 +1394,23 @@
       '<div id="smd-connect-detail">' + progressDetail() + '</div>' +
       (isManual() ? "" : '<div id="smd-connect-snake" class="smd-connect-snake" aria-label="A small game while you wait"></div>') +
       '<div class="smd-connect-note">' + (isManual() ? "Keep your phone unlocked and StewardMD open until every step is answered." : "Keep your phone unlocked and StewardMD open. Locking the screen stops the agent. This takes a few minutes.") + '</div>' +
+      '<div id="smd-connect-stallnote" class="smd-connect-note" style="display:none"></div>' +
       '<div class="smd-connect-row"><button id="smd-connect-stop" class="smd-connect-btn danger" type="button">Stop</button>' +
+      '<button id="smd-connect-finishnow" class="smd-connect-btn primary" type="button" style="display:none">Save what you have</button>' +
       '<button id="smd-connect-progretry" class="smd-connect-btn primary" type="button" style="display:' + (S.progressFailed ? "" : "none") + '">Try again</button></div>';
     setStatus(S.progressFailed ? "bad" : "", S.statusText || "");
     b.querySelector("#smd-connect-stop").onclick = function () { S.stopRequested = true; stopDiscovery(); };
+    /* NOT Stop. The session stays open and the engine keeps everything it learned: it breaks out of
+     * whatever it is waiting on and goes straight to writing the connection. */
+    b.querySelector("#smd-connect-finishnow").onclick = function () {
+      if (!S || S.finishRequested) return;
+      S.finishRequested = true;
+      S.bannerLine = null;
+      var btn = b.querySelector("#smd-connect-finishnow");
+      if (btn) { btn.disabled = true; btn.textContent = "Saving"; }
+      paintProgress();
+      publishBannerProgress();
+    };
     b.querySelector("#smd-connect-progretry").onclick = function () { beginAgentMode(); };
     wireGuideSkip(b);
     startProgressTicker();
@@ -1442,6 +1480,26 @@
       // One crawl step can take half a minute; the banner is all the doctor can see, so the time
       // left has to keep moving there too, not only on the hidden sheet.
       publishBannerProgress();
+      // A quiet run grows a way out. Only the ticker can do this: nothing else runs while the
+      // engine is stuck, which is exactly why the screen had no escape before.
+      var fin = document.getElementById("smd-connect-finishnow");
+      var note = document.getElementById("smd-connect-stallnote");
+      if (fin && !S.finishRequested) fin.style.display = canFinishNow() ? "" : "none";
+      if (!note) return;
+      if (S.finishRequested) {
+        note.style.display = "";
+        note.textContent = "Keeping what the agent already found. This takes a few seconds.";
+      } else if (canFinishNow()) {
+        var n = foundCount();
+        note.style.display = "";
+        note.textContent = "This step is taking longer than usual. Nothing is lost: " + n + (n === 1 ? " screen has" : " screens have") +
+          " already been learned. Save what you have keeps them and finishes now. Stop throws them away.";
+      } else if (stalledFor()) {
+        note.style.display = "";
+        note.textContent = "This step is taking longer than usual. Still trying.";
+      } else {
+        note.style.display = "none";
+      }
     }, 1000);
   }
   function stopProgressTicker() {

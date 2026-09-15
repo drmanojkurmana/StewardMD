@@ -138,6 +138,35 @@ test('runPhoneDiscovery: no askDoctor -> never leaves agent mode; stopSignal end
   assert.deepEqual(asks, ['worklist']); // Stop pressed during the first ask (the unproven worklist comes first): no further asks
 });
 
+/* SAVE WHAT YOU HAVE. A run that stalls late must not cost the doctor the crawl. finishSignal is the
+ * doctor tapping it: unlike stopSignal, the run does not end empty-handed - it breaks out of the asks
+ * and the verification and still writes the discovery and evidence with everything already learned.
+ * Regression for the frozen-at-86% run (owner, iPhone, 2026-09-15). */
+test('runPhoneDiscovery: finishSignal saves what was found instead of discarding it', async () => {
+  const state = { page: 'worklist', requests: [], guided: false, guideTaps: [] };
+  const plugin = fakePlugin(state);
+  const calls = {};
+  let finish = false;
+  const asks = [];
+  const result = await runPhoneDiscovery({
+    plugin, api: fakeApi(calls), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
+    caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5 },
+    finishSignal: () => finish,
+    // The doctor taps "Save what you have" while the first question is on screen.
+    askDoctor: async ({ gap }) => { asks.push(gap); finish = true; return { done: false }; },
+  });
+
+  assert.deepEqual(asks, ['worklist']);                 // no further asks once finishing
+  // The whole point: the run still SAVED. Stop would have left both of these undefined.
+  assert.ok(calls.discovery, 'discovery was never posted: the crawl was thrown away');
+  assert.ok(calls.evidence, 'evidence was never posted: no adapter candidate was created');
+  assert.ok(calls.discovery.observedViews.length > 0, 'saved with no views');
+  assert.equal(result.candidateVersionId, 'v1');
+  assert.ok(result.found.length > 0, 'nothing was reported as found');
+  // And it is honest that it was cut short rather than claiming everything was proven.
+  assert.ok(result.warnings.some((w) => /saved at your request/.test(w)), result.warnings.join('|'));
+});
+
 // A real EMR's entered address is its LOGIN page: navigating back to it after sign-in returns the
 // doctor to the login form (on GHIS it ends the session), so the crawl must begin at the page the
 // browser is already showing. Regression for the on-device failure of 2026-09-12.
