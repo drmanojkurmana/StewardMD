@@ -351,6 +351,31 @@ function cleanObservedViews(raw) {
   });
 }
 
+/* The phone's proof trace (connect-agent/phone/prove.mjs createProofBook): per screen, which requests
+ * were replayed and how many on-screen values each carried. Without it a failed screen is a bare
+ * "no-requests" and the next run is a guess (adapter ver_b16da370, 2026-09-15). Method, redacted path,
+ * role, kind and counts only; an attempt whose path still carries an identifier is dropped. */
+function cleanProofTrace(raw) {
+  if (!Array.isArray(raw)) return [];
+  const num = (x) => (Number.isFinite(Number(x)) ? Math.max(0, Math.min(100000, Math.round(Number(x)))) : 0);
+  const word = (x) => (typeof x === "string" && /^[A-Za-z-]{1,32}$/.test(x) ? x : "");
+  return raw.slice(0, 60).filter((t) => t && typeof t === "object" && !Array.isArray(t)).map((t) => ({
+    resource: word(t.resource),
+    status: word(t.status),
+    tried: num(t.tried),
+    attempts: (Array.isArray(t.attempts) ? t.attempts : []).slice(0, 12)
+      .filter((a) => a && typeof a.path === "string" && a.path.length <= 256 && !/\d{3,}/.test(a.path) && a.path.indexOf("@") < 0)
+      .map((a) => ({
+        method: a.method === "POST" ? "POST" : "GET",
+        path: a.path,
+        role: word(a.role),
+        kind: word(a.kind),
+        hits: num(a.hits),
+        ratio: Math.max(0, Math.min(1, Number(a.ratio) || 0)),
+      })),
+  }));
+}
+
 // A discovery-spec event's redacted path (connect-agent/discovery.mjs's redactPath) always writes the
 // generic token `{id}`; a compiled operation's pathTemplate (connect-agent/manifest/compile.mjs's
 // templateFromRedactedPath) renames that to a semantic placeholder ("{patientId}") derived from the
@@ -918,6 +943,7 @@ export async function onRequest(context) {
       const spec = body.spec;
       if (!spec || typeof spec !== "object" || Array.isArray(spec)) throw new OnboardError("invalid", "spec required");
       const observedViews = cleanObservedViews(body.observedViews);
+      const proofTrace = cleanProofTrace(body.proofs);
 
       let job = await findJobForSession(deps.db, tid, sessionId);
       if (!job) throw new OnboardError("not-found", "job not found");
@@ -1042,6 +1068,7 @@ export async function onRequest(context) {
         requestedAt: nowIso(),
         observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
         observedViews,
+        proofTrace,
       };
       job = await casJob(deps.db, tid, job.id, job.revision, { phone_state: JSON.stringify(phoneState) });
 
@@ -1185,6 +1212,7 @@ export async function onRequest(context) {
         requestedAt: (phoneState && phoneState.requestedAt) || null,
         pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
         views,
+        proofTrace: phoneState && Array.isArray(phoneState.proofTrace) ? phoneState.proofTrace : [],
         // The phone runtime replays these (selectors, labels, paths: PHI-free by construction, see
         // connect-agent/phone/CONTRACT.md "observedViews") to read a ward list in the doctor's own session.
         replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews.map((v) => Object.assign({}, v, { pathTemplate: redactPathValues(v.pathTemplate) })) : [],

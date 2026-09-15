@@ -532,3 +532,31 @@ test("plan validates input sizes and never persists lines", async () => {
   }, env, doc1.headers));
   assert.equal(res3.status, 400);
 });
+
+test("discovery keeps the phone's proof trace (method, redacted path, counts) and refuses one that carries an identifier", async () => {
+  const { env, doc1 } = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, env, doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, env, doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, env, doc1.headers));
+  const proofs = [
+    { resource: "labs", status: "proven", tried: 2, brain: true, overlap: 1, attempts: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", role: "data", kind: "html", hits: 8, ratio: 1 },
+      { method: "POST", path: "/Lab/Home/GetSearchPatientId", role: "data", kind: "json", hits: 8, ratio: 1, gemini: "ok" },
+    ] },
+    { resource: "labs-detail", status: "no-requests", tried: 0, attempts: [] },
+    { resource: "radiology", status: "proven", tried: 1, attempts: [{ method: "GET", path: "/Lab/Result/2012130687", role: "data", kind: "html", hits: 3, ratio: 1 }] },
+  ];
+  const res = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: observedViews(), proofs }, env, doc1.headers));
+  assert.equal(res.status, 200, await res.clone().text());
+  const phoneState = JSON.parse((await findJobForSession(env.CONNECT_DB, "t1", sessionId)).phone_state);
+  assert.deepEqual(phoneState.proofTrace, [
+    { resource: "labs", status: "proven", tried: 2, attempts: [
+      { method: "POST", path: "/Doctor/Home/Searchnew", role: "data", kind: "html", hits: 8, ratio: 1 },
+      { method: "POST", path: "/Lab/Home/GetSearchPatientId", role: "data", kind: "json", hits: 8, ratio: 1 },
+    ] },
+    { resource: "labs-detail", status: "no-requests", tried: 0, attempts: [] },
+    // An attempt whose path still carries an identifier is dropped, never stored.
+    { resource: "radiology", status: "proven", tried: 1, attempts: [] },
+  ]);
+});

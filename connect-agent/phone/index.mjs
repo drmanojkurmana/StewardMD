@@ -263,7 +263,10 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
        * whatever finished inside the budget is kept; the rest stay unproven and are read from their
        * page. Abandoning the wait does not cancel the in-flight call, and does not need to: the run
        * moves on to write the adapter. */
-      const budgetMs = caps?.verifyBudgetMs ?? 150000;
+      /* 150s proved far too tight on a real hospital: GHIS has nine resources to check and the cap fired
+       * before a single endpoint was proven, so the run saved an adapter that could read nothing
+       * (owner's iPhone, 2026-09-15). The cap exists to stop a hang, not to rush the proving. */
+      const budgetMs = caps?.verifyBudgetMs ?? 420000;
       let timer = null;
       const budget = new Promise((resolve) => { timer = setTimeout(() => resolve('__timeout__'), budgetMs); });
       const outcome = await Promise.race([
@@ -355,7 +358,7 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
    * the server keeps it as the integer `rows`. Digits -> #, any address -> [email]. */
   const scrubReason = (r) => typeof r === 'string' ? r.replace(/\S+@\S+/g, '[email]').replace(/\d{3,}/g, '#').slice(0, 200) : r;
   for (const v of observedViews) { if (v && v.verified && typeof v.verified.reason === 'string') v.verified.reason = scrubReason(v.verified.reason); }
-  const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews });
+  const discoveryResult = await api.discovery({ spec, steps: explored.steps, nativeRequests, observedViews, proofs: book.trace });
   notify('COMPILING', { steps: explored.steps.length, events: collector.raw().length, found });
 
   const probeList = Array.isArray(discoveryResult?.probes) ? discoveryResult.probes : [];
