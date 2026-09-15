@@ -2200,7 +2200,9 @@ export async function onRequest(context) {
       }
       if (sub === "medication-order" && method === "POST") {
         const r = await createWardMedicationOrder(request, env, {
-          ...deps, order: body.order || body, safety: body.safety || null,
+          /* LT-14: the safety check runs on the server against the record (never a verdict from the body);
+           * checkOnly shows it before anything is written. */
+          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason,
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,

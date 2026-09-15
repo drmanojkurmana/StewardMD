@@ -214,6 +214,13 @@ try {
     if (!orderInput) return { note: "vitals recorded; this role cannot prescribe (no order form)" };
     await ev(`document.getElementById('wMoDrug').value='Paracetamol'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.querySelector('[data-w-act="medorder"]').click(); return 1;`);
     await until(`return !WARD._st.busy ? 'y' : '';`, 15000);
+    /* LT-14: the server's safety check is shown before anything is written. A finding (an unweighed patient on a
+     * weight-dosed drug, say) is read by the prescriber, who proceeds with a reason, as a person would. */
+    const review = await ev(`var r = document.getElementById('wMoReview'); return r ? r.textContent.slice(0, 200) : '';`);
+    if (review) {
+      await ev(`var o = document.getElementById('wMoOverride'); if (o) o.value = 'Acceptance journey: findings read'; document.querySelector('[data-w-act="moconfirm"]').click(); return 1;`);
+      await until(`return !WARD._st.busy && !document.getElementById('wMoReview') ? 'y' : '';`, 15000);
+    }
     const refused = await ev(`return WARD._st.refusal ? 'refused:' + JSON.stringify(WARD._st.refusal).slice(0,200) : ''`);
     if (refused) return { note: "order refused by the safety engine, verbatim: " + refused };
     // The doses of a BD order placed this evening fall due tomorrow: the nurse widens the round's

@@ -727,6 +727,17 @@ class RecordService {
     return hit || null;
   }
 
+  /**
+   * A write refused by a rule of the caller's own (separation of duties), audited exactly as a
+   * governance refusal inside put() is: record.denied, outcome denied, nothing written. Throws when the
+   * audit row cannot be written, so a refusal is never silently unrecorded.
+   */
+  async auditDenied(resourceType, id, reasons, patientId) {
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.denied", {
+      scope: { resourceType, id, reasons: (reasons || []).map(String) }, patientId: patientId || null, outcome: "denied",
+    }));
+  }
+
   /** The whole chart: latest version of every resource in the patient's compartment. */
   async chart(patientId) {
     const out = {};
