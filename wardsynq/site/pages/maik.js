@@ -43,6 +43,8 @@
     return TS(c, "site.maik.askRefused", "MaiK could not answer this request.") + (detail || '<br><span class="quiet">' + EN(c, c.esc(r.error || "")) + "</span>");
   }
 
+  WSQ._maikAskFailure = askFailure;
+
   WSQ.page("maik", { render: function (c) {
     var el = c.el, st = c.state, esc = c.esc, ms = c.ms;
     if (!c.isWardsynq()) { el.innerHTML = '<div class="msg note">' + esc(T(c, "site.maik.noRecord", "MaiK reads the WardSynQ clinical record. This hospital does not keep one.")) + '</div>'; return; }

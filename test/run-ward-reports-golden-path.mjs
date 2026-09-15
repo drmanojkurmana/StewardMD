@@ -44,9 +44,11 @@ try {
   await click('[data-w-act="reports"]');
   ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('Billing') >= 0 && document.body.lastElementChild.textContent.indexOf('Claims') >= 0;`), "the reports screen opens with all six sections");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('42000') >= 0;`), "the real billing figure is shown");
-  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('outstandingAmount') >= 0 && document.body.lastElementChild.textContent.indexOf('8000') >= 0;`), "the real claims outstanding amount is shown");
-  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('pendingVerification') >= 0;`), "the real pharmacy pending-verification count is shown");
-  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('incompleteCharts') >= 0;`), "the real HIM incomplete-charts count is shown");
+  // LT-38: labelled rows, not the report's key names.
+  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('Amount awaiting the payer') >= 0 && document.body.lastElementChild.textContent.indexOf('8000') >= 0;`), "the real claims outstanding amount is shown");
+  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('Active orders not checked by pharmacy') >= 0;`), "the real pharmacy pending-verification count is shown");
+  ok(await ev(`return document.body.lastElementChild.textContent.indexOf('Incomplete charts') >= 0;`), "the real HIM incomplete-charts count is shown");
+  ok(await ev(`return !/outstandingAmount|pendingVerification|incompleteCharts|tenantId/.test(document.body.lastElementChild.textContent);`), "no raw key names on screen");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('Invoice') >= 0;`), "the billing report's own stated data source is shown, not hidden");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('admin') >= 0;`), "the permission scope this report ran as is shown");
 
