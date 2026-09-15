@@ -374,6 +374,24 @@ try {
   `) === true, "plugin.open receives the https EMR URL, deployment origins, and deployment id as storeId");
   ok(await ev(noDash) === true, "login copy has no em-dash");
 
+  /* 4b. AN SSO HOSPITAL MOVES BEFORE THE DOCTOR IS IN. The sign-in poll sees no password box on the
+   * module chooser at another host. Movement alone must never be read as a completed sign in: on GIMSR
+   * that would hand the browser to the agent while the doctor is still choosing a module. */
+  await ev(`window.__pwFlag = "none"; window.__curUrl = "https://sso.newcity.example/chooser";
+    window.Capacitor.Plugins.ConnectBrowser.evaluate = function (a) {
+      window.__pluginCalls.push({ m: "evaluate", a: a });
+      return Promise.resolve({ result: /password/.test(String((a && a.expression) || "")) ? window.__pwFlag : "" });
+    };
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: window.__curUrl, title: "" }); };
+    return 1;`);
+  await sleep(7000);
+  ok(await ev(`var d=window.SMD_CONNECT_AGENT.__debug(); return d.screen==="login";`) === true, "a page that moved without ever showing a password box is not a completed sign in");
+  ok(await ev(`return !window.__calls.some(function(x){return x.path==="/sessions/sess-1/handoff";});`) === true, "no handoff was posted from the module chooser");
+  await ev(`delete window.Capacitor.Plugins.ConnectBrowser.evaluate; delete window.Capacitor.Plugins.ConnectBrowser.currentUrl;
+    window.Capacitor.Plugins.ConnectBrowser.evaluate = function (a) { window.__pluginCalls.push({ m: "evaluate", a: a }); return Promise.resolve({ result: "" }); };
+    window.Capacitor.Plugins.ConnectBrowser.currentUrl = function () { return Promise.resolve({ url: "", title: "" }); };
+    return 1;`);
+
   // 5. loggedIn -> handoff -> pendingOrigins confirm -> Allow -> origins approve -> agent mode.
   await ev(`window.__pendingOrigins = ["https://sso.newcity.example"]; window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/login", mainFrame:true}); window.Capacitor.Plugins.ConnectBrowser.__fire("loggedIn", {url:"https://emr.newcity.example/home"}); return 1;`);
   ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/sessions/sess-1/handoff";}); return c.length===1 && c[0].body.visitedOrigins.indexOf("https://emr.newcity.example")>=0;`, 8000), "loggedIn posts handoff with the visited origins");

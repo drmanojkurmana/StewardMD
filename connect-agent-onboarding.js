@@ -938,32 +938,34 @@
    * works whenever the app gets a slice, however small. A page that once showed a password box and now
    * shows none, for two checks running, is a completed sign-in. The password value is never read; only
    * whether a password field is on screen. */
+  var signInPollHandle = null;
   function startPhoneSignInPoll() {
     stopPhoneSignInPoll();
     if (!S) return;
     S.signInSawPw = false;
     S.signInGoneTicks = 0;
-    S.signInOpenUrl = S.selected.emrUrl || "";
     var PW = "(function(){try{if(document.readyState!=='complete')return 'loading';var a=document.querySelectorAll('input[type=\"password\"]');for(var i=0;i<a.length;i++){var e=a[i],r=e.getBoundingClientRect();if(r.width>0&&r.height>0&&e.offsetParent)return 'pw'}return 'none'}catch(e){return 'err'}})()";
-    S.signInPoll = setInterval(function () {
-      if (!S || S.screen !== "login" || S.loginHandled) { stopPhoneSignInPoll(); return; }
+    /* THE HANDLE, NOT THE SLOT. This used to live on S, and stopPhoneSignInPoll cleared whatever S
+     * happened to hold when it ran: a session replaced without cancelSession left the old interval
+     * running forever and the stop call killed the NEW session's poll instead. */
+    var handle = setInterval(function () {
+      if (!S || S.screen !== "login" || S.loginHandled) { clearInterval(handle); if (signInPollHandle === handle) signInPollHandle = null; return; }
       var plugin = getPlugin();
       if (!plugin || !plugin.evaluate) return;
-      var url = "";
-      var readUrl = plugin.currentUrl ? plugin.currentUrl() : Promise.resolve(null);
-      Promise.resolve(readUrl).then(function (u) {
-        url = (u && (u.url || u)) || "";
-        return plugin.evaluate({ expression: PW });
-      }).then(function (res) {
+      Promise.resolve(plugin.evaluate({ expression: PW })).then(function (res) {
         if (!S || S.screen !== "login" || S.loginHandled) return;
         var flag = res && (res.result != null ? res.result : res);
         flag = String(flag == null ? "" : flag);
         if (flag === "pw") { S.signInSawPw = true; S.signInGoneTicks = 0; return; }
         if (flag !== "none") { S.signInGoneTicks = 0; return; }   // loading / error: no verdict
-        // No visible password box. Signed in if we saw one earlier OR the page moved off the address
-        // we opened (a stored session lands past the form without ever showing it).
-        var moved = url && S.signInOpenUrl && url.indexOf(S.signInOpenUrl) !== 0 && url.indexOf("http") === 0;
-        if (!(S.signInSawPw || moved)) { S.signInGoneTicks = 0; return; }
+        /* MOVING IS NOT SIGNING IN. A password box that was SEEN and is now gone is a completed sign
+         * in; a page that merely moved is not. On a single-sign-on hospital the doctor signs in at one
+         * host and lands on a module chooser at another, with no password box and no EMR yet, so
+         * "moved" fired the handoff while the doctor was still choosing (GIMSR is exactly that shape:
+         * gimsrlogin.gitam.edu, a chooser, then ghis.gitam.edu). connect-agent/phone/index.mjs records
+         * the same false positive ("NOT ON THE EMR YET"). A doctor whose stored session skips the form
+         * entirely taps "I have signed in, continue" instead. */
+        if (!S.signInSawPw) { S.signInGoneTicks = 0; return; }
         S.signInGoneTicks += 1;
         if (S.signInGoneTicks >= 2 && !S.loginHandled) {
           S.loginHandled = true;
@@ -972,9 +974,10 @@
         }
       }).catch(function () { /* a throttled tick that could not read: try again next time */ });
     }, 2000);
+    signInPollHandle = handle;
   }
   function stopPhoneSignInPoll() {
-    if (S && S.signInPoll) { clearInterval(S.signInPoll); S.signInPoll = null; }
+    if (signInPollHandle) { clearInterval(signInPollHandle); signInPollHandle = null; }
   }
 
   function renderLoginFallback(b) {
