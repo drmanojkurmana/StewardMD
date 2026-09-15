@@ -224,3 +224,45 @@ test('the endpoint a proof saves goes through the same redaction as every captur
   const [ep] = redactEndpoints([{ method: 'GET', url: HOST + '/Radiology/Home/GetRadiologyResultPrint/2012130687?resultid=RS44001' }], HOST + '/x');
   assert.equal(ep.path, '/Radiology/Home/GetRadiologyResultPrint/#?resultid');
 });
+
+test('proveView takes the lab search list, not the whole visit page that also shows the lab names (ver_b16da370)', async () => {
+  const VISIT_PAGE = '<html><body><table><tr><th>Test</th></tr><tr><td>Complete blood count</td></tr><tr><td>Serum creatinine</td></tr></table><table>' +
+    '<tr><td>Pulse</td><td>Blood pressure</td></tr>'.repeat(40) + '</table></body></html>';
+  const LABS_JSON = JSON.stringify([
+    { parameter_long_desc: 'Complete blood count', ServiceRenderId: 'R77001' },
+    { parameter_long_desc: 'Serum creatinine', ServiceRenderId: 'R77002' },
+  ]);
+  const entries = [
+    { seq: 21, method: 'POST', url: HOST + '/Doctor/Home/Searchnew', body: '__RequestVerificationToken=abc&recordNo=MR900001-IP5550001', reqCt: 'application/x-www-form-urlencoded', xhr: true, status: 200, shape: { kind: 'html', keys: ['Test'], rows: 42, tables: 2 } },
+    { seq: 22, method: 'POST', url: HOST + '/Lab/Home/GetSearchPatientId', body: '__RequestVerificationToken=abc&patient_id=MR900001&DeptID=', reqCt: 'application/x-www-form-urlencoded', xhr: true, status: 200, shape: { kind: 'json', keys: ['parameter_long_desc'], rows: 2 } },
+  ];
+  const page = fakePage({
+    entries,
+    screen: [['Complete blood count'], ['Serum creatinine']],
+    answers: { 21: { status: 200, contentType: 'text/html', text: VISIT_PAGE }, 22: { status: 200, contentType: 'application/json', text: LABS_JSON } },
+  });
+  // Gemini ranks the visit page first, as it did on the live run.
+  const brain = { async pickEndpoint() { return { ranked: [{ index: 0, role: 'data' }, { index: 1, role: 'data' }] }; } };
+  const view = { resourceHint: 'labs', pathTemplate: HOST + '/Doctor/Home', rowsSelector: 'tr', headers: ['Test'] };
+  await proveView({ client: page, view, brain, parents: [{ label: 'worklist', rows: rowsForChain(WL_JSON, 'application/json') }] });
+  assert.deepEqual(page.executed, [21, 22], 'every candidate is replayed, not only the first that carries the screen');
+  assert.equal(view.proof.status, 'proven');
+  assert.equal(view.endpoints.find((e) => e.role === 'data').path.split('?')[0], '/Lab/Home/GetSearchPatientId');
+});
+
+test('proveView asks Gemini about the ward list too: an out-patient queue is not the admitted list', async () => {
+  const OPD_HTML = '<table><tr><th>Patient ID</th><th>Name</th><th>Visit type</th></tr><tr><td>MR900001</td><td>TEST ALPHA</td><td>OPD</td></tr><tr><td>MR900002</td><td>TEST BRAVO</td><td>OPD</td></tr></table>';
+  const entries = [{ seq: 31, method: 'GET', url: HOST + '/Doctor/Home/DashboardUnit?type=docopdlist', body: null, xhr: true, status: 200, shape: { kind: 'html', keys: ['Patient ID', 'Name', 'Visit type'], rows: 2, tables: 1 } }];
+  const judged = [];
+  const brain = { async verify(p) { judged.push(p); return { ok: false, resource: 'none', confidence: 0.9, reason: 'out-patient queue' }; } };
+  const view = { resourceHint: 'worklist', pathTemplate: HOST + '/Doctor/Home', rowsSelector: 'tr', headers: ['Patient ID', 'Name', 'Visit type'] };
+  await proveView({
+    client: fakePage({ entries, screen: [['MR900001', 'TEST ALPHA', 'OPD'], ['MR900002', 'TEST BRAVO', 'OPD']], answers: { 31: { status: 200, contentType: 'text/html', text: OPD_HTML } } }),
+    view, brain,
+  });
+  assert.equal(judged.length, 1, 'the ward list reply was judged');
+  assert.equal(judged[0].resource, 'worklist');
+  assert.ok(!/MR900001|ALPHA/.test(JSON.stringify(judged[0])), 'only structure reached the model');
+  assert.equal(view.proof.status, 'unproven');
+  assert.equal(view.endpoints, undefined);
+});

@@ -193,7 +193,7 @@ const SYSTEM = "You help a read-only integration agent understand the SCREENS of
   + "You are given screen structure only: element labels, table column headers, a URL path and an accessibility-style outline. "
   + "There is never any patient data. Answer with a single JSON object and nothing else.";
 
-function promptFor(clean) {
+export function promptFor(clean) {
   if (clean.op === "classify") {
     return "Screen structure:\n" + JSON.stringify({ path: clean.path || null, headers: clean.headers || [], labels: clean.labels || [], outline: clean.snapshot || null })
       + "\n\nResources: " + RESOURCES.join(", ") + ".\n"
@@ -228,7 +228,7 @@ function promptFor(clean) {
   if (clean.op === "verify") {
     return "A read-only agent replayed the call it discovered for the resource \"" + clean.resource + "\"" + (clean.path ? " (" + clean.path + ")" : "") + " for one real patient and got "
       + clean.rowCount + " rows of kind " + (clean.kind || "unknown") + " with these columns:\n" + JSON.stringify(clean.headers || [])
-      + "\n\nJudge the " + (clean.excerpt ? "columns AND the text below" : "STRUCTURE only") + ". Is this really the patient's " + clean.resource + " (worklist = many patients of a ward, not a list of doctors, departments or menu items; labs = investigations with results, not just an order list; medications = drugs with dose or frequency; radiology = studies with reports; notes/history/discharge = clinical text or visit rows)? "
+      + "\n\nJudge the " + (clean.excerpt ? "columns AND the text below" : "STRUCTURE only") + ". Is this really the patient's " + clean.resource + " (worklist = ADMITTED in-patients of a ward (a bed, ward or admission column), not an out-patient or OPD queue and not a list of doctors, departments or menu items; labs = investigations with results, not just an order list; medications = drugs with dose or frequency; radiology = studies with reports; notes/history/discharge = clinical text or visit rows)? "
       + (clean.excerpt
         ? "\n\nThis is the longest text the call returned. It has been redacted before reaching you: every identifying line was replaced by the marker [identifier] and every number of 3+ digits by #. Nothing here identifies a person.\n---\n"
           + clean.excerpt + "\n---\n"

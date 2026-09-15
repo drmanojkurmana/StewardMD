@@ -402,6 +402,21 @@ export function localRank(entries) {
     .sort((a, b) => (b.s - a.s) || (b.seq - a.seq)).map(({ index, role }) => ({ index, role }));
 }
 
+/* THE LIST, NOT THE PAGE THAT CONTAINS IT. A whole patient page carries every lab name and every
+ * radiology line the screen shows, so "carries the screen's values" accepted GHIS's visit page
+ * (POST Searchnew) as the labs call and the visits page as radiology (adapter ver_b16da370,
+ * 2026-09-15), where the hand-built adapter calls the lab search and the radiology list. Every answer
+ * that carries the screen is scored: rows that fit the screen win, a whole HTML document and a large
+ * answer lose. */
+export function specificity(hit, screenRowCount) {
+  const text = String((hit && hit.resp && hit.resp.text) || '');
+  const rows = Array.isArray(hit && hit.rows) ? hit.rows.length : 0;
+  const fit = screenRowCount > 0 && rows > 0 ? Math.min(rows, screenRowCount) / Math.max(rows, screenRowCount) : 0;
+  const wholePage = /<html[\s>]/i.test(text.slice(0, 2000)) ? 1 : 0;
+  const size = Math.min(1, text.length / 200000);
+  return ((hit && hit.o && hit.o.ratio) || 0) + fit - wholePage - size;
+}
+
 /* ---- the loop ----------------------------------------------------------------------------------- */
 
 async function evalJson(client, expression, fallback) {
@@ -454,8 +469,9 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   const roleOf = new Map(order.map((r) => [r.index, r.role]));
   const tryFirst = order.filter((r) => r.role === 'data' || r.role === 'lookup').concat(order.filter((r) => r.role === 'shell'));
 
-  // EXECUTE + VERIFY, in that order, until one answers with what the screen shows.
-  let hit = null;
+  // EXECUTE + VERIFY every candidate (up to MAX_EXEC): keep each answer that carries the screen and that
+  // Gemini did not confidently reject, then take the most specific of them.
+  const hits = [];
   for (const r of tryFirst.slice(0, MAX_EXEC)) {
     const e = entries[r.index];
     const resp = await evalJson(client, PROVE_SOURCES.exec(e.seq), null);
@@ -465,16 +481,15 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     if (kind === 'login') return done('signed-out');
     // A whole page that happens to carry the table is where the view lives, not a data call.
     if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr)) continue;
-    /* GEMINI JUDGES THE REPLY. Carrying the screen's values is necessary, not sufficient: the reply's
-     * own columns must be the resource asked for (labs = tests with results, not an order list). Only
-     * column names and a row count go to the model. A confident "no" rejects it: next candidate. */
+    const rows = rowsForChain(resp.text, resp.contentType);
+    /* GEMINI JUDGES THE REPLY, the ward list included: an out-patient queue carries patients too, and
+     * was proven as the ward list on the live run (DashboardUnit, 2026-09-15). Only column names, a row
+     * count and the redacted path go to the model. A confident "no" rejects it. */
     const resource = String(view.resourceHint || '').replace(/-detail$/, '');
-    if (brain && typeof brain.verify === 'function' && BRAIN_RESOURCES.includes(resource) && resource !== 'worklist') {
-      const rows = rowsForChain(resp.text, resp.contentType);
+    if (brain && typeof brain.verify === 'function' && BRAIN_RESOURCES.includes(resource)) {
       const cols = [];
       for (const row of rows.slice(0, 5)) for (const k of Object.keys(row)) if (k.charAt(0) !== '_' && !cols.includes(k)) cols.push(k);
       const payload = scrubForBrain({ resource, headers: cols.slice(0, 24), rowCount: rows.length, kind: kind === 'json' ? 'json' : 'html', path: candidateStructure(e).path });
-      // Columns alone cannot tell a report from the header block above it; for prose, send the prose.
       if (NARRATIVE.includes(resource)) {
         const ex = narrativeExcerpt(rows, identityValues(parents));
         if (ex) payload.excerpt = ex;
@@ -485,9 +500,9 @@ export async function proveView({ client, view, brain = null, since = -1, label 
       if (v && typeof v.ok === 'boolean') { trace.brain = true; trace.model = trace.model || v.model || null; last.gemini = v.ok ? 'ok' : 'rejected'; }
       if (v && v.ok === false && Number(v.confidence) >= 0.7) continue;
     }
-    hit = { e, resp, kind, o, role: r.role === 'shell' ? 'data' : r.role };
-    break;
+    hits.push({ e, resp, kind, o, rows, role: r.role === 'shell' ? 'data' : r.role });
   }
+  const hit = hits.slice().sort((a, b) => specificity(b, shown.length) - specificity(a, shown.length))[0] || null;
   if (!hit) return done('unproven');
 
   // LEARN: where every field the proven call sends comes from; the page-fired prerequisites that are
