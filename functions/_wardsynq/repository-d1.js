@@ -577,6 +577,12 @@ class D1Repository {
     await this._batchWithChain(tenantId, [this._auditStatement(row)], [row]);
   }
 
+  /** OPTIONAL (repository.js bufferReadAudits): many read rows and their chain links in ONE batch. */
+  async auditMany(tenantId, events) {
+    const rows = (events || []).map((e) => this._auditRow(tenantId, e));
+    if (rows.length) await this._batchWithChain(tenantId, rows.map((row) => this._auditStatement(row)), rows);
+  }
+
   /**
    * OPTIONAL, not in PORT_METHODS: the security review reads the audit trail back. A deployment
    * without it reports the review as unavailable rather than clean. Newest rows win the limit, so a

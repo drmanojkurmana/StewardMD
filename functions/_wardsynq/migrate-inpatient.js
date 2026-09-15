@@ -408,7 +408,10 @@ async function listWard(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  /* LT-21: this read 200 encounters, oldest first, every discharged stay included, and said nothing when there
+   * were more: the newest admissions were the ones silently left off the ward list and the nurse worklist. */
+  const ENCOUNTER_CAP = 1000;
+  try { encounters = await svc.list("Encounter", ENCOUNTER_CAP); }
   catch (e) {
     /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this
      * route) and still have no read scope on Encounter - pharmacy is exactly that - and answering
@@ -435,7 +438,7 @@ async function listWard(request, env, ctx) {
    * turn a readable ward list into an error. */
   let byId = new Map();
   try {
-    const roster = await svc.list("Patient", 400);
+    const roster = await svc.list("Patient", ENCOUNTER_CAP);
     byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
   // BUG-MU0710W4-04KD: the ward list filters by department.
@@ -457,7 +460,8 @@ async function listWard(request, env, ctx) {
   /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
    * server will store it in. Without it the two were inferred separately and disagreed: the box
    * said Fahrenheit, the server stored Celsius, and 98.6 went into the record as 98.6 Cel. */
-  return { ...base, ok: true, patients, region: str(ctx.region) || "IN" };
+  return { ...base, ok: true, patients, region: str(ctx.region) || "IN",
+    ...((encounters || []).length >= ENCOUNTER_CAP ? { partial: true, partialWarning: `Only the first ${ENCOUNTER_CAP} stays on record were read; an admitted patient may be missing from this list.` } : {}) };
 }
 
 /**

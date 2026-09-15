@@ -2023,6 +2023,9 @@
       { act: "referrals", icon: "send", label: "Referrals", title: "Refer this patient to another specialty or facility, and follow the reply" },
       { act: "followup", icon: "schedule", label: "Follow-up", title: "Ask for this patient to be seen again" }] },
     { id: "nursing", label: "Nursing", icon: "vital_signs", tabs: [
+      // LT-23: a shift handover and a nursing task are given FROM the chart of the patient they are about.
+      { act: "handoverchart", icon: "swap_horiz", label: "Hand over", title: "Hand this patient to the next shift, in SBAR" },
+      { act: "nursetasks", icon: "task_alt", label: "Nursing tasks", title: "Add a nursing task for this patient, and see the open ones" },
       { act: "infusions", icon: "monitor_heart", label: "Drips", title: "Running drips, estimated volumes, and the care plan" },
       { act: "tags", icon: "how_to_reg", label: "Wristband", title: "Issue a wristband and check the band on the patient" },
       { act: "wounds", icon: "healing", label: "Wounds", title: "Chart a wound and follow it over time" },
@@ -2168,7 +2171,7 @@
         : '<ul class="w-mini">' + rec.triages.map(function (t) {
           return '<li class="w-mini-row"><div><b>' + (t.retriage ? wTH("ward.re-triaged", "Re-triaged") : wTH("ward.triaged2", "Triaged")) + ": " + esc(wTEn(ACUITY_WORDS[t.acuity]) || t.acuity) + "</b>" +
             (t.retriage && t.previousAcuity != null ? " (" + wTH("ward.was", "was {previousAcuity})", { previousAcuity: esc(t.previousAcuity) }, "previousAcuity") : "") +
-            '<div class="w-dt-times">' + when(t.triagedAt) + (t.triagedBy ? " &middot; " + wTH("ward.by9", "by {triagedBy}", { triagedBy: esc(t.triagedBy) }, "triagedBy") : "") +
+            '<div class="w-dt-times">' + when(t.triagedAt) + (t.triagedBy ? " &middot; " + wTH("ward.by9", "by {triagedBy}", { triagedBy: staffWho(t.triagedBy, t.triagedByName) }, "triagedBy") : "") +
             (t.chiefComplaint ? " &middot; " + esc(t.chiefComplaint) : "") + "</div>" +
             (t.reason ? "<div class=\"w-dt-times\"><b>" + wTH("ward.reason3", "Reason:") + "</b> " + esc(t.reason) + "</div>" : "") + "</div></li>";
         }).join("") + "</ul>";
@@ -3937,6 +3940,14 @@
         "</div><div class=\"w-crit-m\">" + ms("person") + labWho(s.patientId) +
         (s.category ? " &middot; " + esc(s.category) : "") + "</div></li>";
     };
+    /* LT-25: the bench can take the sample itself. A result is refused for a sample nobody collected, so the row
+     * that needs one carries the button that records who took it and when (the server stamps both). */
+    var uncollectedRow = function (s) {
+      var c = s.collection || {};
+      return specRow(s).replace(/<\/li>$/, "") +
+        (c.state === "failed" ? '<div class="w-crit-m warn">' + ms("error") + wTH("ward.last-attempt-failed", "Last attempt failed: {reason}", { reason: esc(c.reason || "") }, "reason", 1) + "</div>" : "") +
+        '<button class="w-btn ghost sm" data-w-act="collectspecimen:' + esc(s.serviceRequestId) + '">' + ms("colorize") + wTH("ward.collect", "Collect") + "</button></li>";
+    };
     /* A test awaiting a result used to be a line with nothing to do: the laboratory board listed what
      * was waiting and gave the laboratory no way to report it. The button opens the entry form for
      * that one request, so a result is always reported AGAINST the order that asked for it. */
@@ -3954,16 +3965,28 @@
      * button. Imaging is reported on the Radiology board; it is still listed here, apart, so an order
      * filed under the wrong category is never lost from both boards. */
     var pendingAll = b.pending || [];
-    var pendingLab = pendingAll.filter(function (p) { return !labIsImaging(p); });
+    /* LT-25: a test listed under "Awaiting collection" (or "Collected, awaiting the laboratory") was ALSO listed here
+     * with Enter result, so a result could be typed for a sample nobody had taken. On the tabs that show those two
+     * cards, a test waits for a result here only once the laboratory has the sample. A test whose sample state was
+     * not read stays here: the server refuses the release if it was never collected. */
+    var stateById = {};
+    spec.forEach(function (s) { stateById[s.serviceRequestId] = stateOf(s); });
+    var pendingLab = pendingAll.filter(function (p) {
+      if (labIsImaging(p)) return false;
+      var sst = stateById[p.serviceRequestId];
+      return !(showHemaBio && (sst === "none" || sst === "failed" || sst === "collected"));
+    });
     var pendingImg = pendingAll.filter(labIsImaging);
     var failed = b.failed || {};
     var critRow = function (c) {
       var e = c.escalation || {};
       return '<li class="lvl-' + esc(e.level || "due") + '"><div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
         (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
-        '</div><div class="w-crit-m">' + ms("person") + labWho(c.patientId) +
-        (e.minutesOpen == null ? "" : " &middot; " + wTH("ward.min-open", "{minutesOpen} min open", { minutesOpen: e.minutesOpen }, "minutesOpen")) + "</div></li>";
+        '</div><div class="w-crit-m">' + ms("person") + (c.patient && c.patient.name ? critWho(c) : labWho(c.patientId)) +
+        (c.minutesSinceReported == null ? "" : " &middot; " + wTH("ward.min-since-reported", "{mins} min since reported", { mins: c.minutesSinceReported }, "mins")) + "</div></li>";
     };
+    // LT-26: open means not yet acknowledged, the same count the Map tile and the ward home show.
+    var openCrits = (b.criticals || []).filter(function (c) { return c.state === "open"; });
     // A list that failed to load is not an empty list: no count, and it says so in the card itself.
     var card = function (icon, title, n, rows, emptyWords, readKey) {
       if (readKey && failed[readKey]) {
@@ -3989,10 +4012,11 @@
         ? '<div class="w-card warn"><div class="w-card-h">' + ms("error") + "<h3>" + wTH("ward.could-not-be-read3", "Could not be read", null, "", 1) + "</h3></div>" +
           "<p>" + wTH("ward.what-is-shown-below-is-incomplete", "{join}. What is shown below is incomplete.", { join: esc(b.errors.join(", ")) }, "join") + "</p></div>"
         : "") +
-      (showHemaBio ? card(wTH("ward.colorize", "colorize"), wT("ward.awaiting-collection", "Awaiting collection"), uncollected.length, uncollected.map(specRow).join(""), wT("ward.no-specimens-awaiting-collection", "No specimens awaiting collection."), "specimens") : "") +
+      (showHemaBio ? card(wTH("ward.colorize", "colorize"), wT("ward.awaiting-collection", "Awaiting collection"), uncollected.length, uncollected.map(uncollectedRow).join(""), wT("ward.no-specimens-awaiting-collection", "No specimens awaiting collection."), "specimens") : "") +
       (showHemaBio ? card("local_shipping", wT("ward.collected-awaiting-the-laboratory", "Collected, awaiting the laboratory"), inTransit.length, inTransit.map(function (sp) {
         var id = sp.collection && sp.collection.specimenId;
         return specRow(sp).replace(/<\/li>$/, "") +
+          '<div class="w-crit-m">' + ms("colorize") + wTH("ward.collected-by", "collected {at} by {who}", { at: when(sp.collection.at), who: staffWho(sp.collection.by, null) }, "at who") + "</div>" +
           (id
             ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + wTH("ward.received2", "Received") + "</button>" +
               '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + wTH("ward.failed", "Failed") + "</button>"
@@ -4007,7 +4031,7 @@
           return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" + '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div></li>";
         }).join("") + "</ul>" +
         '<button class="w-btn ghost sm" data-w-act="radboard">' + ms("arrow_forward") + wTH("ward.open-the-radiology-board", "Open the Radiology board") + "</button></div>" : "") +
-      card("priority_high", wT("ward.critical-results", "Critical results"), (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), wT("ward.no-open-critical-results", "No open critical results."), "critical results") +
+      card("priority_high", wT("ward.critical-results", "Critical results"), openCrits.length, openCrits.map(critRow).join(""), wT("ward.no-open-critical-results", "No open critical results."), "critical results") +
       (showMicro ? (cultureForm(state) + card(wTH("ward.coronavirus", "coronavirus"), wT("ward.cultures-in-progress", "Cultures in progress"), (b.cultures || []).length, (b.cultures || []).map(function (c) {
         return '<li><div class="w-crit-h"><b>' + esc(c.panel || wT("ward.culture", "Culture")) + "</b>" + '<span class="w-st due">' + esc(wTEn(CULTURE_STAGE_WORDS[c.stage]) || c.stage) + "</span>" +
           (c.critical ? "<span class=\"w-st overdue\">" + wTH("ward.positive-blood-culture", "positive blood culture") + "</span>" : "") + "</div>" +
@@ -4153,8 +4177,15 @@
       var n = x.notification || {};
       // S3 P0: a push accepted by the phone gateways is SENT, which is neither delivered nor nobody told.
       var pushed = (notices || []).filter(function (m) { return m && m.level === x.level; }).map(function (m) { return m.sent || 0; }).pop();
-      return ms("campaign") + (x.level === "escalate" ? wTH("ward.escalated", "Escalated") : wTH("ward.overdue", "Overdue")) + " " + wTH("ward.after-min", "{at} after {minutesOpen} min:", { at: when(x.at), minutesOpen: esc(x.minutesOpen) }, "at minutesOpen") + " " +
-        (n.delivered ? wTH("ward.notification-delivered", "notification delivered") : pushed ? wTH("ward.sent-to-phone-s-not-yet", "sent to {pushed} phone(s), not yet confirmed", { pushed: esc(pushed) }, "pushed") : "<b>" + wTH("ward.nobody-was-notified", "nobody was notified") + "</b> (" + esc(n.reason === "NO_CHANNEL" ? wT("ward.no-notification-channel-is-set-up", "no notification channel is set up") : (n.reason || wT("ward.delivery-failed", "delivery failed"))) + ")");
+      /* LT-28: "Escalated" was printed over an escalation that reached nobody. When nothing was delivered or sent the
+       * line says the loop became due for escalation and nobody was told, and why: no channel, or nobody on duty under
+       * the hospital's own alert rule (alert-recipients.js). */
+      var reached = n.delivered || pushed;
+      var why = n.reason === "NO_CHANNEL" ? wT("ward.no-notification-channel-is-set-up", "no notification channel is set up")
+        : n.reason === "NO_RECIPIENT" ? wT("ward.nobody-is-on-duty-to-tell-under", "nobody is on duty to tell under this hospital's alert rule")
+        : (n.reason || wT("ward.delivery-failed", "delivery failed"));
+      return ms("campaign") + (!reached ? wTH("ward.due-for-escalation", "Due for escalation") : x.level === "escalate" ? wTH("ward.escalated", "Escalated") : wTH("ward.overdue", "Overdue")) + " " + wTH("ward.after-min", "{at} after {minutesOpen} min:", { at: when(x.at), minutesOpen: esc(x.minutesOpen) }, "at minutesOpen") + " " +
+        (n.delivered ? wTH("ward.notification-delivered", "notification delivered") : pushed ? wTH("ward.sent-to-phone-s-not-yet", "sent to {pushed} phone(s), not yet confirmed", { pushed: esc(pushed) }, "pushed") : "<b>" + wTH("ward.nobody-was-notified", "nobody was notified") + "</b> (" + esc(why) + ")");
     }).join("<br>") + "</div>";
   }
   /* S3 P0: a result whose push reached nobody says so on the board, in words, never as a quiet gap. */
@@ -4194,32 +4225,39 @@
   }
   function critsBoardView(state) {
     var loops = state.critsBoard || [];
-    var rows = loops.map(function (c) {
-      var esc_ = c.escalation || {}, mins = esc_.minutesOpen;
+    // LT-26: open = not yet acknowledged, the one count every screen shows. Acknowledged loops stay listed below it.
+    var openLoops = loops.filter(function (c) { return c.state === "open"; });
+    var ackLoops = loops.filter(function (c) { return c.state !== "open"; });
+    var rowOf = function (c) {
+      // LT-28: minutes since the result was REPORTED, which acknowledging does not change.
+      var esc_ = c.escalation || {}, mins = c.minutesSinceReported != null ? c.minutesSinceReported : esc_.minutesOpen;
       return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
         '<div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
         (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
         '<span class="w-crit-b">' + (c.basis === "lab" ? wTH("ward.flagged-by-the-lab", "flagged by the lab") : c.basis === "limit" ? wTH("ward.outside-critical-limit", "outside critical limit", null, "", 1) : esc(c.basis || "")) + "</span></div>" +
-        '<div class="w-crit-m">' + ms("person") + esc(c.patientId || "") +
+        '<div class="w-crit-m">' + ms("person") + critWho(c) +
         " &middot; " + ms("schedule") + (mins == null ? "" : wTH("ward.min-since-reported", "{mins} min since reported", { mins: mins }, "mins")) +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; " + wTH("ward.overdue2", "overdue") : "") +
-        (c.state === "acknowledged" ? " &middot; " + wTH("ward.acknowledged-by", "acknowledged by") + " " + esc(c.acknowledgedBy || wT("ward.a-clinician", "a clinician")) : "") + "</div>" +
+        (c.state === "acknowledged" ? " &middot; " + wTH("ward.acknowledged-by", "acknowledged by") + " " + staffWho(c.acknowledgedBy, c.acknowledgedByName) : "") + "</div>" +
         critEscalationsHtml(c.escalations, c.notifications) + critWardRuleHtml(c.notifications) + critNoticeHtml(c) +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + wTH("ward.acknowledge", "Acknowledge") + "</button>" : "") +
         // BUG-MU09DOEX-I3GT: the next step after reading a result is the chart - write the note, order, or reassess.
         (c.encounterId ? '<button class="w-btn tiny ghost" data-w-act="openbedpatient:' + esc(c.encounterId) + '">' + ms("open_in_new") + wTH("ward.open-chart", "Open chart") + "</button>" : "") +
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + wTH("ward.raise-safety-signal", "Raise safety signal") + "</button>" +
       "</li>";
-    }).join("");
+    };
+    var rows = openLoops.map(rowOf).join(""), ackRows = ackLoops.map(rowOf).join("");
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.critical-results", "Critical results", null, "", 1) + "</b><small>" + wTH("ward.hospital-wide", "hospital-wide") + "</small></div>" +
       "<button class=\"w-ic\" data-w-act=\"critsboardload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
-      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>" + wTH("ward.open-loops", "Open loops") + (Array.isArray(state.critsBoard) ? " &middot; " + loops.length : "") + "</h3></div>" +
+      '<div class="w-card"><div class="w-card-h">' + ms("priority_high") + "<h3>" + wTH("ward.open-loops", "Open loops") + (Array.isArray(state.critsBoard) ? " &middot; " + openLoops.length : "") + "</h3></div>" +
       "<p class=\"w-hint\">" + wTH("ward.acknowledging-records-that-you-have-seen", "Acknowledging records that you have seen this and what you did. It is not a way to clear the list.") + "</p>" +
       (state.critsBoard === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.critical-results-could-not-be-loaded", "Critical results could not be loaded. Do not read this as none open. Check the laboratory system directly.", null, "", 1) + "</p>"
         : state.critsBoard == null ? "<p class=\"w-empty\">" + wTH("ward.loading-open-critical-results", "Loading open critical results...", null, "", 1) + "</p>"
         : rows ? '<ul class="w-crits">' + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-open-critical-results-anywhere-right", "No open critical results anywhere right now.", null, "", 1) + "</p>") +
-      "</div>";
+      "</div>" +
+      (ackRows ? '<div class="w-card"><div class="w-card-h">' + ms("task_alt") + "<h3>" + wTH("ward.acknowledged-not-yet-closed", "Acknowledged, not yet closed &middot; {n}", { n: ackLoops.length }, "n") + "</h3></div>" +
+        '<ul class="w-crits">' + ackRows + "</ul></div>" : "");
   }
 
   /* THE RADIOLOGY BOARD. Every other department (ED, theatre, pharmacy stock, critical results) has
@@ -4250,10 +4288,16 @@
     var parts = s.split("^");
     return parts.length > 1 ? (parts[1] + " " + parts[0]).replace(/\s+/g, " ").trim() : s;
   }
-  function radDicomDateTime(date, time) {
+  /* LT-27: a date and time with no zone was read by the browser as ITS local time, while the worklist had written the
+   * UTC digits, so every wait was 5 h 30 min long in India. The worklist now sends the hospital's wall clock with
+   * TimezoneOffsetFromUTC ("+0530"), and that offset is applied here; a worklist that sent none wrote UTC. */
+  function radDicomDateTime(date, time, offset) {
     if (!date || date.length < 8) return "";
     var iso = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
-    if (time && time.length >= 6) iso += "T" + time.slice(0, 2) + ":" + time.slice(2, 4) + ":" + time.slice(4, 6);
+    if (time && time.length >= 6) {
+      var m = /^([+-])(\d{2})(\d{2})$/.exec(offset || "");
+      iso += "T" + time.slice(0, 2) + ":" + time.slice(2, 4) + ":" + time.slice(4, 6) + (m ? m[1] + m[2] + ":" + m[3] : "Z");
+    }
     return iso;
   }
   function radWaitLabel(iso) {
@@ -4277,7 +4321,7 @@
       procedure: radWorklistTagStr(item["00321060"]),
       modality: (step && radWorklistTagStr(step["00080060"])) || "",
       priority: radWorklistTagStr(item["00401003"]).toLowerCase(),
-      orderedAt: radDicomDateTime(date, time),
+      orderedAt: radDicomDateTime(date, time, radWorklistTagStr(item["00080201"])),
     };
   }
   /** A critical loop opened against a radiology report. Report ids are "wsq-rad-<slug>"
@@ -4306,6 +4350,24 @@
     if (p) return esc(p.name || p.patientId) + (p.mrn ? " &middot; " + esc(p.mrn) : "");
     return "<i>" + wTH("ward.not-on-the-ward-list", "not on the ward list") + "</i>";
   }
+  /* LT-22/LT-28/LT-29: A PERSON, NEVER A SIGN-IN UID. The name the record carries beside the id when it has one; a
+   * staff sign-in by its login (an email or a staff id, as the nurse picker shows it); an account id that cannot be
+   * turned into words is "a clinician account", as the chart timeline already says (migrate-inpatient.js personName). */
+  function staffWho(id, name) {
+    if (name) return esc(name);
+    var s = String(id || "");
+    if (!s) return wTH("ward.a-clinician", "a clinician");
+    if (/^(fb|cfa):/.test(s)) return wTH("ward.a-clinician-account", "a clinician account");
+    return esc(s);
+  }
+  /* LT-28: the patient a hospital-wide row is about, the way the bed and ED boards name them: name, MRN, ward, bed.
+   * The server joins these (criticals and handovers, names=1); a row it could not name keeps the record id. */
+  function critWho(row) {
+    var p = row && row.patient;
+    if (!p || !p.name) return esc((row && row.patientId) || "");
+    return "<b>" + esc(p.name) + "</b>" + (p.mrn ? " &middot; " + esc(p.mrn) : "") +
+      (p.ward ? " &middot; " + esc(p.ward) + (p.bed ? ", " + wTH("ward.bed-n", "bed {bed}", { bed: esc(p.bed) }, "bed") : "") : "");
+  }
   function labBoardOpen() {
     st.view = "labboard"; st.labBoard = null; paint(); loadLabBoard();
   }
@@ -4327,7 +4389,7 @@
       read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
       read("results awaiting verification", "/ward/results-to-verify?" + q, function (r) { out.toVerify = r.results || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("cultures in progress", "/ward/cultures-in-progress?" + q, function (r) { out.cultures = r.cultures || []; out.histopathology = r.histopathology || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
-      read("critical results", "/ward/criticals?" + q, function (r) {
+      read("critical results", "/ward/criticals?" + q + "&names=1", function (r) {
         // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
         out.criticals = (r.loops || []).filter(function (l) { return !radCriticalOf(l); });
       }),
@@ -4349,8 +4411,10 @@
     return Promise.all([
       apiGet("/ward/imaging-worklist?" + q)
         .then(function (r) {
-          if (r && r.ok) out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
-          else out.errors.push("imaging worklist");
+          if (r && r.ok) {
+            out.requested = (r.worklist || []).map(radWorklistRow).filter(function (s) { return !reportedIds[s.orderId]; });
+            (r.warnings || []).forEach(function (w) { out.errors.push(w); });
+          } else out.errors.push("imaging worklist");
         })
         .catch(function () { out.errors.push("imaging worklist"); }),
       apiGet("/ward/criticals?" + q)
@@ -5743,15 +5807,17 @@
     var waiting = h.state === "waiting";
     var name = "";
     (state.list || []).forEach(function (p) { if (p.patientId === h.patientId) name = p.name || ""; });
+    // LT-22: the server names the patient (name, MRN, ward, bed); the ward roster is only a fallback.
+    var who = h.patient && h.patient.name ? critWho(h) : esc(name || h.patientId);
     var sec = SBAR_FIELDS.map(function (f) {
       var text = (h.sections || {})[f[0]];
       return text ? '<div class="w-tl-b"><b>' + esc(wTEn(f[1])) + "</b> " + esc(text) + "</div>" : "";
     }).join("");
     return '<li class="w-mini-row' + (waiting ? " w-ib-overdue" : "") + '"><div>' +
       '<span class="w-st ' + (waiting ? "due" : "") + '">' + (waiting ? wTH("ward.waiting-to-be-taken", "waiting to be taken") : wTH("ward.taken2", "taken")) + "</span> " +
-      "<b>" + esc(name || h.patientId) + "</b>" +
-      "<div class=\"w-dt-times\">" + wTH("ward.given-by", "given by {givenBy} &middot; {givenAt}", { givenBy: esc(h.givenBy || ""), givenAt: when(h.givenAt) }, "givenAt") +
-      (h.receivedBy ? " &middot; " + wTH("ward.taken-by", "taken by {receivedBy} {receivedAt}", { receivedBy: esc(h.receivedBy), receivedAt: when(h.receivedAt) }, "receivedBy receivedAt") : "") + "</div>" +
+      "<b>" + who + "</b>" +
+      "<div class=\"w-dt-times\">" + wTH("ward.given-by", "given by {givenBy} &middot; {givenAt}", { givenBy: staffWho(h.givenBy, h.givenByName), givenAt: when(h.givenAt) }, "givenAt") +
+      (h.receivedBy ? " &middot; " + wTH("ward.taken-by", "taken by {receivedBy} {receivedAt}", { receivedBy: staffWho(h.receivedBy, h.receivedByName), receivedAt: when(h.receivedAt) }, "receivedBy receivedAt") : "") + "</div>" +
       sec +
       /* Said plainly rather than left as a blank section: a handover that silently assembled its
        * own background from the chart would be a handover nobody actually gave. */
@@ -6611,10 +6677,11 @@
     if (d.failed) return '<div class="w-card">' + head + '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-load-this-patient-s2", "Could not load this patient's nursing tasks. Do not read this as nothing due.", null, "", 1) + "</p></div>";
     var problems = (d.problems || []).length ? '<p class="w-hint warn">' + ms("error") + esc(d.problems.join("; ")) + "</p>" : "";
     var a = d.assignment, staff = wl.staff;
-    var who = function (id) { var m = (staff || []).filter(function (x) { return x.identity === id; })[0]; return m ? m.label : id; };
+    var who = function (id) { var m = (staff || []).filter(function (x) { return x.identity === id; })[0]; return m ? m.label : (/^(fb|cfa):/.test(String(id || "")) ? wT("ward.a-clinician-account", "a clinician account") : id); };
     var assign = "<div class=\"w-sub\"><h4>" + wTH("ward.assigned-nurse", "Assigned nurse") + "</h4>" +
       (a == null ? "<p class=\"w-hint warn\">" + wTH("ward.assignment-not-known", "Assignment not known.") + "</p>" : "<p>" + (a.nurseId ? wTH("ward.since2", "{nurseLabel}{v} since {assignedAt}", { nurseLabel: esc(a.nurseLabel || a.nurseId), v: (a.shift ? " (" + esc(a.shift) + ")" : ""), assignedAt: when(a.assignedAt) }, "nurseLabel assignedAt") : wTH("ward.no-nurse-assigned", "No nurse assigned.")) + "</p>") +
-      (staff == null ? "<p class=\"w-hint warn\">" + wTH("ward.the-staff-list-could-not-be", "The staff list could not be loaded, so nobody can be picked.", null, "", 1) + "</p>"
+      (staff == null && np.fromChart && !state.nurseWorklist ? "<p class=\"w-hint\">" + ms("info") + wTH("ward.a-nurse-is-assigned-from-the", "A nurse is assigned from the nurse worklist.") + "</p>"
+        : staff == null ? "<p class=\"w-hint warn\">" + wTH("ward.the-staff-list-could-not-be", "The staff list could not be loaded, so nobody can be picked.", null, "", 1) + "</p>"
         : "<label class=\"w-f\"><span>" + wTH("ward.nurse", "Nurse") + "</span><select id=\"wNaNurse\"><option value=\"\">-</option>" + staff.map(function (m) { return '<option value="' + esc(m.identity) + '">' + esc(m.label) + " (" + esc(m.role) + ")</option>"; }).join("") + "</select></label>" +
           "<label class=\"w-f\"><span>" + wTH("ward.shift", "Shift") + "</span><input id=\"wNaShift\" placeholder=\"" + wTA("ward.day-night", "Day, Night") + "\"></label>" +
           "<button class=\"w-btn sm\" data-w-act=\"nurseassign:assign\">" + wTH("ward.assign", "Assign") + "</button>") +
@@ -7531,7 +7598,14 @@
     // An ED disposition-to-admit already knows who the patient is (st.sel) - picking a bed fires
     // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
     // which is for a patient the board does not already have open.
-    if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
+    /* LT-29: one click on a free bed admitted the ED patient at once, while a ward transfer asks first; a mis-click put
+     * the patient in the wrong bed. The same confirmation as transferTo. */
+    if (st.edAdmitPending) {
+      var sure = false;
+      try { sure = G.confirm(wTD("ward.admit-to-bed-confirm", "Admit {name} to {ward}, bed {bed}?", { name: (st.sel && (st.sel.name || st.sel.mrn)) || wT("ward.this-patient2", "this patient"), ward: ward, bed: bed || "" })); } catch (e) { sure = false; }
+      if (!sure) return;
+      st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return;
+    }
     if (st.transferPending && st.sel) { transferTo(ward, bed); return; }
     st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; st.emergencyOverride = false; paint();
   }
@@ -8462,7 +8536,7 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-withdraw-that-authorisation", "Could not withdraw that authorisation."); paint(); });
   }
   function loadCritsBoard() {
-    return apiGet("/ward/criticals?orgId=" + encodeURIComponent(st.orgId))
+    return apiGet("/ward/criticals?orgId=" + encodeURIComponent(st.orgId) + "&names=1")
       .then(function (r) { st.critsBoard = (r && r.ok) ? (r.loops || []) : false; paint(); })
       .catch(function () { st.critsBoard = false; paint(); });
   }
@@ -9148,7 +9222,8 @@
     apiPost("/ward/collect", { orgId: st.orgId, serviceRequestId: serviceRequestId, specimenType: specimenType.trim(), scannedPatientBarcode: scanned.trim() || undefined })
       .then(function (r) {
         if (r && r.error === "wrong_patient_scan") { st.busy = false; st.err = wT("ward.the-scanned-wristband-does-not-match", "The scanned wristband does not match this patient's order. Nothing was collected."); paint(); return; }
-        if (settle(r, r && r.accessionNumber ? wT("ward.collected-accession", "Collected. Accession {accessionNumber}.", { accessionNumber: r.accessionNumber }) : wT("ward.collected", "Collected."))) loadInvestigations();
+        // LT-25: collected from the laboratory board, the board is what re-reads.
+        if (settle(r, r && r.accessionNumber ? wT("ward.collected-accession", "Collected. Accession {accessionNumber}.", { accessionNumber: r.accessionNumber }) : wT("ward.collected", "Collected."))) { if (st.view === "labboard") loadLabBoard(); else loadInvestigations(); }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-collection", "Could not record the collection."); paint(); });
@@ -9517,6 +9592,10 @@
         } else if (r && r.ok) {
           st.err = wT("ward.some-rows-were-not-saved-they", "Some rows were not saved. They are listed below the form.");
           loadLabBoard();
+        } else if (r && r.error === "specimen_not_collected") {
+          // LT-25: refused, and nothing was released. Said in the staff language with the English under it.
+          settle(r, null);
+          st.err = wT("ward.no-sample-has-been-collected-for", "Not released: no sample has been collected for this test. Collect it first (who took it and when are recorded), then release the result.");
         } else settle(r, null);
         paint();
       })
@@ -11558,7 +11637,7 @@
       if (st.view === "mpi") { st.mpi = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "nurseworklist") { st.nurseWorklist = null; st.view = "list"; paint(); return; }
       if (st.view === "surveillance") { st.surveillance = null; st.recordDetail = null; st.view = "list"; paint(); return; }
-      if (st.view === "nursingpatient") { st.nursingPanel = null; loadNurseWorklist(); return; }
+      if (st.view === "nursingpatient") { var fromChart = st.nursingPanel && st.nursingPanel.fromChart; st.nursingPanel = null; if (fromChart && st.sel) { st.view = "chart"; paint(); } else loadNurseWorklist(); return; }
       if (st.view === "forms") { st.formDefs = null; st.formSel = null; st.formAnswers = null; st.formResult = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referrals") { st.referrals = null; st.view = st.sel ? "chart" : "list"; paint(); return; }
       if (st.view === "referralinbox") { st.referrals = null; st.view = "list"; paint(); return; }
@@ -11573,7 +11652,7 @@
       if (st.view === "wounds") { st.wounds = null; st.view = "chart"; paint(); return; }
       if (st.view === "risks") { st.risks = null; st.riskForm = null; st.view = "chart"; paint(); return; }
       if (st.view === "medrec") { st.medRec = null; st.view = "chart"; paint(); return; }
-      if (st.view === "handover") { st.handovers = null; st.view = "list"; paint(); return; }
+      if (st.view === "handover") { st.handovers = null; st.view = st.handoverFromChart && st.sel ? "chart" : "list"; st.handoverFromChart = false; paint(); return; }
       if (st.view === "safetyinbox") { st.inbox = null; st.view = "list"; paint(); return; }
       if (st.view === "workspace") { st.view = "chart"; paint(); return; }
       if (st.view === "people") { st.people = null; st.view = "chart"; paint(); return; }
@@ -12005,6 +12084,14 @@
     if (cmd === "mpimergeconfirm") { mpiMergeConfirm(); return; }
     if (cmd === "mpimergecancel") { st.mpiPreview = null; paint(); return; }
     if (cmd === "mpiunmerge") { mpiMerge(arg, true); return; }
+    /* LT-23: the chart's own entries to the existing handover screen (its SBAR form for the open patient) and the
+     * nursing panel (its task form), both on the routes those screens already use. Back returns to this chart. */
+    if (cmd === "handoverchart") { if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; } st.handoverFromChart = true; handoverOpen(); return; }
+    if (cmd === "nursetasks") {
+      var ns = st.sel; if (!ns || !ns.encounterId) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
+      nursingPanelOpen(ns.patientId + "~" + ns.encounterId); if (st.nursingPanel) { st.nursingPanel.name = st.nursingPanel.name || ns.name || ""; st.nursingPanel.fromChart = true; paint(); }
+      return;
+    }
     if (cmd === "infusions") { infusionOpen(); return; }
     if (cmd === "infusionchart") { infusionChart(arg); return; }
     if (cmd === "careplansave") { carePlanSave(); return; }
@@ -12256,9 +12343,12 @@
   try {
     G.addEventListener("hashchange", function () {
       var el = document.getElementById("smdWard");
-      if (el && el.classList.contains("on")) close();
+      /* LT-29: moving from one ward board to another (#/ward/critsboard to #/ward/labboard) is the shell re-opening the
+       * ward on the new board; closing here ran the shell's onClose and sent the person to the Map instead. Only a
+       * route away from the ward closes it (the shell's route() closes it then too). */
+      if (el && el.classList.contains("on") && !/^#\/ward(\/|$)/.test(String((G.location && G.location.hash) || ""))) close();
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
 })();

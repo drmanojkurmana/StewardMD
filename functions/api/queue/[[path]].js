@@ -99,6 +99,7 @@ import { draftDischargeSummary, signDischargeSummary, dischargePatient, readDisc
 import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js";
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
+import { bufferReadAudits } from "../../_wardsynq/repository.js";
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { recordIcu, icuChart } from "../../_wardsynq/icu-care.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
@@ -1600,6 +1601,9 @@ export async function onRequest(context) {
        * and the same reason it is not a widening - lab.result grants only the narrow record scope in
        * actor.js, so this opens no other route and the store still checks the write itself. */
       if (!wAz.ok && sub === "specimen-outcome") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* LT-25: the laboratory board's Collect. A phlebotomist on the laboratory's staff takes the sample the result
+       * now needs first; same narrow alternative authority as specimen-outcome, and the store still checks the write. */
+      if (!wAz.ok && sub === "collect") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
       /* TASK 4.13: HIM_ROI is the new, narrow alternative to staff.admin for the ROI routes - the
        * `him` role holds HIM_ROI and not staff.admin, and this does not widen staff.admin's own
        * reach anywhere else. Same alternative-authority shape as criticals/specimen-outcome above. */
@@ -3009,7 +3013,9 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-worklist" && method === "GET") {
-        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "" });
+        // LT-27: the hospital's own clock (as the MAR uses), so DICOM start times are its local wall clock with the offset beside them.
+        const clock = { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" };
+        const r = await imagingWorklist(request, env, { ...deps, config: (wsqCfg && wsqCfg.dicom) || null, patientId: url.searchParams.get("patientId") || "", clock });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "imaging-studies" && method === "GET") {
@@ -3534,7 +3540,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "handovers" && method === "GET") {
-        const r = await listHandovers(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "" });
+        // LT-22: each handover names its patient, ward and bed (one read per patient, not per row).
+        const r = await listHandovers(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "", withPatients: true });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "fluid" && method === "POST") {
@@ -3556,10 +3563,18 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "criticals" && method === "GET") {
+        // names=1 (the hospital-wide boards, LT-28): each row names its patient, ward and bed; those reads audit together.
+        const withPatients = url.searchParams.get("names") === "1";
+        const audits = withPatients ? bufferReadAudits(deps.recordDeps.repository) : null;
         const r = await listCriticalLoops(request, env, {
-          ...deps, patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "",
-          policy: (wsqCfg && wsqCfg.criticalEscalation) || null,
+          ...deps, ...(audits ? { recordDeps: { ...deps.recordDeps, repository: audits.repository } } : {}),
+          patientId: url.searchParams.get("patientId") || "", state: url.searchParams.get("state") || "",
+          policy: (wsqCfg && wsqCfg.criticalEscalation) || null, withPatients,
         });
+        if (audits) {
+          try { await audits.flush(); }
+          catch { return json({ ok: false, error: "audit_write_failed", message: "Critical results were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request); }
+        }
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "flag-critical" && method === "POST") {
@@ -3609,20 +3624,25 @@ export async function onRequest(context) {
        * same functions the chart uses, so it can never disagree with the chart. A patient whose schedule or
        * score could not be read is listed with that failure, never shown as "nothing due". */
       if (sub === "nurse-worklist" && method === "GET") {
-        const roster = await listWard(request, env, { ...deps, ward: url.searchParams.get("ward") || "" });
-        if (!roster || !roster.ok) return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request);
-        const nowMs = Date.now(), CAP = 60;
-        const patients = (roster.patients || []).slice(0, CAP);
+        /* LT-21: about a minute to load, and only the first 60 patients. Every patient's schedule, score and nursing
+         * columns are separate audited reads, and each audit row waited its turn on the hash chain; they are now
+         * written together before the answer (bufferReadAudits), and every admitted patient is listed. */
+        const audits = bufferReadAudits(deps.recordDeps.repository);
+        const wdeps = { ...deps, recordDeps: { ...deps.recordDeps, repository: audits.repository } };
+        const roster = await listWard(request, env, { ...wdeps, ward: url.searchParams.get("ward") || "" });
+        if (!roster || !roster.ok) { await audits.flush().catch(() => {}); return json(roster || { ok: false, error: "ward_unavailable" }, (roster && roster.status) || 502, request); }
+        const nowMs = Date.now();
+        const patients = roster.patients || [];
         const sched = { marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined, graceMinutes: Number.isFinite(wsqCfg && wsqCfg.marGraceMinutes) ? wsqCfg.marGraceMinutes : undefined };
         const rows = await Promise.all(patients.map(async (p) => {
           const row = { patientId: p.patientId, patient: p, overdue: null, dueSoon: null, news2: null, problems: [] };
           try {
-            const s = await marSchedule(request, env, { ...deps, ...sched, patientId: p.patientId, from: new Date(nowMs - 12 * 3600e3).toISOString(), to: new Date(nowMs + 4 * 3600e3).toISOString() });
+            const s = await marSchedule(request, env, { ...wdeps, ...sched, patientId: p.patientId, from: new Date(nowMs - 12 * 3600e3).toISOString(), to: new Date(nowMs + 4 * 3600e3).toISOString() });
             if (s && s.ok) { row.overdue = s.due.filter((d) => d.overdue).length; row.dueSoon = s.due.filter((d) => !d.status && Date.parse(d.dueAt) >= nowMs).length; if (s.unreadDoses) row.problems.push(s.warning); }
             else row.problems.push("medication schedule could not be read");
           } catch { row.problems.push("medication schedule could not be read"); }
           try {
-            const n = await news2ForPatient(request, env, { ...deps, patientId: p.patientId, scale: "" });
+            const n = await news2ForPatient(request, env, { ...wdeps, patientId: p.patientId, scale: "" });
             // An unscorable result carries no number: 0 would read as "well" for a patient simply not observed.
             if (n && n.ok && n.score) row.news2 = n.score.scorable === false ? { total: null, risk: null, scorable: false } : { total: n.score.total != null ? n.score.total : null, risk: n.score.risk || null, scorable: true };
             else row.problems.push("early-warning score could not be worked out");
@@ -3631,7 +3651,7 @@ export async function onRequest(context) {
         }));
         /* Nursing columns (nursing.js): assigned nurse, open/overdue tasks, obs due. A piece that could not be read
          * is null with a problem on the row, never 0 or "not due". */
-        const nursing = await nursingWard(request, env, { ...deps, patients: patients.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId })) }).catch(() => new Map());
+        const nursing = await nursingWard(request, env, { ...wdeps, patients: patients.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId })) }).catch(() => new Map());
         for (const row of rows) {
           const n = nursing.get(row.patientId);
           // The NEWS2 module's own "high" band. Shown, never paged: escalation is the nurse's call.
@@ -3646,7 +3666,11 @@ export async function onRequest(context) {
         rows.sort((a, b) => (b.problems.length > 0) - (a.problems.length > 0)
           || ((RISK[a.news2 && a.news2.risk] ?? 9) - (RISK[b.news2 && b.news2.risk] ?? 9))
           || ((b.overdue || 0) - (a.overdue || 0)));
-        return json({ ok: true, rows, me: actor.id, staff: staff ? staff.filter((m) => m.active !== false && can(m.role, CAPS.EMR_VITALS)).map((m) => ({ identity: m.identity, label: m.email || m.identity, role: m.role })) : null, partial: (roster.patients || []).length > CAP, ...((roster.patients || []).length > CAP ? { partialWarning: `Only the first ${CAP} patients on this ward are shown.` } : {}) }, 200, request);
+        // Nothing read above is handed out before its audit rows are written; a failed write is this request's failure.
+        try { await audits.flush(); }
+        catch { return json({ ok: false, error: "audit_write_failed", message: "The worklist was read but could not be recorded in the audit trail, so it is not shown. Try again." }, 502, request); }
+        const partial = !!roster.partial;
+        return json({ ok: true, rows, me: actor.id, staff: staff ? staff.filter((m) => m.active !== false && can(m.role, CAPS.EMR_VITALS)).map((m) => ({ identity: m.identity, label: m.email || m.identity, role: m.role })) : null, total: rows.length, partial, ...(partial ? { partialWarning: roster.partialWarning } : {}) }, 200, request);
       }
       if (sub === "schedule" && method === "GET") {
         const r = await marSchedule(request, env, {

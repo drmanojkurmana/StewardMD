@@ -77,7 +77,12 @@ try {
   await ev(`document.querySelector('[data-w-act="dispositionadmit"]').click(); return true;`);
   for (let i = 0; i < 30; i++) { await sleep(100); if (await ev(`return !!document.querySelector('.w-bedcell.free');`)) break; }
   ok(await ev(`return !!document.querySelector('.w-bedcell.free');`), "admitting from the ED opens the real bed board, not a second admission form");
-  await ev(`document.querySelector('.w-bedcell.free').click(); return true;`);
+  // LT-29: a bed pick asks first, like a transfer. Cancelling admits nobody.
+  await ev(`window.__asked = []; window.confirm = function (m) { window.__asked.push(m); return false; }; document.querySelector('.w-bedcell.free').click(); return true;`);
+  await sleep(200);
+  ok((await ev(`return window.__asked.length;`)) === 1 && !(await lastBody("/ward/ed-disposition")), "a cancelled bed pick asks once and posts no disposition");
+  ok(await ev(`return /^Admit .* to ICU, bed /.test(window.__asked[0]);`), "the question names the ward and bed: " + (await ev(`return window.__asked[0];`)));
+  await ev(`window.confirm = function (m) { window.__asked.push(m); return true; }; document.querySelector('.w-bedcell.free').click(); return true;`);
   await sleep(200);
   const dispBody = await lastBody("/ward/ed-disposition");
   ok(dispBody && dispBody.disposition === "admitted" && dispBody.admission && dispBody.admission.ward === "ICU", "picking a bed fires the disposition directly, naming the real ward and bed: " + JSON.stringify(dispBody));

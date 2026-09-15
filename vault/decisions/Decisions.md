@@ -6486,3 +6486,19 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   translated text plus the English original underneath (`.en-orig`). `document.documentElement.lang` follows.
 - The Order workstation reads the same `wsqStaffNavLang`, loads i18n.js + the language file, translates its static
   HTML at boot. Translations of the new keys are written separately before merge.
+
+## 2026-09-15 Live test LT-21..LT-29 (branch livefix-boards)
+- A hospital-wide list that composes many audited reads buffers its read audit rows for the one request and writes
+  them together before answering (`bufferReadAudits` in functions/_wardsynq/repository.js, `auditMany` on the D1 and
+  memory repositories). Every read is still audited and chained; a failed flush fails the request, so nothing is
+  returned unaudited. Used by `/ward/nurse-worklist` (522 reads: 522 chain steps became 14) and `/ward/criticals?names=1`.
+- `resolveClinicalActor` answers once per (request, deps, tenant, need); the identity cannot change inside a request.
+- A lab result is refused (409 `specimen_not_collected`) for a blood/fluid order with no collected sample; a
+  collected sample not yet marked received is received by the release (`receivedOnRelease: true`). Imaging,
+  procedure and referral orders are never asked.
+- "Open critical results" means state `open` (not acknowledged) on every screen; `minutesSinceReported` is the
+  report's clock and does not change on acknowledgement. Staff names are stored beside the id at write time
+  (`acknowledgedByName`, `givenByName`, `receivedByName`); an older record with only an account id shows
+  "a clinician account", never the uid.
+- DICOM worklist DA/TM are the hospital's wall clock (org `utcOffsetMinutes`/`timeZone`) with TimezoneOffsetFromUTC;
+  a study with a final or corrected radiology report leaves the worklist, a preliminary one stays.

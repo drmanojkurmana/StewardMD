@@ -496,6 +496,11 @@ class MemoryRepository {
     await this._withChain(tenantId, [{ tenantId, ...clone(event) }], () => null);
   }
 
+  /** OPTIONAL (bufferReadAudits): many read rows linked in one chain step, same rows as auditOnly one by one. */
+  async auditMany(tenantId, events) {
+    if ((events || []).length) await this._withChain(tenantId, events.map((e) => ({ tenantId, ...clone(e) })), () => null);
+  }
+
   /** OPTIONAL (see repository-d1.js auditTrail): same contract, newest rows win the limit. */
   async auditTrail(tenantId, opts) {
     const since = String((opts && opts.since) || "");
@@ -516,4 +521,37 @@ class MemoryRepository {
   }
 }
 
-export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX };
+/**
+ * LT-21: A LIST SCREEN THAT READS HUNDREDS OF RECORDS WRITES ITS READ AUDIT ROWS TOGETHER.
+ *
+ * Every read is audited, and every audit row is linked onto the tenant's hash chain under one lock, so a
+ * worklist composed of hundreds of per-patient reads queued hundreds of chain appends one behind another
+ * (about a minute on the live nurse worklist). This wraps a repository for ONE request: reads go through
+ * unchanged, their audit rows are kept, and flush() links them all onto the chain in a few batches. Nothing
+ * is dropped: the caller must flush before it answers, and a flush that fails is the request's failure, so
+ * no record read here is handed out unaudited. Writes are not buffered (append carries its own audit row).
+ * -> { repository, flush(): Promise<number> }
+ */
+function bufferReadAudits(repository) {
+  const held = [];
+  const hold = async (tenantId, event) => { held.push([String(tenantId), event]); };
+  // Every other method runs on the repository itself, so its own state and locks are the ones used.
+  const wrapped = new Proxy(repository, { get: (t, k) => (k === "auditOnly" ? hold : typeof t[k] === "function" ? t[k].bind(t) : t[k]) });
+  async function flush() {
+    const rows = held.splice(0, held.length);
+    const byTenant = new Map();
+    for (const [t, e] of rows) byTenant.set(t, [...(byTenant.get(t) || []), e]);
+    for (const [t, events] of byTenant) {
+      for (let i = 0; i < events.length; i += AUDIT_FLUSH_BATCH) {
+        const part = events.slice(i, i + AUDIT_FLUSH_BATCH);
+        if (typeof repository.auditMany === "function") await repository.auditMany(t, part);
+        else for (const e of part) await repository.auditOnly(t, e);
+      }
+    }
+    return rows.length;
+  }
+  return { repository: wrapped, flush };
+}
+const AUDIT_FLUSH_BATCH = 40;
+
+export { VersionConflictError, IdentityConflictError, RepositoryError, PORT_METHODS, assertRepository, rowOf, MemoryRepository, MAX_ROSTER, rosterLimit, AUDIT_READ_MAX, bufferReadAudits };

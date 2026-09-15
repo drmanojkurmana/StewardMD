@@ -3458,6 +3458,20 @@
     "ward.your-role-cannot-read-this-trend": "Your role cannot read this trend.",
     "ward.your-text-this-is-what-will": "Your text (this is what will be filed)",
     "ward.yyyy-mm-dd": "YYYY-MM-DD",
+    "ward.last-attempt-failed": "Last attempt failed: {reason}",
+    "ward.collected-by": "collected {at} by {who}",
+    "ward.a-clinician-account": "a clinician account",
+    "ward.bed-n": "bed {bed}",
+    "ward.no-sample-has-been-collected-for": "Not released: no sample has been collected for this test. Collect it first (who took it and when are recorded), then release the result.",
+    "ward.nobody-is-on-duty-to-tell-under": "nobody is on duty to tell under this hospital's alert rule",
+    "ward.due-for-escalation": "Due for escalation",
+    "ward.acknowledged-not-yet-closed": "Acknowledged, not yet closed &middot; {n}",
+    "ward.a-nurse-is-assigned-from-the": "A nurse is assigned from the nurse worklist.",
+    "ward.admit-to-bed-confirm": "Admit {name} to {ward}, bed {bed}?",
+    "ward.this-patient2": "this patient",
+    "ward.nursing-tasks": "Nursing tasks",
+    "ward.hand-this-patient-to-the-next": "Hand this patient to the next shift, in SBAR",
+    "ward.add-a-nursing-task-for-this": "Add a nursing task for this patient, and see the open ones",
     /* end ward.js keys */
     /* site pages keys (ui-i18n-site) */
     /* wardsynq/site/shell.js */

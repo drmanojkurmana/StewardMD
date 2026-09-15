@@ -367,6 +367,12 @@ async function marSchedule(request, env, ctx) {
   const opts = { from: new Date(fromMs).toISOString(), to: new Date(toMs).toISOString(), times: ctx.marTimes, offsetMinutes: ctx.offsetMinutes, timeZone: ctx.timeZone };
   const due = [], prn = [], unscheduled = [];
   let truncated = false, unreadDoses = 0;
+  /* LT-21: the patient's dose records in ONE read, not one read per slot (the nurse worklist did this for every
+   * dose of every patient). Latest version per id, exactly what a get per slot returned. A failed read is still
+   * never "not started": every slot is unknown. */
+  let given = null;
+  try { given = new Map(((await svc.byPatient("MedicationAdministration", patientId)) || []).filter(Boolean).map((m) => [m.id, m])); }
+  catch { given = null; }
 
   for (const o of (orders || []).filter((x) => x && x.status === "active")) {
     // orderVersion: the order as the nurse saw it. A dose charted against it is refused if the order changed (G2).
@@ -388,7 +394,7 @@ async function marSchedule(request, env, ctx) {
       let mar = null, readFailed = false;
       /* A failed read is NOT "not started": shown as null it offered Administer on a dose that may
        * already have been given. */
-      try { mar = administrationId ? await svc.get("MedicationAdministration", administrationId) : null; } catch { readFailed = true; unreadDoses += 1; }
+      if (!given) { readFailed = true; unreadDoses += 1; } else mar = (administrationId && given.get(administrationId)) || null;
       due.push({
         ...card, dueAt, administrationId,
         ...(readFailed ? { readFailed: true } : {}),

@@ -189,6 +189,9 @@ export async function releasePotassium(p, value, minutesAgo, analyte) {
   const test = analyte || "Potassium";
   const order = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: p.encounterId, code: test, category: "laboratory" });
   if (order.__status !== 200) throw new Error("order failed " + JSON.stringify(order));
+  // LT-25: a result is released for a sample somebody collected.
+  const got = await as(LAB, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: order.orderId, specimenType: "Serum" });
+  if (got.__status !== 200) throw new Error("collect failed " + JSON.stringify(got));
   const r = await as(LAB, "/ward/release-result", "POST", {
     orgId: ORG, serviceRequestId: order.orderId, status: "final", reportedAt: new Date(Date.now() - (minutesAgo || 0) * 60000).toISOString(),
     tests: [{ test, value, unit: "mmol/L" }],

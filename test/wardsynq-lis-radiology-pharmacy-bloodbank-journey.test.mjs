@@ -160,6 +160,11 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
 
   // A dangerous potassium, on a second order, opens a critical-result loop with no other call.
   const labOrder2 = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId, code: "Potassium", category: "laboratory" });
+  // LT-25: no result for a sample nobody took.
+  const uncollected = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: labOrder2.orderId, status: "final", tests: [{ test: "Potassium", value: 7.2, unit: "mmol/L" }] });
+  assert.equal(uncollected.__status, 409, JSON.stringify(uncollected));
+  assert.equal(uncollected.error, "specimen_not_collected");
+  assert.equal((await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: labOrder2.orderId, specimenType: "Serum" })).__status, 200);
   const critResult = await as(LABTECH, "/ward/release-result", "POST", {
     orgId: ORG, serviceRequestId: labOrder2.orderId, status: "final", reportedAt: "2026-09-09T09:05:00.000Z",
     tests: [{ test: "Potassium", value: 7.2, unit: "mmol/L" }],
@@ -237,7 +242,7 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
 
   assert.ok(types.has("Specimen"), "TASK 3.7 gap closed: the specimen collected for the lab order is now visible in $everything: " + JSON.stringify([...types]));
   const specimens = entries.filter((e) => e.resource && e.resource.resourceType === "Specimen");
-  assert.equal(specimens.length, 1);
+  assert.equal(specimens.length, 2, "one sample per lab order (LT-25: the second order is collected before its result too)");
   assert.equal(specimens[0].resource.status, "available");
 
   assert.ok(types.has("MedicationRequest") || types.has("MedicationDispense"), "the bundle carries the medication side of the journey: " + JSON.stringify([...types]));

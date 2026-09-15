@@ -212,6 +212,7 @@ test("ICU SOFA: partial with the unscored systems named, never counted as 0; SEP
   // Only a gas and a platelet count exist at first.
   await as(NURSE, "/ward/icu-record", "POST", { orgId: ORG, kind: "abg", patientId: adm.patientId, encounterId: adm.encounterId, at: ago(20), values: { sampleType: "arterial", ph: 7.30, pco2: 35, po2: 70, hco3: 17, lactate: 3.1, fio2: 0.5 } });
   const ord = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Platelets", category: "laboratory" });
+  assert.equal((await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: ord.orderId, specimenType: "Whole blood" })).__status, 200);
   const res = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: ord.orderId, status: "final", reportedAt: ago(15), tests: [{ test: "Platelet count", value: 90, unit: "10*3/uL" }] });
   assert.equal(res.__status, 200, JSON.stringify(res));
 

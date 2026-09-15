@@ -120,7 +120,7 @@ function collectionState(specimens) {
   if (received) return { state: "received", at: received.receivedAt, specimenId: received.id };
   const collected = rows.filter((s) => s.state === "collected")
     .sort((a, b) => String(b.collectedAt || "").localeCompare(String(a.collectedAt || "")))[0];
-  if (collected) return { state: "collected", at: collected.collectedAt, specimenId: collected.id };
+  if (collected) return { state: "collected", at: collected.collectedAt, by: collected.collectedBy || null, specimenId: collected.id };
   /* Every attempt failed. This is the state that must never read as "in progress": the order needs
    * doing again and nobody is going to be told by a result arriving. */
   const failed = rows.sort((a, b) => String(b.failedAt || "").localeCompare(String(a.failedAt || "")))[0];
@@ -368,4 +368,4 @@ async function collectionList(request, env, ctx) {
   };
 }
 
-export { TYPE, STATES, OUTSTANDING, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };
+export { TYPE, STATES, OUTSTANDING, NO_SPECIMEN_CATEGORIES, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };

@@ -1120,10 +1120,15 @@ test("the round is computed from the frequency the doctor already wrote, and a g
 test("SAFETY: a dose record that cannot be read is 'unknown', never 'not started', on both the round and the legacy round", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();   // TID
-  const real = RECORD.latest.bind(RECORD);
+  const real = RECORD.latest.bind(RECORD), realByPatient = RECORD.byPatient.bind(RECORD);
   RECORD.latest = async (tenantId, resourceType, id) => {
     if (resourceType === "MedicationAdministration") throw new Error("simulated read outage");
     return real(tenantId, resourceType, id);
+  };
+  // LT-21: the schedule reads the patient's dose records in one read; that read fails the same way.
+  RECORD.byPatient = async (tenantId, resourceType, patientId) => {
+    if (resourceType === "MedicationAdministration") throw new Error("simulated read outage");
+    return realByPatient(tenantId, resourceType, patientId);
   };
   try {
     const from = new Date().toISOString(), to = new Date(Date.now() + 86400000).toISOString();
@@ -1136,7 +1141,7 @@ test("SAFETY: a dose record that cannot be read is 'unknown', never 'not started
     const legacy = await as(NURSE, `/ward/round?orgId=${ORG}&patientId=${adm.patientId}&dueAt=${encodeURIComponent(DUE)}`);
     assert.ok(legacy.due.every((d) => d.status === "unknown"), JSON.stringify(legacy.due));
     assert.equal(legacy.incomplete, true);
-  } finally { RECORD.latest = real; }
+  } finally { RECORD.latest = real; RECORD.byPatient = realByPatient; }
 });
 
 test("a PRN drug never appears on the round, and an unreadable frequency is reported rather than dropped", async () => {
@@ -2298,12 +2303,17 @@ test("resolving identity is the registration authority, and nothing automatic do
  */
 
 /** An investigation ordered on this admission, straight onto the record. */
-async function orderTest(adm, code = "Renal profile", id = "wsq-sr-1") {
+async function orderTest(adm, code = "Renal profile", id = "wsq-sr-1", opts = {}) {
+  const collected = opts.collected !== false;
   await RECORD.append(TENANT_ROW.id, [{
     resourceType: "ServiceRequest", id, version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
     code, display: code, status: "active", requesterId: "cfa:dr",
     meta: { recordedAt: "2026-09-07T08:30:00.000Z", effectiveAt: "2026-09-07T08:30:00.000Z" },
-  }], { actor: "test" });
+  }].concat(collected ? [{
+    // LT-25: a result is released only for a sample somebody took, so the fixture's order has one.
+    resourceType: "SpecimenCollection", id: `wsq-spec-${id}-fixture`, version: 1, patientId: adm.patientId, encounterId: adm.encounterId,
+    serviceRequestId: id, state: "collected", collectedBy: "cfa:nurse", collectedAt: "2026-09-07T08:45:00.000Z",
+  }] : []), { actor: "test" });
   return id;
 }
 
@@ -4623,7 +4633,7 @@ test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", a
 test("ORDER -> COLLECT -> RECEIVE -> RESULT, and an uncollected order is VISIBLY uncollected", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  const sr = await orderTest(adm, "Potassium", "wsq-sr-k");
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k", { collected: false });
 
   /* THE STATE THIS WHOLE FEATURE EXISTS FOR. Before it, this order and one whose blood is sitting in
    * the analyser were the same thing on screen: "requested, no result yet". Only one of them has a
@@ -4665,7 +4675,7 @@ test("ORDER -> COLLECT -> RECEIVE -> RESULT, and an uncollected order is VISIBLY
 test("A FAILED ATTEMPT SENDS THE ORDER BACK TO NEEDING COLLECTION, loudly", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  const sr = await orderTest(adm, "Potassium", "wsq-sr-k2");
+  const sr = await orderTest(adm, "Potassium", "wsq-sr-k2", { collected: false });
   const first = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr, specimenType: "Whole blood", at: "2026-09-07T09:00:00.000Z" });
 
   // A failure with no reason cannot be acted on, and "take it again, differently" is the action.
@@ -5445,6 +5455,7 @@ test("FHIR ids: a canonical id longer than R4 allows is exported hashed, read ba
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
   const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
+  await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr.orderId, specimenType: "Serum" });
   const rep = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
   assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 200));
   const reports = await (await asRaw(DOCTOR, `/ward/fhir/DiagnosticReport?orgId=${ORG}&patient=${adm.patientId}`)).json();
@@ -5475,6 +5486,7 @@ test("FHIR: _include pulls the report's observations through the governed read, 
   const { adm } = await admittedPatientOnDrug();
   const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
   assert.equal(sr.__status, 200, JSON.stringify(sr).slice(0, 200));
+  await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr.orderId, specimenType: "Serum" });
   const rep = await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
   assert.equal(rep.__status, 200, JSON.stringify(rep).slice(0, 300));
 
@@ -6122,6 +6134,7 @@ test("ROUND TRIP: WardSynQ -> an external EMR -> WardSynQ, and the clinical cont
   const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
   await step("verify"); await step("dispense"); await step("scan", { scan }); await step("administer");
   const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Renal profile", category: "laboratory" });
+  await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr.orderId, specimenType: "Serum" });
   await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: sr.orderId, status: "final", reportedAt: "2026-09-07T10:00:00.000Z", conclusion: "Renal function normal.", tests: [{ test: "Creatinine", value: 88, unit: "umol/L" }] });
   const note = await as(DOCTOR, "/ward/note", "POST", { orgId: ORG, templateId: "ward-round", encounterId: adm.encounterId, sections: { impression: "Improving pneumonia.", plan: "Continue antibiotics; review tomorrow." } });
   assert.equal(note.__status, 200, JSON.stringify(note).slice(0, 200));

@@ -17,7 +17,7 @@ window.prompt = function (msg) { window.__calls.push({ prompt: msg }); return wi
 localStorage.setItem("smd_opd_staff_tok", "harness-token");
 
 var PATIENT_ID = "opd-pat-smd-h1-lab01", ENC_ID = "wsq-enc-smd-h1-lab01", MRN = "SMD-H1-LAB01", SR_ID = "wsq-sr-lab-h1";
-var COLLECTED = false, ACCESSION = null;
+var COLLECTED = false, FBC_COLLECTED = false, ACCESSION = null;
 
 window.fetch = function (url, opts) {
   var u = String(url), body = null;
@@ -34,14 +34,29 @@ window.fetch = function (url, opts) {
       collection: COLLECTED ? { state: "collected", at: "2026-09-09T09:00:00.000Z", specimenId: "wsq-spec-1" } : { state: "none", detail: "No sample has been taken for this request." },
     }, /* BUG-MU2PR8I2: an imaging and a procedure order on the same list. Neither has a sample. */
     { serviceRequestId: "wsq-sr-img-1", code: "Chest X-ray", display: "Chest X-ray", category: "imaging", priority: "routine", collection: { state: "none" } },
-    { serviceRequestId: "wsq-sr-ecg-1", code: "Resting ECG", display: "Resting ECG", category: "procedure", priority: "routine", collection: { state: "none" } }
+    { serviceRequestId: "wsq-sr-ecg-1", code: "Resting ECG", display: "Resting ECG", category: "procedure", priority: "routine", collection: { state: "none" } },
+    // LT-25: a blood test nobody has collected, and one whose sample state the board could not tell.
+    { serviceRequestId: "wsq-sr-fbc", code: "Full blood count", display: "Full blood count", category: "laboratory", priority: "routine", collection: FBC_COLLECTED ? { state: "collected", at: "2026-09-15T10:00:00.000Z", by: "lab.01@h.test", specimenId: "wsq-spec-fbc" } : { state: "none" } }
     ], awaitingCollection: COLLECTED ? 0 : 1, inTransit: COLLECTED ? 1 : 0 });
   }
+  if (u.indexOf("/ward/pending-tests") >= 0 && u.indexOf("scope=hospital") >= 0) {
+    return reply({ ok: true, scope: "hospital", pending: [
+      { serviceRequestId: "wsq-sr-fbc", code: "Full blood count", display: "Full blood count", patientId: PATIENT_ID },
+      { serviceRequestId: "wsq-sr-tsh", code: "TSH", display: "TSH", patientId: PATIENT_ID }] });
+  }
+  // LT-25: the server refuses a result for a sample nobody collected.
+  if (u.indexOf("/ward/release-result") >= 0) return reply({ ok: false, status: 409, error: "specimen_not_collected", collection: "none", written: 0, detail: "No sample has been collected for this request." });
+  // LT-23: the chart's handover and nursing tasks, on the routes those screens already use.
+  if (u.indexOf("/ward/handovers") >= 0) return reply({ ok: true, handovers: [], waiting: 0 });
+  if (u.indexOf("/ward/handover") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, handoverId: "wsq-hand-1", state: "waiting" });
+  if (u.indexOf("/ward/nursing-patient") >= 0) return reply({ ok: true, assignment: { nurseId: null, version: null }, tasks: [], tasksOpen: 0, tasksOverdue: 0, vitals: null, problems: [] });
+  if (u.indexOf("/ward/nursing-task") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1 });
   if (u.indexOf("/ward/collect") >= 0 && (opts && opts.method) === "POST") {
     if (body.scannedPatientBarcode && body.scannedPatientBarcode.toUpperCase() !== MRN) {
       return reply({ ok: false, status: 409, error: "wrong_patient_scan", detail: "the scanned wristband does not match the patient this order belongs to", written: 0 });
     }
-    COLLECTED = true; ACCESSION = "ACC-" + Date.now().toString(36).toUpperCase();
+    if (body.serviceRequestId === "wsq-sr-fbc") FBC_COLLECTED = true; else COLLECTED = true;
+    ACCESSION = "ACC-" + Date.now().toString(36).toUpperCase();
     return reply({ ok: true, written: 1, specimenId: "wsq-spec-1", accessionNumber: ACCESSION, state: "collected", note: "Collected. The laboratory has not received it yet, and no result has been produced." });
   }
 
