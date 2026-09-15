@@ -541,7 +541,16 @@ git commit -m "Connect Agent: capture navigation and popup reports as proven bac
 
 A discovered URL is never "learned": it is a candidate that must be executed in the doctor's session and verified (Tasks 2 and 2b). This task closes the remaining hole: proof verifies a candidate against **the values on the screen**, and the screen can itself be filtered. GHIS's own page may send `GetIPWL` with `Emp_ID` or `Dept_ID` filled, which answers with the signed-in doctor's patients only. That passes proof on a screen showing exactly those patients, is saved as recorded, and then returns a subset for every doctor forever: commit `67c8a74d8` (2026-09-14, "ensure GetIPWL worklist endpoint loads all 661 hospital in-patients") is the hard-coded workaround that was papering over precisely this. After this task, the request is saved with its filters empty and `Type=IPWorkList` intact, because that form was proven to return more patients.
 
-**THE SAFETY RULE:** only a parameter `paramsOf` could NOT trace to a patient, a parent row, a token, a constant, a page key or today's date (that is, an `unmapped` filter) may be emptied. A parameter traced to the worklist or a parent row is identity-bearing (`patient_id`, `Render_ID`, `resultid`) and is NEVER emptied: emptying one would turn this patient's lab request into everyone's.
+**THE SAFETY RULE (corrected 2026-09-16 after review of commit `c532e3358`):** widening applies to the **worklist and nothing else**, and even there a patient-keyed or visit-keyed parameter is never emptied.
+
+The first version of this rule keyed off `unmapped` alone, and that was wrong in a way that would have leaked PHI. `unmapped` is `paramsOf`'s FAILURE state, not evidence that a parameter is a filter: when tracing has no parent rows to work from, an identifier is indistinguishable from a doctor filter. `parents` is empty for every resource whenever the worklist proof failed, which is precisely the GHIS situation this plan exists to fix. So `patient_id=MR900001` on a labs call came back `unmapped`, widening emptied it, and the keep-gate did not stop it: every patient's labs is the same response kind, has more rows, and still carries this patient's values, so `accepted()` passed on a superset. It would have been saved as `patient_id: {"empty": true}` and every patient's drawer would then have shown the whole hospital's labs, in the wrong chart. Reported by the reviewer with a live reproduction against the committed code.
+
+Three guards, all required:
+1. Widen **only** when `view.resourceHint === 'worklist'`. The whole population is the goal for the ward list alone. For a patient's labs, medications or radiology, MORE rows is a red flag, never a win.
+2. Never empty a parameter whose KEY is patient-shaped or visit-shaped (`PATIENT_KEY` / `VISIT_KEY` from `adapter-runtime.mjs`), even on the worklist. This protects against a patient-scoped screen that was mis-hinted as the worklist.
+3. Keep the original rule as well: only a parameter `paramsOf` could not trace (`unmapped`) is a candidate. A parameter traced to the worklist or a parent row is identity-bearing and is never emptied.
+
+If a guard costs a wider result (a ward list whose `PatientId` filter was filled stays narrow), that is the correct trade: the gold audit reports it as a `subset` and a human decides. Silently reading another patient's chart is not recoverable.
 
 **Files:**
 - Modify: `connect-agent/phone/prove.mjs` (new `PROVE_EXEC_REQ` source + `PROVE_SOURCES.execRequest`, new `widenRequest`, a widening pass in `proveView` after the hit is chosen)
@@ -570,6 +579,38 @@ test('widenRequest empties only the filters nothing could be traced to', () => {
   assert.equal(widenRequest(labs, { patient_id: { from: 'worklist', field: 'MRNo' }, __RequestVerificationToken: { token: true }, DeptID: { empty: true } }), null, 'nothing untraceable and filled: no widening');
   const scoped = { method: 'GET', url: HOST + '/Lab/Home/Get?patient_id=MR900001', body: null, reqCt: '' };
   assert.equal(widenRequest(scoped, { patient_id: { from: 'worklist', field: 'MRNo' } }), null, 'a row-traced id is never emptied');
+});
+
+test('widenRequest refuses a patient-keyed parameter even when tracing failed', () => {
+  const entry = { method: 'GET', url: HOST + '/Doctor/Home/GetIPWL?PatientId=MR900001&Emp_ID=4471&Type=IPWorkList', body: null, reqCt: '' };
+  const params = { PatientId: { unmapped: true }, Emp_ID: { unmapped: true }, Type: { constant: 'IPWorkList' } };
+  const q = new URL(widenRequest(entry, params).url).searchParams;
+  assert.equal(q.get('PatientId'), 'MR900001', 'a patient-keyed filter is never emptied, even unmapped');
+  assert.equal(q.get('Emp_ID'), '', 'a doctor filter still widens');
+});
+
+test('widening never touches a patient-scoped call, even when tracing failed completely', async () => {
+  // parents: [] is the real GHIS case: the worklist proof failed, so nothing can be traced, and every
+  // parameter including patient_id comes back `unmapped`. Widening must still refuse.
+  const MINE = JSON.stringify([{ test: 'Haemoglobin', value: '11.2' }]);
+  const ALL = JSON.stringify(Array.from({ length: 40 }, (_, i) => ({ test: 'Haemoglobin', value: '11.' + i })));
+  const entries = [{ seq: 71, method: 'GET', url: HOST + '/Lab/Home/GetSearchPatientId?patient_id=MR900001&DeptID=', body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['test'], rows: 1 } }];
+  let widened = null;
+  const page = {
+    async currentUrl() { return { url: HOST + '/Lab/Home' }; },
+    async evaluate({ expression }) {
+      if (expression.includes('PROVE_LIST')) return { result: JSON.stringify(entries) };
+      if (expression.includes('PROVE_SCREEN')) return { result: JSON.stringify([['Haemoglobin', '11.2']]) };
+      if (expression.includes('PROVE_EXEC_REQ')) { widened = expression; return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: ALL }) }; }
+      if (expression.includes('PROVE_EXEC')) return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: MINE }) };
+      return { result: null };
+    },
+  };
+  const view = { resourceHint: 'labs', pathTemplate: HOST + '/Lab/Home', rowsSelector: 'tr', headers: ['Test', 'Value'] };
+  await proveView({ client: page, view, parents: [] });
+  assert.equal(widened, null, 'a patient-scoped resource is never widened: the whole hospital is never fetched');
+  const p = (view.endpoints.find((e) => e.role === 'data') || {}).params || {};
+  assert.notDeepEqual(p.patient_id, { empty: true }, 'the patient id is never saved as empty');
 });
 
 test('the ward list is saved in the form that returns every in-patient, not the doctor filtered one', async () => {
@@ -663,7 +704,10 @@ and add to `PROVE_SOURCES`:
  * own identity and is never touched: emptying it would turn this patient's labs into everyone's. */
 export function widenRequest(entry, params) {
   const src = params || {};
-  const loose = (k, v) => !!v && !!src[k] && src[k].unmapped === true;
+  /* `unmapped` alone is NOT enough: it is the tracing FAILURE state, and an identifier tracing failed on
+   * looks exactly like a doctor filter. A patient-keyed or visit-keyed name is never emptied whatever
+   * tracing said (reviewer reproduction against commit c532e3358, 2026-09-16). */
+  const loose = (k, v) => !!v && !!src[k] && src[k].unmapped === true && !PATIENT_KEY.test(k) && !VISIT_KEY.test(k);
   let u;
   try { u = new URL(entry.url); } catch { return null; }
   let changed = false;
@@ -693,8 +737,11 @@ export function widenRequest(entry, params) {
    * request that matches it can still be a subset. The same call with its untraceable filters emptied
    * is replayed in the doctor's session; when it answers with MORE rows, the same kind, and still
    * carries the screen, THAT is the request saved (owner, 2026-09-16). */
-  const LIST_RESOURCES = ['worklist', 'labs', 'radiology', 'medications', 'notes', 'history', 'discharge'];
-  if (LIST_RESOURCES.includes(String(view.resourceHint || ''))) {
+  /* THE WARD LIST, AND NOTHING ELSE. The whole population is the goal for the ward list alone. For a
+   * patient's labs, medications or radiology, MORE rows is a red flag, not a win: it means the request
+   * stopped being about this patient. Widening every list resource would have emptied `patient_id` on a
+   * labs call whenever the worklist proof failed, putting the whole hospital's labs in one chart. */
+  if (String(view.resourceHint || '') === 'worklist') {
     const wide = widenRequest(hit.e, paramsOf(hit.e, parents));
     if (wide) {
       const resp2 = await evalJson(client, PROVE_SOURCES.execRequest({ method: hit.e.method, url: wide.url, body: wide.body, reqCt: hit.e.reqCt, xhr: hit.e.xhr }), null);
@@ -751,7 +798,7 @@ with
   if (!gold.length && !mine.length) verdict = 'both-empty';
   else if (!mine.length) verdict = 'missing';
   else if (matched === gold.length && mine.length === gold.length && fieldsSame) verdict = 'same';
-  else if (mine.length < gold.length && matched === mine.length) verdict = 'subset';
+  else if (mine.length < gold.length && matched === mine.length && fieldsSame) verdict = 'subset';
   else verdict = 'partial';
   return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, missing: Math.max(0, gold.length - matched), fields, verdict };
 ```
