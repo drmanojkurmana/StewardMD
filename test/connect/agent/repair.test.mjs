@@ -13,7 +13,11 @@ import { manifestContentHash, validateManifest } from "../../../connect-agent/ma
 const ORIGIN = "https://hims.kims.example";
 const OLD_VIEW = { resourceHint: "worklist", pathTemplate: ORIGIN + "/ip/worklist", rowsSelector: "#wl tbody tr", headers: ["UHID", "Patient Name", "Age", "Sex", "Bed"], singleRecord: false };
 const MEDS_VIEW = { resourceHint: "medications", pathTemplate: ORIGIN + "/ip/meds/{id}", rowsSelector: "#rx tr", headers: ["Prod Code", "Drug", "Dose"], singleRecord: false };
-const NEW_VIEW = { resourceHint: "worklist", pathTemplate: ORIGIN + "/ip/all", rowsSelector: "#allpts tbody tr", headers: ["UHID", "Patient Name", "Age", "Sex", "Ward"], singleRecord: false, guided: true, guidedPath: ['a "All patients"'] };
+/* A repair now has to carry the backend request it re-proved on the screen the doctor showed: a page
+ * selector alone is a scraper, and the runtime never scrapes an endpoint adapter (Task 7b). */
+const NEW_VIEW = { resourceHint: "worklist", pathTemplate: ORIGIN + "/ip/all", rowsSelector: "#allpts tbody tr", headers: ["UHID", "Patient Name", "Age", "Sex", "Ward"], singleRecord: false, guided: true, guidedPath: ['a "All patients"'],
+  proof: { status: "proven", tried: 1, kind: "json", hits: 4, cells: 4, overlap: 1 },
+  endpoints: [{ method: "GET", path: "/api/ward/patients?unit&start&length", xhr: true, role: "data", params: {}, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }] };
 
 function baseManifest(views) {
   const inferred = inferHtmlOperations(views, { originId: "origin:kims" });
@@ -93,6 +97,10 @@ test("repair refuses another doctor's session, a draft version, and a view witho
   const noSel = await call("POST", "/api/connect/agent/versions/" + version.id + "/repair?tenant=t1", { sessionId: "sess-1", view: { resourceHint: "worklist", pathTemplate: "/x", headers: ["A"] } }, docEmail);
   assert.equal(noSel.status, 400);
   assert.match((await noSel.json()).detail, /row selector/);
+  // A selector with no proven backend request is a scraper, and is refused (Task 7b).
+  const selectorOnly = await call("POST", "/api/connect/agent/versions/" + version.id + "/repair?tenant=t1", { sessionId: "sess-1", view: { resourceHint: "worklist", pathTemplate: "/x", rowsSelector: "#allpts tbody tr", headers: ["A"] } }, docEmail);
+  assert.equal(selectorOnly.status, 409);
+  assert.match((await selectorOnly.json()).detail, /proven backend request/);
   const missing = await call("POST", "/api/connect/agent/versions/ver_nope/repair?tenant=t1", { sessionId: "sess-1", view: NEW_VIEW }, docEmail);
   assert.equal(missing.status, 404);
   // A second repair of the same adapter is a second draft; the approved one still stands.

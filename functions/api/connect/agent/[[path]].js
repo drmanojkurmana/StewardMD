@@ -190,7 +190,8 @@ function cleanProofCounts(raw, kinds, name) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new OnboardError("invalid", "observedViews: " + name + " invalid");
   const out = {};
   if (raw.kind !== undefined) { if (kinds.indexOf(raw.kind) < 0) throw new OnboardError("invalid", "observedViews: " + name + " kind invalid"); out.kind = raw.kind; }
-  for (const k of ["hits", "cells", "rows"]) {
+  // `population`: how many rows the SAVED (widened) list request returned, so a subset is visible later.
+  for (const k of ["hits", "cells", "rows", "population"]) {
     if (raw[k] === undefined) continue;
     if (!Number.isInteger(raw[k]) || raw[k] < 0 || raw[k] > 100000) throw new OnboardError("invalid", "observedViews: " + name + " " + k + " invalid");
     out[k] = raw[k];
@@ -349,6 +350,61 @@ function cleanObservedViews(raw) {
     }
     return clean;
   });
+}
+
+/* The phone's proof trace (connect-agent/phone/prove.mjs createProofBook): per screen, which requests
+ * were replayed and how many on-screen values each carried. Without it a failed screen is a bare
+ * "no-requests" and the next run is a guess (adapter ver_b16da370, 2026-09-15). Method, redacted path,
+ * role, kind and counts only; an attempt whose path still carries an identifier is dropped. */
+function cleanProofTrace(raw) {
+  if (!Array.isArray(raw)) return [];
+  const num = (x) => (Number.isFinite(Number(x)) ? Math.max(0, Math.min(100000, Math.round(Number(x)))) : 0);
+  const word = (x) => (typeof x === "string" && /^[A-Za-z-]{1,32}$/.test(x) ? x : "");
+  return raw.slice(0, 60).filter((t) => t && typeof t === "object" && !Array.isArray(t)).map((t) => ({
+    resource: word(t.resource),
+    status: word(t.status),
+    tried: num(t.tried),
+    attempts: (Array.isArray(t.attempts) ? t.attempts : []).slice(0, 12)
+      .filter((a) => a && typeof a.path === "string" && a.path.length <= 256 && !/\d{3,}/.test(a.path) && a.path.indexOf("@") < 0)
+      .map((a) => ({
+        method: a.method === "POST" ? "POST" : "GET",
+        path: a.path,
+        role: word(a.role),
+        kind: word(a.kind),
+        hits: num(a.hits),
+        ratio: Math.max(0, Math.min(1, Number(a.ratio) || 0)),
+      })),
+  }));
+}
+
+/* ENDPOINT-COMPLETE OR NOT COMPLETE (owner, 2026-09-16). Every routine clinical resource must be a
+ * proven backend request; a resource read only by scraping a page, or not read at all, means the
+ * adapter is not done. History rides OPD-side and never gates (the hand-built adapter reads it there). */
+const REQUIRED_RESOURCES = ["worklist", "medications", "labs", "labs-detail", "radiology", "radiology-detail"];
+function adapterCompleteness(observedViews) {
+  const views = Array.isArray(observedViews) ? observedViews : [];
+  /* A DATA CALL THAT LOST THE PATIENT IS NOT ENDPOINT-BACKED. A patient-keyed field saved `unmapped`
+   * or `empty` replays with nothing in it, so the request stops being about this patient and whatever
+   * the hospital answers for everyone lands in one chart. The worklist is exempt: it is not
+   * patient-scoped, and its filters are proven empty on purpose (Task 2c). */
+  const PATIENT_ISH = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$|visit|episode|encounter|admission|ip(no|number)/i;
+  const scoped = (v) => (v.endpoints || []).every((e) => {
+    if (!e || e.role !== "data") return true;
+    const p = e.params || {};
+    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].unmapped === true || p[k].empty === true));
+  });
+  const scopedFor = (res, v) => res === "worklist" || scoped(v);
+  const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(res, v));
+  const how = {};
+  const missing = [];
+  for (const res of REQUIRED_RESOURCES) {
+    if (provenEndpoint(res)) how[res] = "endpoint";
+    else {
+      how[res] = views.some((v) => v && v.resourceHint === res && !scopedFor(res, v)) ? "unscoped" : "absent";
+      missing.push(res);
+    }
+  }
+  return { how, endpointComplete: missing.length === 0, missing };
 }
 
 // A discovery-spec event's redacted path (connect-agent/discovery.mjs's redactPath) always writes the
@@ -918,6 +974,7 @@ export async function onRequest(context) {
       const spec = body.spec;
       if (!spec || typeof spec !== "object" || Array.isArray(spec)) throw new OnboardError("invalid", "spec required");
       const observedViews = cleanObservedViews(body.observedViews);
+      const proofTrace = cleanProofTrace(body.proofs);
 
       let job = await findJobForSession(deps.db, tid, sessionId);
       if (!job) throw new OnboardError("not-found", "job not found");
@@ -1042,6 +1099,7 @@ export async function onRequest(context) {
         requestedAt: nowIso(),
         observedEvents: (Array.isArray(spec.events) ? spec.events : []).slice(0, 200),
         observedViews,
+        proofTrace,
       };
       job = await casJob(deps.db, tid, job.id, job.revision, { phone_state: JSON.stringify(phoneState) });
 
@@ -1185,6 +1243,8 @@ export async function onRequest(context) {
         requestedAt: (phoneState && phoneState.requestedAt) || null,
         pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
         views,
+        proofTrace: phoneState && Array.isArray(phoneState.proofTrace) ? phoneState.proofTrace : [],
+        completeness: adapterCompleteness(phoneState && phoneState.observedViews),
         // The phone runtime replays these (selectors, labels, paths: PHI-free by construction, see
         // connect-agent/phone/CONTRACT.md "observedViews") to read a ward list in the doctor's own session.
         replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews.map((v) => Object.assign({}, v, { pathTemplate: redactPathValues(v.pathTemplate) })) : [],
@@ -1198,6 +1258,26 @@ export async function onRequest(context) {
       const { actor, role } = await requireAgent(deps, request, env, tid, "approve");
       const version = await getVersion(deps.db, tid, versionId);
       if (!version) throw new OnboardError("not-found", "adapter version not found");
+      /* ENDPOINT-COMPLETE, OR NOT APPROVED. Every required clinical resource must be a proven backend
+       * request; approving a partial adapter put a 30-minute page hang in front of the owner
+       * (ver_b16da370, 2026-09-15). JSON-probe adapters (no observed views) keep their own evidence. */
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      const candidateViews = ((job && safeJsonParse(job.phone_state)) || {}).observedViews;
+      if (Array.isArray(candidateViews) && candidateViews.length) {
+        const completeness = adapterCompleteness(candidateViews);
+        if (!completeness.endpointComplete) {
+          throw new OnboardError("conflict", "this adapter is not endpoint-complete: no proven backend request for " + completeness.missing.join(", ") + ". Run Connect Hospital again and show the missing screens");
+        }
+      } else if (job) {
+        /* NO VIEWS AT ALL IS NOT AN EXEMPTION. A crawl that found nothing posts an empty list, which
+         * skipped the gate entirely and let the emptiest adapter through while a nearly complete one
+         * was refused. A JSON-probe adapter still approves on its own evidence: at least one capability
+         * the phone actually proved. */
+        const caps = safeJsonParse(version.capabilities);
+        if (!Array.isArray(caps) || !caps.some((c) => c && c.proven === true)) {
+          throw new OnboardError("conflict", "this adapter proved nothing: the run found no screens and no probe succeeded. Run Connect Hospital again");
+        }
+      }
       const { version: activated, activation } = await activateVersion(deps.db, {
         tenantId: tid,
         deploymentId: version.deployment_id,
@@ -1207,7 +1287,6 @@ export async function onRequest(context) {
         policyVersion: "connect-agent-phone/1",
         evidenceHash: version.evidence_hash,
       });
-      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
       if (job && canTransition("job", job.state, "ACTIVE")) {
         assertTransition("job", job.state, "ACTIVE");
         await casJob(deps.db, tid, job.id, job.revision, { state: "ACTIVE", completed_at: nowIso() });
@@ -1234,6 +1313,9 @@ export async function onRequest(context) {
       if (!body.view || typeof body.view !== "object") throw new OnboardError("invalid", "view required");
       const view = cleanObservedViews([body.view])[0];
       if (!view.rowsSelector) throw new OnboardError("invalid", "the repaired view has no row selector");
+      if (!Array.isArray(view.endpoints) || !view.endpoints.some((e) => e && e.role === "data")) {
+        throw new OnboardError("conflict", "a repaired ward list must carry a proven backend request, not a page selector");
+      }
       const job = await findJobByCandidateVersion(deps.db, tid, versionId);
       const phoneState = job ? safeJsonParse(job.phone_state) : null;
       if (!phoneState || !phoneState.manifest || !Array.isArray(phoneState.manifest.origins) || !phoneState.manifest.origins.length) {
