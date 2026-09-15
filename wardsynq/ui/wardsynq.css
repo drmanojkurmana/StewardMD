@@ -580,3 +580,7 @@ textarea { width: 100%; min-height: 74px; resize: vertical; line-height: 1.5; }
 .rail .sitemap .heading { color: var(--ink-3); font-size: var(--t-micro); margin-bottom: var(--sp-2); }
 .rail .sitemap a { padding: 4px 0; color: var(--ink-2); font-size: var(--t-small); font-weight: 500; text-decoration: none; }
 .rail .sitemap a:hover { color: var(--ink); }
+
+/* Staff language (ui-i18n-site). The English original under a translated safety/refusal message,
+   so a clinician reading the target language can still see exactly what the system said. */
+.en-orig { display: block; font-size: .85em; opacity: .8; margin-top: 2px; }

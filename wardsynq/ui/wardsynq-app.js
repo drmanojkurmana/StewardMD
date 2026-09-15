@@ -28,6 +28,126 @@ import { Patient, MedicationOrder, AllergyIntolerance } from "../wardsynq-model.
 const $ = (id) => document.getElementById(id);
 const ME = "Dr Kurmana";
 
+/* ---------------------------------------------------------------- staff language (ui-i18n-site)
+ *
+ * Owner decision 2026-09-15: the staff language picked in the site shell translates the WHOLE staff
+ * interface, this workstation included. The language itself lives in the site shell's localStorage
+ * key ("wsqStaffNavLang"), read once at boot below; there is no in-page picker here, so LANG is fixed
+ * for the life of the page. window.WSQI18n / window.WSQPrint come from classic scripts loaded before
+ * this module (wardsynq.html); their absence (an old cached page, a test with no i18n.js) must not
+ * break anything, so every lookup below falls back to the inline English.
+ *
+ * T(c, key, en, vars): plain text, translated or the English fallback with {name} vars filled. Never
+ * escaped; the caller escapes when the destination is textContent-equivalent or a plain HTML string.
+ * TS(c, key, en, vars): escaped HTML, with the English original underneath (class="en-orig") when the
+ * shown text differs from it and the language is not English. For refusals and failures.
+ * EN(c, html): wraps already-escaped data HTML in <span lang="en"> when the language is not English;
+ * unchanged in English. `c` is always null on this page (no shell context); kept for the same call
+ * shape as the site pages, so the same regex extracts both.
+ */
+let LANG = "en";
+function fill(s, vars) { return String(s).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] != null ? String(vars[k]) : m)); }
+function T(_c, key, en, vars) {
+  const s = window.WSQI18n ? window.WSQI18n.t(key, vars, LANG) : key;
+  return s === key && en != null ? fill(en, vars) : s;
+}
+function TS(_c, key, en, vars) {
+  const shown = T(null, key, en, vars);
+  if (LANG === "en") return esc(shown);
+  let english = window.WSQI18n ? window.WSQI18n.t(key, vars, "en") : key;
+  if (english === key && en != null) english = fill(en, vars);
+  return esc(shown) + (english !== shown ? `<span class="en-orig" lang="en">${esc(english)}</span>` : "");
+}
+function EN(_c, html) { return LANG === "en" ? html : `<span lang="en">${html}</span>`; }
+/** For a block of pure clinical/engine text (a whole element, not a value inside a sentence): the
+ *  lang="en" attribute to splice into that element's own tag, empty in English. */
+function enAttr() { return LANG === "en" ? "" : ' lang="en"'; }
+
+/** The static English already in wardsynq.html, translated in place at boot. Each entry's `get` is a
+ *  literal T(null, "order.x", "English") call (not a variable key/English pair), so the i18n
+ *  extractor sees every string here exactly as it sees the dynamic ones. `lead` preserves a child
+ *  node (the rail buttons keep their <span class="k"> key hint) instead of replacing it. */
+const STATIC_TEXT = [
+  [() => document.querySelectorAll(".rail .link")[0], () => T(null, "order.nav.order", "Order"), "lead"],
+  [() => document.querySelectorAll(".rail .link")[1], () => T(null, "order.nav.meds", "Medications"), "lead"],
+  [() => document.querySelectorAll(".rail .link")[2], () => T(null, "order.nav.results", "Results"), "lead"],
+  [() => document.querySelectorAll(".rail .link")[3], () => T(null, "order.nav.record", "Record"), "lead"],
+  [() => document.querySelectorAll(".rail .link")[4], () => T(null, "order.nav.notes", "Notes")],
+  [() => document.querySelectorAll(".rail .link")[5], () => T(null, "order.nav.handover", "Handover")],
+  [() => document.querySelector('#sitemap a[href="/#/home"]'), () => T(null, "order.nav.map", "Map")],
+  [() => document.querySelector('#sitemap a[href="/#/ward"]'), () => T(null, "order.nav.ward", "Ward")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/board"]'), () => T(null, "order.nav.bedboard", "Bed board")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/edboard"]'), () => T(null, "order.nav.emergency", "Emergency")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/critsboard"]'), () => T(null, "order.nav.criticalresults", "Critical results")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/labboard"]'), () => T(null, "order.nav.laboratory", "Laboratory")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/radboard"]'), () => T(null, "order.nav.radiology", "Radiology")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/flowcommand"]'), () => T(null, "order.nav.commandcenter", "Command center")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/twin"]'), () => T(null, "order.nav.digitaltwin", "Digital twin")],
+  [() => document.querySelector('#sitemap a[href="/#/patients"]'), () => T(null, "order.nav.patients", "Patients")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/cashier"]'), () => T(null, "order.nav.billing", "Billing")],
+  [() => document.querySelector('#sitemap a[href="/#/ward/reports"]'), () => T(null, "order.nav.reports", "Reports")],
+  // /#/maik stays: "MaiK" is a product name, never translated.
+  [() => document.querySelector('#sitemap a[href="/#/admin"]'), () => T(null, "order.nav.admincenter", "Admin Center")],
+  [() => document.querySelector('#sitemap a[href="/#/audit"]'), () => T(null, "order.nav.audit", "Audit")],
+  [() => document.querySelector('#sitemap a[href="/#/logout"]'), () => T(null, "order.nav.signout", "Sign out")],
+  [() => document.querySelector(".roster .heading"), () => T(null, "order.nav.ward", "Ward")],
+  [() => document.querySelector("#orderSection h2"), () => T(null, "order.nav.order", "Order")],
+  [() => document.querySelectorAll("label.f span")[0], () => T(null, "order.field.medication", "Medication")],
+  [() => document.querySelectorAll("label.f span")[1], () => T(null, "order.field.dose", "Dose")],
+  [() => document.querySelectorAll("label.f span")[2], () => T(null, "order.field.unit", "Unit")],
+  [() => document.querySelectorAll("label.f span")[3], () => T(null, "order.field.route", "Route")],
+  [() => document.querySelector('#route option[value="oral"]'), () => T(null, "order.route.oral", "Oral")],
+  [() => document.querySelector('#route option[value="IV"]'), () => T(null, "order.route.iv", "IV")],
+  [() => document.querySelector('#route option[value="IM"]'), () => T(null, "order.route.im", "IM")],
+  [() => document.querySelector('#route option[value="SC"]'), () => T(null, "order.route.subcutaneous", "Subcutaneous")],
+  [() => document.querySelector("#findings .quiet"), () => T(null, "order.findings.empty", "Enter a medication to check it against this patient.")],
+  [() => document.getElementById("sign"), () => T(null, "order.sign.button", "Sign order")],
+  [() => document.getElementById("clear"), () => T(null, "order.clear.button", "Clear")],
+  [() => document.querySelector("#ledgerSection h2"), () => T(null, "order.nav.record", "Record")],
+  [() => document.querySelector("#ledgerSection .note"), () => T(null, "order.record.thissession", "this session")],
+  [() => document.querySelector("#ledger .quiet"), () => T(null, "order.ledger.empty", "Nothing recorded yet.")],
+  [() => document.querySelector("#resultsSection h2"), () => T(null, "order.nav.results", "Results")],
+  [() => document.querySelectorAll(".context .grp .head h2")[1], () => T(null, "order.dosing.heading", "Dosing")],
+  [() => document.querySelector("#medsSection h2"), () => T(null, "order.meds.heading", "Active medications")],
+  [() => document.querySelector(".foot"), () => T(null, "order.footer", "WardSynQ demonstration build. Real deterministic safety engine, unapproved clinical content. Not for clinical use.")],
+  [() => document.getElementById("pack"), () => T(null, "order.pack.loading", "Loading clinical rules.")],
+];
+
+function translateStatic() {
+  if (LANG === "en") return;
+  for (const [find, getText, mode] of STATIC_TEXT) {
+    const el = find();
+    if (!el) continue;
+    const tr = getText();
+    if (mode === "lead" && el.firstChild && el.firstChild.nodeType === 3) el.firstChild.nodeValue = `${tr} `;
+    else el.textContent = tr;
+  }
+  const keys = document.querySelector("p.keys");
+  if (keys) {
+    const map = { "next field": T(null, "order.keys.nextField", "next field"), "sign": T(null, "order.keys.sign", "sign"), "clear": T(null, "order.keys.clear", "clear") };
+    for (const node of Array.from(keys.childNodes)) {
+      if (node.nodeType !== 3) continue;
+      const trimmed = node.nodeValue.trim();
+      if (map[trimmed] == null) continue;
+      const lead = /^\s*/.exec(node.nodeValue)[0], trail = /\s*$/.exec(node.nodeValue)[0];
+      node.nodeValue = lead + map[trimmed] + trail;
+    }
+  }
+}
+
+/** Reads the staff language, loads its file if offered, then runs `cb`. Runs before the first render
+ *  of translated text (boot()), so nothing on screen briefly shows English and then flips. */
+function initLang(cb) {
+  let code = "";
+  try { code = localStorage.getItem("wsqStaffNavLang") || ""; } catch (e) {}
+  const proceed = () => { try { document.documentElement.lang = LANG; } catch (e) {} translateStatic(); cb(); };
+  if (code && code !== "en" && window.WSQI18n && window.WSQI18n.offered(code)) {
+    LANG = code;
+    if (window.WSQPrint && window.WSQPrint.ensureLoaded) window.WSQPrint.ensureLoaded(code, proceed);
+    else proceed();
+  } else proceed();
+}
+
 /* ---------------------------------------------------------------- who is acting
  *
  * The workstation holds a credentialed human actor and writes ONLY through a governed session bound
@@ -115,7 +235,7 @@ async function connectRecord() {
   // here would be three fake patients on a real ward, so it is a stop, not a fallback.
   const q = new URLSearchParams(location.search);
   if (!params && q.get("site") === "1" && q.get("demo") !== "1") {
-    throw new Error("This hospital has no patient record connected yet, so no patients can be shown. Ask the administrator to connect it");
+    throw new Error(T(null, "order.boot.noRecord", "This hospital has no patient record connected yet, so no patients can be shown. Ask the administrator to connect it"));
   }
   if (!params) return null;
   // A record that fails to open stays a failure: demo hospitals never reach here (?demo=1 yields no
@@ -125,7 +245,10 @@ async function connectRecord() {
   S.bus = record.bus;
   S.store = record.store;      // governed; the raw store is not reachable from here
   S.record = record;
-  note(`Connected to record <b>${esc(record.tenantId)}</b> as <b>${esc(record.actor.display)}</b>, ${esc(record.mode)}${record.actor.tier !== TIER.EXECUTE ? ", read only" : ""}`);
+  const readOnly = record.actor.tier !== TIER.EXECUTE ? `, ${T(null, "order.note.readOnly", "read only")}` : "";
+  note(T(null, "order.note.connected", "Connected to record {tenant} as {actor}, {mode}{readOnly}", {
+    tenant: `<b>${EN(null, esc(record.tenantId))}</b>`, actor: `<b>${EN(null, esc(record.actor.display))}</b>`, mode: EN(null, esc(record.mode)), readOnly,
+  }));
   return record;
 }
 
@@ -172,14 +295,17 @@ async function boot() {
       fetch(new URL("../../data/interaction-rules.json", import.meta.url)),
       fetch(new URL("../data/allergy-classes.seed.json", import.meta.url)),
     ]);
-    if (!r1.ok || !r2.ok) throw new Error("clinical rules could not be loaded");
+    if (!r1.ok || !r2.ok) throw new Error(T(null, "order.boot.rulesFailed", "clinical rules could not be loaded"));
     const raw = await r1.json(), seed = await r2.json();
     S.pack = buildRulePack(raw, seed);
     S.engine = new SafetyEngine({ rulePack: S.pack });
 
-    $("pack").innerHTML = seed.status
-      ? `<b>Unapproved clinical content.</b> Allergy and dose rules in this build are seed data awaiting pharmacy sign-off. ${S.pack.interactions.length} interaction rules loaded.`
-      : `${S.pack.interactions.length} interaction rules loaded.`;
+    {
+      const rulesLoaded = esc(T(null, "order.pack.rulesLoaded", "{n} interaction rules loaded.", { n: S.pack.interactions.length }));
+      $("pack").innerHTML = seed.status
+        ? `<b>${esc(T(null, "order.pack.unapproved", "Unapproved clinical content."))}</b> ${esc(T(null, "order.pack.seedNote", "Allergy and dose rules in this build are seed data awaiting pharmacy sign-off."))} ${rulesLoaded}`
+        : rulesLoaded;
+    }
 
     suggestions();
     const record = await connectRecord();
@@ -200,11 +326,14 @@ async function boot() {
     S.journal = new OfflineJournal({ backend: journalBackend });
     try {
       const restored = await S.journal.open();
-      if (restored) note(`Restored <strong>${restored}</strong> unsent ${restored === 1 ? "edit" : "edits"} from a previous session`);
+      if (restored) {
+        const n = `<strong>${restored}</strong>`;
+        note(restored === 1 ? T(null, "order.journal.restored.one", "Restored {n} unsent edit from a previous session", { n }) : T(null, "order.journal.restored.other", "Restored {n} unsent edits from a previous session", { n }));
+      }
     } catch (err) {
       // A journal that will not open is a real problem, and it still must not stop a clinician
       // working. Fall back to memory and say so, rather than failing silently either way.
-      note(`Local journal unavailable, this session is not crash-safe: ${esc(String(err.message || err))}`);
+      note(`${esc(T(null, "order.note.journalUnavailable", "Local journal unavailable, this session is not crash-safe:"))} ${EN(null, esc(String(err.message || err)))}`);
       S.journal = new OfflineJournal({ backend: new MemoryJournalBackend() });
       await S.journal.open();
     }
@@ -235,17 +364,27 @@ async function boot() {
     }
     renderRoster();
     if (S.patients[0]) select(S.patients[0]);
-    else $("roster").innerHTML = '<p class="quiet">No patients in this record yet.</p>';
+    else $("roster").innerHTML = `<p class="quiet">${esc(T(null, "order.roster.noPatients", "No patients in this record yet."))}</p>`;
   } catch (e) {
     const pack = $("pack");
     pack.className = "pack bad";
     if (String((e && e.message) || "").includes("401")) {
-      pack.innerHTML = `${esc(e.message)}. Please <a href="/#/login" style="color:inherit;text-decoration:underline;font-weight:600">sign in to WardSynQ</a> to access this record.`;
+      // The link text goes through TS() (not plain T()): a clinician locked out by a genuine 401
+      // must be able to see, not just trust, that "sign in" is what the target language really says.
+      // The record's own words stay English (EN); the sentence around the link is translated whole and
+      // escaped, with the English original underneath in any other language.
+      const sentence = String(T(null, "order.boot.signInPrompt", "Please {link} to access this record.")).split("{link}");
+      const link = `<a href="/#/login" style="color:inherit;text-decoration:underline;font-weight:600">${esc(T(null, "order.boot.signInLink", "sign in to WardSynQ"))}</a>`;
+      let html = `${EN(null, esc(e.message))}. ${esc(sentence[0])}${link}${esc(sentence.slice(1).join("{link}"))}`;
+      if (LANG !== "en") html += `<span class="en-orig" lang="en">${esc(fill("Please {link} to access this record.", { link: "sign in to WardSynQ" }))}</span>`;
+      pack.innerHTML = html;
+    } else if (LANG === "en") {
+      pack.textContent = `${e.message}. ${T(null, "order.boot.unavailableTail", "Safety checking is unavailable, so ordering is disabled.")}`;
     } else {
-      pack.textContent = `${e.message}. Safety checking is unavailable, so ordering is disabled.`;
+      pack.innerHTML = `${EN(null, esc(e.message))}. ${TS(null, "order.boot.unavailableTail", "Safety checking is unavailable, so ordering is disabled.")}`;
     }
     $("drug").disabled = true;
-    $("roster").innerHTML = '<p class="quiet">Unavailable.</p>';
+    $("roster").innerHTML = `<p class="quiet">${esc(T(null, "order.roster.unavailable", "Unavailable."))}</p>`;
   }
 }
 
@@ -267,23 +406,23 @@ function suggestions() {
 function renderIdentity(allergyLive) {
   const p = S.current, host = $("identity");
   if (!p) { host.innerHTML = ""; return; }
-  const sex = p.sex === "female" ? "F" : p.sex === "male" ? "M" : "sex unknown";
-  const wt = p.weightKg != null ? `${p.weightKg} kg` : "weight not recorded";
+  const sex = p.sex === "female" ? "F" : p.sex === "male" ? "M" : T(null, "order.identity.sexUnknown", "sex unknown");
+  const wt = p.weightKg != null ? `${p.weightKg} kg` : T(null, "order.identity.weightMissing", "weight not recorded");
   const sep = '<span class="sep">/</span>';
   const allergy = p.allergies && p.allergies.length
     ? `<div class="allergy" data-live="${allergyLive ? "true" : "false"}">
-         <span class="t">Allergy</span><span class="v">${esc(p.allergies.map((a) => a.substance).join(", "))}</span>
-         <span class="t">${esc(p.allergies[0].reaction || "")}</span></div>`
-    : `<div class="allergy"><span class="t">No known allergies</span></div>`;
+         <span class="t">${esc(T(null, "order.identity.allergyLabel", "Allergy"))}</span><span class="v">${EN(null, esc(p.allergies.map((a) => a.substance).join(", ")))}</span>
+         <span class="t">${EN(null, esc(p.allergies[0].reaction || ""))}</span></div>`
+    : `<div class="allergy"><span class="t">${esc(T(null, "order.identity.noAllergies", "No known allergies"))}</span></div>`;
 
   host.innerHTML = `
     <div class="who">
-      <div class="name">${esc(p.name)}</div>
-      <div class="facts">${p.ageYears != null ? p.ageYears : "?"} ${esc(sex)} ${sep} ${esc(wt)} ${sep} <span class="ident">${esc(p.mrn)}</span> ${sep} ${esc(p.bed || "")} ${sep} ${esc(p.stay || "")}</div>
+      <div class="name">${EN(null, esc(p.name))}</div>
+      <div class="facts">${p.ageYears != null ? p.ageYears : "?"} ${esc(sex)} ${sep} ${esc(wt)} ${sep} <span class="ident">${EN(null, esc(p.mrn))}</span> ${sep} ${EN(null, esc(p.bed || ""))} ${sep} ${EN(null, esc(p.stay || ""))}</div>
     </div>
     <span class="spring"></span>
     ${allergy}
-    <div class="tools"><button class="btn" type="button" id="focusOrder">New order</button></div>`;
+    <div class="tools"><button class="btn" type="button" id="focusOrder">${esc(T(null, "order.identity.newOrder", "New order"))}</button></div>`;
   $("focusOrder").addEventListener("click", () => $("drug").focus());
 }
 
@@ -295,7 +434,7 @@ function renderRoster() {
     b.type = "button"; b.className = "pt";
     b.setAttribute("aria-current", S.current && S.current.id === p.id ? "true" : "false");
     b.dataset.alert = (p.allergies || []).some((a) => a.criticality === "high") ? "true" : "false";
-    b.innerHTML = `<span class="mark"></span><span class="n">${esc(p.name)}</span><span class="m">${esc(p.bed || "")}</span>`;
+    b.innerHTML = `<span class="mark"></span><span class="n">${EN(null, esc(p.name))}</span><span class="m">${EN(null, esc(p.bed || ""))}</span>`;
     b.addEventListener("click", () => select(p));
     host.appendChild(b);
   }
@@ -317,36 +456,49 @@ function renderResults() {
   const p = S.current;
   $("resultsWhen").textContent = p.resultsWhen || "";
   const host = $("results");
-  if (!p.labs || !p.labs.length) { host.innerHTML = '<p class="quiet">No results.</p>'; return; }
+  if (!p.labs || !p.labs.length) { host.innerHTML = `<p class="quiet">${esc(T(null, "order.results.empty", "No results."))}</p>`; return; }
   host.innerHTML = p.labs.map((l) => {
     const out = (l.high != null && l.value > l.high) || (l.low != null && l.value < l.low);
     const dir = l.high != null && l.value > l.high ? "high" : l.low != null && l.value < l.low ? "low" : "";
-    const range = l.low != null || l.high != null ? `${l.low ?? ""} to ${l.high ?? ""}` : "";
+    const dirWord = dir === "high" ? T(null, "order.results.high", "high") : dir === "low" ? T(null, "order.results.low", "low") : "";
+    const range = l.low != null || l.high != null ? T(null, "order.results.range", "{low} to {high}", { low: l.low ?? "", high: l.high ?? "" }) : "";
     return `<div class="result" data-dev="${out ? "out" : "in"}" data-dir="${dir}">
       <span class="mark"></span>
-      <span class="v">${esc(String(l.value))}${l.unit ? `<u>${esc(l.unit)}</u>` : ""}</span>
+      <span class="v">${EN(null, `${esc(String(l.value))}${l.unit ? `<u>${esc(l.unit)}</u>` : ""}`)}</span>
       <span></span>
-      <span class="meta"><span class="n">${esc(l.name)}</span>${dir ? `<span class="d">${dir}</span>` : ""}<span class="r">${esc(range)}</span></span>
+      <span class="meta"><span class="n">${EN(null, esc(l.name))}</span>${dirWord ? `<span class="d">${esc(dirWord)}</span>` : ""}<span class="r">${EN(null, esc(range))}</span></span>
     </div>`;
   }).join("");
 }
 
+/** Literal T() calls per band (not a computed key), so the i18n extractor can see every English string. */
+function dosingBand(egfr) {
+  if (egfr == null) return T(null, "order.dosing.band.notAvailable", "not available");
+  if (egfr >= 90) return T(null, "order.dosing.band.normal", "normal");
+  if (egfr >= 60) return T(null, "order.dosing.band.mildlyReduced", "mildly reduced");
+  if (egfr >= 30) return T(null, "order.dosing.band.moderatelyReduced", "moderately reduced");
+  if (egfr >= 15) return T(null, "order.dosing.band.severelyReduced", "severely reduced");
+  return T(null, "order.dosing.band.kidneyFailure", "kidney failure");
+}
 function renderDosing() {
   const p = S.current;
-  const band = p.egfr == null ? "not available" : p.egfr >= 90 ? "normal" : p.egfr >= 60 ? "mildly reduced" : p.egfr >= 30 ? "moderately reduced" : p.egfr >= 15 ? "severely reduced" : "kidney failure";
+  const band = dosingBand(p.egfr);
+  const weight = p.weightKg != null ? EN(null, esc(p.weightKg + " kg")) : esc(T(null, "order.dosing.weightMissing", "not recorded"));
+  const kidney = p.egfr != null ? esc(T(null, "order.dosing.egfr", "eGFR {value}, {band}", { value: p.egfr, band })) : esc(band);
+  const age = p.ageYears != null ? esc(T(null, "order.dosing.ageYears", "{n} years", { n: p.ageYears })) : esc(T(null, "order.dosing.ageUnknown", "unknown"));
   $("dosing").innerHTML = `
-    <dt>Weight</dt><dd class="${p.weightKg == null ? "missing" : ""}">${p.weightKg != null ? esc(p.weightKg + " kg") : "not recorded"}</dd>
-    <dt>Kidney</dt><dd>${p.egfr != null ? esc(`eGFR ${p.egfr}, ${band}`) : esc(band)}</dd>
-    <dt>Age</dt><dd>${p.ageYears != null ? esc(p.ageYears + " years") : "unknown"}</dd>`;
+    <dt>${esc(T(null, "order.dosing.weight", "Weight"))}</dt><dd class="${p.weightKg == null ? "missing" : ""}">${weight}</dd>
+    <dt>${esc(T(null, "order.dosing.kidney", "Kidney"))}</dt><dd>${kidney}</dd>
+    <dt>${esc(T(null, "order.dosing.age", "Age"))}</dt><dd>${age}</dd>`;
 }
 
 function renderMeds(implicated) {
   const p = S.current, host = $("meds");
   const hit = new Set((implicated || []).map((d) => String(d).toLowerCase()));
-  if (!p.activeMeds || !p.activeMeds.length) { host.innerHTML = '<p class="quiet">None recorded.</p>'; return; }
+  if (!p.activeMeds || !p.activeMeds.length) { host.innerHTML = `<p class="quiet">${esc(T(null, "order.meds.empty", "None recorded."))}</p>`; return; }
   host.innerHTML = p.activeMeds.map((m) => {
     const on = [...hit].some((h) => h.includes(m.drug.toLowerCase().split(" ")[0]));
-    return `<div class="med" data-implicated="${on}"><div class="d">${esc(m.drug)}</div><div class="s">${esc(m.sig || "")}${m.since ? `, ${esc(m.since)}` : ""}</div></div>`;
+    return `<div class="med" data-implicated="${on}"><div class="d">${EN(null, esc(m.drug))}</div><div class="s">${EN(null, `${esc(m.sig || "")}${m.since ? `, ${esc(m.since)}` : ""}`)}</div></div>`;
   }).join("");
 }
 
@@ -368,7 +520,7 @@ function check() {
   const o = order();
   $("orderEcho").textContent = o && o.dose ? `${o.dose.value} ${o.dose.unit}, ${o.route}` : "";
   if (!o) {
-    $("findings").innerHTML = '<section class="line" data-sig="none"><div class="signal"></div><div class="said"><p class="quiet">Enter a medication to check it against this patient.</p></div></section>';
+    $("findings").innerHTML = `<section class="line" data-sig="none"><div class="signal"></div><div class="said"><p class="quiet">${esc(T(null, "order.findings.empty", "Enter a medication to check it against this patient."))}</p></div></section>`;
     $("sign").disabled = true; $("signWhy").textContent = ""; S.verdict = null;
     renderIdentity(false); renderMeds([]);
     return;
@@ -397,17 +549,17 @@ function check() {
   renderFindings(v, o);
 
   $("sign").disabled = !v.allowed;
-  $("signWhy").textContent = v.allowed ? "" : v.blocks.length ? "A hard stop is standing." : "An override is required first.";
+  $("signWhy").textContent = v.allowed ? "" : v.blocks.length ? T(null, "order.sign.hardStopStanding", "A hard stop is standing.") : T(null, "order.sign.overrideRequired", "An override is required first.");
 }
 
 /** Engine disposition and severity, expressed as clinical significance. */
 function classOf(f) {
-  if (f.overridden) return { sig: "watch", word: "Overridden" };
-  if (f.disposition === DISPOSITION.BLOCK) return { sig: "stop", word: "Hard stop" };
-  if (f.disposition === DISPOSITION.OVERRIDABLE) return { sig: "major", word: "Major" };
-  if (f.severity === "moderate") return { sig: "watch", word: "Moderate" };
-  if (f.severity === "monitor") return { sig: "watch", word: "Monitor" };
-  return { sig: "none", word: "Note" };
+  if (f.overridden) return { sig: "watch", word: T(null, "order.sig.overridden", "Overridden") };
+  if (f.disposition === DISPOSITION.BLOCK) return { sig: "stop", word: T(null, "order.sig.hardStop", "Hard stop") };
+  if (f.disposition === DISPOSITION.OVERRIDABLE) return { sig: "major", word: T(null, "order.sig.major", "Major") };
+  if (f.severity === "moderate") return { sig: "watch", word: T(null, "order.sig.moderate", "Moderate") };
+  if (f.severity === "monitor") return { sig: "watch", word: T(null, "order.sig.monitor", "Monitor") };
+  return { sig: "none", word: T(null, "order.sig.note", "Note") };
 }
 
 function renderFindings(v, o) {
@@ -418,16 +570,16 @@ function renderFindings(v, o) {
   if (v.unresolvedDrug) host.appendChild(line("none", unknownDrug(o)));
   if (!all.length) {
     host.appendChild(line(v.unresolvedDrug ? "none" : "clear",
-      `<p class="sig-line">Nothing in the rule pack objects to this order.</p>
-       <p class="because">Checked against ${S.pack.interactions.length} interaction rules, this patient's allergies, weight and kidney function.</p>`));
+      `<p class="sig-line">${esc(T(null, "order.findings.nothing", "Nothing in the rule pack objects to this order."))}</p>
+       <p class="because">${esc(T(null, "order.findings.checkedAgainst", "Checked against {n} interaction rules, this patient's allergies, weight and kidney function.", { n: S.pack.interactions.length }))}</p>`));
     return;
   }
   for (const f of all) host.appendChild(findingLine(f, o));
 }
 
 function unknownDrug(o) {
-  return `<p class="sig-line">${esc(o.drug)} is not in the rule pack, so nothing has been checked.</p>
-    <p class="because">No interaction, allergy or dose check has run against this product. Silence here is not reassurance.</p>`;
+  return `<p class="sig-line">${T(null, "order.findings.unknownDrug", "{drug} is not in the rule pack, so nothing has been checked.", { drug: EN(null, esc(o.drug)) })}</p>
+    <p class="because">${esc(T(null, "order.findings.unknownDrugNote", "No interaction, allergy or dose check has run against this product. Silence here is not reassurance."))}</p>`;
 }
 
 /** One finding, said as a clinical sentence. */
@@ -439,29 +591,30 @@ function findingLine(f, o) {
 
   const others = (f.drugs || []).filter((d) => d !== o.drug);
   const pairing = others.length
-    ? `<div class="pairing"><span class="d">${esc(o.drug)}</span><span class="op">with</span><span class="d">${esc(others.join(", "))}</span></div>`
+    ? `<div class="pairing"><span class="d">${EN(null, esc(o.drug))}</span><span class="op">${esc(T(null, "order.finding.with", "with"))}</span><span class="d">${EN(null, esc(others.join(", ")))}</span></div>`
     : "";
 
   // The significance sentence. For an interaction the engine's `effect` is already a clinical
-  // statement; for everything else the message is.
+  // statement; for everything else the message is. Either way this is the safety engine's own
+  // wording, produced from the rule pack, never translated (order.` never touches clinical content).
   const significance = f.effect || f.message || "";
   const consider = f.action || "";
   const because = becauseLine(f, others);
 
   const consequence = f.disposition === DISPOSITION.BLOCK
-    ? `There is no override for this. Change the order, or ask pharmacy to review the record behind it.`
+    ? esc(T(null, "order.finding.blockConsequence", "There is no override for this. Change the order, or ask pharmacy to review the record behind it."))
     : f.disposition === DISPOSITION.OVERRIDABLE
-      ? `Proceeding records your name against this decision, notifies the clinical safety officer, and appears on the safety committee list within 24 hours.`
+      ? esc(T(null, "order.finding.overridableConsequence", "Proceeding records your name against this decision, notifies the clinical safety officer, and appears on the safety committee list within 24 hours."))
       : "";
 
   el.innerHTML = `<div class="signal"></div><div class="said"><div class="finding">
       <div class="cls">${esc(c.word)}</div>
       ${pairing}
-      <p class="sig-line">${esc(significance)}</p>
+      <p class="sig-line"${enAttr()}>${esc(significance)}</p>
       ${because ? `<p class="because">${because}</p>` : ""}
-      ${consider ? `<p class="consider"><b>Consider.</b> ${esc(consider)}</p>` : ""}
-      ${consequence ? `<p class="consequence">${esc(consequence)}</p>` : ""}
-      ${f.mechanism ? `<details><summary>Mechanism</summary><p class="mech">${esc(f.mechanism)}${f.monitoring ? ` ${esc(f.monitoring)}` : ""}</p></details>` : ""}
+      ${consider ? `<p class="consider"><b>${esc(T(null, "order.finding.considerLabel", "Consider."))}</b> <span${enAttr()}>${esc(consider)}</span></p>` : ""}
+      ${consequence ? `<p class="consequence">${consequence}</p>` : ""}
+      ${f.mechanism ? `<details><summary>${esc(T(null, "order.finding.mechanism", "Mechanism"))}</summary><p class="mech"${enAttr()}>${esc(f.mechanism)}${f.monitoring ? ` ${esc(f.monitoring)}` : ""}</p></details>` : ""}
     </div></div>`;
 
   if (f.disposition === DISPOSITION.OVERRIDABLE) el.querySelector(".finding").appendChild(overrideBlock(f));
@@ -479,14 +632,18 @@ function becauseLine(f, others) {
   const bits = [];
   for (const name of others) {
     const m = (p.activeMeds || []).find((x) => x.drug === name);
-    if (m) bits.push(`already on <b>${esc(m.drug)}</b>, ${esc(m.sig || "")}${m.since ? `, ${esc(m.since)}` : ""}`);
+    if (m) {
+      const rest = EN(null, `${esc(m.sig || "")}${m.since ? `, ${esc(m.since)}` : ""}`);
+      bits.push(T(null, "order.because.alreadyOn", "already on {drug}, {rest}", { drug: `<b>${EN(null, esc(m.drug))}</b>`, rest }));
+    }
   }
   const abnormal = (p.labs || []).filter((l) => (l.high != null && l.value > l.high) || (l.low != null && l.value < l.low));
   if (abnormal.length && f.disposition !== DISPOSITION.WARN) {
-    bits.push(`on this chart today: ${abnormal.map((l) => `<b>${esc(l.name)} ${esc(String(l.value))}${esc(l.unit || "")}</b>`).join(", ")}`);
+    const list = abnormal.map((l) => `<b>${EN(null, `${esc(l.name)} ${esc(String(l.value))}${esc(l.unit || "")}`)}</b>`).join(", ");
+    bits.push(T(null, "order.because.onChartToday", "on this chart today: {list}", { list }));
   }
   if (!bits.length) return "";
-  return `This patient is ${bits.join("; ")}.`;
+  return T(null, "order.because.thisPatientIs", "This patient is {bits}.", { bits: bits.join("; ") });
 }
 
 function line(sig, html) {
@@ -498,25 +655,34 @@ function line(sig, html) {
 
 /* ---------------------------------------------------------------- override */
 
-const REASONS = [["CLINICAL_NECESSITY", "Clinical necessity"], ["NO_ALTERNATIVE", "No suitable alternative"],
-  ["BENEFIT_OUTWEIGHS_RISK", "Benefit outweighs risk"], ["OTHER", "Other"]];
+const REASON_CODES = ["CLINICAL_NECESSITY", "NO_ALTERNATIVE", "BENEFIT_OUTWEIGHS_RISK", "OTHER"];
+/** Computed at render time, never at module load (LANG is only final once boot() has run), and as
+ *  literal T() calls (not a computed key/English pair) so the i18n extractor sees every string. */
+function reasonLabel(code) {
+  switch (code) {
+    case "CLINICAL_NECESSITY": return T(null, "order.override.reason.clinicalNecessity", "Clinical necessity");
+    case "NO_ALTERNATIVE": return T(null, "order.override.reason.noAlternative", "No suitable alternative");
+    case "BENEFIT_OUTWEIGHS_RISK": return T(null, "order.override.reason.benefitOutweighsRisk", "Benefit outweighs risk");
+    default: return T(null, "order.override.reason.other", "Other");
+  }
+}
 
 function overrideBlock(f) {
   const id = safe(f.code);
   const box = document.createElement("div");
   box.className = "override";
   box.innerHTML = `
-    <div class="ask">Why are you proceeding?</div>
+    <div class="ask">${esc(T(null, "order.override.ask", "Why are you proceeding?"))}</div>
     <div class="picks" role="group" aria-label="Reason">
-      ${REASONS.map(([c, l]) => `<button type="button" class="pick" data-r="${c}" aria-pressed="false">${esc(l)}</button>`).join("")}
+      ${REASON_CODES.map((c) => `<button type="button" class="pick" data-r="${c}" aria-pressed="false">${esc(reasonLabel(c))}</button>`).join("")}
     </div>
-    <label class="rl" for="rat-${id}">Clinical reasoning, in your own words</label>
+    <label class="rl" for="rat-${id}">${esc(T(null, "order.override.reasoningLabel", "Clinical reasoning, in your own words"))}</label>
     <textarea id="rat-${id}" rows="3"></textarea>
     <div class="row">
-      <span class="sworn">Signed as ${esc(ME)} and kept with the order.</span>
+      <span class="sworn">${T(null, "order.override.signedAs", "Signed as {who} and kept with the order.", { who: EN(null, esc(ME)) })}</span>
       <span class="spring"></span>
-      <button type="button" class="btn" data-cancel>Cancel</button>
-      <button type="button" class="btn btn-commit" data-apply disabled>Override and sign</button>
+      <button type="button" class="btn" data-cancel>${esc(T(null, "order.override.cancel", "Cancel"))}</button>
+      <button type="button" class="btn btn-commit" data-apply disabled>${esc(T(null, "order.override.applyButton", "Override and sign"))}</button>
     </div>`;
 
   const d = S.drafts[f.code] || {};
@@ -537,7 +703,7 @@ function overrideBlock(f) {
     S.overrides.push({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode: reason, rationale: ta.value.trim(), actorId: ME, at: new Date().toISOString() });
     delete S.drafts[f.code];
     await S.bus.emit("safety.override.recorded", { code: f.code, reasonCode: reason, actorId: ME });
-    note(`Override, ${esc(REASONS.find(([c]) => c === reason)[1].toLowerCase())}`);
+    note(T(null, "order.note.override", "Override, {reason}", { reason: reasonLabel(reason).toLowerCase() }));
     check();
     if (S.verdict && S.verdict.allowed) await sign();
   });
@@ -555,7 +721,7 @@ function note(html) {
 
 async function sign() {
   const v = S.verdict, out = $("signed");
-  if (!v || !v.allowed) { out.innerHTML = '<p class="fail">This order cannot be signed while a finding stands.</p>'; return; }
+  if (!v || !v.allowed) { out.innerHTML = `<p class="fail">${TS(null, "order.sign.cannotSign", "This order cannot be signed while a finding stands.")}</p>`; return; }
   const o = order();
   o.status = "active"; o.signedBy = CLINICIAN.id;
 
@@ -566,12 +732,12 @@ async function sign() {
       await S.journal.record(o, base, CLINICIAN.id);
     } catch (err) {
       // record() only resolves once the edit is durable, so a rejection means it is NOT saved.
-      out.innerHTML = `<p class="fail">Not saved. ${esc(String(err.message || err))}</p>`;
+      out.innerHTML = `<p class="fail">${TS(null, "order.sign.notSaved", "Not saved.")} ${EN(null, esc(String(err.message || err)))}</p>`;
       return;
     }
     await S.bus.emit("order.journalled", { order: o });
-    note(`Held offline <b>${esc(o.drug)}</b>, ${S.journal.size} unsent`);
-    out.innerHTML = '<p class="quiet">Held on this device. It will be reconciled when the network returns.</p>';
+    note(T(null, "order.note.heldOffline", "Held offline {drug}, {n} unsent", { drug: `<b>${EN(null, esc(o.drug))}</b>`, n: S.journal.size }));
+    out.innerHTML = `<p class="quiet">${TS(null, "order.sign.heldOffline", "Held on this device. It will be reconciled when the network returns.")}</p>`;
     clear(true);
     return;
   }
@@ -582,7 +748,7 @@ async function sign() {
     await S.session.put(o);
   } catch (err) {
     if (err instanceof GovernanceError) {
-      out.innerHTML = `<p class="fail">Refused: ${esc(err.message)}</p>`;
+      out.innerHTML = `<p class="fail">${TS(null, "order.sign.refusedLead", "Refused:")} ${EN(null, esc(err.message))}</p>`;
       return;
     }
     throw err;
@@ -590,8 +756,12 @@ async function sign() {
   await S.bus.emit("order.signed", { order: o, overrides: S.overrides });
   S.current.activeMeds = (S.current.activeMeds || []).concat([{ drug: o.drug, sig: o.dose ? `${o.dose.value} ${o.dose.unit}, ${o.route}` : o.route, since: "just now" }]);
   renderMeds([]);
-  note(`Signed <b>${esc(o.drug)}</b>${o.dose ? ` ${esc(o.dose.value + " " + o.dose.unit)}` : ""}${S.overrides.length ? `, with override` : ""}`);
-  const kept = `<p class="quiet">Signed and kept with the record.</p>`;
+  {
+    const dose = o.dose ? ` ${EN(null, esc(o.dose.value + " " + o.dose.unit))}` : "";
+    const override = S.overrides.length ? `, ${T(null, "order.note.withOverride", "with override")}` : "";
+    note(T(null, "order.note.signed", "Signed {drug}{dose}{override}", { drug: `<b>${EN(null, esc(o.drug))}</b>`, dose, override }));
+  }
+  const kept = `<p class="quiet">${TS(null, "order.sign.signedKept", "Signed and kept with the record.")}</p>`;
   clear(); out.innerHTML = kept;
 }
 
@@ -601,7 +771,7 @@ async function sign() {
  * rather than that it is protecting them.
  */
 function showDenial(denial) {
-  note(`<b>Write refused</b> ${esc(denial.reasons.map((r) => r.code).join(", "))}`);
+  note(`<b>${TS(null, "order.denial.refused", "Write refused")}</b> ${EN(null, esc(denial.reasons.map((r) => r.code).join(", ")))}`);
 }
 
 /**
@@ -613,7 +783,7 @@ function watchConnectivity() {
     if (S.offline === offline) return;
     S.offline = offline;
     document.body.dataset.offline = offline ? "true" : "false";
-    note(offline ? "Network lost, charting locally" : "Network back, reconciling");
+    note(offline ? TS(null, "order.note.networkLost", "Network lost, charting locally") : TS(null, "order.note.networkBack", "Network back, reconciling"));
     if (!offline && S.journal && S.journal.size) await reconcileNow();
   };
   if (typeof window !== "undefined" && "onLine" in navigator) {
@@ -627,10 +797,18 @@ function watchConnectivity() {
 async function reconcileNow() {
   const out = await S.reconciler.reconcile(S.journal);
   const settled = out.applied.length + out.merged.length;
-  if (settled) note(`Reconciled <b>${settled}</b> offline ${settled === 1 ? "edit" : "edits"}`);
+  if (settled) {
+    const n = `<b>${settled}</b>`;
+    note(settled === 1 ? T(null, "order.reconcile.settled.one", "Reconciled {n} offline edit", { n }) : T(null, "order.reconcile.settled.other", "Reconciled {n} offline edits", { n }));
+  }
   if (out.conflicts.length) {
-    note(`<b>${out.conflicts.length} conflict${out.conflicts.length === 1 ? "" : "s"}</b> need a clinical decision`);
-    $("signed").innerHTML = `<p class="fail">${out.conflicts.length} offline ${out.conflicts.length === 1 ? "edit" : "edits"} conflict with the server and are waiting for you to decide. Nothing has been overwritten.</p>`;
+    const n = out.conflicts.length;
+    const word = n === 1 ? T(null, "order.reconcile.conflictWord.one", "conflict") : T(null, "order.reconcile.conflictWord.other", "conflicts");
+    note(`<b>${n} ${esc(word)}</b> ${esc(T(null, "order.reconcile.needsDecision", "need a clinical decision"))}`);
+    const pending = n === 1
+      ? TS(null, "order.conflict.pending.one", "{n} offline edit conflict with the server and are waiting for you to decide. Nothing has been overwritten.", { n })
+      : TS(null, "order.conflict.pending.other", "{n} offline edits conflict with the server and are waiting for you to decide. Nothing has been overwritten.", { n });
+    $("signed").innerHTML = `<p class="fail">${pending}</p>`;
   }
   return out;
 }
@@ -687,4 +865,4 @@ function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").repla
 function safe(s) { return String(s || "x").replace(/[^A-Za-z0-9_-]/g, "-"); }
 function cap(s) { return String(s).replace(/\b[a-z]/g, (c) => c.toUpperCase()); }
 
-boot();
+initLang(boot);
