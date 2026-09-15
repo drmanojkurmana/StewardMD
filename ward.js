@@ -4048,6 +4048,8 @@
         (c.state === "acknowledged" ? " &middot; acknowledged by " + esc(c.acknowledgedBy || "a clinician") : "") + "</div>" +
         critEscalationsHtml(c.escalations, c.notifications) + critWardRuleHtml(c.notifications) + critNoticeHtml(c) +
         (c.state === "open" ? '<button class="w-btn tiny go" data-w-act="ackboard:' + esc(c.loopId) + '">' + ms("task_alt") + "Acknowledge</button>" : "") +
+        // BUG-MU09DOEX-I3GT: the next step after reading a result is the chart - write the note, order, or reassess.
+        (c.encounterId ? '<button class="w-btn tiny ghost" data-w-act="openbedpatient:' + esc(c.encounterId) + '">' + ms("open_in_new") + "Open chart</button>" : "") +
         '<button class="w-btn tiny ghost" data-w-act="incidentsignal:CriticalResultLoop~' + esc(c.loopId) + '">' + ms("report") + "Raise safety signal</button>" +
       "</li>";
     }).join("");
@@ -8299,7 +8301,7 @@
        * reachable from the criticals board and from the safety inbox, and reloading the board from
        * the inbox would leave the row the person just acted on still sitting there. */
       .then(function (r) {
-        if (settle(r, "Acknowledged.")) {
+        if (settle(r, "Acknowledged. Next: Open chart to write a note, place an order or reassess.")) {
           if (st.view === "safetyinbox") loadSafetyInbox(); else loadCritsBoard();
         } else paint();
       })
@@ -11703,13 +11705,16 @@
       var r0 = document.getElementById("wRoster"); if (r0) { var m0 = focusMark(); r0.innerHTML = rosterHtml(st); focusRestore(m0); } else paint();
       return;
     }
+    /* BUG-MU08DSH6-N7FM / BUG-MU09DOEX-I3GT: a bed tile, or a critical result, opens that patient's chart.
+     * This used to call loadRound(id), which ignores its argument and reads whatever chart was already
+     * selected, and fell back to GET /ward/encounter, a route that does not exist: the tap did nothing. */
     if (cmd === "openbedpatient") {
-      var pat = (st.patients || []).find(function (p) { return p.encounterId === arg || p.patientId === arg || p.mrn === arg; });
-      if (pat && pat.encounterId) { loadRound(pat.encounterId); return; }
-      if (arg.indexOf("enc-") === 0 || arg.indexOf("encounter-") === 0) { loadRound(arg); return; }
-      apiGet("/ward/encounter?orgId=" + encodeURIComponent(st.orgId) + "&encounterId=" + encodeURIComponent(arg))
-        .then(function (r) { if (r && r.encounter && r.encounter.encounterId) loadRound(r.encounter.encounterId); else { st.err = "Patient chart not found for that bed."; paint(); } })
-        .catch(function () { st.err = "Could not open patient chart."; paint(); });
+      var onList = function () { return (st.patients || []).some(function (p) { return p.encounterId === arg; }); };
+      if (onList()) { dispatch("open:" + arg); return; }
+      loadWard().then(function () {
+        if (onList()) dispatch("open:" + arg);
+        else { st.err = "That patient is not on the ward list. Open them from the board they are on (ED or theatre)."; paint(); }
+      });
       return;
     }
     if (cmd === "cardioechosave") {

@@ -129,6 +129,29 @@ test("BUG-MU072XAL-4EHO: the bed board reaches Admin Center, Wards; it has no be
   assert.ok(!/bedadd|bedremove/.test(SRC));
 });
 
+// ---- BUG-MU08DSH6-N7FM / BUG-MU09DOEX-I3GT: a bed tile and a critical result open the chart ------------
+test("BUG-MU08DSH6-N7FM: tapping an occupied bed opens THAT patient's chart, loading the ward list when needed", async () => {
+  const PATIENTS = [{ encounterId: "enc-7", patientId: "p7", name: "Bed Seven", ward: "CCU", bed: "7", class: "IPD" }];
+  const gets = [];
+  const { W } = loadWard({
+    fetch: (url) => { gets.push(url); return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(/\/ward\/list/.test(url) ? { ok: true, patients: PATIENTS } : { ok: true }) }); },
+  });
+  W._st.orgId = "org-test";
+  W._st.view = "board";
+  W._dispatch("openbedpatient:enc-7");
+  await tick(); await tick();
+  assert.equal(W._st.view, "chart");
+  assert.equal(W._st.sel && W._st.sel.encounterId, "enc-7");
+  assert.ok(!gets.some((u) => /\/ward\/encounter\?/.test(u)), "asked a route the server does not have");
+});
+
+test("BUG-MU09DOEX-I3GT: a critical result offers Open chart, and acknowledging names the next step", () => {
+  const { W } = loadWard();
+  const html = W._render({ ...W._st, view: "critsboard", critsBoard: [{ loopId: "l1", patientId: "p7", encounterId: "enc-7", display: "Potassium", value: "6.9", state: "open", escalation: {} }] });
+  assert.match(html, /data-w-act="openbedpatient:enc-7"/);
+  assert.match(SRC, /Acknowledged\. Next: Open chart to write a note, place an order or reassess\./);
+});
+
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
 const LAB_BOARD = {
   specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},
