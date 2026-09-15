@@ -560,13 +560,21 @@ writeFileSync(FILE, outSrc);
 
 // ---- the EN block, from what the file now calls ----------------------------------------------------------------
 const used = new Map();
-for (const m of outSrc.matchAll(/\bwT[HAD]?\(("(?:[^"\\]|\\.)*"), ("(?:[^"\\]|\\.)*")/g)) {
+for (const m of outSrc.matchAll(/\bwT[HADS]?\(("(?:[^"\\]|\\.)*"), ("(?:[^"\\]|\\.)*")/g)) {
   const k = JSON.parse(m[1]), v = JSON.parse(m[2]);
   if (used.has(k) && used.get(k) !== v) throw new Error("key " + k + " has two English texts");
   used.set(k, v);
 }
 for (const m of outSrc.matchAll(/\bwTEn\(("(?:[^"\\]|\\.)*")\)/g)) { const v = JSON.parse(m[1]); used.set(keyFor(v), v); }
 for (const v of tableTexts) used.set(keyFor(v), v);
+// discharge.js (the discharge workstation, "ward.dc-*") and patient-register.js (the check-in sheet, "ward.reg-*")
+// write their own wT/wTH/wTD calls by hand, with their keys in this same block; they are collected here so a re-run of this codemod does not drop them.
+{
+  for (const f of ["discharge.js", "patient-register.js"]) {
+    const dc = readFileSync(ROOT + f, "utf8");
+    for (const m of dc.matchAll(/\bwT[HADS]?\(("(?:[^"\\]|\\.)*"), ("(?:[^"\\]|\\.)*")/g)) used.set(JSON.parse(m[1]), JSON.parse(m[2]));
+  }
+}
 // ward-offline.js takes ward.js's lookup as tr(key, english, vars): its keys are written there by hand, and its WORDS
 // table (plus the "write"/"record" fallbacks) is looked up as ward.offline-word-<kind>.
 {

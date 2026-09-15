@@ -2500,7 +2500,7 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
-<script src="/patient-register.js?v=preg2-dept" defer></script>
+<script src="/patient-register.js?v=preg3-i18n" defer></script>
 <script src="/queue.js?v=fdesk3-dept-wsqp1-fu2" defer></script>
 <!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
      medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
@@ -2509,16 +2509,16 @@ window.openExternal = function (u) {
      smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
      given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
 <!-- The patient portal's words and discharge renderer (window.WSQPortal): ward.js previews the portal with them. -->
-<script src="/wardsynq/site/i18n.js?v=13" defer></script>
-<script src="/wardsynq/site/print-lang.js?v=7" defer></script>
-<script src="/wardsynq/site/portal.js?v=14" defer></script>
+<script src="/wardsynq/site/i18n.js?v=15" defer></script>
+<script src="/wardsynq/site/print-lang.js?v=8" defer></script>
+<script src="/wardsynq/site/portal.js?v=15" defer></script>
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
-<script src="/ward.js?v=ward45-livefix-5" defer></script>
+<script src="/ward.js?v=ward46-i18n-unwrapped" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
-<script src="/discharge.js?v=dis4-dcbill" defer></script>
+<script src="/discharge.js?v=dis5-i18n" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>

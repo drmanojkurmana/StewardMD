@@ -118,7 +118,7 @@ test("every key ward.js calls is in the EN catalog with the same English, in one
   const sb = {}; vm.runInNewContext(I18N_SRC, { window: sb });
   const en = sb.WSQI18n._catalogs.en;
   let n = 0;
-  for (const m of WARD_SRC.matchAll(/\bwT[HAD]?\(("(?:[^"\\]|\\.)*"), ("(?:[^"\\]|\\.)*")/g)) {
+  for (const m of WARD_SRC.matchAll(/\bwT[HADS]?\(("(?:[^"\\]|\\.)*"), ("(?:[^"\\]|\\.)*")/g)) {
     const k = JSON.parse(m[1]), v = JSON.parse(m[2]);
     assert.equal(en[k], v, k);
     n++;

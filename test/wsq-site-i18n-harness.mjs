@@ -11,7 +11,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 
 const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
-export const SOURCES = ["wardsynq/site/shell.js", ...readdirSync(new URL("../wardsynq/site/pages/", import.meta.url)).filter((f) => f.endsWith(".js")).sort().map((f) => "wardsynq/site/pages/" + f), "wardsynq/ui/wardsynq-app.js"];
+export const SOURCES = ["wardsynq/site/shell.js", ...readdirSync(new URL("../wardsynq/site/pages/", import.meta.url)).filter((f) => f.endsWith(".js")).sort().map((f) => "wardsynq/site/pages/" + f), "wardsynq/ui/wardsynq-app.js", "wardsynq/site/bug-reporter.js"];
 
 const CALL = /\b(?:T|TS)\(\s*[\w.]+\s*,\s*"((?:site|order)\.[\w.-]+)"\s*,\s*("(?:[^"\\\n]|\\.)*")/g;
 
