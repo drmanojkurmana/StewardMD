@@ -30,6 +30,11 @@
 // crawl reports these as stopReason 'login-required' / 'session-expired-or-shell' instead of silently
 // producing zero views. Ids that embed a date or a visit number (`#hospital_accordion_<date>_<visit>`)
 // are UNSTABLE and never used as selector anchors, and never leave the page.
+//
+// (prove.mjs imports redactEndpoints/scrubForBrain from here; this import back is a cycle ESM resolves,
+// because neither side touches the other's bindings at module top level.)
+import { navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
+
 const CAPS_DEFAULT = { maxViews: 40, maxClicks: 60, maxMs: 240000, waitMs: 1500 };
 // A page with no <th>+row data table and less text than this is a dead shell, not a worklist.
 const SHELL_TEXT_MAX = 600;
@@ -1417,11 +1422,21 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     if (caps.exploreDetails === true && view && view.rowsSelector && !view.block && DETAIL_PARENTS.includes(view.resourceHint) && !detailSeen.has(view.resourceHint) && clicks < maxClicks) {
       detailSeen.add(view.resourceHint);
       const beforePath = await whereAmI();
+      if (typeof client.drainRequests === 'function') { try { await client.drainRequests(); } catch {} }
       await client.evaluate({ expression: `(${ARM_OBSERVER_SRC})()` }).catch(() => {});
       const how = await client.evaluate({ expression: `(${CLICK_FIRST_ROW_SRC})(${JSON.stringify(view.rowsSelector)})` }).catch(() => ({ result: 'e' }));
       if (how && (how.result === 'link' || how.result === 'row')) {
         clicks += 1;
         await client.wait({ ms: waitMs });
+        if (typeof client.drainRequests === 'function') {
+          try {
+            const drained = await client.drainRequests();
+            let pageOrigin = null;
+            try { pageOrigin = new URL(await currentUrl()).origin; } catch { pageOrigin = null; }
+            const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: (caps && caps.origins) || [] });
+            if (nav.length) await client.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+          } catch { /* nav capture is best effort */ }
+        }
         trail.push(view.resourceHint + ' row');
         let detail = null;
         try { detail = await captureView({ client, resourceHint: view.resourceHint + '-detail' }); } catch { detail = null; }

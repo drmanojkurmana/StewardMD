@@ -5,7 +5,7 @@ import { guidedPrompt, REASSURANCE } from './onboard.mjs';
 import { explorePhone, probePhone } from './explore.mjs';
 import { deepCrawlClinical, captureView, enrichView, GUIDE_SOURCES, TARGET_HINTS } from './deep-crawl.mjs';
 import { verifyViews } from './verify.mjs';
-import { createProofBook } from './prove.mjs';
+import { createProofBook, navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';
 /* THE CLIENT THE CRAWL ACTUALLY NEEDS, re-exported from the one module the app imports.
  * connect-agent-onboarding.js calls engine.createPluginClient(); it lived only in plugin-client.mjs
  * and was never re-exported here, so that call returned undefined, the RAW Capacitor plugin was
@@ -191,6 +191,14 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
       view.guided = true;
       if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
       const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
+      if (typeof plugin.drainRequests === 'function') {
+        try {
+          const drained = await plugin.drainRequests();
+          let pageOrigin = null; try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+          const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
+          if (nav.length) await plugin.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+        } catch { /* best effort */ }
+      }
       await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
       await plugin.evaluate({ expression: GUIDE_SOURCES.clearPoint }).catch(() => {});
       if (verdict && verdict.resource && verdict.resource !== 'none' && verdict.resource !== gap && Number(verdict.confidence) >= 0.8) {

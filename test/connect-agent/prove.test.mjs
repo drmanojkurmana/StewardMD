@@ -3,7 +3,7 @@
 // Synthetic GHIS-shaped data (made-up ids and names); the real GHIS endpoint list is never given to discovery.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows } from '../../connect-agent/phone/prove.mjs';
+import { consideredCells, overlapOf, accepted, paramsOf, todayFormat, rowsForChain, proveView, createProofBook, safeParams, learnColumns, screenRows, navToReplayEntries, INJECT_REPLAY_SRC } from '../../connect-agent/phone/prove.mjs';
 import { executeView, parseFetchExpression, PAGE_TOKENS, provenValue, applyColumns } from '../../connect-agent/phone/adapter-runtime.mjs';
 import { mapRows } from '../../connect-agent/phone/runtime.mjs';
 import { redactEndpoints } from '../../connect-agent/phone/deep-crawl.mjs';
@@ -265,4 +265,46 @@ test('proveView asks Gemini about the ward list too: an out-patient queue is not
   assert.ok(!/MR900001|ALPHA/.test(JSON.stringify(judged[0])), 'only structure reached the model');
   assert.equal(view.proof.status, 'unproven');
   assert.equal(view.endpoints, undefined);
+});
+
+test('navToReplayEntries keeps only main-frame GET reports on the hospital origin', () => {
+  const out = navToReplayEntries({ requests: [
+    { method: 'GET', url: 'https://ghis.gitam.edu/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetopcardReport?id=OP77&patid=MR9' },
+    { method: 'POST', url: 'https://ghis.gitam.edu/Doctor/Home/CreateDrugs' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Content/site.css' },
+    { method: 'GET', url: 'https://analytics.example/collect?x=1' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001' },
+  ] }, { pageOrigin: 'https://ghis.gitam.edu' });
+  assert.deepEqual(out, [
+    { method: 'GET', url: 'https://ghis.gitam.edu/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetopcardReport?id=OP77&patid=MR9' },
+  ], 'writes, assets, beacons and a foreign origin are dropped; a repeat is deduped');
+});
+
+test('INJECT_REPLAY_SRC pushes nav entries into the replay buffer with monotonic seq', () => {
+  const win = { __SMD_REPLAY__: { seq: 5, list: [{ seq: 5, url: 'x' }] } };
+  new Function('window', 'entries', 'return (' + INJECT_REPLAY_SRC + ')(entries)')(win, [{ method: 'GET', url: 'https://h/GetReport?resultid=RS1' }]);
+  assert.equal(win.__SMD_REPLAY__.list.length, 2);
+  const added = win.__SMD_REPLAY__.list[1];
+  assert.equal(added.seq, 6);
+  assert.equal(added.method, 'GET');
+  assert.equal(added.url, 'https://h/GetReport?resultid=RS1');
+  assert.equal(added.xhr, false);
+});
+
+test('a radiology report opened by navigation is proven and keyed to its list row', async () => {
+  const REPORT = '<html><body><h3>CT BRAIN PLAIN</h3><p>No acute intracranial abnormality. Ventricles normal.</p></body></html>';
+  // The report GET was injected from the native nav log: it is in the buffer as a page-shaped entry.
+  const entries = [{ seq: 51, method: 'GET', url: HOST + '/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001', body: null, reqCt: '', xhr: false, status: 200, shape: { kind: 'unknown', page: true } }];
+  const view = { resourceHint: 'radiology-detail', detailOf: 'radiology', pathTemplate: HOST + '/Radio/Home', rowsSelector: 'body', headers: ['Impression'] };
+  const radRow = { description: 'CT BRAIN PLAIN', _args: ['RS44001'], resultid: 'RS44001' };
+  await proveView({
+    client: fakePage({ entries, screen: [['No acute intracranial abnormality. Ventricles normal.']], answers: { 51: { status: 200, contentType: 'text/html', text: REPORT } } }),
+    view, parents: [{ label: 'radiology', rows: [radRow] }],
+  });
+  assert.equal(view.proof.status, 'proven', JSON.stringify(view.proof));
+  const data = view.endpoints.find((e) => e.role === 'data');
+  assert.equal(data.path.split('?')[0], '/Radiology/Home/GetRadiologyResultPrint');
+  assert.deepEqual(data.params.resultid, { from: 'radiology', field: 'resultid' });
 });

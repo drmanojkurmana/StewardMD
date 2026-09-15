@@ -402,6 +402,35 @@ export function localRank(entries) {
     .sort((a, b) => (b.s - a.s) || (b.seq - a.seq)).map(({ index, role }) => ({ index, role }));
 }
 
+const NAV_NOISE = /checksession|keepalive|heartbeat|signalr|analytics|\/collect$|\.(js|css|png|jpe?g|gif|svg|woff2?|ico|map|pdf)$/i;
+/* Main-frame reports the hospital opens by navigation or popup (GHIS radiology/lab/visit reports) are
+ * logged natively (decidePolicyFor) but never enter the page fetch/XHR buffer, so proof could not see
+ * them (adapter ver_b16da370: labs-detail, radiology-detail, history no-requests). Drained native GETs
+ * on the hospital origin become proof candidates, re-issued as fetch() with the doctor's cookies. */
+export function navToReplayEntries(drained, { pageOrigin, allowedOrigins = [] } = {}) {
+  const reqs = drained && Array.isArray(drained.requests) ? drained.requests : (Array.isArray(drained) ? drained : []);
+  const out = [];
+  const seen = new Set();
+  for (const r of reqs) {
+    if (!r || String(r.method || 'GET').toUpperCase() !== 'GET' || typeof r.url !== 'string') continue;
+    let u; try { u = new URL(r.url); } catch { continue; }
+    if (u.protocol !== 'https:') continue;
+    if (pageOrigin && u.origin !== pageOrigin && allowedOrigins.indexOf(u.origin) < 0) continue;
+    if (NAV_NOISE.test(u.pathname) || WRITE_PATH.test(u.pathname)) continue;
+    const sig = 'GET ' + u.href;
+    if (seen.has(sig)) continue;
+    seen.add(sig);
+    out.push({ method: 'GET', url: u.href });
+    if (out.length >= 8) break;
+  }
+  return out;
+}
+
+/* Push nav GETs into the page's replay buffer using the real seq, so PROVE_LIST offers them and
+ * PROVE_EXEC re-issues them by seq like any observed request. shape.page marks them shell-ranked; a
+ * report is usually the only candidate, so it is still executed and accepted on overlap. */
+export const INJECT_REPLAY_SRC = "(function(entries){try{var R=window.__SMD_REPLAY__=window.__SMD_REPLAY__||{seq:0,list:[]};for(var i=0;i<entries.length;i++){var e=entries[i];R.seq+=1;R.list.push({seq:R.seq,sig:'GET '+e.url,method:'GET',url:e.url,body:null,reqCt:'',xhr:false,status:200,shape:{kind:'unknown',page:true}});}if(R.list.length>60)R.list.splice(0,R.list.length-60);return R.seq;}catch(x){return 0;}})";
+
 /* THE LIST, NOT THE PAGE THAT CONTAINS IT. A whole patient page carries every lab name and every
  * radiology line the screen shows, so "carries the screen's values" accepted GHIS's visit page
  * (POST Searchnew) as the labs call and the visits page as radiology (adapter ver_b16da370,
@@ -479,8 +508,8 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     const o = kind === 'login' || kind === 'empty' ? { hits: 0, cells: cells.length, ratio: 0 } : overlapOf(cells, resp.text, resp.contentType);
     trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: r.role, kind, hits: o.hits, ratio: o.ratio });
     if (kind === 'login') return done('signed-out');
-    // A whole page that happens to carry the table is where the view lives, not a data call.
-    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr)) continue;
+    // A whole page is layout, unless it is keyed on this patient (a report opened by navigation).
+    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr && !chained(paramsOf(e, parents)))) continue;
     const rows = rowsForChain(resp.text, resp.contentType);
     /* GEMINI JUDGES THE REPLY, the ward list included: an out-patient queue carries patients too, and
      * was proven as the ward list on the live run (DashboardUnit, 2026-09-15). Only column names, a row
