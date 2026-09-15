@@ -244,3 +244,90 @@ test("NCCN NAVIGATOR: terminal node triggers End of Algorithm modal dialog", () 
   noPlaceholders(html);
 });
 
+test("NCCN NAVIGATOR: End of algorithm modal is suppressed unless last step is pressed thrice", () => {
+  const answers = Object.assign({}, HER2_PATH.answers);
+  const keys = Object.keys(answers);
+  const lastKey = keys[keys.length - 1];
+  const lastOpt = answers[lastKey][0];
+  delete answers[lastKey];
+
+  reset(answers);
+  UI._st.view = "navigator";
+
+  // 1st press of terminal step
+  UI._answer(lastKey, lastOpt);
+  assert.equal(UI._st.navEndModalOpen, false, "modal suppressed on 1st press");
+  let html = UI._bodyHtml();
+  assert.ok(!/ot-nav-modal-backdrop/.test(html), "backdrop not rendered");
+
+  // 2nd press of terminal step
+  UI._answer(lastKey, lastOpt);
+  assert.equal(UI._st.navEndModalOpen, false, "modal suppressed on 2nd press");
+
+  // 3rd press of terminal step (thrice)
+  UI._answer(lastKey, lastOpt);
+  assert.equal(UI._st.navEndModalOpen, true, "modal opens when last step is pressed thrice");
+  html = UI._bodyHtml();
+  assert.ok(/End of algorithm reached/.test(html), "modal rendered on 3rd press");
+  noPlaceholders(html);
+});
+
+test("NCCN NAVIGATOR: guided flowchart mode renders stage stepper, active decision card, and workup checklist", () => {
+  reset({});
+  UI._st.view = "navigator";
+  UI._st.navMode = "flow";
+  const html = UI._bodyHtml();
+  assert.ok(/ot-flow-viewport/.test(html), "renders flow viewport");
+  assert.ok(/ot-flow-stepper/.test(html), "renders stage stepper");
+  assert.ok(/ot-flow-card active/.test(html), "renders active decision card");
+  assert.ok(/ot-flow-workup-box/.test(html), "renders diagnostic workup / evaluation checklist box");
+  assert.ok(/ot-flow-opts-list/.test(html), "renders tactile clinical options list");
+  assert.ok(/Ductal Carcinoma In Situ/.test(html), "renders DCIS option in flow");
+  noPlaceholders(html);
+});
+
+test("NCCN NAVIGATOR: guided flowchart renders completed card with choice badge and Change button", () => {
+  reset({ n_histology: ["invasive"] });
+  UI._st.view = "navigator";
+  UI._st.navMode = "flow";
+  const html = UI._bodyHtml();
+  assert.ok(/ot-flow-card completed/.test(html), "renders completed decision step card");
+  assert.ok(/ot-flow-done-pill/.test(html), "renders done pill");
+  assert.ok(/data-ot-act="nav-edit-step"/.test(html), "renders Change button for completed step");
+  assert.ok(/Invasive breast cancer/.test(html), "displays selected answer in completed card");
+  assert.ok(/ot-flow-connector/.test(html), "renders vertical connector between cards");
+  assert.ok(/Invasive Breast Cancer: Clinical Workup and Staging/.test(html), "advances to invasive workup step");
+  assert.ok(/ot-flow-continue-btn/.test(html), "renders single acknowledge button for workup review");
+  noPlaceholders(html);
+});
+
+test("NCCN NAVIGATOR: guided flowchart renders outcome recommendations and NCCN-aligned regimen cards", () => {
+  reset(HER2_PATH.answers);
+  UI._st.view = "navigator";
+  UI._st.navMode = "flow";
+  const html = UI._bodyHtml();
+  assert.ok(/ot-flow-card outcome/.test(html), "renders outcome card at leaf");
+  assert.ok(/ot-flow-rec-badge/.test(html), "renders recommendation badge");
+  assert.ok(/Recommended Regimens \(NCCN Aligned\)/.test(html), "renders recommended regimens header");
+  assert.ok(/ot-flow-proto-card/.test(html), "renders protocol cards in outcome");
+  assert.ok(/Restart Pathway/.test(html), "provides restart pathway button");
+  noPlaceholders(html);
+});
+
+test("NCCN NAVIGATOR: toolbar mode switch allows toggling between Flowchart and Canvas", () => {
+  reset({});
+  UI._st.view = "navigator";
+  UI._st.navMode = "canvas";
+  let html = UI._bodyHtml();
+  assert.ok(/ot-nav-canvas/.test(html), "starts in canvas mode");
+  assert.ok(/ot-nav-mode-pill/.test(html), "toolbar has mode pill");
+  
+  // Toggle to flow mode
+  UI._st.navMode = "flow";
+  html = UI._bodyHtml();
+  assert.ok(/ot-flow-viewport/.test(html), "switches to flow mode");
+  assert.ok(!/ot-nav-canvas/.test(html), "canvas is not rendered in flow mode");
+  noPlaceholders(html);
+});
+
+
