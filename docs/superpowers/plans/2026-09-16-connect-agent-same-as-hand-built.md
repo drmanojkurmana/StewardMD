@@ -2,9 +2,13 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** An agent-built hospital adapter reads GHIS through the same data requests the owner's hand-built adapter (`functions/api/ghis/[[path]].js`) calls, never shows or waits on a hospital page, and cannot be approved until its ward list is proven.
+**Goal:** Connect Agent produces an executable, endpoint-driven adapter for every hospital: the hospital's own backend requests (session, tokens, GET/POST definitions, parameters, multi-request chains, JSON and HTML parsing, pagination, canonical mapping), discovered and proven during onboarding, then run directly through any doctor's authenticated session with no page opening, clicking or DOM scraping as the runtime path. GHIS is the acceptance case: the adapter must call the discovered equivalents of GetIPWL, GetSearchPatientId, GetPrintLabResultDetailsAuth, the radiology requests, GetMedicines and the history requests, exactly as the hand-built `functions/api/ghis/[[path]].js` does.
 
-**Architecture:** The phone engine already proves data calls (`connect-agent/phone/prove.mjs`) and replays proven calls inside the hidden hospital page (`connect-agent/phone/adapter-runtime.mjs` `executeProven`). This plan: (1) keeps the per-screen proof trace so every run explains itself, (2) makes proof choose the request that returns only the list instead of the first page that contains it, and checks the ward list with Gemini, (3) removes the page-opening fallback from the patient read, (4) bounds every read in time, (5) refuses to read unless the native browser confirms it is hidden, (6) refuses approval without a proven ward list, (7) deletes the GIMSR ward-list injection that hid the gap, (8) proves parity on the iPhone with the existing gold audit.
+**The contract (owner, 2026-09-16).** A generated adapter is COMPLETE only when every routine clinical resource it offers is backed by a proven backend request. Acceptance: with the browser UI stopped (no visible page, no taps), the adapter retrieves a real patient's data through the discovered requests alone. If it must open, click or scrape a hospital page to read routine clinical data, it is not complete. The adapter is reusable by another doctor on their own authenticated session with no rediscovery.
+
+**"Browser UI stopped" on the phone.** The hand-built adapter replays requests server-side with the GHIS cookies in KV. A prior owner decision (`vault/decisions/Decisions.md` 2026-09-11) forbids taking cookies off the device, so the phone equivalent is a HIDDEN WebView that issues only the discovered `fetch`/XHR requests in the page realm (`adapter-runtime.mjs executeProven` -> `fetchInPage`), carrying the doctor's session cookies. That is endpoint-driven, not scraping: no page is shown, navigated for its DOM, or clicked. "Stopped" therefore means no visible UI and no DOM interaction, not the WebView process gone.
+
+**Architecture:** The execution half already meets the contract: `executeProven` runs the prerequisite POSTs then the data GET, fills every field from its proven source, follows list->detail chains, parses JSON and HTML, widens pagination, and `ghis-shim.mjs` maps to canonical. The discovery half does not: proof only sees `fetch`/XHR (the page replay buffer `__SMD_REPLAY__`), so a report GHIS opens by navigation or popup (lab result, radiology report, history) is invisible and comes back `no-requests`, and the runtime then falls back to opening pages. This plan closes that: (1) keep the per-screen proof trace so every run explains itself, (2) prove the request that returns only the list, judged by Gemini, (2b) **capture navigation and popup requests so a report opened by page load becomes a proven backend request**, (3) the patient read runs only proven endpoints, never a page, and records per-resource `how`, (4) bound every request and read in time, (5) read only when the native browser confirms it is hidden, (6) **refuse approval unless every required resource is endpoint-backed (endpoint-complete), storing `how` per resource**, (7) delete the GIMSR ward-list injection, (7b) **self-repair re-proves a backend request instead of saving a DOM-scraping view; the DOM path survives only as a labeled last resort for an EMR with no discoverable endpoint, never for an endpoint-complete adapter**, (8) prove GHIS parity and the acceptance test on the iPhone.
 
 **Tech Stack:** ES modules (`connect-agent/**`), ES5 IIFE (`ghis-ward.js`), Cloudflare Pages Functions (`functions/**`), Swift WKWebView plugin, Java Android WebView plugin, `node --test`, headless Chrome CDP harness (`test/run-ward-adapter-ui.mjs`).
 
@@ -33,6 +37,9 @@ Read-path facts (code, 2026-09-15): an unproven screen falls back to `readView` 
 
 - Owner, 2026-09-13: "I want SAME-TO-SAME reproduction of my hand-built GHIS adapter, not an approximate adapter."
 - Owner, 2026-09-15: "it should be 100% similar or better than the manual ghis adapter i created"
+- Owner, 2026-09-16: "Every adapter created by Connect Agent must be an executable endpoint-driven adapter... Do NOT make webpage/DOM scraping the normal runtime path... If it needs to open/click/scrape hospital pages to retrieve routine clinical data, the adapter is NOT complete."
+- Endpoint-complete = every resource in `REQUIRED_RESOURCES` (worklist, patient, medications, labs, labs-detail, radiology, radiology-detail) has a proven backend request whose `how` is `endpoint`. History is offered when present but does not gate completeness (the hand-built adapter reads it OPD-side). A resource genuinely absent in an EMR is `how: 'absent'`, not a failure; a resource readable only by DOM is `how: 'dom'` and makes the adapter DOM-degraded, never complete.
+- Pagination: `replayPlan` widens a page-size/offset/number key to one large page (GHIS style). Multi-page looping is out of scope for the GHIS acceptance and noted as a bounded limitation with an upgrade path, not built here.
 - LAW III: during clinical use the hospital EMR never visibly pops up; background reads run hidden.
 - Credentials never leave the phone. Never log, persist or send cookies, passwords, form values or PHI values. Only method, redacted path (digit runs of 3+ replaced by `#`), key names and counts may leave the phone.
 - Read-only: never call a write path (`WRITE_PATH` in `prove.mjs`).
@@ -48,9 +55,10 @@ Read-path facts (code, 2026-09-15): an unproven screen falls back to `readView` 
 
 | File | Responsibility in this plan |
 |---|---|
-| `connect-agent/phone/index.mjs` | sends the proof trace with discovery (Task 1) |
-| `functions/api/connect/agent/[[path]].js` | cleans and stores the trace (Task 1), approval gate (Task 6) |
-| `connect-agent/phone/prove.mjs` | picks the most specific proven call, checks the ward list (Task 2) |
+| `connect-agent/phone/index.mjs` | sends the proof trace with discovery (Task 1); injects nav requests before proving a guided screen (Task 2b) |
+| `functions/api/connect/agent/[[path]].js` | cleans and stores the trace (Task 1), endpoint-completeness gate and per-resource `how` (Task 6), repair needs a data endpoint (Task 7b) |
+| `connect-agent/phone/prove.mjs` | picks the most specific proven call, checks the ward list (Task 2); turns native navigation and popup GETs into proof candidates (Task 2b) |
+| `connect-agent/phone/deep-crawl.mjs` | drains and injects navigation requests around the detail-row tap (Task 2b) |
 | `functions/_connect/agent/brain.js` | ward list means admitted in-patients (Task 2) |
 | `connect-agent/phone/runtime.mjs` | patient read never opens a page (Task 3), no GetIPWL injection (Task 7) |
 | `connect-agent/phone/ghis-shim.mjs` | says "not read" instead of "none" (Task 3) |
@@ -358,7 +366,176 @@ git commit -m "Connect Agent: prove the call that returns the list, not the page
 
 ---
 
-### Task 3: A patient read never opens a page, and says what it could not read
+### Task 2b: Capture navigation and popup requests so a report opened by a page load becomes a proven backend request
+
+**Why:** Proof reads only the page `fetch`/XHR replay buffer (`__SMD_REPLAY__`, `discovery.mjs keep()`). GHIS opens a lab result, a radiology report and a visit note by main-frame navigation or a popup that the plugin loads in the same view (`ConnectBrowserPlugin.swift:545`), and the native `decidePolicyFor` logs those as GET in `requestLog` (drained by `drainRequests`), but they never enter the replay buffer, so proof sees `no-requests` (adapter ver_b16da370: labs-detail, radiology-detail, history all `no-requests`). This task drains those native GETs and injects them into the replay buffer as candidates, so a navigation report is re-issued as `fetch(url,{credentials:'include'})`, proven against the screen, and saved as a keyed backend request the runtime replays, exactly the endpoint the hand-built adapter calls (`GetPrintLabResultDetailsAuth`, `GetRadiologyResultPrint`).
+
+**Files:**
+- Modify: `connect-agent/phone/prove.mjs` (new exports `navToReplayEntries`, `INJECT_REPLAY_SRC`; fold the patient-keyed-page rule into the accept check)
+- Modify: `connect-agent/phone/deep-crawl.mjs` (drain + inject around the detail-row click, ~line 1421)
+- Modify: `connect-agent/phone/index.mjs` (drain + inject in `askOne` before `book.prove`, ~line 194)
+- Test: `test/connect-agent/prove.test.mjs`
+
+**Interfaces:**
+- Consumes: `client.drainRequests() -> { requests: [{ method, url }] }` (native main-frame navigations + fetch/XHR), `chained`, `paramsOf` (prove.mjs).
+- Produces: `export function navToReplayEntries(drained, { pageOrigin, allowedOrigins = [] }) -> [{ method: 'GET', url }]` (GET, https, page or allowed origin, not asset/session/write, deduped, max 8). `export const INJECT_REPLAY_SRC` (page function string; pushes given `{method,url}` entries into `window.__SMD_REPLAY__` with the real incrementing `seq`, `shape:{kind:'unknown',page:true}`). A patient-keyed full-page GET is now provable (the `role:'shell' && page && !xhr` skip yields when `chained(paramsOf(e, parents))`).
+
+- [ ] **Step 1: Write the failing tests** (append to `test/connect-agent/prove.test.mjs`; add `navToReplayEntries`, `INJECT_REPLAY_SRC` to the import from `../../connect-agent/phone/prove.mjs`)
+
+```js
+test('navToReplayEntries keeps only main-frame GET reports on the hospital origin', () => {
+  const out = navToReplayEntries({ requests: [
+    { method: 'GET', url: 'https://ghis.gitam.edu/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetopcardReport?id=OP77&patid=MR9' },
+    { method: 'POST', url: 'https://ghis.gitam.edu/Doctor/Home/CreateDrugs' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Content/site.css' },
+    { method: 'GET', url: 'https://analytics.example/collect?x=1' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001' },
+  ] }, { pageOrigin: 'https://ghis.gitam.edu' });
+  assert.deepEqual(out, [
+    { method: 'GET', url: 'https://ghis.gitam.edu/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001' },
+    { method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetopcardReport?id=OP77&patid=MR9' },
+  ], 'writes, assets, beacons and a foreign origin are dropped; a repeat is deduped');
+});
+
+test('INJECT_REPLAY_SRC pushes nav entries into the replay buffer with monotonic seq', () => {
+  const win = { __SMD_REPLAY__: { seq: 5, list: [{ seq: 5, url: 'x' }] } };
+  new Function('window', 'entries', 'return (' + INJECT_REPLAY_SRC + ')(entries)')(win, [{ method: 'GET', url: 'https://h/GetReport?resultid=RS1' }]);
+  assert.equal(win.__SMD_REPLAY__.list.length, 2);
+  const added = win.__SMD_REPLAY__.list[1];
+  assert.equal(added.seq, 6);
+  assert.equal(added.method, 'GET');
+  assert.equal(added.url, 'https://h/GetReport?resultid=RS1');
+  assert.equal(added.xhr, false);
+});
+
+test('a radiology report opened by navigation is proven and keyed to its list row', async () => {
+  const REPORT = '<html><body><h3>CT BRAIN PLAIN</h3><p>No acute intracranial abnormality. Ventricles normal.</p></body></html>';
+  // The report GET was injected from the native nav log: it is in the buffer as a page-shaped entry.
+  const entries = [{ seq: 51, method: 'GET', url: HOST + '/Radiology/Home/GetRadiologyResultPrint?resultid=RS44001', body: null, reqCt: '', xhr: false, status: 200, shape: { kind: 'unknown', page: true } }];
+  const view = { resourceHint: 'radiology-detail', detailOf: 'radiology', pathTemplate: HOST + '/Radio/Home', rowsSelector: 'body', headers: ['Impression'] };
+  const radRow = { description: 'CT BRAIN PLAIN', _args: ['RS44001'], resultid: 'RS44001' };
+  await proveView({
+    client: fakePage({ entries, screen: [['No acute intracranial abnormality. Ventricles normal.']], answers: { 51: { status: 200, contentType: 'text/html', text: REPORT } } }),
+    view, parents: [{ label: 'radiology', rows: [radRow] }],
+  });
+  assert.equal(view.proof.status, 'proven', JSON.stringify(view.proof));
+  const data = view.endpoints.find((e) => e.role === 'data');
+  assert.equal(data.path.split('?')[0], '/Radiology/Home/GetRadiologyResultPrint');
+  assert.deepEqual(data.params.resultid, { from: 'radiology', field: 'resultid' });
+});
+```
+
+- [ ] **Step 2: Run them to verify they fail**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs`
+Expected: FAIL. `navToReplayEntries`/`INJECT_REPLAY_SRC` are undefined; the radiology test is `unproven` (the page GET is skipped by the `shell && page && !xhr` guard).
+
+- [ ] **Step 3: Add the pure helper and the inject source** (`prove.mjs`, above `/* ---- the loop ---`)
+
+```js
+const NAV_NOISE = /checksession|keepalive|heartbeat|signalr|analytics|\/collect$|\.(js|css|png|jpe?g|gif|svg|woff2?|ico|map|pdf)$/i;
+/* Main-frame reports the hospital opens by navigation or popup (GHIS radiology/lab/visit reports) are
+ * logged natively (decidePolicyFor) but never enter the page fetch/XHR buffer, so proof could not see
+ * them (adapter ver_b16da370: labs-detail, radiology-detail, history no-requests). Drained native GETs
+ * on the hospital origin become proof candidates, re-issued as fetch() with the doctor's cookies. */
+export function navToReplayEntries(drained, { pageOrigin, allowedOrigins = [] } = {}) {
+  const reqs = drained && Array.isArray(drained.requests) ? drained.requests : (Array.isArray(drained) ? drained : []);
+  const out = [];
+  const seen = new Set();
+  for (const r of reqs) {
+    if (!r || String(r.method || 'GET').toUpperCase() !== 'GET' || typeof r.url !== 'string') continue;
+    let u; try { u = new URL(r.url); } catch { continue; }
+    if (u.protocol !== 'https:') continue;
+    if (pageOrigin && u.origin !== pageOrigin && allowedOrigins.indexOf(u.origin) < 0) continue;
+    if (NAV_NOISE.test(u.pathname) || WRITE_PATH.test(u.pathname)) continue;
+    const sig = 'GET ' + u.href;
+    if (seen.has(sig)) continue;
+    seen.add(sig);
+    out.push({ method: 'GET', url: u.href });
+    if (out.length >= 8) break;
+  }
+  return out;
+}
+
+/* Push nav GETs into the page's replay buffer using the real seq, so PROVE_LIST offers them and
+ * PROVE_EXEC re-issues them by seq like any observed request. shape.page marks them shell-ranked; a
+ * report is usually the only candidate, so it is still executed and accepted on overlap. */
+export const INJECT_REPLAY_SRC = "(function(entries){try{var R=window.__SMD_REPLAY__=window.__SMD_REPLAY__||{seq:0,list:[]};for(var i=0;i<entries.length;i++){var e=entries[i];R.seq+=1;R.list.push({seq:R.seq,sig:'GET '+e.url,method:'GET',url:e.url,body:null,reqCt:'',xhr:false,status:200,shape:{kind:'unknown',page:true}});}if(R.list.length>60)R.list.splice(0,R.list.length-60);return R.seq;}catch(x){return 0;}})";
+```
+
+- [ ] **Step 4: Let a patient-keyed page GET be data** (`prove.mjs`, the accept guard added in Task 2 Step 4)
+
+Change
+
+```js
+    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr)) continue;
+```
+
+to
+
+```js
+    // A whole page is layout, unless it is keyed on this patient (a report opened by navigation).
+    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr && !chained(paramsOf(e, parents)))) continue;
+```
+
+(`chained` and `paramsOf` are already defined in `prove.mjs`.)
+
+- [ ] **Step 5: Drain and inject at the detail-row click** (`deep-crawl.mjs`, in the `if (caps.exploreDetails === true ...)` block)
+
+Directly before `await client.evaluate({ expression: \`(${ARM_OBSERVER_SRC})()\` }).catch(() => {});` add:
+
+```js
+      if (typeof client.drainRequests === 'function') { try { await client.drainRequests(); } catch {} }
+```
+
+Directly after `await client.wait({ ms: waitMs });` (the one right after `CLICK_FIRST_ROW_SRC`) add:
+
+```js
+        if (typeof client.drainRequests === 'function') {
+          try {
+            const drained = await client.drainRequests();
+            const pageOrigin = (() => { try { return new URL(await whereAmI()).origin; } catch { return null; } })();
+            const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: (caps && caps.origins) || [] });
+            if (nav.length) await client.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+          } catch { /* nav capture is best effort */ }
+        }
+```
+
+Add `navToReplayEntries, INJECT_REPLAY_SRC` to the existing `import { ... } from './prove.mjs'` in `deep-crawl.mjs` (if deep-crawl imports prove; if not, add `import { navToReplayEntries, INJECT_REPLAY_SRC } from './prove.mjs';` near the top). Verify with `grep -n "from './prove.mjs'" connect-agent/phone/deep-crawl.mjs`.
+
+- [ ] **Step 6: Drain and inject in the guided ask** (`connect-agent/phone/index.mjs askOne`)
+
+Directly before `await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });` (line ~194) add:
+
+```js
+      if (typeof plugin.drainRequests === 'function') {
+        try {
+          const drained = await plugin.drainRequests();
+          let pageOrigin = null; try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+          const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
+          if (nav.length) await plugin.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+        } catch { /* best effort */ }
+      }
+```
+
+Add `navToReplayEntries, INJECT_REPLAY_SRC` to `index.mjs`'s import from `./prove.mjs` (or add the import). Confirm `origins` is in scope in `askOne` (it is: `runPhoneDiscovery` closes over `origins`). Verify with `grep -n "const origins\|origins =" connect-agent/phone/index.mjs | head`.
+
+- [ ] **Step 7: Run the tests**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/deep-crawl.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/phone-index.test.mjs`
+Expected: PASS. If `deep-crawl.test.mjs` or `phone-index.test.mjs` build a fake `client`/`plugin` without `drainRequests`, the new blocks are skipped by the `typeof ... === 'function'` guard and those tests are unaffected.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add connect-agent/phone/prove.mjs connect-agent/phone/deep-crawl.mjs connect-agent/phone/index.mjs test/connect-agent/prove.test.mjs
+git commit -m "Connect Agent: capture navigation and popup reports as proven backend requests"
+```
+
+---
+
+### Task 3: A patient read never opens a page, and records how each resource is read
 
 **Files:**
 - Modify: `connect-agent/phone/runtime.mjs` (new `provenView`; `readPatientDetails` lines 390-465; delete `fallbackView` lines 382-388)
@@ -834,19 +1011,37 @@ git commit -m "Connect Browser: report hidden; the app reads nothing unless hidd
 
 ---
 
-### Task 6: No approval without a proven ward list
+### Task 6: No approval unless the adapter is endpoint-complete, and store how each resource is read
 
 **Files:**
-- Modify: `functions/api/connect/agent/[[path]].js:1195-1219` (approve route)
+- Modify: `functions/api/connect/agent/[[path]].js` (new `REQUIRED_RESOURCES` + `adapterCompleteness` helper near `cleanProofTrace`; approve route ~1195; `GET /versions/:id` response ~1180)
 - Test: `test/connect/agent/phone-router.test.mjs`
 
 **Interfaces:**
 - Consumes: `findJobByCandidateVersion`, `safeJsonParse`, `OnboardError` (already in the router).
-- Produces: `POST /versions/:id/approve` answers 409 when the candidate job's `phone_state.observedViews` is non-empty and holds no proven `worklist` view with a `data` endpoint. JSON-probe adapters (no observed views) are unaffected.
+- Produces: `adapterCompleteness(observedViews) -> { how: { <resource>: "endpoint" | "absent" }, endpointComplete: boolean, missing: [resource] }` over `REQUIRED_RESOURCES = ["worklist","medications","labs","labs-detail","radiology","radiology-detail"]` (history is offered when present but never gates). `POST /versions/:id/approve` answers 409 for a phone adapter (has observedViews) that is not endpoint-complete, naming the missing resources. `GET /versions/:id` carries `completeness`. JSON-probe adapters (no observed views) are unaffected.
 
 - [ ] **Step 1: Write the failing test** (append to `test/connect/agent/phone-router.test.mjs`)
 
 ```js
+function provenViewOf(resourceHint, path, extra) {
+  return Object.assign({
+    resourceHint, pathTemplate: "/Doctor/Home", rowsSelector: "#t tbody tr", headers: ["A", "B"],
+    proof: { status: "proven", tried: 1, brain: true, overlap: 1, hits: 4, cells: 4, kind: "json" },
+    endpoints: [{ method: "GET", path, xhr: true, role: "data", params: { id: { from: "worklist", field: "MRNo" } }, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  }, extra || {});
+}
+function completeSet() {
+  return [
+    provenViewOf("worklist", "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", { endpoints: [{ method: "GET", path: "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", xhr: true, role: "data", params: { Type: { constant: "IPWorkList" }, __RequestVerificationToken: { token: true } }, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }] }),
+    provenViewOf("medications", "/Doctor/Home/GetMedicines/?id"),
+    provenViewOf("labs", "/Lab/Home/GetSearchPatientId?patient_id"),
+    Object.assign(provenViewOf("labs-detail", "/Lab/Home/GetPrintLabResultDetailsAuth?Render_ID"), { detailOf: "labs" }),
+    provenViewOf("radiology", "/Radio/Home?recordNo"),
+    Object.assign(provenViewOf("radiology-detail", "/Radiology/Home/GetRadiologyResultPrint?resultid"), { detailOf: "radiology" }),
+  ];
+}
+
 async function phoneCandidate(views) {
   const t = await setupTestEnv();
   const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, t.env, t.doc1.headers));
@@ -858,21 +1053,30 @@ async function phoneCandidate(views) {
     tenantId: "t1", probes: (dis.probes || []).map((p) => ({ opId: p.opId, status: 200, contentType: "text/html", responseShape: null, itemCount: null })),
   }, t.env, t.doc1.headers));
   assert.equal(evRes.status, 200, await evRes.clone().text());
-  return Object.assign(t, { versionId: (await evRes.json()).candidateVersionId });
+  return Object.assign(t, { sessionId, versionId: (await evRes.json()).candidateVersionId });
 }
 
-test("approval refuses an adapter whose ward list was never proven, and accepts one whose ward list is", async () => {
-  const unproven = await phoneCandidate(observedViews());
-  const refused = await onRequest(post(`/api/connect/agent/versions/${unproven.versionId}/approve`, { tenantId: "t1" }, unproven.env, unproven.owner1.headers));
+test("approval needs every required resource endpoint-backed; GET /versions/:id reports completeness", async () => {
+  // A resource missing its proven endpoint: refused, and the missing one is named.
+  const partial = await phoneCandidate(completeSet().filter((v) => v.resourceHint !== "radiology-detail"));
+  const refused = await onRequest(post(`/api/connect/agent/versions/${partial.versionId}/approve`, { tenantId: "t1" }, partial.env, partial.owner1.headers));
   assert.equal(refused.status, 409);
-  assert.match(JSON.stringify(await refused.json()), /ward list/);
+  assert.match(JSON.stringify(await refused.json()), /radiology-detail/);
+  const verGet = await (await onRequest(get(`/api/connect/agent/versions/${partial.versionId}?tenant=t1`, partial.env, partial.doc1.headers))).json();
+  assert.equal(verGet.completeness.endpointComplete, false);
+  assert.equal(verGet.completeness.how["medications"], "endpoint");
+  assert.deepEqual(verGet.completeness.missing, ["radiology-detail"]);
 
-  const provenWorklist = Object.assign({}, observedViews()[0], {
-    proof: { status: "proven", tried: 1, brain: true, overlap: 1, hits: 8, cells: 8, kind: "json" },
-    endpoints: [{ method: "GET", path: "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", xhr: true, role: "data", params: { Type: { constant: "IPWorkList" }, __RequestVerificationToken: { token: true } }, proof: { kind: "json", hits: 8, cells: 8, overlap: 1, rows: 2 } }],
-  });
-  const proven = await phoneCandidate([provenWorklist, observedViews()[1]]);
-  const ok = await onRequest(post(`/api/connect/agent/versions/${proven.versionId}/approve`, { tenantId: "t1" }, proven.env, proven.owner1.headers));
+  // The ward list unproven: also refused, naming the ward list.
+  const noWard = completeSet();
+  delete noWard[0].proof; delete noWard[0].endpoints;
+  const wardRefused = await onRequest(post(`/api/connect/agent/versions/${(await phoneCandidate(noWard)).versionId}/approve`, { tenantId: "t1" }, partial.env, partial.owner1.headers));
+  assert.equal(wardRefused.status, 409);
+  assert.match(JSON.stringify(await wardRefused.json()), /worklist/);
+
+  // Every required resource proven: approved.
+  const full = await phoneCandidate(completeSet());
+  const ok = await onRequest(post(`/api/connect/agent/versions/${full.versionId}/approve`, { tenantId: "t1" }, full.env, full.owner1.headers));
   assert.equal(ok.status, 200, await ok.clone().text());
   assert.equal((await ok.json()).state, "ACTIVE");
 });
@@ -881,9 +1085,29 @@ test("approval refuses an adapter whose ward list was never proven, and accepts 
 - [ ] **Step 2: Run it to verify it fails**
 
 Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect/agent/phone-router.test.mjs`
-Expected: FAIL, the unproven candidate is approved with 200.
+Expected: FAIL, the partial candidate is approved with 200 and `completeness` is undefined.
 
-- [ ] **Step 3: Implement the gate** (approve route)
+- [ ] **Step 3: Add the completeness helper** (`functions/api/connect/agent/[[path]].js`, directly after `cleanProofTrace`)
+
+```js
+/* ENDPOINT-COMPLETE OR NOT COMPLETE (owner, 2026-09-16). Every routine clinical resource must be a
+ * proven backend request; a resource read only by scraping a page, or not read at all, means the
+ * adapter is not done. History rides OPD-side and never gates (the hand-built adapter reads it there). */
+const REQUIRED_RESOURCES = ["worklist", "medications", "labs", "labs-detail", "radiology", "radiology-detail"];
+function adapterCompleteness(observedViews) {
+  const views = Array.isArray(observedViews) ? observedViews : [];
+  const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data"));
+  const how = {};
+  const missing = [];
+  for (const res of REQUIRED_RESOURCES) {
+    if (provenEndpoint(res)) how[res] = "endpoint";
+    else { how[res] = "absent"; missing.push(res); }
+  }
+  return { how, endpointComplete: missing.length === 0, missing };
+}
+```
+
+- [ ] **Step 4: Gate approval** (approve route)
 
 Replace
 
@@ -897,29 +1121,39 @@ with
 ```js
       const version = await getVersion(deps.db, tid, versionId);
       if (!version) throw new OnboardError("not-found", "adapter version not found");
-      /* NOTHING PROVEN, NOTHING APPROVED. A crawled adapter whose ward list was never proven reads
-       * through guesses or not at all; approving one put a 30-minute hang in front of the owner
+      /* ENDPOINT-COMPLETE, OR NOT APPROVED. Every required clinical resource must be a proven backend
+       * request; approving a partial adapter put a 30-minute page hang in front of the owner
        * (ver_b16da370, 2026-09-15). JSON-probe adapters (no observed views) keep their own evidence. */
       const job = await findJobByCandidateVersion(deps.db, tid, versionId);
       const candidateViews = ((job && safeJsonParse(job.phone_state)) || {}).observedViews;
       if (Array.isArray(candidateViews) && candidateViews.length) {
-        const provenWard = candidateViews.some((v) => v && v.resourceHint === "worklist" && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data"));
-        if (!provenWard) throw new OnboardError("conflict", "this adapter cannot read a ward list: the agent never proved the admitted patient list. Run Connect Hospital again");
+        const completeness = adapterCompleteness(candidateViews);
+        if (!completeness.endpointComplete) {
+          throw new OnboardError("conflict", "this adapter is not endpoint-complete: no proven backend request for " + completeness.missing.join(", ") + ". Run Connect Hospital again and show the missing screens");
+        }
       }
 ```
 
-and delete the later line `const job = await findJobByCandidateVersion(deps.db, tid, versionId);` (after `activateVersion`), since `job` is now declared above.
+and delete the later duplicate `const job = await findJobByCandidateVersion(deps.db, tid, versionId);` (after `activateVersion`), since `job` is now declared above.
 
-- [ ] **Step 4: Run the tests**
+- [ ] **Step 5: Report completeness on the version** (`GET /versions/:id` response, ~1180)
+
+After the `proofTrace:` line added in Task 1, add:
+
+```js
+        completeness: adapterCompleteness(phoneState && phoneState.observedViews),
+```
+
+- [ ] **Step 6: Run the tests**
 
 Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect/agent/phone-router.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect/agent/activation.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect/agent/candidate-limit.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect/agent/repair.test.mjs`
-Expected: PASS. If `repair.test.mjs` approves a repair candidate without a proven worklist, give that fixture's worklist view the `proof` and `endpoints` shown in Step 1 (a repair is a new candidate and meets the same bar).
+Expected: PASS. If `repair.test.mjs` or the existing full-flow test approves a candidate that is now not endpoint-complete, give that fixture the `completeSet()` views (a repair is a new candidate and meets the same bar), or assert the 409 if the fixture is deliberately partial.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add functions/api/connect/agent/\[\[path\]\].js test/connect/agent/phone-router.test.mjs
-git commit -m "Connect Agent: no approval without a proven ward list"
+git commit -m "Connect Agent: approve only an endpoint-complete adapter; report per-resource how"
 ```
 
 ---
@@ -989,6 +1223,177 @@ Expected: exit 0, no `FAILED:` line.
 ```bash
 git add connect-agent/phone/runtime.mjs test/connect-agent/phone-runtime.test.mjs
 git commit -m "Connect Agent: the ward list reads only calls the adapter recorded (no GIMSR injection)"
+```
+
+---
+
+### Task 7b: The runtime never scrapes when an endpoint was proven; repair re-proves a backend request
+
+**Why:** The contract forbids DOM scraping as the runtime path. Two paths still scrape: `readWorklist` falls back to `readView` (page scrape) when endpoint replay returns nothing (`runtime.mjs:337-340`), and self-repair captures a DOM view and saves it as the runtime pattern (`ghis-ward.js ghisSelfRepair`, `runtime.mjs captureWorklist`, the `/repair` route). For an endpoint-complete adapter neither may happen: a proven worklist that returns nothing goes to repair, and repair re-proves a backend request, never saves a scraper. The DOM read survives only for an EMR with no discoverable endpoint, explicitly, never for GHIS.
+
+**Files:**
+- Modify: `connect-agent/phone/runtime.mjs` (`readWorklist` fallback guard; new `reproveWorklist`)
+- Modify: `ghis-ward.js` (`ghisSelfRepair`)
+- Modify: `functions/api/connect/agent/[[path]].js` (`/repair` route: a repaired worklist must carry a data endpoint)
+- Test: `test/connect-agent/phone-runtime.test.mjs`, `test/run-ward-adapter-ui.mjs`, `test/connect/agent/repair.test.mjs`
+
+**Interfaces:**
+- Consumes: `provenView` (Task 3), `navToReplayEntries`, `INJECT_REPLAY_SRC`, `createProofBook` (Task 2b, prove.mjs).
+- Produces: `export async function reproveWorklist({ plugin, origin, view, parents }) -> view | null` (proves a backend request on the shown screen; returns the view with `endpoints` if proven, else null). `readWorklist` scrapes only when the worklist view has no endpoints and is not proven (a DOM-only adapter); a proven worklist that returns nothing throws `no patient rows found`. `/repair` answers 409 unless the repaired view carries a `role:'data'` endpoint.
+
+- [ ] **Step 1: Write the failing tests** (append to `test/connect-agent/phone-runtime.test.mjs`; `reproveWorklist` added to the import)
+
+```js
+test('a proven worklist that returns nothing does not scrape: it throws for repair', async () => {
+  let navigated = 0;
+  const plugin = {
+    async navigate() { navigated += 1; },
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (req) return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[]' }) };
+      return { result: '[]' };
+    },
+  };
+  const replay = [{ resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: 'tr', headers: ['Patient ID'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Type=IPWorkList', role: 'data', params: { Type: { constant: 'IPWorkList' } } }] }];
+  await assert.rejects(readWorklist({ plugin, origin: 'https://gimsrlogin.gitam.edu', replay, settleMs: 0, maxWaitMs: 5 }), /no patient rows found/);
+  assert.equal(navigated, 0, 'a proven adapter never navigates a page to scrape');
+});
+
+test('reproveWorklist proves a backend request on the screen the doctor showed', async () => {
+  const IPWL = JSON.stringify([{ patientId: 'MR1', patientFirstName: 'A', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'C', bedName: 'B2' }]);
+  const plugin = {
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home/Nurseipwlnew' }; },
+    async drainRequests() { return { requests: [] }; },
+    async evaluate({ expression }) {
+      if (expression.indexOf('__SMD_REPLAY__') >= 0 && expression.indexOf('PROVE') < 0) return { result: '0' };
+      if (expression.indexOf('PROVE_LIST') >= 0) return { result: JSON.stringify([{ seq: 1, method: 'GET', url: 'https://ghis.gitam.edu/Doctor/Home/GetIPWL?Type=IPWorkList', body: null, xhr: true, status: 200, shape: { kind: 'json', keys: ['patientId'], rows: 2 } }]) };
+      if (expression.indexOf('PROVE_SCREEN') >= 0) return { result: JSON.stringify([['MR1', 'A', 'B1'], ['MR2', 'C', 'B2']]) };
+      if (expression.indexOf('PROVE_EXEC') >= 0) return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: 'x', text: IPWL }) };
+      return { result: '[]' };
+    },
+  };
+  const view = { resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'] };
+  const out = await reproveWorklist({ plugin, origin: 'https://ghis.gitam.edu', view });
+  assert.ok(out, 'a backend request was proven');
+  assert.equal(out.endpoints.find((e) => e.role === 'data').path.split('?')[0], '/Doctor/Home/GetIPWL');
+});
+```
+
+- [ ] **Step 2: Run them to verify they fail**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/phone-runtime.test.mjs`
+Expected: FAIL. The first test scrapes (navigated > 0); `reproveWorklist` is undefined.
+
+- [ ] **Step 3: Guard the worklist fallback** (`runtime.mjs readWorklist`, the `if (!rows)` block)
+
+Replace
+
+```js
+  if (!rows) {
+    rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
+    if (onRead) onRead({ resource: 'worklist', via: 'page' });
+  }
+```
+
+with
+
+```js
+  if (!rows) {
+    /* NO SCRAPE FOR AN ENDPOINT ADAPTER (owner, 2026-09-16). A proven worklist, or one that recorded
+     * any endpoint, that returns nothing is a drift, not a licence to read the page: it goes to repair,
+     * which re-proves a backend request. Only a worklist with no endpoint at all (a DOM-only EMR) is
+     * read from its page, the one labeled last resort. */
+    if (provenView(view) || (Array.isArray(view.endpoints) && view.endpoints.length)) {
+      throw new Error('no patient rows found at ' + (view.pathTemplate || view.path || origin) + ' through the proven request; the hospital layout may have changed');
+    }
+    rows = await readView({ plugin, origin, view, settleMs, toggleAll: true, maxWaitMs: maxWaitMs || 20000 });
+    if (onRead) onRead({ resource: 'worklist', via: 'page' });
+  }
+```
+
+- [ ] **Step 4: Add `reproveWorklist`** (`runtime.mjs`, after `captureWorklist`)
+
+```js
+/* REPAIR RE-PROVES, IT DOES NOT SCRAPE (owner, 2026-09-16). The doctor showed the patient list; the
+ * requests their taps fired (fetch/XHR in the page buffer, and navigations injected from the native
+ * log) are proven against the screen, exactly as discovery does. A proven view carries a backend
+ * request the runtime replays; an unproven one is not saved. */
+export async function reproveWorklist({ plugin, origin, view, parents = [] }) {
+  const prove = await import('./prove.mjs');
+  const client = { currentUrl: () => plugin.currentUrl(), evaluate: (a) => plugin.evaluate(a) };
+  if (typeof plugin.drainRequests === 'function') {
+    try {
+      const drained = await plugin.drainRequests();
+      let pageOrigin = null;
+      try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+      const nav = prove.navToReplayEntries(drained, { pageOrigin, allowedOrigins: [origin] });
+      if (nav.length) await plugin.evaluate({ expression: '(' + prove.INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+    } catch { /* best effort */ }
+  }
+  const book = prove.createProofBook({ brain: null });
+  await book.prove({ client, view, label: 'the doctor showed the patient list', since: -1 });
+  return provenView(view) ? view : null;
+}
+```
+
+- [ ] **Step 5: Self-repair re-proves, and never posts a scraper** (`ghis-ward.js ghisSelfRepair`)
+
+Replace the `.then(function (view) { return rt.readView(...) ... })` tail (from `return rt.captureWorklist({ plugin: plugin });` onward) with:
+
+```js
+          return rt.captureWorklist({ plugin: plugin });
+        }).then(function (view) {
+          return rt.reproveWorklist({ plugin: plugin, origin: ctx.origin, view: view }).then(function (proven) {
+            if (!proven) {
+              throw new Error('I could not find a data request behind your patient list on ' + ctx.host + '. This hospital needs a fresh Connect Hospital run so the agent can learn it. ' + err.message);
+            }
+            return rt.readWorklist({ plugin: plugin, origin: ctx.origin, replay: [proven] }).then(function (patients) {
+              if (!patients.length) throw new Error('The request I learned from that screen returned no patients. ' + err.message);
+              agentApi('/versions/' + encodeURIComponent(ctx.versionId) + '/repair', ctx.tid, { method: 'POST', body: JSON.stringify({ sessionId: ctx.sessionId, view: proven }) }).then(function (r) {
+                if (r.s === 200 && r.d && r.d.ok !== false) { try { if (window.toast) window.toast('Thanks. A corrected adapter was sent for approval.'); } catch (e) {} }
+              });
+              return patients;
+            });
+          });
+        });
+```
+
+- [ ] **Step 6: The repair route requires a data endpoint** (`functions/api/connect/agent/[[path]].js`, `/repair` route, after `if (!view.rowsSelector) throw ...`)
+
+```js
+      if (!Array.isArray(view.endpoints) || !view.endpoints.some((e) => e && e.role === "data")) {
+        throw new OnboardError("conflict", "a repaired ward list must carry a proven backend request, not a page selector");
+      }
+```
+
+- [ ] **Step 7: Update the harness repair scenario** (`test/run-ward-adapter-ui.mjs`, the self-repair block at lines ~200-222)
+
+The empty read now goes to repair, which re-proves. Give the shown "all patients" screen a data call and assert the repair posts a proven endpoint, not a selector:
+- In the `/versions/ver-1` MOCK, give the KIMS worklist view `proof: { status: "proven" }` and an `endpoints: [{ method: "GET", path: "/api/ward/patients?unit&start&length", role: "data", params: {} }]` so the first read replays it; drive the empty read by making that route return `{ data: [] }` for this scenario, then after the doctor shows the list, register a route that returns two patients and add it to the page's replay buffer via the fake plugin's `drainRequests` returning that GET url. Assert:
+
+```js
+  ok(await waitFor(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair"&&x.method==="POST";}); return c.length===1 && Array.isArray(c[0].body.view.endpoints) && c[0].body.view.endpoints.some(function(e){return e.role==="data";});`, 8000), "repair posts a proven backend request, not a page selector");
+  ok(await ev(`var c=window.__calls.filter(function(x){return x.path==="/versions/ver-1/repair";})[0]; return JSON.stringify(c.body).indexOf("Ravi")<0 && JSON.stringify(c.body).indexOf("K001")<0;`) === true, "no patient cell text leaves the phone in the repair");
+```
+
+Add a `drainRequests: function(){ return Promise.resolve({ requests: window.__navLog || [] }); }` to `FAKE_PLUGIN`'s `ConnectBrowser`, and in the repair scenario set `window.__navLog = [{ method: "GET", url: "https://hims.kims.example/api/ward/patients?unit=&start=0&length=1000" }]` before firing the `loggedIn` that shows the list. Remove the old assertions that expected `body.view.rowsSelector` and a DOM `__rawTables` capture.
+
+- [ ] **Step 8: Fix the server repair test** (`test/connect/agent/repair.test.mjs`)
+
+Give the repaired view in that test a `role:'data'` endpoint (it now must carry one). If the test asserts a selector-only repair succeeds, change it to assert 409 for a selector-only view and 200 for one with a proven endpoint.
+
+- [ ] **Step 9: Run the tests and the full suite**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/phone-runtime.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect/agent/repair.test.mjs && node test/run-ward-adapter-ui.mjs && npm test`
+Expected: PASS, `ALL GREEN`, `npm test` exits 0 with no `FAILED:` line.
+
+- [ ] **Step 10: Commit**
+
+```bash
+git add connect-agent/phone/runtime.mjs ghis-ward.js functions/api/connect/agent/\[\[path\]\].js test/connect-agent/phone-runtime.test.mjs test/run-ward-adapter-ui.mjs test/connect/agent/repair.test.mjs
+git commit -m "Connect Agent: the runtime never scrapes when proven; repair re-proves a backend request"
 ```
 
 ---
@@ -1066,39 +1471,11 @@ All six proven as listed: go to Step 8. Otherwise, per failing screen, apply exa
 
 | Trace shows | Meaning | Action |
 |---|---|---|
-| The hand-built path is in `attempts` with `ratio >= 0.5` but another path was kept | scoring chose wrong | Add a `prove.test.mjs` case with both answers shaped like the trace (counts and kinds) and adjust `specificity` until it picks the hand-built one; rerun Tasks 2 tests and Step 4 |
-| `GET /Radio/Home` is in `attempts` with `role: shell` and `ratio >= 0.5` | a patient-bound full page GET was skipped as layout | Apply Step 7a |
-| The hand-built path is absent from `attempts` (or status `no-requests`) | the request was never captured | Stop. Write a follow-up plan for capturing that screen, citing this trace. Do not patch without it |
+| The hand-built path is in `attempts` with `ratio >= 0.5` but another path was kept | scoring chose wrong | Add a `prove.test.mjs` case with both answers shaped like the trace (counts and kinds) and adjust `specificity` until it picks the hand-built one; rerun the Task 2 tests, rebuild per Step 2 and repeat from Step 4 |
+| The hand-built path is in `attempts` but was never accepted (`hits` low, `ratio < 0.5`) | the screen the agent compared against was not that resource's screen | The guided ask for that resource is wrong. Fix the ask wording in `connect-agent/phone/onboard.mjs` for that gap, rebuild, repeat from Step 4 |
+| The hand-built path is still absent from `attempts` (status `no-requests`) after Task 2b | neither a fetch/XHR nor a main-frame navigation was captured for that screen | Stop. Capture how that screen actually loads (frame, `<img>`/`<object>` source, WebSocket, or a POST navigation, none of which Task 2b covers) and write a follow-up plan citing this trace. Do not patch without it |
 
-- [ ] **Step 7a (only per the table above): accept a patient-bound full page GET**
-
-Test (append to `test/connect-agent/prove.test.mjs`):
-
-```js
-test('a full page GET keyed on the patient (the radiology list page) can be the data call', async () => {
-  const RAD_PAGE = '<html><body><table><tr><th>Date</th><th>Description</th></tr><tr><td>12-Sep-2026</td><td>CT BRAIN PLAIN</td></tr><tr><td>13-Sep-2026</td><td>X-RAY CHEST PA</td></tr></table></body></html>';
-  const entries = [{ seq: 41, method: 'GET', url: HOST + '/Radio/Home?recordNo=MR900001', body: null, xhr: false, status: 200, shape: { kind: 'html', keys: ['Date', 'Description'], rows: 2, tables: 1, page: true } }];
-  const view = { resourceHint: 'radiology', pathTemplate: HOST + '/Radio/Home', rowsSelector: 'tr', headers: ['Date', 'Description'] };
-  await proveView({ client: fakePage({ entries, screen: [['12-Sep-2026', 'CT BRAIN PLAIN'], ['13-Sep-2026', 'X-RAY CHEST PA']], answers: { 41: { status: 200, contentType: 'text/html', text: RAD_PAGE } } }), view, parents: [{ label: 'worklist', rows: rowsForChain(WL_JSON, 'application/json') }] });
-  assert.equal(view.proof.status, 'proven');
-  assert.deepEqual(view.endpoints.find((e) => e.role === 'data').params.recordNo, { from: 'worklist', field: 'MRNo' });
-});
-```
-
-Implementation (`prove.mjs`, in the Task 2 loop) replace
-
-```js
-    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr)) continue;
-```
-
-with
-
-```js
-    // A whole page is layout, unless it is keyed on this patient (a radiology list page by record number).
-    if (!accepted(o) || (r.role === 'shell' && (e.shape || {}).page && !e.xhr && !chained(paramsOf(e, parents)))) continue;
-```
-
-Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs`, expected PASS; commit `git add connect-agent/phone/prove.mjs test/connect-agent/prove.test.mjs && git commit -m "Connect Agent: a patient-keyed full page GET can be the data call"`; rebuild per Step 2 and repeat from Step 4.
+Task 2b already makes a patient-keyed full-page GET (the radiology list page, a report opened by navigation) provable, so that is not a failure mode to fix here.
 
 - [ ] **Step 8: Approve, then run the gold audit**
 
@@ -1115,17 +1492,36 @@ Pass criteria, all required:
 - `worklist.verdict === "same"`.
 - Every patient grade for `medications`, `lab`, `lab-detail`, `radiology`, `radiology-report` has `verdict` `same` or `both-empty`.
 
-- [ ] **Step 9: Speed and invisibility on the phone**
+- [ ] **Step 9: The owner's acceptance test (endpoint-driven, browser UI stopped)**
 
-Through `test/ios-webkit-cdp.mjs`, for a patient id from the ward list:
+The contract: with the browser UI stopped, the adapter must retrieve a real patient's data through the discovered requests alone, with no page opened, clicked or scraped.
+
+Through `test/ios-webkit-cdp.mjs`, with the GIMSR (adapter) ward list loaded, for a patient id from that list:
 
 ```js
-window.__t = null; var s = performance.now(); fetch(GHIS.getProxyBase() + '/profile?patientId=' + encodeURIComponent(_pid)).then(function (r) { return r.json(); }).then(function () { window.__t = Math.round(performance.now() - s); }); 1
+var _pid = '<a patientId from the ward list>';
+window.__acc = null;
+window.__calls = [];
+var _p = window.Capacitor.Plugins.ConnectBrowser;
+['open','navigate','setMode','close'].forEach(function (m) { var f = _p[m].bind(_p); _p[m] = function (a) { window.__calls.push({ m: m, hidden: a && a.hidden, url: a && a.url }); return f(a); }; });
+var s = performance.now();
+fetch(GHIS.getProxyBase() + '/profile?patientId=' + encodeURIComponent(_pid)).then(function (r) { return r.json(); }).then(function (j) {
+  window.__acc = { ms: Math.round(performance.now() - s), labs: (j.labs || []).length, meds: (j.medications || []).length, rad: (j.radiology || []).length, unreadable: j.unreadable || null, calls: window.__calls };
+}); 1
 ```
 
-(set `_pid` first with `var _pid = '<a patientId from the list>'`), and while it runs take `pymobiledevice3 developer dvt screenshot $CLAUDE_JOB_DIR/tmp/parity-read.png` and look at it.
+While it runs, take `pymobiledevice3 developer dvt screenshot $CLAUDE_JOB_DIR/tmp/parity-read.png` and look at it. Then read `JSON.stringify(window.__acc)`.
 
-Pass criteria: `window.__t <= 5000`, and the screenshot shows StewardMD, not the hospital page or the orange banner.
+Pass criteria, all required:
+- `__acc.calls` contains **no `navigate`** call: the read never loaded a hospital page.
+- Every `open`/`setMode` in `__acc.calls` has `hidden: true`.
+- `__acc.labs`, `__acc.meds` and `__acc.rad` are the real counts for that patient (match the hand-built proxy's own `/profile` for the same patient), and `__acc.unreadable` is null.
+- `__acc.ms <= 5000`.
+- The screenshot shows StewardMD, not the hospital page and not the orange banner.
+
+- [ ] **Step 9a: Reuse by a second doctor without rediscovery**
+
+A second doctor in the same tenant (or the owner after `window.ghisDisconnect()` and a fresh sign-in) opens the same GIMSR (adapter) hospital and taps a patient. Pass criteria: the ward list and the patient drawer fill from the same approved version with no discovery run (no `POST /sessions/:id/discovery` in the network log, `reuse: true` on `POST /sessions`), and Step 9's call assertions hold again on their session.
 
 - [ ] **Step 10: Record it**
 
@@ -1134,7 +1530,7 @@ Append to `vault/decisions/Decisions.md`:
 ```markdown
 ## 2026-09-16 Connect Agent reads GHIS through the hand-built adapter's own requests
 
-**Decision:** A proven call is the most specific answer that carries the screen, not the first; the ward list is judged as admitted in-patients; a patient read never loads a page (unproven screens say "not read"); every hospital request (12 s) and every patient read (30 s) has a deadline; the app reads nothing unless the native browser confirms hidden; no approval without a proven ward list; the GIMSR GetIPWL injection is gone. Parity is graded by `GHIS.goldAudit` (report in `docs/connect/ghis-parity-2026-09-16.md`).
+**Decision:** Every Connect Agent adapter is endpoint-driven: the hospital's own backend requests, discovered and proven at onboarding, replayed in the doctor's session; DOM scraping is never the runtime path. Navigation and popup requests are captured from the native log and proven like any fetch (this is what lab results, radiology reports and history needed). A proven call is the most specific answer that carries the screen, not the first; the ward list is judged as admitted in-patients; a patient read runs only proven endpoints; every request (12 s) and every read (30 s) has a deadline; the app reads nothing unless the native browser confirms hidden; approval requires endpoint-completeness across worklist, medications, labs, labs-detail, radiology and radiology-detail; repair re-proves a request instead of saving a scraper; the GIMSR GetIPWL injection is gone. Parity is graded by `GHIS.goldAudit` and the owner's acceptance test (report in `docs/connect/ghis-parity-2026-09-16.md`).
 
 **Why:** Adapter ver_b16da370 proved the out-patient list as the ward list, the visit page as labs and the visits page as radiology, missed lab results, radiology reports and history, and its patient read sat on a GHIS menu page for 30 minutes in full view on the owner's iPhone (2026-09-15).
 
