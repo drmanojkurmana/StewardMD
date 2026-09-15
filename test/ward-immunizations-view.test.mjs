@@ -31,7 +31,7 @@ const SEL = { patientId: "p1", encounterId: "e1", name: "Asha", mrn: "MR1", admi
 const view = (W, immunizations) => W._render({ ...W._st, view: "immunizations", sel: SEL, immunizations });
 
 test("the chart reaches the screen, and the screen calls the real routes", () => {
-  assert.match(SRC, /data-w-act="immunizations"[^\n]*Immunizations<\/button>/);
+  assert.match(SRC, /act: "immunizations"[^\n]*label: "Immunizations"/); // a chart header tab (CHART_CATS)
   assert.ok(SRC.includes('apiGet("/ward/immunizations?orgId="'));
   assert.ok(SRC.includes('apiPost("/ward/immunization", {'));
   assert.ok(SRC.includes('apiPost("/ward/immunization-error", {'));

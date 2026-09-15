@@ -1942,6 +1942,116 @@
       "</div>";
   }
 
+  /* BUG-MU2PM1D9: THE CHART'S SCREENS, GROUPED. The header used to carry every screen reachable from
+   * a chart as one long row of buttons. They are now six categories (an ARIA tablist) and the chosen
+   * category's buttons; every button keeps its own data-w-act verb, so a click, a shortcut or a shell
+   * deep link opens exactly the screen it always did. All panels stay in the page (the unchosen ones
+   * hidden), so nothing is removed, only folded away. Consultation and Workspace stay beside the name.
+   * `badge(state)`, when a tab has one, returns { n, urgent }: its count is also shown on the category,
+   * so nothing urgent sits unseen inside a closed one. The ED chart keeps its own two buttons. */
+  var CHART_CATS = [
+    { id: "overview", label: "Overview", icon: "dashboard", tabs: [
+      { act: "timeline", icon: "history", label: "Timeline", title: "The whole clinical history on one page, and where you add a clinical note" },
+      { act: "careplan", icon: "flag", label: "Care plan", title: "Goals for this stay and whether each was met" },
+      { act: "pathways", icon: "alt_route", label: "Pathways", title: "Clinical pathways, step progress and enrolments" },
+      { act: "completionopen", icon: "checklist", label: "Chart check", title: "What is still outstanding on this chart" },
+      { act: "people", icon: "person", label: "Contacts", title: "Next of kin, guardian, emergency contact, and whether this patient has died" }] },
+    { id: "orders", label: "Orders", icon: "checklist", tabs: [
+      { act: "ordersets", icon: "checklist", label: "Order sets", title: "A hospital-approved group of orders, each checked on its own" },
+      { act: "medrec", icon: "medication", label: "Medicines on arrival", title: "What this patient was already taking, and what happens to each medicine" },
+      { act: "referrals", icon: "send", label: "Referrals", title: "Refer this patient to another specialty or facility, and follow the reply" },
+      { act: "followup", icon: "schedule", label: "Follow-up", title: "Ask for this patient to be seen again" }] },
+    { id: "nursing", label: "Nursing", icon: "vital_signs", tabs: [
+      { act: "infusions", icon: "monitor_heart", label: "Drips", title: "Running drips, estimated volumes, and the care plan" },
+      { act: "tags", icon: "how_to_reg", label: "Wristband", title: "Issue a wristband and check the band on the patient" },
+      { act: "wounds", icon: "healing", label: "Wounds", title: "Chart a wound and follow it over time" },
+      { act: "risks", icon: "fact_check", label: "Risk", title: "Falls, pressure and whatever else this hospital assesses" },
+      { act: "immunizations", icon: "vaccines", label: "Immunizations", title: "Vaccines given, or not given and why" },
+      { act: "forms", icon: "assignment", label: "Forms", title: "Triage, nursing assessments, checklists this hospital uses" }] },
+    { id: "specialty", label: "Specialty", icon: "local_hospital", tabs: [
+      { act: "specialty", icon: "local_hospital", label: "Specialty", title: "Specialty framework, templates and tools for this stay" },
+      { act: "patientsurgery", icon: "fact_check", label: "Operations", title: "Operations for this patient and where each one stands" },
+      { act: "oncologyopen", icon: "labs", label: "Oncology", title: "ONCqis link, diagnosis, adverse events, chemo administration" },
+      { act: "cardiologyopen", icon: "monitor_heart", label: "Cardiology", title: "KardiQ X link and ECG reference" },
+      { act: "radiologyopen", icon: "medical_information", label: "Radiology", title: "Imaging worklist, protocol and report" },
+      { act: "pharmacyopen", icon: "medication", label: "Pharmacy", title: "Verification queue and dispense" },
+      { act: "txopen", icon: "bloodtype", label: "Blood bank", title: "Transfusion request, crossmatch, bedside verification" }] },
+    { id: "discharge", label: "Documents & discharge", icon: "description", tabs: [
+      { act: "documents", icon: "description", label: "Documents", title: "Consent forms, referral letters, outside reports" },
+      { act: "consentopen", icon: "fact_check", label: "Consent", title: "What this patient has agreed to and refused" },
+      { act: "ipsopen", icon: "summarize", label: "IPS summary", title: "The International Patient Summary another hospital would receive for this patient" },
+      { act: "move", icon: "swap_horiz", label: "Transfer", title: "Transfer to another ward or bed" },
+      { act: "summary", icon: "description", label: "Summary", title: "Discharge summary" },
+      { act: "wardcloseopen", icon: "home", label: "Discharge", title: "End this stay and record where the patient went" },
+      { act: "pcopy", icon: "assignment_ind", label: "Patient copy", title: "The copy this patient can be given" }] },
+    { id: "admin", label: "Admin", icon: "request_quote", tabs: [
+      { act: "billingopen", icon: "request_quote", label: "Billing", title: "Charges, invoices and claims - no collection here" },
+      { act: "tpaopen", icon: "gavel", label: "TPA", title: "Claims and pre-authorisations" },
+      { act: "roiopen", icon: "outbox", label: "ROI", title: "Third-party requests to release this record" }] }
+  ];
+  var CHART_NAV_KEY = "wsqChartNav";
+  function chartNavSaved() { try { return JSON.parse(sessionStorage.getItem(CHART_NAV_KEY) || "null") || {}; } catch (e) { return {}; } }
+  /* A screen opened from anywhere (a tab, a shortcut, a deep link) makes its category the chosen one. */
+  function chartNavNote(act) {
+    for (var i = 0; i < CHART_CATS.length; i++) {
+      for (var j = 0; j < CHART_CATS[i].tabs.length; j++) {
+        if (CHART_CATS[i].tabs[j].act === act) { chartNavSet(CHART_CATS[i].id, act); return; }
+      }
+    }
+  }
+  function chartNavSet(cat, act) {
+    var v = chartNavSaved(); v.cat = cat; if (act) v.tab = act;
+    try { sessionStorage.setItem(CHART_NAV_KEY, JSON.stringify(v)); } catch (e) {}
+  }
+  function chartNavBadge(b) {
+    return b && b.n ? '<span class="w-cnav-b' + (b.urgent ? " urgent" : "") + '" aria-label="' + esc(b.n) + (b.urgent ? " urgent" : "") + '">' + esc(b.n) + "</span>" : "";
+  }
+  function chartNavHtml(state, cats) {
+    cats = cats || CHART_CATS;
+    var saved = chartNavSaved(), cur = cats[0].id;
+    for (var k = 0; k < cats.length; k++) if (cats[k].id === saved.cat) cur = saved.cat;
+    var bar = "", panels = "";
+    cats.forEach(function (c) {
+      var on = c.id === cur, n = 0, urgent = false, first = true;
+      var hasSaved = c.tabs.some(function (t) { return t.act === saved.tab; });
+      var btns = c.tabs.map(function (t) {
+        var b = t.badge ? t.badge(state) : null;
+        if (b && b.n) { n += b.n; urgent = urgent || !!b.urgent; }
+        var stop = hasSaved ? t.act === saved.tab : first; first = false;
+        return '<button class="w-btn ghost" data-w-act="' + t.act + '" title="' + esc(t.title) + '" tabindex="' + (stop ? 0 : -1) + '">' + ms(t.icon) + esc(t.label) + chartNavBadge(b) + "</button>";
+      }).join("");
+      bar += '<button class="w-cnav-t" role="tab" id="wCnav-' + c.id + '" aria-controls="wCnavP-' + c.id + '" aria-selected="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-w-act="chartcat:' + c.id + '">' +
+        ms(c.icon) + esc(c.label) + chartNavBadge(n ? { n: n, urgent: urgent } : null) + "</button>";
+      panels += '<div class="w-cnav-p" role="tabpanel" id="wCnavP-' + c.id + '" aria-labelledby="wCnav-' + c.id + '"' + (on ? "" : " hidden") + '><div role="toolbar" aria-label="' + esc(c.label) + '">' + btns + "</div></div>";
+    });
+    return '<nav class="w-cnav" aria-label="Chart screens"><div class="w-cnav-bar" role="tablist" aria-label="Chart screen categories">' + bar + "</div>" + panels + "</nav>";
+  }
+  /* Choosing a category shows its panel in place, with no repaint: the chart under it is untouched. */
+  function chartNavShow(id) {
+    chartNavSet(id);
+    var r = document.getElementById("smdWard"); if (!r) return;
+    var tabs = r.querySelectorAll(".w-cnav-t");
+    for (var i = 0; i < tabs.length; i++) {
+      var on = tabs[i].id === "wCnav-" + id;
+      tabs[i].setAttribute("aria-selected", String(on)); tabs[i].setAttribute("tabindex", on ? "0" : "-1");
+      var p = document.getElementById(tabs[i].getAttribute("aria-controls")); if (p) p.hidden = !on;
+    }
+  }
+  /* Roving tabindex (ARIA tabs and toolbar patterns): one tab stop per row, arrows move within it.
+   * Categories use manual activation, so arrowing past one never swaps the buttons under a user. */
+  function chartNavKey(e) {
+    var t = e.target, row = t && t.closest && t.closest('.w-cnav [role="tablist"], .w-cnav [role="toolbar"]');
+    if (!row || ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].indexOf(e.key) < 0) return false;
+    if (row.getAttribute("role") === "tablist" && (e.key === "ArrowUp" || e.key === "ArrowDown")) return false;
+    var items = [].slice.call(row.querySelectorAll("button")), i = items.indexOf(t);
+    var next = e.key === "Home" ? 0 : e.key === "End" ? items.length - 1
+      : (i + (e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 1) + items.length) % items.length;
+    items.forEach(function (b, j) { b.setAttribute("tabindex", j === next ? "0" : "-1"); });
+    e.preventDefault();
+    try { items[next].focus(); } catch (x) {}
+    return true;
+  }
+
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
@@ -1960,38 +2070,7 @@
         "<div><b>" + esc(s.name || s.patientId || "") + "</b><small>" + (s.name && s.mrn ? esc(s.mrn) + " &middot; " : "") + esc(s.ward || "") + (s.bed ? " &middot; bed " + esc(s.bed) : "") + " &middot; admitted " + when(s.admittedAt) + "</small></div>" +
         '<button class="w-btn" data-w-act="consultation" title="Examine, diagnose, prescribe, order and write up - saved together">' + ms("edit_note") + "Consultation</button>" +
         '<button class="w-btn" data-w-act="workspace" title="Everything about this patient on one screen">' + ms("fact_check") + "Workspace</button>" +
-        '<button class="w-btn ghost" data-w-act="medrec" title="What this patient was already taking, and what happens to each medicine">' + ms("medication") + "Medicines on arrival</button>" +
-        '<button class="w-btn ghost" data-w-act="ordersets" title="A hospital-approved group of orders, each checked on its own">' + ms("checklist") + "Order sets</button>" +
-        '<button class="w-btn ghost" data-w-act="pathways" title="Clinical pathways, step progress and enrolments">' + ms("alt_route") + "Pathways</button>" +
-        '<button class="w-btn ghost" data-w-act="specialty" title="Specialty framework, templates and tools for this stay">' + ms("local_hospital") + "Specialty</button>" +
-        '<button class="w-btn ghost" data-w-act="infusions" title="Running drips, estimated volumes, and the care plan">' + ms("monitor_heart") + "Drips</button>" +
-        '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this stay and whether each was met">' + ms("flag") + "Care plan</button>" +
-        '<button class="w-btn ghost" data-w-act="tags" title="Issue a wristband and check the band on the patient">' + ms("how_to_reg") + "Wristband</button>" +
-        '<button class="w-btn ghost" data-w-act="patientsurgery" title="Operations for this patient and where each one stands">' + ms("fact_check") + "Operations</button>" +
-        '<button class="w-btn ghost" data-w-act="wounds" title="Chart a wound and follow it over time">' + ms("healing") + "Wounds</button>" +
-        '<button class="w-btn ghost" data-w-act="risks" title="Falls, pressure and whatever else this hospital assesses">' + ms("fact_check") + "Risk</button>" +
-        '<button class="w-btn ghost" data-w-act="immunizations" title="Vaccines given, or not given and why">' + ms("vaccines") + "Immunizations</button>" +
-        '<button class="w-btn ghost" data-w-act="people" title="Next of kin, guardian, emergency contact, and whether this patient has died">' + ms("person") + "Contacts</button>" +
-        '<button class="w-btn ghost" data-w-act="documents" title="Consent forms, referral letters, outside reports">' + ms("description") + "Documents</button>" +
-        '<button class="w-btn ghost" data-w-act="forms" title="Triage, nursing assessments, checklists this hospital uses">' + ms("assignment") + "Forms</button>" +
-        '<button class="w-btn ghost" data-w-act="referrals" title="Refer this patient to another specialty or facility, and follow the reply">' + ms("send") + "Referrals</button>" +
-        '<button class="w-btn ghost" data-w-act="move" title="Transfer to another ward or bed">' + ms("swap_horiz") + "Transfer</button>" +
-        '<button class="w-btn ghost" data-w-act="timeline" title="The whole clinical history on one page, and where you add a clinical note">' + ms("history") + "Timeline</button>" +
-        '<button class="w-btn ghost" data-w-act="summary" title="Discharge summary">' + ms("description") + "Summary</button>" +
-        '<button class="w-btn ghost" data-w-act="wardcloseopen" title="End this stay and record where the patient went">' + ms("home") + "Discharge</button>" +
-        '<button class="w-btn ghost" data-w-act="followup" title="Ask for this patient to be seen again">' + ms("schedule") + "Follow-up</button>" +
-        '<button class="w-btn ghost" data-w-act="oncologyopen" title="ONCqis link, diagnosis, adverse events, chemo administration">' + ms("labs") + "Oncology</button>" +
-        '<button class="w-btn ghost" data-w-act="cardiologyopen" title="KardiQ X link and ECG reference">' + ms("monitor_heart") + "Cardiology</button>" +
-        '<button class="w-btn ghost" data-w-act="radiologyopen" title="Imaging worklist, protocol and report">' + ms("medical_information") + "Radiology</button>" +
-        '<button class="w-btn ghost" data-w-act="pharmacyopen" title="Verification queue and dispense">' + ms("medication") + "Pharmacy</button>" +
-        '<button class="w-btn ghost" data-w-act="txopen" title="Transfusion request, crossmatch, bedside verification">' + ms("bloodtype") + "Blood bank</button>" +
-        '<button class="w-btn ghost" data-w-act="consentopen" title="What this patient has agreed to and refused">' + ms("fact_check") + "Consent</button>" +
-        '<button class="w-btn ghost" data-w-act="ipsopen" title="The International Patient Summary another hospital would receive for this patient">' + ms("summarize") + "IPS summary</button>" +
-        '<button class="w-btn ghost" data-w-act="completionopen" title="What is still outstanding on this chart">' + ms("checklist") + "Chart check</button>" +
-        '<button class="w-btn ghost" data-w-act="roiopen" title="Third-party requests to release this record">' + ms("outbox") + "ROI</button>" +
-        '<button class="w-btn ghost" data-w-act="tpaopen" title="Claims and pre-authorisations">' + ms("gavel") + "TPA</button>" +
-        '<button class="w-btn ghost" data-w-act="billingopen" title="Charges, invoices and claims - no collection here">' + ms("request_quote") + "Billing</button>" +
-        '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>";
+        chartNavHtml(state) + "</div>";
 
     var edTopCards = isEd ? (vitalsCard() + noteCard(state)) : "";
     var standardVitalsAndNote = isEd ? "" : (noteCard(state) + vitalsCard());
@@ -11372,6 +11451,7 @@
     var dc = document.getElementById("smdDischarge"); if (dc && dc.classList.contains("on")) return;
     var t = e.target;
     if (t && t !== document.body && t !== document.documentElement && t !== document && !r.contains(t)) return;
+    if (chartNavKey(e)) return;
     var gPending = !!_gAt && Date.now() - _gAt < 1500; _gAt = 0;
     var s = keyIntent(e, st.view, gPending);
     if (!s) return;
@@ -11404,6 +11484,8 @@
   function dispatch(a) {
     var i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (cmd === "chartcat") { chartNavShow(arg); return; }
+    chartNavNote(cmd);
     if (cmd === "keys") { showKeys(); return; }
     if (cmd === "keysclose") { hideKeys(); return; }
     if (cmd === "dismiss") { st.err = ""; st.note = ""; st.refusal = null; paint(); return; }
@@ -12156,5 +12238,5 @@
     });
   } catch (e) {}
 
-  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
+  G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut };
 })();

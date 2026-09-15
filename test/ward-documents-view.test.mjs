@@ -92,7 +92,7 @@ test("G5: each document lists its portal releases with id, when, by whom, scope 
 
 test("the chart has a Documents button, and opening a file asks the server for a link rather than building one", () => {
   const src = readFileSync(new URL("../ward.js", import.meta.url), "utf8");
-  assert.match(src, /data-w-act="documents"/);
+  assert.match(src, /act: "documents"[^\n]*label: "Documents"/); // a chart header tab (CHART_CATS)
   assert.match(src, /apiPost\("\/ward\/document-link"/);
   assert.ok(!/document-file\?t=/.test(src), "the screen never constructs a file address itself");
 });

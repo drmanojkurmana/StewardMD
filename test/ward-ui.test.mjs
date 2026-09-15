@@ -299,7 +299,8 @@ test("A DIAGNOSIS IS ENTERED HERE, AND THE SCREEN NEVER DECIDES WHO MAY ENTER ON
    * enforced on /ward/problem and a nurse gets a 403 that says so; that refusal is asserted three
    * times in wardsynq-inpatient-emar.test.mjs, and it, not a hidden button, is the control. */
   assert.match(html, /data-w-act="problem"/);
-  assert.ok(!/\brole\b/.test(W._render(chart)), "the screen has no idea who is looking at it");
+  // An ARIA role="tab" attribute is markup, not a user role.
+  assert.ok(!/\brole\b(?!=")/.test(W._render(chart)), "the screen has no idea who is looking at it");
 
   // Every value the server's own vocabulary accepts, so nobody is forced to overstate their
   // confidence. A list offering only "confirmed" turns every working idea into a diagnosis.
