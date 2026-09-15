@@ -756,6 +756,38 @@ with
   return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, missing: Math.max(0, gold.length - matched), fields, verdict };
 ```
 
+- [ ] **Step 6b: Prove the round trip: what proof saved is what replay sends** (owner, 2026-09-16: "ensure replay works")
+
+Saving the widened request is only half of it. This asserts the SAVED endpoint, run through the real replay path, actually sends the whole-ward form in the doctor's session. Append to `test/connect-agent/prove.test.mjs` (import `executeView`, `PAGE_TOKENS`, `parseFetchExpression` from `../../connect-agent/phone/adapter-runtime.mjs` if not already imported), using the same `view` the widening test proved:
+
+```js
+test('the widened ward list round-trips: what proof saved is what replay sends', async () => {
+  const view = { resourceHint: 'worklist', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'],
+    proof: { status: 'proven', kind: 'json', population: 4 },
+    endpoints: [{ method: 'GET', path: '/Doctor/Home/GetIPWL?Emp_ID&Type=IPWorkList&__RequestVerificationToken', role: 'data',
+      params: { Emp_ID: { empty: true }, Type: { constant: 'IPWorkList' }, __RequestVerificationToken: { token: true } } }] };
+  const sent = [];
+  const plugin = {
+    async currentUrl() { return { url: HOST + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression === PAGE_TOKENS) return { result: '{"__RequestVerificationToken":"tok9"}' };
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '[]' };
+      sent.push(req.url);
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[{"patientId":"MR1"},{"patientId":"MR2"},{"patientId":"MR3"},{"patientId":"MR4"}]' }) };
+    },
+  };
+  const out = await executeView({ plugin, origin: HOST, view, patient: {} });
+  assert.equal(out.rows.length, 4, 'replay returns the whole in-patient population');
+  const url = sent.find((u) => /GetIPWL/.test(u));
+  assert.match(url, /Type=IPWorkList/, 'the mode constant is replayed');
+  assert.match(url, /__RequestVerificationToken=tok9/, 'the live page token is replayed');
+  assert.match(url, /Emp_ID=(&|$)/, 'the doctor filter is replayed EMPTY, so the whole ward comes back');
+});
+```
+
+**What this task cannot prove.** There is no phone, no doctor session and no live GHIS here, so the real in-patient count is NOT verified by this task. It is verified in Task 8 on the owner's iPhone, where the gold audit compares the adapter's ward against the hand-built adapter's ward patient by patient and a `subset` verdict fails. Never report Task 2c as having verified real hospital data.
+
 - [ ] **Step 7: Run the tests**
 
 Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/gold-audit.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/live-ghis-regressions.test.mjs`
