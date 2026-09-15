@@ -228,7 +228,7 @@ test('deepCrawlClinical: (B) dead shell (tiny text, no data table, no password i
   assert.deepEqual(observedViews, []);
   assert.deepEqual(trail, []);
   assert.equal(clicks, 0);
-  assert.equal(states, 2); // confirmed once after a wait: a slow worklist may still be loading its rows
+  assert.equal(states, 4); // confirmed after three waits: a slow worklist may need a token round trip first
 });
 
 test('deepCrawlClinical: (B) slow worklist: shell-like on first look, rows arrive by the recheck -> crawl proceeds', async () => {

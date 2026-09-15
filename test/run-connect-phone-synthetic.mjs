@@ -137,8 +137,8 @@ async function main() {
 
   try {
     let ver, t = 0;
-    while (t++ < 60) {
-      try { ver = await (await fetch(`http://localhost:${DBG}/json/version`)).json(); break; }
+    while (t++ < 150) {
+      try { ver = await (await fetch(`http://127.0.0.1:${DBG}/json/version`)).json(); break; }
       catch { await sleep(200); }
     }
     ws = new WebSocket(ver.webSocketDebuggerUrl);

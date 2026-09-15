@@ -33,6 +33,7 @@
 const CAPS_DEFAULT = { maxViews: 40, maxClicks: 60, maxMs: 240000, waitMs: 1500 };
 // A page with no <th>+row data table and less text than this is a dead shell, not a worklist.
 const SHELL_TEXT_MAX = 600;
+const SHELL_RECHECKS = 3;
 
 // ponytail: flat keyword list, no NLP/fuzzy matching — good enough for the GHIS-style nav labels this
 // targets; widen the list (or move to a config) if a hospital's labels don't match.
@@ -694,6 +695,19 @@ function CRAWL_PAGE_STATE() {
   var lists = 0;
   var conts = document.querySelectorAll('ul, ol, [role="list"], [role="grid"], [role="table"]');
   for (var k = 0; k < conts.length && lists < 3; k++) if (conts[k].children && conts[k].children.length >= 3) lists++;
+  /* THE STRONGEST SIGNAL THAT A SCREEN IS ALIVE IS ITS OWN DATA CALL. Some worklists are a single
+   * empty div and a fetch; they have no table, no list and not one link, and no amount of looking at
+   * the DOM will say they are anything but dead. The replay buffer knows: a JSON answer carrying rows
+   * came back for this page. An expired shell's calls come back 401 or empty. */
+  var dataRows = 0;
+  try {
+    var R = window.__SMD_REPLAY__;
+    var list = (R && R.list) || [];
+    for (var n = list.length - 1; n >= 0 && n >= list.length - 40; n--) {
+      var sh = list[n] && list[n].shape;
+      if (sh && sh.kind === 'json' && sh.rows > 0) { dataRows += sh.rows; if (dataRows > 0) break; }
+    }
+  } catch (e) { /* no buffer on this page: fall back to the DOM signals */ }
   return JSON.stringify({
     textLen: ((document.body && document.body.innerText) || '').length,
     hasPasswordInput: !!document.querySelector('input[type=password]'),
@@ -701,6 +715,7 @@ function CRAWL_PAGE_STATE() {
     anyVisible: anyVisible,
     controls: controls,
     lists: lists,
+    dataRows: dataRows,
   });
 }
 
@@ -1070,15 +1085,19 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
    * abandoned (older builds answered "the browser was not on the EMR after sign-in" for those).
    * `controls`/`lists` are absent from an older page build's answer; treat that as the old rule. */
   const isShell = (s) => !!s && s.dataTableCount === 0 && s.textLen < SHELL_TEXT_MAX
-    && !(s.controls > 0) && !(s.lists > 0);
+    && !(s.controls > 0) && !(s.lists > 0) && !(s.dataRows > 0);
   let state = await pageState();
   if (state && state.hasPasswordInput) return { observedViews, trail, stopReason: 'login-required', found: [] };
-  if (isShell(state)) {
+  /* GIVE A SLOW SCREEN TIME TO BECOME ITSELF. One recheck was not enough: a worklist that fetches a
+   * token and only then its data needs two round trips before anything exists to see, and calling it
+   * a dead shell in the meantime abandoned the whole hospital. Rechecked up to three times, leaving
+   * early the moment it stops looking empty; a page still empty after all of them really is empty. */
+  for (let look = 0; look < SHELL_RECHECKS && isShell(state); look += 1) {
     await client.wait({ ms: waitMs });
     state = await pageState();
     if (state && state.hasPasswordInput) return { observedViews, trail, stopReason: 'login-required', found: [] };
-    if (isShell(state)) return { observedViews, trail, stopReason: 'session-expired-or-shell', found: [] };
   }
+  if (isShell(state)) return { observedViews, trail, stopReason: 'session-expired-or-shell', found: [] };
 
   // 1. worklist (the client is already attached to it). No observer armed: global best table.
   progress('worklist', 0);
