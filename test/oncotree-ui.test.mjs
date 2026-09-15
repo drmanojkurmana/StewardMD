@@ -207,3 +207,40 @@ test("handoff with the dose flow ON opens the flow with the selected protocol", 
   assert.ok(Array.isArray(flowProtos) && flowProtos[0] && flowProtos[0].id === "breast-tdm1", "passes the selected protocol");
   delete global.SMD_ONCOFLOW; delete global.SMD_ONCOHOME;
 });
+
+test("NCCN NAVIGATOR: horizontal multi-column flowchart canvas renders with sidebar and toolbar", () => {
+  reset({});
+  UI._st.view = "navigator";
+  const html = UI._bodyHtml();
+  assert.ok(/ot-nav-wrap/.test(html), "renders navigator wrap");
+  assert.ok(/ot-nav-sidebar/.test(html), "renders Table of Contents sidebar");
+  assert.ok(/ot-nav-toolbar/.test(html), "renders toolbar");
+  assert.ok(/Non-active paths/.test(html), "renders non-active paths toggle");
+  assert.ok(/ot-nav-canvas/.test(html), "renders flowchart canvas");
+  assert.ok(/ot-nav-cols/.test(html), "renders multi-column container");
+  assert.ok(/ot-nav-svg/.test(html), "renders SVG curve connector layer");
+  assert.ok(html.indexOf("Table of Contents") >= 0, "sidebar contains Table of Contents");
+  noPlaceholders(html);
+});
+
+test("NCCN NAVIGATOR: selecting a branch draws active connector curves and advances column", () => {
+  reset({ n_histology: ["ibc"] });
+  UI._st.view = "navigator";
+  const html = UI._bodyHtml();
+  assert.ok(/ot-nav-edge active/.test(html), "draws active Bezier curve to target card");
+  assert.ok(/Inflammatory Breast Cancer/.test(html), "Column 1 renders the Inflammatory Breast Cancer card");
+  assert.ok(/ot-nav-tx-badge/.test(html), "shows Tx badge on regimen card");
+  noPlaceholders(html);
+});
+
+test("NCCN NAVIGATOR: terminal node triggers End of Algorithm modal dialog", () => {
+  reset(HER2_PATH.answers);
+  UI._st.view = "navigator";
+  UI._st.navEndModalOpen = true;
+  const html = UI._bodyHtml();
+  assert.ok(/End of algorithm reached/.test(html), "End of algorithm reached modal rendered");
+  assert.ok(/Select.*Clear.*to delete your answers/i.test(html), "dialog explains Clear vs Cancel");
+  assert.ok(/View Regimens/.test(html), "action to view regimens is present");
+  noPlaceholders(html);
+});
+

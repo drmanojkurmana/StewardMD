@@ -54,9 +54,10 @@
 
   var st = {
     guideline: null, graph: null, protocols: {}, answers: {}, rebaseId: null,
-    view: "pathway", openedProtocol: null, selection: null, whyOpen: {}, showExcluded: false,
+    view: "navigator", openedProtocol: null, selection: null, whyOpen: {}, showExcluded: false,
     loaded: false, loading: false, error: null, ctx: null,
-    trail: [], tocQuery: "", summaryOpen: false, _pendingRebase: null
+    trail: [], tocQuery: "", summaryOpen: false, _pendingRebase: null,
+    showNonActive: true, navEndModalOpen: false, sidebarOpen: true, navZoom: 1
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -515,6 +516,404 @@
     lines.push("Decision support only - DRAFT. The physician decides; the dose engine computes doses.");
     return lines.join("\n");
   }
+  // ---- NCCN GUIDELINES NAVIGATOR (interactive horizontal multi-column flowchart) --------------
+  var SECTIONS_BREAST = [
+    { title: "Table of Contents", sec: "Diagnosis", desc: "Initial Presentation & Histopathology", opt: null },
+    { title: "Ductal Carcinoma In Situ (DCIS)", sec: "DCIS", desc: "Workup, Surgical Margins & Endocrine Risk-Reduction", opt: "dcis" },
+    { title: "Invasive Breast Cancer: Workup & Staging", sec: "Workup", desc: "Clinical Staging, Multidisciplinary Workup & Genetic Testing", opt: "invasive" },
+    { title: "Locoregional Therapy (BCS vs Mastectomy)", sec: "Locoregional", desc: "Breast-Conserving Surgery ± RT vs Total Mastectomy ± PMRT", opt: "invasive" },
+    { title: "Preoperative Systemic Therapy (Neoadjuvant)", sec: "Preoperative", desc: "Anthracycline/Taxane, Dual HER2 Blockade, Keynote-522", opt: "invasive" },
+    { title: "Post-Neoadjuvant Residual Triage", sec: "Adjuvant Post-pCR", desc: "pCR De-escalation vs Residual Non-pCR Escalation (T-DM1 / Olaparib)", opt: "invasive" },
+    { title: "Adjuvant Systemic Therapy (Upfront Surgery)", sec: "Adjuvant Upfront", desc: "Subtype-Adapted: HR+/HER2-, HER2+, TNBC, Favorable", opt: "invasive" },
+    { title: "Adjuvant Endocrine Therapy & CDK4/6", sec: "Endocrine Therapy", desc: "Postmenopausal vs Premenopausal + OFS; monarchE / NATALEE", opt: "invasive" },
+    { title: "Recurrent & Stage IV (Metastatic) Disease", sec: "Metastatic", desc: "1L CDK4/6 + AI, 4-Tier HER2 Spectrum, Post-CDK4/6 Biomarkers", opt: "recurrent" },
+    { title: "Special Presentations (IBC, Phyllodes, Paget)", sec: "Special Presentations", desc: "Inflammatory Breast Cancer, Phyllodes, Paget, Pregnancy", opt: "ibc" },
+    { title: "Post-Therapy Surveillance & Survivorship", sec: "Surveillance", desc: "Mammography, DEXA Monitoring, Bone-Modifying Therapy", opt: "invasive" }
+  ];
+
+  function buildNavFlowchart(state) {
+    var startId = (st.graph.startNodeIds && st.graph.startNodeIds[0]) || (st.graph.nodes[0] && st.graph.nodes[0].id);
+    if (!startId) return { columns: [], edges: [], colOf: {}, cardPos: {} };
+
+    var links = st.graph.links || [];
+    var linksFrom = {};
+    links.forEach(function (l) {
+      linksFrom[l.from] = linksFrom[l.from] || [];
+      linksFrom[l.from].push(l);
+    });
+
+    var columns = [];
+    var colOf = {};
+    var visited = {};
+    var edges = [];
+
+    columns.push([startId]);
+    colOf[startId] = 0;
+    visited[startId] = true;
+
+    var curColIdx = 0;
+    while (curColIdx < columns.length) {
+      var curCol = columns[curColIdx];
+      var activeNodeId = curCol.find(function (id) {
+        return state.nodes[id] && state.nodes[id].status === "active";
+      });
+      if (!activeNodeId) break;
+
+      var node = st.byId[activeNodeId];
+      if (!node) break;
+
+      var outLinks = linksFrom[activeNodeId] || [];
+      if (!outLinks.length) break;
+
+      var selOpts = st.answers[activeNodeId] || [];
+      var nextActiveTarget = null;
+      var nextOtherTargets = [];
+
+      outLinks.forEach(function (l) {
+        var fromOpts = l.fromOptions || [];
+        var isSel = selOpts.length && fromOpts.some(function (o) { return selOpts.indexOf(o) >= 0; });
+        var isDirect = !fromOpts.length || fromOpts.indexOf("continue") >= 0;
+
+        if (isSel || (isDirect && (node.nodeType !== "question" || selOpts.length))) {
+          nextActiveTarget = l.to;
+          edges.push({ from: activeNodeId, to: l.to, fromOpt: selOpts[0] || fromOpts[0], active: true });
+        } else if (st.showNonActive) {
+          if (nextOtherTargets.indexOf(l.to) < 0 && l.to !== nextActiveTarget) {
+            nextOtherTargets.push(l.to);
+          }
+          edges.push({ from: activeNodeId, to: l.to, fromOpt: fromOpts[0], active: false });
+        }
+      });
+
+      var nextColNodes = [];
+      if (nextActiveTarget) nextColNodes.push(nextActiveTarget);
+      if (st.showNonActive) {
+        nextOtherTargets.forEach(function (id) {
+          if (nextColNodes.indexOf(id) < 0 && !visited[id]) nextColNodes.push(id);
+        });
+      }
+
+      if (nextColNodes.length) {
+        nextColNodes.forEach(function (id) {
+          colOf[id] = curColIdx + 1;
+          visited[id] = true;
+        });
+        columns.push(nextColNodes);
+      } else {
+        break;
+      }
+
+      curColIdx++;
+      if (curColIdx > 15) break;
+    }
+
+    var CW = 360, CGAP = 75, VGAP = 24;
+    var cardPos = {};
+    var maxW = Math.max(columns.length * (CW + CGAP), CW + 100);
+    var maxH = 800;
+
+    columns.forEach(function (col, cIdx) {
+      var curY = 30;
+      var curX = 30 + cIdx * (CW + CGAP);
+      col.forEach(function (nodeId) {
+        var raw = st.byId[nodeId] || {};
+        var optCount = (raw.options || []).length;
+        var bulletCount = (raw.bullets || []).length;
+        var estH = 140 + optCount * 42 + (bulletCount ? Math.min(bulletCount * 22, 160) : 0);
+        cardPos[nodeId] = { x: curX, y: curY, w: CW, h: estH, optCount: optCount };
+        curY += estH + VGAP;
+      });
+      if (curY > maxH) maxH = curY;
+    });
+
+    var svgEdges = edges.map(function (e) {
+      var pFrom = cardPos[e.from], pTo = cardPos[e.to];
+      if (!pFrom || !pTo) return null;
+      var rawFrom = st.byId[e.from] || {};
+      var optIdx = 0;
+      if (e.fromOpt && rawFrom.options) {
+        var foundIdx = rawFrom.options.findIndex(function (o) { return o.id === e.fromOpt; });
+        if (foundIdx >= 0) optIdx = foundIdx;
+      }
+      var x1 = pFrom.x + pFrom.w;
+      var y1 = pFrom.y + 70 + optIdx * 42 + 20;
+      var x2 = pTo.x;
+      var y2 = pTo.y + 36;
+      var mx = (x1 + x2) / 2;
+      var d = "M " + x1 + " " + y1 + " C " + mx + " " + y1 + ", " + mx + " " + y2 + ", " + x2 + " " + y2;
+      return { d: d, active: e.active, from: e.from, to: e.to };
+    }).filter(Boolean);
+
+    return { columns: columns, edges: svgEdges, cardPos: cardPos, width: maxW + 120, height: maxH + 100, colOf: colOf };
+  }
+
+  function navNodeCardHtml(nodeId, state, isActive) {
+    var raw = st.byId[nodeId];
+    if (!raw) return "";
+    var ns = state.nodes[nodeId] || { status: isActive ? "active" : "disabled", options: [] };
+    var cat = CAT[raw.nodeCategory] || CAT.other;
+    var selOpts = st.answers[nodeId] || [];
+    var isOutcome = raw.nodeType === "end" || raw.showsRecommendation;
+    var code = raw.linkId || (raw.id.replace(/^n_/, "").toUpperCase());
+    var title = raw.name || raw.title || nodeId;
+    var desc = raw.description || "";
+
+    var optsHtml = (raw.options || []).map(function (o) {
+      var isSelected = selOpts.indexOf(o.id) >= 0;
+      return '<div class="ot-nav-opt' + (isSelected ? " selected" : "") + '" data-ot-act="answer" data-ot-node="' + esc(nodeId) + '" data-ot-opt="' + esc(o.id) + '">' +
+        '<span class="ot-nav-radio' + (isSelected ? " checked" : "") + '"><span class="ot-nav-radio-dot"></span></span>' +
+        '<span class="ot-nav-opt-lbl">' + esc(o.label) + '</span>' +
+        '</div>';
+    }).join("");
+
+    var workupHtml = "";
+    if (raw.bullets && raw.bullets.length && (raw.nodeCategory === "workup" || raw.nodeCategory === "criteria" || !raw.options || !raw.options.length)) {
+      workupHtml = '<div class="ot-nav-workup-list">' +
+        raw.bullets.slice(0, 10).map(function (b) {
+          var txt = (b && typeof b === "object") ? ((b.label || "") + ": " + (b.sub || "")) : String(b);
+          return '<div class="ot-nav-check-item">' +
+            '<span class="material-symbols-outlined ot-nav-check-ic">check_box</span>' +
+            '<span class="ot-nav-check-txt">' + esc(txt) + '</span>' +
+            '</div>';
+        }).join("") +
+        '</div>';
+    }
+
+    var linksHtml = "";
+    var refs = asArr(raw.protocolRefs);
+    if (refs.length) {
+      var p0 = st.protocols[refs[0]];
+      var protoName = (p0 && p0.name) || refs[0];
+      linksHtml = '<div class="ot-nav-links-wrap">' +
+        '<button class="ot-nav-links-btn" data-ot-act="view-proto" data-ot-proto="' + esc(refs[0]) + '">' +
+          '<span class="ot-nav-tx-badge">Tx</span>' +
+          '<span class="ot-nav-links-pill">' + ms("link") + ' Links (' + refs.length + ')</span>' +
+          '<span class="ot-nav-links-label">' + esc(shortLabel(protoName)) + '</span>' +
+        '</button>' +
+        '</div>';
+    }
+
+    return '<div class="ot-nav-card' + (isActive ? " active" : " non-active") + (isOutcome ? " outcome" : "") + '" id="otNavCard_' + esc(nodeId) + '" style="--ot-nav-c:' + cat.color + '">' +
+      '<div class="ot-nav-card-hd">' +
+        '<div class="ot-nav-card-cat">' + ms(cat.icon) + '<span>' + esc(cat.name) + '</span></div>' +
+        '<div class="ot-nav-card-code">' + esc(code) + '</div>' +
+      '</div>' +
+      '<div class="ot-nav-card-title ot-step-title">' + esc(title) + '</div>' +
+      (desc ? '<div class="ot-nav-card-desc">' + esc(desc) + '</div>' : "") +
+      workupHtml +
+      (optsHtml ? '<div class="ot-nav-opts">' + optsHtml + '</div>' : "") +
+      linksHtml +
+      '</div>';
+  }
+
+  function navSidebarHtml(state) {
+    var secs = (st.guideline === "breast" || !st.guideline) ? SECTIONS_BREAST : [];
+    if (!secs.length) {
+      var seenSec = {};
+      (st.graph.nodes || []).forEach(function (n) {
+        if (n.section && !seenSec[n.section]) {
+          seenSec[n.section] = true;
+          secs.push({ title: n.section, sec: n.section, opt: null, desc: "" });
+        }
+      });
+    }
+
+    var q = (st.tocQuery || "").trim().toLowerCase();
+    var filtered = secs.filter(function (s) {
+      if (!q) return true;
+      return s.title.toLowerCase().indexOf(q) >= 0 || (s.desc && s.desc.toLowerCase().indexOf(q) >= 0);
+    });
+
+    var itemsHtml = filtered.map(function (s) {
+      return '<button class="ot-nav-sb-item" data-ot-act="nav-jump-section" data-ot-sec="' + esc(s.sec) + '" data-ot-opt="' + esc(s.opt || "") + '">' +
+        '<div class="ot-nav-sb-item-t">' + esc(s.title) + '</div>' +
+        (s.desc ? '<div class="ot-nav-sb-item-d">' + esc(s.desc) + '</div>' : "") +
+        '</button>';
+    }).join("");
+
+    return '<aside class="ot-nav-sidebar' + (st.sidebarOpen === false ? " collapsed" : "") + '" id="otNavSidebar">' +
+      '<div class="ot-nav-sb-hd">' +
+        '<div class="ot-nav-sb-title">' + ms("menu_book") + '<span>Table of Contents</span></div>' +
+        '<button class="ot-nav-sb-toggle" data-ot-act="nav-sidebar-toggle" aria-label="Toggle Sidebar">' + ms("first_page") + '</button>' +
+      '</div>' +
+      '<div class="ot-nav-sb-search">' + ms("search") +
+        '<input type="text" placeholder="Search guidelines..." data-ot-input="toc-search" value="' + esc(st.tocQuery || "") + '">' +
+      '</div>' +
+      '<div class="ot-nav-sb-list">' + (itemsHtml || '<div class="ot-toc-empty">No matches found</div>') + '</div>' +
+      '</aside>';
+  }
+
+  function navToolbarHtml(state) {
+    var cur = currentQuestion(state);
+    var curName = cur ? (cur.name || cur.title || "") : "Recommendations";
+    var title = (st.graph && st.graph.title) || "Breast Cancer";
+    var version = "Version 6.2026 — July 29, 2026";
+
+    return '<div class="ot-nav-toolbar">' +
+      '<div class="ot-nav-tb-left">' +
+        (st.sidebarOpen === false ? '<button class="ot-nav-tb-btn" data-ot-act="nav-sidebar-toggle" aria-label="Open Table of Contents">' + ms("menu") + '</button>' : "") +
+        '<div class="ot-nav-brand">' +
+          '<span class="ot-nav-brand-t">' + esc(title) + '</span>' +
+          '<span class="ot-nav-brand-v">' + esc(version) + '</span>' +
+        '</div>' +
+        '<div class="ot-nav-crumb-sep">/</div>' +
+        '<div class="ot-nav-cur-node">' + esc(curName) + '</div>' +
+      '</div>' +
+      '<div class="ot-nav-tb-right">' +
+        '<label class="ot-nav-toggle-wrap" title="Toggle display of non-active decision branches">' +
+          '<span class="ot-nav-toggle-lbl">Non-active paths</span>' +
+          '<span class="ot-nav-switch' + (st.showNonActive ? " checked" : "") + '">' +
+            '<input type="checkbox" data-ot-act="nav-toggle-nonactive"' + (st.showNonActive ? " checked" : "") + '>' +
+            '<span class="ot-nav-slider"></span>' +
+          '</span>' +
+        '</label>' +
+        '<div class="ot-nav-zoom-group">' +
+          '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-out" title="Zoom Out">−</button>' +
+          '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-fit" title="Fit to 100%">Fit</button>' +
+          '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-in" title="Zoom In">+</button>' +
+        '</div>' +
+        '<button class="ot-nav-clear-btn" data-ot-act="reset" title="Clear all answers and restart">' +
+          ms("restart_alt") + '<span>Clear</span>' +
+        '</button>' +
+      '</div>' +
+      '</div>';
+  }
+
+  function navEndModalHtml(state) {
+    if (!st.navEndModalOpen) return "";
+    return '<div class="ot-nav-modal-backdrop" data-ot-act="nav-modal-close">' +
+      '<div class="ot-nav-modal" data-ot-act="footnote-stop">' +
+        '<div class="ot-nav-modal-hd">' +
+          '<div class="ot-nav-modal-title">End of algorithm reached</div>' +
+          '<button class="ot-nav-modal-x" data-ot-act="nav-modal-close" aria-label="Close">' + ms("close") + '</button>' +
+        '</div>' +
+        '<div class="ot-nav-modal-body">' +
+          '<p>You have reached the end of the algorithm in these Guidelines.</p>' +
+          '<p>Select <b>Clear</b> to delete your answers and refresh the Guidelines or <b>Cancel</b> to return to where you were.</p>' +
+        '</div>' +
+        '<div class="ot-nav-modal-acts">' +
+          '<button class="ot-btn ghost" data-ot-act="nav-modal-close">Cancel</button>' +
+          '<button class="ot-btn primary" data-ot-act="reset">Clear</button>' +
+          '<button class="ot-btn accent" data-ot-act="nav-view-protocols">' + ms("medication") + ' View Regimens</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function navigatorHtml(state) {
+    var flow = buildNavFlowchart(state);
+    var colsHtml = flow.columns.map(function (colNodes, colIdx) {
+      var hasActive = colNodes.some(function (id) { return state.nodes[id] && state.nodes[id].status === "active"; });
+      var cardsHtml = colNodes.map(function (nodeId) {
+        var isActive = state.nodes[nodeId] && state.nodes[nodeId].status === "active";
+        return navNodeCardHtml(nodeId, state, isActive);
+      }).join("");
+      return '<div class="ot-nav-col' + (hasActive ? " has-active" : "") + '" id="otNavCol_' + colIdx + '">' + cardsHtml + '</div>';
+    }).join("");
+
+    var svgPaths = flow.edges.map(function (e) {
+      return '<path class="ot-nav-edge' + (e.active ? " active" : " non-active") + '" d="' + e.d + '"/>';
+    }).join("");
+
+    var svgHtml = '<svg class="ot-nav-svg" width="' + flow.width + '" height="' + flow.height + '" viewBox="0 0 ' + flow.width + ' ' + flow.height + '">' + svgPaths + '</svg>';
+
+    var zoom = st.navZoom || 1;
+    var canvasStyle = 'width:' + flow.width + 'px;height:' + flow.height + 'px;transform:scale(' + zoom + ');';
+
+    return '<div class="ot-nav-wrap">' +
+      navSidebarHtml(state) +
+      '<div class="ot-nav-main">' +
+        navToolbarHtml(state) +
+        '<div class="ot-nav-vp" id="otNavVp">' +
+          '<div class="ot-nav-canvas" id="otNavCanvas" style="' + canvasStyle + '">' +
+            svgHtml +
+            '<div class="ot-nav-cols">' + colsHtml + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      navEndModalHtml(state) +
+      '</div>';
+  }
+
+  function navJumpSection(sec, opt) {
+    if (sec === "Diagnosis" || sec === "Table of Contents") {
+      st.answers = {};
+    } else if (sec === "DCIS") {
+      st.answers = { n_histology: ["dcis"] };
+    } else if (sec === "Special Presentations") {
+      st.answers = { n_histology: ["ibc"] };
+    } else if (sec === "Preoperative") {
+      st.answers = { n_histology: ["invasive"], n_inv_wk: ["continue"], n_inv_approach: ["preop"] };
+    } else if (sec === "Adjuvant Post-pCR") {
+      st.answers = { n_histology: ["invasive"], n_inv_wk: ["continue"], n_inv_approach: ["preop"], n_tx_preop: ["pcr"] };
+    } else if (sec === "Adjuvant Upfront") {
+      st.answers = { n_histology: ["invasive"], n_inv_wk: ["continue"], n_inv_approach: ["upfront"] };
+    } else if (sec === "Locoregional") {
+      st.answers = { n_histology: ["invasive"], n_inv_wk: ["continue"], n_inv_approach: ["upfront"] };
+    } else if (sec === "Endocrine Therapy") {
+      st.answers = { n_histology: ["invasive"], n_inv_wk: ["continue"], n_inv_approach: ["upfront"], n_locoregional: ["bcs"] };
+    } else if (sec === "Metastatic") {
+      st.answers = { n_histology: ["recurrent"] };
+    } else if (opt) {
+      st.answers = { n_histology: [opt] };
+    }
+    pruneDownstream();
+    st.navEndModalOpen = false;
+    repaintBody();
+    navAutoScroll();
+  }
+
+  function navZoom(dir) {
+    var canvas = D && D.getElementById("otNavCanvas");
+    if (!canvas) return;
+    if (dir === "fit") st.navZoom = 1.0;
+    else if (dir === "in") st.navZoom = Math.min(2.0, (st.navZoom || 1) * 1.2);
+    else if (dir === "out") st.navZoom = Math.max(0.4, (st.navZoom || 1) / 1.2);
+    canvas.style.transform = "scale(" + st.navZoom + ")";
+    canvas.style.transformOrigin = "0 0";
+  }
+
+  function navAutoScroll() {
+    if (typeof setTimeout === "undefined") return;
+    setTimeout(function () {
+      var vp = D && D.getElementById("otNavVp");
+      if (!vp) return;
+      var activeCols = vp.querySelectorAll(".ot-nav-col.has-active");
+      if (activeCols.length) {
+        var lastActiveCol = activeCols[activeCols.length - 1];
+        var left = lastActiveCol.offsetLeft - 120;
+        vp.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+      }
+    }, 60);
+  }
+
+  function setupNavigatorCanvas() {
+    if (st.view !== "navigator") return;
+    var vp = D && D.getElementById("otNavVp");
+    if (!vp || vp._navWired) return;
+    vp._navWired = true;
+
+    var isDown = false, startX = 0, startY = 0, scrollLeft = 0, scrollTop = 0;
+    vp.addEventListener("mousedown", function (e) {
+      if (e.target && (e.target.closest(".ot-nav-card") || e.target.closest("button") || e.target.closest("input"))) return;
+      isDown = true;
+      startX = e.pageX - vp.offsetLeft;
+      startY = e.pageY - vp.offsetTop;
+      scrollLeft = vp.scrollLeft;
+      scrollTop = vp.scrollTop;
+    });
+    vp.addEventListener("mouseleave", function () { isDown = false; });
+    vp.addEventListener("mouseup", function () { isDown = false; });
+    vp.addEventListener("mousemove", function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var x = e.pageX - vp.offsetLeft;
+      var y = e.pageY - vp.offsetTop;
+      vp.scrollLeft = scrollLeft - (x - startX);
+      vp.scrollTop = scrollTop - (y - startY);
+    });
+  }
+
   function summarySheetHtml() {
     if (!st.summaryOpen) return "";
     var state = evalState(); if (!state) return "";
@@ -535,6 +934,7 @@
     if (st.openedProtocol) return protocolDetailHtml(st.openedProtocol);
     if (st.selection) return selectionHtml();
     if (st.view === "map") return mapHtml(state) + footnoteSheetHtml() + summarySheetHtml();
+    if (st.view === "navigator") return navigatorHtml(state) + footnoteSheetHtml() + summarySheetHtml();
 
     var cur = currentQuestion(state);
     var mid = "";
@@ -552,8 +952,9 @@
     var hasGraph = !!st.graph;
     var title = hasGraph ? (st.graph.title || "ONCOTREE") : "Oncology navigator";
     var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
-      '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("account_tree") + "Pathway</button>" +
-      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Map</button>" +
+      '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" data-ot-act="view-navigator">' + ms("account_tree") + "Navigator</button>" +
+      '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("format_list_bulleted") + "Step Flow</button>" +
+      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Overview</button>" +
       '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
     var kicker = hasGraph
       ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
@@ -569,7 +970,7 @@
       "</header>" +
       viewToggle +
       crumbsHtml() +
-      '<div class="ot-scroll" id="otBody">' + bodyHtml() + "</div>" +
+      '<div class="ot-scroll' + (st.view === "navigator" ? " ot-scroll-nav" : "") + '" id="otBody">' + bodyHtml() + "</div>" +
       '<div class="ot-disclaimer">Decision support. DRAFT navigator + protocols. Not an approved clinical order; the physician decides and the existing dose engine computes doses.</div>' +
       "</div>";
   }
@@ -609,10 +1010,11 @@
     el.innerHTML = shellHtml();
     motionRender();
     setupGraph();
+    setupNavigatorCanvas();
   }
   function repaintBody() {
     var b = D && D.getElementById("otBody");
-    if (b) { b.innerHTML = bodyHtml(); motionRender(); setupGraph(); } else paint();
+    if (b) { b.innerHTML = bodyHtml(); motionRender(); setupGraph(); setupNavigatorCanvas(); } else paint();
   }
 
   // ---- interactive MAP: pan / zoom / fit (transform kept in st.graphT so it survives repaints) ------
@@ -690,11 +1092,20 @@
     var node = t.getAttribute("data-ot-node"), opt = t.getAttribute("data-ot-opt"), proto = t.getAttribute("data-ot-proto");
     if (act === "close") return close();
     if (act === "pick") { loadGuideline(t.getAttribute("data-ot-guideline")); return; }
-    if (act === "change-disease") { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "pathway"; paint(); return; }
+    if (act === "change-disease") { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "navigator"; paint(); return; }
     if (act === "retry") { st.error = null; if (st.guideline) loadGuideline(st.guideline); else paint(); return; }
-    if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "pathway"; repaintBody(); return; }
+    if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.navEndModalOpen = false; repaintBody(); if (st.view === "navigator") navAutoScroll(); return; }
+    if (act === "view-navigator") { st.view = "navigator"; paint(); return; }
     if (act === "view-pathway") { st.view = "pathway"; paint(); return; }
     if (act === "view-map") { st.view = "map"; paint(); return; }
+    if (act === "nav-sidebar-toggle") { st.sidebarOpen = !(st.sidebarOpen !== false); repaintBody(); return; }
+    if (act === "nav-toggle-nonactive") { st.showNonActive = !st.showNonActive; repaintBody(); return; }
+    if (act === "nav-zoom-in") { navZoom("in"); return; }
+    if (act === "nav-zoom-out") { navZoom("out"); return; }
+    if (act === "nav-zoom-fit") { navZoom("fit"); return; }
+    if (act === "nav-modal-close") { st.navEndModalOpen = false; repaintBody(); return; }
+    if (act === "nav-view-protocols") { st.navEndModalOpen = false; st.view = "pathway"; repaintBody(); return; }
+    if (act === "nav-jump-section") { navJumpSection(t.getAttribute("data-ot-sec"), t.getAttribute("data-ot-opt")); return; }
     if (act === "graph-zoom") { graphZoom(t.getAttribute("data-ot-arg")); return; }
     if (act === "graph-fit") { graphFit(); return; }
     if (act === "toc-toggle") { st.tocOpen = !(st.tocOpen !== false); repaintBody(); return; }
@@ -730,7 +1141,16 @@
     st.answers[nodeId] = [optId];
     pruneDownstream();
     st.openedProtocol = null; st.selection = null;
+    var state = evalState();
+    if (state) {
+      var cur = currentQuestion(state);
+      var outs = reachedOutcomes(state);
+      if (!cur && outs && outs.length) {
+        st.navEndModalOpen = true;
+      }
+    }
     repaintBody();
+    if (st.view === "navigator") navAutoScroll();
   }
   function editStep(nodeId) {
     // Jump back to a step: drop this answer + everything downstream, so the doctor re-answers forward.
@@ -894,6 +1314,7 @@
     if (!flagOn()) { try { G.toast && G.toast("ONCOTREE is off"); } catch (e) {} return; }
     if (!D) return;
     st.ctx = ctx || null;
+    st.view = "navigator";
     var el = D.getElementById("smdOncoTree");
     if (!el) {
       el = D.createElement("div"); el.id = "smdOncoTree"; el.className = "ot-overlay";
