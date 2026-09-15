@@ -171,6 +171,23 @@ test("BUG-MU06DWAT-VZ9C: note templates that failed to load say so instead of th
   assert.match(html, /note templates could not be loaded/);
 });
 
+// ---- BUG-MU08MEQI-JZH1: one vitals set is one timeline row, and nothing else is filed under it -----------
+test("BUG-MU08MEQI-JZH1: vitals charted together are one row; a laboratory value at the same minute is not a vital", () => {
+  const { W } = loadWard();
+  const at = "2026-09-13T08:00:00.000Z";
+  const events = [
+    { id: "o1", at, resourceType: "Observation", category: "observation", label: "Heart rate: 88 /min" },
+    { id: "o2", at, resourceType: "Observation", category: "observation", label: "Respiratory rate: 18 /min" },
+    { id: "o3", at, resourceType: "Observation", category: "observation", label: "Thrombocytes: 90 10*3/uL" },
+    { id: "o4", at, resourceType: "Observation", category: "observation", label: "Chloride: 99 mmol/L" },
+  ];
+  const html = W._render({ ...W._st, view: "chart", sel: { class: "IPD", patientId: "p1", encounterId: "e1" }, timeline: events });
+  assert.match(html, /Vital signs set: Heart rate: 88 \/min · Respiratory rate: 18 \/min/);
+  assert.ok(!/Vital signs set:[^<]*Thrombocytes/.test(html), "a platelet count was filed as a vital sign");
+  assert.ok(!/Vital signs set:[^<]*Chloride/.test(html));
+  assert.match(html, /Thrombocytes: 90/);
+});
+
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
 const LAB_BOARD = {
   specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},

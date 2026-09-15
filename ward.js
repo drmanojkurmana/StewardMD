@@ -1359,7 +1359,11 @@
     dictSay("Voice typing language: " + (next === "hi-IN" ? "Hindi" : "English") + ".");
   }
 
-  /* Group concurrent observations (vitals) within 2 minutes into a single row (BUG-MU08MEQI-JZH1) */
+  /* Group concurrent observations (vitals) within 2 minutes into a single row (BUG-MU08MEQI-JZH1).
+   * A vital is one of the names the server gives the ward's own vital-sign codes (migrate-vitals.js
+   * VITAL_CODES), matched from the start of the label. The old substring test (hr, rr, bp, temp) caught
+   * laboratory values such as "Thrombocytes" and filed them under "Vital signs set". */
+  var VITAL_LABEL = /^(Systolic blood pressure|Diastolic blood pressure|Heart rate|Body temperature|Oxygen saturation|Respiratory rate|Body weight|Supplemental oxygen|ACVPU|Level of consciousness)\b/i;
   function groupTimelineEvents(events) {
     if (!events || !events.length) return [];
     var out = [];
@@ -1367,7 +1371,7 @@
     for (var i = 0; i < events.length; i++) {
       var e = events[i];
       var isObs = (e.category === "observation" || e.resourceType === "Observation");
-      var isVital = isObs && (/pulse|heart|hr|bp|sbp|dbp|spo2|temp|respir|rr|vital/i.test(String(e.label || "")) || e.code === "vitals");
+      var isVital = isObs && VITAL_LABEL.test(String(e.label || ""));
       if (!isVital) {
         if (curVitals) { out.push(curVitals); curVitals = null; }
         out.push(e);
