@@ -80,13 +80,13 @@
       return;
     }
     var tabs = TABS.slice();
-    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"]);
+    if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"], ["bugs", "nav.admin.bugs"]);
     // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
     // Applied once per arrival, so the tab buttons still work while the address says /tariff.
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
+    if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations" || tab === "bugs") && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -96,9 +96,123 @@
       b.onclick = function () { st._adminTab = b.getAttribute("data-tab"); WSQ.render("admin"); };
     });
     var body = document.getElementById("adminBody");
-    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup };
+    var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs };
     return renderers[tab](c, body);
   } });
+
+  // ---- Bug reports (the Report Bug button, functions/_wardsynq/bug-reports.js) ---------------------
+  /* Every report staff sent with the red Report Bug button, for the hospital admin to work through. The server
+   * decides everything here: only the hospital's admin (or its owner, or the StewardMD platform owner) may change a
+   * status or remove, a solved status needs a note saying how, and Remove is refused unless the report is solved.
+   * The buttons below only mirror that, so a report never offers an act the server would refuse.
+   * s.list: null = loading, false = could not be loaded (s.failMsg), else the server's reports. */
+  var BUG_FILTERS = ["active", "open", "in_progress", "solved", "removed", "all"];
+  function bugStatusLabel(c, st) {
+    return {
+      open: T(c, "site.admin.bugs.status.open", "Open"),
+      in_progress: T(c, "site.admin.bugs.status.inProgress", "In progress"),
+      solved: T(c, "site.admin.bugs.status.solved", "Solved"),
+      removed: T(c, "site.admin.bugs.status.removed", "Removed (solved)"),
+    }[st] || st;
+  }
+  function bugFilterLabel(c, f) {
+    return f === "active" ? T(c, "site.admin.bugs.filter.active", "Not removed") : f === "all" ? T(c, "site.admin.bugs.filter.all", "All, including removed") : bugStatusLabel(c, f);
+  }
+  function bugPill(c, st) {
+    var cls = st === "open" ? " stop" : st === "in_progress" ? " warn" : " ok";
+    return '<span class="pill' + cls + '">' + c.esc(bugStatusLabel(c, st)) + "</span>";
+  }
+  function bugWhen(v) { return String(v || "").slice(0, 16).replace("T", " "); }
+  function bugsHtml(c, s) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("bug_report") + " " + esc(T(c, "site.admin.bugs.title", "Bug reports")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.bugs.intro", "Reports sent by staff with the Report Bug button. Mark each one in progress, then solved with a note saying how it was solved. A report can be removed only after it is solved; removing archives it and keeps its history.")) + "</p>" +
+      '<label class="f" style="max-width:260px"><span>' + esc(T(c, "site.admin.bugs.filter", "Show")) + '</span><select id="bugFilter">' +
+      BUG_FILTERS.map(function (f) { return '<option value="' + f + '"' + (f === s.filter ? " selected" : "") + ">" + esc(bugFilterLabel(c, f)) + "</option>"; }).join("") + "</select></label>";
+    if (s.list === null) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.bugs.loading", "Loading bug reports...")) + "</p></div>";
+    if (s.list === false) return h + '<div class="msg err">' + esc(T(c, "site.admin.bugs.loadFailed", "Bug reports could not be loaded:")) + " " + EN(c, esc(s.failMsg || "")) + "</div></div>";
+    if (!s.list.length) return h + '<p class="quiet">' + esc(T(c, "site.admin.bugs.none", "No bug reports match this filter.")) + "</p></div>";
+    h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.bugs.colReported", "Reported")) + "</th><th>" + esc(T(c, "site.admin.bugs.colStatus", "Status")) + "</th><th>" +
+      esc(T(c, "site.admin.bugs.colSeverity", "Severity")) + "</th><th>" + esc(T(c, "site.admin.bugs.colWhat", "What went wrong")) + "</th><th>" + esc(T(c, "site.admin.bugs.colBy", "Reported by")) + "</th><th></th></tr></thead><tbody>" +
+      s.list.map(function (r) {
+        return "<tr><td>" + esc(bugWhen(r.reportedAt)) + "</td><td>" + bugPill(c, r.status) + '</td><td class="mono">' + esc(r.severity) + "</td><td>" + esc(String(r.description || "").slice(0, 120)) +
+          '<div class="quiet">' + esc(r.location || "") + "</div></td><td>" + esc((r.reporter && (r.reporter.name || r.reporter.id)) || "") + "</td>" +
+          '<td><button type="button" class="btn ghost" data-bug-open="' + esc(r.id) + '">' + esc(T(c, "site.admin.bugs.open", "Open")) + "</button></td></tr>";
+      }).join("") + "</tbody></table></div></div>";
+    var r = s.openId && s.list.filter(function (x) { return x.id === s.openId; })[0];
+    if (!s.manager) h = h.replace(/<\/div>$/, '<p class="quiet">' + esc(T(c, "site.admin.bugs.ownOnly", "These are your own reports. Only the hospital admin sees every report and can change one.")) + "</p></div>");
+    return r ? h + bugDetailHtml(c, r, s.manager) : h;
+  }
+  function bugDetailHtml(c, r, manager) {
+    var esc = c.esc, cx = r.context || {}, tg = r.target || null;
+    var line = function (label, v) { return v ? "<div><b>" + esc(label) + "</b> " + esc(v) + "</div>" : ""; };
+    var h = '<div class="card" id="bugDetail"><h2>' + esc(T(c, "site.admin.bugs.detail", "Report")) + " " + bugPill(c, r.status) + "</h2>" +
+      '<p style="white-space:pre-wrap">' + esc(r.description) + "</p>" +
+      line(T(c, "site.admin.bugs.severity", "Severity:"), r.severity) +
+      line(T(c, "site.admin.bugs.where", "Where:"), r.location) +
+      line(T(c, "site.admin.bugs.page", "Page:"), cx.url) +
+      line(T(c, "site.admin.bugs.patient", "Patient on screen:"), cx.patient ? (cx.patient.id || "") + (cx.patient.bed ? " / " + cx.patient.bed : "") : "") +
+      line(T(c, "site.admin.bugs.target", "Element pointed at:"), tg ? tg.selector + (tg.snippet ? ' "' + tg.snippet + '"' : "") : "") +
+      line(T(c, "site.admin.bugs.by", "Reported by:"), r.reporter ? (r.reporter.name || r.reporter.id) + (r.reporter.role ? " (" + r.reporter.role + ")" : "") : "") +
+      line(T(c, "site.admin.bugs.at", "Reported at:"), bugWhen(r.reportedAt)) +
+      line(T(c, "site.admin.bugs.device", "Device:"), (r.userAgent || "") + (r.screen && r.screen.width ? " " + r.screen.width + "x" + r.screen.height : "")) +
+      (r.solution ? line(T(c, "site.admin.bugs.solvedHow", "How it was solved:"), r.solution.note + " (" + bugWhen(r.solution.at) + ")") : "") +
+      ((r.errors || []).length ? "<details><summary>" + esc(T(c, "site.admin.bugs.errors", "Console errors captured ({n})", { n: r.errors.length })) + '</summary><pre style="white-space:pre-wrap;max-width:80ch">' +
+        esc(r.errors.map(function (e) { return (e.time || "") + " " + (e.text || ""); }).join("\n")) + "</pre></details>" : "") +
+      "<h3>" + esc(T(c, "site.admin.bugs.history", "History")) + '</h3><ul class="quiet">' + (r.events || []).map(function (e) {
+        return "<li>" + esc(bugWhen(e.at)) + " " + esc(bugStatusLabel(c, e.status)) + " " + esc(e.byName || e.by || "") + (e.note ? ": " + esc(e.note) : "") + "</li>";
+      }).join("") + "</ul>";
+    if (manager && (r.status === "open" || r.status === "in_progress")) {
+      h += (r.status === "open" ? '<button type="button" class="btn ghost" data-bug-act="in_progress">' + esc(T(c, "site.admin.bugs.setInProgress", "Set in progress")) + "</button> " : "") +
+        '<label class="f"><span>' + esc(T(c, "site.admin.bugs.noteLabel", "How it was solved")) + '</span><textarea id="bugNote" rows="2"></textarea></label>' +
+        '<button type="button" class="btn" data-bug-act="solved">' + esc(T(c, "site.admin.bugs.markSolved", "Mark solved")) + "</button>";
+    }
+    if (manager && r.status === "solved") {
+      h += '<button type="button" class="btn ghost" data-bug-act="open">' + esc(T(c, "site.admin.bugs.reopen", "Reopen")) + "</button> " +
+        '<button type="button" class="btn ghost" data-bug-act="remove">' + esc(T(c, "site.admin.bugs.remove", "Remove")) + "</button>";
+    }
+    return h + '<div id="bugMsg"></div></div>';
+  }
+  WSQ._bugsHtml = bugsHtml;
+  /** The one request each button sends. kind: in_progress | solved | open | remove. */
+  function bugAction(c, kind, r, note) {
+    if (kind === "remove") return c.api("/ward/bug-report-remove", { orgId: c.state.orgId, id: r.id, expectedVersion: r.version });
+    return c.api("/ward/bug-report-status", { orgId: c.state.orgId, id: r.id, status: kind, note: note || "", expectedVersion: r.version });
+  }
+  WSQ._bugAction = bugAction;
+  function renderBugs(c, body) {
+    var s = c.state._bugs = c.state._bugs || { filter: "active", openId: "" };
+    s.list = null;
+    var paint = function () {
+      body.innerHTML = bugsHtml(c, s);
+      var f = document.getElementById("bugFilter");
+      if (f) f.onchange = function () { s.filter = f.value; s.openId = ""; renderBugs(c, body); };
+      body.querySelectorAll("[data-bug-open]").forEach(function (b) {
+        b.onclick = function () { s.openId = b.getAttribute("data-bug-open"); paint(); };
+      });
+      var r = s.openId && s.list && s.list.filter(function (x) { return x.id === s.openId; })[0];
+      body.querySelectorAll("[data-bug-act]").forEach(function (b) {
+        b.onclick = function () {
+          var kind = b.getAttribute("data-bug-act"), noteEl = document.getElementById("bugNote"), note = noteEl ? noteEl.value.trim() : "";
+          var msg = document.getElementById("bugMsg");
+          if (kind === "solved" && note.length < 3) { msg.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.bugs.noteRequired", "Say how it was solved before marking it solved.")) + "</div>"; return; }
+          if (kind === "remove" && !window.confirm(T(c, "site.admin.bugs.removeConfirm", "Remove this solved report? It is archived with its history, not deleted."))) return;
+          b.disabled = true;
+          bugAction(c, kind, r, note).then(function (x) {
+            if (!x || !x.ok) { b.disabled = false; msg.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.bugs.notChanged", "Not changed:")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"; return; }
+            c.toast(kind === "remove" ? T(c, "site.admin.bugs.removed", "Report removed.") : T(c, "site.admin.bugs.saved", "Report set to {status}.", { status: bugStatusLabel(c, x.report.status) }));
+            if (kind === "remove") s.openId = "";
+            renderBugs(c, body);
+          });
+        };
+      });
+    };
+    paint();
+    return c.api("/ward/bug-reports?orgId=" + encodeURIComponent(c.state.orgId) + "&status=" + encodeURIComponent(s.filter)).then(function (x) {
+      if (x && x.ok) { s.list = x.reports || []; s.manager = !!x.manager; } else { s.list = false; s.failMsg = refusal(c, x); }
+      paint();
+    });
+  }
 
   // ---- Clinical seed data (D10) ------------------------------------------------------------------
   /* Clinical content that ships with WardSynQ (allergy classes, dose ceilings, default critical limits and
