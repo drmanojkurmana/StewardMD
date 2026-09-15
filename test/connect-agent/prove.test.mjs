@@ -358,7 +358,38 @@ test('the ward list is saved in the form that returns every in-patient, not the 
   const data = view.endpoints.find((e) => e.role === 'data');
   assert.match(data.path, /Type=IPWorkList/, 'the mode constant is saved');
   assert.deepEqual(data.params.Emp_ID, { empty: true }, 'the doctor filter is saved EMPTY, so every in-patient comes back');
-  assert.equal(view.proof.population, 4, 'the saved request was verified to return the whole in-patient list');
+  assert.equal(view.proof.population, 4, 'the saved request is the one that returned more rows in the fixture');
+});
+
+test('widening never touches a patient-scoped call, even when tracing failed completely', async () => {
+  // parents: [] is the real GHIS case: the worklist proof failed, so nothing can be traced.
+  const MINE = JSON.stringify([{ test: 'Haemoglobin', value: '11.2' }]);
+  const ALL = JSON.stringify(Array.from({ length: 40 }, (_, i) => ({ test: 'Haemoglobin', value: '11.' + i })));
+  const entries = [{ seq: 71, method: 'GET', url: HOST + '/Lab/Home/GetSearchPatientId?patient_id=MR900001&DeptID=', body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['test'], rows: 1 } }];
+  let widened = null;
+  const page = {
+    async currentUrl() { return { url: HOST + '/Lab/Home' }; },
+    async evaluate({ expression }) {
+      if (expression.includes('PROVE_LIST')) return { result: JSON.stringify(entries) };
+      if (expression.includes('PROVE_SCREEN')) return { result: JSON.stringify([['Haemoglobin', '11.2']]) };
+      if (expression.includes('PROVE_EXEC_REQ')) { widened = expression; return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: ALL }) }; }
+      if (expression.includes('PROVE_EXEC')) return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: MINE }) };
+      return { result: null };
+    },
+  };
+  const view = { resourceHint: 'labs', pathTemplate: HOST + '/Lab/Home', rowsSelector: 'tr', headers: ['Test', 'Value'] };
+  await proveView({ client: page, view, parents: [] });
+  assert.equal(widened, null, 'a patient-scoped resource is never widened: the whole hospital is never fetched');
+  const p = (view.endpoints.find((e) => e.role === 'data') || {}).params || {};
+  assert.notDeepEqual(p.patient_id, { empty: true }, 'the patient id is never saved as empty');
+});
+
+test('widenRequest refuses a patient-keyed parameter even when tracing failed', () => {
+  const entry = { method: 'GET', url: HOST + '/Doctor/Home/GetIPWL?PatientId=MR900001&Emp_ID=4471&Type=IPWorkList', body: null, reqCt: '' };
+  const params = { PatientId: { unmapped: true }, Emp_ID: { unmapped: true }, Type: { constant: 'IPWorkList' } };
+  const q = new URL(widenRequest(entry, params).url).searchParams;
+  assert.equal(q.get('PatientId'), 'MR900001', 'a patient-keyed filter is never emptied, even unmapped');
+  assert.equal(q.get('Emp_ID'), '', 'a doctor filter still widens');
 });
 
 /* GHIS-SHAPED FIXTURE, NOT A LIVE HOSPITAL. The real in-patient population can only be checked on the

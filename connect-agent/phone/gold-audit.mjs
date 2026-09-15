@@ -74,7 +74,10 @@ export function compareRows(spec, goldBody, adapterBody) {
   const byKey = new Map();
   for (const r of mine) { const k = keyOf(r, spec.key); if (!byKey.has(k)) byKey.set(k, r); }
   const fields = {};
-  for (const f of spec.fields) fields[f] = { gold: 0, adapter: 0, equal: 0 };
+  // Per field, how many of the rows the adapter DID return carried a gold value: the yardstick for
+  // "the rows it returned are right", which fields[f].gold (every gold row) can never be on a short list.
+  const matchedGold = {};
+  for (const f of spec.fields) { fields[f] = { gold: 0, adapter: 0, equal: 0 }; matchedGold[f] = 0; }
   let matched = 0;
   for (const g of gold) {
     const a = byKey.get(keyOf(g, spec.key));
@@ -82,6 +85,7 @@ export function compareRows(spec, goldBody, adapterBody) {
     if (!a) continue;
     matched += 1;
     for (const f of spec.fields) {
+      if (n(g[f])) matchedGold[f] += 1;
       if (n(a[f])) fields[f].adapter += 1;
       // A long text field (a report) counts as equal when one contains the other.
       const x = n(g[f]), y = n(a[f]);
@@ -90,6 +94,8 @@ export function compareRows(spec, goldBody, adapterBody) {
   }
   const filled = spec.fields.filter((f) => fields[f].gold > 0);
   const fieldsSame = filled.every((f) => fields[f].equal === fields[f].gold);
+  // A short list is only a clean subset when every row it DID return agrees field for field.
+  const matchedFieldsSame = spec.fields.every((f) => fields[f].equal === matchedGold[f]);
   /* A SUBSET IS A FAILURE WITH ITS OWN NAME (owner, 2026-09-16). An adapter that returns some of the
    * ward is more dangerous than one that returns none: the missing patients look like patients who do
    * not exist. It is never folded into "partial". */
@@ -97,7 +103,7 @@ export function compareRows(spec, goldBody, adapterBody) {
   if (!gold.length && !mine.length) verdict = 'both-empty';
   else if (!mine.length) verdict = 'missing';
   else if (matched === gold.length && mine.length === gold.length && fieldsSame) verdict = 'same';
-  else if (mine.length < gold.length && matched === mine.length) verdict = 'subset';
+  else if (mine.length < gold.length && matched === mine.length && matchedFieldsSame) verdict = 'subset';
   else verdict = 'partial';
   return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, missing: Math.max(0, gold.length - matched), fields, verdict };
 }

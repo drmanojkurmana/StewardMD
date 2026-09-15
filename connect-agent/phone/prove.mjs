@@ -15,7 +15,7 @@
 // and counts (overlap, hits, cells, rows). The brain sees paths, key names and column labels only.
 
 import { redactEndpoints, scrubForBrain, scrubExcerpt } from './deep-crawl.mjs';
-import { rowsFromJson, TOKEN_KEY, PAGE_SIZE_KEY, PAGE_START_KEY, PAGE_NUMBER_KEY } from './adapter-runtime.mjs';
+import { rowsFromJson, TOKEN_KEY, PAGE_SIZE_KEY, PAGE_START_KEY, PAGE_NUMBER_KEY, PATIENT_KEY, VISIT_KEY } from './adapter-runtime.mjs';
 
 export const ROLES = Object.freeze(['data', 'prerequisite', 'lookup', 'ping', 'shell']);
 const WRITE_PATH = /save|update|insert|delete|remove|create|submit|approve|cancel|logout|logoff|signout/i;
@@ -456,7 +456,10 @@ export const INJECT_REPLAY_SRC = "(function(entries){try{var R=window.__SMD_REPL
  * own identity and is never touched: emptying it would turn this patient's labs into everyone's. */
 export function widenRequest(entry, params) {
   const src = params || {};
-  const loose = (k, v) => !!v && !!src[k] && src[k].unmapped === true;
+  /* `unmapped` is paramsOf's FAILURE state, not proof that a key is a filter: with no proven worklist
+   * there are no parent rows, so a real patient id traces to nothing and looks exactly like one
+   * (reviewer reproduction, 2026-09-16). A patient- or visit-keyed name is never emptied. */
+  const loose = (k, v) => !!v && !!src[k] && src[k].unmapped === true && !PATIENT_KEY.test(k) && !VISIT_KEY.test(k);
   let u;
   try { u = new URL(entry.url); } catch { return null; }
   let changed = false;
@@ -585,8 +588,11 @@ export async function proveView({ client, view, brain = null, since = -1, label 
    * request that matches it can still be a subset. The same call with its untraceable filters emptied
    * is replayed in the doctor's session; when it answers with MORE rows, the same kind, and still
    * carries the screen, THAT is the request saved (owner, 2026-09-16). */
-  const LIST_RESOURCES = ['worklist', 'labs', 'radiology', 'medications', 'notes', 'history', 'discharge'];
-  if (LIST_RESOURCES.includes(String(view.resourceHint || ''))) {
+  /* THE WARD LIST, AND NOTHING ELSE. The whole population is the goal for the ward list alone. For a
+   * patient's labs, medications or radiology, MORE rows is a red flag, not a win: it means the request
+   * stopped being about this patient. `unmapped` cannot tell an untraceable identifier from a filter
+   * (reviewer reproduction, 2026-09-16), so resource scope is the guard that actually holds. */
+  if (String(view.resourceHint || '') === 'worklist') {
     const wide = widenRequest(hit.e, paramsOf(hit.e, parents));
     if (wide) {
       const resp2 = await evalJson(client, PROVE_SOURCES.execRequest({ method: hit.e.method, url: wide.url, body: wide.body, reqCt: hit.e.reqCt, xhr: hit.e.xhr }), null);

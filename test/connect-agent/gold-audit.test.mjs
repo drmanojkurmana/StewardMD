@@ -18,6 +18,9 @@ test('compareRows: same rows and fields is "same"; a missing field is "partial";
   const short = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', frequency: 'TDS' }] });
   assert.equal(short.verdict, 'subset', 'a row the adapter never returned is never folded into "partial"');
   assert.equal(short.missing, 1);
+  // A short list whose one returned row is also wrong is not a clean subset: it stays "partial".
+  const shortAndWrong = compareRows(spec('medications'), gold, { rows: [{ drugText: 'Tab Paracetamol 650 mg', route: 'IV', frequency: 'TDS' }] });
+  assert.equal(shortAndWrong.verdict, 'partial');
   assert.equal(compareRows(spec('medications'), gold, { rows: [] }).verdict, 'missing');
   assert.ok(!JSON.stringify(partial).includes('Paracetamol'), 'the grade carries no value');
 });
