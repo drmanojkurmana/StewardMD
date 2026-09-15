@@ -651,43 +651,6 @@
           adapterFail(e && e.message ? e.message : 'Could not read the ward list from ' + host + '.');
         });
       };
-      // Patient details from the adapter's other views (medications, labs, radiology, history, discharge),
-      // shown in the existing lab drawer. The browser is reopened in agent mode for the read, then closed.
-      function ghisOpenAdapterPatient(patientId, name) {
-        var ctx = _adapterCtx, plugin = connectPlugin();
-        var drawer = document.getElementById('ghisLabDrawer'), title = document.getElementById('ghisLabTitle'), body = document.getElementById('ghisLabBody');
-        if (!drawer || !ctx) return;
-        var p = null; for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
-        GHIS._selectedPatient = { patientId: patientId, name: name, episodeId: (p && p.episodeId) || '' };
-        title.textContent = name + ' (' + patientId + ')';
-        body.innerHTML = '<div class="ghis-loading">Reading ' + esc(ctx.host) + ' for ' + esc(name) + '...</div>';
-        drawer.style.display = '';
-        if (!plugin) { body.innerHTML = '<div class="ghis-lab-empty">The in-app hospital browser is not available on this device.</div>'; return; }
-        loadWardRuntime().then(function (rt) {
-          ctx.browserOpen = true;
-          // LAW III: a read for one patient is a background read. The doctor keeps their screen.
-          return plugin.open({ url: ctx.origin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function () {
-            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for ' + name, origins: ctx.origins, hidden: true }); } catch (e) {}
-            return rt.readPatientDetails({ plugin: plugin, origin: ctx.origin, replay: ctx.replay, patient: p || { patientId: patientId } });
-          });
-        }).then(function (sections) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
-          if (!sections.length) { body.innerHTML = '<div class="ghis-lab-empty">The approved adapter for ' + esc(ctx.host) + ' has no patient views (medications, labs, radiology, history, discharge).</div>'; return; }
-          body.innerHTML = sections.map(function (sec) {
-            var h = '<div class="ghis-lab-group"><div class="ghis-lab-group-name">' + esc(sec.resource) + '</div>';
-            if (sec.error) return h + '<div class="ghis-lab-detail-empty">' + esc(sec.error) + '</div></div>';
-            if (!sec.rows.length) return h + '<div class="ghis-lab-detail-empty">Nothing recorded.</div></div>';
-            return h + sec.rows.map(function (row) {
-              return '<div class="ghis-lab-row" style="display:block">' + Object.keys(row).filter(function (k) { return k.charAt(0) !== '_'; }).map(function (k) {
-                return '<div><span class="ghis-lab-date">' + esc(k) + '</span> <span class="ghis-lab-test">' + esc(row[k]) + '</span></div>';
-              }).join('') + '</div>';
-            }).join('') + '</div>';
-          }).join('');
-        }).catch(function (e) {
-          ctx.browserOpen = false; try { plugin.close(); } catch (x) {}
-          body.innerHTML = '<div class="ghis-lab-empty">' + esc(e && e.message ? e.message : 'Could not read ' + ctx.host + ' for this patient.') + '</div>';
-        });
-      }
       // "My Ward" tab — open the StewardMD ward dashboard (the ICU dashboard tuned for ward patients:
       // ventilator hidden, "Ward" labels, own patient list; Treatment / instructions / deep review /
       // imaging / discharge reused). The Ward Sync panel (z 18000) sits ABOVE the dashboard (z 10000),
