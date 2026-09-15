@@ -22,7 +22,7 @@
   "use strict";
   var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   // The same cache token portal.js uses for wardsynq/site/i18n/<code>.js; the test pins the two equal.
-  var LANG_FILES_V = 8;
+  var LANG_FILES_V = 9;
   var INSTR = "rx.instr.";
 
   function I() { return (root && root.WSQI18n) || null; }
