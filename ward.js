@@ -668,11 +668,11 @@
   var ACUITY_WORDS = { 1: "1 - Immediate", 2: "2 - Emergent", 3: "3 - Urgent", 4: "4 - Less urgent", 5: "5 - Non-urgent" };
   function edBoardView(state) {
     var rows = (state.ed && state.ed.patients || []).map(function (p) {
-      var sexAge = (p.gender ? ' &middot; <b>' + esc(p.gender).toUpperCase() + (p.ageYears ? ', ' + esc(p.ageYears) + 'y' : '') + '</b>'
-        : '');
+      // BUG-MU06NW2S-8D53: sex in bold, as the record states it (GET /ward/ed sends it); never guessed.
+      var sex = p.sex ? ' &middot; <b class="w-sex">' + esc(String(p.sex).toUpperCase()) + "</b>" : "";
       return "<li>" + '<button class="w-bed" data-w-act="openEd:' + esc(p.encounterId) + '">' +
         '<span class="w-bed-no' + (p.acuity == null ? " untriaged" : " acuity-" + esc(p.acuity)) + '">' + (p.acuity == null ? ms("priority_high") : esc(p.acuity)) + "</span>" +
-        '<span class="w-bed-b"><b>' + esc(p.mrn || p.patientId) + "</b>" + sexAge + "<small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small>" +
+        '<span class="w-bed-b"><b>' + esc(p.name ? p.name + (p.mrn ? " · " + p.mrn : "") : (p.mrn || p.patientId)) + "</b>" + sex + "<small>" + esc(p.chiefComplaint || "No chief complaint recorded") + " &middot; arrived " + when(p.arrivedAt) + "</small>" +
         edReassessLine(p.reassessment) + "</span>" +
         ms("chevron_right") + "</button></li>";
     }).join("");
@@ -1937,11 +1937,10 @@
     var isMaternity = s.class === "MATERNITY";
     var isPediatric = s.class === "PEDIATRICS" || s.class === "NICU";
     var isNicu = s.class === "NICU";
-    var edDemog = s.gender ? (" &middot; <b>" + esc(s.gender).toUpperCase() + (s.ageYears ? ", " + esc(s.ageYears) + "y" : "") + "</b>")
-      : "";
+    var edDemog = s.sex ? ' &middot; <b class="w-sex">' + esc(String(s.sex).toUpperCase()) + "</b>" : "";
     var header = isEd
       ? '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
-        "<div><b>" + esc(s.mrn || s.patientId || "") + "</b><small>" + ms("emergency", true) + "ED" + edDemog +
+        "<div><b>" + esc(s.name ? s.name + (s.mrn ? " · " + s.mrn : "") : (s.mrn || s.patientId || "")) + "</b><small>" + ms("emergency", true) + "ED" + edDemog +
         (s.chiefComplaint ? " &middot; " + esc(s.chiefComplaint) : "") + " &middot; arrived " + when(s.arrivedAt) + "</small></div>" +
         '<button class="w-btn ghost" data-w-act="careplan" title="Goals for this visit and whether each was met">' + ms("flag") + "Care plan</button>" +
         '<button class="w-btn ghost" data-w-act="pcopy" title="The copy this patient can be given">' + ms("assignment_ind") + "Patient copy</button></div>"

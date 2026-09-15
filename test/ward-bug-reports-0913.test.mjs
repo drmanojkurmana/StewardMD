@@ -229,6 +229,19 @@ test("BUG-MU0710W4-04KD: department filter from the record; no 'doctor' search t
   assert.ok(!/data-w-act="rosterfilter:/.test(html), "a filter select still repaints on click, closing itself");
 });
 
+// ---- BUG-MU06NW2S-8D53: the ED board shows sex in bold, from the record ----------------------------------
+test("BUG-MU06NW2S-8D53: the ED board and ED chart show the recorded sex in bold, and nothing when none is recorded", () => {
+  const { W } = loadWard();
+  const board = W._render({ ...W._st, view: "ed", ed: { patients: [
+    { encounterId: "e1", patientId: "p1", name: "Board Test", mrn: "TEST-1", sex: "male" },
+    { encounterId: "e2", patientId: "p2", mrn: "EMERG-UNKNOWN-0001", sex: null },
+  ] } });
+  assert.match(board, /<b>Board Test · TEST-1<\/b> &middot; <b class="w-sex">MALE<\/b>/);
+  assert.equal((board.match(/class="w-sex"/g) || []).length, 1, "a patient with no recorded sex was given one");
+  const chart = W._render({ ...W._st, view: "chart", sel: { class: "ED", patientId: "p1", encounterId: "e1", mrn: "TEST-1", name: "Board Test", sex: "female" } });
+  assert.match(chart, /<b class="w-sex">FEMALE<\/b>/);
+});
+
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
 const LAB_BOARD = {
   specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},
