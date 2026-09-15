@@ -155,9 +155,27 @@ export function READ_ROWS(doc, view) {
   return JSON.stringify(out);
 }
 
+/* THE DOCUMENT THE TABLE IS ACTUALLY IN. A frameset EMR keeps every clinical screen in a child frame,
+ * so reading `document` there reads the <frameset> itself and finds nothing. `framePath` is the list
+ * of frame indexes the crawl recorded when it captured the view; an absent or unreachable path falls
+ * back to the top document, which is what almost every EMR needs. */
+export function FRAME_DOC(path) {
+  var win = window;
+  var list = path || [];
+  for (var i = 0; i < list.length; i++) {
+    try {
+      var next = win.frames[list[i]];
+      if (!next || !next.document) return document;
+      win = next;
+    } catch (e) { return document; } // cross-origin: not ours to read
+  }
+  try { return win.document || document; } catch (e) { return document; }
+}
+
 export function readRowsExpression(view) {
   const safe = { rowsSelector: view.rowsSelector, headers: view.headers || [], cellSelectors: view.cellSelectors || null };
-  return `(${String(READ_ROWS)})(document,${JSON.stringify(safe)})`;
+  const path = Array.isArray(view.framePath) ? view.framePath.slice(0, 3) : [];
+  return `(${String(READ_ROWS)})((${String(FRAME_DOC)})(${JSON.stringify(path)}),${JSON.stringify(safe)})`;
 }
 
 // Picker label: short name from the tenant ("KIMS Hospital" -> "KIMS"), else the origin host's

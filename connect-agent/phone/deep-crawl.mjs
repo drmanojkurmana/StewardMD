@@ -177,6 +177,8 @@ export function buildTableView(raw, resourceHint, pathTemplate) {
   const view = { resourceHint, pathTemplate, method: 'GET', rowsSelector, headers, singleRecord: dataRows.length < 1 };
   if (onclickTemplate) view.onclickTemplate = onclickTemplate;
   if (confidence === 'low') view.confidence = 'low';
+  // Which frame the table was in. Absent or empty means the top document, which is the usual case.
+  if (Array.isArray(raw.framePath) && raw.framePath.length) view.framePath = raw.framePath.slice(0, 3);
   return view;
 }
 
@@ -336,7 +338,22 @@ function CRAWL_RAW_TABLE() {
   var obs = window.__smdCrawlObs || null;
   if (obs && obs.mo) { obs.mo.disconnect(); obs.mo = null; }
   var pointed = window.__smdPointed; // the table the doctor tapped inside during an ask wins outright
-  var tables = (pointed && pointed.isConnected && pointed.tagName === 'TABLE') ? [pointed] : document.querySelectorAll('table');
+  /* EVERY FRAME, NOT JUST THIS DOCUMENT: in a frameset EMR the ward list is never in the top one.
+   * framePath records which frame the winner came from so it can be found again on a later read. */
+  var tables = [];
+  var docs = CRAWL_DOCS();
+  var frameOf = function (el) {
+    for (var q = 0; q < docs.length; q++) { if (docs[q].doc.contains(el)) return docs[q].path; }
+    return [];
+  };
+  if (pointed && pointed.isConnected && pointed.tagName === 'TABLE') {
+    tables = [pointed];
+  } else {
+    for (var dd = 0; dd < docs.length; dd++) {
+      var found = docs[dd].doc.querySelectorAll('table');
+      for (var ff = 0; ff < found.length; ff++) tables.push(found[ff]);
+    }
+  }
   var DAY = /^(su|mo|tu|we|th|fr|sa|sun|mon|tue|wed|thu|fri|sat)$/i;
   var FORM_HINT = /\b(entry|requisition)\b/i;
   var LABEL_WORD = /name|date|code|route|dos|qty|quant|freq|dur|test|result|unit|type|status|remark|desc|no\b|s\.?no|sl\b|#|time|value|range|method|dept|ward|bed|age|sex|gender|doctor|drug|medic|diagnos|advice|report|title|subject|category|notes?\b|comment/i;
@@ -499,7 +516,8 @@ function CRAWL_RAW_TABLE() {
   // and the table's position among its parent's <table> children when a sibling table (header table)
   // shares the parent. Unstable ids are skipped over, not returned.
   var container = { id: '', class: '' };
-  for (var anc = best.parentElement; anc && anc !== document.body; anc = anc.parentElement) {
+  var bestBody = best.ownerDocument ? best.ownerDocument.body : document.body;
+  for (var anc = best.parentElement; anc && anc !== bestBody; anc = anc.parentElement) {
     if (anc.id && !UNSTABLE.test(anc.id)) { container = { id: anc.id, class: anc.getAttribute('class') || '' }; break; }
     if (!container.class && anc.getAttribute('class')) container.class = anc.getAttribute('class');
   }
@@ -512,7 +530,7 @@ function CRAWL_RAW_TABLE() {
   }
 
   var ownId = best.getAttribute('id') || '';
-  return JSON.stringify({ id: UNSTABLE.test(ownId) ? '' : ownId, class: best.getAttribute('class') || '', headers: headers, rows: rowInfos, container: container, tableNth: tableNth });
+  return JSON.stringify({ id: UNSTABLE.test(ownId) ? '' : ownId, class: best.getAttribute('class') || '', headers: headers, rows: rowInfos, container: container, tableNth: tableNth, framePath: frameOf(best) });
 }
 
 // Label/value REPORT BLOCK capture for a view with no data table (radiology report, discharge summary,
@@ -661,14 +679,41 @@ function CRAWL_RAW_BLOCK() {
 
 // PHI-free page state, read before the walk: only booleans and counts leave the page.
 // dataTableCount = tables with a <th> and at least one <td> row, calendars excluded.
+/* EVERY DOCUMENT THIS PAGE REALLY IS. A great many hospital systems are framesets: the top document
+ * holds nothing but <frameset>, and every clinical screen lives in a child frame. Looking only at
+ * `document` there finds no table, no text and no control, so the whole hospital read as a dead page.
+ * Returns the top document first, then each same-origin frame, depth first. A cross-origin frame
+ * throws on access and is skipped: it is not this hospital's, and never the agent's business.
+ * `path` is how a frame is found again later: a list of indexes from the top window. */
+function CRAWL_DOCS() {
+  var out = [];
+  var walk = function (win, path, depth) {
+    var doc = null;
+    try { doc = win.document; } catch (e) { return; } // cross-origin: not ours
+    if (!doc) return;
+    out.push({ doc: doc, win: win, path: path });
+    if (depth >= 3 || out.length > 24) return;
+    var kids = 0;
+    try { kids = win.frames.length; } catch (e) { return; }
+    for (var i = 0; i < kids; i++) {
+      try { walk(win.frames[i], path.concat([i]), depth + 1); } catch (e) { /* skip that frame */ }
+    }
+  };
+  walk(window, [], 0);
+  return out;
+}
+
 function CRAWL_PAGE_STATE() {
-  var tables = document.querySelectorAll('table');
+  var docs = CRAWL_DOCS();
   var dataTableCount = 0, anyVisible = false;
-  for (var i = 0; i < tables.length; i++) {
-    var t = tables[i];
-    if (t.getClientRects && t.getClientRects().length) anyVisible = true;
-    if (/datepicker|calendar/i.test((t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || ''))) continue;
-    if (t.querySelector('th') && t.querySelector('tr td')) dataTableCount++;
+  for (var d = 0; d < docs.length; d++) {
+    var tables = docs[d].doc.querySelectorAll('table');
+    for (var i = 0; i < tables.length; i++) {
+      var t = tables[i];
+      if (t.getClientRects && t.getClientRects().length) anyVisible = true;
+      if (/datepicker|calendar/i.test((t.getAttribute('class') || '') + ' ' + (t.getAttribute('id') || ''))) continue;
+      if (t.querySelector('th') && t.querySelector('tr td')) dataTableCount++;
+    }
   }
   /* AN EMR WITHOUT A <table> IS STILL AN EMR. Counting only tables and characters made every
    * table-less screen look like a dead post-expiry shell, so a modern SPA worklist - divs rendered
@@ -676,7 +721,11 @@ function CRAWL_PAGE_STATE() {
    * A way FURTHER IN is the signal that the page is alive, so count the controls that are not the
    * way back OUT: a sign-in or log-out link is exactly what a dead shell has. */
   var controls = 0;
-  var els = document.querySelectorAll('a[href], button, [role="button"], [role="tab"], [role="menuitem"]');
+  var els = [];
+  for (var dc = 0; dc < docs.length; dc++) {
+    var found = docs[dc].doc.querySelectorAll('a[href], button, [role="button"], [role="tab"], [role="menuitem"]');
+    for (var f = 0; f < found.length; f++) els.push(found[f]);
+  }
   for (var j = 0; j < els.length && controls < 6; j++) {
     var el = els[j];
     if (el.getClientRects && !el.getClientRects().length) continue;
@@ -693,8 +742,10 @@ function CRAWL_PAGE_STATE() {
   }
   // Repeated siblings are how a SPA draws a list when it draws no table at all.
   var lists = 0;
-  var conts = document.querySelectorAll('ul, ol, [role="list"], [role="grid"], [role="table"]');
-  for (var k = 0; k < conts.length && lists < 3; k++) if (conts[k].children && conts[k].children.length >= 3) lists++;
+  for (var dl = 0; dl < docs.length && lists < 3; dl++) {
+    var conts = docs[dl].doc.querySelectorAll('ul, ol, [role="list"], [role="grid"], [role="table"]');
+    for (var k = 0; k < conts.length && lists < 3; k++) if (conts[k].children && conts[k].children.length >= 3) lists++;
+  }
   /* THE STRONGEST SIGNAL THAT A SCREEN IS ALIVE IS ITS OWN DATA CALL. Some worklists are a single
    * empty div and a fetch; they have no table, no list and not one link, and no amount of looking at
    * the DOM will say they are anything but dead. The replay buffer knows: a JSON answer carrying rows
@@ -708,10 +759,17 @@ function CRAWL_PAGE_STATE() {
       if (sh && sh.kind === 'json' && sh.rows > 0) { dataRows += sh.rows; if (dataRows > 0) break; }
     }
   } catch (e) { /* no buffer on this page: fall back to the DOM signals */ }
+  var textLen = 0, hasPw = false;
+  for (var dt = 0; dt < docs.length; dt++) {
+    var b = docs[dt].doc.body;
+    textLen += ((b && b.innerText) || '').length;
+    if (docs[dt].doc.querySelector('input[type=password]')) hasPw = true;
+  }
   return JSON.stringify({
-    textLen: ((document.body && document.body.innerText) || '').length,
-    hasPasswordInput: !!document.querySelector('input[type=password]'),
+    textLen: textLen,
+    hasPasswordInput: hasPw,
     dataTableCount: dataTableCount,
+    frames: docs.length - 1,
     anyVisible: anyVisible,
     controls: controls,
     lists: lists,
@@ -874,6 +932,10 @@ const CONTROL_QUERY = 'a,button,li,div,span,p,label,h1,h2,h3,h4,h5,h6,[role=tab]
 const ARM_OBSERVER_SRC = String(CRAWL_ARM_OBSERVER);
 const RAW_TABLE_SRC = String(CRAWL_RAW_TABLE);
 const RAW_BLOCK_SRC = String(CRAWL_RAW_BLOCK);
+const DOCS_SRC = String(CRAWL_DOCS);
+/* The page-realm functions are sent as source and cannot close over anything here, so a function that
+ * walks frames is handed its walker in the same expression. */
+const withDocs = (fnSrc, args = '') => `(function(){ var CRAWL_DOCS = ${DOCS_SRC}; return (${fnSrc})(${args}); })()`;
 const PAGE_STATE_SRC = String(CRAWL_PAGE_STATE);
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
@@ -935,7 +997,7 @@ export function redactPageUrl(u) {
 
 export async function captureView({ client, resourceHint, blockOnly = false }) {
   const url = redactPageUrl((await client.currentUrl().catch(() => ({})))?.url || null);
-  const raw = blockOnly ? null : await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
+  const raw = blockOnly ? null : await evalJson(client, withDocs(RAW_TABLE_SRC), null);
   let view = raw ? buildTableView(raw, resourceHint, url) : null;
   const block = await evalJson(client, `(${RAW_BLOCK_SRC})()`, null);
   if (!view) view = buildBlockView(block, resourceHint, url);
@@ -1079,7 +1141,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
   // instead of "no patient row". A slow worklist can look shell-like for a moment (rows arrive by AJAX
   // after the frame), so a shell verdict is confirmed once after one wait. A null state (evaluate
   // failed) is treated as unknown and the walk proceeds.
-  const pageState = () => evalJson(client, `(${PAGE_STATE_SRC})()`, null);
+  const pageState = () => evalJson(client, withDocs(PAGE_STATE_SRC), null);
   /* A shell is a page with nothing on it and nowhere to go: no data table, almost no text, and no
    * control that leads further in. A table-less SPA screen has controls, so it is walked, not
    * abandoned (older builds answered "the browser was not on the EMR after sign-in" for those).
@@ -1101,7 +1163,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
 
   // 1. worklist (the client is already attached to it). No observer armed: global best table.
   progress('worklist', 0);
-  const worklistRaw = await evalJson(client, `(${RAW_TABLE_SRC})()`, null);
+  const worklistRaw = await evalJson(client, withDocs(RAW_TABLE_SRC), null);
   {
     /* THE WORKLIST'S OWN DATA CALL. A DataTables ward list fills itself on page load (GHIS: GetIPWL),
      * before the crawl clicks anything, so the native log since open and the observer's events so
