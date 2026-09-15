@@ -120,6 +120,7 @@ import { registerWebhook, updateWebhook, rotateWebhookSecret, testWebhook, listW
 import { createSubscription } from "../../_wardsynq/fhir-subscription.js";
 import { listSmartClients, saveSmartClient, removeSmartClient, setSmartEnabled } from "../../_wardsynq/smart-clients.js";
 import { saveConnector, listConnectors, testConnector, activeConnectors } from "../../_wardsynq/connectors.js";
+import { submitBugReport, listBugReports, setBugReportStatus, removeBugReport } from "../../_wardsynq/bug-reports.js";
 import { viewerConfigOf } from "../../_wardsynq/dicomweb.js";
 import { abdmView, externalInvoiceHandlingRefusal } from "../../_wardsynq/abdm-hospital.js";
 import { level2WardRuleRefusal, wardAlertCover, wardTeamGroupOf, WARD_TEAM_ROLES } from "../../_wardsynq/alert-recipients.js";
@@ -1529,6 +1530,12 @@ export async function onRequest(context) {
         "discharge-checklist": CAPS.QUEUE_ADD,
         // Asserting a diagnosis is a clinical act; reading the list is not.
         problem: CAPS.EMR_TREAT, problems: CAPS.EMR_VIEW,
+        /* The Report Bug button (bug-reports.js). queue.view is the door every operational role holds; a member
+         * holding none of it (the oncqis roles, academic_cell) is let in below by membership alone, because any
+         * member may report and see their own reports. Changing a report's status or removing it is the
+         * hospital admin's: staff.admin here, and the role itself checked in the handler, so hr is refused. */
+        "bug-report": CAPS.QUEUE_VIEW, "bug-reports": CAPS.QUEUE_VIEW,
+        "bug-report-status": CAPS.STAFF_ADMIN, "bug-report-remove": CAPS.STAFF_ADMIN,
       };
       /* Every eMAR transition needs MED_ADMINISTER, including verify and dispense.
        *
@@ -1633,6 +1640,11 @@ export async function onRequest(context) {
        * before the route that is allowed to stand in for the owner ever runs. Let only that one
        * route through to its own ownership check; every other route keeps the gate as it was. */
       if (!wAz.ok && sub === "audit-anchor-acknowledge" && method === "POST" && actor.isOwner) wAz = { ok: true, role: "admin", platformOwner: true };
+      /* Bug reports: any member of this hospital may report and read their own (membership, no capability), and the
+       * StewardMD platform owner may manage them in a hospital they are not staff of. Nothing else is widened. */
+      const BUG_SUBS = new Set(["bug-report", "bug-reports", "bug-report-status", "bug-report-remove"]);
+      if (!wAz.ok && (sub === "bug-report" || sub === "bug-reports") && wAz.reason === "forbidden") wAz = await ORG.authorizeOrg(env, actor, wOrgId, null);
+      if (!wAz.ok && BUG_SUBS.has(sub) && actor.isOwner && wAz.reason !== "org_not_found") wAz = { ok: true, role: "admin", platformOwner: true };
       if (!wAz.ok) return json(azRefusal(wAz), wAz.reason === "org_not_found" ? 404 : 403, request);
 
       /* TASK 9.15/9.1: A THROTTLE ON THE CLINICAL DOOR, which had none.
@@ -2285,6 +2297,23 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
+      if (BUG_SUBS.has(sub)) {
+        const bugCtx = { ...deps, reporter: { id: actor.id, name: actor.email || actor.name || null, role: wAz.role || null },
+          manager: wAz.role === "admin" || !!wAz.platformOwner };
+        let r = null;
+        if (sub === "bug-report" && method === "POST") {
+          r = await submitBugReport(request, env, { ...bugCtx, clientReportId: body.clientReportId, description: body.description, severity: body.severity, location: body.location,
+            context: body.context, target: body.target, errors: body.errors, userAgent: body.userAgent, screen: body.screen, clientReportedAt: body.clientReportedAt });
+        } else if (sub === "bug-reports" && method === "GET") {
+          r = await listBugReports(request, env, { ...bugCtx, status: url.searchParams.get("status") || "" });
+        } else if (sub === "bug-report-status" && method === "POST") {
+          r = await setBugReportStatus(request, env, { ...bugCtx, id: body.id, status: body.status, note: body.note, expectedVersion: body.expectedVersion });
+        } else if (sub === "bug-report-remove" && method === "POST") {
+          r = await removeBugReport(request, env, { ...bugCtx, id: body.id, expectedVersion: body.expectedVersion });
+        }
+        if (r) return json(r, r.ok ? 200 : (r.status || 502), request);
+        return json({ ok: false, error: "not_found" }, 404, request);
+      }
       if (sub === "connectors" && method === "GET") {
         const r = await listConnectors(request, env, { ...deps, kind: url.searchParams.get("kind") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);

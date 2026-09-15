@@ -6560,3 +6560,16 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   reading is pinned to mar-schedule.js parseFrequency). The WardSynQ adapter drops generated duplicate-therapy rules on
   RxClass grouping classes (a class that strictly contains another class of two or more members); curated rules stay.
   The generator (scripts/interactions/build_rules.py) and the StewardMD app's copy of the rules are unchanged.
+
+## 2026-09-16 Report Bug reports live on the server per hospital, removed only once solved
+- Owner: "make sure all bugs reported thru report bug are saved on server and removed only after solved".
+  Stored in the hospital's append-only record store as the internal type `_wardsynq_bug_report`
+  (functions/_wardsynq/bug-reports.js), like connectors and payment requests: versioned, audited in the same append,
+  no migration. Not a RecordService resource type: that door needs a clinical actor (hr and viewer have none), and
+  a type in RESOURCE_TYPES is readable through the raw record door by every emr.view role.
+- Routes (ward block): `POST /ward/bug-report` any member (idempotent per reporter and client id),
+  `GET /ward/bug-reports` (hospital admin, org owner or platform owner sees all, anyone else their own),
+  `POST /ward/bug-report-status` and `POST /ward/bug-report-remove` for those managers only; remove is 409 unless
+  solved and archives (status removed), never deletes. Screen: Admin Center > Bug reports.
+- The widget keeps a device outbox: unsent until the server returns its id, retried on load, online and every
+  minute; the pre-change localStorage log is uploaded once. Only sent copies are trimmed or cleared.
