@@ -278,7 +278,7 @@ function loadWard() {
 
 test("IPS SCREEN in ward.js: reached from the chart; loading, failed, none recorded, unreadable and withheld read differently", async () => {
   const { Ward, src } = loadWard();
-  assert.match(src, /data-w-act="ipsopen"[^\n]*IPS summary/, "the chart has the button");
+  assert.match(src, /act: "ipsopen"[^\n]*label: "IPS summary"/, "the chart has the button");
   assert.ok(src.includes('apiGet("/ward/fhir/Patient/" + encodeURIComponent(pid) + "/$summary?orgId="'));
   const view = (ips) => Ward._render({ ...Ward._st, view: "ips", ips });
   assert.match(view(null), /Loading the summary/);

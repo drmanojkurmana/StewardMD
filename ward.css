@@ -135,6 +135,19 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-chart-h > div { flex: 1 1 220px; min-width: 180px; }
 #smdWard .w-chart-h b { display: block; font-size: 15px; overflow-wrap: anywhere; }
 #smdWard .w-chart-h small { color: var(--on-surface-variant); font-size: 12px; }
+/* BUG-MU2PM1D9: the chart's screens as categories, then the chosen category's buttons. The category
+ * bar scrolls inside itself on a phone; the page never scrolls sideways. */
+#smdWard .w-cnav { flex: 1 1 100%; min-width: 0; }
+#smdWard .w-cnav-bar { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; border-bottom: 1px solid var(--outline-variant); margin-bottom: 10px; }
+#smdWard .w-cnav-t { appearance: none; background: none; border: 0; border-bottom: 3px solid transparent; color: var(--on-surface-variant);
+  font: 600 14px var(--w-sans); padding: 10px 12px; min-height: 44px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex: 0 0 auto; }
+#smdWard .w-cnav-t[aria-selected="true"] { color: var(--primary); border-bottom-color: var(--primary); }
+#smdWard .w-cnav-p[hidden] { display: none; }
+#smdWard .w-cnav-p [role="toolbar"] { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdWard .w-cnav-b { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--sc-high); color: var(--on-surface);
+  font: 700 12px/20px var(--w-sans); text-align: center; }
+#smdWard .w-cnav-b.urgent { background: var(--error); color: var(--on-error); }
+@media (max-width: 600px) { #smdWard .w-cnav-t .material-symbols-outlined { display: none; } }
 
 /* problem list */
 #smdWard .w-problems { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
