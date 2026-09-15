@@ -560,3 +560,62 @@ test("discovery keeps the phone's proof trace (method, redacted path, counts) an
     { resource: "radiology", status: "proven", tried: 1, attempts: [] },
   ]);
 });
+
+function provenViewOf(resourceHint, path, extra) {
+  return Object.assign({
+    resourceHint, pathTemplate: "/Doctor/Home", rowsSelector: "#t tbody tr", headers: ["A", "B"],
+    proof: { status: "proven", tried: 1, brain: true, overlap: 1, hits: 4, cells: 4, kind: "json" },
+    endpoints: [{ method: "GET", path, xhr: true, role: "data", params: { id: { from: "worklist", field: "MRNo" } }, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  }, extra || {});
+}
+function completeSet() {
+  return [
+    provenViewOf("worklist", "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", { endpoints: [{ method: "GET", path: "/Doctor/Home/GetIPWL?Type=IPWorkList&__RequestVerificationToken", xhr: true, role: "data", params: { Type: { constant: "IPWorkList" }, __RequestVerificationToken: { token: true } }, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }] }),
+    provenViewOf("medications", "/Doctor/Home/GetMedicines/?id"),
+    provenViewOf("labs", "/Lab/Home/GetSearchPatientId?patient_id"),
+    Object.assign(provenViewOf("labs-detail", "/Lab/Home/GetPrintLabResultDetailsAuth?Render_ID"), { detailOf: "labs" }),
+    provenViewOf("radiology", "/Radio/Home?recordNo"),
+    Object.assign(provenViewOf("radiology-detail", "/Radiology/Home/GetRadiologyResultPrint?resultid"), { detailOf: "radiology" }),
+  ];
+}
+
+async function phoneCandidate(views) {
+  const t = await setupTestEnv();
+  const sRes = await onRequest(post("/api/connect/agent/sessions", { tenantId: "t1", emrUrl: DEP_ORIGIN, runner: "phone", consent: { agreed: true } }, t.env, t.doc1.headers));
+  const sessionId = (await sRes.json()).sessionId;
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/handoff`, { tenantId: "t1" }, t.env, t.doc1.headers));
+  await onRequest(post(`/api/connect/agent/sessions/${sessionId}/progress`, { tenantId: "t1", stage: "DISCOVERING" }, t.env, t.doc1.headers));
+  const dis = await (await onRequest(post(`/api/connect/agent/sessions/${sessionId}/discovery`, { tenantId: "t1", spec: minimalSpec(), steps: [], observedViews: views }, t.env, t.doc1.headers))).json();
+  const evRes = await onRequest(post(`/api/connect/agent/sessions/${sessionId}/evidence`, {
+    tenantId: "t1", probes: (dis.probes || []).map((p) => ({ opId: p.opId, status: 200, contentType: "text/html", responseShape: null, itemCount: null })),
+  }, t.env, t.doc1.headers));
+  assert.equal(evRes.status, 200, await evRes.clone().text());
+  return Object.assign(t, { sessionId, versionId: (await evRes.json()).candidateVersionId });
+}
+
+test("approval needs every required resource endpoint-backed; GET /versions/:id reports completeness", async () => {
+  // A resource missing its proven endpoint: refused, and the missing one is named.
+  const partial = await phoneCandidate(completeSet().filter((v) => v.resourceHint !== "radiology-detail"));
+  const refused = await onRequest(post(`/api/connect/agent/versions/${partial.versionId}/approve`, { tenantId: "t1" }, partial.env, partial.owner1.headers));
+  assert.equal(refused.status, 409, await refused.clone().text());
+  assert.match(JSON.stringify(await refused.json()), /radiology-detail/);
+  const verGet = await (await onRequest(get(`/api/connect/agent/versions/${partial.versionId}?tenant=t1`, partial.env, partial.doc1.headers))).json();
+  assert.equal(verGet.completeness.endpointComplete, false);
+  assert.equal(verGet.completeness.how["medications"], "endpoint");
+  assert.deepEqual(verGet.completeness.missing, ["radiology-detail"]);
+
+  // The ward list unproven: also refused, naming the ward list.
+  const noWard = completeSet();
+  delete noWard[0].proof; delete noWard[0].endpoints;
+  // Its own env: every phoneCandidate() builds a fresh database, so it must be approved in that one.
+  const noWardCand = await phoneCandidate(noWard);
+  const wardRefused = await onRequest(post(`/api/connect/agent/versions/${noWardCand.versionId}/approve`, { tenantId: "t1" }, noWardCand.env, noWardCand.owner1.headers));
+  assert.equal(wardRefused.status, 409, await wardRefused.clone().text());
+  assert.match(JSON.stringify(await wardRefused.json()), /worklist/);
+
+  // Every required resource proven: approved.
+  const full = await phoneCandidate(completeSet());
+  const ok = await onRequest(post(`/api/connect/agent/versions/${full.versionId}/approve`, { tenantId: "t1" }, full.env, full.owner1.headers));
+  assert.equal(ok.status, 200, await ok.clone().text());
+  assert.equal((await ok.json()).state, "ACTIVE");
+});

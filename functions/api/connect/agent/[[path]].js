@@ -377,6 +377,22 @@ function cleanProofTrace(raw) {
   }));
 }
 
+/* ENDPOINT-COMPLETE OR NOT COMPLETE (owner, 2026-09-16). Every routine clinical resource must be a
+ * proven backend request; a resource read only by scraping a page, or not read at all, means the
+ * adapter is not done. History rides OPD-side and never gates (the hand-built adapter reads it there). */
+const REQUIRED_RESOURCES = ["worklist", "medications", "labs", "labs-detail", "radiology", "radiology-detail"];
+function adapterCompleteness(observedViews) {
+  const views = Array.isArray(observedViews) ? observedViews : [];
+  const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data"));
+  const how = {};
+  const missing = [];
+  for (const res of REQUIRED_RESOURCES) {
+    if (provenEndpoint(res)) how[res] = "endpoint";
+    else { how[res] = "absent"; missing.push(res); }
+  }
+  return { how, endpointComplete: missing.length === 0, missing };
+}
+
 // A discovery-spec event's redacted path (connect-agent/discovery.mjs's redactPath) always writes the
 // generic token `{id}`; a compiled operation's pathTemplate (connect-agent/manifest/compile.mjs's
 // templateFromRedactedPath) renames that to a semantic placeholder ("{patientId}") derived from the
@@ -1214,6 +1230,7 @@ export async function onRequest(context) {
         pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
         views,
         proofTrace: phoneState && Array.isArray(phoneState.proofTrace) ? phoneState.proofTrace : [],
+        completeness: adapterCompleteness(phoneState && phoneState.observedViews),
         // The phone runtime replays these (selectors, labels, paths: PHI-free by construction, see
         // connect-agent/phone/CONTRACT.md "observedViews") to read a ward list in the doctor's own session.
         replay: phoneState && Array.isArray(phoneState.observedViews) ? phoneState.observedViews.map((v) => Object.assign({}, v, { pathTemplate: redactPathValues(v.pathTemplate) })) : [],
@@ -1227,6 +1244,17 @@ export async function onRequest(context) {
       const { actor, role } = await requireAgent(deps, request, env, tid, "approve");
       const version = await getVersion(deps.db, tid, versionId);
       if (!version) throw new OnboardError("not-found", "adapter version not found");
+      /* ENDPOINT-COMPLETE, OR NOT APPROVED. Every required clinical resource must be a proven backend
+       * request; approving a partial adapter put a 30-minute page hang in front of the owner
+       * (ver_b16da370, 2026-09-15). JSON-probe adapters (no observed views) keep their own evidence. */
+      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
+      const candidateViews = ((job && safeJsonParse(job.phone_state)) || {}).observedViews;
+      if (Array.isArray(candidateViews) && candidateViews.length) {
+        const completeness = adapterCompleteness(candidateViews);
+        if (!completeness.endpointComplete) {
+          throw new OnboardError("conflict", "this adapter is not endpoint-complete: no proven backend request for " + completeness.missing.join(", ") + ". Run Connect Hospital again and show the missing screens");
+        }
+      }
       const { version: activated, activation } = await activateVersion(deps.db, {
         tenantId: tid,
         deploymentId: version.deployment_id,
@@ -1236,7 +1264,6 @@ export async function onRequest(context) {
         policyVersion: "connect-agent-phone/1",
         evidenceHash: version.evidence_hash,
       });
-      const job = await findJobByCandidateVersion(deps.db, tid, versionId);
       if (job && canTransition("job", job.state, "ACTIVE")) {
         assertTransition("job", job.state, "ACTIVE");
         await casJob(deps.db, tid, job.id, job.revision, { state: "ACTIVE", completed_at: nowIso() });
