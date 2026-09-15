@@ -6443,3 +6443,18 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   type DELETE). `whoami` carries `orgOwner` / `platformOwner` as UI hints only. The OPD console (opd.html) asks
   for the typed word too; an older native app build that sends no `confirm` is refused and removes nothing.
 - Tests: `test/queue-orgs-onboard.test.mjs` (REMOVE HOSPITAL), `test/run-wardsynq-hospitals-page.mjs`.
+
+## 2026-09-15 The workstation's code is network first; its record opens with the sign-in the person chose
+- Owner bug: "record service refused to open (401). Safety checking is unavailable, so ordering is disabled." on
+  wardsynq.com. The quoted wording is the pre-2026-09-14 text for a 401 (current code says "Please sign in"), so
+  the browser was running cached code. `wardsynq/ui/wardsynq-sw.js` served the page and the unversioned
+  `record-deployment.js` / `wardsynq-store-remote.js` cache first (verified live: all cached under `wardsynq-v6`),
+  so a browser that opened the workstation before the auth fixes kept the page with no Firebase and sent no
+  credential. Now network first, cache only offline; v7 deletes the old cache and reloads an open workstation
+  window once on that upgrade (not opd.html, which holds typed observations).
+- Credential: `smd_opd_toktype` decides, as hospital-auth.js already does for ward.js. "staff" sends only
+  X-Staff-Token; "account"/"firebase" sends only the bearer; unset sends both as before. A Firebase account the
+  browser still remembered was preferred by the server over the staff session and acted as the wrong person.
+- Account restore waits up to 10 s (was 3.5 s, a race on a slow link). No server change; a genuine no-session is
+  still 401 and the banner stays.
+- Tests: `test/wardsynq-workstation-credential.test.mjs`, `test/run-wardsynq-workstation-open.mjs`.

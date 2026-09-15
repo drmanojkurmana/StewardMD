@@ -24,7 +24,7 @@ async function openRecordDeployment(opts) {
   opts = opts || {};
   // A hospital staff session (wardsynq.com / OPD console sign-in) is the same localStorage key
   // ward.js reads; it travels as X-Staff-Token. Absent on a doctor's account session.
-  const staffToken = opts.staffToken || (async () => { try { return localStorage.getItem("smd_opd_staff_tok") || null; } catch { return null; } });
+  const staffToken = opts.staffToken || (async () => { if (signInKind() === "account") return null; try { return localStorage.getItem("smd_opd_staff_tok") || null; } catch { return null; } });
   const backend = new RemoteBackend({ tenantId: opts.tenantId, token: opts.token, staffToken, baseUrl: opts.baseUrl || "" });
   const bus = opts.bus || new ClinicalEventBus({ nodeId: opts.nodeId || "workstation" });
   const store = new ClinicalStore({ backend, bus });
@@ -66,7 +66,23 @@ function recordParams(search) {
  * unavailable, so ordering is disabled." with the drug field, Sign order, Notes and Handover all
  * disabled. Found 2026-09-12 by clicking Ward on the live site. Accepting both shapes is the fix:
  * neither shell is wrong, they were simply never reconciled. */
+/* WHICH SIGN-IN, NOT WHICHEVER TOKEN IS STORED (hospital-auth.js, S3 design 2.3). The site shell and
+ * the OPD console record the sign-in the person chose in "smd_opd_toktype": "staff" for a hospital
+ * staff session, "account" (shell) or "firebase" (OPD console) for a StewardMD account. A browser can
+ * hold both - an account left signed in to Firebase and a staff session on top of it - and the server
+ * prefers a bearer, so sending both acted as whichever account Firebase still remembered rather than
+ * as the person signed in to this hospital. The chosen sign-in now travels alone; with no record of a
+ * choice (the StewardMD app, older sessions) both are sent exactly as before. */
+function signInKind() {
+  let t = "";
+  try { t = (typeof localStorage !== "undefined" && localStorage.getItem("smd_opd_toktype")) || ""; } catch {}
+  if (t === "account" || t === "firebase") return "account";
+  if (t === "staff") return "staff";
+  return "";
+}
+
 async function shellToken() {
+  if (signInKind() === "staff") return null;
   try {
     const a = typeof window !== "undefined" ? window.SMD_AUTH : null;
     if (a && a.ready && typeof a.ready.then === "function") {
@@ -85,7 +101,7 @@ async function shellToken() {
         if (u && typeof u.getIdToken === "function") tok = await u.getIdToken();
       } catch {}
     }
-    if (!tok && typeof localStorage !== "undefined") {
+    if (!tok && signInKind() !== "account" && typeof localStorage !== "undefined") {
       try {
         tok = localStorage.getItem("smd_opd_staff_tok") || null;
       } catch {}
@@ -96,4 +112,4 @@ async function shellToken() {
   }
 }
 
-export { openRecordDeployment, recordParams, shellToken };
+export { openRecordDeployment, recordParams, shellToken, signInKind };
