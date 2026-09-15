@@ -65,6 +65,9 @@ project(':capgo-capacitor-updater').projectDir = new File('../../../../node_modu
 include ':stewardmd-capacitor-llama'
 project(':stewardmd-capacitor-llama').projectDir = new File('../../../../local-plugins/capacitor-llama/android')
 
+include ':stewardmd-capacitor-vision-ocr'
+project(':stewardmd-capacitor-vision-ocr').projectDir = new File('../../../../local-plugins/capacitor-vision-ocr/android')
+
 include ':stewardmd-capacitor-whisper'
 project(':stewardmd-capacitor-whisper').projectDir = new File('../../../../local-plugins/capacitor-whisper/android')
 

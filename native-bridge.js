@@ -257,8 +257,10 @@
         return { available: !!(r && r.available), detections: (r && Array.isArray(r.detections)) ? r.detections : [] };
       }, function () { return { available: false, detections: [] }; });
     },
-    // On-device digit reader (Core ML CRNN, iOS): reads the digits inside each box independently of Apple Vision.
-    // Resolves { available, reads:[{x,y,w,h,text,conf}] }; available=false on builds without it or on Android.
+    // On-device digit reader (CRNN-CTC; Core ML on iOS, TFLite on Android - same model, converted from the
+    // same PyTorch checkpoint, verified for exact parity): reads the digits inside each box independently
+    // of the OCR engine that found the box. Resolves { available, reads:[{x,y,w,h,text,conf}] };
+    // available=false only on a build with neither native model.
     readDigits: function (dataUrl, boxes) {
       var P = plugins(), TR = P && P.VisionOcr;
       if (!(TR && TR.readDigits) || !(boxes && boxes.length)) return Promise.resolve({ available: false, reads: [] });

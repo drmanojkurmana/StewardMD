@@ -5,6 +5,55 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-16 · ICU OCR digit reader ported to Android (TFLite), not a second cloud model
+
+**Decision:** The on-device CRNN-CTC digit reader (1.5M params, 3MB, iOS Core ML since 2026-09-15) is
+now on Android too, via the SAME training checkpoint (`best.pt`) converted PyTorch -> ONNX -> TFLite
+with `onnx2tf`, not retrained. Verified before shipping: 50/50 exact text match and ~0.00002 max logit
+diff against the original PyTorch model on the held-out parity set (tighter than the Core ML export's
+own 0.028). Ships as a new Android source set on the existing `@stewardmd/capacitor-vision-ocr` local
+plugin (`local-plugins/capacitor-vision-ocr/android/`), registered under the SAME Capacitor plugin name
+(`VisionOcr`) and the SAME `readDigits({base64Image, boxes}) -> {available, reads}` contract as iOS, so
+`native-bridge.js` / `reasoning.js` needed ZERO platform-specific changes - `window.SMD_NATIVE.readDigits`
+just starts working on Android because `Capacitor.Plugins.VisionOcr.readDigits` now exists there.
+
+**Why this instead of a small vision-language model:** the owner asked for "any small image reading
+model, fewer parameters" after seeing the local-hybrid MedGemma check take 2-5+ minutes per photo on
+Android. Every vision-capable MaiK pack is 4B-class (2.5-3.1 GB); there is no smaller VLM in the app,
+and reaching for an off-the-shelf small VLM (SmolVLM, Moondream) would mean unproven digit-reading
+accuracy plus real GGUF/TFLite integration work. The digit reader already exists, is purpose-built for
+exactly this (7-segment/LCD monitor numerals, not general images), and was proven safe on iOS. Porting
+it is strictly cheaper and safer than adopting a new general model.
+
+**Gotcha found during conversion:** onnx2tf's fast "flatbuffer_direct" path (used automatically when
+`onnxsim` isn't installed) does NOT apply the usual NCHW->NHWC transpose to the OUTPUT tensor the way it
+does the input. Confirmed by inspecting the compiled `.tflite`'s IO shapes directly: input is `(1,48,192,1)`
+NHWC as expected, but output is `(1,16,48)` - `(batch, class, time)`, NOT the PyTorch/Core ML model's
+`(1,48,16)` `(batch, time, class)`. The Kotlin decode indexes `logits[0][k][t]` accordingly - verified
+against the PyTorch parity data before writing the Android decode, not assumed from the PyTorch shape.
+
+**Verified live on the Pixel 9** (no stubs): `VisionOcr.readDigits` against two real detected OCR boxes
+(ground truth HR=95, MAP=68) returned `95` at conf 0.9999999884 and `68` at conf 0.9999978847 - both
+correct, both comfortably above the 0.999 threshold, in 46ms total (vs. 2-5+ minutes for the MedGemma
+hybrid path on the same hardware). `window.SMD_NATIVE.readDigits` and `V2.digitReadBoxes`/`applyDigitReads`
+confirmed reachable and wired with no code changes beyond the plugin itself.
+
+**Open question, not yet resolved:** in a full `readImageLocal` run on the same fixture, the confirmed
+"95" did NOT flip HR from `NEEDS_REVIEW` to `AUTO_ACCEPTED`. `applyDigitReads`'s own contract is "confirm
+or conflict, never add a value" - it only satisfies the *two-scale-confirmation* blocker specifically,
+not every reason a field can be held for review, and this fixture is a deliberately hard adversarial
+photo (glare, invalid-values banner, big-clock distractor). This may be correct, existing, cross-platform
+behavior (unrelated to the Android port) rather than a defect - not confirmed either way before this
+entry was written, since the phone disconnected (owner picked it up) mid-investigation. Check whether
+the SAME non-promotion happens on iOS with this fixture before concluding anything is broken.
+
+**Build note:** the local Capacitor plugin's `android/` folder must be mirrored into BOTH the worktree
+(source of truth, committed) and the real checkout at `~/Developer/StewardMD/local-plugins/...` - Gradle
+resolves the plugin through `node_modules/@stewardmd/capacitor-vision-ocr`, which is a relative symlink
+(`../../local-plugins/...`) that resolves against wherever `node_modules` physically lives, which for
+this worktree is a symlink back to the real checkout. A worktree-only edit to a local plugin's Android
+source is invisible to a build run from the same worktree until it's copied to the real checkout too.
+
 ## 2026-09-12 · Connect Hospital: explore everything, then ask the doctor
 
 **Decision:** The phone crawl is exhaustive (every control under one patient record, read-only SKIP list, keywords only order the walk) and captures label/value report blocks as well as tables; whatever is still missing is asked of the doctor in a new plugin `guide` mode (question banner, Done, no touch overlay) and the tap path is saved as the replay pattern. Details in `connect-hospital-next-2026-09-12.md`.
