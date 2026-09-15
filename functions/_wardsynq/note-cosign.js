@@ -101,6 +101,7 @@ function summary(n, nowMs) {
     noteId: n.id, patientId: n.patientId, encounterId: n.encounterId || null,
     noteType: n.noteType || null, templateId: n.templateId || null,
     authorId: n.authorId || null, submittedBy: n.submittedBy || null, submittedAt: n.submittedAt || null,
+    writtenAt: (n.meta && (n.meta.recordedAt || n.meta.effectiveAt)) || null,
     signedBy: n.signedBy || null, signedAt: n.signedAt || null,
     state: signingState(n), waitingMinutes: waitingMinutes(n, nowMs),
     // Named, because a note signed with sections still empty is a real thing and the signature does
@@ -221,6 +222,14 @@ async function listAwaitingCoSign(request, env, ctx) {
         .map((n) => summary(n, nowMs))
         .sort((a, b) => String(a.noteId).localeCompare(String(b.noteId)))
     : [];
+  /* LT-13: WHOSE note. A worklist row with no patient cannot be acted on safely: a doctor submitting
+   * "progress complete" cannot tell which bed it was for. One read per distinct patient on the list; a
+   * name that cannot be read stays null and the row still shows. */
+  const names = new Map();
+  await Promise.all([...new Set(notes.concat(mine).map((n) => n.patientId).filter(Boolean))].map(async (pid) => {
+    try { const p = await svc.get("Patient", pid); if (p) names.set(pid, { name: p.name || p.display || null, mrn: p.mrn || null }); } catch { /* stays unnamed */ }
+  }));
+  for (const n of notes.concat(mine)) { const p = names.get(n.patientId); n.patientName = (p && p.name) || null; n.mrn = (p && p.mrn) || null; }
   return {
     ...base, ok: true, notes, waiting: notes.length, mine, unsubmitted: mine.length,
     /* Whether the reader can actually clear this list. A worklist that shows work to somebody who

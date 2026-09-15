@@ -145,6 +145,18 @@ async function verifyOrder(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
 
+  /* 5. NOBODY VERIFIES THEIR OWN PRESCRIPTION (LT-20). A second pair of eyes is the whole point of
+   * verification, and a prescriber who can clear their own order has made it a formality. Refused and
+   * audited whatever role the actor holds, admin included. An unverified order can still be given
+   * (rule 4), so this strands no ward. */
+  const prescriber = str(order.prescriberId || order.signedBy);
+  if (prescriber && prescriber === str(resolved.actor.id)) {
+    try { await svc.auditDenied(TYPE, verificationIdFor(orderId, order.version) || orderId, ["SELF_VERIFICATION"], order.patientId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "audit_failed", detail: "The refusal could not be recorded in the audit trail. Nothing was verified.", written: 0 }; }
+    return { ...base, ok: false, status: 403, error: "self_verification", orderId, written: 0,
+      message: "You prescribed this order, so you cannot verify it. Another pharmacist or clinician must check it. Nothing was recorded." };
+  }
+
   const id = verificationIdFor(orderId, order.version);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
@@ -187,7 +199,7 @@ async function verificationQueue(request, env, ctx) {
   const patientId = str(ctx.patientId);
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", orders: [] };
 
-  const { svc, error } = await openService(request, env, ctx, "record:read");
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, orders: [] };
 
   let orders, verifications, allergies;
@@ -213,6 +225,8 @@ async function verificationQueue(request, env, ctx) {
     return {
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       encounterId: o.encounterId || null, orderVersion: o.version, prescriberId: o.prescriberId || null,
+      // The screen offers no Verify on an order this reader prescribed; the server refuses it regardless.
+      prescribedByYou: !!(resolved && str(o.prescriberId || o.signedBy) === str(resolved.actor.id)),
       ...v,
       verification: v.verification ? {
         outcome: v.verification.outcome, reason: v.verification.reason || null,

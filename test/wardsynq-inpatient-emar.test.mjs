@@ -2049,74 +2049,71 @@ test("an item the clinician never saw is refused, and the sets are ORG content",
  * override rate cannot know it has the problem.
  */
 
-test("an override is recorded against the RULE, and the report names no clinician", async () => {
+/* LT-14: the verdict an override is recorded against is the SERVER's, computed from the record. A verdict
+ * in the request body is not read at all: these tests used to send one, with an actorId of the caller's
+ * choosing, and the analytics believed it. */
+async function onWarfarin() {
+  const ctx = await admittedPatientOnDrug();
+  const w = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: ctx.adm.patientId, encounterId: ctx.adm.encounterId, drug: "Warfarin", dose: { value: 5, unit: "mg" }, route: "oral", frequency: "OD" } });
+  assert.equal(w.__status, 200, JSON.stringify(w));
+  return ctx;
+}
+
+test("an override is recorded against the RULE the server found, attributed to the prescriber, and the report names no clinician", async () => {
   seedHospital();
-  const { adm } = await admittedPatientOnDrug();
-  const safety = {
-    rulePackVersion: "rx-2026.09",
-    warnings: [{ code: "interaction", ruleId: "ddi-warfarin-nsaid", severity: "major", overridden: true }],
-    overrides: [{ code: "interaction", targetId: "ddi-warfarin-nsaid", reasonCode: "benefit-outweighs-risk", rationale: "Single dose, INR checked today.", actorId: "cfa:dr" }],
-  };
+  const { adm } = await onWarfarin();
+  const fabricated = { warnings: [{ code: "interaction", ruleId: "invented", overridden: true }], overrides: [{ code: "interaction", targetId: "invented", reasonCode: "x", rationale: "y", actorId: "cfa:dr" }] };
   const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
-    orgId: ORG, safety,
+    orgId: ORG, safety: fabricated, overrideReason: "Single dose, INR checked today.",
     order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TDS" },
   });
   assert.equal(ord.__status, 200, JSON.stringify(ord));
+  assert.equal(ord.safety.checked, true);
+  assert.ok(ord.safety.warnings.some((w) => w.code === "INTERACTION_MAJOR" && w.overridden), JSON.stringify(ord.safety));
   assert.equal(ord.overridesRecorded.written, 1, "the override is no longer thrown away");
 
   const rep = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
   assert.equal(rep.__status, 200, JSON.stringify(rep));
   assert.equal(rep.report.totalOverrides, 1);
-  assert.equal(rep.report.rules[0].targetId, "ddi-warfarin-nsaid");
-  assert.equal(rep.report.rules[0].topReason, "benefit-outweighs-risk");
-  /* This verdict carries no `findings`, so nothing counted what fired and there is no denominator.
-   * The report says so rather than inventing one. The test below sends a full verdict and gets a
-   * real rate. */
-  assert.equal(rep.report.rules[0].overrideRate, null);
-  assert.equal(rep.report.evaluationsRecorded, 0);
-  assert.match(rep.report.note2, /numerators without a denominator/);
-  // NO CLINICIAN IS NAMED. The report is evidence about rules; naming people would stop them
-  // writing honest rationales, which is the only data that makes a rule fixable.
-  assert.ok(!JSON.stringify(rep.report).includes("cfa:dr"));
-  // The actor IS on the stored record, because a clinical decision needs an author.
+  assert.equal(rep.report.rules[0].targetId, "pair-warfarin-nsaid");
+  assert.equal(rep.report.rules[0].topReason, "prescriber-judgement");
+  // The firing is the server's too, so the rate has a real denominator.
+  assert.equal(rep.report.evaluationsRecorded, 1);
+  assert.equal(rep.report.rules[0].overrideRate, 1);
+  // NO CLINICIAN IS NAMED in the report; the actor IS on the stored record, because a decision needs an author.
+  assert.ok(!JSON.stringify(rep.report).includes(idFor(DOCTOR)));
   const stored = await RECORD.byPatient(TENANT_ROW.id, "SafetyOverride", adm.patientId);
   assert.equal(stored.length, 1);
-  assert.equal(stored[0].actorId, "cfa:dr");
-  assert.equal(stored[0].rulePackVersion, "rx-2026.09");
+  assert.equal(stored[0].actorId, idFor(DOCTOR), "attributed to whoever is signed in, never to an actor the body names");
+  assert.equal(stored[0].rationale, "Single dose, INR checked today.");
+  assert.ok(!stored.some((o) => o.targetId === "invented"), "a verdict in the body is not read");
 });
 
 test("THE OVERRIDE RATE GETS ITS DENOMINATOR: a rule respected twice and overridden once reads 0.33", async () => {
   seedHospital();
-  const { adm } = await admittedPatientOnDrug();
-  const RULE = { code: "interaction", ruleId: "ddi-warfarin-nsaid", disposition: "overridable", severity: "major" };
-  const order = (drug, safety) => as(DOCTOR, "/ward/medication-order", "POST", {
-    orgId: ORG, safety,
+  const { adm } = await onWarfarin();
+  const order = (drug, overrideReason) => as(DOCTOR, "/ward/medication-order", "POST", {
+    orgId: ORG, overrideReason,
     order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TDS" },
   });
 
   /* Twice the rule fires and the prescriber respects it. THIS is the case that has to reach the
    * denominator: counting only the orders where somebody overrode something would make every rule in
    * the pack read as overridden 100% of the time. */
-  const respected = { rulePackVersion: "rx-2026.09", findings: [RULE], warnings: [], overrides: [] };
-  const a = await order("Ibuprofen", respected);
+  const a = await order("Ibuprofen");
   assert.equal(a.__status, 200, JSON.stringify(a));
-  assert.deepEqual(a.overridesRecorded.fired.keys, ["interaction:ddi-warfarin-nsaid"]);
+  assert.ok(a.overridesRecorded.fired.keys.includes("INTERACTION_MAJOR:pair-warfarin-nsaid"), JSON.stringify(a.overridesRecorded));
   assert.equal(a.overridesRecorded.written, 0, "nothing was overridden, and nothing pretends it was");
-  await order("Naproxen", respected);
+  await order("Naproxen");
 
   // The third time, the prescriber overrides it.
-  const overridden = {
-    ...respected,
-    warnings: [{ ...RULE, overridden: true }],
-    overrides: [{ code: "interaction", targetId: "ddi-warfarin-nsaid", reasonCode: "benefit-outweighs-risk", rationale: "Single dose, INR checked today.", actorId: "cfa:dr" }],
-  };
-  const c = await order("Diclofenac", overridden);
-  assert.equal(c.overridesRecorded.written, 1);
+  const c = await order("Diclofenac", "Single dose, INR checked today.");
+  assert.ok(c.overridesRecorded.written >= 1, JSON.stringify(c.overridesRecorded));
 
   const rep = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
   assert.equal(rep.__status, 200, JSON.stringify(rep));
   assert.equal(rep.report.evaluationsRecorded, 3);
-  const rule = rep.report.rules.find((r) => r.targetId === "ddi-warfarin-nsaid");
+  const rule = rep.report.rules.find((r) => r.targetId === "pair-warfarin-nsaid");
   assert.equal(rule.fired, 3, "three orders, three alerts");
   assert.equal(rule.overridden, 1);
   assert.equal(rule.overrideRate, 0.33, "the number that says whether this rule is worth keeping");
@@ -2124,32 +2121,35 @@ test("THE OVERRIDE RATE GETS ITS DENOMINATOR: a rule respected twice and overrid
 
   // A retried identical order is the same evaluation, not a second alert. Inflating the denominator
   // would quietly lower the rate, which is the direction that hides a bad rule.
-  await order("Diclofenac", overridden);
+  await order("Diclofenac", "Single dose, INR checked today.");
   const again = await as(NURSE, `/ward/overrides?orgId=${ORG}`);
   assert.equal(again.report.evaluationsRecorded, 3);
-  assert.equal(again.report.rules.find((r) => r.targetId === "ddi-warfarin-nsaid").fired, 3);
+  assert.equal(again.report.rules.find((r) => r.targetId === "pair-warfarin-nsaid").fired, 3);
 
   // The denominator comes from the RECORD, not from whoever reads the report.
   const firings = await RECORD.byPatient(TENANT_ROW.id, "SafetyFiring", adm.patientId);
   assert.equal(firings.length, 3);
-  assert.ok(firings.every((f) => f.rulePackVersion === "rx-2026.09"));
+  assert.ok(firings.every((f) => f.rulePackVersion && f.rulePackVersion === a.safety.rulePackVersion));
 });
 
 test("AN ANALYTICS FAILURE NEVER COSTS A PATIENT THEIR MEDICINE", async () => {
   seedHospital();
-  const { adm } = await admittedPatientOnDrug();
-  // A verdict whose override cannot be attributed: the analytics row is refused, and the ORDER is
-  // still written. The order and the prescriber's safety decision are the clinical act.
-  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
-    orgId: ORG,
-    safety: { warnings: [{ code: "dose", overridden: true }], overrides: [] },
-    order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Codeine", dose: { value: 30, unit: "mg" }, route: "oral", frequency: "QDS" },
-  });
+  const { adm } = await onWarfarin();
+  // The analytics store refuses the override row: the ORDER is still written. The order and the
+  // prescriber's safety decision are the clinical act.
+  const real = RECORD.append.bind(RECORD);
+  RECORD.append = async (t, recs, c) => { if ((recs || []).some((r) => r.resourceType === "SafetyOverride")) throw new Error("simulated analytics outage"); return real(t, recs, c); };
+  let ord;
+  try {
+    ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+      orgId: ORG, overrideReason: "Benefit outweighs risk.",
+      order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TDS" },
+    });
+  } finally { RECORD.append = real; }
   assert.equal(ord.__status, 200, JSON.stringify(ord));
   assert.equal(ord.written, 1, "the order is written regardless");
   assert.ok(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId));
-  assert.equal(ord.overridesRecorded.written, 0);
-  assert.deepEqual(ord.overridesRecorded.rejected.map((r) => r.reason), ["override_not_attributable"]);
+  assert.equal(ord.overridesRecorded.error, "override_not_recorded");
 
   // An order with no safety verdict at all records nothing and says nothing about overrides.
   const plain = await as(DOCTOR, "/ward/medication-order", "POST", {
@@ -7094,4 +7094,115 @@ test("OBSERVATION FREQUENCY: none set says so (never 'not due'); a weight is not
   assert.equal(row.news2.risk, "high", JSON.stringify(row.news2));
   assert.match(row.escalation.text, /NEWS2 \d+ \(high\)\. Escalation is your call; nothing has been paged\./);
   assert.equal(row.vitals.state, "not_due");
+});
+
+/* ---- LIVE TEST 2026-09-15 (docs/wardsynq/LIVE_TEST_2026-09-15.md) ---------------------------------- */
+
+const anonymous = async (path, method, body) => {
+  const res = await onRequest({ request: new Request("https://x/api/queue" + path, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined }), env: ENV });
+  return res.status;
+};
+
+test("LT-14: POST /api/queue/ward/medication-order runs the SERVER safety check (allergy, interaction, dose) on the chart order; checkOnly writes nothing; 401, nurse 403 and another hospital refused with nothing written", async () => {
+  seedHospital();
+  const { adm } = await onWarfarin();
+  RECORD.append(TENANT_ROW.id, [{ resourceType: "AllergyIntolerance", id: "lt14-alg-pen", version: 1, patientId: adm.patientId, substance: "Penicillin", severity: "severe" }]);
+  const body = { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Amoxicillin", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TDS" } };
+  const amoxId = "wsq-rx-" + String(adm.encounterId).toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-amoxicillin";
+  const orders = async () => (await RECORD.byPatient(TENANT_ROW.id, "MedicationOrder", adm.patientId)).length;
+  const before = await orders();
+
+  // Refusals first, and nothing written by any of them.
+  assert.equal(await anonymous("/ward/medication-order", "POST", { ...body, checkOnly: true }), 401);
+  assert.equal((await as(NURSE, "/ward/medication-order", "POST", { ...body, checkOnly: true })).__status, 403);
+  assert.equal((await as("stranger@example.test", "/ward/medication-order", "POST", { ...body, checkOnly: true })).__status, 403, "not a member of this hospital");
+  assert.equal(await orders(), before);
+
+  // The check, before anything is written: the documented penicillin allergy is found by the engine.
+  const check = await as(DOCTOR, "/ward/medication-order", "POST", { ...body, checkOnly: true, safety: { findings: [] } });
+  assert.equal(check.__status, 200, JSON.stringify(check));
+  assert.equal(check.written, 0);
+  assert.equal(check.checkOnly, true);
+  assert.equal(check.safety.checked, true, "never safety: null");
+  assert.ok(check.safety.overridables.some((f) => f.code === "ALLERGY_CLASS"), JSON.stringify(check.safety));
+  assert.equal(await orders(), before, "checkOnly writes nothing");
+  assert.equal(await RECORD.latest(TENANT_ROW.id, "MedicationOrder", amoxId), null);
+
+  // Prescribed anyway, with a reason: the verdict is on the order, the override is attributed.
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", { ...body, overrideReason: "Tolerated amoxicillin in 2024; allergy label doubtful." });
+  assert.equal(ord.__status, 200, JSON.stringify(ord));
+  assert.equal(ord.safety.checked, true);
+  const stored = await RECORD.latest(TENANT_ROW.id, "MedicationOrder", ord.orderId);
+  assert.equal(stored.safetyAtOrder.checked, true);
+  assert.ok(stored.safetyAtOrder.findings.some((f) => f.code === "ALLERGY_CLASS" && f.overridden), JSON.stringify(stored.safetyAtOrder));
+  assert.equal(stored.safetyAtOrder.acknowledgedBy, idFor(DOCTOR));
+
+  // A dose ceiling is the same engine: a weight-based drug on an UNWEIGHED patient is reported, not passed.
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Unweighed Testcase", mobile: "9876500077", gender: "male", ageYears: 40 });
+  const adm2 = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "14", admittedAt: "2026-09-07T08:00:00.000Z" });
+  const para = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, checkOnly: true, order: { patientId: adm2.patientId, encounterId: adm2.encounterId, drug: "Paracetamol", dose: { value: 650, unit: "mg" }, route: "oral", frequency: "TDS" } });
+  assert.ok(para.safety.blocks.some((f) => f.code === "DOSE_WEIGHT_MISSING"), JSON.stringify(para.safety));
+
+  // Prescribing the same drug again says it replaces the active order, before it does.
+  const again = await as(DOCTOR, "/ward/medication-order", "POST", { ...body, checkOnly: true });
+  assert.equal(again.replaces.orderId, ord.orderId);
+});
+
+test("LT-14 / LT-20: a chart order a pharmacist verified is on the nurse's round for the next 24 hours, and the chart says which orders are awaiting pharmacy", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();   // Paracetamol 500mg TID
+  let tl = await as(DOCTOR, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(tl.activeMedications.find((m) => m.orderId === ord.orderId).pharmacy, "unverified");
+  const v = await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  assert.equal(v.__status, 200, JSON.stringify(v));
+  tl = await as(DOCTOR, `/ward/timeline?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(tl.activeMedications.find((m) => m.orderId === ord.orderId).pharmacy, "verified");
+  const from = new Date().toISOString(), to = new Date(Date.now() + 86400000).toISOString();
+  const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
+  assert.equal(s.__status, 200, JSON.stringify(s));
+  assert.equal(s.due.filter((d) => d.orderId === ord.orderId).length, 3, "TID: three doses in any 24 hours from now");
+});
+
+test("LT-20: POST /api/queue/ward/verify-order refuses the prescriber verifying their own order (403, audited, nothing written); the pharmacist may; 401 and a nurse refused", async () => {
+  seedHospital();
+  const { adm, ord } = await admittedPatientOnDrug();
+  const verifications = async () => (await RECORD.byPatient(TENANT_ROW.id, "MedicationVerification", adm.patientId)).length;
+  assert.equal(await anonymous("/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" }), 401);
+  assert.equal((await as(NURSE, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" })).__status, 403);
+
+  /* The prescriber holds order.verify here (a doctor-admin on the live demo did): the refusal is a rule about the
+   * person, not the role. Granted by making the prescriber the org owner for this one call. */
+  const orgDoc = docs.get(`q_orgs/${ORG}`);
+  docs.set(`q_orgs/${ORG}`, { ...orgDoc, fields: { ...orgDoc.fields, ownerUid: idFor(DOCTOR) } });
+  const self = await as(DOCTOR, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  docs.set(`q_orgs/${ORG}`, orgDoc);
+  assert.equal(self.__status, 403, JSON.stringify(self));
+  assert.equal(self.error, "self_verification");
+  assert.match(self.message, /cannot verify it/);
+  assert.equal(await verifications(), 0, "nothing was written");
+  assert.ok(RECORD.audit.some((a) => a.action === "record.denied" && a.outcome === "denied" && a.actor === idFor(DOCTOR)
+    && a.scope && (a.scope.reasons || []).includes("SELF_VERIFICATION")), "the refusal is in the audit trail");
+
+  const q = await as(PHARM, `/ward/verification-queue?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(q.orders.find((o) => o.orderId === ord.orderId).prescribedByYou, false);
+  const ok = await as(PHARM, "/ward/verify-order", "POST", { orgId: ORG, orderId: ord.orderId, outcome: "verified" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(await verifications(), 1);
+});
+
+test("LT-13: GET /api/queue/ward/cosign-queue names the patient on every note row; LT-24: the patient copy prints no date of birth worked out from an age", async () => {
+  seedHospital();
+  const { reg, adm } = await admittedPatientOnDrug();
+  const n = await noteBy(LOCUM, adm);
+  assert.equal(n.__status, 200, JSON.stringify(n));
+  const q = await as(LOCUM, `/ward/cosign-queue?orgId=${ORG}`);
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  const rows = q.notes.concat(q.mine);
+  assert.ok(rows.length >= 1);
+  assert.ok(rows.every((r) => r.patientName === reg.patient.name && r.mrn === reg.mrn), JSON.stringify(rows));
+
+  const pc = await as(DOCTOR, `/ward/patient-copy?orgId=${ORG}&patientId=${adm.patientId}`);
+  assert.equal(pc.__status, 200, JSON.stringify(pc).slice(0, 300));
+  assert.equal(pc.document.patient.dob, null, "registered with an age only: no invented date of birth on a patient's page");
+  assert.ok(!(pc.clinicianWarnings || []).some((w) => /wardsynq\./.test(w)), "no configuration key on the screen");
 });
