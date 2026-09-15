@@ -41,6 +41,10 @@ test("readImageLocal hands the boxes to the parser and returns them", () => {
   assert.match(reasoning, /V2\.parseMonitor\(obsM, \{ px: px, imageSize: ctx\.imageSize, twoScale: \{ ran: !!\(ctx\.crop && !ctx\.crop\.error\) \}, unlabeledAuto: relaxed, detections: ctx\.detections \|\| undefined \}\)/);
   assert.match(reasoning, /V2\.tileRegions\(ctx\.obs, ctx\.detections, ctx\.imageSize\)/, "detected tiles with no digits are re-read");
   assert.match(reasoning, /V2\.applyConfirmation\(ctx\.obs, b\)/, "the second tile read can only confirm");
+  assert.match(reasoning, /window\.SMD_NATIVE\.readDigits\(dataUrl, dboxes\)/, "the digit reader reads the original capture");
+  assert.match(reasoning, /V2\.applyDigitReads\(ctx\.obs, r\.reads\)/, "digit reads can only confirm or conflict");
+  assert.match(bridge, /TR\.readDigits\(\{ base64Image: b64, boxes: boxes \}\)/);
+  assert.match(swift, /forResource: "DigitReader", withExtension: "mlmodelc"/);
   assert.match(reasoning, /window\.SMD_NATIVE\.detectVitals\(dataUrl\)/, "the on-device detector runs on the original capture");
   assert.match(reasoning, /\{ mode: "fields", fields: fields, lines: lines, boxes: boxes, source: "on-device" \}/);
 });

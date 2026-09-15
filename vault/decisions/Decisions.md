@@ -6420,3 +6420,13 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   automatic check off. Choosing AI Vision as the engine explicitly is unchanged (fills from AI directly).
 - Sending OCR text instead of the image was rejected: similar or higher token cost and it loses layout/colour.
 - Tests: `test/icu-hybrid-merge.test.mjs` (merge rules + end-to-end through image-engine with stubs).
+
+## 2026-09-15 ICU OCR: on-device digit reader as an independent second reader
+- `DigitReader.mlmodelc` (3 MB CRNN-CTC, 48x192 gray; trained on 900k synthetic + 27.5k real crops pseudo-labelled
+  where EasyOCR, TrOCR and PARSeq agreed exactly). Held-out real crops: 88.7% exact; conf >= 0.999 covers 73.5% at
+  99.7% precision (1 confidently wrong: upside-down photo). So it is NEVER a sole source of a value.
+- `applyDigitReads`: a read >= 0.999 CONFIRMS a Vision box with the same digits (digitsAgree, so stray label glyphs
+  are not disagreement) or CONFLICTS it when digits differ; it never adds a value. Native `readDigits` in the
+  VisionOcr plugin (preprocessing ported from the training code, see spec in the job's digits/out/spec.json).
+- Benchmark (268 cases, cached OCR): 0 wrong before and after; 11 fields review -> correct (owner 97c20181 NIBP
+  73/36 (49), MP40 RR 22 on two perturbations, 2 draft externals), 0 lost.

@@ -48,6 +48,9 @@ if (VERIFY_OPT) PARSE_OPTS.verifyFields = VERIFY_OPT === "none" ? [] : VERIFY_OP
 const DETECTIONS = opt("--detections", null) ? JSON.parse(readFileSync(opt("--detections", null), "utf8")) : null;
 const DISABLE_OPT = opt("--disable", null);
 const NO_TILES = args.includes("--no-tiles");
+// digit reader: --dump-digit-boxes <json> writes {img: [{x,y,w,h}]}; --digits <json> ({img: [{x,y,w,h,text,conf}]}) applies reads
+const DUMP_DIGITS = opt("--dump-digit-boxes", null), DIGITS = opt("--digits", null) ? JSON.parse(readFileSync(opt("--digits", null), "utf8")) : null;
+const digitBoxes = {};
 if (DISABLE_OPT) PARSE_OPTS.disable = DISABLE_OPT.split(",");
 const FIX = join(HERE, "fixtures");
 mkdirSync(OUT, { recursive: true });
@@ -188,6 +191,8 @@ for (const casePath of cases) {
       } catch (e) { console.error("tile OCR failed for", gt.id, String(e.message).slice(0, 120)); }
     }
   }
+  if (DUMP_DIGITS) digitBoxes[img] = M.digitReadBoxes(obs);
+  if (DIGITS) { obs = M.applyDigitReads(obs, DIGITS[img] || []); mergeNotes = obs.notes || mergeNotes; }
   let px = null; try { if (existsSync(img)) px = pixelSource(img); } catch (e) { /* colour + quality pixel checks become neutral */ }
   const t0 = Date.now();
   const twoScale = SCALES === 2 ? { ran: !!crop || confirmRan } : null;
@@ -293,6 +298,7 @@ if (SWEEP) {
   }
 }
 
+if (DUMP_DIGITS) writeFileSync(DUMP_DIGITS, JSON.stringify(digitBoxes));
 writeFileSync(join(OUT, "results.json"), JSON.stringify({ generated: new Date().toISOString(), parser: M.VERSION, policy: POLICY, scales: SCALES, thresholds: M.THRESH, quality: M.QUALITY, groups: byGroup, regressions, sweep, cases: results }, null, 2));
 
 /* ------------------------------------------------------------------ report */

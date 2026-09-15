@@ -20,6 +20,6 @@ let package = Package(
                 .product(name: "Cordova", package: "capacitor-swift-pm")
             ],
             path: "ios/Sources/VisionOcrPlugin",
-            resources: [.copy("Resources/VitalDetector.mlmodelc")])
+            resources: [.copy("Resources/VitalDetector.mlmodelc"), .copy("Resources/DigitReader.mlmodelc")])
     ]
 )

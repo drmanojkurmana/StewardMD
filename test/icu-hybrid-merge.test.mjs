@@ -48,6 +48,25 @@ test("inputs are not mutated and non-numeric AI values are ignored", () => {
   assert.equal(m.fields.hr.status, "AUTO_ACCEPTED");
 });
 
+test("digit reader: same digits confirm, different confident digits conflict, low confidence abstains, never adds", () => {
+  const b = (text, x) => ({ text, conf: 1, x, y: 0.1, w: 0.1, h: 0.05 });
+  const obs = [b("16", 0.1), b("98", 0.3), b("3° 22", 0.5), b("120", 0.7)];
+  const r = M.applyDigitReads(obs, [
+    { x: 0.1, y: 0.1, w: 0.1, h: 0.05, text: "16", conf: 0.9995 },
+    { x: 0.3, y: 0.1, w: 0.1, h: 0.05, text: "96", conf: 0.9999 },
+    { x: 0.5, y: 0.1, w: 0.1, h: 0.05, text: "22", conf: 0.9999 },
+    { x: 0.7, y: 0.1, w: 0.1, h: 0.05, text: "126", conf: 0.99 },
+    { x: 0.9, y: 0.1, w: 0.1, h: 0.05, text: "55", conf: 1 }
+  ]);
+  assert.equal(r.length, 4, "a read with no matching OCR box adds nothing");
+  assert.equal(r[0].confirmed, true);
+  assert.match(r[1].ocrConflict, /digit reader 96/);
+  assert.equal(r[2].confirmed, true, "stray label glyphs are not a disagreement");
+  assert.equal(r[3].confirmed, undefined, "below 0.999 the reader abstains");
+  assert.equal(obs[0].confirmed, undefined, "input not mutated");
+  assert.deepEqual(M.digitReadBoxes([b("HR", 0), b("72", 0.2)]), [{ x: 0.2, y: 0.1, w: 0.1, h: 0.05 }]);
+});
+
 // ── end to end through image-engine.js: device read -> automatic AI check on the crop -> merged result ──
 function load({ local, ai, consent = true, hybrid }) {
   const sent = [];

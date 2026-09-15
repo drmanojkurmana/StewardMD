@@ -229,6 +229,16 @@
         return { available: !!(r && r.available), detections: (r && Array.isArray(r.detections)) ? r.detections : [] };
       }, function () { return { available: false, detections: [] }; });
     },
+    // On-device digit reader (Core ML CRNN, iOS): reads the digits inside each box independently of Apple Vision.
+    // Resolves { available, reads:[{x,y,w,h,text,conf}] }; available=false on builds without it or on Android.
+    readDigits: function (dataUrl, boxes) {
+      var P = plugins(), TR = P && P.VisionOcr;
+      if (!(TR && TR.readDigits) || !(boxes && boxes.length)) return Promise.resolve({ available: false, reads: [] });
+      var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
+      return TR.readDigits({ base64Image: b64, boxes: boxes }).then(function (r) {
+        return { available: !!(r && r.available), reads: (r && Array.isArray(r.reads)) ? r.reads : [] };
+      }, function () { return { available: false, reads: [] }; });
+    },
     ocr: function (dataUrl, opts) {
       var P = plugins();
       var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr)

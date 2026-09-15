@@ -386,6 +386,34 @@
     return { fields: out, meta: m2, changed: changed };
   }
 
+  /* Digit reader (on-device CRNN, a reader independent of Apple Vision). It may only CONFIRM a box whose digits it
+   * reads identically, or mark a box CONFLICTED when it reads different digits; like applyConfirmation it never
+   * adds a value. Reads below DIGIT_MIN abstain. digitReadBoxes lists the boxes worth reading (raw geometry; the
+   * reader pads ~10% of the height); applyDigitReads matches reads back by geometry. */
+  var DIGIT_MIN = 0.999;
+  function digitReadBoxes(obs, max) {
+    return (obs || []).filter(function (o) { var d = digitsOf(o.text); return d && d.length <= 8 && String(o.text).length <= 14 && o.w > 0 && o.h > 0; })
+      .sort(function (a, b) { return b.h - a.h; })
+      .slice(0, max || 60)
+      .map(function (o) { return { x: o.x, y: o.y, w: o.w, h: o.h }; });
+  }
+  function applyDigitReads(obs, reads) {
+    var notes = (obs.notes || []).slice();
+    var out = (obs || []).map(function (o) { return assign({}, o); });
+    out.forEach(function (o) {
+      var d = digitsOf(o.text); if (!d || o.ocrConflict) return;
+      var r = (reads || []).filter(function (x) { return x && Math.abs(x.x - o.x) < 1e-6 && Math.abs(x.y - o.y) < 1e-6 && Math.abs(x.w - o.w) < 1e-6 && Math.abs(x.h - o.h) < 1e-6; })[0];
+      if (!r || !(r.conf >= DIGIT_MIN)) return;
+      var rd = String(r.text || "").replace(/\D/g, "");
+      if (!rd) return;
+      // same comparison as the two OCR passes: stray label glyphs ("3° 22", "2 118/76 (90)") are not a disagreement
+      if (rd === d || digitsAgree(o.text, r.text)) { if (!o.confirmed) { o.confirmed = true; o.confirmedBy = "digit reader"; } o.digitReader = { text: r.text, conf: r.conf }; }
+      else { o.ocrConflict = "digit reader " + r.text; o.confirmed = false; notes.push("digit reader disagrees: " + JSON.stringify(o.text) + " vs " + JSON.stringify(r.text)); }
+    });
+    out.notes = notes;
+    return out;
+  }
+
   // A tile read's boxes (already mapped to the full frame) that belong to the tile: centre inside the detector box.
   function tileObservations(mapped, region) {
     var c = region && region.core; if (!c) return mapped || [];
@@ -1142,7 +1170,7 @@
     return out.join("");
   }
 
-  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, tileRegions: tileRegions, tileObservations: tileObservations, hybridMerge: hybridMerge, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
+  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, tileRegions: tileRegions, tileObservations: tileObservations, hybridMerge: hybridMerge, digitReadBoxes: digitReadBoxes, applyDigitReads: applyDigitReads, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
     verifyDigits: verifyDigits, VERIFY: VERIFY, VERIFY_FIELDS: VERIFY_FIELDS,
     _internals: { DIGIT_TEMPLATES: DIGIT_TEMPLATES, readGlyphs: readGlyphs, classifyGlyph: classifyGlyph, buildGraph: buildGraph, assessQuality: assessQuality, blurOf: blurOf, tiltOf: tiltOf, digitsOf: digitsOf, similarity: similarity, gluedValue: gluedValue, FIELDS: FIELDS, LABELS: LABELS, rgbToHsv: rgbToHsv, sampleRegion: sampleRegion, channelColorAtValue: channelColorAtValue, channelColor: channelColor } };
 });

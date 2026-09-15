@@ -4627,6 +4627,15 @@
             });
           }, Promise.resolve()).then(function () { ctx.tiles = tiles.length; return ctx; });
         }).then(function (ctx) {
+          // on-device digit reader: an independent second reader may confirm Vision's digits or flag a conflict,
+          // never add a value (applyDigitReads)
+          if (!window.SMD_NATIVE.readDigits) return ctx;
+          var dboxes = []; try { dboxes = V2.digitReadBoxes(ctx.obs); } catch (e) {}
+          return window.SMD_NATIVE.readDigits(dataUrl, dboxes).then(function (r) {
+            if (r && r.available && r.reads.length) { try { ctx.obs = V2.applyDigitReads(ctx.obs, r.reads); ctx.digitReads = r.reads.length; } catch (e) {} }
+            return ctx;
+          }, function () { return ctx; });
+        }).then(function (ctx) {
           var px = ctx.px, obsM = ctx.obs;
           var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
           var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed, detections: ctx.detections || undefined });
