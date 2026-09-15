@@ -1051,6 +1051,162 @@ git commit -m "Connect Agent: a patient read never opens a page, and says what i
 
 ---
 
+### Task 3b: A request that lost the patient is refused, never sent unscoped
+
+**Why:** `provenValue` (`adapter-runtime.mjs:412`) is `if (!src || src.empty || src.unmapped) return '';`, so a patient-keyed parameter whose source is `{unmapped:true}` replays EMPTY. `paramsOf` writes `{unmapped:true}` whenever tracing fails, and tracing fails for every resource when the ward-list proof failed, which is the exact GHIS case this plan exists to fix, and which Task 2 makes MORE likely by rejecting the out-patient list as the ward list. Reproduced against the current tree: a labs endpoint with `params.patient_id = {unmapped:true}` sends `GET /Lab/Home/GetSearchPatientId?patient_id=&DeptID=`, and whatever the hospital returns for an unscoped lab search lands in that one patient's chart. This predates every task in this plan and is not closed by Task 2c: 2c stops discovery from CHOOSING the wide form, while this is the RUNTIME sending a saved one. It is the worst defect in the system: other people's results in a patient's record.
+
+**Files:**
+- Modify: `connect-agent/phone/adapter-runtime.mjs` (`provenValue` fallback; new `UnscopedRequest`, `unscopedField`; guard in `executeProven`)
+- Modify: `connect-agent/phone/runtime.mjs` (`readPatientDetails` maps the refusal to `unreadable`)
+- Modify: `connect-agent/phone/ghis-shim.mjs` (`notRead` reason for a refused scope)
+- Modify: `functions/api/connect/agent/[[path]].js` (`adapterCompleteness`: an unscoped patient key is not endpoint-backed)
+- Test: `test/connect-agent/adapter-runtime.test.mjs`, `test/connect-agent/phone-runtime.test.mjs`, `test/connect/agent/phone-router.test.mjs`
+
+**Interfaces:**
+- Produces: `provenValue` fills an `unmapped` PATIENT_KEY/VISIT_KEY field from `idCandidates(key, patient)[0]` instead of `''`. `export class UnscopedRequest extends Error` (`name: 'UnscopedRequest'`). `export function unscopedField(req, patient) -> key | null`. `executeProven` throws `UnscopedRequest` rather than issue a request that lost the patient. `readPatientDetails` turns that into `{ resource, unreadable: 'not-scoped' }`. `adapterCompleteness` marks such a resource `how: 'unscoped'` and it fails the gate.
+
+- [ ] **Step 1: Write the failing tests** (append to `test/connect-agent/adapter-runtime.test.mjs`; import `provenValue`, `unscopedField`, `executeProven`, `UnscopedRequest`, `parseFetchExpression`)
+
+```js
+test('an untraceable patient key is filled from the patient, never sent empty', () => {
+  const patient = { patientId: 'MR900001', episodeId: 'IP5550001' };
+  assert.equal(provenValue('patient_id', { unmapped: true }, { patient }), 'MR900001', 'a patient key falls back to this patient');
+  assert.equal(provenValue('Episode_Id', { unmapped: true }, { patient }), 'IP5550001', 'a visit key falls back to this visit');
+  assert.equal(provenValue('DeptID', { unmapped: true }, { patient }), '', 'an ordinary filter is still sent empty');
+  assert.equal(provenValue('DeptID', { empty: true }, { patient }), '', 'a proven-empty filter stays empty');
+});
+
+test('a request that would go out without the patient is refused, not sent', async () => {
+  const patient = { patientId: 'MR900001' };
+  assert.equal(unscopedField({ url: '/Lab/Home/Get?patient_id=&DeptID=', body: null }, patient), 'patient_id');
+  assert.equal(unscopedField({ url: '/Lab/Home/Get?patient_id=MR900001&DeptID=', body: null }, patient), null);
+  assert.equal(unscopedField({ url: '/Lab/Home/Get', body: 'Render_ID=&patient_id=' }, patient), 'patient_id');
+  assert.equal(unscopedField({ url: '/Doctor/Home/GetIPWL?PatientId=', body: null }, {}), null, 'the ward list has no patient and is not scoped');
+
+  // executeProven refuses rather than reading whatever the hospital returns for everyone.
+  let sent = 0;
+  const plugin = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: '{}' }; } };
+  const view = { resourceHint: 'labs', pathTemplate: 'https://h/Lab', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Lab/Home/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] };
+  await assert.rejects(executeProven({ plugin, origin: 'https://h', view, patient }), (e) => e.name === 'UnscopedRequest');
+  assert.equal(sent, 0, 'the unscoped request was never issued to the hospital');
+});
+```
+
+Append to `test/connect-agent/phone-runtime.test.mjs`:
+
+```js
+test('a refused unscoped request is reported unreadable, not as an empty result', async () => {
+  const plugin = {
+    async navigate() { throw new Error('the patient read must never navigate'); },
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate() { return { result: '{}' }; },
+  };
+  const replay = [{ resourceHint: 'labs', pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Lab/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] }];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.deepEqual(secs.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-scoped' });
+});
+```
+
+- [ ] **Step 2: Run them to verify they fail**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/adapter-runtime.test.mjs; node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/phone-runtime.test.mjs`
+Expected: FAIL. `provenValue` returns `''` for the patient key, `unscopedField`/`UnscopedRequest` are undefined, and the labs section comes back as empty rows rather than `not-scoped`.
+
+- [ ] **Step 3: Fill an untraceable patient key from the patient** (`adapter-runtime.mjs provenValue`)
+
+Replace `if (!src || src.empty || src.unmapped) return '';` with:
+
+```js
+  /* AN UNTRACEABLE PATIENT KEY IS NOT AN EMPTY ONE. `unmapped` means tracing failed, and tracing fails
+   * for every resource whenever the ward-list proof failed. Sending a patient-keyed field empty turns
+   * this patient's request into an unscoped one, and whatever the hospital answers lands in this
+   * patient's chart. Fall back to the id this patient carries, exactly as the worklist branch does. */
+  if (!src) return '';
+  if (src.unmapped) return (PATIENT_KEY.test(key) || VISIT_KEY.test(key)) ? (idCandidates(key, patient)[0] || '') : '';
+  if (src.empty) return '';
+```
+
+- [ ] **Step 4: Refuse a request that lost the patient** (`adapter-runtime.mjs`, next to `NotSignedIn`)
+
+```js
+export class UnscopedRequest extends Error { constructor(m) { super(m); this.name = 'UnscopedRequest'; } }
+
+/** The patient-keyed or visit-keyed field that would go out EMPTY while this patient has an id, or null. */
+export function unscopedField(req, patient) {
+  if (!patient || !(patient.patientId || patient.episodeId)) return null;   // the ward list is not patient-scoped
+  const bad = (k, v) => (PATIENT_KEY.test(k) || VISIT_KEY.test(k)) && !String(v || '');
+  try {
+    const u = new URL(String(req.url || ''), 'https://x.invalid');
+    for (const [k, v] of u.searchParams) if (bad(k, v)) return k;
+  } catch { /* relative or malformed: fall through to the body */ }
+  if (typeof req.body === 'string' && req.body.indexOf('=') >= 0) {
+    for (const part of req.body.split('&')) {
+      const i = part.indexOf('=');
+      if (bad(i >= 0 ? part.slice(0, i) : part, i >= 0 ? part.slice(i + 1) : '')) return i >= 0 ? part.slice(0, i) : part;
+    }
+  }
+  return null;
+}
+```
+
+In `executeProven`, directly after `const call = { method: req.method, url: base + req.url, body: req.body, headers: req.headers };` add:
+
+```js
+    const lost = unscopedField({ url: req.url, body: req.body }, patient);
+    if (lost) throw new UnscopedRequest('refusing ' + req.path + ': "' + lost + '" has no learned source, so the request would not be limited to this patient');
+```
+
+- [ ] **Step 5: Report it as unreadable** (`runtime.mjs readPatientDetails`, the `catch` around `replayFirst` added in Task 3)
+
+```js
+    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) {
+      if (e && e.name === 'NotSignedIn') throw e;
+      if (e && e.name === 'UnscopedRequest') { sections.push({ resource: r, unreadable: 'not-scoped' }); continue; }
+      sections.push({ resource: r, error: String((e && e.message) || e) });
+      continue;
+    }
+```
+
+And in `ghis-shim.mjs notRead`, replace the `why` line with:
+
+```js
+  const why = own.some((s) => s.unreadable === 'not-scoped')
+    ? 'the agent never learned which field carries the patient, so the request could not be limited to this patient.'
+    : own.some((s) => s.error) ? 'the hospital did not answer.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
+```
+
+- [ ] **Step 6: An unscoped endpoint is not endpoint-backed** (`functions/api/connect/agent/[[path]].js adapterCompleteness`, Task 6)
+
+Inside `adapterCompleteness`, replace the `provenEndpoint` helper with:
+
+```js
+  const PATIENT_ISH = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$|visit|episode|encounter|admission|ip(no|number)/i;
+  const scoped = (v) => (v.endpoints || []).every((e) => {
+    if (!e || e.role !== "data") return true;
+    const p = e.params || {};
+    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].unmapped === true || p[k].empty === true));
+  });
+  const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scoped(v));
+```
+
+and add an `unscoped` label so the owner sees why: in the loop, `else { how[res] = views.some((v) => v && v.resourceHint === res && !scoped(v)) ? "unscoped" : "absent"; missing.push(res); }`. The worklist is exempt: it is not patient-scoped, so `PATIENT_ISH` params there are expected to be empty. Guard with `if (res !== "worklist" && ...)` inside `scoped` usage, or skip the `scoped` check when `res === "worklist"`.
+
+- [ ] **Step 7: Run the tests**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/adapter-runtime.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/phone-runtime.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/ghis-shim.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/live-ghis-regressions.test.mjs && node test/run-ward-adapter-ui.mjs`
+Expected: PASS, `ALL GREEN`.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add connect-agent/phone/adapter-runtime.mjs connect-agent/phone/runtime.mjs connect-agent/phone/ghis-shim.mjs functions/api/connect/agent/\[\[path\]\].js test/connect-agent/adapter-runtime.test.mjs test/connect-agent/phone-runtime.test.mjs
+git commit -m "Connect Agent: a request that lost the patient is refused, never sent unscoped"
+```
+
+---
+
 ### Task 4: Every read ends
 
 **Files:**
