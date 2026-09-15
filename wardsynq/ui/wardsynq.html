@@ -219,7 +219,11 @@
 
         var tokType = "";
         try { tokType = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
-        var maxWait = tokType === "staff" ? 300 : 3500;
+        /* 3500 ms was a deadline, not a guard: restoring a Firebase session includes a network call,
+         * and on a slow hospital link an account that WAS signed in lost the race and opened onto
+         * a 401. An account sign-in now waits for Firebase itself; the cap only catches an SDK that
+         * never answers. */
+        var maxWait = tokType === "staff" ? 300 : 10000;
 
         setTimeout(function () {
           if (unsub) { try { unsub(); } catch (e) {} }
