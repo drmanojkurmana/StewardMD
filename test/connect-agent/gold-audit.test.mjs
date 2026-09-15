@@ -17,6 +17,26 @@ test('compareRows: same rows and fields is "same"; a missing field or row is "pa
   assert.ok(!JSON.stringify(partial).includes('Paracetamol'), 'the grade carries no value');
 });
 
+test('the same day written two ways counts as the same day, and two different days never do', () => {
+  const row = (dateTime) => ({ drugText: 'Tab Paracetamol 650 mg', route: 'Oral', dateTime });
+  const same = (a, b) => compareRows(spec('medications'), { rows: [row(a)] }, { rows: [row(b)] }).fields.dateTime.equal === 1;
+
+  // One hospital field, two adapters printing it their own way.
+  assert.ok(same('01/02/2026', '2026-02-01'), 'day-first and year-first are the same date');
+  assert.ok(same('1-Feb-2026 10:30', '2026-02-01 10:30'), 'a month name does not change the day');
+  assert.ok(same('2026-02-01T10:30:00', '01/02/2026 10:30'), 'the same instant, written differently');
+
+  // And the rule must not turn "close enough" into "the same".
+  assert.ok(!same('01/02/2026', '03/02/2026'), 'a different day is a different day');
+  assert.ok(!same('01/02/2026', '01/02/2025'), 'a different year is a different year');
+  assert.ok(!same('01/02/2026 10:30', '01/02/2026 18:45'), 'a different time is a different time');
+  // Not everything with numbers in it is a date.
+  assert.ok(!same('500 mg', '2026-02-01'), 'a dose is not a date');
+  const dose = (a, b) => compareRows(spec('medications'), { rows: [{ drugText: 'x', dosage: a }] }, { rows: [{ drugText: 'x', dosage: b }] }).fields.dosage.equal === 1;
+  assert.ok(dose('500 mg', '500mg'), 'punctuation and case never mattered');
+  assert.ok(!dose('500 mg', '250 mg'), 'a different dose is never the same dose');
+});
+
 test('endpointAudit reports the proven call per view against the proxy\'s upstream call', () => {
   const rows = endpointAudit([
     { resourceHint: 'medications', proof: { status: 'proven', overlap: 1, brain: true, model: 'gemini-3.8-flash' }, endpoints: [{ method: 'POST', path: '/Doctor/Home/Searchnew', role: 'prerequisite' }, { method: 'GET', path: '/Doctor/Home/GetMedicines/?id', role: 'data' }] },
