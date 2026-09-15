@@ -582,10 +582,23 @@
   function storeTenant(id) { try { if (id) localStorage.setItem(TENANT_KEY, id); else localStorage.removeItem(TENANT_KEY); } catch (e) {} }
   /* Which hospital? An account that belongs to several tenants (an owner, a super-admin) must say
    * which one it is connecting; the server refuses to guess. One tenant: nothing to ask. */
-  function pickTenantThenLoad() {
+  function pickTenantThenLoad(attempt) {
     api("/tenants", {}).then(function (r) {
       if (!overlay() || !S) return;
-      var list = (r.s === 200 && r.d && r.d.tenants) || [];
+      /* A FAILED ASK IS NOT AN ANSWER. On a cold start the sign-in token is often not ready for the
+       * first call, and treating "could not ask" as "one hospital" meant the next call went out with
+       * no hospital named. The server refuses that (400, tenantId required), the doctor was told to
+       * check their connection, and nothing ever retried: the console sat on that error with no way
+       * forward. Seen on an iPhone after a reinstall cleared the stored choice, 2026-09-15. */
+      if (r.s !== 200 || !r.d || !r.d.tenants) {
+        var n = (attempt || 0) + 1;
+        if (n <= 3) { setTimeout(function () { pickTenantThenLoad(n); }, n * 1200); return; }
+        S.connLoading = false;
+        S.connError = true;
+        if (S.screen === "connections") renderConnections();
+        return;
+      }
+      var list = r.d.tenants || [];
       if (list.length > 1) {
         S.tenants = list;
         var known = list.some(function (t) { return t.tenantId === S.tenant; });
@@ -623,6 +636,20 @@
         S.connections = Array.isArray(r.d) ? r.d : (r.d.connections || []);
       } else {
         S.connections = [];
+        /* "WHICH HOSPITAL?" IS A QUESTION, NOT A FAILURE. An account on more than one tenant gets a
+         * 400 here, and showing "check your connection" for it sent the doctor to look at their
+         * wifi over a question the app could simply ask. Fetch the list and show the picker. */
+        var detail = (r.d && (r.d.detail || r.d.error)) || "";
+        if (r.s === 400 && /tenant/i.test(String(detail)) && !S.tenants) {
+          api("/tenants", {}).then(function (t) {
+            if (!overlay() || !S) return;
+            var list = (t.s === 200 && t.d && t.d.tenants) || [];
+            if (list.length) { S.tenants = list; S.tenant = ""; storeTenant(""); S.connError = false; }
+            else S.connError = true;
+            if (S.screen === "connections") renderConnections();
+          });
+          return;
+        }
         S.connError = true;
       }
       if (S.screen === "connections") renderConnections();
