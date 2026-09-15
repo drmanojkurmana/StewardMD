@@ -545,9 +545,17 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-maik-prov li.warn { color: var(--on-warn-container); }
 #smdWard .w-maik-prov .material-symbols-outlined { font-size: 16px; flex: none; }
 #smdWard .w-maik-prev { border: 1px dashed var(--outline-variant); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; background: var(--sc-low); }
-#smdWard .w-maik-prev b { display: flex; align-items: center; gap: 6px; font: 700 12px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; }
+#smdWard .w-maik-prev > b { display: flex; align-items: center; gap: 6px; font: 700 12px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; }
 #smdWard .w-maik-prev span { display: block; margin-top: 4px; font: 500 12.5px/1.5 var(--w-sans); color: var(--on-surface-variant); }
-#smdWard .w-maik-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+/* BUG-MU2QNKU7: every MaiK button group is one wrapping row on the same 8 px rhythm, rows stacked 8 px
+ * apart, and the secondary task chips one size down (".sm" had no rule, so they rendered as full
+ * buttons). The "Records MaiK read" chips sit in a .w-hint, which is a non-wrapping flex row. */
+#smdWard .w-maik-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; }
+#smdWard .w-maik-acts + .w-maik-acts { margin-top: 8px; }
+#smdWard .w-maik-acts .w-btn.sm { font-size: 13px; padding: 8px 14px; min-height: 40px; }
+#smdWard .w-maik-facts .w-hint { flex-wrap: wrap; align-items: center; }
+#smdWard .w-maik-h { display: flex; align-items: center; gap: 6px; margin: 12px 0 6px; }
+@media (max-width: 1180px) { #smdWard .w-maik-acts .w-btn.sm { min-height: 44px; } }
 #smdWard .w-maik-acts .w-btn[disabled] { opacity: .55; pointer-events: none; }
 
 #smdWard .w-demo { font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 1px 7px; border-radius: 3px; margin-left: 8px;

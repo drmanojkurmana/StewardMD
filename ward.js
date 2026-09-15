@@ -3501,7 +3501,7 @@
    * insertion into a note the clinician is typing. Rejecting needs a reason because a model that is
    * regularly wrong about one thing is only visible if the reasons are kept. */
   function maikHistoryHtml(h) {
-    if (!h) return '<button class="w-btn ghost sm" data-w-act="maikhistory">' + ms("history") + "Earlier MaiK answers for this patient</button>";
+    if (!h) return '<div class="w-maik-acts"><button class="w-btn ghost sm" data-w-act="maikhistory">' + ms("history") + "Earlier MaiK answers for this patient</button></div>";
     if (h.busy) return '<p class="w-empty">Loading earlier answers...</p>';
     if (!h.ok) return '<p class="w-hint warn">' + ms("error") + "Earlier answers could not be loaded. Do not read this as none.</p>";
     if (!(h.interactions || []).length) return '<p class="w-empty">MaiK has not been asked about this patient before.</p>';
@@ -3602,7 +3602,7 @@
           "</div>" +
           (m.editing ? '<label class="w-f"><span>Your text (this is what will be filed)</span>' +
             '<textarea id="wMaikEdit" rows="6">' + esc(i.output) + "</textarea></label>" +
-            '<button class="w-btn go" data-w-act="maikreview:edited">' + ms("save") + "File my edited version</button>" : "")
+            '<div class="w-maik-acts"><button class="w-btn go" data-w-act="maikreview:edited">' + ms("save") + "File my edited version</button></div>" : "")
         : "");
 
     return head + body + prov + preview + acts + (f ? detailPanel(state) : "") + "</div>";
