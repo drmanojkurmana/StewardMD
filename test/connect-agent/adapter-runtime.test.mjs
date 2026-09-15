@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   fetchExpression, parseFetchExpression, fillFields, idCandidates, replayPlan, classifyResponse, rowsFromJson, rowsFromHtml,
-  executeView, tokenFor, PAGE_TOKENS, NotSignedIn,
+  executeView, tokenFor, PAGE_TOKENS, NotSignedIn, FETCH_TIMEOUT_MS,
 } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 const ORIGIN = 'https://ghis.example';
@@ -129,4 +129,19 @@ test('executeView tries the joined record-visit form when the first activation y
   const expired = fakePlugin(() => ({ status: 200, url: ORIGIN + '/Login', text: '<form><input type="password"></form>' }));
   await assert.rejects(executeView({ plugin: expired, origin: ORIGIN, view: { endpoints: [{ method: 'GET', path: '/x/labs?recordNo' }] }, patient, parseHtml: miniParse }), (e) => e instanceof NotSignedIn && /login page/.test(e.message));
   assert.equal(await executeView({ plugin, origin: ORIGIN, view: { endpoints: [] }, patient }), null, 'no replayable call: the caller falls back to the page');
+});
+
+test('every in-page request has its own deadline: a hospital that never answers is aborted', async () => {
+  assert.equal(parseFetchExpression(fetchExpression({ method: 'GET', url: 'https://h/x' })).timeoutMs, FETCH_TIMEOUT_MS);
+  const expr = fetchExpression({ method: 'GET', url: 'https://h/x', timeoutMs: 30 });
+  assert.equal(parseFetchExpression(expr).timeoutMs, 30);
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = (url, init) => new Promise((resolve, reject) => { init.signal.addEventListener('abort', () => reject(new Error('aborted'))); });
+  try {
+    const t0 = Date.now();
+    const out = JSON.parse(await new Function('return ' + expr)());
+    assert.equal(out.status, 0);
+    assert.match(out.error, /aborted/);
+    assert.ok(Date.now() - t0 < 2000, 'aborted at its deadline');
+  } finally { globalThis.fetch = realFetch; }
 });

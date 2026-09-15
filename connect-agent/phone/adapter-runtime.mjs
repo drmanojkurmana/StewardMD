@@ -22,6 +22,9 @@ export const PAGE_START_KEY = /^(start|offset|skip)$/i;
 export const PAGE_NUMBER_KEY = /^(page|pageno|page_no|pagenumber|p)$/i;
 const NOISE_PATH = /checksession|keepalive|heartbeat|ping|payment|logout|login|signalr|analytics|\.(js|css|png|jpe?g|gif|svg|woff2?|ico)$/i;
 const MAX_TEXT = 2 * 1024 * 1024;
+/* EVERY REQUEST ENDS. A hospital page that never answers held a patient read for 30 minutes
+ * (owner's iPhone, 2026-09-15): each in-page request is aborted at this deadline. */
+export const FETCH_TIMEOUT_MS = 12000;
 
 /* ---- the primitive ------------------------------------------------------------------------------ */
 
@@ -33,10 +36,12 @@ export function fetchExpression(req) {
     headers: Object.assign({ 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json, text/html, */*' }, req.headers || {}),
     body: req.body == null ? null : String(req.body),
     max: MAX_TEXT,
+    timeoutMs: Number(req.timeoutMs) > 0 ? Number(req.timeoutMs) : FETCH_TIMEOUT_MS,
   };
   return '(function(){var req=' + JSON.stringify(safe) + ';' +
     'var init={method:req.method,credentials:"include",headers:req.headers,redirect:"follow"};' +
     'if(req.body!=null){init.body=req.body;if(!init.headers["Content-Type"])init.headers["Content-Type"]="application/x-www-form-urlencoded; charset=UTF-8";}' +
+    'if(typeof AbortController==="function"){var ac=new AbortController();init.signal=ac.signal;setTimeout(function(){ac.abort();},req.timeoutMs);}' +
     'return fetch(req.url,init).then(function(r){return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
     '.catch(function(e){return JSON.stringify({status:0,contentType:"",url:req.url,text:"",error:String(e&&e.message||e)});});})()';
 }

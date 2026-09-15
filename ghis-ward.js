@@ -358,6 +358,17 @@
         if (window.__SMD_WARD_SHIM_TEST__) return Promise.resolve(window.__SMD_WARD_SHIM_TEST__);
         try { return (new Function('p', 'return import(p)'))('/connect-agent/phone/ghis-shim.mjs'); } catch (e) { return Promise.reject(e); }
       }
+      /* EVERY READ ENDS. Each hospital request is bounded (adapter-runtime FETCH_TIMEOUT_MS); this bounds
+       * the whole patient read, so a hospital that stops answering can never hold the drawer open for
+       * 30 minutes again (owner's iPhone, 2026-09-15). */
+      var ADAPTER_READ_DEADLINE_MS = 30000;
+      var READ_TIMED_OUT = 'The hospital did not answer in time, so the reading was stopped. Try again.';
+      function withDeadline(promise, ms) {
+        return new Promise(function (resolve, reject) {
+          var t = setTimeout(function () { reject(new Error(READ_TIMED_OUT)); }, ms);
+          promise.then(function (v) { clearTimeout(t); resolve(v); }, function (e) { clearTimeout(t); reject(e); });
+        });
+      }
       function adapterSections(patientId) {
         var ctx = _adapterCtx, plugin = connectPlugin();
         if (!ctx || !plugin) return Promise.reject(new Error('no adapter session'));
@@ -365,7 +376,7 @@
         if (ctx.sections[patientId]) return ctx.sections[patientId];
         var p = null;
         for (var i = 0; i < _patients.length; i++) if (String(_patients[i].patientId) === String(patientId)) p = _patients[i];
-        ctx.sections[patientId] = loadWardRuntime().then(function (rt) {
+        ctx.sections[patientId] = withDeadline(loadWardRuntime().then(function (rt) {
           ctx.browserOpen = true;
           var targetOrigin = ctx.origin;
           if (ctx.origins && ctx.origins.length) {
@@ -377,7 +388,7 @@
             try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true }); } catch (e) {}
             return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
           });
-        }).then(function (sections) {
+        }), window.__SMD_ADAPTER_DEADLINE_MS__ || ADAPTER_READ_DEADLINE_MS).then(function (sections) {
           ctx.browserOpen = false; try { plugin.close(); } catch (e) {}
           ctx.at = Date.now();
           return sections;

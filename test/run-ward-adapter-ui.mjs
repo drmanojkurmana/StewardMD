@@ -56,6 +56,7 @@ window.Capacitor.Plugins.ConnectBrowser = {
     var e = String(a && a.expression || "");
     window.__pluginCalls.push({ m: "evaluate", url: window.__url });
     if (e.indexOf("var req={") === 0 || e.indexOf("(function(){var req={") === 0) {
+      if (window.__hang) return new Promise(function () {});
       var m = /var req=(\\{[\\s\\S]*?\\});var init=/.exec(e); var req = m ? JSON.parse(m[1]) : null;
       if (!req) return Promise.resolve({ result: "" });
       window.__fetches.push({ method: req.method, url: req.url, body: req.body });
@@ -198,6 +199,14 @@ try {
   ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://his.apollo.example/ward/list";});`) === true, "the rendered worklist page was never loaded: replay is primary, scraping is fallback");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A100").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===1 && j.rows[0].drugText==="Metoprolol" && j.rows[0].route==="PO"; });`) === true, "medications replay: activation POST then the keyed GET, HTML fragment parsed into the proxy row shape");
   ok(await ev(`var f=window.__fetches; var i=f.findIndex(function(x){return x.method==="POST"&&x.url==="https://his.apollo.example/api/visit/activate";}); var j=f.findIndex(function(x){return x.url==="https://his.apollo.example/api/ward/medications?mrn=A100";}); return i>=0 && j>i && f[i].body==="__RequestVerificationToken=tok-1&recordNo=A100";`) === true, "the activation POST carried the page token and the record number, before the data call");
+
+  // EVERY READ ENDS: a hospital that never answers is stopped at the deadline with a reason.
+  await ev(`window.__SMD_ADAPTER_DEADLINE_MS__ = 600; window.__hang = true; return 1;`);
+  const t0 = Date.now();
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A101").then(function(r){return r.json();}).then(function(j){ return j.error==="adapter_read_failed" && /did not answer in time/.test(j.detail); });`) === true, "a read that never answers is stopped with a reason");
+  ok(Date.now() - t0 < 5000, "stopped at the deadline, not after minutes");
+  ok(await ev(`return window.__open===false;`) === true, "the browser is closed after a timed-out read");
+  await ev(`window.__hang = false; window.__SMD_ADAPTER_DEADLINE_MS__ = 0; return 1;`);
   await ev(`window.ghisDisconnect(); window.__replayHospital = false; return 1;`);
 
   // Read-time self-repair: the approved adapter's worklist path reads nothing, so the browser asks the
