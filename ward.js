@@ -503,8 +503,8 @@
   }
   /* Unfinished work on the ward, from /ward/metrics. A count the server could not read arrives as
    * null and is shown as "not readable", never as 0. */
-  function wardStatusHtml(m) {
-    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + wTH("ward.ward-status", "Ward status") + "</h3></div>";
+  function wardStatusHtml(m, titleHtml) {
+    var head = '<div class="w-card"><div class="w-card-h">' + ms("monitoring") + "<h3>" + (titleHtml || wTH("ward.ward-status", "Ward status")) + "</h3></div>";
     if (!m) return "";
     if (m.busy) return head + "<p class=\"w-empty\">" + wTH("ward.loading-ward-status", "Loading ward status...") + "</p></div>";
     if (!m.ok || !m.metrics) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.ward-status-could-not-be-loaded", "Ward status could not be loaded. Do not read this as nothing open.", null, "", 1) + "</p></div>";
@@ -556,10 +556,22 @@
     if (c == null) return "<p class=\"w-hint\">" + wTH("ward.loading-who-would-be-alerted-now", "Loading who would be alerted now...") + "</p>";
     if (c === false || !c.ok) return '<p class="w-hint warn">' + ms("error") + wTH("ward.who-would-be-alerted-now-could", "Who would be alerted now could not be read. Do not read this as nobody on duty.", null, "", 1) + "</p>";
     if (!c.wards.length) return '<p class="w-hint warn">' + ms("notifications_off") + wTH("ward.no-wards-are-set-up-so", "No wards are set up, so nobody can be found on duty in a ward.") + "</p>";
-    return '<div class="w-mini">' + c.wards.map(function (w) {
+    return '<div class="w-mini">' + coverSetupHtml(c) + c.wards.map(function (w) {
       return '<p class="w-hint' + (w.total ? "" : " warn") + '">' + ms(w.total ? "notifications_active" : "notifications_off") +
         "<b>" + esc(w.ward) + "</b>: " + wTH("ward.level-2-alert-would-reach", "level 2 alert would reach") + " " + (w.total ? esc(groupCounts(w.counts)) : "<b>" + wTH("ward.nobody-on-duty", "nobody on duty") + "</b> (" + esc(groupCounts(w.counts)) + ")") + "</p>";
     }).join("") + (c.partial ? "<p class=\"w-hint warn\">" + wTH("ward.the-rota-could-not-be-read", "The rota could not be read in full; counts may be low.", null, "", 1) + "</p>" : "") + "</div>";
+  }
+  /* LT-04: when a ward's level 2 alert would reach nobody, the hospital admin is told WHAT to set up, with the way
+   * there: shifts in the Staff rota when none are defined, else staff assigned to the shifts running now. Only for
+   * a role that can change the rota (staff.admin, on wardsynq.com); everyone else sees the per-ward lines as before. */
+  function coverSetupHtml(c) {
+    var empty = c.wards.filter(function (w) { return !w.total; }).length;
+    if (!empty || !(G.WSQ && G.WSQ.can && G.WSQ.can("staff.admin"))) return "";
+    var what = c.shiftsDefined === 0
+      ? wTH("ward.cover-setup-no-shifts", "The staff rota has no shifts. In Staff rota, define a shift for each ward, then assign nurses, residents and consultants to it. Until then a critical result's level 2 alert reaches only people who mark themselves on duty.")
+      : wTH("ward.cover-setup-assign", "Nobody is assigned to a shift running now in {n} ward(s). In Staff rota, assign nurses, residents and consultants to today's shifts, or ask them to mark themselves on duty.", { n: esc(empty) });
+    return '<div class="w-hint warn" id="wCoverSetup">' + ms("manage_accounts") + "<span>" + what + "</span> " +
+      '<button class="w-btn sm" data-w-act="openrota" type="button">' + ms("calendar_month") + wTH("ward.open-staff-rota", "Open Staff rota") + "</button></div>";
   }
   function listView(state) {
     var leftTools =
@@ -650,29 +662,35 @@
     var dept = depts.indexOf(state.boardDept) >= 0 ? state.boardDept : "";
     var wards = dept ? allWards.filter(function (w) { return w.department === dept; }) : allWards;
     var moving = state.transferPending && state.sel;
-    var wardsHtml = wards.map(function (w) {
-      var occ = (w.occupied || []).map(function (o) {
+    var wardRowHtml = function (w) {
+      /* LT-03: occupied and free beds in ONE bed order (CAR-02, CAR-03, CAR-04...), not every occupied bed first
+       * and then every free one. And an occupied tile carries the MRN under the name: two patients can share a
+       * name, and the MRN is what tells them apart. */
+      var cells = (w.occupied || []).map(function (o) {
         // The server now sends name/mrn on every occupied bed (migrate-inpatient.js bedBoard).
         // The id is the LAST resort, never the first thing a nurse reads off a bed.
-        return '<button class="w-bedcell occ" data-w-act="openbedpatient:' + esc(o.encounterId || o.patientId || "") + "\" title=\"" + wTA("ward.open-patient-chart", "Open patient chart") + "\"><b>" + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span></button>";
-      }).join("");
+        return { bed: o.bed, html: '<button class="w-bedcell occ" data-w-act="openbedpatient:' + esc(o.encounterId || o.patientId || "") + "\" title=\"" + wTA("ward.open-patient-chart", "Open patient chart") + "\"><b>" + esc(o.bed) + '</b><span>' + esc(o.name || o.mrn || o.patientId) + "</span>" + (o.name && o.mrn ? "<span>" + esc(o.mrn) + "</span>" : "") + "</button>" };
+      });
       // Which free cell is highlighted as "picked" - a UI selection compare against what the board
       // itself already reported as free, never a computation of whether a bed IS free.
       var isPicked = function (b) { return !!t && t.ward === w.ward && String(t.bed) === String(b); };
-      var free = w.bedsKnown ? (w.free || []).map(function (b) {
-        return '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>" + wTH("ward.free", "Free") + "</span></button>";
-      }).join("") : "<div class=\"w-bedcell unknown\"><span>" + wTH("ward.bed-list-not-configured", "Bed list not configured") + "</span></div>";
+      if (w.bedsKnown) (w.free || []).forEach(function (b) {
+        cells.push({ bed: b, html: '<button class="w-bedcell free' + (isPicked(b) ? " picked" : "") + '" data-w-act="pickbed:' + esc(w.ward) + "|" + esc(b) + '"><b>' + esc(b) + "</b><span>" + wTH("ward.free", "Free") + "</span></button>" });
+      });
+      cells.sort(function (a, b) { return String(a.bed).localeCompare(String(b.bed), undefined, { numeric: true }); });
+      var occ = cells.map(function (c) { return c.html; }).join("");
+      var free = w.bedsKnown ? "" : "<div class=\"w-bedcell unknown\"><span>" + wTH("ward.bed-list-not-configured", "Bed list not configured") + "</span></div>";
       var unplaced = (w.unplaced || []).map(function (o) {
         return '<div class="w-bedcell occ"><b>-</b><span>' + wTH("ward.no-bed-assigned", "{name} (no bed assigned)", { name: esc(o.name || o.mrn || o.patientId) }, "name") + "</span></div>";
       }).join("");
       return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + (w.department ? esc(w.department) + " &middot; " : "") + wTH("ward.occupied", "{length} occupied", { length: esc((w.occupied || []).length) }, "length") + (w.bedsKnown ? " &middot; " + wTH("ward.free2", "{length} free", { length: esc((w.free || []).length) }, "length") : "") + "</small></h4>" +
         (moving && w.ward !== "(no ward recorded)" ? '<button class="w-btn ghost sm" data-w-act="transferward:' + esc(w.ward) + '" type="button">' + ms("swap_horiz") + wTH("ward.move-here-no-bed-yet", "Move here, no bed yet") + "</button>" : "") + "</div>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
-    }).join("");
+    };
 
     var lookup = state.mrnLookup;
     var admitPanel = !t ? "" :
-      '<div class="w-card admit"><div class="w-card-h">' + ms("bed") + "<h3>" + wTH("ward.admit-to-bed", "Admit to {ward}, bed {bed}", { ward: esc(t.ward), bed: esc(t.bed) }, "ward bed") + "</h3>" +
+      '<div class="w-card admit" id="wAdmitPanel"><div class="w-card-h">' + ms("bed") + "<h3>" + wTH("ward.admit-to-bed", "Admit to {ward}, bed {bed}", { ward: esc(t.ward), bed: esc(t.bed) }, "ward bed") + "</h3>" +
         "<button class=\"w-ic\" data-w-act=\"unpickbed\" title=\"" + wTA("ward.choose-a-different-bed", "Choose a different bed") + "\">" + ms("close") + "</button></div>" +
         // Explicit, never inferred from the ward's name - the same rule migrate-inpatient.js's own
         // header states: a ward literally named "ICU" admits as IPD unless this is checked.
@@ -700,6 +718,16 @@
         "<p class=\"w-hint\">" + wTH("ward.opens-the-same-check-in-sheet", "Opens the same check-in sheet used at the front desk.") + "</p>" +
         '<button class="w-btn" data-w-act="admitnew">' + ms("person_add") + wTH("ward.register-admit", "Register &amp; admit") + "</button></div>" +
       "</div>";
+    /* LT-02 (live test 2026-09-15): the admit panel is drawn DIRECTLY UNDER THE WARD whose bed was picked.
+     * It used to follow every ward on the board, about 2000 px below a bed in the first ward, so a click
+     * on a free bed looked like it did nothing. pickBed() scrolls it into view and focuses the MRN box. */
+    var panelInline = false;
+    var wardsHtml = wards.map(function (w) {
+      var row = wardRowHtml(w);
+      if (moving || !t || t.ward !== w.ward) return row;
+      panelInline = true;
+      return row + admitPanel;
+    }).join("");
 
     var who = state.sel ? esc(state.sel.name || state.sel.mrn || state.sel.patientId || "") : "";
     var mode = moving ? '<p class="w-hint">' + ms("swap_horiz") + wTH("ward.transferring", "Transferring") + " <b>" + who + "</b>" + (state.sel.ward ? " " + wTH("ward.from", "from {ward}", { ward: esc(state.sel.ward) }, "ward") + (state.sel.bed ? ", " + wTH("ward.bed2", "bed {bed}", { bed: esc(state.sel.bed) }, "bed") : "") : "") + ": " + wTH("ward.choose-the-department-then-a-free", "choose the department, then a free bed, or move to a ward with no bed yet.") + "</p>"
@@ -718,7 +746,7 @@
       (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + wEnglishOf(state.boardErr) + "</p>"
         : !state.board ? "<p class=\"w-empty\">" + wTH("ward.loading-the-bed-board", "Loading the bed board...") + "</p>"
         : wardsHtml || "<p class=\"w-empty\">" + wTH("ward.no-admissions-and-no-bed-lists", "No admissions and no bed lists configured.") + "</p>") +
-      "</div>" + (moving ? "" : admitPanel);
+      "</div>" + (moving || panelInline ? "" : admitPanel);
   }
 
   /* THE ED BOARD. A worklist, not an arrival log - the server itself sorts untriaged patients
@@ -4647,7 +4675,9 @@
   var BOARD_WORDS = { bedmgmt: "Bed management", critsboard: "Critical results board", labboard: "Lab board", radboard: "Radiology board", inventoryboard: "Inventory", edboard: "ED board" };
   function drillCount(n, label, d, act) {
     if (n == null) return '<span class="w-hint">' + wTH("ward.not-known", "{label}: not known", { label: esc(label) }, "label") + "</span>";
-    if (!d) return "<b>" + esc(n) + "</b> " + esc(label) + " <small class=\"w-hint\">(" + wTH("ward.detail-not-available", "detail not available)") + "</small>";
+    // LT-39: a count with no list behind it is plain text (not a button). "(detail not available)" after every such
+    // number read as a glitch down the whole twin; the title still says so for anyone who looks.
+    if (!d) return '<span title="' + wTA("ward.detail-not-available-for-this-count", "Detail not available for this count.") + '"><b>' + esc(n) + "</b> " + esc(label) + "</span>";
     return '<button class="w-btn ghost tiny" data-w-act="' + esc(act) + '"><b>' + esc(n) + "</b> " + esc(label) + "</button>";
   }
   function twinCount(section, sKey, dKey, n, label) {
@@ -4713,7 +4743,7 @@
       "<div class=\"w-actions\"><button class=\"w-btn ghost\" data-w-act=\"trends\" title=\"" + wTA("ward.these-measures-over-days-weeks-or", "These measures over days, weeks or months, by ward") + "\">" + ms("query_stats") + wTH("ward.trends", "Trends") + "</button></div>" +
       twinDrillHtml(t, tw.drill) +
 
-      twinSectionCard(wTH("ward.hub", "hub"), wT("ward.flow-capacity", "Flow &amp; capacity"), s.flow, function (d) {
+      twinSectionCard("hub", wT("ward.flow-capacity", "Flow and capacity"), s.flow, function (d) {
         var f = d.flow;
         return '<div class="w-actions">' + flowDrill("occupied", f.beds.occupied, "occupied") + flowDrill("edArrivals", f.ed.arrivals, wT("ward.in-ed", "in ED")) + flowDrill("dischargeCandidates", f.dischargeCandidates, wT("ward.ready-to-leave", "ready to leave")) + "</div>";
       }) +
@@ -4724,18 +4754,18 @@
       twinSectionCard("priority_high", wT("ward.critical-results", "Critical results"), s.criticals, function (d) {
         return '<div class="w-actions">' + twinCount(s.criticals, "criticals", "open", d.open, wT("ward.open-loop-s", "open loop(s)")) + "</div>";
       }) +
-      twinSectionCard(wTH("ward.bed", "bed"), "ICU", s.icu, function (d) {
+      twinSectionCard("bed", "ICU", s.icu, function (d) {
         return '<div class="w-actions">' + twinCount(s.icu, "icu", "occupied", d.occupied, wT("ward.in-icu", "in ICU")) +
           twinCount(s.icu, "icu", "ventilated", d.ventilatedRecorded, wT("ward.ventilator-charted-in-12-h", "ventilator charted in 12 h")) +
           twinCount(s.icu, "icu", "vasopressors", d.vasopressorsRecorded, wT("ward.on-a-vasoactive-order", "on a vasoactive order")) + "</div>" +
           "<p class=\"w-hint\">" + wTH("ward.ventilation-and-vasopressors-count-what-is", "Ventilation and vasopressors count what is charted. A patient with nothing charted is not known, not \"off\".") + "</p>" +
           (d.encounterReadCapped || d.recordsCapped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-these-counts-may", "Read limit reached: these counts may be low.") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.groups", "groups"), wT("ward.opd-queue-today", "OPD queue today"), s.opdQueue, function (d) {
+      twinSectionCard("groups", wT("ward.opd-queue-today", "OPD queue today"), s.opdQueue, function (d) {
         return "<p>" + drillCount(d.waiting, "waiting") + " &middot; " + drillCount(d.inConsultation, wT("ward.in-consultation", "in consultation")) + " &middot; " + wTH("ward.session-s", "{sessions} session(s)", { sessions: esc(d.sessions) }, "sessions") + "</p>" +
           '<p class="w-hint">' + esc(d.drillNotAvailable || "") + "</p>";
       }) +
-      twinSectionCard(wTH("ward.badge", "badge"), wT("ward.staffing-now", "Staffing now"), s.staffing, function (d) {
+      twinSectionCard("badge", wT("ward.staffing-now", "Staffing now"), s.staffing, function (d) {
         if (!d.rosterConfigured) return "<p class=\"w-hint\">" + wTH("ward.not-known2", "Not known: {reason}.", { reason: esc(d.reason || wT("ward.no-roster", "no roster")) }) + "</p>";
         var gaps = (d.gaps || []).map(function (g) { return "<li><b>" + esc(g.role) + "</b><span>" + wTH("ward.short-have-of", "{shift}{v} &middot; short {short} (have {have} of {need})", { shift: esc(g.shift), v: (g.unit ? " &middot; " + esc(g.unit) : ""), short: esc(g.short), have: esc(g.have), need: esc(g.need) }, "shift short have need") + "</span></li>"; }).join("");
         return '<div class="w-actions">' + twinCount(s.staffing, "staffing", "onDuty", d.onDutyNow, wT("ward.on-duty-now", "on duty now")) + "</div>" +
@@ -4743,29 +4773,29 @@
           (gaps ? "<p class=\"w-hint warn\">" + wTH("ward.gaps", "Gaps") + "</p><ul class=\"w-mini\">" + gaps + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-gaps-against-the-roster-minimum", "No gaps against the roster minimum.") + "</p>") +
           (d.partial ? "<p class=\"w-hint warn\">" + wTH("ward.the-roster-read-was-cut-short", "The roster read was cut short; gaps may be incomplete.") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.science", "science"), wT("ward.lab-turnaround-7-days", "Lab turnaround (7 days)"), s.labTat, function (d) {
+      twinSectionCard("science", wT("ward.lab-turnaround-7-days", "Lab turnaround (7 days)"), s.labTat, function (d) {
         return (d.sampleSize ? "<p>" + wTH("ward.median", "Median") + " <b>" + wTH("ward.min2", "{medianMinutes} min", { medianMinutes: esc(d.medianMinutes) }, "medianMinutes") + "</b> &middot; " + wTH("ward.90th-percentile", "90th percentile") + " <b>" + wTH("ward.min3", "{p90Minutes} min", { p90Minutes: esc(d.p90Minutes) }, "p90Minutes") + "</b></p>" : "<p class=\"w-empty\">" + wTH("ward.no-reported-requests-with-both-times", "No reported requests with both times in the last 7 days. No figure is shown.") + "</p>") +
           '<div class="w-actions">' + twinCount(s.labTat, "labTat", "slowest", d.sampleSize, wT("ward.in-the-sample", "in the sample")) + "</div>" +
           '<p class="w-hint">' + wTH("ward.excluded-for-a-missing-or-impossible", "{excludedTotal} excluded for a missing or impossible time.", { excludedTotal: esc(d.excludedTotal) }, "excludedTotal") + "</p>" +
           (d.capped ? "<p class=\"w-hint warn\">" + wTH("ward.read-limit-reached-older-requests-may", "Read limit reached: older requests may be missing.") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.radiology", "radiology"), wT("ward.radiology-backlog", "Radiology backlog"), s.radiology, function (d) {
+      twinSectionCard("radiology", wT("ward.radiology-backlog", "Radiology backlog"), s.radiology, function (d) {
         return '<div class="w-actions">' + twinCount(s.radiology, "radiology", "waiting", d.waiting, wT("ward.not-yet-reported", "not yet reported")) + "</div>" +
           "<p>" + (d.oldestWaitingSince ? wTH("ward.oldest-waiting-since-h", "Oldest waiting since {oldestWaitingSince} ({oldestWaitingHours} h)", { oldestWaitingSince: when(d.oldestWaitingSince), oldestWaitingHours: esc(d.oldestWaitingHours) }, "oldestWaitingSince oldestWaitingHours") : wTH("ward.oldest-wait-not-known", "Oldest wait not known")) + "</p>" +
           (d.orderTimeMissing ? '<p class="w-hint">' + wTH("ward.order-s-have-no-recorded-time", "{orderTimeMissing} order(s) have no recorded time.", { orderTimeMissing: esc(d.orderTimeMissing) }, "orderTimeMissing") + "</p>" : "");
       }) +
-      twinSectionCard(wTH("ward.surgical", "surgical"), wT("ward.theatre-utilisation-24-h", "Theatre utilisation (24 h)"), s.otUtilisation, function (d) {
+      twinSectionCard("surgical", wT("ward.theatre-utilisation-24-h", "Theatre utilisation (24 h)"), s.otUtilisation, function (d) {
         if (!d.theatresConfigured) return "<p class=\"w-hint\">" + wTH("ward.not-known-no-theatres-are-set", "Not known: no theatres are set up for this hospital.") + "</p>";
         return "<p>" + wTH("ward.overall", "Overall") + " <b>" + pct(d.overallUtilisation) + "</b> " + wTH("ward.of-theatre-s", "of {theatresConfigured} theatre(s)", { theatresConfigured: esc(d.theatresConfigured) }, "theatresConfigured") + "</p>" +
-          '<ul class="w-mini">' + (d.perTheatre || []).map(function (x) { return "<li><b>" + esc(x.name) + "</b><span>" + pct(x.utilisation) + " &middot; " + wTH("ward.min-booked", "{bookedMinutes} min booked", { bookedMinutes: esc(x.bookedMinutes) }, "bookedMinutes") + "</span></li>"; }).join("") + "</ul>";
+          '<ul class="w-mini">' + (d.perTheatre || []).map(function (x) { return "<li><b>" + esc(x.name) + "</b> <span>" + pct(x.utilisation) + " &middot; " + wTH("ward.min-booked", "{bookedMinutes} min booked", { bookedMinutes: esc(x.bookedMinutes) }, "bookedMinutes") + "</span></li>"; }).join("") + "</ul>";
       }) +
-      twinSectionCard(wTH("ward.emergency", "emergency"), wT("ward.emergency2", "Emergency"), s.emergency, function (d) {
+      twinSectionCard("emergency", wT("ward.emergency2", "Emergency"), s.emergency, function (d) {
         return d.any ? "<p>" + wTH("ward.active-declaration-s", "{length} active declaration(s): {join}", { length: esc(d.active.length), join: esc(d.active.map(function (a) { return a.kind; }).join(", ")) }, "length join") + "</p>" : "<p class=\"w-empty\">" + wTH("ward.none-active", "None active.") + "</p>";
       }) +
       twinSectionCard("event_busy", wT("ward.blackouts", "Blackouts"), s.blackouts, function (d) {
         return d.blackouts.length ? "<p>" + wTH("ward.active-blackout-s", "{length} active blackout(s)", { length: esc(d.blackouts.length) }, "length") + "</p>" : "<p class=\"w-empty\">" + wTH("ward.none-active", "None active.") + "</p>";
       }) +
-      twinSectionCard(wTH("ward.medication", "medication"), wT("ward.pharmacy", "Pharmacy"), s.pharmacy, function (d) {
+      twinSectionCard("medication", wT("ward.pharmacy", "Pharmacy"), s.pharmacy, function (d) {
         var low = (d.stock || []).filter(function (r) { return r.belowReorder; });
         return "<p>" + wTH("ward.dispensed-pending-verification-below-reorder", "{dispenseCount} dispensed &middot; {pendingVerification} pending verification &middot; {length} below reorder", { dispenseCount: esc(d.dispenseCount), pendingVerification: esc(d.pendingVerification), length: esc(low.length) }, "dispenseCount pendingVerification length") + "</p>" +
           (low.length ? '<ul class="w-mini">' + low.map(function (r) { return "<li><b>" + esc(r.display || r.code || "") + "</b><span>" + wTH("ward.level-reorder-at", "level {level} &middot; reorder at {reorderAt}", { level: esc(r.level), reorderAt: esc(r.reorderAt) }, "level reorderAt") + "</span></li>"; }).join("") + "</ul>" +
@@ -4774,11 +4804,11 @@
       twinSectionCard("folder_shared", "HIM", s.him, function (d) {
         return "<p>" + drillCount(d.incompleteCharts, wT("ward.incomplete-chart-s", "incomplete chart(s)")) + " " + wTH("ward.of-checked", "of {chartsChecked} checked", { chartsChecked: esc(d.chartsChecked) }, "chartsChecked") + "</p>";
       }) +
-      twinSectionCard(wTH("ward.science", "science"), wT("ward.diagnostics-lis", "Diagnostics (LIS)"), s.lis, function (d) {
+      twinSectionCard("science", wT("ward.diagnostics-lis", "Diagnostics (LIS)"), s.lis, function (d) {
         return '<div class="w-actions">' + twinCount(s.lis, "lis", "outstanding", d.outstanding, wT("ward.outstanding-specimens", "outstanding specimens")) + "</div><p>" + wTH("ward.of-checked2", "of {checked} checked", { checked: esc(d.checked) }, "checked") + "</p>";
       }) +
       (t.financeWithheld ? '<div class="w-card"><div class="w-card-h">' + ms("lock") + "<h3>" + wTH("ward.finance", "Finance") + "</h3></div><p class=\"w-hint\">" + wTH("ward.billing-and-claims-need-billing-rights", "Billing and claims need billing rights, so they are not shown.") + "</p></div>" : "") +
-      twinSectionCard(wTH("ward.payments", "payments"), wT("ward.billing", "Billing"), s.billing, function (d) {
+      twinSectionCard("payments", wT("ward.billing", "Billing"), s.billing, function (d) {
         return "<p>" + drillCount(d.invoiceCount, wT("ward.invoice-s", "invoice(s)")) + " &middot; " + wTH("ward.charged-collected-outstanding", "charged {charged} &middot; collected {collected} &middot; outstanding {outstanding}", { charged: esc(d.charged), collected: esc(d.collected), outstanding: esc(d.outstanding) }, "charged collected outstanding") + "</p>";
       }) +
       twinSectionCard("request_quote", wT("ward.claims", "Claims"), s.claims, function (d) {
@@ -6194,8 +6224,9 @@
         "<p class=\"w-dt-times\">" + wTH("ward.enrolled", "Enrolled {enrolledAt}", { enrolledAt: when(en.enrolledAt) }, "enrolledAt") + (en.enrolledBy ? " " + wTH("ward.by4", "by {enrolledBy}", { enrolledBy: esc(en.enrolledBy) }, "enrolledBy") : "") + (pw.owner ? " &middot; " + wTH("ward.owner", "Owner: {owner}", { owner: esc(pw.owner) }, "owner") : "") + "</p>" +
         '<ul class="w-mini">' + steps + "</ul></div>";
     }).join("") : "<p class=\"w-empty\">" + wTH("ward.no-active-clinical-pathways-for-this", "No active clinical pathways for this patient.") + "</p>";
+    if (d.progress === false) enrolList = '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-load-clinical-pathways-do", "Could not load clinical pathways. Do not read this as no pathways.", null, "", 1) + "</p>";
 
-    var availList = available.length ? "<div class=\"w-sub\"><h4>" + wTH("ward.available-pathways-to-enrol", "Available pathways to enrol") + "</h4><ul class=\"w-mini\">" +
+    var availList = d.available === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-load-published-pathways", "Could not load the hospital's published pathways. Do not read this as none published.", null, "", 1) + "</p>" : available.length ? "<div class=\"w-sub\"><h4>" + wTH("ward.available-pathways-to-enrol", "Available pathways to enrol") + "</h4><ul class=\"w-mini\">" +
       available.map(function (p) {
         return '<li class="w-mini-row"><div><b>' + esc(p.title) + "</b> (v" + esc(p.version) + ")" +
           (p.owner ? "<div class=\"w-dt-times\">" + wTH("ward.owner", "Owner: {owner}", { owner: esc(p.owner) }, "owner") + (p.reviewDate ? " &middot; " + wTH("ward.review", "Review: {reviewDate}", { reviewDate: esc(p.reviewDate) }, "reviewDate") : "") + "</div>" : "") +
@@ -6933,17 +6964,102 @@
     var keys = Object.keys(v);
     return keys.length ? "<ul class=\"w-mini-flat\">" + keys.map(function (k) { return "<li><b>" + esc(k) + ":</b> " + reportValue(v[k]) + "</li>"; }).join("") + "</ul>" : wTH("ward.none", "none");
   }
+  /* LT-38 (live test 2026-09-15): the reports were drawn as every key of every answer, nested, which on a real
+   * hospital was one 51,000-character page ("flow: computedAt: ... encounterId: wsq-adm-..."). Each report now
+   * has its own small layout of the figures it actually carries: labelled rows and tables, no internal ids, no
+   * key names. A figure the server did not send (unreadable for this role) says "not readable", never 0.
+   * Values recorded or computed by the server (drug names, claim and request states, wards) are shown as sent. */
+  function rptN(v) { return v == null || v === "" ? '<span class="w-st overdue">' + wTH("ward.not-readable", "not readable") + "</span>" : esc(v); }
+  function rptRows(rows) {
+    return '<div style="overflow-x:auto"><table class="w-tbl"><tbody>' + rows.map(function (r) {
+      return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>";
+    }).join("") + "</tbody></table></div>";
+  }
+  function rptGrid(heads, rows, emptyHtml) {
+    if (!rows.length) return '<p class="w-empty">' + emptyHtml + "</p>";
+    return '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr>' + heads.map(function (h) { return "<th>" + h + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      rows.map(function (r) { return "<tr>" + r.map(function (c) { return "<td>" + c + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+  }
+  function rptCounts(obj, headA, emptyHtml) {
+    var keys = Object.keys(obj || {});
+    return rptGrid([headA, wTH("ward.rpt-count", "Count")], keys.map(function (k) { return ['<span lang="en">' + esc(k) + "</span>", rptN(obj[k])]; }), emptyHtml);
+  }
+  function rptWhere(w) { return w ? esc(w.ward || "-") + (w.bed ? " / " + esc(w.bed) : "") : "-"; }
+  var BOTTLENECK_WORDS = { unplaced_patients: "Patients without a bed", ed_untriaged: "ED patients not triaged", beds_blocked: "Beds blocked", beds_in_cleaning_turnover: "Beds being cleaned", stays_with_open_items: "Stays with open items" };
+  var BED_STATE_WORDS = { available: "Available", reserved: "Reserved", occupied: "Occupied", blocked: "Blocked", cleaning: "Cleaning", maintenance: "Maintenance" };
+  var REPORT_BODIES = {
+    patientFlow: function (rep) {
+      var f = rep.flow;
+      if (!f) return '<p class="w-empty">' + wTH("ward.rpt-no-flow", "Patient flow could not be computed.") + "</p>";
+      var ed = f.ed || {}, adm = f.admissionsPending || {}, beds = f.beds || {}, states = beds.states || {};
+      return rptRows([
+        [wTH("ward.rpt-ed-arrivals", "In the emergency department"), rptN(ed.arrivals)],
+        [wTH("ward.rpt-ed-untriaged", "Of those, not yet triaged"), rptN(ed.untriaged)],
+        [wTH("ward.rpt-adm-waiting", "Waiting for admission"), rptN(adm.waiting) + (adm.waiting ? " (" + wTH("ward.rpt-longest-wait", "longest {h} h", { h: esc(adm.longestWaitHours) }) + ")" : "")],
+        [wTH("ward.rpt-beds-occupied", "Beds occupied"), rptN(beds.occupied)],
+        [wTH("ward.rpt-unplaced", "Admitted with no bed"), rptN(beds.unplacedPatients)],
+        [wTH("ward.rpt-discharge-candidates", "Stays with nothing outstanding"), rptN(f.dischargeCandidates)],
+      ]) +
+        "<h5>" + wTH("ward.rpt-bed-states", "Beds by state") + "</h5>" +
+        rptGrid(Object.keys(BED_STATE_WORDS).map(function (k) { return esc(wTEn(BED_STATE_WORDS[k])); }), [Object.keys(BED_STATE_WORDS).map(function (k) { return rptN(states[k]); })], "") +
+        "<h5>" + wTH("ward.rpt-bottlenecks", "Largest bottlenecks") + "</h5>" +
+        rptGrid([wTH("ward.rpt-what", "What"), wTH("ward.ward2", "Ward"), wTH("ward.rpt-count", "Count")], (f.bottlenecks || []).map(function (b) {
+          return [BOTTLENECK_WORDS[b.kind] ? esc(wTEn(BOTTLENECK_WORDS[b.kind])) : '<span lang="en">' + esc(b.kind) + "</span>", b.ward ? esc(b.ward) : "-", rptN(b.count)];
+        }), wTH("ward.rpt-none-now", "None right now.")) +
+        "<h5>" + wTH("ward.rpt-open-stays", "Stays with the most open items") + "</h5>" +
+        rptGrid([wTH("ward.rpt-ward-bed", "Ward / bed"), wTH("ward.rpt-days", "Days in hospital"), wTH("ward.rpt-open-items", "Open items")], (f.staysWithOpenItems || []).slice(0, 20).map(function (s) {
+          return [rptWhere(s), rptN(s.lengthOfStayDays), rptN(s.openItems)];
+        }), wTH("ward.rpt-none-now", "None right now.")) +
+        "<h5>" + wTH("ward.rpt-transfers", "Transfers in the last day") + "</h5>" +
+        rptGrid([wTH("ward.rpt-when", "When"), wTH("ward.rpt-from", "From"), wTH("ward.rpt-to", "To"), wTH("ward.rpt-reason", "Reason")], (f.recentTransfers || []).map(function (s) {
+          return [when(s.movedAt), rptWhere(s.movedFrom), rptWhere(s), s.moveReason ? esc(s.moveReason) : "-"];
+        }), wTH("ward.rpt-none-now", "None right now."));
+    },
+    clinicalOperations: function (rep) { return wardStatusHtml(rep, wTH("ward.rpt-hospital-wide", "Hospital-wide open work")); },
+    billing: function (rep) {
+      return rptRows([
+        [wTH("ward.rpt-invoices", "Invoices raised"), rptN(rep.invoiceCount)], [wTH("ward.rpt-charged", "Charged"), rptN(rep.charged)],
+        [wTH("ward.rpt-collected", "Collected"), rptN(rep.collected)], [wTH("ward.rpt-refunded", "Refunded"), rptN(rep.refunded)],
+        [wTH("ward.rpt-discounted", "Discounted"), rptN(rep.discounted)], [wTH("ward.rpt-adjusted", "Adjusted"), rptN(rep.adjusted)],
+        [wTH("ward.rpt-written-off", "Written off"), rptN(rep.writtenOff)], [wTH("ward.rpt-outstanding", "Outstanding"), rptN(rep.outstanding)],
+      ]);
+    },
+    claims: function (rep) {
+      return rptRows([
+        [wTH("ward.rpt-claims", "Claims"), rptN(rep.claimCount)], [wTH("ward.rpt-submitted", "Submitted"), rptN(rep.submitted)],
+        [wTH("ward.rpt-pending", "Awaiting the payer"), rptN(rep.pending)], [wTH("ward.rpt-denied", "Denied"), rptN(rep.denied)],
+        [wTH("ward.rpt-paid", "Paid"), rptN(rep.approved)], [wTH("ward.rpt-outstanding-amount", "Amount awaiting the payer"), rptN(rep.outstandingAmount)],
+      ]) + "<h5>" + wTH("ward.rpt-by-state", "By state") + "</h5>" + rptCounts(rep.byState, wTH("ward.rpt-state", "State"), wTH("ward.rpt-none-now", "None right now."));
+    },
+    pharmacy: function (rep) {
+      var vol = rep.dispenseVolume || {};
+      return rptRows([[wTH("ward.rpt-dispenses", "Supplies issued"), rptN(rep.dispenseCount)], [wTH("ward.rpt-pending-verify", "Active orders not checked by pharmacy"), rptN(rep.pendingVerification)]]) +
+        "<h5>" + wTH("ward.rpt-issued-by-drug", "Issued, by medicine") + "</h5>" +
+        rptGrid([wTH("ward.rpt-medicine", "Medicine"), wTH("ward.rpt-quantity", "Quantity")], Object.keys(vol).sort().map(function (d) { return ['<span lang="en">' + esc(d) + "</span>", rptN(vol[d])]; }), wTH("ward.rpt-none-issued", "Nothing issued.")) +
+        "<h5>" + wTH("ward.rpt-stock", "Stock on hand") + "</h5>" +
+        rptGrid([wTH("ward.rpt-medicine", "Medicine"), wTH("ward.rpt-location", "Location"), wTH("ward.rpt-on-hand", "On hand")], (rep.stock || []).map(function (s) {
+          return ['<span lang="en">' + esc(s.display || s.code) + "</span>" + (s.belowReorder ? ' <span class="w-st overdue">' + wTH("ward.rpt-reorder", "reorder") + "</span>" : ""), s.location ? esc(s.location) : "-", '<span lang="en">' + esc(s.level) + " " + esc(s.unit || "") + "</span>"];
+        }), wTH("ward.rpt-no-stock", "No stock movements recorded."));
+    },
+    him: function (rep) {
+      var checked = (rep.filters && rep.filters.chartCompletionTypesChecked) || [];
+      return rptRows([[wTH("ward.rpt-charts-checked", "Open stays checked"), rptN(rep.chartsChecked)], [wTH("ward.rpt-incomplete", "Incomplete charts"), rptN(rep.incompleteCharts)], [wTH("ward.rpt-disclosures", "Records released (disclosures)"), rptN(rep.disclosures)]]) +
+        (checked.length ? "" : '<p class="w-hint warn">' + ms("info") + wTH("ward.rpt-no-rules", "No chart-completion rules are set for this hospital, so no chart was checked.") + "</p>") +
+        "<h5>" + wTH("ward.rpt-incomplete-by", "Incomplete, by what is missing") + "</h5>" + rptCounts(rep.incompleteBy, wTH("ward.rpt-what", "What"), wTH("ward.rpt-none-now", "None right now.")) +
+        "<h5>" + wTH("ward.rpt-roi", "Record release requests, by state") + "</h5>" + rptCounts(rep.roiRequests, wTH("ward.rpt-state", "State"), wTH("ward.rpt-none-now", "None right now."));
+    },
+  };
   function reportsView(state) {
     var r = state.reports || {};
     var sections = Object.keys(REPORT_LABELS).map(function (key) {
       var rep = r[key];
       if (!rep) return "";
       if (!rep.ok) return '<div class="w-sub"><h4>' + esc(wTEn(REPORT_LABELS[key])) + "</h4><p class=\"w-empty\">" + wTH("ward.could-not-load", "Could not load:", null, "", 1) + " " + esc(rep.detail || rep.error || wT("ward.unknown-error", "unknown error")) + "</p></div>";
-      var body = Object.keys(rep).filter(function (k) { return ["ok", "mode", "tenantId", "dataSource", "period", "filters", "generatedAt", "scope"].indexOf(k) < 0; })
-        .map(function (k) { var v = rep[k]; return "<li><b>" + esc(k) + ":</b> " + reportValue(v) + "</li>"; }).join("");
+      var body = rep.skipped ? '<p class="w-empty">' + wTH("ward.rpt-not-kept", "This hospital does not keep this record in WardSynQ.") + "</p>" : (REPORT_BODIES[key] || function () { return ""; })(rep);
       return '<div class="w-sub"><h4>' + esc(wTEn(REPORT_LABELS[key])) + "</h4>" +
         "<p class=\"w-dt-times\">" + wTH("ward.source-generated-as", "source: {join}{v} &middot; generated {generatedAt} &middot; as {scope}", { join: esc((rep.dataSource || []).join(", ")), v: (rep.period && (rep.period.from || rep.period.to) ? " &middot; " + esc(rep.period.from || "") + " " + wTH("ward.to2", "to") + " " + esc(rep.period.to || "") : ""), generatedAt: when(rep.generatedAt), scope: esc(rep.scope && rep.scope.role) }, "join generatedAt scope") + "</p>" +
-        "<ul class=\"w-mini-flat\">" + body + "</ul></div>";
+        (rep.partial ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.rpt-partial", "Part of this report could not be read. Counts may be low.", null, "", 1) + "</p>" : "") +
+        body + "</div>";
     }).join("");
     return '<div class="w-card">' +
       '<div class="w-card-h">' + ms("summarize") + "<h3>" + wTH("ward.reports", "Reports") + "</h3>" +
@@ -7529,12 +7645,26 @@
     if (canvas) canvas.scrollTop = cy;
     if (typeof window !== "undefined" && sy > 0) window.scrollTo(0, sy);
     focusRestore(mark);
+    if (st.landOn && st.view === "list" && !st.busy) landOnPatient(st.landOn);
+  }
+  /* LT-05: after an admission, the ward list opens on the admitted patient's row (or at the top, with
+   * the "Admitted" note, when the row is not in this ward's list), never at the board's old offset. */
+  function landOnPatient(at) {
+    st.landOn = null;
+    var p = (st.patients || []).filter(function (x) { return x.ward === at.ward && String(x.bed) === at.bed; })[0];
+    var row = p && p.encounterId ? document.querySelector('[data-w-act="open:' + String(p.encounterId).replace(/"/g, '\\"') + '"]') : null;
+    try {
+      if (row) { row.scrollIntoView({ block: "center" }); row.focus({ preventScroll: true }); return; }
+      var canvas = document.getElementById("wCanvas"); if (canvas) canvas.scrollTop = 0;
+      if (typeof window !== "undefined") window.scrollTo(0, 0);
+    } catch (e) {}
   }
 
-  function loadWard() {
+  /** afterList (optional) runs once the list itself is in, before it is painted. */
+  function loadWard(afterList) {
     st.busy = true; paint();
     return apiGet("/ward/list?orgId=" + encodeURIComponent(st.orgId) + (st.ward ? "&ward=" + encodeURIComponent(st.ward) : ""))
-      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
+      .then(function (r) { if (settle(r)) { st.patients = r.patients || []; if (r.region) st.region = r.region; } st.loaded = true; if (typeof afterList === "function") afterList(); paint(); return Promise.all([loadCosigns(), loadQuality(), loadOverrides(), loadExceptions(), loadEmergencyStatus(), loadWardMetrics(), loadDuty(), loadAlertCover()]); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-ward", "Could not reach the ward."); st.loaded = true; paint(); });
   }
   function loadDuty() {
@@ -7608,6 +7738,9 @@
     }
     if (st.transferPending && st.sel) { transferTo(ward, bed); return; }
     st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; st.emergencyOverride = false; paint();
+    // LT-02: bring the panel to the nurse (it sits under the picked bed's ward) and put the cursor in the MRN box.
+    var panel = typeof document !== "undefined" && document.getElementById("wAdmitPanel");
+    if (panel) { try { panel.scrollIntoView({ block: "nearest" }); var mrnBox = document.getElementById("wAdmitMrn"); if (mrnBox) mrnBox.focus({ preventScroll: true }); } catch (e) {} }
   }
   /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
    * caller writes it. Nothing here invents a second admission path.
@@ -7625,7 +7758,14 @@
       .then(function (r) {
         if (r && r.error === "no_patient_identity") { st.busy = false; st.err = wT("ward.that-mrn-is-not-registered-here", "That MRN is not registered here."); paint(); return; }
         if (settle(r, r && r.written ? wT("ward.admitted-to-bed", "Admitted to {ward}, bed {bed}.", { ward: t.ward, bed: t.bed }) : wT("ward.already-admitted-there", "Already admitted there."))) {
-          st.admitTarget = null; st.mrnLookup = null; st.view = "list"; loadWard();
+          /* LT-05: land ON the admitted patient. The ward list's own load settles and cleared the
+           * "Admitted" note, paint() kept the board's scroll offset (so the list opened mid-page), and
+           * the shell's address still said #/ward/board. Now the note survives, the list scrolls to the
+           * new row, and the address says #/ward. */
+          var admittedNote = st.note;
+          st.admitTarget = null; st.mrnLookup = null; st.view = "list";
+          if (G.WSQ && typeof location !== "undefined" && /^#\/ward\//.test(location.hash)) { try { history.replaceState(null, "", "#/ward"); } catch (e) {} }
+          loadWard(function () { if (!st.err && !st.refusal) st.note = admittedNote; st.landOn = { ward: t.ward, bed: String(t.bed) }; });
         } else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-admit-the-patient", "Could not admit the patient."); paint(); });
@@ -7656,6 +7796,9 @@
     // than trusting a value read at an earlier one.
     var overrideEl = document.getElementById("wAdmitEmergencyOverride");
     if (overrideEl) st.emergencyOverride = !!overrideEl.checked;
+    // LT-05: the type can also be changed after Find (the select is still on screen), so read it at this click too.
+    var classEl = document.getElementById("wAdmitClass");
+    if (classEl) st.admitClass = classEl.value || "";
     doAdmit(st.mrnLookup.mrn);
   }
   /* NEW PATIENT: the SAME check-in sheet the front desk uses (SMD_PATIENTREG), not a second form
@@ -9967,9 +10110,11 @@
     st.view = "pathways"; st.pathwaysData = null; paint();
     Promise.all([
       apiGet("/ward/pathways?orgId=" + encodeURIComponent(st.orgId)),
-      apiGet("/ward/pathway-progress?patientId=" + encodeURIComponent(st.sel.patientId))
+      // LT-16: this call named no hospital, and the server answered 500. It now does.
+      apiGet("/ward/pathway-progress?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
     ]).then(function (res) {
-      st.pathwaysData = { available: res[0] && res[0].ok ? res[0] : null, progress: res[1] && res[1].ok ? res[1] : null };
+      // false = that half failed. A failed read must never render as "no pathways" (it used to be null, drawn as empty).
+      st.pathwaysData = { available: res[0] && res[0].ok ? res[0] : false, progress: res[1] && res[1].ok ? res[1] : false };
       paint();
     }).catch(function () {
       st.pathwaysData = { failed: true };
@@ -10023,7 +10168,7 @@
   function loadSpecialty() {
     if (!st.sel) { st.err = wT("ward.open-a-patient-first", "Open a patient first."); paint(); return; }
     st.view = "specialty"; st.specialtyData = null; paint();
-    apiGet("/ward/specialty?class=" + encodeURIComponent(st.sel.class || "") + "&specialty=" + encodeURIComponent(st.sel.specialty || ""))
+    apiGet("/ward/specialty?orgId=" + encodeURIComponent(st.orgId) + "&class=" + encodeURIComponent(st.sel.class || "") + "&specialty=" + encodeURIComponent(st.sel.specialty || ""))
       .then(function (r) {
         st.specialtyData = r && r.ok ? r : { failed: true };
         paint();
@@ -11680,6 +11825,7 @@
     // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
     if (cmd === "board") { if (st.view !== "board") { st.transferPending = false; st.edAdmitPending = false; } loadBoard(); return; }
     if (cmd === "transferward") { transferTo(arg, ""); return; }
+    if (cmd === "openrota") { if (G.WSQ && G.WSQ.go) G.WSQ.go("rota"); return; }
     if (cmd === "managebeds") { if (G.WSQ && G.WSQ.go) { G.WSQ.state._adminTab = "wards"; G.WSQ.go("admin"); } return; }
     if (cmd === "unpickbed") { st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; paint(); return; }
     if (cmd === "pickbed") { var pb = arg.indexOf("|"); if (pb > 0) pickBed(arg.slice(0, pb), arg.slice(pb + 1)); return; }

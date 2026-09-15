@@ -44,6 +44,12 @@ async function anchoredVerdict(repository, chainId, v, storesIn) {
   return degraded(a.message);
 }
 
+/* The provider's own error codes that mean "no such bucket", as documentStorageProbe reports them. */
+const STORAGE_NOT_SET_UP = new Set(["InvalidBucketName", "NoSuchBucket"]);
+const STORAGE_SETUP_CONSEQUENCE = "Document storage is not set up yet: the platform owner has not yet chosen the storage bucket for documents. Until it is, uploads fail and existing documents cannot be opened; charting continues. There is nothing for this hospital to change.";
+/* LT-34: "no backup ever recorded" says what to do, not only what is missing. */
+const BACKUP_TODO = "What to do: ask your WardSynQ support team to schedule the hospital record export, which records a backup each time it runs. Then restore one backup into a test system and record it under Admin Center, Security review, Record a restore test.";
+
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
 /* Thresholds, returned on the report so a reader can see what "degraded" meant. */
@@ -101,8 +107,14 @@ const DEPENDENCIES = [
       const at = r && r.checkedAt;
       if (!r) return down("The storage check returned nothing.");
       if (r.state === "ok") return { ...up(), checkedAt: at };
-      if (r.state === "not_configured") return { ...down("Document storage is not configured for this deployment."), checkedAt: at };
-      return { ...down(`Storage refused the ${r.step || "unknown"} step of a test save${r.providerStatus ? " (status " + Number(r.providerStatus) + ")" : ""}.`), checkedAt: at };
+      /* LT-34: storage that was never set up is not an outage, and a bare "Down" sent hospital admins looking for one.
+       * No store at all, or a bucket the provider does not recognise, is the platform owner's pending choice of bucket
+       * (owner decision S1). Still down, because uploads really fail; the line says why and that the hospital has
+       * nothing to change. */
+      if (r.state === "not_configured" || STORAGE_NOT_SET_UP.has(r.providerCode)) {
+        return { ...down(r.state === "not_configured" ? "No document store is connected to this deployment." : `The storage service does not recognise the bucket (${r.providerCode}).`), consequence: STORAGE_SETUP_CONSEQUENCE, setup: "platform", checkedAt: at };
+      }
+      return { ...down(`Storage refused the ${r.step || "unknown"} step of a test save${r.providerStatus ? " (status " + Number(r.providerStatus) + (r.providerCode ? ", " + r.providerCode : "") + ")" : ""}.`), checkedAt: at };
     },
   },
   {
@@ -175,7 +187,7 @@ const DEPENDENCIES = [
     async check(d, nowMs) {
       const [runs, tests] = await Promise.all([d.repository.latestByType(d.tenantId, RUN_TYPE, 50), d.repository.latestByType(d.tenantId, RESTORE_TYPE, 200)]);
       const p = dataProtection(runs, tests, d.rpoMinutes, new Date(nowMs).toISOString());
-      const reason = p.reasons.join(" ") || null;
+      const reason = [p.reasons.join(" "), !p.lastBackup || !p.lastRestoreTest ? BACKUP_TODO : ""].filter(Boolean).join(" ") || null;
       return p.status === "green" ? up(`Last backup ${p.lastBackup.at}; last restore test ${p.lastRestoreTest.at}.`) : p.status === "amber" ? degraded(reason) : down(reason);
     },
   },
@@ -226,7 +238,7 @@ async function systemHealthReport(deps) {
     if (!r || !["up", "degraded", "down"].includes(r.status)) r = down("The check returned no result.");
     /* A probe may carry its own consequence for a specific finding (the anchor probe does for a
      * rewritten or truncated trail); otherwise the dependency's consequence for the status applies. */
-    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : (r.consequence || dep.consequence[r.status]) };
+    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : (r.consequence || dep.consequence[r.status]), ...(r.setup ? { setup: r.setup } : {}) };
   }));
   const worst = dependencies.some((x) => x.status === "down") ? "down" : dependencies.some((x) => x.status === "degraded") ? "degraded" : "up";
   return { ok: true, generatedAt: new Date(now()).toISOString(), overall: worst, dependencies, timeoutMs: ms, limits: LIMITS };

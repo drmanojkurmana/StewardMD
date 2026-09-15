@@ -474,9 +474,15 @@ class MemoryRepository {
     return { seq: last };
   }
 
-  async changes(tenantId, sinceSeq, limit) {
+  /** opts.newest: newest first, below opts.before (a cursor from the previous page), for a person reading an audit list. */
+  async changes(tenantId, sinceSeq, limit, opts) {
     const since = Number(sinceSeq) || 0;
     const max = Math.max(1, Math.min(500, Number(limit) || 100));
+    if (opts && opts.newest) {
+      const before = Number(opts.before) > 0 ? Number(opts.before) : Infinity;
+      const desc = this._rows.filter((r) => r.tenantId === tenantId && r.seq < before).sort((a, b) => b.seq - a.seq).slice(0, max);
+      return { records: desc.map((r) => ({ seq: r.seq, ...clone(r.body) })), cursor: desc.length ? desc[desc.length - 1].seq : null };
+    }
     const rows = this._rows.filter((r) => r.tenantId === tenantId && r.seq > since).slice(0, max);
     return { records: rows.map((r) => ({ seq: r.seq, ...clone(r.body) })), cursor: rows.length ? rows[rows.length - 1].seq : since };
   }

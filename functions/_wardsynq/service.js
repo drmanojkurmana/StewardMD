@@ -743,14 +743,16 @@ class RecordService {
   }
 
   /** Everything written to this tenant after a cursor. How a second client learns what changed. */
-  async changes(since, limit) {
+  /** opts: { newest, before } for newest-first reading (repository changes()); omitted, the ascending sync feed. */
+  async changes(since, limit, opts) {
     if (!this.governed) throw new RecordRequestError("no store", "NO_STORE");
     // The governed store has no change feed of its own; this is a READ and is gated the same way.
     this.governed._assertRead(this.actor);
-    const raw = await this.repository.changes(this.tenantId, since, limit);
+    const newest = !!(opts && opts.newest);
+    const raw = await this.repository.changes(this.tenantId, since, limit, newest ? { newest: true, before: opts.before } : undefined);
     // The cursor advances over everything; the records handed back are only what may be read.
     const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType)), cursor: raw.cursor };
-    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, ...(newest ? { newest: true, before: Number(opts.before) || null } : {}), cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
     return page;
   }
 

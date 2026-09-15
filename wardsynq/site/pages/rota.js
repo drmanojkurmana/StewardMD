@@ -16,6 +16,14 @@
 
   function refusal(c, r) { return !r ? T(c, "site.rota.noResponse", "No response from the server.") : (r.message || r.error || T(c, "site.rota.refusalFailed", "failed")); }
   function val(id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; }
+  /* LT-36: a staff member as shown on the rota. Members carry no display name, and a sign-in ID can be a mobile
+   * number or an internal account id: personal data, and no name. Those read "Name not set" (the role is shown
+   * beside it where the answer has one), never the number. An email or staff ID the hospital chose is shown. */
+  function person(c, identity) {
+    var id = String(identity == null ? "" : identity).trim();
+    if (!id || /^\+?[\d\s().-]{7,}$/.test(id) || /^(fb|cfa|ghis|uid):/i.test(id)) return c.esc(T(c, "site.rota.nameNotSet", "Name not set"));
+    return EN(c, c.esc(id));
+  }
 
   /* "what" is a noun phrase already translated by the caller (a literal T() call at each call site),
    * so it composes into these two sentences like any other placeholder. */
@@ -34,7 +42,7 @@
     var myId = (c.state.who && c.state.who.name) || "";
     var swaps = r.swaps.length ? "<h3>" + esc(T(c, "site.rota.swapsHeading", "Swaps")) + "</h3><ul>" + r.swaps.map(function (s) {
       var ask = !!myId && s.to === myId;
-      return "<li>" + EN(c, esc(s.date)) + " " + EN(c, esc(s.shiftId)) + ": " + EN(c, esc(s.from)) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + EN(c, esc(s.to)) + " (" + EN(c, esc(s.status)) + ")" +
+      return "<li>" + EN(c, esc(s.date)) + " " + EN(c, esc(s.shiftId)) + ": " + person(c, s.from) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + person(c, s.to) + " (" + EN(c, esc(s.status)) + ")" +
         (ask && s.status === "proposed" ? ' <button class="btn quiet" type="button" data-rota="swapyes" data-id="' + esc(s.id) + '">' + esc(T(c, "site.rota.accept", "Accept")) + '</button> <button class="btn quiet" type="button" data-rota="swapno" data-id="' + esc(s.id) + '">' + esc(T(c, "site.rota.decline", "Decline")) + "</button>" : "") + "</li>";
     }).join("") + "</ul>" : "";
     var leave = "<h3>" + esc(T(c, "site.rota.myLeaveHeading", "My leave")) + "</h3>" + (r.leave.length ? "<ul>" + r.leave.map(function (l) { return "<li>" + EN(c, esc(l.from)) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + EN(c, esc(l.to)) + ": " + EN(c, esc(l.reason)) + " (" + EN(c, esc(l.status)) + ")</li>"; }).join("") + "</ul>" : "<p>" + esc(T(c, "site.rota.noLeaveRequested", "No leave requested.")) + "</p>") +
@@ -49,7 +57,7 @@
     var esc = c.esc;
     return (r.partial ? '<div class="msg note">' + esc(T(c, "site.rota.coveragePartialNote", "Some of these months have too many rota entries to show in full; gaps may be understated.")) + "</div>" : "") +
       '<div class="tbl"><table><tr><th>' + esc(T(c, "site.rota.colDate", "Date")) + '</th><th>' + esc(T(c, "site.rota.colShift", "Shift")) + '</th><th>' + esc(T(c, "site.rota.colUnit", "Unit")) + '</th><th>' + esc(T(c, "site.rota.colOn", "On")) + '</th><th>' + esc(T(c, "site.rota.colShort", "Short")) + '</th></tr>' + r.coverage.map(function (x) {
-        var on = (x.assignments || []).map(function (a) { return EN(c, esc(a.identity)) + ' <button class="btn quiet" type="button" data-rota="unassign" data-id="' + esc(a.id) + '" title="' + esc(T(c, "site.rota.removeFromShiftTitle", "Remove from this shift")) + '">x</button>'; }).join(", ");
+        var on = (x.assignments || []).map(function (a) { return person(c, a.identity) + ' <button class="btn quiet" type="button" data-rota="unassign" data-id="' + esc(a.id) + '" title="' + esc(T(c, "site.rota.removeFromShiftTitle", "Remove from this shift")) + '">x</button>'; }).join(", ");
         return "<tr" + (x.gaps.length ? ' class="warn"' : "") + "><td>" + EN(c, esc(x.date)) + "</td><td>" + EN(c, esc(x.shift)) + "</td><td>" + EN(c, esc(x.unit)) + "</td><td>" + (on || esc(T(c, "site.rota.nobody", "nobody"))) + "</td><td>" +
           (x.gaps.length ? esc(x.gaps.map(function (g) { return g.short + " " + g.role; }).join(", ")) : "") + "</td></tr>";
       }).join("") + "</table></div>";
@@ -58,7 +66,7 @@
   function dutyHtml(c, r) {
     if (!r.ok) return failed(c, T(c, "site.rota.whoOnDuty", "who is on duty"));
     if (!r.onDuty.length) return "<p>" + c.esc(r.partial ? T(c, "site.rota.dutyPartialEmpty", "Nobody found on the rota for now, but the rota could not be read in full.") : T(c, "site.rota.dutyEmpty", "Nobody is on the rota for right now.")) + "</p>";
-    return "<ul>" + r.onDuty.map(function (d) { return "<li>" + EN(c, c.esc(d.identity)) + ": " + EN(c, c.esc(d.shift)) + " (" + EN(c, c.esc(d.unit)) + ")</li>"; }).join("") + "</ul>";
+    return "<ul>" + r.onDuty.map(function (d) { return "<li>" + person(c, d.identity) + ": " + EN(c, c.esc(d.shift)) + " (" + EN(c, c.esc(d.unit)) + ")</li>"; }).join("") + "</ul>";
   }
   /* Owner 2026-09-15: who is on duty now in each ward (the rota, or marked on duty by themselves) and who marked
    * themselves off duty, from GET /roster/duty. Off duty overrides the rota: those people get no critical-result alert. */
@@ -71,11 +79,11 @@
     var wards = r.wards.length ? r.wards.map(function (w) {
       return "<h3>" + (w.ward ? EN(c, esc(w.ward)) : esc(T(c, "site.rota.noWard", "No ward"))) + " (" + w.people.length + ")</h3><ul>" + w.people.map(function (p) {
         var v = viaText(c, p.via);
-        return "<li>" + EN(c, esc(p.identity)) + (p.role ? ", " + esc(p.role) : "") + ": " + (v != null ? esc(v) : EN(c, esc(p.via))) + (p.until ? " " + esc(T(c, "site.rota.untilLead", "until")) + " " + EN(c, when(p.until)) : "") + "</li>";
+        return "<li>" + person(c, p.identity) + (p.role ? ", " + esc(p.role) : "") + ": " + (v != null ? esc(v) : EN(c, esc(p.via))) + (p.until ? " " + esc(T(c, "site.rota.untilLead", "until")) + " " + EN(c, when(p.until)) : "") + "</li>";
       }).join("") + "</ul>";
     }).join("") : "<p>" + esc(T(c, "site.rota.noOneOnDutyAnyWard", "Nobody is on duty in any ward right now.")) + "</p>";
     var off = "<h3>" + esc(T(c, "site.rota.markedOffDutyHeading", "Marked off duty ({n})", { n: r.off.length })) + "</h3>" + (r.off.length ? "<ul>" + r.off.map(function (p) {
-      return "<li>" + EN(c, esc(p.identity)) + (p.role ? ", " + esc(p.role) : "") + ": " + esc(T(c, "site.rota.offDutyUntilLead", "off duty until")) + " " + EN(c, when(p.until)) + ". " + esc(T(c, "site.rota.notAlerted", "Not alerted.")) + "</li>";
+      return "<li>" + person(c, p.identity) + (p.role ? ", " + esc(p.role) : "") + ": " + esc(T(c, "site.rota.offDutyUntilLead", "off duty until")) + " " + EN(c, when(p.until)) + ". " + esc(T(c, "site.rota.notAlerted", "Not alerted.")) + "</li>";
     }).join("") + "</ul>" : "<p>" + esc(T(c, "site.rota.noOneMarkedOff", "Nobody has marked themselves off duty.")) + "</p>");
     return (r.partial ? '<div class="msg note">' + esc(T(c, "site.rota.dutyWardsPartialNote", "The rota or duty list could not be read in full; some people may be missing.")) + "</div>" : "") + wards + off;
   }
@@ -83,11 +91,11 @@
     var esc = c.esc;
     var l = leave == null ? loading(c, T(c, "site.rota.leaveRequestsPhrase", "leave requests")) : !leave.ok ? failed(c, T(c, "site.rota.leaveRequestsPhrase", "leave requests"))
       : leave.leave.length ? "<ul>" + leave.leave.map(function (x) {
-        return "<li>" + EN(c, esc(x.identity)) + ": " + EN(c, esc(x.from)) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + EN(c, esc(x.to)) + " (" + EN(c, esc(x.reason)) + ') <button class="btn quiet" type="button" data-rota="lvyes" data-id="' + esc(x.id) + '">' + esc(T(c, "site.rota.approve", "Approve")) + '</button> <button class="btn quiet" type="button" data-rota="lvno" data-id="' + esc(x.id) + '">' + esc(T(c, "site.rota.decline", "Decline")) + "</button></li>";
+        return "<li>" + person(c, x.identity) + ": " + EN(c, esc(x.from)) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + EN(c, esc(x.to)) + " (" + EN(c, esc(x.reason)) + ') <button class="btn quiet" type="button" data-rota="lvyes" data-id="' + esc(x.id) + '">' + esc(T(c, "site.rota.approve", "Approve")) + '</button> <button class="btn quiet" type="button" data-rota="lvno" data-id="' + esc(x.id) + '">' + esc(T(c, "site.rota.decline", "Decline")) + "</button></li>";
       }).join("") + "</ul>" : "<p>" + esc(T(c, "site.rota.noLeaveWaiting", "No leave waiting.")) + "</p>";
     var s = swaps == null ? loading(c, T(c, "site.rota.swapsPhrase", "swaps")) : !swaps.ok ? failed(c, T(c, "site.rota.swapsPhrase", "swaps"))
       : swaps.swaps.length ? "<ul>" + swaps.swaps.map(function (x) {
-        return "<li>" + EN(c, esc(x.date)) + ": " + EN(c, esc(x.from)) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + EN(c, esc(x.to)) + " (" + EN(c, esc(x.status)) + ")" +
+        return "<li>" + EN(c, esc(x.date)) + ": " + person(c, x.from) + " " + esc(T(c, "site.rota.toLead", "to")) + " " + person(c, x.to) + " (" + EN(c, esc(x.status)) + ")" +
           (x.status === "accepted" ? ' <button class="btn quiet" type="button" data-rota="swapok" data-id="' + esc(x.id) + '">' + esc(T(c, "site.rota.approve", "Approve")) + '</button> <button class="btn quiet" type="button" data-rota="swapreject" data-id="' + esc(x.id) + '">' + esc(T(c, "site.rota.decline", "Decline")) + "</button>" : " " + esc(T(c, "site.rota.waitingForColleague", "waiting for the colleague"))) + "</li>";
       }).join("") + "</ul>" : "<p>" + esc(T(c, "site.rota.noSwapsWaiting", "No swaps waiting.")) + "</p>";
     return "<h3>" + esc(T(c, "site.rota.leaveRequestsHeading", "Leave requests")) + "</h3>" + l + "<h3>" + esc(T(c, "site.rota.swapsHeading", "Swaps")) + "</h3>" + s;

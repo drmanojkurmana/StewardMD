@@ -28,6 +28,23 @@
     return T(c, "site.maik.reviewPending", "pending");
   }
 
+  /* LT-40: why an ask failed, as escaped HTML, in the staff language with the English under it. A bare code
+   * ("bad_response") told a clinician nothing. Not configured (409 from the gateway's routing refusals) is
+   * the hospital's setup; no JSON at all, or a 5xx, is the AI service not answering. The server's own
+   * sentence follows in English, because it names what to change. */
+  var NOT_CONFIGURED = ["maik_disabled", "no_phi_approved_model", "no_model"];
+  function askFailure(c, r) {
+    if (!r) return TS(c, "site.maik.unreachable", "MaiK could not be reached.");
+    var detail = r && (r.detail || r.message) ? '<br><span class="quiet">' + EN(c, c.esc(r.detail || r.message)) + "</span>" : "";
+    if (r && (r.notConfigured || NOT_CONFIGURED.indexOf(r.error) >= 0))
+      return TS(c, "site.maik.notConfigured", "MaiK is not set up for this hospital. A hospital administrator turns it on and approves a model provider in Admin Center, MaiK clinical AI. Charting and safety checks work without it.") + detail;
+    if (r.error === "bad_response" || r.error === "network" || r.error === "model_unavailable" || r.error === "empty_answer" || (r.status && r.status >= 500))
+      return TS(c, "site.maik.notAnswering", "MaiK did not answer: the AI service is not reachable right now. Nothing was written. Charting and safety checks work without it; try again later.") + detail;
+    return TS(c, "site.maik.askRefused", "MaiK could not answer this request.") + (detail || '<br><span class="quiet">' + EN(c, c.esc(r.error || "")) + "</span>");
+  }
+
+  WSQ._maikAskFailure = askFailure;
+
   WSQ.page("maik", { render: function (c) {
     var el = c.el, st = c.state, esc = c.esc, ms = c.ms;
     if (!c.isWardsynq()) { el.innerHTML = '<div class="msg note">' + esc(T(c, "site.maik.noRecord", "MaiK reads the WardSynQ clinical record. This hospital does not keep one.")) + '</div>'; return; }
@@ -46,7 +63,7 @@
         '<div class="row"><label class="f"><span>' + esc(T(c, "site.maik.taskLabel", "Task")) + '</span><select id="mkTask">' + TASKS.map(function (t) { return '<option value="' + t + '"' + (t === S.task ? " selected" : "") + ">" + esc(taskLabel(c, t)) + "</option>"; }).join("") + "</select></label>" +
         '<label class="f" style="flex:2 1 260px"><span>' + esc(T(c, "site.maik.questionLabel", "Question (optional)")) + '</span><input id="mkQ" maxlength="400" placeholder="' + esc(T(c, "site.maik.questionPlaceholder", "e.g. what changed since yesterday?")) + '"></label>' +
         '<button class="btn" id="mkGo" type="button"' + (S.busy ? " disabled" : "") + ">" + ms("psychology") + esc(S.busy ? T(c, "site.maik.asking", "Asking") : T(c, "site.maik.askButton", "Ask MaiK")) + "</button></div>" +
-        (S.err ? '<div class="msg err">' + esc(S.err) + "</div>" : "");
+        (S.err ? '<div class="msg err">' + S.err + "</div>" : "");
       document.getElementById("mkTask").onchange = function (e) { S.task = e.target.value; };
       document.getElementById("mkGo").onclick = ask_;
     }
@@ -58,7 +75,7 @@
       c.api("/ward/maik-ask", body).then(function (r) {
         S.busy = false;
         if (r && r.ok) S.i = r.interaction;
-        else S.err = (r && (r.detail || r.message || r.error)) || T(c, "site.maik.unreachable", "MaiK could not be reached.");
+        else S.err = askFailure(c, r);
         paintAsk(); paintOut();
       });
     }
@@ -99,7 +116,8 @@
         return;
       }
       list.innerHTML = '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.maik.colPatient", "Patient")) + '</th><th>' + esc(T(c, "site.maik.colWhere", "Where")) + '</th><th></th></tr></thead><tbody>' + rows.map(function (p, ix) {
-        return "<tr><td><b>" + EN(c, esc(p.name)) + "</b><br><span class=\"quiet mono\">" + EN(c, esc(p.patientId)) + "</span></td><td>" + EN(c, esc(p.where)) + '</td><td><button class="btn quiet" type="button" data-ix="' + ix + '">' + esc(T(c, "site.maik.chooseButton", "Choose")) + '</button></td></tr>';
+        // LT-40: the internal record id under every name was noise to a clinician; the ward and bed tell patients apart.
+        return "<tr><td><b>" + EN(c, esc(p.name)) + "</b></td><td>" + EN(c, esc(p.where)) + '</td><td><button class="btn quiet" type="button" data-ix="' + ix + '">' + esc(T(c, "site.maik.chooseButton", "Choose")) + '</button></td></tr>';
       }).join("") + "</tbody></table></div>";
       list.querySelectorAll("[data-ix]").forEach(function (b) { b.onclick = function () { S.sel = rows[Number(b.getAttribute("data-ix"))]; S.i = null; S.err = ""; paintAsk(); paintOut(); document.getElementById("mkAsk").scrollIntoView({ behavior: "smooth", block: "start" }); }; });
     });

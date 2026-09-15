@@ -6502,3 +6502,20 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   "a clinician account", never the uid.
 - DICOM worklist DA/TM are the hospital's wall clock (org `utcOffsetMinutes`/`timeZone`) with TimezoneOffsetFromUTC;
   a study with a final or corrected radiology report leaves the worklist, a preliminary one stays.
+## 2026-09-15 Live test fixes (livefix-site): one account sign-in spelling, no 502 from MaiK, one definition of admitted
+- LT-01 (D7): the OPD console reads `smd_opd_toktype` "account" (wardsynq.com) as "firebase" (its own spelling), opens
+  the hospital in `smd_opd_workplace`, and asks whoami for that hospital's role. Same Firebase project and origin, so
+  the persisted session is the proof; the router still verifies every request. clinic-billing.html reads it the same.
+- A Function must not answer 502: Cloudflare replaces it with an HTML page and the JSON reason is lost (already
+  noted in functions/api/auth and migrate-inpatient.js). maik-interaction.js now uses 503 for "not answering" and
+  409 + notConfigured for the gateway's routing refusals. Other `r.status || 502` routes in the ward block are
+  unchanged and carry the same risk.
+- `getOrg("")` is null: an unnamed hospital is a refusal, not a 500 from reading `q_orgs/`.
+- Occupancy (patients, occupied beds, without a bed) counts ADMISSION_CLASSES everywhere (ward-metrics now matches
+  the bed board, patient flow and the ward list); open work still spans ED, theatre and PACU encounters.
+- `GET /api/queue/roster/duty-status` is a 200 `notWardTeam` for any member; only POST is the ward team's.
+- The audit list reads `changes?newest=1&before=` (both repositories); the ascending sync feed is unchanged.
+  `GET /ward/actor-names` (staff.admin) names actor ids from this hospital's members only; a mobile number or an
+  account id is never returned as a name. Members still have no display name field (not built).
+- Tests: test/run-opd-wardsynq-session-ui.mjs, test/run-ward-livefix-site-ui.mjs, test/ward-livefix-site.test.mjs,
+  test/wsq-site-livefix-site.test.mjs, test/wardsynq-livefix-site-routes.test.mjs.

@@ -228,7 +228,13 @@
   // to YESTERDAY's session while the doctor's app read TODAY's, and console-added patients simply never
   // appeared. Same clinic, same room, different bucket.
   function istDay(){ return new Date(Date.now()+19800000).toISOString().slice(0,10); }
-  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
+  /* ONE ACCOUNT SIGN-IN, TWO SPELLINGS (LT-01, live test 2026-09-15). wardsynq.com (wardsynq/site/shell.js)
+   * records a StewardMD account sign-in as "account"; this console wrote and read only "firebase". A
+   * doctor signed in on wardsynq.com who opened the OPD desk therefore arrived with tokType "account",
+   * no staff token, and was shown this page's sign-in wall. Same Firebase project, same origin, same
+   * persisted session: both spellings mean "use the account's ID token". The server still verifies it. */
+  function ttNorm(t){ return t==="account"?"firebase":(t||""); }
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:ttNorm(localStorage.getItem(LS_TT)), who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
   // The OPD token (called out in the waiting hall). A ticket registered before tokens existed has none.
   var tok=function(t){return t&&t.token?'<span class="tok" title="Token">'+esc(t.token)+'</span>':"";};
@@ -324,6 +330,9 @@
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
       if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
         if(!list.length){ openWizard(); return; }
+        // Came from wardsynq.com with a hospital already chosen: open that one, not the picker.
+        var wp=wardsynqOrg(), chosen=wp&&list.filter(function(c){return c.id===wp;})[0];
+        if(chosen){ openClinic(chosen); return; }
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
@@ -338,7 +347,11 @@
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
   // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
-  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id); loadDash(); }
+  function wardsynqOrg(){ var w=""; try{ w=localStorage.getItem("smd_opd_workplace")||""; }catch(e){} return w.indexOf("wardsynq:")===0?w.slice(9):""; }
+  /* The role is hospital-scoped: an account's whoami without a hospital is its global role, which hid
+   * the admin controls from a hospital admin. Ask again for the opened hospital, as shell.js does. */
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id);
+    api("whoami?orgId="+encodeURIComponent(c.id)).then(function(r){ if(r&&r.ok) st.who=r; },function(){}).then(function(){ loadDash(); }); }
   function openClinics(){
     app.innerHTML='<div class="login"><p>Loading your clinics…</p></div>';
     api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){ openWizard(); return; } renderClinics(list); })

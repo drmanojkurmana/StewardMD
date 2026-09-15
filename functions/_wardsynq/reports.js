@@ -170,7 +170,13 @@ async function pharmacyReport(request, env, ctx) {
   const issued = (dispenses || []).filter(Boolean).filter((d) =>
     !Number.isFinite(fromMs) && !Number.isFinite(toMs) ? true : inPeriod(d.dispensedAt, fromMs, toMs));
   const dispenseVolume = {};
-  for (const d of issued) { const drug = d.drug || "unknown"; dispenseVolume[drug] = (dispenseVolume[drug] || 0) + (Number(d.quantity) || 0); }
+  /* A dispense's quantity is {value, unit} (pharmacy-dispense.js quantityOf), so Number(d.quantity) was NaN and every
+   * drug read 0 beside a real dispense count (LT-38). Summed per drug AND unit: 28 tablets and 100 mL are not 128. */
+  for (const d of issued) {
+    const q = d.quantity, obj = q && typeof q === "object";
+    const k = (d.drug || "unknown") + (obj && q.unit ? " (" + q.unit + ")" : "");
+    dispenseVolume[k] = (dispenseVolume[k] || 0) + (Number(obj ? q.value : q) || 0);
+  }
 
   const pendingVerification = (orders || []).filter(Boolean).filter((o) => o.status === "active")
     .filter((o) => verificationState(o, verifications).state === "unverified").length;
