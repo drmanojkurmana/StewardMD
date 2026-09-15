@@ -363,6 +363,7 @@
        * 30 minutes again (owner's iPhone, 2026-09-15). */
       var ADAPTER_READ_DEADLINE_MS = 30000;
       var READ_TIMED_OUT = 'The hospital did not answer in time, so the reading was stopped. Try again.';
+      var HIDDEN_REFUSED = 'This app version cannot read the hospital out of sight, so nothing was read. Update the app and try again.';
       function withDeadline(promise, ms) {
         return new Promise(function (resolve, reject) {
           var t = setTimeout(function () { reject(new Error(READ_TIMED_OUT)); }, ms);
@@ -384,8 +385,14 @@
               if (/ghis\.gitam\.edu/i.test(ctx.origins[oi])) { targetOrigin = ctx.origins[oi]; break; }
             }
           }
-          return plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function () {
-            try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true }); } catch (e) {}
+          /* LAW III, ENFORCED HERE. The iPhone showed the hospital page over the whole screen during a
+           * patient read although hidden was asked for (2026-09-15): a build can carry a plugin that
+           * ignores the flag. The native side must confirm hidden, or nothing is read. */
+          return plugin.open({ url: targetOrigin, origins: ctx.origins, storeId: ctx.conn.deploymentId, title: ctx.host, initScript: '', hidden: true }).then(function (opened) {
+            if (!opened || opened.hidden !== true) throw new Error(HIDDEN_REFUSED);
+            return plugin.setMode({ mode: 'agent', banner: 'Reading ' + ctx.host + ' for this patient', origins: ctx.origins, hidden: true });
+          }).then(function (moded) {
+            if (!moded || moded.hidden !== true) throw new Error(HIDDEN_REFUSED);
             return rt.readPatientDetails({ plugin: plugin, origin: targetOrigin, replay: ctx.replay, patient: p || { patientId: patientId } });
           });
         }), window.__SMD_ADAPTER_DEADLINE_MS__ || ADAPTER_READ_DEADLINE_MS).then(function (sections) {
@@ -607,8 +614,10 @@
           return waitSignedIn();
         }).then(function () {
           if (el) el.innerHTML = '<div class="ghis-loading">Reading ' + esc(host) + ' for your ward list...</div>';
-          try { plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true }); } catch (e) {}
-          return agentApi('/sessions/' + encodeURIComponent(ctx.sessionId) + '/handoff', it.tid, { method: 'POST', body: JSON.stringify({ visitedOrigins: [origin] }) });
+          return Promise.resolve(plugin.setMode({ mode: 'agent', banner: 'Reading ' + host + ' for your ward list', origins: ctx.origins, hidden: true })).then(function (moded) {
+            if (!moded || moded.hidden !== true) { ctx.browserOpen = false; try { plugin.close(); } catch (x) {} throw new Error(HIDDEN_REFUSED); }
+            return agentApi('/sessions/' + encodeURIComponent(ctx.sessionId) + '/handoff', it.tid, { method: 'POST', body: JSON.stringify({ visitedOrigins: [origin] }) });
+          });
         }).then(function (r) {
           if (r.s !== 200 || !r.d || r.d.ok === false) throw new Error(agentReason(r, 'confirm the sign in with ' + host));
           return agentApi('/versions/' + encodeURIComponent(ctx.versionId), it.tid);

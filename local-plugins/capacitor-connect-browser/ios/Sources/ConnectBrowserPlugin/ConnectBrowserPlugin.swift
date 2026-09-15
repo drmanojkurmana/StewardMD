@@ -157,6 +157,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
                 webView.customUserAgent = ua
             }
             webView.navigationDelegate = self
+            webView.uiDelegate = self
             #if DEBUG
             // Debug builds only: let ios_webkit_debug_proxy see the hospital page, so a stall in the
             // in-app browser can be read instead of guessed at (never in release: the doctor's EMR
@@ -190,7 +191,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
                 "initScriptMode": "documentStart",
                 "storeMode": isolated ? "isolated" : "default"
             ])
-            call.resolve(["ok": true])
+            call.resolve(["ok": true, "hidden": self.hiddenRead, "contract": "hidden-v2"])
         }
     }
 
@@ -261,7 +262,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
              * and the watcher is live again. The old permanent latch meant one early fire ended
              * detection for the rest of the session. */
             if mode == "login" { self.autoLoginNotified = false; self.signedInTicks = 0; self.startLoginPoll() } else { self.stopLoginPoll() }
-            call.resolve(["ok": true])
+            call.resolve(["ok": true, "hidden": self.hiddenRead])
         }
     }
 
@@ -519,6 +520,45 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
                 "auto": true
             ])
         }
+    }
+}
+
+/* A REPORT THAT OPENS IN A POPUP IS STILL A REPORT.
+ *
+ * Hospital systems open reports with window.open (GHIS: tap a report, a popup carries it). A WKWebView
+ * with no UI delegate DISCARDS those silently - nothing opens, no error - so the agent tapped a report
+ * and read the page it was already on, and the doctor saw "popup not allowed" (owner, iPhone,
+ * 2026-09-15). Load the popup in the SAME view instead: the report is then on screen for the doctor and
+ * readable by the agent, and it still passes the navigation delegate below, so the origin allowlist and
+ * the read-only policy apply to it exactly as they do to any other navigation.
+ *
+ * The JS dialogs are answered rather than shown: the agent cannot tap a native alert, and an
+ * unanswered one blocks the page's JavaScript, which would hang a crawl with no way out. */
+extension ConnectBrowserPlugin: WKUIDelegate {
+    public func webView(
+        _ webView: WKWebView,
+        createWebViewWith configuration: WKWebViewConfiguration,
+        for navigationAction: WKNavigationAction,
+        windowFeatures: WKWindowFeatures
+    ) -> WKWebView? {
+        // targetFrame == nil means "open in a new window": re-issue it here.
+        if navigationAction.targetFrame == nil, navigationAction.request.url != nil {
+            webView.load(navigationAction.request)
+        }
+        return nil
+    }
+
+    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        // Read-only: never confirm anything the page asks to change. Dismiss is the safe answer.
+        completionHandler(false)
+    }
+
+    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+        completionHandler(nil)
     }
 }
 

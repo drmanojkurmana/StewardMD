@@ -198,6 +198,8 @@ public class ConnectBrowserPlugin extends Plugin {
 
                 JSObject ret = new JSObject();
                 ret.put("ok", true);
+                ret.put("hidden", hidden);
+                ret.put("contract", "hidden-v2");
                 call.resolve(ret);
             }
         });
@@ -401,6 +403,7 @@ public class ConnectBrowserPlugin extends Plugin {
                 applyModeUi(banner);
                 JSObject ret = new JSObject();
                 ret.put("ok", true);
+                ret.put("hidden", hidden);
                 call.resolve(ret);
             }
         });

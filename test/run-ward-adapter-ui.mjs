@@ -50,7 +50,7 @@ window.__url = "";
 window.Capacitor = window.Capacitor || {};
 window.Capacitor.Plugins = window.Capacitor.Plugins || {};
 window.Capacitor.Plugins.ConnectBrowser = {
-  open: function (a) { window.__pluginCalls.push({ m: "open", a: a }); window.__url = a.url; window.__open = true; return Promise.resolve({ ok: true }); },
+  open: function (a) { window.__pluginCalls.push({ m: "open", a: a }); window.__url = a.url; window.__open = true; return Promise.resolve(window.__staleHidden ? { ok: true } : { ok: true, hidden: a.hidden === true, contract: "hidden-v2" }); },
   navigate: function (a) { window.__pluginCalls.push({ m: "navigate", a: a }); window.__url = a.url; return Promise.resolve({ ok: true }); },
   evaluate: function (a) {
     var e = String(a && a.expression || "");
@@ -71,7 +71,7 @@ window.Capacitor.Plugins.ConnectBrowser = {
     return Promise.resolve({ result: JSON.stringify(window.__pages[window.__url] || []) });
   },
   currentUrl: function () { return Promise.resolve({ url: window.__url, title: "" }); },
-  setMode: function (a) { window.__pluginCalls.push({ m: "setMode", a: a }); return Promise.resolve({ ok: true }); },
+  setMode: function (a) { window.__pluginCalls.push({ m: "setMode", a: a }); return Promise.resolve(window.__staleHidden ? { ok: true } : { ok: true, hidden: a.hidden === true && a.mode !== "login" }); },
   close: function () { window.__pluginCalls.push({ m: "close" }); window.__open = false; return Promise.resolve({ ok: true }); },
   addListener: function (name, fn) { (window.__pluginListeners[name] = window.__pluginListeners[name] || []).push(fn); return { remove: function () { var l = window.__pluginListeners[name]; var i = l.indexOf(fn); if (i >= 0) l.splice(i, 1); } }; },
   __fire: function (name, p) { (window.__pluginListeners[name] || []).slice().forEach(function (fn) { fn(p); }); }
@@ -207,6 +207,12 @@ try {
   ok(Date.now() - t0 < 5000, "stopped at the deadline, not after minutes");
   ok(await ev(`return window.__open===false;`) === true, "the browser is closed after a timed-out read");
   await ev(`window.__hang = false; window.__SMD_ADAPTER_DEADLINE_MS__ = 0; return 1;`);
+
+  // LAW III: a native browser that does not confirm it is hidden is never read through.
+  await ev(`window.__staleHidden = true; window.__fetchMark = window.__fetches.length; return 1;`);
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=A101").then(function(r){return r.json();}).then(function(j){ return j.error==="adapter_read_failed" && /out of sight/.test(j.detail); });`) === true, "a browser that does not confirm hidden reads nothing and says why");
+  ok(await ev(`return window.__fetches.length===window.__fetchMark && window.__open===false;`) === true, "no hospital request was issued and the browser was closed");
+  await ev(`window.__staleHidden = false; return 1;`);
   await ev(`window.ghisDisconnect(); window.__replayHospital = false; return 1;`);
 
   // Read-time self-repair: the approved adapter's worklist path reads nothing, so the browser asks the
