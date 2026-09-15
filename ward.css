@@ -573,6 +573,13 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 @media (min-width: 960px) {
   #smdWard .w-split-layout { grid-template-columns: 340px 1fr; align-items: start; }
 }
+/* BUG-MU073XKT-7KZW: in one column the patient list comes first, above the tools. */
+@media (max-width: 959.98px) {
+  #smdWard .w-split-layout > .w-col-roster { order: -1; }
+}
+#smdWard .w-dict { position: relative; }
+#smdWard .w-dict > textarea { width: 100%; box-sizing: border-box; padding-right: 72px; }
+#smdWard .w-dict > .w-dict-btns { position: absolute; top: 4px; right: 6px; }
 #smdWard .w-col-tools { display: flex; flex-direction: column; gap: 12px; }
 #smdWard .w-col-roster { display: flex; flex-direction: column; gap: 12px; }
 #smdWard .w-mic-btn { background: none; border: 0; cursor: pointer; color: var(--primary); display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 50%; }

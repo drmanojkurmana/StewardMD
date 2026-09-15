@@ -1360,6 +1360,24 @@
     return '<span style="display:inline-flex; gap:2px;"><button type="button" class="w-mic-btn" data-w-act="dictate:' + esc(targetId) + '" title="Voice typing on this device">' + ms("mic") + '</button>' +
       '<button type="button" class="w-mic-btn" data-w-act="dictlang" title="Voice typing language: ' + (lang === "hi-IN" ? "Hindi" : "English") + '">' + DICT_LANGS[lang] + '</button></span>';
   }
+  /* BUG-MU08NPGV-0MZX: voice typing at the right edge inside every free-text box, not only the two that
+   * had it. On-device speech only (D1, startDictation), and a box that already has its own mic is left alone. */
+  function dictateEveryTextarea(el) {
+    if (!el || !el.querySelectorAll) return;
+    var boxes = el.querySelectorAll("textarea[id]");
+    for (var i = 0; i < boxes.length; i++) {
+      var ta = boxes[i], p = ta.parentNode;
+      if (!p || el.querySelector('[data-w-act="dictate:' + ta.id + '"]')) continue;
+      var wrap = document.createElement("div");
+      wrap.className = "w-dict";
+      p.insertBefore(wrap, ta);
+      wrap.appendChild(ta);
+      var btns = document.createElement("span");
+      btns.className = "w-dict-btns";
+      btns.innerHTML = micBtn(ta.id);
+      wrap.appendChild(btns);
+    }
+  }
   function toggleDictLang() {
     var next = dictLang() === "en-IN" ? "hi-IN" : "en-IN";
     try { localStorage.setItem("wsqDictLang", next); } catch (e) {}
@@ -7304,6 +7322,7 @@
     var el = root();
     el.innerHTML = _render(st);
     markShortcuts(el);
+    dictateEveryTextarea(el);
     canvas = document.getElementById("wCanvas");
     if (canvas) canvas.scrollTop = cy;
     if (typeof window !== "undefined" && sy > 0) window.scrollTo(0, sy);
