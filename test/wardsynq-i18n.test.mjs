@@ -52,7 +52,8 @@ for (const code of LANGS) {
     // Structural: the file's only job is one register() call (plus the module.exports plumbing for
     // tests) - nothing here can step on another language file or on i18n.js itself.
     assert.equal((src.match(/\bWSQI18n\.register\(/g) || []).length, 1, "exactly one register() call");
-    assert.equal((src.match(/\bfunction\b/g) || []).length, 1, "no function besides the wrapping IIFE");
+    // `function (` / `function(` only: an English key such as ward.forcing-function-or-... is not code.
+    assert.equal((src.match(/\bfunction\s*\(/g) || []).length, 1, "no function besides the wrapping IIFE");
     assert.match(src, new RegExp('register\\("' + code + '"'), "registers itself under its own code, not another language's");
 
     const window = { WSQI18n: I };
@@ -102,7 +103,7 @@ const NEGATION = {
   es: ["no ", "No ", "nada", "ningun", "ninguna", "nunca", "sin ", "ni "],
   te: ["లేదు", "లేరు", "లేవు", "కాదు", "కాలేదు", "చెల్లదు", "లేక", "అనువదించరు", "వద్దు", "కూడదు", "రాదు", "ఎప్పుడూ"],
   hi: ["नहीं", "मत", " न ", "बिना", "कभी"],
-  bn: ["ছাড়া", "কখনও", "না", "নেই", "নয়", "হয়নি", "হয়নি"],
+  bn: ["ছাড়া", "কখনও", "না", "নেই", "নয়", "হয়নি", "হয়নি", "ননি"],
   kn: ["ಇಲ್ಲ", "ಅಲ್ಲ", "ಿಲ್ಲ", "ವಲ್ಲ", "ಬೇಡ", "ಲಾರ", "ಬಾರದು", "ಎಂದಿಗೂ"],
   ta: ["இல்லை", "அல்ல", "வில்லை", "மில்லை", "ப்படாது", "யாகாது", "வேண்டாம்", "ாதீர்", "ாது", "ாமல்", "ஒருபோதும்"],
   ml: ["ഇല്ല", "അല്ല", "ില്ല", "യല്ല", "തല്ല", "രുത്", "ാതെ", "ാത്ത", "ഒരിക്കലും"],
