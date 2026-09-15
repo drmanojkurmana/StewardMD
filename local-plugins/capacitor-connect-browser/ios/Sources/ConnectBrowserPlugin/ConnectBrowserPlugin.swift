@@ -47,6 +47,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
      * crawled. Hidden here means the same 2pt strip agent reads already used: the page keeps its
      * cookies, its timers and its network, and the doctor keeps their screen. */
     private var hiddenRead = false
+    private var placementConstraints: [NSLayoutConstraint] = []
 
     // Capped request log fed by main-frame navigations (decidePolicyFor) and the document-start
     // fetch/XHR-wrapping user script (didReceive message), drained by drainRequests().
@@ -317,6 +318,8 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     private func teardownExistingBrowser(reason: String, notify: Bool = true) {
         stopLoginPoll()
         hiddenRead = false
+        NSLayoutConstraint.deactivate(placementConstraints)
+        placementConstraints = []
         guard let vc = browserVC else { return }
         vc.webView.navigationDelegate = nil
         vc.webView.configuration.userContentController.removeScriptMessageHandler(forName: Self.requestLogMessageHandler)
@@ -338,7 +341,7 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
     // after open() and every setMode() so it stays idempotent as banner text/mode refresh.
     private func updateContainerFrame(for vc: ConnectBrowserViewController) {
         guard let superview = vc.view.superview else { return }
-        let bounds = superview.bounds
+        _ = superview.bounds
         if hiddenRead {
             /* HIDDEN THE WAY ANDROID DOES IT: full size, transparent, untouchable.
              *
@@ -349,33 +352,55 @@ public class ConnectBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
              * size also keeps WebKit treating the page as visible, so the read runs at full speed
              * instead of being throttled to a crawl the way a 2pt or zero-sized view would be.
              * Not quite 0: a view at alpha 0 is treated as invisible and the page stops. */
-            vc.view.frame = bounds
-            vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            pin(vc, in: superview, bottomStrip: 0)
             vc.view.alpha = 0.01
             vc.view.isUserInteractionEnabled = false
         } else if vc.mode == "agent" && vc.compact {
             vc.view.alpha = 1
             vc.view.isUserInteractionEnabled = true
-            vc.view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height * 0.52).rounded())
-            vc.view.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+            /* A FRAME SET HERE DOES NOT SURVIVE THE PARENT'S NEXT LAYOUT PASS. That is why every
+             * attempt to leave part of the app uncovered silently failed, and it is what stalled a
+             * live GHIS crawl at 86% on the owner's phone (2026-09-15): the hospital page covered the
+             * app's own WebView to the last pixel, iOS stopped scheduling it, and the engine that
+             * drives the crawl lives in it. Constraints are not undone by layout, so they hold. */
+            pin(vc, in: superview, topFraction: 0.52)
         } else if vc.mode == "agent" {
             vc.view.alpha = 1
             vc.view.isUserInteractionEnabled = true
-            // AGENT READS RUN OUT OF SIGHT. While the browser covered the whole app view, the app's own
-            // WKWebView (where the engine runs) stopped answering for minutes at a time and every
-            // iPhone read stalled (2026-09-15). A 2pt strip keeps the hospital page alive (cookies,
-            // tokens, fetch) with the app view fully visible - the same idea as Android's hidden read.
-            vc.view.frame = CGRect(x: 0, y: bounds.height - 2, width: bounds.width, height: 2)
-            vc.view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+            // AGENT READS RUN OUT OF SIGHT: a thin strip keeps the hospital page alive (cookies,
+            // tokens, fetch) with the app view visible and therefore still running.
+            pin(vc, in: superview, bottomStrip: 2)
         } else {
             vc.view.alpha = 1
             vc.view.isUserInteractionEnabled = true
             // Never cover the app view completely: once it was fully occluded the app WKWebView (the
             // engine) stopped running, so the doctor's sign-in was never noticed in login mode
-            // (iPhone 15 Pro, 2026-09-15, seen on screen). A 2pt strip left uncovered keeps it alive.
-            vc.view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: max(bounds.height - 2, 0))
-            vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            // (iPhone 15 Pro, 2026-09-15, seen on screen). A strip left uncovered keeps it alive.
+            pin(vc, in: superview, bottomStrip: 2)
         }
+    }
+
+    /* PIN, DO NOT POSITION. Constraints survive the parent's layout; a frame does not. `topFraction`
+     * gives the browser the top share of the screen; `bottomStrip` leaves the browser everything but
+     * that many points at the bottom, or, when it is the whole height minus the strip, everything but
+     * a sliver. Either way some of the app stays on screen, which is what keeps its WebView - and the
+     * engine inside it - scheduled by iOS. */
+    private func pin(_ vc: ConnectBrowserViewController, in superview: UIView, topFraction: CGFloat? = nil, bottomStrip: CGFloat? = nil) {
+        vc.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.deactivate(placementConstraints)
+        var next: [NSLayoutConstraint] = [
+            vc.view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+            vc.view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+            vc.view.topAnchor.constraint(equalTo: superview.topAnchor),
+        ]
+        if let fraction = topFraction {
+            next.append(vc.view.heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: fraction))
+        } else if let strip = bottomStrip {
+            next.append(vc.view.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -strip))
+        }
+        NSLayoutConstraint.activate(next)
+        placementConstraints = next
+        superview.layoutIfNeeded()
     }
 
     private static func origin(of url: URL) -> String {
