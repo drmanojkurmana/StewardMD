@@ -760,3 +760,64 @@ test("noise: findings saying DIFFERENT things are never absorbed", () => {
   const f = checkInteractions(pack, { drug: "a" }, [{ drug: "b" }, { drug: "c" }]);
   assert.equal(f.length, 2, "two different clinical facts remain two findings");
 });
+
+/* ------------------------------------------------------------------ LT-10, live test 2026-09-15 */
+
+test("LT-10: adult paracetamol is dosed as an adult, 1 g q6h up to 4 g a day above 50 kg", async () => {
+  const real = new SafetyEngine({ rulePack: await loadStewardMDRulePack() });
+  const para = (value, frequency, clinical) => real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Paracetamol", dose: { value, unit: "mg" }, frequency, route: "oral", prescriberId: "dr-1" }), ...clinical });
+
+  // The live report: 1 g for a 62 kg adult was a hard stop against 15 mg/kg x 62 kg = 930 mg.
+  for (const f of [undefined, "q6h", "QID", "1-1-1-1"]) {
+    const v = para(1000, f, { weightKg: 62, ageYears: 67 });
+    assert.equal(v.allowed, true, `1 g ${f || "(no frequency)"} for a 62 kg adult: ${JSON.stringify(v.findings.map((x) => x.message))}`);
+    assert.deepEqual(v.findings.filter((x) => x.code.startsWith("DOSE")), []);
+  }
+  // A known adult with no weight is not stopped; the small-adult rule is said, not enforced.
+  const unweighed = para(1000, "q6h", { ageYears: 40 });
+  assert.equal(unweighed.allowed, true);
+  assert.deepEqual(unweighed.warnings.map((x) => x.code), ["DOSE_WEIGHT_MISSING"]);
+});
+
+test("LT-10: a genuine paracetamol overdose still stops, with no override", async () => {
+  const real = new SafetyEngine({ rulePack: await loadStewardMDRulePack() });
+  const stop = (value, frequency, clinical) => {
+    const v = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Paracetamol", dose: { value, unit: "mg" }, frequency, prescriberId: "dr-1" }), ...clinical });
+    assert.equal(v.allowed, false, `${value} mg ${frequency || ""} must stop`);
+    return v.blocks.map((b) => b.code);
+  };
+  assert.deepEqual(stop(2000, "STAT", { weightKg: 62 }), ["DOSE_ABSOLUTE_CEILING"], "2 g in one dose");
+  assert.deepEqual(stop(1000, "q4h", { weightKg: 62 }), ["DOSE_ABSOLUTE_CEILING_DAILY"], "1 g every 4 hours is 6 g a day");
+  assert.deepEqual(stop(1000, "q6h", { weightKg: 20, ageYears: 6 }), ["DOSE_ABOVE_MG_PER_KG"], "the mg/kg ceiling still holds for a 20 kg child");
+  assert.deepEqual(stop(1000, "q6h", { weightKg: 45, ageYears: 30 }), ["DOSE_ABOVE_MG_PER_KG"], "and for a 45 kg adult: 15 mg/kg is 675 mg");
+  assert.deepEqual(stop(500, "q6h", { ageYears: 6 }), ["DOSE_WEIGHT_MISSING"], "an unweighed child is still refused");
+});
+
+test("LT-10: amoxicillin for a patient on warfarin and clarithromycin is not a therapeutic duplication", async () => {
+  const pack = await loadStewardMDRulePack();
+  const real = new SafetyEngine({ rulePack: pack });
+  const v = real.evaluate({
+    order: MedicationOrder({ patientId: "p1", drug: "Amoxicillin", dose: { value: 500, unit: "mg" }, prescriberId: "dr-1" }),
+    weightKg: 62, activeMeds: [{ drug: "Warfarin 3mg" }, { drug: "Clarithromycin 500mg" }],
+  });
+  assert.deepEqual(v.findings.filter((f) => /duplication/i.test(f.message)).map((f) => f.drugs), [],
+    "warfarin shares only the RxClass root with amoxicillin, and a penicillin with a macrolide is combination therapy");
+  // Duplication at a real drug class still fires: two penicillins.
+  const twoPenicillins = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Amoxicillin", prescriberId: "dr-1" }), activeMeds: [{ drug: "Ampicillin" }] });
+  assert.ok(twoPenicillins.findings.some((f) => /duplication/i.test(f.message)), "two penicillins are still a duplication");
+  // A curated rule on a class that contains other classes is kept: two anticoagulants.
+  const twoAnticoag = real.evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Apixaban", prescriberId: "dr-1" }), activeMeds: [{ drug: "Warfarin" }] });
+  assert.ok(twoAnticoag.findings.some((f) => f.code === "INTERACTION_MAJOR"));
+  assert.ok(!pack.interactions.some((r) => r.id === "dup-established_pharmacologic_classes" || r.id === "dup-antibacterial"), "grouping-class rules are not in the pack");
+  // No em dash reaches the screen from the rule text.
+  assert.ok(!pack.interactions.some((r) => /—/.test([r.effect, r.action, r.mechanism, r.monitoring].join(" "))));
+});
+
+test("LT-10: doses a day read a frequency exactly as the round schedules it", async () => {
+  const { dosesPerDay } = await import("../wardsynq/wardsynq-safety.js");
+  const { parseFrequency } = await import("../functions/_wardsynq/mar-schedule.js");
+  const perDay = (s) => (!s || s.kind === "prn" ? null : s.kind === "once" ? 1 : s.kind === "pattern" ? s.slots.length : s.perDay);
+  for (const f of ["OD", "bd", "TDS", "QID", "QDS", "q6h", "Q4H", "q8h", "Q24H", "Q0H", "q36h", "HS", "nocte", "STAT", "PRN", "SOS", "1-0-1", "1-1-1-1", "0-0-0", "twice daily", "alternate days", "", null]) {
+    assert.equal(dosesPerDay(f), perDay(parseFrequency(f)), String(f));
+  }
+});

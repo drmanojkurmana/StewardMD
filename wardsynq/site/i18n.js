@@ -1829,6 +1829,7 @@
     "ward.next-review-by2": "Next review by",
     "ward.nfc-tag": "NFC tag",
     "ward.ng-enteral": "NG / enteral",
+    "ward.ng-aspirate": "NG aspirate",
     "ward.no": "No",
     "ward.no-active-blackouts": "No active blackouts.",
     "ward.no-active-clinical-pathways-for-this": "No active clinical pathways for this patient.",

@@ -40,7 +40,7 @@ const INTAKE = Object.freeze({
   blood: "Blood or blood product", irrigation: "Irrigation in", other: "Other intake",
 });
 const OUTPUT = Object.freeze({
-  urine: "Urine", drain: "Drain", vomit: "Vomit / aspirate", stool: "Stool",
+  urine: "Urine", drain: "Drain", vomit: "Vomit", ng: "NG aspirate", stool: "Stool",
   blood: "Blood loss", irrigation: "Irrigation out", other: "Other output",
 });
 /** The one unit a balance can be computed in. Everything else is reported, never converted. */
