@@ -445,6 +445,29 @@ export function provenValue(key, src, { patient = null, parentRow = null, tokens
   return fieldOf(row, src.field);
 }
 
+/* A BROKEN CHAIN IS NOT AN EMPTY FIELD. A detail call is keyed on its list row (a lab's Render_ID, a
+ * report's resultid). When that row does not carry the field, provenValue answers '' and the request
+ * goes out asking for "the report with no id", which is another patient's report or the whole
+ * department's. Those key names match neither PATIENT_KEY nor VISIT_KEY, so the 3b guard cannot see
+ * them. Only a DETAIL view, and only a source traced to its own parent list, is checked here: a plain
+ * filter that is legitimately blank for this row must still be allowed through.
+ * brokenChainField(ep, view, ctx) -> the key whose parent-derived value came back empty, or null. */
+export function brokenChainField(ep, view, ctx = {}) {
+  const parent = view && view.detailOf;
+  if (!parent) return null;
+  const params = (ep && ep.params) || {};
+  for (const key of Object.keys(params)) {
+    const src = params[key];
+    if (!src || src.from !== parent) continue;
+    if (Array.isArray(src.fields)) {
+      if (src.fields.some((f) => !fieldOf(ctx.parentRow, f))) return key;
+      continue;
+    }
+    if (!provenValue(key, src, ctx)) return key;
+  }
+  return null;
+}
+
 /** provenRequest(endpoint, ctx) -> { method, path, url, body, headers }: one proven call, filled. */
 export function provenRequest(ep, ctx = {}) {
   const { path, keys, constants } = splitPath(ep.path);
@@ -495,6 +518,8 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
     const call = { method: req.method, url: base + req.url, body: req.body, headers: req.headers };
     const lost = unscopedField({ url: req.url, body: req.body }, patient);
     if (lost) throw new UnscopedRequest('refusing ' + req.path + ': "' + lost + '" has no learned source, so the request would not be limited to this patient');
+    const broken = brokenChainField(ep, view, { patient, parentRow, tokens: toks, now });
+    if (broken) throw new UnscopedRequest('refusing ' + req.path + ': this row carries no "' + broken + '", so the request would not be limited to this ' + view.detailOf + ' row');
     if (typeof onCall === 'function') onCall(call);
     const resp = await fetchInPage(plugin, call);
     const kind = classifyResponse(resp);

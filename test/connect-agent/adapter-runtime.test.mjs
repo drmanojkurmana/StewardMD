@@ -170,3 +170,19 @@ test('a request that would go out without the patient is refused, not sent', asy
   await assert.rejects(executeProven({ plugin, origin: 'https://h', view, patient }), (e) => e.name === 'UnscopedRequest');
   assert.equal(sent, 0, 'the unscoped request was never issued to the hospital');
 });
+
+test('a detail request whose chain key is missing is refused, not sent with an empty id', async () => {
+  let sent = 0;
+  const plugin = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: '{}' }; } };
+  const view = { resourceHint: 'labs-detail', detailOf: 'labs', pathTemplate: 'https://h/Lab', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'POST', path: '/Lab/Home/GetPrintLabResultDetailsAuth', bodyKeys: ['Render_ID', 'Episode_Id'], requestKind: 'form', role: 'data',
+      params: { Render_ID: { from: 'labs', field: 'ServiceRenderId' }, Episode_Id: { from: 'labs', field: 'episode_id' } } }] };
+  // the parent row is missing ServiceRenderId: the chain is broken
+  await assert.rejects(executeProven({ plugin, origin: 'https://h', view, patient: { patientId: 'MR1' }, parentRow: { episode_id: 'IP1' } }), (e) => e.name === 'UnscopedRequest');
+  assert.equal(sent, 0, 'a detail request with no render id never reaches the hospital');
+  // with the row intact it goes through
+  sent = 0;
+  const ok = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: 'x', text: '[]' }) }; } };
+  await executeProven({ plugin: ok, origin: 'https://h', view, patient: { patientId: 'MR1' }, parentRow: { ServiceRenderId: 'R1', episode_id: 'IP1' } });
+  assert.ok(sent > 0, 'a complete chain is still sent');
+});

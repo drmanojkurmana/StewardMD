@@ -430,7 +430,13 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
         let rowIndex = 0;
         for (const row of replayed.slice(0, MAX_DETAIL_ROWS)) {
           let got = null;
-          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+          /* A row whose chain key is missing is skipped, not guessed at and not fatal: the other rows
+           * of this list are still read (adapter-runtime brokenChainField). */
+          try { got = await ar.executeView({ plugin, origin: viewOrigin(d, origin), view: d, patient, parentRow: row }); } catch (e) {
+            if (e && e.name === 'NotSignedIn') throw e;
+            if (e && e.name === 'UnscopedRequest') { rowIndex++; continue; }
+            got = null;
+          }
           // The row's title: prefer description / study / parameter / test name over IDs / numeric strings
           let title = '';
           for (const k of Object.keys(row)) {
