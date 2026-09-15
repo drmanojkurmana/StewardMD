@@ -66,7 +66,7 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
 }
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
-import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
+import { getWardByName, getBedByName, updateBed, listWards, listBeds, listDepartments } from "../_opd_org_store.js";
 
 const IPD = "IPD";
 // ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
@@ -857,9 +857,17 @@ async function bedBoard(request, env, ctx) {
   // unchanged, so nothing that already worked breaks.
   let cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
   const bedStateOf = new Map();   // "ward|bed" (lowercased) -> real state, only when master data exists
+  const deptOf = new Map();       // ward name -> its department's name, from the hospital's own master data
   if (ctx.orgId) {
     let masterWards = [];
     try { masterWards = (await listWards(env, ctx.orgId)).filter((w) => w.active); } catch { masterWards = []; }
+    /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: admitting and transferring pick a department by picking one of
+     * its wards, so the board names each ward's department. Unreadable departments leave it null. */
+    if (masterWards.some((w) => w.departmentId)) {
+      let depts = [];
+      try { depts = await listDepartments(env, ctx.orgId); } catch { depts = []; }
+      for (const w of masterWards) { const d = depts.find((x) => x.id === w.departmentId); if (d && d.name) deptOf.set(w.name, d.name); }
+    }
     if (masterWards.length) {
       cfg = {};
       for (const w of masterWards) {
@@ -908,6 +916,7 @@ async function bedBoard(request, env, ctx) {
     if (row.bed) w.occupied.push(row); else w.unplaced.push(row);   // admitted to the ward, no bed yet
   }
   for (const w of byWard.values()) {
+    w.department = deptOf.get(w.ward) || null;
     const list = cfg && Array.isArray(cfg[w.ward]) ? cfg[w.ward].map(String) : null;
     if (!list) { w.free = []; w.bedsKnown = false; continue; }
     w.bedsKnown = true;

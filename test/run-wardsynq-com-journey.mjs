@@ -239,7 +239,6 @@ try {
     if (!native) return { skip: "not a WardSynQ hospital" };
     await ensureChart();
     if (!(await ev(`return !!document.querySelector('[data-w-act="move"]')`))) return { skip: "no transfer control on this chart for this role" };
-    // ward.js asks for the destination with two prompt() dialogs; answer them the way a person would.
     const from = await ev(`return JSON.stringify({ ward: WARD._st.sel.ward, bed: WARD._st.sel.bed })`);
     const cur = JSON.parse(from || "{}");
     // The destination comes from the live bed board, the same read the board screen makes.
@@ -247,7 +246,11 @@ try {
     const w = (board.wards || []).find((x) => x.ward === cur.ward) || (board.wards || [])[0] || {};
     const target = ((w.free || []).map((x) => (typeof x === "string" ? x : x.bed || x.name || ""))).find((x) => x && x !== cur.bed);
     if (!target) return { skip: "no free bed in " + (cur.ward || "the ward") + " to transfer to" };
-    await ev(`window.prompt = function (msg) { return /which ward/i.test(msg) ? ${JSON.stringify(cur.ward || "")} : /which bed/i.test(msg) ? ${JSON.stringify(target)} : ""; }; document.querySelector('[data-w-act="move"]').click(); return 1;`);
+    // The destination is picked on the bed board (BUG-MU08T4RL-GU0N), then confirmed.
+    const pick = "pickbed:" + (w.ward || "") + "|" + target;
+    await ev(`window.confirm = function () { return true; }; document.querySelector('[data-w-act="move"]').click(); return 1;`);
+    await until(`return [].some.call(document.querySelectorAll('[data-w-act^="pickbed:"]'), function (b) { return b.getAttribute('data-w-act') === ${JSON.stringify(pick)}; }) ? 'y' : '';`, 15000);
+    await ev(`[].filter.call(document.querySelectorAll('[data-w-act^="pickbed:"]'), function (b) { return b.getAttribute('data-w-act') === ${JSON.stringify(pick)}; })[0].click(); return 1;`);
     await until(`return !WARD._st.busy ? 'y' : '';`, 15000);
     const err = await ev(`return WARD._st.err || (WARD._st.refusal && JSON.stringify(WARD._st.refusal)) || ''`);
     must(!err, "transfer refused: " + err);

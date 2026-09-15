@@ -224,6 +224,19 @@ test("BED BOARD: reads real master occupancy/state once a hospital has any, not 
   assert.deepEqual(medicalA.free, [], "a maintenance bed with no patient in it is still not free");
 });
 
+test("BED BOARD (BUG-MU06Z46U-DMDX, BUG-MU08T4RL-GU0N): GET /api/queue/ward/beds names each ward's department from the hospital's own master data", async () => {
+  seedHospital();
+  const cardio = await ORG_STORE.createDepartment(undefined, ORG, { name: "Cardiology" }, "actor-1");
+  const w1 = await ORG_STORE.createWard(undefined, ORG, { name: "CCU", departmentId: cardio.id }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w1.id, name: "1" }, "actor-1");
+  const w2 = await ORG_STORE.createWard(undefined, ORG, { name: "General A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w2.id, name: "1" }, "actor-1");
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  assert.equal(board.__status, 200, JSON.stringify(board));
+  assert.equal(board.wards.find((x) => x.ward === "CCU").department, "Cardiology");
+  assert.equal(board.wards.find((x) => x.ward === "General A").department, null, "a ward with no department is not given one");
+});
+
 /* TASK 4.15's emergency-mode.js declares "bed-assignment-conflict-override" as a real relaxation.
  * These tests prove it is actually consumed, not merely a name a screen displays. */
 test("EMERGENCY OVERRIDE: a blocked bed is refused without a declared emergency, and admitted with one", async () => {

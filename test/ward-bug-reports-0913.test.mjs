@@ -22,6 +22,7 @@ function loadWard(opts) {
     localStorage: { getItem: () => "", setItem() {}, removeItem() {} },
     fetch: opts.fetch || ((url, init) => { posts.push({ url, body: init && init.body }); return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ ok: true }) }); }),
     setTimeout, clearTimeout, console, Promise, Date,
+    confirm: opts.confirm || (() => true), prompt: opts.prompt || (() => ""),
   };
   sandbox.window = sandbox; sandbox.self = sandbox;
   vm.createContext(sandbox); vm.runInContext(SRC, sandbox);
@@ -66,6 +67,51 @@ test("BUG-MU06X41N-V874: an unavailable ICD search is said as unavailable, never
 
 test("BUG-MU06X41N-V874: typing in the ICD code box searches the list as the words box does", () => {
   assert.match(SRC, /e\.target\.id === "wProbText" \|\| e\.target\.id === "wProbCode"/);
+});
+
+// ---- BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: department and destination come from the bed board ---------
+const BOARD = { ok: true, wards: [
+  { ward: "CCU", department: "Cardiology", occupied: [], unplaced: [], free: ["1"], bedsKnown: true },
+  { ward: "General A", department: "General Medicine", occupied: [], unplaced: [], free: ["4"], bedsKnown: true },
+] };
+
+test("BUG-MU06Z46U-DMDX: no fixed department list, and nothing claims a department that is never recorded", () => {
+  assert.ok(!SRC.includes("HOSPITAL_DEPARTMENTS"));
+  assert.ok(!SRC.includes("edAdmitDept"));
+  const { W } = loadWard();
+  const html = W._render({ ...W._st, view: "board", board: BOARD, edAdmitPending: true, sel: { class: "ED", patientId: "p1", encounterId: "e1", mrn: "TEST-1" } });
+  assert.match(html, /Admitting <b>TEST-1<\/b> from the ED: choose the department, then a free bed/);
+  assert.match(html, /<select id="wBoardDept">/);
+  const only = W._render({ ...W._st, view: "board", board: BOARD, boardDept: "Cardiology" });
+  assert.match(only, /CCU/);
+  assert.ok(!/General A/.test(only), "the department filter did not narrow the wards");
+});
+
+test("BUG-MU08T4RL-GU0N: a transfer picks a real ward and bed on the board and posts exactly that", async () => {
+  const posts = [];
+  const { W } = loadWard({
+    fetch: (url, init) => {
+      if (init && init.method === "POST") posts.push({ url, body: JSON.parse(init.body) });
+      const body = /\/ward\/beds/.test(url) ? BOARD : { ok: true, written: 1, patients: [] };
+      return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(body) });
+    },
+  });
+  W._st.orgId = "org-test";
+  W._st.sel = { class: "IPD", patientId: "p1", encounterId: "e1", ward: "General A", bed: "2", name: "Test Patient" };
+  W._st.view = "chart";
+  W._dispatch("move");
+  await tick();
+  assert.equal(W._st.view, "board");
+  const html = W._render(W._st);
+  assert.match(html, /Transferring <b>Test Patient<\/b> from General A, bed 2/);
+  assert.match(html, /data-w-act="transferward:CCU"/);
+  W._dispatch("pickbed:CCU|1");
+  await tick();
+  const t = posts.find((p) => /\/ward\/transfer$/.test(p.url));
+  assert.ok(t, "no transfer was posted");
+  assert.equal(t.body.ward, "CCU");
+  assert.equal(t.body.bed, "1");
+  assert.equal(W._st.transferPending, false);
 });
 
 // ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------

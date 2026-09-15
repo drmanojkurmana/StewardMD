@@ -168,18 +168,6 @@
     apiPost(OFF_KIND_PATH[kind], body).then(onAnswer, keep);
   }
 
-  var HOSPITAL_DEPARTMENTS = [
-    "General Medicine", "General Surgery", "Emergency Medicine", "Intensive Care Unit (ICU)",
-    "Cardiology", "Cardiothoracic Surgery", "Neurology", "Neurosurgery",
-    "Orthopaedics", "Paediatrics", "Neonatology (NICU)", "Obstetrics & Gynaecology",
-    "Oncology (Medical)", "Surgical Oncology", "Radiation Oncology", "Haematology",
-    "Nephrology", "Urology", "Gastroenterology", "Surgical Gastroenterology",
-    "Pulmonology / Respiratory Medicine", "Endocrinology", "Rheumatology",
-    "Dermatology", "Psychiatry", "ENT (Otorhinolaryngology)", "Ophthalmology",
-    "Anaesthesiology & Pain Medicine", "Palliative Care", "Physical Medicine & Rehabilitation",
-    "Infectious Diseases", "Geriatrics", "Plastic & Reconstructive Surgery",
-    "Vascular Surgery", "Transplant Surgery", "Pathology", "Microbiology", "Radiology"
-  ];
 
   /* One place that turns any ward response into what the screen shows. A refusal keeps its reasons;
    * everything else gets the server's own message rather than a rewritten one, because "the ward is
@@ -579,8 +567,17 @@
    * admit the wrong person's chart into a bed. A new patient goes through the SAME registration
    * sheet the front desk uses (SMD_PATIENTREG) - one form, not a second one that could drift from it. */
   function boardView(state) {
-    var wards = (state.board && state.board.wards) || [];
+    var allWards = (state.board && state.board.wards) || [];
     var t = state.admitTarget;
+    /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: a department is chosen by choosing one of its wards. The names
+     * are the hospital's own (Admin, departments and wards, sent by the server per ward), never a fixed list
+     * that nothing records: a typed "Cardiology" used to be shown as chosen and then dropped. */
+    var depts = [];
+    allWards.forEach(function (w) { if (w.department && depts.indexOf(w.department) < 0) depts.push(w.department); });
+    depts.sort();
+    var dept = depts.indexOf(state.boardDept) >= 0 ? state.boardDept : "";
+    var wards = dept ? allWards.filter(function (w) { return w.department === dept; }) : allWards;
+    var moving = state.transferPending && state.sel;
     var wardsHtml = wards.map(function (w) {
       var occ = (w.occupied || []).map(function (o) {
         // The server now sends name/mrn on every occupied bed (migrate-inpatient.js bedBoard).
@@ -596,7 +593,8 @@
       var unplaced = (w.unplaced || []).map(function (o) {
         return '<div class="w-bedcell occ"><b>-</b><span>' + esc(o.name || o.mrn || o.patientId) + " (no bed assigned)</span></div>";
       }).join("");
-      return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4></div>" +
+      return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + (w.department ? esc(w.department) + " &middot; " : "") + esc((w.occupied || []).length) + " occupied" + (w.bedsKnown ? " &middot; " + esc((w.free || []).length) + " free" : "") + "</small></h4>" +
+        (moving && w.ward !== "(no ward recorded)" ? '<button class="w-btn ghost sm" data-w-act="transferward:' + esc(w.ward) + '" type="button">' + ms("swap_horiz") + "Move here, no bed yet</button>" : "") + "</div>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
     }).join("");
 
@@ -604,7 +602,6 @@
     var admitPanel = !t ? "" :
       '<div class="w-card admit"><div class="w-card-h">' + ms("bed") + "<h3>Admit to " + esc(t.ward) + ", bed " + esc(t.bed) + "</h3>" +
         '<button class="w-ic" data-w-act="unpickbed" title="Choose a different bed">' + ms("close") + "</button></div>" +
-        (state.edAdmitDept ? '<p class="w-hint" style="background:#e8f4fd; border:1px solid #b6d4fe; color:#0c5460; padding:8px 12px; border-radius:8px; margin-bottom:12px;">' + ms("info") + 'Admitting from ED to <b>' + esc(state.edAdmitDept) + '</b></p>' : "") +
         // Explicit, never inferred from the ward's name - the same rule migrate-inpatient.js's own
         // header states: a ward literally named "ICU" admits as IPD unless this is checked.
         '<label class="w-f"><span>Admission type</span><select id="wAdmitClass">' +
@@ -632,13 +629,20 @@
         '<button class="w-btn" data-w-act="admitnew">' + ms("person_add") + "Register &amp; admit</button></div>" +
       "</div>";
 
+    var who = state.sel ? esc(state.sel.name || state.sel.mrn || state.sel.patientId || "") : "";
+    var mode = moving ? '<p class="w-hint">' + ms("swap_horiz") + "Transferring <b>" + who + "</b>" + (state.sel.ward ? " from " + esc(state.sel.ward) + (state.sel.bed ? ", bed " + esc(state.sel.bed) : "") : "") + ": choose the department, then a free bed, or move to a ward with no bed yet.</p>"
+      : state.edAdmitPending && state.sel ? '<p class="w-hint">' + ms("emergency") + "Admitting <b>" + who + "</b> from the ED: choose the department, then a free bed.</p>" : "";
+    var deptPick = depts.length ? '<div class="w-filter"><label class="w-f"><span>Department</span><select id="wBoardDept"><option value="">All departments</option>' +
+      depts.map(function (d) { return '<option value="' + esc(d) + '"' + (d === dept ? " selected" : "") + ">" + esc(d) + "</option>"; }).join("") + "</select></label></div>" : "";
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       '<div><b>Bed board</b></div>' +
       '<button class="w-ic" data-w-act="board" title="Refresh">' + ms("refresh") + "</button></div>" +
+      mode + deptPick +
       '<div class="w-card">' +
       (state.boardErr ? '<p class="w-hint warn">' + ms("error") + esc(state.boardErr) + "</p>"
+        : !state.board ? '<p class="w-empty">Loading the bed board...</p>'
         : wardsHtml || '<p class="w-empty">No admissions and no bed lists configured.</p>') +
-      "</div>" + admitPanel;
+      "</div>" + (moving ? "" : admitPanel);
   }
 
   /* THE ED BOARD. A worklist, not an arrival log - the server itself sorts untriaged patients
@@ -7348,6 +7352,7 @@
     // the disposition directly, never through the admit panel's own MRN-lookup/register flow,
     // which is for a patient the board does not already have open.
     if (st.edAdmitPending) { st.edAdmitPending = false; edDispose("admitted", { admission: { ward: ward, bed: bed } }); return; }
+    if (st.transferPending && st.sel) { transferTo(ward, bed); return; }
     st.admitTarget = { ward: ward, bed: bed }; st.mrnLookup = null; st.mrnLookupErr = ""; st.admitClass = ""; st.emergencyOverride = false; paint();
   }
   /* The one write in this whole flow: an Encounter, exactly as /ward/transfer and every other admit
@@ -8780,33 +8785,31 @@
    * itself fires only once a real bed is picked from it, exactly as any other admission does. */
   function edDispositionAdmit() {
     var s = st.sel; if (!s) return;
-    var dept = "";
-    try {
-      var promptMsg = "Admit to which department / specialty?\nAvailable departments:\n" + HOSPITAL_DEPARTMENTS.slice(0, 16).join(", ") + "...\n(Or type any department):";
-      dept = G.prompt(promptMsg, "General Medicine") || "";
-    } catch (e) {}
-    if (dept && dept.trim()) {
-      st.edAdmitDept = dept.trim();
-    }
+    st.transferPending = false; st.boardDept = "";
     st.edAdmitPending = true;
     loadBoard();
   }
 
   /* A transfer, from the patient's own chart. The refusal a busy bed produces is the important part
    * of this flow: the server names the occupant, and that is shown as-is rather than collapsed into
-   * "could not transfer", because "bed 12 already has someone in it" is what the ward has to act on. */
+   * "could not transfer", because "bed 12 already has someone in it" is what the ward has to act on.
+   *
+   * BUG-MU08T4RL-GU0N: the destination used to be typed into a prompt beside a fixed list of department
+   * names, so a transfer "to Cardiology" wrote a ward nobody had. It is picked on the bed board now: the
+   * hospital's real wards, each named with its department, free beds only. */
   function transfer() {
     var s = st.sel; if (!s) return;
-    var ward = "", bed = "", override = false;
+    st.edAdmitPending = false; st.admitTarget = null; st.boardDept = "";
+    st.transferPending = true;
+    loadBoard();
+  }
+  function transferTo(ward, bedIn) {
+    var s = st.sel; if (!s || !ward) return;
+    var bed = bedIn || "", override = false;
     var emergencyActive = st.emergency && (st.emergency.active || []).some(function (a) { return (a.relaxations || []).indexOf("bed-assignment-conflict-override") >= 0; });
-    var knownWards = (st.board && st.board.wards || []).map(function (w) { return w.ward; });
-    var allOptions = knownWards.concat(HOSPITAL_DEPARTMENTS).filter(function (v, idx, arr) { return arr.indexOf(v) === idx; });
     try {
-      var transferMsg = "Transfer to which ward or department?\nOptions:\n" + allOptions.slice(0, 14).join(", ") + "...";
-      ward = G.prompt(transferMsg, s.ward || "") || "";
-      if (!ward.trim()) return;
-      bed = G.prompt("Which bed in " + ward.trim() + "? (leave blank if awaiting one)", "") || "";
-      if (emergencyActive && bed.trim()) {
+      if (!G.confirm("Transfer to " + ward + (bed ? ", bed " + bed : ", no bed yet") + "?")) return;
+      if (emergencyActive && bed) {
         override = /^y/i.test(G.prompt("A declared emergency permits admitting past a blocked/cleaning/maintenance/reserved bed. Use that here? (y/N)", "") || "");
       }
     } catch (e) { return; }
@@ -8816,10 +8819,10 @@
         if (r && r.error === "bed_occupied") {
           st.busy = false;
           st.err = r.detail + (r.occupiedBy && r.occupiedBy.patientId ? " by " + r.occupiedBy.patientId : "") + ". Choose another bed.";
-          paint(); return;
+          loadBoard(); return;
         }
         if (settle(r, r && r.written ? "Moved to " + ward.trim() + (bed.trim() ? ", bed " + bed.trim() : "") + "." : "Already there.")) {
-          st.sel = null; st.view = "list"; loadWard();
+          st.transferPending = false; st.board = null; st.sel = null; st.view = "list"; loadWard();
         } else paint();
       })
       .catch(function () { st.busy = false; st.err = "Could not record the transfer."; paint(); });
@@ -10037,6 +10040,7 @@
   function onFormChange(ev) {
     var t = ev && ev.target;
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
+    if (st.view === "board" && t && t.id === "wBoardDept") { st.boardDept = t.value; paint(); return; }
     if (st.view === "pcopy" && t && t.id === "wPcopyScope") { st.pcopyScope = t.value === "full" ? "full" : "patient-copy"; paint(); return; }
     // The print's second language: its catalog file is loaded before the page is drawn with it.
     if (st.view === "pcopy" && t && t.id === "wPcopyLang") { st.pcopyLang = t.value; if (G.WSQPrint) G.WSQPrint.ensureLoaded(t.value, paint); else paint(); return; }
@@ -11385,18 +11389,21 @@
       // backing out of it returns to that patient's ED chart, not the ward list, and drops the
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
       if (st.view === "board" && st.edAdmitPending) { st.edAdmitPending = false; st.board = null; st.admitTarget = null; st.view = "chart"; paint(); return; }
+      if (st.view === "board" && st.transferPending && st.sel) { st.transferPending = false; st.board = null; st.view = "chart"; paint(); return; }
       // A case's own chart backs out to the theatre board, not the ward list - the same reason the
       // ED chart backs out to the ED board rather than to an unrelated ward roster.
       if (st.view === "surgerycase") { st.surgCase = null; loadSurgeryBoard(); return; }
       st.view = "list"; st.sel = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
-      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false;
+      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false; st.transferPending = false;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
       st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
       paint(); return;
     }
-    if (cmd === "board") { loadBoard(); return; }
+    // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
+    if (cmd === "board") { if (st.view !== "board") { st.transferPending = false; st.edAdmitPending = false; } loadBoard(); return; }
+    if (cmd === "transferward") { transferTo(arg, ""); return; }
     if (cmd === "unpickbed") { st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; paint(); return; }
     if (cmd === "pickbed") { var pb = arg.indexOf("|"); if (pb > 0) pickBed(arg.slice(0, pb), arg.slice(pb + 1)); return; }
     if (cmd === "mrnlookup") { mrnLookup(); return; }
