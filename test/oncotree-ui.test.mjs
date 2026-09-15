@@ -244,6 +244,34 @@ test("NCCN NAVIGATOR: terminal node triggers End of Algorithm modal dialog", () 
   noPlaceholders(html);
 });
 
+test("NCCN NAVIGATOR: End of algorithm modal is suppressed unless last step is pressed thrice", () => {
+  const answers = Object.assign({}, HER2_PATH.answers);
+  const keys = Object.keys(answers);
+  const lastKey = keys[keys.length - 1];
+  const lastOpt = answers[lastKey][0];
+  delete answers[lastKey];
+
+  reset(answers);
+  UI._st.view = "navigator";
+
+  // 1st press of terminal step
+  UI._answer(lastKey, lastOpt);
+  assert.equal(UI._st.navEndModalOpen, false, "modal suppressed on 1st press");
+  let html = UI._bodyHtml();
+  assert.ok(!/ot-nav-modal-backdrop/.test(html), "backdrop not rendered");
+
+  // 2nd press of terminal step
+  UI._answer(lastKey, lastOpt);
+  assert.equal(UI._st.navEndModalOpen, false, "modal suppressed on 2nd press");
+
+  // 3rd press of terminal step (thrice)
+  UI._answer(lastKey, lastOpt);
+  assert.equal(UI._st.navEndModalOpen, true, "modal opens when last step is pressed thrice");
+  html = UI._bodyHtml();
+  assert.ok(/End of algorithm reached/.test(html), "modal rendered on 3rd press");
+  noPlaceholders(html);
+});
+
 test("NCCN NAVIGATOR: guided flowchart mode renders stage stepper, active decision card, and workup checklist", () => {
   reset({});
   UI._st.view = "navigator";

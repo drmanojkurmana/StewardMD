@@ -58,7 +58,7 @@
     loaded: false, loading: false, error: null, ctx: null,
     trail: [], tocQuery: "", summaryOpen: false, _pendingRebase: null,
     showNonActive: true, navEndModalOpen: false, sidebarOpen: true, navZoom: 1,
-    navMode: "auto"
+    navMode: "auto", lastEndStepNode: null, lastEndStepOpt: null, lastEndStepPressCount: 0
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -820,7 +820,7 @@
           '</div>' +
         '</div>' +
         '<div class="ot-flow-card-title">' + esc(node.title || node.name) + '</div>' +
-        '<div class="ot-flow-answered-val">' +
+        '<div class="ot-flow-answered-val" data-ot-act="answer" data-ot-node="' + esc(node.id) + '" data-ot-opt="' + esc(selOpts[0] || "") + '">' +
           '<div class="ot-flow-answered-dot"></div>' +
           '<div class="ot-flow-answered-txt"><b>Selected:</b> ' + esc(choiceTxt) + '</div>' +
         '</div>' +
@@ -1328,7 +1328,7 @@
     if (act === "pick") { loadGuideline(t.getAttribute("data-ot-guideline")); return; }
     if (act === "change-disease") { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "navigator"; paint(); return; }
     if (act === "retry") { st.error = null; if (st.guideline) loadGuideline(st.guideline); else paint(); return; }
-    if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.navEndModalOpen = false; repaintBody(); if (st.view === "navigator") navAutoScroll(); return; }
+    if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.navEndModalOpen = false; st.lastEndStepNode = null; st.lastEndStepOpt = null; st.lastEndStepPressCount = 0; repaintBody(); if (st.view === "navigator") navAutoScroll(); return; }
     if (act === "view-navigator") { st.view = "navigator"; paint(); return; }
     if (act === "view-pathway") { st.view = "pathway"; paint(); return; }
     if (act === "view-map") { st.view = "map"; paint(); return; }
@@ -1337,7 +1337,7 @@
     if (act === "nav-zoom-in") { navZoom("in"); return; }
     if (act === "nav-zoom-out") { navZoom("out"); return; }
     if (act === "nav-zoom-fit") { navZoom("fit"); return; }
-    if (act === "nav-modal-close") { st.navEndModalOpen = false; repaintBody(); return; }
+    if (act === "nav-modal-close") { st.navEndModalOpen = false; st.lastEndStepPressCount = 0; repaintBody(); return; }
     if (act === "nav-set-mode") {
       var m = t.getAttribute("data-ot-mode");
       st.navMode = (m === "flow" || m === "canvas") ? m : "auto";
@@ -1352,6 +1352,9 @@
         st.openedProtocol = null;
         st.selection = null;
         st.navEndModalOpen = false;
+        st.lastEndStepNode = null;
+        st.lastEndStepOpt = null;
+        st.lastEndStepPressCount = 0;
         repaintBody();
       }
       return;
@@ -1398,11 +1401,33 @@
       var cur = currentQuestion(state);
       var outs = reachedOutcomes(state);
       if (!cur && outs && outs.length) {
-        st.navEndModalOpen = true;
+        if (st.lastEndStepNode === nodeId && st.lastEndStepOpt === optId) {
+          st.lastEndStepPressCount = (st.lastEndStepPressCount || 1) + 1;
+        } else {
+          st.lastEndStepNode = nodeId;
+          st.lastEndStepOpt = optId;
+          st.lastEndStepPressCount = 1;
+        }
+        st.navEndModalOpen = (st.lastEndStepPressCount >= 3);
+      } else {
+        st.lastEndStepNode = null;
+        st.lastEndStepOpt = null;
+        st.lastEndStepPressCount = 0;
+        st.navEndModalOpen = false;
       }
     }
     repaintBody();
-    if (st.view === "navigator") navAutoScroll();
+    if (st.view === "navigator") {
+      if (currentNavMode() === "canvas") navAutoScroll();
+      else {
+        if (typeof setTimeout !== "undefined") {
+          setTimeout(function () {
+            var el = D && (D.querySelector(".ot-flow-card.active") || D.querySelector(".ot-flow-card.outcome"));
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 60);
+        }
+      }
+    }
   }
   function editStep(nodeId) {
     // Jump back to a step: drop this answer + everything downstream, so the doctor re-answers forward.
