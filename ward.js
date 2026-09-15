@@ -101,7 +101,9 @@
   function icdSearch(q) {
     return fetchRetry("/api/icd/search?limit=8&q=" + encodeURIComponent(q), { credentials: "omit" })
       .then(function (r) { return r.json(); })
-      .then(function (j) { return (j && j.results) || []; });
+      // The API answers a refused or unbound lookup with 200, an empty list AND error:"unavailable".
+      // Read as a list, that is "no matching code" when nobody searched at all.
+      .then(function (j) { if (!j || j.error || !Array.isArray(j.results)) throw new Error((j && j.error) || "unavailable"); return j.results; });
   }
   function apiPost(path, body) { return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
 
@@ -10452,7 +10454,7 @@
       .then(function (rows) { st.icd = rows; paint(); })
       // A terminology service that is down must never stop a diagnosis being recorded. The words
       // still work, and the screen says so rather than leaving a spinner up.
-      .catch(function () { st.icd = []; st.err = "The code search is unavailable. Record the diagnosis in words."; paint(); });
+      .catch(function () { st.icd = undefined; st.err = "The code search is unavailable. Record the diagnosis in words."; paint(); });
   }
   /* A PERSON PICKS. Nothing here scores, ranks or auto-selects a result - not even when there is
    * exactly one, because one result is not the same as the right one. */
@@ -11917,9 +11919,11 @@
       var r0 = document.getElementById("wRoster"); if (r0) r0.innerHTML = rosterHtml(st);
       return;
     }
-    if (e.target.id === "wProbText") {
+    /* Typing either the words or the code searches the ICD list: a doctor who knows the code starts
+     * in the code box. The result is still only offered; a person picks. */
+    if (e.target.id === "wProbText" || e.target.id === "wProbCode") {
       var q = String(e.target.value || "").trim();
-      st.probText = e.target.value;
+      if (e.target.id === "wProbText") st.probText = e.target.value; else st.probCode = e.target.value;
       if (_probDebounce) clearTimeout(_probDebounce);
       if (q.length < 2) {
         st.icd = undefined;
@@ -11938,7 +11942,11 @@
               }).join("") + "</ul>"
             ) : '<p class="w-hint">' + ms("info") + "No matching code. Record it in words: an uncoded diagnosis is honest, a guessed code is not.</p>";
           }
-        }).catch(function () {});
+        }).catch(function () {
+          st.icd = undefined;
+          var icdElF = document.getElementById("wIcdCandidates");
+          if (icdElF) icdElF.innerHTML = '<p class="w-hint warn">' + ms("error") + "The code search is unavailable. Record the diagnosis in words.</p>";
+        });
       }, 300);
     }
   }
