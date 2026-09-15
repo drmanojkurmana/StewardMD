@@ -57,7 +57,8 @@
     view: "navigator", openedProtocol: null, selection: null, whyOpen: {}, showExcluded: false,
     loaded: false, loading: false, error: null, ctx: null,
     trail: [], tocQuery: "", summaryOpen: false, _pendingRebase: null,
-    showNonActive: true, navEndModalOpen: false, sidebarOpen: true, navZoom: 1
+    showNonActive: true, navEndModalOpen: false, sidebarOpen: true, navZoom: 1,
+    navMode: "auto"
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -743,11 +744,228 @@
       '</aside>';
   }
 
+  function isMobileScreen() {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+  }
+  function currentNavMode() {
+    if (st.navMode === "flow") return "flow";
+    if (st.navMode === "canvas") return "canvas";
+    return isMobileScreen() ? "flow" : "canvas";
+  }
+
+  var CLINICAL_STAGES = [
+    { id: "workup", label: "1. Workup", icon: "biotech" },
+    { id: "staging", label: "2. Staging", icon: "checklist" },
+    { id: "primary", label: "3. Primary Tx", icon: "medical_services" },
+    { id: "response", label: "4. Response", icon: "fact_check" },
+    { id: "subtype", label: "5. Subtype/Adjuvant", icon: "dna" },
+    { id: "regimens", label: "6. Regimens", icon: "medication" }
+  ];
+
+  function getActiveStageIndex(state) {
+    var cur = currentQuestion(state);
+    var outs = reachedOutcomes(state);
+    if (!cur && outs.length) return 5;
+    if (!cur) return 0;
+    var sec = (cur.section || "").toLowerCase();
+    var cat = (cur.nodeCategory || "").toLowerCase();
+    var id = cur.id.toLowerCase();
+
+    if (id.indexOf("mbc") >= 0 || id.indexOf("recur") >= 0 || sec.indexOf("metastatic") >= 0) {
+      if (id.indexOf("genom") >= 0 || id.indexOf("line") >= 0) return 4;
+      return 1;
+    }
+    if (sec.indexOf("workup") >= 0 || cat === "workup") return 0;
+    if (sec.indexOf("staging") >= 0 || id === "n_histology" || (id.indexOf("er") >= 0 && id.indexOf("dcis") >= 0)) return 1;
+    if (sec.indexOf("sequencing") >= 0 || sec.indexOf("locoregional") >= 0 || sec.indexOf("preoperative") >= 0 || id.indexOf("tx_preop") >= 0 || id.indexOf("locoregional") >= 0) return 2;
+    if (sec.indexOf("response") >= 0 || id.indexOf("response") >= 0 || id.indexOf("pcr") >= 0 || id.indexOf("residual") >= 0) return 3;
+    if (sec.indexOf("adjuvant") >= 0 || sec.indexOf("subtype") >= 0 || sec.indexOf("endocrine") >= 0 || id.indexOf("subtype") >= 0 || id.indexOf("hrpos") >= 0) return 4;
+    return 1;
+  }
+
+  function navStageStepperHtml(state) {
+    var curIdx = getActiveStageIndex(state);
+    var stepsHtml = CLINICAL_STAGES.map(function (stage, idx) {
+      var isPassed = idx < curIdx;
+      var isCurrent = idx === curIdx;
+      var statusClass = isPassed ? "completed" : (isCurrent ? "current" : "upcoming");
+      return '<div class="ot-flow-step-item ' + statusClass + '">' +
+        '<div class="ot-flow-step-dot">' + (isPassed ? ms("check") : ms(stage.icon)) + '</div>' +
+        '<div class="ot-flow-step-lbl">' + esc(stage.label) + '</div>' +
+        '</div>';
+    }).join('<div class="ot-flow-step-arrow">' + ms("chevron_right") + '</div>');
+
+    return '<div class="ot-flow-stepper-wrap">' +
+      '<div class="ot-flow-stepper">' + stepsHtml + '</div>' +
+      '</div>';
+  }
+
+  function navFlowchartViewHtml(state) {
+    var answered = answeredSteps(state);
+    var answeredCardsHtml = answered.map(function (node, idx) {
+      var selOpts = st.answers[node.id] || [];
+      var optLabels = (node.options || []).filter(function (o) {
+        return selOpts.indexOf(o.id) >= 0;
+      }).map(function (o) { return o.label; });
+      var choiceTxt = optLabels.join(", ") || selOpts.join(", ");
+      var cat = CAT[node.nodeCategory] || CAT.other;
+
+      return '<div class="ot-flow-card completed" id="otFlowCard_' + esc(node.id) + '">' +
+        '<div class="ot-flow-card-hd">' +
+          '<div class="ot-flow-card-cat" style="color:' + cat.color + '">' + ms(cat.icon) + '<span>' + esc(cat.name) + '</span></div>' +
+          '<div class="ot-flow-badge-group">' +
+            '<span class="ot-flow-done-pill">' + ms("check_circle") + ' Done</span>' +
+            '<button class="ot-flow-edit-btn" data-ot-act="nav-edit-step" data-ot-node="' + esc(node.id) + '">' + ms("edit") + ' Change</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ot-flow-card-title">' + esc(node.title || node.name) + '</div>' +
+        '<div class="ot-flow-answered-val">' +
+          '<div class="ot-flow-answered-dot"></div>' +
+          '<div class="ot-flow-answered-txt"><b>Selected:</b> ' + esc(choiceTxt) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ot-flow-connector"><div class="ot-flow-line"></div>' + ms("arrow_downward") + '</div>';
+    }).join("");
+
+    var cur = currentQuestion(state);
+    var activeCardHtml = "";
+    if (cur) {
+      var cat = CAT[cur.nodeCategory] || CAT.other;
+      var hasBullets = cur.bullets && cur.bullets.length;
+      var isWorkup = cur.nodeCategory === "workup" || cur.nodeCategory === "criteria";
+
+      var workupHtml = "";
+      if (hasBullets) {
+        workupHtml = '<div class="ot-flow-workup-box">' +
+          '<div class="ot-flow-workup-hd">' +
+            ms(isWorkup ? "biotech" : "checklist") +
+            '<span>' + (isWorkup ? "High-Yield Diagnostic Workup Checklist" : "Clinical Evaluation Criteria") + '</span>' +
+          '</div>' +
+          '<div class="ot-flow-workup-list">' +
+            cur.bullets.map(function (b) {
+              var txt = (b && typeof b === "object") ? ((b.label || "") + ": " + (b.sub || "")) : String(b);
+              return '<div class="ot-flow-check-item">' +
+                '<span class="material-symbols-outlined ot-flow-check-ic">check_box</span>' +
+                '<span class="ot-flow-check-txt">' + esc(txt) + '</span>' +
+              '</div>';
+            }).join("") +
+          '</div>' +
+          '</div>';
+      }
+
+      var opts = cur.options || [];
+      var isSingleContinue = opts.length === 1 && /^(continue|next|proceed|ack)$/i.test(opts[0].id);
+      var optsHtml = "";
+
+      if (isSingleContinue) {
+        var opt = opts[0];
+        optsHtml = '<div class="ot-flow-single-opt">' +
+          '<button class="ot-flow-continue-btn" data-ot-act="answer" data-ot-node="' + esc(cur.id) + '" data-ot-opt="' + esc(opt.id) + '">' +
+            ms("task_alt") + '<span>' + esc(opt.label || "Workup Reviewed — Proceed to Next Step") + '</span>' +
+          '</button>' +
+          '</div>';
+      } else {
+        optsHtml = '<div class="ot-flow-opts-container">' +
+          '<div class="ot-flow-decision-prompt">' + ms("tune") + '<span>Once workup is verified, select patient status:</span></div>' +
+          '<div class="ot-flow-opts-list">' +
+            opts.map(function (o) {
+              return '<button class="ot-flow-opt-card" data-ot-act="answer" data-ot-node="' + esc(cur.id) + '" data-ot-opt="' + esc(o.id) + '">' +
+                '<div class="ot-flow-opt-radio"><div class="ot-flow-opt-radio-dot"></div></div>' +
+                '<div class="ot-flow-opt-info">' +
+                  '<div class="ot-flow-opt-lbl">' + esc(o.label) + '</div>' +
+                  (o.pills && o.pills.length ? '<div class="ot-flow-opt-pills">' + o.pills.map(function (p) { return '<span class="ot-flow-pill">' + esc(p) + '</span>'; }).join("") + '</div>' : "") +
+                '</div>' +
+                ms("arrow_forward_ios") +
+              '</button>';
+            }).join("") +
+          '</div>' +
+          '</div>';
+      }
+
+      activeCardHtml = '<div class="ot-flow-card active" id="otFlowCard_' + esc(cur.id) + '" style="--ot-nav-c:' + cat.color + '">' +
+        '<div class="ot-flow-card-hd">' +
+          '<div class="ot-flow-card-cat">' + ms(cat.icon) + '<span>' + esc(cat.name) + '</span></div>' +
+          '<span class="ot-flow-active-badge">Active Decision</span>' +
+        '</div>' +
+        '<h2 class="ot-flow-card-title">' + esc(cur.title || cur.name) + '</h2>' +
+        (cur.description ? '<p class="ot-flow-card-desc">' + esc(cur.description) + '</p>' : "") +
+        workupHtml +
+        optsHtml +
+        '</div>';
+    }
+
+    var outcomeCardHtml = "";
+    var outs = reachedOutcomes(state);
+    if (outs.length) {
+      var outsHtml = outs.map(function (outNode) {
+        var refs = asArr(outNode.protocolRefs);
+        var protoCardsHtml = "";
+        if (refs.length) {
+          protoCardsHtml = '<div class="ot-flow-protos-grid">' +
+            refs.map(function (refId) {
+              var proto = st.protocols[refId];
+              var name = proto ? proto.name : refId;
+              var sub = proto ? (proto.setting || proto.tumorType || "NCCN standard") : "Protocol";
+              return '<div class="ot-flow-proto-card" data-ot-act="view-proto" data-ot-proto="' + esc(refId) + '">' +
+                '<div class="ot-flow-proto-hd">' +
+                  '<span class="ot-flow-proto-tag">REGIMEN</span>' +
+                  '<span class="ot-flow-proto-name">' + esc(name) + '</span>' +
+                '</div>' +
+                '<div class="ot-flow-proto-sub">' + esc(sub) + '</div>' +
+                '<div class="ot-flow-proto-ft">' +
+                  '<span class="ot-flow-proto-view">' + ms("visibility") + ' View Regimen</span>' +
+                  '<span class="ot-flow-proto-btn">' + ms("open_in_new") + ' Open</span>' +
+                '</div>' +
+              '</div>';
+            }).join("") +
+            '</div>';
+        }
+
+        var bulletsHtml = "";
+        if (outNode.bullets && outNode.bullets.length) {
+          bulletsHtml = '<div class="ot-flow-guidance-list">' +
+            outNode.bullets.map(function (b) {
+              var txt = (b && typeof b === "object") ? ((b.label || "") + ": " + (b.sub || "")) : String(b);
+              return '<div class="ot-flow-guide-item">' + ms("verified") + '<span>' + esc(txt) + '</span></div>';
+            }).join("") +
+            '</div>';
+        }
+
+        return '<div class="ot-flow-card outcome">' +
+          '<div class="ot-flow-card-hd">' +
+            '<div class="ot-flow-card-cat" style="color:#2E7D32">' + ms("flag") + '<span>End of Pathway / Regimens</span></div>' +
+            '<span class="ot-flow-rec-badge">Recommendation</span>' +
+          '</div>' +
+          '<h2 class="ot-flow-card-title">' + esc(outNode.title || outNode.name) + '</h2>' +
+          (outNode.description ? '<p class="ot-flow-card-desc">' + esc(outNode.description) + '</p>' : "") +
+          bulletsHtml +
+          (protoCardsHtml ? '<div class="ot-flow-protos-wrap"><div class="ot-flow-protos-title">' + ms("medication") + ' Recommended Regimens (NCCN Aligned):</div>' + protoCardsHtml + '</div>' : "") +
+          '<div class="ot-flow-restart-box">' +
+            '<button class="ot-btn ghost" data-ot-act="reset">' + ms("restart_alt") + ' Restart Pathway</button>' +
+          '</div>' +
+        '</div>';
+      }).join("");
+
+      outcomeCardHtml = (answered.length ? '<div class="ot-flow-connector"><div class="ot-flow-line"></div>' + ms("arrow_downward") + '</div>' : "") + outsHtml;
+    }
+
+    return '<div class="ot-flow-viewport" id="otFlowVp">' +
+      navStageStepperHtml(state) +
+      '<div class="ot-flow-content">' +
+        answeredCardsHtml +
+        activeCardHtml +
+        outcomeCardHtml +
+      '</div>' +
+      '</div>';
+  }
+
   function navToolbarHtml(state) {
     var cur = currentQuestion(state);
     var curName = cur ? (cur.name || cur.title || "") : "Recommendations";
     var title = (st.graph && st.graph.title) || "Breast Cancer";
     var version = "Version 6.2026 — July 29, 2026";
+    var mode = currentNavMode();
 
     return '<div class="ot-nav-toolbar">' +
       '<div class="ot-nav-tb-left">' +
@@ -760,6 +978,10 @@
         '<div class="ot-nav-cur-node">' + esc(curName) + '</div>' +
       '</div>' +
       '<div class="ot-nav-tb-right">' +
+        '<div class="ot-nav-mode-pill">' +
+          '<button class="ot-nav-mode-btn' + (mode === "flow" ? " on" : "") + '" data-ot-act="nav-set-mode" data-ot-mode="flow" title="Guided Flowchart">' + ms("view_timeline") + '<span>Flowchart</span></button>' +
+          '<button class="ot-nav-mode-btn' + (mode === "canvas" ? " on" : "") + '" data-ot-act="nav-set-mode" data-ot-mode="canvas" title="Interactive 2D Board">' + ms("account_tree") + '<span>Canvas</span></button>' +
+        '</div>' +
         '<label class="ot-nav-toggle-wrap" title="Toggle display of non-active decision branches">' +
           '<span class="ot-nav-toggle-lbl">Non-active paths</span>' +
           '<span class="ot-nav-switch' + (st.showNonActive ? " checked" : "") + '">' +
@@ -767,11 +989,13 @@
             '<span class="ot-nav-slider"></span>' +
           '</span>' +
         '</label>' +
-        '<div class="ot-nav-zoom-group">' +
-          '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-out" title="Zoom Out">−</button>' +
-          '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-fit" title="Fit to 100%">Fit</button>' +
-          '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-in" title="Zoom In">+</button>' +
-        '</div>' +
+        (mode === "canvas" ? (
+          '<div class="ot-nav-zoom-group">' +
+            '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-out" title="Zoom Out">−</button>' +
+            '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-fit" title="Fit to 100%">Fit</button>' +
+            '<button class="ot-nav-zbtn" data-ot-act="nav-zoom-in" title="Zoom In">+</button>' +
+          '</div>'
+        ) : "") +
         '<button class="ot-nav-clear-btn" data-ot-act="reset" title="Clear all answers and restart">' +
           ms("restart_alt") + '<span>Clear</span>' +
         '</button>' +
@@ -801,35 +1025,45 @@
   }
 
   function navigatorHtml(state) {
-    var flow = buildNavFlowchart(state);
-    var colsHtml = flow.columns.map(function (colNodes, colIdx) {
-      var hasActive = colNodes.some(function (id) { return state.nodes[id] && state.nodes[id].status === "active"; });
-      var cardsHtml = colNodes.map(function (nodeId) {
-        var isActive = state.nodes[nodeId] && state.nodes[nodeId].status === "active";
-        return navNodeCardHtml(nodeId, state, isActive);
+    var mode = currentNavMode();
+    var mainViewHtml = "";
+
+    if (mode === "flow") {
+      mainViewHtml = navFlowchartViewHtml(state);
+    } else {
+      var flow = buildNavFlowchart(state);
+      var colsHtml = flow.columns.map(function (colNodes, colIdx) {
+        var hasActive = colNodes.some(function (id) { return state.nodes[id] && state.nodes[id].status === "active"; });
+        var cardsHtml = colNodes.map(function (nodeId) {
+          var isActive = state.nodes[nodeId] && state.nodes[nodeId].status === "active";
+          return navNodeCardHtml(nodeId, state, isActive);
+        }).join("");
+        return '<div class="ot-nav-col' + (hasActive ? " has-active" : "") + '" id="otNavCol_' + colIdx + '">' + cardsHtml + '</div>';
       }).join("");
-      return '<div class="ot-nav-col' + (hasActive ? " has-active" : "") + '" id="otNavCol_' + colIdx + '">' + cardsHtml + '</div>';
-    }).join("");
 
-    var svgPaths = flow.edges.map(function (e) {
-      return '<path class="ot-nav-edge' + (e.active ? " active" : " non-active") + '" d="' + e.d + '"/>';
-    }).join("");
+      var svgPaths = flow.edges.map(function (e) {
+        return '<path class="ot-nav-edge' + (e.active ? " active" : " non-active") + '" d="' + e.d + '"/>';
+      }).join("");
 
-    var svgHtml = '<svg class="ot-nav-svg" width="' + flow.width + '" height="' + flow.height + '" viewBox="0 0 ' + flow.width + ' ' + flow.height + '">' + svgPaths + '</svg>';
+      var svgHtml = '<svg class="ot-nav-svg" width="' + flow.width + '" height="' + flow.height + '" viewBox="0 0 ' + flow.width + ' ' + flow.height + '">' + svgPaths + '</svg>';
 
-    var zoom = st.navZoom || 1;
-    var canvasStyle = 'width:' + flow.width + 'px;height:' + flow.height + 'px;transform:scale(' + zoom + ');';
+      var zoom = st.navZoom || 1;
+      var canvasStyle = 'width:' + flow.width + 'px;height:' + flow.height + 'px;transform:scale(' + zoom + ');';
 
-    return '<div class="ot-nav-wrap">' +
+      mainViewHtml = '<div class="ot-nav-vp" id="otNavVp">' +
+        '<div class="ot-nav-canvas" id="otNavCanvas" style="' + canvasStyle + '">' +
+          svgHtml +
+          '<div class="ot-nav-cols">' + colsHtml + '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    return '<div class="ot-nav-wrap' + (mode === "flow" ? " mode-flow" : " mode-canvas") + '">' +
+      (st.sidebarOpen && isMobileScreen() ? '<div class="ot-nav-sb-backdrop" data-ot-act="nav-sidebar-toggle"></div>' : "") +
       navSidebarHtml(state) +
       '<div class="ot-nav-main">' +
         navToolbarHtml(state) +
-        '<div class="ot-nav-vp" id="otNavVp">' +
-          '<div class="ot-nav-canvas" id="otNavCanvas" style="' + canvasStyle + '">' +
-            svgHtml +
-            '<div class="ot-nav-cols">' + colsHtml + '</div>' +
-          '</div>' +
-        '</div>' +
+        mainViewHtml +
       '</div>' +
       navEndModalHtml(state) +
       '</div>';
@@ -1104,6 +1338,24 @@
     if (act === "nav-zoom-out") { navZoom("out"); return; }
     if (act === "nav-zoom-fit") { navZoom("fit"); return; }
     if (act === "nav-modal-close") { st.navEndModalOpen = false; repaintBody(); return; }
+    if (act === "nav-set-mode") {
+      var m = t.getAttribute("data-ot-mode");
+      st.navMode = (m === "flow" || m === "canvas") ? m : "auto";
+      repaintBody();
+      if (st.navMode === "canvas") navAutoScroll();
+      return;
+    }
+    if (act === "nav-edit-step") {
+      if (node) {
+        delete st.answers[node];
+        pruneDownstream();
+        st.openedProtocol = null;
+        st.selection = null;
+        st.navEndModalOpen = false;
+        repaintBody();
+      }
+      return;
+    }
     if (act === "nav-view-protocols") { st.navEndModalOpen = false; st.view = "pathway"; repaintBody(); return; }
     if (act === "nav-jump-section") { navJumpSection(t.getAttribute("data-ot-sec"), t.getAttribute("data-ot-opt")); return; }
     if (act === "graph-zoom") { graphZoom(t.getAttribute("data-ot-arg")); return; }
