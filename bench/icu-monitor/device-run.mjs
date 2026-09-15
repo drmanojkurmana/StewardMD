@@ -49,6 +49,7 @@ const cases = readdirSync(DIR).filter((f) => f.endsWith(".jpg")).map((f) => join
 if (!cases.length) { console.error("no .jpg under " + DIR); process.exit(2); }
 
 const c = connect(await wsUrl(), { timeoutMs: 60000 });
+const detOut = {};
 const summary = { generated: new Date().toISOString(), parser: M.VERSION, device: null, idleControl: null, cases: [] };
 try {
   if (!(await c.evaluate(`!!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)`))) throw new Error("SMD_NATIVE.ocr missing");
@@ -98,8 +99,9 @@ try {
     const raw = await c.evaluateAsync(`
       var V2 = window.__smdV2, url = window.__imgUrl, T = {}, t0 = Date.now(); window.__smdNet.splice(0);
       function ocr(u) { var t = Date.now(); return window.SMD_NATIVE.ocr(u, { languageCorrection: false }).then(function (o) { return { ms: Date.now() - t, boxes: (o && o.boxes) || [], keys: o ? Object.keys(o) : [] }; }); }
-      var out = { full: null, crop: null, confirm: null };
-      ocr(url).then(function (f) {
+      var out = { full: null, crop: null, confirm: null, det: null };
+      var dt = Date.now();
+      window.SMD_NATIVE.detectVitals(url).then(function (d) { out.det = d; out.detMs = Date.now() - dt; return ocr(url); }).then(function (f) {
         out.full = f;
         var fullObs = f.boxes.map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h, q: b.q }; });
         return window.__benchPx(url).then(function (px) {
@@ -118,13 +120,31 @@ try {
             var appRuns = !!(pass.crop && !pass.crop.error), creg = null;
             try { creg = (imageSize && (appRuns || !region)) ? V2.confirmationRegion(pass.obs, imageSize) : null; } catch (e) { out.cregErr = String(e); }
             out.creg = creg; out.confirmBenchOnly = !!creg && !appRuns;
-            var done = function (obs, confirmed) {
+            var done = function (obs0, confirmed) {
+              var appObs = out.confirmBenchOnly ? pass.obs : obs0;
+              // tile reads + on-device language model, exactly as reasoning.js
+              var tiles = []; try { tiles = out.det && out.det.available && imageSize && appRuns ? V2.tileRegions(appObs, out.det.detections, imageSize) : []; } catch (e) { out.tileErr = String(e); }
+              out.tiles = [];
+              var readCrop = function (reg) { return window.__benchCrop(url, reg).then(function (cu) { if (!cu) return null; return ocr(cu.url).then(function (co) { return { co: co, size: { w: cu.w, h: cu.h } }; }); }).catch(function () { return null; }); };
+              var chain = tiles.reduce(function (p, t) {
+                return p.then(function () {
+                  return readCrop(t).then(function (a) {
+                    if (!a) return;
+                    var rec = { region: t, a: a };
+                    out.tiles.push(rec);
+                    appObs = V2.mergeObservations(appObs, V2.tileObservations(V2.mapCropObservations(a.co.boxes.map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; }), t), t));
+                    var tb = Object.assign({}, t, { scale: t.scaleB });
+                    return readCrop(tb).then(function (b) { if (!b) return; rec.b = b; appObs = V2.applyConfirmation(appObs, V2.tileObservations(V2.mapCropObservations(b.co.boxes.map(function (x) { return { text: x.text, conf: x.conf, x: x.x, y: x.y, w: x.w, h: x.h }; }), tb), tb)); });
+                  });
+                });
+              }, Promise.resolve());
+              chain.then(function () {
               out.totalMs = Date.now() - t0;
-              var appObs = out.confirmBenchOnly ? pass.obs : obs;
-              var r = V2.parseMonitor(appObs, { px: px, imageSize: imageSize, twoScale: { ran: appRuns } });
-              out.app = { values: r.values, status: Object.keys(r.fields).reduce(function (a, k) { a[k] = r.fields[k].status; return a; }, {}), merged: appObs.length };
+              var r = V2.parseMonitor(appObs, { px: px, imageSize: imageSize, twoScale: { ran: appRuns }, detections: (out.det && out.det.detections) || undefined });
+              out.app = { values: r.values, sources: Object.keys(r.fields).reduce(function (a, k) { if (r.fields[k].source) a[k] = r.fields[k].source; return a; }, {}), status: Object.keys(r.fields).reduce(function (a, k) { a[k] = r.fields[k].status; return a; }, {}), merged: appObs.length };
               out.net = window.__smdNet.splice(0);
               window.__smdres = JSON.stringify(out);
+              }).catch(function (e) { window.__smdres = JSON.stringify({ error: "tiles: " + String(e && e.message || e) }); });
             };
             if (!creg) return done(pass.obs);
             return window.__benchCrop(url, creg).then(function (cu) {
@@ -152,13 +172,20 @@ try {
     const nodeRegion = M.monitorRegion(fullObs, full.image);
     const regionMatch = (nodeRegion ? keyOf(nodeRegion) : null) === (o.region ? keyOf(o.region) : null);
     if (o.crop) writeFileSync(casePath.replace(/\.json$/, ".crop.json"), JSON.stringify(pack(o.crop, o.cropSize, { key: keyOf(o.region), region: o.region })));
+    (o.tiles || []).forEach((t, ti) => {
+      writeFileSync(casePath.replace(/\.json$/, `.tile${ti}a.crop.json`), JSON.stringify(pack(t.a.co, t.a.size, { key: keyOf(t.region), region: t.region })));
+      const tb = Object.assign({}, t.region, { scale: t.region.scaleB });
+      if (t.b) writeFileSync(casePath.replace(/\.json$/, `.tile${ti}b.crop.json`), JSON.stringify(pack(t.b.co, t.b.size, { key: keyOf(tb), region: tb })));
+    });
     if (o.confirm) writeFileSync(casePath.replace(/\.json$/, ".confirm.cache.json"), JSON.stringify(pack(o.confirm, o.confirmSize, { key: keyOf(o.creg), region: o.creg })));
     const row = { id: gt.id, natural: o.natural, bytes: Buffer.byteLength(b64, "base64"), totalMs: o.totalMs, ocrMs: { full: o.full.ms, crop: o.crop && o.crop.ms, confirm: o.confirm && o.confirm.ms },
       boxes: { full: o.full.boxes.length, crop: o.crop ? o.crop.boxes.length : null, confirm: o.confirm ? o.confirm.boxes.length : null, merged: o.app.merged },
       region: o.region ? keyOf(o.region) : null, confirmRegion: o.creg ? keyOf(o.creg) : null, confirmBenchOnly: o.confirmBenchOnly, regionMatchesNode: regionMatch,
       pluginFields: o.full.keys, boxHasConf: o.full.boxes.some((b) => b.conf != null), boxHasQ: o.full.boxes.some((b) => !!b.q), errors: [o.regionErr, o.cropErr, o.cregErr, o.confirmErr].filter(Boolean),
+      detector: o.det && { available: o.det.available, ms: o.detMs, detections: o.det.detections },
       networkCalls: o.net.length, networkUrls: o.net.map((x) => x.replace(/\?.*/, "")), app: o.app };
     summary.cases.push(row);
+    if (o.det) detOut[img] = o.det.detections;
     console.log(`${gt.id.padEnd(34)} ${o.natural.w}x${o.natural.h} total ${o.totalMs} ms (full ${row.ocrMs.full}/crop ${row.ocrMs.crop ?? "-"}/conf ${row.ocrMs.confirm ?? "-"}) boxes ${row.boxes.full}/${row.boxes.crop ?? "-"}/${row.boxes.confirm ?? "-"} net ${row.networkCalls}${regionMatch ? "" : " REGION MISMATCH"}${o.confirmBenchOnly ? " confirm(bench-only)" : ""} app ${JSON.stringify(o.app.values)}`);
   }
   const after = JSON.parse(await c.evaluate(`JSON.stringify(window.__smdNet.splice(0))`));
@@ -167,4 +194,5 @@ try {
   c.close();
   mkdirSync(dirname(SUMMARY), { recursive: true });
   writeFileSync(SUMMARY, JSON.stringify(summary, null, 2));
+  writeFileSync(SUMMARY.replace(/\.json$/, ".detections.json"), JSON.stringify(detOut));
 }

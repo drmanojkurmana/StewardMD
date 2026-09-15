@@ -4605,6 +4605,24 @@
           var dv = window.SMD_NATIVE.detectVitals ? window.SMD_NATIVE.detectVitals(dataUrl) : Promise.resolve({ available: false, detections: [] });
           return dv.then(function (r) { ctx.detections = r && r.available ? r.detections : null; return ctx; }, function () { return ctx; });
         }).then(function (ctx) {
+          // tile reads: a detected tile with no digits read gets two crops of its own; read A unions (values enter
+          // unconfirmed), read B can only confirm identical digits. Sequential, at most 4 tiles.
+          var tiles = []; try { tiles = ctx.detections && ctx.imageSize && ctx.crop && !ctx.crop.error ? V2.tileRegions(ctx.obs, ctx.detections, ctx.imageSize) : []; } catch (e) {}
+          function readCrop(reg) {
+            return smdCropDataUrl(dataUrl, reg).then(function (u) {
+              return u ? window.SMD_NATIVE.ocr(u, { languageCorrection: false }).then(function (co) { return V2.tileObservations(V2.mapCropObservations(((co && co.boxes) || []).map(function (b) { return { text: b.text, conf: b.conf, x: b.x, y: b.y, w: b.w, h: b.h }; }), reg), reg); }) : null;
+            }).catch(function () { return null; });
+          }
+          return tiles.reduce(function (p, t) {
+            return p.then(function () {
+              return readCrop(t).then(function (a) {
+                if (!a) return;
+                ctx.obs = V2.mergeObservations(ctx.obs, a);
+                return readCrop(assign2(t, { scale: t.scaleB })).then(function (b) { if (b) ctx.obs = V2.applyConfirmation(ctx.obs, b); });
+              });
+            });
+          }, Promise.resolve()).then(function () { ctx.tiles = tiles.length; return ctx; });
+        }).then(function (ctx) {
           var px = ctx.px, obsM = ctx.obs;
           var relaxed = false; try { relaxed = localStorage.getItem("smd_icu_unlabeled_auto") === "1"; } catch (e) {}
           var res = V2.parseMonitor(obsM, { px: px, imageSize: ctx.imageSize, twoScale: { ran: !!(ctx.crop && !ctx.crop.error) }, unlabeledAuto: relaxed, detections: ctx.detections || undefined });

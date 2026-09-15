@@ -47,6 +47,7 @@ if (VERIFY_OPT) PARSE_OPTS.verifyFields = VERIFY_OPT === "none" ? [] : VERIFY_OP
 // --detections <json>: on-device vital-tile detector output per image ({ "<abs jpg path>": [{cls,conf,x,y,w,h}] })
 const DETECTIONS = opt("--detections", null) ? JSON.parse(readFileSync(opt("--detections", null), "utf8")) : null;
 const DISABLE_OPT = opt("--disable", null);
+const NO_TILES = args.includes("--no-tiles");
 if (DISABLE_OPT) PARSE_OPTS.disable = DISABLE_OPT.split(",");
 const FIX = join(HERE, "fixtures");
 mkdirSync(OUT, { recursive: true });
@@ -171,6 +172,20 @@ for (const casePath of cases) {
         obs = M.applyConfirmation(obs, M.mapCropObservations(conf.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h })), creg));
         mergeNotes = obs.notes || mergeNotes; confirmMs = conf.ocrMs || null; confirmRan = true;
       } catch (e) { console.error("confirmation OCR failed for", gt.id, String(e.message).slice(0, 120)); }
+    }
+  }
+  // tile reads: detector tiles with no digits read get two crops of their own (A unions, B only confirms)
+  let tilesRan = 0;
+  if (SCALES === 2 && DETECTIONS && !NO_TILES) {
+    for (const [ti, t] of M.tileRegions(obs, DETECTIONS[img] || [], imageSize).entries()) {
+      try {
+        const a = cropPass(casePath.replace(/\.json$/, `.tile${ti}a.json`), img, t);
+        obs = M.mergeObservations(obs, M.tileObservations(M.mapCropObservations(a.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h, q: o.q })), t), t));
+        const tb = Object.assign({}, t, { scale: t.scaleB });
+        const b = cropPass(casePath.replace(/\.json$/, `.tile${ti}b.json`), img, tb);
+        obs = M.applyConfirmation(obs, M.tileObservations(M.mapCropObservations(b.obs.map((o) => ({ text: o.text, conf: o.conf, x: o.x, y: o.y, w: o.w, h: o.h })), tb), tb));
+        tilesRan++;
+      } catch (e) { console.error("tile OCR failed for", gt.id, String(e.message).slice(0, 120)); }
     }
   }
   let px = null; try { if (existsSync(img)) px = pixelSource(img); } catch (e) { /* colour + quality pixel checks become neutral */ }

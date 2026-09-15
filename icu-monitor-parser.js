@@ -321,6 +321,38 @@
     return out;
   }
 
+  /* Tile reads (on-device detector). A detector tile with no digits read inside it gets its own two crops of the
+   * ORIGINAL at two different scales: read A is unioned in (mergeObservations, values enter UNCONFIRMED), read B
+   * can only confirm identical digits (applyConfirmation). No new trust path: every parser gate still applies.
+   * Returns [{x,y,w,h,scale,scaleB,cls}] in the full image frame, best tile first, at most `max` (default 4). */
+  var TILE_MIN = 0.5, TILE_CLS = { hr: 1, spo2: 1, rr: 1, pulse: 1, etco2: 1 };   // pressures need a source label anyway
+  function tileRegions(obs, detections, imageSize, max) {
+    var SW = imageSize && imageSize.w || 1000, SH = imageSize && imageSize.h || 1000, out = [];
+    (detections || []).filter(function (d) { return d && TILE_CLS[d.cls] && d.conf >= TILE_MIN && d.w > 0 && d.h > 0; })
+      .sort(function (a, b) { return b.conf - a.conf; })
+      .forEach(function (d) {
+        // any digits already overlapping the tile: a crop would only cut through them (a cut "150/54" read "I54")
+        var read = (obs || []).some(function (o) { return digitsOf(o.text) && overlapMin(o, d) > 0.2; });
+        if (read || out.some(function (r) { return overlapMin(r.core, d) > 0.5; })) return;
+        var px = d.w * 0.15, py = d.h * 0.2;
+        var reg = { x: clamp(d.x - px, 0, 1), y: clamp(d.y - py, 0, 1), cls: d.cls, core: { x: d.x, y: d.y, w: d.w, h: d.h } };
+        reg.w = clamp(d.x + d.w + px, 0, 1) - reg.x; reg.h = clamp(d.y + d.h + py, 0, 1) - reg.y;
+        var hPx = reg.h * SH, longPx = Math.max(reg.w * SW, hPx);
+        // tile ~260 px tall for read A, ~400 px for read B; never downscale, cap the long edge at 1600 px
+        var cap = 1600 / Math.max(1, longPx);
+        reg.scale = +Math.max(1, Math.min(260 / Math.max(1, hPx), cap)).toFixed(2);
+        reg.scaleB = +Math.max(1.05, Math.min(400 / Math.max(1, hPx), cap)).toFixed(2);
+        if (reg.scaleB === reg.scale) reg.scaleB = +(reg.scale * 1.3).toFixed(2);
+        out.push(reg);
+      });
+    return out.slice(0, max || 4);
+  }
+  // A tile read's boxes (already mapped to the full frame) that belong to the tile: centre inside the detector box.
+  function tileObservations(mapped, region) {
+    var c = region && region.core; if (!c) return mapped || [];
+    return (mapped || []).filter(function (o) { var cx = o.x + o.w / 2, cy = o.y + o.h / 2; return cx >= c.x && cx <= c.x + c.w && cy >= c.y && cy <= c.y + c.h; });
+  }
+
   /* ------------------------------------------------------------------ colour sampling
    * ONE implementation for the app (canvas ImageData) and the benchmark (decoded RGB). `px` is
    * { w, h, get(x, y) -> [r, g, b] } in PIXELS. Text pixels = bright and saturated; white text is a
@@ -959,16 +991,14 @@
     var ORDER = ["hr", "spo2", "rr", "pulse", "temp", "etco2", "cvp", "pvc"];
     ORDER.forEach(function (field) {
       var f = FIELDS[field], label = findLabel(G, field, claimedLabels), L = label && label.box;
-      var det = !L ? bestDet(field) : null;
-      var chan = L && px ? channelColor(L, px) : null;
+      var det = !L ? bestDet(field) : null;      var chan = L && px ? channelColor(L, px) : null;
       var cands = [];
       function gather() { G.B.forEach(function (b) {
         if (claimed[b.i] || (L && b === L)) return;
         if (b.role !== "numeric" && b.role !== "limit" && b.role !== "limitRange") return;
         if (!valueLike(b.t, f)) return;
         if (L) { var dx = b.x - L.x, dy = b.y - L.y; if (dx < -4 * L.h || dx > 30 * L.h || dy < -1.5 * L.h || dy > 7 * L.h + 0.01) return; }
-        else if (det) { if (!inDet(b, det) || claimedByOther(b, field, det)) return; }
-        else { if (G.order.indexOf(field) < 0 || field === "temp") return; if (G.colX == null || Math.abs(b.cx - G.colX) > 0.12 || b.h < G.maxH * 0.55) return; }
+        else if (det) { if (!inDet(b, det) || claimedByOther(b, field, det)) return; }        else { if (G.order.indexOf(field) < 0 || field === "temp") return; if (G.colX == null || Math.abs(b.cx - G.colX) > 0.12 || b.h < G.maxH * 0.55) return; }
         cands.push(scoreCandidate(G, field, b, label, px, chan));
       }); }
       gather();
@@ -1073,7 +1103,7 @@
     return out.join("");
   }
 
-  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
+  return { VERSION: VERSION, THRESH: THRESH, QUALITY: QUALITY, parseMonitor: parseMonitor, monitorRegion: monitorRegion, mapCropObservations: mapCropObservations, mergeObservations: mergeObservations, confirmationRegion: confirmationRegion, applyConfirmation: applyConfirmation, tileRegions: tileRegions, tileObservations: tileObservations, sampleColors: sampleColors, explain: explain, overlaySVG: overlaySVG,
     verifyDigits: verifyDigits, VERIFY: VERIFY, VERIFY_FIELDS: VERIFY_FIELDS,
     _internals: { DIGIT_TEMPLATES: DIGIT_TEMPLATES, readGlyphs: readGlyphs, classifyGlyph: classifyGlyph, buildGraph: buildGraph, assessQuality: assessQuality, blurOf: blurOf, tiltOf: tiltOf, digitsOf: digitsOf, similarity: similarity, gluedValue: gluedValue, FIELDS: FIELDS, LABELS: LABELS, rgbToHsv: rgbToHsv, sampleRegion: sampleRegion, channelColorAtValue: channelColorAtValue, channelColor: channelColor } };
 });

@@ -6394,3 +6394,17 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - Translations of the new keys are not written here (another builder fills them, `reviewed:false`).
 - Tests: `test/wardsynq-print-lang.test.mjs`, `test/wardsynq-print-lang-routes.test.mjs`, `test/run-print-lang-ui.mjs`
   (headless Chrome print preview and PDF), `test/wardsynq-i18n.test.mjs` (negation).
+
+## 2026-09-15 ICU OCR: on-device vital-tile detector + tile re-reads; Apple on-device LLM rejected
+- **Detector**: YOLO11s (8 classes hr/spo2/rr/sbp/dbp/map/pulse/etco2, val mAP50 0.937) compiled to
+  `VitalDetector.mlmodelc` inside the VisionOcr plugin (`detectVitals`). It only ASSOCIATES a value with a field
+  when no label was read; digits stay Vision's and every parser gate applies. ~20-400 ms on iPhone 15 Pro.
+- **Tile re-reads** (`tileRegions` / `tileObservations`): a detected HR/SpO2/RR/Pulse/EtCO2 tile with no digits
+  overlapping it gets two crops; read A unions (values enter unconfirmed), read B can only confirm. Pressure
+  tiles are excluded (a crop cut "150/54" to "I54" and turned two correct ART readings into scale conflicts).
+- **Apple Foundation Models (on-device ~3B LLM) tried and REMOVED**: on 4 screens it put RR/HR on alarm limits,
+  RR on the HR value and picked label text as values, at 3-10 s per photo. As evidence it would promote wrong
+  values. Do not re-add without a benchmark showing 0 wrong picks.
+- Result on the iPhone (installed app, readImageLocal, 26 owner photos): 21/99 visible values auto-filled,
+  0 wrong, 0 network calls. Remaining misses are mostly deliberate gates (two-pass disagreement, BP source
+  unknown, confidence) and photos where Vision reads no digits at all.
