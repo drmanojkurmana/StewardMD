@@ -61,6 +61,16 @@ try {
   const goodBody = await lastBody("/ward/collect");
   ok(goodBody && goodBody.specimenType === "Whole blood" && goodBody.scannedPatientBarcode === "SMD-H1-LAB01", "the collection posts the real specimen type and the real scanned wristband: " + JSON.stringify(goodBody));
 
+  // ---- 3. BUG-MU2PR8I2: the row's action follows the order's category. ------------------------------
+  const rowOf = (name) => `[].slice.call(document.querySelectorAll("li")).filter(function (l) { var b = l.querySelector("b"); return b && b.textContent === ${JSON.stringify(name)}; })[0]`;
+  ok(await ev(`var r = ${rowOf("Chest X-ray")}; return !!r && !r.querySelector('[data-w-act^="collectspecimen:"]') && /sent for imaging/.test(r.textContent) && !!r.querySelector('[data-w-act="radiologyopen:wsq-sr-img-1"]');`),
+    "an imaging order has no Collect button; it reads sent for imaging and opens in Radiology");
+  ok(await ev(`var r = ${rowOf("Resting ECG")}; return !!r && !r.querySelector("button") && /to be performed/.test(r.textContent);`),
+    "a procedure has no Collect button and reads to be performed");
+  await click('[data-w-act="radiologyopen:wsq-sr-img-1"]');
+  ok(await waitFor(`var p = document.querySelector("li.picked"); return document.body.textContent.indexOf("Imaging worklist") >= 0 && !!p && p.textContent.indexOf("Chest X-ray") >= 0 && /on the imaging worklist/.test(p.textContent);`),
+    "Open in Radiology lands on the imaging worklist with that order picked");
+
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }
 console.log(fails ? `\n${fails} check(s) failed` : "\nALL CHECKS PASSED");

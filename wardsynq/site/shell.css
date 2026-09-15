@@ -143,15 +143,42 @@ tr.warn td { color: var(--sig-major); font-weight: 600; }
 .foot { padding: var(--sp-5) 0 0; color: var(--ink-3); font-size: var(--t-micro); }
 
 /* ---- hospitals ---- */
-.hosp-list { display: flex; flex-direction: column; max-width: 62ch; }
+/* BUG-MU2PG63U: the row is three grid children (signal bar, icon, text), and the grid had two columns,
+   so the text fell into the 3 px column one word per line. One column width for the whole page. */
+.hosp-page { max-width: 720px; }
+.hosp-page .card { grid-template-columns: minmax(0, 1fr); margin-top: var(--sp-6); }
+.hosp-page .card::before { content: none; }
+.hosp-list { display: flex; flex-direction: column; border-top: 1px solid var(--hair); }
 .hosp-row {
-  display: grid; grid-template-columns: 3px 1fr; gap: 0 10px; align-items: stretch;
-  width: 100%; padding: 9px 0; border: 0; border-bottom: 1px solid var(--hair); background: none; text-align: left; cursor: pointer; color: var(--ink);
+  display: grid; grid-template-columns: 3px 24px minmax(0, 1fr); gap: 0 12px; align-items: center;
+  width: 100%; min-height: 56px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--hair); background: none; text-align: left; cursor: pointer; color: var(--ink);
 }
-.hosp-row::before { content: ""; border-radius: 2px; background: transparent; }
-.hosp-row:hover::before { background: var(--ink); }
-.hosp-row b { display: block; font-size: var(--t-body); font-weight: 600; }
-.hosp-row span { font-size: var(--t-micro); color: var(--ink-3); }
+.hosp-row::before { content: ""; align-self: stretch; border-radius: 2px; background: transparent; }
+.hosp-row:hover::before, .hosp-row:focus-visible::before { background: var(--ink); }
+.hosp-row:focus-visible { outline: none; }
+.hosp-row > .ms { font-size: 22px; color: var(--ink-2); justify-self: center; }
+.hosp-row > div { min-width: 0; }
+.hosp-row b { display: block; font-size: var(--t-body); font-weight: 600; overflow-wrap: anywhere; }
+.hosp-row div > span { display: block; margin-top: 2px; font-size: var(--t-micro); color: var(--ink-3); overflow-wrap: anywhere; }
+.hosp-page .row .btn { min-height: 44px; }
+.hosp-item { display: flex; align-items: center; gap: var(--sp-3); border-bottom: 1px solid var(--hair); }
+.hosp-item > .hosp-row { flex: 1 1 auto; min-width: 0; border-bottom: 0; }
+.hosp-item > .hosp-rm { flex: none; min-height: 44px; }
+.hosp-item > .hosp-rm:hover { color: var(--sig-stop); }
+@media (max-width: 600px) { .hosp-item > .hosp-rm { font-size: 0; gap: 0; padding: 0 12px; } .hosp-item > .hosp-rm .ms { font-size: 20px; } }
+
+/* ---- the two-step removal dialog (BUG-MU2PHANW) ---- */
+.wsq-dialog { width: min(480px, calc(100vw - 32px)); padding: var(--sp-5); border: 1px solid var(--hair); border-radius: var(--r); background: var(--surface); color: var(--ink); }
+.wsq-dialog::backdrop { background: rgba(0, 0, 0, .55); }
+.wsq-dialog h2 { font-size: var(--t-lead); font-weight: 600; margin-bottom: var(--sp-3); overflow-wrap: anywhere; }
+.wsq-dialog p { font-size: var(--t-small); color: var(--ink-2); line-height: 1.5; margin-bottom: var(--sp-3); }
+.wsq-dialog p b { color: var(--ink); }
+.wsq-dialog .f { margin-bottom: var(--sp-3); }
+.wsq-dialog .acts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-4); }
+.wsq-dialog .acts .btn { min-height: 44px; }
+.wsq-dialog .btn.danger { font-weight: 600; }
+.wsq-dialog .btn[disabled] { opacity: .5; cursor: not-allowed; }
+@media (max-width: 600px) { .hosp-page .row { align-items: stretch; } .hosp-page .row .btn { width: 100%; justify-content: center; } }
 
 /* ---- toast ---- */
 #wsqToast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 8px 14px; border-radius: var(--r); font-size: var(--t-small); z-index: 13000; max-width: 92vw; opacity: 0; transition: opacity var(--dur) var(--ease); pointer-events: none; }

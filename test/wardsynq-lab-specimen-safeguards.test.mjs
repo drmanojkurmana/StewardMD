@@ -178,3 +178,21 @@ test("DUPLICATE/REUSED ACCESSION BLOCKED BY CONSTRUCTION: re-collecting the SAME
   const second = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr.orderId, specimenType: "Whole blood", at: "2026-09-09T08:40:00.000Z" });
   assert.notEqual(second.accessionNumber, first.accessionNumber);
 });
+
+test("BUG-MU2PR8I2: POST /ward/collect refuses an imaging or procedure order (nothing to collect), read from the order's category, and writes nothing", async () => {
+  seedHospital();
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Lab Patient E", mobile: "9876500805", gender: "male", ageYears: 41 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "4" });
+  for (const [code, category] of [["Chest X-ray", "imaging"], ["Resting ECG", "procedure"]]) {
+    const sr = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code, category });
+    assert.equal(sr.__status, 200, JSON.stringify(sr));
+    const got = await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: sr.orderId, specimenType: "Whole blood" });
+    assert.equal(got.__status, 409, JSON.stringify(got));
+    assert.equal(got.error, "not_a_specimen_order");
+    assert.equal(got.written, 0);
+  }
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "SpecimenCollection", adm.patientId)).length, 0, "no specimen written for either");
+  // The category decides, not the name: a laboratory order that mentions an x-ray is still collectable.
+  const lab = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Urine culture after x-ray contrast", category: "laboratory" });
+  assert.equal((await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: lab.orderId, specimenType: "Urine" })).__status, 200);
+});

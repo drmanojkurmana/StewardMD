@@ -1885,6 +1885,13 @@
    * stays with lab-result.js and is reached from wherever a report actually gets entered. */
   var INV_CATEGORY = [["laboratory", "Laboratory"], ["imaging", "Imaging"], ["procedure", "Procedure"], ["other", "Other"]];
   var INV_PRIORITY = [["routine", "Routine"], ["urgent", "Urgent"], ["stat", "STAT"]];
+  /* BUG-MU2PR8I2: what kind of work an order is, from the order's OWN category. The name is read only
+   * when no category was recorded at all (legacy rows), never to overrule one. */
+  function invOrderKind(c) {
+    var cat = String((c && c.category) || "").toLowerCase();
+    if (!cat) return labIsImaging(c) ? "imaging" : "specimen";
+    return cat === "imaging" || cat === "procedure" || cat === "referral" ? cat : "specimen";
+  }
   function investigationsCard(state) {
     var o = state.invOrder || {};
     var inv = state.investigations;
@@ -1894,13 +1901,18 @@
 
     var rows = coll.map(function (c) {
       var st_ = (c.collection && c.collection.state) || "ordered";
+      var kind = invOrderKind(c);
       // TASK 3.1: the phlebotomist's actual next action, not just a status word. Only offered while
       // a sample genuinely still needs taking (none/failed) - a collected or received sample has
-      // nothing left to do here.
-      var canCollect = st_ === "none" || st_ === "failed";
+      // nothing left to do here. BUG-MU2PR8I2: and only for an order that HAS a sample. A chest X-ray
+      // is acquired, not collected: an active imaging order is already on the radiology worklist
+      // (dicom.js isPendingImaging), so the row says so and opens it there. A procedure is performed.
+      var canCollect = kind === "specimen" && (st_ === "none" || st_ === "failed");
+      var stLabel = kind === "imaging" ? "sent for imaging" : kind === "procedure" ? "to be performed" : kind === "referral" ? "referral" : st_.replace(/_/g, " ");
       return "<li><b>" + esc(c.display || c.code) + "</b> <span>" + esc(c.category || "") + (c.priority && c.priority !== "routine" ? " &middot; " + esc(c.priority).toUpperCase() : "") + "</span>" +
-        " " + '<span class="w-st ' + esc(st_) + '">' + esc(st_.replace(/_/g, " ")) + "</span>" +
+        " " + '<span class="w-st ' + esc(kind === "specimen" ? st_ : "ordered") + '">' + esc(stLabel) + "</span>" +
         (canCollect ? '<button class="w-btn tiny go" data-w-act="collectspecimen:' + esc(c.serviceRequestId) + '">' + ms("colorize") + "Collect</button>" : "") +
+        (kind === "imaging" ? '<button class="w-btn tiny go" data-w-act="radiologyopen:' + esc(c.serviceRequestId) + '">' + ms("radiology") + "Open in Radiology</button>" : "") +
       "</li>";
     }).join("");
 
@@ -3121,10 +3133,9 @@
     var picked = rad.pickedRequestId;
 
     var studyRows = studies.map(function (s) {
-      var st_ = (s.collection && s.collection.state) || "ordered";
       return '<li' + (s.serviceRequestId === picked ? ' class="picked"' : '') + '>' +
         '<button class="w-btn ghost tiny" data-w-act="radpick:' + esc(s.serviceRequestId) + '"><b>' + esc(s.display || s.code) + "</b></button>" +
-        "<span>" + (s.priority && s.priority !== "routine" ? esc(s.priority).toUpperCase() + " &middot; " : "") + esc(st_.replace(/_/g, " ")) + "</span></li>";
+        "<span>" + (s.priority && s.priority !== "routine" ? esc(s.priority).toUpperCase() + " &middot; " : "") + "on the imaging worklist</span></li>";
     }).join("");
 
     var allergyRows = pc && pc.contrastAllergies && pc.contrastAllergies.length
@@ -3542,7 +3553,7 @@
    * insertion into a note the clinician is typing. Rejecting needs a reason because a model that is
    * regularly wrong about one thing is only visible if the reasons are kept. */
   function maikHistoryHtml(h) {
-    if (!h) return '<button class="w-btn ghost sm" data-w-act="maikhistory">' + ms("history") + "Earlier MaiK answers for this patient</button>";
+    if (!h) return '<div class="w-maik-acts"><button class="w-btn ghost sm" data-w-act="maikhistory">' + ms("history") + "Earlier MaiK answers for this patient</button></div>";
     if (h.busy) return '<p class="w-empty">Loading earlier answers...</p>';
     if (!h.ok) return '<p class="w-hint warn">' + ms("error") + "Earlier answers could not be loaded. Do not read this as none.</p>";
     if (!(h.interactions || []).length) return '<p class="w-empty">MaiK has not been asked about this patient before.</p>';
@@ -3643,7 +3654,7 @@
           "</div>" +
           (m.editing ? '<label class="w-f"><span>Your text (this is what will be filed)</span>' +
             '<textarea id="wMaikEdit" rows="6">' + esc(i.output) + "</textarea></label>" +
-            '<button class="w-btn go" data-w-act="maikreview:edited">' + ms("save") + "File my edited version</button>" : "")
+            '<div class="w-maik-acts"><button class="w-btn go" data-w-act="maikreview:edited">' + ms("save") + "File my edited version</button></div>" : "")
         : "");
 
     return head + body + prov + preview + acts + (f ? detailPanel(state) : "") + "</div>";
@@ -7313,7 +7324,31 @@
     }
     if (t) { try { t.focus(); } catch (e) {} }
   }
+  /* BUG-MU2PKIS3: A NATIVE SELECT IS NEVER RE-RENDERED WHILE ITS LIST IS OPEN. paint() replaces the
+   * whole screen, and the ward's loads land one after another (duty, alert cover, metrics...), so a
+   * select opened in that window was swapped for a fresh copy and its list shut under the user. A paint
+   * that arrives while a select is open is held and run once the select closes (changed, left, or
+   * another press). ponytail: the hold is capped at 15 s, because a browser that never reports the list
+   * closing must not freeze a clinical screen. */
+  var _openSelect = null, _openSelectAt = 0, _paintHeld = false;
+  function selectIsOpen() {
+    return !!_openSelect && _openSelect.isConnected && Date.now() - _openSelectAt < 15000;
+  }
+  function onSelectPress(e) {
+    var t = e.target;
+    if (t && t.tagName === "SELECT") { _openSelect = t; _openSelectAt = Date.now(); if (!_paintHeld) setTimeout(flushHeldPaint, 15050); return; }
+    if (_openSelect && e.type !== "keydown") selectClosed();
+  }
+  function selectClosed(e) {
+    if (e && e.target !== _openSelect) return;
+    _openSelect = null;
+    // After the change handlers have read the select's value, never before.
+    if (_paintHeld) setTimeout(flushHeldPaint, 0);
+  }
+  function flushHeldPaint() { if (_paintHeld && !selectIsOpen()) paint(); }
   function paint() {
+    if (selectIsOpen()) { _paintHeld = true; return; }
+    _paintHeld = false;
     var canvas = document.getElementById("wCanvas");
     var cy = canvas ? canvas.scrollTop : 0;
     var sy = (typeof window !== "undefined" && window.scrollY != null) ? window.scrollY : 0;
@@ -8074,8 +8109,8 @@
       .then(function (r) { if (settle(r, "ECG reference recorded.")) loadCardiology(); else paint(); })
       .catch(function () { st.busy = false; st.err = "Could not record the ECG reference."; paint(); });
   }
-  function radiologyOpen() {
-    st.view = "radiology"; st.radiology = null; paint(); loadInvestigations().then(loadRadiology);
+  function radiologyOpen(pickId) {
+    st.view = "radiology"; st.radiology = pickId ? { pickedRequestId: pickId } : null; paint(); loadInvestigations().then(loadRadiology);
   }
   function radStudyEntry(list, serviceRequestId) {
     for (var i = 0; i < (list || []).length; i++) if (list[i].serviceRequestId === serviceRequestId) return list[i];
@@ -10086,6 +10121,7 @@
    * answer it depends on is given. "change" (not "input") so typing in a text box never loses focus. */
   function onFormChange(ev) {
     var t = ev && ev.target;
+    if (t && t.tagName === "SELECT" && t.hasAttribute("data-w-act")) { dispatch(t.getAttribute("data-w-act")); return; }
     /* D5: the Patient copy screen's portal preview follows the scope the clinician is about to release. */
     if (st.view === "board" && t && t.id === "wBoardDept") { st.boardDept = t.value; paint(); return; }
     if (t && t.id === "wNoteTpl") { st.noteTemplateId = t.value; st.noteResult = null; paint(); return; }
@@ -11358,6 +11394,9 @@
 
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-w-act]"); if (!b) return;
+    // A select acts when its value changes (onFormChange), never on the click that opens it: that click
+    // re-rendered the roster and closed the list before anything could be chosen.
+    if (b.tagName === "SELECT") return;
     dispatch(b.getAttribute("data-w-act"));
   }
   /* One dispatcher for a click on a data-w-act button AND for the wardsynq.com shell, which opens
@@ -11651,7 +11690,7 @@
     if (cmd === "cardiologyload") { loadCardiology(); return; }
     if (cmd === "cardiolinksave") { cardioLinkSave(); return; }
     if (cmd === "cardioecgsave") { cardioEcgSave(); return; }
-    if (cmd === "radiologyopen") { radiologyOpen(); return; }
+    if (cmd === "radiologyopen") { radiologyOpen(arg); return; }
     if (cmd === "radiologyload") { loadInvestigations().then(loadRadiology); return; }
     if (cmd === "radpick") { radiologyPick(arg); return; }
     if (cmd === "radprotocolsave") { radiologyProtocolSave(); return; }
@@ -12036,6 +12075,8 @@
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("change", onFormChange); el.addEventListener("change", onFormChange);
+    ["mousedown", "pointerdown", "keydown"].forEach(function (t) { el.removeEventListener(t, onSelectPress, true); el.addEventListener(t, onSelectPress, true); });
+    ["change", "focusout"].forEach(function (t) { el.removeEventListener(t, selectClosed, true); el.addEventListener(t, selectClosed, true); });
     // Live search: re-render only the roster so the search box keeps focus and its caret.
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     document.removeEventListener("keydown", onKey); document.addEventListener("keydown", onKey);

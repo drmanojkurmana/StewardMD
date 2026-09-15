@@ -32,7 +32,10 @@ window.fetch = function (url, opts) {
     return reply({ ok: true, patientId: PATIENT_ID, requests: [{
       serviceRequestId: SR_ID, code: "Renal profile", display: "Renal profile", category: "laboratory", priority: "routine",
       collection: COLLECTED ? { state: "collected", at: "2026-09-09T09:00:00.000Z", specimenId: "wsq-spec-1" } : { state: "none", detail: "No sample has been taken for this request." },
-    }], awaitingCollection: COLLECTED ? 0 : 1, inTransit: COLLECTED ? 1 : 0 });
+    }, /* BUG-MU2PR8I2: an imaging and a procedure order on the same list. Neither has a sample. */
+    { serviceRequestId: "wsq-sr-img-1", code: "Chest X-ray", display: "Chest X-ray", category: "imaging", priority: "routine", collection: { state: "none" } },
+    { serviceRequestId: "wsq-sr-ecg-1", code: "Resting ECG", display: "Resting ECG", category: "procedure", priority: "routine", collection: { state: "none" } }
+    ], awaitingCollection: COLLECTED ? 0 : 1, inTransit: COLLECTED ? 1 : 0 });
   }
   if (u.indexOf("/ward/collect") >= 0 && (opts && opts.method) === "POST") {
     if (body.scannedPatientBarcode && body.scannedPatientBarcode.toUpperCase() !== MRN) {

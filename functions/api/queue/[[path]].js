@@ -3872,15 +3872,17 @@ export async function onRequest(context) {
     }
     if (method === "GET" && seg === "whoami") {
       // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
-      let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
+      let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "", orgOwner = false;
       // For EVERY identity kind, not only staff: an account that is an invited member (or the owner)
       // of the hospital holds that hospital's role, and a console that read the global "doctor" role
       // instead hid the Admin Center from the person who owns the hospital. The server still
       // re-checks every mutation; this only tells the UI what to offer.
-      if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; }
+      if (orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok && az.role) role = az.role; orgOwner = !!(az.ok && az.owner); }
       const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
       let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "", billing: BILL.billingEnabled(env),
+        // UI hints for Remove hospital only; POST /org/delete re-checks both.
+        ...(orgOwner ? { orgOwner: true } : {}), ...(actor.isOwner === true ? { platformOwner: true } : {}), ...(actor.mfaSetupOnly ? { twoStepRequired: true } : {}) }, 200, request);
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
@@ -4381,7 +4383,16 @@ export async function onRequest(context) {
         if (body.connectTenantId) await wsqLinkTenantOrg(env, updated);
         return json({ ok: true, org: updated }, 200, request);
       }
-      if (seg === "org" && sub === "delete") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request); }
+      /* REMOVING A HOSPITAL IS THE OWNER'S ACT (BUG-MU2PHANW). It was any staff admin's, with no typed
+       * confirmation. Now: the hospital's owner or the platform owner only, the body must carry
+       * confirm:"DELETE", and it stays a soft delete audited in the same commit (deleteOrg). */
+      if (seg === "org" && sub === "delete") {
+        const az = await azOrg(null);
+        const platformOwner = actor.isOwner === true && !!(await ORG.getOrg(env, body.orgId));
+        if (!(az.ok && az.owner === true) && !platformOwner) return az.ok ? json({ ok: false, error: "owner_only" }, 403, request) : deny(az);
+        if (String(body.confirm || "") !== "DELETE") return json({ ok: false, error: "confirm_required", detail: "type DELETE to remove this hospital" }, 422, request);
+        return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request);
+      }
       // One-tap: turn a Connect EMR connection into an OPD hospital (so it appears in the app's Hospital list
       // and its FHIR worklist auto-imports). Called from the Connect wizard's "Use in OPD" button.
       if (seg === "org" && sub === "from-connect") {
