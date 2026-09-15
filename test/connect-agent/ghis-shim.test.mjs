@@ -2,7 +2,7 @@
 //   node --test test/connect-agent/ghis-shim.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { serveGhisProxy, labOrders, detailFor, getLabDetail, needsPatientSections, patientIdOf, normalizeAnalyte, normalizeResult, canonicalLabName, numResult, parseReportSections, sectionBody } from '../../connect-agent/phone/ghis-shim.mjs';
+import { serveGhisProxy, labOrders, detailFor, getLabDetail, needsPatientSections, patientIdOf, normalizeAnalyte, normalizeResult, canonicalLabName, numResult, parseReportSections, sectionBody, notRead } from '../../connect-agent/phone/ghis-shim.mjs';
 
 const patient = { patientId: 'K001', episodeId: 'V9' };
 const sections = [
@@ -231,4 +231,20 @@ test('radiology reports parse into IMPRESSION and FINDINGS sections', () => {
   assert.equal(rep.impression, 'Right lower zone consolidation.');
   assert.equal(rep.findings, 'Right lower zone opacity.');
   assert.equal(rep.sections.length, 3);
+});
+
+test('absent is not negative: a section the adapter could not read says so, an empty one does not', () => {
+  const sections = [
+    { resource: 'labs', unreadable: 'not-proven' },
+    { resource: 'radiology', error: 'request failed in the page: aborted' },
+    { resource: 'medications', rows: [], via: 'endpoint' },
+  ];
+  assert.match(notRead(sections, 'labs', 'Lab results').unreadable, /^Lab results were not read: the agent never learned this screen for this hospital\./);
+  assert.match(notRead(sections, 'radiology', 'Radiology reports').unreadable, /^Radiology reports were not read: the hospital did not answer\./);
+  assert.deepEqual(notRead(sections, 'medications', 'Medications'), {}, 'proven and empty is "none"');
+  assert.match(notRead([], 'medications', 'Medications').unreadable, /never learned/, 'no screen at all is not read either');
+  const body = serveGhisProxy({ path: '/lab?patientId=K1', sections, patient: { patientId: 'K1' } }).body;
+  assert.deepEqual(body.orders, []);
+  assert.match(body.unreadable, /^Lab results were not read/);
+  assert.equal(/—/.test(body.unreadable), false, 'no em-dash');
 });

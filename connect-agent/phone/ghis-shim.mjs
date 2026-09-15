@@ -412,6 +412,15 @@ export function historyEntries(sections, patient) {
   return { entries };
 }
 
+/* ABSENT IS NOT NEGATIVE (rulebook 5.2). A resource the adapter could not read says so, so "no
+ * medicines" on screen always means the hospital has none. */
+export function notRead(sections, resource, label) {
+  const own = (Array.isArray(sections) ? sections : []).filter((s) => s && s.resource === resource);
+  if (own.some((s) => Array.isArray(s.rows))) return {};
+  const why = own.some((s) => s.error) ? 'the hospital did not answer.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
+  return { unreadable: label + ' were not read: ' + why };
+}
+
 /**
  * serveGhisProxy({ method, path, patients, sections, patient }) -> { status, body } | null
  * `path` is the proxy path with query (e.g. "/lab?patientId=MR1"). null = not an endpoint this shim
@@ -432,11 +441,11 @@ export function serveGhisProxy({ method = 'GET', path, patients = [], sections =
     case 'demographics': return { status: 200, body: { phone: '', region: '' } };
     case 'assessment': return { status: 200, body: { fields: [], authorized: null, raw: '', htmlLen: 0 } };
     case 'inv-search': case 'drug-search': return { status: 200, body: { rows: [] } };
-    case 'lab': return { status: 200, body: { orders: labOrders(sections, patient).orders } };
+    case 'lab': return { status: 200, body: Object.assign({ orders: labOrders(sections, patient).orders }, notRead(sections, 'labs', 'Lab results')) };
     case 'lab-detail': { const d = labOrders(sections, patient); const det = d.detailOf ? d.detailOf(q.get('renderId')) : null; return { status: 200, body: det || { group: '', department: '', tests: [] } }; }
-    case 'radiology': return { status: 200, body: { orders: radiologyOrders(sections, patient).orders } };
+    case 'radiology': return { status: 200, body: Object.assign({ orders: radiologyOrders(sections, patient).orders }, notRead(sections, 'radiology', 'Radiology reports')) };
     case 'radiology-report': return { status: 200, body: radiologyOrders(sections, patient).reportOf(q.get('resultid')) };
-    case 'medications': return { status: 200, body: medicationRows(sections) };
+    case 'medications': return { status: 200, body: Object.assign(medicationRows(sections), notRead(sections, 'medications', 'Medications')) };
     case 'history': return { status: 200, body: historyEntries(sections, patient) };
     case 'profile': return { status: 200, body: { labs: labOrders(sections, patient).orders, radiology: radiologyOrders(sections, patient).orders, medications: medicationRows(sections).rows, phone: '' } };
     default: return null;

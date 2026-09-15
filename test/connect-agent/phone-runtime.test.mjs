@@ -4,6 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fieldForHeader, mapRow, mapRows, READ_ROWS, readRowsExpression, hospitalLabel, isGimsrOrigin, fillPath, readWorklist, readPatientDetails } from '../../connect-agent/phone/runtime.mjs';
+import { parseFetchExpression } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 test('fieldForHeader tolerates the labels Indian EMRs actually use', () => {
   assert.equal(fieldForHeader('UHID'), 'mrn');
@@ -130,12 +131,27 @@ test('readWorklist names the reason when nothing usable comes back', async () =>
   await assert.rejects(readWorklist({ plugin: fakePlugin({ 'https://h/x': [{ 'S.No': '1' }] }), origin: 'https://h', replay, settleMs: 0 }), /no patient rows found at \/x \(1 rows read/);
 });
 
-test('readPatientDetails reads each detail view for the patient and keeps per-view errors', async () => {
-  const plugin = fakePlugin({ 'https://h/meds/K1': [{ Drug: 'Amox' }] });
-  plugin.evaluate = async () => { throw new Error('page gone'); };
-  const bad = await readPatientDetails({ plugin, origin: 'https://h', replay: [{ resourceHint: 'labs', pathTemplate: '/labs/{id}', rowsSelector: 'tr', headers: [] }], patient: { patientId: 'K1' }, settleMs: 0 });
-  assert.deepEqual(bad, [{ resource: 'labs', error: 'page gone' }]);
-  const good = fakePlugin({ 'https://h/meds/K1': [{ Drug: 'Amox' }] });
-  const secs = await readPatientDetails({ plugin: good, origin: 'https://h', replay: [{ resourceHint: 'medications', pathTemplate: '/meds/{id}', rowsSelector: 'tr', headers: ['Drug'] }], patient: { patientId: 'K1' }, settleMs: 0 });
-  assert.deepEqual(secs, [{ resource: 'medications', rows: [{ Drug: 'Amox' }], via: 'page' }]);
+test('readPatientDetails never opens a page: an unproven screen is unreadable, a proven one replays its call', async () => {
+  const navigated = [];
+  const plugin = {
+    async navigate(a) { navigated.push(a.url); },
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (!req) return { result: '{}' };
+      const text = /GetMeds/.test(req.url) ? '[{"Drug":"Amox"}]' : '[]';
+      return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text }) };
+    },
+  };
+  const proven = (resourceHint, path) => ({ resourceHint, pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Drug'], proof: { status: 'proven' }, endpoints: [{ method: 'GET', path, role: 'data', params: { id: { from: 'worklist', field: 'patientId' } } }] });
+  const replay = [
+    { resourceHint: 'labs', pathTemplate: 'https://h/labs/{id}', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'unproven' } },
+    proven('medications', '/GetMeds?id'),
+    proven('radiology', '/GetRad?id'),
+  ];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.deepEqual(navigated, [], 'no page was loaded');
+  assert.deepEqual(secs.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-proven' });
+  assert.deepEqual(secs.find((s) => s.resource === 'medications').rows, [{ Drug: 'Amox' }]);
+  assert.deepEqual(secs.find((s) => s.resource === 'radiology').rows, [], 'proven and empty is an empty answer, not a missing one');
 });

@@ -405,6 +405,11 @@
           return new Response(JSON.stringify(r.body), { status: r.status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
         });
       }
+      /* ABSENT IS NOT NEGATIVE: a section the adapter could not read says why, never "none found". */
+      function notReadHtml(j) {
+        var why = j && (j.unreadable || (j.error === 'adapter_read_failed' ? (j.detail || 'The hospital could not be read.') : ''));
+        return why ? '<div class="ghis-lab-empty">' + esc(why) + '</div>' : '';
+      }
       (function installAdapterProxy() {
         if (window.__smdAdapterProxyInstalled) return;
         window.__smdAdapterProxyInstalled = true;
@@ -1249,6 +1254,8 @@
           try { if (sec.parentNode && sec.parentNode.lastElementChild !== sec) sec.parentNode.appendChild(sec); } catch (e) {}
           authFetch('/medications?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
+              var nr = notReadHtml(j);
+              if (nr) { sec.innerHTML = nr; return; }
               var rows = (j && j.rows) || [];
               if (rows.length === 0) { sec.innerHTML = ''; return; }
               var html = '<details class="ghis-med-fold"><summary class="ghis-lab-section-title" style="cursor:pointer;list-style:none">' + wIco("pills") + ' Medications · ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + ' <span style="font-weight:400;opacity:.6">(tap to expand)</span></summary>';
@@ -1277,6 +1284,8 @@
                 body.innerHTML = '<div class="ghis-lab-empty">Your session expired — sign in again in the Ward panel.</div>';
                 return;
               }
+              var nr = notReadHtml(j);
+              if (nr) { body.innerHTML = nr; return; }
               var orders = (j && j.orders) || [];
               if (orders.length === 0) {
                 body.innerHTML = '<div class="ghis-lab-empty">No lab orders found for this patient.</div>';
@@ -1315,6 +1324,8 @@
           if (!sec) return;
           authFetch('/radiology?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
+              var nr = notReadHtml(j);
+              if (nr) { sec.innerHTML = nr; return; }
               var orders = (j && j.orders) || [];
               if (orders.length === 0) { sec.innerHTML = ''; return; }
               var html = '<div class="ghis-lab-section-title">' + wIco("xray") + ' Imaging · ' + orders.length + ' stud' + (orders.length === 1 ? 'y' : 'ies') + '</div>';

@@ -93,7 +93,10 @@ window.GHIS.__setAgentApi(function (path, tid, opts) {
     { resourceHint: "worklist", pathTemplate: "https://his.apollo.example/ward/list", method: "GET", rowsSelector: "#wl tbody tr", headers: ["MRN", "Patient Name", "Age/Sex", "Ward"], singleRecord: false,
       endpoints: [ { method: "GET", path: "/ward/list" }, { method: "GET", path: "/api/ward/patients?unit&start&length" } ] },
     { resourceHint: "medications", pathTemplate: "https://his.apollo.example/ward/list", method: "GET", rowsSelector: "#rx tbody tr", headers: ["Drug", "Dose", "Route"], singleRecord: false,
-      endpoints: [ { method: "POST", path: "/api/visit/activate", bodyKeys: ["__RequestVerificationToken", "recordNo"], requestKind: "form" }, { method: "GET", path: "/api/ward/medications?mrn" } ] } ] } });
+      proof: { status: "proven", kind: "html" },
+      endpoints: [
+        { method: "POST", path: "/api/visit/activate", bodyKeys: ["__RequestVerificationToken", "recordNo"], requestKind: "form", role: "prerequisite", params: { __RequestVerificationToken: { token: true }, recordNo: { from: "worklist", field: "MRN" } } },
+        { method: "GET", path: "/api/ward/medications?mrn", role: "data", params: { mrn: { from: "worklist", field: "MRN" } } } ] } ] } });
   if (path === "/sessions" && opts.method === "POST" && window.__replayHospital) return Promise.resolve({ s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-r", state: "CREATED", reuse: true, deployment: { id: "dep-r", origins: ["https://his.apollo.example"], activeVersionId: "ver-r" } } });
   if (path === "/sessions" && opts.method === "POST") return Promise.resolve(window.__sessionResp || { s: 200, d: { ok: true, sessionId: "sess-1", deploymentId: "dep-kims", state: "CREATED", reuse: true, deployment: { id: "dep-kims", origins: ["https://hims.kims.example"], activeVersionId: "ver-1" } } });
   if (path === "/sessions/sess-1/handoff") return Promise.resolve({ s: 200, d: { ok: true, origins: ["https://hims.kims.example"], pendingOrigins: [] } });
@@ -162,8 +165,8 @@ try {
   ok(await ev(`return window.GHIS.ensureSession().then(function(ok){ return ok; });`) === true, "ensureSession is true through an adapter session (Assess can open)");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/status").then(function(r){return r.json();}).then(function(j){ return j.connected===true && j.userId==="adapter"; });`) === true, "GET /status through the adapter says connected");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/patients").then(function(r){return r.json();}).then(function(j){ return Array.isArray(j) && j.length===2 && j[0].patientId==="K001"; });`) === true, "GET /patients is the adapter's roster in the proxy's array shape");
-  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===1 && j.rows[0].drugText==="Amoxicillin" && j.rows[0].dosage==="500 mg TDS"; });`) === true, "GET /medications reads the adapter's medications view into the proxy row shape");
-  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/profile?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.medications.length===1 && Array.isArray(j.labs) && Array.isArray(j.radiology); });`) === true, "GET /profile merges the cached patient views without a second browser read");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/medications?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.rows && j.rows.length===0 && /^Medications were not read/.test(j.unreadable); });`) === true, "GET /medications for a screen the agent never proved says it was not read");
+  ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/profile?patientId=K001").then(function(r){return r.json();}).then(function(j){ return j.medications.length===0 && Array.isArray(j.labs) && Array.isArray(j.radiology); });`) === true, "GET /profile merges the cached patient views without a second browser read");
   ok(await ev(`return window.__pluginCalls.filter(function(c){return c.m==="open";}).length===2;`) === true, "one browser read per patient, then the cache serves every endpoint");
   ok(await ev(`return fetch(window.GHIS.getProxyBase()+"/prescribe",{method:"POST",body:"{}"}).then(function(r){return r.status;});`) === 501, "writes through an adapter answer 501 emr_write_disabled");
   ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="setMode"&&c.a.mode==="agent"&&c.a.banner==="Reading hims.kims.example for your ward list";});`) === true, "browser was switched to agent mode with the reading banner");
@@ -172,9 +175,9 @@ try {
   ok(await ev(`return document.getElementById("ghisFBranch").innerText.indexOf("MICU")>=0;`) === true, "branch filter populated from the adapter rows");
 
   await ev(`document.querySelector("#ghisPatientList .ghis-pt-card").click(); return 1;`);
-  ok(await waitFor(`return document.getElementById("ghisLabBody").innerText.indexOf("Amoxicillin")>=0;`, 8000), "tapping a patient reads the adapter's medications view into the detail drawer");
+  ok(await waitFor(`return document.getElementById("ghisLabBody").innerText.indexOf("Medications were not read")>=0;`, 8000), "the drawer says medications were not read instead of showing nothing");
   ok(await ev(`return document.getElementById("ghisLabTitle").textContent==="Ravi Kumar (K001)";`) === true, "drawer titled with the patient");
-  ok(await ev(`return window.__pluginCalls.some(function(c){return c.m==="navigate"&&c.a.url==="https://hims.kims.example/ip/meds/K001";}) && window.__open===false;`) === true, "detail read navigated to the filled path and closed the browser");
+  ok(await ev(`return !window.__pluginCalls.some(function(c){return c.m==="navigate"&&/\\/ip\\/meds\\//.test(c.a.url);}) && window.__open===false;`) === true, "the patient read never loaded a page and closed the browser");
 
   await ev(`window.closeLabDrawer(); window.ghisDisconnect(); return 1;`);
   ok(await ev(`return document.getElementById("ghisHospital").style.display!=="none";`) === true, "sign out returns to the hospital picker");

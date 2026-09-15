@@ -208,6 +208,11 @@ export function viewsByResource(replay) {
   return by;
 }
 
+/** A view discovery proved: its data call is known and was replayed against the screen. */
+export function provenView(v) {
+  return !!(v && v.proof && v.proof.status === 'proven' && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === 'data'));
+}
+
 function pathToUrl(origin, path) {
   if (!path) return origin;
   if (/^https?:/i.test(path)) return path;
@@ -379,14 +384,6 @@ export function endpointCandidates(view, patient) {
   return out;
 }
 
-/* A recorded selector names a panel inside the full page ("#accordionEx table ... tr"); the data call
- * answers with the fragment alone, where that container is missing. Fall back to any table's rows,
- * or the block's own root, before concluding there is nothing. */
-function fallbackView(view) {
-  if (view.block) return Object.assign({}, view, { rowsSelector: view.rowsSelector.replace(/^#[\w-]+\s+/, '') });
-  return Object.assign({}, view, { rowsSelector: 'table tbody tr', headers: [] });
-}
-
 export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
   /* NO HOSPITAL IS SPECIAL HERE. The views are exactly what discovery proved for this hospital; the
    * runtime never injects an endpoint it knows from elsewhere (owner, 2026-09-13: GHIS is the test,
@@ -396,13 +393,17 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
   for (const r of DETAIL_RESOURCES) {
     const v = views[r];
     if (!v) continue;
-    /* Where to look, in order: the view's own page with the patient filled in (a labs page by
-     * recordNo), then the data calls that page made (the medicines fragment by id). A page shared with
-     * the worklist (the single-page Doctor Home) is skipped: it never shows this patient's panel on
-     * its own. Each place is read with the recorded selector, then with the fallback. */
+    /* NEVER A PAGE. A screen discovery could not prove is reported unreadable, never loaded and scraped:
+     * reading GHIS pages for one patient sat on a two-link menu for 30 minutes on the owner's iPhone
+     * (2026-09-15). The hand-built adapter never loads a page either. */
+    if (!provenView(v)) { sections.push({ resource: r, unreadable: 'not-proven' }); continue; }
     let replayed = null;
     const vo = viewOrigin(v, origin);
-    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; replayed = null; }
+    try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) {
+      if (e && e.name === 'NotSignedIn') throw e;
+      sections.push({ resource: r, error: String((e && e.message) || e) });
+      continue;
+    }
     if (replayed) {
       sections.push(withRoles({ resource: r, rows: replayed, via: 'endpoint' }, v));
       /* THE CHAIN: a proven detail view (one lab result, one radiology report) is read for each row of
@@ -442,24 +443,8 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
       }
       continue;
     }
-    const own = fillPath(v.pathTemplate || v.path, patient);
-    const origin_ = vo;
-    const shared = views.worklist && samePage(pathToUrl(origin, own), pathToUrl(origin, views.worklist.pathTemplate || views.worklist.path));
-    const places = [];
-    if (!shared) places.push(own);
-    for (const c of endpointCandidates(v, patient)) places.push(c);
-    let rows = [];
-    let lastErr = null;
-    for (const place of places) {
-      for (const candidate of [Object.assign({}, v, { pathTemplate: place }), Object.assign(fallbackView(v), { pathTemplate: place })]) {
-        try { rows = await readView({ plugin, origin: vo, view: candidate, settleMs, maxWaitMs }); } catch (e) { lastErr = e; rows = []; }
-        if (rows.length) break;
-      }
-      if (rows.length) break;
-    }
-    if (!rows.length && lastErr) { sections.push({ resource: r, error: lastErr.message }); continue; }
-    if (rows.length && onRead) onRead({ resource: r, via: 'page' });
-    sections.push(withRoles({ resource: r, rows, via: 'page' }, v));
+    // Proven, and this patient has none (no medicines charted): an empty answer, not a missing one.
+    sections.push(withRoles({ resource: r, rows: [], via: 'endpoint' }, v));
   }
   return sections;
 }
