@@ -317,23 +317,6 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
     .sort((a, b) => Number(!!(b.proof && b.proof.status === 'proven')) - Number(!!(a.proof && a.proof.status === 'proven')));
-  if (isGimsrOrigin(origin) && !candidates.some((c) => (c.endpoints || []).some((e) => /GetIPWL/i.test(e.path)))) {
-    candidates.unshift({
-      resourceHint: 'worklist',
-      pathTemplate: 'https://ghis.gitam.edu/Doctor/Home',
-      proof: { status: 'proven', kind: 'json' },
-      endpoints: [{
-        method: 'GET',
-        path: '/Doctor/Home/GetIPWL?NursingStationId&PatientId&FloorId&Emp_ID&Dept_ID&Type=IPWorkList&__RequestVerificationToken',
-        role: 'data',
-        params: {
-          Type: { constant: 'IPWorkList' },
-          __RequestVerificationToken: { token: true }
-        },
-        proof: { status: 'proven', kind: 'json' }
-      }]
-    });
-  }
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
     try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }

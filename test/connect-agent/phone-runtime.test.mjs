@@ -155,3 +155,21 @@ test('readPatientDetails never opens a page: an unproven screen is unreadable, a
   assert.deepEqual(secs.find((s) => s.resource === 'medications').rows, [{ Drug: 'Amox' }]);
   assert.deepEqual(secs.find((s) => s.resource === 'radiology').rows, [], 'proven and empty is an empty answer, not a missing one');
 });
+
+test('the GIMSR sign-in host gets no built-in ward list call: only what discovery recorded is sent', async () => {
+  const sent = [];
+  const plugin = {
+    async navigate() {},
+    async currentUrl() { return { url: 'https://ghis.gitam.edu/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      const req = parseFetchExpression(expression);
+      if (req) { sent.push(req.url); return { result: JSON.stringify({ status: 200, contentType: 'application/json', url: req.url, text: '[]' }) }; }
+      return { result: '[]' };
+    },
+  };
+  const replay = [{ resourceHint: 'worklist', pathTemplate: 'https://ghis.gitam.edu/Doctor/Home', rowsSelector: 'tr', headers: ['Patient ID'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Doctor/Home/DashboardUnit?type', role: 'data', params: { type: { constant: 'docopdlist' } } }] }];
+  await assert.rejects(readWorklist({ plugin, origin: 'https://gimsrlogin.gitam.edu', replay, settleMs: 0, maxWaitMs: 5 }), /no patient rows found/);
+  assert.ok(sent.length > 0, 'the recorded call was sent');
+  assert.ok(!sent.some((u) => /GetIPWL/.test(u)), 'no call the adapter never recorded: ' + JSON.stringify(sent));
+});
