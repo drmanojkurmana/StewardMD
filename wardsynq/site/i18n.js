@@ -3594,6 +3594,16 @@
     "ward.disposition-transferred": "Transferred to another hospital",
     "ward.disposition-lama": "Left against medical advice (LAMA / DAMA)",
     "ward.disposition-died": "Died",
+    "ward.identity-could-not-be-loaded": "identity could not be loaded",
+    "ward.identity-not-recorded": "identity not recorded",
+    "ward.staff-identity-detail": "Name: {name} · Employee ID: {employeeId} · Role: {role}",
+    "ward.name-not-set": "Name not set",
+    "ward.not-recorded4": "not recorded",
+    "ward.by-who": "by {who}",
+    "ward.witness-who": "witness {who}",
+    "ward.signed-by-who": "signed by {who}",
+    "ward.prescribed-by-who": "prescribed by {who}",
+    "ward.checked-by-who": "{outcome} by {who}",
     /* end ward.js keys */
     /* site pages keys (ui-i18n-site) */
     /* wardsynq/site/shell.js */
@@ -4262,6 +4272,11 @@
     "site.admin.staff.addTitle": "Add or update a staff member",
     "site.admin.staff.hospitalCode": "Hospital code for sign-in:",
     "site.admin.staff.identityLabel": "Identity (staff ID or email)",
+    "site.admin.staff.nameCol": "Name (employee ID)",
+    "site.admin.staff.nameNotSet": "Name not set",
+    "site.admin.staff.nameLabel": "Name as the ward reads it",
+    "site.admin.staff.employeeId": "Employee ID",
+    "site.admin.staff.blankKeeps": "blank keeps what is saved",
     "site.admin.staff.regNo": "Registration number (prescribers)",
     "site.admin.staff.regNoPlaceholder": "leave blank if not a prescriber",
     "site.admin.staff.alertMobileLabel": "Alert mobile (critical-result SMS)",

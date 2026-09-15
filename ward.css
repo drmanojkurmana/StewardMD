@@ -668,3 +668,10 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 
 /* The staff language: a translated safety text keeps the English it was translated from right under it. */
 #smdWard .w-en { display: block; flex-basis: 100%; font-size: .82em; font-weight: 400; opacity: .85; margin-top: 2px; }
+
+/* Owner 2026-09-16: a staff member named on a chart (ward.js staffWho). Reads as text; the dotted line says it opens
+ * the full identity on a click or tap, and the tooltip carries it on hover. */
+#smdWard .w-who { display: inline; background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; text-align: inherit; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
+#smdWard span.w-who { cursor: default; text-decoration: none; }
+#smdWard .w-who:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+#smdWard .w-who-x { color: var(--muted, #666); }

@@ -375,8 +375,20 @@ export function membership(o = {}) {
     /* S3 P0 (owner decision O4): the mobile a critical-result SMS goes to when no phone confirmed the push.
      * Staff contact data set by an admin, never a patient's. Digits with an optional leading +, else empty. */
     alertMobile: alertMobileOf(o.alertMobile),
+    /* Owner 2026-09-16: WHO GAVE THE DRUG, WHO ASKED FOR IT. The chart stores the sign-in id an audit follows; the
+     * ward reads the person: the name the hospital records for this member and its own employee id. Either can be
+     * blank. A name that is a phone number, an email or an account id is not kept (notAName; the member route refuses
+     * one), and an employee id is what the hospital typed (numbers are normal there), never an account id. */
+    displayName: notAName(o.displayName) ? "" : s(o.displayName).trim().slice(0, 80),
+    employeeId: /^(fb|cfa|ghis|uid):/i.test(s(o.employeeId).trim()) ? "" : s(o.employeeId).trim().slice(0, 40),
     active: o.active !== false, createdAt: Number(o.createdAt) || 0
   };
+}
+/* PURE. A sign-in value that is not a person's name: a mobile number, an email, or an internal account id ("fb:",
+ * "cfa:", "ghis:", "uid:"). Personal data or opaque, never shown to the ward as a name. */
+export function notAName(v) {
+  const x = s(v).trim();
+  return /^\+?[\d\s().-]{7,}$/.test(x) || /@/.test(x) || /^(fb|cfa|ghis|uid):/i.test(x);
 }
 
 // ---- TENANT ISOLATION (pure predicates — the server enforces these on every org-scoped call) ----

@@ -1198,9 +1198,9 @@
         roleNoteRows(c).map(function (l) { return '<p class="quiet"><b>' + c.esc(l[0]) + ":</b> " + c.esc(l[1]) + "</p>"; }).join("") + "</div>" +
         twoStepPolicyCard(c) +
         '<div class="card"><h2>' + c.esc(T(c, "site.admin.staff.title", "Staff")) + "</h2>" +
-        (members.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.staff.identity", "Identity")) + "</th><th>" + c.esc(T(c, "site.admin.staff.role", "Role")) + "</th><th>" + c.esc(T(c, "site.admin.staff.active", "Active")) + "</th><th>" + c.esc(T(c, "site.admin.staff.email", "Email")) + "</th><th>" + c.esc(T(c, "site.admin.staff.pinSet", "PIN set")) + "</th><th>" + c.esc(T(c, "site.admin.staff.alertMobile", "Alert mobile")) + "</th><th></th></tr></thead><tbody>" +
+        (members.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.staff.identity", "Identity")) + "</th><th>" + c.esc(T(c, "site.admin.staff.nameCol", "Name (employee ID)")) + "</th><th>" + c.esc(T(c, "site.admin.staff.role", "Role")) + "</th><th>" + c.esc(T(c, "site.admin.staff.active", "Active")) + "</th><th>" + c.esc(T(c, "site.admin.staff.email", "Email")) + "</th><th>" + c.esc(T(c, "site.admin.staff.pinSet", "PIN set")) + "</th><th>" + c.esc(T(c, "site.admin.staff.alertMobile", "Alert mobile")) + "</th><th></th></tr></thead><tbody>" +
           members.map(function (m) {
-            return '<tr data-identity="' + c.esc(m.identity) + '"><td>' + c.esc(m.identity) + "</td><td>" + c.esc(m.role) + "</td><td>" + c.esc(m.active ? T(c, "site.admin.yes", "yes") : T(c, "site.admin.no", "no")) + "</td><td>" + c.esc(m.email || T(c, "site.admin.staff.noneEmail", "none")) + "</td><td>" + c.esc(m.hasPin ? T(c, "site.admin.yes", "yes") : T(c, "site.admin.no", "no")) + "</td><td>" + c.esc(m.alertMobile ? T(c, "site.admin.staff.mobileSet", "set") : T(c, "site.admin.staff.noneEmail", "none")) + "</td><td>" +
+            return '<tr data-identity="' + c.esc(m.identity) + '"><td>' + c.esc(m.identity) + "</td><td>" + (m.displayName ? EN(c, c.esc(m.displayName)) : c.esc(T(c, "site.admin.staff.nameNotSet", "Name not set"))) + (m.employeeId ? " (" + EN(c, c.esc(m.employeeId)) + ")" : "") + "</td><td>" + c.esc(m.role) + "</td><td>" + c.esc(m.active ? T(c, "site.admin.yes", "yes") : T(c, "site.admin.no", "no")) + "</td><td>" + c.esc(m.email || T(c, "site.admin.staff.noneEmail", "none")) + "</td><td>" + c.esc(m.hasPin ? T(c, "site.admin.yes", "yes") : T(c, "site.admin.no", "no")) + "</td><td>" + c.esc(m.alertMobile ? T(c, "site.admin.staff.mobileSet", "set") : T(c, "site.admin.staff.noneEmail", "none")) + "</td><td>" +
               '<button type="button" class="btn quiet" data-mact="' + (m.active ? "disable" : "restore") + '" data-id="' + c.esc(m.identity) + '">' + c.esc(m.active ? T(c, "site.admin.staff.disable", "Disable") : T(c, "site.admin.staff.restore", "Restore")) + "</button> " +
               '<button type="button" class="btn quiet" data-mact="reset" data-id="' + c.esc(m.identity) + '">' + c.esc(T(c, "site.admin.staff.resetAccess", "Reset access")) + "</button></td></tr>";
           }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.staff.none", "No staff added yet.")) + "</p>") +
@@ -1208,6 +1208,9 @@
         '<div class="card"><h2>' + c.esc(T(c, "site.admin.staff.addTitle", "Add or update a staff member")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.staff.hospitalCode", "Hospital code for sign-in:")) + ' <span class="mono">' + c.esc((c.state.org && c.state.org.code) || "") + "</span></p>" +
         '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.admin.staff.identityLabel", "Identity (staff ID or email)")) + '</span><input id="admMemberIdentity"></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.staff.role", "Role")) + '</span><select id="admMemberRole">' + roleOpts + "</select></label>" +
+        /* Owner 2026-09-16: the name and employee ID the ward shows beside everything this person records on a chart. */
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.staff.nameLabel", "Name as the ward reads it")) + '</span><input id="admMemberName" autocomplete="off" placeholder="' + c.esc(T(c, "site.admin.staff.blankKeeps", "blank keeps what is saved")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.staff.employeeId", "Employee ID")) + '</span><input id="admMemberEmpId" autocomplete="off" placeholder="' + c.esc(T(c, "site.admin.staff.blankKeeps", "blank keeps what is saved")) + '"></label>' +
         /* The hospital vouching that this person is a registered practitioner. Without it a doctor
          * who signs in as hospital staff can write the chart and cannot SIGN anything - no
          * prescription, no note, no discharge summary - because the only other source of a signing
@@ -1243,6 +1246,9 @@
         var memberBody = { orgId: c.state.orgId, identity: id, role: document.getElementById("admMemberRole").value, regNo: (document.getElementById("admMemberRegNo").value || "").trim() };
         var mobile = (document.getElementById("admMemberMobile").value || "").trim();
         if (mobile) memberBody.alertMobile = mobile;
+        var dname = (document.getElementById("admMemberName").value || "").trim(), empId = (document.getElementById("admMemberEmpId").value || "").trim();
+        if (dname) memberBody.displayName = dname;
+        if (empId) memberBody.employeeId = empId;
         c.api("/member", memberBody).then(function (r) {
           if (!r || !r.ok) { document.getElementById("admMemMsg").innerHTML = '<div class="msg err">' + EN(c, c.esc(refusal(c, r))) + "</div>"; return; }
           c.toast(T(c, "site.admin.staff.saved", "Staff saved.")); WSQ.render("admin");

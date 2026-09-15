@@ -1041,12 +1041,17 @@ function personName(actorId) {
  * role-specific fields are preferred where they exist because they are more precise about the
  * clinical act: a prescription's prescriber and an order's requester are the person answerable for
  * it, which is not always the session that saved the row. */
+function whoIdOf(r) {
+  return str((r && (r.authorId || r.prescriberId || r.requesterId || r.performerId)) || (r && r.writtenBy && r.writtenBy.id) || "");
+}
 function whoOf(r) {
-  return personName(
-    (r && (r.authorId || r.prescriberId || r.requesterId || r.performerId))
-    || (r && r.writtenBy && r.writtenBy.id)
-    || "",
-  );
+  return personName(whoIdOf(r));
+}
+/* Owner 2026-09-16: the screen names the person. Beside the label's words an event carries the actor id itself
+ * (`byId`, and `signedById` / `witnessId` where the record has them) and the label without the actor (`labelBase`),
+ * so the chart shows the staff member's name and employee id, resolved at display. The record is unchanged. */
+function withActor(event, id, base) {
+  return id ? { ...event, byId: id, labelBase: base } : event;
 }
 
 /* What KIND of thing happened, for colour coding and for the filters a reader uses to pull one
@@ -1192,7 +1197,8 @@ function edVisitEvents(versions) {
     if (i === 0) {
       const at = str(v.periodStart) || metaAt(v);
       const who = writer(v);
-      if (at) out.push({ at, resourceType: "Encounter", id: v.id, category: "visit", label: `ED: arrived${v.reason ? `, ${v.reason}` : ""}${who ? ` · by ${who}` : ""}`, ...(who ? { who } : {}) });
+      const base = `ED: arrived${v.reason ? `, ${v.reason}` : ""}`;
+      if (at) out.push(withActor({ at, resourceType: "Encounter", id: v.id, category: "visit", label: `${base}${who ? ` · by ${who}` : ""}`, ...(who ? { who } : {}) }, whoIdOf(v), base));
     }
     // triageSeq tells two triages apart even inside one millisecond (migrate-ed.js triageKey()).
     const tKey = !v.triagedAt ? null : v.triageSeq != null ? `seq:${v.triageSeq}` : `at:${v.triagedAt}`;
@@ -1200,24 +1206,26 @@ function edVisitEvents(versions) {
       const who = personName(v.triagedBy);
       const retriage = prevTriage != null;
       const from = v.previousAcuity != null ? v.previousAcuity : prevAcuity;
-      out.push({
+      const base = retriage ? `Re-triaged: acuity ${from != null ? `${from} to ` : ""}${v.acuity}` : `Triaged: acuity ${v.acuity}`;
+      out.push(withActor({
         at: v.triagedAt, resourceType: "Encounter", id: v.id, category: "visit",
-        label: retriage ? `Re-triaged: acuity ${from != null ? `${from} to ` : ""}${v.acuity}${who ? ` · by ${who}` : ""}` : `Triaged: acuity ${v.acuity}${who ? ` · by ${who}` : ""}`,
+        label: `${base}${who ? ` · by ${who}` : ""}`,
         ...(v.triageReason ? { body: [{ heading: "reason", text: str(v.triageReason) }] } : {}),
         ...(who ? { who } : {}),
-      });
+      }, str(v.triagedBy), base));
       prevTriage = tKey; prevAcuity = v.acuity;
     }
     if (!disposed && v.status === "finished") {
       disposed = true;
       const at = str(v.periodEnd) || metaAt(v);
       const who = writer(v);
-      if (at) out.push({
+      const base = `ED disposition: ${v.disposition || "visit closed"}`;
+      if (at) out.push(withActor({
         at, resourceType: "Encounter", id: v.id, category: "visit",
-        label: `ED disposition: ${v.disposition || "visit closed"}${who ? ` · by ${who}` : ""}`,
+        label: `${base}${who ? ` · by ${who}` : ""}`,
         ...(v.dispositionReason ? { body: [{ heading: "reason", text: str(v.dispositionReason) }] } : {}),
         ...(who ? { who } : {}),
-      });
+      }, whoIdOf(v), base));
     }
   });
   return out;
@@ -1261,16 +1269,17 @@ function timelineFromChart(chart, extras) {
       const at = (resourceType === "ProcedureRecord" && str(r.performedAt)) || (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
       if (!at) { withoutTimestamp++; continue; }
       const who = whoOf(r);
-      const event = {
+      const event = withActor({
         at, resourceType, id: r.id, label: label(r, who),
         category: TIMELINE_CATEGORY[resourceType] || "other",
         ...(who ? { who } : {}),
-      };
+      }, who ? whoIdOf(r) : "", label(r, "").replace(/^Somebody wrote a /, "A "));
+      if (resourceType === "MedicationAdministration" && str(r.witnessedBy)) event.witnessId = str(r.witnessedBy);
       // The note's own words, so the history can be read without opening every note in turn.
       if (resourceType === "ClinicalNote") {
         const body = noteBody(r);
         if (body.length) event.body = body;
-        if (r.signedBy) event.signedBy = personName(r.signedBy);
+        if (r.signedBy) { event.signedBy = personName(r.signedBy); event.signedById = str(r.signedBy); }
       }
       // A result's conclusion is the sentence the reader is actually after.
       if (resourceType === "DiagnosticReport" && str(r.conclusion)) event.body = [{ heading: "conclusion", text: str(r.conclusion) }];

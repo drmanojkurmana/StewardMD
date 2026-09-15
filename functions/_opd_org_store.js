@@ -326,6 +326,8 @@ export async function setMembership(env, orgId, identity, body, actorId) {
     regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
     regionProfile: b.regionProfile !== undefined ? b.regionProfile : (prev && prev.regionProfile),
     alertMobile: b.alertMobile !== undefined ? b.alertMobile : (prev && prev.alertMobile),
+    displayName: b.displayName !== undefined ? b.displayName : (prev && prev.displayName),
+    employeeId: b.employeeId !== undefined ? b.employeeId : (prev && prev.employeeId),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
@@ -339,7 +341,7 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, displayName: m.displayName, employeeId: m.employeeId, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
 export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });

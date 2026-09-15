@@ -38,7 +38,7 @@ import { selfCreateTenant } from "../../_connect/enterprise/org.js";
 import { unitsFor } from "../../_region.js";
 import { validateOrgProfile, validateMemberProfile } from "../../_region_in.js";
 import * as PAT from "../../_opd_patient_store.js";
-import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor, memberChangeRefusal, isOwnerOfOrg, alertMobileOf, notAName, tokenConfigProblems, tokenScope, resolveTokenDepartment } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
@@ -100,6 +100,7 @@ import { recordProblem, listProblems } from "../../_wardsynq/migrate-problem.js"
 import { marSchedule } from "../../_wardsynq/mar-schedule.js";
 import { openCriticalLoops, acknowledgeCritical, listCriticalLoops } from "../../_wardsynq/critical-results.js";
 import { bufferReadAudits } from "../../_wardsynq/repository.js";
+import { membersForIds, staffIdentity, idsParam } from "../../_wardsynq/staff-identity.js";
 import { recordFluid, fluidBalance } from "../../_wardsynq/fluid-balance.js";
 import { recordIcu, icuChart } from "../../_wardsynq/icu-care.js";
 import { giveHandover, receiveHandover, listHandovers } from "../../_wardsynq/handover.js";
@@ -448,6 +449,15 @@ function isOwnerEmail(env, email) { try { return !!(email && ownerEmails(env).in
 async function ghisUserId(env, token) {
   if (!token || !env.GHIS_KV) return "";
   try { const raw = await env.GHIS_KV.get("sess:" + token); if (!raw) return ""; return String(JSON.parse(raw).userId || ""); } catch (e) { return ""; }
+}
+/* Where a chart's actor id is looked up (functions/_wardsynq/staff-identity.js membersForIds): an account through its
+ * sign-in email, an Access sign-in by the hash identify() makes, and one member row read directly, all within orgId. */
+function staffDirectory(env, orgId) {
+  return {
+    accountEmail: (id) => ORG.accountEmail(env, id),
+    accessIdOf: async (email) => "cfa:" + (await sha256hex(String(email).toLowerCase())),
+    getMember: (identity) => ORG.getMembership(env, orgId, identity),
+  };
 }
 // The one identity entry point. AUTHORITY is never decided here — a session only proves WHO you are;
 // what you may do is org-membership (authorizeOrg) server-side. Global role is "admin" only for a
@@ -1500,6 +1510,8 @@ export async function onRequest(context) {
          * safety_officer is NOT added - it is clinical-incident safety, not account security. */
         "security-report": CAPS.STAFF_ADMIN, "audit-rows": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
         "actor-names": CAPS.STAFF_ADMIN,
+        // Owner 2026-09-16: who did something on a chart is part of reading it (pharmacy, lab and blood bank: below).
+        "staff-identities": CAPS.EMR_VIEW,
         /* P2.17 anchor acknowledgement. The capability gate only narrows this to staff.admin, which
          * hr and admin members hold too: the hospital-owner check happens at the route itself, fail
          * closed, so naming the capability here grants nobody the acknowledgement. */
@@ -1623,6 +1635,10 @@ export async function onRequest(context) {
       /* LT-25: the laboratory board's Collect. A phlebotomist on the laboratory's staff takes the sample the result
        * now needs first; same narrow alternative authority as specimen-outcome, and the store still checks the write. */
       if (!wAz.ok && sub === "collect") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* Owner 2026-09-16: the prescriber and verifier on the pharmacy queue, the collector on the laboratory board and
+       * whoever acted on a blood unit are named to the staff who work from those records without emr.view. Names,
+       * employee ids and roles of this hospital's staff only; it opens no chart and no other route. */
+      for (const alt of [CAPS.ORDER_READ, CAPS.LAB_RESULT, CAPS.TRANSFUSION_ISSUE]) if (!wAz.ok && sub === "staff-identities") wAz = await ORG.authorizeOrg(env, actor, wOrgId, alt);
       /* TASK 4.13: HIM_ROI is the new, narrow alternative to staff.admin for the ROI routes - the
        * `him` role holds HIM_ROI and not staff.admin, and this does not widen staff.admin's own
        * reach anywhere else. Same alternative-authority shape as criticals/specimen-outcome above. */
@@ -2831,26 +2847,42 @@ export async function onRequest(context) {
        * that is nobody here comes back unnamed, never looked up anywhere else. A mobile-number sign-in ID is not
        * a name and is never returned as one. staff.admin only, like the rest of the audit review. */
       if (sub === "actor-names" && method === "GET") {
-        const ids = [...new Set(String(url.searchParams.get("ids") || "").split(",").map((s) => s.trim()).filter(Boolean))].slice(0, 100);
-        const members = await ORG.listMembers(env, wOrgId);
-        const byKey = new Map();
-        for (const m of members) for (const k of [m.identity, m.email]) if (k) byKey.set(String(k).toLowerCase(), m);
-        const notAName = (s) => /^\+?[\d\s().-]{7,}$/.test(String(s || "")) || /^(fb|cfa|ghis):/.test(String(s || ""));
+        const ids = idsParam(url.searchParams.get("ids"), 100);
+        const found = await membersForIds(await ORG.listMembers(env, wOrgId), ids.filter((id) => id.indexOf("system:") !== 0), staffDirectory(env, wOrgId));
+        const notALabel = (s) => /^\+?[\d\s().-]{7,}$/.test(String(s || "")) || /^(fb|cfa|ghis):/.test(String(s || ""));
         const names = {};
         for (const id of ids) {
           if (id.indexOf("system:") === 0) { names[id] = { system: true }; continue; }
-          let m = byKey.get(id.toLowerCase()) || null;
-          if (!m && id.indexOf("fb:") === 0) { const email = await ORG.accountEmail(env, id).catch(() => null); if (email) m = byKey.get(email) || null; }
-          if (!m && id.indexOf("cfa:") === 0) {
-            for (const x of members) {
-              const e = [x.email, x.identity].find((v) => /@/.test(String(v || "")));
-              if (e && "cfa:" + (await sha256hex(String(e).toLowerCase())) === id) { m = x; break; }
-            }
-          }
-          const label = m ? [m.email, m.identity].find((v) => v && !notAName(v)) || null : null;
+          const m = found.get(id);
+          // The name the hospital recorded first; the audit screen (staff.admin) may still read a sign-in email.
+          const label = m ? (staffIdentity(m).name || [m.email, m.identity].find((v) => v && !notALabel(v)) || null) : null;
           names[id] = m ? { name: label, role: m.role || null } : { name: null, role: null };
         }
         return json({ ok: true, names }, 200, request);
+      }
+      /* Owner 2026-09-16: WHO GAVE THE DRUG, WHO ASKED FOR IT, on every chart screen. The same lookup as actor-names
+       * (functions/_wardsynq/staff-identity.js), for anyone who may read the chart or the orders, samples and units a
+       * pharmacist, laboratory or blood bank works from, and only the three fields a clinical reader needs: name,
+       * employee id, role. Never an email, a mobile number or another hospital's staff. One request per screen and
+       * one audit row for it, written before the answer. */
+      if (sub === "staff-identities" && method === "GET") {
+        const ids = idsParam(url.searchParams.get("ids"), 200);
+        let found;
+        try { found = await membersForIds(await ORG.listMembers(env, wOrgId), ids.filter((id) => id.indexOf("system:") !== 0), staffDirectory(env, wOrgId)); }
+        catch { return json({ ok: false, error: "staff_read_failed", message: "Staff identities could not be read. Do not read this as nobody." }, 502, request); }
+        const identities = {};
+        let resolved = 0;
+        for (const id of ids) {
+          identities[id] = id.indexOf("system:") === 0 ? { system: true } : staffIdentity(found.get(id));
+          if (identities[id] && !identities[id].system) resolved++;
+        }
+        try {
+          await deps.recordDeps.repository.auditOnly(mig.tenantId, { ts: new Date().toISOString(), actor: actor.id, connectorId: "wardsynq", action: "staff.identity.read",
+            resourceCounts: null, scope: { purpose: "chart-actor-names", asked: ids.length, resolved }, patientRefHash: null, outcome: "ok" });
+        } catch {
+          return json({ ok: false, error: "audit_write_failed", message: "Staff identities were read but could not be recorded in the audit trail, so they are not shown. Try again." }, 502, request);
+        }
+        return json({ ok: true, identities }, 200, request);
       }
       if (sub === "audit-rows" && method === "GET") {
         const r = await auditRowsForReview(request, env, { ...deps, ids: url.searchParams.get("ids") || "" });
@@ -4591,6 +4623,9 @@ export async function onRequest(context) {
         if (body.remove) return lifecycle(ORG.removeMembership(env, body.orgId, body.identity, actor.id), true);
         if (body.alertMobile !== undefined && String(body.alertMobile).trim() && !alertMobileOf(body.alertMobile)) {
           return json({ ok: false, error: "invalid_alert_mobile", message: "The alert mobile must be 10 to 15 digits, with the country code if outside India." }, 422, request);
+        }
+        if (body.displayName !== undefined && String(body.displayName).trim() && notAName(body.displayName)) {
+          return json({ ok: false, error: "invalid_display_name", message: "The name is the person's name as the ward should read it, not a mobile number, an email or an account id." }, 422, request);
         }
         if (body.regionProfile !== undefined) {
           const mOrg = await ORG.getOrg(env, body.orgId);

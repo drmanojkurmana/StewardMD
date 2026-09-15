@@ -401,6 +401,10 @@ async function marSchedule(request, env, ctx) {
         status: readFailed ? "unknown" : mar ? mar.status : null,             // null = this dose has not been started
         administeredAt: (mar && mar.administeredAt) || null,
         administeredBy: (mar && mar.administeredBy) || null,
+        /* Owner 2026-09-16: who witnessed a high-alert dose, and who put the dose in its current state (the session
+         * that wrote this version: the nurse who held it, recorded the refusal or cancelled it). Ids; the round names them. */
+        witnessedBy: (mar && mar.witnessedBy) || null,
+        statusBy: (mar && mar.writtenBy && mar.writtenBy.id) || null,
         overdue: isOverdue(t, mar && mar.status, nowMs, ctx.graceMinutes),
         /* Only when this dose is NOT at the time the ward's policy names. A nurse handed a time the
          * policy does not contain is owed the reason on the same row, not in a release note. */

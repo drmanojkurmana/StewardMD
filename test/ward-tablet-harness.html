@@ -35,7 +35,10 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: DUE, prn: [], unscheduled: [] });
   if (u.indexOf("/ward/nurse-worklist") >= 0) return reply(WORKLIST);
   if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
-  if (u.indexOf("/ward/timeline") >= 0) return reply({ ok: true, events: [], activeMedications: [] });
+  // Owner 2026-09-16: a timeline line carries the actor's id; the ward names the person from /ward/staff-identities.
+  if (u.indexOf("/ward/timeline") >= 0) return reply({ ok: true, events: [{ at: at(8), resourceType: "MedicationAdministration", id: "mar-h1", category: "medication",
+    label: "Ondansetron - administered · by a clinician account", labelBase: "Ondansetron - administered", byId: "cfa:nurse" }], activeMedications: [] });
+  if (u.indexOf("/ward/staff-identities") >= 0) return reply({ ok: true, identities: { "cfa:nurse": { name: "Sister Anitha R", employeeId: "EMP-1042", role: "nurse" } } });
   if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
   if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
   if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
