@@ -55,7 +55,12 @@ test("ART and NIBP are surfaced separately, never merged", () => {
 test("image-engine: AI Vision offered only when core vitals need review, only on tap; counters cover every outcome", () => {
   assert.match(engine, /var core = \(r\.monitor && r\.monitor\.review \|\| \[\]\)\.filter\(function \(k\) \{ return \/\^\(\?:hr\|spo2\|sbp\|dbp\|map\|rr\)\$\/\.test\(k\); \}\);/);
   assert.match(engine, /stat\(core\.length \? "local_needs_review" : "local_success"\);/);
-  assert.match(engine, /if \(!core\.length \|\| !aiAvailable\(\) \|\| !online\(\)\) return r;/, "high-confidence local read returns without any dialog or network");
+  assert.match(engine, /if \(!core\.length\) return r;/, "high-confidence local read returns without any dialog or network");
+  // hybrid (2026-09-16): the second reader follows the user's own answer-engine choice (aiAvailable() reads
+  // that same policy) — Cloud/Auto checks with AI Vision, Local checks with the downloaded vision pack.
+  assert.match(engine, /if \(aiAvailable\(\) && online\(\) && getConsent\(\)\) return hybridCheck\(r, image, kind\);/);
+  assert.match(engine, /if \(!aiAvailable\(\) && localVisionReady\(\)\) return localHybridCheck\(r, image, kind\);/);
+  assert.match(engine, /if \(!aiAvailable\(\) \|\| !online\(\)\) return r;/, "neither reader available → the on-device result stands");
   assert.match(engine, /if \(f !== "ai"\) return r;/, "dismiss / manual keeps the on-device result");
   assert.match(engine, /stat\("gemini_fallback"\);/); assert.match(engine, /stat\(ar && ar\.mode === "fields" \? "gemini_success" : "gemini_failure"\)/);
   assert.match(engine, /stat\("network_calls"\);\s*return window\.SMD_AI\.vision\(image, kind\)/, "every cloud call is counted");

@@ -404,10 +404,18 @@
       // AI Vision, but only on an explicit tap. High-confidence local reads never touch the network.
       var core = (r.monitor && r.monitor.review || []).filter(function (k) { return /^(?:hr|spo2|sbp|dbp|map|rr)$/.test(k); });
       stat(core.length ? "local_needs_review" : "local_success");
-      if (!core.length || !aiAvailable() || !online()) return r;
-      // HYBRID (owner, 2026-09-15): with cloud consent already given, the monitor crop goes to AI Vision
-      // automatically and a value auto-fills only where BOTH readers agree (hybridMerge). Off: smd_icu_hybrid=0.
-      if (hybridOn() && getConsent()) return hybridCheck(r, image, kind);
+      if (!core.length) return r;
+      // HYBRID (owner, 2026-09-15/16): a second, independent reader checks review-only values; a value
+      // auto-fills only where BOTH readers agree (hybridMerge). WHICH second reader is the user's own
+      // answer-engine choice, exactly as it already governs MaiK generally (aiAvailable() reads that same
+      // policy): Cloud/Auto -> AI Vision on the monitor crop (needs consent + online). Local -> the
+      // downloaded on-device vision pack (MedGemma / Gemma; text-only Bonsai packs cannot see) checks the
+      // SAME crop, nothing leaves the device, no consent needed. Off entirely: smd_icu_hybrid=0.
+      if (hybridOn()) {
+        if (aiAvailable() && online() && getConsent()) return hybridCheck(r, image, kind);
+        if (!aiAvailable() && localVisionReady()) return localHybridCheck(r, image, kind);
+      }
+      if (!aiAvailable() || !online()) return r;
       var names = { hr: "HR", spo2: "SpO2", sbp: "SBP", dbp: "DBP", map: "MAP", rr: "RR" };
       return fallbackDialog("Read on this device. Needs your check: " + core.map(function (k) { return names[k] || k; }).join(", ") + ". Check these with AI Vision (cloud) or fill them by hand?",
         { ai: true, device: false, retryLabel: "Check with AI Vision (Pro)", title: "Some values need review" }).then(function (f) {
@@ -423,7 +431,9 @@
     });
   }
 
-  function assign(a, b) { var o = {}, k; for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) o[k] = a[k]; for (k in b) if (Object.prototype.hasOwnProperty.call(b, k)) o[k] = b[k]; return o; }
+  // Variadic like icu-monitor-parser.js's assign: merges every source into `a` (mutates it) and returns it.
+  // Every call site here passes a fresh {} as `a`, so mutating it is safe.
+  function assign(a) { for (var i = 1; i < arguments.length; i++) { var s = arguments[i]; if (s) for (var k in s) if (Object.prototype.hasOwnProperty.call(s, k)) a[k] = s[k]; } return a; }
   function hybridOn() { try { return localStorage.getItem("smd_icu_hybrid") !== "0"; } catch (e) { return true; } }
   /* Device read + AI Vision on the MONITOR CROP only (no patient banner, fewer image tokens). The device
    * result stays the base; hybridMerge promotes a value only when both readers agree, and downgrades any
@@ -450,6 +460,36 @@
       log("hybrid: changed", m.changed.join(",") || "none");
       return out;
     }, function () { done(); stat("hybrid_ai_failure"); return r; });
+  }
+
+  /* Local counterpart of hybridCheck: the same crop, the same LOCAL_SCHEMA/parseLooseJson routeLocal()
+   * already uses, but the answer stays on the phone. Slower (a downloaded 4B model, not a cloud call) so
+   * it only ever runs when the user has picked the Local engine and a vision-capable pack is ready. */
+  function localHybridCheck(r, image, kind) {
+    var V2 = window.SMD_ICU_MONITOR, L = window.SMD_MAIK_LOCAL;
+    var schema = LOCAL_SCHEMA[kind] || (kind === "icu" || kind === "handover" ? LOCAL_SCHEMA.all : null);
+    if (!V2 || !V2.hybridMerge || !L || !L.answer || !schema) return Promise.resolve(r);
+    var reg = r.monitor && r.monitor.stats && r.monitor.stats.crop && r.monitor.stats.crop.region;
+    var done = busy("Checking with the on-device model…");
+    stat("hybrid_local_check");
+    var ask = "Read this clinical image and return ONLY JSON matching " + schema + ". Omit any field you cannot read with confidence. No prose, no explanation, no code fence.";
+    var sysOverride = "You read clinical images and return ONLY the JSON asked for. No prose, no explanation, no code fence, no commentary. Omit any field you cannot read with confidence. Never invent a value.";
+    var cropP = reg ? window.SMD_AI.cropImage(image, { x: reg.x, y: reg.y, w: reg.w, h: reg.h, maxLong: 1024 }) : Promise.resolve(null);
+    return cropP.then(function (crop) { return Promise.resolve(L.answer({ question: ask }, { images: [stripFileScheme(crop || image)], systemOverride: sysOverride }, null)); })
+      .then(function (resp) {
+        done();
+        var f = resp && !resp.error ? parseLooseJson(String(resp.text || "")) : null;
+        if (!f || !Object.keys(f).length) { stat("hybrid_local_failure"); return r; }
+        var nested = kind === "all", af = nested ? (f.vitals || {}) : f;
+        var m = V2.hybridMerge(nested ? ((r.fields && r.fields.vitals) || {}) : (r.fields || {}), r.monitor, af);
+        var out = assign({}, r, { monitor: m.meta, hybrid: { changed: m.changed, source: "local" } });
+        if (nested) { out.fields = assign({}, r.fields || {}); if (Object.keys(m.fields).length) out.fields.vitals = m.fields; else delete out.fields.vitals; }
+        else out.fields = m.fields;
+        out.mode = out.fields && Object.keys(out.fields).length ? "fields" : "lines";
+        out.lines = r.lines || [];
+        stat("hybrid_local_success");
+        return out;
+      }, function () { done(); stat("hybrid_local_failure"); return r; });
   }
 
   /* The on-device model as a target of the fallback dialogs: try it, and if IT fails too, drop to the

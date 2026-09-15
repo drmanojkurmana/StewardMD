@@ -6430,3 +6430,27 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   VisionOcr plugin (preprocessing ported from the training code, see spec in the job's digits/out/spec.json).
 - Benchmark (268 cases, cached OCR): 0 wrong before and after; 11 fields review -> correct (owner 97c20181 NIBP
   73/36 (49), MP40 RR 22 on two perturbations, 2 draft externals), 0 lost.
+
+## 2026-09-16 ICU OCR hybrid: routes to the user's OWN engine choice (Cloud -> AI Vision, Local -> on-device)
+- Owner: "local or cloud is decided by user when user select local ai models its routed to local models
+  like medgemma or bonsai". hybridCheck's caller now reads the SAME `aiAvailable()` policy the rest of
+  MaiK already uses: Cloud/Auto + consent + online -> AI Vision on the crop (unchanged). Local (cloudAllowed
+  false) + a vision-ready pack downloaded (MedGemma 1.5 4B / Gemma 4 E2B — the text-only Bonsai packs have
+  no projector, cannot see) -> `localHybridCheck`, same crop, same `hybridMerge` agree-to-fill rule, nothing
+  leaves the device, no consent needed. Neither available -> unchanged (dialog / device result stands).
+- **Real bug found and fixed**: image-engine.js's own `assign(a,b)` only took 2 args; `hybridCheck` (already
+  shipped) and `localHybridCheck` both called it with 3, so the 3rd arg (`{monitor:m.meta, hybrid:{...}}`)
+  was silently dropped — the merged monitor/status update never reached the caller, only masked in the
+  original cloud test because the fixture's stale field happened to match. Fixed by making `assign` variadic
+  like icu-monitor-parser.js's own (mutates a fresh `{}` first arg, N sources) — every call site already
+  passed a fresh `{}`, so no behavior change elsewhere.
+- Verified live: (1) Android's ML Kit OCR end-to-end on the owner's Pixel 9, 26 owner photos, 13/103 values
+  auto-filled, 0 wrong (weaker than iOS's 21/99 since Android has neither the tile detector nor the digit
+  reader yet — both Core ML, iOS-only). (2) Discovered `@capgo/capacitor-updater` (autoUpdate:"off" in
+  config, but a bundle was live-swapped anyway) silently replaces the installed JS with whatever is on
+  stewardmd.in — any Android test must call `CapacitorUpdater.reset({})` and check `current()` first, or it
+  silently tests production code, not the local build. (3) Local-hybrid path fired correctly on this
+  Local-engine phone via a live JS injection over the WebView's own CDP (no reinstall needed for a JS-only
+  change): rr promoted to AUTO on agreement, spo2 correctly stayed review on disagreement, 0 network calls.
+- Tests: `test/icu-hybrid-merge.test.mjs` (+2: local engine runs on-device with no upload/consent; no vision
+  pack ready -> no automatic check), `test/icu-ocr-v2-integration.test.mjs` updated for the new gating.

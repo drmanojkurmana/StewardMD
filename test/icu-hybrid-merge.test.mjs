@@ -67,8 +67,10 @@ test("digit reader: same digits confirm, different confident digits conflict, lo
   assert.deepEqual(M.digitReadBoxes([b("HR", 0), b("72", 0.2)]), [{ x: 0.2, y: 0.1, w: 0.1, h: 0.05 }]);
 });
 
-// ── end to end through image-engine.js: device read -> automatic AI check on the crop -> merged result ──
-function load({ local, ai, consent = true, hybrid }) {
+// ── end to end through image-engine.js: device read -> automatic second-reader check -> merged result ──
+// cloudAllowed mirrors the user's own answer-engine choice: Cloud/Auto (true, default) routes the hybrid
+// check to AI Vision; Local (false) routes it to the downloaded on-device vision pack instead.
+function load({ local, ai, localAnswer, consent = true, hybrid, cloudAllowed = true, visionReady = true }) {
   const sent = [];
   const store = Object.assign(consent ? { "stewardmd.aiVisionPhiConsent": "true" } : {}, hybrid === "0" ? { smd_icu_hybrid: "0" } : {});
   const node = () => ({ setAttribute() {}, appendChild() {}, remove() {}, classList: { add() {}, remove() {}, toggle() {} }, style: {}, querySelectorAll: () => [], querySelector: () => null, set innerHTML(_v) {}, get innerHTML() { return ""; }, addEventListener() {}, textContent: "" });
@@ -77,6 +79,8 @@ function load({ local, ai, consent = true, hybrid }) {
     localStorage: { _d: store, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); }, removeItem(k) { delete this._d[k]; } },
     document: { createElement: node, getElementById: () => null, head: node(), body: node(), querySelector: () => null, querySelectorAll: () => [] },
     addEventListener() {}, Capacitor: { isNativePlatform: () => true, Plugins: {} },
+    SMD_MAIK_ENGINE: { cloudAllowed: () => cloudAllowed },
+    SMD_MAIK_LOCAL: { visionReady: () => visionReady, currentPack: () => "maik-mxcore", answer: async (...args) => { sent.push({ local: args }); return localAnswer; } },
     SMD_NATIVE: { ocr: () => Promise.resolve({}) },
     SMD_ICU_MONITOR: M,
     SMD_AI: {
@@ -100,6 +104,25 @@ test("with consent, review fields trigger an automatic AI check of the MONITOR C
   assert.equal(r.fields.rr, 16, "device suggestion confirmed by AI Vision");
   assert.equal(r.fields.spo2, undefined, "97 vs 95 stays review");
   assert.equal(r.monitor.fields.spo2.status, "NEEDS_REVIEW");
+});
+
+test("Local engine selected: the hybrid check runs on-device (no upload, no consent needed), same agree-to-fill rule", async () => {
+  const { E, sent } = load({ local: LOCAL, cloudAllowed: false, consent: false, localAnswer: { text: '{"hr":72,"rr":16,"spo2":95}' } });
+  const r = await E.process({ image: "data:image/jpeg;base64,FULL", kind: "monitor", engineOverride: "device" });
+  assert.equal(sent.some((s) => s.img), false, "nothing was sent to AI Vision");
+  assert.ok(sent.some((s) => s.local), "the on-device model was asked");
+  assert.equal(sent.find((s) => s.crop)?.crop.maxLong, 1024, "a smaller crop for the slower on-device model");
+  assert.equal(r.fields.hr, 72);
+  assert.equal(r.fields.rr, 16, "device suggestion confirmed by the on-device model");
+  assert.equal(r.fields.spo2, undefined, "97 vs 95 stays review");
+  assert.equal(r.hybrid.source, "local");
+});
+
+test("Local engine selected but no vision pack downloaded: no automatic check, device result unchanged", async () => {
+  const { E, sent } = load({ local: LOCAL, cloudAllowed: false, consent: false, visionReady: false });
+  const r = await E.process({ image: "x", kind: "monitor", engineOverride: "device" });
+  assert.equal(sent.length, 0);
+  assert.deepEqual(r.fields, { hr: 72 });
 });
 
 test("AI failure returns the device result unchanged; smd_icu_hybrid=0 never uploads automatically", async () => {
