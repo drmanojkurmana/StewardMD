@@ -8,7 +8,7 @@
 
 **"Browser UI stopped" on the phone.** The hand-built adapter replays requests server-side with the GHIS cookies in KV. A prior owner decision (`vault/decisions/Decisions.md` 2026-09-11) forbids taking cookies off the device, so the phone equivalent is a HIDDEN WebView that issues only the discovered `fetch`/XHR requests in the page realm (`adapter-runtime.mjs executeProven` -> `fetchInPage`), carrying the doctor's session cookies. That is endpoint-driven, not scraping: no page is shown, navigated for its DOM, or clicked. "Stopped" therefore means no visible UI and no DOM interaction, not the WebView process gone.
 
-**Architecture:** The execution half already meets the contract: `executeProven` runs the prerequisite POSTs then the data GET, fills every field from its proven source, follows list->detail chains, parses JSON and HTML, widens pagination, and `ghis-shim.mjs` maps to canonical. The discovery half does not: proof only sees `fetch`/XHR (the page replay buffer `__SMD_REPLAY__`), so a report GHIS opens by navigation or popup (lab result, radiology report, history) is invisible and comes back `no-requests`, and the runtime then falls back to opening pages. This plan closes that: (1) keep the per-screen proof trace so every run explains itself, (2) prove the request that returns only the list, judged by Gemini, (2b) **capture navigation and popup requests so a report opened by page load becomes a proven backend request**, (3) the patient read runs only proven endpoints, never a page, and records per-resource `how`, (4) bound every request and read in time, (5) read only when the native browser confirms it is hidden, (6) **refuse approval unless every required resource is endpoint-backed (endpoint-complete), storing `how` per resource**, (7) delete the GIMSR ward-list injection, (7b) **self-repair re-proves a backend request instead of saving a DOM-scraping view; the DOM path survives only as a labeled last resort for an EMR with no discoverable endpoint, never for an endpoint-complete adapter**, (8) prove GHIS parity and the acceptance test on the iPhone.
+**Architecture:** The execution half already meets the contract: `executeProven` runs the prerequisite POSTs then the data GET, fills every field from its proven source, follows list->detail chains, parses JSON and HTML, widens pagination, and `ghis-shim.mjs` maps to canonical. The discovery half does not: proof only sees `fetch`/XHR (the page replay buffer `__SMD_REPLAY__`), so a report GHIS opens by navigation or popup (lab result, radiology report, history) is invisible and comes back `no-requests`, and the runtime then falls back to opening pages. This plan closes that: (1) keep the per-screen proof trace so every run explains itself, (2) prove the request that returns only the list, judged by Gemini, (2b) **capture navigation and popup requests so a report opened by page load becomes a proven backend request**, (2c) **save a list request in its widest proven form, so a doctor-filtered ward list can never be mistaken for the ward, and make a subset a named audit failure**, (3) the patient read runs only proven endpoints, never a page, and records per-resource `how`, (4) bound every request and read in time, (5) read only when the native browser confirms it is hidden, (6) **refuse approval unless every required resource is endpoint-backed (endpoint-complete), storing `how` per resource**, (7) delete the GIMSR ward-list injection, (7b) **self-repair re-proves a backend request instead of saving a DOM-scraping view; the DOM path survives only as a labeled last resort for an EMR with no discoverable endpoint, never for an endpoint-complete adapter**, (8) prove GHIS parity and the acceptance test on the iPhone.
 
 **Tech Stack:** ES modules (`connect-agent/**`), ES5 IIFE (`ghis-ward.js`), Cloudflare Pages Functions (`functions/**`), Swift WKWebView plugin, Java Android WebView plugin, `node --test`, headless Chrome CDP harness (`test/run-ward-adapter-ui.mjs`).
 
@@ -531,6 +531,241 @@ Expected: PASS. If `deep-crawl.test.mjs` or `phone-index.test.mjs` build a fake 
 ```bash
 git add connect-agent/phone/prove.mjs connect-agent/phone/deep-crawl.mjs connect-agent/phone/index.mjs test/connect-agent/prove.test.mjs
 git commit -m "Connect Agent: capture navigation and popup reports as proven backend requests"
+```
+
+---
+
+### Task 2c: A list request is saved in its widest proven form, and a subset fails the audit
+
+**Why (owner, 2026-09-16):** "Do not mark GetIPWL as learned just because the URL is discovered. Prove the exact request with Type=IPWorkList and the required empty filters, replay it using the authenticated doctor's session, verify that it returns the complete inpatient population, save that exact request/body/parameters in the adapter, and make the gold audit fail if the adapter returns only a subset."
+
+A discovered URL is never "learned": it is a candidate that must be executed in the doctor's session and verified (Tasks 2 and 2b). This task closes the remaining hole: proof verifies a candidate against **the values on the screen**, and the screen can itself be filtered. GHIS's own page may send `GetIPWL` with `Emp_ID` or `Dept_ID` filled, which answers with the signed-in doctor's patients only. That passes proof on a screen showing exactly those patients, is saved as recorded, and then returns a subset for every doctor forever: commit `67c8a74d8` (2026-09-14, "ensure GetIPWL worklist endpoint loads all 661 hospital in-patients") is the hard-coded workaround that was papering over precisely this. After this task, the request is saved with its filters empty and `Type=IPWorkList` intact, because that form was proven to return more patients.
+
+**THE SAFETY RULE:** only a parameter `paramsOf` could NOT trace to a patient, a parent row, a token, a constant, a page key or today's date (that is, an `unmapped` filter) may be emptied. A parameter traced to the worklist or a parent row is identity-bearing (`patient_id`, `Render_ID`, `resultid`) and is NEVER emptied: emptying one would turn this patient's lab request into everyone's.
+
+**Files:**
+- Modify: `connect-agent/phone/prove.mjs` (new `PROVE_EXEC_REQ` source + `PROVE_SOURCES.execRequest`, new `widenRequest`, a widening pass in `proveView` after the hit is chosen)
+- Modify: `connect-agent/phone/gold-audit.mjs` (`compareRows`: an explicit `subset` verdict and a `missing` count)
+- Test: `test/connect-agent/prove.test.mjs`, `test/connect-agent/gold-audit.test.mjs`
+
+**Interfaces:**
+- Produces: `export function widenRequest(entry, params) -> { url, body } | null` (same request with every `unmapped` filter emptied; constants, tokens, page keys and row-traced values untouched; null when nothing would change). `PROVE_SOURCES.execRequest({ method, url, body, reqCt, xhr })` executes an arbitrary request in the page. A proven list view records `view.proof.population` (rows the saved request returned). `compareRows` returns `verdict: 'subset'` with `missing: <count>` when the adapter returns fewer rows than the hand-built adapter and every row it did return matched.
+
+- [ ] **Step 1: Write the failing tests** (append to `test/connect-agent/prove.test.mjs`; add `widenRequest` to the import)
+
+```js
+test('widenRequest empties only the filters nothing could be traced to', () => {
+  const entry = { method: 'GET', url: HOST + '/Doctor/Home/GetIPWL?NursingStationId=&PatientId=&FloorId=&Emp_ID=4471&Dept_ID=12&Type=IPWorkList&__RequestVerificationToken=abc', body: null, reqCt: '' };
+  const params = { Emp_ID: { unmapped: true }, Dept_ID: { unmapped: true }, Type: { constant: 'IPWorkList' }, __RequestVerificationToken: { token: true } };
+  const wide = widenRequest(entry, params);
+  assert.ok(wide);
+  const q = new URL(wide.url).searchParams;
+  assert.equal(q.get('Emp_ID'), '', 'an untraceable filter is emptied');
+  assert.equal(q.get('Dept_ID'), '');
+  assert.equal(q.get('Type'), 'IPWorkList', 'a mode constant is kept');
+  assert.equal(q.get('__RequestVerificationToken'), 'abc', 'the token is kept');
+
+  // A patient-scoped request is NEVER widened: that would read every patient's labs.
+  const labs = { method: 'POST', url: HOST + '/Lab/Home/GetSearchPatientId', body: '__RequestVerificationToken=abc&patient_id=MR900001&DeptID=', reqCt: 'application/x-www-form-urlencoded' };
+  assert.equal(widenRequest(labs, { patient_id: { from: 'worklist', field: 'MRNo' }, __RequestVerificationToken: { token: true }, DeptID: { empty: true } }), null, 'nothing untraceable and filled: no widening');
+  const scoped = { method: 'GET', url: HOST + '/Lab/Home/Get?patient_id=MR900001', body: null, reqCt: '' };
+  assert.equal(widenRequest(scoped, { patient_id: { from: 'worklist', field: 'MRNo' } }), null, 'a row-traced id is never emptied');
+});
+
+test('the ward list is saved in the form that returns every in-patient, not the doctor filtered one', async () => {
+  const MINE = JSON.stringify([{ patientId: 'MR1', patientFirstName: 'ALPHA', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'BRAVO', bedName: 'B2' }]);
+  const ALL = JSON.stringify([
+    { patientId: 'MR1', patientFirstName: 'ALPHA', bedName: 'B1' }, { patientId: 'MR2', patientFirstName: 'BRAVO', bedName: 'B2' },
+    { patientId: 'MR3', patientFirstName: 'CHARLIE', bedName: 'B3' }, { patientId: 'MR4', patientFirstName: 'DELTA', bedName: 'B4' },
+  ]);
+  const filtered = HOST + '/Doctor/Home/GetIPWL?Emp_ID=4471&Type=IPWorkList';
+  const entries = [{ seq: 61, method: 'GET', url: filtered, body: null, reqCt: '', xhr: true, status: 200, shape: { kind: 'json', keys: ['patientId'], rows: 2 } }];
+  const answers = { 61: { status: 200, contentType: 'application/json', text: MINE } };
+  const page = {
+    executed: [],
+    async currentUrl() { return { url: HOST + '/Doctor/Home' }; },
+    async evaluate({ expression }) {
+      if (expression.includes('PROVE_LIST')) return { result: JSON.stringify(entries) };
+      if (expression.includes('PROVE_SCREEN')) return { result: JSON.stringify([['MR1', 'ALPHA', 'B1'], ['MR2', 'BRAVO', 'B2']]) };
+      if (expression.includes('PROVE_EXEC_REQ')) {
+        // the widened replay: filters emptied, Type kept
+        const m = /"url":"([^"]+)"/.exec(expression);
+        page.executed.push(m && m[1]);
+        return { result: JSON.stringify({ status: 200, contentType: 'application/json', text: /Emp_ID=&/.test(m[1]) || /Emp_ID=$/.test(m[1]) ? ALL : MINE }) };
+      }
+      if (expression.includes('PROVE_EXEC')) return { result: JSON.stringify(answers[61]) };
+      return { result: null };
+    },
+  };
+  const view = { resourceHint: 'worklist', pathTemplate: HOST + '/Doctor/Home', rowsSelector: '#wl tbody tr', headers: ['UHID', 'Name', 'Bed'] };
+  await proveView({ client: page, view });
+  assert.equal(view.proof.status, 'proven');
+  const data = view.endpoints.find((e) => e.role === 'data');
+  assert.match(data.path, /Type=IPWorkList/, 'the mode constant is saved');
+  assert.deepEqual(data.params.Emp_ID, { empty: true }, 'the doctor filter is saved EMPTY, so every in-patient comes back');
+  assert.equal(view.proof.population, 4, 'the saved request was verified to return the whole in-patient list');
+});
+```
+
+Append to `test/connect-agent/gold-audit.test.mjs` (add `compareRows`, `GOLD_ENDPOINTS` to its import if absent):
+
+```js
+test('an adapter that returns only some of the ward FAILS the audit as a subset', () => {
+  const spec = GOLD_ENDPOINTS[0]; // patients
+  const gold = [{ patientId: 'MR1' }, { patientId: 'MR2' }, { patientId: 'MR3' }];
+  const mine = [{ patientId: 'MR1' }, { patientId: 'MR2' }];
+  const out = compareRows(spec, gold, mine);
+  assert.equal(out.verdict, 'subset', 'fewer patients than the hand-built adapter is a named failure, not a pass');
+  assert.equal(out.missing, 1);
+  assert.equal(compareRows(spec, gold, gold).verdict, 'same');
+});
+```
+
+- [ ] **Step 2: Run them to verify they fail**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs; node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/gold-audit.test.mjs`
+Expected: FAIL. `widenRequest` is undefined, the ward list saves `Emp_ID` as recorded, and `compareRows` calls a short list `partial`.
+
+- [ ] **Step 3: Add the arbitrary-request executor** (`prove.mjs`, next to `PROVE_EXEC`)
+
+```js
+/* Execute a request the page did not make as recorded: the widened form of a list call. Same session,
+ * same cookies, same realm as PROVE_EXEC; only the url and body differ. */
+function PROVE_EXEC_REQ(req) {
+  var headers = { Accept: 'application/json, text/html, */*' };
+  if (req.xhr) headers['X-Requested-With'] = 'XMLHttpRequest';
+  var init = { method: req.method, credentials: 'include', headers: headers, redirect: 'follow' };
+  if (req.body != null && req.method !== 'GET' && req.method !== 'HEAD') {
+    init.body = req.body;
+    headers['Content-Type'] = req.reqCt || 'application/x-www-form-urlencoded; charset=UTF-8';
+  }
+  return fetch(req.url, init).then(function (r) {
+    return r.text().then(function (t) {
+      return JSON.stringify({ status: r.status, contentType: r.headers.get('content-type') || '', url: r.url, text: t.length > 2097152 ? t.slice(0, 2097152) : t });
+    });
+  }).catch(function (x) { return JSON.stringify({ status: 0, error: String(x && x.message || x) }); });
+}
+```
+
+and add to `PROVE_SOURCES`:
+
+```js
+  execRequest: (req) => `(${String(PROVE_EXEC_REQ)})(${JSON.stringify(req)})`,
+```
+
+- [ ] **Step 4: Add `widenRequest`** (`prove.mjs`, above the loop)
+
+```js
+/* THE WIDEST FORM THAT STILL SHOWS THIS DOCTOR'S PATIENTS (owner, 2026-09-16). A ward list request can
+ * carry filters the hospital's own page filled in (the signed-in doctor, their unit): replayed as
+ * recorded it returns a subset forever and patients silently vanish. Only a parameter nothing could be
+ * traced to (`unmapped`) is emptied. A value traced to the worklist or a parent row is the patient's
+ * own identity and is never touched: emptying it would turn this patient's labs into everyone's. */
+export function widenRequest(entry, params) {
+  const src = params || {};
+  const loose = (k, v) => !!v && !!src[k] && src[k].unmapped === true;
+  let u;
+  try { u = new URL(entry.url); } catch { return null; }
+  let changed = false;
+  const q = [];
+  u.searchParams.forEach((v, k) => { q.push([k, loose(k, v) ? '' : v]); if (loose(k, v)) changed = true; });
+  let body = entry.body == null ? null : String(entry.body);
+  if (body && /urlencoded|^$/i.test(String(entry.reqCt || '')) && body.indexOf('=') >= 0) {
+    const parts = body.split('&').map((p) => {
+      const i = p.indexOf('=');
+      const k = i >= 0 ? p.slice(0, i) : p;
+      const v = i >= 0 ? decodeURIComponent(p.slice(i + 1).replace(/\+/g, ' ')) : '';
+      if (loose(k, v)) { changed = true; return k + '='; }
+      return p;
+    });
+    body = parts.join('&');
+  }
+  if (!changed) return null;
+  const search = q.map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v)).join('&');
+  return { url: u.origin + u.pathname + (search ? '?' + search : ''), body };
+}
+```
+
+- [ ] **Step 5: Widen the chosen list call, and record the population** (`prove.mjs`, in `proveView` directly after `if (!hit) return done('unproven');`)
+
+```js
+  /* VERIFY THE POPULATION, NOT JUST THE SCREEN. The screen can be a filtered view of the ward, so the
+   * request that matches it can still be a subset. The same call with its untraceable filters emptied
+   * is replayed in the doctor's session; when it answers with MORE rows, the same kind, and still
+   * carries the screen, THAT is the request saved (owner, 2026-09-16). */
+  const LIST_RESOURCES = ['worklist', 'labs', 'radiology', 'medications', 'notes', 'history', 'discharge'];
+  if (LIST_RESOURCES.includes(String(view.resourceHint || ''))) {
+    const wide = widenRequest(hit.e, paramsOf(hit.e, parents));
+    if (wide) {
+      const resp2 = await evalJson(client, PROVE_SOURCES.execRequest({ method: hit.e.method, url: wide.url, body: wide.body, reqCt: hit.e.reqCt, xhr: hit.e.xhr }), null);
+      const kind2 = responseKind(resp2);
+      if (kind2 === kind2 && resp2 && kind2 !== 'login' && kind2 !== 'empty') {
+        const rows2 = rowsForChain(resp2.text, resp2.contentType);
+        const o2 = overlapOf(cells, resp2.text, resp2.contentType);
+        trace.tried.push({ method: hit.e.method, path: candidateStructure(hit.e).path.replace(/\d{3,}/g, '#'), role: 'data', kind: kind2, hits: o2.hits, ratio: o2.ratio, widened: true });
+        if (kind2 === hit.kind && rows2.length > hit.rows.length && accepted(o2)) {
+          hit.e = Object.assign({}, hit.e, { url: wide.url, body: wide.body });
+          hit.resp = resp2;
+          hit.rows = rows2;
+          hit.o = o2;
+        }
+      }
+    }
+  }
+```
+
+Then, where `view.proof` is assigned at the end of `proveView`, add the population count by changing
+
+```js
+  view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind }, trace.model ? { model: trace.model } : {});
+```
+
+to
+
+```js
+  view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind, population: dataRows.length }, trace.model ? { model: trace.model } : {});
+```
+
+(`cleanProofCounts` on the server must allow `population`; if it rejects unknown keys, add it there alongside `rows`.)
+
+- [ ] **Step 6: A subset is a named audit failure** (`gold-audit.mjs compareRows`)
+
+Replace
+
+```js
+  let verdict;
+  if (!gold.length && !mine.length) verdict = 'both-empty';
+  else if (!mine.length) verdict = 'missing';
+  else if (matched === gold.length && mine.length === gold.length && fieldsSame) verdict = 'same';
+  else verdict = 'partial';
+  return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, fields, verdict };
+```
+
+with
+
+```js
+  /* A SUBSET IS A FAILURE WITH ITS OWN NAME (owner, 2026-09-16). An adapter that returns some of the
+   * ward is more dangerous than one that returns none: the missing patients look like patients who do
+   * not exist. It is never folded into "partial". */
+  let verdict;
+  if (!gold.length && !mine.length) verdict = 'both-empty';
+  else if (!mine.length) verdict = 'missing';
+  else if (matched === gold.length && mine.length === gold.length && fieldsSame) verdict = 'same';
+  else if (mine.length < gold.length && matched === mine.length) verdict = 'subset';
+  else verdict = 'partial';
+  return { endpoint: spec.endpoint, gold: gold.length, adapter: mine.length, matched, missing: Math.max(0, gold.length - matched), fields, verdict };
+```
+
+- [ ] **Step 7: Run the tests**
+
+Run: `node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/prove.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/gold-audit.test.mjs && node --experimental-test-module-mocks --experimental-sqlite test/connect-agent/live-ghis-regressions.test.mjs`
+Expected: PASS. `live-ghis-regressions.test.mjs` already asserts the GetIPWL replay sends `Type=IPWorkList` with empty filters and the page token; it must still pass.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add connect-agent/phone/prove.mjs connect-agent/phone/gold-audit.mjs test/connect-agent/prove.test.mjs test/connect-agent/gold-audit.test.mjs
+git commit -m "Connect Agent: save a list request in its widest proven form; a subset fails the gold audit"
 ```
 
 ---
@@ -1489,8 +1724,10 @@ then poll `JSON.stringify(window.__gold)` until it is not `null`. Save the repor
 
 Pass criteria, all required:
 - `endpoints[]`: `same === true` for `worklist`, `labs`, `labs-detail`, `radiology`, `radiology-detail`, `medications`.
-- `worklist.verdict === "same"`.
+- `worklist.verdict === "same"`, and `worklist.adapter === worklist.gold`: the adapter returns the WHOLE in-patient population, not the signed-in doctor's share. A `verdict` of `subset` here is an outright failure, however well the rows that did come back matched.
+- No grade anywhere in the report has `verdict: "subset"`.
 - Every patient grade for `medications`, `lab`, `lab-detail`, `radiology`, `radiology-report` has `verdict` `same` or `both-empty`.
+- The saved ward-list request carries `Type=IPWorkList` with its filters empty: check the approved version's worklist endpoint (`GET /versions/:id` -> `replay`) shows `params` with `{ "empty": true }` for the doctor and unit filters, and that `proof.population` equals the gold ward size.
 
 - [ ] **Step 9: The owner's acceptance test (endpoint-driven, browser UI stopped)**
 
@@ -1555,3 +1792,268 @@ git add docs/connect/ghis-parity-2026-09-16.md vault/decisions/Decisions.md "vau
 git commit -m "Connect Agent: GHIS parity report and decision"
 git push -u origin HEAD
 ```
+
+---
+
+# GOLD-STANDARD CORRECTIONS — MUST BE PART OF THE IMPLEMENTATION
+
+The following rules are mandatory. They tighten the plan so the generated adapter is truly equivalent to the hand-built GHIS adapter at runtime, not merely similar by URL or screen.
+
+## 1. Define adapter parity at the REQUEST-BEHAVIOR level
+
+The generated adapter is considered equivalent only when it can reproduce the required clinical operation with the same backend behavior.
+
+For every proven operation, store enough information to execute it later:
+
+- HTTP method
+- exact URL/path
+- query parameters
+- POST body/form fields/JSON body
+- required headers
+- content type
+- cookies/session binding
+- CSRF/anti-forgery/request-verification tokens and how they are obtained/refreshed
+- redirect behavior where relevant
+- response type: JSON, HTML, text, etc.
+- parser/extractor
+- pagination rules
+- identifiers required by later requests
+- prerequisite requests
+- request dependencies
+- multi-request chains
+- canonical StewardMD mapping
+
+Do not declare an endpoint learned merely because its URL, name, columns, or visible text looks correct.
+
+## 2. Prove the COMPLETE request chain
+
+A clinical resource is not proven until the complete chain needed to obtain the usable clinical data has been proven.
+
+Examples for GHIS:
+
+### Labs
+
+Prove the equivalent of:
+
+`GetSearchPatientId`
+→ obtain the required identifiers such as `ServiceRenderId` and `episode_id`
+→ `GetPrintLabResultDetailsAuth`
+→ parse the actual laboratory result.
+
+Proving only the lab list/search request is insufficient.
+
+### Radiology
+
+Prove the equivalent of:
+
+radiology list request
+→ obtain `resultid`
+→ `GetRadiologyResultPrint`
+→ parse the actual radiology report.
+
+Proving only the radiology list is insufficient.
+
+### Other resources
+
+Apply the same rule to every resource that requires a list → detail, search → detail, token → data, or prerequisite → data chain.
+
+## 3. Resource-specific verification; do not trust text overlap
+
+Do not use generic keyword overlap as sufficient proof.
+
+A whole patient/visit page may contain words such as "lab", "radiology", "medicine", etc. without being the backend operation that supplies that resource.
+
+Verification must establish:
+
+1. The candidate request is associated with the intended user action.
+2. Its response contains the expected resource-specific structure/data.
+3. Required identifiers are produced or consumed correctly.
+4. The candidate can be replayed with the authenticated session.
+5. The resulting data maps to the intended canonical resource.
+
+Gemini may propose or explain candidates, but deterministic verification must decide whether the evidence proves the operation.
+
+## 4. Capture navigation requests completely
+
+Navigation/popup discovery must not capture only GET requests.
+
+Observe relevant:
+
+- main-frame GET navigation
+- main-frame POST navigation
+- popup/new-window navigation
+- redirects
+- request method
+- URL
+- query
+- body/form data
+- content type
+- relevant headers
+
+A report/detail workflow can be a navigation request rather than a fetch/XHR call. It must still become observable evidence when authorized and technically available.
+
+## 5. Correct absence state
+
+Do not confuse these states:
+
+- `PROVEN` = backend operation was executed and verified.
+- `PROVEN_ABSENT` = the resource was explicitly checked and the hospital's EMR genuinely does not provide it.
+- `DOM_ONLY` = the resource appears only through a page/UI and no backend operation has been proven.
+- `UNKNOWN` = insufficient evidence.
+
+For required resources:
+
+- `PROVEN` → complete
+- `PROVEN_ABSENT` → complete for that hospital/resource
+- `DOM_ONLY` → NOT complete
+- `UNKNOWN` → NOT complete
+
+Therefore an agent cannot finish discovery simply by declaring a resource "absent" without evidence.
+
+## 6. Gold audit must compare clinical DATA, not only endpoints
+
+The final GHIS gold audit must compare the generated adapter against the hand-built GHIS adapter at two levels.
+
+### Level A — Request/chain parity
+
+Compare:
+
+- methods
+- endpoint paths
+- required parameters
+- request bodies
+- prerequisite requests
+- identifiers
+- token/session handling
+- response formats
+- parsers
+- pagination
+- chain dependencies
+
+Exact URL equality is preferred where the hospital uses the same endpoint. If an implementation uses an equivalent endpoint, document why the behavior is equivalent.
+
+### Level B — Normalized clinical-data parity
+
+For the same authorized test patient/visit, compare normalized output for every supported resource:
+
+- patient identity/basic details
+- medications
+- labs
+- lab details/results
+- radiology
+- radiology report/details
+- history/encounters where offered
+
+Ignore irrelevant formatting differences such as HTML whitespace, ordering where clinically non-semantic, or presentation markup.
+
+The generated adapter passes only when the supported clinical data is materially equivalent to the hand-built adapter's output.
+
+## 7. No page-scraping fallback after endpoint proof
+
+Runtime must use the proven backend operation whenever one exists.
+
+Do NOT silently fall back to:
+
+- opening the patient page
+- clicking the hospital UI
+- reading rendered tables
+- DOM scraping
+- screenshot/OCR extraction
+
+If a required backend operation is unproven, the system must report that the adapter is incomplete or needs repair rather than pretending the resource works through page scraping.
+
+A browser may still be used during authorized discovery to cause and observe requests. It is not the normal clinical data path after the adapter is proven.
+
+## 8. Adapter = executable connector, not a map
+
+The final adapter is both:
+
+1. discovery knowledge about how the hospital EMR works, and
+2. executable runtime logic for obtaining canonical StewardMD data.
+
+It must be reusable by future doctors at the same hospital.
+
+The adapter is shared at hospital level.
+
+Authentication is NOT shared:
+
+- Doctor A uses Doctor A's authenticated session/cookies/tokens.
+- Doctor B uses Doctor B's authenticated session/cookies/tokens.
+- Never reuse Doctor A's session for Doctor B.
+
+The runtime must bind each execution to the currently authenticated doctor's authorized hospital session.
+
+## 9. Gemini 3.8 is the reasoning brain, not the truth gate
+
+Use Gemini 3.8 to:
+
+- interpret observed actions and network evidence
+- suggest candidate requests
+- identify likely request chains
+- explain parameters/identifiers
+- propose canonical mappings
+- decide what evidence should be tested next
+
+But Gemini must not by itself mark an operation as proven.
+
+Deterministic verification must execute the request and validate the returned data/structure/chain.
+
+Use the model as the explorer's brain; use deterministic checks as the truth gate.
+
+## 10. Completion and approval gate
+
+An adapter must NOT reach `AWAITING_APPROVAL` merely because discovery produced a plausible configuration.
+
+Before approval, verify:
+
+- every required clinical resource is `PROVEN` or `PROVEN_ABSENT`
+- every required multi-request chain is complete
+- no required resource is `DOM_ONLY` or `UNKNOWN`
+- request replay succeeds using the authenticated session
+- canonical mapping succeeds
+- pagination works for the acceptance case
+- session/token handling works
+- no required runtime path opens hospital pages or scrapes DOM
+- GHIS gold audit passes for the GHIS acceptance case
+
+Approval and activation remain separate states.
+
+## 11. GHIS acceptance targets
+
+For the GHIS acceptance case, the generated adapter must reproduce the behavior of the hand-built adapter for the documented operations, including equivalents of:
+
+- worklist: `GetIPWL`
+- patient search/selection: `GetSearchPatientId` / relevant patient-search operation
+- labs list: `GetSearchPatientId`
+- lab details: `GetPrintLabResultDetailsAuth`
+- radiology list: `GetRadiologyResultPrint` workflow and its list/detail prerequisites as documented by the hand-built adapter
+- medications: `GetMedicines`
+- history: `Getopcard` + `Getconsultant` where offered
+
+The exact endpoint evidence from the active adapter must be checked rather than assumed.
+
+## 12. Final definition of "DONE"
+
+Do not report "100%", "complete", "ready", or equivalent until the actual acceptance tests have passed.
+
+The final proof must show:
+
+`doctor login`
+→ `authorized authenticated session`
+→ `autonomous discovery`
+→ `request observation`
+→ `Gemini reasoning`
+→ `candidate execution`
+→ `deterministic verification`
+→ `complete request chains`
+→ `adapter compilation`
+→ `adapter validation`
+→ `gold audit`
+→ `human approval`
+→ `WardSync automatic hospital registration`
+→ `second doctor login`
+→ `same approved adapter reused`
+→ `real clinical data retrieved through the second doctor's own session`
+
+The test must demonstrate endpoint-driven runtime retrieval, not merely that pages can be opened.
+
