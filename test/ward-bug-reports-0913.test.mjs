@@ -67,3 +67,42 @@ test("BUG-MU06X41N-V874: an unavailable ICD search is said as unavailable, never
 test("BUG-MU06X41N-V874: typing in the ICD code box searches the list as the words box does", () => {
   assert.match(SRC, /e\.target\.id === "wProbText" \|\| e\.target\.id === "wProbCode"/);
 });
+
+// ---- BUG-MU09M56N-TOP1 / BUG-MU09NX9N-JJMQ: the laboratory board -------------------------------------
+const LAB_BOARD = {
+  specimens: [], toVerify: [], cultures: [], histopathology: [], criticals: [], errors: [], failed: {},
+  pending: [
+    { serviceRequestId: "sr-cbc", display: "CBC", category: "laboratory", patientId: "p1" },
+    { serviceRequestId: "sr-cxr", display: "Chest X-ray PA", category: "laboratory", patientId: "p1" },
+  ],
+};
+const labHtml = (W, extra) => W._render({ ...W._st, view: "labboard", labBoard: { ...LAB_BOARD, ...(extra || {}) }, labDept: (extra && extra.dept) || "all", list: [] });
+
+test("BUG-MU09M56N-TOP1: the Microbiology and Pathology tabs can start a culture or a histopathology report", () => {
+  const { W } = loadWard();
+  const micro = labHtml(W, { dept: "micro" });
+  assert.match(micro, /data-w-act="cultureopen:sr-cbc"/, "microbiology had no way to start a culture");
+  assert.ok(!/labresultopen:sr-cbc/.test(micro));
+  const path = labHtml(W, { dept: "path" });
+  assert.match(path, /data-w-act="histoopen:sr-cbc"/, "pathology had no way to start a report");
+  const hb = labHtml(W, { dept: "hema_bio" });
+  assert.match(hb, /labresultopen:sr-cbc/);
+  assert.ok(!/cultureopen:sr-cbc/.test(hb));
+});
+
+test("BUG-MU09NX9N-JJMQ: an X-ray awaiting its report is not offered a blood result entry, and is still listed", () => {
+  const { W } = loadWard();
+  const html = labHtml(W);
+  assert.ok(!/labresultopen:sr-cxr/.test(html), "the X-ray was offered Enter result among the blood tests");
+  assert.match(html, /Imaging orders &middot; 1/);
+  assert.match(html, /Chest X-ray PA/);
+  assert.match(html, /data-w-act="radboard"/);
+});
+
+test("BUG-MU09M56N-TOP1: a laboratory list that failed to load says so in its own card, never 'No tests awaiting'", () => {
+  const { W } = loadWard();
+  const html = labHtml(W, { pending: [], failed: { "tests awaiting a result": true, specimens: true }, errors: ["tests awaiting a result", "specimens"] });
+  assert.ok(!/No tests awaiting a result/.test(html));
+  assert.ok(!/No specimens awaiting collection/.test(html));
+  assert.match(html, /Could not be read\. Do not read this as none\./);
+});

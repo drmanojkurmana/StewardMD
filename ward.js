@@ -3756,7 +3756,10 @@
     }
     var b = state.labBoard;
     var dept = state.labDept || "all";
-    var none = function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
+    var showHemaBio = dept === "all" || dept === "hema_bio";
+    var showPath = dept === "all" || dept === "path";
+    var showMicro = dept === "all" || dept === "micro";
+    var none =function (what) { return '<p class="w-empty">' + esc(what) + "</p>"; };
     var stateOf = function (s) { return (s && s.collection && s.collection.state) || "none"; };
     var spec = (b.specimens || []).filter(function (s) { return !labIsImaging(s); });
     var uncollected = spec.filter(function (s) { return stateOf(s) === "none" || stateOf(s) === "failed"; });
@@ -3771,13 +3774,23 @@
     /* A test awaiting a result used to be a line with nothing to do: the laboratory board listed what
      * was waiting and gave the laboratory no way to report it. The button opens the entry form for
      * that one request, so a result is always reported AGAINST the order that asked for it. */
+    /* BUG-MU09M56N-TOP1: the Pathology and Microbiology tabs hid this list, and it is the only place a
+     * culture or a histopathology report is started from, so those two tabs could not begin any work.
+     * Every tab lists what awaits a result, with the entry that tab does. */
     var pendRow = function (p) {
       return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
         '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div>" +
-        '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + "Enter result</button>" +
-        '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(p.serviceRequestId) + '">' + ms("coronavirus") + "Culture</button>" +
-        '<button class="w-btn ghost sm" data-w-act="histoopen:' + esc(p.serviceRequestId) + '">' + ms("description") + "Histopathology</button></li>";
+        (showHemaBio ? '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + "Enter result</button>" : "") +
+        (showMicro ? '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(p.serviceRequestId) + '">' + ms("coronavirus") + "Culture</button>" : "") +
+        (showPath ? '<button class="w-btn ghost sm" data-w-act="histoopen:' + esc(p.serviceRequestId) + '">' + ms("description") + "Histopathology</button>" : "") + "</li>";
     };
+    /* BUG-MU09NX9N-JJMQ: an X-ray waiting for its report sat among the blood tests with an Enter result
+     * button. Imaging is reported on the Radiology board; it is still listed here, apart, so an order
+     * filed under the wrong category is never lost from both boards. */
+    var pendingAll = b.pending || [];
+    var pendingLab = pendingAll.filter(function (p) { return !labIsImaging(p); });
+    var pendingImg = pendingAll.filter(labIsImaging);
+    var failed = b.failed || {};
     var critRow = function (c) {
       var e = c.escalation || {};
       return '<li class="lvl-' + esc(e.level || "due") + '"><div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
@@ -3785,7 +3798,12 @@
         '</div><div class="w-crit-m">' + ms("person") + labWho(c.patientId) +
         (e.minutesOpen == null ? "" : " &middot; " + e.minutesOpen + " min open") + "</div></li>";
     };
-    var card = function (icon, title, n, rows, emptyWords) {
+    // A list that failed to load is not an empty list: no count, and it says so in the card itself.
+    var card = function (icon, title, n, rows, emptyWords, readKey) {
+      if (readKey && failed[readKey]) {
+        return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + "</h3></div>" +
+          '<p class="w-hint warn">' + ms("error") + "Could not be read. Do not read this as none.</p></div>";
+      }
       return '<div class="w-card"><div class="w-card-h">' + ms(icon) + "<h3>" + esc(title) + " &middot; " + n + "</h3></div>" +
         (n ? '<ul class="w-crits">' + rows + "</ul>" : none(emptyWords)) + "</div>";
     };
@@ -3797,10 +3815,6 @@
       '<button class="w-chip' + (dept === "micro" ? " on" : "") + '" data-w-act="labdept:micro" type="button">Microbiology</button>' +
       '</div>';
 
-    var showHemaBio = dept === "all" || dept === "hema_bio";
-    var showPath = dept === "all" || dept === "path";
-    var showMicro = dept === "all" || dept === "micro";
-
     return '<div class="w-chart-h"><button class="w-ic" data-w-act="back" aria-label="Back">' + ms("arrow_back") + "</button>" +
       "<div><b>Laboratory</b><small>hospital-wide</small></div>" +
       '<button class="w-ic" data-w-act="labboardload" title="Refresh">' + ms("refresh") + "</button></div>" +
@@ -3809,7 +3823,7 @@
         ? '<div class="w-card warn"><div class="w-card-h">' + ms("error") + "<h3>Could not be read</h3></div>" +
           "<p>" + esc(b.errors.join(", ")) + ". What is shown below is incomplete.</p></div>"
         : "") +
-      (showHemaBio ? card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.") : "") +
+      (showHemaBio ? card("colorize", "Awaiting collection", uncollected.length, uncollected.map(specRow).join(""), "No specimens awaiting collection.", "specimens") : "") +
       (showHemaBio ? card("local_shipping", "Collected, awaiting the laboratory", inTransit.length, inTransit.map(function (sp) {
         var id = sp.collection && sp.collection.specimenId;
         return specRow(sp).replace(/<\/li>$/, "") +
@@ -3817,24 +3831,30 @@
             ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + "Received</button>" +
               '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + "Failed</button>"
             : "") + "</li>";
-      }).join(""), "Nothing in transit.") : "") +
+      }).join(""), "Nothing in transit.", "specimens") : "") +
       (showHemaBio ? labResultForm(state) : "") +
-      (showHemaBio && (b.toVerify || []).length ? card("verified", "Awaiting verification", b.toVerify.length, b.toVerify.map(labVerifyRow).join(""), "") : "") +
-      (showHemaBio ? card("biotech", "Awaiting a result", (b.pending || []).length, (b.pending || []).map(pendRow).join(""), "No tests awaiting a result.") : "") +
-      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.") +
+      (showHemaBio && ((b.toVerify || []).length || failed["results awaiting verification"]) ? card("verified", "Awaiting verification", (b.toVerify || []).length, (b.toVerify || []).map(labVerifyRow).join(""), "", "results awaiting verification") : "") +
+      card("biotech", "Awaiting a result", pendingLab.length, pendingLab.map(pendRow).join(""), "No tests awaiting a result.", "tests awaiting a result") +
+      (pendingImg.length ? '<div class="w-card"><div class="w-card-h">' + ms("radiology") + "<h3>Imaging orders &middot; " + pendingImg.length + "</h3></div>" +
+        '<p class="w-hint">' + ms("info") + "Reported on the Radiology board, not entered here.</p>" +
+        '<ul class="w-crits">' + pendingImg.map(function (p) {
+          return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" + '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div></li>";
+        }).join("") + "</ul>" +
+        '<button class="w-btn ghost sm" data-w-act="radboard">' + ms("arrow_forward") + "Open the Radiology board</button></div>" : "") +
+      card("priority_high", "Critical results", (b.criticals || []).length, (b.criticals || []).map(critRow).join(""), "No open critical results.", "critical results") +
       (showMicro ? (cultureForm(state) + card("coronavirus", "Cultures in progress", (b.cultures || []).length, (b.cultures || []).map(function (c) {
         return '<li><div class="w-crit-h"><b>' + esc(c.panel || "Culture") + "</b>" + '<span class="w-st due">' + esc(CULTURE_STAGE_WORDS[c.stage] || c.stage) + "</span>" +
           (c.critical ? '<span class="w-st overdue">positive blood culture</span>' : "") + "</div>" +
           '<div class="w-crit-m">' + ms("person") + labWho(c.patientId) + " &middot; " + esc((c.specimen && c.specimen.type) || "") + "</div>" +
           '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(c.serviceRequestId) + '">' + ms("edit_note") + "Update stage</button></li>";
-      }).join(""), "No cultures in progress.")) : "") +
+      }).join(""), "No cultures in progress.", "cultures in progress")) : "") +
       (showPath ? (histoForm(state) + card("description", "Histopathology reports", (b.histopathology || []).length, (b.histopathology || []).map(function (h) {
         var signed = h.status === "final" || h.status === "corrected";
         return '<li><div class="w-crit-h"><b>' + esc(h.panel || "Histopathology") + "</b>" +
           '<span class="w-st ' + (signed ? "" : "due") + '">' + (signed ? "signed" : h.awaitingVerification ? "awaiting verification" : "not signed") + "</span></div>" +
           '<div class="w-crit-m">' + ms("person") + labWho(h.patientId) + (h.diagnosis ? " &middot; " + esc(h.diagnosis) : "") + "</div>" +
           (signed ? '<button class="w-btn ghost sm" data-w-act="histoaddendum:' + esc(h.reportId) + '">' + ms("post_add") + "Add addendum</button>" : "") + "</li>";
-      }).join(""), "No histopathology reports.")) : "");
+      }).join(""), "No histopathology reports.", "cultures in progress")) : "");
   }
 
   /* MICROBIOLOGY ENTRY (P1.9). One form per stage update; every save is a new version of the same
@@ -4127,11 +4147,12 @@
   function loadLabBoard() {
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId);
-    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], errors: [] };
+    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], errors: [], failed: {} };
+    var fail = function (name) { out.errors.push(name); out.failed[name] = true; };
     var read = function (name, path, fn) {
       return apiGet(path).then(function (r) {
-        if (r && r.ok) fn(r); else out.errors.push(name);
-      }).catch(function () { out.errors.push(name); });
+        if (r && r.ok) fn(r); else fail(name);
+      }).catch(function () { fail(name); });
     };
     return Promise.all([
       read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
