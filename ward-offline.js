@@ -333,26 +333,32 @@
       cachePut: cachePut, cacheGet: cacheGet, clearAll: clearAll, load: load };
   }
 
+  /* The words below are English. ward.js passes its staff-language lookup as tr (owner decision 2026-09-15: a
+   * picked language changes the whole staff interface); without one, tr fills the English, so every other caller
+   * and test reads exactly what it always did. The server's refusal reason is a value, never looked up. */
+  function en(key, text, vars) { return vars ? text.replace(/\{(\w+)\}/g, function (m, k) { return Object.prototype.hasOwnProperty.call(vars, k) ? "" + vars[k] : m; }) : text; }
   /* PURE. The words for the sync state, the same on every screen. */
-  function label(s) {
-    if (!s) return { kind: "online", text: "Online" };
-    if (s.readFailed) return { kind: "conflicts", text: "Entries kept on this device could not be read" };
-    if (s.syncing) return { kind: "syncing", text: "Syncing" };
-    if (s.conflicts) return { kind: "conflicts", text: "Conflicts (" + s.conflicts + ")" };
-    if (!s.online) return { kind: "offline", text: "Offline (" + s.waiting + " waiting)" };
-    if (s.authNeeded && s.waiting) return { kind: "offline", text: "Sign in again to send (" + s.waiting + " waiting)" };
-    if (s.waiting) return { kind: "offline", text: "Online (" + s.waiting + " waiting)" };
-    return { kind: "online", text: "Online" };
+  function label(s, tr) {
+    tr = tr || en;
+    if (!s) return { kind: "online", text: tr("ward.offline-online", "Online") };
+    if (s.readFailed) return { kind: "conflicts", text: tr("ward.offline-entries-could-not-be-read", "Entries kept on this device could not be read") };
+    if (s.syncing) return { kind: "syncing", text: tr("ward.offline-syncing", "Syncing") };
+    if (s.conflicts) return { kind: "conflicts", text: tr("ward.offline-conflicts", "Conflicts ({n})", { n: s.conflicts }) };
+    if (!s.online) return { kind: "offline", text: tr("ward.offline-offline-waiting", "Offline ({n} waiting)", { n: s.waiting }) };
+    if (s.authNeeded && s.waiting) return { kind: "offline", text: tr("ward.offline-sign-in-again-to-send", "Sign in again to send ({n} waiting)", { n: s.waiting }) };
+    if (s.waiting) return { kind: "offline", text: tr("ward.offline-online-waiting", "Online ({n} waiting)", { n: s.waiting }) };
+    return { kind: "online", text: tr("ward.offline-online", "Online") };
   }
   /* PURE. What a settled item says. A dose refusal is loud and uses the exact words. */
-  function itemText(it) {
+  function itemText(it, tr) {
+    tr = tr || en;
     if (it.state === "refused") {
-      return it.kind === "mar" ? "Not recorded - the dose record was refused: " + it.reason
-        : "Not recorded - the " + (WORDS[it.kind] || "write") + " was refused: " + it.reason;
+      return it.kind === "mar" ? tr("ward.offline-dose-refused", "Not recorded - the dose record was refused: {reason}", { reason: it.reason })
+        : tr("ward.offline-write-refused", "Not recorded - the {what} was refused: {reason}", { what: tr("ward.offline-word-" + (WORDS[it.kind] ? it.kind : "write"), WORDS[it.kind] || "write"), reason: it.reason });
     }
-    if (it.state === "conflict" && it.error === "order_changed") return "CONFLICT: the order changed after this dose was charted. Nothing was recorded. Compare it with the order as it is now.";
-    if (it.state === "conflict") return "CONFLICT: this " + (WORDS[it.kind] || "record") + " changed on the server after you saw it. Nothing was overwritten.";
-    return "Saved on this device, not yet sent.";
+    if (it.state === "conflict" && it.error === "order_changed") return tr("ward.offline-order-changed", "CONFLICT: the order changed after this dose was charted. Nothing was recorded. Compare it with the order as it is now.");
+    if (it.state === "conflict") return tr("ward.offline-record-changed", "CONFLICT: this {what} changed on the server after you saw it. Nothing was overwritten.", { what: tr("ward.offline-word-" + (WORDS[it.kind] ? it.kind : "record"), WORDS[it.kind] || "record") });
+    return tr("ward.offline-saved-not-yet-sent", "Saved on this device, not yet sent.");
   }
 
   /* The device instance ward.js uses. Built lazily so this file loads in Node for tests. */

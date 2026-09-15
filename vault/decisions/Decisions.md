@@ -6458,3 +6458,20 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - Account restore waits up to 10 s (was 3.5 s, a race on a slow link). No server change; a genuine no-session is
   still 401 and the banner stays.
 - Tests: `test/wardsynq-workstation-credential.test.mjs`, `test/run-wardsynq-workstation-open.mjs`.
+
+## 2026-09-15 The staff language reaches the whole ward, through a codemod with the English inline (ui-i18n-ward)
+- Owner decision: a staff member's picked language changes the whole staff interface, not the rail. ward.js writes
+  every string through `wT` (plain text), `wTH` (markup), `wTA` (title/placeholder/aria-label/alt), `wTD` (dialogs),
+  each call carrying its English inline, keys `ward.*` in one delimited block at the end of EN in
+  `wardsynq/site/i18n.js`. ward.js without i18n.js (StewardMD app, harnesses) or with English picked renders
+  byte-identical English. The language is the shell picker's `G.WSQ.state.navLang`; paint() sets `<html lang>`.
+- Written by `scripts/wardsynq-i18n-ward-codemod.mjs` (acorn, dev-time only), re-runnable after merging other
+  ward.js work: literal-level edits, comments kept. Anything recorded is only ever a `{placeholder}` value, marked
+  `lang="en"` inside markup; strings sent to the server, compared, selectors, other attributes, units, routes,
+  frequencies, laterality, abbreviations and clinical-shaped text are skipped. Module-level word tables are read
+  through `wTEn()` where rendered. eMAR verbs and states are shown translated; the machine spelling is still sent.
+- Safety: a translated refusal/critical/allergy/not-saved text keeps its English under it (`<small class="w-en">`);
+  plain texts kept in `st.err` find their English through `wEnglishOf`; dialogs show both.
+- Not covered: discharge.js (its printable must stay English; print.dc.* already handles the print), strings built by
+  `.push()` into arrays, prompt default answers. Translations are not written on this branch.
+- Tests: `test/ward-staff-i18n.test.mjs` (fake TE[...] catalog), `test/run-ward-staff-i18n-ui.mjs` (headless Chrome).
