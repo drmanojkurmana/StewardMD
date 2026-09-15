@@ -1488,6 +1488,7 @@ export async function onRequest(context) {
          * deployment owner's act. No clinical capability reaches it: a doctor or nurse gets 403.
          * safety_officer is NOT added - it is clinical-incident safety, not account security. */
         "security-report": CAPS.STAFF_ADMIN, "audit-rows": CAPS.STAFF_ADMIN, "security-review": CAPS.STAFF_ADMIN, "restore-test": CAPS.STAFF_ADMIN,
+        "actor-names": CAPS.STAFF_ADMIN,
         /* P2.17 anchor acknowledgement. The capability gate only narrows this to staff.admin, which
          * hr and admin members hold too: the hospital-owner check happens at the route itself, fail
          * closed, so naming the capability here grants nobody the acknowledgement. */
@@ -2771,6 +2772,33 @@ export async function onRequest(context) {
           readerDirectory: { accountEmail: (id) => ORG.accountEmail(env, id), accessIdOf: async (email) => "cfa:" + (await sha256hex(String(email).toLowerCase())) },
           viewerIsOwner: isOwnerOfOrg(wOrg, actor.id) || !!actor.isOwner });
         return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* LT-37: WHO an audit row's actor id is, for the audit screen. The record stores the id an audit follows
+       * ("fb:<uid>", "cfa:<hash>", a staff sign-in ID, "system:..."); a person reading the list needs the staff
+       * member. Resolved only against THIS hospital's members (an account through its sign-in email): an id
+       * that is nobody here comes back unnamed, never looked up anywhere else. A mobile-number sign-in ID is not
+       * a name and is never returned as one. staff.admin only, like the rest of the audit review. */
+      if (sub === "actor-names" && method === "GET") {
+        const ids = [...new Set(String(url.searchParams.get("ids") || "").split(",").map((s) => s.trim()).filter(Boolean))].slice(0, 100);
+        const members = await ORG.listMembers(env, wOrgId);
+        const byKey = new Map();
+        for (const m of members) for (const k of [m.identity, m.email]) if (k) byKey.set(String(k).toLowerCase(), m);
+        const notAName = (s) => /^\+?[\d\s().-]{7,}$/.test(String(s || "")) || /^(fb|cfa|ghis):/.test(String(s || ""));
+        const names = {};
+        for (const id of ids) {
+          if (id.indexOf("system:") === 0) { names[id] = { system: true }; continue; }
+          let m = byKey.get(id.toLowerCase()) || null;
+          if (!m && id.indexOf("fb:") === 0) { const email = await ORG.accountEmail(env, id).catch(() => null); if (email) m = byKey.get(email) || null; }
+          if (!m && id.indexOf("cfa:") === 0) {
+            for (const x of members) {
+              const e = [x.email, x.identity].find((v) => /@/.test(String(v || "")));
+              if (e && "cfa:" + (await sha256hex(String(e).toLowerCase())) === id) { m = x; break; }
+            }
+          }
+          const label = m ? [m.email, m.identity].find((v) => v && !notAName(v)) || null : null;
+          names[id] = m ? { name: label, role: m.role || null } : { name: null, role: null };
+        }
+        return json({ ok: true, names }, 200, request);
       }
       if (sub === "audit-rows" && method === "GET") {
         const r = await auditRowsForReview(request, env, { ...deps, ids: url.searchParams.get("ids") || "" });

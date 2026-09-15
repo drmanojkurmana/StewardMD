@@ -1882,6 +1882,13 @@
       down: T(c, "site.admin.health.down", "Down"),
     }[s];
   }
+  /* LT-34: a check time in this browser's own clock, day first, digits only ("15-09-2026 22:15"), never a raw UTC
+   * ISO string. Anything that is not a time is shown as it came. */
+  function localAt(iso) {
+    var d = new Date(iso), p = function (n) { return (n < 10 ? "0" : "") + n; };
+    if (!iso || isNaN(d.getTime())) return iso == null ? "" : String(iso);
+    return p(d.getDate()) + "-" + p(d.getMonth() + 1) + "-" + d.getFullYear() + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
   function systemHealthHtml(c, r) {
     var esc = c.esc;
     if (r == null) return '<div class="card"><h2>' + esc(T(c, "site.admin.health.title", "System health")) + '</h2><span class="spin"></span> ' + esc(T(c, "site.admin.health.checking", "Checking each dependency...")) + "</div>";
@@ -1889,10 +1896,12 @@
       ". " + esc(T(c, "site.admin.health.unknownNote", "The status of every dependency is unknown. This is not the same as everything being up.")) + "</div></div>";
     var head = r.overall === "up" ? '<div class="msg ok">' + esc(T(c, "site.admin.health.allUp", "Every dependency answered its check.")) + "</div>"
       : '<div class="msg err">' + esc(T(c, "site.admin.health.someDown", "{n} of {total} dependencies are not fully up.", { n: r.dependencies.filter(function (d) { return d.status !== "up"; }).length, total: r.dependencies.length })) + "</div>";
-    return '<div class="card"><h2>' + esc(T(c, "site.admin.health.title", "System health")) + '</h2><p class="quiet">' + esc(T(c, "site.admin.health.checkedAt", "Checked {at}. Each check gives up after {ms} ms and counts as down.", { at: r.generatedAt, ms: r.timeoutMs })) + "</p>" + head +
+    return '<div class="card"><h2>' + esc(T(c, "site.admin.health.title", "System health")) + '</h2><p class="quiet">' + esc(T(c, "site.admin.health.checkedAt", "Checked {at}. Each check gives up after {ms} ms and counts as down.", { at: localAt(r.generatedAt), ms: r.timeoutMs })) + "</p>" + head +
       '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.health.colDependency", "Dependency")) + "</th><th>" + esc(T(c, "site.admin.health.colStatus", "Status")) + "</th><th>" + esc(T(c, "site.admin.health.colChecked", "Checked")) + "</th><th>" + esc(T(c, "site.admin.health.colMeaning", "What it means")) + "</th></tr></thead><tbody>" +
       r.dependencies.map(function (d) {
-        return '<tr class="' + (d.status === "up" ? "" : "warn") + '"><td>' + esc(d.name) + "</td><td><b>" + esc(healthLabel(c, d.status) || T(c, "site.admin.health.unknown", "Unknown")) + "</b></td><td>" + esc(d.checkedAt) + "</td><td>" +
+        // LT-34: never set up (the platform owner's pending choice) reads as that, not as a bare Down.
+        var label = d.setup === "platform" ? T(c, "site.admin.health.notSetUp", "Not set up yet") : healthLabel(c, d.status);
+        return '<tr class="' + (d.status === "up" ? "" : "warn") + '"><td>' + esc(d.name) + "</td><td><b>" + esc(label || T(c, "site.admin.health.unknown", "Unknown")) + "</b></td><td>" + esc(localAt(d.checkedAt)) + "</td><td>" +
           (d.consequence ? EN(c, esc(d.consequence)) + "<br>" : "") + (d.reason ? '<span class="quiet">' + EN(c, esc(d.reason)) + "</span>" : "") + "</td></tr>";
       }).join("") + '</tbody></table></div><button type="button" class="btn ghost" id="healthRecheck">' + esc(T(c, "site.admin.health.checkAgain", "Check again")) + "</button></div>";
   }

@@ -136,6 +136,22 @@ for (const [id, downOver, hangOver] of CASES) {
   });
 }
 
+test("LT-34: storage never set up says so (still down), a real refusal stays a plain Down; no backup says what to do", async () => {
+  for (const probe of [{ state: "not_configured" }, { state: "failed", step: "put", providerStatus: 400, providerCode: "InvalidBucketName" }, { state: "failed", step: "put", providerStatus: 404, providerCode: "NoSuchBucket" }]) {
+    const d = byId(await H.systemHealthReport(healthy({ documentProbe: async () => probe })))["document-storage"];
+    assert.deepEqual([d.status, d.setup], ["down", "platform"], JSON.stringify(d));
+    assert.match(d.consequence, /not set up yet: the platform owner has not yet chosen the storage bucket/);
+    assert.match(d.consequence, /uploads fail and existing documents cannot be opened; charting continues/);
+  }
+  const refused = byId(await H.systemHealthReport(healthy({ documentProbe: async () => ({ state: "failed", step: "put", providerStatus: 403, providerCode: "AccessDenied" }) })))["document-storage"];
+  assert.equal(refused.setup, undefined, "an outage is not a setup gap");
+  assert.match(refused.reason, /status 403, AccessDenied/);
+  const backup = byId(await H.systemHealthReport(healthy({ repository: { latestByType: async () => [] } })))["backup"];
+  assert.match(backup.reason, /No backup run has ever been recorded\./);
+  assert.match(backup.reason, /What to do: .*Record a restore test/);
+  assert.ok(!/What to do/.test(byId(await H.systemHealthReport(healthy()))["backup"].reason || ""), "not when both are on record");
+});
+
 test("degraded branches: slow record store, MaiK off, one of two model providers failing, late tick, dead events", async () => {
   const slow = byId(await H.systemHealthReport(healthy({ repository: { probe: async () => ({ ok: true, ms: 2500 }) } })))["record-store"];
   assert.equal(slow.status, "degraded");
@@ -241,4 +257,9 @@ test("screen: loading and a failed load never look healthy; each dependency show
   assert.match(shown, /uploads fail and existing documents cannot be opened; charting continues/);
   assert.ok(!/Every dependency answered/.test(shown));
   assert.ok(!/[—–]/.test(loading + failed + shown), "no em or en dash on screen");
+  // LT-34: a setup gap reads "Not set up yet", and times are this browser's clock, not raw ISO.
+  const setup = html(c, { ok: true, overall: "down", generatedAt: "2026-09-15T16:45:50.537Z", timeoutMs: 3000, dependencies: [{ id: "document-storage", name: "Document storage", status: "down", setup: "platform", checkedAt: "2026-09-15T16:45:50.537Z", reason: "x", consequence: "y" }] });
+  assert.match(setup, /<b>Not set up yet<\/b>/);
+  assert.ok(!setup.includes("2026-09-15T16:45:50.537Z"), setup);
+  assert.match(setup, /\d{2}-09-2026 \d{2}:\d{2}/);
 });

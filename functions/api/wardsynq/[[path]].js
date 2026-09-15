@@ -134,7 +134,8 @@ export async function handle(request, env, deps) {
       if (rest.length === 0) return jsonResponse({ ok: true, ...svc.descriptor() });
 
       if (rest[0] === "changes" && rest.length === 1) {
-        const page = await svc.changes(url.searchParams.get("since"), url.searchParams.get("limit"));
+        const newest = url.searchParams.get("newest") === "1";
+        const page = await svc.changes(url.searchParams.get("since"), url.searchParams.get("limit"), newest ? { newest: true, before: url.searchParams.get("before") } : undefined);
         return jsonResponse({ ok: true, ...page });
       }
       if (rest[0] === "list" && rest.length === 2) {

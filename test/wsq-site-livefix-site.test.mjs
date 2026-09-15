@@ -16,6 +16,7 @@ const sb = { window: { WSQ: { page() {} } } };
 vm.createContext(sb);
 vm.runInContext(read("wardsynq/site/pages/rota.js"), sb);
 vm.runInContext(read("wardsynq/site/pages/maik.js"), sb);
+vm.runInContext(read("wardsynq/site/pages/audit.js"), sb);
 const W = sb.window.WSQ;
 const C = { esc, state: { who: {} } };
 
@@ -49,6 +50,23 @@ test("LT-40 MaiK: not set up, not answering and refused each say so in words, wi
   assert.match(f(C, null), /MaiK could not be reached/);
   assert.match(f(C, { ok: false, error: "patient_required", detail: "a MaiK request is always about one identified patient" }), /MaiK could not answer this request\.[\s\S]*one identified patient/);
   assert.ok(!f(C, { ok: false, error: "x", detail: "<img src=x>" }).includes("<img"), "the server's text is escaped");
+});
+
+test("LT-37 audit: actors by name for an admin, never a raw account id or mobile; bookkeeping types in words; local times", () => {
+  const A = W._audit;
+  const names = { "fb:DcGIzIXwxURU0G9L4J5jehluENl1": { name: "dr.kumar@hosp.example", role: "admin" }, "8897298117": { name: null, role: "doctor" } };
+  assert.equal(A.actorHtml(C, "fb:DcGIzIXwxURU0G9L4J5jehluENl1", names), "dr.kumar@hosp.example, admin");
+  assert.equal(A.actorHtml(C, "fb:DcGIzIXwxURU0G9L4J5jehluENl1", null), "Staff account, name not set", "not an admin: no lookup, still no raw id");
+  assert.equal(A.actorHtml(C, "8897298117", names), "Staff account, name not set, doctor");
+  assert.equal(A.actorHtml(C, "system:bed-claim", null), "System");
+  assert.equal(A.actorHtml(C, "", null), "System", "a bookkeeping row with no writer");
+  assert.equal(A.actorHtml(C, "nurse1", null), "nurse1");
+  assert.equal(A.typeText("_wardsynq_bed_claim"), "bed claim");
+  assert.equal(A.typeText("MedicationOrder"), "MedicationOrder");
+  assert.match(A.localAt("2026-09-15T16:45:50.537Z"), /^\d{2}-09-2026 \d{2}:\d{2}$/);
+  assert.equal(A.localAt(""), "");
+  const src = read("wardsynq/site/pages/audit.js");
+  assert.match(src, /\/changes\?newest=1&limit=100/, "the list asks for newest first");
 });
 
 test("LT-40 MaiK patient picker: no internal record id under each name", () => {
