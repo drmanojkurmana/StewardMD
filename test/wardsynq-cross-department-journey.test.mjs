@@ -188,7 +188,7 @@ test("JOURNEY: ED -> ICU -> WARD -> SURGERY -> WARD -> DISCHARGE stays ONE patie
   assert.equal(incise.__status, 200, JSON.stringify(incise), "the checklist gate cleared - incision reachable, proving the journey's surgery leg is a REAL gated case, not a bypass");
 
   // ---- Discharge: closes the journey. Patient stays the same throughout. -----------------------------
-  const finalDischarge = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: icuEncounterId, disposition: "home" });
+  const finalDischarge = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: icuEncounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(finalDischarge.__status, 200, JSON.stringify(finalDischarge));
   const closedWard = await RECORD.latest(TENANT_ROW.id, "Encounter", icuEncounterId);
   assert.equal(closedWard.status, "finished");

@@ -48,8 +48,13 @@ export function validateTariff(item) {
   if (!item || !String(item.name || "").trim()) return { ok: false, error: "name_required" };
   const price = Math.round(Number(item.price));
   if (!isFinite(price) || price < 0) return { ok: false, error: "bad_price" };
-  const kind = (item.kind === "medication" || item.kind === "service") ? item.kind : "investigation";
-  return { ok: true, item: { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price } };
+  /* bed, nursing and visit joined 2026-09-15 (LT-30): charges per day of an inpatient stay, priced by the
+   * ward bill (functions/_wardsynq/charge-capture.js). `ward` narrows one to a ward by name; empty means
+   * every ward. They are never offered as OPD orders (inv-catalog lists tests and medicines only). */
+  const kind = ["medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
+  const out = { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price };
+  if (kind === "bed" || kind === "nursing" || kind === "visit") out.ward = String(item.ward || "").trim();
+  return { ok: true, item: out };
 }
 
 // Validate an order before create.

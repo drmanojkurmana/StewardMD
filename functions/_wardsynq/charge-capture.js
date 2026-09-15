@@ -37,6 +37,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -136,13 +137,19 @@ function capturableFrom(slices) {
 function priceWith(items, tariff) {
   const table = tariff && typeof tariff === "object" ? tariff : {};
   const byCode = {};
-  for (const k of Object.keys(table)) byCode[str(k).toUpperCase()] = table[k];
+  for (const k of Object.keys(table)) byCode[str(k).toUpperCase()] = k;
 
   const priced = [], unpriced = [];
   let total = 0, currency = null;
 
-  for (const it of items || []) {
-    const entry = byCode[str(it.code).toUpperCase()];
+  for (let it of items || []) {
+    /* By code, then by the name it was recorded under. A released report carries the test's name as
+     * its code ("Complete blood count"), and the price list names the test the same way, so a price
+     * set on the Price list screen reaches the bill without anybody learning an internal code. The
+     * line is billed under the price list's own key, which is also what GST is looked up by. */
+    const key = byCode[str(it.code).toUpperCase()] || byCode[str(it.display).toUpperCase()];
+    const entry = key === undefined ? undefined : table[key];
+    if (key !== undefined && key !== it.code) it = { ...it, code: key };
     const amount = entry && typeof entry === "object" ? Number(entry.amount) : Number(entry);
     /* `Number("")` is 0 and 0 is finite. A tariff entry that exists and carries no amount is a
      * configuration mistake, and treating it as a price of zero would silently give the item away. */
@@ -164,6 +171,88 @@ function priceWith(items, tariff) {
   }
   // Money, rounded once at the end rather than per line.
   return { priced, unpriced, total: Math.round(total * 100) / 100, currency };
+}
+
+/**
+ * PURE. The one price table charges are priced from: the hospital's configured `wardsynq.tariff`
+ * and the Price list the Admin Center edits (q_tariff rows, prices in paise).
+ *
+ * Until LT-30 the ward bill read ONLY the configuration, while the Price list screen wrote only
+ * q_tariff, so an administrator could set every price on screen and the bill still said "no price
+ * set". A Price list row wins over a configured entry with the same key: it is the one the hospital
+ * can see and change, and its changes are audited. A row is keyed by its code, and by its name
+ * when it has no code. A withdrawn row prices nothing.
+ */
+const DAILY_KINDS = Object.freeze(["bed", "nursing", "visit"]);
+function tariffTable(configTariff, priceListRows) {
+  const out = {};
+  const cfg = configTariff && typeof configTariff === "object" ? configTariff : {};
+  for (const k of Object.keys(cfg)) out[k] = cfg[k];
+  for (const r of priceListRows || []) {
+    if (!r || r.active === false) continue;
+    const key = str(r.code) || str(r.name);
+    const paise = Number(r.price);
+    if (!key || !Number.isFinite(paise) || paise < 0) continue;
+    for (const k of Object.keys(out)) if (k.toUpperCase() === key.toUpperCase()) delete out[k];
+    out[key] = { amount: paise / 100, description: str(r.name) || key, kind: str(r.kind) || null, ward: str(r.ward) || null,
+      ...(r.gstRate !== undefined && r.gstRate !== null && r.gstRate !== "" ? { gstRate: r.gstRate } : {}) };
+    // A test is also found by its name, so a coded row still prices a report recorded under the name.
+    if (str(r.code) && str(r.name) && !Object.keys(out).some((k) => k.toUpperCase() === str(r.name).toUpperCase())) out[str(r.name)] = out[key];
+  }
+  return out;
+}
+
+const DAY_MS = 86400000;
+/**
+ * PURE. The days of an inpatient stay, each with the ward the patient was on when the day began.
+ * A day is charged once it has started: admitted at 09:00 and still here at 09:01 the next morning
+ * is two days. `versions` is the Encounter's history (oldest first) so a transfer moves the ward
+ * from the day it happened; without it every day is on the current ward.
+ * ponytail: the ward at the START of each day, not the ward the patient spent most of it on. Split
+ * a day at the transfer time if a hospital bills that way.
+ */
+function stayDays(encounter, versions, nowMs) {
+  const start = Date.parse(str(encounter && encounter.periodStart));
+  const end = encounter && encounter.periodEnd ? Date.parse(str(encounter.periodEnd)) : nowMs;
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return [];
+  // ponytail: capped at a year of days per stay; a longer stay is billed in parts.
+  const count = Math.min(366, Math.max(1, Math.ceil((end - start) / DAY_MS)));
+  const moves = (versions || []).filter(Boolean);
+  const days = [];
+  for (let n = 1; n <= count; n++) {
+    const t = start + (n - 1) * DAY_MS;
+    let ward = str(encounter.location && encounter.location.ward);
+    if (moves.length) {
+      ward = str(moves[0].location && moves[0].location.ward) || ward;
+      for (const v of moves) { const m = Date.parse(str(v.movedAt)); if (Number.isFinite(m) && m <= t) ward = str(v.location && v.location.ward) || ward; }
+    }
+    days.push({ n, at: new Date(t).toISOString(), ward });
+  }
+  return days;
+}
+
+/**
+ * PURE. What a stay day is charged: its bed, and any nursing or doctor-visit charge the price list
+ * sets per day. A bed is ONE line a day (the ward's own bed price, else the hospital-wide one) and
+ * is listed with no price when neither exists, because a stay with no bed charge is a gap, not a
+ * gift. Nursing and visit charges exist only where the price list names them.
+ */
+function stayDayItems(encounter, days, table) {
+  const entries = Object.keys(table || {}).map((k) => ({ key: k, e: table[k] })).filter((x) => x.e && typeof x.e === "object" && DAILY_KINDS.includes(x.e.kind));
+  const sameWard = (e, ward) => str(e.ward).toUpperCase() === str(ward).toUpperCase();
+  const seen = new Set(), items = [];
+  for (const d of days || []) {
+    const bed = entries.find((x) => x.e.kind === "bed" && x.e.ward && sameWard(x.e, d.ward)) || entries.find((x) => x.e.kind === "bed" && !x.e.ward);
+    items.push({ code: bed ? bed.key : "BED-DAY", display: bed ? (bed.e.description || bed.key) : `Bed per day${d.ward ? ", " + d.ward : ""}`,
+      at: d.at, ward: d.ward || null, day: d.n, sourceType: "Encounter", sourceId: `${encounter.id}:bed:${d.n}`, patientId: encounter.patientId || null, quantity: 1 });
+    for (const x of entries) {
+      if (x.e.kind === "bed" || (x.e.ward && !sameWard(x.e, d.ward)) || seen.has(`${x.e.description}:${d.n}`)) continue;
+      seen.add(`${x.e.description}:${d.n}`);
+      items.push({ code: x.key, display: x.e.description || x.key, at: d.at, ward: d.ward || null, day: d.n,
+        sourceType: "Encounter", sourceId: `${encounter.id}:${x.e.kind}:${x.key}:${d.n}`, patientId: encounter.patientId || null, quantity: 1 });
+    }
+  }
+  return items;
 }
 
 async function open_(request, env, ctx, need) {
@@ -193,11 +282,16 @@ async function chargesForPatient(request, env, ctx) {
   if (error) return { ...base, ...error, items: [] };
 
   const types = Object.keys(HAPPENED);
-  let slices;
+  /* A slice that could not be read is NAMED, not treated as nothing done. Reading it as empty is
+   * how a bill looks settled when the doses on it were simply not visible to this request. */
+  const unreadable = [];
+  let slices, stays = [];
   try {
-    const rows = await Promise.all(types.map((t) => svc.byPatient(t, patientId).catch(() => [])));
+    const rows = await Promise.all(types.map((t) => svc.byPatient(t, patientId).catch(() => { unreadable.push(t); return []; })));
     slices = {};
     types.forEach((t, i) => { slices[t] = (rows[i] || []).filter(Boolean); });
+    stays = (await svc.byPatient("Encounter", patientId).catch(() => { unreadable.push("Encounter"); return []; }))
+      .filter((e) => e && !isExternalRecord(e) && ADMISSION_CLASSES.includes(e.class));
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), items: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), items: [] };
@@ -208,20 +302,38 @@ async function chargesForPatient(request, env, ctx) {
   const encounterId = str(ctx.encounterId);
   if (encounterId) {
     for (const t of types) slices[t] = slices[t].filter((r) => str(r.encounterId) === encounterId);
+    stays = stays.filter((e) => e.id === encounterId);
   }
 
   const { items, skipped } = capturableFrom(slices);
+  /* The days of each inpatient stay: a bed occupied is care that happened, like a dose given. The
+   * version history says which ward each day was on; if it cannot be read, the current ward is used
+   * and the charge list says so. */
+  const nowMs = Number.isFinite(Date.parse(str(ctx.now))) ? Date.parse(str(ctx.now)) : Date.now();
+  let histories = new Map();
+  if (stays.length) {
+    try { histories = await svc.histories("Encounter", stays.map((e) => e.id)); }
+    catch { histories = new Map(); }
+  }
+  let wardHistoryUnread = 0;
+  for (const e of stays) {
+    const versions = histories.get(e.id);
+    if (!versions) wardHistoryUnread += 1;
+    items.push(...stayDayItems(e, stayDays(e, versions || null, nowMs), ctx.tariff));
+  }
   const { priced, unpriced, total, currency } = priceWith(items, ctx.tariff);
 
   return {
     ...base, ok: true, patientId, encounterId: encounterId || null,
     items, priced, unpriced, total, currency,
+    ...(unreadable.length ? { unreadable, unreadableWarning: `Could not read: ${unreadable.join(", ")}. Do not read the charge list as complete.` } : {}),
+    ...(wardHistoryUnread ? { wardHistoryWarning: "The ward history of a stay could not be read, so its bed days are charged at the current ward." } : {}),
     /* Said every time. Nothing here is a charge, and the number is a proposal computed from the
      * record as it stands this second. */
     notCharged: skipped,
     tariffConfigured: !!(ctx.tariff && Object.keys(ctx.tariff).length),
     ...(ctx.tariff && Object.keys(ctx.tariff).length ? {} : {
-      tariffWarning: "This hospital has not configured wardsynq.tariff, so nothing is priced. There is no default rate card and there will not be one: a tariff is a commercial and regulatory document, not a default.",
+      tariffWarning: "No prices are set for this hospital, so nothing is priced. An administrator sets them on the Price list in the Admin Center. There is no default rate card: a price list is a commercial and regulatory document, not a default.",
     }),
     ...(unpriced.length ? {
       unpricedWarning: `${unpriced.length} item${unpriced.length === 1 ? " has" : "s have"} no price. They are listed rather than dropped: an item silently omitted is revenue nobody knows was lost, and one quietly priced at zero reads as a decision to give it away.`,
@@ -230,4 +342,4 @@ async function chargesForPatient(request, env, ctx) {
   };
 }
 
-export { HAPPENED, itemFrom, capturableFrom, priceWith, chargesForPatient };
+export { HAPPENED, DAILY_KINDS, itemFrom, capturableFrom, priceWith, tariffTable, stayDays, stayDayItems, chargesForPatient };

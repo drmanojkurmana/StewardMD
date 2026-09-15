@@ -78,14 +78,16 @@ async function patientFlow(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, flow: null };
 
-  let encounters, orders, administrations, serviceRequests, problems;
+  let encounters, orders, administrations, serviceRequests, problems, reports;
   try {
-    [encounters, orders, administrations, serviceRequests, problems] = await Promise.all([
+    [encounters, orders, administrations, serviceRequests, problems, reports] = await Promise.all([
       svc.list("Encounter", 500),
       svc.list("MedicationOrder", 1000).catch(() => []),
       svc.list("MedicationAdministration", 1000).catch(() => []),
       svc.list("ServiceRequest", 1000).catch(() => []),
       svc.list("Condition", 1000).catch(() => []),
+      // A test with a released result is not open (LT-31): the report decides, as on the discharge summary.
+      svc.list("DiagnosticReport", 1000).catch(() => []),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), flow: null };
@@ -101,7 +103,7 @@ async function patientFlow(request, env, ctx) {
     const myAdmins = (administrations || []).filter((a) => a && myOrders.some((o) => o.id === a.orderId));
     const mySr = (serviceRequests || []).filter((s) => s && s.encounterId === e.id);
     const myProblems = (problems || []).filter((c) => c && c.patientId === e.patientId);
-    const pending = pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mySr, problems: myProblems });
+    const pending = pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mySr, problems: myProblems, reports });
     return {
       encounterId: e.id, patientId: e.patientId,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,

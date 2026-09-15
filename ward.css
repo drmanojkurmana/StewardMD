@@ -438,6 +438,10 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 @media print {
   /* The pack is the page. Everything else in the app is hidden, and the shell's fixed positioning is
      undone so more than the first screenful reaches the paper. */
+  /* The page behind the ward (the map, the sidebar, the Report Bug button) is hidden too, or a Patient copy
+     printed them after the copy (LT-33). Only while the ward is open and the discharge summary is not: that
+     layer prints itself (discharge.css). */
+  body:has(> #smdWard.on):not(:has(> #smdDischarge.on)) > *:not(#smdWard) { display: none !important; }
   #smdWard { position: static; background: #fff; color: #000; }
   #smdWard .w-shell, #smdWard .w-canvas { display: block; height: auto; overflow: visible; padding: 0; }
   #smdWard .w-top, #smdWard .w-noprint, #smdWard .w-refusal, #smdWard .w-err, #smdWard .w-ok { display: none !important; }

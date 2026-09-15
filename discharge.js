@@ -51,7 +51,8 @@
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
-  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
+  // aria-hidden: the icon name is a font ligature, not words; without it "verified Sign and finalise" was the button's name (LT-31).
+  function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '" aria-hidden="true">' + name + "</span>"; }
   function val(id) { var el = document.getElementById(id); return el ? String(el.value == null ? "" : el.value) : ""; }
   function confirmed(m) { try { return !!(G.confirm && G.confirm(m)); } catch (e) { return false; } }
 
@@ -114,12 +115,23 @@
   }
 
   // ---- pure helpers -------------------------------------------------------------------------
-  function when(iso, withTime) {
+  /* THE HOSPITAL'S CLOCK, NOT UTC AND NOT THE BROWSER'S (LT-19). Through the shared print helper
+   * (wardsynq/site/print-lang.js WSQPrint.date) with the hospital's own time zone or offset from the
+   * server, so this screen and the printed summary can never show one instant two ways. */
+  function when(iso, withTime, clock) {
     if (!iso) return null;
+    if (G.WSQPrint && G.WSQPrint.date) return G.WSQPrint.date(iso, clock || st.print, withTime);
     var d = new Date(iso); if (isNaN(d.getTime())) return String(iso);
     var o = { day: "2-digit", month: "short", year: "numeric" };
     if (withTime !== false) { o.hour = "2-digit"; o.minute = "2-digit"; }
     return d.toLocaleString([], o);
+  }
+  /* The assembled sections carry instants as ISO text ("Admitted: 2026-09-15T15:23:31.058Z."), which is
+   * what the signed record keeps. They are READ in the hospital's clock: only a full instant with its zone
+   * is rewritten, so a date, a dose or anything a clinician typed is never touched. */
+  var ISO_INSTANT = /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})\b/g;
+  function localTimes(text, clock) {
+    return String(text == null ? "" : text).replace(ISO_INSTANT, function (iso) { return when(iso, true, clock) || iso; });
   }
   function initials(n) {
     n = String(n || "").trim(); if (!n) return "?";
@@ -150,8 +162,8 @@
       p.mrn ? { l: "MRN", v: p.mrn, mono: true } : null,
       p.sex ? { l: "Sex", v: p.sex } : null,
       e.ward ? { l: "Ward", v: e.ward + (e.bed ? ", bed " + e.bed : "") } : null,
-      { l: "Admitted", v: when(e.admittedAt) || "not recorded" },
-      { l: "Discharged", v: when(e.dischargedAt) || "not yet" },
+      { l: "Admitted", v: when(e.admittedAt, true, s.print) || "not recorded" },
+      { l: "Discharged", v: when(e.dischargedAt, true, s.print) || "not yet" },
       los === null ? null : { l: "Stay", v: los + (los === 1 ? " day" : " days") }
     ].filter(Boolean).map(function (f) {
       return '<div class="d-fact"><dt>' + esc(f.l) + "</dt><dd" + (f.mono ? ' class="mono"' : "") + ">" + esc(f.v) + "</dd></div>";
@@ -175,7 +187,7 @@
   function signatureBlock(s) {
     if (!s.signed) return "";
     return '<div class="d-signed">' + ms("verified") +
-      "<div><b>Signed</b><span>" + esc(s.signedBy || "clinician") + (s.recordedAt ? " &middot; " + esc(when(s.recordedAt)) : "") +
+      "<div><b>Signed</b><span>" + esc(s.signedBy || "clinician") + (s.recordedAt ? " &middot; " + esc(when(s.recordedAt, true, s.print)) : "") +
       "</span><small>This version is immutable. A correction is a new signed version, not a change to this one.</small></div>" +
       '<span class="d-ver">v' + esc(s.version == null ? "?" : s.version) + "</span></div>";
   }
@@ -196,13 +208,13 @@
       "</div>";
     }
 
-    var out = '<div class="d-body' + (absent ? " absent" : "") + '">' + esc(body || NOT_RECORDED) + "</div>";
+    var out = '<div class="d-body' + (absent ? " absent" : "") + '">' + esc(localTimes(body || NOT_RECORDED, s.print)) + "</div>";
     // What the record says, beside what the clinician wrote. This is the whole point of keeping both.
     if (edited) {
       var open = !!s.compare[k];
       out += '<button class="d-compare" data-d-act="compare:' + esc(k) + '" aria-expanded="' + (open ? "true" : "false") + '">' +
         ms(open ? "expand_less" : "expand_more") + (open ? "Hide what the record says" : "Show what the record says") + "</button>" +
-        (open ? '<div class="d-source"><span class="d-srclabel">' + ms("database") + "Assembled from the record</span><div class=\"d-body absent-src\">" + esc((s.assembled && s.assembled[k]) || NOT_RECORDED) + "</div></div>" : "");
+        (open ? '<div class="d-source"><span class="d-srclabel">' + ms("database") + "Assembled from the record</span><div class=\"d-body absent-src\">" + esc(localTimes((s.assembled && s.assembled[k]) || NOT_RECORDED, s.print)) + "</div></div>" : "");
     }
     return out;
   }
@@ -237,7 +249,7 @@
   }
 
   // ---- render: the rail ----------------------------------------------------------------------
-  var PENDING_LABEL = { dose: "Dose not finished", investigation: "Investigation open", medication: "Order still active", problem: "Diagnosis unconfirmed" };
+  var PENDING_LABEL = { dose: "Dose not finished", investigation: "Result pending", medication: "Order still active", problem: "Diagnosis unconfirmed" };
   function pendingCard(s) {
     var rows = (s.pending || []).map(function (p) {
       var what = p.drug || p.display || p.orderId || p.id;
@@ -249,9 +261,9 @@
       return '<div class="d-card"><h4>' + ms("check_circle") + "Outstanding</h4>" +
         '<p class="d-ok">' + ms("check") + "Nothing is left open on this stay.</p></div>";
     }
-    // Amber, not red. None of this blocks a discharge; it has to be seen, not alarmed about.
+    // Amber, not red. It has to be seen, not alarmed about.
     return '<div class="d-card warn"><h4>' + ms("pending_actions") + "Outstanding &middot; " + s.pending.length + "</h4>" +
-      '<p class="d-cardnote">None of this stops a discharge. It should be a decision, not a discovery.</p>' +
+      '<p class="d-cardnote">Open orders and pending results stop the discharge until a treating clinician records why the patient may go with them. It should be a decision, not a discovery.</p>' +
       '<ul class="d-pending">' + rows + "</ul></div>";
   }
   function indexCard(s) {
@@ -406,7 +418,7 @@
     var head = rows.map(function (r) { return '<div class="p-f"><span>' + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>"; }).join("");
     var headTr = rows.filter(function (r) { return r[2]; }).map(function (r) { return esc(r[0]) + ": " + T("print.dc.field." + r[2]); }).join(" &middot; ");
     var body = SECTIONS.map(function (sec, i) {
-      return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(textOf(s, sec.k) || NOT_RECORDED) + "</p></section>" +
+      return '<section><h2>' + (i + 1) + ". " + esc(sec.n) + (isEdited(s, sec.k) ? ' <em>clinician edited</em>' : "") + "</h2><p>" + esc(localTimes(textOf(s, sec.k) || NOT_RECORDED, s.print)) + "</p></section>" +
         tr("<h2>" + (i + 1) + ". " + T("print.dc.section." + sec.k) + "</h2><p>" + T("print.tr.englishOnly") + "</p>");
     }).join("");
     var prov = (s.sections && s.sections.provenance) || (s.assembled && s.assembled.provenance) || "";

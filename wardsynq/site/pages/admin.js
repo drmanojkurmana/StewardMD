@@ -81,6 +81,10 @@
     }
     var tabs = TABS.slice();
     if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"]);
+    // #/admin/tariff opens that tab: the cashier's "no price set" message links straight to the Price list (LT-30).
+    // Applied once per arrival, so the tab buttons still work while the address says /tariff.
+    if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
+    st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
     if ((tab === "seed" || tab === "maik" || tab === "security" || tab === "health" || tab === "export" || tab === "fhir" || tab === "integrations") && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
@@ -790,24 +794,44 @@
    * rounds differently in two places. Every change is audited on the server with the old price and the
    * new one. Withdrawing an item hides it from new bills but keeps it, because old bills still name it. */
   function rupees(paise) { var n = Number(paise); return isFinite(n) ? (n / 100).toFixed(2) : ""; }
+  /* WHAT A HOSPITAL CHARGES FOR A STAY (LT-30). Bed, nursing care and doctor visits are charged per day of
+   * an inpatient stay by the ward bill; a bed can be priced for one ward (by name) or for every ward. Tests
+   * and medicines are priced by the name they are ordered under, so the bill finds them without a code. */
+  var TARIFF_KINDS = ["bed", "nursing", "visit", "investigation", "medication", "service"];
+  function tariffKindLabel(c, k) {
+    return {
+      bed: T(c, "site.admin.tariff.kindBed", "Bed, per day"), nursing: T(c, "site.admin.tariff.kindNursing", "Nursing care, per day"),
+      visit: T(c, "site.admin.tariff.kindVisit", "Doctor visit, per day"), investigation: T(c, "site.admin.tariff.kindLabTest", "Lab or radiology test"),
+      medication: T(c, "site.admin.tariff.kindMedicine", "Medicine"), service: T(c, "site.admin.tariff.kindService", "Service"),
+    }[k] || k;
+  }
   function renderTariff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
-    return c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+    return Promise.all([c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)), c.api("/wards?orgId=" + encodeURIComponent(c.state.orgId)).catch(function () { return null; })]).then(function (both) {
+      var r = both[0], wr = both[1];
       if (!r || !r.ok) { body.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.loadFailed", "The price list could not be loaded. Do not read this as an empty price list.")) + "</div>"; return; }
       var items = r.items || [];
+      // null = the wards could not be read: a per-ward bed price then cannot be offered, and the screen says so.
+      var wards = wr && wr.ok ? (wr.wards || []).map(function (w) { return w.name; }).filter(Boolean) : null;
       body.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.tariff.title", "Price list")) + "</h2>" +
         (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th></th></tr></thead><tbody>" +
           items.map(function (t) {
-            return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(t.kind) + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
+            var daily = t.kind === "bed" || t.kind === "nursing" || t.kind === "visit";
+            return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(tariffKindLabel(c, t.kind)) +
+              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
               '<td><button type="button" class="btn ghost" data-trf-edit="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changePrice", "Change price")) + '</button> ' +
               '<button type="button" class="btn ghost" data-trf-off="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.withdraw", "Withdraw")) + "</button></td></tr>";
           }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.none", "No prices set yet.")) + "</p>") +
         '<h3>' + c.esc(T(c, "site.admin.tariff.addItem", "Add an item")) + '</h3><div class="row">' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.name", "Name")) + '</span><input id="admTrfName"></label>' +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + '</span><input id="admTrfCode"></label>' +
-        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + '</span><select id="admTrfKind"><option value="investigation">' + c.esc(T(c, "site.admin.tariff.kindTest", "Test")) + '</option><option value="medication">' + c.esc(T(c, "site.admin.tariff.kindMedicine", "Medicine")) + '</option><option value="service">' + c.esc(T(c, "site.admin.tariff.kindService", "Service")) + "</option></select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + '</span><select id="admTrfKind">' + TARIFF_KINDS.map(function (k) { return '<option value="' + k + '">' + c.esc(tariffKindLabel(c, k)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.ward", "Ward (per-day charges)")) + '</span><select id="admTrfWard"><option value="">' + c.esc(T(c, "site.admin.tariff.everyWard", "Every ward")) + "</option>" +
+          (wards || []).map(function (w) { return '<option value="' + c.esc(w) + '">' + c.esc(w) + "</option>"; }).join("") + "</select></label>" +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + '</span><input id="admTrfPrice" inputmode="decimal"></label>' +
-        '</div><button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
+        '</div>' + (wards === null ? '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.wardsFailed", "The wards could not be loaded, so a bed price can only be set for every ward right now.")) + "</div>" : "") +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.howBilled", "Bed, nursing and doctor visit prices are charged for each day of an inpatient stay. Name a test or medicine exactly as it is ordered, so the bill can find its price.")) + "</p>" +
+        '<button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>";
 
       function save(item) {
@@ -824,7 +848,7 @@
         var price = toPaise(document.getElementById("admTrfPrice").value);
         if (!name) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errName", "Give the item a name.")) + "</div>"; return; }
         if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice", "The price has to be a plain amount in rupees, like 450 or 450.50.")) + "</div>"; return; }
-        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, price: price });
+        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, ward: document.getElementById("admTrfWard").value, price: price });
       };
       body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
         b.onclick = function () {
@@ -832,14 +856,14 @@
           var v = prompt(T(c, "site.admin.tariff.newPricePrompt", "New price for {name} in rupees (now {price})", { name: t.name, price: rupees(t.price) })); if (v == null) return;
           var price = toPaise(v);
           if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice2", "The price has to be a plain amount in rupees.")) + "</div>"; return; }
-          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, price: price });
+          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: price });
         };
       });
       body.querySelectorAll("[data-trf-off]").forEach(function (b) {
         b.onclick = function () {
           var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-off"); })[0]; if (!t) return;
           if (!confirm(T(c, "site.admin.tariff.withdrawConfirm", "Withdraw {name} from the price list? Old bills keep it.", { name: t.name }))) return;
-          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, price: t.price, active: false });
+          save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, active: false });
         };
       });
     });

@@ -66,7 +66,11 @@ async function raiseInvoice(request, env, ctx) {
 
   const charges = await chargesForPatient(request, env, { ...ctx, patientId });
   if (!charges.ok) return { ...base, ...charges, written: 0 };
-  if (!charges.priced || !charges.priced.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
+  /* NOTHING RAISED IS SAID, WITH WHAT HAS NO PRICE (LT-30). This answered ok with written 0 and the
+   * cashier screen showed nothing at all. The unpriced items go back by name so the screen can say
+   * exactly which charges an administrator has to price. */
+  const unpricedNames = (charges.unpriced || []).map((u) => ({ display: u.display || u.code, code: u.code, reason: u.reason }));
+  if (!charges.priced || !charges.priced.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", unpriced: unpricedNames, ...(charges.unreadable ? { unreadable: charges.unreadable } : {}), detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
 
   // NEVER TWICE. Every source event already sitting on an earlier invoice for this patient is
   // excluded here, before a second invoice can be raised against it.
@@ -108,6 +112,7 @@ async function raiseInvoice(request, env, ctx) {
   try {
     const out = await svc.put(ep, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, ...summary({ ...ep, version: out.record.version }), actor: resolved.actor.id,
+      ...(unpricedNames.length ? { unpriced: unpricedNames } : {}), ...(charges.unreadable ? { unreadable: charges.unreadable } : {}),
       ...(gst.applies ? { gst: { totalTax: gst.totalTax, unconfigured: gst.unconfigured, taxRegistration: ep.taxRegistration || null } } : {}) };
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
 }

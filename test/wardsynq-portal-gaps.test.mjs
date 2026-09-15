@@ -574,7 +574,8 @@ test("D5: each entry is withheld for its own reason, free text stays withheld wh
     assert.equal(inv[0].withheld, true, "open critical loop");
     assert.equal(inv[1].withheld, true, "preliminary");
     assert.equal(inv[2].withheld, true, "sensitive, tied by code");
-    assert.deepEqual(inv[3], { text: "Full blood count (completed)" });
+    // LT-31 (2026-09-15): the summary line carries the released result, not just the request's status.
+    assert.deepEqual(inv[3], { text: "Full blood count (result): normal" });
     assert.match(inv[0].say, /Please ask your care team/);
     assert.ok(!("reason" in inv[0]) && !("serviceRequestId" in inv[0]), "no reason category and no record id on a withheld entry");
     const dx = byKey.diagnoses.items;
@@ -598,7 +599,7 @@ test("D5: each entry is withheld for its own reason, free text stays withheld wh
 
     await RECORD.append(TENANT, [{ version: 2, meta: { recordedAt: NOW }, resourceType: "CriticalResultLoop", id: "loop-d-k", patientId: PD, reportId: "rep-d-k", state: "acknowledged" }], { idempotencyKey: "ack-d" });
     const after = Object.fromEntries((await portal("record", { grantId: "g-d", token: T.d })).body.dischargeSummaries[0].sections.map((s) => [s.key, s]));
-    assert.equal(after.investigations.items[0].text, "KSECRET Potassium (completed)", "acknowledging the loop releases that entry");
+    assert.equal(after.investigations.items[0].text, "KSECRET Potassium (result): 7.2", "acknowledging the loop releases that entry, with its result (LT-31)");
     assert.equal(after.investigations.items[1].withheld, true, "and only that one");
     assert.equal(after.investigations.items[2].withheld, true);
   } finally { restore(); }

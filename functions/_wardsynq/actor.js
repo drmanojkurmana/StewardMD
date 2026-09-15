@@ -347,7 +347,10 @@ function grantForCaps(caps) {
      * a patient received. It is what charge capture IS, it is what a coder in any hospital sees, and
      * the containment is that the write scope below did not move. A site wanting tighter separation
      * should hold BILLING_CHARGE for coders and leave the cashier on BILLING_VIEW. */
-    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"];
+    /* Encounter joined 2026-09-15 (LT-30): a bed day is billed from the stay itself, its dates and the
+     * ward each day was on. It is the admission record a billing desk already works from, and the
+     * write scope below still does not move. */
+    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter"];
     // Invoice joined 2026-09-09 (TASK 4.6): the ledger charge-capture.js's priced proposal becomes
     // once a person raises it. Read for BOTH billing.view and billing.charge - a cashier reading a
     // balance is not a coding act, it is the whole reason billing.view exists (see the Cashier task

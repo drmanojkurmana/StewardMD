@@ -201,7 +201,7 @@ test("DISCHARGE: vacates the master bed", async () => {
   assert.equal(adm.__status, 200, JSON.stringify(adm));
   assert.equal((await ORG_STORE.getBed(undefined, bed.id)).state, "occupied");
 
-  const disch = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home" });
+  const disch = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(disch.__status, 200, JSON.stringify(disch));
   assert.equal((await ORG_STORE.getBed(undefined, bed.id)).state, "available", "discharge frees the master bed");
 });

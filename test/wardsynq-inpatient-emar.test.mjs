@@ -392,7 +392,7 @@ test("wrong-patient / bed-safety: /ward/admit refuses a bed another open admissi
   assert.equal(await as(DOCTOR, `/ward/list?orgId=${ORG}&ward=Medical A`).then((r) => r.patients.length), 1, "the ward list still shows exactly the one real admission");
 
   // The bed frees the moment its occupant is discharged, exactly as it does for transfer.
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: admA.encounterId, dischargedAt: "2026-09-08T09:00:00.000Z" });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: admA.encounterId, dischargedAt: "2026-09-08T09:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const admB2 = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: regB.mrn, ward: "Medical A", bed: "31", admittedAt: "2026-09-08T10:00:00.000Z" });
   assert.equal(admB2.__status, 200, JSON.stringify(admB2));
 
@@ -712,7 +712,7 @@ test("discharge closes the stay, and a discharged patient leaves the ward list",
   const before = await as(NURSE, `/ward/list?orgId=${ORG}&ward=Medical A`);
   assert.equal(before.patients.length, 1);
 
-  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-08T11:00:00.000Z", disposition: "home" });
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-08T11:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(out.__status, 200, JSON.stringify(out));
   assert.equal(out.status, "finished");
 
@@ -724,7 +724,7 @@ test("discharge closes the stay, and a discharged patient leaves the ward list",
   const after = await as(NURSE, `/ward/list?orgId=${ORG}&ward=Medical A`);
   assert.equal(after.patients.length, 0, "the ward list is open admissions only");
 
-  const again = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const again = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(again.written, 0);
   assert.equal(again.skipped, "already_discharged");
   assert.deepEqual((await RECORD.history(TENANT_ROW.id, "Encounter", adm.encounterId)).map((h) => h.status), ["in-progress", "finished"]);
@@ -743,7 +743,7 @@ test("a discharged stay's full record - vitals, the order, its administration, a
   await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, display: "Community-acquired pneumonia" } });
   const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: DUE, patient, ...extra });
   await mar("verify"); await mar("dispense"); await mar("scan", { scan }); const given = await mar("administer");
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-08T11:00:00.000Z" });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-08T11:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
   assert.equal(enc.status, "finished", "the stay really is closed - the reads below are of a CLOSED stay, not an open one");
 
@@ -770,7 +770,7 @@ test("discharge reports doses still in flight rather than silently closing over 
   const { ord, patient, adm } = await admittedPatientOnDrug();
   await as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: "verify", orderId: ord.orderId, dueAt: DUE, patient });
 
-  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(out.__status, 200, "an unfinished dose is a hospital's policy call, not a refusal invented here");
   assert.equal(out.dosesInFlight.length, 1);
   assert.equal(out.dosesInFlight[0].status, "verified");
@@ -783,7 +783,7 @@ test("the auto maker assembles the summary from the record and invents nothing",
   await mar("verify"); await mar("dispense");
   await mar("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral" } });
   await mar("administer");
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z" });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
 
   const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
   assert.equal(draft.__status, 200, JSON.stringify(draft));
@@ -838,7 +838,7 @@ test("a fed-in Medication*/ServiceRequest record never appears as this admission
     meta: { recordedAt: EXT.importedAt, effectiveAt: EXT.importedAt, source: EXT },
   }], { actor: "test" });
 
-  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z" });
+  const out = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T08:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(out.__status, 200, JSON.stringify(out));
   assert.equal(out.dosesInFlight.length, 0, "the feed's own unfinished dose is not this hospital's to report");
 
@@ -858,7 +858,7 @@ test("a fed-in Medication*/ServiceRequest record never appears as this admission
 test("a discharge summary is signed as its own version, and a signed one is not redrafted", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
 
   assert.equal((await as(NURSE, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId })).__status, 403);
@@ -880,7 +880,7 @@ test("a discharge summary is signed as its own version, and a signed one is not 
 test("a clinician's corrections survive, and only an inpatient stay can be discharged", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const edited = await as(DOCTOR, "/ward/discharge-summary", "POST", {
     orgId: ORG, encounterId: adm.encounterId,
     sections: { assessment: "Community-acquired pneumonia, resolved.", plan: "Oral amoxicillin 5 days, review in clinic." },
@@ -905,7 +905,7 @@ test("a clinician's corrections survive, and only an inpatient stay can be disch
   const S = await as(DOCTOR, `/session?hospitalId=${ORG}`);
   const T = await as(DOCTOR, "/ticket", "POST", { sessionId: S.session.id, name: "OPD Testcase", mobile: "9876500099", mrn: "SMD-WARD01-00099", visitType: "new" });
   const opdEnc = "opd-enc-" + String(T.ticket.id).toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  const bad = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: opdEnc });
+  const bad = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: opdEnc, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(bad.__status, 409);
   assert.equal(bad.error, "not_an_admission");
 });
@@ -937,7 +937,7 @@ test("the summary can be READ without writing one, and it reports what is still 
 test("the read shows a clinician's words BESIDE the record's, so the two can never be confused", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   await as(DOCTOR, "/ward/discharge-summary", "POST", {
     orgId: ORG, encounterId: adm.encounterId, sections: { plan: "Review in clinic in one week." },
   });
@@ -960,7 +960,7 @@ test("the read shows a clinician's words BESIDE the record's, so the two can nev
 test("a signed summary is immutable, keeps its provenance, and cannot be redrafted", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId, sections: { plan: "Discharge on oral antibiotics." } });
   const signed = await as(DOCTOR, "/ward/sign-discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
   assert.equal(signed.__status, 200, JSON.stringify(signed));
@@ -1054,7 +1054,7 @@ test("the discharge summary now carries the problem list instead of an empty ass
   const { adm } = await admittedPatientOnDrug();
   await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed" } });
   await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, code: "E11.9", codeSystem: "ICD-10", display: "Type 2 diabetes mellitus", clinicalStatus: "resolved" } });
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
 
   const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
   assert.match(draft.sections.diagnoses, /Active:/);
@@ -1254,7 +1254,7 @@ test("the discharge screen renders the real record, start to finish", async () =
   await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "J18.9", codeSystem: "ICD-10", display: "Pneumonia, unspecified organism", verificationStatus: "confirmed" } });
   const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
   await step("verify"); await step("dispense"); await step("scan", { scan }); await step("administer");
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home" });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
 
   // 1. The screen opens by READING. Nothing is written by looking at a patient.
   const read = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
@@ -1338,7 +1338,7 @@ test("the discharge screen renders the real record, start to finish", async () =
 test("an unsigned summary is marked as a draft ON PAPER, so it cannot be mistaken for the real thing", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const read = await as(DOCTOR, `/ward/discharge-summary?orgId=${ORG}&encounterId=${adm.encounterId}`);
 
   const SRC = readFileSync(new URL("../discharge.js", import.meta.url), "utf8");
@@ -1623,7 +1623,7 @@ test("TWO PATIENTS CANNOT OCCUPY ONE BED, and the refusal names the occupant", a
 test("a closed stay is not transferred, and neither is an OPD visit", async () => {
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const gone = await as(DOCTOR, "/ward/transfer", "POST", { orgId: ORG, encounterId: adm.encounterId, ward: "HDU", bed: "3" });
   assert.equal(gone.__status, 409);
   assert.equal(gone.error, "not_admitted", "re-opening the stay to accommodate the request would be far worse than refusing");
@@ -2586,7 +2586,7 @@ test("a home medicine with no decision is NAMED, and reaches the discharge summa
 
   // THE SUMMARY NAMES THE ONE NOBODY DECIDED. A summary listing only the decided medicines would
   // read as a completed reconciliation, and the undecided one is exactly the one that gets lost.
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
   assert.match(draft.sections.homeMedicines, /Stopped:\nWarfarin 3 mg, OD - Held pre-operatively/);
   assert.match(draft.sections.homeMedicines, /NOT RECONCILED[\s\S]*Levothyroxine/);
@@ -3101,7 +3101,7 @@ test("THE NARROW GRANT: a pharmacist can see what a verification needs, and noth
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
   await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG, problem: { patientId: adm.patientId, display: "Chronic kidney disease" } });
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
 
   // What they CAN see: the orders, and the allergies that travel with the queue. A pharmacist who
@@ -3213,7 +3213,7 @@ test("a handover never pollutes the discharge summary's clinical notes", async (
   seedHospital();
   const { adm } = await admittedPatientOnDrug();
   await as(NURSE, "/ward/handover", "POST", { orgId: ORG, encounterId: adm.encounterId, sbar: { assessment: "Nursing handover assessment, not a medical one." } });
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const draft = await as(DOCTOR, "/ward/discharge-summary", "POST", { orgId: ORG, encounterId: adm.encounterId });
   /* The summary copies a CLINICIAN'S assessment note. A shift handover is a different document and
    * must not be mistaken for the medical assessment of the admission. It is a separate resource
@@ -3924,7 +3924,7 @@ test("an investigation needs a stay that exists and is open, and is not a nurse'
   assert.equal((await as(NURSE, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Potassium" })).__status, 403,
     "asking for an investigation is a clinical act");
 
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z" });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const closed = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: adm.encounterId, code: "Potassium" });
   assert.equal(closed.__status, 409);
   assert.equal(closed.error, "encounter_closed");
@@ -4568,7 +4568,7 @@ test("THE ADT MESSAGE IS BUILT FROM THE RECORD, and a stay it cannot describe is
 
   // Discharging the patient changes the EVENT, from the record - a message can never announce an
   // admission for a stay that has ended.
-  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z" });
+  await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, dischargedAt: "2026-09-09T10:00:00.000Z", disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   const out = await as(NURSE, `/ward/adt?orgId=${ORG}&encounterId=${adm.encounterId}`);
   assert.equal(out.event, "A03");
   assert.match(out.message.split("\r")[0], /ADT\^A03/);
