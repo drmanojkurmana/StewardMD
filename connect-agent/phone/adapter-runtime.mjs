@@ -380,6 +380,25 @@ export function headerFit(rows, headers) {
 
 export class NotSignedIn extends Error { constructor(m) { super(m); this.name = 'NotSignedIn'; } }
 
+export class UnscopedRequest extends Error { constructor(m) { super(m); this.name = 'UnscopedRequest'; } }
+
+/** The patient-keyed or visit-keyed field that would go out EMPTY while this patient has an id, or null. */
+export function unscopedField(req, patient) {
+  if (!patient || !(patient.patientId || patient.episodeId)) return null;   // the ward list is not patient-scoped
+  const bad = (k, v) => (PATIENT_KEY.test(k) || VISIT_KEY.test(k)) && !String(v || '');
+  try {
+    const u = new URL(String(req.url || ''), 'https://x.invalid');
+    for (const [k, v] of u.searchParams) if (bad(k, v)) return k;
+  } catch { /* relative or malformed: fall through to the body */ }
+  if (typeof req.body === 'string' && req.body.indexOf('=') >= 0) {
+    for (const part of req.body.split('&')) {
+      const i = part.indexOf('=');
+      if (bad(i >= 0 ? part.slice(0, i) : part, i >= 0 ? part.slice(i + 1) : '')) return i >= 0 ? part.slice(0, i) : part;
+    }
+  }
+  return null;
+}
+
 /* ---- proven endpoints (prove.mjs) ---------------------------------------------------------------- */
 
 /** A proven view: its endpoints carry the role and field sources discovery proved. */
@@ -409,7 +428,13 @@ export function formatToday(fmt, now = new Date()) {
  * (patient._row); without that row it falls back to the id the patient carries for a key of that name.
  */
 export function provenValue(key, src, { patient = null, parentRow = null, tokens = null, now } = {}) {
-  if (!src || src.empty || src.unmapped) return '';
+  /* AN UNTRACEABLE PATIENT KEY IS NOT AN EMPTY ONE. `unmapped` means tracing failed, and tracing fails
+   * for every resource whenever the ward-list proof failed. Sending a patient-keyed field empty turns
+   * this patient's request into an unscoped one, and whatever the hospital answers lands in this
+   * patient's chart. Fall back to the id this patient carries, exactly as the worklist branch does. */
+  if (!src) return '';
+  if (src.unmapped) return (PATIENT_KEY.test(key) || VISIT_KEY.test(key)) ? (idCandidates(key, patient)[0] || '') : '';
+  if (src.empty) return '';
   if (src.token) return tokenFor(key, tokens);
   if (src.constant != null) return String(src.constant);
   if (src.page) return ({ size: '1000', start: '0', number: '1' })[src.page] || '';
@@ -468,6 +493,8 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
   for (const ep of eps) {
     const req = provenRequest(ep, { patient, parentRow, tokens: toks, now });
     const call = { method: req.method, url: base + req.url, body: req.body, headers: req.headers };
+    const lost = unscopedField({ url: req.url, body: req.body }, patient);
+    if (lost) throw new UnscopedRequest('refusing ' + req.path + ': "' + lost + '" has no learned source, so the request would not be limited to this patient');
     if (typeof onCall === 'function') onCall(call);
     const resp = await fetchInPage(plugin, call);
     const kind = classifyResponse(resp);

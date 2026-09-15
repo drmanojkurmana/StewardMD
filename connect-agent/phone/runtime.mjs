@@ -384,6 +384,7 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     const vo = viewOrigin(v, origin);
     try { replayed = await replayFirst({ plugin, origin: vo, view: v, patient, onRead }); } catch (e) {
       if (e && e.name === 'NotSignedIn') throw e;
+      if (e && e.name === 'UnscopedRequest') { sections.push({ resource: r, unreadable: 'not-scoped' }); continue; }
       sections.push({ resource: r, error: String((e && e.message) || e) });
       continue;
     }

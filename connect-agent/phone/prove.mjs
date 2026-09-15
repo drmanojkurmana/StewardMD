@@ -453,7 +453,9 @@ export const INJECT_REPLAY_SRC = "(function(entries){try{var R=window.__SMD_REPL
  * carry filters the hospital's own page filled in (the signed-in doctor, their unit): replayed as
  * recorded it returns a subset forever and patients silently vanish. Only a parameter nothing could be
  * traced to (`unmapped`) is emptied. A value traced to the worklist or a parent row is the patient's
- * own identity and is never touched: emptying it would turn this patient's labs into everyone's. */
+ * own identity and is never touched: emptying it would turn this patient's labs into everyone's.
+ * SAFE FOR THE WARD LIST ONLY. Never call this for a patient-scoped resource: a key that names neither
+ * a patient nor a visit (a lab's `resultid`, a report id) would still be emptied. */
 export function widenRequest(entry, params) {
   const src = params || {};
   /* `unmapped` is paramsOf's FAILURE state, not proof that a key is a filter: with no proven worklist

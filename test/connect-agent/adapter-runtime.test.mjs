@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import {
   fetchExpression, parseFetchExpression, fillFields, idCandidates, replayPlan, classifyResponse, rowsFromJson, rowsFromHtml,
   executeView, tokenFor, PAGE_TOKENS, NotSignedIn, FETCH_TIMEOUT_MS,
+  provenValue, unscopedField, executeProven, UnscopedRequest,
 } from '../../connect-agent/phone/adapter-runtime.mjs';
 
 const ORIGIN = 'https://ghis.example';
@@ -144,4 +145,28 @@ test('every in-page request has its own deadline: a hospital that never answers 
     assert.match(out.error, /aborted/);
     assert.ok(Date.now() - t0 < 2000, 'aborted at its deadline');
   } finally { globalThis.fetch = realFetch; }
+});
+
+test('an untraceable patient key is filled from the patient, never sent empty', () => {
+  const patient = { patientId: 'MR900001', episodeId: 'IP5550001' };
+  assert.equal(provenValue('patient_id', { unmapped: true }, { patient }), 'MR900001', 'a patient key falls back to this patient');
+  assert.equal(provenValue('Episode_Id', { unmapped: true }, { patient }), 'IP5550001', 'a visit key falls back to this visit');
+  assert.equal(provenValue('DeptID', { unmapped: true }, { patient }), '', 'an ordinary filter is still sent empty');
+  assert.equal(provenValue('DeptID', { empty: true }, { patient }), '', 'a proven-empty filter stays empty');
+});
+
+test('a request that would go out without the patient is refused, not sent', async () => {
+  const patient = { patientId: 'MR900001' };
+  assert.equal(unscopedField({ url: '/Lab/Home/Get?patient_id=&DeptID=', body: null }, patient), 'patient_id');
+  assert.equal(unscopedField({ url: '/Lab/Home/Get?patient_id=MR900001&DeptID=', body: null }, patient), null);
+  assert.equal(unscopedField({ url: '/Lab/Home/Get', body: 'Render_ID=&patient_id=' }, patient), 'patient_id');
+  assert.equal(unscopedField({ url: '/Doctor/Home/GetIPWL?PatientId=', body: null }, {}), null, 'the ward list has no patient and is not scoped');
+
+  // executeProven refuses rather than reading whatever the hospital returns for everyone.
+  let sent = 0;
+  const plugin = { async currentUrl() { return { url: 'https://h/Lab' }; }, async evaluate() { sent += 1; return { result: '{}' }; } };
+  const view = { resourceHint: 'labs', pathTemplate: 'https://h/Lab', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Lab/Home/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] };
+  await assert.rejects(executeProven({ plugin, origin: 'https://h', view, patient }), (e) => e.name === 'UnscopedRequest');
+  assert.equal(sent, 0, 'the unscoped request was never issued to the hospital');
 });

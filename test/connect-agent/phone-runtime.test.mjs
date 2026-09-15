@@ -173,3 +173,15 @@ test('the GIMSR sign-in host gets no built-in ward list call: only what discover
   assert.ok(sent.length > 0, 'the recorded call was sent');
   assert.ok(!sent.some((u) => /GetIPWL/.test(u)), 'no call the adapter never recorded: ' + JSON.stringify(sent));
 });
+
+test('a refused unscoped request is reported unreadable, not as an empty result', async () => {
+  const plugin = {
+    async navigate() { throw new Error('the patient read must never navigate'); },
+    async currentUrl() { return { url: 'https://h/home' }; },
+    async evaluate() { return { result: '{}' }; },
+  };
+  const replay = [{ resourceHint: 'labs', pathTemplate: 'https://h/home', rowsSelector: 'tr', headers: ['Test'], proof: { status: 'proven' },
+    endpoints: [{ method: 'GET', path: '/Lab/Get?patient_id', role: 'data', params: { patient_id: { empty: true } } }] }];
+  const secs = await readPatientDetails({ plugin, origin: 'https://h', replay, patient: { patientId: 'K1' }, settleMs: 0 });
+  assert.deepEqual(secs.find((s) => s.resource === 'labs'), { resource: 'labs', unreadable: 'not-scoped' });
+});

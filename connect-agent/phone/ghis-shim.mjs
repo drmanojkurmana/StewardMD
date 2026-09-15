@@ -417,7 +417,9 @@ export function historyEntries(sections, patient) {
 export function notRead(sections, resource, label) {
   const own = (Array.isArray(sections) ? sections : []).filter((s) => s && s.resource === resource);
   if (own.some((s) => Array.isArray(s.rows))) return {};
-  const why = own.some((s) => s.error) ? 'the hospital did not answer.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
+  const why = own.some((s) => s.unreadable === 'not-scoped')
+    ? 'the agent never learned which field carries the patient, so the request could not be limited to this patient.'
+    : own.some((s) => s.error) ? 'the hospital did not answer.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
   return { unreadable: label + ' were not read: ' + why };
 }
 
