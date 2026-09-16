@@ -389,13 +389,16 @@ function adapterCompleteness(observedViews) {
    * never sends that blank -- adapter-runtime.mjs provenValue() falls back to idCandidates(key,
    * patient)[0] for a patient/visit key (ver_05ce2f04: recordNo -> patientId, exactly the hand-built's
    * /Radio/Home?recordNo=${patientId}), and unscopedField() refuses at send time if it would still be
-   * blank. Only {empty:true} replays unscoped. The worklist is exempt: it is not patient-scoped, and
+   * blank. Only {empty:true} replays unscoped. A {constant} is not scoped either (GHIS ver_b27ed367,
+   * 2026-09-17): a page-side JS bug recorded ?id=undefined as a "mode" value, proof matched it once, and
+   * provenValue would then send that same literal id=undefined for every patient forever -- the same
+   * wrong chart in every read, not a blank one. The worklist is exempt: it is not patient-scoped, and
    * its filters are proven empty on purpose (Task 2c). */
   const PATIENT_ISH = /record|mrn|uhid|patient|reg(no|istration)|hosp(ital)?(no|id)|umr|^id$|visit|episode|encounter|admission|ip(no|number)/i;
   const scoped = (v) => (v.endpoints || []).every((e) => {
     if (!e || e.role !== "data") return true;
     const p = e.params || {};
-    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && p[k].empty === true);
+    return !Object.keys(p).some((k) => PATIENT_ISH.test(k) && p[k] && (p[k].empty === true || p[k].constant !== undefined));
   });
   const scopedFor = (res, v) => res === "worklist" || scoped(v);
   const provenEndpoint = (res) => views.some((v) => v && v.resourceHint === res && v.proof && v.proof.status === "proven" && Array.isArray(v.endpoints) && v.endpoints.some((e) => e && e.role === "data") && scopedFor(res, v));

@@ -651,6 +651,28 @@ test("an unmapped patient key is not unscoped -- the runtime backfills it; only 
   assert.equal(emptyVer.completeness.how["radiology"], "unscoped");
 });
 
+function labsView(params) {
+  return provenViewOf("labs", "/Doctor/Home/OTLabPrintsSecretary/?id", {
+    endpoints: [{ method: "GET", path: "/Doctor/Home/OTLabPrintsSecretary/?id", xhr: true, role: "data", params, proof: { kind: "json", hits: 4, cells: 4, overlap: 1, rows: 2 } }],
+  });
+}
+
+test("a constant patient key is not scoped either -- GHIS ver_b27ed367: ?id=undefined proven once replays the same wrong chart for every patient", async () => {
+  // paramsOf (connect-agent/phone/prove.mjs) never records a {constant} for a PATIENT_ISH key from live
+  // capture any more (a recorded 'undefined' is {empty:true} now), but a version saved before that fix,
+  // or a hand-authored one, can still carry one -- the server gate must refuse it exactly like {empty:true}.
+  const constSet = completeSet().filter((v) => v.resourceHint !== "labs").concat(labsView({ id: { constant: "undefined" } }));
+  const constCand = await phoneCandidate(constSet);
+  const constVer = await (await onRequest(get(`/api/connect/agent/versions/${constCand.versionId}?tenant=t1`, constCand.env, constCand.doc1.headers))).json();
+  assert.equal(constVer.completeness.how["labs"], "unscoped");
+
+  // A key traced to a worklist row is genuinely patient-scoped: still "endpoint".
+  const tracedSet = completeSet().filter((v) => v.resourceHint !== "labs").concat(labsView({ id: { from: "worklist", field: "Patient ID" } }));
+  const tracedCand = await phoneCandidate(tracedSet);
+  const tracedVer = await (await onRequest(get(`/api/connect/agent/versions/${tracedCand.versionId}?tenant=t1`, tracedCand.env, tracedCand.doc1.headers))).json();
+  assert.equal(tracedVer.completeness.how["labs"], "endpoint");
+});
+
 test("a list whose own proven columns are already the results needs no separate detail call (GHIS OTLabPrints)", async () => {
   // labs proven with the real GHIS OTLabPrints headers (result-shaped), labs-detail never proven at all:
   // labs-detail reads "inline", is not in `missing`, and the whole candidate still approves.
