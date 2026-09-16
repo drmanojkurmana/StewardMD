@@ -3826,6 +3826,10 @@
   function inventoryView(state) {
     var inv = state.inventory || {};
     var s = inv.stock;
+    /* The laboratory's reagents and consumables: the same ledger at the one Laboratory location, with an item instead of a
+     * drug, no batch advice (it reads dispenses, which the laboratory cannot) and no reconciliation. */
+    var lab = inv.lab === true;
+    var itemWord = lab ? wTH("ward.lab-stock-item", "Item") : wTH("ward.drug", "Drug");
     var levels = (s && s.levels) || [];
     var expiring = (s && s.expiring) || [];
 
@@ -3842,7 +3846,7 @@
     }).join("");
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<div><b>" + wTH("ward.inventory", "Inventory") + "</b></div>" +
+      "<div><b>" + (lab ? wTH("ward.lab-stock-title", "Reagents and consumables") : wTH("ward.inventory", "Inventory")) + "</b>" + (lab ? "<small>" + wTH("ward.laboratory", "Laboratory") + "</small>" : "") + "</div>" +
       "<button class=\"w-ic\" data-w-act=\"inventoryload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
 
       (s && s.negative && s.negative.length ? '<p class="w-hint warn">' + ms("error") + esc(s.negativeWarning) + "</p>" : "") +
@@ -3862,21 +3866,21 @@
         : expiringRows ? '<ul class="w-mini">' + expiringRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nothing-expiring-soon", "Nothing expiring soon.") + "</p>") +
       "</div>" +
 
-      '<div class="w-card"><div class="w-card-h">' + ms("low_priority") + "<h3>" + wTH("ward.which-batch-to-use", "Which batch to use") + "</h3></div>" +
+      (lab ? "" : '<div class="w-card"><div class="w-card-h">' + ms("low_priority") + "<h3>" + wTH("ward.which-batch-to-use", "Which batch to use") + "</h3></div>" +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wFefoCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.quantity", "Quantity") + "</span><input id=\"wFefoQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wFefoUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-tablet", "e.g. tablet") + "\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="stockfefo">' + ms("search") + wTH("ward.suggest-batches", "Suggest batches") + "</button>" +
-      fefoResultHtml(inv.fefo) + "</div>" +
+      fefoResultHtml(inv.fefo) + "</div>") +
 
       '<div class="w-card"><div class="w-card-h">' + ms("call_received") + "<h3>" + wTH("ward.receipt", "Receipt") + "</h3></div>" +
       '<div class="w-grid">' +
-      "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wStkCode\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + itemWord + "</span><input id=\"wStkCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.quantity", "Quantity") + "</span><input id=\"wStkQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wStkUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-tablet-vial", "e.g. tablet, vial") + "\"></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wStkLoc\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-main", "e.g. Main") + "\"></label>" +
+      (lab ? "" : "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wStkLoc\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-main", "e.g. Main") + "\"></label>") +
       "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wStkBatch\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wStkExpiry\" type=\"date\"></label>" +
       "</div>" +
@@ -3884,10 +3888,10 @@
 
       '<div class="w-card"><div class="w-card-h">' + ms("edit") + "<h3>" + wTH("ward.adjustment-wastage", "Adjustment / wastage") + "</h3></div>" +
       '<div class="w-grid">' +
-      "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wAdjCode\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + itemWord + "</span><input id=\"wAdjCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.quantity2", "Quantity (+/-)") + "</span><input id=\"wAdjQty\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wAdjUnit\" type=\"text\" autocomplete=\"off\"></label>" +
-      "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wAdjLoc\" type=\"text\" autocomplete=\"off\"></label>" +
+      (lab ? "" : "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wAdjLoc\" type=\"text\" autocomplete=\"off\"></label>") +
       "</div>" +
       "<label class=\"w-f\"><span>" + wTH("ward.reason-required", "Reason (required)") + "</span><input id=\"wAdjReason\" type=\"text\" autocomplete=\"off\"></label>" +
       '<div class="w-actions">' +
@@ -3895,7 +3899,7 @@
       '<button class="w-btn go" data-w-act="stockwaste">' + ms("delete") + wTH("ward.wastage", "Wastage") + "</button>" +
       "</div></div>" +
 
-      '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + wTH("ward.reconciliation2", "Reconciliation") + "</h3></div>" +
+      (lab ? "" : '<div class="w-card"><div class="w-card-h">' + ms("fact_check") + "<h3>" + wTH("ward.reconciliation2", "Reconciliation") + "</h3></div>" +
       '<div class="w-grid">' +
       "<label class=\"w-f\"><span>" + wTH("ward.drug", "Drug") + "</span><input id=\"wRecCode\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wRecUnit\" type=\"text\" autocomplete=\"off\"></label>" +
@@ -3904,7 +3908,7 @@
       "</div>" +
       "<label class=\"w-f\"><span>" + wTH("ward.note-optional", "Note (optional)") + "</span><input id=\"wRecReason\" type=\"text\" autocomplete=\"off\"></label>" +
       '<button class="w-btn go" data-w-act="stockreconcile">' + ms("check") + wTH("ward.reconcile", "Reconcile") + "</button>" +
-      '<p class="w-hint">' + ms("info") + wTH("ward.posts-the-counted-quantity-against-the", "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing.") + "</p></div>";
+      '<p class="w-hint">' + ms("info") + wTH("ward.posts-the-counted-quantity-against-the", "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing.") + "</p></div>");
   }
 
   /* TASK 3.6: the hospital-wide critical-result queue. Not patient-scoped, unlike criticalsCard on
@@ -4260,7 +4264,8 @@
         (why.length ? ' <span class="w-st due">' + esc(why.join("; ")) + "</span>" : "") + "</div>";
     }).join("");
     return '<li><div class="w-crit-h"><b>' + esc(x.panel || wT("ward.result", "Result")) + "</b></div>" +
-      '<div class="w-crit-m">' + ms("person") + labWho(x.patientId) + " &middot; " + wTH("ward.entered-by", "entered by") + " " + escOr(x.releasedBy) + (x.reportedAt ? " " + when(x.reportedAt) : "") + "</div>" + obs +
+      '<div class="w-crit-m">' + ms("person") + labWho(x.patientId) + " &middot; " + wTH("ward.entered-by", "entered by") + " " + escOr(x.releasedBy) + (x.reportedAt ? " " + when(x.reportedAt) : "") +
+        (x.analyserName ? " &middot; " + wTH("ward.lab-an-measured-on", "measured on {name}", { name: esc(x.analyserName) }, "name") : "") + "</div>" + obs +
       (x.unreadObservations ? '<p class="w-hint warn">' + ms("error") + wTH("ward.value-s-could-not-be-read", "{unreadObservations} value(s) could not be read. Do not verify until they load.", { unreadObservations: esc(x.unreadObservations) }, "unreadObservations", 1) + "</p>" : "") +
       (x.mine ? '<p class="w-hint">' + ms("info") + wTH("ward.you-entered-this-so-somebody-else", "You entered this, so somebody else must verify it.") + "</p>"
         : (x.unreadObservations ? "" : '<button class="w-btn go sm" data-w-act="labverify:' + esc(x.reportId) + '">' + ms("verified") + wTH("ward.verify", "Verify") + "</button>") +
@@ -4275,6 +4280,7 @@
       : n === "results awaiting verification" ? wT("ward.lab-part-to-verify", "results awaiting verification")
       : n === "cultures in progress" ? wT("ward.lab-part-cultures", "cultures in progress")
       : n === "critical results" ? wT("ward.lab-part-criticals", "critical results")
+      : n === "analyser results" ? wT("ward.lab-part-analyser", "analyser results")
       : n === "ward roster" ? wT("ward.lab-part-roster", "ward roster")
       : n === "imaging worklist" ? wT("ward.lab-part-worklist", "imaging worklist")
       : n === "critical findings" ? wT("ward.lab-part-critical-findings", "critical findings")
@@ -4299,6 +4305,9 @@
     var spec = (b.specimens || []).filter(function (s) { return !labIsImaging(s); });
     var uncollected = spec.filter(function (s) { return stateOf(s) === "none" || stateOf(s) === "failed"; });
     var inTransit = spec.filter(function (s) { return stateOf(s) === "collected"; });
+    // A received sample found haemolysed or clotted on the bench can still be rejected before any result.
+    var receivedSpecimen = {};
+    spec.forEach(function (s) { if (stateOf(s) === "received" && s.collection.specimenId) receivedSpecimen[s.serviceRequestId] = s.collection.specimenId; });
     var pri = function (s) { return s.priority === "stat" ? "overdue" : s.priority === "urgent" ? "failed" : ""; };
     var specRow = function (s) {
       return '<li class="' + pri(s) + '"><div class="w-crit-h"><b>' + esc(s.display || s.code) + "</b>" +
@@ -4324,6 +4333,7 @@
       return '<li><div class="w-crit-h"><b>' + esc(p.display || p.code) + "</b></div>" +
         '<div class="w-crit-m">' + ms("person") + labWho(p.patientId) + "</div>" +
         (showHemaBio ? '<button class="w-btn ghost sm" data-w-act="labresultopen:' + esc(p.serviceRequestId) + '">' + ms("edit_note") + wTH("ward.enter-result", "Enter result") + "</button>" : "") +
+        (showHemaBio && receivedSpecimen[p.serviceRequestId] ? '<button class="w-btn ghost sm" data-w-act="specreject:' + esc(receivedSpecimen[p.serviceRequestId]) + '">' + ms("block") + wTH("ward.lab-rej-button", "Reject sample") + "</button>" : "") +
         (showMicro ? '<button class="w-btn ghost sm" data-w-act="cultureopen:' + esc(p.serviceRequestId) + '">' + ms("coronavirus") + wTH("ward.culture", "Culture") + "</button>" : "") +
         (showPath ? '<button class="w-btn ghost sm" data-w-act="histoopen:' + esc(p.serviceRequestId) + '">' + ms("description") + wTH("ward.histopathology", "Histopathology") + "</button>" : "") + "</li>";
     };
@@ -4372,6 +4382,9 @@
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<div><b>" + wTH("ward.laboratory", "Laboratory") + "</b><small>" + wTH("ward.hospital-wide", "hospital-wide") + "</small></div>" +
+      "<button class=\"w-ic\" data-w-act=\"labqc\" title=\"" + wTA("ward.lab-qc-title", "Quality control") + "\" aria-label=\"" + wTA("ward.lab-qc-title", "Quality control") + "\">" + ms("rule") + "</button>" +
+      "<button class=\"w-ic\" data-w-act=\"labstock\" title=\"" + wTA("ward.lab-stock-title", "Reagents and consumables") + "\" aria-label=\"" + wTA("ward.lab-stock-title", "Reagents and consumables") + "\">" + ms("inventory_2") + "</button>" +
+      "<button class=\"w-ic\" data-w-act=\"labrejections\" title=\"" + wTA("ward.lab-rej-stats", "Rejected samples") + "\" aria-label=\"" + wTA("ward.lab-rej-stats", "Rejected samples") + "\">" + ms("block") + "</button>" +
       "<button class=\"w-ic\" data-w-act=\"labboardload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       deptTabs +
       (b.errors && b.errors.length
@@ -4386,7 +4399,8 @@
           (id
             ? '<button class="w-btn ghost sm" data-w-act="specreceived:' + esc(id) + '">' + ms("check") + wTH("ward.received2", "Received") + "</button>" +
               '<button class="w-btn ghost sm" data-w-act="speclabel:' + esc(sp.serviceRequestId) + '">' + ms("label") + wTH("ward.print-tube-label", "Print tube label") + "</button>" +
-              '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + wTH("ward.failed", "Failed") + "</button>"
+              '<button class="w-btn ghost sm" data-w-act="specfailed:' + esc(id) + '">' + ms("close") + wTH("ward.failed", "Failed") + "</button>" +
+              '<button class="w-btn ghost sm" data-w-act="specreject:' + esc(id) + '">' + ms("block") + wTH("ward.lab-rej-button", "Reject sample") + "</button>"
             : "") + "</li>";
       }).join(""), wT("ward.nothing-in-transit", "Nothing in transit."), "specimens") : "") +
       /* The tube in the laboratory's hand, scanned or typed: found by its label, and refused on the server if the label is not its own. */
@@ -4394,6 +4408,7 @@
         "<label class=\"w-f\"><span>" + wTH("ward.tube-label", "Label on the tube") + "</span><input id=\"wSpecScan\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.accession-number", "Accession number") + "\"></label>" +
         camBtn("wSpecScan") + '<button class="w-btn go" data-w-act="specscanreceive">' + ms("check") + wTH("ward.receive-this-tube", "Receive this tube") + "</button></div>" : "") +
       (showHemaBio ? labResultForm(state) : "") +
+      (showHemaBio ? analyserCardsHtml(b) : "") +
       (showHemaBio && ((b.toVerify || []).length || failed["results awaiting verification"]) ? card("verified", wT("ward.awaiting-verification", "Awaiting verification"), (b.toVerify || []).length, (b.toVerify || []).map(labVerifyRow).join(""), "", "results awaiting verification") : "") +
       card("biotech", wT("ward.awaiting-a-result", "Awaiting a result"), pendingLab.length, pendingLab.map(pendRow).join(""), wT("ward.no-tests-awaiting-a-result", "No tests awaiting a result."), "tests awaiting a result") +
       (pendingImg.length ? '<div class="w-card"><div class="w-card-h">' + ms("radiology") + "<h3>" + wTH("ward.imaging-orders", "Imaging orders &middot; {length}", { length: pendingImg.length }, "length") + "</h3></div>" +
@@ -4416,6 +4431,298 @@
           '<div class="w-crit-m">' + ms("person") + labWho(h.patientId) + (h.diagnosis ? " &middot; " + esc(h.diagnosis) : "") + "</div>" +
           (signed ? '<button class="w-btn ghost sm" data-w-act="histoaddendum:' + esc(h.reportId) + '">' + ms("post_add") + wTH("ward.add-addendum", "Add addendum") + "</button>" : "") + "</li>";
       }).join(""), wT("ward.no-histopathology-reports", "No histopathology reports."), "cultures in progress")) : "");
+  }
+
+  /* ANALYSER RESULTS ON THE BENCH (lab-analysers.js). What an analyser sent through the on-premises connector,
+   * matched to the tube it measured, waiting for a technologist to release it as themselves. None of it is on
+   * the chart yet. A code the hospital has not mapped is shown as not mapped and is never released, and a QC
+   * state that could not be read hides Release rather than looking like no block. */
+  function labAnStatusWord(s) {
+    return s === "preliminary" ? wT("ward.lab-an-preliminary", "preliminary") : s === "corrected" ? wT("ward.lab-an-corrected", "corrected") : "";
+  }
+  function analyserRowHtml(r) {
+    var mapped = 0;
+    var lines = (r.results || []).map(function (x) {
+      if (x.testName) mapped++;
+      return "<div>" + (x.testName ? esc(x.testName) : '<span class="w-st due">' + wTH("ward.lab-an-not-mapped", "not mapped: {code}", { code: esc(x.instrumentCode) }, "code") + "</span>") +
+        ": <b>" + esc(x.value) + (x.unit ? " " + esc(x.unit) : "") + "</b>" +
+        (x.referenceRange ? " (" + wTH("ward.range", "range {text})", { text: esc(x.referenceRange) }) : "") +
+        (x.flags ? ' <span class="w-st due">' + esc(x.flags) + "</span>" : "") +
+        (labAnStatusWord(x.status) ? ' <span class="w-st">' + esc(labAnStatusWord(x.status)) + "</span>" : "") + "</div>";
+    }).join("");
+    var blocked = r.qcBlocked || [];
+    var qc = r.qcBlocked === null
+      ? '<p class="w-hint warn">' + ms("error") + wTH("ward.lab-an-qc-unread", "The QC state of this analyser could not be read. Do not release until it loads.", null, "", 1) + "</p>"
+      : blocked.length ? '<p class="w-hint warn">' + ms("rule") + wTH("ward.lab-an-qc-blocked", "QC rejected for {tests}. Record the corrective action on Quality control, or override with a reason.", { tests: esc(blocked.map(function (b) { return b.test; }).join(", ")) }, "tests", 1) + "</p>" : "";
+    return '<li><div class="w-crit-h"><b>' + esc(r.analyserName || r.analyserId) + "</b>" + '<span class="w-crit-v">' + esc(r.specimenId) + "</span></div>" +
+      '<div class="w-crit-m">' + ms("person") + (r.patientId ? labWho(r.patientId) : wTH("ward.lab-an-no-sample", "No sample on record matches this tube.")) + " &middot; " + when(r.observedAt || r.receivedAt) + "</div>" +
+      lines + qc +
+      (r.state === "pending" && r.qcBlocked !== null && mapped ? '<button class="w-btn go sm" data-w-act="analyserrelease:' + esc(r.id) + '">' + ms("send") + wTH("ward.lab-an-release", "Release") + "</button>" : "") +
+      (r.state === "pending" && !mapped ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.lab-an-none-mapped", "None of these codes is mapped to a hospital test, so nothing can be released. An administrator maps them under Integrations.") + "</p>" : "") +
+      '<button class="w-btn ghost sm" data-w-act="analyserdismiss:' + esc(r.id) + '">' + ms("close") + wTH("ward.lab-an-dismiss", "Do not release") + "</button></li>";
+  }
+  function analyserCardsHtml(b) {
+    if (b.failed && b.failed["analyser results"]) {
+      return '<div class="w-card"><div class="w-card-h">' + ms("precision_manufacturing") + "<h3>" + wTH("ward.lab-an-title", "From analysers") + "</h3></div>" +
+        '<p class="w-hint warn">' + ms("error") + wTH("ward.could-not-be-read-do-not", "Could not be read. Do not read this as none.", null, "", 1) + "</p></div>";
+    }
+    var rows = b.analyser || [];
+    var pending = rows.filter(function (r) { return r.state === "pending"; }), unmatched = rows.filter(function (r) { return r.state === "unmatched"; });
+    return '<div class="w-card"><div class="w-card-h">' + ms("precision_manufacturing") + "<h3>" + wTH("ward.lab-an-pending", "From analysers, waiting to be released &middot; {n}", { n: pending.length }, "n") + "</h3></div>" +
+      (pending.length ? '<ul class="w-crits">' + pending.map(analyserRowHtml).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.lab-an-none", "No analyser results waiting.") + "</p>") + "</div>" +
+      (unmatched.length ? '<div class="w-card"><div class="w-card-h">' + ms("help") + "<h3>" + wTH("ward.lab-an-unmatched", "From analysers, not matched to a sample &middot; {n}", { n: unmatched.length }, "n") + "</h3></div>" +
+        '<ul class="w-crits">' + unmatched.map(analyserRowHtml).join("") + "</ul></div>" : "");
+  }
+  function analyserReleaseAct(id, reason) {
+    var row = ((st.labBoard && st.labBoard.analyser) || []).filter(function (x) { return x.id === id; })[0];
+    st.busy = true; paint();
+    return apiPost("/ward/analyser-release", { orgId: st.orgId, inboxId: id, expectedVersion: row ? row.version : undefined, qcOverrideReason: reason || undefined })
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.error === "qc_blocked" && !reason) {
+          paint();
+          askReason(wTH("ward.lab-qc-override-q", "A rejected QC run blocks this analyser and test. Why is it safe to release anyway?", null, "", 1),
+            wT("ward.lab-qc-override-need", "An override needs a reason."), wTH("ward.lab-qc-override-ok", "Override and release"),
+            function (why) {
+              if (why.length < 10) { st.err = wT("ward.lab-qc-override-short", "Say more: an override reason is at least 10 characters."); return; }
+              return analyserReleaseAct(id, why);
+            }, { danger: true, icon: "warning" });
+          return;
+        }
+        settle(r, null);
+        /* Whether the result was checked against the critical limits is said on every release, also when the release
+         * landed but the bench row could not be marked. */
+        var crit = r && r.criticalCheck;
+        var critMsg = crit && !crit.checked ? wT("ward.result-saved-but-it-could-not", "Result saved, but it could NOT be checked against the critical limits. Review it for critical values now.")
+          : crit && crit.opened ? (crit.opened === 1 ? wT("ward.critical-value-in-this-result-the-one", "{opened} critical value in this result. The critical-result alert has been opened.", { opened: crit.opened }) : wT("ward.critical-value-in-this-result-the-many", "{opened} critical values in this result. The critical-result alert has been opened.", { opened: crit.opened })) : "";
+        if (r && r.ok) {
+          st.err = critMsg;
+          st.note = r.awaitingVerification ? wT("ward.on-the-chart-as-preliminary-another", "On the chart as preliminary. Another member of the laboratory must verify it.") : wT("ward.result-released", "Result released.");
+          loadLabBoard(); return;
+        }
+        // Released to the chart, but the bench row was not marked: said plainly so nobody releases it twice.
+        if (r && r.released) { st.err = wT("ward.lab-an-released-unmarked", "The result was released to the chart, but this analyser row could not be marked as done and may still be listed. Do not release it again.") + (critMsg ? " " + critMsg : ""); loadLabBoard(); return; }
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.lab-an-release-unknown", "No response from the server. The result may or may not have been released; refresh the board before trying again."); paint(); });
+  }
+  function analyserDismissAct(id) {
+    var row = ((st.labBoard && st.labBoard.analyser) || []).filter(function (x) { return x.id === id; })[0];
+    askReason(wTH("ward.lab-an-dismiss-q", "Why is this result not being released (rerun, sample rejected, not our specimen)?", null, "", 1),
+      wT("ward.lab-an-dismiss-need", "Say why this result is not being released."), wTH("ward.lab-an-dismiss", "Do not release"),
+      function (why) {
+        st.busy = true; paint();
+        return apiPost("/ward/analyser-dismiss", { orgId: st.orgId, inboxId: id, reason: why, expectedVersion: row ? row.version : undefined })
+          .then(function (r) { if (settle(r, wT("ward.lab-an-dismissed", "Taken off the bench. Nothing was released."))) loadLabBoard(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      });
+  }
+
+  /* SAMPLE REJECTION with a coded reason (specimen.js). The order goes back to needing a sample, which is the
+   * prompt to recollect, and the reason is counted by month and ward. */
+  function labRejectionWord(code) {
+    return code === "haemolysed" ? wT("ward.lab-rej-haemolysed", "Haemolysed")
+      : code === "clotted" ? wT("ward.lab-rej-clotted", "Clotted")
+      : code === "insufficient" ? wT("ward.lab-rej-insufficient", "Insufficient sample")
+      : code === "mislabelled" ? wT("ward.lab-rej-mislabelled", "Mislabelled")
+      : code === "wrong-container" ? wT("ward.lab-rej-wrong-container", "Wrong container") : code;
+  }
+  var LAB_REJECTION_CODES = ["haemolysed", "clotted", "insufficient", "mislabelled", "wrong-container"];
+  function specimenRejectAct(specimenId) {
+    if (!specimenId) return;
+    askFor({ title: wTH("ward.lab-rej-title", "Reject this sample"), icon: "block", ok: wTH("ward.lab-rej-ok", "Reject and ask for a new sample"), danger: true,
+      fields: [{ key: "code", type: "select", label: wTH("ward.lab-rej-reason", "Reason"), required: wT("ward.lab-rej-pick", "Pick the reason the sample was rejected."),
+        options: [["", wTH("ward.choose", "Choose&hellip;")]].concat(LAB_REJECTION_CODES.map(function (c) { return [c, esc(labRejectionWord(c))]; })) }] },
+      function (v) {
+        st.busy = true; paint();
+        return apiPost("/ward/specimen-outcome", { orgId: st.orgId, specimenId: specimenId, state: "failed", rejectionCode: v.code })
+          .then(function (r) { if (settle(r, wT("ward.lab-rej-done", "Rejected. The ward sees this order as needing a new sample."))) loadLabBoard(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      });
+  }
+  function labRejectionsOpen() {
+    st.view = "labrejections"; st.labRej = { month: (st.labRej && st.labRej.month) || new Date().toISOString().slice(0, 7), data: null }; paint(); loadLabRejections();
+  }
+  function loadLabRejections() {
+    var m = val("wRejMonth") || st.labRej.month;
+    st.labRej = { month: m, data: null }; paint();
+    return apiGet("/ward/specimen-rejections?orgId=" + encodeURIComponent(st.orgId) + "&month=" + encodeURIComponent(m))
+      .then(function (r) { st.labRej.data = r && r.ok ? r : { failed: true, detail: r && (r.detail || r.message) }; paint(); })
+      .catch(function () { st.labRej.data = { failed: true }; paint(); });
+  }
+  function labRejectionsView(state) {
+    var R = state.labRej || {}, d = R.data;
+    var head = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<div><b>" + wTH("ward.lab-rej-stats", "Rejected samples") + "</b><small>" + wTH("ward.lab-rej-by", "by reason and ward") + "</small></div></div>" +
+      '<div class="w-card"><div class="w-grid"><label class="w-f"><span>' + wTH("ward.lab-rej-month", "Month") + '</span><input id="wRejMonth" type="month" value="' + esc(R.month || "") + '"></label></div>' +
+      '<button class="w-btn go" data-w-act="labrejload">' + ms("search") + wTH("ward.lab-rej-show", "Show") + "</button></div>";
+    if (!d) return head + '<p class="w-empty">' + wTH("ward.loading4", "Loading...") + "</p>";
+    if (d.failed) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.lab-rej-failed", "The rejection counts could not be read. Do not read this as none.", null, "", 1) + "</p>";
+    var codes = LAB_REJECTION_CODES;
+    var rows = (d.byWard || []).map(function (w) {
+      return "<tr><td>" + (w.ward ? esc(w.ward) : wTH("ward.lab-rej-no-ward", "Ward not known")) + "</td>" + codes.map(function (c) { return "<td>" + esc((w.byReason && w.byReason[c]) || 0) + "</td>"; }).join("") + "<td><b>" + esc(w.total) + "</b></td></tr>";
+    }).join("");
+    return head + (d.partialWarning ? '<p class="w-hint warn">' + ms("warning") + esc(d.partialWarning) + "</p>" : "") +
+      (d.wardUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.lab-rej-ward-unread", "The ward of {n} rejected sample(s) could not be read; they are counted under Ward not known.", { n: esc(d.wardUnreadable) }, "n") + "</p>" : "") +
+      '<div class="w-card"><div class="w-card-h">' + ms("block") + "<h3>" + wTH("ward.lab-rej-summary", "{rejected} rejected of {collected} collected in {month}", { rejected: esc(d.rejected), collected: esc(d.collected), month: esc(d.month) }, "month") + "</h3></div>" +
+      (d.rejected ? '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.lab-rej-ward", "Ward") + "</th>" + codes.map(function (c) { return "<th>" + esc(labRejectionWord(c)) + "</th>"; }).join("") + "<th>" + wTH("ward.lab-rej-total", "Total") + "</th></tr></thead><tbody>" + rows +
+        "<tr><td><b>" + wTH("ward.lab-rej-total", "Total") + "</b></td>" + codes.map(function (c) { return "<td><b>" + esc((d.byReason && d.byReason[c]) || 0) + "</b></td>"; }).join("") + "<td><b>" + esc(d.rejected) + "</b></td></tr></tbody></table></div>"
+        : '<p class="w-empty">' + wTH("ward.lab-rej-none", "No samples were rejected this month.") + "</p>") + "</div>";
+  }
+
+  /* QUALITY CONTROL (lab-qc.js). The Westgard rules are the server's: every value here is what the server
+   * stored when the run was written. The Levey-Jennings chart is drawn in SD units against each lot's own
+   * target, one chart per control level, so lots and levels of one test read on one scale. */
+  function ljChartSvg(runs, label) {
+    var W = 600, Hh = 190, padL = 34, padR = 8, padT = 8, padB = 18;
+    var y = function (z) { var c = Math.max(-4, Math.min(4, z)); return padT + (4 - c) / 8 * (Hh - padT - padB); };
+    var n = runs.length, x = function (i) { return padL + (n <= 1 ? (W - padL - padR) / 2 : i * (W - padL - padR) / (n - 1)); };
+    var COLOR = { accepted: "currentColor", warning: "#b45309", rejected: "#b91c1c" };
+    var line = function (z) {
+      var a = Math.abs(z), stroke = a === 3 ? "#b91c1c" : a === 2 ? "#b45309" : "currentColor";
+      return '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(z) + '" y2="' + y(z) + '" stroke="' + stroke + '" stroke-opacity="' + (a >= 2 ? 0.85 : z === 0 ? 0.6 : 0.25) + '"' + (a === 2 ? ' stroke-dasharray="4 3"' : "") + "></line>" +
+        '<text x="2" y="' + (y(z) + 4) + '" font-size="10" fill="currentColor" fill-opacity="0.75">' + (z === 0 ? wTH("ward.lab-qc-mean", "mean") : (z > 0 ? "+" : "") + z + "SD") + "</text>";
+    };
+    var path = runs.map(function (r, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(r.z).toFixed(1); }).join(" ");
+    return '<svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + wTA("ward.lab-qc-chart-label", "Levey-Jennings chart, {label}", { label: esc(label) }) + '" style="width:100%;max-width:640px;height:auto">' +
+      [3, 2, 1, 0, -1, -2, -3].map(line).join("") +
+      (n ? '<path d="' + path + '" fill="none" stroke="currentColor" stroke-opacity="0.5"></path>' : "") +
+      runs.map(function (r, i) {
+        var s = (r.evaluation && r.evaluation.status) || "accepted";
+        return '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(r.z).toFixed(1) + '" r="' + (s === "rejected" ? 5 : 3.5) + '" fill="' + (COLOR[s] || COLOR.accepted) + '"></circle>';
+      }).join("") + "</svg>";
+  }
+  function labQcStatusWord(s) {
+    return s === "rejected" ? wT("ward.lab-qc-rejected", "rejected") : s === "warning" ? wT("ward.lab-qc-warning", "warning") : wT("ward.lab-qc-accepted", "accepted");
+  }
+  function labQcOpen() {
+    st.view = "labqc"; st.labQc = null; st.labQcSel = st.labQcSel || {}; paint(); loadLabQc();
+  }
+  function loadLabQc() {
+    return apiGet("/ward/lab-qc?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.labQc = r && r.ok ? r : { failed: true }; paint(); })
+      .catch(function () { st.labQc = { failed: true }; paint(); });
+  }
+  function labQcView(state) {
+    var head = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
+      "<div><b>" + wTH("ward.lab-qc-title", "Quality control") + "</b><small>" + wTH("ward.lab-qc-sub", "Westgard rules, evaluated by the server") + "</small></div>" +
+      "<button class=\"w-ic\" data-w-act=\"labqcload\" title=\"" + wTA("ward.refresh", "Refresh") + "\" aria-label=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>";
+    var q = state.labQc;
+    if (!q) return head + '<p class="w-empty">' + wTH("ward.lab-qc-loading", "Loading quality control...") + "</p>";
+    if (q.failed) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.lab-qc-failed", "Quality control could not be read. Do not read this as no QC problems.", null, "", 1) + "</p>";
+    var sel = state.labQcSel || {}, analysers = q.analysers || [], materials = q.materials || [];
+    var anName = function (id) { var a = analysers.filter(function (x) { return x.id === id; })[0]; return a ? a.name : id; };
+    var an = sel.analyserId || (analysers[0] && analysers[0].id) || "";
+    var tests = [];
+    (analysers.filter(function (a) { return a.id === an; })[0] || { tests: [] }).tests.forEach(function (t) { if (tests.indexOf(t) < 0) tests.push(t); });
+    materials.forEach(function (m) { if (!m.analyserId || m.analyserId === an) (m.targets || []).forEach(function (t) { if (tests.indexOf(t.test) < 0) tests.push(t.test); }); });
+    var test = sel.test && tests.indexOf(sel.test) >= 0 ? sel.test : (tests[0] || "");
+    var lc = function (s) { return String(s || "").toLowerCase(); };
+    var runs = (q.runs || []).filter(function (r) { return r.analyserId === an && lc(r.test) === lc(test); }).slice().reverse();
+    var levels = [];
+    runs.forEach(function (r) { if (levels.indexOf(r.level) < 0) levels.push(r.level); });
+    var opt = function (v, label, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? " selected" : "") + ">" + esc(label) + "</option>"; };
+
+    var blocks = (q.blocks || []).map(function (b) {
+      return '<li class="lvl-overdue"><div class="w-crit-h"><b>' + esc(anName(b.analyserId)) + " &middot; " + esc(b.test) + '</b><span class="w-st overdue">' + esc((b.rules || []).join(", ")) + "</span></div>" +
+        '<div class="w-crit-m">' + wTH("ward.lab-qc-blocked-since", "Patient results held since {at}", { at: when(b.recordedAt) }, "at") + "</div>" +
+        '<button class="w-btn go sm" data-w-act="labqcaction:' + esc(b.analyserId + "|" + b.test) + '">' + ms("build") + wTH("ward.lab-qc-action", "Record corrective action") + "</button></li>";
+    }).join("");
+    var charts = levels.map(function (lv) {
+      var pts = runs.filter(function (r) { return r.level === lv; }).slice(-40);
+      return "<h4>" + wTH("ward.lab-qc-level", "Level {level}", { level: esc(lv) }, "level") + "</h4>" + ljChartSvg(pts, anName(an) + ", " + test + ", " + lv);
+    }).join("");
+    var table = runs.slice(-30).reverse().map(function (r) {
+      var ev = r.evaluation || {};
+      return "<tr><td>" + when(r.at) + "</td><td>" + esc(r.level) + "</td><td>" + esc(r.lot) + "</td><td><b>" + esc(r.value) + "</b>" + (r.unit ? " " + esc(r.unit) : "") + "</td><td>" + esc(r.z) + "</td>" +
+        '<td><span class="w-st ' + (ev.status === "rejected" ? "overdue" : ev.status === "warning" ? "due" : "") + '">' + esc(labQcStatusWord(ev.status)) + "</span> " + esc((ev.rules || []).join(", ")) + "</td>" +
+        "<td>" + (r.source === "connector" ? wTH("ward.lab-qc-from-analyser", "analyser") : wTH("ward.lab-qc-typed", "typed")) + "</td></tr>";
+    }).join("");
+    var form = state.labQcForm || {};
+    var active = materials.filter(function (m) { return m.active !== false; });
+    var mat = active.filter(function (m) { return m.id === form.materialId; })[0] || active[0] || null;
+
+    return head + (q.truncatedWarning ? '<p class="w-hint warn">' + ms("warning") + esc(q.truncatedWarning) + "</p>" : "") +
+      '<div class="w-card"><div class="w-card-h">' + ms("rule") + "<h3>" + wTH("ward.lab-qc-blocks", "Held by a rejected QC run &middot; {n}", { n: (q.blocks || []).length }, "n") + "</h3></div>" +
+      (blocks ? '<ul class="w-crits">' + blocks + "</ul>" : '<p class="w-empty">' + wTH("ward.lab-qc-no-blocks", "No analyser and test is held.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("show_chart") + "<h3>" + wTH("ward.lab-qc-lj", "Levey-Jennings") + "</h3></div>" +
+      (analysers.length ? '<div class="w-grid"><label class="w-f"><span>' + wTH("ward.lab-qc-analyser", "Analyser") + '</span><select id="wQcAn" data-w-act="labqcsel">' + analysers.map(function (a) { return opt(a.id, a.name, an); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-test", "Test") + '</span><select id="wQcTest" data-w-act="labqcsel">' + tests.map(function (t) { return opt(t, t, test); }).join("") + "</select></label></div>" +
+        (runs.length ? charts + '<div style="overflow-x:auto"><table class="w-tbl"><thead><tr><th>' + wTH("ward.lab-qc-when", "When") + "</th><th>" + wTH("ward.lab-qc-level-col", "Level") + "</th><th>" + wTH("ward.lab-qc-lot", "Lot") + "</th><th>" + wTH("ward.lab-qc-value", "Value") + "</th><th>" + wTH("ward.lab-qc-sd", "SD from mean") + "</th><th>" + wTH("ward.lab-qc-result", "Result") + "</th><th>" + wTH("ward.lab-qc-source", "Source") + "</th></tr></thead><tbody>" + table + "</tbody></table></div>"
+          : '<p class="w-empty">' + wTH("ward.lab-qc-no-runs", "No QC results for this analyser and test yet.") + "</p>")
+        : '<p class="w-empty">' + wTH("ward.lab-qc-no-analysers", "No analyser is registered. An administrator adds them under Integrations.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("science") + "<h3>" + wTH("ward.lab-qc-record", "Record a QC result") + "</h3></div>" +
+      (active.length && analysers.length ? '<div class="w-grid">' +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-lot-level", "Control lot") + '</span><select id="wQcRunMat" data-w-act="labqcformmat">' + active.map(function (m) { return opt(m.id, m.name + " " + m.lot + " / " + m.level, mat ? mat.id : ""); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-analyser", "Analyser") + '</span><select id="wQcRunAn">' + analysers.map(function (a) { return opt(a.id, a.name, (mat && mat.analyserId) || an); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-test", "Test") + '</span><select id="wQcRunTest">' + ((mat && mat.targets) || []).map(function (t) { return opt(t.test, t.test, test); }).join("") + "</select></label>" +
+        '<label class="w-f"><span>' + wTH("ward.lab-qc-value", "Value") + '</span><input id="wQcRunValue" type="text" inputmode="decimal" autocomplete="off"></label></div>' +
+        '<button class="w-btn go" data-w-act="labqcrun">' + ms("add") + wTH("ward.lab-qc-record-btn", "Record and evaluate") + "</button>"
+        : '<p class="w-empty">' + wTH("ward.lab-qc-need-lot", "Add a control lot below before recording QC results.") + "</p>") + "</div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("inventory") + "<h3>" + wTH("ward.lab-qc-lots", "Control lots &middot; {n}", { n: materials.length }, "n") + "</h3></div>" +
+      (materials.length ? '<ul class="w-mini">' + materials.map(function (m) {
+        return "<li><b>" + esc(m.name) + " " + esc(m.lot) + " / " + esc(m.level) + "</b><span>" + wTH("ward.lab-qc-lot-line", "expires {expiry} &middot; {n} test(s)", { expiry: esc(m.expiry), n: esc((m.targets || []).length) }, "expiry") +
+          (m.sampleId ? " &middot; " + wTH("ward.lab-qc-sample-id", "sample id {id}", { id: esc(m.sampleId) }, "id") : "") + (m.active === false ? ' <span class="w-st">' + wTH("ward.lab-qc-inactive", "not in use") + "</span>" : "") + "</span></li>";
+      }).join("") + "</ul>" : "") +
+      "<h4>" + wTH("ward.lab-qc-add-lot", "Add or update a control lot") + "</h4>" +
+      '<div class="w-grid">' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-material-name", "Control material") + '</span><input id="wQcmName" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-lot", "Lot") + '</span><input id="wQcmLot" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-level-col", "Level") + '</span><input id="wQcmLevel" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.expiry", "Expiry") + '</span><input id="wQcmExpiry" type="date"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-sample-id-label", "Sample id the analyser reports (optional)") + '</span><input id="wQcmSample" type="text" autocomplete="off"></label>' +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-analyser", "Analyser") + '</span><select id="wQcmAn">' + opt("", wT("ward.lab-qc-any-analyser", "Any analyser"), "") + analysers.map(function (a) { return opt(a.id, a.name, ""); }).join("") + "</select></label></div>" +
+      '<label class="w-f"><span>' + wTH("ward.lab-qc-targets", "Targets, one per line: test | mean | SD | unit") + '</span><textarea id="wQcmTargets" rows="4" placeholder="Potassium | 4.0 | 0.1 | mmol/L"></textarea></label>' +
+      '<button class="w-btn go" data-w-act="labqcmaterial">' + ms("save") + wTH("ward.lab-qc-save-lot", "Save control lot") + "</button></div>" +
+
+      '<div class="w-card"><div class="w-card-h">' + ms("gpp_maybe") + "<h3>" + wTH("ward.lab-qc-overrides", "Overrides &middot; {n}", { n: (q.overrides || []).length }, "n") + "</h3></div>" +
+      ((q.overrides || []).length ? '<ul class="w-mini">' + q.overrides.map(function (o) {
+        return "<li><b>" + esc(anName(o.analyserId)) + " &middot; " + esc((o.tests || []).join(", ")) + "</b><span>" + when(o.at) + " &middot; " + staffWho(o.by, null) + " &middot; " + esc(o.reason) + "</span></li>";
+      }).join("") + "</ul>" : '<p class="w-empty">' + wTH("ward.lab-qc-no-overrides", "No QC block has been overridden.") + "</p>") +
+      ((q.actions || []).length ? "<h4>" + wTH("ward.lab-qc-actions", "Corrective actions") + '</h4><ul class="w-mini">' + q.actions.slice(0, 20).map(function (a) {
+        return "<li><b>" + esc(anName(a.analyserId)) + " &middot; " + esc(a.test) + "</b><span>" + when(a.recordedAt) + " &middot; " + staffWho(a.by, null) + " &middot; " + esc(a.action) + "</span></li>";
+      }).join("") + "</ul>" : "") + "</div>";
+  }
+  function labQcRunSave() {
+    var materialId = val("wQcRunMat"), analyserId = val("wQcRunAn"), test = val("wQcRunTest"), value = val("wQcRunValue");
+    if (!materialId || !analyserId || !test || value === "") { st.err = wT("ward.lab-qc-run-need", "Choose the lot, analyser and test, and enter the value."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/lab-qc-run", { orgId: st.orgId, materialId: materialId, analyserId: analyserId, test: test, value: value })
+      .then(function (r) {
+        var ev = r && r.ok && r.run && r.run.evaluation;
+        var msg = !ev ? null : ev.status === "rejected" ? wT("ward.lab-qc-run-rejected", "Recorded. QC REJECTED ({rules}): patient results for this analyser and test are held until a corrective action is recorded.", { rules: (ev.rules || []).join(", ") })
+          : ev.status === "warning" ? wT("ward.lab-qc-run-warning", "Recorded with a 1-2s warning. Check the other rules and the trend before releasing.") : wT("ward.lab-qc-run-accepted", "Recorded. Within the rules.");
+        if (settle(r, ev && ev.status !== "rejected" ? msg : null)) { if (ev && ev.status === "rejected") st.err = msg; st.labQcSel = { analyserId: analyserId, test: test }; loadLabQc(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function labQcMaterialSave() {
+    var targets = val("wQcmTargets").split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean).map(function (l) {
+      var p = l.split("|").map(function (x) { return x.trim(); });
+      return { test: p[0] || "", mean: p[1] || "", sd: p[2] || "", unit: p[3] || "" };
+    });
+    st.busy = true; paint();
+    apiPost("/ward/lab-qc-material", { orgId: st.orgId, material: { name: val("wQcmName"), lot: val("wQcmLot"), level: val("wQcmLevel"), expiry: val("wQcmExpiry"), sampleId: val("wQcmSample"), analyserId: val("wQcmAn"), targets: targets } })
+      .then(function (r) { if (settle(r, wT("ward.lab-qc-lot-saved", "Control lot saved."))) loadLabQc(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+  }
+  function labQcActionAct(arg) {
+    var i = arg.indexOf("|"), analyserId = arg.slice(0, i), test = arg.slice(i + 1);
+    askReason(wTH("ward.lab-qc-action-q", "What was done (recalibration, new reagent lot, maintenance) and what did the repeat QC show?", null, "", 1),
+      wT("ward.lab-qc-action-need", "Describe the corrective action."), wTH("ward.lab-qc-action", "Record corrective action"),
+      function (action) {
+        st.busy = true; paint();
+        return apiPost("/ward/lab-qc-action", { orgId: st.orgId, analyserId: analyserId, test: test, action: action })
+          .then(function (r) { if (settle(r, wT("ward.lab-qc-action-done", "Corrective action recorded. Patient results for this analyser and test can be released again."))) loadLabQc(); else paint(); })
+          .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
+      });
+  }
+  function labStockOpen() {
+    st.view = "inventory"; st.inventory = { lab: true }; paint(); loadInventory();
   }
 
   /* MICROBIOLOGY ENTRY (P1.9). One form per stage update; every save is a new version of the same
@@ -4822,7 +5129,7 @@
   function loadLabBoard() {
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId);
-    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], errors: [], failed: {} };
+    var out = { specimens: [], pending: [], criticals: [], toVerify: [], cultures: [], histopathology: [], analyser: [], errors: [], failed: {} };
     var fail = function (name) { out.errors.push(name); out.failed[name] = true; };
     var read = function (name, path, fn) {
       return apiGet(path).then(function (r) {
@@ -4833,6 +5140,7 @@
       read("specimens", "/ward/collections?" + q + "&scope=hospital", function (r) { out.specimens = r.requests || []; }),
       read("tests awaiting a result", "/ward/pending-tests?" + q + "&scope=hospital", function (r) { out.pending = r.pending || []; }),
       read("results awaiting verification", "/ward/results-to-verify?" + q, function (r) { out.toVerify = r.results || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
+      read("analyser results", "/ward/analyser-inbox?" + q, function (r) { out.analyser = r.rows || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("cultures in progress", "/ward/cultures-in-progress?" + q, function (r) { out.cultures = r.cultures || []; out.histopathology = r.histopathology || []; if (r.partialWarning) out.errors.push(r.partialWarning); }),
       read("critical results", "/ward/criticals?" + q + "&names=1", function (r) {
         // The laboratory's own loops. A radiology report id starts wsq-rad-; a lab one does not.
@@ -8093,6 +8401,8 @@
         : state.view === "critsboard" ? critsBoardView(state)
         : state.view === "timeline" ? timelineView(state)
         : state.view === "labboard" ? labBoardView(state)
+        : state.view === "labqc" ? labQcView(state)
+        : state.view === "labrejections" ? labRejectionsView(state)
         : state.view === "radboard" ? radBoardView(state)
         : state.view === "integration" ? integrationView(state)
         : state.view === "bedmgmt" ? bedBoardMgmtView(state)
@@ -9690,7 +10000,7 @@
   function loadInventory() {
     if (!st.inventory) st.inventory = {};
     st.inventory.failed = false;
-    return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId))
+    return apiGet("/ward/stock?orgId=" + encodeURIComponent(st.orgId) + (st.inventory.lab ? "&location=Laboratory" : ""))
       .then(function (r) { st.inventory.stock = (r && r.ok) ? r : null; st.inventory.failed = !(r && r.ok); paint(); })
       .catch(function () { st.inventory.stock = null; st.inventory.failed = true; paint(); });
   }
@@ -9704,7 +10014,7 @@
       .catch(function () { st.inventory.fefo = { ok: false }; paint(); });
   }
   function stockReceive() {
-    var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
+    var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = st.inventory && st.inventory.lab ? "Laboratory" : val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
     if (!code || !qty || !unit) { st.err = wT("ward.a-receipt-needs-a-drug-a", "A receipt needs a drug, a quantity and a unit."); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/stock-move", { orgId: st.orgId, kind: "receipt", code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, batch: batch || undefined, expiry: expiry || undefined })
@@ -9715,7 +10025,7 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-receipt", "Could not record the receipt."); paint(); });
   }
   function stockAdjustOrWaste(kind) {
-    var code = val("wAdjCode"), qty = val("wAdjQty"), unit = val("wAdjUnit"), loc = val("wAdjLoc"), reason = val("wAdjReason");
+    var code = val("wAdjCode"), qty = val("wAdjQty"), unit = val("wAdjUnit"), loc = st.inventory && st.inventory.lab ? "Laboratory" : val("wAdjLoc"), reason = val("wAdjReason");
     if (!code || !qty || !unit) { st.err = wT("ward.fill-in-the-drug-quantity-and", "Fill in the drug, quantity and unit."); paint(); return; }
     if (!reason) { st.err = wT("ward.an-adjustment-or-wastage-needs-a", "An adjustment or wastage needs a reason."); paint(); return; }
     st.busy = true; paint();
@@ -12863,7 +13173,8 @@
       if (st.view === "radiology") { st.view = "chart"; st.radiology = null; paint(); return; }
       if (st.view === "pharmacy") { st.view = "chart"; st.pharmacy = null; paint(); return; }
       if (st.view === "transfusion") { st.view = "chart"; st.transfusion = null; paint(); return; }
-      if (st.view === "inventory") { st.inventory = null; st.view = "list"; paint(); return; }
+      if (st.view === "inventory") { var labStock = st.inventory && st.inventory.lab; st.inventory = null; if (labStock) { labBoardOpen(); return; } st.view = "list"; paint(); return; }
+      if (st.view === "labqc" || st.view === "labrejections") { st.labQc = null; labBoardOpen(); return; }
       if (st.view === "critsboard") { st.critsBoard = []; st.view = "list"; paint(); return; }
       if (st.view === "timeline") { st.view = "chart"; paint(); return; }
       if (st.view === "labboard") { st.labBoard = null; st.view = "list"; paint(); return; }
@@ -13002,6 +13313,19 @@
     if (cmd === "timelinenote") { timelineNoteSave(); return; }
     if (cmd === "labboard") { labBoardOpen(); return; }
     if (cmd === "labboardload") { loadLabBoard(); return; }
+    if (cmd === "analyserrelease") { analyserReleaseAct(arg, ""); return; }
+    if (cmd === "analyserdismiss") { analyserDismissAct(arg); return; }
+    if (cmd === "specreject") { specimenRejectAct(arg); return; }
+    if (cmd === "labqc") { labQcOpen(); return; }
+    if (cmd === "labqcload") { st.labQc = null; paint(); loadLabQc(); return; }
+    if (cmd === "labqcsel") { st.labQcSel = { analyserId: val("wQcAn"), test: val("wQcTest") }; paint(); return; }
+    if (cmd === "labqcformmat") { st.labQcForm = { materialId: val("wQcRunMat") }; paint(); return; }
+    if (cmd === "labqcrun") { labQcRunSave(); return; }
+    if (cmd === "labqcmaterial") { labQcMaterialSave(); return; }
+    if (cmd === "labqcaction") { labQcActionAct(arg); return; }
+    if (cmd === "labstock") { labStockOpen(); return; }
+    if (cmd === "labrejections") { labRejectionsOpen(); return; }
+    if (cmd === "labrejload") { loadLabRejections(); return; }
     if (cmd === "radboard") { radBoardOpen(); return; }
     if (cmd === "radboardload") { loadRadBoard(); return; }
     if (cmd === "radboardpick") { radBoardPick(arg); return; }
@@ -13278,10 +13602,23 @@
     if (cmd === "labtmpl") { labTemplateApply(arg); return; }
     if (cmd === "labdept") { st.labDept = arg; paint(); return; }
     if (cmd === "labverify" || cmd === "labreturn") {
-      var verifySend = function (reason) {
+      var verifySend = function (reason, qcOverrideReason) {
         st.busy = true; paint();
-        return apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined })
-          .then(function (r) { if (settle(r, cmd === "labverify" ? wT("ward.verified-the-result-is-final", "Verified. The result is final.") : wT("ward.returned-for-re-entry", "Returned for re-entry."))) loadLabBoard(); else paint(); })
+        return apiPost("/ward/verify-result", { orgId: st.orgId, reportId: arg, decision: cmd === "labverify" ? "verify" : "return", reason: reason || undefined, qcOverrideReason: qcOverrideReason || undefined })
+          .then(function (r) {
+            // A rejected QC run on the analyser that measured it holds verification until a corrective action, or an override with a reason.
+            if (r && r.error === "qc_blocked" && !qcOverrideReason) {
+              st.busy = false; paint();
+              askReason(wTH("ward.lab-qc-override-q", "A rejected QC run blocks this analyser and test. Why is it safe to release anyway?", null, "", 1),
+                wT("ward.lab-qc-override-need", "An override needs a reason."), wTH("ward.lab-qc-override-ok", "Override and release"),
+                function (why) {
+                  if (why.length < 10) { st.err = wT("ward.lab-qc-override-short", "Say more: an override reason is at least 10 characters."); return; }
+                  return verifySend(reason, why);
+                }, { danger: true, icon: "warning" });
+              return;
+            }
+            if (settle(r, cmd === "labverify" ? wT("ward.verified-the-result-is-final", "Verified. The result is final.") : wT("ward.returned-for-re-entry", "Returned for re-entry."))) loadLabBoard(); else paint();
+          })
           .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
       };
       if (cmd === "labreturn") askReason(wTH("ward.what-needs-checking-or-re-entering", "What needs checking or re-entering?"), wT("ward.say-what-needs-checking", "Say what needs checking."), null, verifySend, { icon: "undo" });

@@ -225,8 +225,11 @@ function grantForCaps(caps) {
      * the loop was refused, and no critical alert opened. The lab may now write the loop its own result
      * opens, and read it back to avoid opening it twice. This does NOT open the ward's critical-results
      * LIST to the laboratory: that route is gated by capability at the door, which is unchanged. */
-    const canRead = ["Patient", "ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol", "CriticalResultLoop"];
-    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol", "CriticalResultLoop"];
+    /* StockMovement joined 2026-09-16: the laboratory's reagents and consumables are counted on the same stock
+     * ledger as the pharmacy's (stock.js), at the Laboratory location. It names no patient. The router lets
+     * lab.result reach the stock routes only for that one location. */
+    const canRead = ["Patient", "ServiceRequest", "Observation", "DiagnosticReport", "SpecimenCollection", "AllergyIntolerance", "ImagingProtocol", "CriticalResultLoop", "StockMovement"];
+    const canWrite = ["Observation", "DiagnosticReport", "SpecimenCollection", "ImagingProtocol", "CriticalResultLoop", "StockMovement"];
     const cats = { Observation: ["laboratory"] };
     if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: canWrite, writeCategories: cats, basis: CAPS.LAB_RESULT };
     else grant = {

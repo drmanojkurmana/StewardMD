@@ -31,7 +31,10 @@
     "roi": "Superseded by roi-requests, which the Release of information card calls and which returns the same summary() of every request for the patient. Verified 2026-09-13.",
     "round": "Superseded by schedule, which the chart's Medication round calls over a time window instead of one dueAt. Both now report an unreadable dose record as unknown, never as not started (test/wardsynq-inpatient-emar.test.mjs). Verified 2026-09-13.",
     "flag-critical": "Called by the server itself: release-result opens critical loops against the stored report on every release (2026-09-14). This route remains only as an idempotent re-check; a screen button for it would duplicate that automatic step.",
-    "tick-all": "The stewardmd-api worker's */5 cron POSTs it with the admin token so critical results escalate with nobody on the ward (S3 P0); no screen calls it."
+    "tick-all": "The stewardmd-api worker's */5 cron POSTs it with the admin token so critical results escalate with nobody on the ward (S3 P0); no screen calls it.",
+    "analyser-config": "The on-premises laboratory analyser connector (connect-agent/analyser) fetches its analysers here with the hospital connector key; no person calls it. The key and the register are on Admin > Integrations > Laboratory analysers.",
+    "analyser-results": "The on-premises analyser connector files a received result or a QC run here; it lands on the Laboratory board for a technologist, never on a chart.",
+    "analyser-orders": "The on-premises analyser connector asks which tests were ordered on a specimen when an analyser sends an ASTM host query."
   },
   "knownGaps": {},
   "untestedRoutes": []

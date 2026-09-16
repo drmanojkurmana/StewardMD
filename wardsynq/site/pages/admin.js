@@ -2511,9 +2511,10 @@
 
   function renderIntegrations(c, body, shown) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
-    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="abdmCard"></div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
+    body.innerHTML = '<div id="cnCard">' + connectorsHtml(c, null) + '</div><div id="abdmCard"></div><div id="labAnCard"></div><div id="whCard">' + webhooksHtml(c, null) + '</div><div id="scCard">' + smartClientsHtml(c, null) + "</div>";
     loadConnectors(c, body);
     if (WSQ._abdmLoad) WSQ._abdmLoad(c);   // pages/abdm.js: the ABDM connector has its own card
+    if (WSQ._labAnalysersLoad) WSQ._labAnalysersLoad(c);   // pages/lab-analysers.js: laboratory analysers and the connector key
     var fail = function (r) { return { failed: true, message: r ? refusal(c, r) : T(c, "site.admin.err.noResponse", "No response from the server.") }; };
     /* The connected-apps card loads beside the webhooks, into its own wrapper, so whichever answer
      * arrives first is never wiped by the other. */

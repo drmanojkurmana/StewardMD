@@ -6695,3 +6695,27 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
 - "Scan with camera" (BarcodeDetector + getUserMedia) only fills the field a wedge scanner types into; the same button
   sends it through the same server check. Specimen receipt by scan sends `scannedAccession`, and the server refuses a
   label that is not the specimen's own accession (409 `wrong_specimen_scan`).
+## 2026-09-16 Laboratory analysers connect through an on-premises connector; results are released by a person
+- Pages Functions has no TCP, so analysers (HL7 v2 over MLLP, ASTM E1381/E1394 over TCP or serial-over-TCP) talk to
+  `connect-agent/analyser/`, a stdlib-only Node program on the laboratory network. It frames and acknowledges per
+  spec, keeps a durable file queue, and calls three routes before staff authentication:
+  `GET /api/queue/lab-connector/analyser-config`, `POST .../analyser-results`, `POST .../analyser-orders` (host query).
+  The existing Camofox Connect runner in `connect-agent/` is a different job (EMR discovery for Connect) with its own
+  HMAC runner protocol; the analyser connector sits beside it in the same folder rather than inside it.
+- Authority is one connector key per hospital (`wsqlab.<base64url org id>.<secret>`), issued on Admin > Integrations >
+  Laboratory analysers, shown once, stored AES-GCM sealed (webhooks.js sealSecret), compared in constant time. The
+  protocol per analyser (astm or hl7) is the per-hospital adapter choice; the instrument-code mapping stays on the server.
+- Analyser results do NOT go through `/ward/hl7`: that door files ANOTHER system's records (landBundle, external source).
+  An analyser measures this hospital's own specimens, so its results wait in `_wardsynq_analyser_result` (the bench
+  inbox) and reach the chart only when a technologist presses Release, through lab-result.js `releaseResult` as that
+  person: autoverification, second-person verification and the critical check apply unchanged. Nothing is
+  auto-released; a device actor never writes an Observation or DiagnosticReport.
+- QC (lab-qc.js): control lots with target mean/SD per test and level; runs typed or received (an active lot's sample
+  id marks a QC run); Westgard 1-2s warning and 1-3s, 2-2s, R-4s (different level within two hours), 4-1s, 10x
+  rejections evaluated server-side on every run, window restarting at the last corrective action. A rejected run
+  blocks analyser release and verification of that analyser's results for that test until a corrective action; an
+  override needs a reason, is its own record and audit row, and is listed on the QC screen. The block is derived.
+- Reagents use the pharmacy stock ledger at location "Laboratory"; lab.result reaches `stock`/`stock-move` for that
+  location only (the grant adds StockMovement). Specimen rejection is `specimen-outcome` failed with a `rejectionCode`
+  (haemolysed, clotted, insufficient, mislabelled, wrong-container); monthly counts by reason and ward read the
+  encounter's ward through the repository (the lab grant cannot read Encounter; only ward names and counts leave).

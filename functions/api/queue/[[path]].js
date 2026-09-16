@@ -166,7 +166,9 @@ import { askAboutHospital, reviewTwinInteraction } from "../../_wardsynq/twin-co
 import { prepareOverdueWorkQueue } from "../../_wardsynq/twin-agent.js";
 import { qualityReport, qualitySafetyReport } from "../../_wardsynq/quality.js";
 import { DEFINITIONS as TREND_DEFINITIONS, trendCatalogue, trendSeries, trendEvents } from "../../_wardsynq/trends.js";
-import { collectSpecimen, specimenOutcome, collectionList } from "../../_wardsynq/specimen.js";
+import { collectSpecimen, specimenOutcome, collectionList, rejectionStats } from "../../_wardsynq/specimen.js";
+import { parseConnectorKey, authenticateConnector, connectorConfig, connectorResults, connectorOrders, listAnalysers, saveAnalyser, connectorKey, analyserInbox, releaseAnalyserResult, dismissAnalyserResult } from "../../_wardsynq/lab-analysers.js";
+import { qcOverview, saveQcMaterial, recordQcRun, recordCorrectiveAction } from "../../_wardsynq/lab-qc.js";
 import { adtForEncounter, oruForReport } from "../../_wardsynq/hl7v2.js";
 import { requestAdmission, closeAdmissionRequest, admissionWaitingList } from "../../_wardsynq/admission-request.js";
 import { registryReport } from "../../_wardsynq/registry.js";
@@ -608,6 +610,30 @@ function opdOrgFor(env, hospitalId) {
  * a public endpoint cannot be used to run up storage calls. */
 let docProbeCache = null;
 const tickLogKey = (tenantId) => `wsq:tick:last:${tenantId}`;
+/* The one stock location the laboratory's own authority reaches (reagents and consumables). */
+const LAB_STOCK_LOCATION = "Laboratory";
+/* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
+ * reachable through /ward/flag-critical, which nothing called - so a potassium of 7 released
+ * through the laboratory screen opened no critical-result loop and alerted nobody. The loops are
+ * now opened straight after the write, against the report ON THE RECORD (not the request body) and
+ * with the site's own limits, so no client can release a result without it being checked. A failure
+ * to open them is reported on the release, never swallowed: a result that could not be checked must
+ * not read as a result that was checked and found normal. Shared by a typed release and an analyser's. */
+async function wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, reportId, idempotencyKey) {
+  try {
+    const crit = await openCriticalLoops(request, env, {
+      ...deps, reportId,
+      limits: (wsqCfg && wsqCfg.criticalLimits) || null,
+      notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository),
+      idempotencyKey: idempotencyKey ? idempotencyKey + ":critical" : null,
+    });
+    return crit && crit.ok
+      ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
+      : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
+  } catch (e) {
+    return { checked: false, error: "critical_check_failed" };
+  }
+}
 /* ONE HOSPITAL'S BACKGROUND PASS, from either trigger: ordinary ward traffic, or the worker's cron through
  * /ops/tick-all (S3 P0, so a quiet hospital at 03:00 still escalates). The same two-minute gate serves
  * both, so the two triggers never double-run a hospital. Returns null when the gate said not yet. */
@@ -815,6 +841,30 @@ export async function onRequest(context) {
         }
       }
       return json({ ok: results.every((x) => !x.failed && !x.criticalsFailed), tenants: orgs.length, results }, 200, request);
+    }
+    /* THE LABORATORY ANALYSER CONNECTOR (lab-analysers.js). Before staff authentication on purpose: it is a
+     * program on the hospital's own network, not a person, and carries no staff session. Its authority is the
+     * hospital's connector key (issued once on Admin, stored sealed, compared in constant time). A key that does
+     * not open the named hospital's record is a 401 with no detail. It can file a received result or a QC run and
+     * ask what was ordered on a specimen; it can never put anything on a chart. */
+    if (seg === "lab-connector") {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const lcKey = parseConnectorKey((request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""));
+      if (!lcKey) return json({ ok: false, error: "auth" }, 401, request);
+      const lcOrg = await ORG.getOrg(env, lcKey.orgId);
+      const lcMig = lcOrg ? await wsqForcedMigration(env, lcOrg) : null;
+      if (!lcMig || lcMig.error) return json({ ok: false, error: "auth" }, 401, request);
+      const lc = { repo: wsqRecordDeps(env, lcMig.tenantId).repository, tenantId: lcMig.tenantId };
+      const lcAuth = await authenticateConnector(env, lc.repo, lc.tenantId, lcKey);
+      if (!lcAuth.ok) return json({ ok: false, error: lcAuth.error }, lcAuth.status, request);
+      const lcRl = await rateHit({ binding: env && env.WSQ_RL, kv: env && env.MAIK_KV }, { key: `wsqlab:${lcOrg.id}`, limit: 1200, windowMs: 60000 });
+      if (!lcRl.allowed) return json({ ok: false, error: "rate_limited", retryAfterSeconds: lcRl.retryAfterSeconds }, 429, request, { "Retry-After": String(lcRl.retryAfterSeconds) });
+      let lcOut = null;
+      if (sub === "analyser-config" && method === "GET") lcOut = await connectorConfig(lc);
+      else if (sub === "analyser-results" && method === "POST") lcOut = await connectorResults(lc, await readBody(request));
+      else if (sub === "analyser-orders" && method === "POST") lcOut = await connectorOrders(lc, await readBody(request));
+      if (!lcOut) return json({ ok: false, error: "not_found" }, 404, request);
+      return json(lcOut.body, lcOut.status, request, { "Cache-Control": "no-store" });
     }
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
@@ -1359,6 +1409,14 @@ export async function onRequest(context) {
         "report-pharmacy": CAPS.ORDER_DISPENSE, "report-him": CAPS.STAFF_ADMIN,
         // The laboratory. Its own authority: releasing a result is not treating a patient.
         "release-result": CAPS.LAB_RESULT, "pending-tests": CAPS.LAB_RESULT, "verify-result": CAPS.LAB_RESULT, "results-to-verify": CAPS.LAB_RESULT,
+        /* Laboratory analysers (lab-analysers.js). The register and the connector key are the deployment owner's
+         * configuration: staff.admin, and a clinical actor inside, so hr is refused as it is for every connector.
+         * The analyser results waiting on the bench, quality control and the rejection counts are the laboratory's
+         * own work: lab.result, the authority that releases results. */
+        "lab-analysers": CAPS.STAFF_ADMIN, "lab-analyser-save": CAPS.STAFF_ADMIN, "lab-connector-key": CAPS.STAFF_ADMIN,
+        "analyser-inbox": CAPS.LAB_RESULT, "analyser-release": CAPS.LAB_RESULT, "analyser-dismiss": CAPS.LAB_RESULT,
+        "lab-qc": CAPS.LAB_RESULT, "lab-qc-material": CAPS.LAB_RESULT, "lab-qc-run": CAPS.LAB_RESULT, "lab-qc-action": CAPS.LAB_RESULT,
+        "specimen-rejections": CAPS.LAB_RESULT,
         /* Microbiology and histopathology (P1.9). Writing either, and the bench's in-progress list, is the
          * laboratory's release authority. The chart reading them is reading the chart. */
         "culture-report": CAPS.LAB_RESULT, "cultures-in-progress": CAPS.LAB_RESULT,
@@ -1677,6 +1735,16 @@ export async function onRequest(context) {
       /* The tube label printed at the laboratory board's Collect names the patient; the lab grant already reads Patient
        * (actor.js) and nothing else this read touches beyond the allergies it also holds. */
       if (!wAz.ok && sub === "label-data") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+      /* The laboratory's reagents and consumables are counted on the pharmacy's stock ledger at ONE location,
+       * "Laboratory". lab.result reaches the levels and movements for that location and no other, and the
+       * handler below pins the location, so it cannot read or move pharmacy stock through this door. */
+      let labStockOnly = false;
+      if (!wAz.ok && (sub === "stock" || sub === "stock-move") && (method === "GET" ? url.searchParams.get("location") : body.location) === LAB_STOCK_LOCATION) {
+        wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.LAB_RESULT);
+        labStockOnly = wAz.ok;
+      }
+      // Rejection counts name no patient: whoever reads the hospital's operational analytics may read them too.
+      if (!wAz.ok && sub === "specimen-rejections") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ANALYTICS_VIEW);
       /* Owner 2026-09-16: the prescriber and verifier on the pharmacy queue, the collector on the laboratory board and
        * whoever acted on a blood unit are named to the staff who work from those records without emr.view. Names,
        * employee ids and roles of this hospital's staff only; it opens no chart and no other route. */
@@ -2769,11 +2837,11 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-move" && method === "POST") {
-        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock" && method === "GET") {
-        const r = await stockLevels(request, env, { ...deps, location: url.searchParams.get("location") || "", reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null });
+        const r = await stockLevels(request, env, { ...deps, location: labStockOnly ? LAB_STOCK_LOCATION : (url.searchParams.get("location") || ""), noDispenses: labStockOnly || url.searchParams.get("location") === LAB_STOCK_LOCATION, reorderLevels: (wsqCfg && wsqCfg.reorderLevels) || null, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stock-fefo" && method === "GET") {
@@ -3242,7 +3310,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "specimen-outcome" && method === "POST") {
-        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, scannedAccession: body.scannedAccession, idempotencyKey: body.idempotencyKey || null });
+        const r = await specimenOutcome(request, env, { ...deps, specimenId: body.specimenId, state: body.state, failureReason: body.failureReason, scannedAccession: body.scannedAccession, rejectionCode: body.rejectionCode, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "collections" && method === "GET") {
@@ -3395,28 +3463,59 @@ export async function onRequest(context) {
           deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null, labVerification: (wsqCfg && wsqCfg.labVerification) || null,
           idempotencyKey: body.idempotencyKey || null,
         });
-        /* A RELEASED RESULT IS CHECKED AGAINST THE CRITICAL LIMITS, ALWAYS. openCriticalLoops was only
-         * reachable through /ward/flag-critical, which nothing called - so a potassium of 7 released
-         * through the laboratory screen opened no critical-result loop and alerted nobody. The loops are
-         * now opened here, straight after the write, against the report ON THE RECORD (not the request
-         * body) and with the site's own limits, so no client can release a result without it being
-         * checked. A failure to open them is reported on the release, never swallowed: a result that
-         * could not be checked must not read as a result that was checked and found normal. */
-        if (r && r.ok && r.reportId) {
-          try {
-            const crit = await openCriticalLoops(request, env, {
-              ...deps, reportId: r.reportId,
-              limits: (wsqCfg && wsqCfg.criticalLimits) || null,
-              notifyDeps: notifyDepsFor(env, wOrg, mig.tenantId, deps.recordDeps.repository),
-              idempotencyKey: body.idempotencyKey ? body.idempotencyKey + ":critical" : null,
-            });
-            r.criticalCheck = crit && crit.ok
-              ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
-              : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
-          } catch (e) {
-            r.criticalCheck = { checked: false, error: "critical_check_failed" };
-          }
-        }
+        // Checked against the critical limits straight after the write (wsqReleaseCriticalCheck).
+        if (r && r.ok && r.reportId) r.criticalCheck = await wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, r.reportId, body.idempotencyKey || null);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* An analyser's result, released by the technologist who presses the button (lab-analysers.js). The release
+       * is lab-result.js releaseResult, so the same autoverification and second-person rules apply, and the same
+       * critical check follows it - also when the release landed but the bench row could not be marked. */
+      if (sub === "analyser-release" && method === "POST") {
+        const r = await releaseAnalyserResult(request, env, {
+          ...deps, inboxId: body.inboxId, expectedVersion: body.expectedVersion, qcOverrideReason: body.qcOverrideReason,
+          deltaLimits: (wsqCfg && wsqCfg.deltaLimits) || null, autoVerify: (wsqCfg && wsqCfg.autoVerify) || null, labVerification: (wsqCfg && wsqCfg.labVerification) || null,
+        });
+        if (r && r.released && r.reportId) r.criticalCheck = await wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, r.reportId, "analyser-release:" + String(body.inboxId || ""));
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "analyser-inbox" && method === "GET") {
+        const r = await analyserInbox(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "analyser-dismiss" && method === "POST") {
+        const r = await dismissAnalyserResult(request, env, { ...deps, inboxId: body.inboxId, reason: body.reason, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-analysers" && method === "GET") {
+        const r = await listAnalysers(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-analyser-save" && method === "POST") {
+        const r = await saveAnalyser(request, env, { ...deps, analyser: body.analyser, expectedVersion: body.expectedVersion });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-connector-key" && method === "POST") {
+        const r = await connectorKey(request, env, { ...deps, orgId: wOrgId, revoke: body.revoke === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request, { "Cache-Control": "no-store" });
+      }
+      if (sub === "lab-qc" && method === "GET") {
+        const r = await qcOverview(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-qc-material" && method === "POST") {
+        const r = await saveQcMaterial(request, env, { ...deps, material: body.material });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-qc-run" && method === "POST") {
+        const r = await recordQcRun(request, env, { ...deps, materialId: body.materialId, analyserId: body.analyserId, test: body.test, value: body.value });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "lab-qc-action" && method === "POST") {
+        const r = await recordCorrectiveAction(request, env, { ...deps, analyserId: body.analyserId, test: body.test, action: body.action });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "specimen-rejections" && method === "GET") {
+        const r = await rejectionStats(request, env, { ...deps, month: url.searchParams.get("month") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "culture-report" && method === "POST") {
@@ -3453,7 +3552,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "verify-result" && method === "POST") {
-        const r = await verifyResult(request, env, { ...deps, reportId: body.reportId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion });
+        const r = await verifyResult(request, env, { ...deps, reportId: body.reportId, decision: body.decision, reason: body.reason, expectedVersion: body.expectedVersion, qcOverrideReason: body.qcOverrideReason });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "results-to-verify" && method === "GET") {

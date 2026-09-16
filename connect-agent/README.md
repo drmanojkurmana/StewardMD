@@ -147,3 +147,37 @@ A hospital adapter is not considered production-ready until all of the following
 8. Write operations remain disabled unless separately authorized and explicitly enabled.
 9. Audit logging and revocation are configured.
 10. The adapter is registered and versioned through the existing Connect registry.
+
+## Laboratory analyser connector
+
+`connect-agent/analyser/` is a separate connector for laboratory analysers on the hospital's own network (HL7 v2
+over MLLP, or ASTM E1381/E1394 / CLSI LIS01-A2/LIS02-A2 over TCP, including serial-over-TCP converters). It exists
+because WardSynQ runs on Cloudflare Pages Functions, which cannot open raw TCP sockets. Node stdlib only.
+
+Run: `node connect-agent/analyser/index.mjs --config <path>` with `{ serverUrl, keyFile, dataDir, logLevel?, timeouts? }`.
+`keyFile` holds the hospital's connector key, issued once on Admin > Integrations > Laboratory analysers (keep the
+file mode 0600; the connector warns otherwise). Nothing else is configured locally: the analysers (protocol, whether
+the connector listens or connects, host, port, host query) come from `GET /api/queue/lab-connector/analyser-config`,
+polled every `pollSeconds`, cached in `dataDir/config-cache.json` for a start while the server is unreachable. The
+mapping of instrument codes to hospital tests stays on the server; the connector sends codes as the instrument sent them.
+
+Files: `mllp.mjs` (MLLP framing, HL7 parse and ACK), `astm.mjs` (E1381 transport state machines, E1394 records),
+`queue.mjs` (durable file queue), `client.mjs` (the three server calls, key loading, message ids), `index.mjs` (wiring).
+
+- Results go one per specimen to `POST /api/queue/lab-connector/analyser-results` with a deterministic `messageId`
+  (sha256 of analyser id, specimen id and canonical results), so a retransmission is a duplicate on the server. The
+  server files them in the Laboratory board's analyser inbox for a technologist; nothing reaches a chart from here.
+- The instrument is acknowledged (MLLP AA, or the ACK of the ASTM frame completing the L record) only after the result
+  is durably in `dataDir/queue/pending/`. A failed disk write answers HL7 with AE and NAKs that ASTM frame, so the
+  instrument keeps the result. Results with status X (cannot be done) or no value are counted and not sent.
+- Delivery retries with exponential backoff (5 s to 10 min, jitter); 401/403 retry every 5 minutes; 404/409/422 are
+  moved to `dataDir/queue/dead/` with the status. A status line with pending and dead counts is logged every 5 minutes.
+  Logs carry counts, analyser ids, message ids and error codes, never values or specimen identifiers.
+- Timestamps without a UTC offset (HL7 DTM, ASTM R-13/R-12) are read as the connector machine's local time, which is
+  the laboratory's time zone; an explicit offset is honoured.
+- ASTM host query (analyser `hostQuery` on): the connector asks `POST /api/queue/lab-connector/analyser-orders` and
+  answers H, P, O (O-3 specimen, O-5 the instrument's codes, O-6 S/A/R priority, O-26 Q) and `L|1|N`; when the server
+  cannot be reached or has no order, H and `L|1|I` (no information). A frame repeated after a lost ACK is ACKed and
+  kept once; host/instrument ENQ contention makes the connector yield.
+- Not built: HL7 host query (QRY/QBP are vendor-specific); such a message gets `MSA|AR` with that reason. Only the N and
+  I termination codes are ever emitted.
