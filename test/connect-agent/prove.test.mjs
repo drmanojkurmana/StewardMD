@@ -45,6 +45,15 @@ test('paramsOf traces every field: ward-list column, joined visit id, parent row
   assert.deepEqual(safeParams({ id: { from: 'worklist', field: 'col123' }, x: { constant: 'a' } }), { id: { unmapped: true }, x: { constant: 'a' } });
 });
 
+/* GHIS ver_b27ed367 2026-09-17: a page-side JS bug sends id=undefined literally. Recorded as a
+ * {constant} it would replay id=undefined for every patient forever; it is not a value. */
+test('paramsOf: a recorded "undefined"/"null"/"NaN" value is not a value', () => {
+  const wl = { label: 'worklist', rows: rowsForChain(WL_JSON, 'application/json') };
+  assert.deepEqual(paramsOf({ url: HOST + '/Doctor/Home/OTLabPrintsSecretary/?id=undefined', body: null }, [wl]), { id: { empty: true } });
+  assert.deepEqual(paramsOf({ url: HOST + '/x?a=NULL&b=NaN', body: null }, [wl]), { a: { empty: true }, b: { empty: true } });
+  assert.deepEqual(paramsOf({ url: HOST + '/Doctor/Home/GetIPWL?Type=IPWorkList', body: null }, [wl]), { Type: { constant: 'IPWorkList' } });
+});
+
 /* F3 REGRESSION: findField used to stop at row 200, so a widened hospital-wide worklist (757 rows on a
  * live run) left the doctor's own row unmapped whenever it sat past that cutoff. */
 test('paramsOf: a 757-row worklist maps a field whose only matching row is past the old 200-row cutoff', () => {

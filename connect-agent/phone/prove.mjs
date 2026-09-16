@@ -21,6 +21,7 @@ export const ROLES = Object.freeze(['data', 'prerequisite', 'lookup', 'ping', 's
 const WRITE_PATH = /save|update|insert|delete|remove|create|submit|approve|cancel|logout|logoff|signout/i;
 const MAX_EXEC = 6;
 export const CONSTANT_VALUE = /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/;
+const NOT_A_VALUE = /^(undefined|null|nan)$/i;
 const BRAIN_RESOURCES =['worklist', 'patient', 'notes', 'labs', 'radiology', 'medications', 'discharge', 'history'];
 /* Resources whose truth is PROSE, not columns. A radiology call can carry the right column names and
  * still hand back the demographics header; only the words tell the two apart, so for these the brain is
@@ -409,7 +410,9 @@ export function paramsOf(request, parents = [], now = new Date()) {
   for (const [k, v] of pairs) {
     if (out[k]) continue;
     if (TOKEN_KEY.test(k)) { out[k] = { token: true }; continue; }
-    if (v === '' || v == null) { out[k] = { empty: true }; continue; }
+    // A page-side JS bug can literally stringify the missing value ('?id=undefined'): not a value,
+    // never a {constant} — recorded as one it would replay the same wrong id for every patient forever.
+    if (v === '' || v == null || NOT_A_VALUE.test(String(v).trim())) { out[k] = { empty: true }; continue; }
     let src = null;
     if (PAGE_SIZE_KEY.test(k)) src = { page: 'size' };
     else if (PAGE_START_KEY.test(k)) src = { page: 'start' };
