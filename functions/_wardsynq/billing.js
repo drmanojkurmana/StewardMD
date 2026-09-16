@@ -53,6 +53,7 @@ import { submitViaAdapter, adapterForPayer, payerById, publicPayers, payerRuleWa
 import { FhirClaimAdapter } from "../../wardsynq/wardsynq-fhir-claim-adapter.js";
 import { NhcxAdapter } from "../../wardsynq/wardsynq-nhcx-adapter.js";
 import { openSecret } from "./webhooks.js";
+import { nhcxAdapterDeps, ELIGIBILITY_TYPE } from "./nhcx.js";
 import { makeSafeFetch } from "../_connect/onboard/net.js";
 import { makeSecrets } from "../_connect/secrets.js";
 import { priceWith } from "./charge-capture.js";
@@ -87,15 +88,18 @@ function sealedCredentialAuthorizer(env, payers, secretsImpl) {
   };
 }
 
-const ADAPTER_KINDS = Object.freeze({ "fhir-claim": FhirClaimAdapter, nhcx: NhcxAdapter });
+/* NHCX needs more than a header: several sealed values and the correlation record written before sending
+ * (nhcx.js). actorId is who asked, for that record's audit. */
+const ADAPTER_KINDS = Object.freeze({ "fhir-claim": FhirClaimAdapter, nhcx: (payer, deps) => NhcxAdapter(payer, deps.nhcx || {}) });
 
 /** The adapter for a payer id, with a hardened transport. ctx.tpaAdapter (a site's own) wins when given. */
-function resolveAdapter(env, ctx, payerId) {
+function resolveAdapter(env, ctx, payerId, actorId) {
   if (ctx.tpaAdapter) return ctx.tpaAdapter;
   const fetchImpl = typeof ctx.fetchImpl === "function" ? ctx.fetchImpl : (typeof fetch === "function" ? fetch : null);
   return adapterForPayer(ctx.payers, payerId, ADAPTER_KINDS, {
     fetch: fetchImpl ? makeSafeFetch(fetchImpl) : null,
     authorize: sealedCredentialAuthorizer(env, ctx.payers, ctx.secretsImpl),
+    nhcx: ctx.recordDeps && ctx.migration ? nhcxAdapterDeps(env, ctx, actorId) : {},
   }).adapter;
 }
 
@@ -334,7 +338,7 @@ async function claimAction(request, env, ctx) {
    * actually contacted. */
   if (action === "submit" || action === "resubmit") {
     if (str(ctx.payerId)) next.payerId = str(ctx.payerId);
-    next.adapter = await submitViaAdapter(next, resolveAdapter(env, ctx, next.payerId), { use: "claim", now, payerId: next.payerId || null });
+    next.adapter = await submitViaAdapter(next, resolveAdapter(env, ctx, next.payerId, by), { use: "claim", now, payerId: next.payerId || null });
     applyAcknowledged(next, next.adapter, now);
     next.history.push({ at: now, event: "payer-channel", by, detail: `${next.adapter.adapterId}: ${next.adapter.state}` });
   }
@@ -384,9 +388,25 @@ async function recordPreAuth(request, env, ctx) {
     });
     auth.payerId = str(ctx.payerId) || null;
     if (Number.isFinite(Number(ctx.requestedAmount)) && ctx.requestedAmount !== "" && ctx.requestedAmount != null) auth.requestedAmount = Number(ctx.requestedAmount);
+    if (str(ctx.policyNumber)) auth.policyNumber = str(ctx.policyNumber);
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "preauth_refused", code: e.code, detail: e.message, preAuth: null };
     throw e;
+  }
+  /* The diagnoses a payer's pre-authorisation form asks for (NHCX Claim.diagnosis is 1..*). They face the same
+   * rule as a claim: a code the problem list does not support is refused, never carried to a payer. */
+  const dxCodes = (Array.isArray(ctx.codes) ? ctx.codes : []).map((c) => str(typeof c === "string" ? c : c && c.code)).filter(Boolean);
+  if (dxCodes.length) {
+    let conditions;
+    try { conditions = await svc.byPatient("Condition", patientId); }
+    catch (e) { return { ...base, ok: false, status: e instanceof GovernanceError ? 403 : 502, error: e instanceof GovernanceError ? "permission" : "record_read_failed", preAuth: null }; }
+    const view = clinicalView(conditions);
+    const unsupported = dxCodes.map((code) => ({ code, ...supportFor(code, view), condition: conditionDetail(code, conditions) })).filter((x) => x.support !== SUPPORT.DOCUMENTED);
+    if (unsupported.length) {
+      return { ...base, ok: false, status: 422, error: "preauth_refused", code: "UNSUPPORTED_DIAGNOSIS", codes: unsupported, preAuth: null,
+        detail: `Not on the problem list, so not sent to a payer: ${unsupported.map((x) => x.code).join(", ")}. A clinician documents a diagnosis through the clinical path first.` };
+    }
+    auth.codes = dxCodes.map((code) => ({ code }));
   }
 
   const id = `wsq-preauth-${slug(patientId)}-${slug(treatment)}-${slug(decidedAt)}`;
@@ -394,7 +414,7 @@ async function recordPreAuth(request, env, ctx) {
   /* P1.5: a REQUESTED pre-authorisation with a payer goes through that payer's adapter as a FHIR Claim
    * with use=preauthorization. A decision (approved/refused/expired) is a fact arriving and sends nothing. */
   if (state === PREAUTH_STATE.REQUESTED && auth.payerId) {
-    record.adapter = await submitViaAdapter(record, resolveAdapter(env, ctx, auth.payerId), { use: "preauthorization", now: decidedAt, payerId: auth.payerId });
+    record.adapter = await submitViaAdapter(record, resolveAdapter(env, ctx, auth.payerId, resolved.actor.id), { use: "preauthorization", now: decidedAt, payerId: auth.payerId });
     if (record.adapter.state === "acknowledged" && record.adapter.payerReference) record.payerReference = record.adapter.payerReference;
   }
 
@@ -424,13 +444,15 @@ async function claimsForPatient(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, claims: [] };
 
-  let rows, auths, estimates;
-  let estimatesUnreadable = false;
+  let rows, auths, estimates, eligibility;
+  let estimatesUnreadable = false, eligibilityUnreadable = false;
   try {
-    [rows, auths, estimates] = await Promise.all([
+    [rows, auths, estimates, eligibility] = await Promise.all([
       svc.byPatient(CLAIM_TYPE, patientId),
       svc.byPatient(PREAUTH_TYPE, patientId).catch(() => []),
       svc.byPatient(ESTIMATE_TYPE, patientId).catch(() => { estimatesUnreadable = true; return []; }),
+      // NHCX eligibility checks (nhcx.js). Unreadable is said, never shown as none.
+      svc.byPatient(ELIGIBILITY_TYPE, patientId).catch(() => { eligibilityUnreadable = true; return []; }),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), claims: [] };
@@ -446,6 +468,7 @@ async function claimsForPatient(request, env, ctx) {
     preAuthorisations,
     estimates: (estimates || []).filter(Boolean),
     ...(estimatesUnreadable ? { estimatesUnreadable: true } : {}),
+    eligibilityChecks: eligibilityUnreadable ? null : (eligibility || []).filter(Boolean).sort((a, b) => String(b.at).localeCompare(String(a.at))),
     // P1.5: the payer list as a screen may see it, and each claim's payer rules as warnings only.
     payers: publicPayers(ctx.payers),
     payerWarnings: Object.fromEntries(claims.map((c) => [c.id, payerRuleWarnings(c, payerById(ctx.payers, c.payerId), { preAuths: preAuthorisations, now })])),

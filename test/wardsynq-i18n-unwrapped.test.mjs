@@ -248,6 +248,8 @@ const RAW_STATUS_ALLOW = {
   "s.level": "a stock quantity inside a report row already wrapped '<span lang=\"en\">...", // the report intentionally marks its own values English
   "c.stage": "a wound stage (mostly the digits 1-4) interpolated through wTH's own wrap list, which already marks it lang=\"en\" by the file's own convention for values not treated as translatable words",
   "c.bill.state": "BILL_WORDS[c.bill.state] already covers every known code; this is its own explicit fallback for one it does not know",
+  "r.disposition": "the payer's own sentence from an NHCX CoverageEligibilityResponse.disposition (functions/_wardsynq/nhcx.js), recorded as the payer wrote it, not a code",
+  "b.type": "the payer's own benefit name from an NHCX CoverageEligibilityResponse benefit.type text or display, recorded as the payer wrote it, not a code",
 };
 test("ward.js: a raw server state/status/kind code is never rendered as visible text (only as a CSS class, or explicitly allowlisted with why)", () => {
   const w = read("ward.js"), lines = w.split("\n");

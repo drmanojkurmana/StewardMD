@@ -681,7 +681,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * drug chart. In this build one role is both cashier and coder; a hospital that separates them
    * should hold BILLING_CHARGE for coders only. */
   assert.equal(tier("cashier"), TIER.EXECUTE, "it writes its own claim, so it is not READ-only any more");
-  assert.deepEqual(write("cashier"), ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"]);
+  // 2026-09-16 (NHCX): CoverageEligibilityCheck joined, a question to a payer and its answer. Still financial only.
+  assert.deepEqual(write("cashier"), ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck"]);
   assert.ok(!write("cashier").includes("Condition"), "billing can never write the diagnosis that would justify its own charge");
   assert.ok(!write("cashier").includes("Observation"), "nor any other clinical fact");
   /* 2026-09-08, charge capture (#942): four "what was DONE" types joined the READ list and NOTHING
@@ -690,7 +691,7 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * need none of this and would bill for doses the patient refused. It is a real widening and the
    * containment is the line above: the write scope did not move. */
   assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate",
-    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter"]);
+    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter", "CoverageEligibilityCheck"]);
   // 2026-09-15 (LT-30): Encounter joined, because a bed day is billed from the stay. Still no write.
   assert.ok(!read("cashier").includes("ClinicalNote"), "a coder is not given the whole chart to answer one question");
   assert.ok(!read("cashier").includes("Observation"), "nor the vitals and the laboratory values");

@@ -357,10 +357,12 @@ function grantForCaps(caps) {
     // this grant is written to anticipate, TASK 4.7). Write is billing.charge only: raising an
     // invoice and posting a payment against it is the SAME financial-record authority as coding a
     // claim, not a clinical one.
+    // CoverageEligibilityCheck joined 2026-09-16 (NHCX, nhcx.js): asking a payer whether a policy is in force is
+    // the same financial authority as a pre-authorisation, and it is not a clinical fact.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES]
-      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES, "CoverageEligibilityCheck"]
+      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds

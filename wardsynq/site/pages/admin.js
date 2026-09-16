@@ -919,6 +919,17 @@
       medication: T(c, "site.admin.tariff.kindMedicine", "Medicine"), service: T(c, "site.admin.tariff.kindService", "Service"),
     }[k] || k;
   }
+  /* The server refuses the same things; saying them here gives the reason in the hospital's language. */
+  function tariffTaxError(c, hsn, rate) {
+    var h = String(hsn || "").replace(/\s+/g, ""), r = String(rate || "").trim();
+    if (h && !/^(\d{4}|\d{6}|\d{8})$/.test(h)) return T(c, "site.admin.tariff.errHsn", "HSN/SAC is 4, 6 or 8 digits.");
+    if (r && !(/^\d+(\.\d{1,2})?$/.test(r) && Number(r) <= 100)) return T(c, "site.admin.tariff.errGst", "The GST rate is a percentage from 0 to 100, like 5 or 12.");
+    return "";
+  }
+  function tariffGstLabel(c, t) {
+    if (t.kind === "bed") return t.intensiveCare ? T(c, "site.admin.tariff.gstIcu", "Intensive care room: exempt") : T(c, "site.admin.tariff.gstRoom", "Room: 5% above Rs 5,000 a day");
+    return t.gstRate === "" || t.gstRate == null ? "" : T(c, "site.admin.tariff.gstRateShown", "{rate}%", { rate: t.gstRate });
+  }
   function renderTariff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return Promise.all([c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)), c.api("/wards?orgId=" + encodeURIComponent(c.state.orgId)).catch(function () { return null; })]).then(function (both) {
@@ -928,12 +939,13 @@
       // null = the wards could not be read: a per-ward bed price then cannot be offered, and the screen says so.
       var wards = wr && wr.ok ? (wr.wards || []).map(function (w) { return w.name; }).filter(Boolean) : null;
       body.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.tariff.title", "Price list")) + "</h2>" +
-        (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th></th></tr></thead><tbody>" +
+        (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colHsn", "HSN/SAC")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colGst", "GST")) + "</th><th></th></tr></thead><tbody>" +
           items.map(function (t) {
             var daily = t.kind === "bed" || t.kind === "nursing" || t.kind === "visit";
             return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(tariffKindLabel(c, t.kind)) +
-              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
+              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td><td>" + c.esc(t.hsnSac || "") + "</td><td>" + c.esc(tariffGstLabel(c, t)) + "</td>" +
               '<td><button type="button" class="btn ghost" data-trf-edit="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changePrice", "Change price")) + '</button> ' +
+              '<button type="button" class="btn ghost" data-trf-tax="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changeTax", "Change GST details")) + '</button> ' +
               '<button type="button" class="btn ghost" data-trf-off="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.withdraw", "Withdraw")) + "</button></td></tr>";
           }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.none", "No prices set yet.")) + "</p>") +
         '<h3>' + c.esc(T(c, "site.admin.tariff.addItem", "Add an item")) + '</h3><div class="row">' +
@@ -943,7 +955,11 @@
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.ward", "Ward (per-day charges)")) + '</span><select id="admTrfWard"><option value="">' + c.esc(T(c, "site.admin.tariff.everyWard", "Every ward")) + "</option>" +
           (wards || []).map(function (w) { return '<option value="' + c.esc(w) + '">' + c.esc(w) + "</option>"; }).join("") + "</select></label>" +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + '</span><input id="admTrfPrice" inputmode="decimal"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.hsn", "HSN/SAC (4, 6 or 8 digits)")) + '</span><input id="admTrfHsn" inputmode="numeric"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.gstRate", "GST rate % (medicines and other taxable items)")) + '</span><input id="admTrfGst" inputmode="decimal"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.icu", "Intensive care room (ICU/CCU/ICCU/NICU), beds only")) + '</span><input id="admTrfIcu" type="checkbox"></label>' +
         '</div>' + (wards === null ? '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.wardsFailed", "The wards could not be loaded, so a bed price can only be set for every ward right now.")) + "</div>" : "") +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.gstRules", "GST is applied by law: a room other than an intensive care room charged above Rs 5,000 a day is taxed at 5 percent; intensive care rooms and other health care services are exempt; medicines on an inpatient bill are exempt, and medicines sold to outpatients are taxed at the rate set here. An intensive care room is marked here, never guessed from the ward name.")) + "</p>" +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.howBilled", "Bed, nursing and doctor visit prices are charged for each day of an inpatient stay. Name a test or medicine exactly as it is ordered, so the bill can find its price.")) + "</p>" +
         '<button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>";
@@ -962,7 +978,12 @@
         var price = toPaise(document.getElementById("admTrfPrice").value);
         if (!name) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errName", "Give the item a name.")) + "</div>"; return; }
         if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice", "The price has to be a plain amount in rupees, like 450 or 450.50.")) + "</div>"; return; }
-        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, ward: document.getElementById("admTrfWard").value, price: price });
+        var kind = document.getElementById("admTrfKind").value;
+        var taxErr = tariffTaxError(c, document.getElementById("admTrfHsn").value, document.getElementById("admTrfGst").value);
+        if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
+        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: kind, ward: document.getElementById("admTrfWard").value, price: price,
+          hsnSac: document.getElementById("admTrfHsn").value.trim(), gstRate: document.getElementById("admTrfGst").value.trim(),
+          intensiveCare: kind === "bed" ? document.getElementById("admTrfIcu").checked : undefined });
       };
       body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
         b.onclick = function () {
@@ -971,6 +992,19 @@
           var price = toPaise(v);
           if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice2", "The price has to be a plain amount in rupees.")) + "</div>"; return; }
           save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: price });
+        };
+      });
+      /* GST details only: the server keeps the price and everything not sent. */
+      body.querySelectorAll("[data-trf-tax]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-tax"); })[0]; if (!t) return;
+          var hsn = prompt(T(c, "site.admin.tariff.hsnPrompt", "HSN/SAC for {name} (4, 6 or 8 digits; empty to clear)", { name: t.name }), t.hsnSac || ""); if (hsn == null) return;
+          var rate = prompt(T(c, "site.admin.tariff.gstPrompt", "GST rate % for {name} (empty for none)", { name: t.name }), t.gstRate == null ? "" : String(t.gstRate)); if (rate == null) return;
+          var taxErr = tariffTaxError(c, hsn, rate);
+          if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
+          var item = { id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, hsnSac: hsn.trim(), gstRate: rate.trim() };
+          if (t.kind === "bed") item.intensiveCare = confirm(T(c, "site.admin.tariff.icuConfirm", "Is {name} an intensive care room (ICU, CCU, ICCU or NICU)? OK for yes, Cancel for no.", { name: t.name }));
+          save(item);
         };
       });
       body.querySelectorAll("[data-trf-off]").forEach(function (b) {
@@ -2365,7 +2399,10 @@
         var res = CN_STATE.result[x.id];
         /* The gateway's webhook goes to this address. It names the hospital only; the gateway's signature is what is trusted. */
         var callback = x.kind === "payment" && x.provider !== "manual"
-          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.gatewayWebhook", "Gateway webhook address:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
+          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.gatewayWebhook", "Gateway webhook address:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>"
+          /* NHCX appends /claim/on_submit and the rest to the endpoint URL; the bearer token and this hospital's key are what is trusted. */
+          : x.kind === "payer" && x.provider === "nhcx"
+          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.nhcxCallback", "NHCX endpoint URL to register for this hospital:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/nhcx-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
         return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + esc(x.active ? T(c, "site.admin.connectors.on", "On") : T(c, "site.admin.connectors.off", "Off")) + "</b></td><td>" +
           (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.setAt", "set {at}", { at: x.secretsSetAt || "" })) + "</span>" : '<span class="quiet">' + esc(T(c, "site.admin.connectors.noneSet", "none")) + "</span>") + "</td><td>" +
           '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">' + esc(T(c, "site.admin.connectors.change2", "Change")) + '</button> ' +

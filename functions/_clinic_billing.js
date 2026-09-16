@@ -54,6 +54,22 @@ export function validateTariff(item) {
   const kind = ["medication", "service", "bed", "nursing", "visit"].indexOf(item.kind) >= 0 ? item.kind : "investigation";
   const out = { code: String(item.code || "").trim(), name: String(item.name).trim(), kind, price };
   if (kind === "bed" || kind === "nursing" || kind === "visit") out.ward = String(item.ward || "").trim();
+  /* GST (gap-claims-gst B; the rules are in functions/_region_in.js gstForLines). Each field is stored only when
+   * the caller sends it, so a screen that does not know about GST cannot wipe it on a price change, and sending ""
+   * clears it. hsnSac: HSN (goods) or SAC (services), 4, 6 or 8 digits (Notification 78/2020-Central Tax).
+   * gstRate: the item's own rate, 0-100. intensiveCare: a bed row that is an ICU/CCU/ICCU/NICU room, set by the
+   * hospital and never inferred from a ward's name. */
+  if (item.hsnSac !== undefined) {
+    const h = String(item.hsnSac == null ? "" : item.hsnSac).replace(/\s+/g, "");
+    if (h && !/^(\d{4}|\d{6}|\d{8})$/.test(h)) return { ok: false, error: "bad_hsn_sac" };
+    out.hsnSac = h;
+  }
+  if (item.gstRate !== undefined) {
+    const t = String(item.gstRate == null ? "" : item.gstRate).trim();
+    if (t && !(/^\d+(\.\d{1,2})?$/.test(t) && Number(t) <= 100)) return { ok: false, error: "bad_gst_rate" };
+    out.gstRate = t ? Number(t) : "";
+  }
+  if (kind === "bed" && item.intensiveCare !== undefined) out.intensiveCare = item.intensiveCare === true;
   return { ok: true, item: out };
 }
 

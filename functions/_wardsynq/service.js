@@ -186,6 +186,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* P1.5: a pre-admission cost estimate from the tariff. Financial, marked as an estimate on the record,
    * and never read to decide anything clinical. Granted with Claim. */
   "CostEstimate",
+  /* gap-claims-gst A (2026-09-16): an NHCX coverage eligibility check and the payer's answer to it
+   * (functions/_wardsynq/nhcx.js). Financial, append-only (the answer is a new version), granted with Claim. */
+  "CoverageEligibilityCheck",
   /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
    * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
    * lines - "what was billed" and "what happened to the bill since" are different facts. A

@@ -6679,3 +6679,61 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+## 2026-09-16 NHCX payer adapter sends for real; only a verified callback moves a record (gap-claims-gst A)
+- **Decision:** `wardsynq/wardsynq-nhcx-adapter.js` builds NRCeS ClaimBundle / CoverageEligibilityRequestBundle / Task,
+  encrypts to the payer's X.509 certificate as a compact JWE (RSA-OAEP with SHA-1 per RFC 7518, A256GCM, aad = the
+  protected header) with WebCrypto only, takes a token from `<gateway>/participant/auth/token/generate`, and POSTs
+  `{"payload": jwe}`. A 202 is `sent` (never acknowledged). `functions/_wardsynq/nhcx.js` writes a tenant system record
+  `_wardsynq_nhcx_exchange` (ids only) BEFORE the request leaves, and the public
+  `POST /api/queue/nhcx-callback/<orgId>/<resource>/<action>` believes an answer only after: RS256 bearer JWT verified with
+  the gateway signing certificate on the payer connector whose code is the sender (exp/iat), JWE decrypted with the
+  hospital's own sealed PKCS8 key, recipient code equal to the hospital's participant code, correlation id sent by this
+  hospital through that connector for that kind of request. Unverified callers write nothing (not even audit); later
+  refusals are audited. New record type `CoverageEligibilityCheck` (billing.charge writes, billing.view reads).
+- **x-hcx-timestamp is ISO 8601**, not the "Unix timestamp" the OpenAPI schema text says: the spec's own example JWE,
+  every integrator SDK and the gateway's validator (joda `new DateTime(String)`) use ISO 8601.
+- **Pre-authorisation diagnoses** sent to a payer must be DOCUMENTED on the problem list (same rule as a claim); a
+  pre-authorisation is approved only on outcome complete/partial with an approved amount above zero and refused only on
+  complete with exactly zero; a claim answer records the payer's figures and never moves the claim lifecycle.
+- **Trade-off / not built:** certificates are entered per payer connector (sealed), not fetched from
+  `/participant/search`; a token is fetched per call (no cache); communication/request, paymentnotice and
+  predetermination are not built; a Patient travels as a logical id only (payers needing ABHA or demographics will ask
+  for more). A callback that races the claim's own "sent" write can make that write answer 409. Not verified against a
+  live NHCX sandbox (mocked transport only).
+- **Status:** built, tested (test/wardsynq-nhcx.test.mjs, test/ward-rad-tpa-view.test.mjs).
+
+## 2026-09-16 GST rules by law, credit/debit notes on the invoice ledger, and e-invoicing (IRN) as a connector (gap-claims-gst B)
+- **Decision:** `functions/_region_in.js gstForLines` applies the rules the law fixes for a clinical establishment, read
+  from the primary PDFs on cbic-gst.gov.in: a non-ICU/CCU/ICCU/NICU room over Rs 5000 a day is 5 percent on the whole
+  day's charge without ITC (Notification 03/2022-CT(Rate) entry 31A in 11/2017; 04/2022-CT(Rate) proviso to serial 74
+  of 12/2017; in force 18 July 2022); other health care (Heading 9993) is exempt; a medicine on an inpatient bill is
+  exempt as part of the composite supply; a medicine sold to an outpatient takes the Price list rate. The Price list row
+  carries `hsnSac`, `gstRate` and, for beds only, `intensiveCare` (never inferred from a ward name); each is stored only
+  when sent, so an older screen cannot wipe it. Invoice lines carry hsnSac, taxable value, basis and tax; CGST/SGST
+  versus IGST is computed in the summary from the buyer's place of supply against the GSTIN's state (never stored).
+- **Research correction:** the research note had 03/2022 and 04/2022 the other way round (03 inserts the taxable
+  entry, 04 the exemption proviso). Circular 32/06/2018-GST's own text names FOOD to in-patients as part of the exempt
+  composite supply; it does not mention medicines. Medicines to in-patients are exempt here by the same composite-supply
+  reasoning (Sections 2(30), 8(a) CGST Act; Gujarat AAR 106/2020 cited in the research), which a hospital's
+  accountant should confirm.
+- **Decision:** credit and debit notes are ledger events on the same append-only invoice (`postNote` in
+  `wardsynq/wardsynq-invoice.js`): own number (CRN/DBN series), date, required reason, lines naming the charge line with
+  a taxable value and GST at that line's own rate. Credit is capped per line at what is still creditable; void is refused
+  once a note or an active IRN exists. A credit note reversing GST after 30 November following the supply's financial
+  year is recorded with `gstReversalLate` and a warning (Section 34(2)); the annual-return date is not known here.
+- **Decision:** tax invoices in India get a consecutive number per financial year (`INV/2627/000001`, 16 characters max,
+  Rule 46(b)), issued from a `_wardsynq_doc_series` record with optimistic concurrency. A number issued before a failed
+  invoice write is a gap, not reused. Invoices raised before this change have no number and cannot be e-invoiced.
+- **Decision:** e-invoicing is a singleton connector kind `einvoice` with an adapter map; the first adapter is the NIC
+  IRP direct API (auth `/eivital/v1.04/auth`, `/eicore/v1.03/Invoice`, `/eicore/v1.03/Invoice/Cancel`, headers
+  client_id/client_secret/Gstin/user_name/AuthToken, RSA PKCS#1 v1.5 over base64(JSON) with the IRP public key, SEK and
+  payloads AES-256-ECB). WebCrypto lacks both ciphers, so RSA is BigInt modexp on the SPKI-imported key and ECB is built
+  from single AES-CBC blocks; both are checked against node:crypto. Only B2B bills with a buyer GSTIN and only taxed lines
+  are reported; B2C, exempt-only, unnumbered, missing-HSN, not connected and not enabled are refused with a plain reason
+  before anything is sent. The hospital's own "applies to us" setting decides applicability; turnover is not computed.
+  Signs in per call (no token cache). Cancel only within 24 hours of AckDt (India time). Printed invoice draws the signed
+  QR with the existing vendor/qrcode-generator.js.
+- **Not built:** B2C place of supply from a patient address (B2C is intra-state), the 30-day reporting limit for AATO over
+  Rs 10 crore (the IRP refuses), e-way bills, GSTR returns, GST on the OPD clinic billing station (q_invoices, which still
+  has no tax), unit codes other than NOS for medicines. Not verified against the live NIC sandbox (mocked IRP only).
+- **Status:** built, tested (test/wardsynq-gst-einvoice.test.mjs).

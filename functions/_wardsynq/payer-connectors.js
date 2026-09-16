@@ -8,10 +8,13 @@
  * adapters exactly as before; a connector wins over a wardsynq.payers entry with the same id, and the
  * org list keeps working for a hospital that has not moved.
  *
- * Adapters: "fhir-claim" (the existing generic FHIR R4 Claim adapter), "nhcx" (a shape only, see
- * wardsynq-nhcx-adapter.js for what is and is not verified), "manual" (the hospital's own portal, email
+ * Adapters: "fhir-claim" (the existing generic FHIR R4 Claim adapter), "nhcx" (the HCX protocol: JWE to the
+ * payer's certificate, answers through the verified callback in nhcx.js; see wardsynq-nhcx-adapter.js), "manual" (the hospital's own portal, email
  * or paper process: queued, never sent). The credential is opened at send time only, for that payer.
  */
+
+import { importEncryptionKey, importVerifyKey, importDecryptionKey, generateToken } from "../../wardsynq/wardsynq-nhcx-adapter.js";
+import { makeSafeFetch } from "../_connect/onboard/net.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const REF = { key: "ref", label: "Payer reference (used on claims)", type: "text", required: true };
@@ -19,6 +22,15 @@ const RULES = [
   { key: "preauthRequiredAbove", label: "Pre-authorisation required above (amount)", type: "text" },
   { key: "timelyFilingDays", label: "Timely filing (days from discharge)", type: "text" },
 ];
+
+/* Sealed like every connector credential. The certificates are public, but they are long and they decide
+ * who can read what is sent, so they travel the same shown-once, never-returned path. */
+const NHCX_SECRETS = Object.freeze([
+  { key: "secret", label: "NHCX participant secret" },
+  { key: "encryptionCert", label: "The payer's encryption certificate (PEM)" },
+  { key: "signingCert", label: "The NHCX gateway's signing certificate (PEM), to check callbacks" },
+  { key: "privateKey", label: "This hospital's encryption private key (PKCS8 PEM), to read callbacks" },
+]);
 
 function numbersValid(settings) {
   for (const f of RULES) if (settings[f.key] != null && settings[f.key] !== "" && !(Number(settings[f.key]) >= 0)) return `${f.label} must be a number.`;
@@ -49,15 +61,30 @@ const PAYER_KIND = Object.freeze({
       },
     },
     nhcx: {
-      label: "NHCX (National Health Claims Exchange), not yet able to send",
-      help: "Prepares the HCX envelope only. Nothing is sent until encryption, profiles and participant onboarding are built; claims record why.",
+      label: "NHCX (National Health Claims Exchange)",
+      help: "Sends eligibility checks, pre-authorisations and claims to this payer through the NHCX gateway, encrypted to the payer's certificate. A request the gateway accepts is shown as sent; only the payer's own signed and encrypted answer, arriving at the callback address, marks it acknowledged, approved or refused. Register the callback address shown after saving as this hospital's endpoint URL in the NHCX participant registry.",
       settings: [REF,
-        { key: "gatewayUrl", label: "NHCX gateway base URL", type: "url", required: true },
+        { key: "gatewayUrl", label: "NHCX gateway base URL (including the API version path)", type: "url", required: true },
         { key: "senderCode", label: "This hospital's participant code", type: "text", required: true },
         { key: "recipientCode", label: "The payer's participant code", type: "text", required: true },
+        { key: "username", label: "NHCX user name (for the access token)", type: "text", required: true },
+        { key: "providerName", label: "Hospital name as the payer knows it", type: "text", required: true },
         ...RULES],
-      secrets: [{ key: "token", label: "Gateway bearer token" }],
-      validate: (settings) => numbersValid(settings),
+      secrets: NHCX_SECRETS,
+      validate(settings, present) {
+        const need = NHCX_SECRETS.filter((f) => !(present && present[f.key])).map((f) => f.label);
+        if (need.length) return `NHCX needs: ${need.join("; ")}.`;
+        return numbersValid(settings);
+      },
+      /* The one safe call the protocol offers: an access token. The certificates and the key are parsed first. */
+      async test({ settings, secrets, fetchImpl }) {
+        for (const [k, load] of [["encryptionCert", importEncryptionKey], ["signingCert", importVerifyKey], ["privateKey", importDecryptionKey]]) {
+          try { await load(secrets[k]); } catch { return { ok: false, reason: "bad_" + k, detail: `${NHCX_SECRETS.find((f) => f.key === k).label} could not be read. Paste the whole PEM, including the BEGIN and END lines.` }; }
+        }
+        const t = await generateToken({ gatewayUrl: settings.gatewayUrl, username: settings.username, participantCode: settings.senderCode, secret: secrets.secret, fetchImpl: makeSafeFetch(fetchImpl || fetch) });
+        return t.ok ? { ok: true, detail: "The certificates and key read correctly and the NHCX gateway issued an access token. Nothing was sent to the payer." }
+          : { ok: false, reason: "token", httpStatus: t.httpStatus || null, detail: t.detail.replace(" Nothing was sent.", "") };
+      },
     },
     manual: {
       label: "Manual (portal, email or paper)",
@@ -72,7 +99,7 @@ const PAYER_KIND = Object.freeze({
 function payersFromConnectors(records) {
   return (records || []).filter((r) => r && r.kind === "payer" && r.active === true && str(r.settings && r.settings.ref)).map((r) => {
     const s = r.settings || {};
-    const authType = r.provider === "fhir-claim" ? str(s.authType) || "bearer" : r.provider === "nhcx" ? "bearer" : "none";
+    const authType = r.provider === "fhir-claim" ? str(s.authType) || "bearer" : r.provider === "nhcx" ? "nhcx" : "none";
     const rules = {};
     for (const f of RULES) if (str(s[f.key])) rules[f.key] = Number(s[f.key]);
     return {
@@ -80,6 +107,8 @@ function payersFromConnectors(records) {
       endpoint: str(s.endpoint || s.gatewayUrl) || null, currency: str(s.currency) || undefined, providerName: str(s.providerName) || undefined,
       senderCode: str(s.senderCode) || undefined, recipientCode: str(s.recipientCode) || undefined,
       auth: authType === "none" ? "none" : { type: authType, headerName: str(s.headerName) || undefined, connectorSecret: (r.secretsEnc && r.secretsEnc.token) || null },
+      // NHCX opens several sealed values at send time (nhcx.js); the seals stay server-side, like the token above.
+      ...(r.provider === "nhcx" ? { connectorId: r.id, username: str(s.username) || undefined, connectorSecrets: r.secretsEnc || {} } : {}),
       rules, source: "connector",
     };
   });
@@ -91,4 +120,4 @@ function mergePayers(fromConnectors, fromOrg) {
   return [...fromConnectors, ...(Array.isArray(fromOrg) ? fromOrg : []).filter((p) => p && !ids.has(str(p.id)))];
 }
 
-export { PAYER_KIND, payersFromConnectors, mergePayers };
+export { PAYER_KIND, NHCX_SECRETS, payersFromConnectors, mergePayers };

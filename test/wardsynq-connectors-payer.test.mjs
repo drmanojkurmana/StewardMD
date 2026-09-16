@@ -1,6 +1,6 @@
 /* test/wardsynq-connectors-payer.test.mjs - owner S4: payers and TPAs as per-hospital connectors.
  *
- * One mocked-fetch contract test per payer adapter (fhir-claim, nhcx, manual), and the real routes:
+ * One mocked-fetch contract test per payer adapter (fhir-claim, manual; nhcx in test/wardsynq-nhcx.test.mjs), and the real routes:
  * POST /api/queue/ward/connector-save (kind payer), GET /api/queue/ward/connectors,
  * POST /api/queue/ward/claim-state and GET /api/queue/ward/claims reading the connector registry.
  *
@@ -10,7 +10,6 @@ import { as, seed, H, ENV, T, ORG_ID, ADMIN, NURSE, HR, CASHIER, DOCTOR, OTHER_A
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const { buildNhcxEnvelope, NhcxAdapter, NHCX_MISSING } = await import("../wardsynq/wardsynq-nhcx-adapter.js");
 const { FhirClaimAdapter } = await import("../wardsynq/wardsynq-fhir-claim-adapter.js");
 const { adapterForPayer, submitViaAdapter } = await import("../wardsynq/wardsynq-tpa-adapter.js");
 const { payersFromConnectors, mergePayers } = await import("../functions/_wardsynq/payer-connectors.js");
@@ -34,28 +33,7 @@ test("contract fhir-claim: POSTs a FHIR Claim with the opened credential and map
   assert.equal(JSON.parse(seen[0].init.body).resourceType, "Claim");
 });
 
-test("contract nhcx: builds the verified HCX envelope shape and sends NOTHING, saying exactly what is missing", async () => {
-  const payer = { id: "nhcx-icici", name: "ICICI via NHCX", senderCode: "1000-hosp", recipientCode: "2000-payer" };
-  const env = buildNhcxEnvelope(CLAIM, payer, { use: "claim", now: "2026-09-14T10:00:00Z" });
-  assert.equal(env.path, "/claim/submit");
-  assert.equal(env.protectedHeader.alg, "RSA-OAEP");
-  assert.equal(env.protectedHeader.enc, "A256GCM");
-  for (const h of ["x-hcx-sender_code", "x-hcx-recipient_code", "x-hcx-api_call_id", "x-hcx-correlation_id", "x-hcx-timestamp"]) assert.ok(env.protectedHeader[h], h);
-  assert.equal(env.bundle.resourceType, "Bundle");
-  assert.equal(env.bundle.type, "collection");
-  assert.equal(env.bundle.entry[0].resource.resourceType, "Claim");
-  assert.equal(buildNhcxEnvelope(CLAIM, payer, { use: "preauthorization" }).path, "/preauth/submit");
-
-  let calls = 0;
-  const fetchImpl = async () => { calls++; return new Response("{}"); };
-  const { adapter } = adapterForPayer([{ ...payer, adapter: "nhcx" }], "nhcx-icici", { nhcx: (p) => NhcxAdapter(p, { fetch: fetchImpl }) });
-  const out = await submitViaAdapter(CLAIM, adapter, { use: "claim" });
-  assert.equal(out.state, "not_configured", "never 'sent'");
-  assert.equal(calls, 0, "nothing reaches the network");
-  for (const m of NHCX_MISSING) assert.ok(out.note.includes(m), m);
-  const bare = await NhcxAdapter({ id: "x" }).submit(CLAIM, {});
-  assert.match(bare.note, /Missing configuration: x-hcx-sender_code, x-hcx-recipient_code/);
-});
+/* contract nhcx: test/wardsynq-nhcx.test.mjs (the adapter now sends: token, JWE, bundles, callbacks). */
 
 test("contract manual: queued for the hospital's own process, nothing sent", async () => {
   let calls = 0;
@@ -150,25 +128,15 @@ test("payer connector refusals: a named header without a name, a bad currency, a
   assert.equal(writesNow(), before);
 });
 
-test("an nhcx payer can be saved and a claim to it records not_configured with the missing pieces", async () => {
+test("an nhcx payer without its sealed values is refused at save, and the catalogue offers all three payer adapters", async () => {
   seed();
+  const before = writesNow();
   const saved = await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, kind: "payer", provider: "nhcx", name: "ICICI Lombard",
-    settings: { ref: "icici", gatewayUrl: "https://93.184.216.40/hcx", senderCode: "1000-hosp", recipientCode: "2000-icici" } });
-  assert.equal(saved.__status, 200, saved.__text);
+    settings: { ref: "icici", gatewayUrl: "https://93.184.216.40/hcx", senderCode: "1000-hosp", recipientCode: "2000-icici", username: "u", providerName: "Hospital" } });
+  assert.equal(saved.__status, 422, saved.__text);
+  assert.match(saved.message, /NHCX needs: NHCX participant secret/);
+  assert.equal(writesNow(), before);
   const list = await as(ADMIN, `/ward/connectors?orgId=${ORG_ID}&kind=payer`);
   assert.deepEqual(list.catalogue.map((k) => k.kind), ["payer"]);
   assert.deepEqual(list.catalogue[0].providers.map((p) => p.id), ["fhir-claim", "nhcx", "manual"]);
-  let calls = 0;
-  ENV.WSQ_TPA_FETCH = async () => { calls++; return new Response("{}"); };
-  try {
-    const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG_ID, name: "Nhcx Person", mobile: "9876500033", gender: "female", ageYears: 40 });
-    const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG_ID, mrn: reg.mrn, ward: "Medical A", bed: "3" });
-    await as(DOCTOR, "/ward/problem", "POST", { orgId: ORG_ID, problem: { patientId: adm.patientId, encounterId: adm.encounterId, code: "I10", display: "Essential hypertension" } });
-    const claim = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG_ID, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "icici" });
-    const sub = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG_ID, claimId: claim.claimId, action: "submit", submittedAmount: 900 });
-    assert.equal(sub.__status, 200, sub.__text);
-    assert.equal(sub.claim.adapter.state, "not_configured");
-    assert.match(sub.claim.adapter.note, /JWE encryption/);
-    assert.equal(calls, 0);
-  } finally { delete ENV.WSQ_TPA_FETCH; }
 });
