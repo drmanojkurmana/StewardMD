@@ -14,6 +14,7 @@ import { activeConnectors, openConnectorSecrets } from "./connectors.js";
 import { EINVOICE_ADAPTERS, CANCEL_REASONS, irnRequest } from "./einvoice-irp.js";
 import { recordIrn, recordIrnCancel } from "../../wardsynq/wardsynq-invoice.js";
 import { invoiceSummary, openInvoiceService, invoiceWriteFailure } from "./invoice.js";
+import { einvoiceApplicability } from "./gst-settings.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -40,8 +41,13 @@ async function prepare(request, env, ctx) {
   catch { return { done: { ...base, ok: false, status: 502, error: "record_read_failed", message: "The e-invoice settings could not be read, so nothing was sent.", written: 0 } }; }
   const adapter = conn && EINVOICE_ADAPTERS[conn.provider];
   if (!adapter) return { done: { ...base, ok: false, status: 409, error: "einvoice_not_connected", message: "E-invoicing is not connected for this hospital (Admin > Integrations > GST e-invoicing). Nothing was sent.", written: 0 } };
-  // Asked before the bill is opened, so a hospital that is not reporting does not read (and audit reading) a bill for nothing.
-  if (ctx.requireEnabled && (conn.settings || {}).applies !== true) return { done: { ...base, ok: false, status: 409, error: "einvoice_not_enabled", message: "E-invoicing is not enabled for this hospital: the setting that it applies to your turnover is off. Nothing was sent.", written: 0 } };
+  /* Asked before the bill is opened, so a hospital that is not reporting does not read (and audit reading) a bill for
+   * nothing. Applicability is the aggregate turnover entered on the GST settings, exempt supplies included. */
+  const applic = einvoiceApplicability(ctx.gst);
+  if (ctx.requireEnabled && !applic.applies) return { done: { ...base, ok: false, status: 409, error: "einvoice_not_enabled", reason: applic.reason, written: 0,
+    message: applic.reason === "turnover_not_entered"
+      ? "E-invoicing is not enabled: the hospital's aggregate turnover is not entered on Admin > Price list > GST settings. Nothing was sent."
+      : "E-invoicing does not apply: the aggregate turnover entered (exempt supplies included) is not above Rs 5 crore. Nothing was sent." } };
   try { inv = await svc.get(TYPE, invoiceId); }
   catch (e) { return { done: { ...base, ...invoiceWriteFailure(e, { invoiceId, written: 0 }) } }; }
   if (!inv) return { done: { ...base, ok: false, status: 404, error: "invoice_not_found", invoiceId, written: 0 } };
@@ -124,7 +130,8 @@ async function einvoiceStatus(request, env, ctx) {
   let conn;
   try { conn = (await activeConnectors(ctx.recordDeps.repository, mig.tenantId, "einvoice"))[0] || null; }
   catch { return { ok: false, status: 502, error: "record_read_failed", message: "The e-invoice settings could not be read." }; }
-  return { ok: true, state: !conn || !EINVOICE_ADAPTERS[conn.provider] ? "not_connected" : (conn.settings || {}).applies === true ? "ready" : "not_enabled" };
+  const applic = einvoiceApplicability(ctx.gst);
+  return { ok: true, state: !conn || !EINVOICE_ADAPTERS[conn.provider] ? "not_connected" : applic.applies ? "ready" : "not_enabled", ...(applic.reason ? { reason: applic.reason } : {}) };
 }
 
 export { generateIrnRoute, cancelIrnRoute, einvoiceStatus, ackMs };

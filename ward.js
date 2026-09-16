@@ -4407,6 +4407,7 @@
         "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wPhExpiry\" type=\"date\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.destination", "Destination") + "</span><input id=\"wPhDest\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ward-a-cabinet", "e.g. Ward A cabinet") + "\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wPhWitness\" type=\"text\" autocomplete=\"off\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.take-home-at-discharge", "Take-home medicine at discharge") + "</span><input id=\"wPhTakeHome\" type=\"checkbox\"></label>" +
         "</div>" +
         '<button class="w-btn go" data-w-act="phdispense">' + ms("send") + wTH("ward.dispense", "Dispense") + "</button>" +
         (dispenseRows ? '<div class="w-sub"><h4>' + ms("history") + wTH("ward.dispense-history", "Dispense history") + "</h4><ul class=\"w-mini\">" + dispenseRows + "</ul></div>" : "") +
@@ -6332,7 +6333,8 @@
   /* Package billing: what each line is to the stay's package (functions/_wardsynq/packages.js). */
   function cashPackageWord(l) {
     if (!l || !l.packageCode) return "";
-    var w = l.packageLine ? wTH("ward.pkg-line-rate", "package rate")
+    var w = l.packageRoom ? wTH("ward.pkg-line-room", "room charges within the package, taxed")
+      : l.packageLine ? wTH("ward.pkg-line-rate", "package rate")
       : l.packageIncluded ? wTH("ward.pkg-line-included", "included in the package")
       : l.packageExcluded ? wTH("ward.pkg-line-excluded", "excluded from the package, billed")
       : l.packageOutside ? wTH("ward.pkg-line-outside", "not listed by the package, billed; check") : "";
@@ -6343,14 +6345,52 @@
       " &middot; " + wTH("ward.taxable-value", "taxable {value}", { value: esc(taxable) }, "value") +
       (l.taxKind === "GST" ? " &middot; " + cashGstText(l) : " &middot; " + wTH("ward.no-gst-rate-set", "no GST rate set")) + "</li>";
   }
+  /* THE GST DOCUMENTS THIS BILL IS (gst-packages; the server's documentsOf): a Bill of Supply, a Tax Invoice, an
+   * Invoice-cum-Bill of Supply, or for a registered buyer a Tax Invoice and a separate Bill of Supply, each with its own
+   * number and total. A bill raised before numbering has none, and shows its invoice number as before. */
+  var DOC_TYPE_WORDS = { bill_of_supply: "Bill of Supply", tax_invoice: "Tax Invoice", invoice_cum_bill_of_supply: "Invoice-cum-Bill of Supply" };
+  function cashDocsHtml(inv) {
+    var docs = inv.documents || [];
+    if (!docs.length) return inv.documentNumber ? "<p>" + wTH("ward.invoice-number", "Invoice number {no}", { no: esc(inv.documentNumber) }, "no") + "</p>" : "";
+    return docs.map(function (d) {
+      return "<p><b>" + esc(wTEn(DOC_TYPE_WORDS[d.type]) || d.type) + " " + esc(d.number || wT("ward.gst-doc-no-number", "(no number yet)")) + "</b> &middot; " +
+        wTH("ward.gst-doc-totals", "taxable {taxable} &middot; GST {tax} &middot; total {total}", { taxable: esc(d.taxable), tax: esc(d.tax), total: esc(d.total) }, "taxable tax total") + "</p>";
+    }).join("");
+  }
+  /* What the cashier is told about GST on this bill (review 2.5): the package room carved out and how it was valued, a
+   * value capped at the package price, a fallback to the published tariff, GST the hospital bears, a scheme that may
+   * deduct GST TDS, and the exempt supply footnote. */
+  var ROOM_METHOD_WORDS = { published_tariff: "the published room tariff", scheme_rate: "the payer's own per-day room rate", proportional_split: "a proportional split of the package price" };
+  function cashGstNotesHtml(inv) {
+    var out = "", rg = inv.package && inv.package.roomGst, lines = inv.lines || [];
+    if (rg) {
+      out += '<p class="w-hint">' + ms("info") + wTH("ward.gst-pkg-room-carved", "This package includes {days} room day(s) above Rs 5,000 per day. Rs {taxable} of the package is shown as room charges and taxed at 5%. The rest of the package is exempt. Valuation method: {methodName}.",
+        { days: esc(rg.days), taxable: esc(rg.taxable), methodName: esc(wTEn(ROOM_METHOD_WORDS[rg.method]) || rg.method) }, "days taxable") + "</p>";
+      if (rg.capped) out += '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-pkg-room-capped", "The room tariff for this stay is more than the package price. The whole package price has been treated as room charges for GST. Check the package and room category before issuing.", null, "", 1) + "</p>";
+      if (rg.fallback) out += '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-pkg-room-fallback", "The valuation chosen in the GST settings could not be used for this package, so the published room tariff was used.", null, "", 1) + "</p>";
+      if (rg.unrecoverableGst) out += '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-pkg-unrecoverable", "GST of Rs {tax} on room charges in this package is payable by the hospital because the payer's package rate does not allow GST on top.", { tax: esc(rg.unrecoverableGst) }, "tax", 1) + "</p>";
+      if (rg.gstTdsPossible) out += '<p class="w-hint">' + ms("info") + wTH("ward.gst-pkg-tds", "This scheme is marked as a notified GST TDS deductor: it may deduct GST TDS on the taxed room charges (Section 51). Its 10 percent claim deduction is income tax TDS, not GST.") + "</p>";
+    }
+    if (lines.some(function (l) { return l.taxBasis === "package_room_over_5000_per_day" || l.taxBasis === "room_over_5000_per_day"; })) {
+      out += '<p class="w-hint">' + wTH("ward.gst-room-why", "GST 5% applies because this room is not an ICU, CCU, ICCU or NICU and its charge exceeds Rs 5,000 per day (Notification 11/2017-Central Tax (Rate), entry 31A).") + "</p>";
+    }
+    if (lines.some(function (l) { return l.taxKind === "GST" && l.taxExempt; })) {
+      out += '<p class="w-hint">' + wTH("ward.gst-exempt-footnote", "Health care services by a clinical establishment are exempt from GST (Notification 12/2017-Central Tax (Rate), entry 74). Medicines, implants, consumables and food supplied to an admitted patient form part of that service.") + "</p>";
+    }
+    return out;
+  }
   /* E-INVOICING, SAID PLAINLY. null = still asking, false = could not be read; never read as "not reported". A bill
-   * to a patient (no buyer GSTIN) is never sent. */
+   * to a patient (no buyer GSTIN) is never sent; a Bill of Supply is never sent; only a Tax Invoice and a note carrying
+   * GST are offered for an IRN. */
   function cashEinvHtml(e, inv) {
     if (e === undefined) return "";
     if (e === null) return '<p class="w-hint">' + wTH("ward.checking-e-invoicing", "Checking e-invoicing...") + "</p>";
     if (e === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.e-invoicing-status-could-not-be-read", "E-invoicing status could not be read. Do not read this bill as reported or not reported.", null, "", 1) + "</p>";
     if (e.state === "not_connected") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-is-not-connected", "E-invoicing is not connected. Nothing on this bill is reported.") + "</p>";
+    if (e.state === "not_enabled" && e.reason === "turnover_not_entered") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-no-turnover", "E-invoicing is not enabled: the hospital's aggregate turnover, exempt supplies included, is not entered on Admin, Price list, GST settings. Nothing on this bill is reported.") + "</p>";
     if (e.state === "not_enabled") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-not-enabled", "E-invoicing is not enabled for this hospital. Nothing on this bill is reported.") + "</p>";
+    var docs = inv.documents || [];
+    var exemptOnly = docs.length === 1 && docs[0].type === "bill_of_supply", mixedB2b = docs.length === 2;
     var b2b = inv.buyer && inv.buyer.gstin;
     var regs = (inv.einvoices || []).map(function (x) {
       return '<li><b>' + esc(x.docNumber) + "</b> " + wTH("ward.irn-value", "IRN {irn}", { irn: esc(x.irn) }, "irn") + " &middot; " + wTH("ward.ack-value", "Ack {ackNo} {ackDt}", { ackNo: esc(x.ackNo || ""), ackDt: esc(x.ackDt || "") }, "ackNo ackDt") +
@@ -6358,9 +6398,11 @@
     }).join("");
     if (!b2b) return '<p class="w-hint">' + ms("info") + wTH("ward.b2c-not-reported", "B2C, not reported: this bill has no buyer GSTIN.") + "</p>" + (regs ? '<ul class="w-mini">' + regs + "</ul>" : "");
     var active = function (no) { return (inv.einvoices || []).some(function (x) { return x.docNumber === no && x.status === "ACT"; }); };
-    var docs = [inv.documentNumber].concat((inv.events || []).filter(function (ev) { return ev.kind === "credit_note" || ev.kind === "debit_note"; }).map(function (ev) { return ev.noteNumber; }))
-      .filter(function (no) { return no && !active(no); });
-    return (regs ? '<ul class="w-mini">' + regs + "</ul>" : "") + (inv.status === "void" ? "" : docs.map(function (no) {
+    var head = exemptOnly ? '<p class="w-hint">' + ms("info") + wTH("ward.e-invoice-exempt-only", "Exempt supplies are not reported for e-invoicing. This Bill of Supply has no IRN.") + "</p>"
+      : mixedB2b ? '<p class="w-hint">' + ms("info") + wTH("ward.e-invoice-mixed-b2b", "This bill has taxed and exempt charges for a registered payer. It will be issued as a Tax Invoice (reported for e-invoicing) and a separate Bill of Supply.") + "</p>" : "";
+    var reportable = (exemptOnly ? [] : [inv.documentNumber]).concat((inv.events || []).filter(function (ev) { return (ev.kind === "credit_note" || ev.kind === "debit_note") && !ev.financial && ev.tax > 0; }).map(function (ev) { return ev.noteNumber; }));
+    var docs = reportable.filter(function (no) { return no && !active(no); });
+    return head + (regs ? '<ul class="w-mini">' + regs + "</ul>" : "") + (inv.status === "void" ? "" : docs.map(function (no) {
       return '<button class="w-btn tiny ghost" data-w-act="invirn:' + esc(inv.invoiceId) + (no === inv.documentNumber ? "" : "~" + esc(no)) + '">' + ms("qr_code_2") + wTH("ward.report-for-e-invoice", "Get IRN for {doc}", { doc: esc(no) }, "doc") + "</button>";
     }).join(""));
   }
@@ -6414,7 +6456,11 @@
         return "<li><b>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + (isNote ? " " + esc(ev.noteNumber) : "") + "</b> " + esc(ev.amount) + " " + esc(inv.currency || "") +
           '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; " + wTH("ward.ref", "ref {reference}", { reference: esc(ev.reference) }, "reference") : "") + "</span>" +
           (isNote ? '<ul class="w-mini">' + (ev.lines || []).map(function (l) { return cashLineHtml(l, l.taxable); }).join("") + "</ul>" +
-            (ev.gstReversalLate ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-reversal-late", "Past the Section 34 time limit: the bill is reduced, but the GST cannot be reduced in the return.", null, "", 1) + "</p>" : "") : "") + "</li>";
+            (ev.gstReversalLate ? '<p class="w-hint warn">' + ms("warning") + (ev.tax > 0 ? wTH("ward.gst-reversal-late", "Past the Section 34 time limit: the bill is reduced, but the GST cannot be reduced in the return.", null, "", 1)
+              : wTH("ward.gst-note-late", "Past the Section 34 time limit: this note is issued without GST.", null, "", 1)) + "</p>" : "") +
+            (ev.gstTreatment === "gst_refunded" ? '<p class="w-hint">' + wTH("ward.gst-note-refunded", "GST refunded to the patient with this note{ref}.", { ref: ev.gstConfirmation && ev.gstConfirmation.reference ? ": " + esc(ev.gstConfirmation.reference) : "" }, "ref") + "</p>"
+              : ev.gstTreatment === "itc_reversed" ? '<p class="w-hint">' + wTH("ward.gst-note-itc", "Input tax credit reversal confirmed by the buyer: {ref}.", { ref: esc(ev.gstConfirmation && ev.gstConfirmation.reference || "") }, "ref") + "</p>"
+              : ev.financial ? '<p class="w-hint">' + wTH("ward.gst-note-financial", "No GST on this note: a financial note, not reported for e-invoicing.") + "</p>" : "") : "") + "</li>";
       }).join("");
       var receiptRows = (inv.receipts || []).map(function (r) {
         // The payment-gateway adapter boundary, stated on the receipt itself: no live gateway exists
@@ -6433,9 +6479,9 @@
         }).join("");
       var lineRows = (inv.lines || []).map(function (l) { return cashLineHtml(l, l.taxable == null ? l.line : l.taxable); }).join("");
       return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(wTEn(INVOICE_STATUS_WORDS[inv.status]) || inv.status) + "</span></h4>" +
-        (inv.documentNumber ? "<p>" + wTH("ward.invoice-number", "Invoice number {no}", { no: esc(inv.documentNumber) }, "no") + "</p>" : "") +
+        cashDocsHtml(inv) +
         (inv.package ? "<p>" + wTH("ward.pkg-invoice", "Package {code}: {name}, rate {rate}", { code: esc(inv.package.code), name: esc(inv.package.name), rate: esc(inv.package.rate) }, "code name rate") + "</p>" + pkgFlagsHtml(inv.package) : "") +
-        (lineRows ? '<ul class="w-mini">' + lineRows + "</ul>" : "") +
+        (lineRows ? '<ul class="w-mini">' + lineRows + "</ul>" : "") + cashGstNotesHtml(inv) +
         "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
         cashEinvHtml(c.einvoice, inv) +
         "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + (inv.creditBalance ? " &middot; " + wTH("ward.credit", "Credit {creditBalance}", { creditBalance: esc(inv.creditBalance) }, "creditBalance") : "") + "</p>" +
@@ -10267,7 +10313,7 @@
     var qty = val("wPhQty"), unit = val("wPhUnit"), batch = val("wPhBatch"), expiry = val("wPhExpiry"), dest = val("wPhDest");
     if (!qty || !unit) { st.err = wT("ward.a-dispense-needs-a-positive-quantity", "A dispense needs a positive quantity and a unit."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined, witnessId: val("wPhWitness") || undefined })
+    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined, witnessId: val("wPhWitness") || undefined, takeHome: checked("wPhTakeHome") || undefined })
       .then(function (r) {
         if (r && r.error === "quantity_required") { st.busy = false; st.err = wT("ward.a-dispense-needs-a-positive-quantity", "A dispense needs a positive quantity and a unit."); paint(); return; }
         var msg = wT("ward.dispensed", "Dispensed.");
@@ -10475,7 +10521,7 @@
     // E-invoicing at this hospital (gap-claims-gst B). null = asking, false = could not be read.
     st.cashier.einvoice = null;
     apiGet("/ward/einvoice-status?orgId=" + encodeURIComponent(st.orgId))
-      .then(function (r) { st.cashier.einvoice = r && r.ok ? { state: r.state } : false; paint(); })
+      .then(function (r) { st.cashier.einvoice = r && r.ok ? { state: r.state, reason: r.reason || null } : false; paint(); })
       .catch(function () { st.cashier.einvoice = false; paint(); });
     // Online payment links (owner S2). null = loading, false = could not be read: never "no links".
     st.cashier.payLinks = null;
@@ -10499,8 +10545,11 @@
         /* EVERY OUTCOME IS SAID (LT-30). "Nothing priced" came back ok with nothing written and the
          * screen showed nothing at all, so the cashier could not tell a click that did nothing from one
          * that was never sent. */
-        if (r && r.ok) { st.cashier.raised = r; loadCashier(); return; }
-        st.cashier.err = (r && (r.detail || r.error)) || wT("ward.could-not-raise-an-invoice", "Could not raise an invoice.");
+        if (r && r.ok) { st.cashier.raised = r; if (r.warning) st.note = r.warning; loadCashier(); return; }
+        /* GST refusals (gst-packages): nothing is raised until the Price list says what the law needs. */
+        if (r && r.error === "room_tariff_missing") st.cashier.err = wT("ward.gst-room-tariff-missing", "This package covers room days in {roomCategoryName}, which has no per-day room tariff on the Price list. GST cannot be worked out. Add the tariff before issuing this bill.", { roomCategoryName: r.category || "" });
+        else if (r && r.error === "gst_rate_missing") st.cashier.err = wT("ward.gst-rate-missing", "These items are taxable and have no GST rate on the Price list, so no bill was raised: {codes}. An administrator sets each rate; none is assumed.", { codes: (r.codes || []).join(", ") });
+        else st.cashier.err = (r && (r.detail || r.error)) || wT("ward.could-not-raise-an-invoice", "Could not raise an invoice.");
         paint();
       })
       .catch(function () { st.busy = false; st.cashier.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
@@ -11570,13 +11619,14 @@
   /* CREDIT AND DEBIT NOTES, BUYER DETAILS, E-INVOICE (gap-claims-gst B). Each asks on the ward (askFor), sends only
    * what the cashier typed, and reloads the bills from the server; the server computes every amount of GST. */
   function cashInvoice(invoiceId) { return ((st.cashier && st.cashier.invoices) || []).filter(function (i) { return i.invoiceId === invoiceId; })[0] || null; }
-  function cashWrite(path, body) {
+  function cashWrite(path, body, refusals) {
     st.busy = true; paint();
     return apiPost(path, body)
       .then(function (r) {
         st.busy = false;
         if (r && r.ok) { if (r.warning) st.note = r.warning; loadCashier(); return; }
-        st.err = (r && (r.message || r.detail || r.error)) || wT("ward.could-not-record-that", "Could not record that.");
+        // A refusal this screen knows is said in the hospital's language (English under it); any other in the server's words.
+        st.err = (r && refusals && HAS(refusals, r.error) && refusals[r.error]) || (r && (r.message || r.detail || r.error)) || wT("ward.could-not-record-that", "Could not record that.");
         paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
@@ -11592,7 +11642,35 @@
       })) }, function (v) {
       var lines = (inv.lines || []).map(function (l, i) { return { lineIndex: i, taxable: Number(v["l" + i]) }; }).filter(function (x) { return x.taxable > 0; });
       if (!lines.length) { st.err = wT("ward.enter-an-amount-on-at-least-one-line", "Enter an amount on at least one line."); return null; }
-      return cashWrite(credit ? "/ward/invoice-credit-note" : "/ward/invoice-debit-note", { orgId: st.orgId, invoiceId: invoiceId, reason: v.reason, lines: lines });
+      var body = { orgId: st.orgId, invoiceId: invoiceId, reason: v.reason, lines: lines };
+      if (!credit) return cashWrite("/ward/invoice-debit-note", body);
+      /* SECTION 34(2): a credit note reduces GST only if the patient is refunded the GST, or a registered buyer has
+       * reversed its input tax credit. The server asks, writing nothing and using no number; the question is asked
+       * here and the note sent again with the answer. */
+      st.busy = true; paint();
+      return apiPost("/ward/invoice-credit-note", body).then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { if (r.warning) st.note = r.warning; loadCashier(); return; }
+        if (r && r.error === "gst_confirmation_required") { invoiceNoteGst(body, r); return; }
+        st.err = (r && (r.message || r.detail || r.error)) || wT("ward.could-not-record-that", "Could not record that.");
+        paint();
+      }, function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+    });
+  }
+  function invoiceNoteGst(body, r) {
+    var registered = r.recipient === "registered";
+    askFor({ icon: "receipt_long", ok: wTH("ward.record-credit-note", "Record credit note"), title: wTH("ward.gst-note-ask-title", "GST on this credit note"),
+      text: registered
+        ? wTH("ward.gst-note-ask-registered", "GST on this credit note reduces the hospital's tax only after {payerName} reverses the matching input tax credit. Record their confirmation.", { payerName: esc(r.payerName || "") }, "payerName")
+        : wTH("ward.gst-note-ask-patient", "GST on this credit note reduces the hospital's tax only if the GST is refunded to the patient. Refund Rs {gst} of GST with this note, or issue it without GST.", { gst: esc(r.gst) }, "gst"),
+      fields: [
+        { key: "gstTreatment", type: "select", label: wTH("ward.gst-note-ask-choice", "How is this note issued?"), value: registered ? "itc_reversed" : "gst_refunded",
+          options: [[registered ? "itc_reversed" : "gst_refunded", registered ? wTH("ward.gst-note-opt-itc", "With GST: the buyer has reversed the input tax credit") : wTH("ward.gst-note-opt-refund", "With GST: the GST is refunded to the patient with this note")],
+            ["without_gst", wTH("ward.gst-note-opt-without", "Without GST")]] },
+        { key: "gstConfirmation", label: registered ? wTH("ward.gst-note-ask-ref", "The buyer's confirmation (letter or reference)") : wTH("ward.gst-note-ask-refund-ref", "Refund reference (optional)") },
+      ] }, function (v) {
+      if (registered && v.gstTreatment === "itc_reversed" && !v.gstConfirmation) { st.err = wT("ward.gst-note-need-ref", "Enter the buyer's confirmation, or issue the note without GST."); return null; }
+      return cashWrite("/ward/invoice-credit-note", Object.assign({}, body, { gstTreatment: v.gstTreatment, gstConfirmation: v.gstConfirmation || undefined }));
     });
   }
   function invoiceBuyer(invoiceId) {
@@ -11601,6 +11679,8 @@
     askFor({ icon: "business", ok: wTH("ward.save", "Save"), title: wTH("ward.buyer-details-title", "Buyer details for a B2B tax invoice"),
       text: wTH("ward.buyer-details-text", "For a company, insurer or other GST-registered buyer. Leave the GSTIN empty for a bill to the patient."),
       fields: [
+        { key: "kind", type: "select", label: wTH("ward.buyer-kind", "Who is this buyer?"), value: b.kind || "business",
+          options: [["business", wTH("ward.buyer-kind-business", "A company or other buyer that itself pays")], ["payer", wTH("ward.buyer-kind-payer", "An insurer, TPA or scheme paying a cashless claim")]] },
         { key: "gstin", label: wTH("ward.buyer-gstin", "Buyer GSTIN"), value: b.gstin || "" },
         { key: "legalName", label: wTH("ward.buyer-legal-name", "Legal name"), value: b.legalName || "" },
         { key: "address1", label: wTH("ward.buyer-address", "Address"), value: b.address1 || "" },
@@ -11609,13 +11689,14 @@
         { key: "stateCode", label: wTH("ward.buyer-state-code", "State code (2 digits)"), value: b.stateCode || "" },
         { key: "pos", label: wTH("ward.buyer-place-of-supply", "Place of supply (state code)"), value: b.pos || "" },
       ] }, function (v) {
-      return cashWrite("/ward/invoice-buyer", { orgId: st.orgId, invoiceId: invoiceId, buyer: v.gstin ? v : null });
+      return cashWrite("/ward/invoice-buyer", { orgId: st.orgId, invoiceId: invoiceId, buyer: v.gstin ? v : null }, {
+        payer_not_recipient: wT("ward.buyer-payer-not-recipient", "Your GST settings treat the patient as the recipient of a cashless claim, so this bill stays a bill to the patient; the insurer, TPA or scheme is named as payer only. Nothing was changed.") });
     });
   }
   function invoiceIrn(arg) {
     var p = String(arg || "").split("~");
     askFor({ icon: "qr_code_2", ok: wTH("ward.get-irn", "Get IRN"), title: wTH("ward.get-irn-title", "Report this document to the e-invoice portal?"),
-      text: wTH("ward.get-irn-text", "Only taxed lines are reported. The IRN can be cancelled within 24 hours; after that, raise a credit note.") }, function () {
+      text: wTH("ward.get-irn-text2", "Only the Tax Invoice of taxed lines is reported; a Bill of Supply never is. The IRN can be cancelled within 24 hours; after that, raise a credit note.") }, function () {
       return cashWrite("/ward/invoice-irn", { orgId: st.orgId, invoiceId: p[0], noteNumber: p[1] || undefined });
     });
   }
@@ -11653,13 +11734,21 @@
         return '<table border="1" cellspacing="0" cellpadding="4"><tr><th>' + wTH("ward.print-item", "Item") + "</th><th>" + wTH("ward.print-hsn-sac", "HSN/SAC") + "</th><th>" + wTH("ward.print-taxable", "Taxable value") + "</th><th>" + wTH("ward.print-gst", "GST") + "</th></tr>" +
           (lines || []).map(function (l) { return "<tr><td>" + esc(l.display || l.code) + "</td><td>" + esc(l.hsnSac || "") + "</td><td>" + esc(taxableOf(l)) + "</td><td>" + (l.taxKind === "GST" ? cashGstText(l) : wTH("ward.no-gst-rate-set", "no GST rate set")) + "</td></tr>"; }).join("") + "</table>";
       };
+      var taxableOf = function (l) { return l.taxable == null ? l.line : l.taxable; };
+      /* Each GST document under its own heading and number (gst-packages): a Bill of Supply has no IRN block. */
+      var docs = inv.documents || [];
+      var docHtml = docs.length ? docs.map(function (d) {
+        return "<h2>" + esc(wTEn(DOC_TYPE_WORDS[d.type]) || d.type) + " " + esc(d.number || "") + "</h2>" + table(d.lineIndexes.map(function (i) { return inv.lines[i]; }), taxableOf) +
+          "<p>" + wTH("ward.gst-doc-totals", "taxable {taxable} &middot; GST {tax} &middot; total {total}", { taxable: esc(d.taxable), tax: esc(d.tax), total: esc(d.total) }, "taxable tax total") + "</p>" + (d.type === "bill_of_supply" ? "" : irnBlock(d.number));
+      }).join("") : "<h2>" + wTH("ward.tax-invoice", "Tax invoice") + " " + esc(inv.documentNumber || inv.invoiceId) + "</h2>" + table(inv.lines, taxableOf) + irnBlock(inv.documentNumber);
+      var lines = inv.lines || [];
+      var printNotes = (lines.some(function (l) { return l.taxBasis === "package_room_over_5000_per_day" || l.taxBasis === "room_over_5000_per_day"; }) ? "<p><small>" + wTH("ward.gst-room-why", "GST 5% applies because this room is not an ICU, CCU, ICCU or NICU and its charge exceeds Rs 5,000 per day (Notification 11/2017-Central Tax (Rate), entry 31A).") + "</small></p>" : "") +
+        (lines.some(function (l) { return l.taxKind === "GST" && l.taxExempt; }) ? "<p><small>" + wTH("ward.gst-exempt-footnote", "Health care services by a clinical establishment are exempt from GST (Notification 12/2017-Central Tax (Rate), entry 74). Medicines, implants, consumables and food supplied to an admitted patient form part of that service.") + "</small></p>" : "");
       var html = "<title>" + esc(inv.documentNumber || inv.invoiceId) + "</title><body style=\"font-family:sans-serif\">" +
-        "<h2>" + wTH("ward.tax-invoice", "Tax invoice") + " " + esc(inv.documentNumber || inv.invoiceId) + "</h2>" +
         (inv.taxRegistration ? "<p>" + wTH("ward.print-seller-gstin", "GSTIN {gstin}", { gstin: esc(inv.taxRegistration.id) }, "gstin") + "</p>" : "") +
         "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") + "<br>" + esc([inv.buyer.address1, inv.buyer.location, inv.buyer.pincode].join(", ")) : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
-        table(inv.lines, function (l) { return l.taxable == null ? l.line : l.taxable; }) +
+        docHtml + printNotes +
         "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + "</p>" +
-        irnBlock(inv.documentNumber) +
         notes.map(function (ev) {
           return "<h3>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + " " + esc(ev.noteNumber) + "</h3><p>" + esc(when(ev.at)) + " &middot; " + esc(ev.reason || "") + "</p>" +
             table(ev.lines, function (l) { return l.taxable; }) + "<p>" + wTH("ward.note-total", "Taxable {taxable} &middot; GST {tax} &middot; Total {amount}", { taxable: esc(ev.taxable), tax: esc(ev.tax), amount: esc(ev.amount) }, "taxable tax amount") + "</p>" + irnBlock(ev.noteNumber);

@@ -77,6 +77,9 @@ function MedicationDispense(input) {
     expiry: i.expiry || null,
     state: STATES.includes(i.state) ? i.state : "issued",
     destination: i.destination || null,          // the ward it went to
+    /* A take-home supply given at discharge, said by the pharmacist. GST treats it apart from medicines used in the
+     * stay (functions/_region_in.js gstForLines). Absent on everything else. */
+    ...(i.takeHome === true ? { takeHome: true } : {}),
     // Whether a pharmacist had checked this exact version when it was issued. Stated, never assumed.
     verifiedVersion: Number.isFinite(i.verifiedVersion) ? i.verifiedVersion : null,
     unverified: !!i.unverified,
@@ -182,7 +185,7 @@ function summary(d) {
   return {
     dispenseId: d.id, orderId: d.orderId, orderVersion: d.orderVersion,
     drug: d.drug || null, quantity: d.quantity || null, batch: d.batch || null, expiry: d.expiry || null, state: d.state,
-    destination: d.destination || null, unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
+    destination: d.destination || null, ...(d.takeHome ? { takeHome: true } : {}), unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
     dispensedBy: d.dispensedBy, dispensedAt: d.dispensedAt,
     returnedBy: d.returnedBy || null, returnedAt: d.returnedAt || null, returnReason: d.returnReason || null,
     ...(d.controlled ? { controlled: true, witnessedBy: d.witnessedBy || null } : {}),
@@ -264,7 +267,7 @@ async function dispenseOrder(request, env, ctx) {
     id, patientId: order.patientId, encounterId: order.encounterId || null,
     orderId, orderVersion: order.version, drug: order.drug, drugCode: order.drugCode || null,
     quantity, batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
-    state: "issued", destination: str(ctx.destination) || null,
+    state: "issued", destination: str(ctx.destination) || null, takeHome: ctx.takeHome === true,
     verifiedVersion: check.state === "current" ? check.verifiedVersion : null,
     // Stated on the record rather than left to be inferred from an absent verification.
     unverified: check.state === "none",

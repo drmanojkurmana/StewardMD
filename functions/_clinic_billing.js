@@ -75,6 +75,24 @@ export function validateTariff(item) {
     out.gstRate = t ? Number(t) : "";
   }
   if (kind === "bed" && item.intensiveCare !== undefined) out.intensiveCare = item.intensiveCare === true;
+  /* gst-packages (2026-09-17). intensiveCareClass: which intensive care unit a bed row is, set by the hospital: the four
+   * the notification names (ICU, CCU, ICCU, NICU), a specialty ICU (PICU, MICU, SICU) or HDU / step-down; "" is an
+   * ordinary room. It also sets the older intensiveCare marker, true only for the four named units. unitHours: how many
+   * hours one bed price covers (24 a day, 8 a shift, 1 an hour), so the room charge is tested per day. nonHealthcare: an
+   * item that is not health care (attendant food or bed, cosmetic procedure, retail), taxed at its own rate even on an
+   * in-patient bill. */
+  if (kind === "bed" && item.intensiveCareClass !== undefined) {
+    const c = String(item.intensiveCareClass == null ? "" : item.intensiveCareClass).trim().toUpperCase();
+    if (c && ["ICU", "CCU", "ICCU", "NICU", "ICU_SPECIALTY", "HDU"].indexOf(c) < 0) return { ok: false, error: "bad_intensive_care_class" };
+    out.intensiveCareClass = c;
+    out.intensiveCare = ["ICU", "CCU", "ICCU", "NICU"].indexOf(c) >= 0;
+  }
+  if (kind === "bed" && item.unitHours !== undefined) {
+    const t = String(item.unitHours == null ? "" : item.unitHours).trim();
+    if (t && !(/^\d{1,2}$/.test(t) && Number(t) >= 1 && Number(t) <= 24)) return { ok: false, error: "bad_unit_hours" };
+    out.unitHours = t ? Number(t) : "";
+  }
+  if (item.nonHealthcare !== undefined) out.nonHealthcare = item.nonHealthcare === true;
   return { ok: true, item: out };
 }
 

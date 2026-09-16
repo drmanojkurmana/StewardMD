@@ -7086,6 +7086,8 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   from single AES-CBC blocks; both are checked against node:crypto. Only B2B bills with a buyer GSTIN and only taxed lines
   are reported; B2C, exempt-only, unnumbered, missing-HSN, not connected and not enabled are refused with a plain reason
   before anything is sent. The hospital's own "applies to us" setting decides applicability; turnover is not computed.
+  (SUPERSEDED 2026-09-17: applicability is the aggregate turnover including exempt supplies on the GST settings; place of
+  supply is where performed by default; a mixed B2B bill is a Tax Invoice plus a Bill of Supply. See the entry below.)
   Signs in per call (no token cache). Cancel only within 24 hours of AckDt (India time). Printed invoice draws the signed
   QR with the existing vendor/qrcode-generator.js.
 - **Not built:** B2C place of supply from a patient address (B2C is intra-state), the 30-day reporting limit for AATO over
@@ -7113,6 +7115,7 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   and pre-authorisation state flags; the bill still raises (the desk decides), it says so.
 - **GST:** the package line is treated as a health care service (exempt) and covered lines carry no tax.
   Not split: a package bundling a room above Rs 5,000 a day; a hospital's accountant decides, the package then needs GST fields.
+  SUPERSEDED 2026-09-17 by "GST on package billing per the GST treatment review" below: the room is carved out.
 - **No scheme API:** PM-JAY TMS has no public API and no CGHS/ECHS API is verified, so `GET /ward/package-pack` returns
   a checklist, the package's own document lists and a field export labelled manual submission, and never marks anything
   submitted. TMS pre-auth sections per the PM-JAY 2.0 TMS Provider User Manual (sha.kerala.gov.in); mandatory documents
@@ -7324,3 +7327,46 @@ Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a 
   new requester kinds authorised-attendant (authority recorded) and legal-authority; not a sixth DPDP request kind.
 - **Log retention is reported, never claimed**: audit and read-log rows are never deleted by WardSynQ (met); storage in
   India, the platform's own logs and NTP source are not confirmed / not met (security review card).
+
+## 2026-09-17 GST on package billing per the GST treatment review (branch gst-packages)
+- **Source:** GST treatment review of WardSynQ package billing (17 September 2026, reviewer agent; citations inline in it).
+  Its answers are "probable" or "unconfirmed" where no primary text settles the point; each such point is a hospital
+  setting defaulting to the review's safest reading, labelled for the chartered accountant.
+- **Decision:** a non-ICU room above Rs 5,000 a day inside a package is carved out of the exempt package line as its own
+  line (`<code>-ROOM`, sourceId `<assignment>:room`, SAC 999311) and taxed at 5 percent; the package line keeps the rest.
+  Valuation (`gst.pkgRoomValuation`): published per-day tariff capped at the package price (default), the payer's own
+  per-day room rate entered on the package with its source, or a proportional split (falls back to the tariff, said, when
+  a covered item has no price). `priceIncludesGst` on a package back-calculates 5/105 and records the GST the hospital
+  bears. A covered room day with no bed row refuses the bill (`room_tariff_missing`). Valued when the package line is
+  billed; later room days on an open stay need a debit note (the response warns).
+- **Decision:** in-patient is a property of the stay: every item on an admitted patient's bill is exempt composite health
+  care (SAC 999311 printed, never the goods' HSN) except a room over Rs 5,000 a day, a Price list row marked
+  `nonHealthcare`, and a take-home medicine at discharge (`MedicationDispense.takeHome`, taxed unless
+  `gst.dischargeMedsAsComposite`). Outpatient: services exempt with default SAC (999312/999314/999315/999316), a medicine
+  given in the visit exempt, a dispensed one taxed at its row rate. A taxable line with no rate now REFUSES the bill
+  (`gst_rate_missing`) instead of raising it untaxed.
+- **Decision:** the room test is per day: bed rows carry `unitHours` (charge capture bills begun units per day), the
+  per-day charge is max(price converted to 24 hours, the day's bed lines); `intensiveCareClass` (ICU, CCU, ICCU, NICU,
+  ICU_SPECIALTY, HDU) with `gst.intensiveCareUnits` deciding the last two; `gst.roomChargeBasis` may add daily nursing.
+- **Decision:** documents are computed per invoice (`documents`): Bill of Supply (exempt only, numbered in a `BOS`
+  series), Tax Invoice, Invoice-cum-Bill of Supply (Rule 46A, to a patient), and for a registered buyer a Tax Invoice
+  (the invoice number, the only document reported for an IRN) plus a Bill of Supply issued its own BOS number when the
+  buyer is saved. The IRN request refuses a mixed B2B bill until that number exists.
+- **Decision:** place of supply for health services is where performed (IGST Act s.12(4), probable): CGST + SGST even for
+  an out-of-state payer; the invoice stores `placeOfSupply` from `gst.placeOfSupply` at raise, and only
+  "recipient_state" restores IGST. `gst.recipientOfCashlessClaims` defaults to the patient: a buyer of kind "payer", or any
+  buyer on a scheme or insurer package, is refused (`payer_not_recipient`). A TAN-based GSTIN (TDS deductor) is valid.
+- **Decision:** Section 34(2) from 01.10.2025: a credit note on taxed lines needs `gstTreatment` (patient:
+  `gst_refunded`; registered buyer: `itc_reversed` with a confirmation reference; or `without_gst`), asked before a number
+  is issued; after the 30 November limit it is issued without GST. A note carrying no GST is `financial` and never
+  reported to the IRP.
+- **Decision:** e-invoice applicability is `gst.aggregateTurnoverRs` (exempt supplies included) above Rs 5 crore; the
+  connector's own "applies" checkbox is removed. Settings live in org config `wardsynq.gst`, edited on Admin > Price list
+  > GST settings through `GET/POST /api/queue/org/gst-settings` (staff.admin; a non-default needs the CA's opinion reference
+  and date; every change needs a reason; audited `org:gst_settings` naming the settings changed).
+- **Not built:** WHOLE_PACKAGE_EXEMPT valuation and per-payer valuation overrides; the 30-day IRP reporting limit for AATO
+  of Rs 10 crore or more (the IRP refuses); an e-invoice override with a CA reference; GST TDS computation (only a note);
+  a later confirmation step for a credit note issued while ITC reversal is pending; debit notes against a carved room on
+  later days; OPD clinic billing station (q_invoices) GST.
+- **Status:** built, tested (test/wardsynq-gst-packages.test.mjs, test/wardsynq-gst-einvoice.test.mjs,
+  test/wsq-admin-gst-settings.test.mjs).

@@ -129,7 +129,7 @@ export async function upsertTariff(env, orgId, item, actor) {
     action: existing ? "tariff_update" : "tariff_create",
     meta: `${fields.name} ${before == null ? "" : before + " -> "}${fields.price}${fields.active === false ? " (withdrawn)" : ""}` +
       // The tax position is part of what is charged, so a change to it is recorded the same way.
-      ["hsnSac", "gstRate", "intensiveCare"].filter((k) => k in fields).map((k) => ` ${k} ${existing && existing.fields && existing.fields[k] !== undefined ? existing.fields[k] + " -> " : ""}${fields[k]}`).join(""),
+      ["hsnSac", "gstRate", "intensiveCare", "intensiveCareClass", "unitHours", "nonHealthcare"].filter((k) => k in fields).map((k) => ` ${k} ${existing && existing.fields && existing.fields[k] !== undefined ? existing.fields[k] + " -> " : ""}${fields[k]}`).join(""),
   });
   return { ok: true, id };
 }

@@ -175,6 +175,7 @@ import { buildTwinSnapshot, reconstructTwinAsOf, operationalHealthReport, roster
 import * as GROUP from "../../_hospital_group_store.js";
 import { hospitalCounts } from "../../_wardsynq/hospital-group.js";
 import * as CLINICAL from "../../_wardsynq/clinical-settings.js";
+import { readGstSettings, validateGstSettings, changedGstKeys } from "../../_wardsynq/gst-settings.js";
 import * as SEED from "../../_wardsynq/seed-signoff.js";
 import * as SEEDSTORE from "../../_seed_signoff_store.js";
 import { predictMetric } from "../../_wardsynq/twin-predict.js";
@@ -3415,7 +3416,7 @@ export async function onRequest(context) {
       if (sub === "invoice" && method === "POST") {
         const tf = await wsqTariff(env, wOrgId, wsqCfg);
         if (tf.error) return json({ ok: false, error: "price_list_unreadable", detail: tf.error, written: 0 }, 502, request);
-        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await raiseInvoice(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, tariff: tf.table, region: (wOrg && wOrg.region) || "IN", gstin: (wOrg && wOrg.regionProfile && wOrg.regionProfile.gstin) || "", gst: readGstSettings(wsqCfg), at: body.at, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice" && method === "GET") {
@@ -3487,7 +3488,8 @@ export async function onRequest(context) {
       if (sub === "package-save" && method === "POST") {
         const r = await savePackage(request, env, { ...deps, id: body.id, expectedVersion: body.expectedVersion, active: body.active, reason: body.reason,
           scheme: body.scheme, schemeName: body.schemeName, code: body.code, name: body.name, rate: body.rate, expectedLosDays: body.expectedLosDays,
-          preAuthRequired: body.preAuthRequired, inclusions: body.inclusions, exclusions: body.exclusions, preAuthDocuments: body.preAuthDocuments, claimDocuments: body.claimDocuments });
+          preAuthRequired: body.preAuthRequired, inclusions: body.inclusions, exclusions: body.exclusions, preAuthDocuments: body.preAuthDocuments, claimDocuments: body.claimDocuments,
+          roomRatePerDay: body.roomRatePerDay, roomRateSource: body.roomRateSource, priceIncludesGst: body.priceIncludesGst });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "stay-package" && method === "POST") {
@@ -3507,19 +3509,20 @@ export async function onRequest(context) {
       }
       /* gap-claims-gst B: credit and debit notes, B2B buyer details, and the IRN (functions/_wardsynq/invoice.js, einvoice.js). */
       if ((sub === "invoice-credit-note" || sub === "invoice-debit-note") && method === "POST") {
-        const r = await postNoteRoute(request, env, { ...deps, kind: sub === "invoice-credit-note" ? "credit_note" : "debit_note", invoiceId: body.invoiceId, reason: body.reason, lines: body.lines, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await postNoteRoute(request, env, { ...deps, kind: sub === "invoice-credit-note" ? "credit_note" : "debit_note", invoiceId: body.invoiceId, reason: body.reason, lines: body.lines, at: body.at, idempotencyKey: body.idempotencyKey || null,
+          gstTreatment: body.gstTreatment, gstConfirmation: body.gstConfirmation });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "invoice-buyer" && method === "POST") {
-        const r = await setBuyerRoute(request, env, { ...deps, invoiceId: body.invoiceId, buyer: body.buyer, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        const r = await setBuyerRoute(request, env, { ...deps, invoiceId: body.invoiceId, buyer: body.buyer, at: body.at, idempotencyKey: body.idempotencyKey || null, gst: readGstSettings(wsqCfg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "einvoice-status" && method === "GET") {
-        const r = await einvoiceStatus(request, env, deps);
+        const r = await einvoiceStatus(request, env, { ...deps, gst: readGstSettings(wsqCfg) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if ((sub === "invoice-irn" || sub === "invoice-irn-cancel") && method === "POST") {
-        const ectx = { ...deps, invoiceId: body.invoiceId, noteNumber: body.noteNumber, idempotencyKey: body.idempotencyKey || null, fetchImpl: typeof env.WSQ_EINV_FETCH === "function" ? env.WSQ_EINV_FETCH : undefined };
+        const ectx = { ...deps, gst: readGstSettings(wsqCfg), invoiceId: body.invoiceId, noteNumber: body.noteNumber, idempotencyKey: body.idempotencyKey || null, fetchImpl: typeof env.WSQ_EINV_FETCH === "function" ? env.WSQ_EINV_FETCH : undefined };
         const r = sub === "invoice-irn" ? await generateIrnRoute(request, env, ectx) : await cancelIrnRoute(request, env, { ...ectx, reasonCode: body.reasonCode, remark: body.remark });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -4497,7 +4500,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {
-        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, at: body.at, idempotencyKey: body.idempotencyKey || null,
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
           isControlled, witnessId: body.witnessId, witnessCheck });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -5203,6 +5206,29 @@ export async function onRequest(context) {
       await ORG.updateOrg(env, orgId, { wardsynq: patch }, actor.id, { action: "org:blood_centre_settings", meta: JSON.stringify({ changed }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ok: true, centre: bloodCentreView(back && back.wardsynq), changed }, 200, request);
+    }
+    /* gst-packages: the hospital's GST settings where the law is not settled (functions/_wardsynq/gst-settings.js), on
+     * Admin > Price list. staff.admin reads and saves; a choice other than the review's default needs the chartered
+     * accountant's opinion reference and date, every change needs a reason, and the audit row names the settings changed. */
+    if (seg === "org" && sub === "gst-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "GST settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, settings: readGstSettings(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateGstSettings(cb.settings, o.wardsynq);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_gst_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const changed = changedGstKeys(o.wardsynq, value);
+      if (!changed.length) return json({ ok: true, changed: [], settings: readGstSettings(o.wardsynq) }, 200, request);
+      const reason = String(cb.reason || "").trim();
+      if (!reason) return json({ ok: false, error: "reason_required", message: "Say why the GST settings are being changed. Nothing was saved." }, 422, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { gst: value } }, actor.id,
+        { action: "org:gst_settings", meta: JSON.stringify({ changed, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, changed, settings: readGstSettings(back && back.wardsynq) }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";

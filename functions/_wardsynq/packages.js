@@ -89,8 +89,17 @@ function validatePackage(raw) {
   if (both.length) return { error: "included_and_excluded", message: `Both included and excluded: ${both.join(", ")}.` };
   const preAuthDocuments = listOf(r.preAuthDocuments, 50, 200), claimDocuments = listOf(r.claimDocuments, 50, 200);
   if (!preAuthDocuments || !claimDocuments) return { error: "too_many_documents", message: "At most 50 documents per list." };
+  /* GST on the room inside the package (gst-packages; functions/_region_in.js packageRoomComponent). roomRatePerDay: the
+   * per-day room rate the payer's own rate card states, with where it is stated, used only when the hospital values
+   * package rooms at the scheme's rate. priceIncludesGst: the payer pays this rate and no GST on top, so GST on a
+   * taxed room is worked back out of it and borne by the hospital. False unless an administrator says so. */
+  const roomRateText = str(r.roomRatePerDay);
+  if (roomRateText && (!/^\d+(\.\d{1,2})?$/.test(roomRateText) || Number(roomRateText) > 10000000)) return { error: "bad_room_rate", message: "The scheme's room rate is an amount in rupees per day, like 4500." };
+  const roomRateSource = str(r.roomRateSource).slice(0, 200);
+  if (roomRateText && !roomRateSource) return { error: "room_rate_source_required", message: "Say where the payer's rate card states this room rate (document and page)." };
   return { item: { scheme, schemeName: schemeName || null, code, name, rate: round2(rateText), expectedLosDays: los, preAuthRequired: r.preAuthRequired === true,
-    inclusions: inc.cover, exclusions: exc.cover, preAuthDocuments, claimDocuments } };
+    inclusions: inc.cover, exclusions: exc.cover, preAuthDocuments, claimDocuments,
+    roomRatePerDay: roomRateText ? round2(roomRateText) : null, roomRateSource: roomRateText ? roomRateSource : null, priceIncludesGst: r.priceIncludesGst === true } };
 }
 
 /** PURE. The kind of a captured charge item: the Price list row's kind, else what its source record is. */
@@ -222,6 +231,7 @@ async function who(request, env, ctx, need) {
 const publicPackage = (p) => ({ id: p.id, version: p.version, scheme: p.scheme, schemeName: p.schemeName || null, code: p.code, name: p.name, rate: p.rate,
   expectedLosDays: p.expectedLosDays == null ? null : p.expectedLosDays, preAuthRequired: p.preAuthRequired === true, inclusions: p.inclusions, exclusions: p.exclusions,
   preAuthDocuments: p.preAuthDocuments || [], claimDocuments: p.claimDocuments || [], active: p.active !== false, changeReason: p.changeReason || null,
+  roomRatePerDay: p.roomRatePerDay == null ? null : p.roomRatePerDay, roomRateSource: p.roomRateSource || null, priceIncludesGst: p.priceIncludesGst === true,
   writtenBy: p.writtenBy && p.writtenBy.id, writtenAt: p.writtenBy && p.writtenBy.at });
 
 /** ctx: {} - every package at this hospital, withdrawn ones included and marked. */
@@ -274,8 +284,8 @@ async function savePackage(request, env, ctx) {
   const at = new Date().toISOString();
   const next = { resourceType: PACKAGE_TYPE, id, version: cur ? cur.version + 1 : 1, ...v.item, active, changeReason: reason || null,
     createdAt: (cur && cur.createdAt) || at, createdBy: (cur && cur.createdBy) || w.actorId, writtenBy: { id: w.actorId, kind: "human", at } };
-  const fields = ["schemeName", "name", "rate", "expectedLosDays", "preAuthRequired", "inclusions", "exclusions", "preAuthDocuments", "claimDocuments", "active"];
-  const changed = cur ? fields.filter((k) => JSON.stringify(next[k]) !== JSON.stringify(cur[k] === undefined ? null : cur[k])) : fields;
+  const fields = ["schemeName", "name", "rate", "expectedLosDays", "preAuthRequired", "inclusions", "exclusions", "preAuthDocuments", "claimDocuments", "roomRatePerDay", "roomRateSource", "priceIncludesGst", "active"];
+  const changed = cur ? fields.filter((k) => JSON.stringify(next[k]) !== JSON.stringify(k === "priceIncludesGst" ? cur[k] === true : cur[k] === undefined ? null : cur[k])) : fields;
   if (cur && !changed.length) return { ok: true, unchanged: true, package: publicPackage(cur) };
   const action = !cur ? "package.create" : active !== (cur.active !== false) ? (active ? "package.restore" : "package.withdraw") : "package.update";
   const scope = { packageId: id, version: next.version, changed, ...(cur && changed.includes("rate") ? { rateFrom: cur.rate, rateTo: next.rate } : {}), reason: reason || null };
