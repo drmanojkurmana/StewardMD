@@ -5,6 +5,28 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-16 · Image Engine chooser: recommend Hybrid first, add "Don't ask me again"
+
+**Decision:** `recommendFor()` now recommends Private Device OCR - relabeled "Hybrid" in the UI whenever
+its automatic second-reader check can actually engage (`hybridReady()`) - ahead of AI Vision, which
+drops to second, then plain on-device OCR/On-device AI last. Two independent readers agreeing is safer
+than either alone, and it is free when the on-device model does the checking. Falls back to the old
+AI-Vision-first order when hybrid cannot engage (no consent yet and no local vision pack downloaded, or
+`smd_icu_hybrid=0`, or no device OCR at all as on web). The engine-card copy and Settings list relabel
+the "device" option "Hybrid" with an updated description under the same condition, so the picker and
+Settings never disagree about what the recommended option actually does.
+
+Added a "Don't ask me again" button to the chooser sheet, distinct from the existing "Remember my
+choice" checkbox: remembering only pre-selects the radio next time, the sheet still shows; the new
+button (`localStorage.stewardmd.imageEngineSkipChooser`) skips the sheet entirely and routes straight to
+the remembered engine. Re-enabled from Settings ("Ask which engine to use every time"), shown only while
+skipped.
+
+**Bug fixed in passing:** `getPref()`/`setPref()` only ever persisted `"ai"` or `"device"` -  choosing
+"On-device AI" and checking "Remember my choice" silently reverted to Device on the next photo. Found
+because the skip button is pointless if the remembered engine isn't the one actually chosen. Now all
+three values round-trip.
+
 ## 2026-09-16 · ICU OCR digit reader ported to Android (TFLite), not a second cloud model
 
 **Decision:** The on-device CRNN-CTC digit reader (1.5M params, 3MB, iOS Core ML since 2026-09-15) is

@@ -1,15 +1,20 @@
 /* StewardMD — Image Engine chooser for ICU Snapshot image processing.
  * ===========================================================================
- * Two clinician-controlled engines, one central router (no duplicated branching):
- *   • Private Device OCR · Free — native Apple Vision (iOS) / ML Kit bridge (Android where
- *     available), else local OCR fallback. Image NEVER leaves the device. Best for labelled
- *     documents (labs, ABG, medication lists, flowsheets); labels + reading order preserved.
+ * Three clinician-controlled engines, one central router (no duplicated branching):
+ *   • Private Device OCR · Free — native Apple Vision (iOS) / ML Kit bridge (Android). Image NEVER
+ *     leaves the device. Automatically becomes HYBRID (recommended, 2026-09-16) whenever a second
+ *     reader can check it: AI Vision on the crop (consent + online) or the downloaded on-device
+ *     model — a value only fills in when both readers agree (hybridCheck/localHybridCheck below).
  *   • AI Vision · Pro — sends the ORIGINAL image { image, kind } to the existing StewardMD AI
- *     vision endpoint (server understands spatial layout — best for monitor/ventilator). May
+ *     vision endpoint (server understands spatial layout — best single-reader accuracy). May
  *     process PHI → explicit consent required before the first upload / whenever unsaved.
+ *   • On-device AI · Free — the downloaded MaiK vision pack reads the image itself, offline.
  *
- * Preference: localStorage "stewardmd.imageEngine" ∈ {device, ai} (default device).
+ * Recommendation order (recommendFor): Hybrid, then AI Vision, then plain on-device OCR.
+ * Preference: localStorage "stewardmd.imageEngine" ∈ {device, ai, local} (default device).
  * Consent:    localStorage "stewardmd.aiVisionPhiConsent" = "true".
+ * "Don't ask me again": localStorage "stewardmd.imageEngineSkipChooser" = "1" — process() then
+ *   routes straight to the remembered engine with no picker; re-enabled from Settings.
  * Central API: window.SMD_IMAGE_ENGINE.process({ image, kind, engineOverride })
  *   resolves { mode:"fields", fields, lines, engine } | { mode:"lines", lines, engine }
  *            | { cancelled:true }  — the ingest shape the ICU review already consumes.
@@ -19,16 +24,25 @@
   "use strict";
   var KEY_ENGINE = "stewardmd.imageEngine";
   var KEY_CONSENT = "stewardmd.aiVisionPhiConsent";
+  var KEY_SKIP = "stewardmd.imageEngineSkipChooser";
   var DEV = (function () { try { return location.hostname === "localhost" || location.hostname === "127.0.0.1" || localStorage.getItem("smd_debug") === "1"; } catch (e) { return false; } })();
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lrem(k) { try { localStorage.removeItem(k); } catch (e) {} }
 
-  function getPref() { return lget(KEY_ENGINE) === "ai" ? "ai" : "device"; }   // default: device (privacy-first)
-  function setPref(v) { lset(KEY_ENGINE, v === "ai" ? "ai" : "device"); }
+  // "local" used to collapse into "device" here, so a remembered On-device AI choice was silently
+  // lost the next time the app opened (found while wiring "Don't ask me again" - that button is
+  // useless if the remembered value isn't the one actually chosen).
+  function getPref() { var v = lget(KEY_ENGINE); return v === "ai" || v === "local" ? v : "device"; }   // default: device (privacy-first)
+  function setPref(v) { lset(KEY_ENGINE, v === "ai" || v === "local" ? v : "device"); }
   function getConsent() { return lget(KEY_CONSENT) === "true"; }
   function setConsent(on) { if (on) lset(KEY_CONSENT, "true"); else lrem(KEY_CONSENT); }
+  // "Don't ask me again" (chooseEngine): skip the picker entirely and route straight to the
+  // remembered engine. Separate from KEY_ENGINE itself so "Remember my choice" (pre-fills the picker
+  // next time but still shows it) and "Don't ask me again" (skips the picker outright) stay distinct.
+  function skipChooser() { return lget(KEY_SKIP) === "1"; }
+  function setSkipChooser(on) { if (on) lset(KEY_SKIP, "1"); else lrem(KEY_SKIP); }
   // AI Vision availability (matches reasoning.js visionAiOn; default on = current beta behavior),
   // AND the answer-engine policy (2026-09-11): with the Local or KB-only engine selected, AI Vision
   // is a cloud AI call and is therefore not available, network or no network. Every dialog and
@@ -46,11 +60,18 @@
   }
 
   var SCREEN_KINDS = { monitor: 1, ventilator: 1 };                 // layout-dependent → AI especially important
-  // AI Vision is the recommended engine for best accuracy on ANY clinical image whenever it can
-  // run (enabled + online). When it cannot (offline / disabled), the downloaded on-device model is
-  // the offline alternative to AI Vision (owner, 2026-09-04) if its projector is installed; plain
-  // on-device OCR is the last resort, private but it only extracts text.
+  // Priority (owner, 2026-09-16): Hybrid first, AI Vision second, plain on-device last.
+  // "Hybrid" is not a 4th engine - it is Private Device OCR with the automatic second-reader check
+  // (hybridCheck/localHybridCheck in routeDevice) already layered on top for review-only values, so
+  // recommending "device" IS recommending Hybrid whenever that check can actually run: two independent
+  // readers agreeing is safer than either one alone, for free (no per-image cloud cost) when the local
+  // model does the checking. Falls through to AI Vision (best single-reader accuracy) when hybrid
+  // cannot engage (no consent yet and no local vision pack), then on-device OCR alone as the last resort.
+  function hybridReady() {
+    return hybridOn() && deviceOcrAvailable() && ((aiAvailable() && online() && getConsent()) || localVisionReady());
+  }
   function recommendFor(kind) {
+    if (hybridReady()) return "device";
     if (aiAvailable() && online()) return "ai";
     return localVisionReady() ? "local" : "device";
   }
@@ -144,14 +165,17 @@
   function engineCard(engine, selected, kind) {
     var isAi = engine === "ai";
     var isLocal = engine === "local";
+    var isHybrid = engine === "device" && hybridReady();
     var rec = recommendFor(kind) === engine;
-    var title = isAi ? "AI Vision" : isLocal ? "On-device AI" : "Private Device OCR";
+    var title = isAi ? "AI Vision" : isLocal ? "On-device AI" : isHybrid ? "Hybrid" : "Private Device OCR";
     var pill = isAi ? '<span class="ie-pill pro">Pro</span>' : '<span class="ie-pill free">Free</span>';
     var recPill = rec ? '<span class="ie-pill rec">Recommended</span>' : "";
     var desc = isAi
       ? "Secure cloud AI — the most accurate reading of any clinical image (labs, ABG, medication lists, monitor & ventilator screens). The image is sent for processing."
       : isLocal
       ? "Your offline alternative to AI Vision. The downloaded model reads the image on this phone. Nothing is sent anywhere and no AI tokens are used. It understands what it is looking at rather than only extracting text, but it is a small model, slower than the cloud, and can be wrong, so check it against the original."
+      : isHybrid
+      ? "Reads the image privately on this device, then double-checks any uncertain value against " + (aiAvailable() && online() && getConsent() ? "AI Vision" : "the on-device model") + " — a value only fills in when both agree. The safest option, and free when the on-device model does the checking."
       : "Runs privately on this device (Apple Vision / ML Kit) — the image never leaves it, but it can be less accurate, especially for screens, handwriting or complex layouts.";
     return '<button type="button" class="ie-lrow' + (selected ? " sel" : "") + '" data-engine="' + engine + '" role="radio" aria-checked="' + selected + '">' +
       '<span class="ie-lmain"><span class="ie-lt">' + esc(title) + " " + pill + recPill + "</span>" +
@@ -168,13 +192,15 @@
       if (lget(KEY_ENGINE) == null) sel = recommendFor(kind);
       function body() {
         var rec = recommendFor(kind);
-        var helper = rec === "ai"
+        var helper = (rec === "device" && hybridReady())
+          ? "Hybrid is recommended: this device reads the image, then double-checks any uncertain value before filling it in — a value only fills when both readers agree. The safest choice, and free when the on-device model does the checking."
+          : rec === "ai"
           ? "AI Vision is recommended for the most accurate reading. Your image is sent securely for processing; on-device OCR stays private but can be less accurate."
           : rec === "local"
           ? "AI Vision is unavailable right now (offline or turned off). On-device AI is your offline alternative: the downloaded model reads the image on this phone. Slower than the cloud and it can be wrong, so check it against the original."
           : "Image stays on this device. (AI Vision is unavailable right now.)";
-        var warn = (rec === "ai" && sel === "device")
-          ? '<div class="ie-warn">⚠️ On-device OCR can be less accurate. AI Vision is recommended for the best accuracy.</div>' : "";
+        var warn = (sel === "device" && !hybridReady() && rec !== "device")
+          ? '<div class="ie-warn">⚠️ On-device OCR alone can be less accurate. ' + (rec === "ai" ? "AI Vision" : "Hybrid") + ' is recommended instead.</div>' : "";
         return '<div class="ie-h">Choose Image Engine</div>' +
           '<div class="ie-sub">' + esc(helper) + "</div>" +
           '<div class="ie-list" role="radiogroup" aria-label="Image engine">' +
@@ -184,7 +210,8 @@
           '</div>' +
           warn +
           '<label class="ie-chk"><input type="checkbox" id="ieRemember"><span>Remember my choice</span></label>' +
-          '<div class="ie-row"><button class="ie-btn sec" id="ieCancel">Cancel</button><button class="ie-btn" id="ieGo">Continue</button></div>';
+          '<div class="ie-row"><button class="ie-btn sec" id="ieCancel">Cancel</button><button class="ie-btn" id="ieGo">Continue</button></div>' +
+          '<button type="button" class="ie-btn sec" id="ieSkip" style="margin-top:8px;width:100%">Don’t ask me again</button>';
       }
       var o = overlay(body());
       function rerender() { o.sheet.innerHTML = body(); wire(); }
@@ -192,6 +219,7 @@
         o.sheet.querySelectorAll(".ie-lrow").forEach(function (c) { c.addEventListener("click", function () { sel = c.getAttribute("data-engine"); var rem = o.sheet.querySelector("#ieRemember"); var remembered = rem && rem.checked; rerender(); var r2 = o.sheet.querySelector("#ieRemember"); if (r2) r2.checked = remembered; }); });
         o.sheet.querySelector("#ieCancel").addEventListener("click", function () { o.close(); resolve(null); });
         o.sheet.querySelector("#ieGo").addEventListener("click", function () { var rem = o.sheet.querySelector("#ieRemember"); o.close(); resolve({ engine: sel, remember: !!(rem && rem.checked) }); });
+        o.sheet.querySelector("#ieSkip").addEventListener("click", function () { o.close(); resolve({ engine: sel, remember: true, skip: true }); });
       }
       wire();
     });
@@ -263,10 +291,13 @@
     // tokens; Private Device OCR pays nothing per pixel, and on a monitor photo the small labels
     // and "(MAP)" values fall below what Apple Vision can read at 900px (2026-09-14 MP40 test).
     var original = opts.original || image;
+    // "Don't ask me again" (chooseEngine's skip button): go straight to the remembered engine, no sheet.
+    if (!opts.engineOverride && skipChooser()) return route(getPref(), image, kind, original);
     var picked = opts.engineOverride ? Promise.resolve({ engine: opts.engineOverride, remember: false }) : chooseEngine(kind);
     return picked.then(function (choice) {
       if (!choice) { log("cancelled at chooser"); return { cancelled: true }; }
       if (choice.remember) setPref(choice.engine);
+      if (choice.skip) setSkipChooser(true);
       return route(choice.engine, image, kind, original);
     });
   }
@@ -580,14 +611,17 @@
         '<span style="flex:1;min-width:0"><span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:600 14px/1.3 var(--sans,system-ui)">' + label + " " + pill + '</span><span style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">' + desc + '</span></span>' +
         '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span></button>';
     }
+    var hybrid = hybridReady();
     return '<div class="ie-seg">' +
       '<div role="radiogroup" aria-label="Image engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
-      opt("device", "Private Device OCR", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>', "Uses Apple Vision on iPhone/iPad and ML Kit on Android. Image stays on this device.", true) +
+      opt("device", hybrid ? "Hybrid" : "Private Device OCR", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>',
+        hybrid ? "Reads the image on this device, then double-checks any uncertain value before filling it in. The safest option." : "Uses Apple Vision on iPhone/iPad and ML Kit on Android. Image stays on this device.", true) +
       opt("ai", "AI Vision", '<span style="font:700 9px/1 var(--sans,system-ui);background:#fef3c7;color:#92400e;border-radius:5px;padding:2px 5px;vertical-align:middle">Pro</span>', "Uses secure cloud AI for better monitor and ventilator screen interpretation.", false) +
       (localVisionReady()
         ? opt("local", "On-device AI", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>', "Your offline alternative to AI Vision. The downloaded model reads the image on this phone. Slower, and it can be wrong.", false)
         : "") +
       '</div>' +
+      (skipChooser() ? '<button class="smd-nav-btn" data-ie-ask="1" style="text-align:left">Ask which engine to use every time</button>' : "") +
       '<button class="smd-nav-btn" data-ie-privacy="1" style="text-align:left">🔒 Privacy &amp; processing</button>' +
       '</div>';
   }
@@ -601,6 +635,12 @@
       });
     });
     root.querySelectorAll("[data-ie-privacy]").forEach(function (b) { b.addEventListener("click", openPrivacyModal); });
+    root.querySelectorAll("[data-ie-ask]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        setSkipChooser(false);
+        var host = b.closest(".ie-seg"); if (host) { host.outerHTML = settingsHTML(); var newHost = root.querySelector(".ie-seg") || document.querySelector(".ie-seg"); wireSettings(newHost && newHost.parentNode ? newHost.parentNode : root); }
+      });
+    });
   }
 
   function openPrivacyModal() {
@@ -625,6 +665,7 @@
     isPro: isPro, recommendFor: recommendFor, aiAvailable: aiAvailable, deviceOcrAvailable: deviceOcrAvailable,
     ensureCloudConsent: ensureCloudConsent, getConsent: getConsent, setConsent: setConsent,
     process: process, settingsHTML: settingsHTML, wireSettings: wireSettings, openPrivacyModal: openPrivacyModal,
-    KEY_ENGINE: KEY_ENGINE, KEY_CONSENT: KEY_CONSENT
+    hybridReady: hybridReady, skipChooser: skipChooser, setSkipChooser: setSkipChooser,
+    KEY_ENGINE: KEY_ENGINE, KEY_CONSENT: KEY_CONSENT, KEY_SKIP: KEY_SKIP
   };
 })();
