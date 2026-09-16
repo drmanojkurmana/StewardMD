@@ -2886,9 +2886,173 @@
   function tpaPayerSelect(id, payers) {
     return '<select id="' + id + "\"><option value=\"\">" + wTH("ward.no-payer", "No payer") + "</option>" + (payers || []).map(function (p) {
       return '<option value="' + esc(p.id) + '">' + esc(p.name) + " &middot; " + esc(p.adapter) +
-        (p.adapter === "fhir-claim" && !p.endpointConfigured ? " (" + wTH("ward.no-endpoint", "no endpoint)") : "") + "</option>";
+        (p.adapter === "fhir-claim" && !p.endpointConfigured ? " (" + wTH("ward.no-endpoint", "no endpoint)") : "") +
+        (p.adapter === "nhcx" && !p.nhcxConnected ? " (" + wTH("ward.nhcx-not-connected-option", "not connected)") : "") + "</option>";
     }).join("") + "</select>";
   }
+  /* NHCX (functions/_wardsynq/nhcx.js), gap-claims-gst A. A request the gateway accepted is "sent"; only the payer's
+   * verified answer is "answered". With no connected NHCX payer the screen says so and offers nothing to send. */
+  var NHCX_OUTCOME_WORDS = { queued: "queued by the payer", complete: "complete", partial: "partly processed", error: "error" };
+  var NHCX_ELIG_WORDS = { sent: "sent, no answer yet", answered: "answered", failed: "failed" };
+  function nhcxPayers(payers) { return (payers || []).filter(function (p) { return p.adapter === "nhcx" && p.nhcxConnected; }); }
+  function nhcxExchangeLine(kind, rec, payers) {
+    var a = rec.adapter, p = null;
+    for (var i = 0; i < (payers || []).length; i++) if (payers[i].id === rec.payerId) p = payers[i];
+    if (!p || p.adapter !== "nhcx") return "";
+    var word;
+    if (!a || !a.exchange) word = p.nhcxConnected ? wTH("ward.nhcx-not-sent", "not sent through NHCX") : wTH("ward.nhcx-not-connected-short", "not connected, nothing sent");
+    else if (a.state === "acknowledged") word = wTH("ward.nhcx-answered", "answered by the payer") + (a.outcome ? " (" + esc(wTEn(NHCX_OUTCOME_WORDS[a.outcome]) || a.outcome) + ")" : "");
+    else if (a.state === "failed") word = wTH("ward.nhcx-failed", "failed");
+    else word = wTH("ward.nhcx-sent", "sent to the gateway, no answer yet");
+    var checks = rec.statusChecks || [], last = checks[checks.length - 1];
+    return '<div class="w-dt-times">' + wTH("ward.nhcx-exchange", "NHCX:") + " " + word +
+      (last ? " &middot; " + wTH("ward.nhcx-status-asked", "status asked {at}", { at: when(last.at) }) : "") +
+      (a && a.exchange && p.nhcxConnected ? ' <button class="w-btn ghost sm" data-w-act="hcxstatus:' + kind + ":" + esc(rec.id) + '">' + ms("sync") + wTH("ward.nhcx-check-status", "Check status") + "</button>" : "") + "</div>";
+  }
+  function nhcxEligibilitySection(t) {
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.nhcx-eligibility", "NHCX eligibility") + "</h4>";
+    var conn = nhcxPayers(t.payers);
+    if (!conn.length) return h + '<p class="w-hint">' + ms("link_off") + wTH("ward.nhcx-not-connected", "Not connected to NHCX. Nothing is sent through NHCX until an administrator sets up an NHCX payer under Admin, Integrations.") + "</p></div>";
+    var rows = (t.eligibilityChecks || []).map(function (e) {
+      var r = e.response;
+      return '<li class="w-mini-row"><div><span class="w-st ' + esc(e.state) + '">' + esc(wTEn(NHCX_ELIG_WORDS[e.state]) || e.state) + "</span> <b>" + esc(tpaPayerName(t.payers, e.payerId)) + "</b> &middot; " + when(e.at) +
+        (r ? "<div class=\"w-dt-times\">" + (r.inforce === true ? wTH("ward.nhcx-inforce-yes", "Policy in force") : r.inforce === false ? wTH("ward.nhcx-inforce-no", "Policy not in force") : wTH("ward.nhcx-inforce-unknown", "The payer did not say whether the policy is in force")) +
+          (r.outcome ? " &middot; " + esc(wTEn(NHCX_OUTCOME_WORDS[r.outcome]) || r.outcome) : "") + (r.disposition ? " &middot; " + esc(r.disposition) : "") + "</div>" +
+          ((r.benefits || []).length ? '<div class="w-dt-times">' + r.benefits.map(function (b) { return esc(b.type) + (b.allowed != null ? " " + esc(b.allowed) : "") + (b.used != null ? " (" + wTH("ward.nhcx-used", "used {used}", { used: esc(b.used) }) + ")" : ""); }).join("; ") + "</div>" : "") +
+          ((r.errors || []).length ? '<div class="w-warn">' + r.errors.map(function (x) { return esc(x); }).join("; ") + "</div>" : "") : "") +
+        (e.adapter && e.adapter.note && e.state !== "answered" ? '<div class="w-dt-times">' + esc(e.adapter.note) + "</div>" : "") +
+        nhcxExchangeLine("eligibility", e, t.payers) + "</div></li>";
+    }).join("");
+    return h + (t.eligibilityChecks === null ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.nhcx-eligibility-unreadable", "Eligibility checks could not be read. This is not the same as there being none.", null, "", 1) + "</p>"
+        : rows ? "<ul class=\"w-mini\">" + rows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.nhcx-no-eligibility", "No eligibility check has been sent for this patient.") + "</p>") +
+      '<select id="wNhcxPayer">' + conn.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + "</option>"; }).join("") + "</select>" +
+      "<input id=\"wNhcxPolicy\" placeholder=\"" + wTA("ward.nhcx-policy-number", "Policy number") + "\">" +
+      '<button class="w-btn" data-w-act="nhcxelig">' + ms("verified_user") + wTH("ward.nhcx-check-eligibility", "Check eligibility") + "</button></div>";
+  }
+  /* PACKAGE BILLING ON A STAY (gap-claims-gst-2, functions/_wardsynq/packages.js). st.tpaPkg: null = loading, false =
+   * could not be read (never shown as no package), else { assignments, stays, packages }. A scheme portal is never
+   * reached: the document pack is for a person to upload, and says so. */
+  function pkgPreauthWord(s) {
+    if (s === "missing") return wT("ward.pkg-preauth-missing", "none linked");
+    if (s === "not_required") return wT("ward.pkg-preauth-not-required", "not required");
+    if (s === "unreadable") return wT("ward.pkg-preauth-unreadable", "could not be read");
+    if (s === "not_found") return wT("ward.pkg-preauth-not-found", "linked record not found");
+    return preauthStateWord(s);
+  }
+  function pkgSchemeWord(s) {
+    var words = { pmjay: wT("ward.pkg-scheme-pmjay", "PM-JAY (Ayushman Bharat)"), state: wT("ward.pkg-scheme-state", "State scheme"), cghs: wT("ward.pkg-scheme-cghs", "CGHS"),
+      echs: wT("ward.pkg-scheme-echs", "ECHS"), insurer: wT("ward.pkg-scheme-insurer", "Private insurer"), hospital: wT("ward.pkg-scheme-hospital", "Hospital package") };
+    return HAS(words, s) ? words[s] : s;
+  }
+  /* PURE. The flags a cashier or TPA desk must see on a package stay, as warnings. */
+  function pkgFlagsHtml(f) {
+    if (!f) return "";
+    return (f.losExceeded ? '<div class="w-warn">' + ms("schedule") + wTH("ward.pkg-los-exceeded", "Length of stay exceeded: day {days}, the package expects {expected}.", { days: esc(f.stayDays), expected: esc(f.expectedLosDays) }, "days expected") + "</div>" : "") +
+      (f.preAuthProblem ? '<div class="w-warn">' + ms("fact_check") + wTH("ward.pkg-preauth-problem", "This package needs an approved pre-authorisation: {state}.", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" : "");
+  }
+  function packageSection(state) {
+    var p = state.tpaPkg, t = state.tpa || {};
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.pkg-title", "Package billing") + "</h4>";
+    if (p === null || p === undefined) return h + '<p class="w-empty">' + wTH("ward.pkg-loading", "Loading packages&hellip;") + "</p></div>";
+    if (p === false) return h + '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-unreadable", "Packages could not be read. This is not the same as this stay having none.", null, "", 1) + "</p></div>";
+    var rows = (p.assignments || []).map(function (a) {
+      var k = a.package || {}, f = a.flags || {}, sp = a.split;
+      var list = function (items) { return items.map(function (x) { return esc(x.display) + (x.line != null ? " " + esc(x.line) : ""); }).join(", "); };
+      return '<li class="w-mini-row"><div><b>' + esc(k.code) + "</b> " + esc(k.name) + " &middot; " + esc(pkgSchemeWord(k.scheme)) + (k.schemeName ? " (" + esc(k.schemeName) + ")" : "") +
+        '<div class="w-dt-times">' + wTH("ward.pkg-rate-line", "Rate {rate} &middot; version {version} &middot; stay {encounter}", { rate: esc(k.rate), version: esc(k.version), encounter: esc(a.encounterId) }, "rate version encounter") +
+        (a.beneficiaryId ? " &middot; " + wTH("ward.pkg-beneficiary", "beneficiary ID {id}", { id: esc(a.beneficiaryId) }, "id") : "") + "</div>" +
+        '<div class="w-dt-times">' + (f.stayDays == null ? wTH("ward.pkg-days-unknown", "Days in hospital not known here") : wTH("ward.pkg-days", "Day {days} of {expected} expected", { days: esc(f.stayDays), expected: esc(f.expectedLosDays == null ? "-" : f.expectedLosDays) }, "days expected")) +
+        " &middot; " + wTH("ward.pkg-preauth", "pre-authorisation: {state}", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" +
+        pkgFlagsHtml(f) +
+        (sp === false ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-split-unreadable", "The stay's charges could not be read, so what is billed on top is not known.", null, "", 1) + "</p>"
+          : sp ? '<div class="w-dt-times">' + wTH("ward.pkg-counts", "Charges so far: {included} covered, {excluded} excluded, {outside} not listed", { included: esc(sp.counts.included), excluded: esc(sp.counts.excluded), outside: esc(sp.counts.outside) }, "included excluded outside") + "</div>" +
+            (sp.excluded.length ? '<div class="w-dt-times">' + wTH("ward.pkg-excluded-billed", "Excluded, billed on top:") + " " + list(sp.excluded) + "</div>" : "") +
+            (sp.outside.length ? '<div class="w-warn">' + wTH("ward.pkg-outside-billed", "Not listed by the package, billed; check against the scheme:") + " " + list(sp.outside) + "</div>" : "") +
+            (sp.unpriced.length ? '<div class="w-warn">' + wTH("ward.pkg-unpriced", "Not covered and not priced:") + " " + list(sp.unpriced) + "</div>" : "") : "") +
+        (f.manualPortal ? '<p class="w-hint">' + ms("info") + wTH("ward.pkg-manual-portal", "Not connected to the scheme's portal. Nothing is sent from here; use the document pack to submit by hand.") + "</p>" : "") +
+        '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="pkgpack:' + esc(a.encounterId) + '">' + ms("folder_open") + wTH("ward.pkg-pack", "Document pack (manual submission)") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="pkgset:' + esc(a.encounterId) + '">' + ms("edit") + wTH("ward.pkg-change", "Change") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="pkgremove:' + esc(a.encounterId) + '">' + ms("remove") + wTH("ward.pkg-remove", "Remove") + "</button></div></li>";
+    }).join("");
+    var canAttach = (p.stays || []).length && (p.packages || []).some(function (x) { return x.active; });
+    return h + (p.staysUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-stays-unreadable", "The stays could not be read here, so days in hospital are not shown.", null, "", 1) + "</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.pkg-none", "No stay of this patient is on a package.") + "</p>") +
+      (canAttach ? '<button class="w-btn" data-w-act="pkgset">' + ms("inventory_2") + wTH("ward.pkg-attach", "Put a stay on a package") + "</button>"
+        : '<p class="w-hint">' + ms("info") + wTH("ward.pkg-cannot-attach", "A package needs an inpatient stay and a package set up by an administrator under Admin, Price list.") + "</p>") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.pkg-how-billed", "The bill carries the package rate and what the package excludes. Charges it covers show at zero.") + "</p></div>";
+  }
+  function loadTpaPackages() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.tpaPkg = null;
+    Promise.all([apiGet("/ward/stay-packages?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId)), apiGet("/ward/packages?orgId=" + encodeURIComponent(st.orgId))])
+      .then(function (both) { st.tpaPkg = both[0] && both[0].ok && both[1] && both[1].ok ? { assignments: both[0].assignments || [], stays: both[0].stays || [], staysUnreadable: !!both[0].staysUnreadable, packages: both[1].packages || [] } : false; paint(); })
+      .catch(function () { st.tpaPkg = false; paint(); });
+  }
+  function pkgWrite(body) {
+    st.busy = true; paint();
+    return apiPost("/ward/stay-package", body)
+      .then(function (r) { if (settle(r, wT("ward.pkg-saved", "Recorded."))) { loadTpaPackages(); return; } paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.pkg-not-saved", "Could not reach the server. The package may not have changed; reload to check."); paint(); });
+  }
+  function pkgSetAction(encounterId) {
+    var p = st.tpaPkg; if (!p || !st.sel) return;
+    var cur = encounterId ? (p.assignments || []).filter(function (a) { return a.encounterId === encounterId; })[0] : null;
+    var stays = (p.stays || []).map(function (s) { return [s.id, esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + (s.status === "in-progress" ? " (" + wTH("ward.pkg-stay-open", "in hospital") + ")" : "")]; });
+    var pkgs = (p.packages || []).filter(function (x) { return x.active; }).map(function (x) { return [x.id, esc(x.code) + " &middot; " + esc(x.name) + " &middot; " + esc(pkgSchemeWord(x.scheme)) + " &middot; " + esc(x.rate)]; });
+    var auths = [["", wTH("ward.pkg-no-preauth", "No pre-authorisation")]].concat(((st.tpa && st.tpa.preAuthorisations) || []).map(function (a) { return [a.id, esc(a.treatment) + " &middot; " + esc(preauthStateWord(a.state))]; }));
+    askFor({ icon: "inventory_2", ok: wTH("ward.pkg-save", "Save"), title: cur ? wTH("ward.pkg-change-title", "Change the package on this stay") : wTH("ward.pkg-attach-title", "Put a stay on a package"),
+      text: wTH("ward.pkg-attach-text", "The stay keeps the package version chosen now, even if the price list changes later. A stay that already has an itemised bill cannot be put on a package."),
+      fields: [
+        { key: "encounterId", type: "select", label: wTH("ward.pkg-stay", "Stay"), options: stays, value: encounterId || (stays[0] && stays[0][0]) || "" },
+        { key: "packageId", type: "select", label: wTH("ward.pkg-package", "Package"), options: pkgs, value: cur ? cur.package.id : (pkgs[0] && pkgs[0][0]) || "" },
+        { key: "preAuthId", type: "select", label: wTH("ward.pkg-preauth-link", "Pre-authorisation"), options: auths, value: cur ? cur.preAuthId || "" : "" },
+        { key: "beneficiaryId", label: wTH("ward.pkg-beneficiary-id", "Scheme beneficiary ID (card or ID number)"), value: cur ? cur.beneficiaryId || "" : "" },
+      ].concat(cur ? [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.pkg-reason-required", "Say why the package is changing.") }] : []) }, function (v) {
+      var existing = (p.assignments || []).filter(function (a) { return a.encounterId === v.encounterId; })[0];
+      return pkgWrite({ orgId: st.orgId, patientId: st.sel.patientId, encounterId: v.encounterId, packageId: v.packageId, preAuthId: v.preAuthId || undefined,
+        beneficiaryId: v.beneficiaryId || undefined, reason: v.reason || undefined, expectedVersion: existing ? existing.version : undefined });
+    });
+  }
+  function pkgRemoveAction(encounterId) {
+    var p = st.tpaPkg; if (!p || !st.sel) return;
+    var cur = (p.assignments || []).filter(function (a) { return a.encounterId === encounterId; })[0]; if (!cur) return;
+    askFor({ icon: "remove", danger: true, ok: wTH("ward.pkg-remove", "Remove"), title: wTH("ward.pkg-remove-title", "Remove {code} from this stay?", { code: esc(cur.package.code) }, "code"),
+      text: wTH("ward.pkg-remove-text", "The stay is then billed item by item. A package already on a bill cannot be removed; raise a note on that bill instead."),
+      fields: [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.pkg-remove-reason-required", "Say why the package is being removed.") }] }, function (v) {
+      return pkgWrite({ orgId: st.orgId, patientId: st.sel.patientId, encounterId: encounterId, remove: true, reason: v.reason, expectedVersion: cur.version });
+    });
+  }
+  /* THE MANUAL SUBMISSION PACK, printed. Opened at once (a window opened after a wait is blocked as a popup) and filled
+   * when the server answers; a failure is said in that window and on the ward, never a blank pack. */
+  function pkgPackAction(encounterId) {
+    if (!st.sel) return;
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    if (!win) { st.err = wT("ward.could-not-open-a-print-window", "Could not open a print window. Allow pop-ups for this site."); paint(); return; }
+    var write = function (html) { try { win.document.open(); win.document.write(html); win.document.close(); } catch (e) {} };
+    write("<p>" + wTH("ward.pkg-pack-loading", "Preparing the document pack&hellip;") + "</p>");
+    apiGet("/ward/package-pack?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId) + "&encounterId=" + encodeURIComponent(encounterId))
+      .then(function (r) {
+        if (!r || !r.ok || !r.pack) {
+          write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>");
+          st.err = wT("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere."); paint(); return;
+        }
+        var k = r.pack;
+        var checkWord = function (s) { return s === "done" ? wTH("ward.pkg-check-done", "done") : s === "not_done" ? wTH("ward.pkg-check-not-done", "not done") : wTH("ward.pkg-check-by-hand", "check by hand"); };
+        var docs = function (list) { return list.length ? "<ul>" + list.map(function (d) { return "<li>&#9744; " + esc(d) + "</li>"; }).join("") + "</ul>" : "<p>" + wTH("ward.pkg-pack-no-docs", "No documents are listed on this package. Add the scheme's mandatory documents for it under Admin, Price list, Packages.") + "</p>"; };
+        write("<title>" + esc(k.package.code) + "</title><body style=\"font-family:sans-serif\">" +
+          "<h2>" + wTH("ward.pkg-pack-title", "Manual submission pack: {code}", { code: esc(k.package.code) }, "code") + "</h2>" +
+          "<p><b>" + wTH("ward.pkg-pack-notice", "Not connected to the scheme's portal. Nothing in this pack has been sent or submitted. A person uploads it on the portal and records the portal's reference on the pre-authorisation.") + "</b></p>" +
+          "<p>" + esc(k.package.name) + " &middot; " + esc(pkgSchemeWord(k.scheme)) + (k.schemeName ? " (" + esc(k.schemeName) + ")" : "") + " &middot; " + wTH("ward.pkg-rate-version", "Rate {rate}, version {version}", { rate: esc(k.package.rate), version: esc(k.package.version) }, "rate version") + "</p>" +
+          "<h3>" + wTH("ward.pkg-pack-checklist", "Checklist") + "</h3><ul>" + k.checklist.map(function (c) { return "<li>" + esc(c.text) + ": <b>" + checkWord(c.state) + "</b></li>"; }).join("") + "</ul>" +
+          "<h3>" + wTH("ward.pkg-pack-preauth-docs", "Documents for pre-authorisation") + "</h3>" + docs(k.preAuthDocuments) +
+          "<h3>" + wTH("ward.pkg-pack-claim-docs", "Documents for the claim") + "</h3>" + docs(k.claimDocuments) +
+          "<h3>" + wTH("ward.pkg-pack-fields", "Fields to copy into the portal") + "</h3><p>" + wTH("ward.pkg-pack-fields-note", "Field names on the portal may differ. An empty value is not known here.") + "</p>" +
+          '<table border="1" cellspacing="0" cellpadding="4">' + k.fields.map(function (f) { return "<tr><td>" + esc(f.section) + "</td><td>" + esc(f.label) + "</td><td>" + esc(f.value == null ? "" : f.value) + "</td></tr>"; }).join("") + "</table></body>");
+        try { win.focus(); } catch (e) {}
+      })
+      .catch(function () { write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>"); });
+  }
+
   function tpaView(state) {
     if (!state.tpa) return "<div class=\"w-card\"><h3>" + wTH("ward.tpa-claims", "TPA / Claims") + "</h3><p class=\"w-empty\">" + wTH("ward.loading-claims", "Loading claims&hellip;") + "</p></div>";
     var t = state.tpa;
@@ -2925,6 +3089,7 @@
         // submission is queued for the hospital's own process, never shown as sent to anyone.
         "<div class=\"w-dt-times\">" + wTH("ward.payer", "payer: {tpaPayerName}", { tpaPayerName: esc(tpaPayerName(t.payers, c.payerId)) }, "tpaPayerName") + (c.payerReference ? " &middot; " + wTH("ward.payer-ref", "payer ref {payerReference}", { payerReference: esc(c.payerReference) }, "payerReference") : "") + "</div>" +
         (c.adapter ? "<div class=\"w-dt-times\">" + wTH("ward.payer-channel", "payer channel: {TPA_CHANNEL_WORDS}", { TPA_CHANNEL_WORDS: esc(wTEn(TPA_CHANNEL_WORDS[c.adapter.state]) || c.adapter.state) }, "") + (c.adapter.note ? " - " + esc(c.adapter.note) : "") + "</div>" : "") +
+        nhcxExchangeLine("claim", c, t.payers) +
         (resubs.length ? "<div class=\"w-dt-times\">" + (resubs.length > 1 ? wTH("ward.resubmitted-times", "resubmitted {length} times:", { length: resubs.length }, "length") : wTH("ward.resubmitted-time-once", "resubmitted {length} time:", { length: resubs.length }, "length")) + " " + resubs.map(function (x) { return x.reason ? esc(x.reason) : wTH("ward.no-reason-recorded", "no reason recorded"); }).join("; ") + "</div>" : "") +
         (stl ? "<div class=\"w-dt-times\">" + wTH("ward.settled-paid-balance-with", "settled: paid {paidAmount}{v}{v2}{v3}{v4} &middot; balance with {balanceWith}", { paidAmount: esc(stl.paidAmount), v: (stl.approvedAmount != null ? " " + wTH("ward.of-approved2", "of {approvedAmount} approved", { approvedAmount: esc(stl.approvedAmount) }, "approvedAmount") : " (" + wTH("ward.approved-amount-not-recorded", "approved amount not recorded)")), v2: (stl.shortPaidAmount ? " &middot; " + wTH("ward.short", "short {shortPaidAmount}: {shortPaymentReason}", { shortPaidAmount: esc(stl.shortPaidAmount), shortPaymentReason: esc(stl.shortPaymentReason) }, "shortPaidAmount shortPaymentReason") : ""), v3: (stl.disallowances && stl.disallowances.length ? " &middot; " + wTH("ward.disallowed", "disallowed:") + " " + stl.disallowances.map(function (d) { return esc(d.reason) + (d.amount != null ? " (" + esc(d.amount) + ")" : ""); }).join("; ") : ""), v4: (stl.outstandingAmount != null ? " &middot; " + wTH("ward.outstanding3", "outstanding {outstandingAmount}", { outstandingAmount: esc(stl.outstandingAmount) }, "outstandingAmount") : " &middot; " + wTH("ward.outstanding-unknown", "outstanding unknown")), balanceWith: esc(stl.balanceWith) }, "paidAmount balanceWith") + (stl.patientBalance ? " (" + esc(stl.patientBalance.amount) + ": " + esc(stl.patientBalance.reason) + ")" : "") + "</div>" : "") +
         (warns.length ? warns.map(function (w) { return '<div class="w-warn">' + esc(w) + "</div>"; }).join("") : "") +
@@ -2936,6 +3101,7 @@
         (a.authorizedAmount != null ? " &middot; " + esc(a.authorizedAmount) : "") +
         (a.reason ? " &middot; " + esc(a.reason) : "") +
         (a.payerId ? "<div class=\"w-dt-times\">" + wTH("ward.payer", "payer: {tpaPayerName}", { tpaPayerName: esc(tpaPayerName(t.payers, a.payerId)) }, "tpaPayerName") + (a.adapter ? " &middot; " + esc(wTEn(TPA_CHANNEL_WORDS[a.adapter.state]) || a.adapter.state) + (a.adapter.note ? " - " + esc(a.adapter.note) : "") : "") + "</div>" : "") +
+        nhcxExchangeLine("preauth", a, t.payers) +
         '<div class="w-dt-times">' + esc(a.note || "") + "</div></div></li>";
     }).join("");
     var estRows = (t.estimates || []).map(function (e) {
@@ -2948,6 +3114,7 @@
     return '<div class="w-card">' +
       "<div class=\"w-dt-bar w-noprint\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
       "<h3>" + wTH("ward.tpa-claims", "TPA / Claims") + "</h3><button class=\"w-btn ghost\" data-w-act=\"tpaopen\">" + ms("refresh") + wTH("ward.refresh", "Refresh") + "</button></div>" +
+      nhcxEligibilitySection(t) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.claims", "Claims") + "</h4>" +
       (claimRows ? "<ul class=\"w-mini\">" + claimRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-claim-has-been-coded-for", "No claim has been coded for this patient.") + "</p>") +
       "<input id=\"wTpaCodes\" placeholder=\"" + wTA("ward.codes-to-claim-comma-separated", "Codes to claim, comma-separated") + "\">" +
@@ -2963,7 +3130,10 @@
       "<input id=\"wTpaAuthAmount\" placeholder=\"" + wTA("ward.authorized-amount-if-approved", "Authorized amount (if approved)") + "\">" +
       tpaPayerSelect("wTpaAuthPayer", t.payers) +
       "<input id=\"wTpaAuthRequested\" placeholder=\"" + wTA("ward.requested-amount-sent-with-a-requested", "Requested amount (sent with a requested pre-auth)") + "\">" +
+      "<input id=\"wTpaAuthCodes\" placeholder=\"" + wTA("ward.nhcx-preauth-codes", "Diagnosis codes on the problem list, comma-separated (NHCX needs them)") + "\">" +
+      "<input id=\"wTpaAuthPolicy\" placeholder=\"" + wTA("ward.nhcx-preauth-policy", "Policy number (NHCX needs it)") + "\">" +
       '<button class="w-btn" data-w-act="preauth">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
+      packageSection(state) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.estimates", "Estimates") + "</h4>" +
       (t.estimatesUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.estimates-could-not-be-read", "Estimates could not be read.", null, "", 1) + "</p>"
         : estRows ? "<ul class=\"w-mini\">" + estRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-estimate-has-been-prepared-for", "No estimate has been prepared for this patient.") + "</p>") +
@@ -5710,7 +5880,52 @@
    * is invented; if a hospital wants a threshold-based sign-off, that is a real policy decision for
    * a later, explicitly-scoped task, not assumed here. */
   var INVOICE_STATUS_WORDS = { open: "Open", paid: "Paid", void: "Void" };
-  var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided" };
+  var EVENT_KIND_WORDS = { raised: "Invoice raised", discount: "Discount", deposit: "Deposit", payment: "Payment", refund: "Refund", adjustment: "Adjustment", write_off: "Write-off", void: "Voided",
+    credit_note: "Credit note", debit_note: "Debit note", buyer_details: "Buyer details", irn_generated: "IRN generated", irn_cancelled: "IRN cancelled" };
+  /* GST ON THE BILL (gap-claims-gst B). Each line says its HSN/SAC, taxable value and GST, split into CGST and SGST
+   * within the state or IGST across states as the server computed it; an exempt line says exempt, and a line the law
+   * does not settle with no rate says so rather than showing nothing. Notes show their own number, reason and GST. */
+  function cashGstText(l) {
+    if (!l || l.taxKind !== "GST") return "";
+    if (l.taxExempt) return wTH("ward.gst-exempt", "GST exempt");
+    if (l.igst) return wTH("ward.gst-igst", "GST {rate}% &middot; IGST {igst}", { rate: esc(l.taxRate), igst: esc(l.igst) }, "rate igst");
+    return wTH("ward.gst-cgst-sgst", "GST {rate}% &middot; CGST {cgst} &middot; SGST {sgst}", { rate: esc(l.taxRate), cgst: esc(l.cgst), sgst: esc(l.sgst) }, "rate cgst sgst");
+  }
+  /* Package billing: what each line is to the stay's package (functions/_wardsynq/packages.js). */
+  function cashPackageWord(l) {
+    if (!l || !l.packageCode) return "";
+    var w = l.packageLine ? wTH("ward.pkg-line-rate", "package rate")
+      : l.packageIncluded ? wTH("ward.pkg-line-included", "included in the package")
+      : l.packageExcluded ? wTH("ward.pkg-line-excluded", "excluded from the package, billed")
+      : l.packageOutside ? wTH("ward.pkg-line-outside", "not listed by the package, billed; check") : "";
+    return w ? " &middot; <b>" + w + "</b>" : "";
+  }
+  function cashLineHtml(l, taxable) {
+    return "<li>" + esc(l.display || l.code) + cashPackageWord(l) + " &middot; " + (l.hsnSac ? wTH("ward.hsn-sac", "HSN/SAC {code}", { code: esc(l.hsnSac) }, "code") : wTH("ward.no-hsn-sac", "no HSN/SAC")) +
+      " &middot; " + wTH("ward.taxable-value", "taxable {value}", { value: esc(taxable) }, "value") +
+      (l.taxKind === "GST" ? " &middot; " + cashGstText(l) : " &middot; " + wTH("ward.no-gst-rate-set", "no GST rate set")) + "</li>";
+  }
+  /* E-INVOICING, SAID PLAINLY. null = still asking, false = could not be read; never read as "not reported". A bill
+   * to a patient (no buyer GSTIN) is never sent. */
+  function cashEinvHtml(e, inv) {
+    if (e === undefined) return "";
+    if (e === null) return '<p class="w-hint">' + wTH("ward.checking-e-invoicing", "Checking e-invoicing...") + "</p>";
+    if (e === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.e-invoicing-status-could-not-be-read", "E-invoicing status could not be read. Do not read this bill as reported or not reported.", null, "", 1) + "</p>";
+    if (e.state === "not_connected") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-is-not-connected", "E-invoicing is not connected. Nothing on this bill is reported.") + "</p>";
+    if (e.state === "not_enabled") return '<p class="w-hint">' + ms("info") + wTH("ward.e-invoicing-not-enabled", "E-invoicing is not enabled for this hospital. Nothing on this bill is reported.") + "</p>";
+    var b2b = inv.buyer && inv.buyer.gstin;
+    var regs = (inv.einvoices || []).map(function (x) {
+      return '<li><b>' + esc(x.docNumber) + "</b> " + wTH("ward.irn-value", "IRN {irn}", { irn: esc(x.irn) }, "irn") + " &middot; " + wTH("ward.ack-value", "Ack {ackNo} {ackDt}", { ackNo: esc(x.ackNo || ""), ackDt: esc(x.ackDt || "") }, "ackNo ackDt") +
+        " &middot; " + (x.status === "ACT" ? wTH("ward.irn-active", "active") + ' <button class="w-btn tiny ghost" data-w-act="invirncancel:' + esc(inv.invoiceId) + "~" + esc(x.docNumber) + '">' + ms("cancel") + wTH("ward.cancel-irn", "Cancel IRN") + "</button>" : wTH("ward.irn-cancelled", "cancelled")) + "</li>";
+    }).join("");
+    if (!b2b) return '<p class="w-hint">' + ms("info") + wTH("ward.b2c-not-reported", "B2C, not reported: this bill has no buyer GSTIN.") + "</p>" + (regs ? '<ul class="w-mini">' + regs + "</ul>" : "");
+    var active = function (no) { return (inv.einvoices || []).some(function (x) { return x.docNumber === no && x.status === "ACT"; }); };
+    var docs = [inv.documentNumber].concat((inv.events || []).filter(function (ev) { return ev.kind === "credit_note" || ev.kind === "debit_note"; }).map(function (ev) { return ev.noteNumber; }))
+      .filter(function (no) { return no && !active(no); });
+    return (regs ? '<ul class="w-mini">' + regs + "</ul>" : "") + (inv.status === "void" ? "" : docs.map(function (no) {
+      return '<button class="w-btn tiny ghost" data-w-act="invirn:' + esc(inv.invoiceId) + (no === inv.documentNumber ? "" : "~" + esc(no)) + '">' + ms("qr_code_2") + wTH("ward.report-for-e-invoice", "Get IRN for {doc}", { doc: esc(no) }, "doc") + "</button>";
+    }).join(""));
+  }
   /* WHAT HAS NOT BEEN BILLED YET, AND CLAIMS WORTH A SECOND LOOK.
    * Unbilled charges are the priced items no invoice has picked up; unpriced ones are shown too, because
    * an item with no price is not free, it is a gap in the price list. The coding watchlist lists claims
@@ -5757,8 +5972,11 @@
     var invoices = c.invoices || [];
     var invRows = invoices.map(function (inv) {
       var eventRows = (inv.events || []).map(function (ev) {
-        return "<li><b>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + "</b> " + esc(ev.amount) + " " + esc(inv.currency || "") +
-          '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; " + wTH("ward.ref", "ref {reference}", { reference: esc(ev.reference) }, "reference") : "") + "</span></li>";
+        var isNote = ev.kind === "credit_note" || ev.kind === "debit_note";
+        return "<li><b>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + (isNote ? " " + esc(ev.noteNumber) : "") + "</b> " + esc(ev.amount) + " " + esc(inv.currency || "") +
+          '<span>' + esc(when(ev.at)) + (ev.reason ? " &middot; " + esc(ev.reason) : "") + (ev.reference ? " &middot; " + wTH("ward.ref", "ref {reference}", { reference: esc(ev.reference) }, "reference") : "") + "</span>" +
+          (isNote ? '<ul class="w-mini">' + (ev.lines || []).map(function (l) { return cashLineHtml(l, l.taxable); }).join("") + "</ul>" +
+            (ev.gstReversalLate ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.gst-reversal-late", "Past the Section 34 time limit: the bill is reduced, but the GST cannot be reduced in the return.", null, "", 1) + "</p>" : "") : "") + "</li>";
       }).join("");
       var receiptRows = (inv.receipts || []).map(function (r) {
         // The payment-gateway adapter boundary, stated on the receipt itself: no live gateway exists
@@ -5775,7 +5993,13 @@
             (l.url ? ' &middot; <a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.url) + "</a>" : "") +
             (l.flag ? " &middot; " + esc(wTEn(PAY_FLAG_WORDS[l.flag.reason]) || l.flag.reason) : "") + "</p>";
         }).join("");
+      var lineRows = (inv.lines || []).map(function (l) { return cashLineHtml(l, l.taxable == null ? l.line : l.taxable); }).join("");
       return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(wTEn(INVOICE_STATUS_WORDS[inv.status]) || inv.status) + "</span></h4>" +
+        (inv.documentNumber ? "<p>" + wTH("ward.invoice-number", "Invoice number {no}", { no: esc(inv.documentNumber) }, "no") + "</p>" : "") +
+        (inv.package ? "<p>" + wTH("ward.pkg-invoice", "Package {code}: {name}, rate {rate}", { code: esc(inv.package.code), name: esc(inv.package.name), rate: esc(inv.package.rate) }, "code name rate") + "</p>" + pkgFlagsHtml(inv.package) : "") +
+        (lineRows ? '<ul class="w-mini">' + lineRows + "</ul>" : "") +
+        "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
+        cashEinvHtml(c.einvoice, inv) +
         "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + (inv.creditBalance ? " &middot; " + wTH("ward.credit", "Credit {creditBalance}", { creditBalance: esc(inv.creditBalance) }, "creditBalance") : "") + "</p>" +
         (eventRows ? '<ul class="w-mini">' + eventRows + "</ul>" : "") +
         (receiptRows ? "<h4>" + wTH("ward.receipts", "Receipts") + "</h4><ul class=\"w-mini\">" + receiptRows + "</ul>" : "") + links +
@@ -5788,7 +6012,11 @@
           '<button class="w-btn tiny ghost" data-w-act="invadjust:' + esc(inv.invoiceId) + '">' + ms("tune") + wTH("ward.adjustment", "Adjustment") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invwriteoff:' + esc(inv.invoiceId) + '">' + ms("remove_circle") + wTH("ward.write-off", "Write off") + "</button>" +
           '<button class="w-btn tiny ghost" data-w-act="invvoid:' + esc(inv.invoiceId) + '">' + ms("block") + wTH("ward.cancel-this-bill", "Cancel this bill") + "</button>" +
-          "</div>" : "") + "</div>";
+          '<button class="w-btn tiny ghost" data-w-act="invcredit:' + esc(inv.invoiceId) + '">' + ms("remove") + wTH("ward.credit-note", "Credit note") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invdebit:' + esc(inv.invoiceId) + '">' + ms("add") + wTH("ward.debit-note", "Debit note") + "</button>" +
+          '<button class="w-btn tiny ghost" data-w-act="invbuyer:' + esc(inv.invoiceId) + '">' + ms("business") + wTH("ward.buyer-details", "Buyer details (B2B)") + "</button>" +
+          "</div>" : "") +
+        '<div class="w-actions"><button class="w-btn tiny ghost" data-w-act="invprint:' + esc(inv.invoiceId) + '">' + ms("print") + wTH("ward.print-invoice", "Print invoice") + "</button></div>" + "</div>";
     }).join("");
 
     return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
@@ -9748,6 +9976,11 @@
     apiGet("/ward/upcoding?" + q)
       .then(function (r) { st.cashier.watch = r && r.ok ? r : { failed: true }; paint(); })
       .catch(function () { st.cashier.watch = { failed: true }; paint(); });
+    // E-invoicing at this hospital (gap-claims-gst B). null = asking, false = could not be read.
+    st.cashier.einvoice = null;
+    apiGet("/ward/einvoice-status?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.cashier.einvoice = r && r.ok ? { state: r.state } : false; paint(); })
+      .catch(function () { st.cashier.einvoice = false; paint(); });
     // Online payment links (owner S2). null = loading, false = could not be read: never "no links".
     st.cashier.payLinks = null;
     apiGet("/ward/payment-requests?" + q)
@@ -10767,6 +11000,113 @@
       (fu.err ? '<p class="w-hint warn" role="alert">' + ms("error") + esc(fu.err) + "</p>" : "") +
       '<div class="w-actions"><button class="w-btn go" data-w-act="followupsubmit"' + (state.busy ? " disabled" : "") + ">" + ms("schedule") + wTH("ward.request-follow-up", "Request follow-up") + "</button>" +
       '<button class="w-btn ghost" data-w-act="back">' + wTH("ward.cancel", "Cancel") + "</button></div></div>";
+  }
+
+  /* CREDIT AND DEBIT NOTES, BUYER DETAILS, E-INVOICE (gap-claims-gst B). Each asks on the ward (askFor), sends only
+   * what the cashier typed, and reloads the bills from the server; the server computes every amount of GST. */
+  function cashInvoice(invoiceId) { return ((st.cashier && st.cashier.invoices) || []).filter(function (i) { return i.invoiceId === invoiceId; })[0] || null; }
+  function cashWrite(path, body) {
+    st.busy = true; paint();
+    return apiPost(path, body)
+      .then(function (r) {
+        st.busy = false;
+        if (r && r.ok) { if (r.warning) st.note = r.warning; loadCashier(); return; }
+        st.err = (r && (r.message || r.detail || r.error)) || wT("ward.could-not-record-that", "Could not record that.");
+        paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-reach-the-server2", "Could not reach the server."); paint(); });
+  }
+  function invoiceNote(invoiceId, which) {
+    var inv = cashInvoice(invoiceId); if (!inv) return;
+    var credit = which === "credit";
+    askFor({ icon: credit ? "remove" : "add", ok: credit ? wTH("ward.record-credit-note", "Record credit note") : wTH("ward.record-debit-note", "Record debit note"),
+      title: credit ? wTH("ward.credit-note-title", "Credit note: take back part of this bill") : wTH("ward.debit-note-title", "Debit note: add to this bill"),
+      text: wTH("ward.note-text", "Enter the taxable amount for each line it applies to. GST follows each line's own rate. The note gets its own number and the bill's lines are never changed."),
+      fields: [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.a-note-needs-a-reason", "A note needs a reason.") }].concat((inv.lines || []).map(function (l, i) {
+        return { key: "l" + i, label: wTH("ward.note-line-amount", "{item}: taxable amount", { item: esc(l.display || l.code) }, "item") };
+      })) }, function (v) {
+      var lines = (inv.lines || []).map(function (l, i) { return { lineIndex: i, taxable: Number(v["l" + i]) }; }).filter(function (x) { return x.taxable > 0; });
+      if (!lines.length) { st.err = wT("ward.enter-an-amount-on-at-least-one-line", "Enter an amount on at least one line."); return null; }
+      return cashWrite(credit ? "/ward/invoice-credit-note" : "/ward/invoice-debit-note", { orgId: st.orgId, invoiceId: invoiceId, reason: v.reason, lines: lines });
+    });
+  }
+  function invoiceBuyer(invoiceId) {
+    var inv = cashInvoice(invoiceId); if (!inv) return;
+    var b = inv.buyer || {};
+    askFor({ icon: "business", ok: wTH("ward.save", "Save"), title: wTH("ward.buyer-details-title", "Buyer details for a B2B tax invoice"),
+      text: wTH("ward.buyer-details-text", "For a company, insurer or other GST-registered buyer. Leave the GSTIN empty for a bill to the patient."),
+      fields: [
+        { key: "gstin", label: wTH("ward.buyer-gstin", "Buyer GSTIN"), value: b.gstin || "" },
+        { key: "legalName", label: wTH("ward.buyer-legal-name", "Legal name"), value: b.legalName || "" },
+        { key: "address1", label: wTH("ward.buyer-address", "Address"), value: b.address1 || "" },
+        { key: "location", label: wTH("ward.buyer-place", "Place"), value: b.location || "" },
+        { key: "pincode", label: wTH("ward.buyer-pincode", "PIN code"), value: b.pincode || "" },
+        { key: "stateCode", label: wTH("ward.buyer-state-code", "State code (2 digits)"), value: b.stateCode || "" },
+        { key: "pos", label: wTH("ward.buyer-place-of-supply", "Place of supply (state code)"), value: b.pos || "" },
+      ] }, function (v) {
+      return cashWrite("/ward/invoice-buyer", { orgId: st.orgId, invoiceId: invoiceId, buyer: v.gstin ? v : null });
+    });
+  }
+  function invoiceIrn(arg) {
+    var p = String(arg || "").split("~");
+    askFor({ icon: "qr_code_2", ok: wTH("ward.get-irn", "Get IRN"), title: wTH("ward.get-irn-title", "Report this document to the e-invoice portal?"),
+      text: wTH("ward.get-irn-text", "Only taxed lines are reported. The IRN can be cancelled within 24 hours; after that, raise a credit note.") }, function () {
+      return cashWrite("/ward/invoice-irn", { orgId: st.orgId, invoiceId: p[0], noteNumber: p[1] || undefined });
+    });
+  }
+  function invoiceIrnCancel(arg) {
+    var p = String(arg || "").split("~");
+    var inv = cashInvoice(p[0]);
+    askFor({ icon: "cancel", danger: true, ok: wTH("ward.cancel-irn", "Cancel IRN"), title: wTH("ward.cancel-irn-title", "Cancel the IRN for {doc}?", { doc: esc(p[1] || "") }, "doc"),
+      fields: [
+        { key: "reasonCode", type: "select", label: wTH("ward.cancel-irn-reason", "Reason"), value: "2", options: [["1", wTH("ward.irn-reason-duplicate", "Duplicate")], ["2", wTH("ward.irn-reason-data-entry", "Data entry mistake")], ["3", wTH("ward.irn-reason-order-cancelled", "Order cancelled")], ["4", wTH("ward.irn-reason-others", "Others")]] },
+        { key: "remark", label: wTH("ward.cancel-irn-remark", "Remark (up to 100 characters)") },
+      ] }, function (v) {
+      return cashWrite("/ward/invoice-irn-cancel", { orgId: st.orgId, invoiceId: p[0], noteNumber: inv && p[1] !== inv.documentNumber ? p[1] : undefined, reasonCode: v.reasonCode, remark: v.remark });
+    });
+  }
+  /* THE PRINTED TAX INVOICE. Opened at once (a window opened after a wait is blocked as a popup), filled from the bill
+   * the cashier is looking at, with each IRN's signed QR code drawn by vendor/qrcode-generator.js (already served for
+   * the site), loaded only when a bill has one. A QR that cannot be drawn is said, never replaced by a blank box. */
+  function invoicePrint(invoiceId) {
+    var inv = cashInvoice(invoiceId); if (!inv) return;
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    if (!win) { st.err = wT("ward.could-not-open-a-print-window", "Could not open a print window. Allow pop-ups for this site."); paint(); return; }
+    var fill = function () {
+      var qr = function (text) {
+        if (!text) return "";
+        try { var q = G.qrcode(0, "L"); q.addData(text); q.make(); return q.createSvgTag(2, 4); }
+        catch (e) { return "<p>" + wTH("ward.qr-could-not-be-drawn", "The QR code could not be drawn. Use the IRN above.") + "</p>"; }
+      };
+      var notes = (inv.events || []).filter(function (ev) { return ev.kind === "credit_note" || ev.kind === "debit_note"; });
+      var regFor = function (no) { return (inv.einvoices || []).filter(function (x) { return x.docNumber === no && x.status === "ACT"; })[0]; };
+      var irnBlock = function (no) {
+        var x = regFor(no); if (!x) return "";
+        return "<p>" + wTH("ward.irn-value", "IRN {irn}", { irn: esc(x.irn) }, "irn") + "<br>" + wTH("ward.ack-value", "Ack {ackNo} {ackDt}", { ackNo: esc(x.ackNo || ""), ackDt: esc(x.ackDt || "") }, "ackNo ackDt") + "</p>" + qr(x.signedQrCode);
+      };
+      var table = function (lines, taxableOf) {
+        return '<table border="1" cellspacing="0" cellpadding="4"><tr><th>' + wTH("ward.print-item", "Item") + "</th><th>" + wTH("ward.print-hsn-sac", "HSN/SAC") + "</th><th>" + wTH("ward.print-taxable", "Taxable value") + "</th><th>" + wTH("ward.print-gst", "GST") + "</th></tr>" +
+          (lines || []).map(function (l) { return "<tr><td>" + esc(l.display || l.code) + "</td><td>" + esc(l.hsnSac || "") + "</td><td>" + esc(taxableOf(l)) + "</td><td>" + (l.taxKind === "GST" ? cashGstText(l) : wTH("ward.no-gst-rate-set", "no GST rate set")) + "</td></tr>"; }).join("") + "</table>";
+      };
+      var html = "<title>" + esc(inv.documentNumber || inv.invoiceId) + "</title><body style=\"font-family:sans-serif\">" +
+        "<h2>" + wTH("ward.tax-invoice", "Tax invoice") + " " + esc(inv.documentNumber || inv.invoiceId) + "</h2>" +
+        (inv.taxRegistration ? "<p>" + wTH("ward.print-seller-gstin", "GSTIN {gstin}", { gstin: esc(inv.taxRegistration.id) }, "gstin") + "</p>" : "") +
+        "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") + "<br>" + esc([inv.buyer.address1, inv.buyer.location, inv.buyer.pincode].join(", ")) : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
+        table(inv.lines, function (l) { return l.taxable == null ? l.line : l.taxable; }) +
+        "<p>" + wTH("ward.charged-paid-in-balance", "Charged {charged} &middot; Paid in {paidIn} &middot; Balance {balance}", { charged: esc(inv.charged), paidIn: esc(inv.paidIn), balance: esc(inv.balance) }, "charged paidIn balance") + "</p>" +
+        irnBlock(inv.documentNumber) +
+        notes.map(function (ev) {
+          return "<h3>" + esc(wTEn(EVENT_KIND_WORDS[ev.kind]) || ev.kind) + " " + esc(ev.noteNumber) + "</h3><p>" + esc(when(ev.at)) + " &middot; " + esc(ev.reason || "") + "</p>" +
+            table(ev.lines, function (l) { return l.taxable; }) + "<p>" + wTH("ward.note-total", "Taxable {taxable} &middot; GST {tax} &middot; Total {amount}", { taxable: esc(ev.taxable), tax: esc(ev.tax), amount: esc(ev.amount) }, "taxable tax amount") + "</p>" + irnBlock(ev.noteNumber);
+        }).join("") + "</body>";
+      try { win.document.open(); win.document.write(html); win.document.close(); win.focus(); win.print(); } catch (e) {}
+    };
+    var needsQr = (inv.einvoices || []).some(function (x) { return x.status === "ACT" && x.signedQrCode; });
+    if (!needsQr || typeof G.qrcode === "function") { fill(); return; }
+    var s = document.createElement("script");
+    s.src = "/vendor/qrcode-generator.js?v=qrgen1";
+    s.onload = fill; s.onerror = fill;
+    document.body.appendChild(s);
   }
 
   function invoiceVoid(invoiceId) {
@@ -12865,13 +13205,13 @@
       .catch(function () { st.busy = false; st.billing = { invoices: null, claims: null }; st.err = wT("ward.could-not-load-billing", "Could not load billing."); paint(); });
   }
   function tpaOpen() {
-    st.view = "tpa"; st.tpa = null; paint(); loadTpa();
+    st.view = "tpa"; st.tpa = null; st.tpaPkg = null; paint(); loadTpa();
   }
   function loadTpa() {
     if (!st.sel || !st.sel.patientId) return;
     st.busy = true; paint();
     return apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
-      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); })
+      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); if (r && r.ok) loadTpaPackages(); })
       .catch(function () { st.busy = false; st.tpa = { failed: true }; paint(); });
   }
   function claimCodeAction() {
@@ -12962,9 +13302,28 @@
       authorizedAmount: amountStr ? Number(amountStr) : undefined,
       payerId: val("wTpaAuthPayer") || undefined,
       requestedAmount: val("wTpaAuthRequested") ? Number(val("wTpaAuthRequested")) : undefined,
+      codes: val("wTpaAuthCodes") ? val("wTpaAuthCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean) : undefined,
+      policyNumber: val("wTpaAuthPolicy") || undefined,
     })
       .then(function (r) { if (settle(r, wT("ward.recorded", "Recorded."))) loadTpa(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that-pre-authorisation", "Could not record that pre-authorisation."); paint(); });
+  }
+  function nhcxEligibilityAction() {
+    if (!st.sel || !st.sel.patientId) return;
+    var payerId = val("wNhcxPayer"), policy = val("wNhcxPolicy");
+    if (!payerId || !policy) { st.err = wT("ward.nhcx-choose-payer-and-policy", "Choose the NHCX payer and enter the policy number."); paint(); return; }
+    st.busy = true; paint();
+    apiPost("/ward/nhcx-eligibility", { orgId: st.orgId, patientId: st.sel.patientId, payerId: payerId, policyNumber: policy })
+      .then(function (r) { if (settle(r, wT("ward.nhcx-eligibility-sent", "Sent to NHCX. The payer's answer appears here when it arrives."))) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.nhcx-eligibility-not-sent", "Could not send the eligibility check."); paint(); });
+  }
+  function hcxStatusAction(arg) {
+    var i = String(arg || "").indexOf(":");
+    if (i < 1) return;
+    st.busy = true; paint();
+    apiPost("/ward/hcx-status", { orgId: st.orgId, recordKind: arg.slice(0, i), recordId: arg.slice(i + 1) })
+      .then(function (r) { if (settle(r, wT("ward.nhcx-status-sent", "Status asked. The payer's answer appears here when it arrives."))) loadTpa(); else paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.nhcx-status-not-sent", "Could not ask for the status."); paint(); });
   }
   function loadCosigns() {
     return apiGet("/ward/cosign-queue?orgId=" + encodeURIComponent(st.orgId))
@@ -13409,7 +13768,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
+      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.tpaPkg = null; st.billing = null;
       paint(); return;
     }
     // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
@@ -13567,6 +13926,12 @@
     if (cmd === "invrefund") { cashPost(arg, "refund"); return; }
     if (cmd === "invadjust") { cashPost(arg, "adjust"); return; }
     if (cmd === "invwriteoff") { cashPost(arg, "writeoff"); return; }
+    if (cmd === "invcredit") { invoiceNote(arg, "credit"); return; }
+    if (cmd === "invdebit") { invoiceNote(arg, "debit"); return; }
+    if (cmd === "invbuyer") { invoiceBuyer(arg); return; }
+    if (cmd === "invirn") { invoiceIrn(arg); return; }
+    if (cmd === "invirncancel") { invoiceIrnCancel(arg); return; }
+    if (cmd === "invprint") { invoicePrint(arg); return; }
     if (cmd === "bedmgmtload") { loadBedMgmt(); return; }
     if (cmd === "bedstate") { bedStateApply(arg); return; }
     if (cmd === "stockreceive") { stockReceive(); return; }
@@ -13992,6 +14357,11 @@
     if (cmd === "claimbalance") { claimBalanceAction(arg); return; }
     if (cmd === "estimate") { estimateAction(); return; }
     if (cmd === "preauth") { preAuthAction(); return; }
+    if (cmd === "nhcxelig") { nhcxEligibilityAction(); return; }
+    if (cmd === "hcxstatus") { hcxStatusAction(arg); return; }
+    if (cmd === "pkgset") { pkgSetAction(arg); return; }
+    if (cmd === "pkgremove") { pkgRemoveAction(arg); return; }
+    if (cmd === "pkgpack") { pkgPackAction(arg); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }

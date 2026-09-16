@@ -137,6 +137,7 @@ import { projectHipRouting } from "../../_wardsynq/abdm-connect.js";
 import { CONNECTOR_TYPE } from "../../_wardsynq/connectors.js";
 import { level2WardRuleRefusal, wardAlertCover, wardTeamGroupOf, WARD_TEAM_ROLES } from "../../_wardsynq/alert-recipients.js";
 import { payersFromConnectors, mergePayers } from "../../_wardsynq/payer-connectors.js";
+import { checkEligibility, requestStatus, receiveNhcxCallback } from "../../_wardsynq/nhcx.js";
 import { createPaymentLink, listPaymentRequests, receivePaymentCallback } from "../../_wardsynq/payment-links.js";
 import { ingestFhir, listExceptions, listSourceGrants, resolveException, inboundEnabled, grantSourceSystem, revokeSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 import { registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery } from "../../_wardsynq/fhir-outbound.js";
@@ -245,7 +246,9 @@ import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
 import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
 import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
-import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient } from "../../_wardsynq/invoice.js";
+import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setBuyerRoute } from "../../_wardsynq/invoice.js";
+import { generateIrnRoute, cancelIrnRoute, einvoiceStatus } from "../../_wardsynq/einvoice.js";
+import { listPackages, packageVersions, savePackage, setStayPackage, stayPackages, packagePack } from "../../_wardsynq/packages.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
 import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
@@ -886,6 +889,17 @@ export async function onRequest(context) {
       const payMig = await wsqForcedMigration(env, payOrg);
       if (!payMig || payMig.error) return json({ ok: false, error: "not_found" }, 404, request);
       const r = await receivePaymentCallback(request, env, { migration: payMig, recordDeps: wsqRecordDeps(env, payMig.tenantId), fetchImpl: typeof env.WSQ_PAY_FETCH === "function" ? env.WSQ_PAY_FETCH : undefined });
+      return json(r.body, r.status, request);
+    }
+    /* AN NHCX PAYER'S ANSWER (nhcx.js): /nhcx-callback/<orgId>/<resource>/<action>, the address a hospital registers
+     * as its endpoint URL in the participant registry. Before authentication on purpose, like the payment notice: the
+     * gateway's RS256 bearer token, decryption with this hospital's own key, the recipient code and a correlation id
+     * this hospital sent are the authorisation. The path names the hospital and the protocol action, never a patient. */
+    if (method === "POST" && seg === "nhcx-callback" && parts[1] && parts[2] && parts[3] && !parts[4]) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 503, request);
+      const hcxMig = await wsqForcedMigration(env, await ORG.getOrg(env, parts[1]));
+      if (!hcxMig || hcxMig.error) return json({ ok: false, error: "not_found" }, 404, request);
+      const r = await receiveNhcxCallback(request, env, { migration: hcxMig, recordDeps: wsqRecordDeps(env, hcxMig.tenantId), action: `${parts[2]}/${parts[3]}` });
       return json(r.body, r.status, request);
     }
     /* S3 P0: THE ESCALATION TIMER THAT DOES NOT NEED ANYBODY ON THE WARD. The stewardmd-api worker's
@@ -1701,6 +1715,8 @@ export async function onRequest(context) {
          * the module's own instruction is that it is checked "by somebody who is not paid on
          * collections" - and billing.view is precisely the person who is. */
         claim: CAPS.BILLING_CHARGE, "claim-state": CAPS.BILLING_CHARGE, preauth: CAPS.BILLING_CHARGE,
+        // NHCX (nhcx.js): asking a payer about coverage or a request's status is the same authority as sending the request.
+        "nhcx-eligibility": CAPS.BILLING_CHARGE, "hcx-status": CAPS.BILLING_CHARGE,
         claims: CAPS.BILLING_VIEW, upcoding: CAPS.STAFF_ADMIN,
         // P1.5: a pre-admission estimate is a financial record written by the same authority that codes a claim.
         "claim-estimate": CAPS.BILLING_CHARGE,
@@ -1720,6 +1736,13 @@ export async function onRequest(context) {
         // Owner S2: asking the gateway for a link is taking money (billing.charge); reading them is reading bills.
         "invoice-payment-link": CAPS.BILLING_CHARGE, "payment-requests": CAPS.BILLING_VIEW,
         "invoice-writeoff": CAPS.BILLING_CHARGE, "invoice-void": CAPS.BILLING_CHARGE,
+        // gap-claims-gst B: notes, the buyer on a B2B bill and e-invoice reporting all change a bill.
+        "invoice-credit-note": CAPS.BILLING_CHARGE, "invoice-debit-note": CAPS.BILLING_CHARGE, "invoice-buyer": CAPS.BILLING_CHARGE,
+        "invoice-irn": CAPS.BILLING_CHARGE, "invoice-irn-cancel": CAPS.BILLING_CHARGE, "einvoice-status": CAPS.BILLING_VIEW,
+        /* gap-claims-gst-2 (packages.js): the package master is price list authority (staff.admin writes, as the Price
+         * list does); putting a stay on a package changes its bill (billing.charge); reading either is reading bills. */
+        packages: CAPS.BILLING_VIEW, "package-versions": CAPS.BILLING_VIEW, "package-save": CAPS.STAFF_ADMIN,
+        "stay-package": CAPS.BILLING_CHARGE, "stay-packages": CAPS.BILLING_VIEW, "package-pack": CAPS.BILLING_VIEW,
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
@@ -2904,7 +2927,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "connector-test" && method === "POST") {
-        const r = await testConnector(request, env, { ...deps, id: body.id });
+        const r = await testConnector(request, env, { ...deps, id: body.id, fetchImpl: typeof env.WSQ_EINV_FETCH === "function" ? env.WSQ_EINV_FETCH : undefined });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* CONNECTED APPS (smart-clients.js), Admin Center > Integrations. The hospital's SMART client
@@ -3219,7 +3242,15 @@ export async function onRequest(context) {
       if (sub === "preauth" && method === "POST") {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await recordPreAuth(request, env, { ...deps, patientId: body.patientId, treatment: body.treatment, state: body.state, scheme: body.scheme, reason: body.reason, decidedAt: body.decidedAt, invoiceId: body.invoiceId, authorizedAmount: body.authorizedAmount, idempotencyKey: body.idempotencyKey || null,
-          payerId: body.payerId, requestedAmount: body.requestedAmount, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+          payerId: body.payerId, requestedAmount: body.requestedAmount, policyNumber: body.policyNumber, codes: body.codes, payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "nhcx-eligibility" || sub === "hcx-status") && method === "POST") {
+        let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
+        const fetchImpl = env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null;
+        const r = sub === "nhcx-eligibility"
+          ? await checkEligibility(request, env, { ...deps, patientId: body.patientId, payerId: body.payerId, policyNumber: body.policyNumber, purpose: body.purpose, payers, fetchImpl })
+          : await requestStatus(request, env, { ...deps, recordKind: body.recordKind, recordId: body.recordId, payers, fetchImpl });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "claim-estimate" && method === "POST") {
@@ -3379,6 +3410,55 @@ export async function onRequest(context) {
       }
       if (sub === "invoice-void" && method === "POST") {
         const r = await voidInvoiceRoute(request, env, { ...deps, invoiceId: body.invoiceId, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* gap-claims-gst-2: package billing (functions/_wardsynq/packages.js). The split and the pack read the stay's
+       * charges through the same capture and price list the bill uses. */
+      if (sub === "packages" && method === "GET") {
+        const r = await listPackages(request, env, deps);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "package-versions" && method === "GET") {
+        const r = await packageVersions(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "package-save" && method === "POST") {
+        const r = await savePackage(request, env, { ...deps, id: body.id, expectedVersion: body.expectedVersion, active: body.active, reason: body.reason,
+          scheme: body.scheme, schemeName: body.schemeName, code: body.code, name: body.name, rate: body.rate, expectedLosDays: body.expectedLosDays,
+          preAuthRequired: body.preAuthRequired, inclusions: body.inclusions, exclusions: body.exclusions, preAuthDocuments: body.preAuthDocuments, claimDocuments: body.claimDocuments });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stay-package" && method === "POST") {
+        const r = await setStayPackage(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, packageId: body.packageId, preAuthId: body.preAuthId,
+          beneficiaryId: body.beneficiaryId, reason: body.reason, remove: body.remove === true, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "stay-packages" || sub === "package-pack") && method === "GET") {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        const patientId = url.searchParams.get("patientId") || "";
+        // An unreadable price list leaves the split unknown (false), never shown as nothing billed on top.
+        const chargesFor = tf.error ? () => Promise.resolve(null) : (encounterId) => chargesForPatient(request, env, { ...deps, patientId, encounterId, tariff: tf.table });
+        const r = sub === "stay-packages"
+          ? await stayPackages(request, env, { ...deps, patientId, chargesFor, tariff: tf.table })
+          : await packagePack(request, env, { ...deps, patientId, encounterId: url.searchParams.get("encounterId") || "", chargesFor, tariff: tf.table });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* gap-claims-gst B: credit and debit notes, B2B buyer details, and the IRN (functions/_wardsynq/invoice.js, einvoice.js). */
+      if ((sub === "invoice-credit-note" || sub === "invoice-debit-note") && method === "POST") {
+        const r = await postNoteRoute(request, env, { ...deps, kind: sub === "invoice-credit-note" ? "credit_note" : "debit_note", invoiceId: body.invoiceId, reason: body.reason, lines: body.lines, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "invoice-buyer" && method === "POST") {
+        const r = await setBuyerRoute(request, env, { ...deps, invoiceId: body.invoiceId, buyer: body.buyer, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "einvoice-status" && method === "GET") {
+        const r = await einvoiceStatus(request, env, deps);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "invoice-irn" || sub === "invoice-irn-cancel") && method === "POST") {
+        const ectx = { ...deps, invoiceId: body.invoiceId, noteNumber: body.noteNumber, idempotencyKey: body.idempotencyKey || null, fetchImpl: typeof env.WSQ_EINV_FETCH === "function" ? env.WSQ_EINV_FETCH : undefined };
+        const r = sub === "invoice-irn" ? await generateIrnRoute(request, env, ectx) : await cancelIrnRoute(request, env, { ...ectx, reasonCode: body.reasonCode, remark: body.remark });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "backup" && method === "GET") {

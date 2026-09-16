@@ -19,12 +19,13 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, receiptsFor, InvoiceRefusalError } from "../../wardsynq/wardsynq-invoice.js";
+import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, receiptsFor, InvoiceRefusalError, NOTE_KINDS, postNote, setBuyer } from "../../wardsynq/wardsynq-invoice.js";
 import { validateCollection, applyAdapterResult } from "../../wardsynq/wardsynq-payment-methods.js";
 import { chargesForPatient } from "./charge-capture.js";
 import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
-import { gstForLines } from "../_region_in.js";
+import { gstForLines, gstSplit, financialYearOf, istDateOf, section34Deadline, validateBuyer } from "../_region_in.js";
 import { ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
+import { ASSIGNMENT_TYPE, applyPackage, packageFlags } from "./packages.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -87,8 +88,27 @@ function invoicesForStay(invoices, encounter, stayChargeKeys, nowMs) {
   });
 }
 
+/* PURE. Whether this invoice is an inter-state supply: a B2B buyer whose place of supply is not the seller's state
+ * (the first two digits of the hospital's GSTIN are its state code). A bill to a person (B2C) is treated as
+ * within the state.
+ * ponytail: B2C is always intra-state (the hospital's own state); a B2C place of supply from the patient's address
+ * (Section 12(2)(b) IGST Act) needs an address on the invoice first. */
+function interStateOf(inv) {
+  const seller = str(inv && inv.taxRegistration && inv.taxRegistration.id).slice(0, 2), pos = str(inv && inv.buyer && inv.buyer.pos);
+  return !!(seller && pos && seller !== pos);
+}
+/* PURE. CGST/SGST or IGST on each taxed line and note line, computed from the stored tax and never stored itself:
+ * the split follows the place of supply, which the buyer details decide. */
+function withSplit(inv) {
+  const inter = interStateOf(inv);
+  const split = (l) => (l && l.taxKind === "GST" ? { ...l, ...gstSplit(l.tax, inter) } : l);
+  return {
+    interState: inter, lines: (inv.lines || []).map(split),
+    events: (inv.events || []).map((e) => (e && NOTE_KINDS.includes(e.kind) ? { ...e, lines: (e.lines || []).map(split) } : e)),
+  };
+}
 function summary(inv) {
-  return { taxRegistration: inv.taxRegistration || null, invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, lines: inv.lines, events: inv.events, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
+  return { package: inv.package || null, taxRegistration: inv.taxRegistration || null, documentNumber: inv.documentNumber || null, buyer: inv.buyer || null, einvoices: inv.einvoices || [], ...withSplit(inv), invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
 }
 
 /** ctx: { migration, patientId, encounterId?, tariff?, at?, actorDeps, recordDeps } */
@@ -108,15 +128,52 @@ async function raiseInvoice(request, env, ctx) {
    * encounter must be this patient's inpatient stay; with none named, the patient's open stay is used. */
   const stay = await stayForInvoice(svc, patientId, str(ctx.encounterId));
   if (stay.error) return { ...base, ...stay.error, written: 0 };
-  const encounterId = stay.encounterId;
+  let encounterId = stay.encounterId;
 
-  const charges = await chargesForPatient(request, env, { ...ctx, patientId });
+  /* PACKAGE BILLING (packages.js). A stay on a package bills the package rate and what the package excludes; a charge
+   * it covers goes on the bill at zero, marked included, and only that stay's charges are read. Every OTHER stay on a
+   * package keeps its charges off this bill: they belong to that package, never item by item. A DISCHARGED stay on a
+   * package is still billed by it: with no stay named and none open, the latest package stay with something billable
+   * not yet on a bill (the package line, an exclusion, a charge that came later) is this bill's stay. Not knowing
+   * whether a stay is on a package raises nothing: an itemised bill for a package stay is a wrong bill. */
+  let actives;
+  try { actives = ((await svc.byPatient(ASSIGNMENT_TYPE, patientId)) || []).filter((a) => a && a.status === "active" && str(a.patientId) === patientId).sort((a, b) => str(b.at).localeCompare(str(a.at))); }
+  catch { return { ...base, ok: false, status: 502, error: "package_unreadable", detail: "Whether this patient has a stay on a package could not be read, so no bill was raised.", written: 0 }; }
+  const packageKeys = new Set();
+  if (actives.some((a) => a.encounterId !== encounterId)) {
+    let earlier;
+    try { earlier = (await svc.byPatient(TYPE, patientId)) || []; }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const onBill = new Set();
+    for (const inv of earlier) if (inv && !isExternalRecord(inv)) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
+    const pick = !encounterId;
+    for (const a of actives) {
+      if (a.encounterId === encounterId) continue;
+      const ch = await chargesForPatient(request, env, { ...ctx, patientId, encounterId: a.encounterId });
+      if (!ch.ok) return { ...base, ...ch, written: 0 };
+      const ap = applyPackage(ch, a, ctx.tariff);
+      if (pick && !encounterId && ap.lines.some((l) => !l.packageIncluded && !onBill.has(`${l.sourceType}:${l.sourceId}`))) { encounterId = a.encounterId; continue; }
+      for (const it of [...(ch.priced || []), ...(ch.unpriced || [])]) if (it.sourceType && it.sourceId) packageKeys.add(`${it.sourceType}:${it.sourceId}`);
+    }
+  }
+  let assignment = encounterId ? actives.find((a) => a.encounterId === encounterId) || null : null, packagePreAuth = null, packageStay = null;
+  if (assignment) {
+    packageStay = await svc.get("Encounter", encounterId).catch(() => null);
+    if (assignment.preAuthId) packagePreAuth = await svc.get("PreAuthorisation", assignment.preAuthId).catch(() => undefined);
+  }
+  const charges = await chargesForPatient(request, env, { ...ctx, patientId, ...(assignment ? { encounterId } : {}) });
   if (!charges.ok) return { ...base, ...charges, written: 0 };
+  if (!assignment && packageKeys.size) {
+    const off = (it) => !(it.sourceType && it.sourceId && packageKeys.has(`${it.sourceType}:${it.sourceId}`));
+    charges.priced = (charges.priced || []).filter(off); charges.unpriced = (charges.unpriced || []).filter(off);
+  }
+  const applied = assignment ? applyPackage(charges, assignment, ctx.tariff) : null;
+  const billable = applied ? applied.lines : charges.priced;
   /* NOTHING RAISED IS SAID, WITH WHAT HAS NO PRICE (LT-30). This answered ok with written 0 and the
    * cashier screen showed nothing at all. The unpriced items go back by name so the screen can say
    * exactly which charges an administrator has to price. */
-  const unpricedNames = (charges.unpriced || []).map((u) => ({ display: u.display || u.code, code: u.code, reason: u.reason }));
-  if (!charges.priced || !charges.priced.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", unpriced: unpricedNames, ...(charges.unreadable ? { unreadable: charges.unreadable } : {}), detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
+  const unpricedNames = ((applied ? applied.unpriced : charges.unpriced) || []).map((u) => ({ display: u.display || u.code, code: u.code, reason: u.reason }));
+  if (!billable || !billable.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", unpriced: unpricedNames, ...(charges.unreadable ? { unreadable: charges.unreadable } : {}), detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
 
   // NEVER TWICE. Every source event already sitting on an earlier invoice for this patient is
   // excluded here, before a second invoice can be raised against it.
@@ -125,14 +182,19 @@ async function raiseInvoice(request, env, ctx) {
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   const alreadyInvoiced = new Set();
   for (const inv of existing) { if (inv && !isExternalRecord(inv)) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) alreadyInvoiced.add(`${l.sourceType}:${l.sourceId}`); }
-  const newLines = charges.priced.filter((it) => !(it.sourceType && it.sourceId && alreadyInvoiced.has(`${it.sourceType}:${it.sourceId}`)));
+  const newLines = billable.filter((it) => !(it.sourceType && it.sourceId && alreadyInvoiced.has(`${it.sourceType}:${it.sourceId}`)));
   if (!newLines.length) return { ...base, ok: true, written: 0, skipped: "already_invoiced", detail: "Every currently priced item is already on an earlier invoice." };
+  if (newLines.every((l) => l.packageIncluded)) return { ...base, ok: true, written: 0, skipped: "package_covers_all", detail: "Everything new on this stay is covered by its package, and the package is already on a bill." };
 
   /* P2.6: tax, from the region adapter and the hospital's own tariff only. India: a tariff item with a
    * gstRate gets a GST line, an exempt one says exempt, and one with no rate gets NO tax and is listed
    * back to the cashier - never assumed to be 0 percent or any default slab. A rate that is not a
    * number refuses the invoice: a bill with a guessed tax is worse than no bill. */
-  const gst = gstForLines(newLines, ctx.tariff, ctx.region);
+  /* A package is a health care service (Heading 9993, exempt) unless its rows say otherwise; an included line is at zero
+   * and carries no tax. ponytail: a package that bundles a room over Rs 5,000 a day is not split out for the 5 percent;
+   * a hospital's accountant decides that, and the package would then need its own GST fields. */
+  const gstTable = assignment ? { ...(ctx.tariff || {}), [assignment.package.code]: { kind: "service", description: assignment.package.name } } : ctx.tariff;
+  const gst = gstForLines(newLines.filter((l) => !l.packageIncluded), gstTable, ctx.region, { inpatient: !!encounterId });
   if (gst.invalid.length) return { ...base, ok: false, status: 422, error: "gst_rate_invalid", codes: gst.invalid, written: 0, detail: "These tariff items carry a GST rate that is not a number from 0 to 100. Correct the tariff before raising this invoice." };
   const taxByCode = new Map(gst.lines.map((g) => [g.code.toUpperCase(), g]));
 
@@ -146,21 +208,56 @@ async function raiseInvoice(request, env, ctx) {
       lines: newLines.map((l) => {
         const g = taxByCode.get(str(l.code).toUpperCase());
         return { code: l.code, display: l.display, quantity: l.quantity, amount: l.amount, line: l.line, sourceType: l.sourceType || null, sourceId: l.sourceId || null,
-          ...(g ? { taxKind: "GST", taxRate: g.gstRate, taxExempt: g.gstExempt, tax: g.tax } : {}) };
+          ...(g && !l.packageIncluded ? { taxKind: "GST", taxRate: g.gstRate, taxExempt: g.gstExempt, tax: g.tax, hsnSac: g.hsnSac, taxBasis: g.basis, taxable: g.taxable, kind: g.kind } : {}),
+          ...(l.packageCode ? { packageCode: l.packageCode, packageLine: !!l.packageLine, packageIncluded: !!l.packageIncluded, packageExcluded: !!l.packageExcluded, packageOutside: !!l.packageOutside } : {}) };
       }),
       actorId: resolved.actor.id, at,
     });
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
   ep.resourceType = TYPE;
   ep.source = { system: "wardsynq-native", sourceId: `invoice:${id}` };
+  if (assignment) {
+    const p = assignment.package;
+    ep.package = { assignmentId: assignment.id, assignmentVersion: assignment.version, packageId: p.id, packageVersion: p.version, scheme: p.scheme, schemeName: p.schemeName || null,
+      code: p.code, name: p.name, rate: p.rate, beneficiaryId: assignment.beneficiaryId || null, preAuthId: assignment.preAuthId || null,
+      ...packageFlags(assignment, packageStay, packagePreAuth, Date.parse(at) || Date.now()), counts: applied.counts };
+  }
   if (gst.applies && str(ctx.gstin)) ep.taxRegistration = { kind: "GSTIN", id: str(ctx.gstin) };
+  /* A TAX INVOICE CARRIES A CONSECUTIVE SERIAL NUMBER of at most 16 characters, unique for the financial year (Rule
+   * 46(b) CGST Rules; the e-invoice DocDtls.No has the same limit). Issued only once the invoice itself is sound.
+   * ponytail: a number issued and then not used (the invoice write fails) leaves a gap in the series; a hospital
+   * explains gaps as cancelled numbers, the usual practice, rather than this taking a cross-record transaction. */
+  if (gst.applies) {
+    try { ep.documentNumber = await nextDocumentNumber(ctx.recordDeps.repository, mig.tenantId, "INV", at, resolved.actor.id); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "document_number_failed", detail: "No invoice number could be issued, so nothing was raised.", written: 0 }; }
+  }
 
   try {
     const out = await svc.put(ep, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, ...summary({ ...ep, version: out.record.version }), actor: resolved.actor.id,
       ...(unpricedNames.length ? { unpriced: unpricedNames } : {}), ...(charges.unreadable ? { unreadable: charges.unreadable } : {}),
-      ...(gst.applies ? { gst: { totalTax: gst.totalTax, unconfigured: gst.unconfigured, taxRegistration: ep.taxRegistration || null } } : {}) };
+      ...(gst.applies ? { gst: { totalTax: gst.totalTax, unconfigured: gst.unconfigured, missingHsnSac: gst.missingHsnSac, taxRegistration: ep.taxRegistration || null } } : {}) };
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
+}
+
+const SERIES_TYPE = "_wardsynq_doc_series";
+/** The next number in a document series ("INV", "CRN", "DBN") for the financial year of `at`: INV/2627/000001.
+ *  Optimistic: two cashiers racing for the same number cannot both land (append refuses a version that exists). */
+async function nextDocumentNumber(repo, tenantId, typ, at, actorId) {
+  const fy = financialYearOf(at);
+  if (!fy) throw new Error("no financial year for that time");
+  const id = `${typ.toLowerCase()}-${fy}`;
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const cur = await repo.latest(tenantId, SERIES_TYPE, id);
+    const n = (cur ? Number(cur.last) || 0 : 0) + 1;
+    const now = new Date().toISOString();
+    const rec = { resourceType: SERIES_TYPE, id, version: cur ? cur.version + 1 : 1, series: typ, financialYear: fy, last: n, writtenBy: { id: actorId, kind: "human", at: now } };
+    try {
+      await repo.append(tenantId, [rec], { audit: { ts: now, actor: actorId, connectorId: "wardsynq-invoices", action: "document.number.issue", outcome: "ok", scope: { series: id, number: n } } });
+      return `${typ}/${fy}/${String(n).padStart(6, "0")}`;
+    } catch (e) { if (!(e instanceof VersionConflictError)) throw e; }
+  }
+  throw new Error("the document number series is busy");
 }
 
 /** Shared phase-transition runner: read the invoice, mutate it via the engine, write it back. */
@@ -243,6 +340,54 @@ async function postWriteOff(request, env, ctx) { return transition(request, env,
 /** ctx: { migration, invoiceId, reason, actorDeps, recordDeps } */
 async function voidInvoiceRoute(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => voidInvoice(inv, { actorId, at: at_(ctx), reason: ctx.reason })); }
 
+/**
+ * A credit or debit note (gap-claims-gst B). ctx: { migration, invoiceId, kind: "credit_note"|"debit_note", reason,
+ * lines: [{ lineIndex, taxable }], at?, actorDeps, recordDeps }. The note is checked against the invoice BEFORE its
+ * number is issued, so a refused note uses no number. A credit note reversing GST after the Section 34 time limit
+ * is still recorded (the bill is still reduced) but carries `gstReversalLate` and the response says so: the tax
+ * cannot be reduced in the return any more.
+ */
+async function postNoteRoute(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const kind = str(ctx.kind);
+  if (!NOTE_KINDS.includes(kind)) return { ...base, ok: false, status: 422, error: "unknown_note_kind", written: 0 };
+  const invoiceId = str(ctx.invoiceId);
+  if (!invoiceId) return { ...base, ok: false, status: 422, error: "invoice_required", written: 0 };
+  const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+  let current;
+  try { current = await svc.get(TYPE, invoiceId); }
+  catch (e) { return { ...base, ...writeFailure(e, { invoiceId, written: 0 }) }; }
+  if (!current) return { ...base, ok: false, status: 404, error: "invoice_not_found", invoiceId, written: 0 };
+  const at = at_(ctx), actorId = resolved.actor.id;
+  const opts = { actorId, at, reason: ctx.reason, lines: ctx.lines };
+  try { postNote(JSON.parse(JSON.stringify(current)), kind, { ...opts, noteNumber: "CHECK" }); }
+  catch (e) { return { ...base, ...writeFailure(e, { invoiceId, written: 0, actor: actorId }) }; }
+  let noteNumber;
+  try { noteNumber = await nextDocumentNumber(ctx.recordDeps.repository, mig.tenantId, kind === "credit_note" ? "CRN" : "DBN", at, actorId); }
+  catch { return { ...base, ok: false, status: 502, error: "document_number_failed", detail: "No note number could be issued, so nothing was recorded.", written: 0 }; }
+  postNote(current, kind, { ...opts, noteNumber });
+  const ev = current.events[current.events.length - 1];
+  const raisedAt = str(((current.events || [])[0] || {}).at);
+  const deadline = section34Deadline(raisedAt);
+  if (kind === "credit_note" && ev.tax > 0 && deadline && istDateOf(at) > deadline) ev.gstReversalLate = true;
+  try {
+    const out = await svc.put({ ...current, resourceType: TYPE }, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, noteNumber, ...summary({ ...current, version: out.record.version }), actor: actorId,
+      ...(ev.gstReversalLate ? { warning: `The time limit for reducing GST on this supply was ${deadline} (Section 34 CGST Act). The bill is reduced, but the GST cannot be reduced in the return.` } : {}) };
+  } catch (e) { return { ...base, ...writeFailure(e, { invoiceId, written: 0, actor: actorId, noteNumber }) }; }
+}
+
+/** ctx: { migration, invoiceId, buyer: { gstin, legalName, address1, location, pincode, stateCode, pos } | null }.
+ *  An empty GSTIN clears the buyer: the bill is then to a person (B2C). */
+async function setBuyerRoute(request, env, ctx) {
+  const v = validateBuyer(ctx.buyer);
+  if (v.errors) return { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null, ok: false, status: 422, error: "invalid_buyer", errors: v.errors, written: 0 };
+  return transition(request, env, ctx, (inv, actorId) => setBuyer(inv, v.buyer, { actorId, at: at_(ctx) }));
+}
+
 /** ctx: { migration, invoiceId, actorDeps, recordDeps } */
 async function readInvoice(request, env, ctx) {
   const mig = ctx.migration;
@@ -282,4 +427,5 @@ async function invoicesForPatient(request, env, ctx) {
 export {
   TYPE, raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff,
   voidInvoiceRoute, readInvoice, invoicesForPatient, stayForInvoice, invoicesForStay,
+  postNoteRoute, setBuyerRoute, nextDocumentNumber, summary as invoiceSummary, interStateOf, open_ as openInvoiceService, writeFailure as invoiceWriteFailure,
 };

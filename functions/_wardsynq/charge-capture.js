@@ -200,7 +200,8 @@ function tariffTable(configTariff, priceListRows) {
     if (!key || !Number.isFinite(paise) || paise < 0) continue;
     for (const k of Object.keys(out)) if (k.toUpperCase() === key.toUpperCase()) delete out[k];
     out[key] = { amount: paise / 100, description: str(r.name) || key, kind: str(r.kind) || null, ward: str(r.ward) || null,
-      ...(r.gstRate !== undefined && r.gstRate !== null && r.gstRate !== "" ? { gstRate: r.gstRate } : {}) };
+      ...(r.gstRate !== undefined && r.gstRate !== null && r.gstRate !== "" ? { gstRate: r.gstRate } : {}),
+      ...(str(r.hsnSac) ? { hsnSac: str(r.hsnSac) } : {}), ...(r.intensiveCare === true ? { intensiveCare: true } : {}) };
     // A test is also found by its name, so a coded row still prices a report recorded under the name.
     if (str(r.code) && str(r.name) && !Object.keys(out).some((k) => k.toUpperCase() === str(r.name).toUpperCase())) out[str(r.name)] = out[key];
   }

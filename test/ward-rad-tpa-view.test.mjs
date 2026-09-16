@@ -92,3 +92,40 @@ test("tpa: channel, warnings, settlement, resubmissions, estimates and the expli
   assert.match(html, /data-w-act="estimate"/);
   assert.ok(!/claimbalance:c1/.test(html), "no balance action before settlement");
 });
+
+test("tpa NHCX (gap-claims-gst A): not connected offers nothing to send; connected shows eligibility answers, exchange status and Check status; unread is not none", () => {
+  const W = loadWard();
+  const off = tpa(W, { claims: [], preAuthorisations: [], estimates: [], eligibilityChecks: [], payers: [{ id: "icici", name: "ICICI", adapter: "nhcx", nhcxConnected: false }] });
+  assert.match(off, /Not connected to NHCX. Nothing is sent through NHCX/);
+  assert.ok(!/data-w-act="nhcxelig"/.test(off), "no send button when not connected");
+  assert.match(off, /ICICI &middot; nhcx \(not connected\)/);
+
+  const payers = [{ id: "icici", name: "ICICI", adapter: "nhcx", nhcxConnected: true }];
+  const on = tpa(W, {
+    payers, estimates: [],
+    eligibilityChecks: [
+      { id: "e1", state: "answered", payerId: "icici", at: "2026-09-16T10:00:00Z", adapter: { state: "acknowledged", exchange: { correlationId: "k1" } }, response: { outcome: "complete", inforce: true, disposition: "Policy in force", benefits: [{ type: "Sum insured", allowed: 500000 }], errors: [] } },
+      { id: "e2", state: "sent", payerId: "icici", at: "2026-09-16T11:00:00Z", adapter: { state: "sent", exchange: { correlationId: "k2" }, note: "Accepted by the NHCX gateway" }, response: null },
+    ],
+    claims: [
+      { id: "c1", state: "submitted", payerId: "icici", codes: [{ code: "I10" }], adapter: { state: "sent", exchange: { correlationId: "k3" } }, statusChecks: [{ at: "2026-09-16T12:00:00Z", state: "sent" }] },
+      { id: "c2", state: "coded", payerId: "icici", codes: [{ code: "I10" }] },
+    ],
+    preAuthorisations: [{ id: "pa1", state: "approved", treatment: "PTCA", payerId: "icici", authorizedAmount: 45000, adapter: { state: "acknowledged", outcome: "complete", exchange: { correlationId: "k4" } } }],
+  });
+  assert.match(on, /data-w-act="nhcxelig"/);
+  assert.match(on, /Policy in force &middot; complete &middot; Policy in force/);
+  assert.match(on, /Sum insured 500000/);
+  assert.match(on, /sent, no answer yet/);
+  assert.match(on, /NHCX: sent to the gateway, no answer yet &middot; status asked/);
+  assert.match(on, /data-w-act="hcxstatus:claim:c1"/);
+  assert.match(on, /NHCX: not sent through NHCX/);
+  assert.ok(!/hcxstatus:claim:c2/.test(on), "nothing to ask about a claim never sent");
+  assert.match(on, /NHCX: answered by the payer \(complete\)/);
+  assert.match(on, /data-w-act="hcxstatus:preauth:pa1"/);
+  assert.match(on, /data-w-act="hcxstatus:eligibility:e2"/);
+  assert.match(on, /id="wTpaAuthCodes"/);
+
+  const unread = tpa(W, { payers, claims: [], preAuthorisations: [], estimates: [], eligibilityChecks: null });
+  assert.match(unread, /Eligibility checks could not be read. This is not the same as there being none/);
+});

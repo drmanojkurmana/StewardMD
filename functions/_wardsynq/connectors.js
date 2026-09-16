@@ -33,13 +33,14 @@ import { PAYMENT_KIND } from "./payment-gateways.js";
 import { ABDM_KIND } from "./abdm-hospital.js";
 import { WHATSAPP_KIND } from "./patient-messaging.js";
 import { BACKUP_KIND } from "./backup-destinations.js";
+import { EINVOICE_KIND } from "./einvoice-irp.js";
 
 const CONNECTOR_TYPE = "_wardsynq_connector";
 const MAX_CONNECTORS = 100;
 
 /* kind -> { label, singleton, providers: { id -> { label, settings[], secrets[], validate?, test? } } }
  * validate(settings, secretsPresent, { org, previous }): previous is the saved settings of the same provider, or null. */
-const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND, abdm: ABDM_KIND, whatsapp: WHATSAPP_KIND, backup: BACKUP_KIND });
+const KINDS = Object.freeze({ payment: PAYMENT_KIND, payer: PAYER_KIND, dicom: DICOM_KIND, abdm: ABDM_KIND, whatsapp: WHATSAPP_KIND, backup: BACKUP_KIND, einvoice: EINVOICE_KIND });
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);

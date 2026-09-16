@@ -194,6 +194,7 @@
     return h + '<div id="bugMsg"></div></div>';
   }
   WSQ._bugsHtml = bugsHtml;
+  WSQ._renderPackages = function (c, host) { return renderPackages(c, host); };
   /** The one request each button sends. kind: in_progress | solved | open | remove. */
   function bugAction(c, kind, r, note) {
     if (kind === "remove") return c.api("/ward/bug-report-remove", { orgId: c.state.orgId, id: r.id, expectedVersion: r.version });
@@ -999,6 +1000,17 @@
       medication: T(c, "site.admin.tariff.kindMedicine", "Medicine"), service: T(c, "site.admin.tariff.kindService", "Service"),
     }[k] || k;
   }
+  /* The server refuses the same things; saying them here gives the reason in the hospital's language. */
+  function tariffTaxError(c, hsn, rate) {
+    var h = String(hsn || "").replace(/\s+/g, ""), r = String(rate || "").trim();
+    if (h && !/^(\d{4}|\d{6}|\d{8})$/.test(h)) return T(c, "site.admin.tariff.errHsn", "HSN/SAC is 4, 6 or 8 digits.");
+    if (r && !(/^\d+(\.\d{1,2})?$/.test(r) && Number(r) <= 100)) return T(c, "site.admin.tariff.errGst", "The GST rate is a percentage from 0 to 100, like 5 or 12.");
+    return "";
+  }
+  function tariffGstLabel(c, t) {
+    if (t.kind === "bed") return t.intensiveCare ? T(c, "site.admin.tariff.gstIcu", "Intensive care room: exempt") : T(c, "site.admin.tariff.gstRoom", "Room: 5% above Rs 5,000 a day");
+    return t.gstRate === "" || t.gstRate == null ? "" : T(c, "site.admin.tariff.gstRateShown", "{rate}%", { rate: t.gstRate });
+  }
   function renderTariff(c, body) {
     body.innerHTML = '<span class="spin"></span>';
     return Promise.all([c.api("/bill/tariff?orgId=" + encodeURIComponent(c.state.orgId)), c.api("/wards?orgId=" + encodeURIComponent(c.state.orgId)).catch(function () { return null; })]).then(function (both) {
@@ -1008,12 +1020,13 @@
       // null = the wards could not be read: a per-ward bed price then cannot be offered, and the screen says so.
       var wards = wr && wr.ok ? (wr.wards || []).map(function (w) { return w.name; }).filter(Boolean) : null;
       body.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.tariff.title", "Price list")) + "</h2>" +
-        (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th></th></tr></thead><tbody>" +
+        (items.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.tariff.colItem", "Item")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colKind", "Kind")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colHsn", "HSN/SAC")) + "</th><th>" + c.esc(T(c, "site.admin.tariff.colGst", "GST")) + "</th><th></th></tr></thead><tbody>" +
           items.map(function (t) {
             var daily = t.kind === "bed" || t.kind === "nursing" || t.kind === "visit";
             return "<tr><td>" + c.esc(t.name) + "</td><td>" + c.esc(t.code || "") + "</td><td>" + c.esc(tariffKindLabel(c, t.kind)) +
-              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td>" +
+              (daily ? "<br><small>" + c.esc(t.ward ? T(c, "site.admin.tariff.wardOnly", "{ward} only", { ward: t.ward }) : T(c, "site.admin.tariff.everyWard", "Every ward")) + "</small>" : "") + "</td><td>" + c.esc(rupees(t.price)) + "</td><td>" + c.esc(t.hsnSac || "") + "</td><td>" + c.esc(tariffGstLabel(c, t)) + "</td>" +
               '<td><button type="button" class="btn ghost" data-trf-edit="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changePrice", "Change price")) + '</button> ' +
+              '<button type="button" class="btn ghost" data-trf-tax="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.changeTax", "Change GST details")) + '</button> ' +
               '<button type="button" class="btn ghost" data-trf-off="' + c.esc(t.id) + '">' + c.esc(T(c, "site.admin.tariff.withdraw", "Withdraw")) + "</button></td></tr>";
           }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.none", "No prices set yet.")) + "</p>") +
         '<h3>' + c.esc(T(c, "site.admin.tariff.addItem", "Add an item")) + '</h3><div class="row">' +
@@ -1023,10 +1036,16 @@
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.ward", "Ward (per-day charges)")) + '</span><select id="admTrfWard"><option value="">' + c.esc(T(c, "site.admin.tariff.everyWard", "Every ward")) + "</option>" +
           (wards || []).map(function (w) { return '<option value="' + c.esc(w) + '">' + c.esc(w) + "</option>"; }).join("") + "</select></label>" +
         '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.colPrice", "Price (Rs)")) + '</span><input id="admTrfPrice" inputmode="decimal"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.hsn", "HSN/SAC (4, 6 or 8 digits)")) + '</span><input id="admTrfHsn" inputmode="numeric"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.gstRate", "GST rate % (medicines and other taxable items)")) + '</span><input id="admTrfGst" inputmode="decimal"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.tariff.icu", "Intensive care room (ICU/CCU/ICCU/NICU), beds only")) + '</span><input id="admTrfIcu" type="checkbox"></label>' +
         '</div>' + (wards === null ? '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.wardsFailed", "The wards could not be loaded, so a bed price can only be set for every ward right now.")) + "</div>" : "") +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.gstRules", "GST is applied by law: a room other than an intensive care room charged above Rs 5,000 a day is taxed at 5 percent; intensive care rooms and other health care services are exempt; medicines on an inpatient bill are exempt, and medicines sold to outpatients are taxed at the rate set here. An intensive care room is marked here, never guessed from the ward name.")) + "</p>" +
         '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.howBilled", "Bed, nursing and doctor visit prices are charged for each day of an inpatient stay. Name a test or medicine exactly as it is ordered, so the bill can find its price.")) + "</p>" +
         '<button type="button" class="btn" id="admTrfAdd">' + c.esc(T(c, "site.admin.add", "Add")) + '</button><div id="admTrfMsg"></div>' +
-        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>";
+        '<p class="quiet">' + c.esc(T(c, "site.admin.tariff.everyChange", "Every change is recorded with the old and new price.")) + "</p></div>" +
+        '<div id="admPkgHost"></div>';
+      renderPackages(c, document.getElementById("admPkgHost"));
 
       function save(item) {
         return c.api("/bill/tariff", Object.assign({ orgId: c.state.orgId }, item)).then(function (x) {
@@ -1042,7 +1061,12 @@
         var price = toPaise(document.getElementById("admTrfPrice").value);
         if (!name) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errName", "Give the item a name.")) + "</div>"; return; }
         if (price === null) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.tariff.errPrice", "The price has to be a plain amount in rupees, like 450 or 450.50.")) + "</div>"; return; }
-        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: document.getElementById("admTrfKind").value, ward: document.getElementById("admTrfWard").value, price: price });
+        var kind = document.getElementById("admTrfKind").value;
+        var taxErr = tariffTaxError(c, document.getElementById("admTrfHsn").value, document.getElementById("admTrfGst").value);
+        if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
+        save({ name: name, code: document.getElementById("admTrfCode").value.trim(), kind: kind, ward: document.getElementById("admTrfWard").value, price: price,
+          hsnSac: document.getElementById("admTrfHsn").value.trim(), gstRate: document.getElementById("admTrfGst").value.trim(),
+          intensiveCare: kind === "bed" ? document.getElementById("admTrfIcu").checked : undefined });
       };
       body.querySelectorAll("[data-trf-edit]").forEach(function (b) {
         b.onclick = function () {
@@ -1053,6 +1077,19 @@
           save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: price });
         };
       });
+      /* GST details only: the server keeps the price and everything not sent. */
+      body.querySelectorAll("[data-trf-tax]").forEach(function (b) {
+        b.onclick = function () {
+          var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-tax"); })[0]; if (!t) return;
+          var hsn = prompt(T(c, "site.admin.tariff.hsnPrompt", "HSN/SAC for {name} (4, 6 or 8 digits; empty to clear)", { name: t.name }), t.hsnSac || ""); if (hsn == null) return;
+          var rate = prompt(T(c, "site.admin.tariff.gstPrompt", "GST rate % for {name} (empty for none)", { name: t.name }), t.gstRate == null ? "" : String(t.gstRate)); if (rate == null) return;
+          var taxErr = tariffTaxError(c, hsn, rate);
+          if (taxErr) { document.getElementById("admTrfMsg").innerHTML = '<div class="msg err">' + c.esc(taxErr) + "</div>"; return; }
+          var item = { id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, hsnSac: hsn.trim(), gstRate: rate.trim() };
+          if (t.kind === "bed") item.intensiveCare = confirm(T(c, "site.admin.tariff.icuConfirm", "Is {name} an intensive care room (ICU, CCU, ICCU or NICU)? OK for yes, Cancel for no.", { name: t.name }));
+          save(item);
+        };
+      });
       body.querySelectorAll("[data-trf-off]").forEach(function (b) {
         b.onclick = function () {
           var t = items.filter(function (x) { return x.id === b.getAttribute("data-trf-off"); })[0]; if (!t) return;
@@ -1060,6 +1097,116 @@
           save({ id: t.id, name: t.name, code: t.code, kind: t.kind, ward: t.ward || "", price: t.price, active: false });
         };
       });
+    });
+  }
+
+  /* PACKAGES (gap-claims-gst-2, functions/_wardsynq/packages.js). A package price for a whole episode under a scheme:
+   * its rate, what it covers and excludes, the expected length of stay and whether a pre-authorisation is needed.
+   * Every change is a new version with a reason; the old ones stay readable. A stay is put on a package on the ward's
+   * TPA / Claims screen. Nothing here sends anything to a scheme. */
+  var PKG_SCHEMES = ["pmjay", "state", "cghs", "echs", "insurer", "hospital"];
+  function pkgSchemeLabel(c, s) {
+    return {
+      pmjay: T(c, "site.admin.pkg.schemePmjay", "PM-JAY (Ayushman Bharat)"), state: T(c, "site.admin.pkg.schemeState", "State scheme"),
+      cghs: T(c, "site.admin.pkg.schemeCghs", "CGHS"), echs: T(c, "site.admin.pkg.schemeEchs", "ECHS"),
+      insurer: T(c, "site.admin.pkg.schemeInsurer", "Private insurer"), hospital: T(c, "site.admin.pkg.schemeHospital", "Hospital package"),
+    }[s] || s;
+  }
+  var PKG_STATE = { editing: null };
+  function renderPackages(c, host) {
+    if (!host) return;
+    host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + '</h2><span class="spin"></span></div>';
+    return c.api("/ward/packages?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) {
+      if (!r || !r.ok) { host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + '</h2><div class="msg err">' + c.esc(T(c, "site.admin.pkg.loadFailed", "The packages could not be loaded. Do not read this as no packages.")) + "</div></div>"; return; }
+      var pkgs = r.packages || [];
+      var ed = PKG_STATE.editing ? pkgs.filter(function (p) { return p.id === PKG_STATE.editing; })[0] || null : null;
+      var kindBoxes = function (prefix, chosen) {
+        return TARIFF_KINDS.map(function (k) {
+          return '<label class="f"><input type="checkbox" data-pkg-' + prefix + '="' + c.esc(k) + '"' + (chosen.indexOf(k) >= 0 ? " checked" : "") + "> " + c.esc(tariffKindLabel(c, k)) + "</label>";
+        }).join("");
+      };
+      var val = function (k, d) { return ed && ed[k] != null ? ed[k] : d; };
+      var cover = function (k) { return (ed && ed[k]) || { kinds: [], items: [] }; };
+      host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + "</h2>" +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.pkg.intro", "A package bills one rate for a whole stay. Charges it covers appear on the bill at zero; charges it excludes are billed on top; charges it names neither way are billed and flagged for checking. Nothing here is sent to any scheme.")) + "</p>" +
+        (pkgs.length ? '<div class="tbl"><table><thead><tr><th>' + c.esc(T(c, "site.admin.pkg.colScheme", "Scheme")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colCode", "Code")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colName", "Package")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colRate", "Rate (Rs)")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colLos", "Expected days")) + "</th><th>" + c.esc(T(c, "site.admin.pkg.colPreauth", "Pre-authorisation")) + "</th><th></th></tr></thead><tbody>" +
+          pkgs.map(function (p) {
+            return '<tr class="' + (p.active ? "" : "warn") + '"><td>' + c.esc(pkgSchemeLabel(c, p.scheme)) + (p.schemeName ? "<br><small>" + c.esc(p.schemeName) + "</small>" : "") + "</td><td>" + c.esc(p.code) + "</td><td>" + c.esc(p.name) +
+              "<br><small>" + c.esc(T(c, "site.admin.pkg.versionOf", "version {version}", { version: p.version })) + (p.active ? "" : " &middot; " + c.esc(T(c, "site.admin.pkg.withdrawn", "withdrawn"))) + "</small></td><td>" + c.esc(Number(p.rate).toFixed(2)) + "</td><td>" + c.esc(p.expectedLosDays == null ? "" : p.expectedLosDays) + "</td><td>" +
+              c.esc(p.preAuthRequired ? T(c, "site.admin.pkg.required", "required") : T(c, "site.admin.pkg.notRequired", "not required")) + "</td><td>" +
+              '<button type="button" class="btn ghost" data-pkg-edit="' + c.esc(p.id) + '">' + c.esc(T(c, "site.admin.pkg.change", "Change")) + "</button> " +
+              '<button type="button" class="btn ghost" data-pkg-hist="' + c.esc(p.id) + '">' + c.esc(T(c, "site.admin.pkg.history", "Versions")) + "</button> " +
+              '<button type="button" class="btn ghost" data-pkg-toggle="' + c.esc(p.id) + '">' + c.esc(p.active ? T(c, "site.admin.pkg.withdraw", "Withdraw") : T(c, "site.admin.pkg.restore", "Restore")) + "</button>" +
+              '<div id="admPkgHist-' + c.esc(p.id) + '"></div></td></tr>';
+          }).join("") + "</tbody></table></div>" : '<p class="quiet">' + c.esc(T(c, "site.admin.pkg.none", "No packages set up yet.")) + "</p>") +
+        "<h3>" + c.esc(ed ? T(c, "site.admin.pkg.editTitle", "Change {code}", { code: ed.code }) : T(c, "site.admin.pkg.addTitle", "Add a package")) + '</h3><div class="row">' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colScheme", "Scheme")) + '</span><select id="admPkgScheme"' + (ed ? " disabled" : "") + ">" + PKG_SCHEMES.map(function (s) { return '<option value="' + s + '"' + (val("scheme", "pmjay") === s ? " selected" : "") + ">" + c.esc(pkgSchemeLabel(c, s)) + "</option>"; }).join("") + "</select></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.schemeName", "State scheme or insurer name")) + '</span><input id="admPkgSchemeName" value="' + c.esc(val("schemeName", "")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colCode", "Code")) + '</span><input id="admPkgCode" value="' + c.esc(val("code", "")) + '"' + (ed ? " disabled" : "") + "></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colName", "Package")) + '</span><input id="admPkgName" value="' + c.esc(val("name", "")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.colRate", "Rate (Rs)")) + '</span><input id="admPkgRate" inputmode="decimal" value="' + c.esc(ed ? Number(ed.rate).toFixed(2) : "") + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.los", "Expected length of stay (days)")) + '</span><input id="admPkgLos" inputmode="numeric" value="' + c.esc(val("expectedLosDays", "")) + '"></label>' +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.preauth", "Pre-authorisation required")) + '</span><input id="admPkgPreauth" type="checkbox"' + (val("preAuthRequired", false) ? " checked" : "") + "></label></div>" +
+        "<h4>" + c.esc(T(c, "site.admin.pkg.inclusions", "Covered by the package")) + '</h4><div class="row">' + kindBoxes("inc", cover("inclusions").kinds) + "</div>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.incItems", "Also covered: items by price list code or name, one per line")) + '</span><textarea id="admPkgIncItems" rows="2">' + c.esc(cover("inclusions").items.join("\n")) + "</textarea></label>" +
+        "<h4>" + c.esc(T(c, "site.admin.pkg.exclusions", "Excluded, billed on top")) + '</h4><div class="row">' + kindBoxes("exc", cover("exclusions").kinds) + "</div>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.excItems", "Excluded items by price list code or name, one per line (an implant, blood, a named drug)")) + '</span><textarea id="admPkgExcItems" rows="2">' + c.esc(cover("exclusions").items.join("\n")) + "</textarea></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.preauthDocs", "Documents the scheme requires for pre-authorisation, one per line")) + '</span><textarea id="admPkgPreDocs" rows="3">' + c.esc(val("preAuthDocuments", []).join("\n")) + "</textarea></label>" +
+        '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.claimDocs", "Documents the scheme requires for the claim, one per line")) + '</span><textarea id="admPkgClaimDocs" rows="3">' + c.esc(val("claimDocuments", []).join("\n")) + "</textarea></label>" +
+        (ed ? '<label class="f"><span>' + c.esc(T(c, "site.admin.pkg.reason", "Why is it changing?")) + '</span><input id="admPkgReason"></label>' : "") +
+        '<button type="button" class="btn" id="admPkgSave">' + c.esc(ed ? T(c, "site.admin.pkg.saveChange", "Save as a new version") : T(c, "site.admin.add", "Add")) + "</button> " +
+        (ed ? '<button type="button" class="btn ghost" id="admPkgCancel">' + c.esc(T(c, "site.admin.pkg.cancel", "Cancel")) + "</button>" : "") +
+        '<div id="admPkgMsg"></div><p class="quiet">' + c.esc(T(c, "site.admin.pkg.docsNote", "List documents from the scheme's own package master. A stay already running on a package keeps the version it was attached with.")) + "</p></div>";
+
+      var msg = function (t) { document.getElementById("admPkgMsg").innerHTML = '<div class="msg err">' + t + "</div>"; };
+      var kindsOf = function (prefix) { return Array.prototype.slice.call(host.querySelectorAll("[data-pkg-" + prefix + "]")).filter(function (x) { return x.checked; }).map(function (x) { return x.getAttribute("data-pkg-" + prefix); }); };
+      var lines = function (id) { return document.getElementById(id).value.split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean); };
+      var send = function (body, p) {
+        return c.api("/ward/package-save", Object.assign({ orgId: c.state.orgId }, body)).then(function (x) {
+          if (!x || !x.ok) { msg(EN(c, c.esc(refusal(c, x)))); return; }
+          PKG_STATE.editing = null; c.toast(T(c, "site.admin.saved", "Saved.")); renderPackages(c, host);
+        }, function () { msg(c.esc(T(c, "site.admin.pkg.noResponse", "No response from the server. The package may not have been saved; reload to check."))); });
+      };
+      document.getElementById("admPkgSave").onclick = function () {
+        var rate = document.getElementById("admPkgRate").value.trim(), los = document.getElementById("admPkgLos").value.trim();
+        if (!document.getElementById("admPkgCode").value.trim() || !document.getElementById("admPkgName").value.trim()) { msg(c.esc(T(c, "site.admin.pkg.errCodeName", "Give the package a code and a name."))); return; }
+        if (!/^\d+(\.\d{1,2})?$/.test(rate)) { msg(c.esc(T(c, "site.admin.pkg.errRate", "The rate has to be a plain amount in rupees, like 45000 or 45000.50."))); return; }
+        if (los && !/^\d+$/.test(los)) { msg(c.esc(T(c, "site.admin.pkg.errLos", "The expected length of stay is a whole number of days."))); return; }
+        var reason = ed ? document.getElementById("admPkgReason").value.trim() : "";
+        if (ed && !reason) { msg(c.esc(T(c, "site.admin.pkg.errReason", "Say why the package is changing."))); return; }
+        send({ id: ed ? ed.id : undefined, expectedVersion: ed ? ed.version : undefined, reason: reason || undefined,
+          scheme: ed ? ed.scheme : document.getElementById("admPkgScheme").value, schemeName: document.getElementById("admPkgSchemeName").value.trim(),
+          code: ed ? ed.code : document.getElementById("admPkgCode").value.trim(), name: document.getElementById("admPkgName").value.trim(), rate: rate, expectedLosDays: los,
+          preAuthRequired: document.getElementById("admPkgPreauth").checked,
+          inclusions: { kinds: kindsOf("inc"), items: lines("admPkgIncItems") }, exclusions: { kinds: kindsOf("exc"), items: lines("admPkgExcItems") },
+          preAuthDocuments: lines("admPkgPreDocs"), claimDocuments: lines("admPkgClaimDocs") });
+      };
+      if (ed) document.getElementById("admPkgCancel").onclick = function () { PKG_STATE.editing = null; renderPackages(c, host); };
+      host.querySelectorAll("[data-pkg-edit]").forEach(function (b) { b.onclick = function () { PKG_STATE.editing = b.getAttribute("data-pkg-edit"); renderPackages(c, host); }; });
+      host.querySelectorAll("[data-pkg-toggle]").forEach(function (b) {
+        b.onclick = function () {
+          var p = pkgs.filter(function (x) { return x.id === b.getAttribute("data-pkg-toggle"); })[0]; if (!p) return;
+          var reason = prompt(p.active ? T(c, "site.admin.pkg.withdrawPrompt", "Why is {code} being withdrawn? Stays already on it keep it.", { code: p.code }) : T(c, "site.admin.pkg.restorePrompt", "Why is {code} being restored?", { code: p.code }));
+          if (!reason || !reason.trim()) return;
+          send({ id: p.id, expectedVersion: p.version, reason: reason.trim(), active: !p.active, scheme: p.scheme, schemeName: p.schemeName || "", code: p.code, name: p.name, rate: Number(p.rate).toFixed(2),
+            expectedLosDays: p.expectedLosDays == null ? "" : p.expectedLosDays, preAuthRequired: p.preAuthRequired, inclusions: p.inclusions, exclusions: p.exclusions, preAuthDocuments: p.preAuthDocuments, claimDocuments: p.claimDocuments });
+        };
+      });
+      host.querySelectorAll("[data-pkg-hist]").forEach(function (b) {
+        b.onclick = function () {
+          var id = b.getAttribute("data-pkg-hist"), box = document.getElementById("admPkgHist-" + id);
+          box.innerHTML = '<span class="spin"></span>';
+          c.api("/ward/package-versions?orgId=" + encodeURIComponent(c.state.orgId) + "&id=" + encodeURIComponent(id)).then(function (h) {
+            if (!h || !h.ok) { box.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.pkg.historyFailed", "The versions could not be loaded.")) + "</div>"; return; }
+            box.innerHTML = '<ul class="quiet">' + h.versions.slice().reverse().map(function (v) {
+              return "<li>" + c.esc(T(c, "site.admin.pkg.versionLine", "Version {version}: Rs {rate}, {at}", { version: v.version, rate: Number(v.rate).toFixed(2), at: v.writtenAt || "" })) +
+                (v.active ? "" : " &middot; " + c.esc(T(c, "site.admin.pkg.withdrawn", "withdrawn"))) + (v.changeReason ? " &middot; " + c.esc(v.changeReason) : "") + "</li>";
+            }).join("") + "</ul>";
+          }, function () { box.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.pkg.historyFailed", "The versions could not be loaded.")) + "</div>"; });
+        };
+      });
+    }, function () {
+      host.innerHTML = '<div class="card"><h2>' + c.esc(T(c, "site.admin.pkg.title", "Packages")) + '</h2><div class="msg err">' + c.esc(T(c, "site.admin.pkg.loadFailed", "The packages could not be loaded. Do not read this as no packages.")) + "</div></div>";
     });
   }
 
@@ -2445,7 +2592,10 @@
         var res = CN_STATE.result[x.id];
         /* The gateway's webhook goes to this address. It names the hospital only; the gateway's signature is what is trusted. */
         var callback = x.kind === "payment" && x.provider !== "manual"
-          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.gatewayWebhook", "Gateway webhook address:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
+          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.gatewayWebhook", "Gateway webhook address:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/payment-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>"
+          /* NHCX appends /claim/on_submit and the rest to the endpoint URL; the bearer token and this hospital's key are what is trusted. */
+          : x.kind === "payer" && x.provider === "nhcx"
+          ? '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.nhcxCallback", "NHCX endpoint URL to register for this hospital:")) + ' <code style="user-select:all;word-break:break-all">' + esc(location.origin + "/api/queue/nhcx-callback/" + encodeURIComponent(c.state.orgId)) + "</code></span>" : "";
         return '<tr class="' + (x.active ? "" : "warn") + '"><td>' + esc(x.name || x.id) + callback + (res ? '<br><span class="msg ' + (res.passed ? "ok" : "err") + '">' + esc(res.detail) + "</span>" : "") + "</td><td>" + esc(prov.label || x.provider) + "</td><td><b>" + esc(x.active ? T(c, "site.admin.connectors.on", "On") : T(c, "site.admin.connectors.off", "Off")) + "</b></td><td>" +
           (x.secretsSet.length ? esc(x.secretsSet.join(", ")) + '<br><span class="quiet">' + esc(T(c, "site.admin.connectors.setAt", "set {at}", { at: x.secretsSetAt || "" })) + "</span>" : '<span class="quiet">' + esc(T(c, "site.admin.connectors.noneSet", "none")) + "</span>") + "</td><td>" +
           '<button type="button" class="btn ghost" data-cn-edit="' + esc(x.id) + '">' + esc(T(c, "site.admin.connectors.change2", "Change")) + '</button> ' +

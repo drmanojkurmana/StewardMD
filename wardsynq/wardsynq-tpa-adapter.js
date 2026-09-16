@@ -57,6 +57,8 @@ async function submitViaAdapter(claim, adapter, opts) {
     payerReference: (result && result.payerReference) || null,
     note: (result && result.note) || null,
     ...(result && result.outcome ? { outcome: result.outcome } : {}),
+    // An asynchronous exchange (NHCX): the ids a later callback or status check is matched by. Never a body.
+    ...(result && result.exchange && typeof result.exchange === "object" ? { exchange: result.exchange } : {}),
     // The payer's own figures, carried only when the payer actually acknowledged.
     ...(state === "acknowledged" && result.adjudication ? { adjudication: result.adjudication } : {}),
     ...(state === "acknowledged" && Array.isArray(result.disallowances) && result.disallowances.length ? { disallowances: result.disallowances } : {}),
@@ -117,8 +119,16 @@ function publicPayers(payers) {
   return (Array.isArray(payers) ? payers : []).filter((p) => p && str(p.id)).map((p) => ({
     id: str(p.id), name: str(p.name) || str(p.id), adapter: str(p.adapter) || "manual",
     endpointConfigured: /^https:\/\//i.test(str(p.endpoint)),
-    credentialConfigured: !!(p.auth && typeof p.auth === "object" && (str(p.auth.credentialRef) || str(p.auth.connectorSecret))),
+    credentialConfigured: !!(p.auth && typeof p.auth === "object" && (str(p.auth.credentialRef) || str(p.auth.connectorSecret))) || nhcxConnected(p),
+    ...(str(p.adapter) === "nhcx" ? { nhcxConnected: nhcxConnected(p) } : {}),
   }));
+}
+
+/** PURE. An NHCX payer that can send: an active connector with its gateway, codes, user and all four sealed values. */
+function nhcxConnected(p) {
+  const s = (p && p.connectorSecrets) || {};
+  return str(p && p.adapter) === "nhcx" && /^https:\/\//i.test(str(p.endpoint)) && !!(str(p.senderCode) && str(p.recipientCode) && str(p.username))
+    && ["secret", "encryptionCert", "signingCert", "privateKey"].every((k) => !!s[k]);
 }
 
 /**
