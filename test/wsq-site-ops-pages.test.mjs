@@ -89,7 +89,7 @@ test("stores, assets, blood bank: every visible word is translated in another la
   const B = xx.win.WSQ._bloodbank;
   const bank = BANK();
   const bhtml = B.inventoryHtml(c, bank) + B.unitsHtml(c, bank) + B.donorsHtml(c, bank) + B.donationsHtml(c, bank) + B.samplesHtml(c, bank) + B.notificationsHtml(c, bank) + B.lookbackHtml(c, bank) + B.labelHtml(c, UNIT);
-  assert.deepEqual(leftovers(bhtml, ["BAG-1-PRBC", "BAG-1", "BAG-2", "BAG-3-PLT", "O+", "2 to 6 C", "D-1 · Asha · 1990-01-01", "D-1 · Asha", "Low Hb", "BAG-1 · D-1 · Asha · 450 mL", "BAG-2 · D-1 · Asha · 450 mL", "D-1 · Asha · 2026-09-15 12:00", "350 mL", "450 mL", "O", "A", "B", "AB",
+  assert.deepEqual(leftovers(bhtml, ["(Thangjam Santa Singh v Union of India)", "BAG-1-PRBC", "BAG-1", "BAG-2", "BAG-3-PLT", "O+", "2 to 6 C", "D-1 · Asha · 1990-01-01", "D-1 · Asha", "Low Hb", "BAG-1 · D-1 · Asha · 450 mL", "BAG-2 · D-1 · Asha · 450 mL", "D-1 · Asha · 2026-09-15 12:00", "350 mL", "450 mL", "O", "A", "B", "AB",
     "2026-10-27 00:00", "2026-09-15 13:00", "2026-09-15 14:00", "2026-09-18 00:00", "2026-09-16 10:00", "2026-09-16 11:00", "2026-09-16 09:00", "2026-09-20 00:00", "2026-09-02 00:00",
     ": Faint", "Fridge 2", "Fridge 3", " · ICTC", "MRN-7", " · Chills", "BAG-1 D-1", "D-1 · BAG-2", " MRN-7", "BAG-3-PLT · O+", "20 to 24 C with continuous gentle agitation", "4 to 6 C", "-30 C or colder", "20 to 24 C",
     " · 280 mL", "O RhD+", " · anti-M"]), []);
@@ -165,7 +165,7 @@ test("blood bank and Admin > Hospital: each criterion in force names where it co
   assert.match(card(ac, { ok: true, criteria: CRITERIA_US, saved: {} }), /data-crit="systolicMax" value="" placeholder="WHO suggests 140"/);
   const xx = loadSite({ lang: "xx", pages: ["bloodbank.js", "admin.js"] }), xc = ctxOf(xx);
   xc.ms = () => "";
-  assert.deepEqual(leftovers(xx.win.WSQ._donorCriteriaHtml(xc, { ok: true, criteria: CRITERIA, saved: {} }) + xx.win.WSQ._bloodbank.donorsHtml(xc, bank(CRITERIA)), ["120/80"]), []);
+  assert.deepEqual(leftovers(xx.win.WSQ._donorCriteriaHtml(xc, { ok: true, criteria: CRITERIA, saved: {} }) + xx.win.WSQ._bloodbank.donorsHtml(xc, bank(CRITERIA)), ["120/80", "(Thangjam Santa Singh v Union of India)"]), []);
 });
 
 test("blood bank: a failed read says to check the shelf, never no units", () => {
