@@ -7183,3 +7183,38 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
   an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
   the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.
+
+## 2026-09-17 Blood donor criteria: the stricter of WHO 2012 and the law of the hospital's country, per hospital stricter only (branch fix-donor-growth)
+
+- **Owner decision, corrected the same day by the legal review (section G).** The owner asked for international criteria
+  (WHO) instead of the unconfirmed secondary-source values. The legal review found that in India the donor criteria of the
+  Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, "H. Criteria for Blood Donation" (substituted by G.S.R. 166(E),
+  11 March 2020) are licence conditions of a blood centre (r.122-P, r.122-O), so a WHO value looser than the Rule would breach
+  the licence. Rule: **each criterion in force is the stricter of WHO and the law**; a hospital may only make it stricter.
+- **Sources read, not assumed (2026-09-17).** WHO, Blood donor selection (2012), ISBN 978 92 4 154851 9, on NCBI Bookshelf
+  (ch. 4 NBK138219, ch. 6 NBK138208, ch. 7 NBK138223); no later WHO edition found. The gazette text of G.S.R. 166(E), items
+  1-104, from https://drugscontrol.py.gov.in/sites/default/files/GSR-166-E.pdf. Council of Europe (EDQM) Guide, 22nd ed.
+  (2025), standard 2.4.1.4, for the yearly whole blood maximum WHO does not set. Every value in
+  functions/_wardsynq/donor-criteria.js carries its WHO section or its item number.
+- **Resulting values in India:** age 18-65, first-time donors up to 60, apheresis 18-60, no physician's discretion past an
+  age limit (item 2); 45 kg for 350 mL, **more than** 55 kg for 450 mL (item 3, the old `>= 55` was a bug), 50 kg for apheresis;
+  Hb 12.5 women (item 9) and 13.0 men (WHO 4.6.1); 90/120 days (item 4); apheresis 28 days between platelet collections and
+  14 for plasma (WHO 4.6.2, stricter than the Rule's 48 h), at most 2 in 7 days and 24 in a year, 28 days after whole blood,
+  whole blood 28 days after apheresis or 90 if the red cells were not all returned (item 4); platelet count above 150 and
+  total protein above 60 g/L (WHO 4.10); BP 100-140/60-90, pulse 60-100 and regular, temperature measured (items 5-7).
+  Outside India: WHO values, CoE 6/4 donations a year, BP and pulse not checked unless the hospital sets a limit, and the
+  WHO physician's discretion for older donors (named on the record).
+- **Deferral table as data.** Each yes on the questionnaire is deferred against a condition (35 conditions, WHO and Rule
+  periods, the longer or permanent wins); the period is worked out from the date given, a longer typed period is allowed,
+  a shorter one never. Conditions with no fixed period (breastfeeding, minor illness in the Rule) need days typed.
+  Item 52 is kept as the Rule states (sub judice); changing it is a code release citing the amending notification.
+- **Temperature.** Item 7 says "Afebrile; 37 C/98.4 F". Read as normal body temperature, not a ceiling: febrile is WHO
+  4.5.2's more than 37.6 C, and a centre that reads 37.0 as the ceiling sets it on Admin. Flagged for the legal reviewer.
+- **Jurisdiction** = the hospital's region: India when the region is IN or not set (as the rest of WardSynQ reads it), none
+  for another country until its law is reviewed (`legalMinimums` is keyed by jurisdiction).
+- **Settings** live in `wardsynq.bloodDonorCriteria` (org whitelist), edited at Admin > Hospital > Blood donor selection
+  criteria through GET/POST /api/queue/org/blood-donor-criteria (staff.admin, audited by criterion name). Validated on save
+  and again on every read; a stored value that is looser is ignored.
+- **Not built:** double red cell apheresis, the Rule's pre-donation checks as separate hard gates (they are one question and
+  a condition with typed days), component shelf-life changes from the legal review (Schedule P was not read here), NAT,
+  pilot sample retention, the donor record 5-year retention rule.

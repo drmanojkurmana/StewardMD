@@ -684,6 +684,43 @@
     draw(undefined);
     c.api("/org/clinical-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
   }
+  /* BLOOD DONOR CRITERIA (functions/_wardsynq/blood-bank.js, owner decision 2026-09-17). WHO 2012 by default; this
+   * hospital may only make a criterion stricter. The table is the blood bank page's own (WSQ._bloodbank), so both
+   * screens name each criterion and its source the same way. r: undefined = loading, null = could not be loaded (said,
+   * never drawn as the standard's values), else the server's { criteria, saved }; after a save, its read-back. */
+  function donorCriteriaHtml(c, r, msg) {
+    var esc = c.esc, B = WSQ._bloodbank;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.hospital.donor.title", "Blood donor selection criteria")) + "</h2>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.hospital.donor.loading", "Loading donor criteria...")) + "</p></div>";
+    if (!r || !B) return h + '<div class="msg err">' + esc(T(c, "site.admin.hospital.donor.loadFailed", "The donor criteria could not be loaded. Do not read this as the standard's values being in force.")) + "</div></div>";
+    return h + '<p class="quiet">' + esc(T(c, "site.admin.hospital.donor.intro", "The blood bank screens donors against the stricter of the WHO blood donor selection guidelines (2012) and the law of this hospital's country (in India, the Drugs and Cosmetics Rules 1945, Schedule F Part XII-B). A blood centre may apply a stricter rule here: each value can only be made stricter. Blank uses the standard.")) + "</p>" +
+      B.criteriaTableHtml(c, r.criteria, true, r.saved) +
+      '<button class="btn" id="donorCritSave" type="button">' + esc(T(c, "site.admin.hospital.donor.save", "Save donor criteria")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
+  }
+  WSQ._donorCriteriaHtml = donorCriteriaHtml;
+  function wireDonorCriteria(c) {
+    var box = document.getElementById("donorCritCard");
+    if (!box) return;
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    var draw = function (r, msg) {
+      box.innerHTML = donorCriteriaHtml(c, r, msg);
+      var btn = document.getElementById("donorCritSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var criteria = {};
+        Array.prototype.forEach.call(box.querySelectorAll("[data-crit]"), function (el) { var v = String(el.value || "").trim(); criteria[el.getAttribute("data-crit")] = v === "" ? null : Number(v); });
+        btn.disabled = true;
+        c.api("/org/blood-donor-criteria", { orgId: c.state.orgId, criteria: criteria }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; box.querySelector(".msg") && box.querySelector(".msg").remove(); box.insertAdjacentHTML("beforeend", '<div class="msg err">' + c.esc(T(c, "site.admin.hospital.donor.notSaved", "Nothing was saved.")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"); return; }
+          draw(x, { ok: true, html: x.changed && x.changed.length ? c.esc(T(c, "site.admin.hospital.donor.saved", "Saved. The server now holds the criteria shown above.")) : c.esc(T(c, "site.admin.hospital.donor.savedNoChange", "Saved: nothing had changed.")) });
+          c.toast(T(c, "site.admin.hospital.donor.toast", "Donor criteria saved."));
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/blood-donor-criteria" + q).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
   /* CRITICAL RESULT ALERTS TO PHONES (S3 P0). Whether a critical result is pushed through the StewardMD
    * app, who each level tells, the SMS fallback when no phone confirms, and - loudest - every open result
    * that told nobody. Everything shown comes from GET /ward/alert-status, so this card never has its own
@@ -835,7 +872,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="donorCritCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -858,6 +895,7 @@
       });
     };
     wireClinicalSettings(c);
+    wireDonorCriteria(c);
     wireNoteWriters(c);
     wirePrintLang(c);
     wireLabelSizes(c);

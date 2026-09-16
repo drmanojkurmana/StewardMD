@@ -30,10 +30,13 @@
  *   - Red cells 2-6 C (stored 4 +/- 2 C), platelets 22 +/- 2 C on an agitator: https://pmc.ncbi.nlm.nih.gov/articles/PMC9855214/
  *     CONFIRMED (secondary, storage temperature only).
  *   - UNCONFIRMED against a primary text: red cells in SAGM 42 days and whole blood/CPDA-1 35 days; FFP and
- *     cryoprecipitate one year at -30 C or colder; donor age 18-65, weight 45 kg (55 kg for a 450 mL bag),
- *     haemoglobin 12.5 g/dL, 90 days between donations for men and 120 for women. Shelf lives are therefore
- *     DEFAULTS the screen offers and the blood bank confirms against its own licence conditions and SOPs; the
- *     expiry recorded is the one the blood bank enters. The donor criteria are enforced as stated here.
+ *     cryoprecipitate one year at -30 C or colder. Shelf lives are therefore DEFAULTS the screen offers and the blood
+ *     bank confirms against its own licence conditions and SOPs; the expiry recorded is the one the blood bank enters.
+ *
+ * DONOR SELECTION. donor-criteria.js holds the criteria and the deferral table: the stricter of WHO 2012 and the law of
+ * the hospital's jurisdiction (Drugs and Cosmetics Rules 1945 Schedule F Part XII-B in India), each value with its
+ * section or item, and a hospital's own settings only where stricter. This file applies them to a screening and a
+ * collection.
  */
 
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
@@ -41,6 +44,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { DONATION_TYPES, HB_METHODS, donorCriteriaFor, screeningFailures, discretionary, deferralFor, meets } from "./donor-criteria.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const up = (v) => str(v).toUpperCase();
@@ -59,9 +63,6 @@ const COMPONENTS = Object.freeze({
 });
 /* The transfusion engine's and the ward screen's spellings, to the inventory's component. */
 const COMPONENT_ALIAS = Object.freeze({ "whole-blood": "whole-blood", "red-cells": "prbc", prbc: "prbc", plasma: "ffp", ffp: "ffp", platelets: "platelets", sdp: "platelets", cryoprecipitate: "cryo", cryo: "cryo" });
-/* Each yes needs a deferral. The periods beside them are guidance on the screen, not computed here. */
-const SCREENING_QUESTIONS = Object.freeze(["illness", "malaria", "jaundice", "tattoo", "transfusion", "surgery", "pregnancy", "high-risk", "chronic-disease"]);
-const CRITERIA = Object.freeze({ minAge: 18, maxAge: 65, minWeightKg: 45, minWeightKg450: 55, minHb: 12.5, intervalDaysMale: 90, intervalDaysFemale: 120 });
 const ISSUED_PHASES = new Set(["issued", "checked", "transfusing", "completed"]);
 
 async function open(request, env, ctx, need) {
@@ -185,13 +186,14 @@ async function bloodBankOverview(request, env, ctx) {
   const now = ctx.now || new Date().toISOString();
   const units = unitStatuses(b.BloodUnit, b.BloodDonation, b.BloodTestResult, b.BloodUnitEvent, b.TransfusionEpisode, now);
   const soon = Date.parse(now) + 3 * DAY;
+  const criteria = donorCriteriaFor(ctx.wsqCfg, ctx.orgRegion);
   return {
-    ...base, ok: true, now, questions: SCREENING_QUESTIONS, tti: TTI, criteria: CRITERIA,
+    ...base, ok: true, now, tti: TTI, hbMethods: HB_METHODS, donationTypes: DONATION_TYPES, criteria, questions: criteria.questions,
     components: Object.keys(COMPONENTS).map((c) => ({ component: c, ...COMPONENTS[c] })),
     donors: b.BloodDonor.map((d) => ({ donorId: d.id, donorNumber: d.donorNumber, name: d.name, sex: d.sex, dateOfBirth: d.dateOfBirth, phone: d.phone || null, deferral: deferralInForce(d.id, b.DonorScreening, now) }))
       .sort((a, b2) => str(a.name).localeCompare(str(b2.name))),
-    screenings: b.DonorScreening.sort(byAt).reverse().slice(0, 200).map((s) => ({ screeningId: s.id, donorId: s.donorId, outcome: s.outcome, deferralReason: s.deferralReason || null, deferredUntil: s.deferredUntil || null, permanent: !!s.permanent, at: s.at, used: b.BloodDonation.some((d) => d.screeningId === s.id) })),
-    donations: b.BloodDonation.map((d) => ({ donationId: d.id, bagNumber: d.bagNumber, donorId: d.donorId, volumeMl: d.volumeMl, bagType: d.bagType, collectedAt: d.collectedAt, tests: donationTests(d.id, b.BloodTestResult), units: units.filter((u) => u.donationId === d.id).length }))
+    screenings: b.DonorScreening.sort(byAt).reverse().slice(0, 200).map((s) => ({ screeningId: s.id, donorId: s.donorId, donationType: s.donationType || "whole-blood", outcome: s.outcome, deferralReason: s.deferralReason || null, deferredUntil: s.deferredUntil || null, permanent: !!s.permanent, at: s.at, used: b.BloodDonation.some((d) => d.screeningId === s.id) })),
+    donations: b.BloodDonation.map((d) => ({ donationId: d.id, bagNumber: d.bagNumber, donorId: d.donorId, donationType: d.donationType || "whole-blood", volumeMl: d.volumeMl, bagType: d.bagType, collectedAt: d.collectedAt, tests: donationTests(d.id, b.BloodTestResult), units: units.filter((u) => u.donationId === d.id).length }))
       .sort((a, b2) => str(b2.collectedAt).localeCompare(str(a.collectedAt))),
     units: units.sort((a, b2) => str(a.expiresAt).localeCompare(str(b2.expiresAt))),
     inventory: inventoryOf(units),
@@ -218,68 +220,91 @@ async function registerDonor(request, env, ctx) {
   } catch (e) { return { ...base, ...writeFailure(e), written: 0 }; }
 }
 
-function ageOn(dob, iso) {
-  const b = new Date(dob + "T00:00:00Z"), n = new Date(iso);
-  let a = n.getUTCFullYear() - b.getUTCFullYear();
-  if (n.getUTCMonth() < b.getUTCMonth() || (n.getUTCMonth() === b.getUTCMonth() && n.getUTCDate() < b.getUTCDate())) a--;
-  return a;
-}
+const refusal = (base, status, error, detail, extra) => ({ ...base, ok: false, status, error, detail, ...(extra || {}), written: 0 });
 
-/** PURE. Why a donor may not donate now, from the screening values and their donation history. [] = no reason. */
-function screeningFailures(donor, s, lastDonationAt, nowIso) {
-  const out = [];
-  const age = ageOn(donor.dateOfBirth, nowIso);
-  if (!(age >= CRITERIA.minAge && age <= CRITERIA.maxAge)) out.push("age");
-  if (!(Number(s.weightKg) >= CRITERIA.minWeightKg)) out.push("weight");
-  if (!(Number(s.hbGdl) >= CRITERIA.minHb)) out.push("haemoglobin");
-  if (SCREENING_QUESTIONS.some((q) => s.answers && s.answers[q] === true)) out.push("questionnaire");
-  if (lastDonationAt) {
-    const gap = (Date.parse(nowIso) - Date.parse(lastDonationAt)) / DAY;
-    if (gap < (donor.sex === "female" ? CRITERIA.intervalDaysFemale : CRITERIA.intervalDaysMale)) out.push("interval");
-  }
-  return out;
-}
-
-/** POST /ward/donor-screening - questionnaire, weight, haemoglobin, and the outcome: eligible, or deferred with reason and period. */
+/**
+ * POST /ward/donor-screening - the questionnaire, the measurements and the outcome: eligible, or deferred against the
+ * conditions of the deferral table (donor-criteria.js). A longer period or a permanent deferral is always allowed; a
+ * shorter one than the table never is, so the period recorded is the later of the two.
+ */
 async function screenDonor(request, env, ctx) {
   const base = baseOf(ctx);
   if (off(ctx)) return { ...base, ok: true, skipped: "off", written: 0 };
-  const outcome = str(ctx.outcome), donorId = str(ctx.donorId);
+  const criteria = donorCriteriaFor(ctx.wsqCfg, ctx.orgRegion), L = criteria.limits, m = criteria.measure;
+  const outcome = str(ctx.outcome), donorId = str(ctx.donorId), donationType = str(ctx.donationType) || "whole-blood";
+  if (!DONATION_TYPES.includes(donationType)) return refusal(base, 422, "donation_type_invalid", `The donation type is one of ${DONATION_TYPES.join(", ")}.`);
   const answers = {};
-  for (const q of SCREENING_QUESTIONS) {
+  for (const q of criteria.questions) {
     const v = ctx.answers && ctx.answers[q];
-    if (typeof v !== "boolean") return { ...base, ok: false, status: 422, error: "questionnaire_incomplete", question: q, detail: "Every screening question is answered yes or no.", written: 0 };
+    if (typeof v !== "boolean") return refusal(base, 422, "questionnaire_incomplete", "Every screening question is answered yes or no.", { question: q });
     answers[q] = v;
   }
   const weightKg = Number(ctx.weightKg), hbGdl = Number(ctx.hbGdl);
-  if (!(weightKg > 0) || !(hbGdl > 0) || str(ctx.weightKg) === "" || str(ctx.hbGdl) === "") return { ...base, ok: false, status: 422, error: "vitals_required", detail: "Weight and haemoglobin are measured, not assumed.", written: 0 };
-  if (!["eligible", "deferred"].includes(outcome)) return { ...base, ok: false, status: 422, error: "bad_outcome", written: 0 };
+  if (!(weightKg > 0) || !(hbGdl > 0) || str(ctx.weightKg) === "" || str(ctx.hbGdl) === "") return refusal(base, 422, "vitals_required", "Weight and haemoglobin are measured, not assumed.");
+  if (!["eligible", "deferred"].includes(outcome)) return refusal(base, 422, "bad_outcome");
+  const hbMethod = str(ctx.hbMethod) || null;
+  if (hbMethod && !HB_METHODS.includes(hbMethod)) return refusal(base, 422, "hb_method_invalid", `The haemoglobin method is one of ${HB_METHODS.join(", ")}.`);
+  const bp = /^(\d{2,3})\s*\/\s*(\d{2,3})$/.exec(str(ctx.bp)), num = (v) => (str(v) === "" ? null : Number(v));
+  const temperatureC = num(ctx.temperature), pulse = num(ctx.pulse), plateletCount = num(ctx.plateletCount), totalProteinGL = num(ctx.totalProteinGL);
+  const pulseRegular = typeof ctx.pulseRegular === "boolean" ? ctx.pulseRegular : null;
+  if ((str(ctx.bp) && !bp) || [temperatureC, pulse, plateletCount, totalProteinGL].some((v) => v != null && !Number.isFinite(v))) {
+    return refusal(base, 422, "vitals_invalid", "Blood pressure is written as systolic/diastolic (120/80); temperature, pulse, platelet count and total protein as numbers.");
+  }
+  const law = (item) => `${criteria.standards[criteria.jurisdiction]}, item ${item}`;
+  if (!bp && (m.bp || [L.systolicMin, L.systolicMax, L.diastolicMin, L.diastolicMax].some(Boolean))) return refusal(base, 422, "bp_required", m.bp ? `Blood pressure is measured at every screening (${law(m.bp)}).` : "This hospital checks blood pressure before donation. Measure and record it.");
+  if ((pulse == null && (m.pulse || L.pulseMin || L.pulseMax)) || (m.pulse && pulseRegular == null)) return refusal(base, 422, "pulse_required", m.pulse ? `The pulse and whether it is regular are recorded at every screening (${law(m.pulse)}).` : "This hospital checks the pulse before donation. Measure and record it.");
+  if (temperatureC == null && m.temperature) return refusal(base, 422, "temperature_required", `The donor must be afebrile, so temperature is measured at every screening (${law(m.temperature)}).`);
+  if (donationType === "apheresis-platelets" && plateletCount == null) return refusal(base, 422, "apheresis_lab_required", "A platelet apheresis donor's platelet count is measured before donation (WHO 2012, 4.10).");
+  if (donationType === "apheresis-plasma" && totalProteinGL == null) return refusal(base, 422, "apheresis_lab_required", "A plasma apheresis donor's total protein is measured before donation (WHO 2012, 4.10).");
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let donor, screenings, donations;
   try { [donor, screenings, donations] = await Promise.all([svc.get("BloodDonor", donorId), svc.list("DonorScreening", READ_CAP), svc.list("BloodDonation", READ_CAP)]); }
   catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
-  if (!donor) return { ...base, ok: false, status: 404, error: "donor_not_found", written: 0 };
+  if (!donor) return refusal(base, 404, "donor_not_found");
   const now = new Date().toISOString();
-  const last = latest(donations).filter((d) => d.donorId === donorId).map((d) => d.collectedAt).sort().pop() || null;
-  const failures = screeningFailures(donor, { weightKg, hbGdl, answers }, last, now);
+  const history = latest(donations).filter((d) => d.donorId === donorId).map((d) => ({ at: d.collectedAt, type: d.donationType || "whole-blood", reinfusionComplete: d.reinfusionComplete }));
+  const failures = screeningFailures(donor, { donationType, weightKg, hbGdl, answers, temperatureC, pulse, pulseRegular, plateletCount, totalProteinGL,
+    systolic: bp ? Number(bp[1]) : null, diastolic: bp ? Number(bp[2]) : null }, history, now, criteria);
   const inForce = deferralInForce(donorId, screenings, now);
-  const record = { resourceType: "DonorScreening", id: `wsq-screen-${crypto.randomUUID()}`, donorId, answers, weightKg, hbGdl,
-    bp: str(ctx.bp) || null, pulse: str(ctx.pulse) || null, temperature: str(ctx.temperature) || null, outcome, failures, by: resolved.actor.id, at: now };
+  const record = { resourceType: "DonorScreening", id: `wsq-screen-${crypto.randomUUID()}`, donorId, donationType, answers, weightKg, hbGdl, hbMethod,
+    bp: str(ctx.bp) || null, pulse, pulseRegular, temperature: temperatureC, plateletCount, totalProteinGL, outcome, failures,
+    criteriaInForce: { jurisdiction: criteria.jurisdiction, values: criteria.values }, by: resolved.actor.id, at: now };
   if (outcome === "eligible") {
-    if (inForce) return { ...base, ok: false, status: 409, error: "donor_deferred", deferral: inForce, detail: "This donor is deferred and cannot be accepted.", written: 0 };
-    if (failures.length) return { ...base, ok: false, status: 422, error: "not_eligible", failures, detail: `This donor does not meet: ${failures.join(", ")}. Record a deferral instead.`, written: 0 };
+    if (inForce) return refusal(base, 409, "donor_deferred", "This donor is deferred and cannot be accepted.", { deferral: inForce });
+    const allowed = discretionary(criteria), hard = failures.filter((f) => !allowed.includes(f));
+    if (hard.length) return refusal(base, 422, "not_eligible", `This donor does not meet: ${hard.join(", ")}. Record a deferral instead.`, { failures });
+    if (failures.length) {
+      /* WHO 4.1.2: an older first-time donor, or a regular donor past the upper age, only at the discretion of the
+       * responsible physician, named with the reason on the record. Never where the law states the age without one. */
+      const physician = str(ctx.physicianName), why = str(ctx.physicianReason);
+      if (!physician || !why) return refusal(base, 422, "physician_discretion_required", "Past this age a donor is accepted only at the discretion of the responsible physician (WHO 2012, 4.1.2). Name the physician and the reason, or record a deferral.", { failures });
+      record.physicianDiscretion = { name: physician, reason: why, failures };
+    }
   } else {
-    const reason = str(ctx.deferralReason), days = Number(ctx.deferralDays);
-    if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "A deferral records why.", written: 0 };
-    if (ctx.permanent !== true && !(Number.isInteger(days) && days > 0)) return { ...base, ok: false, status: 422, error: "deferral_period_required", detail: "A deferral is for a number of days, or permanent.", written: 0 };
+    const conditions = (Array.isArray(ctx.deferralConditions) ? ctx.deferralConditions : []).filter((x) => x && str(x.condition));
+    const uncovered = criteria.questions.filter((q) => answers[q] && !conditions.some((x) => criteria.deferrals[str(x.condition)] && criteria.deferrals[str(x.condition)].question === q));
+    if (uncovered.length) return refusal(base, 422, "deferral_condition_required", `A yes to ${uncovered.join(", ")} is deferred against the condition in the deferral table it concerns.`, { questions: uncovered });
+    const table = deferralFor(conditions, criteria, now);
+    if (!table.ok) return { ...base, status: 422, ...table, written: 0 };
+    const reason = str(ctx.deferralReason) || table.applied.map((a) => a.condition).join(", ");
+    if (!reason) return refusal(base, 422, "reason_required", "A deferral records why.");
+    const days = str(ctx.deferralDays) === "" || ctx.deferralDays == null ? null : Number(ctx.deferralDays);
+    if (days != null && !(Number.isInteger(days) && days > 0)) return refusal(base, 422, "deferral_period_required", "A deferral is for a whole number of days, or permanent.");
+    record.permanent = ctx.permanent === true || table.permanent;
+    if (!record.permanent) {
+      if (table.undated.length && days == null) return refusal(base, 422, "deferral_period_required", `${table.undated.join(", ")} has no fixed period in the standards: enter the days until it resolves.`, { conditions: table.undated });
+      const own = days == null ? null : new Date(Date.parse(now) + days * DAY).toISOString();
+      record.deferredUntil = [own, table.until].filter(Boolean).sort().pop() || null;
+      if (!record.deferredUntil) return refusal(base, 422, "deferral_period_required", conditions.length ? "The deferral period for this condition has already passed. Enter the days if the donor is still deferred." : "A deferral is for a number of days, or permanent.");
+    } else record.deferredUntil = null;
     record.deferralReason = reason;
-    record.permanent = ctx.permanent === true;
-    record.deferredUntil = record.permanent ? null : new Date(Date.parse(now) + days * DAY).toISOString();
+    record.deferralConditions = table.applied;
   }
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
-    return { ...base, ok: true, written: 1, screeningId: record.id, outcome, failures, version: out.record.version };
+    return { ...base, ok: true, written: 1, screeningId: record.id, outcome, failures, version: out.record.version,
+      ...(outcome === "deferred" ? { permanent: record.permanent, deferredUntil: record.deferredUntil, deferralConditions: record.deferralConditions } : {}) };
   } catch (e) { return { ...base, ...writeFailure(e), written: 0 }; }
 }
 
@@ -289,26 +314,32 @@ async function recordDonation(request, env, ctx) {
   if (off(ctx)) return { ...base, ok: true, skipped: "off", written: 0 };
   const bag = up(ctx.bagNumber).replace(/[^A-Z0-9-]+/g, "");
   const volume = Number(ctx.volumeMl);
-  if (!bag) return { ...base, ok: false, status: 422, error: "bag_number_required", written: 0 };
-  if (![350, 450].includes(volume)) return { ...base, ok: false, status: 422, error: "bad_volume", detail: "A donation is a 350 mL or 450 mL bag.", written: 0 };
+  if (!bag) return refusal(base, 422, "bag_number_required");
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   let screening, donations;
   try { [screening, donations] = await Promise.all([svc.get("DonorScreening", str(ctx.screeningId)), svc.list("BloodDonation", READ_CAP)]); }
   catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   const now = new Date().toISOString();
-  if (!screening || screening.outcome !== "eligible") return { ...base, ok: false, status: 409, error: "no_eligible_screening", detail: "A donation is collected only against an eligible screening.", written: 0 };
-  if (Date.parse(now) - Date.parse(screening.at) > DAY) return { ...base, ok: false, status: 409, error: "screening_too_old", detail: "The screening is more than 24 hours old. Screen the donor again.", written: 0 };
-  if (latest(donations).some((d) => d.screeningId === screening.id)) return { ...base, ok: false, status: 409, error: "screening_used", written: 0 };
-  if (volume === 450 && !(Number(screening.weightKg) >= CRITERIA.minWeightKg450)) return { ...base, ok: false, status: 422, error: "weight_below_450", detail: `A 450 mL bag needs a donor of at least ${CRITERIA.minWeightKg450} kg.`, written: 0 };
-  const record = { resourceType: "BloodDonation", id: `wsq-donation-${bag.toLowerCase()}`, bagNumber: bag, donorId: screening.donorId, screeningId: screening.id,
-    volumeMl: volume, bagType: str(ctx.bagType) || null, collectedAt: now, adverseReaction: str(ctx.adverseReaction) || null, by: resolved.actor.id, at: now };
+  if (!screening || screening.outcome !== "eligible") return refusal(base, 409, "no_eligible_screening", "A donation is collected only against an eligible screening.");
+  if (Date.parse(now) - Date.parse(screening.at) > DAY) return refusal(base, 409, "screening_too_old", "The screening is more than 24 hours old. Screen the donor again.");
+  if (latest(donations).some((d) => d.screeningId === screening.id)) return refusal(base, 409, "screening_used");
+  const type = screening.donationType || "whole-blood", apheresis = type !== "whole-blood";
+  if (!apheresis && ![350, 450].includes(volume)) return refusal(base, 422, "bad_volume", "A whole blood donation is a 350 mL or 450 mL bag.");
+  if (apheresis && !(Number.isInteger(volume) && volume > 0 && volume <= 1000)) return refusal(base, 422, "bad_volume", "An apheresis collection records its volume in mL.");
+  if (apheresis && typeof ctx.reinfusionComplete !== "boolean") return refusal(base, 422, "reinfusion_required", "Record whether the red cells were returned completely: it decides when this donor may give again.");
+  if (!apheresis) {
+    const lim = donorCriteriaFor(ctx.wsqCfg, ctx.orgRegion).limits[volume === 450 ? "minWeightKg450" : "minWeightKg350"];
+    if (!meets("higher", Number(screening.weightKg), lim)) return refusal(base, 422, volume === 450 ? "weight_below_450" : "weight_below_350", `A ${volume} mL bag needs a donor weighing ${lim.exclusive ? "more than" : "at least"} ${lim.value} kg.`);
+  }
+  const record = { resourceType: "BloodDonation", id: `wsq-donation-${bag.toLowerCase()}`, bagNumber: bag, donorId: screening.donorId, screeningId: screening.id, donationType: type,
+    volumeMl: volume, bagType: str(ctx.bagType) || null, reinfusionComplete: apheresis ? ctx.reinfusionComplete : null, collectedAt: now, adverseReaction: str(ctx.adverseReaction) || null, by: resolved.actor.id, at: now };
   try {
     /* The bag number is the id: a bag used twice is refused, never merged into the first donation. */
     const out = await svc.put(record, { expectedVersion: 0, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, donationId: record.id, bagNumber: bag, version: out.record.version };
   } catch (e) {
-    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "bag_number_used", detail: "That bag number is already recorded.", written: 0 };
+    if (e instanceof VersionConflictError) return refusal(base, 409, "bag_number_used", "That bag number is already recorded.");
     return { ...base, ...writeFailure(e), written: 0 };
   }
 }
@@ -439,7 +470,7 @@ async function bloodUnitGate(request, env, ctx, stage) {
 }
 
 export {
-  TTI, ABO, RHD, COMPONENTS, SCREENING_QUESTIONS, CRITERIA,
-  donationTests, deferralInForce, unitStatuses, inventoryOf, screeningFailures, normComponent,
+  TTI, ABO, RHD, COMPONENTS,
+  donationTests, deferralInForce, unitStatuses, inventoryOf, normComponent,
   bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate,
 };

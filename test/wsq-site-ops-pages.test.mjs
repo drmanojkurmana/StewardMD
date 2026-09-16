@@ -12,6 +12,12 @@ import assert from "node:assert/strict";
 import { loadSite, leftovers } from "./wsq-site-i18n-harness.mjs";
 
 const ctxOf = (env) => ({ esc: env.win.WSQ.esc, t: env.win.WSQ.t, tSafe: env.win.WSQ.tSafe, en: env.win.WSQ.en });
+/* GET /ward/blood-bank criteria as donor-criteria.js donorCriteriaFor answers for an Indian hospital with two stricter
+ * settings, and for one outside India. */
+const { donorCriteriaFor } = await import("../functions/_wardsynq/donor-criteria.js");
+const SAVED = { minHbFemale: 13, deferrals: { tattoo: 400 } };
+const CRITERIA = JSON.parse(JSON.stringify(donorCriteriaFor({ bloodDonorCriteria: SAVED }, "IN")));
+const CRITERIA_US = JSON.parse(JSON.stringify(donorCriteriaFor(null, "US")));
 const load = (lang) => loadSite({ lang, pages: ["stores.js", "assets.js", "bloodbank.js"] });
 
 const STORES = {
@@ -62,7 +68,7 @@ test("stores, assets, blood bank: every visible word is translated in another la
 
   const B = xx.win.WSQ._bloodbank;
   const bank = { ok: true, now: "2026-09-16T00:00:00Z", questions: ["illness", "high-risk"], tti: ["hiv", "malaria"],
-    criteria: { minAge: 18, maxAge: 65, minWeightKg: 45, minWeightKg450: 55, minHb: 12.5, intervalDaysMale: 90, intervalDaysFemale: 120 },
+    criteria: CRITERIA,
     components: [{ component: "prbc", shelfDays: 42, storage: "2 to 6 C" }],
     donors: [{ donorId: "dn1", donorNumber: "D-1", name: "Asha", dateOfBirth: "1990-01-01", deferral: { permanent: false, until: "2026-12-01T00:00:00Z", reason: "Low Hb" } }],
     screenings: [{ screeningId: "sc1", donorId: "dn1", outcome: "eligible", used: false, at: "2026-09-15T12:00:00Z" }],
@@ -71,6 +77,42 @@ test("stores, assets, blood bank: every visible word is translated in another la
     inventory: [{ group: "O+", component: "prbc", available: 1, soonestExpiry: "2026-10-27T00:00:00Z" }], expiryAlerts: [] };
   const bhtml = B.inventoryHtml(c, bank) + B.unitsHtml(c, bank) + B.donorsHtml(c, bank) + B.donationsHtml(c, bank);
   assert.deepEqual(leftovers(bhtml, ["BAG-1-PRBC", "BAG-1", "O+", "2 to 6 C", "D-1 · Asha · 1990-01-01", "D-1 · Asha", "Low Hb", "BAG-1 · D-1 · Asha · 450 mL", "D-1 · Asha · 2026-09-15 12:00", "350 mL", "450 mL", "O", "A", "B", "AB", "2026-10-27 00:00", "2026-09-15 13:00"]), []);
+});
+
+test("blood bank and Admin > Hospital: each criterion in force names where it comes from (WHO section, Schedule F item, both, or this hospital); each question's window is the deferral in force; Admin edits only stricter values", () => {
+  const en = load("en"), c = ctxOf(en), B = en.win.WSQ._bloodbank;
+  const bank = (criteria) => ({ ok: true, now: "2026-09-17T00:00:00Z", questions: criteria.questions, criteria, donors: [] });
+  const html = B.donorsHtml(c, bank(CRITERIA)).replace(/&#39;/g, "'");
+  assert.match(html, /stricter of the WHO blood donor selection guidelines \(2012\) and the Drugs and Cosmetics Rules 1945, Schedule F Part XII-B/);
+  assert.match(html, /WHO blood donor selection guidelines \(2012\), section 4\.6\.1/, "men's haemoglobin: WHO is stricter");
+  assert.match(html, /Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, item 4 \(stricter than WHO\)/, "intervals: the law is stricter");
+  assert.match(html, /WHO 2012 section 4\.1\.1, and Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, item 2/, "minimum age: both say 18");
+  assert.match(html, /This hospital's stricter setting/);
+  assert.match(html, /more than 55/);
+  assert.match(html, /Malaria in the last 183 days/);
+  assert.match(html, /Tattoo, piercing, acupuncture or other skin-piercing procedure in the last 400 days/, "the window follows this hospital's longer deferral");
+  assert.match(html, /A resident of another country who has lived in India for less than 1096 days/);
+  assert.match(html, /<option value="hepatitis-b-c-unknown">Hepatitis B, C or of unknown cause \(permanent\)<\/option>/);
+  assert.match(html, /id="bbScHbM"/); assert.match(html, /id="bbScType"/); assert.match(html, /id="bbScPulseReg"/); assert.match(html, /id="bbScCond1"/);
+  const us = B.donorsHtml(c, bank(CRITERIA_US)).replace(/&#39;/g, "'");
+  assert.match(us, /Council of Europe blood components guide \(22nd edition, 2025\), standard 2\.4\.1\.4/);
+  assert.match(us, /Neither standard sets a value/);
+  assert.doesNotMatch(us, /lived in India/);
+  assert.doesNotMatch(B.criteriaTableHtml(c, CRITERIA, false), /data-crit=/, "the blood bank reads the criteria; only Admin edits them");
+  const adm = loadSite({ lang: "en", pages: ["bloodbank.js", "admin.js"] }), ac = ctxOf(adm);
+  ac.ms = () => "";
+  const card = adm.win.WSQ._donorCriteriaHtml;
+  assert.match(card(ac, undefined), /Loading donor criteria/);
+  assert.match(card(ac, null).replace(/&#39;/g, "'"), /Do not read this as the standard's values being in force/);
+  const form = card(ac, { ok: true, criteria: CRITERIA, saved: SAVED });
+  assert.match(form, /data-crit="minHbFemale" value="13" placeholder="12.5"/);
+  assert.match(form, /data-crit="minWeightKg450" value="" placeholder="more than 55"/);
+  assert.match(form, /data-crit="deferrals.tattoo" value="400" placeholder="366"/);
+  assert.doesNotMatch(form, /data-crit="deferrals.hepatitis-b-c-unknown"/, "a permanent deferral cannot be made stricter");
+  assert.match(card(ac, { ok: true, criteria: CRITERIA_US, saved: {} }), /data-crit="systolicMax" value="" placeholder="WHO suggests 140"/);
+  const xx = loadSite({ lang: "xx", pages: ["bloodbank.js", "admin.js"] }), xc = ctxOf(xx);
+  xc.ms = () => "";
+  assert.deepEqual(leftovers(xx.win.WSQ._donorCriteriaHtml(xc, { ok: true, criteria: CRITERIA, saved: {} }) + xx.win.WSQ._bloodbank.donorsHtml(xc, bank(CRITERIA)), ["120/80"]), []);
 });
 
 test("blood bank: a failed read says to check the shelf, never no units", () => {

@@ -257,6 +257,7 @@ import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_w
 import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
 import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
 import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate } from "../../_wardsynq/blood-bank.js";
+import { donorCriteriaFor, validateDonorCriteria } from "../../_wardsynq/donor-criteria.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
@@ -2061,7 +2062,8 @@ export async function onRequest(context) {
       if (!mig) return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The inpatient ward is only available for a WardSynQ-native hospital." }, 409, request);
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
       // clock: the hospital's wall clock for calendar facts (an expected discharge date that has passed).
-      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg,
+      // orgRegion: the hospital's country, which decides the law a rule is checked against (donor-criteria.js jurisdictionOf).
+      const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg, orgRegion: (wOrg && wOrg.region) || null,
         clock: { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" } };
       /* CONTROLLED DRUGS (controlled-drugs.js). Whether a drug is controlled is the hospital's drug master; who may witness
        * one is an ACTIVE member of THIS hospital who dispenses, gives medicines or keeps the NDPS register. The lookup
@@ -2196,8 +2198,8 @@ export async function onRequest(context) {
         if (sub === "job-card-update" && method === "POST") return R(await updateJobCard(request, env, { ...deps, jobCardId: body.jobCardId, action: body.action, engineer: body.engineer, code: body.code, quantity: body.quantity, location: body.location, resolution: body.resolution, checklist: body.checklist, calibrationResult: body.calibrationResult, downtimeMinutes: body.downtimeMinutes, statusAfter: body.statusAfter, idempotencyKey: key }));
         if (sub === "blood-bank" && method === "GET") return R(await bloodBankOverview(request, env, { ...deps }));
         if (sub === "blood-donor" && method === "POST") return R(await registerDonor(request, env, { ...deps, name: body.name, sex: body.sex, dateOfBirth: body.dateOfBirth, phone: body.phone, address: body.address, idempotencyKey: key }));
-        if (sub === "donor-screening" && method === "POST") return R(await screenDonor(request, env, { ...deps, donorId: body.donorId, answers: body.answers, weightKg: body.weightKg, hbGdl: body.hbGdl, bp: body.bp, pulse: body.pulse, temperature: body.temperature, outcome: body.outcome, deferralReason: body.deferralReason, deferralDays: body.deferralDays, permanent: body.permanent === true, idempotencyKey: key }));
-        if (sub === "blood-donation" && method === "POST") return R(await recordDonation(request, env, { ...deps, screeningId: body.screeningId, bagNumber: body.bagNumber, volumeMl: body.volumeMl, bagType: body.bagType, adverseReaction: body.adverseReaction, idempotencyKey: key }));
+        if (sub === "donor-screening" && method === "POST") return R(await screenDonor(request, env, { ...deps, donorId: body.donorId, answers: body.answers, weightKg: body.weightKg, hbGdl: body.hbGdl, bp: body.bp, pulse: body.pulse, pulseRegular: body.pulseRegular, temperature: body.temperature, hbMethod: body.hbMethod, donationType: body.donationType, plateletCount: body.plateletCount, totalProteinGL: body.totalProteinGL, physicianName: body.physicianName, physicianReason: body.physicianReason, deferralConditions: body.deferralConditions, outcome: body.outcome, deferralReason: body.deferralReason, deferralDays: body.deferralDays, permanent: body.permanent === true, idempotencyKey: key }));
+        if (sub === "blood-donation" && method === "POST") return R(await recordDonation(request, env, { ...deps, screeningId: body.screeningId, bagNumber: body.bagNumber, volumeMl: body.volumeMl, bagType: body.bagType, reinfusionComplete: body.reinfusionComplete, adverseReaction: body.adverseReaction, idempotencyKey: key }));
         if (sub === "blood-test-result" && method === "POST") return R(await recordBloodTests(request, env, { ...deps, donationId: body.donationId, tti: body.tti, abo: body.abo, rhD: body.rhD, method: body.method, idempotencyKey: key }));
         if (sub === "blood-components" && method === "POST") return R(await separateComponents(request, env, { ...deps, donationId: body.donationId, components: body.components }));
         if (sub === "blood-unit-event" && method === "POST") return R(await bloodUnitEvent(request, env, { ...deps, unitId: body.unitId, kind: body.kind, reason: body.reason, idempotencyKey: key }));
@@ -5109,6 +5111,30 @@ export async function onRequest(context) {
         { action: "org:clinical_settings", meta: JSON.stringify({ changed, template: cb.templateId || null }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ok: true, changed, settings: CLINICAL.readClinicalSettings(back && back.wardsynq) }, 200, request);
+    }
+    /* Blood donor selection criteria (donor-criteria.js, owner decision 2026-09-17 as corrected by the legal review): the
+     * stricter of WHO 2012 and the law of the hospital's region is in force, and a hospital may only make a criterion
+     * stricter. staff.admin reads and saves; the read shows each value in force and where it comes from. The audit row
+     * names the criteria changed, not the values. */
+    if (seg === "org" && sub === "blood-donor-criteria") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Donor criteria belong to a WardSynQ hospital." }, 409, request);
+      const view = (cfg) => ({ ok: true, criteria: donorCriteriaFor(cfg, o.region), saved: (cfg && cfg.bloodDonorCriteria) || {} });
+      if (method === "GET") return json(view(o.wardsynq), 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateDonorCriteria(cb.criteria, o.region);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_donor_criteria", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const flatOf = (x) => ({ ...x.values, ...Object.fromEntries(Object.entries(x.deferrals).map(([c2, d]) => [`deferrals.${c2}`, d.days])) });
+      const before = flatOf(donorCriteriaFor(o.wardsynq, o.region)), after = flatOf(donorCriteriaFor({ bloodDonorCriteria: value }, o.region));
+      const changed = Object.keys(after).filter((k) => before[k] !== after[k]);
+      if (!changed.length && JSON.stringify((o.wardsynq && o.wardsynq.bloodDonorCriteria) || {}) === JSON.stringify(value)) return json({ ...view(o.wardsynq), changed: [] }, 200, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { bloodDonorCriteria: value } }, actor.id, { action: "org:blood_donor_criteria", meta: JSON.stringify({ changed }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ...view(back && back.wardsynq), changed }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";
