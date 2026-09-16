@@ -34,7 +34,13 @@ const TYPE = "ROIRequest";
 const STATES = Object.freeze(["requested", "authorized", "denied", "fulfilled", "cancelled"]);
 /** Who is asking, in the ordinary shape a HIM department already classifies requests by. `other`
  *  exists with a required note so nothing about a real requester is unrecordable. */
-const RELATIONSHIPS = Object.freeze(["patient", "attorney", "other-provider", "insurer", "government-agency", "employer", "family-member", "other"]);
+const RELATIONSHIPS = Object.freeze(["patient", "authorised-attendant", "legal-authority", "attorney", "other-provider", "insurer", "government-agency", "employer", "family-member", "other"]);
+/* IMC (Professional Conduct, Etiquette and Ethics) Regulations 2002 reg 1.3.2: records requested by "the patients/
+ * authorised attendant or legal authorities involved" are acknowledged and "documents shall be issued within the period
+ * of 72 hours". Separate from, and stricter than, any DPDP or SPDI access clock (legal opinion H.4.6). The attendant's
+ * authority is recorded, never assumed. */
+const IMC_RELATIONSHIPS = Object.freeze(["patient", "authorised-attendant", "legal-authority"]);
+const IMC_HOURS = 72;
 
 class RoiRefusalError extends Error {
   constructor(code, message) { super(message || code); this.code = code; }
@@ -51,6 +57,7 @@ function ROIRequest(input) {
       name: str((i.requester || {}).name) || null,
       organization: str((i.requester || {}).organization) || null,
       relationship: RELATIONSHIPS.includes((i.requester || {}).relationship) ? (i.requester || {}).relationship : "other",
+      authority: str((i.requester || {}).authority) || null,
     },
     purpose: str(i.purpose) || null,
     // Recorded verbatim, never validated against a list of what counts as legally sufficient - a
@@ -88,6 +95,7 @@ function roiIdFor(patientId, requesterName, requestedAt) {
 function requestROI({ id, patientId, requester, purpose, authorizationBasis, scope, recipient, requestedBy, requestedAt } = {}) {
   if (!id || !patientId) throw new RoiRefusalError("MISSING_FIELDS", "an ROI request needs a patient");
   if (!requester || !str(requester.name)) throw new RoiRefusalError("REQUESTER_REQUIRED", "an ROI request must name who is asking");
+  if (requester.relationship === "authorised-attendant" && str(requester.authority).length < 5) throw new RoiRefusalError("AUTHORITY_REQUIRED", "an authorised attendant's request records their authority (for example the patient's signed authorisation)");
   if (!str(purpose)) throw new RoiRefusalError("PURPOSE_REQUIRED", "an ROI request must say what it is for");
   if (!str(recipient)) throw new RoiRefusalError("RECIPIENT_REQUIRED", "an ROI request must name who the record goes to");
   const rt = (scope && scope.recordTypes) || [];
@@ -152,4 +160,16 @@ function fulfill(req, { by, at, deliveredStatus, resourceCounts, note } = {}) {
   return req;
 }
 
-export { TYPE, STATES, RELATIONSHIPS, RoiRefusalError, ROIRequest, roiIdFor, requestROI, authorize, deny, cancel, fulfill };
+/** PURE. The IMC reg 1.3.2 clock on a request, or null when the requester is not one reg 1.3.2 names. Issued means
+ * fulfilled; a denial or cancellation stops the clock and says so. */
+function imcClock(req, nowMs) {
+  const rel = req && req.requester && req.requester.relationship;
+  const at = Date.parse(str(req && req.requestedAt));
+  if (!IMC_RELATIONSHIPS.includes(rel) || !Number.isFinite(at)) return null;
+  const due = at + IMC_HOURS * 3600000, done = Date.parse(str(req.fulfilledAt));
+  const open = req.state === "requested" || req.state === "authorized";
+  return { hours: IMC_HOURS, dueBy: new Date(due).toISOString(), late: Number.isFinite(done) ? done > due : open ? nowMs > due : null, stopped: !open && !Number.isFinite(done) ? req.state : null,
+    citation: "IMC Regulations 2002 reg 1.3.2: documents issued within 72 hours of a request by the patient, an authorised attendant or a legal authority" };
+}
+
+export { TYPE, STATES, RELATIONSHIPS, IMC_RELATIONSHIPS, IMC_HOURS, RoiRefusalError, ROIRequest, roiIdFor, requestROI, authorize, deny, cancel, fulfill, imcClock };

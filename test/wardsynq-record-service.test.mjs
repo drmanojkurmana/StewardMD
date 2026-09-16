@@ -671,7 +671,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
   // dpo (DPDP Act 2023, 2026-09-16): the privacy records, the consents an erasure withdraws and the Patient master
   // it removes optional identifiers from. Nothing clinical is writable; EMR_VIEW's read is unrestricted.
   assert.equal(tier("dpo"), TIER.EXECUTE);
-  assert.deepEqual(write("dpo"), ["PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach", "PatientConsent", "Patient"]);
+  // 2026-09-17: LegalHold, which stops erasure and destruction (retention.js).
+  assert.deepEqual(write("dpo"), ["PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach", "PatientConsent", "Patient", "LegalHold"]);
   assert.equal(read("dpo"), null);
   assert.ok(!write("dpo").includes("ClinicalNote") && !write("dpo").includes("MedicationOrder"), "answering a data request is not treating anyone");
   /* 2026-09-08: the cashier gained BILLING_CHARGE's claim grant, and it is narrow BY ENUMERATION.

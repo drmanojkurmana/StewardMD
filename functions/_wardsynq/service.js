@@ -479,6 +479,9 @@ const RESOURCE_TYPES = Object.freeze([
    * a personal data breach with its notification times. Append-only like everything else: "we answered on the
    * 3rd" and "the Board was told at 14:00" are exactly the facts that must not be editable afterwards. */
   "PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach",
+  /* 2026-09-17 (retention.js): a legal hold on a patient's record, placed with its reason and reference and lifted only
+   * with the reference to the disposal of the matter. Both are versions of one record. */
+  "LegalHold",
   /* Compliance reporting, 2026-09-16: the hospital's own self-assessment against the NABH Digital Health
    * Standards (compliance.js) and a saved report definition (report-builder.js). No patient on either. */
   "DhsAssessment", "SavedReport",

@@ -7183,3 +7183,34 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
 - **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
   an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
   the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.
+
+## 2026-09-17 Privacy law by date, confirmed clocks, retention classes and legal holds (branch legal-privacy)
+
+Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a practising lawyer's sign-off).
+- **The law is computed per day** (functions/_wardsynq/privacy-law.js). DPDP hospital duties start 13 May 2027
+  (G.S.R. 843(E); Rules r.1, G.S.R. 846(E)), Consent Managers 13 Nov 2026. Before that: IT Act s.43A + SPDI Rules 2011 and
+  the CERT-In Directions 2022. `wardsynq.dpdp.dpdpStartDate` may only bring commencement EARLIER (stricter). No separate
+  `privacyRegime` setting: the regime is the date. The stricter of both regimes is kept after commencement.
+- **Clocks replace "hospital-set, not confirmed"**: SPDI one month (min of 30 days and a calendar month) for every request
+  received before commencement; DPDP 30 days per kind (cap 90) from it; CERT-In 6 hours from awareness always; Board
+  detailed report 72 hours only for a breach the hospital became aware of from commencement, moved only by a recorded
+  Board extension; patients 72 hours as hospital POLICY (past 72 only with a written reason). A value past a cap is not
+  used. The old `breachBoardHours` setting is ignored.
+- **No silent breach close**: close needs CERT-In, the patients and (where it applies) the Board recorded; the only other
+  exit is "not a personal data breach" with reasons, confirmed by a different person. r.7(1) five and r.7(2)(b) headings
+  are required fields; the sixth Board heading is filled from the patients' log.
+- **Every answer carries the DPO/Grievance contact** from the published notice (r.9, SPDI r.5(9)); no notice, no answer.
+- **Children (r.10) and guardians (r.11) gate non-care purposes only, from commencement**: research/marketing/other
+  consents, a portal account, a message opt-in. Care (treatment, procedure, blood, referral sharing, clinical photography)
+  is exempt (Fourth Schedule Part A item 1). An unrecorded date of birth fails closed for a non-care purpose.
+- **Retention classes** (functions/_wardsynq/retention.js): clinical records 10 years after the last encounter (DGHS OM
+  28 Oct 2014), a child's until 3 years after 18 (unconfirmed limitation basis, hospital may lengthen), MLC 10 years or
+  proceedings end, PCPNDT 2, MTP 5; `wardsynq.retention.years` lengthens, never below the floor. Nothing auto-purges;
+  a document purge needs a reason and is refused inside the patient's clinical period or under a hold. Document default
+  went 3 -> 10 years.
+- **LegalHold is a record type**; every non-withdrawn MLC register entry is an automatic hold. Holds block erasure and
+  destruction; only register.records (the medical records officer) lifts one, with a disposal reference.
+- **Copies of records within 72 hours** (IMC reg 1.3.2) are a clock on the release-of-information request (ROI), with
+  new requester kinds authorised-attendant (authority recorded) and legal-authority; not a sixth DPDP request kind.
+- **Log retention is reported, never claimed**: audit and read-log rows are never deleted by WardSynQ (met); storage in
+  India, the platform's own logs and NTP source are not confirmed / not met (security review card).

@@ -481,9 +481,10 @@ function grantForCaps(caps) {
    * acknowledgements, the data principal requests and the breach register. PatientConsent, because an
    * erasure request is honoured by withdrawing the consents that are not needed for treatment, and
    * Patient, because it removes the identifiers a patient chose to give (ABHA) from the current record.
-   * Nothing clinical: this grant cannot write a note, an order or a result. */
+   * Nothing clinical: this grant cannot write a note, an order or a result.
+   * LegalHold joined 2026-09-17 (retention.js): the DPO places a hold that stops erasure and destruction. */
   if (has(CAPS.DPDP_MANAGE)) {
-    const added = ["PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach", "PatientConsent", "Patient"];
+    const added = ["PrivacyNotice", "PrivacyAcknowledgement", "DataPrincipalRequest", "DataBreach", "PatientConsent", "Patient", "LegalHold"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.DPDP_MANAGE };
     else grant = {
       tier: TIER.EXECUTE,
@@ -491,6 +492,20 @@ function grantForCaps(caps) {
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + CAPS.DPDP_MANAGE,
+    };
+  }
+
+  /* Legal holds, 2026-09-17 (retention.js, legal opinion H.4.4). The medical records officer (register.records) places a
+   * hold and is the only one who lifts it. LegalHold alone: records custody is not treating anyone. */
+  if (has(CAPS.REGISTER_RECORDS)) {
+    const added = ["LegalHold"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.REGISTER_RECORDS };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.REGISTER_RECORDS,
     };
   }
 

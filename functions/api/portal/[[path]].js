@@ -174,7 +174,7 @@ export async function onRequest(context) {
       if (r.ok) r.canChange = !session.proxy;
     } else if (sub === "comm-preference-set") {
       if (session.proxy) return json({ ok: false, error: "patient_only", detail: "Only the patient can change how the hospital contacts them." }, 403, request);
-      r = await setPreference({ ...repo, patientId: session.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, source: "portal", by: session.readerId || `patient:${session.patientId}` });
+      r = await setPreference({ ...repo, dpdp: cfg && cfg.dpdp, patientId: session.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, source: "portal", by: session.readerId || `patient:${session.patientId}` });
     } else if (sub === "feedback-pending") {
       r = feedbackSettings(cfg && cfg.feedback).enabled ? await pendingSurveys({ ...repo, patientId: session.patientId }) : { ok: true, surveys: [] };
       if (r.ok) r.canAnswer = !session.proxy;

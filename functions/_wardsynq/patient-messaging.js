@@ -29,6 +29,7 @@
 
 import { VersionConflictError } from "./repository.js";
 import { newInvite, INVITE_TYPE } from "./patient-feedback.js";
+import { lawOn, childGate } from "./privacy-law.js";
 
 const PREF = "_wardsynq_comm_pref", MESSAGE = "_wardsynq_comm_message";
 const TYPES = Object.freeze(["appointment", "labReady", "followUp", "refill", "feedback"]);
@@ -171,13 +172,27 @@ async function setPreference(ctx) {
   const mobile = optedIn ? normaliseMobile(ctx.mobile) : null;
   if (optedIn && !mobile) return refuse(422, "mobile_required", "Give the mobile number the patient agreed to be contacted on.");
   if (ctx.source === "staff" && !clip(ctx.note, 200)) return refuse(422, "note_required", "Say how the patient gave or withdrew consent (for example: signed the consent form at the desk).");
+  /* DPDP Rules 2025 r.10, from commencement (privacy-law.js): messaging a child directly is not a health service, so an
+   * opt-in for a child (or a patient whose date of birth is not recorded) is recorded by staff with a parent or guardian
+   * verified against an ID the hospital holds or a DigiLocker token. A child cannot opt in from the portal. An opt-out
+   * is never gated. */
+  let parentVerification = null;
+  const law = lawOn(ctx.dpdp, Date.now());
+  if (optedIn && law.dpdpInForce) {
+    let patient;
+    try { patient = await ctx.repository.latest(ctx.tenantId, "Patient", patientId); } catch { return refuse(502, "record_read_failed", "The patient's date of birth could not be read, so nothing was changed."); }
+    const pv = ctx.source === "staff" ? ctx.parentVerification || null : null;
+    const gate = childGate({ dob: patient && patient.dob, purpose: "direct-message", atMs: Date.now(), law, givenBy: pv ? "parent" : "", verification: pv });
+    if (gate.required && !gate.satisfied) return { ...refuse(422, "parental_consent_required", "Messages to a child need a parent or guardian's consent, recorded at the desk with their identity checked against an ID the hospital holds or a DigiLocker token."), citation: gate.citation };
+    if (gate.required) parentVerification = { method: pv.method, reference: clip(pv.reference, 200), parentName: clip(pv.parentName, 200), verifiedBy: str(ctx.by), citation: gate.citation };
+  }
   const at = new Date().toISOString();
   let cur;
   try { cur = await ctx.repository.latest(ctx.tenantId, PREF, prefId(patientId)); } catch { return refuse(502, "preference_read_failed", "The patient's preferences could not be read, so nothing was changed."); }
   const prev = cur && cur.channels && cur.channels[channel];
   if (prev && (prev.optedIn === true) === optedIn && (prev.mobile || null) === mobile) return { ok: true, unchanged: true, preference: prefOut(cur) };
   const next = { resourceType: PREF, id: prefId(patientId), version: cur ? cur.version + 1 : 1, patientId,
-    channels: { ...((cur && cur.channels) || {}), [channel]: { optedIn, mobile, at, by: str(ctx.by), source: ctx.source === "portal" ? "portal" : "staff", note: clip(ctx.note, 200) || null } },
+    channels: { ...((cur && cur.channels) || {}), [channel]: { optedIn, mobile, at, by: str(ctx.by), source: ctx.source === "portal" ? "portal" : "staff", note: clip(ctx.note, 200) || null, parentVerification } },
     writtenBy: { id: str(ctx.by), kind: "human", at } };
   try { await ctx.repository.append(ctx.tenantId, [next], { audit: auditEvent(optedIn ? "patient.comms.opt_in" : "patient.comms.opt_out", ctx.by, { channel, source: next.channels[channel].source }) }); }
   catch (e) { return e instanceof VersionConflictError ? refuse(409, "version_conflict", "The preferences changed at the same moment. Try again; nothing was saved.") : refuse(502, "preference_write_failed", "The preference could not be saved, so it was not changed."); }
@@ -197,7 +212,7 @@ async function staffPreference(request, env, ctx) {
   try { patient = await repository.latest(tenantId, "Patient", patientId); } catch { return refuse(502, "record_read_failed", "The patient could not be read."); }
   if (!patient) return refuse(404, "patient_not_found", "No such patient at this hospital.");
   if (ctx.method === "GET") return getPreference({ repository, tenantId, patientId });
-  return setPreference({ repository, tenantId, patientId, channel: ctx.channel, optedIn: ctx.optedIn === true, mobile: ctx.mobile, source: "staff", by: ctx.actorId, note: ctx.note });
+  return setPreference({ repository, tenantId, patientId, channel: ctx.channel, optedIn: ctx.optedIn === true, mobile: ctx.mobile, source: "staff", by: ctx.actorId, note: ctx.note, dpdp: ctx.dpdp, parentVerification: ctx.parentVerification });
 }
 
 /* ---- generating what is due ------------------------------------------------------------------------------------ */

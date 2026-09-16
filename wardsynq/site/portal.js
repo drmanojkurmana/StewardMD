@@ -112,7 +112,10 @@
     else if (p === false) body = '<div class="msg err" role="alert" data-state="failed">' + esc(tr("privacy.failed")) + "</div>";
     else {
       var n = p.notice;
-      body = n ? '<article class="privacy-notice">' + (n.title ? "<h3>" + esc(n.title) + "</h3>" : "") + '<p style="white-space:pre-wrap">' + esc(n.text) + "</p>" +
+      /* The itemised parts the notice must carry (DPDP Rules 2025 r.3; SPDI Rules 2011 r.5(3)), as the hospital wrote them. */
+      var parts = ["dataItems", "purposes", "withdrawConsent", "rights", "recipients", "collectingAgency", "boardComplaint"].filter(function (k) { return n && n[k]; });
+      body = n ? '<article class="privacy-notice">' + (n.title ? "<h3>" + esc(n.title) + "</h3>" : "") + (n.text ? '<p style="white-space:pre-wrap">' + esc(n.text) + "</p>" : "") +
+          parts.map(function (k) { return "<p><b>" + esc(tr("privacy.part." + k)) + '</b><br><span style="white-space:pre-wrap">' + esc(n[k]) + "</span></p>"; }).join("") +
           "<p><b>" + esc(tr("privacy.dpo")) + "</b> " + esc(n.dpoContact) + (n.grievanceContact ? "<br><b>" + esc(tr("privacy.grievance")) + "</b> " + esc(n.grievanceContact) : "") + "</p></article>" +
           (p.acknowledged ? '<p class="quiet" data-state="acknowledged">' + esc(tr("privacy.acknowledged")) + "</p>"
             : !p.proxy ? '<button class="btn" type="button" data-act="privacy-ack" data-lang="' + esc(n.language) + '">' + esc(tr("privacy.acknowledge")) + "</button>" : "")

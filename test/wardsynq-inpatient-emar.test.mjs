@@ -6753,15 +6753,29 @@ test("DOCUMENTS: an administrator deletes the stored files only after retention;
     await as(DOCTOR, "/ward/document-upload", "POST", { ...body, documentId: up.document.id, expectedVersion: 1, title: "Aadhaar copy, clearer" });
     assert.equal(objects.size, 2);
 
-    const early = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    const PURGE = { orgId: ORG, documentId: up.document.id, reason: "Retention period over, destruction approved by the records committee" };
+    const noReason = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id });
+    assert.equal(noReason.__status, 422, "the purge is the destruction record: it needs a reason");
+    const early = await as(ADMIN, "/ward/document-purge", "POST", PURGE);
     assert.equal(early.__status, 409, JSON.stringify(early));
     assert.equal(early.error, "retention_not_expired");
     assert.equal(objects.size, 2, "nothing is deleted before the retention date");
 
+    /* Legal opinion H.4.2: ten years for a document (DGHS OM 28 Oct 2014), and the patient's in-patient stay keeps the
+     * whole record ten years after it ended. Four years on is still inside both. */
     const realNow = Date.now;
     Date.now = () => realNow() + 4 * 365 * 24 * 3600 * 1000;
+    try { assert.equal((await as(ADMIN, "/ward/document-purge", "POST", PURGE)).error, "retention_not_expired"); }
+    finally { Date.now = realNow; }
+    // A stay that is still open keeps the record however far on: the patient is discharged first.
+    Date.now = () => realNow() + 11 * 366 * 24 * 3600 * 1000;
+    try { assert.equal((await as(ADMIN, "/ward/document-purge", "POST", PURGE)).retentionClass, "clinical-ipd"); }
+    finally { Date.now = realNow; }
+    const enc = await RECORD.latest(TENANT_ROW.id, "Encounter", adm.encounterId);
+    await RECORD.append(TENANT_ROW.id, [{ ...enc, version: enc.version + 1, status: "finished", periodEnd: "2026-09-10T08:00:00.000Z" }], { idempotencyKey: "discharge-for-retention" });
+    Date.now = () => realNow() + 11 * 366 * 24 * 3600 * 1000;
     let purged;
-    try { purged = await as(ADMIN, "/ward/document-purge", "POST", { orgId: ORG, documentId: up.document.id }); }
+    try { purged = await as(ADMIN, "/ward/document-purge", "POST", PURGE); }
     finally { Date.now = realNow; }
     assert.equal(purged.__status, 200, JSON.stringify(purged));
     assert.equal(purged.objectsDeleted, 2, "every version's file goes");

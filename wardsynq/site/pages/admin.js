@@ -1908,9 +1908,25 @@
     /* G3: the hospital event log is chained on its own and reported on its own. */
     h += "<h3>" + esc(T(c, "site.admin.security.tamperEvidenceEventLog", "Tamper evidence: hospital event log")) + "</h3><p class=\"quiet\">" + esc(T(c, "site.admin.security.eventLogNote", "Sign-ins, staff changes, hospital setting changes, and queue and billing actions.")) + "</p>" +
       auditIntegrityHtml(c, a.orgIntegrity, a.orgAnchors, "event-log") + orgUnlinkedHtml(c, a.orgUnlinked);
-    return h + "</div>";
+    h += "</div>" + logRetentionHtml(c, r.logRetention);
+    return h;
   }
   WSQ._securityReviewHtml = securityReviewHtml;
+
+  /* CERT-In Directions 2022 (iv) and DPDP Rules 2025 r.6(1)(e), r.8(3): whether WardSynQ's logs are kept long enough and
+   * where. Worked out from what the code keeps (security-review.js logRetentionCheck); what it cannot see is never met. */
+  function logRetentionHtml(c, lr) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.security.logRetention", "Log retention: CERT-In 180 days in India")) + "</h2>";
+    if (!lr || !lr.checks) return h + '<div class="msg err">' + esc(T(c, "site.admin.security.logRetentionMissing", "Log retention was not checked. This is not the same as the logs being kept.")) + "</div></div>";
+    var word = function (s) { return s === "met" ? T(c, "site.admin.security.lrMet", "Met") : s === "not-met" ? T(c, "site.admin.security.lrNotMet", "Not met") : T(c, "site.admin.security.lrNotConfirmed", "Not confirmed"); };
+    h += '<div class="msg ' + (lr.meetsCertIn ? "ok" : "warn") + '">' + esc(lr.meetsCertIn ? T(c, "site.admin.security.lrMeets", "The logs meet the CERT-In directions.") : T(c, "site.admin.security.lrNotShown", "Not shown to meet the CERT-In directions.")) + " " + EN(c, esc(lr.summary)) + "</div>";
+    h += '<div class="tbl"><table><tbody>' + lr.checks.map(function (x) {
+      return '<tr><td><span class="pill' + (x.status === "met" ? " ok" : x.status === "not-met" ? " stop" : " warn") + '">' + esc(word(x.status)) + "</span></td><td>" + EN(c, esc(x.text)) + "</td></tr>";
+    }).join("") + "</tbody></table></div>";
+    return h + '<p class="quiet">' + EN(c, esc((lr.citations || []).join("; "))) + "</p></div>";
+  }
+  WSQ._logRetentionHtml = logRetentionHtml;
 
   /* G3. Event-log rows with no link are never verified. Rows added after linking began are listed;
    * a count that could not be made says so, never "every row linked". */

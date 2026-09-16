@@ -3111,7 +3111,7 @@
       "</div>";
   }
 
-  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
+  var ROI_RELATIONSHIPS = [["patient", "Patient"], ["authorised-attendant", "Authorised attendant"], ["legal-authority", "Legal authority"], ["attorney", "Attorney"], ["other-provider", "Other provider"], ["insurer", "Insurer"], ["government-agency", "Government agency"], ["employer", "Employer"], ["family-member", "Family member"], ["other", "Other"]];
   function roiView(state) {
     var r = state.roi || {};
     var rows = (r.requests || []).map(function (req) {
@@ -3126,6 +3126,10 @@
       return '<li class="w-mini-row"><div><span class="w-st ' + esc(req.state) + '">' + esc(roiStateWord(req.state)) + "</span> " +
         "<b>" + esc(req.requester && req.requester.name) + "</b>" + (req.requester && req.requester.relationship ? " (" + esc(req.requester.relationship) + ")" : "") +
         " &middot; " + esc(req.purpose) +
+        /* IMC Regulations 2002 reg 1.3.2: documents issued within 72 hours to the patient, an authorised attendant or a legal authority. */
+        (req.imcClock ? "<div class=\"w-dt-times\">" + (req.imcClock.late ? '<span class="w-st stop">' + wTH("ward.roi-imc-late", "Past 72 hours") + "</span> " : "") +
+          wTH("ward.roi-imc-due", "Copies due within 72 hours (IMC Regulations 2002 reg 1.3.2), by {when}", { when: when(req.imcClock.dueBy) }) +
+          (req.requester && req.requester.authority ? " &middot; " + wTH("ward.roi-authority", "authority: {authority}", { authority: esc(req.requester.authority) }, "authority") : "") + "</div>" : "") +
         "<div class=\"w-dt-times\">" + wTH("ward.scope-requested", "scope: {join}{v}{v2}{v3} &middot; requested {requestedAt}", { join: esc((req.scope && req.scope.recordTypes || []).join(", ")), v: (req.authorizationBasis ? " &middot; " + wTH("ward.basis", "basis: {authorizationBasis}", { authorizationBasis: esc(req.authorizationBasis) }, "authorizationBasis") : ""), v2: (req.decisionReason ? " &middot; " + esc(req.decisionReason) : ""), v3: (req.disclosure ? " &middot; " + wTH("ward.sent", "sent {deliveredStatus} ({stringify})", { deliveredStatus: esc(req.disclosure.deliveredStatus), stringify: esc(JSON.stringify(req.disclosure.resourceCounts || {})) }, "deliveredStatus stringify") : ""), requestedAt: when(req.requestedAt) }, "join requestedAt") + "</div></div>" +
         (actions ? '<div class="w-mini-row-act">' + actions + "</div>" : "") +
         "</li>";
@@ -3139,6 +3143,7 @@
       "<input id=\"wRoiRequesterName\" placeholder=\"" + wTA("ward.requester-name", "Requester name") + "\">" +
       "<input id=\"wRoiOrg\" placeholder=\"" + wTA("ward.organization-optional", "Organization (optional)") + "\">" +
       '<select id="wRoiRelationship">' + ROI_RELATIONSHIPS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(wTEn(x[1])) + "</option>"; }).join("") + "</select>" +
+      "<input id=\"wRoiAuthority\" placeholder=\"" + wTA("ward.roi-authority-input", "Authority (authorised attendant: the patient's signed authorisation)") + "\">" +
       "<input id=\"wRoiPurpose\" placeholder=\"" + wTA("ward.purpose", "Purpose") + "\">" +
       "<input id=\"wRoiRecipient\" placeholder=\"" + wTA("ward.recipient-where-it-goes", "Recipient (where it goes)") + "\">" +
       "<input id=\"wRoiRecordTypes\" placeholder=\"" + wTA("ward.record-types-comma-separated-e-g", "Record types, comma-separated (e.g. DiagnosticReport)") + "\">" +
@@ -12884,13 +12889,15 @@
       .catch(function () { st.docVersions = { id: id, failed: true }; paint(); });
   }
   function documentPurge(id) {
-    askFor({ icon: "delete_forever", danger: true, ok: wTH("ward.remove", "Remove"),
-      title: wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1) }, function () {
+    /* The purge is the destruction record (legal opinion H.4.2): a named person gives the reason. The server refuses
+     * inside the retention period and under a legal hold, and says until when. */
+    askReason(wTH("ward.delete-the-stored-file-for-every", "Delete the stored file for every version of this document?\n\nThe record that it existed, who uploaded it and when stays. This cannot be undone.", null, "", 1),
+      wT("ward.doc-purge-reason-needed", "Destroying a document needs a reason."), wTH("ward.remove", "Remove"), function (reason) {
       st.busy = true; paint();
-      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id })
+      return apiPost("/ward/document-purge", { orgId: st.orgId, documentId: id, reason: reason })
         .then(function (r) { if (settle(r, r && r.ok ? wT("ward.file-deleted-the-record-of-the", "File deleted. The record of the document is kept.") : null)) loadDocuments(); else paint(); })
         .catch(function () { st.busy = false; st.err = wT("ward.could-not-delete-the-file", "Could not delete the file."); paint(); });
-    });
+    }, { danger: true, icon: "delete_forever", label: wTH("ward.doc-purge-reason", "Why is it being destroyed? This is kept as the destruction record.") });
   }
   function documentWithdraw(id) {
     askReason(wTH("ward.why-is-this-document-being-withdrawn", "Why is this document being withdrawn? (For example: scanned under the wrong patient.) The file is kept.", null, "", 1), wT("ward.a-withdrawal-needs-a-reason", "A withdrawal needs a reason."), wTH("ward.withdraw", "Withdraw"), function (reason) {
@@ -13686,7 +13693,7 @@
     st.busy = true; paint();
     apiPost("/ward/roi-request", {
       orgId: st.orgId, patientId: st.sel.patientId,
-      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship") },
+      requester: { name: name, organization: val("wRoiOrg") || undefined, relationship: val("wRoiRelationship"), authority: val("wRoiAuthority") || undefined },
       purpose: purpose, recipient: recipient, scope: { recordTypes: types },
     })
       .then(function (r) { if (settle(r, wT("ward.requested", "Requested."))) loadRoi(); else paint(); })

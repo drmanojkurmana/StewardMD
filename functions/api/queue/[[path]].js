@@ -110,6 +110,7 @@ import { dispenseOrder, returnDispense, listDispenses } from "../../_wardsynq/ph
 import { declareBreakGlass, openEmergencyChart, listBreakGlass } from "../../_wardsynq/break-glass.js";
 import { declareEmergency, deactivateEmergency, emergencyStatus, emergencyLog, emergencyReconciliation } from "../../_wardsynq/emergency-mode.js";
 import { publishNotice, privacyNotices, acknowledgePrivacy, privacyAcknowledgements, fileDataRequest, actOnDataRequest, dpoQueue, dataHoldings, recordBreach, updateBreach } from "../../_wardsynq/dpdp.js";
+import { patientRetention, placeLegalHold, liftLegalHold } from "../../_wardsynq/retention.js";
 import { nabhIndicators, nabhCsv, hmisMonthly, hmisCsv, dhsChecklist, saveDhsAssessment } from "../../_wardsynq/compliance.js";
 import { runReport, saveReport, listSavedReports, reportCsv } from "../../_wardsynq/report-builder.js";
 import { reportIncident, signalIncident, confirmIncident, triageIncident, recordIncidentRCA, addIncidentCAPA, completeIncidentCAPA, closeIncident, incidentLog } from "../../_wardsynq/incidents.js";
@@ -1502,6 +1503,10 @@ export async function onRequest(context) {
         "privacy-notices": CAPS.QUEUE_VIEW, "privacy-acknowledgements": CAPS.QUEUE_VIEW, "privacy-acknowledge": CAPS.QUEUE_ADD,
         "privacy-notice": CAPS.DPDP_MANAGE, "data-requests": CAPS.DPDP_MANAGE, "data-request": CAPS.DPDP_MANAGE,
         "data-request-act": CAPS.DPDP_MANAGE, "data-holdings": CAPS.DPDP_MANAGE, "data-breach": CAPS.DPDP_MANAGE, "data-breach-update": CAPS.DPDP_MANAGE,
+        /* Retention and legal holds (retention.js, legal opinion H.4). The DPO reads what erasure must keep and places a
+         * hold; the medical records officer (register.records) may do both, and only the records officer lifts a hold,
+         * with the reference to the disposal of the matter (H.4.4). */
+        retention: CAPS.DPDP_MANAGE, "legal-hold": CAPS.DPDP_MANAGE, "legal-hold-lift": CAPS.REGISTER_RECORDS,
         /* Returns (compliance.js). The indicator tables name no patient and no clinician: analytics.view, the same
          * gate as quality-safety. The DHS self-assessment is the hospital's own statement about itself: staff.admin. */
         "nabh-indicators": CAPS.ANALYTICS_VIEW, "hmis-monthly": CAPS.ANALYTICS_VIEW,
@@ -1989,6 +1994,7 @@ export async function onRequest(context) {
        * medico-legal case and opens one patient's; the nodal officer records a notification. Nothing else widens. */
       if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
       if (!wAz.ok && sub === "register-notification" && method === "POST") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_IHIP);
+      if (!wAz.ok && (sub === "retention" || sub === "legal-hold")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
       /* Asking for a purchase order's approval is the pharmacy's own next step after raising it. The
        * request cap (emr.vitals) is a ward one pharmacy does not hold, so "Ask for approval" on the
        * Purchasing screen was always refused. Only for supply subjects; deciding still needs emr.treat. */
@@ -2437,7 +2443,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "document-purge" && method === "POST") {
-        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId });
+        const r = await purgeDocument(request, env, { ...deps, store: documentStoreFromEnv(env), documentId: body.documentId, reason: body.reason, retention: wsqCfg && wsqCfg.retention });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "tag-assign" && method === "POST") {
@@ -2869,7 +2875,7 @@ export async function onRequest(context) {
         const commCtx = { ...deps, actorId: actor.id };
         let r = null;
         if (sub === "comm-preference" && (method === "GET" || method === "POST")) {
-          r = await staffPreference(request, env, { ...commCtx, method, patientId: method === "GET" ? url.searchParams.get("patientId") || "" : body.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, note: body.note });
+          r = await staffPreference(request, env, { ...commCtx, method, patientId: method === "GET" ? url.searchParams.get("patientId") || "" : body.patientId, channel: body.channel, optedIn: body.optedIn === true, mobile: body.mobile, note: body.note, dpdp: wsqCfg && wsqCfg.dpdp, parentVerification: body.parentVerification || null });
         } else if (sub === "comm-log" && method === "GET") {
           const ports = await commsPorts(env, wOrg, deps.recordDeps.repository, mig.tenantId).catch(() => null);
           r = ports ? await messageLog(request, env, { ...commCtx, status: url.searchParams.get("status") || "", smsMissing: ports.sms.missing, whatsappConnected: !!ports.whatsapp })
@@ -3532,7 +3538,7 @@ export async function onRequest(context) {
         ]);
         const assignmentSources = { members, roster, utcOffsetMinutes: wsqCfg && wsqCfg.utcOffsetMinutes != null ? wsqCfg.utcOffsetMinutes : 330 };
         const r = await securityReport(request, env, { ...deps, orgEvents, assignmentSources, viewerId: actor.id, days: url.searchParams.get("days"), rpoMinutes: (wsqCfg && wsqCfg.rpoMinutes) || null,
-          auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN",
+          auditRetentionYears: wsqCfg ? wsqCfg.auditRetentionYears : null, region: (wOrg && wOrg.region) || "IN", readLogRetentionDays: wsqCfg ? wsqCfg.readLogRetentionDays : null,
           anchorStores: anchorStoresFor(env), orgAuditChain: orgAuditChain(env, wOrgId),
           /* G11: one person across sign-in methods. Access ids are "cfa:" + the same hash identify() makes. */
           readerDirectory: { accountEmail: (id) => ORG.accountEmail(env, id), accessIdOf: async (email) => "cfa:" + (await sha256hex(String(email).toLowerCase())) },
@@ -3663,7 +3669,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-enrol" && method === "POST") {
-        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, proxy: body.proxy || null, config: (wsqCfg && wsqCfg.patientAccess) || null, idempotencyKey: body.idempotencyKey || null });
+        const r = await enrolPatient(request, env, { ...deps, patientId: body.patientId, issuedTo: body.issuedTo, identifiedBy: body.identifiedBy, proxy: body.proxy || null, config: (wsqCfg && wsqCfg.patientAccess) || null,
+          dpdp: wsqCfg && wsqCfg.dpdp, parentVerification: body.parentVerification || null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "patient-grants" && method === "GET") {
@@ -3979,7 +3986,8 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "consent" && method === "POST") {
-        const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordConsent(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, scope: body.scope, decision: body.decision, detail: body.detail, givenBy: body.givenBy, giverName: body.giverName, capacity: body.capacity, validFrom: body.validFrom, validUntil: body.validUntil,
+          dpdp: wsqCfg && wsqCfg.dpdp, parentVerification: body.parentVerification, guardianAppointment: body.guardianAppointment, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "withdraw-consent" && method === "POST") {
@@ -4372,15 +4380,18 @@ export async function onRequest(context) {
       /* ---- DPDP Act 2023 (dpdp.js) ---- */
       const dpdpCfg = (wsqCfg && wsqCfg.dpdp) || null;
       if (sub === "privacy-notices" && method === "GET") {
-        const r = await privacyNotices(request, env, { ...deps });
+        const r = await privacyNotices(request, env, { ...deps, dpdp: dpdpCfg });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "privacy-notice" && method === "POST") {
-        const r = await publishNotice(request, env, { ...deps, language: body.language, title: body.title, text: body.text, dpoContact: body.dpoContact, grievanceContact: body.grievanceContact, idempotencyKey: body.idempotencyKey || null });
+        const r = await publishNotice(request, env, { ...deps, dpdp: dpdpCfg, language: body.language, title: body.title, text: body.text, dataItems: body.dataItems, purposes: body.purposes,
+          withdrawConsent: body.withdrawConsent, rights: body.rights, recipients: body.recipients, collectingAgency: body.collectingAgency, boardComplaint: body.boardComplaint,
+          dpoContact: body.dpoContact, grievanceContact: body.grievanceContact, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "privacy-acknowledge" && method === "POST") {
-        const r = await acknowledgePrivacy(request, env, { ...deps, patientId: body.patientId || patientIdForMrn(body.mrn), language: body.language, method: body.method, givenBy: body.givenBy, giverName: body.giverName, idempotencyKey: body.idempotencyKey || null });
+        const r = await acknowledgePrivacy(request, env, { ...deps, patientId: body.patientId || patientIdForMrn(body.mrn), language: body.language, method: body.method, givenBy: body.givenBy, giverName: body.giverName,
+          healthDataConsent: body.healthDataConsent === true, consentForm: body.consentForm, consentDocumentId: body.consentDocumentId, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "privacy-acknowledgements" && method === "GET") {
@@ -4396,21 +4407,35 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "data-request-act" && method === "POST") {
-        const r = await actOnDataRequest(request, env, { ...deps, requestId: body.requestId, action: body.action, response: body.response,
+        const r = await actOnDataRequest(request, env, { ...deps, requestId: body.requestId, action: body.action, response: body.response, retention: wsqCfg && wsqCfg.retention,
           /* The registration desk's copy of the patient's optional details, cleared through its own store. */
           clearRegistrationDetails: (mrn) => PAT.clearOptionalRegistration(env, wOrgId, mrn, actor.id || "") });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "data-holdings" && method === "GET") {
-        const r = await dataHoldings(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "" });
+        const r = await dataHoldings(request, env, { ...deps, patientId: url.searchParams.get("patientId") || "", retention: wsqCfg && wsqCfg.retention });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "data-breach" && method === "POST") {
-        const r = await recordBreach(request, env, { ...deps, dpdp: dpdpCfg, detectedAt: body.detectedAt, description: body.description, dataCategories: body.dataCategories, affectedCount: body.affectedCount, idempotencyKey: body.idempotencyKey || null });
+        const r = await recordBreach(request, env, { ...deps, dpdp: dpdpCfg, detectedAt: body.detectedAt, awareAt: body.awareAt, description: body.description, dataCategories: body.dataCategories, affectedCount: body.affectedCount, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "data-breach-update" && method === "POST") {
-        const r = await updateBreach(request, env, { ...deps, breachId: body.breachId, event: body.event, assessment: body.assessment, at: body.at, reference: body.reference, count: body.count, method: body.method, text: body.text, summary: body.summary });
+        const r = await updateBreach(request, env, { ...deps, breachId: body.breachId, event: body.event, assessment: body.assessment, at: body.at, reference: body.reference, count: body.count, method: body.method, text: body.text, summary: body.summary,
+          report: body.report, intimation: body.intimation, extendedTo: body.extendedTo, reasons: body.reasons });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* ---- Retention and legal holds (retention.js) ---- */
+      if (sub === "retention" && method === "GET") {
+        const r = await patientRetention(request, env, { ...deps, patientId: url.searchParams.get("patientId") || patientIdForMrn(url.searchParams.get("mrn") || ""), retention: wsqCfg && wsqCfg.retention });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "legal-hold" && method === "POST") {
+        const r = await placeLegalHold(request, env, { ...deps, patientId: body.patientId || patientIdForMrn(body.mrn), reason: body.reason, reference: body.reference, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "legal-hold-lift" && method === "POST") {
+        const r = await liftLegalHold(request, env, { ...deps, holdId: body.holdId, patientId: body.patientId || patientIdForMrn(body.mrn), liftReference: body.liftReference });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* ---- Returns and reports (compliance.js, report-builder.js) ---- */

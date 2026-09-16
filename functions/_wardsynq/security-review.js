@@ -506,6 +506,40 @@ function auditRetention(oldestAuditAt, oldestRecordAt, setting) {
   return out;
 }
 
+/**
+ * PURE. Whether WardSynQ's logs meet the log duties in force, from what the code actually keeps (legal opinion A.4.8).
+ *   CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022: (iv) logs of all ICT systems kept securely for a rolling
+ *   180 days within the Indian jurisdiction; (i) clocks synchronised to NIC or NPL NTP, or a source traceable to them.
+ *   DPDP Rules 2025 r.6(1)(e) and r.8(3), from commencement: logs kept at least one year.
+ * WHAT THE CODE KEEPS: audit rows are appended and never deleted by any WardSynQ code (NEVER_DELETED above); clinical
+ * read-log rows are never deleted either, only the correction lookup is bounded to readLogRetentionDays (read-log.js,
+ * 90 by default). What it cannot see: where the database is hosted, the hosting platform's own request and network
+ * logs, and the server clock's source. Those are never reported as met. input: { oldestAuditAt, auditReadable,
+ * readLogRetentionDays, nowMs }
+ */
+function logRetentionCheck(input) {
+  const i = input || {};
+  const now = Number.isFinite(i.nowMs) ? i.nowMs : Date.now();
+  const oldest = msOf(i.oldestAuditAt);
+  const ageDays = Number.isFinite(oldest) ? Math.floor((now - oldest) / DAY) : null;
+  const readDays = Number(i.readLogRetentionDays) > 0 ? Number(i.readLogRetentionDays) : 90;
+  const checks = [
+    i.auditReadable
+      ? { id: "audit-rows", status: "met", text: `Audit rows are never deleted by WardSynQ, so they are kept longer than 180 days and one year.${ageDays == null ? " No audit row has been written yet." : ` The oldest row is from ${new Date(oldest).toISOString().slice(0, 10)} (${ageDays} days).`}` }
+      : { id: "audit-rows", status: "not-confirmed", text: "The audit trail could not be read, so how long its rows are kept could not be checked." },
+    { id: "read-log", status: "met", text: `Clinical read-log rows are never deleted. Only the lookup of who read a corrected value answers for the last ${readDays} days.` },
+    { id: "location", status: "not-confirmed", text: "WardSynQ does not record the region its database is hosted in, so storage within India is not confirmed. The platform owner confirms it." },
+    { id: "platform-logs", status: "not-met", text: "WardSynQ does not keep the hosting platform's web request, network or firewall logs. CERT-In covers the logs of all ICT systems: the platform owner keeps those for 180 days in India." },
+    { id: "clock-sync", status: "not-confirmed", text: "Server time comes from the hosting platform. Synchronisation to NIC or NPL NTP is not confirmed by WardSynQ." },
+  ];
+  return {
+    meetsCertIn: false, meetsDpdpOneYear: i.auditReadable ? "audit-rows-only" : false,
+    summary: "WardSynQ's own audit and read-log rows are kept indefinitely. Full CERT-In log compliance is not confirmed: storage within India, the platform's own logs and clock synchronisation are outside what WardSynQ can check.",
+    checks,
+    citations: ["CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022, (i) and (iv)", "DPDP Rules 2025 r.6(1)(e), r.8(3) (from 13 May 2027)"],
+  };
+}
+
 /** PURE. Hospital event-log rows that carry no chain link (G3), split at when linking began.
  * startMs: the first linked row's time, or null when nothing has been linked yet. Unlinked rows are
  * never verified: before linking began they are the old era; after it they are a lost linking race or
@@ -712,6 +746,7 @@ async function securityReport(request, env, ctx) {
     ...base, ok: true, generatedAt: now, period, days, advisory: true,
     note: "Findings are advisory. Nothing here locks an account or blocks access.",
     counts, chartAccess, assignmentAccess, exports, logins, reviewQueue: queue, dataProtection: protection, auditRetention: retention,
+    logRetention: logRetentionCheck({ oldestAuditAt: auditRead && auditRead.oldestAt, auditReadable: !!auditRead, readLogRetentionDays: ctx.readLogRetentionDays, nowMs: msOf(now) }),
     rules: RULES, methods: METHOD, notDetected: NOT_DETECTED,
   };
 }
@@ -823,5 +858,5 @@ async function recordRestoreTest(request, env, ctx) {
 export {
   RULES, METHOD, NOT_DETECTED, REVIEW_TYPE, RESTORE_TYPE, PRIVILEGED, EXEMPT_ROLES, EXEMPTIONS,
   chartAccessFindings, nurseAssignmentIntervals, rosterIntervals, wardHistoryStays, readerAliases, readerAliasesFor, outOfAssignmentFindings, exportChannel, exportFindings, deviceOf, loginFindings, reviewItems, reviewQueue, reviewProblem,
-  dataProtection, auditRetention, unlinkedRows, ORG_VERIFY_LIMIT, securityReport, auditRowsForReview, recordSecurityReview, recordRestoreTest,
+  dataProtection, auditRetention, logRetentionCheck, unlinkedRows, ORG_VERIFY_LIMIT, securityReport, auditRowsForReview, recordSecurityReview, recordRestoreTest,
 };
