@@ -341,7 +341,7 @@
     if (native) h += item("workstation", "nav.workstation") + item("ward:", "nav.ward") + item("ward:board", "nav.beds") + item("ward:edboard", "nav.emergency") + item("ward:critsboard", "nav.criticals") + item("ward:labboard", "nav.lab") + item("ward:radboard", "nav.radiology");
     h += item("opd", "nav.opd") + item("patients", "nav.patients");
     if (native) h += heading("nav.command") + item("ward:flowcommand", "nav.commandCenter") + item("ward:twin", "nav.twin") + item("ward:reports", "nav.reports") + item("ward:cashier", "nav.billing") + item("ward:integration", "nav.integration") + item("maik", "nav.maik");
-    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("rota", "nav.rota") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
+    h += heading("nav.administration") + item("admin", "nav.adminCenter") + item("audit", "nav.audit") + item("security", "nav.security") + item("rota", "nav.rota") + (native ? item("registers", "nav.registers") : "") + item("accounts", "nav.accounts") + item("group", "nav.group") + "</div>";
     return h;
   }
   function render(page, extra) {
@@ -685,6 +685,10 @@
       tile({ go: "admin", icon: "admin_panel_settings", title: T(null, "site.shell.home.tile.admin.title", "Admin Center"), sub: T(null, "site.shell.home.tile.admin.sub", "Wards, beds, departments, rooms, staff and roles"), need: "staff.admin" }),
       tile({ go: "audit", icon: "policy", title: T(null, "site.shell.home.tile.audit.title", "Audit and security"), sub: T(null, "site.shell.home.tile.audit.sub", "Record changes, emergency access, source grants, service health"), need: "emr.view" }),
     ];
+    /* Statutory registers (pages/registers.js): NDPS, PCPNDT Form F, medico-legal cases, MTP, births and deaths, notifiable
+     * diseases. Open to each register's custodian and to the doctors who create entries; the page shows each person only
+     * the registers their role keeps, and the server refuses the rest. */
+    if (native) adminTiles.push(tile({ go: "registers", icon: "menu_book", title: T(null, "site.shell.home.tile.registers.title", "Registers"), sub: T(null, "site.shell.home.tile.registers.sub", "NDPS, PCPNDT Form F, medico-legal, MTP, births and deaths, notifiable diseases"), need: ["register.ndps", "register.pcpndt", "register.mtp", "register.records", "mlc.record", "register.ihip", "emr.treat"] }));
     if (native) adminTiles.push(tile({ go: "ward:bedmgmt", icon: "dashboard_customize", title: T(null, "site.shell.home.tile.bedmgmt.title", "Bed management"), sub: T(null, "site.shell.home.tile.bedmgmt.sub", "Bed master: block, release, housekeeping"), need: "staff.admin" }));
     el.innerHTML = head + sec(esc(T(null, "site.shell.home.sec.clinical", "Clinical")), wardTiles) + (cmdTiles.length ? sec(esc(T(null, "site.shell.home.sec.command", "Command and operations")), cmdTiles) : "") + sec(esc(T(null, "site.shell.home.sec.patientsAI", "Patients and AI")), peopleTiles) + sec(esc(T(null, "site.shell.home.sec.admin", "Administration")), adminTiles);
     if (!native) return;

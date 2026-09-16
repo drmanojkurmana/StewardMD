@@ -330,6 +330,13 @@ async function draftDischargeSummary(request, env, ctx) {
   // nothing is.
   candidate.editedSections = editedSections;
   candidate.structured = structuredSections(inputs, assembled);
+  /* A MEDICO-LEGAL STAY SAYS SO ON ITS DISCHARGE SUMMARY (registers.js "mlc"): the MLC number and nothing else from the
+   * register. Asked of the register by the route; an unreadable register refuses the draft rather than dropping the flag. */
+  if (typeof ctx.medicoLegalFor === "function") {
+    let mlc;
+    try { mlc = await ctx.medicoLegalFor(encounter.patientId); } catch { return { ...base, ok: false, status: 502, error: "mlc_check_failed", detail: "The medico-legal register could not be checked, so the summary was not saved.", written: 0 }; }
+    candidate.medicoLegal = mlc || null;
+  }
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });

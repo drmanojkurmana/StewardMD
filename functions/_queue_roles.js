@@ -75,6 +75,16 @@ export const CAPS = {
   // report, the same separation ONCQIS/PGLOG hold between authoring and sign-off.
   INCIDENT_REPORT: "incident.report",
   INCIDENT_INVESTIGATE: "incident.investigate",
+  // ---- Statutory registers (functions/_wardsynq/registers.js), 2026-09-16 ----------------------
+  // Each register is its own authority because each is a legal record with its own custodian, and the
+  // confidential ones (PCPNDT Form F, MTP, medico-legal cases) must not open to everyone who can read a
+  // chart. None of these grants a clinical record scope: the registers live outside RESOURCE_TYPES.
+  REGISTER_NDPS: "register.ndps",       // controlled-drug register: view, daily/shift count (pharmacist, ward in-charge)
+  REGISTER_PCPNDT: "register.pcpndt",   // PCPNDT Form F: record and report (radiologist, obstetrician)
+  REGISTER_MTP: "register.mtp",         // MTP case register and monthly report (obstetrician, medical records)
+  REGISTER_RECORDS: "register.records", // births, deaths, still births, MLC register (medical records officer)
+  MLC_RECORD: "mlc.record",             // mark a patient's stay medico-legal and record the police intimation (treating doctor)
+  REGISTER_IHIP: "register.ihip",       // notifiable disease register and the weekly IHIP export (public health nodal officer)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -127,10 +137,10 @@ export const ROLE_CAPS = {
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
            C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
-           C.ORDER_READ, C.INCIDENT_REPORT],
+           C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
-               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT],
+               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.REGISTER_NDPS],
   // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
   // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
@@ -156,7 +166,7 @@ export const ROLE_CAPS = {
   // Pharmacy: reads the patient's medication orders and marks them dispensed once paid. Deliberately
   // NOT given EMR_VIEW - dispensing needs the order, not the consultation notes - and never
   // BILLING_CHARGE, so the person handing over medicines is not the person taking the money.
-  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY],
+  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY, C.REGISTER_NDPS],
   /* Laboratory: sees the tests that were ordered and releases results against them. Deliberately NO
    * EMR_VIEW - resulting a potassium needs the request, not the consultation notes - and no
    * ordering, dispensing or billing capability of any kind. */
@@ -184,7 +194,7 @@ export const ROLE_CAPS = {
    * the radiographer does NOT hold LAB_RESULT and cannot file a report or protocol a study, and the
    * radiologist does. Neither orders, prescribes, dispenses or bills. */
   radiographer: [C.QUEUE_VIEW, C.EMR_VIEW],
-  radiologist: [C.QUEUE_VIEW, C.EMR_VIEW, C.LAB_RESULT],
+  radiologist: [C.QUEUE_VIEW, C.EMR_VIEW, C.LAB_RESULT, C.REGISTER_PCPNDT],
   // HR / practice manager: runs the staff list and reads operational analytics. NO queue control, NO
   // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
   // admin (which carries every clinical and billing capability in the system).
@@ -197,7 +207,7 @@ export const ROLE_CAPS = {
   // HIM (Health Information Management): reads the chart to decide what may be released, and
   // records the release decision itself via HIM_ROI. No EMR_TREAT, no billing, no queue control
   // beyond viewing. See actor.js's HIM_ROI branch for exactly what this writes.
-  him: [C.QUEUE_VIEW, C.EMR_VIEW, C.HIM_ROI],
+  him: [C.QUEUE_VIEW, C.EMR_VIEW, C.HIM_ROI, C.REGISTER_RECORDS, C.REGISTER_MTP],
   // Blood Bank: crossmatches, issues and administers a transfusion. No EMR_VIEW, no EMR_VITALS, no
   // EMR_TREAT - see actor.js's TRANSFUSION_ISSUE branch for the narrow TransfusionEpisode-only
   // scope this composes to, the separation migrate-transfusion.js's own header names as deferred.
@@ -243,6 +253,14 @@ export const ROLE_CAPS = {
   // holding INCIDENT_INVESTIGATE via the `admin` role above is that site's own choice, not this
   // role's default. EMR_VIEW so an investigation can read the chart an incident references.
   safety_officer: [C.QUEUE_VIEW, C.EMR_VIEW, C.INCIDENT_REPORT, C.INCIDENT_INVESTIGATE],
+  /* Statutory registers, 2026-09-16. An obstetrician is a doctor who also keeps the PCPNDT Form F and the MTP
+   * register; a plain doctor holds neither, which is what keeps those two registers closed to the rest of the
+   * medical staff. The public health nodal officer reads the chart (a notification has to be checked against it)
+   * and owns the notifiable disease register, and nothing else clinical. */
+  obstetrician: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
+                 C.EMR_VITALS, C.EMR_TREAT, C.EMR_IMMUNISE, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE,
+                 C.ORDER_READ, C.INCIDENT_REPORT, C.MLC_RECORD, C.REGISTER_PCPNDT, C.REGISTER_MTP],
+  public_health: [C.QUEUE_VIEW, C.EMR_VIEW, C.REGISTER_IHIP],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };

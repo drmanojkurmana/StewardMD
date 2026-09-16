@@ -6679,3 +6679,24 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
 - A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
   paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).
+## 2026-09-16 Statutory registers are internal record types, one capability per register
+- NDPS, PCPNDT Form F, medico-legal cases, MTP, births/deaths/still births with MCCD, and IDSP/IHIP notifications live
+  in the append-only repository as internal types (`_wardsynq_register_<kind>`, registers.js), like bug reports and
+  connectors, not as RecordService resource types: a resource type is readable through the raw record door, the chart
+  and the change feed by every role with a null read scope, and Form F, MTP and MLC must not be.
+  `RecordService.changes()` now withholds `_wardsynq_register*` rows. Each save is a version in the same append as its
+  audit row; a correction names the version and a reason; every register read is audited; audit rows carry no names.
+- New capabilities (functions/_queue_roles.js): register.ndps (pharmacy, supervisor), register.pcpndt (radiologist,
+  obstetrician), register.mtp (obstetrician, him), register.records (him), mlc.record (doctor, obstetrician),
+  register.ihip (public_health). New roles: `obstetrician` (doctor + Form F + MTP + MLC) and `public_health`.
+  admin holds all by construction. No actor.js grant changed.
+- The NDPS register is not a second ledger: it is read from StockMovement, MedicationDispense and
+  MedicationAdministration (controlled-drugs.js). Drugs are flagged in Admin clinical settings (`controlledDrugs`) or by
+  `controlled: true` on a formulary entry. Wastage/adjustment, dispense and eMAR administration of a flagged drug need
+  a named witness who is an active member of the hospital holding order.dispense, med.administer or register.ndps and
+  is not the recorder. The witness is named, not signed in (a PIN co-sign is the upgrade). The witness and the shift
+  count are hospital policy; the NDPS Rules require Forms 3E/3H/3-I (cited in the file).
+- A returned dispense no longer counts as an issue in stock levels (stock.js levelsFrom, batchBalances).
+- A final obstetric ultrasound report is refused without a complete Form F linked to its request; a preliminary one is not.
+- Nothing is submitted to any authority (CRS, IHIP, District Appropriate Authority, CMO): no public API exists; exports
+  are CSV and printable tables, and every response says submission is manual.

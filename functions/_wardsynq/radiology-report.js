@@ -115,6 +115,16 @@ async function reportImaging(request, env, ctx) {
   try { sr = await svc.get("ServiceRequest", serviceRequestId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
+  /* PCPNDT: AN OBSTETRIC ULTRASOUND IS NOT FINALISED WITHOUT A COMPLETED FORM F (register-routes.js formFGate). A
+   * preliminary report is not blocked, so an urgent finding still reaches the ward; the final one waits for the form.
+   * A gate that could not be checked refuses too, because "could not check" is not "complete". */
+  if (status !== "preliminary" && typeof ctx.formFCheck === "function") {
+    let gate;
+    try { gate = await ctx.formFCheck(sr, ctx.modality); } catch { gate = { required: true, ok: false, error: "formf_unreadable", detail: "Form F could not be checked, so the report was not finalised." }; }
+    if (gate && gate.required && !gate.ok) {
+      return { ...base, ok: false, status: gate.error === "formf_unreadable" ? 502 : 409, error: gate.error, detail: gate.detail, missing: gate.missing || [], serviceRequestId, written: 0 };
+    }
+  }
 
   const id = reportIdFor(serviceRequestId);
   if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };

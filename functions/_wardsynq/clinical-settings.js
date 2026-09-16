@@ -14,7 +14,10 @@
  * s3-p0-alert-path) and has its own validation there.
  */
 
-export const CLINICAL_SETTING_KEYS = Object.freeze(["highAlertDrugs", "antibiotics", "orderVerifyWithinHours", "edReassessMinutes", "patientAccess", "rpoMinutes"]);
+/* controlledDrugs joined 2026-09-16 (statutory registers): the drug master's controlled-drug flag, as the names the
+ * pharmacy writes. A drug named here is kept in the NDPS register (controlled-drugs.js), and dispensing or giving
+ * it needs a second-person witness. Empty means none flagged, and the register says so. */
+export const CLINICAL_SETTING_KEYS = Object.freeze(["highAlertDrugs", "antibiotics", "orderVerifyWithinHours", "edReassessMinutes", "patientAccess", "rpoMinutes", "controlledDrugs"]);
 const ACUITIES = ["1", "2", "3", "4", "5"];
 const MAX_LIST = 300, MAX_NAME = 80;
 
@@ -22,7 +25,7 @@ export const TEMPLATES = Object.freeze({
   "not-configured": Object.freeze({
     label: "Every setting stated as not configured",
     description: "No drug lists, no clinical intervals, patient access off. Each screen that uses a setting says it is not configured until your hospital fills it in.",
-    settings: Object.freeze({ highAlertDrugs: [], antibiotics: [], orderVerifyWithinHours: null, edReassessMinutes: {}, patientAccess: { enabled: false }, rpoMinutes: null }),
+    settings: Object.freeze({ highAlertDrugs: [], antibiotics: [], orderVerifyWithinHours: null, edReassessMinutes: {}, patientAccess: { enabled: false }, rpoMinutes: null, controlledDrugs: [] }),
   }),
 });
 
@@ -40,7 +43,7 @@ export function readClinicalSettings(wardsynqCfg) {
     highAlertDrugs: list(w.highAlertDrugs), antibiotics: list(w.antibiotics),
     orderVerifyWithinHours: num(w.orderVerifyWithinHours), edReassessMinutes: ed,
     patientAccess: { enabled: !!(w.patientAccess && w.patientAccess.enabled === true) },
-    rpoMinutes: num(w.rpoMinutes),
+    rpoMinutes: num(w.rpoMinutes), controlledDrugs: list(w.controlledDrugs),
   };
 }
 
@@ -74,6 +77,7 @@ export function validateClinicalSettings(input) {
   };
   names("highAlertDrugs", "high-alert drugs");
   names("antibiotics", "antibiotics");
+  names("controlledDrugs", "controlled drugs");
   whole("orderVerifyWithinHours", 1, 168, "Hours to pharmacy verification");
   whole("rpoMinutes", 5, 10080, "Recovery point objective (minutes)");
   if (input.edReassessMinutes !== undefined) {

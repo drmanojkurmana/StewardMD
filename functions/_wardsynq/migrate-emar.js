@@ -39,6 +39,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -308,6 +309,17 @@ async function administerStep(request, env, ctx) {
   }
 
   const before = record.status;
+  /* A CONTROLLED DRUG IS GIVEN IN FRONT OF A SECOND PERSON (controlled-drugs.js), whatever the high-alert list says.
+   * Stricter than the high-alert witness below: the witness must also be an active member of this hospital who may
+   * witness one, checked by the route, because this dose is a line in the NDPS register. Refused before the machine
+   * runs, so nothing is written. */
+  if (action === "administer" && typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) {
+      return { ...base, ok: false, status: w.error.status === 502 ? 502 : 409, error: w.error.status === 502 ? w.error.error : "refused", action, from: before,
+        reasons: [{ code: String(w.error.error).toUpperCase(), message: w.error.detail }], detail: w.error.detail, orderId, administrationId: marId, actor: resolved.actor.id, written: 0 };
+    }
+  }
   try {
     if (action === "verify") await emar.transition(record, STATES.VERIFIED, { actorId: resolved.actor.id });
     else if (action === "dispense") await emar.transition(record, STATES.DISPENSED, { actorId: resolved.actor.id });

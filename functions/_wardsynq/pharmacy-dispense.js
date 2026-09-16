@@ -46,6 +46,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "MedicationDispense";
@@ -81,6 +82,8 @@ function MedicationDispense(input) {
     unverified: !!i.unverified,
     dispensedBy: i.dispensedBy || null, dispensedAt: i.dispensedAt || null,
     returnedBy: i.returnedBy || null, returnedAt: i.returnedAt || null, returnReason: i.returnReason || null,
+    // A controlled drug's issue names its witness (controlled-drugs.js). Absent on everything else.
+    ...(i.controlled ? { controlled: true, witnessedBy: i.witnessedBy || null } : {}),
     source: { system: "wardsynq-native", sourceId: `dispense:${i.id}` },
   };
 }
@@ -182,6 +185,7 @@ function summary(d) {
     destination: d.destination || null, unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
     dispensedBy: d.dispensedBy, dispensedAt: d.dispensedAt,
     returnedBy: d.returnedBy || null, returnedAt: d.returnedAt || null, returnReason: d.returnReason || null,
+    ...(d.controlled ? { controlled: true, witnessedBy: d.witnessedBy || null } : {}),
     version: d.version,
   };
 }
@@ -224,6 +228,17 @@ async function dispenseOrder(request, env, ctx) {
     };
   }
 
+  /* A CONTROLLED DRUG LEAVES THE PHARMACY IN FRONT OF A SECOND PERSON (controlled-drugs.js). Whether it is controlled
+   * is the hospital's drug master (ctx.isControlled, from the route); who counts as a witness is the same check stock
+   * wastage uses, so the two cannot disagree. Asked only after the order is known to be live. */
+  let witnessedBy = null;
+  const controlled = typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true;
+  if (controlled) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) return { ...base, ...w.error, orderId, written: 0 };
+    witnessedBy = w.witnessId;
+  }
+
   const mine = (verifications || []).filter((v) => v && str(v.orderId) === orderId);
   const check = verificationFor(mine, order.version);
   if (check.state === "superseded") {
@@ -254,6 +269,7 @@ async function dispenseOrder(request, env, ctx) {
     // Stated on the record rather than left to be inferred from an absent verification.
     unverified: check.state === "none",
     dispensedBy: resolved.actor.id, dispensedAt: at,
+    controlled, witnessedBy,
   });
 
   try {

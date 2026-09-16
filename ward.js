@@ -2449,6 +2449,20 @@
     return true;
   }
 
+  /* The medico-legal flag (yes or no and the MLC number; the case itself stays in the register) and notifiable disease
+   * prompts, which are suggestions a person decides on in Registers. Nothing while loading; a read failure says so. */
+  function registerFlagsCard(state) {
+    var f = state.registerFlags;
+    if (f === null || f === undefined) return "";
+    if (f === false) return '<p class="w-hint warn">' + ms("warning") + wTH("ward.registers-unreadable", "The medico-legal and notifiable disease registers could not be checked for this patient.") + "</p>";
+    var out = "";
+    if (f.mlc && f.mlc.mlc) out += '<p class="w-hint warn">' + ms("gavel") + wTH("ward.mlc-flag", "Medico-legal case {numbers}", { numbers: esc((f.mlc.cases || []).map(function (x) { return x.serial; }).join(", ")) }) + "</p>";
+    (f.prompts || []).forEach(function (p) {
+      out += '<p class="w-hint">' + ms("coronavirus") + wTH("ward.notifiable-prompt", "Possibly notifiable: {name}. Check the case definition and record a notification in Registers.", { name: esc(p.name) }) +
+        ' <a class="w-btn ghost" href="#/registers">' + ms("menu_book") + wTH("ward.open-registers", "Open Registers") + "</a></p>";
+    });
+    return out;
+  }
   function chartView(state) {
     var s = state.sel || {};
     var isEd = s.class === "ED";
@@ -2471,7 +2485,7 @@
     var edTopCards = isEd ? (vitalsCard() + noteCard(state)) : "";
     var standardVitalsAndNote = isEd ? "" : (noteCard(state) + vitalsCard());
 
-    return header +
+    return header + registerFlagsCard(state) +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) : "") +
       problemsCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
@@ -3795,6 +3809,7 @@
         "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wPhBatch\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wPhExpiry\" type=\"date\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.destination", "Destination") + "</span><input id=\"wPhDest\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ward-a-cabinet", "e.g. Ward A cabinet") + "\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wPhWitness\" type=\"text\" autocomplete=\"off\"></label>" +
         "</div>" +
         '<button class="w-btn go" data-w-act="phdispense">' + ms("send") + wTH("ward.dispense", "Dispense") + "</button>" +
         (dispenseRows ? '<div class="w-sub"><h4>' + ms("history") + wTH("ward.dispense-history", "Dispense history") + "</h4><ul class=\"w-mini\">" + dispenseRows + "</ul></div>" : "") +
@@ -3877,6 +3892,8 @@
       "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wStkLoc\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-main", "e.g. Main") + "\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.batch4", "Batch") + "</span><input id=\"wStkBatch\" type=\"text\" autocomplete=\"off\"></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.expiry", "Expiry") + "</span><input id=\"wStkExpiry\" type=\"date\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.received-from", "Received from (supplier)") + "</span><input id=\"wStkFrom\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.invoice-no", "Invoice or consignment note number") + "</span><input id=\"wStkDoc\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
       '<button class="w-btn go" data-w-act="stockreceive">' + ms("add") + wTH("ward.record-receipt", "Record receipt") + "</button></div>" +
 
@@ -3888,6 +3905,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.location", "Location") + "</span><input id=\"wAdjLoc\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
       "<label class=\"w-f\"><span>" + wTH("ward.reason-required", "Reason (required)") + "</span><input id=\"wAdjReason\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wAdjWitness\" type=\"text\" autocomplete=\"off\"></label>" +
       '<div class="w-actions">' +
       '<button class="w-btn go" data-w-act="stockadjust">' + ms("edit") + wTH("ward.adjust", "Adjust") + "</button>" +
       '<button class="w-btn go" data-w-act="stockwaste">' + ms("delete") + wTH("ward.wastage", "Wastage") + "</button>" +
@@ -3901,6 +3919,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.counted-quantity", "Counted quantity") + "</span><input id=\"wRecCounted\" type=\"text\" inputmode=\"decimal\" autocomplete=\"off\"></label>" +
       "</div>" +
       "<label class=\"w-f\"><span>" + wTH("ward.note-optional", "Note (optional)") + "</span><input id=\"wRecReason\" type=\"text\" autocomplete=\"off\"></label>" +
+      "<label class=\"w-f\"><span>" + wTH("ward.controlled-witness", "Witness staff ID (controlled drugs only)") + "</span><input id=\"wRecWitness\" type=\"text\" autocomplete=\"off\"></label>" +
       '<button class="w-btn go" data-w-act="stockreconcile">' + ms("check") + wTH("ward.reconcile", "Reconcile") + "</button>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.posts-the-counted-quantity-against-the", "Posts the counted quantity against the derived level as an auditable adjustment naming the expected value and the variance. A matching count writes nothing.") + "</p></div>";
   }
@@ -8328,6 +8347,14 @@
     var s = st.sel; if (!s) return Promise.resolve();
     st.busy = true; paint();
     var q = "orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(s.patientId);
+    /* Statutory registers on the chart (register-routes.js): the medico-legal flag and its number, and notifiable disease
+     * prompts. Loaded beside the chart, never blocking it; null while loading, false when it could not be read. */
+    st.registerFlags = null;
+    Promise.all([apiGet("/ward/mlc-flag?" + q), apiGet("/ward/notifiable-prompts?" + q)]).then(function (rs) {
+      if (st.sel !== s) return;
+      st.registerFlags = rs[0] && rs[0].ok && rs[1] && rs[1].ok ? { mlc: rs[0], prompts: rs[1].prompts || [] } : false;
+      paint();
+    }, function () { if (st.sel === s) { st.registerFlags = false; paint(); } });
     return Promise.all([apiGet("/ward/problems?" + q), apiGet("/ward/criticals?" + q), apiGet("/ward/timeline?" + q)])
       .then(function (rs) {
         if (settle(rs[0])) st.problems = rs[0].problems || [];
@@ -9181,7 +9208,7 @@
     var qty = val("wPhQty"), unit = val("wPhUnit"), batch = val("wPhBatch"), expiry = val("wPhExpiry"), dest = val("wPhDest");
     if (!qty || !unit) { st.err = wT("ward.a-dispense-needs-a-positive-quantity", "A dispense needs a positive quantity and a unit."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined })
+    apiPost("/ward/dispense", { orgId: st.orgId, orderId: picked, quantity: { value: Number(qty), unit: unit }, batch: batch || undefined, expiry: expiry || undefined, destination: dest || undefined, witnessId: val("wPhWitness") || undefined })
       .then(function (r) {
         if (r && r.error === "quantity_required") { st.busy = false; st.err = wT("ward.a-dispense-needs-a-positive-quantity", "A dispense needs a positive quantity and a unit."); paint(); return; }
         var msg = wT("ward.dispensed", "Dispensed.");
@@ -9687,9 +9714,9 @@
     var code = val("wStkCode"), qty = val("wStkQty"), unit = val("wStkUnit"), loc = val("wStkLoc"), batch = val("wStkBatch"), expiry = val("wStkExpiry");
     if (!code || !qty || !unit) { st.err = wT("ward.a-receipt-needs-a-drug-a", "A receipt needs a drug, a quantity and a unit."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/stock-move", { orgId: st.orgId, kind: "receipt", code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, batch: batch || undefined, expiry: expiry || undefined })
+    apiPost("/ward/stock-move", { orgId: st.orgId, kind: "receipt", code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, batch: batch || undefined, expiry: expiry || undefined, receivedFrom: val("wStkFrom") || undefined, documentNo: val("wStkDoc") || undefined })
       .then(function (r) {
-        if (settle(r, wT("ward.receipt-recorded", "Receipt recorded."))) { ["wStkCode", "wStkQty", "wStkUnit", "wStkLoc", "wStkBatch", "wStkExpiry"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
+        if (settle(r, wT("ward.receipt-recorded", "Receipt recorded."))) { ["wStkCode", "wStkQty", "wStkUnit", "wStkLoc", "wStkBatch", "wStkExpiry", "wStkFrom", "wStkDoc"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
         else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-receipt", "Could not record the receipt."); paint(); });
@@ -9699,7 +9726,7 @@
     if (!code || !qty || !unit) { st.err = wT("ward.fill-in-the-drug-quantity-and", "Fill in the drug, quantity and unit."); paint(); return; }
     if (!reason) { st.err = wT("ward.an-adjustment-or-wastage-needs-a", "An adjustment or wastage needs a reason."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/stock-move", { orgId: st.orgId, kind: kind, code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, reason: reason })
+    apiPost("/ward/stock-move", { orgId: st.orgId, kind: kind, code: code, quantity: { value: Number(qty), unit: unit }, location: loc || undefined, reason: reason, witnessId: val("wAdjWitness") || undefined })
       .then(function (r) {
         if (r && r.error === "reason_required") { st.busy = false; st.err = wT("ward.an-adjustment-or-wastage-needs-a", "An adjustment or wastage needs a reason."); paint(); return; }
         if (settle(r, kind === "wastage" ? wT("ward.wastage-recorded", "Wastage recorded.") : wT("ward.adjustment-recorded", "Adjustment recorded."))) { ["wAdjCode", "wAdjQty", "wAdjUnit", "wAdjLoc", "wAdjReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; }); loadInventory(); }
@@ -9711,7 +9738,7 @@
     var code = val("wRecCode"), unit = val("wRecUnit"), loc = val("wRecLoc"), counted = val("wRecCounted"), reason = val("wRecReason");
     if (!code || !unit || counted === "") { st.err = wT("ward.a-reconciliation-needs-a-drug-a", "A reconciliation needs a drug, a unit and the counted quantity."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/stock-reconcile", { orgId: st.orgId, code: code, unit: unit, location: loc || undefined, counted: Number(counted), reason: reason || undefined })
+    apiPost("/ward/stock-reconcile", { orgId: st.orgId, code: code, unit: unit, location: loc || undefined, counted: Number(counted), reason: reason || undefined, witnessId: val("wRecWitness") || undefined })
       .then(function (r) {
         if (r && r.error === "counted_required") { st.busy = false; st.err = wT("ward.enter-the-number-actually-counted", "Enter the number actually counted."); paint(); return; }
         var msg = r && r.skipped === "no_variance" ? wT("ward.the-count-matches-the-record-nothing", "The count matches the record. Nothing was posted.") : (r && r.reason) || wT("ward.reconciled", "Reconciled.");
@@ -13401,7 +13428,7 @@
     st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
     st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null;
     st.due = null; st.problems = null; st.labBoard = null; st.radBoard = null; st.critsBoard = null;
-    st.incidentLog = null; st.incidentHealth = null; st.qs = null; st.qsOpen = null;
+    st.incidentLog = null; st.incidentHealth = null; st.qs = null; st.qsOpen = null; st.registerFlags = null;
     st.consultationResult = null;
     st.approvals = null;
     st.purchaseOrders = null;

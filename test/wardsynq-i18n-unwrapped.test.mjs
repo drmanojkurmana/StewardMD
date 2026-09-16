@@ -87,10 +87,13 @@ const ALLOW = {
   "wardsynq/site/pages/admin.js": {
     "a record type or a lookup suffix, not words": ["Invoice", "Incident", "Org", "Bundle"],
   },
+  "wardsynq/site/pages/registers.js": {
+    "the print window's stylesheet, not words": ["</title><style>body{font:12px sans-serif}table{border-collapse:collapse;width:100%}td,th{border:1px solid #444;padding:3px;vertical-align:top}</style><h2>"],
+  },
 };
 const WARD_FILES = ["ward.js", "discharge.js", "patient-register.js"];
 const SITE_FILES = ["wardsynq/site/shell.js", "wardsynq/site/bug-reporter.js", "wardsynq/ui/wardsynq-app.js",
-  ...["abdm", "accounts", "admin", "audit", "group", "maik", "patients", "portal-access", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
+  ...["abdm", "accounts", "admin", "audit", "group", "maik", "patients", "portal-access", "registers", "rota", "security"].map((p) => "wardsynq/site/pages/" + p + ".js")];
 
 for (const file of [...WARD_FILES, ...SITE_FILES]) {
   test("no unwrapped visible English in " + file + " beyond its allowlist", () => {

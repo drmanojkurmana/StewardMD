@@ -42,6 +42,7 @@ import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { witnessOrRefusal } from "./controlled-drugs.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const key = (v) => str(v).toUpperCase();
@@ -129,7 +130,9 @@ function levelsFrom(movements, dispenses) {
     receivedAt.set(k, set);
   }
   for (const d of dispenses || []) {
-    if (!d) continue;
+    /* A RETURNED ISSUE CAME BACK (pharmacy-dispense.js returnDispense: "stock comes back"). It was subtracted anyway,
+     * so every return left the level short by what was returned, and a controlled-drug count then read as a loss. */
+    if (!d || d.state === "returned") continue;
     const qty = quantityOf(d.quantity);
     const code = str(d.drugCode) || str(d.drug);
     if (!qty || !code) {
@@ -165,7 +168,7 @@ function batchBalances(movements, dispenses, code, unit) {
     row(str(m.batch), str(m.expiry)).onHand += q.value * sign;
   }
   for (const d of dispenses || []) {
-    const q = d && quantityOf(d.quantity);
+    const q = d && d.state !== "returned" && quantityOf(d.quantity);
     if (!q || key(str(d.drugCode) || str(d.drug)) !== k || key(q.unit) !== u) continue;
     if (!str(d.batch)) { unbatched += q.value; continue; }
     row(str(d.batch), str(d.expiry)).onHand -= q.value;
@@ -364,6 +367,16 @@ async function recordMovement(request, env, ctx) {
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
+  /* A CONTROLLED DRUG IS NOT DESTROYED OR WRITTEN OFF BY ONE PERSON (controlled-drugs.js). The route decides whether
+   * the item is controlled (the hospital's drug master) and hands in the check that the witness is a real, different
+   * member of this hospital; a witness who is the person recording, or nobody at all, is refused and nothing lands. */
+  let witnessedBy = null;
+  if (ctx.controlled === true && (kind === "wastage" || kind === "adjustment")) {
+    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+    if (w.error) return { ...base, ...w.error, written: 0 };
+    witnessedBy = w.witnessId;
+  }
+
   const at = str(ctx.at) || new Date().toISOString();
   /* The random tail matters: two receipts of one drug in the same millisecond used to share an id, and
    * the second became a new version of the first, so the first delivery vanished from every level.
@@ -374,6 +387,11 @@ async function recordMovement(request, env, ctx) {
     quantity, location: str(ctx.location) || null,
     batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
     reason: reason || null, at, by: resolved.actor.id,
+    ...(ctx.controlled === true ? { controlled: true, witnessedBy } : {}),
+    /* Form 3H (NDPS Rules r.52R) records where a receipt came from and its consignment note, bill or invoice number.
+     * Optional for every drug, kept when given. */
+    ...(str(ctx.receivedFrom) ? { receivedFrom: str(ctx.receivedFrom).slice(0, 200) } : {}),
+    ...(str(ctx.documentNo) ? { documentNo: str(ctx.documentNo).slice(0, 80) } : {}),
     source: { system: "wardsynq-native", sourceId: `stock:${id}` },
   };
 

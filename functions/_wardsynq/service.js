@@ -762,7 +762,10 @@ class RecordService {
     const newest = !!(opts && opts.newest);
     const raw = await this.repository.changes(this.tenantId, since, limit, newest ? { newest: true, before: opts.before } : undefined);
     // The cursor advances over everything; the records handed back are only what may be read.
-    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType)), cursor: raw.cursor };
+    /* The statutory registers (registers.js) share this store as internal types and are NEVER handed out here: a null
+     * read scope admits every type, and a Form F, an MTP case or a medico-legal case must reach nobody except
+     * through its own register's route. */
+    const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType) && !String(r.resourceType || "").startsWith("_wardsynq_register")), cursor: raw.cursor };
     await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, ...(newest ? { newest: true, before: Number(opts.before) || null } : {}), cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
     return page;
   }
