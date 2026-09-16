@@ -70,6 +70,14 @@ const ALLOWLIST = [
   // fabricated data" and shell.js's isDemo() title text).
   { file: "wardsynq/site/shell.css", hex: "f8f0df", snippet: "--sig-major-wash, #f8f0df", reason: "the DEMO hospital-bar tag - warns clinicians a hospital is fabricated data, never a real patient." },
   { file: "wardsynq/site/shell.css", hex: "85570c", snippet: "--sig-major, #85570c", reason: "the DEMO hospital-bar tag - same reason as above." },
+
+  // --- ward.js lab QC Levey-Jennings chart (gap-lab): Westgard state is a real laboratory safety state.
+  { file: "ward.js", hex: "b45309", snippet: 'var COLOR = { accepted: "currentColor", warning: "#b45309"', reason: "a QC run with a Westgard warning (1-2s) point on the Levey-Jennings chart." },
+  { file: "ward.js", hex: "b91c1c", snippet: 'var COLOR = { accepted: "currentColor", warning: "#b45309", rejected: "#b91c1c"', reason: "a rejected QC run point: patient results for that test are blocked until corrective action." },
+  { file: "ward.js", hex: "b91c1c", snippet: 'stroke = a === 3 ? "#b91c1c"', reason: "the +/-3 SD rejection limit line on the Levey-Jennings chart." },
+  { file: "ward.js", hex: "b45309", snippet: 'a === 2 ? "#b45309"', reason: "the +/-2 SD warning limit line on the Levey-Jennings chart." },
+  // --- not a colour: the HTML entity &#9744; (ballot box) in the package document checklist matches the hex pattern.
+  { file: "ward.js", hex: "9744", snippet: "<li>&#9744; ", reason: "HTML entity for an empty checkbox in the package document pack, not a colour." },
 ];
 
 function hexToHsl(hex) {
