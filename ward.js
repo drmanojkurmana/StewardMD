@@ -2911,6 +2911,130 @@
       "<input id=\"wNhcxPolicy\" placeholder=\"" + wTA("ward.nhcx-policy-number", "Policy number") + "\">" +
       '<button class="w-btn" data-w-act="nhcxelig">' + ms("verified_user") + wTH("ward.nhcx-check-eligibility", "Check eligibility") + "</button></div>";
   }
+  /* PACKAGE BILLING ON A STAY (gap-claims-gst-2, functions/_wardsynq/packages.js). st.tpaPkg: null = loading, false =
+   * could not be read (never shown as no package), else { assignments, stays, packages }. A scheme portal is never
+   * reached: the document pack is for a person to upload, and says so. */
+  function pkgPreauthWord(s) {
+    if (s === "missing") return wT("ward.pkg-preauth-missing", "none linked");
+    if (s === "not_required") return wT("ward.pkg-preauth-not-required", "not required");
+    if (s === "unreadable") return wT("ward.pkg-preauth-unreadable", "could not be read");
+    if (s === "not_found") return wT("ward.pkg-preauth-not-found", "linked record not found");
+    return preauthStateWord(s);
+  }
+  function pkgSchemeWord(s) {
+    var words = { pmjay: wT("ward.pkg-scheme-pmjay", "PM-JAY (Ayushman Bharat)"), state: wT("ward.pkg-scheme-state", "State scheme"), cghs: wT("ward.pkg-scheme-cghs", "CGHS"),
+      echs: wT("ward.pkg-scheme-echs", "ECHS"), insurer: wT("ward.pkg-scheme-insurer", "Private insurer"), hospital: wT("ward.pkg-scheme-hospital", "Hospital package") };
+    return HAS(words, s) ? words[s] : s;
+  }
+  /* PURE. The flags a cashier or TPA desk must see on a package stay, as warnings. */
+  function pkgFlagsHtml(f) {
+    if (!f) return "";
+    return (f.losExceeded ? '<div class="w-warn">' + ms("schedule") + wTH("ward.pkg-los-exceeded", "Length of stay exceeded: day {days}, the package expects {expected}.", { days: esc(f.stayDays), expected: esc(f.expectedLosDays) }, "days expected") + "</div>" : "") +
+      (f.preAuthProblem ? '<div class="w-warn">' + ms("fact_check") + wTH("ward.pkg-preauth-problem", "This package needs an approved pre-authorisation: {state}.", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" : "");
+  }
+  function packageSection(state) {
+    var p = state.tpaPkg, t = state.tpa || {};
+    var h = "<div class=\"w-sub\"><h4>" + wTH("ward.pkg-title", "Package billing") + "</h4>";
+    if (p === null || p === undefined) return h + '<p class="w-empty">' + wTH("ward.pkg-loading", "Loading packages&hellip;") + "</p></div>";
+    if (p === false) return h + '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-unreadable", "Packages could not be read. This is not the same as this stay having none.", null, "", 1) + "</p></div>";
+    var rows = (p.assignments || []).map(function (a) {
+      var k = a.package || {}, f = a.flags || {}, sp = a.split;
+      var list = function (items) { return items.map(function (x) { return esc(x.display) + (x.line != null ? " " + esc(x.line) : ""); }).join(", "); };
+      return '<li class="w-mini-row"><div><b>' + esc(k.code) + "</b> " + esc(k.name) + " &middot; " + esc(pkgSchemeWord(k.scheme)) + (k.schemeName ? " (" + esc(k.schemeName) + ")" : "") +
+        '<div class="w-dt-times">' + wTH("ward.pkg-rate-line", "Rate {rate} &middot; version {version} &middot; stay {encounter}", { rate: esc(k.rate), version: esc(k.version), encounter: esc(a.encounterId) }, "rate version encounter") +
+        (a.beneficiaryId ? " &middot; " + wTH("ward.pkg-beneficiary", "beneficiary ID {id}", { id: esc(a.beneficiaryId) }, "id") : "") + "</div>" +
+        '<div class="w-dt-times">' + (f.stayDays == null ? wTH("ward.pkg-days-unknown", "Days in hospital not known here") : wTH("ward.pkg-days", "Day {days} of {expected} expected", { days: esc(f.stayDays), expected: esc(f.expectedLosDays == null ? "-" : f.expectedLosDays) }, "days expected")) +
+        " &middot; " + wTH("ward.pkg-preauth", "pre-authorisation: {state}", { state: esc(pkgPreauthWord(f.preAuthState)) }, "") + "</div>" +
+        pkgFlagsHtml(f) +
+        (sp === false ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-split-unreadable", "The stay's charges could not be read, so what is billed on top is not known.", null, "", 1) + "</p>"
+          : sp ? '<div class="w-dt-times">' + wTH("ward.pkg-counts", "Charges so far: {included} covered, {excluded} excluded, {outside} not listed", { included: esc(sp.counts.included), excluded: esc(sp.counts.excluded), outside: esc(sp.counts.outside) }, "included excluded outside") + "</div>" +
+            (sp.excluded.length ? '<div class="w-dt-times">' + wTH("ward.pkg-excluded-billed", "Excluded, billed on top:") + " " + list(sp.excluded) + "</div>" : "") +
+            (sp.outside.length ? '<div class="w-warn">' + wTH("ward.pkg-outside-billed", "Not listed by the package, billed; check against the scheme:") + " " + list(sp.outside) + "</div>" : "") +
+            (sp.unpriced.length ? '<div class="w-warn">' + wTH("ward.pkg-unpriced", "Not covered and not priced:") + " " + list(sp.unpriced) + "</div>" : "") : "") +
+        (f.manualPortal ? '<p class="w-hint">' + ms("info") + wTH("ward.pkg-manual-portal", "Not connected to the scheme's portal. Nothing is sent from here; use the document pack to submit by hand.") + "</p>" : "") +
+        '</div><div class="w-mini-row-act"><button class="w-btn ghost sm" data-w-act="pkgpack:' + esc(a.encounterId) + '">' + ms("folder_open") + wTH("ward.pkg-pack", "Document pack (manual submission)") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="pkgset:' + esc(a.encounterId) + '">' + ms("edit") + wTH("ward.pkg-change", "Change") + "</button>" +
+        '<button class="w-btn ghost sm" data-w-act="pkgremove:' + esc(a.encounterId) + '">' + ms("remove") + wTH("ward.pkg-remove", "Remove") + "</button></div></li>";
+    }).join("");
+    var canAttach = (p.stays || []).length && (p.packages || []).some(function (x) { return x.active; });
+    return h + (p.staysUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.pkg-stays-unreadable", "The stays could not be read here, so days in hospital are not shown.", null, "", 1) + "</p>" : "") +
+      (rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.pkg-none", "No stay of this patient is on a package.") + "</p>") +
+      (canAttach ? '<button class="w-btn" data-w-act="pkgset">' + ms("inventory_2") + wTH("ward.pkg-attach", "Put a stay on a package") + "</button>"
+        : '<p class="w-hint">' + ms("info") + wTH("ward.pkg-cannot-attach", "A package needs an inpatient stay and a package set up by an administrator under Admin, Price list.") + "</p>") +
+      '<p class="w-hint">' + ms("info") + wTH("ward.pkg-how-billed", "The bill carries the package rate and what the package excludes. Charges it covers show at zero.") + "</p></div>";
+  }
+  function loadTpaPackages() {
+    if (!st.sel || !st.sel.patientId) return;
+    st.tpaPkg = null;
+    Promise.all([apiGet("/ward/stay-packages?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId)), apiGet("/ward/packages?orgId=" + encodeURIComponent(st.orgId))])
+      .then(function (both) { st.tpaPkg = both[0] && both[0].ok && both[1] && both[1].ok ? { assignments: both[0].assignments || [], stays: both[0].stays || [], staysUnreadable: !!both[0].staysUnreadable, packages: both[1].packages || [] } : false; paint(); })
+      .catch(function () { st.tpaPkg = false; paint(); });
+  }
+  function pkgWrite(body) {
+    st.busy = true; paint();
+    return apiPost("/ward/stay-package", body)
+      .then(function (r) { if (settle(r, wT("ward.pkg-saved", "Recorded."))) { loadTpaPackages(); return; } paint(); })
+      .catch(function () { st.busy = false; st.err = wT("ward.pkg-not-saved", "Could not reach the server. The package may not have changed; reload to check."); paint(); });
+  }
+  function pkgSetAction(encounterId) {
+    var p = st.tpaPkg; if (!p || !st.sel) return;
+    var cur = encounterId ? (p.assignments || []).filter(function (a) { return a.encounterId === encounterId; })[0] : null;
+    var stays = (p.stays || []).map(function (s) { return [s.id, esc(when(s.periodStart)) + (s.ward ? " &middot; " + esc(s.ward) : "") + (s.status === "in-progress" ? " (" + wTH("ward.pkg-stay-open", "in hospital") + ")" : "")]; });
+    var pkgs = (p.packages || []).filter(function (x) { return x.active; }).map(function (x) { return [x.id, esc(x.code) + " &middot; " + esc(x.name) + " &middot; " + esc(pkgSchemeWord(x.scheme)) + " &middot; " + esc(x.rate)]; });
+    var auths = [["", wTH("ward.pkg-no-preauth", "No pre-authorisation")]].concat(((st.tpa && st.tpa.preAuthorisations) || []).map(function (a) { return [a.id, esc(a.treatment) + " &middot; " + esc(preauthStateWord(a.state))]; }));
+    askFor({ icon: "inventory_2", ok: wTH("ward.pkg-save", "Save"), title: cur ? wTH("ward.pkg-change-title", "Change the package on this stay") : wTH("ward.pkg-attach-title", "Put a stay on a package"),
+      text: wTH("ward.pkg-attach-text", "The stay keeps the package version chosen now, even if the price list changes later. A stay that already has an itemised bill cannot be put on a package."),
+      fields: [
+        { key: "encounterId", type: "select", label: wTH("ward.pkg-stay", "Stay"), options: stays, value: encounterId || (stays[0] && stays[0][0]) || "" },
+        { key: "packageId", type: "select", label: wTH("ward.pkg-package", "Package"), options: pkgs, value: cur ? cur.package.id : (pkgs[0] && pkgs[0][0]) || "" },
+        { key: "preAuthId", type: "select", label: wTH("ward.pkg-preauth-link", "Pre-authorisation"), options: auths, value: cur ? cur.preAuthId || "" : "" },
+        { key: "beneficiaryId", label: wTH("ward.pkg-beneficiary-id", "Scheme beneficiary ID (card or ID number)"), value: cur ? cur.beneficiaryId || "" : "" },
+      ].concat(cur ? [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.pkg-reason-required", "Say why the package is changing.") }] : []) }, function (v) {
+      var existing = (p.assignments || []).filter(function (a) { return a.encounterId === v.encounterId; })[0];
+      return pkgWrite({ orgId: st.orgId, patientId: st.sel.patientId, encounterId: v.encounterId, packageId: v.packageId, preAuthId: v.preAuthId || undefined,
+        beneficiaryId: v.beneficiaryId || undefined, reason: v.reason || undefined, expectedVersion: existing ? existing.version : undefined });
+    });
+  }
+  function pkgRemoveAction(encounterId) {
+    var p = st.tpaPkg; if (!p || !st.sel) return;
+    var cur = (p.assignments || []).filter(function (a) { return a.encounterId === encounterId; })[0]; if (!cur) return;
+    askFor({ icon: "remove", danger: true, ok: wTH("ward.pkg-remove", "Remove"), title: wTH("ward.pkg-remove-title", "Remove {code} from this stay?", { code: esc(cur.package.code) }, "code"),
+      text: wTH("ward.pkg-remove-text", "The stay is then billed item by item. A package already on a bill cannot be removed; raise a note on that bill instead."),
+      fields: [{ key: "reason", type: "textarea", label: wTH("ward.why", "Why?"), required: wT("ward.pkg-remove-reason-required", "Say why the package is being removed.") }] }, function (v) {
+      return pkgWrite({ orgId: st.orgId, patientId: st.sel.patientId, encounterId: encounterId, remove: true, reason: v.reason, expectedVersion: cur.version });
+    });
+  }
+  /* THE MANUAL SUBMISSION PACK, printed. Opened at once (a window opened after a wait is blocked as a popup) and filled
+   * when the server answers; a failure is said in that window and on the ward, never a blank pack. */
+  function pkgPackAction(encounterId) {
+    if (!st.sel) return;
+    var win = null; try { win = G.open("", "_blank"); } catch (e) {}
+    if (!win) { st.err = wT("ward.could-not-open-a-print-window", "Could not open a print window. Allow pop-ups for this site."); paint(); return; }
+    var write = function (html) { try { win.document.open(); win.document.write(html); win.document.close(); } catch (e) {} };
+    write("<p>" + wTH("ward.pkg-pack-loading", "Preparing the document pack&hellip;") + "</p>");
+    apiGet("/ward/package-pack?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId) + "&encounterId=" + encodeURIComponent(encounterId))
+      .then(function (r) {
+        if (!r || !r.ok || !r.pack) {
+          write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>");
+          st.err = wT("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere."); paint(); return;
+        }
+        var k = r.pack;
+        var checkWord = function (s) { return s === "done" ? wTH("ward.pkg-check-done", "done") : s === "not_done" ? wTH("ward.pkg-check-not-done", "not done") : wTH("ward.pkg-check-by-hand", "check by hand"); };
+        var docs = function (list) { return list.length ? "<ul>" + list.map(function (d) { return "<li>&#9744; " + esc(d) + "</li>"; }).join("") + "</ul>" : "<p>" + wTH("ward.pkg-pack-no-docs", "No documents are listed on this package. Add the scheme's mandatory documents for it under Admin, Price list, Packages.") + "</p>"; };
+        write("<title>" + esc(k.package.code) + "</title><body style=\"font-family:sans-serif\">" +
+          "<h2>" + wTH("ward.pkg-pack-title", "Manual submission pack: {code}", { code: esc(k.package.code) }, "code") + "</h2>" +
+          "<p><b>" + wTH("ward.pkg-pack-notice", "Not connected to the scheme's portal. Nothing in this pack has been sent or submitted. A person uploads it on the portal and records the portal's reference on the pre-authorisation.") + "</b></p>" +
+          "<p>" + esc(k.package.name) + " &middot; " + esc(pkgSchemeWord(k.scheme)) + (k.schemeName ? " (" + esc(k.schemeName) + ")" : "") + " &middot; " + wTH("ward.pkg-rate-version", "Rate {rate}, version {version}", { rate: esc(k.package.rate), version: esc(k.package.version) }, "rate version") + "</p>" +
+          "<h3>" + wTH("ward.pkg-pack-checklist", "Checklist") + "</h3><ul>" + k.checklist.map(function (c) { return "<li>" + esc(c.text) + ": <b>" + checkWord(c.state) + "</b></li>"; }).join("") + "</ul>" +
+          "<h3>" + wTH("ward.pkg-pack-preauth-docs", "Documents for pre-authorisation") + "</h3>" + docs(k.preAuthDocuments) +
+          "<h3>" + wTH("ward.pkg-pack-claim-docs", "Documents for the claim") + "</h3>" + docs(k.claimDocuments) +
+          "<h3>" + wTH("ward.pkg-pack-fields", "Fields to copy into the portal") + "</h3><p>" + wTH("ward.pkg-pack-fields-note", "Field names on the portal may differ. An empty value is not known here.") + "</p>" +
+          '<table border="1" cellspacing="0" cellpadding="4">' + k.fields.map(function (f) { return "<tr><td>" + esc(f.section) + "</td><td>" + esc(f.label) + "</td><td>" + esc(f.value == null ? "" : f.value) + "</td></tr>"; }).join("") + "</table></body>");
+        try { win.focus(); } catch (e) {}
+      })
+      .catch(function () { write("<p>" + wTH("ward.pkg-pack-failed", "The document pack could not be prepared. Nothing was sent anywhere.") + "</p>"); });
+  }
+
   function tpaView(state) {
     if (!state.tpa) return "<div class=\"w-card\"><h3>" + wTH("ward.tpa-claims", "TPA / Claims") + "</h3><p class=\"w-empty\">" + wTH("ward.loading-claims", "Loading claims&hellip;") + "</p></div>";
     var t = state.tpa;
@@ -2991,6 +3115,7 @@
       "<input id=\"wTpaAuthCodes\" placeholder=\"" + wTA("ward.nhcx-preauth-codes", "Diagnosis codes on the problem list, comma-separated (NHCX needs them)") + "\">" +
       "<input id=\"wTpaAuthPolicy\" placeholder=\"" + wTA("ward.nhcx-preauth-policy", "Policy number (NHCX needs it)") + "\">" +
       '<button class="w-btn" data-w-act="preauth">' + ms("fact_check") + wTH("ward.record2", "Record") + "</button></div>" +
+      packageSection(state) +
       "<div class=\"w-sub\"><h4>" + wTH("ward.estimates", "Estimates") + "</h4>" +
       (t.estimatesUnreadable ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.estimates-could-not-be-read", "Estimates could not be read.", null, "", 1) + "</p>"
         : estRows ? "<ul class=\"w-mini\">" + estRows + "</ul>" : "<p class=\"w-empty\">" + wTH("ward.no-estimate-has-been-prepared-for", "No estimate has been prepared for this patient.") + "</p>") +
@@ -5429,8 +5554,17 @@
     if (l.igst) return wTH("ward.gst-igst", "GST {rate}% &middot; IGST {igst}", { rate: esc(l.taxRate), igst: esc(l.igst) }, "rate igst");
     return wTH("ward.gst-cgst-sgst", "GST {rate}% &middot; CGST {cgst} &middot; SGST {sgst}", { rate: esc(l.taxRate), cgst: esc(l.cgst), sgst: esc(l.sgst) }, "rate cgst sgst");
   }
+  /* Package billing: what each line is to the stay's package (functions/_wardsynq/packages.js). */
+  function cashPackageWord(l) {
+    if (!l || !l.packageCode) return "";
+    var w = l.packageLine ? wTH("ward.pkg-line-rate", "package rate")
+      : l.packageIncluded ? wTH("ward.pkg-line-included", "included in the package")
+      : l.packageExcluded ? wTH("ward.pkg-line-excluded", "excluded from the package, billed")
+      : l.packageOutside ? wTH("ward.pkg-line-outside", "not listed by the package, billed; check") : "";
+    return w ? " &middot; <b>" + w + "</b>" : "";
+  }
   function cashLineHtml(l, taxable) {
-    return "<li>" + esc(l.display || l.code) + " &middot; " + (l.hsnSac ? wTH("ward.hsn-sac", "HSN/SAC {code}", { code: esc(l.hsnSac) }, "code") : wTH("ward.no-hsn-sac", "no HSN/SAC")) +
+    return "<li>" + esc(l.display || l.code) + cashPackageWord(l) + " &middot; " + (l.hsnSac ? wTH("ward.hsn-sac", "HSN/SAC {code}", { code: esc(l.hsnSac) }, "code") : wTH("ward.no-hsn-sac", "no HSN/SAC")) +
       " &middot; " + wTH("ward.taxable-value", "taxable {value}", { value: esc(taxable) }, "value") +
       (l.taxKind === "GST" ? " &middot; " + cashGstText(l) : " &middot; " + wTH("ward.no-gst-rate-set", "no GST rate set")) + "</li>";
   }
@@ -5525,6 +5659,7 @@
       var lineRows = (inv.lines || []).map(function (l) { return cashLineHtml(l, l.taxable == null ? l.line : l.taxable); }).join("");
       return '<div class="w-sub"><h4>' + esc(inv.invoiceId) + '<span class="w-st ' + esc(inv.status) + '">' + esc(wTEn(INVOICE_STATUS_WORDS[inv.status]) || inv.status) + "</span></h4>" +
         (inv.documentNumber ? "<p>" + wTH("ward.invoice-number", "Invoice number {no}", { no: esc(inv.documentNumber) }, "no") + "</p>" : "") +
+        (inv.package ? "<p>" + wTH("ward.pkg-invoice", "Package {code}: {name}, rate {rate}", { code: esc(inv.package.code), name: esc(inv.package.name), rate: esc(inv.package.rate) }, "code name rate") + "</p>" + pkgFlagsHtml(inv.package) : "") +
         (lineRows ? '<ul class="w-mini">' + lineRows + "</ul>" : "") +
         "<p>" + (inv.buyer && inv.buyer.gstin ? wTH("ward.buyer-b2b", "Billed to {name}, GSTIN {gstin}", { name: esc(inv.buyer.legalName), gstin: esc(inv.buyer.gstin) }, "name gstin") : wTH("ward.buyer-b2c", "Billed to the patient (no buyer GSTIN)")) + "</p>" +
         cashEinvHtml(c.einvoice, inv) +
@@ -12393,13 +12528,13 @@
       .catch(function () { st.busy = false; st.billing = { invoices: null, claims: null }; st.err = wT("ward.could-not-load-billing", "Could not load billing."); paint(); });
   }
   function tpaOpen() {
-    st.view = "tpa"; st.tpa = null; paint(); loadTpa();
+    st.view = "tpa"; st.tpa = null; st.tpaPkg = null; paint(); loadTpa();
   }
   function loadTpa() {
     if (!st.sel || !st.sel.patientId) return;
     st.busy = true; paint();
     return apiGet("/ward/claims?orgId=" + encodeURIComponent(st.orgId) + "&patientId=" + encodeURIComponent(st.sel.patientId))
-      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); })
+      .then(function (r) { st.busy = false; st.tpa = (r && r.ok) ? r : { failed: true }; paint(); if (r && r.ok) loadTpaPackages(); })
       .catch(function () { st.busy = false; st.tpa = { failed: true }; paint(); });
   }
   function claimCodeAction() {
@@ -12952,7 +13087,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
-      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.billing = null;
+      st.maternity = null; st.admitClass = ""; st.emergencyOverride = false; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null; st.consent = null; st.completion = null; st.roi = null; st.tpa = null; st.tpaPkg = null; st.billing = null;
       paint(); return;
     }
     // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
@@ -13506,6 +13641,9 @@
     if (cmd === "preauth") { preAuthAction(); return; }
     if (cmd === "nhcxelig") { nhcxEligibilityAction(); return; }
     if (cmd === "hcxstatus") { hcxStatusAction(arg); return; }
+    if (cmd === "pkgset") { pkgSetAction(arg); return; }
+    if (cmd === "pkgremove") { pkgRemoveAction(arg); return; }
+    if (cmd === "pkgpack") { pkgPackAction(arg); return; }
     if (cmd === "cosign") { cosign(arg); return; }
     if (cmd === "submitnote") { submitNote(arg); return; }
     if (cmd === "tx") { transmit(arg); return; }

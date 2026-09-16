@@ -6737,3 +6737,33 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   Rs 10 crore (the IRP refuses), e-way bills, GSTR returns, GST on the OPD clinic billing station (q_invoices, which still
   has no tax), unit codes other than NOS for medicines. Not verified against the live NIC sandbox (mocked IRP only).
 - **Status:** built, tested (test/wardsynq-gst-einvoice.test.mjs).
+
+## 2026-09-16 Package billing: a versioned package master, a package copied onto a stay, and a manual pack for schemes with no API (gap-claims-gst-2)
+- **Decision:** `functions/_wardsynq/packages.js`. The master is a tenant system record `_wardsynq_package` (one per
+  scheme and code; scheme pmjay / state / cghs / echs / insurer / hospital; rate in rupees; inclusions and exclusions as
+  Price list kinds plus named items; expected length of stay; pre-authorisation required; the scheme's pre-auth and
+  claim document lists). Append-only: every change is a version with a reason and the version read, audited
+  `package.create / update / withdraw / restore` with the fields changed (and old/new rate). staff.admin writes on
+  Admin > Price list > Packages; billing.view reads.
+- **Decision:** a package on a stay is a new record type `PackageAssignment` (billing.charge writes, billing.view reads,
+  granted with Claim), id per stay, carrying a COPY of the package version, the pre-authorisation it is linked to (must
+  be this patient's) and the scheme beneficiary ID. Change or removal needs a reason; refused once the package line is
+  on a bill (raise a note instead) and refused on a stay that already has an itemised bill (no care billed twice).
+- **Decision:** `raiseInvoice` on a package stay bills the package line (sourceType PackageAssignment, never twice), every
+  charge the package covers at zero with `packageIncluded` (an unpriced covered charge needs no price), exclusions on top
+  (`packageExcluded`), and charges named neither way billed and flagged `packageOutside` for a person to check. An
+  exclusion wins over an inclusion. Charges of any OTHER active package stay are kept off a patient's other bills. With
+  no stay named and none open, the latest package stay with something billable not yet billed is the bill's stay, so a
+  discharged package stay is still billed by its package. The invoice carries `package` with length of stay exceeded
+  and pre-authorisation state flags; the bill still raises (the desk decides), it says so.
+- **GST:** the package line is treated as a health care service (exempt) and covered lines carry no tax.
+  Not split: a package bundling a room above Rs 5,000 a day; a hospital's accountant decides, the package then needs GST fields.
+- **No scheme API:** PM-JAY TMS has no public API and no CGHS/ECHS API is verified, so `GET /ward/package-pack` returns
+  a checklist, the package's own document lists and a field export labelled manual submission, and never marks anything
+  submitted. TMS pre-auth sections per the PM-JAY 2.0 TMS Provider User Manual (sha.kerala.gov.in); mandatory documents
+  are per package, so the hospital enters them from the scheme's package master rather than WardSynQ inventing them.
+- **Not built:** automatic LOS enhancement requests, per-day package rates or multi-package stays, importing a scheme's
+  HBP master file, GST split for bundled rooms, `/ward/charges` preview still lists a package stay item by item (the TPA
+  screen's package split and the bill are package-aware).
+- **Status:** built, tested (test/wardsynq-packages.test.mjs, test/ward-package-view.test.mjs, test/wsq-admin-packages.test.mjs,
+  test/run-ward-package-ui.mjs headless).

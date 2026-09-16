@@ -226,6 +226,7 @@ import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.j
 import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setBuyerRoute } from "../../_wardsynq/invoice.js";
 import { generateIrnRoute, cancelIrnRoute, einvoiceStatus } from "../../_wardsynq/einvoice.js";
+import { listPackages, packageVersions, savePackage, setStayPackage, stayPackages, packagePack } from "../../_wardsynq/packages.js";
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
@@ -1519,6 +1520,10 @@ export async function onRequest(context) {
         // gap-claims-gst B: notes, the buyer on a B2B bill and e-invoice reporting all change a bill.
         "invoice-credit-note": CAPS.BILLING_CHARGE, "invoice-debit-note": CAPS.BILLING_CHARGE, "invoice-buyer": CAPS.BILLING_CHARGE,
         "invoice-irn": CAPS.BILLING_CHARGE, "invoice-irn-cancel": CAPS.BILLING_CHARGE, "einvoice-status": CAPS.BILLING_VIEW,
+        /* gap-claims-gst-2 (packages.js): the package master is price list authority (staff.admin writes, as the Price
+         * list does); putting a stay on a package changes its bill (billing.charge); reading either is reading bills. */
+        packages: CAPS.BILLING_VIEW, "package-versions": CAPS.BILLING_VIEW, "package-save": CAPS.STAFF_ADMIN,
+        "stay-package": CAPS.BILLING_CHARGE, "stay-packages": CAPS.BILLING_VIEW, "package-pack": CAPS.BILLING_VIEW,
         invoices: CAPS.BILLING_VIEW,
         /* Stock control is the dispensing side of pharmacy. Nothing behind these routes can refuse a
          * dispense: a count is a belief and the box in the pharmacist's hand is the fact. */
@@ -2880,6 +2885,37 @@ export async function onRequest(context) {
       }
       if (sub === "invoice-void" && method === "POST") {
         const r = await voidInvoiceRoute(request, env, { ...deps, invoiceId: body.invoiceId, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      /* gap-claims-gst-2: package billing (functions/_wardsynq/packages.js). The split and the pack read the stay's
+       * charges through the same capture and price list the bill uses. */
+      if (sub === "packages" && method === "GET") {
+        const r = await listPackages(request, env, deps);
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "package-versions" && method === "GET") {
+        const r = await packageVersions(request, env, { ...deps, id: url.searchParams.get("id") || "" });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "package-save" && method === "POST") {
+        const r = await savePackage(request, env, { ...deps, id: body.id, expectedVersion: body.expectedVersion, active: body.active, reason: body.reason,
+          scheme: body.scheme, schemeName: body.schemeName, code: body.code, name: body.name, rate: body.rate, expectedLosDays: body.expectedLosDays,
+          preAuthRequired: body.preAuthRequired, inclusions: body.inclusions, exclusions: body.exclusions, preAuthDocuments: body.preAuthDocuments, claimDocuments: body.claimDocuments });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "stay-package" && method === "POST") {
+        const r = await setStayPackage(request, env, { ...deps, patientId: body.patientId, encounterId: body.encounterId, packageId: body.packageId, preAuthId: body.preAuthId,
+          beneficiaryId: body.beneficiaryId, reason: body.reason, remove: body.remove === true, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if ((sub === "stay-packages" || sub === "package-pack") && method === "GET") {
+        const tf = await wsqTariff(env, wOrgId, wsqCfg);
+        const patientId = url.searchParams.get("patientId") || "";
+        // An unreadable price list leaves the split unknown (false), never shown as nothing billed on top.
+        const chargesFor = tf.error ? () => Promise.resolve(null) : (encounterId) => chargesForPatient(request, env, { ...deps, patientId, encounterId, tariff: tf.table });
+        const r = sub === "stay-packages"
+          ? await stayPackages(request, env, { ...deps, patientId, chargesFor, tariff: tf.table })
+          : await packagePack(request, env, { ...deps, patientId, encounterId: url.searchParams.get("encounterId") || "", chargesFor, tariff: tf.table });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       /* gap-claims-gst B: credit and debit notes, B2B buyer details, and the IRN (functions/_wardsynq/invoice.js, einvoice.js). */

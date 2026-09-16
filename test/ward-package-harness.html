@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WardSynQ gap-claims-gst-2: package billing harness</title>
+<link rel="stylesheet" href="../ward.css">
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<script>
+/* The REAL ward.js on TPA / Claims: put a stay on a package through the in-ward question (askFor), survive a repaint
+ * with what was typed, see the flags, open the manual submission pack and remove the package with a reason. The stub
+ * server answers in the shapes functions/_wardsynq/packages.js returns (test/wardsynq-packages.test.mjs pins them).
+ * Client half only; not a live server. */
+window.__calls = [];
+window.__packWin = { html: "", document: { open: function () { window.__packWin.html = ""; }, write: function (h) { window.__packWin.html += h; }, close: function () {} }, focus: function () {} };
+window.open = function () { return window.__packWin; };
+localStorage.setItem("smd_opd_staff_tok", "harness-token");
+
+var PATIENT_ID = "opd-pat-smd-h1-pkg01", ENC_ID = "wsq-enc-smd-h1-pkg01";
+var PKG = { id: "pkg-pmjay-su007a", version: 1, scheme: "pmjay", schemeName: null, code: "SU007A", name: "Open reduction internal fixation", rate: 45000, expectedLosDays: 2, preAuthRequired: true, active: true,
+  inclusions: { kinds: ["bed", "medication"], items: [] }, exclusions: { kinds: [], items: ["IMPLANT"] }, preAuthDocuments: ["X-ray"], claimDocuments: ["Discharge summary"] };
+var ASSIGNMENTS = [];
+
+window.fetch = function (url, opts) {
+  var u = String(url), body = null, method = (opts && opts.method) || "GET";
+  try { body = opts && opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__calls.push({ url: u, method: method, body: body });
+  var reply = function (obj) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(obj); } }); };
+
+  if (u.indexOf("/ward/list") >= 0) return reply({ ok: true, patients: [{ encounterId: ENC_ID, patientId: PATIENT_ID, class: "IPD", ward: "Ortho", bed: "4", admittedAt: "2026-09-12T06:00:00.000Z" }] });
+  if (u.indexOf("/ward/beds") >= 0) return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Ortho", bedsKnown: true, occupied: [], free: ["4"], unplaced: [] }] });
+  if (u.indexOf("/ward/claims") >= 0) return reply({ ok: true, patientId: PATIENT_ID, claims: [], preAuthorisations: [{ id: "pa-1", state: "requested", treatment: "ORIF" }], estimates: [], eligibilityChecks: [], payers: [] });
+  if (u.indexOf("/ward/packages") >= 0) return reply({ ok: true, packages: [PKG] });
+  if (u.indexOf("/ward/stay-packages") >= 0) return reply({ ok: true, patientId: PATIENT_ID, assignments: ASSIGNMENTS,
+    stays: [{ id: ENC_ID, status: "in-progress", periodStart: "2026-09-12T06:00:00.000Z", periodEnd: null, ward: "Ortho" }] });
+  if (u.indexOf("/ward/stay-package") >= 0 && method === "POST") {
+    if (body.remove) { if (!body.reason) return reply({ ok: false, status: 422, error: "reason_required", message: "Say why the package is being removed." }); ASSIGNMENTS = []; return reply({ ok: true, assignment: { status: "removed" } }); }
+    var a = { id: "wsq-pkgstay-" + body.encounterId, version: 1, patientId: body.patientId, encounterId: body.encounterId, status: "active", package: PKG, preAuthId: body.preAuthId || null, beneficiaryId: body.beneficiaryId || null,
+      flags: { stayDays: 4, expectedLosDays: 2, losExceeded: true, preAuthRequired: true, preAuthState: body.preAuthId ? "requested" : "missing", preAuthProblem: true, manualPortal: true },
+      split: { counts: { included: 6, excluded: 1, outside: 0 }, excluded: [{ display: "Locking plate", line: 20000 }], outside: [], unpriced: [] } };
+    ASSIGNMENTS = [a];
+    return reply({ ok: true, assignment: a });
+  }
+  if (u.indexOf("/ward/package-pack") >= 0) return reply({ ok: true, pack: { manualSubmission: true, scheme: "pmjay", schemeName: null, package: { code: "SU007A", name: PKG.name, version: 1, rate: 45000 },
+    notice: "WardSynQ is not connected to the PM-JAY Transaction Management System (TMS). Nothing in this pack has been sent or submitted.",
+    checklist: [{ text: "Beneficiary ID entered on the stay", state: "done" }, { text: "Every document listed below attached on the portal", state: "check" }],
+    preAuthDocuments: ["X-ray"], claimDocuments: ["Discharge summary"], fields: [{ section: "Admission information", label: "Beneficiary ID", value: "PMJAY-77" }] } });
+
+  if (u.indexOf("/ward/problems") >= 0) return reply({ ok: true, problems: [] });
+  if (u.indexOf("/ward/criticals") >= 0) return reply({ ok: true, loops: [] });
+  if (u.indexOf("/ward/balance") >= 0) return reply({ ok: true, balance: null });
+  if (u.indexOf("/ward/outbox") >= 0) return reply({ ok: true, transmissions: [] });
+  if (u.indexOf("/ward/templates") >= 0) return reply({ ok: true, templates: [] });
+  if (u.indexOf("/ward/news2") >= 0) return reply({ ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough vitals recorded to score." } });
+  if (u.indexOf("/ward/flowsheet") >= 0) return reply({ ok: true, grid: { hours: [], rows: [] } });
+  if (u.indexOf("/ward/schedule") >= 0) return reply({ ok: true, due: [], prn: [], unscheduled: [] });
+  if (u.indexOf("/ward/collections") >= 0) return reply({ ok: true, requests: [] });
+  if (u.indexOf("/ward/pending-tests") >= 0) return reply({ ok: true, pending: [] });
+  if (u.indexOf("/ward/fhir") >= 0) return reply({ resourceType: "Bundle", type: "searchset", entry: [] });
+  return reply({ ok: true });
+};
+</script>
+<script src="../ward.js"></script>
+<script>
+window.__ready = !!(window.WARD && window.WARD.open);
+</script>
+</body></html>

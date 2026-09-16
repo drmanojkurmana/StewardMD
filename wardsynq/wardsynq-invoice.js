@@ -67,6 +67,9 @@ function invoiceLine(input) {
     ...(str(i.hsnSac) ? { hsnSac: str(i.hsnSac) } : {}),
     ...(str(i.taxBasis) ? { taxBasis: str(i.taxBasis), taxable: round2(i.taxable == null ? i.line : i.taxable) } : {}),
     ...(str(i.kind) ? { kind: str(i.kind) } : {}),
+    /* Package billing (functions/_wardsynq/packages.js): the package line itself, or a charge the package covers (at
+     * zero), excludes (billed on top) or names neither way (billed, flagged). Carried as the caller gave it. */
+    ...(str(i.packageCode) ? { packageCode: str(i.packageCode), ...Object.fromEntries(["packageLine", "packageIncluded", "packageExcluded", "packageOutside"].filter((k) => i[k] === true).map((k) => [k, true])) } : {}),
   };
 }
 

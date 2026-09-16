@@ -189,6 +189,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* gap-claims-gst A (2026-09-16): an NHCX coverage eligibility check and the payer's answer to it
    * (functions/_wardsynq/nhcx.js). Financial, append-only (the answer is a new version), granted with Claim. */
   "CoverageEligibilityCheck",
+  /* gap-claims-gst-2 (2026-09-16): a package on an inpatient stay (functions/_wardsynq/packages.js), with a copy of the
+   * package version it was attached with and its pre-authorisation link. Financial, versioned, granted with Claim. */
+  "PackageAssignment",
   /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
    * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
    * lines - "what was billed" and "what happened to the bill since" are different facts. A
