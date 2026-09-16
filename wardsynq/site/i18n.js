@@ -4584,6 +4584,16 @@
     "ward.xfer-cancel-why-needed": "Say why the request is cancelled.",
     "ward.xfer-cancelled-note": "Transfer request cancelled.",
     "ward.xfer-icu-tag": "(ICU)",
+    "ward.cp-title": "Standard code (optional)",
+    "ward.cp-loading": "Loading this hospital's code sets...",
+    "ward.cp-failed": "This hospital's code sets could not be loaded, so no code can be picked now. Do not read this as none loaded.",
+    "ward.cp-none-loaded": "No SNOMED CT, ICD-10 or LOINC codes are loaded for this hospital. An administrator loads them in Admin, FHIR.",
+    "ward.cp-remove": "Remove code",
+    "ward.cp-system": "Code system",
+    "ward.cp-search": "Search by code or words",
+    "ward.cp-search-failed": "The code search failed. Do not read this as no match.",
+    "ward.cp-no-match": "No code in this hospital's set matches.",
+    "ward.cp-type-two": "Type at least two characters of the code or its words.",
     /* end ward.js keys */
     /* site pages keys (ui-i18n-site) */
     /* wardsynq/site/shell.js */
@@ -6490,6 +6500,26 @@
     "site.abdm.checkHpr": "Check",
     "site.abdm.checkDone": "The registry answered: {status}.",
     "site.abdm.checkNoResponse": "No response from the server. Nothing was checked; try again.",
+    "site.admin.codes.licence.snomed": "This hospital holds a SNOMED CT affiliate licence (in India, through NRCeS) covering this release.",
+    "site.admin.codes.licence.icd10": "This hospital is licensed by WHO, or its national release centre, to use this ICD-10 release.",
+    "site.admin.codes.licence.loinc": "This hospital accepts the LOINC licence and keeps its copyright notice with the content.",
+    "site.admin.codes.title": "Code sets",
+    "site.admin.codes.intro": "The SNOMED CT, ICD-10 and LOINC codes staff can pick on diagnoses, problems, operations and tests. WardSynQ ships none of these: load the release this hospital is licensed for. Loading a system again replaces its codes; the earlier load stays on record.",
+    "site.admin.codes.listFailed": "The loaded code sets could not be read. This is not the same as none loaded.",
+    "site.admin.codes.colSystem": "System",
+    "site.admin.codes.colCodes": "Codes",
+    "site.admin.codes.colLoaded": "Loaded",
+    "site.admin.codes.notLoaded": "not loaded",
+    "site.admin.codes.loadTitle": "Load a code set",
+    "site.admin.codes.system": "Code system",
+    "site.admin.codes.file": "CSV or tab-separated file",
+    "site.admin.codes.columns": "The first row names the columns: a code column (code, LOINC_NUM or conceptId) and a display column (display, LONG_COMMON_NAME, term or description). Rows marked inactive are left out.",
+    "site.admin.codes.load": "Load codes",
+    "site.admin.codes.pickFile": "Choose the file to load.",
+    "site.admin.codes.confirmLicence": "Confirm this hospital's licence for these codes before loading them.",
+    "site.admin.codes.readFailed": "The file could not be read. Nothing was loaded.",
+    "site.admin.codes.loaded": "Loaded {n} codes. {skipped} rows were left out.",
+    "site.admin.codes.notLoadedLead": "Nothing was loaded:",
     /* end site pages keys */
   };
 

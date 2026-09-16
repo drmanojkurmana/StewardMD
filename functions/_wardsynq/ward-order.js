@@ -30,6 +30,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { findEntry } from "./investigation-catalogue.js";
+import { resolveCoding } from "./code-sets.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -109,6 +110,11 @@ async function orderInvestigation(request, env, ctx) {
   }
   const category = entry ? entry.category : CATEGORIES.includes(str(ctx.category)) ? str(ctx.category) : "laboratory";
 
+  // An optional standard code for the test (LOINC, SNOMED CT), only from the hospital's loaded set (code-sets.js).
+  let standardCoding = null;
+  try { const rc = await resolveCoding(svc, mig.tenantId, ctx.coding); if (rc.refuse) return { ...base, ok: false, ...rc.refuse, written: 0 }; standardCoding = rc.coding; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The code set could not be read, so nothing was ordered.", written: 0 }; }
+
   const sr = ServiceRequest({
     id, patientId: encounter.patientId, encounterId,
     code, category, priority, requesterId: resolved.actor.id, status: "active",
@@ -122,6 +128,7 @@ async function orderInvestigation(request, env, ctx) {
   const reason = str(ctx.reason);
   if (reason) sr.reason = reason;
   // Which list the test came from, or that it came from none: an order and its charge share the catalogue's name.
+  if (standardCoding) sr.standardCoding = standardCoding;
   if (entry) sr.catalogue = { code: entry.code, source: entry.source };
   else if (other) sr.other = true;
 

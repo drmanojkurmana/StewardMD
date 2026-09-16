@@ -302,6 +302,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* A request to move a patient to another ward or unit, and the receiving unit's answer (transfer-request.js):
    * requested, accepted or declined, bed assigned, completed or cancelled, each step a new version. */
   "TransferRequest",
+  /* A hospital-loaded SNOMED CT / ICD-10 / LOINC release (code-sets.js): the import record (who, when, how many,
+   * the licence confirmation) and the codes in chunks. Hospital-wide, no patientId. Loaded from Admin. */
+  "CodeSetImport", "CodeSetChunk",
   /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
    * episode per patient, versioned like everything else - a delivery is the fact that changes para,
    * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */

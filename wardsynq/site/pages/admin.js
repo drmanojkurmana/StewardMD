@@ -2018,11 +2018,70 @@
   }
   WSQ._expansionHtml = expansionHtml;
 
+  /* CODE SETS (functions/_wardsynq/code-sets.js). The SNOMED CT, ICD-10 and LOINC codes the ward's code picker
+   * searches. WardSynQ ships none of them: the hospital loads the release it is licensed for, as a CSV (or a
+   * tab-separated release file) with a code column and a display column, and confirms that licence. null = loading;
+   * a failed list says so and is never shown as "nothing loaded". */
+  function codeSetLicence(c, system) {
+    return system === "snomed" ? T(c, "site.admin.codes.licence.snomed", "This hospital holds a SNOMED CT affiliate licence (in India, through NRCeS) covering this release.")
+      : system === "icd-10" ? T(c, "site.admin.codes.licence.icd10", "This hospital is licensed by WHO, or its national release centre, to use this ICD-10 release.")
+      : T(c, "site.admin.codes.licence.loinc", "This hospital accepts the LOINC licence and keeps its copyright notice with the content.");
+  }
+  function codeSetsHtml(c, r, msg) {
+    var esc = c.esc;
+    var h = '<div class="card"><h2>' + c.ms("tag") + " " + esc(T(c, "site.admin.codes.title", "Code sets")) + "</h2>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.codes.intro", "The SNOMED CT, ICD-10 and LOINC codes staff can pick on diagnoses, problems, operations and tests. WardSynQ ships none of these: load the release this hospital is licensed for. Loading a system again replaces its codes; the earlier load stays on record.")) + "</p>";
+    if (r === null) return h + '<span class="spin"></span></div>';
+    if (!r || !r.ok) return h + '<div class="msg err">' + esc(T(c, "site.admin.codes.listFailed", "The loaded code sets could not be read. This is not the same as none loaded.")) + " " + EN(c, esc(refusal(c, r))) + "</div></div>";
+    h += '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.admin.codes.colSystem", "System")) + "</th><th>" + esc(T(c, "site.admin.codes.colCodes", "Codes")) + "</th><th>" + esc(T(c, "site.admin.codes.colLoaded", "Loaded")) + "</th></tr></thead><tbody>" +
+      r.systems.map(function (s) {
+        return "<tr><td>" + esc(s.name) + '</td><td>' + (s.loaded ? esc(s.count) : esc(T(c, "site.admin.codes.notLoaded", "not loaded"))) + "</td><td>" +
+          (s.loaded ? esc(s.importedAt) + (s.fileName ? " &middot; " + esc(s.fileName) : "") : "") + "</td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<h3>' + esc(T(c, "site.admin.codes.loadTitle", "Load a code set")) + "</h3>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.codes.system", "Code system")) + '</span><select id="admCodeSystem">' +
+      r.systems.map(function (s) { return '<option value="' + esc(s.system) + '">' + esc(s.name) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.admin.codes.file", "CSV or tab-separated file")) + '</span><input id="admCodeFile" type="file" accept=".csv,.txt,.tsv,text/csv,text/plain"></label></div>' +
+      '<p class="quiet">' + esc(T(c, "site.admin.codes.columns", "The first row names the columns: a code column (code, LOINC_NUM or conceptId) and a display column (display, LONG_COMMON_NAME, term or description). Rows marked inactive are left out.")) + "</p>" +
+      '<label class="f"><span><input id="admCodeLicence" type="checkbox"> <span id="admCodeLicenceText">' + esc(codeSetLicence(c, r.systems[0] && r.systems[0].system)) + "</span></span></label>" +
+      '<button type="button" class="btn" id="admCodeLoad">' + esc(T(c, "site.admin.codes.load", "Load codes")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "");
+    return h + "</div>";
+  }
+  WSQ._codeSetsHtml = codeSetsHtml;
+  function renderCodeSets(c, holder, msg) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId);
+    holder.innerHTML = codeSetsHtml(c, null);
+    return c.api("/ward/code-sets" + q).then(function (r) {
+      holder.innerHTML = codeSetsHtml(c, r || null, msg);
+      var sys = document.getElementById("admCodeSystem"), btn = document.getElementById("admCodeLoad");
+      if (!sys || !btn) return;
+      sys.onchange = function () { document.getElementById("admCodeLicenceText").textContent = codeSetLicence(c, sys.value); document.getElementById("admCodeLicence").checked = false; };
+      btn.onclick = function () {
+        var file = document.getElementById("admCodeFile").files[0], licence = document.getElementById("admCodeLicence").checked, esc = c.esc;
+        var fail = function (text) { renderCodeSets(c, holder, { ok: false, html: text }); };
+        if (!file) return fail(esc(T(c, "site.admin.codes.pickFile", "Choose the file to load.")));
+        if (!licence) return fail(esc(T(c, "site.admin.codes.confirmLicence", "Confirm this hospital's licence for these codes before loading them.")));
+        btn.disabled = true;
+        var reader = new FileReader();
+        reader.onerror = function () { fail(esc(T(c, "site.admin.codes.readFailed", "The file could not be read. Nothing was loaded."))); };
+        reader.onload = function () {
+          c.api("/ward/code-set-import", { orgId: c.state.orgId, system: sys.value, csv: String(reader.result || ""), fileName: file.name, licenceConfirmed: true }).then(function (x) {
+            if (x && x.ok) renderCodeSets(c, holder, { ok: true, html: esc(T(c, "site.admin.codes.loaded", "Loaded {n} codes. {skipped} rows were left out.", { n: x.count, skipped: x.skippedRows })) });
+            else fail(esc(T(c, "site.admin.codes.notLoadedLead", "Nothing was loaded:")) + " " + EN(c, esc((x && x.detail) || refusal(c, x))));
+          });
+        };
+        reader.readAsText(file);
+      };
+    });
+  }
+
   function renderFhir(c, body) {
     var q = "?orgId=" + encodeURIComponent(c.state.orgId);
     body.innerHTML = fhirHtml(c, null, null);
     return Promise.all([c.api("/ward/fhir/metadata" + q), c.api("/ward/fhir/ValueSet" + q)]).then(function (res) {
-      body.innerHTML = fhirHtml(c, res[0] || {}, res[1] || {});
+      body.innerHTML = '<div id="admCodeSets"></div>' + fhirHtml(c, res[0] || {}, res[1] || {});
+      renderCodeSets(c, document.getElementById("admCodeSets"));
       body.querySelectorAll("[data-vs-expand]").forEach(function (b) {
         b.onclick = function () {
           var id = b.getAttribute("data-vs-expand"), out = document.getElementById("admVs-" + id);

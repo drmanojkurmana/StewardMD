@@ -42,6 +42,7 @@ import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
+import { resolveCoding } from "./code-sets.js";
 
 const CASE_TYPE = "SurgicalCase";
 const ANES_TYPE = "AnesthesiaRecord";
@@ -112,11 +113,16 @@ async function bookSurgicalCase(request, env, ctx) {
 
   const current = await loadCase(svc, caseId).catch(() => null);
   if (current) return { ...base, ok: true, written: 0, skipped: "unchanged", caseId, encounterId: current.encounterId, version: current.version };
+  // An optional procedure code, only from the hospital's loaded code set (code-sets.js). The words stay the booking's.
+  let procedureCoding = null;
+  try { const rc = await resolveCoding(svc, mig.tenantId, b.coding); if (rc.refuse) return { ...base, ok: false, ...rc.refuse, written: 0 }; procedureCoding = rc.coding; }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The code set could not be read, so the case was not booked.", written: 0 }; }
 
   let c;
   try { c = await engine.book({ id: patientId, mrn }, { procedure: b.procedure, site: b.site, laterality: b.laterality }, resolved.actor.id); }
   catch (e) { return caseRefusal(base, e, { written: 0 }); }
   c.id = caseId;
+  if (procedureCoding) c.procedureCoding = procedureCoding;
 
   const enc = Encounter({
     id: encounterIdForCase(caseId), patientId, class: SURGERY, status: OPEN,

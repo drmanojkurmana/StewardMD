@@ -6941,3 +6941,16 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   request found them. A move whose request could not then be closed returns 502 request_not_closed, transferred:true.
 - **Not checked:** that the person accepting belongs to the receiving ward (the server has no ward membership). An
   ICU transfer request moves the location through the same route and does not change the stay's class.
+
+## 2026-09-16 Hospital-loaded code sets, no licensed content shipped (branch gap-clinical-2)
+
+- **SNOMED CT, ICD-10, LOINC are loaded by the hospital** (Admin > FHIR > Code sets, CSV or tab-separated release file with
+  a code and a display column), with a licence confirmation recorded on the import (who, when, the statement). No release
+  ships: SNOMED CT needs the hospital's NRCeS affiliate licence, ICD-10 is WHO-licensed, and the LOINC licence text could not
+  be retrieved on 2026-09-16 (loinc.org refused automated fetches), so no LOINC table ships either.
+- **Stored as records** (code-sets.js): CodeSetImport per system + CodeSetChunk records of 2000 codes, chunk ids carry the
+  import id so a re-import never overwrites. Search reads the whole set into memory (per-isolate cache); ceiling 100k codes
+  per system. Past that, an indexed store (D1 table with FTS) behind the repository adapter.
+- **A code is attached only from the loaded set** (resolveCoding): problems/diagnoses with codeSystem snomed|icd-10|loinc,
+  an operation booking (SurgicalCase.procedureCoding), a test order (ServiceRequest.standardCoding). The stored display is
+  the set's. FHIR Condition/Procedure/ServiceRequest and the ABDM consultation record carry the coding when present.

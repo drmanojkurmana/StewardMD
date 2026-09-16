@@ -143,6 +143,7 @@ import { ingestHl7 } from "../../_wardsynq/hl7-inbound.js";
 import { startReconciliation, decideMedicine, readReconciliation } from "../../_wardsynq/med-reconciliation.js";
 import { wardMetrics } from "../../_wardsynq/ward-metrics.js";
 import { patientFlow } from "../../_wardsynq/patient-flow.js";
+import { importCodeSet, listCodeSets, searchCodes } from "../../_wardsynq/code-sets.js";
 import { setExpectedDischarge, expectedDischargeHistory } from "../../_wardsynq/expected-discharge.js";
 import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, executeTransfer, listTransferRequests } from "../../_wardsynq/transfer-request.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
@@ -1225,6 +1226,9 @@ export async function onRequest(context) {
          * Asking for a transfer is a clinical decision (emr.treat); answering it, assigning the bed, moving the
          * patient and cancelling are the bed-management acts /ward/transfer is already gated on (queue.add). */
         "expected-discharge": CAPS.EMR_TREAT, "expected-discharge-history": CAPS.EMR_VIEW,
+        /* Hospital-loaded code sets (code-sets.js): loading a licensed release is hospital administration
+         * (staff.admin); seeing what is loaded and searching it is anyone who reads the chart (emr.view). */
+        "code-set-import": CAPS.STAFF_ADMIN, "code-sets": CAPS.EMR_VIEW, "code-search": CAPS.EMR_VIEW,
         "transfer-request": CAPS.EMR_TREAT, "transfer-respond": CAPS.QUEUE_ADD, "transfer-assign-bed": CAPS.QUEUE_ADD,
         "transfer-execute": CAPS.QUEUE_ADD, "transfer-cancel": CAPS.QUEUE_ADD, "transfer-requests": CAPS.EMR_VIEW,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
@@ -3413,7 +3417,7 @@ export async function onRequest(context) {
       }
       if (sub === "investigation" && method === "POST") {
         const cat = await wsqInvestigationCatalogue(env, wOrgId, wsqCfg);
-        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
+        const r = await orderInvestigation(request, env, { ...deps, encounterId: body.encounterId, code: body.code, display: body.display, codeSystem: body.codeSystem, category: body.category, priority: body.priority, reason: body.reason, other: body.other === true, coding: body.coding, catalogue: cat.entries, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "investigation-catalogue" && method === "GET") {
@@ -3963,6 +3967,18 @@ export async function onRequest(context) {
       }
       if (sub === "transfer" && method === "POST") {
         const r = await transferPatient(request, env, { ...deps, encounterId: body.encounterId, ward: body.ward, bed: body.bed, reason: body.reason, movedAt: body.movedAt, emergencyOverride: body.emergencyOverride === true, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-set-import" && method === "POST") {
+        const r = await importCodeSet(request, env, { ...deps, system: body.system, csv: body.csv, fileName: body.fileName, licenceConfirmed: body.licenceConfirmed === true });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-sets" && method === "GET") {
+        const r = await listCodeSets(request, env, { ...deps });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "code-search" && method === "GET") {
+        const r = await searchCodes(request, env, { ...deps, system: url.searchParams.get("system") || "", q: url.searchParams.get("q") || "", limit: url.searchParams.get("limit") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "expected-discharge" && method === "POST") {

@@ -995,7 +995,7 @@
         "<label class=\"w-f\"><span>" + wTH("ward.site", "Site") + "</span><input id=\"wSurgSite\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.laterality", "Laterality") + "</span><select id=\"wSurgLaterality\"><option value=\"not-applicable\">" + wTH("ward.not-applicable", "Not applicable") + "</option><option value=\"left\">Left</option><option value=\"right\">Right</option><option value=\"bilateral\">Bilateral</option></select></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.theatre", "Theatre") + "</span><input id=\"wSurgTheatre\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-ot-1", "e.g. OT-1") + "\"></label>" +
-        "</div>" +
+        "</div>" + codePickerHtml(state, "surg") +
         '<button class="w-btn tiny go" data-w-act="surgerybook">' + ms("check") + wTH("ward.book-case", "Book case") + "</button>" : "") +
       "</div>";
 
@@ -1047,7 +1047,7 @@
     if (!c) return "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button><div><b>" + wTH("ward.case", "Case") + "</b></div></div><div class=\"w-card\"><p class=\"w-empty\">" + wTH("ward.loading", "Loading&hellip;") + "</p></div>";
 
     var header = "<div class=\"w-chart-h\"><button class=\"w-ic\" data-w-act=\"back\" aria-label=\"" + wTA("ward.back2", "Back") + "\">" + ms("arrow_back") + "</button>" +
-      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + " &middot; " + esc(c.laterality) + " &middot; " + esc(wTEn(STAGE_WORDS[c.stage]) || c.stage) + "</small></div>" +
+      "<div><b>" + esc(c.patientMrn || c.patientId) + "</b><small>" + esc(c.procedure) + (c.procedureCoding ? ' <span class="w-code">' + esc(c.procedureCoding.code) + "</span>" : "") + " &middot; " + esc(c.laterality) + " &middot; " + esc(wTEn(STAGE_WORDS[c.stage]) || c.stage) + "</small></div>" +
       "<button class=\"w-ic\" data-w-act=\"surgeryload\" title=\"" + wTA("ward.refresh", "Refresh") + "\">" + ms("refresh") + "</button></div>" +
       /* ABANDONING A CASE. A case that is not going ahead - the patient deteriorated, the list overran,
        * the consent was withdrawn - has to be ended on the record, with a reason, or it sits on the
@@ -1524,6 +1524,57 @@
     ["confirmed", "Confirmed"],
     ["refuted", "Refuted - considered and ruled out"]
   ];
+  /* THE CODE PICKER over the hospital's own loaded SNOMED CT, ICD-10 and LOINC codes (code-sets.js). A person searches
+   * and picks; nothing is preselected, and the server checks the code is in the set before it is stored.
+   * st.codeSets: null = loading, false = failed, [systems]. st.cp[key]: { system, results: null (searching) |
+   * false (failed) | [codes], err, chosen }. key is where the code goes: "prob", "surg" or "inv". */
+  function codePickerHtml(state, key) {
+    var cs = state.codeSets, p = (state.cp && state.cp[key]) || {};
+    var head = '<div class="w-sub w-codepick"><h4>' + ms("tag") + wTH("ward.cp-title", "Standard code (optional)") + "</h4>";
+    if (cs == null) return head + '<p class="w-hint">' + wTH("ward.cp-loading", "Loading this hospital's code sets...") + "</p></div>";
+    if (cs === false) return head + '<p class="w-hint warn">' + ms("error") + wTH("ward.cp-failed", "This hospital's code sets could not be loaded, so no code can be picked now. Do not read this as none loaded.", null, "", 1) + "</p></div>";
+    var loaded = cs.filter(function (s) { return s.loaded; });
+    if (!loaded.length) return head + '<p class="w-hint">' + ms("info") + wTH("ward.cp-none-loaded", "No SNOMED CT, ICD-10 or LOINC codes are loaded for this hospital. An administrator loads them in Admin, FHIR.") + "</p></div>";
+    if (p.chosen) return head + '<p class="w-hint">' + ms("check_circle") + "<b>" + esc(p.chosen.code) + "</b> " + esc(p.chosen.display) + ' <small lang="en">' + esc(p.chosen.name) + "</small> " +
+      '<button class="w-btn ghost tiny" data-w-act="cpclear:' + key + '">' + ms("close") + wTH("ward.cp-remove", "Remove code") + "</button></p></div>";
+    var res = p.results;
+    return head + '<div class="w-grid">' +
+      '<label class="w-f"><span>' + wTH("ward.cp-system", "Code system") + '</span><select id="wCp-' + key + '-sys">' + loaded.map(function (s) {
+        return '<option value="' + esc(s.system) + '"' + (p.system === s.system ? " selected" : "") + ">" + esc(s.name) + "</option>"; }).join("") + "</select></label>" +
+      '<label class="w-f"><span>' + wTH("ward.cp-search", "Search by code or words") + '</span><input id="wCp-' + key + '-q" type="search" autocomplete="off"></label></div>' +
+      '<button class="w-btn ghost" data-w-act="cpfind:' + key + '">' + ms("search") + wTH("ward.find-code", "Find code") + "</button>" +
+      (res === null ? '<p class="w-hint">' + wTH("ward.searching", "Searching…") + "</p>"
+        : res === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.cp-search-failed", "The code search failed. Do not read this as no match.", null, "", 1) + (p.err ? " " + esc(p.err) : "") + "</p>"
+        : Array.isArray(res) ? (res.length ? '<ul class="w-icd">' + res.map(function (c, i) {
+            return '<li><button class="w-icd-p" data-w-act="cppick:' + key + "|" + i + '"><b>' + esc(c.code) + "</b><span>" + esc(c.display) + "</span></button></li>"; }).join("") + "</ul>"
+          : '<p class="w-hint">' + wTH("ward.cp-no-match", "No code in this hospital's set matches.") + "</p>") : "") + "</div>";
+  }
+  function loadCodeSets() {
+    if (Array.isArray(st.codeSets)) return Promise.resolve();
+    st.codeSets = null;
+    return apiGet("/ward/code-sets?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (r) { st.codeSets = r && r.ok ? (r.systems || []) : false; paint(); }, function () { st.codeSets = false; paint(); });
+  }
+  function codePickFind(key) {
+    var system = val("wCp-" + key + "-sys"), q = val("wCp-" + key + "-q");
+    st.cp = st.cp || {};
+    if (q.length < 2) { st.err = wT("ward.cp-type-two", "Type at least two characters of the code or its words."); paint(); return; }
+    var p = st.cp[key] = { system: system, results: null, err: "", chosen: null };
+    paint();
+    apiGet("/ward/code-search?orgId=" + encodeURIComponent(st.orgId) + "&system=" + encodeURIComponent(system) + "&q=" + encodeURIComponent(q))
+      .then(function (r) { if (st.cp[key] !== p) return; p.results = r && r.ok ? (r.codes || []) : false; p.err = r && !r.ok ? (r.detail || r.error || "") : ""; p.name = r && r.name; paint(); },
+        function () { if (st.cp[key] !== p) return; p.results = false; paint(); });
+  }
+  function codePickPick(arg) {
+    var parts = String(arg).split("|"), p = st.cp && st.cp[parts[0]], c = p && Array.isArray(p.results) && p.results[Number(parts[1])];
+    if (!c) return;
+    var sys = (st.codeSets || []).filter(function (s) { return s.system === p.system; })[0];
+    p.chosen = { system: p.system, code: c.code, display: c.display, name: (sys && sys.name) || p.system };
+    p.results = undefined;
+    paint();
+  }
+  function codeChosen(key) { var p = st.cp && st.cp[key]; return p && p.chosen ? { system: p.chosen.system, code: p.chosen.code } : undefined; }
+
   function problemsCard(state) {
     var rows = (state.problems || []).map(function (p) {
       return '<li><b>' + esc(p.display) + "</b>" + (p.codeSystem && p.codeSystem !== "text" ? ' <span class="w-code">' + esc(p.code) + "</span>" : "") +
@@ -1562,6 +1613,7 @@
       "</div>" +
       // Said plainly, because a code box beside a text box invites typing one in and hoping.
       '<p class="w-hint">' + ms("info") + wTH("ward.left-blank-the-code-is-not", "Left blank, the code is not guessed at: the diagnosis is recorded as text, and says so. Nothing here decides what the words mean.") + "</p>" +
+      codePickerHtml(state, "prob") +
       "</div></div>";
   }
 
@@ -2456,6 +2508,7 @@
       "<label class=\"w-f\"><span>" + wTH("ward.inv-other-category", "Category, for a test not on the list") + "</span><select id=\"wInvCat\">" + INV_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '"' + (o.category === c[0] ? " selected" : "") + ">" + esc(wTEn(c[1])) + "</option>"; }).join("") + "</select></label>" +
       "<label class=\"w-f\"><span>" + wTH("ward.inv-reason", "Reason (needed for a test not on the list)") + "</span><input id=\"wInvReason\" type=\"text\" autocomplete=\"off\"></label>" +
       "</div>" +
+      codePickerHtml(state, "inv") +
       '<button class="w-btn" data-w-act="investigation">' + ms("send") + wTH("ward.order2", "Order") + "</button>" +
       (rows ? '<div class="w-sub"><h4>' + ms("checklist") + wTH("ward.on-order", "On order") + "</h4><ul class=\"w-mini\">" + rows + "</ul></div>" : "") +
       (results ? '<div class="w-sub"><h4>' + ms("fact_check") + wTH("ward.results-imaging-reports", "Results &amp; Imaging Reports") + "</h4><ul class=\"w-mini w-results\">" + results + "</ul></div>" : "") +
@@ -9388,7 +9441,7 @@
       .then(function (r) { st.busy = false; if (r && r.ok) st.surgBoard = r; else st.surgErr = (r && r.detail) || wT("ward.could-not-load-the-theatre-board", "Could not load the theatre board."); paint(); })
       .catch(function () { st.busy = false; st.surgErr = wT("ward.could-not-load-the-theatre-board", "Could not load the theatre board."); paint(); });
   }
-  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; paint(); }
+  function surgeryBookOpen() { st.surgBookOpen = true; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.cp = {}; paint(); loadCodeSets(); }
   function surgeryBookClose() { st.surgBookOpen = false; st.surgMrnLookup = null; paint(); }
   function surgMrnLookup() {
     var mrn = val("wSurgMrn");
@@ -9411,7 +9464,7 @@
     var procedure = val("wSurgProcedure"), site = val("wSurgSite"), theatre = val("wSurgTheatre");
     var laterality = (document.getElementById("wSurgLaterality") || {}).value || "not-applicable";
     st.busy = true; paint();
-    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre } })
+    apiPost("/ward/surgery-book", { orgId: st.orgId, booking: { mrn: lookup.mrn, procedure: procedure, site: site, laterality: laterality, theatre: theatre, coding: codeChosen("surg") } })
       .then(function (r) {
         if (settle(r, wT("ward.case-booked", "Case booked."))) { st.surgBookOpen = false; st.surgMrnLookup = null; loadSurgeryBoard(); } else paint();
       })
@@ -10899,12 +10952,13 @@
     var display = entry ? entry.name : typed;
     st.busy = true; paint();
     apiPost("/ward/investigation", entry
-      ? { orgId: st.orgId, encounterId: s.encounterId, display: entry.name, code: entry.code, category: entry.category, priority: priority, reason: reason || undefined }
-      : { orgId: st.orgId, encounterId: s.encounterId, display: typed, code: typed, category: category, priority: priority, reason: reason, other: true }
+      ? { orgId: st.orgId, encounterId: s.encounterId, display: entry.name, code: entry.code, category: entry.category, priority: priority, reason: reason || undefined, coding: codeChosen("inv") }
+      : { orgId: st.orgId, encounterId: s.encounterId, display: typed, code: typed, category: category, priority: priority, reason: reason, other: true, coding: codeChosen("inv") }
     ).then(function (r) {
       if (settle(r, r && r.written ? wT("ward.ordered", "Ordered {display}.", { display: display }) : null)) {
         ["wInvCode", "wInvReason"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
         var oth = document.getElementById("wInvOther"); if (oth) oth.checked = false;
+        if (st.cp) st.cp.inv = null;
         loadInvestigations();
       } else paint();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-order-that", "Could not order that."); paint(); });
@@ -12922,20 +12976,22 @@
 
   function addProblem() {
     var s = st.sel; if (!s) return;
-    var text = val("wProbText"), code = val("wProbCode");
+    var text = val("wProbText"), code = val("wProbCode"), picked = st.cp && st.cp.prob && st.cp.prob.chosen;
+    // A code picked from the hospital's set is sent with its system, and the server checks it is in that set.
+    if (picked) { code = picked.code; if (!text) text = picked.display; }
     if (!text && !code) { st.err = wT("ward.a-diagnosis-needs-words-a-code", "A diagnosis needs words, a code, or both."); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/problem", {
       orgId: st.orgId,
       problem: {
         patientId: s.patientId, encounterId: s.encounterId,
-        display: text, code: code,
+        display: text, code: code, codeSystem: picked ? picked.system : undefined,
         verificationStatus: val("wProbVs") || undefined,
       },
     })
       .then(function (r) {
         if (settle(r, r && r.written ? wT("ward.recorded-as", "Recorded as {verificationStatus}.", { verificationStatus: r.verificationStatus }) : (r && r.skipped === "unchanged" ? wT("ward.already-on-the-list-unchanged", "Already on the list, unchanged.") : null))) {
-          st.probText = ""; st.probCode = ""; st.icd = undefined;
+          st.probText = ""; st.probCode = ""; st.icd = undefined; if (st.cp) st.cp.prob = null;
           ["wProbText", "wProbCode"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
           loadChart();
         } else paint();
@@ -13898,7 +13954,7 @@
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.timeline = null; st.activeMeds = null;
       st.timelineFilter = ""; st.highlightReportId = null; st.timelineWhen = ""; st.timelineOpen = null; st.timelineQuery = ""; st.recordDetail = null;
       st.err = ""; st.note = ""; st.refusal = null; st.devices = null; st.maternity = null; st.apgar = null; st.ageBand = null; st.lines = null; st.rateResult = null; st.oncology = null; st.cardiology = null; st.radiology = null; st.pharmacy = null; st.transfusion = null;
-      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null; st.stayPlan = null;
+      st.icu = null; st.flowsheetFailed = false; st.resusBundles = null; st.stayPlan = null; st.cp = {};
       /* TASK 8.5: MaiK is cleared with the rest of the chart. An answer about the previous patient
        * left on screen beside a new patient's observations is the wrong-patient error with extra
        * steps, and it is the one this panel could most easily cause. */
@@ -13911,6 +13967,7 @@
       if (p.class === "PEDIATRICS" || p.class === "NICU") { st.growth = null; loadAgeBand(); loadGrowth(); }
       if (apgarChart(p)) loadApgar(p.patientId);
       if (p.class !== "ED") loadStayPlan();
+      loadCodeSets();
       if (p.class === "NICU") loadLines();
       return;
     }
@@ -13977,6 +14034,9 @@
     if (cmd === "bedmgmt") { bedMgmtOpen(); return; }
     if (cmd === "flowcommand") { flowCommandOpen(); return; }
     if (cmd === "flowload") { loadFlowCommand(); return; }
+    if (cmd === "cpfind") { codePickFind(arg); return; }
+    if (cmd === "cppick") { codePickPick(arg); return; }
+    if (cmd === "cpclear") { if (st.cp) st.cp[arg] = null; paint(); return; }
     if (cmd === "stayplanload") { st.stayPlan = null; paint(); loadStayPlan(); return; }
     if (cmd === "eddsave") { eddSave(); return; }
     if (cmd === "xferrequest") { xferRequest(); return; }
