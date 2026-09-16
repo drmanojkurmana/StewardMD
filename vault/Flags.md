@@ -36,10 +36,19 @@ Turning these on does not enable a feature; it breaks one.
 
 | Flag | State | What it says about itself |
 |---|---|---|
-| `smd_kardiox` | OFF | Its own words: clinically unvalidated, regulatory-pending. Opens per device via the Experimental passcode. |
-| `smd_thorex` | OFF | Its own words: needs GROQ + validation. Opens per device via the Experimental passcode. |
+| `smd_kardiox` | **ON** (def:true) | Its own words: clinically unvalidated, regulatory-pending. Live for every user of the build. |
+| `smd_thorex` | **ON** (def:true) | Its own words: needs GROQ + validation. GROQ is provisioned; the VALIDATION half is still outstanding. Live for every user. |
+| `smd_fundx` | **ON** (def:true) | Live for every user of the build. |
 
-Both open **per device** today via the sidebar Experimental access code, so testers already reach them. Flipping the default makes them live for every user of the build.
+**These are ON, not OFF (owner decision 2026-08-26; corrected here 2026-09-16 after this section was
+found stale against the registries).** The defaults were already flipped in `kardiox-flags.js`,
+`thorex-flags.js` and `fundx-flags.js`; this section still described the pre-flip world, which read as
+"three unvalidated imaging AI modules are off for users" when the opposite is true. The per-module
+tables further down were already correct, so the file contradicted itself.
+
+The clinical position is unchanged by the flag: each module is still clinically unvalidated and
+regulatory-pending, and the in-module wording that says so must stay. Set `def:false` in the relevant
+`*-flags.js` to close one again; `?kardiox=0` / `?thorex=0` / `?fundx=0` disables per device.
 
 ## Everything, by module
 
