@@ -73,6 +73,7 @@
   var STATION = P.get("station") === "pharmacy" ? "pharmacy" : "billing";
   var tok = "", tt = "";
   try { tok = localStorage.getItem("smd_opd_staff_tok") || ""; tt = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
+  if (tt === "account") tt = "firebase";   // wardsynq.com spells the account sign-in "account" (LT-01)
   var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
   var cur = null;   // { patient, orders } | { invoice }
 

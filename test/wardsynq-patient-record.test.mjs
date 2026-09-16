@@ -56,7 +56,8 @@ test("sensitivity is ORG CONFIGURATION and this file invents no list of its own"
    * "not for the patient", printed on the patient's own copy, would be the most careless thing on
    * the page. The two lists are separate so that separation cannot be lost in a template. */
   assert.equal(clinicianWarnings(false).length, 1);
-  assert.match(clinicianWarnings(false)[0], /neverRelease/);
+  assert.match(clinicianWarnings(false)[0], /not chosen any results to withhold/);
+  assert.doesNotMatch(clinicianWarnings(false)[0], /wardsynq\./, "LT-24: no configuration key on a clinical screen");
   assert.deepEqual(clinicianWarnings(true), []);
   const say = statements({ withheldResults: [], excludedDiagnoses: 0, diagnoses: [] });
   assert.ok(!say.some((s) => /neverRelease/.test(s)));

@@ -39,6 +39,10 @@ export async function createOrg(env, body, ownerUid) {
 }
 export async function getOrg(env, orgId) {
   let id = sanitize(orgId);
+  /* No hospital named is no hospital found. Reading "q_orgs/" answered with a document that has no id, and
+   * M.org threw "opd_org: id required": a request that forgot ?orgId= became a 500 instead of a refusal
+   * (LT-16, GET /ward/pathway-progress). */
+  if (!id) return null;
   let d = await fsGet(env, "q_orgs/" + id);
   /* Document ids are lower-case hex, and clients have upper-cased them: the pglog setup screen
    * applied .toUpperCase() to every handle a user typed, which is correct for an SMD-XXXXXX code
@@ -109,9 +113,14 @@ export async function listOrgsForMember(env, identities) {
   }
   return out;
 }
+/* SOFT DELETE ONLY. The hospital leaves every list; its clinical record, documents and audit trail are
+ * untouched (medical records must be retained). BUG-MU2PHANW: the flag and its hash-chained audit row
+ * are ONE commit, so a removed hospital without its audit row cannot exist (it was a best-effort row
+ * written after the fact). */
 export async function deleteOrg(env, orgId, actorId) {
-  await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
-  await audit(env, orgId, actorId, "org:delete", "");
+  const ts = now();
+  await appendOrgAudit(env, { ts, hospitalId: String(orgId), ticketId: "", actor: String(actorId || ""), action: "org:delete", meta: "soft delete; records retained" },
+    [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: ts, deletedBy: String(actorId || "") })]);
   return { ok: true };
 }
 /* auditEvent: { action, meta } to write the audit row IN THE SAME COMMIT as the change, for a change that must
@@ -317,6 +326,8 @@ export async function setMembership(env, orgId, identity, body, actorId) {
     regNo: b.regNo !== undefined ? b.regNo : (prev && prev.regNo),
     regionProfile: b.regionProfile !== undefined ? b.regionProfile : (prev && prev.regionProfile),
     alertMobile: b.alertMobile !== undefined ? b.alertMobile : (prev && prev.alertMobile),
+    displayName: b.displayName !== undefined ? b.displayName : (prev && prev.displayName),
+    employeeId: b.employeeId !== undefined ? b.employeeId : (prev && prev.employeeId),
     active: b.active !== undefined ? b.active !== false : (prev ? prev.active !== false : true),
     createdAt: (prev && prev.createdAt) || now(),
   });
@@ -330,11 +341,23 @@ export async function getMembership(env, orgId, identity) {
 // Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
 function publicMember(id, f) {
   const m = M.membership(withId(id, f));
-  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, regNo: m.regNo, regionProfile: m.regionProfile, alertMobile: m.alertMobile, displayName: m.displayName, employeeId: m.employeeId, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
 }
+/* EVERY member, in pages of 300 (includes disabled so admin can restore; active flag shown). One query of 300 used to be
+ * the whole answer, so a staff member beyond the first 300 was not named on a chart: an Access sign-in id ("cfa:" +
+ * email hash) cannot be read directly by id and is only matched against this list (staff-identity.js).
+ * ponytail: 20 pages (6000 members) is the ceiling; a hospital near it wants an identity index instead of a scan. */
+const MEMBER_PAGE = 300;
 export async function listMembers(env, orgId) {
-  const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });
-  return r.map((x) => publicMember(x.id, x.fields));   // includes disabled so admin can restore; active flag shown
+  const out = [];
+  let after = null;
+  for (let page = 0; page < 20; page++) {
+    const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: MEMBER_PAGE, orderByName: true, ...(after ? { startAfter: after } : {}) });
+    for (const x of r) out.push(publicMember(x.id, x.fields));
+    if (r.length < MEMBER_PAGE) break;
+    after = r[r.length - 1].name;
+  }
+  return out;
 }
 /* wUpdate UPSERTS. Without this check a mistyped identity on disable/restore/PIN/password/reset
  * created a brand-new member row, and a PIN or password on it was a working sign-in (getMemberAuth

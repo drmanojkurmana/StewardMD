@@ -332,10 +332,16 @@ async function listEd(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), patients: [] };
   }
 
+  /* BUG-MU06NW2S-8D53: the board drew the patient's sex in bold from a field this list never sent, so it
+   * never appeared. One roster read, joined in memory as listWard does; unreadable leaves name and sex null. */
+  let byId = new Map();
+  try { byId = new Map(((await svc.list("Patient", 400)) || []).filter((p) => p && p.id).map((p) => [p.id, p])); } catch { /* rows still shown */ }
   const patients = (encounters || [])
     .filter((e) => e && e.class === ED && e.status === OPEN)
     .map((e) => ({
       encounterId: e.id, patientId: e.patientId,
+      name: (byId.get(e.patientId) && byId.get(e.patientId).name) || null,
+      sex: (byId.get(e.patientId) && byId.get(e.patientId).sex && byId.get(e.patientId).sex !== "unknown" && byId.get(e.patientId).sex) || null,
       mrn: ((e.identifiers || []).find((i) => i && i.system === "opd-mrn") || {}).value || null,
       chiefComplaint: e.reason || null, acuity: e.acuity != null ? e.acuity : null,
       arrivedAt: e.periodStart || null, triagedAt: e.triagedAt || null, version: e.version,

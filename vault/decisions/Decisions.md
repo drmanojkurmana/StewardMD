@@ -6420,6 +6420,7 @@ duty. Nurses and residents can turn themselves OFF duty in the StewardMD app."
   recipients}` (field renamed from `nurseRule`; old loops keep theirs). Empty set is NO_RECIPIENT as before.
 - **No ward on the patient**: hospital-wide on-duty cover as before, `ward: null` recorded and said on the critical
   results board ("No ward recorded for this patient"). Owner follow-up: whether that should stay hospital-wide.
+  **Superseded the same day** by the no-ward entry below (admitting doctor and residents on duty).
 - **Self duty status**: `GET/POST /api/queue/roster/duty-status` (roster block, not /ward: it is staff data like leave,
   and needs no WardSynQ record tenant). Identity is the caller's membership in that hospital, from the credential; a
   body `identity` naming anyone else is 403 `not_your_status`; only ward-team roles (403 `not_ward_team` otherwise).
@@ -6435,6 +6436,42 @@ duty. Nurses and residents can turn themselves OFF duty in the StewardMD app."
   screens), `test/wardsynq-ward-duty-team.test.mjs` (routes, negative auth, audit-in-one-commit, real-rota dispatch),
   `test/org-level2-nurse-rule-route.test.mjs`, `test/wardsynq-hospital-group.test.mjs`, `test/wardsynq-alert-dispatch.test.mjs`,
   `test/run-ward-duty-golden-path.mjs` (headless Chrome, real ward.js).
+
+## 2026-09-15 A critical result for a patient with no ward alerts the admitting doctor and the residents on duty (owner decision)
+
+Owner decision 2026-09-15: "No ward: alert the doctor the patient is admitted under, and the resident on duty." This
+replaces hospital-wide on-duty cover for a patient whose Encounter has no `location.ward`.
+- **Rule** `NO_WARD_RULE = "no-ward-admitting-doctor-and-residents"` in `alert-recipients.js`. Not a hospital choice:
+  not in `LEVEL2_WARD_RULES`, so `/org/update` and `/group/policy` still refuse it as a ward rule. It is a `case` of the
+  same keyed resolver (`level2WardRecipients`), with every condition in `noWardCover`.
+- **Where it applies**: `resolveRecipients`, at every level whose tiers ask who is on duty (any role, or the level-2
+  slot). Every on-duty role path (doctor, resident, supervisor, the ward team) is replaced by it for a no-ward patient.
+  The ordering clinician (off-duty check unchanged) and named escalation contacts (by name, not filtered by duty) are
+  kept as on any result: owner follow-up if the orderer should also be dropped for a no-ward patient.
+- **Admitting doctor** = `Encounter.attendingId` (set by admission and OPD ticket sync, carried forward by later
+  encounter versions). Told unless an unexpired "off" duty status exists (`admittingSkipped: "marked off duty until <iso>"`), or
+  the identity is a member row that is not active (`"not an active member of this hospital"`). Not required to be on the
+  rota: the owner named the doctor, not the doctor on duty.
+- **Residents** = roles `resident`, `pg_resident` (`WARD_TEAM_ROLES.resident`; interns still excluded), ON DUTY now by
+  `onDutyNow` over the whole hospital's rota and self-marked duty (off overrides). **Department known** = the admitting
+  doctor's membership `scope.departments` is non-empty: a resident counts when their own `scope.departments` shares one,
+  or the ward they are on duty in (`q_wards` name) has one of those `departmentId`s (reader `wards()` in `alert-deps.js`,
+  read only then). A resident whose membership has no department and who is on duty in a ward with no department is NOT
+  counted in that case. **Department not known** (no admitting doctor, or no departments on their membership): residents
+  on duty anywhere. There is no department on Encounter itself, and the doctor's own rota unit is not used.
+- **Nobody else**: no nurse, supervisor or consultant other than the admitting doctor, at any level.
+- **Record** on the notice: `wardRule = {rule, ward: null, noWardCover: {admittingDoctor, admittingSkipped, residentScope:
+  "department"|"hospital", residents}, recipients}`. Empty set: NO_RECIPIENT as before, plus `why` (e.g. "no ward, no
+  admitting doctor, no resident on duty"; the channel detail carries the same sentence).
+- **Screens**: critical results board (ward.js `critWardRuleHtml`) names the admitting doctor (or why skipped) and the
+  residents on duty with the scope; a NO_RECIPIENT line adds the `why`. Loops recorded before this keep the old
+  "went to everyone on duty in the hospital" line. Admin > Critical result alerts card explains the no-ward rule.
+- **Not changed**: Admin "Phones registered for alerts now" still checks people on duty with a ladder role and named
+  contacts; an admitting doctor who is neither is not checked there.
+- Tests: `test/wardsynq-alert-recipients.test.mjs` (admitting doctor told; off duty skipped, expired off not; department
+  residents by membership and by ward; off-duty and not-on-duty residents; other department excluded; hospital scope when
+  unknown, with and without an admitting doctor; nurse, supervisor, other consultant not told at any level; NO_RECIPIENT
+  reason through `serverPushChannel`; board and card text). Each condition was mutation-checked.
 
 ## 2026-09-15 Bilingual patient prints: English whole and authoritative, a second language optional, catalog words only (owner decision)
 
@@ -6525,3 +6562,251 @@ stay whatever as safety". Built fresh (branch `bilingual-prints`); Antigravity's
   change): rr promoted to AUTO on agreement, spo2 correctly stayed review on disagreement, 0 network calls.
 - Tests: `test/icu-hybrid-merge.test.mjs` (+2: local engine runs on-device with no upload/consent; no vision
   pack ready -> no automatic check), `test/icu-ocr-v2-integration.test.mjs` updated for the new gating.
+
+## 2026-09-15 Removing a hospital is the owner's act: soft delete, typed DELETE, audited in the same commit (BUG-MU2PHANW-T18X)
+- `POST /api/queue/org/delete` was open to any staff admin with no confirmation. It now needs the hospital's owner
+  (`ownerUid`) or the platform owner, and `confirm: "DELETE"` in the body (422 `confirm_required` otherwise).
+  Non-owner admin 403 `owner_only`; another hospital 403/404.
+- Still the existing soft delete (`deleted: true`, now with `deletedBy`): the hospital leaves every list; its clinical
+  record, documents and audit trail are kept (medical records retention). The flag and its hash-chained
+  `org:delete` row go in one commit via `appendOrgAudit`, no longer a best-effort row after the write.
+- Screens: #/hospitals (owner rows) and Admin > Hospital, one shared two-step dialog in shell.js (explain, then
+  type DELETE). `whoami` carries `orgOwner` / `platformOwner` as UI hints only. The OPD console (opd.html) asks
+  for the typed word too; an older native app build that sends no `confirm` is refused and removes nothing.
+- Tests: `test/queue-orgs-onboard.test.mjs` (REMOVE HOSPITAL), `test/run-wardsynq-hospitals-page.mjs`.
+
+## 2026-09-15 The workstation's code is network first; its record opens with the sign-in the person chose
+- Owner bug: "record service refused to open (401). Safety checking is unavailable, so ordering is disabled." on
+  wardsynq.com. The quoted wording is the pre-2026-09-14 text for a 401 (current code says "Please sign in"), so
+  the browser was running cached code. `wardsynq/ui/wardsynq-sw.js` served the page and the unversioned
+  `record-deployment.js` / `wardsynq-store-remote.js` cache first (verified live: all cached under `wardsynq-v6`),
+  so a browser that opened the workstation before the auth fixes kept the page with no Firebase and sent no
+  credential. Now network first, cache only offline; v7 deletes the old cache and reloads an open workstation
+  window once on that upgrade (not opd.html, which holds typed observations).
+- Credential: `smd_opd_toktype` decides, as hospital-auth.js already does for ward.js. "staff" sends only
+  X-Staff-Token; "account"/"firebase" sends only the bearer; unset sends both as before. A Firebase account the
+  browser still remembered was preferred by the server over the staff session and acted as the wrong person.
+- Account restore waits up to 10 s (was 3.5 s, a race on a slow link). No server change; a genuine no-session is
+  still 401 and the banner stays.
+- Tests: `test/wardsynq-workstation-credential.test.mjs`, `test/run-wardsynq-workstation-open.mjs`.
+
+## 2026-09-15 The staff language reaches the whole ward, through a codemod with the English inline (ui-i18n-ward)
+- Owner decision: a staff member's picked language changes the whole staff interface, not the rail. ward.js writes
+  every string through `wT` (plain text), `wTH` (markup), `wTA` (title/placeholder/aria-label/alt), `wTD` (dialogs),
+  each call carrying its English inline, keys `ward.*` in one delimited block at the end of EN in
+  `wardsynq/site/i18n.js`. ward.js without i18n.js (StewardMD app, harnesses) or with English picked renders
+  byte-identical English. The language is the shell picker's `G.WSQ.state.navLang`; paint() sets `<html lang>`.
+- Written by `scripts/wardsynq-i18n-ward-codemod.mjs` (acorn, dev-time only), re-runnable after merging other
+  ward.js work: literal-level edits, comments kept. Anything recorded is only ever a `{placeholder}` value, marked
+  `lang="en"` inside markup; strings sent to the server, compared, selectors, other attributes, units, routes,
+  frequencies, laterality, abbreviations and clinical-shaped text are skipped. Module-level word tables are read
+  through `wTEn()` where rendered. eMAR verbs and states are shown translated; the machine spelling is still sent.
+- Safety: a translated refusal/critical/allergy/not-saved text keeps its English under it (`<small class="w-en">`);
+  plain texts kept in `st.err` find their English through `wEnglishOf`; dialogs show both.
+- Not covered: discharge.js (its printable must stay English; print.dc.* already handles the print), strings built by
+  `.push()` into arrays, prompt default answers. Translations are not written on this branch.
+- Tests: `test/ward-staff-i18n.test.mjs` (fake TE[...] catalog), `test/run-ward-staff-i18n-ui.mjs` (headless Chrome).
+
+## 2026-09-15 A staff language translates the whole staff interface (replaces nav-labels-only)
+- shell.js T/TS/EN, exposed on the page context as `c.t(key, vars, en)`, `c.tSafe`, `c.en`, `c.lang`; pages carry a
+  3-line local T/TS/EN so helpers rendered without the shell stay English. The inline English must equal EN[key];
+  `test/wsq-site-i18n-catalog.test.mjs` extracts every call and pins the one block
+  `/* site pages keys (ui-i18n-site) */` at the end of EN in i18n.js (keys `site.*`, `order.*`).
+- Never translated: recorded or server values (names, codes, drugs, doses, results, hospital/ward names, audit
+  values, server messages), marked lang="en" where shown inside translated UI. Refusals and failures use TS: the
+  translated text plus the English original underneath (`.en-orig`). `document.documentElement.lang` follows.
+- The Order workstation reads the same `wsqStaffNavLang`, loads i18n.js + the language file, translates its static
+  HTML at boot. Translations of the new keys are written separately before merge.
+
+## 2026-09-15 Live test LT-21..LT-29 (branch livefix-boards)
+- A hospital-wide list that composes many audited reads buffers its read audit rows for the one request and writes
+  them together before answering (`bufferReadAudits` in functions/_wardsynq/repository.js, `auditMany` on the D1 and
+  memory repositories). Every read is still audited and chained; a failed flush fails the request, so nothing is
+  returned unaudited. Used by `/ward/nurse-worklist` (522 reads: 522 chain steps became 14) and `/ward/criticals?names=1`.
+- `resolveClinicalActor` answers once per (request, deps, tenant, need); the identity cannot change inside a request.
+- A lab result is refused (409 `specimen_not_collected`) for a blood/fluid order with no collected sample; a
+  collected sample not yet marked received is received by the release (`receivedOnRelease: true`). Imaging,
+  procedure and referral orders are never asked.
+- "Open critical results" means state `open` (not acknowledged) on every screen; `minutesSinceReported` is the
+  report's clock and does not change on acknowledgement. Staff names are stored beside the id at write time
+  (`acknowledgedByName`, `givenByName`, `receivedByName`); an older record with only an account id shows
+  "a clinician account", never the uid.
+- DICOM worklist DA/TM are the hospital's wall clock (org `utcOffsetMinutes`/`timeZone`) with TimezoneOffsetFromUTC;
+  a study with a final or corrected radiology report leaves the worklist, a preliminary one stays.
+## 2026-09-15 Live test fixes (livefix-site): one account sign-in spelling, no 502 from MaiK, one definition of admitted
+- LT-01 (D7): the OPD console reads `smd_opd_toktype` "account" (wardsynq.com) as "firebase" (its own spelling), opens
+  the hospital in `smd_opd_workplace`, and asks whoami for that hospital's role. Same Firebase project and origin, so
+  the persisted session is the proof; the router still verifies every request. clinic-billing.html reads it the same.
+- A Function must not answer 502: Cloudflare replaces it with an HTML page and the JSON reason is lost (already
+  noted in functions/api/auth and migrate-inpatient.js). maik-interaction.js now uses 503 for "not answering" and
+  409 + notConfigured for the gateway's routing refusals. Other `r.status || 502` routes in the ward block are
+  unchanged and carry the same risk.
+- `getOrg("")` is null: an unnamed hospital is a refusal, not a 500 from reading `q_orgs/`.
+- Occupancy (patients, occupied beds, without a bed) counts ADMISSION_CLASSES everywhere (ward-metrics now matches
+  the bed board, patient flow and the ward list); open work still spans ED, theatre and PACU encounters.
+- `GET /api/queue/roster/duty-status` is a 200 `notWardTeam` for any member; only POST is the ward team's.
+- The audit list reads `changes?newest=1&before=` (both repositories); the ascending sync feed is unchanged.
+  `GET /ward/actor-names` (staff.admin) names actor ids from this hospital's members only; a mobile number or an
+  account id is never returned as a name. Members still have no display name field (not built).
+- Tests: test/run-opd-wardsynq-session-ui.mjs, test/run-ward-livefix-site-ui.mjs, test/ward-livefix-site.test.mjs,
+  test/wsq-site-livefix-site.test.mjs, test/wardsynq-livefix-site-routes.test.mjs.
+## 2026-09-15 Medication order entry runs the server safety check; prescribers cannot verify their own orders (LT-14, LT-20)
+- `POST /api/queue/ward/medication-order` runs the SafetyEngine on the server against the record (allergies, other
+  active orders, latest weight) through `orderEntrySafety` in migrate-emar.js, the same facts reader the bedside hook
+  and the pharmacy queue use. A `safety` verdict in the request body is no longer read (it was trusted for override
+  analytics, actorId included).
+- Not a gate (seed content is unapproved, seed-signoff.js): `checkOnly: true` returns the verdict and writes nothing;
+  the chart shows any finding and the prescriber proceeds with `overrideReason` (attributed server-side) or changes the
+  order. The verdict is stored on the order as `safetyAtOrder`. The Order workstation should call the same route.
+- `POST /api/queue/ward/verify-order` refuses the order's prescriber (403 `self_verification`, `record.denied` audit
+  row via `RecordService.auditDenied`), whatever their role. Unverified orders stay administrable (rule 4).
+- ward.js `paint()` puts back fields the user changed (same view and patient, same drawn default); a write the server
+  accepted (`written !== 0`) empties the card its button sits in.
+## 2026-09-15 One price list for the ward bill; the discharge checklist is enforced on the server (LT-30, LT-32)
+- The ward bill (`/ward/charges`, `/ward/invoice`, claim estimates, the discharge bill check) prices from ONE table:
+  `wardsynq.tariff` merged with the Admin Center Price list (q_tariff via the clinic billing store), Price list wins
+  (`charge-capture.js tariffTable`, router `wsqTariff`). Before, the screen wrote q_tariff and the bill read only the
+  config, so prices set on screen never reached a bill. An unreadable Price list is an error (502), never "unpriced".
+- Price list kinds `bed`, `nursing`, `visit` are per day of an inpatient stay, optionally for one ward (by name). A day
+  is charged once started; the ward is the one the Encounter history says the day began on. A bed day with no price
+  is listed unpriced (`BED-DAY`), never free. Tests and medicines match by code, then by the name they were recorded
+  under. `billing.charge` now reads Encounter (read only) for this.
+- `/ward/discharge` refuses (409 `discharge_blocked`, nothing written) until the bill is settled or deferred with a
+  reason, and open orders / pending results / unreadable order lists carry an override reason from a caller holding
+  `emr.treat` (403 `override_not_permitted` otherwise, decided in the router, never from the body). Deferral and
+  override are written on the finished Encounter (`billDeferred`, `dischargeOverride`, `dischargeChecklist`).
+  Destination is coded: home, transferred (+ receiving hospital), left-against-advice, died (needs a recorded death),
+  other (+ text); `ward` stays for ICU step-down. `GET /ward/discharge-checklist` shows the same checklist.
+- A released result (final/corrected DiagnosticReport) closes its investigation on the summary, the pending list and
+  the command centre; the summary line carries the values or impression. Signing an undrafted summary drafts it first.
+
+## 2026-09-15 The Order workstation is a ward screen, not a separate record client (LT-09, LT-10)
+- `wardsynq/ui/wardsynq-app.js` no longer carries a demo cohort, a browser-side governed store, an offline journal
+  or its own rule-pack evaluation. Roster: `GET /api/queue/ward/list`. Context: `/ward/fhir` (AllergyIntolerance,
+  Patient, Observation weight and labs) and `/ward/timeline` (active medicines). Sign: the chart's two steps on
+  `POST /api/queue/ward/medication-order` (checkOnly, then the order with `overrideReason`). The site shell opens it
+  with `?site=1&orgId=`, demo hospital or not. Allergies the page cannot read stop the order.
+- Dose limits may be weight-based only up to a weight (`mgPerKgUpToKg`; paracetamol 50 kg, ibuprofen 40 kg) and may
+  carry a daily ceiling checked against the order's frequency (`absoluteCeilingDaily`, `maxDaily`; the frequency
+  reading is pinned to mar-schedule.js parseFrequency). The WardSynQ adapter drops generated duplicate-therapy rules on
+  RxClass grouping classes (a class that strictly contains another class of two or more members); curated rules stay.
+  The generator (scripts/interactions/build_rules.py) and the StewardMD app's copy of the rules are unchanged.
+
+## 2026-09-16 Report Bug reports live on the server per hospital, removed only once solved
+- Owner: "make sure all bugs reported thru report bug are saved on server and removed only after solved".
+  Stored in the hospital's append-only record store as the internal type `_wardsynq_bug_report`
+  (functions/_wardsynq/bug-reports.js), like connectors and payment requests: versioned, audited in the same append,
+  no migration. Not a RecordService resource type: that door needs a clinical actor (hr and viewer have none), and
+  a type in RESOURCE_TYPES is readable through the raw record door by every emr.view role.
+- Routes (ward block): `POST /ward/bug-report` any member (idempotent per reporter and client id),
+  `GET /ward/bug-reports` (hospital admin, org owner or platform owner sees all, anyone else their own),
+  `POST /ward/bug-report-status` and `POST /ward/bug-report-remove` for those managers only; remove is 409 unless
+  solved and archives (status removed), never deletes. Screen: Admin Center > Bug reports.
+- The widget keeps a device outbox: unsent until the server returns its id, retried on load, online and every
+  minute; the pre-change localStorage log is uploaded once. Only sent copies are trimmed or cleared.
+
+## 2026-09-16 A staff screen's English goes through the catalog, and the server's display text travels as a code
+- Owner: with Telugu picked, screens still showed English. The catalog was 5,169 of 5,249 keys complete, so what was
+  left was text that never went through it. scripts/wardsynq-i18n-unwrapped.mjs finds string literals a screen shows
+  as words (text between tags, a title/placeholder/aria-label, a sentence) that are not an argument of a translation
+  helper; test/wardsynq-i18n-unwrapped.test.mjs pins each file's list against an allowlist of the deliberate
+  exceptions, so a new unwrapped literal fails there. discharge.js (the discharge workstation, "ward.dc-*") and
+  patient-register.js (the check-in sheet, "ward.reg-*") now carry the same wT/wTH/wTD helpers as ward.js, and the
+  Report Bug widget uses the site pages' T()/TS() ("site.bug.*").
+- SERVER DISPLAY TEXT IS NOT TRANSLATED ON THE SERVER. functions/_wardsynq/quality.js keeps sending its English and
+  sends a stable code beside it (a measure's id for its title; reasonCode, noteCode, note2Code with the numbers in
+  reasonVars/noteVars). ward.js maps code -> key with wTS(key, english, sent, vars), which shows the translation ONLY
+  when the server's English is exactly the catalog's English filled with those values, and the server's own words
+  otherwise - so a sentence changed on the server can never be shown as the translation of an older one.
+- A count is two keys ("{n} nurse" and "{n} nurses"), never one key with "s" glued on: the English "1 resident" that
+  the alert-cover tests pin cannot survive a single plural form, and no other language pluralises like English.
+- Icon ligature names (card/icuHead/wsBlock's icon argument) are never catalog words: a translated "verified" put
+  Telugu where the Material Symbols glyph belongs.
+## 2026-09-16 A chart names the staff member: name and employee id, resolved at display
+- Owner: "timeline shows by clinician account it should state his/her employee id and name ... so everyone knows who
+  gave the drugs who asked to give". Records keep the actor id they were written with; nothing is rewritten.
+- Source: the hospital's member row gains `displayName` and `employeeId` (Admin Center > Staff; a name that is a
+  mobile number, an email or an account id is refused). An employee id falls back to the staff sign-in ID the hospital
+  chose; an email, a mobile number or an account id is never shown as either.
+- One lookup (functions/_wardsynq/staff-identity.js) serves `GET /ward/actor-names` (audit screen, staff.admin) and the
+  new `GET /ward/staff-identities` (emr.view, or order.read / lab.result / transfusion.issue): name, employeeId, role
+  only, this hospital's members only (disabled members included), one audit row `staff.identity.read` per request.
+- ward.js `staffWho(id, storedName)` is the one renderer: "Name (EMP-1042)", full identity in the title and on a
+  click or tap (`whoinfo`). All ids named on a screen go in one request per screen; the fallback shows while it runs,
+  and a failed lookup says "identity could not be loaded". The live staff record wins over a name stored at write
+  time. Timeline events carry `byId`/`labelBase` (and `signedById`, `witnessId`); the round carries `witnessedBy` and
+  `statusBy`.
+## 2026-09-16 Billing and reports from the live retest: one price table, invoices carry the stay, catalogue of tests
+- THE PRICE LIST IS THE ONLY PRICE TABLE where it exists (clinic billing store on). The retest billed "Specimen
+  collection 60" while the Price list said "No prices set yet": the demo seed had written fabricated prices into
+  wardsynq.tariff, which no screen shows. `wsqTariff` now ignores wardsynq.tariff whenever the Price list store is on;
+  the configured tariff prices only a deployment with no Price list store. An item with no Price list price is listed
+  as "no price set". The demo seed writes its (labelled DEMO) prices to the Price list instead. Production demo data
+  is not changed.
+- AN INVOICE CARRIES THE STAY. `raiseInvoice` stores the named encounter (refused 422 if it is not this patient's) or
+  the patient's open inpatient stay. The discharge checklist's "bill settled" sums only that stay's invoices
+  (`invoicesForStay`): an invoice with the stay's id, or one with no id (every invoice before this change) matched by a
+  line from this stay's charges or a bed day of it, or by being raised between admission and discharge (or now).
+  Whether an item is on a bill still reads every one of the patient's bills, so nothing is billed twice.
+- REPORTS: the billing footing shows credit held beyond the bills and nets refunds, void invoices are counted apart,
+  and it states whether it balances. A dispense is taken out of the one location that item was received into (else the
+  unnamed main store), not the ward it was sent to. Billing, claims and pharmacy reports take `from`/`to` (a date is a
+  whole day on the hospital's clock) defaulting to the last 7 days; a bad date is 422. CSV per table is built in the
+  browser from the table on screen.
+- INVESTIGATION CATALOGUE (functions/_wardsynq/investigation-catalogue.js): Price list items of kind
+  investigation/radiology, the hospital's order-set investigations, then a built-in list of common tests with WardSynQ
+  short codes (not LOINC). A catalogued test's category is the catalogue's. The chart orders anything else only as
+  `other: true` with a reason (422 without); an API order with an unknown code is still accepted, unmarked, so order
+  sets, integrations and older clients keep working. Existing orders filed as laboratory whose code or name is exactly
+  a built-in imaging test are READ as imaging (`effectiveCategory`) by the laboratory and radiology worklists and by
+  specimen collection; stored records are not rewritten. Words in a free-text name never overrule a category.
+- BED BOARD: a stay's ward is matched to the hospital's ward by name or ward code without regard to case, as ADT
+  already does; never by a partial name. A ward not on the ward list (or turned off) and a ward with no bed rows each
+  say so instead of "Bed list not configured".
+## 2026-09-16 MaiK asks the model where Google serves it; health probes that path; errors carry a reference, not the provider's words
+- Live retest LT-40/LT-34: Ask MaiK 503 `model_unavailable`, Vertex NOT_FOUND for
+  `projects/<project>/locations/us-central1/publishers/google/models/gemini-3.6-flash`, and the raw provider error
+  (project id, model path, docs URL) printed to the clinician. System health said MaiK Up at the same time.
+- Root cause 1: the gateway put the model in the deployment's single region (GCP_LOCATION, else asia-south1). Google's
+  Gemini 3.6 Flash page (read 2026-09-16) lists global and the US/EU multi-regions only. The registry entry now carries
+  `vertexLocations: ["global","us","eu"]`; `vertexEndpoint()` keeps GCP_LOCATION when it serves the model, otherwise
+  uses the multi-region containing it (us-* -> `aiplatform.us.rep.googleapis.com`, europe-* -> eu), else global
+  (`aiplatform.googleapis.com`). Production (us-central1) goes to the US multi-region, which keeps the US processing
+  the deployment already had. No env var and no per-hospital model id added: the model id was verified to exist, the
+  location was the fault. vertex-pro (gemini-3.1-pro-preview, opt-in by name) has no verified location list and keeps
+  GCP_LOCATION. NOT verified live: the call against the real project.
+- Root cause 2: health read model metadata with the AI Studio key; clinical requests go to Vertex under the service
+  account. `probeClinicalPath()` takes the same route() decision askAboutPatient gets (summary, phi) and calls
+  countTokens (free, generates nothing) on the same host/location/model with the same token, or a hospital model
+  server's /models. MaiK on with nothing approved for patient data is "Not set up yet" (`setup: "hospital"`), not Up.
+- Root cause 3: askAboutPatient returned invoke()'s diagnostic detail. `publicRefusal()` passes setup refusals
+  through; a runtime refusal (model_unavailable, empty_answer, no_provider) is logged server-side as
+  `[maik] MK-XXXXXXXX <code>: <scrubbed provider text, 300 chars>` (no patient id, no prompt) and the response carries
+  `ref` and a plain sentence. invoke() itself keeps its diagnostic detail for server callers and tests.
+
+## 2026-09-16 listMembers pages through every member
+- The staff identity lookup matched an Access sign-in (`cfa:` + email hash, not readable by id) only against the first
+  300 members. `listMembers` now pages 300 at a time ordered by document name (`fsQuery` `startAfter`), ceiling 20
+  pages. Every caller (admin staff list, rota, security review) sees every member.
+## 2026-09-16 Order entry refuses an absolute dose ceiling, including one reached across orders (retest 2026-09-16)
+- Retest: a second paracetamol order on top of an active 1 g QDS came back with no finding. The SafetyEngine gains an
+  opt-in `same-drug` check (wardsynq-safety.js `checkSameDrug`), run only by order entry (migrate-emar.js
+  `orderEntrySafety`): `SAME_DRUG_ACTIVE` (overridable) when the molecule is already active on another order, and
+  `DOSE_ABSOLUTE_CEILING_CUMULATIVE` (block) when this order's day plus the other single-molecule orders' days is above
+  `absoluteCeilingDaily` (mass units summed in mg; PRN or unread frequencies and combination products are not summed
+  and are named). The order being replaced (same deterministic id) is excluded, so the chart's replace flow is neither.
+  With the check on, a duplicate-class rule needs two different molecules, so one molecule twice is one finding.
+- The findings stay REPORTED (unapproved seed content) with one exception: `ORDER_ENTRY_HARD_STOPS`
+  (`DOSE_ABSOLUTE_CEILING`, `DOSE_ABSOLUTE_CEILING_DAILY`, `DOSE_ABSOLUTE_CEILING_CUMULATIVE`) are arithmetic on the
+  order, not rule content, and `POST /ward/medication-order` refuses them (409 `safety_hard_stop`, nothing written,
+  whatever reason is sent). Each carries `hardStop: true` and the verdict lists `hardStops`; screens label only those
+  "Hard stop". Every other block or overridable finding is "Needs a reason to proceed", a warning is "Warning".
+  The bedside hook and the OPD advisory do not run `same-drug`.
+## 2026-09-16 Questions before a ward write are asked on the ward, not in browser dialogs
+- ward.js `askFor(spec, run)`: the question and every typed value live in `st.ask` (`data-w-ask`), so a repaint keeps
+  them; Cancel/Escape writes nothing; a blank required field is refused in the dialog; the write's failure is shown in
+  the dialog, which stays open. Used for lab Collect, critical acknowledge (chart, board, inbox), ED bed admit,
+  transfer, and the other clinical writes. discharge.js signs and reverts through an on-screen question (`st.ask`).
+  Native dialogs remain only in MaiK, integration, billing/claims, purchasing and scheduling screens (other lanes).
+- A paint that arrives while a pointer is down inside the ward is held until the pointer comes up (3 s cap), as a
+  paint is held for an open select: a repaint between press and release lost the click (the ED "first triage" miss).

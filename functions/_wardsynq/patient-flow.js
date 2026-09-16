@@ -32,6 +32,7 @@ import { bedBoard, ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
 import { admissionWaitingList } from "./admission-request.js";
 import { pendingItems, lengthOfStayDays } from "./migrate-discharge.js";
 import { listBeds } from "../_opd_org_store.js";
+import { patientLabels, labelKey } from "./patient-label.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const RECENT_TRANSFER_MS = 24 * 60 * 60 * 1000;
@@ -78,14 +79,16 @@ async function patientFlow(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, flow: null };
 
-  let encounters, orders, administrations, serviceRequests, problems;
+  let encounters, orders, administrations, serviceRequests, problems, reports;
   try {
-    [encounters, orders, administrations, serviceRequests, problems] = await Promise.all([
+    [encounters, orders, administrations, serviceRequests, problems, reports] = await Promise.all([
       svc.list("Encounter", 500),
       svc.list("MedicationOrder", 1000).catch(() => []),
       svc.list("MedicationAdministration", 1000).catch(() => []),
       svc.list("ServiceRequest", 1000).catch(() => []),
       svc.list("Condition", 1000).catch(() => []),
+      // A test with a released result is not open (LT-31): the report decides, as on the discharge summary.
+      svc.list("DiagnosticReport", 1000).catch(() => []),
     ]);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), flow: null };
@@ -101,7 +104,7 @@ async function patientFlow(request, env, ctx) {
     const myAdmins = (administrations || []).filter((a) => a && myOrders.some((o) => o.id === a.orderId));
     const mySr = (serviceRequests || []).filter((s) => s && s.encounterId === e.id);
     const myProblems = (problems || []).filter((c) => c && c.patientId === e.patientId);
-    const pending = pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mySr, problems: myProblems });
+    const pending = pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mySr, problems: myProblems, reports });
     return {
       encounterId: e.id, patientId: e.patientId,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
@@ -141,13 +144,24 @@ async function patientFlow(request, env, ctx) {
     ...(staysWithOpenItems.length ? [{ kind: "stays_with_open_items", count: staysWithOpenItems.length }] : []),
   ].sort((a, b) => b.count - a.count);
 
+  /* LT-39: the discharge list named no patient ("5 open items · Cardiology Ward · bed CAR-08"). Each row now carries
+   * the patient's name and MRN, read once per patient through the caller's own governed service (patient-label.js),
+   * so a role that may not read a patient gets nulls, never another patient's name. Ward and bed are already the
+   * stay's current location. Only when asked (ctx.withPatients, the command center's own route): the digital twin
+   * reuses this computation at executive level, where no name or MRN belongs. */
+  const dischargeRows = [...staysWithOpenItems.slice(0, 50), ...dischargeCandidates.slice(0, DRILL_CAP)];
+  const labels = ctx.withPatients ? await patientLabels(svc, dischargeRows.map((s) => ({ patientId: s.patientId }))) : null;
+  const named = (s) => { if (!labels) return s; const l = labels.get(labelKey({ patientId: s.patientId })) || {}; return { ...s, name: l.name || null, mrn: l.mrn || null }; };
+  const candidatesDrill = drillList(dischargeCandidates);
+  if (labels) candidatesDrill.items = candidatesDrill.items.map((it) => { const n = named(it); return { ...n, label: [n.name, n.mrn].filter(Boolean).join(" · ") || null }; });
+
   const flow = {
     computedAt: nowIso,
     ed: { arrivals: (ed && ed.patients || []).length, untriaged: (ed && ed.patients || []).filter((p) => !p.triagedAt).length },
     admissionsPending: { waiting: (waiting && waiting.waiting) || 0, longestWaitHours: (waiting && waiting.longestWaitHours) || 0 },
     beds: { occupied: totalOccupied, unplacedPatients: totalUnplaced, wardsKnown: wards.length, states: bedStates },
     dischargeCandidates: dischargeCandidates.length,
-    staysWithOpenItems: staysWithOpenItems.slice(0, 50),
+    staysWithOpenItems: staysWithOpenItems.slice(0, 50).map(named),
     recentTransfers: recentTransfers.slice(0, 50),
     bottlenecks,
     /* P1.13 drill-down: the patients BEHIND each headline count, capped and saying so. */
@@ -156,7 +170,7 @@ async function patientFlow(request, env, ctx) {
       edUntriaged: drillList(((ed && ed.patients) || []).filter((p) => !p.triagedAt)),
       occupied: drillList(wards.flatMap((w) => (w.occupied || []).map((o) => ({ ...o, ward: w.ward })))),
       unplaced: drillList(wards.flatMap((w) => (w.unplaced || []).map((o) => ({ ...o, ward: w.ward })))),
-      dischargeCandidates: drillList(dischargeCandidates),
+      dischargeCandidates: candidatesDrill,
     },
   };
   return { ...base, ok: true, flow, ...( (ed && !ed.ok) || (beds && !beds.ok) || (waiting && !waiting.ok) ? { partial: true } : {}) };

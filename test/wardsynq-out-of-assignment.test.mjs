@@ -423,7 +423,7 @@ test("G11 screen: ward columns and sign-ins on a flag, a button to open its rows
   assert.match(page, /Patient's ward then/);
   assert.match(page, /Ward B/);
   assert.match(page, /Reader rostered on then/);
-  assert.match(page, /fb:u9/);
+  assert.ok(!page.includes("fb:u9"), "LT-35: a sign-in is the staff member, never the account id"); assert.match(page, /these sign-ins: Staff account, name not set/);
   assert.match(page, /data-sec-rows="aud-5"/);
   assert.match(page, /data-sec-rows="aud-6"/);
   assert.match(page, /could not be matched to an email/);

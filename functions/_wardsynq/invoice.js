@@ -24,6 +24,7 @@ import { validateCollection, applyAdapterResult } from "../../wardsynq/wardsynq-
 import { chargesForPatient } from "./charge-capture.js";
 import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
 import { gstForLines } from "../_region_in.js";
+import { ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -48,6 +49,44 @@ function writeFailure(e, extra) {
   if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", detail: e.detail, ...extra };
   return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), ...extra };
 }
+/** Which inpatient stay an invoice is raised for: the named one (it must be this patient's), else the patient's
+ * open stay (the latest if somehow more than one), else none (an outpatient bill). Never throws. */
+async function stayForInvoice(svc, patientId, named) {
+  if (named) {
+    const enc = await svc.get("Encounter", named).catch(() => null);
+    if (!enc || str(enc.patientId) !== patientId) return { error: { ok: false, status: 422, error: "encounter_not_this_patient", detail: "That stay is not this patient's." } };
+    return { encounterId: enc.id };
+  }
+  let stays;
+  try { stays = (await svc.byPatient("Encounter", patientId)) || []; }
+  catch (e) { return { error: { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) } }; }
+  const open = stays.filter((e) => e && !isExternalRecord(e) && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
+    .sort((a, b) => str(b.periodStart).localeCompare(str(a.periodStart)));
+  return { encounterId: open.length ? open[0].id : null };
+}
+
+/**
+ * PURE. The invoices that belong to one stay, for the discharge checklist. An invoice carrying the stay's id is the
+ * stay's. An invoice with NO encounter id (every invoice raised before 2026-09-16, when the cashier never sent one)
+ * is matched by the patient (the list is already this patient's) and the service dates: it counts when one of its
+ * lines is a charge from this stay (the same source event, or a bed day of this stay), or when it was raised between
+ * admission and discharge (or now). An invoice for another stay is never counted.
+ */
+function invoicesForStay(invoices, encounter, stayChargeKeys, nowMs) {
+  const id = str(encounter && encounter.id);
+  const start = Date.parse(str(encounter && encounter.periodStart));
+  const end = encounter && encounter.periodEnd ? Date.parse(str(encounter.periodEnd)) : (Number.isFinite(nowMs) ? nowMs : Date.now());
+  const keys = stayChargeKeys instanceof Set ? stayChargeKeys : new Set(stayChargeKeys || []);
+  return (invoices || []).filter((inv) => {
+    if (!inv) return false;
+    if (str(inv.encounterId)) return str(inv.encounterId) === id;
+    const lines = inv.lines || [];
+    if (lines.some((l) => keys.has(`${l.sourceType}:${l.sourceId}`) || (l.sourceType === "Encounter" && str(l.sourceId).startsWith(id + ":")))) return true;
+    const raised = Date.parse(str(((inv.events || [])[0] || {}).at));
+    return Number.isFinite(raised) && Number.isFinite(start) && raised >= start && raised <= end;
+  });
+}
+
 function summary(inv) {
   return { taxRegistration: inv.taxRegistration || null, invoiceId: inv.id, patientId: inv.patientId, encounterId: inv.encounterId, currency: inv.currency, lines: inv.lines, events: inv.events, void: inv.void, voidReason: inv.voidReason, version: inv.version, receipts: receiptsFor(inv), ...reconciliationOf(inv) };
 }
@@ -64,9 +103,20 @@ async function raiseInvoice(request, env, ctx) {
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
+  /* THE STAY THIS BILL BELONGS TO (retest 2026-09-16). The cashier sends only the patient, so every invoice was
+   * written with encounterId null and the discharge checklist could not tell it was this stay's bill. A named
+   * encounter must be this patient's inpatient stay; with none named, the patient's open stay is used. */
+  const stay = await stayForInvoice(svc, patientId, str(ctx.encounterId));
+  if (stay.error) return { ...base, ...stay.error, written: 0 };
+  const encounterId = stay.encounterId;
+
   const charges = await chargesForPatient(request, env, { ...ctx, patientId });
   if (!charges.ok) return { ...base, ...charges, written: 0 };
-  if (!charges.priced || !charges.priced.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
+  /* NOTHING RAISED IS SAID, WITH WHAT HAS NO PRICE (LT-30). This answered ok with written 0 and the
+   * cashier screen showed nothing at all. The unpriced items go back by name so the screen can say
+   * exactly which charges an administrator has to price. */
+  const unpricedNames = (charges.unpriced || []).map((u) => ({ display: u.display || u.code, code: u.code, reason: u.reason }));
+  if (!charges.priced || !charges.priced.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", unpriced: unpricedNames, ...(charges.unreadable ? { unreadable: charges.unreadable } : {}), detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
 
   // NEVER TWICE. Every source event already sitting on an earlier invoice for this patient is
   // excluded here, before a second invoice can be raised against it.
@@ -92,7 +142,7 @@ async function raiseInvoice(request, env, ctx) {
   let ep;
   try {
     ep = openInvoice({
-      id, patientId, encounterId: str(ctx.encounterId) || null, currency: charges.currency,
+      id, patientId, encounterId, currency: charges.currency,
       lines: newLines.map((l) => {
         const g = taxByCode.get(str(l.code).toUpperCase());
         return { code: l.code, display: l.display, quantity: l.quantity, amount: l.amount, line: l.line, sourceType: l.sourceType || null, sourceId: l.sourceId || null,
@@ -108,6 +158,7 @@ async function raiseInvoice(request, env, ctx) {
   try {
     const out = await svc.put(ep, { idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, ...summary({ ...ep, version: out.record.version }), actor: resolved.actor.id,
+      ...(unpricedNames.length ? { unpriced: unpricedNames } : {}), ...(charges.unreadable ? { unreadable: charges.unreadable } : {}),
       ...(gst.applies ? { gst: { totalTax: gst.totalTax, unconfigured: gst.unconfigured, taxRegistration: ep.taxRegistration || null } } : {}) };
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
 }
@@ -230,5 +281,5 @@ async function invoicesForPatient(request, env, ctx) {
 
 export {
   TYPE, raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff,
-  voidInvoiceRoute, readInvoice, invoicesForPatient,
+  voidInvoiceRoute, readInvoice, invoicesForPatient, stayForInvoice, invoicesForStay,
 };

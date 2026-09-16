@@ -22,7 +22,7 @@ const LEVELS = Object.freeze(["due", "overdue", "escalate"]);
  * roles: member roles ON DUTY NOW in the patient's unit (the rota, and self-marked duty). contacts: named member
  * identities. There is no nurse-in-charge role in _queue_roles.js: "nurse" on the overdue tier is the ward-team
  * slot, decided by the named level-2 ward rule below; a hospital that wants none removes "nurse" here.
- * No responsible-clinician field exists on Encounter, so it is not a source until one does. */
+ * Encounter.attendingId (the doctor the patient is admitted under) is a source only for a patient with no ward (noWardCover). */
 const DEFAULT_LEVELS = Object.freeze({
   approval: Object.freeze({ approvedBy: "Dr Manoj Kurmana", approvedOn: "2026-09-14", decision: "O5" }),
   due: Object.freeze({ orderer: true, roles: Object.freeze(["doctor", "resident"]), contacts: Object.freeze([]) }),
@@ -104,7 +104,7 @@ function onDutyNow(ctx) {
  * THE ONE PLACE the level-2 ward recipients are decided, keyed by rule name.
  * ctx: onDutyNow's ctx plus active: Map(identity -> role). Every condition is checked here, none trusted to a reader:
  * ROLE (an active member in one of the rule's groups), DUTY and WARD (onDutyNow). A patient whose ward is unknown
- * keeps the ladder's hospital-wide cover (ctx.unit ""), so no ward test is possible there.
+ * has no ward to test: NO_WARD_RULE (noWardCover) decides them instead.
  * -> [{identity, group, unit, via}]
  */
 function level2WardRecipients(rule, ctx) {
@@ -114,8 +114,50 @@ function level2WardRecipients(rule, ctx) {
   switch (rule) {
     case "all-on-duty-ward-team": return team(WARD_TEAM_GROUPS);
     case "all-on-duty-nurses-in-ward": return team(["nurse"]);
+    case NO_WARD_RULE: return noWardCover(ctx).people;
     default: throw new Error(`level-2 ward rule "${rule}" has no resolver`);
   }
+}
+
+/* OWNER DECISION 2026-09-15, replacing hospital-wide on-duty cover for a patient with NO WARD recorded: "No ward: alert
+ * the doctor the patient is admitted under, and the resident on duty." Not a hospital choice (never saveable as a ward
+ * rule); it applies at every level wherever the ladder would have asked who is on duty. Nobody else on duty is told:
+ * no nurse, no supervisor, no consultant other than the admitting doctor. The ordering clinician and named contacts are
+ * told by name as on any result. */
+const NO_WARD_RULE = "no-ward-admitting-doctor-and-residents";
+const residentRole = (role) => WARD_TEAM_ROLES.resident.includes(str(role));
+
+/**
+ * PURE. Who covers a patient with no ward. ctx: onDutyNow's ctx plus active: Map(identity -> role), members: [{identity,
+ * role, active, scope: {departments}}], admittingId (Encounter.attendingId), wards: [{name, departmentId}].
+ *   ADMITTING DOCTOR: told unless an unexpired "off" says off duty (or they are no longer an active member); skipped is recorded with why.
+ *   RESIDENTS (resident, pg_resident) ON DUTY NOW: when the admitting doctor's department is known (their membership scope),
+ *   only those in it, by their own membership scope or by the ward they are on duty in; otherwise anywhere in the hospital.
+ * -> { people: [{identity, group: "admitting"|"resident"}], cover: {admittingDoctor, admittingSkipped, residentScope, residents} }
+ */
+function noWardCover(ctx) {
+  const now = Number(ctx.nowMs) || Date.now();
+  const admitting = str(ctx.admittingId) || null;
+  const rows = new Map((ctx.members || []).filter(Boolean).map((m) => [str(m.identity), m]));
+  const deptsOf = (id) => (rows.get(id) && rows.get(id).scope && list(rows.get(id).scope.departments)) || [];
+  let skipped = null;
+  if (admitting) {
+    const off = (ctx.statuses || []).find((s) => s && str(s.identity) === admitting && s.status === "off" && Number(s.expiresAt) > now);
+    if (off) skipped = `marked off duty until ${new Date(Number(off.expiresAt)).toISOString()}`;
+    else if (rows.has(admitting) && !ctx.active.has(admitting)) skipped = "not an active member of this hospital";
+  }
+  const depts = admitting ? deptsOf(admitting) : [];
+  const wardDept = new Map((ctx.wards || []).filter(Boolean).map((w) => [str(w.name), str(w.departmentId)]));
+  const inDept = (a) => deptsOf(a.identity).some((d) => depts.includes(d)) || depts.includes(wardDept.get(str(a.unit)));
+  const residents = onDutyNow({ ...ctx, unit: "" })
+    .filter((a) => residentRole(ctx.active.get(a.identity)) && (!depts.length || inDept(a)) && a.identity !== admitting);
+  const people = [...(admitting && !skipped ? [{ identity: admitting, group: "admitting" }] : []), ...residents.map((a) => ({ identity: a.identity, group: "resident" }))];
+  return { people, cover: { admittingDoctor: admitting, admittingSkipped: skipped, residentScope: depts.length ? "department" : "hospital", residents: residents.length } };
+}
+
+/** PURE. The sentence NO_RECIPIENT carries for a no-ward patient: which of the two owner-named sources were missing. */
+function noWardWhy(c) {
+  return `no ward, ${!c.admittingDoctor ? "no admitting doctor" : `admitting doctor ${c.admittingSkipped || "not reached"}`}, no resident on duty${c.residentScope === "department" ? " in the admitting doctor's department" : ""}`;
 }
 
 /** PURE. People per group, every group of the rule named (a zero is shown, not left out). */
@@ -162,9 +204,10 @@ function nextLevel(level) {
  * Member identities, as `orgId~identity`, for a loop at a level.
  *
  * readers: { latest(type, id), members() -> [{identity, role, active}], onDuty(unit) -> {onDuty: [{identity, unit}]},
- * dutyStatuses?() -> {statuses: [{identity, status, unit, expiresAt}]} }. Returns { recipients, reason?, unit,
- * location: {ward, bed}, sources, wardRule? }. wardRule, when the level reaches the level-2 tier and it lists "nurse"
- * (the ward-team slot): { rule, source, key?, configured?, ward, counts: {group: n} }.
+ * dutyStatuses?() -> {statuses: [{identity, status, unit, expiresAt}]}, wards?() -> [{name, departmentId}] }. Returns
+ * { recipients, reason?, why?, unit, location: {ward, bed}, sources, wardRule? }. wardRule, when the level reaches the
+ * level-2 tier and it lists "nurse" (the ward-team slot): { rule, source, key?, configured?, ward, counts: {group: n} };
+ * for a patient with no ward, at any level that asks who is on duty: { rule: NO_WARD_RULE, ward: null, noWardCover }.
  */
 async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers) {
   const lv = LEVELS.includes(level) ? level : "due";
@@ -179,7 +222,7 @@ async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers)
     orderer = str(sr && sr.requesterId);
   }
   const encounter = loop && loop.encounterId ? await readers.latest("Encounter", loop.encounterId) : null;
-  // A patient whose ward is unknown is covered by everyone on duty in the hospital, not by nobody.
+  // A patient whose ward is unknown is covered by the admitting doctor and the residents on duty (noWardCover), not by nobody.
   const unit = str(encounter && encounter.location && encounter.location.ward);
 
   /* "nurse" on the level-2 tier is the ward-team slot, decided by the hospital's named rule (level2WardRecipients);
@@ -193,12 +236,21 @@ async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers)
     const active = new Map((members || []).filter((m) => m && m.active !== false).map((m) => [str(m.identity), str(m.role)]));
     const duty = ((await readers.onDuty(unit)) || {}).onDuty || [];
     const ctx = { unit, active, duty, statuses, nowMs: now };
-    onDuty = onDutyNow(ctx).map((a) => a.identity).filter((id) => roles.has(active.get(id)));
-    if (level2) {
-      const r = level2WardRuleOf(policy);
-      const team = level2WardRecipients(r.rule, ctx);
-      wardRule = { rule: r.rule, source: r.source, ...(r.key ? { key: r.key } : {}), ...(r.configured ? { configured: r.configured } : {}), ward: unit || null, counts: countsByGroup(r.rule, team) };
-      onDuty = [...new Set([...onDuty, ...team.map((a) => a.identity)])];
+    if (!unit) {
+      // No ward recorded (owner 2026-09-15): the admitting doctor and the residents on duty, and nobody else on duty.
+      const admittingId = str(encounter && encounter.attendingId);
+      const scoped = (members || []).some((m) => m && str(m.identity) === admittingId && m.scope && (list(m.scope.departments) || []).length);
+      const nw = noWardCover({ ...ctx, members, admittingId, wards: scoped && readers.wards ? (await readers.wards()) || [] : [] });
+      onDuty = nw.people.map((p) => p.identity);
+      wardRule = { rule: NO_WARD_RULE, ward: null, noWardCover: nw.cover };
+    } else {
+      onDuty = onDutyNow(ctx).map((a) => a.identity).filter((id) => roles.has(active.get(id)));
+      if (level2) {
+        const r = level2WardRuleOf(policy);
+        const team = level2WardRecipients(r.rule, ctx);
+        wardRule = { rule: r.rule, source: r.source, ...(r.key ? { key: r.key } : {}), ...(r.configured ? { configured: r.configured } : {}), ward: unit, counts: countsByGroup(r.rule, team) };
+        onDuty = [...new Set([...onDuty, ...team.map((a) => a.identity)])];
+      }
     }
   }
   // The ordering clinician is told by name, but not while they have marked themselves off duty (owner 2026-09-15).
@@ -208,7 +260,7 @@ async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers)
   const ids = [...new Set([...(orderer ? [orderer] : []), ...onDuty, ...contacts])];
   return {
     recipients: ids.map((id) => `${orgId}~${id}`),
-    ...(ids.length ? {} : { reason: "NO_RECIPIENT" }),
+    ...(ids.length ? {} : { reason: "NO_RECIPIENT", ...(wardRule && wardRule.noWardCover ? { why: noWardWhy(wardRule.noWardCover) } : {}) }),
     unit: unit || null,
     location: { ward: unit || null, bed: str(encounter && encounter.location && encounter.location.bed) || null },
     sources: { orderer: orderer || null, onDuty: onDuty.length, contacts: contacts.length },
@@ -216,4 +268,4 @@ async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers)
   };
 }
 
-export { LEVELS, DEFAULT_LEVELS, LEVEL2_WARD_RULES, WARD_TEAM_ROLES, WARD_TEAM_GROUPS, wardTeamGroupOf, levelsFor, nextLevel, level2WardRuleOf, level2WardRuleRefusal, onDutyNow, level2WardRecipients, countsByGroup, wardAlertCover, resolveRecipients };
+export { LEVELS, DEFAULT_LEVELS, LEVEL2_WARD_RULES, NO_WARD_RULE, noWardCover, noWardWhy, WARD_TEAM_ROLES, WARD_TEAM_GROUPS, wardTeamGroupOf, levelsFor, nextLevel, level2WardRuleOf, level2WardRuleRefusal, onDutyNow, level2WardRecipients, countsByGroup, wardAlertCover, resolveRecipients };

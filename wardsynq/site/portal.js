@@ -28,7 +28,7 @@
   var KEY = "wsqPortalSession";
   var LANG_KEY = "wsqPortalLang";
   // Cache token for wardsynq/site/i18n/<code>.js. Bump it (here, not in the language files) when translations merge.
-  var LANG_FILES_V = 3;
+  var LANG_FILES_V = 18;
   function tr(key, vars) {
     var I = typeof window !== "undefined" && window.WSQI18n, lang = "en";
     try { lang = document.documentElement.lang || "en"; } catch (e) {}

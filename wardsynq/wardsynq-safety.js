@@ -131,7 +131,8 @@ function resolveGeneric(text, pack) {
  *     allergyClasses: { <classTag>: [member generic, ...] },
  *     crossReactivity: [ {id, groups:[classTag, classTag], likelihood, note, disposition?} ],
  *     doseLimits: { <generic>: {maxSingle:{value,unit}, maxDaily:{value,unit},
- *                               mgPerKgSingle?, mgPerKgDaily?, absoluteCeilingSingle?} },
+ *                               mgPerKgSingle?, mgPerKgUpToKg?, absoluteCeilingSingle?,
+ *                               absoluteCeilingDaily?} },
  *     renalAdjustments: { <generic>: { <band>: {dose, note} } }
  *   }
  */
@@ -428,7 +429,7 @@ function isSevereReaction(allergy) {
  * that fires only among drugs the patient is already on is not caused by this order, and is
  * reported as pre-existing rather than blocking a new dose).
  */
-function checkInteractions(pack, order, activeMeds) {
+function checkInteractions(pack, order, activeMeds, opts) {
   const out = [];
   // Every molecule in the ordered product counts as ordered: a combination interacts through each
   // of its components, and the rule candidate set is a Set, so no rule can fire twice for this.
@@ -453,7 +454,7 @@ function checkInteractions(pack, order, activeMeds) {
 
   for (const rule of candidates) {
     const assignment = isDuplicationRule(rule)
-      ? satisfyDuplicationRule(rule, enriched)
+      ? satisfyDuplicationRule(rule, enriched, opts && opts.sameDrugChecked)
       : satisfyRule(rule, enriched);
     if (!assignment) continue;
     if (!assignment.some((e) => e.isOrdered)) continue; // pre-existing, not caused by this order
@@ -554,9 +555,12 @@ function isDuplicationRule(rule) {
  * when at least two do. Returns all of them, so the finding can name the drugs that actually
  * overlap rather than just the one being ordered.
  */
-function satisfyDuplicationRule(rule, entries) {
+function satisfyDuplicationRule(rule, entries, distinctOnly) {
   const subject = rule.subjects[0];
   const matches = entries.filter((e) => (subject.kind === "generic" ? e.generic === subject.value : e.tokens.has(subject.value)));
+  /* When the same-drug check runs, the same molecule twice is ITS finding (SAME_DRUG_ACTIVE); a class rule
+   * saying "stacking CNS depressants" about two paracetamol orders would be the same fact twice, worded wrong. */
+  if (distinctOnly && new Set(matches.map((e) => e.generic)).size < 2) return null;
   return matches.length >= 2 ? matches : null;
 }
 
@@ -625,10 +629,21 @@ function checkDose(pack, order, clinical) {
       { generic, limit: limits.maxSingle, given: dose }));
   }
 
+  /* LT-10 (live test 2026-09-15): paracetamol 1 g for a 62 kg adult was a hard stop, "15 mg/kg x 62 kg
+   * = 930 mg". 15 mg/kg is the CHILD's dose; above 50 kg the adult dose applies. A limit that is only
+   * weight-based up to some weight says so with mgPerKgUpToKg, and a patient heavier than that is held
+   * to the adult limits above instead. A limit without it (gentamicin) is weight-based at every weight. */
   const perKg = limits.mgPerKgSingle;
-  if (perKg && lower(dose.unit) === "mg") {
-    const weight = typeof clinical.weightKg === "number" ? clinical.weightKg : null;
-    if (weight === null) {
+  const weight = typeof clinical.weightKg === "number" ? clinical.weightKg : null;
+  const upToKg = typeof limits.mgPerKgUpToKg === "number" ? limits.mgPerKgUpToKg : null;
+  if (perKg && lower(dose.unit) === "mg" && !(upToKg !== null && weight !== null && weight > upToKg)) {
+    if (weight === null && upToKg !== null && typeof clinical.ageYears === "number" && clinical.ageYears >= 18) {
+      // A known adult with no weight: the adult limits above still ran, and the small-adult mg/kg dose
+      // is said rather than turned into a stop on every adult order.
+      out.push(finding("DOSE_WEIGHT_MISSING", DISPOSITION.WARN, SEVERITY.MODERATE,
+        `No weight is recorded for this adult. Up to ${upToKg} kg ${order.drug} is dosed at ${perKg} mg/kg; record a weight to check it.`,
+        { generic, mgPerKgSingle: perKg, mgPerKgUpToKg: upToKg }));
+    } else if (weight === null) {
       out.push(finding("DOSE_WEIGHT_MISSING", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
         `${order.drug} is dosed by weight and this patient has no recorded weight, so the mg/kg ceiling cannot be checked.`,
         { generic, mgPerKgSingle: perKg }));
@@ -643,6 +658,94 @@ function checkDose(pack, order, clinical) {
           `${dose.value} mg exceeds the weight-based ceiling for ${order.drug} (${perKg} mg/kg x ${weight} kg = ${ceiling} mg${effective === adultCap ? `, capped at the adult maximum ${adultCap} mg` : ""}).`,
           { generic, mgPerKgSingle: perKg, weightKg: weight, ceiling: effective, given: dose }));
       }
+    }
+  }
+
+  /* The day's total, when the order's frequency gives a count. 1 g four times a day is the adult
+   * paracetamol maximum; 1 g every four hours is 6 g a day, and no single dose on that order looks
+   * wrong. PRN or no frequency: nothing to multiply, so no daily finding. */
+  const perDay = dosesPerDay(order.frequency);
+  if (perDay) {
+    const daily = { value: dose.value * perDay, unit: dose.unit };
+    if (limits.absoluteCeilingDaily && sameUnit(daily, limits.absoluteCeilingDaily) && daily.value > limits.absoluteCeilingDaily.value) {
+      out.push(finding("DOSE_ABSOLUTE_CEILING_DAILY", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
+        `${dose.value} ${dose.unit} ${order.frequency} is ${daily.value} ${dose.unit} a day, above the daily ceiling for ${order.drug} (${limits.absoluteCeilingDaily.value} ${limits.absoluteCeilingDaily.unit}).`,
+        { generic, limit: limits.absoluteCeilingDaily, given: daily, dosesPerDay: perDay }));
+    } else if (limits.maxDaily && sameUnit(daily, limits.maxDaily) && daily.value > limits.maxDaily.value) {
+      out.push(finding("DOSE_ABOVE_MAX_DAILY", DISPOSITION.OVERRIDABLE, SEVERITY.MAJOR,
+        `${dose.value} ${dose.unit} ${order.frequency} is ${daily.value} ${dose.unit} a day, above the recommended daily maximum for ${order.drug} (${limits.maxDaily.value} ${limits.maxDaily.unit}).`,
+        { generic, limit: limits.maxDaily, given: daily, dosesPerDay: perDay }));
+    }
+  }
+  return out;
+}
+
+/* Doses a day from the frequency as written, or null when it gives no count (PRN, blank, or not
+ * understood). The same reading as parseFrequency() in functions/_wardsynq/mar-schedule.js, which
+ * schedules the round; this file runs in the browser and cannot import that one, so
+ * test/wardsynq-safety.test.mjs pins the two together. */
+const DOSES_PER_DAY = Object.freeze({
+  OD: 1, QD: 1, DAILY: 1, ONCEDAILY: 1, ONCEADAY: 1, "1ID": 1, OM: 1, MANE: 1, MORNING: 1,
+  HS: 1, ON: 1, NOCTE: 1, ATNIGHT: 1, BEDTIME: 1, ATBEDTIME: 1, STAT: 1, ONCE: 1, ONCEONLY: 1, IMMEDIATELY: 1,
+  BD: 2, BID: 2, TWICEDAILY: 2, TWICEADAY: 2,
+  TDS: 3, TID: 3, THRICEDAILY: 3, THREETIMESADAY: 3,
+  QID: 4, QDS: 4, FOURTIMESADAY: 4,
+});
+function dosesPerDay(freq) {
+  const norm = String(freq == null ? "" : freq).toUpperCase().replace(/[\s.–—]/g, "");
+  if (!norm) return null;
+  if (/^\d(-\d){2,3}$/.test(norm)) return norm.split("-").filter((n) => Number(n) > 0).length || null;
+  const q = /^Q(\d{1,2})H$/.exec(norm);
+  if (q) { const h = Number(q[1]); return h && h <= 24 ? 24 / h : null; }
+  return Object.prototype.hasOwnProperty.call(DOSES_PER_DAY, norm) ? DOSES_PER_DAY[norm] : null;
+}
+
+/* Mass units the order forms offer, in mg. A second order written in g must not drop out of a sum in mg. */
+const MG_PER = Object.freeze({ mcg: 0.001, ug: 0.001, mg: 1, g: 1000 });
+const inMg = (value, unit) => (Object.prototype.hasOwnProperty.call(MG_PER, lower(unit)) ? value * MG_PER[lower(unit)] : null);
+
+/**
+ * The same drug twice. HAZ-MED-03, across orders (retest 2026-09-16: a second paracetamol 1 g QDS on top of
+ * an active one came back with no finding, 8 g a day). checkDose() sees one order; this sees the patient's
+ * OTHER active orders of the same molecule, so it needs their dose and frequency (`activeMeds[].dose`,
+ * `.frequency`). The caller excludes the order being replaced: prescribing the same order again is a new
+ * version of it, not a second one.
+ *  - SAME_DRUG_ACTIVE, overridable: the molecule is already active (PRN with regular is a real reason).
+ *  - DOSE_ABSOLUTE_CEILING_CUMULATIVE, block: this order's day plus the other single-molecule orders' days
+ *    is above the daily ceiling. A combination product's dose is not one molecule's, and a PRN or unread
+ *    frequency has no day, so neither is summed; the SAME_DRUG_ACTIVE message says what was left out.
+ * Opt-in (checks: "same-drug"): only order entry passes active orders with doses.
+ */
+function checkSameDrug(pack, order, activeMeds) {
+  const out = [];
+  const ordered = resolveComponents(order.drugCode || order.drug, pack);
+  if (!ordered.length) return out;
+  for (const generic of ordered) {
+    const same = (activeMeds || []).filter((m) => m && resolveComponents(m.drugCode || m.drug, pack).includes(generic));
+    if (!same.length) continue;
+    const limits = pack.doseLimits.get(generic) || {};
+    const ceiling = limits.absoluteCeilingDaily ? inMg(limits.absoluteCeilingDaily.value, limits.absoluteCeilingDaily.unit) : null;
+    const dayOf = (o) => {
+      const d = o && o.dose, perDay = dosesPerDay(o && o.frequency);
+      if (!d || typeof d.value !== "number" || !perDay || resolveComponents(o.drugCode || o.drug, pack).length !== 1) return null;
+      const mg = inMg(d.value, d.unit);
+      return mg === null ? null : mg * perDay;
+    };
+    const sig = (m) => [m.drug, m.dose && typeof m.dose.value === "number" ? `${m.dose.value} ${m.dose.unit || ""}`.trim() : "", m.frequency].filter(Boolean).join(" ");
+    const uncounted = same.filter((m) => dayOf(m) === null);
+    out.push(finding("SAME_DRUG_ACTIVE", DISPOSITION.OVERRIDABLE, SEVERITY.MAJOR,
+      `${generic.charAt(0).toUpperCase() + generic.slice(1)} is already active for this patient (${same.map(sig).join("; ")}). This order would be given as well as ${same.length === 1 ? "that one" : "those"}.`
+        + (ceiling !== null && uncounted.length ? ` Not in the daily total: ${uncounted.map(sig).join("; ")} (no daily count).` : ""),
+      { generic, drugs: same.map((m) => m.drug) }));
+    const mine = dayOf(order);
+    if (ceiling === null || mine === null) continue;
+    const others = same.map(dayOf).filter((v) => v !== null);
+    if (!others.length) continue;
+    const total = mine + others.reduce((a, b) => a + b, 0);
+    if (total > ceiling) {
+      out.push(finding("DOSE_ABSOLUTE_CEILING_CUMULATIVE", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
+        `With the ${generic} already active, this order makes ${total} mg a day, above the daily ceiling for ${generic} (${limits.absoluteCeilingDaily.value} ${limits.absoluteCeilingDaily.unit}).`,
+        { generic, limit: limits.absoluteCeilingDaily, given: { value: total, unit: "mg" } }));
     }
   }
   return out;
@@ -719,13 +822,15 @@ class SafetyEngine {
     const clinical = {
       weightKg: typeof ctx.weightKg === "number" ? ctx.weightKg : (patient && patient.weightKg),
       egfr: typeof ctx.egfr === "number" ? ctx.egfr : (patient && patient.egfr),
+      ageYears: typeof ctx.ageYears === "number" ? ctx.ageYears : (patient && patient.ageYears),
     };
 
     let findings = [];
     if (this.checks.includes("allergy")) findings = findings.concat(checkAllergies(this.rulePack, order, allergies || []));
-    if (this.checks.includes("interaction")) findings = findings.concat(checkInteractions(this.rulePack, order, activeMeds || []));
+    if (this.checks.includes("interaction")) findings = findings.concat(checkInteractions(this.rulePack, order, activeMeds || [], { sameDrugChecked: this.checks.includes("same-drug") }));
     if (this.checks.includes("dose")) findings = findings.concat(checkDose(this.rulePack, order, clinical));
     if (this.checks.includes("renal")) findings = findings.concat(checkRenal(this.rulePack, order, clinical));
+    if (this.checks.includes("same-drug")) findings = findings.concat(checkSameDrug(this.rulePack, order, activeMeds || []));
 
     // An override clears exactly one overridable finding, matched by code and, where the finding
     // names one, its rule/allergy id. It can never clear a block: that is what Category 1 means.
@@ -819,6 +924,6 @@ export {
   SEVERITY, SEVERITY_ORDER, DISPOSITION, NON_OVERRIDABLE_REACTIONS,
   SafetyEngine, SafetyEngineError,
   compileRulePack, emptyRulePack, defaultDisposition,
-  checkAllergies, checkInteractions, checkDose, checkRenal, collapseDuplicateFindings,
+  checkAllergies, checkInteractions, checkDose, checkRenal, checkSameDrug, collapseDuplicateFindings, dosesPerDay,
   resolveGeneric, resolveComponents, renalBand, isSevereReaction, satisfyRule, satisfyDuplicationRule, isDuplicationRule,
 };

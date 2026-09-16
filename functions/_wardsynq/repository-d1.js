@@ -552,9 +552,18 @@ class D1Repository {
     return { seq };
   }
 
-  async changes(tenantId, sinceSeq, limit) {
+  async changes(tenantId, sinceSeq, limit, opts) {
     const since = Number(sinceSeq) || 0;
     const max = Math.max(1, Math.min(500, Number(limit) || 100));
+    // Newest first, below a cursor: the audit list a person reads (LT-37). The sync feed below is unchanged.
+    if (opts && opts.newest) {
+      const before = Number(opts.before) > 0 ? Number(opts.before) : Number.MAX_SAFE_INTEGER;
+      const d = await this.db
+        .prepare("SELECT seq, body FROM wardsynq_record WHERE tenant_id=? AND seq<? ORDER BY seq DESC LIMIT ?")
+        .bind(tenantId, before, max).all();
+      const rows = d.results || [];
+      return { records: rows.map((row) => ({ seq: row.seq, ...parseBody(row) })), cursor: rows.length ? rows[rows.length - 1].seq : null };
+    }
     const r = await this.db
       .prepare("SELECT seq, body FROM wardsynq_record WHERE tenant_id=? AND seq>? ORDER BY seq ASC LIMIT ?")
       .bind(tenantId, since, max).all();
@@ -575,6 +584,12 @@ class D1Repository {
   async auditOnly(tenantId, event) {
     const row = this._auditRow(tenantId, event);
     await this._batchWithChain(tenantId, [this._auditStatement(row)], [row]);
+  }
+
+  /** OPTIONAL (repository.js bufferReadAudits): many read rows and their chain links in ONE batch. */
+  async auditMany(tenantId, events) {
+    const rows = (events || []).map((e) => this._auditRow(tenantId, e));
+    if (rows.length) await this._batchWithChain(tenantId, rows.map((row) => this._auditStatement(row)), rows);
   }
 
   /**

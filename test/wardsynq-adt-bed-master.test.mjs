@@ -201,7 +201,7 @@ test("DISCHARGE: vacates the master bed", async () => {
   assert.equal(adm.__status, 200, JSON.stringify(adm));
   assert.equal((await ORG_STORE.getBed(undefined, bed.id)).state, "occupied");
 
-  const disch = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home" });
+  const disch = await as(DOCTOR, "/ward/discharge", "POST", { orgId: ORG, encounterId: adm.encounterId, disposition: "home", billDeferredReason: "Billed separately in this test", overrideReason: "Open items accepted in this test" });
   assert.equal(disch.__status, 200, JSON.stringify(disch));
   assert.equal((await ORG_STORE.getBed(undefined, bed.id)).state, "available", "discharge frees the master bed");
 });
@@ -222,6 +222,62 @@ test("BED BOARD: reads real master occupancy/state once a hospital has any, not 
   assert.deepEqual(medicalA.occupied.map((o) => o.bed), ["1"]);
   // Bed 2 is in maintenance in the MASTER record, with nobody in it - it must NOT read as free.
   assert.deepEqual(medicalA.free, [], "a maintenance bed with no patient in it is still not free");
+});
+
+test("BED BOARD (BUG-MU06Z46U-DMDX, BUG-MU08T4RL-GU0N): GET /api/queue/ward/beds names each ward's department from the hospital's own master data", async () => {
+  seedHospital();
+  const cardio = await ORG_STORE.createDepartment(undefined, ORG, { name: "Cardiology" }, "actor-1");
+  const w1 = await ORG_STORE.createWard(undefined, ORG, { name: "CCU", departmentId: cardio.id }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w1.id, name: "1" }, "actor-1");
+  const w2 = await ORG_STORE.createWard(undefined, ORG, { name: "General A" }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w2.id, name: "1" }, "actor-1");
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  assert.equal(board.__status, 200, JSON.stringify(board));
+  assert.equal(board.wards.find((x) => x.ward === "CCU").department, "Cardiology");
+  assert.equal(board.wards.find((x) => x.ward === "General A").department, null, "a ward with no department is not given one");
+});
+
+test("WARD LIST (BUG-MU0710W4-04KD): GET /api/queue/ward/list names each patient's department from the ward's master data", async () => {
+  seedHospital();
+  const cardio = await ORG_STORE.createDepartment(undefined, ORG, { name: "Cardiology" }, "actor-1");
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "CCU", departmentId: cardio.id }, "actor-1");
+  await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "1" }, "actor-1");
+  const { adm } = await registerAndAdmit("CCU", "1");
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+  const list = await as(DOCTOR, `/ward/list?orgId=${ORG}`);
+  assert.equal(list.__status, 200, JSON.stringify(list));
+  assert.equal(list.patients.find((p) => p.ward === "CCU").department, "Cardiology");
+});
+
+test("RETIRE A BED (BUG-MU072XAL-4EHO): POST /api/queue/bed/update active:false - staff.admin only, this hospital only, never with a patient in it", async () => {
+  seedHospital();
+  const w = await ORG_STORE.createWard(undefined, ORG, { name: "Medical A" }, "actor-1");
+  const free = await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "1" }, "actor-1");
+  const busy = await ORG_STORE.createBed(undefined, ORG, { wardId: w.id, name: "2" }, "actor-1");
+  const { adm } = await registerAndAdmit("Medical A", "2");
+  assert.equal(adm.__status, 200, JSON.stringify(adm));
+
+  const anon = await onRequest({ request: new Request("https://x/api/queue/bed/update", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orgId: ORG, bedId: free.id, active: false }) }), env: ENV });
+  assert.equal(anon.status, 401);
+  const doctor = await as(DOCTOR, "/bed/update", "POST", { orgId: ORG, bedId: free.id, active: false });
+  assert.equal(doctor.__status, 403, JSON.stringify(doctor));
+  assert.equal((await ORG_STORE.getBed(undefined, free.id)).active, true, "a refused retire changed the bed");
+
+  const other = await ORG_STORE.createBed(undefined, "org-other", { wardId: "w-other", name: "9" }, "actor-9");
+  const cross = await as(ADMIN, "/bed/update", "POST", { orgId: ORG, bedId: other.id, active: false });
+  assert.equal(cross.__status, 404, JSON.stringify(cross));
+  assert.equal((await ORG_STORE.getBed(undefined, other.id)).active, true);
+
+  const occupied = await as(ADMIN, "/bed/update", "POST", { orgId: ORG, bedId: busy.id, active: false });
+  assert.equal(occupied.__status, 409, JSON.stringify(occupied));
+  assert.equal(occupied.error, "bed_occupied");
+  assert.equal((await ORG_STORE.getBed(undefined, busy.id)).active, true);
+
+  const ok = await as(ADMIN, "/bed/update", "POST", { orgId: ORG, bedId: free.id, active: false });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal((await ORG_STORE.getBed(undefined, free.id)).active, false);
+  const board = await as(DOCTOR, `/ward/beds?orgId=${ORG}`);
+  assert.deepEqual(board.wards.find((x) => x.ward === "Medical A").free, [], "a retired bed is still offered as free");
 });
 
 /* TASK 4.15's emergency-mode.js declares "bed-assignment-conflict-override" as a real relaxation.

@@ -35,6 +35,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { priorityRank } from "./ward-order.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 // The SAME wristband comparator wardsynq-meds.js's five-rights scan already uses (HAZ-MED-04) and
@@ -45,6 +46,8 @@ const TYPE = "SpecimenCollection";
 const STATES = Object.freeze(["collected", "received", "failed"]);
 /** The ones where somebody is still waiting on a sample. `failed` is outstanding: it needs redoing. */
 const OUTSTANDING = Object.freeze(["collected", "failed"]);
+/** Order categories (ward-order.js CATEGORIES) that are acquired, performed or referred, never collected. */
+const NO_SPECIMEN_CATEGORIES = Object.freeze(["imaging", "procedure", "referral"]);
 
 function SpecimenCollection(input) {
   const i = input || {};
@@ -118,7 +121,7 @@ function collectionState(specimens) {
   if (received) return { state: "received", at: received.receivedAt, specimenId: received.id };
   const collected = rows.filter((s) => s.state === "collected")
     .sort((a, b) => String(b.collectedAt || "").localeCompare(String(a.collectedAt || "")))[0];
-  if (collected) return { state: "collected", at: collected.collectedAt, specimenId: collected.id };
+  if (collected) return { state: "collected", at: collected.collectedAt, by: collected.collectedBy || null, specimenId: collected.id };
   /* Every attempt failed. This is the state that must never read as "in progress": the order needs
    * doing again and nobody is going to be told by a result arriving. */
   const failed = rows.sort((a, b) => String(b.failedAt || "").localeCompare(String(a.failedAt || "")))[0];
@@ -186,6 +189,12 @@ async function collectSpecimen(request, env, ctx) {
   if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
   if (sr.status === "revoked" || sr.status === "completed") {
     return { ...base, ok: false, status: 409, error: "request_not_open", detail: `this request is ${sr.status}`, serviceRequestId, written: 0 };
+  }
+  // BUG-MU2PR8I2: an imaging study, a procedure or a referral has no sample. A "collected" chest X-ray
+  // would put an accession number on the laboratory's board for a tube that does not exist. Read from
+  // the order's own category, never its name. LT-15: a catalogued imaging test filed as laboratory reads as imaging.
+  if (NO_SPECIMEN_CATEGORIES.includes(effectiveCategory(sr))) {
+    return { ...base, ok: false, status: 409, error: "not_a_specimen_order", detail: `this is a ${effectiveCategory(sr)} order; there is no sample to collect`, serviceRequestId, written: 0 };
   }
 
   const scanned = str(ctx.scannedPatientBarcode);
@@ -334,7 +343,7 @@ async function collectionList(request, env, ctx) {
     // An order another hospital placed is on this chart for the record, not for this ward's phlebotomist.
     .filter((o) => o && o.status !== "revoked" && o.status !== "completed" && !isExternalRecord(o))
     .map((o) => ({
-      serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: o.category || null,
+      serviceRequestId: o.id, code: o.code, display: o.display || o.code, category: (o.category || effectiveCategory(o) === "imaging") ? effectiveCategory(o) : null,
       // Carried so a hospital-wide caller can say WHOSE specimen this is. Harmless per-patient
       // (the caller already knows), and the one thing a department board cannot work without.
       patientId: o.patientId || null,
@@ -360,4 +369,4 @@ async function collectionList(request, env, ctx) {
   };
 }
 
-export { TYPE, STATES, OUTSTANDING, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };
+export { TYPE, STATES, OUTSTANDING, NO_SPECIMEN_CATEGORIES, SpecimenCollection, specimenIdFor, accessionNumberFor, isOutstanding, collectionState, collectSpecimen, specimenOutcome, collectionList };

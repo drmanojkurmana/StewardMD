@@ -101,20 +101,22 @@ test("Admin card: shows the sign-off and what is missing, and saves exactly the 
   sb.WSQ = sb.window.WSQ;
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
-  assert.match(C.html(esc, null), /Loading/);
-  assert.match(C.html(esc, false), /could not be loaded/);
+  const c = { esc };
+  assert.match(C.html(c, null), /Loading/);
+  assert.match(C.html(c, false), /could not be loaded/);
   const status = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: { acknowledgeWithinMinutes: 30, escalateAfterMinutes: 60 },
     failures: [{ loopId: "wsq-crit-x", level: "due", at: "2026-09-14T10:00:00Z", reason: "NO_RECIPIENT" }], noDevice: [{ identity: "o~nurse1", times: 2 }],
     sms: { ready: false, missing: ["This hospital's DLT template name for critical-result SMS is not set."], senderId: "", templateName: "" } };
-  const html = C.html(esc, status);
-  assert.match(html, /approved by Dr Manoj Kurmana on 2026-09-14 \(owner decision O5\)/);
+  const html = C.html(c, status);
+  assert.match(html, /approved by Dr Manoj Kurmana on 2026-09-14/);
+  assert.ok(!/owner decision/.test(html), "internal decision references are not shown in Admin Center (LT-35)");
   assert.match(html, /id="alEnabled" checked/);
   assert.match(html, /SMS fallback is not configured/);
   assert.match(html, /template name for critical-result SMS is not set/);
   assert.match(html, /nobody could be found to tell/);
   assert.match(html, /o~nurse1/);
   assert.doesNotMatch(html, /UNAPPROVED|—/);
-  const out = C.read({ enabled: true, senderId: " WSQHSP ", templateName: "WSQ_CRITICAL", escalation: { acknowledgeWithinMinutes: 20 },
+  const out = C.read(c, { enabled: true, senderId: " WSQHSP ", templateName: "WSQ_CRITICAL", escalation: { acknowledgeWithinMinutes: 20 },
     levels: { due: { orderer: true, roles: ["doctor"], contactsText: "" }, overdue: { orderer: true, roles: ["supervisor"], contactsText: "" }, escalate: { orderer: false, roles: [], contactsText: "cmo@h.in\n\n" } } });
   const w = JSON.parse(JSON.stringify(out.wardsynq));
   assert.deepEqual(w.alerts, { push: { enabled: true }, sms: { provider: "twofactor", senderId: "WSQHSP", templateName: "WSQ_CRITICAL" } });
@@ -163,18 +165,19 @@ test("Admin card: phones now, from the registrations; a failed read is never sho
   sb.WSQ = sb.window.WSQ;
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
+  const c = { esc };
   const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true } };
-  const some = C.html(esc, { ...base, phones: { ok: true, checked: 3, noDevice: [{ identity: "nurse7", role: "nurse", why: "on duty" }, { identity: "cmo@h.in", role: null, why: "named contact" }] } });
+  const some = C.html(c, { ...base, phones: { ok: true, checked: 3, noDevice: [{ identity: "nurse7", role: "nurse", why: "on duty" }, { identity: "cmo@h.in", role: null, why: "named contact" }] } });
   assert.match(some, /No phone registered for alerts \(2 of 3\)/);
   assert.match(some, /nurse7 \(on duty, nurse\)/);
   assert.match(some, /cmo@h.in \(named contact\)/);
-  assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 3, noDevice: [] } }), /All 3 people on duty/);
+  assert.match(C.html(c, { ...base, phones: { ok: true, checked: 3, noDevice: [] } }), /All 3 people on duty/);
   for (const p of [{ ok: false, error: "read_failed" }, undefined]) {
-    const h = C.html(esc, { ...base, phones: p });
+    const h = C.html(c, { ...base, phones: p });
     assert.match(h, /could not be read/);
     assert.doesNotMatch(h, /have a phone registered\./);
   }
-  assert.match(C.html(esc, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
+  assert.match(C.html(c, { ...base, phones: { ok: true, checked: 0, noDevice: [] } }), /nobody to check/);
 });
 
 /* Owner decision 2026-09-15: level 2 tells the WARD TEAM on duty now (nurses, residents, consultants) by a named rule
@@ -259,17 +262,103 @@ test("resolveRecipients at level 2: the record keeps the rule, source, ward and 
   assert.deepEqual([nurseOnly.wardRule.rule, nurseOnly.wardRule.key, nurseOnly.wardRule.counts], ["all-on-duty-nurses-in-ward", "level2NurseRule", { nurse: 1 }]);
 });
 
-test("level 2 with nobody on duty in the ward is NO_RECIPIENT with zero counts; a patient with no ward keeps hospital-wide cover and records ward null", async () => {
+test("level 2 with nobody on duty in the ward is NO_RECIPIENT with zero counts", async () => {
   const empty = { ...readers(), onDuty: async () => ({ onDuty: [{ identity: "nurse", unit: "Surgical B" }] }), dutyStatuses: async () => ({ statuses: [] }) };
   const policy = { levels: { due: { orderer: false, roles: [] }, overdue: { orderer: false, roles: ["nurse"] } } };
   const r = await resolveRecipients({ orgId: "o", loop, level: "overdue", policy }, empty);
-  assert.deepEqual([r.recipients, r.reason], [[], "NO_RECIPIENT"]);
+  assert.deepEqual([r.recipients, r.reason, r.why], [[], "NO_RECIPIENT", undefined]);
   assert.deepEqual(r.wardRule.counts, { nurse: 0, resident: 0, consultant: 0 });
+});
+
+/* Owner decision 2026-09-15: a patient with NO WARD recorded alerts the doctor the patient is admitted under
+ * (Encounter.attendingId) and the residents on duty, replacing hospital-wide on-duty cover. One case per condition. */
+const NW = {
+  records: {
+    "Encounter/nw": { location: { ward: null, bed: null }, attendingId: "adm" },
+    "Encounter/nw-unscoped": { location: {}, attendingId: "adm2" },
+    "Encounter/nw-nodoc": { location: {} },
+  },
+  members: [
+    { identity: "adm", role: "doctor", scope: { departments: ["cardio"] } }, { identity: "adm2", role: "doctor", scope: { departments: [] } },
+    { identity: "resC", role: "resident", scope: { departments: ["cardio"] } }, { identity: "pgWard", role: "pg_resident", scope: { departments: [] } },
+    { identity: "resS", role: "resident", scope: { departments: ["surg"] } }, { identity: "resOff", role: "resident", scope: { departments: ["cardio"] } },
+    { identity: "resHome", role: "resident", scope: { departments: ["cardio"] } },
+    { identity: "nurseD", role: "nurse", scope: { departments: ["cardio"] } }, { identity: "cons2", role: "doctor", scope: { departments: ["cardio"] } },
+    { identity: "sup", role: "supervisor" },
+  ],
+  duty: [["resC", "Ward 1"], ["pgWard", "CCU"], ["resS", "Ward 2"], ["resOff", "Ward 1"], ["nurseD", "Ward 1"], ["cons2", "Ward 1"], ["sup", "Ward 1"]].map(([identity, unit]) => ({ identity, unit })),
+  wards: [{ name: "CCU", departmentId: "cardio" }, { name: "Ward 1", departmentId: null }, { name: "Ward 2", departmentId: "surg" }],
+};
+const nwReaders = ({ statuses = [], duty = NW.duty, seen } = {}) => ({
+  latest: async (t, id) => NW.records[t + "/" + id] || null,
+  members: async () => NW.members,
+  onDuty: async (unit) => { if (seen) seen.push(["onDuty", unit]); return { onDuty: duty }; },
+  dutyStatuses: async () => ({ statuses: [{ identity: "resOff", status: "off", unit: "", expiresAt: Date.now() + 3600000 }, ...statuses] }),
+  wards: async () => { if (seen) seen.push(["wards"]); return NW.wards; },
+});
+const nwLoop = (encounterId) => ({ id: "l-nw", encounterId });
+
+test("no ward: the admitting doctor is alerted, and the record names the rule, ward null and the cover", async () => {
+  const r = await resolveRecipients({ orgId: "o", loop: nwLoop("nw"), level: "overdue" }, nwReaders());
+  assert.ok(r.recipients.includes("o~adm"), "the doctor the patient is admitted under");
+  assert.deepEqual(r.wardRule, { rule: AR.NO_WARD_RULE, ward: null, noWardCover: { admittingDoctor: "adm", admittingSkipped: null, residentScope: "department", residents: 2 } });
+  assert.equal(r.reason, undefined);
+});
+
+test("no ward: an admitting doctor marked OFF duty is skipped, with why; an expired off does not skip", async () => {
+  const off = await resolveRecipients({ orgId: "o", loop: nwLoop("nw"), level: "due" }, nwReaders({ statuses: [{ identity: "adm", status: "off", unit: "", expiresAt: Date.now() + 3600000 }] }));
+  assert.ok(!off.recipients.includes("o~adm"));
+  assert.match(off.wardRule.noWardCover.admittingSkipped, /^marked off duty until \d{4}-/);
+  const expired = await resolveRecipients({ orgId: "o", loop: nwLoop("nw"), level: "due" }, nwReaders({ statuses: [{ identity: "adm", status: "off", unit: "", expiresAt: Date.now() - 1 }] }));
+  assert.ok(expired.recipients.includes("o~adm"));
+  assert.equal(expired.wardRule.noWardCover.admittingSkipped, null);
+});
+
+test("no ward, department known: residents on duty in it are alerted (by membership or by the ward they are on duty in); off duty and other departments are not", async () => {
   const seen = [];
-  const noWard = await resolveRecipients({ orgId: "o", loop: { id: "l3", reportId: "r1", encounterId: "missing" }, level: "overdue", policy }, { ...empty, onDuty: async (u) => { seen.push(u); return { onDuty: [{ identity: "nurse", unit: "Surgical B" }] }; } });
-  assert.deepEqual(seen, [""]);
-  assert.equal(noWard.wardRule.ward, null);
-  assert.deepEqual(noWard.recipients, ["o~nurse"], "hospital-wide cover, as before");
+  const r = await resolveRecipients({ orgId: "o", loop: nwLoop("nw"), level: "overdue" }, nwReaders({ seen }));
+  assert.ok(r.recipients.includes("o~resC"), "a resident on duty whose department is the admitting doctor's");
+  assert.ok(r.recipients.includes("o~pgWard"), "a PG resident on duty in a ward of that department");
+  assert.ok(!r.recipients.includes("o~resOff"), "a resident of the department marked off duty");
+  assert.ok(!r.recipients.includes("o~resHome"), "a resident of the department who is not on duty");
+  assert.ok(!r.recipients.includes("o~resS"), "a resident on duty in another department");
+  assert.equal(r.wardRule.noWardCover.residentScope, "department");
+  assert.deepEqual(seen, [["onDuty", ""], ["wards"]], "the whole hospital's rota, then the wards to map a ward to its department");
+});
+
+test("no ward, department not known: residents on duty anywhere in the hospital, recorded as hospital scope", async () => {
+  for (const enc of ["nw-unscoped", "nw-nodoc"]) {
+    const seen = [];
+    const r = await resolveRecipients({ orgId: "o", loop: nwLoop(enc), level: "overdue" }, nwReaders({ seen }));
+    assert.deepEqual(r.recipients.filter((x) => /res|pg/.test(x)).sort(), ["o~pgWard", "o~resC", "o~resS"], enc);
+    assert.equal(r.wardRule.noWardCover.residentScope, "hospital", enc);
+    assert.ok(!seen.some((x) => x[0] === "wards"), "no department to map wards to");
+  }
+});
+
+test("no ward: nurses, supervisors and consultants other than the admitting doctor on duty are NOT alerted, at any level", async () => {
+  for (const level of ["due", "overdue", "escalate"]) {
+    const r = await resolveRecipients({ orgId: "o", loop: nwLoop("nw"), level }, nwReaders());
+    for (const who of ["o~nurseD", "o~cons2", "o~sup"]) assert.ok(!r.recipients.includes(who), level + " " + who);
+    assert.deepEqual(r.recipients.sort(), ["o~adm", "o~pgWard", "o~resC"], level);
+  }
+});
+
+test("no ward, no admitting doctor, no resident on duty: NO_RECIPIENT, loud, with the reason; the push notice records it", async () => {
+  const r = await resolveRecipients({ orgId: "o", loop: nwLoop("nw-nodoc"), level: "overdue" }, nwReaders({ duty: NW.duty.filter((a) => !/res|pg/.test(a.identity)) }));
+  assert.deepEqual([r.recipients, r.reason, r.why], [[], "NO_RECIPIENT", "no ward, no admitting doctor, no resident on duty"]);
+  assert.deepEqual(r.wardRule.noWardCover, { admittingDoctor: null, admittingSkipped: null, residentScope: "hospital", residents: 0 });
+  const off = await resolveRecipients({ orgId: "o", loop: nwLoop("nw"), level: "due" }, nwReaders({ duty: [], statuses: [{ identity: "adm", status: "off", expiresAt: Date.now() + 60000 }] }));
+  assert.match(off.why, /^no ward, admitting doctor marked off duty until .*, no resident on duty in the admitting doctor's department$/);
+
+  const { serverPushChannel } = await import("../functions/_wardsynq/push-alerts.js");
+  const payload = { loopId: "l-nw", encounterId: "nw-nodoc", level: "overdue", notices: [] };
+  const ch = serverPushChannel({ orgId: "o", tenantId: "t", policy: null, readers: nwReaders({ duty: [] }), directory: { devicesFor: async () => [], putNotice: async () => {} }, sendToTokens: async () => ({ sent: 0, total: 0 }) });
+  const out = await ch(payload);
+  assert.equal(out.detail, "NO_RECIPIENT: no ward, no admitting doctor, no resident on duty");
+  const n = payload.notices[0];
+  assert.deepEqual([n.reason, n.why], ["NO_RECIPIENT", "no ward, no admitting doctor, no resident on duty"]);
+  assert.deepEqual(n.wardRule, { rule: AR.NO_WARD_RULE, ward: null, noWardCover: { admittingDoctor: null, admittingSkipped: null, residentScope: "hospital", residents: 0 }, recipients: 0 });
 });
 
 test("wardAlertCover: counts per role now, zeros named; dutyExpiry: end of the rostered shift, else 12 hours, never later", async () => {
@@ -291,14 +380,16 @@ test("screens: the Alerts card explains the ward rule; the ward board names who 
   vm.createContext(sb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/admin.js", import.meta.url), "utf8"), sb);
   const C = sb.window.WSQ._alertCard;
   const base = { ok: true, enabled: true, levels: levelsFor(null), defaults: DEFAULT_LEVELS, minutes: {}, failures: [], noDevice: [], sms: { ready: true }, phones: { ok: true, checked: 0, noDevice: [] } };
-  const html = C.html(esc0, { ...base, wardRule: AR.level2WardRuleOf(null) });
+  const html = C.html({ esc: esc0 }, { ...base, wardRule: AR.level2WardRuleOf(null) });
   assert.match(html, /Level 2 ward rule<\/dt><dd><span class="mono">all-on-duty-ward-team<\/span> <span class="quiet">\(default\)/);
   assert.match(html, /Every nurse, resident and consultant on duty now in the patient&#39;s ward/);
   assert.match(html, /off duty lasts until the end of their rostered shift, or 12 hours/);
-  assert.match(C.html(esc0, { ...base, wardRule: AR.level2WardRuleOf({ level2WardRule: "x" }) }), /saved rule "x" is not one this build has/);
-  assert.match(C.html(esc0, base), /level 2 ward rule could not be read/);
+  assert.match(html, /Patient with no ward recorded:<\/b> at every level the alert goes to the doctor the patient is admitted under, unless that doctor has marked themselves off duty, and to the residents on duty now in that doctor's department \(anywhere in the hospital when the department is not known\)/);
+  assert.match(html, /No nurse, supervisor or other consultant on duty is told/);
+  assert.match(C.html({ esc: esc0 }, { ...base, wardRule: AR.level2WardRuleOf({ level2WardRule: "x" }) }), /saved rule "x" is not one this build has/);
+  assert.match(C.html({ esc: esc0 }, base), /level 2 ward rule could not be read/);
   assert.doesNotMatch(html, /—/);
-  const out = C.read({ enabled: true, senderId: "", templateName: "", escalation: { level2NurseRule: "all-on-duty-nurses-in-ward" }, levels: {} });
+  const out = C.read({ esc: esc0 }, { enabled: true, senderId: "", templateName: "", escalation: { level2NurseRule: "all-on-duty-nurses-in-ward" }, levels: {} });
   assert.equal(out.wardsynq.criticalEscalation.level2NurseRule, "all-on-duty-nurses-in-ward", "the card's own save keeps a saved rule");
 
   const wsb = { navigator: { userAgent: "node" }, location: { hash: "", href: "" },
@@ -321,7 +412,16 @@ test("screens: the Alerts card explains the ward rule; the ward board names who 
   assert.match(list({ duty: { ok: true, status: null, rota: null, wards: ["Medical A"], hours: 12 } }), /Not on the rota now and not marked on duty/);
   const board = (wardRule) => W._render({ ...W._st, view: "critsboard", critsBoard: [{ loopId: "c1", patientId: "p1", display: "Potassium", value: 7.1, state: "open", escalation: { level: "overdue" }, notifications: [{ nid: "a", level: "overdue", sent: 1, wardRule }] }] });
   assert.match(board({ rule: "all-on-duty-ward-team", ward: "Medical A", counts: { nurse: 2, resident: 1, consultant: 1 } }), /Level 2 ward team on duty in Medical A: 2 nurses, 1 resident, 1 consultant/);
-  assert.match(board({ rule: "all-on-duty-ward-team", ward: null, counts: { nurse: 3, resident: 0, consultant: 1 } }), /<b>No ward recorded for this patient:<\/b> level 2 went to everyone on duty in the hospital/);
+  assert.match(board({ rule: "all-on-duty-ward-team", ward: null, counts: { nurse: 3, resident: 0, consultant: 1 } }), /<b>No ward recorded for this patient:<\/b> level 2 went to everyone on duty in the hospital/, "an older loop, recorded before the no-ward rule");
+  const nwb = board({ rule: AR.NO_WARD_RULE, ward: null, noWardCover: { admittingDoctor: "dr.rao", admittingSkipped: null, residentScope: "department", residents: 2 } });
+  assert.match(nwb, /<b>No ward recorded for this patient:<\/b> alerted the admitting doctor dr\.rao, and 2 residents on duty in the admitting doctor(&#39;|')s department/);
+  assert.doesNotMatch(nwb, /everyone on duty in the hospital/);
+  assert.match(board({ rule: AR.NO_WARD_RULE, ward: null, noWardCover: { admittingDoctor: "dr.rao", admittingSkipped: "marked off duty until 2026-09-15T14:30:00.000Z", residentScope: "hospital", residents: 1 } }),
+    /admitting doctor dr\.rao not alerted \(marked off duty until 2026-09-15T14:30:00\.000Z\), and 1 resident on duty anywhere in the hospital \(department not known\)/);
+  const nobody = W._render({ ...W._st, view: "critsboard", critsBoard: [{ loopId: "c2", patientId: "p2", display: "Potassium", value: 7.1, state: "open", escalation: { level: "due" },
+    notifications: [{ nid: null, level: "due", reason: "NO_RECIPIENT", why: "no ward, no admitting doctor, no resident on duty", wardRule: { rule: AR.NO_WARD_RULE, ward: null, noWardCover: { admittingDoctor: null, admittingSkipped: null, residentScope: "hospital", residents: 0 } } }] }] });
+  assert.match(nobody, /Alert did not reach anyone:<\/b> nobody could be found to tell \(no ward, no admitting doctor, no resident on duty\)/);
+  assert.match(nobody, /no admitting doctor recorded, and 0 residents on duty anywhere in the hospital/);
 
   const rsb = { window: { WSQ: { page() {} } } }; rsb.WSQ = rsb.window.WSQ;
   vm.createContext(rsb); vm.runInContext(readFileSync(new URL("../wardsynq/site/pages/rota.js", import.meta.url), "utf8"), rsb);

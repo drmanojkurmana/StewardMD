@@ -28,6 +28,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
+import { patientLabels, labelKey, actorName } from "./patient-label.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -113,8 +114,8 @@ function summary(n) {
   return {
     handoverId: n.id, patientId: n.patientId, encounterId: n.encounterId || null,
     sections: n.sections || {}, sbarStated: n.sbarStated == null ? null : n.sbarStated,
-    givenBy: n.givenBy || null, givenAt: n.givenAt || null,
-    receivedBy: n.receivedBy || null, receivedAt: n.receivedAt || null,
+    givenBy: n.givenBy || null, givenByName: n.givenByName || null, givenAt: n.givenAt || null,
+    receivedBy: n.receivedBy || null, receivedByName: n.receivedByName || null, receivedAt: n.receivedAt || null,
     state: n.receivedBy ? "received" : "waiting",
     version: n.version,
   };
@@ -164,6 +165,8 @@ async function giveHandover(request, env, ctx) {
     givenBy: resolved.actor.id, givenAt,
   });
   note.sbarStated = stated;
+  // LT-22: the person, as their sign-in names them, beside the id the audit follows.
+  note.givenByName = actorName(resolved.actor);
   note.receivedBy = null;
   note.receivedAt = null;
 
@@ -211,6 +214,8 @@ async function receiveHandover(request, env, ctx) {
     sections: current.sections, givenBy: current.givenBy, givenAt: current.givenAt,
   });
   next.sbarStated = current.sbarStated == null ? null : current.sbarStated;
+  next.givenByName = current.givenByName || null;
+  next.receivedByName = actorName(resolved.actor);
   next.receivedBy = resolved.actor.id;
   next.receivedAt = new Date().toISOString();
   // What the incoming clinician said back, when they said anything. A read-back is the strongest
@@ -253,6 +258,11 @@ async function listHandovers(request, env, ctx) {
     .filter((h) => (want === "all" ? true : h.state === want))
     // Oldest first: the one that has been waiting longest is the one most likely to be lost.
     .sort((a, b) => String(a.givenAt || "").localeCompare(String(b.givenAt || "")));
+  // LT-22: the incoming nurse reads a name, MRN, ward and bed, not "opd-pat-smd-demo-00001".
+  if (ctx.withPatients) {
+    const labels = await patientLabels(svc, handovers);
+    for (const h of handovers) h.patient = labels.get(labelKey(h)) || null;
+  }
   return { ...base, ok: true, handovers, waiting: handovers.filter((h) => h.state === "waiting").length };
 }
 

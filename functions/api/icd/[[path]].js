@@ -29,7 +29,9 @@ function authorise(request, env) {
   if (env.GHIS_APP_TOKEN && tok === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && tok === env.AI_APP_TOKEN) return true;
   const o = request.headers.get("Origin") || "";
-  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
+  // wardsynq.com's worker forwards /api/* with this Origin (wardsynq/site/_worker.js). Refused, the
+  // ward's code search there came back empty and read as "no matching code".
+  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://wardsynq.com" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
 }
 
 function validQuery(raw) {

@@ -34,6 +34,27 @@ test("the vocabulary is closed, honestly local, and never claims a code it does 
   assert.equal(make([{ direction: "intake", kind: "oral", value: 200, at: "2026-09-07T09:00:00.000Z" }]).observations[0].codeSystem, SYSTEM);
 });
 
+/* LT-08 (live test 2026-09-15): output could not be charted as urine, and the output list offered intake
+ * routes. Every output kind the ward offers is an output code, and a shift of them adds up. */
+test("LT-08: every output the ward offers is charted as output, and the totals add up", () => {
+  const WARD_OUTPUT = ["urine", "drain", "vomit", "ng", "stool", "blood", "other"];
+  for (const k of WARD_OUTPUT) assert.equal(fluidCode("output", k), `output.${k}`, k);
+  assert.equal(displayOf("output.ng"), "NG aspirate");
+  const r = make([
+    { direction: "intake", kind: "iv", value: 1000, at: "2026-09-07T08:10:00.000Z" },
+    { direction: "intake", kind: "oral", value: 200, at: "2026-09-07T08:20:00.000Z" },
+    ...WARD_OUTPUT.map((kind, i) => ({ direction: "output", kind, value: 50 + i * 10, at: `2026-09-07T09:${String(10 + i).padStart(2, "0")}:00.000Z` })),
+  ]);
+  assert.deepEqual(r.rejected, []);
+  // LT-11: the kind charted is the kind picked. IV intake stays IV, never oral.
+  assert.deepEqual(r.observations.slice(0, 2).map((o) => o.code), ["intake.iv", "intake.oral"]);
+  const s = summariseBalance(r.observations.map((o) => at(o.code, o.value, o.meta.effectiveAt)), { from: "2026-09-07T08:00:00.000Z", to: "2026-09-07T10:00:00.000Z" });
+  const out = WARD_OUTPUT.reduce((n, _, i) => n + 50 + i * 10, 0);
+  assert.deepEqual([s.intake, s.output, s.balance], [1200, out, 1200 - out]);
+  assert.equal(s.byKind["intake.iv"], 1000);
+  assert.equal(s.byKind["output.urine"], 50);
+});
+
 test("a volume that is not plainly one number is NOT recorded and NOT guessed at", () => {
   const r = make([
     { direction: "intake", kind: "oral", value: "a cup", at: "2026-09-07T09:00:00.000Z" },

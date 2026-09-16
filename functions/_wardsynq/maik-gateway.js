@@ -192,7 +192,7 @@ function maikStatus(env, config) {
         credentialSource: vertexMissing.length ? "GEMINI_API_KEY (environment binding)" : "GCP_PROJECT and service account (environment bindings)",
         surface: vertexMissing.length
           ? "Vertex AI express mode (aiplatform.googleapis.com), publisher path, no project or region in the URL"
-          : `Vertex AI project endpoint (${vertexRegion(env)}-aiplatform.googleapis.com), region ${vertexRegion(env)}`,
+          : `Vertex AI project endpoint (${vertexEndpoint(env, byId("vertex-flash")).host}), location ${vertexEndpoint(env, byId("vertex-flash")).location}`,
         phiCapable: !vertexMissing.length,
         detail: !vertexMissing.length
           ? "the project's service account is configured; patient data may go here once this hospital approves Vertex"
@@ -314,6 +314,12 @@ const MODELS = Object.freeze([
   {
     id: "vertex-flash",
     provider: "vertex", model: "gemini-3.6-flash", version: "gemini-3.6-flash",
+    /* WHERE GOOGLE SERVES IT (LT-40, live retest 2026-09-16). Gemini 3.6 Flash is served on the global endpoint and
+     * the US and EU multi-regions only (Google's model page, docs.cloud.google.com/gemini-enterprise-agent-platform/
+     * models/gemini/3-6-flash, read 2026-09-16), not in a single region such as us-central1 or asia-south1: asked
+     * there, Vertex answered NOT_FOUND "Publisher model ... was not found". vertexEndpoint() keeps the deployment's
+     * GCP_LOCATION when the model is served there and otherwise uses the multi-region that contains it. */
+    vertexLocations: ["global", "us", "eu"],
     locality: LOCALITY.CLOUD,
     tasks: [TASK.SUMMARISE, TASK.DRAFT_NOTE, TASK.EXPLAIN, TASK.EXTRACT, TASK.ANSWER],
     latency: "medium", cost: "metered",
@@ -343,6 +349,28 @@ const MODELS = Object.freeze([
 
 const byId = (id) => MODELS.find((m) => m.id === str(id)) || null;
 const vertexRegion = (env) => str(env && env.GCP_LOCATION) || "asia-south1";
+
+/**
+ * PURE. The project-scoped Vertex endpoint a model is asked on: { location, host, base }.
+ *
+ * The deployment's region (GCP_LOCATION) when the registry does not say where the model is served or says it is served
+ * there; otherwise the multi-region containing that region (us-* -> us, europe-* -> eu), and the global endpoint when
+ * neither applies (asia-south1 has no multi-region). Multi-regions have their own ".rep." host and global has no
+ * region prefix (Google's locations page, read 2026-09-16). A model named without a registry entry (the Connect agent
+ * brain passes only a model id) is looked up by its Vertex model id.
+ */
+function vertexEndpoint(env, m) {
+  const model = str(m && m.model);
+  const served = (m && m.vertexLocations) || (MODELS.find((x) => x.provider === "vertex" && x.model === model) || {}).vertexLocations || null;
+  const want = vertexRegion(env);
+  let location = want;
+  if (served && !served.includes(want)) {
+    const multi = /^us-/.test(want) ? "us" : /^europe-/.test(want) ? "eu" : "global";
+    location = served.includes(multi) ? multi : served[0];
+  }
+  const host = location === "global" ? "aiplatform.googleapis.com" : location === "us" || location === "eu" ? `aiplatform.${location}.rep.googleapis.com` : `${location}-aiplatform.googleapis.com`;
+  return { location, host, base: `https://${host}/v1/projects/${encodeURIComponent(str(env && env.GCP_PROJECT))}/locations/${location}/publishers/google/models/${encodeURIComponent(model)}` };
+}
 
 /** PURE. May patient data go to this model: the platform can carry it AND this hospital approved it. */
 function phiAllowed(m, cfg, env) {
@@ -592,12 +620,12 @@ const PROVIDERS = Object.freeze({
     generate: async (req) => {
       const env = req.env || {};
       if (!vertexProjectMissing(env).length && (req.phi || !geminiKey(env))) {
-        const region = vertexRegion(env);
+        const ep = vertexEndpoint(env, req.model);
         return googleGenerate(req, {
           providerId: "vertex",
           bearer: () => vertexAccessToken(env, req.fetchImpl),
-          urlFor: (model) => `https://${region}-aiplatform.googleapis.com/v1/projects/${encodeURIComponent(env.GCP_PROJECT)}/locations/${region}/publishers/google/models/${encodeURIComponent(model)}:generateContent`,
-          surface: `Vertex AI project endpoint (${region}-aiplatform.googleapis.com)`,
+          urlFor: () => `${ep.base}:generateContent`,
+          surface: `Vertex AI project endpoint (${ep.host})`,
         });
       }
       if (req.phi) throw new Error(`patient data is not sent to Vertex express mode; the project credentials are missing (${vertexProjectMissing(env).join(", ")})`);
@@ -678,4 +706,53 @@ async function invoke(ctx) {
   };
 }
 
-export { TASK, LOCALITY, MODELS, PROVIDERS, PHI_CAPABLE, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate, vertexProjectMissing, phiAllowed };
+/* A refusal that is this hospital's setup, not a failure: the caller shows how to set it up. */
+const SETUP_REFUSALS = new Set(["maik_disabled", "no_phi_approved_model", "no_model"]);
+/* A refusal whose detail is a provider's own words (or ours about a provider call): model_unavailable carries the
+ * provider's error message, which names the cloud project, the model path and a documentation URL. */
+const RUNTIME_REFUSALS = new Set(["model_unavailable", "empty_answer", "no_provider"]);
+
+/**
+ * LT-40. What a person is shown when invoke() refused. A setup refusal and our own sentences pass through; a
+ * runtime refusal becomes a plain sentence with a reference code, and the provider's text goes to the server log
+ * under that code, secret-scrubbed and cut to 300 characters. The log line carries the refusal code, the reference
+ * and the provider message only: no patient id, no prompt. `log` is injectable for tests.
+ */
+function publicRefusal(answer, log) {
+  const a = answer || {};
+  if (!RUNTIME_REFUSALS.has(a.code)) return { code: a.code, detail: a.detail };
+  const ref = "MK-" + String(crypto.randomUUID()).replace(/-/g, "").slice(0, 8).toUpperCase();
+  try { (log || console.error)(`[maik] ${ref} ${a.code}: ${str(a.detail).slice(0, 300)}`); } catch { /* a log that fails must not change the answer */ }
+  return { code: a.code, ref, detail: `The AI service did not answer. Nothing was written. Reference ${ref}.` };
+}
+
+/**
+ * LT-34. System health for MaiK probes THE PATH A CLINICAL REQUEST TAKES, not a different one. It used to read model
+ * metadata with the AI Studio key while Ask MaiK went to Vertex under the service account, so health said Up while
+ * every clinical request failed. Here: the same route() decision askAboutPatient gets (a summary carrying patient
+ * data, this hospital's configuration, this server's bindings), then one call on that model's own endpoint that
+ * generates nothing and costs nothing: Vertex countTokens on the project endpoint (same host, location, model and
+ * service-account token as generateContent), or a hospital model server's /models list.
+ *
+ * Returns { state: "up" | "down" | "not_configured" | "off", code?, model?, label?, status? }. Never a provider's text.
+ */
+async function probeClinicalPath(ctx) {
+  const c = ctx || {};
+  const decision = route({ task: TASK.SUMMARISE, phi: true, config: c.config, env: c.env, context: { patientId: "system-health-probe" } });
+  if (!decision.ok) return { state: decision.code === "maik_disabled" ? "off" : SETUP_REFUSALS.has(decision.code) ? "not_configured" : "down", code: decision.code };
+  const m = decision.model, f = c.fetchImpl || fetch;
+  const label = m.provider === "vertex" ? `${m.model} on Vertex AI (${vertexEndpoint(c.env, m).location})` : m.provider === "local-openai" ? "this hospital's model server" : m.id;
+  let res;
+  try {
+    if (m.provider === "vertex") {
+      const token = await vertexAccessToken(c.env || {}, c.fetchImpl);
+      res = await f(`${vertexEndpoint(c.env, m).base}:countTokens`, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "health check" }] }] }) });
+    } else if (m.provider === "local-openai") {
+      res = await f(`${String(maikConfig(c.config).localBaseUrl).replace(/\/+$/, "")}/models`);
+    } else return { state: "down", model: m.id, label, code: "no_probe" };
+  } catch { return { state: "down", model: m.id, label }; }
+  return res && res.ok ? { state: "up", model: m.id, label } : { state: "down", model: m.id, label, status: (res && Number(res.status)) || null };
+}
+
+export { TASK, LOCALITY, MODELS, PROVIDERS, PHI_CAPABLE, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate, vertexProjectMissing, phiAllowed, vertexEndpoint, publicRefusal, probeClinicalPath, SETUP_REFUSALS };

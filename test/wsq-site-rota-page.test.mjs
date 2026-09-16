@@ -40,5 +40,5 @@ test("approvals: a swap still waiting for the colleague cannot be approved yet",
   assert.ok(!html.includes('data-rota="swapok" data-id="s1"'));
   assert.ok(html.includes('data-rota="swapok" data-id="s2"'));
   assert.match(R.pendingHtml(C({}), { ok: false }, null), /Could not load leave requests/);
-  assert.match(read("wardsynq/site/shell.js"), /item\("rota", "Staff rota"\)/);
+  assert.match(read("wardsynq/site/shell.js"), /item\("rota", "nav.rota"\)/);
 });

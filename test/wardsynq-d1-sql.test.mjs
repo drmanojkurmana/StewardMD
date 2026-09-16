@@ -151,6 +151,12 @@ test("every D1Repository read and write runs against real SQL and returns real r
   assert.ok(page1.cursor > 0);
   const page2 = await repo.changes("t1", page1.cursor, 100);
   assert.ok(page2.records.every((r) => r.seq > page1.cursor), "paging never repeats a row");
+  // LT-37: newest first for the audit list, paged down by `before`, executed against the real schema.
+  const all = (await repo.changes("t1", 0, 100)).records.map((r) => r.seq);
+  const top = await repo.changes("t1", 0, 2, { newest: true });
+  assert.deepEqual(top.records.map((r) => r.seq), all.slice().reverse().slice(0, 2), "the newest two, newest first");
+  const next = await repo.changes("t1", 0, 100, { newest: true, before: top.cursor });
+  assert.deepEqual(next.records.map((r) => r.seq), all.slice().reverse().slice(2), "then the rest, never repeating a row");
 
   assert.deepEqual(await repo.recall("t1", "key-1"), { resourceType: "Patient", id: "pat-1", version: 1 });
   assert.equal(await repo.recall("t1", "no-such-key"), null);

@@ -45,13 +45,18 @@ try {
 
   await click('[data-w-act="critsboard"]');
   ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('Open loops') >= 0;`), "the critical-results board opens");
-  ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('opd-pat-smd-h1-other') >= 0;`), "the board names the patient the loop belongs to, with no chart for that patient ever opened on this screen");
+  // LT-28: by name, MRN, ward and bed (the server's names=1 join), not by record id.
+  ok(await waitFor(`var t = document.body.lastElementChild.textContent; return t.indexOf('Harness Patient Other') >= 0 && t.indexOf('Ward B, bed 7') >= 0 && t.indexOf('opd-pat-smd-h1-other') < 0;`), "the board names the patient, ward and bed, with no chart for that patient ever opened on this screen");
+  ok(await ev(`return window.__calls.some(function (c) { return c.url && c.url.indexOf('/ward/criticals') >= 0 && c.url.indexOf('names=1') >= 0; });`), "the board asks the server for the named rows");
   ok(await ev(`return document.body.lastElementChild.textContent.indexOf('ESCALATE') >= 0;`), "the escalation level is shown");
 
   await click('[data-w-act^="ackboard:"]');
   const ackBody = await lastBody("/ward/acknowledge");
   ok(ackBody && ackBody.loopId === "loop-1" && !!ackBody.action, "acknowledging posts the real loop id and the real free-text action: " + JSON.stringify(ackBody));
-  ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('acknowledged by') >= 0;`), "the acknowledged state is reflected after the board reloads");
+  ok(await waitFor(`return document.body.lastElementChild.textContent.indexOf('acknowledged by Dr Harness') >= 0;`), "the acknowledged state is reflected after the board reloads, with the acknowledger's name");
+  // LT-26/LT-28: open means unacknowledged, and the time since reported does not reset.
+  ok(await ev(`var t = document.body.lastElementChild.textContent.replace(/\\s+/g, " "); return t.indexOf('Open loops · 0') >= 0 && t.indexOf('Acknowledged, not yet closed · 1') >= 0 && t.indexOf('42 min since reported') >= 0 && t.indexOf('cfa:doctor') < 0;`),
+    "after acknowledging: 0 open, 1 acknowledged, still 42 min since reported, no raw id");
 
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }

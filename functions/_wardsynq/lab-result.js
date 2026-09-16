@@ -34,6 +34,8 @@ import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { LAB_CODE_SEED } from "../../wardsynq/adapters/wardsynq-ghis-adapter.js";
 import { deltaCheck, autoVerify } from "./lab-delta.js";
+import { effectiveCategory } from "./investigation-catalogue.js";
+import { TYPE as SPECIMEN_TYPE, NO_SPECIMEN_CATEGORIES, SpecimenCollection, collectionState } from "./specimen.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const CATEGORY = "laboratory";
@@ -158,6 +160,23 @@ async function releaseResult(request, env, ctx) {
     catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
     if (!sr) return { ...base, ok: false, status: 404, error: "request_not_found", serviceRequestId, written: 0 };
   }
+  /* LT-25: NO RESULT FOR A SAMPLE NOBODY TOOK. A result released against a blood or fluid order that was never
+   * collected (or whose every attempt failed) is a number with no tube behind it, and the order then sat on the
+   * board as "awaiting collection" for ever. Imaging, procedures and referrals have no sample and are not asked.
+   * A collected sample the laboratory never marked received is received by this release, by whoever released it:
+   * the person resulting it had it on the bench, and the specimen then leaves every "awaiting" list. */
+  let receiveOnRelease = null;
+  if (sr && !NO_SPECIMEN_CATEGORIES.includes(str(sr.category))) {
+    let specimens;
+    try { specimens = ((await svc.byPatient(SPECIMEN_TYPE, sr.patientId)) || []).filter((s) => s && s.serviceRequestId === serviceRequestId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const where = collectionState(specimens);
+    if (where.state === "none" || where.state === "failed") {
+      return { ...base, ok: false, status: 409, error: "specimen_not_collected", serviceRequestId, collection: where.state,
+        detail: "No sample has been collected for this request. Record the collection (who took it, when) before releasing a result.", written: 0 };
+    }
+    if (where.state === "collected") receiveOnRelease = specimens.find((s) => s.id === where.specimenId) || null;
+  }
   const patientId = str(ctx.patientId) || (sr && sr.patientId) || "";
   if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", detail: "a result names its patient, or the request it answers", written: 0 };
 
@@ -193,6 +212,14 @@ async function releaseResult(request, env, ctx) {
    * laboratory that cannot release a number because software disagreed with it is a laboratory that
    * routes around the software by the end of the week. A failure to READ the history is likewise not
    * a reason to withhold anything - the check is simply reported as not done. */
+  if (receiveOnRelease) {
+    const at = new Date().toISOString();
+    const next = SpecimenCollection({ ...receiveOnRelease, state: "received", receivedAt: at, receivedBy: resolved.actor.id });
+    next.receivedOnRelease = true;
+    try { await svc.put(next, { expectedVersion: receiveOnRelease.version }); }
+    catch (e) { return { ...base, ...writeFailure(e, { serviceRequestId, written: 0, actor: resolved.actor.id }) }; }
+  }
+
   let history = [];
   try { history = (await svc.byPatient("Observation", patientId)) || []; }
   catch { history = null; }
@@ -371,7 +398,8 @@ async function pendingRequests(request, env, ctx) {
     .filter((s) => s && s.status !== "completed" && s.status !== "revoked" && s.status !== "cancelled" && !isExternalRecord(s))
     .filter((s) => !resulted.has(s.id))
     // patientId travels so a hospital-wide caller can say whose test this is.
-    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
+    // LT-15: the category the boards file it under, a catalogued imaging test filed as laboratory read as imaging.
+    .map((s) => ({ serviceRequestId: s.id, code: s.code, display: s.display || s.code, category: effectiveCategory(s), patientId: s.patientId || null, encounterId: s.encounterId || null, requestedBy: s.requesterId || null, status: s.status }));
   return { ...base, ok: true, patientId: patientId || null, scope: hospitalWide ? "hospital" : "patient", pending };
 }
 

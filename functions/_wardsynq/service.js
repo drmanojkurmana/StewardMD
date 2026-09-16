@@ -727,6 +727,17 @@ class RecordService {
     return hit || null;
   }
 
+  /**
+   * A write refused by a rule of the caller's own (separation of duties), audited exactly as a
+   * governance refusal inside put() is: record.denied, outcome denied, nothing written. Throws when the
+   * audit row cannot be written, so a refusal is never silently unrecorded.
+   */
+  async auditDenied(resourceType, id, reasons, patientId) {
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.denied", {
+      scope: { resourceType, id, reasons: (reasons || []).map(String) }, patientId: patientId || null, outcome: "denied",
+    }));
+  }
+
   /** The whole chart: latest version of every resource in the patient's compartment. */
   async chart(patientId) {
     const out = {};
@@ -743,14 +754,16 @@ class RecordService {
   }
 
   /** Everything written to this tenant after a cursor. How a second client learns what changed. */
-  async changes(since, limit) {
+  /** opts: { newest, before } for newest-first reading (repository changes()); omitted, the ascending sync feed. */
+  async changes(since, limit, opts) {
     if (!this.governed) throw new RecordRequestError("no store", "NO_STORE");
     // The governed store has no change feed of its own; this is a READ and is gated the same way.
     this.governed._assertRead(this.actor);
-    const raw = await this.repository.changes(this.tenantId, since, limit);
+    const newest = !!(opts && opts.newest);
+    const raw = await this.repository.changes(this.tenantId, since, limit, newest ? { newest: true, before: opts.before } : undefined);
     // The cursor advances over everything; the records handed back are only what may be read.
     const page = { records: raw.records.filter((r) => canRead(this.actor, r.resourceType)), cursor: raw.cursor };
-    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
+    await this.repository.auditOnly(this.tenantId, await this._audit("record.changes", { scope: { since: Number(since) || 0, ...(newest ? { newest: true, before: Number(opts.before) || null } : {}), cursor: page.cursor, withheld: raw.records.length - page.records.length }, resourceCounts: { records: page.records.length } }));
     return page;
   }
 

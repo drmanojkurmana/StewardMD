@@ -325,7 +325,9 @@ test("24. patient data reaches Vertex through the project's regional endpoint, u
   assert.equal(r.ok, true, JSON.stringify(r));
   assert.equal(r.routedTo, "vertex-flash");
   const gen = t.seen.find((x) => x.url.includes(":generateContent"));
-  assert.equal(gen.url, "https://asia-south1-aiplatform.googleapis.com/v1/projects/wsq-proj/locations/asia-south1/publishers/google/models/gemini-3.6-flash:generateContent");
+  /* LT-40: gemini-3.6-flash is not served in asia-south1 (the default region) or in us-central1; asked there Vertex
+   * answered NOT_FOUND. With no multi-region containing asia-south1 it goes to the global endpoint. */
+  assert.equal(gen.url, "https://aiplatform.googleapis.com/v1/projects/wsq-proj/locations/global/publishers/google/models/gemini-3.6-flash:generateContent");
   assert.equal(gen.headers.Authorization, `Bearer ${ACCESS}`);
   assert.ok(!gen.headers["x-goog-api-key"], "the express-mode key is not how patient data travels, even when one exists");
   assert.ok(t.seen.some((x) => x.url.includes(encodeURIComponent(envVertex.GCP_SA_EMAIL))), "the token is the project service account's");
@@ -361,7 +363,40 @@ test("27. the per-hospital switch still decides: Vertex configured but not appro
   const st = maikStatus(envVertex, { enabled: true, phiApproved: ["vertex"] });
   const v = st.providers.find((p) => p.provider === "vertex");
   assert.equal(v.phiCapable, true);
-  assert.match(v.surface, /asia-south1-aiplatform/);
+  assert.match(v.surface, /\(aiplatform\.googleapis\.com\), location global/);
   assert.ok(!JSON.stringify(st).includes("PRIVATE KEY"), "no key material in the status");
   assert.equal(st.models.find((m) => m.id === "vertex-flash").phiApproved, true);
+});
+
+/* ---- LT-40 (live retest 2026-09-16): the model is asked where Google serves it, and a clinician never sees the
+ * provider's error ------------------------------------------------------------------------------------------------- */
+
+test("LT-40: vertexEndpoint keeps a region that serves the model and otherwise uses the multi-region containing it", async () => {
+  const { vertexEndpoint, MODELS: M } = await import("../functions/_wardsynq/maik-gateway.js");
+  const flash = M.find((m) => m.id === "vertex-flash");
+  const at = (loc) => vertexEndpoint({ GCP_PROJECT: "p1", GCP_LOCATION: loc }, flash);
+  assert.equal(at("us-central1").base, "https://aiplatform.us.rep.googleapis.com/v1/projects/p1/locations/us/publishers/google/models/gemini-3.6-flash", "the live failure: us-central1 does not serve it");
+  assert.equal(at("europe-west4").host, "aiplatform.eu.rep.googleapis.com");
+  assert.equal(at("asia-south1").host, "aiplatform.googleapis.com");
+  assert.equal(at("global").location, "global");
+  assert.equal(at("us").location, "us");
+  // A model id handed in without its registry entry (the Connect agent brain) is looked up by id.
+  assert.equal(vertexEndpoint({ GCP_PROJECT: "p1", GCP_LOCATION: "us-central1" }, { model: "gemini-3.6-flash" }).location, "us");
+  // A model the registry does not place keeps the deployment's region, as before.
+  assert.equal(vertexEndpoint({ GCP_PROJECT: "p1", GCP_LOCATION: "us-central1" }, { model: "gemini-3.1-pro-preview" }).location, "us-central1");
+});
+
+test("LT-40: publicRefusal logs the provider's words under a reference and shows a plain sentence; setup refusals pass through", async () => {
+  const { publicRefusal } = await import("../functions/_wardsynq/maik-gateway.js");
+  const logged = [];
+  const raw = "vertex-flash could not answer: Vertex AI project endpoint (aiplatform.googleapis.com) refused the request [NOT_FOUND]: Publisher model projects/stewardmd-498ec/locations/us-central1/publishers/google/models/gemini-3.6-flash was not found. See https://cloud.google.com/vertex-ai. Nothing was written.";
+  const shown = publicRefusal({ ok: false, code: "model_unavailable", detail: raw }, (line) => logged.push(line));
+  assert.match(shown.ref, /^MK-[0-9A-F]{8}$/);
+  assert.equal(shown.detail, `The AI service did not answer. Nothing was written. Reference ${shown.ref}.`);
+  assert.ok(!/stewardmd-498ec|googleapis|https?:|projects\//.test(JSON.stringify(shown)), JSON.stringify(shown));
+  assert.equal(logged.length, 1);
+  assert.ok(logged[0].includes(shown.ref) && logged[0].includes("NOT_FOUND"), "the operator can find the cause by the reference");
+  const setup = publicRefusal({ ok: false, code: "no_phi_approved_model", detail: "approve a provider" }, (l) => logged.push(l));
+  assert.deepEqual(setup, { code: "no_phi_approved_model", detail: "approve a provider" });
+  assert.equal(logged.length, 1, "a setup refusal is not an error to log");
 });

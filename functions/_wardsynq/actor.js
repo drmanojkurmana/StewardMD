@@ -347,7 +347,10 @@ function grantForCaps(caps) {
      * a patient received. It is what charge capture IS, it is what a coder in any hospital sees, and
      * the containment is that the write scope below did not move. A site wanting tighter separation
      * should hold BILLING_CHARGE for coders and leave the cashier on BILLING_VIEW. */
-    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"];
+    /* Encounter joined 2026-09-15 (LT-30): a bed day is billed from the stay itself, its dates and the
+     * ward each day was on. It is the admission record a billing desk already works from, and the
+     * write scope below still does not move. */
+    const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter"];
     // Invoice joined 2026-09-09 (TASK 4.6): the ledger charge-capture.js's priced proposal becomes
     // once a person raises it. Read for BOTH billing.view and billing.charge - a cashier reading a
     // balance is not a coding act, it is the whole reason billing.view exists (see the Cashier task
@@ -634,7 +637,21 @@ function offlineContextOf(request) {
  *
  * deps: { db, identifyFn, claimsFn?, staffSession?, orgForTenant, authorizeOrg }
  */
-async function resolveClinicalActor(request, env, tenantId, need, deps) {
+/* LT-21: ONE REQUEST, ONE ANSWER TO "WHO IS THIS". A composed screen (the nurse worklist: a schedule, a score and
+ * the nursing columns for every patient) called this once per piece per patient, and each call verified the token,
+ * read the tenant and asked the staff registry again: well over a hundred identical lookups for one page. The answer
+ * cannot change within a request, so it is kept per (request, deps, tenant, need) and dropped with the request. */
+const RESOLVED = new WeakMap();
+function resolveClinicalActor(request, env, tenantId, need, deps) {
+  if (!request || typeof request !== "object" || !deps || typeof deps !== "object") return resolveClinicalActorNow(request, env, tenantId, need, deps);
+  if (!RESOLVED.has(request)) RESOLVED.set(request, new WeakMap());
+  const perDeps = RESOLVED.get(request);
+  if (!perDeps.has(deps)) perDeps.set(deps, new Map());
+  const memo = perDeps.get(deps), key = `${tenantId}|${need}`;
+  if (!memo.has(key)) memo.set(key, resolveClinicalActorNow(request, env, tenantId, need, deps));
+  return memo.get(key);
+}
+async function resolveClinicalActorNow(request, env, tenantId, need, deps) {
   deps = deps || {};
   if (!deps.db) throw new PermissionError("record service is not provisioned");
   const identity = await resolveIdentity(request, env, deps);

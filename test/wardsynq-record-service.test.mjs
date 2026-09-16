@@ -690,7 +690,8 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * need none of this and would bill for doses the patient refused. It is a real widening and the
    * containment is the line above: the write scope did not move. */
   assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate",
-    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"]);
+    "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense", "Encounter"]);
+  // 2026-09-15 (LT-30): Encounter joined, because a bed day is billed from the stay. Still no write.
   assert.ok(!read("cashier").includes("ClinicalNote"), "a coder is not given the whole chart to answer one question");
   assert.ok(!read("cashier").includes("Observation"), "nor the vitals and the laboratory values");
   /* 2026-09-07: pharmacy gained ORDER_VERIFY. Verification is only as good as what the verifier can

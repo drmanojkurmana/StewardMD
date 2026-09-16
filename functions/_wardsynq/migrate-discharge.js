@@ -34,15 +34,44 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { VITAL_CODES } from "./migrate-vitals.js";
+import { VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { problemLine, problemsForSummary } from "./migrate-problem.js";
 import { diagnosisFor } from "./patient-record.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
 import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
+import { chargesForPatient } from "./charge-capture.js";
+import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
+import { invoicesForStay } from "./invoice.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
-const investigationLine = (s) => `${s.display || s.code} (${s.status})`;
+/* An investigation as the reader needs it: what was asked for and what came back. The request's own
+ * status stays "active" after a result is released (lab-result.js and radiology-report.js attach a
+ * DiagnosticReport and leave the request alone), so a line built from the request alone said
+ * "Complete blood count (active)" an hour after a critical haemoglobin was released, and the result
+ * appeared nowhere (LT-31). The report decides, exactly as pendingRequests() already does. */
+const RESULTED = ["final", "corrected"];
+function reportFor(s, reports) {
+  const mine = (reports || []).filter((r) => r && r.serviceRequestId === s.id && r.status !== "cancelled");
+  return mine.find((r) => RESULTED.includes(r.status)) || mine[0] || null;
+}
+function resultValues(report, observations) {
+  if (report.category === "imaging" || report.impression || report.findings) {
+    return report.impression ? `Impression: ${report.impression}` : report.findings ? `Findings: ${report.findings}` : "";
+  }
+  const ids = new Set(report.resultObservationIds || []);
+  const vals = (observations || []).filter((o) => o && ids.has(o.id))
+    .map((o) => `${o.display || o.code} ${o.value}${o.unit ? " " + displayUnit(o.unit) : ""}${o.sourceCritical ? " (critical)" : ""}`);
+  return vals.length ? vals.join(", ") : str(report.conclusion);
+}
+function investigationLine(s, reports, observations) {
+  const name = s.display || s.code;
+  const report = reportFor(s, reports);
+  if (!report) return `${name} (${s.status === "active" ? "requested, no result yet" : s.status})`;
+  const vals = resultValues(report, observations);
+  const when = report.reportedAt ? `, reported ${report.reportedAt}` : "";
+  return `${name} (${RESULTED.includes(report.status) ? "result" : report.status + " result"}${when})${vals ? ": " + vals : ""}`;
+}
 
 /** Builds the governed service, or a shaped refusal. Never throws. */
 async function openService(request, env, ctx, need) {
@@ -83,7 +112,7 @@ function vitalsLine(observations) {
   for (const o of observations) {
     const hit = byCode.get(o.code);
     if (!hit) continue;
-    parts.push(`${hit.spec.display} ${o.value}${o.unit ? " " + o.unit : ""}`);
+    parts.push(`${hit.spec.display} ${o.value}${o.unit ? " " + displayUnit(o.unit) : ""}`);
   }
   return parts.join(", ");
 }
@@ -109,7 +138,10 @@ function assembleDischargeSummary(r) {
 
   // Vitals: the FIRST and LAST recorded sets only. A discharge summary is not a flowsheet, and
   // pasting every reading in would bury the two a reader actually wants.
-  const obs = [...(r.observations || [])].sort((a, b) =>
+  // Vital signs only: a laboratory result is an Observation too, and taking the first of those as
+  // "on admission" printed a laboratory time with "no numeric values".
+  const vitalCodes = new Set(Object.keys(VITAL_CODES).map((k) => VITAL_CODES[k].code));
+  const obs = [...(r.observations || [])].filter((o) => o && vitalCodes.has(o.code)).sort((a, b) =>
     String((a.meta && a.meta.effectiveAt) || "").localeCompare(String((b.meta && b.meta.effectiveAt) || "")));
   const at = (o) => String((o.meta && o.meta.effectiveAt) || "");
   const firstAt = obs.length ? at(obs[0]) : null;
@@ -139,7 +171,7 @@ function assembleDischargeSummary(r) {
     : "None documented on this admission.";
 
   const investigations = (r.serviceRequests || []).length
-    ? r.serviceRequests.map(investigationLine).join("\n")
+    ? r.serviceRequests.map((sr) => investigationLine(sr, r.reports, r.observations)).join("\n")
     : NOT_RECORDED;
 
   // Assessment/plan are COPIED from what a clinician actually wrote, never composed.
@@ -196,7 +228,58 @@ function structuredSections(r, sections) {
       /* Whether it was a diagnosis when this line was written. A differential stays withheld even after it is confirmed: the line still says differential. */
       diagnosis: !!diagnosisFor(c), text: problemLine(c) })) },
     investigations: { text: sections.investigations, items: (r.serviceRequests || []).filter(Boolean).map((s) => ({
-      serviceRequestId: s.id, code: s.code || null, text: investigationLine(s) })) },
+      serviceRequestId: s.id, code: s.code || null, text: investigationLine(s, r.reports, r.observations) })) },
+  };
+}
+
+/**
+ * Everything one stay's summary, pending list and discharge checklist are made from. Only this
+ * admission's activity, and only native records (a fed-in external Medication* / ServiceRequest /
+ * report must never appear as ours). The problem list is the PATIENT's, not this admission's: a
+ * chronic diagnosis carried in from before the stay belongs on the summary too.
+ *
+ * `failed` names every source that could not be read. The summary has always shown such a source
+ * as empty; the discharge checklist must not, because an unread list of open orders is not an
+ * empty one.
+ */
+async function readStay(svc, encounterId, patientIdHint) {
+  let encounter;
+  try { encounter = await svc.get("Encounter", encounterId); }
+  catch (e) { return { error: { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) } }; }
+  if (!encounter) return { error: { ok: false, status: 404, error: "encounter_not_found", encounterId } };
+  const patientId = str(patientIdHint) || encounter.patientId;
+  const failed = [];
+  const soft = (name, p, empty) => p.catch(() => { failed.push(name); return empty; });
+  const [patient, observations, orders, administrations, allergies, serviceRequests, reports, notes, problems, reconciliation, stored] = await Promise.all([
+    soft("Patient", svc.get("Patient", patientId), null),
+    soft("Observation", svc.byPatient("Observation", patientId), []),
+    soft("MedicationOrder", svc.byPatient("MedicationOrder", patientId), []),
+    soft("MedicationAdministration", svc.byPatient("MedicationAdministration", patientId), []),
+    soft("AllergyIntolerance", svc.byPatient("AllergyIntolerance", patientId), []),
+    soft("ServiceRequest", svc.byPatient("ServiceRequest", patientId), []),
+    soft("DiagnosticReport", svc.byPatient("DiagnosticReport", patientId), []),
+    soft("ClinicalNote", svc.byPatient("ClinicalNote", patientId), []),
+    soft("Condition", svc.byPatient("Condition", patientId), []),
+    svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
+    svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
+  ]);
+  const native = (rows) => (rows || []).filter((r) => r && !isExternalRecord(r));
+  const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
+  const myOrders = mine(native(orders));
+  return {
+    encounter, stored, failed,
+    inputs: {
+      encounter, patient,
+      observations: mine(observations),
+      orders: myOrders,
+      administrations: native(administrations).filter((a) => myOrders.some((o) => o.id === a.orderId)),
+      allergies: allergies || [],
+      serviceRequests: mine(native(serviceRequests)),
+      reports: native(reports),
+      notes: mine(notes),
+      problems: problems || [],
+      reconciliation,
+    },
   };
 }
 
@@ -217,47 +300,10 @@ async function draftDischargeSummary(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation;
-  try {
-    encounter = await svc.get("Encounter", encounterId);
-    if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
-    const patientId = str(ctx.patientId) || encounter.patientId;
-    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation] = await Promise.all([
-      svc.get("Patient", patientId).catch(() => null),
-      svc.byPatient("Observation", patientId).catch(() => []),
-      svc.byPatient("MedicationOrder", patientId).catch(() => []),
-      svc.byPatient("MedicationAdministration", patientId).catch(() => []),
-      svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-      svc.byPatient("ServiceRequest", patientId).catch(() => []),
-      svc.byPatient("ClinicalNote", patientId).catch(() => []),
-      svc.byPatient("Condition", patientId).catch(() => []),
-      svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
-    ]);
-  } catch (e) {
-    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
-  }
-
-  // Only this admission's activity belongs in this admission's summary, and only native records
-  // (a fed-in external Medication* / ServiceRequest record must never appear as ours).
-  const native = (rows) => (rows || []).filter((r) => r && !isExternalRecord(r));
-  orders = native(orders);
-  administrations = native(administrations);
-  serviceRequests = native(serviceRequests);
-  const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
-  const inputs = {
-    encounter, patient,
-    observations: mine(observations),
-    orders: mine(orders),
-    administrations: (administrations || []).filter((a) => mine(orders).some((o) => o.id === a.orderId)),
-    allergies: allergies || [],
-    serviceRequests: mine(serviceRequests),
-    notes: mine(notes),
-    // The problem list is the PATIENT's, not this admission's: a chronic diagnosis carried in from
-    // before the stay belongs on the summary too.
-    problems: problems || [],
-    reconciliation,
-    dischargedAt: ctx.dischargedAt || encounter.periodEnd || null,
-  };
+  const stay = await readStay(svc, encounterId, ctx.patientId);
+  if (stay.error) return { ...base, ...stay.error, written: 0 };
+  const { encounter } = stay;
+  const inputs = { ...stay.inputs, dischargedAt: ctx.dischargedAt || encounter.periodEnd || null };
   const assembled = assembleDischargeSummary(inputs);
 
   const id = dischargeSummaryIdFor(encounterId);
@@ -338,7 +384,17 @@ async function signDischargeSummary(request, env, ctx) {
   let current;
   try { current = await svc.get("ClinicalNote", id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-  if (!current) return { ...base, ok: false, status: 404, error: "no_draft", detail: "draft the discharge summary before signing it", noteId: id };
+  /* NOT YET DRAFTED IS NOT A REASON TO REFUSE (LT-31). The screen shows the assembled summary before
+   * any draft exists and offers Sign on it, so the first Sign always came back 404 "no_draft" and the
+   * clinician had to find Save draft first. Signing an undrafted summary now saves the assembled text
+   * as the draft and signs that draft, as two versions, so the record still shows what was signed. */
+  if (!current) {
+    const drafted = await draftDischargeSummary(request, env, { ...ctx, sections: null, idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:draft` : null });
+    if (!drafted.ok) return drafted;
+    try { current = await svc.get("ClinicalNote", id); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 1 }; }
+    if (!current) return { ...base, ok: false, status: 502, error: "draft_not_readable", detail: "The draft was saved but could not be read back, so it was not signed.", noteId: id, written: 1 };
+  }
 
   const signed = ClinicalNote({
     id: current.id, patientId: current.patientId, encounterId: current.encounterId,
@@ -359,12 +415,108 @@ async function signDischargeSummary(request, env, ctx) {
   }
 }
 
+/* WHERE THE PATIENT WENT, as a coded choice (LT-17). It was typed into a browser prompt, "died"
+ * included. `other` needs words; `transferred` names the receiving hospital. `ward` is an intensive
+ * care stay stepped down to a ward, which the ICU flow has always sent. */
+const DISCHARGE_DISPOSITIONS = Object.freeze(["home", "transferred", "left-against-advice", "died", "other", "ward"]);
+
 /**
- * Closes the stay. ctx: { migration, encounterId, dischargedAt?, disposition?, actorDeps, recordDeps }
+ * PURE. Where the bill stands for this stay.
+ * charges: chargesForPatient() scoped to the stay; invoices: the patient's Invoice records, or null
+ * when they could not be read.
+ * settled = nothing owed on any bill and nothing done on this stay left off one. An item with no
+ * price is not settled: it is a charge nobody has billed yet.
+ */
+function billState(charges, invoices, encounter, nowMs) {
+  if (!charges || !charges.ok || (charges.unreadable && charges.unreadable.length) || !Array.isArray(invoices)) {
+    return { state: "unreadable", balance: null, unbilled: [], unpriced: [] };
+  }
+  const live = invoices.filter((i) => i && !isExternalRecord(i) && !i.void);
+  // An item on ANY of the patient's bills is billed: the same event is never billed twice (invoice.js).
+  const onBill = new Set();
+  for (const inv of live) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
+  const unbilled = (charges.priced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)))
+    .map((it) => ({ display: it.display || it.code, code: it.code, amount: it.line }));
+  const unpriced = (charges.unpriced || []).map((it) => ({ display: it.display || it.code, code: it.code }));
+  /* What is owed is read from THIS STAY's invoices (retest 2026-09-16): an invoice carrying the stay's id, or an older
+   * one with no id matched by its lines or its date (invoice.js invoicesForStay). With no stay given, every bill. */
+  const stayKeys = new Set([...(charges.priced || []), ...(charges.unpriced || [])].map((it) => `${it.sourceType}:${it.sourceId}`));
+  const owedOn = encounter ? invoicesForStay(live, encounter, stayKeys, nowMs) : live;
+  const balance = Math.round(owedOn.reduce((n, inv) => n + (Number(reconciliationOf(inv).balance) || 0), 0) * 100) / 100;
+  const state = balance > 0 ? "balance_due" : (unbilled.length || unpriced.length) ? "unbilled" : "settled";
+  return { state, balance, unbilled, unpriced, invoiceIds: owedOn.map((i) => i.id) };
+}
+
+/**
+ * PURE. The discharge checklist (LT-32): the bill, the orders still open and the results still
+ * pending, and anything that could not be checked. `pending` is pendingItems() for the stay.
+ */
+function dischargeChecklist(pending, bill, failed) {
+  const relevant = ["MedicationOrder", "MedicationAdministration", "ServiceRequest", "DiagnosticReport"];
+  return {
+    bill,
+    openOrders: (pending || []).filter((p) => p.kind === "dose" || p.kind === "medication"),
+    pendingResults: (pending || []).filter((p) => p.kind === "investigation"),
+    unreadable: (failed || []).filter((f) => relevant.includes(f)),
+  };
+}
+
+/**
+ * PURE. What stops this discharge. A bill that is not settled needs a stated reason to defer it.
+ * Open orders, pending results, or a list that could not be read need an explicit override with a
+ * reason, and only somebody allowed to override (the router's emr.treat decision) may give one.
+ */
+function dischargeBlockers(checklist, answers) {
+  const a = answers || {};
+  const out = [];
+  if (checklist.bill.state !== "settled" && !str(a.billDeferredReason)) out.push("bill_not_settled");
+  const needsOverride = checklist.openOrders.length > 0 || checklist.pendingResults.length > 0 || checklist.unreadable.length > 0;
+  if (needsOverride && !str(a.overrideReason)) out.push("override_required");
+  if (needsOverride && str(a.overrideReason) && a.canOverride !== true) out.push("override_not_permitted");
+  return out;
+}
+
+/** Reads the stay's checklist with the caller's own record access. Never throws. */
+async function checklistFor(request, env, ctx, svc, stay) {
+  const { encounter } = stay;
+  const [charges, invoices] = await Promise.all([
+    chargesForPatient(request, env, { ...ctx, patientId: encounter.patientId, encounterId: encounter.id, tariff: ctx.tariff || null })
+      .catch((e) => ({ ok: false, error: "charges_failed", detail: str(e && e.message) })),
+    svc.byPatient("Invoice", encounter.patientId).catch(() => null),
+  ]);
+  const checklist = dischargeChecklist(pendingItems(stay.inputs), billState(charges, invoices, encounter), stay.failed);
+  if (ctx.tariffError) checklist.bill = { state: "unreadable", balance: null, unbilled: [], unpriced: [], detail: ctx.tariffError };
+  return checklist;
+}
+
+/** READS the discharge checklist. Writes nothing. ctx: { migration, encounterId, tariff?, canOverride?, actorDeps, recordDeps } */
+async function readDischargeChecklist(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", checklist: null };
+  const encounterId = str(ctx.encounterId);
+  if (!encounterId) return { ...base, ok: false, status: 422, error: "encounter_required" };
+  const { svc, error } = await openService(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  const stay = await readStay(svc, encounterId, null);
+  if (stay.error) return { ...base, ...stay.error };
+  const checklist = await checklistFor(request, env, ctx, svc, stay);
+  return {
+    ...base, ok: true, encounterId, patientId: stay.encounter.patientId, status: stay.encounter.status, class: stay.encounter.class,
+    checklist, blockers: dischargeBlockers(checklist, {}), canOverride: ctx.canOverride === true,
+    deceasedRecorded: !!(stay.inputs.patient && stay.inputs.patient.deceased), dispositions: DISCHARGE_DISPOSITIONS,
+  };
+}
+
+/**
+ * Closes the stay. ctx: { migration, encounterId, dischargedAt?, disposition, destination?, dispositionNote?,
+ *   billDeferredReason?, overrideReason?, canOverride?, tariff?, actorDeps, recordDeps }
  *
- * Reports doses still in flight rather than refusing on them: whether an unfinished dose should stop
- * a discharge is a hospital's policy, not this file's to invent. It is surfaced so the decision is
- * an informed one.
+ * THE CHECKLIST IS ENFORCED HERE, not only on the screen (LT-32). A stay used to close with no bill,
+ * an active order and results outstanding, because nothing here looked. Now the bill has to be
+ * settled or deferred with a reason, and open orders or pending results need an override with a
+ * reason from somebody allowed to give one. Both answers are written onto the finished Encounter,
+ * so the record says who let the patient go with what still open, and why.
  */
 async function dischargePatient(request, env, ctx) {
   const mig = ctx.migration;
@@ -377,29 +529,37 @@ async function dischargePatient(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  let current;
-  try { current = await svc.get("Encounter", encounterId); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-  if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
+  const stay = await readStay(svc, encounterId, null);
+  if (stay.error) return { ...base, ...stay.error, written: 0 };
+  const current = stay.encounter;
   if (!ADMISSION_CLASSES.includes(current.class)) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient or ICU stay is discharged here", encounterId };
   if (current.status === "finished") {
     return { ...base, ok: true, written: 0, skipped: "already_discharged", encounterId, dischargedAt: current.periodEnd, version: current.version };
   }
 
-  // Doses that were started and never finished. Reported, not blocked — see the docstring.
-  let inFlight = [];
-  try {
-    const orders = (await svc.byPatient("MedicationOrder", current.patientId).catch(() => []))
-      .filter((o) => o && !isExternalRecord(o) && o.encounterId === encounterId);
-    const admins = (await svc.byPatient("MedicationAdministration", current.patientId).catch(() => []))
-      .filter((a) => a && !isExternalRecord(a));
-    inFlight = (admins || [])
-      .filter((a) => a && orders.some((o) => o.id === a.orderId))
-      .filter((a) => ["ordered", "verified", "dispensed", "scanned", "held"].includes(a.status))
-      .map((a) => ({ administrationId: a.id, orderId: a.orderId, status: a.status }));
-  } catch { inFlight = []; }
+  const disposition = str(ctx.disposition);
+  if (!DISCHARGE_DISPOSITIONS.includes(disposition)) return { ...base, ok: false, status: 422, error: "disposition_required", detail: `Say where the patient went: one of ${DISCHARGE_DISPOSITIONS.join(", ")}.`, dispositions: DISCHARGE_DISPOSITIONS, written: 0 };
+  if (disposition === "other" && !str(ctx.dispositionNote)) return { ...base, ok: false, status: 422, error: "disposition_note_required", detail: "Say where the patient went.", written: 0 };
+  if (disposition === "transferred" && !str(ctx.destination)) return { ...base, ok: false, status: 422, error: "destination_required", detail: "Name the hospital the patient was transferred to.", written: 0 };
+  /* A death is a clinical statement with its own confirmation and its own record. Closing a stay as
+   * a death without it would leave the patient alive on their own record. */
+  if (disposition === "died" && !(stay.inputs.patient && stay.inputs.patient.deceased)) {
+    return { ...base, ok: false, status: 409, error: "death_not_recorded", detail: "Record the death first, then close the stay.", written: 0 };
+  }
+
+  const checklist = await checklistFor(request, env, ctx, svc, stay);
+  const blockers = dischargeBlockers(checklist, ctx);
+  if (blockers.length) {
+    const forbidden = blockers.includes("override_not_permitted");
+    return {
+      ...base, ok: false, status: forbidden ? 403 : 409, error: forbidden ? "override_not_permitted" : "discharge_blocked", blockers, checklist,
+      detail: forbidden ? "Only a treating clinician may discharge with orders or results still open." : "This stay has a bill, orders or results that are not settled.",
+      written: 0,
+    };
+  }
 
   const dischargedAt = str(ctx.dischargedAt) || new Date().toISOString();
+  const at = new Date().toISOString();
   const candidate = Encounter({
     id: current.id, patientId: current.patientId, class: current.class, status: "finished",
     identifiers: current.identifiers, location: current.location,
@@ -408,8 +568,21 @@ async function dischargePatient(request, env, ctx) {
   });
   if (current.attendingId) candidate.attendingId = current.attendingId;
   if (current.reason) candidate.reason = current.reason;
-  const disposition = str(ctx.disposition);
-  if (disposition) candidate.disposition = disposition;
+  candidate.disposition = disposition;
+  if (str(ctx.destination)) candidate.destination = str(ctx.destination);
+  if (str(ctx.dispositionNote)) candidate.dispositionNote = str(ctx.dispositionNote);
+  // Bolted on, the file's own convention. What was open at the moment of discharge, and who decided.
+  candidate.dischargeChecklist = {
+    billState: checklist.bill.state, balance: checklist.bill.balance,
+    unbilled: checklist.bill.unbilled.length, unpriced: checklist.bill.unpriced.length,
+    openOrders: checklist.openOrders.map((p) => p.id), pendingResults: checklist.pendingResults.map((p) => p.id),
+    unreadable: checklist.unreadable,
+  };
+  if (checklist.bill.state !== "settled") candidate.billDeferred = { reason: str(ctx.billDeferredReason), by: resolved.actor.id, at };
+  if (checklist.openOrders.length || checklist.pendingResults.length || checklist.unreadable.length) {
+    candidate.dischargeOverride = { reason: str(ctx.overrideReason), by: resolved.actor.id, role: resolved.role, at };
+  }
+  const inFlight = checklist.openOrders.filter((p) => p.kind === "dose").map((p) => ({ administrationId: p.id, orderId: p.orderId, status: p.status }));
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
@@ -418,7 +591,9 @@ async function dischargePatient(request, env, ctx) {
     // authoritative record of the discharge either way.
     const loc = current.location || {};
     if (ctx.orgId && loc.ward && loc.bed) await freeMasterBed(env, ctx.orgId, loc.ward, loc.bed, resolved.actor.id);
-    return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, status: "finished", dischargedAt, dosesInFlight: inFlight, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
+    return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, status: "finished", dischargedAt, disposition, dosesInFlight: inFlight,
+      billDeferred: candidate.billDeferred || null, dischargeOverride: candidate.dischargeOverride || null,
+      version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
   }
@@ -428,18 +603,22 @@ async function dischargePatient(request, env, ctx) {
  * PURE. What is still outstanding on this stay, and would leave with the patient unresolved.
  *
  * A discharge summary that says nothing about a dose still in flight or a test still open reads as
- * a complete account of the stay when it is not. None of this blocks a discharge - a ward has real
- * reasons to send a patient home with a result pending - but it must be SHOWN, and shown before the
- * clinician signs rather than discovered afterwards.
+ * a complete account of the stay when it is not. It must be SHOWN, before the clinician signs rather
+ * than discovered afterwards. Open orders and pending results also stop a discharge until a treating
+ * clinician overrides with a reason (dischargeBlockers): a ward has real reasons to send a patient
+ * home with a result pending, and the record has to say whose decision that was.
  */
 function pendingItems(r) {
   const orders = r.orders || [];
   const doses = (r.administrations || [])
     .filter((a) => a && ["ordered", "verified", "dispensed", "scanned", "held"].includes(a.status))
     .map((a) => ({ kind: "dose", id: a.id, orderId: a.orderId, status: a.status, drug: a.drug || (orders.find((o) => o.id === a.orderId) || {}).drug || null }));
+  // A request with a final or corrected report has its result; a preliminary one is still pending.
   const investigations = (r.serviceRequests || [])
     .filter((s) => s && s.status !== "completed" && s.status !== "cancelled" && s.status !== "revoked")
-    .map((s) => ({ kind: "investigation", id: s.id, status: s.status || "unknown", display: s.display || s.code || null }));
+    .map((s) => ({ s, report: reportFor(s, r.reports) }))
+    .filter((x) => !(x.report && RESULTED.includes(x.report.status)))
+    .map(({ s, report }) => ({ kind: "investigation", id: s.id, status: report ? `${report.status} result` : "no result yet", display: s.display || s.code || null }));
   // An active medication order on a discharged patient is not itself wrong - it may be the
   // discharge prescription - but it is a decision somebody has to have made deliberately.
   const meds = orders.filter((o) => o && o.status === "active")
@@ -471,41 +650,11 @@ async function readDischargeSummary(request, env, ctx) {
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error };
 
-  let encounter, patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation, stored;
-  try {
-    encounter = await svc.get("Encounter", encounterId);
-    if (!encounter) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
-    const patientId = str(ctx.patientId) || encounter.patientId;
-    [patient, observations, orders, administrations, allergies, serviceRequests, notes, problems, reconciliation, stored] = await Promise.all([
-      svc.get("Patient", patientId).catch(() => null),
-      svc.byPatient("Observation", patientId).catch(() => []),
-      svc.byPatient("MedicationOrder", patientId).catch(() => []),
-      svc.byPatient("MedicationAdministration", patientId).catch(() => []),
-      svc.byPatient("AllergyIntolerance", patientId).catch(() => []),
-      svc.byPatient("ServiceRequest", patientId).catch(() => []),
-      svc.byPatient("ClinicalNote", patientId).catch(() => []),
-      svc.byPatient("Condition", patientId).catch(() => []),
-      svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
-      svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
-    ]);
-    orders = (orders || []).filter((r) => r && !isExternalRecord(r));
-    administrations = (administrations || []).filter((r) => r && !isExternalRecord(r));
-    serviceRequests = (serviceRequests || []).filter((r) => r && !isExternalRecord(r));
-  } catch (e) {
-    return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
-  }
-
-  const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
-  const myOrders = mine(orders);
-  const myAdmins = (administrations || []).filter((a) => myOrders.some((o) => o.id === a.orderId));
-  const assembled = assembleDischargeSummary({
-    encounter, patient,
-    observations: mine(observations), orders: myOrders, administrations: myAdmins,
-    allergies: allergies || [], serviceRequests: mine(serviceRequests), notes: mine(notes),
-    problems: problems || [],
-    reconciliation,
-    dischargedAt: encounter.periodEnd || null,
-  });
+  const stay = await readStay(svc, encounterId, ctx.patientId);
+  if (stay.error) return { ...base, ...stay.error };
+  const { encounter, stored } = stay;
+  const { patient } = stay.inputs;
+  const assembled = assembleDischargeSummary({ ...stay.inputs, dischargedAt: encounter.periodEnd || null });
 
   return {
     ...base, ok: true, encounterId, patientId: encounter.patientId,
@@ -532,7 +681,7 @@ async function readDischargeSummary(request, env, ctx) {
       authorId: stored.authorId || null, version: stored.version,
       recordedAt: (stored.meta && stored.meta.recordedAt) || null,
     } : null,
-    pending: pendingItems({ orders: myOrders, administrations: myAdmins, serviceRequests: mine(serviceRequests), problems: problems || [] }),
+    pending: pendingItems(stay.inputs),
   };
 }
 
@@ -540,4 +689,5 @@ export {
   NOT_RECORDED, dischargeSummaryIdFor, lengthOfStayDays, assembleDischargeSummary, structuredSections,
   mergeSections, pendingItems, readDischargeSummary,
   draftDischargeSummary, signDischargeSummary, dischargePatient,
+  DISCHARGE_DISPOSITIONS, billState, dischargeChecklist, dischargeBlockers, readDischargeChecklist, investigationLine,
 };

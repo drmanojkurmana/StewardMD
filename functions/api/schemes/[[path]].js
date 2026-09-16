@@ -40,7 +40,8 @@ function authorise(request, env) {
   if (env.GHIS_APP_TOKEN && tok === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && tok === env.AI_APP_TOKEN) return true;
   const o = request.headers.get("Origin") || "";
-  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
+  // wardsynq.com's worker forwards /api/* with this Origin (wardsynq/site/_worker.js).
+  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://wardsynq.com" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
 }
 
 // q trimmed, 2..80 chars; returns "" (invalid) otherwise so callers can 400 on falsy.

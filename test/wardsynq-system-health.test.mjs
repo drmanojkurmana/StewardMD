@@ -86,7 +86,7 @@ function healthy(over) {
       auditChainRows: async () => [],
     },
     orgAuditChain: { chainId: "q:org", auditChainHead: async () => null, auditChainRows: async () => [] },   // G3: nothing linked yet reads as up
-    tenantId: "t1", env: { GEMINI_API_KEY: SECRET }, maik: { enabled: true, localBaseUrl: LOCAL, localModel: "m1" }, rpoMinutes: 60,
+    tenantId: "t1", env: { GEMINI_API_KEY: SECRET }, maik: { enabled: true, phiApproved: ["local-openai"], localBaseUrl: LOCAL, localModel: "m1" }, rpoMinutes: 60,
     orgProbe: async () => ({ id: "org" }),
     documentProbe: async () => ({ state: "ok", checkedAt: iso(NOW - 60000) }),
     lastTick: async () => ({ at: iso(NOW - 2 * 60000), criticalsFailed: false, outboxFailed: false }),
@@ -136,17 +136,75 @@ for (const [id, downOver, hangOver] of CASES) {
   });
 }
 
-test("degraded branches: slow record store, MaiK off, one of two model providers failing, late tick, dead events", async () => {
+test("LT-34: storage never set up says so (still down), a real refusal stays a plain Down; no backup says what to do", async () => {
+  for (const probe of [{ state: "not_configured" }, { state: "failed", step: "put", providerStatus: 400, providerCode: "InvalidBucketName" }, { state: "failed", step: "put", providerStatus: 404, providerCode: "NoSuchBucket" }]) {
+    const d = byId(await H.systemHealthReport(healthy({ documentProbe: async () => probe })))["document-storage"];
+    assert.deepEqual([d.status, d.setup], ["down", "platform"], JSON.stringify(d));
+    assert.match(d.consequence, /not set up yet: the platform owner has not yet chosen the storage bucket/);
+    assert.match(d.consequence, /uploads fail and existing documents cannot be opened; charting continues/);
+  }
+  const refused = byId(await H.systemHealthReport(healthy({ documentProbe: async () => ({ state: "failed", step: "put", providerStatus: 403, providerCode: "AccessDenied" }) })))["document-storage"];
+  assert.equal(refused.setup, undefined, "an outage is not a setup gap");
+  assert.match(refused.reason, /status 403, AccessDenied/);
+  const backup = byId(await H.systemHealthReport(healthy({ repository: { latestByType: async () => [] } })))["backup"];
+  assert.match(backup.reason, /No backup run has ever been recorded\./);
+  assert.match(backup.reason, /What to do: .*Record a restore test/);
+  assert.ok(!/What to do/.test(byId(await H.systemHealthReport(healthy()))["backup"].reason || ""), "not when both are on record");
+});
+
+test("degraded branches: slow record store, MaiK off, late tick, dead events", async () => {
   const slow = byId(await H.systemHealthReport(healthy({ repository: { probe: async () => ({ ok: true, ms: 2500 }) } })))["record-store"];
   assert.equal(slow.status, "degraded");
   assert.equal(byId(await H.systemHealthReport(healthy({ maik: { enabled: false } })))["maik-gateway"].status, "degraded");
-  const one = byId(await H.systemHealthReport(healthy({ fetchImpl: async (url) => ({ ok: String(url).includes("generativelanguage") }) })))["maik-gateway"];
-  assert.equal(one.status, "degraded");
-  assert.match(one.reason, /hospital model server/);
   assert.equal(byId(await H.systemHealthReport(healthy({ lastTick: async () => ({ at: iso(NOW - 20 * 60000) }) })))["ops-tick"].status, "degraded");
   assert.equal(byId(await H.systemHealthReport(healthy({ lastTick: async () => undefined })))["ops-tick"].status, "down", "nowhere to record a run is not up");
   const dead = byId(await H.systemHealthReport(healthy({ repository: { latestByType: async (_t, type) => type === "_wardsynq_outbox" ? [{ status: "dead", attempts: 6 }] : healthy().repository.latestByType(_t, type) } })))["outbox"];
   assert.equal(dead.status, "degraded");
+});
+
+/* LT-34 (live retest 2026-09-16): health said MaiK Up while Ask MaiK returned 503. The probe read model metadata with the
+ * AI Studio key; clinical requests go to Vertex under the service account, where gemini-3.6-flash was asked for in a
+ * region that does not serve it. The probe now takes the clinical request's own route, host, location and model. */
+const { privateKey: SA_KEY } = await crypto.subtle.generateKey({ name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }, true, ["sign", "verify"]);
+const SA_PEM = `-----BEGIN PRIVATE KEY-----\n${Buffer.from(await crypto.subtle.exportKey("pkcs8", SA_KEY)).toString("base64")}\n-----END PRIVATE KEY-----`; // security-scan: allow test key generated per run, not a real credential
+const VERTEX_ENV = { GEMINI_API_KEY: SECRET, GCP_PROJECT: "wsq-proj-77", GCP_LOCATION: "us-central1", GCP_SA_EMAIL: "maik@wsq-proj-77.iam.gserviceaccount.com", GCP_WIF_PRIVATE_KEY: SA_PEM, GCP_WIF_AUDIENCE: "//iam.googleapis.com/projects/1/locations/global/workloadIdentityPools/p/providers/cf" };
+function vertexFetch(modelAnswers) {
+  const seen = [];
+  return { seen, fetchImpl: async (url) => {
+    const u = String(url); seen.push(u);
+    if (u.startsWith("https://sts.googleapis.com/")) return { ok: true, status: 200, json: async () => ({ access_token: "federated" }) };
+    if (u.startsWith("https://iamcredentials.googleapis.com/")) return { ok: true, status: 200, json: async () => ({ accessToken: "ya29.probe", expireTime: new Date(Date.now() + 3600e3).toISOString() }) };
+    if (u.includes("generativelanguage")) return { ok: true, status: 200, json: async () => ({}) };   // the AI Studio key path answers
+    return modelAnswers(u);
+  } };
+}
+
+test("LT-34: MaiK health probes the clinical path (Vertex, same host, location and model), so a model the clinical path cannot reach is Down", async () => {
+  const maik = { enabled: true, phiApproved: ["vertex"] };
+  const missing = vertexFetch(() => ({ ok: false, status: 404 }));
+  const d = byId(await H.systemHealthReport(healthy({ env: VERTEX_ENV, maik, fetchImpl: missing.fetchImpl, timeoutMs: 2000 })))["maik-gateway"];
+  assert.equal(d.status, "down", JSON.stringify(d));
+  assert.match(d.reason, /did not answer \(gemini-3\.6-flash on Vertex AI \(us\), status 404\)/);
+  assert.ok(!missing.seen.some((u) => u.includes("generativelanguage")), "the AI Studio key path is not what clinical requests use");
+  assert.ok(missing.seen.includes("https://aiplatform.us.rep.googleapis.com/v1/projects/wsq-proj-77/locations/us/publishers/google/models/gemini-3.6-flash:countTokens"), missing.seen.join("\n"));
+  assert.ok(!JSON.stringify(d).includes("wsq-proj-77") && !JSON.stringify(d).includes("googleapis"), "no project id or URL on the screen");
+
+  const ok = vertexFetch(() => ({ ok: true, status: 200 }));
+  assert.equal(byId(await H.systemHealthReport(healthy({ env: VERTEX_ENV, maik, fetchImpl: ok.fetchImpl, timeoutMs: 2000 })))["maik-gateway"].status, "up");
+
+  // The generate call a clinical request makes goes to the very endpoint the probe checked.
+  const { invoke, TASK } = await import("../functions/_wardsynq/maik-gateway.js");
+  const gen = vertexFetch(() => ({ ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: "A summary." }] }, finishReason: "STOP" }] }) }));
+  const r = await invoke({ task: TASK.SUMMARISE, phi: true, prompt: "p", config: maik, env: VERTEX_ENV, context: { patientId: "p1" }, fetchImpl: gen.fetchImpl });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.ok(gen.seen.includes("https://aiplatform.us.rep.googleapis.com/v1/projects/wsq-proj-77/locations/us/publishers/google/models/gemini-3.6-flash:generateContent"), gen.seen.join("\n"));
+});
+
+test("LT-34: MaiK on with no model approved for patient data is Not set up (hospital), even when an AI Studio key would answer", async () => {
+  const d = byId(await H.systemHealthReport(healthy({ env: { GEMINI_API_KEY: SECRET }, maik: { enabled: true }, fetchImpl: async () => ({ ok: true }) })))["maik-gateway"];
+  assert.deepEqual([d.status, d.setup], ["down", "hospital"], JSON.stringify(d));
+  assert.match(d.consequence, /not set up for this hospital/);
+  assert.match(d.reason, /No model provider is approved to receive patient data/);
 });
 
 test("withTimeout rejects a hanging promise and passes a quick one through", async () => {
@@ -241,4 +299,9 @@ test("screen: loading and a failed load never look healthy; each dependency show
   assert.match(shown, /uploads fail and existing documents cannot be opened; charting continues/);
   assert.ok(!/Every dependency answered/.test(shown));
   assert.ok(!/[—–]/.test(loading + failed + shown), "no em or en dash on screen");
+  // LT-34: a setup gap reads "Not set up yet", and times are this browser's clock, not raw ISO.
+  const setup = html(c, { ok: true, overall: "down", generatedAt: "2026-09-15T16:45:50.537Z", timeoutMs: 3000, dependencies: [{ id: "document-storage", name: "Document storage", status: "down", setup: "platform", checkedAt: "2026-09-15T16:45:50.537Z", reason: "x", consequence: "y" }] });
+  assert.match(setup, /<b>Not set up yet<\/b>/);
+  assert.ok(!setup.includes("2026-09-15T16:45:50.537Z"), setup);
+  assert.match(setup, /\d{2}-09-2026 \d{2}:\d{2}/);
 });

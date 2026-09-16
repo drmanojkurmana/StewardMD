@@ -31,6 +31,9 @@ import { reconciliationSummary } from "./med-reconciliation.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const IPD = "IPD", OPEN_ENC = "in-progress";
+/* migrate-inpatient.js ADMISSION_CLASSES, repeated rather than imported (that file's import chain is the whole ward);
+ * test/wardsynq-ward-metrics.test.mjs pins the two equal. */
+const ADMITTED = Object.freeze(["IPD", "ICU", "MATERNITY", "PEDIATRICS", "NICU"]);
 
 /** Administration states that mean a dose was started and never finished. */
 const IN_FLIGHT = Object.freeze(["ordered", "verified", "dispensed", "scanned", "held"]);
@@ -54,10 +57,15 @@ function summariseWard(input) {
   const patientIds = new Set(stays.map((e) => e.patientId));
   const mine = (r) => !want || patientIds.has(r && r.patientId);
 
-  // Occupancy. `unplaced` is admitted-to-a-ward-without-a-bed, which is a real state and not zero.
+  /* Occupancy. `unplaced` is admitted-to-a-ward-without-a-bed, which is a real state and not zero.
+   * ONE DEFINITION OF ADMITTED (LT-39, live test 2026-09-15): the bed board, patient flow (Command center) and the
+   * ward list count an admission by ADMISSION_CLASSES; this counted ED, theatre and PACU encounters as occupied
+   * beds too, so the ward home said "85 beds occupied, 2 without a bed" while Command center said 83 and 1 and the
+   * Map 84 admitted, all at once. Open work below still covers every open encounter. */
+  const admitted = stays.filter((e) => ADMITTED.includes(e.class));
   const beds = new Map();
   let unplaced = 0;
-  for (const e of stays) {
+  for (const e of admitted) {
     const bed = str(e.location && e.location.bed);
     if (!bed) { unplaced += 1; continue; }
     const w = str(e.location && e.location.ward) || "(no ward)";
@@ -86,7 +94,10 @@ function summariseWard(input) {
   return {
     ward: str(i.ward) || null,
     computedAt: new Date(nowMs).toISOString(),
+    // patients: every open stay (theatre and ED included; the group census and a theatre ward's home read it).
+    // admitted: the LT-39 count the hospital-wide ward home compares with the Map and Command center.
     patients: stays.length,
+    admitted: admitted.length,
     occupiedBeds: beds.size,
     unplaced,
     open: {
@@ -174,4 +185,4 @@ async function wardMetrics(request, env, ctx) {
   return { ...base, ok: true, metrics, ...(unreadable.length ? { unreadable, partial: true } : {}) };
 }
 
-export { IN_FLIGHT, summariseWard, blankUnreadable, wardMetrics };
+export { IN_FLIGHT, ADMITTED, summariseWard, blankUnreadable, wardMetrics };

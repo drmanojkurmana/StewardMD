@@ -734,5 +734,35 @@ P2.8 voice typing (f94933e1): on-device recognition only (`SpeechRecognition.ava
 
 - wardsynq.abdm.externalInvoiceHandling = "clinical-document" (only value; absent = default; other values 422). ABDM landing reads the hospital setting, names policy, value and source on each landed external-invoice audit row, and refuses to write Invoice, Claim, PreAuthorisation or CostEstimate whatever the mapping produces; billing report and patient invoice list count zero. Shown read-only on Admin > Integrations > ABDM.
 - wardsynq.criticalEscalation.level2NurseRule = "all-on-duty-nurses-in-ward" (only value; absent = default; other values 422 on org and group policy saves). One resolver switch in alert-recipients.js enforces nurse role, on duty now and the patient ward; the loop records {rule, source, ward, nurses, recipients}; empty set is NO_RECIPIENT. Shown read-only on the Critical result alerts card with "Applies until a Nurse-in-Charge role or assignment is implemented".
-- Open: a patient with no ward still uses hospital-wide cover, so level-2 nurses come from every ward (owner to decide).
+- Decided 2026-09-15: a patient with no ward alerts the admitting doctor (unless off duty) and the residents on duty in that doctor's department, or hospital-wide when the department is unknown; no nurses (branch no-ward-alert-cover).
 - Regression 6931, 0 fail. Every route has a screen and a test. Security scan 0 findings. Live admin.js 37, abdm.js 2.
+
+### 2026-09-15 (early) - ward on-duty team alerts, bilingual prints, complete translations, rota window fix
+
+- Owner: ward alerts go to everyone ON DUTY on the patient ward (nurses, residents, consultants), nobody off duty. level2WardRule default all-on-duty-ward-team (old nurse-only value still honoured); self duty status via POST /api/queue/roster/duty-status (own status only, audited through the event-log chain, expires at shift end or 12 h); ward board shows who would be alerted now (GET /ward/alert-cover, counts only); rota page shows on/off duty by ward.
+- Owner: printouts English main and authoritative, second language optional. Patient copy and discharge summary gain a second-language option behind wardsynq.printLanguages (default off); translated boxes carry catalog wording and 13 closed-list patient instructions only; English part byte-identical with the option on or off. Dates now "15 Sep 2026" in hospital time on both prints. Fixed: discharge.css blanked the Patient copy print.
+- Owner: no partial languages. All nine portal languages complete (191 keys each) via Gemini on Vertex AI (Gemini CLI key is blocked), validated for placeholders, digits and negation, safety keys and every patient instruction back-translated; Tamil "finish the full course" re-translated. The i18n test fails if any offered language misses a key.
+- Fix: security report read the rota by UTC date, so between midnight and 05:30 IST rostered staff were flagged as out-of-assignment; now one day of margin each side.
+- Regression 6954, 0 fail (before merging a large ICU OCR update from main; re-run on the merged tree in progress). Every route has a screen and a test. Security scan 0 findings. Live ward.js site90-duty-printlang, admin.js 39, i18n.js 8, print-lang.js 2.
+- Open: staff navigation label translation (approved, not built); owner questions: interns in the ward team, named contacts skipped when off duty, no-ward patient cover.
+
+### 2026-09-15 - G4 closed: live audit chain confirmed in production
+
+- First production WardSynQ writes since the 2026-09-14 11:10Z deploy: 14 connect_audit_event rows (tenant wardsynq-demo-superspecialty-hospital-1b10ee), 14 wardsynq_audit_chain rows. `node scripts/audit-chain-live-check.mjs --since 2026-09-14T11:10:00Z` reports CONFIRMED: all linked, chain head 14, newest 14 verified. The hourly session cron was removed.
+
+### 2026-09-15 - staff navigation labels in nine languages; no-ward alert cover
+
+- Staff shell language picker (next to Sign out) translates only the sidebar rail and the Admin Center tab strip; clinical screens stay English and the page lang stays en. 18 new nav keys translated in every language via Gemini on Vertex, validated. Headless staff nav 7/7.
+- Owner: a patient with no ward alerts the doctor they are admitted under (skipped and recorded when marked off duty or inactive) and the residents on duty in that doctor department (hospital-wide when the department is unknown); nurses and other consultants are not alerted; NO_RECIPIENT carries why. Builder kept the ordering clinician alerted as on any result. Headless crits board and duty runs pass.
+- Regression: full suite green except three source-check tests updated for the nav.* keys (16/16 after). Every route has a screen and a test. Security scan 0 findings. Live shell.js 39, admin.js 41, ward.js site91-noward.
+
+### 2026-09-15 - owner Report Bug fixes (37 reports of 2026-09-13)
+
+- Triage in docs/wardsynq/BUG_REPORTS.md (ids only): BUG 11, UX 3, FEATURE 1 built, FIXED-ALREADY 9, NEEDS-OWNER 12. Fixed: ICD and scheme search refused wardsynq.com (empty list shown as no match); Microbiology and Pathology tabs could not start reports; ED admit and transfer use real wards and departments; bed retire/bring back with occupied refusal and link from the bed board; tapping an occupied bed opens the chart; template opens without extra click; vitals no longer grouped with lab names; infusion duration no longer written into frequency; ward list department filter and self-closing filters; voice typing in every free-text box; ED board bold name and sex.
+- Regression 7035, 1 fail: test/onco-store.test.mjs rchop protocol schema, from another session breast NCCN update on main (fails on origin/main too), not WardSynQ. Every route has a screen and a test. Security scan 0 findings. Live ward.js site92-bugs0913, admin.js 42.
+
+### 2026-09-15 - owner Report Bug fixes, batch 2
+
+- MaiK card rows aligned; imaging orders no longer offer Collect (row reads sent for imaging with Open in Radiology; ECG to be performed; POST /ward/collect refuses non-specimen orders 409); ward selector no longer closes on open (select acts on change, paint waits while a native select is open, 15 s cap); hospital chooser page single aligned column; Remove hospital owner or platform owner only, two-step dialog with typed DELETE, soft delete with chained audit row, records retained (OPD console delete now owner-only with the typed word too).
+- Open owner decision: should ward imaging orders stay off the modality worklist until "Send for imaging"? Chart tab grouping (BUG-MU2PM1D9) in progress.
+- Regression 7044, only failure onco-store rchop schema (other session). Headless roster select, hospitals page, MaiK, golden path, bug reports 0913 all pass. Security scan 0 findings. Live ward.js site95, admin.js 43, shell.js 42.

@@ -61,6 +61,57 @@ try {
   const goodBody = await lastBody("/ward/collect");
   ok(goodBody && goodBody.specimenType === "Whole blood" && goodBody.scannedPatientBarcode === "SMD-H1-LAB01", "the collection posts the real specimen type and the real scanned wristband: " + JSON.stringify(goodBody));
 
+  // ---- 3. BUG-MU2PR8I2: the row's action follows the order's category. ------------------------------
+  const rowOf = (name) => `[].slice.call(document.querySelectorAll("li")).filter(function (l) { var b = l.querySelector("b"); return b && b.textContent === ${JSON.stringify(name)}; })[0]`;
+  ok(await ev(`var r = ${rowOf("Chest X-ray")}; return !!r && !r.querySelector('[data-w-act^="collectspecimen:"]') && /sent for imaging/.test(r.textContent) && !!r.querySelector('[data-w-act="radiologyopen:wsq-sr-img-1"]');`),
+    "an imaging order has no Collect button; it reads sent for imaging and opens in Radiology");
+  ok(await ev(`var r = ${rowOf("Resting ECG")}; return !!r && !r.querySelector("button") && /to be performed/.test(r.textContent);`),
+    "a procedure has no Collect button and reads to be performed");
+  await click('[data-w-act="radiologyopen:wsq-sr-img-1"]');
+  ok(await waitFor(`var p = document.querySelector("li.picked"); return document.body.textContent.indexOf("Imaging worklist") >= 0 && !!p && p.textContent.indexOf("Chest X-ray") >= 0 && /on the imaging worklist/.test(p.textContent);`),
+    "Open in Radiology lands on the imaging worklist with that order picked");
+
+  // ---- 4. LT-23: hand over and add a nursing task FROM THE CHART, and come back to it. -------------------
+  await click('[data-w-act="back"]');
+  ok(await waitFor(`return !!document.querySelector('[data-w-act="handoverchart"]');`), "back on the chart, its Nursing category carries Hand over");
+  await click('[data-w-act="handoverchart"]');
+  ok(await waitFor(`return !!document.getElementById('wHo_situation') && !!document.querySelector('[data-w-act="handovergive"]');`), "Hand over opens the SBAR form for this patient");
+  await ev(`document.getElementById('wHo_situation').value = 'Day 2 pneumonia, stable on room air'; return true;`);
+  await click('[data-w-act="handovergive"]');
+  ok(await waitFor(`return document.body.textContent.indexOf('Handed over') >= 0;`), "the handover is recorded and says it waits to be taken");
+  const hoBody = await lastBody("/ward/handover");
+  ok(hoBody && hoBody.encounterId === "wsq-enc-smd-h1-lab01" && hoBody.sbar && hoBody.sbar.situation === "Day 2 pneumonia, stable on room air", "the handover posts this chart's encounter and the words typed: " + JSON.stringify(hoBody));
+  await click('[data-w-act="back"]');
+  ok(await waitFor(`return !!document.querySelector('[data-w-act="nursetasks"]');`), "back from the handover returns to the same chart");
+  await click('[data-w-act="nursetasks"]');
+  ok(await waitFor(`return !!document.getElementById('wNtTitle');`), "Nursing tasks opens the task form for this patient");
+  await ev(`document.getElementById('wNtTitle').value = 'Turn every 2 hours'; return true;`);
+  await click('[data-w-act="ntaskadd"]');
+  ok(await waitFor(`return document.body.textContent.indexOf('Task added') >= 0;`), "the task is added");
+  const taskBody = await lastBody("/ward/nursing-task");
+  ok(taskBody && taskBody.patientId === "opd-pat-smd-h1-lab01" && taskBody.encounterId === "wsq-enc-smd-h1-lab01" && taskBody.title === "Turn every 2 hours", "the task posts this chart's patient and encounter: " + JSON.stringify(taskBody));
+  await click('[data-w-act="back"]');
+  ok(await waitFor(`return !!document.querySelector('[data-w-act="nursetasks"]');`), "back from nursing tasks returns to the chart");
+
+  // ---- 5. LT-25: the laboratory board collects, and never offers a result for a sample nobody took. -------
+  await click('[data-w-act="back"]');
+  ok(await waitFor(`return !!document.querySelector('[data-w-act="labboard"]');`), "the ward list carries the Laboratory board");
+  await click('[data-w-act="labboard"]');
+  ok(await waitFor(`return !!document.querySelector('[data-w-act="collectspecimen:wsq-sr-fbc"]');`), "an uncollected blood test has Collect on the laboratory board");
+  ok(await ev(`return !document.querySelector('[data-w-act="labresultopen:wsq-sr-fbc"]') && !!document.querySelector('[data-w-act="labresultopen:wsq-sr-tsh"]');`), "Enter result is not offered for the uncollected test");
+  const hospitalReads = await ev(`return window.__calls.filter(function (c) { return c.url && c.url.indexOf('/ward/collections') >= 0 && c.url.indexOf('scope=hospital') >= 0; }).length;`);
+  await setPrompts(["Whole blood", ""]);
+  await click('[data-w-act="collectspecimen:wsq-sr-fbc"]');
+  ok(await waitFor(`return !document.querySelector('[data-w-act="collectspecimen:wsq-sr-fbc"]') && document.body.textContent.indexOf('Collected, awaiting the laboratory') >= 0 && /collected .* by lab\\.01@h\\.test/.test(document.body.textContent);`), "after Collect the board re-reads: in transit, with who collected and when");
+  const fbcBody = await lastBody("/ward/collect");
+  ok(fbcBody && fbcBody.serviceRequestId === "wsq-sr-fbc" && fbcBody.specimenType === "Whole blood", "Collect posts the board's order: " + JSON.stringify(fbcBody));
+  ok((await ev(`return window.__calls.filter(function (c) { return c.url && c.url.indexOf('/ward/collections') >= 0 && c.url.indexOf('scope=hospital') >= 0; }).length;`)) > hospitalReads, "the laboratory board, not the chart, was reloaded");
+  await click('[data-w-act="labresultopen:wsq-sr-tsh"]');
+  ok(await waitFor(`return !!document.getElementById('wLrVal0');`), "Enter result opens the entry form");
+  await ev(`document.getElementById('wLrTest0').value = 'TSH'; document.getElementById('wLrVal0').value = '2.1'; return true;`);
+  await click('[data-w-act="labresultsave"]');
+  ok(await waitFor(`return document.body.textContent.indexOf('Not released: no sample has been collected for this test') >= 0;`), "a refused release says plainly that nothing was released and why");
+
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }
 console.log(fails ? `\n${fails} check(s) failed` : "\nALL CHECKS PASSED");

@@ -121,7 +121,8 @@ test("the approvals screen renders a chain, including one that was taken back", 
   assert.match(html, /waiting/);
   assert.match(html, /something was taken back/);
   // The approval that happened is still shown, because it happened.
-  assert.match(html, /approved by micro\.b/);
+  // The approver is rendered through the staff identity element (owner 2026-09-16: name and employee id).
+  assert.match(html, /approved by <span class="w-who">micro\.b<\/span>/);
 });
 
 test("purchasing shows a part-delivered order and names an over-delivery", () => {

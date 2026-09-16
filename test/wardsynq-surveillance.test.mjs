@@ -286,6 +286,6 @@ test("11. copilot tasks pass the computed findings as facts, keep them apart fro
   seed(undefined, down);
   await seedPatient();
   const d = await ask(DOCTOR, { task: "prepare-rounds" });
-  assert.equal(d.__status, 502);
+  assert.equal(d.__status, 503, "503, never 502: Cloudflare swaps a Function's 502 for its own HTML page (LT-40)");
   assert.ok(!d.interaction, "no answer is fabricated when the model is unavailable");
 });

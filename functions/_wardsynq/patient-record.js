@@ -163,7 +163,9 @@ async function assemble(svc, patientId, neverRelease) {
   const excludedDiagnoses = (conditions || []).filter(Boolean).length - diagnoses.length;
 
   return {
-    patient: patient ? { id: patient.id, name: patient.name, mrn: patient.mrn, dob: patient.dob } : null,
+    /* LT-24: a date of birth worked out from a typed age is not a date of birth. It is left off a page
+     * the patient is handed rather than printed as if somebody had recorded it. */
+    patient: patient ? { id: patient.id, name: patient.name, mrn: patient.mrn, dob: patient.approxDob ? null : patient.dob } : null,
     diagnoses, excludedDiagnoses,
     /* Never filtered by anything in this file. The value of an allergy list is that the patient
      * carries it to the next hospital, and one this file could trim would not be worth carrying. */
@@ -252,7 +254,7 @@ function statements(doc) {
 /** PURE. What the clinician must read BEFORE handing the page over. Never printed on it. */
 function clinicianWarnings(neverReleaseConfigured) {
   if (neverReleaseConfigured) return [];
-  return ["This hospital has not configured wardsynq.neverRelease, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."];
+  return ["This hospital has not chosen any results to withhold from patients, so no result is withheld from this page on grounds of sensitivity. Read it before you hand it over."];
 }
 
 /** ctx: { migration, patientId, neverRelease? } - what the patient would be given. Writes nothing. */

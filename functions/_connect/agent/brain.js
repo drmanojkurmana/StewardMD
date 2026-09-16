@@ -39,14 +39,14 @@ export const ENDPOINT_ROLES = Object.freeze(["data", "prerequisite", "lookup", "
 const RESPONSE_KINDS = Object.freeze(["json", "html", "text", "empty", "unknown"]);
 export const SUGGESTIONS = Object.freeze(["ok", "other-endpoint", "ask-doctor"]);
 
-const LIMITS = Object.freeze({ str: 120, list: 60, planList: 200, snapshot: 8000, path: 300 });
+const LIMITS = Object.freeze({ str: 120, list: 60, planList: 200, snapshot: 8000, path: 300, excerpt: 1200 });
 const DIGITS = /\d{3,}/;
 const CONTROL = /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/; // newlines and tabs are fine: the snapshot is line-based
 const ALLOWED_KEYS = Object.freeze({
   "classify": ["op", "origin", "path", "headers", "labels", "snapshot", "ask"],
   "map-columns": ["op", "origin", "resource", "headers"],
   "next": ["op", "origin", "controls", "looking", "path"],
-  "verify": ["op", "origin", "resource", "headers", "rowCount", "kind", "path"],
+  "verify": ["op", "origin", "resource", "headers", "rowCount", "kind", "path", "excerpt"],
   "pick-endpoint": ["op", "origin", "resource", "action", "headers", "candidates"],
   "plan-controls": ["op", "origin", "controls", "looking", "path"],
 });
@@ -152,6 +152,15 @@ export function phiGate(payload) {
       clean.candidates.push(out);
     }
   }
+  /* THE ONE PLACE CLINICAL WORDS MAY REACH THE MODEL, and only to answer "is this really a report?".
+   * The phone scrubs first (connect-agent/phone/deep-crawl.mjs scrubExcerpt): identifying lines become
+   * the marker "[identifier]", digit runs become '#'. The same gate as everything else applies here, so
+   * a name with a number in it, an e-mail or an MRN that survived the phone is refused, not forwarded. */
+  if (payload.excerpt !== undefined) {
+    const why = badString(payload.excerpt, LIMITS.excerpt);
+    if (why) return { ok: false, reason: "excerpt " + why };
+    clean.excerpt = payload.excerpt.replace(/[ \t]+/g, " ").trim();
+  }
   if (payload.snapshot !== undefined) {
     const why = badString(payload.snapshot, LIMITS.snapshot);
     if (why) return { ok: false, reason: "snapshot " + why };
@@ -184,7 +193,7 @@ const SYSTEM = "You help a read-only integration agent understand the SCREENS of
   + "You are given screen structure only: element labels, table column headers, a URL path and an accessibility-style outline. "
   + "There is never any patient data. Answer with a single JSON object and nothing else.";
 
-function promptFor(clean) {
+export function promptFor(clean) {
   if (clean.op === "classify") {
     return "Screen structure:\n" + JSON.stringify({ path: clean.path || null, headers: clean.headers || [], labels: clean.labels || [], outline: clean.snapshot || null })
       + "\n\nResources: " + RESOURCES.join(", ") + ".\n"
@@ -219,8 +228,13 @@ function promptFor(clean) {
   if (clean.op === "verify") {
     return "A read-only agent replayed the call it discovered for the resource \"" + clean.resource + "\"" + (clean.path ? " (" + clean.path + ")" : "") + " for one real patient and got "
       + clean.rowCount + " rows of kind " + (clean.kind || "unknown") + " with these columns:\n" + JSON.stringify(clean.headers || [])
-      + "\n\nJudge the STRUCTURE only. Is this really the patient's " + clean.resource + " (worklist = many patients of a ward, not a list of doctors, departments or menu items; labs = investigations with results, not just an order list; medications = drugs with dose or frequency; radiology = studies with reports; notes/history/discharge = clinical text or visit rows)? "
-      + "Answer: {\"ok\": <true|false>, \"resource\": <what these columns most likely are, one of " + RESOURCES.join(", ") + " or \"none\">, \"confidence\": <0 to 1>, \"reason\": <short>, \"suggestion\": <\"ok\" if it is right, \"other-endpoint\" if another call is likely to hold the real data, \"ask-doctor\" if only the doctor can show where it lives>}";
+      + "\n\nJudge the " + (clean.excerpt ? "columns AND the text below" : "STRUCTURE only") + ". Is this really the patient's " + clean.resource + " (worklist = ADMITTED in-patients of a ward (a bed, ward or admission column), not an out-patient or OPD queue and not a list of doctors, departments or menu items; labs = investigations with results, not just an order list; medications = drugs with dose or frequency; radiology = studies with reports; notes/history/discharge = clinical text or visit rows)? "
+      + (clean.excerpt
+        ? "\n\nThis is the longest text the call returned. It has been redacted before reaching you: every identifying line was replaced by the marker [identifier] and every number of 3+ digits by #. Nothing here identifies a person.\n---\n"
+          + clean.excerpt + "\n---\n"
+          + "Say what this text IS. A radiology report reads like a study: a modality or body part, findings, an impression. A lab report reads like measured analytes with values and ranges. A discharge summary or a note reads like a clinical narrative. If it is only [identifier] markers, a header, an address block, a menu or boilerplate, then it carries no report at all and the answer is false with resource \"patient\" (demographics) or \"none\".\n"
+        : "")
+      + "Answer: {\"ok\": <true|false>, \"resource\": <what this most likely is, one of " + RESOURCES.join(", ") + " or \"none\">, \"confidence\": <0 to 1>, \"reason\": <short>, \"suggestion\": <\"ok\" if it is right, \"other-endpoint\" if another call is likely to hold the real data, \"ask-doctor\" if only the doctor can show where it lives>}";
   }
   return "A read-only agent is on an EMR screen" + (clean.path ? " at path " + clean.path : "") + " and can tap ONE of these controls (labels, in order, zero-based):\n"
     + JSON.stringify(clean.controls) + "\n\nIt is still looking for: " + clean.looking.join(", ") + ".\n"

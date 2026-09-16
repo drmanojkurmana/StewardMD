@@ -20,8 +20,11 @@ mock.module("../functions/_fbfirestore.js", {
     fsGet: async (_e, path) => { const d = docs.get(path); return d ? { id: path, name: path, fields: { ...d.fields }, updateTime: d.updateTime } : null; },
     fsQuery: async (_e, coll, opts) => {
       const where = opts && opts.where, limit = (opts && opts.limit) || 100, out = [];
-      for (const [path, d] of docs) {
+      // Paging as Firestore does it: ordered by document name, starting after the previous page's last name.
+      const entries = opts && (opts.orderByName || opts.startAfter) ? [...docs].sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)) : docs;
+      for (const [path, d] of entries) {
         if (!path.startsWith(coll + "/") || path.slice(coll.length + 1).includes("/")) continue;
+        if (opts && opts.startAfter && path <= opts.startAfter) continue;
         if (where && String(d.fields[where.field]) !== String(where.value)) continue;
         out.push({ id: path.slice(coll.length + 1), name: path, fields: { ...d.fields }, updateTime: d.updateTime });
         if (out.length >= limit) break;
@@ -189,6 +192,9 @@ export async function releasePotassium(p, value, minutesAgo, analyte) {
   const test = analyte || "Potassium";
   const order = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId: p.encounterId, code: test, category: "laboratory" });
   if (order.__status !== 200) throw new Error("order failed " + JSON.stringify(order));
+  // LT-25: a result is released for a sample somebody collected.
+  const got = await as(LAB, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: order.orderId, specimenType: "Serum" });
+  if (got.__status !== 200) throw new Error("collect failed " + JSON.stringify(got));
   const r = await as(LAB, "/ward/release-result", "POST", {
     orgId: ORG, serviceRequestId: order.orderId, status: "final", reportedAt: new Date(Date.now() - (minutesAgo || 0) * 60000).toISOString(),
     tests: [{ test, value, unit: "mmol/L" }],

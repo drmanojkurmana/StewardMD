@@ -30,11 +30,13 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { vitalsToObservations, VITAL_CODES } from "./migrate-vitals.js";
+import { vitalsToObservations, VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { patientIdForMrn, admissionIdFor } from "./opd-identity.js";
 import { recordOverrides } from "./override-analytics.js";
 import { resolveFormulary, formularyStatus } from "./formulary.js";
 import { chainState, approvalCovers, levelsFor } from "./verification.js";
+import { orderEntrySafety } from "./migrate-emar.js";
+import { verificationState } from "./pharmacy-verify.js";
 
 /**
  * Does this approval reference actually approve this drug, right now?
@@ -66,7 +68,7 @@ async function verifyApprovalRef(svc, ref, drug, ctx) {
 }
 import { isActive as emergencyIsActive } from "./emergency-mode.js";
 import { compileAdvisories, evaluateAdvisories } from "./advisories.js";
-import { getWardByName, getBedByName, updateBed, listWards, listBeds } from "../_opd_org_store.js";
+import { getWardByName, getBedByName, updateBed, listWards, listBeds, listDepartments } from "../_opd_org_store.js";
 
 const IPD = "IPD";
 // ICU joined 2026-09-08 (Task 2.2). An admission is still ONE act through this ONE file - a ward
@@ -388,6 +390,17 @@ async function releaseBedClaim(svc, candidate) {
  * A caller with no read grant gets a refusal, not an empty list — an empty ward and a forbidden ward
  * must never look the same to a nurse.
  */
+/* Ward name -> its department's name, from the hospital's own master data (Admin, departments and wards).
+ * A ward with no department, or departments that cannot be read, is simply absent: never guessed. */
+async function departmentNames(env, orgId, wards) {
+  const out = new Map();
+  if (!orgId || !(wards || []).some((w) => w && w.departmentId)) return out;
+  let depts = [];
+  try { depts = await listDepartments(env, orgId); } catch { return out; }
+  for (const w of wards) { const d = depts.find((x) => x.id === w.departmentId); if (d && d.name) out.set(w.name, d.name); }
+  return out;
+}
+
 async function listWard(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -397,7 +410,10 @@ async function listWard(request, env, ctx) {
   if (error) return { ...base, ...error, patients: [] };
 
   let encounters;
-  try { encounters = await svc.list("Encounter", 200); }
+  /* LT-21: this read 200 encounters, oldest first, every discharged stay included, and said nothing when there
+   * were more: the newest admissions were the ones silently left off the ward list and the nurse worklist. */
+  const ENCOUNTER_CAP = 1000;
+  try { encounters = await svc.list("Encounter", ENCOUNTER_CAP); }
   catch (e) {
     /* A SCOPE REFUSAL IS A 403, NOT A SERVER ERROR. A role can hold queue.view (which opens this
      * route) and still have no read scope on Encounter - pharmacy is exactly that - and answering
@@ -424,9 +440,12 @@ async function listWard(request, env, ctx) {
    * turn a readable ward list into an error. */
   let byId = new Map();
   try {
-    const roster = await svc.list("Patient", 400);
+    const roster = await svc.list("Patient", ENCOUNTER_CAP);
     byId = new Map((roster || []).filter((p) => p && p.id).map((p) => [p.id, p]));
   } catch (e) { /* the encounters are still worth showing; the rows simply carry no name */ }
+  // BUG-MU0710W4-04KD: the ward list filters by department.
+  let deptOf = new Map();
+  if (ctx.orgId) { try { deptOf = await departmentNames(env, ctx.orgId, await listWards(env, ctx.orgId)); } catch { deptOf = new Map(); } }
 
   const patients = open.map((e) => {
     const p = byId.get(e.patientId) || null;
@@ -436,13 +455,15 @@ async function listWard(request, env, ctx) {
       name: (p && (p.name || p.display)) || null,
       mrn: (p && p.mrn) || null,
       ward: (e.location && e.location.ward) || null, bed: (e.location && e.location.bed) || null,
+      department: (e.location && deptOf.get(e.location.ward)) || null,
       admittedAt: e.periodStart || null, attendingId: e.attendingId || null, version: e.version,
     };
   });
   /* The hospital's country, so the ward screen can LABEL a temperature box with the unit this
    * server will store it in. Without it the two were inferred separately and disagreed: the box
    * said Fahrenheit, the server stored Celsius, and 98.6 went into the record as 98.6 Cel. */
-  return { ...base, ok: true, patients, region: str(ctx.region) || "IN" };
+  return { ...base, ok: true, patients, region: str(ctx.region) || "IN",
+    ...((encounters || []).length >= ENCOUNTER_CAP ? { partial: true, partialWarning: `Only the first ${ENCOUNTER_CAP} stays on record were read; an admitted patient may be missing from this list.` } : {}) };
 }
 
 /**
@@ -573,9 +594,21 @@ function patientInstructionsRefusal(v) {
 }
 
 /**
- * Creates an inpatient medication order. The CDSS pre-check is run and REPORTED, never used to gate:
- * the content is unapproved seed data (see rx-safety.js) and this file does not get to invent a new
- * clinical control. ctx: { migration, order: {...}, safety?, actorDeps, recordDeps }.
+ * Creates an inpatient medication order. The CDSS check is run HERE, on the server, by the same engine
+ * and against the same record facts as the pharmacy queue and the bedside scan (migrate-emar.js
+ * orderEntrySafety), and REPORTED, never used to gate: the content is unapproved seed data (see
+ * rx-safety.js and seed-signoff.js) and this file does not get to invent a new clinical control. The one
+ * exception is a dose above an absolute ceiling, alone or summed with the patient's other active orders of
+ * the same molecule (ORDER_ENTRY_HARD_STOPS, retest 2026-09-16): that is refused, 409, nothing written.
+ *
+ * LT-14: this used to report whatever `safety` verdict the CALLER sent, and the ward screen sent none,
+ * so every chart order was saved with `safety: null` and nothing ran. A caller's verdict is no longer
+ * read at all. `checkOnly` runs the formulary and the engine and writes nothing, so a screen can show
+ * the findings before the prescriber confirms (the OPD's /rx-safety pattern). `overrideReason` is the
+ * prescriber's reason for proceeding past overridable findings; it is attributed to the acting actor
+ * here, never to anyone a caller names.
+ *
+ * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, actorDeps, recordDeps }.
  */
 async function createWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
@@ -652,6 +685,36 @@ async function createWardMedicationOrder(request, env, ctx) {
   let current;
   try { current = await svc.get("MedicationOrder", candidate.id); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  /* The same drug already active on this admission: prescribing it again REPLACES that order (one order
+   * per encounter and drug). Said before the write, never discovered after it. */
+  const replaces = current && current.status === "active"
+    ? { orderId: current.id, version: current.version, dose: current.dose || null, route: current.route || null, frequency: current.frequency || null }
+    : null;
+
+  let safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, []);
+  if (ctx.checkOnly === true) {
+    return { ...base, ok: true, written: 0, checkOnly: true, drug: candidate.drug, safety, formulary: fStatus.state,
+      ...(advisories.length ? { advisories } : {}), ...(replaces ? { replaces } : {}), actor: resolved.actor.id, role: resolved.role };
+  }
+  /* A hard stop is refused whatever reason comes with it, and nothing is written (orderEntrySafety,
+   * ORDER_ENTRY_HARD_STOPS). Every other finding stays reported and proceeds with a reason. */
+  if (safety.checked && (safety.hardStops || []).length) {
+    return { ...base, ok: false, status: 409, error: "safety_hard_stop", detail: safety.hardStops.map((f) => f.message).join(" "),
+      drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
+  }
+  const overrideReason = str(ctx.overrideReason).slice(0, 500);
+  let overrides = [];
+  if (safety.checked && overrideReason && safety.overridables.length) {
+    overrides = safety.overridables.map((f) => ({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode: "prescriber-judgement", rationale: overrideReason, actorId: resolved.actor.id }));
+    safety = await orderEntrySafety(svc, ctx.rulePack || null, candidate, overrides);
+  }
+  /* What the prescriber was shown, ON the order: the pharmacist and the nurse read the order, not this
+   * response, and a finding somebody proceeded past belongs with the prescription it was about. */
+  candidate.safetyAtOrder = safety.checked
+    ? { checked: true, rulePackVersion: safety.rulePackVersion, checkedAt: new Date().toISOString(),
+        findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.overridden ? { overridden: true } : {}) })),
+        unresolvedDrug: !!safety.unresolvedDrug, ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
+    : { checked: false, code: safety.code, checkedAt: new Date().toISOString() };
 
   let out;
   try {
@@ -668,25 +731,25 @@ async function createWardMedicationOrder(request, env, ctx) {
    * A FAILURE HERE NEVER FAILS THE ORDER. The order and the prescriber's safety decision are the
    * clinical act; losing an analytics row must not cost a patient their medicine. It is reported on
    * the response rather than thrown. */
-  let overrides = null;
+  let overrideRows = null;
   try {
-    overrides = await recordOverrides(svc, {
-      safety: ctx.safety, orderId: candidate.id, patientId: candidate.patientId,
+    overrideRows = await recordOverrides(svc, {
+      safety: safety.checked ? { ...safety, overrides } : null, orderId: candidate.id, patientId: candidate.patientId,
       encounterId: candidate.encounterId, drug: candidate.drug, idempotencyKey: ctx.idempotencyKey || null,
     });
-  } catch (e) { overrides = { written: 0, overrides: [], error: "override_not_recorded", detail: str(e && e.message) }; }
+  } catch (e) { overrideRows = { written: 0, overrides: [], error: "override_not_recorded", detail: str(e && e.message) }; }
 
   return {
     ...base, ok: true, written: 1, orderId: candidate.id, patientId: candidate.patientId,
     encounterId: candidate.encounterId, version: out.record.version, status: candidate.status,
-    safety: ctx.safety || null,
+    safety, ...(replaces ? { replaced: replaces } : {}),
     /* The hospital's own advice, alongside the safety engine's findings and never mixed into them.
      * Every entry carries source:"hospital-advisory" and blocking:false. */
     ...(advisories.length ? { advisories } : {}),
     formulary: fStatus.state,
     // `fired` is included: an evaluation where the rule was RESPECTED writes a firing and no
     // override, and leaving that off the response made the denominator invisible to the caller.
-    ...(overrides && (overrides.written || overrides.error || overrides.rejected || overrides.fired) ? { overridesRecorded: overrides } : {}),
+    ...(overrideRows && (overrideRows.written || overrideRows.error || overrideRows.rejected || overrideRows.fired) ? { overridesRecorded: overrideRows } : {}),
     actor: resolved.actor.id, role: resolved.role,
   };
 }
@@ -846,9 +909,7 @@ async function bedBoard(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), wards: [] };
   }
 
-  const want = str(ctx.ward).toLowerCase();
-  const open = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN)
-    .filter((e) => !want || str(e.location && e.location.ward).toLowerCase() === want);
+  const allOpen = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN);
 
   // TASK 4.2: the real Ward/Bed master data from TASK 4.1 wins over the free-text org config the
   // moment a hospital has actually created any - this is what turns the config blob's own
@@ -857,19 +918,42 @@ async function bedBoard(request, env, ctx) {
   // unchanged, so nothing that already worked breaks.
   let cfg = ctx.beds && typeof ctx.beds === "object" ? ctx.beds : null;
   const bedStateOf = new Map();   // "ward|bed" (lowercased) -> real state, only when master data exists
+  const deptOf = new Map();       // ward name -> its department's name, from the hospital's own master data
+  const canonical = new Map();    // lowercased ward name or code -> the ward's own name (LT-03)
+  const retired = new Set();      // lowercased names and codes of wards the hospital has turned off
+  let masterKnown = false, bedsUnread = false;
   if (ctx.orgId) {
-    let masterWards = [];
-    try { masterWards = (await listWards(env, ctx.orgId)).filter((w) => w.active); } catch { masterWards = []; }
+    let allWards = [];
+    try { allWards = await listWards(env, ctx.orgId); } catch { allWards = []; }
+    const masterWards = allWards.filter((w) => w.active);
+    for (const w of allWards.filter((x) => !x.active)) { retired.add(str(w.name).toLowerCase()); if (str(w.code)) retired.add(str(w.code).toLowerCase()); }
+    /* BUG-MU06Z46U-DMDX / BUG-MU08T4RL-GU0N: admitting and transferring pick a department by picking one of
+     * its wards, so the board names each ward's department. Unreadable departments leave it null. */
+    for (const [k, v] of await departmentNames(env, ctx.orgId, masterWards)) deptOf.set(k, v);
     if (masterWards.length) {
+      masterKnown = true;
       cfg = {};
+      /* One read of the hospital's beds, grouped by ward. A read that fails is not "this ward has no beds": it
+       * leaves every ward's bed list unknown and says so. */
+      let beds = null;
+      try { beds = (await listBeds(env, ctx.orgId)).filter((b) => b.active); } catch { beds = null; bedsUnread = true; }
       for (const w of masterWards) {
-        let beds = [];
-        try { beds = (await listBeds(env, ctx.orgId, w.id)).filter((b) => b.active); } catch { beds = []; }
-        cfg[w.name] = beds.map((b) => b.name);
-        for (const b of beds) bedStateOf.set(`${w.name.toLowerCase()}|${b.name.toLowerCase()}`, b.state);
+        canonical.set(str(w.name).toLowerCase(), w.name);
+        if (str(w.code) && !canonical.has(str(w.code).toLowerCase())) canonical.set(str(w.code).toLowerCase(), w.name);
+        if (!beds) { cfg[w.name] = null; continue; }
+        const mine = beds.filter((b) => b.wardId === w.id);
+        cfg[w.name] = mine.map((b) => b.name);
+        for (const b of mine) bedStateOf.set(`${w.name.toLowerCase()}|${b.name.toLowerCase()}`, b.state);
       }
     }
   }
+  /* LT-03: an encounter's ward is the name somebody typed or picked. ADT matches it to the hospital's wards without
+   * regard to case (getWardByName), but this board grouped by the exact text, so "cardiology ward" or the ward code
+   * "CAR" made a second, bed-less row beside "Cardiology Ward" that read "Bed list not configured". Matched here the
+   * same way, by name or code, never by a partial name: "cardio" is not guessed to be Cardiology Ward. */
+  const wardNameOf = (name) => canonical.get(str(name).toLowerCase()) || str(name);
+  const want = str(ctx.ward).toLowerCase();
+  const open = allOpen.filter((e) => !want || wardNameOf(e.location && e.location.ward).toLowerCase() === wardNameOf(ctx.ward).toLowerCase());
   const byWard = new Map();
   const wardOf = (name) => {
     const key = str(name) || "(no ward recorded)";
@@ -897,7 +981,7 @@ async function bedBoard(request, env, ctx) {
   } catch (e) { /* the beds are still worth showing; the tiles simply carry no name */ }
 
   for (const e of open) {
-    const w = wardOf(e.location && e.location.ward);
+    const w = wardOf(wardNameOf(e.location && e.location.ward));
     const p = nameById.get(e.patientId) || null;
     const row = {
       encounterId: e.id, patientId: e.patientId,
@@ -908,9 +992,15 @@ async function bedBoard(request, env, ctx) {
     if (row.bed) w.occupied.push(row); else w.unplaced.push(row);   // admitted to the ward, no bed yet
   }
   for (const w of byWard.values()) {
+    w.department = deptOf.get(w.ward) || null;
     const list = cfg && Array.isArray(cfg[w.ward]) ? cfg[w.ward].map(String) : null;
-    if (!list) { w.free = []; w.bedsKnown = false; continue; }
+    /* LT-03: WHY a ward has no bed list, said plainly. A ward the hospital's ward list does not have (typed free text
+     * at admission, or a ward since turned off) is not a ward whose beds were never set up, and the fix differs:
+     * move the patient to a real ward, or add the ward. The patients in it are still shown. */
+    if (masterKnown && !Object.prototype.hasOwnProperty.call(cfg, w.ward)) w.notInWardList = retired.has(w.ward.toLowerCase()) ? "retired" : "unknown";
+    if (!list) { w.free = []; w.bedsKnown = false; if (bedsUnread) w.bedsUnread = true; continue; }
     w.bedsKnown = true;
+    if (!list.length) w.noBeds = true;
     const taken = new Set(w.occupied.map((o) => String(o.bed).toLowerCase()));
     // A bed with no patient in it is not automatically free: the master record may say blocked,
     // cleaning or maintenance, and that is the hospital's own call, not this board's to overrule.
@@ -981,12 +1071,17 @@ function personName(actorId) {
  * role-specific fields are preferred where they exist because they are more precise about the
  * clinical act: a prescription's prescriber and an order's requester are the person answerable for
  * it, which is not always the session that saved the row. */
+function whoIdOf(r) {
+  return str((r && (r.authorId || r.prescriberId || r.requesterId || r.performerId)) || (r && r.writtenBy && r.writtenBy.id) || "");
+}
 function whoOf(r) {
-  return personName(
-    (r && (r.authorId || r.prescriberId || r.requesterId || r.performerId))
-    || (r && r.writtenBy && r.writtenBy.id)
-    || "",
-  );
+  return personName(whoIdOf(r));
+}
+/* Owner 2026-09-16: the screen names the person. Beside the label's words an event carries the actor id itself
+ * (`byId`, and `signedById` / `witnessId` where the record has them) and the label without the actor (`labelBase`),
+ * so the chart shows the staff member's name and employee id, resolved at display. The record is unchanged. */
+function withActor(event, id, base) {
+  return id ? { ...event, byId: id, labelBase: base } : event;
 }
 
 /* What KIND of thing happened, for colour coding and for the filters a reader uses to pull one
@@ -1078,7 +1173,7 @@ const TIMELINE_LABEL = {
     return `${r.class || "Visit"}: ${what}${where}${who ? ` · by ${who}` : ""}`;
   },
   Condition: (r, who) => `${who ? `${who} recorded` : "Recorded"} a diagnosis: ${r.display || r.code}${r.clinicalStatus ? ` (${r.clinicalStatus})` : ""}`,
-  Observation: (r, who) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${r.unit}` : ""}` : ""}${who ? ` · by ${who}` : ""}`,
+  Observation: (r, who) => `${OBSERVATION_NAME[r.code] || r.code}${r.value != null ? `: ${r.value}${r.unit ? ` ${displayUnit(r.unit)}` : ""}` : ""}${who ? ` · by ${who}` : ""}`,
   MedicationOrder: (r, who) => `${who ? `${who} prescribed` : "Prescribed"} ${r.drug}${r.dose && r.dose.value != null ? ` ${r.dose.value}${r.dose.unit || ""}` : ""}${r.route ? ` ${r.route}` : ""}${r.frequency ? ` ${r.frequency}` : ""} — ${r.status || "draft"}`,
   MedicationAdministration: (r, who) => `${r.drug || "Medication"} — ${r.status || "ordered"}${r.holdReason ? ` (${r.holdReason})` : ""}${who ? ` · by ${who}` : ""}`,
   /* WHO ASKED FOR IT travels with the order. "Who ordered this chest film, and when" is the first
@@ -1132,7 +1227,8 @@ function edVisitEvents(versions) {
     if (i === 0) {
       const at = str(v.periodStart) || metaAt(v);
       const who = writer(v);
-      if (at) out.push({ at, resourceType: "Encounter", id: v.id, category: "visit", label: `ED: arrived${v.reason ? `, ${v.reason}` : ""}${who ? ` · by ${who}` : ""}`, ...(who ? { who } : {}) });
+      const base = `ED: arrived${v.reason ? `, ${v.reason}` : ""}`;
+      if (at) out.push(withActor({ at, resourceType: "Encounter", id: v.id, category: "visit", label: `${base}${who ? ` · by ${who}` : ""}`, ...(who ? { who } : {}) }, whoIdOf(v), base));
     }
     // triageSeq tells two triages apart even inside one millisecond (migrate-ed.js triageKey()).
     const tKey = !v.triagedAt ? null : v.triageSeq != null ? `seq:${v.triageSeq}` : `at:${v.triagedAt}`;
@@ -1140,24 +1236,26 @@ function edVisitEvents(versions) {
       const who = personName(v.triagedBy);
       const retriage = prevTriage != null;
       const from = v.previousAcuity != null ? v.previousAcuity : prevAcuity;
-      out.push({
+      const base = retriage ? `Re-triaged: acuity ${from != null ? `${from} to ` : ""}${v.acuity}` : `Triaged: acuity ${v.acuity}`;
+      out.push(withActor({
         at: v.triagedAt, resourceType: "Encounter", id: v.id, category: "visit",
-        label: retriage ? `Re-triaged: acuity ${from != null ? `${from} to ` : ""}${v.acuity}${who ? ` · by ${who}` : ""}` : `Triaged: acuity ${v.acuity}${who ? ` · by ${who}` : ""}`,
+        label: `${base}${who ? ` · by ${who}` : ""}`,
         ...(v.triageReason ? { body: [{ heading: "reason", text: str(v.triageReason) }] } : {}),
         ...(who ? { who } : {}),
-      });
+      }, str(v.triagedBy), base));
       prevTriage = tKey; prevAcuity = v.acuity;
     }
     if (!disposed && v.status === "finished") {
       disposed = true;
       const at = str(v.periodEnd) || metaAt(v);
       const who = writer(v);
-      if (at) out.push({
+      const base = `ED disposition: ${v.disposition || "visit closed"}`;
+      if (at) out.push(withActor({
         at, resourceType: "Encounter", id: v.id, category: "visit",
-        label: `ED disposition: ${v.disposition || "visit closed"}${who ? ` · by ${who}` : ""}`,
+        label: `${base}${who ? ` · by ${who}` : ""}`,
         ...(v.dispositionReason ? { body: [{ heading: "reason", text: str(v.dispositionReason) }] } : {}),
         ...(who ? { who } : {}),
-      });
+      }, whoIdOf(v), base));
     }
   });
   return out;
@@ -1201,16 +1299,17 @@ function timelineFromChart(chart, extras) {
       const at = (resourceType === "ProcedureRecord" && str(r.performedAt)) || (r.meta && (r.meta.effectiveAt || r.meta.recordedAt)) || null;
       if (!at) { withoutTimestamp++; continue; }
       const who = whoOf(r);
-      const event = {
+      const event = withActor({
         at, resourceType, id: r.id, label: label(r, who),
         category: TIMELINE_CATEGORY[resourceType] || "other",
         ...(who ? { who } : {}),
-      };
+      }, who ? whoIdOf(r) : "", label(r, "").replace(/^Somebody wrote a /, "A "));
+      if (resourceType === "MedicationAdministration" && str(r.witnessedBy)) event.witnessId = str(r.witnessedBy);
       // The note's own words, so the history can be read without opening every note in turn.
       if (resourceType === "ClinicalNote") {
         const body = noteBody(r);
         if (body.length) event.body = body;
-        if (r.signedBy) event.signedBy = personName(r.signedBy);
+        if (r.signedBy) { event.signedBy = personName(r.signedBy); event.signedById = str(r.signedBy); }
       }
       // A result's conclusion is the sentence the reader is actually after.
       if (resourceType === "DiagnosticReport" && str(r.conclusion)) event.body = [{ heading: "conclusion", text: str(r.conclusion) }];
@@ -1226,6 +1325,9 @@ function timelineFromChart(chart, extras) {
       if (resourceType === "ServiceRequest") {
         const rep = reportByRequest.get(str(r.id));
         event.reportReady = !!rep;
+        // The test and its kind as fields, so a screen can say them without the label's actor and status words (LT-24).
+        event.test = str(r.display || r.code) || null;
+        event.orderCategory = str(r.category) || null;
         if (rep) {
           event.reportId = rep.id;
           event.reportStatus = rep.status || null;
@@ -1242,6 +1344,9 @@ function timelineFromChart(chart, extras) {
     .map((o) => ({
       orderId: o.id, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null,
       prescriberId: o.prescriberId || null, since: (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || null,
+      /* LT-20: whether pharmacy has checked it. null when this reader cannot see verifications at all,
+       * which is not the same as "unverified". */
+      pharmacy: Array.isArray(chart.MedicationVerification) ? verificationState(o, chart.MedicationVerification).state : null,
     }))
     .sort((a, b) => (a.since || "") < (b.since || "") ? 1 : -1);
   return { events, withoutTimestamp, activeMedications };

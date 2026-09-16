@@ -20,7 +20,7 @@
 import { outboxHealth } from "./outbox.js";
 import { dataProtection, RESTORE_TYPE } from "./security-review.js";
 import { RUN_TYPE } from "./backup-run.js";
-import { maikConfig, geminiKey } from "./maik-gateway.js";
+import { probeClinicalPath } from "./maik-gateway.js";
 import { verifyAuditChain, checkAnchorStores, anchorStoresOf } from "./audit-chain.js";
 
 /* P2.17. What the ward is told when the outside copy of the audit trail no longer matches the
@@ -43,6 +43,14 @@ async function anchoredVerdict(repository, chainId, v, storesIn) {
   if (a.status === "rewritten" || a.status === "truncated" || a.status === "disagree") return { ...down(a.message), consequence: ANCHOR_TAMPER_CONSEQUENCE };
   return degraded(a.message);
 }
+
+/* The provider's own error codes that mean "no such bucket", as documentStorageProbe reports them. */
+const STORAGE_NOT_SET_UP = new Set(["InvalidBucketName", "NoSuchBucket"]);
+const STORAGE_SETUP_CONSEQUENCE = "Document storage is not set up yet: the platform owner has not yet chosen the storage bucket for documents. Until it is, uploads fail and existing documents cannot be opened; charting continues. There is nothing for this hospital to change.";
+/* LT-34: MaiK on with no model it may send patient data to is a hospital setting, not an outage. */
+const MAIK_SETUP_CONSEQUENCE = "MaiK is not set up for this hospital: AI summaries and drafts are unavailable. Charting, prescribing and safety checks continue without it. A hospital administrator approves a model provider in Admin Center, MaiK clinical AI.";
+/* LT-34: "no backup ever recorded" says what to do, not only what is missing. */
+const BACKUP_TODO = "What to do: ask your WardSynQ support team to schedule the hospital record export, which records a backup each time it runs. Then restore one backup into a test system and record it under Admin Center, Security review, Record a restore test.";
 
 const TIMEOUT_MS = 3000;
 const MIN = 60000;
@@ -101,8 +109,14 @@ const DEPENDENCIES = [
       const at = r && r.checkedAt;
       if (!r) return down("The storage check returned nothing.");
       if (r.state === "ok") return { ...up(), checkedAt: at };
-      if (r.state === "not_configured") return { ...down("Document storage is not configured for this deployment."), checkedAt: at };
-      return { ...down(`Storage refused the ${r.step || "unknown"} step of a test save${r.providerStatus ? " (status " + Number(r.providerStatus) + ")" : ""}.`), checkedAt: at };
+      /* LT-34: storage that was never set up is not an outage, and a bare "Down" sent hospital admins looking for one.
+       * No store at all, or a bucket the provider does not recognise, is the platform owner's pending choice of bucket
+       * (owner decision S1). Still down, because uploads really fail; the line says why and that the hospital has
+       * nothing to change. */
+      if (r.state === "not_configured" || STORAGE_NOT_SET_UP.has(r.providerCode)) {
+        return { ...down(r.state === "not_configured" ? "No document store is connected to this deployment." : `The storage service does not recognise the bucket (${r.providerCode}).`), consequence: STORAGE_SETUP_CONSEQUENCE, setup: "platform", checkedAt: at };
+      }
+      return { ...down(`Storage refused the ${r.step || "unknown"} step of a test save${r.providerStatus ? " (status " + Number(r.providerStatus) + (r.providerCode ? ", " + r.providerCode : "") + ")" : ""}.`), checkedAt: at };
     },
   },
   {
@@ -111,20 +125,18 @@ const DEPENDENCIES = [
       down: "MaiK down: AI summaries and drafts fail. Charting, prescribing and safety checks continue without it.",
       degraded: "MaiK limited: AI summaries and drafts may fail or be unavailable. Charting, prescribing and safety checks continue without it.",
     },
+    /* LT-34: the probe goes where a clinical request goes (maik-gateway.js probeClinicalPath): the model routing picks
+     * for a summary with patient data, on that model's own endpoint. A different path answering (the AI Studio key)
+     * said Up while every Ask MaiK failed. Not set up for this hospital is its own line, never an outage. */
     async check(d) {
-      const cfg = maikConfig(d.maik);
-      if (!cfg.enabled) return degraded("MaiK is turned off for this hospital.");
-      const fetchImpl = d.fetchImpl || fetch;
-      const probes = [];
-      const key = geminiKey(d.env);
-      /* A model metadata read: it proves the key and the service answer, and generates nothing. */
-      if (key) probes.push(["Google model service", () => fetchImpl("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash", { headers: { "x-goog-api-key": key } })]);
-      if (cfg.localBaseUrl && cfg.localModel) probes.push(["hospital model server", () => fetchImpl(`${cfg.localBaseUrl.replace(/\/+$/, "")}/models`)]);
-      if (!probes.length) return down("MaiK is on but no model provider is configured.");
-      const results = await Promise.all(probes.map(([label, fn]) => fn().then((res) => [label, !!(res && res.ok)], () => [label, false])));
-      const failed = results.filter((x) => !x[1]).map((x) => x[0]);
-      if (!failed.length) return up();
-      return failed.length === results.length ? down(`No model provider answered (${failed.join(", ")}).`) : degraded(`Not answering: ${failed.join(", ")}.`);
+      const p = await probeClinicalPath({ config: d.maik, env: d.env, fetchImpl: d.fetchImpl });
+      if (p.state === "off") return degraded("MaiK is turned off for this hospital.");
+      if (p.state === "not_configured") {
+        return { ...down(p.code === "no_phi_approved_model" ? "No model provider is approved to receive patient data for this hospital, or the approved one cannot receive it on this server." : "No model this hospital allows can answer on this server."),
+          consequence: MAIK_SETUP_CONSEQUENCE, setup: "hospital" };
+      }
+      if (p.state === "up") return up(`Answering: ${p.label}.`);
+      return down(p.label ? `The model clinical requests use did not answer (${p.label}${p.status ? ", status " + p.status : ""}).` : "MaiK could not choose a model for a clinical request.");
     },
   },
   {
@@ -175,7 +187,7 @@ const DEPENDENCIES = [
     async check(d, nowMs) {
       const [runs, tests] = await Promise.all([d.repository.latestByType(d.tenantId, RUN_TYPE, 50), d.repository.latestByType(d.tenantId, RESTORE_TYPE, 200)]);
       const p = dataProtection(runs, tests, d.rpoMinutes, new Date(nowMs).toISOString());
-      const reason = p.reasons.join(" ") || null;
+      const reason = [p.reasons.join(" "), !p.lastBackup || !p.lastRestoreTest ? BACKUP_TODO : ""].filter(Boolean).join(" ") || null;
       return p.status === "green" ? up(`Last backup ${p.lastBackup.at}; last restore test ${p.lastRestoreTest.at}.`) : p.status === "amber" ? degraded(reason) : down(reason);
     },
   },
@@ -226,7 +238,7 @@ async function systemHealthReport(deps) {
     if (!r || !["up", "degraded", "down"].includes(r.status)) r = down("The check returned no result.");
     /* A probe may carry its own consequence for a specific finding (the anchor probe does for a
      * rewritten or truncated trail); otherwise the dependency's consequence for the status applies. */
-    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : (r.consequence || dep.consequence[r.status]) };
+    return { id: dep.id, name: dep.name, status: r.status, checkedAt: r.checkedAt || new Date(now()).toISOString(), reason: r.reason || null, consequence: r.status === "up" ? null : (r.consequence || dep.consequence[r.status]), ...(r.setup ? { setup: r.setup } : {}) };
   }));
   const worst = dependencies.some((x) => x.status === "down") ? "down" : dependencies.some((x) => x.status === "degraded") ? "degraded" : "up";
   return { ok: true, generatedAt: new Date(now()).toISOString(), overall: worst, dependencies, timeoutMs: ms, limits: LIMITS };

@@ -50,7 +50,7 @@ import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { screenOutput, unsupportedSafetyClaim } from "../../wardsynq/wardsynq-secops.js";
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
-import { TASK, invoke, maikConfig } from "./maik-gateway.js";
+import { TASK, invoke, maikConfig, publicRefusal, SETUP_REFUSALS } from "./maik-gateway.js";
 import { buildPatientContext, promptFor, SECTION, DEFAULT_SECTIONS } from "./maik-chart-context.js";
 import { ClinicalNote } from "../../wardsynq/wardsynq-model.js";
 
@@ -212,15 +212,21 @@ async function open(request, env, ctx, need) {
     });
     return { svc, recorder, resolved };
   } catch (e) {
-    const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
+    const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : UNAVAILABLE;
     return { error: { ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: str(e && e.message) } };
   }
 }
+/* NEVER 502 FROM THIS FILE (LT-40, live test 2026-09-15). Cloudflare's edge replaces a 502 from a Function with
+ * its own HTML error page (functions/api/auth, migrate-inpatient.js say the same), so "the model did not
+ * answer" reached the MaiK screen as unparseable HTML and was shown as "bad_response". A failure outside this
+ * code is 503, which arrives as the JSON reason; a hospital that has not configured MaiK is 409. */
+const UNAVAILABLE = 503;
+const NOT_CONFIGURED = SETUP_REFUSALS;
 
 function writeFailure(e, extra) {
   if (e instanceof GovernanceError) return { ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), ...extra };
   if (e instanceof VersionConflictError) return { ok: false, status: 409, error: "version_conflict", ...extra };
-  return { ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), ...extra };
+  return { ok: false, status: UNAVAILABLE, error: "record_write_failed", detail: str(e && e.message), ...extra };
 }
 
 /**
@@ -288,7 +294,12 @@ async function askAboutPatient(request, env, ctx) {
   });
   /* A REFUSAL TO ROUTE IS NOT A MAIK ACTION. No model was asked, nothing was sent, and there is
    * nothing to record - the caller is told plainly why, which is the only useful thing here. */
-  if (!answer.ok) return { ...base, ok: false, status: answer.code === "no_phi_approved_model" || answer.code === "maik_disabled" ? 409 : 502, error: answer.code, detail: answer.detail };
+  /* LT-40: a provider's own error (its project id, model path, documentation URL) never reaches the clinician. It is
+   * logged under a reference code, and the screen gets a plain sentence with that code (maik-gateway.js publicRefusal). */
+  if (!answer.ok) {
+    const shown = publicRefusal(answer);
+    return { ...base, ok: false, status: NOT_CONFIGURED.has(answer.code) ? 409 : UNAVAILABLE, error: answer.code, detail: shown.detail, ...(shown.ref ? { ref: shown.ref } : {}), ...(NOT_CONFIGURED.has(answer.code) ? { notConfigured: true } : {}) };
+  }
 
   /* OUTPUT IS SCREENED BEFORE ANYBODY SEES IT, and withheld WHOLE if it fails.
    *
@@ -437,7 +448,7 @@ async function listInteractions(request, env, ctx) {
   const patientId = str(ctx.patientId);
   let rows;
   try { rows = patientId ? await recorder.byPatient(TYPE, patientId) : await recorder.list(TYPE, 200); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), interactions: [] }; }
+  catch (e) { return { ...base, ok: false, status: UNAVAILABLE, error: "record_read_failed", detail: str(e && e.message), interactions: [] }; }
   const interactions = (rows || []).filter(Boolean)
     .sort((a, b) => str(b.requestedAt).localeCompare(str(a.requestedAt)));
   const counts = { pending: 0, accepted: 0, edited: 0, rejected: 0 };
