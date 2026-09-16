@@ -9,27 +9,26 @@ import { registerSettings, validateRegisterSettings, formFMonthlyClock, mtpFormI
 import { validateFields, rule4AAllowed, mlcClocks, mtpFormII, csvFor, FOETAL_DEATH_CAUSES } from "../functions/_wardsynq/registers.js";
 import { mtpEpisodes, maskMtpNames } from "../functions/_wardsynq/register-routes.js";
 
-test("defaults are the safest reading: District CMO by the 7th with the annex, no online Form F, every MLC category intimated, 2024 RBD forms, ICD-10 optional, witness on", () => {
-  const s = registerSettings(null);
-  assert.equal(s.mtp.formIIRecipient, "district");
+test("defaults are the safest reading: Form II by the 7th with the annex, every MLC category intimated, 2024 RBD forms, ICD-10 optional, witness on; online Form F, MedLEaPR and the Form II recipient are no longer settings", () => {
+  const s = registerSettings({ registers: { pcpndt: { onlinePortal: { mandatory: true, state: "Odisha" } }, mtp: { formIIRecipient: "district" }, mlc: { medleapr: { enabled: true } } } });
+  assert.equal(s.mtp.formIIRecipient, undefined, "owner's legal guidance 2026-09-17: the recipient is the Chief Medical Officer of the State, not a setting");
+  assert.equal(s.pcpndt.onlinePortal, undefined, "online Form F is per State/UT configuration (legal-requirements.js)");
+  assert.equal(s.mlc.medleapr, undefined, "MedLEaPR is per State/UT configuration (legal-requirements.js)");
   assert.equal(s.mtp.formIIDueDay, 7);
   assert.equal(s.mtp.formIIOver20Annex, true);
-  assert.equal(s.pcpndt.onlinePortal.mandatory, false);
   assert.equal(s.pcpndt.formGVersion, "1996");
   assert.equal(s.mlc.intimationCategories.length, 16);
-  assert.equal(s.mlc.medleapr.enabled, false);
   assert.equal(s.rbd.formVersion, "model-2024");
   assert.equal(s.mccd.requireIcd10, false);
   assert.equal(s.ndps.requireWitness, true);
 });
 
-test("validateRegisterSettings refuses a Form 3G valid for more than three years, two over-all in-charges, a bad date and a mandatory portal with no state", () => {
+test("validateRegisterSettings refuses a Form 3G valid for more than three years, two over-all in-charges and a bad date", () => {
   const { problems } = validateRegisterSettings({
-    pcpndt: { onlinePortal: { mandatory: true } },
     ndps: { rmi: { form3gNumber: "RMI/1", issuedOn: "2025-01-01", expiresOn: "2029-01-02", designatedDoctors: [{ name: "A", overallInCharge: true }, { name: "B", overallInCharge: true }], changes: [{ changedOn: "01-02-2026" }] } },
     mtp: { formIIDueDay: 31 },
   });
-  for (const re of [/three years/, /one over-all in-charge/, /changedOn: a date/, /name the state/, /formIIDueDay/]) assert.ok(problems.some((p) => re.test(p)), re + " in " + problems.join(" | "));
+  for (const re of [/three years/, /one over-all in-charge/, /changedOn: a date/, /formIIDueDay/]) assert.ok(problems.some((p) => re.test(p)), re + " in " + problems.join(" | "));
   assert.deepEqual(validateRegisterSettings({ mtp: { formIIDueDay: 5 } }).problems, []);
 });
 

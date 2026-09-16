@@ -38,6 +38,7 @@ import { REGISTERS, saveEntry, listEntries, entryHistory, csvFor, schemaOf, mtpF
   RESTRICTED_MLC, pocsoTaskIdFor, pocsoTaskClock, keralaMlcCsv, OBSTETRIC } from "./registers.js";
 import { ndpsRegister, recordNdpsCount, ndpsAnnual, form3eView, form3hDayNumbers, rule65Register, ndpsPatientView, isControlledDrug } from "./controlled-drugs.js";
 import { notifiablePrompts, weeklyExport } from "./notifiable.js";
+import { formFSubmission, formFPortalClock, medleaprRequired, citeOf } from "./legal-requirements.js";
 import { registerSettings, NOTES, formFMonthlyClock, mtpFormIIClock, rbdClock, pcpndtCentreAlerts, mtpRetentionEnd, form3hClosureLate } from "./register-settings.js";
 import { recordMovement } from "./stock.js";
 import { quantityOf } from "./pharmacy-dispense.js";
@@ -261,7 +262,7 @@ async function registerRoute(request, env, ctx) {
         return { entries, clockSummary: { policeIntimationPending: all.filter((c) => c.kind === "police-intimation").length, pocsoReportDue: all.filter((c) => c.kind === "pocso-report").length,
           ioReportDue: all.filter((c) => c.kind === "io-report").length, inquestPapersPending: all.filter((c) => c.kind === "inquest-papers").length,
           pocsoTasksOpen: taskClocks.length, overdue: all.filter((c) => c.state === "overdue").length + taskClocks.filter((c) => c.state === "overdue").length },
-        medleapr: settings.mlc.medleapr, stateFormat: settings.mlc.stateFormat };
+        medleapr: medleaprRequired(ctx.stateUt, ctx.wsqCfg && ctx.wsqCfg.legal, "MLR", today), stateFormat: settings.mlc.stateFormat };
       });
     }
     if (kind === "notification" && str(q.week)) return weeklyExport(ctx, q.week, q.format);
@@ -406,13 +407,19 @@ async function formFRead(ctx, q, settings, today) {
     /* Every Form F of the month, the incomplete ones flagged in the Complete column, never dropped. */
     return { ...csvResponse("formf", r.entries, period), format: "monthly", filename: `formf-monthly-${period}.csv`, total: r.entries.length, incomplete: r.entries.filter((e) => !e.complete).length,
       clock: formFMonthlyClock(period, today, sub && sub.fields.submittedOn), submitted: sub || null, ...(r.truncated ? { truncated: true, truncatedWarning: r.truncatedWarning } : {}),
-      rule: "PC&PNDT Rules r.9(8): a complete report of the month's procedures by the 5th day of the following month to the Appropriate Authority." };
+      rule: citeOf("IN-PCPNDT-R9-8-MONTHLY"), stateSubmission: formFSubmission(ctx.stateUt, ctx.wsqCfg && ctx.wsqCfg.legal, today) };
   }
-  return readList(ctx, "formf", q, (r) => ({
-    incomplete: r.entries.filter((e) => !e.complete).length,
-    presumedContravention: "An incomplete Form F is presumed a contravention of section 5 or 6 unless the contrary is proved (Act s.4(3) proviso). Complete every one.",
-    centre: pcpndtCentreAlerts(settings, today), onlinePortal: settings.pcpndt.onlinePortal, formGVersion: settings.pcpndt.formGVersion,
-  }));
+  /* The hospital's State/UT decides whether and how a Form F goes to a portal (legal-requirements.js); each entry carries
+   * its online-submission clock where the State/UT sets a deadline, counted from its procedure date. */
+  const legal = ctx.wsqCfg && ctx.wsqCfg.legal;
+  const stateSubmission = formFSubmission(ctx.stateUt, legal, today);
+  return readList(ctx, "formf", q, (r) => {
+    const entries = r.entries.map((e) => ({ ...e, portalClock: formFPortalClock(e.fields, formFSubmission(ctx.stateUt, legal, (e.fields && e.fields.procedureDate) || today), today) }));
+    return { entries, incomplete: r.entries.filter((e) => !e.complete).length,
+      presumedContravention: "An incomplete Form F is presumed a contravention of section 5 or 6 unless the contrary is proved (Act s.4(3) proviso). Complete every one.",
+      centre: pcpndtCentreAlerts(settings, today), stateSubmission, formGVersion: settings.pcpndt.formGVersion,
+      portalPending: entries.filter((e) => e.portalClock && !/^submitted/.test(e.portalClock.state)).length, portalOverdue: entries.filter((e) => e.portalClock && e.portalClock.state === "overdue").length };
+  });
 }
 
 /* MTP reads. Regulation 6: the register is not open to inspection except under the authority of law, so an export names
@@ -426,7 +433,9 @@ async function mtpRead(ctx, q, settings, today) {
     const sub = filed.entries.find((e) => e.fields.returnKind === "mtp-form2" && e.fields.period === q.period);
     const f2 = mtpFormII(r.entries, ctx.orgName, q.state, settings);
     return { ok: true, register: "mtp", period: q.period, form: "Form II (MTP Regulations 2003, reg.4(5))", ...f2, submission: SUBMISSION,
-      sendTo: settings.mtp.formIIRecipient === "state" ? "The Chief Medical Officer of the State" : "The Chief Medical Officer of the District", recipientNote: NOTES.formIIRecipient,
+      /* Owner's legal guidance 2026-09-17 item 1: to the Chief Medical Officer of the State, from the head of the hospital or
+       * owner of the approved place. Never patient-facing; it stays behind register.mtp. */
+      sendTo: "The Chief Medical Officer of the State", from: "The head of the hospital or owner of the approved place", recipientNote: citeOf("IN-MTP-REG4-5-FORMII"),
       clock: mtpFormIIClock(q.period, settings, today, sub && sub.fields.submittedOn), dueNote: NOTES.formIIDueDay, submitted: sub || null };
   }
   if (q.format === "csv") {
@@ -452,7 +461,7 @@ async function mtpRead(ctx, q, settings, today) {
       const task = Number(e.fields.age) < 18 ? tasks.get(pocsoTaskIdFor(e.id)) : null;
       return { ...e, flags: { formICertifiedLate: e.fields.formICertifiedLate === true, pocsoPending: Number(e.fields.age) < 18 && !(task && task.complete) } };
     }),
-    form2: mtpFormIIClock(prevPeriod(today), settings, today, null), formIIRecipient: settings.mtp.formIIRecipient,
+    form2: mtpFormIIClock(prevPeriod(today), settings, today, null),
   })));
 }
 

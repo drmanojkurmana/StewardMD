@@ -2,9 +2,10 @@
  * the registers show (due, overdue, renewal). PURE: no store, no clock of its own (every function takes `now`).
  *
  * WHY SETTINGS. The legal review of the registers (2026-09-17, a legal-research opinion, not legal advice; the items it
- * lists for a practising lawyer are still open) marks several points unsettled: who receives MTP Form II and by when,
- * whether a state mandates online Form F, which state medico-legal format applies, which RBD model rules a state has
- * notified. For each the safest default is set here and the hospital may change it on the Registers screen (Settings
+ * lists for a practising lawyer are still open) marks several points unsettled: when MTP Form II is due, which state
+ * medico-legal format applies, which RBD model rules a state has notified. The owner's legal guidance of the same day
+ * settled the rest: the Form II recipient is fixed (the Chief Medical Officer of the State), and online Form F and
+ * MedLEaPR are per State/UT configuration in legal-requirements.js (Admin > Legal requirements), no longer settings here. For each the safest default is set here and the hospital may change it on the Registers screen (Settings
  * tab, staff.admin). The screen shows the note beside each setting. Nothing here shortens a statutory period.
  *
  * Stored as wardsynq.registers in the org config (functions/_opd_org.js whitelist).
@@ -19,12 +20,9 @@ const daysBetween = (a, b) => Math.round((Date.parse(b + "T00:00:00Z") - Date.pa
 
 /* The notes shown beside a setting whose law is unsettled. English legal text, as the registers' labels are. */
 const NOTES = Object.freeze({
-  onlineFormF: "No central rule requires online Form F; some states do (MoHFW SOP for District Appropriate Authorities, 2016). Which states is not confirmed: ask your District Appropriate Authority. When mandatory, a Form F is not complete without the portal reference, and the signed paper copy is still kept.",
   formGVersion: "MoHFW circulated a draft revised Form G in 2024; whether it was notified is not confirmed, so the 1996 Form G stays until it is.",
-  formIIRecipient: "MTP Regulations 2003 reg 4(5) says the Chief Medical Officer \"of the State\", but reg 2(c) defines the Chief Medical Officer as the one \"of a District\". The recipient is unsettled; District is the default. Confirm with your district office.",
   formIIDueDay: "No due date for Form II is prescribed. The 7th of the following month is hospital policy.",
   formIIOver20Annex: "The 2003 Form II has no column for terminations over 20 weeks (lawful since the MTP Amendment Act 2021). With this on they are counted in a separately labelled annex, never as a column of the form.",
-  medleapr: "MedLEaPR (NIC) is adopted by many states for government hospitals; whether a private hospital must use it is not confirmed and varies by state.",
   intimationCategories: "Which injuries a state medico-legal manual treats as medico-legal cases varies. By default every category is intimated to the police.",
   rbdFormVersion: "The Model RBD (Amendment) Rules 2024 are an ORGI template each state must notify. Use model-1999 only if your state has not notified the 2024 forms.",
   requireIcd10: "Form No. 4 has no ICD-10 field; the statistical office codes the cause. An ICD-10 code here is the hospital's own coding.",
@@ -49,10 +47,9 @@ function registerSettings(wardsynqCfg) {
   const r = (wardsynqCfg && typeof wardsynqCfg === "object" && wardsynqCfg.registers && typeof wardsynqCfg.registers === "object") ? wardsynqCfg.registers : {};
   const o = (x) => (x && typeof x === "object" && !Array.isArray(x) ? x : {});
   const arr = (x) => (Array.isArray(x) ? x.filter((y) => y && typeof y === "object") : []);
-  const p = o(r.pcpndt), portal = o(p.onlinePortal), centre = o(p.centre), m = o(r.mtp), l = o(r.mlc), b = o(r.rbd), c = o(r.mccd), n = o(r.ndps), rmi = o(n.rmi);
+  const p = o(r.pcpndt), centre = o(p.centre), m = o(r.mtp), l = o(r.mlc), b = o(r.rbd), c = o(r.mccd), n = o(r.ndps), rmi = o(n.rmi);
   return {
     pcpndt: {
-      onlinePortal: { state: str(portal.state), url: str(portal.url), mandatory: portal.mandatory === true },
       formGVersion: str(p.formGVersion) === "2024" ? "2024" : "1996",
       centre: {
         formBNumber: str(centre.formBNumber), formBValidUntil: isDate(str(centre.formBValidUntil)) ? str(centre.formBValidUntil) : "",
@@ -62,12 +59,10 @@ function registerSettings(wardsynqCfg) {
       },
     },
     mtp: {
-      formIIRecipient: str(m.formIIRecipient) === "state" ? "state" : "district",
       formIIDueDay: Number.isInteger(m.formIIDueDay) && m.formIIDueDay >= 1 && m.formIIDueDay <= 28 ? m.formIIDueDay : 7,
       formIIOver20Annex: m.formIIOver20Annex !== false,
     },
     mlc: {
-      medleapr: { enabled: !!(l.medleapr && l.medleapr.enabled === true), state: str(l.medleapr && l.medleapr.state) },
       intimationCategories: Array.isArray(l.intimationCategories) ? l.intimationCategories.map(str).filter((k) => MLC_CATEGORY_KEYS.includes(k)) : MLC_CATEGORY_KEYS.slice(),
       goodSamaritanCharterDisplayed: l.goodSamaritanCharterDisplayed === true,
       stateFormat: str(l.stateFormat) === "kerala" ? "kerala" : "hospital",
@@ -112,7 +107,6 @@ function validateRegisterSettings(input) {
   for (const x of Array.isArray(nd.drugRegimes) ? nd.drugRegimes : []) if (x && str(x.drug) && !REGIMES.includes(str(x.regime))) problems.push(`ndps.drugRegimes: ${str(x.regime) || "(blank)"} is not a regime (${str(x.drug)})`);
   if (input.mlc && str(input.mlc.stateFormat) && !["hospital", "kerala"].includes(str(input.mlc.stateFormat))) problems.push("mlc.stateFormat: hospital or kerala");
   if (rmi.designatedDoctors.filter((d) => d.overallInCharge).length > 1) problems.push("ndps.rmi.designatedDoctors: one over-all in-charge (NDPS Rules r.52Q)");
-  if (v.pcpndt.onlinePortal.mandatory && !v.pcpndt.onlinePortal.state) problems.push("pcpndt.onlinePortal.state: name the state whose portal is mandatory");
   const m = input.mtp || {};
   if (m.formIIDueDay !== undefined && !(Number.isInteger(m.formIIDueDay) && m.formIIDueDay >= 1 && m.formIIDueDay <= 28)) problems.push("mtp.formIIDueDay: a day of the month from 1 to 28");
   const l = input.mlc || {};

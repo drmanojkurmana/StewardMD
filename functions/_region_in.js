@@ -19,6 +19,7 @@
  */
 
 import { regionOf } from "./_region.js";
+import { isStateUt } from "./_wardsynq/legal-requirements.js";
 
 const s = (v) => (v == null ? "" : String(v).trim());
 const round2 = (n) => Math.round((Number(n) || 0) * 100) / 100;
@@ -75,6 +76,9 @@ export function orgProfile(p, region) {
   const out = {};
   if (s(p.gstin)) out.gstin = normalizeGstin(p.gstin);
   if (s(p.hfrId)) out.hfrId = normalizeHfrId(p.hfrId);
+  /* stateUt joined 2026-09-17 (legal-requirements.js): the State/UT the hospital is in, an ISO 3166-2:IN code. It selects
+   * the State-specific legal requirements (online Form F, MedLEaPR). Absent means "not recorded", never a default State. */
+  if (isStateUt(p.stateUt)) out.stateUt = s(p.stateUt).toUpperCase();
   return out;
 }
 export function memberProfile(p, region) {
@@ -86,11 +90,12 @@ export function memberProfile(p, region) {
 export function validateOrgProfile(p, region) {
   const errors = {};
   if (!p || typeof p !== "object") return errors;
-  const has = s(p.gstin) || s(p.hfrId);
+  const has = s(p.gstin) || s(p.hfrId) || s(p.stateUt);
   if (regionOf({ region }) !== "IN") {
-    if (has) errors.region = "GSTIN and HFR facility id apply only to a hospital in India.";
+    if (has) errors.region = "GSTIN, HFR facility id and State/UT apply only to a hospital in India.";
     return errors;
   }
+  if (s(p.stateUt) && !isStateUt(p.stateUt)) errors.stateUt = "Choose the State or Union Territory from the list.";
   if (s(p.gstin) && !isValidGstin(p.gstin)) errors.gstin = "That GSTIN is not valid. It is 15 characters and its last character is a check character - re-enter it.";
   if (s(p.hfrId) && !isValidHfrId(p.hfrId)) errors.hfrId = "An HFR facility id is IN followed by 10 digits.";
   return errors;

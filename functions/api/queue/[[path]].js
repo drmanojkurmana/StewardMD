@@ -222,6 +222,7 @@ import { reportImaging } from "../../_wardsynq/radiology-report.js";
 import { REGISTER_SUBS, registerRoute, formFGate, formFFlag, mtpNameMask, mtpEpisodes } from "../../_wardsynq/register-routes.js";
 import { listEntries as listRegisterEntries, FREE_TREATMENT, typeOf as registerTypeOf, MAX_LIST as REGISTER_MAX } from "../../_wardsynq/registers.js";
 import { registerSettings, validateRegisterSettings, rmiStatus, NOTES as REGISTER_NOTES } from "../../_wardsynq/register-settings.js";
+import { legalView, validateStateConfig, stateConfigFor } from "../../_wardsynq/legal-requirements.js";
 import { controlledSet, isControlledDrug, regimeOf, quarantineRefusal, estimateRefusal } from "../../_wardsynq/controlled-drugs.js";
 import { imagingStudies } from "../../_wardsynq/imaging-viewer.js";
 import { protocolContext, recordProtocol } from "../../_wardsynq/radiology-protocol.js";
@@ -2083,7 +2084,9 @@ export async function onRequest(context) {
       if (mig.error) return json({ ok: false, error: mig.error }, 409, request);
       // clock: the hospital's wall clock for calendar facts (an expected discharge date that has passed).
       // orgRegion: the hospital's country, which decides the law a rule is checked against (donor-criteria.js jurisdictionOf).
+      // stateUt: the hospital's State/UT (regionProfile, _region_in.js), which selects State-specific legal requirements (legal-requirements.js).
       const deps = { migration: mig, actorDeps: wsqActorDeps(env), recordDeps: wsqRecordDeps(env, mig.tenantId), orgId: wOrgId, wsqCfg, orgRegion: (wOrg && wOrg.region) || null,
+        stateUt: (wOrg && wOrg.regionProfile && wOrg.regionProfile.stateUt) || null,
         clock: { offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : 330, timeZone: (wsqCfg && wsqCfg.timeZone) || "" } };
       /* NDPS Rules r.52-O (register-settings.js rmiStatus): an expired Form 3G recognition with no renewal applied for
        * refuses controlled-drug receipts and dispensing (stock.js, pharmacy-dispense.js). */
@@ -5340,6 +5343,42 @@ export async function onRequest(context) {
       const saved = registerSettings(back && back.wardsynq);
       if (JSON.stringify(saved) !== JSON.stringify(value)) return json({ ok: false, error: "not_saved", message: "The settings did not read back as sent, so do not rely on them. Try again." }, 502, request);
       return json({ ok: true, changed, settings: saved, notes: REGISTER_NOTES }, 200, request);
+    }
+    /* The legal requirement registry (legal-requirements.js, owner's legal guidance 2026-09-17): read-only for the admin
+     * and for every register keeper; staff.admin edits only the State/UT values the registry leaves to the hospital, with a
+     * reason, and the audit row names the kind, the State/UT, the keys and the reason, never the values. */
+    if (seg === "org" && sub === "legal-requirements") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const readCaps = [CAPS.REGISTER_PCPNDT, CAPS.REGISTER_PCPNDT_READ, CAPS.REGISTER_MTP, CAPS.REGISTER_RECORDS, CAPS.MLC_RECORD, CAPS.REGISTER_NDPS, CAPS.REGISTER_NDPS_READ, CAPS.REGISTER_IHIP];
+      let az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      const isAdmin = az.ok;
+      if (!az.ok && method === "GET" && az.reason !== "org_not_found") for (const cap of readCaps) { const x = await ORG.authorizeOrg(env, actor, orgId, cap); if (x.ok) { az = x; break; } }
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Legal requirements belong to a WardSynQ hospital." }, 409, request);
+      const cfg = o.wardsynq || {};
+      const today = hospitalToday(Date.now(), { offsetMinutes: Number.isFinite(cfg.utcOffsetMinutes) ? cfg.utcOffsetMinutes : 330, timeZone: cfg.timeZone || "" });
+      const stateUt = (o.regionProfile && o.regionProfile.stateUt) || null;
+      const view = (c) => ({ ok: true, ...legalView(stateUt, c && c.legal, today, o.region), canEdit: isAdmin });
+      if (method === "GET") return json(view(cfg), 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const kind = String(cb.kind || "");
+      const { value, problems } = validateStateConfig(kind, stateUt, cb.values, cfg.legal, today);
+      if (problems.length) return json({ ok: false, error: "invalid_state_config", problems, message: "Nothing was saved. " + problems.join("; ") }, 422, request);
+      const reason = String(cb.reason || "").trim();
+      if (reason.length < 5) return json({ ok: false, error: "reason_required", message: "Say why this State/UT configuration is being changed (at least 5 characters). Nothing was saved." }, 422, request);
+      const prevLegal = cfg.legal && typeof cfg.legal === "object" ? cfg.legal : {};
+      const prevStates = prevLegal.stateConfig && typeof prevLegal.stateConfig === "object" ? prevLegal.stateConfig : {};
+      const nextLegal = { ...prevLegal, stateConfig: { ...prevStates, [stateUt]: { ...(prevStates[stateUt] || {}), [kind]: value } } };
+      const changed = Object.keys(cb.values || {});
+      await ORG.updateOrg(env, orgId, { wardsynq: { legal: nextLegal } }, actor.id, { action: "org:legal_state_config", meta: JSON.stringify({ kind, stateUt, changed, reason: reason.slice(0, 80) }) });
+      const back = await ORG.getOrg(env, orgId);
+      const after = stateConfigFor(kind, stateUt, back && back.wardsynq && back.wardsynq.legal, today);
+      if (changed.some((k) => JSON.stringify(after.values[k]) !== JSON.stringify(value[k] === undefined ? null : value[k]))) {
+        return json({ ok: false, error: "not_saved", message: "The configuration did not read back as sent, so do not rely on it. Try again." }, 502, request);
+      }
+      return json({ ...view(back && back.wardsynq), changed }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";

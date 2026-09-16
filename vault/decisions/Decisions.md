@@ -7430,3 +7430,31 @@ Source: the legal opinion of 17 Sep 2026 (sections A and H; research awaiting a 
   revisedEstimateRef is given; no estimate recorded, or a ledger past READ_CAP, WARNS instead (refusing a morphine delivery
   on a count that cannot be made is a patient harm). r.52V(3): a controlled transfer-out naming toInstitution needs
   controllerApprovalRef. H1 and X registers are views over the ledger (view=h1, view=schedx).
+
+## 2026-09-17 Legal requirement registry and State/UT configuration (owner's legal guidance) (branch legal-registry)
+- Binding owner guidance: no binary legal yes/no. `functions/_wardsynq/legal-requirements.js` holds every requirement as a
+  record (id, title, sourceType, instrument, provision, jurisdiction IN or an ISO 3166-2:IN State/UT code, effectiveFrom,
+  expiresOn, status, appliesTo, mandatory, evidence URLs with verified flag, notes, cite). `enforcement(req, {region,
+  stateUt, facilityType, caseType, on})`: IN_FORCE, AMENDED, UNDER_CHALLENGE, STATE_SPECIFIC enforced; STAYED, STRUCK_DOWN,
+  not yet effective, expired not. An appliesTo list with the hospital's value unknown does not exempt (safest).
+- The engine reads citations and dates from it: privacy-law.js CITE and the DPDP dates, donor-criteria.js STANDARDS.IN,
+  blood-centre-rules.js RULES and record/sample refs, the Form F monthly rule and the Form II note. Text byte-identical.
+- The hospital's State/UT is `regionProfile.stateUt` (India adapter, validated against the 36 codes; edited on Admin >
+  Legal requirements). Absent means "not recorded", never a default State.
+- State/UT configuration kinds: formF {mode ONLINE|OFFLINE|PORTAL_AND_RECORD, deadlineDays, portalUrl,
+  acknowledgementRequired} and medleapr {required, effectiveFrom, caseTypes}. A shipped State entry's non-null values change
+  only by a code release citing the source; its null keys, and every key of an unseeded State/UT, are hospital-set in
+  `wardsynq.legal.stateConfig[STATE][kind]` via POST /org/legal-requirements (staff.admin, reason, audited without values).
+  Seeded: MH online 5 days (portal verified), DL online (portal verified, no deadline found), RJ portal + record (portal
+  verified), RJ MedLEaPR from 2026-02-01 (Rajasthan HC, Mukesh Kumar @ Mangej v State of Rajasthan, SB Crl Misc Bail
+  173/2025, 17 Nov 2025, read on Indian Kanoon). Bihar and all others unconfigured.
+- Replaced settings: registers.pcpndt.onlinePortal, registers.mtp.formIIRecipient, registers.mlc.medleapr (stored values are
+  now ignored). Form F: ONLINE or PORTAL_AND_RECORD requires portalSubmittedOn, plus portalReference unless
+  acknowledgementRequired is false (unset = required); each list entry carries portalClock (procedureDate + deadlineDays).
+  The monthly report stays central r.9(8) (5th) and shows the State/UT submission route. MLC: medleaprReference and
+  medleaprFrozenOn required only when MedLEaPR is required for MLR on the arrival's local day.
+- MTP Form II: to the Chief Medical Officer of the State, from the head of the hospital / owner of the approved place (reg
+  4(5)); the District default and the reg 2(c) note are gone. Due day stays hospital policy.
+- Item 52: registry status UNDER_CHALLENGE (Thangjam Santa Singh v Union of India); a law deferral naming a requirement is
+  used only while enforced; the criteria table says "under challenge in the Supreme Court; not stayed; enforced".
+- GET /org/legal-requirements: staff.admin or any register capability (read-only, canEdit false).

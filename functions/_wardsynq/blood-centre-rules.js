@@ -18,10 +18,11 @@
  */
 
 import { CLASSES, classesOf } from "./retention.js";
+import { citeOf } from "./legal-requirements.js";
 
 const DAY_H = 24;
 const str = (v) => (v == null ? "" : String(v).trim());
-const RULES = "Drugs and Cosmetics Rules 1945, Schedule F Part XII-B (G.S.R. 166(E), 2020) and Schedule P";
+const RULES = citeOf("IN-DCR-SCHP-COMPONENTS");
 const TABLE = "legal opinion 2026-09-17, G.1 component shelf life and storage";
 
 /* THE COMPONENTS. hours: the longest shelf life, counted from collection (a pooled open-system unit from pooling).
@@ -112,9 +113,9 @@ const GROUP_COLOURS = Object.freeze({ O: "blue", A: "yellow", B: "pink", AB: "wh
  * The record period is retention.js's "blood-centre" class, not a setting of its own: its floor is the five years, and
  * the hospital's longer period is that class's wardsynq.retention.years["blood-centre"] (classesOf never goes below the
  * floor). The Admin blood centre card still edits it as recordRetentionYears; the route saves it into the class. */
-const SAMPLE_RETENTION = Object.freeze({ days: 7, ref: "Schedule F Part XII-B, heading K Note (a)" });
+const SAMPLE_RETENTION = Object.freeze({ days: 7, ref: citeOf("IN-DCR-XIIB-K-NOTE-A") });
 const RETENTION_CLASS = "blood-centre";
-const RECORD_RETENTION = Object.freeze({ years: CLASSES[RETENTION_CLASS].floorYears, retentionClass: RETENTION_CLASS, ref: "Schedule F Part XII-B, heading L NOTE; rule 122-P(i)(c)" });
+const RECORD_RETENTION = Object.freeze({ years: CLASSES[RETENTION_CLASS].floorYears, retentionClass: RETENTION_CLASS, ref: citeOf("IN-DCR-XIIB-L") });
 
 /**
  * PURE. The settings in force: wsqCfg.bloodCentre, each value used only where it is stricter than the Rules, and the

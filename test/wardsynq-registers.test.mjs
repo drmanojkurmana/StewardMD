@@ -305,7 +305,9 @@ test("MTP: POST /ward/register-mtp enforces the Act's opinions, numbers n/year, 
   assert.equal(f2.statement["4(e). Total"], 1, "the 2003 columns count up to 20 weeks");
   assert.equal(f2.statement["5(b). I.U.D."], 1);
   assert.equal(f2.annex.Total, 1, "over 20 weeks in the separately labelled annex");
-  assert.match(f2.sendTo, /of the District/);
+  assert.equal(f2.sendTo, "The Chief Medical Officer of the State", "owner's legal guidance 2026-09-17 item 1");
+  assert.match(f2.from, /head of the hospital or owner of the approved place/);
+  for (const who of [DOCTOR, NURSE, CASHIER, RAD]) assert.equal((await as(who, "/ward/register-mtp?orgId=" + ORG + "&period=" + MONTH + "&format=form2")).__status, 403, "Form II stays inside the restricted MTP workflow: " + who);
 });
 
 test("births and deaths: GET /ward/register-vital lists what is owed, prefills from the chart; POST /ward/register-vital and /ward/register-mccd (ICD-10 checked)", async () => {
@@ -464,12 +466,13 @@ test("register settings: /org/register-settings is staff.admin's; 401, 403 with 
   const bad = await settingsAs(ADMIN, { ndps: { rmi: { form3gNumber: "RMI/1", issuedOn: "2025-01-01", expiresOn: "2030-01-01" } } });
   assert.equal(bad.__status, 422, JSON.stringify(bad));
   assert.equal(JSON.stringify(docs.get(`q_orgs/${ORG}`).fields.wardsynq), before, "no refusal wrote anything");
-  const saved = await settingsAs(ADMIN, { mtp: { formIIDueDay: 9, formIIRecipient: "state" } });
+  const saved = await settingsAs(ADMIN, { mtp: { formIIDueDay: 9 } });
   assert.equal(saved.__status, 200, JSON.stringify(saved));
   assert.deepEqual(saved.changed, ["mtp"]);
   const read = await as(ADMIN, "/org/register-settings?orgId=" + ORG);
   assert.equal(read.settings.mtp.formIIDueDay, 9);
-  assert.match(read.notes.formIIRecipient, /reg 2\(c\)/);
+  assert.equal(read.notes.formIIRecipient, undefined, "the recipient is settled by the owner's legal guidance, no longer a note");
+  assert.match(read.notes.formIIDueDay, /hospital policy/);
   assert.deepEqual(docs.get(`q_orgs/${ORG}`).fields.wardsynq.controlledDrugs, ["Morphine"], "the other hospital settings are kept");
 });
 
@@ -501,9 +504,17 @@ test("PCPNDT Form F (legal review B): register serial, thumb-impression attester
   assert.equal(audit[0].actor, idFor(OBS));
   assert.ok(!JSON.stringify(audit).includes("Female foetus"), "the refused text is not kept");
 
-  assert.equal((await settingsAs(ADMIN, { pcpndt: { onlinePortal: { state: "Odisha", url: "https://pndtformf.odisha.gov.in/", mandatory: true } } })).__status, 200);
+  /* Online Form F follows the hospital's State/UT (legal-requirements.js): Maharashtra, online within five days. */
+  docs.get(`q_orgs/${ORG}`).fields.regionProfile = { stateUt: "MH" };
   const portal = await as(RAD, "/ward/register-formf", "POST", body);
-  assert.deepEqual(portal.entry.missing, ["portalReference"], "a state that mandates online filing: not complete without the portal reference");
+  assert.deepEqual(portal.entry.missing, ["portalSubmittedOn", "portalReference"], "Maharashtra: not complete without the portal submission and its acknowledgement");
+  const mhList = await as(RAD, "/ward/register-formf?orgId=" + ORG + "&period=" + MONTH);
+  assert.equal(mhList.stateSubmission.mode, "ONLINE");
+  assert.equal(mhList.entries.find((e) => e.id === portal.entry.id).portalClock.dueBy, new Date(Date.parse(TODAY + "T00:00:00Z") + 5 * 86400000).toISOString().slice(0, 10), "due within five calendar days of the procedure");
+  assert.equal(mhList.portalPending, 4, "every Form F of the month without a recorded portal submission");
+  docs.get(`q_orgs/${ORG}`).fields.regionProfile = { stateUt: "BR" };
+  assert.deepEqual((await as(RAD, "/ward/register-formf", "POST", body)).entry.missing, [], "Bihar is not configured: Form F is complete without a portal reference");
+  docs.get(`q_orgs/${ORG}`).fields.regionProfile = { stateUt: "MH" };
 
   const list = await as(RAD, "/ward/register-formf?orgId=" + ORG + "&period=" + MONTH);
   assert.equal(list.incomplete, 3);
@@ -512,7 +523,7 @@ test("PCPNDT Form F (legal review B): register serial, thumb-impression attester
 
   const monthly = await as(RAD, "/ward/register-formf?orgId=" + ORG + "&period=" + MONTH + "&format=monthly");
   assert.equal(monthly.__status, 200, JSON.stringify(monthly));
-  assert.equal(monthly.total, 4);
+  assert.equal(monthly.total, 5);
   assert.equal(monthly.incomplete, 3);
   assert.equal(monthly.csv.split("\r\n").filter((l) => /,no,/.test(l)).length, 3, "every incomplete Form F is in the report, flagged");
   assert.equal(monthly.clock.dueBy.slice(8), "05");
@@ -583,7 +594,7 @@ test("MTP (legal review C): Rule 3B list, rule 4A eligibility, guardian consent 
   const f2 = await as(HIM, "/ward/register-mtp?orgId=" + ORG + "&period=" + MONTH + "&format=form2");
   assert.equal(f2.annex, undefined);
   assert.match(f2.annexOmitted, /no column/);
-  assert.match(f2.recipientNote, /unsettled/);
+  assert.match(f2.recipientNote, /reg 4\(5\).*Chief Medical Officer of the State/);
 });
 
 test("MTP regulation 7: during her episode the ward list, bed board, timeline, discharge summary and front desk lookup show the serial number, not her name, to anyone outside the MTP register", async () => {
@@ -651,10 +662,19 @@ test("medico-legal cases (legal review D): Good Samaritan identity optional; POC
   assert.equal(inv.error, "free_treatment_bnss_397");
   assert.notEqual((await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG, patientId: rta.patientId })).error, "free_treatment_bnss_397", "a road accident is billed as usual");
 
-  await settingsAs(ADMIN, { mlc: { intimationCategories: [], medleapr: { enabled: true, state: "Karnataka" } } });
+  await settingsAs(ADMIN, { mlc: { intimationCategories: [] } });
+  /* MedLEaPR follows the State/UT (legal-requirements.js): required in Rajasthan from 1 February 2026 (High Court order),
+   * not configured in Karnataka. */
+  docs.get(`q_orgs/${ORG}`).fields.regionProfile = { stateUt: "RJ" };
   const bite = await admitted("male");
   const biteCase = await as(DOCTOR, "/ward/register-mlc", "POST", { orgId: ORG, patientId: bite.patientId, encounterId: bite.encounterId, fields: { category: "animal-bite", status: "open", arrivalAt: new Date().toISOString(), historyAsGiven: "Dog bite.", doctor: "Dr Casualty" } });
-  assert.deepEqual(biteCase.entry.missing, ["medleaprReference", "medleaprFrozenOn"], "not a statutory intimation once the hospital narrows the list; MedLEaPR on");
+  assert.deepEqual(biteCase.entry.missing, ["medleaprReference", "medleaprFrozenOn"], "not a statutory intimation once the hospital narrows the list; MedLEaPR required in Rajasthan");
+  const before = await as(DOCTOR, "/ward/register-mlc", "POST", { orgId: ORG, patientId: bite.patientId, fields: { category: "animal-bite", status: "open", arrivalAt: "2026-01-31T10:00:00+05:30", historyAsGiven: "Dog bite.", doctor: "Dr Casualty" } });
+  assert.deepEqual(before.entry.missing, [], "a case that arrived before 1 February 2026 follows the State-prescribed workflow");
+  docs.get(`q_orgs/${ORG}`).fields.regionProfile = { stateUt: "KA" };
+  const ka = await as(DOCTOR, "/ward/register-mlc", "POST", { orgId: ORG, patientId: bite.patientId, fields: { category: "animal-bite", status: "open", arrivalAt: new Date().toISOString(), historyAsGiven: "Dog bite.", doctor: "Dr Casualty" } });
+  assert.deepEqual(ka.entry.missing, [], "Karnataka: MedLEaPR not configured, no reference required");
+  delete docs.get(`q_orgs/${ORG}`).fields.regionProfile;
 
   const decl = { mlcNumber: opened.entry.serial, fitnessBeforeAt: new Date(Date.now() - 7200000).toISOString(), fitnessBefore: "Dr Casualty", magistrateCalled: "unavailable", witness1Name: "Staff Nurse A, Hospital A", witness1: "Staff Nurse A",
     witness2Name: "Security Officer B, Hospital A", witness2: "Security Officer B", startDate: TODAY, startTime: "01:00", language: "Kannada", statementVerbatim: "As spoken.", readOver: "yes",

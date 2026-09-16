@@ -129,9 +129,13 @@
       pulseMin: T(c, "site.blood.crit.pulseMin", "Lowest pulse (per minute)"), pulseMax: T(c, "site.blood.crit.pulseMax", "Highest pulse (per minute)") };
     return HAS(w, key) ? w[key] : key;
   }
-  /* s: a criterion's or deferral's source from the server. The law named is India's, the only jurisdiction in legalMinimums. */
+  /* s: a criterion's or deferral's source from the server. The law named is India's, the only jurisdiction in legalMinimums.
+   * A provision the legal requirement registry marks under challenge says so (item 52): not stayed, so enforced. */
   function criterionSource(c, s) {
     if (!s) return "";
+    if (s.law && s.law.status === "UNDER_CHALLENGE" && (s.source === "law" || s.source === "both")) {
+      return criterionSource(c, { source: s.source, who: s.who, law: { item: s.law.item } }) + ". " + T(c, "site.blood.src.underChallenge", "Item {item}: under challenge in the Supreme Court; not stayed; enforced", { item: s.law.item }) + (s.law.challenge ? " (" + s.law.challenge.case + ")" : "");
+    }
     var ref = s.who && s.who.ref, item = s.law && s.law.item;
     if (s.source === "hospital") return T(c, "site.blood.src.hospital", "This hospital's stricter setting");
     if (s.source === "law") return T(c, "site.blood.src.lawIN", "Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, item {item} (stricter than WHO)", { item: item });

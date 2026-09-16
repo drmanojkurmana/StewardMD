@@ -95,6 +95,8 @@
     }
     var tabs = TABS.slice();
     if (c.isWardsynq()) tabs.push(["seed", "nav.admin.seed"], ["maik", "nav.admin.maik"], ["security", "nav.admin.security"], ["health", "nav.admin.health"], ["export", "nav.admin.export"], ["fhir", "nav.admin.fhir"], ["integrations", "nav.admin.integrations"], ["bugs", "nav.admin.bugs"], ["governance", "nav.admin.governance"],
+      // Owner's legal guidance 2026-09-17: the legal requirement registry and this hospital's State/UT (pages/registers.js WSQ._legal).
+      ["legal", "nav.admin.legal"],
       // Gap wave 2026-09-16: HR beyond the rota (pages/hr.js) and patient engagement (pages/engage.js).
       ["hrAttendance", "nav.admin.hrAttendance"], ["hrCredentials", "nav.admin.hrCredentials"], ["hrTraining", "nav.admin.hrTraining"],
       ["patientComms", "nav.admin.patientComms"], ["onlineBooking", "nav.admin.onlineBooking"], ["patientFeedback", "nav.admin.patientFeedback"]);
@@ -103,7 +105,7 @@
     if (st.page === "admin" && st.arg && st._adminArg !== st.arg && tabs.some(function (t) { return t[0] === st.arg; })) st._adminTab = st.arg;
     st._adminArg = st.page === "admin" ? st.arg : "";
     var tab = st._adminTab || "hospital";
-    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
+    if (["seed", "maik", "security", "health", "export", "fhir", "integrations", "bugs", "governance", "legal", "hrAttendance", "hrCredentials", "hrTraining", "patientComms", "onlineBooking", "patientFeedback"].indexOf(tab) >= 0 && !c.isWardsynq()) tab = "hospital";
     var navTr = c.navTr || function (k) { return k; };
     el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + '</span></div>' +
       '<div class="tabs" role="tablist" lang="' + c.esc(c.navLang || "en") + '">' + tabs.map(function (t) {
@@ -116,6 +118,7 @@
     var renderers = { seed: renderSeed, hospital: renderHospital, departments: renderDepts, wards: renderWards, rooms: renderRooms, staff: renderStaff, maik: renderMaik, security: renderSecurity, health: renderHealth, export: renderExport, fhir: renderFhir, integrations: renderIntegrations, tariff: renderTariff, advisories: renderAdvisories, forms: renderForms, pathways: renderPathways, group: renderGroup, bugs: renderBugs,
       // Privacy and compliance is its own page (pages/governance.js); the tab is the Admin Center's door to it.
       governance: function () { st._adminTab = "hospital"; WSQ.go("governance"); },
+      legal: function (x, y) { return WSQ._legal.render(x, y); },
       // Looked up when the tab opens: pages/hr.js and pages/engage.js load after this file.
       hrAttendance: function (x, y) { return WSQ._hr.attendance(x, y); }, hrCredentials: function (x, y) { return WSQ._hr.credentials(x, y); }, hrTraining: function (x, y) { return WSQ._hr.training(x, y); },
       patientComms: function (x, y) { return WSQ._engage.comms(x, y); }, onlineBooking: function (x, y) { return WSQ._engage.booking(x, y); }, patientFeedback: function (x, y) { return WSQ._engage.feedback(x, y); } };

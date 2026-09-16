@@ -27,6 +27,7 @@
 
 import { VersionConflictError } from "./repository.js";
 import { registerSettings } from "./register-settings.js";
+import { formFSubmission, medleaprRequired } from "./legal-requirements.js";
 
 const PREFIX = "_wardsynq_register_";
 const SERIAL_TYPE = "_wardsynq_register_serial";
@@ -338,6 +339,14 @@ const FORMF_INDICATIONS = [
 ];
 const PCPNDT_RETENTION = "Kept at least two years from the procedure, or until any legal proceeding ends, whichever is later (PC&PNDT Rules r.9(6), Act s.29). WardSynQ never deletes an entry.";
 const FORMF_DECLARATION = "I have neither detected nor disclosed the sex of her foetus to anybody in any manner.";
+/* The hospital's local calendar day of an ISO time (today when there is none). */
+const localDay = (iso, offsetMinutes) => new Date((Number.isFinite(Date.parse(iso)) ? Date.parse(iso) : Date.now()) + (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000).toISOString().slice(0, 10);
+/* The State/UT portal fields a Form F needs on its procedure date: the submission date where the State/UT requires portal
+ * submission, and the acknowledgement unless its configuration says none is required. */
+function formFPortalFields(v, o) {
+  const sub = o && o.legal ? formFSubmission(o.legal.stateUt, o.legal.cfg, /^\d{4}-\d{2}-\d{2}$/.test(String(v.procedureDate || "")) ? v.procedureDate : localDay(null, o.offsetMinutes)) : null;
+  return !sub || !sub.requiresPortal ? [] : sub.requiresReference ? ["portalSubmittedOn", "portalReference"] : ["portalSubmittedOn"];
+}
 const FORMF = {
   title: "PCPNDT Form F", authority: "District Appropriate Authority (PC&PNDT Act)", citation: "PC&PNDT Act 1994 s.4(3); PC&PNDT Rules 1996 r.9(1), r.9(4), r.9(7), r.9(8), r.10(1A), Form F (heading: New amended on 4th February, 2014 notified on 31st January 2014)",
   patient: "required", dateField: "procedureDate", confidential: [], serial: "FORMF", retention: PCPNDT_RETENTION,
@@ -391,14 +400,17 @@ const FORMF = {
     f("identifiedOn", "D. Date of the attestation", "date"),
     f("doctorDeclaration", `D. Declaration of the doctor: ${FORMF_DECLARATION} (name in capitals, type full name)`, "attest", { req: true }),
     f("doctorDeclarationRegistrationNo", "D. Registration number of the doctor making the declaration", "text", { req: true }),
-    f("portalReference", "State online Form F portal reference (when the state mandates online filing)", "text", { max: 80 }),
+    /* Online submission is a State/UT implementation requirement, not national (owner's legal guidance 2026-09-17 item 2):
+     * required only where the hospital's State/UT configuration says ONLINE or PORTAL_AND_RECORD (legal-requirements.js). */
+    f("portalSubmittedOn", "State/UT Form F portal: date submitted (where the State/UT requires portal submission)", "date"),
+    f("portalReference", "State/UT Form F portal: acknowledgement or reference number", "text", { max: 80 }),
   ],
   requiredWhen: (v, o) => [
     ...(v.procedureKind === "invasive" ? ["familyHistory", "familyHistoryBasis", "invasiveIndications", "formGConsentDate", "formGLanguage", "invasiveProcedures", "complications"] : v.procedureKind === "non-invasive" ? ["indications", "procedureCarriedOut"] : []),
     ...(!v.referredBy && !v.selfReferral ? ["referredBy"] : []),
     ...(v.referredBy ? ["referralSlipKept"] : []),
     ...(v.womanSignedBy === "thumb-impression" ? ["identifiedByName", "identifiedByAge", "identifiedBySex", "identifiedByAddress", "identifiedByContact", "identifiedByAttestation", "identifiedOn"] : []),
-    ...(o && o.settings && o.settings.pcpndt.onlinePortal.mandatory ? ["portalReference"] : []),
+    ...formFPortalFields(v, o),
   ],
   rules: (v) => {
     const p = [];
@@ -833,7 +845,7 @@ const MLC = {
     f("doctor", "Doctor recording this medico-legal case (type full name)", "attest", { req: true }),
   ],
   requiredWhen: (v, o) => {
-    const s = (o && o.settings && o.settings.mlc) || { intimationCategories: [], medleapr: {} };
+    const s = (o && o.settings && o.settings.mlc) || { intimationCategories: [] };
     const c = v.category;
     const out = [];
     if (STATUTORY_INTIMATION.includes(c) || (s.intimationCategories || []).includes(c)) out.push("policeStation", "intimationAt", "intimationMode");
@@ -844,7 +856,9 @@ const MLC = {
     if (c === "pocso") out.push("pocsoReportAt", "pocsoReportTo", "personPresent");
     if (DEATH_INQUEST.includes(c)) out.push("inquestPapersReceived");
     if (v.inquestPapersReceived === "yes") out.push("inquestPapersReference");
-    if (s.medleapr && s.medleapr.enabled) out.push("medleaprReference", "medleaprFrozenOn");
+    /* MedLEaPR only where the hospital's State/UT requires it for a medico-legal report on the arrival date (owner's legal
+     * guidance 2026-09-17 item 3, legal-requirements.js); otherwise the State-prescribed workflow. */
+    if (o && o.legal && medleaprRequired(o.legal.stateUt, o.legal.cfg, "MLR", localDay(v.arrivalAt, o.offsetMinutes)).required) out.push("medleaprReference", "medleaprFrozenOn");
     if (s.stateFormat === "kerala") out.push("examinationRequested", "identificationMark1", "identificationMark2");
     if (v.certificateIssuedTo) out.push("certificateRequestNo", "certificateIssuedOn");
     return out;
@@ -993,11 +1007,12 @@ const blankObj = (o, parts) => !o || typeof o !== "object" || parts.every((p) =>
  * Unknown keys are PROBLEMS, never dropped: a field this form does not have is either a mistake or content that must
  * not be stored (Form F refuses anything about the sex of a foetus this way), and silently discarding it would report
  * a save that did not keep what was sent.
- * opts: { settings (register-settings.js registerSettings), offsetMinutes }: what a hospital-editable setting changes.
+ * opts: { settings (register-settings.js registerSettings), offsetMinutes, legal: { stateUt, cfg (wardsynq.legal) } }: what a
+ * hospital-editable setting or the hospital's State/UT configuration changes.
  */
 function validateFields(kind, input, prior, opts) {
   const def = REGISTERS[kind];
-  const o = { settings: registerSettings(null), offsetMinutes: 330, ...(opts || {}) };
+  const o = { settings: registerSettings(null), offsetMinutes: 330, legal: { stateUt: null, cfg: null }, ...(opts || {}) };
   const version = o.settings.rbd.formVersion;
   const src = input && typeof input === "object" && !Array.isArray(input) ? input : {};
   const byKey = new Map(def.fields.map((x) => [x.key, x]));
@@ -1147,7 +1162,8 @@ async function saveEntry(ctx) {
     if (reason.length < 5) return { ok: false, status: 422, error: "reason_required", message: "A correction says why (at least 5 characters). Nothing was saved.", written: 0 };
   }
 
-  const opts = { settings: registerSettings(ctx.wsqCfg), offsetMinutes: ctx.clock && Number.isFinite(ctx.clock.offsetMinutes) ? ctx.clock.offsetMinutes : 330 };
+  const opts = { settings: registerSettings(ctx.wsqCfg), offsetMinutes: ctx.clock && Number.isFinite(ctx.clock.offsetMinutes) ? ctx.clock.offsetMinutes : 330,
+    legal: { stateUt: ctx.stateUt || null, cfg: (ctx.wsqCfg && ctx.wsqCfg.legal) || null } };
   const v = validateFields(kind, ctx.fields, prior && prior.fields, opts);
   /* Checks that read other records (an MTP termination names its Form E; a Form F print names a version). */
   if (!v.problems.length && def.check) {
@@ -1197,7 +1213,7 @@ async function saveEntry(ctx) {
      * entry is never saved without them. */
     let also = [];
     if (def.alsoWrite) {
-      try { also = await def.alsoWrite(entry, { repo, tenantId, now, who, settings: opts.settings, offsetMinutes: opts.offsetMinutes }); }
+      try { also = await def.alsoWrite(entry, { repo, tenantId, now, who, settings: opts.settings, offsetMinutes: opts.offsetMinutes, legal: opts.legal }); }
       catch { return { ...READ_FAILED, message: "A record this entry opens could not be prepared, so nothing was saved.", written: 0 }; }
       scope.also = also.map((x) => ({ register: x.kind, id: x.id }));
     }
@@ -1230,7 +1246,7 @@ async function saveEntry(ctx) {
  * refuses the save that asked for it. c: { now, who, settings, offsetMinutes } */
 function draftEntry(kind, input, c) {
   const def = REGISTERS[kind];
-  const v = validateFields(kind, input.fields, null, { settings: c.settings, offsetMinutes: c.offsetMinutes });
+  const v = validateFields(kind, input.fields, null, { settings: c.settings, offsetMinutes: c.offsetMinutes, legal: c.legal });
   if (v.problems.length) throw new Error(`${kind}: ${v.problems.join("; ")}`);
   const fields = { ...v.value };
   for (const [k, val] of Object.entries(input.serverFields || {})) if (def.fields.some((x) => x.key === k && x.server)) fields[k] = val;

@@ -10,6 +10,11 @@
  * the Form F printout and monthly report, MTP Forms D and E and Form II, the dying declaration, NDPS Forms 3E, 3J and
  * 3-I. A due date is always said in words beside its colour. Settings (staff.admin) holds the hospital-editable
  * choices where the law is unsettled, each with its note.
+ *
+ * Legal requirements (owner's legal guidance 2026-09-17, functions/_wardsynq/legal-requirements.js): a read-only list of
+ * the requirements for the hospital's State/UT, with source, status, dates, evidence and what is not configured. The same
+ * renderer (WSQ._legal) draws Admin > Legal requirements, where staff.admin records the State/UT and edits only the values
+ * the registry leaves to the hospital, with a reason.
  */
 (function () {
   "use strict";
@@ -21,7 +26,7 @@
   function checked(id) { var e = document.getElementById(id); return !!(e && e.checked); }
 
   var S = { tab: "", period: "", vitalKind: "birth", week: "", schemas: null, notes: null, data: null, entry: null, form: null, msg: null, extra: null,
-    sub: { formf: "formf", mtp: "mtp", mlc: "mlc", ndps: "book" }, year: "", ndpsPatient: "", settings: null, saving: false };
+    sub: { formf: "formf", mtp: "mtp", mlc: "mlc", ndps: "book" }, year: "", ndpsPatient: "", settings: null, saving: false, legal: null };
 
   function tabs(c) {
     return [
@@ -31,6 +36,7 @@
       { key: "mtp", need: ["register.mtp"], title: T(c, "site.registers.tab.mtp", "MTP") },
       { key: "vital", need: ["register.records", "emr.treat"], title: T(c, "site.registers.tab.vital", "Births and deaths") },
       { key: "ihip", need: ["register.ihip", "emr.treat"], title: T(c, "site.registers.tab.ihip", "Notifiable diseases") },
+      { key: "legal", need: ["staff.admin", "register.ndps", "register.ndps.read", "register.pcpndt", "register.pcpndt.read", "register.records", "mlc.record", "register.mtp", "register.ihip"], title: T(c, "site.legal.tab", "Legal requirements") },
       { key: "settings", need: ["staff.admin"], title: T(c, "site.registers.tab.settings", "Register settings") },
     ].filter(function (t) { return t.need.some(function (n) { return c.can(n); }); });
   }
@@ -537,7 +543,8 @@
     if (kind === "formf") {
       if (r.incomplete) out += '<div class="msg err">' + esc(T(c, "site.registers.formf.incomplete", "{n} incomplete Form F this month: presumed contravention unless the contrary is proved (Act s.4(3)). Complete every one.", { n: r.incomplete })) + "</div>";
       out += alertsHtml(c, r.centre);
-      if (r.onlinePortal && r.onlinePortal.mandatory) out += '<div class="msg note">' + esc(T(c, "site.registers.formf.portal", "Online Form F is mandatory in {s}: an entry is complete only with the portal reference. Keep the signed paper copy too.", { s: r.onlinePortal.state })) + "</div>";
+      if (r.stateSubmission) out += '<div class="msg note">' + esc(submissionText(c, r.stateSubmission)) + "</div>";
+      if (r.portalPending) out += '<div class="msg ' + (r.portalOverdue ? "err" : "note") + '">' + esc(T(c, "site.legal.formf.pending", "{n} Form F not yet recorded as submitted on the State/UT portal, {o} past the deadline.", { n: r.portalPending, o: r.portalOverdue || 0 })) + "</div>";
       out += '<p class="quiet">' + esc(T(c, "site.registers.formf.due5", "The monthly report of every Form F is due by the 5th of the following month (rule 9(8)).")) + "</p>";
     }
     if (kind === "mtp" && r.form2) out += '<div class="msg ' + clockClass(r.form2) + '">' + esc(T(c, "site.registers.mtp.form2Clock", "Form II for {p}: {s}", { p: r.form2.period, s: clockText(c, r.form2) })) + "</div>";
@@ -545,7 +552,10 @@
       var cs = r.clockSummary;
       out += '<div class="msg ' + (cs.overdue ? "err" : "note") + '">' + esc(T(c, "site.registers.mlc.dashboard", "Open cases: {p} police intimations pending, {c} POCSO reports due, {i} reports to the investigating officer due, {q} inquest papers pending, {o} overdue.", { p: cs.policeIntimationPending, c: cs.pocsoReportDue, i: cs.ioReportDue, q: cs.inquestPapersPending, o: cs.overdue })) + "</div>";
       if (cs.pocsoTasksOpen) out += '<div class="msg err">' + esc(T(c, "site.registers.mlc.pocsoTasks", "{n} POCSO intimation tasks are open (POCSO Act s.19(1)). Open them from the register picker.", { n: cs.pocsoTasksOpen })) + "</div>";
-      if (r.medleapr && r.medleapr.enabled) out += '<p class="quiet">' + esc(T(c, "site.registers.mlc.medleapr", "MedLEaPR is on for this hospital: a case is complete with its MedLEaPR reference and frozen date.")) + "</p>";
+      if (r.medleapr) out += '<p class="quiet">' + esc(r.medleapr.required ? T(c, "site.legal.mlc.required", "MedLEaPR is required in this State/UT for medico-legal reports today: a case is complete with its MedLEaPR reference and frozen date.")
+        : !r.medleapr.stateUt ? T(c, "site.legal.mlc.noState", "This hospital's State/UT is not recorded, so no MedLEaPR requirement is applied. Follow the State-prescribed medico-legal workflow.")
+        : !r.medleapr.configured ? T(c, "site.legal.mlc.notConfigured", "MedLEaPR is not configured for this State/UT. Follow the State-prescribed medico-legal workflow.")
+        : T(c, "site.legal.mlc.notRequired", "MedLEaPR is not required in this State/UT for medico-legal reports today. Follow the State-prescribed medico-legal workflow.")) + "</p>";
     }
     return out;
   }
@@ -562,11 +572,11 @@
       return '<div class="card"><h3>' + EN(c, esc(x.r.form)) + '</h3><dl class="kv">' + Object.keys(st).map(function (k) { return "<dt>" + EN(c, esc(k)) + "</dt><dd>" + EN(c, esc(st[k])) + "</dd>"; }).join("") + "</dl>" +
         (an ? "<h4>" + EN(c, esc(an.title)) + '</h4><dl class="kv">' + Object.keys(an).filter(function (k) { return k !== "title"; }).map(function (k) { return "<dt>" + EN(c, esc(k)) + "</dt><dd>" + esc(an[k]) + "</dd>"; }).join("") + "</dl>" : "") +
         (x.r.annexOmitted ? '<div class="msg note">' + EN(c, esc(x.r.annexOmitted)) + "</div>" : "") +
-        "<p>" + EN(c, esc(x.r.sendTo)) + '</p><p class="quiet">' + EN(c, esc(x.r.recipientNote)) + " " + EN(c, esc(x.r.dueNote)) + "</p>" +
+        "<p>" + esc(T(c, "site.legal.mtp.to", "To:")) + " " + EN(c, esc(x.r.sendTo)) + "<br>" + esc(T(c, "site.legal.mtp.from", "From:")) + " " + EN(c, esc(x.r.from)) + '</p><p class="quiet">' + EN(c, esc(x.r.recipientNote)) + " " + EN(c, esc(x.r.dueNote)) + "</p>" +
         '<div class="msg ' + clockClass(x.r.clock) + '">' + esc(clockText(c, x.r.clock)) + '</div><button class="btn quiet" type="button" data-rg="new-return" data-period="' + esc(x.r.period) + '">' + esc(T(c, "site.registers.recordSubmission", "Record a submission")) + "</button></div>";
     }
     if (x.what === "monthly") {
-      return '<div class="card"><h3>' + esc(T(c, "site.registers.formf.monthlyTitle", "Monthly report of Form F, {p}", { p: x.r.period })) + "</h3><p>" + EN(c, esc(x.r.rule)) + "</p><p>" +
+      return '<div class="card"><h3>' + esc(T(c, "site.registers.formf.monthlyTitle", "Monthly report of Form F, {p}", { p: x.r.period })) + "</h3><p>" + EN(c, esc(x.r.rule)) + "</p>" + (x.r.stateSubmission ? '<p class="quiet">' + esc(submissionText(c, x.r.stateSubmission)) + "</p>" : "") + "<p>" +
         esc(T(c, "site.registers.formf.monthlyCounts", "{t} Form F this month, {i} incomplete (flagged in the report, never left out).", { t: x.r.total, i: x.r.incomplete })) + '</p><div class="msg ' + clockClass(x.r.clock) + '">' + esc(clockText(c, x.r.clock)) + "</div>" +
         '<button class="btn" type="button" data-rg="monthly-csv">' + esc(T(c, "site.registers.formf.downloadReport", "Download the report (CSV)")) + '</button> <button class="btn quiet" type="button" data-rg="new-return" data-period="' + esc(x.r.period) + '">' + esc(T(c, "site.registers.recordSubmission", "Record a submission")) + "</button></div>";
     }
@@ -616,20 +626,17 @@
     var box = function (id, label, on) { return '<label class="f" style="flex-direction:row;align-items:center"><input type="checkbox" id="' + id + '"' + (on ? " checked" : "") + ' style="width:auto;margin:0 8px 0 0"><span>' + esc(label) + "</span></label>"; };
     var select = function (id, label, value, opts) { return '<label class="f"><span>' + esc(label) + '</span><select id="' + id + '">' + opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === value ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select></label>"; };
     var area = function (id, label, value, hint) { return '<label class="f"><span>' + esc(label) + '</span><textarea id="' + id + '" rows="3">' + esc(value) + '</textarea><span class="quiet">' + esc(hint) + "</span></label>"; };
-    return '<div class="card"><h3>' + esc(T(c, "site.registers.settings.pcpndt", "PCPNDT")) + '</h3><div class="row">' +
-      input("rgS_portalState", T(c, "site.registers.settings.portalState", "State with online Form F"), p.onlinePortal.state) + input("rgS_portalUrl", T(c, "site.registers.settings.portalUrl", "Portal address"), p.onlinePortal.url) +
-      box("rgS_portalMandatory", T(c, "site.registers.settings.portalMandatory", "Online Form F is mandatory in this state"), p.onlinePortal.mandatory) + "</div>" + note("onlineFormF") +
+    return '<div class="card"><h3>' + esc(T(c, "site.registers.settings.pcpndt", "PCPNDT")) + '</h3>' +
+      '<p class="quiet">' + esc(T(c, "site.legal.settingsMoved", "Online Form F and MedLEaPR follow this hospital's State/UT: see the Legal requirements tab.")) + "</p>" +
       '<div class="row">' + select("rgS_formG", T(c, "site.registers.settings.formG", "Form G version"), p.formGVersion, [["1996", "1996"], ["2024", T(c, "site.registers.settings.formG2024", "2024 revision (only once notified)")]]) + "</div>" + note("formGVersion") +
       '<div class="row">' + input("rgS_formB", T(c, "site.registers.settings.formB", "Form B registration certificate number"), p.centre.formBNumber) + input("rgS_formBUntil", T(c, "site.registers.settings.formBUntil", "Form B valid until"), p.centre.formBValidUntil, "date") +
       box("rgS_r17", T(c, "site.registers.settings.r17Notice", "The rule 17(1) notice is displayed in English and the local language"), p.centre.r17NoticeDisplayed) + box("rgS_r17copies", T(c, "site.registers.settings.r17Copies", "Copies of the Act and Rules are on the premises (rule 17(2))"), p.centre.actAndRulesOnPremises) + "</div>" +
       area("rgS_machines", T(c, "site.registers.settings.machines", "Machines, one per line"), lines(p.centre.machines, ["make", "model", "serial"]), T(c, "site.registers.settings.machinesHint", "make | model | serial number")) +
       area("rgS_changes", T(c, "site.registers.settings.changes", "Planned changes of employee, place or equipment (rule 13), one per line"), lines(p.centre.plannedChanges, ["what", "effectiveOn", "intimatedOn"]), T(c, "site.registers.settings.changesHint", "what | effective on (YYYY-MM-DD) | intimated on (YYYY-MM-DD, blank if not yet)")) + "</div>" +
       '<div class="card"><h3>' + esc(T(c, "site.registers.tab.mtp", "MTP")) + '</h3><div class="row">' +
-      select("rgS_f2Recipient", T(c, "site.registers.settings.f2Recipient", "Form II goes to"), m.formIIRecipient, [["district", T(c, "site.registers.settings.cmoDistrict", "Chief Medical Officer of the District")], ["state", T(c, "site.registers.settings.cmoState", "Chief Medical Officer of the State")]]) +
       input("rgS_f2Day", T(c, "site.registers.settings.f2Day", "Form II due on this day of the following month"), m.formIIDueDay, "number", ' min="1" max="28"') + box("rgS_f2Annex", T(c, "site.registers.settings.f2Annex", "Count terminations over 20 weeks in a separate annex"), m.formIIOver20Annex) + "</div>" +
-      note("formIIRecipient") + " " + note("formIIDueDay") + " " + note("formIIOver20Annex") + "</div>" +
-      '<div class="card"><h3>' + esc(T(c, "site.registers.tab.mlc", "Medico-legal cases")) + '</h3><div class="row">' + box("rgS_medleapr", T(c, "site.registers.settings.medleapr", "This hospital uses MedLEaPR"), l.medleapr.enabled) + input("rgS_medleaprState", T(c, "site.registers.settings.medleaprState", "MedLEaPR state"), l.medleapr.state) +
-      box("rgS_charter", T(c, "site.registers.settings.charter", "The Good Samaritan charter is displayed at the entrance and on the website (CMVR r.168(5))"), l.goodSamaritanCharterDisplayed) + "</div>" + note("medleapr") +
+      note("formIIDueDay") + " " + note("formIIOver20Annex") + "</div>" +
+      '<div class="card"><h3>' + esc(T(c, "site.registers.tab.mlc", "Medico-legal cases")) + '</h3><div class="row">' + box("rgS_charter", T(c, "site.registers.settings.charter", "The Good Samaritan charter is displayed at the entrance and on the website (CMVR r.168(5))"), l.goodSamaritanCharterDisplayed) + "</div>" +
       "<p>" + esc(T(c, "site.registers.settings.intimation", "Categories intimated to the police (statutory categories are always intimated)")) + '</p><div class="row">' + MLC_CATS.map(function (k) {
         return '<label class="f" style="flex-direction:row;align-items:center"><input type="checkbox" data-mlccat="' + esc(k) + '"' + (l.intimationCategories.indexOf(k) >= 0 ? " checked" : "") + ' style="width:auto;margin:0 8px 0 0"><span>' + EN(c, esc(catLabel(k))) + "</span></label>";
       }).join("") + "</div>" + note("intimationCategories") +
@@ -653,11 +660,11 @@
     var cats = [], boxes = document.querySelectorAll("[data-mlccat]");
     for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) cats.push(boxes[i].getAttribute("data-mlccat"));
     return {
-      pcpndt: { onlinePortal: { state: val("rgS_portalState"), url: val("rgS_portalUrl"), mandatory: checked("rgS_portalMandatory") }, formGVersion: val("rgS_formG"),
+      pcpndt: { formGVersion: val("rgS_formG"),
         centre: { formBNumber: val("rgS_formB"), formBValidUntil: val("rgS_formBUntil"), r17NoticeDisplayed: checked("rgS_r17"), actAndRulesOnPremises: checked("rgS_r17copies"),
           machines: parseLines("rgS_machines", ["make", "model", "serial"]), plannedChanges: parseLines("rgS_changes", ["what", "effectiveOn", "intimatedOn"]) } },
-      mtp: { formIIRecipient: val("rgS_f2Recipient"), formIIDueDay: Number(val("rgS_f2Day")), formIIOver20Annex: checked("rgS_f2Annex") },
-      mlc: { medleapr: { enabled: checked("rgS_medleapr"), state: val("rgS_medleaprState") }, goodSamaritanCharterDisplayed: checked("rgS_charter"), intimationCategories: cats,
+      mtp: { formIIDueDay: Number(val("rgS_f2Day")), formIIOver20Annex: checked("rgS_f2Annex") },
+      mlc: { goodSamaritanCharterDisplayed: checked("rgS_charter"), intimationCategories: cats,
         stateFormat: val("rgS_stateFormat"), restrictedReaders: String(val("rgS_restricted") || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean) },
       rbd: { formVersion: val("rgS_rbdVersion"), informantAuthorisations: parseLines("rgS_informants", ["name", "authorisedBy", "from"]) },
       mccd: { requireIcd10: checked("rgS_icd") },
@@ -667,6 +674,138 @@
         scheduleXLocations: String(val("rgS_xLocations") || "").split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean) },
     };
   }
+
+  /* ---------------------------------------------------------------------------------------------- legal requirements */
+  /* How a Form F reaches the State/UT (r: the server's formFSubmission). Never "online nationwide": said per State/UT. */
+  function submissionText(c, r) {
+    if (!r.stateUt) return T(c, "site.legal.formf.noState", "This hospital's State/UT is not recorded (Admin > Legal requirements), so no State/UT Form F submission rule is applied. Form F itself is mandatory everywhere.");
+    if (!r.configured) return T(c, "site.legal.formf.notConfigured", "Form F submission is not configured for {state}: WardSynQ requires no portal submission. Form F itself is mandatory everywhere; ask your State/UT Appropriate Authority.", { state: r.stateName });
+    if (r.mode === "OFFLINE") return T(c, "site.legal.formf.offline", "In {state} Form F is submitted offline. Keep the signed record.", { state: r.stateName });
+    var url = r.portalUrl || T(c, "site.legal.notConfigured", "not configured");
+    var t = r.mode === "ONLINE" ? T(c, "site.legal.formf.online", "In {state} Form F is submitted online at {url}.", { state: r.stateName, url: url })
+      : T(c, "site.legal.formf.portalRecord", "In {state} Form F is entered on the State portal at {url}, and the Form F record is kept.", { state: r.stateName, url: url });
+    if (r.deadlineDays) t += " " + T(c, "site.legal.formf.deadline", "Due within {n} calendar days of the procedure.", { n: r.deadlineDays });
+    return t + " " + (r.requiresReference ? T(c, "site.legal.formf.withRef", "An entry is complete with the portal submission date and the acknowledgement.") : T(c, "site.legal.formf.noRef", "An entry is complete with the portal submission date."));
+  }
+  function legalStatusText(c, q) {
+    switch (q.status) {
+      case "UNDER_CHALLENGE": return T(c, "site.legal.status.underChallenge", "under challenge in the Supreme Court; not stayed; enforced");
+      case "STAYED": return T(c, "site.legal.status.stayed", "stayed; not enforced");
+      case "STRUCK_DOWN": return T(c, "site.legal.status.struckDown", "struck down; not enforced");
+      case "AMENDED": return T(c, "site.legal.status.amended", "in force as amended");
+      case "STATE_SPECIFIC": return T(c, "site.legal.status.stateSpecific", "in force in this State/UT");
+      default: return T(c, "site.legal.status.inForce", "in force");
+    }
+  }
+  function appliesText(c, e) {
+    if (e.applies) return T(c, "site.legal.applies.yes", "applies today");
+    return { "not-yet-effective": T(c, "site.legal.applies.notYet", "not yet in force"), expired: T(c, "site.legal.applies.expired", "no longer in force"),
+      stayed: T(c, "site.legal.applies.stayed", "stayed"), "struck-down": T(c, "site.legal.applies.struckDown", "struck down"),
+      "state-not-set": T(c, "site.legal.applies.stateNotSet", "State/UT not recorded") }[e.reason] || T(c, "site.legal.applies.no", "does not apply");
+  }
+  var LEGAL_KEYS = { formF: ["mode", "deadlineDays", "portalUrl", "acknowledgementRequired"], medleapr: ["required", "effectiveFrom", "caseTypes"] };
+  function legalKeyLabel(c, k) {
+    return { mode: T(c, "site.legal.key.mode", "Submission mode"), deadlineDays: T(c, "site.legal.key.deadlineDays", "Deadline (calendar days after the procedure)"), portalUrl: T(c, "site.legal.key.portalUrl", "Portal address"),
+      acknowledgementRequired: T(c, "site.legal.key.ack", "Acknowledgement required"), required: T(c, "site.legal.key.required", "MedLEaPR required"),
+      effectiveFrom: T(c, "site.legal.key.effectiveFrom", "Required from"), caseTypes: T(c, "site.legal.key.caseTypes", "Reports it is required for") }[k] || k;
+  }
+  function legalValueText(c, k, v) {
+    if (v == null) return T(c, "site.legal.notConfigured", "not configured");
+    if (v === true) return T(c, "site.legal.yes", "yes");
+    if (v === false) return T(c, "site.legal.no", "no");
+    return Array.isArray(v) ? v.join(", ") : String(v);
+  }
+  function legalInput(c, kind, k, v, r) {
+    var esc = c.esc, id = "lg_" + kind + "_" + k, blank = '<option value="">' + esc(T(c, "site.legal.notConfigured", "not configured")) + "</option>";
+    var yn = function () { return '<select id="' + id + '">' + blank + '<option value="yes"' + (v === true ? " selected" : "") + ">" + esc(T(c, "site.legal.yes", "yes")) + '</option><option value="no"' + (v === false ? " selected" : "") + ">" + esc(T(c, "site.legal.no", "no")) + "</option></select>"; };
+    var field;
+    if (k === "mode") field = '<select id="' + id + '">' + blank + r.modes.map(function (m) { return '<option value="' + esc(m) + '"' + (m === v ? " selected" : "") + ">" + esc(m) + "</option>"; }).join("") + "</select>";
+    else if (k === "acknowledgementRequired" || k === "required") field = yn();
+    else if (k === "deadlineDays") field = '<input id="' + id + '" type="number" min="1" max="31" value="' + esc(v == null ? "" : v) + '">';
+    else if (k === "effectiveFrom") field = '<input id="' + id + '" type="date" value="' + esc(v || "") + '">';
+    else if (k === "caseTypes") return '<fieldset class="f"><legend>' + esc(legalKeyLabel(c, k)) + "</legend>" + r.caseTypes.map(function (t) { return '<label><input type="checkbox" data-lgcase="' + esc(kind) + '" value="' + esc(t) + '"' + ((v || []).indexOf(t) >= 0 ? " checked" : "") + "> " + esc(t) + "</label> "; }).join("") + "</fieldset>";
+    else field = '<input id="' + id + '" value="' + esc(v || "") + '">';
+    return '<label class="f"><span>' + esc(legalKeyLabel(c, k)) + "</span>" + field + "</label>";
+  }
+  /* r: null = loading, false = could not be loaded (said, never drawn as none), else the server's legalView. admin: Admin's
+   * tab, which records the State/UT and edits the values the registry leaves to the hospital (the server refuses the rest). */
+  function legalHtml(c, r, admin) {
+    var esc = c.esc;
+    if (r === null) return loading(c);
+    if (r === false) return '<div class="msg err">' + TS(c, "site.legal.loadFailed", "The legal requirements could not be loaded. Do not read this as none applying.") + "</div>";
+    var edit = admin && r.canEdit;
+    var h = '<div class="card"><h3>' + esc(T(c, "site.legal.title", "Legal requirements for this hospital")) + '</h3><p class="quiet">' +
+      esc(T(c, "site.legal.intro", "Each requirement WardSynQ enforces, with its source, status and dates. A requirement under challenge stays enforced unless a court has stayed it. State/UT values change only with their source; values not set for your State/UT are this hospital's to configure.")) + "</p>";
+    h += r.stateUt ? "<p>" + esc(T(c, "site.legal.state", "State/UT:")) + " " + EN(c, esc(r.stateName)) + "</p>"
+      : '<div class="msg err">' + esc(T(c, "site.legal.noState", "This hospital's State/UT is not recorded, so no State/UT requirement can be selected.")) + "</div>";
+    if (edit) h += '<div class="row"><label class="f"><span>' + esc(T(c, "site.legal.chooseState", "State or Union Territory")) + '</span><select id="lgState"><option value="">' + esc(T(c, "site.legal.notRecorded", "not recorded")) + "</option>" +
+      r.states.map(function (x) { return '<option value="' + esc(x.code) + '"' + (x.code === r.stateUt ? " selected" : "") + ">" + EN(c, esc(x.name)) + "</option>"; }).join("") +
+      '</select></label><button class="btn quiet" type="button" data-lg="state">' + esc(T(c, "site.legal.saveState", "Save State/UT")) + "</button></div>";
+    h += "</div>";
+    ["formF", "medleapr"].forEach(function (kind) {
+      var cf = r.config[kind];
+      h += '<div class="card"><h3>' + esc(kind === "formF" ? T(c, "site.legal.kind.formF", "PCPNDT Form F submission") : T(c, "site.legal.kind.medleapr", "MedLEaPR for medico-legal reports")) + "</h3>";
+      if (!cf.configured) h += '<div class="msg note">' + esc(T(c, "site.legal.kindNotConfigured", "Not configured for your State/UT.")) + " " + esc(kind === "formF" ? T(c, "site.legal.formF.default", "Form F is still mandatory everywhere; no portal submission is required by WardSynQ.") : T(c, "site.legal.medleapr.default", "No MedLEaPR reference is required; follow the State-prescribed medico-legal workflow.")) + "</div>";
+      h += '<dl class="kv">' + LEGAL_KEYS[kind].map(function (k) {
+        var src = cf.sources[k];
+        return "<dt>" + esc(legalKeyLabel(c, k)) + "</dt><dd>" + EN(c, esc(legalValueText(c, k, cf.values[k]))) + ' <span class="quiet">' +
+          esc(src === "registry" ? T(c, "site.legal.src.registry", "from {id}", { id: cf.requirementId }) : src === "hospital" ? T(c, "site.legal.src.hospital", "set by this hospital") : "") + "</span></dd>";
+      }).join("") + "</dl>";
+      if (edit && cf.editable.length) {
+        h += '<div class="row">' + cf.editable.map(function (k) { return legalInput(c, kind, k, cf.sources[k] === "hospital" ? cf.values[k] : null, r); }).join("") + "</div>" +
+          '<div class="row"><label class="f"><span>' + esc(T(c, "site.legal.reason", "Reason for the change (audited)")) + '</span><input id="lg_' + kind + '_reason"></label>' +
+          '<button class="btn" type="button" data-lg="save" data-kind="' + kind + '">' + esc(T(c, "site.legal.save", "Save")) + "</button></div>";
+      }
+      h += "</div>";
+    });
+    h += '<div class="card"><div class="tbl"><table><tr><th>' + esc(T(c, "site.legal.col.requirement", "Requirement")) + "</th><th>" + esc(T(c, "site.legal.col.source", "Source")) + "</th><th>" + esc(T(c, "site.legal.col.jurisdiction", "Jurisdiction")) +
+      "</th><th>" + esc(T(c, "site.legal.col.status", "Status")) + "</th><th>" + esc(T(c, "site.legal.col.dates", "Effective")) + "</th><th>" + esc(T(c, "site.legal.col.evidence", "Evidence")) + "</th></tr>" +
+      r.requirements.map(function (q) {
+        var dates = (q.effectiveFrom || T(c, "site.legal.noDate", "not stated")) + (q.expiresOn ? " " + T(c, "site.legal.until", "until {d}", { d: q.expiresOn }) : "");
+        return "<tr><td>" + EN(c, esc(q.title)) + (q.mandatory ? "" : ' <span class="quiet">' + esc(T(c, "site.legal.notMandatory", "(not mandatory in itself)")) + "</span>") + "</td><td>" + EN(c, esc(q.sourceType + ": " + q.instrument + (q.provision ? ", " + q.provision : ""))) +
+          (q.notes ? '<br><span class="quiet">' + EN(c, esc(q.notes)) + "</span>" : "") + "</td><td>" + esc(q.jurisdiction === "IN" ? T(c, "site.legal.india", "India") : q.jurisdiction) + "</td><td>" + esc(legalStatusText(c, q)) +
+          (q.challenge ? '<br><span class="quiet">' + EN(c, esc(q.challenge.case + ", " + q.challenge.court)) + "</span>" : "") + "<br>" + esc(appliesText(c, q.enforcement)) + "</td><td>" + esc(dates) + "</td><td>" +
+          q.evidence.map(function (e) { return '<a href="' + esc(e.url) + '" target="_blank" rel="noopener noreferrer">' + esc(e.kind) + "</a> " + esc(e.verified ? T(c, "site.legal.verified", "(read)") : T(c, "site.legal.unverified", "(not verified)")); }).join("<br>") + "</td></tr>";
+      }).join("") + "</table></div></div>";
+    return h;
+  }
+  /* Reads one kind's editable values from Admin's form: blank is null (clears the hospital's value). */
+  function readLegal(kind, editable) {
+    var out = {};
+    editable.forEach(function (k) {
+      if (k === "caseTypes") { var b = document.querySelectorAll('[data-lgcase="' + kind + '"]'), l = []; for (var i = 0; i < b.length; i++) if (b[i].checked) l.push(b[i].value); out[k] = l.length ? l : null; return; }
+      var v = val("lg_" + kind + "_" + k);
+      out[k] = v === "" ? null : (k === "acknowledgementRequired" || k === "required") ? v === "yes" : k === "deadlineDays" ? Number(v) : v;
+    });
+    return out;
+  }
+  /* Admin > Legal requirements. body: the tab's element. */
+  function renderLegal(c, body) {
+    var q = "?orgId=" + encodeURIComponent(c.state.orgId), r = null, msg = null;
+    var paint = function () { body.innerHTML = (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '" role="status">' + EN(c, c.esc(msg.text)) + "</div>" : "") + legalHtml(c, r, true); };
+    var load = function () { r = null; paint(); c.api("/org/legal-requirements" + q).then(function (x) { r = x && x.ok ? x : false; paint(); }, function () { r = false; paint(); }); };
+    body.onclick = function (ev) {
+      var b = ev.target.closest && ev.target.closest("[data-lg]"); if (!b || !r) return;
+      if (b.getAttribute("data-lg") === "state") {
+        b.disabled = true;
+        c.api("/org/update", { orgId: c.state.orgId, regionProfile: { stateUt: val("lgState") } }).then(function (x) {
+          msg = x && x.ok ? { ok: true, text: T(c, "site.legal.stateSaved", "State/UT saved.") } : { ok: false, text: refusal(c, x) };
+          if (x && x.ok) c.state.org = x.org;
+          load();
+        });
+      }
+      if (b.getAttribute("data-lg") === "save") {
+        var kind = b.getAttribute("data-kind");
+        b.disabled = true;
+        c.api("/org/legal-requirements", { orgId: c.state.orgId, kind: kind, values: readLegal(kind, r.config[kind].editable), reason: val("lg_" + kind + "_reason") }).then(function (x) {
+          if (!x || !x.ok) { b.disabled = false; msg = { ok: false, text: refusal(c, x) }; paint(); return; }
+          msg = { ok: true, text: T(c, "site.legal.saved", "Saved. The server now holds the values shown.") }; r = x; paint();
+        });
+      }
+    };
+    load();
+  }
+  WSQ._legal = { html: legalHtml, submissionText: submissionText, render: renderLegal, read: readLegal };
 
   /* ---------------------------------------------------------------------------------------------- render + actions */
   WSQ.page("registers", { render: function (c) {
@@ -683,7 +822,7 @@
       el.innerHTML = '<div class="title"><h1>' + esc(T(c, "site.registers.heading", "Registers")) + "</h1></div>" +
         '<div class="tabs" role="tablist">' + list.map(function (t) { return '<button type="button" role="tab" data-rg="tab" data-id="' + t.key + '" aria-selected="' + (t.key === S.tab) + '">' + esc(t.title) + "</button>"; }).join("") + "</div>" +
         (S.msg ? '<div class="msg ' + (S.msg.ok ? "ok" : "err") + '" role="status">' + EN(c, esc(S.msg.text)) + "</div>" : "") +
-        (S.tab === "settings" ? settingsHtml(c) : registerHtml(c));
+        (S.tab === "settings" ? settingsHtml(c) : S.tab === "legal" ? legalHtml(c, S.legal, false) : registerHtml(c));
       if (S.form && S.schemas && S.schemas[S.form.kind || kindNow()] && S.schemas[S.form.kind || kindNow()].definitions) {
         var sel = document.getElementById("rgF_condition"), dbox = document.getElementById("rgDefs");
         var draw = function () { var d = S.schemas[kindNow()].definitions.filter(function (x) { return sel && x.key === sel.value; })[0]; if (dbox) dbox.innerHTML = d ? esc(T(c, "site.registers.ihip.defP", "Presumptive (P form):")) + " " + EN(c, esc(d.presumptive)) + (d.confirmed ? " " + esc(T(c, "site.registers.ihip.defL", "Laboratory confirmed (L form):")) + " " + EN(c, esc(d.confirmed)) : "") : ""; };
@@ -692,6 +831,7 @@
     };
     var load = function () {
       S.data = null; S.extra = null; paint();
+      if (S.tab === "legal") { S.legal = null; paint(); return c.api("/org/legal-requirements" + q).then(function (r) { S.legal = r && r.ok ? r : false; paint(); }, function () { S.legal = false; paint(); }); }
       if (S.tab === "settings") { S.settings = null; paint(); return c.api("/org/register-settings" + q).then(function (r) { S.settings = r && r.ok ? r : false; paint(); }); }
       if (S.tab === "ndps" && S.sub.ndps === "book") { var mr = monthRange(S.period); return c.api("/ward/register-ndps" + q + "&from=" + mr.from + "&to=" + mr.to).then(function (r) { S.data = r || { ok: false }; paint(); }); }
       if (S.tab === "ndps" && S.sub.ndps === "annual") return c.api("/ward/register-ndps" + q + "&view=annual&year=" + encodeURIComponent(S.year)).then(function (r) { S.data = r || { ok: false }; paint(); });

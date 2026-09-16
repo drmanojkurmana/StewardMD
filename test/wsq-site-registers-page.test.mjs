@@ -38,9 +38,12 @@ test("a 2024 birth report's name and address are parts on the form and come back
 test("a due date is said in words beside its colour; the Form F count of incomplete entries is a presumed contravention", () => {
   const xx = env("xx");
   assert.match(xx.R.clockText(xx.c, { state: "overdue", dueBy: "2026-09-05" }), /^⟦OVERDUE: was due by 2026-09-05⟧$/);
-  xx.R.state.data = { ok: true, entries: [], incomplete: 3, centre: [{ kind: "r17-notice" }], onlinePortal: { mandatory: true, state: "Odisha" } };
+  xx.R.state.data = { ok: true, entries: [], incomplete: 3, centre: [{ kind: "r17-notice" }], portalPending: 2, portalOverdue: 1,
+    stateSubmission: { stateUt: "MH", stateName: "Maharashtra", configured: true, mode: "ONLINE", deadlineDays: 5, portalUrl: "https://pcpndt.maharashtra.gov.in/", requiresPortal: true, requiresReference: true } };
   const html = xx.R.statusHtml(xx.c, "formf");
-  assert.deepEqual(leftovers(html, ["Odisha"]), []);
+  assert.deepEqual(leftovers(html, []), []);
+  assert.match(html, /⟦In Maharashtra Form F is submitted online at https:\/\/pcpndt\.maharashtra\.gov\.in\/\.⟧ ⟦Due within 5 calendar days of the procedure\.⟧/);
+  assert.match(html, /class="msg err">⟦2 Form F not yet recorded as submitted on the State\/UT portal, 1 past the deadline\.⟧/);
   assert.match(html, /⟦3 incomplete Form F this month: presumed contravention/);
   assert.match(html, /class="msg err"/);
   const table = xx.R.entriesTable(xx.c, schemaOf("death"), { ok: true, entries: [{ id: "reg-death-1", version: 1, complete: false, eventDate: "2026-08-01", fields: { dateOfDeath: "2026-08-01" }, clock: { state: "late-permission", dueBy: "2026-08-22" } }] });
@@ -52,17 +55,16 @@ test("register settings: every label translates around the server's legal notes,
   xx.R.state.settings = { ok: true, settings: registerSettings(null), notes: NOTES };
   const html = xx.R.settingsHtml(xx.c);
   assert.deepEqual(leftovers(html, [...Object.values(NOTES), "1996", "sexual-assault-adult", "acid-attack", "pocso", "rta", "death-in-custody", "death-woman-married-under-7-years", "bnss33-offence", "assault", "burns", "poisoning", "suspected-suicide", "fall-industrial", "animal-bite", "brought-dead", "unknown-unconscious", "other"]), []);
-  assert.match(html, /⟦Chief Medical Officer of the District⟧/);
+  assert.ok(!html.includes("rgS_f2Recipient") && !html.includes("rgS_portal") && !html.includes("rgS_medleapr"), "the settings the owner's legal guidance replaced are gone");
   const { doc, R } = xx;
   doc.getElementById("rgS_f2Day").value = "10";
-  doc.getElementById("rgS_f2Recipient").value = "state";
   doc.getElementById("rgS_rmiNo").value = "RMI/7";
   doc.getElementById("rgS_rmiExpires").value = "2027-01-31";
   doc.getElementById("rgS_doctors").value = "Dr P | KMC 1 | yes | 2026-01-01\nDr Q | KMC 2 |  |";
   doc.getElementById("rgS_witness").checked = false;
   const s = R.readSettings();
   assert.equal(s.mtp.formIIDueDay, 10);
-  assert.equal(s.mtp.formIIRecipient, "state");
+  assert.equal(s.mtp.formIIRecipient, undefined);
   assert.equal(s.ndps.requireWitness, false);
   assert.deepEqual(s.ndps.rmi.designatedDoctors, [{ name: "Dr P", registrationNo: "KMC 1", overallInCharge: true, from: "2026-01-01" }, { name: "Dr Q", registrationNo: "KMC 2", overallInCharge: false, from: "" }]);
   xx.R.state.settings = false;

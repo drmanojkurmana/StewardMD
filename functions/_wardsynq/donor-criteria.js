@@ -23,13 +23,15 @@
  * node --test --experimental-test-module-mocks test/wardsynq-blood-bank.test.mjs test/org-blood-donor-criteria.test.mjs
  */
 
+import { requirement, citeOf, ENFORCED } from "./legal-requirements.js";
+
 const DAY = 86400000;
 const str = (v) => (v == null ? "" : String(v).trim());
 
 const STANDARDS = Object.freeze({
   who: "WHO, Blood donor selection: guidelines on assessing donor suitability for blood donation (2012)",
   coe: "Council of Europe, Guide to the preparation, use and quality assurance of blood components, 22nd edition (2025)",
-  IN: "Drugs and Cosmetics Rules 1945, Schedule F Part XII-B, H. Criteria for Blood Donation (G.S.R. 166(E), 11 March 2020)",
+  IN: citeOf("IN-DCR-XIIB-H"),
 });
 
 const DONATION_TYPES = Object.freeze(["whole-blood", "apheresis-platelets", "apheresis-plasma"]);
@@ -186,7 +188,9 @@ const legalMinimums = Object.freeze({
       delivery: { days: 366, item: "15" },                     // "Defer for 12 Months after delivery"
       abortion: { days: 183, item: "16" },                     // "Defer for 6 months after abortion"
       breastfeeding: { days: null, item: "17" },               // "Defer for total period of lactation"
-      "high-risk-behaviour": { days: "permanent", item: "52" }, // sub judice (Thangjam Santa Singh v Union of India), kept as the Rule states
+      /* Item 52 is UNDER_CHALLENGE in the registry (Thangjam Santa Singh v Union of India), not stayed, so enforced exactly as
+       * the Rule states (owner's legal guidance 2026-09-17 item 5). It drops out only if the registry says STAYED or STRUCK_DOWN. */
+      "high-risk-behaviour": { days: "permanent", item: "52", requirement: "IN-DCR-XIIB-H-52" },
       "high-risk-contact": { days: 366, item: "47, 49" },
       "heart-disease": { days: "permanent", item: "31-37" },
       "insulin-diabetes": { days: "permanent", item: "43, 101" },
@@ -238,16 +242,25 @@ function flatSettings(o) {
   return out;
 }
 
+/* PURE. A law entry that names a registry requirement carries its status (and any challenge), and is used only while the
+ * registry says it is enforced: UNDER_CHALLENGE is, STAYED and STRUCK_DOWN are not. */
+function lawEntry(x) {
+  if (!x || !x.requirement) return x || null;
+  const r = requirement(x.requirement);
+  return ENFORCED.includes(r.status) ? { ...x, status: r.status, ...(r.challenge ? { challenge: r.challenge } : {}) } : null;
+}
+
 /** PURE. The standards' value in force for one criterion or deferral before any hospital setting, with its source. */
 function standardFor(key, jurisdiction, legal = legalMinimums) {
   const law = jurisdiction && legal[jurisdiction];
   if (key.startsWith("deferrals.")) {
     const c = key.slice(10), d = DEFERRALS[c];
     if (!d) return null;
-    const w = d.who ? d.who.days : null, l = law && law.deferrals && law.deferrals[c] ? law.deferrals[c].days : null;
+    const le = lawEntry(law && law.deferrals && law.deferrals[c]);
+    const w = d.who ? d.who.days : null, l = le ? le.days : null;
     const days = longer(w, l);
     return { days, source: days == null ? "none" : w === l ? "both" : days === l ? "law" : "who",
-      who: d.who || null, law: law && law.deferrals && law.deferrals[c] ? law.deferrals[c] : null };
+      who: d.who || null, law: le };
   }
   const d = CRITERIA[key];
   if (!d) return null;

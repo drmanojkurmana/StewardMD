@@ -16,10 +16,13 @@
  * 28 Apr 2022. The stricter of the two regimes is kept by default after commencement (opinion A.4.1).
  */
 
+import { requirement, citeOf } from "./legal-requirements.js";
+
 const DAY = 86400000, HOUR = 3600000;
-const PUBLISHED = "2025-11-13";
-const CONSENT_MANAGER_START = "2026-11-13";
-const DPDP_START = "2027-05-13";
+/* The dates and citations are the legal requirement registry's (legal-requirements.js). */
+const PUBLISHED = requirement("IN-DPDP-PUBLISHED").effectiveFrom;
+const CONSENT_MANAGER_START = requirement("IN-DPDP-R4-CONSENT-MANAGERS").effectiveFrom;
+const DPDP_START = requirement("IN-DPDP-ACT-S3-17").effectiveFrom;
 const MAX_DAYS_DPDP = 90;   // DPDP Rules 2025 r.14(3): a published grievance period "not exceeding ninety days"
 const MAX_DAYS_SPDI = 30;   // SPDI Rules 2011 r.5(9): grievances redressed "within one month from the date of receipt"
 const CERT_IN_HOURS = 6;    // CERT-In Directions 2022 (ii): report "within 6 hours of noticing"
@@ -29,24 +32,11 @@ const LOG_DAYS_CERT_IN = 180;      // CERT-In Directions 2022 (iv): "a rolling p
 const LOG_DAYS_DPDP = 365;         // DPDP Rules 2025 r.6(1)(e), r.8(3): logs kept "for a minimum period of one year"
 const MAJORITY_YEARS = 18;         // DPDP Act s.2(f): a child is an individual who has not completed eighteen years
 
-const CITE = Object.freeze({
-  dpdpCommencement: "DPDP Act 2023 commencement: G.S.R. 843(E), 13 Nov 2025; DPDP Rules 2025 r.1, G.S.R. 846(E), 13 Nov 2025",
-  spdi: "IT Act 2000 s.43A; SPDI Rules 2011",
-  spdiGrievance: "SPDI Rules 2011 r.5(9): the Grievance Officer redresses grievances within one month from the date of receipt",
-  spdiConsent: "SPDI Rules 2011 r.5(1): consent in writing (letter, fax or email) regarding the purpose, before health data is collected",
-  spdiNotice: "SPDI Rules 2011 r.5(3): the fact of collection, the purpose, the intended recipients, and the name and address of the collecting agency",
-  certIn: "CERT-In Directions No. 20(3)/2022-CERT-In, 28 Apr 2022, (ii): report within 6 hours of noticing",
-  certInLogs: "CERT-In Directions 2022 (iv): logs of all ICT systems kept securely for a rolling 180 days within India",
-  dpdpRequests: "DPDP Rules 2025 r.14(3): a published period not exceeding 90 days (the PIB explainer of 17 Nov 2025 reads it as covering access, correction and erasure requests)",
-  dpdpBoard: "DPDP Rules 2025 r.7(2)(b): detailed report to the Board within 72 hours of becoming aware, or a longer period the Board allows on a written request",
-  dpdpPrincipals: "DPDP Rules 2025 r.7(1): each affected Data Principal told without delay (no number; this is the hospital's policy target)",
-  dpdpLogs: "DPDP Rules 2025 r.6(1)(e), r.8(3): logs kept at least one year",
-  dpdpNotice: "DPDP Act 2023 s.5, DPDP Rules 2025 r.3",
-  dpdpContact: "DPDP Rules 2025 r.9: the DPO or contact person is stated in every response",
-  children: "DPDP Rules 2025 r.10: verifiable parental consent before processing a child's data; Fourth Schedule Part A item 1: not needed where processing is restricted to providing health services to the child",
-  disability: "DPDP Rules 2025 r.11: a guardian's appointment by a court, a designated authority or a local level committee is verified",
-  imcRecords: "IMC (Professional Conduct, Etiquette and Ethics) Regulations 2002 reg 1.3.2: documents issued within 72 hours of a request by the patient, an authorised attendant or a legal authority",
-});
+const CITE = Object.freeze(Object.fromEntries(Object.entries({
+  dpdpCommencement: "IN-DPDP-ACT-S3-17", spdi: "IN-SPDI-2011", spdiGrievance: "IN-SPDI-R5-9", spdiConsent: "IN-SPDI-R5-1", spdiNotice: "IN-SPDI-R5-3",
+  certIn: "IN-CERTIN-2022-II", certInLogs: "IN-CERTIN-2022-IV", dpdpRequests: "IN-DPDP-R14-3", dpdpBoard: "IN-DPDP-R7-2B", dpdpPrincipals: "IN-DPDP-R7-1",
+  dpdpLogs: "IN-DPDP-R6-LOGS", dpdpNotice: "IN-DPDP-S5-R3", dpdpContact: "IN-DPDP-R9", children: "IN-DPDP-R10", disability: "IN-DPDP-R11", imcRecords: "IN-IMC-1-3-2",
+}).map(([k, id]) => [k, citeOf(id)])));
 
 const REQUEST_KINDS = Object.freeze(["access", "correction", "erasure", "grievance", "nomination"]);
 
