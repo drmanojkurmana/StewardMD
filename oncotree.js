@@ -1634,6 +1634,7 @@
     var patient = {
       caseNo: c.caseNo || c.patientId || "", name: c.name || "", age: c.age || null, sex: c.sex || "",
       heightCm: c.heightCm || null, weightKg: c.weightKg || null,
+      creatinine: c.creatinine || c.serumCreatinine || null,
       diagnosis: c.diagnosis || st.guideline || "", intent: (asArr(p && p.intentOptions)[0] || ""), consultant: c.consultant || ""
     };
     try {
