@@ -19,7 +19,7 @@
  */
 
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService } from "./service.js";
+import { RecordService, bloodCentreOnlyReadable } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { historyOf } from "../../wardsynq/wardsynq-temporal.js";
 
@@ -117,6 +117,12 @@ async function recordDetail(request, env, ctx) {
   } catch (e) {
     const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
     return { ...base, ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: str(e && e.message), record: null, versions: [] };
+  }
+
+  /* The blood centre's confidential registers (service.js BLOOD_CENTRE_ONLY, legal opinion G.5.8) are read on the Blood
+   * bank screen, never through this door by a role whose scope admits every type. */
+  if (!bloodCentreOnlyReadable(resolved.actor, resourceType)) {
+    return { ...base, ok: false, status: 403, error: "permission", detail: "This record is kept by the blood centre and is read on the Blood bank screen.", record: null, versions: [] };
   }
 
   let current, versions;

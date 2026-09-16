@@ -257,7 +257,8 @@ import { listPackages, packageVersions, savePackage, setStayPackage, stayPackage
 import { recordMovement, stockLevels, reconcileCount, stockFefo } from "../../_wardsynq/stock.js";
 import { storesOverview, saveStoreItem, saveStoreLocation, storeMovement, raiseIndent, decideIndent, issueIndent, acknowledgeIndent, closeIndent, storeConsumption, purchaseFromIndent } from "../../_wardsynq/stores.js";
 import { assetsOverview, saveAsset, recordAssetEvent, saveSchedule, openJobCard, updateJobCard } from "../../_wardsynq/assets.js";
-import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate } from "../../_wardsynq/blood-bank.js";
+import { bloodBankOverview, registerDonor, screenDonor, recordDonation, recordBloodTests, separateComponents, bloodUnitEvent, bloodUnitGate, poolUnits, registerSample, discardSample, recordDonorNotification } from "../../_wardsynq/blood-bank.js";
+import { bloodCentreView, validateBloodCentreSettings } from "../../_wardsynq/blood-centre-rules.js";
 import { donorCriteriaFor, validateDonorCriteria } from "../../_wardsynq/donor-criteria.js";
 import { possibleDuplicates } from "../../_wardsynq/mpi-view.js";
 import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "../../_wardsynq/patient-access.js";
@@ -1324,7 +1325,8 @@ export async function onRequest(context) {
         /* The blood bank's registers (blood-bank.js): the blood bank's own authority, which admin also holds. */
         "blood-bank": CAPS.TRANSFUSION_ISSUE, "blood-donor": CAPS.TRANSFUSION_ISSUE, "donor-screening": CAPS.TRANSFUSION_ISSUE,
         "blood-donation": CAPS.TRANSFUSION_ISSUE, "blood-test-result": CAPS.TRANSFUSION_ISSUE, "blood-components": CAPS.TRANSFUSION_ISSUE,
-        "blood-unit-event": CAPS.TRANSFUSION_ISSUE,
+        "blood-unit-event": CAPS.TRANSFUSION_ISSUE, "blood-pool": CAPS.TRANSFUSION_ISSUE, "blood-sample": CAPS.TRANSFUSION_ISSUE,
+        "blood-sample-discard": CAPS.TRANSFUSION_ISSUE, "donor-notification": CAPS.TRANSFUSION_ISSUE,
         /* Hospital support services (2026-09-16). A diet order is a clinical order, emr.treat, with diet.order
          * as the dietitian's alternative (SUPPORT_ALT below); reading one is reading the chart. The kitchen's
          * board and marks are diet.kitchen. CSSD, housekeeping, transport and the mortuary each sit on their
@@ -2203,10 +2205,14 @@ export async function onRequest(context) {
         if (sub === "blood-bank" && method === "GET") return R(await bloodBankOverview(request, env, { ...deps }));
         if (sub === "blood-donor" && method === "POST") return R(await registerDonor(request, env, { ...deps, name: body.name, sex: body.sex, dateOfBirth: body.dateOfBirth, phone: body.phone, address: body.address, idempotencyKey: key }));
         if (sub === "donor-screening" && method === "POST") return R(await screenDonor(request, env, { ...deps, donorId: body.donorId, answers: body.answers, weightKg: body.weightKg, hbGdl: body.hbGdl, bp: body.bp, pulse: body.pulse, pulseRegular: body.pulseRegular, temperature: body.temperature, hbMethod: body.hbMethod, donationType: body.donationType, plateletCount: body.plateletCount, totalProteinGL: body.totalProteinGL, physicianName: body.physicianName, physicianReason: body.physicianReason, deferralConditions: body.deferralConditions, outcome: body.outcome, deferralReason: body.deferralReason, deferralDays: body.deferralDays, permanent: body.permanent === true, idempotencyKey: key }));
-        if (sub === "blood-donation" && method === "POST") return R(await recordDonation(request, env, { ...deps, screeningId: body.screeningId, bagNumber: body.bagNumber, volumeMl: body.volumeMl, bagType: body.bagType, reinfusionComplete: body.reinfusionComplete, adverseReaction: body.adverseReaction, idempotencyKey: key }));
-        if (sub === "blood-test-result" && method === "POST") return R(await recordBloodTests(request, env, { ...deps, donationId: body.donationId, tti: body.tti, abo: body.abo, rhD: body.rhD, method: body.method, idempotencyKey: key }));
+        if (sub === "blood-donation" && method === "POST") return R(await recordDonation(request, env, { ...deps, screeningId: body.screeningId, bagNumber: body.bagNumber, volumeMl: body.volumeMl, bagType: body.bagType, donorKind: body.donorKind, anticoagulant: body.anticoagulant, reinfusionComplete: body.reinfusionComplete, adverseReaction: body.adverseReaction, idempotencyKey: key }));
+        if (sub === "blood-test-result" && method === "POST") return R(await recordBloodTests(request, env, { ...deps, donationId: body.donationId, tti: body.tti, methods: body.methods, nat: body.nat, antibodyScreen: body.antibodyScreen, antibodyIdentified: body.antibodyIdentified, abo: body.abo, rhD: body.rhD, idempotencyKey: key }));
         if (sub === "blood-components" && method === "POST") return R(await separateComponents(request, env, { ...deps, donationId: body.donationId, components: body.components }));
         if (sub === "blood-unit-event" && method === "POST") return R(await bloodUnitEvent(request, env, { ...deps, unitId: body.unitId, kind: body.kind, reason: body.reason, idempotencyKey: key }));
+        if (sub === "blood-pool" && method === "POST") return R(await poolUnits(request, env, { ...deps, unitIds: body.unitIds, component: body.component, openSystem: body.openSystem, idempotencyKey: key }));
+        if (sub === "blood-sample" && method === "POST") return R(await registerSample(request, env, { ...deps, kind: body.kind, donationId: body.donationId, episodeId: body.episodeId, location: body.location, idempotencyKey: key }));
+        if (sub === "blood-sample-discard" && method === "POST") return R(await discardSample(request, env, { ...deps, sampleId: body.sampleId, idempotencyKey: key }));
+        if (sub === "donor-notification" && method === "POST") return R(await recordDonorNotification(request, env, { ...deps, donationId: body.donationId, step: body.step, method: body.method, referredTo: body.referredTo, note: body.note, idempotencyKey: key }));
       }
       /* ---- hospital support services (diet.js, cssd.js, housekeeping.js, ambulance.js, mortuary.js) ---- */
       const support = (wsqCfg && wsqCfg.supportServices) || {};
@@ -5147,6 +5153,28 @@ export async function onRequest(context) {
       await ORG.updateOrg(env, orgId, { wardsynq: { bloodDonorCriteria: value } }, actor.id, { action: "org:blood_donor_criteria", meta: JSON.stringify({ changed }) });
       const back = await ORG.getOrg(env, orgId);
       return json({ ...view(back && back.wardsynq), changed }, 200, request);
+    }
+    /* Blood centre settings (blood-centre-rules.js, legal opinion 2026-09-17 section G): NAT required, shorter component
+     * shelf lives, longer sample and record retention; never looser than the Rules. staff.admin reads and saves, the
+     * same authority as the donor criteria; the audit row names the settings changed, not the values. */
+    if (seg === "org" && sub === "blood-centre-settings") {
+      const cb = method === "POST" ? await readBody(request) : {};
+      const orgId = url.searchParams.get("orgId") || cb.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+      const o = await ORG.getOrg(env, orgId);
+      if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "Blood centre settings belong to a WardSynQ hospital." }, 409, request);
+      if (method === "GET") return json({ ok: true, centre: bloodCentreView(o.wardsynq) }, 200, request);
+      if (method !== "POST") return json({ ok: false, error: "not_found" }, 404, request);
+      const { value, errors } = validateBloodCentreSettings(cb.settings);
+      if (Object.keys(errors).length) return json({ ok: false, error: "invalid_blood_centre_settings", errors, message: "Nothing was saved. " + Object.values(errors).join(" ") }, 422, request);
+      const before = bloodCentreView(o.wardsynq).saved, flat = (x) => ({ natRequired: !!x.natRequired, sampleRetentionDays: x.sampleRetentionDays || null, recordRetentionYears: x.recordRetentionYears || null, ...Object.fromEntries(Object.entries(x.shelfHours || {}).map(([k, v]) => [`shelfHours.${k}`, v])) });
+      const b1 = flat(before), a1 = flat(value);
+      const changed = [...new Set([...Object.keys(b1), ...Object.keys(a1)])].filter((k) => (b1[k] == null ? null : b1[k]) !== (a1[k] == null ? null : a1[k]));
+      if (!changed.length) return json({ ok: true, centre: bloodCentreView(o.wardsynq), changed: [] }, 200, request);
+      await ORG.updateOrg(env, orgId, { wardsynq: { bloodCentre: value } }, actor.id, { action: "org:blood_centre_settings", meta: JSON.stringify({ changed }) });
+      const back = await ORG.getOrg(env, orgId);
+      return json({ ok: true, centre: bloodCentreView(back && back.wardsynq), changed }, 200, request);
     }
     if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members" || seg === "wards" || seg === "beds")) {
       const orgId = url.searchParams.get("orgId") || "";

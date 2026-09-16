@@ -7254,3 +7254,41 @@ Design: `docs/emr-gap-analysis/S6_ABDM_INTEGRATION_DESIGN.md` 3.3-3.6, 4.2. Owne
   GET /ward/growth returns `reference` (id, name, citation, licence, attribution) and the ward card names it.
 - **Not built:** CDC 2022 extended BMI-for-age; preterm charts (Fenton, INTERGROWTH-21st); recording length, height or head
   circumference (still only weight is plotted).
+
+## 2026-09-17 Blood centre after collection follows Schedule F Part XII-B and Schedule P (legal opinion section G) (branch blood-legal)
+
+- **Source:** legal opinion 2026-09-17, section G (G.1 tables, G.5 requirements 3 to 8). Rules and citations are one pure
+  module, `functions/_wardsynq/blood-centre-rules.js`; `blood-bank.js` enforces them. This closes the "Not built" list of
+  the donor-criteria entry above, except what is listed below.
+- **Shelf life is computed, not typed.** Expiry = collection time + the Rules' shelf life for the component, the bag's
+  anticoagulant (whole blood ACD 21 days, CPDA 35, Schedule P item 7) and the additive (SAGM/ADSOL/NUTRICEL 42 days); FFP
+  and cryo one year, platelets 5 days, granulocytes 24 hours, an open-system pool 6 hours. An entered expiry may only be
+  earlier; a later one is refused. Red cells without an additive are capped at the whole blood limit (the opinion reads no
+  separate value). FFP frozen, and platelets separated from whole blood, within 6 hours of collection or refused. Storage
+  is recorded as the Rules' range, not free text. The donation records its anticoagulant and voluntary/replacement kind.
+- **Tests (heading K, L):** every result names its method; the irregular antibody screen is recorded (shown and printed,
+  not a release gate: the opinion names the field, not a hold); NAT is a hospital setting (not required by the Rules), and a
+  reactive NAT discards whether or not required. **Any reactive result in a donation's history keeps it reactive**: before
+  this, the latest result counted, so a retest could clear a reactive donation, contrary to the module header.
+- **Label:** printed from the unit's server record only when it may be issued, with every result, method, antibody screen
+  and the group colour (O blue, A yellow, B pink, AB white).
+- **Pooling:** one BloodUnit record naming its source units and donations; sources derive status "pooled". One group only.
+- **Samples:** `BloodSample` register; retain-until = 7 days (or the hospital's longer setting) after the last of the
+  covered units left (issued, discarded, expired); a discard before then is refused. Discard is a new version.
+- **Confidential (G.5.8):** `DonorNotification` (notified, counselled, referred) only for a reactive donation, blood
+  centre role only. `service.js BLOOD_CENTRE_ONLY` (BloodDonor, DonorScreening, BloodTestResult, DonorNotification,
+  BloodUnitEvent) is withheld from the change feed and from `/ward/record-detail` unless the reader's grant names the type:
+  a null read scope admitted every type, so any doctor or nurse could sync item 52 deferral reasons and HIV results. The
+  crossmatch gate says "not available", never "reactive". The Blood bank routes still read through list/get (gated by
+  transfusion.issue), so admin's null scope keeps the screen.
+- **Look-back (G.5.6):** derived on read: reactions on episodes traced unit -> donation -> donor; each reactive donation's
+  earlier donations from the same donor with their units' status and recipient MRN.
+- **Charges (G.5.7):** `_clinic_billing.js validateTariff` refuses a tariff line named as a price/cost/sale of blood or a
+  component. Only names are checked; NBTC rates are not encoded.
+- **Settings:** `wardsynq.bloodCentre` { natRequired, shelfHours (shorter only), sampleRetentionDays (>= 7),
+  recordRetentionYears (>= 5) }, Admin > Hospital, GET/POST /api/queue/org/blood-centre-settings (staff.admin, audited by
+  name). **Merge note:** branch legal-privacy adds `retention.js` with a "blood-centre" class of five years; after both merge,
+  recordRetentionYears should come from that class. Nothing in WardSynQ purges blood centre records today.
+- **Not built:** frozen red cells (storage -80 to -196 C, no shelf life in the opinion); donor consent form fields (not
+  listed in section G); bag batch and kit/reagent registers (heading L lists them, G.5 does not); a Medical Officer name on
+  screening (the signed-in actor is recorded); NBTC processing-charge rates; storage temperature logs.

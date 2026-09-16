@@ -16,6 +16,8 @@ const NO = { illness: false, "infection-history": false, malaria: false, jaundic
 /* Measured at every screening in India (Schedule F Part XII-B items 5, 6, 7). The harness hospital names no region: India. */
 const V = { bp: "120/80", pulse: 72, pulseRegular: true, temperature: 36.8 };
 const CLEAR = { hiv: "non-reactive", hbv: "non-reactive", hcv: "non-reactive", syphilis: "non-reactive", malaria: "non-reactive" };
+/* The method of each test and the irregular antibody screen (Schedule F Part XII-B headings K and L). */
+const LAB = { methods: { hiv: "elisa", hbv: "elisa", hcv: "elisa", syphilis: "vdrl", malaria: "rapid-antigen" }, antibodyScreen: "negative" };
 const inDays = (d) => new Date(Date.now() + d * 86400000).toISOString();
 
 async function donate(bag, who = U.BLOOD) {
@@ -23,10 +25,10 @@ async function donate(bag, who = U.BLOOD) {
   assert.equal(donor.__status, 200, JSON.stringify(donor));
   const scr = await as(who, "/ward/donor-screening", "POST", { orgId: ORG, donorId: donor.donorId, ...V, answers: NO, weightKg: 70, hbGdl: 14, outcome: "eligible" });
   assert.equal(scr.__status, 200, JSON.stringify(scr));
-  const don = await as(who, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: scr.screeningId, bagNumber: bag, volumeMl: 450, bagType: "triple" });
+  const don = await as(who, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: scr.screeningId, bagNumber: bag, volumeMl: 450, bagType: "triple" });
   assert.equal(don.__status, 200, JSON.stringify(don));
   const comp = await as(who, "/ward/blood-components", "POST", { orgId: ORG, donationId: don.donationId, components: [
-    { component: "prbc", volumeMl: 280, expiresAt: inDays(42) }, { component: "ffp", volumeMl: 220, expiresAt: inDays(365) }, { component: "platelets", volumeMl: 50, expiresAt: inDays(2) }] });
+    { component: "prbc", volumeMl: 280, additive: "sagm" }, { component: "ffp", volumeMl: 220 }, { component: "platelets", volumeMl: 50, expiresAt: inDays(2) }] });
   assert.equal(comp.__status, 200, JSON.stringify(comp));
   return { donor, scr, don, comp };
 }
@@ -55,7 +57,7 @@ test("blood bank: POST /api/queue/ward/blood-donor, /ward/donor-screening - 401,
   assert.equal(def.__status, 200, JSON.stringify(def));
   const blocked = await as(U.BLOOD, "/ward/donor-screening", "POST", { orgId: ORG, donorId: donor.donorId, ...V, answers: NO, weightKg: 60, hbGdl: 13.5, outcome: "eligible" });
   assert.equal(blocked.error, "donor_deferred", "a deferral in force is not screened away");
-  const donation = await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: def.screeningId, bagNumber: "B9", volumeMl: 350 });
+  const donation = await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: def.screeningId, bagNumber: "B9", volumeMl: 350 });
   assert.equal(donation.error, "no_eligible_screening");
   const view = await as(U.BLOOD, `/ward/blood-bank?orgId=${ORG}`);
   assert.equal(view.__status, 200);
@@ -68,7 +70,7 @@ test("blood bank: POST /api/queue/ward/blood-donor, /ward/donor-screening - 401,
 test("blood bank golden path: POST /api/queue/ward/blood-donation, /ward/blood-components, /ward/blood-test-result - quarantine until all five tests are non-reactive; a reactive donation is never available; POST /ward/blood-unit-event discards with a reason", async () => {
   seedHospital();
   const a = await donate("BAG-100");
-  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: a.scr.screeningId, bagNumber: "BAG-101", volumeMl: 450 })).error, "screening_used");
+  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: a.scr.screeningId, bagNumber: "BAG-101", volumeMl: 450 })).error, "screening_used");
   assert.equal((await as(U.NURSE, "/ward/blood-components", "POST", { orgId: ORG, donationId: a.don.donationId, components: [{ component: "cryo", volumeMl: 20, expiresAt: inDays(300) }] })).__status, 403);
 
   let view = await as(U.BLOOD, `/ward/blood-bank?orgId=${ORG}`);
@@ -77,16 +79,16 @@ test("blood bank golden path: POST /api/queue/ward/blood-donation, /ward/blood-c
 
   const incomplete = await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: { hiv: "non-reactive" }, abo: "O", rhD: "positive" });
   assert.equal(incomplete.error, "tti_incomplete");
-  assert.equal((await as(U.NURSE, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: CLEAR, abo: "O", rhD: "positive" })).__status, 403);
+  assert.equal((await as(U.NURSE, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: CLEAR, ...LAB, abo: "O", rhD: "positive" })).__status, 403);
   assert.equal((await recordsOf("BloodTestResult")).length, 0);
-  const ok = await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: CLEAR, abo: "O", rhD: "positive" });
+  const ok = await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: CLEAR, ...LAB, abo: "O", rhD: "positive" });
   assert.equal(ok.__status, 200, JSON.stringify(ok));
   view = await as(U.BLOOD, `/ward/blood-bank?orgId=${ORG}`);
   assert.deepEqual(view.inventory.map((r) => [r.group, r.component, r.available]), [["O+", "ffp", 1], ["O+", "platelets", 1], ["O+", "prbc", 1]]);
   assert.ok(view.expiryAlerts.some((u) => u.component === "platelets"), "platelets expiring within three days are flagged");
 
   const b = await donate("BAG-200");
-  const reactive = await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: b.don.donationId, tti: { ...CLEAR, hbv: "reactive" }, abo: "A", rhD: "negative" });
+  const reactive = await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: b.don.donationId, tti: { ...CLEAR, hbv: "reactive" }, ...LAB, abo: "A", rhD: "negative" });
   assert.equal(reactive.state, "reactive");
   view = await as(U.BLOOD, `/ward/blood-bank?orgId=${ORG}`);
   assert.ok(view.units.filter((u) => u.bagNumber === "BAG-200").every((u) => u.status === "reactive"));
@@ -98,7 +100,7 @@ test("blood bank golden path: POST /api/queue/ward/blood-donation, /ward/blood-c
   assert.equal(disc.__status, 200, JSON.stringify(disc));
   view = await as(U.BLOOD, `/ward/blood-bank?orgId=${ORG}`);
   assert.equal(view.units.find((u) => u.unitId === unit.unitId).status, "discarded");
-  const dup = await as(U.BLOOD, "/ward/blood-components", "POST", { orgId: ORG, donationId: b.don.donationId, components: [{ component: "prbc", volumeMl: 280, expiresAt: inDays(42) }] });
+  const dup = await as(U.BLOOD, "/ward/blood-components", "POST", { orgId: ORG, donationId: b.don.donationId, components: [{ component: "prbc", volumeMl: 280, additive: "sagm" }] });
   assert.equal(dup.error, "unit_exists", "a unit is never written twice");
 });
 
@@ -120,7 +122,7 @@ test("inventory gate on the existing workflow: POST /api/queue/ward/transfusion-
   assert.equal(quarantined.code, "UNIT_NOT_AVAILABLE");
   assert.equal((await recordsOf("TransfusionEpisode"))[0].phase, "requested", "nothing was crossmatched");
 
-  assert.equal((await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: CLEAR, abo: "O", rhD: "positive" })).__status, 200);
+  assert.equal((await as(U.BLOOD, "/ward/blood-test-result", "POST", { orgId: ORG, donationId: a.don.donationId, tti: CLEAR, ...LAB, abo: "O", rhD: "positive" })).__status, 200);
   const wrongGroup = await as(U.BLOOD, "/ward/transfusion-crossmatch", "POST", { orgId: ORG, episodeId: req.episodeId, unitId: prbc.unitNumber, aboGroup: "A", rhD: "positive", component: "red-cells" });
   assert.equal(wrongGroup.code, "GROUP_MISMATCH", "typed group never overrides the tested group");
   const plasma = units.find((u) => u.component === "ffp");
@@ -154,7 +156,7 @@ test("blood bank pure functions: tests, statuses and eligibility", () => {
   assert.equal(donationTests("d", [{ donationId: "d", tti: { ...CLEAR, malaria: "reactive" }, abo: "B", rhD: "positive", at: "1" }]).state, "reactive");
   const now = "2026-09-16T00:00:00.000Z";
   const base = { id: "u", unitNumber: "X-PRBC", donationId: "d", component: "prbc", expiresAt: "2026-10-01T00:00:00.000Z" };
-  const res = [{ donationId: "d", tti: CLEAR, abo: "B", rhD: "negative", at: "1" }];
+  const res = [{ donationId: "d", tti: CLEAR, ...LAB, abo: "B", rhD: "negative", at: "1" }];
   assert.equal(unitStatuses([base], [], [], [], [], now)[0].status, "quarantine");
   assert.equal(unitStatuses([base], [], res, [], [], now)[0].status, "available");
   assert.equal(unitStatuses([{ ...base, expiresAt: "2026-09-15T00:00:00.000Z" }], [], res, [], [], now)[0].status, "expired");
@@ -294,16 +296,16 @@ test("routes: POST /api/queue/org/blood-donor-criteria settings reach POST /ward
   const other = await as(U.BLOOD, "/ward/blood-donor", "POST", { orgId: ORG, name: "Ravi", sex: "male", dateOfBirth: "1990-03-03" });
   const ok = await as(U.BLOOD, "/ward/donor-screening", "POST", { ...base, donorId: other.donorId, hbGdl: 14, hbMethod: "venous-analyser" });
   assert.equal(ok.__status, 200, JSON.stringify(ok));
-  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: ok.screeningId, bagNumber: "BAG-55", volumeMl: 450 })).error, "weight_below_450", "55 kg is not more than 55 kg");
-  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: ok.screeningId, bagNumber: "BAG-35", volumeMl: 350 })).__status, 200);
+  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: ok.screeningId, bagNumber: "BAG-55", volumeMl: 450 })).error, "weight_below_450", "55 kg is not more than 55 kg");
+  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: ok.screeningId, bagNumber: "BAG-35", volumeMl: 350 })).__status, 200);
   const rec = (await recordsOf("DonorScreening")).find((s) => s.id === ok.screeningId);
   assert.equal(rec.criteriaInForce.jurisdiction, "IN"); assert.equal(rec.criteriaInForce.values.minHbFemale, 13); assert.equal(rec.hbMethod, "venous-analyser");
 
   const aph = await as(U.BLOOD, "/ward/blood-donor", "POST", { orgId: ORG, name: "Arun", sex: "male", dateOfBirth: "1988-04-04" });
   const plt = await as(U.BLOOD, "/ward/donor-screening", "POST", { ...base, donorId: aph.donorId, weightKg: 60, hbGdl: 14, donationType: "apheresis-platelets", plateletCount: 220 });
   assert.equal(plt.__status, 200, JSON.stringify(plt));
-  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: plt.screeningId, bagNumber: "APH-1", volumeMl: 300 })).error, "reinfusion_required");
-  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, screeningId: plt.screeningId, bagNumber: "APH-1", volumeMl: 300, reinfusionComplete: false })).__status, 200);
+  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: plt.screeningId, bagNumber: "APH-1", volumeMl: 300 })).error, "reinfusion_required");
+  assert.equal((await as(U.BLOOD, "/ward/blood-donation", "POST", { orgId: ORG, donorKind: "voluntary", anticoagulant: "cpda", screeningId: plt.screeningId, bagNumber: "APH-1", volumeMl: 300, reinfusionComplete: false })).__status, 200);
   const again = await as(U.BLOOD, "/ward/donor-screening", "POST", { ...base, donorId: aph.donorId, weightKg: 60, hbGdl: 14 });
   assert.deepEqual(again.failures, ["after-apheresis"], "whole blood waits 90 days after red cells were not all returned");
   const view = await as(U.BLOOD, `/ward/blood-bank?orgId=${ORG}`);

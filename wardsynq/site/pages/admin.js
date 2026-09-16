@@ -699,6 +699,54 @@
       (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
   }
   WSQ._donorCriteriaHtml = donorCriteriaHtml;
+  /* BLOOD CENTRE SETTINGS (functions/_wardsynq/blood-centre-rules.js, legal opinion 2026-09-17 section G). Each may only
+   * be stricter than the Drugs and Cosmetics Rules: NAT required, shorter shelf lives, longer retention. r: undefined =
+   * loading, null = could not be loaded (said, never drawn as the Rules' values), else the server's { centre }. */
+  function bloodCentreHtml(c, r, msg) {
+    var esc = c.esc, B = WSQ._bloodbank;
+    var h = '<div class="card"><h2>' + esc(T(c, "site.admin.hospital.bloodCentre.title", "Blood centre: tests, shelf lives and retention")) + "</h2>";
+    if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.hospital.bloodCentre.loading", "Loading blood centre settings...")) + "</p></div>";
+    if (!r || !r.centre || !B) return h + '<div class="msg err">' + esc(T(c, "site.admin.hospital.bloodCentre.loadFailed", "The blood centre settings could not be loaded. Do not read this as the Rules' values being in force.")) + "</div></div>";
+    var ce = r.centre, saved = ce.saved || {}, sh = saved.shelfHours || {};
+    var num = function (id, value, placeholder, label) { return '<label class="f"><span>' + esc(label) + '</span><input type="number" min="1" step="1" id="' + id + '" value="' + (value == null ? "" : esc(value)) + '" placeholder="' + esc(placeholder) + '"></label>'; };
+    return h + '<p class="quiet">' + esc(T(c, "site.admin.hospital.bloodCentre.intro", "The Drugs and Cosmetics Rules 1945 set these for a licensed blood centre. This hospital may only make them stricter: require NAT, shorten a shelf life, keep samples or records longer. Blank uses the Rules.")) + "</p>" +
+      '<label class="f"><span><input type="checkbox" id="bcNat"' + (ce.natRequired ? " checked" : "") + "> " + esc(T(c, "site.admin.hospital.bloodCentre.nat", "Require NAT on every donation before release")) + "</span></label>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.hospital.bloodCentre.natNote", "Not required by the Rules. Reports say the government declined to make NAT mandatory in March 2026; that is not confirmed from a primary text.")) + "</p>" +
+      '<div class="row">' + num("bcSample", saved.sampleRetentionDays, ce.sampleRetention.days, T(c, "site.admin.hospital.bloodCentre.sampleDays", "Days to keep pilot and recipient samples after issue")) +
+      num("bcRecords", saved.recordRetentionYears, ce.recordRetention.years, T(c, "site.admin.hospital.bloodCentre.recordYears", "Years to keep blood centre records")) + "</div>" +
+      "<h3>" + esc(T(c, "site.admin.hospital.bloodCentre.shelfHeading", "Shorter shelf lives (hours)")) + '</h3><div class="row">' +
+      ce.components.map(function (k) {
+        return '<label class="f"><span>' + B.componentWord(c, k.component) + ": " + esc(T(c, "site.admin.hospital.bloodCentre.shelfFor", "the Rules allow up to {limit}", { limit: B.shelfWords(c, k.longestHours) })) +
+          '</span><input type="number" min="1" step="1" data-shelf="' + esc(k.component) + '" value="' + (sh[k.component] == null ? "" : esc(sh[k.component])) + '" placeholder="' + esc(k.longestHours) + '"></label>';
+      }).join("") + "</div>" +
+      '<p class="quiet">' + esc(T(c, "site.blood.shelfUnconfirmed", "Not confirmed in the Rules as read, so not allowed here: a longer shelf life for fresh frozen plasma kept at -40 C or colder (one year is kept), and a separate shelf life for red cells without an additive solution (they keep no longer than whole blood in the same anticoagulant).")) + "</p>" +
+      '<button class="btn" id="bcSave" type="button">' + esc(T(c, "site.admin.hospital.bloodCentre.save", "Save blood centre settings")) + "</button>" +
+      (msg ? '<div class="msg ' + (msg.ok ? "ok" : "err") + '">' + msg.html + "</div>" : "") + "</div>";
+  }
+  WSQ._bloodCentreHtml = bloodCentreHtml;
+  function wireBloodCentre(c) {
+    var box = document.getElementById("bloodCentreCard");
+    if (!box) return;
+    var draw = function (r, msg) {
+      box.innerHTML = bloodCentreHtml(c, r, msg);
+      var btn = document.getElementById("bcSave");
+      if (!btn) return;
+      btn.onclick = function () {
+        var v = function (id) { var e = document.getElementById(id); return e ? String(e.value || "").trim() : ""; };
+        var shelf = {};
+        Array.prototype.forEach.call(box.querySelectorAll("[data-shelf]"), function (el) { var x = String(el.value || "").trim(); shelf[el.getAttribute("data-shelf")] = x === "" ? null : Number(x); });
+        var nat = document.getElementById("bcNat");
+        btn.disabled = true;
+        c.api("/org/blood-centre-settings", { orgId: c.state.orgId, settings: { natRequired: !!(nat && nat.checked), sampleRetentionDays: v("bcSample") === "" ? null : Number(v("bcSample")), recordRetentionYears: v("bcRecords") === "" ? null : Number(v("bcRecords")), shelfHours: shelf } }).then(function (x) {
+          if (!x || !x.ok) { btn.disabled = false; box.querySelector(".msg") && box.querySelector(".msg").remove(); box.insertAdjacentHTML("beforeend", '<div class="msg err">' + c.esc(T(c, "site.admin.hospital.donor.notSaved", "Nothing was saved.")) + " " + EN(c, c.esc(refusal(c, x))) + "</div>"); return; }
+          draw(x, { ok: true, html: c.esc(x.changed && x.changed.length ? T(c, "site.admin.hospital.bloodCentre.saved", "Saved. The server now holds the settings shown above.") : T(c, "site.admin.hospital.donor.savedNoChange", "Saved: nothing had changed.")) });
+          c.toast(T(c, "site.admin.hospital.bloodCentre.toast", "Blood centre settings saved."));
+        });
+      };
+    };
+    draw(undefined);
+    c.api("/org/blood-centre-settings?orgId=" + encodeURIComponent(c.state.orgId)).then(function (r) { draw(r && r.ok ? r : null); }, function () { draw(null); });
+  }
   function wireDonorCriteria(c) {
     var box = document.getElementById("donorCritCard");
     if (!box) return;
@@ -872,7 +920,7 @@
       '<p class="quiet">' + c.esc(T(c, "site.admin.hospital.countryNote", "The country decides what counts as a valid phone number and the unit a temperature is charted in from now on. Readings already recorded keep the unit they were recorded in.")) + '</p><div id="admHospMsg"></div>' +
       (c.isWardsynq() ? "" : '<div class="msg note">' + c.esc(T(c, "site.admin.hospital.needsWardsynq", "Inpatient features (ward, beds, theatre, Digital Twin) need a WardSynQ hospital. Create one from the hospital list.")) + '</div>') +
       '</div><div id="tokCard"></div>' +
-      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="donorCritCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
+      (c.isWardsynq() ? '<div id="admAlertSlot"></div><div id="clinCard"></div><div id="donorCritCard"></div><div id="bloodCentreCard"></div>' + noteWritersCard(c, o) + printLangCard(c, o) + labelSizesCard(c, o) + approvalRulesHtml(c, o.wardsynq) + labCheckHtml(c, o.wardsynq) : "") +
       /* BUG-MU2PHANW: the owner (or platform owner) only; the same two-step dialog as the hospital list. */
       (c.state.who && (c.state.who.orgOwner || c.state.who.platformOwner) && c.removeHospital
         ? '<div class="card"><h2>' + c.esc(T(c, "site.admin.hospital.removeTitle", "Remove this hospital")) + '</h2><p class="quiet">' + c.esc(T(c, "site.admin.hospital.removeIntro", "Removes it from every hospital list. Patient records, documents and the audit trail are kept.")) + '</p>' +
@@ -895,7 +943,7 @@
       });
     };
     wireClinicalSettings(c);
-    wireDonorCriteria(c);
+    wireDonorCriteria(c); wireBloodCentre(c);
     wireNoteWriters(c);
     wirePrintLang(c);
     wireLabelSizes(c);
