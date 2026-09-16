@@ -42,20 +42,22 @@ const SHELL_RECHECKS = 3;
 
 // ponytail: flat keyword list, no NLP/fuzzy matching — good enough for the GHIS-style nav labels this
 // targets; widen the list (or move to a config) if a hospital's labels don't match.
-const CLINICAL_KEYWORDS_SRC =
+export const CLINICAL_KEYWORDS_SRC =
   'medic|drug|\\blabs?\\b|laborator|investigat|result|radiolog|imaging|x.?ray|scan|history|discharge|summary|' +
   'demographic|patient.?details|patient.?profile|profile|encounter|visit|\\bnote|report|diagnos|record';
 
 // Never click anything that could write, print, send, sign out or leave the module. Matched against the
 // control's visible label (case-insensitive). Read-only is the whole contract of this crawler.
-const SKIP_SRC =
+export const SKIP_SRC =
   'log.?out|sign.?out|log.?off|delete|remove|\\bsave|submit|update|\\bedit|\\badd\\b|\\bnew\\b|create|' +
   'order|prescri|upload|attach|send|\\bsms|whatsapp|mail|print|export|download|cancel|\\bclose|\\bback\\b|' +
   '\\bhome\\b|refresh|reload|\\bapps?\\b|switch|password|settings|transfer|admit|approve|reject|confirm|' +
   '×|✕|\\bpay|bill|discharge\\s+(the\\s+)?patient|clear|reset|select\\s+all|verify|sign\\b|finali[sz]e|complete';
 
-// Controls that switch which patient list is shown (tabs and menu items on a worklist page).
-const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted/i;
+// Controls that switch which patient list is shown (tabs and menu items on a worklist page): the doctor's
+// own in-patient list, the hospital-wide IP worklist, and the other queues that are patient lists too
+// (GHIS: "In patients" | "Out patients" | "Emergency" | "IP worklist" under Administration).
+export const LIST_CONTROL = /^(in|ip|inpatients?)\s*-?\s*(patients?|work\s*list|worklist)?$|^(ip|in\s*patient|ward|my\s*patients?)\s*(work\s*list|worklist|list)?$|^all\s*patients$|^admitted|^out\s*-?\s*patients?$|^opd$|^emergency$|^casualty$/i;
 
 const HINT_RULES = [
   /* Indian hospital EMRs rarely say "medications": GHIS and its peers label the same chart
@@ -862,11 +864,16 @@ function CRAWL_FIND_CONTROLS(keywordSrc, skipSrc, query) {
     if (/^(TR|TD|TH|TABLE|TBODY|THEAD|INPUT|SELECT|TEXTAREA|OPTION|FORM|BODY|HTML)$/.test(tag)) continue;
     if (tag === 'BUTTON' && (el.getAttribute('type') || '').toLowerCase() === 'submit') continue;
     /* A COLLAPSED MENU IS STILL THE MENU. On a phone the EMR's navbar folds away (GHIS: Medications,
-     * Investigations, Patient profile sit in a hidden .navbar-nav / .dropdown-menu), so a visible-only
-     * walk never reached labs or medications (Pixel, 2026-09-13). A hidden item with its own click
-     * handler inside a nav or dropdown menu is kept; el.click() runs its handler without opening it. */
+     * Investigations, Patient profile, and the hospital-wide "IP worklist" under Administration sit in
+     * a hidden .navbar-nav / .dropdown-menu), so a visible-only walk never reached labs, medications or
+     * the ward-wide list (Pixel, 2026-09-13; GHIS "IP worklist" is a plain <a href>, no onclick, owner
+     * 2026-09-16). A hidden item is kept when it has its own click handler (el.click() runs it without
+     * opening the menu) OR a real href (a plain link, not "#"/empty/javascript:void), inside a nav or
+     * dropdown menu; the SKIP denylist below still keeps Logout and the rest off the list. */
     if (anyVisible && !(el.getClientRects && el.getClientRects().length)) {
-      if (!el.hasAttribute('onclick') || !(el.closest && el.closest('nav,.navbar,.navbar-nav,.dropdown-menu,[class*=sidebar],[class*=side-menu],[class*=mega-me]'))) continue;
+      var hiddenHref = tag === 'A' ? (el.getAttribute('href') || '').trim() : '';
+      var hiddenHrefOk = !!hiddenHref && hiddenHref !== '#' && !/^javascript:\s*void\(/i.test(hiddenHref);
+      if (!(el.hasAttribute('onclick') || hiddenHrefOk) || !(el.closest && el.closest('nav,.navbar,.navbar-nav,.dropdown-menu,[class*=sidebar],[class*=side-menu],[class*=mega-me]'))) continue;
     }
     var text = (el.textContent || '').replace(/\s+/g, ' ').trim();
     if (!text || text.length > 80) continue;
@@ -976,14 +983,14 @@ function CRAWL_GUIDE_PATH() {
   return JSON.stringify(p.slice(0, 20));
 }
 
-const CONTROL_QUERY = 'a,button,li,div,span,p,label,h1,h2,h3,h4,h5,h6,[role=tab],[role=button],[data-toggle],[data-bs-toggle],[onclick]';
+export const CONTROL_QUERY = 'a,button,li,div,span,p,label,h1,h2,h3,h4,h5,h6,[role=tab],[role=button],[data-toggle],[data-bs-toggle],[onclick]';
 const ARM_OBSERVER_SRC = String(CRAWL_ARM_OBSERVER);
 const RAW_TABLE_SRC = String(CRAWL_RAW_TABLE);
 const RAW_BLOCK_SRC = String(CRAWL_RAW_BLOCK);
 const DOCS_SRC = String(CRAWL_DOCS);
 /* The page-realm functions are sent as source and cannot close over anything here, so a function that
  * walks frames is handed its walker in the same expression. */
-const withDocs = (fnSrc, args = '') => `(function(){ var CRAWL_DOCS = ${DOCS_SRC}; return (${fnSrc})(${args}); })()`;
+export const withDocs = (fnSrc, args = '') => `(function(){ var CRAWL_DOCS = ${DOCS_SRC}; return (${fnSrc})(${args}); })()`;
 const PAGE_STATE_SRC = String(CRAWL_PAGE_STATE);
 const FIND_PATIENT_ROW_SRC = String(CRAWL_FIND_PATIENT_ROW);
 const CLICK_ROW_SRC = String(CRAWL_CLICK_ROW);
@@ -1089,7 +1096,7 @@ export async function exploreDetailOf({ client, view, book, origins = [], waitMs
   }
   return detail;
 }
-const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
+export const FIND_CONTROLS_SRC = String(CRAWL_FIND_CONTROLS);
 const CLICK_CONTROL_SRC = String(CRAWL_CLICK_CONTROL);
 const ARM_GUIDE_SRC = String(CRAWL_ARM_GUIDE);
 const GUIDE_PATH_SRC = String(CRAWL_GUIDE_PATH);
@@ -1353,7 +1360,7 @@ export async function deepCrawlClinical({ client, caps = {}, onProgress, stopSig
     const listViews = [];
     const tabs = (await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []) || [])
       .filter((c) => c && LIST_CONTROL.test(c.label)).map((c) => c.label);
-    for (const label of [...new Set(tabs)].slice(0, 4)) {
+    for (const label of [...new Set(tabs)].slice(0, 6)) {
       if (stopped() || Date.now() >= deadline) break;
       const now = await evalJson(client, withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + "," + JSON.stringify(SKIP_SRC) + "," + JSON.stringify(CONTROL_QUERY)), []);
       const ctl = (Array.isArray(now) ? now : []).find((c) => c.label === label);

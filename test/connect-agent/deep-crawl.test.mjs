@@ -4,11 +4,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
+import { createServer } from 'node:http';
 import { existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders, awaitDetailRequest, exploreDetailOf } from '../../connect-agent/phone/deep-crawl.mjs';
+import { buildTableView, buildBlockView, deepCrawlClinical, redactEndpoints, mergeEndpointDetails, hintFromHeaders, awaitDetailRequest, exploreDetailOf, LIST_CONTROL, FIND_CONTROLS_SRC, CLINICAL_KEYWORDS_SRC, SKIP_SRC, CONTROL_QUERY, withDocs } from '../../connect-agent/phone/deep-crawl.mjs';
 import { inferHtmlOperations } from '../../connect-agent/manifest/infer-html.mjs';
 import { extractRecords, isValidSelector } from '../../connect-agent/manifest/html.mjs';
 
@@ -489,7 +490,18 @@ window.__writes=0;
 function loadView(id){var v=VIEWS[id];setTimeout(function(){document.getElementById(v[0]).innerHTML=v[1];},30);}
 </script></body></html>`;
 
-async function withChrome(fn, html = ACCORDION_HTML) {
+// Serves `html` off a real http://127.0.0.1 origin instead of a data: URI: a data: page's location.origin
+// is opaque ("null"), so CRAWL_FIND_CONTROLS's same-site href check (new URL(href, location.href), then
+// comparing .origin) throws/never matches there -- fine for onclick-driven fixtures, useless for testing
+// a plain <a href>. Only needed when a test exercises that path.
+function serveHtml(html) {
+  const server = createServer((req, res) => { res.setHeader('content-type', 'text/html'); res.end(html); });
+  return new Promise((resolve) => {
+    server.listen(0, '127.0.0.1', () => resolve({ url: `http://127.0.0.1:${server.address().port}/`, close: () => new Promise((r) => server.close(r)) }));
+  });
+}
+
+async function withChrome(fn, html = ACCORDION_HTML, navUrl = null) {
   const port = 9400 + Math.floor(Math.random() * 400);
   const userDir = join(tmpdir(), 'deep-crawl-chrome-' + process.pid + '-' + port);
   const proc = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${userDir}`, '--no-first-run', '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
@@ -508,7 +520,7 @@ async function withChrome(fn, html = ACCORDION_HTML) {
     const { result: { targetId } } = await call('Target.createTarget', { url: 'about:blank' });
     ({ result: { sessionId } } = await call('Target.attachToTarget', { targetId, flatten: true }));
     await call('Runtime.enable');
-    await call('Page.navigate', { url: 'data:text/html;charset=utf-8,' + encodeURIComponent(html) });
+    await call('Page.navigate', { url: navUrl || ('data:text/html;charset=utf-8,' + encodeURIComponent(html)) });
     const evaluate = async ({ expression }) => {
       const r = await call('Runtime.evaluate', { expression, returnByValue: true });
       if (r.result?.exceptionDetails) throw new Error('page error: ' + (r.result.exceptionDetails.exception?.description || r.result.exceptionDetails.text));
@@ -794,3 +806,43 @@ test('guided ask: the table the doctor taps inside turns green and is the one ca
     assert.equal((await evaluate({ expression: "document.getElementById('meds').style.outline" })).result, '');
   }, html);
 });
+
+// --- F4: a collapsed menu's plain <a href> is a candidate too, not only an el.onclick --------------
+
+test('LIST_CONTROL matches every patient-list tab (including the ones behind a menu), not a record-scoped item', () => {
+  for (const label of ['In patients', 'IP worklist', 'Out patients', 'Outpatients', 'OPD', 'Emergency', 'Casualty', 'All patients', 'Admitted patients']) {
+    assert.ok(LIST_CONTROL.test(label), label + ' should match');
+  }
+  for (const label of ['Final discharge', 'Diet Reports']) {
+    assert.ok(!LIST_CONTROL.test(label), label + ' should not match');
+  }
+});
+
+const MENU_HTML = `<!doctype html><html><body>
+<a href="/Doctor/Home">Dashboard</a>
+<nav class="navbar-nav">
+  <div class="dropdown-menu" style="display:none">
+    <a href="/Doctor/IPWorkList">IP worklist</a>
+    <a href="/Account/Logout">Logout</a>
+  </div>
+</nav>
+</body></html>`;
+
+test('FIND_CONTROLS_SRC: a hidden <a href> inside a collapsed dropdown is a candidate; a hidden Logout <a href> in the same menu is not (real DOM)',
+  { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
+    // A real http:// origin, not a data: URI: CRAWL_FIND_CONTROLS's same-site check resolves the <a href>
+    // against location.href, and a data: page's origin is opaque ("null"), which would never match.
+    const { url, close } = await serveHtml(MENU_HTML);
+    try {
+      await withChrome(async (evaluate) => {
+        const expr = withDocs(FIND_CONTROLS_SRC, JSON.stringify(CLINICAL_KEYWORDS_SRC) + ',' + JSON.stringify(SKIP_SRC) + ',' + JSON.stringify(CONTROL_QUERY));
+        const { result } = await evaluate({ expression: expr });
+        const out = JSON.parse(result);
+        const labels = out.map((c) => c.label);
+        assert.ok(labels.includes('IP worklist'), JSON.stringify(out));
+        assert.ok(!labels.includes('Logout'), JSON.stringify(out));
+      }, MENU_HTML, url);
+    } finally {
+      await close();
+    }
+  });
