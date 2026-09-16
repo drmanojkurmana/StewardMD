@@ -191,6 +191,20 @@
   // an explicit ctx to open({...}) — this is the primary, fully-tested path (unit + CDP).
   function livePatientContext() {
     try {
+      if (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) {
+        var wsq = G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs(G);
+        if (wsq && wsq.patient && wsq.patient.id) {
+          return {
+            patient: { name: wsq.patient.name, patientId: wsq.patient.id },
+            heightCm: wsq.vitals.heightCm,
+            weightKg: wsq.vitals.weightKg,
+            age: wsq.vitals.age,
+            sex: wsq.vitals.sex,
+            creatinine: wsq.labs.serumCreatinine,
+            renal: wsq.labs.crcl ? "CrCl " + wsq.labs.crcl + " mL/min" : null
+          };
+        }
+      }
       var p = G.GHISMEDS && G.GHISMEDS.getSelectedPatient && G.GHISMEDS.getSelectedPatient();
       if (p && p.patientId) return { patient: { name: p.name, patientId: p.patientId } };
     } catch (e) {}
@@ -433,30 +447,41 @@
     var html = R.buildProtocolSheet(plan, { patientName: (st.ctx && st.ctx.patient && st.ctx.patient.name) || "", diagnosis: (st.ctx && st.ctx.diagnosis) || "" });
     exportHtmlDoc(html, "StewardMD-" + (plan.protocolId || "protocol"));
   }
-  // Native fallback when the real-PDF plugin (VisionOcr.htmlToPdf) is absent: write the HTML to cache
-  // and open the share sheet (user picks Print / Save as PDF). Mirrors opd-emr.js oncoShareHtml.
-  function shareHtmlFile(html, name) {
-    try {
-      var P = G.Capacitor && G.Capacitor.Plugins;
-      if (P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
-        P.Filesystem.writeFile({ path: name + ".html", data: html, directory: "CACHE", encoding: "utf8" })
-          .then(function () { return P.Filesystem.getUri({ path: name + ".html", directory: "CACHE" }); })
-          .then(function (r) { return P.Share.share({ title: "StewardMD - Protocol sheet", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); })
-          .catch(function () { toast("Export unavailable on this device."); });
-        return;
-      }
-    } catch (e) {}
-    toast("Export not available on this device.");
-  }
   function exportHtmlDoc(html, filename) {
     var name = (filename || "StewardMD-Protocol").replace(/[^\w.-]+/g, "-");
-    // NATIVE: real PDF if the renderer is present, else share the HTML file (share sheet -> Save as PDF).
+    toast("Building PDF...");
+    // 1. Native bridge: VisionOcr (iOS) or jsPDF client fallback (Android / Native) -> real .pdf file
     if (G.SMD_IS_NATIVE) {
       var N = G.SMD_NATIVE;
-      if (N && N.sharePdfFromHtml) { toast("Building PDF..."); N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function () { shareHtmlFile(html, name); }); return; }
-      shareHtmlFile(html, name); return;
+      if (N && N.sharePdfFromHtml) {
+        N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function (err) {
+          console.warn("sharePdfFromHtml failed, trying client-side PDF:", err);
+          if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+            G.SMD_PDF.fromHtml(html, name, "StewardMD - Protocol sheet").catch(function () {
+              toast("PDF export failed on this device.");
+            });
+          } else {
+            toast("PDF export unavailable.");
+          }
+        });
+        return;
+      }
     }
-    // WEB: hidden-iframe print (the browser dialog offers Save as PDF).
+    // 2. Client-side PDF export (works on Web, PWA, mobile browsers -> real .pdf download)
+    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+      G.SMD_PDF.fromHtml(html, name, "StewardMD - Protocol sheet").catch(function () {
+        // 3. Fallback to print dialog on desktop (offers native Save as PDF)
+        try {
+          var ifr = document.createElement("iframe"); ifr.setAttribute("aria-hidden", "true");
+          ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+          document.body.appendChild(ifr);
+          var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+          setTimeout(function () { try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {} setTimeout(function () { try { ifr.remove(); } catch (e2) {} }, 1500); }, 350);
+        } catch (e) { toast("Export unavailable."); }
+      });
+      return;
+    }
+    // 3. Desktop browser print
     try {
       var ifr = document.createElement("iframe"); ifr.setAttribute("aria-hidden", "true");
       ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
@@ -589,6 +614,19 @@
   function foreground() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("oh-bg"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on")) close(); }); } catch (e) {}
+
+  // React Bits Spotlight tracking: calculates cursor/pointer offset for luminous gradients
+  try {
+    if (typeof document !== "undefined") {
+      document.addEventListener("pointermove", function (e) {
+        var card = e.target && e.target.closest ? e.target.closest(".oh-card, .oh-qa, .oh-row, .oh-favchip, .ctc-grow, .stg-trow, .stg-grow, .rec-out") : null;
+        if (!card) return;
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", (e.clientX - r.left) + "px");
+        card.style.setProperty("--mouse-y", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    }
+  } catch (e) {}
 
   // Testing/launch hook (mirrors queue.js): with the flag on, ?oncohome=1 auto-opens.
   try {

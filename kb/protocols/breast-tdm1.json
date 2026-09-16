@@ -15,7 +15,8 @@
   "caps": "protocol",
   "source": {
     "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
-    "primaryStudy": "KATHERINE: von Minckwitz G, Huang CS, Mano MS, et al. N Engl J Med 2019;380:617-628; EMILIA: Verma S, et al. N Engl J Med 2012;367:1783-1791"
+    "primaryStudy": "KATHERINE: von Minckwitz G, Huang CS, Mano MS, et al. N Engl J Med 2019;380:617-628; EMILIA: Verma S, et al. N Engl J Med 2012;367:1783-1791",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
     "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-M 4, 7 of 10; BINV-Q 4, 10 of 15)",
@@ -50,9 +51,9 @@
     "Peripheral neuropathy assessment periodically"
   ],
   "clearanceChecks": [
-    "CBC/platelets (ANC ≥ 1000/mcL, platelets ≥ 100,000/mcL)",
-    "liver function tests (ALT/AST ≤ 2.5x ULN, bilirubin ≤ ULN)",
-    "LVEF (≥ 50%)",
+    "CBC/platelets (ANC \u2265 1000/mcL, platelets \u2265 100,000/mcL)",
+    "liver function tests (ALT/AST \u2264 2.5x ULN, bilirubin \u2264 ULN)",
+    "LVEF (\u2265 50%)",
     "prior-cycle status"
   ],
   "doseModificationRules": [
@@ -60,13 +61,13 @@
       "condition": "grade 3 or 4 thrombocytopenia (platelets < 50,000/mcL)",
       "drug": "ado-trastuzumab emtansine",
       "action": "hold/reduce",
-      "text": "Hold T-DM1 until platelets recover to grade ≤ 1 (≥ 75,000/mcL). Resume at reduced dose level: first reduction 3.0 mg/kg; second reduction 2.4 mg/kg. Permanently discontinue if unable to tolerate 2.4 mg/kg."
+      "text": "Hold T-DM1 until platelets recover to grade \u2264 1 (\u2265 75,000/mcL). Resume at reduced dose level: first reduction 3.0 mg/kg; second reduction 2.4 mg/kg. Permanently discontinue if unable to tolerate 2.4 mg/kg."
     },
     {
       "condition": "grade 3 or 4 transaminitis (ALT/AST > 5x ULN)",
       "drug": "ado-trastuzumab emtansine",
       "action": "hold/reduce",
-      "text": "Hold T-DM1 until ALT/AST recover to grade ≤ 2 (≤ 5x ULN). Resume with one dose-level reduction."
+      "text": "Hold T-DM1 until ALT/AST recover to grade \u2264 2 (\u2264 5x ULN). Resume with one dose-level reduction."
     },
     {
       "condition": "symptomatic congestive heart failure or LVEF < 40%",

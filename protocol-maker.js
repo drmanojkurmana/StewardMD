@@ -227,7 +227,8 @@
   // ---- open / close -----------------------------------------------------------------------------
   function ensureEl() {
     var el = D.getElementById("smdProtoMaker");
-    if (!el) { el = D.createElement("div"); el.id = "smdProtoMaker"; el.className = "mkp-overlay"; D.body.appendChild(el); el.addEventListener("click", onClick); el.addEventListener("change", onChange); }
+    if (!el) { el = D.createElement("div"); el.id = "smdProtoMaker"; el.className = "mkp-overlay"; el.style.zIndex = "15000"; D.body.appendChild(el); el.addEventListener("click", onClick); el.addEventListener("change", onChange); }
+    else { el.style.zIndex = "15000"; }
     return el;
   }
   function open(opts) {
@@ -235,7 +236,7 @@
     ctx = opts || {};
     view = ctx.startNew ? "editor" : "list";
     if (ctx.startNew) mk = blank();
-    var el = ensureEl(); el.style.display = "block"; if (D.body) D.body.classList.add("mkp-open");
+    var el = ensureEl(); el.style.display = "block"; el.style.zIndex = "15000"; if (D.body) D.body.classList.add("mkp-open");
     paint();
   }
   function close() { var el = D && D.getElementById("smdProtoMaker"); if (el) el.style.display = "none"; if (D && D.body) D.body.classList.remove("mkp-open"); }

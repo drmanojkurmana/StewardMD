@@ -14,7 +14,8 @@
   "caps": "protocol",
   "source": {
     "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
-    "primaryStudy": "INAVO120: Turner NC, Im SA, Saura C, et al. N Engl J Med 2024;391:1584-1596; Jhaveri KL, et al. N Engl J Med 2025;393:151-161"
+    "primaryStudy": "INAVO120: Turner NC, Im SA, Saura C, et al. N Engl J Med 2024;391:1584-1596; Jhaveri KL, et al. N Engl J Med 2025;393:151-161",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
     "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 6, 14 of 15)",
@@ -48,7 +49,7 @@
   ],
   "clearanceChecks": [
     "fasting plasma glucose (< 160 mg/dL)",
-    "CBC / absolute neutrophil count (ANC ≥ 1000/mcL, platelets ≥ 50,000/mcL)",
+    "CBC / absolute neutrophil count (ANC \u2265 1000/mcL, platelets \u2265 50,000/mcL)",
     "liver function tests",
     "prior-cycle status"
   ],
@@ -57,13 +58,13 @@
       "condition": "grade 3 hyperglycemia (fasting glucose > 250 mg/dL)",
       "drug": "inavolisib",
       "action": "hold/reduce",
-      "text": "Hold inavolisib. Initiate/intensify antidiabetic therapy. Resume at reduced dose (6 mg daily) when fasting glucose ≤ 160 mg/dL."
+      "text": "Hold inavolisib. Initiate/intensify antidiabetic therapy. Resume at reduced dose (6 mg daily) when fasting glucose \u2264 160 mg/dL."
     },
     {
       "condition": "grade 3 neutropenia on Day 1 of cycle",
       "drug": "palbociclib",
       "action": "delay",
-      "text": "Hold palbociclib until ANC ≥ 1000/mcL. Resume at 125 mg or reduce to 100 mg for prolonged or recurrent grade 3."
+      "text": "Hold palbociclib until ANC \u2265 1000/mcL. Resume at 125 mg or reduce to 100 mg for prolonged or recurrent grade 3."
     }
   ],
   "drugs": [
@@ -86,7 +87,34 @@
         "perDose": null
       },
       "days": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
       ],
       "modificationRules": []
     },
@@ -109,7 +137,27 @@
         "perDose": null
       },
       "days": [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
       ],
       "modificationRules": []
     },

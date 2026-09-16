@@ -1,0 +1,362 @@
+{
+  "guideline": "tcell_lymphoma",
+  "id": "tcell_lymphoma",
+  "title": "T-Cell Lymphomas",
+  "category": "Hematologic Malignancies",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "t_cell_lymphoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for T-Cell Lymphomas. Covers complete clinical algorithm: Diagnostic Workup (excisional or incisional biopsy avoiding FNA alone, comprehensive IHC immunophenotyping with CD30 and EBER ISH, TCR gamma/beta clonality, targeted NGS profiling, FDG-PET/CT plus bilateral marrow staging, baseline echocardiogram before anthracyclines) -> Subtype and CD30 Expression Stratification (CD30-positive ALCL/CD30+ PTCL vs CD30-negative PTCL-NOS/AITL/TFH vs extranodal NK/T-cell nasal type vs relapsed or refractory) -> CD30-positive first-line BV-CHP per ECHELON-2 with consolidative ASCR in CR1 except low/intermediate-IPI ALK-positive ALCL -> CD30-negative first-line CHOEP (or CHOP) with consolidative ASCR in CR1 -> Localized NK/T-cell concurrent chemoradiotherapy or P-GEMOX and advanced SMILE or P-GEMOX with allogeneic HCT -> Relapsed or refractory brentuximab, HDAC inhibitor, or pralatrexate salvage to allogeneic HCT. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for T-Cell Lymphomas Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "BV-CHP per ECHELON-2: brentuximab vedotin 1.8 mg/kg IV day 1 plus cyclophosphamide, doxorubicin, and prednisone every 21 days for 6 cycles. Vincristine is omitted from the CHP backbone to avoid overlapping neurotoxicity with brentuximab vedotin.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Consolidative autologous stem cell rescue (ASCR) in first complete remission (CR1) is recommended for ALK-negative ALCL and CD30-positive or CD30-negative PTCL responders. ALK-positive ALCL with low or intermediate IPI achieves cure with BV-CHP alone without ASCR.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "CHOEP adds etoposide 100 mg/m2 days 1-3 to CHOP for patients aged 60 years or younger with good performance status. CHOP is used for older or unfit patients. Give G-CSF primary prophylaxis for the etoposide-added febrile-neutropenia risk.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Extranodal NK/T-cell lymphoma is EBV-driven and resistant to anthracyclines through P-glycoprotein-mediated efflux. Localized disease receives concurrent chemoradiotherapy (radiotherapy 50 Gy or higher) or L-asparaginase regimens (P-GEMOX); advanced disease receives SMILE or P-GEMOX with allogeneic HCT for fit responders.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Relapsed or refractory salvage is selected by CD30 status and subtype biology: brentuximab vedotin for CD30-positive relapse, HDAC inhibitors (romidepsin or belinostat, preferred for AITL/TFH), or pralatrexate with vitamin B12 and folic acid. Consolidate second remission with allogeneic HCT in eligible candidates.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "tcell_lymphoma_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "T-Cell Lymphomas: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before subtype and CD30 expression stratification. Confirm tissue diagnosis with full immunophenotype and clonality, complete NGS profiling, stage with PET/CT and marrow, and record baseline cardiac function before anthracyclines.",
+      "path": "T-Cell Lymphomas / Workup",
+      "pills": [
+        "T-cell lymphoma",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Excisional or incisional surgical biopsy of enlarged lymph node or involved tissue for histopathology (avoid FNA alone, which is insufficient for T-cell lymphoma subtyping)",
+        "Comprehensive IHC immunophenotyping: CD3, CD4, CD8, CD30, CD2, CD5, CD7, CD10, BCL6, PD-1, CXCL13, ALK, CD56, cytotoxic markers (TIA-1, granzyme B), and EBER in situ hybridization",
+        "T-cell receptor (TCR) gamma/beta gene rearrangement analysis to confirm clonal T-cell population",
+        "Targeted NGS mutation profiling (RHOA, TET2, DNMT3A, IDH2, STAT3, STAT5B, and ALK fusions)",
+        "Staging: whole-body FDG-PET/CT (or contrast-enhanced CT) and bilateral bone marrow aspirate and biopsy",
+        "Baseline echocardiogram for left ventricular ejection fraction prior to anthracycline-based therapy"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Subtype and CD30 Expression Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_subtype",
+      "linkId": "tcell_lymphoma_subtype",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Subtype and CD30 Expression Stratification",
+      "title": "T-Cell Lymphomas: Subtype and CD30 Expression Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign subtype and CD30 expression status plus presentation (frontline nodal vs extranodal NK/T vs relapsed); the group selects the BV-CHP, CHOEP, L-asparaginase, or salvage pathway.",
+      "path": "T-Cell Lymphomas / Subtype and CD30 Expression Stratification",
+      "pills": [
+        "T-cell lymphoma",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "CD30-positive disease: systemic anaplastic large cell lymphoma (ALK-positive or ALK-negative), or CD30-positive PTCL-NOS or AITL with expression at 10 percent or higher.",
+        "CD30-negative peripheral T-cell lymphoma: PTCL-NOS, angioimmunoblastic T-cell lymphoma (AITL), or T-follicular helper (TFH) phenotype without qualifying CD30 expression.",
+        "Extranodal NK/T-cell lymphoma, nasal type: EBV-driven extranodal disease of the nasal cavity, nasopharynx, or other extranodal sites.",
+        "Relapsed or refractory disease: primary refractory T-cell lymphoma or any relapse after frontline therapy; CD30 status at relapse determines salvage selection before allogeneic HCT."
+      ],
+      "options": [
+        {
+          "id": "cd30_pos",
+          "label": "CD30-Positive T-Cell Lymphomas (Systemic ALCL [ALK+ / ALK-], or CD30+ PTCL-NOS / AITL >=10%)",
+          "sets": {
+            "subtype": "cd30_positive"
+          },
+          "pills": [
+            "T-cell lymphoma",
+            "CD30-positive",
+            "ALCL"
+          ]
+        },
+        {
+          "id": "cd30_neg",
+          "label": "CD30-Negative Peripheral T-Cell Lymphoma (PTCL-NOS, AITL, TFH)",
+          "sets": {
+            "subtype": "cd30_negative"
+          },
+          "pills": [
+            "T-cell lymphoma",
+            "CD30-negative",
+            "PTCL"
+          ]
+        },
+        {
+          "id": "nk_tcell",
+          "label": "Extranodal NK/T-Cell Lymphoma, Nasal Type (EBV-driven)",
+          "sets": {
+            "subtype": "nk_tcell"
+          },
+          "pills": [
+            "T-cell lymphoma",
+            "NK/T-cell",
+            "EBV-driven",
+            "extranodal"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed or Refractory T-Cell Lymphomas",
+          "sets": {
+            "setting": "relapsed_refractory"
+          },
+          "pills": [
+            "T-cell lymphoma",
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_cd30_pos_tx",
+      "linkId": "tcell_lymphoma_cd30_pos_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "CD30-Positive Treatment",
+      "title": "CD30-Positive Disease: BV-CHP With Consolidative ASCR in CR1",
+      "section": "Treatment",
+      "description": "First-line BV-CHP per ECHELON-2 for CD30-positive systemic ALCL and CD30-positive PTCL; consolidative ASCR in CR1 for ALK-negative ALCL and CD30-positive PTCL, omitted for low or intermediate-IPI ALK-positive ALCL cured by BV-CHP alone.",
+      "path": "T-Cell Lymphomas / CD30-Positive / Treatment",
+      "pills": [
+        "T-cell lymphoma",
+        "CD30-positive",
+        "ALCL",
+        "BV-CHP"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "First-line BV-CHP every 21 days x 6 cycles: Brentuximab vedotin 1.8 mg/kg IV day 1 + Cyclophosphamide 750 mg/m2 day 1 + Doxorubicin 50 mg/m2 day 1 + Prednisone 100 mg/day days 1-5 (ECHELON-2 trial).",
+        "Omit vincristine from the CHP backbone to avoid overlapping neurotoxicity with brentuximab vedotin; monitor for peripheral neuropathy and neutropenia with G-CSF support per febrile-neutropenia risk.",
+        "Consolidative Autologous Stem Cell Rescue (ASCR) in first complete remission (CR1) for ALK-negative ALCL and CD30-positive PTCL-NOS or AITL responders.",
+        "ALK-positive ALCL with low or intermediate IPI achieves cure with BV-CHP alone without ASCR; reserve transplant for high-risk or incomplete-response cases per multidisciplinary review.",
+        "Restage with FDG-PET/CT after 3-4 cycles and at end of treatment; offer clinical trial enrollment at every line.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "BV-CHP (Brentuximab vedotin + CHP) x 6 cycles +/- Consolidative ASCR in CR1",
+      "protocolRefs": [
+        "heme-alcl-bv-chp"
+      ]
+    },
+    {
+      "id": "n_cd30_neg_tx",
+      "linkId": "tcell_lymphoma_cd30_neg_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "CD30-Negative Treatment",
+      "title": "CD30-Negative PTCL: CHOEP Followed by Consolidative ASCR in CR1",
+      "section": "Treatment",
+      "description": "First-line CHOEP (or CHOP for older or unfit patients) for CD30-negative PTCL-NOS, AITL, and TFH disease, followed by consolidative high-dose therapy and ASCR in CR1 for responding patients.",
+      "path": "T-Cell Lymphomas / CD30-Negative / Treatment",
+      "pills": [
+        "T-cell lymphoma",
+        "CD30-negative",
+        "PTCL",
+        "CHOEP"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "b"
+      ],
+      "bullets": [
+        "First-line CHOEP every 21 days x 6 cycles for patients aged 60 years or younger with good performance status: Cyclophosphamide 750 mg/m2 day 1 + Doxorubicin 50 mg/m2 day 1 + Vincristine 1.4 mg/m2 day 1 + Etoposide 100 mg/m2 days 1-3 + Prednisone 100 mg/day days 1-5; CHOP for older or unfit patients who cannot tolerate etoposide.",
+        "Give G-CSF primary prophylaxis given the etoposide-added febrile-neutropenia risk; monitor CBC before each cycle with tumor lysis prophylaxis for high tumor burden.",
+        "Consolidative High-Dose Therapy and Autologous Stem Cell Rescue (ASCR) in CR1 for responding patients proceeding to transplant evaluation.",
+        "Baseline and serial echocardiograms given cumulative anthracycline exposure; assess response with interim and end-of-treatment FDG-PET/CT.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "CHOEP (Cyclophosphamide/Dox/Vincristine/Etoposide/Pred) x 6 -> Consolidative ASCR in CR1",
+      "protocolRefs": [
+        "heme-ptcl-choep"
+      ]
+    },
+    {
+      "id": "n_nk_tcell_tx",
+      "linkId": "tcell_lymphoma_nk_tcell_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "NK/T-Cell Treatment",
+      "title": "Extranodal NK/T-Cell Lymphoma, Nasal Type: CCRT or L-Asparaginase Regimens",
+      "section": "Treatment",
+      "description": "Stage-adapted therapy for EBV-driven extranodal NK/T-cell lymphoma: concurrent chemoradiotherapy or P-GEMOX for localized disease, SMILE or P-GEMOX with allogeneic HCT for advanced disease.",
+      "path": "T-Cell Lymphomas / NK/T-Cell / Treatment",
+      "pills": [
+        "T-cell lymphoma",
+        "NK/T-cell",
+        "EBV-driven",
+        "extranodal"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Stage I/II (localized): concurrent chemoradiotherapy (CCRT: radiotherapy 50 Gy or higher + Cisplatin/Etoposide-based chemotherapy) or non-anthracycline L-asparaginase regimens (P-GEMOX: Gemcitabine + Oxaliplatin + Pegaspargase).",
+        "Stage III/IV (advanced): SMILE (Dexamethasone, Methotrexate, Ifosfamide, L-asparaginase, Etoposide) or P-GEMOX, selected by fitness, renal function, and prior exposure.",
+        "Anthracycline-based regimens are ineffective in NK/T-cell disease because of P-glycoprotein-mediated multidrug resistance; use L-asparaginase-containing therapy.",
+        "Consider Allogeneic HCT for fit patients with advanced-stage response or high-risk disease after L-asparaginase-based induction.",
+        "Monitor EBV DNA load, CBC, coagulation, pancreatitis, hepatotoxicity, and hypersensitivity on asparaginase; restage with FDG-PET/CT and EBV DNA.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Concurrent ChemoRT (>=50 Gy) or P-GEMOX / SMILE (L-Asparaginase Regimens)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_relapsed_tx",
+      "linkId": "tcell_lymphoma_relapsed_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Relapsed or Refractory Treatment",
+      "title": "Relapsed or Refractory Disease: Targeted and Epigenetic Salvage to Allogeneic HCT",
+      "section": "Treatment",
+      "description": "Targeted second-line and epigenetic salvage selected by CD30 status and subtype biology, consolidated with allogeneic HCT in eligible candidates achieving second remission.",
+      "path": "T-Cell Lymphomas / Relapsed or Refractory / Treatment",
+      "pills": [
+        "T-cell lymphoma",
+        "relapsed",
+        "refractory",
+        "salvage"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Brentuximab vedotin 1.8 mg/kg IV every 3 weeks for CD30-positive relapses, with peripheral neuropathy and neutropenia monitoring.",
+        "HDAC inhibitors for epigenetic salvage, preferred for AITL/TFH biology: Romidepsin 14 mg/m2 on days 1, 8, and 15 every 28 days, or Belinostat per labeling with CBC and ECG monitoring.",
+        "Pralatrexate 30 mg/m2 weekly for 6 of 7 weeks with vitamin B12 and folic acid supplementation and mucositis monitoring.",
+        "Consolidate second remission with Allogeneic Hematopoietic Cell Transplantation (HCT) for eligible candidates; enroll in a clinical trial wherever available.",
+        "Re-biopsy at relapse to confirm histology and CD30 status; restage with FDG-PET/CT and bone marrow assessment as indicated.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Targeted Epigenetic Salvage (Brentuximab / Romidepsin / Pralatrexate) -> Allogeneic HCT",
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_subtype",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_subtype",
+      "toNodeId": "n_subtype",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_subtype_cd30pos",
+      "from": "n_subtype",
+      "fromNodeId": "n_subtype",
+      "to": "n_cd30_pos_tx",
+      "toNodeId": "n_cd30_pos_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "cd30_pos",
+      "fromOptions": [
+        "cd30_pos"
+      ]
+    },
+    {
+      "id": "l_subtype_cd30neg",
+      "from": "n_subtype",
+      "fromNodeId": "n_subtype",
+      "to": "n_cd30_neg_tx",
+      "toNodeId": "n_cd30_neg_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "cd30_neg",
+      "fromOptions": [
+        "cd30_neg"
+      ]
+    },
+    {
+      "id": "l_subtype_nkt",
+      "from": "n_subtype",
+      "fromNodeId": "n_subtype",
+      "to": "n_nk_tcell_tx",
+      "toNodeId": "n_nk_tcell_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "nk_tcell",
+      "fromOptions": [
+        "nk_tcell"
+      ]
+    },
+    {
+      "id": "l_subtype_relapsed",
+      "from": "n_subtype",
+      "fromNodeId": "n_subtype",
+      "to": "n_relapsed_tx",
+      "toNodeId": "n_relapsed_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "relapsed",
+      "fromOptions": [
+        "relapsed"
+      ]
+    }
+  ]
+}

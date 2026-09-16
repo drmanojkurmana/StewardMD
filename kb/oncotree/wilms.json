@@ -1,0 +1,435 @@
+{
+  "guideline": "wilms",
+  "id": "wilms",
+  "title": "Wilms Tumor (Nephroblastoma)",
+  "category": "Pediatric Oncology",
+  "version": "1.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "wilms_tumor",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2026 clinical navigator for Wilms Tumor (Nephroblastoma). Covers complete clinical algorithm: Diagnostic Workup (gentle abdominal examination with blood pressure and syndromic assessment, contrast-enhanced abdominal and pelvic CT or MRI with IVC and renal vein patency, mandatory chest CT with IV contrast for pulmonary metastatic screening, upfront radical nephroureterectomy with regional lymph node sampling, favorable vs unfavorable histology classification, 1p and 16q LOH plus 1q gain testing) -> Histology and Stage Stratification (Stage I-II FH standard risk vs Stage III FH or Stage I-II with 1p/16q LOH intermediate risk vs Stage IV FH metastatic vs diffuse anaplasia unfavorable histology vs bilateral Stage V) -> Stage I-II FH Regimen EE-4A without radiation -> Stage III FH flank RT plus Regimen DD-4A -> Stage IV FH Regimen DD-4A plus whole lung RT with AREN0533 response-guided omission -> Diffuse anaplasia Regimen UH-1/I with RT to primary and metastatic sites -> Bilateral renal-preservation pathway with neoadjuvant chemotherapy then nephron-sparing surgery. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Wilms Tumor Version 1.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Gentle abdominal palpation avoids tumor capsule rupture and spill, which upstages disease to stage III. Assess blood pressure for renin-mediated hypertension and examine for WAGR, Denys-Drash, and Beckwith-Wiedemann syndromic features with genetics referral where indicated.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Upfront radical nephroureterectomy with regional lymph node sampling is the standard diagnostic and therapeutic procedure; percutaneous core biopsy of a unilateral resectable mass is avoided because tumor spill upstages disease to stage III and mandates intensified therapy.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Chest CT with IV contrast is mandatory for all patients at diagnosis because subcentimeter pulmonary nodules are missed on plain radiography; lung is the most common metastatic site, followed by liver and bone.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "1p and 16q loss of heterozygosity (LOH) identifies higher-risk favorable histology disease requiring Regimen DD-4A intensification; 1q gain is an adverse prognostic marker under active study for risk stratification.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "COG AREN0533 response-guided approach: stage IV favorable histology patients with complete resolution of lung nodules by week 6 of DD-4A chemotherapy can omit whole lung radiotherapy without compromising event-free survival.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "wilms_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Wilms Tumor: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before histology and stage stratification. Examine gently to avoid capsule rupture, image the abdomen and chest, resect with lymph node sampling, classify histology, and test 1p/16q LOH plus 1q gain.",
+      "path": "Wilms Tumor / Workup",
+      "pills": [
+        "Wilms",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Physical examination assessing abdominal mass (gentle palpation to avoid tumor capsule rupture), blood pressure, and syndromic features (WAGR, Denys-Drash, Beckwith-Wiedemann)",
+        "Contrast-enhanced abdominal and pelvic CT or MRI assessing renal mass, contralateral kidney, and IVC/renal vein patency",
+        "Chest CT with IV contrast (mandatory for pulmonary metastatic screening; identifies subcentimeter nodules)",
+        "Upfront radical nephroureterectomy with regional lymph node sampling (percutaneous core biopsy avoided to prevent tumor spill and stage III upstaging)",
+        "Histopathology: International classification for Favorable Histology (FH) vs Unfavorable Histology (UH: focal vs diffuse anaplasia)",
+        "Molecular cytogenetics on resected tumor: 1p and 16q Loss of Heterozygosity (LOH) and 1q gain"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Histology and Stage Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_histology",
+      "linkId": "wilms_stage_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Histology and Stage Stratification",
+      "title": "Wilms Tumor: Histology and Stage Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign stage, histology, and molecular risk from surgical pathology and 1p/16q LOH status; the group selects the EE-4A, DD-4A, metastatic, anaplasia, or bilateral renal-preservation pathway.",
+      "path": "Wilms Tumor / Histology and Stage Stratification",
+      "pills": [
+        "Wilms",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Stage I-II Favorable Histology without 1p/16q LOH: completely resected standard-risk disease with negative nodes and intact capsule.",
+        "Stage III Favorable Histology or Stage I-II with 1p/16q LOH: residual or spilled disease, positive nodes, or molecular high-risk features requiring flank radiation plus 3-drug therapy.",
+        "Stage IV Favorable Histology: hematogenous metastases to lung, liver, or bone at diagnosis.",
+        "Unfavorable Histology with diffuse anaplasia (Stage II-IV UH): chemo-resistant biology requiring intensive multimodality therapy.",
+        "Bilateral Wilms Tumor (Stage V, synchronous bilateral): renal-preservation pathway with neoadjuvant chemotherapy then nephron-sparing surgery."
+      ],
+      "options": [
+        {
+          "id": "stage_i_ii_fh",
+          "label": "Stage I-II Favorable Histology without 1p/16q LOH (Standard Risk FH)",
+          "sets": {
+            "stage": "I-II",
+            "histology": "favorable",
+            "risk": "standard"
+          },
+          "pills": [
+            "Wilms",
+            "stage I-II",
+            "FH",
+            "standard-risk"
+          ]
+        },
+        {
+          "id": "stage_iii_fh",
+          "label": "Stage III Favorable Histology OR Stage I-II with 1p/16q LOH (Intermediate Risk FH)",
+          "sets": {
+            "stage": "III",
+            "histology": "favorable",
+            "risk": "intermediate"
+          },
+          "pills": [
+            "Wilms",
+            "stage III",
+            "FH",
+            "LOH-positive",
+            "intermediate-risk"
+          ]
+        },
+        {
+          "id": "stage_iv_fh",
+          "label": "Stage IV Favorable Histology (Metastatic to Lung, Liver, or Bone)",
+          "sets": {
+            "stage": "IV",
+            "histology": "favorable",
+            "setting": "metastatic"
+          },
+          "pills": [
+            "Wilms",
+            "stage IV",
+            "FH",
+            "metastatic"
+          ]
+        },
+        {
+          "id": "diffuse_anaplasia",
+          "label": "Unfavorable Histology / Diffuse Anaplasia (Stage II-IV UH)",
+          "sets": {
+            "histology": "unfavorable",
+            "risk": "high"
+          },
+          "pills": [
+            "Wilms",
+            "UH",
+            "diffuse anaplasia",
+            "high-risk"
+          ]
+        },
+        {
+          "id": "bilateral",
+          "label": "Bilateral Wilms Tumor (Stage V / Synchronous Bilateral)",
+          "sets": {
+            "stage": "V",
+            "laterality": "bilateral"
+          },
+          "pills": [
+            "Wilms",
+            "stage V",
+            "bilateral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_stage_i_ii_fh_tx",
+      "linkId": "wilms_stage_i_ii_fh_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Stage I-II FH Treatment",
+      "title": "Stage I-II FH: Radical Nephrectomy Plus Regimen EE-4A Without RT",
+      "section": "Treatment",
+      "description": "Two-drug adjuvant chemotherapy without flank radiation for completely resected standard-risk favorable histology disease.",
+      "path": "Wilms Tumor / Stage I-II FH / Treatment",
+      "pills": [
+        "Wilms",
+        "stage I-II",
+        "FH",
+        "standard-risk"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "COG Regimen EE-4A: Vincristine 1.5 mg/m2 IV (maximum 2 mg) weekly x 10 doses then every 3 weeks plus Dactinomycin 45 mcg/kg IV (maximum 2.5 mg) every 3 weeks for 18-22 weeks total therapy.",
+        "No flank radiation therapy required for completely resected Stage I-II favorable histology disease without 1p/16q LOH, positive nodes, spill, or residual tumor.",
+        "4-year event-free survival above 92-95% on COG studies with nephrectomy plus EE-4A in this standard-risk group.",
+        "Monitor for vincristine neuropathy (jaw pain, constipation, ileus, foot drop) and dactinomycin hepatopathy plus myelosuppression with dose holds per toxicity.",
+        "Surveillance after therapy: abdominal imaging and chest imaging per COG schedule with blood pressure and renal function monitoring of the solitary kidney.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Radical Nephrectomy + Regimen EE-4A (Vincristine + Dactinomycin) x 18 weeks (No RT)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_stage_iii_fh_tx",
+      "linkId": "wilms_stage_iii_fh_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Stage III FH Treatment",
+      "title": "Stage III FH: Flank RT Plus Regimen DD-4A",
+      "section": "Treatment",
+      "description": "Three-drug chemotherapy with flank or whole abdomen radiation for stage III or LOH-positive favorable histology disease.",
+      "path": "Wilms Tumor / Stage III FH / Treatment",
+      "pills": [
+        "Wilms",
+        "stage III",
+        "FH",
+        "intermediate-risk"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "COG Regimen DD-4A: Vincristine 1.5 mg/m2 IV weekly plus Dactinomycin 45 mcg/kg IV every 3 weeks plus Doxorubicin 45 mg/m2 cumulative dose given over the course of therapy, for 24 weeks total.",
+        "Flank radiation therapy 10.8 Gy in 6 fractions to the tumor bed (whole abdomen RT 10.8 Gy for diffuse spill, peritoneal seeding, or preoperative rupture) starting within 2 weeks of surgery where feasible.",
+        "4-year event-free survival above 88-90% for Stage III favorable histology disease on DD-4A plus radiation.",
+        "Cardiac surveillance with baseline and serial echocardiograms for doxorubicin exposure; monitor renal function, blood counts, and hepatic function throughout.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Radical Nephrectomy + Flank RT (10.8 Gy) + Regimen DD-4A (Vincristine/Dactinomycin/Doxorubicin)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_stage_iv_fh_tx",
+      "linkId": "wilms_stage_iv_fh_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Stage IV FH Treatment",
+      "title": "Stage IV FH: Regimen DD-4A Plus Response-Guided Whole Lung RT",
+      "section": "Treatment",
+      "description": "Systemic 3-drug therapy with response-guided whole lung radiotherapy for metastatic favorable histology disease.",
+      "path": "Wilms Tumor / Stage IV FH / Treatment",
+      "pills": [
+        "Wilms",
+        "stage IV",
+        "FH",
+        "metastatic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "e"
+      ],
+      "bullets": [
+        "Systemic Regimen DD-4A: Vincristine 1.5 mg/m2 IV weekly plus Dactinomycin 45 mcg/kg IV every 3 weeks plus Doxorubicin 45 mg/m2 cumulative dose, with restaging of lung nodules at week 6.",
+        "Whole lung radiotherapy 12 Gy in 1.5 Gy fractions (8 fractions) for persistent pulmonary disease; COG AREN0533 response-guided approach allows omission of whole lung RT when lung nodules show complete response by week 6.",
+        "Irradiate liver or bone metastases per response and multidisciplinary review; resect residual lesions where feasible after chemotherapy.",
+        "Cardiac, pulmonary, and renal surveillance given combined anthracycline plus lung RT exposure; enroll in a clinical trial wherever available.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Regimen DD-4A + Whole Lung Radiotherapy (12 Gy, omitted if rapid complete response)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_diffuse_anaplasia_tx",
+      "linkId": "wilms_diffuse_anaplasia_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Diffuse Anaplasia Treatment",
+      "title": "Diffuse Anaplasia: Nephrectomy Plus RT Plus Regimen UH-1/I",
+      "section": "Treatment",
+      "description": "Intensive multimodality therapy with alternating multiagent chemotherapy and radiation for unfavorable histology with diffuse anaplasia.",
+      "path": "Wilms Tumor / Diffuse Anaplasia / Treatment",
+      "pills": [
+        "Wilms",
+        "UH",
+        "diffuse anaplasia",
+        "high-risk"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Radical nephrectomy with regional lymph node sampling plus radiation therapy to the primary tumor bed and metastatic sites (19.8 to 24 Gy per site and stage).",
+        "COG Regimen UH-1 / Regimen I: Vincristine, Doxorubicin, and Cyclophosphamide alternating with Etoposide and Cisplatin for 30 weeks total therapy.",
+        "Diffuse anaplasia is chemo-resistant relative to favorable histology disease; manage at a high-volume pediatric oncology center with stem-cell, audiology, renal, and cardiac supportive care for platinum and alkylator exposure.",
+        "Monitor for myelosuppression, ototoxicity, nephrotoxicity, hemorrhagic cystitis, infertility risk, and second neoplasms; enroll in a clinical trial wherever available.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Radical Nephrectomy + RT (19.8-24 Gy) + Regimen UH-1/I (VDC alternating with VP-16/Cisplatin)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_bilateral_tx",
+      "linkId": "wilms_bilateral_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Bilateral Wilms Treatment",
+      "title": "Stage V Bilateral: Neoadjuvant Chemo Then Nephron-Sparing Surgery",
+      "section": "Treatment",
+      "description": "Renal-preservation strategy with biopsy, neoadjuvant chemotherapy, serial MRI restaging, and bilateral nephron-sparing surgery.",
+      "path": "Wilms Tumor / Bilateral Stage V / Treatment",
+      "pills": [
+        "Wilms",
+        "stage V",
+        "bilateral",
+        "nephron-sparing"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Initial core needle biopsy of bilateral renal masses to confirm Wilms histology and exclude anaplasia or non-Wilms renal tumors before chemotherapy.",
+        "Neoadjuvant chemotherapy with Vincristine 1.5 mg/m2 IV weekly plus Dactinomycin 45 mcg/kg IV every 3 weeks, with Doxorubicin added for bulky, poorly responsive, or metastatic disease, for 6 to 12 weeks.",
+        "Serial high-resolution MRI restaging during neoadjuvant therapy to assess tumor shrinkage, preserve surgical planes, and time bilateral nephron-sparing surgery.",
+        "Bilateral nephron-sparing surgery (partial nephrectomy or enucleation) with the goal of preserving maximal renal parenchyma; avoid bilateral radical nephrectomy with dialysis dependence wherever technically feasible.",
+        "Adjuvant chemotherapy and selective radiation per final pathology, stage, histology, and LOH status of each kidney; lifelong renal function, blood pressure, and second-tumor surveillance.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Neoadjuvant Chemo (Vincristine+Dactinomycin) x 6-12 weeks -> Nephron-Sparing Partial Nephrectomy",
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_histology",
+      "toNodeId": "n_stage_histology",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_i_ii_fh",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_stage_i_ii_fh_tx",
+      "toNodeId": "n_stage_i_ii_fh_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage_i_ii_fh",
+      "fromOptions": [
+        "stage_i_ii_fh"
+      ]
+    },
+    {
+      "id": "l_stage_iii_fh",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_stage_iii_fh_tx",
+      "toNodeId": "n_stage_iii_fh_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage_iii_fh",
+      "fromOptions": [
+        "stage_iii_fh"
+      ]
+    },
+    {
+      "id": "l_stage_iv_fh",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_stage_iv_fh_tx",
+      "toNodeId": "n_stage_iv_fh_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage_iv_fh",
+      "fromOptions": [
+        "stage_iv_fh"
+      ]
+    },
+    {
+      "id": "l_diffuse_anaplasia",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_diffuse_anaplasia_tx",
+      "toNodeId": "n_diffuse_anaplasia_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "diffuse_anaplasia",
+      "fromOptions": [
+        "diffuse_anaplasia"
+      ]
+    },
+    {
+      "id": "l_bilateral",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_bilateral_tx",
+      "toNodeId": "n_bilateral_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "bilateral",
+      "fromOptions": [
+        "bilateral"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "peds-wilms-ee4a"
+  ]
+}

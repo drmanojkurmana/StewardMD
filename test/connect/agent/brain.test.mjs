@@ -2,7 +2,7 @@
 //   node --test test/connect/agent/brain.test.mjs
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { phiGate, askBrain, shapeAnswer, structureHash, RESOURCES, ROLES, brainModel } from "../../../functions/_connect/agent/brain.js";
+import { phiGate, askBrain, shapeAnswer, structureHash, RESOURCES, ROLES, brainModel, promptFor } from "../../../functions/_connect/agent/brain.js";
 import { onRequest } from "../../../functions/api/connect/agent/[[path]].js";
 import { makeAgentDb } from "./agent-db.mjs";
 import { sha256hex } from "../../../functions/_connect/agent/hmac.js";
@@ -181,4 +181,10 @@ test("vertex-adc: with the Cloud Run proxy configured, the brain calls it with t
   assert.equal(out.model, "gemini-3.8-flash");
   const refused = async () => new Response(JSON.stringify({ error: "vertex_403", detail: "denied" }), { status: 502 });
   await assert.rejects(askBrain({ env, fetchImpl: refused, payload: Object.assign({}, GHIS_WORKLIST, { labels: ["other"] }) }), /ADC proxy\) refused the request \[502\]/);
+});
+
+test("verify tells the model a ward list is admitted in-patients, not an out-patient queue", () => {
+  const p = promptFor({ op: "verify", resource: "worklist", rowCount: 2, headers: ["Patient ID", "Visit type"], kind: "html" });
+  assert.match(p, /ADMITTED in-patients/);
+  assert.match(p, /not an out-patient or OPD queue/);
 });
