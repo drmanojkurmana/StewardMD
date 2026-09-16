@@ -530,6 +530,14 @@
     on("navigated", function (e) {
       var o = e && e.url ? originOf(e.url) : null;
       if (o && S && S.visitedOrigins.indexOf(o) < 0) S.visitedOrigins.push(o);
+      /* RE-ARM THE GUIDE AFTER NAVIGATION. index.mjs's GUIDE_ARM (CRAWL_ARM_OBSERVER + CRAWL_ARM_GUIDE)
+       * is evaluated once per ask and dies with the document, so the doctor's own navigation during a
+       * guided ask (S.guide: an ask is on screen) silently drops tap-to-point and the green outline.
+       * Best-effort: errors are swallowed, never surfaced to the doctor. */
+      if (S && S.guide && S.engine && S.engine.GUIDE_ARM) {
+        var armClient = S.pluginClient || getPlugin();
+        if (armClient && armClient.evaluate) { try { armClient.evaluate({ expression: S.engine.GUIDE_ARM }).catch(function () {}); } catch (e2) {} }
+      }
     });
     on("loggedIn", function () {
       if (!S) return;

@@ -354,3 +354,58 @@ test('runPhoneDiscovery: the autonomous crawl carries deployment.origins through
   const injected = plugin.evals.some((e) => e.includes('window.__SMD_REPLAY__=window.__SMD_REPLAY__'));
   assert.ok(injected, 'the secondary-origin request never reached the replay buffer (origins was not passed through)');
 });
+
+/* B1 REGRESSION. askOne (index.mjs) used to call captureView BEFORE draining the native request log for
+ * navToReplayEntries/INJECT_REPLAY. captureView itself drains (and CLEARS) that same log to build
+ * view.endpoints (deep-crawl.mjs captureView), so a doctor's page-load navigation (GHIS radiology:
+ * GET /Radio/Home?recordNo=... is a document load, not XHR) was already gone from the log by the time
+ * the drain->nav->inject block ran: nav was always [] and INJECT_REPLAY_SRC was never even evaluated.
+ * Fixed by moving that block above captureView, the same order deep-crawl.mjs's exploreDetailOf uses. */
+function pageLoadFakePlugin(state) {
+  const evals = [];
+  return {
+    platform: 'android', evals,
+    async navigate() { return { ok: true }; },
+    async wait() {},
+    async snapshot() { return { snapshot: '' }; },
+    async click() { return { result: 'ok' }; },
+    async closeTab() { return { ok: true }; },
+    async currentUrl() { return { url: 'https://emr.example/Radio/Home?recordNo=MR1' }; },
+    async setMode() { return { ok: true }; },
+    async drainRequests() { return { requests: state.requests.splice(0) }; },
+    async evaluate({ expression }) {
+      const e = String(expression);
+      evals.push(e);
+      if (e.includes('__SMD_CONNECT_OBSERVER__.events')) return { result: '[]' };
+      if (e.startsWith('mw:(')) return { result: JSON.stringify({ installed: true, installId: 'i1' }) };
+      if (e.includes('function CRAWL_RAW_TABLE')) return { result: 'null' };
+      if (e.includes('function CRAWL_RAW_BLOCK')) return { result: JSON.stringify(RAD_BLOCK) };
+      if (e.includes('function CRAWL_GUIDE_PATH')) return { result: '[]' };
+      if (e.includes('function CRAWL_ARM_GUIDE') || e.includes('function CRAWL_ARM_OBSERVER')) return { result: 'ok' };
+      if (e.includes('function CRAWL_CLEAR_POINT')) return { result: 'ok' };
+      return { result: null };
+    },
+  };
+}
+
+test('askOne: the native request log is drained for replay injection BEFORE captureView drains (and clears) it', async () => {
+  const state = { requests: [] };
+  const plugin = pageLoadFakePlugin(state);
+  await runPhoneDiscovery({
+    plugin, api: fakeApiDetail({}), session: { id: 's1' }, deployment: { origins: ['https://emr.example'] },
+    mode: 'manual', caps: { maxMs: 30000, waitMs: 1, verifyWaitMs: 5, verifyBudgetMs: 50 },
+    askDoctor: async ({ gap }) => {
+      if (gap !== 'radiology') return { done: false };
+      // The doctor's page-load navigation to the report is already sitting in the native log by the
+      // time they tap Done, exactly like a real document-load GET fired before the ask resolves.
+      state.requests.push({ method: 'GET', url: 'https://emr.example/Radio/Home?recordNo=MR1' });
+      return { done: true };
+    },
+  });
+  const injectAt = plugin.evals.findIndex((e) => e.includes('window.__SMD_REPLAY__=window.__SMD_REPLAY__'));
+  const captureAt = plugin.evals.findIndex((e) => e.includes('function CRAWL_RAW_TABLE') || e.includes('function CRAWL_RAW_BLOCK'));
+  assert.ok(injectAt >= 0, 'the nav GET never reached the replay buffer: ' + JSON.stringify(plugin.evals));
+  assert.ok(plugin.evals[injectAt].includes('MR1'), 'the injected entry does not carry the navigated URL');
+  assert.ok(captureAt >= 0, 'captureView never read the screen');
+  assert.ok(injectAt < captureAt, `the replay injection (index ${injectAt}) must run before captureView drains the log (index ${captureAt})`);
+});

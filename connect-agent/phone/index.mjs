@@ -17,6 +17,12 @@ export { createPluginClient } from './plugin-client.mjs';
 // on the phone. The phone only crawls and sends the observed view STRUCTURE; the server infers the
 // adapter from it (same split as compile/validate). Keeping the manifest modules off the phone bundle.
 
+/* RE-ARM AFTER NAVIGATION (FIX A). GUIDE_SOURCES.arm/.armGuide (deep-crawl.mjs) are evaluated once per
+ * ask (askOne, below) and die with the document: a doctor who navigates during a guided ask silently
+ * loses tap-to-point and the green outline, with nothing telling them why. connect-agent-onboarding.js
+ * re-evaluates this on every native `navigated` event while an ask is on screen, best-effort. */
+export const GUIDE_ARM = GUIDE_SOURCES.arm + ';' + GUIDE_SOURCES.armGuide;
+
 function browserOf(plugin) {
   if (plugin && plugin.platform === 'android') return 'phone-android';
   if (plugin && plugin.platform === 'ios') return 'phone-ios';
@@ -206,6 +212,20 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
       if (!answer || !answer.done) break;
       let guidedPath = [];
       try { guidedPath = JSON.parse((await plugin.evaluate({ expression: GUIDE_SOURCES.guidePath }))?.result || '[]'); } catch { guidedPath = []; }
+      /* DRAIN -> REPLAY ENTRIES -> INJECT, BEFORE captureView. captureView (deep-crawl.mjs) itself calls
+       * plugin.drainRequests() to build view.endpoints, which DRAINS AND CLEARS the same native request
+       * log this block reads. Doing this after captureView (as it used to) meant a doctor's page-load
+       * navigation (GHIS radiology: GET /Radio/Home?recordNo=... is a document load, not XHR) was
+       * already gone from the log, so `nav` was always empty and INJECT_REPLAY_SRC was never even
+       * evaluated. Same order deep-crawl.mjs's exploreDetailOf already uses. Found 2026-09-17. */
+      if (typeof plugin.drainRequests === 'function') {
+        try {
+          const drained = await plugin.drainRequests();
+          let pageOrigin = null; try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
+          const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
+          if (nav.length) await plugin.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
+        } catch { /* best effort */ }
+      }
       let view = null;
       try { view = await captureView({ client: plugin, resourceHint: gap, blockOnly: gap === 'patient' }); } catch { view = null; }
       if (!view || !view.rowsSelector) {
@@ -219,14 +239,6 @@ export async function runPhoneDiscovery({ plugin, api, session, deployment, star
       view.guided = true;
       if (Array.isArray(guidedPath) && guidedPath.length) view.guidedPath = guidedPath.slice(0, 20).map((s) => String(s).slice(0, 120));
       const verdict = await enrichView(view, brain, { ask: gap, keepHint: true });
-      if (typeof plugin.drainRequests === 'function') {
-        try {
-          const drained = await plugin.drainRequests();
-          let pageOrigin = null; try { const cur = await plugin.currentUrl(); pageOrigin = new URL(typeof cur === 'string' ? cur : cur && cur.url).origin; } catch { pageOrigin = null; }
-          const nav = navToReplayEntries(drained, { pageOrigin, allowedOrigins: origins });
-          if (nav.length) await plugin.evaluate({ expression: '(' + INJECT_REPLAY_SRC + ')(' + JSON.stringify(nav) + ')' }).catch(() => {});
-        } catch { /* best effort */ }
-      }
       await book.prove({ client: plugin, view, label: 'the doctor showed the ' + gap + ' screen' });
       /* ONE LEVEL DEEPER ON WHAT THE DOCTOR SHOWED. The crawl opens a row of every list it finds, but a
        * screen that only arrived because the doctor demonstrated it never got that treatment, so its

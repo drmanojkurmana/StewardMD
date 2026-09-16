@@ -157,7 +157,10 @@ return 1;
  * lets the test decide the outcome per scenario. */
 const FAKE_ENGINE = `
 window.__engineCalls = [];
+// Stands in for index.mjs's real GUIDE_ARM (CRAWL_ARM_OBSERVER + CRAWL_ARM_GUIDE sources): a distinctive
+// marker the onboarding UI should re-evaluate on a native "navigated" event while a guided ask is active.
 window.__SMD_PHONE_ENGINE_TEST__ = {
+  GUIDE_ARM: "SMD_TEST_GUIDE_ARM_MARKER",
   runPhoneDiscovery: function (opts) {
     window.__engineCalls.push(opts);
     window.__lastOnProgress = opts.onProgress;
@@ -435,8 +438,21 @@ try {
   `).then((v) => ok(v === true, "runPhoneDiscovery receives askDoctor and stopSignal"));
   ok(await waitFor(`var t=document.getElementById("smd-connect-detail").textContent; return t.indexOf("radiology reports")>=0 && !!document.getElementById("smd-connect-guideskip");`, 3000), "guided step renders the question and a Skip button");
   ok(await ev(`return document.getElementById("smd-connect-phase").textContent.indexOf("needs your help")>=0;`) === true, "guided step phase copy asks for help");
+
+  // FIX A regression: index.mjs's GUIDE_ARM dies with the document, so a doctor's own navigation
+  // during a guided ask silently drops tap-to-point/the green outline. The native "navigated" event
+  // must re-evaluate GUIDE_ARM on the plugin while an ask is active, and must NOT do so once it is not.
+  const guideArmed = `return window.__pluginCalls.some(function(c){return c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER";});`;
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
+  ok(await waitFor(guideArmed, 3000), "a navigated event during an active guided ask re-evaluates GUIDE_ARM on the plugin");
+
   await ev(`document.getElementById("smd-connect-guideskip").click(); return 1;`);
   ok(await waitFor(`return window.__ask1 && window.__ask1.done === false && !document.getElementById("smd-connect-guideskip");`, 3000), "Skip resolves the ask with done:false and removes the instruction");
+  await ev(`window.__pluginCalls = window.__pluginCalls.filter(function(c){return !(c.m==="evaluate" && c.a && c.a.expression==="SMD_TEST_GUIDE_ARM_MARKER");}); return 1;`);
+  await ev(`window.Capacitor.Plugins.ConnectBrowser.__fire("navigated", {url:"https://emr.newcity.example/Radio/Home"}); return 1;`);
+  await sleep(300);
+  ok(await ev(guideArmed) === false, "a navigated event outside an active guided ask does not re-evaluate GUIDE_ARM");
+
   await ev(`
     var call = window.__engineCalls[window.__engineCalls.length - 1];
     call.askDoctor({gap:"discharge", text:"I could not find the discharge summary. Tap where it lives, then tap Done."}).then(function (r) { window.__ask2 = r; });
