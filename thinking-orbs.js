@@ -88,20 +88,55 @@
     return { dots: visible, lines: visLines };
   }
 
-  function paintLines(ctx, lines, dark, tint) {
+  // Modern AI dynamic flowing multi-color gradient palette (Gemini / Apple Intelligence style)
+  var GRAD_DARK = [
+    [34, 211, 238],   // Electric Cyan (#22d3ee)
+    [99, 102, 241],   // Indigo (#6366f1)
+    [168, 85, 247],   // Neon Purple (#a855f7)
+    [244, 63, 94],    // Hot Coral / Rose (#f43f5e)
+    [52, 211, 153],   // Luminescent Mint (#34d399)
+    [34, 211, 238]    // Loop back to Cyan
+  ];
+
+  var GRAD_LIGHT = [
+    [14, 165, 233],   // Vibrant Sky Blue (#0ea5e9)
+    [79, 70, 229],    // Deep Indigo (#4f46e5)
+    [147, 51, 234],   // Royal Purple (#9333ea)
+    [225, 29, 72],    // Coral Crimson (#e11d48)
+    [13, 148, 136],   // Teal Mint (#0d9488)
+    [14, 165, 233]    // Loop back
+  ];
+
+  function getGradientColor(x, y, z, size, tSec, dark) {
+    var palette = dark ? GRAD_DARK : GRAD_LIGHT;
+    var cx = size / 2, cy = size / 2;
+    var dx = (x - cx) / (size / 2 || 1);
+    var dy = (y - cy) / (size / 2 || 1);
+    var angle = Math.atan2(dy, dx);
+    var normAngle = (angle + Math.PI) / (2 * Math.PI);
+    // Rotating chromatic flow + 3D depth phase
+    var phase = (normAngle + (z || 0) * 0.22 + (tSec || 0) * 0.15) % 1;
+    if (phase < 0) phase += 1;
+
+    var nStops = palette.length - 1;
+    var pos = phase * nStops;
+    var idx = Math.floor(pos);
+    var frac = pos - idx;
+    var c1 = palette[idx];
+    var c2 = palette[idx + 1] || palette[0];
+
+    var r = Math.round(c1[0] + (c2[0] - c1[0]) * frac);
+    var g = Math.round(c1[1] + (c2[1] - c1[1]) * frac);
+    var b = Math.round(c1[2] + (c2[2] - c1[2]) * frac);
+    return [r, g, b];
+  }
+
+  function paintLines(ctx, lines, dark, tSec, size) {
     for (var i = 0; i < lines.length; i++) {
       var l = lines[i];
       var alpha = l.a != null ? l.a : 1;
-      var w = Math.min(1, Math.max(0, l.white));
-      var g = Math.round((dark ? 1 - w : w) * 255);
-      if (tint) {
-        var r = Math.round(g * 0.45 + tint[0] * 0.55);
-        var gr = Math.round(g * 0.45 + tint[1] * 0.55);
-        var b = Math.round(g * 0.45 + tint[2] * 0.55);
-        ctx.strokeStyle = "rgba(" + r + "," + gr + "," + b + "," + alpha + ")";
-      } else {
-        ctx.strokeStyle = "rgba(" + g + "," + g + "," + g + "," + alpha + ")";
-      }
+      var c = getGradientColor((l.x1 + l.x2) / 2, (l.y1 + l.y2) / 2, 0, size, tSec, dark);
+      ctx.strokeStyle = "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + (alpha * 0.85) + ")";
       ctx.lineWidth = l.w;
       ctx.beginPath();
       ctx.moveTo(l.x1, l.y1);
@@ -110,29 +145,27 @@
     }
   }
 
-  function paintDots(ctx, dots, dark, tint) {
+  function paintDots(ctx, dots, dark, tSec, size) {
     for (var i = 0; i < dots.length; i++) {
       var d = dots[i];
       var alpha = d.a != null ? d.a : 1;
       var w = Math.min(1, Math.max(0, d.white));
-      var g = Math.round((dark ? 1 - w : w) * 255);
-      if (tint) {
-        var r = Math.round(g * 0.4 + tint[0] * 0.6);
-        var gr = Math.round(g * 0.4 + tint[1] * 0.6);
-        var b = Math.round(g * 0.4 + tint[2] * 0.6);
-        ctx.fillStyle = "rgba(" + r + "," + gr + "," + b + "," + alpha + ")";
-      } else {
-        ctx.fillStyle = "rgba(" + g + "," + g + "," + g + "," + alpha + ")";
-      }
+      var lum = (dark ? 1 - w : w);
+      var c = getGradientColor(d.x, d.y, d.z, size, tSec, dark);
+      // Modern AI luminous blend
+      var r = Math.min(255, Math.round(c[0] * 0.82 + (dark ? 255 : 30) * lum * 0.18));
+      var g = Math.min(255, Math.round(c[1] * 0.82 + (dark ? 255 : 30) * lum * 0.18));
+      var b = Math.min(255, Math.round(c[2] * 0.82 + (dark ? 255 : 30) * lum * 0.18));
+      ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
-  function paintFrame(ctx, frame, dark, tint) {
-    if (frame.lines && frame.lines.length) paintLines(ctx, frame.lines, dark, tint);
-    paintDots(ctx, frame.dots, dark, tint);
+  function paintFrame(ctx, frame, dark, tSec, size) {
+    if (frame.lines && frame.lines.length) paintLines(ctx, frame.lines, dark, tSec, size);
+    paintDots(ctx, frame.dots, dark, tSec, size);
   }
 
   // ── Mode Geometries ────────────────────────────────────────────────────────
@@ -590,9 +623,8 @@
       ctx.clearRect(0, 0, size, size);
       var frameFn = MODES[mode] || frameGlobe;
       var dark = options.dark != null ? options.dark : isDocDark();
-      var activeTint = options.tint !== false ? (dark ? [45, 212, 191] : [14, 110, 99]) : null;
       var frame = frameFn(size, tSec, options.opts || {});
-      paintFrame(ctx, frame, dark, activeTint);
+      paintFrame(ctx, frame, dark, tSec, size);
     }
 
     function loop() {
@@ -686,22 +718,13 @@
     return CLINICAL_AGENT_ORBS[Math.floor(Math.random() * CLINICAL_AGENT_ORBS.length)];
   }
 
-  // ── Multi-Orb HTML Builder for MaiK Buffer ─────────────────────────────────
+  // ── Single Thinking Orb HTML Builder for MaiK Buffer ───────────────────────
   function getOrbClusterHTML(stage, cls) {
     var primaryState = getStateForStage(stage, cls);
-    var isWeb = (cls && cls.indexOf('webbusy') !== -1) || (stage && stage.toLowerCase().indexOf('web') !== -1);
-    var companions = isWeb ? ['weaving', 'connecting', 'composing'] : ['solving', 'searching', 'weaving'];
-    // Filter out primary from companions
-    companions = companions.filter(function (s) { return s !== primaryState; });
-    while (companions.length < 2) companions.push('working');
 
     return '<div class="maik-orb-cluster" data-orb-cluster="1">' +
-      '<div class="maik-orb-main" title="Active Thinking Orb: ' + primaryState + '">' +
-        '<canvas class="maik-thinking-orb active-orb" data-orb-state="' + primaryState + '" data-orb-size="36" width="72" height="72" style="width:36px;height:36px;border-radius:50%;cursor:pointer;"></canvas>' +
-      '</div>' +
-      '<div class="maik-orb-satellites">' +
-        '<canvas class="maik-thinking-orb sat-orb" data-orb-state="' + companions[0] + '" data-orb-size="20" width="40" height="40" style="width:20px;height:20px;border-radius:50%;cursor:pointer;" title="Agent: ' + companions[0] + '"></canvas>' +
-        '<canvas class="maik-thinking-orb sat-orb" data-orb-state="' + companions[1] + '" data-orb-size="20" width="40" height="40" style="width:20px;height:20px;border-radius:50%;cursor:pointer;" title="Agent: ' + companions[1] + '"></canvas>' +
+      '<div class="maik-orb-main" title="Thinking: ' + primaryState + '">' +
+        '<canvas class="maik-thinking-orb active-orb" data-orb-state="' + primaryState + '" data-orb-size="45" width="90" height="90" style="width:45px;height:45px;border-radius:50%;cursor:pointer;display:block;"></canvas>' +
       '</div>' +
     '</div>';
   }

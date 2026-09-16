@@ -34,54 +34,53 @@ html body #maikSheet.mk-atmosphere .maik-disc svg { width:12px;height:12px; }
 html body.dark #maikSheet :is(.maik-logo,.maik-side-logo,.maik-hero-logo img,.maik-wm),html body.v3-dark #maikSheet :is(.maik-logo,.maik-side-logo,.maik-hero-logo img,.maik-wm),html body.dark :is(.maik-side-logo),html body.v3-dark :is(.maik-side-logo) { filter:brightness(0) invert(1)!important; }
 html body:not(.dark):not(.v3-dark) #maikSheet :is(.maik-logo,.maik-side-logo,.maik-hero-logo img,.maik-wm) { filter:none; }
 
-/* ── MaiK Thinking Orbs (Jakub Antalik 3D thought-orb engine) ── */
+/* ── MaiK Thinking Orb (Single 45px Modern AI Multi-Gradient Engine) ── */
 .maik-orb-cluster {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  justify-content: center;
   flex: none;
   vertical-align: middle;
 }
 .maik-orb-main {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 45px;
+  height: 45px;
   flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.16) 0%, transparent 74%);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, rgba(34, 211, 238, 0.18) 45%, rgba(244, 63, 94, 0.08) 65%, transparent 75%);
   transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: maikOrbAura 3.5s ease-in-out infinite alternate;
 }
 .maik-orb-main:hover {
   transform: scale(1.08);
 }
-.maik-orb-satellites {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+@keyframes maikOrbAura {
+  0% {
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(34, 211, 238, 0.18) 45%, rgba(244, 63, 94, 0.08) 65%, transparent 75%);
+  }
+  50% {
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.25) 0%, rgba(244, 63, 94, 0.20) 45%, rgba(52, 211, 153, 0.10) 65%, transparent 75%);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.25) 0%, rgba(168, 85, 247, 0.18) 45%, rgba(34, 211, 238, 0.10) 65%, transparent 75%);
+  }
 }
 .maik-thinking-orb {
   display: block;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1), opacity .2s ease;
+  transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .maik-thinking-orb.active-orb {
-  filter: drop-shadow(0 2px 8px rgba(45, 212, 191, 0.25));
-}
-.maik-thinking-orb.sat-orb {
-  opacity: 0.58;
-  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-}
-.maik-thinking-orb.sat-orb:hover {
-  opacity: 0.95;
-  transform: scale(1.18);
+  filter: drop-shadow(0 2px 14px rgba(168, 85, 247, 0.45)) drop-shadow(0 0 8px rgba(34, 211, 238, 0.40));
 }
 @media (prefers-reduced-motion: reduce) {
-  .maik-orb-main, .maik-thinking-orb { transition: none; }
+  .maik-orb-main, .maik-thinking-orb { transition: none; animation: none; }
 }
 
 /* ── Eradicate rectangular/square focus boxes on all textboxes & refine pills ── */
