@@ -196,6 +196,8 @@ body.dark #smdDischarge .d-btn.sign { color: #1a1030; }
 #smdDischarge .d-banner.warn { background: var(--sev-warning-bg); color: var(--sev-warning-fg); border-color: var(--sev-warning-bd); }
 #smdDischarge .d-banner.err { background: var(--sev-critical-bg); color: var(--sev-critical-fg); border-color: var(--sev-critical-bd); }
 #smdDischarge .d-banner.ok { background: var(--sev-stable-bg); color: var(--sev-stable-fg); border-color: var(--sev-stable-bd); }
+/* The question before signing or reverting (discharge.js askPanel), just above the action bar. */
+#smdDischarge .d-shell > .d-banner { flex: 0 0 auto; margin: 8px 16px 0; }
 
 /* ---- action bar ----------------------------------------------------------------------------- */
 #smdDischarge .d-actions {

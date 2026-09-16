@@ -629,6 +629,15 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-keys dt { flex: 0 0 104px; color: var(--on-surface-variant); font-size: 12px; }
 #smdWard .w-keys dd { margin: 0; }
 #smdWard .w-keys kbd { font: 600 12px var(--mono, ui-monospace, Menlo, monospace); border: 1px solid var(--outline-variant); border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; background: var(--sc-low); color: var(--on-surface); }
+/* The safety check's findings are sentences: read in sentence case, with only the heading word ("Hard stop") strong.
+   A pill-shaped, capitalised block of engine text was hard to read (retest 2026-09-16). */
+#smdWard #wMoReview li.w-st { display: block; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 400; border-radius: 10px; padding: 6px 10px; margin: 4px 0; }
+#smdWard #wMoReview li.w-st b { font-weight: 700; }
+/* A question before a write (ward.js askFor): over the ward, never a browser dialog. */
+#smdWard .w-ask { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(0, 0, 0, .45); }
+#smdWard .w-ask > .w-card { width: min(520px, 100%); max-height: calc(100vh - 32px); overflow-y: auto; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
+#smdWard .w-ask .w-card-h h3 { margin: 0; }
 #smdWard .w-next { font-size: 12px; font-weight: 600; color: var(--on-surface-variant); }
 #smdWard .w-next.warn { color: var(--on-warn-container); }
 

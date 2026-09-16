@@ -108,6 +108,11 @@ test("BUG-MU08T4RL-GU0N: a transfer picks a real ward and bed on the board and p
   assert.match(html, /data-w-act="transferward:CCU"/);
   W._dispatch("pickbed:CCU|1");
   await tick();
+  // Retest 2026-09-16: the confirmation is asked on the ward, and nothing moves until its own button.
+  assert.match(W._st.ask && W._st.ask.spec.title, /Transfer to CCU, bed 1\?/);
+  assert.ok(!posts.some((p) => /\/ward\/transfer$/.test(p.url)), "nothing posted before the question is answered");
+  W._dispatch("askok");
+  await tick();
   const t = posts.find((p) => /\/ward\/transfer$/.test(p.url));
   assert.ok(t, "no transfer was posted");
   assert.equal(t.body.ward, "CCU");

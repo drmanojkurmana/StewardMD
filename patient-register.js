@@ -285,7 +285,12 @@
       });
     }
 
-    function close() { host.className = ""; host.innerHTML = ""; }
+    /* LT-29 (retest 2026-09-16): the sheet belongs to the screen that opened it. The "added" card stayed over the ED
+     * board after the Patients page navigated there, covering Find. Moving to another screen closes it; nothing on
+     * the card is unsaved (the patient was already added, and the number is on their record). */
+    function onHash() { close(); }
+    function close() { host.className = ""; host.innerHTML = ""; try { root.removeEventListener("hashchange", onHash); } catch (e) {} }
+    try { root.removeEventListener("hashchange", open._onHash); root.addEventListener("hashchange", onHash); open._onHash = onHash; } catch (e) {}
 
     host.onclick = function (ev) {
       var t = ev.target;

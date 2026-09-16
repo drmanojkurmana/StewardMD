@@ -84,7 +84,7 @@ async function safetyFacts(svc, order) {
   ]);
   const activeMeds = (orders || [])
     .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
-    .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode }));
+    .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode, dose: o.dose || null, frequency: o.frequency || null }));
   /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
    * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the
    * "a weight-based drug on an unweighed patient refuses rather than passes" invariant and is
@@ -122,16 +122,28 @@ function bedsideSafetyCheck(svc, rulePack) {
  * attributed by the caller. Never throws: a check that could not run says so (checked: false) and is
  * never reported as a clean one.
  */
+/* THE FINDINGS ORDER ENTRY REFUSES (retest 2026-09-16). Every other finding is reported and proceeds with the
+ * prescriber's reason, because the content is unapproved seed data (see createWardMedicationOrder). A dose
+ * above an absolute ceiling is not a judgement the rule content makes: it is arithmetic on the order and the
+ * patient's other active orders of the same molecule, and 8 g of paracetamol a day has no reason. Each such
+ * finding carries hardStop: true, so a screen labels exactly what the server refuses and nothing else. */
+const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
+
 async function orderEntrySafety(svc, rulePack, order, overrides) {
   if (!rulePack) return { checked: false, code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" };
   try {
     const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
-    const v = new SafetyEngine({ rulePack }).evaluate({ order, allergies, activeMeds, weightKg, overrides: overrides || [] });
+    // "same-drug" only here: order entry is where a second order of an active molecule is decided.
+    const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug"] })
+      .evaluate({ order, allergies, activeMeds, weightKg, overrides: overrides || [] });
     const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
-      ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}) });
+      ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
+      ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
+    const blocks = v.blocks.map(pick);
     return {
       checked: true, rulePackVersion: v.rulePackVersion, allowed: v.allowed,
-      blocks: v.blocks.map(pick), overridables: v.overridables.map(pick), warnings: v.warnings.map(pick), findings: v.findings.map(pick),
+      blocks, overridables: v.overridables.map(pick), warnings: v.warnings.map(pick), findings: v.findings.map(pick),
+      hardStops: blocks.filter((f) => f.hardStop),
       unresolvedDrug: v.unresolvedDrug, unresolvedActiveMeds: v.unresolvedActiveMeds || [],
     };
   } catch (e) {
@@ -330,4 +342,4 @@ async function administerStep(request, env, ctx) {
   }
 }
 
-export { ACTIONS, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };
+export { ACTIONS, ORDER_ENTRY_HARD_STOPS, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };

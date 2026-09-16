@@ -223,3 +223,61 @@ test("LT-09: who may not sign from the workstation: no session, a nurse, another
   assert.equal(ok.__status, 200, JSON.stringify(ok));
   assert.equal(await count(), 1);
 });
+
+/* ---- Retest 2026-09-16 (docs/wardsynq/LIVE_RETEST_2026-09-16.md, new observation 1) ------------------
+ * QA-04, 62 kg, paracetamol 1000 mg QDS active: a second paracetamol order came back allowed:true,
+ * findings:[] (8 g a day). The same molecule already active is a finding; the day's total across the active
+ * orders of that molecule above the daily ceiling is a hard stop the server refuses whatever the reason. */
+test("retest 2026-09-16: POST /api/queue/ward/medication-order flags the same drug already active and refuses a combined daily overdose; a replacement is neither", async () => {
+  seedHospital();
+  const { adm } = await admitted();
+  const count = async () => (await RECORD.byPatient(TENANT.id, "MedicationOrder", adm.patientId)).filter((o) => o.status === "active").length;
+  const first = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { frequency: "QDS" }));
+  assert.equal(first.__status, 200, JSON.stringify(first));
+  assert.equal(await count(), 1);
+  const codes = (sf) => [...sf.blocks, ...sf.overridables, ...sf.warnings].map((f) => f.code).sort();
+
+  // The exact live case: another paracetamol 1 g QDS, written as its own order.
+  const second = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol 1g", frequency: "QDS" }, { checkOnly: true }));
+  assert.equal(second.__status, 200, JSON.stringify(second));
+  assert.equal(second.safety.allowed, false);
+  assert.deepEqual(codes(second.safety), ["DOSE_ABSOLUTE_CEILING_CUMULATIVE", "SAME_DRUG_ACTIVE"], JSON.stringify(second.safety));
+  assert.deepEqual(second.safety.hardStops.map((f) => f.code), ["DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
+  assert.match(second.safety.hardStops[0].message, /8000 mg a day/);
+  assert.equal(second.safety.overridables.find((f) => f.code === "SAME_DRUG_ACTIVE").hardStop, undefined, "the duplicate itself needs a reason, it is not a hard stop");
+  // 650 mg TDS on top is 5.95 g: the same refusal.
+  const tds = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol 650", dose: { value: 650, unit: "mg" }, frequency: "TDS" }, { checkOnly: true }));
+  assert.deepEqual(tds.safety.hardStops.map((f) => f.code), ["DOSE_ABSOLUTE_CEILING_CUMULATIVE"], JSON.stringify(tds.safety));
+  // A dose in grams is summed in mg, not dropped.
+  const grams = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol tablet", dose: { value: 1, unit: "g" }, frequency: "BD" }, { checkOnly: true }));
+  assert.deepEqual(grams.safety.hardStops.map((f) => f.code), ["DOSE_ABSOLUTE_CEILING_CUMULATIVE"], JSON.stringify(grams.safety));
+
+  // Placing it, even with a reason, is refused and writes nothing.
+  const placed = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol 1g", frequency: "QDS" }, { overrideReason: "pain not controlled" }));
+  assert.equal(placed.__status, 409, JSON.stringify(placed));
+  assert.equal(placed.error, "safety_hard_stop");
+  assert.equal(placed.written, 0);
+  assert.equal(await count(), 1, "nothing written");
+  // So is a single order above the daily ceiling (1 g every 4 hours).
+  const q4h = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol IV", frequency: "q4h" }, { overrideReason: "x" }));
+  assert.equal(q4h.__status, 409, JSON.stringify(q4h));
+  assert.equal(await count(), 1);
+
+  // The replacement flow: the same order written again replaces the active one, so it is not a duplicate of itself.
+  const repl = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { dose: { value: 650, unit: "mg" }, frequency: "TDS" }, { checkOnly: true }));
+  assert.equal(repl.replaces.orderId, first.orderId, JSON.stringify(repl));
+  assert.deepEqual(codes(repl.safety), [], JSON.stringify(repl.safety));
+  const replaced = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { dose: { value: 650, unit: "mg" }, frequency: "TDS" }));
+  assert.equal(replaced.__status, 200, JSON.stringify(replaced));
+  assert.equal(await count(), 1, "still one active paracetamol order");
+
+  // A PRN on top of the regular order has no daily count: a finding that needs a reason, and it can be placed.
+  const prn = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol PRN", dose: { value: 500, unit: "mg" }, frequency: "PRN" }, { checkOnly: true }));
+  assert.deepEqual(codes(prn.safety), ["SAME_DRUG_ACTIVE"], JSON.stringify(prn.safety));
+  assert.deepEqual(prn.safety.hardStops, []);
+  const prnPlaced = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol PRN", dose: { value: 500, unit: "mg" }, frequency: "PRN" }, { overrideReason: "breakthrough fever overnight" }));
+  assert.equal(prnPlaced.__status, 200, JSON.stringify(prnPlaced));
+  assert.equal(await count(), 2);
+  // A nurse still cannot place anything, hard stop or not.
+  assert.equal((await as(NURSE, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol 1g", frequency: "QDS" }))).__status, 403);
+});

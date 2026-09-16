@@ -47,6 +47,7 @@
     canAuthor: false, hasDraft: false,
     editing: "", compare: {},           // which section is open for editing; which show the record's version
     busy: false, loaded: false, err: "", note: "", refusal: null,
+    ask: null,                          // the question open before an irreversible step: { kind: "sign" | "revert", arg }
     print: null, printLang: ""          // the hospital's print settings; the second language picked for this print
   };
 
@@ -69,7 +70,6 @@
   /* The English under a failure this screen translated; "" for a server's own words or in English. */
   function wEnglishOf(text) { return text && wLang() !== "en" && HAS(EN_OF, text) ? '<span class="en-orig" lang="en">' + esc(EN_OF[text]) + "</span>" : ""; }
   function val(id) { var el = document.getElementById(id); return el ? String(el.value == null ? "" : el.value) : ""; }
-  function confirmed(m) { try { return !!(G.confirm && G.confirm(m)); } catch (e) { return false; } }
 
   /* The eight sections the assembler produces, in the order a discharge summary is read. Allergies
    * sit high because that is where a receiving clinician looks first, not where the data model
@@ -337,6 +337,26 @@
     return "";
   }
 
+  /* ASKED ON THE SCREEN, NOT IN A BROWSER DIALOG (retest 2026-09-16). Signing is irreversible, so the question
+   * stays: it is a panel above the action bar, translated like the rest of the screen, and nothing is written
+   * until its own button is pressed. Cancel writes nothing. */
+  function askPanel(s) {
+    var a = s.ask; if (!a) return "";
+    var n = (s.pending || []).length, body, yes;
+    if (a.kind === "sign") {
+      var q = wTH("ward.dc-sign-confirm", "Sign this discharge summary?\n\nIt becomes part of the permanent record and CANNOT be edited. A correction afterwards is a new signed version.").split(/\n+/);
+      body = "<b>" + q[0] + "</b>" + (q.length > 1 ? "<br>" + q.slice(1).join(" ") : "") +
+        (n ? "<br>" + (n === 1 ? wTH("ward.dc-sign-one-outstanding", "There is 1 item still outstanding on this stay. Signing does not resolve them.") : wTH("ward.dc-sign-n-outstanding", "There are {n} items still outstanding on this stay. Signing does not resolve them.", { n: n })) : "");
+      yes = '<button class="d-btn sign" data-d-act="askyes"' + (s.busy ? " disabled" : "") + ">" + ms("verified") + wTH("ward.dc-sign-and-finalise", "Sign and finalise") + "</button>";
+    } else {
+      body = wTH("ward.dc-discard-correction", "Discard your correction to this section and return it to the record's own text?");
+      yes = '<button class="d-btn" data-d-act="askyes"' + (s.busy ? " disabled" : "") + ">" + ms("undo") + wTH("ward.dc-revert-to-record", "Revert to record") + "</button>";
+    }
+    return '<div class="d-banner warn" role="alertdialog" aria-modal="false" aria-label="' + wTH("ward.dc-sign-and-finalise", "Sign and finalise") + '">' + ms("gpp_maybe") +
+      "<div><p>" + body + '</p><div class="d-editbar">' + yes +
+      '<button class="d-btn ghost" data-d-act="askno">' + wTH("ward.dc-cancel", "Cancel") + "</button></div></div></div>";
+  }
+
   function actionbar(s) {
     if (s.signed) {
       // Signed off: the locked idiom the assessment screen already uses. No Save, because offering
@@ -372,7 +392,7 @@
           provenance(s) +
         "</div>" +
         '<aside class="d-rail">' + statusCard(s) + pendingCard(s) + indexCard(s) + "</aside>" +
-      "</div></div>" + actionbar(s) + "</div>";
+      "</div></div>" + askPanel(s) + actionbar(s) + "</div>";
   }
   function topbar(s) {
     return '<header class="d-top"><button class="d-ic" data-d-act="close" title="' + wTH("ward.dc-close", "Close") + '">' + ms("arrow_back") + "</button>" +
@@ -426,9 +446,7 @@
   }
 
   function sign() {
-    var n = (st.pending || []).length;
-    var warn = !n ? "" : "\n\n" + (n === 1 ? wTD("ward.dc-sign-one-outstanding", "There is 1 item still outstanding on this stay. Signing does not resolve them.") : wTD("ward.dc-sign-n-outstanding", "There are {n} items still outstanding on this stay. Signing does not resolve them.", { n: n }));
-    if (!confirmed(wTD("ward.dc-sign-confirm", "Sign this discharge summary?\n\nIt becomes part of the permanent record and CANNOT be edited. A correction afterwards is a new signed version.") + warn)) return;
+    st.ask = null;
     st.busy = true; paint();
     apiPost("/ward/sign-discharge-summary", { orgId: st.orgId, encounterId: st.encounterId })
       .then(function (r) { if (settle(r)) return load(wT("ward.dc-signed-now-immutable", "Signed. This version is now immutable.")); paint(); })
@@ -493,20 +511,23 @@
     if (cmd === "cancel") { st.editing = ""; paint(); return; }
     if (cmd === "print") { doPrint(); return; }
     if (cmd === "draft") { draft(null, wT("ward.dc-draft-saved-from-record", "Draft saved from the record.")); return; }
-    if (cmd === "sign") { sign(); return; }
+    if (cmd === "sign") { st.ask = { kind: "sign" }; paint(); return; }
+    if (cmd === "askno") { st.ask = null; paint(); return; }
+    if (cmd === "askyes") {
+      var a = st.ask; if (!a || st.busy) return;
+      if (a.kind === "sign") { sign(); return; }
+      st.ask = null;
+      var rp = {}; rp[a.arg] = (st.assembled && st.assembled[a.arg]) || NOT_RECORDED;
+      draft(rp, wT("ward.dc-section-returned", "Section returned to the record."));
+      return;
+    }
     if (cmd === "save") {
       var k = st.editing; if (!k) return;
       var patch = {}; patch[k] = val("dEdit");
       draft(patch, wT("ward.dc-section-saved", "Section saved."));
       return;
     }
-    if (cmd === "revert") {
-      var text = (st.assembled && st.assembled[arg]) || NOT_RECORDED;
-      if (!confirmed(wTD("ward.dc-discard-correction", "Discard your correction to this section and return it to the record's own text?"))) return;
-      var rp = {}; rp[arg] = text;
-      draft(rp, wT("ward.dc-section-returned", "Section returned to the record."));
-      return;
-    }
+    if (cmd === "revert") { st.ask = { kind: "revert", arg: arg }; paint(); return; }
   }
 
   function onChange(e) {
@@ -521,13 +542,13 @@
     st.encounterId = opts.encounterId || "";
     st.patientId = opts.patientId || "";
     if (!st.orgId || !st.encounterId) { try { G.toast && G.toast(wT("ward.dc-needs-an-admission", "A discharge summary needs an admission.")); } catch (e) {} return; }
-    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {}; st.printLang = "";
+    st.loaded = false; st.err = ""; st.note = ""; st.refusal = null; st.editing = ""; st.compare = {}; st.printLang = ""; st.ask = null;
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("change", onChange); el.addEventListener("change", onChange);
     paint(); load();
   }
-  function close() { var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
+  function close() { st.ask = null; var el = root(); el.classList.remove("on"); el.innerHTML = ""; }
 
   G.DISCHARGE = { open: open, close: close, _render: _render, _st: st, _sections: SECTIONS, _problem: problem, _printable: printable };
 })();

@@ -410,24 +410,28 @@ function refresh() {
   else findingsNote(`<p class="quiet">${esc(o ? T(null, "order.findings.signToCheck", "Sign order checks it on the server against this patient's record first.") : T(null, "order.findings.empty", "Enter a medication to check it against this patient."))}</p>`);
 
   const missing = !o ? "" : !o.dose ? T(null, "order.sign.needDose", "Enter the dose.") : !o.frequency ? T(null, "order.sign.needFrequency", "Say how often it is given, for example BD, q6h or STAT.") : "";
-  sign.disabled = !o || !!missing || !canPrescribe() || S.busy;
-  why.textContent = !canPrescribe() ? T(null, "order.sign.notPrescriber", "Your role cannot sign medication orders.") : missing;
+  const stopped = !!(S.review && hardStops(S.review.safety).length);
+  sign.disabled = !o || !!missing || !canPrescribe() || S.busy || stopped;
+  why.textContent = !canPrescribe() ? T(null, "order.sign.notPrescriber", "Your role cannot sign medication orders.")
+    : stopped ? T(null, "order.sign.hardStopped", "A hard stop cannot be signed past. Change the order.") : missing;
   if (S.review && needsReason(S.review.safety)) sign.textContent = T(null, "order.sign.anyway", "Sign anyway");
   else sign.textContent = T(null, "order.sign.button", "Sign order");
 }
 
 const needsReason = (sf) => !!(sf && ((sf.blocks || []).length || (sf.overridables || []).length));
+/* What the server refuses whatever the reason (functions/_wardsynq/migrate-emar.js ORDER_ENTRY_HARD_STOPS). */
+const hardStops = (sf) => ((sf && sf.blocks) || []).filter((f) => f.hardStop);
 /** Anything the prescriber must see before the order is placed: the chart's own "clean" rule. */
 const clean = (r) => { const sf = r.safety || {}; return sf.checked === true && !needsReason(sf) && !(sf.warnings || []).length && !sf.unresolvedDrug && !(sf.unresolvedActiveMeds || []).length && !r.replaces; };
 
-/** Engine disposition, as clinical significance. */
+/* What the server does with a finding, in words (retest 2026-09-16: an overridable finding was headed "Hard
+ * stop" over a "Sign anyway" button). Hard stop only for what the server refuses; any other block or
+ * overridable finding is signed with a reason; a warning gates nothing. */
 function classOf(f) {
   if (f.overridden) return { sig: "watch", word: T(null, "order.sig.overridden", "Overridden") };
-  if (f.disposition === "block") return { sig: "stop", word: T(null, "order.sig.hardStop", "Hard stop") };
-  if (f.disposition === "overridable") return { sig: "major", word: T(null, "order.sig.major", "Major") };
-  if (f.severity === "moderate") return { sig: "watch", word: T(null, "order.sig.moderate", "Moderate") };
-  if (f.severity === "monitor") return { sig: "watch", word: T(null, "order.sig.monitor", "Monitor") };
-  return { sig: "none", word: T(null, "order.sig.note", "Note") };
+  if (f.hardStop) return { sig: "stop", word: T(null, "order.sig.hardStop", "Hard stop") };
+  if (f.disposition === "block" || f.disposition === "overridable") return { sig: "major", word: T(null, "order.sig.needsReason", "Needs a reason to proceed") };
+  return { sig: "watch", word: T(null, "order.sig.warning", "Warning") };
 }
 
 /** The server's check, before anything is written: its findings in its own words, and what proceeding takes. */
@@ -447,7 +451,8 @@ function renderReview(rv) {
     host.appendChild(line(c.sig, `<div class="finding"><div class="cls">${esc(c.word)}</div><p class="sig-line"${enAttr()}>${esc(f.message || f.code)}</p></div>`));
   }
   if (sf.checked === true && clean(rv)) host.appendChild(line("clear", `<p class="sig-line">${esc(T(null, "order.findings.nothing", "Nothing in the rule pack objects to this order."))}</p>`));
-  if (needsReason(sf)) {
+  if (hardStops(sf).length) host.appendChild(line("stop", `<p class="fail">${TS(null, "order.review.hardStop", "The server refuses this order whatever the reason. Change the dose, the frequency or the drug.")}</p>`));
+  else if (needsReason(sf)) {
     const box = document.createElement("div");
     box.className = "override";
     box.innerHTML = `<label class="rl" for="reason">${esc(T(null, "order.review.reasonLabel", "Reason for prescribing anyway (required)"))}</label>

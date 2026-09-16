@@ -34,7 +34,7 @@ import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { VITAL_CODES } from "./migrate-vitals.js";
+import { VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { problemLine, problemsForSummary } from "./migrate-problem.js";
 import { diagnosisFor } from "./patient-record.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
@@ -60,7 +60,7 @@ function resultValues(report, observations) {
   }
   const ids = new Set(report.resultObservationIds || []);
   const vals = (observations || []).filter((o) => o && ids.has(o.id))
-    .map((o) => `${o.display || o.code} ${o.value}${o.unit ? " " + o.unit : ""}${o.sourceCritical ? " (critical)" : ""}`);
+    .map((o) => `${o.display || o.code} ${o.value}${o.unit ? " " + displayUnit(o.unit) : ""}${o.sourceCritical ? " (critical)" : ""}`);
   return vals.length ? vals.join(", ") : str(report.conclusion);
 }
 function investigationLine(s, reports, observations) {
@@ -111,7 +111,7 @@ function vitalsLine(observations) {
   for (const o of observations) {
     const hit = byCode.get(o.code);
     if (!hit) continue;
-    parts.push(`${hit.spec.display} ${o.value}${o.unit ? " " + o.unit : ""}`);
+    parts.push(`${hit.spec.display} ${o.value}${o.unit ? " " + displayUnit(o.unit) : ""}`);
   }
   return parts.join(", ");
 }

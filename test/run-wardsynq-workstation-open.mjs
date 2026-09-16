@@ -72,6 +72,9 @@ try {
   const review = await b.until(`var f = document.getElementById("findings").textContent; return /documented allergic/.test(f) ? f : ""`, 8000);
   ok(!!review && orderPosts().length === 1 && orderPosts()[0].body.checkOnly === true, "the server's finding is shown and nothing was written", review);
   ok(await text("sign") === "Sign anyway" && !!(await b.ev(`return document.getElementById("reason") ? "y" : ""`)), "proceeding is Sign anyway, with a reason box");
+  // Retest 2026-09-16: the label says what the server does. An overridable finding is not a "Hard stop".
+  const cls = await b.ev(`return Array.prototype.map.call(document.querySelectorAll("#findings .cls"), function (e) { return e.textContent; }).join("|")`);
+  ok(cls === "Needs a reason to proceed" && !/Hard stop/.test(await text("findings")), "an overridable finding reads Needs a reason to proceed", cls);
   await b.click("#sign");
   await b.sleep(300);
   ok(/Give a reason/.test(await text("signed")) && orderPosts().length === 1, "Sign anyway with no reason writes nothing", await text("signed"));
@@ -87,6 +90,20 @@ try {
   await b.until(`return /documented allergic/.test(document.getElementById("findings").textContent) ? "y" : ""`, 8000);
   await setVal("dose", "250");
   ok(await text("sign") === "Sign order" && !/documented allergic/.test(await text("findings")), "changing the order drops the check it no longer matches");
+  await b.click("#clear");
+
+  // 4b. Retest 2026-09-16: a hard stop the server refuses cannot be signed past, reason or not.
+  stub.calls.length = 0;
+  await fill("Paracetamol 1g", "1000", "QDS");
+  await b.click("#sign");
+  const stopped = await b.until(`var f = document.getElementById("findings").textContent; return /8000 mg a day/.test(f) ? f : ""`, 8000);
+  const cls2 = await b.ev(`return Array.prototype.map.call(document.querySelectorAll("#findings .cls"), function (e) { return e.textContent; }).join("|")`);
+  ok(!!stopped && cls2 === "Hard stop|Needs a reason to proceed", "the cumulative ceiling reads Hard stop, the duplicate Needs a reason to proceed", cls2);
+  ok(await b.ev(`return document.getElementById("sign").disabled`) === true && /cannot be signed past/.test(await text("signWhy")) && !(await b.ev(`return document.getElementById("reason") ? "y" : ""`)),
+    "Sign is disabled, with no reason box, and says why", await text("signWhy"));
+  await b.ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", ctrlKey: true, bubbles: true })); return 1`);
+  await b.sleep(300);
+  ok(orderPosts().length === 1 && orderPosts()[0].body.checkOnly === true, "the keyboard shortcut does not sign it either: only the check was sent", JSON.stringify(orderPosts().map((c) => c.body)));
   await b.click("#clear");
 
   // 5. A server refusal is not a success.
