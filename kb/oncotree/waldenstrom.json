@@ -1,0 +1,359 @@
+{
+  "guideline": "waldenstrom",
+  "id": "waldenstrom",
+  "title": "Waldenstr\u00f6m Macroglobulinemia",
+  "category": "Hematologic Malignancies",
+  "version": "1.2027",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 1.2027)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "waldenstrom_macroglobulinemia",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 1.2027 clinical navigator for Waldenstrom Macroglobulinemia / Lymphoplasmacytic Lymphoma (WM/LPL). Covers complete clinical algorithm: Diagnostic Workup (SPEP with immunofixation and quantitative immunoglobulins confirming monoclonal IgM paraprotein, serum viscosity with dilated funduscopic examination for hyperviscosity, bone marrow aspirate and trephine biopsy showing clonal lymphoplasmacytic infiltrate, mandatory MYD88 L265P and CXCR4 WHIM-like mutation testing, contrast-enhanced CT of neck/chest/abdomen/pelvis, CBC with beta-2 microglobulin, free light chains, cryoglobulins, and cold agglutinins) -> Indication for Therapy and Risk Stratification (asymptomatic/smoldering vs symptomatic first-line BTK-inhibitor preferred vs symptomatic first-line fixed-duration chemoimmunotherapy vs relapsed/refractory) -> Asymptomatic active surveillance (watch and wait with serial CBC/IgM/SPEP monitoring) -> First-line BTK inhibitor therapy (zanubrutinib preferred per ASPEN, ibrutinib with or without rituximab per iNNOVATE with plasmapheresis guard for IgM flare) -> Fixed-duration chemoimmunotherapy (bendamustine plus rituximab per StiL NHL1/BRIGHT, or DRC) -> Relapsed/refractory salvage (pirtobrutinib per BRUIN for BTK C481S resistance, venetoclax, bortezomib-based BDR, autologous HCT). References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Waldenstrom Macroglobulinemia / Lymphoplasmacytic Lymphoma Version 1.2027.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "MYD88 L265P (AS-PCR or NGS) is present in more than 90% of WM and strongly supports the diagnosis of lymphoplasmacytic lymphoma; CXCR4 WHIM-like mutations modify disease behavior and BTK-inhibitor response kinetics and should be assessed alongside MYD88.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Rituximab can cause a transient IgM flare with precipitous hyperviscosity. Perform urgent plasmapheresis before rituximab when IgM exceeds 4000 mg/dL or symptomatic hyperviscosity is present, and monitor serum viscosity and funduscopic findings closely.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "BR regimen: bendamustine 90 mg/m2 IV days 1-2 plus rituximab 375 mg/m2 day 1 every 28 days for 4-6 cycles (StiL NHL1 / BRIGHT trials, high deep response rate). DRC regimen: dexamethasone 20 mg day 1, rituximab 375 mg/m2 day 1, cyclophosphamide 100 mg/m2 PO twice daily days 1-5 every 21 days for 6 cycles (gentle outpatient regimen, minimal neuropathy).",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Pirtobrutinib 200 mg PO daily is a non-covalent BTK inhibitor active after covalent BTK failure including BTK C481S resistance (BRUIN trial). Venetoclax ramp-up to 800 mg PO daily has high single-agent activity in relapsed WM. BDR (bortezomib plus dexamethasone plus rituximab) and autologous HCT for young fit patients with chemosensitive relapse are additional salvage options.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "waldenstrom_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Waldenstrom Macroglobulinemia: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before indication for therapy and risk stratification. Confirm monoclonal IgM paraprotein, assess hyperviscosity end-organ effects, establish marrow histology and immunophenotype, complete mandatory MYD88/CXCR4 molecular testing, and stage nodal and splenic disease.",
+      "path": "Waldenstrom Macroglobulinemia / Workup",
+      "pills": [
+        "WM",
+        "LPL",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Serum protein electrophoresis (SPEP), immunofixation (IFE), and quantitative immunoglobulins (IgM, IgG, IgA) establishing monoclonal IgM paraprotein",
+        "Serum viscosity measurement and dilated funduscopic examination for symptomatic hyperviscosity (headaches, visual disturbances, mucosal bleeding)",
+        "Bone marrow aspirate and trephine core biopsy: demonstrating clonal lymphoplasmacytic infiltrate (CD19+, CD20+, sIgM+, CD5-, CD10-, CD23-)",
+        "Mandatory molecular testing: MYD88 L265P mutation testing (AS-PCR or NGS; present in >90%) and CXCR4 WHIM-like mutation analysis",
+        "Cross-sectional CT of neck, chest, abdomen, and pelvis with contrast to assess lymphadenopathy and hepatosplenomegaly",
+        "Complete blood count, beta-2 microglobulin, serum free light chains, cryoglobulins, and cold agglutinins"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Indication for Therapy and Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_indication_strat",
+      "linkId": "waldenstrom_indication_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Indication for Therapy and Risk Stratification",
+      "title": "Waldenstrom Macroglobulinemia: Indication for Therapy and Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign treatment indication from symptoms, cytopenias, neuropathy, and hyperviscosity; symptomatic first-line disease selects the BTK-inhibitor preferred or fixed-duration chemoimmunotherapy pathway, and prior therapy selects the relapsed pathway.",
+      "path": "Waldenstrom Macroglobulinemia / Indication for Therapy and Risk Stratification",
+      "pills": [
+        "WM",
+        "LPL",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Asymptomatic / smoldering WM: no cytopenias, neuropathy, hyperviscosity, organ compromise, or constitutional symptoms; paraprotein level alone is not a treatment indication.",
+        "Symptomatic first-line WM, BTK-inhibitor preferred: oral chemotherapy-free pathway anchored on zanubrutinib (ASPEN) or ibrutinib with or without rituximab (iNNOVATE).",
+        "Symptomatic first-line WM, fixed-duration chemoimmunotherapy: BR (StiL NHL1 / BRIGHT) or DRC for time-limited therapy.",
+        "Relapsed or refractory WM: progression after prior systemic therapy, including covalent BTK failure with BTK C481S resistance."
+      ],
+      "options": [
+        {
+          "id": "asymptomatic",
+          "label": "Asymptomatic / Smoldering Waldenstr\u00f6m Macroglobulinemia (No cytopenias, neuropathy, or hyperviscosity)",
+          "sets": {
+            "phase": "asymptomatic"
+          },
+          "pills": [
+            "WM",
+            "asymptomatic",
+            "smoldering"
+          ]
+        },
+        {
+          "id": "btki_1l",
+          "label": "Symptomatic First-Line WM: BTK-Inhibitor Preferred Pathway (Oral, chemotherapy-free)",
+          "sets": {
+            "phase": "symptomatic",
+            "line": "first",
+            "backbone": "btki"
+          },
+          "pills": [
+            "WM",
+            "first-line",
+            "BTKi"
+          ]
+        },
+        {
+          "id": "chemoimmuno_1l",
+          "label": "Symptomatic First-Line WM: Fixed-Duration Chemoimmunotherapy (BR or DRC)",
+          "sets": {
+            "phase": "symptomatic",
+            "line": "first",
+            "backbone": "chemoimmunotherapy"
+          },
+          "pills": [
+            "WM",
+            "first-line",
+            "chemoimmunotherapy"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed or Refractory Waldenstr\u00f6m Macroglobulinemia",
+          "sets": {
+            "phase": "relapsed_refractory"
+          },
+          "pills": [
+            "WM",
+            "relapsed",
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_asymptomatic_tx",
+      "linkId": "waldenstrom_asymptomatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Asymptomatic Surveillance",
+      "title": "Asymptomatic / Smoldering WM: Active Surveillance (Watch and Wait)",
+      "section": "Treatment",
+      "description": "Active surveillance without systemic therapy for asymptomatic or smoldering WM; treatment is not indicated for paraprotein level alone.",
+      "path": "Waldenstrom Macroglobulinemia / Asymptomatic / Surveillance",
+      "pills": [
+        "WM",
+        "asymptomatic",
+        "smoldering",
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Active surveillance (Watch and Wait): monitor clinical symptoms, CBC, IgM, and SPEP every 3 to 6 months.",
+        "Treatment is strictly NOT indicated for laboratory paraprotein levels alone in the absence of constitutional symptoms, organ compromise, or cytopenias.",
+        "Reassess for treatment indications at each visit: new cytopenias, symptomatic hyperviscosity, neuropathy, cryoglobulinemia, cold agglutinins, lymphadenopathy, or hepatosplenomegaly.",
+        "Repeat MYD88/CXCR4 assessment and marrow evaluation if progression to symptomatic disease is suspected.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Active Surveillance (Watch and Wait) with Serial CBC/IgM Monitoring",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_btki_1l_tx",
+      "linkId": "waldenstrom_btki_1l_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "First-Line BTK Inhibitor Treatment",
+      "title": "Symptomatic First-Line WM: BTK-Inhibitor Preferred Therapy",
+      "section": "Treatment",
+      "description": "First-line oral chemotherapy-free BTK inhibitor therapy for symptomatic WM, with zanubrutinib preferred and ibrutinib-based therapy as the alternative with an IgM-flare guard.",
+      "path": "Waldenstrom Macroglobulinemia / First-Line / BTK Inhibitor",
+      "pills": [
+        "WM",
+        "first-line",
+        "BTKi",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Preferred: Zanubrutinib 160 mg PO BID or 320 mg PO daily (ASPEN trial: preferred BTKi, active in both MYD88-mutated and MYD88-wildtype, reduced atrial fibrillation/hypertension).",
+        "Alternative: Ibrutinib 420 mg PO daily with or without Rituximab 375 mg/m2 (iNNOVATE trial); WARNING: perform urgent plasmapheresis before rituximab if IgM >4000 mg/dL to prevent lethal IgM flare and hyperviscosity.",
+        "Monitor for BTK-inhibitor toxicities: atrial fibrillation, hypertension, bleeding, cytopenias, and infection; hold perioperatively per labeling.",
+        "Assess response by serial IgM, SPEP, CBC, and symptom review; re-biopsy and CXCR4 reassessment on suboptimal response.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Zanubrutinib 160 mg PO BID (or Ibrutinib 420 mg) +/- Rituximab",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_chemoimmuno_1l_tx",
+      "linkId": "waldenstrom_chemoimmuno_1l_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "First-Line Chemoimmunotherapy",
+      "title": "Symptomatic First-Line WM: Fixed-Duration Chemoimmunotherapy (BR or DRC)",
+      "section": "Treatment",
+      "description": "Fixed-duration first-line chemoimmunotherapy for symptomatic WM: bendamustine plus rituximab for deep response, or DRC as the gentle outpatient alternative.",
+      "path": "Waldenstrom Macroglobulinemia / First-Line / Chemoimmunotherapy",
+      "pills": [
+        "WM",
+        "first-line",
+        "chemoimmunotherapy",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Regimen 1: Bendamustine 90 mg/m2 IV d1-2 + Rituximab 375 mg/m2 d1 q28d x 4-6 cycles (BR: StiL NHL1 / BRIGHT trials; high deep response rate).",
+        "Regimen 2: DRC: Dexamethasone 20 mg d1, Rituximab 375 mg/m2 d1, Cyclophosphamide 100 mg/m2 PO BID d1-5 q21d x 6 cycles (gentle outpatient regimen, minimal neuropathy).",
+        "Apply the rituximab IgM-flare guard: urgent plasmapheresis before rituximab if IgM >4000 mg/dL or symptomatic hyperviscosity is present.",
+        "Monitor blood counts, renal function, and infection risk across cycles; assess response by serial IgM, SPEP, and CBC.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Bendamustine + Rituximab (BR) x 4-6 cycles or DRC x 6 cycles",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_relapsed_tx",
+      "linkId": "waldenstrom_relapsed_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Relapsed or Refractory Treatment",
+      "title": "Relapsed / Refractory WM: Targeted Salvage Therapy and Autologous HCT",
+      "section": "Treatment",
+      "description": "Second-line and subsequent targeted salvage therapy for relapsed or refractory WM, including non-covalent BTK inhibition for C481S resistance, BCL2 inhibition, proteasome-inhibitor therapy, and autologous transplant for fit chemosensitive patients.",
+      "path": "Waldenstrom Macroglobulinemia / Relapsed Refractory / Salvage",
+      "pills": [
+        "WM",
+        "relapsed",
+        "refractory",
+        "salvage"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Non-covalent BTK inhibitor: Pirtobrutinib 200 mg PO daily (BRUIN trial; overcomes BTK C481S resistance).",
+        "BCL2 inhibitor: Venetoclax ramp-up to 800 mg PO daily (high single-agent activity in relapsed WM).",
+        "Proteasome inhibitor: Bortezomib + Dexamethasone + Rituximab (BDR).",
+        "Autologous Hematopoietic Cell Transplantation (ASCR) for young fit patients with multiple chemosensitive relapses.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Pirtobrutinib (Non-Covalent BTKi) or Venetoclax 800 mg Daily -> Autologous HCT",
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_indication",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_indication_strat",
+      "toNodeId": "n_indication_strat",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_indication_asymptomatic",
+      "from": "n_indication_strat",
+      "fromNodeId": "n_indication_strat",
+      "to": "n_asymptomatic_tx",
+      "toNodeId": "n_asymptomatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "asymptomatic",
+      "fromOptions": [
+        "asymptomatic"
+      ]
+    },
+    {
+      "id": "l_indication_btki_1l",
+      "from": "n_indication_strat",
+      "fromNodeId": "n_indication_strat",
+      "to": "n_btki_1l_tx",
+      "toNodeId": "n_btki_1l_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "btki_1l",
+      "fromOptions": [
+        "btki_1l"
+      ]
+    },
+    {
+      "id": "l_indication_chemoimmuno_1l",
+      "from": "n_indication_strat",
+      "fromNodeId": "n_indication_strat",
+      "to": "n_chemoimmuno_1l_tx",
+      "toNodeId": "n_chemoimmuno_1l_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "chemoimmuno_1l",
+      "fromOptions": [
+        "chemoimmuno_1l"
+      ]
+    },
+    {
+      "id": "l_indication_relapsed",
+      "from": "n_indication_strat",
+      "fromNodeId": "n_indication_strat",
+      "to": "n_relapsed_tx",
+      "toNodeId": "n_relapsed_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "relapsed",
+      "fromOptions": [
+        "relapsed"
+      ]
+    }
+  ],
+  "protocolRefs": [
+    "waldenstrom-zanubrutinib"
+  ]
+}

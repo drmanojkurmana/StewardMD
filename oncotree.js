@@ -62,7 +62,34 @@
     { id: "bcell", title: "B-Cell Lymphomas", sub: "Follicular, Mantle Cell (TP53), MZL, Burkitt", icon: "bloodtype", ready: true },
     { id: "dlbcl", title: "Diffuse Large B-Cell Lymphoma", sub: "IPI; R-CHOP vs pola-R-CHP; relapsed CAR-T", icon: "bloodtype", ready: true },
     { id: "hodgkin", title: "Hodgkin Lymphoma", sub: "Early vs advanced; PET-adapted ABVD / BV", icon: "bloodtype", ready: true },
-    { id: "cutaneous_lymphoma", title: "Cutaneous Lymphomas", sub: "MF/SS TNMB; CD30+ LyP/pcALCL; CBCL indolent vs leg-type", icon: "dermatology", ready: true }
+    { id: "cutaneous_lymphoma", title: "Cutaneous Lymphomas", sub: "MF/SS TNMB; CD30+ LyP/pcALCL; CBCL indolent vs leg-type", icon: "dermatology", ready: true },
+    { id: "histiocytic", title: "Histiocytic Neoplasms", sub: "LCH (adult/pediatric), ECD, RDD; BRAF V600E & MEK inhibitors", icon: "bloodtype", ready: true },
+    { id: "kaposi", title: "Kaposi Sarcoma", sub: "HIV-associated, classic, endemic, iatrogenic; Liposomal doxorubicin & ART", icon: "healing", ready: true },
+    { id: "mastocytosis", title: "Systemic Mastocytosis", sub: "ISM vs AdvSM; KIT D816V; Avapritinib & Midostaurin", icon: "bloodtype", ready: true },
+    { id: "merkel", title: "Merkel Cell Carcinoma", sub: "CK20 dot-like; mandatory SLNB; Avelumab / Pembrolizumab / Retifanlimab", icon: "dermatology", ready: true },
+    { id: "mds", title: "Myelodysplastic Syndromes", sub: "IPSS-M / IPSS-R; del(5q) Lenalidomide, Luspatercept & Azacitidine", icon: "bloodtype", ready: true },
+    { id: "mesothelioma", title: "Mesothelioma", sub: "Pleural & Peritoneal; Epithelioid vs Non-Epithelioid; Nivo+Ipi & Cis+Pem", icon: "pulmonology", ready: true },
+    { id: "mpn", title: "Myeloproliferative Neoplasms", sub: "MF (DIPSS/MIPSS70), PV (CYTO-PV), ET; Ruxolitinib / Fedratinib / Momelotinib / HU", icon: "bloodtype", ready: true },
+    { id: "neuroendocrine", title: "Neuroendocrine & Adrenal Tumors", sub: "GI/pNET (SSTR-PET); SSA, Lu-177 Dotatate (NETTER-1), Everolimus & CAPTEM", icon: "biotech", ready: true },
+    { id: "basal_cell", title: "Basal Cell Skin Cancer", sub: "Risk stratification; Mohs surgery, Vismodegib (SMO inhibitor) & Cemiplimab", icon: "dermatology", ready: true },
+    { id: "occult_primary", title: "Occult Primary (CUP)", sub: "Favorable subsets vs true CUP; IHC, NGS profiling & empiric doublets", icon: "biotech", ready: true },
+    { id: "neuroblastoma", title: "Neuroblastoma (Pediatric)", sub: "INRG risk; MYCN amplification; Dinutuximab (anti-GD2) + GM-CSF + Isotretinoin", icon: "child_care", ready: true },
+    { id: "penile", title: "Penile Cancer", sub: "Organ-sparing surgery; DSNB / ILND; Neoadjuvant TIP & Pembrolizumab", icon: "man", ready: true },
+    { id: "pediatric_all", title: "Pediatric ALL", sub: "B-ALL & T-ALL; NCI risk; MRD-directed, Blinatumomab & Tisagenlecleucel CAR-T", icon: "child_care", ready: true },
+    { id: "pediatric_aml", title: "Pediatric AML", sub: "CBF vs High-risk; Gemtuzumab ozogamicin (ADE+GO), APL (ATRA+ATO) & HCT", icon: "child_care", ready: true },
+    { id: "pediatric_lymphoma", title: "Pediatric B-Cell Lymphoma", sub: "Burkitt & DLBCL; LMB96 Group A-C, Rituximab + COPADM/CYVE & DA-EPOCH-R", icon: "child_care", ready: true },
+    { id: "pediatric_cns", title: "Pediatric CNS Tumors", sub: "Medulloblastoma (CSI), pLGG (BRAF/MEK inhibitors), DMG (ONC201) & Ependymoma", icon: "neurology", ready: true },
+    { id: "sclc", title: "Small Cell Lung Cancer", sub: "LS-SCLC (ChemoRT + ADRIATIC); ES-SCLC (Atezo/Durva); Lurbinectedin & Tarlatamab (DLL3)", icon: "pulmonology", ready: true },
+    { id: "squamous_cell_skin", title: "Squamous Cell Skin Cancer", sub: "Risk features (Area H, PNI); Mohs surgery, CCPDMA, PORT & Cemiplimab (anti-PD-1)", icon: "dermatology", ready: true },
+    { id: "tcell_lymphoma", title: "T-Cell Lymphomas", sub: "ALCL, PTCL-NOS, AITL; CD30-directed BV-CHP (ECHELON-2), CHOEP & ASCR", icon: "bloodtype", ready: true },
+    { id: "rectal", title: "Rectal Cancer", sub: "Total Neoadjuvant Therapy (TNT: mFOLFOX6 + LCRT), Dostarlimab (dMMR) & Watch-and-Wait", icon: "gastroenterology", ready: true },
+    { id: "small_bowel", title: "Small Bowel Adenocarcinoma", sub: "Duodenal / jejunal / ileal; MSI/Lynch; Whipple, mFOLFOX6, CAPOX & Pembrolizumab", icon: "gastroenterology", ready: true },
+    { id: "thymic", title: "Thymoma & Thymic Carcinoma", sub: "Masaoka-Koga stage; Surgical thymectomy, CAP chemotherapy (rare-thymic-cap), PORT & Pembrolizumab", icon: "pulmonology", ready: true },
+    { id: "uveal_melanoma", title: "Uveal Melanoma", sub: "Ocular brachytherapy; Liver MRI surveillance; Tebentafusp (HLA-A*02:01) & Liver-directed therapy", icon: "visibility", ready: true },
+    { id: "vaginal", title: "Vaginal Cancer", sub: "FIGO stage; Pelvic ChemoRT (Cisplatin) + Interstitial IGBT; KEYNOTE-826 IO-chemo", icon: "female", ready: true },
+    { id: "vulvar", title: "Vulvar Cancer", sub: "FIGO stage; Radical local excision, SLNB / Groin dissection, Pelvic ChemoRT & Pembrolizumab", icon: "female", ready: true },
+    { id: "waldenstrom", title: "Waldenström Macroglobulinemia", sub: "IgM & hyperviscosity; MYD88 L265P / CXCR4; Zanubrutinib (ASPEN), BR & DRC", icon: "bloodtype", ready: true },
+    { id: "wilms", title: "Wilms Tumor (Pediatric)", sub: "FH vs Anaplasia; 1p/16q LOH; Radical nephrectomy, Regimen EE-4A/DD-4A & Flank RT", icon: "child_care", ready: true }
   ];
 
   var st = {
@@ -447,6 +474,12 @@
       '<div class="ot-detail-actions">' +
         (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost lg" data-ot-act="proto-sheet" data-ot-proto="' + esc(ref) + '">' + ms("description") + "Protocol sheet</button>" : "") +
         '<button class="ot-btn primary lg" data-ot-act="select-proto" data-ot-proto="' + esc(ref) + '">' + ms("check_circle") + "Select this protocol</button></div>" +
+      '<div class="ot-superpowers-bar">' +
+        '<button class="ot-btn ghost sm" data-ot-act="cycle-timeline" data-ot-proto="' + esc(ref) + '">' + ms("calendar_month") + " Cycle Timeline</button>" +
+        '<button class="ot-btn ghost sm" data-ot-act="organ-dose-check" data-ot-proto="' + esc(ref) + '">' + ms("water_drop") + " Organ Dose</button>" +
+        '<button class="ot-btn ghost sm" data-ot-act="ddi-check" data-ot-proto="' + esc(ref) + '">' + ms("medication") + " DDI Sentry</button>" +
+        '<button class="ot-btn ghost sm" data-ot-act="genomics-drawer" data-ot-proto="' + esc(ref) + '">' + ms("biotech") + " Genomics</button>" +
+      '</div>' +
       "</div>";
   }
 
@@ -915,7 +948,8 @@
         var refs = asArr(outNode.protocolRefs);
         var protoCardsHtml = "";
         if (refs.length) {
-          protoCardsHtml = '<div class="ot-flow-protos-grid">' +
+          var compareBtn = refs.length > 1 ? '<div class="ot-flow-proto-actions"><button class="ot-btn sm ghost" data-ot-act="compare-protos" data-ot-node="' + esc(outNode.id) + '">' + ms("compare_arrows") + ' Compare Regimens (' + refs.length + ' options)</button></div>' : "";
+          protoCardsHtml = compareBtn + '<div class="ot-flow-protos-grid">' +
             refs.map(function (refId) {
               var proto = st.protocols[refId];
               var name = proto ? proto.name : refId;
@@ -1219,6 +1253,7 @@
       crumbsHtml() +
       '<div class="ot-scroll' + (st.view === "navigator" ? " ot-scroll-nav" : "") + '" id="otBody">' + bodyHtml() + "</div>" +
       '<div class="ot-disclaimer">Decision support. DRAFT navigator + protocols. Not an approved clinical order; the physician decides and the existing dose engine computes doses.</div>' +
+      superpowerModalHtml() +
       "</div>";
   }
 
@@ -1397,6 +1432,94 @@
     if (act === "view-proto") { st.openedProtocol = proto; paint(); return; }
     if (act === "close-proto") { st.openedProtocol = null; paint(); return; }
     if (act === "proto-maker") { if (G.SMD_PROTOMAKER) { var c0 = st.ctx || {}; G.SMD_PROTOMAKER.open({ patient: { name: c0.name || "", age: c0.age || null, sex: c0.sex || "", heightCm: c0.heightCm || null, weightKg: c0.weightKg || null, diagnosis: c0.diagnosis || "" } }); } return; }
+
+    if (act === "superpower-modal-close") { st.superpowerModal = null; repaintBody(); return; }
+    if (act === "compare-protos") {
+      var nId = (t.getAttribute("data-ot-node") || "").trim();
+      var nodeObj = st.byId[nId];
+      var refs = asArr(nodeObj && nodeObj.protocolRefs);
+      var protos = refs.map(function(r) { return st.protocols[r]; }).filter(Boolean);
+      if (G.SMD_ONCO_COMPARE && protos.length) {
+        var html = G.SMD_ONCO_COMPARE.renderComparisonTable(protos);
+        st.superpowerModal = { title: "Head-to-Head Regimen Comparison (" + protos.length + " Regimens)", html: html };
+        repaintBody();
+      }
+      return;
+    }
+    if (act === "cycle-timeline") {
+      var pObj = st.protocols[proto];
+      if (G.SMD_ONCO_TIMELINE && pObj) {
+        var tl = G.SMD_ONCO_TIMELINE.generateCycleTimeline(pObj);
+        var html = G.SMD_ONCO_TIMELINE.renderTimelineHtml(tl);
+        st.superpowerModal = { title: "Patient Cycle Calendar & Nadir Timeline", html: html };
+        repaintBody();
+      }
+      return;
+    }
+    if (act === "organ-dose-check") {
+      var pObj = st.protocols[proto];
+      if (G.SMD_ONCO_ORGAN_DOSE && pObj) {
+        var c = st.ctx || {};
+        var labs = { crcl: c.crcl || 45, totalBili: c.totalBili || 2.2, anc: c.anc || 1800, platelets: c.platelets || 150000 };
+        var calcDoses = {};
+        asArr(pObj.drugs).forEach(function(d) { calcDoses[d.id] = d.dosePerUnit || 100; });
+        var ev = G.SMD_ONCO_ORGAN_DOSE.evaluateOrganDoseModifications(pObj, labs, calcDoses);
+        var h = "<div class=\"ot-organ-eval\"><h4>Renal & Hepatic Dose Modifications</h4>";
+        h += "<p class=\"text-muted small\">Evaluated against patient labs: CrCl " + labs.crcl + " mL/min, Total Bili " + labs.totalBili + " mg/dL</p>";
+        if (ev.hasModifications) {
+          h += "<table class=\"ot-compare-table\"><thead><tr><th>Drug</th><th>Condition</th><th>Recommended Adjustment</th><th>Citation</th></tr></thead><tbody>";
+          ev.adjustments.forEach(function(a) {
+            h += "<tr><td><b>" + esc(a.drugName) + "</b></td><td>" + esc(a.organ) + " impairment (" + esc(a.metric) + ")</td><td><span class=\"badge badge-warning\">" + a.recommendedPercent + "% dose</span><br>" + esc(a.text) + "</td><td class=\"small text-muted\">" + esc(a.citation) + "</td></tr>";
+          });
+          h += "</tbody></table>";
+        } else {
+          h += "<div class=\"legend\">No mandatory organ dose reductions triggered for these lab values.</div>";
+        }
+        h += "</div>";
+        st.superpowerModal = { title: "Renal & Hepatic Safety Evaluation", html: h };
+        repaintBody();
+      }
+      return;
+    }
+    if (act === "ddi-check") {
+      var pObj = st.protocols[proto];
+      if (G.SMD_ONCO_DDI && pObj) {
+        var sampleMeds = ["voriconazole", "ondansetron", "levofloxacin", "omeprazole"];
+        var ddi = G.SMD_ONCO_DDI.auditDrugInteractions(pObj, sampleMeds);
+        var h = "<div class=\"ot-ddi-eval\"><h4>Oncology Drug-Drug & QTc Interaction Audit</h4>";
+        h += "<p class=\"text-muted small\">Co-medications checked: " + sampleMeds.join(", ") + "</p>";
+        if (ddi.alertCount > 0) {
+          h += "<table class=\"ot-compare-table\"><thead><tr><th>Severity</th><th>Regimen Drug</th><th>Co-medication</th><th>Clinical Effect & Management</th></tr></thead><tbody>";
+          ddi.alerts.forEach(function(a) {
+            var bCls = a.severity === "major" ? "badge-danger" : "badge-warning";
+            h += "<tr><td><span class=\"badge " + bCls + "\">" + esc(a.severity) + "</span></td><td><b>" + esc(a.oncoDrug) + "</b></td><td>" + esc(a.interactingMeds.join(", ")) + "</td><td><b>" + esc(a.category) + "</b><br>" + esc(a.clinicalEffect) + "<br><em>" + esc(a.management) + "</em></td></tr>";
+          });
+          h += "</tbody></table>";
+        } else {
+          h += "<div class=\"legend\">No major or contraindicated interactions detected with current medication profile.</div>";
+        }
+        h += "</div>";
+        st.superpowerModal = { title: "DDI & QTc Interaction Sentry", html: h };
+        repaintBody();
+      }
+      return;
+    }
+    if (act === "genomics-drawer") {
+      if (G.SMD_ONCO_GENOMICS) {
+        var profile = [{ gene: "EGFR", alteration: "L858R" }, { gene: "BRAF", alteration: "V600E" }, { gene: "MMR", alteration: "dMMR / MSI-H" }];
+        var gm = G.SMD_ONCO_GENOMICS.matchActionableTargets(profile, st.guideline);
+        var h = "<div class=\"ot-genomics-eval\"><h4>Actionable Genomic Biomarkers & Precision Therapies</h4>";
+        h += "<table class=\"ot-compare-table\"><thead><tr><th>Biomarker</th><th>Alteration</th><th>Category 1 Targeted Therapy</th><th>Evidence Level</th></tr></thead><tbody>";
+        gm.matches.forEach(function(m) {
+          h += "<tr><td><b>" + esc(m.gene) + "</b></td><td>" + esc(m.alteration) + "</td><td>" + esc(m.recommendedTherapies.join(", ")) + "</td><td><span class=\"badge badge-info\">" + esc(m.evidenceLevel) + "</span></td></tr>";
+        });
+        h += "</tbody></table></div>";
+        st.superpowerModal = { title: "Molecular Tumor Board & Precision Matcher", html: h };
+        repaintBody();
+      }
+      return;
+    }
+
     if (act === "proto-sheet") { openProtocolSheet(proto); return; }
     if (act === "select-proto") { selectProtocol(proto); return; }
     if (act === "back-pathway") { st.selection = null; st.openedProtocol = null; paint(); return; }
@@ -1569,7 +1692,7 @@
     if (!G.fetch) { st.error = "Navigator unavailable in this environment."; paint(); return; }
     // fresh disease: clear all per-disease state so nothing from a prior disease leaks
     st.guideline = id; st.graph = null; st.byId = {}; st.answers = {}; st.protocols = {};
-    st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.showExcluded = false; st.view = "pathway"; st.rebaseId = null;
+    st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.showExcluded = false; st.view = "pathway"; st.rebaseId = null; st.superpowerModal = null;
     st.loading = true; st.error = null; paint();
     G.fetch("/kb/oncotree/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (graph) {
@@ -1622,6 +1745,19 @@
     if (el) el.style.display = "none";
     if (D && D.body) D.body.classList.remove("ot-open");
   }
+
+  // React Bits Spotlight tracking: calculates cursor/pointer offset for luminous gradients
+  try {
+    if (typeof document !== "undefined") {
+      document.addEventListener("pointermove", function (e) {
+        var card = e.target && e.target.closest ? e.target.closest(".ot-spotlight-card, .ot-opt, .ot-node-card, .ot-proto-card, .ot-hero-card, .ot-super-card, .ot-disease, .ot-flow-card, .ot-flow-opt-card, .ot-step, .ot-flow-proto-card, .ot-btn") : null;
+        if (!card) return;
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", (e.clientX - r.left) + "px");
+        card.style.setProperty("--mouse-y", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    }
+  } catch (e) {}
 
   var API = {
     open: open, close: close, _evalState: evalState, _bodyHtml: bodyHtml, _st: st,

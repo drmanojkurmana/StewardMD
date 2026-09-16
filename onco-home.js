@@ -191,6 +191,20 @@
   // an explicit ctx to open({...}) — this is the primary, fully-tested path (unit + CDP).
   function livePatientContext() {
     try {
+      if (G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) {
+        var wsq = G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs(G);
+        if (wsq && wsq.patient && wsq.patient.id) {
+          return {
+            patient: { name: wsq.patient.name, patientId: wsq.patient.id },
+            heightCm: wsq.vitals.heightCm,
+            weightKg: wsq.vitals.weightKg,
+            age: wsq.vitals.age,
+            sex: wsq.vitals.sex,
+            creatinine: wsq.labs.serumCreatinine,
+            renal: wsq.labs.crcl ? "CrCl " + wsq.labs.crcl + " mL/min" : null
+          };
+        }
+      }
       var p = G.GHISMEDS && G.GHISMEDS.getSelectedPatient && G.GHISMEDS.getSelectedPatient();
       if (p && p.patientId) return { patient: { name: p.name, patientId: p.patientId } };
     } catch (e) {}
@@ -589,6 +603,19 @@
   function foreground() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("oh-bg"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on")) close(); }); } catch (e) {}
+
+  // React Bits Spotlight tracking: calculates cursor/pointer offset for luminous gradients
+  try {
+    if (typeof document !== "undefined") {
+      document.addEventListener("pointermove", function (e) {
+        var card = e.target && e.target.closest ? e.target.closest(".oh-card, .oh-qa, .oh-row, .oh-favchip, .ctc-grow, .stg-trow, .stg-grow, .rec-out") : null;
+        if (!card) return;
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", (e.clientX - r.left) + "px");
+        card.style.setProperty("--mouse-y", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    }
+  } catch (e) {}
 
   // Testing/launch hook (mirrors queue.js): with the flag on, ?oncohome=1 auto-opens.
   try {

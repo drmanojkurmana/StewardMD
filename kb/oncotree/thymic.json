@@ -1,0 +1,356 @@
+{
+  "guideline": "thymic",
+  "id": "thymic",
+  "title": "Thymomas and Thymic Carcinomas",
+  "category": "Thoracic Oncology",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "thymoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Thymomas and Thymic Carcinomas. Covers complete clinical algorithm: Diagnostic Workup (contrast-enhanced chest CT with upper abdomen, cardiac/thoracic MRI for great vessel and pericardial assessment, paraneoplastic syndrome evaluation for Myasthenia Gravis and pure red cell aplasia, multidisciplinary thoracic surgical consultation with selective core needle biopsy, WHO histologic subtyping of Thymoma Type A-B3 vs Thymic Carcinoma Type C, PFTs with MIP/MEP for myasthenic symptoms) -> Histology and Stage Stratification (Masaoka-Koga Stage I/II resectable thymoma vs Stage III/IVa locally advanced thymoma vs Thymic Carcinoma Type C vs recurrent or Stage IVb metastatic disease) -> Early thymoma complete surgical thymectomy with selective PORT 45-50 Gy -> Locally advanced thymoma neoadjuvant CAP x 2-4 cycles then thymectomy plus PORT 54-60 Gy or definitive chemoradiotherapy if unresectable -> Thymic carcinoma resection with lymph node dissection plus adjuvant chemoRT or induction chemoRT with second-line pembrolizumab or sunitinib -> Metastatic CAP or carboplatin/paclitaxel with second-line lenvatinib, pembrolizumab, or octreotide plus prednisone. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Thymomas and Thymic Carcinomas Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Biopsy is avoided when imaging shows an encapsulated resectable thymoma proceeding directly to thymectomy; core needle biopsy is indicated when disease is non-resectable or when lymphoma or germ cell tumor is suspected.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "WHO histologic subtype distinguishes Thymoma (Type A, AB, B1, B2, B3) from Thymic Carcinoma (Type C, predominantly squamous or neuroendocrine); subtype plus Masaoka-Koga stage selects the surgical, PORT, and systemic pathway.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "CAP induction regimen: Cyclophosphamide 500 mg/m2 day 1 + Doxorubicin 50 mg/m2 day 1 + Cisplatin 50 mg/m2 day 1 every 21 days for 2-4 cycles, followed by restaging CT to determine resectability.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Second-line pembrolizumab 200 mg IV every 3 weeks or sunitinib 50 mg PO daily for thymic carcinoma requires screening for immune myocarditis and myasthenia flare; octreotide LAR applies to refractory thymoma with a positive octreoscan.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "thymic_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Thymomas and Thymic Carcinomas: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before histology and stage stratification. Image the chest and upper abdomen, assess great vessel and pericardial involvement, screen for paraneoplastic syndromes, obtain surgical input with selective biopsy, classify WHO histology, and document respiratory muscle reserve in myasthenic patients.",
+      "path": "Thymomas and Thymic Carcinomas / Workup",
+      "pills": [
+        "thymic",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Contrast-enhanced CT of the chest (including upper abdomen to screen for diaphragmatic and subdiaphragmatic extension)",
+        "Cardiac or thoracic MRI with and without contrast to assess great vessel invasion, pericardial involvement, and resectability",
+        "Systematic evaluation for paraneoplastic syndromes, particularly Myasthenia Gravis (anti-acetylcholine receptor [AChR] binding/blocking antibodies) and pure red cell aplasia",
+        "Multidisciplinary thoracic surgical consultation (biopsy avoided if encapsulated resectable thymoma; core needle biopsy if non-resectable or suspicion of lymphoma/germ cell tumor)",
+        "Pathologic classification: WHO histologic subtype: Thymoma (Type A, AB, B1, B2, B3) vs Thymic Carcinoma (Type C, predominantly squamous or neuroendocrine)",
+        "Pulmonary function testing with respiratory muscle pressures (MIP/MEP) in patients with neuromuscular or myasthenic symptoms"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Histology and Stage Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_histology",
+      "linkId": "thymic_stage_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Histology and Stage Stratification",
+      "title": "Thymomas and Thymic Carcinomas: Histology and Stage Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign Masaoka-Koga stage with WHO histology (thymoma Type A-B3 vs thymic carcinoma Type C) or identify recurrent or Stage IVb metastatic disease; the group selects the surgical, induction, multimodality, or palliative systemic pathway.",
+      "path": "Thymomas and Thymic Carcinomas / Histology and Stage Stratification",
+      "pills": [
+        "thymic",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Masaoka-Koga Stage I/II resectable thymoma: encapsulated or microscopic capsular invasion, WHO Type A through B3.",
+        "Masaoka-Koga Stage III/IVa locally advanced thymoma: invasion of pericardium, great vessels, or lung, or pleural implants.",
+        "Thymic carcinoma Type C: locally advanced disease, resectable or unresectable, predominantly squamous or neuroendocrine histology.",
+        "Recurrent or distant metastatic thymic malignancy: Stage IVb disease beyond the anterior mediastinum and pleura."
+      ],
+      "options": [
+        {
+          "id": "stage12_resectable",
+          "label": "Masaoka-Koga Stage I/II Resectable Thymoma (Encapsulated or microscopic capsular invasion, Type A-B3)",
+          "sets": {
+            "stage": "early_resectable"
+          },
+          "pills": [
+            "thymic",
+            "stage I-II",
+            "resectable"
+          ]
+        },
+        {
+          "id": "stage34_locally_advanced",
+          "label": "Masaoka-Koga Stage III/IVa Locally Advanced Thymoma (Invasion of pericardium, great vessels, lung, or pleural implants)",
+          "sets": {
+            "stage": "locally_advanced"
+          },
+          "pills": [
+            "thymic",
+            "stage III-IVa",
+            "locally advanced"
+          ]
+        },
+        {
+          "id": "thymic_carcinoma",
+          "label": "Thymic Carcinoma (Type C: Locally advanced, resectable or unresectable)",
+          "sets": {
+            "histology": "thymic_carcinoma"
+          },
+          "pills": [
+            "thymic",
+            "carcinoma",
+            "type C"
+          ]
+        },
+        {
+          "id": "recurrent_metastatic",
+          "label": "Recurrent or Distant Metastatic Thymic Malignancy (Stage IVb)",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "thymic",
+            "metastatic",
+            "stage IVb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_early_thymoma_tx",
+      "linkId": "thymic_early_thymoma_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Early Resectable Thymoma Treatment",
+      "title": "Stage I/II Thymoma: Complete Surgical Thymectomy With Selective PORT",
+      "section": "Treatment",
+      "description": "Upfront complete surgical thymectomy for Masaoka-Koga Stage I/II resectable thymoma, with observation after complete Stage I resection and selective postoperative radiotherapy for Stage II disease with positive or close margins or high-risk B2/B3 histology.",
+      "path": "Thymomas and Thymic Carcinomas / Early Resectable Thymoma / Treatment",
+      "pills": [
+        "thymic",
+        "stage I-II",
+        "resectable",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Complete surgical thymectomy (total resection of thymus gland, tumor, and all mediastinal fat) as definitive therapy for encapsulated resectable thymoma.",
+        "Postoperative observation for Stage I completely resected thymoma with negative margins.",
+        "Postoperative radiation therapy (PORT: 45 to 50 Gy) considered for Stage II disease with positive or close margins or high-risk B2/B3 histology.",
+        "Surveillance after definitive therapy: contrast-enhanced chest CT at regular intervals with monitoring for myasthenia gravis and second malignancies."
+      ],
+      "regimenSummary": "Complete Surgical Thymectomy +/- Postoperative Radiotherapy (PORT 45-50 Gy)",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_adv_thymoma_tx",
+      "linkId": "thymic_adv_thymoma_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Locally Advanced Thymoma Treatment",
+      "title": "Stage III/IVa Thymoma: Neoadjuvant CAP Then Thymectomy Plus PORT",
+      "section": "Treatment",
+      "description": "Neoadjuvant CAP induction for Masaoka-Koga Stage III/IVa locally advanced thymoma, then restaging: resectable disease proceeds to complete thymectomy plus PORT 54-60 Gy, while unresectable disease proceeds to definitive concurrent chemoradiotherapy.",
+      "path": "Thymomas and Thymic Carcinomas / Locally Advanced Thymoma / Treatment",
+      "pills": [
+        "thymic",
+        "stage III-IVa",
+        "locally advanced",
+        "neoadjuvant"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Neoadjuvant induction chemotherapy: CAP (Cyclophosphamide 500 mg/m2 day 1 + Doxorubicin 50 mg/m2 day 1 + Cisplatin 50 mg/m2 day 1 every 21 days for 2-4 cycles).",
+        "Restaging contrast-enhanced CT after induction: if tumor is converted to resectable, proceed to complete surgical thymectomy plus Postoperative Radiotherapy (PORT: 54-60 Gy).",
+        "If disease remains unresectable after induction, proceed to definitive concurrent chemoradiotherapy.",
+        "Multidisciplinary coordination across thoracic surgery, medical oncology, and radiation oncology with cardiac, renal, and audiologic monitoring on cisplatin-based therapy.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Neoadjuvant CAP x 2-4 cycles -> Surgical Thymectomy + PORT (54-60 Gy)",
+      "protocolRefs": [
+        "rare-thymic-cap"
+      ]
+    },
+    {
+      "id": "n_thymic_carcinoma_tx",
+      "linkId": "thymic_carcinoma_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Thymic Carcinoma Treatment",
+      "title": "Thymic Carcinoma Type C: Resection Plus ChemoRT, 2L Pembrolizumab or Sunitinib",
+      "section": "Treatment",
+      "description": "Multimodality therapy for Type C thymic carcinoma: complete resection with mediastinal lymph node dissection plus postoperative chemoradiotherapy when feasible, induction chemoRT for unresectable disease, and second-line pembrolizumab or sunitinib with myocarditis and myasthenia screening.",
+      "path": "Thymomas and Thymic Carcinomas / Thymic Carcinoma / Treatment",
+      "pills": [
+        "thymic",
+        "carcinoma",
+        "type C",
+        "multimodality"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Complete surgical resection with mediastinal lymph node dissection whenever feasible, followed by Postoperative Chemoradiotherapy (PORT 54-60 Gy with concurrent Cisplatin or Carboplatin plus Paclitaxel).",
+        "For unresectable disease: induction Carboplatin (AUC 6) plus Paclitaxel (200 mg/m2 every 21 days) or CAP, followed by radiation.",
+        "Second-line therapy: Pembrolizumab 200 mg IV every 3 weeks or Sunitinib 50 mg PO daily, with screening for immune myocarditis and myasthenia flare.",
+        "Stage with contrast-enhanced chest CT and cardiac/thoracic MRI at baseline and on therapy; offer clinical trial enrollment at every line.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Surgical Resection + Adjuvant ChemoRT; 2L Pembrolizumab or Sunitinib (Type C)",
+      "protocolRefs": [
+        "rare-thymic-cap"
+      ]
+    },
+    {
+      "id": "n_metastatic_tx",
+      "linkId": "thymic_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Recurrent or Metastatic Treatment",
+      "title": "Stage IVb: CAP or Carboplatin/Paclitaxel Then Lenvatinib, Pembrolizumab, or Octreotide",
+      "section": "Treatment",
+      "description": "First-line systemic CAP or carboplatin plus paclitaxel for recurrent or Stage IVb metastatic thymic malignancy, with octreotide LAR plus prednisone for scan-positive refractory thymoma, lenvatinib or pembrolizumab for refractory thymic carcinoma, and palliative radiotherapy for symptomatic lesions.",
+      "path": "Thymomas and Thymic Carcinomas / Recurrent Metastatic / Systemic Therapy",
+      "pills": [
+        "thymic",
+        "metastatic",
+        "stage IVb",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Systemic chemotherapy: CAP (Cyclophosphamide + Doxorubicin + Cisplatin) or Carboplatin plus Paclitaxel as first-line therapy.",
+        "For refractory thymoma: Octreotide LAR 30 mg IM every 4 weeks plus Prednisone 0.5-1 mg/kg/day (if octreotide scan positive).",
+        "For refractory thymic carcinoma: Lenvatinib 24 mg daily or Pembrolizumab with immune-related adverse event monitoring.",
+        "Palliative local radiotherapy for osseous or symptomatic mediastinal lesions.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "CAP or Carboplatin/Paclitaxel -> 2L Lenvatinib / Pembrolizumab or Octreotide+Prednisone",
+      "protocolRefs": [
+        "rare-thymic-cap"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_histology",
+      "toNodeId": "n_stage_histology",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_early",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_early_thymoma_tx",
+      "toNodeId": "n_early_thymoma_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage12_resectable",
+      "fromOptions": [
+        "stage12_resectable"
+      ]
+    },
+    {
+      "id": "l_stage_advanced",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_adv_thymoma_tx",
+      "toNodeId": "n_adv_thymoma_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "stage34_locally_advanced",
+      "fromOptions": [
+        "stage34_locally_advanced"
+      ]
+    },
+    {
+      "id": "l_stage_carcinoma",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_thymic_carcinoma_tx",
+      "toNodeId": "n_thymic_carcinoma_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "thymic_carcinoma",
+      "fromOptions": [
+        "thymic_carcinoma"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage_histology",
+      "fromNodeId": "n_stage_histology",
+      "to": "n_metastatic_tx",
+      "toNodeId": "n_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "recurrent_metastatic",
+      "fromOptions": [
+        "recurrent_metastatic"
+      ]
+    }
+  ]
+}

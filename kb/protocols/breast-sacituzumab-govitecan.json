@@ -14,7 +14,8 @@
   "caps": "protocol",
   "source": {
     "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026",
-    "primaryStudy": "ASCENT: Bardia A, et al. N Engl J Med 2021;384:1529-1541; TROPiCS-02: Rugo HS, et al. Lancet 2023;402:1423-1433"
+    "primaryStudy": "ASCENT: Bardia A, et al. N Engl J Med 2021;384:1529-1541; TROPiCS-02: Rugo HS, et al. Lancet 2023;402:1423-1433",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
   },
   "institution": {
     "provenance": "ONCQIS grounded Standard Protocol (NCCN v6.2026 BINV-Q 2, 3, 9 of 15)",
@@ -48,30 +49,30 @@
     "Monitor for infusion-related reactions during and for at least 30 minutes after infusion"
   ],
   "clearanceChecks": [
-    "Day 1: ANC ≥ 1500/mcL and platelets ≥ 100,000/mcL",
-    "Day 8: ANC ≥ 1000/mcL and platelets ≥ 75,000/mcL (hold Day 8 dose if counts lower)",
-    "resolution of diarrhea and stomatitis to grade ≤ 1",
+    "Day 1: ANC \u2265 1500/mcL and platelets \u2265 100,000/mcL",
+    "Day 8: ANC \u2265 1000/mcL and platelets \u2265 75,000/mcL (hold Day 8 dose if counts lower)",
+    "resolution of diarrhea and stomatitis to grade \u2264 1",
     "prior-cycle status"
   ],
   "doseModificationRules": [
     {
-      "condition": "severe neutropenia (grade 4 neutropenia ≥7 days, or febrile neutropenia)",
+      "condition": "severe neutropenia (grade 4 neutropenia \u22657 days, or febrile neutropenia)",
       "drug": "sacituzumab govitecan",
       "action": "hold/reduce",
-      "text": "Withhold sacituzumab govitecan until ANC ≥ 1500/mcL. For first occurrence, reduce dose by 25% (10 mg/kg -> 7.5 mg/kg); for second occurrence, reduce by another 25% (7.5 mg/kg -> 5 mg/kg). Discontinue if grade 4 neutropenia recurs at 5 mg/kg. Add G-CSF."
+      "text": "Withhold sacituzumab govitecan until ANC \u2265 1500/mcL. For first occurrence, reduce dose by 25% (10 mg/kg -> 7.5 mg/kg); for second occurrence, reduce by another 25% (7.5 mg/kg -> 5 mg/kg). Discontinue if grade 4 neutropenia recurs at 5 mg/kg. Add G-CSF."
     },
     {
       "condition": "grade 3 or 4 diarrhea",
       "drug": "sacituzumab govitecan",
       "action": "hold/reduce",
-      "text": "Withhold until resolved to grade ≤ 1. Resume with 25% dose reduction (7.5 mg/kg)."
+      "text": "Withhold until resolved to grade \u2264 1. Resume with 25% dose reduction (7.5 mg/kg)."
     }
   ],
   "drugs": [
     {
       "id": "sacituzumab-govitecan",
       "name": "Sacituzumab Govitecan",
-      "basis": "weight",
+      "basis": "mgkg",
       "dosePerUnit": 10,
       "unit": "mg/kg",
       "route": "IV",

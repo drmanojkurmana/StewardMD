@@ -1,0 +1,86 @@
+{
+  "id": "sclc-tarlatamab",
+  "diseaseId": "sclc",
+  "name": "Tarlatamab (DLL3-targeted BiTE for Relapsed/Refractory ES-SCLC)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 12,
+  "caps": "none",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Landmark Regimen: DeLLphi-301 Phase II Trial / FDA approval 2024",
+    "approval": null
+  },
+  "stage": [
+    "IV",
+    "extensive-stage"
+  ],
+  "treatmentSetting": [
+    "subsequent-line"
+  ],
+  "histology": "small cell lung carcinoma",
+  "premedications": [
+    {
+      "name": "Dexamethasone",
+      "dose": "8 mg IV",
+      "notes": "Premedication prior to Step-up doses (Cycle 1 Day 1 and Cycle 1 Day 8)"
+    },
+    {
+      "name": "Diphenhydramine",
+      "dose": "25-50 mg IV/PO",
+      "notes": "Premedication prior to Step-up doses"
+    },
+    {
+      "name": "Acetaminophen",
+      "dose": "650 mg PO",
+      "notes": "Premedication prior to Step-up doses"
+    }
+  ],
+  "supportiveCare": [
+    "Inpatient monitoring: 24-48 hours observation required for Cycle 1 Day 1 (1 mg step-up) and Cycle 1 Day 8 (10 mg step-up) due to CRS / ICANS risk.",
+    "Tocilizumab (8 mg/kg IV) and dexamethasone must be immediately available on unit before starting infusion."
+  ],
+  "monitoring": [
+    "Vitals and neuro checks q2-4h during inpatient step-up dosing",
+    "CBC, CMP, ferritin, CRP baseline and prior to each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "Cytokine Release Syndrome (CRS) Grade 2",
+      "action": "hold/treat",
+      "text": "Administer oxygen; give tocilizumab 8 mg/kg IV (max 800 mg). Withhold tarlatamab until CRS resolves."
+    },
+    {
+      "condition": "ICANS Grade >= 2",
+      "action": "hold/treat",
+      "text": "Administer dexamethasone 10-20 mg IV q6h. Withhold tarlatamab until complete resolution."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "tarlatamab",
+      "name": "Tarlatamab-dlle",
+      "basis": "flat",
+      "dosePerUnit": 10,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Tarlatamab maintenance 10 mg IV every 14 days (Cycle 2+). Note: Cycle 1 uses step-up dosing: 1 mg IV Day 1, 10 mg IV Day 8, with required 24-48h inpatient telemetry/monitoring for CRS."
+    }
+  ]
+}

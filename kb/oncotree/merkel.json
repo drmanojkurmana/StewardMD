@@ -1,0 +1,331 @@
+{
+  "guideline": "merkel",
+  "title": "Merkel Cell Carcinoma",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "diseaseId": "merkel_cell_carcinoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Merkel Cell Carcinoma (MCC). Covers complete clinical algorithm: Diagnostic Workup (full-body skin exam, punch/excisional biopsy with CK20 perinuclear dot-like IHC, neuroendocrine markers chromogranin/synaptophysin, MCPyV oncoprotein serology/IHC, baseline cross-sectional PET-CT or CT neck/chest/abdomen/pelvis, mandatory Sentinel Lymph Node Biopsy SLNB for all clinically node-negative cN0 tumors before definitive excision) -> Stage Stratification (Stage I-II Localized cN0 vs Stage III Regional Nodal vs Stage IV Distant Metastatic) -> Localized Surgical Management (Wide local excision with 1-2 cm margins or Mohs micrographic surgery -> Adjuvant Radiation Therapy 50-56 Gy to primary tumor bed for high-risk features) -> Regional Nodal Management (Clinically positive or SLNB-positive: Completion Lymph Node Dissection CLND or Definitive Nodal RT 50-60 Gy) -> Disseminated / Metastatic Stage IV Systemic Immunotherapy: Anti-PD-L1 Avelumab 800 mg IV q2w (JAVELIN Merkel 200 Category 1 Preferred), Anti-PD-1 Pembrolizumab 200 mg q3w or 400 mg q6w (KEYNOTE-017 Category 1 Preferred), Retifanlimab 500 mg q4w (POD1UM-201 Category 1); Platinum-based chemotherapy (cisplatin/carboplatin + etoposide) reserved for contraindications to or progression on checkpoint inhibitors. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Merkel Cell Carcinoma Version 2.2026 (July 2026).",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Sentinel lymph node biopsy (SLNB) is recommended for all clinically node-negative (cN0) Merkel cell carcinoma tumors regardless of primary tumor size, performed prior to or concurrently with wide local excision, because nodal micrometastases are common even in small primaries and SLNB status drives adjuvant decisions.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "MCC shows small round blue cells with neuroendocrine features; CK20 positivity in the classic perinuclear dot-like pattern plus chromogranin A, synaptophysin, or CD56 supports MCC, while TTF-1 and CK7 negativity argues against metastatic small cell lung carcinoma, Melan-A/S100 negativity against melanoma, and LCA/CD45 negativity against lymphoma.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Adjuvant radiation therapy 50-56 Gy to the primary tumor bed is recommended for high-risk localized MCC: primary tumor larger than 2 cm, positive or close surgical margins not amenable to re-excision, lymphovascular invasion, immunosuppression, head and neck primary, or recurrent disease.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "SLNB-positive or clinically node-positive regional MCC is managed with completion lymph node dissection with or without adjuvant nodal radiation 50-60 Gy; definitive nodal radiation alone is the alternative for unresectable disease or patients unfit for or declining surgery.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Frontline anti-PD-(L)1 therapy is Category 1 preferred for disseminated MCC: avelumab 800 mg IV every 2 weeks (JAVELIN Merkel 200), pembrolizumab 200 mg every 3 weeks or 400 mg every 6 weeks (KEYNOTE-017), and retifanlimab 500 mg IV every 4 weeks (POD1UM-201). Cytotoxic chemotherapy is reserved for contraindications to or progression on checkpoint inhibitors.",
+      "evidence": "1"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "merkel_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Diagnostic Workup",
+      "title": "Merkel Cell Carcinoma: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the diagnostic workup before clinical staging. Confirm tissue diagnosis with neuroendocrine IHC, establish viral status, stage systemic extent, and plan mandatory nodal staging.",
+      "path": "Merkel Cell Carcinoma / Workup",
+      "pills": [
+        "MCC",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete cutaneous examination of all skin surfaces with documentation of primary lesion size, color, borders, and fixation, plus palpation of all regional lymph node basins for clinically positive nodes.",
+        "Full-thickness diagnostic biopsy (punch, incisional, or excisional) of the primary cutaneous lesion; pathology must document tumor thickness, peripheral and deep margin status, lymphovascular invasion, perineural invasion, and extracutaneous extension where present.",
+        "Pathology and IHC: small round blue cells with neuroendocrine features; Cytokeratin 20 (CK20) positive in the classic perinuclear dot-like pattern; Chromogranin A, Synaptophysin, and CD56 positive; TTF-1 and CK7 negative (excludes metastatic small cell lung carcinoma SCLC); Melan-A and S100 negative (excludes melanoma); LCA/CD45 negative (excludes lymphoma).",
+        "Merkel Cell Polyomavirus (MCPyV) testing: oncoprotein serology (AMERK antibody test) or MCPyV large T-antigen IHC on tumor tissue for prognostic stratification and surveillance baseline.",
+        "Systemic baseline imaging: whole-body FDG PET-CT (preferred) or contrast-enhanced CT of neck, chest, abdomen, and pelvis to detect regional adenopathy and distant metastases before definitive surgery.",
+        "Sentinel Lymph Node Biopsy (SLNB): mandatory recommendation for all clinically node-negative (cN0) tumors regardless of primary tumor size; perform prior to or concurrently with wide local excision so lymphatic mapping is undisturbed."
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Diagnostic Workup Reviewed — Proceed to Clinical Staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage",
+      "linkId": "merkel_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical Stage",
+      "title": "Merkel Cell Carcinoma: Clinical Stage Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign a clinical stage group from primary tumor extent (T), clinical nodal status (cN), and distant metastasis (M); stage selects the local, regional, or disseminated pathway.",
+      "path": "Merkel Cell Carcinoma / Staging",
+      "pills": [
+        "MCC",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Stage I-II localized disease: primary tumor cT1-T4, clinically node-negative (cN0), no distant metastasis (M0); Stage I is 2 cm or smaller, Stage II is larger than 2 cm or with deep extracutaneous invasion.",
+        "Stage III regional nodal disease: clinically or pathologically involved regional nodes (cN1-N3 or pN1-N3), in-transit metastases, M0; includes SLNB-positive micrometastatic disease found on pathologic staging.",
+        "Stage IV distant metastatic disease: any T, any N, with distant metastasis (M1) to skin beyond the basin, lung, liver, bone, brain, or other distant sites on baseline cross-sectional imaging.",
+        "When the clinical exam and imaging disagree on nodal status, confirm suspicious nodes with fine-needle aspiration or core biopsy before assigning Stage III; do not delay mandatory SLNB for cN0 disease."
+      ],
+      "options": [
+        {
+          "id": "local",
+          "label": "Clinical Stage I-II: localized primary (cT1-4, cN0, M0)",
+          "sets": {
+            "stage": "I-II"
+          },
+          "pills": [
+            "MCC",
+            "localized"
+          ]
+        },
+        {
+          "id": "regional",
+          "label": "Clinical Stage III: regional nodal disease (cN1-3 or pN1-3, M0)",
+          "sets": {
+            "stage": "III"
+          },
+          "pills": [
+            "MCC",
+            "stage III"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Clinical Stage IV: distant metastatic disease (M1)",
+          "sets": {
+            "stage": "IV"
+          },
+          "pills": [
+            "MCC",
+            "stage IV"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_local_slnb",
+      "linkId": "merkel_local_slnb",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "SLNB Result",
+      "title": "Localized MCC: Sentinel Lymph Node Biopsy Result",
+      "section": "Staging",
+      "description": "Localized (cN0) disease requires pathologic nodal staging. Enter the SLNB result; a negative SLNB routes to primary resection while a positive SLNB routes to regional nodal management.",
+      "path": "Merkel Cell Carcinoma / Localized / SLNB",
+      "pills": [
+        "MCC",
+        "localized",
+        "SLNB"
+      ],
+      "required": true,
+      "bullets": [
+        "SLNB technique: preoperative lymphoscintigraphy with intraoperative blue dye and gamma probe; excise all hot and blue sentinel nodes and evaluate with serial sectioning plus CK20 and neuroendocrine IHC to detect micrometastases.",
+        "SLNB-negative (pN0): no tumor in any sentinel node; proceed to definitive wide local excision or Mohs surgery of the primary with risk-adapted adjuvant primary-bed radiation.",
+        "SLNB-positive (pN1): any sentinel-node metastasis including micrometastasis or isolated tumor cells with MCC morphology and confirmatory IHC; manage as Stage III regional nodal disease.",
+        "If SLNB was omitted or is non-diagnostic (failed mapping, no node identified), treat the basin as unstaged: discuss repeat mapping versus nodal basin radiation or close ultrasound surveillance with the multidisciplinary team."
+      ],
+      "options": [
+        {
+          "id": "slnb_neg",
+          "label": "SLNB Negative (pN0): no sentinel-node metastasis",
+          "sets": {
+            "slnb": "negative"
+          },
+          "pills": [
+            "MCC",
+            "pN0"
+          ]
+        },
+        {
+          "id": "slnb_pos",
+          "label": "SLNB Positive (pN1): sentinel-node metastasis present",
+          "sets": {
+            "slnb": "positive"
+          },
+          "pills": [
+            "MCC",
+            "pN1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_local_resection",
+      "linkId": "merkel_tx_local_resection",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Localized Resection and Adjuvant RT",
+      "title": "SLNB-Negative Localized MCC: Definitive Resection With Risk-Adapted Adjuvant Radiation",
+      "section": "Treatment",
+      "description": "Definitive local therapy for SLNB-negative localized MCC: complete surgical excision of the primary followed by adjuvant primary-bed radiation for high-risk features, then structured surveillance.",
+      "path": "Merkel Cell Carcinoma / Localized / pN0 / Resection",
+      "pills": [
+        "MCC",
+        "localized",
+        "pN0",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Wide local excision of the primary with 1-2 cm peripheral clinical margins carried down to investing fascia, with histologic confirmation of clear deep and peripheral margins on permanent section.",
+        "Mohs micrographic surgery is an acceptable alternative, particularly for head and neck or cosmetically and functionally sensitive sites where tissue preservation matters and expertise is available.",
+        "Adjuvant radiation therapy 50-56 Gy to the primary tumor bed for high-risk features: primary tumor larger than 2 cm, positive or close margins not amenable to re-excision, lymphovascular invasion, immunosuppression, head and neck primary, or recurrent presentation.",
+        "Omit adjuvant primary-bed radiation for small (2 cm or smaller), widely clear, node-negative primaries without adverse features after shared decision-making; document the rationale.",
+        "Surveillance after definitive local therapy: skin and nodal basin examination every 3-6 months for 2 years then every 6-12 months, baseline and serial MCPyV oncoprotein antibody titers where initially positive, and cross-sectional imaging for high-risk or symptomatic patients."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_regional_mgmt",
+      "linkId": "merkel_regional_mgmt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Regional Nodal Management",
+      "title": "Stage III Regional MCC: Completion Dissection With or Without Nodal Radiation, or Definitive Nodal Radiation",
+      "section": "Treatment",
+      "description": "Definitive regional therapy for clinically positive or SLNB-positive nodal MCC: surgical clearance with risk-adapted adjuvant nodal radiation, or definitive nodal radiation alone when disease is unresectable or surgery is declined or unsafe.",
+      "path": "Merkel Cell Carcinoma / Regional / Nodal Management",
+      "pills": [
+        "MCC",
+        "stage III",
+        "nodal"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Confirm clinically suspicious nodes with fine-needle aspiration or core biopsy with CK20 and neuroendocrine IHC, and complete regional and distant staging with whole-body FDG PET-CT before definitive nodal therapy.",
+        "Completion lymph node dissection (CLND) of the involved basin with pathologic assessment of node count, size of largest metastasis, and extracapsular extension to guide adjuvant decisions.",
+        "Adjuvant nodal radiation therapy 50-60 Gy after CLND for high-risk nodal features: multiple involved nodes, large nodal metastasis, extracapsular extension, or close or positive dissection margins.",
+        "Definitive nodal radiation alone (50-60 Gy) for unresectable nodal disease, medically inoperable patients, or patients declining surgery; include the involved basin with margins per radiation oncology planning.",
+        "Manage the primary tumor in parallel (wide excision or Mohs with adjuvant primary-bed radiation per the localized pathway) and consider clinical trial enrollment; surveil skin, basins, and distant sites every 3-4 months initially."
+      ],
+      "protocolRefs": []
+    },
+    {
+      "id": "n_tx_metastatic",
+      "linkId": "merkel_tx_metastatic",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Disseminated Systemic Immunotherapy",
+      "title": "Stage IV Disseminated MCC: Frontline Anti-PD-(L)1 Immunotherapy With Chemotherapy Reserved",
+      "section": "Treatment",
+      "description": "Frontline systemic therapy for distant metastatic MCC is immune checkpoint blockade with a Category 1 preferred anti-PD-(L)1 agent; platinum-based chemotherapy is reserved for checkpoint contraindications or progression.",
+      "path": "Merkel Cell Carcinoma / Metastatic / Systemic Therapy",
+      "pills": [
+        "MCC",
+        "stage IV",
+        "immunotherapy"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Frontline immune checkpoint inhibitors, Category 1 preferred: avelumab 800 mg IV every 2 weeks (anti-PD-L1; JAVELIN Merkel 200, Category 1 preferred); pembrolizumab 200 mg IV every 3 weeks or 400 mg every 6 weeks (anti-PD-1; KEYNOTE-017, Category 1 preferred); retifanlimab 500 mg IV every 4 weeks (anti-PD-1; POD1UM-201, Category 1).",
+        "Select among the three preferred agents by infusion schedule, access, autoimmune history, and organ function; obtain baseline CBC, metabolic panel, thyroid function, cortisol/ACTH where indicated, ECG, and contrast brain MRI when neurologic symptoms or high metastatic burden warrant it.",
+        "Assess response with cross-sectional imaging every 8-12 weeks on therapy; continue effective checkpoint blockade until progression or unacceptable toxicity, and manage immune-related adverse events with treatment hold plus corticosteroids and specialty input per severity.",
+        "Palliate symptomatic or oligometastatic sites in parallel: consider radiation to painful bone lesions, brain metastases, or bleeding primaries, and surgical palliation for isolated progressing lesions while effective systemic therapy continues elsewhere.",
+        "Second-line and chemotherapy option for patients progressing on or with contraindications to anti-PD-(L)1: cisplatin or carboplatin plus etoposide; topotecan; or the CAV regimen (cyclophosphamide, doxorubicin, vincristine); prioritize clinical trial enrollment at every line.",
+        "Counsel that cytotoxic responses in MCC are typically brief compared with checkpoint inhibitor responses, so revisit checkpoint eligibility (including resolution of prior contraindications) before committing to chemotherapy."
+      ],
+      "protocolRefs": []
+    }
+  ],
+  "links": [
+    {
+      "id": "l_wk_stage",
+      "from": "n_workup",
+      "to": "n_stage",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_local",
+      "from": "n_stage",
+      "to": "n_local_slnb",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "local"
+      ]
+    },
+    {
+      "id": "l_stage_regional",
+      "from": "n_stage",
+      "to": "n_regional_mgmt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "regional"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage",
+      "to": "n_tx_metastatic",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "metastatic"
+      ]
+    },
+    {
+      "id": "l_slnb_neg",
+      "from": "n_local_slnb",
+      "to": "n_tx_local_resection",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "slnb_neg"
+      ]
+    },
+    {
+      "id": "l_slnb_pos",
+      "from": "n_local_slnb",
+      "to": "n_regional_mgmt",
+      "linkCategory": "conditional",
+      "fromOptions": [
+        "slnb_pos"
+      ]
+    }
+  ]
+}

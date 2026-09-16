@@ -75,8 +75,8 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d2">
-<link rel="stylesheet" href="/onco-home.css?v=op5-oncqis">
-<link rel="stylesheet" href="/oncotree.css?v=nccn-nav2">
+<link rel="stylesheet" href="/onco-home.css?v=op6-redesign">
+<link rel="stylesheet" href="/oncotree.css?v=nccn-nav5">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm1">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
@@ -2582,7 +2582,13 @@ window.openExternal = function (u) {
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
 <script src="/onco-plan-flow.js?v=op1" defer></script>
-<script src="/onco-home.js?v=hardlocal3" defer></script>
+<!-- Clinical Oncology Superpowers: Dynamic organ dose modification, Calvert Carboplatin, WardSync EMR labs, multi-regimen comparison, cycle nadir timeline, DDI sentry, genomic MRD precision -->
+<script src="/onco-organ-dose.js?v=op2" defer></script>
+<script src="/onco-compare.js?v=op1" defer></script>
+<script src="/onco-cycle-timeline.js?v=op1" defer></script>
+<script src="/onco-ddi-sentry.js?v=op1" defer></script>
+<script src="/onco-genomics.js?v=op1" defer></script>
+<script src="/onco-home.js?v=hardlocal4" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->

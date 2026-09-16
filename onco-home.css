@@ -1,3 +1,176 @@
+/* ── ONCQIS APPLE DESIGN & REACT BITS REDESIGN SYSTEM ── */
+.oh-overlay {
+  --oh-bg: #f5f5f7;
+  --oh-card: #ffffff;
+  --oh-ink: #1d1d1f;
+  --oh-sub: #6e6e73;
+  --oh-line: rgba(0, 0, 0, 0.08);
+  --oh-accent: #0e6e63;
+  --oh-accent-glow: rgba(14, 110, 99, 0.14);
+  --oh-glass: rgba(255, 255, 255, 0.84);
+  --oh-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  font-family: var(--oh-font) !important;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.dark .oh-overlay {
+  --oh-bg: #000000;
+  --oh-card: #1c1c1e;
+  --oh-ink: #f5f5f7;
+  --oh-sub: #a1a1a6;
+  --oh-line: rgba(255, 255, 255, 0.12);
+  --oh-accent: #14b8a6;
+  --oh-accent-glow: rgba(20, 184, 166, 0.22);
+  --oh-glass: rgba(28, 28, 30, 0.84);
+}
+
+/* Translucent Frosted Glass Header */
+.oh-top {
+  position: relative;
+  background: var(--oh-glass) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+  border-bottom: 1px solid var(--oh-line) !important;
+  padding-top: calc(16px + env(safe-area-inset-top)) !important;
+}
+.oh-top::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 5px;
+  background: var(--oh-sub);
+  opacity: 0.35;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+.oh-title {
+  font-family: var(--oh-font) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.022em !important;
+}
+
+/* Apple Museum Gallery Hero */
+.oh-hero {
+  background: linear-gradient(135deg, #0e6e63 0%, #084c44 100%) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 12px 32px -4px rgba(14, 110, 99, 0.32) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.oh-hero-title {
+  font-family: var(--oh-font) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* React Bits Spotlight Cards for Tools, Staging & Protocol Cards */
+.oh-card, .oh-qa, .oh-row, .oh-favchip, .ctc-grow, .stg-trow, .stg-grow, .rec-out {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px !important;
+  border: 1px solid var(--oh-line) !important;
+  background: var(--oh-card) !important;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease, border-color 0.16s ease !important;
+}
+
+body.dark .oh-card, body.dark .oh-qa, body.dark .oh-row, body.dark .oh-favchip,
+body.dark .ctc-grow, body.dark .stg-trow, body.dark .stg-grow, body.dark .rec-out {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+.oh-card::before, .oh-qa::before, .oh-row::before, .oh-favchip::before,
+.ctc-grow::before, .stg-trow::before, .stg-grow::before, .rec-out::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--oh-accent-glow), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Luminous Border Beam Glow on Hover */
+.oh-card::after, .oh-qa::after, .oh-row::after, .oh-favchip::after,
+.ctc-grow::after, .stg-trow::after, .stg-grow::after, .rec-out::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(220px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--oh-accent), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.oh-card:hover::before, .oh-qa:hover::before, .oh-row:hover::before, .oh-favchip:hover::before,
+.ctc-grow:hover::before, .stg-trow:hover::before, .stg-grow:hover::before, .rec-out:hover::before,
+.oh-card:hover::after, .oh-qa:hover::after, .oh-row:hover::after, .oh-favchip:hover::after,
+.ctc-grow:hover::after, .stg-trow:hover::after, .stg-grow:hover::after, .rec-out:hover::after {
+  opacity: 1;
+}
+
+/* Emil Kowalski: Instant Touch Latency Elimination & Spring Touch */
+.oh-card:active, .oh-qa:active, .oh-row:active, .oh-favchip:active, .oh-back:active, .oh-cta:active,
+.ctc-grow:active, .stg-trow:active, .stg-grow:active {
+  transform: scale(0.976) translateY(1px) !important;
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* iOS Sheet Handle */
+.oh-sheet-handle {
+  width: 36px;
+  height: 5px;
+  background: var(--oh-sub);
+  opacity: 0.35;
+  border-radius: 9999px;
+  margin: 8px auto 14px;
+}
+
+.oh-card-ic, .oh-qa .material-symbols-rounded, .oh-qa .material-symbols-outlined {
+  border-radius: 14px !important;
+  background: var(--oh-accent-glow) !important;
+  color: var(--oh-accent) !important;
+}
+
+/* Patient Context Pill Bar */
+.oh-ctx {
+  border-radius: 18px !important;
+  background: color-mix(in srgb, var(--oh-accent) 6%, var(--oh-card)) !important;
+  border: 1px solid color-mix(in srgb, var(--oh-accent) 24%, transparent) !important;
+}
+.oh-chip {
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+}
+
+/* Search Bar */
+.oh-search {
+  border-radius: 16px !important;
+  border: 1.5px solid var(--oh-line) !important;
+  background: var(--oh-card) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.oh-search:focus {
+  border-color: var(--oh-accent) !important;
+  box-shadow: 0 0 0 4px var(--oh-accent-glow) !important;
+}
+
+/* Dosage & Calculator Numbers Tabular Alignment */
+.oh-drow-dose, .rec-nums, .stg-code {
+  font-variant-numeric: tabular-nums !important;
+}
+
 /* onco-home.css — ONCQIS "The Cancer Library" + the shared chrome for every onco reference tool
    (staging / CTCAE / irAE / RECIST) and the doctor plan-flow. REBUILT (2026-08) onto the app's
    canonical design system (redesign-system.css --rds-* / --teal #0e6e63 + the clinical severity ramp

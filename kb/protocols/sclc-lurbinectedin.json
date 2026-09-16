@@ -1,0 +1,81 @@
+{
+  "id": "sclc-lurbinectedin",
+  "diseaseId": "sclc",
+  "name": "Lurbinectedin Monotherapy (Relapsed SCLC)",
+  "version": "1.0",
+  "lifecycleState": "active",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "none",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS Reference Regimen: Phase II Basket Trial (Trigo et al. Lancet Oncol 2020)",
+    "approval": null
+  },
+  "stage": [
+    "relapsed",
+    "extensive-stage"
+  ],
+  "treatmentSetting": [
+    "second-line"
+  ],
+  "histology": "small cell lung carcinoma",
+  "premedications": [
+    {
+      "name": "Dexamethasone",
+      "dose": "8 mg IV",
+      "notes": "Give 30 minutes before lurbinectedin infusion"
+    },
+    {
+      "name": "5-HT3 antagonist (e.g. Ondansetron)",
+      "dose": "8-16 mg IV",
+      "notes": "Give 30 minutes before infusion"
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF primary prophylaxis recommended if febrile neutropenia risk is elevated or in patients with extensive prior marrow injury.",
+    "Antiemetics: moderate emetic risk."
+  ],
+  "monitoring": [
+    "CBC with differential weekly during cycle 1, then prior to each cycle",
+    "Liver function tests (ALT, AST, alkaline phosphatase, bilirubin) and serum creatinine before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1,500/mcL or Platelets < 100,000/mcL on Day 1",
+      "action": "delay",
+      "text": "Delay cycle until ANC >= 1,500/mcL and platelets >= 100,000/mcL. If delayed > 2 weeks or Grade 4 neutropenia/thrombocytopenia occurs, reduce dose to 2.6 mg/m2."
+    },
+    {
+      "condition": "Grade 3-4 ALT/AST elevation",
+      "action": "delay/reduce",
+      "text": "Withhold until recovery to Grade <= 1. Reduce dose to 2.6 mg/m2 upon resumption."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "lurbinectedin",
+      "name": "Lurbinectedin",
+      "basis": "bsa",
+      "dosePerUnit": 3.2,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Lurbinectedin 3.2 mg/m2 IV infused over 60 minutes on Day 1 of each 21-day cycle until progression or unacceptable toxicity. Preferred second-line chemotherapy for platinum-resistant/sensitive SCLC."
+    }
+  ]
+}

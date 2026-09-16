@@ -1,0 +1,350 @@
+{
+  "guideline": "squamous_cell_skin",
+  "id": "squamous_cell_skin",
+  "title": "Squamous Cell Skin Cancer",
+  "category": "Skin Cancer",
+  "version": "2.2026",
+  "subtitle": "StewardMD ONCOTREE Navigator (NCCN Guidelines Version 2.2026)",
+  "navigatorVersion": "3.2.0",
+  "lastModified": "2026-09-16",
+  "rootNodeId": "n_workup",
+  "diseaseId": "cutaneous_squamous_cell_carcinoma",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "Comprehensive NCCN Guidelines Version 2.2026 clinical navigator for Cutaneous Squamous Cell Carcinoma (CSCC). Covers complete clinical algorithm: Diagnostic Workup (full-body skin exam with dermoscopy, regional nodal basin palpation, deep shave/punch/incisional biopsy into reticular dermis/fat, NCCN and BWH risk stratification, immunosuppression and chronic wound/Marjolin ulcer assessment, cross-sectional MRI/CT for high-risk or perineural tumors, ultrasound-guided FNA or core biopsy of suspicious nodes) -> Stage and Risk Stratification (Low-Risk localized vs High-Risk localized vs Regional Nodal Stage III cN1-cN3 vs Locally Advanced Unresectable or Distant Metastatic Stage IV) -> Low-risk standard 4-6 mm excision, C&D for selected trunk/extremity lesions, or definitive RT for nonsurgical candidates -> High-risk Mohs micrographic surgery or CCPDMA excision with adjuvant PORT 50-66 Gy for positive margins, extensive PNI, or deeply infiltrative disease -> Regional nodal therapeutic lymph node dissection with PORT 60-66 Gy plus or minus concurrent platinum radiosensitization for ECE or multiple nodes -> Advanced/metastatic first-line cemiplimab 350 mg IV q3w (EMPOWER-CSCC 1) or pembrolizumab (KEYNOTE-629), second-line cetuximab plus or minus platinum chemotherapy, palliative RT. References StewardMD Standard Protocols. DRAFT - clinical decision support; physician decides and dose engine calculates patient-specific doses.",
+  "sourceNote": "Structured in accordance with NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines) for Squamous Cell Skin Cancer Version 2.2026.",
+  "startNodeIds": [
+    "n_workup"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Area H (mask area of face including central face, eyelids, eyebrows, periorbital skin, nose, lips, chin, mandible, preauricular and postauricular skin, temples, ears, genitalia, hands, feet): high-risk at any size. Area M (cheeks, forehead, scalp, neck, pretibial): high-risk at 10 mm or larger. Area L (trunk and extremities excluding pretibial, hands, feet): high-risk at 20 mm or larger.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "High-risk CSCC features per NCCN and BWH criteria: depth greater than 6 mm or invasion beyond subcutaneous fat, poor differentiation, perineural invasion 0.1 mm or larger, lymphovascular invasion, immunosuppressed host (solid organ transplant recipient, CLL, HIV), chronic wound or Marjolin ulcer, site of prior radiation, or recurrent tumor.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Mohs micrographic surgery (MMS) or excision with complete circumferential peripheral and deep margin assessment (CCPDMA) is preferred for high-risk CSCC for tissue sparing and optimal margin control. Postoperative adjuvant radiotherapy (PORT 50-66 Gy) is indicated for positive margins not amenable to re-excision, extensive perineural invasion, or deeply infiltrative disease.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Regional nodal CSCC requires therapeutic lymph node dissection (including superficial parotidectomy and neck dissection for periparotid involvement) followed by PORT 60-66 Gy; concurrent platinum-based radiosensitization is added for extracapsular extension (ECE) or multiple involved nodes.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "First-line systemic therapy for locally advanced unresectable or metastatic CSCC: cemiplimab 350 mg IV every 3 weeks (anti-PD-1, EMPOWER-CSCC 1) or pembrolizumab 200 mg IV q3w or 400 mg IV q6w (KEYNOTE-629). Second-line or immune-ineligible: cetuximab 400 mg/m2 load then 250 mg/m2 weekly plus or minus platinum chemotherapy, with palliative radiotherapy for symptom control.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "squamous_cell_skin_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "type": "workup",
+      "template": "workup",
+      "name": "Diagnostic Workup",
+      "title": "Squamous Cell Skin Cancer: Diagnostic Workup Checklist",
+      "section": "Workup",
+      "description": "Step 1: Complete the clinical workup before stage and risk stratification. Confirm tissue diagnosis with invasion depth and grade, map Area H/M/L risk criteria, flag immunosuppression and high-risk clinical features, image deeply invasive or perineural tumors, and biopsy suspicious nodes.",
+      "path": "Squamous Cell Skin Cancer / Workup",
+      "pills": [
+        "CSCC",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Full-body skin examination with dermoscopy and careful palpation of regional lymph node basins (cervical, parotid, axillary, inguinofemoral)",
+        "Diagnostic biopsy of primary lesion (deep shave, punch, or incisional) extending into reticular dermis/fat to assess invasion depth and grade",
+        "Risk stratification using NCCN and Brigham and Women's Hospital (BWH) criteria: high-risk tumor size (Area H any size, Area M >=10mm, Area L >=20mm), depth >6mm, perineural invasion (PNI >=0.1mm), or poor differentiation",
+        "Clinical risk factors: immunosuppressed host (solid organ transplant recipient, CLL, HIV), chronic wound/Marjolin ulcer, site of prior radiation, or recurrent tumor",
+        "Cross-sectional imaging: contrast-enhanced MRI or CT of primary site and regional nodal basin for high-risk, deeply invasive, or suspected perineural tumors",
+        "Ultrasound-guided fine needle aspiration (FNA) or core needle biopsy of any palpable or radiologically suspicious lymph nodes"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup Complete - Proceed to Stage and Risk Stratification",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_stage_risk",
+      "linkId": "squamous_cell_skin_stage_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "type": "staging",
+      "template": "staging",
+      "name": "Stage and Risk Stratification",
+      "title": "Squamous Cell Skin Cancer: Stage and Risk Stratification",
+      "section": "Staging",
+      "description": "Workup complete. Assign the risk group from Area H/M/L size criteria, depth, differentiation, PNI/LVI, immune status, recurrence, nodal involvement, and distant spread; the group selects the local, margin-controlled, multimodality nodal, or systemic immunotherapy pathway.",
+      "path": "Squamous Cell Skin Cancer / Stage and Risk Stratification",
+      "pills": [
+        "CSCC",
+        "staging"
+      ],
+      "required": true,
+      "bullets": [
+        "Low-risk localized CSCC: Area L smaller than 20 mm or Area M smaller than 10 mm, well-differentiated, depth 2 mm or less, no PNI or LVI, primary lesion, immunocompetent host.",
+        "High-risk localized CSCC: Area H at any size, Area M 10 mm or larger, Area L 20 mm or larger, depth greater than 6 mm, poorly differentiated, PNI present, immunosuppressed host, or recurrent tumor without nodal or distant spread.",
+        "Regional nodal disease: Stage III (cN1-cN3) with proven regional lymph node metastases on FNA/core biopsy or definitive imaging, without distant metastases.",
+        "Locally advanced unresectable or distant metastatic CSCC: Stage IV disease not amenable to curative surgery or radiotherapy, or with distant organ metastases."
+      ],
+      "options": [
+        {
+          "id": "low",
+          "label": "Low-Risk CSCC (Area L <20mm, Area M <10mm, well-differentiated, depth <=2mm, no PNI/LVI, primary, immunocompetent)",
+          "sets": {
+            "risk": "low"
+          },
+          "pills": [
+            "CSCC",
+            "low-risk"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "High-Risk Localized CSCC (Area H, depth >6mm, poorly differentiated, PNI, immunosuppressed, or recurrent)",
+          "sets": {
+            "risk": "high"
+          },
+          "pills": [
+            "CSCC",
+            "high-risk"
+          ]
+        },
+        {
+          "id": "regional",
+          "label": "Regional Nodal Disease (Stage III / cN1-cN3: Proven regional lymph node metastases)",
+          "sets": {
+            "stage": "regional"
+          },
+          "pills": [
+            "CSCC",
+            "regional",
+            "cN1-cN3"
+          ]
+        },
+        {
+          "id": "metastatic",
+          "label": "Locally Advanced Unresectable or Distant Metastatic CSCC (Stage IV)",
+          "sets": {
+            "stage": "metastatic"
+          },
+          "pills": [
+            "CSCC",
+            "metastatic",
+            "Stage IV"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_low_risk_tx",
+      "linkId": "squamous_cell_skin_low_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Low-Risk Treatment",
+      "title": "Low-Risk CSCC: Standard Excision, C&D, or Definitive RT",
+      "section": "Treatment",
+      "description": "Definitive local therapy for low-risk CSCC: margin-assessed standard excision, curettage and electrodesiccation for selected trunk/extremity lesions, or definitive radiation for nonsurgical candidates.",
+      "path": "Squamous Cell Skin Cancer / Low-Risk / Treatment",
+      "pills": [
+        "CSCC",
+        "low-risk",
+        "local"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Standard surgical excision with 4 to 6 mm clinical margins and postoperative margin assessment; re-excise for positive margins.",
+        "Curettage and Electrodesiccation (C&D) for low-risk superficial/nodular lesions on trunk/extremities (excluding Area H) in appropriate candidates.",
+        "Definitive radiation therapy reserved for nonsurgical candidates or patients declining surgery; confirm suitability with radiation oncology.",
+        "Surveillance after definitive local therapy: full skin examination with dermoscopy at least annually, sun-protection counseling, and prompt biopsy of new or changing lesions."
+      ],
+      "regimenSummary": "Standard 4-6mm Excision or C&D or Definitive Radiotherapy",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_high_risk_tx",
+      "linkId": "squamous_cell_skin_high_risk_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "High-Risk Treatment",
+      "title": "High-Risk Localized CSCC: Mohs or CCPDMA Excision With Adjuvant PORT",
+      "section": "Treatment",
+      "description": "Margin-controlled surgery is preferred for high-risk localized CSCC to spare tissue and confirm complete removal; adjuvant radiotherapy covers positive margins, extensive perineural invasion, or deeply infiltrative disease.",
+      "path": "Squamous Cell Skin Cancer / High-Risk / Treatment",
+      "pills": [
+        "CSCC",
+        "high-risk",
+        "surgery"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Mohs Micrographic Surgery (MMS) preferred for tissue sparing and optimal margin control, especially for Area H lesions, recurrent disease, and poorly differentiated or perineural tumors.",
+        "Surgical excision with complete circumferential peripheral and deep margin assessment (CCPDMA) as an alternative margin-controlled technique where Mohs expertise is unavailable.",
+        "Postoperative adjuvant radiotherapy (PORT: 50-66 Gy) for positive margins not amenable to re-excision, extensive perineural invasion (PNI), or deeply infiltrative disease.",
+        "Surveillance after definitive therapy: skin and regional nodal examination every 3-6 months for 2 years then every 6-12 months, with cross-sectional imaging for perineural or deeply invasive disease and a low threshold for re-biopsy."
+      ],
+      "regimenSummary": "Mohs Micrographic Surgery (MMS) or CCPDMA Excision +/- Adjuvant PORT",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_regional_nodal_tx",
+      "linkId": "squamous_cell_skin_regional_nodal_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Regional Nodal Treatment",
+      "title": "Regional Nodal CSCC: Lymph Node Dissection Plus Adjuvant ChemoRT",
+      "section": "Treatment",
+      "description": "Multimodality locoregional therapy for Stage III cN1-cN3 CSCC: therapeutic lymph node dissection followed by postoperative adjuvant radiotherapy with concurrent platinum radiosensitization for ECE or multiple involved nodes.",
+      "path": "Squamous Cell Skin Cancer / Regional Nodal / Treatment",
+      "pills": [
+        "CSCC",
+        "regional",
+        "cN1-cN3",
+        "multimodality"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Radical or modified comprehensive lymph node dissection (including superficial parotidectomy and neck dissection for periparotid involvement) with resection of the primary tumor with clear margins where feasible.",
+        "Postoperative Adjuvant Radiotherapy (PORT: 60-66 Gy) to the dissected nodal basin and involved primary site.",
+        "Concurrent platinum-based radiosensitization for extracapsular extension (ECE) or multiple involved nodes, coordinated across surgical, radiation, and medical oncology.",
+        "Surveillance after multimodality therapy: clinical and cross-sectional imaging of the primary site and nodal basin every 3-6 months for 2 years then every 6-12 months; offer clinical trial enrollment where available."
+      ],
+      "regimenSummary": "Therapeutic Lymph Node Dissection + Postoperative Adjuvant ChemoRT",
+      "protocolRefs": []
+    },
+    {
+      "id": "n_advanced_metastatic_tx",
+      "linkId": "squamous_cell_skin_advanced_metastatic_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "type": "treatment",
+      "template": "treatment",
+      "name": "Advanced or Metastatic Treatment",
+      "title": "Stage IV CSCC: Cemiplimab or Pembrolizumab Then Cetuximab-Based Therapy",
+      "section": "Treatment",
+      "description": "First-line systemic immunotherapy for locally advanced unresectable or distant metastatic CSCC, with EGFR-targeted therapy plus or minus platinum chemotherapy second-line or for immune-ineligible patients, plus palliative radiotherapy.",
+      "path": "Squamous Cell Skin Cancer / Advanced or Metastatic / Systemic Therapy",
+      "pills": [
+        "CSCC",
+        "metastatic",
+        "Stage IV",
+        "systemic"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "First-line Systemic Immunotherapy: Cemiplimab 350 mg IV every 3 weeks (EMPOWER-CSCC 1 trial) or Pembrolizumab 200 mg IV q3w or 400 mg IV q6w (KEYNOTE-629 trial); continue until disease progression or unacceptable toxicity with immune-related adverse event monitoring.",
+        "Second-line or immune-ineligible: EGFR-targeted therapy (Cetuximab 400 mg/m2 load then 250 mg/m2 weekly) plus or minus Platinum chemotherapy (Carboplatin AUC 5 + Paclitaxel 175 mg/m2), selected by fitness, organ function, and prior exposure.",
+        "Palliative radiotherapy for symptomatic primary, nodal, bone, or soft-tissue disease for local control and symptom relief.",
+        "Stage with cross-sectional imaging at baseline and every 8-12 weeks on systemic therapy; offer clinical trial enrollment at every line.",
+        "Physician decides; dose engine calculates patient-specific doses."
+      ],
+      "regimenSummary": "Cemiplimab 350 mg IV q3w (or Pembrolizumab) -> 2L Cetuximab +/- Chemo",
+      "protocolRefs": [
+        "skin-cscc-cemiplimab"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_workup_stage",
+      "from": "n_workup",
+      "fromNodeId": "n_workup",
+      "to": "n_stage_risk",
+      "toNodeId": "n_stage_risk",
+      "linkCategory": "conditional",
+      "triggerOptionId": "continue",
+      "fromOptions": [
+        "continue"
+      ]
+    },
+    {
+      "id": "l_stage_low",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_low_risk_tx",
+      "toNodeId": "n_low_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "low",
+      "fromOptions": [
+        "low"
+      ]
+    },
+    {
+      "id": "l_stage_high",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_high_risk_tx",
+      "toNodeId": "n_high_risk_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "high",
+      "fromOptions": [
+        "high"
+      ]
+    },
+    {
+      "id": "l_stage_regional",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_regional_nodal_tx",
+      "toNodeId": "n_regional_nodal_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "regional",
+      "fromOptions": [
+        "regional"
+      ]
+    },
+    {
+      "id": "l_stage_metastatic",
+      "from": "n_stage_risk",
+      "fromNodeId": "n_stage_risk",
+      "to": "n_advanced_metastatic_tx",
+      "toNodeId": "n_advanced_metastatic_tx",
+      "linkCategory": "conditional",
+      "triggerOptionId": "metastatic",
+      "fromOptions": [
+        "metastatic"
+      ]
+    }
+  ]
+}
